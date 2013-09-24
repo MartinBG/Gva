@@ -1,0 +1,13 @@
+{
+  "name": "regis",
+  "version": "1.0.0",
+  "fullVersion": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-html2js": "~0.1.6",
+    "grunt-exec": "~0.4.2",
+    "grunt-express": "~1.2.0"
+  }
+}

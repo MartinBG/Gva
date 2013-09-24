@@ -1,0 +1,8 @@
+bower_components/*
+bower_components/**/*
+
+build/*
+build/**/*
+
+node_modules/*
+node_modules/**/*

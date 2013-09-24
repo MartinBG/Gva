@@ -1,0 +1,19 @@
+{
+  "name": "gva",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "1.2.0-rc.1",
+    "angular-resource": "1.2.0-rc.1",
+    "angular-ui-router": "angular-ui/ui-router#b2cd6d206130f957cdedb61646f0cadd1220061b",
+    "angular-bootstrap": "~0.5.0",
+    "json3": "~3.2.4",
+    "jquery": "~1.9.1",
+    "lodash": "~1.3.1",
+    "es5-shim": "~2.0.8",
+    "bootstrap": "angelyordanov/bootstrap#229469e0598a230c8b11890d128a57618df838d4"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.0-rc.1",
+    "angular-scenario": "1.2.0-rc.1"
+  }
+}

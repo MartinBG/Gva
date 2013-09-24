@@ -1,0 +1,40 @@
+﻿<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container nav-container">
+      <ul class="nav">
+        <li ng-repeat="item in items"
+          ng-class="{'active': item.active, 'dropdown': item.items.length > 0}">
+          <a ng-if="item.items.length === 0" ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
+            <i ng-if="item.icon" ng-class="item.icon"></i>
+            <span>{{item.text}}</span>
+          </a>
+          <a ng-if="item.items.length > 0" class="dropdown-toggle">
+            <i ng-if="item.icon" ng-class="item.icon"></i>
+            <span>{{item.text}}</span>
+            <b class="caret"></b>
+          </a>
+          <ul ng-if="item.items.length > 0" class="dropdown-menu">
+            <li ng-repeat="item in item.items">
+              <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
+                <i ng-if="item.icon" ng-class="item.icon"></i>
+                <span>{{item.text}}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div style="display: inline-block; float: right; margin-top: 3px;">
+        <div style="float: right">
+          <span style="font-weight: bold">{{userFullName}}</span>
+        </div>
+        <div style="float: right; clear: both;">
+          <a ng-show="userHasPassword" style="margin-right: 4px; font-size: 14px">Смяна на паролата</a>
+          <a style="font-size: 14px;">Изход</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="padding-top: 50px; padding-bottom: 50px">
+  <div ui-view="pageView"></div>
+</div>

@@ -1,0 +1,64 @@
+﻿<div class="container page-content">
+  <h4>Потребители</h4>
+
+  <form class="well form-inline">
+    <div class="row">
+      <div class="span3">
+        <label class="control-label">Потребителско име</label>  
+      </div>
+
+      <div class="span4">
+        <label class="control-label">Име</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <input type="text" class="span3" ng-model="username" />
+      </div>
+      <div class="span4">
+        <input type="text" class="input-xlarge" ng-model="fullname" />
+      </div>
+      <div  class="span2">
+        <select style="width:auto;"
+          ng-model="showActive"
+          ng-options="k as v for (k,v) in {'true': 'Само активни', 'false': 'Само неактивни'}">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="pull-right">
+        <button id="searchBtn" type="button" class="btn" ng-click="search()"><i class="icon-search"></i>Търси</button>
+        <button type="button" class="btn" ng-click="newUser()"><i class="icon-user"></i>Нов потребител</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-striped" ng-show="users.length > 0">
+    <thead>
+      <tr>
+        <th>Потребителско име</th>
+        <th>Име</th>
+        <th>Роли</th>
+        <th>Активен</th>
+        <th style="width:1px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>{{user.username}}</td>
+        <td>{{user.fullname}}</td>
+        <td>{{user.roles}}</td>
+        <td>{{user.isActive ? 'Да' : 'Не'}}</td>
+        <td>
+          <button type="button" class="btn btn-mini btn-info" ng-click="editUser(user)">
+            Редакция
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <span ng-show="users.length === 0">
+    Няма намерени потребители
+  </span>
+</div>
