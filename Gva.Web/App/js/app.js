@@ -39,7 +39,7 @@
           { text: 'Инспекции', url: '/licenses' }
         ]})
         .addItem({ text: 'Админ', icon: 'glyphicon-wrench', items: [
-          { text: 'Потребители', state: usersStatesProvider.states.search },
+          { text: 'Потребители', state: usersStatesProvider.states.search }
         ]})
         .addItem({ text: 'Помощ', items: [
           {
