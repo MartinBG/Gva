@@ -22,17 +22,25 @@
       $urlRouterProvider.otherwise('/users');
         
       navbarConfigProvider
-        .addItem({ text: 'Регистър', url: '/search', icon: 'glyphicon-search' })
-        .addItem({
-          text: 'Администриране',
-          icon: 'glyphicon-wrench',
-          permissions: [ 'sys#admin' ],
-          items: [
-            { text: 'Потребители', state: usersStatesProvider.states.search },
-            { text: 'Редакция', state: usersStatesProvider.states.edit },
-            { text: 'Номенклатури', url: '/nomenclatures' }
-          ]
-        })
+        .addItem({ text: 'Персонал', items: [
+          { text: 'Физически лица', url: '/personel' },
+          { text: 'Лицензи', url: '/licenses' },
+          { text: 'Квалификации', url: '/qualifications' },
+          { text: 'Медицински', url: '/medical' }
+        ]})
+        .addItem({ text: 'Организации', url: '/organizations', items: [
+          { text: 'Удостоверения', url: '/licenses' },
+          { text: 'Одити', url: '/licenses' },
+          { text: 'Надзор', url: '/licenses' },
+          { text: 'Ръководен Персонал', url: '/licenses' }
+        ]})
+        .addItem({ text: 'Възд. Средства', url: '/aircraft', items: [
+          { text: 'Удостоверения', url: '/licenses' },
+          { text: 'Инспекции', url: '/licenses' }
+        ]})
+        .addItem({ text: 'Админ', icon: 'glyphicon-wrench', items: [
+          { text: 'Потребители', state: usersStatesProvider.states.search },
+        ]})
         .addItem({ text: 'Помощ', items: [
           {
             text: 'Ръководство на потребителя',
