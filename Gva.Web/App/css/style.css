@@ -19,7 +19,7 @@ div.button-group
   float: right;
   margin-top: 25px;
 }
-label.control-label 
+form.form-inline label.control-label 
 {
   min-width: 100%;
 }
