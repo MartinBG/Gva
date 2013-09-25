@@ -1,26 +1,27 @@
 ﻿<div class="container page-content">
   <h4>Потребители</h4>
+
   <form class="well well-sm form-inline" role="form">
     <div class="row">
       <div class="form-group col-sm-3">
-        <label>Потребителско име</label>
+        <label class="control-label">Потребителско име</label>
         <input type="text" class="input-sm form-control" ng-model="username" />
       </div>
-      <div class="form-group col-sm-3">
-        <label>Име</label>
+      <div class="form-group col-sm-4">
+        <label class="control-label">Име</label>
         <input type="text" class="input-sm form-control" ng-model="fullname" />
       </div>
-      <div class="form-group col-sm-2">
-        <label style="visibility: hidden">Активен</label>
-        <select class="input-sm form-control"
+      <div class="form-group col-sm-2 labeless">
+        <select class="input-sm form-control" style="width:auto;"
           ng-model="showActive"
           ng-options="k as v for (k,v) in {'true': 'Само активни', 'false': 'Само неактивни'}">
           <option value=""></option>
         </select>
       </div>
-      <div class="btn-group col-sm-4" style="margin-top: 23px">
+      <div class="button-group col-sm-3">
         <button id="searchBtn" type="button" class="btn-sm btn-default" ng-click="search()">
-          <span class="glyphicon glyphicon-search"></span>Търси
+          <span class="glyphicon glyphicon-search"></span>
+          Търси
         </button>
         <button type="button" class="btn-sm btn-default" ng-click="newUser()">
           <span class="glyphicon glyphicon-user"></span>

@@ -10,3 +10,16 @@ li.dropdown-split-left > a
 {
   padding-right: 0px;
 }
+div.form-group.labeless *
+{
+  margin-top: 25px;
+}
+div.button-group
+{
+  float: right;
+  margin-top: 25px;
+}
+label.control-label 
+{
+  min-width: 100%;
+}
