@@ -4,34 +4,34 @@
     <span ng-show="isEdit">Редактиране на потребител</span>
   </h4>
 
-  <form name="userForm" novalidate ng-submit="save()" class="form-horizontal well">
-    <div class="control-group" ng-class="{'error': saveClicked && (userExists || userForm.username.$invalid)}">
-      <label class="control-label">Потребителско име:</label>
-      <div class="controls">
-        <input type="text" name="username" class="input-xlarge"
+  <form name="userForm" novalidate ng-submit="save()" class="form-horizontal well" role="form">
+    <div class="form-group" ng-class="{'has-error': saveClicked && (userExists || userForm.username.$invalid)}">
+      <label class="control-label col-sm-3">Потребителско име:</label>
+      <div class="col-sm-4">
+        <input type="text" name="username" class="input-sm form-control"
           required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/" 
           ng-model="user.username" ng-disabled="isEdit">
         <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid">
           потребителското име трябва да е поне 5 символа и да съдържа само букви, числа, подчертавки (_) и точки (.)
         </span>
-        <span id="usernameExists" class="help-inline" ng-show="userExists">потребителското име е заето</span>
+        <span id="usernameExists" class="help-block" ng-show="userExists">потребителското име е заето</span>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Име:</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge" ng-model="user.fullname">
+    <div class="form-group">
+      <label class="control-label col-sm-3">Име:</label>
+      <div class="col-sm-4">
+        <input type="text" class="input-sm form-control" ng-model="user.fullname">
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Коментар:</label>
-      <div class="controls">
-        <textarea rows="3" class="input-xlarge" ng-model="user.notes"></textarea>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Коментар:</label>
+      <div class="col-sm-4">
+        <textarea rows="3" class="form-control" ng-model="user.notes"></textarea>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Вход:</label>
-      <div class="controls">
+    <div class="form-group">
+      <label class="control-label col-sm-3">Вход:</label>
+      <div class="col-sm-4">
         <div class="checkbox">
           <input type="checkbox" ng-model="setPassword"> с потребителско име / парола
         </div>
@@ -40,57 +40,57 @@
         </div>
       </div>
     </div>
-    <div class="control-group" ng-class="{'error': saveClicked && userForm.password.$invalid}"
+    <div class="form-group" ng-class="{'has-error': saveClicked && userForm.password.$invalid}"
       ng-show="setPassword">
-      <label class="control-label">Парола:</label>
-      <div class="controls">
-        <input type="password" name="password" class="input-xlarge" ng-required="setPassword && !isEdit" ng-minlength="8" ng-model="password" />
-        <span id="passInvalid" class="help-inline" ng-show="saveClicked && userForm.password.$invalid">
+      <label class="control-label col-sm-3">Парола:</label>
+      <div class="col-sm-4">
+        <input type="password" name="password" class="input-sm form-control" ng-required="setPassword && !isEdit" ng-minlength="8" ng-model="password" />
+        <span id="passInvalid" class="help-block" ng-show="saveClicked && userForm.password.$invalid">
           паролата трябва да бъде поне 8 символа
         </span>
       </div>
     </div>
-    <div class="control-group" ng-class="{'error': saveClicked && (password !== confirmPassword)}"
+    <div class="form-group" ng-class="{'has-error': saveClicked && (password !== confirmPassword)}"
       ng-show="setPassword">
-      <label class="control-label">Повтори парола:</label>
-      <div class="controls">
-        <input type="password" name="confirmPassword" class="input-xlarge" ng-model="confirmPassword">
-        <span id="confirmPassInvalid" class="help-inline" ng-show="saveClicked && (password !== confirmPassword)">
+      <label class="control-label col-sm-3">Повтори парола:</label>
+      <div class="col-sm-4">
+        <input type="password" name="confirmPassword" class="input-sm form-control" ng-model="confirmPassword">
+        <span id="confirmPassInvalid" class="help-block" ng-show="saveClicked && (password !== confirmPassword)">
           паролите не съвпадат
         </span>
       </div>
     </div>
-    <div class="control-group" ng-class="{'error': saveClicked && userForm.certificate.$invalid}"
+    <div class="form-group" ng-class="{'has-error': saveClicked && userForm.certificate.$invalid}"
       ng-show="setCertificate">
-      <label class="control-label">Сертификат:</label>
-      <div class="controls">
-        <input type="text" name="certificate" class="input-xlarge" ng-required="setCertificate" ng-model="certificate">
-        <span class="help-inline" ng-show="saveClicked && userForm.certificate.$invalid">
+      <label class="control-label col-sm-3">Сертификат:</label>
+      <div class="col-sm-4">
+        <input type="text" name="certificate" class="input-sm form-control" ng-required="setCertificate" ng-model="certificate">
+        <span class="help-block" ng-show="saveClicked && userForm.certificate.$invalid">
           въведете сертификат
         </span>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Роли:</label>
-      <div class="controls">
+    <div class="form-group">
+      <label class="control-label col-sm-3">Роли:</label>
+      <div class="col-sm-4">
         <div class="checkbox" ng-repeat="role in roles">
           <input type="checkbox" ng-model="role.selected">
           <span>{{role.name}}</span>
         </div>
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label">Активен:</label>
-      <div class="controls">
+    <div class="form-group">
+      <label class="control-label col-sm-3">Активен:</label>
+      <div class="col-sm-4">
         <div class="checkbox">
           <input type="checkbox" ng-model="user.isActive">
         </div>
       </div>
     </div>
-    <div class="control-group">
-      <div class="controls">
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-4">
         <button id="saveBtn" type="submit" class="btn btn-primary">Запис</button>
-        <button id="cancelBtn" type="button" class="btn" ng-click="cancel()">Отказ</button>
+        <button id="cancelBtn" type="button" class="btn btn-default" ng-click="cancel()">Отказ</button>
       </div>
     </div>
   </form>

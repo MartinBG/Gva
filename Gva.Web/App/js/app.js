@@ -22,10 +22,10 @@
       $urlRouterProvider.otherwise('/users');
         
       navbarConfigProvider
-        .addItem({ text: 'Регистър', url: '/search', icon: 'icon-search' })
+        .addItem({ text: 'Регистър', url: '/search', icon: 'glyphicon-search' })
         .addItem({
           text: 'Администриране',
-          icon: 'icon-wrench',
+          icon: 'glyphicon-wrench',
           permissions: [ 'sys#admin' ],
           items: [
             { text: 'Потребители', state: usersStatesProvider.states.search },

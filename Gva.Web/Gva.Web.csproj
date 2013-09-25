@@ -120,6 +120,34 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App\.gitignore" />
+    <Content Include="App\css\style.css" />
+    <Content Include="App\gruntfile.js" />
+    <Content Include="App\img\initial-loader.gif" />
+    <Content Include="App\index.html" />
+    <Content Include="App\js\app.js" />
+    <Content Include="App\js\navigation\controllers\navbarCtrl.js" />
+    <Content Include="App\js\navigation\navigation.js" />
+    <Content Include="App\js\navigation\providers\navbarConfigProvider.js" />
+    <Content Include="App\js\navigation\providers\statesProvider.js" />
+    <Content Include="App\js\navigation\templates\navbar.html" />
+    <Content Include="App\js\users\controllers\editCtrl.js" />
+    <Content Include="App\js\users\controllers\searchCtrl.js" />
+    <Content Include="App\js\users\providers\statesProvider.js" />
+    <Content Include="App\js\users\resources\role.js" />
+    <Content Include="App\js\users\resources\user.js" />
+    <Content Include="App\js\users\templates\edit.html" />
+    <Content Include="App\js\users\templates\search.html" />
+    <Content Include="App\js\users\users.js" />
+    <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
+    <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
+    <Content Include="App\test\e2e\e2eMocksSetup.js" />
+    <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
+    <Content Include="App\test\e2e\mocks\usersHttp.js" />
+    <Content Include="App\test\e2e\ptorConf.js" />
+    <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\usersSpec.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -136,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\.editorconfig" />
+    <Content Include="App\.jshintrc" />
+    <Content Include="App\bower.json" />
+    <Content Include="App\package.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
