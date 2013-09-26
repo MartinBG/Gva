@@ -13,7 +13,8 @@
     "angular-ui-select2": "0.0.2",
     "select2": "3.4.3",
     "jquery-modern": "jquery#2.0.3",
-    "jquery-legacy": "jquery#1.10.2"
+    "jquery-legacy": "jquery#1.10.2",
+    "select2-bootstrap-css": "fk/select2-bootstrap-css#48cd4b44bc94046cab20e0d345c978483684ab2e"
   },
   "devDependencies": {
     "angular-mocks": "1.2.0-rc.1",

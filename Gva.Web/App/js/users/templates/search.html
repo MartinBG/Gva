@@ -11,8 +11,9 @@
         <label class="control-label">Име</label>
         <input type="text" class="input-sm form-control" ng-model="fullname" />
       </div>
-      <div class="form-group col-sm-2 labeless">
-        <select ui-select2="{ allowClear: true}" id="showActive" ng-model="showActive" data-placeholder="Активност" style="width:100%;">
+      <div class="form-group col-sm-2">
+        <label class="control-label">Активност</label>
+        <select id="showActive" class="input-sm form-control" ui-select2="{ allowClear: true}" ng-model="showActive" data-placeholder=" ">
           <option value=""></option>
           <option value="true">Само активни</option>
           <option value="false">Само неактивни</option>
