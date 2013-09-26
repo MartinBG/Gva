@@ -1,12 +1,12 @@
 ﻿<div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-gva-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
   </div>
-  <div class="collapse navbar-collapse navbar-gva-collapse container nav-container">
+  <div class="collapse navbar-collapse container nav-container">
     <ul class="nav navbar-nav">
       <li ng-repeat-start="item in items"
         ng-class="{'active': item.active, 'dropdown': item.items.length > 0 && !item.url, 'dropdown\-split\-left': item.items.length > 0 && item.url}">
@@ -28,7 +28,7 @@
           </li>
         </ul>
       </li>
-      <li ng-repeat-end ng-show="item.items.length > 0 && item.url" class="dropdown dropdown-split-right">
+      <li ng-repeat-end ng-show="item.items.length > 0 && item.url" class="dropdown dropdown-split-right hidden-phone">
         <a class="dropdown-toggle">
           <b class="caret"></b>
         </a>

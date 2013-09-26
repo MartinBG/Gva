@@ -10,16 +10,15 @@ li.dropdown-split-left > a
 {
   padding-right: 0px;
 }
-div.form-group.labeless *
+div.labeless
 {
-  margin-top: 25px;
-}
-div.button-group
-{
-  float: right;
   margin-top: 25px;
 }
 form.form-inline label.control-label 
 {
   min-width: 100%;
+}
+@media (max-width:767px)
+{
+  .hidden-phone{display:none !important;}
 }
