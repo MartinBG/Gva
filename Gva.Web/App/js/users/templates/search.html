@@ -7,7 +7,7 @@
         <label class="control-label">Потребителско име</label>
         <input type="text" class="input-sm form-control" ng-model="username" />
       </div>
-      <div class="form-group col-sm-4">
+      <div class="form-group col-sm-3 col-lg-4">
         <label class="control-label">Име</label>
         <input type="text" class="input-sm form-control" ng-model="fullname" />
       </div>
@@ -19,14 +19,14 @@
           <option value="false">Само неактивни</option>
         </select>
       </div>
-      <div class="col-sm-3 labeless">
-        <button id="searchBtn" type="button" class="btn-sm btn-default" ng-click="search()">
-          <span class="glyphicon glyphicon-search"></span>
-          Търси
-        </button>
-        <button type="button" class="btn-sm btn-default" ng-click="newUser()">
+      <div class="col-sm-4 col-lg-3 labeless">
+        <button type="button" class="pull-right btn-sm btn-default" ng-click="newUser()">
           <span class="glyphicon glyphicon-user"></span>
           Нов потребител
+        </button>
+        <button id="searchBtn" type="button" class="pull-right btn-sm btn-default" ng-click="search()">
+          <span class="glyphicon glyphicon-search"></span>
+          Търси
         </button>
       </div>
     </div>
