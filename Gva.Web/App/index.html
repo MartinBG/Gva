@@ -53,7 +53,13 @@
     <link href="/app/bower_components/select2/select2.css" rel="stylesheet">
     <link href="/app/css/style.css" rel="stylesheet">
 
-    <script src="/app/bower_components/jquery/jquery.js"></script>
+    <!--[if lt IE 9]>
+      <script src="/app/bower_components/jquery-legacy/jquery.js"></script>
+      <script src="/app/bower_components/es5-shim/es5-shim.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+      <script src="/app/bower_components/jquery-modern/jquery.js"></script>
+    <!--<![endif]-->
     <script src="/app/bower_components/lodash/lodash.js"></script>
     <script src="/app/bower_components/select2/select2.js"></script>
     <script src="/app/bower_components/angular/angular.js"></script>
