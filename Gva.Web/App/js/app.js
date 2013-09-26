@@ -3,6 +3,7 @@
   angular.module('app', [
     'ng',
     'ui.router',
+    'ui.select2',
     'navigation',
     'users'
   ]).config([

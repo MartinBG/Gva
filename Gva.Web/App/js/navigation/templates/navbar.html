@@ -6,49 +6,51 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <div class="collapse navbar-collapse container nav-container">
-    <ul class="nav navbar-nav">
-      <li ng-repeat-start="item in items"
-        ng-class="{'active': item.active, 'dropdown': item.items.length > 0 && !item.url, 'dropdown\-split\-left': item.items.length > 0 && item.url}">
-        <a ng-if="item.url" ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-          <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
-          <span>{{item.text}}</span>
-        </a>
-        <a ng-if="item.items.length > 0 && !item.url" class="dropdown-toggle">
-          <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
-          <span>{{item.text}}</span>
-          <b class="caret"></b>
-        </a>
-        <ul ng-if="item.items.length > 0 && !item.url" class="dropdown-menu">
-          <li ng-repeat="item in item.items">
-            <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-              <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
-              <span>{{item.text}}</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li ng-repeat-end ng-show="item.items.length > 0 && item.url" class="dropdown dropdown-split-right hidden-phone">
-        <a class="dropdown-toggle">
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu pull-right">
-          <li ng-repeat="item in item.items">
-            <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-              <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
-              <span>{{item.text}}</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <div class="navbar-right" style="margin-top: 3px;">
-      <div class="pull-right">
-        <span style="font-weight: bold">{{userFullName}}</span>
-      </div>
-      <div class="pull-right" style="clear: both;">
-        <a ng-show="userHasPassword" style="margin-right: 4px; font-size: 14px">Смяна на паролата</a>
-        <a style="font-size: 14px;">Изход</a>
+  <div class="collapse navbar-collapse nav-container">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li ng-repeat-start="item in items"
+          ng-class="{'active': item.active, 'dropdown': item.items.length > 0 && !item.url, 'dropdown\-split\-left': item.items.length > 0 && item.url}">
+          <a ng-if="item.url" ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
+            <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+            <span>{{item.text}}</span>
+          </a>
+          <a ng-if="item.items.length > 0 && !item.url" class="dropdown-toggle">
+            <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+            <span>{{item.text}}</span>
+            <b class="caret"></b>
+          </a>
+          <ul ng-if="item.items.length > 0 && !item.url" class="dropdown-menu">
+            <li ng-repeat="item in item.items">
+              <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
+                <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+                <span>{{item.text}}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-repeat-end ng-show="item.items.length > 0 && item.url" class="dropdown dropdown-split-right hidden-phone">
+          <a class="dropdown-toggle">
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li ng-repeat="item in item.items">
+              <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
+                <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+                <span>{{item.text}}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="navbar-right" style="margin-top: 3px;">
+        <div class="pull-right">
+          <span style="font-weight: bold">{{userFullName}}</span>
+        </div>
+        <div class="pull-right" style="clear: both;">
+          <a ng-show="userHasPassword" style="margin-right: 4px; font-size: 14px">Смяна на паролата</a>
+          <a style="font-size: 14px;">Изход</a>
+        </div>
       </div>
     </div>
   </div>
