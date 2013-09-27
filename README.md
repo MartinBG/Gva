@@ -9,12 +9,6 @@ gva
 4. In the js app folder `cd .\Gva.Web\App`
   * Install the required npm packages with `npm install`
   * Install the required bower components with `bower install`
-  * Build the `angular-ui-router`  
-    (Temporary workaround untill the 0.2 version is released)  
-    `cd .\bower_components\angular-ui-router`  
-    `npm install`  
-    `grunt build`  
-    `cd ..\..\`
   * Build the js app with `grunt`
 5. Open the solution `Gva.sln` and run the web project `Gva.Web`
 
