@@ -1,9 +1,4 @@
 ﻿<div class="container page-content">
-  <h4>
-    <span ng-hide="isEdit">Нов потребител</span>
-    <span ng-show="isEdit">Редактиране на потребител</span>
-  </h4>
-
   <form name="userForm" novalidate ng-submit="save()" class="form-horizontal well" role="form">
     <div class="form-group" ng-class="{'has-error': saveClicked && (userExists || userForm.username.$invalid)}">
       <label class="control-label col-sm-3">Потребителско име:</label>
