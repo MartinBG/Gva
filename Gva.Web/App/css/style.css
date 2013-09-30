@@ -1,7 +1,3 @@
-body
-{
-  padding-top: 50px;
-}
 li.dropdown-split-right > a
 {
   padding-left: 4px;
@@ -24,17 +20,22 @@ form.form-inline label.control-label
 }
 
 .page-view {
+    padding-top: 50px;
     padding-bottom: 50px;
 }
 
 .breadcrumb-page-view {
-    padding-top:50px;
+    padding-top: 91px;
     padding-bottom: 10px;
 }
 
-.breadcrumb-bar {
-    margin-top:-45px;
-    margin-bottom:-25px;
-    padding-top:50px;
+.navbar.breadcrumb-bar {
+    top: 51px;
+    min-height: 30px;
+    z-index: 1029;
 }
 
+.breadcrumb-bar .breadcrumb {
+    margin-bottom: 0;
+    padding: 5px 15px;
+}
