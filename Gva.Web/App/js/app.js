@@ -10,19 +10,19 @@
     '$urlRouterProvider',
     '$stateProvider',
     '$locationProvider',
-    'navigation.NavbarConfigProvider',
+    'navigation.NavigationConfigProvider',
     'users.StatesProvider',
     function (
       $urlRouterProvider,
       $stateProvider,
       $locationProvider,
-      navbarConfigProvider,
+      navigationConfigProvider,
       usersStatesProvider
     ) {
       $locationProvider.html5Mode(false);
       $urlRouterProvider.otherwise('/users');
-        
-      navbarConfigProvider
+
+      navigationConfigProvider
         .addItem({ text: 'Персонал', items: [
           { text: 'Физически лица', url: '/personel' },
           { text: 'Лицензи', url: '/licenses' },
@@ -50,7 +50,8 @@
           }
         ]})
         .setUserFullName("Администратор")
-        .setUserHasPassword(true);
+        .setUserHasPassword(true)
+        .showBreadcrumbBar(true);
     }
   ]);
 }(angular));

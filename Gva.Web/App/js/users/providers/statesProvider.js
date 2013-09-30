@@ -1,12 +1,27 @@
-﻿(function (angular) {
+﻿/// <reference path="../../navigation/templates/navbar.html" />
+(function (angular) {
   'use strict';
 
   function StatesProvider($stateProvider, navigationStatesProvider) {
+    var users = {
+        name: 'users',
+        title: 'Потребители',
+        url: '/users?username&fullname&showActive',
+        parent: navigationStatesProvider.states.root,
+        'abstract': true,
+        views: {
+          'pageView': {
+            template: '<div ui-view="pageView"></div>'
+          }
+        }
+      };
+
     this.states = {
+      'users': users,
       'search': {
         name: 'users.search',
-        parent: navigationStatesProvider.states.root,
-        url: '/users?username&fullname&showActive',
+        parent: users,
+        url: '',
         views: {
           'pageView': {
             templateUrl: 'users/templates/search.html',
@@ -16,7 +31,8 @@
       },
       'newUser': {
         name: 'users.newUser',
-        parent: navigationStatesProvider.states.root,
+        title: 'Нов потребител',
+        parent: users,
         url: '/users/new',
         views: {
           'pageView': {
@@ -27,7 +43,8 @@
       },
       'edit': {
         name: 'users.edit',
-        parent: navigationStatesProvider.states.root,
+        title: 'Редакция',
+        parent: users,
         url: '/users/:userId',
         views: {
           'pageView': {
@@ -39,9 +56,10 @@
     };
 
     $stateProvider
-      .state(this.states.search)
-      .state(this.states.newUser)
-      .state(this.states.edit);
+    .state(this.states.users)
+    .state(this.states.search)
+    .state(this.states.newUser)
+    .state(this.states.edit);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];

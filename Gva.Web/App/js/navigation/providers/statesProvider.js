@@ -7,8 +7,10 @@
         name: 'navbar',
         views: {
           'rootView': {
-            templateUrl: 'navigation/templates/navbar.html',
-            controller: 'navigation.NavbarCtrl'
+            templateUrl: 'navigation/templates/navbar.html'
+          },
+          'breadcrumbBarView': {
+            templateUrl: 'navigation/templates/navbar.html'
           }
         }
       }

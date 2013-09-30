@@ -1,4 +1,4 @@
-﻿<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="navigation.NavbarCtrl">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="icon-bar"></span>
@@ -54,7 +54,20 @@
       </div>
     </div>
   </div>
+
 </div>
-<div>
-  <div ui-view="pageView"></div>
+<div class="navbar navbar-default" ng-show="showBreadcrumbBar" role="navigation" style="margin-bottom:0px" ng-controller="navigation.BreadcrumbBarCtrl">
+    <div class="container nav-container" role="navigation">
+        <div class="breadcrumb-bar" role="navigation">
+        <ul class="breadcrumb">
+            <li ng-repeat="breadcrumbBarState in breadcrumbBarStates">
+                <a ng-show="!$last" ng-href="{{breadcrumbBarState.url}}">{{breadcrumbBarState.title}}</a>
+                <span ng-show="$last"">{{breadcrumbBarState.title}}</span>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+<div ng-class="{'page-view': !showBreadcrumbBar}"  ng-controller="navigation.BreadcrumbBarCtrl">
+    <div ui-view="pageView"></div>
 </div>

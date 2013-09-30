@@ -1,6 +1,6 @@
 body
 {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 li.dropdown-split-right > a
 {
@@ -22,3 +22,19 @@ form.form-inline label.control-label
 {
   .hidden-phone{display:none !important;}
 }
+
+.page-view {
+    padding-bottom: 50px;
+}
+
+.breadcrumb-page-view {
+    padding-top:50px;
+    padding-bottom: 10px;
+}
+
+.breadcrumb-bar {
+    margin-top:-45px;
+    margin-bottom:-25px;
+    padding-top:50px;
+}
+
