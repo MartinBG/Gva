@@ -6,7 +6,7 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <div class="collapse navbar-collapse nav-container">
+  <div class="collapse navbar-collapse">
     <div class="container">
       <ul class="nav navbar-nav">
         <li ng-repeat-start="item in items"
@@ -54,12 +54,11 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <div ng-controller="navigation.BreadcrumbBarCtrl">
   <div class="navbar navbar-default navbar-fixed-top breadcrumb-bar" ng-show="showBreadcrumbBar" role="navigation" >
-    <div class="container nav-container" role="navigation">
+    <div class="container">
       <ul class="breadcrumb">
         <li ng-repeat="breadcrumbBarState in breadcrumbBarStates" ng-class="{'active': $last}">
           <a ng-show="!$last" ng-href="{{breadcrumbBarState.url}}">{{breadcrumbBarState.title}}</a>
