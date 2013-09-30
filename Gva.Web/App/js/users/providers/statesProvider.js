@@ -33,7 +33,7 @@
         name: 'users.newUser',
         title: 'Нов потребител',
         parent: users,
-        url: '/users/new',
+        url: '/new',
         views: {
           'pageView': {
             templateUrl: 'users/templates/edit.html',
@@ -45,7 +45,7 @@
         name: 'users.edit',
         title: 'Редакция',
         parent: users,
-        url: '/users/:userId',
+        url: '/:userId',
         views: {
           'pageView': {
             templateUrl: 'users/templates/edit.html',
