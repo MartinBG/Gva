@@ -5,6 +5,7 @@
     'ui.router',
     'ui.select2',
     'navigation',
+    'scaffolding',
     'users'
   ]).config([
     '$urlRouterProvider',

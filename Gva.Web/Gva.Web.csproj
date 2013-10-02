@@ -132,6 +132,10 @@
     <Content Include="App\js\navigation\providers\navigationConfigProvider.js" />
     <Content Include="App\js\navigation\providers\statesProvider.js" />
     <Content Include="App\js\navigation\templates\navbar.html" />
+    <Content Include="App\js\scaffolding\directives\dateDirective.js" />
+    <Content Include="App\js\scaffolding\directives\floatDirective.js" />
+    <Content Include="App\js\scaffolding\directives\integerDirective.js" />
+    <Content Include="App\js\scaffolding\scaffolding.js" />
     <Content Include="App\js\users\controllers\editCtrl.js" />
     <Content Include="App\js\users\providers\searchCtrl.js" />
     <Content Include="App\js\users\providers\statesProvider.js" />
