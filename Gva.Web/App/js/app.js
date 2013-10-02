@@ -50,7 +50,7 @@
             newTab: true
           }
         ]})
-        .setUserFullName("Администратор")
+        .setUserFullName('Администратор')
         .setUserHasPassword(true)
         .showBreadcrumbBar(true);
     }
