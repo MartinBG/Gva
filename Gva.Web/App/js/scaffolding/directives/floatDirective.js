@@ -13,11 +13,11 @@
 
           element.unbind('input');
           element.bind('input', function () {
-            var float = this.value.replace(/[^0-9.]+/g, '');
-            element[0].value = float;
+            var floatNum = this.value.replace(/[^0-9.]+/g, '');
+            element[0].value = floatNum;
 
             scope.$apply(function () {
-              ngModel.$setViewValue(parseFloat(float));
+              ngModel.$setViewValue(parseFloat(floatNum));
             });
           });
         }
