@@ -9,13 +9,17 @@
       ptor.get('#/users/2');
     });
 
+    it('should update breadcrumb text', function () {
+      /*jshint quotmark:false */
+      ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
+        .getText().then(function (text) {
+          expect(text).toEqual('Редакция');
+        });
+    });
+
     it('should display user', function () {
       var usernameElem = ptor.findElement(protractor.By.input('user.username')),
           fullnameElem = ptor.findElement(protractor.By.input('user.fullname'));
-
-      ptor.findElement(protractor.By.tagName('h4')).getText().then(function (text) {
-        expect(text).toEqual('Редактиране на потребител');
-      });
 
       expect(usernameElem.isEnabled()).toBe(false);
       usernameElem.getAttribute('value').then(function (value) {
@@ -33,10 +37,6 @@
 
     it('should be able to change user', function () {
       var fullnameElem = ptor.findElement(protractor.By.input('user.fullname'));
-
-      ptor.findElement(protractor.By.tagName('h4')).getText().then(function (text) {
-        expect(text).toEqual('Редактиране на потребител');
-      });
 
       fullnameElem.clear();
       fullnameElem.sendKeys('Peter Atanasov');

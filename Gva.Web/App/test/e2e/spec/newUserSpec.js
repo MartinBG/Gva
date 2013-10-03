@@ -9,15 +9,19 @@
       ptor.get('#/users/new');
     });
 
+    it('should update breadcrumb text', function () {
+      /*jshint quotmark:false */
+      ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
+        .getText().then(function (text) {
+            expect(text).toEqual('Нов потребител');
+          });
+    });
+
     it('should validate username', function () {
       var usernameElem = ptor.findElement(protractor.By.input('user.username')),
           usernameExistsElem = ptor.findElement(protractor.By.id('usernameExists')),
           usernameInvalidElem = ptor.findElement(protractor.By.id('usernameInvalid')),
           saveBtnElem = ptor.findElement(protractor.By.id('saveBtn'));
-    
-      ptor.findElement(protractor.By.tagName('h4')).getText().then(function (text) {
-        expect(text).toEqual('Нов потребител');
-      });
       
       saveBtnElem.click().then(function () {
         expect(usernameExistsElem.isDisplayed()).toBe(false);
@@ -44,10 +48,6 @@
           confirmPassElem = ptor.findElement(protractor.By.input('confirmPassword')),
           confirmPassInvalidElem = ptor.findElement(protractor.By.id('confirmPassInvalid')),
           saveBtnElem = ptor.findElement(protractor.By.id('saveBtn'));
-
-      ptor.findElement(protractor.By.tagName('h4')).getText().then(function (text) {
-        expect(text).toEqual('Нов потребител');
-      });
 
       ptor.findElement(protractor.By.input('setPassword')).click();
       
