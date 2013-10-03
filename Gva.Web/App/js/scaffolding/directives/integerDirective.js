@@ -1,23 +1,23 @@
-﻿(function (angular) {
+﻿// Usage: <input sc-integer type="text" class="form-control input-sm" ng-model="<model_name>" />
+(function (angular) {
   'use strict';
 
   angular.module('scaffolding')
-    .directive('input', function () {
+    .directive('scInteger', function () {
       return {
-        restrict: 'E',
+        restrict: 'A',
         require: '?ngModel',
         link: function (scope, element, attrs, ngModel) {
-          if (!ngModel || attrs.type !== 'integer') {
+          if (!ngModel) {
             return;
           }
 
-          element.unbind('input');
-          element.bind('input', function () {
-            var integer = this.value.replace(/[^0-9]+/g, '');
-            element[0].value = integer;
+          element.on('change', function (ev) {
+            var intNum = ev.target.value.replace(/[^0-9]+/g, '');
+            element.val(intNum);
 
             scope.$apply(function () {
-              ngModel.$setViewValue(parseInt(integer, 10));
+              ngModel.$setViewValue(parseInt(intNum, 10));
             });
           });
         }

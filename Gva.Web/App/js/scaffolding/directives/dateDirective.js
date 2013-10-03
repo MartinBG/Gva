@@ -1,10 +1,11 @@
-﻿(function (angular) {
+﻿// Usage: <sc-date ng-model="<model_name>" />
+(function (angular) {
   'use strict';
 
   angular.module('scaffolding')
     .directive('scDate', ['$filter', function ($filter) {
       return {
-        restrict: 'A',
+        restrict: 'E',
         replace: true,
         require: '?ngModel',
         template: '<div class="date input-group input-group-sm">' +
@@ -41,6 +42,10 @@
 
               ngModel.$setViewValue(date);
             });
+          });
+
+          scope.$on('$destroy', function () {
+            element.datetimepicker('destroy');
           });
         }
       };

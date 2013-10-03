@@ -1,20 +1,20 @@
-﻿(function (angular) {
+﻿// Usage: <input sc-float type="text" class="form-control input-sm" ng-model="<model_name>" />
+(function (angular) {
   'use strict';
 
   angular.module('scaffolding')
-    .directive('input', function () {
+    .directive('scFloat', function () {
       return {
-        restrict: 'E',
+        restrict: 'A',
         require: '?ngModel',
         link: function (scope, element, attrs, ngModel) {
-          if (!ngModel || attrs.type !== 'float') {
+          if (!ngModel) {
             return;
           }
 
-          element.unbind('input');
-          element.bind('input', function () {
-            var floatNum = this.value.replace(/[^0-9.]+/g, '');
-            element[0].value = floatNum;
+          element.on('change', function (ev) {
+            var floatNum = ev.target.value.replace(/[^0-9.]+/g, '');
+                element.val(floatNum);
 
             scope.$apply(function () {
               ngModel.$setViewValue(parseFloat(floatNum));
