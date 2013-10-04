@@ -12,12 +12,22 @@
             return;
           }
 
+          var intRegExpr = new RegExp('/[0-9]+/');
+
           element.on('change', function (ev) {
-            var intNum = ev.target.value.replace(/[^0-9]+/g, '');
-            element.val(intNum);
+            var value = ev.target.value,
+                integerNum;
+
+            if (intRegExpr.test(value)) {
+              integerNum = parseInt(value, 10);
+            }
+            else {
+              integerNum = null;
+              element.val(null);
+            }
 
             scope.$apply(function () {
-              ngModel.$setViewValue(parseInt(intNum, 10));
+              ngModel.$setViewValue(integerNum);
             });
           });
         }

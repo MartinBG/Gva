@@ -12,12 +12,27 @@
             return;
           }
 
-          element.on('change', function (ev) {
-            var floatNum = ev.target.value.replace(/[^0-9.]+/g, '');
-                element.val(floatNum);
+          var floatRegExpr = new RegExp('^-?[0-9]+(.|,)?[0-9]*$');
 
+          element.on('change', function (ev) {
+            var value = ev.target.value,
+                floatNum;
+
+            if (floatRegExpr.test(value)) {
+              floatNum = parseFloat(value.replace(',', '.'));
+
+              if (/(\.|\,)$/g.test(value)) {
+                value += '00';
+              }
+            }
+            else {
+              floatNum = null;
+              value = null;
+            }
+
+            element.val(value);
             scope.$apply(function () {
-              ngModel.$setViewValue(parseFloat(floatNum));
+              ngModel.$setViewValue(floatNum);
             });
           });
         }
