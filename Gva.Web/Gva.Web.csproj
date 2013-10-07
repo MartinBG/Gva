@@ -177,9 +177,6 @@
     <Content Include="App\bower.json" />
     <Content Include="App\package.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="App\.jshintignore" />
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
