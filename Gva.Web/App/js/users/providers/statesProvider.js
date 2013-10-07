@@ -1,5 +1,4 @@
-﻿/// <reference path="../../navigation/templates/navbar.html" />
-(function (angular) {
+﻿(function (angular) {
   'use strict';
 
   function StatesProvider($stateProvider, navigationStatesProvider) {

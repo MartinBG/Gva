@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Лицензиране на авиационен персонал, въздухоплавателни средства и летателна годност</title>
+    <title l10n-text="index.license"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="version" content="1.0.0#000000">
@@ -45,12 +45,12 @@
 </head>
 <body id="ng-app" ng-app="app">
     <noscript>
-        <h2 style="text-align: center;">Страницата не може да бъде показана, ако сте спрели изпълнението на JavaScript</h2>
+        <h2 style="text-align: center;" l10n-text="index.unableToShowPage"></h2>
     </noscript>
     
     <div id="root" ui-view="rootView">
         <div id="initial-loader">
-            <h4>Моля изчакайте...</h4>
+            <h4 l10n-text="navbar.pleaseWait"></h4>
             <i></i>
         </div>
     </div>
@@ -69,7 +69,8 @@
 
     <script src="/app/bower_components/select2/select2.js"></script>
     <script src="/app/bower_components/angular/angular.js"></script>
-    <script src="/app/bower_components/angular-i18n/angular-locale_bg-bg"></script>
+    <script src="/app/bower_components/angular-i18n/angular-locale_bg-bg.js"></script>
+    <script src="/app/bower_components/angular-l10n/build/l10n-with-tools.js"></script>
     <script src="/app/bower_components/angular-resource/angular-resource.js"></script>
     <script src="/app/bower_components/angular-ui-select2/src/select2.js"></script>
     <script src="/app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -78,6 +79,7 @@
     <script src="/app/bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
     <script src="/app/bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.bg.js"></script>
 
+    <script src="/app/js/l10n/l10nTexts_bg-bg.js"></script>
     <script src="/app/js/app.js"></script>
     <script src="/app/js/scaffolding/scaffolding.js"></script>
     <script src="/app/js/scaffolding/directives/dateDirective.js"></script>

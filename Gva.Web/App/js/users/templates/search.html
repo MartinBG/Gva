@@ -2,29 +2,29 @@
   <form class="well well-sm form-inline" role="form">
     <div class="row">
       <div class="form-group col-sm-3">
-        <label class="control-label">Потребителско име</label>
+        <label class="control-label" l10n-text="users.search.username"></label>
         <input type="text" class="input-sm form-control" ng-model="username" />
       </div>
       <div class="form-group col-sm-3 col-lg-4">
-        <label class="control-label">Име</label>
+        <label class="control-label" l10n-text="users.search.name"></label>
         <input type="text" class="input-sm form-control" ng-model="fullname" />
       </div>
       <div class="form-group col-sm-2">
-        <label class="control-label">Активност</label>
+        <label class="control-label" l10n-text="users.search.activity"></label>
         <select id="showActive" class="input-sm form-control" ui-select2="{ allowClear: true}" ng-model="showActive" data-placeholder=" ">
           <option value=""></option>
-          <option value="true">Само активни</option>
-          <option value="false">Само неактивни</option>
+          <option value="true" l10n-text="users.search.onlyActive"></option>
+          <option value="false" l10n-text="users.search.onlyUnactive"></option>
         </select>
       </div>
       <div class="col-sm-4 col-lg-3 labeless">
-        <button type="button" class="pull-right btn-sm btn-default" ng-click="newUser()">
+        <button type="button" class="pull-right btn-sm btn-default" ng-click="newUser()" >
           <span class="glyphicon glyphicon-user"></span>
-          Нов потребител
+          <span l10n-text="users.search.new"></span>
         </button>
         <button id="searchBtn" type="button" class="pull-right btn-sm btn-default" ng-click="search()">
           <span class="glyphicon glyphicon-search"></span>
-          Търси
+          <span l10n-text="users.search.search"></span>
         </button>
       </div>
     </div>
@@ -33,10 +33,10 @@
   <table class="table table-bordered table-striped table-condensed" ng-show="users.length > 0">
     <thead>
       <tr>
-        <th>Потребителско име</th>
-        <th>Име</th>
-        <th>Роли</th>
-        <th>Активен</th>
+        <th l10n-text="users.search.username"></th>
+        <th l10n-text="users.search.name"></th>
+        <th l10n-text="users.search.roles"></th>
+        <th l10n-text="users.search.active"></th>
         <th style="width:1px"></th>
       </tr>
     </thead>
@@ -45,17 +45,15 @@
         <td>{{user.username}}</td>
         <td>{{user.fullname}}</td>
         <td>{{user.roles}}</td>
-        <td>{{user.isActive ? 'Да' : 'Не'}}</td>
+        <td ng-show="user.isActive" l10n-text="users.search.yes"></td>
+        <td ng-show="{{!user.isActive}}" l10n-text="users.search.no"></td>
         <td>
-          <button type="button" class="btn-xs btn-info" ng-click="editUser(user)">
-            Редакция
+          <button type="button" class="btn-xs btn-info" ng-click="editUser(user)" l10n-text="users.search.edit">
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <span ng-show="users.length === 0">
-    Няма намерени потребители
-  </span>
+  <span ng-show="users.length === 0" l10n-text="search.noUsersFound"></span>
 </div>

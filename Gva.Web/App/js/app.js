@@ -6,7 +6,10 @@
     'ui.select2',
     'navigation',
     'scaffolding',
-    'users'
+    'users',
+    'l10n',
+    'l10n-tools',
+    'l10nTexts_bg-bg'
   ]).config([
     '$urlRouterProvider',
     '$stateProvider',
