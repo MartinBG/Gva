@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function FloatDirective ($locale) {
+  function FloatDirective ($filter) {
     return {
       restrict: 'E',
       replace: true,
@@ -13,21 +13,12 @@
           return;
         }
 
-        var decimalSep = $locale.NUMBER_FORMATS.DECIMAL_SEP;
-
         element.on('change', function (ev) {
           var value = ev.target.value.replace(',', '.'),
-              floatNum = parseFloat(value);
+              floatNum = parseFloat(value) || undefined,
+              floatText = $filter('number')(floatNum, 2);
 
-          if (floatNum) {
-            value = floatNum.toString().replace('.', decimalSep);
-            element.val(value);
-          }
-          else {
-            element.val(null);
-            floatNum = null;
-          }
-
+          element.val(floatText);
           scope.$apply(function () {
             ngModel.$setViewValue(floatNum);
           });
@@ -36,7 +27,7 @@
     };
   }
 
-  FloatDirective.$inject = ['$locale'];
+  FloatDirective.$inject = ['$filter'];
 
   angular.module('scaffolding').directive('scFloat', FloatDirective);
 }(angular));
