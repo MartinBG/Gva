@@ -1,72 +1,68 @@
 ﻿<div class="container page-content">
   <form name="userForm" novalidate ng-submit="save()" class="form-horizontal well" role="form">
     <div class="form-group" ng-class="{'has-error': saveClicked && (userExists || userForm.username.$invalid)}">
-      <label class="control-label col-sm-3">Потребителско име:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.username"></label>
       <div class="col-sm-4">
         <input type="text" name="username" class="input-sm form-control"
           required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/" 
           ng-model="user.username" ng-disabled="isEdit">
-        <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid">
-          потребителското име трябва да е поне 5 символа и да съдържа само букви, числа, подчертавки (_) и точки (.)
+        <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid" l10n-text="edit.usernameInvalid">
         </span>
-        <span id="usernameExists" class="help-block" ng-show="userExists">потребителското име е заето</span>
+        <span id="usernameExists" class="help-block" ng-show="userExists" l10n-text="edit.usernameExists"></span>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Име:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.name"></label>
       <div class="col-sm-4">
         <input type="text" class="input-sm form-control" ng-model="user.fullname">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Коментар:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.comment"></label>
       <div class="col-sm-4">
         <textarea rows="3" class="form-control" ng-model="user.notes"></textarea>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Вход:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.entrance"></label>
       <div class="col-sm-4">
         <div class="checkbox">
-          <input type="checkbox" ng-model="setPassword"> с потребителско име / парола
+          <input type="checkbox" ng-model="setPassword" l10n-text="edit.withPassAndUsername">
         </div>
         <div class="checkbox">
-          <input type="checkbox" ng-model="setCertificate"> със сертификат
+          <input type="checkbox" ng-model="setCertificate" l10n-text="edit.withCertificate">
         </div>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.password.$invalid}"
       ng-show="setPassword">
-      <label class="control-label col-sm-3">Парола:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.password"></label>
       <div class="col-sm-4">
         <input type="password" name="password" class="input-sm form-control" ng-required="setPassword && !isEdit" ng-minlength="8" ng-model="password" />
-        <span id="passInvalid" class="help-block" ng-show="saveClicked && userForm.password.$invalid">
-          паролата трябва да бъде поне 8 символа
+        <span id="passInvalid" class="help-block" ng-show="saveClicked && userForm.password.$invalid" l10n-text="edit.passMustBeMin8symbols">
         </span>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && (password !== confirmPassword)}"
       ng-show="setPassword">
-      <label class="control-label col-sm-3">Повтори парола:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.repeatPass"></label>
       <div class="col-sm-4">
         <input type="password" name="confirmPassword" class="input-sm form-control" ng-model="confirmPassword">
-        <span id="confirmPassInvalid" class="help-block" ng-show="saveClicked && (password !== confirmPassword)">
-          паролите не съвпадат
+        <span id="confirmPassInvalid" class="help-block" ng-show="saveClicked && (password !== confirmPassword)" l10n-text="edit.doNotMatch">
         </span>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.certificate.$invalid}"
       ng-show="setCertificate">
-      <label class="control-label col-sm-3">Сертификат:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.certificate"></label>
       <div class="col-sm-4">
         <input type="text" name="certificate" class="input-sm form-control" ng-required="setCertificate" ng-model="certificate">
-        <span class="help-block" ng-show="saveClicked && userForm.certificate.$invalid">
-          въведете сертификат
+        <span class="help-block" ng-show="saveClicked && userForm.certificate.$invalid" l10n-text="edit.inputCertificate">
         </span>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Роли:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.roles"></label>
       <div class="col-sm-4">
         <div class="checkbox" ng-repeat="role in roles">
           <input type="checkbox" ng-model="role.selected">
@@ -75,7 +71,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Активен:</label>
+      <label class="control-label col-sm-3" l10n-text="edit.active"></label>
       <div class="col-sm-4">
         <div class="checkbox">
           <input type="checkbox" ng-model="user.isActive">
@@ -84,8 +80,8 @@
     </div>
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-4">
-        <button id="saveBtn" type="submit" class="btn btn-primary">Запис</button>
-        <button id="cancelBtn" type="button" class="btn btn-default" ng-click="cancel()">Отказ</button>
+        <button id="saveBtn" type="submit" class="btn btn-primary" l10n-text="edit.save"></button>
+        <button id="cancelBtn" type="button" class="btn btn-default" ng-click="cancel()" l10n-text="edit.cancel"></button>
       </div>
     </div>
   </form>

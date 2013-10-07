@@ -6,6 +6,8 @@
     'ui.router',
     'ui.bootstrap',
     'navigation',
-    'users.templates'
+    'users.templates',
+    'l10n',
+    'l10n-tools'
   ]);
 }(angular));

@@ -126,6 +126,8 @@
     <Content Include="App\img\initial-loader.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
+    <Content Include="App\js\l10nTexts_en-bg.js" />
+    <Content Include="App\js\l10n\l10n-with-tools.js" />
     <Content Include="App\js\navigation\controllers\breadcrumbBarCtrl.js" />
     <Content Include="App\js\navigation\controllers\navbarCtrl.js" />
     <Content Include="App\js\navigation\navigation.js" />
@@ -175,6 +177,9 @@
     <Content Include="App\.jshintrc" />
     <Content Include="App\bower.json" />
     <Content Include="App\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\.jshintignore" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

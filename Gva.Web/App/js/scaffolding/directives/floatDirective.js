@@ -14,7 +14,7 @@
 
           element.on('change', function (ev) {
             var floatNum = ev.target.value.replace(/[^0-9.]+/g, '');
-                element.val(floatNum);
+            element.val(floatNum);
 
             scope.$apply(function () {
               ngModel.$setViewValue(parseFloat(floatNum));
