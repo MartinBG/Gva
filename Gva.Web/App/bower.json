@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "1.2.0-rc.2",
     "angular-i18n": "1.2.0-rc.2",
+    "angular-l10n": "4vanger/angular-l10n#6cb73e3cad1adc894d99f97a097df799313e088b",
     "angular-resource": "1.2.0-rc.2",
     "angular-ui-router": "0.2.0",
     "angular-bootstrap": "0.5.0",

@@ -1,7 +1,7 @@
 ﻿(function (angular) {
   'use strict';
-  angular.module('l10nTexts_en-bg', ['l10n']).config(['l10nProvider', function(l10n){
-    l10n.add('bg', {
+  angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function(l10n){
+    l10n.add('bg-bg', {
       navbar: {
         exit: 'Изход',
         changePass: 'Смяна на паролата'
@@ -10,7 +10,7 @@
         unableToShowPage: 'Страницата не може да бъде показана,' +
           ' ако сте спрели изпълнението на JavaScript',
         pleaseWait: 'Моля изчакайте...',
-        licence: 'Лицензиране на авиационен персонал,' +
+        license: 'Лицензиране на авиационен персонал,' +
           ' въздухоплавателни средства и летателна годност'
       },
       search: {

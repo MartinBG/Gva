@@ -9,7 +9,7 @@
     'users',
     'l10n',
     'l10n-tools',
-    'l10nTexts_en-bg'
+    'l10nTexts_bg-bg'
   ]).config([
     '$urlRouterProvider',
     '$stateProvider',
