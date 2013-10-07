@@ -1,41 +1,42 @@
-﻿// Usage: <input sc-float type="text" class="form-control input-sm" ng-model="<model_name>" />
+﻿// Usage: <sc-float ng-model="<model_name>" />
 (function (angular) {
   'use strict';
 
-  angular.module('scaffolding')
-    .directive('scFloat', function () {
-      return {
-        restrict: 'A',
-        require: '?ngModel',
-        link: function (scope, element, attrs, ngModel) {
-          if (!ngModel) {
-            return;
+  function FloatDirective ($locale) {
+    return {
+      restrict: 'E',
+      replace: true,
+      require: '?ngModel',
+      templateUrl: 'scaffolding/templates/floatTemplate.html',
+      link: function (scope, element, attrs, ngModel) {
+        if (!ngModel) {
+          return;
+        }
+
+        var decimalSep = $locale.NUMBER_FORMATS.DECIMAL_SEP;
+
+        element.on('change', function (ev) {
+          var value = ev.target.value.replace(',', '.'),
+              floatNum = parseFloat(value);
+
+          if (floatNum) {
+            value = floatNum.toString().replace('.', decimalSep);
+            element.val(value);
+          }
+          else {
+            element.val(null);
+            floatNum = null;
           }
 
-          var floatRegExpr = new RegExp('^-?[0-9]+(.|,)?[0-9]*$');
-
-          element.on('change', function (ev) {
-            var value = ev.target.value,
-                floatNum;
-
-            if (floatRegExpr.test(value)) {
-              floatNum = parseFloat(value.replace(',', '.'));
-
-              if (/(\.|\,)$/g.test(value)) {
-                value += '00';
-              }
-            }
-            else {
-              floatNum = null;
-              value = null;
-            }
-
-            element.val(value);
-            scope.$apply(function () {
-              ngModel.$setViewValue(floatNum);
-            });
+          scope.$apply(function () {
+            ngModel.$setViewValue(floatNum);
           });
-        }
-      };
-    });
+        });
+      }
+    };
+  }
+
+  FloatDirective.$inject = ['$locale'];
+
+  angular.module('scaffolding').directive('scFloat', FloatDirective);
 }(angular));

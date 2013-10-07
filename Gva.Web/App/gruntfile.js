@@ -28,6 +28,11 @@ module.exports = function (grunt) {
         src: [ 'js/users/**/*.html' ],
         dest: '<%= buildDir %>/templates/users.js',
         module: 'users.templates'
+      },
+      scaffolding: {
+        src: ['js/scaffolding/**/*.html'],
+        dest: '<%= buildDir %>/templates/scaffolding.js',
+        module: 'scaffolding.templates'
       }
     },
     watch:{
