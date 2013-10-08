@@ -1,4 +1,4 @@
-﻿//Usage: <sc-select ng-model="<model_name>"/></sc-select>
+﻿//Usage: <sc-select ng-model="<model_name>" ui-select2="{ select2 options object }"/></sc-select>
 (function (angular) {
   'use strict';
 
@@ -12,7 +12,6 @@
         if (!ngModel) {
           return;
         }
-
       }
     };
   }
