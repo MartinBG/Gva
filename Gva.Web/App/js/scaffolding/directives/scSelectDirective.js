@@ -7,12 +7,7 @@
       restrict: 'E',
       replace: true,
       require: ['?ngModel', 'uiSelect2'],
-      templateUrl: 'scaffolding/templates/scSelectTemplate.html',
-      link: function (scope, element, attrs, ngModel) {
-        if (!ngModel) {
-          return;
-        }
-      }
+      templateUrl: 'scaffolding/templates/scSelectTemplate.html'
     };
   }
 
