@@ -4,6 +4,7 @@
 
   function DateDirective ($filter) {
     return {
+      priority: 110,
       restrict: 'E',
       replace: true,
       require: '?ngModel',
