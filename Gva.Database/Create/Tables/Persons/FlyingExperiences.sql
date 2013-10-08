@@ -39,7 +39,7 @@ CREATE TABLE [dbo].[FlyingExperiences] (
     CONSTRAINT [FK_FlyingExperience_Persons]            FOREIGN KEY ([PersonId])            REFERENCES [dbo].[Persons]            ([PersonId]),
     CONSTRAINT [FK_FlyingExperience_StaffTypes]         FOREIGN KEY ([StaffTypeId])         REFERENCES [dbo].[StaffTypes]         ([StaffTypeId]),
     CONSTRAINT [FK_FlyingExperience_Organizations]      FOREIGN KEY ([OrganizationId])      REFERENCES [dbo].[Organizations]      ([OrganizationId]),
-    CONSTRAINT [FK_FlyingExperience_Aircrafts]          FOREIGN KEY ([AircraftId])          REFERENCES [dbo].[Aircrafts]          ([AircraftId]),
+    CONSTRAINT [FK_FlyingExperience_Aircraft]           FOREIGN KEY ([AircraftId])          REFERENCES [dbo].[Aircraft]           ([AircraftId]),
     CONSTRAINT [FK_FlyingExperience_RatingClasses]      FOREIGN KEY ([RatingClassId])       REFERENCES [dbo].[RatingClasses]      ([RatingClassId]),
     CONSTRAINT [FK_FlyingExperience_RatingTypes]        FOREIGN KEY ([RatingTypeId])        REFERENCES [dbo].[RatingTypes]        ([RatingTypeId]),
     CONSTRAINT [FK_FlyingExperience_Authorizations]     FOREIGN KEY ([AuthorizationId])     REFERENCES [dbo].[Authorizations]     ([AuthorizationId]),

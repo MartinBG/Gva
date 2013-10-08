@@ -55,8 +55,8 @@ GO
 -- Organizations
 :r "Create\Tables\Organizations\Organizations.sql"
 
--- Aircrafts
-:r "Create\Tables\Aircrafts\Aircrafts.sql"
+-- Aircraft
+:r "Create\Tables\Aircraft\Aircraft.sql"
 
 -- Persons
 :r "Create\Tables\Persons\Persons.sql"
