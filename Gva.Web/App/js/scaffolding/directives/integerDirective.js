@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function IntegerDirective() {
+  function IntegerDirective($filter) {
     return {
       restrict: 'E',
       replace: true,
@@ -14,25 +14,22 @@
         }
 
         element.on('change', function (ev) {
-          var value = ev.target.value,
-              integerNum = parseInt(value, 10);
+          var integerNum = parseInt(ev.target.value, 10),
+              integerText;
 
-          if (integerNum) {
-            value = integerNum.toString();
-            element.val(value);
-          }
-          else {
-            element.val(null);
-            integerNum = null;
-          }
+          integerNum = isNaN(integerNum) ? undefined : integerNum;
+          integerText = $filter('number')(integerNum, 0);
 
+          element.val(integerText);
           scope.$apply(function () {
-            ngModel.$setViewValue(integerNum);
+            ngModel.$setViewValue(integerText);
           });
         });
       }
     };
   }
+
+  IntegerDirective.$inject = ['$filter'];
 
   angular.module('scaffolding').directive('scInt', IntegerDirective);
 }(angular));

@@ -15,8 +15,11 @@
 
         element.on('change', function (ev) {
           var value = ev.target.value.replace(',', '.'),
-              floatNum = parseFloat(value) || undefined,
-              floatText = $filter('number')(floatNum, 2);
+              floatNum = parseFloat(value),
+              floatText;
+
+          floatNum = isNaN(floatNum) ? undefined : floatNum;
+          floatText = $filter('number')(floatNum, 2);
 
           element.val(floatText);
           scope.$apply(function () {
