@@ -3,18 +3,18 @@
     <div class="form-group" ng-class="{'has-error': saveClicked && (userExists || userForm.username.$invalid)}">
       <label class="control-label col-sm-3" l10n-text="users.edit.username"></label>
       <div class="col-sm-4">
-        <input type="text" name="username" class="input-sm form-control"
-          required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/" 
+        <sc-text name="username"
+          required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/"
           ng-model="user.username" ng-disabled="isEdit">
-        <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid" l10n-text="users.edit.usernameInvalid">
-        </span>
+        </sc-text>
+        <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid" l10n-text="users.edit.usernameInvalid"></span>
         <span id="usernameExists" class="help-block" ng-show="userExists" l10n-text="users.edit.usernameExists"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" l10n-text="users.edit.name"></label>
       <div class="col-sm-4">
-        <input type="text" class="input-sm form-control" ng-model="user.fullname">
+        <sc-text ng-model="user.fullname"></sc-text>
       </div>
     </div>
     <div class="form-group">
@@ -39,8 +39,7 @@
       <label class="control-label col-sm-3" l10n-text="users.edit.password"></label>
       <div class="col-sm-4">
         <input type="password" name="password" class="input-sm form-control" ng-required="setPassword && !isEdit" ng-minlength="8" ng-model="password" />
-        <span id="passInvalid" class="help-block" ng-show="saveClicked && userForm.password.$invalid" l10n-text="users.edit.passMustBeMin8symbols">
-        </span>
+        <span id="passInvalid" class="help-block" ng-show="saveClicked && userForm.password.$invalid" l10n-text="users.edit.passMustBeMin8symbols"></span>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && (password !== confirmPassword)}"
@@ -48,17 +47,15 @@
       <label class="control-label col-sm-3" l10n-text="users.edit.repeatPass"></label>
       <div class="col-sm-4">
         <input type="password" name="confirmPassword" class="input-sm form-control" ng-model="confirmPassword">
-        <span id="confirmPassInvalid" class="help-block" ng-show="saveClicked && (password !== confirmPassword)" l10n-text="users.edit.doNotMatch">
-        </span>
+        <span id="confirmPassInvalid" class="help-block" ng-show="saveClicked && (password !== confirmPassword)" l10n-text="users.edit.doNotMatch"></span>
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.certificate.$invalid}"
       ng-show="setCertificate">
       <label class="control-label col-sm-3" l10n-text="users.edit.certificate"></label>
       <div class="col-sm-4">
-        <input type="text" name="certificate" class="input-sm form-control" ng-required="setCertificate" ng-model="certificate">
-        <span class="help-block" ng-show="saveClicked && userForm.certificate.$invalid" l10n-text="users.edit.inputCertificate">
-        </span>
+        <sc-text name="certificate" ng-required="setCertificate" ng-model="certificate"></sc-text>
+        <span class="help-block" ng-show="saveClicked && userForm.certificate.$invalid" l10n-text="users.edit.inputCertificate"></span>
       </div>
     </div>
     <div class="form-group">
