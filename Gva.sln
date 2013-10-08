@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{496599
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.Database", "Gva.Database\Gva.Database.csproj", "{6B3A2E0F-ED05-49A0-939A-BF5FAE11B160}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,8 @@ Global
 		{0AA2D32A-21C7-4B24-A82D-C5F0E5087521}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA2D32A-21C7-4B24-A82D-C5F0E5087521}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA2D32A-21C7-4B24-A82D-C5F0E5087521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B3A2E0F-ED05-49A0-939A-BF5FAE11B160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B3A2E0F-ED05-49A0-939A-BF5FAE11B160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

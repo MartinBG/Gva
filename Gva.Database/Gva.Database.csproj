@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B3A2E0F-ED05-49A0-939A-BF5FAE11B160}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gva.Database</RootNamespace>
+    <AssemblyName>Gva.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Create\Create.sql" />
+    <Content Include="Create\CreateDB.sql" />
+    <Content Include="Create\Diagram\Persons.sql" />
+    <Content Include="Create\Diagram\Ratings.sql" />
+    <Content Include="Create\Diagram\Licenses.sql" />
+    <Content Include="Create\Tables\Noms\AddressTypes.sql" />
+    <Content Include="Create\Tables\Noms\Caas.sql" />
+    <Content Include="Create\Tables\Noms\RatingCategories66.sql" />
+    <Content Include="Create\Tables\Noms\RatingGroups66.sql" />
+    <Content Include="Create\Tables\Noms\RatingModels.sql" />
+    <Content Include="Create\Tables\Noms\Examiners.sql" />
+    <Content Include="Create\Tables\Noms\LicenseInstanceTypes.sql" />
+    <Content Include="Create\Tables\Noms\LicenseTypes.sql" />
+    <Content Include="Create\Tables\Noms\LocationIndicators.sql" />
+    <Content Include="Create\Tables\Noms\ExperienceRoles.sql" />
+    <Content Include="Create\Tables\Noms\ExperienceMeasures.sql" />
+    <Content Include="Create\Tables\Noms\StaffTypes.sql" />
+    <Content Include="Create\Tables\Aircrafts\Aircrafts.sql" />
+    <Content Include="Create\Tables\Noms\RatingClasses.sql" />
+    <Content Include="Create\Tables\Noms\RatingTypes.sql" />
+    <Content Include="Create\Tables\Noms\Authorizations.sql" />
+    <Content Include="Create\Tables\Organizations\Organizations.sql" />
+    <Content Include="Create\Tables\Noms\EmploymentCategories.sql" />
+    <Content Include="Create\Tables\Noms\Schools.sql" />
+    <Content Include="Create\Tables\Noms\EducationDegrees.sql" />
+    <Content Include="Create\Tables\Noms\Genders.sql" />
+    <Content Include="Create\Tables\Noms\Countries.sql" />
+    <Content Include="Create\Tables\Noms\Settlements.sql" />
+    <Content Include="Create\Tables\Noms\MedicalCertificateLimitations.sql" />
+    <Content Include="Create\Tables\Persons\MedicalCertificates.sql" />
+    <Content Include="Create\Tables\Persons\FlyingExperiences.sql" />
+    <Content Include="Create\Tables\Persons\RatingInstances.sql" />
+    <Content Include="Create\Tables\Persons\Ratings.sql" />
+    <Content Include="Create\Tables\Persons\LicenseInstanceRatings.sql" />
+    <Content Include="Create\Tables\Persons\LicenseInstances.sql" />
+    <Content Include="Create\Tables\Persons\Licenses.sql" />
+    <Content Include="Create\Tables\Persons\Educations.sql" />
+    <Content Include="Create\Tables\Persons\Employments.sql" />
+    <Content Include="Create\Tables\Persons\Persons.sql" />
+    <Content Include="Create\Tables\Persons\Addresses.sql" />
+    <Content Include="Create\Tables\System\GParams.sql" />
+    <Content Include="Create\Tables\Users\Roles.sql" />
+    <Content Include="Create\Tables\Users\UserRoles.sql" />
+    <Content Include="Create\Tables\Users\Users.sql" />
+    <Content Include="Create\Tools\DocumentationScript.sql" />
+    <Content Include="Create\Tools\spDesc.sql" />
+    <Content Include="Create\Tools\sp_generate_inserts.sql" />
+    <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="CreateAll.bat" />
+    <None Include="CreateAll.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateAll.tt</DependentUpon>
+    </None>
+    <None Include="CreateAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateAll.log</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

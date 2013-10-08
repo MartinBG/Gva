@@ -1,0 +1,16 @@
+﻿IF EXISTS (SELECT name FROM sys.databases WHERE name = N'$(DatabaseName)')
+BEGIN
+    ALTER DATABASE [$(DatabaseName)] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+    DROP DATABASE [$(DatabaseName)]
+END
+GO
+
+CREATE DATABASE [$(DatabaseName)] COLLATE Cyrillic_General_CI_AS
+GO
+
+ALTER DATABASE [$(DatabaseName)]
+SET ALLOW_SNAPSHOT_ISOLATION ON
+
+ALTER DATABASE [$(DatabaseName)]
+SET READ_COMMITTED_SNAPSHOT ON
+GO
