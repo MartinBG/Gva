@@ -1,13 +1,20 @@
-﻿//Usage: <sc-select ng-model="<model_name>" ui-select2="{ select2 options object }"/></sc-select>
+﻿//Usage: <sc-select sc-select="{ select2 options object }" ng-model="model"></sc-select>
 (function (angular) {
   'use strict';
 
   function scSelectDirective() {
     return {
+      priority: 110,
       restrict: 'E',
       replace: true,
-      require: ['?ngModel', 'uiSelect2'],
-      templateUrl: 'scaffolding/templates/scSelectTemplate.html'
+      templateUrl: 'scaffolding/templates/scSelectTemplate.html',
+      compile: function () {
+          return {
+              pre: function (scope, tElement, tAttrs) {
+                  tAttrs.$set('uiSelect2', tAttrs.scSelect);
+                }
+            };
+        }
     };
   }
 
