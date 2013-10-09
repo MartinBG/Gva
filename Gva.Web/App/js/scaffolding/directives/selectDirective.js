@@ -7,7 +7,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/templates/scSelectTemplate.html',
+      templateUrl: 'scaffolding/templates/selectTemplate.html',
       compile: function () {
           return {
               pre: function (scope, tElement, tAttrs) {
