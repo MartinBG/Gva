@@ -136,10 +136,12 @@
     <Content Include="App\js\scaffolding\directives\dateDirective.js" />
     <Content Include="App\js\scaffolding\directives\floatDirective.js" />
     <Content Include="App\js\scaffolding\directives\integerDirective.js" />
+    <Content Include="App\js\scaffolding\directives\scSelectDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
     <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
     <Content Include="App\js\scaffolding\templates\floatTemplate.html" />
     <Content Include="App\js\scaffolding\templates\integerTemplate.html" />
+    <Content Include="App\js\scaffolding\templates\scSelectTemplate.html" />
     <Content Include="App\js\users\controllers\editCtrl.js" />
     <Content Include="App\js\users\controllers\searchCtrl.js" />
     <Content Include="App\js\users\providers\statesProvider.js" />
