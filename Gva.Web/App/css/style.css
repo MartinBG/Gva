@@ -12,7 +12,7 @@ div.labeless
 }
 form.form-inline label.control-label 
 {
-  min-width: 100%;
+  min-width: 90%;
 }
 @media (max-width:767px)
 {
