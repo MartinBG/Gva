@@ -3,15 +3,15 @@
     <div class="row">
       <div class="form-group col-sm-3">
         <label class="control-label" l10n-text="users.search.username"></label>
-        <input type="text" class="input-sm form-control" ng-model="username" />
+        <input type="text" class="input-sm form-control" ng-model="searchParams.username" />
       </div>
       <div class="form-group col-sm-3 col-lg-4">
         <label class="control-label" l10n-text="users.search.name"></label>
-        <input type="text" class="input-sm form-control" ng-model="fullname" />
+        <input type="text" class="input-sm form-control" ng-model="searchParams.fullname" />
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="users.search.activity"></label>
-        <select id="showActive" class="input-sm form-control" ui-select2="{ allowClear: true}" ng-model="showActive" data-placeholder=" ">
+        <select id="showActive" class="input-sm form-control" ui-select2="{ allowClear: true}" ng-model="searchParams.showActive" data-placeholder=" ">
           <option value=""></option>
           <option value="true" l10n-text="users.search.onlyActive"></option>
           <option value="false" l10n-text="users.search.onlyUnactive"></option>
@@ -54,6 +54,16 @@
       </tr>
     </tbody>
   </table>
+
+<sc-search selected-filters="searchParams">
+  <sc-filter type="int" filter-name="users.search.username" classes="col-sm-3" model-name="username" removable="false"></sc-filter>
+  <sc-filter type="float" filter-name="users.search.name" classes="col-sm-3" model-name="fullname" removable="true"></sc-filter>
+  <sc-filter type="int" filter-name="users.search.activity" model-name="active" removable="true"></sc-filter>
+  <sc-btn-wrapper btn-classes="col-sm-3" btn-actions="btnActions">
+    <sc-button text="users.search.new" icon="glyphicon-user" classes="btn-sm btn-default" action-name="newUser"></sc-button>
+    <sc-button text="users.search.name" icon="glyphicon-user" action-name="add"></sc-button>
+  </sc-btn-wrapper>
+</sc-search>
 
   <span ng-show="users.length === 0" l10n-text="search.noUsersFound"></span>
 </div>

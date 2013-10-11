@@ -141,6 +141,7 @@
     <Content Include="App\js\scaffolding\directives\integerDirective.js" />
     <Content Include="App\js\scaffolding\directives\searchDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
+    <Content Include="App\js\scaffolding\templates\btnWrapperTemplate.html" />
     <Content Include="App\js\scaffolding\templates\buttonTemplate.html" />
     <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
     <Content Include="App\js\scaffolding\templates\filterTemplate.html" />
