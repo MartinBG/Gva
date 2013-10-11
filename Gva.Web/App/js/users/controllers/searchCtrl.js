@@ -2,9 +2,17 @@
   'use strict';
 
   function SearchCtrl($scope, $state, $stateParams, usersStates, User) {
-    $scope.username = $stateParams.username;
-    $scope.fullname = $stateParams.fullname;
-    $scope.showActive = $stateParams.showActive;
+    $scope.searchParams = {
+      username: $stateParams.username,
+      fullname: $stateParams.fullname,
+      showActive: $stateParams.showActive
+    };
+
+    $scope.btnActions = {
+      'newUser': function () {
+        $state.go(usersStates.newUser);
+      }
+    };
 
     User.query($stateParams).$promise.then(function (users) {
       $scope.users = users.map(function (user) {

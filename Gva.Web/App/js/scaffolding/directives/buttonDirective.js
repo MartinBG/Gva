@@ -3,9 +3,40 @@
   'use strict';
 
   function ButtonDirective() {
+    function ButtonCompile (tElement, tAttrs) {
+      if (!tAttrs.classes) {
+        tAttrs.classes = 'btn-sm btn-default';
+      }
+
+      return ButtonLink;
+    }
+
+    function ButtonLink($scope, element, attrs, controllers) {
+      var scSearch = controllers[0],
+          scBtnWrapper = controllers[1];
+
+      if (!scSearch || !scBtnWrapper) {
+        return;
+      }
+
+      $scope.action = undefined;
+      $scope.addFilter = undefined;
+      $scope.nonSelectedFilters = [];
+
+      if ($scope.actionName === 'add') {
+        $scope.nonSelectedFilters = scSearch.getNonSelectedFilters();
+        $scope.addFilter = function (filter) {
+          scSearch.addFilter(filter);
+        };
+      }
+      else {
+        $scope.action = scBtnWrapper.getBtnAction($scope.actionName);
+      }
+    }
+
     return {
       restrict: 'E',
-      require: '^scSearch',
+      require: ['?^scSearch', '?^scBtnWrapper'],
       replace: true,
       scope: {
         actionName: '@',
@@ -14,46 +45,7 @@
         icon: '@'
       },
       templateUrl: 'scaffolding/templates/buttonTemplate.html',
-      link: function (scope, element, attrs, scSearch) {
-        if (!scSearch) {
-          return;
-        }
-
-        scope.btnClasses = scSearch.btnClasses;
-        scope.action = undefined;
-        scope.addFilter = undefined;
-        scope.nonSelectedFilters = [];
-
-        if (scope.actionName === 'add') {
-          for (var modelName in scSearch.filters) {
-            if (!(modelName in scSearch.selectedFilters) &&
-                scSearch.filters[modelName].filterName) {
-              scope.nonSelectedFilters.push({
-                name: scSearch.filters[modelName].filterName,
-                model: modelName
-              });
-            }
-          }
-          scSearch.nonSelectedFilters = scope.nonSelectedFilters;
-
-          scope.addFilter = function (filter) {
-            var index = scope.nonSelectedFilters.indexOf(filter);
-            scope.nonSelectedFilters.splice(index, 1);
-
-            scSearch.selectedFilters[filter.model] = undefined;
-          };
-        }
-        else {
-          scope.action = scSearch.btnActions[scope.actionName];
-        }
-      },
-      compile: function (tElement, tAttrs) {
-        if (!tAttrs.classes) {
-          tAttrs.classes = 'btn-sm btn-default';
-        }
-
-        return this.link;
-      }
+      compile: ButtonCompile
     };
   }
 
