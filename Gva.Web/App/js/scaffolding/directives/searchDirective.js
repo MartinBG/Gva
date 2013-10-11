@@ -16,6 +16,7 @@
         var index = nonSelectedFilters.indexOf(filter);
         nonSelectedFilters.splice(index, 1);
 
+        selectedFilters[filter.model] = undefined;
         filters[filter.model].model = undefined;
       };
 
