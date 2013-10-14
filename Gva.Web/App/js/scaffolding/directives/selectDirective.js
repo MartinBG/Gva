@@ -8,13 +8,9 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'scaffolding/templates/selectTemplate.html',
-      compile: function () {
-          return {
-              pre: function (scope, tElement, tAttrs) {
-                  tAttrs.$set('uiSelect2', tAttrs.scSelect);
-                }
-            };
-        }
+      compile: function (tElement, tAttrs) {
+        tAttrs.$set('uiSelect2', tAttrs.scSelect);
+      }
     };
   }
 

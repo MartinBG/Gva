@@ -47,6 +47,10 @@
 
     function SearchLink($scope) {
       $scope.$watch('selectedFilters', function (newObj, oldObj) {
+        if (newObj === oldObj) {
+          return;
+        }
+
         for (var propt in newObj) {
           if (newObj[propt] !== oldObj[propt]) {
             $scope.filters[propt].model = newObj[propt];

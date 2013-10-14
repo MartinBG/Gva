@@ -39,14 +39,14 @@
         return modelName in scSearch.selectedFilters;
       };
 
-      if ($scope.model !== undefined) {
-        $scope.$watch('model', function (value) {
-          scSearch.selectedFilters[modelName] = value;
-        });
-      }
+      $scope.$watch('model', function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          scSearch.selectedFilters[modelName] = newVal;
+        }
+      }, true);
 
       $scope.removeFilter = function () {
-        return scSearch.removeFilter($scope.filterName, modelName);
+        scSearch.removeFilter($scope.filterName, modelName);
       };
 
       scSearch.registerFilter(modelName, $scope);

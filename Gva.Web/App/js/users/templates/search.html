@@ -1,35 +1,13 @@
 ﻿<div class="container page-content">
-  <form class="well well-sm form-inline" role="form">
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="control-label" l10n-text="users.search.username"></label>
-        <sc-text ng-model="username"></sc-text>
-      </div>
-      <div class="form-group col-sm-3 col-lg-4">
-        <label class="control-label" l10n-text="users.search.name"></label>
-        <sc-text ng-model="fullname"></sc-text>
-      </div>
-      <div class="form-group col-sm-2">
-        <label class="control-label" l10n-text="users.search.activity"></label>
-        <select id="showActive" class="input-sm form-control" ui-select2="{ allowClear: true}" ng-model="searchParams.showActive" data-placeholder=" ">
-          <option value=""></option>
-          <option value="true" l10n-text="users.search.onlyActive"></option>
-          <option value="false" l10n-text="users.search.onlyUnactive"></option>
-        </select>
-      </div>
-      <div class="col-sm-4 col-lg-3 labeless">
-        <button type="button" class="pull-right btn-sm btn-default" ng-click="newUser()" >
-          <span class="glyphicon glyphicon-user"></span>
-          <span l10n-text="users.search.new"></span>
-        </button>
-        <button id="searchBtn" type="button" class="pull-right btn-sm btn-default" ng-click="search()">
-          <span class="glyphicon glyphicon-search"></span>
-          <span l10n-text="users.search.search"></span>
-        </button>
-      </div>
-    </div>
-  </form>
-
+  <sc-search selected-filters="filters">
+    <sc-filter type="text" model-name="username" classes="col-sm-3" removable="false" filter-name="users.search.username"></sc-filter>
+    <sc-filter type="text" model-name="fullname" classes="col-sm-3 col-lg-4" removable="false" filter-name="users.search.name"></sc-filter>
+    <sc-filter type="select" model-name="showActive" classes="col-sm-2" removable="false" options="select2opt" filter-name="users.search.activity"></sc-filter>
+    <sc-btn-wrapper btn-classes="col-sm-4 col-lg-3" btn-actions="btnActions">
+      <sc-button action-name="search" classes="btn-sm btn-default pull-right" text="users.search.search" icon="glyphicon-search"></sc-button>
+      <sc-button action-name="newUser" classes="btn-sm btn-default pull-right" text="users.search.new" icon="glyphicon-user"></sc-button>
+    </sc-btn-wrapper>
+  </sc-search>
   <table class="table table-bordered table-striped table-condensed" ng-show="users.length > 0">
     <thead>
       <tr>
