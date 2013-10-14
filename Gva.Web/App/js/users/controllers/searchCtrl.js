@@ -1,7 +1,7 @@
 ﻿(function (angular) {
   'use strict';
 
-  function SearchCtrl($scope, $state, $stateParams, usersStates, User, l10n) {
+  function SearchCtrl($scope, $state, $stateParams, usersStates, User) {
     $scope.filters = {
       username: $stateParams.username,
       fullname: $stateParams.fullname,
@@ -19,15 +19,6 @@
           showActive: $scope.filters.showActive && $scope.filters.showActive.id
         });
       }
-    };
-
-    $scope.select2opt = {
-      allowClear: true,
-      placeholder: ' ',
-      data: [
-        { id: 'true', text: l10n.get('users.search.onlyActive') },
-        { id: 'false', text: l10n.get('users.search.onlyUnactive') }
-      ]
     };
 
     User.query($stateParams).$promise.then(function (users) {
@@ -53,7 +44,7 @@
     };
   }
   
-  SearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'users.States', 'users.User', 'l10n'];
+  SearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'users.States', 'users.User'];
 
   angular.module('users').controller('users.SearchCtrl', SearchCtrl);
 }(angular));

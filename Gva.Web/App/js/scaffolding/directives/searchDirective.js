@@ -50,39 +50,38 @@
       };
     }
 
-    function SearchLink($scope, element) {
-      $scope.$watch('selectedFilters', function (newObj, oldObj) {
-        if (newObj === oldObj) {
-          return;
-        }
-
-        for (var propt in newObj) {
-          if (newObj[propt] !== oldObj[propt]) {
-            $scope.filters[propt].model = newObj[propt];
-          }
-        }
-      }, true);
-
-      var rowBlock = element.find('div.row');
-      var buttonBlock = element.find('div.btnBlock');
-      var transcludedBlock = element.find('div[ng-transclude]');
-      var transcludedElements = transcludedBlock.children();
-      angular.forEach(transcludedElements, function (elem) {
-        if (angular.element(elem).hasClass('btnDiv')) {
-          buttonBlock.append(elem);
-        } else {
-          rowBlock.append(elem);
-        }
-      });
-      transcludedBlock.remove();
-    }
-
-    function SearchCompile(tElement, tAttrs) {
+    function SearchCompile(tElement, tAttrs, transcludeFn) {
       if (!tAttrs.btnClasses) {
         tAttrs.btnClasses = 'col-sm-3';
       }
 
-      return SearchLink;
+      return function ($scope, element) {
+        $scope.$watch('selectedFilters', function (newObj, oldObj) {
+          if (newObj === oldObj) {
+            return;
+          }
+
+          for (var propt in newObj) {
+            if (newObj[propt] !== oldObj[propt]) {
+              $scope.filters[propt].model = newObj[propt];
+            }
+          }
+        }, true);
+
+        var childScope = $scope.$new();
+        transcludeFn(childScope, function (clone) {
+          var rowBlock = element.find('div.row');
+          var buttonBlock = element.find('div.btnBlock');
+          var transcludedElements = clone;
+          angular.forEach(transcludedElements, function (elem) {
+            if (angular.element(elem).hasClass('btnDiv')) {
+              buttonBlock.append(elem);
+            } else {
+              rowBlock.append(elem);
+            }
+          });
+        });
+      };
     }
 
     return {

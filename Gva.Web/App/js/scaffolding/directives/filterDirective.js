@@ -19,7 +19,7 @@
           type === 'select') {
         var dirHtml, optionsHtml;
 
-        optionsHtml = options ? ' sc-' + type + '="options"' : '';
+        optionsHtml = options ? ' sc-' + type + '="' + options + '"' : '';
         dirHtml = '<sc-' + type + ' ng-model="model"' + optionsHtml + '></sc-' + type + '>';
 
         tElement.append(dirHtml);
@@ -61,7 +61,7 @@
         modelName: '@',
         removable: '@',
         classes: '@',
-        options: '=',
+        options: '@',
         filterName: '@'
       },
       templateUrl: 'scaffolding/templates/filterTemplate.html',
