@@ -11,11 +11,8 @@
       return ButtonLink;
     }
 
-    function ButtonLink($scope, element, attrs, controllers) {
-      var scSearch = controllers[0],
-          scBtnWrapper = controllers[1];
-
-      if (!scSearch || !scBtnWrapper) {
+    function ButtonLink($scope, element, attrs, scSearch) {
+      if (!scSearch) {
         return;
       }
 
@@ -30,13 +27,13 @@
         };
       }
       else {
-        $scope.action = scBtnWrapper.getBtnAction($scope.actionName);
+        $scope.action = scSearch.getBtnAction($scope.actionName);
       }
     }
 
     return {
       restrict: 'E',
-      require: ['?^scSearch', '?^scBtnWrapper'],
+      require: '?^scSearch',
       replace: true,
       scope: {
         actionName: '@',

@@ -1,4 +1,4 @@
-﻿// Uage: <sc-search selected-filters=""></sc-search>
+﻿// Uage: <sc-search selected-filters="" btn-classes="" btn-actions=""></sc-search>
 (function (angular) {
   'use strict';
 
@@ -6,7 +6,8 @@
     function SearchController ($scope) {
       var filters = $scope.filters = {},
           nonSelectedFilters = [],
-          selectedFilters = this.selectedFilters = $scope.selectedFilters;
+          selectedFilters = this.selectedFilters = $scope.selectedFilters,
+          btnActions = $scope.btnActions;
 
       this.registerFilter = function (modelName, filterScope) {
         filters[modelName] = filterScope;
@@ -43,9 +44,13 @@
 
         return nonSelectedFilters;
       };
+
+      this.getBtnAction = function (actionName) {
+        return btnActions[actionName];
+      };
     }
 
-    function SearchLink($scope) {
+    function SearchLink($scope, element) {
       $scope.$watch('selectedFilters', function (newObj, oldObj) {
         if (newObj === oldObj) {
           return;
@@ -57,6 +62,27 @@
           }
         }
       }, true);
+
+      var rowBlock = element.find('div.row');
+      var buttonBlock = element.find('div.btnBlock');
+      var transcludedBlock = element.find('div[ng-transclude]');
+      var transcludedElements = transcludedBlock.children();
+      angular.forEach(transcludedElements, function (elem) {
+        if (angular.element(elem).hasClass('btnDiv')) {
+          buttonBlock.append(elem);
+        } else {
+          rowBlock.append(elem);
+        }
+      });
+      transcludedBlock.remove();
+    }
+
+    function SearchCompile(tElement, tAttrs) {
+      if (!tAttrs.btnClasses) {
+        tAttrs.btnClasses = 'col-sm-3';
+      }
+
+      return SearchLink;
     }
 
     return {
@@ -65,10 +91,12 @@
       replace: true,
       templateUrl: 'scaffolding/templates/searchTemplate.html',
       scope: {
-        selectedFilters: '='
+        selectedFilters: '=',
+        btnClasses: '@',
+        btnActions: '='
       },
       controller: SearchController,
-      link: SearchLink
+      compile: SearchCompile
     };
   }
 

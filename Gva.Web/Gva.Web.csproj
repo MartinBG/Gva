@@ -134,7 +134,6 @@
     <Content Include="App\js\navigation\providers\statesProvider.js" />
     <Content Include="App\js\navigation\templates\navbar.html" />
     <Content Include="App\js\scaffolding\directives\buttonDirective.js" />
-    <Content Include="App\js\scaffolding\directives\btnWrapperDirective.js" />
     <Content Include="App\js\scaffolding\directives\dateDirective.js" />
     <Content Include="App\js\scaffolding\directives\filterDirective.js" />
     <Content Include="App\js\scaffolding\directives\floatDirective.js" />
@@ -143,7 +142,6 @@
     <Content Include="App\js\scaffolding\directives\textDirective.js" />
     <Content Include="App\js\scaffolding\directives\searchDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
-    <Content Include="App\js\scaffolding\templates\btnWrapperTemplate.html" />
     <Content Include="App\js\scaffolding\templates\buttonTemplate.html" />
     <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
     <Content Include="App\js\scaffolding\templates\filterTemplate.html" />
