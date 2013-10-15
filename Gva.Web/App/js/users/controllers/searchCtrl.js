@@ -8,17 +8,16 @@
       showActive: $stateParams.showActive
     };
 
-    $scope.btnActions = {
-      'newUser': function () {
-        $state.go(usersStates.newUser);
-      },
-      'search': function () {
-        $state.go(usersStates.search, {
-          username: $scope.filters.username,
-          fullname: $scope.filters.fullname,
-          showActive: $scope.filters.showActive && $scope.filters.showActive.id
-        });
-      }
+    $scope.newUser = function () {
+      $state.go(usersStates.newUser);
+    };
+
+    $scope.search = function () {
+      $state.go(usersStates.search, {
+        username: $scope.filters.username,
+        fullname: $scope.filters.fullname,
+        showActive: $scope.filters.showActive && $scope.filters.showActive.id
+      });
     };
 
     User.query($stateParams).$promise.then(function (users) {

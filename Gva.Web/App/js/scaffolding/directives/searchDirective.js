@@ -1,4 +1,4 @@
-﻿// Uage: <sc-search selected-filters="" btn-classes="" btn-actions=""></sc-search>
+﻿// Uage: <sc-search selected-filters="" btn-classes=""></sc-search>
 (function (angular) {
   'use strict';
 
@@ -6,8 +6,7 @@
     function SearchController ($scope) {
       var filters = $scope.filters = {},
           nonSelectedFilters = [],
-          selectedFilters = this.selectedFilters = $scope.selectedFilters,
-          btnActions = $scope.btnActions;
+          selectedFilters = this.selectedFilters = $scope.selectedFilters;
 
       this.registerFilter = function (modelName, filterScope) {
         filters[modelName] = filterScope;
@@ -44,10 +43,6 @@
 
         return nonSelectedFilters;
       };
-
-      this.getBtnAction = function (actionName) {
-        return btnActions[actionName];
-      };
     }
 
     function SearchCompile(tElement, tAttrs, transcludeFn) {
@@ -68,8 +63,7 @@
           }
         }, true);
 
-        var childScope = $scope.$new();
-        transcludeFn(childScope, function (clone) {
+        transcludeFn($scope.$parent, function (clone) {
           var rowBlock = element.find('div.row');
           var buttonBlock = element.find('div.btnBlock');
           var transcludedElements = clone;
@@ -91,8 +85,7 @@
       templateUrl: 'scaffolding/templates/searchTemplate.html',
       scope: {
         selectedFilters: '=',
-        btnClasses: '@',
-        btnActions: '='
+        btnClasses: '@'
       },
       controller: SearchController,
       compile: SearchCompile

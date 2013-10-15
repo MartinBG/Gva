@@ -1,10 +1,11 @@
 ﻿<div class="container page-content">
-  <sc-search selected-filters="filters" btn-classes="col-sm-4 col-lg-3" btn-actions="btnActions">
+  <sc-search selected-filters="filters" btn-classes="col-sm-4 col-lg-3">
     <sc-filter type="text" model-name="username" classes="col-sm-3" removable="false" filter-name="users.search.username"></sc-filter>
-    <sc-filter type="text" model-name="fullname" classes="col-sm-3 col-lg-4" removable="false" filter-name="users.search.name"></sc-filter>
-    <sc-filter type="select" model-name="showActive" classes="col-sm-2" removable="false" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" filter-name="users.search.activity"></sc-filter>
+    <sc-filter type="text" model-name="fullname" classes="col-sm-3 col-lg-4" removable="true" filter-name="users.search.name"></sc-filter>
+    <sc-filter type="select" model-name="showActive" classes="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" filter-name="users.search.activity"></sc-filter>
     <sc-button action-name="search" text="users.search.search" icon="glyphicon-search"></sc-button>
     <sc-button action-name="newUser" text="users.search.new" icon="glyphicon-user"></sc-button>
+    <sc-button action-name="add"></sc-button>
   </sc-search>
   <table class="table table-bordered table-striped table-condensed" ng-show="users.length > 0">
     <thead>

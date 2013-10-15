@@ -16,7 +16,6 @@
         return;
       }
 
-      $scope.action = undefined;
       $scope.addFilter = undefined;
       $scope.nonSelectedFilters = [];
 
@@ -25,9 +24,6 @@
         $scope.addFilter = function (filter) {
           scSearch.addFilter(filter);
         };
-      }
-      else {
-        $scope.action = scSearch.getBtnAction($scope.actionName);
       }
     }
 

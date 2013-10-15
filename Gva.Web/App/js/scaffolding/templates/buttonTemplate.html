@@ -1,5 +1,5 @@
 ﻿<div class="btnDiv" style="display: inline-block;">
-  <button type="button" class="{{classes}}" ng-click="action()" ng-hide="actionName === 'add'">
+  <button type="button" class="{{classes}}" ng-click="$parent.{{actionName}}()" ng-hide="actionName === 'add'">
     <span ng-show="icon" class="glyphicon {{icon}}"></span>
     <span l10n-text="{{text}}"></span>
   </button>
