@@ -1,0 +1,34 @@
+﻿{
+  "description": "Адрес на Физическо лице",
+  "type": "object",
+  "properties": {
+    "addressTypeId": {
+      "type": "number", 
+      "description": "Тип адрес от Номенклатура Типове адреси"
+    },
+    "settlementId": {
+      "type": "number", 
+      "description": "Населено място от Номенклатура Населени места"
+    },
+    "address": {
+      "type": "string", 
+      "description": "Адрес"
+    },
+    "addressAlt": {
+      "type": "string", 
+      "description": "Адрес представен на друг език"
+    },
+    "phone": {
+      "type": "string", 
+      "description": "Телефон(и) за връзка на този адрес"
+    },
+    "valid": {
+      "type": "boolean", 
+      "description": "Валиден адрес" 
+    },
+    "postalCode": {
+      "type": "string", 
+      "description": "Пощенски код"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+﻿{
+  "description": "Лични данни на Физическо лице",
+  "type": "object",
+  "required": ["lin"],
+  "additionalProperties": false,
+  "properties": {
+    "lin": {
+      "type": "string",
+      "description": "Личен идентификационен номер"
+    },
+    "uin": {
+      "type": "string", 
+      "description": "Единен граждански номер"
+    },
+    "firstName": {
+      "type": "string", 
+      "description": "Име на физическо лице"
+    },
+    "firstNameAlt": {
+      "type": "string", 
+      "description": "Име на физическо лице на поддържащ език"
+    },
+    "middleName": {
+      "type": "string", 
+      "description": "Презиме на физическо лице"
+    },
+    "middleNameAlt": {
+      "type": "string", 
+      "description": "Презиме на физическо лице на поддържащ език"
+    },
+    "lastName": {
+      "type": "string", 
+      "description": "Фамилия на физическо лице"
+    },
+    "lastNameAlt": {
+      "type": "string", 
+      "description": "Фамилия на физическо лице на поддържащ език"
+    },
+    "dateOfBirth": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата на раждане"
+    },
+    "placeOfBirthId": {
+      "type": "number", 
+      "description": "Населено място за място на раждане от Номенклатура Населени места"
+    },
+    "countryId": {
+      "type": "number", 
+      "description": "Държава за гражданство от Номеклатура Държави" 
+    },
+    "sexId": {
+      "type": "number", 
+      "description": "Пол от Номенклатура Полове" 
+    },
+    "email": {
+      "format": "email", 
+      "type": "string", 
+      "description": "E-mail адрес"
+    },
+    "fax": {
+      "type": "string", 
+      "description": "Факс номер(а)"
+    },
+    "phone1": {
+      "type": "string", 
+      "description": "Телефонен номер 1"
+    },
+    "phone2": {
+      "type": "string", 
+      "description": "Телефонен номер 2"
+    },
+    "phone3": {
+      "type": "string", 
+      "description": "Телефонен номер 3"
+    },
+    "phone4": {
+      "type": "string", 
+      "description": "Телефонен номер 4"
+    },
+    "phone5": {
+      "type": "string", 
+      "description": "Телефонен номер 5"
+    }
+  }
+}

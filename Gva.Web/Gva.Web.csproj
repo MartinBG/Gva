@@ -138,6 +138,7 @@
     <Content Include="App\js\scaffolding\directives\integerDirective.js" />
     <Content Include="App\js\scaffolding\directives\selectDirective.js" />
     <Content Include="App\js\scaffolding\directives\textDirective.js" />
+    <Content Include="App\js\scaffolding\resources\nomenclature.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
     <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
     <Content Include="App\js\scaffolding\templates\floatTemplate.html" />
@@ -152,10 +153,17 @@
     <Content Include="App\js\users\templates\edit.html" />
     <Content Include="App\js\users\templates\search.html" />
     <Content Include="App\js\users\users.js" />
+    <Content Include="App\schema\nomenclatures.sample.js" />
+    <Content Include="App\schema\person-address.sample.js" />
+    <Content Include="App\schema\person-data.sample.js" />
+    <Content Include="App\schema\person-document-education.sample.js" />
+    <Content Include="App\schema\person-document-employee.sample.js" />
+    <Content Include="App\schema\persons.sample.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
+    <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
     <Content Include="App\test\e2e\ptorConf.js" />
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
@@ -183,6 +191,17 @@
     <Content Include="App\.jshintrc" />
     <Content Include="App\bower.json" />
     <Content Include="App\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-data.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\nomenclature-country-content.json" />
+    <Content Include="App\schema\person-address.json" />
+    <Content Include="App\schema\person-document-education.json" />
+    <Content Include="App\schema\person-document-employee.json" />
+    <Content Include="App\schema\person-document-id.json" />
+    <Content Include="App\schema\person-status.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,46 @@
+﻿{
+  "description": "Лична карта на Физическо лице",
+  "type": "object",
+  "properties": {    
+    "documentNumber": {
+      "type": "string", 
+      "description": "Номер на документа"
+    },
+    "documentDateValidFrom": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата, от която документа е валиден"
+    },
+    "documentDateValidTo": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата, до която документа е валиден"
+    },
+    "documentPublisher": {
+      "type": "string", 
+      "description": "Издател на документа"
+    },        
+    "personDocumentIdTypeId": {
+      "type": "number", 
+      "description": "Тип документ за самоличност от Номенклатура Типове документи за самоличност на Физичеко лице"
+    },    
+    "valid": {
+      "type": "boolean", 
+      "description": "Валидност" 
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
+    },
+    
+    "bookPageNumber": {
+      "type": "string", 
+      "description": "Номер на страница в деловодна книга"
+    },
+    "pageCount": {
+      "type": "number", 
+      "description": "Брой страници на документа"
+    }    
+
+  }
+}

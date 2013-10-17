@@ -1,0 +1,40 @@
+﻿{
+  "description": "Месторабота на Физическо лице",
+  "type": "object",
+  "properties": {
+    "hiredate": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата на назначаване"
+    },
+    "valid": {
+      "type": "boolean", 
+      "description": "Валидност" 
+    },
+    "organizationId": {
+      "type": "number", 
+      "description": "Организация от Номенклатура Организации"
+    },
+    "employmentCategoryId": {
+      "type": "number", 
+      "description": "Категория персонал от Номенклатура Категории персонал"
+    },
+    "countryId": {
+      "type": "number", 
+      "description": "Държава в която се намира местоработата от Номеклатура Държави" 
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
+    },
+    
+    "bookPageNumber": {
+      "type": "string", 
+      "description": "Номер на страница в деловодна книга"
+    },
+    "pageCount": {
+      "type": "number", 
+      "description": "Брой страници на документа"
+    }
+  }
+}

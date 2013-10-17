@@ -1,0 +1,40 @@
+﻿{
+  "description": "Месторабота на Физическо лице",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "string", 
+      "description": "Идентификация на диплома"
+    },
+    "completionDate": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата на завършване"
+    },
+    "speciality": {
+      "type": "string", 
+      "description": "Специалност"
+    },    
+    "schoolId": {
+      "type": "number", 
+      "description": "Учебно заведение от Номенклатура Учебни заведения"
+    },
+    "graduationId": {
+      "type": "number", 
+      "description": "Степен на образование от Номенклатура Степени на образование"
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
+    },
+    
+    "bookPageNumber": {
+      "type": "string", 
+      "description": "Номер на страница в деловодна книга"
+    },
+    "pageCount": {
+      "type": "number", 
+      "description": "Брой страници на документа"
+    }
+  }
+}

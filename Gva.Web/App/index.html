@@ -87,6 +87,7 @@
     <script src="/app/js/scaffolding/directives/floatDirective.js"></script>
     <script src="/app/js/scaffolding/directives/textDirective.js"></script>
     <script src="/app/js/scaffolding/directives/selectDirective.js"></script>
+    <script src="/app/js/scaffolding/resources/nomenclature.js"></script>
     <script src="/app/js/navigation/navigation.js"></script>
     <script src="/app/js/navigation/controllers/navbarCtrl.js"></script>
     <script src="/app/js/navigation/controllers/breadcrumbBarCtrl.js"></script>
@@ -102,8 +103,21 @@
     <script src="/app/build/templates/navigation.js"></script>
     <script src="/app/build/templates/users.js"></script>
     
+    <script type="text/ecmascript">
+      window.require = function (module) {
+        var match = /(\.\/)?(.+)/.exec(module);
+        if (match) {
+          return window[match[2]].exports;
+        }
+        return undefined;
+      }
+      window.getData = window.require;
+    </script>
+    <script src="/app/schema/nomenclatures.sample.js"></script>
+    <script src="/app/schema/person-data.sample.js"></script>
     <script src="/app/bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="/app/test/e2e/httpBackendConfiguratorProvider.js"></script>
+    <script src="/app/test/e2e/mocks/nomenclaturesHttp.js"></script>
     <script src="/app/test/e2e/mocks/usersHttp.js"></script>
     <script src="/app/test/e2e/e2eMocksSetup.js"></script>
 </body>
