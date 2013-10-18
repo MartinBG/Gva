@@ -157,8 +157,9 @@
     <Content Include="App\schema\person-address.sample.js" />
     <Content Include="App\schema\person-data.sample.js" />
     <Content Include="App\schema\person-document-education.sample.js" />
-    <Content Include="App\schema\person-document-employee.sample.js" />
-    <Content Include="App\schema\persons.sample.js" />
+    <Content Include="App\schema\person-document-employment.sample.js" />
+    <Content Include="App\schema\person-document-id.sample.js" />
+    <Content Include="App\schema\person.sample.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
@@ -199,9 +200,11 @@
     <Content Include="App\schema\nomenclature-country-content.json" />
     <Content Include="App\schema\person-address.json" />
     <Content Include="App\schema\person-document-education.json" />
-    <Content Include="App\schema\person-document-employee.json" />
     <Content Include="App\schema\person-document-id.json" />
     <Content Include="App\schema\person-status.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-employment.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

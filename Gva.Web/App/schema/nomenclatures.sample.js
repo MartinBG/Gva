@@ -1,6 +1,7 @@
-﻿(function (module) {
+﻿/*global module*/
+/*jshint maxlen:false*/
+(function (module) {
   'use strict';
-  /*jshint maxlen:false*/
 
   module.exports = {
     getId: function (nom, alias) {
@@ -8,7 +9,13 @@
         return nomValue.alias === alias;
       })[0].nomTypeValueId;
     },
-    
+
+    getName: function (nom, alias) {
+      return this[nom].filter(function (nomValue) {
+        return nomValue.alias === alias;
+      })[0].name;
+    },
+
     //Номенклатура Полове
     sex: [
       {nomTypeValueId: 1, code: '', name: 'Мъж', nameAlt: 'Мъж', alias: 'male'},
@@ -22,21 +29,20 @@
       {nomTypeValueId: 2, code: 'BE', name: 'Belgium', nameAlt: 'Belgium'},
       {nomTypeValueId: 3, code: 'CY', name: 'Cyprus', nameAlt: 'Cyprus'},
       {nomTypeValueId: 4, code: 'CZ', name: 'Czech Republic', nameAlt: 'Czech Republic'},
-      {nomTypeValueId: 33, code: 'BG', name: 'Република България', nameAlt: 'Republic of Bulgaria', alias: 'Bulgaria',
-        content: {
-          nationalityCode_CA: 'BGR',
-          heading:'РЕПУБЛИКА БЪЛГАРИЯ',
-          headingTrans:'REPUBLIC OF BULGARIA',
-          licenceCode_CA: 'BGR.'
-        }} 
+      {nomTypeValueId: 33, code: 'BG', name: 'Република България', nameAlt: 'Republic of Bulgaria', alias: 'Bulgaria', content: {
+        nationalityCode_CA: 'BGR',
+        heading:'РЕПУБЛИКА БЪЛГАРИЯ',
+        headingTrans:'REPUBLIC OF BULGARIA',
+        licenceCode_CA: 'BGR.'
+      }}
     ],
-    
+
     //Населени места
     cities: [
       {nomTypeValueId: 4159, code: '68134', name: 'София', nameAlt: 'Sofia', alias: 'Sofia'},
       {nomTypeValueId: 4661, code: '56784', name: 'гр.Пловдив', nameAlt: 'gr.Plovdiv', alias: 'Plovdiv'}
     ],
-    
+
     //Номенклатура Типове адреси
     addressTypes: [
       {nomTypeValueId: 1, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', alias: 'Permanent'},
@@ -47,40 +53,36 @@
       {nomTypeValueId: 102, code: 'BOS', name: 'Данни за ръководител TO', nameAlt: 'Данни за ръководител TO'},
       {nomTypeValueId: 290, code: 'TO', name: 'Адрес за базово ослужване на ВС', nameAlt: 'Адрес за базово ослужване на ВС'}
     ],
-    
+
     //Номенклатура Организации
     Organizations: [
       {nomTypeValueId: 203, code: '203', name: 'AAK Progres', nameAlt: 'AAK Progres', alias: 'AAK Progres'}
     ],
-    
+
     //Номенклатура Категории персонал
     EmploymentCategories: [
-      {nomTypeValueId: 631, code: '1', name: 'Директор', nameAlt: 'Director', 
-        content: {
-          Code_CA: '', 
-          StaffTypeId: undefined
-        }},
-      {nomTypeValueId: 650, code: '11', name: 'Втори пилот', nameAlt: 'First officer', alias: 'First officer',
-        content: { 
-          Code_CA: '11', 
-          StaffTypeId: 1
-        }}
+      {nomTypeValueId: 631, code: '1', name: 'Директор', nameAlt: 'Director', content: {
+        Code_CA: '',
+        StaffTypeId: undefined
+      }},
+      {nomTypeValueId: 650, code: '11', name: 'Втори пилот', nameAlt: 'First officer', alias: 'First officer', content: {
+        Code_CA: '11',
+        StaffTypeId: 1
+      }}
     ],
-    
+
     //Номенклатура Учебни заведения
     Schools: [
-      {nomTypeValueId: 673, code: '4', name: 'Университет за национално и световно стопанство (УНСС)-София', nameAlt: 'Университет за национално и световно стопанство (УНСС)-София', alias: 'UNSS',
-        content: { 
-          graduationId: 1, 
-          graduationIds: [1, 3, 450],
-          pilotTraining: false
-        }},
-      {nomTypeValueId: 1349, code: '218', name: 'Български въздухоплавателен център', nameAlt: 'Български въздухоплавателен център', alias: 'BAC',
-        content: { 
-          graduationId: 450, 
-          graduationIds: [450],
-          pilotTraining: true
-        }}
+      {nomTypeValueId: 673, code: '4', name: 'Университет за национално и световно стопанство (УНСС)-София', nameAlt: 'Университет за национално и световно стопанство (УНСС)-София', alias: 'UNSS', content: {
+        graduationId: 1,
+        graduationIds: [1, 3, 450],
+        pilotTraining: false
+      }},
+      {nomTypeValueId: 1349, code: '218', name: 'Български въздухоплавателен център', nameAlt: 'Български въздухоплавателен център', alias: 'BAC', content: {
+        graduationId: 450,
+        graduationIds: [450],
+        pilotTraining: true
+      }}
     ],
 
     //Номенклатура Степени на образование
@@ -91,17 +93,36 @@
     ],
 
     //Номенклатура Типове документи за самоличност на Физичеко лице
-    PersonDocumentIdTypes: [
-      {nomTypeValueId: 3, code: '3', name: 'Лична карта', nameAlt: 'Лична карта', alias: 'id'},
+    PersonIdDocumentTypes: [
+      {nomTypeValueId: 3, code: '3', name: 'Лична карта', nameAlt: 'Лична карта', alias: 'Id'},
       {nomTypeValueId: 4, code: '4', name: 'Задграничен паспорт', nameAlt: 'Задграничен паспорт'},
       {nomTypeValueId: 5, code: '5', name: 'Паспорт', nameAlt: 'Паспорт'}
     ],
-    
-    //Номенклатура Типове сътояние на Физичеко лице
-    PersonDocumentIdTypes2: [
+
+    //Номенклатура Други типове документи на Физичеко лице
+    PersonOtherDocumentTypes: [
+      {nomTypeValueId: 683, code: '20', name: 'Писмо', nameAlt: 'Писмо', alias: 'Letter'},
+      {nomTypeValueId: 702, code: '22', name: 'Справка', nameAlt: 'Справка', alias: 'Report'}
+    ],
+
+    //Номенклатура Други роли на документи на Физичеко лице
+    PersonOtherDocumentRoles: [
+      {nomTypeValueId: 683, code: '20', name: 'Писмо', nameAlt: 'Писмо', alias: 'Letter'},
+      {nomTypeValueId: 702, code: '22', name: 'Справка', nameAlt: 'Справка', alias: 'Report'}
+    ],
+
+    //Номенклатура Типове сътояния на Физичеко лице
+    PersonStatusTypes: [
       {nomTypeValueId: 1, code: '3', name: 'Негоден', nameAlt: 'Негоден', alias: 'Disabled'},
       {nomTypeValueId: 2, code: '4', name: 'Временно негоден', nameAlt: 'Временно негоден'},
-      {nomTypeValueId: 3, code: '5', name: 'Майчинство', nameAlt: 'Майчинство'} 
+      {nomTypeValueId: 3, code: '5', name: 'Майчинство', nameAlt: 'Майчинство'}
+    ],
+
+    //Номенклатура Издатели на документи - Други
+    OtherDocPublishers: [
+      {nomTypeValueId: 1, code: '', name: 'ЛИЧНО', nameAlt: ''},
+      {nomTypeValueId: 301, code: '', name: 'МВР', nameAlt: '', alias: 'Mvr'}
     ]
+
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

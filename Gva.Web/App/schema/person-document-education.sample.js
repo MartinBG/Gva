@@ -1,10 +1,11 @@
-﻿(function (module) {
+﻿/*global module, require*/
+(function (module) {
   'use strict';
 
   var nomenclatures = require('./nomenclatures.sample');
 
   module.exports = {
-    personEducation1: {
+    person1Education: {
       documentNumber: '1',
       completionDate: '1981-04-04T00:00',
       speciality: 'пилот',
@@ -12,8 +13,8 @@
       graduationId: nomenclatures.getId('Graduations', 'PQ'),
       notes: '',
       
-      bookPageNumber: "2",
+      bookPageNumber: '2',
       pageCount: 1
     }
   };
-})(typeof module === 'undefined' ? (this['person-document-employee.sample'] = {}) : module);
+})(typeof module === 'undefined' ? (this['person-document-education.sample'] = {}) : module);

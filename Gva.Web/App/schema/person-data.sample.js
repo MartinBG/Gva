@@ -1,10 +1,11 @@
-﻿(function (module) {
+﻿/*global module, require*/
+(function (module) {
   'use strict';
 
   var nomenclatures = require('./nomenclatures.sample');
-  
+
   module.exports = {
-    personData1: {
+    person1Data: {
       lin: '11232',
       uin: '6101033765',
       firstName: 'Иван',

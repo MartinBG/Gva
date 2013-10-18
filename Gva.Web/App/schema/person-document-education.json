@@ -1,5 +1,5 @@
 ﻿{
-  "description": "Месторабота на Физическо лице",
+  "description": "Образование на Физическо лице",
   "type": "object",
   "properties": {
     "documentNumber": {
@@ -8,7 +8,7 @@
     },
     "completionDate": {
       "format": "date-time", 
-      "type": "string", 
+      "type": "string",
       "description": "Дата на завършване"
     },
     "speciality": {

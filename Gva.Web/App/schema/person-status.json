@@ -2,33 +2,27 @@
   "description": "Състояние на физическо лице (вр. Негоден, Майчинство и т.н.)",
   "type": "object",
   "properties": {
-    "addressTypeId": {
+    "personStatusTypeId": {
       "type": "number", 
-      "description": "Състояние-причина от Номенклатура Типове сътояние на Физичеко лице"
+      "description": "Състояние-причина от Номенклатура Типове сътояния на Физичеко лице"
     },
-    "settlementId": {
-      "type": "number", 
-      "description": "Населено място от Номенклатура Населени места"
+    "documentNumber": {
+      "type": "string", 
+      "description": "Номер на документа"
+    },
+    "documentDateValidFrom": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата, от която сътоянието е валидно"
+    },
+    "documentDateValidTo": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата, до която сътоянието е валидно"
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
     }
-    "address": {
-      "type": "string", 
-      "description": "Адрес"
-    },
-    "addressAlt": {
-      "type": "string", 
-      "description": "Адрес представен на друг език"
-    },
-    "phone": {
-      "type": "string", 
-      "description": "Телефон(и) за връзка на този адрес"
-    },
-    "valid": {
-      "type": "boolean", 
-      "description": "Валиден адрес" 
-    },
-    "postalCode": {
-      "type": "string", 
-      "description": "Пощенски код"
-    },   
   }
 }

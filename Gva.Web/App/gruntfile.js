@@ -65,10 +65,13 @@ module.exports = function (grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      all: [
+      source: [
         'gruntfile.js',
         'js/**/*.js',
         'test/**/*.js'
+      ],
+      schema: [
+        'schema/**/*.js'
       ]
     },
     html2js: {
@@ -127,7 +130,7 @@ module.exports = function (grunt) {
           'schema/person-address.json': 'schema/person-address.sample.js',
           'schema/person-data.json': 'schema/person-data.sample.js',
           'schema/person-document-education.json': 'schema/person-document-education.sample.js',
-          'schema/person-document-employee.json': 'schema/person-document-employee.sample.js'
+          'schema/person-document-employment.json': 'schema/person-document-employment.sample.js'
         }
       }
     }
@@ -139,7 +142,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-express');
 
-  grunt.registerTask('debug', ['jshint', 'html2js' ]);
-  grunt.registerTask('default', [ 'debug' ]);
-  grunt.registerTask('test', [ 'debug', 'express', 'exec']);
+  grunt.registerTask('debug', ['jshint:source', 'html2js' ]);
+  grunt.registerTask('test', ['debug', 'express', 'exec']);
+  grunt.registerTask('sv', ['jshint:schema', 'tv4']);
+
+  grunt.registerTask('default', ['debug']);
+  
 };
