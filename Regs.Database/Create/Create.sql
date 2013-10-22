@@ -5,14 +5,18 @@ GO
 --Tables
 ---------------------------------------------------------------
 
-:r $(rootPath)\"Tables\GvaApplications.sql"
-:r $(rootPath)\"Tables\GvaFiles.sql"
-:r $(rootPath)\"Tables\GvaLotFileTypes.sql"
-:r $(rootPath)\"Tables\GvaLotFiles.sql"
-:r $(rootPath)\"Tables\GvaAppLotFiles.sql"
+-- Lots
+:r $(rootPath)\"Tables\LotTypes.sql"
+:r $(rootPath)\"Tables\Lots.sql"
+:r $(rootPath)\"Tables\LotParts.sql"
+
+-- Noms
+:r $(rootPath)\"Tables\Noms.sql"
+:r $(rootPath)\"Tables\NomValues.sql"
+
 
 ---------------------------------------------------------------
 -- Diagram
 ---------------------------------------------------------------
 
-:r $(rootPath)\"Diagram\Gva.sql"
+:r $(rootPath)\"Diagram\Regs.sql"

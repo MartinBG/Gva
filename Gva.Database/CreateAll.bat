@@ -1,1 +1,1 @@
-sqlcmd -S.\SQLEXPRESS -v DatabaseName="Gva" -i"Create\Create.sql"
+@sqlcmd -S.\SQLEXPRESS -v dbName="Gva" -i"CreateAll.sql"

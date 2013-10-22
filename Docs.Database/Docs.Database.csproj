@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3414421C-5290-4D7A-A4D1-6AC0CB817A9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Docs.Database</RootNamespace>
+    <AssemblyName>Docs.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Create\Create.sql" />
+    <Content Include="Create\Diagram\Correspondents.sql" />
+    <Content Include="Create\Diagram\DocRelations.sql" />
+    <Content Include="Create\Diagram\Docs.sql" />
+    <Content Include="Create\Diagram\Main.sql" />
+    <Content Include="Create\Diagram\Users.sql" />
+    <Content Include="Create\Functions\fnCheckForRegisteredChildDocs.sql" />
+    <Content Include="Create\Functions\fnGetCorrespondentDisplayName.sql" />
+    <Content Include="Create\Functions\fnGetParentClassifications.sql" />
+    <Content Include="Create\Functions\fnGetParentUnits.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateClassifications.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateUnits.sql" />
+    <Content Include="Create\Procedures\Classifications\spGetUnitClassifications.sql" />
+    <Content Include="Create\Procedures\Classifications\spSetAllDocsUsers.sql" />
+    <Content Include="Create\Procedures\Classifications\spSetDeactiveUnit.sql" />
+    <Content Include="Create\Procedures\Classifications\spSetDocUsers.sql" />
+    <Content Include="Create\Procedures\Classifications\spSetUserDocs.sql" />
+    <Content Include="Create\Procedures\spDeleteNotRegisteredDoc.sql" />
+    <Content Include="Create\Procedures\spGetDocRegisterId.sql" />
+    <Content Include="Create\Procedures\spGetDocRegisterNextNumber.sql" />
+    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmails.sql" />
+    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
+    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailTypes.sql" />
+    <Content Include="Create\Tables\Assignments\AssignmentTypes.sql" />
+    <Content Include="Create\Tables\Classifications\ClassificationRelations.sql" />
+    <Content Include="Create\Tables\Classifications\ClassificationRoles.sql" />
+    <Content Include="Create\Tables\Classifications\Classifications.sql" />
+    <Content Include="Create\Tables\Correspondents\CorrespondentContacts.sql" />
+    <Content Include="Create\Tables\Correspondents\CorrespondentGroups.sql" />
+    <Content Include="Create\Tables\Correspondents\Correspondents.sql" />
+    <Content Include="Create\Tables\Correspondents\CorrespondentTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocCasePartTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocClassifications.sql" />
+    <Content Include="Create\Tables\Documents\DocCorrespondentContacts.sql" />
+    <Content Include="Create\Tables\Documents\DocCorrespondents.sql" />
+    <Content Include="Create\Tables\Documents\DocDestinationTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocDirections.sql" />
+    <Content Include="Create\Tables\Documents\DocElectronicServiceStages.sql" />
+    <Content Include="Create\Tables\Documents\DocEntryTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocFileContents.sql" />
+    <Content Include="Create\Tables\Documents\DocFileKinds.sql" />
+    <Content Include="Create\Tables\Documents\DocFiles.sql" />
+    <Content Include="Create\Tables\Documents\DocFileTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocFormatTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocIncomingDocs.sql" />
+    <Content Include="Create\Tables\Documents\DocRegisters.sql" />
+    <Content Include="Create\Tables\Documents\DocRelations.sql" />
+    <Content Include="Create\Tables\Documents\Docs.sql" />
+    <Content Include="Create\Tables\Documents\DocSourceTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocStatuses.sql" />
+    <Content Include="Create\Tables\Documents\DocTypeClassifications.sql" />
+    <Content Include="Create\Tables\Documents\DocTypeGroups.sql" />
+    <Content Include="Create\Tables\Documents\DocTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocTypeUnitRoles.sql" />
+    <Content Include="Create\Tables\Documents\DocUnitPermissions.sql" />
+    <Content Include="Create\Tables\Documents\DocUnitRoles.sql" />
+    <Content Include="Create\Tables\Documents\DocUnits.sql" />
+    <Content Include="Create\Tables\Documents\DocUsers.sql" />
+    <Content Include="Create\Tables\Documents\DocWorkflowActions.sql" />
+    <Content Include="Create\Tables\Documents\DocWorkflows.sql" />
+    <Content Include="Create\Tables\Documents\Tickets.sql" />
+    <Content Include="Create\Tables\ElectronicServices\ElectronicServiceStageExecutors.sql" />
+    <Content Include="Create\Tables\ElectronicServices\ElectronicServiceStages.sql" />
+    <Content Include="Create\Tables\IncomingDocuments\IncomingDocFiles.sql" />
+    <Content Include="Create\Tables\IncomingDocuments\IncomingDocs.sql" />
+    <Content Include="Create\Tables\IncomingDocuments\IncomingDocStatuses.sql" />
+    <Content Include="Create\Tables\Others\IrregularityTypes.sql" />
+    <Content Include="Create\Tables\Registers\RegisterIndexes.sql" />
+    <Content Include="Create\Tables\Units\UnitClassifications.sql" />
+    <Content Include="Create\Tables\Units\UnitRelations.sql" />
+    <Content Include="Create\Tables\Units\Units.sql" />
+    <Content Include="Create\Tables\Units\UnitTypes.sql" />
+    <Content Include="Create\Views\vwDocs.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
