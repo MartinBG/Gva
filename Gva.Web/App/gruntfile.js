@@ -111,7 +111,8 @@ module.exports = function (grunt) {
     },
     exec: {
       protractor: {
-        command: 'protractor test/e2e/ptorConf.js'
+        cmd: 'protractor.cmd ../../test/e2e/ptorConf.js',
+        cwd: './node_modules/.bin/'
       }
     },
     tv4: {
@@ -143,7 +144,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-express');
 
   grunt.registerTask('debug', ['jshint:source', 'html2js' ]);
-  grunt.registerTask('test', ['debug', 'express', 'exec']);
+  grunt.registerTask('test', ['debug', 'express', 'exec:protractor']);
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
   grunt.registerTask('default', ['debug']);
