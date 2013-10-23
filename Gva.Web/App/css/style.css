@@ -39,3 +39,74 @@ form.form-inline label.control-label
     margin-bottom: 0;
     padding: 5px 15px;
 }
+
+.modal {
+    display: block;
+    height: 0;
+    overflow: visible;
+}
+
+.paginate_button {
+    display: inline-block;
+    padding: 5px 6px;
+    margin:5px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background: #E0E0E0 ;
+    color:black;
+}
+
+.paginate_button:hover {
+    display: inline-block;
+    padding: 5px 6px;
+    margin:5px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background: #E0E0E0;
+    color: #303030;
+}
+
+.paginate_active {
+    display: inline-block;
+    padding: 5px 6px;
+    margin:5px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background: #C0C0C0;
+}

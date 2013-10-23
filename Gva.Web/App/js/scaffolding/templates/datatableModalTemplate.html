@@ -1,0 +1,18 @@
+﻿<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header" >
+            <button type="button" class="close" ng-click="close()" aria-hidden="true">x</button>
+            <h3 l10n-text="datatableDirective.modalHeading"></h3>
+        </div>
+        <div class="modal-body">
+            <div class="checkbox ng-scope" ng-repeat="column in columnDefs">
+              <input type="checkbox" ng-model="column.visible" class="ng-pristine ng-valid" ng-show="column.title !== ''">
+              <span class="ng-binding" ng-show="column.title !== ''">{{column.title}}</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn primary" ng-click="close()" l10n-text="datatableDirective.close"></a>
+            <a class="btn secondary" ng-click="cancel()" l10n-text="datatableDirective.cancel"></a>
+        </div>
+    </div>
+</div>
