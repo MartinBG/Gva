@@ -1,4 +1,4 @@
-﻿// Usage: <sc-text ng-model="<model_name>" />
+﻿// Usage: <sc-text ng-model="<model_name>"></sc-text>
 (function (angular) {
   'use strict';
 

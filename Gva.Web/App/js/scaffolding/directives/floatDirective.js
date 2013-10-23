@@ -1,8 +1,8 @@
-﻿// Usage: <sc-float ng-model="<model_name>" />
+﻿// Usage: <sc-float ng-model="<model_name>"></sc-float>
 (function (angular) {
   'use strict';
 
-  function FloatDirective ($filter) {
+  function FloatDirective ($filter, $locale) {
     return {
       priority: 110,
       restrict: 'E',
@@ -14,8 +14,10 @@
           return;
         }
 
+        var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
+
         element.on('change', function (ev) {
-          var value = ev.target.value.replace(',', '.'),
+          var value = ev.target.value.replace(groupSep, '').replace(',', '.'),
               floatNum = parseFloat(value),
               floatText;
 
@@ -31,7 +33,7 @@
     };
   }
 
-  FloatDirective.$inject = ['$filter'];
+  FloatDirective.$inject = ['$filter', '$locale'];
 
   angular.module('scaffolding').directive('scFloat', FloatDirective);
 }(angular));

@@ -1,8 +1,8 @@
-﻿// Usage: <sc-int ng-model="<model_name>" />
+﻿// Usage: <sc-int ng-model="<model_name>"></sc-int>
 (function (angular) {
   'use strict';
 
-  function IntegerDirective($filter) {
+  function IntegerDirective($filter, $locale) {
     return {
       priority: 110,
       restrict: 'E',
@@ -14,8 +14,11 @@
           return;
         }
 
+        var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
+
         element.on('change', function (ev) {
-          var integerNum = parseInt(ev.target.value, 10),
+          var value = ev.target.value.replace(groupSep, ''),
+              integerNum = parseInt(value, 10),
               integerText;
 
           integerNum = isNaN(integerNum) ? undefined : integerNum;
@@ -23,14 +26,14 @@
 
           element.val(integerText);
           scope.$apply(function () {
-            ngModel.$setViewValue(integerText);
+            ngModel.$setViewValue(integerNum);
           });
         });
       }
     };
   }
 
-  IntegerDirective.$inject = ['$filter'];
+  IntegerDirective.$inject = ['$filter', '$locale'];
 
   angular.module('scaffolding').directive('scInt', IntegerDirective);
 }(angular));
