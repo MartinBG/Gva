@@ -29,7 +29,7 @@
         ptor
           .findElement(
             protractor.By.repeater('user in users')
-            .row(1)
+            .row(0)
             .column('username'))
           .getText()
           .then(function(text) {
@@ -44,7 +44,7 @@
         ptor
           .findElement(
             protractor.By.repeater('user in users')
-            .row(1)
+            .row(0)
             .column('fullname'))
           .getText()
           .then(function(text) {
@@ -60,7 +60,7 @@
         ptor
           .findElement(
             protractor.By.repeater('user in users')
-            .row(1)
+            .row(0)
             .column('fullname'))
           .getText()
           .then(function(text) {
@@ -74,7 +74,7 @@
         ptor
           .findElement(
             protractor.By.repeater('user in users')
-            .row(1)
+            .row(0)
             .column('fullname'))
           .getText()
           .then(function(text) {
