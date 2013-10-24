@@ -1,5 +1,4 @@
-﻿// Usage: <sc-filter type="" model-name="" removable="" classes="" options="" filter-name="">
-//        </sc-filter>
+﻿// Usage: <sc-filter type="" name="" removable="" classes="" options="" label=""></sc-filter>
 (function (angular) {
   'use strict';
 
@@ -33,23 +32,23 @@
         return;
       }
 
-      var modelName = attrs.modelName;
-      $scope.model = scSearch.selectedFilters[modelName];
+      var name = attrs.name;
+      $scope.model = scSearch.selectedFilters[name] || null;
       $scope.show = function () {
-        return modelName in scSearch.selectedFilters;
+        return scSearch.selectedFilters.hasOwnProperty(name);
       };
 
       $scope.$watch('model', function (newVal, oldVal) {
         if (newVal !== oldVal) {
-          scSearch.selectedFilters[modelName] = newVal;
+          scSearch.selectedFilters[name] = newVal;
         }
-      }, true);
+      });
 
       $scope.removeFilter = function () {
-        scSearch.removeFilter($scope.filterName, modelName);
+        delete scSearch.selectedFilters[name];
       };
 
-      scSearch.registerFilter(modelName, $scope);
+      scSearch.registerFilter(name, $scope);
     }
 
     return {
@@ -57,12 +56,9 @@
       require: '?^scSearch',
       replace: true,
       scope: {
-        type: '@',
-        modelName: '@',
         removable: '@',
         classes: '@',
-        options: '@',
-        filterName: '@'
+        label: '@'
       },
       templateUrl: 'scaffolding/templates/filterTemplate.html',
       compile: FilterCompile

@@ -4,44 +4,13 @@
 
   function SearchDirective() {
     function SearchController ($scope) {
-      var filters = $scope.filters = {},
-          nonSelectedFilters = [],
-          selectedFilters = this.selectedFilters = $scope.selectedFilters;
+      var filters = $scope.filters = {};
 
-      this.registerFilter = function (modelName, filterScope) {
-        filters[modelName] = filterScope;
-      };
+      this.selectedFilters = $scope.selectedFilters;
+      this.nonSelectedFilters = $scope.nonSelectedFilters = [];
 
-      this.addFilter = function (filter) {
-        var index = nonSelectedFilters.indexOf(filter);
-        nonSelectedFilters.splice(index, 1);
-
-        selectedFilters[filter.model] = undefined;
-        filters[filter.model].model = undefined;
-      };
-
-      this.removeFilter = function (filterName, modelName) {
-        if (filterName) {
-          nonSelectedFilters.push({
-            name: filterName,
-            model: modelName
-          });
-        }
-
-        delete selectedFilters[modelName];
-      };
-
-      this.getNonSelectedFilters = function () {
-        for (var modelName in filters) {
-          if (!(modelName in $scope.selectedFilters) && filters[modelName].filterName) {
-            nonSelectedFilters.push({
-              name: filters[modelName].filterName,
-              model: modelName
-            });
-          }
-        }
-
-        return nonSelectedFilters;
+      this.registerFilter = function (name, filterScope) {
+        filters[name] = filterScope;
       };
     }
 
@@ -52,23 +21,31 @@
 
       return function ($scope, element) {
         $scope.$watch('selectedFilters', function (newObj, oldObj) {
-          if (newObj === oldObj) {
-            return;
+          for (var propt in newObj) {
+            if (newObj.hasOwnProperty(propt) && newObj[propt] !== oldObj[propt]) {
+              $scope.filters[propt].model = newObj[propt];
+            }
           }
 
-          for (var propt in newObj) {
-            if (newObj[propt] !== oldObj[propt]) {
-              $scope.filters[propt].model = newObj[propt];
+          $scope.nonSelectedFilters.length = 0;
+          for (var name in $scope.filters) {
+            if ($scope.filters.hasOwnProperty(name) &&
+                !(name in newObj) &&
+                $scope.filters[name].label) {
+              $scope.nonSelectedFilters.push({
+                label: $scope.filters[name].label,
+                name: name
+              });
             }
           }
         }, true);
 
         transcludeFn($scope.$parent, function (clone) {
           var rowBlock = element.find('div.row');
-          var buttonBlock = element.find('div.btnBlock');
+          var buttonBlock = element.find('div.btns-block');
           var transcludedElements = clone;
           angular.forEach(transcludedElements, function (elem) {
-            if (angular.element(elem).hasClass('btnDiv')) {
+            if (angular.element(elem).hasClass('btn-div')) {
               buttonBlock.append(elem);
             } else {
               rowBlock.append(elem);
@@ -87,7 +64,7 @@
         selectedFilters: '=',
         btnClasses: '@'
       },
-      controller: SearchController,
+      controller: ['$scope', SearchController],
       compile: SearchCompile
     };
   }

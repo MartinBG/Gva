@@ -1,15 +1,15 @@
-﻿<div class="btnDiv" style="display: inline-block;">
-  <button type="button" class="{{classes}}" ng-click="$parent.{{actionName}}()" ng-hide="actionName === 'add'">
+﻿<div class="btn-div" style="display: inline-block;">
+  <button type="button" class="{{classes}}" ng-click="btnAction()" ng-hide="action === 'add'">
     <span ng-show="icon" class="glyphicon {{icon}}"></span>
     <span l10n-text="{{text}}"></span>
   </button>
-  <div class="btn-group" ng-show="actionName === 'add' && nonSelectedFilters.length">
+  <div class="btn-group" ng-show="action === 'add' && nonSelectedFilters.length">
     <button type="button" class="{{classes}} dropdown-toggle" data-toggle="dropdown">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
     <ul class="dropdown-menu pull-right" role="menu">
       <li ng-repeat="filter in nonSelectedFilters">
-        <a href="#" ng-click="addFilter(filter)"><span l10n-text="{{filter.name}}"></span></a>
+        <a href="#" ng-click="addFilter(filter)"><span l10n-text="{{filter.label}}"></span></a>
       </li>
     </ul>
   </div>

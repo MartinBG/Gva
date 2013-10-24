@@ -1,8 +1,8 @@
-﻿// Usage: <sc-button action-name="" classes="" text="" icon=""></sc-button>
+﻿// Usage: <sc-button action="" class="" text="" icon=""></sc-button>
 (function (angular) {
   'use strict';
 
-  function ButtonDirective() {
+  function ButtonDirective($parse) {
     function ButtonCompile (tElement, tAttrs) {
       if (!tAttrs.classes) {
         tAttrs.classes = 'btn-sm btn-default';
@@ -17,13 +17,17 @@
       }
 
       $scope.addFilter = undefined;
-      $scope.nonSelectedFilters = [];
+      $scope.nonSelectedFilters = undefined;
+      $scope.btnAction = undefined;
 
-      if ($scope.actionName === 'add') {
-        $scope.nonSelectedFilters = scSearch.getNonSelectedFilters();
+      if ($scope.action === 'add') {
+        $scope.nonSelectedFilters = scSearch.nonSelectedFilters;
         $scope.addFilter = function (filter) {
-          scSearch.addFilter(filter);
+          scSearch.selectedFilters[filter.name] = null;
         };
+      }
+      else {
+        $scope.btnAction = $parse(attrs.action)($scope.$parent);
       }
     }
 
@@ -32,7 +36,7 @@
       require: '?^scSearch',
       replace: true,
       scope: {
-        actionName: '@',
+        action: '@',
         classes: '@',
         text: '@',
         icon: '@'
@@ -41,6 +45,8 @@
       compile: ButtonCompile
     };
   }
+
+  ButtonDirective.$inject = ['$parse'];
 
   angular.module('scaffolding').directive('scButton', ButtonDirective);
 }(angular));
