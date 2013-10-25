@@ -19,6 +19,7 @@
       $scope.addFilter = undefined;
       $scope.nonSelectedFilters = undefined;
       $scope.btnAction = undefined;
+      $scope.text = undefined;
 
       if ($scope.action === 'add') {
         $scope.nonSelectedFilters = scSearch.nonSelectedFilters;
@@ -27,6 +28,7 @@
         };
       }
       else {
+        $scope.text = $scope.$root.l10n.get(attrs.text);
         $scope.btnAction = $parse(attrs.action)($scope.$parent);
       }
     }
@@ -38,7 +40,6 @@
       scope: {
         action: '@',
         classes: '@',
-        text: '@',
         icon: '@'
       },
       templateUrl: 'scaffolding/templates/buttonTemplate.html',

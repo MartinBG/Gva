@@ -34,6 +34,8 @@
 
       var name = attrs.name;
       $scope.model = scSearch.selectedFilters[name] || null;
+      $scope.label = $scope.$root.l10n.get(attrs.label);
+
       $scope.show = function () {
         return scSearch.selectedFilters.hasOwnProperty(name);
       };
@@ -57,8 +59,7 @@
       replace: true,
       scope: {
         removable: '@',
-        classes: '@',
-        label: '@'
+        classes: '@'
       },
       templateUrl: 'scaffolding/templates/filterTemplate.html',
       compile: FilterCompile
