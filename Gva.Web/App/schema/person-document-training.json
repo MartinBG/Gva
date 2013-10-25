@@ -1,0 +1,92 @@
+﻿{
+  "description": "Обучение на Физическо лице",
+  "type": "object",
+  "properties": {
+    "documentNumber": {
+      "type": "string",
+      "description": "Номер на документа"
+    },
+    "documentPersonNumber": {
+      "type": ["number", "null"],
+      "description": "Пореден номер на лицето в списъка - при групов документ, за поддържане на ункиалност  documentNumber + documentPersonNumber за даден тип документ"
+    },
+    "documentDateValidFrom": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Дата на завършване"
+    },
+    "documentDateValidTo": {
+      "format": ["date-time",""],
+      "type": ["string", "null"], 
+      "description": "Дата, до която документа е валиден"
+    },
+    "documentPublisher": {
+      "type": "string", 
+      "description": "Издател на документа"
+    },
+
+    "staffTypeId": {
+    "type": ["number", "null"],
+    "description": "Тип  персонал от Номенклатура Типове персонал"
+    },
+
+    "ratingTypeId": {
+    "type": ["number", "null"],
+    "description": "Тип ВС от Номенклатура Типове ВС за екипажи"
+    },
+    "aircraftTypeGroupId": {
+    "type": ["number", "null"],
+    "description": "Тип/Група ВС от Номенклатура Групи ВС"
+    },
+    "ratingClassId": {
+      "type": ["number", "null"],
+      "description": "Клас ВС от Номенклатура Класове ВС за екипажи"
+    },
+    "authorizationId": {
+      "type": ["number", "null"],
+      "description": "Разрешение от Номенклатура Разрешения към квалификация"
+    },
+    "licenceTypeId": {
+      "type": ["number", "null"],
+      "description": "Вид правоспособност от Номенклатура Видове(типове) правоспособност"
+    },
+    "locationIndicatorId": {
+      "type": ["number", "null"],
+      "description": "Индикатор на местоположение от Номенклатура Индикатори на местоположение"
+    },
+    "sector": {
+      "type": "string", 
+      "description": "Сектор/работно място"
+    },
+
+    "engLangLevelId": {
+      "type": ["number", "null"],
+      "description": "Ниво на език от Номенклатура Нива на владеене на английски език"
+    },
+    "personOtherDocumentTypeId": {
+      "type": "number",
+      "description": "Тип документ от Номенклатура Други типове документи на Физичеко лице"
+    },
+    "personOtherDocumentRoleId": {
+      "type": "number", 
+      "description": "Роля на документ от Номенклатура Други роли документи на Физичеко лице"
+    },
+    "valid": {
+      "type": "boolean",
+      "description": "Валидност" 
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
+    },
+    
+    "bookPageNumber": {
+      "type": "string",
+      "description": "Номер на страница в деловодна книга"
+    },
+    "pageCount": {
+      "type": "number", 
+      "description": "Брой страници на документа"
+    }
+  }
+}

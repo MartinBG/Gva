@@ -24,7 +24,7 @@
     },
     "valid": {
       "type": "boolean", 
-      "description": "Валиден адрес" 
+      "description": "Валидност" 
     },
     "postalCode": {
       "type": "string", 

@@ -128,10 +128,14 @@ module.exports = function (grunt) {
       },
       schemas: {
         files: {
-          'schema/person-address.json': 'schema/person-address.sample.js',
           'schema/person-data.json': 'schema/person-data.sample.js',
+          'schema/person-address.json': 'schema/person-address.sample.js',
+          'schema/person-status.json': 'schema/person-status.sample.js',
+          'schema/person-document-employment.json': 'schema/person-document-employment.sample.js',
           'schema/person-document-education.json': 'schema/person-document-education.sample.js',
-          'schema/person-document-employment.json': 'schema/person-document-employment.sample.js'
+          'schema/person-document-id.json': 'schema/person-document-id.sample.js',
+          'schema/person-document-other.json': 'schema/person-document-other.sample.js',
+          'schema/person-document-training.json': 'schema/person-document-training.sample.js'
         }
       }
     }

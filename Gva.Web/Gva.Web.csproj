@@ -159,6 +159,9 @@
     <Content Include="App\schema\person-document-education.sample.js" />
     <Content Include="App\schema\person-document-employment.sample.js" />
     <Content Include="App\schema\person-document-id.sample.js" />
+    <Content Include="App\schema\person-document-other.sample.js" />
+    <Content Include="App\schema\person-document-training.sample.js" />
+    <Content Include="App\schema\person-status.sample.js" />
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
@@ -205,6 +208,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\person-document-employment.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-other.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-training.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

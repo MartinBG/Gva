@@ -1,5 +1,5 @@
 ﻿{
-  "description": "Други документи на Физическо лице",
+  "description": "Проверки-общо на Физическо лице",
   "type": "object",
   "properties": {
     "documentNumber": {
@@ -7,13 +7,13 @@
       "description": "Номер на документа"
     },
     "documentPersonNumber": {
-      "type": "number", 
+      "type": ["number", "null"],
       "description": "Пореден номер на лицето в списъка - при групов документ, за поддържане на ункиалност  documentNumber + documentPersonNumber за даден тип документ"
     },
     "documentDateValidFrom": {
       "format": "date-time", 
       "type": "string", 
-      "description": "Дата, от която документа е валиден"
+      "description": "Дата на завършване"
     },
     "documentDateValidTo": {
       "format": ["date-time",""],
@@ -23,7 +23,27 @@
     "documentPublisher": {
       "type": "string", 
       "description": "Издател на документа"
-    },        
+    },
+    "ratingTypeId": {
+      "type": ["number", "null"],
+      "description": "Тип ВС от Номенклатура Типове ВС"
+    },
+    "ratingClassId": {
+      "type": ["number", "null"],
+      "description": "Клас ВС от Номенклатура Класове ВС"
+    },
+    "authorizationId": {
+      "type": ["number", "null"],
+      "description": "Разрешение към квалификация от Номенклатура Разрешения към квалификация"
+    },
+    "licenceTypeId": {
+      "type": ["number", "null"],
+      "description": "Вид(тип) правоспособност от Номенклатура Видове(типове) правоспособност"
+    },
+    "engLangLevelId": {
+      "type": ["number", "null"],
+      "description": "Ниво на владеене на английски език от Номенклатура Нива на владеене на английски език"
+    },
     "personOtherDocumentTypeId": {
       "type": "number",
       "description": "Тип документ от Номенклатура Други типове документи на Физичеко лице"

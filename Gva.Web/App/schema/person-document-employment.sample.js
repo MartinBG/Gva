@@ -8,8 +8,8 @@
     person1Employee: {
       hiredate: '2013-09-20T00:00',
       valid: true,
-      organizationId: nomenclatures.getId('Organizations', 'AAK Progres'),
-      employmentCategoryId: nomenclatures.getId('EmploymentCategories', 'First officer'),
+      organizationId: nomenclatures.getId('organizations', 'AAK Progres'),
+      employmentCategoryId: nomenclatures.getId('employmentCategories', 'First officer'),
       countryId: nomenclatures.getId('countries', 'Bulgaria'),
       notes: '',
       

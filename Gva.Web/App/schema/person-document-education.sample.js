@@ -9,8 +9,8 @@
       documentNumber: '1',
       completionDate: '1981-04-04T00:00',
       speciality: 'пилот',
-      schoolId: nomenclatures.getId('Schools', 'BAC'),
-      graduationId: nomenclatures.getId('Graduations', 'PQ'),
+      schoolId: nomenclatures.getId('schools', 'BAC'),
+      graduationId: nomenclatures.getId('graduations', 'PQ'),
       notes: '',
       
       bookPageNumber: '2',
