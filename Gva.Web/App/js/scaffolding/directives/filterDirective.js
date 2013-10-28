@@ -37,7 +37,8 @@
       $scope.label = $scope.$root.l10n.get(attrs.label);
 
       $scope.show = function () {
-        return scSearch.selectedFilters.hasOwnProperty(name);
+        return scSearch.selectedFilters.hasOwnProperty(name) &&
+          scSearch.selectedFilters[name] !== undefined;
       };
 
       $scope.$watch('model', function (newVal, oldVal) {

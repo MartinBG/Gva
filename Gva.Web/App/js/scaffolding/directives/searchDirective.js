@@ -1,4 +1,4 @@
-﻿// Uage: <sc-search selected-filters="" btn-classes=""></sc-search>
+﻿// Usage: <sc-search selected-filters="" btn-classes=""></sc-search>
 (function (angular) {
   'use strict';
 
@@ -30,7 +30,7 @@
           $scope.nonSelectedFilters.length = 0;
           for (var name in $scope.filters) {
             if ($scope.filters.hasOwnProperty(name) &&
-                !(name in newObj) &&
+                (!(name in newObj) || newObj[name] === undefined) &&
                 $scope.filters[name].label) {
               $scope.nonSelectedFilters.push({
                 label: $scope.filters[name].label,
