@@ -1,4 +1,4 @@
-﻿// Usage: <sc-filter type="" name="" removable="" classes="" options="" label=""></sc-filter>
+﻿// Usage: <sc-filter type="" name="" removable="" class="" options="" label=""></sc-filter>
 (function (angular) {
   'use strict';
 
@@ -7,8 +7,8 @@
       var type = tAttrs.type,
           options = tAttrs.options;
 
-      if (!tAttrs.classes) {
-        tAttrs.classes = 'col-sm-3';
+      if (!tElement.attr('class')) {
+        tElement.addClass('col-sm-3');
       }
 
       if (type === 'date' ||
@@ -35,6 +35,7 @@
       var name = attrs.name;
       $scope.model = scSearch.selectedFilters[name] || null;
       $scope.label = $scope.$root.l10n.get(attrs.label);
+      $scope.labeless = !$scope.label && !$scope.$eval(attrs.removable);
 
       $scope.show = function () {
         return scSearch.selectedFilters.hasOwnProperty(name) &&
@@ -59,8 +60,7 @@
       require: '?^scSearch',
       replace: true,
       scope: {
-        removable: '@',
-        classes: '@'
+        removable: '@'
       },
       templateUrl: 'scaffolding/templates/filterTemplate.html',
       compile: FilterCompile

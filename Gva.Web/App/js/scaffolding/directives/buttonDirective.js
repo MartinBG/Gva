@@ -3,10 +3,20 @@
   'use strict';
 
   function ButtonDirective($parse) {
-    function ButtonCompile (tElement, tAttrs) {
-      if (!tAttrs.classes) {
-        tAttrs.classes = 'btn-sm btn-default';
+    function ButtonCompile (tElement) {
+      var btnClasses = tElement.attr('class'),
+          buttons = tElement.find('button');
+
+      if (!btnClasses) {
+        btnClasses = 'btn-sm btn-default';
       }
+
+      buttons.each(function (index, button) {
+        button.className = btnClasses;
+      });
+
+      tElement.removeClass();
+      tElement.addClass('btn-div');
 
       return ButtonLink;
     }
@@ -39,7 +49,6 @@
       replace: true,
       scope: {
         action: '@',
-        classes: '@',
         icon: '@'
       },
       templateUrl: 'scaffolding/templates/buttonTemplate.html',
