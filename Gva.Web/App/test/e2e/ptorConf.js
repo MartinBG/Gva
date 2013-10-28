@@ -2,7 +2,7 @@
 exports.config = {
   seleniumServerJar: '../../test/e2e/assets/selenium/selenium-server-standalone-2.35.0.jar',
   chromeDriver: '../../test/e2e/assets/selenium/chromedriver',
-  specs: ['spec/*.js'],
+  specs: ['spec/*.js', 'directives/specs/*.js'],
   capabilities: {
     'browserName': 'chrome'
   },

@@ -165,6 +165,12 @@
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
+    <Content Include="App\test\e2e\directives\controllers\scInputCtrl.js" />
+    <Content Include="App\test\e2e\directives\directiveTests.js" />
+    <Content Include="App\test\e2e\directives\providers\statesProvider.js" />
+    <Content Include="App\test\e2e\directives\specs\intSpec.js" />
+    <Content Include="App\test\e2e\directives\specs\textSpec.js" />
+    <Content Include="App\test\e2e\directives\templates\scInput.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
