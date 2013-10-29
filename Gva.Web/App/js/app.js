@@ -57,5 +57,7 @@
         .setUserHasPassword(true)
         .showBreadcrumbBar(true);
     }
-  ]);
+  ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
+    $rootScope.l10n = l10n;
+  }]);
 }(angular));

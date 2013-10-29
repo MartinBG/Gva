@@ -10,10 +10,7 @@ div.labeless
 {
   margin-top: 25px;
 }
-form.form-inline label.control-label 
-{
-  min-width: 100%;
-}
+
 @media (max-width:767px)
 {
   .hidden-phone{display:none !important;}
