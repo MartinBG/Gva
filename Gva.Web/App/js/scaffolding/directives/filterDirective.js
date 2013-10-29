@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function FilterDirective() {
+  function FilterDirective(l10n) {
     function FilterCompile (tElement, tAttrs) {
       var type = tAttrs.type,
           options = tAttrs.options;
@@ -32,35 +32,38 @@
         return;
       }
 
-      var name = attrs.name;
-      $scope.model = scSearch.selectedFilters[name] || null;
-      $scope.label = $scope.$root.l10n.get(attrs.label);
-      $scope.labeless = !$scope.label && !$scope.$eval(attrs.removable);
+      var name = attrs.name,
+          label = attrs.label,
+          selectedFilters = scSearch.selectedFilters;
+
+      $scope.model = null;
+      $scope.label = l10n.get(label);
 
       $scope.show = function () {
-        return scSearch.selectedFilters.hasOwnProperty(name) &&
-          scSearch.selectedFilters[name] !== undefined;
+        return selectedFilters.hasOwnProperty(name);
       };
 
       $scope.$watch('model', function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          scSearch.selectedFilters[name] = newVal;
+        if (newVal !== oldVal && selectedFilters.hasOwnProperty(name)) {
+          selectedFilters[name] = newVal;
         }
       });
 
       $scope.removeFilter = function () {
-        delete scSearch.selectedFilters[name];
+        delete selectedFilters[name];
       };
 
       scSearch.registerFilter(name, $scope);
     }
+
+    FilterDirective.$inject = ['l10n'];
 
     return {
       restrict: 'E',
       require: '?^scSearch',
       replace: true,
       scope: {
-        removable: '@'
+        removable: '&'
       },
       templateUrl: 'scaffolding/templates/filterTemplate.html',
       compile: FilterCompile

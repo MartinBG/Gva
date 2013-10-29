@@ -1,16 +1,51 @@
 ﻿// Usage: <sc-search selected-filters="" btn-classes=""></sc-search>
-(function (angular) {
+/*globals angular, _*/
+(function (angular, _) {
   'use strict';
 
   function SearchDirective() {
     function SearchController ($scope) {
-      var filters = $scope.filters = {};
+      var filters = {},
+          //an object used as the special value of the watch expression
+          //when the watched property does not exist on the object
+          emptyValue = {};
 
       this.selectedFilters = $scope.selectedFilters;
-      this.nonSelectedFilters = $scope.nonSelectedFilters = [];
+      this.dropdownFilters = $scope.dropdownFilters = [];
 
       this.registerFilter = function (name, filterScope) {
         filters[name] = filterScope;
+      };
+
+      this.initialize = function () {
+        _.forOwn(filters, function(filterScope, filterName) {
+          var dropdownFilter = {
+            label: filterScope.label,
+            name: filterName,
+            visible: false
+          };
+          $scope.dropdownFilters.push(dropdownFilter);
+
+          $scope.$watch(
+            function () {
+              return $scope.selectedFilters.hasOwnProperty(filterName) ?
+                $scope.selectedFilters[filterName] :
+                emptyValue;
+            },
+            function (newVal) {
+              filterScope.model = newVal === emptyValue ? null : newVal;
+              dropdownFilter.visible = newVal === emptyValue;
+            },
+            true);
+
+          filterScope.$watch('model', function (newVal, oldVal) {
+            if (newVal !== oldVal &&
+              $scope.selectedFilters.hasOwnProperty(filterName)
+            ) {
+              $scope.selectedFilters[filterName] = newVal;
+            }
+          }, true);
+        });
       };
     }
 
@@ -19,39 +54,20 @@
         tAttrs.btnClasses = 'col-sm-3';
       }
 
-      return function ($scope, element) {
-        $scope.$watch('selectedFilters', function (newObj, oldObj) {
-          for (var propt in newObj) {
-            if (newObj.hasOwnProperty(propt) && newObj[propt] !== oldObj[propt]) {
-              $scope.filters[propt].model = newObj[propt];
-            }
-          }
-
-          $scope.nonSelectedFilters.length = 0;
-          for (var name in $scope.filters) {
-            if ($scope.filters.hasOwnProperty(name) &&
-                (!(name in newObj) || newObj[name] === undefined) &&
-                $scope.filters[name].label) {
-              $scope.nonSelectedFilters.push({
-                label: $scope.filters[name].label,
-                name: name
-              });
-            }
-          }
-        }, true);
-
+      return function ($scope, element, attrs, scSearch) {
         transcludeFn($scope.$parent, function (clone) {
-          var rowBlock = element.find('div.row');
           var buttonBlock = element.find('div.btns-block');
-          var transcludedElements = clone;
-          angular.forEach(transcludedElements, function (elem) {
+
+          angular.forEach(clone, function (elem) {
             if (angular.element(elem).hasClass('btn-div')) {
               buttonBlock.append(elem);
             } else {
-              rowBlock.append(elem);
+              buttonBlock.before(elem);
             }
           });
         });
+
+        scSearch.initialize();
       };
     }
 
@@ -70,4 +86,4 @@
   }
 
   angular.module('scaffolding').directive('scSearch', SearchDirective);
-}(angular));
+}(angular, _));

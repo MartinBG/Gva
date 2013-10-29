@@ -1,12 +1,17 @@
-﻿(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function SearchCtrl($scope, $state, $stateParams, usersStates, User) {
     $scope.filters = {
-      username: $stateParams.username,
-      fullname: $stateParams.fullname,
-      showActive: $stateParams.showActive
+      username: null //always show the username filter
     };
+
+    _.forOwn($stateParams, function(value, param) {
+      if (value !== null && value !== undefined) {
+        $scope.filters[param] = value;
+      }
+    });
 
     $scope.newUser = function () {
       $state.go(usersStates.newUser);
@@ -46,4 +51,4 @@
   SearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'users.States', 'users.User'];
 
   angular.module('users').controller('users.SearchCtrl', SearchCtrl);
-}(angular));
+}(angular, _));

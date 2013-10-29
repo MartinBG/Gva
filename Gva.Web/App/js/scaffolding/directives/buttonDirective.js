@@ -1,22 +1,23 @@
 ﻿// Usage: <sc-button action="" class="" text="" icon=""></sc-button>
-(function (angular) {
+/*globals angular, $ */
+(function (angular, $) {
   'use strict';
 
-  function ButtonDirective($parse) {
-    function ButtonCompile (tElement) {
-      var btnClasses = tElement.attr('class'),
-          buttons = tElement.find('button');
+  function ButtonDirective($parse, l10n) {
+    function ButtonCompile (tElement, tAttrs) {
+      var btnClasses = tElement.attr('class');
 
-      if (!btnClasses) {
-        btnClasses = 'btn-sm btn-default';
+      if (tAttrs.action === 'add') {
+        tElement.children('button').remove();
+      } else {
+        tElement.children('div.btn-group').remove();
       }
 
-      buttons.each(function (index, button) {
-        button.className = btnClasses;
+      tElement.find('button').each(function (index, button) {
+        $(button).attr('class', btnClasses || 'btn-sm btn-default');
       });
 
-      tElement.removeClass();
-      tElement.addClass('btn-div');
+      tElement.attr('class', 'btn-div');
 
       return ButtonLink;
     }
@@ -27,18 +28,18 @@
       }
 
       $scope.addFilter = undefined;
-      $scope.nonSelectedFilters = undefined;
+      $scope.dropdownFilters = undefined;
       $scope.btnAction = undefined;
       $scope.text = undefined;
 
       if ($scope.action === 'add') {
-        $scope.nonSelectedFilters = scSearch.nonSelectedFilters;
-        $scope.addFilter = function (filter) {
-          scSearch.selectedFilters[filter.name] = null;
+        $scope.dropdownFilters = scSearch.dropdownFilters;
+        $scope.addFilter = function (filterName) {
+          scSearch.selectedFilters[filterName] = null;
         };
       }
       else {
-        $scope.text = $scope.$root.l10n.get(attrs.text);
+        $scope.text = l10n.get(attrs.text);
         $scope.btnAction = $parse(attrs.action)($scope.$parent);
       }
     }
@@ -56,7 +57,7 @@
     };
   }
 
-  ButtonDirective.$inject = ['$parse'];
+  ButtonDirective.$inject = ['$parse', 'l10n'];
 
   angular.module('scaffolding').directive('scButton', ButtonDirective);
-}(angular));
+}(angular, $));
