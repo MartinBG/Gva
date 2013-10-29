@@ -43,12 +43,6 @@
         return selectedFilters.hasOwnProperty(name);
       };
 
-      $scope.$watch('model', function (newVal, oldVal) {
-        if (newVal !== oldVal && selectedFilters.hasOwnProperty(name)) {
-          selectedFilters[name] = newVal;
-        }
-      });
-
       $scope.removeFilter = function () {
         delete selectedFilters[name];
       };
