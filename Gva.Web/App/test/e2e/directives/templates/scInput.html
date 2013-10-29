@@ -19,13 +19,11 @@
         <label class="control-label">Text input box</label>
         <input name="textInput" class="form-control input-sm" ng-model="text" />
       </div>
-      <div class="form-group col-sm-3">
-        <label class="control-label">Int input box</label>
-        <input name="intInput" class="form-control input-sm" ng-model="intNum" />
+      <div class="form-group col-sm-3 labeless">
+        <button type="button" ng-click="changeInt()" name="intBtn" class="btn-sm btn-info">Change to 789</button>
       </div>
-      <div class="form-group col-sm-3">
-        <label class="control-label">Float input box</label>
-        <input name="floatInput" class="form-control input-sm" ng-model="floatNum" />
+      <div class="form-group col-sm-3 labeless">
+        <button type="button" ng-click="changeFloat()" name="floatBtn" class="btn-sm btn-info">Change to 789.12</button>
       </div>
     </div>
   </form>

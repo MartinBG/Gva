@@ -4,37 +4,25 @@
 
   describe('Sc-float directive', function() {
     var ptor = protractor.getInstance(),
-        floatDirectiveElem,
-        floatInputElem;
+        floatDirectiveElem;
 
     beforeEach(function (){
       ptor.get('#/test/input');
 
       floatDirectiveElem = ptor.findElement(protractor.By.name('floatDir'));
-      floatInputElem = ptor.findElement(protractor.By.name('floatInput'));
     });
 
     it('should set the text of the element to whatever number is passed.', function() {
+      var floatBtnElem = ptor.findElement(protractor.By.name('floatBtn'));
+
       floatDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('');
       });
 
-      floatInputElem.sendKeys('789.12');
+      floatBtnElem.click();
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('789.12');
-      });
-    });
-
-    it('should change the model to whatever number is typed.', function() {
-      floatInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      floatDirectiveElem.sendKeys('134.56');
-
-      floatInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('134.56');
       });
     });
 

@@ -4,37 +4,25 @@
 
   describe('Sc-int directive', function() {
     var ptor = protractor.getInstance(),
-        intDirectiveElem,
-        intInputElem;
+        intDirectiveElem;
 
     beforeEach(function (){
       ptor.get('#/test/input');
 
       intDirectiveElem = ptor.findElement(protractor.By.name('intDir'));
-      intInputElem = ptor.findElement(protractor.By.name('intInput'));
     });
 
     it('should set the text of the element to whatever integer is passed.', function() {
+      var intBtnElem = ptor.findElement(protractor.By.name('intBtn'));
+
       intDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('');
       });
 
-      intInputElem.sendKeys('789');
+      intBtnElem.click();
 
       intDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('789');
-      });
-    });
-
-    it('should change the model to whatever integer is typed.', function() {
-      intInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      intDirectiveElem.sendKeys('13456');
-
-      intInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('13456');
       });
     });
 
