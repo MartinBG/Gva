@@ -4,7 +4,7 @@
   function StatesProvider($stateProvider, navigationStatesProvider) {
     this.states = {
       'scInputTest': {
-        name: 'directive-tests.text',
+        name: 'directive-tests.input',
         parent: navigationStatesProvider.states.root,
         url: '/test/input',
         views: {
@@ -13,11 +13,23 @@
             controller: 'directive-tests.ScInputCtrl'
           }
         }
+      },
+      'scSelectTest': {
+        name: 'directive-tests.select',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/select',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/templates/scSelect.html',
+            controller: 'directive-tests.ScSelectCtrl'
+          }
+        }
       }
     };
 
     $stateProvider
-      .state(this.states.scInputTest);
+      .state(this.states.scInputTest)
+      .state(this.states.scSelectTest);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];

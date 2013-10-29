@@ -1,0 +1,20 @@
+﻿<div class="container page-content">
+  <form name="form"class="form-inline well" role="form">
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label class="control-label">Select directive</label>
+        <sc-select name="selectDir" class="form-control" ng-change="change()" ng-model="select" sc-select="{ allowClear: true, placeholder: ' ', data: options }"></sc-select>
+      </div>
+      <div class="form-group col-sm-5">
+        <div class="labeless">
+          <label class="radio-inline">
+            <input type="radio" name="optionsRadios" ng-model="select" value=""> none
+          </label>
+          <label class="radio-inline" ng-repeat="option in options">
+            <input type="radio" name="optionsRadios" ng-model="$parent.select" value="{{option.id}}"> {{option.text}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
