@@ -26,6 +26,20 @@
       });
     });
 
+    it('should change the model to whatever number is typed.', function() {
+      var floatLabelElem = ptor.findElement(protractor.By.name('floatLbl'));
+
+      floatLabelElem.getText().then(function (value) {
+        expect(value).toEqual('');
+      });
+
+      floatDirectiveElem.sendKeys('134.56');
+
+      floatLabelElem.getText().then(function (value) {
+        expect(value).toEqual('134.56');
+      });
+    });
+
     it('should validate user input.', function() {
       floatDirectiveElem.sendKeys('a134asddas56\t');
 

@@ -26,6 +26,20 @@
       });
     });
 
+    it('should change the model to whatever integer is typed.', function() {
+      var intLabelElem = ptor.findElement(protractor.By.name('intLbl'));
+
+      intLabelElem.getText().then(function (value) {
+        expect(value).toEqual('');
+      });
+
+      intDirectiveElem.sendKeys('13456');
+
+      intLabelElem.getText().then(function (value) {
+        expect(value).toEqual('13456');
+      });
+    });
+
     it('should validate user input.', function() {
       intDirectiveElem.sendKeys('a134asddas56\t');
 

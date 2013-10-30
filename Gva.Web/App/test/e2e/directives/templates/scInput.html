@@ -1,29 +1,60 @@
 ﻿<div class="container page-content">
-  <form name="form"class="form-inline well" role="form">
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="control-label">Text directive</label>
-        <sc-text name="textDir" ng-model="text"></sc-text>
-      </div>
-      <div class="form-group col-sm-3">
-        <label class="control-label">Int directive</label>
-        <sc-int name="intDir" ng-model="intNum"></sc-int>
-      </div>
-      <div class="form-group col-sm-3">
-        <label class="control-label">Float directive</label>
-        <sc-float name="floatDir" ng-model="floatNum"></sc-float>
+  <form name="form" class="form-inline" role="form">
+    <div class="well">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label">Text directive</label>
+          <sc-text name="textDir" ng-model="text"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label">Text input box</label>
+          <input name="textInput" class="form-control input-sm" ng-model="text" />
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="control-label">Text input box</label>
-        <input name="textInput" class="form-control input-sm" ng-model="text" />
+
+    <div class="well">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label">Int directive</label>
+          <sc-int name="intDir" ng-model="intNum"></sc-int>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeInt()" name="intBtn" class="btn-sm btn-info">Change to 789</button>
+        </div>
+        <div class="form-group col-sm-3 labeless"">
+          <label>model = <span name="intLbl">{{intNum}}</span></label>
+        </div>
       </div>
-      <div class="form-group col-sm-3 labeless">
-        <button type="button" ng-click="changeInt()" name="intBtn" class="btn-sm btn-info">Change to 789</button>
+    </div>
+
+    <div class="well">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label">Float directive</label>
+          <sc-float name="floatDir" ng-model="floatNum"></sc-float>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeFloat()" name="floatBtn" class="btn-sm btn-info">Change to 789.12</button>
+        </div>
+        <div class="form-group col-sm-3 labeless">
+          <label>model = <span name="floatLbl">{{floatNum}}</span></label>
+        </div>
       </div>
-      <div class="form-group col-sm-3 labeless">
-        <button type="button" ng-click="changeFloat()" name="floatBtn" class="btn-sm btn-info">Change to 789.12</button>
+    </div>
+
+    <div class="well">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label">Date directive</label>
+          <sc-date name="dateDir" ng-model="date"></sc-date>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeDate()" name="dateBtn" class="btn-sm btn-info">Change to 10.08.1990</button>
+        </div>
+        <div class="form-group col-sm-3 labeless">
+          <label>model = <span name="dateLbl">{{date}}</span></label>
+        </div>
       </div>
     </div>
   </form>

@@ -169,6 +169,7 @@
     <Content Include="App\test\e2e\directives\controllers\scSelectCtrl.js" />
     <Content Include="App\test\e2e\directives\directiveTests.js" />
     <Content Include="App\test\e2e\directives\providers\statesProvider.js" />
+    <Content Include="App\test\e2e\directives\specs\dateSpec.js" />
     <Content Include="App\test\e2e\directives\specs\floatSpec.js" />
     <Content Include="App\test\e2e\directives\specs\intSpec.js" />
     <Content Include="App\test\e2e\directives\specs\selectSpec.js" />
