@@ -9,7 +9,7 @@
     beforeEach(function (){
       ptor.get('#/test/input');
 
-      dateInputElem = ptor.findElement(protractor.By.className('date-input'));
+      dateInputElem = ptor.findElement(protractor.By.css('div.date > input'));
     });
 
     it('should set the date to whatever date is passed.', function() {
@@ -26,7 +26,7 @@
       });
     });
 
-    it('should change the model to whatever date is selected or typed.', function() {
+    it('should change the model to whatever date is typed.', function() {
       var dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
 
       dateLabelElem.getText().then(function (value) {
@@ -38,6 +38,10 @@
       dateLabelElem.getText().then(function (value) {
         expect(value).toEqual('2013-10-12T00:00:00');
       });
+    });
+
+    it('should change the model to whatever date is selected.', function() {
+      var dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
 
       ptor.findElement(protractor.By.className('glyphicon-calendar')).click().then( function () {
         ptor.findElements(protractor.By.className('day')).then (function (dayElems) {
