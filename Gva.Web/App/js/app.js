@@ -9,7 +9,8 @@
     'users',
     'l10n',
     'l10n-tools',
-    'l10nTexts_bg-bg'
+    'l10nTexts_bg-bg',
+    'directive-tests'
   ]).config([
     '$urlRouterProvider',
     '$stateProvider',
