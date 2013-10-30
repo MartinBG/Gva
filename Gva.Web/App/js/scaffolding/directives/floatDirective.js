@@ -16,18 +16,26 @@
 
         var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
 
-        element.on('change', function (ev) {
-          var value = ev.target.value.replace(groupSep, '').replace(',', '.'),
-              floatNum = parseFloat(value),
-              floatText;
+        var validate = function (value) {
+          var floatNum = parseFloat(value.toString().replace(',', '.'));
+          floatNum = isNaN(floatNum) ? null : floatNum.toFixed(2);
 
-          floatNum = isNaN(floatNum) ? undefined : floatNum;
-          floatText = $filter('number')(floatNum, 2);
+          return floatNum;
+        };
 
-          element.val(floatText);
-          scope.$apply(function () {
-            ngModel.$setViewValue(floatNum);
+        element.on('change', function () {
+          ngModel.$formatters.forEach(function (formatter) {
+            ngModel.$viewValue = formatter(ngModel.$viewValue);
           });
+
+          ngModel.$render();
+        });
+
+        ngModel.$parsers.push(validate);
+        ngModel.$formatters.push(function (value) {
+          var validatedNum = validate(value) || undefined;
+
+          return $filter('number')(validatedNum, 2).replace(groupSep, '');
         });
       }
     };

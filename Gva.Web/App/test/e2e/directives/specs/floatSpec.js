@@ -22,7 +22,7 @@
       floatBtnElem.click();
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('789.12');
+        expect(value).toEqual('789,12');
       });
     });
 
@@ -58,14 +58,13 @@
       floatDirectiveElem.sendKeys('13345.6\t');
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/13[\s,]345[\.,]60/);
+        expect(value).toMatch(/13345,60/);
       });
 
-      floatDirectiveElem.clear();
-      floatDirectiveElem.sendKeys('13345.67\t');
+      floatDirectiveElem.sendKeys('7\t');
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/13[\s,]345[\.,]67/);
+        expect(value).toMatch(/13345,61/);
       });
     });
   });

@@ -2,38 +2,42 @@
 (function (angular) {
   'use strict';
 
-  function IntegerDirective($filter, $locale) {
+  function IntegerDirective() {
     return {
       priority: 110,
       restrict: 'E',
       replace: true,
       require: '?ngModel',
       templateUrl: 'scaffolding/templates/integerTemplate.html',
-      link: function (scope, element, attrs, ngModel) {
+      link: function ($scope, element, attrs, ngModel) {
         if (!ngModel) {
           return;
         }
 
-        var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
+        var validate = function (value) {
+          var integerNum = parseInt(value, 10);
+          integerNum = isNaN(integerNum) ? null : integerNum;
 
-        element.on('change', function (ev) {
-          var value = ev.target.value.replace(groupSep, ''),
-              integerNum = parseInt(value, 10),
-              integerText;
+          return integerNum;
+        };
 
-          integerNum = isNaN(integerNum) ? undefined : integerNum;
-          integerText = $filter('number')(integerNum, 0);
-
-          element.val(integerText);
-          scope.$apply(function () {
-            ngModel.$setViewValue(integerNum);
+        element.on('change', function () {
+          ngModel.$formatters.forEach(function (formatter) {
+            ngModel.$viewValue = formatter(ngModel.$viewValue);
           });
+
+          ngModel.$render();
+        });
+
+        ngModel.$parsers.push(validate);
+        ngModel.$formatters.push(function (value) {
+          var validatedNum = validate(value);
+
+          return validatedNum ? validatedNum.toString() : '';
         });
       }
     };
   }
-
-  IntegerDirective.$inject = ['$filter', '$locale'];
 
   angular.module('scaffolding').directive('scInt', IntegerDirective);
 }(angular));

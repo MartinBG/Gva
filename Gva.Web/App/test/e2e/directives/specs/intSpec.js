@@ -53,19 +53,5 @@
         expect(value).toEqual('134');
       });
     });
-
-    it('should format user input.', function() {
-      intDirectiveElem.sendKeys('133456\t');
-
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/133[\s,]456/);
-      });
-
-      intDirectiveElem.sendKeys('7\t');
-
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/1[\s,]334[\s,]567/);
-      });
-    });
   });
 }(protractor));
