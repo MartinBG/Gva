@@ -3,8 +3,8 @@ GO
 
 CREATE TABLE [dbo].[GvaAppLotFiles] (
     [GvaApplicationId]  INT   NOT NULL,
-    [DocFileId]         INT   NOT NULL,
     [GvaLotFileId]      INT   NOT NULL,
+    [DocFileId]         INT   NULL,
     CONSTRAINT [PK_GvaAppLotFiles]                 PRIMARY KEY ([GvaApplicationId], [GvaLotFileId]),
     CONSTRAINT [FK_GvaAppLotFiles_DocFiles]        FOREIGN KEY ([DocFileId])        REFERENCES [dbo].[DocFiles]        ([DocFileId]),
     CONSTRAINT [FK_GvaAppLotFiles_GvaApplications] FOREIGN KEY ([GvaApplicationId]) REFERENCES [dbo].[GvaApplications] ([GvaApplicationId]),

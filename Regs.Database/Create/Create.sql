@@ -9,6 +9,11 @@ GO
 :r $(rootPath)\"Tables\LotTypes.sql"
 :r $(rootPath)\"Tables\Lots.sql"
 :r $(rootPath)\"Tables\LotParts.sql"
+:r $(rootPath)\"Tables\TextBlobs.sql"
+:r $(rootPath)\"Tables\LotCommits.sql"
+:r $(rootPath)\"Tables\LotPartVersions.sql"
+:r $(rootPath)\"Tables\LotCommitVersions.sql"
+:r $(rootPath)\"Tables\LotPartExts.sql"
 
 -- Noms
 :r $(rootPath)\"Tables\Noms.sql"
