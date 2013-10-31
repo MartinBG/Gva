@@ -1,0 +1,11 @@
+﻿<div class="container page-content">
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="filter1" class="col-sm-3" removable="false" label="Filter 1"></sc-filter>
+    <sc-filter type="text" name="filter2" class="col-sm-2" removable="true" label="Filter 2"></sc-filter>
+    <sc-filter type="text" name="filter3" removable="true"></sc-filter>
+    <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" label="users.search.activity"></sc-filter>
+<!--    <sc-button action="search" text="users.search.search" icon="glyphicon-search"></sc-button>
+    <sc-button action="" text="Action"-->
+    <sc-button action="add"></sc-button>
+  </sc-search>
+</div>
