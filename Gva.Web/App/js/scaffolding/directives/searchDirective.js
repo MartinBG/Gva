@@ -34,7 +34,7 @@
             },
             function (newVal) {
               filterScope.model = newVal === emptyValue ? null : newVal;
-              dropdownFilter.visible = newVal === emptyValue;
+              dropdownFilter.visible = filterScope.label && newVal === emptyValue;
             },
             true);
 
