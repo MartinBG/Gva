@@ -1,5 +1,5 @@
 ﻿// Usage: <sc-float ng-model="<model_name>"></sc-float>
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function FloatDirective ($filter, $locale) {
@@ -17,6 +17,10 @@
         var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
 
         var validate = function (value) {
+          if (!_.isNumber(value) && !_.isString(value)) {
+            return null;
+          }
+
           var floatNum = parseFloat(value.toString().replace(',', '.'));
           floatNum = isNaN(floatNum) ? null : floatNum.toFixed(2);
 
@@ -44,4 +48,4 @@
   FloatDirective.$inject = ['$filter', '$locale'];
 
   angular.module('scaffolding').directive('scFloat', FloatDirective);
-}(angular));
+}(angular, _));

@@ -1,5 +1,5 @@
 ﻿// Usage: <sc-int ng-model="<model_name>"></sc-int>
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function IntegerDirective() {
@@ -15,6 +15,10 @@
         }
 
         var validate = function (value) {
+          if (!_.isNumber(value) && !_.isString(value)) {
+            return null;
+          }
+
           var integerNum = parseInt(value, 10);
           integerNum = isNaN(integerNum) ? null : integerNum;
 
@@ -40,4 +44,4 @@
   }
 
   angular.module('scaffolding').directive('scInt', IntegerDirective);
-}(angular));
+}(angular, _));
