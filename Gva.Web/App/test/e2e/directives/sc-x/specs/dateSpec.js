@@ -64,8 +64,8 @@
 
     it('should validate user input.', function() {
       var date = new Date(),
-          day = date.getDate(),
-          month = date.getMonth() + 1,
+          day = ('0' + date.getDate()).slice(-2),
+          month =('0' + (date.getMonth() + 1)).slice(-2),
           year = date.getFullYear();
 
       dateInputElem.sendKeys('alabala\t');

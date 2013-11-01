@@ -94,7 +94,7 @@ module.exports = function (grunt) {
         module: 'scaffolding.templates'
       },
       directiveTests: {
-        src: ['test/e2e/directives/**/*.html'],
+        src: ['test/e2e/directives/**/**/*.html'],
         dest: '<%= buildDir %>/templates/directive-tests.js',
         module: 'directive-tests.templates'
       }

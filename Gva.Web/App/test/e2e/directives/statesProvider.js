@@ -9,7 +9,7 @@
         url: '/test/input',
         views: {
           'pageView': {
-            templateUrl: '../test/e2e/directives/templates/scInput.html',
+            templateUrl: '../test/e2e/directives/sc-x/templates/scInput.html',
             controller: 'directive-tests.ScInputCtrl'
           }
         }
@@ -20,8 +20,19 @@
         url: '/test/select',
         views: {
           'pageView': {
-            templateUrl: '../test/e2e/directives/templates/scSelect.html',
+            templateUrl: '../test/e2e/directives/sc-x/templates/scSelect.html',
             controller: 'directive-tests.ScSelectCtrl'
+          }
+        }
+      },
+      'scSearchTest': {
+        name: 'directive-tests.search',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/search',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-search/templates/scSearch.html',
+            controller: 'directive-tests.ScSearchCtrl'
           }
         }
       }
@@ -29,7 +40,8 @@
 
     $stateProvider
       .state(this.states.scInputTest)
-      .state(this.states.scSelectTest);
+      .state(this.states.scSelectTest)
+      .state(this.states.scSearchTest);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];
