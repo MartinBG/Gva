@@ -172,6 +172,7 @@
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
     <Content Include="App\test\e2e\directives\sc-search\controllers\scSearchCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
     <Content Include="App\test\e2e\directives\sc-x\controllers\scInputCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-x\controllers\scSelectCtrl.js" />
@@ -203,7 +204,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\test\e2e\directives\sc-search\specs\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -1,11 +1,40 @@
 ﻿<div class="container page-content">
-  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-search selected-filters="filters" btn-classes="col-sm-3">
     <sc-filter type="text" name="filter1" class="col-sm-3" removable="false" label="Filter 1"></sc-filter>
     <sc-filter type="text" name="filter2" class="col-sm-2" removable="true" label="Filter 2"></sc-filter>
     <sc-filter type="text" name="filter3" removable="true"></sc-filter>
-    <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" label="users.search.activity"></sc-filter>
-<!--    <sc-button action="search" text="users.search.search" icon="glyphicon-search"></sc-button>
-    <sc-button action="" text="Action"-->
-    <sc-button action="add"></sc-button>
+    <sc-filter type="select" name="filter4" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 1, text: 'option1' }, { id: 2, text: 'option2'}]}" label="Filter 4"></sc-filter>
+    <sc-button action="action1" text="Button 1" class="btn-sm btn-info"></sc-button>
+    <sc-button action="action2" text="Button 2"></sc-button>
+    <sc-button action="add" name="addBtn"></sc-button>
   </sc-search>
+
+  <form class="well form-inline">
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label class="control-label">Filter 1</label>
+        <input type="text" class="form-control input-sm" ng-model="filters.filter1"/>
+      </div>
+      <div class="form-group col-sm-2" ng-if="filters.filter2 !== undefined">
+        <label class="control-label">Filter 2</label>
+        <input type="text" class="form-control input-sm" ng-model="filters.filter2"/>
+      </div>
+      <div class="form-group col-sm-3" ng-if="filters.filter3 !== undefined">
+        <label class="control-label">Filter 3</label>
+        <input type="text" class="form-control input-sm" ng-model="filters.filter3"/>
+      </div>
+      <div class="form-group col-sm-2" ng-if="filters.filter4 !== undefined">
+        <label class="control-label">Filter 4</label>
+        <sc-select sc-select="{ allowClear: true, placeholder: ' ', data: [{ id: 1, text: 'option1' }, { id: 2, text: 'option2'}]}" ng-model="filters.filter4"></sc-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="labeless">
+        <label class="col-sm-6">Button1 is clicked <span>{{btn1Clicks}}</span> times.</label>
+      </div>
+      <div class="labeless">
+        <label class="col-sm-6">Button2 is clicked <span>{{btn2Clicks}}</span> times.</label>
+      </div>
+    </div>
+  </form>
 </div>

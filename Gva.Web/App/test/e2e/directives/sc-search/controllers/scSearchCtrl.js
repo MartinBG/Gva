@@ -4,22 +4,22 @@
   function ScSearchCtrl($scope) {
     $scope.filters = {
       filter1: null,
+      filter2: null,
       filter3: null
     };
 
-    $scope.changeInt = function () {
-      $scope.intNum = 789;
+    $scope.btn1Clicks = 0;
+    $scope.btn2Clicks = 0;
+
+    $scope.action1 = function () {
+      $scope.btn1Clicks++;
     };
 
-    $scope.changeFloat = function () {
-      $scope.floatNum = 789.12;
-    };
-
-    $scope.changeDate = function () {
-      $scope.date = '1990-08-10T12:18:12';
+    $scope.action2 = function () {
+      $scope.btn2Clicks++;
     };
   }
-  
+
   ScSearchCtrl.$inject = ['$scope'];
 
   angular.module('directive-tests').controller('directive-tests.ScSearchCtrl', ScSearchCtrl);
