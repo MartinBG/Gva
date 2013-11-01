@@ -14,7 +14,8 @@
 
     it('should hide the filters not specified in the "selected-filters" attribute.',
         function() {
-      ptor.findElements(protractor.By.css('form div.form-group')).then(function (filters) {
+      ptor.findElements(protractor.By.css('form[name=search] div.form-group'))
+          .then(function (filters) {
         expect(filters.length).toBe(4);
 
         filters[0].getAttribute('name').then(function (name) {
@@ -149,6 +150,64 @@
 
             nonSelectedFilters[0].getText().then (function (value) {
               expect(value).toBe('Filter 4');
+            });
+          });
+        });
+      });
+    });
+
+    it('should change the filters object to contain only the selected filters.', function () {
+      ptor.findElements(protractor.By.css('form[name=modelForm] div.form-group > input'))
+          .then(function (selectedFilters) {
+        expect(selectedFilters.length).toBe(3);
+
+        selectedFilters[0].getAttribute('name').then(function (name) {
+          expect(name).toEqual('filter1Input');
+        });
+
+        selectedFilters[1].getAttribute('name').then(function (name) {
+          expect(name).toEqual('filter2Input');
+        });
+
+        selectedFilters[2].getAttribute('name').then(function (name) {
+          expect(name).toEqual('filter3Input');
+        });
+      });
+
+      ptor.findElement(protractor.By.css('div[name=filter2] > button')).click().then(function () {
+        ptor.findElements(protractor.By.css('form[name=modelForm] div.form-group > input'))
+          .then(function (selectedFilters) {
+          expect(selectedFilters.length).toBe(2);
+
+          selectedFilters[0].getAttribute('name').then(function (name) {
+            expect(name).toEqual('filter1Input');
+          });
+
+          selectedFilters[1].getAttribute('name').then(function (name) {
+            expect(name).toEqual('filter3Input');
+          });
+        });
+      });
+
+      addBtn.click().then(function () {
+        ptor.findElements(protractor.By.css('div[action=add] li > a'))
+            .then(function (nonSelectedFilters) {
+          nonSelectedFilters[1].click().then(function () {
+            ptor.findElements(protractor.By.css('form[name=modelForm] div.form-group > input'))
+                .then(function (selectedFilters) {
+              expect(selectedFilters.length).toBe(3);
+
+              selectedFilters[0].getAttribute('name').then(function (name) {
+                expect(name).toEqual('filter1Input');
+              });
+
+              selectedFilters[1].getAttribute('name').then(function (name) {
+                expect(name).toEqual('filter3Input');
+              });
+
+              selectedFilters[2].getAttribute('name').then(function (name) {
+                expect(name).toEqual('filter4Input');
+              });
             });
           });
         });
