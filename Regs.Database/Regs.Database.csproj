@@ -44,6 +44,11 @@
   <ItemGroup>
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Regs.sql" />
+    <Content Include="Create\Tables\TextBlobs.sql" />
+    <Content Include="Create\Tables\LotPartExts.sql" />
+    <Content Include="Create\Tables\LotCommitVersions.sql" />
+    <Content Include="Create\Tables\LotCommits.sql" />
+    <Content Include="Create\Tables\LotPartVersions.sql" />
     <Content Include="Create\Tables\NomValues.sql" />
     <Content Include="Create\Tables\Noms.sql" />
     <Content Include="Create\Tables\LotParts.sql" />
