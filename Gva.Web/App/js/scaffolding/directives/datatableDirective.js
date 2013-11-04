@@ -35,9 +35,9 @@ Usage <sc-datatable ng-model="data"
 
             table = angular.element('.datatable').dataTable({
               aaData: scope.ngModel,
-              bFilter: scope.filterable,
-              bPaginate: scope.pageable,
-              bSort: scope.sortable,
+              bFilter: scope.filterable === 'false' ? false : true,
+              bPaginate: scope.pageable === 'false'? false : true,
+              bSort: scope.sortable === 'false'? false : true,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
               sDom: '<<"span4"l><"span4"f>r>t' +

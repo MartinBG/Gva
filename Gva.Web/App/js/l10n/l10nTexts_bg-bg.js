@@ -66,7 +66,7 @@
         filtered: ' - филтрирани от _MAX_ записа.',
         close: 'Затвори',
         cancel: 'Откажи',
-        deleteColumns: 'Скрий колони',
+        deleteColumns: 'Колони',
         modalHeading: 'Изберете кои колони да се виждат'
       }
     });
