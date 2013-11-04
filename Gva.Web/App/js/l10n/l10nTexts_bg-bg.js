@@ -43,6 +43,21 @@
           save: 'Запис',
           cancel: 'Отказ'
         }
+      },
+      datatableDirective: {
+        firstPage: 'Първа страница',
+        lastPage: 'Последна страница',
+        nextPage: 'Следваща',
+        previousPage: 'Предишна  ',
+        info: 'Намерени общo _TOTAL_ резултата (от _START_ до _END_)',
+        datatableInfo: 'Показани резултати от ',
+        to: ' до ',
+        all: ' от общо ',
+        noDataAvailable: 'Няма намерени резултати',
+        displayRecords: '_MENU_ на страница',
+        search: 'Търси',
+        filtered: ' (филтрирани от _MAX_ записа)',
+        deleteColumns: 'Колони'
       }
     });
   }]);

@@ -7,30 +7,19 @@
     <sc-button action="newUser" text="users.search.new" icon="glyphicon-user"></sc-button>
     <sc-button action="add"></sc-button>
   </sc-search>
-  <table class="table table-bordered table-striped table-condensed" ng-show="users.length > 0">
-    <thead>
-      <tr>
-        <th l10n-text="users.search.username"></th>
-        <th l10n-text="users.search.name"></th>
-        <th l10n-text="users.search.roles"></th>
-        <th l10n-text="users.search.active"></th>
-        <th style="width:1px"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="user in users">
-        <td>{{user.username}}</td>
-        <td>{{user.fullname}}</td>
-        <td>{{user.roles}}</td>
-        <td ng-show="user.isActive" l10n-text="users.search.yes"></td>
-        <td ng-show="{{!user.isActive}}" l10n-text="users.search.no"></td>
-        <td>
-          <button type="button" class="btn-xs btn-info" ng-click="editUser(user)" l10n-text="users.search.edit">
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <span ng-show="users.length === 0" l10n-text="users.search.noUsersFound"></span>
+  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="username" title="Потребителско име" type="string">
+    </sc-column>
+    <sc-column data="fullname" title="Име" type="string">
+    </sc-column>
+    <sc-column data="roles" title="Роли" type="string">
+    </sc-column>
+    <sc-column data="isActive" title="Активен" type="string">
+      <span>{{item.isActive? 'Да' : 'Не'}}</span>
+    </sc-column>
+    <sc-column>
+      <button type="button" class="btn-xs btn-info" ng-click="editUser(item)" l10n-text="users.search.edit"></button>
+    </sc-column>
+  </sc-datatable>
 </div>

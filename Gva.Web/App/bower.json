@@ -13,6 +13,8 @@
     "es5-shim": "2.1.0",
     "bootstrap": "angelyordanov/bootstrap#229469e0598a230c8b11890d128a57618df838d4",
     "bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#e16c2d47574bd14ea514d54b679b1fbccfdccb29",
+    "datatable": "DataTables/DataTables#a077d24e6a7b49f8db9094197ff04dd0f62720c2",
+    "datatablePlugins": "DataTables/Plugins#dec9bace323a3ca5f88cdc5bc431eeeb92b82821",
     "angular-ui-select2": "0.0.2",
     "select2": "3.4.3",
     "jquery-modern": "jquery#2.0.3",
