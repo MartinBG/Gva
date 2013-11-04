@@ -12,7 +12,7 @@
     "lodash": "2.1.0",
     "es5-shim": "2.1.0",
     "bootstrap": "angelyordanov/bootstrap#229469e0598a230c8b11890d128a57618df838d4",
-    "bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#d4c5d78cda72c33caf963b99a4c8160321c117bb",
+    "bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#e16c2d47574bd14ea514d54b679b1fbccfdccb29",
     "angular-ui-select2": "0.0.2",
     "select2": "3.4.3",
     "jquery-modern": "jquery#2.0.3",

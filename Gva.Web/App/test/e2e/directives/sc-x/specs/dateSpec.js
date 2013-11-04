@@ -4,12 +4,14 @@
 
   describe('Sc-date directive', function() {
     var ptor = protractor.getInstance(),
-        dateInputElem;
+        dateInputElem,
+        dateLabelElem;
 
     beforeEach(function (){
       ptor.get('#/test/input');
 
       dateInputElem = ptor.findElement(protractor.By.css('div.date > input'));
+      dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
     });
 
     it('should set the date to whatever date is passed.', function() {
@@ -27,8 +29,6 @@
     });
 
     it('should change the model to whatever date is typed.', function() {
-      var dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
-
       dateLabelElem.getText().then(function (value) {
         expect(value).toEqual('');
       });
@@ -37,6 +37,15 @@
 
       dateLabelElem.getText().then(function (value) {
         expect(value).toEqual('2013-10-12T00:00:00');
+      });
+    });
+
+    it('should allow clearing the date.', function () {
+      dateInputElem.sendKeys('12.10.2013\t');
+      dateInputElem.clear();
+
+      dateLabelElem.getText().then(function (text) {
+        expect(text).toEqual('');
       });
     });
 
@@ -63,15 +72,14 @@
     });
 
     it('should validate user input.', function() {
-      var date = new Date(),
-          day = ('0' + date.getDate()).slice(-2),
-          month =('0' + (date.getMonth() + 1)).slice(-2),
-          year = date.getFullYear();
-
       dateInputElem.sendKeys('alabala\t');
 
       dateInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual(day + '.' + month + '.' + year);
+        expect(value).toEqual('');
+      });
+
+      dateLabelElem.getText().then(function (text) {
+        expect(text).toEqual('');
       });
     });
   });
