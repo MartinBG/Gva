@@ -61,13 +61,10 @@
         to: ' до ',
         all: ' от общо ',
         noDataAvailable: 'Няма намерени резултати',
-        displayRecords: 'Покажи _MENU_ на страница',
+        displayRecords: '_MENU_ на страница',
         search: 'Търси',
-        filtered: ' - филтрирани от _MAX_ записа.',
-        close: 'Затвори',
-        cancel: 'Откажи',
-        deleteColumns: 'Колони',
-        modalHeading: 'Изберете кои колони да се виждат'
+        filtered: ' (филтрирани от _MAX_ записа)',
+        deleteColumns: 'Колони'
       }
     });
   }]);

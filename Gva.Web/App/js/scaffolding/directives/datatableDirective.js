@@ -54,7 +54,7 @@ Usage <sc-datatable ng-model="data"
                 sInfo: l10n.get('datatableDirective.info'),
                 sLengthMenu: l10n.get('datatableDirective.displayRecords'),
                 sEmptyTable: l10n.get('datatableDirective.noDataAvailable'),
-                sInfoEmpty: l10n.get('datatableDirective.noDataAvailable'),
+                sInfoEmpty: '',
                 sZeroRecords: l10n.get('datatableDirective.noDataAvailable'),
                 sSearch: l10n.get('datatableDirective.search'),
                 sInfoFiltered: l10n.get('datatableDirective.filtered'),
