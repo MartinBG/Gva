@@ -1,4 +1,17 @@
-﻿<button class="btn" ng-click="open()" ng-show="dynamicColumns" l10n-text="datatableDirective.deleteColumns"></button>
-<table class="datatable table table-bordered table-striped table-condensed">
+﻿<div class="btn-group dynamic-columns-btn pull-right" style="margin-left:5px" ng-show="dynamicColumns">
+  <button type="button" class="btn btn-default btn-sm" l10n-text="datatableDirective.deleteColumns"></button>
+  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu" role="menu">
+    <div ng-repeat="column in aoColumnDefs">
+        <input type="checkbox" ng-click="hideColumn(val, $index)" ng-model="column.bVisible" ng-show="column.sTitle !== ''">
+        <span ng-show="column.sTitle !== ''">{{column.sTitle}}</span>
+    </div>
+  </div>
+</div>
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable">
     <div ng-transclude></div>
 </table>

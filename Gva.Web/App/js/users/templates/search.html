@@ -1,36 +1,26 @@
 ﻿<div class="container page-content">
-  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-    <sc-filter type="text" name="username" class="col-sm-3" removable="false" label="users.search.username"></sc-filter>
-    <sc-filter type="text" name="fullname" class="col-sm-2 col-md-3 col-lg-4" removable="true" label="users.search.name"></sc-filter>
-    <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" label="users.search.activity"></sc-filter>
-    <sc-button action="search" text="users.search.search" icon="glyphicon-search"></sc-button>
-    <sc-button action="newUser" text="users.search.new" icon="glyphicon-user"></sc-button>
-    <sc-button action="add"></sc-button>
-  </sc-search>
-  <table class="table table-bordered table-striped table-condensed" ng-show="users.length > 0">
-    <thead>
-      <tr>
-        <th l10n-text="users.search.username"></th>
-        <th l10n-text="users.search.name"></th>
-        <th l10n-text="users.search.roles"></th>
-        <th l10n-text="users.search.active"></th>
-        <th style="width:1px"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="user in users">
-        <td>{{user.username}}</td>
-        <td>{{user.fullname}}</td>
-        <td>{{user.roles}}</td>
-        <td ng-show="user.isActive" l10n-text="users.search.yes"></td>
-        <td ng-show="{{!user.isActive}}" l10n-text="users.search.no"></td>
-        <td>
-          <button type="button" class="btn-xs btn-info" ng-click="editUser(user)" l10n-text="users.search.edit">
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+        <sc-filter type="text" name="username" class="col-sm-3" removable="false" label="users.search.username"></sc-filter>
+        <sc-filter type="text" name="fullname" class="col-sm-2 col-md-3 col-lg-4" removable="true" label="users.search.name"></sc-filter>
+        <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" label="users.search.activity"></sc-filter>
+        <sc-button action="search" text="users.search.search" icon="glyphicon-search"></sc-button>
+        <sc-button action="newUser" text="users.search.new" icon="glyphicon-user"></sc-button>
+        <sc-button action="add"></sc-button>
+    </sc-search>
+    <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column data="username" title="Потребителско име"  type="string">
+        </sc-column>
+        <sc-column data="fullname" title="Име" type="string">
+        </sc-column>
+        <sc-column data="roles" title="Роли"  type="string" >
+        </sc-column>
+        <sc-column data="isActive" title="Активен" type="string">
+            <span>{{item.isActive? 'Да' : 'Не'}}</span>
+        </sc-column>
+        <sc-column>
+            <button type="button" class="btn-xs btn-info" ng-click="editUser(item)" l10n-text="users.search.edit">
+            </button>
+        </sc-column>
+    </sc-datatable>
   <span ng-show="users.length === 0" l10n-text="users.search.noUsersFound"></span>
 </div>
