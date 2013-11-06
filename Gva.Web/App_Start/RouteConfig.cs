@@ -16,6 +16,12 @@ namespace Gva.Web
             routes.IgnoreRoute("app/{*pathInfo}");
 
             routes.MapRoute(
+               name: null,
+               url: "file",
+               defaults: new { controller = "File", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{*pathInfo}",
                 defaults: new { controller = "Home", action = "Index" }

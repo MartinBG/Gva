@@ -1,0 +1,39 @@
+﻿<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.title"></h3>
+</div>
+<div class="modal-body">
+
+  <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}" ng-show="!isUploading">
+    <i class="glyphicon glyphicon-plus"></i>
+    <span>Избери файлове</span>
+    <input type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple ng-disabled="false">
+  </span>
+  <div style="margin-bottom: 14px; height: 15px; position: relative;"
+    ng-show="isUploading">
+    <div class="progress progress-striped" style="margin-bottom: 0; position: absolute; display: inline-block; vertical-align: middle; left: 0; right: 15px">
+      <div class="progress-bar" ng-style="{width: (100 * (filesUploaded / (filesLength || 1))) + '%'}">
+      </div>
+      <div style="position: absolute; text-align: center; width: 100%">
+        <span>{{filesUploaded}}</span>
+        /
+                  <span>{{filesLength}}</span>
+      </div>
+    </div>
+    <i class="glyphicon glyphicon-download" style="position: absolute; right: 0px" ng-click="stop()"></i>
+  </div>
+  <ul class="tree tree-root" style="margin-top: 15px">
+    <li ng-repeat="data in fileHierarchy">
+      <!-- move ng-include to a separate element because of https://github.com/angular/angular.js/issues/3584 -->
+      <ng-include src="'scaffolding/templates/files/filesModalTree.html'"></ng-include>
+    </li>
+  </ul>
+  <span ng-show="!fileHierarchy.length" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFilesAttached"></span>
+
+
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="cancel()" l10n-text="scaffolding.scFiles.modal.cancel"></button>
+  <button type="button" class="btn btn-primary" ng-click="ok()" l10n-text="scaffolding.scFiles.modal.accept"></button>
+</div>

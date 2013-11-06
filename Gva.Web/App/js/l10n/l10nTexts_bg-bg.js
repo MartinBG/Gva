@@ -6,6 +6,18 @@
         exit: 'Изход',
         changePass: 'Смяна на паролата'
       },
+      scaffolding: {
+        scFiles: {
+          manyFiles: '{{filesCount}} прикачени файла.',
+          noFiles: 'Няма прикачени файлове.',
+          modal: {
+            title: 'Прикачени файлове',
+            accept: 'Запис',
+            cancel: 'Отказ',
+            noFilesAttached: 'Няма прикачени файлове'
+          }
+        }
+      },
       users: {
         search: {
           username: 'Потребителско име',

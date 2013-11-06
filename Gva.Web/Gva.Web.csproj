@@ -110,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +139,9 @@
     <Content Include="App\js\scaffolding\directives\datatableDirective.js" />
     <Content Include="App\js\scaffolding\directives\dateDirective.js" />
     <Content Include="App\js\scaffolding\directives\filterDirective.js" />
+    <Content Include="App\js\scaffolding\directives\files\filesDirective.js" />
+    <Content Include="App\js\scaffolding\directives\files\filesModalCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\files\filesCtrl.js" />
     <Content Include="App\js\scaffolding\directives\floatDirective.js" />
     <Content Include="App\js\scaffolding\directives\integerDirective.js" />
     <Content Include="App\js\scaffolding\directives\selectDirective.js" />
@@ -149,6 +153,10 @@
     <Content Include="App\js\scaffolding\templates\datatableTemplate.html" />
     <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
     <Content Include="App\js\scaffolding\templates\filterTemplate.html" />
+    <Content Include="App\js\scaffolding\templates\files\filesModal.html" />
+    <Content Include="App\js\scaffolding\templates\dateTemplate.html" />
+    <Content Include="App\js\scaffolding\templates\files\filesModalTree.html" />
+    <Content Include="App\js\scaffolding\templates\files\files.html" />
     <Content Include="App\js\scaffolding\templates\floatTemplate.html" />
     <Content Include="App\js\scaffolding\templates\integerTemplate.html" />
     <Content Include="App\js\scaffolding\templates\selectTemplate.html" />
