@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{292CF59D-FE6C-44C9-8642-82C2136121C8}</ProjectGuid>
+    <ProjectGuid>{9A57D379-56E1-4AA7-952C-FDBDBA167457}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Database</RootNamespace>
-    <AssemblyName>Common.Database</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,8 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,26 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Http\IMvcConfig.cs" />
+    <Compile Include="Http\IWebApiConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CorrelationIdLayoutRenderer.cs" />
+    <Compile Include="Utils\Expressions\ExpressionExpanderExtensions.cs" />
+    <Compile Include="Utils\Expressions\ExpressionParameterRebinder.cs" />
+    <Compile Include="Utils\Expressions\PredicateBuilder.cs" />
+    <Compile Include="Utils\NinjectControllerFactory.cs" />
+    <Compile Include="Utils\NinjectDependencyResolver.cs" />
+    <Compile Include="Utils\NinjectDependencyScope.cs" />
+    <Compile Include="Utils\NLogExceptionFilter.cs" />
+    <Compile Include="Utils\NLogTraceFilter.cs" />
+    <Compile Include="Utils\SuppressFormsAuthenticationRedirectModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Create\Create.sql" />
-    <Content Include="Create\CreateDB.sql" />
-    <Content Include="Create\Tables\Addresses\Countries.sql" />
-    <Content Include="Create\Tables\Addresses\Districts.sql" />
-    <Content Include="Create\Tables\Addresses\Municipalities.sql" />
-    <Content Include="Create\Tables\Addresses\Settlements.sql" />
-    <Content Include="Create\Tables\System\ActionLogs.sql" />
-    <Content Include="Create\Tables\System\GParams.sql" />
-    <Content Include="Create\Tables\Users\Roles.sql" />
-    <Content Include="Create\Tables\Users\UserRoles.sql" />
-    <Content Include="Create\Tables\Users\Users.sql" />
-    <Content Include="Create\Tools\DocumentationScript.sql" />
-    <Content Include="Create\Tools\spDesc.sql" />
-    <Content Include="Create\Tools\sp_generate_inserts.sql" />
-    <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
