@@ -13,23 +13,11 @@ namespace Common.Utils
 {
     public class NLogTraceFilter : System.Web.Http.Filters.ActionFilterAttribute, System.Web.Mvc.IActionFilter
     {
-        public static readonly string MvcRequestIdKey = "__Log4NetTraceFilterRequestIdKey__";
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
-        }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            string userHostAddress = string.Empty;
-            if (actionContext.Request.Properties.ContainsKey("MS_HttpContext"))
-            {
-               userHostAddress = ((System.Web.HttpContextWrapper)actionContext.Request.Properties["MS_HttpContext"]).Request.UserHostAddress;
-            }
-
-            LogEventInfo infoEvent = new LogEventInfo(LogLevel.Info, string.Empty, string.Empty);
-            logger.Log(infoEvent);
+            logger.Info(string.Empty);
         }
 
         void System.Web.Mvc.IActionFilter.OnActionExecuted(ActionExecutedContext filterContext)
@@ -38,8 +26,7 @@ namespace Common.Utils
 
         void System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
-            LogEventInfo infoEvent = new LogEventInfo(LogLevel.Info, string.Empty, string.Empty);
-            logger.Log(infoEvent);
+            logger.Info(string.Empty);
         }
     }
 }

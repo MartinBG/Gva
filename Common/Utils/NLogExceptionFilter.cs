@@ -15,16 +15,12 @@ namespace Common.Utils
 
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            LogEventInfo errorEvent = new LogEventInfo(LogLevel.Error, string.Empty, string.Empty);
-            errorEvent.Exception = actionExecutedContext.Exception;
-            logger.Log(errorEvent);
+            logger.ErrorException(string.Empty, actionExecutedContext.Exception);
         }
 
         void System.Web.Mvc.IExceptionFilter.OnException(ExceptionContext filterContext)
         {
-            LogEventInfo errorEvent = new LogEventInfo(LogLevel.Error, string.Empty, string.Empty);
-            errorEvent.Exception = filterContext.Exception;
-            logger.Log(errorEvent);
+            logger.ErrorException(string.Empty, filterContext.Exception);
         }
     }
 }

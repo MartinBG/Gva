@@ -13,6 +13,8 @@ namespace Common.Utils
     [LayoutRenderer("requestId")]
     public class RequestIdLayoutRenderer : LayoutRenderer
     {
+        private static readonly string RequestIdKey = "__NLogRequestIdKey__";
+
         protected override void Append(StringBuilder builder, LogEventInfo ev)
         {
             HttpContext context = HttpContext.Current;
@@ -21,12 +23,12 @@ namespace Common.Utils
                 return;
             }
 
-            if (!context.Items.Contains(NLogTraceFilter.MvcRequestIdKey))
+            if (!context.Items.Contains(RequestIdKey))
             {
-                context.Items.Add(NLogTraceFilter.MvcRequestIdKey, Guid.NewGuid());
+                context.Items.Add(RequestIdKey, Guid.NewGuid());
             }
 
-            builder.Append(context.Items[NLogTraceFilter.MvcRequestIdKey]);
+            builder.Append(context.Items[RequestIdKey]);
         }
     }
 }
