@@ -186,9 +186,11 @@
     <Content Include="App\test\e2e\directives\sc-search\specs\filterSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
+    <Content Include="App\test\e2e\directives\sc-files\controllers\scFilesCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-x\controllers\scInputCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-x\controllers\scSelectCtrl.js" />
     <Content Include="App\test\e2e\directives\directiveTests.js" />
+    <Content Include="App\test\e2e\directives\sc-files\templates\scFiles.html" />
     <Content Include="App\test\e2e\directives\statesProvider.js" />
     <Content Include="App\test\e2e\directives\sc-x\specs\dateSpec.js" />
     <Content Include="App\test\e2e\directives\sc-x\specs\floatSpec.js" />
@@ -216,6 +218,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\test\e2e\directives\sc-files\specs\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
