@@ -3,7 +3,7 @@ GO
 
 CREATE TABLE [dbo].[ActionLogs](
     [Id]          [int] IDENTITY(1,1) NOT NULL,
-    [ActionDate]  [datetime]          NULL,
+    [LogDate]  [datetime]          NULL,
     [IP]          [nvarchar](50)      NULL,
     [RawUrl]      [nvarchar](500)     NULL,
     [Form]        [nvarchar](500)     NULL,
