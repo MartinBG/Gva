@@ -1,4 +1,4 @@
-﻿PRINT 'Common.GParams'
+﻿PRINT 'GParams'
 GO
 
 CREATE TABLE [dbo].[GParams] (

@@ -44,6 +44,8 @@
   <ItemGroup>
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Regs.sql" />
+    <Content Include="Create\Tables\LotPartOperations.sql" />
+    <Content Include="Create\Tables\LotSetParts.sql" />
     <Content Include="Create\Tables\TextBlobs.sql" />
     <Content Include="Create\Tables\LotPartExts.sql" />
     <Content Include="Create\Tables\LotCommitVersions.sql" />
@@ -52,7 +54,7 @@
     <Content Include="Create\Tables\NomValues.sql" />
     <Content Include="Create\Tables\Noms.sql" />
     <Content Include="Create\Tables\LotParts.sql" />
-    <Content Include="Create\Tables\LotTypes.sql" />
+    <Content Include="Create\Tables\LotSets.sql" />
     <Content Include="Create\Tables\Lots.sql" />
   </ItemGroup>
   <ItemGroup />

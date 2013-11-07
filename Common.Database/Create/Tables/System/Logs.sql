@@ -1,4 +1,4 @@
-﻿PRINT 'Common.Logs'
+﻿PRINT 'Logs'
 GO
 
 CREATE TABLE [dbo].[Logs](
