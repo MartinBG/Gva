@@ -1,6 +1,6 @@
-﻿<div class="btn-group dynamic-columns-btn pull-right" style="margin-left:5px" ng-show="dynamicColumns">
-  <button type="button" class="btn btn-default btn-sm" l10n-text="datatableDirective.deleteColumns"></button>
+﻿<div class="btn-group dynamic-columns-btn pull-right" ng-show="dynamicColumns">
   <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+    <span l10n-text="datatableDirective.deleteColumns"></span>
     <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
   </button>
@@ -12,6 +12,5 @@
   </div>
 </div>
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable">
-    <div ng-transclude></div>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" ng-transclude>
 </table>

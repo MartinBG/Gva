@@ -46,3 +46,21 @@ div.labeless
     color: #999;
     cursor: default;
 }
+
+.dataTables_filter input {
+    width: 200px;
+    display: inline-block;
+    height: 30px;
+    padding: 5px 10px;
+    line-height: 1.5;
+    color: rgb(85, 85, 85);
+    vertical-align: middle;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.dynamic-columns-btn {
+    margin-left:5px
+}
