@@ -23,8 +23,6 @@ namespace Gva.Web.App_Start
             RegisterGlobalFilters(GlobalFilters.Filters);
 
             RegisterRoutes(RouteTable.Routes);
-
-            ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("correlationId", typeof(RequestIdLayoutRenderer));
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

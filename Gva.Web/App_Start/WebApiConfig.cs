@@ -19,8 +19,6 @@ namespace Gva.Web
             RegisterGlobalFilters(config);
 
             RegisterRoutes(config);
-
-            ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("correlationId", typeof(RequestIdLayoutRenderer));
         }
 
         private static void RegisterGlobalFilters(HttpConfiguration config)
