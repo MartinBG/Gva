@@ -48,7 +48,7 @@
     <Content Include="Create\Tables\Addresses\Districts.sql" />
     <Content Include="Create\Tables\Addresses\Municipalities.sql" />
     <Content Include="Create\Tables\Addresses\Settlements.sql" />
-    <Content Include="Create\Tables\System\ActionLogs.sql" />
+    <Content Include="Create\Tables\System\Logs.sql" />
     <Content Include="Create\Tables\System\GParams.sql" />
     <Content Include="Create\Tables\Users\Roles.sql" />
     <Content Include="Create\Tables\Users\UserRoles.sql" />

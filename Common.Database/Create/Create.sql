@@ -21,7 +21,7 @@ GO
 
 -- System
 :r $(rootPath)"\Tables\System\GParams.sql"
-:r $(rootPath)"\Tables\System\ActionLogs.sql"
+:r $(rootPath)"\Tables\System\Logs.sql"
 
 -- Users
 :r $(rootPath)"\Tables\Users\Users.sql"
