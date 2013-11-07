@@ -8,9 +8,6 @@
         views: {
           'rootView': {
             templateUrl: 'navigation/templates/navbar.html'
-          },
-          'breadcrumbBarView': {
-            templateUrl: 'navigation/templates/navbar.html'
           }
         }
       }
