@@ -1,0 +1,13 @@
+﻿<div class="input-group input-group-sm">
+  <div class="form-control">
+    <span ng-show="!singleFile">{{uploadedFilesText}}
+    </span>
+    <a ng-show="singleFile" ng-href="{{fileUrl}}" target="_blank">
+      <span>{{uploadedFilesText}}
+      </span>
+    </a>
+  </div>
+  <div class="btn input-group-addon" type="button" ng-click="openModal()">
+    <i class="glyphicon glyphicon-file"></i>
+  </div>
+</div>

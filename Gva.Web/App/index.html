@@ -1,140 +1,149 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Лицензиране на авиационен персонал, въздухоплавателни средства и летателна годност</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="version" content="1.0.0#000000">
-    
-    <style type="text/css">
-        #initial-loader
-        {
-            margin-top: 100px;
-        }
+  <title>Лицензиране на авиационен персонал, въздухоплавателни средства и летателна годност</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="version" content="1.0.0#000000">
 
-        #initial-loader > h4
-        {
-            margin: 8px 0;
-            font-size: 15px;
-            font-family: inherit;
-            font-weight: bold;
-            line-height: 16px;
-            color: inherit;
-            vertical-align: middle;
-            text-align: center;
-            text-rendering: optimizelegibility;
-        }
+  <style type="text/css">
+    #initial-loader
+    {
+      margin-top: 100px;
+    }
 
-        #initial-loader > i
-        {
-            display: block;
-            background-image: url("/app/img/initial-loader.gif");
-            background-repeat: no-repeat;
-            background-position:center;
-            height: 32px;
-            margin: 5px;
-            padding: 0;
-        }
-    </style>
-    
-    <link href="/app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="/app/bower_components/select2/select2.css" rel="stylesheet">
-    <link href="/app/bower_components/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet">
-    <link href="/app/bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="/app/bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    #initial-loader > h4
+    {
+      margin: 8px 0;
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: bold;
+      line-height: 16px;
+      color: inherit;
+      vertical-align: middle;
+      text-align: center;
+      text-rendering: optimizelegibility;
+    }
 
-    <link href="/app/css/style.css" rel="stylesheet">
+    #initial-loader > i
+    {
+      display: block;
+      background-image: url("/app/img/initial-loader.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 32px;
+      margin: 5px;
+      padding: 0;
+    }
+  </style>
+
+  <link href="/app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="/app/bower_components/select2/select2.css" rel="stylesheet">
+  <link href="/app/bower_components/select2-bootstrap-css/select2-bootstrap.css" rel="stylesheet">
+  <link href="/app/bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+  <link href="/app/bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <link href="/app/bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+  <link href="/app/bower_components/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+  <link href="/app/css/style.css" rel="stylesheet">
 </head>
 <body id="ng-app" ng-app="app">
-    <noscript>
-        <h2 style="text-align: center;">Страницата не може да бъде показана, ако сте спрели изпълнението на JavaScript</h2>
-    </noscript>
-    
-    <div id="root" ui-view="rootView">
-        <div id="initial-loader">
-            <h4>Моля изчакайте...</h4>
-            <i></i>
-        </div>
-    </div>
+  <noscript>
+    <h2 style="text-align: center;">Страницата не може да бъде показана, ако сте спрели изпълнението на JavaScript</h2>
+  </noscript>
 
-    <!--[if lt IE 9]>
+  <div id="root" ui-view="rootView">
+    <div id="initial-loader">
+      <h4>Моля изчакайте...</h4>
+      <i></i>
+    </div>
+  </div>
+
+  <!--[if lt IE 9]>
       <script src="/app/bower_components/html5shiv/dist/html5shiv.js"></script>
       <script src="/app/bower_components/respond/respond.src.js"></script>
       <script src="/app/bower_components/jquery-legacy/jquery.js"></script>
       <script src="/app/bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="/app/bower_components/es5-shim/es5-shim.js"></script>
     <![endif]-->
-    <!--[if gte IE 9]><!-->
-      <script src="/app/bower_components/jquery-modern/jquery.js"></script>
-      <script src="/app/bower_components/lodash/dist/lodash.js"></script>
-    <!--<![endif]-->
+  <!--[if gte IE 9]><!-->
+  <script src="/app/bower_components/jquery-modern/jquery.js"></script>
+  <script src="/app/bower_components/lodash/dist/lodash.js"></script>
+  <!--<![endif]-->
 
-    <script src="/app/bower_components/select2/select2.js"></script>
-    <script src="/app/bower_components/angular/angular.js"></script>
-    <script src="/app/bower_components/angular-i18n/angular-locale_bg-bg.js"></script>
-    <script src="/app/bower_components/angular-l10n/build/l10n-with-tools.js"></script>
-    <script src="/app/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="/app/bower_components/angular-ui-select2/src/select2.js"></script>
-    <script src="/app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="/app/bower_components/bootstrap/js/collapse.js"></script>
-    <script src="/app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/app/bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-    <script src="/app/bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.bg.js"></script>
-    <script src="/app/bower_components/datatable/media/js/jquery.dataTables.js"></script>
-    <script src="/app/bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+  <script src="/app/bower_components/select2/select2.js"></script>
+  <script src="/app/bower_components/angular/angular.js"></script>
+  <script src="/app/bower_components/angular-i18n/angular-locale_bg-bg.js"></script>
+  <script src="/app/bower_components/angular-l10n/build/l10n-with-tools.js"></script>
+  <script src="/app/bower_components/angular-resource/angular-resource.js"></script>
+  <script src="/app/bower_components/angular-ui-select2/src/select2.js"></script>
+  <script src="/app/bower_components/angular-ui-utils/modules/jq/jq.js"></script>
+  <script src="/app/bower_components/angular-bootstrap/dist/ui-bootstrap-tpls-0.6.0-SNAPSHOT.js"></script>
+  <script src="/app/bower_components/bootstrap/js/collapse.js"></script>
+  <script src="/app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/app/bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+  <script src="/app/bower_components/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.bg.js"></script>
+  <script src="/app/bower_components/datatable/media/js/jquery.dataTables.js"></script>
+  <script src="/app/bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+  <script src="/app/bower_components/jquery-ui/ui/jquery.ui.widget.js"></script>
+  <script src="/app/bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="/app/bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
-    <script src="/app/js/l10n/l10nTexts_bg-bg.js"></script>
-    <script src="/app/js/app.js"></script>
-    <script src="/app/js/scaffolding/scaffolding.js"></script>
-    <script src="/app/js/scaffolding/directives/dateDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/integerDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/floatDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/textDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/selectDirective.js"></script>
-    <script src="/app/js/scaffolding/resources/nomenclature.js"></script>
-    <script src="/app/js/scaffolding/directives/searchDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/filterDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/buttonDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/datatableDirective.js"></script>
-    <script src="/app/js/scaffolding/directives/columnDirective.js"></script>
-    <script src="/app/js/navigation/navigation.js"></script>
-    <script src="/app/js/navigation/controllers/navbarCtrl.js"></script>
-    <script src="/app/js/navigation/controllers/breadcrumbBarCtrl.js"></script>
-    <script src="/app/js/navigation/providers/navigationConfigProvider.js"></script>
-    <script src="/app/js/navigation/providers/statesProvider.js"></script>
-    <script src="/app/js/users/users.js"></script>
-    <script src="/app/js/users/controllers/editCtrl.js"></script>
-    <script src="/app/js/users/controllers/searchCtrl.js"></script>
-    <script src="/app/js/users/providers/statesProvider.js"></script>
-    <script src="/app/js/users/resources/user.js"></script>
-    <script src="/app/js/users/resources/role.js"></script>
-    <script src="/app/build/templates/scaffolding.js"></script>
-    <script src="/app/build/templates/navigation.js"></script>
-    <script src="/app/build/templates/users.js"></script>
-    
-    <script type="text/ecmascript">
-      window.require = function (module) {
-        var match = /(\.\/)?(.+)/.exec(module);
-        if (match) {
-          return window[match[2]].exports;
-        }
-        return undefined;
+  <script src="/app/js/l10n/l10nTexts_bg-bg.js"></script>
+  <script src="/app/js/app.js"></script>
+  <script src="/app/js/scaffolding/scaffolding.js"></script>
+  <script src="/app/js/scaffolding/directives/files/filesCtrl.js"></script>
+  <script src="/app/js/scaffolding/directives/files/filesDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/files/filesModalCtrl.js"></script>
+  <script src="/app/js/scaffolding/directives/dateDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/integerDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/floatDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/textDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/selectDirective.js"></script>
+  <script src="/app/js/scaffolding/resources/nomenclature.js"></script>
+  <script src="/app/js/scaffolding/directives/searchDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/filterDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/buttonDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/datatableDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/columnDirective.js"></script>
+  <script src="/app/js/navigation/navigation.js"></script>
+  <script src="/app/js/navigation/controllers/navbarCtrl.js"></script>
+  <script src="/app/js/navigation/controllers/breadcrumbBarCtrl.js"></script>
+  <script src="/app/js/navigation/providers/navigationConfigProvider.js"></script>
+  <script src="/app/js/navigation/providers/statesProvider.js"></script>
+  <script src="/app/js/users/users.js"></script>
+  <script src="/app/js/users/controllers/editCtrl.js"></script>
+  <script src="/app/js/users/controllers/searchCtrl.js"></script>
+  <script src="/app/js/users/providers/statesProvider.js"></script>
+  <script src="/app/js/users/resources/user.js"></script>
+  <script src="/app/js/users/resources/role.js"></script>
+  <script src="/app/build/templates/scaffolding.js"></script>
+  <script src="/app/build/templates/navigation.js"></script>
+  <script src="/app/build/templates/users.js"></script>
+
+  <script type="text/ecmascript">
+    window.require = function (module) {
+      var match = /(\.\/)?(.+)/.exec(module);
+      if (match) {
+        return window[match[2]].exports;
       }
-      window.getData = window.require;
-    </script>
-    <script src="/app/schema/nomenclatures.sample.js"></script>
-    <script src="/app/schema/person-data.sample.js"></script>
-    <script src="/app/bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="/app/test/e2e/httpBackendConfiguratorProvider.js"></script>
-    <script src="/app/test/e2e/mocks/nomenclaturesHttp.js"></script>
-    <script src="/app/test/e2e/mocks/usersHttp.js"></script>
-    <script src="/app/test/e2e/e2eMocksSetup.js"></script>
+      return undefined;
+    }
+    window.getData = window.require;
+  </script>
+  <script src="/app/schema/nomenclatures.sample.js"></script>
+  <script src="/app/schema/person-data.sample.js"></script>
 
-    <script src="/app/test/e2e/directives/directiveTests.js"></script>
-    <script src="/app/test/e2e/directives/statesProvider.js"></script>
-    <script src="/app/build/templates/directive-tests.js"></script>
-    <script src="/app/test/e2e/directives/sc-x/controllers/scInputCtrl.js"></script>
-    <script src="/app/test/e2e/directives/sc-x/controllers/scSelectCtrl.js"></script>
-    <script src="/app/test/e2e/directives/sc-search/controllers/scSearchCtrl.js"></script>
+  <script src="/app/bower_components/angular-mocks/angular-mocks.js"></script>
+  <script src="/app/test/e2e/httpBackendConfiguratorProvider.js"></script>
+  <script src="/app/test/e2e/mocks/nomenclaturesHttp.js"></script>
+  <script src="/app/test/e2e/mocks/usersHttp.js"></script>
+  <script src="/app/test/e2e/e2eMocksSetup.js"></script>
+
+  <script src="/app/test/e2e/directives/directiveTests.js"></script>
+  <script src="/app/test/e2e/directives/statesProvider.js"></script>
+  <script src="/app/build/templates/directive-tests.js"></script>
+  <script src="/app/test/e2e/directives/sc-x/controllers/scInputCtrl.js"></script>
+  <script src="/app/test/e2e/directives/sc-x/controllers/scSelectCtrl.js"></script>
+  <script src="/app/test/e2e/directives/sc-search/controllers/scSearchCtrl.js"></script>
 </body>
 </html>
