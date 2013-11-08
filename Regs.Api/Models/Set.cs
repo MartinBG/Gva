@@ -22,6 +22,24 @@ namespace Regs.Api.Models
 
         public virtual ICollection<Lot> Lots { get; set; }
         public virtual ICollection<SetPart> SetParts { get; set; }
+
+        public void AddLot()
+        {
+            Lot lot = new Lot
+            {
+                NextIndex = 0
+            };
+
+            Commit index = new Commit
+            {
+                CommiterId = 1, //TO DO
+                CommitDate = DateTime.Now,
+                IsIndex = true
+            };
+
+            lot.Commits.Add(index);
+            this.Lots.Add(lot);
+        }
     }
 
     public class SetMap : EntityTypeConfiguration<Set>

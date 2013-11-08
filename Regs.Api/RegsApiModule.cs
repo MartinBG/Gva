@@ -1,5 +1,6 @@
 ﻿using Common.Data;
 using Ninject.Modules;
+using Regs.Api;
 using Regs.Api.Models;
 
 namespace Regs.Api
@@ -9,6 +10,7 @@ namespace Regs.Api
         public override void Load()
         {
             Bind<IDbConfiguration>().To<RegsDbConfiguration>();
+            Bind<LotManager.ILotManager>().To<LotManager.LotManager>();
         }
     }
 }
