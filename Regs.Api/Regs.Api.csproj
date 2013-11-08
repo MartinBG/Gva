@@ -38,6 +38,15 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.NamedScope">
+      <HintPath>..\packages\Ninject.Extensions.NamedScope.3.0.0.5\lib\net45-full\Ninject.Extensions.NamedScope.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -56,11 +65,12 @@
     <Compile Include="Models\PartExt.cs" />
     <Compile Include="Models\PartOperation.cs" />
     <Compile Include="Models\PartVersion.cs" />
-    <Compile Include="Models\RegisDbConfiguration.cs" />
+    <Compile Include="Models\RegsDbConfiguration.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\SetPart.cs" />
     <Compile Include="Models\TextBlob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegsApiModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

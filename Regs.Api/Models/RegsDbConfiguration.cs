@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
-    public class RegisDbConfiguration : IDbConfiguration
+    public class RegsDbConfiguration : IDbConfiguration
     {
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
