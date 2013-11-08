@@ -27,9 +27,3 @@ GO
 :r $(rootPath)"\Tables\Users\Users.sql"
 :r $(rootPath)"\Tables\Users\Roles.sql"
 :r $(rootPath)"\Tables\Users\UserRoles.sql"
-
----------------------------------------------------------------
--- Diagram
----------------------------------------------------------------
-
---:r $(rootPath)"\Diagram\Persons.sql"

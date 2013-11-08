@@ -13,7 +13,8 @@ CREATE TABLE [dbo].[LotPartVersions] (
     CONSTRAINT [FK_LotPartVersions_LotCommits]        FOREIGN KEY ([OriginalCommitId])    REFERENCES [dbo].[LotCommits]         ([LotCommitId]),
     CONSTRAINT [FK_LotPartVersions_LotParts]          FOREIGN KEY ([LotPartId])           REFERENCES [dbo].[LotParts]           ([LotPartId]),
     CONSTRAINT [FK_LotPartVersions_TextBlobs]         FOREIGN KEY ([TextBlobId])          REFERENCES [dbo].[TextBlobs]          ([TextBlobId]),
-    CONSTRAINT [FK_LotPartVersions_LotPartOperations] FOREIGN KEY ([LotPartOperationId])  REFERENCES [dbo].[LotPartOperations]  ([LotPartOperationId])
+    CONSTRAINT [FK_LotPartVersions_LotPartOperations] FOREIGN KEY ([LotPartOperationId])  REFERENCES [dbo].[LotPartOperations]  ([LotPartOperationId]),
+    CONSTRAINT [FK_LotPartVersions_Users]             FOREIGN KEY ([CreatorId])           REFERENCES [dbo].[Users]              ([UserId])
 )
 GO
 

@@ -2,22 +2,29 @@
 GO 
 
 CREATE TABLE [dbo].[NomValues](
-    [NomValueId]   INT            NOT NULL IDENTITY,
-    [NomId]        INT            NOT NULL,
-    [Code]         NVARCHAR (50)  NOT NULL,
-    [Name]         NVARCHAR (50)  NOT NULL,
-    [Alias]        NVARCHAR (50)  NULL,
-    [TextContent]  NVARCHAR (MAX) NOT NULL,
-    CONSTRAINT [PK_NomValues]      PRIMARY KEY ([NomValueId]),
-    CONSTRAINT [FK_NomValues_Noms] FOREIGN KEY ([NomId]) REFERENCES [dbo].[Noms] ([NomId])
+    [NomValueId]      INT            NOT NULL IDENTITY,
+    [NomId]           INT            NOT NULL,
+    [Code]            NVARCHAR (50)  NOT NULL,
+    [Name]            NVARCHAR (50)  NOT NULL,
+    [NameAlt]         NVARCHAR (50)  NOT NULL,
+    [ParentValueId]   INT            NULL,
+    [Alias]           NVARCHAR (50)  NULL,
+    [TextContent]     NVARCHAR (MAX) NOT NULL,
+    [IsActive]        BIT            NOT NULL,
+    CONSTRAINT [PK_NomValues]           PRIMARY KEY ([NomValueId]),
+    CONSTRAINT [FK_NomValues_Noms]      FOREIGN KEY ([NomId])         REFERENCES [dbo].[Noms] ([NomId]),
+    CONSTRAINT [FK_NomValues_NomValues] FOREIGN KEY ([ParentValueId]) REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
 exec spDescTable  N'NomValues', N'Стойности на номенклатури.'
-exec spDescColumn N'NomValues', N'NomValueId'   , N'Уникален системно генериран идентификатор.'
-exec spDescColumn N'NomValues', N'NomId'        , N'Номенклатура.'
-exec spDescColumn N'NomValues', N'Code'         , N'Код.'
-exec spDescColumn N'NomValues', N'Name'         , N'Наименование.'
-exec spDescColumn N'NomValues', N'Alias'        , N'Символен идентификатор.'
-exec spDescColumn N'NomValues', N'TextContent'  , N'Съдържание.'
+exec spDescColumn N'NomValues', N'NomValueId'    , N'Уникален системно генериран идентификатор.'
+exec spDescColumn N'NomValues', N'NomId'         , N'Номенклатура.'
+exec spDescColumn N'NomValues', N'Code'          , N'Код.'
+exec spDescColumn N'NomValues', N'Name'          , N'Наименование.'
+exec spDescColumn N'NomValues', N'NameAlt'       , N'Наименование на поддържащ език.'
+exec spDescColumn N'NomValues', N'ParentValueId' , N'Идентификатор на базовата номенклатура.'
+exec spDescColumn N'NomValues', N'Alias'         , N'Символен идентификатор.'
+exec spDescColumn N'NomValues', N'TextContent'   , N'Съдържание.'
+exec spDescColumn N'NomValues', N'IsActive'      , N'Маркер за валидност.'
 GO

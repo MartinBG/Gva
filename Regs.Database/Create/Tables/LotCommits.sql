@@ -10,7 +10,8 @@ CREATE TABLE [dbo].[LotCommits] (
     [IsIndex]             BIT           NOT NULL,
     CONSTRAINT [PK_Commits]               PRIMARY KEY ([LotCommitId]),
     CONSTRAINT [FK_LotCommits_LotCommits] FOREIGN KEY ([ParentLotCommitId]) REFERENCES [dbo].[LotCommits] ([LotCommitId]),
-    CONSTRAINT [FK_LotCommits_Lots]       FOREIGN KEY ([LotId])             REFERENCES [dbo].[Lots]       ([LotId])
+    CONSTRAINT [FK_LotCommits_Lots]       FOREIGN KEY ([LotId])             REFERENCES [dbo].[Lots]       ([LotId]),
+    CONSTRAINT [FK_LotCommits_Users]      FOREIGN KEY ([CommiterId])        REFERENCES [dbo].[Users]      ([UserId])
 )
 GO
 
