@@ -11,7 +11,7 @@
       { key: 'f444444444', relativePath: '', name: 'file4' }
     ];
     var singleFile = [
-      { key: 'f111111111', relativePath: 'app/', name: 'file1' }
+      { key: 'f111111111', relativePath: '', name: 'file1' }
     ];
 
     $scope.changeToMultipleFiles = function () {

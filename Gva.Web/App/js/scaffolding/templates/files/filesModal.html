@@ -7,7 +7,7 @@
   <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}" ng-show="!isUploading">
     <i class="glyphicon glyphicon-plus"></i>
     <span>Избери файлове</span>
-    <input type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple ng-disabled="false">
+    <input class="test-file-upload-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple ng-disabled="false">
   </span>
   <div style="margin-bottom: 14px; height: 15px; position: relative;"
     ng-show="isUploading">
@@ -23,7 +23,7 @@
     <i class="glyphicon glyphicon-download" style="position: absolute; right: 0px" ng-click="stop()"></i>
   </div>
   <ul class="tree tree-root" style="margin-top: 15px">
-    <li ng-repeat="data in fileHierarchy">
+    <li  class="test-files-root-li" ng-repeat="data in fileHierarchy">
       <!-- move ng-include to a separate element because of https://github.com/angular/angular.js/issues/3584 -->
       <ng-include src="'scaffolding/templates/files/filesModalTree.html'"></ng-include>
     </li>

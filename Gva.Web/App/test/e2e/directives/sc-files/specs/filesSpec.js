@@ -53,7 +53,7 @@
       });
     });
 
-    it('should display files.', function () {
+    it('should open modal.', function () {
       /*jshint quotmark:false */
 
       openModalBtnElem.click().then(function () {
@@ -61,6 +61,94 @@
             protractor.By.xpath("//div[@class='modal-body ng-scope']/span[last()]")
           ).getText().then(function (value) {
             expect(value).toEqual('Няма прикачени файлове');
+          });
+      });
+    });
+
+    it('should display file tree.', function () {
+      /*jshint quotmark:false */
+      multipleFilesBtnElem.click();
+
+      openModalBtnElem.click().then(function () {
+        ptor.findElements(
+          protractor.By.className('test-files-li')).then(function (data) {
+            expect(Object.keys(data).length).toEqual(3);
+          });
+        ptor.findElements(
+          protractor.By.className('test-files-root-li')).then(function (data) {
+            expect(Object.keys(data).length).toEqual(2);
+          });
+      });
+    });
+
+    it('should render download link inside modal.', function () {
+      /*jshint quotmark:false */
+      singleFileBtnElem.click();
+
+      openModalBtnElem.click().then(function () {
+        ptor.findElement(
+          protractor.By.className('test-download-link')).getText().then(function (value) {
+            expect(value).toEqual('file1');
+          });
+      });
+    });
+
+    it('should delete file', function () {
+      /*jshint quotmark:false */
+      singleFileBtnElem.click();
+      singleFileDirectiveSpan.getText().then(function (value) {
+        expect(value).toEqual('file1');
+      });
+      openModalBtnElem.click().then(function () {
+        ptor.findElement(
+          protractor.By.className('tree-image-close')).click().then(function () {
+            ptor.findElement(
+         protractor.By.xpath("//div[@class='modal-body ng-scope']/span[last()]")
+       ).getText().then(function (value) {
+              expect(value).toEqual('Няма прикачени файлове');
+            });
+          });
+      });
+    });
+
+    it('should upload file.', function () {
+
+      openModalBtnElem.click()
+        .then(function () {
+          return ptor.findElement(protractor.By.className('test-file-upload-button'))
+             .sendKeys('//filesCtrl.js');
+        })
+        .then(function () {
+          return ptor.findElement(
+        protractor.By.className('test-file-name')).getText();
+        })
+        .then(function (value) {
+          expect(value).toEqual('filesCtrl.js');
+        });
+        //.then(function () {
+        //  return ptor.findElement(protractor.By.className('btn-primary')).click();
+        //})
+        //.then(function () {
+        //  singleFileDirectiveSpan.getText().then(function (value) {
+        //    expect(value).toEqual('filesCtrl.js');
+        //  });
+        //});
+    });
+
+    it('should dismiss modal', function () {
+      multipleFilesBtnElem.click();
+
+      openModalBtnElem.click().then(function () {
+        return ptor.findElement(protractor.By.className('btn-default'))
+          .click();
+      })
+      .then(function () {
+        ptor.findElements(protractor.By.className('modal-body'))
+          .then(function (data) {
+            expect(Object.keys(data).length).toEqual(0);
+            filesDirectiveSpan.getText().then(function (value) {
+              expect(value).toEqual('4 прикачени файла.');
+            });
           });
       });
     });

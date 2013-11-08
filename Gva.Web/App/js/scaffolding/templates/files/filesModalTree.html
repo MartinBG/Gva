@@ -4,10 +4,10 @@
   ng-show="data.children.length"></i>
 
 <a ng-show="!data.item.pending && !data.children" ng-href="{{data.item.url}}" target="_blank">
-  <span>{{data.name}}
+  <span class="test-download-link">{{data.name}}
   </span>
 </a>
-<span ng-show="data.item.pending">{{data.name}}
+<span class="test-file-name" ng-show="data.item.pending">{{data.name}}
 </span>
 <span ng-show="data.children">{{data.name}}
 </span>
