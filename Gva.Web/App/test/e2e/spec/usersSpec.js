@@ -15,25 +15,23 @@
     });
 
     it('should display all users', function() {
-      var allUsernamesPromise = ptor.findElements(protractor.By.repeater('user in users')
-        .column('username'));
-
-      allUsernamesPromise.then(function (elements) {
-        var usernames = protractor.promise.fullyResolved(elements.map(function (el) {
-          return el.getText();
-        }));
-
-        expect(usernames).toEqual(['admin', 'peter', 'georgi', 'test1']);
-      });
+      var usernames = [];
+      ptor.findElements(protractor.By.css('sc-datatable tbody tr'))
+        .then(function(elements) {
+          usernames = protractor.promise.fullyResolved(elements.map(function (el) {
+            return el.findElement(protractor.By.css('td')).getText();
+          }));
+          expect(usernames).toEqual(['admin', 'peter', 'georgi', 'test1']);
+        });
     });
     
     it('should search by username', function() {
       ptor.findElement(protractor.By.css('div[name=username] > input')).sendKeys('peter');
 
       searchBtn.click().then(function() {
-        var firstUsername = ptor.findElement(protractor.By.repeater('user in users')
-          .row(0)
-          .column('username'));
+
+        var firstUsername = ptor.findElement(
+          protractor.By.css('sc-datatable tbody tr td:first-child'));
 
         firstUsername.getText().then(function(text) {
           expect(text).toEqual('peter');
@@ -45,13 +43,13 @@
       addBtn.click().then(function () {
         ptor.findElements(protractor.By.css('div[action=add] li')).then(function (filters) {
           filters[0].click().then(function () {
+
             ptor.findElement(protractor.By.css('div[name=fullname] > input'))
               .sendKeys('Administrator');
 
             searchBtn.click().then(function() {
-              var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                .row(0)
-                .column('fullname'));
+              var firstFullname = ptor.findElement(
+                protractor.By.css('sc-datatable tbody tr td:nth-child(2)'));
 
               firstFullname.getText().then(function(text) {
                 expect(text).toEqual('Administrator');
@@ -75,9 +73,9 @@
 
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
-                var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                  .row(0)
-                  .column('fullname'));
+
+                var firstFullname = ptor.findElement(
+                  protractor.By.css('sc-datatable tbody tr td:nth-child(2)'));
 
                 firstFullname.getText().then(function(text) {
                   expect(text).toEqual('Administrator');
@@ -94,9 +92,8 @@
 
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
-                var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                  .row(0)
-                  .column('fullname'));
+                var firstFullname = ptor.findElement(
+                  protractor.By.css('sc-datatable tbody tr td:nth-child(2)'));
 
                 firstFullname.getText().then(function(text) {
                   expect(text).toEqual('iztrit');
