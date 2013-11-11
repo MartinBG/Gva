@@ -110,7 +110,8 @@ module.exports = function (grunt) {
         options: {
           hostname: 'localhost',
           port: 52560,
-          bases: ['../', '../app']
+          bases: ['../', '../app'],
+          server: 'test/e2e/expressServer.js'
         }
       }
     },
