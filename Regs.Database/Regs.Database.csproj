@@ -56,6 +56,7 @@
     <Content Include="Create\Tables\LotParts.sql" />
     <Content Include="Create\Tables\LotSets.sql" />
     <Content Include="Create\Tables\Lots.sql" />
+    <Content Include="Insert\LotPartOperations.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

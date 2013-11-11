@@ -69,6 +69,7 @@
     <Compile Include="Data\IDbConfiguration.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Http\IMvcConfig.cs" />
     <Compile Include="Http\IWebApiConfig.cs" />
     <Compile Include="Models\CommonDbConfiguration.cs" />

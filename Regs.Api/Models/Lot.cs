@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Common.Data;
+using Microsoft.Practices.ServiceLocation;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Extensions;
 
 namespace Regs.Api.Models
 {
@@ -24,54 +27,89 @@ namespace Regs.Api.Models
         public virtual ICollection<Part> Parts { get; set; }
         public virtual Set Set { get; set; }
 
-        //public void AddPart(string schema, JObject json)
-        //{
-        //    Commit lastCommit = this.GetCommit();
-        //    SetPart setPart = this.Set.SetParts.FirstOrDefault(sp => sp.Path == schema);
+        public PartVersion AddPart(string path, JObject json)
+        {
+            SetPart setPart = this.Set.SetParts.FirstOrDefault(sp => sp.Path == path);
+            if (setPart == null)
+            {
+                throw new Exception("Cannot construct path from the specified schema.");
+            }
 
-        //    if (setPart == null)
-        //    {
-        //        throw new Exception("Cannot construct path from the specified schema.");
-        //    }
+            return this.AddPart(setPart, json);
+        }
 
-        //    string path = string.Empty;
-        //    foreach(var symbol in schema)
-        //    {
-        //        path += (symbol == '*' ? this.NextIndex++ : symbol);
-        //    }
+        public PartVersion AddPart(SetPart setPart, JObject json)
+        {
+            IUnitOfWork unitOfWork = ServiceLocator.Current.GetInstance<IUnitOfWork>();
+            Commit currCommit = this.GetCommit();
 
-        //    Part newPart = new Part
-        //    {
-        //        SetPartId = setPart.SetPartId,
-        //        LotId = this.LotId,
-        //        Path = path
-        //    };
-        //}
+            string path = string.Empty;
+            foreach (var symbol in setPart.Path)
+            {
+                path += (symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString());
+            }
+
+            Part newPart = new Part
+            {
+                SetPartId = setPart.SetPartId,
+                LotId = this.LotId,
+                Path = path
+            };
+            unitOfWork.DbContext.Set<Part>().Add(newPart);
+
+            string content = json.ToString();
+            string hash = content.CalculateSHA1();
+            TextBlob textBlob = unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == hash);
+
+            if (textBlob == null)
+            {
+                textBlob = new TextBlob
+                {
+                    Hash = hash,
+                    Size = content.Length,
+                    TextContent = content
+                };
+                unitOfWork.DbContext.Set<TextBlob>().Add(textBlob);
+            }
+
+            PartVersion partVersion = new PartVersion
+            {
+                OriginalCommitId = currCommit.CommitId,
+                PartOperationId = (int)PartOperation.Add,
+                CreatorId = 1, //TO DO - user context
+                CreateDate = DateTime.Now,
+                Part = newPart,
+                TextBlobId = textBlob.TextBlobId
+            };
+            currCommit.PartVersions.Add(partVersion);
+
+            return partVersion;
+        }
 
         public IEnumerable<PartVersion> GetParts(int? commitId = null)
         {
-            return this.GetPartsByOperations( new string[] {"Add", "Update"}, commitId);
+            return this.GetPartsByOperations( new PartOperation[] { PartOperation.Add, PartOperation.Update }, commitId);
         }
 
         public IEnumerable<PartVersion> GetAddedParts(int? commitId = null)
         {
-            return this.GetPartsByOperations(new string[] { "Add" }, commitId);
+            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Add }, commitId);
         }
 
         public IEnumerable<PartVersion> GetUpdatedParts(int? commitId = null)
         {
-            return this.GetPartsByOperations(new string[] { "Update" }, commitId);
+            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Update }, commitId);
         }
 
         public IEnumerable<PartVersion> DeletedParts(int? commitId = null)
         {
-            return this.GetPartsByOperations(new string[] { "Delete" }, commitId);
+            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Delete }, commitId);
         }
 
         public PartVersion GetPart(string path, int? commitId)
         {
             Commit commit = this.GetCommit(commitId);
-            PartVersion partVersion = commit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperation.Alias != "Delete");
+            PartVersion partVersion = commit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperationId != (int)PartOperation.Delete);
 
             if (partVersion == null)
             {
@@ -81,10 +119,11 @@ namespace Regs.Api.Models
             return partVersion;
         }
 
-        private IEnumerable<PartVersion> GetPartsByOperations(string[] partOperations, int? commitId)
+        private IEnumerable<PartVersion> GetPartsByOperations(PartOperation[] partOperations, int? commitId)
         {
+            IEnumerable<int> partOperationIds = partOperations.Select(po => (int)po);
             Commit commit = GetCommit(commitId);
-            IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperations.Contains(pv.PartOperation.Alias));
+            IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperationIds.Contains(pv.PartOperationId));
 
             return partVersions;
         }

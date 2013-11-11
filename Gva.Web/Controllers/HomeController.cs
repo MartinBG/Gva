@@ -23,7 +23,12 @@ namespace Gva.Web.Controllers
             {
                 Regs.Api.Models.Set set = lotManager.GetSet("testAlias");
 
-                set.AddLot();
+                Regs.Api.Models.Lot lot = lotManager.GetLot(3);
+
+                Regs.Api.Models.PartVersion partVersion = lot.AddPart("test/*/new/*", new Newtonsoft.Json.Linq.JObject { });
+                unitOfWork.DbContext.Set<Regs.Api.Models.PartVersion>().Add(partVersion);
+
+                IEnumerable<Regs.Api.Models.PartVersion> pvs = lot.GetAddedParts();
 
                 unitOfWork.Save();
 

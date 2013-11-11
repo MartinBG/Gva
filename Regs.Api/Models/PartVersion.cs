@@ -24,7 +24,6 @@ namespace Regs.Api.Models
         public DateTime CreateDate { get; set; }
 
         public virtual Commit OriginalCommit { get; set; }
-        public virtual PartOperation PartOperation { get; set; }
         public virtual Part Part { get; set; }
         public virtual TextBlob TextBlob { get; set; }
         public virtual ICollection<Commit> Commits { get; set; }
@@ -52,10 +51,6 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.OriginalCommit)
                 .WithMany()
                 .HasForeignKey(d => d.OriginalCommitId);
-
-            this.HasRequired(t => t.PartOperation)
-                .WithMany()
-                .HasForeignKey(d => d.PartOperationId);
 
             this.HasRequired(t => t.Part)
                 .WithMany(t => t.PartVersions)

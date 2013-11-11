@@ -11,6 +11,6 @@ namespace Regs.Api.LotManager
     {
         Set GetSet(int setId);
         Set GetSet(string alias);
-        Lot GetLot(int lotId, int? commitId);
+        Lot GetLot(int lotId, int? commitId = null);
     }
 }
