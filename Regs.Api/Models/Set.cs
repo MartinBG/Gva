@@ -32,8 +32,9 @@ namespace Regs.Api.Models
             Lot lot = new Lot
             {
                 NextIndex = 0,
-                SetId = this.SetId
+                Set = this
             };
+            unitOfWork.DbContext.Set<Lot>().Add(lot);
 
             Commit index = new Commit
             {

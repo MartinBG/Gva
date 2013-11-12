@@ -21,16 +21,16 @@ namespace Gva.Web.Controllers
         {
             using (var transaction = unitOfWork.BeginTransaction())
             {
-                Regs.Api.Models.Set set = lotManager.GetSet("testAlias");
+                Regs.Api.Models.Set set = lotManager.GetSet("Person");
 
-                Regs.Api.Models.Lot lot = lotManager.GetLot(3);
+                Regs.Api.Models.Lot lot; //= set.AddLot();
+                //unitOfWork.Save();
 
-                Regs.Api.Models.PartVersion partVersion = lot.AddPart("test/*/new/*", new Newtonsoft.Json.Linq.JObject { });
-                unitOfWork.DbContext.Set<Regs.Api.Models.PartVersion>().Add(partVersion);
+                lot = lotManager.GetLot(1);
 
-                IEnumerable<Regs.Api.Models.PartVersion> pvs = lot.GetAddedParts();
-
+                Regs.Api.Models.PartVersion partVersion = lot.AddPart("/addresses/*", new Newtonsoft.Json.Linq.JObject { });
                 unitOfWork.Save();
+                //IEnumerable<Regs.Api.Models.PartVersion> pvs = lot.GetAddedParts();
 
                 transaction.Commit();
             }

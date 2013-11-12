@@ -19,11 +19,11 @@ namespace Regs.Api.Models
         public int PartId { get; set; }
         public int TextBlobId { get; set; }
         public int OriginalCommitId { get; set; }
-        public int PartOperationId { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreateDate { get; set; }
 
         public virtual Commit OriginalCommit { get; set; }
+        public virtual PartOperation PartOperation { get; set; }
         public virtual Part Part { get; set; }
         public virtual TextBlob TextBlob { get; set; }
         public virtual ICollection<Commit> Commits { get; set; }
@@ -43,7 +43,7 @@ namespace Regs.Api.Models
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.TextBlobId).HasColumnName("TextBlobId");
             this.Property(t => t.OriginalCommitId).HasColumnName("OriginalCommitId");
-            this.Property(t => t.PartOperationId).HasColumnName("LotPartOperationId");
+            this.Property(t => t.PartOperation).HasColumnName("LotPartOperationId");
             this.Property(t => t.CreatorId).HasColumnName("CreatorId");
             this.Property(t => t.CreateDate).HasColumnName("CreateDate");
 

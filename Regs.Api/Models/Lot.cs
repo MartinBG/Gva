@@ -43,24 +43,29 @@ namespace Regs.Api.Models
             IUnitOfWork unitOfWork = ServiceLocator.Current.GetInstance<IUnitOfWork>();
             Commit currCommit = this.GetCommit();
 
-            string path = string.Empty;
+            StringBuilder path = new StringBuilder();
             foreach (var symbol in setPart.Path)
             {
-                path += (symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString());
+                path.Append((symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString()));
+            }
+
+            if (currCommit.PartVersions.Any(pv => pv.Part.Path == path.ToString()))
+            {
+                throw new Exception(string.Format("Specified path ({0}) is already in index", path.ToString()));
             }
 
             Part newPart = new Part
             {
                 SetPartId = setPart.SetPartId,
                 LotId = this.LotId,
-                Path = path
+                Path = path.ToString()
             };
             unitOfWork.DbContext.Set<Part>().Add(newPart);
 
             string content = json.ToString();
             string hash = content.CalculateSHA1();
-            TextBlob textBlob = unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == hash);
 
+            TextBlob textBlob = unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == hash);
             if (textBlob == null)
             {
                 textBlob = new TextBlob
@@ -72,16 +77,19 @@ namespace Regs.Api.Models
                 unitOfWork.DbContext.Set<TextBlob>().Add(textBlob);
             }
 
+
             PartVersion partVersion = new PartVersion
             {
                 OriginalCommitId = currCommit.CommitId,
-                PartOperationId = (int)PartOperation.Add,
+                PartOperation = PartOperation.Add,
                 CreatorId = 1, //TO DO - user context
                 CreateDate = DateTime.Now,
                 Part = newPart,
-                TextBlobId = textBlob.TextBlobId
+                TextBlob = textBlob
             };
+
             currCommit.PartVersions.Add(partVersion);
+            unitOfWork.DbContext.Set<PartVersion>().Add(partVersion);
 
             return partVersion;
         }
@@ -109,7 +117,7 @@ namespace Regs.Api.Models
         public PartVersion GetPart(string path, int? commitId)
         {
             Commit commit = this.GetCommit(commitId);
-            PartVersion partVersion = commit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperationId != (int)PartOperation.Delete);
+            PartVersion partVersion = commit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperation != PartOperation.Delete);
 
             if (partVersion == null)
             {
@@ -121,9 +129,8 @@ namespace Regs.Api.Models
 
         private IEnumerable<PartVersion> GetPartsByOperations(PartOperation[] partOperations, int? commitId)
         {
-            IEnumerable<int> partOperationIds = partOperations.Select(po => (int)po);
             Commit commit = GetCommit(commitId);
-            IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperationIds.Contains(pv.PartOperationId));
+            IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperations.Contains(pv.PartOperation));
 
             return partVersions;
         }
@@ -132,7 +139,7 @@ namespace Regs.Api.Models
         {
             Commit commit = commitId.HasValue ?
                 this.Commits.FirstOrDefault(c => c.CommitId == commitId) :
-                this.Commits.OrderByDescending(c => c.CommitDate).FirstOrDefault();
+                this.Commits.FirstOrDefault(c => c.IsIndex == true);
 
             if (commit == null)
             {

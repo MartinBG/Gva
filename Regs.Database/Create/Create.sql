@@ -33,3 +33,4 @@ GO
 -- Insert
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\LotPartOperations.sql"
+:r $(rootPath)\"..\Insert\TestData.sql"

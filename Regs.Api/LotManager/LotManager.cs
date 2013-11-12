@@ -42,7 +42,6 @@ namespace Regs.Api.LotManager
             if (commitId.HasValue)
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Include(c => c.PartVersions)
                     .FirstOrDefault(c => c.CommitId == commitId);
                 if (commit.LotId != lotId)
                 {
@@ -52,11 +51,17 @@ namespace Regs.Api.LotManager
             else
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Include(c => c.PartVersions)
-                    .Where(c => c.LotId == lotId).OrderByDescending(c => c.CommitDate).FirstOrDefault();
+                    .Where(c => c.LotId == lotId).FirstOrDefault(c => c.IsIndex == true);
             }
 
-            this.unitOfWork.DbContext.Set<TextBlob>().Load();
+            IEnumerable<PartVersion> partVersions = this.unitOfWork.DbContext.Set<PartVersion>()
+                .Include(pv => pv.TextBlob)
+                .Where(pv => pv.Commits.Select(c => c.CommitId).Contains(commit.CommitId));
+
+            if (partVersions.Any())
+            {
+                partVersions.AsQueryable().Load();
+            }
 
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
                 .Include(l => l.Parts)
