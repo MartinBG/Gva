@@ -15,12 +15,12 @@
       <div class="progress-bar" ng-style="{width: (100 * (filesUploaded / (filesLength || 1))) + '%'}">
       </div>
       <div style="position: absolute; text-align: center; width: 100%">
-        <span>{{filesUploaded}}</span>
+        <span class="test-files-uploaded">{{filesUploaded}}</span>
         /
                   <span>{{filesLength}}</span>
       </div>
     </div>
-    <i class="glyphicon glyphicon-download" style="position: absolute; right: 0px" ng-click="stop()"></i>
+    <i class="glyphicon glyphicon-download test-icon-stop" style="position: absolute; right: 0px" ng-click="stop()"></i>
   </div>
   <ul class="tree tree-root" style="margin-top: 15px">
     <li  class="test-files-root-li" ng-repeat="data in fileHierarchy">

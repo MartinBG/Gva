@@ -156,6 +156,7 @@ module.exports = function (grunt) {
   grunt.registerTask('debug', ['jshint:source', 'html2js' ]);
   grunt.registerTask('test', ['debug', 'express', 'exec:protractor']);
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
+  grunt.registerTask('test-server', ['express', 'express-keepalive']);
 
   grunt.registerTask('default', ['debug']);
   
