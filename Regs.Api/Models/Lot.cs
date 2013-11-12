@@ -1,13 +1,10 @@
-﻿using Common.Data;
-using Microsoft.Practices.ServiceLocation;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
+using Regs.Api.Managers.LobManager;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Common.Extensions;
 
 namespace Regs.Api.Models
 {
@@ -27,20 +24,19 @@ namespace Regs.Api.Models
         public virtual ICollection<Part> Parts { get; set; }
         public virtual Set Set { get; set; }
 
-        public PartVersion AddPart(string path, JObject json)
+        public PartVersion AddPart(string path, JObject json, ILobManager lobManager)
         {
             SetPart setPart = this.Set.SetParts.FirstOrDefault(sp => sp.Path == path);
             if (setPart == null)
             {
-                throw new Exception("Cannot construct path from the specified schema.");
+                throw new Exception(string.Format("No LotSetPart in the current lot has the specified path: {0}", path));
             }
 
-            return this.AddPart(setPart, json);
+            return this.AddPart(setPart, json, lobManager);
         }
 
-        public PartVersion AddPart(SetPart setPart, JObject json)
+        public PartVersion AddPart(SetPart setPart, JObject json, ILobManager lobManager)
         {
-            IUnitOfWork unitOfWork = ServiceLocator.Current.GetInstance<IUnitOfWork>();
             Commit currCommit = this.GetCommit();
 
             StringBuilder path = new StringBuilder();
@@ -54,29 +50,15 @@ namespace Regs.Api.Models
                 throw new Exception(string.Format("Specified path ({0}) is already in index", path.ToString()));
             }
 
+
             Part newPart = new Part
             {
-                SetPartId = setPart.SetPartId,
+                SetPart = setPart,
                 LotId = this.LotId,
                 Path = path.ToString()
             };
-            unitOfWork.DbContext.Set<Part>().Add(newPart);
 
-            string content = json.ToString();
-            string hash = content.CalculateSHA1();
-
-            TextBlob textBlob = unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == hash);
-            if (textBlob == null)
-            {
-                textBlob = new TextBlob
-                {
-                    Hash = hash,
-                    Size = content.Length,
-                    TextContent = content
-                };
-                unitOfWork.DbContext.Set<TextBlob>().Add(textBlob);
-            }
-
+            TextBlob textBlob = lobManager.AddLob(json.ToString());
 
             PartVersion partVersion = new PartVersion
             {
@@ -87,11 +69,35 @@ namespace Regs.Api.Models
                 Part = newPart,
                 TextBlob = textBlob
             };
-
             currCommit.PartVersions.Add(partVersion);
-            unitOfWork.DbContext.Set<PartVersion>().Add(partVersion);
 
             return partVersion;
+        }
+
+        public PartVersion UpdatePart(string path, JObject json, ILobManager lobManager)
+        {
+            Commit currCommit = this.GetCommit();
+            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path);
+
+            if (partVersion == null)
+            {
+                throw new Exception(string.Format("No LotPart found having the specified path: {0}", path));
+            }
+
+            return this.UpdatePartVersion(partVersion, json, lobManager);
+        }
+
+        public PartVersion UpdatePart(SetPart setPart, JObject json, ILobManager lobManager)
+        {
+            Commit currCommit = this.GetCommit();
+            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.SetPartId == setPart.SetPartId);
+
+            if (partVersion == null)
+            {
+                throw new Exception(string.Format("No LotPart found having the spcified setPart with id {1}", setPart.SetPartId));
+            }
+
+            return this.UpdatePartVersion(partVersion, json, lobManager);
         }
 
         public IEnumerable<PartVersion> GetParts(int? commitId = null)
@@ -123,6 +129,14 @@ namespace Regs.Api.Models
             {
                 throw new Exception(string.Format("Invalid path: {0}", path));
             }
+
+            return partVersion;
+        }
+
+        private PartVersion UpdatePartVersion(PartVersion partVersion, JObject json, ILobManager lobManager)
+        {
+            partVersion.TextBlob = lobManager.AddLob(json.ToString());
+            partVersion.PartOperation = PartOperation.Update;
 
             return partVersion;
         }

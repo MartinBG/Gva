@@ -1,12 +1,7 @@
-﻿using Common.Data;
-using Microsoft.Practices.ServiceLocation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
@@ -27,23 +22,19 @@ namespace Regs.Api.Models
 
         public Lot AddLot()
         {
-            IUnitOfWork unitOfWork = ServiceLocator.Current.GetInstance<IUnitOfWork>();
-
-            Lot lot = new Lot
-            {
-                NextIndex = 0,
-                Set = this
-            };
-            unitOfWork.DbContext.Set<Lot>().Add(lot);
-
             Commit index = new Commit
             {
                 CommiterId = 1, //TO DO - user context
                 CommitDate = DateTime.Now,
-                IsIndex = true,
-                Lot = lot
+                IsIndex = true
             };
-            unitOfWork.DbContext.Set<Commit>().Add(index);
+
+            Lot lot = new Lot
+            {
+                NextIndex = 0,
+            };
+            lot.Commits.Add(index);
+            this.Lots.Add(lot);
 
             return lot;
         }

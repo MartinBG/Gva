@@ -2,12 +2,10 @@
 using Regs.Api.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq;
 
-namespace Regs.Api.LotManager
+namespace Regs.Api.Managers.LotManager
 {
     public class LotManager : ILotManager
     {
@@ -42,6 +40,7 @@ namespace Regs.Api.LotManager
             if (commitId.HasValue)
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
+                    .Include(c => c.PartVersions)
                     .FirstOrDefault(c => c.CommitId == commitId);
                 if (commit.LotId != lotId)
                 {
@@ -51,6 +50,7 @@ namespace Regs.Api.LotManager
             else
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
+                    .Include(c => c.PartVersions)
                     .Where(c => c.LotId == lotId).FirstOrDefault(c => c.IsIndex == true);
             }
 
@@ -58,7 +58,7 @@ namespace Regs.Api.LotManager
                 .Include(pv => pv.TextBlob)
                 .Where(pv => pv.Commits.Select(c => c.CommitId).Contains(commit.CommitId));
 
-            if (partVersions.Any())
+            if (partVersions.ToArray().Length != 0)
             {
                 partVersions.AsQueryable().Load();
             }

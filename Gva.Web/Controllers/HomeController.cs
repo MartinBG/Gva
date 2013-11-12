@@ -9,12 +9,14 @@ namespace Gva.Web.Controllers
     public class HomeController : Controller
     {
         private Common.Data.IUnitOfWork unitOfWork;
-        private Regs.Api.LotManager.ILotManager lotManager;
+        private Regs.Api.Managers.LotManager.ILotManager lotManager;
+        private Regs.Api.Managers.LobManager.ILobManager lobManager;
 
-        public HomeController(Common.Data.IUnitOfWork unitOfWork, Regs.Api.LotManager.ILotManager lotManager)
+        public HomeController(Common.Data.IUnitOfWork unitOfWork, Regs.Api.Managers.LotManager.ILotManager lotManager, Regs.Api.Managers.LobManager.ILobManager lobManager)
         {
             this.unitOfWork = unitOfWork;
             this.lotManager = lotManager;
+            this.lobManager = lobManager;
         }
 
         public ActionResult Test()
@@ -23,14 +25,13 @@ namespace Gva.Web.Controllers
             {
                 Regs.Api.Models.Set set = lotManager.GetSet("Person");
 
-                Regs.Api.Models.Lot lot; //= set.AddLot();
-                //unitOfWork.Save();
+                Regs.Api.Models.Lot lot = set.AddLot();
+                unitOfWork.Save();
 
                 lot = lotManager.GetLot(1);
-
-                Regs.Api.Models.PartVersion partVersion = lot.AddPart("/addresses/*", new Newtonsoft.Json.Linq.JObject { });
+                Regs.Api.Models.PartVersion partVersion = lot.AddPart("/addresses/*", new Newtonsoft.Json.Linq.JObject { }, lobManager);
+                //Regs.Api.Models.PartVersion partVersion = lot.UpdatePart("/addresses/0", Newtonsoft.Json.Linq.JObject.Parse(@"{ CPU: 'Intel', Drives: [ 'DVD read/writer', '500 gigabyte hard drive']}"), lobManager);
                 unitOfWork.Save();
-                //IEnumerable<Regs.Api.Models.PartVersion> pvs = lot.GetAddedParts();
 
                 transaction.Commit();
             }
