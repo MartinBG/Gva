@@ -1,5 +1,5 @@
 ﻿/*global require, module, setTimeout*/
-(function () {
+(function (require, module, setTimeout) {
   'use strict';
   var express = require('express');
   var fs = require('fs');
@@ -7,8 +7,10 @@
   var files = {};
 
   function generateGuid() {
+    /*jshint bitwise: false*/
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      var r = Math.floor(Math.random() * 16),
+          v = c === 'x' ? r : (r&0x3|0x8);
       return v.toString(16);
     });
   }
@@ -26,11 +28,11 @@
   app.use(express.multipart());
 
   app.post('/file', function(req, res) {
-    var fileKey = generateGuid();
-    var currentFile = req.files.files[0];
-
+    var fileKey = generateGuid(),
+      currentFile = req.files.files[0];
+    
     if (currentFile.name === 'filesDirective.js') {
-      setTimeout(function(){
+      setTimeout(function() {
         processFile(fileKey, currentFile, res);
       }, 3000);
     } else {
@@ -40,12 +42,13 @@
   
   app.get('/file', function(req, res) {
     var fileName = req.query.fileName,
-      fileKey = req.query.fileKey;
-    var file = files[fileKey];
+      fileKey = req.query.fileKey,
+      file = files[fileKey];
+    
     res.setHeader('Content-disposition', 'attachment; filename=' + fileName);
     res.setHeader('Content-type', 'application/octet-stream');
-    res.send(file);  
+    res.send(file);
   });
   module.exports = app;
-}());
+}(require, module, setTimeout));
 
