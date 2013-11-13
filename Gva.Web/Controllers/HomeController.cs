@@ -25,12 +25,13 @@ namespace Gva.Web.Controllers
             {
                 Regs.Api.Models.Set set = lotManager.GetSet("Person");
 
-                Regs.Api.Models.Lot lot = set.AddLot();
-                unitOfWork.Save();
+                Regs.Api.Models.Lot lot; //= set.AddLot();
+                //unitOfWork.Save();
 
                 lot = lotManager.GetLot(1);
-                Regs.Api.Models.PartVersion partVersion = lot.AddPart("/addresses/*", new Newtonsoft.Json.Linq.JObject { }, lobManager);
-                //Regs.Api.Models.PartVersion partVersion = lot.UpdatePart("/addresses/0", Newtonsoft.Json.Linq.JObject.Parse(@"{ CPU: 'Intel', Drives: [ 'DVD read/writer', '500 gigabyte hard drive']}"), lobManager);
+                //Regs.Api.Models.PartVersion partVersion = lot.AddPart("/addresses/*", new Newtonsoft.Json.Linq.JObject { }, lobManager);
+                //Regs.Api.Models.PartVersion partVersion = lot.UpdatePart("/addresses/2", Newtonsoft.Json.Linq.JObject.Parse(@"{ CPU: 'Intel', Drives: [ 'DVD read/writer', '500 gigabyte hard drive']}"), lobManager);
+                lot.Commit(new List<string> { "/addresses/2" });
                 unitOfWork.Save();
 
                 transaction.Commit();
