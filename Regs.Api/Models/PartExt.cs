@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
@@ -36,7 +32,7 @@ namespace Regs.Api.Models
 
             // Relationships
             this.HasRequired(t => t.Part)
-                .WithOptional(t => t.PartExt);
+                .WithOptional();
 
             this.HasRequired(t => t.CommitedPartVersion)
                 .WithMany()

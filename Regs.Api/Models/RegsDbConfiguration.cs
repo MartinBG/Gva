@@ -17,7 +17,6 @@ namespace Regs.Api.Models
             modelBuilder.Configurations.Add(new NomMap());
             modelBuilder.Configurations.Add(new NomValueMap());
             modelBuilder.Configurations.Add(new PartMap());
-            modelBuilder.Configurations.Add(new PartExtMap());
             modelBuilder.Configurations.Add(new PartVersionMap());
             modelBuilder.Configurations.Add(new SetMap());
             modelBuilder.Configurations.Add(new SetPartMap());
