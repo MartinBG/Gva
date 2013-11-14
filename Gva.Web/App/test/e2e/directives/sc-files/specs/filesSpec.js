@@ -1,6 +1,8 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
+
+  var _ = require('lodash');
 
   describe('Sc-files directive', function () {
     var ptor = protractor.getInstance(),
@@ -63,7 +65,7 @@
       .then(function () {
         ptor.findElements(protractor.By.className('modal-body'))
           .then(function (data) {
-            expect(Object.keys(data).length).toEqual(0);
+            expect(_.keys(data).length).toEqual(0);
             filesDirectiveSpan.getText().then(function (value) {
               expect(value).toEqual('4 прикачени файла.');
             });
@@ -76,11 +78,11 @@
       openModalBtnElem.click().then(function () {
         ptor.findElements(
           protractor.By.className('test-files-li')).then(function (data) {
-            expect(Object.keys(data).length).toEqual(3);
+            expect(_.keys(data).length).toEqual(3);
           });
         ptor.findElements(
           protractor.By.className('test-files-root-li')).then(function (data) {
-            expect(Object.keys(data).length).toEqual(2);
+            expect(_.keys(data).length).toEqual(2);
           });
       });
     });
@@ -162,7 +164,7 @@
           return ptor.wait(function () {
             return ptor.findElements(protractor.By.className('modal-body'))
               .then(function (elements) {
-                return Object.keys(elements).length === 0;
+                return _.keys(elements).length === 0;
               });
           }, 5000);
         })
@@ -173,4 +175,4 @@
         });
     });
   });
-}(protractor));
+}(protractor, describe, beforeEach, it, expect, require));
