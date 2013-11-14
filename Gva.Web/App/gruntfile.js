@@ -110,7 +110,8 @@ module.exports = function (grunt) {
         options: {
           hostname: 'localhost',
           port: 52560,
-          bases: ['../', '../app']
+          bases: ['../', '../app'],
+          server: 'test/e2e/expressServer.js'
         }
       }
     },
@@ -155,6 +156,7 @@ module.exports = function (grunt) {
   grunt.registerTask('debug', ['jshint:source', 'html2js' ]);
   grunt.registerTask('test', ['debug', 'express', 'exec:protractor']);
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
+  grunt.registerTask('test-server', ['express', 'express-keepalive']);
 
   grunt.registerTask('default', ['debug']);
   

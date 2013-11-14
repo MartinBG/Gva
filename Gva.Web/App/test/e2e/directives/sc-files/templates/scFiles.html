@@ -1,0 +1,24 @@
+﻿<div class="container page-content">
+  <form name="form" class="form-inline" role="form">
+    <div class="well">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label">File directive</label>
+          <sc-files name="filesDir" ng-model="files"></sc-files>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeToMultipleFiles()" name="multipleFilesBtn" class="btn-sm btn-info">Change to multiple files</button>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeToSingleFile()" name="singleFileBtn" class="btn-sm btn-info">Change to single file</button>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <button type="button" ng-click="changeToNoFiles()" name="noFilesBtn" class="btn-sm btn-info">Change to no files</button>
+        </div>
+        <div class="form-group col-sm-3 labeless"">
+          <label>model files count = <span name="filesLabel">{{files.length}}</span></label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

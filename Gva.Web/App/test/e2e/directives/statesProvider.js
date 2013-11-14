@@ -35,13 +35,25 @@
             controller: 'directive-tests.ScSearchCtrl'
           }
         }
+      },
+      'scFilesTest': {
+        name: 'directive-tests.files',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/files',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-files/templates/scFiles.html',
+            controller: 'directive-tests.ScFilesCtrl'
+          }
+        }
       }
     };
 
     $stateProvider
       .state(this.states.scInputTest)
       .state(this.states.scSelectTest)
-      .state(this.states.scSearchTest);
+      .state(this.states.scSearchTest)
+      .state(this.states.scFilesTest);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];
