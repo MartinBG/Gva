@@ -50,8 +50,6 @@
       scSearch.registerFilter(name, $scope);
     }
 
-    FilterDirective.$inject = ['l10n'];
-
     return {
       restrict: 'E',
       require: '?^scSearch',
@@ -59,10 +57,12 @@
       scope: {
         removable: '&'
       },
-      templateUrl: 'scaffolding/templates/filterTemplate.html',
+      templateUrl: 'scaffolding/directives/search/filterDirective.html',
       compile: FilterCompile
     };
   }
+
+  FilterDirective.$inject = ['l10n'];
 
   angular.module('scaffolding').directive('scFilter', FilterDirective);
 }(angular));

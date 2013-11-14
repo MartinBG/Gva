@@ -13,7 +13,7 @@
         controller: 'scaffolding.FilesCtrl',
         require: ['scFiles', '?ngModel'],
         replace: true,
-        templateUrl: 'scaffolding/templates/files/files.html',
+        templateUrl: 'scaffolding/directives/files/filesDirective.html',
         link: function link(scope, iElement, iAttrs, controllers) {
           var filesCtrl = controllers[0],
               ngModelCtrl = controllers[1];

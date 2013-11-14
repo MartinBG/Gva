@@ -13,7 +13,7 @@ Usage <sc-datatable ng-model="data"
       restrict: 'E',
       replace: false,
       transclude: true,
-      templateUrl:'scaffolding/templates/datatableTemplate.html',
+      templateUrl:'scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         ngModel: '=',
         filterable: '@',
@@ -99,6 +99,4 @@ Usage <sc-datatable ng-model="data"
   DatatableDirective.$inject = ['l10n'];
 
   angular.module('scaffolding').directive('scDatatable', DatatableDirective);
-
-
 }(angular));

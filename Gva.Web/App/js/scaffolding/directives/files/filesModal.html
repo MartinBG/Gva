@@ -25,7 +25,7 @@
   <ul class="tree tree-root" style="margin-top: 15px">
     <li  class="test-files-root-li" ng-repeat="data in fileHierarchy">
       <!-- move ng-include to a separate element because of https://github.com/angular/angular.js/issues/3584 -->
-      <ng-include src="'scaffolding/templates/files/filesModalTree.html'"></ng-include>
+      <ng-include src="'scaffolding/directives/files/filesModalTree.html'"></ng-include>
     </li>
   </ul>
   <span class="test-no-files-span" ng-show="!fileHierarchy.length" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFilesAttached"></span>

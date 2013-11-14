@@ -75,7 +75,7 @@
       restrict: 'E',
       transclude: true,
       replace: true,
-      templateUrl: 'scaffolding/templates/searchTemplate.html',
+      templateUrl: 'scaffolding/directives/search/searchDirective.html',
       scope: {
         selectedFilters: '=',
         btnClasses: '@'

@@ -2,17 +2,17 @@
 (function (angular) {
   'use strict';
 
-  function scSelectDirective() {
+  function SelectDirective() {
     return {
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/templates/selectTemplate.html',
+      templateUrl: 'scaffolding/directives/select/selectDirective.html',
       compile: function (tElement, tAttrs) {
         tAttrs.$set('uiSelect2', tAttrs.scSelect);
       }
     };
   }
 
-  angular.module('scaffolding').directive('scSelect', scSelectDirective);
+  angular.module('scaffolding').directive('scSelect', SelectDirective);
 }(angular));

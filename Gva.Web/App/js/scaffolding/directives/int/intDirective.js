@@ -2,13 +2,13 @@
 (function (angular, _) {
   'use strict';
 
-  function IntegerDirective() {
+  function IntDirective() {
     return {
       priority: 110,
       restrict: 'E',
       replace: true,
       require: '?ngModel',
-      templateUrl: 'scaffolding/templates/integerTemplate.html',
+      templateUrl: 'scaffolding/directives/int/intDirective.html',
       link: function ($scope, element, attrs, ngModel) {
         if (!ngModel) {
           return;
@@ -43,5 +43,5 @@
     };
   }
 
-  angular.module('scaffolding').directive('scInt', IntegerDirective);
+  angular.module('scaffolding').directive('scInt', IntDirective);
 }(angular, _));

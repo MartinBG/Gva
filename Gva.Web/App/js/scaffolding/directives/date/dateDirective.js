@@ -8,7 +8,7 @@
       restrict: 'E',
       replace: true,
       require: '?ngModel',
-      templateUrl: 'scaffolding/templates/dateTemplate.html',
+      templateUrl: 'scaffolding/directives/date/dateDirective.html',
       link: function (scope, element, attrs, ngModel) {
         if (!ngModel) {
           return;

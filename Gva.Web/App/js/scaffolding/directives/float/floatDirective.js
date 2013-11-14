@@ -8,7 +8,7 @@
       restrict: 'E',
       replace: true,
       require: '?ngModel',
-      templateUrl: 'scaffolding/templates/floatTemplate.html',
+      templateUrl: 'scaffolding/directives/float/floatDirective.html',
       link: function (scope, element, attrs, ngModel) {
         if (!ngModel) {
           return;

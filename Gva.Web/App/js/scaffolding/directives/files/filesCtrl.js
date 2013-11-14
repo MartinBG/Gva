@@ -12,7 +12,7 @@
 
     $scope.openModal = function () {
       var modal = $modal.open({
-        templateUrl: 'scaffolding/templates/files/filesModal.html',
+        templateUrl: 'scaffolding/directives/files/filesModal.html',
         controller: 'scaffolding.FilesModalCtrl',
         backdrop: 'static',
         keyboard: false,

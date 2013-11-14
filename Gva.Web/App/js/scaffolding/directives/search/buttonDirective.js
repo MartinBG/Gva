@@ -52,7 +52,7 @@
         action: '@',
         icon: '@'
       },
-      templateUrl: 'scaffolding/templates/buttonTemplate.html',
+      templateUrl: 'scaffolding/directives/search/buttonDirective.html',
       compile: ButtonCompile
     };
   }
