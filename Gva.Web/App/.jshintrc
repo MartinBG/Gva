@@ -17,9 +17,5 @@
   "strict": true,
   "trailing": true,
   "maxlen": 100,
-  "quotmark": "single",
-  "globals": {
-      "angular": true,
-      "_": true
-  }
+  "quotmark": "single"
 }

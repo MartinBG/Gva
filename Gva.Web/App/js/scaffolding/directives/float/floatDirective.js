@@ -1,4 +1,6 @@
 ﻿// Usage: <sc-float ng-model="<model_name>"></sc-float>
+
+/*global angular, _*/
 (function (angular, _) {
   'use strict';
 

@@ -1,5 +1,5 @@
 ﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor) {
+(function (protractor, describe, beforeEach, it, expect) {
   'use strict';
 
   describe('Edit user page', function () {
@@ -58,4 +58,4 @@
       });
     });
   });
-}(protractor));
+}(protractor, describe, beforeEach, it, expect));

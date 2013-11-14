@@ -1,4 +1,5 @@
 ﻿// Usage: <sc-search selected-filters="" btn-classes=""></sc-search>
+
 /*globals angular, _*/
 (function (angular, _) {
   'use strict';

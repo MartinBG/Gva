@@ -1,4 +1,6 @@
 ﻿//Usage: <sc-select sc-select="{ select2 options object }" ng-model="model"></sc-select>
+
+/*global angular*/
 (function (angular) {
   'use strict';
 

@@ -1,4 +1,6 @@
 ﻿// Usage: <sc-int ng-model="<model_name>"></sc-int>
+
+/*global angular, _*/
 (function (angular, _) {
   'use strict';
 

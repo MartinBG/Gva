@@ -1,4 +1,6 @@
 ﻿// Usage: <sc-filter type="" name="" removable="" class="" options="" label=""></sc-filter>
+
+/*global angular*/
 (function (angular) {
   'use strict';
 

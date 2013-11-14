@@ -1,4 +1,5 @@
 ﻿// Usage: <sc-button action="" class="" text="" icon=""></sc-button>
+
 /*globals angular, $ */
 (function (angular, $) {
   'use strict';

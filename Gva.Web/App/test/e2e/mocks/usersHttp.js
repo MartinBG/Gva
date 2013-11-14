@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     var roles = [{

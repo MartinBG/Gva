@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
   angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function(l10n){
     l10n.add('bg-bg', {

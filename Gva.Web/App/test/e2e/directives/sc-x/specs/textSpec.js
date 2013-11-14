@@ -1,5 +1,5 @@
 ﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor) {
+(function (protractor, describe, beforeEach, it, expect) {
   'use strict';
 
   describe('Sc-text directive', function() {
@@ -38,4 +38,4 @@
       });
     });
   });
-}(protractor));
+}(protractor, describe, beforeEach, it, expect));

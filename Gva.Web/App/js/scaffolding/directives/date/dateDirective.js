@@ -1,4 +1,6 @@
 ﻿// Usage: <sc-date ng-model="<model_name>" />
+
+/*global angular*/
 (function (angular) {
   'use strict';
 

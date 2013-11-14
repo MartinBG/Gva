@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿/*global angular*/
+(function (angular) {
   /*jshint newcap: false */
   'use strict';
   function $HttpBackendConfiguratorProvider() {

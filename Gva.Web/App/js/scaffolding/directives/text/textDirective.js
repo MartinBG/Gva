@@ -1,4 +1,6 @@
 ﻿// Usage: <sc-text ng-model="<model_name>"></sc-text>
+
+/*global angular*/
 (function (angular) {
   'use strict';
 

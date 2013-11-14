@@ -1,4 +1,5 @@
-﻿(function (angular) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function StatesProvider($stateProvider, navigationStatesProvider) {

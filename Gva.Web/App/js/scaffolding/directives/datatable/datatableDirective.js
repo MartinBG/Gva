@@ -6,6 +6,8 @@ Usage <sc-datatable ng-model="data"
         dynamic-columns="true|false">
  </sc-datatable>
 */
+
+/*global angular*/
 (function (angular) {
   'use strict';
   function DatatableDirective(l10n) {

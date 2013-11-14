@@ -7,6 +7,8 @@ Usage: <sc-column model-name="property"
         [title]>
         </sc-column>
 */
+
+/*global angular*/
 (function (angular) {
   'use strict';
 
