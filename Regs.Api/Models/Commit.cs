@@ -24,7 +24,7 @@ namespace Regs.Api.Models
 
         public virtual Commit ParentCommit { get; set; }
         public virtual Lot Lot { get; set; }
-        public virtual User User { get; set; }
+        public virtual User Commiter { get; set; }
         public virtual ICollection<PartVersion> PartVersions { get; set; }
     }
 
@@ -60,9 +60,10 @@ namespace Regs.Api.Models
 
             this.HasRequired(t => t.Lot)
                 .WithMany(t => t.Commits)
-                .HasForeignKey(d => d.LotId);
+                .HasForeignKey(d => d.LotId)
+                .WillCascadeOnDelete();
 
-            this.HasRequired(t => t.User)
+            this.HasRequired(t => t.Commiter)
                 .WithMany()
                 .HasForeignKey(d => d.CommiterId);
 

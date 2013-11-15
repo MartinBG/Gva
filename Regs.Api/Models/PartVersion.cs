@@ -54,7 +54,8 @@ namespace Regs.Api.Models
 
             this.HasRequired(t => t.Part)
                 .WithMany(t => t.PartVersions)
-                .HasForeignKey(d => d.PartId);
+                .HasForeignKey(d => d.PartId)
+                .WillCascadeOnDelete();
 
             this.HasRequired(t => t.TextBlob)
                 .WithMany()

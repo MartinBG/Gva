@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
@@ -20,11 +21,11 @@ namespace Regs.Api.Models
         public virtual ICollection<Lot> Lots { get; set; }
         public virtual ICollection<SetPart> SetParts { get; set; }
 
-        public Lot AddLot()
+        public Lot AddLot(UserContext userContext)
         {
             Commit index = new Commit
             {
-                CommiterId = 1, //TO DO - user context
+                CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
                 IsIndex = true
             };

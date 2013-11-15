@@ -72,12 +72,16 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Http\IMvcConfig.cs" />
     <Compile Include="Http\IWebApiConfig.cs" />
+    <Compile Include="Infrastructure\IUserContextProvider.cs" />
+    <Compile Include="Infrastructure\UserContext.cs" />
+    <Compile Include="Infrastructure\UserContextProvider.cs" />
     <Compile Include="Models\CommonDbConfiguration.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="Utils\Expressions\ExpressionExpanderExtensions.cs" />
+    <Compile Include="Utils\Expressions\ExpressionHelper.cs" />
     <Compile Include="Utils\Expressions\ExpressionParameterRebinder.cs" />
     <Compile Include="Utils\Expressions\PredicateBuilder.cs" />
     <Compile Include="Utils\NinjectControllerFactory.cs" />

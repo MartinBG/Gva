@@ -12,12 +12,16 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using NLog;
+using Common.Utils.Expressions;
+using System.Data.Entity.Core;
 
 namespace Common.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private static readonly Func<EntityReference, EntityKey> relatedEndCachedValueAccessor = ExpressionHelper.GetFieldAccessor<EntityReference, EntityKey>("_cachedForeignKey");
 
         private static object syncRoot = new object();
 
@@ -44,13 +48,21 @@ namespace Common.Data
                                                  .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                                                  .Where(e => !e.IsRelationship))
                 {
+                    //var res = entry.RelationshipManager.GetAllRelatedEnds()
+                    //    .Where(re =>
+                    //        re is EntityReference &&
+                    //        relatedEndCachedValueAccessor((EntityReference)re).EntityContainerName.Contains("EntityHasNullForeignKey") &&
+                    //        re.RelationshipSet.ElementType.RelationshipEndMembers
+                    //            .Any(rem => rem.Name == re.TargetRoleName &&
+                    //                rem.DeleteBehavior == OperationAction.Cascade));
+
                     if (entry.RelationshipManager.GetAllRelatedEnds()
                         .Any(re =>
                             re is EntityReference &&
-                            ((EntityReference)re).EntityKey == null &&
                             re.RelationshipSet.ElementType.RelationshipEndMembers
                                 .Any(rem => rem.Name == re.TargetRoleName &&
-                                    rem.DeleteBehavior == OperationAction.Cascade)))
+                                    rem.DeleteBehavior == OperationAction.Cascade) &&
+                            relatedEndCachedValueAccessor((EntityReference)re).EntityContainerName.Contains("EntityHasNullForeignKey")))
                     {
                         ((IObjectContextAdapter)context).ObjectContext.DeleteObject(entry.Entity);
                     }
