@@ -48,14 +48,6 @@ namespace Common.Data
                                                  .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                                                  .Where(e => !e.IsRelationship))
                 {
-                    //var res = entry.RelationshipManager.GetAllRelatedEnds()
-                    //    .Where(re =>
-                    //        re is EntityReference &&
-                    //        relatedEndCachedValueAccessor((EntityReference)re).EntityContainerName.Contains("EntityHasNullForeignKey") &&
-                    //        re.RelationshipSet.ElementType.RelationshipEndMembers
-                    //            .Any(rem => rem.Name == re.TargetRoleName &&
-                    //                rem.DeleteBehavior == OperationAction.Cascade));
-
                     if (entry.RelationshipManager.GetAllRelatedEnds()
                         .Any(re =>
                             re is EntityReference &&
