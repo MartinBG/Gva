@@ -13,20 +13,24 @@ Usage <sc-datatable ng-model="data"
   function DatatableDirective(l10n) {
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       templateUrl:'scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         ngModel: '=',
-        filterable: '@',
-        pageable: '@',
-        sortable: '@',
-        dynamicColumns: '@'
+        filterable: '&',
+        pageable: '&',
+        sortable: '&',
+        dynamicColumns: '&'
       },
-      link: function (scope) {
-        var table;
+      link: function (scope, elements, attrs) {
+        var table,
+          filterable = scope.filterable(),
+          pageable = scope.pageable(),
+          sortable = scope.sortable(),
+          dynamicColumns = scope.dynamicColumns();
 
-        if(scope.dynamicColumns) {
+        if(dynamicColumns) {
           scope.hideColumn = function (value, i) {
               table.fnSetColumnVis(i, scope.aoColumnDefs[i].bVisible);
             };
@@ -37,9 +41,9 @@ Usage <sc-datatable ng-model="data"
 
             table = angular.element('.datatable').dataTable({
               aaData: scope.ngModel,
-              bFilter: scope.filterable === 'false' ? false : true,
-              bPaginate: scope.pageable === 'false'? false : true,
-              bSort: scope.sortable === 'false'? false : true,
+              bFilter: filterable,
+              bPaginate: pageable,
+              bSort: sortable,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
               sDom: '<<"span4"l><"span4"f>r>t' +
@@ -90,7 +94,8 @@ Usage <sc-datatable ng-model="data"
             sType: column.type || '',
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
-            sDefaultContent:''
+            sDefaultContent:'',
+            sClass: column.data
           });
 
         };
