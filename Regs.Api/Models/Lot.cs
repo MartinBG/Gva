@@ -198,7 +198,8 @@ namespace Regs.Api.Models
             {
                 ParentCommitId = currCommit.CommitId,
                 CommiterId = userContext.UserId,
-                CommitDate = DateTime.Now
+                CommitDate = DateTime.Now,
+                PartVersions = new Collection<PartVersion>(this.GetParts().ToList())
             };
 
             if (paths != null)
@@ -215,14 +216,14 @@ namespace Regs.Api.Models
                     throw new Exception("Invalid Path!");
                 }
 
-                IEnumerable<PartVersion> modifiedAndNewPartVersions = this.GetParts().Where(pv => pv.OriginalCommitId == currCommit.CommitId && !partVersionsToCommit.Contains(pv));
+                PartVersion[] modifiedAndNewPartVersions = this.GetParts().Where(pv => pv.OriginalCommitId == currCommit.CommitId && !partVersionsToCommit.Contains(pv)).ToArray();
                 foreach (var partVersion in modifiedAndNewPartVersions)
                 {
                     partVersion.OriginalCommit = index;
+                    currCommit.PartVersions.Remove(partVersion);
                 }
             }
 
-            index.PartVersions = new Collection<PartVersion>(this.GetParts().ToList());
             index.IsIndex = true;
             this.Commits.Add(index);
 
