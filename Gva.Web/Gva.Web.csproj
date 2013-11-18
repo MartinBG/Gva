@@ -162,6 +162,8 @@
     <Content Include="App\js\navigation\providers\navigationConfigProvider.js" />
     <Content Include="App\js\navigation\providers\statesProvider.js" />
     <Content Include="App\js\navigation\templates\navbar.html" />
+    <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
+    <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
     <Content Include="App\js\scaffolding\directives\search\buttonDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\columnDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\datatableDirective.js" />

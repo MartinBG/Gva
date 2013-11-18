@@ -5,7 +5,10 @@
   angular.module('scaffolding').factory('scaffolding.Nomenclature', [
     '$resource',
     function ($resource) {
-      return $resource('/api/nomenclatures/:alias', {alias:'@alias'});
+      return $resource('/api/nomenclatures/:alias?term=:term', {
+        alias:'@alias',
+        term: '@term'
+      });
     }
   ]);
 }(angular));
