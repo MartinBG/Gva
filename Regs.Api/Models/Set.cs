@@ -1,8 +1,8 @@
-﻿using Common.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Infrastructure;
 
 namespace Regs.Api.Models
 {
@@ -33,6 +33,7 @@ namespace Regs.Api.Models
             Lot lot = new Lot
             {
                 NextIndex = 0,
+                Set = this
             };
             lot.Commits.Add(index);
             this.Lots.Add(lot);

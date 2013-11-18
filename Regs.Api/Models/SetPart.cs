@@ -53,7 +53,6 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.Set)
                 .WithMany(t => t.SetParts)
                 .HasForeignKey(d => d.SetId);
-
         }
     }
 }

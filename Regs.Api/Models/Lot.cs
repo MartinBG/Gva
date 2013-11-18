@@ -1,12 +1,12 @@
-﻿using Common.Infrastructure;
-using Newtonsoft.Json.Linq;
-using Regs.Api.Managers.LobManager;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
+using Common.Infrastructure;
+using Newtonsoft.Json.Linq;
+using Regs.Api.Managers.LobManager;
 
 namespace Regs.Api.Models
 {
@@ -44,7 +44,7 @@ namespace Regs.Api.Models
             StringBuilder path = new StringBuilder();
             foreach (var symbol in setPart.Path)
             {
-                path.Append((symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString()));
+                path.Append(symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString());
             }
 
             if (currCommit.PartVersions.Any(pv => pv.Part.Path == path.ToString() && pv.PartOperation != PartOperation.Delete))
@@ -116,7 +116,7 @@ namespace Regs.Api.Models
 
         public PartVersion ResetPart(string path)
         {
-            Commit currCommit = GetCommit();
+            Commit currCommit = this.GetCommit();
 
             PartVersion partVersion = currCommit.PartVersions
                 .FirstOrDefault(pv => 
@@ -149,7 +149,7 @@ namespace Regs.Api.Models
 
         public void Reset(int commmitId)
         {
-            Commit currCommit = GetCommit();
+            Commit currCommit = this.GetCommit();
             bool partVersionsInIndex = currCommit.PartVersions
                 .Any(pv =>
                     pv.PartOperation != PartOperation.Delete &&
@@ -169,7 +169,7 @@ namespace Regs.Api.Models
             newIndex.IsIndex = true;
 
             IList<Commit> commitsToDelete = this.Commits.Where(c => c.CommitId > commmitId).ToList();
-            foreach(var commit in commitsToDelete)
+            foreach (var commit in commitsToDelete)
             {
                 IEnumerable<PartVersion> partVersionsToDelete = commit.PartVersions.Where(pv => pv.OriginalCommitId == commit.CommitId);
 
@@ -233,7 +233,7 @@ namespace Regs.Api.Models
 
         public IEnumerable<PartVersion> GetParts(int? commitId = null)
         {
-            return this.GetPartsByOperations( new PartOperation[] { PartOperation.Add, PartOperation.Update }, commitId);
+            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Add, PartOperation.Update }, commitId);
         }
 
         public IEnumerable<PartVersion> GetAddedParts(int? commitId = null)
@@ -310,7 +310,7 @@ namespace Regs.Api.Models
 
         private IEnumerable<PartVersion> GetPartsByOperations(PartOperation[] partOperations, int? commitId)
         {
-            Commit commit = GetCommit(commitId);
+            Commit commit = this.GetCommit(commitId);
             IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperations.Contains(pv.PartOperation));
 
             return partVersions;

@@ -6,7 +6,7 @@ namespace Regs.Api.Models
     public partial class PartExt
     {
         public int PartId { get; set; }
-        public Nullable<int> IndexPartVersionId { get; set; }
+        public int? IndexPartVersionId { get; set; }
         public int CommitedPartVersionId { get; set; }
         public int FirstPartVersionId { get; set; }
 
