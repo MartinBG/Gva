@@ -203,6 +203,7 @@
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\gva.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
