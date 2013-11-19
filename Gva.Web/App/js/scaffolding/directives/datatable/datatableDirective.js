@@ -7,7 +7,7 @@ Usage <sc-datatable ng-model="data"
  </sc-datatable>
 */
 
-/*global angular*/
+/*global angular, $*/
 (function (angular) {
   'use strict';
   function DatatableDirective(l10n) {
@@ -23,7 +23,8 @@ Usage <sc-datatable ng-model="data"
         sortable: '&',
         dynamicColumns: '&'
       },
-      link: function (scope, elements, attrs) {
+
+      link: function (scope, iElement) {
         var table,
           filterable = scope.filterable(),
           pageable = scope.pageable(),
@@ -39,8 +40,9 @@ Usage <sc-datatable ng-model="data"
         scope.$watch('ngModel', function(){
           if(scope.ngModel) {
 
-            table = angular.element('.datatable').dataTable({
+            table = iElement.find('table').dataTable({
               aaData: scope.ngModel,
+              bDestroy: true,
               bFilter: filterable,
               bPaginate: pageable,
               bSort: sortable,
@@ -56,6 +58,18 @@ Usage <sc-datatable ng-model="data"
                   angular.element('.dataTables_length select').addClass('form-control input-sm');
                   angular.element('.dataTables_length select').css('width', '75px');
                 },
+              fnRowCallback: function(nRow) {
+                angular.forEach(nRow.children, function(child){
+                  var classNames = $.trim(child.className).split(' '),
+                    className;
+                  if(classNames[0] !== 'sorting_disabled'){
+                    className = classNames[0];
+                  } else {
+                    className = classNames[1];
+                  }
+                  angular.element('td:eq(' + child.cellIndex +')', nRow).attr('data', className);
+                });
+              },
               oLanguage: {
                 sInfo: l10n.get('datatableDirective.info'),
                 sLengthMenu: l10n.get('datatableDirective.displayRecords'),
@@ -106,4 +120,5 @@ Usage <sc-datatable ng-model="data"
   DatatableDirective.$inject = ['l10n'];
 
   angular.module('scaffolding').directive('scDatatable', DatatableDirective);
+
 }(angular));
