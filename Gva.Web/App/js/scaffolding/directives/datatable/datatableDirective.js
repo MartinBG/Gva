@@ -7,7 +7,7 @@ Usage <sc-datatable ng-model="data"
  </sc-datatable>
 */
 
-/*global angular, $*/
+/*global angular*/
 (function (angular) {
   'use strict';
   function DatatableDirective(l10n) {
@@ -60,13 +60,10 @@ Usage <sc-datatable ng-model="data"
                 },
               fnRowCallback: function(nRow) {
                 angular.forEach(nRow.children, function(child){
-                  var classNames = $.trim(child.className).split(' '),
-                    className;
-                  if(classNames[0] !== 'sorting_disabled'){
-                    className = classNames[0];
-                  } else {
-                    className = classNames[1];
-                  }
+                  var dataName = child.className.match(/sc-\w+/).toString(),
+                    dataNameSubstring = dataName.substring(3,dataName.length),
+                    className = dataNameSubstring !== 'undefined' ? dataNameSubstring : '';
+
                   angular.element('td:eq(' + child.cellIndex +')', nRow).attr('data', className);
                 });
               },
@@ -109,7 +106,7 @@ Usage <sc-datatable ng-model="data"
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',
-            sClass: column.data
+            sClass: 'sc-' + column.data
           });
 
         };
