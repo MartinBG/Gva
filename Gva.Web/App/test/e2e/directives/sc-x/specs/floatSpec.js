@@ -20,7 +20,6 @@
       });
 
       floatBtnElem.click();
-
       floatDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('789,12');
       });
@@ -34,37 +33,44 @@
       });
 
       floatDirectiveElem.sendKeys('134.56');
-
       floatLabelElem.getText().then(function (value) {
         expect(value).toEqual('134.56');
       });
     });
 
-    it('should validate user input.', function() {
+    it('should empty field on invalid user input.', function() {
       floatDirectiveElem.sendKeys('a134asddas56\t');
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('');
       });
+    });
 
-      floatDirectiveElem.sendKeys('134.asddas56\t');
+    it('should try to parse user input.', function() {
+      floatDirectiveElem.sendKeys('134.12asddas56\t');
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/134[\.,]00/);
+        expect(value).toEqual('134,12');
       });
     });
 
-    it('should format user input.', function() {
-      floatDirectiveElem.sendKeys('13345.6\t');
+    it('should round user input.', function() {
+      floatDirectiveElem.sendKeys('13345.656\t');
 
       floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/13345,60/);
+        expect(value).toEqual('13345,66');
       });
+    });
+    
+    it('should represent the float as number.', function() {
+      var isFloatLabelElem = ptor.findElement(protractor.By.name('isFloatLbl')),
+          isFloatBtnElem = ptor.findElement(protractor.By.name('isFloatBtn'));
 
-      floatDirectiveElem.sendKeys('7\t');
+      floatDirectiveElem.sendKeys('123.449999');
+      isFloatBtnElem.click();
 
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toMatch(/13345,61/);
+      isFloatLabelElem.getText().then(function (value) {
+        expect(value).toEqual('true');
       });
     });
   });

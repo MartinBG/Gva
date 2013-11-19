@@ -1,7 +1,6 @@
 ﻿// Usage: <sc-int ng-model="<model_name>"></sc-int>
-
-/*global angular, _*/
-(function (angular, _) {
+/*global angular*/
+(function (angular) {
   'use strict';
 
   function IntDirective() {
@@ -16,34 +15,34 @@
           return;
         }
 
-        var validate = function (value) {
-          if (!_.isNumber(value) && !_.isString(value)) {
-            return null;
-          }
-
-          var integerNum = parseInt(value, 10);
-          integerNum = isNaN(integerNum) ? null : integerNum;
-
-          return integerNum;
-        };
-
-        element.on('change', function () {
-          ngModel.$formatters.forEach(function (formatter) {
-            ngModel.$viewValue = formatter(ngModel.$viewValue);
-          });
-
-          ngModel.$render();
+        ngModel.$parsers.push(function (strValue) {
+          var num = parseInt(strValue, 10);
+          return isNaN(num) ? undefined : num;
         });
 
-        ngModel.$parsers.push(validate);
-        ngModel.$formatters.push(function (value) {
-          var validatedNum = validate(value);
+        ngModel.$formatters.push(function (numValue) {
+          return numValue === undefined || numValue === null ?
+            undefined :
+            numValue;
+        });
+        
+        element.on('blur', function() {
+          var formatters = ngModel.$formatters,
+              idx = formatters.length,
+              value = ngModel.$modelValue;
 
-          return validatedNum ? validatedNum.toString() : '';
+          while(idx--) {
+            value = formatters[idx](value);
+          }
+
+          if (ngModel.$viewValue !== value) {
+            ngModel.$viewValue = value;
+            ngModel.$render();
+          }
         });
       }
     };
   }
 
   angular.module('scaffolding').directive('scInt', IntDirective);
-}(angular, _));
+}(angular));

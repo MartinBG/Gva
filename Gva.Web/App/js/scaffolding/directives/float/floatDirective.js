@@ -1,7 +1,6 @@
 ﻿// Usage: <sc-float ng-model="<model_name>"></sc-float>
-
-/*global angular, _*/
-(function (angular, _) {
+/*global angular*/
+(function (angular) {
   'use strict';
 
   function FloatDirective ($filter, $locale) {
@@ -18,30 +17,30 @@
 
         var groupSep = $locale.NUMBER_FORMATS.GROUP_SEP;
 
-        var validate = function (value) {
-          if (!_.isNumber(value) && !_.isString(value)) {
-            return null;
-          }
-
-          var floatNum = parseFloat(value.toString().replace(',', '.'));
-          floatNum = isNaN(floatNum) ? null : floatNum.toFixed(2);
-
-          return floatNum;
-        };
-
-        element.on('change', function () {
-          ngModel.$formatters.forEach(function (formatter) {
-            ngModel.$viewValue = formatter(ngModel.$viewValue);
-          });
-
-          ngModel.$render();
+        ngModel.$parsers.push(function (strValue) {
+          var num = parseFloat(strValue.replace(',', '.'));
+          return isNaN(num) ? undefined : Math.round((num + 0.00001) * 100) / 100;
         });
 
-        ngModel.$parsers.push(validate);
-        ngModel.$formatters.push(function (value) {
-          var validatedNum = validate(value) || undefined;
+        ngModel.$formatters.push(function (numValue) {
+          return numValue === undefined || numValue === null ?
+            undefined :
+            $filter('number')(numValue).replace(groupSep, '');
+        });
 
-          return $filter('number')(validatedNum, 2).replace(groupSep, '');
+        element.on('blur', function() {
+          var formatters = ngModel.$formatters,
+              idx = formatters.length,
+              value = ngModel.$modelValue;
+
+          while(idx--) {
+            value = formatters[idx](value);
+          }
+
+          if (ngModel.$viewValue !== value) {
+            ngModel.$viewValue = value;
+            ngModel.$render();
+          }
         });
       }
     };
@@ -50,4 +49,4 @@
   FloatDirective.$inject = ['$filter', '$locale'];
 
   angular.module('scaffolding').directive('scFloat', FloatDirective);
-}(angular, _));
+}(angular));

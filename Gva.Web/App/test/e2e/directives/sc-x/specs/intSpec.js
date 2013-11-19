@@ -20,7 +20,6 @@
       });
 
       intBtnElem.click();
-
       intDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('789');
       });
@@ -34,23 +33,36 @@
       });
 
       intDirectiveElem.sendKeys('13456');
-
       intLabelElem.getText().then(function (value) {
         expect(value).toEqual('13456');
       });
     });
 
-    it('should validate user input.', function() {
+    it('should empty field on invalid user input.', function() {
       intDirectiveElem.sendKeys('a134asddas56\t');
 
       intDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('');
       });
+    });
 
+    it('should try to parse user input.', function() {
       intDirectiveElem.sendKeys('134asddas56\t');
 
       intDirectiveElem.getAttribute('value').then(function (value) {
         expect(value).toEqual('134');
+      });
+    });
+
+    it('should represent the int as number.', function() {
+      var isIntLabelElem = ptor.findElement(protractor.By.name('isIntLbl')),
+          isIntBtnElem = ptor.findElement(protractor.By.name('isIntBtn'));
+
+      intDirectiveElem.sendKeys('123');
+      isIntBtnElem.click();
+
+      isIntLabelElem.getText().then(function (value) {
+        expect(value).toEqual('true');
       });
     });
   });

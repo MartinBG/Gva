@@ -7,6 +7,8 @@
     $scope.intNum = null;
     $scope.floatNum = null;
     $scope.date = null;
+    $scope.isFloatNumber = null;
+    $scope.isIntNumber = null;
 
     $scope.changeInt = function () {
       $scope.intNum = 789;
@@ -18,6 +20,14 @@
 
     $scope.changeDate = function () {
       $scope.date = '1990-08-10T12:18:12';
+    };
+
+    $scope.checkIsFloatNumber = function () {
+      $scope.isFloatNumber = $scope.floatNum === 123.45;
+    };
+
+    $scope.checkIsIntNumber = function () {
+      $scope.isIntNumber = $scope.intNum === 123;
     };
   }
   
