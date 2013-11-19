@@ -46,19 +46,24 @@ namespace Regs.Api.Models
             {
                 path.Append(symbol == '*' ? (this.NextIndex++).ToString() : symbol.ToString());
             }
+            string pathStr = path.ToString();
 
-            if (currCommit.PartVersions.Any(pv => pv.Part.Path == path.ToString() && pv.PartOperation != PartOperation.Delete))
+            if (currCommit.PartVersions.Any(pv => pv.Part.Path == pathStr))
             {
                 throw new Exception(string.Format("Specified path ({0}) is already in index", path.ToString()));
             }
 
-            Part newPart = new Part
+            Part part = this.Parts.FirstOrDefault(p => p.Path == pathStr);
+            if (part == null)
             {
-                SetPart = setPart,
-                LotId = this.LotId,
-                Path = path.ToString()
-            };
-            this.Parts.Add(newPart);
+                part = new Part
+                {
+                    SetPart = setPart,
+                    LotId = this.LotId,
+                    Path = pathStr
+                };
+                this.Parts.Add(part);
+            }
 
             PartVersion partVersion = new PartVersion
             {
@@ -66,7 +71,7 @@ namespace Regs.Api.Models
                 PartOperation = PartOperation.Add,
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
-                Part = newPart,
+                Part = part,
                 TextBlob = lobManager.AddLob(json.ToString())
             };
             currCommit.PartVersions.Add(partVersion);
@@ -81,14 +86,14 @@ namespace Regs.Api.Models
             return this.UpdatePartVersion(partVersion, json, lobManager, userContext);
         }
 
-        public PartVersion UpdatePart(SetPart setPart, JObject json, ILobManager lobManager, UserContext userContext)
+        public PartVersion UpdatePart(Part part, JObject json, ILobManager lobManager, UserContext userContext)
         {
             Commit currCommit = this.GetCommit();
-            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.SetPartId == setPart.SetPartId && pv.PartOperation != PartOperation.Delete);
+            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.PartId == part.PartId && pv.PartOperation != PartOperation.Delete);
 
             if (partVersion == null)
             {
-                throw new Exception(string.Format("No LotPart found having the spcified setPart with id {1}", setPart.SetPartId));
+                throw new Exception(string.Format("No LotPart found having the specified part with id {1}", part.PartId));
             }
 
             return this.UpdatePartVersion(partVersion, json, lobManager, userContext);
@@ -101,14 +106,14 @@ namespace Regs.Api.Models
             return this.DeletePartVersion(partVersion, userContext);
         }
 
-        public PartVersion DeletePart(SetPart setPart, UserContext userContext)
+        public PartVersion DeletePart(Part part, UserContext userContext)
         {
             Commit currCommit = this.GetCommit();
-            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.SetPartId == setPart.SetPartId && pv.PartOperation != PartOperation.Delete);
+            PartVersion partVersion = currCommit.PartVersions.FirstOrDefault(pv => pv.Part.PartId == part.PartId && pv.PartOperation != PartOperation.Delete);
 
             if (partVersion == null)
             {
-                throw new Exception(string.Format("No LotPart found having the spcified setPart with id {1}", setPart.SetPartId));
+                throw new Exception(string.Format("No LotPart found having the spcified part with id {1}", part.PartId));
             }
 
             return this.DeletePartVersion(partVersion, userContext);
@@ -121,7 +126,6 @@ namespace Regs.Api.Models
             PartVersion partVersion = currCommit.PartVersions
                 .FirstOrDefault(pv => 
                     pv.Part.Path == path &&
-                    pv.PartOperation != PartOperation.Delete &&
                     pv.OriginalCommitId == currCommit.CommitId);
 
             if (partVersion == null)
@@ -130,17 +134,17 @@ namespace Regs.Api.Models
             }
 
             Part part = partVersion.Part;
-            if (part.PartVersions.Count == 1)
-            {
-                this.Parts.Remove(part);
-                return partVersion;
-            }
 
             part.PartVersions.Remove(partVersion);
 
-            if (partVersion.PartOperation == PartOperation.Update)
+            if (part.PartVersions.Count == 0)
             {
-                PartVersion prevPartVersion = this.GetPart(path, currCommit.ParentCommitId);
+                this.Parts.Remove(part);
+            }
+
+            PartVersion prevPartVersion = currCommit.ParentCommit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperation != PartOperation.Delete);
+            if (prevPartVersion != null)
+            {
                 currCommit.PartVersions.Add(prevPartVersion);
             }
 
@@ -176,13 +180,11 @@ namespace Regs.Api.Models
                 foreach (var partVersion in partVersionsToDelete)
                 {
                     Part part = partVersion.Part;
-                    if (part.PartVersions.Count == 1)
+                    part.PartVersions.Remove(partVersion);
+
+                    if (part.PartVersions.Count == 0)
                     {
                         this.Parts.Remove(part);
-                    }
-                    else 
-                    {
-                        part.PartVersions.Remove(partVersion);
                     }
                 }
 
@@ -216,8 +218,15 @@ namespace Regs.Api.Models
                     throw new Exception("Invalid Path!");
                 }
 
-                PartVersion[] modifiedAndNewPartVersions = this.GetParts().Where(pv => pv.OriginalCommitId == currCommit.CommitId && !partVersionsToCommit.Contains(pv)).ToArray();
-                foreach (var partVersion in modifiedAndNewPartVersions)
+                IEnumerable<PartVersion> deletedPVsNotForCommit = currCommit.PartVersions
+                    .Where(pv => pv.PartOperation == PartOperation.Delete && !partVersionsToCommit.Contains(pv));
+                IList<PartVersion> partVersions = index.PartVersions.Concat(deletedPVsNotForCommit).ToList();
+                index.PartVersions = new Collection<PartVersion>(partVersions);
+
+                PartVersion[] indexPartVersions = currCommit.PartVersions
+                    .Where(pv => pv.OriginalCommitId == currCommit.CommitId && !partVersionsToCommit.Contains(pv))
+                    .ToArray();
+                foreach (var partVersion in indexPartVersions)
                 {
                     partVersion.OriginalCommit = index;
                     currCommit.PartVersions.Remove(partVersion);
@@ -272,6 +281,8 @@ namespace Regs.Api.Models
             if (partVersion.OriginalCommitId == currCommit.CommitId)
             {
                 partVersion.TextBlob = lobManager.AddLob(json.ToString());
+                partVersion.CreatorId = userContext.UserId;
+                partVersion.CreateDate = DateTime.Now;
                 return partVersion;
             }
 

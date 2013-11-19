@@ -56,8 +56,10 @@ namespace Regs.Api.Tests.Tests
 
             PartVersion savedPartVersion = lot.GetPart("/addresses/0");
 
-            Part part = this.unitOfWork.DbContext.Set<Part>().FirstOrDefault(p => p.Path == "/addresses/0");
+            Part part = this.unitOfWork.DbContext.Set<Part>().SingleOrDefault(p => p.Path == "/addresses/0");
+            Assert.NotNull(part);
             TextBlob textBlob = this.unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == "876FB827A153BB2CB30FC25B082B7CB9D31290D8");
+            Assert.NotNull(textBlob);
             Commit commit = lot.Commits.First();
 
             Assert.Equal<int>(part.PartId, savedPartVersion.PartId);
@@ -66,6 +68,64 @@ namespace Regs.Api.Tests.Tests
             Assert.Equal<int>(this.userContext.UserId, savedPartVersion.CreatorId);
             Assert.Equal<int>((int)PartOperation.Add, (int)savedPartVersion.PartOperation);
             Assert.Contains<PartVersion>(savedPartVersion, commit.PartVersions);
+        }
+
+        [Fact, AutoRollback]
+        public void AddPartDeletedInPreviousCommit()
+        {
+            Set set = this.lotManager.GetSet("Person");
+
+            Lot lot = set.AddLot(this.userContext);
+            lot.AddPart(
+                "/generalInfo",
+                new JObject (),
+                this.lobManager,
+                this.userContext);
+            this.unitOfWork.Save();
+            lot.AddPart(
+                "/addresses/*",
+                new JObject (),
+                this.lobManager,
+                this.userContext);
+            this.unitOfWork.Save();
+
+            lot.Commit(this.userContext);
+            this.unitOfWork.Save();
+
+            lot.DeletePart("/generalInfo", this.userContext);
+            this.unitOfWork.Save();
+
+            lot.Commit(this.userContext);
+            this.unitOfWork.Save();
+
+            lot.AddPart(
+                "/generalInfo",
+                JObject.Parse(@"{ key1: 'value1', key2: [ 'value1', 'value2']}"),
+                this.lobManager,
+                this.userContext);
+            this.unitOfWork.Save();
+
+            PartVersion addedPartVersion = this.unitOfWork.DbContext.Set<PartVersion>()
+                .OrderByDescending(pv => pv.PartVersionId)
+                .FirstOrDefault();
+
+            Part part = this.unitOfWork.DbContext.Set<Part>().SingleOrDefault(p => p.Path == "/generalInfo");
+            Assert.NotNull(part);
+
+            TextBlob textBlob = this.unitOfWork.DbContext.Set<TextBlob>().FirstOrDefault(tb => tb.Hash == "876FB827A153BB2CB30FC25B082B7CB9D31290D8");
+            Assert.NotNull(textBlob);
+
+            Commit index = this.unitOfWork.DbContext.Set<Commit>()
+                .Include(c => c.PartVersions)
+                .FirstOrDefault(c => c.IsIndex);
+
+            PartVersion addedPV = index.PartVersions.OrderByDescending(pv => pv.PartVersionId).First();
+            Assert.Equal<int>(part.PartId, addedPartVersion.PartId);
+            Assert.Equal<int>(textBlob.TextBlobId, addedPartVersion.TextBlobId);
+            Assert.Equal<int>(index.CommitId, addedPartVersion.OriginalCommitId);
+            Assert.Equal<int>(this.userContext.UserId, addedPartVersion.CreatorId);
+            Assert.Equal<int>((int)PartOperation.Add, (int)addedPartVersion.PartOperation);
+            Assert.Contains<PartVersion>(addedPartVersion, index.PartVersions);
         }
 
         [Fact, AutoRollback]
@@ -181,6 +241,9 @@ namespace Regs.Api.Tests.Tests
             PartVersion updatedPv1 = lot.UpdatePart("/addresses/0", new JObject(), this.lobManager, this.userContext);
             this.unitOfWork.Save();
 
+            PartVersion deletedPv2 = lot.DeletePart("/addresses/1", this.userContext);
+            this.unitOfWork.Save();
+
             PartVersion pv3 = lot.AddPart(
                 "/addresses/*",
                 JObject.Parse(@"{ key1: 'value1', key2: [ 'value1', 'value2']}"),
@@ -189,31 +252,34 @@ namespace Regs.Api.Tests.Tests
             this.unitOfWork.Save();
 
             Commit index = this.unitOfWork.DbContext.Set<Commit>().FirstOrDefault(c => c.LotId == lot.LotId && c.IsIndex);
-            IEnumerable<PartVersion> partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Select(c => c.CommitId).Contains(index.CommitId));
+            IEnumerable<PartVersion> partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Any(c => c.CommitId == index.CommitId));
             Assert.Equal<int>(3, partVersions.Count());
             Assert.Contains<PartVersion>(updatedPv1, partVersions);
-            Assert.Contains<PartVersion>(pv2, partVersions);
+            Assert.Contains<PartVersion>(deletedPv2, partVersions);
             Assert.Contains<PartVersion>(pv3, partVersions);
 
             lot.ResetPart("/addresses/0");
             this.unitOfWork.Save();
 
-            partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Select(c => c.CommitId).Contains(index.CommitId));
+            partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Any(c => c.CommitId == index.CommitId));
+            Assert.Equal<int>(3, partVersions.Count());
+            Assert.Contains<PartVersion>(pv1, partVersions);
+            Assert.Contains<PartVersion>(deletedPv2, partVersions);
+            Assert.Contains<PartVersion>(pv3, partVersions);
+
+            lot.ResetPart("/addresses/1");
+            this.unitOfWork.Save();
+
+            partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Any(c => c.CommitId == index.CommitId));
             Assert.Equal<int>(3, partVersions.Count());
             Assert.Contains<PartVersion>(pv1, partVersions);
             Assert.Contains<PartVersion>(pv2, partVersions);
             Assert.Contains<PartVersion>(pv3, partVersions);
 
-            Assert.Throws<Exception>(delegate
-                {
-                    lot.ResetPart("/addresses/1");
-                    this.unitOfWork.Save();
-            });
-
             lot.ResetPart("/addresses/2");
             this.unitOfWork.Save();
 
-            partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Select(c => c.CommitId).Contains(index.CommitId));
+            partVersions = this.unitOfWork.DbContext.Set<PartVersion>().Where(pv => pv.Commits.Any(c => c.CommitId == index.CommitId));
             Assert.Equal<int>(2, partVersions.Count());
             Assert.Contains<PartVersion>(pv1, partVersions);
             Assert.Contains<PartVersion>(pv2, partVersions);
