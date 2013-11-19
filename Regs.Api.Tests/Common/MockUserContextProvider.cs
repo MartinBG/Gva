@@ -1,6 +1,11 @@
-﻿using Common.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Common.Infrastructure;
 
-namespace Gva.Model.Tests.Common
+namespace Regs.Api.Tests.Common
 {
     public class MockUserContextProvider : IUserContextProvider
     {

@@ -247,7 +247,7 @@ namespace Regs.Api.Models
             return this.GetPartsByOperations(new PartOperation[] { PartOperation.Update }, commitId);
         }
 
-        public IEnumerable<PartVersion> DeletedParts(int? commitId = null)
+        public IEnumerable<PartVersion> GetDeletedParts(int? commitId = null)
         {
             return this.GetPartsByOperations(new PartOperation[] { PartOperation.Delete }, commitId);
         }
