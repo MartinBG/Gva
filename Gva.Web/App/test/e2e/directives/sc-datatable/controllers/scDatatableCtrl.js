@@ -18,11 +18,14 @@
             isActive: user.isActive
           };
         });
+
+        $scope.users2 = $scope.users;
       });
 
       $scope.loadMany = function(){
         for(var i = 0; i < 10; i++){
           $scope.users = $scope.users.concat($scope.users);
+          $scope.users2 = $scope.users2.concat($scope.users2);
         }
       };
 

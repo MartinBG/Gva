@@ -1,9 +1,11 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor) {
+
   'use strict';
   
   describe('Users search page', function() {
     var ptor = protractor.getInstance(),
+        gvaBy = require('../gva.js').GvaBy,
         searchBtn,
         addBtn;
 
@@ -15,29 +17,24 @@
     });
 
     it('should display all users', function() {
-      var allUsernamesPromise = ptor.findElements(protractor.By.repeater('user in users')
-        .column('username'));
-
-      allUsernamesPromise.then(function (elements) {
-        var usernames = protractor.promise.fullyResolved(elements.map(function (el) {
-          return el.getText();
-        }));
-
-        expect(usernames).toEqual(['admin', 'peter', 'georgi', 'test1']);
-      });
+      ptor
+        .findElements(gvaBy.datatable('users').column('username'))
+        .then(function (elements) {
+          var usernamesPromise = protractor.promise.fullyResolved(elements.map(function (el) {
+            return el.getText();
+          }));
+ 
+          expect(usernamesPromise).toEqual(['admin', 'peter', 'georgi', 'test1']);
+        });
     });
-    
+
     it('should search by username', function() {
       ptor.findElement(protractor.By.css('div[name=username] > input')).sendKeys('peter');
 
       searchBtn.click().then(function() {
-        var firstUsername = ptor.findElement(protractor.By.repeater('user in users')
-          .row(0)
-          .column('username'));
-
-        firstUsername.getText().then(function(text) {
-          expect(text).toEqual('peter');
-        });
+        var firstUsername = ptor.findElement(
+          gvaBy.datatable('users').row(1).column('username'));
+        expect(firstUsername.getText()).toEqual('peter');
       });
     });
 
@@ -49,13 +46,9 @@
               .sendKeys('Administrator');
 
             searchBtn.click().then(function() {
-              var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                .row(0)
-                .column('fullname'));
-
-              firstFullname.getText().then(function(text) {
-                expect(text).toEqual('Administrator');
-              });
+              var firstFullname = ptor.findElement(
+                gvaBy.datatable('users').row(1).column('fullname'));
+              expect(firstFullname.getText()).toEqual('Administrator');
             });
           });
         });
@@ -75,13 +68,9 @@
 
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
-                var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                  .row(0)
-                  .column('fullname'));
-
-                firstFullname.getText().then(function(text) {
-                  expect(text).toEqual('Administrator');
-                });
+                var firstFullname = ptor.findElement(
+                  gvaBy.datatable('users').row(1).column('fullname'));
+                expect(firstFullname.getText()).toEqual('Administrator');
               });
             });
 
@@ -94,13 +83,9 @@
 
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
-                var firstFullname = ptor.findElement(protractor.By.repeater('user in users')
-                  .row(0)
-                  .column('fullname'));
-
-                firstFullname.getText().then(function(text) {
-                  expect(text).toEqual('iztrit');
-                });
+                var firstFullname = ptor.findElement(
+                  gvaBy.datatable('users').row(1).column('fullname'));
+                expect(firstFullname.getText()).toEqual('iztrit');
               });
             });
           });

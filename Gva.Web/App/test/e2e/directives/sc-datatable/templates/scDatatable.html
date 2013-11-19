@@ -1,5 +1,5 @@
 ﻿<div class="container page-content">
-  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true" name="datatable1">
+  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column data="username" title="Потребителско име" type="string" name="username">
     </sc-column>
     <sc-column data="fullname" title="Име" type="string" name="name">
@@ -9,7 +9,7 @@
     <sc-column data="isActive" title="Активен" type="string" name="isActive">
       <span>{{item.isActive? 'Да' : 'Не'}}</span>
     </sc-column>
-    <sc-column>
+    <sc-column data="buttons">
       <button type="button" class="btn-xs btn-info" ng-click="editUser(item)" l10n-text="users.search.edit"></button>
     </sc-column>
   </sc-datatable>
@@ -18,7 +18,7 @@
   <button type="button" class="btn-xs btn-info" ng-click="loadMany()" id="loadManybtn">Load many users</button>
 </div>
 <div class="container page-content">
-  <sc-datatable ng-model="users" sortable="false" pageable="false" dynamic-columns="false" name="datatable2">
+  <sc-datatable ng-model="users2" sortable="false" pageable="false" dynamic-columns="false">
     <sc-column data="username" title="Потребителско име" type="string" name="username">
     </sc-column>
     <sc-column data="fullname" title="Име" type="string" name="name">

@@ -4,12 +4,17 @@
   function createSelector (model, index, data) {
     var selector ='';
     if(model) {
-      selector += 'div[ng-model=' + model + '] table.datatable';
+      selector += 'div[ng-model=' + model + '] table.dataTable';
     } else {
-      selector += 'div table.datatable';
+      selector += 'div table.dataTable';
     }
     if(index || data){
-      selector += ' tbody';
+      if(index === 0) {
+        selector += ' thead';
+        index = 1;
+      } else {
+        selector += ' tbody';
+      }
       if(index) {
         selector += ' tr:nth-child(' + index +')';
       }
@@ -35,10 +40,12 @@
   GvaBy.datatable = function(model) {
     return {
       findOverride: function(driver) {
-        return driver.findElement(protractor.By.css('div[ng-model=' + model + '] table.datatable'));
+        var selector = createSelector(model);
+        return driver.findElement(protractor.By.css(selector));
       },
       findArrayOverride: function(driver) {
-        return driver.findElements(protractor.By.css('table[class*=datatable]'));
+        var selector = createSelector(model);
+        return driver.findElements(protractor.By.css(selector));
       },
       row: function (index) {
         return {

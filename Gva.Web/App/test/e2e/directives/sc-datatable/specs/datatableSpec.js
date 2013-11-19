@@ -1,9 +1,10 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor) {
   'use strict';
 
   describe('Sc-datatable directive', function() {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+      gvaBy = require('../../../gva').GvaBy;
 
     beforeEach(function (){
       ptor.get('#/test/datatable');
@@ -11,13 +12,12 @@
 
     it('should filter properly', function() {
       var searchInputDatatable2 = protractor.By.css(
-        'sc-datatable[name=datatable2] div[class=dataTables_filter] input'),
+        'div[ng-model=users2] div[class=dataTables_filter] input'),
         infoTextDatatable2 = protractor.By.css(
-          'sc-datatable[name=datatable2] div[class=dataTables_info]'),
+          'div[ng-model=users2] div[class=dataTables_info]'),
         searchInputDatatable1 = protractor.By.css(
-        'sc-datatable[name=datatable1] div[class=dataTables_filter] input'),
-        firstColumnFirstRow = protractor.By.css(
-        'sc-datatable[name=datatable1] tbody tr td:first-child'),
+        'div[ng-model=users] div[class=dataTables_filter] input'),
+        firstColumnFirstRow =  gvaBy.datatable('users').row(1).column('username'),
         loadManyBtn = ptor.findElement(protractor.By.id('loadManybtn'));
 
       ptor.findElement(searchInputDatatable1).sendKeys('peter');
@@ -36,14 +36,15 @@
 
         expect(ptor.findElement(infoTextDatatable2).getText())
           .toMatch(/\S+\s\S+\s1,024\s\S+\s\(\S+\s1\s\S+\s1,024\)\s\(\S+\s\S+\s4,096\s\S+\)/);
+
       });
     });
 
     it('should load 4096 users', function() {
       var datatable1InfoText = protractor.By.css(
-        'sc-datatable[name=datatable1] div[class=dataTables_info]'),
+        'div[ng-model=users] div[class=dataTables_info]'),
         datatable2InfoText = protractor.By.css(
-        'sc-datatable[name=datatable2] div[class=dataTables_info]'),
+        'div[ng-model=users2] div[class=dataTables_info]'),
         loadManyBtn = ptor.findElement(protractor.By.id('loadManybtn')),
         infoText1,
         infoText2;
@@ -59,7 +60,7 @@
     });
 
     it('should go to edit user page', function() {
-      ptor.findElement(protractor.By.css('tbody tr:nth-child(2) td:last-child')).click();
+      ptor.findElement(gvaBy.datatable('users').row(2).column('buttons')).click();
       var username = ptor.findElement(protractor.By.name('username'))
         .getAttribute('value');
       expect(username).toEqual('peter');
@@ -84,8 +85,7 @@
 
     it('should hide and show columns properly using the button called Columns', function() {
       var dropdownBtn = ptor.findElement(protractor.By.css('button[data-toggle=dropdown]')),
-        columnsHeaders = protractor.By.css('sc-datatable[name=datatable1] thead tr th'),
-        usernames = [],
+        headers = [],
         checkboxesPromise;
 
       dropdownBtn.click();
@@ -96,39 +96,40 @@
         dropdownBtn.click();
         checkboxElems[0].click();
 
-        ptor.findElements(columnsHeaders)
-          .then(function (elements) {
-            usernames = protractor.promise.fullyResolved(elements.map(function (el) {
-              return el.getText();
-            }));
-            expect(usernames).toEqual(['Роли', 'Активен', '']);
-          });
+        ptor.findElement(gvaBy.datatable('users').row(0))
+          .findElements(protractor.By.css('th')).then(function(elements){
+              headers = protractor.promise.fullyResolved(elements.map(function (el) {
+                return el.getText();
+              }));
+              expect(headers).toEqual(['Роли', 'Активен', '']);
+            });
 
         dropdownBtn.click();
         checkboxElems[1].click();
 
-        usernames = [];
-        ptor.findElements(columnsHeaders)
-          .then(function (elements) {
-            usernames = protractor.promise.fullyResolved(elements.map(function (el) {
-              return el.getText();
-            }));
-            expect(usernames).toEqual(['Име', 'Роли', 'Активен', '']);
-          });
+        headers = [];
+
+        ptor.findElement(gvaBy.datatable('users').row(0))
+          .findElements(protractor.By.css('th')).then(function(elements){
+              headers = protractor.promise.fullyResolved(elements.map(function (el) {
+                return el.getText();
+              }));
+              expect(headers).toEqual(['Име', 'Роли', 'Активен', '']);
+            });
 
       });
     });
 
     it('correct sorting settings should be set by sc-datatable parameters', function() {
-      var sortingSettings = [];
-      ptor.findElements(protractor.By.css('sc-datatable[name=datatable2] thead tr th'))
-          .then(function (elements) {
-            sortingSettings = protractor.promise.fullyResolved(elements.map(function (el) {
-              return el.getAttribute('class');
-            }));
-            expect(sortingSettings)
-              .toEqual(['sorting_disabled', 'sorting_disabled']);
-          });
+
+      ptor.findElement(gvaBy.datatable('users2').row(0))
+          .findElements(protractor.By.css('th')).then(function(elements){
+              var sortingSettings = protractor.promise.fullyResolved(elements.map(function (el) {
+                return el.getAttribute('class');
+              }));
+              expect(sortingSettings)
+                .toEqual(['sorting_disabled username', 'sorting_disabled fullname']);
+            });
 
       ptor.get('#/test/datatable/column');
        //no filter displayed
