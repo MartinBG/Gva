@@ -30,17 +30,16 @@
               }));
               expect(sortingSettings)
                 .toEqual([
-                  'sorting_disabled username',
-                  'roles sorting',
-                  'isActive sorting_desc',
-                  'sorting'
+                  'sorting_disabled sc-username',
+                  'sc-roles sorting',
+                  'sc-isActive sorting_desc',
+                  'sc-undefined sorting'
                 ]);
             });
       });
 
     it('should sort correctly columns data when their headers are clicked', function() {
       var firstUsername,
-        username,
         sortValue = ptor.findElement(gvaBy.datatable('users').row(0))
           .findElement(protractor.By.css('th:nth-child(3)'))
           .then(function (element) {
@@ -53,14 +52,38 @@
 
       expect(firstUsername.getText()).toEqual('test1');
 
-      expect(sortValue).toEqual('isActive sorting_asc');
+      expect(sortValue).toEqual('sc-isActive sorting_asc');
+    });
 
-      ptor.findElement(protractor.By.id('loadManybtn')).click().then(function(){
-        username = ptor.findElement(
-          gvaBy.datatable('users').row(3070).column('username'));
-        expect(username.getText()).toEqual('georgi');
-
+    it('should sort correctly columns data when their headers are clicked' +
+      'and many users are loaded',
+      function() {
+        ptor.findElement(gvaBy.datatable('users').row(0))
+          .findElement(protractor.By.css('th:nth-child(3)'))
+          .then(function (element) {
+            element.click();
+          });
+        ptor.findElement(protractor.By.id('loadManybtn')).click().then(function(){
+          var username = ptor.findElement(
+            gvaBy.datatable('users').row(3070).column('username'));
+          expect(username.getText()).toEqual('georgi');
+        });
       });
+
+    it('correct settings should be set by sc-datatable parameters', function() {
+       //no filter displayed
+      expect(ptor.findElement(gvaBy.datatable('users').inputFilter().isDisplayed()))
+        .toEqual(false);
+      //no pagination displayed
+      expect(ptor.findElements(
+        protractor.By.css('ul[class=pagination] li:nth-child(3) a')).length);
+      //no range filter displayed
+      expect(ptor.findElement(gvaBy.datatable('users').lengthFilter().isDisplayed()))
+        .toEqual(false);
+      //no dynamic-columns button displayed
+      expect(ptor.findElement(gvaBy.datatable('users').buttonHideColumns().isDisplayed()))
+        .toEqual(false);
+
     });
 
   });

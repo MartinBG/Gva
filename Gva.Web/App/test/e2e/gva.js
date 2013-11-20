@@ -70,9 +70,104 @@
               return driver.findElements(protractor.By.css(selector));
             }
         };
+      },
+      inputFilter: function() {
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(
+              protractor.By.css(
+              'div[ng-model=' + model + '] ' +
+              'div[class=dataTables_filter] ' +
+              'input'));
+          },
+          isDisplayed: function () {
+            return {
+              findOverride: function(driver) {
+                var selector = 'div[ng-model=' + model + '] ' +
+                  'div[class=dataTables_filter]';
+                return driver.isElementPresent(protractor.By.css(selector));
+              }
+            };
+          }
+        };
+      },
+      infoText: function() {
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(
+              protractor.By.css(
+              'div[ng-model=' + model + '] ' +
+              'div[class=dataTables_info]'));
+          }
+        };
+      },
+      buttonHideColumns: function() {
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(
+              protractor.By.css(
+              'div[ng-model=' + model + '] ' +
+              'button[data-toggle=dropdown]'));
+          },
+          isDisplayed: function () {
+            return {
+              findOverride: function(driver) {
+                var selector = 'div[ng-model=' + model + '] ' +
+                  'div[class*=ng-hide] ' +
+                  'button[data-toggle=dropdown]';
+
+                return !driver.isElementPresent(protractor.By.css(selector));
+              }
+            };
+          }
+        };
+      },
+      hideColumnsCheckbox: function(number) {
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(
+                protractor.By.css(
+                'div[ng-model=' + model + '] ' +
+                'div[class=dropdown-menu] ' +
+                'div:nth-child(' + (number+1) + ') ' +
+                'input[type=checkbox]'));
+          }
+        };
+      },
+      lengthFilter: function () {
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(
+                protractor.By.css(
+                'div[ng-model=' + model + '] ' +
+                'div[class=dataTables_length] ' +
+                'select'));
+          },
+          option: function (number) {
+            return {
+              findOverride: function(driver) {
+                return driver.findElement(
+                  protractor.By.css(
+                  'div[ng-model=' + model + '] ' +
+                  'div[class=dataTables_length] ' +
+                  'select ' +
+                  'option:nth-child(' + (number+1) + ')'));
+              }
+            };
+          },
+          isDisplayed: function () {
+            return {
+              findOverride: function(driver) {
+                var selector = 'div[ng-model=' + model + '] ' +
+                  'div[class=dataTables_length] ' +
+                  'select';
+                return driver.isElementPresent(protractor.By.css(selector));
+              }
+            };
+          }
+        };
       }
     };
-
 
   };
 

@@ -1,5 +1,5 @@
 ﻿<div class="container page-content">
-  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="false">
     <sc-column data="username" title="Потребителско име" type="string" name="username">
     </sc-column>
     <sc-column data="fullname" title="Име" type="string" name="name">
@@ -15,8 +15,14 @@
   </sc-datatable>
 </div>
 <div class="container page-content">
-  <button type="button" class="btn-xs btn-info" ng-click="loadMany()" id="loadManybtn">Load many users</button>
+  <div class="row well">
+    <label class="control-label">Edited User:
+      <input style="width: 100px;" ng-model="btnResult" />
+    </label>
+    <button type="button" class="btn-xs btn-info" ng-click="loadMany()" id="loadManybtn">Load many users</button>
+  </div>
 </div>
+
 <div class="container page-content">
   <sc-datatable ng-model="users2" sortable="false" pageable="false" dynamic-columns="false">
     <sc-column data="username" title="Потребителско име" type="string" name="username">
