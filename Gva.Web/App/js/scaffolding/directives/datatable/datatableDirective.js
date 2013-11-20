@@ -6,67 +6,47 @@ Usage <sc-datatable ng-model="data"
         dynamic-columns="true|false">
  </sc-datatable>
 */
-
 /*global angular*/
 (function (angular) {
   'use strict';
   function DatatableDirective(l10n) {
     return {
       restrict: 'E',
-      replace: true,
+      replace: false,
       transclude: true,
       templateUrl:'scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         ngModel: '=',
-        filterable: '&',
-        pageable: '&',
-        sortable: '&',
-        dynamicColumns: '&'
+        filterable: '@',
+        pageable: '@',
+        sortable: '@',
+        dynamicColumns: '@'
       },
-
       link: function (scope, iElement) {
-        var table,
-          filterable = scope.filterable(),
-          pageable = scope.pageable(),
-          sortable = scope.sortable(),
-          dynamicColumns = scope.dynamicColumns();
+        var table;
 
-        if(dynamicColumns) {
+        if(scope.dynamicColumns) {
           scope.hideColumn = function (value, i) {
-              table.fnSetColumnVis(i, scope.aoColumnDefs[i].bVisible);
+              table.fnSetColumnVis(i, !scope.aoColumnDefs[i].bVisible);
             };
         }
-
+        
         scope.$watch('ngModel', function(){
           if(scope.ngModel) {
-
             table = iElement.find('table').dataTable({
               aaData: scope.ngModel,
               bDestroy: true,
-              bFilter: filterable,
-              bPaginate: pageable,
-              bSort: sortable,
+              bFilter: scope.filterable === 'false' ? false : true,
+              bPaginate: scope.pageable === 'false'? false : true,
+              bSort: scope.sortable === 'false'? false : true,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
               sDom: '<<"span4"l><"span4"f>r>t' +
                   '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
-              sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
-                  angular.element('.dataTables_filter input').addClass('form-control input-sm');
-                  angular.element('.dataTables_filter input').css('width', '200px');
-                  angular.element('.dataTables_length select').addClass('form-control input-sm');
-                  angular.element('.dataTables_length select').css('width', '75px');
+                  angular.element('.dataTables_length select').select2();
                 },
-              fnRowCallback: function(nRow) {
-                angular.forEach(nRow.children, function(child){
-                  var dataName = child.className.match(/sc-\w+/).toString(),
-                    dataNameSubstring = dataName.substring(3,dataName.length),
-                    className = dataNameSubstring !== 'undefined' ? dataNameSubstring : '';
-
-                  angular.element('td:eq(' + child.cellIndex +')', nRow).attr('data', className);
-                });
-              },
               oLanguage: {
                 sInfo: l10n.get('datatableDirective.info'),
                 sLengthMenu: l10n.get('datatableDirective.displayRecords'),
@@ -82,7 +62,7 @@ Usage <sc-datatable ng-model="data"
                   sPrevious: l10n.get('datatableDirective.previousPage')
                 }
               }
-            });
+            }).fnSetFilteringDelay();
           }
 
         });
@@ -102,11 +82,10 @@ Usage <sc-datatable ng-model="data"
             mData: column.data || '',
             bSortable: column.sortable === 'false'? false : true,
             bVisible: column.visible === 'false'? false : true,
-            sType: column.type || '',
+            sType: column.type || 'string',
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
-            sDefaultContent:'',
-            sClass: 'sc-' + column.data
+            sDefaultContent: ''
           });
 
         };

@@ -207,7 +207,13 @@
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
     <Content Include="App\test\e2e\directives\sc-files\specs\filesSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\controllers\scDatatableCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\specs\columnSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\specs\datatableSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\templates\scColumn.html" />
+    <Content Include="App\test\e2e\directives\sc-datatable\templates\scDatatable.html" />
     <Content Include="App\test\e2e\directives\sc-search\controllers\scSearchCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\filterSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
@@ -232,6 +238,7 @@
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\gva.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

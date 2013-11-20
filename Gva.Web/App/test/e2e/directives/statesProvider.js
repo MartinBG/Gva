@@ -47,6 +47,28 @@
             controller: 'directive-tests.ScFilesCtrl'
           }
         }
+      },
+      'scDatatableTest': {
+        name: 'directive-tests.datatable',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/datatable',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-datatable/templates/scDatatable.html',
+            controller: 'directive-tests.ScDatatableCtrl'
+          }
+        }
+      },
+      'scColumnTest': {
+        name: 'directive-tests.datatable.column',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/datatable/column',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-datatable/templates/scColumn.html',
+            controller: 'directive-tests.ScDatatableCtrl'
+          }
+        }
       }
     };
 
@@ -54,7 +76,9 @@
       .state(this.states.scInputTest)
       .state(this.states.scSelectTest)
       .state(this.states.scSearchTest)
-      .state(this.states.scFilesTest);
+      .state(this.states.scFilesTest)
+      .state(this.states.scDatatableTest)
+      .state(this.states.scColumnTest);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];
