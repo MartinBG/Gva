@@ -14,7 +14,7 @@ namespace Regs.Api.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public string NameAlt { get; set; }
-        public Nullable<int> ParentValueId { get; set; }
+        public int? ParentValueId { get; set; }
         public string Alias { get; set; }
         public string TextContent { get; set; }
         public bool IsActive { get; set; }
@@ -69,7 +69,6 @@ namespace Regs.Api.Models
             this.HasOptional(t => t.ParentValue)
                 .WithMany()
                 .HasForeignKey(d => d.ParentValueId);
-
         }
     }
 }

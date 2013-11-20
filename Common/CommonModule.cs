@@ -2,6 +2,7 @@
 using Common.Models;
 using Ninject.Modules;
 using Ninject.Extensions.NamedScope;
+using Common.Infrastructure;
 
 namespace Common
 {
@@ -11,6 +12,7 @@ namespace Common
         {
             Bind<IUnitOfWork>().To<UnitOfWork>().InCallScope();
             Bind<IDbConfiguration>().To<CommonDbConfiguration>();
+            Bind<IUserContextProvider>().To<UserContextProvider>();
         }
     }
 }

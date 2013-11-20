@@ -7,8 +7,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Gva.Web.App_Start;
 using Ninject;
-using Microsoft.Practices.ServiceLocation;
-using CommonServiceLocator.NinjectAdapter.Unofficial;
 
 namespace Gva.Web
 {
@@ -20,8 +18,6 @@ namespace Gva.Web
         {
             IKernel kernel = new StandardKernel();
             NinjectConfig.RegisterServices(kernel);
-
-            ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(kernel));
 
             MvcConfig.Register(kernel);
 

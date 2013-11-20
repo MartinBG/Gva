@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using NLog;
-using NLog.Internal;
+using Common.Utils.Expressions;
+using System.Data.Entity.Core;
 
 namespace Common.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private static readonly Func<EntityReference, EntityKey> relatedEndCachedValueAccessor = ExpressionHelper.GetFieldAccessor<EntityReference, EntityKey>("_cachedForeignKey");
 
         private static object syncRoot = new object();
 
@@ -37,6 +42,24 @@ namespace Common.Data
         {
             try
             {
+                context.ChangeTracker.DetectChanges();
+
+                foreach (ObjectStateEntry entry in ((IObjectContextAdapter)context).ObjectContext.ObjectStateManager
+                                                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
+                                                 .Where(e => !e.IsRelationship))
+                {
+                    if (entry.RelationshipManager.GetAllRelatedEnds()
+                        .Any(re =>
+                            re is EntityReference &&
+                            re.RelationshipSet.ElementType.RelationshipEndMembers
+                                .Any(rem => rem.Name == re.TargetRoleName &&
+                                    rem.DeleteBehavior == OperationAction.Cascade) &&
+                            relatedEndCachedValueAccessor((EntityReference)re).EntityContainerName.Contains("EntityHasNullForeignKey")))
+                    {
+                        ((IObjectContextAdapter)context).ObjectContext.DeleteObject(entry.Entity);
+                    }
+                }
+
                 context.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -86,6 +109,9 @@ namespace Common.Data
 
                         DbModelBuilder modelBuilder = new DbModelBuilder();
 
+                        modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+                        modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
                         foreach (IDbConfiguration configuration in configurations)
                         {
                             configuration.AddConfiguration(modelBuilder);
@@ -110,6 +136,10 @@ namespace Common.Data
                     this.context.Configuration.LazyLoadingEnabled = false;
                     this.context.Configuration.ProxyCreationEnabled = false;
                     this.context.Configuration.UseDatabaseNullSemantics = true;
+
+#if DEBUG
+                    this.context.Database.Log = s => Debug.WriteLine(s);
+#endif
                 }
 
                 return this.context;

@@ -27,3 +27,9 @@ GO
 :r $(rootPath)"\Tables\Users\Users.sql"
 :r $(rootPath)"\Tables\Users\Roles.sql"
 :r $(rootPath)"\Tables\Users\UserRoles.sql"
+
+
+---------------------------------------------------------------
+-- Insert
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\TestUsers.sql"

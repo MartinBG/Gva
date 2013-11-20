@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotCommitVersions] (
-    [LotPartVersionId]   INT   NOT NULL IDENTITY,
+    [LotPartVersionId]   INT   NOT NULL,
     [LotCommitId]        INT   NOT NULL,
     CONSTRAINT [PK_LotCommitVersions]                  PRIMARY KEY ([LotPartVersionId], [LotCommitId]),
     CONSTRAINT [FK_LotCommitVersions_LotCommits]       FOREIGN KEY ([LotCommitId])      REFERENCES [dbo].[LotCommits]      ([LotCommitId]),
