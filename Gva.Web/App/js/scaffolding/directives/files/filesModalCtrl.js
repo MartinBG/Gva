@@ -2,7 +2,13 @@
 (function (angular, _, alert, $) {
   'use strict';
 
-  function FilesModalCtrl($scope, $q, $interpolate, $modalInstance, scFilesConfig, files) {
+  function FilesModalCtrl($scope,
+    $q,
+    $interpolate,
+    $modalInstance,
+    scFilesConfig,
+    files,
+    isReadonly) {
     var pendingUploads = {},
       uploadedFiles = {},
       canceled;
@@ -12,6 +18,7 @@
     $scope.filesUploaded = 0;
     $scope.filesLength = 0;
     $scope.scFilesConfig = scFilesConfig;
+    $scope.isReadonly = isReadonly;
 
     (files || []).forEach(function (file) {
       var key = file.relativePath + file.name + ';' + file.key;
@@ -209,7 +216,8 @@
     '$interpolate',
     '$modalInstance',
     'scFilesConfig',
-    'files'
+    'files',
+    'isReadonly'
   ];
 
   angular.module('scaffolding').controller('scaffolding.FilesModalCtrl', FilesModalCtrl);

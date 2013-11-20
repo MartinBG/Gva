@@ -4,10 +4,10 @@
 </div>
 <div class="modal-body">
 
-  <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}" ng-show="!isUploading">
+  <span class="btn btn-success fileinput-button"  ng-show="!isUploading && !isReadonly">
     <i class="glyphicon glyphicon-plus"></i>
     <span>Избери файлове</span>
-    <input class="test-file-upload-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple ng-disabled="false">
+    <input class="test-file-upload-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple>
   </span>
   <div style="margin-bottom: 14px; height: 15px; position: relative;"
     ng-show="isUploading">

@@ -19,6 +19,11 @@
         link: function link(scope, iElement, iAttrs, controllers) {
           var filesCtrl = controllers[0],
               ngModelCtrl = controllers[1];
+
+          scope.$watch(function () {
+            scope.isReadonly = !!iAttrs.readonly;
+          });
+
           filesCtrl.setNgModelCtrl(ngModelCtrl);
         }
       };

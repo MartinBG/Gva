@@ -19,6 +19,9 @@
         resolve: {
           files: function () {
             return self.ngModel.$viewValue;
+          },
+          isReadonly: function () {
+            return $scope.isReadonly;
           }
         }
       });
@@ -40,9 +43,10 @@
 
   FilesCtrl.prototype.updateScope = function (files, $scope) {
     var self = this;
-
     $scope.singleFile = false;
+    $scope.noFiles = false;
     if (files.length === 0) {
+      $scope.noFiles = true;
       $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFiles');
     } else if (files.length === 1) {
       $scope.singleFile = true;
