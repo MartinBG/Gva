@@ -12,41 +12,57 @@ Usage <sc-datatable ng-model="data"
   function DatatableDirective(l10n) {
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       templateUrl:'scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         ngModel: '=',
-        filterable: '@',
-        pageable: '@',
-        sortable: '@',
-        dynamicColumns: '@'
+        filterable: '&',
+        pageable: '&',
+        sortable: '&',
+        dynamicColumns: '&'
       },
-      link: function (scope, iElement) {
-        var table;
 
-        if(scope.dynamicColumns) {
+      link: function (scope, iElement) {
+        var table,
+          filterable = scope.filterable() === undefined? true : scope.filterable(),
+          pageable = scope.pageable() === undefined? true : scope.pageable(),
+          sortable = scope.sortable() === undefined? true : scope.sortable(),
+          dynamicColumns = scope.dynamicColumns() === undefined? true : scope.dynamicColumns();
+
+        if(dynamicColumns) {
           scope.hideColumn = function (value, i) {
               table.fnSetColumnVis(i, !scope.aoColumnDefs[i].bVisible);
             };
         }
-        
+
         scope.$watch('ngModel', function(){
           if(scope.ngModel) {
+
             table = iElement.find('table').dataTable({
               aaData: scope.ngModel,
               bDestroy: true,
-              bFilter: scope.filterable === 'false' ? false : true,
-              bPaginate: scope.pageable === 'false'? false : true,
-              bSort: scope.sortable === 'false'? false : true,
+              bFilter: filterable,
+              bPaginate: pageable,
+              bSort: sortable,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
               sDom: '<<"span4"l><"span4"f>r>t' +
                   '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
+              sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
                   angular.element('.dataTables_length select').select2();
                 },
+              fnRowCallback: function(nRow) {
+                angular.forEach(nRow.children, function(child){
+                  var dataName = child.className.match(/sc-\w+/).toString(),
+                    dataNameSubstring = dataName.substring(3,dataName.length),
+                    className = dataNameSubstring !== 'undefined' ? dataNameSubstring : '';
+
+                  angular.element('td:eq(' + child.cellIndex +')', nRow).attr('data', className);
+                });
+              },
               oLanguage: {
                 sInfo: l10n.get('datatableDirective.info'),
                 sLengthMenu: l10n.get('datatableDirective.displayRecords'),
@@ -85,7 +101,8 @@ Usage <sc-datatable ng-model="data"
             sType: column.type || 'string',
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
-            sDefaultContent: ''
+            sDefaultContent:'',
+            sClass: 'sc-' + column.data
           });
 
         };

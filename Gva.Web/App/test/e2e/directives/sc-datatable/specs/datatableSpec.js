@@ -80,11 +80,9 @@
 
     it('should hide and show columns properly using the button called Columns', function() {
       var buttonHideColumns = ptor.findElement(gvaBy.datatable('users').buttonHideColumns()),
-        headers,
-        checkboxesPromise;
+        headers;
 
       buttonHideColumns.click();
-      checkboxesPromise = ptor.findElements(protractor.By.css('input[type=checkbox]'));
 
       ptor.findElement(gvaBy.datatable('users').hideColumnsCheckbox(1)).click();
       buttonHideColumns.click();
