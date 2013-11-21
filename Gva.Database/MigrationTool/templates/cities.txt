@@ -1,0 +1,10 @@
+<% _.each(results, function(res) {
+%>INSERT INTO NomValues (NomValueId,NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES<%
+%>(<%= $int(res.nomValueId) %>,<%= $int(res.nomId) %>,<%= $str(res.CODE) %>,<%= $str(res.NAME) %>,<%= $str(res.NAME_TRANS) %>,<%= $int(idMap['countries'][res.COUNTRY_ID]) %>,NULL,<%= $bool(res.VALID_YN) %>,<%= $json({
+	type: res.TV_TYPE,
+	notes: res.NOTES,
+	postCode: res.POSTAL_CODE_DEFAULT,
+	oblCode: res.OBL_CODE,
+	obstCode: res.OBST_CODE
+}) %>);
+<% }); %>

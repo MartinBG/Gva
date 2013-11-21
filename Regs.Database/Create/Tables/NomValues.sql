@@ -4,13 +4,13 @@ GO
 CREATE TABLE [dbo].[NomValues](
     [NomValueId]      INT            NOT NULL IDENTITY,
     [NomId]           INT            NOT NULL,
-    [Code]            NVARCHAR (50)  NOT NULL,
-    [Name]            NVARCHAR (50)  NOT NULL,
-    [NameAlt]         NVARCHAR (50)  NOT NULL,
+    [Code]            NVARCHAR (500) NULL,
+    [Name]            NVARCHAR (500) NOT NULL,
+    [NameAlt]         NVARCHAR (500) NULL,
     [ParentValueId]   INT            NULL,
     [Alias]           NVARCHAR (50)  NULL,
-    [TextContent]     NVARCHAR (MAX) NOT NULL,
-    [IsActive]        BIT            NOT NULL,
+    [TextContent]     NVARCHAR (MAX) NULL,
+    [IsActive]        BIT            NULL,
     CONSTRAINT [PK_NomValues]           PRIMARY KEY ([NomValueId]),
     CONSTRAINT [FK_NomValues_Noms]      FOREIGN KEY ([NomId])         REFERENCES [dbo].[Noms] ([NomId]),
     CONSTRAINT [FK_NomValues_NomValues] FOREIGN KEY ([ParentValueId]) REFERENCES [dbo].[NomValues] ([NomValueId])
