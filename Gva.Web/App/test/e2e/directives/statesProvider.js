@@ -26,6 +26,17 @@
           }
         }
       },
+      'scNomenclatureTest': {
+        name: 'directive-tests.nomenclature',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/nom',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-x/templates/scNomenclature.html',
+            controller: 'directive-tests.ScNomenclatureCtrl'
+          }
+        }
+      },
       'scSearchTest': {
         name: 'directive-tests.search',
         parent: navigationStatesProvider.states.root,
@@ -75,6 +86,7 @@
     $stateProvider
       .state(this.states.scInputTest)
       .state(this.states.scSelectTest)
+      .state(this.states.scNomenclatureTest)
       .state(this.states.scSearchTest)
       .state(this.states.scFilesTest)
       .state(this.states.scDatatableTest)

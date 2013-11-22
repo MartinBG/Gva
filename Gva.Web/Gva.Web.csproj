@@ -205,6 +205,9 @@
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\server\file.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-x\controllers\scNomenclatureCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-x\specs\nomenclatureSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-x\templates\scNomenclature.html" />
     <Content Include="App\test\e2e\expressServer.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
