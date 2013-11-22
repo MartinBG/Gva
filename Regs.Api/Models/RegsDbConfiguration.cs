@@ -1,10 +1,5 @@
-﻿using Common.Data;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using Common.Data;
 
 namespace Regs.Api.Models
 {
@@ -17,8 +12,6 @@ namespace Regs.Api.Models
             modelBuilder.Configurations.Add(new NomMap());
             modelBuilder.Configurations.Add(new NomValueMap());
             modelBuilder.Configurations.Add(new PartMap());
-            modelBuilder.Configurations.Add(new PartExtMap());
-            modelBuilder.Configurations.Add(new PartOperationMap());
             modelBuilder.Configurations.Add(new PartVersionMap());
             modelBuilder.Configurations.Add(new SetMap());
             modelBuilder.Configurations.Add(new SetPartMap());

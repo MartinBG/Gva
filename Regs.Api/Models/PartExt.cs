@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
     public partial class PartExt
     {
         public int PartId { get; set; }
-        public Nullable<int> IndexPartVersionId { get; set; }
+        public int? IndexPartVersionId { get; set; }
         public int CommitedPartVersionId { get; set; }
         public int FirstPartVersionId { get; set; }
 
@@ -36,7 +32,7 @@ namespace Regs.Api.Models
 
             // Relationships
             this.HasRequired(t => t.Part)
-                .WithOptional(t => t.PartExt);
+                .WithOptional();
 
             this.HasRequired(t => t.CommitedPartVersion)
                 .WithMany()

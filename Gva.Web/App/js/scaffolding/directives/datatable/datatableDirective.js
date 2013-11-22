@@ -6,7 +6,6 @@ Usage <sc-datatable ng-model="data"
         dynamic-columns="true|false">
  </sc-datatable>
 */
-
 /*global angular*/
 (function (angular) {
   'use strict';
@@ -26,14 +25,14 @@ Usage <sc-datatable ng-model="data"
 
       link: function (scope, iElement) {
         var table,
-          filterable = scope.filterable(),
-          pageable = scope.pageable(),
-          sortable = scope.sortable(),
-          dynamicColumns = scope.dynamicColumns();
+          filterable = scope.filterable() === undefined? true : scope.filterable(),
+          pageable = scope.pageable() === undefined? true : scope.pageable(),
+          sortable = scope.sortable() === undefined? true : scope.sortable(),
+          dynamicColumns = scope.dynamicColumns() === undefined? true : scope.dynamicColumns();
 
         if(dynamicColumns) {
           scope.hideColumn = function (value, i) {
-              table.fnSetColumnVis(i, scope.aoColumnDefs[i].bVisible);
+              table.fnSetColumnVis(i, !scope.aoColumnDefs[i].bVisible);
             };
         }
 
@@ -53,10 +52,7 @@ Usage <sc-datatable ng-model="data"
               sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
-                  angular.element('.dataTables_filter input').addClass('form-control input-sm');
-                  angular.element('.dataTables_filter input').css('width', '200px');
-                  angular.element('.dataTables_length select').addClass('form-control input-sm');
-                  angular.element('.dataTables_length select').css('width', '75px');
+                  angular.element('.dataTables_length select').select2();
                 },
               fnRowCallback: function(nRow) {
                 angular.forEach(nRow.children, function(child){
@@ -82,7 +78,7 @@ Usage <sc-datatable ng-model="data"
                   sPrevious: l10n.get('datatableDirective.previousPage')
                 }
               }
-            });
+            }).fnSetFilteringDelay();
           }
 
         });
@@ -102,7 +98,7 @@ Usage <sc-datatable ng-model="data"
             mData: column.data || '',
             bSortable: column.sortable === 'false'? false : true,
             bVisible: column.visible === 'false'? false : true,
-            sType: column.type || '',
+            sType: column.type || 'string',
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',

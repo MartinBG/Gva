@@ -57,6 +57,7 @@
     <Content Include="Create\Tools\spDesc.sql" />
     <Content Include="Create\Tools\sp_generate_inserts.sql" />
     <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
+    <Content Include="Insert\TestUsers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

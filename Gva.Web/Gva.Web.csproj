@@ -41,9 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator.NinjectAdapter.Unofficial">
-      <HintPath>..\packages\CommonServiceLocator.NinjectAdapter.Unofficial.3.0.1.10\lib\Net40\CommonServiceLocator.NinjectAdapter.Unofficial.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
@@ -53,9 +50,6 @@
       <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -215,7 +209,13 @@
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />
     <Content Include="App\test\e2e\directives\sc-files\specs\filesSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\controllers\scDatatableCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\specs\columnSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\specs\datatableSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-datatable\templates\scColumn.html" />
+    <Content Include="App\test\e2e\directives\sc-datatable\templates\scDatatable.html" />
     <Content Include="App\test\e2e\directives\sc-search\controllers\scSearchCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\filterSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
@@ -240,6 +240,7 @@
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\gva.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -293,9 +294,6 @@
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
       <Name>Regs.Api</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="_MSBuild\NuGetPackageAndPublish.targets" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

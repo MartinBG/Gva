@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
@@ -19,7 +15,6 @@ namespace Regs.Api.Models
         public int LotId { get; set; }
         public string Path { get; set; }
 
-        public virtual PartExt PartExt { get; set; }
         public virtual Lot Lot { get; set; }
         public virtual SetPart SetPart { get; set; }
         public virtual ICollection<PartVersion> PartVersions { get; set; }
@@ -47,12 +42,12 @@ namespace Regs.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithMany(t => t.Parts)
-                .HasForeignKey(d => d.LotId);
+                .HasForeignKey(d => d.LotId)
+                .WillCascadeOnDelete();
 
             this.HasRequired(t => t.SetPart)
                 .WithMany(t => t.Parts)
                 .HasForeignKey(d => d.SetPartId);
-
         }
     }
 }

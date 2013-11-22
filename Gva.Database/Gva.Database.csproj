@@ -53,6 +53,97 @@
     <Content Include="Create\Tables\GvaApplications.sql" />
     <Content Include="Create\Tables\GvaRating.sql" />
     <Content Include="Create\Tables\GvaRatingDates.sql" />
+    <Content Include="Insert\Noms\addressTypes.sql" />
+    <Content Include="Insert\Noms\aircraftClases66.sql" />
+    <Content Include="Insert\Noms\aircraftGroup66.sql" />
+    <Content Include="Insert\Noms\aircraftTCHolders.sql" />
+    <Content Include="Insert\Noms\aircraftTypeGroups.sql" />
+    <Content Include="Insert\Noms\aircraftTypes.sql" />
+    <Content Include="Insert\Noms\applicationpaymentTypes.sql" />
+    <Content Include="Insert\Noms\applicationTypes.sql" />
+    <Content Include="Insert\Noms\authorizationGroups.sql" />
+    <Content Include="Insert\Noms\authorizations.sql" />
+    <Content Include="Insert\Noms\caa.sql" />
+    <Content Include="Insert\Noms\cities.sql" />
+    <Content Include="Insert\Noms\countries.sql" />
+    <Content Include="Insert\Noms\currencies.sql" />
+    <Content Include="Insert\Noms\directions.sql" />
+    <Content Include="Insert\Noms\documentRoles.sql" />
+    <Content Include="Insert\Noms\documentTypes.sql" />
+    <Content Include="Insert\Noms\employmentCategories.sql" />
+    <Content Include="Insert\Noms\experienceMeasures.sql" />
+    <Content Include="Insert\Noms\experienceRoles.sql" />
+    <Content Include="Insert\Noms\gender.sql" />
+    <Content Include="Insert\Noms\graduations.sql" />
+    <Content Include="Insert\Noms\licenceActions.sql" />
+    <Content Include="Insert\Noms\licenceTypeDictionary.sql" />
+    <Content Include="Insert\Noms\licenceTypes.sql" />
+    <Content Include="Insert\Noms\limitations66.sql" />
+    <Content Include="Insert\Noms\locationIndicators.sql" />
+    <Content Include="Insert\Noms\medClasses.sql" />
+    <Content Include="Insert\Noms\medDocPublishers.sql" />
+    <Content Include="Insert\Noms\medLimitation.sql" />
+    <Content Include="Insert\Noms\organizationKinds.sql" />
+    <Content Include="Insert\Noms\organizationTypes.sql" />
+    <Content Include="Insert\Noms\otherDocPublishers.sql" />
+    <Content Include="Insert\Noms\personCheckDocumentRoles.sql" />
+    <Content Include="Insert\Noms\personCheckDocumentTypes.sql" />
+    <Content Include="Insert\Noms\personIddocumentTypes.sql" />
+    <Content Include="Insert\Noms\personRatingLevels.sql" />
+    <Content Include="Insert\Noms\personStatusTypes.sql" />
+    <Content Include="Insert\Noms\ratingClasses.sql" />
+    <Content Include="Insert\Noms\ratingClassGroups.sql" />
+    <Content Include="Insert\Noms\ratingSubClasses.sql" />
+    <Content Include="Insert\Noms\ratingTypes.sql" />
+    <Content Include="Insert\Noms\schools.sql" />
+    <Content Include="Insert\Noms\staffTypes.sql" />
+    <Content Include="MigrationTool\gruntfile.js" />
+    <Content Include="MigrationTool\migration.js" />
+    <Content Include="MigrationTool\templates\addressTypes.txt" />
+    <Content Include="MigrationTool\templates\aircraftClases66.txt" />
+    <Content Include="MigrationTool\templates\aircraftGroup66.txt" />
+    <Content Include="MigrationTool\templates\aircraftTCHolders.txt" />
+    <Content Include="MigrationTool\templates\aircraftTypeGroups.txt" />
+    <Content Include="MigrationTool\templates\aircraftTypes.txt" />
+    <Content Include="MigrationTool\templates\applicationpaymentTypes.txt" />
+    <Content Include="MigrationTool\templates\applicationTypes.txt" />
+    <Content Include="MigrationTool\templates\authorizationGroups.txt" />
+    <Content Include="MigrationTool\templates\authorizations.txt" />
+    <Content Include="MigrationTool\templates\caa.txt" />
+    <Content Include="MigrationTool\templates\cities.txt" />
+    <Content Include="MigrationTool\templates\countries.txt" />
+    <Content Include="MigrationTool\templates\currencies.txt" />
+    <Content Include="MigrationTool\templates\directions.txt" />
+    <Content Include="MigrationTool\templates\documentRoles.txt" />
+    <Content Include="MigrationTool\templates\documentTypes.txt" />
+    <Content Include="MigrationTool\templates\employmentCategories.txt" />
+    <Content Include="MigrationTool\templates\experienceMeasures.txt" />
+    <Content Include="MigrationTool\templates\experienceRoles.txt" />
+    <Content Include="MigrationTool\templates\gender.txt" />
+    <Content Include="MigrationTool\templates\graduations.txt" />
+    <Content Include="MigrationTool\templates\licenceActions.txt" />
+    <Content Include="MigrationTool\templates\licenceTypeDictionary.txt" />
+    <Content Include="MigrationTool\templates\licenceTypes.txt" />
+    <Content Include="MigrationTool\templates\limitations66.txt" />
+    <Content Include="MigrationTool\templates\locationIndicators.txt" />
+    <Content Include="MigrationTool\templates\medClasses.txt" />
+    <Content Include="MigrationTool\templates\medDocPublishers.txt" />
+    <Content Include="MigrationTool\templates\medLimitation.txt" />
+    <Content Include="MigrationTool\templates\organizationKinds.txt" />
+    <Content Include="MigrationTool\templates\organizationTypes.txt" />
+    <Content Include="MigrationTool\templates\otherDocPublishers.txt" />
+    <Content Include="MigrationTool\templates\personCheckDocumentRoles.txt" />
+    <Content Include="MigrationTool\templates\personCheckDocumentTypes.txt" />
+    <Content Include="MigrationTool\templates\personIddocumentTypes.txt" />
+    <Content Include="MigrationTool\templates\personRatingLevels.txt" />
+    <Content Include="MigrationTool\templates\personStatusTypes.txt" />
+    <Content Include="MigrationTool\templates\ratingClasses.txt" />
+    <Content Include="MigrationTool\templates\ratingClassGroups.txt" />
+    <Content Include="MigrationTool\templates\ratingSubClasses.txt" />
+    <Content Include="MigrationTool\templates\ratingTypes.txt" />
+    <Content Include="MigrationTool\templates\schools.txt" />
+    <Content Include="MigrationTool\templates\staffTypes.txt" />
+    <Content Include="MigrationTool\templates\_wrapper.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -66,6 +157,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CreateAll.log</LastGenOutput>
     </None>
+    <None Include="MigrationTool\.jshintrc" />
+    <None Include="MigrationTool\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

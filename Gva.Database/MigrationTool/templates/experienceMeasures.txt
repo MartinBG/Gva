@@ -1,0 +1,6 @@
+<% _.each(results, function(res) { 
+%>INSERT INTO NomValues (NomValueId,NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES<%
+%>(<%= $int(res.nomValueId) %>,<%= $int(res.nomId) %>,<%= $str(res.CODE) %>,<%= $str(res.NAME) %>,<%= $str(res.NAME_TRANS) %>,NULL,NULL,<%= $bool(res.VALID_YN) %>,<%= $json({
+	codeCA: res.CA_CODE
+}) %>);
+<% }); %>

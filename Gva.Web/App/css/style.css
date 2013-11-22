@@ -46,17 +46,6 @@ div.labeless
   padding: 5px 15px;
 }
 
-.pagination > .active > a, .pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus
-{
-  background-color: #f5f5f5;
-  color: #999;
-  cursor: default;
-}
-
 /*****TREE*******/
 ul.tree
 {
@@ -119,3 +108,31 @@ i.tree-image-close
   margin-top: 0px;
 }
 /****************/
+.pagination > .active > a, .pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus
+{
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: default;
+}
+
+.dataTables_filter input {
+    width: 200px;
+    display: inline-block;
+    height: 30px;
+    padding: 5px 10px;
+    line-height: 1.5;
+    color: rgb(85, 85, 85);
+    vertical-align: middle;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.dynamic-columns-btn {
+    margin-left:5px
+}

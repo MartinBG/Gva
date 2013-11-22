@@ -1,10 +1,7 @@
-﻿using Common.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common.Models;
 
 namespace Regs.Api.Models
 {
@@ -19,7 +16,6 @@ namespace Regs.Api.Models
         public int PartId { get; set; }
         public int TextBlobId { get; set; }
         public int OriginalCommitId { get; set; }
-        public int PartOperationId { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreateDate { get; set; }
 
@@ -44,7 +40,7 @@ namespace Regs.Api.Models
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.TextBlobId).HasColumnName("TextBlobId");
             this.Property(t => t.OriginalCommitId).HasColumnName("OriginalCommitId");
-            this.Property(t => t.PartOperationId).HasColumnName("LotPartOperationId");
+            this.Property(t => t.PartOperation).HasColumnName("LotPartOperationId");
             this.Property(t => t.CreatorId).HasColumnName("CreatorId");
             this.Property(t => t.CreateDate).HasColumnName("CreateDate");
 
@@ -53,13 +49,10 @@ namespace Regs.Api.Models
                 .WithMany()
                 .HasForeignKey(d => d.OriginalCommitId);
 
-            this.HasRequired(t => t.PartOperation)
-                .WithMany()
-                .HasForeignKey(d => d.PartOperationId);
-
             this.HasRequired(t => t.Part)
                 .WithMany(t => t.PartVersions)
-                .HasForeignKey(d => d.PartId);
+                .HasForeignKey(d => d.PartId)
+                .WillCascadeOnDelete();
 
             this.HasRequired(t => t.TextBlob)
                 .WithMany()

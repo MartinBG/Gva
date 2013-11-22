@@ -1,0 +1,9 @@
+<% _.each(results, function(res) { 
+%>INSERT INTO NomValues (NomValueId,NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES<%
+%>(<%= $int(res.nomValueId) %>,<%= $int(res.nomId) %>,<%= $str(res.CODE) %>,<%= $str(res.NAME) %>,<%= $str(res.NAME_TRANS) %>,<%= idMap['countries'][res.COUNTRY_ID] %>,NULL,<%= $bool(res.VALID_YN) %>,<%= $json({
+	heading: res.HEADING,
+	headingAlt: res.HEADING_TRANS,
+	subHeading: res.SUBHEADING,
+	subHeadingAlt: res.SUBHEADING_TRANS
+}) %>);
+<% }); %>
