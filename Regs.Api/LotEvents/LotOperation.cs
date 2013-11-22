@@ -5,8 +5,8 @@
         AddPart,
         UpdatePart,
         DeletePart,
-        Reset,
         ResetPart,
+        Reset,
         Commit
     }
 }
