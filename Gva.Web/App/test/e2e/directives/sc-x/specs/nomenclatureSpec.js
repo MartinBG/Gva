@@ -1,8 +1,6 @@
-﻿/*global protractor, describe, beforeEach, it, expect, require*/
-(function (protractor, describe, beforeEach, it, expect, require) {
+﻿/*global protractor, describe, beforeEach, it, expect*/
+(function (protractor, describe, beforeEach, it, expect) {
   'use strict';
-
-  var gvaBy = require('../../../gva.js').GvaBy;
 
   describe('Sc-select directive', function() {
     var ptor = protractor.getInstance(),
@@ -16,14 +14,15 @@
     });
 
     it('should display initial value.', function() {
-      expect(ptor.findElement(gvaBy.nomenclature('gender').text()).getText()).toEqual('Жена');
+      expect(ptor.findElement(protractor.By.nomenclature('gender').text()).getText())
+        .toEqual('Жена');
       expect(selectedNomId.getText()).toEqual('2');
       expect(selectedNomName.getText()).toEqual('Жена');
     });
 
     it('should clear selection and update model value.', function() {
       ptor
-        .findElement(gvaBy.nomenclature('gender').deselectButton())
+        .findElement(protractor.By.nomenclature('gender').deselectButton())
         .click()
         .then(function () {
           expect(selectedNomId.getText()).toEqual('');
@@ -33,16 +32,16 @@
 
     it('should filter items and update model value.', function() {
       ptor
-        .findElement(gvaBy.nomenclature('gender'))
+        .findElement(protractor.By.nomenclature('gender'))
         .click()
         .then(function () {
           return ptor
-            .findElement(gvaBy.nomenclature('gender').dropdownInput())
+            .findElement(protractor.By.nomenclature('gender').dropdownInput())
             .sendKeys('Мъж');
         })
         .then(function () {
           return ptor
-            .findElement(gvaBy.nomenclature('gender').dropdownInput())
+            .findElement(protractor.By.nomenclature('gender').dropdownInput())
             .sendKeys(protractor.Key.ENTER);
         })
         .then(function () {
@@ -61,4 +60,4 @@
         });
     });
   });
-}(protractor, describe, beforeEach, it, expect, require));
+}(protractor, describe, beforeEach, it, expect));

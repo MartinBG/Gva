@@ -1,15 +1,16 @@
-﻿/*global exports, require, protractor, exports*/
-(function(protractor){
+﻿/*global module, require, global*/
+(function (module, require, global){
   'use strict';
 
   var util = require('util'),
-    GvaBy = {},
-    ProtractorBy = function() {};
+    GvaBy = function() {},
+    ProtractorBy = function() {},
+    protractor = global.protractor;
 
   ProtractorBy.prototype = protractor.By;
   util.inherits(GvaBy, ProtractorBy);
 
-  GvaBy.datatable = function(model) {
+  GvaBy.prototype.datatable = function(model) {
     var datatableContainerCss = 'div[ng-model=' + model + ']';
 
     function createCellSelector(rowIndex, columnData) {
@@ -200,7 +201,7 @@
     };
   };
 
-  GvaBy.nomenclature = function(model) {
+  GvaBy.prototype.nomenclature = function(model) {
     /*jshint -W101*/
     /* jshint -W109*/
     var containerXPath =  "//div[contains(@class,'select2-container') and following-sibling::*[1][self::input and @ng-model='" + model + "']]",
@@ -250,5 +251,6 @@
       }
     };
   };
-  exports.GvaBy = GvaBy;
-}(protractor));
+
+  module.exports = GvaBy;
+}(module, require, global));

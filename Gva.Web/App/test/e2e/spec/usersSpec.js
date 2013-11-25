@@ -1,11 +1,10 @@
-/*global protractor, describe, beforeEach, it, expect, require*/
-(function (protractor) {
+/*global protractor, describe, beforeEach, it, expect*/
+(function (protractor, describe, beforeEach, it, expect) {
 
   'use strict';
   
   describe('Users search page', function() {
     var ptor = protractor.getInstance(),
-        gvaBy = require('../gva.js').GvaBy,
         searchBtn,
         addBtn;
 
@@ -18,7 +17,7 @@
 
     it('should display all users', function() {
       ptor
-        .findElements(gvaBy.datatable('users').column('username'))
+        .findElements(protractor.By.datatable('users').column('username'))
         .then(function (elements) {
           var usernamesPromise = protractor.promise.fullyResolved(elements.map(function (el) {
             return el.getText();
@@ -33,7 +32,7 @@
 
       searchBtn.click().then(function() {
         var firstUsername = ptor.findElement(
-          gvaBy.datatable('users').row(1).column('username'));
+          protractor.By.datatable('users').row(1).column('username'));
         expect(firstUsername.getText()).toEqual('peter');
       });
     });
@@ -47,7 +46,7 @@
 
             searchBtn.click().then(function() {
               var firstFullname = ptor.findElement(
-                gvaBy.datatable('users').row(1).column('fullname'));
+                protractor.By.datatable('users').row(1).column('fullname'));
               expect(firstFullname.getText()).toEqual('Administrator');
             });
           });
@@ -69,7 +68,7 @@
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
                 var firstFullname = ptor.findElement(
-                  gvaBy.datatable('users').row(1).column('fullname'));
+                  protractor.By.datatable('users').row(1).column('fullname'));
                 expect(firstFullname.getText()).toEqual('Administrator');
               });
             });
@@ -84,7 +83,7 @@
               ptor.findElement(protractor.By.css('div[action=search] > button')).click()
                   .then(function() {
                 var firstFullname = ptor.findElement(
-                  gvaBy.datatable('users').row(1).column('fullname'));
+                  protractor.By.datatable('users').row(1).column('fullname'));
                 expect(firstFullname.getText()).toEqual('iztrit');
               });
             });
@@ -93,4 +92,4 @@
       });
     });
   });
-} (protractor));
+} (protractor, describe, beforeEach, it, expect));
