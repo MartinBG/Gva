@@ -80,6 +80,7 @@
         });
       }
     };
+
     $scope.cancel = function () {
       $state.go(usersStates.search);
     };
