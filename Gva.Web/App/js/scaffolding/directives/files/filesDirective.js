@@ -1,4 +1,4 @@
-﻿// Usage: <sc-date ng-model="<model_name> [multiple]" />
+﻿// Usage: <sc-files ng-model="<model_name> [multiple]"> </sc-files>
 
 /*global angular*/
 (function (angular) {
