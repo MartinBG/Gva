@@ -70,12 +70,27 @@
       expect(infoText.getText()).toContain('11');
     });
 
+    it('should evaluate column content expressions on next page', function () {
+      ptor.findElement(protractor.By.id('loadManybtn')).click();
+      ptor.findElement(protractor.By.css('ul[class=pagination] li:nth-child(4) a')).click();
+      var isActiveCol4 = ptor.findElement(gvaBy.datatable('users').row(4).column('isActive'));
+      expect(isActiveCol4.getText()).toBe('Не');
+    });
+
     it('should load 100 entries per page', function() {
       ptor.findElement(protractor.By.id('loadManybtn')).click();
       ptor.findElement(gvaBy.datatable('users').lengthFilter().option(2)).click();
 
       var infoText = ptor.findElement(gvaBy.datatable('users').infoText());
       expect(infoText.getText()).toEqual('Намерени общo 4,096 резултата (от 1 до 50)');
+    });
+
+    it('should evaluate column content expressions when loading more entries', function () {
+      ptor.findElement(protractor.By.id('loadManybtn')).click();
+      ptor.findElement(gvaBy.datatable('users').lengthFilter().option(2)).click();
+
+      var isActiveCol16 = ptor.findElement(gvaBy.datatable('users').row(16).column('isActive'));
+      expect(isActiveCol16.getText()).toBe('Не');
     });
 
     it('should hide and show columns properly using the button called Columns', function() {
