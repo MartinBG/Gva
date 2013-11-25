@@ -224,7 +224,6 @@
     <Content Include="App\test\e2e\directives\sc-datatable\templates\scColumn.html" />
     <Content Include="App\test\e2e\directives\sc-datatable\templates\scDatatable.html" />
     <Content Include="App\test\e2e\directives\sc-search\controllers\scSearchCtrl.js" />
-    <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\filterSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
