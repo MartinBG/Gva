@@ -59,7 +59,7 @@
       multipleFilesBtnElem.click();
 
       openModalBtnElem.click().then(function () {
-        return ptor.findElement(protractor.By.className('btn-default'))
+        return ptor.findElement(protractor.By.className('test-button-close'))
           .click();
       })
       .then(function () {
