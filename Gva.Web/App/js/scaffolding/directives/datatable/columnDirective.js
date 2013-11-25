@@ -15,7 +15,6 @@ Usage: <sc-column model-name="property"
   function ColumnDirective() {
     return {
       restrict: 'E',
-      replace: true,
       require: '^scDatatable',
       transclude: true,
       compile : function(element, attrs, childTranscludeFn){
@@ -34,8 +33,6 @@ Usage: <sc-column model-name="property"
 
               angular.element(nTd).empty();
               angular.element(nTd).append(clone);
-
-              scope.$evalAsync(function () { childScope.$destroy(); });
             };
           }
 
