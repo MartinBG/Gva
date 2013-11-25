@@ -5,12 +5,10 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/:alias',
-        function ($params) {
-          return [
-            200,
-            nomenclatures[$params.alias]
-          ];
+      .when('GET', '/api/nomenclatures/:alias?term',
+        function ($params, $filter) {
+          var noms = $filter('filter')(nomenclatures[$params.alias], { name: $params.term });
+          return [200, noms];
         }
       );
   });

@@ -136,3 +136,7 @@ i.tree-image-close
 .dynamic-columns-btn {
     margin-left:5px
 }
+
+.glyphicon-loading:before {
+  content: url('../img/loading-icon.gif');
+}

@@ -26,6 +26,17 @@
           }
         }
       },
+      'scNomenclatureTest': {
+        name: 'directive-tests.nomenclature',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/nom',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-x/templates/scNomenclature.html',
+            controller: 'directive-tests.ScNomenclatureCtrl'
+          }
+        }
+      },
       'scSearchTest': {
         name: 'directive-tests.search',
         parent: navigationStatesProvider.states.root,
@@ -69,16 +80,29 @@
             controller: 'directive-tests.ScDatatableCtrl'
           }
         }
+      },
+      'scPromiseStateTest': {
+        name: 'directive-tests.promiseState',
+        parent: navigationStatesProvider.states.root,
+        url: '/test/promise',
+        views: {
+          'pageView': {
+            templateUrl: '../test/e2e/directives/sc-promise-state/templates/scPromiseState.html',
+            controller: 'directive-tests.ScPromiseStateCtrl'
+          }
+        }
       }
     };
 
     $stateProvider
       .state(this.states.scInputTest)
       .state(this.states.scSelectTest)
+      .state(this.states.scNomenclatureTest)
       .state(this.states.scSearchTest)
       .state(this.states.scFilesTest)
       .state(this.states.scDatatableTest)
-      .state(this.states.scColumnTest);
+      .state(this.states.scColumnTest)
+      .state(this.states.scPromiseStateTest);
   }
 
   StatesProvider.$inject = ['$stateProvider', 'navigation.StatesProvider'];

@@ -147,6 +147,7 @@
     <Content Include="App\css\style.css" />
     <Content Include="App\gruntfile.js" />
     <Content Include="App\img\initial-loader.gif" />
+    <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
     <Content Include="App\js\l10n\l10nTexts_bg-bg.js" />
@@ -156,6 +157,10 @@
     <Content Include="App\js\navigation\providers\navigationConfigProvider.js" />
     <Content Include="App\js\navigation\providers\statesProvider.js" />
     <Content Include="App\js\navigation\templates\navbar.html" />
+    <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
+    <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
+    <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.html" />
+    <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.js" />
     <Content Include="App\js\scaffolding\directives\search\buttonDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\columnDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\datatableDirective.js" />
@@ -202,7 +207,13 @@
     <Content Include="App\schema\person-status.sample.js" />
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\server\file.js" />
+    <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-promise-state\specs\promiseStateSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-promise-state\templates\scPromiseState.html" />
     <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-x\controllers\scNomenclatureCtrl.js" />
+    <Content Include="App\test\e2e\directives\sc-x\specs\nomenclatureSpec.js" />
+    <Content Include="App\test\e2e\directives\sc-x\templates\scNomenclature.html" />
     <Content Include="App\test\e2e\expressServer.js" />
     <Content Include="App\test\e2e\assets\selenium\chromedriver.exe" />
     <Content Include="App\test\e2e\assets\selenium\selenium-server-standalone-2.35.0.jar" />

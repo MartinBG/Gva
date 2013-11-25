@@ -168,8 +168,57 @@
         };
       }
     };
-
   };
 
+  GvaBy.nomenclature = function(model) {
+    /*jshint -W101*/
+    /* jshint -W109*/
+    var containerXPath =  "//div[contains(@class,'select2-container') and following-sibling::*[1][self::input and @ng-model='" + model + "']]",
+        containerAnchorXPath = containerXPath + "/a[contains(@class, 'select2-choice')]",
+        nameSpanXPath = containerAnchorXPath + "/span[contains(@class, 'select2-chosen')]",
+        deselectBtnXPath = containerAnchorXPath + "/abbr",
+        dropdownInputXPath = "//div[@id='select2-drop']/div[contains(@class, 'select2-search')]/input[contains(@class, 'select2-input')]";
+    /* jshint +W101*/
+    /* jshint +W109*/
+
+    return {
+      findOverride: function(driver) {
+        return driver.findElement(protractor.By.xpath(containerXPath));
+      },
+      findArrayOverride: function(driver) {
+        return driver.findElements(protractor.By.xpath(containerXPath));
+      },
+      text: function () {
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.xpath(nameSpanXPath));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.xpath(nameSpanXPath));
+          }
+        };
+      },
+      deselectButton: function () {
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.xpath(deselectBtnXPath));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.xpath(deselectBtnXPath));
+          }
+        };
+      },
+      dropdownInput: function () {
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.xpath(dropdownInputXPath));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.xpath(dropdownInputXPath));
+          }
+        };
+      }
+    };
+  };
   exports.GvaBy = GvaBy;
 }(protractor));
