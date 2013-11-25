@@ -52,16 +52,7 @@ Usage <sc-datatable ng-model="data"
               sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
-                  angular.element('.dataTables_length select').select2();
-                },
-              fnRowCallback: function(nRow) {
-                angular.forEach(nRow.children, function(child){
-                  var dataName = child.className.match(/sc-\w+/).toString(),
-                    dataNameSubstring = dataName.substring(3,dataName.length),
-                    className = dataNameSubstring !== 'undefined' ? dataNameSubstring : '';
-
-                  angular.element('td:eq(' + child.cellIndex +')', nRow).attr('data', className);
-                });
+                angular.element('.dataTables_length select').select2();
               },
               oLanguage: {
                 sInfo: l10n.get('datatableDirective.info'),
@@ -78,7 +69,7 @@ Usage <sc-datatable ng-model="data"
                   sPrevious: l10n.get('datatableDirective.previousPage')
                 }
               }
-            }).fnSetFilteringDelay();
+            });
           }
 
         });
@@ -102,9 +93,8 @@ Usage <sc-datatable ng-model="data"
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',
-            sClass: 'sc-' + column.data
+            sClass: 'scdt-' + column.data
           });
-
         };
       }
     };

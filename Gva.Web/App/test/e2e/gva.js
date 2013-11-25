@@ -1,34 +1,6 @@
 ﻿/*global exports, require, protractor, exports*/
 (function(protractor){
   'use strict';
-  function createSelector (model, index, data) {
-    var selector ='';
-    if(model) {
-      selector += 'div[ng-model=' + model + '] table.dataTable';
-    } else {
-      selector += 'div table.dataTable';
-    }
-    if(index || data){
-      if(index === 0) {
-        selector += ' thead';
-        index = 1;
-      } else {
-        selector += ' tbody';
-      }
-      if(index) {
-        selector += ' tr:nth-child(' + index +')';
-      }
-      if(data) {
-        if(!index) {
-          selector += ' tr td[data*=' + data + ']';
-        }
-        else {
-          selector += ' td[data*=' + data + ']';
-        }
-      }
-    }
-    return selector;
-  }
 
   var util = require('util'),
     GvaBy = {},
@@ -38,26 +10,59 @@
   util.inherits(GvaBy, ProtractorBy);
 
   GvaBy.datatable = function(model) {
+    var datatableContainerCss = 'div[ng-model=' + model + ']';
+
+    function createCellSelector(rowIndex, columnData) {
+      var selector = datatableContainerCss + ' table.dataTable',
+          isHeader;
+
+      if (rowIndex >= 0) {
+        if(rowIndex === 0) {
+          isHeader = true;
+          selector += ' thead';
+          rowIndex = 1;
+        } else {
+          selector += ' tbody';
+        }
+
+        selector += ' tr:nth-child(' + rowIndex +')';
+
+        if (columnData) {
+          if (isHeader) {
+            selector += ' th.scdt-' + columnData;
+          } else {
+            selector += ' td.scdt-' + columnData;
+          }
+        }
+      } else {
+        selector += ' tbody td.scdt-' + columnData;
+      }
+
+      return selector;
+    }
+
     return {
       findOverride: function(driver) {
-        var selector = createSelector(model);
-        return driver.findElement(protractor.By.css(selector));
+        return driver.findElement(protractor.By.css(datatableContainerCss));
       },
       findArrayOverride: function(driver) {
-        var selector = createSelector(model);
-        return driver.findElements(protractor.By.css(selector));
+        return driver.findElements(protractor.By.css(datatableContainerCss));
       },
       row: function (index) {
         return {
           findOverride: function(driver) {
-            var selector = createSelector(model, index);
-            return driver.findElement(protractor.By.css(selector));
+            return driver.findElement(protractor.By.css(createCellSelector(index)));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.css(createCellSelector(index)));
           },
           column: function (data) {
             return {
               findOverride: function(driver) {
-                var selector = createSelector(model, index, data);
-                return driver.findElement(protractor.By.css(selector));
+                return driver.findElement(protractor.By.css(createCellSelector(index, data)));
+              },
+              findArrayOverride: function(driver) {
+                return driver.findElements(protractor.By.css(createCellSelector(index, data)));
               }
             };
           }
@@ -65,105 +70,130 @@
       },
       column: function(data) {
         return {
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.css(createCellSelector(undefined, data)));
+          },
           findArrayOverride: function(driver) {
-              var selector = createSelector(model, '', data);
-              return driver.findElements(protractor.By.css(selector));
-            }
+            return driver.findElements(protractor.By.css(createCellSelector(undefined, data)));
+          }
         };
       },
-      inputFilter: function() {
+      header: function() {
         return {
-          findOverride: function (driver) {
-            return driver.findElement(
-              protractor.By.css(
-              'div[ng-model=' + model + '] ' +
-              'div[class=dataTables_filter] ' +
-              'input'));
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.css(createCellSelector(0)));
           },
-          isDisplayed: function () {
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.css(createCellSelector(0)));
+          },
+          column: function (data) {
             return {
               findOverride: function(driver) {
-                var selector = 'div[ng-model=' + model + '] ' +
-                  'div[class=dataTables_filter]';
-                return driver.isElementPresent(protractor.By.css(selector));
+                return driver.findElement(protractor.By.css(createCellSelector(0, data)));
+              },
+              findArrayOverride: function(driver) {
+                return driver.findElements(protractor.By.css(createCellSelector(0, data)));
               }
             };
+          }
+        };
+      },
+      filterInput: function() {
+        var filterInputCss =
+          datatableContainerCss +
+          ' div[class=dataTables_filter] input';
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(protractor.By.css(filterInputCss));
+          },
+          findArrayOverride: function (driver) {
+            return driver.findElements(protractor.By.css(filterInputCss));
           }
         };
       },
       infoText: function() {
-        return {
-          findOverride: function (driver) {
-            return driver.findElement(
-              protractor.By.css(
-              'div[ng-model=' + model + '] ' +
-              'div[class=dataTables_info]'));
-          }
-        };
-      },
-      buttonHideColumns: function() {
-        return {
-          findOverride: function (driver) {
-            return driver.findElement(
-              protractor.By.css(
-              'div[ng-model=' + model + '] ' +
-              'button[data-toggle=dropdown]'));
-          },
-          isDisplayed: function () {
-            return {
-              findOverride: function(driver) {
-                var selector = 'div[ng-model=' + model + '] ' +
-                  'div[class*=ng-hide] ' +
-                  'button[data-toggle=dropdown]';
+        var infoTextCss =
+          datatableContainerCss +
+          ' div[class=dataTables_info]';
 
-                return !driver.isElementPresent(protractor.By.css(selector));
-              }
-            };
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(protractor.By.css(infoTextCss));
+          },
+          findArrayOverride: function (driver) {
+            return driver.findElements(protractor.By.css(infoTextCss));
           }
         };
       },
-      hideColumnsCheckbox: function(number) {
+      hideColumnsButton: function() {
+        var hideColumnsButtonCss =
+          datatableContainerCss +
+          ' button[data-toggle=dropdown]';
+
+        return {
+          findOverride: function (driver) {
+            return driver.findElement(protractor.By.css(hideColumnsButtonCss));
+          },
+          findArrayOverride: function (driver) {
+            return driver.findElement(protractor.By.css(hideColumnsButtonCss));
+          }
+        };
+      },
+      hideColumnCheckbox: function(number) {
+        var hideColumnCheckboxCss =
+          datatableContainerCss +
+          ' div[class=dropdown-menu] ' +
+          'div:nth-child(' + (number+1) + ') ' +
+          'input[type=checkbox]';
+
         return {
           findOverride: function(driver) {
-            return driver.findElement(
-                protractor.By.css(
-                'div[ng-model=' + model + '] ' +
-                'div[class=dropdown-menu] ' +
-                'div:nth-child(' + (number+1) + ') ' +
-                'input[type=checkbox]'));
+            return driver.findElement(protractor.By.css(hideColumnCheckboxCss));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.css(hideColumnCheckboxCss));
           }
         };
       },
       lengthFilter: function () {
+        var lengthFilterCss =
+          datatableContainerCss +
+          ' div[class=dataTables_length] ' +
+          'select';
+
         return {
           findOverride: function(driver) {
-            return driver.findElement(
-                protractor.By.css(
-                'div[ng-model=' + model + '] ' +
-                'div[class=dataTables_length] ' +
-                'select'));
+            return driver.findElement(protractor.By.css(lengthFilterCss));
+          },
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.css(lengthFilterCss));
           },
           option: function (number) {
+            var lengthFilterOptionCss =
+              lengthFilterCss +
+              ' option:nth-child(' + (number+1) + ')';
             return {
               findOverride: function(driver) {
-                return driver.findElement(
-                  protractor.By.css(
-                  'div[ng-model=' + model + '] ' +
-                  'div[class=dataTables_length] ' +
-                  'select ' +
-                  'option:nth-child(' + (number+1) + ')'));
+                return driver.findElement(protractor.By.css(lengthFilterOptionCss));
+              },
+              findArrayOverride: function(driver) {
+                return driver.findElements(protractor.By.css(lengthFilterOptionCss));
               }
             };
+          }
+        };
+      },
+      pageButton: function (pageNumber) {
+        var pageButtonCss =
+          datatableContainerCss +
+          ' ul[class=pagination] li:nth-child(' + (pageNumber + 1) + ') a';
+
+        return {
+          findOverride: function(driver) {
+            return driver.findElement(protractor.By.css(pageButtonCss));
           },
-          isDisplayed: function () {
-            return {
-              findOverride: function(driver) {
-                var selector = 'div[ng-model=' + model + '] ' +
-                  'div[class=dataTables_length] ' +
-                  'select';
-                return driver.isElementPresent(protractor.By.css(selector));
-              }
-            };
+          findArrayOverride: function(driver) {
+            return driver.findElements(protractor.By.css(pageButtonCss));
           }
         };
       }

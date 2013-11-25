@@ -31,7 +31,7 @@
 
     $timeout(loadUsers, 500);
 
-    $scope.btnResult = '';
+    $scope.selectedUser = '';
     $scope.loadMany = function(){
       for(var i = 0; i < 10; i++){
         $scope.users = $scope.users.concat($scope.users);
@@ -40,7 +40,7 @@
     };
 
     $scope.editUser = function (user) {
-      $scope.btnResult = user.username;
+      $scope.selectedUser = user.username;
     };
   }
 

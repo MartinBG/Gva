@@ -12,79 +12,69 @@
 
     it('a column should be hidden because of the sc-column parameter called visibility',
       function() {
-        ptor.findElement(gvaBy.datatable('users').row(0))
-          .findElements(protractor.By.css('th')).then(function(elements){
-              var headers = protractor.promise.fullyResolved(elements.map(function (el) {
-                return el.getText();
-              }));
-              expect(headers).toEqual(['Потребителско име', 'Роли', 'Активен', '']);
-            });
-      });
+        var headerElements,
+            headers;
 
-    it('correct sorting settings should be set by the sc-column parameters sorting and sortable',
-      function() {
-        ptor.findElement(gvaBy.datatable('users').row(0))
-          .findElements(protractor.By.css('th')).then(function(elements){
-              var sortingSettings = protractor.promise.fullyResolved(elements.map(function (el) {
-                return el.getAttribute('class');
-              }));
-              expect(sortingSettings)
-                .toEqual([
-                  'sorting_disabled sc-username',
-                  'sc-roles sorting',
-                  'sc-isActive sorting_desc',
-                  'sc-undefined sorting'
-                ]);
-            });
+        headerElements =
+          ptor.findElement(gvaBy.datatable('users').header())
+          .findElements(protractor.By.css('th'));
+
+        headers = headerElements.then(function (he) {
+          return protractor.promise.fullyResolved(he.map(function (el) {
+            return el.getText();
+          }));
+        });
+
+        expect(headers).toEqual(['Потребителско име', 'Роли', 'Активен', '']);
       });
 
     it('should sort correctly columns data when their headers are clicked', function() {
-      var firstUsername,
-        sortValue = ptor.findElement(gvaBy.datatable('users').row(0))
-          .findElement(protractor.By.css('th:nth-child(3)'))
-          .then(function (element) {
-            element.click();
-            return element.getAttribute('class');
-          });
+      var firstUsername;
 
-      firstUsername = ptor.findElement(
-          gvaBy.datatable('users').row(1).column('username'));
+      ptor.findElement(gvaBy.datatable('users').header().column('isActive'))
+      .click();
 
-      expect(firstUsername.getText()).toEqual('test1');
+      firstUsername =
+        ptor.findElement(gvaBy.datatable('users').row(1).column('username'))
+        .getText();
 
-      expect(sortValue).toEqual('sc-isActive sorting_asc');
+      expect(firstUsername).toEqual('test1');
     });
 
     it('should sort correctly columns data when their headers are clicked' +
       'and many users are loaded',
       function() {
-        ptor.findElement(gvaBy.datatable('users').row(0))
-          .findElement(protractor.By.css('th:nth-child(3)'))
-          .then(function (element) {
-            element.click();
-          });
-        ptor.findElement(protractor.By.id('loadManybtn')).click().then(function(){
-          var username = ptor.findElement(
-            gvaBy.datatable('users').row(3070).column('username'));
-          expect(username.getText()).toEqual('georgi');
-        });
+        var username;
+
+        ptor.findElement(gvaBy.datatable('users').header().column('isActive'))
+        .click();
+        
+        ptor.findElement(protractor.By.id('loadManybtn'))
+        .click();
+
+        username =
+          ptor.findElement(gvaBy.datatable('users').row(3070).column('username'))
+          .getText();
+
+        expect(username).toEqual('georgi');
       });
 
     it('correct settings should be set by sc-datatable parameters', function() {
        //no filter displayed
-      expect(ptor.findElement(gvaBy.datatable('users').inputFilter().isDisplayed()))
+      expect(ptor.isElementPresent(gvaBy.datatable('users').filterInput()))
         .toEqual(false);
+
       //no pagination displayed
       expect(ptor.findElements(
         protractor.By.css('ul[class=pagination] li:nth-child(3) a')).length);
+
       //no range filter displayed
-      expect(ptor.findElement(gvaBy.datatable('users').lengthFilter().isDisplayed()))
+      expect(ptor.isElementPresent(gvaBy.datatable('users').lengthFilter()))
         .toEqual(false);
+
       //no dynamic-columns button displayed
-      expect(ptor.findElement(gvaBy.datatable('users').buttonHideColumns().isDisplayed()))
+      expect(ptor.isElementPresent(gvaBy.datatable('users').hideColumnsButton()))
         .toEqual(false);
-
     });
-
   });
 }(protractor));

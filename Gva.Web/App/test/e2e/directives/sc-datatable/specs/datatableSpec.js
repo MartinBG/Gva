@@ -11,61 +11,50 @@
     });
 
     it('should filter properly', function() {
-      var searchInputDatatable1 = gvaBy.datatable('users').inputFilter(),
+      var searchInputDatatable1 = gvaBy.datatable('users').filterInput(),
         firstColumnFirstRow =  gvaBy.datatable('users').row(1).column('username');
 
       ptor.findElement(searchInputDatatable1).sendKeys('peter');
-      ptor.sleep(1000);
+
       expect(ptor.findElement(firstColumnFirstRow).getText()).toEqual('peter');
 
       ptor.findElement(searchInputDatatable1).clear();
       ptor.findElement(searchInputDatatable1).sendKeys('Petrov');
-      ptor.sleep(1000);
 
       expect(ptor.findElement(firstColumnFirstRow).getText()).toEqual('georgi');
     });
 
     it('should filter properly with many users loaded', function() {
-      var searchInputDatatable2 = gvaBy.datatable('users2').inputFilter(),
-        infoTextDatatable2 = gvaBy.datatable('users2').infoText(),
-        loadManyBtn = ptor.findElement(protractor.By.id('loadManybtn'));
+      ptor.findElement(protractor.By.id('loadManybtn')).click();
+      ptor.findElement(gvaBy.datatable('users2').filterInput()).sendKeys('iztrit');
 
-      loadManyBtn.click().then(function(){
-        ptor.findElement(searchInputDatatable2).sendKeys('iztrit');
-        ptor.sleep(1000);
-
-        expect(ptor.findElement(infoTextDatatable2).getText())
-          .toEqual('Намерени общo 1,024 резултата (от 1 до 1,024) (филтрирани от 4,096 записа)');
-      });
+      expect(ptor.findElement(gvaBy.datatable('users2').infoText()).getText())
+        .toEqual('Намерени общo 1,024 резултата (от 1 до 1,024) (филтрирани от 4,096 записа)');
     });
 
     it('should load 4096 users', function() {
-      var datatable1InfoText = gvaBy.datatable('users').infoText(),
-        datatable2InfoText = gvaBy.datatable('users2').infoText(),
-        loadManyBtn = ptor.findElement(protractor.By.id('loadManybtn')),
-        infoText1,
-        infoText2;
+      ptor.findElement(protractor.By.id('loadManybtn')).click();
 
-      loadManyBtn.click().then(function(){
-        infoText1 = ptor.findElement(datatable1InfoText);
-        expect(infoText1.getText()).toEqual('Намерени общo 4,096 резултата (от 1 до 10)');
+      expect(ptor.findElement(gvaBy.datatable('users').infoText()).getText())
+        .toEqual('Намерени общo 4,096 резултата (от 1 до 10)');
 
-        infoText2 = ptor.findElement(datatable2InfoText);
-        expect(infoText2.getText()).toEqual('Намерени общo 4,096 резултата (от 1 до 4,096)');
-      });
-
+      expect(ptor.findElement(gvaBy.datatable('users2').infoText()).getText())
+        .toEqual('Намерени общo 4,096 резултата (от 1 до 4,096)');
     });
 
-    it('should go to edit user page', function() {
+    it('should select user', function() {
       ptor.findElement(gvaBy.datatable('users').row(2).column('buttons')).click();
-      var username = ptor.findElement(protractor.By.css('input[ng-model=btnResult]'))
+
+      var selectedUser =
+        ptor.findElement(protractor.By.css('input[ng-model=selectedUser]'))
         .getAttribute('value');
-      expect(username).toEqual('peter');
+      expect(selectedUser).toEqual('peter');
     });
 
     it('should change current page number', function() {
       ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.css('ul[class=pagination] li:nth-child(3) a')).click();
+      ptor.findElement(gvaBy.datatable('users').pageButton(2)).click();
+
       var infoText = ptor.findElement(gvaBy.datatable('users').infoText());
       expect(infoText.getText()).toContain('11');
     });
@@ -94,48 +83,55 @@
     });
 
     it('should hide and show columns properly using the button called Columns', function() {
-      var buttonHideColumns = ptor.findElement(gvaBy.datatable('users').buttonHideColumns()),
-        headers;
+      var hideColumnsButton = ptor.findElement(gvaBy.datatable('users').hideColumnsButton()),
+          headerElements,
+          headers;
 
-      buttonHideColumns.click();
+      hideColumnsButton.click();
+      ptor.findElement(gvaBy.datatable('users').hideColumnCheckbox(1)).click();
 
-      ptor.findElement(gvaBy.datatable('users').hideColumnsCheckbox(1)).click();
-      buttonHideColumns.click();
-      ptor.findElement(gvaBy.datatable('users').hideColumnsCheckbox(0)).click();
+      hideColumnsButton.click();
+      ptor.findElement(gvaBy.datatable('users').hideColumnCheckbox(0)).click();
 
-      ptor.findElement(gvaBy.datatable('users').row(0))
-        .findElements(protractor.By.css('th')).then(function(elements){
-            headers = protractor.promise.fullyResolved(elements.map(function (el) {
-              return el.getText();
-            }));
-            expect(headers).toEqual(['Роли', 'Активен', '']);
-          });
+      headerElements =
+        ptor.findElement(gvaBy.datatable('users').header())
+        .findElements(protractor.By.css('th'));
 
-      buttonHideColumns.click();
-      ptor.findElement(gvaBy.datatable('users').hideColumnsCheckbox(1)).click();
+      headers = headerElements.then(function (he) {
+        return protractor.promise.fullyResolved(he.map(function (el) {
+          return el.getText();
+        }));
+      });
+      expect(headers).toEqual(['Роли', 'Активен', '']);
 
-      headers = [];
+      hideColumnsButton.click();
+      ptor.findElement(gvaBy.datatable('users').hideColumnCheckbox(1)).click();
 
-      ptor.findElement(gvaBy.datatable('users').row(0))
-        .findElements(protractor.By.css('th')).then(function(elements){
-            headers = protractor.promise.fullyResolved(elements.map(function (el) {
-              return el.getText();
-            }));
-            expect(headers).toEqual(['Име', 'Роли', 'Активен', '']);
-          });
+      headerElements =
+        ptor.findElement(gvaBy.datatable('users').header())
+        .findElements(protractor.By.css('th'));
+
+      headers = headerElements.then(function (he) {
+        return protractor.promise.fullyResolved(he.map(function (el) {
+          return el.getText();
+        }));
+      });
+
+      expect(headers).toEqual(['Име', 'Роли', 'Активен', '']);
     });
 
     it('correct sorting settings should be set by sc-datatable parameters', function() {
-
-      ptor.findElement(gvaBy.datatable('users2').row(0))
-          .findElements(protractor.By.css('th')).then(function(elements){
-              var sortingSettings = protractor.promise.fullyResolved(elements.map(function (el) {
-                return el.getAttribute('class');
-              }));
-              expect(sortingSettings)
-                .toEqual(['sorting_disabled sc-username', 'sorting_disabled sc-fullname']);
-            });
+      ptor.findElement(gvaBy.datatable('users2').header())
+      .findElements(protractor.By.css('th'))
+      .then(function(elements) {
+        return protractor.promise.fullyResolved(elements.map(function (el) {
+          return el.getAttribute('class');
+        }));
+      })
+      .then(function (sortingSettings) {
+        expect(sortingSettings)
+          .toEqual(['sorting_disabled scdt-username', 'sorting_disabled scdt-fullname']);
+      });
     });
-
   });
 }(protractor));
