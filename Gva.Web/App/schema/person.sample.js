@@ -1,5 +1,4 @@
 ﻿/*global module, require*/
-/*jshint maxlen:false*/
 (function (module) {
   'use strict';
 
@@ -12,7 +11,6 @@
       personOtherDocuments = require('./person-document-other.sample'),
       personTrainings = require('./person-document-training.sample');
 
-
   module.exports = [{
     personData: personData.person1Data,
     personAdresses: [personAdresses.person1Address1, personAdresses.person1Address2],
@@ -23,4 +21,4 @@
     personOtherDocuments: [personOtherDocuments.person1Doc1],
     personTrainings: [personTrainings.person1Training1, personTrainings.person1Training2, personTrainings.person1Training3, personTrainings.person1Training4]
   }];
-})(typeof module === 'undefined' ? (this['persons.sample'] = {}) : module);
+})(typeof module === 'undefined' ? (this['person.sample'] = {}) : module);
