@@ -36,7 +36,7 @@
             var isValid = validationFn(value);
 
             // check if the result is promise
-            if (isValid.then && typeof (isValid.then) === 'function') {
+            if (isValid && isValid.then && typeof (isValid.then) === 'function') {
               control.$setValidity(validationErrorKey, false);
               addPendingValidation(control);
               addPendingValidation(form);

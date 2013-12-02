@@ -25,7 +25,7 @@
             var result = scope.scClick({ $event: event });
 
             // check if the result is promise
-            if (result.then && typeof (result.then) === 'function') {
+            if (result && result.then && typeof (result.then) === 'function') {
               elementCtrl.$pending = true;
               result['finally'](function () {
                 delete elementCtrl.$pending;
