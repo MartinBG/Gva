@@ -159,6 +159,7 @@
     <Content Include="App\js\navigation\templates\navbar.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
+    <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />
     <Content Include="App\js\scaffolding\directives\validate\validateDirective.js" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.html" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.js" />
