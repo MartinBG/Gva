@@ -175,6 +175,7 @@
     <Content Include="App\js\scaffolding\directives\int\intDirective.js" />
     <Content Include="App\js\scaffolding\directives\select\selectDirective.js" />
     <Content Include="App\js\scaffolding\directives\text\textDirective.js" />
+    <Content Include="App\js\scaffolding\providers\scaffoldingProvider.js" />
     <Content Include="App\js\scaffolding\resources\nomenclature.js" />
     <Content Include="App\js\scaffolding\directives\search\searchDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
