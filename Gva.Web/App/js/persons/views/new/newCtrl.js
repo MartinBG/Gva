@@ -47,6 +47,12 @@
     $scope.save = function () {
       return Person.save($scope.newPerson).$promise;
     };
+
+    $scope.saveDisabled = function () {
+      return $scope.personAddressForm.$invalid ||
+        $scope.personDataForm.$invalid ||
+        $scope.personDocumentIdForm.$invalid;
+    };
   }
 
   NewCtrl.$inject = ['$scope', 'persons.Person'];

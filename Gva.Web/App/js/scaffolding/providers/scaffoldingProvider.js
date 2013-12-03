@@ -15,6 +15,7 @@
           controller: options.controller,
           link: function (scope, element, attrs) {
             scope.$parent[attrs.name] = scope[attrs.name];
+            scope.form = scope[attrs.name];
           }
         };
       });
