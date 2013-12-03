@@ -143,6 +143,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App\.gitignore" />
+    <Content Include="App\build\js\app.js" />
+    <Content Include="App\build\js\sample.data.js" />
+    <Content Include="App\build\js\test.js" />
+    <Content Include="App\build\templates\directive-tests.js" />
+    <Content Include="App\build\templates\navigation.js" />
+    <Content Include="App\build\templates\scaffolding.js" />
+    <Content Include="App\build\templates\users.js" />
     <Content Include="App\css\style.css" />
     <Content Include="App\gruntfile.js" />
     <Content Include="App\img\initial-loader.gif" />
@@ -232,6 +239,8 @@
     <Content Include="App\schema\person-status.sample.js" />
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\test\e2e\delay.js" />
+    <Content Include="App\schema\requireShim.js" />
+    <Content Include="App\server\file.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\specs\promiseStateSpec.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\templates\scPromiseState.html" />
@@ -270,9 +279,9 @@
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
     <Content Include="App\test\e2e\ptorConf.js" />
-    <Content Include="App\test\e2e\spec\editUserSpec.js" />
-    <Content Include="App\test\e2e\spec\newUserSpec.js" />
-    <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\directives\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\directives\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\directives\spec\usersSpec.js" />
     <Content Include="App\test\e2e\gvaBy.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -334,6 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\person-document-checks.json" />
+    <Content Include="App\build\js\app.map" />
+    <Content Include="App\build\js\sample.data.map" />
+    <Content Include="App\build\js\test.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
