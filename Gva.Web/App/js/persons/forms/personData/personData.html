@@ -31,10 +31,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.lin.$invalid}">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.lin.$dirty && form.lin.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
           <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <span ng-show="form.lin.$invalid && !form.lin.$error.$pending" class="glyphicon glyphicon-warning-sign" tooltip-placement="right" ng-attr-tooltip="{{form.lin.$error.required && 'Задължително поле' || form.lin.$error.unique && 'Невалиден ЛИН'}}"></span>
+          <span ng-show="form.lin.$dirty && form.lin.$invalid && !form.lin.$error.$pending" class="glyphicon glyphicon-warning-sign" title="{{form.lin.$error.required && 'Задължително поле' || form.lin.$error.unique && 'Невалиден ЛИН'}}"></span>
           <sc-text ng-model="model.lin" name="lin" required sc-validate="{unique: isUniqueLin}"></sc-text>
         </div>
         <div class="form-group col-sm-2">
