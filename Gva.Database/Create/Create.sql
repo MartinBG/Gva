@@ -10,9 +10,7 @@ GO
 :r $(rootPath)\"Tables\GvaLotFileTypes.sql"
 :r $(rootPath)\"Tables\GvaLotFiles.sql"
 :r $(rootPath)\"Tables\GvaAppLotFiles.sql"
-:r $(rootPath)\"Tables\GvaFlyingExps.sql"
-:r $(rootPath)\"Tables\GvaRating.sql"
-:r $(rootPath)\"Tables\GvaRatingDates.sql"
+:r $(rootPath)\"Tables\GvaLotObjects.sql"
 
 ---------------------------------------------------------------
 -- Diagram
