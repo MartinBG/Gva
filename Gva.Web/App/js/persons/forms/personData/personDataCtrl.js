@@ -8,6 +8,10 @@
     self.$scope = $scope;
 
     $scope.isUniqueLin = function (value) {
+      if (!value) {
+        return true;
+      }
+
       return Person.query({ lin: value, exact: true })
         .$promise
         .then(function (persons) {

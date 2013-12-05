@@ -23,13 +23,14 @@
 
     return {
       restrict: 'A',
-      require: ['ngModel', '^form'],
+      require: 'ngModel',
       scope: {
         scValidate: '&'
       },
-      link: function (scope, element, attrs, requiredControllers) {
-        var control = requiredControllers[0],
-            form = requiredControllers[1];
+      link: function (scope, element, attrs, control) {
+        var forms = _.map(element.parents('ng-form'), function (formElem) {
+              return angular.element(formElem).controller('form');
+            });
 
         _.forOwn(scope.scValidate(), function (validationFn, validationErrorKey) {
           var validator = function (value) {
@@ -39,16 +40,22 @@
             if (isValid && isValid.then && typeof (isValid.then) === 'function') {
               control.$setValidity(validationErrorKey, false);
               addPendingValidation(control);
-              addPendingValidation(form);
+              forms.forEach(function (form) {
+                addPendingValidation(form);
+              });
 
               isValid.then(function (result) {
                 control.$setValidity(validationErrorKey, result);
 
                 removePendingValidation(control);
-                removePendingValidation(form);
+                forms.forEach(function (form) {
+                  removePendingValidation(form);
+                });
               }, function () {
                 removePendingValidation(control);
-                removePendingValidation(form);
+                forms.forEach(function (form) {
+                  removePendingValidation(form);
+                });
               });
             } else {
               control.$setValidity(validationErrorKey, isValid);
