@@ -295,6 +295,10 @@
     <Content Include="App\schema\person-document-training.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Api\Common.Api.csproj">
+      <Project>{69bed796-4199-433e-bc42-e8d7406369d9}</Project>
+      <Name>Common.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common</Name>

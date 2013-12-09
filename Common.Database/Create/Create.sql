@@ -19,6 +19,9 @@ GO
 :r $(rootPath)"\Tables\Addresses\Settlements.sql"
 :r $(rootPath)"\Tables\Addresses\Countries.sql"
 
+--Files
+:r $(rootPath)"\Tables\Files\Blobs.sql"
+
 -- System
 :r $(rootPath)"\Tables\System\GParams.sql"
 :r $(rootPath)"\Tables\System\Logs.sql"
