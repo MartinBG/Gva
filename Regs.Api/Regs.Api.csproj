@@ -57,6 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LotEvents\LotEventDispatcher\ILotEventDispatcher.cs" />
+    <Compile Include="LotEvents\LotEventDispatcher\LotEventDispatcher.cs" />
+    <Compile Include="LotEvents\LotEventDispatcherFactory\ILotEventDispatcherFactory.cs" />
+    <Compile Include="LotEvents\LotEvent.cs" />
+    <Compile Include="LotEvents\LotEventDispatcherFactory\LotEventDispatcherFactory.cs" />
+    <Compile Include="LotEvents\LotEventHandler.cs" />
+    <Compile Include="LotEvents\LotOperation.cs" />
     <Compile Include="Managers\LobManager\ILobManager.cs" />
     <Compile Include="Managers\LobManager\LobManager.cs" />
     <Compile Include="Managers\LotMnager\ILotManager.cs" />

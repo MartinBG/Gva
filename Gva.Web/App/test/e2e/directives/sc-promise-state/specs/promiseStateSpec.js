@@ -125,5 +125,37 @@
           expect(value).toBe('Already resolved ;)');
         });
       });
+
+    it('should not react to a previous promise being rejected' +
+      ' when a new promise is set.', function () {
+        var createBtnElem = ptor.findElement(protractor.By.id('createBtn'));
+        var createResolvedBtnElem = ptor.findElement(protractor.By.id('createResolvedBtn'));
+        var rejectBtnElem = ptor.findElement(protractor.By.id('rejectBtn'));
+
+        promiseStateDirectiveElem.isDisplayed().then(function (value) {
+          expect(value).toBe(false);
+        });
+
+        // create first promise
+        createBtnElem.click();
+
+        // create a second resolved promise
+        createResolvedBtnElem.click();
+
+        //reject the first promise
+        rejectBtnElem.click();
+
+        promiseStateDirectiveElem.isDisplayed().then(function (value) {
+          expect(value).toBe(true);
+        });
+
+        promiseStateDirectiveElem.getAttribute('class').then(function (value) {
+          expect(value.split(' ').indexOf('glyphicon-ok')).toBeGreaterThan(0);
+        });
+
+        promiseStateDirectiveElem.getAttribute('title').then(function (value) {
+          expect(value).toBe('Already resolved ;)');
+        });
+      });
   });
 }(protractor, describe, beforeEach, it, expect));

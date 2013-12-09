@@ -71,6 +71,50 @@
         search: 'Търси',
         filtered: ' (филтрирани от _MAX_ записа)',
         deleteColumns: 'Колони'
+      },
+      persons: {
+        personDataDirective: {
+          title: 'Лични данни',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          dateOfBirth: 'Дата на раждане',
+          sex: 'Пол',
+          firstName: 'Име',
+          firstNameAlt: 'Име (латиница)',
+          middleName: 'Презиме',
+          middleNameAlt: 'Презиме (латиница)',
+          lastName: 'Фамилия',
+          lastNameAlt: 'Фамилия (латиница)',
+          placeOfBirth: 'Място на раждане',
+          country: 'Гражданство',
+          email: 'E-mail',
+          fax: 'Факс',
+          companyPhone: 'Служебен телефон',
+          phones: 'Телефони'
+        },
+        personAddressDirective: {
+          title: 'Адрес',
+          addressType: 'Вид',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          addressAlt: 'Адрес (латиница)',
+          valid: 'Валиден',
+          postalCode: 'Пощенски код',
+          phone: 'Телефон'
+        },
+        personDocumentIdDirective: {
+          title: 'Документ за самоличност',
+          personDocumentIdTypeId: 'Тип документ',
+          valid: 'Валиден',
+          documentNumber: 'Номер на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валиден до',
+          documentPublisher: 'Издаден от'
+        },
+        newPerson: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        }
       }
     });
   }]);

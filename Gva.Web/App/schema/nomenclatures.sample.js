@@ -16,11 +16,17 @@
       })[0].name;
     },
 
+    //Номенклатура Булеви стойности
+    boolean: [
+      {nomTypeValueId: 1, code: 'Y', name: 'Да', nameAlt: 'Yes', alias: 'true'},
+      {nomTypeValueId: 2, code: 'N', name: 'Не', nameAlt: 'No', alias: 'false'}
+    ],
+
     //Номенклатура Полове
     sex: [
-      {nomTypeValueId: 1, code: '', name: 'Мъж', nameAlt: 'Мъж', alias: 'male'},
-      {nomTypeValueId: 2, code: '', name: 'Жена', nameAlt: 'Female'},
-      {nomTypeValueId: 3, code: '', name: 'Неопределен', nameAlt: 'Unknown'}
+      {nomTypeValueId: 1, code: '', name: 'Мъж', nameAlt: 'Male', alias: 'male'},
+      {nomTypeValueId: 2, code: '', name: 'Жена', nameAlt: 'Female', alias: 'female'},
+      {nomTypeValueId: 3, code: '', name: 'Неопределен', nameAlt: 'Unknown', alias: 'unknown'}
     ],
     
     //Номеклатура Държави

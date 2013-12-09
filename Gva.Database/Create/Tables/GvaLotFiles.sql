@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[GvaLotFiles] (
     [GvaLotFileTypeId]  INT           NULL,
     [PageIndex]         NVARCHAR (50) NULL,
     [PageNumber]        NVARCHAR (50) NOT NULL,
+    [IsActive]          BIT           NOT NULL,
     CONSTRAINT [PK_GvaLotFiles]                 PRIMARY KEY ([GvaLotFileId]),
     CONSTRAINT [FK_GvaLotFiles_DocFiles]        FOREIGN KEY([DocFileId])        REFERENCES [dbo].[DocFiles]        ([DocFileId]),
     CONSTRAINT [FK_GvaLotFiles_GvaFiles]        FOREIGN KEY([GvaFileId])        REFERENCES [dbo].[GvaFiles]        ([GvaFileId]),
@@ -25,4 +26,5 @@ exec spDescColumn N'GvaLotFiles', N'DocFileId'        , N'Файл от доку
 exec spDescColumn N'GvaLotFiles', N'GvaLotFileTypeId' , N'Тип на файла в описа.'
 exec spDescColumn N'GvaLotFiles', N'PageIndex'        , N'Номер на страницата в описа.'
 exec spDescColumn N'GvaLotFiles', N'PageNumber'       , N'Брой страници.'
+exec spDescColumn N'GvaLotFiles', N'IsActive'         , N'Маркер за валидност.'
 GO

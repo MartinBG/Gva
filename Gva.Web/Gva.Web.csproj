@@ -146,6 +146,7 @@
     <Content Include="App\css\style.css" />
     <Content Include="App\gruntfile.js" />
     <Content Include="App\img\initial-loader.gif" />
+    <Content Include="App\img\loading-icon-white.gif" />
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
@@ -156,8 +157,13 @@
     <Content Include="App\js\navigation\providers\navigationConfigProvider.js" />
     <Content Include="App\js\navigation\providers\statesProvider.js" />
     <Content Include="App\js\navigation\templates\navbar.html" />
+    <Content Include="App\js\persons\forms\personAddress\personAddress.html" />
+    <Content Include="App\js\persons\forms\personData\personDataCtrl.js" />
+    <Content Include="App\js\persons\forms\personDocumentId\personDocumentId.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
+    <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />
+    <Content Include="App\js\scaffolding\directives\validate\validateDirective.js" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.html" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.js" />
     <Content Include="App\js\scaffolding\directives\search\buttonDirective.js" />
@@ -165,6 +171,12 @@
     <Content Include="App\js\scaffolding\directives\datatable\datatableDirective.js" />
     <Content Include="App\js\scaffolding\directives\date\dateDirective.js" />
     <Content Include="App\js\scaffolding\directives\search\filterDirective.js" />
+    <Content Include="App\js\persons\views\new\newCtrl.js" />
+    <Content Include="App\js\persons\persons.js" />
+    <Content Include="App\js\persons\providers\statesProvider.js" />
+    <Content Include="App\js\persons\resources\person.js" />
+    <Content Include="App\js\persons\forms\personData\personData.html" />
+    <Content Include="App\js\persons\views\new\new.html" />
     <Content Include="App\js\scaffolding\directives\files\filesDirective.js" />
     <Content Include="App\js\scaffolding\directives\files\filesModalCtrl.js" />
     <Content Include="App\js\scaffolding\directives\files\filesCtrl.js" />
@@ -172,6 +184,7 @@
     <Content Include="App\js\scaffolding\directives\int\intDirective.js" />
     <Content Include="App\js\scaffolding\directives\select\selectDirective.js" />
     <Content Include="App\js\scaffolding\directives\text\textDirective.js" />
+    <Content Include="App\js\scaffolding\providers\scaffoldingProvider.js" />
     <Content Include="App\js\scaffolding\resources\nomenclature.js" />
     <Content Include="App\js\scaffolding\directives\search\searchDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
@@ -206,6 +219,7 @@
     <Content Include="App\schema\person-status.sample.js" />
     <Content Include="App\schema\person.sample.js" />
     <Content Include="App\server\file.js" />
+    <Content Include="App\test\e2e\delay.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\specs\promiseStateSpec.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\templates\scPromiseState.html" />
@@ -223,7 +237,6 @@
     <Content Include="App\test\e2e\directives\sc-datatable\templates\scColumn.html" />
     <Content Include="App\test\e2e\directives\sc-datatable\templates\scDatatable.html" />
     <Content Include="App\test\e2e\directives\sc-search\controllers\scSearchCtrl.js" />
-    <Content Include="App\test\e2e\directives\sc-search\specs\buttonSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\filterSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\specs\searchSpec.js" />
     <Content Include="App\test\e2e\directives\sc-search\templates\scSearch.html" />
@@ -242,6 +255,7 @@
     <Content Include="App\test\e2e\directives\sc-x\templates\scSelect.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
+    <Content Include="App\test\e2e\mocks\personsHttp.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
     <Content Include="App\test\e2e\ptorConf.js" />
@@ -306,6 +320,9 @@
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
       <Name>Regs.Api</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-checks.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

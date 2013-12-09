@@ -101,6 +101,7 @@
   <script src="/app/js/scaffolding/directives/text/textDirective.js"></script>
   <script src="/app/js/scaffolding/directives/select/selectDirective.js"></script>
   <script src="/app/js/scaffolding/resources/nomenclature.js"></script>
+  <script src="/app/js/scaffolding/providers/scaffoldingProvider.js"></script>
   <script src="/app/js/scaffolding/directives/search/searchDirective.js"></script>
   <script src="/app/js/scaffolding/directives/search/filterDirective.js"></script>
   <script src="/app/js/scaffolding/directives/search/buttonDirective.js"></script>
@@ -108,11 +109,18 @@
   <script src="/app/js/scaffolding/directives/datatable/columnDirective.js"></script>
   <script src="/app/js/scaffolding/directives/nomenclature/nomenclatureDirective.js"></script>
   <script src="/app/js/scaffolding/directives/promiseState/promiseStateDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/validate/validateDirective.js"></script>
+  <script src="/app/js/scaffolding/directives/click/clickDirective.js"></script>
   <script src="/app/js/navigation/navigation.js"></script>
   <script src="/app/js/navigation/controllers/navbarCtrl.js"></script>
   <script src="/app/js/navigation/controllers/breadcrumbBarCtrl.js"></script>
   <script src="/app/js/navigation/providers/navigationConfigProvider.js"></script>
   <script src="/app/js/navigation/providers/statesProvider.js"></script>
+  <script src="/app/js/persons/persons.js"></script>
+  <script src="/app/js/persons/views/new/newCtrl.js"></script>
+  <script src="/app/js/persons/forms/personData/personDataCtrl.js"></script>
+  <script src="/app/js/persons/providers/statesProvider.js"></script>
+  <script src="/app/js/persons/resources/person.js"></script>
   <script src="/app/js/users/users.js"></script>
   <script src="/app/js/users/controllers/editCtrl.js"></script>
   <script src="/app/js/users/controllers/searchCtrl.js"></script>
@@ -121,6 +129,7 @@
   <script src="/app/js/users/resources/role.js"></script>
   <script src="/app/build/templates/scaffolding.js"></script>
   <script src="/app/build/templates/navigation.js"></script>
+  <script src="/app/build/templates/persons.js"></script>
   <script src="/app/build/templates/users.js"></script>
 
   <script type="text/ecmascript">
@@ -135,10 +144,20 @@
   </script>
   <script src="/app/schema/nomenclatures.sample.js"></script>
   <script src="/app/schema/person-data.sample.js"></script>
+  <script src="/app/schema/person-document-education.sample.js"></script>
+  <script src="/app/schema/person-document-employment.sample.js"></script>
+  <script src="/app/schema/person-document-id.sample.js"></script>
+  <script src="/app/schema/person-document-other.sample.js"></script>
+  <script src="/app/schema/person-document-training.sample.js"></script>
+  <script src="/app/schema/person-address.sample.js"></script>
+  <script src="/app/schema/person-status.sample.js"></script>
+  <script src="/app/schema/person.sample.js"></script>
 
   <script src="/app/bower_components/angular-mocks/angular-mocks.js"></script>
+  <script src="/app/test/e2e/delay.js"></script>
   <script src="/app/test/e2e/httpBackendConfiguratorProvider.js"></script>
   <script src="/app/test/e2e/mocks/nomenclaturesHttp.js"></script>
+  <script src="/app/test/e2e/mocks/personsHttp.js"></script>
   <script src="/app/test/e2e/mocks/usersHttp.js"></script>
   <script src="/app/test/e2e/e2eMocksSetup.js"></script>
   <script src="/app/test/e2e/directives/directiveTests.js"></script>

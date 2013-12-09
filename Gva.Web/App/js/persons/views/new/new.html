@@ -1,0 +1,20 @@
+﻿<div class="container page-content">
+  <ng-form name="newPersonForm">
+    <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
+
+    <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+
+    <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <button name="saveBtn" sc-click="save()" type="button" class="btn btn-primary" ng-disabled="newPersonForm.$invalid">
+          <span class="glyphicon" ng-class="{'glyphicon-loading':saveBtn.$pending, 'glyphicon-floppy-disk': !saveBtn.$pending}"></span>
+          <span l10n-text="persons.newPerson.save"></span>
+        </button>
+        <button type="button" class="btn btn-default" l10n-text="persons.newPerson.cancel">
+        </button>
+      </div>
+    </div>
+  </ng-form>
+</div>

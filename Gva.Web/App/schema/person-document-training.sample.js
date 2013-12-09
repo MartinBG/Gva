@@ -97,4 +97,4 @@
     }
 
   };
-})(typeof module === 'undefined' ? (this['person-document-education.sample'] = {}) : module);
+})(typeof module === 'undefined' ? (this['person-document-training.sample'] = {}) : module);

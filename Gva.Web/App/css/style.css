@@ -140,3 +140,25 @@ i.tree-image-close
 .glyphicon-loading:before {
   content: url('../img/loading-icon.gif');
 }
+
+.btn-primary .glyphicon-loading:before {
+  content: url('../img/loading-icon-white.gif');
+}
+
+.panel-default > .form-title {
+    background-color: rgba(228, 221, 221, 0.97);
+}
+
+.panel-default > .form-body {
+    background-color: #f5f5f5;
+    font-size: 12px;
+}
+
+.centered{
+    float: none;
+    margin: 0px auto;
+}
+
+.has-error .glyphicon-warning-sign {
+    color: #b94a48;
+}

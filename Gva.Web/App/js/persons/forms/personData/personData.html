@@ -1,0 +1,96 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading form-title"><strong l10n-text="persons.personDataDirective.title"></strong></div>
+    <div class="well-sm panel-body form-body">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.firstName"></label>
+          <sc-text ng-model="model.firstName"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.middleName"></label>
+          <sc-text ng-model="model.middleName"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.lastName"></label>
+          <sc-text ng-model="model.lastName"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.firstNameAlt"></label>
+          <sc-text ng-model="model.firstNameAlt"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.middleNameAlt"></label>
+          <sc-text ng-model="model.middleNameAlt"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDataDirective.lastNameAlt"></label>
+          <sc-text ng-model="model.lastNameAlt"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.lin.$dirty && form.lin.$invalid}">
+          <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
+          <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
+          <span ng-show="form.lin.$dirty && form.lin.$invalid && !form.lin.$error.$pending" class="glyphicon glyphicon-warning-sign" title="{{form.lin.$error.required && 'Задължително поле' || form.lin.$error.unique && 'Невалиден ЛИН'}}"></span>
+          <sc-text ng-model="model.lin" name="lin" required sc-validate="{unique: isUniqueLin}"></sc-text>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>
+          <sc-text ng-model="model.uin"></sc-text>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
+          <sc-nomenclature ng-model="model.sexId" alias="'sex'" load="true"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.dateOfBirth"></label>
+          <sc-date ng-model="model.dateOfBirth"></sc-date>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.placeOfBirth"></label>
+          <sc-nomenclature ng-model="model.placeOfBirthId" alias="'cities'" load="false"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.country"></label>
+          <sc-nomenclature ng-model="model.countryId" alias="'countries'" load="false"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="persons.personDataDirective.email"></label>
+          <sc-text ng-model="model.email"></sc-text>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="persons.personDataDirective.fax"></label>
+          <sc-text ng-model="model.fax"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.phones"></label>
+          <sc-text ng-model="model.phone2"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <sc-text ng-model="model.phone3"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <sc-text ng-model="model.phone4"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 labeless">
+          <sc-text ng-model="model.phone5"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.companyPhone"></label>
+          <sc-text ng-model="model.phone1"></sc-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

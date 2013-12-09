@@ -1,9 +1,9 @@
-﻿using Common.Data;
-using Regs.Api.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Data;
+using Regs.Api.Models;
 
 namespace Regs.Api.Managers.LotManager
 {
@@ -11,9 +11,14 @@ namespace Regs.Api.Managers.LotManager
     {
         private IUnitOfWork unitOfWork;
 
-        public LotManager(IUnitOfWork unitOfWork)
+        public LotManager(IUnitOfWork unitOfWork, IEnumerable<IEventHandler> eventHandlers)
         {
             this.unitOfWork = unitOfWork;
+
+            foreach (var eventHandler in eventHandlers)
+            {
+                Events.Register(eventHandler);
+            }
         }
 
         public Set GetSet(int setId)

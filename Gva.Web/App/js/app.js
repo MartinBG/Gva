@@ -8,6 +8,7 @@
     'navigation',
     'scaffolding',
     'users',
+    'persons',
     'l10n',
     'l10n-tools',
     'l10nTexts_bg-bg',
@@ -18,19 +19,22 @@
     '$locationProvider',
     'navigation.NavigationConfigProvider',
     'users.StatesProvider',
+    'persons.StatesProvider',
     function (
       $urlRouterProvider,
       $stateProvider,
       $locationProvider,
       navigationConfigProvider,
-      usersStatesProvider
+      usersStatesProvider,
+      personsStatesProvider
     ) {
       $locationProvider.html5Mode(false);
       $urlRouterProvider.otherwise('/users');
 
       navigationConfigProvider
         .addItem({ text: 'Персонал', items: [
-          { text: 'Физически лица', url: '/personel' },
+          { text: 'Физически лица', url: '/persons' },
+          { text: 'Ново физическо лице', state: personsStatesProvider.states.newPerson },
           { text: 'Лицензи', url: '/licenses' },
           { text: 'Квалификации', url: '/qualifications' },
           { text: 'Медицински', url: '/medical' }
