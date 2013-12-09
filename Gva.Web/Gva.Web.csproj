@@ -132,7 +132,6 @@
   <ItemGroup>
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
-    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
