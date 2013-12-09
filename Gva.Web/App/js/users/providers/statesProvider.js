@@ -8,12 +8,7 @@
         title: 'Потребители',
         url: '/users?username&fullname&showActive',
         parent: navigationStatesProvider.states.root,
-        'abstract': true,
-        views: {
-          'pageView': {
-            template: '<div ui-view="pageView"></div>'
-          }
-        }
+        'abstract': true
       };
 
     this.states = {
@@ -23,7 +18,7 @@
         parent: users,
         url: '',
         views: {
-          'pageView': {
+          'pageView@root': {
             templateUrl: 'users/templates/search.html',
             controller: 'users.SearchCtrl'
           }
@@ -35,7 +30,7 @@
         parent: users,
         url: '/new',
         views: {
-          'pageView': {
+          'pageView@root': {
             templateUrl: 'users/templates/edit.html',
             controller: 'users.EditCtrl'
           }
@@ -47,7 +42,7 @@
         parent: users,
         url: '/:userId',
         views: {
-          'pageView': {
+          'pageView@root': {
             templateUrl: 'users/templates/edit.html',
             controller: 'users.EditCtrl'
           }

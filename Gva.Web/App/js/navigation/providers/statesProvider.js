@@ -5,7 +5,7 @@
   function StatesProvider($stateProvider) {
     this.states = {
       'root': {
-        name: 'navbar',
+        name: 'root',
         views: {
           'rootView': {
             templateUrl: 'navigation/templates/navbar.html'
