@@ -9,7 +9,6 @@ namespace Common.Http
 {
     public interface IWebApiConfig
     {
-        int Priority { get; }
         void RegisterRoutes(HttpConfiguration config);
     }
 }

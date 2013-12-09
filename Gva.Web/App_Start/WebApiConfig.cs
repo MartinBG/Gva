@@ -4,7 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using Common.Http;
 using Common.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Ninject;
 using NLog.Config;
 
@@ -16,9 +19,27 @@ namespace Gva.Web
         {
             config.DependencyResolver = new NinjectDependencyResolver(kernel);
 
+            config.Formatters.JsonFormatter.SerializerSettings =
+                new JsonSerializerSettings()
+                {
+#if DEBUG
+                    Formatting = Newtonsoft.Json.Formatting.Indented,
+#endif
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Include,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+
             RegisterGlobalFilters(config);
 
             RegisterRoutes(config);
+
+            foreach (IWebApiConfig webApiConfig in kernel.GetAll<IWebApiConfig>())
+            {
+                webApiConfig.RegisterRoutes(config);
+            }
         }
 
         private static void RegisterGlobalFilters(HttpConfiguration config)
