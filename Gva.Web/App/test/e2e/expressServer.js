@@ -27,7 +27,7 @@
 
   app.use(express.multipart());
 
-  app.post('/file', function(req, res) {
+  app.post('/api/file', function(req, res) {
     var fileKey = generateGuid(),
       currentFile = req.files.files[0];
     
@@ -40,7 +40,7 @@
     }
   });
   
-  app.get('/file', function(req, res) {
+  app.get('/api/file', function(req, res) {
     var fileName = req.query.fileName,
       fileKey = req.query.fileKey,
       file = files[fileKey];

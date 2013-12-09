@@ -218,7 +218,6 @@
     <Content Include="App\schema\person-document-training.sample.js" />
     <Content Include="App\schema\person-status.sample.js" />
     <Content Include="App\schema\person.sample.js" />
-    <Content Include="App\server\file.js" />
     <Content Include="App\test\e2e\delay.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\specs\promiseStateSpec.js" />
