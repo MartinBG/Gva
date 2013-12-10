@@ -33,7 +33,7 @@
     $scope.userHasPassword = navigationConfig.userHasPassword;
 
   }
-  NavbarCtrl.$inject = [ '$scope', '$state', 'navigation.NavigationConfig'];
+  NavbarCtrl.$inject = [ '$scope', '$state', 'NavigationConfig'];
 
-  angular.module('navigation').controller('navigation.NavbarCtrl', NavbarCtrl);
+  angular.module('navigation').controller('NavbarCtrl', NavbarCtrl);
 }(angular));

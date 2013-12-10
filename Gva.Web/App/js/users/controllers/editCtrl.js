@@ -2,13 +2,12 @@
 (function (angular) {
   'use strict';
   
-  function EditCtrl(
+  function UsersEditCtrl(
     $q,
     $scope,
     $filter,
     $state,
     $stateParams,
-    usersStates,
     User,
     Role
   ) {
@@ -74,7 +73,7 @@
           $scope.userExists = exists;
           if (!exists) {
             $scope.user.$save().then(function () {
-              $state.go(usersStates.search);
+              $state.go('users.search');
             });
           }
         });
@@ -82,20 +81,19 @@
     };
 
     $scope.cancel = function () {
-      $state.go(usersStates.search);
+      $state.go('users.search');
     };
   }
   
-  EditCtrl.$inject = [
+  UsersEditCtrl.$inject = [
     '$q',
     '$scope',
     '$filter',
     '$state',
     '$stateParams',
-    'users.States',
-    'users.User',
-    'users.Role'
+    'User',
+    'Role'
   ];
   
-  angular.module('users').controller('users.EditCtrl', EditCtrl);
+  angular.module('users').controller('UsersEditCtrl', UsersEditCtrl);
 }(angular));

@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function NewCtrl($scope, Person) {
+  function PersonsNewCtrl($scope, Person) {
     $scope.newPerson = {
       personData: {
         lin: undefined,
@@ -49,7 +49,7 @@
     };
   }
 
-  NewCtrl.$inject = ['$scope', 'persons.Person'];
+  PersonsNewCtrl.$inject = ['$scope', 'Person'];
 
-  angular.module('persons').controller('persons.NewCtrl', NewCtrl);
+  angular.module('gva').controller('PersonsNewCtrl', PersonsNewCtrl);
 }(angular));

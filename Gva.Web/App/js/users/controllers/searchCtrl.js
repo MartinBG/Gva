@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function SearchCtrl($scope, $state, $stateParams, usersStates, User) {
+  function UsersSearchCtrl($scope, $state, $stateParams, User) {
     $scope.filters = {
       username: null //always show the username filter
     };
@@ -14,11 +14,11 @@
     });
 
     $scope.newUser = function () {
-      $state.go(usersStates.newUser);
+      $state.go('users.new');
     };
 
     $scope.search = function () {
-      $state.go(usersStates.search, {
+      $state.go('users.search', {
         username: $scope.filters.username,
         fullname: $scope.filters.fullname,
         showActive: $scope.filters.showActive && $scope.filters.showActive.id
@@ -44,11 +44,11 @@
     });
 
     $scope.editUser = function (user) {
-      $state.go(usersStates.edit, { userId: user.userId });
+      $state.go('users.edit', { userId: user.userId });
     };
   }
   
-  SearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'users.States', 'users.User'];
+  UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'User'];
 
-  angular.module('users').controller('users.SearchCtrl', SearchCtrl);
+  angular.module('users').controller('UsersSearchCtrl', UsersSearchCtrl);
 }(angular, _));

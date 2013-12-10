@@ -89,9 +89,9 @@ module.exports = function (grunt) {
         module: 'users.templates'
       },
       persons: {
-        src: ['js/persons/**/*.html'],
-        dest: '<%= buildDir %>/templates/persons.js',
-        module: 'persons.templates'
+        src: ['js/gva/**/*.html'],
+        dest: '<%= buildDir %>/templates/gva.js',
+        module: 'gva.templates'
       },
       scaffolding: {
         src: ['js/scaffolding/**/*.html'],

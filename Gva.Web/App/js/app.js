@@ -8,7 +8,7 @@
     'navigation',
     'scaffolding',
     'users',
-    'persons',
+    'gva',
     'l10n',
     'l10n-tools',
     'l10nTexts_bg-bg',
@@ -17,24 +17,20 @@
     '$urlRouterProvider',
     '$stateProvider',
     '$locationProvider',
-    'navigation.NavigationConfigProvider',
-    'users.StatesProvider',
-    'persons.StatesProvider',
+    'NavigationConfigProvider',
     function (
       $urlRouterProvider,
       $stateProvider,
       $locationProvider,
-      navigationConfigProvider,
-      usersStatesProvider,
-      personsStatesProvider
+      navigationConfigProvider
     ) {
       $locationProvider.html5Mode(false);
       $urlRouterProvider.otherwise('/users');
 
       navigationConfigProvider
         .addItem({ text: 'Персонал', items: [
-          { text: 'Физически лица', url: '/persons' },
-          { text: 'Ново физическо лице', state: personsStatesProvider.states.newPerson },
+          { text: 'Физически лица', state: 'persons.search' },
+          { text: 'Ново физическо лице', state: 'persons.new' },
           { text: 'Лицензи', url: '/licenses' },
           { text: 'Квалификации', url: '/qualifications' },
           { text: 'Медицински', url: '/medical' }
@@ -50,7 +46,7 @@
           { text: 'Инспекции', url: '/licenses' }
         ]})
         .addItem({ text: 'Админ', icon: 'glyphicon-wrench', items: [
-          { text: 'Потребители', state: usersStatesProvider.states.search }
+          { text: 'Потребители', state: 'users.search' }
         ]})
         .addItem({ text: 'Помощ', items: [
           {

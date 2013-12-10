@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function BreadcrumbBarCtrl($scope, $state, navigationConfig) {
@@ -19,7 +19,11 @@
           break;
         }
 
-        lastState = lastState.parent;
+        if (_.isString(lastState.parent)) {
+          lastState = $state.get(lastState.parent);
+        } else {
+          lastState = lastState.parent;
+        }
       }
 
       states.reverse();
@@ -38,7 +42,7 @@
     }
   }
 
-  BreadcrumbBarCtrl.$inject = [ '$scope', '$state', 'navigation.NavigationConfig'];
+  BreadcrumbBarCtrl.$inject = [ '$scope', '$state', 'NavigationConfig'];
 
-  angular.module('navigation').controller('navigation.BreadcrumbBarCtrl', BreadcrumbBarCtrl);
-}(angular));
+  angular.module('navigation').controller('BreadcrumbBarCtrl', BreadcrumbBarCtrl);
+}(angular, _));

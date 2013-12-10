@@ -20,7 +20,7 @@
     };
   }
 
-  PersonDataCtrl.$inject = ['$scope', 'persons.Person'];
+  PersonDataCtrl.$inject = ['$scope', 'Person'];
 
-  angular.module('persons').controller('persons.PersonDataCtrl', PersonDataCtrl);
+  angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
 }(angular, $));

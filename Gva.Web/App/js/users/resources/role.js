@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('users').factory('users.Role', ['$resource', function ($resource) {
+  angular.module('users').factory('Role', ['$resource', function ($resource) {
     return $resource('/api/roles');
   }]);
 }(angular));

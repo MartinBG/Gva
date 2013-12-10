@@ -34,5 +34,5 @@
     return this;
   };
 
-  angular.module('navigation').provider('navigation.NavigationConfig', NavigationConfigProvider);
+  angular.module('navigation').provider('NavigationConfig', NavigationConfigProvider);
 }(angular));
