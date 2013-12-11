@@ -41,7 +41,9 @@
       }
       else {
         $scope.text = l10n.get(attrs.text);
-        $scope.btnAction = $parse(attrs.action)($scope.$parent);
+        $scope.btnAction = function () {
+          $scope.action();
+        };
       }
     }
 
@@ -50,7 +52,7 @@
       require: '?^scSearch',
       replace: true,
       scope: {
-        action: '@',
+        action: '&',
         icon: '@'
       },
       templateUrl: 'scaffolding/directives/search/buttonDirective.html',
