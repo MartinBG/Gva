@@ -27,7 +27,7 @@ namespace Gva.Web.Controllers
 
         public ActionResult Index()
         {
-            return File(Server.MapPath("~/App/index.html"), "text/html");
+            return File(Server.MapPath("~/App/build/index.html"), "text/html");
         }
     }
 }
