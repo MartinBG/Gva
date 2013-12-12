@@ -11,7 +11,7 @@
     beforeEach(function() {
       ptor.get('#/users');
 
-      searchBtn = ptor.findElement(protractor.By.css('div[action=search] > button'));
+      searchBtn = ptor.findElement(protractor.By.css('div[action=\'search()\'] > button'));
       addBtn = ptor.findElement(protractor.By.css('div[action=add] button'));
     });
 
@@ -65,7 +65,7 @@
                 select2Opts[0].click();
               });
 
-              ptor.findElement(protractor.By.css('div[action=search] > button')).click()
+              ptor.findElement(protractor.By.css('div[action=\'search()\'] > button')).click()
                   .then(function() {
                 var firstFullname = ptor.findElement(
                   protractor.By.datatable('users').row(1).column('fullname'));
@@ -80,7 +80,7 @@
                 select2Opts[1].click();
               });
 
-              ptor.findElement(protractor.By.css('div[action=search] > button')).click()
+              ptor.findElement(protractor.By.css('div[action=\'search()\'] > button')).click()
                   .then(function() {
                 var firstFullname = ptor.findElement(
                   protractor.By.datatable('users').row(1).column('fullname'));

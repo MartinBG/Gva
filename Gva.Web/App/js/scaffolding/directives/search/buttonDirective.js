@@ -24,6 +24,8 @@
     }
 
     function ButtonLink($scope, element, attrs, scSearch) {
+      var parsedAction;
+
       if (!scSearch) {
         return;
       }
@@ -41,8 +43,10 @@
       }
       else {
         $scope.text = l10n.get(attrs.text);
+
+        parsedAction = $parse(attrs.action);
         $scope.btnAction = function () {
-          $scope.action();
+          parsedAction($scope.$parent);
         };
       }
     }
@@ -52,7 +56,7 @@
       require: '?^scSearch',
       replace: true,
       scope: {
-        action: '&',
+        action: '@',
         icon: '@'
       },
       templateUrl: 'scaffolding/directives/search/buttonDirective.html',

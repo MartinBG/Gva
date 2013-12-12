@@ -5,7 +5,7 @@
     <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('users.search.onlyUnactive')}]}" label="users.search.activity"></sc-filter>
     <sc-button action="search()" text="users.search.search" icon="glyphicon-search"></sc-button>
     <sc-button action="newUser()" text="users.search.new" icon="glyphicon-user"></sc-button>
-    <sc-button action="add()"></sc-button>
+    <sc-button action="add"></sc-button>
   </sc-search>
 
   <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
