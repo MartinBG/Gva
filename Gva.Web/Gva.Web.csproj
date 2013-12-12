@@ -143,13 +143,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App\.gitignore" />
-    <Content Include="App\build\js\app.js" />
-    <Content Include="App\build\js\sample.data.js" />
-    <Content Include="App\build\js\test.js" />
-    <Content Include="App\build\templates\directive-tests.js" />
-    <Content Include="App\build\templates\navigation.js" />
-    <Content Include="App\build\templates\scaffolding.js" />
-    <Content Include="App\build\templates\users.js" />
     <Content Include="App\css\style.css" />
     <Content Include="App\gruntfile.js" />
     <Content Include="App\img\initial-loader.gif" />
@@ -343,9 +336,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\person-document-checks.json" />
-    <Content Include="App\build\js\app.map" />
-    <Content Include="App\build\js\sample.data.map" />
-    <Content Include="App\build\js\test.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
