@@ -145,7 +145,8 @@ module.exports = function (grunt) {
         '!test/e2e/ptorConf.js',
         '!test/e2e/expressServer.js',
         '!test/e2e/spec/**/*.js',
-        '!test/e2e/directives/**/specs/*.js']
+        '!test/e2e/directives/**/specs/*.js'
+      ]
     },
     cssBundles: {
       '<%= buildDir %>/css/styles.css': [
