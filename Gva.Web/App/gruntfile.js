@@ -140,12 +140,12 @@ module.exports = function (grunt) {
         'bower_components/angular-mocks/angular-mocks.js'
       ],
       '<%= buildDir %>/js/test.js': [
-        'test/e2e/httpBackendConfiguratorProvider.js',
-        'test/e2e/mocks/*.js',
-        'test/e2e/e2eMocksSetup.js',
-        'test/e2e/directives/*.js',
-        'test/e2e/directives/*/controllers/*.js'
-      ]
+        'test/e2e/**/*.js',
+        '!test/e2e/gvaBy.js',
+        '!test/e2e/ptorConf.js',
+        '!test/e2e/expressServer.js',
+        '!test/e2e/spec/**/*.js',
+        '!test/e2e/directives/**/specs/*.js']
     },
     cssBundles: {
       '<%= buildDir %>/css/styles.css': [
