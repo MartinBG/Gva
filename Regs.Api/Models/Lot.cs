@@ -1,5 +1,4 @@
 ﻿using Common.Data;
-using Common.Infrastructure;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Managers.LobManager;
@@ -9,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
+using Common.Api.UserContext;
 
 namespace Regs.Api.Models
 {

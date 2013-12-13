@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Infrastructure;
+using Common.Api.UserContext;
 
 namespace Regs.Api.Tests.Common
 {

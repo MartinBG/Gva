@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Common.Infrastructure;
+using Common.Api.UserContext;
 using Gva.Web.App_Start;
 using Newtonsoft.Json.Linq;
 using Ninject;

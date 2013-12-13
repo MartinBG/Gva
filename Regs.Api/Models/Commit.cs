@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using Common.Models;
+using Common.Api.Models;
 
 namespace Regs.Api.Models
 {

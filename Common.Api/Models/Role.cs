@@ -1,11 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Common.Models
+namespace Common.Api.Models
 {
     public partial class Role
     {
@@ -19,7 +16,6 @@ namespace Common.Models
         public string Permissions { get; set; }
         public bool IsActive { get; set; }
         public byte[] Version { get; set; }
-
         public virtual ICollection<User> Users { get; set; }
     }
 
@@ -56,11 +52,13 @@ namespace Common.Models
             this.HasMany(t => t.Users)
                 .WithMany(t => t.Roles)
                 .Map(m =>
-                    {
-                        m.ToTable("UserRoles");
-                        m.MapLeftKey("RoleId");
-                        m.MapRightKey("UserId");
-                    });
+                {
+                    m.ToTable("UserRoles");
+                    m.MapLeftKey("RoleId");
+                    m.MapRightKey("UserId");
+                });
+
+
         }
     }
 }

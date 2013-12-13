@@ -1,6 +1,4 @@
-﻿
-using Common.Models;
-namespace Common.Infrastructure
+﻿namespace Common.Api.UserContext
 {
     public interface IUserContextProvider
     {

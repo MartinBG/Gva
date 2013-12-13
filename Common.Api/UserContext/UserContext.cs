@@ -1,8 +1,8 @@
-﻿using Common.Models;
+﻿using Common.Api.Models;
 using System.Linq;
 using System.Security;
 
-namespace Common.Infrastructure
+namespace Common.Api.UserContext
 {
     public class UserContext
     {

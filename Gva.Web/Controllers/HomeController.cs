@@ -12,12 +12,12 @@ namespace Gva.Web.Controllers
         private Common.Data.IUnitOfWork unitOfWork;
         private Regs.Api.Managers.LotManager.ILotManager lotManager;
         private Regs.Api.Managers.LobManager.ILobManager lobManager;
-        private Common.Infrastructure.UserContext userContext;
+        private Common.Api.UserContext.UserContext userContext;
 
         public HomeController(Common.Data.IUnitOfWork unitOfWork, 
             Regs.Api.Managers.LotManager.ILotManager lotManager, 
             Regs.Api.Managers.LobManager.ILobManager lobManager,
-            Common.Infrastructure.IUserContextProvider userContextProvider)
+            Common.Api.UserContext.IUserContextProvider userContextProvider)
         {
             this.unitOfWork = unitOfWork;
             this.lotManager = lotManager;

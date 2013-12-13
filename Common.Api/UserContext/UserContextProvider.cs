@@ -1,7 +1,7 @@
-﻿using Common.Data;
-using Common.Models;
+﻿using Common.Api.Models;
+using Common.Data;
 
-namespace Common.Infrastructure
+namespace Common.Api.UserContext
 {
     // TO DO
     public class UserContextProvider : IUserContextProvider

@@ -1,11 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Common.Models
+namespace Common.Api.Models
 {
     public partial class User
     {
@@ -24,7 +21,6 @@ namespace Common.Models
         public string CertificateThumbprint { get; set; }
         public bool IsActive { get; set; }
         public byte[] Version { get; set; }
-
         public virtual ICollection<Role> Roles { get; set; }
     }
 
