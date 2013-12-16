@@ -44,6 +44,7 @@ Usage <sc-datatable ng-model="data"
               bDestroy: true,
               bFilter: filterable,
               bPaginate: pageable,
+              sAutoWidth: false,
               bSort: sortable,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
@@ -93,7 +94,8 @@ Usage <sc-datatable ng-model="data"
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',
-            sClass: 'scdt-' + column.data
+            sClass: 'scdt-' + column.data,
+            sWidth: column.width
           });
         };
       }

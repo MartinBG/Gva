@@ -44,7 +44,8 @@ Usage: <sc-column model-name="property"
             visible: iAttrs.visible,
             sorting: iAttrs.sorting,
             createCell: createCellFunc,
-            defaultValue: iAttrs.defaultValue
+            defaultValue: iAttrs.defaultValue,
+            width: iAttrs.width
           });
         };
       }
