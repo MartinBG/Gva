@@ -150,6 +150,12 @@
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
+    <Content Include="App\js\corrs\controllers\editCtrl.js" />
+    <Content Include="App\js\corrs\controllers\searchCtrl.js" />
+    <Content Include="App\js\corrs\corrs.js" />
+    <Content Include="App\js\corrs\resources\corr.js" />
+    <Content Include="App\js\corrs\templates\edit.html" />
+    <Content Include="App\js\corrs\templates\search.html" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
@@ -175,6 +181,8 @@
     <Content Include="App\js\gva\persons\forms\personAddress.html" />
     <Content Include="App\js\gva\persons\forms\personDataCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentId.html" />
+    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
+    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
     <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />
@@ -268,6 +276,7 @@
     <Content Include="App\test\e2e\directives\sc-x\templates\scSelect.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
+    <Content Include="App\test\e2e\mocks\corrsHttp.js" />
     <Content Include="App\test\e2e\mocks\personsHttp.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />

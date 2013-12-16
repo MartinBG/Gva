@@ -1,0 +1,123 @@
+﻿<div class="container page-content">
+  <p>NEW/EDIT</p>
+  <form name="corrForm" novalidate class="well">
+    <div class="well-sm panel-body form-body">
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.correspondentGroup"></label>
+          <sc-nomenclature ng-model="corr.corrGroup" alias="'CorrespondentGroups'" load="false"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.email"></label>
+          <sc-text ng-model="corr.email"></sc-text>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.correspondentType"></label>
+          <sc-nomenclature ng-model="corr.corrType" alias="'CorrespondentTypes'" load="false"></sc-nomenclature>
+        </div>
+      </div>
+
+      <!--BgCitizen-->
+      <div ng-show="corr.corrType.alias == 'BulgarianCitizen'">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.bgCitizenFirstName"></label>
+            <sc-text ng-model="corr.bgCitizenFirstName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.bgCitizenLastName"></label>
+            <sc-text ng-model="corr.bgCitizenLastName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.bgCitizenUIN"></label>
+            <sc-text ng-model="corr.bgCitizenUIN"></sc-text>
+          </div>
+        </div>
+      </div>
+
+      <!--Foreigner-->
+      <div ng-show="corr.corrType.alias == 'Foreigner'">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.foreignerFirstName"></label>
+            <sc-text ng-model="corr.foreignerFirstName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.foreignerLastName"></label>
+            <sc-text ng-model="corr.foreignerLastName"></sc-text>
+          </div>
+          <div class="form-group col-sm-2">
+            <label class="control-label" l10n-text="corrs.edit.foreignerBirthDate"></label>
+            <sc-date ng-model="corr.foreignerBirthDate"></sc-date>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.foreignerCountry"></label>
+            <sc-nomenclature ng-model="corr.foreignerCountryId" alias="'countries'" load="false"></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.foreignerSettlement"></label>
+            <sc-text ng-model="corr.foreignerSettlement"></sc-text>
+          </div>
+        </div>
+      </div>
+
+      <!--LegalEntity-->
+      <div ng-show="corr.corrType.alias == 'LegalEntity'">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.legalEntityName"></label>
+            <sc-text ng-model="corr.legalEntityName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.legalEntityBulstat"></label>
+            <sc-text ng-model="corr.legalEntityBulstat"></sc-text>
+          </div>
+        </div>
+      </div>
+
+      <!--ForeignLegalEntity-->
+      <div ng-show="corr.corrType.alias == 'ForeignLegalEntity'">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.fLegalEntityName"></label>
+            <sc-text ng-model="corr.fLegalEntityName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.fLegalEntityCountry"></label>
+            <sc-nomenclature ng-model="corr.fLegalEntityCountryId" alias="'countries'" load="false"></sc-nomenclature>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.fLegalEntityRegisterName"></label>
+            <sc-text ng-model="corr.fLegalEntityRegisterName"></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="corrs.edit.fLegalEntityRegisterNumber"></label>
+            <sc-text ng-model="corr.fLegalEntityRegisterNumber"></sc-text>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-8">
+            <label class="control-label" l10n-text="corrs.edit.fLegalEntityOtherData"></label>
+            <sc-textarea ng-model="corr.fLegalEntityOtherData"></sc-textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3 col-sm-offset-4">
+          <button id="saveBtn" type="button" class="btn btn-primary" ng-click="save()" l10n-text="corrs.edit.save"></button>
+          <button id="cancelBtn" type="button" class="btn btn-default" ng-click="cancel()" l10n-text="corrs.edit.cancel"></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

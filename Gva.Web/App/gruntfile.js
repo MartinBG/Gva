@@ -36,7 +36,7 @@ module.exports = function (grunt) {
           if (hasErrors) {
             return;
           }
-        
+
           var data = require('./' + filepath),
               failed;
 
@@ -74,7 +74,9 @@ module.exports = function (grunt) {
         'js/users/*.js',
         'js/users/**/*.js',
         'js/gva/*.js',
-        'js/gva/**/*.js'
+        'js/gva/**/*.js',
+        'js/corrs/*.js',
+        'js/corrs/**/*.js'
       ],
       '<%= buildDir %>/js/sample.data.js': [
         'schema/requireShim.js',
@@ -238,6 +240,11 @@ module.exports = function (grunt) {
         dest: '<%= buildDir %>/templates/users.js',
         module: 'users.templates'
       },
+      corrs: {
+        src: [ 'js/corrs/**/*.html' ],
+        dest: '<%= buildDir %>/templates/corrs.js',
+        module: 'corrs.templates'
+      },
       persons: {
         src: ['js/gva/**/*.html'],
         dest: '<%= buildDir %>/templates/gva.js',
@@ -315,7 +322,7 @@ module.exports = function (grunt) {
       }
     }
   });
-  
+
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
@@ -339,11 +346,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test-release',
     ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template', 'express', 'exec:protractor']);
- 
+
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
   grunt.registerTask('test-server', ['express', 'express-keepalive']);
 
   grunt.registerTask('default', ['debug']);
-  
+
 };

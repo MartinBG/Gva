@@ -1,0 +1,23 @@
+﻿<div class="container page-content">
+  <p>SEARCH</p>
+   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="corrUin" class="col-sm-3" removable="false" label="corrs.search.corrUin"></sc-filter>
+    <sc-filter type="text" name="corrEmail" class="col-sm-3" removable="true" label="corrs.search.corrEmail"></sc-filter>
+    <sc-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-button>
+    <sc-button action="newCorr()" text="corrs.search.new" icon="glyphicon-user"></sc-button>
+    <sc-button action="add"></sc-button>
+  </sc-search>
+
+   <sc-datatable ng-model="corrs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="displayName" title="Наименование">
+    </sc-column>
+    <sc-column data="email" title="Имейл">
+    </sc-column>
+    <sc-column data="corrType.name" title="Тип">
+    </sc-column>
+    <sc-column>
+      <button type="button" class="btn-xs btn-info" ng-click="editCorr(item)" l10n-text="corrs.search.edit"></button>
+    </sc-column>
+  </sc-datatable>
+
+</div>

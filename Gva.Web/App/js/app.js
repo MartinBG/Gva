@@ -9,6 +9,7 @@
     'scaffolding',
     'users',
     'gva',
+    'corrs',
     'l10n',
     'l10n-tools',
     'l10nTexts_bg-bg',
@@ -41,7 +42,10 @@
           { text: 'Надзор', url: '/licenses' },
           { text: 'Ръководен Персонал', url: '/licenses' }
         ]})
-        .addItem({ text: 'Възд. Средства', url: '/aircraft', items: [
+        .addItem({text: 'Кореспонденти', state: 'corrs.search', items: [
+          { text: 'Нов кореспондент', state: 'corrs.new' }
+        ]})
+        .addItem({text: 'Възд. Средства', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licenses' },
           { text: 'Инспекции', url: '/licenses' }
         ]})

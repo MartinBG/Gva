@@ -19,6 +19,42 @@
           }
         }
       },
+      corrs: {
+        search: {
+          corrUin: 'Наименование',
+          corrEmail: 'Имейл',
+          activity: 'Активност',
+          onlyActive: 'Само активни',
+          onlyUnactive: 'Само неактивни',
+          'new': 'Нов кореспондент',
+          search: 'Търси',
+          edit: 'Редакция'
+        },
+        edit: {
+          email: 'Имейл',
+          correspondentType: 'Тип кореспондент',
+          correspondentGroup: 'Кореспондентска група',
+          bgCitizenFirstName: 'Първо име',
+          bgCitizenLastName: 'Фамилия',
+          bgCitizenUIN: 'ЕГН',
+          foreignerFirstName: 'Първо име',
+          foreignerLastName: 'Фамилия',
+          foreignerCountry: 'Държава',
+          foreignerSettlement: 'Населено място',
+          foreignerBirthDate: 'Дата на раждане',
+          legalEntityName: 'Наименование',
+          legalEntityBulstat: 'БУЛСТАТ',
+          fLegalEntityName: 'Наименование',
+          fLegalEntityCountry: 'Държава',
+          fLegalEntityRegisterName: 'Рег. наименование',
+          fLegalEntityRegisterNumber: 'Рег. номер',
+          fLegalEntityOtherData: 'Доп. информация',
+
+
+          save: 'Запис',
+          cancel: 'Отказ'
+        }
+      },
       users: {
         search: {
           username: 'Потребителско име',
