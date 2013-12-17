@@ -3,9 +3,9 @@
   'use strict';
 
   exports.config = {
-    seleniumServerJar: '../../test/e2e/assets/selenium/selenium-server-standalone-2.35.0.jar',
-    chromeDriver: '../../test/e2e/assets/selenium/chromedriver',
-    specs: ['spec/*.js', 'directives/sc-*/specs/*.js'],
+    seleniumServerJar: 'test/e2e/assets/selenium/selenium-server-standalone-2.35.0.jar',
+    chromeDriver: 'test/e2e/assets/selenium/chromedriver',
+    specs: ['test/e2e/spec/*.js', 'test/e2e/directives/sc-*/specs/*.js'],
     capabilities: {
       'browserName': 'chrome'
     },
