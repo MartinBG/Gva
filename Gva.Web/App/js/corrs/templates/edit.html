@@ -1,11 +1,10 @@
 ﻿<div class="container page-content">
-  <p>NEW/EDIT</p>
   <form name="corrForm" novalidate class="well">
     <div class="well-sm panel-body form-body">
       <div class="row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.correspondentGroup.$invalid && saveClicked}">
           <label class="control-label" l10n-text="corrs.edit.correspondentGroup"></label>
-          <sc-nomenclature ng-model="corr.corrGroup" alias="'CorrespondentGroups'" load="false"></sc-nomenclature>
+          <sc-nomenclature name="correspondentGroup" ng-model="corr.correspondentGroup" alias="'correspondentGroups'" load="false" required></sc-nomenclature>
         </div>
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="corrs.edit.email"></label>
@@ -14,22 +13,22 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.correspondentType.$invalid && saveClicked}">
           <label class="control-label" l10n-text="corrs.edit.correspondentType"></label>
-          <sc-nomenclature ng-model="corr.corrType" alias="'CorrespondentTypes'" load="false"></sc-nomenclature>
+          <sc-nomenclature name="correspondentType" ng-model="corr.correspondentType" alias="'correspondentTypes'" load="false" required></sc-nomenclature>
         </div>
       </div>
 
       <!--BgCitizen-->
-      <div ng-show="corr.corrType.alias == 'BulgarianCitizen'">
+      <div ng-show="corr.correspondentType.alias == 'BulgarianCitizen'">
         <div class="row">
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.bgCitizenFirstName.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.bgCitizenFirstName"></label>
-            <sc-text ng-model="corr.bgCitizenFirstName"></sc-text>
+            <sc-text name="bgCitizenFirstName" ng-model="corr.bgCitizenFirstName" ng-required="corr.correspondentType.alias == 'BulgarianCitizen'"></sc-text>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.bgCitizenLastName.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.bgCitizenLastName"></label>
-            <sc-text ng-model="corr.bgCitizenLastName"></sc-text>
+            <sc-text name="bgCitizenLastName" ng-model="corr.bgCitizenLastName" ng-required="corr.correspondentType.alias == 'BulgarianCitizen'"></sc-text>
           </div>
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="corrs.edit.bgCitizenUIN"></label>
@@ -39,15 +38,15 @@
       </div>
 
       <!--Foreigner-->
-      <div ng-show="corr.corrType.alias == 'Foreigner'">
+      <div ng-show="corr.correspondentType.alias == 'Foreigner'">
         <div class="row">
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.foreignerFirstName.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.foreignerFirstName"></label>
-            <sc-text ng-model="corr.foreignerFirstName"></sc-text>
+            <sc-text name="foreignerFirstName" ng-model="corr.foreignerFirstName" ng-required="corr.correspondentType.alias == 'Foreigner'"></sc-text>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.foreignerLastName.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.foreignerLastName"></label>
-            <sc-text ng-model="corr.foreignerLastName"></sc-text>
+            <sc-text name="foreignerLastName" ng-model="corr.foreignerLastName" ng-required="corr.correspondentType.alias == 'Foreigner'"></sc-text>
           </div>
           <div class="form-group col-sm-2">
             <label class="control-label" l10n-text="corrs.edit.foreignerBirthDate"></label>
@@ -68,25 +67,25 @@
       </div>
 
       <!--LegalEntity-->
-      <div ng-show="corr.corrType.alias == 'LegalEntity'">
+      <div ng-show="corr.correspondentType.alias == 'LegalEntity'">
         <div class="row">
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="corrs.edit.legalEntityName"></label>
             <sc-text ng-model="corr.legalEntityName"></sc-text>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.legalEntityBulstat.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.legalEntityBulstat"></label>
-            <sc-text ng-model="corr.legalEntityBulstat"></sc-text>
+            <sc-text name="legalEntityBulstat" ng-model="corr.legalEntityBulstat" ng-required="corr.correspondentType.alias == 'LegalEntity'"></sc-text>
           </div>
         </div>
       </div>
 
       <!--ForeignLegalEntity-->
-      <div ng-show="corr.corrType.alias == 'ForeignLegalEntity'">
+      <div ng-show="corr.correspondentType.alias == 'ForeignLegalEntity'">
         <div class="row">
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.fLegalEntityName.$invalid && saveClicked}">
             <label class="control-label" l10n-text="corrs.edit.fLegalEntityName"></label>
-            <sc-text ng-model="corr.fLegalEntityName"></sc-text>
+            <sc-text name="fLegalEntityName" ng-model="corr.fLegalEntityName" ng-required="corr.correspondentType.alias == 'ForeignLegalEntity'"></sc-text>
           </div>
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="corrs.edit.fLegalEntityCountry"></label>
@@ -106,10 +105,42 @@
         <div class="row">
           <div class="form-group col-sm-8">
             <label class="control-label" l10n-text="corrs.edit.fLegalEntityOtherData"></label>
-            <sc-textarea ng-model="corr.fLegalEntityOtherData"></sc-textarea>
+            <textarea ng-model="corr.fLegalEntityOtherData" class="form-control" rows="3"></textarea>
           </div>
         </div>
+      </div>
 
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.contactSettlementId"></label>
+          <sc-nomenclature ng-model="corr.contactSettlementId" alias="'cities'" load="false"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.contactPostCode"></label>
+          <sc-text ng-model="corr.contactPostCode"></sc-text>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-8">
+          <label class="control-label" l10n-text="corrs.edit.contactAddress"></label>
+          <textarea ng-model="corr.contactAddress" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.contactPostOfficeBox"></label>
+          <sc-text ng-model="corr.contactPostOfficeBox"></sc-text>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.contactPhone"></label>
+          <sc-text ng-model="corr.contactPhone"></sc-text>
+        </div>
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="corrs.edit.contactFax"></label>
+          <sc-text ng-model="corr.contactFax"></sc-text>
+        </div>
       </div>
 
       <div class="row">

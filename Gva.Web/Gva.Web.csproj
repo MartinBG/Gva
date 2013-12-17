@@ -181,8 +181,6 @@
     <Content Include="App\js\gva\persons\forms\personAddress.html" />
     <Content Include="App\js\gva\persons\forms\personDataCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentId.html" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
     <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />

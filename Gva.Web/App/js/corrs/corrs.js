@@ -13,9 +13,9 @@
   ]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
-        name: 'corrs', //'users',
+        name: 'corrs',
         title: 'Кореспонденти',
-        url: '/corrs?corrUin&corrEmail', //'/users?username&fullname&showActive',
+        url: '/corrs?displayName&email',
         parent: 'root',
         'abstract': true
       })

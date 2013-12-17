@@ -17,14 +17,14 @@
     },
 
     //Номенклатура Кореспондентска група
-    CorrespondentGroups: [
+    correspondentGroups: [
       {nomTypeValueId: 1, code: '', name: 'Министерски съвет', nameAlt: '', alias: '' },
       {nomTypeValueId: 2, code: '', name: 'Заявители', nameAlt: 'Applicants', alias: 'Applicants' },
       {nomTypeValueId: 3, code: '', name: 'Системни', nameAlt: 'System', alias: 'System' }
     ],
 
     //Номенклатура Тип кореспондент
-    CorrespondentTypes: [
+    correspondentTypes: [
      { nomTypeValueId: 1, code: '', name: 'Български гражданин', nameAlt: 'BulgarianCitizen', alias: 'BulgarianCitizen' },
      { nomTypeValueId: 2, code: '', name: 'Чужденец', nameAlt: 'Foreigner', alias: 'Foreigner' },
      { nomTypeValueId: 3, code: '', name: 'Юридическо лице', nameAlt: 'LegalEntity', alias: 'LegalEntity' },

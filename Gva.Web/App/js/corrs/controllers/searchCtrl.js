@@ -4,8 +4,8 @@
 
   function CorrsSearchCtrl($scope, $state, $stateParams, Corr) {
     $scope.filters = {
-      corrUin: null,
-      corrEmail: null
+      displayName: null,
+      email: null
     };
 
     _.forOwn($stateParams, function(value, param) {
@@ -20,24 +20,18 @@
 
     $scope.search = function () {
       $state.go('corrs.search', {
-        corrUin: $scope.filters.corrUin,
-        corrEmail: $scope.filters.corrEmail
+        displayName: $scope.filters.displayName,
+        email: $scope.filters.email
       });
     };
 
     Corr.query($stateParams).$promise.then(function (corrs) {
       $scope.corrs = corrs.map(function (corr) {
-        //var roles = '';
-        //for (var i = 0; i < user.roles.length; i++) {
-        //  roles += user.roles[i].name + ', ';
-        //}
-        //roles = roles.substring(0, roles.length - 2);
-
         return {
           corrId: corr.corrId,
           displayName: corr.displayName,
           email: corr.email,
-          corrType: corr.corrType
+          correspondentType: corr.correspondentType
         };
       });
     });

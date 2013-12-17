@@ -5,14 +5,8 @@
     var nomenclatures = require('./nomenclatures.sample'),
       corrs = [{
         corrId: 1,
-        corrType: {
-          nomTypeValueId: nomenclatures.getId('CorrespondentTypes', 'Foreigner'),
-          name: nomenclatures.getName('CorrespondentTypes', 'Foreigner')
-        },
-        corrGroup: {
-          nomTypeValueId: nomenclatures.getId('CorrespondentGroups', 'Applicants'),
-          name: nomenclatures.getName('CorrespondentGroups', 'Applicants')
-        },
+        correspondentType: nomenclatures.correspondentTypes[0],
+        correspondentGroup: nomenclatures.correspondentGroups[0],
         displayName: 'ДЕЛТА КОИН 1324567890',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
@@ -44,14 +38,8 @@
         contactFax: ''
       }, {
         corrId: 2,
-        corrType: {
-          corrTypeId: nomenclatures.getId('CorrespondentTypes', 'Foreigner'),
-          name: nomenclatures.getName('CorrespondentTypes', 'Foreigner')
-        },
-        corrGroup: {
-          corrGroupId: nomenclatures.getId('CorrespondentGroups', 'Applicants'),
-          name: nomenclatures.getName('CorrespondentGroups', 'Applicants')
-        },
+        correspondentType: nomenclatures.correspondentTypes[1],
+        correspondentGroup: nomenclatures.correspondentGroups[1],
         displayName: 'ДЕЛТА КОИН 1324567890',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
@@ -85,13 +73,13 @@
       nextCorrId = 3;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/corrs?corrUin&corrEmail',
+      .when('GET', '/api/corrs?displayName&email',
         function ($params, $filter) {
           return [
             200,
             $filter('filter')(corrs, {
-              corrUin: $params.corrUin,
-              corrEmail: $params.corrEmail
+              displayName: $params.displayName,
+              email: $params.email
             })
           ];
         })
@@ -115,7 +103,6 @@
             return [400];
           }
 
-          //$jsonData.hasPassword = $jsonData.password !== undefined && $jsonData.password !== '';
           corrs[corrIndex] = $jsonData;
 
           return [200];
@@ -127,7 +114,6 @@
           }
 
           $jsonData.corrId = ++nextCorrId;
-          //$jsonData.hasPassword = $jsonData.password !== undefined && $jsonData.password !== '';
           corrs.push($jsonData);
 
           return [200];

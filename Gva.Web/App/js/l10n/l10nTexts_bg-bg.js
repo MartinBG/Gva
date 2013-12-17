@@ -21,8 +21,8 @@
       },
       corrs: {
         search: {
-          corrUin: 'Наименование',
-          corrEmail: 'Имейл',
+          displayName: 'Наименование',
+          email: 'Имейл',
           activity: 'Активност',
           onlyActive: 'Само активни',
           onlyUnactive: 'Само неактивни',
@@ -49,7 +49,14 @@
           fLegalEntityRegisterName: 'Рег. наименование',
           fLegalEntityRegisterNumber: 'Рег. номер',
           fLegalEntityOtherData: 'Доп. информация',
-
+          contactDistrictId: 'Област',
+          contactMunicipalityId: 'Община',
+          contactSettlementId: 'Населено място',
+          contactPostCode: 'ПК',
+          contactAddress: 'Адрес',
+          contactPostOfficeBox: 'Пощенска кутия',
+          contactPhone: 'Телефон',
+          contactFax: 'Факс',
 
           save: 'Запис',
           cancel: 'Отказ'

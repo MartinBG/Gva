@@ -42,7 +42,7 @@
           { text: 'Надзор', url: '/licenses' },
           { text: 'Ръководен Персонал', url: '/licenses' }
         ]})
-        .addItem({text: 'Кореспонденти', state: 'corrs.search', items: [
+        .addItem({text: 'Кореспонденти', icon: 'glyphicon-user', state: 'corrs.search', items: [
           { text: 'Нов кореспондент', state: 'corrs.new' }
         ]})
         .addItem({text: 'Възд. Средства', url: '/aircraft', items: [

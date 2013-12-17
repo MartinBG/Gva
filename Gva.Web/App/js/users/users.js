@@ -15,7 +15,7 @@
       .state({
         name: 'users',
         title: 'Потребители',
-        url: '/users?username&fullname',
+        url: '/users?username&fullname&showActive',
         parent: 'root',
         'abstract': true
       })
