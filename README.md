@@ -27,7 +27,7 @@ gva
 ##### To debug the tests
 1. Install `node-inspector` globally with `npm install -g node-inspector`
 2. Run the tests with
-`node --debug-brk c:\Users\username\AppData\Roaming\npm\node_modules\grunt-cli\bin\grunt taskname`
+`node --debug-brk c:\Users\username\AppData\Roaming\npm\node_modules\grunt-cli\bin\grunt test`
 where `username` is your current user
 3. Run `node-inspector` in a separate command prompt
 4. Open the url that that inspector is showing in Chrome(e.g. http://127.0.0.1:8080/debug?port=5858)
