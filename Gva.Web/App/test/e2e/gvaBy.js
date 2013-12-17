@@ -5,9 +5,9 @@
   var util = require('util'),
     GvaBy = function() {},
     ProtractorBy = function() {},
-    protractor = global.protractor;
+    by = global.by;
 
-  ProtractorBy.prototype = protractor.By;
+  ProtractorBy.prototype = by;
   util.inherits(GvaBy, ProtractorBy);
 
   GvaBy.prototype.datatable = function(model) {
@@ -43,29 +43,19 @@
     }
 
     return {
-      findOverride: function(driver, element) {
-        return (element || driver).findElement(protractor.By.css(datatableContainerCss));
-      },
-      findArrayOverride: function(driver, element) {
-        return (element || driver).findElements(protractor.By.css(datatableContainerCss));
+      findElementsOverride: function(driver, using) {
+        return (using || driver).findElements(by.css(datatableContainerCss));
       },
       row: function (index) {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.css(createCellSelector(index)));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.css(createCellSelector(index)));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.css(createCellSelector(index)));
           },
           column: function (data) {
             return {
-              findOverride: function(driver, element) {
-                return (element || driver)
-                  .findElement(protractor.By.css(createCellSelector(index, data)));
-              },
-              findArrayOverride: function(driver, element) {
-                return (element || driver)
-                  .findElements(protractor.By.css(createCellSelector(index, data)));
+              findElementsOverride: function(driver, using) {
+                return (using || driver)
+                  .findElements(by.css(createCellSelector(index, data)));
               }
             };
           }
@@ -73,33 +63,22 @@
       },
       column: function(data) {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver)
-              .findElement(protractor.By.css(createCellSelector(undefined, data)));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver)
-              .findElements(protractor.By.css(createCellSelector(undefined, data)));
+          findElementsOverride: function(driver, using) {
+            return (using || driver)
+              .findElements(by.css(createCellSelector(undefined, data)));
           }
         };
       },
       header: function() {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.css(createCellSelector(0)));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.css(createCellSelector(0)));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.css(createCellSelector(0)));
           },
           column: function (data) {
             return {
-              findOverride: function(driver, element) {
-                return (element || driver)
-                  .findElement(protractor.By.css(createCellSelector(0, data)));
-              },
-              findArrayOverride: function(driver, element) {
-                return (element || driver)
-                  .findElements(protractor.By.css(createCellSelector(0, data)));
+              findElementsOverride: function(driver, using) {
+                return (using || driver)
+                  .findElements(by.css(createCellSelector(0, data)));
               }
             };
           }
@@ -110,11 +89,8 @@
           datatableContainerCss +
           ' div[class=dataTables_filter] input';
         return {
-          findOverride: function (driver, element) {
-            return (element || driver).findElement(protractor.By.css(filterInputCss));
-          },
-          findArrayOverride: function (driver, element) {
-            return (element || driver).findElements(protractor.By.css(filterInputCss));
+          findElementsOverride: function (driver, using) {
+            return (using || driver).findElements(by.css(filterInputCss));
           }
         };
       },
@@ -124,11 +100,8 @@
           ' div[class=dataTables_info]';
 
         return {
-          findOverride: function (driver, element) {
-            return (element || driver).findElement(protractor.By.css(infoTextCss));
-          },
-          findArrayOverride: function (driver, element) {
-            return (element || driver).findElements(protractor.By.css(infoTextCss));
+          findElementsOverride: function (driver, using) {
+            return (using || driver).findElements(by.css(infoTextCss));
           }
         };
       },
@@ -138,11 +111,8 @@
           ' button[data-toggle=dropdown]';
 
         return {
-          findOverride: function (driver, element) {
-            return (element || driver).findElement(protractor.By.css(hideColumnsButtonCss));
-          },
-          findArrayOverride: function (driver, element) {
-            return (element || driver).findElement(protractor.By.css(hideColumnsButtonCss));
+          findElementsOverride: function (driver, using) {
+            return (using || driver).findElements(by.css(hideColumnsButtonCss));
           }
         };
       },
@@ -154,11 +124,8 @@
           'input[type=checkbox]';
 
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.css(hideColumnCheckboxCss));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.css(hideColumnCheckboxCss));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.css(hideColumnCheckboxCss));
           }
         };
       },
@@ -169,22 +136,16 @@
           'select';
 
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.css(lengthFilterCss));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.css(lengthFilterCss));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.css(lengthFilterCss));
           },
           option: function (number) {
             var lengthFilterOptionCss =
               lengthFilterCss +
               ' option:nth-child(' + (number+1) + ')';
             return {
-              findOverride: function(driver, element) {
-                return (element || driver).findElement(protractor.By.css(lengthFilterOptionCss));
-              },
-              findArrayOverride: function(driver, element) {
-                return (element || driver).findElements(protractor.By.css(lengthFilterOptionCss));
+              findElementsOverride: function(driver, using) {
+                return (using || driver).findElements(by.css(lengthFilterOptionCss));
               }
             };
           }
@@ -196,11 +157,8 @@
           ' ul[class=pagination] li:nth-child(' + (pageNumber + 1) + ') a';
 
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.css(pageButtonCss));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.css(pageButtonCss));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.css(pageButtonCss));
           }
         };
       }
@@ -219,39 +177,27 @@
     /* jshint +W109*/
 
     return {
-      findOverride: function(driver, element) {
-        return (element || driver).findElement(protractor.By.xpath(containerXPath));
-      },
-      findArrayOverride: function(driver, element) {
-        return (element || driver).findElements(protractor.By.xpath(containerXPath));
+      findElementsOverride: function(driver, using) {
+        return (using || driver).findElements(by.xpath(containerXPath));
       },
       text: function () {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.xpath(nameSpanXPath));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.xpath(nameSpanXPath));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.xpath(nameSpanXPath));
           }
         };
       },
       deselectButton: function () {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.xpath(deselectBtnXPath));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.xpath(deselectBtnXPath));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.xpath(deselectBtnXPath));
           }
         };
       },
       dropdownInput: function () {
         return {
-          findOverride: function(driver, element) {
-            return (element || driver).findElement(protractor.By.xpath(dropdownInputXPath));
-          },
-          findArrayOverride: function(driver, element) {
-            return (element || driver).findElements(protractor.By.xpath(dropdownInputXPath));
+          findElementsOverride: function(driver, using) {
+            return (using || driver).findElements(by.xpath(dropdownInputXPath));
           }
         };
       }

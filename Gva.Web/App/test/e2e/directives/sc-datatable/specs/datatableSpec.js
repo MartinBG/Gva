@@ -45,8 +45,7 @@
       ptor.findElement(protractor.By.datatable('users').row(2).column('buttons')).click();
 
       var selectedUser =
-        ptor.findElement(protractor.By.css('input[ng-model=selectedUser]'))
-        .getAttribute('value');
+        ptor.findElement(protractor.By.model('selectedUser')).getAttribute('value');
       expect(selectedUser).toEqual('peter');
     });
 
@@ -60,7 +59,7 @@
 
     it('should evaluate column content expressions on next page', function () {
       ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.css('ul[class=pagination] li:nth-child(4) a')).click();
+      ptor.findElement(protractor.By.datatable('users').pageButton(3)).click();
       var isActiveCol4 =
         ptor.findElement(protractor.By.datatable('users').row(4).column('isActive'));
       expect(isActiveCol4.getText()).toBe('Не');
