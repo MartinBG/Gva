@@ -2,10 +2,10 @@
   "name": "gva",
   "version": "1.0.0",
   "dependencies": {
-    "angular": "1.2.0",
-    "angular-i18n": "1.2.0",
+    "angular": "1.2.5",
+    "angular-i18n": "1.2.5",
     "angular-l10n": "4vanger/angular-l10n#6cb73e3cad1adc894d99f97a097df799313e088b",
-    "angular-resource": "1.2.0",
+    "angular-resource": "1.2.5",
     "angular-ui-router": "0.2.0",
     "angular-bootstrap": "angular-ui/bootstrap#0c5d6398948ea3c3e9c3641937ba740069669ce8",
     "angular-ui-utils": "0.0.4",
@@ -27,8 +27,8 @@
     "respond": "1.3.0"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.0",
-    "angular-scenario": "1.2.0"
+    "angular-mocks": "1.2.5",
+    "angular-scenario": "1.2.5"
   },
   "resolutions": {
     "bootstrap": "229469e0598a230c8b11890d128a57618df838d4",

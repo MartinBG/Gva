@@ -59,20 +59,20 @@
       });
 
     it('correct settings should be set by sc-datatable parameters', function() {
-       //no filter displayed
+      //no filter displayed
       expect(ptor.isElementPresent(protractor.By.datatable('users').filterInput()))
         .toEqual(false);
 
       //no pagination displayed
-      expect(ptor.findElements(
-        protractor.By.css('ul[class=pagination] li:nth-child(3) a')).length);
+      expect(ptor.isElementPresent(protractor.By.css('ul[class=pagination]')))
+        .toEqual(false);
 
       //no range filter displayed
       expect(ptor.isElementPresent(protractor.By.datatable('users').lengthFilter()))
         .toEqual(false);
 
       //no dynamic-columns button displayed
-      expect(ptor.isElementPresent(protractor.By.datatable('users').hideColumnsButton()))
+      expect(ptor.findElement(protractor.By.datatable('users').hideColumnsButton()).isDisplayed())
         .toEqual(false);
     });
   });

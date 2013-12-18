@@ -20,8 +20,18 @@ gva
 
 #### Test
 
+##### To run the tests
 1. Make sure you have `java` accessible from your `PATH`
 2. Run `grunt test`
+
+##### To debug the tests
+1. Install `node-inspector` globally with `npm install -g node-inspector`
+2. Run the tests with
+`node --debug-brk c:\Users\username\AppData\Roaming\npm\node_modules\grunt-cli\bin\grunt test`
+where `username` is your current user
+3. Run `node-inspector` in a separate command prompt
+4. Open the url that that inspector is showing in Chrome(e.g. http://127.0.0.1:8080/debug?port=5858)
+5. See [Debugging Protractor Tests](https://github.com/angular/protractor/blob/master/docs/debugging.md) for more info.
 
 #### Migration tool
 1. Install `Instant Client Package - Basic 12.1` and `Instant Client Package - SDK 12.1` from http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html

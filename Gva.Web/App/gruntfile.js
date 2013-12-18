@@ -168,6 +168,7 @@ module.exports = function (grunt) {
       },
       source: [
         'gruntfile.js',
+        'gruntTasks/**/*.js',
         'js/**/*.js',
         'test/**/*.js'
       ],
@@ -277,10 +278,11 @@ module.exports = function (grunt) {
         }
       }
     },
-    exec: {
-      protractor: {
-        cmd: 'protractor.cmd ../../test/e2e/ptorConf.js',
-        cwd: './node_modules/.bin/'
+    protractor: {
+      test: {
+        options: {
+          configFilename: 'test/e2e/ptorConf.js'
+        }
       }
     },
     tv4: {
@@ -326,7 +328,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
-  grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-express');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -335,17 +336,19 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concat-sourcemap');
   grunt.loadNpmTasks('grunt-template');
 
+  grunt.loadTasks('./gruntTasks');
+  
   grunt.registerTask('debug',
     ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template']);
 
   grunt.registerTask('test',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template', 'express', 'exec:protractor']);
+    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template', 'express', 'protractor']);
 
   grunt.registerTask('release',
     ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template']);
 
   grunt.registerTask('test-release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template', 'express', 'exec:protractor']);
+    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template', 'express', 'protractor']);
 
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
