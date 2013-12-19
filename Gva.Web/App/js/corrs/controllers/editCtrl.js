@@ -15,16 +15,36 @@
       $scope.corr = Corr.get({ corrId: $stateParams.corrId });
     } else {
       $scope.isEdit = false;
-      $scope.corr = new Corr();
-      $scope.corr.$promise = $q.when($scope.corr);
+
+      Corr.NewCorr().$promise
+        .then(function (result) {
+          $scope.corr = result;
+        });
+
     }
     $scope.saveClicked = false;
+
+    $scope.removeCorrContact = function (target) {
+      var index = $scope.corr.correspondentContacts.indexOf(target);
+
+      if (index > -1) {
+        $scope.corr.correspondentContacts.splice(index, 1);
+      }
+    };
+
+    $scope.addCorrContact = function () {
+      Corr.CorrContact($stateParams)
+        .$promise
+        .then(function (res) {
+          $scope.corr.correspondentContacts.push(res);
+        });
+    };
 
     $scope.save = function () {
       $scope.saveClicked = true;
 
       if ($scope.corrForm.$valid) {
-        $scope.corr.$save().then(function () {
+        $scope.corr.$save($stateParams).then(function () {
           $state.go('corrs.search');
         });
       }

@@ -16,6 +16,12 @@
       })[0].name;
     },
 
+    get: function (nom, alias) {
+      return this[nom].filter(function (nomValue) {
+        return nomValue.alias === alias;
+      })[0];
+    },
+
     //Номенклатура Кореспондентска група
     correspondentGroups: [
       {nomTypeValueId: 1, code: '', name: 'Министерски съвет', nameAlt: '', alias: '' },
@@ -46,10 +52,10 @@
     
     //Номеклатура Държави
     countries: [
-      {nomTypeValueId: 1, code: 'AT', name: 'Austria', nameAlt: 'Austria'},
-      {nomTypeValueId: 2, code: 'BE', name: 'Belgium', nameAlt: 'Belgium'},
-      {nomTypeValueId: 3, code: 'CY', name: 'Cyprus', nameAlt: 'Cyprus'},
-      {nomTypeValueId: 4, code: 'CZ', name: 'Czech Republic', nameAlt: 'Czech Republic'},
+      {nomTypeValueId: 1, code: 'AT', alias: 'Austria', name: 'Austria', nameAlt: 'Austria' },
+      {nomTypeValueId: 2, code: 'BE', alias: 'Belgium', name: 'Belgium', nameAlt: 'Belgium' },
+      {nomTypeValueId: 3, code: 'CY', alias: 'Cyprus', name: 'Cyprus', nameAlt: 'Cyprus' },
+      {nomTypeValueId: 4, code: 'CZ', alias: 'Czech Republic', name: 'Czech Republic', nameAlt: 'Czech Republic' },
       {nomTypeValueId: 33, code: 'BG', name: 'Република България', nameAlt: 'Republic of Bulgaria', alias: 'Bulgaria', content: {
         nationalityCode_CA: 'BGR',
         heading:'РЕПУБЛИКА БЪЛГАРИЯ',

@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function(l10n){
+  angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       navbar: {
         exit: 'Изход',
@@ -31,6 +31,7 @@
           edit: 'Редакция'
         },
         edit: {
+          correspondentTitle: 'Кореспондент',
           email: 'Имейл',
           correspondentType: 'Тип кореспондент',
           correspondentGroup: 'Кореспондентска група',
@@ -57,7 +58,12 @@
           contactPostOfficeBox: 'Пощенска кутия',
           contactPhone: 'Телефон',
           contactFax: 'Факс',
-
+          contactPersonsTitle: 'Лица за контакти',
+          contactName: 'Наименование',
+          contactUin: 'Идентификационен номер',
+          contactNote: 'Позиция',
+          'delete': 'изтрии',
+          add: 'добави',
           save: 'Запис',
           cancel: 'Отказ'
         }
@@ -85,7 +91,7 @@
             ' и да съдържа само букви, числа, подчертавки (_) и точки (.)',
           usernameExists: 'потребителското име е заето',
           comment: 'Коментар:',
-          entrance:'Вход:',
+          entrance: 'Вход:',
           withPassAndUsername: ' с потребителско име / парола',
           withCertificate: ' със сертификат',
           password: 'Парола:',
