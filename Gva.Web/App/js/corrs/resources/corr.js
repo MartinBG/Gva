@@ -7,11 +7,11 @@
       function ($resource) {
         return $resource('/api/corrs/:corrId', {userId:'@corrId'},
           {
-            'NewCorr': {
+            'create': {
               method: 'GET',
               url: '/api/corrs/new'
             },
-            'CorrContact': {
+            'contact': {
               method: 'GET',
               url: '/api/corrs/contacts/new/:corrId',
               params: { corrId: '@corrId' }

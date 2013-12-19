@@ -16,7 +16,7 @@
     } else {
       $scope.isEdit = false;
 
-      Corr.NewCorr().$promise
+      Corr.create().$promise
         .then(function (result) {
           $scope.corr = result;
         });
@@ -33,7 +33,7 @@
     };
 
     $scope.addCorrContact = function () {
-      Corr.CorrContact($stateParams)
+      Corr.contact($stateParams)
         .$promise
         .then(function (res) {
           $scope.corr.correspondentContacts.push(res);
