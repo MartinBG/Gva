@@ -114,6 +114,15 @@
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        viewPerson: {
+          name: 'Име',
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          age: 'Възраст',
+          company: 'Фирма',
+          employmentCategory: 'Длъжност',
+          edit: 'Редакция'
         }
       }
     });

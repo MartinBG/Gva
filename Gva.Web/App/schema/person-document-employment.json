@@ -8,20 +8,24 @@
       "description": "Дата на назначаване"
     },
     "valid": {
-      "type": "boolean", 
-      "description": "Валидност" 
+      "type": "object", 
+      "description": "Валидност",
+      "additionalProperties": true
     },
-    "organizationId": {
-      "type": "number", 
-      "description": "Организация от Номенклатура Организации"
+    "organization": {
+      "type": "object", 
+      "description": "Организация от Номенклатура Организации",
+      "additionalProperties": true
     },
-    "employmentCategoryId": {
-      "type": "number", 
-      "description": "Категория персонал от Номенклатура Категории персонал"
+    "employmentCategory": {
+      "type": "object", 
+      "description": "Категория персонал от Номенклатура Категории персонал",
+      "additionalProperties": true
     },
-    "countryId": {
-      "type": "number", 
-      "description": "Държава в която се намира местоработата от Номеклатура Държави" 
+    "country": {
+      "type": "object", 
+      "description": "Държава в която се намира местоработата от Номеклатура Държави",
+      "additionalProperties": true
     },
     "notes": {
       "type": "string", 

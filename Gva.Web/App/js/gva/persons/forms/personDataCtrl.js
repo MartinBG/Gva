@@ -1,8 +1,8 @@
-﻿/*global angular, $*/
+﻿/*global angular*/
 (function (angular) {
   'use strict';
 
-  function PersonDataCtrl($scope, Person) {
+  function PersonDataCtrl($scope, $stateParams, Person) {
     var self = this;
 
     self.$scope = $scope;
@@ -15,12 +15,13 @@
       return Person.query({ lin: value, exact: true })
         .$promise
         .then(function (persons) {
-          return persons.length === 0;
+          return persons.length === 0 ||
+            (persons.length === 1 && persons[0].id === $stateParams.id);
         });
     };
   }
 
-  PersonDataCtrl.$inject = ['$scope', 'Person'];
+  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person'];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
-}(angular, $));
+}(angular));
