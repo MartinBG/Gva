@@ -151,12 +151,17 @@
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
+    <Content Include="App\js\gva\persons\resources\personData.js" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
     <Content Include="App\js\gva\persons\views\addressesNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesEdit.html" />
     <Content Include="App\js\gva\persons\views\addressesEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\licencesSearch.html" />
+    <Content Include="App\js\gva\persons\views\licencesSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\views\personDataEdit.html" />
+    <Content Include="App\js\gva\persons\views\personDataEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\statusesSearch.html" />
     <Content Include="App\js\gva\persons\views\statusesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\statusesEdit.html" />
@@ -233,7 +238,7 @@
     <Content Include="App\schema\person-document-other.sample.js" />
     <Content Include="App\schema\person-document-training.sample.js" />
     <Content Include="App\schema\person-status.sample.js" />
-    <Content Include="App\schema\person.sample.js" />
+    <Content Include="App\test\e2e\mocks\personLots.js" />
     <Content Include="App\test\e2e\delay.js" />
     <Content Include="App\schema\requireShim.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
@@ -270,6 +275,7 @@
     <Content Include="App\test\e2e\directives\sc-x\templates\scSelect.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
+    <Content Include="App\test\e2e\mocks\personDataHttp.js" />
     <Content Include="App\test\e2e\mocks\personsHttp.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
@@ -278,6 +284,11 @@
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\spec\editPersonDataSpec.js" />
+    <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\spec\viewPersonSpec.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

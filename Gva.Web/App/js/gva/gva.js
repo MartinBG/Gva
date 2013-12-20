@@ -69,6 +69,18 @@
         }
       })
       .state({
+        name: 'persons.edit',
+        title: 'Редакция',
+        parent: 'persons.view',
+        url: '/personData',
+        views: {
+          'pageView@root': {
+            templateUrl: 'gva/persons/views/personDataEdit.html',
+            controller: 'PersonDataEditCtrl'
+          }
+        }
+      })
+      .state({
         name: 'persons.addresses',
         title: 'Адреси',
         parent: 'persons.view',
@@ -149,6 +161,24 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/statusesEdit.html',
             controller: 'StatusesEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.licences',
+        title: 'Лицензи',
+        parent: 'persons.view',
+        url: '/licences',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.licences.search',
+        parent: 'persons.licences',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/licencesSearch.html',
+            controller: 'LicencesSearchCtrl'
           }
         }
       });

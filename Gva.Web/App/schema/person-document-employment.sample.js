@@ -7,12 +7,11 @@
   module.exports = {
     person1Employee: {
       hiredate: '2013-09-20T00:00',
-      valid: true,
-      organizationId: nomenclatures.getId('organizations', 'AAK Progres'),
-      employmentCategoryId: nomenclatures.getId('employmentCategories', 'First officer'),
-      countryId: nomenclatures.getId('countries', 'Bulgaria'),
+      valid: nomenclatures.get('boolean', 'true'),
+      organization: nomenclatures.get('organizations', 'AAK Progres'),
+      employmentCategory: nomenclatures.get('employmentCategories', 'First officer'),
+      country: nomenclatures.get('countries', 'Bulgaria'),
       notes: '',
-      
       bookPageNumber: '1',
       pageCount: 1
     }

@@ -6,7 +6,7 @@
 
   module.exports = {
     person1Status: {
-      personStatusTypeId: nomenclatures.getId('personStatusTypes', 'Disabled'),
+      personStatusType: nomenclatures.get('personStatusTypes', 'Disabled'),
       documentNumber: '2',
       documentDateValidFrom: '1912-04-04T00:00',
       documentDateValidTo: '1912-05-04T00:00',

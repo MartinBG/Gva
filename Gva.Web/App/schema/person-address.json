@@ -2,13 +2,15 @@
   "description": "Адрес на Физическо лице",
   "type": "object",
   "properties": {
-    "addressTypeId": {
-      "type": "number", 
-      "description": "Тип адрес от Номенклатура Типове адреси"
+    "addressType": {
+      "type": "object", 
+      "description": "Тип адрес от Номенклатура Типове адреси",
+      "additionalProperties": true
     },
-    "settlementId": {
-      "type": "number", 
-      "description": "Населено място от Номенклатура Населени места"
+    "settlement": {
+      "type": "object", 
+      "description": "Населено място от Номенклатура Населени места",
+      "additionalProperties": true
     },
     "address": {
       "type": "string", 
@@ -23,8 +25,9 @@
       "description": "Телефон(и) за връзка на този адрес"
     },
     "valid": {
-      "type": "boolean", 
-      "description": "Валидност" 
+      "type": "object", 
+      "description": "Валидност",
+      "additionalProperties": true
     },
     "postalCode": {
       "type": "string", 

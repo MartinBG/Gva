@@ -1,29 +1,78 @@
-﻿/*global angular, getData*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
-  var persons = getData('person.sample');
-
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
+    function personMapper(p) {
+      return {
+        id: p.lotId,
+        lin: p.personData.part.lin,
+        uin: p.personData.part.uin,
+        names: p.personData.part.firstName + ' ' +
+          p.personData.part.middleName + ' ' + p.personData.part.lastName,
+        /*jshint -W052*/
+        age: ~~((Date.now() - new Date(p.personData.part.dateOfBirth)) / (31557600000)),
+        /*jshint +W052*/
+        licences: 'C/AL, ATCL, ATCL, FCL/ATPA, FDA, Part-66 N, FDA, CPL(A), CPL(A)',
+        ratings: 'A 300/310, /NAT-OTS MNPS',
+        organization: _(p.personDocumentEmployments).pluck('part')
+          .where({ valid: true }).pluck('organization').pluck('name').first()
+      };
+    }
+
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/persons/:id',
+        function ($params, $filter, $delay, personLots) {
+          var person = _(personLots)
+            .filter({ lotId: parseInt($params.id, 10) }).map(personMapper).first();
+
+          if (person) {
+            return [200, $delay(500, person)];
+          }
+          else {
+            return [404, $delay(500)];
+          }
+        })
       .when('GET', '/api/persons?lin&exact',
-        function ($params, $filter, $delay) {
-          return [
-            200,
-            $delay(4000, $filter('filter')(persons, function (person) {
+        function ($params, $filter, $delay, personLots) {
+          var persons = _(personLots)
+            .filter(function (p) {
               if ($params.exact) {
-                return person.personData.lin === $params.lin;
+                return p.personData.part.lin === $params.lin;
               } else {
-                return person.personData.lin.indexOf($params.lin) >= 0;
+                return p.personData.part.lin.indexOf($params.lin) >= 0;
               }
-            }))
-          ];
+            })
+            .map(personMapper)
+            .value();
+
+          return [200, $delay(500, persons)];
         })
       .when('POST', '/api/persons',
-        function ($params, $jsonData, $delay) {
-          persons.push($jsonData);
+        function ($params, $jsonData, $delay, personLots) {
+          var nextLotId = _(personLots).pluck('lotId').max().value() + 1;
+
+          personLots.push({
+            lotId: nextLotId,
+            personData: {
+              partIndex: 1,
+              part: $jsonData.personData
+            },
+            personAdresses: [
+              {
+                partIndex: 2,
+                part: $jsonData.personAddress
+              }
+            ],
+            personDocumentIds: [
+              {
+                partIndex: 3,
+                part: $jsonData.personDocumentId
+              }
+            ]
+          });
 
           return [200, $delay(500)];
         });
   });
-}(angular));
+}(angular, _));

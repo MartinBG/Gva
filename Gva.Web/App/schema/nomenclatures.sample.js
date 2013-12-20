@@ -16,6 +16,12 @@
       })[0].name;
     },
 
+    get: function (nom, alias) {
+      return this[nom].filter(function (nomValue) {
+        return nomValue.alias === alias;
+      })[0];
+    },
+
     //Номенклатура Булеви стойности
     boolean: [
       {nomTypeValueId: 1, code: 'Y', name: 'Да', nameAlt: 'Yes', alias: 'true'},

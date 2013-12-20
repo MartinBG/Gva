@@ -162,3 +162,8 @@ i.tree-image-close
 .has-error .glyphicon-warning-sign {
     color: #b94a48;
 }
+
+form.card input.form-control[disabled] {
+    cursor: auto;
+    background-color: #ffffff;
+}

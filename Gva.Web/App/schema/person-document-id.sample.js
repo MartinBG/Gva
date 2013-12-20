@@ -10,8 +10,8 @@
       documentDateValidFrom: '2010-04-04T00:00',
       documentDateValidTo: '2020-04-04T00:00',
       documentPublisher: 'МВР София',
-      personDocumentIdTypeId: nomenclatures.getId('personIdDocumentTypes', 'Id'),
-      valid: true,
+      personDocumentIdType: nomenclatures.get('personIdDocumentTypes', 'Id'),
+      valid: nomenclatures.get('boolean', 'true'),
       notes: '',
       bookPageNumber: '3',
       pageCount: 1

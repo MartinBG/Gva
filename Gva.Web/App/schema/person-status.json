@@ -2,9 +2,10 @@
   "description": "Състояние на физическо лице (вр. Негоден, Майчинство и т.н.)",
   "type": "object",
   "properties": {
-    "personStatusTypeId": {
-      "type": "number", 
-      "description": "Състояние-причина от Номенклатура Типове сътояния на Физичеко лице"
+    "personStatusType": {
+      "type": "object", 
+      "description": "Състояние-причина от Номенклатура Типове сътояния на Физичеко лице",
+      "additionalProperties": true
     },
     "documentNumber": {
       "type": "string", 
