@@ -86,7 +86,7 @@ Usage <sc-datatable ng-model="data"
           }
 
           $scope.aoColumnDefs.push({
-            sTitle: column.title || '',
+            sTitle: l10n.get(column.title) || '',
             mData: column.data || '',
             bSortable: column.sortable === 'false'? false : true,
             bVisible: column.visible === 'false'? false : true,
