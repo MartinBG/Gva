@@ -94,7 +94,7 @@ Usage <sc-datatable ng-model="data"
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',
-            sClass: 'scdt-' + column.data,
+            sClass: 'scdt-' + (column.data ? column.data.replace(/[\[\]\.]/g, '_') : 'empty'),
             sWidth: column.width
           });
         };
