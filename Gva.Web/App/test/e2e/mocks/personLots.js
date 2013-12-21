@@ -3,7 +3,7 @@
   'use strict';
 
   var personData = require('./person-data.sample'),
-      personAdresses = require('./person-address.sample'),
+      personAddresses = require('./person-address.sample'),
       personStatuses = require('./person-status.sample'),
       personDocumentEmployments = require('./person-document-employment.sample'),
       personDocumentEducations = require('./person-document-education.sample'),
@@ -13,18 +13,19 @@
 
   angular.module('app').constant('personLots', [{
     lotId: 1,
+    nextIndex: 13,
     personData: {
       partIndex: 1,
       part: personData.person1Data
     },
-    personAdresses: [
+    personAddresses: [
       {
         partIndex: 2,
-        part: personAdresses.person1Address1
+        part: personAddresses.person1Address1
       },
       {
         partIndex: 3,
-        part: personAdresses.person1Address2
+        part: personAddresses.person1Address2
       }
     ],
     personStatuses: [

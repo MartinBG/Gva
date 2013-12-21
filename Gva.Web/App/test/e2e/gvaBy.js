@@ -30,13 +30,13 @@
 
         if (columnData) {
           if (isHeader) {
-            selector += ' th.scdt-' + columnData;
+            selector += ' th.scdt-' + columnData.replace(/[\[\]\.]/g, '_');
           } else {
-            selector += ' td.scdt-' + columnData;
+            selector += ' td.scdt-' + columnData.replace(/[\[\]\.]/g, '_');
           }
         }
       } else {
-        selector += ' tbody td.scdt-' + columnData;
+        selector += ' tbody td.scdt-' + columnData.replace(/[\[\]\.]/g, '_');
       }
 
       return selector;

@@ -21,18 +21,6 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id',
-        function ($params, $filter, $delay, personLots) {
-          var person = _(personLots)
-            .filter({ lotId: parseInt($params.id, 10) }).map(personMapper).first();
-
-          if (person) {
-            return [200, $delay(500, person)];
-          }
-          else {
-            return [404, $delay(500)];
-          }
-        })
       .when('GET', '/api/persons?lin&exact',
         function ($params, $filter, $delay, personLots) {
           var persons = _(personLots)
@@ -48,12 +36,25 @@
 
           return [200, $delay(500, persons)];
         })
+      .when('GET', '/api/persons/:id',
+        function ($params, $filter, $delay, personLots) {
+          var person = _(personLots)
+            .filter({ lotId: parseInt($params.id, 10) }).map(personMapper).first();
+
+          if (person) {
+            return [200, $delay(500, person)];
+          }
+          else {
+            return [404, $delay(500)];
+          }
+        })
       .when('POST', '/api/persons',
         function ($params, $jsonData, $delay, personLots) {
           var nextLotId = _(personLots).pluck('lotId').max().value() + 1;
 
           personLots.push({
             lotId: nextLotId,
+            nextIndex: 4,
             personData: {
               partIndex: 1,
               part: $jsonData.personData

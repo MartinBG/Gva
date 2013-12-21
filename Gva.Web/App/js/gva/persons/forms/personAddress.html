@@ -5,27 +5,32 @@
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressType"></label>
-          <sc-nomenclature ng-model="model.addressTypeId" alias="'addressTypes'" load="true"></sc-nomenclature>
+          <span ng-show="form.addressType.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.addressType.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.addressType" alias="'addressTypes'" name="addressType" load="true" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personAddressDirective.valid"></label>
-          <sc-nomenclature ng-model="model.valid" alias="'boolean'" load="true"></sc-nomenclature>
+          <span ng-show="form.valid.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.valid.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.valid" alias="'boolean'" name="valid" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="persons.personAddressDirective.address"></label>
-          <sc-text ng-model="model.address"></sc-text>
+          <span ng-show="form.address.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.address.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.address" name="address" ng-required="true"></sc-text>
         </div>
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressAlt"></label>
-          <sc-text ng-model="model.addressAlt"></sc-text>
+          <span ng-show="form.addressAlt.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.addressAlt.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.addressAlt" name="addressAlt" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personAddressDirective.settlement"></label>
-          <sc-nomenclature ng-model="model.settlementId" alias="'cities'" load="true"></sc-nomenclature>
+          <span ng-show="form.settlement.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.settlement.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.settlement" name="settlement" alias="'cities'" load="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personAddressDirective.postalCode"></label>
