@@ -123,6 +123,24 @@
           company: 'Фирма',
           employmentCategory: 'Длъжност',
           edit: 'Редакция'
+        },
+        newAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        addressSearch: {
+          type: 'Вид',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          postalCode: 'Пощенски код',
+          phone: 'Телефон',
+          valid: 'Актуален',
+          edit: 'Редакция',
+          'delete': 'Изтрий'
         }
       }
     });

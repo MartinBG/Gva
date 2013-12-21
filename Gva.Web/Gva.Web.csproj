@@ -152,6 +152,7 @@
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
     <Content Include="App\js\gva\persons\resources\personData.js" />
+    <Content Include="App\js\gva\persons\resources\personAddress.js" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
@@ -276,13 +277,17 @@
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
     <Content Include="App\test\e2e\mocks\personDataHttp.js" />
+    <Content Include="App\test\e2e\mocks\personAddressesHttp.js" />
     <Content Include="App\test\e2e\mocks\personsHttp.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
     <Content Include="App\test\e2e\ptorConf.js" />
     <Content Include="App\test\e2e\gvaBy.js" />
+    <Content Include="App\test\e2e\spec\editPersonAddressSpec.js" />
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newPersonAddressSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\searchPersonAddressSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
     <Content Include="App\test\e2e\spec\editPersonDataSpec.js" />
     <Content Include="App\test\e2e\spec\editUserSpec.js" />

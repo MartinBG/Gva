@@ -1,3 +1,19 @@
-﻿<div>
-  ADDRESSES EDIT
+﻿<div class="container page-content">
+  <ng-form name="editAddressForm">
+
+    <gva-person-address name="personAddressForm" ng-model="personAddress.part"></gva-person-address>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <button name="saveBtn" sc-click="save()" type="button" class="btn btn-primary" ng-disabled="editAddressForm.$invalid">
+          <span class="glyphicon" ng-class="{'glyphicon-loading':saveBtn.$pending, 'glyphicon-floppy-disk': !saveBtn.$pending}"></span>
+          <span l10n-text="persons.editAddress.save"></span>
+        </button>
+        <button type="button" name="cancelBtn" class="btn btn-default" sc-click="cancel()">
+          <span class="glyphicon" ng-class="{'glyphicon-loading': cancelBtn.$pending, 'glyphicon-arrow-left': !cancelBtn.$pending}"></span>
+          <span l10n-text="persons.editAddress.cancel"></span>
+        </button>
+      </div>
+    </div>
+  </ng-form>
 </div>
