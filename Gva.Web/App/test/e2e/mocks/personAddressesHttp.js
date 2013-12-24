@@ -5,14 +5,14 @@
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
       .when('GET', '/api/persons/:id/personAddresses',
-        function ($params, $delay, personLots) {
+        function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          return [200, $delay(500, person.personAddresses)];
+          return [200, person.personAddresses];
         })
       .when('GET', '/api/persons/:id/personAddresses/:ind',
-        function ($params, $delay, personLots) {
+        function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -20,14 +20,14 @@
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
           if (personAddress) {
-            return [200, $delay(500, personAddress)];
+            return [200, personAddress];
           }
           else {
-            return [404, $delay(500)];
+            return [404];
           }
         })
       .when('POST', '/api/persons/:id/personAddresses',
-        function ($params, $jsonData, $delay, personLots) {
+        function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -37,10 +37,10 @@
 
           person.personAddresses.push(personAddress);
 
-          return [200, $delay(500)];
+          return [200];
         })
       .when('POST', '/api/persons/:id/personAddresses/:ind',
-        function ($params, $jsonData, $delay, personLots) {
+        function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -49,10 +49,10 @@
 
           _.assign(personAddress, $jsonData);
 
-          return [200, $delay(500)];
+          return [200];
         })
       .when('DELETE', '/api/persons/:id/personAddresses/:ind',
-        function ($params, $jsonData, $delay, personLots) {
+        function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -61,7 +61,7 @@
 
           person.personAddresses.splice(personAddressInd, 1);
 
-          return [200, $delay(500)];
+          return [200];
         });
   });
 }(angular, _));

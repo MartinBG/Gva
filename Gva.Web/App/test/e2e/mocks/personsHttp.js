@@ -22,7 +22,7 @@
 
     $httpBackendConfiguratorProvider
       .when('GET', '/api/persons?lin&exact',
-        function ($params, $filter, $delay, personLots) {
+        function ($params, $filter, personLots) {
           var persons = _(personLots)
             .filter(function (p) {
               if ($params.exact) {
@@ -34,22 +34,22 @@
             .map(personMapper)
             .value();
 
-          return [200, $delay(500, persons)];
+          return [200, persons];
         })
       .when('GET', '/api/persons/:id',
-        function ($params, $filter, $delay, personLots) {
+        function ($params, $filter, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).map(personMapper).first();
 
           if (person) {
-            return [200, $delay(500, person)];
+            return [200, person];
           }
           else {
-            return [404, $delay(500)];
+            return [404];
           }
         })
       .when('POST', '/api/persons',
-        function ($params, $jsonData, $delay, personLots) {
+        function ($params, $jsonData, personLots) {
           var nextLotId = _(personLots).pluck('lotId').max().value() + 1;
 
           personLots.push({
@@ -73,7 +73,7 @@
             ]
           });
 
-          return [200, $delay(500)];
+          return [200];
         });
   });
 }(angular, _));
