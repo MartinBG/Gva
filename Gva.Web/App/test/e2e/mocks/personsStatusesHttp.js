@@ -4,62 +4,62 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/personAddresses',
+      .when('GET', '/api/persons/:id/personStatuses',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          return [200, person.personAddresses];
+          return [200, person.personStatuses];
         })
-      .when('GET', '/api/persons/:id/personAddresses/:ind',
+      .when('GET', '/api/persons/:id/personStatuses/:ind',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personAddress = _(person.personAddresses)
+          var personStatus = _(person.personStatuses)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          if (personAddress) {
-            return [200, personAddress];
+          if (personStatus) {
+            return [200, personStatus];
           }
           else {
             return [404];
           }
         })
-      .when('POST', '/api/persons/:id/personAddresses',
+      .when('POST', '/api/persons/:id/personStatuses',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personAddress = $jsonData;
+          var personStatus = $jsonData;
 
-          personAddress.partIndex = person.nextIndex++;
+          personStatus.partIndex = person.nextIndex++;
 
-          person.personAddresses.push(personAddress);
+          person.personStatuses.push(personStatus);
 
           return [200];
         })
-      .when('POST', '/api/persons/:id/personAddresses/:ind',
+      .when('POST', '/api/persons/:id/personStatuses/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personAddress = _(person.personAddresses)
+          var personStatus = _(person.personStatuses)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          _.assign(personAddress, $jsonData);
+          _.assign(personStatus, $jsonData);
 
           return [200];
         })
-      .when('DELETE', '/api/persons/:id/personAddresses/:ind',
+      .when('DELETE', '/api/persons/:id/personStatuses/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personAddressInd = _(person.personAddresses)
+          var personStatusInd = _(person.personStatuses)
             .findIndex({ partIndex: parseInt($params.ind, 10) });
 
-          person.personAddresses.splice(personAddressInd, 1);
+          person.personStatuses.splice(personStatusInd, 1);
 
           return [200];
         });

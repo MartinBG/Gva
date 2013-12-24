@@ -13,7 +13,7 @@
 
   angular.module('app').constant('personLots', [{
     lotId: 1,
-    nextIndex: 13,
+    nextIndex: 16,
     personData: {
       partIndex: 1,
       part: personData.person1Data
@@ -31,48 +31,60 @@
     personStatuses: [
       {
         partIndex: 4,
-        part: personStatuses.person1Status
+        part: personStatuses.person1Status1
+      },
+      {
+        partIndex: 5,
+        part: personStatuses.person1Status2
+      },
+      {
+        partIndex: 6,
+        part: personStatuses.person1Status3
+      },
+      {
+        partIndex: 7,
+        part: personStatuses.person1Status4
       }
     ],
     personDocumentEmployments: [
       {
-        partIndex: 5,
+        partIndex: 8,
         part: personDocumentEmployments.person1Employee
       }
     ],
     personDocumentEducations: [
       {
-        partIndex: 6,
+        partIndex: 9,
         part: personDocumentEducations.person1Education
       }
     ],
     personDocumentIds: [
       {
-        partIndex: 7,
+        partIndex: 10,
         part: personDocumentIds.person1Id
       }
     ],
     personDocumentOthers: [
       {
-        partIndex: 8,
+        partIndex: 11,
         part: personDocumentOthers.person1Doc1
       }
     ],
     personDocumentTrainings: [
       {
-        partIndex: 9,
+        partIndex: 12,
         part: personDocumentTrainings.person1Training1
       },
       {
-        partIndex: 10,
+        partIndex: 13,
         part: personDocumentTrainings.person1Training2
       },
       {
-        partIndex: 11,
+        partIndex: 14,
         part: personDocumentTrainings.person1Training3
       },
       {
-        partIndex: 12,
+        partIndex: 15,
         part: personDocumentTrainings.person1Training4
       }
     ]

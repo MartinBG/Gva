@@ -111,6 +111,14 @@
           documentDateValidTo: 'Валиден до',
           documentPublisher: 'Издаден от'
         },
+        personStatusDirective: {
+          title: 'Състояние',
+          personStatusType: 'Причина',
+          documentNumber: 'Номер на документа',
+          documentDateValidFrom: 'Начална дата',
+          documentDateValidTo: 'Крайна дата',
+          notes: 'Бележки'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -140,7 +148,26 @@
           phone: 'Телефон',
           valid: 'Актуален',
           edit: 'Редакция',
-          'delete': 'Изтрий'
+          remove: 'Изтрий'
+        },
+        newStatus: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStatus: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        statusSearch: {
+          newState: 'Ново Състояние',
+          personStatusType: 'Причина',
+          documentNumber: 'Номер на документа',
+          documentDateValidFrom: 'Начална дата',
+          documentDateValidTo: 'Крайна дата',
+          notes: 'Бележки',
+          isActive: 'Активен',
+          edit: 'Редакция',
+          remove: 'Изтрий'
         }
       }
     });

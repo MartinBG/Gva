@@ -130,6 +130,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\test\e2e\spec\searchPersonStatusesSpec.js" />
+    <Content Include="App\test\e2e\mocks\personsStatusesHttp.js" />
+    <Content Include="App\test\e2e\spec\editPersonStatusSpec.js" />
+    <Content Include="App\test\e2e\spec\newPersonStatusSpec.js" />
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -153,6 +158,7 @@
     <Content Include="App\js\app.js" />
     <Content Include="App\js\gva\persons\resources\personData.js" />
     <Content Include="App\js\gva\persons\resources\personAddress.js" />
+    <Content Include="App\js\gva\persons\resources\personsStatus.js" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
@@ -294,6 +300,9 @@
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
     <Content Include="App\test\e2e\spec\viewPersonSpec.js" />
+    <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\usersSpec.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

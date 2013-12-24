@@ -24,6 +24,10 @@
       name: 'gvaPersonDocumentId',
       templateUrl: 'gva/persons/forms/personDocumentId.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonStatus',
+      templateUrl: 'gva/persons/forms/personStatus.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({

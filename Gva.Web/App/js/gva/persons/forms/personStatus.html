@@ -1,0 +1,31 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading form-title"><strong l10n-text="persons.personStatusDirective.title"></strong></div>
+    <div class="well-sm panel-body form-body">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personStatusDirective.personStatusType"></label>
+          <sc-nomenclature alias="'personStatusTypes'" load="true" ng-model="model.personStatusType" ng-required="true"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personStatusDirective.documentNumber"></label>
+          <sc-text ng-model="model.documentNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personStatusDirective.documentDateValidFrom"></label>
+          <sc-date name="docDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
+        </div>
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personStatusDirective.documentDateValidTo"></label>
+          <sc-date name="docDateValidTo" ng-model="model.documentDateValidTo"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label class="control-label" l10n-text="persons.personStatusDirective.notes"></label>
+          <sc-text ng-model="model.notes"></sc-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>
