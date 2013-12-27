@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function(l10n){
+  angular.module('l10nTexts_bg-bg', ['l10n']).config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       navbar: {
         exit: 'Изход',
@@ -42,7 +42,7 @@
             ' и да съдържа само букви, числа, подчертавки (_) и точки (.)',
           usernameExists: 'потребителското име е заето',
           comment: 'Коментар:',
-          entrance:'Вход:',
+          entrance: 'Вход:',
           withPassAndUsername: ' с потребителско име / парола',
           withCertificate: ' със сертификат',
           password: 'Парола:',
@@ -73,6 +73,20 @@
         deleteColumns: 'Колони'
       },
       persons: {
+        search: {
+          names: 'Име',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          licences: 'Лицензи',
+          ratings: 'Квалификации',
+          organization: 'Организация',
+          age: 'Възраст',
+          yes: 'Да',
+          no: 'Не',
+          'new': 'Ново лице',
+          search: 'Търси',
+          view: 'Преглед'
+        },
         personDataDirective: {
           title: 'Лични данни',
           lin: 'ЛИН',

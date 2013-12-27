@@ -3,10 +3,6 @@
   'use strict';
 
   function PersonDataCtrl($scope, $stateParams, Person) {
-    var self = this;
-
-    self.$scope = $scope;
-
     $scope.isUniqueLin = function (value) {
       if (!value) {
         return true;

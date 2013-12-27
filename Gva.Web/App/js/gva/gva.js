@@ -34,7 +34,7 @@
         name: 'persons',
         title: 'Физически лица',
         parent: 'root',
-        url: '/persons',
+        url: '/persons?exact&lin&uin&names&licences&ratings&organization',
         'abstract': true
       })
       .state({

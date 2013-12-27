@@ -3,10 +3,6 @@
   'use strict';
 
   function StatusesNewCtrl($scope, $stateParams, $state, PersonStatus) {
-    $scope.status = {
-      part: {}
-    };
-
     $scope.cancel = function () {
       return $state.go('persons.statuses.search', { id: $stateParams.id });
     };

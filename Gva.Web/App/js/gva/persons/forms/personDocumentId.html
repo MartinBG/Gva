@@ -4,22 +4,26 @@
     <div class="well-sm panel-body form-body">
       <div class="row">
         <div class="form-group col-sm-3">
-          <label class="control-label" l10n-text="persons.personDocumentIdDirective.personDocumentIdTypeId"></label>
-          <sc-nomenclature ng-model="model.personDocumentIdTypeId" alias="'personDocumentIdTypes'" load="true"></sc-nomenclature>
+          <label class="control-label" l10n-text="persons.personDocumentIdDirective.personDocumentIdType"></label>
+          <span name="personDocumentIdTypeValidationSpan" ng-show="form.personDocumentIdType.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.personDocumentIdType.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.personDocumentIdType" name="personDocumentIdType" alias="'personIdDocumentTypes'" load="true" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.valid"></label>
-          <sc-nomenclature ng-model="model.valid" alias="'boolean'" load="true"></sc-nomenclature>
+          <span name="docValidValidationSpan" ng-show="form.valid.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.valid.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentNumber"></label>
-          <sc-text ng-model="model.documentNumber"></sc-text>
+          <span name="documentNumberValidationSpan" ng-show="form.documentNumber.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentNumber.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentDateValidFrom"></label>
-          <sc-date ng-model="model.documentDateValidFrom"></sc-date>
+          <span name="documentDateValidFromValidationSpan" ng-show="form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
+          <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentDateValidTo"></label>
@@ -27,7 +31,8 @@
         </div>
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentPublisher"></label>
-          <sc-text ng-model="model.documentPublisher"></sc-text>
+          <span name="documentPublisherValidationSpan" ng-show="form.documentPublisher.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentPublisher.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
         </div>
       </div>
     </div>

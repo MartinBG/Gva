@@ -63,11 +63,11 @@
 
       expect(lin.getAttribute('value')).toEqual('11232');
 
-      expect(uin.getAttribute('value')).toEqual('6101033765');
+      expect(uin.getAttribute('value')).toEqual('7005159385');
 
       expect(sex.getAttribute('value')).toEqual('1');
 
-      expect(dateOfBirth.getAttribute('value')).toEqual('04.04.1961');
+      expect(dateOfBirth.getAttribute('value')).toEqual('15.05.1970');
 
       expect(placeOfBirth.getAttribute('value')).toEqual('4159');
 

@@ -21,19 +21,19 @@
       expect(personName.getAttribute('value')).toEqual('Иван Иванов Иванов');
 
       expect(personCompany.isEnabled()).toBe(false);
-      expect(personCompany.getAttribute('value')).toEqual('');
+      expect(personCompany.getAttribute('value')).toEqual('AAK Progres');
 
       expect(personEmplCategory.isEnabled()).toBe(false);
       expect(personEmplCategory.getAttribute('value')).toEqual('');
 
       expect(personUin.isEnabled()).toBe(false);
-      expect(personUin.getAttribute('value')).toEqual('6101033765');
+      expect(personUin.getAttribute('value')).toEqual('7005159385');
 
       expect(personLin.isEnabled()).toBe(false);
       expect(personLin.getAttribute('value')).toEqual('11232');
 
       expect(personAge.isEnabled()).toBe(false);
-      expect(personAge.getAttribute('value')).toEqual('52');
+      expect(personAge.getAttribute('value')).toEqual('43');
     });
 
     it('should navigate to edit person page', function () {
