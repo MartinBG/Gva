@@ -281,6 +281,8 @@
     <Content Include="App\test\e2e\directives\sc-x\templates\scInput.html" />
     <Content Include="App\test\e2e\directives\sc-x\templates\scSelect.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
+    <Content Include="App\test\e2e\spec\newPersonSpec.js" />
+    <Content Include="App\test\e2e\spec\personsSpec.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
     <Content Include="App\test\e2e\mocks\personDataHttp.js" />
     <Content Include="App\test\e2e\mocks\personAddressesHttp.js" />

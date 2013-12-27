@@ -3,10 +3,6 @@
   'use strict';
 
   function AddressesNewCtrl($scope, $state, $stateParams, PersonAddress) {
-    $scope.personAddress = {
-      part: {}
-    };
-
     $scope.save = function () {
       return PersonAddress
         .save({ id: $stateParams.id }, $scope.personAddress).$promise

@@ -16,22 +16,36 @@
         licences: 'C/AL, ATCL, ATCL, FCL/ATPA, FDA, Part-66 N, FDA, CPL(A), CPL(A)',
         ratings: 'A 300/310, /NAT-OTS MNPS',
         organization: _(p.personDocumentEmployments).pluck('part')
-          .where({ valid: true }).pluck('organization').pluck('name').first()
+          .where(function (e) { return e.valid.alias === 'true'; })
+          .pluck('organization').pluck('name').first()
       };
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons?lin&exact',
+      .when('GET', '/api/persons?exact&lin&uin&names&licences&ratings&organization',
         function ($params, $filter, personLots) {
           var persons = _(personLots)
-            .filter(function (p) {
-              if ($params.exact) {
-                return p.personData.part.lin === $params.lin;
-              } else {
-                return p.personData.part.lin.indexOf($params.lin) >= 0;
-              }
-            })
             .map(personMapper)
+            .filter(function (p) {
+              var isMatch = true;
+
+              _.forOwn($params, function (value, param) {
+                if (!value || param === 'exact') {
+                  return;
+                }
+
+                if ($params.exact) {
+                  isMatch = isMatch && p[param] && p[param] === $params[param];
+                } else {
+                  isMatch = isMatch && p[param] && p[param].toString().indexOf($params[param]) >= 0;
+                }
+
+                //short circuit forOwn if not a match
+                return isMatch;
+              });
+
+              return isMatch;
+            })
             .value();
 
           return [200, persons];

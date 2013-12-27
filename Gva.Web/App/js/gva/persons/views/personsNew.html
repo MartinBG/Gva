@@ -12,7 +12,7 @@
           <span class="glyphicon" ng-class="{'glyphicon-loading':saveBtn.$pending, 'glyphicon-floppy-disk': !saveBtn.$pending}"></span>
           <span l10n-text="persons.newPerson.save"></span>
         </button>
-        <button type="button" class="btn btn-default" l10n-text="persons.newPerson.cancel">
+        <button name="cancelBtn" type="button" ng-click="cancel()" class="btn btn-default" l10n-text="persons.newPerson.cancel">
         </button>
       </div>
     </div>
