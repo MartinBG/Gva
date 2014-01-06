@@ -1,13 +1,13 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  angular.module('corrs', [
+  angular.module('ems', [
     'ng',
     'ngResource',
     'ui.router',
     'ui.bootstrap',
     'navigation',
-    'corrs.templates',
+    'ems.templates',
     'l10n',
     'l10n-tools'
   ]).config(['$stateProvider', function ($stateProvider) {
@@ -25,7 +25,7 @@
         url: '',
         views: {
           'pageView@root': {
-            templateUrl: 'corrs/templates/search.html',
+            templateUrl: 'ems/corrs/forms/corrSearch.html',
             controller: 'CorrsSearchCtrl'
           }
         }
@@ -37,7 +37,7 @@
         url: '/new',
         views: {
           'pageView@root': {
-            templateUrl: 'corrs/templates/edit.html',
+            templateUrl: 'ems/corrs/forms/corrEdit.html',
             controller: 'CorrsEditCtrl'
           }
         }
@@ -49,7 +49,7 @@
         url: '/:corrId',
         views: {
           'pageView@root': {
-            templateUrl: 'corrs/templates/edit.html',
+            templateUrl: 'ems/corrs/forms/corrEdit.html',
             controller: 'CorrsEditCtrl'
           }
         }

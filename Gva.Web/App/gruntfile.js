@@ -75,8 +75,8 @@ module.exports = function (grunt) {
         'js/users/**/*.js',
         'js/gva/*.js',
         'js/gva/**/*.js',
-        'js/corrs/*.js',
-        'js/corrs/**/*.js'
+        'js/ems/*.js',
+        'js/ems/**/*.js'
       ],
       '<%= buildDir %>/js/sample.data.js': [
         'schema/requireShim.js',
@@ -241,10 +241,10 @@ module.exports = function (grunt) {
         dest: '<%= buildDir %>/templates/users.js',
         module: 'users.templates'
       },
-      corrs: {
-        src: [ 'js/corrs/**/*.html' ],
-        dest: '<%= buildDir %>/templates/corrs.js',
-        module: 'corrs.templates'
+      ems: {
+        src: [ 'js/ems/**/*.html' ],
+        dest: '<%= buildDir %>/templates/ems.js',
+        module: 'ems.templates'
       },
       persons: {
         src: ['js/gva/**/*.html'],

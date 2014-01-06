@@ -151,12 +151,12 @@
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
-    <Content Include="App\js\corrs\controllers\editCtrl.js" />
-    <Content Include="App\js\corrs\controllers\searchCtrl.js" />
-    <Content Include="App\js\corrs\corrs.js" />
-    <Content Include="App\js\corrs\resources\corr.js" />
-    <Content Include="App\js\corrs\templates\edit.html" />
-    <Content Include="App\js\corrs\templates\search.html" />
+    <Content Include="App\js\ems\corrs\forms\corrEditCtrl.js" />
+    <Content Include="App\js\ems\corrs\forms\corrSearchCtrl.js" />
+    <Content Include="App\js\ems\ems.js" />
+    <Content Include="App\js\ems\corrs\resources\corr.js" />
+    <Content Include="App\js\ems\corrs\forms\corrEdit.html" />
+    <Content Include="App\js\ems\corrs\forms\corrSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
@@ -297,6 +297,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\js\ems\corrs\views\" />
+    <Folder Include="App\js\ems\docs\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -43,5 +43,5 @@
   
   CorrsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Corr'];
 
-  angular.module('corrs').controller('CorrsSearchCtrl', CorrsSearchCtrl);
+  angular.module('ems').controller('CorrsSearchCtrl', CorrsSearchCtrl);
 }(angular, _));

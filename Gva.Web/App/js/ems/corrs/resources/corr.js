@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('corrs')
+  angular.module('ems')
     .factory('Corr', ['$resource',
       function ($resource) {
         return $resource('/api/corrs/:corrId', {userId:'@corrId'},

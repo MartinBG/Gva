@@ -9,7 +9,7 @@
     'scaffolding',
     'users',
     'gva',
-    'corrs',
+    'ems',
     'l10n',
     'l10n-tools',
     'l10nTexts_bg-bg',

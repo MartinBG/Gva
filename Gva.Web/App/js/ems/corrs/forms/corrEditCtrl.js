@@ -64,5 +64,5 @@
     'Corr'
   ];
 
-  angular.module('corrs').controller('CorrsEditCtrl', CorrsEditCtrl);
+  angular.module('ems').controller('CorrsEditCtrl', CorrsEditCtrl);
 }(angular));
