@@ -122,6 +122,20 @@
         deleteColumns: 'Колони'
       },
       persons: {
+        search: {
+          names: 'Име',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          licences: 'Лицензи',
+          ratings: 'Квалификации',
+          organization: 'Организация',
+          age: 'Възраст',
+          yes: 'Да',
+          no: 'Не',
+          'new': 'Ново лице',
+          search: 'Търси',
+          view: 'Преглед'
+        },
         personDataDirective: {
           title: 'Лични данни',
           lin: 'ЛИН',
@@ -160,9 +174,63 @@
           documentDateValidTo: 'Валиден до',
           documentPublisher: 'Издаден от'
         },
+        personStatusDirective: {
+          title: 'Състояние',
+          personStatusType: 'Причина',
+          documentNumber: 'Номер на документа',
+          documentDateValidFrom: 'Начална дата',
+          documentDateValidTo: 'Крайна дата',
+          notes: 'Бележки'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        viewPerson: {
+          name: 'Име',
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          age: 'Възраст',
+          company: 'Фирма',
+          employmentCategory: 'Длъжност',
+          edit: 'Редакция'
+        },
+        newAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        addressSearch: {
+          type: 'Вид',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          postalCode: 'Пощенски код',
+          phone: 'Телефон',
+          valid: 'Актуален',
+          edit: 'Редакция',
+          remove: 'Изтрий'
+        },
+        newStatus: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStatus: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        statusSearch: {
+          newState: 'Ново Състояние',
+          personStatusType: 'Причина',
+          documentNumber: 'Номер на документа',
+          documentDateValidFrom: 'Начална дата',
+          documentDateValidTo: 'Крайна дата',
+          notes: 'Бележки',
+          isActive: 'Активен',
+          edit: 'Редакция',
+          remove: 'Изтрий'
         }
       }
     });

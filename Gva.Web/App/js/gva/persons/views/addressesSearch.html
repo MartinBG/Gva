@@ -1,3 +1,28 @@
-﻿<div>
-  ADDRESSES SEARCH
+﻿<div class="container page-content">
+  <sc-datatable ng-model="addresses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="part.addressType.name" title="persons.addressSearch.type">
+    </sc-column>
+    <sc-column data="part.settlement.name" title="persons.addressSearch.settlement">
+    </sc-column>
+    <sc-column data="part.address" title="persons.addressSearch.address">
+    </sc-column>
+    <sc-column data="part.postalCode" title="persons.addressSearch.postalCode">
+    </sc-column>
+    <sc-column data="part.phone" title="persons.addressSearch.phone">
+    </sc-column>
+    <sc-column data="part.valid.name" title="persons.addressSearch.valid">
+    </sc-column>
+    <sc-column width="115px">
+      <button type="button" name="editBtn" class="btn-xs btn-info" sc-click="editAddress(item)">
+        <span class="glyphicon" ng-class="{'glyphicon-loading': editBtn.$pending, 'glyphicon-pencil': !editBtn.$pending}"></span>
+        <span l10n-text="persons.addressSearch.edit"></span>
+      </button>
+    </sc-column>
+    <sc-column  width="100px">
+      <button type="button" class="btn-xs btn-info" name="deleteBtn" sc-click="deleteAddress(item)">
+        <span class="glyphicon" ng-class="{'glyphicon-loading': deleteBtn.$pending, 'glyphicon-remove': !deleteBtn.$pending}"></span>
+        <span l10n-text="persons.addressSearch.remove"></span>
+      </button>
+    </sc-column>
+  </sc-datatable>
 </div>

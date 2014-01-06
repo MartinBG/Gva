@@ -20,13 +20,15 @@
       "type": "string", 
       "description": "Издател на документа"
     },        
-    "personDocumentIdTypeId": {
-      "type": "number", 
-      "description": "Тип документ за самоличност от Номенклатура Типове документи за самоличност на Физичеко лице"
+    "personDocumentIdType": {
+      "type": "object", 
+      "description": "Тип документ за самоличност от Номенклатура Типове документи за самоличност на Физичеко лице",
+      "additionalProperties": true
     },    
     "valid": {
-      "type": "boolean", 
-      "description": "Валидност" 
+      "type": "object", 
+      "description": "Валидност",
+      "additionalProperties": true
     },
     "notes": {
       "type": "string", 

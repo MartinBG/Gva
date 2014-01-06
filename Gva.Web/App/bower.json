@@ -6,7 +6,7 @@
     "angular-i18n": "1.2.5",
     "angular-l10n": "4vanger/angular-l10n#6cb73e3cad1adc894d99f97a097df799313e088b",
     "angular-resource": "1.2.5",
-    "angular-ui-router": "0.2.0",
+    "angular-ui-router": "0.2.7",
     "angular-bootstrap": "angular-ui/bootstrap#0c5d6398948ea3c3e9c3641937ba740069669ce8",
     "angular-ui-utils": "0.0.4",
     "json3": "3.2.4",

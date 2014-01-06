@@ -24,13 +24,17 @@
       name: 'gvaPersonDocumentId',
       templateUrl: 'gva/persons/forms/personDocumentId.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonStatus',
+      templateUrl: 'gva/persons/forms/personStatus.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
         name: 'persons',
         title: 'Физически лица',
         parent: 'root',
-        url: '/persons',
+        url: '/persons?exact&lin&uin&names&licences&ratings&organization',
         'abstract': true
       })
       .state({
@@ -65,6 +69,18 @@
           'pageView@root': {
             templateUrl: 'gva/persons/views/personsView.html',
             controller: 'PersonsViewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.edit',
+        title: 'Редакция',
+        parent: 'persons.view',
+        url: '/personData',
+        views: {
+          'pageView@root': {
+            templateUrl: 'gva/persons/views/personDataEdit.html',
+            controller: 'PersonDataEditCtrl'
           }
         }
       })
@@ -149,6 +165,24 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/statusesEdit.html',
             controller: 'StatusesEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.licences',
+        title: 'Лицензи',
+        parent: 'persons.view',
+        url: '/licences',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.licences.search',
+        parent: 'persons.licences',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/licencesSearch.html',
+            controller: 'LicencesSearchCtrl'
           }
         }
       });

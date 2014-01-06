@@ -6,7 +6,7 @@
     var ptor = protractor.getInstance();
 
     beforeEach(function (){
-      ptor.get('#/test/datatable/column');
+      ptor.get('#/test/column');
     });
 
     it('a column should be hidden because of the sc-column parameter called visibility',

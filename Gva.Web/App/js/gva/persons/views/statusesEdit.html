@@ -1,3 +1,18 @@
-﻿<div>
-  STATUSES EDIT
-</div>
+﻿<ng-form class="form-inline" name="editStatusForm">
+
+  <gva-person-status name="personStatusForm" ng-model="status.part"></gva-person-status>
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-sm-offset-4">
+      <button type="button" class="btn btn-primary" name="saveBtn" sc-click="save()" ng-disabled="editStatusForm.$invalid">
+        <span class="glyphicon" ng-class="{'glyphicon-loading':saveBtn.$pending, 'glyphicon-floppy-disk': !saveBtn.$pending}"></span>
+        <span l10n-text="persons.editStatus.save"></span>
+      </button>
+      <button type="button" class="btn btn-default" name="cancelBtn" sc-click="cancel()">
+        <span class="glyphicon" ng-class="{'glyphicon-loading':cancelBtn.$pending, 'glyphicon-arrow-left': !cancelBtn.$pending}"></span>
+        <span l10n-text="persons.editStatus.cancel"></span>
+      </button>
+    </div>
+  </div>
+</ng-form>
+

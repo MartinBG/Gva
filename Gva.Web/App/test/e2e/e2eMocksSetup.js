@@ -5,20 +5,24 @@
   angular.module('app').config(function ($provide) {
     $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
 
-    $provide.decorator('$httpBackend', function ($delegate) {
+    $provide.decorator('$httpBackend', function ($delegate, $delay) {
       var proxy = function (method, url, data, callback, headers, timeout, withCredentials) {
         var promiseAwareCallback = function (status, data, headers) {
           var self = this;
 
-          // check if the result is promise
-          if (data && data.then && typeof (data.then) === 'function') {
-            data.then(function (result) {
-              callback.call(self, status, result, headers);
-            });
-          } else {
-            callback.call(self, status, data, headers);
+          // wrap the result if not a promise
+          if (!(data && data.then && typeof (data.then) === 'function')) {
+            data = $delay(500, data);
           }
+
+          data.then(function (result) {
+            result = _.cloneDeep(result);
+
+            callback.call(self, status, result, headers);
+          });
         };
+
+        data = _.cloneDeep(data);
 
         return $delegate.call(this,
           method, url, data, promiseAwareCallback, headers, timeout, withCredentials);

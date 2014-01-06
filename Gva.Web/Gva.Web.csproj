@@ -130,6 +130,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\test\e2e\spec\searchPersonStatusesSpec.js" />
+    <Content Include="App\test\e2e\mocks\personsStatusesHttp.js" />
+    <Content Include="App\test\e2e\spec\editPersonStatusSpec.js" />
+    <Content Include="App\test\e2e\spec\newPersonStatusSpec.js" />
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -157,12 +162,19 @@
     <Content Include="App\js\ems\corrs\resources\corr.js" />
     <Content Include="App\js\ems\corrs\forms\corrEdit.html" />
     <Content Include="App\js\ems\corrs\forms\corrSearch.html" />
+    <Content Include="App\js\gva\persons\resources\personData.js" />
+    <Content Include="App\js\gva\persons\resources\personAddress.js" />
+    <Content Include="App\js\gva\persons\resources\personsStatus.js" />
     <Content Include="App\js\gva\persons\views\addressesSearch.html" />
     <Content Include="App\js\gva\persons\views\addressesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesNew.html" />
     <Content Include="App\js\gva\persons\views\addressesNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\addressesEdit.html" />
     <Content Include="App\js\gva\persons\views\addressesEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\licencesSearch.html" />
+    <Content Include="App\js\gva\persons\views\licencesSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\views\personDataEdit.html" />
+    <Content Include="App\js\gva\persons\views\personDataEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\statusesSearch.html" />
     <Content Include="App\js\gva\persons\views\statusesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\statusesEdit.html" />
@@ -185,6 +197,8 @@
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
     <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />
+    <Content Include="App\js\gva\directives\tabs\tabsDirective.html" />
+    <Content Include="App\js\gva\directives\tabs\tabsDirective.js" />
     <Content Include="App\js\scaffolding\directives\validate\validateDirective.js" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.html" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.js" />
@@ -237,10 +251,9 @@
     <Content Include="App\schema\person-document-other.sample.js" />
     <Content Include="App\schema\person-document-training.sample.js" />
     <Content Include="App\schema\person-status.sample.js" />
-    <Content Include="App\schema\person.sample.js" />
+    <Content Include="App\test\e2e\mocks\personLots.js" />
     <Content Include="App\test\e2e\delay.js" />
     <Content Include="App\schema\requireShim.js" />
-    <Content Include="App\server\file.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\controllers\scPromiseStateCtrl.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\specs\promiseStateSpec.js" />
     <Content Include="App\test\e2e\directives\sc-promise-state\templates\scPromiseState.html" />
@@ -274,13 +287,28 @@
     <Content Include="App\test\e2e\directives\sc-x\templates\scInput.html" />
     <Content Include="App\test\e2e\directives\sc-x\templates\scSelect.html" />
     <Content Include="App\test\e2e\e2eMocksSetup.js" />
+    <Content Include="App\test\e2e\spec\newPersonSpec.js" />
+    <Content Include="App\test\e2e\spec\personsSpec.js" />
     <Content Include="App\test\e2e\httpBackendConfiguratorProvider.js" />
     <Content Include="App\test\e2e\mocks\corrsHttp.js" />
+    <Content Include="App\test\e2e\mocks\personDataHttp.js" />
+    <Content Include="App\test\e2e\mocks\personAddressesHttp.js" />
     <Content Include="App\test\e2e\mocks\personsHttp.js" />
     <Content Include="App\test\e2e\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\e2e\mocks\usersHttp.js" />
     <Content Include="App\test\e2e\ptorConf.js" />
     <Content Include="App\test\e2e\gvaBy.js" />
+    <Content Include="App\test\e2e\spec\editPersonAddressSpec.js" />
+    <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newPersonAddressSpec.js" />
+    <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\searchPersonAddressSpec.js" />
+    <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\spec\editPersonDataSpec.js" />
+    <Content Include="App\test\e2e\spec\editUserSpec.js" />
+    <Content Include="App\test\e2e\spec\newUserSpec.js" />
+    <Content Include="App\test\e2e\spec\usersSpec.js" />
+    <Content Include="App\test\e2e\spec\viewPersonSpec.js" />
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
     <Content Include="App\test\e2e\spec\usersSpec.js" />
