@@ -337,7 +337,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-template');
 
   grunt.loadTasks('./gruntTasks');
-  
+
   grunt.registerTask('debug',
     ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template']);
 

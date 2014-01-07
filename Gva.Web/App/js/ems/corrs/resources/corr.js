@@ -5,7 +5,7 @@
   angular.module('ems')
     .factory('Corr', ['$resource',
       function ($resource) {
-        return $resource('/api/corrs/:corrId', {userId:'@corrId'},
+        return $resource('/api/corrs/:corrId', { userId: '@corrId' },
           {
             'create': {
               method: 'GET',
