@@ -10,6 +10,7 @@
     $stateParams,
     Doc
   ) {
+
     if ($stateParams.docId) {
       $scope.isEdit = true;
       $scope.doc = Doc.get({ docId: $stateParams.docId });
@@ -22,6 +23,16 @@
       //  });
 
     }
+
+    $scope.inEditMode = false;
+
+    $scope.enterEditMode = function () {
+      $scope.inEditMode = true;
+    };
+
+    $scope.exitEditMode = function () {
+      $scope.inEditMode = false;
+    };
 
   }
 

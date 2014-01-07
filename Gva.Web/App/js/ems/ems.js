@@ -25,7 +25,7 @@
         url: '',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/docs/forms/docSearch.html',
+            templateUrl: 'ems/docs/views/docSearch.html',
             controller: 'DocsSearchCtrl'
           }
         }
@@ -37,7 +37,7 @@
         url: '/:docId',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/docs/forms/docEdit.html',
+            templateUrl: 'ems/docs/views/docEdit.html',
             controller: 'DocsEditCtrl'
           }
         }
@@ -57,7 +57,7 @@
         url: '',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/corrs/forms/corrSearch.html',
+            templateUrl: 'ems/corrs/views/corrSearch.html',
             controller: 'CorrsSearchCtrl'
           }
         }
@@ -69,7 +69,7 @@
         url: '/new',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/corrs/forms/corrEdit.html',
+            templateUrl: 'ems/corrs/views/corrEdit.html',
             controller: 'CorrsEditCtrl'
           }
         }
@@ -81,7 +81,7 @@
         url: '/:corrId',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/corrs/forms/corrEdit.html',
+            templateUrl: 'ems/corrs/views/corrEdit.html',
             controller: 'CorrsEditCtrl'
           }
         }

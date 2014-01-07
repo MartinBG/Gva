@@ -130,10 +130,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\js\ems\docs\forms\docSearch.html" />
-    <Content Include="App\js\ems\docs\forms\docSearchCtrl.js" />
-    <Content Include="App\js\ems\docs\forms\docEditCtrl.js" />
-    <Content Include="App\js\ems\docs\forms\docEdit.html" />
+    <Content Include="App\js\ems\docs\views\docSearch.html" />
+    <Content Include="App\js\ems\docs\views\docSearchCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docEditCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\test\e2e\mocks\docsHttp.js" />
@@ -162,12 +162,12 @@
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
-    <Content Include="App\js\ems\corrs\forms\corrEditCtrl.js" />
-    <Content Include="App\js\ems\corrs\forms\corrSearchCtrl.js" />
+    <Content Include="App\js\ems\corrs\views\corrEditCtrl.js" />
+    <Content Include="App\js\ems\corrs\views\corrSearchCtrl.js" />
     <Content Include="App\js\ems\ems.js" />
     <Content Include="App\js\ems\corrs\resources\corr.js" />
-    <Content Include="App\js\ems\corrs\forms\corrEdit.html" />
-    <Content Include="App\js\ems\corrs\forms\corrSearch.html" />
+    <Content Include="App\js\ems\corrs\views\corrEdit.html" />
+    <Content Include="App\js\ems\corrs\views\corrSearch.html" />
     <Content Include="App\js\gva\persons\resources\personData.js" />
     <Content Include="App\js\gva\persons\resources\personAddress.js" />
     <Content Include="App\js\gva\persons\resources\personsStatus.js" />
@@ -331,8 +331,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\js\ems\corrs\views\" />
-    <Folder Include="App\js\ems\docs\views\" />
+    <Folder Include="App\js\ems\corrs\forms\" />
+    <Folder Include="App\js\ems\docs\forms\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

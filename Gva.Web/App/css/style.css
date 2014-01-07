@@ -167,3 +167,20 @@ form.card input.form-control[disabled] {
     cursor: auto;
     background-color: #ffffff;
 }
+
+/*  EMS  */
+
+.control-label-bg {
+    padding: 7px 10px;
+    background-color: #E9E9E9;
+    display: block;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.control-label-status {
+    /*float: right;*/
+    margin: 0px 0px 10px 5px;
+    padding: 5px 10px;
+    background-color: #E9E9E9;
+}

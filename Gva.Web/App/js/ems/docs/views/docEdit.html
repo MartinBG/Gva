@@ -1,0 +1,153 @@
+﻿<div class="container page-content">
+  <!--<div class="form-inline">-->
+  <div class="panel panel-default">
+
+    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
+        <ul class="nav navbar-nav">
+          <li ng-show="!inEditMode" class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-plus"></i>
+              <span>Подчинен</span><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Документ</a>
+              </li>
+              <li>
+                <a href="#">Резолюция</a>
+              </li>
+              <li>
+                <a href="#">Задача</a>
+              </li>
+              <li>
+                <a href="#">Забележка</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-show="!inEditMode">
+            <a ng-click="enterEditMode()">
+              <i class="glyphicon glyphicon-edit"></i><span>&nbsp;Редакция</span>
+            </a>
+          </li>
+          <li ng-show="inEditMode">
+            <a>
+              <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Запис</span>
+            </a>
+          </li>
+          <li ng-show="inEditMode">
+            <a ng-click="exitEditMode()">
+              <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
+            </a>
+          </li>
+
+          <li ng-show="!inEditMode" class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-tag"></i>
+              <span>Управление</span><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Отбелязване като изготвен</a>
+              </li>
+              <li>
+                <a href="#">...</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-show="!inEditMode" class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <span>Етапи</span><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">Приключване</a>
+              </li>
+              <li>
+                <a href="#">Следващ</a>
+              </li>
+              <li>
+                <a href="#">Техн. редакция</a>
+              </li>
+              <li>
+                <a href="#">Сторниране</a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="well-sm panel-body form-body">
+
+      <form class="form-horizontal" novalidate>
+
+        <div class="row">
+          <div class="col-md-3">
+            <span>Дата и час: </span>
+            <span><b>{{ doc.regDate }} </b></span>
+          </div>
+          <div class="col-md-3">
+            <span>Номер: </span>
+            <span><b>{{ doc.regUri }} </b></span>
+          </div>
+          <div class="col-md-2 col-md-offset-2">
+            <span>Статус: </span>
+            <span><b>{{ doc.docStatusName }} </b></span>
+          </div>
+          <div class="col-md-2">
+            <span>Тип: </span>
+            <span><b>{{ doc.docDirectionName }} </b></span>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <div class="col-md-12">
+            <span class="control-label-bg">{{ doc.docTypeName }}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <span>{{ doc.docSubjectLabel }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <sc-nomenclature name="docSubject" ng-model="doc.docSubject" alias="'correspondentGroups'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+          </div>
+        </div>
+
+        <!--  <div class="form-group">
+          <label class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">email@example.com</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+          </div>
+        </div>-->
+
+      </form>
+
+    </div>
+  </div>
+
+  <!--</div>-->
+</div>
