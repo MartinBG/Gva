@@ -20,6 +20,13 @@
         'abstract': true
       })
       .state({
+        name: 'docs',
+        title: 'Документи',
+        url: '/docs',
+        parent: 'root',
+        'abstract': true
+      })
+      .state({
         name: 'corrs.search',
         parent: 'corrs',
         url: '',
@@ -47,6 +54,18 @@
         title: 'Редакция',
         parent: 'corrs',
         url: '/:corrId',
+        views: {
+          'pageView@root': {
+            templateUrl: 'ems/corrs/forms/corrEdit.html',
+            controller: 'CorrsEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'docs.edit',
+        title: 'Нов кореспондент',
+        parent: 'corrs',
+        url: '/new',
         views: {
           'pageView@root': {
             templateUrl: 'ems/corrs/forms/corrEdit.html',

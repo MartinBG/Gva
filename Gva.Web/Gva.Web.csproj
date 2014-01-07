@@ -130,7 +130,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\test\e2e\mocks\docsHttp.js" />
     <Content Include="App\test\e2e\spec\searchPersonStatusesSpec.js" />
     <Content Include="App\test\e2e\mocks\personsStatusesHttp.js" />
     <Content Include="App\test\e2e\spec\editPersonStatusSpec.js" />
@@ -326,7 +328,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\views\" />
-    <Folder Include="App\js\ems\docs\" />
+    <Folder Include="App\js\ems\docs\forms\" />
+    <Folder Include="App\js\ems\docs\views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
