@@ -5,13 +5,13 @@ using System.Linq;
 using Common.Data;
 using Regs.Api.Models;
 
-namespace Regs.Api.Managers.LotManager
+namespace Regs.Api.Repositories.LotRepositories
 {
-    public class LotManager : ILotManager
+    public class LotRepository : ILotRepository
     {
         private IUnitOfWork unitOfWork;
 
-        public LotManager(IUnitOfWork unitOfWork, IEnumerable<IEventHandler> eventHandlers)
+        public LotRepository(IUnitOfWork unitOfWork, IEnumerable<IEventHandler> eventHandlers)
         {
             this.unitOfWork = unitOfWork;
 
@@ -39,15 +39,42 @@ namespace Regs.Api.Managers.LotManager
             return set;
         }
 
-        public Lot GetLot(int lotId, int? commitId = null)
+        public Lot GetLotIndex(int lotId)
         {
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
                 .Include(l => l.Parts)
+                .Include(l => l.Commits)
+                .Include(l => l.Set)
+                .Include(l => l.Set.SetParts)
                 .SingleOrDefault(l => l.LotId == lotId);
 
             if (lot == null)
             {
-                throw new Exception(string.Format("Invalid lotId: {0}", lotId));
+                throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
+            }
+
+            Commit commit = this.unitOfWork.DbContext.Set<Commit>()
+                .Include(c => c.PartVersions)
+                .Where(c => c.LotId == lotId && c.IsIndex == true)
+                .SingleOrDefault();
+
+            commit.IsLoaded = true;
+
+            return lot;
+        }
+
+        public Lot GetLot(int lotId, int? commitId = null)
+        {
+            Lot lot = this.unitOfWork.DbContext.Set<Lot>()
+                .Include(l => l.Parts)
+                .Include(l => l.Commits)
+                .Include(l => l.Set)
+                .Include(l => l.Set.SetParts)
+                .SingleOrDefault(l => l.LotId == lotId);
+
+            if (lot == null)
+            {
+                throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
             }
 
             Commit commit;
@@ -64,15 +91,19 @@ namespace Regs.Api.Managers.LotManager
             else
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Include(c => c.PartVersions)
-                    .Where(c => c.LotId == lotId)
-                    .SingleOrDefault(c => c.IsIndex == true);
+                    .Where(c => c.LotId == lotId && c.IsIndex == true)
+                    .Select(c => c.ParentCommit)
+                    .SingleOrDefault();
+
+                if (commit == null)
+                {
+                    throw new Exception(string.Format("The specified lot with id {0} does not have a non-index commit.", lotId));
+                }
+
+                this.unitOfWork.DbContext.Entry(commit).Collection(c => c.PartVersions).Load();
             }
 
-            this.unitOfWork.DbContext.Set<PartVersion>()
-                .Include(pv => pv.TextBlob)
-                .Where(pv => pv.Commits.Any(c => c.CommitId == commit.CommitId))
-                .Load();
+            commit.IsLoaded = true;
 
             return lot;
         }

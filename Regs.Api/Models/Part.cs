@@ -14,6 +14,7 @@ namespace Regs.Api.Models
         public int SetPartId { get; set; }
         public int LotId { get; set; }
         public string Path { get; set; }
+        public int? Index { get; set; }
 
         public virtual Lot Lot { get; set; }
         public virtual SetPart SetPart { get; set; }
@@ -38,6 +39,7 @@ namespace Regs.Api.Models
             this.Property(t => t.SetPartId).HasColumnName("LotSetPartId");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Path).HasColumnName("Path");
+            this.Property(t => t.Index).HasColumnName("Index");
 
             // Relationships
             this.HasRequired(t => t.Lot)

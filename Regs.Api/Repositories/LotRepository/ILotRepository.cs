@@ -1,11 +1,12 @@
 ﻿using Regs.Api.Models;
 
-namespace Regs.Api.Managers.LotManager
+namespace Regs.Api.Repositories.LotRepositories
 {
-    public interface ILotManager
+    public interface ILotRepository
     {
         Set GetSet(int setId);
         Set GetSet(string alias);
         Lot GetLot(int lotId, int? commitId = null);
+        Lot GetLotIndex(int lotId);
     }
 }

@@ -6,10 +6,10 @@ GO
 
 
 INSERT INTO [LotSetParts]
-    ([LotSetPartId], [LotSetId], [Path]                     , [Schema])
-VALUES
-    (1             , 1         , N'/generalInfo'            , N'{}'   ),
-    (2             , 1         , N'/addresses/*'            , N'{}'   ),
-    (3             , 1         , N'/ratings/*'              , N'{}'   ),
-    (4             , 1         , N'/ratings/*/ratingDates/*', N'{}'   )
+    ([LotSetPartId], [LotSetId], [PathRegex]                    , [Schema])
+VALUES                                                          
+    (1             , 1         , N'/generalInfo'                , N'{}'   ),
+    (2             , 1         , N'/addresses/\d+'              , N'{}'   ),
+    (3             , 1         , N'/ratings/\d+'                , N'{}'   ),
+    (4             , 1         , N'/ratings/\d+/ratingDates/\d+', N'{}'   )
 GO

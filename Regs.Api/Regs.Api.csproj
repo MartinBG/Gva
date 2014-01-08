@@ -64,12 +64,10 @@
     <Compile Include="LotEvents\LotEventDispatcherFactory\LotEventDispatcherFactory.cs" />
     <Compile Include="LotEvents\LotEventHandler.cs" />
     <Compile Include="LotEvents\LotOperation.cs" />
-    <Compile Include="Managers\LobManager\ILobManager.cs" />
-    <Compile Include="Managers\LobManager\LobManager.cs" />
-    <Compile Include="Managers\LotMnager\ILotManager.cs" />
+    <Compile Include="Repositories\LotRepository\ILotRepository.cs" />
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\Lot.cs" />
-    <Compile Include="Managers\LotMnager\LotManager.cs" />
+    <Compile Include="Repositories\LotRepository\LotRepository.cs" />
     <Compile Include="Models\Nom.cs" />
     <Compile Include="Models\NomValue.cs" />
     <Compile Include="Models\Part.cs" />
@@ -79,7 +77,6 @@
     <Compile Include="Models\RegsDbConfiguration.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\SetPart.cs" />
-    <Compile Include="Models\TextBlob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegsApiModule.cs" />
   </ItemGroup>
