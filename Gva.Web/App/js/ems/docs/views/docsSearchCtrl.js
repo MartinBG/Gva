@@ -19,7 +19,7 @@
     });
 
     $scope.search = function () {
-      $state.go('docs.search', {
+      $state.go('docs/search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate
         //names: $scope.filters.names,
@@ -30,7 +30,7 @@
     };
 
     $scope.viewDoc = function (doc) {
-      return $state.go('docs.edit', { id: doc.docId });
+      return $state.go('docs/edit/addressing', { docId: doc.docId });
     };
   }
 

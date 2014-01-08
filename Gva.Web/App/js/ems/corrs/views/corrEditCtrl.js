@@ -45,13 +45,13 @@
 
       if ($scope.corrForm.$valid) {
         $scope.corr.$save($stateParams).then(function () {
-          $state.go('corrs.search');
+          $state.go('corrs/search');
         });
       }
     };
 
     $scope.cancel = function () {
-      $state.go('corrs.search');
+      $state.go('corrs/search');
     };
   }
 

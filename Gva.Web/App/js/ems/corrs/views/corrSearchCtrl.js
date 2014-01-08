@@ -15,11 +15,11 @@
     });
 
     $scope.newCorr = function () {
-      $state.go('corrs.new');
+      $state.go('corrs/new');
     };
 
     $scope.search = function () {
-      $state.go('corrs.search', {
+      $state.go('corrs/search', {
         displayName: $scope.filters.displayName,
         email: $scope.filters.email
       });
@@ -37,10 +37,10 @@
     });
 
     $scope.editCorr = function (corr) {
-      $state.go('corrs.edit', { corrId: corr.corrId });
+      $state.go('corrs/edit', { corrId: corr.corrId });
     };
   }
-  
+
   CorrsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Corr'];
 
   angular.module('ems').controller('CorrsSearchCtrl', CorrsSearchCtrl);

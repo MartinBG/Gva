@@ -96,7 +96,7 @@
         <div class="row">
           <div class="col-md-3">
             <span>Дата и час: </span>
-            <span><b>{{ doc.regDate }} </b></span>
+            <span><b>{{ doc.regDate | date:'dd.MM.yyyy HH:mm' }} </b></span>
           </div>
           <div class="col-md-3">
             <span>Номер: </span>
@@ -127,7 +127,8 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <sc-nomenclature name="docSubject" ng-model="doc.docSubject" alias="'docSubjects'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+            <sc-text ng-model="doc.docSubject" required ng-disabled="!inEditMode"></sc-text>
+            <!--<sc-nomenclature name="docSubject" ng-model="doc.docSubject" alias="'docSubjects'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>-->
           </div>
         </div>
 

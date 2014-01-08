@@ -42,11 +42,11 @@
           { text: 'Надзор', url: '/licenses' },
           { text: 'Ръководен Персонал', url: '/licenses' }
         ]})
-        .addItem({text: 'Документи', icon: 'glyphicon-folder-open', state: 'docs.search', items: [
-          { text: 'Нов документ', state: 'docs.new' }
+        .addItem({text: 'Документи', icon: 'glyphicon-folder-open', state: 'docs/search', items: [
+          { text: 'Нов документ', state: 'docs/new' }
         ]})
-        .addItem({text: 'Кореспонденти', icon: 'glyphicon-user', state: 'corrs.search', items: [
-          { text: 'Нов кореспондент', state: 'corrs.new' }
+        .addItem({text: 'Кореспонденти', icon: 'glyphicon-user', state: 'corrs/search', items: [
+          { text: 'Нов кореспондент', state: 'corrs/new' }
         ]})
         .addItem({text: 'Възд. Средства', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licenses' },
