@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function ScFilesCtrl($scope) {
+  function ScFilesCtrl($scope, $timeout) {
     $scope.files = [];
 
     var multipleFiles = [
@@ -14,6 +14,11 @@
     var singleFile = [
       { key: 'f111111111', relativePath: '', name: 'file1' }
     ];
+
+    $scope.loadSingleFileWithDelay = function () {
+      $scope.files = undefined;
+      $timeout($scope.changeToSingleFile, 400);
+    };
 
     $scope.changeToMultipleFiles = function () {
       $scope.files = multipleFiles;
@@ -28,7 +33,7 @@
     };
   }
 
-  ScFilesCtrl.$inject = ['$scope'];
+  ScFilesCtrl.$inject = ['$scope', '$timeout'];
 
   angular.module('scaffolding').controller('ScFilesTestbedCtrl', ScFilesCtrl);
 }(angular));

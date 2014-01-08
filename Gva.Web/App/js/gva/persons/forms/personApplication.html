@@ -1,0 +1,13 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading form-title"><strong l10n-text="persons.personApplicationDirective.title"></strong></div>
+    <div class="well-sm panel-body form-body">
+      <sc-datatable ng-model="model" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+        <sc-column data="applicationId" title="persons.personApplicationDirective.number">
+        </sc-column>
+        <sc-column data="applicationName" title="persons.personApplicationDirective.name">
+        </sc-column>
+      </sc-datatable>
+    </div>
+  </div>
+</ng-form>

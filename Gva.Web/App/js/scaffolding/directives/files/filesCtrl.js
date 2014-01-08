@@ -45,7 +45,7 @@
     var self = this;
     $scope.singleFile = false;
     $scope.noFiles = false;
-    if (files.length === 0) {
+    if (!files || files.length === 0) {
       $scope.noFiles = true;
       $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFiles');
     } else if (files.length === 1) {

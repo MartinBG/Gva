@@ -22,11 +22,20 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentId',
-      templateUrl: 'gva/persons/forms/personDocumentId.html'
+      templateUrl: 'gva/persons/forms/personDocumentId.html',
+      controller: 'PersonDocumentIdCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonStatus',
       templateUrl: 'gva/persons/forms/personStatus.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonScannedDocument',
+      templateUrl: 'gva/persons/forms/personScannedDocument.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonApplication',
+      templateUrl: 'gva/persons/forms/personApplication.html'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -165,6 +174,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/statusesEdit.html',
             controller: 'StatusesEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentIds',
+        title: 'Документи за самоличност',
+        parent: 'persons.view',
+        url: '/documentIds',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.documentIds.search',
+        parent: 'persons.documentIds',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentIdsSearch.html',
+            controller: 'DocumentIdsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentIds.new',
+        title: 'Нов документ за самоличност',
+        parent: 'persons.documentIds',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentIdsNew.html',
+            controller: 'DocumentIdsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentIds.edit',
+        title: 'Редакция на документ за самоличност',
+        parent: 'persons.documentIds',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentIdsEdit.html',
+            controller: 'DocumentIdsEditCtrl'
           }
         }
       })

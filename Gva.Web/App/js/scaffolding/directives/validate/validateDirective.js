@@ -4,7 +4,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ValidateDirective() {
+  function ValidateDirective($parse) {
     function addPendingValidation(control) {
       if (!control.$error.$pending) {
         control.$error.$pending = 0;
@@ -24,15 +24,14 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      scope: {
-        scValidate: '&'
-      },
+      scope: false,
       link: function (scope, element, attrs, control) {
         var forms = _.map(element.parents('ng-form'), function (formElem) {
               return angular.element(formElem).controller('form');
-            });
+            }),
+            scValidate = $parse(attrs.scValidate)(scope);
 
-        _.forOwn(scope.scValidate(), function (validationFn, validationErrorKey) {
+        _.forOwn(scValidate, function (validationFn, validationErrorKey) {
           var validator = function (value) {
             var isValid = validationFn(value);
 
@@ -70,7 +69,7 @@
     };
   }
 
-  ValidateDirective.$inject = [];
+  ValidateDirective.$inject = ['$parse'];
 
   angular.module('scaffolding').directive('scValidate', ValidateDirective);
 }(angular, _));
