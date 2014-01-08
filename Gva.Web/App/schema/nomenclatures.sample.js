@@ -22,14 +22,23 @@
       })[0];
     },
 
-      //Номенклатура Кореспондентска група
-    correspondentGroups: [
-      {nomTypeValueId: 1, code: '', name: 'Министерски съвет', nameAlt: '', alias: '' },
-      {nomTypeValueId: 2, code: '', name: 'Заявители', nameAlt: 'Applicants', alias: 'Applicants' },
-      {nomTypeValueId: 3, code: '', name: 'Системни', nameAlt: 'System', alias: 'System' }
+
+    docSubjects: [
+      { nomTypeValueId: 1, code: '', name: 'Подадено заявление', nameAlt: '', alias: '' },
+      { nomTypeValueId: 2, code: '', name: 'Резолюция', nameAlt: '', alias: '' },
+      { nomTypeValueId: 3, code: '', name: 'Забелвжка', nameAlt: '', alias: ''},
+      { nomTypeValueId: 4, code: '', name: 'Задача', nameAlt: '', alias: '' },
+      { nomTypeValueId: 5, code: '', name: 'Други', nameAlt: '', alias: '' }
     ],
 
-      //Номенклатура Тип кореспондент
+    //Номенклатура Кореспондентска група
+    correspondentGroups: [
+      { nomTypeValueId: 1, code: '', name: 'Министерски съвет', nameAlt: '', alias: '' },
+      { nomTypeValueId: 2, code: '', name: 'Заявители', nameAlt: 'Applicants', alias: 'Applicants' },
+      { nomTypeValueId: 3, code: '', name: 'Системни', nameAlt: 'System', alias: 'System' }
+    ],
+
+    //Номенклатура Тип кореспондент
     correspondentTypes: [
      { nomTypeValueId: 1, code: '', name: 'Български гражданин', nameAlt: 'BulgarianCitizen', alias: 'BulgarianCitizen' },
      { nomTypeValueId: 2, code: '', name: 'Чужденец', nameAlt: 'Foreigner', alias: 'Foreigner' },
@@ -222,7 +231,7 @@
       { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' } }
     ],
 
-    //Номенклатура Групи Разрешения към квалификация 
+    //Номенклатура Групи Разрешения към квалификация
     authorizationGroups: [
       { nomTypeValueId: 1, code: 'FT', name: 'За провеждане обучение', content: { StaffTypeId: 1 } },
       { nomTypeValueId: 100, code: 'T', name: 'За ОВД', content: { RatingClassGroupId: 9, StaffTypeId: 2 } },
@@ -232,7 +241,7 @@
       { nomTypeValueId: 461, code: 'M', name: 'За ТО (СУВД)', content: { RatingClassGroupId: 8, StaffTypeId: 5 } }
     ],
 
-    //Номенклатура Разрешения към квалификация 
+    //Номенклатура Разрешения към квалификация
     authorizations: [
       { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 } },
       { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' } },
@@ -251,7 +260,7 @@
       { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
     ],
 
-    //Номенклатура Видове(типове) правоспособност 
+    //Номенклатура Видове(типове) правоспособност
     licenceTypes: [
       { nomTypeValueId: 1, code: 'PPL(A)', name: 'Любител пилот на самолет (PPL(A))', nameAlt: 'Private Pilot  (Aeroplane) (PPL(A))', content: { StaffTypeId: 1, SeqNo: 1, DictionaryId: 1, Code_CA: 'PPL(A)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PPL(A)' } },
       { nomTypeValueId: 2, code: 'CPL(A)', name: 'Професионален пилот на самолет CPL(A)', nameAlt: 'Commercial Pilot  (Aeroplane) (CPL(A))', content: { StaffTypeId: 1, SeqNo: 2, DictionaryId: 1, Code_CA: 'CPL(A)', PRT_MAX_RATING_COUNT: 14, _CODE: 'CPL(A)' } },
@@ -269,7 +278,7 @@
       { nomTypeValueId: 1411, code: 'CPA', name: 'Професионален пилот-CPA', nameAlt: 'Commercial pilot licence-CPA', content: { StaffTypeId: 1, SeqNo: 21, DictionaryId: 1, Code_CA: 'CPL(A)', PRT_MAX_RATING_COUNT: 25, _CODE: 'CPA' }, alias: 'CPA' }
     ],
 
-    //Номенклатура Нива на владеене на английски език 
+    //Номенклатура Нива на владеене на английски език
     engLangLevels: [
       { nomTypeValueId: 1, code: 'L4', name: 'Работно (Ниво 4)', nameAlt: 'Operational (Level  4)' },
       { nomTypeValueId: 2, code: 'L5', name: 'Разширено (Ниво  5)', nameAlt: 'Extended (Level  5)' },
@@ -286,7 +295,7 @@
       { nomTypeValueId: 6, code: 'LBHT', name: 'ИХТИМАН', nameAlt: 'IHTIMAN' }
     ],
 
-    //Номенклатура Държатели на ТС за ВС 
+    //Номенклатура Държатели на ТС за ВС
     aircraftTCHolders: [
       { nomTypeValueId: 1, code: '', name: 'Еърбъс', nameAlt: 'Airbus' },
       { nomTypeValueId: 3, code: '', name: 'Чесна Еъркрафт Къмпани', nameAlt: 'Cessna Aircraft Company' },

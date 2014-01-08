@@ -17,7 +17,7 @@
         regUri: '000030-1-05.01.2014',
         regIndex: '000030',
         regNumber: 1,
-        docSubject: nomenclatures.correspondentGroups[0]
+        docSubject: nomenclatures.docSubjects[0]
       }, {
         docId: 2
       }];

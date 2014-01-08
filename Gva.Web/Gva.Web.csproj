@@ -130,6 +130,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\ems\docs\views\docClassifications.html" />
+    <Content Include="App\js\ems\docs\views\docClassificationsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docCase.html" />
+    <Content Include="App\js\ems\docs\views\docCaseCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docStages.html" />
+    <Content Include="App\js\ems\docs\views\docStagesCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docWorkflows.html" />
+    <Content Include="App\js\ems\docs\views\docWorkflowsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docContent.html" />
+    <Content Include="App\js\ems\docs\views\docContent.js" />
+    <Content Include="App\js\ems\docs\views\docAddressingCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docAddressing.html" />
     <Content Include="App\js\ems\docs\views\docSearch.html" />
     <Content Include="App\js\ems\docs\views\docSearchCtrl.js" />
     <Content Include="App\js\ems\docs\views\docEditCtrl.js" />
