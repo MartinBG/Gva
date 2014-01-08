@@ -19,6 +19,19 @@
           }
         }
       },
+      docs: {
+        search: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          view: 'Преглед',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: '',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент'
+        }
+      },
       corrs: {
         search: {
           displayName: 'Наименование',

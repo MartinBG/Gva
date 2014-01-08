@@ -25,7 +25,7 @@
         url: '',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/docs/views/docSearch.html',
+            templateUrl: 'ems/docs/views/docsSearch.html',
             controller: 'DocsSearchCtrl'
           }
         }

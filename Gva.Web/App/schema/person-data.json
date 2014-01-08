@@ -9,80 +9,80 @@
       "description": "Личен идентификационен номер"
     },
     "uin": {
-      "type": "string", 
+      "type": "string",
       "description": "Единен граждански номер"
     },
     "firstName": {
-      "type": "string", 
+      "type": "string",
       "description": "Име на физическо лице"
     },
     "firstNameAlt": {
-      "type": "string", 
+      "type": "string",
       "description": "Име на физическо лице на поддържащ език"
     },
     "middleName": {
-      "type": "string", 
+      "type": "string",
       "description": "Презиме на физическо лице"
     },
     "middleNameAlt": {
-      "type": "string", 
+      "type": "string",
       "description": "Презиме на физическо лице на поддържащ език"
     },
     "lastName": {
-      "type": "string", 
+      "type": "string",
       "description": "Фамилия на физическо лице"
     },
     "lastNameAlt": {
-      "type": "string", 
+      "type": "string",
       "description": "Фамилия на физическо лице на поддържащ език"
     },
     "dateOfBirth": {
-      "format": "date-time", 
-      "type": "string", 
+      "format": "date-time",
+      "type": "string",
       "description": "Дата на раждане"
     },
     "placeOfBirth": {
-      "type": "object", 
+      "type": "object",
       "description": "Населено място за място на раждане от Номенклатура Населени места",
       "additionalProperties": true
     },
     "country": {
-      "type": "object", 
+      "type": "object",
       "description": "Държава за гражданство от Номеклатура Държави",
       "additionalProperties": true
     },
     "sex": {
-      "type": "object", 
+      "type": "object",
       "description": "Пол от Номенклатура Полове",
       "additionalProperties": true
     },
     "email": {
-      "format": "email", 
-      "type": "string", 
+      "format": "email",
+      "type": "string",
       "description": "E-mail адрес"
     },
     "fax": {
-      "type": "string", 
+      "type": "string",
       "description": "Факс номер(а)"
     },
     "phone1": {
-      "type": "string", 
+      "type": "string",
       "description": "Телефонен номер 1"
     },
     "phone2": {
-      "type": "string", 
+      "type": "string",
       "description": "Телефонен номер 2"
     },
     "phone3": {
-      "type": "string", 
+      "type": "string",
       "description": "Телефонен номер 3"
     },
     "phone4": {
-      "type": "string", 
+      "type": "string",
       "description": "Телефонен номер 4"
     },
     "phone5": {
-      "type": "string", 
+      "type": "string",
       "description": "Телефонен номер 5"
     }
   }

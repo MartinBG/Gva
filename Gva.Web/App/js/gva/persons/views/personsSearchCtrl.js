@@ -32,7 +32,7 @@
     $scope.newPerson = function () {
       return $state.go('persons.new');
     };
-    
+
     $scope.viewPerson = function (person) {
       return $state.go('persons.view', { id: person.id });
     };
