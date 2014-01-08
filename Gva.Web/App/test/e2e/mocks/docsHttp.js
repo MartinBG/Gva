@@ -33,6 +33,19 @@
           }
 
           return [200, doc];
+        })
+       .when('POST', '/api/docs/:docId',
+        function ($params, $jsonData, $filter) {
+          var docId = parseInt($params.docId, 10),
+            docIndex = docs.indexOf($filter('filter')(docs, { docId: docId })[0]);
+
+          if (docIndex === -1) {
+            return [400];
+          }
+
+          docs[docIndex] = $jsonData;
+
+          return [200];
         });
   });
 }(angular));

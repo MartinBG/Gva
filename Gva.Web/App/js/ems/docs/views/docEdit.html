@@ -1,97 +1,97 @@
 ﻿<div class="container page-content">
-  <!--<div class="form-inline">-->
-  <div class="panel panel-default">
 
-    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+  <ng-form class="form-inline" name="editDocForm">
 
-      <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
-        <ul class="nav navbar-nav">
-          <li ng-show="!inEditMode" class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-plus"></i>
-              <span>Подчинен</span><b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Документ</a>
-              </li>
-              <li>
-                <a href="#">Резолюция</a>
-              </li>
-              <li>
-                <a href="#">Задача</a>
-              </li>
-              <li>
-                <a href="#">Забележка</a>
-              </li>
-            </ul>
-          </li>
-          <li ng-show="!inEditMode">
-            <a ng-click="enterEditMode()">
-              <i class="glyphicon glyphicon-edit"></i><span>&nbsp;Редакция</span>
-            </a>
-          </li>
-          <li ng-show="inEditMode">
-            <a>
-              <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Запис</span>
-            </a>
-          </li>
-          <li ng-show="inEditMode">
-            <a ng-click="exitEditMode()">
-              <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
-            </a>
-          </li>
+      <div class="panel panel-default">
 
-          <li ng-show="!inEditMode" class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-tag"></i>
-              <span>Управление</span><b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Отбелязване като изготвен</a>
-              </li>
-              <li>
-                <a href="#">...</a>
-              </li>
-            </ul>
-          </li>
-          <li ng-show="!inEditMode" class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-              <span>Етапи</span><b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#">Приключване</a>
-              </li>
-              <li>
-                <a href="#">Следващ</a>
-              </li>
-              <li>
-                <a href="#">Техн. редакция</a>
-              </li>
-              <li>
-                <a href="#">Сторниране</a>
-              </li>
-            </ul>
-          </li>
+      <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
 
-        </ul>
-      </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
+          <ul class="nav navbar-nav">
+            <li ng-show="!inEditMode" class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Подчинен</span><b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Документ</a>
+                </li>
+                <li>
+                  <a href="#">Резолюция</a>
+                </li>
+                <li>
+                  <a href="#">Задача</a>
+                </li>
+                <li>
+                  <a href="#">Забележка</a>
+                </li>
+              </ul>
+            </li>
+            <li ng-show="!inEditMode">
+              <a sc-click="enterEditMode()" style="cursor: pointer;">
+                <i class="glyphicon glyphicon-edit"></i><span>&nbsp;Редакция</span>
+              </a>
+            </li>
+            <li ng-show="inEditMode">
+              <a sc-click="save()" style="cursor: pointer;">
+                <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Запис</span>
+              </a>
+            </li>
+            <li ng-show="inEditMode">
+              <a sc-click="exitEditMode()" style="cursor: pointer;">
+                <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
+              </a>
+            </li>
+
+            <li ng-show="!inEditMode" class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-tag"></i>
+                <span>Управление</span><b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Отбелязване като изготвен</a>
+                </li>
+                <li>
+                  <a href="#">...</a>
+                </li>
+              </ul>
+            </li>
+            <li ng-show="!inEditMode" class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                <span>Етапи</span><b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Приключване</a>
+                </li>
+                <li>
+                  <a href="#">Следващ</a>
+                </li>
+                <li>
+                  <a href="#">Техн. редакция</a>
+                </li>
+                <li>
+                  <a href="#">Сторниране</a>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
 
 
     <div class="well-sm panel-body form-body">
-
-      <form class="form-horizontal" novalidate>
 
         <div class="row">
           <div class="col-md-3">
@@ -131,22 +131,23 @@
           </div>
         </div>
 
-      </form>
+        <br />
 
-      <br />
+        <gva-tabs tab-list="{
+        'Адресати': 'docs/edit/addressing',
+        'Прикачени файлове': 'docs/edit/content',
+        'Управление': 'docs/edit/workflows',
+        'Етапи': 'docs/edit/stages',
+        'Преписка': 'docs/edit/case',
+        'Класификация': 'docs/edit/classifications'
+        }"></gva-tabs>
 
-      <gva-tabs tab-list="{
-      'Адресати': 'doc.addressing',
-      'Прикачени файлове': 'doc.content',
-      'Управление': 'doc.workflows',
-      'Етапи': 'doc.stages',
-      'Преписка': 'doc.case',
-      'Класификация': 'doc.classifications'
-      }"></gva-tabs>
+        <div ui-view="detailView">
+        </div>
 
-      <div ui-view="detailView">
       </div>
-  </div>
+    </ng-form>
 
-  <!--</div>-->
+
+
 </div>

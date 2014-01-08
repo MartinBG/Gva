@@ -10,19 +10,12 @@
     $stateParams,
     Doc
   ) {
+    //$scope.doc = Doc.get({ docId: $stateParams.docId });
 
-    if ($stateParams.docId) {
-      $scope.isEdit = true;
-      $scope.doc = Doc.get({ docId: $stateParams.docId });
-    } else {
-      $scope.isEdit = false;
+    Doc.get({ docId: $stateParams.docId }).$promise.then(function (doc) {
+      $scope.doc = doc;
+    });
 
-      //Corr.create().$promise
-      //  .then(function (result) {
-      //    $scope.corr = result;
-      //  });
-
-    }
 
     $scope.inEditMode = false;
 
@@ -32,6 +25,17 @@
 
     $scope.exitEditMode = function () {
       $scope.inEditMode = false;
+    };
+
+    $scope.save = function () {
+
+      if ($scope.editDocForm.$valid) {
+        return Doc
+          .save($stateParams, $scope.doc).$promise
+          .then(function () {
+            return $state.go('docs/edit', { docId: $stateParams.docId });
+          });
+      }
     };
 
   }

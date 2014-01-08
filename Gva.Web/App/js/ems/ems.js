@@ -20,7 +20,7 @@
         'abstract': true
       })
       .state({
-        name: 'docs.search',
+        name: 'docs/search',
         parent: 'docs',
         url: '',
         views: {
@@ -31,7 +31,7 @@
         }
       })
       .state({
-        name: 'doc.edit',
+        name: 'docs/edit',
         title: 'Редакция',
         parent: 'docs',
         url: '/:docId',
@@ -43,77 +43,77 @@
         }
       })
       .state({
-        name: 'doc.addressing',
+        name: 'docs/edit/addressing',
         title: 'Адресати',
-        parent: 'doc.edit',
+        parent: 'docs/edit',
         url: '/addresses',
         views: {
-          'detailView@doc.edit': {
+          'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docAddressing.html',
             controller: 'DocAddressingCtrl'
           }
         }
       })
       .state({
-        name: 'doc.content',
+        name: 'docs/edit/content',
         title: 'Прикачени файлове',
-        parent: 'doc.edit',
+        parent: 'docs/edit',
         url: '/content',
         views: {
-          'detailView@doc.edit': {
+          'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docContent.html',
             controller: 'DocContentCtrl'
           }
         }
       })
       .state({
-        name: 'doc.workflows',
+        name: 'docs/edit/workflows',
         title: 'Управление',
-        parent: 'doc.edit',
+        parent: 'docs/edit',
         url: '/workflows',
         views: {
-          'detailView@doc.edit': {
+          'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docWorkflows.html',
             controller: 'DocWorkflowsCtrl'
           }
         }
       })
-    .state({
-      name: 'doc.stages',
-      title: 'Етапи',
-      parent: 'doc.edit',
-      url: '/stages',
-      views: {
-        'detailView@doc.edit': {
-          templateUrl: 'ems/docs/views/docStages.html',
-          controller: 'DocStagesCtrl'
+      .state({
+        name: 'docs/edit/stages',
+        title: 'Етапи',
+        parent: 'docs/edit',
+        url: '/stages',
+        views: {
+          'detailView@docs/edit': {
+            templateUrl: 'ems/docs/views/docStages.html',
+            controller: 'DocStagesCtrl'
+          }
         }
-      }
-    })
-    .state({
-      name: 'doc.case',
-      title: 'Преписка',
-      parent: 'doc.edit',
-      url: '/case',
-      views: {
-        'detailView@doc.edit': {
-          templateUrl: 'ems/docs/views/docCase.html',
-          controller: 'DocCaseCtrl'
+      })
+      .state({
+        name: 'docs/edit/case',
+        title: 'Преписка',
+        parent: 'docs/edit',
+        url: '/case',
+        views: {
+          'detailView@docs/edit': {
+            templateUrl: 'ems/docs/views/docCase.html',
+            controller: 'DocCaseCtrl'
+          }
         }
-      }
-    })
-    .state({
-      name: 'doc.classifications',
-      title: 'Класификация',
-      parent: 'doc.edit',
-      url: '/classifications',
-      views: {
-        'detailView@doc.edit': {
-          templateUrl: 'ems/docs/views/docClassifications.html',
-          controller: 'DocClassificationsCtrl'
+      })
+      .state({
+        name: 'docs/edit/classifications',
+        title: 'Класификация',
+        parent: 'docs/edit',
+        url: '/classifications',
+        views: {
+          'detailView@docs/edit': {
+            templateUrl: 'ems/docs/views/docClassifications.html',
+            controller: 'DocClassificationsCtrl'
+          }
         }
-      }
-    });
+      });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -124,7 +124,7 @@
         'abstract': true
       })
       .state({
-        name: 'corrs.search',
+        name: 'corrs/search',
         parent: 'corrs',
         url: '',
         views: {
@@ -135,7 +135,7 @@
         }
       })
       .state({
-        name: 'corrs.new',
+        name: 'corrs/new',
         title: 'Нов кореспондент',
         parent: 'corrs',
         url: '/new',
@@ -147,7 +147,7 @@
         }
       })
       .state({
-        name: 'corrs.edit',
+        name: 'corrs/edit',
         title: 'Редакция',
         parent: 'corrs',
         url: '/:corrId',
