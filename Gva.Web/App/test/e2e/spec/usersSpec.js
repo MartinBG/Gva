@@ -1,95 +1,57 @@
-/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
 
   'use strict';
   
   describe('Users search page', function() {
     var ptor = protractor.getInstance(),
-        searchBtn,
-        addBtn;
+        Page = require('../pageObjects/usersPO'),
+        usersPage;
 
     beforeEach(function() {
       ptor.get('#/users');
-
-      searchBtn = ptor.findElement(protractor.By.css('div[action=\'search()\'] > button'));
-      addBtn = ptor.findElement(protractor.By.css('div[action=add] button'));
+      usersPage = new Page(ptor);
     });
 
     it('should display all users', function() {
-      ptor
-        .findElements(protractor.By.datatable('users').column('username'))
-        .then(function (elements) {
-          var usernamesPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(usernamesPromise).toEqual(['admin', 'peter', 'georgi', 'test1']);
-        });
+      expect(usersPage.datatable.getColumns('username', 'fullname', 'roles', 'isActive')).toEqual([
+        [ 'admin', 'Administrator', 'Role1, Role2', 'Да' ],
+        [ 'peter', 'Peter Ivanov', 'Role1, Role2', 'Да' ],
+        [ 'georgi', 'Georgi Petrov', 'Role1, Role2', 'Да' ],
+        [ 'test1', 'iztrit', 'Role1, Role2', 'Не' ]
+      ]);
     });
 
     it('should search by username', function() {
-      ptor.findElement(protractor.By.css('div[name=username] > input')).sendKeys('peter');
+      usersPage.searchForm.setField('username', 'peter');
+      usersPage.searchForm.clickButton('search');
 
-      searchBtn.click().then(function() {
-        var firstUsername = ptor.findElement(
-          protractor.By.datatable('users').row(1).column('username'));
-        expect(firstUsername.getText()).toEqual('peter');
-      });
+      usersPage = new Page(ptor);
+      expect(usersPage.datatable.getColumn('username')).toEqual(['peter']);
     });
 
     it('should search by fullname', function() {
-      addBtn.click().then(function () {
-        ptor.findElements(protractor.By.css('div[action=add] li')).then(function (filters) {
-          filters[0].click().then(function () {
-            ptor.findElement(protractor.By.css('div[name=fullname] > input'))
-              .sendKeys('Administrator');
+      usersPage.searchForm.addFilter('fullname');
+      usersPage.searchForm.setField('fullname', 'Administrator');
+      usersPage.searchForm.clickButton('search');
 
-            searchBtn.click().then(function() {
-              var firstFullname = ptor.findElement(
-                protractor.By.datatable('users').row(1).column('fullname'));
-              expect(firstFullname.getText()).toEqual('Administrator');
-            });
-          });
-        });
-      });
+      usersPage = new Page(ptor);
+      expect(usersPage.datatable.getColumn('fullname')).toEqual(['Administrator']);
     });
 
     it('should search by isActive', function() {
-      addBtn.click().then(function () {
-        ptor.findElements(protractor.By.css('div[action=add] li')).then(function (filters) {
-          filters[1].click().then(function () {
-            ptor.findElement(protractor.By.className('select2-container'))
-                .click().then( function () {
-              ptor.findElements(protractor.By.className('select2-result'))
-                  .then(function (select2Opts) {
-                select2Opts[0].click();
-              });
+      usersPage.searchForm.addFilter('showActive');
+      usersPage.searchForm.setField('showActive', 1);
+      usersPage.searchForm.clickButton('search');
 
-              ptor.findElement(protractor.By.css('div[action=\'search()\'] > button')).click()
-                  .then(function() {
-                var firstFullname = ptor.findElement(
-                  protractor.By.datatable('users').row(1).column('fullname'));
-                expect(firstFullname.getText()).toEqual('Administrator');
-              });
-            });
+      usersPage = new Page(ptor);
+      expect(usersPage.datatable.getColumn('isActive')).toEqual(['Да', 'Да', 'Да']);
 
-            ptor.findElement(protractor.By.className('select2-container'))
-                .click().then( function () {
-              ptor.findElements(protractor.By.className('select2-result'))
-                  .then(function (select2Opts) {
-                select2Opts[1].click();
-              });
+      usersPage.searchForm.setField('showActive', 2);
+      usersPage.searchForm.clickButton('search');
 
-              ptor.findElement(protractor.By.css('div[action=\'search()\'] > button')).click()
-                  .then(function() {
-                var firstFullname = ptor.findElement(
-                  protractor.By.datatable('users').row(1).column('fullname'));
-                expect(firstFullname.getText()).toEqual('iztrit');
-              });
-            });
-          });
-        });
-      });
+      usersPage = new Page(ptor);
+      expect(usersPage.datatable.getColumn('isActive')).toEqual(['Не']);
     });
   });
-} (protractor, describe, beforeEach, it, expect));
+} (protractor, describe, beforeEach, it, expect, require));

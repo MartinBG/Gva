@@ -1,94 +1,67 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('New user page', function () {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+        Page = require('../pageObjects/newUserPO'),
+        newUserPage;
 
     beforeEach(function () {
       ptor.get('#/users/new');
+      newUserPage = new Page(ptor);
     });
 
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText().then(function (text) {
-            expect(text).toEqual('Нов потребител');
-          });
+      expect(newUserPage.breadcrumb.getText()).toEqual('Нов потребител');
     });
 
     it('should validate username', function () {
-      var usernameElem = ptor.findElement(protractor.By.input('user.username')),
-          usernameExistsElem = ptor.findElement(protractor.By.id('usernameExists')),
-          usernameInvalidElem = ptor.findElement(protractor.By.id('usernameInvalid')),
-          saveBtnElem = ptor.findElement(protractor.By.id('saveBtn'));
-      
-      saveBtnElem.click().then(function () {
-        expect(usernameExistsElem.isDisplayed()).toBe(false);
-        expect(usernameInvalidElem.isDisplayed()).toBe(true);
-      });
-      
-      usernameElem.sendKeys('123');
-      saveBtnElem.click().then(function () {
-        expect(usernameExistsElem.isDisplayed()).toBe(false);
-        expect(usernameInvalidElem.isDisplayed()).toBe(true);
-      });
+      newUserPage.save();
+      expect(newUserPage.usernameExistsError.isDisplayed()).toBe(false);
+      expect(newUserPage.usernameInvalidError.isDisplayed()).toBe(true);
 
-      usernameElem.clear();
-      usernameElem.sendKeys('georgi');
-      saveBtnElem.click().then(function () {
-        expect(usernameExistsElem.isDisplayed()).toBe(true);
-        expect(usernameInvalidElem.isDisplayed()).toBe(false);
-      });
+      newUserPage.username.set('123');
+      newUserPage.save();
+      expect(newUserPage.usernameExistsError.isDisplayed()).toBe(false);
+      expect(newUserPage.usernameInvalidError.isDisplayed()).toBe(true);
+
+      newUserPage.username.set('georgi');
+      newUserPage.save();
+      expect(newUserPage.usernameExistsError.isDisplayed()).toBe(true);
+      expect(newUserPage.usernameInvalidError.isDisplayed()).toBe(false);
     });
 
     it('should validate password', function () {
-      var passwordElem = ptor.findElement(protractor.By.input('password')),
-          passInvalidElem = ptor.findElement(protractor.By.id('passInvalid')),
-          confirmPassElem = ptor.findElement(protractor.By.input('confirmPassword')),
-          confirmPassInvalidElem = ptor.findElement(protractor.By.id('confirmPassInvalid')),
-          saveBtnElem = ptor.findElement(protractor.By.id('saveBtn'));
+      newUserPage.hasPassword.click();
+      newUserPage.save();
+      expect(newUserPage.passInvalidError.isDisplayed()).toBe(true);
 
-      ptor.findElement(protractor.By.input('setPassword')).click();
-      
-      saveBtnElem.click().then(function () {
-        expect(passInvalidElem.isDisplayed()).toBe(true);
-      });
-      
-      passwordElem.sendKeys('1234567');
-      saveBtnElem.click().then(function () {
-        expect(passInvalidElem.isDisplayed()).toBe(true);
-      });
+      newUserPage.password.sendKeys('1234567');
+      newUserPage.save();
+      expect(newUserPage.passInvalidError.isDisplayed()).toBe(true);
 
-      passwordElem.sendKeys('8');
-      saveBtnElem.click().then(function () {
-        expect(passInvalidElem.isDisplayed()).toBe(false);
-        expect(confirmPassInvalidElem.isDisplayed()).toBe(true);
-      });
+      newUserPage.password.sendKeys('8');
+      newUserPage.save();
+      expect(newUserPage.passInvalidError.isDisplayed()).toBe(false);
+      expect(newUserPage.confirmPassInvalidError.isDisplayed()).toBe(true);
 
-      confirmPassElem.sendKeys('12345678');
-      saveBtnElem.click().then(function () {
-        expect(passInvalidElem.isDisplayed()).toBe(false);
-        expect(confirmPassInvalidElem.isDisplayed()).toBe(false);
-      });
+      newUserPage.confirmPassword.sendKeys('12345678');
+      newUserPage.save();
+      expect(newUserPage.passInvalidError.isDisplayed()).toBe(false);
+      expect(newUserPage.confirmPassInvalidError.isDisplayed()).toBe(false);
     });
 
     it('should be able to create new user', function () {
-      ptor.findElement(protractor.By.input('user.username')).sendKeys('atanas');
+      newUserPage.username.set('atanas');
+      newUserPage.fullname.set('Atanas Spasov');
+      newUserPage.hasPassword.click();
+      newUserPage.password.sendKeys('12345678');
+      newUserPage.confirmPassword.sendKeys('12345678');
+      newUserPage.isActive.click();
 
-      ptor.findElement(protractor.By.input('user.fullname')).sendKeys('Atanas Spasov');
-
-      ptor.findElement(protractor.By.input('setPassword')).click();
-      ptor.findElement(protractor.By.input('password')).sendKeys('12345678');
-      ptor.findElement(protractor.By.input('confirmPassword')).sendKeys('12345678');
-      
-      ptor.findElement(protractor.By.input('user.isActive')).click();
-      
-      ptor.findElement(protractor.By.id('saveBtn')).click().then(function () {
-        ptor.getCurrentUrl().then(function (url) {
-          expect(url).toEqual('http://localhost:52560/#/users');
-        });
-      });
+      newUserPage.save();
+      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/users');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));
