@@ -37,6 +37,15 @@
        { nomTypeValueId: 2, code: '', name: 'По куриер', nameAlt: '', alias: '' }
     ],
 
+    //Номенклатура Статуси на документ
+    docStatuses: [
+      { nomTypeValueId: 1, code: '', name: 'Чернова', nameAlt: '', alias: 'Draft' },
+      { nomTypeValueId: 2, code: '', name: 'Изготвен', nameAlt: '', alias: 'Prepared' },
+      { nomTypeValueId: 3, code: '', name: 'Обработен', nameAlt: '', alias: 'Processed' },
+      { nomTypeValueId: 4, code: '', name: 'Приключен', nameAlt: '', alias: 'Finished' },
+      { nomTypeValueId: 5, code: '', name: 'Отхвърлен', nameAlt: '', alias: 'Canceled' }
+    ],
+
     docSubjects: [
       { nomTypeValueId: 1, code: '', name: 'Подадено заявление', nameAlt: '', alias: '' },
       { nomTypeValueId: 2, code: '', name: 'Резолюция', nameAlt: '', alias: '' },

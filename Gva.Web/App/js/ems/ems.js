@@ -15,7 +15,7 @@
       .state({
         name: 'docs',
         title: 'Документи',
-        url: '/docs',
+        url: '/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units',
         parent: 'root',
         'abstract': true
       })

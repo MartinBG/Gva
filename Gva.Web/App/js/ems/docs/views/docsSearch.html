@@ -4,14 +4,15 @@
     <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="docs.search.fromDate"></sc-filter>
     <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="docs.search.toDate"></sc-filter>
 
-    <!--<sc-filter type="text" name="names" class="col-sm-3" removable="true" label="persons.search.names"></sc-filter>
-    <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
-    <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
-    <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
-
-    <sc-button action="newPerson()" text="persons.search.new" icon="glyphicon-user"></sc-button>-->
+    <sc-filter type="text" name="regUri" class="col-sm-3" removable="false" label="docs.search.regUri"></sc-filter>
+    <sc-filter type="text" name="docName" class="col-sm-3" removable="false" label="docs.search.docName"></sc-filter>
+    <sc-filter type="int" name="docTypeId" class="col-sm-3" removable="false" label="docs.search.docTypeId">
+    </sc-filter>
+    <sc-filter type="int" name="docStatusId" class="col-sm-3" removable="false" label="docs.search.docStatusId">
+    </sc-filter>
+    <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
+    <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
     <sc-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-button>
-    <!--<sc-button action="add"></sc-button>-->
   </sc-search>
 
   <sc-datatable ng-model="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">

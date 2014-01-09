@@ -1,5 +1,5 @@
-﻿/*global angular, require*/
-(function (angular) {
+﻿/*global angular, require, _*/
+(function (angular, _) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     var nomenclatures = require('./nomenclatures.sample'),
@@ -470,11 +470,27 @@
       nextDocId = 3;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/docs?fromDate&toDate',
-        function () { //$params, $filter
-          var t = nomenclatures.get('countries', 'Belgium');
+      .when('GET', '/api/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units',
+        function ($params) {
+          var t = nomenclatures.get('countries', 'Belgium'),
+            result = _(docs).filter(function (d) {
+              var isMatch = true;
+
+
+              if (d || $params) {
+                return true;
+              }
+              else {
+                return false;
+              }
+
+              return isMatch;
+            })
+          .value();
+
           t = undefined;
-          return [200, docs];
+
+          return [200, result];
         })
       .when('GET', '/api/docs/new',
         function () {
@@ -517,9 +533,8 @@
           return [200];
         })
       .when('GET', '/api/docs/:docId',
-        function ($params, $filter) {
-          var docId = parseInt($params.docId, 10),
-            doc = $filter('filter')(docs, { docId: docId })[0];
+        function ($params) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
           if (!doc) {
             return [400];
@@ -541,4 +556,4 @@
           return [200];
         });
   });
-}(angular));
+}(angular, _));

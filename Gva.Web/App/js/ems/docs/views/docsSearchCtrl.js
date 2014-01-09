@@ -5,7 +5,13 @@
   function DocsSearchCtrl($scope, $state, $stateParams, Doc) {
     $scope.filters = {
       fromDate: null,
-      toDate: null
+      toDate: null,
+      regUri: null,
+      docName: null,
+      docTypeId: null,
+      docStatusId: null,
+      corrs: null,
+      units: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -21,11 +27,13 @@
     $scope.search = function () {
       $state.go('docs/search', {
         fromDate: $scope.filters.fromDate,
-        toDate: $scope.filters.toDate
-        //names: $scope.filters.names,
-        //licences: $scope.filters.licences,
-        //ratings: $scope.filters.ratings,
-        //organization: $scope.filters.organization
+        toDate: $scope.filters.toDate,
+        regUri: $scope.filters.regUri,
+        docName: $scope.filters.docName,
+        docTypeId: $scope.filters.docTypeId,
+        docStatusId: $scope.filters.docStatusId,
+        corrs: $scope.filters.corrs,
+        units: $scope.filters.units
       });
     };
 
