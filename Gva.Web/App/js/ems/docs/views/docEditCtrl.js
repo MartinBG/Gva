@@ -19,6 +19,15 @@
 
     $scope.inEditMode = false;
 
+    $scope.markAsRead = function () {
+      $scope.doc.isRead = true;
+    };
+
+    $scope.markAsUnread = function () {
+      //todo call to backend and set DocUser.HasRead flags
+      $scope.doc.isRead = false;
+    };
+
     $scope.enterEditMode = function () {
       $scope.inEditMode = true;
     };
@@ -33,7 +42,9 @@
         return Doc
           .save($stateParams, $scope.doc).$promise
           .then(function () {
-            return $state.go('docs/edit', { docId: $stateParams.docId });
+            //todo refresh state ! $state.go('docs/edit', { docId: $stateParams.docId });
+            $scope.inEditMode = false;
+            return true;
           });
       }
     };

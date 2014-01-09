@@ -22,11 +22,25 @@
       })[0];
     },
 
+    assignmentTypes: [
+     { nomTypeValueId: 1, code: '', name: 'Със срок', nameAlt: '', alias: '' },
+     { nomTypeValueId: 2, code: '', name: 'Без срок', nameAlt: '', alias: '' }
+    ],
+
+    docSourceTypes: [
+      { nomTypeValueId: 1, code: '', name: 'Интернет', nameAlt: '', alias: '' },
+      { nomTypeValueId: 2, code: '', name: 'Подадено на гише', nameAlt: '', alias: '' }
+    ],
+
+    docDestinationTypes: [
+       { nomTypeValueId: 1, code: '', name: 'Имейл', nameAlt: '', alias: '' },
+       { nomTypeValueId: 2, code: '', name: 'По куриер', nameAlt: '', alias: '' }
+    ],
 
     docSubjects: [
       { nomTypeValueId: 1, code: '', name: 'Подадено заявление', nameAlt: '', alias: '' },
       { nomTypeValueId: 2, code: '', name: 'Резолюция', nameAlt: '', alias: '' },
-      { nomTypeValueId: 3, code: '', name: 'Забелвжка', nameAlt: '', alias: ''},
+      { nomTypeValueId: 3, code: '', name: 'Забелвжка', nameAlt: '', alias: '' },
       { nomTypeValueId: 4, code: '', name: 'Задача', nameAlt: '', alias: '' },
       { nomTypeValueId: 5, code: '', name: 'Други', nameAlt: '', alias: '' }
     ],

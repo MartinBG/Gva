@@ -1,1 +1,210 @@
-﻿<span>AAA</span>
+﻿<div class="tab-content">
+  <div class="accordion" id="accordionDocAddressing">
+    <div class="accordion-group" style="border-top: none;">
+      <div id="collapseAddressing" class="accordion-body collapse in">
+        <div class="accordion-inner">
+          <div class="row" ng-show="doc.isVisibleRoleFrom">
+            <div class="col-md-2">
+              <span>От:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleFrom">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleTo">
+            <div class="col-md-2">
+              <span>До:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleTo">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleMadeBy">
+            <div class="col-md-2">
+              <span>Изготвил:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleMadeBy">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleImportedBy">
+            <div class="col-md-2">
+              <span>Въвел:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleImportedBy">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleCCopy">
+            <div class="col-md-2">
+              <span>Копие до:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleCCopy">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleCorrespondent">
+            <div class="col-md-2">
+              <span>Кореспонденти:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleCorrespondent">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleCorrespondent">
+            <div class="form-group col-md-3">
+              <span>Коресп. №:</span>
+              <sc-text name="corrRegNumber" ng-model="doc.corrRegNumber" ng-readonly="!inEditMode"></sc-text>
+            </div>
+
+            <div class="form-group col-md-2">
+              <span>Дата:</span>
+              <sc-date name="corrRegDate" ng-model="doc.corrRegDate" ng-readonly="!inEditMode"></sc-date>
+            </div>
+
+            <div class="form-group col-md-3" ng-show="doc.isVisibleDocSourceTypeId">
+              <span>Получено чрез:</span>
+              <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+            </div>
+
+            <div class="form-group col-md-3" ng-show="doc.isVisibleDocDestinationTypeId">
+              <span>Изпратено чрез:</span>
+              <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseAssignment">Възлагане
+        </a>
+      </div>
+      <div id="collapseAssignment" class="accordion-body collapse" ng-class="{in: doc.isVisibleCollapseAssignment}">
+        <div class="accordion-inner">
+          <div class="row" ng-show="doc.isVisibleRoleInCharge">
+            <div class="col-md-2">
+              <span>Отговорник:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleInCharge">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleControlling">
+            <div class="col-md-2">
+              <span>Контролиращ:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleControlling">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleAssignment">
+            <div class="form-group col-md-3">
+              <span>Вид възлагане:</span>
+              <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+            </div>
+
+            <div class="form-group col-md-2">
+              <span>Дата на възлагане:</span>
+              <sc-date name="assignmentDate" ng-model="doc.assignmentDate" ng-readonly="!inEditMode"></sc-date>
+            </div>
+
+            <div class="form-group col-md-2">
+              <span>Срок до:</span>
+              <sc-date name="assignmentDeadline" ng-model="doc.assignmentDeadline" ng-readonly="!inEditMode"></sc-date>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapsePermissions">Допълнителни права
+        </a>
+      </div>
+      <div id="collapsePermissions" class="accordion-body collapse" ng-class="{in: doc.isVisibleCollapsePermissions}">
+        <div class="accordion-inner">
+          <div class="row" ng-show="doc.isVisibleRoleReaders">
+            <div class="col-md-2">
+              <span>Читатели:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleReaders">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleEditors">
+            <div class="col-md-2">
+              <span>Редактори:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleEditors">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+
+          <div class="row" ng-show="doc.isVisibleRoleRegistrators">
+            <div class="col-md-2">
+              <span>Регистратори:</span>
+            </div>
+          </div>
+          <div class="row" ng-show="doc.isVisibleRoleRegistrators">
+            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+              <sc-text ng-disabled="!inEditMode"></sc-text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseAccessCode">Код за достъп
+        </a>
+      </div>
+      <div id="collapseAccessCode" class="accordion-body collapse in">
+        <div class="accordion-inner">
+          <div class="row">
+            <div class="form-group col-md-3">
+              <span>Код за достъп:</span>
+              <sc-text name="accessCode" ng-model="doc.accessCode" readonly></sc-text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
