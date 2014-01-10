@@ -27,12 +27,12 @@
         assignmentDate: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         assignmentDeadline: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         accessCode: '56DY77ICXP',
-        caseRegUri : undefined,
-        docFormatTypeId : 1,
-        docCasePartTypeId : 1,
-        docTypeGroupId : 1,
-        docCorrespondents : [],
-        numberOfDocuments : undefined,
+        caseRegUri: undefined,
+        docFormatTypeId: 1,
+        docCasePartTypeId: 1,
+        docTypeGroupId: 1,
+        docCorrespondents: [],
+        numberOfDocuments: undefined,
         isVisibleRoleFrom: true,
         isVisibleRoleTo: false,
         isVisibleRoleImportedBy: true,
@@ -49,7 +49,26 @@
         isVisibleRoleRegistrators: true,
         isVisibleCollapseAssignment: false,
         isVisibleCollapsePermissions: false,
-        isRead: false
+        isRead: false,
+        docBody: '',
+        privateDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за прайвит док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ],
+        publicDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за публик док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ]
       }, {
         docId: 2,
         docStatusId: 2,
@@ -73,12 +92,12 @@
         assignmentDate: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         assignmentDeadline: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         accessCode: '56DY77ICXP',
-        caseRegUri : undefined,
-        docFormatTypeId : 1,
-        docCasePartTypeId : 1,
-        docTypeGroupId : 1,
-        docCorrespondents : [],
-        numberOfDocuments : undefined,
+        caseRegUri: undefined,
+        docFormatTypeId: 1,
+        docCasePartTypeId: 1,
+        docTypeGroupId: 1,
+        docCorrespondents: [],
+        numberOfDocuments: undefined,
         isVisibleRoleFrom: true,
         isVisibleRoleTo: false,
         isVisibleRoleImportedBy: true,
@@ -119,12 +138,12 @@
         assignmentDate: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         assignmentDeadline: new Date(today.getTime() + (48 * 60 * 60 * 1000)),
         accessCode: '56DY77ICXP',
-        caseRegUri : undefined,
-        docFormatTypeId : 1,
-        docCasePartTypeId : 1,
-        docTypeGroupId : 1,
-        docCorrespondents : [],
-        numberOfDocuments : undefined,
+        caseRegUri: undefined,
+        docFormatTypeId: 1,
+        docCasePartTypeId: 1,
+        docTypeGroupId: 1,
+        docCorrespondents: [],
+        numberOfDocuments: undefined,
         isVisibleRoleFrom: true,
         isVisibleRoleTo: false,
         isVisibleRoleImportedBy: true,
@@ -169,12 +188,12 @@
             regIndex: undefined,
             regNumber: undefined,
             correspondentName: undefined,
-            caseRegUri : undefined,//
-            docFormatTypeId : undefined,
-            docCasePartTypeId : undefined,
-            docTypeGroupId : undefined,//
-            docCorrespondents : [],//
-            numberOfDocuments : undefined//
+            caseRegUri: undefined,//
+            docFormatTypeId: undefined,
+            docCasePartTypeId: undefined,
+            docTypeGroupId: undefined,//
+            docCorrespondents: [],//
+            numberOfDocuments: undefined//
           };
 
           return [200, newDoc];
@@ -187,7 +206,7 @@
           }
 
           $jsonData.docId = ++nextDocId;
-          $jsonData.regUri = '000030-'+$jsonData.docId+'-05.01.2014';
+          $jsonData.regUri = '000030-' + $jsonData.docId + '-05.01.2014';
           docs.push($jsonData);
 
           return [200];

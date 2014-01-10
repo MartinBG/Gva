@@ -36,6 +36,17 @@
       $scope.inEditMode = false;
     };
 
+    $scope.viewFile = function () {
+    };
+    $scope.editFile = function () {
+    };
+    $scope.detachFile = function () {
+    };
+    $scope.attachPrivateFile = function () {
+    };
+    $scope.createPrivateFile = function () {
+    };
+
     $scope.save = function () {
 
       if ($scope.editDocForm.$valid) {
