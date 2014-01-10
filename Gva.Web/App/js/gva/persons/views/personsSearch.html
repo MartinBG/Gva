@@ -28,8 +28,8 @@
     </sc-column>
     <sc-column data="organization" title="persons.search.organization">
     </sc-column>
-    <sc-column sortable="false">
-      <button type="button" class="btn-xs btn-info" ng-click="viewPerson(item)" l10n-text="persons.search.view"></button>
+    <sc-column sortable="false" width="115px">
+      <gva-button name="viewButton" gva-click="viewPerson(item)" text="persons.search.view" class="btn-xs btn-info" icon="glyphicon-file"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

@@ -8,11 +8,8 @@
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <button name="saveBtn" sc-click="save()" type="button" class="btn btn-primary" ng-disabled="newPersonForm.$invalid">
-          <span class="glyphicon" ng-class="{'glyphicon-loading':saveBtn.$pending, 'glyphicon-floppy-disk': !saveBtn.$pending}"></span>
-          <span l10n-text="persons.newPerson.save"></span>
-        </button>
-        <button name="cancelBtn" type="button" ng-click="cancel()" class="btn btn-default" l10n-text="persons.newPerson.cancel">
+        <gva-button name="saveBtn" gva-click="save()" text="persons.newPerson.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newPersonForm.$invalid"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newPerson.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
         </button>
       </div>
     </div>

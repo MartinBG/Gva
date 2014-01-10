@@ -17,6 +17,10 @@
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
     };
+
+    $scope.newAddress = function () {
+      return $state.go('persons.addresses.new');
+    };
   }
 
   AddressesSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonAddress'];
