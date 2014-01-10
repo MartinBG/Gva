@@ -89,7 +89,9 @@ module.exports = function (grunt) {
         'test/gva/persons/mocks/*.js',
         'test/ems/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
-        'test/scaffolding/testbeds/*.js'
+        'test/scaffolding/testbeds/*.js',
+        'test/gva/directives/testbeds/states.js',
+        'test/gva/directives/testbeds/*.js'
       ]
     },
     cssBundles: {
@@ -179,7 +181,7 @@ module.exports = function (grunt) {
         module: 'common.templates'
       },
       gva: {
-        src: ['js/gva/**/*.html'],
+        src: ['js/gva/**/*.html', 'test/gva/**/*.html'],
         dest: '<%= buildDir %>/templates/gva.js',
         module: 'gva.templates'
       },
