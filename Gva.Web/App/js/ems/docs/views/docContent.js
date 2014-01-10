@@ -4,41 +4,33 @@
 
   function DocContentCtrl(
     //$q,
-    //$scope,
+    $scope
     //$filter,
     //$state,
     //$stateParams,
     //Doc
   ) {
 
-    //if ($stateParams.docId) {
-    //  $scope.isEdit = true;
-    //  $scope.doc = Doc.get({ docId: $stateParams.docId });
-    //} else {
-    //  $scope.isEdit = false;
+    $scope.viewFile = function () {
+    };
 
-    //  //Corr.create().$promise
-    //  //  .then(function (result) {
-    //  //    $scope.corr = result;
-    //  //  });
+    $scope.editFile = function () {
+    };
 
-    //}
+    $scope.detachFile = function () {
+    };
 
-    //$scope.inEditMode = false;
+    $scope.attachPrivateFile = function () {
+    };
 
-    //$scope.enterEditMode = function () {
-    //  $scope.inEditMode = true;
-    //};
-
-    //$scope.exitEditMode = function () {
-    //  $scope.inEditMode = false;
-    //};
+    $scope.createPrivateFile = function () {
+    };
 
   }
 
   DocContentCtrl.$inject = [
     //'$q',
-    //'$scope',
+    '$scope'
     //'$filter',
     //'$state',
     //'$stateParams',

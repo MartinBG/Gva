@@ -16,7 +16,6 @@
       $scope.doc = doc;
     });
 
-
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
@@ -36,21 +35,7 @@
       $scope.inEditMode = false;
     };
 
-    $scope.viewFile = function () {
-    };
-    $scope.editFile = function () {
-    };
-    $scope.detachFile = function () {
-    };
-    $scope.attachPrivateFile = function () {
-    };
-    $scope.createPrivateFile = function () {
-    };
-    $scope.removeDocWorkflow = function () {
-    };
-
     $scope.save = function () {
-
       if ($scope.editDocForm.$valid) {
         return Doc
           .save($stateParams, $scope.doc).$promise

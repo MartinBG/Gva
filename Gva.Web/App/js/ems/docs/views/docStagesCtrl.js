@@ -3,46 +3,15 @@
   'use strict';
 
   function DocStagesCtrl(
-    //$q,
-    //$scope,
-    //$filter,
-    //$state,
-    //$stateParams,
-    //Doc
+    $scope
   ) {
 
-    //if ($stateParams.docId) {
-    //  $scope.isEdit = true;
-    //  $scope.doc = Doc.get({ docId: $stateParams.docId });
-    //} else {
-    //  $scope.isEdit = false;
-
-    //  //Corr.create().$promise
-    //  //  .then(function (result) {
-    //  //    $scope.corr = result;
-    //  //  });
-
-    //}
-
-    //$scope.inEditMode = false;
-
-    //$scope.enterEditMode = function () {
-    //  $scope.inEditMode = true;
-    //};
-
-    //$scope.exitEditMode = function () {
-    //  $scope.inEditMode = false;
-    //};
+    $scope.blabla = '<b>asdf</b>';
 
   }
 
   DocStagesCtrl.$inject = [
-    //'$q',
-    //'$scope',
-    //'$filter',
-    //'$state',
-    //'$stateParams',
-    //'Doc'
+    '$scope'
   ];
 
   angular.module('ems').controller('DocStagesCtrl', DocStagesCtrl);

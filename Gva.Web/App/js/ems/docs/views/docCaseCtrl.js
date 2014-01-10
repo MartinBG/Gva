@@ -3,46 +3,19 @@
   'use strict';
 
   function DocCaseCtrl(
-    //$q,
-    //$scope,
-    //$filter,
-    //$state,
-    //$stateParams,
-    //Doc
+    $scope,
+    $state
   ) {
 
-    //if ($stateParams.docId) {
-    //  $scope.isEdit = true;
-    //  $scope.doc = Doc.get({ docId: $stateParams.docId });
-    //} else {
-    //  $scope.isEdit = false;
-
-    //  //Corr.create().$promise
-    //  //  .then(function (result) {
-    //  //    $scope.corr = result;
-    //  //  });
-
-    //}
-
-    //$scope.inEditMode = false;
-
-    //$scope.enterEditMode = function () {
-    //  $scope.inEditMode = true;
-    //};
-
-    //$scope.exitEditMode = function () {
-    //  $scope.inEditMode = false;
-    //};
+    $scope.viewDoc = function (docId) {
+      return $state.go('docs/edit/addressing', { docId: docId });
+    };
 
   }
 
   DocCaseCtrl.$inject = [
-    //'$q',
-    //'$scope',
-    //'$filter',
-    //'$state',
-    //'$stateParams',
-    //'Doc'
+    '$scope',
+    '$state'
   ];
 
   angular.module('ems').controller('DocCaseCtrl', DocCaseCtrl);

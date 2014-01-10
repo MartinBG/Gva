@@ -95,7 +95,69 @@
             note: null
           }
         ],
-        isVisibleDocWorkflows: true
+        isVisibleDocWorkflows: true,
+        docElectronicServiceStages: [
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за  административна услуга',
+            electronicServiceStageExecutors: '<b>Служител ДКХ</b>',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: false
+          },
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за отстраняване на заявителя',
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: true
+          }
+        ],
+        docRelations: [
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
+            docDocStatusName: 'Чернова',
+            descriptionCol: 'ИСКАНЕ по чл. 6 и 18 от Наредбата за документите'
+          },
+          {
+            docId: 827068,
+            isCurrent: false,
+            docDocCasePartTypeStyleColor: 'red',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Резолюция: Резолюция'
+          },
+          {
+            docId: 827068,
+            isCurrent: false,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Задача: Задача'
+          }
+        ],
+        docClassifications: [
+          {
+            classificationName: 'Всички документи',
+            classificationDate: '2014-01-08T17:21:55.387'
+          },
+          {
+            classificationName: 'Услуги',
+            classificationDate: '2014-01-08T17:21:55.387'
+
+          },
+          {
+            classificationName: 'Искане',
+            classificationDate: '2014-01-08T17:21:55.387'
+          }
+        ]
       }, {
         docId: 2,
         docStatusId: 2,
@@ -141,7 +203,115 @@
         isVisibleRoleRegistrators: true,
         isVisibleCollapseAssignment: false,
         isVisibleCollapsePermissions: false,
-        isRead: false
+        isRead: false,
+        docBody: '',
+        privateDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за прайвит док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ],
+        publicDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за публик док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ],
+        docWorkflows: [
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Подпис',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Съгласуване',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Одобрение',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          }
+        ],
+        isVisibleDocWorkflows: true,
+        docElectronicServiceStages: [
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за  административна услуга',
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: false
+          },
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за  административна услуга',
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: false
+          }
+        ],
+        docRelations: [
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
+            docDocStatusName: 'Чернова',
+            descriptionCol: 'ИСКАНЕ по чл. 6 и 18 от Наредбата за документите'
+          },
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Резолюция: Резолюция'
+          },
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Задача: Задача'
+          }
+        ],
+        docClassifications: [
+          {
+            classificationName: 'Всички документи',
+            classificationDate: '2014-01-08T17:21:55.387'
+          },
+          {
+            classificationName: 'Услуги',
+            classificationDate: '2014-01-08T17:21:55.387'
+
+          },
+          {
+            classificationName: 'Искане',
+            classificationDate: '2014-01-08T17:21:55.387'
+          }
+        ]
       }, {
         docId: 3,
         docStatusId: 3,
@@ -233,7 +403,69 @@
             note: null
           }
         ],
-        isVisibleDocWorkflows: true
+        isVisibleDocWorkflows: true,
+        docElectronicServiceStages: [
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за  административна услуга',
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: false
+          },
+          {
+            startingDate: '2014-01-08T17:21:43.303',
+            electronicServiceStageName: 'Приемане на заявление за  административна услуга',
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate: null,
+            endingDate: '2014-01-09T17:38:49.683',
+            isCurrentStage: false
+          }
+        ],
+        docRelations: [
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
+            docDocStatusName: 'Чернова',
+            descriptionCol: 'ИСКАНЕ по чл. 6 и 18 от Наредбата за документите'
+          },
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Резолюция: Резолюция'
+          },
+          {
+            docId: 827068,
+            isCurrent: true,
+            docDocCasePartTypeStyleColor: 'black',
+            docRegDate: '2014-01-08T17:22:14.58',
+            regNumberCol: 'Вътрешен | Вътрешен',
+            docDocStatusName: 'Приключен',
+            descriptionCol: 'Задача: Задача'
+          }
+        ],
+        docClassifications: [
+          {
+            classificationName: 'Всички документи',
+            classificationDate: '2014-01-08T17:21:55.387'
+          },
+          {
+            classificationName: 'Услуги',
+            classificationDate: '2014-01-08T17:21:55.387'
+
+          },
+          {
+            classificationName: 'Искане',
+            classificationDate: '2014-01-08T17:21:55.387'
+          }
+        ]
       }],
       nextDocId = 3;
 

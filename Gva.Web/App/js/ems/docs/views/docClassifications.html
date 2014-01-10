@@ -1,1 +1,29 @@
-﻿<span>FFF</span>
+﻿<div class="tab-content">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Класификационна схема</th>
+        <th>Дата</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody  ng-repeat="dc in doc.docClassifications">
+      <tr>
+        <td>{{ dc.classificationName }}</td>
+        <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td style="text-align: right;">
+          <a ng-show="inEditMode" ng-click="removeDocClassification(dc)" style="cursor: pointer;">изтрий
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td colspan="3" style="text-align: right;">
+          <a ng-show="inEditMode" ng-click="addDocClassification(dc)" style="cursor: pointer;">добави
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
