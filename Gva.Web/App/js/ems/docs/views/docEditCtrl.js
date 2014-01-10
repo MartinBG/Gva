@@ -46,6 +46,8 @@
     };
     $scope.createPrivateFile = function () {
     };
+    $scope.removeDocWorkflow = function () {
+    };
 
     $scope.save = function () {
 

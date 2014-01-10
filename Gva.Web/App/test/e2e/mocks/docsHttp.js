@@ -68,7 +68,34 @@
             docFileTypeIsEditable: false,
             isActive: true
           }
-        ]
+        ],
+        docWorkflows: [
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Подпис',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Съгласуване',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Одобрение',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          }
+        ],
+        isVisibleDocWorkflows: true
       }, {
         docId: 2,
         docStatusId: 2,
@@ -160,7 +187,53 @@
         isVisibleRoleRegistrators: true,
         isVisibleCollapseAssignment: false,
         isVisibleCollapsePermissions: false,
-        isRead: false
+        isRead: false,
+        docBody: '',
+        privateDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за прайвит док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ],
+        publicDocFiles: [
+          {
+            docFileId: 2010,
+            name: 'Файл за публик док файлс',
+            docFileTypeName: 'Неопределен',
+            docFileTypeIsEditable: false,
+            isActive: true
+          }
+        ],
+        docWorkflows: [
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Подпис',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Съгласуване',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          },
+          {
+            eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
+            docWorkflowActionName: 'Одобрение',
+            yesNo: true,
+            principalUnitName: 'admin',
+            toUnitName: '',
+            note: null
+          }
+        ],
+        isVisibleDocWorkflows: true
       }],
       nextDocId = 3;
 
