@@ -1,0 +1,101 @@
+﻿<div class="container page-content">
+  <!--<div class="form-inline">-->
+  <div class="panel panel-default">
+
+    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
+        <ul class="nav navbar-nav">
+          <li>
+            <a sc-click="save()">
+              <i class="glyphicon glyphicon-pencil"></i><span>&nbsp;Продължи</span>
+            </a>
+          </li>
+          <li>
+            <a sc-click="save()">
+              <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Регистрирай и продължи</span>
+            </a>
+          </li>
+          <li>
+            <a sc-click="cancel()">
+              <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="well-sm panel-body form-body">
+      <form name="docForm" class="form-horizontal" style="padding-left: 30px;">
+        <div class="well-sm panel-body form-body">
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
+              <sc-text ng-model="doc.caseRegUri" name="caseRegUri"></sc-text>
+            </div>
+          </div>
+
+          <div class="row">
+              <button ng-repeat="docFormatType in docFormatTypes" type="button" ng-class="docFormatType.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docFormatTypeChange($index)">{{docFormatType.name}}</button>
+          </div>
+          <br />
+          <div class="row">
+              <button ng-repeat="docCasePartType in docCasePartTypes" type="button" ng-class="docCasePartType.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docCasePartTypeChange($index)">{{docCasePartType.name}}</button>
+          </div>
+          <br />
+          <div class="row">
+              <button ng-repeat="docDirection in docDirections" type="button" ng-class="docDirection.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docDirectionChange($index)">{{docDirection.name}}</button>
+          </div>
+          <br />
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
+              <sc-nomenclature  ng-model="docTypeGroup" name="docTypeGroup" alias="'docTypeGroups'" load="true"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
+              <sc-nomenclature  ng-model="docTypes" name="docTypes" alias="'docTypes'" load="true"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
+              <sc-text ng-model="doc.docSubject" name="docSubject"></sc-text>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
+              <sc-nomenclature  ng-model="docCorrespondents" name="testCorrespondents" alias="'testCorrespondents'" load="true"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label class="control-label" l10n-text="docs.newDoc.numberOfDocuments"></label>
+              <sc-text ng-model="doc.numberOfDocuments" name="numberOfDocuments"></sc-text>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

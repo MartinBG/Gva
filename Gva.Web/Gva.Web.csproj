@@ -144,6 +144,10 @@
     <Content Include="App\js\ems\docs\views\docAddressing.html" />
     <Content Include="App\js\ems\docs\views\docsSearch.html" />
     <Content Include="App\js\ems\docs\views\docsSearchCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docNewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docNew.html" />
+    <Content Include="App\js\ems\docs\views\docSearch.html" />
+    <Content Include="App\js\ems\docs\views\docSearchCtrl.js" />
     <Content Include="App\js\ems\docs\views\docEditCtrl.js" />
     <Content Include="App\js\ems\docs\views\docEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />

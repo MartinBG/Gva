@@ -343,6 +343,139 @@
       { nomTypeValueId: 602, code: '', name: 'Airbus A318/A319/A320/A321 (CFM56)', nameAlt: 'Airbus A318/A319/A320/A321 (CFM56)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } },
       { nomTypeValueId: 603, code: '', name: 'Airbus A319/A320/A321 (IAE V2500)', nameAlt: 'Airbus A319/A320/A321 (IAE V2500)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } },
       { nomTypeValueId: 604, code: '', name: 'Airbus A319/A320/A321 (PW JT8D)', nameAlt: 'Airbus A319/A320/A321 (PW JT8D)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } }
+    ],
+
+    //Номенклатура DocFormatTypes
+    docFormatTypes: [
+      {
+        "docFormatTypeId": 1,
+        "name": "Електронен",
+        "alias": "Electronic",
+        "isActive": true,
+        "version": "AAAAAAAAIBI=",
+        "docs": []
+      },
+      {
+        "docFormatTypeId": 2,
+        "name": "Електронен с хартия",
+        "alias": "ElectronicWithPaper",
+        "isActive": false,
+        "version": "AAAAAAAAIBM=",
+        "docs": []
+      },
+      {
+        "docFormatTypeId": 3,
+        "name": "Хартиен",
+        "alias": "Paper",
+        "isActive": false,
+        "version": "AAAAAAAAIBQ=",
+        "docs": []
+      }
+    ],
+
+    //Номенклатура DocCasePartTypes
+    docCasePartTypes: [
+      {
+        "docCasePartTypeId": 1,
+        "name": "Публичен",
+        "alias": "Public",
+        "description": null,
+        "version": "AAAAAAAAHtw=",
+        "isActive": true,
+        "docCasePartMovements": [],
+        "docs": []
+      },
+      {
+        "docCasePartTypeId": 2,
+        "name": "Вътрешен",
+        "alias": "Internal",
+        "description": null,
+        "version": "AAAAAAAAHt0=",
+        "isActive": false,
+        "docCasePartMovements": [],
+        "docs": []
+      },
+      {
+        "docCasePartTypeId": 3,
+        "name": "Контролен",
+        "alias": "Control",
+        "description": null,
+        "version": "AAAAAAAAHt4=",
+        "isActive": false,
+        "docCasePartMovements": [],
+        "docs": []
+      }
+    ],
+
+    //Номенклатура DocDirections
+    docDirections: [
+      {
+        "docDirectionId": 1,
+        "name": "Входящ",
+        "alias": "Incomming",
+        "isActive": true,
+        "version": "AAAAAAAAHsg=",
+        "docTypeClassifications": [],
+        "docTypeUnitRoles": [],
+        "docs": []
+      },
+      {
+        "docDirectionId": 2,
+        "name": "Вътрешен",
+        "alias": "Internal",
+        "isActive": false,
+        "version": "AAAAAAAAHsk=",
+        "docTypeClassifications": [],
+        "docTypeUnitRoles": [],
+        "docs": []
+      },
+      {
+        "docDirectionId": 3,
+        "name": "Изходящ",
+        "alias": "Outgoing",
+        "isActive": false,
+        "version": "AAAAAAAAHso=",
+        "docTypeClassifications": [],
+        "docTypeUnitRoles": [],
+        "docs": []
+      },
+      {
+        "docDirectionId": 4,
+        "name": "Циркулярен",
+        "alias": "InternalOutgoing",
+        "isActive": false,
+        "version": "AAAAAAAAHss=",
+        "docTypeClassifications": [],
+        "docTypeUnitRoles": [],
+        "docs": []
+      }
+    ],
+
+    //Номенклатура DocTypeGroups
+    docTypeGroups: [
+      { nomTypeValueId: 1, code: '', name: 'Общи', nameAlt: '', alias: 'common' },
+      { nomTypeValueId: 2, code: '', name: 'Искане', nameAlt: '', alias: 'request' },
+      { nomTypeValueId: 3, code: '', name: 'Електронни услуги', nameAlt: '', alias: 'electronicService' },
+      { nomTypeValueId: 4, code: '', name: 'Отгвори на услуги', nameAlt: '', alias: 'serviceAnswers' },
+      { nomTypeValueId: 5, code: '', name: 'Други', nameAlt: '', alias: 'others' }
+    ],
+
+    //Номенклатура DocTypes
+    docTypes: [
+      { nomTypeValueId: 1, code: '', name: 'Резолюция', nameAlt: '', alias: 'resolution' },
+      { nomTypeValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task' },
+      { nomTypeValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note' },
+      { nomTypeValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter' },
+      { nomTypeValueId: 5, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol' }
+    ],
+
+    //тестови данни за кореспондент
+    testCorrespondents: [
+      { nomTypeValueId: 1, code: '', name: 'Мирослав Георгиев', nameAlt: '', alias: 'mirko' },
+      { nomTypeValueId: 2, code: '', name: 'Янислав Гальов', nameAlt: '', alias: 'yani' },
+      { nomTypeValueId: 3, code: '', name: 'Цветан Белчев', nameAlt: '', alias: 'seso' },
+      { nomTypeValueId: 4, code: '', name: 'Георги Йорданов', nameAlt: '', alias: 'georgi' },
+      { nomTypeValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

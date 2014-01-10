@@ -2,7 +2,19 @@
 (function (angular) {
   'use strict';
 
-  angular.module('ems').factory('Doc', ['$resource', function ($resource) {
-    return $resource('/api/docs/:docId', { docId: '@docId' });
-  }]);
+  angular.module('ems')
+    .factory('Doc', ['$resource',
+      function ($resource) {
+        return $resource('/api/docs/:docId', { docId: '@docId' },
+          {
+            'create': {
+              method: 'GET',
+              url: '/api/docs/new'
+            },
+            'saveNew': {
+              method: 'POST',
+              url: '/api/docs/saveNew'
+            }
+          });
+      }]);
 }(angular));

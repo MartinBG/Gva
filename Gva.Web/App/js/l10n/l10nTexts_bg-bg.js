@@ -19,19 +19,6 @@
           }
         }
       },
-      docs: {
-        search: {
-          fromDate: 'От дата',
-          toDate: 'До дата',
-          view: 'Преглед',
-          regDate: 'Дата',
-          regUri: 'Рег.№',
-          docSubject: '',
-          docDirectionName: '',
-          docStatusName: 'Статус',
-          correspondentName: 'Кореспондент'
-        }
-      },
       corrs: {
         search: {
           displayName: 'Наименование',
@@ -244,6 +231,27 @@
           isActive: 'Активен',
           edit: 'Редакция',
           remove: 'Изтрий'
+        }
+      },
+      docs: {
+        search: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          view: 'Преглед',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: '',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент'
+        },
+        newDoc: {
+          caseRegUri: 'Към преписка',
+          docTypeGroupId: 'Група',
+          docTypeId: 'Вид',
+          docSubject: 'Относно',
+          docCorrespondent: 'Кореспондент',
+          numberOfDocuments: 'Брой документи'
         }
       }
     });

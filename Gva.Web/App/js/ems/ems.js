@@ -31,6 +31,18 @@
         }
       })
       .state({
+        name: 'docs/new',
+        title: 'Нов документ',
+        parent: 'docs',
+        url: '/new',
+        views: {
+          'pageView@root': {
+            templateUrl: 'ems/docs/views/docNew.html',
+            controller: 'DocsNewCtrl'
+          }
+        }
+      })
+      .state({
         name: 'docs/edit',
         title: 'Редакция',
         parent: 'docs',

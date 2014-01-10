@@ -208,3 +208,12 @@ form.card input.form-control[disabled] {
   padding: 5px 10px;
   background-color: #E9E9E9;
 }
+
+.btn-large-fast {
+    padding: 11px 19px;
+    font-size: 15px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    width: 196px;
+}
