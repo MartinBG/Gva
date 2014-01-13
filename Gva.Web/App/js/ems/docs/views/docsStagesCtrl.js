@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocStagesCtrl(
+  function DocsStagesCtrl(
     $scope
   ) {
 
@@ -10,9 +10,9 @@
 
   }
 
-  DocStagesCtrl.$inject = [
+  DocsStagesCtrl.$inject = [
     '$scope'
   ];
 
-  angular.module('ems').controller('DocStagesCtrl', DocStagesCtrl);
+  angular.module('ems').controller('DocsStagesCtrl', DocsStagesCtrl);
 }(angular));

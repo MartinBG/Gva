@@ -9,8 +9,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleFrom">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
               <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -20,8 +21,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleTo">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -31,8 +33,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleMadeBy">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -42,8 +45,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleImportedBy">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -53,8 +57,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleCCopy">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -64,8 +69,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleCorrespondent">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -82,12 +88,12 @@
 
             <div class="form-group col-md-3" ng-show="doc.isVisibleDocSourceTypeId">
               <span>Получено чрез:</span>
-              <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+              <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
             </div>
 
             <div class="form-group col-md-3" ng-show="doc.isVisibleDocDestinationTypeId">
               <span>Изпратено чрез:</span>
-              <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+              <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
             </div>
           </div>
 
@@ -108,8 +114,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleInCharge">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -119,15 +126,16 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleControlling">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
           <div class="row" ng-show="doc.isVisibleAssignment">
             <div class="form-group col-md-3">
               <span>Вид възлагане:</span>
-              <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-disabled="!inEditMode"></sc-nomenclature>
+              <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
             </div>
 
             <div class="form-group col-md-2">
@@ -157,8 +165,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleReaders">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -168,8 +177,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleEditors">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
@@ -179,8 +189,9 @@
             </div>
           </div>
           <div class="row" ng-show="doc.isVisibleRoleRegistrators">
-            <div class="form-group col-md-11" style="margin-bottom: 10px;">
-              <sc-text ng-disabled="!inEditMode"></sc-text>
+            <div class="col-md-11 input-group" style="margin-bottom: 10px;">
+              <sc-text ng-readonly="!inEditMode"></sc-text>
+              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
         </div>

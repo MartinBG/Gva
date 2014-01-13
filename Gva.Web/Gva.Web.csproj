@@ -130,26 +130,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\js\ems\docs\views\docClassifications.html" />
-    <Content Include="App\js\ems\docs\views\docClassificationsCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docCase.html" />
-    <Content Include="App\js\ems\docs\views\docCaseCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docStages.html" />
-    <Content Include="App\js\ems\docs\views\docStagesCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docWorkflows.html" />
-    <Content Include="App\js\ems\docs\views\docWorkflowsCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docContent.html" />
-    <Content Include="App\js\ems\docs\views\docContent.js" />
-    <Content Include="App\js\ems\docs\views\docAddressingCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docAddressing.html" />
+    <Content Include="App\js\ems\docs\views\docsClassifications.html" />
+    <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsCase.html" />
+    <Content Include="App\js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsStages.html" />
+    <Content Include="App\js\ems\docs\views\docsStagesCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsWorkflows.html" />
+    <Content Include="App\js\ems\docs\views\docsWorkflowsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsContent.html" />
+    <Content Include="App\js\ems\docs\views\docsContent.js" />
+    <Content Include="App\js\ems\docs\views\docsAddressingCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsAddressing.html" />
     <Content Include="App\js\ems\docs\views\docsSearch.html" />
     <Content Include="App\js\ems\docs\views\docsSearchCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docNewCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docNew.html" />
-    <Content Include="App\js\ems\docs\views\docSearch.html" />
-    <Content Include="App\js\ems\docs\views\docSearchCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docEditCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docEdit.html" />
+    <Content Include="App\js\ems\docs\views\docsNewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsNew.html" />
+    <Content Include="App\js\ems\docs\views\docsEditCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\test\e2e\mocks\docsHttp.js" />

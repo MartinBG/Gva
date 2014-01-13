@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocWorkflowsCtrl(
+  function DocsWorkflowsCtrl(
     $scope
   ) {
 
@@ -12,9 +12,9 @@
 
   }
 
-  DocWorkflowsCtrl.$inject = [
+  DocsWorkflowsCtrl.$inject = [
     '$scope'
   ];
 
-  angular.module('ems').controller('DocWorkflowsCtrl', DocWorkflowsCtrl);
+  angular.module('ems').controller('DocsWorkflowsCtrl', DocsWorkflowsCtrl);
 }(angular));

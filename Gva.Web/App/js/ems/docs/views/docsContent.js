@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocContentCtrl(
+  function DocsContentCtrl(
     //$q,
     $scope
     //$filter,
@@ -28,7 +28,7 @@
 
   }
 
-  DocContentCtrl.$inject = [
+  DocsContentCtrl.$inject = [
     //'$q',
     '$scope'
     //'$filter',
@@ -37,5 +37,5 @@
     //'Doc'
   ];
 
-  angular.module('ems').controller('DocContentCtrl', DocContentCtrl);
+  angular.module('ems').controller('DocsContentCtrl', DocsContentCtrl);
 }(angular));

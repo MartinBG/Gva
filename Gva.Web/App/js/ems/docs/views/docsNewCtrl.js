@@ -8,10 +8,6 @@
     $state,
     Doc
   ) {
-
-
-
-
     var nomenclatures = require('./nomenclatures.sample');
 
     Doc.create().$promise

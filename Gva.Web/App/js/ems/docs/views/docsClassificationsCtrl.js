@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocClassificationsCtrl(
+  function DocsClassificationsCtrl(
     $scope
   ) {
 
@@ -14,9 +14,9 @@
 
   }
 
-  DocClassificationsCtrl.$inject = [
+  DocsClassificationsCtrl.$inject = [
     '$scope'
   ];
 
-  angular.module('ems').controller('DocClassificationsCtrl', DocClassificationsCtrl);
+  angular.module('ems').controller('DocsClassificationsCtrl', DocsClassificationsCtrl);
 }(angular));

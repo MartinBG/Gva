@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocCaseCtrl(
+  function DocsCaseCtrl(
     $scope,
     $state
   ) {
@@ -13,10 +13,10 @@
 
   }
 
-  DocCaseCtrl.$inject = [
+  DocsCaseCtrl.$inject = [
     '$scope',
     '$state'
   ];
 
-  angular.module('ems').controller('DocCaseCtrl', DocCaseCtrl);
+  angular.module('ems').controller('DocsCaseCtrl', DocsCaseCtrl);
 }(angular));

@@ -172,6 +172,7 @@ form.card input.form-control[disabled] {
 .accordion {
   margin-bottom: 16px;
 }
+
 .accordion-group {
   margin-bottom: 2px;
   border: 1px solid #e5e5e5;
@@ -179,16 +180,20 @@ form.card input.form-control[disabled] {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
+
 .accordion-heading {
   border-bottom: 0;
 }
-.accordion-heading .accordion-toggle {
-  display: block;
-  padding: 8px 15px;
-}
+
+  .accordion-heading .accordion-toggle {
+    display: block;
+    padding: 8px 15px;
+  }
+
 .accordion-toggle {
   cursor: pointer;
 }
+
 .accordion-inner {
   padding: 9px 15px;
   border-top: 1px solid #e5e5e5;
@@ -210,10 +215,15 @@ form.card input.form-control[disabled] {
 }
 
 .btn-large-fast {
-    padding: 11px 19px;
-    font-size: 15px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-    width: 196px;
+  padding: 11px 19px;
+  font-size: 15px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  width: 196px;
+}
+
+.search-addon {
+  padding: 5px 12px;
+  cursor: pointer;
 }

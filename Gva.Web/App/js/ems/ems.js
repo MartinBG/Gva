@@ -37,7 +37,7 @@
         url: '/new',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/docs/views/docNew.html',
+            templateUrl: 'ems/docs/views/docsNew.html',
             controller: 'DocsNewCtrl'
           }
         }
@@ -49,7 +49,7 @@
         url: '/:docId',
         views: {
           'pageView@root': {
-            templateUrl: 'ems/docs/views/docEdit.html',
+            templateUrl: 'ems/docs/views/docsEdit.html',
             controller: 'DocsEditCtrl'
           }
         }
@@ -61,8 +61,8 @@
         url: '/addr',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docAddressing.html',
-            controller: 'DocAddressingCtrl'
+            templateUrl: 'ems/docs/views/docsAddressing.html',
+            controller: 'DocsAddressingCtrl'
           }
         }
       })
@@ -73,8 +73,8 @@
         url: '/cnt',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docContent.html',
-            controller: 'DocContentCtrl'
+            templateUrl: 'ems/docs/views/docsContent.html',
+            controller: 'DocsContentCtrl'
           }
         }
       })
@@ -85,8 +85,8 @@
         url: '/wfs',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docWorkflows.html',
-            controller: 'DocWorkflowsCtrl'
+            templateUrl: 'ems/docs/views/docsWorkflows.html',
+            controller: 'DocsWorkflowsCtrl'
           }
         }
       })
@@ -97,8 +97,8 @@
         url: '/stg',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docStages.html',
-            controller: 'DocStagesCtrl'
+            templateUrl: 'ems/docs/views/docsStages.html',
+            controller: 'DocsStagesCtrl'
           }
         }
       })
@@ -109,8 +109,8 @@
         url: '/case',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docCase.html',
-            controller: 'DocCaseCtrl'
+            templateUrl: 'ems/docs/views/docsCase.html',
+            controller: 'DocsCaseCtrl'
           }
         }
       })
@@ -121,8 +121,8 @@
         url: '/clss',
         views: {
           'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docClassifications.html',
-            controller: 'DocClassificationsCtrl'
+            templateUrl: 'ems/docs/views/docsClassifications.html',
+            controller: 'DocsClassificationsCtrl'
           }
         }
       });
