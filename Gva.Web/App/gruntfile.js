@@ -1,4 +1,4 @@
-/*global module, require*/
+/*global module, require, process*/
 /*jshint maxlen: false */
 module.exports = function (grunt) {
   'use strict';
@@ -217,9 +217,27 @@ module.exports = function (grunt) {
       }
     },
     protractor: {
-      test: {
+      options: {
+        configFilename: 'test/e2e/ptorConf.js'
+      },
+      test_chrome: {
         options: {
-          configFilename: 'test/e2e/ptorConf.js'
+          config: {
+            chromeDriver: process.env.SELENIUM_PATH + 'chromedriver',
+            capabilities: {
+              'browserName': 'chrome'
+            }
+          }
+        }
+      },
+      test_ie: {
+        options: {
+          config: {
+            seleniumArgs: ['-Dwebdriver.ie.driver=' + process.env.SELENIUM_PATH + 'IEDriverServer.exe'],
+            capabilities: {
+              'browserName': 'internet explorer'
+            }
+          }
         }
       }
     },
@@ -279,14 +297,14 @@ module.exports = function (grunt) {
   grunt.registerTask('debug',
     ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template']);
 
-  grunt.registerTask('test',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template', 'express', 'protractor']);
+  grunt.registerTask('test', ['debug', 'express', 'protractor:test_chrome']);
+  
+  grunt.registerTask('test-ie', ['debug', 'express', 'protractor:test_ie']);
 
   grunt.registerTask('release',
     ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template']);
 
-  grunt.registerTask('test-release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template', 'express', 'protractor']);
+  grunt.registerTask('test-release', ['release', 'express', 'protractor:test_chrome']);
  
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
