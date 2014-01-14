@@ -1,9 +1,7 @@
-/*global module, require, process*/
+/*global module, process*/
 /*jshint maxlen: false */
 module.exports = function (grunt) {
   'use strict';
-
-  var crypto = require('crypto');
 
   // Project configuration.
   grunt.initConfig({
@@ -202,8 +200,8 @@ module.exports = function (grunt) {
     },
     watch:{
       html: {
-        files:['css/**', 'js/**', 'schema/**', 'test/**'],
-        tasks:['html2js', 'concat_sourcemap', 'template']
+        files: ['css/**', 'js/**', 'schema/**', 'test/**'],
+        tasks: ['html2js', 'bundle:debug']
       }
     },
     express: {
@@ -265,15 +263,23 @@ module.exports = function (grunt) {
         }
       }
     },
-    template: {
+    bundle: {
       options: {
-        data: {
-          md5: function(file) {
-            return crypto.createHash('md5').update(grunt.file.read(file), 'utf8').digest('hex');
-          }
+        appPath: '/app',
+        bundles: ['<%= jsBundles %>', '<%= cssBundles %>']
+      },
+      debug: {
+        options: {
+          debug: true
+        },
+        files: {
+          'build/index.html': ['index.html']
         }
       },
-      index: {
+      release: {
+        options: {
+          debug: false
+        },
         files: {
           'build/index.html': ['index.html']
         }
@@ -290,25 +296,27 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-concat-sourcemap');
-  grunt.loadNpmTasks('grunt-template');
 
   grunt.loadTasks('./gruntTasks');
-  
-  grunt.registerTask('debug',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template']);
 
-  grunt.registerTask('test', ['debug', 'express', 'protractor:test_chrome']);
-  
-  grunt.registerTask('test-ie', ['debug', 'express', 'protractor:test_ie']);
+  grunt.registerTask('debug',
+    ['clean', 'jshint:source', 'html2js', 'bundle:debug']);
+
+  grunt.registerTask('bundled',
+    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'bundle:release']);
 
   grunt.registerTask('release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template']);
+    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'bundle:release']);
 
-  grunt.registerTask('test-release', ['release', 'express', 'protractor:test_chrome']);
+  grunt.registerTask('test-chrome', ['express', 'protractor:test_chrome']);
+
+  grunt.registerTask('test-ie', ['express', 'protractor:test_ie']);
  
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
   grunt.registerTask('test-server', ['express', 'express-keepalive']);
+
+  grunt.registerTask('test', ['debug', 'test-chrome']);
 
   grunt.registerTask('default', ['debug']);
   
