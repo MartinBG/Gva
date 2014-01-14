@@ -58,7 +58,7 @@
         name: 'docs/edit/addressing',
         title: 'Адресати',
         parent: 'docs/edit',
-        url: '/addr',
+        url: '/address',
         views: {
           'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docsAddressing.html',
@@ -70,7 +70,7 @@
         name: 'docs/edit/content',
         title: 'Прикачени файлове',
         parent: 'docs/edit',
-        url: '/cnt',
+        url: '/content',
         views: {
           'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docsContent.html',
@@ -82,7 +82,7 @@
         name: 'docs/edit/workflows',
         title: 'Управление',
         parent: 'docs/edit',
-        url: '/wfs',
+        url: '/workflows',
         views: {
           'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docsWorkflows.html',
@@ -94,7 +94,7 @@
         name: 'docs/edit/stages',
         title: 'Етапи',
         parent: 'docs/edit',
-        url: '/stg',
+        url: '/stages',
         views: {
           'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docsStages.html',
@@ -118,7 +118,7 @@
         name: 'docs/edit/classifications',
         title: 'Класификация',
         parent: 'docs/edit',
-        url: '/clss',
+        url: '/classifications',
         views: {
           'detailView@docs/edit': {
             templateUrl: 'ems/docs/views/docsClassifications.html',
