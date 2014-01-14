@@ -1,8 +1,6 @@
 packages/*
 packages/**/*
 
-Gva.Web/*errors.txt
-
 *.tmp
 *.suo
 *.csproj.user
