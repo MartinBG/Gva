@@ -23,7 +23,7 @@
     });
 
     it('should search by username', function() {
-      usersPage.searchForm.setField('username', 'peter');
+      usersPage.searchForm.setFilter('username', 'peter');
       usersPage.searchForm.clickButton('search');
 
       usersPage = new Page(ptor);
@@ -32,7 +32,7 @@
 
     it('should search by fullname', function() {
       usersPage.searchForm.addFilter('fullname');
-      usersPage.searchForm.setField('fullname', 'Administrator');
+      usersPage.searchForm.setFilter('fullname', 'Administrator');
       usersPage.searchForm.clickButton('search');
 
       usersPage = new Page(ptor);
@@ -41,13 +41,13 @@
 
     it('should search by isActive', function() {
       usersPage.searchForm.addFilter('showActive');
-      usersPage.searchForm.setField('showActive', 1);
+      usersPage.searchForm.setFilter('showActive', 1);
       usersPage.searchForm.clickButton('search');
 
       usersPage = new Page(ptor);
       expect(usersPage.datatable.getColumn('isActive')).toEqual(['Да', 'Да', 'Да']);
 
-      usersPage.searchForm.setField('showActive', 2);
+      usersPage.searchForm.setFilter('showActive', 2);
       usersPage.searchForm.clickButton('search');
 
       usersPage = new Page(ptor);
