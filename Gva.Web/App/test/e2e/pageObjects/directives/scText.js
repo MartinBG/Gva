@@ -15,5 +15,9 @@
     this.element.sendKeys(text);
   };
 
+  ScText.prototype.isEnabled = function () {
+    return this.element.isEnabled();
+  };
+
   module.exports = ScText;
 }(module));

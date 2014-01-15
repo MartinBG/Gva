@@ -19,7 +19,7 @@
 
   ScDatatable.prototype.getColumns = function () {
     var columns = _.map(arguments, function (argument) {
-      return 'scdt-' + argument;
+      return 'scdt-' + argument.replace(/[\[\]\.]/g, '_');
     });
 
     return this.element.findElements(by.css('tbody tr')).then(function(rows) {

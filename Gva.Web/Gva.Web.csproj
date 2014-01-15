@@ -149,6 +149,8 @@
     <Content Include="App\test\e2e\pageObjects\directives\scFloat.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scInt.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scNomenclature.js" />
+    <Content Include="App\test\e2e\pageObjects\directives\scFloat.js" />
+    <Content Include="App\test\e2e\pageObjects\directives\scInt.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scSearch.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scSelect.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scText.js" />

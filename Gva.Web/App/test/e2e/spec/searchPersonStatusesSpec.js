@@ -1,152 +1,48 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Person status search page', function () {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+      Page = require('../pageObjects/searchPersonStatusesPO'),
+      personStatusesPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/statuses');
+      personStatusesPage = new Page(ptor);
     });
 
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      var text = ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText();
-      expect(text).toEqual('Състояния');
+      expect(personStatusesPage.breadcrumb.getText()).toEqual('Състояния');
     });
 
-    it('should display data correctly', function () {
-      var dataPromise;
-
-      ptor
-        .findElements(protractor.By.datatable('statuses')
-        .column('part.personStatusType.name')).then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['Негоден', 'Майчинство', 'Майчинство', 'Майчинство']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentNumber'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['1', '2', '32', '21']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentDateValidFrom'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['07.10.1912', '04.04.1812', '04.11.1922', '04.09.2012']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentDateValidTo'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['24.12.1912', '04.05.1812', '15.12.2012', '14.05.2812']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.notes'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['note1', 'note2', 'note3', 'note4']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.isActive'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['Не', 'Не', 'Не', 'Да']);
-        });
+    it('should display all person statuses correctly', function () {
+      expect(personStatusesPage.datatable.getColumns(
+        'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
+        'part.documentDateValidTo', 'part.notes', 'part.isActive'))
+        .toEqual([
+          ['Негоден', '1', '07.10.1912', '24.12.1912', 'note1', 'Не'],
+          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'note2', 'Не'],
+          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'note3', 'Не'],
+          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'note4', 'Да']
+        ]);
     });
 
-    
-    it('should delete a status correctly', function () {
+    it('should delete a status correctly and stay on the same state', function () {
       var btnSelector = 'tbody tr:first-child td:nth-child(8)';
       ptor.findElement(protractor.By.css(btnSelector)).click();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
-      var dataPromise;
+      personStatusesPage = new Page(ptor);
 
-      ptor
-        .findElements(protractor.By.datatable('statuses')
-        .column('part.personStatusType.name')).then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['Майчинство', 'Майчинство', 'Майчинство']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentNumber'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['2', '32', '21']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentDateValidFrom'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['04.04.1812', '04.11.1922', '04.09.2012']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.documentDateValidTo'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['04.05.1812', '15.12.2012', '14.05.2812']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.notes'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['note2', 'note3', 'note4']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('statuses').column('part.isActive'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
-
-          expect(dataPromise).toEqual(['Не', 'Не', 'Да']);
-        });
+      expect(personStatusesPage.datatable.getColumns(
+        'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
+        'part.documentDateValidTo', 'part.notes', 'part.isActive'))
+        .toEqual([
+          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'note2', 'Не'],
+          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'note3', 'Не'],
+          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'note4', 'Да']
+        ]);
 
     });
 
@@ -162,4 +58,4 @@
     });
 
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

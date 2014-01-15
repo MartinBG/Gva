@@ -3,13 +3,18 @@
   'use strict';
 
   var ScText = require('./directives/scText'),
+      ScDate = require('./directives/scDate'),
       ScNomenclature = require('./directives/scNomenclature');
 
   function PersonStatusPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
 
-    this.personStatusType = new ScNomenclature('model.personStatusType',context);
+    this.personStatusType = new ScNomenclature('model.personStatusType', context);
     this.documentNumber = new ScText(context.findElement(by.input('model.documentNumber')));
+    this.documentDateValidFrom =
+      new ScDate(context.findElement(by.css('div[name=docDateValidFrom]')), context);
+    this.documentDateValidTo =
+      new ScDate(context.findElement(by.css('div[name=docDateValidTo]')), context);
     this.notes = new ScText(context.findElement(by.input('model.notes')));
 
     this.saveBtn = context.findElement(by.name('saveBtn'));

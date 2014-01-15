@@ -13,6 +13,12 @@
     });
   };
 
+  ScDate.prototype.clear = function () {
+    return this.element.findElement(by.tagName('input')).then(function (dateInput) {
+      return dateInput.clear();
+    });
+  };
+
   ScDate.prototype.set = function (text) {
     return this.element.findElement(by.tagName('input')).then(function (dateInput) {
       return dateInput.clear().then(function () {
