@@ -138,11 +138,14 @@
     <Content Include="App\test\e2e\directives\sc-x\specs\textareaSpec.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scDatatable.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scDate.js" />
+    <Content Include="App\test\e2e\pageObjects\directives\scNomenclature.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scSearch.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scText.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scTextarea.js" />
     <Content Include="App\test\e2e\pageObjects\newUserPO.js" />
     <Content Include="App\test\e2e\directives\sc-search\pageObjects\searchPO.js" />
+    <Content Include="App\test\e2e\pageObjects\personAddressPO.js" />
+    <Content Include="App\test\e2e\pageObjects\searchPersonAddressPO.js" />
     <Content Include="App\test\e2e\pageObjects\usersPO.js" />
     <Content Include="App\test\e2e\spec\editUserSpec.js" />
     <Content Include="App\test\e2e\spec\newUserSpec.js" />
