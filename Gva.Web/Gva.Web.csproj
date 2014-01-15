@@ -145,6 +145,7 @@
     <Content Include="App\test\e2e\directives\gva-button\templates\gvaButton.html" />
     <Content Include="App\test\e2e\pageObjects\directives\scDatatable.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scDate.js" />
+    <Content Include="App\test\e2e\pageObjects\directives\scFiles.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scFloat.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scInt.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scNomenclature.js" />
@@ -152,8 +153,10 @@
     <Content Include="App\test\e2e\pageObjects\directives\scSelect.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scText.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scTextarea.js" />
+    <Content Include="App\test\e2e\pageObjects\newPersonPO.js" />
     <Content Include="App\test\e2e\pageObjects\newUserPO.js" />
     <Content Include="App\test\e2e\directives\sc-search\pageObjects\searchPO.js" />
+    <Content Include="App\test\e2e\pageObjects\personsPO.js" />
     <Content Include="App\test\e2e\pageObjects\personStatusPO.js" />
     <Content Include="App\test\e2e\pageObjects\searchPersonStatusesPO.js" />
     <Content Include="App\test\e2e\pageObjects\usersPO.js" />
