@@ -137,6 +137,8 @@
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\test\e2e\directives\sc-x\pageObjects\inputPO.js" />
+    <Content Include="App\test\e2e\directives\sc-x\pageObjects\nomenclaturePO.js" />
+    <Content Include="App\test\e2e\directives\sc-x\pageObjects\selectPO.js" />
     <Content Include="App\test\e2e\directives\sc-x\specs\textareaSpec.js" />
     <Content Include="App\test\e2e\directives\gva-button\controllers\gvaButton.js" />
     <Content Include="App\test\e2e\directives\gva-button\specs\buttonSpec.js" />
@@ -147,6 +149,7 @@
     <Content Include="App\test\e2e\pageObjects\directives\scInt.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scNomenclature.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scSearch.js" />
+    <Content Include="App\test\e2e\pageObjects\directives\scSelect.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scText.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scTextarea.js" />
     <Content Include="App\test\e2e\pageObjects\newUserPO.js" />
