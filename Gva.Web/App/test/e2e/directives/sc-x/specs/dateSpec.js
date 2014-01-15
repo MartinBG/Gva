@@ -1,86 +1,47 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Sc-date directive', function() {
     var ptor = protractor.getInstance(),
-        dateInputElem,
-        dateLabelElem;
+        Page = require('../pageObjects/inputPO'),
+        inputPage;
 
     beforeEach(function (){
       ptor.get('#/test/input');
-
-      dateInputElem = ptor.findElement(protractor.By.css('div.date > input'));
-      dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
+      inputPage = new Page(ptor);
     });
 
     it('should set the date to whatever date is passed.', function() {
-      var dateBtnElem = ptor.findElement(protractor.By.name('dateBtn'));
-
-      dateInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      dateBtnElem.click();
-
-      dateInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('10.08.1990');
-      });
+      expect(inputPage.dateDirective.get()).toEqual('');
+      inputPage.changeDate();
+      expect(inputPage.dateDirective.get()).toEqual('10.08.1990');
     });
 
-    it('should change the model to whatever date is typed.', function() {
-      dateLabelElem.getText().then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      dateInputElem.sendKeys('12.10.2013\t');
-
-      dateLabelElem.getText().then(function (value) {
-        expect(value).toEqual('2013-10-12T00:00:00');
-      });
+    it('should change the model to whatever date is typed.', function () {
+      expect(inputPage.dateLabel.getText()).toEqual('');
+      inputPage.dateDirective.set('12.10.2013');
+      expect(inputPage.dateLabel.getText()).toEqual('2013-10-12T00:00:00');
     });
 
     it('should allow clearing the date.', function () {
-      dateInputElem.sendKeys('12.10.2013\t');
-      dateInputElem.clear();
-
-      dateLabelElem.getText().then(function (text) {
-        expect(text).toEqual('');
-      });
+      inputPage.dateDirective.set('12.10.2013');
+      inputPage.dateDirective.clear();
+      expect(inputPage.dateLabel.getText()).toEqual('');
     });
 
     it('should change the model to whatever date is selected.', function() {
-      var dateLabelElem = ptor.findElement(protractor.By.name('dateLbl'));
+      var currentDate = new Date(),
+          ISOdate = currentDate.toISOString().replace(/T.*/, 'T00:00:00');
 
-      ptor.findElement(protractor.By.className('glyphicon-calendar')).click().then( function () {
-        ptor.findElements(protractor.By.className('day')).then (function (dayElems) {
-          dayElems[15].click().then(function () {
-            dateInputElem.getAttribute('value').then(function (datepickerValue) {
-              var dateArr = datepickerValue.split('.'),
-                  day = dateArr[0],
-                  month = dateArr[1],
-                  year = dateArr[2],
-                  ISOdate = year + '-' + month + '-' + day +'T00:00:00';
-
-              dateLabelElem.getText().then(function (modelValue) {
-                expect(modelValue).toEqual(ISOdate);
-              });
-            });
-          });
-        });
-      });
+      inputPage.dateDirective.selectCurrentDate();
+      expect(inputPage.dateLabel.getText()).toEqual(ISOdate);
     });
 
-    it('should validate user input.', function() {
-      dateInputElem.sendKeys('alabala\t');
-
-      dateInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      dateLabelElem.getText().then(function (text) {
-        expect(text).toEqual('');
-      });
+    it('should validate user input.', function () {
+      inputPage.dateDirective.set('alabala');
+      expect(inputPage.dateDirective.get()).toEqual('');
+      expect(inputPage.dateLabel.getText()).toEqual('');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));
