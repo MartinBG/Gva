@@ -2,10 +2,10 @@
 (function (module, by, require){
   'use strict';
 
-  var ScText = require('./directives/scText');//,
+  var ScText = require('./directives/scText'),
       ScNomenclature = require('./directives/scNomenclature');
 
-  function personStatusPO(context) {
+  function PersonStatusPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
 
     this.personStatusType = new ScNomenclature('model.personStatusType',context);
@@ -16,13 +16,13 @@
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
   }
 
-  personStatusPO.prototype.save = function () {
+  PersonStatusPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  personStatusPO.prototype.cancel = function () {
+  PersonStatusPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = personStatusPO;
+  module.exports = PersonStatusPO;
 }(module, by, require));
