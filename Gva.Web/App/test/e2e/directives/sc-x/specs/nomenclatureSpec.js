@@ -1,63 +1,38 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Sc-select directive', function() {
     var ptor = protractor.getInstance(),
-        selectedNomId,
-        selectedNomName;
+        Page = require('../pageObjects/nomenclaturePO'),
+        nomenclaturePage;
 
     beforeEach(function () {
       ptor.get('#/test/nom');
-      selectedNomId = ptor.findElement(protractor.By.id('selectedNomId'));
-      selectedNomName = ptor.findElement(protractor.By.id('selectedNomName'));
+      nomenclaturePage = new Page(ptor);
     });
 
-    it('should display initial value.', function() {
-      expect(ptor.findElement(protractor.By.nomenclature('gender').text()).getText())
-        .toEqual('Жена');
-      expect(selectedNomId.getText()).toEqual('2');
-      expect(selectedNomName.getText()).toEqual('Жена');
+    it('should display initial value.', function () {
+      expect(nomenclaturePage.nomenclature.get()).toEqual('Жена');
+      expect(nomenclaturePage.selectedNomId()).toEqual('2');
+      expect(nomenclaturePage.selectedNomName()).toEqual('Жена');
     });
 
-    it('should clear selection and update model value.', function() {
-      ptor
-        .findElement(protractor.By.nomenclature('gender').deselectButton())
-        .click()
-        .then(function () {
-          expect(selectedNomId.getText()).toEqual('');
-          expect(selectedNomName.getText()).toEqual('');
-        });
+    it('should clear selection and update model value.', function () {
+      nomenclaturePage.nomenclature.clear();
+      expect(nomenclaturePage.selectedNomId()).toEqual('');
+      expect(nomenclaturePage.selectedNomName()).toEqual('');
     });
 
-    it('should filter items and update model value.', function() {
-      ptor
-        .findElement(protractor.By.nomenclature('gender'))
-        .click()
-        .then(function () {
-          return ptor
-            .findElement(protractor.By.nomenclature('gender').dropdownInput())
-            .sendKeys('Мъж');
-        })
-        .then(function () {
-          return ptor
-            .findElement(protractor.By.nomenclature('gender').dropdownInput())
-            .sendKeys(protractor.Key.ENTER);
-        })
-        .then(function () {
-          expect(selectedNomId.getText()).toEqual('1');
-          expect(selectedNomName.getText()).toEqual('Мъж');
-        });
+    it('should filter items and update model value.', function () {
+      nomenclaturePage.nomenclature.set('Мъж');
+      expect(nomenclaturePage.selectedNomId()).toEqual('1');
+      expect(nomenclaturePage.selectedNomName()).toEqual('Мъж');
     });
 
-    it('should update on model value changes.', function() {
-      ptor
-        .findElement(protractor.By.id('changeBtn'))
-        .click()
-        .then(function () {
-          expect(selectedNomId.getText()).toEqual('3');
-          expect(selectedNomName.getText()).toEqual('Неопределен');
-        });
+    it('should update on model value changes.', function () {
+      nomenclaturePage.changeNomValue();
+      expect(nomenclaturePage.nomenclature.get()).toEqual('Неопределен');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

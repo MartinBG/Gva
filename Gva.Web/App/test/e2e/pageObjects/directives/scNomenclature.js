@@ -14,7 +14,6 @@
     this.context = context;
     this.container = this.context.findElement(by.xpath(containerXPath));
     this.nameSpan = this.context.findElement(by.xpath(nameSpanXPath));
-    
   }
 
   ScNomenclature.prototype.get = function () {
@@ -33,6 +32,13 @@
     this.container.click();
     this.context.findElement(by.xpath(this.dropdownInputXPath)).sendKeys(text);
     this.context.findElement(by.xpath(this.dropdownInputXPath)).sendKeys('\n');
+  };
+
+  ScNomenclature.prototype.clear = function () {
+    return this.container.findElement(by.css('.select2-search-choice-close'))
+      .then(function (deselectBtn) {
+      return deselectBtn.click();
+    });
   };
 
   module.exports = ScNomenclature;
