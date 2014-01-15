@@ -15,7 +15,9 @@
 
   ScDate.prototype.set = function (text) {
     return this.element.findElement(by.tagName('input')).then(function (dateInput) {
-      dateInput.sendKeys(text + '\t');
+      return dateInput.clear().then(function () {
+        return dateInput.sendKeys(text + '\t');
+      });
     });
   };
 
