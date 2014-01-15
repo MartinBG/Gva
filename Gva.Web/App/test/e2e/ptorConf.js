@@ -4,7 +4,7 @@
 
   exports.config = {
     seleniumServerJar: process.env.SELENIUM_PATH + 'selenium-server-standalone-2.39.0.jar',
-    specs: ['test/e2e/spec/*.js', 'test/e2e/directives/sc-*/specs/*.js'],
+    specs: ['test/e2e/directives/sc-x/specs/floatSpec.js'],
     baseUrl: 'http://localhost:52560',
     rootElement: 'body',
     onPrepare: function() {

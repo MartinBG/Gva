@@ -1,69 +1,42 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Sc-int directive', function() {
     var ptor = protractor.getInstance(),
-        intDirectiveElem;
+        Page = require('../pageObjects/inputPO'),
+        inputPage;
 
     beforeEach(function (){
       ptor.get('#/test/input');
-
-      intDirectiveElem = ptor.findElement(protractor.By.name('intDir'));
+      inputPage = new Page(ptor);
     });
 
     it('should set the text of the element to whatever integer is passed.', function() {
-      var intBtnElem = ptor.findElement(protractor.By.name('intBtn'));
-
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      intBtnElem.click();
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('789');
-      });
+      expect(inputPage.intDirective.get()).toEqual('');
+      inputPage.changeInt();
+      expect(inputPage.intDirective.get()).toEqual('789');
     });
 
     it('should change the model to whatever integer is typed.', function() {
-      var intLabelElem = ptor.findElement(protractor.By.name('intLbl'));
-
-      intLabelElem.getText().then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      intDirectiveElem.sendKeys('13456');
-      intLabelElem.getText().then(function (value) {
-        expect(value).toEqual('13456');
-      });
+      expect(inputPage.getIntValue()).toEqual('');
+      inputPage.intDirective.set('13456');
+      expect(inputPage.getIntValue()).toEqual('13456');
     });
 
-    it('should empty field on invalid user input.', function() {
-      intDirectiveElem.sendKeys('a134asddas56\t');
-
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
+    it('should empty field on invalid user input.', function () {
+      inputPage.intDirective.set('a134asddas56');
+      expect(inputPage.intDirective.get()).toEqual('');
     });
 
-    it('should try to parse user input.', function() {
-      intDirectiveElem.sendKeys('134asddas56\t');
-
-      intDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('134');
-      });
+    it('should try to parse user input.', function () {
+      inputPage.intDirective.set('134asddas56');
+      expect(inputPage.intDirective.get()).toEqual('134');
     });
 
     it('should represent the int as number.', function() {
-      var isIntLabelElem = ptor.findElement(protractor.By.name('isIntLbl')),
-          isIntBtnElem = ptor.findElement(protractor.By.name('isIntBtn'));
-
-      intDirectiveElem.sendKeys('123');
-      isIntBtnElem.click();
-
-      isIntLabelElem.getText().then(function (value) {
-        expect(value).toEqual('true');
-      });
+      inputPage.intDirective.set('123');
+      expect(inputPage.isInt()).toEqual('true');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

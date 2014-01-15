@@ -1,77 +1,47 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Sc-float directive', function() {
     var ptor = protractor.getInstance(),
-        floatDirectiveElem;
+        Page = require('../pageObjects/inputPO'),
+        inputPage;
 
     beforeEach(function (){
       ptor.get('#/test/input');
-
-      floatDirectiveElem = ptor.findElement(protractor.By.name('floatDir'));
+      inputPage = new Page(ptor);
     });
 
     it('should set the text of the element to whatever number is passed.', function() {
-      var floatBtnElem = ptor.findElement(protractor.By.name('floatBtn'));
-
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      floatBtnElem.click();
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('789,12');
-      });
+      expect(inputPage.floatDirective.get()).toEqual('');
+      inputPage.changeFloat();
+      expect(inputPage.floatDirective.get()).toEqual('789,12');
     });
 
     it('should change the model to whatever number is typed.', function() {
-      var floatLabelElem = ptor.findElement(protractor.By.name('floatLbl'));
-
-      floatLabelElem.getText().then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      floatDirectiveElem.sendKeys('134.56');
-      floatLabelElem.getText().then(function (value) {
-        expect(value).toEqual('134.56');
-      });
+      expect(inputPage.getFloatValue()).toEqual('');
+      inputPage.floatDirective.set('134.56');
+      expect(inputPage.getFloatValue()).toEqual('134.56');
     });
 
-    it('should empty field on invalid user input.', function() {
-      floatDirectiveElem.sendKeys('a134asddas56\t');
-
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
+    it('should empty field on invalid user input.', function () {
+      inputPage.floatDirective.set('a134asddas56');
+      expect(inputPage.floatDirective.get()).toEqual('');
     });
 
-    it('should try to parse user input.', function() {
-      floatDirectiveElem.sendKeys('134.12asddas56\t');
-
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('134,12');
-      });
+    it('should try to parse user input.', function () {
+      inputPage.floatDirective.set('134.12asddas56');
+      expect(inputPage.floatDirective.get()).toEqual('134,12');
     });
 
-    it('should round user input.', function() {
-      floatDirectiveElem.sendKeys('13345.656\t');
-
-      floatDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('13345,66');
-      });
+    it('should round user input.', function () {
+      inputPage.floatDirective.set('13345.656');
+      expect(inputPage.floatDirective.get()).toEqual('13345,66');
     });
     
     it('should represent the float as number.', function() {
-      var isFloatLabelElem = ptor.findElement(protractor.By.name('isFloatLbl')),
-          isFloatBtnElem = ptor.findElement(protractor.By.name('isFloatBtn'));
-
-      floatDirectiveElem.sendKeys('123.449999');
-      isFloatBtnElem.click();
-
-      isFloatLabelElem.getText().then(function (value) {
-        expect(value).toEqual('true');
-      });
+      inputPage.floatDirective.set('123.449999');
+      expect(inputPage.isFloat()).toEqual('true');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

@@ -12,7 +12,7 @@
 
   ScInt.prototype.set = function (text) {
     this.element.clear();
-    this.element.sendKeys(text);
+    this.element.sendKeys(text + '\t');
   };
 
   module.exports = ScInt;

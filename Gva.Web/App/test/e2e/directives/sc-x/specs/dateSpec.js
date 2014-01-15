@@ -19,15 +19,15 @@
     });
 
     it('should change the model to whatever date is typed.', function () {
-      expect(inputPage.dateLabel.getText()).toEqual('');
+      expect(inputPage.getDateValue()).toEqual('');
       inputPage.dateDirective.set('12.10.2013');
-      expect(inputPage.dateLabel.getText()).toEqual('2013-10-12T00:00:00');
+      expect(inputPage.getDateValue()).toEqual('2013-10-12T00:00:00');
     });
 
     it('should allow clearing the date.', function () {
       inputPage.dateDirective.set('12.10.2013');
       inputPage.dateDirective.clear();
-      expect(inputPage.dateLabel.getText()).toEqual('');
+      expect(inputPage.getDateValue()).toEqual('');
     });
 
     it('should change the model to whatever date is selected.', function() {
@@ -35,13 +35,13 @@
           ISOdate = currentDate.toISOString().replace(/T.*/, 'T00:00:00');
 
       inputPage.dateDirective.selectCurrentDate();
-      expect(inputPage.dateLabel.getText()).toEqual(ISOdate);
+      expect(inputPage.getDateValue()).toEqual(ISOdate);
     });
 
     it('should validate user input.', function () {
       inputPage.dateDirective.set('alabala');
       expect(inputPage.dateDirective.get()).toEqual('');
-      expect(inputPage.dateLabel.getText()).toEqual('');
+      expect(inputPage.getDateValue()).toEqual('');
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));
