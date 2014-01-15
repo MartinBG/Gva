@@ -90,7 +90,10 @@ module.exports = function (grunt) {
         '!test/e2e/ptorConf.js',
         '!test/e2e/expressServer.js',
         '!test/e2e/spec/**/*.js',
-        '!test/e2e/directives/**/specs/*.js'
+        '!test/e2e/directives/**/specs/*.js',
+        '!test/e2e/directives/**/pageObjects/*.js',
+        '!test/e2e/pageObjects/*.js',
+        '!test/e2e/pageObjects/directives/*.js'
       ]
     },
     cssBundles: {
