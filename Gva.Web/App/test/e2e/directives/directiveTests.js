@@ -72,16 +72,6 @@
         }
       })
       .state({
-        name: 'directive-tests.column',
-        url: '/column',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/e2e/directives/sc-datatable/templates/scColumn.html',
-            controller: 'directive-tests.ScDatatableCtrl'
-          }
-        }
-      })
-      .state({
         name: 'directive-tests.promiseState',
         url: '/promise',
         views: {
