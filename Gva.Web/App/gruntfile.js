@@ -8,14 +8,11 @@ module.exports = function (grunt) {
     buildDir: 'build',
     jsBundles: {
       '<%= buildDir %>/js/app.js': [
-        'js/l10n/*.js',
         'js/*.js',
         'js/scaffolding/*.js',
         'js/scaffolding/**/*.js',
-        'js/navigation/*.js',
-        'js/navigation/**/*.js',
-        'js/users/*.js',
-        'js/users/**/*.js',
+        'js/common/*.js',
+        'js/common/**/*.js',
         'js/gva/*.js',
         'js/gva/**/*.js'
       ],
@@ -83,12 +80,13 @@ module.exports = function (grunt) {
         'bower_components/angular-mocks/angular-mocks.js'
       ],
       '<%= buildDir %>/js/test.js': [
-        'test/e2e/**/*.js',
-        '!test/e2e/gvaBy.js',
-        '!test/e2e/ptorConf.js',
-        '!test/e2e/expressServer.js',
-        '!test/e2e/spec/**/*.js',
-        '!test/e2e/directives/**/specs/*.js'
+        'test/delay.js',
+        'test/e2eMocksSetup.js',
+        'test/httpBackendConfiguratorProvider.js',
+        'test/common/mocks/*.js',
+        'test/gva/persons/mocks/*.js',
+        'test/scaffolding/testbeds/states.js',
+        'test/scaffolding/testbeds/*.js'
       ]
     },
     cssBundles: {
@@ -173,14 +171,9 @@ module.exports = function (grunt) {
         base: 'js'
       },
       navigation: {
-        src: [ 'js/navigation/**/*.html' ],
-        dest: '<%= buildDir %>/templates/navigation.js',
-        module: 'navigation.templates'
-      },
-      users: {
-        src: [ 'js/users/**/*.html' ],
-        dest: '<%= buildDir %>/templates/users.js',
-        module: 'users.templates'
+        src: [ 'js/common/**/*.html' ],
+        dest: '<%= buildDir %>/templates/common.js',
+        module: 'common.templates'
       },
       persons: {
         src: ['js/gva/**/*.html'],
@@ -188,14 +181,9 @@ module.exports = function (grunt) {
         module: 'gva.templates'
       },
       scaffolding: {
-        src: ['js/scaffolding/**/*.html'],
+        src: ['js/scaffolding/**/*.html', 'test/scaffolding/**/*.html'],
         dest: '<%= buildDir %>/templates/scaffolding.js',
         module: 'scaffolding.templates'
-      },
-      directiveTests: {
-        src: ['test/e2e/directives/**/**/*.html'],
-        dest: '<%= buildDir %>/templates/directive-tests.js',
-        module: 'directive-tests.templates'
       }
     },
     watch:{
@@ -210,13 +198,13 @@ module.exports = function (grunt) {
           hostname: 'localhost',
           port: 52560,
           bases: ['../', '../app/build/'],
-          server: 'test/e2e/expressServer.js'
+          server: 'test/expressServer.js'
         }
       }
     },
     protractor: {
       options: {
-        configFilename: 'test/e2e/ptorConf.js'
+        configFilename: 'test/ptorConf.js'
       },
       test_chrome: {
         options: {

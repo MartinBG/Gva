@@ -5,4 +5,3 @@
   }
   return undefined;
 }
-window.getData = window.require;

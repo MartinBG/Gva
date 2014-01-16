@@ -5,14 +5,11 @@
     'ng',
     'ui.router',
     'ui.select2',
-    'navigation',
+    'common',
     'scaffolding',
-    'users',
     'gva',
     'l10n',
-    'l10n-tools',
-    'l10nTexts_bg-bg',
-    'directive-tests'
+    'l10n-tools'
   ]).config([
     '$urlRouterProvider',
     '$stateProvider',

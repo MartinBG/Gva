@@ -56,18 +56,18 @@ Usage <sc-datatable ng-model="data"
                 angular.element('.dataTables_length select').select2();
               },
               oLanguage: {
-                sInfo: l10n.get('datatableDirective.info'),
-                sLengthMenu: l10n.get('datatableDirective.displayRecords'),
-                sEmptyTable: l10n.get('datatableDirective.noDataAvailable'),
+                sInfo: l10n.get('scaffolding.scDatatable.info'),
+                sLengthMenu: l10n.get('scaffolding.scDatatable.displayRecords'),
+                sEmptyTable: l10n.get('scaffolding.scDatatable.noDataAvailable'),
                 sInfoEmpty: '',
-                sZeroRecords: l10n.get('datatableDirective.noDataAvailable'),
-                sSearch: l10n.get('datatableDirective.search'),
-                sInfoFiltered: l10n.get('datatableDirective.filtered'),
+                sZeroRecords: l10n.get('scaffolding.scDatatable.noDataAvailable'),
+                sSearch: l10n.get('scaffolding.scDatatable.search'),
+                sInfoFiltered: l10n.get('scaffolding.scDatatable.filtered'),
                 oPaginate: {
-                  sFirst: l10n.get('datatableDirective.firstPage'),
-                  sLast: l10n.get('datatableDirective.lastPage'),
-                  sNext: l10n.get('datatableDirective.nextPage'),
-                  sPrevious: l10n.get('datatableDirective.previousPage')
+                  sFirst: l10n.get('scaffolding.scDatatable.firstPage'),
+                  sLast: l10n.get('scaffolding.scDatatable.lastPage'),
+                  sNext: l10n.get('scaffolding.scDatatable.nextPage'),
+                  sPrevious: l10n.get('scaffolding.scDatatable.previousPage')
                 }
               }
             });

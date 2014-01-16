@@ -7,7 +7,7 @@
     'ui.router',
     'ui.bootstrap',
     'gva.templates',
-    'navigation',
+    'common',
     'l10n',
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {

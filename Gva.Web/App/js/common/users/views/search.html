@@ -1,0 +1,25 @@
+﻿<div class="container page-content">
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="username" class="col-sm-3" removable="false" label="common.users.search.username"></sc-filter>
+    <sc-filter type="text" name="fullname" class="col-sm-2 col-md-3 col-lg-4" removable="true" label="common.users.search.name"></sc-filter>
+    <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('common.users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('common.users.search.onlyUnactive')}]}" label="common.users.search.activity"></sc-filter>
+    <sc-button action="search()" text="common.users.search.search" icon="glyphicon-search"></sc-button>
+    <sc-button action="newUser()" text="common.users.search.new" icon="glyphicon-user"></sc-button>
+    <sc-button action="add"></sc-button>
+  </sc-search>
+
+  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="username" title="Потребителско име">
+    </sc-column>
+    <sc-column data="fullname" title="Име">
+    </sc-column>
+    <sc-column data="roles" title="Роли">
+    </sc-column>
+    <sc-column data="isActive" title="Активен">
+      <span>{{item.isActive ? 'Да' : 'Не'}}</span>
+    </sc-column>
+    <sc-column>
+      <button type="button" class="btn-xs btn-info" ng-click="editUser(item)" l10n-text="common.users.search.edit"></button>
+    </sc-column>
+  </sc-datatable>
+</div>
