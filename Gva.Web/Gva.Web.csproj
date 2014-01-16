@@ -143,6 +143,7 @@
     <Content Include="App\test\e2e\directives\gva-button\controllers\gvaButton.js" />
     <Content Include="App\test\e2e\directives\gva-button\specs\buttonSpec.js" />
     <Content Include="App\test\e2e\directives\gva-button\templates\gvaButton.html" />
+    <Content Include="App\test\e2e\pageObjects\personDataPO.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scDatatable.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scDate.js" />
     <Content Include="App\test\e2e\pageObjects\directives\scFiles.js" />
