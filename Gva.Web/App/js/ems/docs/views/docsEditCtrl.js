@@ -10,11 +10,11 @@
     $stateParams,
     Doc
   ) {
-    //$scope.doc = Doc.get({ docId: $stateParams.docId });
+    $scope.doc = Doc.get({ docId: $stateParams.docId });
 
-    Doc.get({ docId: $stateParams.docId }).$promise.then(function (doc) {
-      $scope.doc = doc;
-    });
+    //Doc.get({ docId: $stateParams.docId }).$promise.then(function (doc) {
+    //  $scope.doc = doc;
+    //});
 
     $scope.inEditMode = false;
 

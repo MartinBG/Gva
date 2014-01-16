@@ -22,6 +22,14 @@
       })[0];
     },
 
+    units: [
+     { nomTypeValueId: 1, code: '', name: 'admin (Администратор)', nameAlt: '', alias: '' },
+     { nomTypeValueId: 2, code: '', name: 'Анка Ангелова Тонова (СТАРШИ ЕКСПЕРТ)', nameAlt: '', alias: '' },
+     { nomTypeValueId: 3, code: '', name: 'Анна Аристидова Андонова (НАЧАЛНИК НА ОТДЕЛ)', nameAlt: '', alias: '' },
+     { nomTypeValueId: 4, code: '', name: 'Антонио Красимиров Донов (ИНСПЕКТОР)', nameAlt: '', alias: '' },
+     { nomTypeValueId: 5, code: '', name: 'Петър', nameAlt: '', alias: '' }
+    ],
+
     assignmentTypes: [
      { nomTypeValueId: 1, code: '', name: 'Със срок', nameAlt: '', alias: '' },
      { nomTypeValueId: 2, code: '', name: 'Без срок', nameAlt: '', alias: '' }
