@@ -2,137 +2,79 @@
 (function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
-  var _ = require('lodash'),
-    ScFiles = require('../../../pageObjects/directives/scFiles.js');
-
   describe('Sc-files directive', function () {
     var ptor = protractor.getInstance(),
-      multipleFilesBtnElem,
-      singleFileBtnElem,
-      noFilesBtnElem,
-      openModalBtnElem,
-      filesDir;
+        Page = require('../pageObjects/filesPO'),
+        filesPage;
 
     beforeEach(function () {
       ptor.get('#/test/files');
-      filesDir = new ScFiles(ptor.findElement(protractor.By.name('filesDir')), ptor);
-      multipleFilesBtnElem = ptor.findElement(protractor.By.name('multipleFilesBtn'));
-      singleFileBtnElem = ptor.findElement(protractor.By.name('singleFileBtn'));
-      noFilesBtnElem = ptor.findElement(protractor.By.name('noFilesBtn'));
-      openModalBtnElem = ptor.findElement(protractor.By.className('glyphicon-file'));
+      filesPage = new Page(ptor);
     });
 
     it('should set the text of the element to whatever file array is passed.', function () {
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('Няма прикачени файлове.');
-      });
+      expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
 
-      multipleFilesBtnElem.click();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('4 прикачени файла.');
-      });
+      filesPage.selectMultipleFiles();
+      expect(filesPage.filesDirective.get()).toEqual('4 прикачени файла.');
 
-      singleFileBtnElem.click();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('file1');
-      });
+      filesPage.selectSingleFile();
+      expect(filesPage.filesDirective.get()).toEqual('file1');
 
-      noFilesBtnElem.click();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('Няма прикачени файлове.');
-      });
+      filesPage.deselectFiles();
+      expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
     });
 
     it('should open modal.', function () {
-      filesDir.openModal();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('Няма прикачени файлове.');
-      });
+      filesPage.filesDirective.openModal();
+      expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
     });
 
     it('should dismiss modal', function () {
-      multipleFilesBtnElem.click();
-      filesDir.openModal();
-      filesDir.closeModal();
-      ptor.findElements(protractor.By.className('modal-body'))
-        .then(function (data) {
-          expect(_.keys(data).length).toEqual(0);
-          filesDir.get().then(function (value) {
-            expect(value).toEqual('4 прикачени файла.');
-          });
-        });
+      filesPage.selectMultipleFiles();
+      filesPage.filesDirective.openModal();
+      filesPage.filesDirective.closeModal();
+
+      expect(filesPage.filesDirective.isModalDismissed()).toBe(true);
+      expect(filesPage.filesDirective.get()).toEqual('4 прикачени файла.');
     });
 
-
     it('should display file tree.', function () {
-      multipleFilesBtnElem.click();
-      filesDir.openModal();
-      ptor.findElements(
-        protractor.By.className('test-files-li')).then(function (data) {
-          expect(_.keys(data).length).toEqual(3);
-        });
-      ptor.findElements(
-        protractor.By.className('test-files-root-li')).then(function (data) {
-          expect(_.keys(data).length).toEqual(2);
-        });
+      filesPage.selectMultipleFiles();
+
+      filesPage.filesDirective.openModal();
+      expect(filesPage.filesDirective.getFileTree())
+        .toEqual([
+          { '': [{ file1: [] }, { file2: [] }, { file3: [] }] },
+          { file4: [] }
+        ]);
     });
 
     it('should render download link inside modal.', function () {
-      singleFileBtnElem.click();
-      filesDir.openModal();
-      ptor.findElement(
-        protractor.By.className('test-download-link')).getText().then(function (value) {
-          expect(value).toEqual('file1');
-        });
+      filesPage.selectMultipleFiles();
+
+      filesPage.filesDirective.openModal();
+      expect(filesPage.filesDirective.getFiles()).toEqual(['file1', 'file2', 'file3', 'file4']);
     });
 
     it('should delete file', function () {
-      singleFileBtnElem.click();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('file1');
-      });
+      filesPage.selectMultipleFiles();
+      expect(filesPage.filesDirective.get()).toEqual('4 прикачени файла.');
 
-      filesDir.openModal();
-
-      ptor.findElement(protractor.By.className('tree-image-close')).click()
-        .then(function () {
-          return ptor.findElement(
-            protractor.By.className('test-no-files-span')).getText();
-        })
-        .then(function (value) {
-          expect(value).toEqual('Няма прикачени файлове');
-        });
+      filesPage.filesDirective.openModal();
+      filesPage.filesDirective.deleteFile('file1');
+      expect(filesPage.filesDirective.getFileTree())
+        .toEqual([
+          { '': [{ file2: [] }, { file3: [] }] },
+          { file4: [] }
+        ]);
     });
 
     it('should upload file.', function () {
-      filesDir.openModal();
-      filesDir.addFile('//filesCtrl.js');
-      filesDir.uploadFiles();
-      filesDir.get().then(function (value) {
-        expect(value).toEqual('filesCtrl.js');
-      });
-    });
-
-    it('should stop uploading.', function () {
-      filesDir.openModal();
-      filesDir.addFile('//filesCtrl.js');
-      filesDir.addFile('//filesDirective.js');
-      filesDir.addFile('//filesModalCtrl.js');
-      filesDir.uploadFiles();
-      ptor.findElement(protractor.By.className('test-icon-stop')).click()
-      .then(function () {
-        return ptor.wait(function () {
-          return ptor.findElements(protractor.By.className('modal-body'))
-            .then(function (elements) {
-              return _.keys(elements).length === 0;
-            });
-        }, 5000);
-      })
-      .then(function () {
-        filesDir.get().then(function (value) {
-          expect(value).toEqual('2 прикачени файла.');
-        });
-      });
+      filesPage.filesDirective.openModal();
+      filesPage.filesDirective.addFile('//filesCtrl.js');
+      filesPage.filesDirective.uploadFiles();
+      expect(filesPage.filesDirective.get()).toEqual('filesCtrl.js');
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));

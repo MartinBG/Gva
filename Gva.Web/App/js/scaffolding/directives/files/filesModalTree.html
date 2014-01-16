@@ -14,6 +14,6 @@
 <i class="glyphicon glyphicon-remove-circle tree-image-close"
   ng-show="data.canRemove && !isReadonly" ng-click="remove(data)"></i>
 <ul class="tree" ng-show="data.isExpanded">
-  <li class="test-files-li" ng-repeat="data in data.children" ng-include="'scaffolding/directives/files/filesModalTree.html'">
-  </li>
+    <li class="test-files-li" ng-repeat="data in data.children" ng-include="'scaffolding/directives/files/filesModalTree.html'" ng-class="'scf-' + data.name">
+    </li>
 </ul>
