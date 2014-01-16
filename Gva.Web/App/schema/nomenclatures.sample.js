@@ -483,11 +483,11 @@
 
     //Номенклатура DocTypes
     docTypes: [
-      { nomTypeValueId: 1, code: '', name: 'Резолюция', nameAlt: '', alias: 'resolution' },
-      { nomTypeValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task' },
-      { nomTypeValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note' },
-      { nomTypeValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter' },
-      { nomTypeValueId: 5, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol' }
+      { nomTypeValueId: 1, code: '', name: 'Резолюция', nameAlt: '', alias: 'resolution', parentId: 1 },
+      { nomTypeValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task', parentId: 1 },
+      { nomTypeValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note', parentId: 1 },
+      { nomTypeValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter', parentId: 1 },
+      { nomTypeValueId: 5, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol', parentId: 5 }
     ],
 
     //тестови данни за кореспондент

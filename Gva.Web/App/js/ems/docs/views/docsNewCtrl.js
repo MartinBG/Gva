@@ -29,8 +29,6 @@
           _($scope.docDirections).filter({'isActive': true}).first().name;
       });
 
-    $scope.docTypeGroups = nomenclatures.docTypeGroups;
-
     $scope.docFormatTypeChange = function ($index) {
       _.forOwn($scope.docFormatTypes, function (item) {
           item.isActive = false;
@@ -61,13 +59,12 @@
 
     $scope.save = function () {
       if ($scope.docForm.$valid) {
-        $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomTypeValueId;
-        $scope.doc.docTypeId = $scope.docTypes.nomTypeValueId;
-        $scope.doc.correspondentName = $scope.docCorrespondents.name;
+        $scope.doc.docTypeGroupId = $scope.doc.docTypeGroupId.nomTypeValueId;
+        $scope.doc.docTypeId = $scope.doc.docTypeId.nomTypeValueId;
+        $scope.doc.correspondentName = 'TBD';
         $scope.doc.statusId = 2;
         $scope.doc.regDate = new Date();
         $scope.doc.docStatusName = 'Чернова';
-
 
         $scope.doc.$saveNew().then(function () {
           $state.go('docs/search');
