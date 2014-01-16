@@ -33,6 +33,10 @@ Usage: <sc-column model-name="property"
 
               angular.element(nTd).empty();
               angular.element(nTd).append(clone);
+
+              if (!childScope.$$phase) {
+                childScope.$digest();
+              }
             };
           }
 
