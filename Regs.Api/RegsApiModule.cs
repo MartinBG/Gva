@@ -2,8 +2,7 @@
 using Ninject.Modules;
 using Regs.Api;
 using Regs.Api.Models;
-using Regs.Api.Managers.LotManager;
-using Regs.Api.Managers.LobManager;
+using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.LotEvents.LotEventDispatcherFactory;
 
 namespace Regs.Api
@@ -14,8 +13,7 @@ namespace Regs.Api
         {
             Bind<IDbConfiguration>().To<RegsDbConfiguration>();
 
-            Bind<ILotManager>().To<LotManager>();
-            Bind<ILobManager>().To<LobManager>();
+            Bind<ILotRepository>().To<LotRepository>();
 
             Bind<ILotEventDispatcherFactory>().To<LotEventDispatcherFactory>();
         }

@@ -7,37 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="version" content="1.0.0#000000">
 
-  <style type="text/css">
-    #initial-loader
-    {
-      margin-top: 100px;
-    }
-
-    #initial-loader > h4
-    {
-      margin: 8px 0;
-      font-size: 15px;
-      font-family: inherit;
-      font-weight: bold;
-      line-height: 16px;
-      color: inherit;
-      vertical-align: middle;
-      text-align: center;
-      text-rendering: optimizelegibility;
-    }
-
-    #initial-loader > i
-    {
-      display: block;
-      background-image: url("/app/img/initial-loader.gif?_h=<%= md5('build/img/initial-loader.gif') %>");
-      background-repeat: no-repeat;
-      background-position: center;
-      height: 32px;
-      margin: 5px;
-      padding: 0;
-    }
-  </style>
-  <link href="/app/build/css/styles.css?_h=<%= md5('build/css/styles.css') %>" rel="stylesheet" />
+  <%= cssBundle('build/css/styles.css') %>
 </head>
 <body id="ng-app" ng-app="app">
   <noscript>
@@ -52,16 +22,16 @@
   </div>
  
   <!--[if lt IE 9]>
-  <script src="/app/build/js/lib.ie8.js?_h=<%= md5('build/js/lib.ie8.js') %>"></script>
+  <%= jsBundle('build/js/lib.ie8.js') %>
   <!--<[endif]-->
 
   <!--[if gte IE 9]><!-->
-  <script src="/app/build/js/lib.js?_h=<%= md5('build/js/lib.js') %>"></script>
+  <%= jsBundle('build/js/lib.js') %>
   <!--<![endif]-->
 
-  <script src="/app/build/js/app.js?_h=<%= md5('build/js/app.js') %>"></script>
-  <script src="/app/build/js/templates.js?_h=<%= md5('build/js/templates.js') %>"></script>
-  <script src="/app/build/js/sample.data.js?_h=<%= md5('build/js/sample.data.js') %>"></script>
-  <script src="/app/build/js/test.js?_h=<%= md5('build/js/test.js') %>"></script>
+  <%= jsBundle('build/js/app.js') %>
+  <%= jsBundle('build/js/templates.js') %>
+  <%= jsBundle('build/js/sample.data.js') %>
+  <%= jsBundle('build/js/test.js') %>
 </body>
 </html>

@@ -17,7 +17,7 @@ namespace Regs.Api.Models
 
         public int SetPartId { get; set; }
         public int SetId { get; set; }
-        public string Path { get; set; }
+        public string PathRegex { get; set; }
         public string Schema { get; set; }
 
         public virtual ICollection<Part> Parts { get; set; }
@@ -35,7 +35,7 @@ namespace Regs.Api.Models
             this.Property(t => t.SetPartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.Path)
+            this.Property(t => t.PathRegex)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -46,7 +46,7 @@ namespace Regs.Api.Models
             this.ToTable("LotSetParts");
             this.Property(t => t.SetPartId).HasColumnName("LotSetPartId");
             this.Property(t => t.SetId).HasColumnName("LotSetId");
-            this.Property(t => t.Path).HasColumnName("Path");
+            this.Property(t => t.PathRegex).HasColumnName("PathRegex");
             this.Property(t => t.Schema).HasColumnName("Schema");
 
             // Relationships

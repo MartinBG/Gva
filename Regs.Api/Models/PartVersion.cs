@@ -14,7 +14,7 @@ namespace Regs.Api.Models
 
         public int PartVersionId { get; set; }
         public int PartId { get; set; }
-        public int TextBlobId { get; set; }
+        public string TextContent { get; set; }
         public int OriginalCommitId { get; set; }
         public int CreatorId { get; set; }
         public DateTime CreateDate { get; set; }
@@ -22,7 +22,6 @@ namespace Regs.Api.Models
         public virtual Commit OriginalCommit { get; set; }
         public virtual PartOperation PartOperation { get; set; }
         public virtual Part Part { get; set; }
-        public virtual TextBlob TextBlob { get; set; }
         public virtual ICollection<Commit> Commits { get; set; }
         public virtual User User { get; set; }
     }
@@ -38,7 +37,7 @@ namespace Regs.Api.Models
             this.ToTable("LotPartVersions");
             this.Property(t => t.PartVersionId).HasColumnName("LotPartVersionId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
-            this.Property(t => t.TextBlobId).HasColumnName("TextBlobId");
+            this.Property(t => t.TextContent).HasColumnName("TextContent");
             this.Property(t => t.OriginalCommitId).HasColumnName("OriginalCommitId");
             this.Property(t => t.PartOperation).HasColumnName("LotPartOperationId");
             this.Property(t => t.CreatorId).HasColumnName("CreatorId");
@@ -53,10 +52,6 @@ namespace Regs.Api.Models
                 .WithMany(t => t.PartVersions)
                 .HasForeignKey(d => d.PartId)
                 .WillCascadeOnDelete();
-
-            this.HasRequired(t => t.TextBlob)
-                .WithMany()
-                .HasForeignKey(d => d.TextBlobId);
 
             this.HasRequired(t => t.User)
                 .WithMany()

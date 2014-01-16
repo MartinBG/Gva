@@ -4,6 +4,7 @@
 
   function ScInputCtrl($scope) {
     $scope.text = null;
+    $scope.textarea = null;
     $scope.intNum = null;
     $scope.floatNum = null;
     $scope.date = null;

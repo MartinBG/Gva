@@ -9,12 +9,6 @@ gva
 4. In the js app folder `cd .\Gva.Web\App`
   * Install the required npm packages with `npm install`
   * Install the required bower components with `bower install`
-  * Build the `angular-bootstrap`   
-    `cd .\bower_components\angular-bootstrap`  
-    `npm install`  
-    `grunt before-test`  
-    `grunt after-test`  
-    `cd ..\..\`
   * Build the js app with `grunt`
 5. Open the solution `Gva.sln` and run the web project `Gva.Web`
 
@@ -22,7 +16,11 @@ gva
 
 ##### To run the tests
 1. Make sure you have `java` accessible from your `PATH`
-2. Run `grunt test`
+2.1 Download chormedriver for selenium from http://chromedriver.storage.googleapis.com/index.html?path=2.8/
+2.2 Download IEDriverServer from https://code.google.com/p/selenium/downloads/detail?name=IEDriverServer_Win32_2.39.0.zip
+3. Download selenium server from https://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.39.0.jar
+4. Add a new environment variable `SELENIUM_PATH` with value -  the path to the folder in which you have put selenium server and chormedriver
+5. Run `grunt test` (`grunt test-ie` for IE)
 
 ##### To debug the tests
 1. Install `node-inspector` globally with `npm install -g node-inspector`

@@ -21,13 +21,14 @@ namespace Regs.Api.Models
         public virtual ICollection<Lot> Lots { get; set; }
         public virtual ICollection<SetPart> SetParts { get; set; }
 
-        public Lot AddLot(UserContext userContext)
+        public Lot CreateLot(UserContext userContext)
         {
             Commit index = new Commit
             {
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
-                IsIndex = true
+                IsIndex = true,
+                IsLoaded = true
             };
 
             Lot lot = new Lot

@@ -1,64 +1,7 @@
-/*global module, require*/
+/*global module, process*/
 /*jshint maxlen: false */
 module.exports = function (grunt) {
   'use strict';
-
-  var _ = require('lodash'),
-      tv4 = require('tv4'),
-      crypto = require('crypto');
-
-  grunt.registerMultiTask('tv4', 'JSON Schema validation.', function() {
-    var options = this.options({
-        formats: {}
-      }),
-      hasErrors;
-
-    grunt.verbose.writeflags(options, 'Options');
-    tv4.addFormat(options.formats);
-
-    this.files.forEach(function(f) {
-      var schema;
-
-      if (!grunt.file.exists(f.dest)) {
-        grunt.fail.warn('Schema file "' + f.dest + '" not found.');
-      } else {
-        schema = grunt.file.readJSON(f.dest);
-
-        f.src.filter(function(filepath) {
-          if (!grunt.file.exists(filepath)) {
-            grunt.fail.warn('Data file "' + filepath + '" not found.');
-            return false;
-          } else {
-            return true;
-          }
-        })
-        .forEach(function(filepath) {
-          if (hasErrors) {
-            return;
-          }
-
-          var data = require('./' + filepath),
-              failed;
-
-          _.forOwn(data, function(value, key) {
-            if (!tv4.validate(value, schema)) {
-              grunt.log.error(filepath);
-              grunt.log.error('Error at item: ' + key + ', dataPath: ' + tv4.error.dataPath);
-              grunt.log.error(tv4.error.message);
-              failed = true;
-              hasErrors = true;
-            }
-          });
-
-          if (!failed) {
-            grunt.log.ok(filepath);
-          }
-        });
-      }
-    });
-
-    return hasErrors;
-  });
 
   // Project configuration.
   grunt.initConfig({
@@ -104,7 +47,7 @@ module.exports = function (grunt) {
         'bower_components/angular-resource/angular-resource.js',
         'bower_components/angular-ui-select2/src/select2.js',
         'bower_components/angular-ui-utils/modules/jq/jq.js',
-        'bower_components/angular-bootstrap/dist/ui-bootstrap-tpls-0.7.0.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'bower_components/bootstrap/js/collapse.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
@@ -129,7 +72,7 @@ module.exports = function (grunt) {
         'bower_components/angular-resource/angular-resource.js',
         'bower_components/angular-ui-select2/src/select2.js',
         'bower_components/angular-ui-utils/modules/jq/jq.js',
-        'bower_components/angular-bootstrap/dist/ui-bootstrap-tpls-0.7.0.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'bower_components/bootstrap/js/collapse.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
@@ -147,6 +90,7 @@ module.exports = function (grunt) {
         '!test/e2e/ptorConf.js',
         '!test/e2e/expressServer.js',
         '!test/e2e/spec/**/*.js',
+        '!test/e2e/pageObjects/**/*.js',
         '!test/e2e/directives/**/specs/*.js'
       ]
     },
@@ -264,8 +208,8 @@ module.exports = function (grunt) {
     },
     watch:{
       html: {
-        files:['css/**', 'js/**', 'schema/**', 'test/**'],
-        tasks:['html2js', 'concat_sourcemap', 'template']
+        files: ['css/**', 'js/**', 'schema/**', 'test/**'],
+        tasks: ['html2js', 'bundle:debug']
       }
     },
     express: {
@@ -279,9 +223,27 @@ module.exports = function (grunt) {
       }
     },
     protractor: {
-      test: {
+      options: {
+        configFilename: 'test/e2e/ptorConf.js'
+      },
+      test_chrome: {
         options: {
-          configFilename: 'test/e2e/ptorConf.js'
+          config: {
+            chromeDriver: process.env.SELENIUM_PATH + 'chromedriver',
+            capabilities: {
+              'browserName': 'chrome'
+            }
+          }
+        }
+      },
+      test_ie: {
+        options: {
+          config: {
+            seleniumArgs: ['-Dwebdriver.ie.driver=' + process.env.SELENIUM_PATH + 'IEDriverServer.exe'],
+            capabilities: {
+              'browserName': 'internet explorer'
+            }
+          }
         }
       }
     },
@@ -309,15 +271,23 @@ module.exports = function (grunt) {
         }
       }
     },
-    template: {
+    bundle: {
       options: {
-        data: {
-          md5: function(file) {
-            return crypto.createHash('md5').update(grunt.file.read(file), 'utf8').digest('hex');
-          }
+        appPath: '/app',
+        bundles: ['<%= jsBundles %>', '<%= cssBundles %>']
+      },
+      debug: {
+        options: {
+          debug: true
+        },
+        files: {
+          'build/index.html': ['index.html']
         }
       },
-      index: {
+      release: {
+        options: {
+          debug: false
+        },
         files: {
           'build/index.html': ['index.html']
         }
@@ -334,25 +304,27 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-concat-sourcemap');
-  grunt.loadNpmTasks('grunt-template');
 
   grunt.loadTasks('./gruntTasks');
 
   grunt.registerTask('debug',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template']);
+    ['clean', 'jshint:source', 'html2js', 'bundle:debug']);
 
-  grunt.registerTask('test',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'template', 'express', 'protractor']);
+  grunt.registerTask('bundled',
+    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'bundle:release']);
 
   grunt.registerTask('release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template']);
+    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'bundle:release']);
 
-  grunt.registerTask('test-release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'template', 'express', 'protractor']);
+  grunt.registerTask('test-chrome', ['express', 'protractor:test_chrome']);
+
+  grunt.registerTask('test-ie', ['express', 'protractor:test_ie']);
 
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
   grunt.registerTask('test-server', ['express', 'express-keepalive']);
+
+  grunt.registerTask('test', ['debug', 'test-chrome']);
 
   grunt.registerTask('default', ['debug']);
 

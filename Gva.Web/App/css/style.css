@@ -227,3 +227,33 @@ form.card input.form-control[disabled] {
   padding: 5px 12px;
   cursor: pointer;
 }
+
+/* Initial loader */
+#initial-loader
+{
+    margin-top: 100px;
+}
+
+#initial-loader > h4
+{
+    margin: 8px 0;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 16px;
+    color: inherit;
+    vertical-align: middle;
+    text-align: center;
+    text-rendering: optimizelegibility;
+}
+
+#initial-loader > i
+{
+    display: block;
+    background-image: url('../img/initial-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 32px;
+    margin: 5px;
+    padding: 0;
+}

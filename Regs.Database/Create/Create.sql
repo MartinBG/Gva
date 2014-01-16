@@ -10,7 +10,6 @@ GO
 :r $(rootPath)\"Tables\LotSetParts.sql"
 :r $(rootPath)\"Tables\Lots.sql"
 :r $(rootPath)\"Tables\LotParts.sql"
-:r $(rootPath)\"Tables\TextBlobs.sql"
 :r $(rootPath)\"Tables\LotPartOperations.sql"
 :r $(rootPath)\"Tables\LotCommits.sql"
 :r $(rootPath)\"Tables\LotPartVersions.sql"

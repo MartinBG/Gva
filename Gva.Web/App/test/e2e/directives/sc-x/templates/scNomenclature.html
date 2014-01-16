@@ -19,5 +19,23 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label class="control-label">Parent</label>
+        <sc-nomenclature ng-model="parentVal" alias="'parentNom'" load="true"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label">Child</label>
+        <sc-nomenclature ng-model="childVal" alias="'childrenNom'" load="false" params="{ parentId: parentVal ? parentVal.nomTypeValueId : 0 }"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-5">
+        <div class="labeless">
+          <span id="Span1">{{parentVal.nomTypeValueId}}</span>
+          <span id="Span2">{{childVal.nomTypeValueId}}</span>
+        </div>
+      </div>
+    </div>
+
   </form>
 </div>

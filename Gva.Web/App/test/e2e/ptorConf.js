@@ -1,14 +1,10 @@
-/*global exports, require, global*/
-(function (exports, require, global) {
+/*global exports, require, global, process*/
+(function (exports, require, global, process) {
   'use strict';
 
   exports.config = {
-    seleniumServerJar: 'test/e2e/assets/selenium/selenium-server-standalone-2.35.0.jar',
-    chromeDriver: 'test/e2e/assets/selenium/chromedriver',
+    seleniumServerJar: process.env.SELENIUM_PATH + 'selenium-server-standalone-2.39.0.jar',
     specs: ['test/e2e/spec/*.js', 'test/e2e/directives/sc-*/specs/*.js'],
-    capabilities: {
-      'browserName': 'chrome'
-    },
     baseUrl: 'http://localhost:52560',
     rootElement: 'body',
     onPrepare: function() {
@@ -30,4 +26,4 @@
       defaultTimeoutInterval: 10000
     }
   };
-}(exports, require, global));
+}(exports, require, global, process));

@@ -19,6 +19,8 @@ namespace Regs.Api.Models
         public DateTime CommitDate { get; set; }
         public bool IsIndex { get; set; }
 
+        public bool IsLoaded { get; set; }
+
         public virtual Commit ParentCommit { get; set; }
         public virtual Lot Lot { get; set; }
         public virtual User Commiter { get; set; }
@@ -63,6 +65,9 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.Commiter)
                 .WithMany()
                 .HasForeignKey(d => d.CommiterId);
+
+            // Local-only properties
+            this.Ignore(t => t.IsLoaded);
         }
     }
 }
