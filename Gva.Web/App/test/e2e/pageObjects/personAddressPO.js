@@ -9,7 +9,10 @@
     this.address = new ScText(context.findElement(by.input('model.address')));
     this.addressAlt = new ScText(context.findElement(by.input('model.addressAlt')));
     this.addressType = new ScNomenclature('model.addressType', context);
-    this.valid = new ScNomenclature('model.valid', context);
+    this.valid = new ScNomenclature(
+      'model.valid',
+      context.findElement(by.name('personAddressForm'))
+      );
     this.settlement = new ScNomenclature('model.settlement', context);
     this.postalCode = new ScText(context.findElement(by.input('model.postalCode')));
     this.phone = new ScText(context.findElement(by.input('model.phone')));
