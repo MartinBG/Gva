@@ -5,7 +5,7 @@
   function NavigationConfigProvider() {
     this.items = [];
   }
-  
+
   NavigationConfigProvider.prototype.$get = function () {
     return {
       items: this.items,
@@ -14,12 +14,12 @@
       showBreadcrumbBar: this.showBreadcrumbBar
     };
   };
-  
+
   NavigationConfigProvider.prototype.addItem = function (item) {
     this.items.push(item);
     return this;
   };
-  
+
   NavigationConfigProvider.prototype.setUserFullName = function (userFullName) {
     this.userFullName = userFullName;
     return this;

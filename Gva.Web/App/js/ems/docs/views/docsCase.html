@@ -1,0 +1,29 @@
+﻿<div class="tab-content">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th style="width: 150px;">Рег.№</th>
+        <th style="width: 100px;">Статус</th>
+        <th>Описание</th>
+        <th style="width: 75px;"></th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="dr in doc.docRelations">
+      <tr ng-style="{ color: dr.docDocCasePartTypeStyleColor, 'font-weight': dr.isCurrent ? 'bold' : 'normal'}">
+        <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ dr.regNumberCol }}</td>
+        <!--todo must be html rendered-->
+        <td>{{ dr.docDocStatusName }}</td>
+        <td>{{ dr.descriptionCol }}</td>
+        <!--todo must be html rendered-->
+        <td style="text-align: right;">
+          <a ng-click="viewDoc(doc.docId)" style="cursor: pointer;">преглед
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--TODO DocLinks documents implementation-->
+</div>

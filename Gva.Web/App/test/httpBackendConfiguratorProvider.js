@@ -14,7 +14,7 @@
     });
     return this;
   };
-  
+
   $HttpBackendConfiguratorProvider.prototype.$get = [
     '$urlMatcherFactory',
     '$injector',
@@ -54,18 +54,18 @@
         return res;
       }, {});
   };
-  
+
   $HttpBackendConfigurator.prototype.configure = function ($httpBackend) {
     var self = this,
       method;
-      
+
     function respond(method, url, data) {
       var matchers = self.matchersPerMethod[method],
         urlSplit = url.split('?'),
         path = urlSplit[0],
         query = self.parseQuery(urlSplit[1]),
         i;
-      
+
       for (i = 0; i < matchers.length; i++) {
         var match = matchers[i].matcher.exec(path, query);
         if (match) {
@@ -77,7 +77,7 @@
         }
       }
     }
-    
+
     for (method in self.matchersPerMethod) {
       if (self.matchersPerMethod.hasOwnProperty(method)) {
         $httpBackend.when(method, /^.*$/).respond(respond);

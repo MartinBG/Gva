@@ -47,7 +47,7 @@
       $state.go('users.edit', { userId: user.userId });
     };
   }
-  
+
   UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'User'];
 
   angular.module('common').controller('UsersSearchCtrl', UsersSearchCtrl);

@@ -130,6 +130,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\ems\docs\views\docsClassifications.html" />
+    <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsCase.html" />
+    <Content Include="App\js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsStages.html" />
+    <Content Include="App\js\ems\docs\views\docsStagesCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsWorkflows.html" />
+    <Content Include="App\js\ems\docs\views\docsWorkflowsCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsContent.html" />
+    <Content Include="App\js\ems\docs\views\docsContent.js" />
+    <Content Include="App\js\ems\docs\views\docsAddressingCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsAddressing.html" />
+    <Content Include="App\js\ems\docs\views\docsSearch.html" />
+    <Content Include="App\js\ems\docs\views\docsSearchCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsNewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsNew.html" />
+    <Content Include="App\js\ems\docs\views\docsEditCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsEdit.html" />
+    <Content Include="App\js\ems\docs\recources\doc.js" />
+    <Content Include="App\js\ems\ems_bg-bg.js" />
+    <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
@@ -137,6 +158,8 @@
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
+    <Content Include="App\test\ems\mocks\corrsHttp.js" />
+    <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />
@@ -175,6 +198,12 @@
     <Content Include="App\img\loading-icon.gif" />
     <Content Include="App\index.html" />
     <Content Include="App\js\app.js" />
+    <Content Include="App\js\ems\corrs\views\corrEditCtrl.js" />
+    <Content Include="App\js\ems\corrs\views\corrSearchCtrl.js" />
+    <Content Include="App\js\ems\ems.js" />
+    <Content Include="App\js\ems\corrs\resources\corr.js" />
+    <Content Include="App\js\ems\corrs\views\corrEdit.html" />
+    <Content Include="App\js\ems\corrs\views\corrSearch.html" />
     <Content Include="App\js\gva\persons\resources\personData.js" />
     <Content Include="App\js\gva\persons\resources\personAddress.js" />
     <Content Include="App\js\gva\persons\resources\personsStatus.js" />
@@ -322,6 +351,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\js\ems\corrs\forms\" />
+    <Folder Include="App\js\ems\docs\forms\" />
     <Folder Include="App\test\gva\persons\pageObjects\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
@@ -387,7 +418,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>2902</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:60045/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

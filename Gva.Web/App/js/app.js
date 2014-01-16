@@ -8,6 +8,7 @@
     'common',
     'scaffolding',
     'gva',
+    'ems',
     'l10n',
     'l10n-tools'
   ]).config([
@@ -38,7 +39,13 @@
           { text: 'Надзор', url: '/licenses' },
           { text: 'Ръководен Персонал', url: '/licenses' }
         ]})
-        .addItem({ text: 'Възд. Средства', url: '/aircraft', items: [
+        .addItem({text: 'Документи', icon: 'glyphicon-folder-open', state: 'docs/search', items: [
+          { text: 'Нов документ', state: 'docs/new' }
+        ]})
+        .addItem({text: 'Кореспонденти', icon: 'glyphicon-user', state: 'corrs/search', items: [
+          { text: 'Нов кореспондент', state: 'corrs/new' }
+        ]})
+        .addItem({text: 'Възд. Средства', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licenses' },
           { text: 'Инспекции', url: '/licenses' }
         ]})

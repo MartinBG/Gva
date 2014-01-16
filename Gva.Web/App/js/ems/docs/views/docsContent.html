@@ -1,0 +1,78 @@
+﻿<div class="tab-content">
+  <div class="row">
+    <div class="col-md-2">
+      <span>Текст:</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-11" style="margin-bottom: 10px;">
+      <textarea rows="3" class="form-control" ng-model="doc.docBody" ng-disabled="!inEditMode"></textarea>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <!--<th style="width: 40px;">#</th>-->
+        <th>Име на файл</th>
+        <th>Тип</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr>
+      <td colspan="3">Вътрешни файлове
+      </td>
+    </tr>
+    <tbody ng-repeat="pdf in doc.privateDocFiles">
+      <tr ng-style="{ color: pdf.isActive ? 'black' : 'red' }">
+        <td>{{ pdf.name }}</td>
+        <td>{{ pdf.docFileTypeName }}</td>
+        <td style="text-align: right;">
+          <a ng-show="pdf.docFileTypeIsEditable" ng-click="viewFile(pdf)" style="cursor: pointer;">преглед</a>
+          <a ng-show="inEditMode && pdf.docFileTypeIsEditable" ng-click="editFile(pdf)" style="cursor: pointer;">редактирай</a>
+          <a href="/EmsFile/Index/{{ pdf.docFileId }}" target="_blank" ng-show="pdf.docFileId && !pdf.docFileTypeIsEditable" style="cursor: pointer;">изтегли</a>
+          <a ng-show="inEditMode && pdf.isActive" ng-click="detachFile(pdf)" style="cursor: pointer;">изтрий</a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-show="inEditMode">
+      <tr>
+        <td colspan="4" style="text-align: right;">
+          <a ng-click="attachPrivateFile(pdf)" style="cursor: pointer;">добавяне на съществуващ
+          </a>
+          <span>|</span>
+          <a ng-click="createPrivateFile(pdf)" style="cursor: pointer;">създаване на нов
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="3">Публични файлове
+      </td>
+    </tr>
+    <tbody ng-repeat="pdf in doc.publicDocFiles">
+      <tr ng-style="{ color: pdf.isActive ? 'black' : 'red' }">
+        <td>{{ pdf.name }}</td>
+        <td>{{ pdf.docFileTypeName }}</td>
+        <td style="text-align: right;">
+          <a ng-show="pdf.docFileTypeIsEditable" ng-click="viewFile(pdf)" style="cursor: pointer;">преглед</a>
+          <a ng-show="inEditMode && pdf.docFileTypeIsEditable" ng-click="editFile(pdf)" style="cursor: pointer;">редактирай</a>
+          <a href="/EmsFile/Index/{{ pdf.docFileId }}" target="_blank" ng-show="pdf.docFileId && !pdf.docFileTypeIsEditable" style="cursor: pointer;">изтегли</a>
+          <a ng-show="inEditMode && pdf.isActive" ng-click="detachFile(pdf)" style="cursor: pointer;">изтрий</a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-show="inEditMode">
+      <tr>
+        <td colspan="4" style="text-align: right;">
+          <a ng-click="attachPrivateFile(pdf)" style="cursor: pointer;">добавяне на съществуващ
+          </a>
+          <span>|</span>
+          <a ng-click="createPrivateFile(pdf)" style="cursor: pointer;">създаване на нов
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

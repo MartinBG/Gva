@@ -11,7 +11,7 @@
     $scope.cancel = function () {
       return $state.go('persons.statuses.search', { id: $stateParams.id });
     };
-    
+
     $scope.save = function () {
       return PersonStatus
         .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status).$promise

@@ -14,7 +14,9 @@ module.exports = function (grunt) {
         'js/common/*.js',
         'js/common/**/*.js',
         'js/gva/*.js',
-        'js/gva/**/*.js'
+        'js/gva/**/*.js',
+        'js/ems/*.js',
+        'js/ems/**/*.js'
       ],
       '<%= buildDir %>/js/sample.data.js': [
         'schema/requireShim.js',
@@ -85,6 +87,7 @@ module.exports = function (grunt) {
         'test/httpBackendConfiguratorProvider.js',
         'test/common/mocks/*.js',
         'test/gva/persons/mocks/*.js',
+        'test/ems/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js'
       ]
@@ -175,10 +178,15 @@ module.exports = function (grunt) {
         dest: '<%= buildDir %>/templates/common.js',
         module: 'common.templates'
       },
-      persons: {
+      gva: {
         src: ['js/gva/**/*.html'],
         dest: '<%= buildDir %>/templates/gva.js',
         module: 'gva.templates'
+      },
+      ems: {
+        src: [ 'js/ems/**/*.html' ],
+        dest: '<%= buildDir %>/templates/ems.js',
+        module: 'ems.templates'
       },
       scaffolding: {
         src: ['js/scaffolding/**/*.html', 'test/scaffolding/**/*.html'],

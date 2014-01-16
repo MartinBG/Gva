@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  
+
   function NavbarCtrl($scope, $state, navigationConfig) {
     function mapItems(items) {
       return items.filter(function (item) {
