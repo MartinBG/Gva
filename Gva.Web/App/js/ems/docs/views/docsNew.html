@@ -59,23 +59,26 @@
           <br />
 
           <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
-              <sc-nomenclature  ng-model="doc.docTypeGroupId" name="docTypeGroup" alias="'docTypeGroups'" load="true"></sc-nomenclature>
+              <span name="docTypeGroupIdValidationSpan" ng-show="saveClicked && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
+              <sc-nomenclature  ng-model="doc.docTypeGroupId" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
-              <sc-nomenclature  ng-model="doc.docTypeId" name="docTypes" alias="'docTypes'" load="false" params="{ parentId: doc.docTypeGroupId ? doc.docTypeGroupId.nomTypeValueId : 0 }"></sc-nomenclature>
+              <span name="docTypeIdValidationSpan" ng-show="saveClicked && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
+              <sc-nomenclature  ng-model="doc.docTypeId" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: doc.docTypeGroupId ? doc.docTypeGroupId.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docSubject.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
-              <sc-text ng-model="doc.docSubject" name="docSubject"></sc-text>
+              <span name="docSubjectValidationSpan" ng-show="saveClicked && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
+              <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
             </div>
           </div>
 
@@ -87,14 +90,15 @@
           </div>
 
           <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.numberOfDocuments.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.numberOfDocuments"></label>
-              <sc-text ng-model="doc.numberOfDocuments" name="numberOfDocuments"></sc-text>
+              <span name="numberOfDocumentsValidationSpan" ng-show="saveClicked && docForm.numberOfDocuments.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.numberOfDocuments.$error.unique && 'С-та трябва да е положително число'}}"></span>
+              <sc-text ng-model="doc.numberOfDocuments" name="numberOfDocuments" required sc-validate="{unique: isNumberOfDocsValid}"></sc-text>
             </div>
           </div>
 
         </div>
-
+        
       </form>
     </div>
   </div>

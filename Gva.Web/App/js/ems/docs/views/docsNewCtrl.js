@@ -8,6 +8,8 @@
     $state,
     Doc
   ) {
+    $scope.saveClicked = false;
+
     var nomenclatures = require('./nomenclatures.sample');
 
     Doc.create().$promise
@@ -16,23 +18,32 @@
 
         $scope.docFormatTypes = nomenclatures.docFormatTypes;
         $scope.doc.docFormatTypeId =
-          _($scope.docFormatTypes).filter({'isActive': true}).first().docFormatTypeId;
+          _($scope.docFormatTypes).filter({ 'isActive': true }).first().docFormatTypeId;
 
         $scope.docCasePartTypes = nomenclatures.docCasePartTypes;
         $scope.doc.docCasePartTypeId =
-          _($scope.docCasePartTypes).filter({'isActive': true}).first().docCasePartTypeId;
+          _($scope.docCasePartTypes).filter({ 'isActive': true }).first().docCasePartTypeId;
 
         $scope.docDirections = nomenclatures.docDirections;
         $scope.doc.docDirectionId =
-          _($scope.docDirections).filter({'isActive': true}).first().docDirectionId;
+          _($scope.docDirections).filter({ 'isActive': true }).first().docDirectionId;
         $scope.doc.docDirectionName =
-          _($scope.docDirections).filter({'isActive': true}).first().name;
+          _($scope.docDirections).filter({ 'isActive': true }).first().name;
       });
+
+    $scope.isNumberOfDocsValid = function (value) {
+      var parsedValue = parseInt(value, 10);
+      if (!isNaN(parsedValue) && parsedValue > 0) {
+        return true;
+      }
+
+      return false;
+    };
 
     $scope.docFormatTypeChange = function ($index) {
       _.forOwn($scope.docFormatTypes, function (item) {
-          item.isActive = false;
-        });
+        item.isActive = false;
+      });
 
       $scope.docFormatTypes[$index].isActive = true;
       $scope.doc.docFormatTypeId = $scope.docFormatTypes[$index].docFormatTypeId;
@@ -40,8 +51,8 @@
 
     $scope.docCasePartTypeChange = function ($index) {
       _.forOwn($scope.docCasePartTypes, function (item) {
-          item.isActive = false;
-        });
+        item.isActive = false;
+      });
 
       $scope.docCasePartTypes[$index].isActive = true;
       $scope.doc.docCasePartTypeId = $scope.docCasePartTypes[$index].docCasePartTypeId;
@@ -49,8 +60,8 @@
 
     $scope.docDirectionChange = function ($index) {
       _.forOwn($scope.docDirections, function (item) {
-          item.isActive = false;
-        });
+        item.isActive = false;
+      });
 
       $scope.docDirections[$index].isActive = true;
       $scope.doc.docDirectionId = $scope.docDirections[$index].docDirectionId;
@@ -58,6 +69,8 @@
     };
 
     $scope.save = function () {
+      $scope.saveClicked = true;
+
       if ($scope.docForm.$valid) {
         $scope.doc.docTypeGroupId = $scope.doc.docTypeGroupId.nomTypeValueId;
         $scope.doc.docTypeId = $scope.doc.docTypeId.nomTypeValueId;
