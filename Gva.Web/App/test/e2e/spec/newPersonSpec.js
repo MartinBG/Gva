@@ -61,9 +61,6 @@
       expect(newPersonPage.isSaveBtnDisabled).toEqual(true);
       newPersonPage.personDocumentId.documentPublisher.set('Карнобат еър');
 
-      newPersonPage = new Page(ptor);
-      expect(newPersonPage.isSaveBtnDisabled).toEqual(false);
-
       newPersonPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons');
 
