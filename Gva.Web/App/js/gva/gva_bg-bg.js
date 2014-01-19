@@ -86,6 +86,7 @@
           cancel: 'Отказ'
         },
         addressSearch: {
+          newAddress: 'Нов aдрес',
           type: 'Вид',
           settlement: 'Населено място',
           address: 'Адрес',

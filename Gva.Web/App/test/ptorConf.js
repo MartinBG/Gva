@@ -7,6 +7,7 @@
     specs: [
       'test/common/specs/*.js',
       'test/gva/persons/specs/*.js',
+      'test/gva/directives/specs/*.js',
       'test/scaffolding/specs/*.js'
     ],
     baseUrl: 'http://localhost:52560',

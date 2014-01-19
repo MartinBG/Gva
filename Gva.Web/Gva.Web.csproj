@@ -160,6 +160,10 @@
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
+    <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
+    <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbed.html" />
+    <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
+    <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />
