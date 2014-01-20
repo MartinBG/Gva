@@ -130,6 +130,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
+    <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsClassifications.html" />
     <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />

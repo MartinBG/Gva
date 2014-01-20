@@ -38,7 +38,8 @@
           onlyUnactive: 'Само неактивни',
           'new': 'Нов кореспондент',
           search: 'Търси',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          select: 'Избор'
         },
         edit: {
           correspondentTitle: 'Кореспондент',

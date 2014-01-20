@@ -35,6 +35,24 @@
       $scope.inEditMode = false;
     };
 
+    //function fnAddFrom(item)
+    //{
+    //  docunit.unit = item;
+    //  docunit.Role = "From";
+    //  doc.DocUnit.push(docunit);
+    //}
+    //function fnAddTo(item) {
+    //  docunit.unit = item;
+    //  docunit.Role = "To";
+    //  doc.DocUnit.push(docunit);
+    //}
+    //function fnAddUnit(item);
+    //fnAddUnit = fnAddTo;
+
+    $scope.chooseCorr = function () {
+      return $state.go('docs/edit/chooseCorr');
+    };
+
     $scope.save = function () {
       if ($scope.editDocForm.$valid) {
         return Doc

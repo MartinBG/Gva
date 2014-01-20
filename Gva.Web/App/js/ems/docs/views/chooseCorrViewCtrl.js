@@ -1,0 +1,62 @@
+﻿/*global angular, _*/
+(function (angular) {
+  'use strict';
+
+  function ChooseCorrViewCtrl(
+    $state,
+    $stateParams,
+    $scope,
+    Corr
+  ) {
+    $scope.filters = {
+      displayName: null,
+      email: null
+    };
+
+    _.forOwn($stateParams, function (value, param) {
+      if (value !== null && value !== undefined) {
+        $scope.filters[param] = value;
+      }
+    });
+
+    $scope.search = function () {
+      $state.go('docs/edit/chooseCorr', {
+        displayName: $scope.filters.displayName,
+        email: $scope.filters.email
+      });
+    };
+
+    Corr.query($stateParams).$promise.then(function (corrs) {
+      $scope.corrs = corrs.map(function (corr) {
+        return {
+          corrId: corr.corrId,
+          displayName: corr.displayName,
+          email: corr.email,
+          correspondentType: corr.correspondentType
+        };
+      });
+    });
+
+    $scope.selectCorr = function (corr) {
+      var nomItem = {
+        nomTypeValueId: corr.corrId,
+        name: corr.displayName,
+        content: corr
+      };
+
+      $scope.doc.docCorrespondents.push(nomItem);
+
+      $state.go('docs/edit/addressing');
+    };
+
+  }
+
+  ChooseCorrViewCtrl.$inject = [
+    '$state',
+    '$stateParams',
+    '$scope',
+    'Corr'
+  ];
+
+  angular.module('ems').controller('ChooseCorrViewCtrl', ChooseCorrViewCtrl);
+}(angular, _));

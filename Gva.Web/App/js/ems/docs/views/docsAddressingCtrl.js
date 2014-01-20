@@ -3,14 +3,17 @@
   'use strict';
 
   function DocsAddressingCtrl(
-    $scope
+    $scope,
+    $stateParams
   ) {
-    $scope.t = undefined;
+    $scope.test = $stateParams.docId;
+
 
   }
 
   DocsAddressingCtrl.$inject = [
-    '$scope'
+    '$scope',
+    '$stateParams'
   ];
 
   angular.module('ems').controller('DocsAddressingCtrl', DocsAddressingCtrl);

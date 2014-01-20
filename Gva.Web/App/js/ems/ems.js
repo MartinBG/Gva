@@ -67,6 +67,18 @@
         }
       })
       .state({
+        name: 'docs/edit/chooseCorr',
+        title: 'Избор кореспондент',
+        parent: 'docs/edit',
+        url: '/choosecorr?displayName&email',
+        views: {
+          'corrView@docs/edit': {
+            templateUrl: 'ems/docs/views/chooseCorrView.html',
+            controller: 'ChooseCorrViewCtrl'
+          }
+        }
+      })
+      .state({
         name: 'docs/edit/content',
         title: 'Прикачени файлове',
         parent: 'docs/edit',

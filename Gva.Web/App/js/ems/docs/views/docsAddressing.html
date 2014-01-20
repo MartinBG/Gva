@@ -10,7 +10,6 @@
           </div>
           <div class="row" ng-show="doc.isVisibleRoleFrom">
             <div class="col-md-11 input-group" style="margin-bottom: 10px;">
-              <!--<sc-text ng-readonly="!inEditMode"></sc-text>-->
               <sc-nomenclature  ng-model="doc.docUnits" alias="'units'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
               <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
             </div>
@@ -71,8 +70,8 @@
           </div>
           <div class="row" ng-show="doc.isVisibleCorrespondent">
             <div class="col-md-11 input-group" style="margin-bottom: 10px;">
-              <sc-text ng-readonly="!inEditMode"></sc-text>
-              <span class="input-group-addon search-addon" ng-show="inEditMode"><i class="glyphicon glyphicon-search"></i></span>
+              <sc-nomenclature  ng-model="doc.docCorrespondents" alias="'corrs'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+              <span class="input-group-addon search-addon" ng-show="inEditMode" ng-click="chooseCorr(item)"><i class="glyphicon glyphicon-search"></i></span>
             </div>
           </div>
 
