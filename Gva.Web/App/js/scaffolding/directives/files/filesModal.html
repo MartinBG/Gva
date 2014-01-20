@@ -23,7 +23,7 @@
     <i class="glyphicon glyphicon-download test-icon-stop" style="position: absolute; right: 0px" ng-click="stop()"></i>
   </div>
   <ul class="tree tree-root" style="margin-top: 15px">
-    <li  class="test-files-root-li" ng-repeat="data in fileHierarchy" ng-include="'scaffolding/directives/files/filesModalTree.html'">
+    <li  class="test-files-root-li" ng-repeat="data in fileHierarchy" ng-include="'scaffolding/directives/files/filesModalTree.html'" ng-class="'scf-' + data.name">
     </li>
   </ul>
   <span class="test-no-files-span" ng-show="!fileHierarchy.length" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFilesAttached"></span>

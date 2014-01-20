@@ -1,51 +1,32 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('scTextarea directive', function() {
     var ptor = protractor.getInstance(),
-        textareaDirectiveElem,
-        textareaInputElem;
+        Page = require('../pageObjects/testbeds/inputPO'),
+        inputPage;
 
     beforeEach(function (){
       ptor.get('#/test/input');
-
-      textareaDirectiveElem = ptor.findElement(protractor.By.name('textareaDir'));
-      textareaInputElem = ptor.findElement(protractor.By.name('textareaInput'));
+      inputPage = new Page(ptor);
     });
 
-    it('should set the textarea of the element to whatever is passed.', function() {
-      textareaDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      textareaInputElem.sendKeys('text');
-
-      textareaDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('text');
-      });
+    it('should set the textarea of the element to whatever is passed.', function () {
+      expect(inputPage.textareaDirective.get()).toEqual('');
+      inputPage.textareaInput.sendKeys('text');
+      expect(inputPage.textareaDirective.get()).toEqual('text');
     });
 
-    it('should change the model to whatever is typed.', function() {
-      textareaInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      textareaDirectiveElem.sendKeys('text');
-
-      textareaInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('text');
-      });
+    it('should change the model to whatever is typed.', function () {
+      expect(inputPage.textareaInput.getAttribute('value')).toEqual('');
+      inputPage.textareaDirective.set('text');
+      expect(inputPage.textareaInput.getAttribute('value')).toEqual('text');
     });
 
-    it('should set properly rows and cols attributes.', function() {
-      textareaInputElem.getAttribute('rows').then(function (value) {
-        expect(value).toEqual('5');
-      });
-
-      textareaInputElem.getAttribute('cols').then(function (value) {
-        expect(value).toEqual('40');
-      });
+    it('should set properly rows and cols attributes.', function () {
+      expect(inputPage.textareaDirective.rows).toEqual('5');
+      expect(inputPage.textareaDirective.columns).toEqual('40');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

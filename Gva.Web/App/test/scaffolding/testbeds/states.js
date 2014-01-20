@@ -77,17 +77,6 @@
         }
       })
       .state({
-        name: 'scaffoldingTestbed/column',
-        parent: 'scaffoldingTestbed',
-        url: '/column',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scDatatableColumnTestbed.html',
-            controller: 'ScDatatableTestbedCtrl'
-          }
-        }
-      })
-      .state({
         name: 'scaffoldingTestbed/promiseState',
         parent: 'scaffoldingTestbed',
         url: '/promise',

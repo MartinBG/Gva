@@ -154,6 +154,8 @@
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
+    <Content Include="App\js\gva\directives\button\buttonDirective.html" />
+    <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
@@ -199,6 +201,28 @@
     <Content Include="App\test\gva\persons\specs\editPersonDocumentIdSpec.js" />
     <Content Include="App\test\gva\persons\specs\newPersonDocumentIdSpec.js" />
     <Content Include="App\test\gva\persons\specs\searchPersonDocumentIdSpec.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\filesPO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\promiseStatePO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\datatablePO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\inputPO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\nomenclaturePO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\selectPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\newPersonPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\personAddressPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\personDataPO.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scDate.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scFiles.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scNomenclature.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scFloat.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scInt.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scPromiseState.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scSelect.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\searchPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\personDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\personsPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\personStatusPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\searchPersonAddressPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\searchPersonStatusesPO.js" />
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -329,9 +353,7 @@
     <Content Include="App\test\expressServer.js" />
     <Content Include="App\test\scaffolding\specs\scFilesSpec.js" />
     <Content Include="App\test\scaffolding\testbeds\scDatatableTestbedCtrl.js" />
-    <Content Include="App\test\scaffolding\specs\scDatatableColumnSpec.js" />
     <Content Include="App\test\scaffolding\specs\scDatatableSpec.js" />
-    <Content Include="App\test\scaffolding\testbeds\scDatatableColumnTestbed.html" />
     <Content Include="App\test\scaffolding\testbeds\scDatatableTestbed.html" />
     <Content Include="App\test\scaffolding\testbeds\scSearchTestbedCtrl.js" />
     <Content Include="App\test\scaffolding\specs\scSearchFilterSpec.js" />
@@ -375,7 +397,6 @@
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
     <Folder Include="App\js\ems\docs\forms\" />
-    <Folder Include="App\test\gva\persons\pageObjects\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

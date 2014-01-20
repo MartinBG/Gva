@@ -1,84 +1,49 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, require, describe, beforeEach, it, expect*/
 (function (protractor, describe, beforeEach, it, expect) {
 
   'use strict';
   
   describe('Person address search page', function() {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+        Page = require('../pageObjects/searchPersonAddressPO'),
+        personAddressesPage;
 
     beforeEach(function() {
       ptor.get('#/persons/1/addresses');
+      personAddressesPage = new Page(ptor);
     });
 
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      var text = ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText();
-      expect(text).toEqual('Адреси');
+      expect(personAddressesPage.breadcrumb.getText()).toEqual('Адреси');
     });
 
-    it('should display data correctly', function() {
-      var dataPromise;
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.addressType.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['Постоянен адрес', 'Адрес за кореспонденция']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.settlement.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['гр.Пловдив', 'гр.Пловдив']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.address'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['бул.Цариградско шосе 28 ет.9', 'жг.Толстой бл.39 ап.40']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.valid.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['Не', 'Да']);
-        });
+    it('should display data correctly', function () {
+      expect(personAddressesPage.datatable.getColumns(
+          'part_addressType_name',
+          'part_settlement_name',
+          'part_address',
+          'part_valid_name'
+          )).toEqual([
+          ['Постоянен адрес', 'гр.Пловдив', 'бул.Цариградско шосе 28 ет.9', 'Не'],
+          ['Адрес за кореспонденция', 'гр.Пловдив', 'жг.Толстой бл.39 ап.40', 'Да' ]
+        ]);
     });
-
-    it('should delete an address', function() {
-      var btnSelector = 'tbody tr:first-child td:nth-child(8)';
-      ptor.findElement(protractor.By.css(btnSelector))
-        .click();
-      ptor
-      .findElements(protractor.By.datatable('addresses').column('part.addressType.name'))
-      .then(function (elements) {
-        var dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-          return el.getText();
-        }));
- 
-        expect(dataPromise).toEqual(['Адрес за кореспонденция']);
-      });
+     
+    it('should delete an address', function () {
+      personAddressesPage.firstDeleteBtn.click();
+      personAddressesPage = new Page(ptor);
+      expect(personAddressesPage.datatable.getColumns(
+          'part_addressType_name',
+          'part_settlement_name',
+          'part_address',
+          'part_valid_name'
+          )).toEqual([
+        ['Адрес за кореспонденция', 'гр.Пловдив', 'жг.Толстой бл.39 ап.40', 'Да']
+      ]);
     });
 
     it('should go to edit page', function() {
-      var btnSelector = 'tbody tr:first-child td:nth-child(7)';
-      ptor.findElement(protractor.By.css(btnSelector))
-        .click();
+      personAddressesPage.firstEditBtn.click();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses/2');
     });
   });

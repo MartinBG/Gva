@@ -18,7 +18,7 @@
 
     });
 
-    it('should create new address correctly', function() {
+    it('should create new document id correctly', function() {
       ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType')).click();
       ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType').dropdownInput())
         .sendKeys('Задграничен паспорт');

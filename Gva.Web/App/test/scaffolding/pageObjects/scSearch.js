@@ -1,17 +1,24 @@
-﻿/*global module, protractor, by*/
-(function (module, protractor, by){
+﻿/*global module, protractor, by, require*/
+(function (module, protractor, by, require){
   'use strict';
+
+  var Q = require('q'),
+      _ = require('lodash');
 
   function ScSearch(element, context) {
     this.element = element;
     this.context = context;
   }
 
-  ScSearch.prototype.clickButton = function (btnName) {
-    return this.element.findElement(by.css('div[action="' + btnName + '()"] > button'))
+  ScSearch.prototype.clickButton = function (btnAction) {
+    return this.element.findElement(by.css('div[action="' + btnAction + '()"] button'))
                 .then(function (btn) {
       return btn.click();
     });
+  };
+
+  ScSearch.prototype.getButton = function (btnName) {
+    return this.element.findElement(by.css('div[name=' + btnName +'] button'));
   };
 
   ScSearch.prototype.addFilter = function (filterName) {
@@ -27,7 +34,16 @@
     });
   };
 
-  ScSearch.prototype.setField = function (fieldName, value) {
+  ScSearch.prototype.removeFilter = function (fieldName) {
+    return this.element.findElement(by.css('div[name=' + fieldName + ']'))
+          .then(function (container) {
+      return container.findElement(by.css('button.close')).then(function (closeBtn) {
+        closeBtn.click();
+      });
+    });
+  };
+
+  ScSearch.prototype.setFilter = function (fieldName, value) {
     var context = this.context;
 
     return this.element.findElement(by.css('div[name=' + fieldName + ']'))
@@ -54,5 +70,33 @@
     });
   };
 
+  ScSearch.prototype.getFilterContainer = function (filterName) {
+    return this.element.findElement(protractor.By.name(filterName));
+  };
+
+  ScSearch.prototype.getFilterOptions = function (filterName) {
+    var context = this.context;
+
+    return this.element.findElement(by.css('div[name='+ filterName + '] div.select2-container'))
+          .then(function (arrow) {
+      return arrow.click().then(function () {
+        return context.findElements(by.css('#select2-drop ul > li')).then(function (options) {
+          return Q.all(_.map(options, function (option) {
+            return option.getText();
+          }));
+        });
+      });
+    });
+  };
+
+  ScSearch.prototype.getVisibleFilters = function () {
+    return this.element.findElements(by.css('div.form-group:not(.ng-hide)'))
+                .then(function (filters) {
+      return Q.all(_.map(filters, function (filter) {
+        return filter.getAttribute('name');
+      }));
+    });
+  };
+
   module.exports = ScSearch;
-}(module, protractor, by));
+}(module, protractor, by, require));

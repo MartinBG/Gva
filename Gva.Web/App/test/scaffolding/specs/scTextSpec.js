@@ -1,41 +1,27 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('scText directive', function() {
     var ptor = protractor.getInstance(),
-        textDirectiveElem,
-        textInputElem;
+        Page = require('../pageObjects/testbeds/inputPO'),
+        inputPage;
 
     beforeEach(function (){
       ptor.get('#/test/input');
-
-      textDirectiveElem = ptor.findElement(protractor.By.name('textDir'));
-      textInputElem = ptor.findElement(protractor.By.name('textInput'));
+      inputPage = new Page(ptor);
     });
 
-    it('should set the text of the element to whatever is passed.', function() {
-      textDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      textInputElem.sendKeys('text');
-
-      textDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('text');
-      });
+    it('should set the text of the element to whatever is passed.', function () {
+      expect(inputPage.textDirective.get()).toEqual('');
+      inputPage.textInput.sendKeys('text');
+      expect(inputPage.textDirective.get()).toEqual('text');
     });
 
-    it('should change the model to whatever is typed.', function() {
-      textInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      textDirectiveElem.sendKeys('text');
-
-      textInputElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('text');
-      });
+    it('should change the model to whatever is typed.', function () {
+      expect(inputPage.textInput.getAttribute('value')).toEqual('');
+      inputPage.textDirective.set('text');
+      expect(inputPage.textInput.getAttribute('value')).toEqual('text');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

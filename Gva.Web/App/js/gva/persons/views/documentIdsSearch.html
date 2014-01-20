@@ -28,16 +28,10 @@
       <span>{{item.file[0].name}}</span>
     </sc-column>
     <sc-column width="115px">
-      <button type="button" name="editBtn" class="btn-xs btn-info" sc-click="editDocumentId(item)">
-        <span class="glyphicon" ng-class="{'glyphicon-loading': editBtn.$pending, 'glyphicon-pencil': !editBtn.$pending}"></span>
-        <span l10n-text="persons.documentIdSearch.edit"></span>
-      </button>
+      <gva-button name="editBtn" class="btn-xs btn-info" gva-click="editDocumentId(item)" l10n-text="persons.documentIdSearch.edit" icon="glyphicon-pencil"></gva-button>
     </sc-column>
     <sc-column  width="100px">
-      <button type="button" class="btn-xs btn-info" name="deleteBtn" sc-click="deleteDocumentId(item)">
-        <span class="glyphicon" ng-class="{'glyphicon-loading': deleteBtn.$pending, 'glyphicon-remove': !deleteBtn.$pending}"></span>
-        <span l10n-text="persons.documentIdSearch.remove"></span>
-      </button>
+      <gva-button name="deleteBtn" class="btn-xs btn-info" gva-click="deleteDocumentId(item)" l10n-text="persons.documentIdSearch.remove" icon="glyphicon-remove"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

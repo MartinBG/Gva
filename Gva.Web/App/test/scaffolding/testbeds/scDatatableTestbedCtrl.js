@@ -27,15 +27,27 @@
       }];
 
       $scope.users2 = $scope.users;
+      $scope.users3 = $scope.users;
     }
 
     $timeout(loadUsers, 500);
 
     $scope.selectedUser = '';
-    $scope.loadMany = function(){
+    $scope.loadManyInFirstTable = function(){
       for(var i = 0; i < 10; i++){
         $scope.users = $scope.users.concat($scope.users);
+      }
+    };
+
+    $scope.loadManyInSecondTable = function () {
+      for (var i = 0; i < 10; i++) {
         $scope.users2 = $scope.users2.concat($scope.users2);
+      }
+    };
+
+    $scope.loadManyInThirdTable = function () {
+      for (var i = 0; i < 10; i++) {
+        $scope.users3 = $scope.users3.concat($scope.users3);
       }
     };
 

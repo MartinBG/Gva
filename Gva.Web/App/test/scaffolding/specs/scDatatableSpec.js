@@ -1,138 +1,136 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, require, describe, beforeEach, it, expect*/
 (function (protractor, describe, beforeEach, it, expect) {
   'use strict';
 
   describe('scDatatable directive', function () {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+        Page = require('../pageObjects/testbeds/datatablePO'),
+        datatablePage;
 
     beforeEach(function (){
       ptor.get('#/test/datatable');
+      datatablePage = new Page(ptor);
     });
 
-    it('should filter properly', function() {
-      var searchInputDatatable1 = protractor.By.datatable('users').filterInput(),
-        firstColumnFirstRow =  protractor.By.datatable('users').row(1).column('username');
+    it('should filter properly', function () {
+      var searchInputDatatable1 = datatablePage.datatable1.filterInput();
+      searchInputDatatable1.sendKeys('peter');
+      datatablePage = new Page(ptor);
+      expect(datatablePage.datatable1.getColumn('username')).toEqual(['peter']);
 
-      ptor.findElement(searchInputDatatable1).sendKeys('peter');
-
-      expect(ptor.findElement(firstColumnFirstRow).getText()).toEqual('peter');
-
-      ptor.findElement(searchInputDatatable1).clear();
-      ptor.findElement(searchInputDatatable1).sendKeys('Petrov');
-
-      expect(ptor.findElement(firstColumnFirstRow).getText()).toEqual('georgi');
+      searchInputDatatable1.clear();
+      searchInputDatatable1.sendKeys('Petrov');
+      datatablePage = new Page(ptor);
+      expect(datatablePage.datatable1.getColumn('username')).toEqual(['georgi']);
     });
-
-    it('should filter properly with many users loaded', function() {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.datatable('users2').filterInput()).sendKeys('iztrit');
-
-      expect(ptor.findElement(protractor.By.datatable('users2').infoText()).getText())
+    
+    it('should filter properly with many users loaded', function () {
+      datatablePage.loadManyEntriesInTable2();
+      datatablePage.datatable2.setFilterInput('iztrit');
+      expect(datatablePage.datatable2.getInfoText())
         .toEqual('Намерени общo 1,024 резултата (от 1 до 1,024) (филтрирани от 4,096 записа)');
     });
 
     it('should load 4096 users', function() {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-
-      expect(ptor.findElement(protractor.By.datatable('users').infoText()).getText())
+      datatablePage.loadManyEntriesInTable1();
+      datatablePage.loadManyEntriesInTable2();
+      expect(datatablePage.datatable1.getInfoText())
         .toEqual('Намерени общo 4,096 резултата (от 1 до 10)');
 
-      expect(ptor.findElement(protractor.By.datatable('users2').infoText()).getText())
+      expect(datatablePage.datatable2.getInfoText())
         .toEqual('Намерени общo 4,096 резултата (от 1 до 4,096)');
     });
 
-    it('should select user', function() {
-      ptor.findElement(protractor.By.datatable('users').row(2).column('buttons')).click();
-
-      var selectedUser =
-        ptor.findElement(protractor.By.model('selectedUser')).getAttribute('value');
-      expect(selectedUser).toEqual('peter');
+    it('should select user', function () {
+      datatablePage.datatable1.getRowButtons(2).then(function (buttons) {
+        buttons[0].click();
+        expect(datatablePage.selectedUser.getAttribute('value')).toEqual('peter');
+      });
     });
 
     it('should change current page number', function() {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.datatable('users').pageButton(2)).click();
-
-      var infoText = ptor.findElement(protractor.By.datatable('users').infoText());
-      expect(infoText.getText()).toContain('11');
+      datatablePage.loadManyEntriesInTable1();
+      datatablePage.datatable1.goToPage(2);
+      expect(datatablePage.datatable1.getInfoText()).toContain('11');
     });
-
+    
     it('should evaluate column content expressions on next page', function () {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.datatable('users').pageButton(3)).click();
-      var isActiveCol4 =
-        ptor.findElement(protractor.By.datatable('users').row(4).column('isActive'));
-      expect(isActiveCol4.getText()).toBe('Не');
+      datatablePage.loadManyEntriesInTable1();
+      datatablePage.datatable1.goToPage(3);
+      datatablePage.datatable1.getColumn('isActive').then(function(results){
+        expect(results[3]).toBe('Не');
+      });
+      
     });
 
     it('should load 100 entries per page', function() {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.datatable('users').lengthFilter().option(2)).click();
-
-      var infoText = ptor.findElement(protractor.By.datatable('users').infoText());
-      expect(infoText.getText()).toEqual('Намерени общo 4,096 резултата (от 1 до 50)');
+      datatablePage.loadManyEntriesInTable1();
+      datatablePage.datatable1.setLengthFilterOption(2);
+      expect(datatablePage.datatable1.getInfoText())
+        .toEqual('Намерени общo 4,096 резултата (от 1 до 50)');
     });
-
+    
     it('should evaluate column content expressions when loading more entries', function () {
-      ptor.findElement(protractor.By.id('loadManybtn')).click();
-      ptor.findElement(protractor.By.datatable('users').lengthFilter().option(2)).click();
-
-      var isActiveCol16 =
-        ptor.findElement(protractor.By.datatable('users').row(16).column('isActive'));
-      expect(isActiveCol16.getText()).toBe('Не');
+      datatablePage.loadManyEntriesInTable1();
+      datatablePage.datatable1.setLengthFilterOption(2);
+      datatablePage.datatable1.getColumn('isActive').then(function (results) {
+        expect(results[15]).toBe('Не');
+      });
     });
 
-    it('should hide and show columns properly using the button called Columns', function() {
-      var hideColumnsButton =
-            ptor.findElement(protractor.By.datatable('users').hideColumnsButton()),
-          headerElements,
-          headers;
+    it('should hide and show columns properly using the button called Columns', function () {
+      datatablePage.datatable1.clickHideColumnsButton();
+      datatablePage.datatable1.clickHideColumnCheckbox(1);
 
-      hideColumnsButton.click();
-      ptor.findElement(protractor.By.datatable('users').hideColumnCheckbox(1)).click();
+      datatablePage.datatable1.clickHideColumnsButton();
+      datatablePage.datatable1.clickHideColumnCheckbox(0);
+      expect(datatablePage.datatable1.getHeaders()).toEqual(['Роли', 'Активен', '']);
 
-      hideColumnsButton.click();
-      ptor.findElement(protractor.By.datatable('users').hideColumnCheckbox(0)).click();
-
-      headerElements =
-        ptor.findElement(protractor.By.datatable('users').header())
-        .findElements(protractor.By.css('th'));
-
-      headers = headerElements.then(function (he) {
-        return protractor.promise.fullyResolved(he.map(function (el) {
-          return el.getText();
-        }));
-      });
-      expect(headers).toEqual(['Роли', 'Активен', '']);
-
-      hideColumnsButton.click();
-      ptor.findElement(protractor.By.datatable('users').hideColumnCheckbox(1)).click();
-
-      headerElements =
-        ptor.findElement(protractor.By.datatable('users').header())
-        .findElements(protractor.By.css('th'));
-
-      headers = headerElements.then(function (he) {
-        return protractor.promise.fullyResolved(he.map(function (el) {
-          return el.getText();
-        }));
-      });
-
-      expect(headers).toEqual(['Име', 'Роли', 'Активен', '']);
+      datatablePage.datatable1.clickHideColumnsButton();
+      datatablePage.datatable1.clickHideColumnCheckbox(1);
+      expect(datatablePage.datatable1.getHeaders()).toEqual(['Име', 'Роли', 'Активен', '']);
     });
 
-    it('correct sorting settings should be set by sc-datatable parameters', function() {
-      ptor.findElement(protractor.By.datatable('users2').header())
-      .findElements(protractor.By.css('th'))
-      .then(function(elements) {
-        return protractor.promise.fullyResolved(elements.map(function (el) {
-          return el.getAttribute('class');
-        }));
-      })
-      .then(function (sortingSettings) {
-        expect(sortingSettings)
-          .toEqual(['sorting_disabled scdt-username', 'sorting_disabled scdt-fullname']);
+    it('correct sorting settings should be set by sc-datatable parameters', function () {
+      expect(datatablePage.datatable2.getColumnsClasses())
+        .toEqual(['sorting_disabled scdt-username', 'sorting_disabled scdt-fullname']);
+    });
+    
+    it('a column should be hidden because of the sc-column parameter called visibility',
+      function () {
+        expect(datatablePage.datatable3.getHeaders())
+               .toEqual(['Потребителско име', 'Роли', 'Активен', '']);
       });
+
+    it('should sort correctly columns data when their headers are clicked', function () {
+      datatablePage.datatable3.clickHeader('isActive');
+      datatablePage.datatable3.getColumn('username').then(function (results) {
+        expect(results[0]).toEqual('test1');
+      });
+    });
+
+    it('should sort correctly columns data when their headers are clicked' +
+      ' and many users are loaded',
+      function () {
+        datatablePage.loadManyEntriesInTable3().then(function () {
+          datatablePage.datatable3.clickHeader('isActive');
+          expect(datatablePage.datatable3.getRow(3069))
+            .toEqual(['peter', 'Role1, Role2', 'Да', 'Редакция']);
+        });
+      });
+   
+    it('correct settings should be set by sc-datatable parameters', function () {
+      //no filter displayed
+      expect(datatablePage.datatable3.isFilterDisplayed()).toEqual(false);
+      
+      //no pagination displayed
+      expect(datatablePage.datatable3.isPaginationDisplayed()).toEqual(false);
+
+      //no range filter displayed
+      expect(datatablePage.datatable3.isLengthRangeDisplayed()).toEqual(false);
+
+      //no dynamic-columns button displayed
+      expect(datatablePage.datatable3.isHideColumnButtonDisplayed()).toEqual(false);
     });
   });
 }(protractor, describe, beforeEach, it, expect));

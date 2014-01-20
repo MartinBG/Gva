@@ -8,7 +8,7 @@
     };
 
     var checkValue = function(param, value){
-      if (!value) {
+      if (!value || !$stateParams.id) {
         return true;
       }
 

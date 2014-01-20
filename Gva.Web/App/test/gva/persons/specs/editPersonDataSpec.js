@@ -1,98 +1,43 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('Edit person data page', function () {
     var ptor = protractor.getInstance(),
-        firstName,
-        middleName,
-        lastName,
-        firstNameAlt,
-        middleNameAlt,
-        lastNameAlt,
-        lin,
-        uin,
-        sex,
-        dateOfBirth,
-        placeOfBirth,
-        country,
-        email,
-        fax,
-        phone1,
-        phone2,
-        phone3,
-        phone4,
-        phone5;
+        Page = require('../pageObjects/personDataPO'),
+        editPersonDataPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/personData');
-
-      firstName = ptor.findElement(protractor.By.input('model.firstName'));
-      middleName = ptor.findElement(protractor.By.input('model.middleName'));
-      lastName = ptor.findElement(protractor.By.input('model.lastName'));
-      firstNameAlt = ptor.findElement(protractor.By.input('model.firstNameAlt'));
-      middleNameAlt = ptor.findElement(protractor.By.input('model.middleNameAlt'));
-      lastNameAlt = ptor.findElement(protractor.By.input('model.lastNameAlt'));
-      lin = ptor.findElement(protractor.By.input('model.lin'));
-      uin = ptor.findElement(protractor.By.input('model.uin'));
-      sex = ptor.findElement(protractor.By.input('model.sex'));
-      dateOfBirth = ptor.findElement(protractor.By.css('div.date > input'));
-      placeOfBirth = ptor.findElement(protractor.By.input('model.placeOfBirth'));
-      country = ptor.findElement(protractor.By.input('model.country'));
-      email = ptor.findElement(protractor.By.input('model.email'));
-      fax = ptor.findElement(protractor.By.input('model.fax'));
-      phone1 = ptor.findElement(protractor.By.input('model.phone1'));
-      phone2 = ptor.findElement(protractor.By.input('model.phone2'));
-      phone3 = ptor.findElement(protractor.By.input('model.phone3'));
-      phone4 = ptor.findElement(protractor.By.input('model.phone4'));
-      phone5 = ptor.findElement(protractor.By.input('model.phone5'));
+      editPersonDataPage = new Page(ptor);
     });
 
     it('should display person\'s data', function () {
-      expect(firstName.getAttribute('value')).toEqual('Иван');
-
-      expect(middleName.getAttribute('value')).toEqual('Иванов');
-
-      expect(lastName.getAttribute('value')).toEqual('Иванов');
-
-      expect(firstNameAlt.getAttribute('value')).toEqual('Ivan');
-
-      expect(middleNameAlt.getAttribute('value')).toEqual('Ivanov');
-
-      expect(lastNameAlt.getAttribute('value')).toEqual('Ivanov');
-
-      expect(lin.getAttribute('value')).toEqual('11232');
-
-      expect(uin.getAttribute('value')).toEqual('7005159385');
-
-      expect(sex.getAttribute('value')).toEqual('1');
-
-      expect(dateOfBirth.getAttribute('value')).toEqual('15.05.1970');
-
-      expect(placeOfBirth.getAttribute('value')).toEqual('4159');
-
-      expect(country.getAttribute('value')).toEqual('33');
-
-      expect(email.getAttribute('value')).toEqual('ivan@mail.bg');
-
-      expect(fax.getAttribute('value')).toEqual('(02) 876 89 89');
-
-      expect(phone1.getAttribute('value')).toEqual('0888 876 431');
-
-      expect(phone2.getAttribute('value')).toEqual('0888 876 432');
-
-      expect(phone3.getAttribute('value')).toEqual('0888 876 433');
-
-      expect(phone4.getAttribute('value')).toEqual('0888 876 434');
-
-      expect(phone5.getAttribute('value')).toEqual('0888 876 435');
+      expect(editPersonDataPage.firstName.get()).toEqual('Иван');
+      expect(editPersonDataPage.middleName.get()).toEqual('Иванов');
+      expect(editPersonDataPage.lastName.get()).toEqual('Иванов');
+      expect(editPersonDataPage.firstNameAlt.get()).toEqual('Ivan');
+      expect(editPersonDataPage.middleNameAlt.get()).toEqual('Ivanov');
+      expect(editPersonDataPage.lastNameAlt.get()).toEqual('Ivanov');
+      expect(editPersonDataPage.lin.get()).toEqual('11232');
+      expect(editPersonDataPage.uin.get()).toEqual('7005159385');
+      expect(editPersonDataPage.sex.get()).toEqual('Мъж');
+      expect(editPersonDataPage.dateOfBirth.get()).toEqual('15.05.1970');
+      expect(editPersonDataPage.placeOfBirth.get()).toEqual('София');
+      expect(editPersonDataPage.country.get()).toEqual('Република България');
+      expect(editPersonDataPage.email.get()).toEqual('ivan@mail.bg');
+      expect(editPersonDataPage.fax.get()).toEqual('(02) 876 89 89');
+      expect(editPersonDataPage.phone1.get()).toEqual('0888 876 431');
+      expect(editPersonDataPage.phone2.get()).toEqual('0888 876 432');
+      expect(editPersonDataPage.phone3.get()).toEqual('0888 876 433');
+      expect(editPersonDataPage.phone4.get()).toEqual('0888 876 434');
+      expect(editPersonDataPage.phone5.get()).toEqual('0888 876 435');
     });
 
     it('should be able to change person data', function () {
-      firstName.clear();
-      firstName.sendKeys('Vasil');
+      editPersonDataPage.firstName.set('Vasil');
 
-      ptor.findElement(protractor.By.name('saveBtn')).click();
+      editPersonDataPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1');
 
       expect(ptor.findElement(protractor.By.name('names')).getAttribute('value'))
@@ -100,8 +45,9 @@
     });
 
     it('should be able to return to view person page', function () {
-      ptor.findElement(protractor.By.name('cancelBtn')).click();
+      editPersonDataPage.cancel();
+
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1');
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));

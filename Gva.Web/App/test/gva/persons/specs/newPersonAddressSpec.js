@@ -1,155 +1,76 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor, describe, beforeEach, it, expect) {
 
   'use strict';
   
   describe('Person address new page', function() {
-    var ptor = protractor.getInstance();
+    var ptor = protractor.getInstance(),
+        Page = require('../pageObjects/personAddressPO'),
+        SearchPage = require('../pageObjects/searchPersonAddressPO'),
+        newPersonAddressPage,
+        searchPersonAddressPage;
 
-    beforeEach(function() {
+    beforeEach(function () {
       ptor.get('#/persons/1/addresses/new');
+      newPersonAddressPage = new Page(ptor);
     });
 
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      var text = ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText();
-      expect(text).toEqual('Нов адрес');
-
+      expect(newPersonAddressPage.breadcrumb.getText()).toEqual('Нов адрес');
     });
 
-    it('should create new address correctly', function() {
-      ptor.findElement(protractor.By.nomenclature('model.addressType')).click();
-      ptor.findElement(protractor.By.nomenclature('model.addressType').dropdownInput())
-        .sendKeys('Седалище');
-      ptor.findElement(protractor.By.nomenclature('model.addressType').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
+    it('should create new address correctly', function () {
+      newPersonAddressPage.addressType.set('Седалище');
+      newPersonAddressPage.valid.set('Да');
+      newPersonAddressPage.settlement.set('София');
+      newPersonAddressPage.address.set('ж.к. Драгалевци');
+      newPersonAddressPage.addressAlt.set('j.k.Dragalevci');
+      newPersonAddressPage.postalCode.set('1000');
+      newPersonAddressPage.phone.set('0999212');
 
-      ptor.findElement(protractor.By.nomenclature('model.valid')).click();
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys('Да');
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
-      
-      ptor.findElement(protractor.By.nomenclature('model.settlement')).click();
-      ptor.findElement(protractor.By.nomenclature('model.settlement').dropdownInput())
-        .sendKeys('София');
-      ptor.findElement(protractor.By.nomenclature('model.settlement').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
-
-      ptor.findElement(protractor.By.input('model.address')).sendKeys('ж.к. Драгалевци');
-      ptor.findElement(protractor.By.input('model.addressAlt')).sendKeys('j.k.Dragalevci');
-      ptor.findElement(protractor.By.input('model.postalCode')).sendKeys('1000');
-      ptor.findElement(protractor.By.input('model.phone')).sendKeys('0999212');
-
-      ptor.findElement(protractor.By.name('saveBtn')).click();
+      newPersonAddressPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses');
+      searchPersonAddressPage = new SearchPage(ptor);
 
-      var dataPromise;
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.addressType.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['Постоянен адрес', 'Адрес за кореспонденция', 'Седалище']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.settlement.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['гр.Пловдив', 'гр.Пловдив', 'София']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.address'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual([
-            'бул.Цариградско шосе 28 ет.9',
-            'жг.Толстой бл.39 ап.40',
-            'ж.к. Драгалевци'
-          ]);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.postalCode'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['', '', '1000']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.phone'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['', '', '0999212']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('addresses').column('part.valid.name'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['Не', 'Да', 'Да']);
-        });
+      expect(searchPersonAddressPage.datatable.getColumns(
+          'part_addressType_name',
+          'part_settlement_name',
+          'part_address',
+          'part_postalCode',
+          'part_phone',
+          'part_valid_name'
+          )).toEqual([
+          ['Постоянен адрес', 'гр.Пловдив', 'бул.Цариградско шосе 28 ет.9', '', '', 'Не'],
+          ['Адрес за кореспонденция', 'гр.Пловдив', 'жг.Толстой бл.39 ап.40', '', '', 'Да'],
+          ['Седалище', 'София', 'ж.к. Драгалевци', '1000', '0999212', 'Да']
+        ]);
     });
 
     it('should disable save button unless all required fields are filled out', function() {
-      expect(ptor.isElementPresent(protractor.By.css('button[disabled=disabled]')))
-        .toEqual(true);
+      expect(newPersonAddressPage.isSaveBtnDisabled).toEqual(true);
 
-      ptor.findElement(protractor.By.nomenclature('model.addressType')).click();
-      ptor.findElement(protractor.By.nomenclature('model.addressType').dropdownInput())
-        .sendKeys('Седалище');
-      ptor.findElement(protractor.By.nomenclature('model.addressType').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
+      newPersonAddressPage.addressType.set('Седалище');
+      newPersonAddressPage.valid.set('Да');
+      newPersonAddressPage.settlement.set('София');
+      newPersonAddressPage = new Page(ptor);
+      expect(newPersonAddressPage.isSaveBtnDisabled).toEqual(true);
 
-      ptor.findElement(protractor.By.nomenclature('model.valid')).click();
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys('Да');
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
-      
-      ptor.findElement(protractor.By.nomenclature('model.settlement')).click();
-      ptor.findElement(protractor.By.nomenclature('model.settlement').dropdownInput())
-        .sendKeys('София');
-      ptor.findElement(protractor.By.nomenclature('model.settlement').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
+      newPersonAddressPage.address.set('ж.к. Драгалевци');
+      newPersonAddressPage.addressAlt.set('j.k.Dragalevci');
+      newPersonAddressPage = new Page(ptor);
+      expect(newPersonAddressPage.isSaveBtnDisabled).toEqual(false);
 
-      expect(ptor.isElementPresent(protractor.By.css('button[disabled=disabled]')))
-        .toEqual(true);
-
-      ptor.findElement(protractor.By.input('model.address')).sendKeys('ж.к. Драгалевци');
-      ptor.findElement(protractor.By.input('model.addressAlt')).sendKeys('j.k.Dragalevci');
-
-      expect(ptor.isElementPresent(protractor.By.css('button[disabled=disabled]')))
-        .toEqual(false);
+      newPersonAddressPage.postalCode.set('1000');
+      newPersonAddressPage.phone.set('0999212');
+      newPersonAddressPage = new Page(ptor);
+      expect(newPersonAddressPage.isSaveBtnDisabled).toEqual(false);
     });
 
     it('should go to search view at clicking on cancel button', function () {
-      ptor.findElement(protractor.By.name('cancelBtn'))
-        .click().then(function () {
-            ptor.getCurrentUrl().then(function (url) {
-              expect(url).toEqual('http://localhost:52560/#/persons/1/addresses');
-            });
-          });
+      newPersonAddressPage.cancel();
+      ptor.getCurrentUrl().then(function (url) {
+        expect(url).toEqual('http://localhost:52560/#/persons/1/addresses');
+      });
     });
   });
 

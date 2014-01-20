@@ -1,51 +1,27 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
-(function (protractor, describe, beforeEach, it, expect) {
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
+(function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
   describe('scSelect directive', function() {
     var ptor = protractor.getInstance(),
-        optionsPromise;
+        Page = require('../pageObjects/testbeds/selectPO'),
+        selectPage;
 
     beforeEach(function (){
       ptor.get('#/test/select');
-
-      optionsPromise = ptor.findElements(protractor.By.name('optionsRadios'));
+      selectPage = new Page(ptor);
     });
 
     it('should select the passed option.', function() {
-      var selectDirectiveElem = ptor.findElement(protractor.By.name('selectDir'));
-
-      selectDirectiveElem.getAttribute('value').then(function (value) {
-        expect(value).toEqual('');
-      });
-
-      optionsPromise.then( function (optionElems) {
-        optionElems[2].click().then( function () {
-          selectDirectiveElem.getAttribute('value').then(function (value) {
-            expect(value).toEqual('2');
-          });
-        });
-      });
+      expect(selectPage.selectDirective.get()).toEqual('');
+      selectPage.selectOption('option2');
+      expect(selectPage.selectDirective.get()).toEqual('option2');
     });
 
     it('should change the model to whatever is selected.', function() {
-      var select2Elem = ptor.findElement(protractor.By.className('select2-container'));
-
-      optionsPromise.then(function (optionElems) {
-        optionElems[0].getAttribute('checked').then(function (isChecked) {
-          expect(isChecked).toBeTruthy();
-        });
-
-        select2Elem.click().then( function () {
-          ptor.findElements(protractor.By.className('select2-result')).then(function (select2Opts) {
-            select2Opts[2].click();
-          });
-
-          optionElems[3].getAttribute('checked').then(function (isChecked) {
-            expect(isChecked).toBeTruthy();
-          });
-        });
-      });
+      expect(selectPage.isSelected('none')).toBeTruthy();
+      selectPage.selectDirective.set(3);
+      expect(selectPage.isSelected('option3')).toBeTruthy();
     });
   });
-}(protractor, describe, beforeEach, it, expect));
+}(protractor, describe, beforeEach, it, expect, require));
