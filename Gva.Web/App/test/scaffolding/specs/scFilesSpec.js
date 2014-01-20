@@ -11,7 +11,8 @@
       multipleFilesBtnElem,
       singleFileBtnElem,
       noFilesBtnElem,
-      openModalBtnElem;
+      openModalBtnElem,
+      loadSingleFileWithDelayBtnElem;
 
     beforeEach(function () {
       ptor.get('#/test/files');
@@ -22,11 +23,17 @@
       singleFileBtnElem = ptor.findElement(protractor.By.name('singleFileBtn'));
       noFilesBtnElem = ptor.findElement(protractor.By.name('noFilesBtn'));
       openModalBtnElem = ptor.findElement(protractor.By.className('glyphicon-file'));
+      loadSingleFileWithDelayBtnElem = ptor.findElement(protractor.By.name('loadFileWithDelayBtn'));
     });
 
     it('should set the text of the element to whatever file array is passed.', function () {
       filesDirectiveSpan.getText().then(function (value) {
         expect(value).toEqual('Няма прикачени файлове.');
+      });
+      loadSingleFileWithDelayBtnElem.click().then(function () {
+        filesDirectiveSpan.getText().then(function (value) {
+          expect(value).toEqual('');
+        });
       });
 
       multipleFilesBtnElem.click();

@@ -54,7 +54,19 @@
           documentNumber: 'Номер на документ',
           documentDateValidFrom: 'От дата',
           documentDateValidTo: 'Валиден до',
-          documentPublisher: 'Издаден от'
+          documentPublisher: 'Издаден от',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          notes: 'Бележки'
+        },
+        personScannedDocumentDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл'
+        },
+        personApplicationDirective: {
+          title: 'Документът е приложен към заявления:',
+          name: 'Име на заявление',
+          number: 'Номер на заявление'
         },
         personStatusDirective: {
           title: 'Състояние',
@@ -114,6 +126,27 @@
           isActive: 'Активен',
           edit: 'Редакция',
           remove: 'Изтрий'
+        },
+        newDocumentId: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentId: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        documentIdSearch: {
+          docTypeId: 'Документ',
+          documentNumber: 'Номер на документа',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валиден до',
+          valid: 'Валиден',
+          bookPageNumber: 'Номер на страница в деловодна книга.',
+          pageCount: 'Брой стр.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newDocumentId: 'Нов документ'
         }
       }
     });
