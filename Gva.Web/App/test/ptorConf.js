@@ -16,6 +16,8 @@
       var GvaBy = require('./gvaBy');
 
       global.protractor.By = new GvaBy();
+
+      global.browser.driver.manage().window().maximize();
     },
     // ----- Options to be passed to minijasminenode -----
     jasmineNodeOpts: {
