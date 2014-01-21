@@ -50,7 +50,12 @@
       personDocumentEmployments: [
         {
           partIndex: 8,
-          part: personDocumentEmployments.person1Employment
+          part: personDocumentEmployments.person1Employment,
+          file: [{
+            key: '3a-1-ab',
+            name: 'test.pdf',
+            relativePath: ''
+          }]
         }
       ],
       personDocumentEducations: [

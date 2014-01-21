@@ -76,6 +76,17 @@
           documentDateValidTo: 'Крайна дата',
           notes: 'Бележки'
         },
+        personEmploymentDirective: {
+          title: 'Месторабота',
+          hiredate: 'Дата на назначаване',
+          valid: 'Валиден',
+          organization: 'Организация',
+          employmentCategory: 'Категория длъжност',
+          country: 'Страна',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          notes: 'Бележки'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -147,6 +158,28 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newDocumentId: 'Нов документ'
+        },
+        employmentSearch: {
+          newEmployment: 'Нова месторабота',
+          hiredate: 'Дата на назначаване',
+          employmentCategory: 'Категория длъжност',
+          organization: 'Организация',
+          country: 'Страна',
+          valid: 'Валидност',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий'
+        },
+        newEmployment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editEmployment: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       }
     });
