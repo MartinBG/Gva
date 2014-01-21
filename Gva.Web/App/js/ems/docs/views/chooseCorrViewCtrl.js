@@ -44,8 +44,14 @@
         content: corr
       };
 
+      //todo return function
       $scope.doc.docCorrespondents.push(nomItem);
+      //todo goto previous state
+      $state.go('docs/edit/addressing');
+    };
 
+    $scope.goBack = function () {
+      //todo goto previous state
       $state.go('docs/edit/addressing');
     };
 

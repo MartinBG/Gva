@@ -35,22 +35,34 @@
       $scope.inEditMode = false;
     };
 
-    //function fnAddFrom(item)
-    //{
-    //  docunit.unit = item;
-    //  docunit.Role = "From";
-    //  doc.DocUnit.push(docunit);
-    //}
-    //function fnAddTo(item) {
-    //  docunit.unit = item;
-    //  docunit.Role = "To";
-    //  doc.DocUnit.push(docunit);
-    //}
-    //function fnAddUnit(item);
-    //fnAddUnit = fnAddTo;
+    $scope.unitAddFrom = function () {
+      $scope.docUnitType = 'From';
+      $scope.chooseUnit();
+    };
+
+    $scope.unitAddTo = function () {
+      $scope.docUnitType = 'To';
+      $scope.chooseUnit();
+    };
+
+    $scope.unitAdd = function (unit) {
+      switch ($scope.docUnitType) {
+      case 'From':
+        $scope.doc.docUnitsFrom.push(unit);
+        break;
+      case 'To':
+        $scope.doc.docUnitsTo.push(unit);
+        break;
+      }
+
+    };
 
     $scope.chooseCorr = function () {
       return $state.go('docs/edit/chooseCorr');
+    };
+
+    $scope.chooseUnit = function () {
+      return $state.go('docs/edit/chooseUnit', { type: 'From' });
     };
 
     $scope.save = function () {
@@ -58,9 +70,7 @@
         return Doc
           .save($stateParams, $scope.doc).$promise
           .then(function () {
-            //todo refresh state ! $state.go('docs/edit', { docId: $stateParams.docId });
-            $scope.inEditMode = false;
-            return true;
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
           });
       }
     };

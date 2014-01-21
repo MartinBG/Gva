@@ -72,9 +72,21 @@
         parent: 'docs/edit',
         url: '/choosecorr?displayName&email',
         views: {
-          'corrView@docs/edit': {
+          'popView@docs/edit': {
             templateUrl: 'ems/docs/views/chooseCorrView.html',
             controller: 'ChooseCorrViewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'docs/edit/chooseUnit',
+        title: 'Избор служител',
+        parent: 'docs/edit',
+        url: '/chooseunit?name',
+        views: {
+          'popView@docs/edit': {
+            templateUrl: 'ems/docs/views/chooseUnitView.html',
+            controller: 'ChooseUnitViewCtrl'
           }
         }
       })

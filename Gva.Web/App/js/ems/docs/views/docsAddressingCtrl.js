@@ -7,8 +7,6 @@
     $stateParams
   ) {
     $scope.test = $stateParams.docId;
-
-
   }
 
   DocsAddressingCtrl.$inject = [

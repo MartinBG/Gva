@@ -29,6 +29,13 @@
           numberOfDocuments: 'Брой документи'
         }
       },
+      units: {
+        name: 'Наименование',
+        search: 'Търси',
+        edit: 'Редакция',
+        back: 'Назад',
+        select: 'Избор'
+      },
       corrs: {
         search: {
           displayName: 'Наименование',
@@ -39,6 +46,7 @@
           'new': 'Нов кореспондент',
           search: 'Търси',
           edit: 'Редакция',
+          back: 'Назад',
           select: 'Избор'
         },
         edit: {
