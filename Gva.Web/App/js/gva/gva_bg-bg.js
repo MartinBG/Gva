@@ -47,6 +47,17 @@
           postalCode: 'Пощенски код',
           phone: 'Телефон'
         },
+        personDocumentEducationDirective: {
+          title: 'Образнование',
+          documentNumber: 'Номер на документ',
+          completionDate: 'Дата на завършване',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          speciality: 'Специалност',
+          graduation: 'Степен на образование',
+          school: 'Учебно заведение',
+          notes: 'Бележки'
+        },
         personDocumentIdDirective: {
           title: 'Документ за самоличност',
           personDocumentIdTypeId: 'Тип документ',
@@ -135,6 +146,14 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        newDocumentEducation: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentEducation: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         documentIdSearch: {
           docTypeId: 'Документ',
           documentNumber: 'Номер на документа',
@@ -147,6 +166,19 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newDocumentId: 'Нов документ'
+        },
+        documentEducationSearch: {
+          documentNumber: 'Номер на документа',
+          completionDate: 'Дата на завършване',
+          school: 'Учебно заведение',
+          graduation: 'Степен на образование',
+          speciality: 'Специалност',
+          bookPageNumber: 'Номер на стр. в деловодна книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newDocumentEducation: 'Ново образнование'
         }
       }
     });

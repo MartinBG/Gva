@@ -56,7 +56,22 @@
       personDocumentEducations: [
         {
           partIndex: 9,
-          part: personDocumentEducations.person1Education
+          part: personDocumentEducations.person1Education,
+          file: [{
+            key: '342-42-ab',
+            name: 'testName.pdf',
+            relativePath: '../folder1/folder2/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application1'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application2'
+            }
+          ]
         }
       ],
       personDocumentIds: [
