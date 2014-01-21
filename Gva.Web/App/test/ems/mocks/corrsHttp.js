@@ -1,4 +1,4 @@
-﻿/*global angular, require*/
+﻿/*global angular, require, _*/
 (function (angular) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
@@ -55,7 +55,7 @@
         corrId: 2,
         correspondentType: nomenclatures.correspondentTypes[1],
         correspondentGroup: nomenclatures.correspondentGroups[1],
-        displayName: 'ДЕЛТА КОИН 1324567890',
+        displayName: 'АЛИ БАБА 4040404040',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
         bgCitizenLastName: '',
@@ -91,6 +91,29 @@
       nextCorrContactId = 3;
 
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/nomenclatures/corrs',
+        function () {
+          var noms = [],
+            nomItem = {
+              nomTypeValueId: '',
+              name: '',
+              content: []
+            };
+
+          _.forEach(corrs, function (item) {
+            var t = {};
+
+            nomItem.nomTypeValueId = item.corrId;
+            nomItem.name = item.displayName;
+            nomItem.content = item;
+
+            _.assign(t, nomItem, true);
+            noms.push(t);
+          });
+
+          return [200, noms];
+        }
+      )
       .when('GET', '/api/corrs?displayName&email',
         function ($params, $filter) {
           return [
@@ -105,6 +128,23 @@
         function ($params, $jsonData) {
           if (!$jsonData || $jsonData.corrId) {
             return [400];
+          }
+
+          if ($jsonData.correspondentType.nomTypeValueId === 1) {
+            $jsonData.displayName = $jsonData.bgCitizenFirstName + ' ' +
+              $jsonData.bgCitizenLastName;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 2) {
+            $jsonData.displayName = $jsonData.foreignerFirstName + ' ' +
+              $jsonData.foreignerLastName;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 3) {
+            $jsonData.displayName = $jsonData.legalEntityName + ' ' +
+              $jsonData.legalEntityBulstat;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 4) {
+            $jsonData.displayName = $jsonData.fLegalEntityName + ' ' +
+              $jsonData.legalEntityBulstat;
           }
 
           $jsonData.corrId = ++nextCorrId;
@@ -168,6 +208,23 @@
           var corrId = parseInt($params.corrId, 10),
             corrIndex = corrs.indexOf($filter('filter')(corrs, { corrId: corrId })[0]);
 
+          if ($jsonData.correspondentType.nomTypeValueId === 1) {
+            $jsonData.displayName = $jsonData.bgCitizenFirstName + ' ' +
+              $jsonData.bgCitizenLastName;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 2) {
+            $jsonData.displayName = $jsonData.foreignerFirstName + ' ' +
+              $jsonData.foreignerLastName;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 3) {
+            $jsonData.displayName = $jsonData.legalEntityName + ' ' +
+              $jsonData.legalEntityBulstat;
+          }
+          else if ($jsonData.correspondentType.nomTypeValueId === 4) {
+            $jsonData.displayName = $jsonData.fLegalEntityName + ' ' +
+              $jsonData.legalEntityBulstat;
+          }
+
           if (corrIndex === -1) {
             return [400];
           }
@@ -191,4 +248,4 @@
           return [200, correspondentContact];
         });
   });
-}(angular));
+}(angular, _));

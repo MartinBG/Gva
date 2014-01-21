@@ -1,0 +1,26 @@
+﻿<div class="tab-content">
+
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="corrs.search.displayName"></sc-filter>
+    <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
+    <sc-button action="goBack()" text="corrs.search.back" icon="glyphicon-arrow-left"></sc-button>
+    <sc-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-button>
+    <sc-button action="add"></sc-button>
+  </sc-search>
+
+   <sc-datatable ng-model="corrs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-column data="displayName" title="Наименование">
+    </sc-column>
+    <sc-column data="email" title="Имейл">
+    </sc-column>
+    <sc-column data="correspondentType.name" title="Тип">
+    </sc-column>
+    <sc-column>
+      <button type="button" class="btn-xs btn-info" ng-click="selectCorr(item)" l10n-text="corrs.search.select"></button>
+    </sc-column>
+  </sc-datatable>
+  <!--todo add back button-->
+
+  <div style="clear: both;"> </div>
+
+</div>

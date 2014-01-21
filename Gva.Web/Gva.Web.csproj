@@ -130,6 +130,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\js\ems\docs\recources\unit.js" />
+    <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
+    <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\chooseUnitView.html" />
+    <Content Include="App\js\ems\docs\views\chooseUnitViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsClassifications.html" />
     <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />
@@ -160,6 +165,7 @@
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
+    <Content Include="App\test\ems\mocks\unitsHttp.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />

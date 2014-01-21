@@ -86,8 +86,8 @@ module.exports = function (grunt) {
         'test/e2eMocksSetup.js',
         'test/httpBackendConfiguratorProvider.js',
         'test/common/mocks/*.js',
-        'test/gva/persons/mocks/*.js',
         'test/ems/mocks/*.js',
+        'test/gva/persons/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js',
         'test/gva/directives/testbeds/states.js',
@@ -284,7 +284,7 @@ module.exports = function (grunt) {
       }
     }
   });
-  
+
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
@@ -309,7 +309,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test-chrome', ['express', 'protractor:test_chrome']);
 
   grunt.registerTask('test-ie', ['express', 'protractor:test_ie']);
- 
+
   grunt.registerTask('sv', ['jshint:schema', 'tv4']);
 
   grunt.registerTask('test-server', ['express', 'express-keepalive']);
@@ -317,5 +317,5 @@ module.exports = function (grunt) {
   grunt.registerTask('test', ['debug', 'test-chrome']);
 
   grunt.registerTask('default', ['debug']);
-  
+
 };

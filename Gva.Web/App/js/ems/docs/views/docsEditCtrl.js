@@ -35,14 +35,42 @@
       $scope.inEditMode = false;
     };
 
+    $scope.unitAddFrom = function () {
+      $scope.docUnitType = 'From';
+      $scope.chooseUnit();
+    };
+
+    $scope.unitAddTo = function () {
+      $scope.docUnitType = 'To';
+      $scope.chooseUnit();
+    };
+
+    $scope.unitAdd = function (unit) {
+      switch ($scope.docUnitType) {
+      case 'From':
+        $scope.doc.docUnitsFrom.push(unit);
+        break;
+      case 'To':
+        $scope.doc.docUnitsTo.push(unit);
+        break;
+      }
+
+    };
+
+    $scope.chooseCorr = function () {
+      return $state.go('docs/edit/chooseCorr');
+    };
+
+    $scope.chooseUnit = function () {
+      return $state.go('docs/edit/chooseUnit', { type: 'From' });
+    };
+
     $scope.save = function () {
       if ($scope.editDocForm.$valid) {
         return Doc
           .save($stateParams, $scope.doc).$promise
           .then(function () {
-            //todo refresh state ! $state.go('docs/edit', { docId: $stateParams.docId });
-            $scope.inEditMode = false;
-            return true;
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
           });
       }
     };
