@@ -11,7 +11,7 @@
     <sc-column data="name" title="Наименование">
     </sc-column>
     <sc-column>
-      <button type="button" class="btn-xs btn-info" ng-click="selectUnit(item)" l10n-text="units.select"></button>
+      <button type="button" class="btn-xs btn-info" ng-click="selectUnit(item)" l10n-text="units.select" ng-disabled="!onUnitSelected"></button>
     </sc-column>
   </sc-datatable>
   <!--todo add back button-->

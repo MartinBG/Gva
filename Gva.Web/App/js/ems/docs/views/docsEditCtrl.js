@@ -35,26 +35,20 @@
       $scope.inEditMode = false;
     };
 
+    $scope.onUnitSelected = null;
     $scope.unitAddFrom = function () {
-      $scope.docUnitType = 'From';
-      $scope.chooseUnit();
-    };
-
-    $scope.unitAddTo = function () {
-      $scope.docUnitType = 'To';
-      $scope.chooseUnit();
-    };
-
-    $scope.unitAdd = function (unit) {
-      switch ($scope.docUnitType) {
-      case 'From':
+      $scope.onUnitSelected = function (unit) {
         $scope.doc.docUnitsFrom.push(unit);
-        break;
-      case 'To':
+        $scope.onUnitSelected = null;
+      };
+      $scope.chooseUnit();
+    };
+    $scope.unitAddTo = function () {
+      $scope.onUnitSelected = function (unit) {
         $scope.doc.docUnitsTo.push(unit);
-        break;
-      }
-
+        $scope.onUnitSelected = null;
+      };
+      $scope.chooseUnit();
     };
 
     $scope.chooseCorr = function () {
@@ -62,7 +56,7 @@
     };
 
     $scope.chooseUnit = function () {
-      return $state.go('docs/edit/chooseUnit', { type: 'From' });
+      return $state.go('docs/edit/chooseUnit');
     };
 
     $scope.save = function () {

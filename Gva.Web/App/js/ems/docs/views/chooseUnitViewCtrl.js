@@ -31,7 +31,7 @@
     });
 
     $scope.selectUnit = function (unit) {
-      $scope.unitAdd(unit);
+      $scope.onUnitSelected(unit);
       //todo goto previous state
       $state.go('docs/edit/addressing');
     };
