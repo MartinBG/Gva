@@ -37,6 +37,11 @@
       name: 'gvaPersonApplication',
       templateUrl: 'gva/persons/forms/personApplication.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonMedical',
+      templateUrl: 'gva/persons/forms/personMedical.html',
+      controller: 'PersonMedicalCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -234,6 +239,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/licencesSearch.html',
             controller: 'LicencesSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.medicals',
+        title: 'Медицински',
+        parent: 'persons.view',
+        url: '/medicals',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.medicals.search',
+        parent: 'persons.medicals',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/medicalsSearch.html',
+            controller: 'MedicalsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.medicals.new',
+        title: 'Новo медицинско',
+        parent: 'persons.medicals',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/medicalsNew.html',
+            controller: 'MedicalsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.medicals.edit',
+        title: 'Редакция на медицинско',
+        parent: 'persons.medicals',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/medicalsEdit.html',
+            controller: 'MedicalsEditCtrl'
           }
         }
       });

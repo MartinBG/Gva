@@ -25,6 +25,7 @@ module.exports = function (grunt) {
         'schema/person-document-education.sample.js',
         'schema/person-document-employment.sample.js',
         'schema/person-document-id.sample.js',
+        'schema/person-document-med.sample.js',
         'schema/person-document-other.sample.js',
         'schema/person-document-training.sample.js',
         'schema/person-address.sample.js',
@@ -256,6 +257,7 @@ module.exports = function (grunt) {
           'schema/person-document-employment.json': 'schema/person-document-employment.sample.js',
           'schema/person-document-education.json': 'schema/person-document-education.sample.js',
           'schema/person-document-id.json': 'schema/person-document-id.sample.js',
+          'schema/person-document-med.json': 'schema/person-document-med.sample.js',
           'schema/person-document-other.json': 'schema/person-document-other.sample.js',
           'schema/person-document-training.json': 'schema/person-document-training.sample.js'
         }

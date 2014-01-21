@@ -76,6 +76,20 @@
           documentDateValidTo: 'Крайна дата',
           notes: 'Бележки'
         },
+        personMedicalDirective: {
+          documentNumberPrefix: 'Префикс',
+          documentNumber: 'Номер',
+          documentNumberSuffix: 'Суфикс',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          limitations: 'Ограничения към свидетелство за медицинска годност',
+          medClassType: 'Клас',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници',
+          title: 'Свидетелство за медицинска годност'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -147,6 +161,29 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newDocumentId: 'Нов документ'
+        },
+        medicalSearch: {
+          testimonial: 'Свидетелство',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          medClass: 'Клас',
+          limitations: 'Ограничения',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newMedical: 'Ново медицинско'
+        },
+        newMedical: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editMedical: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       }
     });
