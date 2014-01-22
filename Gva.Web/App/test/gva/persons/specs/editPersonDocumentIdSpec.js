@@ -1,220 +1,73 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor, describe, beforeEach, it, expect) {
 
   'use strict';
   
-  describe('Person address edit page', function() {
-    var ptor = protractor.getInstance();
+  describe('Person address edit page', function () {
+    var ptor = protractor.getInstance(),
+       Page = require('../pageObjects/editDocumentIdPO'),
+       SearchPage = require('../pageObjects/searchDocumentIdPO'),
+       editPersonDocumentIdPage,
+       searchPersonDocumentIdPage;
 
-    beforeEach(function() {
+    beforeEach(function () {
       ptor.get('#/persons/1/documentIds/10');
+      editPersonDocumentIdPage = new Page(ptor);
     });
-
+    
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      var text = ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText();
-      expect(text).toEqual('Редакция на документ за самоличност');
+      expect(editPersonDocumentIdPage.breadcrumb.getText())
+        .toEqual('Редакция на документ за самоличност');
     });
 
     it('should display correct filled out data', function () {
-      expect(
-        ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType').text())
-        .getText())
-        .toEqual('Лична карта');
-
-      expect(ptor.findElement(protractor.By.nomenclature('model.valid').text()).getText())
-        .toEqual('Да');
-
-      ptor.findElement(protractor.By.input('model.bookPageNumber'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('3');
-        });
-
-      ptor.findElement(protractor.By.input('model.pageCount'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('1');
-        });
-
-      ptor.findElement(protractor.By.input('model.documentNumber'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('6765432123');
-        });
-
-      ptor.findElement(protractor.By.css('div[name=documentDateValidFrom] > input'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('04.04.2010');
-        });
-      
-      ptor.findElement(protractor.By.css('div[name=documentDateValidTo] > input'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('04.04.2020');
-        });
-      
-      ptor.findElement(protractor.By.input('model.documentPublisher'))
-        .getAttribute('value').then(function (text) {
-          expect(text).toEqual('МВР София');
-        });
-      
-      ptor.findElement(protractor.By.className('test-single-file-span'))
-        .getText().then(function (text) {
-          expect(text).toEqual('testName.pdf');
-        });
-      var dataPromise;
-      ptor
-        .findElements(protractor.By.datatable('model').column('applicationId'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['1', '2']);
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('model').column('applicationName'))
-        .then(function (elements) {
-          dataPromise = protractor.promise.fullyResolved(elements.map(function (el) {
-            return el.getText();
-          }));
- 
-          expect(dataPromise).toEqual(['application1', 'application2']);
-        });
+      expect(editPersonDocumentIdPage.personDocumentIdType.get()).toEqual('Лична карта');
+      expect(editPersonDocumentIdPage.valid.get()).toEqual('Да');
+      expect(editPersonDocumentIdPage.bookPageNumber.get()).toEqual('3');
+      expect(editPersonDocumentIdPage.pageCount.get()).toEqual('1');
+      expect(editPersonDocumentIdPage.documentNumber.get()).toEqual('6765432123');
+      expect(editPersonDocumentIdPage.documentPublisher.get()).toEqual('МВР София');
+      expect(editPersonDocumentIdPage.fileSpan.getText()).toEqual('testName.pdf');
+      expect(editPersonDocumentIdPage.documentDateValidFrom.get()).toEqual('04.04.2010');
+      expect(editPersonDocumentIdPage.documentDateValidTo.get()).toEqual('04.04.2020');
+      expect(editPersonDocumentIdPage.datatable.getColumns(
+          'applicationId',
+          'applicationName'
+          )).toEqual([
+          ['1', 'application1'],
+          ['2', 'application2']
+        ]);
     });
    
-    it('should change document id data correctly', function() {
-      ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType')).click();
-      ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType').dropdownInput())
-        .sendKeys('Паспорт');
-      ptor.findElement(protractor.By.nomenclature('model.personDocumentIdType').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
+    it('should change document id data correctly', function () {
+      editPersonDocumentIdPage.personDocumentIdType.set('Задграничен паспорт');
+      editPersonDocumentIdPage.documentNumber.set('1000');
+      editPersonDocumentIdPage.documentDateValidFrom.set('22.12.2014');
+      editPersonDocumentIdPage.documentPublisher.set('МВР Бургас');
+      editPersonDocumentIdPage.pageCount.set('5');
+      editPersonDocumentIdPage.bookPageNumber.set('3');
+      editPersonDocumentIdPage.valid.set('Не');
+      editPersonDocumentIdPage.documentDateValidTo.set('01.08.2018');
 
-      ptor.findElement(protractor.By.nomenclature('model.valid')).click();
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys('Не');
-      ptor.findElement(protractor.By.nomenclature('model.valid').dropdownInput())
-        .sendKeys(protractor.Key.ENTER);
-      
+      editPersonDocumentIdPage.save();
 
-      var pageNumberInput = ptor.findElement(protractor.By.input('model.bookPageNumber'));
-      pageNumberInput.clear();
-      pageNumberInput.sendKeys('5');
-
-      var pageCountInput = ptor.findElement(protractor.By.input('model.pageCount'));
-      pageCountInput.clear();
-      pageCountInput.sendKeys('3');
-
-      var documentNumberInput = ptor.findElement(protractor.By.input('model.documentNumber'));
-      documentNumberInput.clear();
-      documentNumberInput.sendKeys('1000');
-
-      var notesTextarea = ptor.findElement(protractor.By.css('textarea'));
-      notesTextarea.clear();
-      notesTextarea.sendKeys('Записки...');
-
-      var publisherInput = ptor.findElement(protractor.By.input('model.documentPublisher'));
-      publisherInput.clear();
-      publisherInput.sendKeys('МВР Бургас');
-
-      var documentDateValidFromInput =
-        ptor.findElement(protractor.By.css('div[name=documentDateValidFrom] > input'));
-      documentDateValidFromInput.clear();
-      documentDateValidFromInput.sendKeys('22.12.2014');
-
-      var documentDateValidToInput =
-        ptor.findElement(protractor.By.css('div[name=documentDateValidTo] > input'));
-      documentDateValidToInput.clear();
-      documentDateValidToInput.sendKeys('01.08.2018');
-
-      ptor.findElement(protractor.By.name('saveBtn')).click();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds');
+      searchPersonDocumentIdPage = new SearchPage(ptor);
 
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.docTypeId'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['Паспорт']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.valid'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['Не']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentNumber'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['1000']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentDateValidFrom'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['22.12.2014']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentDateValidTo'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['01.08.2018']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.bookPageNumber'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['5']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.pageCount'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['3']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.notes'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['Записки...']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentPublisher'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['МВР Бургас']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.file'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['testName.pdf', '']);
-          }));
-        });
+      expect(searchPersonDocumentIdPage.datatable.getColumns(
+          'part_personDocumentIdType_name',
+          'part_documentNumber',
+          'part_documentDateValidFrom',
+          'part.documentDateValidTo',
+          'part_documentPublisher',
+          'part_valid_name',
+          'part_bookPageNumber',
+          'part_pageCount',
+          'file'
+          )).toEqual([
+          ['Задграничен паспорт', '1000', '22.12.2014',
+            '01.08.2018', 'МВР Бургас', 'Не', '3', '5', 'testName.pdf']
+        ]);
     });
   });
 

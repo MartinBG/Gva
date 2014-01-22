@@ -1,112 +1,53 @@
-﻿/*global protractor, describe, beforeEach, it, expect*/
+﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor, describe, beforeEach, it, expect) {
 
   'use strict';
   
-  describe('Person address search page', function() {
-    var ptor = protractor.getInstance();
+  describe('Person address search page', function () {
+    var ptor = protractor.getInstance(),
+        Page = require('../pageObjects/searchDocumentIdPO'),
+        personDocumentIdsPage;
 
-    beforeEach(function() {
+    beforeEach(function () {
       ptor.get('#/persons/1/documentIds');
+      personDocumentIdsPage = new Page(ptor);
     });
 
     it('should update breadcrumb text', function () {
-      /*jshint quotmark:false */
-      var text = ptor.findElement(protractor.By.xpath("//ul[@class='breadcrumb']/li[last()]"))
-        .getText();
-      expect(text).toEqual('Документи за самоличност');
+      expect(personDocumentIdsPage.breadcrumb.getText()).toEqual('Документи за самоличност');
     });
 
-    it('should display data correctly', function() {
-      ptor
-         .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.docTypeId'))
-          .then(function (elements) {
-            protractor.promise.fullyResolved(elements.map(function (el) {
-                expect(el.getText()).toEqual(['Лична карта']);
-              }));
-          });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentNumber'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['6765432123']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentPublisher'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['МВР София']);
-          }));
-        });
-
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentDateValidFrom'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['04.04.2010']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.documentDateValidTo'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['04.04.2020']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.valid'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['Да']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.bookPageNumber'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['3']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.pageCount'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['1']);
-          }));
-        });
-      ptor
-        .findElements(protractor.By.datatable('documentIds')
-        .column('part.documentIdSearch.file'))
-        .then(function (elements) {
-          protractor.promise.fullyResolved(elements.map(function (el) {
-            expect(el.getText()).toEqual(['testName.pdf']);
-          }));
-        });
+    it('should display data correctly', function () {
+      expect(personDocumentIdsPage.datatable.getColumns(
+          'part_personDocumentIdType_name',
+          'part_documentNumber',
+          'part_documentDateValidFrom',
+          'part.documentDateValidTo',
+          'part_documentPublisher',
+          'part_valid_name',
+          'part_bookPageNumber',
+          'part_pageCount',
+          'file'
+          )).toEqual([
+        ['Лична карта', '6765432123', '04.04.2010',
+            '04.04.2020',  'МВР София', 'Да', '3', '1', 'testName.pdf']
+      ]);
     });
-
-    it('should delete a documentId', function() {
-      var btnSelector = 'tbody tr:first-child td:nth-child(10)';
-      ptor.findElement(protractor.By.css(btnSelector)).click();
-      expect(ptor.findElement(protractor.By.css('td')).getText())
+   
+    it('should delete a documentId', function () {
+      personDocumentIdsPage.datatable.getRowButtons(1).then(function (buttons) {
+        buttons[1].click();
+        personDocumentIdsPage = new Page(ptor);
+        expect(personDocumentIdsPage.tableBody.getText())
         .toEqual('Няма намерени резултати');
+      });
     });
 
-    it('should go to edit page', function() {
-      var btnSelector = 'tbody tr:first-child td:nth-child(9)';
-      ptor.findElement(protractor.By.css(btnSelector))
-        .click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds/10');
+    it('should go to edit page', function () {
+      personDocumentIdsPage.datatable.getRowButtons(1).then(function (buttons) {
+        buttons[0].click();
+        expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds/10');
+      });
     });
   });
 

@@ -178,6 +178,9 @@
     <Content Include="App\test\gva\persons\mocks\personLots.js" />
     <Content Include="App\test\gva\persons\mocks\personsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
+    <Content Include="App\test\gva\persons\pageObjects\newDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\editDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\searchDocumentIdPO.js" />
     <Content Include="App\test\scaffolding\pageObjects\scDatatable.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSearch.js" />
     <Content Include="App\test\scaffolding\pageObjects\scText.js" />

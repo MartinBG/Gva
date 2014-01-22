@@ -140,6 +140,7 @@
           documentNumber: 'Номер на документа',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валиден до',
+          publisher: 'Издаден от',
           valid: 'Валиден',
           bookPageNumber: 'Номер на страница в деловодна книга.',
           pageCount: 'Брой стр.',
