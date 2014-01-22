@@ -31,7 +31,10 @@
           { text: 'Ново физическо лице', state: 'persons.new' },
           { text: 'Лицензи', url: '/licenses' },
           { text: 'Квалификации', url: '/qualifications' },
-          { text: 'Медицински', url: '/medical' }
+          { text: 'Медицински', url: '/medical' },
+          { text: 'Заявления', state: 'applications/search' },
+          { text: 'Ново заявление', state: 'applications/new/doc' },
+          { text: 'Свържи заявление', state: 'applications/link/common' }
         ]})
         .addItem({ text: 'Организации', url: '/organizations', items: [
           { text: 'Удостоверения', url: '/licenses' },
