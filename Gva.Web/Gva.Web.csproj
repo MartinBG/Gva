@@ -155,17 +155,26 @@
     <Content Include="App\js\ems\docs\views\docsEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\ems\ems_bg-bg.js" />
-    <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\js\gva\persons\forms\personMedicalCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personMedical.html" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
     <Content Include="App\js\gva\directives\button\buttonDirective.html" />
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\js\gva\persons\resources\personMedical.js" />
+    <Content Include="App\js\gva\persons\views\medicalsEdit.html" />
+    <Content Include="App\js\gva\persons\views\medicalsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\medicalsNew.html" />
+    <Content Include="App\js\gva\persons\views\medicalsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\medicalsSearch.html" />
+    <Content Include="App\js\gva\persons\views\medicalsSearchCtrl.js" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\test\ems\mocks\unitsHttp.js" />
+    <Content Include="App\schema\person-document-med.sample.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
@@ -176,6 +185,7 @@
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personLots.js" />
+    <Content Include="App\test\gva\persons\mocks\personMedicalsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\newDocumentIdPO.js" />
@@ -195,7 +205,6 @@
     <Content Include="App\js\gva\persons\forms\personDocumentIdCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personApplication.html" />
     <Content Include="App\js\gva\persons\forms\personScannedDocument.html" />
-    <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentId.js" />
@@ -425,7 +434,7 @@
     <Content Include="App\schema\nomenclature-country-content.json" />
     <Content Include="App\schema\person-address.json" />
     <Content Include="App\schema\person-document-education.json" />
-    <Content Include="App\schema\person-document-id.json" />
+    <Content Include="App\schema\person-document-med.json" />
     <Content Include="App\schema\person-status.json" />
   </ItemGroup>
   <ItemGroup>

@@ -505,6 +505,25 @@
       { nomTypeValueId: 3, code: '', name: 'Цветан Белчев', nameAlt: '', alias: 'seso' },
       { nomTypeValueId: 4, code: '', name: 'Георги Йорданов', nameAlt: '', alias: 'georgi' },
       { nomTypeValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
+    ],
+
+    medicalClassTypes: [
+      { nomTypeValueId: 1, code: '', name: 'клас 1', nameAlt: 'class 1', alias:'class1'},
+      { nomTypeValueId: 2, code: '', name: 'клас 2', nameAlt: 'class 2', alias: 'class2'},
+      { nomTypeValueId: 3, code: '', name: 'клас 3', nameAlt: 'class 3', alias: 'class3'},
+      { nomTypeValueId: 4, code: '', name: 'клас 4', nameAlt: 'class 4', alias: 'class4'}
+    ],
+
+    medicalLimitationTypes: [
+      { nomTypeValueId: 1, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
+      { nomTypeValueId: 2, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
+      { nomTypeValueId: 3, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
+      { nomTypeValueId: 4, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' },
+      { nomTypeValueId: 5, code: 'OSL', name: 'OSL', nameAlt: 'OSL', alias: 'OSL' },
+      { nomTypeValueId: 6, code: 'TML', name: 'TML', nameAlt: 'TML', alias: 'TML' },
+      { nomTypeValueId: 7, code: 'VDL', name: 'VDL', nameAlt: 'VDL', alias: 'VDL' },
+      { nomTypeValueId: 8, code: 'VML', name: 'VML', nameAlt: 'VML', alias: 'VML' },
+      { nomTypeValueId: 9, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

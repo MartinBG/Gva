@@ -1,0 +1,52 @@
+﻿{
+  "description": "Лична карта на Физическо лице",
+  "type": "object",
+  "properties": {    
+    "documentNumberPrefix": {
+      "type": "string", 
+      "description": "Префикс"
+    },
+    "documentNumberSufix": {
+      "type": "string", 
+      "description": "Суфикс"
+    },
+    "documentNumber": {
+      "type": "string", 
+      "description": "Номер на документа"
+    },
+    "documentDateValidFrom": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "От дата"
+    },
+    "documentDateValidTo": {
+      "format": "date-time", 
+      "type": "string", 
+      "description": "Валидно до"
+    },
+    "medClassType": {
+      "type": "number", 
+      "description": "Клас"
+    },
+    "documentPublisher": {
+      "type": "string", 
+      "description": "Издател на документа"
+    },       
+    "limitationsTypes": {
+      "type": "array", 
+      "description": "граничения към свидетелство за медицинска годност",
+    },
+    "notes": {
+      "type": "string", 
+      "description": "Бележки"
+    },
+    "bookPageNumber": {
+      "type": "string", 
+      "description": "Номер на страница в деловодна книга"
+    },
+    "pageCount": {
+      "type": "number", 
+      "description": "Брой страници на документа"
+    }
+  }
+}
