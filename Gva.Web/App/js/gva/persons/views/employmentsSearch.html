@@ -1,0 +1,37 @@
+﻿<div class="container page-content">
+  <div class="row">
+    <div class="form-group col-sm-3 col-sm-offset-0">
+      <gva-button name="createBtn" gva-click="newEmployment()" text="persons.employmentSearch.newEmployment" class="btn btn-primary" icon="glyphicon-floppy-disk"></gva-button>
+    </div>
+  </div>
+  <sc-datatable ng-model="employments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
+      <span>{{item.part.hiredate | date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="part.employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
+    </sc-column>
+    <sc-column data="part.organization.name" title="persons.employmentSearch.organization" type="string">
+    </sc-column>
+    <sc-column data="part.country.name" title="persons.employmentSearch.country" type="string">
+    </sc-column>
+    <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
+    </sc-column>
+    <sc-column data="part.notes" title="persons.employmentSearch.notes" type="string">
+    </sc-column>
+    <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
+    </sc-column>
+    <sc-column data="part.bookPageNumber" title="persons.employmentSearch.bookPageNumber">
+    </sc-column>
+    <sc-column data="part.pageCount" title="persons.employmentSearch.pageCount">
+    </sc-column>
+    <sc-column title="persons.employmentSearch.file">
+      <span>{{item.file[0].name}}</span>
+    </sc-column>
+    <sc-column width="120px">
+      <gva-button name="editBtn" gva-click="editEmployment(item)" text="persons.employmentSearch.edit" class="btn-xs btn-info" icon="glyphicon-pencil"></gva-button>
+    </sc-column>
+    <sc-column width="100px">
+      <gva-button name="deleteBtn" gva-click="deleteEmployment(item)" text="persons.employmentSearch.remove" class="btn-xs btn-info" icon="glyphicon-remove"></gva-button>
+    </sc-column>
+  </sc-datatable>
+</div>

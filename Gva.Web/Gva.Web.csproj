@@ -157,6 +157,9 @@
     <Content Include="App\js\ems\ems_bg-bg.js" />
     <Content Include="App\js\gva\persons\forms\personMedicalCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personMedical.html" />
+    <Content Include="App\js\gva\persons\forms\personEmploymentCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personEmployment.html" />
+    <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
@@ -170,6 +173,13 @@
     <Content Include="App\js\gva\persons\views\medicalsNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\medicalsSearch.html" />
     <Content Include="App\js\gva\persons\views\medicalsSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personEmployment.js" />
+    <Content Include="App\js\gva\persons\views\employmentsNew.html" />
+    <Content Include="App\js\gva\persons\views\employmentsEdit.html" />
+    <Content Include="App\js\gva\persons\views\employmentsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\employmentsSearch.html" />
+    <Content Include="App\js\gva\persons\views\employmentsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\employmentsSearchCtrl.js" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
@@ -182,6 +192,7 @@
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
     <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personEmploymentsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personLots.js" />

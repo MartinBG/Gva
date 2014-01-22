@@ -42,6 +42,11 @@
       templateUrl: 'gva/persons/forms/personMedical.html',
       controller: 'PersonMedicalCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonEmployment',
+      templateUrl: 'gva/persons/forms/personEmployment.html',
+      controller: 'PersonEmploymentCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -239,6 +244,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/licencesSearch.html',
             controller: 'LicencesSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.employments',
+        title: 'Месторабота',
+        parent: 'persons.view',
+        url: '/employments',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.employments.search',
+        parent: 'persons.employments',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/employmentsSearch.html',
+            controller: 'EmploymentsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.employments.new',
+        title: 'Новa месторабота',
+        parent: 'persons.employments',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/employmentsNew.html',
+            controller: 'EmploymentsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.employments.edit',
+        title: 'Редакция на месторабота',
+        parent: 'persons.employments',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/employmentsEdit.html',
+            controller: 'EmploymentsEditCtrl'
           }
         }
       })
