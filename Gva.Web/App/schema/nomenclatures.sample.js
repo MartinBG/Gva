@@ -144,10 +144,10 @@
 
     //Номенклатура Типове персонал
     staffTypes: [
-      { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД' },
-      { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO' },
+      { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias:'M' },
+      { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias:'G' },
       { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'Crew' },
-      { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД' }
+      { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias:'T' }
     ],
 
     //Номенклатура Категории персонал
@@ -244,12 +244,12 @@
 
     //Номенклатура Типове ВС за екипажи
     ratingTypes: [
-      { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80' },
-      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737' },
-      { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet' },
-      { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)' } },
-      { nomTypeValueId: 850, code: 'Тu 154', name: 'Tу 154', nameAlt: 'Tu 154', content: { Code_CA: 'Тu 154' } },
-      { nomTypeValueId: 851, code: 'BAe 146', name: 'BAe 146', nameAlt: 'BAe 146', content: { Code_CA: 'BAe 146' } }
+      { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80', alias: 'MD80' },
+      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737', alias: 'B737' },
+      { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet', alias: 'L410' },
+      { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)' }, alias: 'IR(MEA)' },
+      { nomTypeValueId: 850, code: 'Тu 154', name: 'Tу 154', nameAlt: 'Tu 154', content: { Code_CA: 'Тu 154' }, alias: 'Тu 154' },
+      { nomTypeValueId: 851, code: 'BAe 146', name: 'BAe 146', nameAlt: 'BAe 146', content: { Code_CA: 'BAe 146' }, alias: 'BAe 146' }
     ],
 
     //Номенклатура Групи Класове ВС за екипажи
@@ -262,16 +262,16 @@
 
     //Номенклатура Класове ВС за екипажи
     ratingClasses: [
-      { nomTypeValueId: 1, code: 'VLA', name: 'Много леки самолети', nameAlt: 'Много леки самолети', content: { GroupId: 1 } },
-      { nomTypeValueId: 2, code: 'ULA', name: 'Свръхлеки самолети', nameAlt: 'Свръхлеки самолети', content: { GroupId: 1 } },
-      { nomTypeValueId: 5, code: 'C', name: 'Радиолокационен обзор', nameAlt: 'Surveillance', content: { GroupId: 8, Code_CA: 'C' } },
-      { nomTypeValueId: 6, code: 'D', name: 'Обработка на данни', nameAlt: 'Data processing', content: { GroupId: 8, Code_CA: 'D' } },
-      { nomTypeValueId: 7, code: 'E', name: 'Аеронавигационно метеорологично оборудване', nameAlt: 'Met', content: { GroupId: 8, Code_CA: 'E' } },
-      { nomTypeValueId: 8, code: 'F', name: 'Светотехнически средства', nameAlt: 'Agl', content: { GroupId: 8, Code_CA: 'F' } },
-      { nomTypeValueId: 9, code: 'A', name: 'Комуникация', nameAlt: 'Communications', content: { GroupId: 8, Code_CA: 'A' } },
-      { nomTypeValueId: 100, code: 'APP', name: 'Процедурно ОВД в летищния контролиран район', nameAlt: 'Aerodrome Control Procedural', content: { GroupId: 9, Code_CA: 'APP' } },
-      { nomTypeValueId: 101, code: 'APS', name: 'ОВД в летищния контролиран районн чрез средства за обзор', nameAlt: 'Approach Control Surveillance', content: { GroupId: 9, Code_CA: 'APS' } },
-      { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' } }
+      { nomTypeValueId: 1, code: 'VLA', name: 'Много леки самолети', nameAlt: 'Много леки самолети', content: { GroupId: 1 }, alias: 'VLA' },
+      { nomTypeValueId: 2, code: 'ULA', name: 'Свръхлеки самолети', nameAlt: 'Свръхлеки самолети', content: { GroupId: 1 }, alias: 'ULA' },
+      { nomTypeValueId: 5, code: 'C', name: 'Радиолокационен обзор', nameAlt: 'Surveillance', content: { GroupId: 8, Code_CA: 'C' }, alias: 'C' },
+      { nomTypeValueId: 6, code: 'D', name: 'Обработка на данни', nameAlt: 'Data processing', content: { GroupId: 8, Code_CA: 'D' }, alias: 'D' },
+      { nomTypeValueId: 7, code: 'E', name: 'Аеронавигационно метеорологично оборудване', nameAlt: 'Met', content: { GroupId: 8, Code_CA: 'E' }, alias: 'E' },
+      { nomTypeValueId: 8, code: 'F', name: 'Светотехнически средства', nameAlt: 'Agl', content: { GroupId: 8, Code_CA: 'F' }, alias: 'F' },
+      { nomTypeValueId: 9, code: 'A', name: 'Комуникация', nameAlt: 'Communications', content: { GroupId: 8, Code_CA: 'A' }, alias: 'A' },
+      { nomTypeValueId: 100, code: 'APP', name: 'Процедурно ОВД в летищния контролиран район', nameAlt: 'Aerodrome Control Procedural', content: { GroupId: 9, Code_CA: 'APP' }, alias: 'APP' },
+      { nomTypeValueId: 101, code: 'APS', name: 'ОВД в летищния контролиран районн чрез средства за обзор', nameAlt: 'Approach Control Surveillance', content: { GroupId: 9, Code_CA: 'APS' }, alias: 'APS' },
+      { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' }, alias: 'ACP' }
     ],
 
     //Номенклатура Групи Разрешения към квалификация
@@ -286,7 +286,7 @@
 
     //Номенклатура Разрешения към квалификация
     authorizations: [
-      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 } },
+      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FI(A)' },
       { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' } },
       { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
       { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' } },
@@ -330,7 +330,7 @@
 
     //Номенклатура Индикатори на местоположение
     locationIndicators: [
-      { nomTypeValueId: 1, code: 'LBBG', name: 'БУРГАС', nameAlt: 'BURGAS' },
+      { nomTypeValueId: 1, code: 'LBBG', name: 'БУРГАС', nameAlt: 'BURGAS', alias: 'LBBG' },
       { nomTypeValueId: 2, code: 'LBBO', name: 'БОХОТ-LM ', nameAlt: 'BOHOT-LM' },
       { nomTypeValueId: 3, code: 'LBDB', name: 'ДОЛНА БАНЯ', nameAlt: 'DOLNA BANYA' },
       { nomTypeValueId: 4, code: 'LBGO', name: 'ГОРНА ОРХЯХОВИЦА', nameAlt: 'GORNA ORYAHOVITSA' },
@@ -505,6 +505,23 @@
       { nomTypeValueId: 3, code: '', name: 'Цветан Белчев', nameAlt: '', alias: 'seso' },
       { nomTypeValueId: 4, code: '', name: 'Георги Йорданов', nameAlt: '', alias: 'georgi' },
       { nomTypeValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
-    ]
+    ],
+
+    //Номенклатура Въздухоплавателни средства
+    aircrafts: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'aircraft1', nameAlt: 'aircraft1', alias: 'aircraft1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'aircraft2', nameAlt: 'aircraft2', alias: 'aircraft2' }
+    ],
+    //Номенклатура Роли в натрупан летателният опит
+    experienceRoles: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'type1', nameAlt: 'type1', alias: 'type1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'type2', nameAlt: 'type2', alias: 'type2' }
+    ],
+    //Номенклатура Видове летателен опит
+    experienceMeasures: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'measure1', nameAlt: 'measure1', alias: 'measure1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'measure2', nameAlt: 'measure2', alias: 'measure2' }
+    ],
+
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

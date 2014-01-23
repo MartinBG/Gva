@@ -37,6 +37,11 @@
       name: 'gvaPersonApplication',
       templateUrl: 'gva/persons/forms/personApplication.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonFlyingExperience',
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
+      controller: 'PersonFlyingExperienceCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -234,6 +239,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/licencesSearch.html',
             controller: 'LicencesSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences',
+        title: 'Летателен/практически опит',
+        parent: 'persons.view',
+        url: '/flyingExperiences',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.flyingExperiences.search',
+        parent: 'persons.flyingExperiences',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesSearch.html',
+            controller: 'FlyingExperiencesSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences.new',
+        title: 'Нов летателен/практически опит',
+        parent: 'persons.flyingExperiences',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesNew.html',
+            controller: 'FlyingExperiencesNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences.edit',
+        title: 'Редакция на летателен/практически опит',
+        parent: 'persons.flyingExperiences',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesEdit.html',
+            controller: 'FlyingExperiencesEditCtrl'
           }
         }
       });

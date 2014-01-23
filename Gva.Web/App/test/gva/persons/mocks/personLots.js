@@ -9,7 +9,8 @@
       personDocumentEducations = require('./person-document-education.sample'),
       personDocumentIds = require('./person-document-id.sample'),
       personDocumentOthers = require('./person-document-other.sample'),
-      personDocumentTrainings = require('./person-document-training.sample');
+      personDocumentTrainings = require('./person-document-training.sample'),
+      personFlyingExperiences = require('./person-flyingExperience.sample');
 
   angular.module('app').constant('personLots', [
     {
@@ -102,6 +103,12 @@
         {
           partIndex: 15,
           part: personDocumentTrainings.person1Training4
+        }
+      ],
+      personFlyingExperiences: [
+        {
+          partIndex: 16,
+          part: personFlyingExperiences.person1FlyingExperience1
         }
       ]
     },

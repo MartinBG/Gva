@@ -1,0 +1,13 @@
+﻿<div class="container page-content">
+  <ng-form name="editAddressForm">
+
+    <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <gva-button name="saveBtn" gva-click="save()" text="persons.editAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editAddressForm.$invalid"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+      </div>
+    </div>
+  </ng-form>
+</div>
