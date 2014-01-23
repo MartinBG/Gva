@@ -76,7 +76,7 @@
           parent: 'applications/new',
           url: '/doc',
           views: {
-            'newView@applications/new': {
+            'applicationsNewView': {
               templateUrl: 'gva/applications/views/applicationsNewDoc.html',
               controller: 'ApplicationsNewDocCtrl'
             }
@@ -84,11 +84,11 @@
         })
         .state({
           name: 'applications/new/personChoose',
-          title: 'Избери Персон',
+          title: 'Избер на заявител',
           parent: 'applications/new',
-          url: '/personChoose',
+          url: '/personChoose?exact&lin&uin&names&licences&ratings&organization',
           views: {
-            'newView@applications/new': {
+            'applicationsNewView': {
               templateUrl: 'gva/applications/views/personChoose.html',
               controller: 'PersonChooseCtrl'
             }
@@ -96,11 +96,11 @@
         })
         .state({
           name: 'applications/new/personNew',
-          title: 'Нов Персон',
+          title: 'Нов заявител',
           parent: 'applications/new',
           url: '/personNew',
           views: {
-            'newView@applications/new': {
+            'applicationsNewView': {
               templateUrl: 'gva/applications/views/personNew.html',
               controller: 'PersonNewCtrl'
             }

@@ -66,7 +66,7 @@
         function ($params, $jsonData, personLots) {
           var nextLotId = _(personLots).pluck('lotId').max().value() + 1;
 
-          personLots.push({
+          var newPerson = {
             lotId: nextLotId,
             nextIndex: 4,
             personData: {
@@ -85,9 +85,11 @@
                 part: $jsonData.personDocumentId
               }
             ]
-          });
+          };
 
-          return [200];
+          personLots.push(newPerson);
+
+          return [200, newPerson];
         });
   });
 }(angular, _));

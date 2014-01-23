@@ -148,6 +148,17 @@
           remove: 'Изтрий',
           newDocumentId: 'Нов документ'
         }
+      },
+      applications: {
+        newform: {
+          person: 'Заявител',
+          newPerson: 'Нов заявител',
+          choosePerson: 'Избери заявител'
+        },
+        choosePerson: {
+          choose: 'Избери',
+          cancel: 'Отказ'
+        }
       }
     });
   }]);

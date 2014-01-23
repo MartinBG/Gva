@@ -1,3 +1,16 @@
 ﻿<div class="container page-content">
-  нов човек
+  <ng-form name="newPersonForm">
+    <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
+
+    <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+
+    <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <gva-button name="saveBtn" gva-click="save()" text="persons.newPerson.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newPersonForm.$invalid"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newPerson.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+      </div>
+    </div>
+  </ng-form>
 </div>

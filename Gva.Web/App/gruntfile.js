@@ -87,6 +87,7 @@ module.exports = function (grunt) {
         'test/httpBackendConfiguratorProvider.js',
         'test/common/mocks/*.js',
         'test/ems/mocks/*.js',
+        'test/gva/applications/mocks/*.js',
         'test/gva/persons/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js',

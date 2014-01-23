@@ -2,18 +2,18 @@
 (function (angular) {
   'use strict';
 
-  angular.module('ems')
-    .factory('Doc', ['$resource',
+  angular.module('gva')
+    .factory('Application', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:docId', { docId: '@docId' },
+        return $resource('/api/applications/:id', { id: '@id' },
           {
             'createNew': {
               method: 'GET',
-              url: '/api/docs/new'
+              url: '/api/applications/new/create'
             },
             'saveNew': {
               method: 'POST',
-              url: '/api/docs/saveNew'
+              url: '/api/applications/new/save'
             }
           });
       }]);
