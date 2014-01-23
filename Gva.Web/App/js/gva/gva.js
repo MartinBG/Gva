@@ -26,6 +26,11 @@
       controller: 'PersonDocumentIdCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonDocumentEducation',
+      templateUrl: 'gva/persons/forms/personDocumentEducation.html',
+      controller: 'PersonDocumentEducationCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonStatus',
       templateUrl: 'gva/persons/forms/personStatus.html'
     });
@@ -226,6 +231,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/documentIdsEdit.html',
             controller: 'DocumentIdsEditCtrl'
+          }
+        }
+      })
+            .state({
+        name: 'persons.documentEducations',
+        title: 'Образования',
+        parent: 'persons.view',
+        url: '/documentEducations',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.documentEducations.search',
+        parent: 'persons.documentEducations',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentEducationsSearch.html',
+            controller: 'DocumentEducationsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentEducations.new',
+        title: 'Ново образование',
+        parent: 'persons.documentEducations',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentEducationsNew.html',
+            controller: 'DocumentEducationsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentEducations.edit',
+        title: 'Редакция на образование',
+        parent: 'persons.documentEducations',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentEducationsEdit.html',
+            controller: 'DocumentEducationsEditCtrl'
           }
         }
       })

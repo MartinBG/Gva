@@ -159,6 +159,8 @@
     <Content Include="App\js\gva\persons\forms\personMedical.html" />
     <Content Include="App\js\gva\persons\forms\personEmploymentCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personEmployment.html" />
+    <Content Include="App\js\gva\persons\forms\personDocumentEducation.html" />
+    <Content Include="App\js\gva\persons\forms\personDocumentEducationCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
@@ -180,6 +182,13 @@
     <Content Include="App\js\gva\persons\views\employmentsSearch.html" />
     <Content Include="App\js\gva\persons\views\employmentsEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\employmentsSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personDocumentEducation.js" />
+    <Content Include="App\js\gva\persons\views\documentEducationsEdit.html" />
+    <Content Include="App\js\gva\persons\views\documentEducationsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\documentEducationsNew.html" />
+    <Content Include="App\js\gva\persons\views\documentEducationsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\documentEducationsSearch.html" />
+    <Content Include="App\js\gva\persons\views\documentEducationsSearchCtrl.js" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
@@ -191,6 +200,7 @@
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbed.html" />
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
     <Content Include="App\test\gva\directives\testbeds\states.js" />
+    <Content Include="App\test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personEmploymentsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />

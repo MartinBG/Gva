@@ -15,19 +15,20 @@
       "type": "string", 
       "description": "Специалност"
     },    
-    "schoolId": {
-      "type": "number", 
-      "description": "Учебно заведение от Номенклатура Учебни заведения"
+    "school": {
+      "type": "object", 
+      "description": "Учебно заведение от Номенклатура Учебни заведения",
+      "additionalProperties": true
     },
-    "graduationId": {
-      "type": "number", 
-      "description": "Степен на образование от Номенклатура Степени на образование"
+    "graduation": {
+      "type": "object", 
+      "description": "Степен на образование от Номенклатура Степени на образование",
+      "additionalProperties": true
     },
     "notes": {
       "type": "string", 
       "description": "Бележки"
     },
-    
     "bookPageNumber": {
       "type": "string", 
       "description": "Номер на страница в деловодна книга"
