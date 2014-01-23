@@ -196,6 +196,9 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newFlyingExperience: 'Нов летателен/практически опит'
+        },
+        flyingExperienceNew: {
+          notUnique: 'Данните се дублират с вече съществуващ запис'
         }
       }
     });
