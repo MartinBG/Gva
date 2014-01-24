@@ -1,0 +1,17 @@
+﻿<div class="tab-content">
+  <ng-form name="newForm">
+
+    <div ng-show="docFileType.nomTypeValueId === 1">
+        <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId.part"></gva-person-document-id>
+        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentId.file"></gva-person-scanned-document>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-5">
+        <gva-button name="saveBtn" gva-click="save()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newForm.$invalid"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+      </div>
+    </div>
+
+  </ng-form>
+</div>

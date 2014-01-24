@@ -12,7 +12,7 @@
       schoolId: nomenclatures.getId('schools', 'BAC'),
       graduationId: nomenclatures.getId('graduations', 'PQ'),
       notes: '',
-      
+
       bookPageNumber: '2',
       pageCount: 1
     }

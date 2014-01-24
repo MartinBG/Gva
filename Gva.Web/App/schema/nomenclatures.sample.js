@@ -184,6 +184,10 @@
       }
     ],
 
+    documents: [
+      { nomTypeValueId: 1, code: '1', name: 'Документ за самоличност', nameAlt: 'Document Id', alias: '' }
+    ],
+
     //Номенклатура Степени на образование
     graduations: [
       { nomTypeValueId: 1, code: 'HS', name: 'Висше образование (бакалавър)', nameAlt: 'Висше образование (бакалавър)', alias: 'HS' },

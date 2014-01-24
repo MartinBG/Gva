@@ -179,6 +179,79 @@
             }
           }
         })
+        .state({
+          name: 'applications/edit/case',
+          title: 'Преписка',
+          parent: 'applications/edit',
+          url: '/case',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditCase.html',
+              controller: 'ApplicationsEditCaseCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'applications/edit/quals',
+          title: 'Квалификации',
+          parent: 'applications/edit',
+          url: '/quals',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditQuals.html',
+              controller: 'ApplicationsEditQualsCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'applications/edit/licenses',
+          title: 'Лицензи',
+          parent: 'applications/edit',
+          url: '/licenses',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditLicenses.html',
+              controller: 'ApplicationsEditLicensesCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'applications/edit/newfile',
+          title: 'Нов файл',
+          parent: 'applications/edit',
+          url: '/newfile',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditNewFile.html',
+              controller: 'ApplicationsEditNewFileCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'applications/edit/addpart',
+          title: 'Добавяне',
+          parent: 'applications/edit',
+          url: '/addpart',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditAddPart.html',
+              controller: 'ApplicationsEditAddPartCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'applications/edit/linkpart',
+          title: 'Свързване',
+          parent: 'applications/edit',
+          url: '/linkpart',
+          views: {
+            'detailView@applications/edit': {
+              templateUrl: 'gva/applications/views/applicationsEditLinkPart.html',
+              controller: 'ApplicationsEditLinkPartCtrl'
+            }
+          }
+        })
+
 
       ;
     }])

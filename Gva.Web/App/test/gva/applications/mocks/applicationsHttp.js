@@ -2,8 +2,40 @@
 (function (angular, _) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
+    function personMapper(p) {
+      if (!!p) {
+        return {
+          id: p.lotId,
+          lin: p.personData.part.lin,
+          uin: p.personData.part.uin,
+          names: p.personData.part.firstName + ' ' +
+            p.personData.part.middleName + ' ' + p.personData.part.lastName,
+          /*jshint -W052*/
+          age: ~~((Date.now() - new Date(p.personData.part.dateOfBirth)) / (31557600000))
+          /*jshint +W052*/
+        };
+      }
+    }
 
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/applications/:id',
+        function ($params, $filter, gvaApplications) {
+          var gvaApplication = _(gvaApplications)
+            .filter({ gvaApplicationId: parseInt($params.id, 10) }).first();
+
+          if (gvaApplication) {
+            if (gvaApplication.person.lotId) { //todo change person data better
+              gvaApplication.person = personMapper(gvaApplication.person);
+            }
+
+            return [200, gvaApplication];
+          }
+          else {
+            return [404];
+          }
+
+        })
+
       .when('GET', '/api/applications/new/create',
         function () {
           var newGvaApplication = {

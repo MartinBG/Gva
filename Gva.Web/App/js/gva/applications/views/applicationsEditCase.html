@@ -1,0 +1,38 @@
+﻿<div class="tab-content">
+
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th style="width: 250px;">Тип/№/Дата</th>
+        <th>Тип</th>
+        <th >Дело</th>
+        <th style="width: 75px;"></th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="c in application.case">
+      <tr>
+        <td>{{ c.regNumberCol }} {{ c.docStatusName }}</td>
+        <td>{{ c.descriptionCol }}</td>
+        <td></td>
+        <td style="text-align: right;">
+          <a ng-click="viewDoc(c.docId)" style="cursor: pointer;">Преглед
+          </a>
+        </td>
+      </tr>
+      <tr ng-repeat="df in c.docFiles">
+        <td></td>
+        <td>{{ df.docFileTypeName }}</td>
+        <td><a ng-click="addpart()" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkpart()" style="cursor: pointer;">Свържи с вече добавен</a></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align: right;">
+          <a ng-click="newfile(item)" style="cursor: pointer;">Нов файл</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+ <!-- <button type="button" class="btn btn-default btn-sm" ng-click="addpart()">Добави към дело</button>
+  <button type="button" class="btn btn-default btn-sm" ng-click="linkpart()">Свържи с вече добавен</button>-->
+</div>
