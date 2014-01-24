@@ -101,6 +101,29 @@
           pageCount: 'Брой страници на документа',
           notes: 'Бележки'
         },
+        personDocumentTrainingDirective: {
+          title: 'Обучение',
+          staffType: 'Тип персонал',
+          documentNumber: 'Номер на документ',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издаден от',
+          ratingType: 'Тип ВС',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          locationIndicator: 'Индикатор за местоположение',
+          sector: 'Сектор/работно място',
+          engLangLevel: 'Ниво на език',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валиден',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -216,6 +239,34 @@
           cancel: 'Отказ'
         },
         editEmployment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        documentTrainingSearch: {
+          staffType: 'Тип персонал',
+          documentNumber: 'Номер на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издаден от',
+          ratingType: 'Тип ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валиден',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newDocumentTraining: 'Нов документ'
+        },
+        newDocumentTraining: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentTraining: {
           save: 'Запис',
           cancel: 'Отказ'
         }

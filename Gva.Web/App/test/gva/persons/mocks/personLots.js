@@ -95,7 +95,22 @@
       personDocumentTrainings: [
         {
           partIndex: 12,
-          part: personDocumentTrainings.person1Training1
+          part: personDocumentTrainings.person1Training1,
+          file: [{
+            key: '311-93-wb',
+            name: 'test1.pdf',
+            relativePath: '../folder1/folder3/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application111'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application222'
+            }
+          ]
         },
         {
           partIndex: 13,
@@ -103,7 +118,22 @@
         },
         {
           partIndex: 14,
-          part: personDocumentTrainings.person1Training3
+          part: personDocumentTrainings.person1Training3,
+          file: [{
+            key: '311-93-wb',
+            name: 'test3.pdf',
+            relativePath: '../folder1/folder3/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application122'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application212'
+            }
+          ]
         },
         {
           partIndex: 15,

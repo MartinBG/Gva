@@ -144,10 +144,10 @@
 
     //Номенклатура Типове персонал
     staffTypes: [
-      { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД' },
-      { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO' },
-      { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'Crew' },
-      { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД' }
+      { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias: 'M' },
+      { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias: 'G' },
+      { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'F' },
+      { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias: 'T' }
     ],
 
     //Номенклатура Категории персонал
@@ -245,7 +245,7 @@
     //Номенклатура Типове ВС за екипажи
     ratingTypes: [
       { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80' },
-      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737' },
+      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737', alias: 'B737' },
       { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet' },
       { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)' } },
       { nomTypeValueId: 850, code: 'Тu 154', name: 'Tу 154', nameAlt: 'Tu 154', content: { Code_CA: 'Тu 154' } },
@@ -286,7 +286,7 @@
 
     //Номенклатура Разрешения към квалификация
     authorizations: [
-      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 } },
+      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FI(A)' },
       { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' } },
       { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
       { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' } },

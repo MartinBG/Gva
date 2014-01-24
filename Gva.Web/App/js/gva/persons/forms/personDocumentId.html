@@ -37,7 +37,6 @@
           <span ng-show="form.documentNumber.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="documentNumberValidationSpan" ng-show="form.documentNumber.$dirty && form.documentNumber.$invalid && !form.documentNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
             title="{{form.documentNumber.$error.required && 'Задължително поле' || form.documentNumber.$error.unique && 'Невалиден номер на документ'}}"></span>
-          
           <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" sc-validate="{unique: isUniqueDocNumber}"></sc-text>
         </div>
         <div class="form-group col-sm-2">
@@ -52,7 +51,7 @@
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentDateValidTo"></label>
           <span name="documentDateValidToValidationSpan" ng-show="form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign"
             title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
-          <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo"></sc-date>
+          <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-required="true"></sc-date>
         </div>
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentPublisher"></label>
@@ -60,7 +59,7 @@
           <span name="documentPublisherValidationSpan" ng-show="form.documentPublisher.$dirty && form.documentPublisher.$invalid && !form.documentPublisher.$error.$pending"
              class="glyphicon glyphicon-warning-sign"
             title="{{form.documentPublisher.$error.required && 'Задължително поле' || form.documentPublisher.$error.unique && 'Невалиден издател на документ'}}"></span>
-          <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" sc-validate="{unique: isUniquePublisher}"></sc-text>
+          <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" sc-validate="{unique: isUniqueDocPublisher}"></sc-text>
         </div>
       </div>
       <div class="row">
