@@ -34,6 +34,16 @@
         </div>
       </div>
       <div class="row">
+        <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personEmploymentDirective.notes"></label>
+        </div>
+      </div>
+      <div class="row3">
+        <div class="form-group col-md">
+          <sc-textarea rows="3" cols="50" ng-model="model.notes"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.bookPageNumber"></label>
           <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$invalid && !form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
@@ -45,16 +55,6 @@
           <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
           <sc-text ng-model="model.pageCount" name="pageCount" sc-validate="{min: isPositive}"></sc-text>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-2">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.notes"></label>
-        </div>
-      </div>
-      <div class="row3">
-        <div class="form-group col-md">
-          <sc-textarea rows="3" cols="50" ng-model="model.notes"></sc-textarea>
         </div>
       </div>
     </div>
