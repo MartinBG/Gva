@@ -30,7 +30,8 @@
         scope.$watch(function () {
           return paramsFunc(scope.$parent);
         }, function (newVal, oldVal) {
-          if (!angular.equals(newVal, oldVal)) {
+          //skip initialization
+          if (newVal !== oldVal) {
             ngModel.$setViewValue(undefined);
             ngModel.$render();
           }
