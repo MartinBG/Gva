@@ -28,6 +28,7 @@ module.exports = function (grunt) {
         'schema/person-document-med.sample.js',
         'schema/person-document-other.sample.js',
         'schema/person-document-training.sample.js',
+        'schema/person-document-checks.sample.js',
         'schema/person-address.sample.js',
         'schema/person-status.sample.js',
         'schema/person.sample.js'

@@ -1,0 +1,34 @@
+﻿/*global angular*/
+(function (angular) {
+  'use strict';
+
+  function DocumentEmploymentsEditCtrl($scope, $state, $stateParams, PersonDocumentEmployment) {
+    PersonDocumentEmployment
+    .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
+    .then(function (employment) {
+      $scope.personDocumentEmployment = employment;
+    });
+
+    $scope.save = function () {
+      return PersonDocumentEmployment
+        .save({ id: $stateParams.id, ind: $stateParams.ind },
+        $scope.personDocumentEmployment).$promise
+        .then(function () {
+          return $state.go('persons.employments.search');
+        });
+    };
+
+    $scope.cancel = function () {
+      return $state.go('persons.employments.search');
+    };
+  }
+
+  DocumentEmploymentsEditCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentEmployment'
+  ];
+
+  angular.module('gva').controller('DocumentEmploymentsEditCtrl', DocumentEmploymentsEditCtrl);
+}(angular));

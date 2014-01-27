@@ -43,14 +43,19 @@
       templateUrl: 'gva/persons/forms/personApplication.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonMedical',
-      templateUrl: 'gva/persons/forms/personMedical.html',
-      controller: 'PersonMedicalCtrl'
+      name: 'gvaPersonDocumentMedical',
+      templateUrl: 'gva/persons/forms/personDocumentMedical.html',
+      controller: 'PersonDocumentMedicalCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonEmployment',
-      templateUrl: 'gva/persons/forms/personEmployment.html',
-      controller: 'PersonEmploymentCtrl'
+      name: 'gvaPersonDocumentEmployment',
+      templateUrl: 'gva/persons/forms/personDocumentEmployment.html',
+      controller: 'PersonDocumentEmploymentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentCheck',
+      templateUrl: 'gva/persons/forms/personDocumentCheck.html',
+      controller: 'PersonDocumentCheckCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -295,6 +300,47 @@
         }
       })
       .state({
+        name: 'persons.checks',
+        title: 'Проверки',
+        parent: 'persons.view',
+        url: '/checks',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.checks.search',
+        parent: 'persons.checks',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentChecksSearch.html',
+            controller: 'DocumentChecksSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.checks.new',
+        title: 'Нова проверка',
+        parent: 'persons.checks',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentChecksNew.html',
+            controller: 'DocumentChecksNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.checks.edit',
+        title: 'Редакция на проверка',
+        parent: 'persons.checks',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentChecksEdit.html',
+            controller: 'DocumentChecksEditCtrl'
+          }
+        }
+      }).state({
         name: 'persons.employments',
         title: 'Месторабота',
         parent: 'persons.view',
@@ -307,8 +353,8 @@
         url: '',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/employmentsSearch.html',
-            controller: 'EmploymentsSearchCtrl'
+            templateUrl: 'gva/persons/views/documentEmploymentsSearch.html',
+            controller: 'DocumentEmploymentsSearchCtrl'
           }
         }
       })
@@ -319,8 +365,8 @@
         url: '/new',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/employmentsNew.html',
-            controller: 'EmploymentsNewCtrl'
+            templateUrl: 'gva/persons/views/documentEmploymentsNew.html',
+            controller: 'DocumentEmploymentsNewCtrl'
           }
         }
       })
@@ -331,8 +377,8 @@
         url: '/:ind',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/employmentsEdit.html',
-            controller: 'EmploymentsEditCtrl'
+            templateUrl: 'gva/persons/views/documentEmploymentsEdit.html',
+            controller: 'DocumentEmploymentsEditCtrl'
           }
         }
       })
@@ -349,8 +395,8 @@
         url: '',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/medicalsSearch.html',
-            controller: 'MedicalsSearchCtrl'
+            templateUrl: 'gva/persons/views/documentMedicalsSearch.html',
+            controller: 'DocumentMedicalsSearchCtrl'
           }
         }
       })
@@ -361,8 +407,8 @@
         url: '/new',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/medicalsNew.html',
-            controller: 'MedicalsNewCtrl'
+            templateUrl: 'gva/persons/views/documentMedicalsNew.html',
+            controller: 'DocumentMedicalsNewCtrl'
           }
         }
       })
@@ -373,8 +419,8 @@
         url: '/:ind',
         views: {
           'detailView@persons.view': {
-            templateUrl: 'gva/persons/views/medicalsEdit.html',
-            controller: 'MedicalsEditCtrl'
+            templateUrl: 'gva/persons/views/documentMedicalsEdit.html',
+            controller: 'DocumentMedicalsEditCtrl'
           }
         }
       });

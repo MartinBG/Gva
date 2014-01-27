@@ -112,6 +112,29 @@
           pageCount: 'Брой страници на документа',
           notes: 'Бележки'
         },
+        personCheckDirective: {
+          title: 'Проверка',
+          staffType: 'Вид персонал',
+          documentNumber: 'Номер на документа',
+          documentPersonNumber: 'Номер в списъка',
+          personCheckDocumentType: 'Тип документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personCheckRatingValue: 'Оценка',
+          personCheckDocumentRole: 'Роля на документ',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          valid: 'Валиден',
+          bookPageNumber: '№ на стр. в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          notes: 'Бележки',
+          sector: 'Сектор/работно място',
+          locationIndicator: 'Индикатор на местоположение',
+          ratingType: 'Тип ВС'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -250,6 +273,34 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newDocumentEducation: 'Ново образнование'
+        },
+        checkSearch: {
+          newCheck: 'Нова проверка',
+          documentNumber: '№ на документа',
+          ratingClass: 'Клас ВС',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personCheckDocumentType: 'Тип документ',
+          personCheckDocumentRole: 'Роля на документ',
+          ratingType: 'Тип ВС',
+          valid: 'Валидност',
+          notes: 'Бележки',
+          bookPageNumber: '№ на стр. в дел. книга',
+          pageCount: 'Бр. стр.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий'
+        },
+        editCheck: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        newCheck: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       }
     });

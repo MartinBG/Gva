@@ -20,6 +20,10 @@
         throw new Error('sc-nomenclature alias not specified!');
       }
 
+      if (iAttrs.ngDisabled) {
+        scope.ngDisabled = $parse(iAttrs.ngDisabled);
+      }
+
       if (iAttrs.params) {
         paramsFunc = $parse(iAttrs.params);
 

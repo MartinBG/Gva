@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonEmploymentCtrl($scope, $stateParams, PersonEmployment) {
+  function PersonDocumentEmploymentCtrl($scope, $stateParams, PersonDocumentEmployment) {
     $scope.isPositive = function (value) {
       return (value >= 0 ? true: false);
     };
@@ -11,13 +11,13 @@
       if (!value || !$stateParams.id) {
         return true;
       }
-      var object = { id: $stateParams.id };
+      var queryParams = { id: $stateParams.id };
       if (param === 'hdate') {
-        object[param] = value;
+        queryParams[param] = value;
       } else {
-        object[param] = value.nomTypeValueId;
+        queryParams[param] = value.nomTypeValueId;
       }
-      return PersonEmployment.query(object).$promise
+      return PersonDocumentEmployment.query(queryParams).$promise
         .then(function (employments) {
           return employments.length === 0 ||
             (employments.length === 1 &&
@@ -34,7 +34,7 @@
     };
   }
 
-  PersonEmploymentCtrl.$inject = ['$scope', '$stateParams', 'PersonEmployment'];
+  PersonDocumentEmploymentCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentEmployment'];
 
-  angular.module('gva').controller('PersonEmploymentCtrl', PersonEmploymentCtrl);
+  angular.module('gva').controller('PersonDocumentEmploymentCtrl', PersonDocumentEmploymentCtrl);
 }(angular));

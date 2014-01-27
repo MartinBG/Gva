@@ -48,9 +48,9 @@
       "type": "number",
       "description": "Тип документ от Номенклатура Други типове документи на Физичеко лице"
     },
-    "personOtherDocumentRoleId": {
+    "personCheckDocumentRoleId": {
       "type": "number", 
-      "description": "Роля на документ от Номенклатура Други роли документи на Физичеко лице"
+      "description": "Роля на документ от Номенклатура Роли документи за проверка на Физичеко лице"
     },
     "valid": {
       "type": "boolean",
