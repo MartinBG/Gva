@@ -150,7 +150,6 @@
     <Content Include="App\js\ems\docs\views\docsEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\ems\ems_bg-bg.js" />
-    <Content Include="App\js\gva\persons\forms\personFlyingExperienceCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personFlyingExperience.html" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\gruntTasks\bundle.js" />

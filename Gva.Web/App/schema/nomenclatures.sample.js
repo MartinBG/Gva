@@ -146,7 +146,7 @@
     staffTypes: [
       { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias:'M' },
       { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias:'G' },
-      { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'Crew' },
+      { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'F' },
       { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias:'T' }
     ],
 

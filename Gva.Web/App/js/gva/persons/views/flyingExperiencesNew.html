@@ -1,16 +1,16 @@
 ﻿<div class="container page-content">
-  <ng-form name="editAddressForm">
+  <ng-form name="editFlyingExperienceForm">
 
     <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
 
     <div class="well" ng-show="!isUnique" style="background-color:red;">
-      <span  l10n-text="persons.flyingExperienceNew.notUnique"></span>
+      <span l10n-text="persons.flyingExperienceNew.notUnique"></span>
     </div>
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.editAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editAddressForm.$invalid"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+        <gva-button name="saveBtn" gva-click="save()" text="persons.flyingExperienceNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editFlyingExperienceForm.$invalid"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.flyingExperienceNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
       </div>
     </div>
   </ng-form>

@@ -198,7 +198,14 @@
           newFlyingExperience: 'Нов летателен/практически опит'
         },
         flyingExperienceNew: {
-          notUnique: 'Данните се дублират с вече съществуващ запис'
+          notUnique: 'Данните се дублират с вече съществуващ запис',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        flyingExperienceEdit: {
+          notUnique: 'Данните се дублират с вече съществуващ запис',
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       }
     });

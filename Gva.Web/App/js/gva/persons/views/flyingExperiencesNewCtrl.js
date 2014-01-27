@@ -17,6 +17,8 @@
         licenceType: $scope.personFlyingExperience.part.licenceType.nomTypeValueId,
         locationIndicator: $scope.personFlyingExperience.part.locationIndicator.nomTypeValueId,
         sector: $scope.personFlyingExperience.part.sector,
+        month: $scope.personFlyingExperience.part.period.month,
+        year: $scope.personFlyingExperience.part.period.year,
         experienceRole: $scope.personFlyingExperience.part.experienceRole.nomTypeValueId,
         experienceMeasure: $scope.personFlyingExperience.part.experienceMeasure.nomTypeValueId
       }).$promise

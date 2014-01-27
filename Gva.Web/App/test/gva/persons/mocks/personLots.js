@@ -15,7 +15,7 @@
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 16,
+      nextIndex: 22,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -107,8 +107,12 @@
       ],
       personFlyingExperiences: [
         {
-          partIndex: 16,
+          partIndex: 20,
           part: personFlyingExperiences.person1FlyingExperience1
+        },
+        {
+          partIndex: 21,
+          part: personFlyingExperiences.person1FlyingExperience2
         }
       ]
     },
