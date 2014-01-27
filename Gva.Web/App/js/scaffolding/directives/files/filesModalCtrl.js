@@ -220,5 +220,5 @@
     'isReadonly'
   ];
 
-  angular.module('scaffolding').controller('scaffolding.FilesModalCtrl', FilesModalCtrl);
+  angular.module('scaffolding').controller('FilesModalCtrl', FilesModalCtrl);
 }(angular, _, alert, $));

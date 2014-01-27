@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('scaffolding').factory('scaffolding.Nomenclature', [
+  angular.module('scaffolding').factory('Nomenclature', [
     '$resource',
     function ($resource) {
       return $resource('/api/nomenclatures/:alias?term=:term', {

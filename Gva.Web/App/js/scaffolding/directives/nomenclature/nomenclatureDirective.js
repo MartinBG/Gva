@@ -107,7 +107,7 @@
     };
   }
 
-  NomenclatureDirective.$inject = ['$filter', '$parse', 'scaffolding.Nomenclature'];
+  NomenclatureDirective.$inject = ['$filter', '$parse', 'Nomenclature'];
 
   angular.module('scaffolding').directive('scNomenclature', NomenclatureDirective);
 }(angular, _, $, Select2));
