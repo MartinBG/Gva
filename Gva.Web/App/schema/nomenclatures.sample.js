@@ -144,10 +144,10 @@
 
     //Номенклатура Типове персонал
     staffTypes: [
-      { nomTypeValueId: 5, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД' },
-      { nomTypeValueId: 4, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO' },
-      { nomTypeValueId: 1, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'Crew' },
-      { nomTypeValueId: 2, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД' }
+      { nomTypeValueId: 1, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias: 'M' },
+      { nomTypeValueId: 2, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias: 'G' },
+      { nomTypeValueId: 3, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'F' },
+      { nomTypeValueId: 4, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias: 'T'  }
     ],
 
     //Номенклатура Категории персонал
@@ -195,7 +195,8 @@
     personIdDocumentTypes: [
       { nomTypeValueId: 3, code: '3', name: 'Лична карта', nameAlt: 'Лична карта', alias: 'Id' },
       { nomTypeValueId: 4, code: '4', name: 'Задграничен паспорт', nameAlt: 'Задграничен паспорт' },
-      { nomTypeValueId: 5, code: '5', name: 'Паспорт', nameAlt: 'Паспорт' }
+      { nomTypeValueId: 5, code: '5', name: 'Паспорт', nameAlt: 'Паспорт', alias: 'passport' },
+      { nomTypeValueId: 5, code: '5', name: 'Разрешение за пребиваване', nameAlt: 'Разрешение за пребиваване', alias: 'allowance' }
     ],
 
     //Номенклатура Други типове документи на Физичеко лице
@@ -215,7 +216,7 @@
     //Номенклатура Други роли на документи на Физичеко лице
     personOtherDocumentRoles: [
       { nomTypeValueId: 1, code: '1', name: 'Летателна проверка', nameAlt: '', alias: 'FlightTest' },
-      { nomTypeValueId: 2, code: '2', name: 'Документ за самоличност', nameAlt: '' },
+      { nomTypeValueId: 2, code: '2', name: 'Документ за самоличност', nameAlt: '', alias: 'documentId' },
       { nomTypeValueId: 3, code: '3', name: 'Диплома за завършено образование', nameAlt: '' },
       { nomTypeValueId: 4, code: '4', name: 'Теоретично обучение', nameAlt: '', alias: 'TheoreticalTraining' },
       { nomTypeValueId: 5, code: '5', name: 'Летателно обучение', nameAlt: '' },
@@ -244,12 +245,12 @@
 
     //Номенклатура Типове ВС за екипажи
     ratingTypes: [
-      { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80' },
-      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737' },
-      { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet' },
-      { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)' } },
-      { nomTypeValueId: 850, code: 'Тu 154', name: 'Tу 154', nameAlt: 'Tu 154', content: { Code_CA: 'Тu 154' } },
-      { nomTypeValueId: 851, code: 'BAe 146', name: 'BAe 146', nameAlt: 'BAe 146', content: { Code_CA: 'BAe 146' } }
+      { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80', alias: 'MD80' },
+      { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737', alias: 'B737' },
+      { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet', alias: 'L410' },
+      { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)', alias: 'IR(MEA)' } },
+      { nomTypeValueId: 850, code: 'Тu 154', name: 'Tу 154', nameAlt: 'Tu 154', content: { Code_CA: 'Тu 154' }, alias: 'Тu 154' },
+      { nomTypeValueId: 851, code: 'BAe 146', name: 'BAe 146', nameAlt: 'BAe 146', content: { Code_CA: 'BAe 146' }, alias: 'BAe 146' }
     ],
 
     //Номенклатура Групи Класове ВС за екипажи
@@ -262,10 +263,10 @@
 
     //Номенклатура Класове ВС за екипажи
     ratingClasses: [
-      { nomTypeValueId: 1, code: 'VLA', name: 'Много леки самолети', nameAlt: 'Много леки самолети', content: { GroupId: 1 } },
-      { nomTypeValueId: 2, code: 'ULA', name: 'Свръхлеки самолети', nameAlt: 'Свръхлеки самолети', content: { GroupId: 1 } },
-      { nomTypeValueId: 5, code: 'C', name: 'Радиолокационен обзор', nameAlt: 'Surveillance', content: { GroupId: 8, Code_CA: 'C' } },
-      { nomTypeValueId: 6, code: 'D', name: 'Обработка на данни', nameAlt: 'Data processing', content: { GroupId: 8, Code_CA: 'D' } },
+      { nomTypeValueId: 1, code: 'VLA', name: 'Много леки самолети', nameAlt: 'Много леки самолети', content: { GroupId: 1 }, alias: 'VLA' },
+      { nomTypeValueId: 2, code: 'ULA', name: 'Свръхлеки самолети', nameAlt: 'Свръхлеки самолети', content: { GroupId: 1 }, alias: 'ULA' },
+      { nomTypeValueId: 5, code: 'C', name: 'Радиолокационен обзор', nameAlt: 'Surveillance', content: { GroupId: 8, Code_CA: 'C' }, alias: 'C' },
+      { nomTypeValueId: 6, code: 'D', name: 'Обработка на данни', nameAlt: 'Data processing', content: { GroupId: 8, Code_CA: 'D' }, alias: 'D' },
       { nomTypeValueId: 7, code: 'E', name: 'Аеронавигационно метеорологично оборудване', nameAlt: 'Met', content: { GroupId: 8, Code_CA: 'E' } },
       { nomTypeValueId: 8, code: 'F', name: 'Светотехнически средства', nameAlt: 'Agl', content: { GroupId: 8, Code_CA: 'F' } },
       { nomTypeValueId: 9, code: 'A', name: 'Комуникация', nameAlt: 'Communications', content: { GroupId: 8, Code_CA: 'A' } },
@@ -286,10 +287,10 @@
 
     //Номенклатура Разрешения към квалификация
     authorizations: [
-      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 } },
-      { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' } },
+      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FIA' },
+      { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' }, alias: 'CATII' },
       { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
-      { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' } },
+      { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' }, alias: 'CATIIIB' },
       { nomTypeValueId: 16, code: 'LV-TO', name: 'LV-TO (cop)', nameAlt: 'LV-TO (cop)', content: { GroupId: 421, Code_CA: 'LV-TO' } },
       { nomTypeValueId: 100, code: 'GMS', name: 'КВД по маневрената площ на летището чрез средства за обзор', nameAlt: 'Ground Movement Surveillance ', content: { GroupId: 100, Code_CA: 'GMS' } },
       { nomTypeValueId: 101, code: 'RAD', name: 'КВД чрез радар', nameAlt: 'Radar', content: { GroupId: 100, Code_CA: 'RAD' } },
@@ -305,10 +306,10 @@
 
     //Номенклатура Видове(типове) правоспособност
     licenceTypes: [
-      { nomTypeValueId: 1, code: 'PPL(A)', name: 'Любител пилот на самолет (PPL(A))', nameAlt: 'Private Pilot  (Aeroplane) (PPL(A))', content: { StaffTypeId: 1, SeqNo: 1, DictionaryId: 1, Code_CA: 'PPL(A)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PPL(A)' } },
-      { nomTypeValueId: 2, code: 'CPL(A)', name: 'Професионален пилот на самолет CPL(A)', nameAlt: 'Commercial Pilot  (Aeroplane) (CPL(A))', content: { StaffTypeId: 1, SeqNo: 2, DictionaryId: 1, Code_CA: 'CPL(A)', PRT_MAX_RATING_COUNT: 14, _CODE: 'CPL(A)' } },
-      { nomTypeValueId: 3, code: 'ATPL(A)', name: 'Транспортен пилот на самолет ATPL(A)', nameAlt: 'Airline transport Pilot  (Aeroplane) (ATPL(A))', content: { StaffTypeId: 1, SeqNo: 3, DictionaryId: 1, Code_CA: 'ATPL(A)', PRT_MAX_RATING_COUNT: 11, _CODE: 'ATPL(A)' } },
-      { nomTypeValueId: 4, code: 'PPL(H)', name: 'Любител пилот на вертолет (PPL(H))', nameAlt: 'Private Pilot  (Helicopter) (PPL(H))', content: { StaffTypeId: 1, SeqNo: 4, DictionaryId: 1, Code_CA: 'PPL(H)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PPL(H)' } },
+      { nomTypeValueId: 1, code: 'PPL(A)', name: 'Любител пилот на самолет (PPL(A))', nameAlt: 'Private Pilot  (Aeroplane) (PPL(A))', content: { StaffTypeId: 1, SeqNo: 1, DictionaryId: 1, Code_CA: 'PPL(A)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PPL(A)' }, alias: 'PPLA' },
+      { nomTypeValueId: 2, code: 'CPL(A)', name: 'Професионален пилот на самолет CPL(A)', nameAlt: 'Commercial Pilot  (Aeroplane) (CPL(A))', content: { StaffTypeId: 1, SeqNo: 2, DictionaryId: 1, Code_CA: 'CPL(A)', PRT_MAX_RATING_COUNT: 14, _CODE: 'CPL(A)' }, alias: 'CPL' },
+      { nomTypeValueId: 3, code: 'ATPL(A)', name: 'Транспортен пилот на самолет ATPL(A)', nameAlt: 'Airline transport Pilot  (Aeroplane) (ATPL(A))', content: { StaffTypeId: 1, SeqNo: 3, DictionaryId: 1, Code_CA: 'ATPL(A)', PRT_MAX_RATING_COUNT: 11, _CODE: 'ATPL(A)' }, alias: 'ATPL' },
+      { nomTypeValueId: 4, code: 'PPL(H)', name: 'Любител пилот на вертолет (PPL(H))', nameAlt: 'Private Pilot  (Helicopter) (PPL(H))', content: { StaffTypeId: 1, SeqNo: 4, DictionaryId: 1, Code_CA: 'PPL(H)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PPL(H)' }, alias: 'PPLH' },
       { nomTypeValueId: 5, code: 'CPL(H)', name: 'Професионален пилот на вертолет (CPL(H))', nameAlt: 'Commercial Pilot  (CPL(H))', content: { StaffTypeId: 1, SeqNo: 5, DictionaryId: 1, Code_CA: 'CPL(H)', PRT_MAX_RATING_COUNT: 11, _CODE: 'CPL(H)' } },
       { nomTypeValueId: 6, code: 'ATPL(H)', name: 'Транспортен пилот на вертолет (ATPL(H))', nameAlt: 'Airline Transport Pilot  (Helocopter) (ATPL(H))', content: { StaffTypeId: 1, SeqNo: 6, DictionaryId: 1, Code_CA: 'ATPL(H)', PRT_MAX_RATING_COUNT: 11, _CODE: 'ATPL(H)' } },
       { nomTypeValueId: 7, code: 'PL(G)', name: 'Пилот на планер (PL(G))', nameAlt: 'Pilot  (Glider)  (PL(G))', content: { StaffTypeId: 1, SeqNo: 7, DictionaryId: 1, Code_CA: 'PL(G)', PRT_MAX_RATING_COUNT: 11, _CODE: 'PLG' } },
@@ -323,19 +324,19 @@
 
     //Номенклатура Нива на владеене на английски език
     engLangLevels: [
-      { nomTypeValueId: 1, code: 'L4', name: 'Работно (Ниво 4)', nameAlt: 'Operational (Level  4)' },
-      { nomTypeValueId: 2, code: 'L5', name: 'Разширено (Ниво  5)', nameAlt: 'Extended (Level  5)' },
-      { nomTypeValueId: 3, code: 'L6', name: 'Експерт (Ниво  6)', nameAlt: 'Expert (Level  6)' }
+      { nomTypeValueId: 1, code: 'L4', name: 'Работно (Ниво 4)', nameAlt: 'Operational (Level  4)', alias: 'L4' },
+      { nomTypeValueId: 2, code: 'L5', name: 'Разширено (Ниво  5)', nameAlt: 'Extended (Level  5)', alias: 'L5' },
+      { nomTypeValueId: 3, code: 'L6', name: 'Експерт (Ниво  6)', nameAlt: 'Expert (Level  6)', alias: 'L6' }
     ],
 
     //Номенклатура Индикатори на местоположение
     locationIndicators: [
-      { nomTypeValueId: 1, code: 'LBBG', name: 'БУРГАС', nameAlt: 'BURGAS' },
-      { nomTypeValueId: 2, code: 'LBBO', name: 'БОХОТ-LM ', nameAlt: 'BOHOT-LM' },
-      { nomTypeValueId: 3, code: 'LBDB', name: 'ДОЛНА БАНЯ', nameAlt: 'DOLNA BANYA' },
-      { nomTypeValueId: 4, code: 'LBGO', name: 'ГОРНА ОРХЯХОВИЦА', nameAlt: 'GORNA ORYAHOVITSA' },
-      { nomTypeValueId: 5, code: 'LBGR', name: 'ГРИВИЦА', nameAlt: 'GRIVITSA' },
-      { nomTypeValueId: 6, code: 'LBHT', name: 'ИХТИМАН', nameAlt: 'IHTIMAN' }
+      { nomTypeValueId: 1, code: 'LBBG', name: 'БУРГАС', nameAlt: 'BURGAS', alias: 'LBBG' },
+      { nomTypeValueId: 2, code: 'LBBO', name: 'БОХОТ-LM ', nameAlt: 'BOHOT-LM', alias: 'LBBO' },
+      { nomTypeValueId: 3, code: 'LBDB', name: 'ДОЛНА БАНЯ', nameAlt: 'DOLNA BANYA', alias: 'LBDB' },
+      { nomTypeValueId: 4, code: 'LBGO', name: 'ГОРНА ОРХЯХОВИЦА', nameAlt: 'GORNA ORYAHOVITSA', alias: 'LBGO' },
+      { nomTypeValueId: 5, code: 'LBGR', name: 'ГРИВИЦА', nameAlt: 'GRIVITSA', alias: 'LBGR' },
+      { nomTypeValueId: 6, code: 'LBHT', name: 'ИХТИМАН', nameAlt: 'IHTIMAN', alias: 'LBHT' }
     ],
 
     //Номенклатура Държатели на ТС за ВС
@@ -366,9 +367,9 @@
 
     //Номенклатура Групи ВС
     aircraftTypeGroups: [
-      { nomTypeValueId: -100, code: '', name: 'Без ТС', nameAlt: 'No type', content: { aircraftTypeId: 1, aircraftTCHolderId: 163 } },
+      { nomTypeValueId: -100, code: '', name: 'Без ТС', nameAlt: 'No type', content: { aircraftTypeId: 1, aircraftTCHolderId: 163 }, alias: 'NoType' },
       { nomTypeValueId: 600, code: '', name: '(Gates) Learjet 60 (PWC305)', nameAlt: '(Gates) Learjet 60 (PWC305)', content: { aircraftTypeId: 1, aircraftTCHolderId: 43 } },
-      { nomTypeValueId: 601, code: '', name: '(Hawker Beechcraft) Beech 200 Series (PWC PT6)', nameAlt: '(Hawker Beechcraft) Beech 200 Series (PWC PT6)', content: { aircraftTypeId: 1, aircraftTCHolderId: 36 } },
+      { nomTypeValueId: 601, code: '', name: '(Hawker Beechcraft) Beech 200 Series (PWC PT6)', nameAlt: '(Hawker Beechcraft) Beech 200 Series (PWC PT6)', content: { aircraftTypeId: 1, aircraftTCHolderId: 36 }, alias: 'PWCPT6' },
       { nomTypeValueId: 602, code: '', name: 'Airbus A318/A319/A320/A321 (CFM56)', nameAlt: 'Airbus A318/A319/A320/A321 (CFM56)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } },
       { nomTypeValueId: 603, code: '', name: 'Airbus A319/A320/A321 (IAE V2500)', nameAlt: 'Airbus A319/A320/A321 (IAE V2500)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } },
       { nomTypeValueId: 604, code: '', name: 'Airbus A319/A320/A321 (PW JT8D)', nameAlt: 'Airbus A319/A320/A321 (PW JT8D)', content: { aircraftTypeId: 1, aircraftTCHolderId: 1 } }
@@ -507,6 +508,7 @@
       { nomTypeValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
     ],
 
+    //kласове за медицинси
     medicalClassTypes: [
       { nomTypeValueId: 1, code: '', name: 'клас 1', nameAlt: 'class 1', alias:'class1'},
       { nomTypeValueId: 2, code: '', name: 'клас 2', nameAlt: 'class 2', alias: 'class2'},
@@ -514,6 +516,7 @@
       { nomTypeValueId: 4, code: '', name: 'клас 4', nameAlt: 'class 4', alias: 'class4'}
     ],
 
+    //Oграничения за медицински
     medicalLimitationTypes: [
       { nomTypeValueId: 1, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
       { nomTypeValueId: 2, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
@@ -524,6 +527,31 @@
       { nomTypeValueId: 7, code: 'VDL', name: 'VDL', nameAlt: 'VDL', alias: 'VDL' },
       { nomTypeValueId: 8, code: 'VML', name: 'VML', nameAlt: 'VML', alias: 'VML' },
       { nomTypeValueId: 9, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
+    ],
+
+    //типове документи за проверка
+    personCheckDocumentTypes: [
+      { nomTypeValueId: 1, code: 'BTF', name: 'Base training form', nameAlt: 'Base training form', alias: 'BaseTrainingForm' },
+      { nomTypeValueId: 2, code: 'Auth', name: 'Authorisation', nameAlt: 'Authorisation', alias: 'Authorisation' },
+      { nomTypeValueId: 3, code: 'Conf', name: 'Confirmaction', nameAlt: 'Confirmaction', alias: 'Confirmaction' },
+      { nomTypeValueId: 4, code: 'Cert', name: 'Certificate', nameAlt: 'Certificate', alias: 'Certificate' }
+    ],
+
+    //оценки при проверка на Физическо лице
+    personCheckRatingValues: [
+       { nomTypeValueId: 1, code: 'Goog', name: 'Добро', nameAlt: 'good', alias: 'good' },
+       { nomTypeValueId: 2, code: 'Sat', name: 'Задоволително', nameAlt: 'Задоволително', alias: 'satisfactory' },
+       { nomTypeValueId: 3, code: 'Ins', name: 'Недостатъчно', nameAlt: 'Недостатъчно', alias: 'insufficient' },
+       { nomTypeValueId: 4, code: 'Unac', name: 'Неприемливо', nameAlt: 'Неприемливо', alias: 'unacceptable' },
+       { nomTypeValueId: 4, code: 'Comp', name: 'Компетентен', nameAlt: 'Компетентен', alias: 'competent' },
+       { nomTypeValueId: 4, code: 'Incomp', name: 'Некомпетентен', nameAlt: 'Некомпетентен', alias: 'incompetent' },
+    ],
+    //номенклатура Роли документи за проверка на Физичеко лице
+    personCheckDocumentRoles: [
+      { nomTypeValueId: 1, code: '1', name: 'Летателна проверка', nameAlt: '', alias: 'FlightTest' },
+      { nomTypeValueId: 2, code: '2', name: 'Практическа проверка', nameAlt: '', alias: 'PracticalCheck' },
+      { nomTypeValueId: 3, code: '3', name: 'Проверка на работното място', nameAlt: '', alias: 'CheckAtWork' },
+      { nomTypeValueId: 4, code: '4', name: 'Тренажор', nameAlt: '', alias: 'Trainer' },
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

@@ -4,15 +4,15 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/personMedicals?num&nums&nump&medclid',
+      .when('GET', '/api/persons/:id/personDocumentMedicals?num&nums&nump&medclid',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           if ($params.num || $params.nums || $params.nump || $params.medclid) {
-            var personMedicals = [],
+            var personDocumentMedicals = [],
                 exists;
-            angular.forEach(person.personMedicals, function (medical) {
+            angular.forEach(person.personDocumentMedicals, function (medical) {
               if ($params.num) {
                 exists = medical.part.documentNumber === $params.num;
               } else if ($params.nums) {
@@ -24,63 +24,63 @@
                 exists = medical.part.medClassType.nomTypeValueId === typeId;
               }
               if (exists) {
-                personMedicals.push(medical);
+                personDocumentMedicals.push(medical);
               }
             });
-            return [200, personMedicals];
+            return [200, personDocumentMedicals];
           } else {
-            return [200, person.personMedicals];
+            return [200, person.personDocumentMedicals];
           }
         })
-      .when('GET', '/api/persons/:id/personMedicals/:ind',
+      .when('GET', '/api/persons/:id/personDocumentMedicals/:ind',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personMedical = _(person.personMedicals)
+          var personDocumentMedical = _(person.personDocumentMedicals)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          if (personMedical) {
-            return [200, personMedical];
+          if (personDocumentMedical) {
+            return [200, personDocumentMedical];
           }
           else {
             return [404];
           }
         })
-      .when('POST', '/api/persons/:id/personMedicals',
+      .when('POST', '/api/persons/:id/personDocumentMedicals',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personMedical = $jsonData;
+          var personDocumentMedical = $jsonData;
 
-          personMedical.partIndex = person.nextIndex++;
+          personDocumentMedical.partIndex = person.nextIndex++;
 
-          person.personMedicals.push(personMedical);
+          person.personDocumentMedicals.push(personDocumentMedical);
 
           return [200];
         })
-      .when('POST', '/api/persons/:id/personMedicals/:ind',
+      .when('POST', '/api/persons/:id/personDocumentMedicals/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personMedical = _(person.personMedicals)
+          var personDocumentMedical = _(person.personDocumentMedicals)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          _.assign(personMedical, $jsonData);
+          _.assign(personDocumentMedical, $jsonData);
 
           return [200];
         })
-      .when('DELETE', '/api/persons/:id/personMedicals/:ind',
+      .when('DELETE', '/api/persons/:id/personDocumentMedicals/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personMedicalInd = _(person.personMedicals)
+          var personDocumentMedicalInd = _(person.personMDocumentedicals)
             .findIndex({ partIndex: parseInt($params.ind, 10) });
 
-          person.personMedicals.splice(personMedicalInd, 1);
+          person.personDocumentMedicals.splice(personDocumentMedicalInd, 1);
 
           return [200];
         });

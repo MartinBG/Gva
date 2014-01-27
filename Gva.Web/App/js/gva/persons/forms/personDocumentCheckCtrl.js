@@ -2,13 +2,13 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentIdCtrl($scope, $stateParams, PersonDocumentId) {
+  function PersonDocumentCheckCtrl($scope, $stateParams, PersonDocumentCheck) {
     $scope.isPositive = function (value) {
       return (value >= 0 ? true: false);
     };
 
-    var checkValue = function(param, value){
-      if (!value || !$stateParams.id) {
+    var checkValue = function (param, value) {
+      if (!value || !$stateParams.id || value.length === 0) {
         return true;
       }
 
@@ -19,18 +19,21 @@
         queryParams[param] = value;
       }
 
-      return PersonDocumentId.query(queryParams).$promise
-        .then(function (documentIds) {
-          return documentIds.length === 0 ||
-            (documentIds.length === 1  &&
-            documentIds[0].partIndex === parseInt($stateParams.ind, 10));
+      return PersonDocumentCheck.query(queryParams).$promise
+        .then(function (checks) {
+          return checks.length === 0 ||
+            (checks.length === 1 &&
+            checks[0].partIndex === parseInt($stateParams.ind, 10));
         });
     };
 
     $scope.isUniqueDocNumber = function (value) {
       return checkValue('number', value);
     };
-
+    $scope.isUniqueDocPersonNumber = function (value) {
+      return checkValue('pnumber', value);
+    };
+    
     $scope.isUniqueDocTypeId = function (value) {
       return checkValue('typeid', value);
     };
@@ -44,7 +47,7 @@
     };
   }
 
-  PersonDocumentIdCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentId'];
+  PersonDocumentCheckCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentCheck'];
 
-  angular.module('gva').controller('PersonDocumentIdCtrl', PersonDocumentIdCtrl);
+  angular.module('gva').controller('PersonDocumentCheckCtrl', PersonDocumentCheckCtrl);
 }(angular));
