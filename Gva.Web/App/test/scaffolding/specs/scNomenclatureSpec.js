@@ -34,5 +34,21 @@
       nomenclaturePage.changeNomValue();
       expect(nomenclaturePage.nomenclature.get()).toEqual('Неопределен');
     });
+    
+    it('should display initial value for id mode nomenclatures', function () {
+      expect(nomenclaturePage.parentNomenclature.get()).toEqual('P1');
+      expect(nomenclaturePage.childNomenclature.get()).toEqual('CH2');
+    });
+    
+    it('should clear child nomenclature on parent change', function () {
+      nomenclaturePage.parentNomenclature.set('P2');
+      expect(nomenclaturePage.childNomenclature.get()).toEqual('');
+    });
+    
+    it('should filter child nomenclature', function () {
+      nomenclaturePage.parentNomenclature.set('P2');
+      nomenclaturePage.childNomenclature.click();
+      expect(nomenclaturePage.childNomenclature.getDropdownResults()).toEqual(['CH3', 'CH4']);
+    });
   });
 }(protractor, describe, beforeEach, it, expect, require));

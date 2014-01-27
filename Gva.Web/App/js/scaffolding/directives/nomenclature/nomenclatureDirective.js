@@ -1,20 +1,23 @@
 ﻿// Usage:
-// <sc-nomenclature alias="" load="true|false" params="" multiple ng-model="">
+// <sc-nomenclature alias="" mode="id|object" load="true|false" params="" multiple ng-model="">
 // </sc-nomenclature>
 
 /*global angular, _, $, Select2*/
 (function (angular, _, $, Select2) {
   'use strict';
 
-  function NomenclatureDirective($filter, $parse, Nomenclature) {
+  function NomenclatureDirective($filter, $parse, Nomenclature, scNomenclatureConfig) {
     function preLink(scope, iElement, iAttrs, ngModel) {
-      var alias = scope.alias(),
+      var idProp = scNomenclatureConfig.idProp,
+          nameProp = scNomenclatureConfig.nameProp,
+          alias = scope.alias(),
+          query = { alias: alias },
           load = scope.load() || false,
           loadedValuesPromise,
           queryFunc,
+          initSelectionFunc,
           paramsFunc,
-          params,
-          qry;
+          createQuery;
 
       if (!alias) {
         throw new Error('sc-nomenclature alias not specified!');
@@ -26,8 +29,11 @@
 
       if (iAttrs.params) {
         paramsFunc = $parse(iAttrs.params);
+        createQuery = function (params) {
+          return _.assign({}, query, params, paramsFunc(scope.$parent));
+        };
 
-        scope.$watch(function () {
+        scope.$parent.$watch(function () {
           return paramsFunc(scope.$parent);
         }, function (newVal, oldVal) {
           //skip initialization
@@ -37,37 +43,48 @@
           }
         },
         true);
+      } else {
+        createQuery = function (params) {
+          return _.assign({}, query, params);
+        };
+      }
+      
+      if (iAttrs.mode === 'id') {
+        ngModel.$parsers.push(function (viewValue) {
+          if (viewValue === null || viewValue === undefined) {
+            return viewValue;
+          } else {
+            return viewValue[idProp];
+          }
+        });
+        
+        initSelectionFunc = function (element, callback) {
+          var id = element.val();
+
+          Nomenclature
+            .get(createQuery({ id: id })).$promise
+            .then(function (result) {
+              callback(result);
+            });
+        };
       }
 
       if (load) {
-        qry = { alias: alias };
-
-        if (paramsFunc) {
-          params = paramsFunc(scope.$parent);
-          _.assign(qry, params);
-        }
-
-        loadedValuesPromise = Nomenclature.query(qry).$promise;
+        loadedValuesPromise = Nomenclature.query(createQuery()).$promise;
 
         queryFunc = function (query) {
           loadedValuesPromise.then(function (result) {
+            var filter = {};
+            filter[nameProp] = query.term;
             query.callback({
-              results: $filter('filter')(result, { name: query.term })
+              results: $filter('filter')(result, filter)
             });
           });
         };
       } else {
         queryFunc = function (query) {
-          var params,
-            qry = { alias: alias, term: query.term };
-
-          if (paramsFunc) {
-            params = paramsFunc(scope.$parent);
-            _.assign(qry, params);
-          }
-
           Nomenclature
-            .query(qry).$promise
+            .query(createQuery({ term: query.term })).$promise
             .then(function (result) {
               query.callback({ results: result });
             });
@@ -79,16 +96,17 @@
         allowClear: true,
         placeholder: ' ', //required for allowClear to work
         query: queryFunc,
+        initSelection: initSelectionFunc,
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [];
-          Select2.util.markMatch(result.name, query.term, markup, escapeMarkup);
+          Select2.util.markMatch(result[nameProp], query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (data) {
-          return data ? Select2.util.escapeMarkup(data.name) : undefined;
+          return data ? Select2.util.escapeMarkup(data[nameProp]) : undefined;
         },
         id: function (obj) {
-          return obj.nomTypeValueId;
+          return obj[idProp];
         }
       };
     }
@@ -107,7 +125,12 @@
     };
   }
 
-  NomenclatureDirective.$inject = ['$filter', '$parse', 'Nomenclature'];
+  NomenclatureDirective.$inject = ['$filter', '$parse', 'Nomenclature', 'scNomenclatureConfig'];
 
-  angular.module('scaffolding').directive('scNomenclature', NomenclatureDirective);
+  angular.module('scaffolding')
+    .constant('scNomenclatureConfig', {
+      idProp: 'nomTypeValueId',
+      nameProp: 'name'
+    })
+    .directive('scNomenclature', NomenclatureDirective);
 }(angular, _, $, Select2));

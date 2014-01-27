@@ -3,6 +3,8 @@
   'use strict';
 
   function ScNomenclatureCtrl($scope) {
+    $scope.parentVal = 1;
+    $scope.childVal = 2;
     $scope.gender = {nomTypeValueId: 2, code: '', name: 'Жена', nameAlt: 'Female'};
     $scope.change = function () {
       $scope.gender = {nomTypeValueId: 3, code: '', name: 'Неопределен', nameAlt: 'Unknown'};
