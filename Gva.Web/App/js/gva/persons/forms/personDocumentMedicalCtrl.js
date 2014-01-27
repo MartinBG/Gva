@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonMedicalCtrl($scope, $stateParams, PersonMedical) {
+  function PersonDocumentMedicalCtrl($scope, $stateParams, PersonDocumentMedical) {
     $scope.isPositive = function (value) {
       return (value >= 0 ? true: false);
     };
@@ -17,14 +17,14 @@
       if (!value) {
         return true;
       }
-      var object = { id: $stateParams.id };
+      var queryParams = { id: $stateParams.id };
       if (param === 'medclid') {
-        object.medclid = value.nomTypeValueId;
+        queryParams.medclid = value.nomTypeValueId;
       } else {
-        object[param] = value;
+        queryParams[param] = value;
       }
 
-      return PersonMedical.query(object).$promise
+      return PersonDocumentMedical.query(queryParams).$promise
         .then(function (medicals) {
           return medicals.length === 0 ||
             (medicals.length === 1 &&
@@ -49,7 +49,7 @@
     };
   }
 
-  PersonMedicalCtrl.$inject = ['$scope', '$stateParams', 'PersonMedical'];
+  PersonDocumentMedicalCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentMedical'];
 
-  angular.module('gva').controller('PersonMedicalCtrl', PersonMedicalCtrl);
+  angular.module('gva').controller('PersonDocumentMedicalCtrl', PersonDocumentMedicalCtrl);
 }(angular));

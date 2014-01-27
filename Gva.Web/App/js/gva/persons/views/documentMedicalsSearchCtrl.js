@@ -2,8 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function MedicalsSearchCtrl($scope, $state, $stateParams, PersonMedical) {
-    PersonMedical.query($stateParams).$promise.then(function (medicals) {
+  function DocumentMedicalsSearchCtrl($scope, $state, $stateParams, PersonDocumentMedical) {
+    PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
       $scope.medicals = medicals.map(function (medical) {
         var testimonial = medical.part.documentNumberPrefix + ' ' +
           medical.part.documentNumber + ' ' +
@@ -22,24 +22,29 @@
       });
     });
 
-    $scope.editMedical = function (medical) {
+    $scope.editDocumentMedical = function (medical) {
       return $state.go('persons.medicals.edit', { id: $stateParams.id, ind: medical.partIndex });
     };
 
-    $scope.deleteMedical= function (medical) {
-      return PersonMedical.remove({ id: $stateParams.id, ind: medical.partIndex })
+    $scope.deleteDocumentMedical = function (medical) {
+      return PersonDocumentMedical.remove({ id: $stateParams.id, ind: medical.partIndex })
         .$promise.then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
     };
 
-    $scope.newMedical = function () {
+    $scope.newDocumentMedical = function () {
       return $state.go('persons.medicals.new');
     };
 
   }
 
-  MedicalsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonMedical'];
+  DocumentMedicalsSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentMedical'
+  ];
 
-  angular.module('gva').controller('MedicalsSearchCtrl', MedicalsSearchCtrl);
+  angular.module('gva').controller('DocumentMedicalsSearchCtrl', DocumentMedicalsSearchCtrl);
 }(angular));
