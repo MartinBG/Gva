@@ -37,7 +37,8 @@
       checkUniqueness().then(function (value) {
         if (value) {
           return PersonFlyingExperience
-            .save({ id: $stateParams.id }, $scope.personFlyingExperience).$promise
+            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personFlyingExperience)
+            .$promise
             .then(function () {
               return $state.go('persons.flyingExperiences.search');
             });
