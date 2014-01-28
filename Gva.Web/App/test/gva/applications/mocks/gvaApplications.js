@@ -14,7 +14,7 @@
           doc: {
             docId: 1
           },
-          'case': [
+          docCase: [
             {
               docId: 1,
               regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
@@ -23,18 +23,30 @@
               docFiles: [
                 {
                   docFileId: 1,
-                  docFileTypeName: 'Лична карта',
-                  gvaLotFileId: null
+                  docFileTypeId: 1,
+                  docFileTypeName: 'Документи за самоличност',
+                  docFileTypeAlias: 'DocumentId',
+                  gvaLotFileId: null,
+                  part: null,
+                  partIndex: null
                 },
                 {
                   docFileId: 2,
-                  docFileTypeName: 'Задграничен паспорт',
-                  gvaLotFileId: null
+                  docFileTypeId: 1,
+                  docFileTypeName: 'Документи за самоличност',
+                  docFileTypeAlias: 'DocumentId',
+                  gvaLotFileId: null,
+                  part: null,
+                  partIndex: null
                 },
                 {
                   docFileId: 3,
-                  docFileTypeName: 'Медицинска годност',
-                  gvaLotFileId: null
+                  docFileTypeId: 1,
+                  docFileTypeName: 'Документи за самоличност',
+                  docFileTypeAlias: 'DocumentId',
+                  gvaLotFileId: null,
+                  part: null,
+                  partIndex: null
                 }
               ]
             },

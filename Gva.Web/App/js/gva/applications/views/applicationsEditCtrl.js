@@ -10,29 +10,14 @@
     ) {
     $scope.application = Application.get({ id: $stateParams.id });
 
-    $scope.newfile = function () {
-      
-      return $state.go('applications/edit/newfile');
-    };
-
-    $scope.addpart = function () {
-      return $state.go('applications/edit/addpart');
-    };
-
-    $scope.linkpart = function () {
-      return $state.go('applications/edit/linkpart');
-    };
-
-    $scope.viewDoc = function (docId) {
-      return $state.go('docs/edit/addressing', { docId: docId });
-    };
-
     $scope.docFileType = null;
+    $scope.docFileId = null;
+    $scope.currentDocId = null;
+    $scope.isLinkNew = false;
 
-    $scope.personView = function (id) {
+    $scope.viewPerson = function (id) {
       return $state.go('persons.view', { id: id });
     };
-
   }
 
   ApplicationsEditCtrl.$inject = [

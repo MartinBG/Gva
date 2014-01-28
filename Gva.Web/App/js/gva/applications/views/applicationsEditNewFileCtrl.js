@@ -6,10 +6,12 @@
     $scope,
     $state
     ) {
-
     $scope.cancel = function () {
-      $scope.$parent.docFileType = null;
       return $state.go('applications/edit/case');
+    };
+
+    $scope.addPart = function () {
+      return $state.go('applications/edit/addpart');
     };
   }
 

@@ -1,16 +1,30 @@
 ﻿<div class="tab-content">
-  <ng-form name="newForm">
+  <ng-form name="addForm">
 
-    <div ng-show="docFileType.nomTypeValueId === 1">
-        <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId.part"></gva-person-document-id>
-        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentId.file"></gva-person-scanned-document>
-    </div>
+    <div ng-show="docFileType.alias === 'DocumentId'">
+        <gva-person-document-id name="personDocumentIdForm" ng-model="applicationDocFile.part"></gva-person-document-id>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-5">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newForm.$invalid"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+        <div ng-show="!isLinkNew">
+          <gva-person-scanned-document name="personScannedDocumentForm" ng-model="applicationDocFile.file"></gva-person-scanned-document>
+        </div>
+
+       <div ng-show="!isLinkNew">
+          <div class="row">
+            <div class="form-group col-sm-3 col-sm-offset-5">
+              <gva-button name="saveBtn" gva-click="addPart()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addForm.$invalid"></gva-button>
+              <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="isLinkNew">
+          <div class="row">
+            <div class="form-group col-sm-3 col-sm-offset-5">
+              <gva-button name="saveBtn" gva-click="linkNew()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addForm.$invalid"></gva-button>
+              <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+            </div>
+          </div>
+        </div>
     </div>
 
   </ng-form>

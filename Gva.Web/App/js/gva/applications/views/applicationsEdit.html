@@ -1,37 +1,35 @@
 ﻿<div class="container page-content">
-  <ng-form class="form-inline" name="editApplicationForm">
-    <div class="panel panel-default">
-      <div class="panel-heading form-title"><strong>Заявление (неприключено)</strong></div>
-      <div class="well-sm panel-body form-body">
+  <div class="panel panel-default">
+    <div class="panel-heading form-title"><strong>Заявление (неприключено)</strong></div>
+    <div class="well-sm panel-body form-body">
 
-        <div class="row">
-          <label class="control-label col-sm-3">Заявител:</label>
+      <div class="row">
+        <label class="control-label col-sm-3">Заявител:</label>
+      </div>
+      <div class="row">
+        <div class="input-group input-group-sm col-md-7 col-lg-6">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.name"></span>
+          <input disabled name="names" type="text" class="form-control" value="{{application.person.names}}" />
         </div>
-        <div class="row">
-          <div class="input-group input-group-sm col-md-7 col-lg-6">
-            <span class="input-group-addon" l10n-text="persons.viewPerson.name"></span>
-            <input disabled name="names" type="text" class="form-control" value="{{application.person.names}}" />
-          </div>
-          <div class="input-group input-group-sm col-md-3 col-lg-2">
-            <span class="input-group-addon" l10n-text="persons.viewPerson.uin"></span>
-            <input disabled name="uin" type="text" class="form-control" value="{{application.person.uin}}" />
-          </div>
-          <div class="form-group col-sm-offset-10 col-md-offset-0">
-            <gva-button name="editBtn" gva-click="personView(application.person.id)" text="persons.search.view" class="btn-xs btn-info pull-right" icon="glyphicon-pencil"></gva-button>
-          </div>
+        <div class="input-group input-group-sm col-md-3 col-lg-2">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.uin"></span>
+          <input disabled name="uin" type="text" class="form-control" value="{{application.person.uin}}" />
         </div>
-
-        <br />
-
-        <gva-tabs tab-list="{
-        'Преписка': 'applications/edit/case',
-        'Квалификации': 'applications/edit/quals',
-        'Лицензи': 'applications/edit/licenses'
-        }"></gva-tabs>
-
-        <div ui-view="detailView" class="tabbable">
+        <div class="form-group col-sm-offset-10 col-md-offset-0">
+          <gva-button name="editBtn" gva-click="viewPerson(application.person.id)" text="persons.search.view" class="btn-xs btn-info pull-right" icon="glyphicon-pencil"></gva-button>
         </div>
       </div>
+
+      <br />
+
+      <gva-tabs tab-list="{
+      'Преписка': 'applications/edit/case',
+      'Квалификации': 'applications/edit/quals',
+      'Лицензи': 'applications/edit/licenses'
+      }"></gva-tabs>
+
+      <div ui-view="detailView" class="tabbable">
+      </div>
     </div>
-  </ng-form>
+  </div>
 </div>

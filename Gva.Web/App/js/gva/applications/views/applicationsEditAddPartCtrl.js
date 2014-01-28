@@ -6,20 +6,35 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentId
+    ApplicationDocFile
     ) {
-
     $scope.cancel = function () {
-      $scope.$parent.docFileType = null;
       return $state.go('applications/edit/case');
     };
 
-    $scope.save = function () {
-      return
-      PersonDocumentId.save({ id: $stateParams.id }, $scope.personDocumentId).$promise
-        .then(function () {
+    $scope.addPart = function () {
+      return ApplicationDocFile
+        .save({ id: $stateParams.id }, {
+          personId: $scope.application.person.id,
+          currentDocId: $scope.$parent.currentDocId,
+          file: $scope.applicationDocFile.file,
+          fileType: $scope.docFileType,
+          part: $scope.applicationDocFile.part
+        }
+        ).$promise.then(function () {
+          return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
+        });
+    };
 
-          return $state.go('applications/edit/case');
+    $scope.linkNew = function () {
+      return ApplicationDocFile
+        .linkNew({ id: $stateParams.id, docFileId: $scope.$parent.docFileId }, {
+          personId: $scope.application.person.id,
+          currentDocId: $scope.$parent.currentDocId,
+          part: $scope.applicationDocFile.part
+        }
+        ).$promise.then(function () {
+          return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
     };
   }
@@ -28,7 +43,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentId'
+    'ApplicationDocFile'
   ];
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);

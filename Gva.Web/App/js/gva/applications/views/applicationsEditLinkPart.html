@@ -1,5 +1,54 @@
-﻿<div class="container page-content">
-  link part
+﻿<div class="tab-content">
+  <div class="panel panel-default">
+    <div class="panel-heading form-title"><strong>Свържи документ в описа</strong></div>
+    <div class="well-sm panel-body form-body">
+      <br />
+      <!--<div class="row">
+        <label class="control-label col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-3">Тип на документ:</label>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-5">
+          <sc-nomenclature ng-model="$parent.docFileType" name="docFileType" alias="'documents'" load="false" ng-required="true"></sc-nomenclature>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-sm" ng-click="search()">Преглед на опис</button>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
+        </div>
+      </div>-->
 
-  <button type="button" class="btn btn-default btn-sm" ng-click="goBack()" >Назад</button>
+      <br />
+
+      <div ng-show="docFileType.alias === 'DocumentId'">
+        <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="persons.documentIdSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.documentDateValidFrom" title="persons.documentIdSearch.documentDateValidFrom">
+            <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.documentDateValidTo" title="persons.documentIdSearch.documentDateValidTo">
+            <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.valid.name" title="persons.documentIdSearch.valid">
+          </sc-column>
+          <sc-column data="part.bookPageNumber" title="persons.documentIdSearch.bookPageNumber">
+          </sc-column>
+          <sc-column data="part.pageCount" title="persons.documentIdSearch.pageCount">
+          </sc-column>
+           <sc-column sortable="false">
+            <button type="button" class="btn-xs btn-info" ng-click="linkPart(item)">Избор</button>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <div class="form-group col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
+        <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
+      </div>
+
+
+    </div>
+  </div>
 </div>

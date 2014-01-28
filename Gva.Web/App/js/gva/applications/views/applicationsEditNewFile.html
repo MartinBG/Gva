@@ -1,20 +1,20 @@
 ﻿<div class="tab-content">
   <div class="panel panel-default">
-    <div class="panel-heading form-title"><strong>Нов файл</strong></div>
+    <div class="panel-heading form-title"><strong>Нов документ в описа</strong></div>
     <div class="well-sm panel-body form-body">
       <br />
       <div class="row">
-        <label class="control-label col-sm-3">Тип на файл:</label>
+        <label class="control-label col-sm-3 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">Тип на документ:</label>
       </div>
       <div class="row">
-        <div class="form-group col-sm-5">
+        <div class="form-group col-sm-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
           <sc-nomenclature ng-model="$parent.docFileType" name="docFileType" alias="'documents'" load="false" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <br />
-      <div class="form-group col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
+      <div class="form-group col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
         <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
-        <button type="button" class="btn btn-primary btn-sm" ng-click="addpart()">Продължи</button>
+        <button type="button" class="btn btn-primary btn-sm" ng-click="addPart()">Продължи</button>
       </div>
     </div>
   </div>
