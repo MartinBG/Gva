@@ -14,21 +14,17 @@
           </sc-nomenclature>
         </div>
         <div class="form-group col-sm-2">
+          <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentNumber"></label>
+          <span ng-show="form.documentNumber.$error.$pending" class="glyphicon glyphicon-loading"></span>
+          <span name="documentNumberValidationSpan" ng-show="form.documentNumber.$dirty && form.documentNumber.$invalid && !form.documentNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
+                title="{{form.documentNumber.$error.required && 'Задължително поле' || form.documentNumber.$error.unique && 'Невалиден номер на документ'}}"></span>
+
+          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" sc-validate="{unique: isUniqueDocNumber}"></sc-text>
+        </div>
+        <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.valid"></label>
           <span name="docValidValidationSpan" ng-show="form.valid.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.valid.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" load="true" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-sm-3">
-          <label class="control-label" l10n-text="persons.personDocumentIdDirective.bookPageNumber"></label>
-          <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$dirty && form.bookPageNumber.$invalid && !form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
-            title="{{form.bookPageNumber.$error.required && 'Задължително поле' || form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" sc-validate="{min: isPositive}"></sc-text>
-        </div>
-        <div class="form-group col-sm-3">
-          <label class="control-label" l10n-text="persons.personDocumentIdDirective.pageCount"></label>
-          <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
-            title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.pageCount" name="pageCount" sc-validate="{min: isPositive}"></sc-text>
         </div>
       </div>
       <div class="row">
@@ -37,7 +33,6 @@
           <span ng-show="form.documentNumber.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="documentNumberValidationSpan" ng-show="form.documentNumber.$dirty && form.documentNumber.$invalid && !form.documentNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
             title="{{form.documentNumber.$error.required && 'Задължително поле' || form.documentNumber.$error.unique && 'Невалиден номер на документ'}}"></span>
-
           <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" sc-validate="{unique: isUniqueDocNumber}"></sc-text>
         </div>
         <div class="form-group col-sm-2">
@@ -71,6 +66,20 @@
       <div class="row3">
         <div class="form-group col-md">
           <sc-textarea rows="3" cols="50" ng-model="model.notes"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDocumentIdDirective.bookPageNumber"></label>
+          <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$dirty && form.bookPageNumber.$invalid && !form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
+                title="{{form.bookPageNumber.$error.required && 'Задължително поле' || form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
+          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" sc-validate="{min: isPositive}"></sc-text>
+        </div>
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.personDocumentIdDirective.pageCount"></label>
+          <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
+                title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
+          <sc-text ng-model="model.pageCount" name="pageCount" sc-validate="{min: isPositive}"></sc-text>
         </div>
       </div>
     </div>

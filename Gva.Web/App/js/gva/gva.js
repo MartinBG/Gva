@@ -26,6 +26,11 @@
       controller: 'PersonDocumentIdCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonDocumentEducation',
+      templateUrl: 'gva/persons/forms/personDocumentEducation.html',
+      controller: 'PersonDocumentEducationCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonStatus',
       templateUrl: 'gva/persons/forms/personStatus.html'
     });
@@ -36,6 +41,21 @@
     scaffoldingProvider.form({
       name: 'gvaPersonApplication',
       templateUrl: 'gva/persons/forms/personApplication.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentMedical',
+      templateUrl: 'gva/persons/forms/personDocumentMedical.html',
+      controller: 'PersonDocumentMedicalCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentEmployment',
+      templateUrl: 'gva/persons/forms/personDocumentEmployment.html',
+      controller: 'PersonDocumentEmploymentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentCheck',
+      templateUrl: 'gva/persons/forms/personDocumentCheck.html',
+      controller: 'PersonDocumentCheckCtrl'
     });
   }])
     .config(['$stateProvider', function ($stateProvider) {
@@ -251,8 +271,6 @@
             }
           }
         })
-
-
       ;
     }])
     .config(['$stateProvider', function ($stateProvider) {
@@ -452,6 +470,131 @@
             'detailView@persons.view': {
               templateUrl: 'gva/persons/views/licencesSearch.html',
               controller: 'LicencesSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.checks',
+          title: 'Проверки',
+          parent: 'persons.view',
+          url: '/checks',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.checks.search',
+          parent: 'persons.checks',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentChecksSearch.html',
+              controller: 'DocumentChecksSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.checks.new',
+          title: 'Нова проверка',
+          parent: 'persons.checks',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentChecksNew.html',
+              controller: 'DocumentChecksNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.checks.edit',
+          title: 'Редакция на проверка',
+          parent: 'persons.checks',
+          url: '/:ind',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentChecksEdit.html',
+              controller: 'DocumentChecksEditCtrl'
+            }
+          }
+        }).state({
+          name: 'persons.employments',
+          title: 'Месторабота',
+          parent: 'persons.view',
+          url: '/employments',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.employments.search',
+          parent: 'persons.employments',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEmploymentsSearch.html',
+              controller: 'DocumentEmploymentsSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.employments.new',
+          title: 'Новa месторабота',
+          parent: 'persons.employments',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEmploymentsNew.html',
+              controller: 'DocumentEmploymentsNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.employments.edit',
+          title: 'Редакция на месторабота',
+          parent: 'persons.employments',
+          url: '/:ind',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEmploymentsEdit.html',
+              controller: 'DocumentEmploymentsEditCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.medicals',
+          title: 'Медицински',
+          parent: 'persons.view',
+          url: '/medicals',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.medicals.search',
+          parent: 'persons.medicals',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentMedicalsSearch.html',
+              controller: 'DocumentMedicalsSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.medicals.new',
+          title: 'Новo медицинско',
+          parent: 'persons.medicals',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentMedicalsNew.html',
+              controller: 'DocumentMedicalsNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.medicals.edit',
+          title: 'Редакция на медицинско',
+          parent: 'persons.medicals',
+          url: '/:ind',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentMedicalsEdit.html',
+              controller: 'DocumentMedicalsEditCtrl'
             }
           }
         });

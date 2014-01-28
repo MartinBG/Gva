@@ -9,13 +9,13 @@
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          if($params.number || $params.typeid || $params.publ || $params.datef){
+          if ($params.number || $params.typeid || $params.publ || $params.datef) {
             var documentIds = [],
                 exists;
             angular.forEach(person.personDocumentIds, function(documentId){
                 if($params.number) {
                   exists = documentId.part.documentNumber === $params.number;
-                } else if($params.typeid) {
+                } else if ($params.typeid) {
                   var typeId = parseInt($params.typeid, 10);
                   exists = documentId.part.personDocumentIdType.nomTypeValueId === typeId;
                 } else if ($params.publ) {

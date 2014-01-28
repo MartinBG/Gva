@@ -13,7 +13,7 @@
     $scope.openModal = function () {
       var modal = $modal.open({
         templateUrl: 'scaffolding/directives/files/filesModal.html',
-        controller: 'scaffolding.FilesModalCtrl',
+        controller: 'FilesModalCtrl',
         backdrop: 'static',
         keyboard: false,
         resolve: {
@@ -66,5 +66,5 @@
 
   FilesCtrl.$inject = ['$scope', '$modal', '$interpolate', 'l10n', 'scFilesConfig'];
 
-  angular.module('scaffolding').controller('scaffolding.FilesCtrl', FilesCtrl);
+  angular.module('scaffolding').controller('FilesCtrl', FilesCtrl);
 }(angular, $));

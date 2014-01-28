@@ -1,6 +1,9 @@
-﻿/*global module, by*/
-(function (module, by) {
+﻿/*global module, by, require*/
+(function (module, by, require) {
   'use strict';
+
+  var Q = require('q'),
+      _ = require('lodash');
 
   function ScNomenclature(model, context) {
     /*jshint -W101*/
@@ -9,6 +12,7 @@
       containerAnchorXPath = containerXPath + "/a[contains(@class, 'select2-choice')]",
       nameSpanXPath = containerAnchorXPath + "/span[contains(@class, 'select2-chosen')]";
     this.dropdownInputXPath = "//div[@id='select2-drop']/div[contains(@class, 'select2-search')]/input[contains(@class, 'select2-input')]";
+    this.dropdownResultsXpath = "//div[@id='select2-drop']/ul[contains(@class, 'select2-results')]/li[contains(@class, 'select2-result')]";
     /* jshint +W101*/
     /* jshint +W109*/
     this.context = context;
@@ -27,6 +31,14 @@
   ScNomenclature.prototype.dropdownInput = function () {
     return this.context.findElement(by.xpath(this.dropdownInputXPath));
   };
+  
+  ScNomenclature.prototype.getDropdownResults = function () {
+    return this.context.findElements(by.xpath(this.dropdownResultsXpath)).then(function (results) {
+      return Q.all(_.map(results, function (result) {
+        return result.getText();
+      }));
+    });
+  };
 
   ScNomenclature.prototype.set = function (text) {
     this.container.click();
@@ -42,4 +54,4 @@
   };
 
   module.exports = ScNomenclature;
-}(module, by));
+}(module, by, require));

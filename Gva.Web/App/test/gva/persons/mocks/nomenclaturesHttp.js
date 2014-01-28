@@ -5,20 +5,23 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/:alias?term&parentId',
+      .when('GET', '/api/nomenclatures/:alias?term&parentId&id',
         function ($params, $filter) {
-          var noms;
+          var res = nomenclatures[$params.alias];
 
-          if (!$params.parentId) {
-            noms = $filter('filter')(nomenclatures[$params.alias], { name: $params.term });
+          if ($params.id) {
+            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
           } else {
-            noms = $filter('filter')(
-              $filter('filter')(nomenclatures[$params.alias], { name: $params.term }),
-              { parentId: parseInt($params.parentId, 10) },
-              true);
+            if ($params.term) {
+              res = $filter('filter')(res, { name: $params.term }, false);
+            }
+
+            if ($params.parentId) {
+              res = $filter('filter')(res, { parentId: parseInt($params.parentId, 10) }, true);
+            }
           }
 
-          return [200, noms];
+          return [200, res];
         }
       );
   });

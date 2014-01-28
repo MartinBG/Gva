@@ -47,6 +47,17 @@
           postalCode: 'Пощенски код',
           phone: 'Телефон'
         },
+        personDocumentEducationDirective: {
+          title: 'Образнование',
+          documentNumber: 'Номер на документ',
+          completionDate: 'Дата на завършване',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          speciality: 'Специалност',
+          graduation: 'Степен на образование',
+          school: 'Учебно заведение',
+          notes: 'Бележки'
+        },
         personDocumentIdDirective: {
           title: 'Документ за самоличност',
           personDocumentIdTypeId: 'Тип документ',
@@ -75,6 +86,54 @@
           documentDateValidFrom: 'Начална дата',
           documentDateValidTo: 'Крайна дата',
           notes: 'Бележки'
+        },
+        personMedicalDirective: {
+          documentNumberPrefix: 'Префикс',
+          documentNumber: 'Номер',
+          documentNumberSuffix: 'Суфикс',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          limitations: 'Ограничения към свидетелство за медицинска годност',
+          medClassType: 'Клас',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници',
+          title: 'Свидетелство за медицинска годност'
+        },
+        personEmploymentDirective: {
+          title: 'Месторабота',
+          hiredate: 'Дата на назначаване',
+          valid: 'Валиден',
+          organization: 'Организация',
+          employmentCategory: 'Категория длъжност',
+          country: 'Страна',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          notes: 'Бележки'
+        },
+        personCheckDirective: {
+          title: 'Проверка',
+          staffType: 'Вид персонал',
+          documentNumber: 'Номер на документа',
+          documentPersonNumber: 'Номер в списъка',
+          personCheckDocumentType: 'Тип документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personCheckRatingValue: 'Оценка',
+          personCheckDocumentRole: 'Роля на документ',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          valid: 'Валиден',
+          bookPageNumber: '№ на стр. в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          notes: 'Бележки',
+          sector: 'Сектор/работно място',
+          locationIndicator: 'Индикатор на местоположение',
+          ratingType: 'Тип ВС'
         },
         newPerson: {
           save: 'Запис',
@@ -135,11 +194,20 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        newDocumentEducation: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentEducation: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         documentIdSearch: {
           docTypeId: 'Документ',
           documentNumber: 'Номер на документа',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валиден до',
+          publisher: 'Издаден от',
           valid: 'Валиден',
           bookPageNumber: 'Номер на страница в деловодна книга.',
           pageCount: 'Брой стр.',
@@ -147,6 +215,92 @@
           edit: 'Редакция',
           remove: 'Изтрий',
           newDocumentId: 'Нов документ'
+        },
+        medicalSearch: {
+          testimonial: 'Свидетелство',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          medClass: 'Клас',
+          limitations: 'Ограничения',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newMedical: 'Ново медицинско'
+        },
+        newMedical: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editMedical: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        employmentSearch: {
+          newEmployment: 'Нова месторабота',
+          hiredate: 'Дата на назначаване',
+          employmentCategory: 'Категория длъжност',
+          organization: 'Организация',
+          country: 'Страна',
+          valid: 'Валидност',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий'
+        },
+        newEmployment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editEmployment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        documentEducationSearch: {
+          documentNumber: 'Номер на документа',
+          completionDate: 'Дата на завършване',
+          school: 'Учебно заведение',
+          graduation: 'Степен на образование',
+          speciality: 'Специалност',
+          bookPageNumber: 'Номер на стр. в деловодна книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newDocumentEducation: 'Ново образнование'
+        },
+        checkSearch: {
+          newCheck: 'Нова проверка',
+          documentNumber: '№ на документа',
+          ratingClass: 'Клас ВС',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personCheckDocumentType: 'Тип документ',
+          personCheckDocumentRole: 'Роля на документ',
+          ratingType: 'Тип ВС',
+          valid: 'Валидност',
+          notes: 'Бележки',
+          bookPageNumber: '№ на стр. в дел. книга',
+          pageCount: 'Бр. стр.',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий'
+        },
+        editCheck: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        newCheck: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       },
       applications: {

@@ -9,12 +9,14 @@
       personDocumentEducations = require('./person-document-education.sample'),
       personDocumentIds = require('./person-document-id.sample'),
       personDocumentOthers = require('./person-document-other.sample'),
-      personDocumentTrainings = require('./person-document-training.sample');
+      personDocumentTrainings = require('./person-document-training.sample'),
+      personDocumentMedicals = require('./person-document-med.sample'),
+      personDocumentChecks = require('./person-document-checks.sample');
 
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 16,
+      nextIndex: 20,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -50,13 +52,33 @@
       personDocumentEmployments: [
         {
           partIndex: 8,
-          part: personDocumentEmployments.person1Employment
+          part: personDocumentEmployments.person1Employment,
+          file: [{
+            key: '3a-1-ab',
+            name: 'test.pdf',
+            relativePath: ''
+          }]
         }
       ],
       personDocumentEducations: [
         {
           partIndex: 9,
-          part: personDocumentEducations.person1Education
+          part: personDocumentEducations.person1Education,
+          file: [{
+            key: '342-42-ab',
+            name: 'testName.pdf',
+            relativePath: '../folder1/folder2/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application1'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application2'
+            }
+          ]
         }
       ],
       personDocumentIds: [
@@ -102,6 +124,26 @@
         {
           partIndex: 15,
           part: personDocumentTrainings.person1Training4
+        }
+      ],
+      personDocumentMedicals: [
+        {
+          partIndex: 16,
+          part: personDocumentMedicals.person1Medical1
+        },
+        {
+          partIndex: 17,
+          part: personDocumentMedicals.person1Medical2
+        }
+      ],
+      personDocumentChecks: [
+        {
+          partIndex: 18,
+          part: personDocumentChecks.person1Check1
+        },
+        {
+          partIndex: 19,
+          part: personDocumentChecks.person1Check2
         }
       ]
     },

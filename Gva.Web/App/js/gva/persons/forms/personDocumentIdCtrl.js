@@ -12,13 +12,14 @@
         return true;
       }
 
-      return PersonDocumentId.query({
-        id: $stateParams.id,
-        number: param === 'number'? value : undefined,
-        typeid: param === 'typeid'? value.nomTypeValueId : undefined,
-        publ: param === 'publ'? value : undefined,
-        datef: param === 'datef'? value : undefined
-      }).$promise
+      var queryParams = { id: $stateParams.id };
+      if (param === 'typeid') {
+        queryParams[param] = value.nomTypeValueId;
+      } else {
+        queryParams[param] = value;
+      }
+
+      return PersonDocumentId.query(queryParams).$promise
         .then(function (documentIds) {
           return documentIds.length === 0 ||
             (documentIds.length === 1  &&
