@@ -189,6 +189,7 @@
       { nomTypeValueId: 2, code: '2', name: 'Образования', nameAlt: 'DocumentEducation', alias: 'DocumentEducation' },
       { nomTypeValueId: 3, code: '3', name: 'Месторабота', nameAlt: 'DocumentEmployment', alias: 'DocumentEmployment' },
       { nomTypeValueId: 4, code: '4', name: 'Медицински', nameAlt: 'DocumentMed', alias: 'DocumentMed' },
+      { nomTypeValueId: 4, code: '5', name: 'Проверка', nameAlt: 'DocumentCheck', alias: 'DocumentCheck' }
     ],
 
     //Номенклатура Степени на образование

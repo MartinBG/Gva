@@ -23,7 +23,7 @@
         <td>{{ df.docFileTypeName }}</td>
         <td>
           <div ng-if="!!df.gvaLotFileId">
-            <a ng-click="viewPart(df.partIndex)" style="cursor: pointer;">Дело {{ application.person.uin }} стр. {{ df.part.bookPageNumber }}</a>
+            <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.uin }} стр. {{ df.part.bookPageNumber }}</a>
           </div>
 
           <div ng-if="!df.gvaLotFileId">

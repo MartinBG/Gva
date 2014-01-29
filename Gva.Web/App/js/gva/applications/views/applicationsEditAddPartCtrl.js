@@ -17,11 +17,12 @@
         .save({ id: $stateParams.id }, {
           personId: $scope.application.person.id,
           currentDocId: $scope.$parent.currentDocId,
-          file: $scope.applicationDocFile.file,
+          file: $scope.wrapper.applicationDocFile.file,
           fileType: $scope.docFileType,
-          part: $scope.applicationDocFile.part
+          part: $scope.wrapper.applicationDocFile.part
         }
         ).$promise.then(function () {
+          $scope.wrapper = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
     };
@@ -31,9 +32,10 @@
         .linkNew({ id: $stateParams.id, docFileId: $scope.$parent.docFileId }, {
           personId: $scope.application.person.id,
           currentDocId: $scope.$parent.currentDocId,
-          part: $scope.applicationDocFile.part
+          part: $scope.wrapper.applicationDocFile.part
         }
         ).$promise.then(function () {
+          $scope.wrapper = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
     };

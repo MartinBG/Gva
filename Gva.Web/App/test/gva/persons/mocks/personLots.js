@@ -57,7 +57,8 @@
             key: '3a-1-ab',
             name: 'test.pdf',
             relativePath: ''
-          }]
+          }],
+          applications: []
         }
       ],
       personDocumentEducations: [
@@ -69,16 +70,7 @@
             name: 'testName.pdf',
             relativePath: '../folder1/folder2/'
           }],
-          applications: [
-            {
-              applicationId: 1,
-              applicationName: 'application1'
-            },
-            {
-              applicationId: 2,
-              applicationName: 'application2'
-            }
-          ]
+          applications: []
         }
       ],
       personDocumentIds: [
@@ -90,60 +82,60 @@
             name: 'testName.pdf',
             relativePath: '../folder1/folder2/'
           }],
-          applications: [
-            {
-              applicationId: 1,
-              applicationName: 'application1'
-            },
-            {
-              applicationId: 2,
-              applicationName: 'application2'
-            }
-          ]
+          applications: []
         }
       ],
       personDocumentOthers: [
         {
           partIndex: 11,
-          part: personDocumentOthers.person1Doc1
+          part: personDocumentOthers.person1Doc1,
+          applications: []
         }
       ],
       personDocumentTrainings: [
         {
           partIndex: 12,
-          part: personDocumentTrainings.person1Training1
+          part: personDocumentTrainings.person1Training1,
+          applications: []
         },
         {
           partIndex: 13,
-          part: personDocumentTrainings.person1Training2
+          part: personDocumentTrainings.person1Training2,
+          applications: []
         },
         {
           partIndex: 14,
-          part: personDocumentTrainings.person1Training3
+          part: personDocumentTrainings.person1Training3,
+          applications: []
         },
         {
           partIndex: 15,
-          part: personDocumentTrainings.person1Training4
+          part: personDocumentTrainings.person1Training4,
+          applications: []
         }
       ],
       personDocumentMedicals: [
         {
           partIndex: 16,
-          part: personDocumentMedicals.person1Medical1
+          part: personDocumentMedicals.person1Medical1,
+          applications: []
         },
         {
           partIndex: 17,
-          part: personDocumentMedicals.person1Medical2
+          part: personDocumentMedicals.person1Medical2,
+          applications: []
         }
       ],
       personDocumentChecks: [
         {
           partIndex: 18,
-          part: personDocumentChecks.person1Check1
+          part: personDocumentChecks.person1Check1,
+          applications: []
         },
         {
           partIndex: 19,
-          part: personDocumentChecks.person1Check2
+          part: personDocumentChecks.person1Check2,
+          applications: []
         }
       ]
     },
@@ -157,7 +149,8 @@
       personDocumentEmployments: [
         {
           partIndex: 2,
-          part: personDocumentEmployments.person2Employment
+          part: personDocumentEmployments.person2Employment,
+          applications: []
         }
       ]
     },
@@ -171,7 +164,8 @@
       personDocumentEmployments: [
         {
           partIndex: 2,
-          part: personDocumentEmployments.person3Employment
+          part: personDocumentEmployments.person3Employment,
+          applications: []
         }
       ]
     }

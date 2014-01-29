@@ -40,7 +40,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonApplication',
-      templateUrl: 'gva/persons/forms/personApplication.html'
+      templateUrl: 'gva/persons/forms/personApplication.html',
+      controller: 'PersonApplicationCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentMedical',
@@ -455,6 +456,50 @@
             }
           }
         })
+
+        .state({
+          name: 'persons.documentEducations',
+          title: 'Образования',
+          parent: 'persons.view',
+          url: '/documentEducations',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.documentEducations.search',
+          parent: 'persons.documentEducations',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEducationsSearch.html',
+              controller: 'DocumentEducationsSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.documentEducations.new',
+          title: 'Ново образование',
+          parent: 'persons.documentEducations',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEducationsNew.html',
+              controller: 'DocumentEducationsNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.documentEducations.edit',
+          title: 'Редакция на образование',
+          parent: 'persons.documentEducations',
+          url: '/:ind',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/documentEducationsEdit.html',
+              controller: 'DocumentEducationsEditCtrl'
+            }
+          }
+        })
+
         .state({
           name: 'persons.licences',
           title: 'Лицензи',
@@ -556,6 +601,7 @@
             }
           }
         })
+
         .state({
           name: 'persons.medicals',
           title: 'Медицински',

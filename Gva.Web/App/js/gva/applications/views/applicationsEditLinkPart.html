@@ -3,24 +3,8 @@
     <div class="panel-heading form-title"><strong>Свържи документ в описа</strong></div>
     <div class="well-sm panel-body form-body">
       <br />
-      <!--<div class="row">
-        <label class="control-label col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-3">Тип на документ:</label>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-5">
-          <sc-nomenclature ng-model="$parent.docFileType" name="docFileType" alias="'documents'" load="false" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group">
-          <button type="button" class="btn btn-primary btn-sm" ng-click="search()">Преглед на опис</button>
-        </div>
-        <div class="form-group">
-          <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
-        </div>
-      </div>-->
 
-      <br />
-
-      <div ng-show="docFileType.alias === 'DocumentId'">
+      <div ng-if="docFileType.alias === 'DocumentId'">
         <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
           </sc-column>
@@ -44,11 +28,123 @@
         </sc-datatable>
       </div>
 
+      <div ng-if="docFileType.alias === 'DocumentEducation'">
+        <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate">
+            <span>{{item.part.completionDate | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.speciality" title="persons.documentEducationSearch.speciality">
+          </sc-column>
+          <sc-column data="part.school.name" title="persons.documentEducationSearch.school">
+          </sc-column>
+          <sc-column data="part.graduation.name" title="persons.documentEducationSearch.graduation">
+          </sc-column>
+          <sc-column data="part.bookPageNumber" title="persons.documentEducationSearch.bookPageNumber">
+          </sc-column>
+          <sc-column data="part.pageCount" title="persons.documentEducationSearch.pageCount">
+          </sc-column>
+          <sc-column sortable="false">
+            <button type="button" class="btn-xs btn-info" ng-click="linkPart(item)">Избор</button>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <div ng-if="docFileType.alias === 'DocumentEmployment'">
+        <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
+            <span>{{item.part.hiredate | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
+          </sc-column>
+          <sc-column data="part.organization.name" title="persons.employmentSearch.organization" type="string">
+          </sc-column>
+          <sc-column data="part.country.name" title="persons.employmentSearch.country" type="string">
+          </sc-column>
+          <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
+          </sc-column>
+          <sc-column data="part.notes" title="persons.employmentSearch.notes" type="string">
+          </sc-column>
+          <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
+          </sc-column>
+          <sc-column data="part.bookPageNumber" title="persons.employmentSearch.bookPageNumber">
+          </sc-column>
+          <sc-column data="part.pageCount" title="persons.employmentSearch.pageCount">
+          </sc-column>
+          <sc-column sortable="false">
+            <button type="button" class="btn-xs btn-info" ng-click="linkPart(item)">Избор</button>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <div ng-if="docFileType.alias === 'DocumentMed'">
+         <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
+          </sc-column>
+          <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom">
+            <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.documentDateValidTo" title="persons.medicalSearch.documentDateValidTo">
+            <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.medClassType.name" title="persons.medicalSearch.medClass">
+          </sc-column>
+          <sc-column data="part.limitations" title="persons.medicalSearch.limitations">
+          </sc-column>
+          <sc-column data="part.documentPublisher" title="persons.medicalSearch.documentPublisher">
+          </sc-column>
+          <sc-column data="part.bookPageNumber" title="persons.medicalSearch.bookPageNumber">
+          </sc-column>
+          <sc-column data="part.pageCount" title="persons.medicalSearch.pageCount">
+          </sc-column>
+          <sc-column data="part.notes" title="persons.medicalSearch.notes">
+          </sc-column>
+          <sc-column sortable="false">
+            <button type="button" class="btn-xs btn-info" ng-click="linkPart(item)">Избор</button>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <div ng-if="docFileType.alias === 'DocumentCheck'">
+        <sc-datatable ng-model="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
+          </sc-column>
+          <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom">
+            <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.documentDateValidTo" title="persons.checkSearch.documentDateValidTo">
+            <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+          </sc-column>
+          <sc-column data="part.documentPublisher" title="persons.checkSearch.documentPublisher">
+          </sc-column>
+          <sc-column data="part.ratingType.name" title="persons.checkSearch.ratingType">
+          </sc-column>
+          <sc-column data="part.authorization.name" title="persons.checkSearch.authorization">
+          </sc-column>
+          <sc-column data="part.licenceType.name" width="70px" title="persons.checkSearch.licenceType">
+          </sc-column>
+          <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
+          </sc-column>
+          <sc-column data="part.personCheckDocumentRole.name" title="persons.checkSearch.personCheckDocumentRole">
+          </sc-column>
+          <sc-column data="part.valid.name" title="persons.checkSearch.valid">
+          </sc-column>
+          <sc-column data="part.bookPageNumber" title="persons.checkSearch.bookPageNumber">
+          </sc-column>
+          <sc-column data="part.pageCount" title="persons.checkSearch.pageCount">
+          </sc-column>
+          <sc-column sortable="false">
+            <button type="button" class="btn-xs btn-info" ng-click="linkPart(item)">Избор</button>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
       <div class="form-group col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
         <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
       </div>
-
-
     </div>
   </div>
 </div>

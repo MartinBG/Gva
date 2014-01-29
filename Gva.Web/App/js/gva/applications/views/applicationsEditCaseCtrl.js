@@ -34,10 +34,34 @@
       return $state.go('applications/edit/newfile');
     };
 
-    $scope.viewPart = function (partIndex) {
-      return $state.go('persons.documentIds.edit', {
+    $scope.viewPart = function (part) {
+      var path = '';
+
+      if (part.docFileTypeAlias === 'DocumentId') {
+        path = 'persons.documentIds.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentEducation') {
+        path = 'persons.documentEducations.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentEmployment') {
+        path = 'persons.employments.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentMed') {
+        path = 'persons.medicals.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentCheck') {
+        path = 'persons.checks.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentTraining') {
+        path = 'persons.documentIds.edit';
+      }
+      else if (part.docFileTypeAlias === 'DocumentOther') {
+        path = 'persons.documentIds.edit';
+      }
+
+      return $state.go(path, {
         id: $stateParams.id,
-        ind: partIndex
+        ind: part.partIndex
       });
     };
 

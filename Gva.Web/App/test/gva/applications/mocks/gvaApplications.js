@@ -32,18 +32,18 @@
                 },
                 {
                   docFileId: 2,
-                  docFileTypeId: 1,
-                  docFileTypeName: 'Документи за самоличност',
-                  docFileTypeAlias: 'DocumentId',
+                  docFileTypeId: 2,
+                  docFileTypeName: 'Образования',
+                  docFileTypeAlias: 'DocumentEducation',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
                 },
                 {
                   docFileId: 3,
-                  docFileTypeId: 1,
-                  docFileTypeName: 'Документи за самоличност',
-                  docFileTypeAlias: 'DocumentId',
+                  docFileTypeId: 3,
+                  docFileTypeName: 'Месторабота',
+                  docFileTypeAlias: 'DocumentEmployment',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
@@ -58,8 +58,21 @@
               docFiles: [
                 {
                   docFileId: 4,
-                  docFileTypeName: 'Издържан теоритичен изпит пред ГВА',
-                  gvaLotFileId: null
+                  docFileTypeId: 4,
+                  docFileTypeName: 'Медицински',
+                  docFileTypeAlias: 'DocumentMed',
+                  gvaLotFileId: null,
+                  part: null,
+                  partIndex: null
+                },
+                {
+                  docFileId: 5,
+                  docFileTypeId: 5,
+                  docFileTypeName: 'Проверка',
+                  docFileTypeAlias: 'DocumentCheck',
+                  gvaLotFileId: null,
+                  part: null,
+                  partIndex: null
                 }
               ]
             },

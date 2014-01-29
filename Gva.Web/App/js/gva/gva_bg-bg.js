@@ -77,7 +77,8 @@
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',
           name: 'Име на заявление',
-          number: 'Номер на заявление'
+          number: 'Номер на заявление',
+          view: 'Преглед'
         },
         personStatusDirective: {
           title: 'Състояние',
