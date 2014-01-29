@@ -57,6 +57,11 @@
       templateUrl: 'gva/persons/forms/personDocumentCheck.html',
       controller: 'PersonDocumentCheckCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentTraining',
+      templateUrl: 'gva/persons/forms/personDocumentTraining.html',
+      controller: 'PersonDocumentTrainingCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -421,6 +426,48 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/documentMedicalsEdit.html',
             controller: 'DocumentMedicalsEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings',
+        title: 'Обучение',
+        parent: 'persons.view',
+        url: '/documentTrainings',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.documentTrainings.search',
+        parent: 'persons.documentTrainings',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsSearch.html',
+            controller: 'DocumentTrainingsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings.new',
+        title: 'Нов документ за самоличност',
+        parent: 'persons.documentTrainings',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsNew.html',
+            controller: 'DocumentTrainingsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings.edit',
+        title: 'Редакция на документ за самоличност',
+        parent: 'persons.documentTrainings',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsEdit.html',
+            controller: 'DocumentTrainingsEditCtrl'
           }
         }
       });

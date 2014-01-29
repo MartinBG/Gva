@@ -3,7 +3,7 @@
 
   'use strict';
   
-  describe('Person address search page', function () {
+  describe('Person document Ids search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/searchDocumentIdPO'),
         personDocumentIdsPage;

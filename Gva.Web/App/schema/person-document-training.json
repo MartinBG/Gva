@@ -25,34 +25,41 @@
       "description": "Издател на документа"
     },
 
-    "staffTypeId": {
-    "type": ["number", "null"],
-    "description": "Тип  персонал от Номенклатура Типове персонал"
+    "staffType": {
+	"type": "object",
+	"description": "Тип  персонал от Номенклатура Типове персонал",
+	"additionalProperties": true
     },
 
-    "ratingTypeId": {
-    "type": ["number", "null"],
-    "description": "Тип ВС от Номенклатура Типове ВС за екипажи"
+    "ratingType": {
+    "type": "object",
+    "description": "Тип ВС от Номенклатура Типове ВС за екипажи",
+	"additionalProperties": true
     },
-    "aircraftTypeGroupId": {
-    "type": ["number", "null"],
-    "description": "Тип/Група ВС от Номенклатура Групи ВС"
+    "aircraftTypeGroup": {
+    "type": "object",
+    "description": "Тип/Група ВС от Номенклатура Групи ВС",
+	"additionalProperties": true
     },
-    "ratingClassId": {
-      "type": ["number", "null"],
-      "description": "Клас ВС от Номенклатура Класове ВС за екипажи"
+    "ratingClass": {
+      "type": "object",
+      "description": "Клас ВС от Номенклатура Класове ВС за екипажи",
+	  "additionalProperties": true
     },
-    "authorizationId": {
-      "type": ["number", "null"],
-      "description": "Разрешение от Номенклатура Разрешения към квалификация"
+    "authorization": {
+      "type": "object",
+      "description": "Разрешение от Номенклатура Разрешения към квалификация",
+	  "additionalProperties": true
     },
-    "licenceTypeId": {
-      "type": ["number", "null"],
-      "description": "Вид правоспособност от Номенклатура Видове(типове) правоспособност"
+    "licenceType": {
+      "type": "object",
+      "description": "Вид правоспособност от Номенклатура Видове(типове) правоспособност",
+	  "additionalProperties": true
     },
-    "locationIndicatorId": {
-      "type": ["number", "null"],
-      "description": "Индикатор на местоположение от Номенклатура Индикатори на местоположение"
+    "locationIndicator": {
+      "type": "object",
+      "description": "Индикатор на местоположение от Номенклатура Индикатори на местоположение",
+	  "additionalProperties": true
     },
     "sector": {
       "type": "string", 
@@ -60,16 +67,19 @@
     },
 
     "engLangLevelId": {
-      "type": ["number", "null"],
-      "description": "Ниво на език от Номенклатура Нива на владеене на английски език"
+      "type": "object",
+      "description": "Ниво на език от Номенклатура Нива на владеене на английски език",
+	  "additionalProperties": true
     },
     "personOtherDocumentTypeId": {
-      "type": "number",
-      "description": "Тип документ от Номенклатура Други типове документи на Физичеко лице"
+      "type": "object",
+      "description": "Тип документ от Номенклатура Други типове документи на Физичеко лице",
+	  "additionalProperties": true
     },
     "personOtherDocumentRoleId": {
-      "type": "number", 
-      "description": "Роля на документ от Номенклатура Други роли документи на Физичеко лице"
+      "type": "object", 
+      "description": "Роля на документ от Номенклатура Други роли документи на Физичеко лице",
+	  "additionalProperties": true
     },
     "valid": {
       "type": "boolean",

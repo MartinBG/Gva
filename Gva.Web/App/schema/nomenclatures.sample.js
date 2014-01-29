@@ -147,7 +147,7 @@
       { nomTypeValueId: 1, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias: 'M' },
       { nomTypeValueId: 2, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias: 'G' },
       { nomTypeValueId: 3, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'F' },
-      { nomTypeValueId: 4, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias: 'T'  }
+      { nomTypeValueId: 4, code: 'T', name: 'Наземен авиационен персонал за ОВД', nameAlt: 'Наземен авиационен персонал за ОВД', alias: 'T' }
     ],
 
     //Номенклатура Категории персонал
@@ -245,7 +245,7 @@
 
     //Номенклатура Типове ВС за екипажи
     ratingTypes: [
-      { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80', alias: 'MD80' },
+    { nomTypeValueId: 1, code: 'MD80', name: 'McDonnell Douglas MD80', nameAlt: 'McDonnell Douglas MD80', alias: 'MD80' },
       { nomTypeValueId: 2, code: 'B737', name: 'Boeing 737', nameAlt: 'B737', alias: 'B737' },
       { nomTypeValueId: 3, code: 'L410', name: 'Let L-410 Turbolet', nameAlt: 'Let L-410 Turbolet', alias: 'L410' },
       { nomTypeValueId: 831, code: 'IR(MEA)', name: 'Полети по прибори', nameAlt: 'Instrument rating (MEA)', content: { Code_CA: 'IR(MEA)', alias: 'IR(MEA)' } },
@@ -287,22 +287,22 @@
 
     //Номенклатура Разрешения към квалификация
     authorizations: [
-      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FIA' },
-      { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' }, alias: 'CATII' },
-      { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
-      { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' }, alias: 'CATIIIB' },
-      { nomTypeValueId: 16, code: 'LV-TO', name: 'LV-TO (cop)', nameAlt: 'LV-TO (cop)', content: { GroupId: 421, Code_CA: 'LV-TO' } },
-      { nomTypeValueId: 100, code: 'GMS', name: 'КВД по маневрената площ на летището чрез средства за обзор', nameAlt: 'Ground Movement Surveillance ', content: { GroupId: 100, Code_CA: 'GMS' } },
-      { nomTypeValueId: 101, code: 'RAD', name: 'КВД чрез радар', nameAlt: 'Radar', content: { GroupId: 100, Code_CA: 'RAD' } },
-      { nomTypeValueId: 102, code: 'ADS', name: 'КВД чрез автоматичен зависим обзор', nameAlt: 'Automatic Dependent Surveillance', content: { GroupId: 100, Code_CA: 'ADS' } },
-      { nomTypeValueId: 103, code: 'PAR', name: 'КВД чрез прецизен радар за подход', nameAlt: 'Precision Approach Radar', content: { GroupId: 100, Code_CA: 'PAR' } },
-      { nomTypeValueId: 104, code: 'SRA', name: 'КВД чрез обзорен радар за подход', nameAlt: 'Surveillance Radar Approach ', content: { GroupId: 100, Code_CA: 'SRA' } },
-      { nomTypeValueId: 200, code: 'ASM', name: 'Планиране и разпределение на въздушното пространство', nameAlt: 'Air Space management', content: { GroupId: 100, Code_CA: 'ASM' } },
-      { nomTypeValueId: 201, code: 'ATFM', name: 'Организация на потоците въздушно движение', nameAlt: 'Air Traffic Flow Management', content: { GroupId: 100, Code_CA: 'ATFM' } },
-      { nomTypeValueId: 203, code: 'FIS', name: 'Полетно информационно обслужване на полетите', nameAlt: 'Flight Information Service', content: { GroupId: 100, Code_CA: 'FIS' } },
-      { nomTypeValueId: 205, code: 'SAR', name: 'Търсене и спасяване', nameAlt: 'Search and Rescue', content: { GroupId: 100, Code_CA: 'SAR' } },
-      { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
-    ],
+    { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FI(A)' },
+    { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' }, alias: 'CATII' },
+    { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
+    { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' }, alias: 'CATIIIB' },
+    { nomTypeValueId: 16, code: 'LV-TO', name: 'LV-TO (cop)', nameAlt: 'LV-TO (cop)', content: { GroupId: 421, Code_CA: 'LV-TO' } },
+    { nomTypeValueId: 100, code: 'GMS', name: 'КВД по маневрената площ на летището чрез средства за обзор', nameAlt: 'Ground Movement Surveillance ', content: { GroupId: 100, Code_CA: 'GMS' } },
+    { nomTypeValueId: 101, code: 'RAD', name: 'КВД чрез радар', nameAlt: 'Radar', content: { GroupId: 100, Code_CA: 'RAD' } },
+    { nomTypeValueId: 102, code: 'ADS', name: 'КВД чрез автоматичен зависим обзор', nameAlt: 'Automatic Dependent Surveillance', content: { GroupId: 100, Code_CA: 'ADS' } },
+    { nomTypeValueId: 103, code: 'PAR', name: 'КВД чрез прецизен радар за подход', nameAlt: 'Precision Approach Radar', content: { GroupId: 100, Code_CA: 'PAR' } },
+    { nomTypeValueId: 104, code: 'SRA', name: 'КВД чрез обзорен радар за подход', nameAlt: 'Surveillance Radar Approach ', content: { GroupId: 100, Code_CA: 'SRA' } },
+    { nomTypeValueId: 200, code: 'ASM', name: 'Планиране и разпределение на въздушното пространство', nameAlt: 'Air Space management', content: { GroupId: 100, Code_CA: 'ASM' } },
+    { nomTypeValueId: 201, code: 'ATFM', name: 'Организация на потоците въздушно движение', nameAlt: 'Air Traffic Flow Management', content: { GroupId: 100, Code_CA: 'ATFM' } },
+    { nomTypeValueId: 203, code: 'FIS', name: 'Полетно информационно обслужване на полетите', nameAlt: 'Flight Information Service', content: { GroupId: 100, Code_CA: 'FIS' } },
+    { nomTypeValueId: 205, code: 'SAR', name: 'Търсене и спасяване', nameAlt: 'Search and Rescue', content: { GroupId: 100, Code_CA: 'SAR' } },
+    { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
+  ],
 
     //Номенклатура Видове(типове) правоспособност
     licenceTypes: [
@@ -510,10 +510,10 @@
 
     //kласове за медицинси
     medicalClassTypes: [
-      { nomTypeValueId: 1, code: '', name: 'клас 1', nameAlt: 'class 1', alias:'class1'},
-      { nomTypeValueId: 2, code: '', name: 'клас 2', nameAlt: 'class 2', alias: 'class2'},
-      { nomTypeValueId: 3, code: '', name: 'клас 3', nameAlt: 'class 3', alias: 'class3'},
-      { nomTypeValueId: 4, code: '', name: 'клас 4', nameAlt: 'class 4', alias: 'class4'}
+      { nomTypeValueId: 1, code: '', name: 'клас 1', nameAlt: 'class 1', alias: 'class1' },
+      { nomTypeValueId: 2, code: '', name: 'клас 2', nameAlt: 'class 2', alias: 'class2' },
+      { nomTypeValueId: 3, code: '', name: 'клас 3', nameAlt: 'class 3', alias: 'class3' },
+      { nomTypeValueId: 4, code: '', name: 'клас 4', nameAlt: 'class 4', alias: 'class4' }
     ],
 
     //Oграничения за медицински
