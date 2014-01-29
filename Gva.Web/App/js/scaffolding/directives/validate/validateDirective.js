@@ -4,7 +4,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ValidateDirective($parse) {
+  function ValidateDirective($parse, $q) {
     function addPendingValidation(control) {
       if (!control.$error.$pending) {
         control.$error.$pending = 0;
@@ -23,13 +23,34 @@
 
     return {
       restrict: 'A',
-      require: 'ngModel',
+      require: ['?ngModel', '?form'],
       scope: false,
-      link: function (scope, element, attrs, control) {
-        var forms = _.map(element.parents('ng-form'), function (formElem) {
+      link: function (scope, element, attrs, controllers) {
+        var parentForms = _.map(element.parents('ng-form'), function (formElem) {
               return angular.element(formElem).controller('form');
             }),
-            scValidate = $parse(attrs.scValidate)(scope);
+            scValidate = $parse(attrs.scValidate)(scope),
+            validators = [],
+            immediate = attrs.scValidateImmediate|| false,
+            control,
+            form;
+
+        if (controllers[1]) {
+          form = controllers[1];
+
+          control = {
+            $setValidity: function (validationErrorKey, isValid) {
+              form.$setValidity(validationErrorKey, isValid, control);
+            },
+            $parsers: [],
+            $error: {},
+            $name: '__scValidateDummy'
+          };
+
+          form.$addControl(control);
+        } else {
+          control = controllers[0];
+        }
 
         _.forOwn(scValidate, function (validationFn, validationErrorKey) {
           var validator = function (value) {
@@ -39,37 +60,76 @@
             if (isValid && isValid.then && typeof (isValid.then) === 'function') {
               control.$setValidity(validationErrorKey, false);
               addPendingValidation(control);
-              forms.forEach(function (form) {
-                addPendingValidation(form);
+              parentForms.forEach(function (parentForm) {
+                addPendingValidation(parentForm);
               });
 
-              isValid.then(function (result) {
+              return isValid.then(function (result) {
                 control.$setValidity(validationErrorKey, result);
 
                 removePendingValidation(control);
-                forms.forEach(function (form) {
-                  removePendingValidation(form);
+                parentForms.forEach(function (parentForm) {
+                  removePendingValidation(parentForm);
                 });
-              }, function () {
+
+                return result;
+              }, function (reason) {
                 removePendingValidation(control);
-                forms.forEach(function (form) {
-                  removePendingValidation(form);
+                parentForms.forEach(function (parentForm) {
+                  removePendingValidation(parentForm);
                 });
+
+                throw reason;
               });
             } else {
               control.$setValidity(validationErrorKey, isValid);
-            }
 
-            return value;
+              return $q.when(isValid);
+            }
           };
 
-          control.$parsers.push(validator);
+          validators.push(validator);
+
+          if (immediate) {
+            control.$parsers.push(function (value) {
+              validator(value);
+
+              return value;
+            });
+          }
         });
+
+        (form || control).$validate = function () {
+          var validationResultPromises =
+            _.map(validators, function (validator) { return validator(); });
+
+          if (form) {
+            _.forOwn(form, function (value, key) {
+              // child controls are all properties not starting with $
+              if (key.indexOf('$') >= 0) {
+                return;
+              }
+
+              // check if child control has custom validation with scValidate
+              if (value.$validate) {
+                validationResultPromises.push(value.$validate());
+              }
+            });
+          }
+
+          return $q.all(validationResultPromises).then(function () {
+            if (form) {
+              form.$validated = true;
+            }
+
+            return (form || control).$valid;
+          });
+        };
       }
     };
   }
 
-  ValidateDirective.$inject = ['$parse'];
+  ValidateDirective.$inject = ['$parse', '$q'];
 
   angular.module('scaffolding').directive('scValidate', ValidateDirective);
 }(angular, _));

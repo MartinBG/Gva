@@ -39,7 +39,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonFlyingExperience',
-      templateUrl: 'gva/persons/forms/personFlyingExperience.html'
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
+      controller: 'PersonFlyingExperienceCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider

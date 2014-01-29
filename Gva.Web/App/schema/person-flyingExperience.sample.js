@@ -57,7 +57,7 @@
       staffType: nomenclatures.get('staffTypes', 'F'),
       documentDate: '1981-04-04T00:00',
       period: {
-        month: 'Януари2',
+        month: 'Февруари',
         year: 2014
       },
       organization: nomenclatures.get('organizations', 'AAK Progres'),

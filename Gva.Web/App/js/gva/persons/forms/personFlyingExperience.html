@@ -1,11 +1,14 @@
-﻿<ng-form class="form-inline">
+﻿<ng-form class="form-inline" sc-validate="{check: checkUniqueness}">
+  <div>
+    <label ng-show="personFlyingExperienceForm.$invalid" l10n-text="persons.personFlyingExperienceDirective.notUnique"></label>
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading form-title"><strong l10n-text="persons.personFlyingExperienceDirective.title"></strong></div>
     <div class="well-sm panel-body form-body">
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.staffType"></label>
-          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true"  ng-disabled="isEdit"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true" ng-disabled="isEdit"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3" ng-show="model.staffType.code === 'F'">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.month"></label>
@@ -48,7 +51,7 @@
       </div>
       <div class="form-group col-sm-3">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.authorization"></label>
-        <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" load="true" ></sc-nomenclature>
+        <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" load="true"></sc-nomenclature>
       </div>
     </div>
     <div class="row" ng-show="model.staffType.code === 'F'">
@@ -65,7 +68,7 @@
   <div class="well row">
     <div class="form-group col-sm-3">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
-      <span name="experienceRoleIndicatorValidationSpan" ng-show="form.experienceRole.$dirty && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
+      <span name="experienceRoleIndicatorValidationSpan" ng-show="form.$validated && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
       <sc-nomenclature ng-model="model.experienceRole" name="experienceRole" alias="'experienceRoles'" load="true" ng-required="true"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-3">
@@ -80,7 +83,7 @@
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayDuration"></label>
         <div class="input-group">
           <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
-            </span>
+          </span>
           </span>
           <sc-int ng-model="model.dayIFR.hours"></sc-int>
           <span class="input-group-addon padding6">:</span>
@@ -91,7 +94,7 @@
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightDuration"></label>
         <div class="input-group">
           <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
-            </span>
+          </span>
           <sc-int ng-model="model.nightIFR.hours"></sc-int>
           <span class="input-group-addon padding6">:</span>
           <sc-int ng-model="model.nightIFR.minutes"></sc-int>
@@ -102,7 +105,7 @@
       <div class="form-group col-sm-2">
         <div class="input-group">
           <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
-            </span>
+          </span>
           <sc-int ng-model="model.dayVFR.hours"></sc-int>
           <span class="input-group-addon padding6">:</span>
           <sc-int ng-model="model.dayVFR.minutes"></sc-int>
@@ -111,7 +114,7 @@
       <div class="form-group col-sm-2">
         <div class="input-group">
           <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
-            </span>
+          </span>
           <sc-int ng-model="model.nightVFR.hours"></sc-int>
           <span class="input-group-addon padding6">:</span>
           <sc-int ng-model="model.nightVFR.minutes"></sc-int>
@@ -121,12 +124,12 @@
     <div class="row">
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayLandings"></label>
-          <sc-int ng-model="model.dayLandings"></sc-int>
-        </div>
+        <sc-int ng-model="model.dayLandings"></sc-int>
+      </div>
 
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightLandings"></label>
-          <sc-int ng-model="model.nightLandings"></sc-int>
+        <sc-int ng-model="model.nightLandings"></sc-int>
       </div>
     </div>
   </div>
@@ -147,7 +150,6 @@
     </div>
 
     <div class="form-group col-sm-2">
-
       <div class="input-group">
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-time">
@@ -160,7 +162,6 @@
       </div>
     </div>
     <div class="form-group col-sm-2" ng-show="model.staffType.code === 'F'">
-
       <div class="input-group">
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-time">

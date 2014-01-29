@@ -102,7 +102,8 @@
           nightLandings: 'Кацания(нощ)',
           total: 'Общо количество (с натрупване)',
           totalDoc: 'Общо количество (по документа)',
-          totalLastMonths: 'Общ нальот за посл. 12 месеца'
+          totalLastMonths: 'Общ нальот за посл. 12 месеца',
+          notUnique: 'Данните се дублират с вече съществуващ запис'
         },
         newPerson: {
           save: 'Запис',
@@ -198,12 +199,10 @@
           newFlyingExperience: 'Нов летателен/практически опит'
         },
         flyingExperienceNew: {
-          notUnique: 'Данните се дублират с вече съществуващ запис',
           save: 'Запис',
           cancel: 'Отказ'
         },
         flyingExperienceEdit: {
-          notUnique: 'Данните се дублират с вече съществуващ запис',
           save: 'Запис',
           cancel: 'Отказ'
         }
