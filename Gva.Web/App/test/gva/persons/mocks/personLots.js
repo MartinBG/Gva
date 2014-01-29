@@ -96,7 +96,12 @@
         {
           partIndex: 12,
           part: personDocumentTrainings.person1Training1,
-          applications: []
+          applications: [],
+          file: [{
+            key: '311-93-wb',
+            name: 'test1.pdf',
+            relativePath: '../folder1/folder3/'
+          }]
         },
         {
           partIndex: 13,
@@ -106,7 +111,12 @@
         {
           partIndex: 14,
           part: personDocumentTrainings.person1Training3,
-          applications: []
+          applications: [],
+          file: [{
+            key: '311-93-wb',
+            name: 'test3.pdf',
+            relativePath: '../folder1/folder3/'
+          }]
         },
         {
           partIndex: 15,

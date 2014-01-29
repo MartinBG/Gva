@@ -10,7 +10,7 @@
         <input disabled name="organization" type="text" class="form-control" value="{{person.organization}}" />
       </div>
     </div>
-    <div class="row" style="margin-top:5px;">
+    <div class="row" style="margin-top: 5px;">
       <div class="input-group input-group-sm col-md-3 col-lg-2">
         <span class="input-group-addon" l10n-text="persons.viewPerson.uin"></span>
         <input disabled name="uin" type="text" class="form-control" value="{{person.uin}}" />
@@ -43,6 +43,7 @@
       },
       'Медицински': 'persons.medicals.search',
       'Квалификации': {
+        'Обучение': 'persons.documentTrainings.search',
         'Проверки': 'persons.checks.search'
        }}"></gva-tabs>
   <div ui-view="detailView">
