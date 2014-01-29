@@ -61,7 +61,8 @@
         ]})
         .setUserFullName('Администратор')
         .setUserHasPassword(true)
-        .showBreadcrumbBar(true);
+        .showBreadcrumbBar(true)
+        .setBreadcrumbBarHomeState('users');
     }
   ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
     $rootScope.l10n = l10n;
