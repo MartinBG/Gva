@@ -184,12 +184,42 @@
       }
     ],
 
-    documents: [
-      { nomTypeValueId: 1, code: '1', name: 'Документ за самоличност', nameAlt: 'DocumentId', alias: 'DocumentId' },
-      { nomTypeValueId: 2, code: '2', name: 'Образования', nameAlt: 'DocumentEducation', alias: 'DocumentEducation' },
-      { nomTypeValueId: 3, code: '3', name: 'Месторабота', nameAlt: 'DocumentEmployment', alias: 'DocumentEmployment' },
-      { nomTypeValueId: 4, code: '4', name: 'Медицински', nameAlt: 'DocumentMed', alias: 'DocumentMed' },
-      { nomTypeValueId: 4, code: '5', name: 'Проверка', nameAlt: 'DocumentCheck', alias: 'DocumentCheck' }
+    documentParts: [
+      {
+        nomTypeValueId: 1, code: '1', name: 'Документ за самоличност', nameAlt: 'DocumentId', alias: 'DocumentId', content: {
+          setPartId: 1
+        }
+      },
+      {
+        nomTypeValueId: 2, code: '2', name: 'Образования', nameAlt: 'DocumentEducation', alias: 'DocumentEducation', content: {
+          setPartId: 2
+        }
+      },
+      {
+        nomTypeValueId: 3, code: '3', name: 'Месторабота', nameAlt: 'DocumentEmployment', alias: 'DocumentEmployment', content: {
+          setPartId: 3
+        }
+      },
+      {
+        nomTypeValueId: 4, code: '4', name: 'Медицински', nameAlt: 'DocumentMed', alias: 'DocumentMed', content: {
+          setPartId: 4
+        }
+      },
+      {
+        nomTypeValueId: 5, code: '5', name: 'Проверка', nameAlt: 'DocumentCheck', alias: 'DocumentCheck', content: {
+          setPartId: 5
+        }
+      },
+      {
+        nomTypeValueId: 6, code: '6', name: '*', nameAlt: 'DocumentTraining', alias: 'DocumentTraining', content: {
+          setPartId: 6
+        }
+      },
+      {
+        nomTypeValueId: 7, code: '7', name: '*', nameAlt: 'DocumentOther', alias: 'DocumentOther', content: {
+          setPartId: 7
+        }
+      }
     ],
 
     //Номенклатура Степени на образование
@@ -310,7 +340,7 @@
     { nomTypeValueId: 203, code: 'FIS', name: 'Полетно информационно обслужване на полетите', nameAlt: 'Flight Information Service', content: { GroupId: 100, Code_CA: 'FIS' } },
     { nomTypeValueId: 205, code: 'SAR', name: 'Търсене и спасяване', nameAlt: 'Search and Rescue', content: { GroupId: 100, Code_CA: 'SAR' } },
     { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
-  ],
+    ],
 
     //Номенклатура Видове(типове) правоспособност
     licenceTypes: [
@@ -492,10 +522,9 @@
     //Номенклатура DocTypeGroups
     docTypeGroups: [
       { nomTypeValueId: 1, code: '', name: 'Общи', nameAlt: '', alias: 'common' },
-      { nomTypeValueId: 2, code: '', name: 'Искане', nameAlt: '', alias: 'request' },
-      { nomTypeValueId: 3, code: '', name: 'Електронни услуги', nameAlt: '', alias: 'electronicService' },
-      { nomTypeValueId: 4, code: '', name: 'Отгвори на услуги', nameAlt: '', alias: 'serviceAnswers' },
-      { nomTypeValueId: 5, code: '', name: 'Други', nameAlt: '', alias: 'others' }
+      { nomTypeValueId: 2, code: '', name: 'Електронни услуги', nameAlt: '', alias: 'electronicService' },
+      { nomTypeValueId: 3, code: '', name: 'Отгвори на услуги', nameAlt: '', alias: 'serviceAnswers' },
+      { nomTypeValueId: 4, code: '', name: 'Други', nameAlt: '', alias: 'others' }
     ],
 
     //Номенклатура DocTypes
@@ -504,7 +533,15 @@
       { nomTypeValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task', parentId: 1 },
       { nomTypeValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note', parentId: 1 },
       { nomTypeValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter', parentId: 1 },
-      { nomTypeValueId: 5, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol', parentId: 5 }
+
+      { nomTypeValueId: 4, code: 'М12.1.5', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – пилоти', nameAlt: '', alias: '', parentId: 2 },
+      { nomTypeValueId: 5, code: 'М12.1.6', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – кабинен екипаж, полетни диспечери, бордни инженери, щурмани, бордни съпроводители', nameAlt: '', alias: '', parentId: 2 },
+      { nomTypeValueId: 6, code: 'М12.1.8', name: 'Признаване на свидетелство за правоспособност на чужди граждани', nameAlt: '', alias: '', parentId: 2 },
+      { nomTypeValueId: 7, code: 'М12.1.14', name: 'Издаване на свидетелство за правоспособност на ръководители на полети', nameAlt: '', alias: '', parentId: 2 },
+      { nomTypeValueId: 8, code: 'М12.1.15', name: 'Издаване на свидетелство за правоспособност на инженерно-технически състав по обслужване на средствата за управление на въздушното движение (УВД), на ученик -  ръководители на полети, на асистент координатори на полети и на координатори по УВД', nameAlt: '', alias: '', parentId: 2 },
+      { nomTypeValueId: 9, code: 'М12.1.7', name: 'Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери', nameAlt: '', alias: '', parentId: 2 },
+
+      { nomTypeValueId: 10, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol', parentId: 4 }
     ],
 
     //тестови данни за кореспондент

@@ -7,6 +7,7 @@
     $state
     ) {
     $scope.cancel = function () {
+      $scope.documentData = null;
       return $state.go('applications/edit/case');
     };
 

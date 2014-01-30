@@ -10,10 +10,12 @@
     ) {
     $scope.application = Application.get({ id: $stateParams.id });
 
-    $scope.docFileType = null;
-    $scope.docFileId = null;
-    $scope.currentDocId = null;
-    $scope.isLinkNew = false;
+    $scope.documentData = {
+      docPartType: null,
+      docFileId: null,
+      currentDocId: null,
+      isLinkNew: false
+    };
 
     $scope.viewPerson = function (id) {
       return $state.go('persons.view', { id: id });

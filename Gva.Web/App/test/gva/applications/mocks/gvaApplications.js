@@ -24,8 +24,8 @@
                 {
                   docFileId: 1,
                   docFileTypeId: 1,
-                  docFileTypeName: 'Документи за самоличност',
-                  docFileTypeAlias: 'DocumentId',
+                  docFileTypeName: 'PDF',
+                  docFileTypeAlias: 'PDF',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
@@ -33,8 +33,8 @@
                 {
                   docFileId: 2,
                   docFileTypeId: 2,
-                  docFileTypeName: 'Образования',
-                  docFileTypeAlias: 'DocumentEducation',
+                  docFileTypeName: 'WORD',
+                  docFileTypeAlias: 'WORD',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
@@ -42,8 +42,8 @@
                 {
                   docFileId: 3,
                   docFileTypeId: 3,
-                  docFileTypeName: 'Месторабота',
-                  docFileTypeAlias: 'DocumentEmployment',
+                  docFileTypeName: 'EXCEL',
+                  docFileTypeAlias: 'EXCEL',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
@@ -58,18 +58,18 @@
               docFiles: [
                 {
                   docFileId: 4,
-                  docFileTypeId: 4,
-                  docFileTypeName: 'Медицински',
-                  docFileTypeAlias: 'DocumentMed',
+                  docFileTypeId: 1,
+                  docFileTypeName: 'PDF',
+                  docFileTypeAlias: 'PDF',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null
                 },
                 {
                   docFileId: 5,
-                  docFileTypeId: 5,
-                  docFileTypeName: 'Проверка',
-                  docFileTypeAlias: 'DocumentCheck',
+                  docFileTypeId: 2,
+                  docFileTypeName: 'WORD',
+                  docFileTypeAlias: 'PDF',
                   gvaLotFileId: null,
                   part: null,
                   partIndex: null

@@ -5,17 +5,17 @@
   angular.module('gva')
     .factory('ApplicationDocFile', ['$resource',
       function ($resource) {
-        return $resource('/api/applications/:id/docFiles', { id: '@id' },
+        return $resource('/api/apps/:id/docParts', { id: '@id' },
           {
             'linkNew': {
               method: 'POST',
-              url: '/api/applications/:id/docFiles/:docFileId/linkNew',
-              params: { id: '@id', docFileId: '@docFileId' }
+              url: '/api/apps/:id/docParts/:setPartId/linkNew',
+              params: { id: '@id', setPartId: '@setPartId' }
             },
             'linkExisting': {
               method: 'POST',
-              url: '/api/applications/:id/docFiles/:docFileId/linkExisting',
-              params: { id: '@id', docFileId: '@docFileId' }
+              url: '/api/apps/:id/docParts/:setPartId/linkExisting',
+              params: { id: '@id', setPartId: '@setPartId' }
             }
           });
       }]);

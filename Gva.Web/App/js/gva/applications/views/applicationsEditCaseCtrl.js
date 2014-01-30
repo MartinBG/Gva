@@ -1,4 +1,4 @@
-﻿/*global angular, require*/
+﻿/*global angular*/
 (function (angular) {
   'use strict';
 
@@ -7,61 +7,57 @@
     $state,
     $stateParams
     ) {
-    var nomenclatures = require('./nomenclatures.sample');
-
     $scope.$parent.docFileType = null;
     $scope.$parent.isLinkNew = false;
 
     $scope.linkNew = function (docId, docFile) {
-      $scope.$parent.docFileType = nomenclatures.get('documents', docFile.docFileTypeAlias);
-      $scope.$parent.isLinkNew = true;
-      $scope.$parent.docFileId = docFile.docFileId;
-      $scope.$parent.currentDocId = docId;
+      $scope.documentData.isLinkNew = true;
+      $scope.documentData.docFileId = docFile.docFileId;
+      $scope.documentData.currentDocId = docId;
 
-      return $state.go('applications/edit/addpart');
+      return $state.go('applications/edit/newfile');
     };
 
     $scope.linkPart = function (docId, docFile) {
-      $scope.$parent.docFileType = nomenclatures.get('documents', docFile.docFileTypeAlias);
-      $scope.$parent.docFileId = docFile.docFileId;
-      $scope.$parent.currentDocId = docId;
+      $scope.documentData.docFileId = docFile.docFileId;
+      $scope.documentData.currentDocId = docId;
 
       return $state.go('applications/edit/linkpart');
     };
 
     $scope.newfile = function (c) {
-      $scope.$parent.currentDocId = c.docId;
+      $scope.documentData.currentDocId = c.docId;
       return $state.go('applications/edit/newfile');
     };
 
-    $scope.viewPart = function (part) {
+    $scope.viewPart = function (docCase) {
       var path = '';
 
-      if (part.docFileTypeAlias === 'DocumentId') {
+      if (docCase.setPartId === 1) {
         path = 'persons.documentIds.edit';
       }
-      else if (part.docFileTypeAlias === 'DocumentEducation') {
+      else if (docCase.setPartId === 2) {
         path = 'persons.documentEducations.edit';
       }
-      else if (part.docFileTypeAlias === 'DocumentEmployment') {
+      else if (docCase.setPartId === 3) {
         path = 'persons.employments.edit';
       }
-      else if (part.docFileTypeAlias === 'DocumentMed') {
+      else if (docCase.setPartId === 4) {
         path = 'persons.medicals.edit';
       }
-      else if (part.docFileTypeAlias === 'DocumentCheck') {
+      else if (docCase.setPartId === 5) {
         path = 'persons.checks.edit';
       }
-      else if (part.docFileTypeAlias === 'DocumentTraining') {
-        path = 'persons.documentIds.edit';
-      }
-      else if (part.docFileTypeAlias === 'DocumentOther') {
-        path = 'persons.documentIds.edit';
-      }
+      //else if (docCase.setPartId === 6) {
+        //path = 'persons.documentIds.edit';
+      //}
+      //else if (docCase.setPartId === 7) {
+        //path = 'persons.documentIds.edit';
+      //}
 
       return $state.go(path, {
         id: $stateParams.id,
-        ind: part.partIndex
+        ind: docCase.partIndex
       });
     };
 

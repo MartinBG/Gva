@@ -14,66 +14,84 @@
     PersonDocumentCheck
     ) {
 
-    if ($scope.$parent.docFileType) {
-      if ($scope.$parent.docFileType.alias === 'DocumentId') {
-        PersonDocumentId.query($stateParams).$promise.then(function (documentIds) {
-          $scope.documentPart = documentIds;
-        });
-      }
-      else if ($scope.$parent.docFileType.alias === 'DocumentEducation') {
-        PersonDocumentEducation.query($stateParams).$promise.then(function (documentEducations) {
-          $scope.documentPart = documentEducations;
-        });
-      }
-      else if ($scope.$parent.docFileType.alias === 'DocumentEmployment') {
-        PersonDocumentEmployment.query($stateParams).$promise.then(function (employments) {
-          $scope.documentPart = employments;
-        });
-      }
-      else if ($scope.$parent.docFileType.alias === 'DocumentMed') {
-        PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
-          $scope.documentPart = medicals.map(function (medical) {
-            var testimonial = medical.part.documentNumberPrefix + ' ' +
-              medical.part.documentNumber + ' ' +
-              medical.part.documentNumberSuffix;
+    $scope.search = function () {
+      $scope.showDocumentId = false;
+      $scope.showDocumentEducation = false;
+      $scope.showDocumentEmployment = false;
+      $scope.showDocumentMed = false;
+      $scope.showDocumentCheck = false;
 
-            medical.part.testimonial = testimonial;
-
-            var limitations = '';
-            for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-              limitations += medical.part.limitationsTypes[i].name + ', ';
-            }
-            limitations = limitations.substring(0, limitations.length - 2);
-            medical.part.limitations = limitations;
-
-            return medical;
+      if ($scope.documentData.docPartType) {
+        if ($scope.documentData.docPartType.content.setPartId === 1) {
+          PersonDocumentId.query($stateParams).$promise.then(function (documentIds) {
+            $scope.wrapper.documentPart = documentIds;
+            $scope.showDocumentId = !!documentIds;
           });
-        });
-      }
-      else if ($scope.$parent.docFileType.alias === 'DocumentCheck') {
-        PersonDocumentCheck.query($stateParams).$promise.then(function (checks) {
-          $scope.documentPart = checks;
-        });
-      }
+        }
+        else if ($scope.documentData.docPartType.content.setPartId === 2) {
+          PersonDocumentEducation.query($stateParams).$promise.then(function (documentEducations) {
+            $scope.wrapper.documentPart = documentEducations;
+            $scope.showDocumentEducation = !!documentEducations;
+          });
+        }
+        else if ($scope.documentData.docPartType.content.setPartId === 3) {
+          PersonDocumentEmployment.query($stateParams).$promise.then(function (employments) {
+            $scope.wrapper.documentPart = employments;
+            $scope.showDocumentEmployment = !!employments;
+          });
+        }
+        else if ($scope.documentData.docPartType.content.setPartId === 4) {
+          PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
+            $scope.wrapper.documentPart = medicals.map(function (medical) {
+              var testimonial = medical.part.documentNumberPrefix + ' ' +
+                medical.part.documentNumber + ' ' +
+                medical.part.documentNumberSuffix;
 
-      //todo add more
-    }
+              medical.part.testimonial = testimonial;
+
+              var limitations = '';
+              for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
+                limitations += medical.part.limitationsTypes[i].name + ', ';
+              }
+              limitations = limitations.substring(0, limitations.length - 2);
+              medical.part.limitations = limitations;
+
+              return medical;
+            });
+            $scope.showDocumentMed = !!medicals;
+          });
+        }
+        else if ($scope.documentData.docPartType.content.setPartId === 5) {
+          PersonDocumentCheck.query($stateParams).$promise.then(function (checks) {
+            $scope.wrapper.documentPart = checks;
+            $scope.showDocumentCheck = !!checks;
+          });
+        }
+
+        //todo add more
+      }
+    };
 
     $scope.linkPart = function (item) {
       return ApplicationDocFile
-        .linkExisting({ id: $stateParams.id, docFileId: $scope.$parent.docFileId }, {
+        .linkExisting({
+          id: $stateParams.id,
+          setPartId: $scope.documentData.docPartType.content.setPartId
+        }, {
           personId: $scope.application.person.id,
-          currentDocId: $scope.$parent.currentDocId,
-          partIndex: item.partIndex
-        }
-        ).$promise.then(function () {
-          $scope.documentPart = null;
+          currentDocId: $scope.documentData.currentDocId,
+          partIndex: item.partIndex,
+          docFileId: $scope.documentData.docFileId
+        }).$promise.then(function () {
+          $scope.wrapper = null;
+          $scope.documentData = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
 
     };
 
     $scope.goBack = function () {
+      $scope.documentData = null;
       return $state.go('applications/edit/case');
     };
   }
