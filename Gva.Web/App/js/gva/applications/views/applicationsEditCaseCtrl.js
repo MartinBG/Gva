@@ -7,13 +7,14 @@
     $state,
     $stateParams
     ) {
-    $scope.$parent.docFileType = null;
-    $scope.$parent.isLinkNew = false;
+
+    $scope.documentData.isLinkNew = false;
 
     $scope.linkNew = function (docId, docFile) {
       $scope.documentData.isLinkNew = true;
       $scope.documentData.docFileId = docFile.docFileId;
       $scope.documentData.currentDocId = docId;
+      $scope.documentData.docPartType = null;
 
       return $state.go('applications/edit/newfile');
     };
@@ -21,11 +22,13 @@
     $scope.linkPart = function (docId, docFile) {
       $scope.documentData.docFileId = docFile.docFileId;
       $scope.documentData.currentDocId = docId;
+      $scope.documentData.docPartType = null;
 
       return $state.go('applications/edit/linkpart');
     };
 
     $scope.newfile = function (c) {
+      $scope.documentData.docPartType = null;
       $scope.documentData.currentDocId = c.docId;
       return $state.go('applications/edit/newfile');
     };
@@ -49,10 +52,10 @@
         path = 'persons.checks.edit';
       }
       //else if (docCase.setPartId === 6) {
-        //path = 'persons.documentIds.edit';
+      //path = 'persons.documentIds.edit';
       //}
       //else if (docCase.setPartId === 7) {
-        //path = 'persons.documentIds.edit';
+      //path = 'persons.documentIds.edit';
       //}
 
       return $state.go(path, {
