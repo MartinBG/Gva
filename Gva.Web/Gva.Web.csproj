@@ -175,14 +175,12 @@
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\resources\personDocumentTraining.js" />
-    <Content Include="App\js\gva\persons\resources\personMedical.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEdit.html" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsNew.html" />
     <Content Include="App\js\gva\persons\views\documentTrainingsNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsSearch.html" />
     <Content Include="App\js\gva\persons\views\documentTrainingsSearchCtrl.js" />
-    <Content Include="App\js\gva\persons\resources\personEmployment.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentEducation.js" />
     <Content Include="App\js\gva\persons\views\documentEducationsEdit.html" />
     <Content Include="App\js\gva\persons\views\documentEducationsEditCtrl.js" />
