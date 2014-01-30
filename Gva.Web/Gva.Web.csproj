@@ -169,6 +169,8 @@
     <Content Include="App\js\gva\persons\forms\personDocumentMedical.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentEmployment.html" />
+    <Content Include="App\js\gva\persons\forms\personFlyingExperience.html" />
+    <Content Include="App\js\gva\persons\forms\personFlyingExperienceCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
@@ -231,6 +233,17 @@
     <Content Include="App\schema\person-document-checks.sample.js" />
     <Content Include="App\test\ems\mocks\unitsHttp.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
+    <Content Include="App\js\gva\persons\resources\personFlyingExperience.js" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesNew.html" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesSearch.html" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesEdit.html" />
+    <Content Include="App\js\gva\persons\views\flyingExperiencesEditCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
+    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
+    <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
+    <Content Include="App\schema\person-flyingExperience.sample.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
@@ -238,6 +251,7 @@
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
     <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personFlyingExperiencesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEmploymentsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentChecksHttp.js" />
