@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="row">
     <div class="form-group col-sm-3 col-sm-offset-0">
       <button sc-click="newDocumentId()" type="button" class="btn btn-primary" name="createBtn">
@@ -30,10 +30,10 @@
       <span>{{item.file[0].name}}</span>
     </sc-column>
     <sc-column width="115px">
-      <gva-button name="editBtn" class="btn-xs btn-info" gva-click="editDocumentId(item)" l10n-text="persons.documentIdSearch.edit" icon="glyphicon-pencil"></gva-button>
+      <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentId(item)" l10n-text="persons.documentIdSearch.edit" icon="glyphicon-pencil"></gva-button>
     </sc-column>
     <sc-column  width="100px">
-      <gva-button name="deleteBtn" class="btn-xs btn-info" gva-click="deleteDocumentId(item)" l10n-text="persons.documentIdSearch.remove" icon="glyphicon-remove"></gva-button>
+      <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentId(item)" l10n-text="persons.documentIdSearch.remove" icon="glyphicon-remove"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

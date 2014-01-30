@@ -1,196 +1,179 @@
-﻿<div class="container page-content">
+﻿<div>
   <ng-form class="form-inline" name="editDocForm">
       <div class="panel panel-default">
 
-        <nav class="navbar navbar-default " style="margin-bottom: 0px;">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+        <nav class="panel-heading">
+          <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
+            <div ng-show="!inEditMode" class="btn-group">
+              <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-plus"></i>
+                Подчинен <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Документ</a></li>
+                <li><a href="#">Резолюция</a></li>
+                <li><a href="#">Задача</a></li>
+                <li><a href="#">Забележка</a></li>
+              </ul>
+            </div>
+
+            <button ng-show="!inEditMode" ng-click="enterEditMode()" type="button" class="btn btn-default btn-sm">
+              <i class="glyphicon glyphicon-edit"></i>
+              Редакция
             </button>
-          </div>
 
-          <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
-            <ul class="nav navbar-nav">
-              <li ng-show="!inEditMode" class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                  <i class="glyphicon glyphicon-plus"></i>
-                  <span>Подчинен</span><b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">Документ</a>
-                  </li>
-                  <li>
-                    <a href="#">Резолюция</a>
-                  </li>
-                  <li>
-                    <a href="#">Задача</a>
-                  </li>
-                  <li>
-                    <a href="#">Забележка</a>
-                  </li>
-                </ul>
-              </li>
-              <li ng-show="!inEditMode">
-                <a ng-click="enterEditMode()" style="cursor: pointer;">
-                  <i class="glyphicon glyphicon-edit"></i><span>&nbsp;Редакция</span>
-                </a>
-              </li>
-              <li ng-show="inEditMode">
-                <a ng-click="save()" style="cursor: pointer;">
-                  <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Запис</span>
-                </a>
-              </li>
-              <li ng-show="inEditMode">
-                <a ng-click="exitEditMode()" style="cursor: pointer;">
-                  <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
-                </a>
-              </li>
+            <button ng-show="inEditMode" ng-click="save()" type="button" class="btn btn-primary btn-sm">
+              <i class="glyphicon glyphicon-floppy-disk"></i>
+              Запис
+            </button>
 
-              <li ng-show="!inEditMode" class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                  <i class="glyphicon glyphicon-tag"></i>
-                  <span>Управление</span><b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
+            <button ng-show="inEditMode" ng-click="exitEditMode()" type="button" class="btn btn-default btn-sm">
+              <i class="glyphicon glyphicon-ban-circle"></i>
+              Отказ
+            </button>
+
+            <div class="btn-group" ng-show="!inEditMode">
+              <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-tag"></i>
+                Управление <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="#">Отбелязване като изготвен</a>
+                </li>
+                <li>
+                  <a href="#">Отбелязване като обработен</a>
+                </li>
                   <li>
-                    <a href="#">Отбелязване като изготвен</a>
-                  </li>
+                  <a href="#">Отбелязване като приключен</a>
+                </li>
                   <li>
-                    <a href="#">Отбелязване като обработен</a>
-                  </li>
-                   <li>
-                    <a href="#">Отбелязване като приключен</a>
-                  </li>
-                   <li>
-                    <a href="#">Отбелязване като анулиран</a>
-                  </li>
-                   <li>
-                    <a href="#">Регистриране</a>
-                  </li>
-                   <li>
-                    <a href="#">Подписване с електронен подпис</a>
-                  </li>
-                   <li>
-                    <a href="#">Премахване на ел. подписи</a>
-                  </li>
+                  <a href="#">Отбелязване като анулиран</a>
+                </li>
+                  <li>
+                  <a href="#">Регистриране</a>
+                </li>
+                  <li>
+                  <a href="#">Подписване с електронен подпис</a>
+                </li>
+                  <li>
+                  <a href="#">Премахване на ел. подписи</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Подписване</a>
+                </li>
+                <li>
+                  <a href="#">Съгласуване</a>
+                </li>
+                <li>
+                  <a href="#">Одобрение</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">За подписване</a>
+                </li>
+                <li>
+                  <a href="#">За съгласуване</a>
+                </li>
+                <li>
+                  <a href="#">За одобрение</a>
+                </li>
+                  <li>
+                  <a href="#">За регистрация</a>
+                </li>
                   <li class="divider"></li>
                   <li>
-                    <a href="#">Подписване</a>
-                  </li>
+                  <a href="#">Връщане в статус чернова</a>
+                </li>
                   <li>
-                    <a href="#">Съгласуване</a>
-                  </li>
+                  <a href="#">Връщане в статус изготвен</a>
+                </li>
                   <li>
-                    <a href="#">Одобрение</a>
-                  </li>
-                  <li class="divider"></li>
+                  <a href="#">Връщане в статус обработен</a>
+                </li>
                   <li>
-                    <a href="#">За подписване</a>
-                  </li>
-                  <li>
-                    <a href="#">За съгласуване</a>
-                  </li>
-                  <li>
-                    <a href="#">За одобрение</a>
-                  </li>
-                   <li>
-                    <a href="#">За регистрация</a>
-                  </li>
-                   <li class="divider"></li>
-                   <li>
-                    <a href="#">Връщане в статус чернова</a>
-                  </li>
-                   <li>
-                    <a href="#">Връщане в статус изготвен</a>
-                  </li>
-                   <li>
-                    <a href="#">Връщане в статус обработен</a>
-                  </li>
-                   <li>
-                    <a href="#">Връщане в статус обработен</a>
-                  </li>
-                </ul>
-              </li>
-              <li ng-show="!inEditMode" class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                  <span>Етапи</span><b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="#">Приключване</a>
-                  </li>
-                  <li>
-                    <a href="#">Следващ</a>
-                  </li>
-                  <li>
-                    <a href="#">Техн. редакция</a>
-                  </li>
-                  <li>
-                    <a href="#">Сторниране</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="nav pull-right">
-              <li ng-show="!doc.isRead">
-                <a ng-click="markAsRead()" title="Маркирай като прочетено" style="cursor: pointer; color: black;">
-                  <i class="glyphicon glyphicon-eye-open"></i>
-                </a>
-              </li>
-              <li ng-show="doc.isRead">
-                <a ng-click="markAsUnread()" title="Маркирай като непрочетено" style="cursor: pointer; color: black;">
-                  <i class="glyphicon glyphicon-eye-close"></i>
-                </a>
-              </li>
-            </ul>
+                  <a href="#">Връщане в статус обработен</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="btn-group" ng-show="!inEditMode">
+              <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                Етапи <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="#">Приключване</a>
+                </li>
+                <li>
+                  <a href="#">Следващ</a>
+                </li>
+                <li>
+                  <a href="#">Техн. редакция</a>
+                </li>
+                <li>
+                  <a href="#">Сторниране</a>
+                </li>
+              </ul>
+            </div>
+
+            <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
+              <i class="glyphicon glyphicon-eye-open"></i>
+              Маркирай като прочетено
+            </button>
+
+            <button ng-show="doc.isRead" ng-click="markAsUnread()" type="button" class="pull-right btn btn-sm btn-default">
+              <i class="glyphicon glyphicon-eye-close"></i>
+              Маркирай като непрочетено
+            </button>
           </div>
         </nav>
 
 
-        <div class="well-sm panel-body form-body">
-          <div class="row">
-            <div class="col-md-3">
-              <span>Дата и час: </span>
-              <span><b>{{ doc.regDate | date:'dd.MM.yyyy HH:mm' }}</b></span>
+        <div class="well-sm panel-body">
+          <div class="well well-sm m_top_10">
+            <div class="row">
+              <div class="col-md-12">
+                <label>ИСКАНЕ по чл. 19, ал. 2, т. 2 от Наредбата за документите</label>
+              </div>
             </div>
-            <div class="col-md-3">
-              <span>Номер: </span>
-              <span><b>{{ doc.regUri }}</b></span>
+
+            <div class="row card">
+              <div class="form-group col-md-3">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon">Дата и час:</span>
+                  <input disabled="disabled" type="text" class="form-control" value="{{ doc.regDate | date:'dd.MM.yyyy HH:mm' }}">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon">Номер:</span>
+                  <input disabled="disabled" type="text" class="form-control" value="{{ doc.regUri }}">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon">Статус:</span>
+                  <input disabled="disabled" type="text" class="form-control" value="{{ doc.docStatusName }}">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon">Тип:</span>
+                  <input disabled="disabled" type="text" class="form-control" value="{{ doc.docDirectionName }}">
+                </div>
+              </div>
             </div>
-            <div class="col-md-2 col-md-offset-2">
-              <span>Статус: </span>
-              <span><b>{{ doc.docStatusName }}</b></span>
-            </div>
-            <div class="col-md-2">
-              <span>Тип: </span>
-              <span><b>{{ doc.docDirectionName }}</b></span>
+            <div class="row card">
+              <div class="form-group col-md-12">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon">{{ doc.docSubjectLabel }}:</span>
+                  <sc-text ng-model="doc.docSubject" ng-disabled="!inEditMode"></sc-text>
+                </div>
+              </div>
             </div>
           </div>
-
-          <br />
-
-          <div class="row">
-            <div class="col-md-12">
-              <span class="control-label-bg">{{ doc.docTypeName }}</span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <span>{{ doc.docSubjectLabel }}</span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <sc-text ng-model="doc.docSubject" ng-readonly="!inEditMode"></sc-text>
-            </div>
-          </div>
-
-          <br />
 
           <gva-tabs tab-list="{
           'Адресати': 'docs/edit/addressing',
@@ -201,12 +184,14 @@
           'Класификация': 'docs/edit/classifications'
           }"></gva-tabs>
 
-          <div ui-view="detailView" class="tabbable">
-          </div>
+          <div class="tab-content">
+            <div ui-view="detailView">
+            </div>
 
-          <div ui-view="popView" class="tabbable">
+            <div ui-view="popView">
+            </div>
+            <div class="clear"></div>
           </div>
-
         </div>
 
       </div>

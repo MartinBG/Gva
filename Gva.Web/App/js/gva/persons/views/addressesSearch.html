@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="row">
     <div class="form-group col-sm-3 col-sm-offset-0">
       <gva-button name="createBtn" gva-click="newAddress()" text="persons.addressSearch.newAddress" class="btn btn-primary" icon="glyphicon-floppy-disk"></gva-button>
@@ -18,10 +18,10 @@
     <sc-column data="part.valid.name" title="persons.addressSearch.valid">
     </sc-column>
     <sc-column width="115px">
-      <gva-button name="editBtn" gva-click="editAddress(item)" text="persons.addressSearch.edit" class="btn-xs btn-info" icon="glyphicon-pencil"></gva-button>
+      <gva-button name="editBtn" gva-click="editAddress(item)" text="persons.addressSearch.edit" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
     <sc-column  width="100px">
-      <gva-button name="deleteBtn" gva-click="deleteAddress(item)" text="persons.addressSearch.remove" class="btn-xs btn-info" icon="glyphicon-remove"></gva-button>
+      <gva-button name="deleteBtn" gva-click="deleteAddress(item)" text="persons.addressSearch.remove" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

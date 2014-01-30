@@ -12,7 +12,7 @@
     "json3": "3.2.4",
     "lodash": "2.1.0",
     "es5-shim": "2.1.0",
-    "bootstrap": "angelyordanov/bootstrap#229469e0598a230c8b11890d128a57618df838d4",
+    "bootstrap": "3.0.3",
     "bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#e16c2d47574bd14ea514d54b679b1fbccfdccb29",
     "datatable": "DataTables/DataTables#a077d24e6a7b49f8db9094197ff04dd0f62720c2",
     "datatablePlugins": "DataTables/Plugins#dec9bace323a3ca5f88cdc5bc431eeeb92b82821",
@@ -31,7 +31,6 @@
     "angular-scenario": "1.2.5"
   },
   "resolutions": {
-    "bootstrap": "229469e0598a230c8b11890d128a57618df838d4",
     "jquery": ">= 1.9.0"
   }
 }

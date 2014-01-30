@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
     <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="corrs.search.displayName"></sc-filter>
     <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
@@ -15,7 +15,7 @@
     <sc-column data="correspondentType.name" title="Тип">
     </sc-column>
     <sc-column>
-      <button type="button" class="btn-xs btn-info" ng-click="editCorr(item)" l10n-text="corrs.search.edit"></button>
+      <button type="button" class="btn btn-xs btn-primary" ng-click="editCorr(item)" l10n-text="corrs.search.edit"></button>
     </sc-column>
   </sc-datatable>
 </div>

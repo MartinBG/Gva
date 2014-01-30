@@ -1,7 +1,7 @@
 ﻿<ng-form class="form-inline">
   <div class="panel panel-default">
-    <div class="panel-heading form-title"><strong l10n-text="persons.personDataDirective.title"></strong></div>
-    <div class="well-sm panel-body form-body">
+    <div class="panel-heading"><strong l10n-text="persons.personDataDirective.title"></strong></div>
+    <div class="well-sm panel-body">
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personDataDirective.firstName"></label>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.lin.$dirty && form.lin.$invalid}">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.lin.$dirty && form.lin.$invalid && !form.lin.$error.$pending, 'has-warning': form.lin.$error.$pending}">
           <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
           <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="linValidationSpan" ng-show="form.lin.$dirty && form.lin.$invalid && !form.lin.$error.$pending" class="glyphicon glyphicon-warning-sign" title="{{form.lin.$error.required && 'Задължително поле' || form.lin.$error.unique && 'Невалиден ЛИН'}}"></span>

@@ -53,7 +53,7 @@ Usage <sc-datatable ng-model="data"
               sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
-                angular.element('.dataTables_length select').select2();
+                angular.element('.dataTables_length select').addClass('input-sm').select2();
               },
               oLanguage: {
                 sInfo: l10n.get('scaffolding.scDatatable.info'),

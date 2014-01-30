@@ -1,10 +1,10 @@
 ﻿<div>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" ng-class="{'nav-tabs-large': secondTabList.length}">
     <li ng-class="{active: tab.isActive}" ng-repeat="tab in tabList">
       <a ng-click="openTab(tab)" style="cursor: pointer">{{tab.title}}</a>
     </li>
   </ul>
-  <ul class="nav nav-pills">
+  <ul class="nav nav-tabs" ng-show="secondTabList.length">
     <li ng-class="{active: tab.isActive}" ng-repeat="tab in secondTabList">
       <a ng-click="openTab(tab)" style="cursor: pointer">{{tab.title}}</a>
     </li>

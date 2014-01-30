@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="row">
     <div class="form-group col-sm-3 col-sm-offset-0">
       <gva-button name="createBtn" gva-click="newDocumentCheck()" text="persons.checkSearch.newCheck" class="btn btn-primary" icon="glyphicon-floppy-disk"></gva-button>
@@ -21,7 +21,7 @@
     </sc-column>
     <sc-column data="part.authorization.name" title="persons.checkSearch.authorization">
     </sc-column>
-    <sc-column data="part.licenceType.name" width="70px" title="persons.checkSearch.licenceType">
+    <sc-column data="part.licenceType.name" title="persons.checkSearch.licenceType">
     </sc-column>
     <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
     </sc-column>
@@ -36,11 +36,11 @@
     <sc-column data="file" title="persons.checkSearch.file">
       <span>{{item.file[0].name}}</span>
     </sc-column>
-    <sc-column width="115px">
-      <gva-button name="editBtn" gva-click="editDocumentCheck(item)" text="persons.checkSearch.edit" class="btn-xs btn-info" icon="glyphicon-pencil"></gva-button>
+    <sc-column>
+      <gva-button name="editBtn" gva-click="editDocumentCheck(item)" text="persons.checkSearch.edit" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
-    <sc-column width="100px">
-      <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" text="persons.checkSearch.remove" class="btn-xs btn-info" icon="glyphicon-remove"></gva-button>
+    <sc-column>
+      <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" text="persons.checkSearch.remove" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>
