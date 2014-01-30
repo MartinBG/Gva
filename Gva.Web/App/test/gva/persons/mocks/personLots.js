@@ -11,12 +11,13 @@
       personDocumentOthers = require('./person-document-other.sample'),
       personDocumentTrainings = require('./person-document-training.sample'),
       personDocumentMedicals = require('./person-document-med.sample'),
-      personDocumentChecks = require('./person-document-checks.sample');
+      personDocumentChecks = require('./person-document-checks.sample'),
+      personFlyingExperiences = require('./person-flyingExperience.sample');
 
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 20,
+      nextIndex: 22,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -111,7 +112,22 @@
       personDocumentTrainings: [
         {
           partIndex: 12,
-          part: personDocumentTrainings.person1Training1
+          part: personDocumentTrainings.person1Training1,
+          file: [{
+            key: '311-93-wb',
+            name: 'test1.pdf',
+            relativePath: '../folder1/folder3/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application111'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application222'
+            }
+          ]
         },
         {
           partIndex: 13,
@@ -119,7 +135,22 @@
         },
         {
           partIndex: 14,
-          part: personDocumentTrainings.person1Training3
+          part: personDocumentTrainings.person1Training3,
+          file: [{
+            key: '311-93-wb',
+            name: 'test3.pdf',
+            relativePath: '../folder1/folder3/'
+          }],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application122'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application212'
+            }
+          ]
         },
         {
           partIndex: 15,
@@ -144,6 +175,16 @@
         {
           partIndex: 19,
           part: personDocumentChecks.person1Check2
+        }
+      ],
+      personFlyingExperiences: [
+        {
+          partIndex: 20,
+          part: personFlyingExperiences.person1FlyingExperience1
+        },
+        {
+          partIndex: 21,
+          part: personFlyingExperiences.person1FlyingExperience2
         }
       ]
     },

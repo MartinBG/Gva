@@ -296,3 +296,10 @@ form.card input.form-control[disabled]
   margin: 5px;
   padding: 0;
 }
+
+.padding-top10 {
+  padding-top: 10px;
+}
+.padding6 {
+  padding: 6px;
+}

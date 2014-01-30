@@ -135,6 +135,58 @@
           locationIndicator: 'Индикатор на местоположение',
           ratingType: 'Тип ВС'
         },
+        personDocumentTrainingDirective: {
+          title: 'Обучение',
+          staffType: 'Тип персонал',
+          documentNumber: 'Номер на документ',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издаден от',
+          ratingType: 'Тип ВС',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          locationIndicator: 'Индикатор за местоположение',
+          sector: 'Сектор/работно място',
+          engLangLevel: 'Ниво на език',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валиден',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа'
+        },
+        personFlyingExperienceDirective: {
+          title: 'Летателен/практически опит',
+          staffType: 'Тип персонал',
+          month: 'За месец',
+          year: 'Година',
+          organization: 'Организация',
+          aircraft: 'Рег.знак на ВС',
+          ratingType: 'Тип ВС',
+          ratingClass: 'Клас',
+          licenceType: 'Кв.ниво',
+          authorization: 'Разрешение',
+          locationIndicator: 'Местоположение',
+          sector: 'Сектор/раб.място',
+          experienceRole: 'Роля',
+          experienceMeasure: 'Вид опит',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          documentDate: 'Дата на документа',
+          dayDuration: 'Нальот(дневен)',
+          nightDuration: 'Нальот(нощен)',
+          IFR: 'IFR',
+          VFR: 'VFR',
+          dayLandings: 'Кацания(ден)',
+          nightLandings: 'Кацания(нощ)',
+          total: 'Общо количество (с натрупване)',
+          totalDoc: 'Общо количество (по документа)',
+          totalLastMonths: 'Общ нальот за посл. 12 месеца',
+          notUnique: 'Данните се дублират с вече съществуващ запис'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -299,6 +351,63 @@
           cancel: 'Отказ'
         },
         newCheck: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        documentTrainingSearch: {
+          staffType: 'Тип персонал',
+          documentNumber: 'Номер на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издаден от',
+          ratingType: 'Тип ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валиден',
+          notes: 'Бележки',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          file: 'Файл',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newDocumentTraining: 'Нов документ'
+        },
+        newDocumentTraining: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentTraining: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        flyingExperienceSearch: {
+          staffType: 'Тип персонал',
+          month: 'За месец',
+          year: 'Година',
+          organization: 'Организация',
+          aircraft: 'Рег.знак на ВС',
+          ratingType: 'Тип ВС',
+          ratingClass: 'Клас',
+          licenceType: 'Кв.ниво',
+          authorization: 'Разрешение',
+          locationIndicator: 'Местоположение',
+          sector: 'Сектор/раб.място',
+          experienceRole: 'Роля',
+          experienceMeasure: 'Вид опит',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          documentDate: 'Дата на документа',
+          edit: 'Редакция',
+          remove: 'Изтрий',
+          newFlyingExperience: 'Нов летателен/практически опит'
+        },
+        flyingExperienceNew: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        flyingExperienceEdit: {
           save: 'Запис',
           cancel: 'Отказ'
         }

@@ -15,7 +15,7 @@
       ratingType: nomenclatures.get('ratingTypes', 'B737'),
       aircraftTypeGroup: nomenclatures.get('aircraftTypeGroups', 'NoType'),
       ratingClass: '',
-      authorization: nomenclatures.get('authorizations', 'FIA'),
+      authorization: nomenclatures.get('authorizations', 'FI(A)'),
       licenceType: nomenclatures.get('licenceTypes', 'PPLA'),
       locationIndicator: nomenclatures.get('locationIndicators', 'LBBG'),
       sector: 'Сектор1',

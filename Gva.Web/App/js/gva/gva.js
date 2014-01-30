@@ -57,6 +57,16 @@
       templateUrl: 'gva/persons/forms/personDocumentCheck.html',
       controller: 'PersonDocumentCheckCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentTraining',
+      templateUrl: 'gva/persons/forms/personDocumentTraining.html',
+      controller: 'PersonDocumentTrainingCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonFlyingExperience',
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
+      controller: 'PersonFlyingExperienceCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -239,7 +249,7 @@
           }
         }
       })
-            .state({
+      .state({
         name: 'persons.documentEducations',
         title: 'Образования',
         parent: 'persons.view',
@@ -421,6 +431,90 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/documentMedicalsEdit.html',
             controller: 'DocumentMedicalsEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings',
+        title: 'Обучение',
+        parent: 'persons.view',
+        url: '/documentTrainings',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.documentTrainings.search',
+        parent: 'persons.documentTrainings',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsSearch.html',
+            controller: 'DocumentTrainingsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings.new',
+        title: 'Нов документ за самоличност',
+        parent: 'persons.documentTrainings',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsNew.html',
+            controller: 'DocumentTrainingsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.documentTrainings.edit',
+        title: 'Редакция на документ за самоличност',
+        parent: 'persons.documentTrainings',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/documentTrainingsEdit.html',
+            controller: 'DocumentTrainingsEditCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences',
+        title: 'Летателен/практически опит',
+        parent: 'persons.view',
+        url: '/flyingExperiences',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.flyingExperiences.search',
+        parent: 'persons.flyingExperiences',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesSearch.html',
+            controller: 'FlyingExperiencesSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences.new',
+        title: 'Нов летателен/практически опит',
+        parent: 'persons.flyingExperiences',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesNew.html',
+            controller: 'FlyingExperiencesNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.flyingExperiences.edit',
+        title: 'Редакция на летателен/практически опит',
+        parent: 'persons.flyingExperiences',
+        url: '/:ind',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/flyingExperiencesEdit.html',
+            controller: 'FlyingExperiencesEditCtrl'
           }
         }
       });
