@@ -3,6 +3,8 @@
   'use strict';
 
   function FlyingExperiencesEditCtrl($scope, $state, $stateParams, PersonFlyingExperience) {
+    $scope.isEdit = true;
+
     PersonFlyingExperience
       .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
       .then(function (flyingExperience) {
@@ -12,7 +14,7 @@
     $scope.save = function () {
       $scope.personFlyingExperienceForm.saveIsClicked = true;
       $scope.personFlyingExperienceForm.$validate()
-        .then(function (){
+        .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {
             return PersonFlyingExperience
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personFlyingExperience)

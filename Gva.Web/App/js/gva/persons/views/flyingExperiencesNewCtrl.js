@@ -3,6 +3,7 @@
   'use strict';
 
   function FlyingExperiencesNewCtrl($scope, $state, $stateParams, PersonFlyingExperience) {
+    $scope.isEdit = false;
 
     $scope.save = function () {
       $scope.personFlyingExperienceForm.saveIsClicked = true;
@@ -10,7 +11,7 @@
         .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {
             return PersonFlyingExperience
-              .save({ id: $stateParams.id}, $scope.personFlyingExperience)
+              .save({ id: $stateParams.id }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
                 return $state.go('persons.flyingExperiences.search');

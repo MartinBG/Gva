@@ -1,14 +1,14 @@
-﻿<ng-form class="form-inline" sc-validate="{check: checkUniqueness}">
-  <div>
-    <label ng-show="personFlyingExperienceForm.$invalid" l10n-text="persons.personFlyingExperienceDirective.notUnique"></label>
-  </div>
+﻿<ng-form class="form-inline" sc-validate="{}">
+<!--  <div>
+    <label ng-show="personFlyingExperienceForm.$invalid && personFlyingExperienceForm.$validated" l10n-text="persons.personFlyingExperienceDirective.notUnique"></label>
+  </div>-->
   <div class="panel panel-default">
     <div class="panel-heading form-title"><strong l10n-text="persons.personFlyingExperienceDirective.title"></strong></div>
     <div class="well-sm panel-body form-body">
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.staffType"></label>
-          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true" ng-disabled="isEdit"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true" ng-disabled="$parent.isEdit"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3" ng-show="model.staffType.code === 'F'">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.month"></label>
@@ -65,7 +65,8 @@
       </div>
     </div>
   </div>
-  <div class="well row">
+  <div class="well">
+    <div class = "row">
     <div class="form-group col-sm-3">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
       <span name="experienceRoleIndicatorValidationSpan" ng-show="form.$validated && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
@@ -73,10 +74,11 @@
     </div>
     <div class="form-group col-sm-3">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure"></label>
-      <span name="experienceMeasureValidationSpan" ng-show="form.experienceMeasure.$dirty && form.experienceMeasure.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceMeasure.$error.required && 'Задължително поле'}}"></span>
+      <span name="experienceMeasureValidationSpan" ng-show="form.$validated && form.experienceMeasure.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceMeasure.$error.required && 'Задължително поле'}}"></span>
       <sc-nomenclature ng-model="model.experienceMeasure" name="experienceMeasure" alias="'experienceMeasures'" load="true" ng-required="true"></sc-nomenclature>
     </div>
   </div>
+    </div>
   <div class="well" ng-show="model.staffType.code === 'F'">
     <div class="row">
       <div class="form-group col-sm-2">
@@ -133,7 +135,7 @@
       </div>
     </div>
   </div>
-  <div class="well row">
+  <div class="well">
     <div class="row">
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.total"></label>
@@ -143,12 +145,13 @@
       </div>
       <div class="form-group col-sm-4" ng-show="model.staffType.code === 'F'">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
-        <span name="totalDocValidationSpan" ng-show="form.hours.$invalid || form.minutes.$invalid"
+        <span name="totalDocValidationSpan" ng-show="form.hours.$invalid || form.minutes.$invalid && form.$validated"
               class="glyphicon glyphicon-warning-sign"
               title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
       </div>
     </div>
-
+    
+    <div class="row">
     <div class="form-group col-sm-2">
       <div class="input-group">
         <span class="input-group-addon">
@@ -178,10 +181,11 @@
           <span class="glyphicon glyphicon-time">
           </span>
         </span>
-        <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="true"></sc-int>
+        <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.code === 'F'"></sc-int>
         <span class="input-group-addon padding6">:</span>
-        <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="true"></sc-int>
+        <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.code === 'F'"></sc-int>
       </div>
     </div>
+      </div>
   </div>
 </ng-form>
