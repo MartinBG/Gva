@@ -1,73 +1,36 @@
 ﻿<div>
-  <!--<div class="form-inline">-->
   <div class="panel panel-default">
-
-    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+    <nav class="panel-heading">
+      <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
+        <button sc-click="save()" type="button" class="btn btn-default btn-sm">
+          <i class="glyphicon glyphicon-pencil"></i>
+          Продължи
         </button>
-      </div>
-
-      <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
-        <ul class="nav navbar-nav">
-          <li>
-            <a sc-click="save()">
-              <i class="glyphicon glyphicon-pencil"></i><span>&nbsp;Продължи</span>
-            </a>
-          </li>
-          <li>
-            <a sc-click="save()">
-              <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Регистрирай и продължи</span>
-            </a>
-          </li>
-          <li>
-            <a sc-click="cancel()">
-              <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
-            </a>
-          </li>
-        </ul>
+        <button sc-click="save()" type="button" class="btn btn-default btn-sm">
+          <i class="glyphicon glyphicon-ok"></i>
+          Регистрирай и продължи
+        </button>
+        <button sc-click="cancel()" type="button" class="btn btn-default btn-sm">
+          <i class="glyphicon glyphicon-remove"></i>
+          Отказ
+        </button>
       </div>
     </nav>
 
-
-    <div class="well-sm panel-body form-body">
-      <form name="docForm" class="form-horizontal" style="padding-left: 30px;">
+    <div class="well-sm panel-body">
+      <form name="docForm">
         <div class="well-sm panel-body form-body">
-
           <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
               <sc-text ng-model="doc.caseRegUri" name="caseRegUri"></sc-text>
             </div>
-          </div>
-
-          <div class="row">
-              <button ng-repeat="docFormatType in docFormatTypes" type="button" ng-class="docFormatType.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docFormatTypeChange($index)">{{docFormatType.name}}</button>
-          </div>
-          <br />
-          <div class="row">
-              <button ng-repeat="docCasePartType in docCasePartTypes" type="button" ng-class="docCasePartType.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docCasePartTypeChange($index)">{{docCasePartType.name}}</button>
-          </div>
-          <br />
-          <div class="row">
-              <button ng-repeat="docDirection in docDirections" type="button" ng-class="docDirection.isActive ? 'btn-large-fast btn-primary' : 'btn-large-fast'"  ng-click="docDirectionChange($index)">{{docDirection.name}}</button>
-          </div>
-          <br />
-
-          <div class="row">
-            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
+            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
               <span name="docTypeGroupIdValidationSpan" ng-show="saveClicked && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
               <sc-nomenclature  ng-model="doc.docTypeGroupId" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
+            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
               <span name="docTypeIdValidationSpan" ng-show="saveClicked && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
               <sc-nomenclature  ng-model="doc.docTypeId" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: doc.docTypeGroupId ? doc.docTypeGroupId.nomTypeValueId : 0 }" required></sc-nomenclature>
@@ -75,30 +38,61 @@
           </div>
 
           <div class="row">
-            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docSubject.$invalid && saveClicked}">
+            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docSubject.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
               <span name="docSubjectValidationSpan" ng-show="saveClicked && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
               <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
               <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondents'" load="true" multiple></sc-nomenclature>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-3" ng-class="{'has-error': docForm.numberOfDocuments.$invalid && saveClicked}">
+            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.numberOfDocuments.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.numberOfDocuments"></label>
               <span name="numberOfDocumentsValidationSpan" ng-show="saveClicked && docForm.numberOfDocuments.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.numberOfDocuments.$error.unique && 'С-та трябва да е положително число'}}"></span>
               <sc-text ng-model="doc.numberOfDocuments" name="numberOfDocuments" required sc-validate="{unique: isNumberOfDocsValid}"></sc-text>
             </div>
           </div>
 
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <div class="btn-group">
+                <button type="button" class="btn"
+                  ng-repeat="docFormatType in docFormatTypes"
+                  ng-class="{'btn-primary': docFormatType.isActive, 'btn-default': !docFormatType.isActive}"
+                  ng-click="docFormatTypeChange($index)">
+                  {{docFormatType.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <div class="btn-group">
+                <button type="button" class="btn"
+                  ng-repeat="docCasePartType in docCasePartTypes" 
+                  ng-class="{'btn-primary': docCasePartType.isActive, 'btn-default': !docCasePartType.isActive}"
+                  ng-click="docCasePartTypeChange($index)">
+                  {{docCasePartType.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <div class="btn-group">
+                <button type="button"  class="btn"
+                  ng-repeat="docDirection in docDirections"
+                  ng-class="{'btn-primary': docDirection.isActive, 'btn-default': !docDirection.isActive}"
+                  ng-click="docDirectionChange($index)">
+                  {{docDirection.name}}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        
       </form>
     </div>
   </div>

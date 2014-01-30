@@ -234,39 +234,6 @@ form.card input.form-control[disabled]
   border-top: 1px solid #e5e5e5;
 }
 
-.control-label-bg
-{
-  padding: 7px 10px;
-  background-color: #E9E9E9;
-  display: block;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.control-label-status
-{
-  /*float: right;*/
-  margin: 0px 0px 10px 5px;
-  padding: 5px 10px;
-  background-color: #E9E9E9;
-}
-
-.btn-large-fast
-{
-  padding: 11px 19px;
-  font-size: 15px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  width: 196px;
-}
-
-.search-addon
-{
-  padding: 5px 12px;
-  cursor: pointer;
-}
-
 /* Initial loader */
 #initial-loader
 {
