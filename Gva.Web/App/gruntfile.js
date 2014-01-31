@@ -100,6 +100,7 @@ module.exports = function (grunt) {
     cssBundles: {
       '<%= buildDir %>/css/styles.css': [
         'bower_components/bootstrap/dist/css/bootstrap.css',
+        'bower_components/font-awesome/css/font-awesome.css',
         'bower_components/select2/select2.css',
         'bower_components/select2-bootstrap-css/select2-bootstrap.css',
         'bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.css',
@@ -166,7 +167,8 @@ module.exports = function (grunt) {
     copy: {
       resources: {
         files: [
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/bootstrap/fonts/' },
+          { expand:true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/bootstrap/dist/fonts/' },
+          { expand:true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/font-awesome/fonts/' },
           { expand:true, src: '{*.png,*.gif}', dest: '<%= buildDir %>/css/'   , cwd: 'bower_components/select2/' },
           { expand:true, src: '**'           , dest: '<%= buildDir %>/images/', cwd: 'bower_components/datatablePlugins/integration/bootstrap/images/' },
           { expand:true, src: '**'           , dest: '<%= buildDir %>/img'    , cwd: 'bower_components/blueimp-file-upload/img/' },

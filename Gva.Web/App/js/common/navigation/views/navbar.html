@@ -12,18 +12,18 @@
         <li ng-repeat-start="item in items"
           ng-class="{'active': item.active, 'dropdown': item.items.length > 0 && !item.url, 'dropdown\-split\-left': item.items.length > 0 && item.url}">
           <a ng-if="item.url" ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-            <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+            <span ng-if="item.icon" ng-class="item.icon"></span>
             <span>{{item.text}}</span>
           </a>
           <a ng-if="item.items.length > 0 && !item.url" class="dropdown-toggle">
-            <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+            <span ng-if="item.icon" ng-class="item.icon"></span>
             <span>{{item.text}}</span>
             <b class="caret"></b>
           </a>
           <ul ng-if="item.items.length > 0 && !item.url" class="dropdown-menu">
             <li ng-repeat="item in item.items">
               <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-                <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+                <span ng-if="item.icon" ng-class="item.icon"></span>
                 <span>{{item.text}}</span>
               </a>
             </li>
@@ -36,7 +36,7 @@
           <ul class="dropdown-menu pull-right">
             <li ng-repeat="item in item.items">
               <a ng-href="{{item.url}}" target="{{item.newTab && '_blank' || '_self' }}">
-                <span ng-if="item.icon" class="glyphicon" ng-class="item.icon"></span>
+                <span ng-if="item.icon" ng-class="item.icon"></span>
                 <span>{{item.text}}</span>
               </a>
             </li>
