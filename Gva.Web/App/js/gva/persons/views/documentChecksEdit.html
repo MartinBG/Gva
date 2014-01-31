@@ -3,11 +3,11 @@
 
     <gva-person-document-check name="personDocumentCheckForm" ng-model="personDocumentCheck.part"></gva-person-document-check>
 
-    <gva-person-scanned-document name="personDocumentCheckForm" ng-model="personDocumentCheck.file"></gva-person-scanned-document>
+    <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentCheck.file"></gva-person-scanned-document>
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newCheck.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentCheckForm.$invalid"></gva-button>
+        <gva-button name="saveBtn" gva-click="save()" text="persons.newCheck.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentCheckForm.$pristine"></gva-button>
         <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newCheck.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
       </div>
     </div>
