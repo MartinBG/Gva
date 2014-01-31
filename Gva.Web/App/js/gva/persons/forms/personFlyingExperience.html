@@ -67,12 +67,12 @@
   </div>
   <div class="well">
     <div class = "row">
-    <div class="form-group col-sm-3">
+    <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.experienceRole.$invalid}">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
       <span name="experienceRoleIndicatorValidationSpan" ng-show="form.$validated && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
       <sc-nomenclature ng-model="model.experienceRole" name="experienceRole" alias="'experienceRoles'" load="true" ng-required="true"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-3">
+    <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.experienceMeasure.$invalid}">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure"></label>
       <span name="experienceMeasureValidationSpan" ng-show="form.$validated && form.experienceMeasure.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceMeasure.$error.required && 'Задължително поле'}}"></span>
       <sc-nomenclature ng-model="model.experienceMeasure" name="experienceMeasure" alias="'experienceMeasures'" load="true" ng-required="true"></sc-nomenclature>
@@ -143,7 +143,8 @@
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths"></label>
       </div>
-      <div class="form-group col-sm-4" ng-show="model.staffType.code === 'F'">
+      <div class="form-group col-sm-4" ng-show="model.staffType.code === 'F'"
+        ng-class="{'has-error': form.hours.$invalid || form.minutes.$invalid && form.$validated}">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
         <span name="totalDocValidationSpan" ng-show="form.hours.$invalid || form.minutes.$invalid && form.$validated"
               class="glyphicon glyphicon-warning-sign"

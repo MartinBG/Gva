@@ -73,7 +73,8 @@
           var personFlyingExperience = $jsonData;
 
           personFlyingExperience.partIndex = person.nextIndex++;
-
+          person.personFlyingExperiences =
+            person.personFlyingExperiences ? person.personFlyingExperiences : [];
           person.personFlyingExperiences.push(personFlyingExperience);
 
           return [200];
