@@ -10,15 +10,15 @@
       </tr>
     </thead>
     <tbody ng-repeat="dr in doc.docRelations">
-      <tr ng-style="{ color: dr.docDocCasePartTypeStyleColor, 'font-weight': dr.isCurrent ? 'bold' : 'normal'}">
-        <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td>{{ dr.regNumberCol }}</td>
+      <tr ng-style="{ 'font-weight': dr.docId === doc.docId ? 'bold' : 'normal'}">
+        <td>{{ dr.regDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ dr.regNumber + ' | ' + dr.casePartType + ' | ' + dr.direction }}</td>
         <!--todo must be html rendered-->
-        <td>{{ dr.docDocStatusName }}</td>
-        <td>{{ dr.descriptionCol }}</td>
+        <td>{{ dr.statusName }}</td>
+        <td>{{ dr.description }}</td>
         <!--todo must be html rendered-->
         <td style="text-align: right;">
-          <a ng-click="viewDoc(doc.docId)" style="cursor: pointer;">преглед
+          <a ng-click="viewDoc(dr.docId)" style="cursor: pointer;">преглед
           </a>
         </td>
       </tr>

@@ -40,6 +40,10 @@
     $scope.viewDoc = function (doc) {
       return $state.go('docs/edit/addressing', { docId: doc.docId });
     };
+
+    $scope.newDoc = function () {
+      return $state.go('docs/new');
+    };
   }
 
   DocsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc'];

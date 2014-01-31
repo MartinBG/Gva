@@ -10,6 +10,7 @@
       return [
         {
           docId: 1,
+          parentDocId: null,
           docStatusId: 1,
           docStatusName: 'Чернова',
           docSubject: 'Заявление',
@@ -34,6 +35,7 @@
           caseRegUri: undefined,
           docFormatTypeId: 1,
           docCasePartTypeId: 1,
+          docCasePartTypeName: 'Публичен',
           docTypeGroupId: 1,
           docCorrespondents: [],
           docUnits: [],
@@ -140,6 +142,7 @@
           ]
         }, {
           docId: 2,
+          parentDocId: null,
           docStatusId: 2,
           docStatusName: 'Изготвен',
           docSubjectLabel: 'Относно',
@@ -147,7 +150,7 @@
           docTypeId: 1,
           docDirectionName: 'Входящ',
           docDirectionId: 1,
-          docTypeName: 'ИСКАНЕ по чл. 21, ал. 2, т. 2 от Наредбата за документите',
+          docTypeName: 'Издаване на свидетелство за правоспособност на авиационен персонал',
           regDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
           regUri: '000030-2-05.01.2014',
           regIndex: '000030',
@@ -164,6 +167,7 @@
           caseRegUri: undefined,
           docFormatTypeId: 1,
           docCasePartTypeId: 1,
+          docCasePartTypeName: 'Публичен',
           docTypeGroupId: 1,
           docCorrespondents: [],
           docUnits: [],
@@ -247,35 +251,7 @@
               isCurrentStage: false
             }
           ],
-          docRelations: [
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
-              docDocStatusName: 'Чернова',
-              descriptionCol: 'ИСКАНЕ по чл. 6 и 18 от Наредбата за документите'
-            },
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: 'Вътрешен | Вътрешен',
-              docDocStatusName: 'Приключен',
-              descriptionCol: 'Резолюция: Резолюция'
-            },
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: 'Вътрешен | Вътрешен',
-              docDocStatusName: 'Приключен',
-              descriptionCol: 'Задача: Задача'
-            }
-          ],
+          docRelations: _(docCases).filter({ docCaseId: 2 }).first().docCase,
           docClassifications: [
             {
               classificationName: 'Всички документи',
@@ -293,6 +269,7 @@
           ]
         }, {
           docId: 3,
+          parentDocId: null,
           docStatusId: 3,
           docStatusName: 'Обработен',
           docSubjectLabel: 'Относно',
@@ -317,6 +294,7 @@
           caseRegUri: undefined,
           docFormatTypeId: 1,
           docCasePartTypeId: 1,
+          docCasePartTypeName: 'Публичен',
           docTypeGroupId: 1,
           docCorrespondents: [],
           docUnits: [],
@@ -400,35 +378,7 @@
               isCurrentStage: false
             }
           ],
-          docRelations: [
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: '000030-2-08.01.2014<br/>Входящ | Публичен',
-              docDocStatusName: 'Чернова',
-              descriptionCol: 'ИСКАНЕ по чл. 6 и 18 от Наредбата за документите'
-            },
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: 'Вътрешен | Вътрешен',
-              docDocStatusName: 'Приключен',
-              descriptionCol: 'Резолюция: Резолюция'
-            },
-            {
-              docId: 827068,
-              isCurrent: true,
-              docDocCasePartTypeStyleColor: 'black',
-              docRegDate: '2014-01-08T17:22:14.58',
-              regNumberCol: 'Вътрешен | Вътрешен',
-              docDocStatusName: 'Приключен',
-              descriptionCol: 'Задача: Задача'
-            }
-          ],
+          docRelations: _(docCases).filter({ docCaseId: 3 }).first().docCase,
           docClassifications: [
             {
               classificationName: 'Всички документи',

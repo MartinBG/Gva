@@ -364,6 +364,15 @@
         choosePerson: {
           choose: 'Избери',
           cancel: 'Отказ'
+        },
+        link: {
+          chooseDoc: 'Избор на документ',
+          cancel: 'Отказ',
+          clear: 'Изчисти',
+          document: 'Документ',
+          docNumber: 'Рег.№',
+          docStatus: 'Статус',
+          docName: 'Име'
         }
       }
     });

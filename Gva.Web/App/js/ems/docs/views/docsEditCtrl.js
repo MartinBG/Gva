@@ -12,10 +12,6 @@
   ) {
     $scope.doc = Doc.get({ docId: $stateParams.docId });
 
-    //Doc.get({ docId: $stateParams.docId }).$promise.then(function (doc) {
-    //  $scope.doc = doc;
-    //});
-
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
@@ -69,6 +65,34 @@
       }
     };
 
+    $scope.attachNewDoc = function () {
+      $state.go('docs/new', { parentDocId: $scope.doc.docId });
+    };
+
+    $scope.attachDoc = function (docTypeId) {
+
+      var newDoc = {
+        parentDocId:  $scope.doc.docId,
+        docFormatTypeId: 3,
+        docFormatTypeName: 'Хартиен',
+        docCasePartTypeId: 1,
+        docCasePartTypeName: 'Публичен',
+        docDirectionId: 1,
+        docDirectionName: 'Входящ',
+        docTypeId: docTypeId,
+        docTypeName:
+          docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
+        docSubject:
+          docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
+        correspondents: $scope.doc.correspondents,
+        correspondentName: $scope.doc.correspondentName
+      };
+
+      Doc.save(newDoc).$promise.then(function (savedDoc) {
+        $state.go('docs/edit/addressing', { docId: savedDoc.docId });
+      });
+
+    };
   }
 
   DocsEditCtrl.$inject = [

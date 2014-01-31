@@ -35,7 +35,7 @@
       return proxy;
     });
   });
-  
+
   angular.module('app').run(function ($httpBackend, $httpBackendConfigurator) {
     $httpBackendConfigurator.configure($httpBackend);
   });

@@ -1,4 +1,4 @@
-﻿/*global angular, _, require*/
+﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
 
@@ -6,47 +6,55 @@
     $q,
     $scope,
     $state,
-    Doc
+    $stateParams,
+    Doc,
+    Nomenclature
   ) {
     $scope.saveClicked = false;
+    $scope.isChild = !!$stateParams.parentDocId;
 
-    var nomenclatures = require('./nomenclatures.sample');
-
-    Doc.createNew().$promise
-      .then(function (result) {
-        $scope.doc = result;
-
-        $scope.docFormatTypes = nomenclatures.docFormatTypes;
-        $scope.doc.docFormatTypeId =
-          _($scope.docFormatTypes).filter({ 'isActive': true }).first().docFormatTypeId;
-
-        $scope.docCasePartTypes = nomenclatures.docCasePartTypes;
-        $scope.doc.docCasePartTypeId =
-          _($scope.docCasePartTypes).filter({ 'isActive': true }).first().docCasePartTypeId;
-
-        $scope.docDirections = nomenclatures.docDirections;
-        $scope.doc.docDirectionId =
-          _($scope.docDirections).filter({ 'isActive': true }).first().docDirectionId;
-        $scope.doc.docDirectionName =
-          _($scope.docDirections).filter({ 'isActive': true }).first().name;
+    if ($scope.isChild) {
+      Doc.get({ docId: $stateParams.parentDocId }).$promise.then(function (parentDoc) {
+        $scope.parentDoc = parentDoc;
+        $scope.parentDocInfo =
+          'Към ' + parentDoc.regUri + ' ' + parentDoc.docTypeName + ' ' + parentDoc.docSubject;
       });
+    }
+
+    $scope.doc = {
+      numberOfDocuments: 1,
+      parentDocId: $stateParams.parentDocId
+    };
+
+    Nomenclature.query({ alias: 'docFormatTypes' }).$promise.then(function (result) {
+      $scope.docFormatTypes = result;
+      $scope.doc.docFormatTypeId = _($scope.docFormatTypes).first().docFormatTypeId;
+      $scope.doc.docFormatTypeName = _($scope.docFormatTypes).first().name;
+    });
+
+    Nomenclature.query({ alias: 'docCasePartTypes' }).$promise.then(function (result) {
+      $scope.docCasePartTypes = result;
+      $scope.doc.docCasePartTypeId = _($scope.docCasePartTypes).first().docCasePartTypeId;
+      $scope.doc.docCasePartTypeName = _($scope.docCasePartTypes).first().name;
+    });
+
+    Nomenclature.query({ alias: 'docDirections' }).$promise.then(function (result) {
+      $scope.docDirections = result;
+      $scope.doc.docDirectionId = _($scope.docDirections).first().docDirectionId;
+      $scope.doc.docDirectionName = _($scope.docDirections).first().name;
+    });
 
     $scope.isNumberOfDocsValid = function (value) {
-      var parsedValue = parseInt(value, 10);
-      if (!isNaN(parsedValue) && parsedValue > 0) {
-        return true;
-      }
-
-      return false;
+      return (/^\+?(0|[1-9]\d*)$/).test(value);
     };
 
     $scope.docFormatTypeChange = function ($index) {
       _.forOwn($scope.docFormatTypes, function (item) {
         item.isActive = false;
       });
-
       $scope.docFormatTypes[$index].isActive = true;
       $scope.doc.docFormatTypeId = $scope.docFormatTypes[$index].docFormatTypeId;
+      $scope.doc.docFormatTypeName = $scope.docFormatTypes[$index].name;
     };
 
     $scope.docCasePartTypeChange = function ($index) {
@@ -56,13 +64,13 @@
 
       $scope.docCasePartTypes[$index].isActive = true;
       $scope.doc.docCasePartTypeId = $scope.docCasePartTypes[$index].docCasePartTypeId;
+      $scope.doc.docCasePartTypeName = $scope.docCasePartTypes[$index].name;
     };
 
     $scope.docDirectionChange = function ($index) {
       _.forOwn($scope.docDirections, function (item) {
         item.isActive = false;
       });
-
       $scope.docDirections[$index].isActive = true;
       $scope.doc.docDirectionId = $scope.docDirections[$index].docDirectionId;
       $scope.doc.docDirectionName = $scope.docDirections[$index].name;
@@ -70,23 +78,40 @@
 
     $scope.save = function () {
       $scope.saveClicked = true;
-
       if ($scope.docForm.$valid) {
-        $scope.doc.docTypeGroupId = $scope.doc.docTypeGroupId.nomTypeValueId;
-        $scope.doc.docTypeId = $scope.doc.docTypeId.nomTypeValueId;
-        $scope.doc.correspondentName = 'TBD';
-        $scope.doc.statusId = 2;
-        $scope.doc.regDate = new Date();
-        $scope.doc.docStatusName = 'Чернова';
 
-        $scope.doc.$saveNew().then(function () {
-          $state.go('docs/search');
+        $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomTypeValueId;
+        $scope.doc.docTypeGroupName =  $scope.docTypeGroup.name;
+
+        $scope.doc.docTypeId = $scope.docType.nomTypeValueId;
+        $scope.doc.docTypeName =  $scope.docType.name;
+
+        if ($scope.doc.docCorrespondents && $scope.doc.docCorrespondents.length > 0) {
+          $scope.doc.correspondentName = $scope.doc.docCorrespondents.map(function (correspondent) {
+            return correspondent.name;
+          })
+          .join('; ');
+        }
+
+        Doc.save($scope.doc).$promise.then(function (savedDoc) {
+          if ($scope.isChild) {
+            $state.go('docs/edit/addressing', { docId: savedDoc.docId });
+          }
+          else {
+            $state.go('docs/search');
+          }
         });
       }
     };
 
+
     $scope.cancel = function () {
-      $state.go('docs/search');
+      if ($scope.isChild) {
+        $state.go('docs/edit/addressing', { docId: $stateParams.parentDocId });
+      }
+      else {
+        $state.go('docs/search');
+      }
     };
   }
 
@@ -94,7 +119,9 @@
     '$q',
     '$scope',
     '$state',
-    'Doc'
+    '$stateParams',
+    'Doc',
+    'Nomenclature'
   ];
 
   angular.module('ems').controller('DocsNewCtrl', DocsNewCtrl);

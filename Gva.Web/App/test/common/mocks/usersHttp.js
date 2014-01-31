@@ -74,7 +74,7 @@
 
           $jsonData.hasPassword = $jsonData.password !== undefined && $jsonData.password !== '';
           users[userIndex] = $jsonData;
-          
+
           return [200];
         })
       .when('POST', '/api/users',
@@ -86,7 +86,7 @@
           $jsonData.userId = ++nextUserId;
           $jsonData.hasPassword = $jsonData.password !== undefined && $jsonData.password !== '';
           users.push($jsonData);
-          
+
           return [200];
         })
       .when('GET', '/api/roles',

@@ -7,13 +7,9 @@
       function ($resource) {
         return $resource('/api/applications/:id', { id: '@id' },
           {
-            'createNew': {
-              method: 'GET',
-              url: '/api/applications/new/create'
-            },
-            'saveNew': {
+            'validateExist': {
               method: 'POST',
-              url: '/api/applications/new/save'
+              url: '/api/applications/validate/exist'
             }
           });
       }]);

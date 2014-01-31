@@ -13,13 +13,25 @@
           content: result
         };
 
-        return $state.go('applications/new/doc');
+        goToPreviousState();
       });
     };
 
     $scope.cancel = function () {
-      return $state.go('applications/new/doc');
+      goToPreviousState();
     };
+
+    function goToPreviousState() {
+      var previousState;
+      if ($state.$current.parent.self.name === 'applications/new') {
+        previousState = 'applications/new/doc';
+      }
+      else if ($state.$current.parent.self.name === 'applications/link') {
+        previousState = 'applications/link/common';
+      }
+
+      return $state.go(previousState);
+    }
   }
 
   PersonNewCtrl.$inject = ['$scope', '$state', 'Person'];

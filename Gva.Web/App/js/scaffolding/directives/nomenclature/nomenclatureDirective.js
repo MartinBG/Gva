@@ -48,7 +48,7 @@
           return _.assign({}, query, params);
         };
       }
-      
+
       if (iAttrs.mode === 'id') {
         ngModel.$parsers.push(function (viewValue) {
           if (viewValue === null || viewValue === undefined) {
@@ -57,7 +57,7 @@
             return viewValue[idProp];
           }
         });
-        
+
         initSelectionFunc = function (element, callback) {
           var id = element.val();
 

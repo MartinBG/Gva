@@ -33,29 +33,14 @@
           }
 
         })
-
-      .when('GET', '/api/applications/new/create',
-        function () {
-          var newApplication = {
-            applicationId: undefined,
-            docId: undefined,
-            personLotId: undefined
-          };
-
-          return [200, newApplication];
-
-        })
-      .when('POST', '/api/applications/new/save',
-        function ($jsonData, applications) {
-          if (!$jsonData || !$jsonData.docId || !$jsonData.personLotId) {
+      .when('POST', '/api/applications',
+        function ($jsonData, applicationsFactory) {
+          if (!$jsonData || !$jsonData.docId || !$jsonData.lotId) {
             return [400];
           }
 
-          var nextApplicationId = (!nextApplicationId) ?
-            1 : _(applications).pluck('applicationId').max().value() + 1;
-
-          $jsonData.applicationId = nextApplicationId;
-          applications.push($jsonData);
+          $jsonData.applicationId = applicationsFactory.getNextApplicationId();
+          applicationsFactory.saveApplication($jsonData);
 
           return [200, $jsonData];
         })
@@ -80,6 +65,17 @@
           });
 
           return [200, noms];
+        })
+      .when('POST', '/api/applications/validate/exist',
+        function ($jsonData, applicationsFactory) {
+          var exist = false;
+
+          if ($jsonData && $jsonData.docId && $jsonData.lotId) {
+            exist =
+              !!applicationsFactory.getApplicationByDocAndPerson($jsonData.docId, $jsonData.lotId);
+          }
+
+          return [200, { applicationExist: exist}];
         });
   });
 }(angular, _));

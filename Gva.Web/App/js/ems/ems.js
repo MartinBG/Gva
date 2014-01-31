@@ -34,7 +34,7 @@
         name: 'docs/new',
         title: 'Нов документ',
         parent: 'docs',
-        url: '/new',
+        url: '/new?parentDocId',
         views: {
           'pageView@root': {
             templateUrl: 'ems/docs/views/docsNew.html',

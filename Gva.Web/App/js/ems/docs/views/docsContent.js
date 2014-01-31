@@ -25,7 +25,6 @@
 
     $scope.createPrivateFile = function () {
     };
-
   }
 
   DocsContentCtrl.$inject = [

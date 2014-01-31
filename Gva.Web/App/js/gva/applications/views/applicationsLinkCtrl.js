@@ -2,12 +2,11 @@
 (function (angular) {
   'use strict';
 
-  function ApplicationsLinkCtrl(
-    ) {
-
+  function ApplicationsLinkCtrl() {
   }
 
-  ApplicationsLinkCtrl.$inject = [];
+  ApplicationsLinkCtrl.$inject = [
+  ];
 
   angular.module('gva').controller('ApplicationsLinkCtrl', ApplicationsLinkCtrl);
 }(angular

@@ -22,7 +22,10 @@
       }
 
       function docCaseMapper(p) {
-        p.docFiles = _(docs).filter({ docId: p.docId }).first().publicDocFiles.map(docFileMapper);
+        var publicDocFiles = _(docs).filter({ docId: p.docId }).first().publicDocFiles;
+        if (publicDocFiles) {
+          p.docFiles = publicDocFiles.map(docFileMapper);
+        }
         return p;
       }
 
@@ -46,6 +49,12 @@
               .filter({ docId: application.docId }).first();
 
           return application;
+        },
+        getApplicationByDocAndPerson: function (docId, lotId) {
+          return _(applications).filter({ docId: docId, lotId: lotId }).first();
+        },
+        getNextApplicationId: function () {
+          return _(applications).pluck('applicationId').max().value() + 1;
         },
         saveApplication: function (application) {
           applications.push(application);

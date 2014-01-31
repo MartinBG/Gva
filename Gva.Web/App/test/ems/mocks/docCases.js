@@ -14,7 +14,12 @@
           casePartType: 'Публичен',
           statusName: 'Чернова',
           description: 'Издаване на свидетелство за правоспособност на авиационен персонал'
-        },
+        }
+      ]
+    },
+    {
+      docCaseId: 2,
+      docCase: [
         {
           docId: 2,
           regDate: '2014-01-08T17:22:14.58',
@@ -23,7 +28,12 @@
           casePartType: 'Входящ',
           statusName: 'Изготвен',
           description: 'Резолюция'
-        },
+        }
+      ]
+    },
+    {
+      docCaseId: 3,
+      docCase: [
         {
           docId: 3,
           regDate: '2014-01-08T17:22:14.58',

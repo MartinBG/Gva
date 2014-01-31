@@ -27,7 +27,6 @@
       </div>
     </nav>
 
-
     <div class="well-sm panel-body form-body">
       <form name="docForm" class="form-horizontal" style="padding-left: 30px;">
         <div class="well-sm panel-body form-body">
@@ -36,11 +35,11 @@
             <div class="form-group col-sm-4" ng-class="{'has-error': docForm.personLotId.$invalid && saveClicked}">
                   <label class="control-label" l10n-text="applications.newform.person"></label>
                   <span name="docPersonLotIdSpan" ng-show="saveClicked && docForm.personLotId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.personLotId.$error.required && 'Задължително поле'}}"></span>
-                  <sc-nomenclature  ng-model="person" alias="'persons'" name="personLotId" load="true" required style="float: left;"></sc-nomenclature>
+                  <sc-nomenclature  ng-model="$parent.person" alias="'persons'" name="personLotId" load="true" required style="float: left;"></sc-nomenclature>
             </div>
             <div class="form-group col-sm-4" style="padding-top:27px;margin-left:auto;">
-              <div  style="float: left;"><gva-button name="newPersonBtn" gva-click="newPerson()" text="applications.newform.newPerson" class="btn-xs btn-info"></gva-button></div>
-              <div  style="float: left; padding-left: 13px;"><gva-button name="choosePersonBtn" gva-click="choosePerson()" text="applications.newform.choosePerson" class="btn-xs btn-info"></gva-button></div>
+              <div  style="float: left;"><gva-button name="choosePersonBtn" gva-click="choosePerson()" text="applications.newform.choosePerson" class="btn-xs btn-info"></gva-button></div>
+              <div  style="float: left; padding-left: 13px;"><gva-button name="newPersonBtn" gva-click="newPerson()" text="applications.newform.newPerson" class="btn-xs btn-info"></gva-button></div>
             </div>
           </div>
 
@@ -48,7 +47,7 @@
             <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
               <span name="docTypeGroupIdValidationSpan" ng-show="saveClicked && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature  ng-model="doc.docTypeGroupId" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
+              <sc-nomenclature  ng-model="$parent.docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
             </div>
           </div>
 
@@ -56,7 +55,7 @@
             <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
               <span name="docTypeIdValidationSpan" ng-show="saveClicked && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature  ng-model="doc.docTypeId" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: doc.docTypeGroupId ? doc.docTypeGroupId.nomTypeValueId : 0 }" required></sc-nomenclature>
+              <sc-nomenclature  ng-model="$parent.docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: $parent.docTypeGroup ? $parent.docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
@@ -64,15 +63,12 @@
             <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docSubject.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
               <span name="docSubjectValidationSpan" ng-show="saveClicked && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
-              <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
+              <sc-text ng-model="$parent.docSubject" name="docSubject" required></sc-text>
             </div>
           </div>
         </div>
 
       </form>
     </div>
-
-
-
   </div>
 </div>

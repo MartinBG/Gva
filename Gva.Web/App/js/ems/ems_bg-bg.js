@@ -13,6 +13,8 @@
           corrs: 'Кореспонденти',
           units: 'Отнесено към',
           view: 'Преглед',
+          choose: 'Избор',
+          newDoc: 'Нов документ',
           regDate: 'Дата',
           regUri: 'Рег.№',
           docSubject: '',

@@ -21,16 +21,16 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">Документ</a>
+                    <a sc-click="attachNewDoc()">Документ</a>
                   </li>
                   <li>
-                    <a href="#">Резолюция</a>
+                    <a sc-click="attachDoc(1)">Резолюция</a>
                   </li>
                   <li>
-                    <a href="#">Задача</a>
+                    <a sc-click="attachDoc(2)">Задача</a>
                   </li>
                   <li>
-                    <a href="#">Забележка</a>
+                    <a sc-click="attachDoc(3)">Забележка</a>
                   </li>
                 </ul>
               </li>
@@ -178,6 +178,9 @@
               <span class="control-label-bg">{{ doc.docTypeName }}</span>
             </div>
           </div>
+
+          <div ng-show="doc.parentDocInfo">&nbsp{{doc.parentDocInfo}}</div>
+          <br ng-show="doc.parentDocInfo"/>
 
           <div class="row">
             <div class="col-md-12">

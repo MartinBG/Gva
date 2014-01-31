@@ -30,7 +30,7 @@
     };
 
     $scope.cancel = function () {
-      $state.go('applications/new/doc');
+      goToPreviousState();
     };
 
     $scope.choosePerson = function (person) {
@@ -40,8 +40,20 @@
           content: person
         };
 
-      return $state.go('applications/new/doc');
+      goToPreviousState();
     };
+
+    function goToPreviousState() {
+      var previousState;
+      if ($state.$current.parent.self.name === 'applications/new') {
+        previousState = 'applications/new/doc';
+      }
+      else if ($state.$current.parent.self.name === 'applications/link') {
+        previousState = 'applications/link/common';
+      }
+
+      return $state.go(previousState);
+    }
   }
 
   PersonChooseCtrl.$inject = ['$scope', '$state', '$stateParams', 'Person'];

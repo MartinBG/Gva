@@ -2,14 +2,11 @@
 (function (angular) {
   'use strict';
 
-  function ApplicationsNewCtrl($scope) {
-    $scope.application = undefined;
-    $scope.doc = undefined;
-    $scope.person = undefined;
+  function ApplicationsNewCtrl() {
   }
 
   ApplicationsNewCtrl.$inject = [
-    '$scope'
+
   ];
 
   angular.module('gva').controller('ApplicationsNewCtrl', ApplicationsNewCtrl);

@@ -150,7 +150,7 @@
           parent: 'applications/link',
           url: '/common',
           views: {
-            'linkView@applications/link': {
+            'applicationsLinkView': {
               templateUrl: 'gva/applications/views/applicationsLinkCommon.html',
               controller: 'ApplicationsLinkCommonCtrl'
             }
@@ -158,11 +158,11 @@
         })
         .state({
           name: 'applications/link/docChoose',
-          title: 'Избери Док',
+          title: 'Избор на документ',
           parent: 'applications/link',
           url: '/docChoose',
           views: {
-            'linkView@applications/link': {
+            'applicationsLinkView': {
               templateUrl: 'gva/applications/views/docChoose.html',
               controller: 'DocChooseCtrl'
             }
@@ -170,11 +170,11 @@
         })
         .state({
           name: 'applications/link/personChoose',
-          title: 'Избери Персон',
+          title: 'Избер на заявител',
           parent: 'applications/link',
           url: '/personChoose',
           views: {
-            'linkView@applications/link': {
+            'applicationsLinkView': {
               templateUrl: 'gva/applications/views/personChoose.html',
               controller: 'PersonChooseCtrl'
             }
@@ -182,11 +182,11 @@
         })
         .state({
           name: 'applications/link/personNew',
-          title: 'Нов Персон',
+          title: 'Нов заявител',
           parent: 'applications/link',
           url: '/personNew',
           views: {
-            'linkView@applications/link': {
+            'applicationsLinkView': {
               templateUrl: 'gva/applications/views/personNew.html',
               controller: 'PersonNewCtrl'
             }

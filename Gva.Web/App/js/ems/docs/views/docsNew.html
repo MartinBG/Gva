@@ -38,7 +38,11 @@
       <form name="docForm" class="form-horizontal" style="padding-left: 30px;">
         <div class="well-sm panel-body form-body">
 
-          <div class="row">
+          <div class="row" ng-show="isChild">
+            <div>&nbsp{{parentDocInfo}}</div><br />
+          </div>
+
+          <div class="row" ng-hide="isChild">
             <div class="form-group col-sm-3">
               <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
               <sc-text ng-model="doc.caseRegUri" name="caseRegUri"></sc-text>
@@ -62,7 +66,7 @@
             <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
               <span name="docTypeGroupIdValidationSpan" ng-show="saveClicked && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature  ng-model="doc.docTypeGroupId" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
+              <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
             </div>
           </div>
 
@@ -70,7 +74,7 @@
             <div class="form-group col-sm-3" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
               <span name="docTypeIdValidationSpan" ng-show="saveClicked && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature  ng-model="doc.docTypeId" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: doc.docTypeGroupId ? doc.docTypeGroupId.nomTypeValueId : 0 }" required></sc-nomenclature>
+              <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
