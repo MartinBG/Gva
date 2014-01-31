@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('gva')
-    .factory('ApplicationDocFile', ['$resource',
+    .factory('ApplicationDocPart', ['$resource',
       function ($resource) {
         return $resource('/api/apps/:id/docParts', { id: '@id' },
           {

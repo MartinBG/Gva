@@ -6,42 +6,36 @@
     $scope,
     $state,
     $stateParams,
-    ApplicationDocFile
+    ApplicationDocPart
     ) {
     $scope.cancel = function () {
-      $scope.wrapper = null;
-      $scope.documentData = null;
-      return $state.go('applications/edit/case');
+      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
     };
 
     $scope.addPart = function () {
-      return ApplicationDocFile
+      return ApplicationDocPart
         .save({ id: $stateParams.id }, {
           personId: $scope.application.person.id,
           currentDocId: $scope.documentData.currentDocId,
-          file: $scope.wrapper.applicationDocFile.file,
+          file: $scope.wrapper.applicationDocPart.file,
           setPartId: $scope.documentData.docPartType.content.setPartId,
-          part: $scope.wrapper.applicationDocFile.part
+          part: $scope.wrapper.applicationDocPart.part
         }).$promise.then(function () {
-          $scope.wrapper = null;
-          $scope.documentData = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
     };
 
     $scope.linkNew = function () {
-      return ApplicationDocFile
+      return ApplicationDocPart
         .linkNew({
           id: $stateParams.id,
           setPartId: $scope.documentData.docPartType.content.setPartId
         }, {
           personId: $scope.application.person.id,
           currentDocId: $scope.documentData.currentDocId,
-          part: $scope.wrapper.applicationDocFile.part,
-          docFileId: $scope.documentData.docFileId
+          part: $scope.wrapper.applicationDocPart.part,
+          docFileId: $scope.documentData.docFiles[0].key
         }).$promise.then(function () {
-          $scope.wrapper = null;
-          $scope.documentData = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
     };
@@ -51,7 +45,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'ApplicationDocFile'
+    'ApplicationDocPart'
   ];
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);

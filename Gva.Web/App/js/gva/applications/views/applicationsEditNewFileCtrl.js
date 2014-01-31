@@ -4,11 +4,11 @@
 
   function ApplicationsEditNewFileCtrl(
     $scope,
-    $state
+    $state,
+    $stateParams
     ) {
     $scope.cancel = function () {
-      $scope.documentData = null;
-      return $state.go('applications/edit/case');
+      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
     };
 
     $scope.addPart = function () {
@@ -18,7 +18,8 @@
 
   ApplicationsEditNewFileCtrl.$inject = [
     '$scope',
-    '$state'
+    '$state',
+    '$stateParams'
   ];
 
   angular.module('gva').controller('ApplicationsEditNewFileCtrl', ApplicationsEditNewFileCtrl);

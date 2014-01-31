@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    ApplicationDocFile,
+    ApplicationDocPart,
     PersonDocumentId,
     PersonDocumentEducation,
     PersonDocumentEmployment,
@@ -73,7 +73,7 @@
     };
 
     $scope.linkPart = function (item) {
-      return ApplicationDocFile
+      return ApplicationDocPart
         .linkExisting({
           id: $stateParams.id,
           setPartId: $scope.documentData.docPartType.content.setPartId
@@ -81,18 +81,16 @@
           personId: $scope.application.person.id,
           currentDocId: $scope.documentData.currentDocId,
           partIndex: item.partIndex,
-          docFileId: $scope.documentData.docFileId
+          docFileId: $scope.documentData.docFiles[0].key
         }).$promise.then(function () {
-          $scope.wrapper = null;
-          $scope.documentData = null;
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
 
     };
 
-    $scope.goBack = function () {
+    $scope.cancel = function () {
       $scope.documentData = null;
-      return $state.go('applications/edit/case');
+      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
     };
   }
 
@@ -100,7 +98,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'ApplicationDocFile',
+    'ApplicationDocPart',
     'PersonDocumentId',
     'PersonDocumentEducation',
     'PersonDocumentEmployment',

@@ -16,7 +16,7 @@
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 20,
+      nextIndex: 22,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -83,18 +83,40 @@
             relativePath: '../folder1/folder2/'
           }],
           applications: []
+        },
+        {
+          partIndex: 11,
+          part: personDocumentIds.person1Id,
+          file: [],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'Издаване на свидетелство за правоспособност на авиационен персонал'
+            }
+          ]
+        },
+        {
+          partIndex: 12,
+          part: personDocumentIds.person1Id,
+          file: [],
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'Издаване на свидетелство за правоспособност на авиационен персонал'
+            }
+          ]
         }
       ],
       personDocumentOthers: [
         {
-          partIndex: 11,
+          partIndex: 13,
           part: personDocumentOthers.person1Doc1,
           applications: []
         }
       ],
       personDocumentTrainings: [
         {
-          partIndex: 12,
+          partIndex: 14,
           part: personDocumentTrainings.person1Training1,
           applications: [],
           file: [{
@@ -104,12 +126,12 @@
           }]
         },
         {
-          partIndex: 13,
+          partIndex: 15,
           part: personDocumentTrainings.person1Training2,
           applications: []
         },
         {
-          partIndex: 14,
+          partIndex: 16,
           part: personDocumentTrainings.person1Training3,
           applications: [],
           file: [{
@@ -119,31 +141,31 @@
           }]
         },
         {
-          partIndex: 15,
+          partIndex: 17,
           part: personDocumentTrainings.person1Training4,
           applications: []
         }
       ],
       personDocumentMedicals: [
         {
-          partIndex: 16,
+          partIndex: 18,
           part: personDocumentMedicals.person1Medical1,
           applications: []
         },
         {
-          partIndex: 17,
+          partIndex: 19,
           part: personDocumentMedicals.person1Medical2,
           applications: []
         }
       ],
       personDocumentChecks: [
         {
-          partIndex: 18,
+          partIndex: 20,
           part: personDocumentChecks.person1Check1,
           applications: []
         },
         {
-          partIndex: 19,
+          partIndex: 21,
           part: personDocumentChecks.person1Check2,
           applications: []
         }

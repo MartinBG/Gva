@@ -29,7 +29,7 @@
 
     Application.createNew().$promise
       .then(function (result) {
-        $scope.$parent.gvaApplication = result;
+        $scope.$parent.application = result;
       });
 
     $scope.newPerson = function () {
@@ -56,10 +56,10 @@
         $scope.$parent.doc.docStatusName = 'Чернова';
 
         $scope.$parent.doc.$saveNew().then(function (result) {
-          $scope.$parent.gvaApplication.docId = result.docId;
-          $scope.$parent.gvaApplication.personLotId = $scope.person.nomTypeValueId;
+          $scope.$parent.application.docId = result.docId;
+          $scope.$parent.application.personLotId = $scope.person.nomTypeValueId;
 
-          $scope.$parent.gvaApplication.$saveNew().then(function () {
+          $scope.$parent.application.$saveNew().then(function () {
             $state.go('docs/search');
           });
         });

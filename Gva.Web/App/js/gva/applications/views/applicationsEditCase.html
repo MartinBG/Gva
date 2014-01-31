@@ -10,8 +10,8 @@
     </thead>
     <tbody ng-repeat="c in application.docCase">
       <tr>
-        <td>{{ c.regNumberCol }} {{ c.docStatusName }}</td>
-        <td>{{ c.descriptionCol }}</td>
+        <td>{{ c.regNumber }} {{ c.statusName }}</td>
+        <td>{{ c.description }}</td>
         <td></td>
         <td style="text-align: right;">
           <a ng-click="viewDoc(c.docId)" style="cursor: pointer;">Преглед
@@ -20,13 +20,13 @@
       </tr>
       <tr ng-repeat="df in c.docFiles">
         <td></td>
-        <td>{{ df.docFileTypeName }}</td>
+        <td>{{ df.name }} <span ng-show="!!df.setPartName">({{ df.setPartName }})</span></td>
         <td>
-          <div ng-if="!!df.gvaLotFileId">
+          <div ng-if="!!df.setPartId">
             <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.uin }} стр. {{ df.part.bookPageNumber }}</a>
           </div>
 
-          <div ng-if="!df.gvaLotFileId">
+          <div ng-if="!df.setPartId">
             <a ng-click="linkNew(c.docId, df)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(c.docId, df)" style="cursor: pointer;">Свържи с вече добавен</a>
           </div>
 

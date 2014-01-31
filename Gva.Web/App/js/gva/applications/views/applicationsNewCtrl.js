@@ -3,7 +3,7 @@
   'use strict';
 
   function ApplicationsNewCtrl($scope) {
-    $scope.gvaApplication = undefined;
+    $scope.application = undefined;
     $scope.doc = undefined;
     $scope.person = undefined;
   }

@@ -3,7 +3,7 @@
     <div class="panel-heading form-title"><strong>Свържи документ в описа</strong></div>
     <div class="well-sm panel-body form-body">
 
-      <div ng-if="!!documentData.docFileId">
+      <div ng-if="documentData.docFiles.length > 0">
         <div class="row">
           <label class="control-label col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-3">Тип на документ:</label>
         </div>
@@ -13,7 +13,7 @@
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-primary btn-sm" ng-click="search()">Преглед на опис</button>
-            <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
           </div>
         </div>
 
@@ -158,9 +158,9 @@
         </div>
       </div>
 
-      <div ng-if="!documentData.docFileId">
+      <div ng-if="!documentData.docFiles.length">
         <div class="form-group col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
-          <button type="button" class="btn btn-primary btn-sm" ng-click="goBack()">Назад</button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
         </div>
       </div>
 

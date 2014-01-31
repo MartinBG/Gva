@@ -8,11 +8,15 @@
     $scope,
     Application
     ) {
-    $scope.application = Application.get({ id: $stateParams.id });
+    //$scope.application = Application.get({ id: $stateParams.id });
+
+    Application.get({ id: $stateParams.id }).$promise.then(function (application) {
+      $scope.application = application;
+    });
 
     $scope.documentData = {
       docPartType: null,
-      docFileId: null,
+      docFiles: [],
       currentDocId: null,
       isLinkNew: false
     };

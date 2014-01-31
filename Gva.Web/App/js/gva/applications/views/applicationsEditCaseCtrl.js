@@ -7,12 +7,10 @@
     $state,
     $stateParams
     ) {
-
-    $scope.documentData.isLinkNew = false;
-
     $scope.linkNew = function (docId, docFile) {
       $scope.documentData.isLinkNew = true;
-      $scope.documentData.docFileId = docFile.docFileId;
+      $scope.documentData.docFiles = [];
+      $scope.documentData.docFiles.push(docFile);
       $scope.documentData.currentDocId = docId;
       $scope.documentData.docPartType = null;
 
@@ -20,7 +18,8 @@
     };
 
     $scope.linkPart = function (docId, docFile) {
-      $scope.documentData.docFileId = docFile.docFileId;
+      $scope.documentData.docFiles = [];
+      $scope.documentData.docFiles.push(docFile);
       $scope.documentData.currentDocId = docId;
       $scope.documentData.docPartType = null;
 

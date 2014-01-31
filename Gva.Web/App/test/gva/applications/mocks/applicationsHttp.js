@@ -19,16 +19,16 @@
 
     $httpBackendConfiguratorProvider
       .when('GET', '/api/applications/:id',
-        function ($params, $filter, gvaApplications) {
-          var gvaApplication = _(gvaApplications)
-            .filter({ gvaApplicationId: parseInt($params.id, 10) }).first();
+        function ($params, $filter, applicationsFactory) {
+          var application = _(applicationsFactory.getInstance())
+            .filter({ applicationId: parseInt($params.id, 10) }).first();
 
-          if (gvaApplication) {
-            if (gvaApplication.person.lotId) { //todo change person data better
-              gvaApplication.person = personMapper(gvaApplication.person);
+          if (application) {
+            if (application.person.lotId) { //todo change person data better
+              application.person = personMapper(application.person);
             }
 
-            return [200, gvaApplication];
+            return [200, application];
           }
           else {
             return [404];
@@ -38,26 +38,26 @@
 
       .when('GET', '/api/applications/new/create',
         function () {
-          var newGvaApplication = {
-            gvaApplicationId: undefined,
+          var newApplication = {
+            applicationId: undefined,
             docId: undefined,
             personLotId: undefined
           };
 
-          return [200, newGvaApplication];
+          return [200, newApplication];
 
         })
       .when('POST', '/api/applications/new/save',
-        function ($jsonData, gvaApplications) {
+        function ($jsonData, applications) {
           if (!$jsonData || !$jsonData.docId || !$jsonData.personLotId) {
             return [400];
           }
 
-          var nextGvaApplicationId = (!nextGvaApplicationId) ?
-            1 : _(gvaApplications).pluck('gvaApplicationId').max().value() + 1;
+          var nextApplicationId = (!nextApplicationId) ?
+            1 : _(applications).pluck('applicationId').max().value() + 1;
 
-          $jsonData.gvaApplicationId = nextGvaApplicationId;
-          gvaApplications.push($jsonData);
+          $jsonData.applicationId = nextApplicationId;
+          applications.push($jsonData);
 
           return [200, $jsonData];
         })
