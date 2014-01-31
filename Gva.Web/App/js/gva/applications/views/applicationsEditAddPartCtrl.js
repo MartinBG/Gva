@@ -15,7 +15,7 @@
     $scope.addPart = function () {
       return ApplicationDocPart
         .save({ id: $stateParams.id }, {
-          personId: $scope.application.person.id,
+          personId: $scope.application.lotId,
           currentDocId: $scope.documentData.currentDocId,
           file: $scope.wrapper.applicationDocPart.file,
           setPartId: $scope.documentData.docPartType.content.setPartId,
@@ -31,7 +31,7 @@
           id: $stateParams.id,
           setPartId: $scope.documentData.docPartType.content.setPartId
         }, {
-          personId: $scope.application.person.id,
+          personId: $scope.application.lotId,
           currentDocId: $scope.documentData.currentDocId,
           part: $scope.wrapper.applicationDocPart.part,
           docFileId: $scope.documentData.docFiles[0].key

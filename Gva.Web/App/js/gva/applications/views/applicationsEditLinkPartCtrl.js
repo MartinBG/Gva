@@ -78,7 +78,7 @@
           id: $stateParams.id,
           setPartId: $scope.documentData.docPartType.content.setPartId
         }, {
-          personId: $scope.application.person.id,
+          personId: $scope.application.lotId,
           currentDocId: $scope.documentData.currentDocId,
           partIndex: item.partIndex,
           docFileId: $scope.documentData.docFiles[0].key

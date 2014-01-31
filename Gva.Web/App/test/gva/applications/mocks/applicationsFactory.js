@@ -26,29 +26,30 @@
         return p;
       }
 
-      return {
-        getInstance: function () {
-          return [
-            {
-              applicationId: 1,
-              person: {
-                lotId: 1,
-                personData: _(personLots).filter({ lotId: 1 }).first().personData
-              },
-              doc: {
-                docId: 1,
-                docTypeName: _(docs).filter({ docId: 1 }).first().docTypeName
-              },
-              docCase: _(docCases).filter({ docCaseId: 1 }).first().docCase.map(docCaseMapper)
-            },
-            {
-              applicationId: 2,
-              docId: 2,
-              personLotId: 2
-            }
-          ];
+      var applications = [
+        {
+          applicationId: 1,
+          lotId: 1,
+          docId: 1
         }
+      ];
 
+      return {
+        getApplication: function (id) {
+          var application = _.cloneDeep(_(applications).filter({ applicationId: id }).first());
+
+          application.docCase = _(docCases)
+              .filter({ docCaseId: application.docId }).first().docCase.map(docCaseMapper);
+          application.personData = _(personLots)
+              .filter({ lotId: application.lotId }).first().personData;
+          application.doc = _(docs)
+              .filter({ docId: application.docId }).first();
+
+          return application;
+        },
+        saveApplication: function (application) {
+          applications.push(application);
+        }
       };
 
     }

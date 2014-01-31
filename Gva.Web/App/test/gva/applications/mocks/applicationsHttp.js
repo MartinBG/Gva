@@ -5,13 +5,12 @@
     function personMapper(p) {
       if (!!p) {
         return {
-          id: p.lotId,
-          lin: p.personData.part.lin,
-          uin: p.personData.part.uin,
-          names: p.personData.part.firstName + ' ' +
-            p.personData.part.middleName + ' ' + p.personData.part.lastName,
+          lin: p.part.lin,
+          uin: p.part.uin,
+          names: p.part.firstName + ' ' +
+            p.part.middleName + ' ' + p.part.lastName,
           /*jshint -W052*/
-          age: ~~((Date.now() - new Date(p.personData.part.dateOfBirth)) / (31557600000))
+          age: ~~((Date.now() - new Date(p.part.dateOfBirth)) / (31557600000))
           /*jshint +W052*/
         };
       }
@@ -20,12 +19,11 @@
     $httpBackendConfiguratorProvider
       .when('GET', '/api/applications/:id',
         function ($params, $filter, applicationsFactory) {
-          var application = _(applicationsFactory.getInstance())
-            .filter({ applicationId: parseInt($params.id, 10) }).first();
+          var application = applicationsFactory.getApplication(parseInt($params.id, 10));
 
           if (application) {
-            if (application.person.lotId) { //todo change person data better
-              application.person = personMapper(application.person);
+            if (application.lotId) { //todo change person data better
+              application.person = personMapper(application.personData);
             }
 
             return [200, application];

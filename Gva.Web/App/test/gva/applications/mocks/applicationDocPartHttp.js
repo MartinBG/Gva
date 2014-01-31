@@ -8,8 +8,7 @@
         function ($params, $jsonData, personLots, applicationsFactory, docs, applicationLotFiles) {
           var person = _(personLots)
                 .filter({ lotId: parseInt($jsonData.personId, 10) }).first(),
-              application = _(applicationsFactory.getInstance())
-                .filter({ applicationId: parseInt($params.id, 10) }).first(),
+              application = applicationsFactory.getApplication(parseInt($params.id, 10)),
               doc = _(docs).filter({ docId: parseInt($jsonData.currentDocId, 10) }).first(),
               docPart = {
             applications: [],
@@ -75,8 +74,7 @@
         })
       .when('POST', '/api/apps/:id/docParts/:setPartId/linkNew',
         function ($params, $jsonData, docs, personLots, applicationsFactory, applicationLotFiles) {
-          var application = _(applicationsFactory.getInstance())
-                .filter({ applicationId: parseInt($params.id, 10) }).first(),
+          var application = applicationsFactory.getApplication(parseInt($params.id, 10)),
               person = _(personLots)
                 .filter({ lotId: parseInt($jsonData.personId, 10) }).first(),
               doc = _(docs).filter({ docId: parseInt($jsonData.currentDocId, 10) }).first(),
@@ -141,8 +139,7 @@
         })
       .when('POST', '/api/apps/:id/docParts/:setPartId/linkExisting',
         function ($params, $jsonData, applicationsFactory, personLots, docs, applicationLotFiles) {
-          var application = _(applicationsFactory.getInstance())
-                .filter({ applicationId: parseInt($params.id, 10) }).first(),
+          var application = applicationsFactory.getApplication(parseInt($params.id, 10)),
               person = _(personLots)
                 .filter({ lotId: parseInt($jsonData.personId, 10) }).first(),
               doc = _(docs).filter({ docId: parseInt($jsonData.currentDocId, 10) }).first(),
