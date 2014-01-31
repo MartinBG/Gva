@@ -6,9 +6,10 @@
     <div class="panel-heading"><strong l10n-text="persons.personFlyingExperienceDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.staffType.$invalid}">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.staffType"></label>
-          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true" ng-disabled="$parent.isEdit"></sc-nomenclature>
+          <span name="staffTypeValidationSpan" ng-show="form.staffType.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.staffType.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature ng-model="model.staffType" name="staffType"  alias="'staffTypes'" load="true" ng-disabled="$parent.isEdit" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3" ng-show="model.staffType.code === 'F'">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.month"></label>
