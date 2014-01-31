@@ -1,38 +1,32 @@
-﻿<div>
-  <div class="row">
-    <div class="form-group col-sm-3 col-sm-offset-0">
-      <gva-button name="createBtn" gva-click="newFlyingExperience()" text="persons.flyingExperienceSearch.newFlyingExperience" class="btn btn-primary" icon="glyphicon-floppy-disk"></gva-button>
-    </div>
-  </div>
-  <sc-datatable ng-model="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-       <sc-column data="part.staffType.name" title="persons.flyingExperienceSearch.staffType">
-    </sc-column>
-    <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate">
-      <span>{{item.part.documentDate | date:'mediumDate'}}</span>
-    </sc-column>
-    <sc-column data="part.period.month" title="persons.flyingExperienceSearch.month">
-    </sc-column>
-    <sc-column data="part.period.year" title="persons.flyingExperienceSearch.year">
-    </sc-column>
-    <sc-column data="part.aircraft.name" title="persons.flyingExperienceSearch.aircraft">
-    </sc-column>
-    <sc-column data="part.ratingType.name" title="persons.flyingExperienceSearch.ratingType">
-    </sc-column>
-    <sc-column data="part.ratingClass.name" title="persons.flyingExperienceSearch.ratingClass">
-    </sc-column>
-    <sc-column data="part.licenceType.name" title="persons.flyingExperienceSearch.licenceType">
-    </sc-column>
-    <sc-column data="part.authorization.name" title="persons.flyingExperienceSearch.authorization">
-    </sc-column>
-    <sc-column data="part.experienceRole.name" title="persons.flyingExperienceSearch.experienceRole">
-    </sc-column>
-    <sc-column data="part.experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
-    </sc-column>
-    <sc-column width="115px">
-      <gva-button name="editBtn" gva-click="editFlyingExperience(item)" text="persons.flyingExperienceSearch.edit" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    </sc-column>
-    <sc-column  width="100px">
-      <gva-button name="deleteBtn" gva-click="deleteFlyingExperience(item)" text="persons.flyingExperienceSearch.remove" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
-    </sc-column>
-  </sc-datatable>
-</div>
+﻿<gva-button name="createBtn" gva-click="newFlyingExperience()" text="persons.flyingExperienceSearch.newFlyingExperience" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+<sc-datatable ng-model="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column data="part.staffType.name" title="persons.flyingExperienceSearch.staffType">
+  </sc-column>
+  <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate">
+    <span>{{item.part.documentDate | date:'mediumDate'}}</span>
+  </sc-column>
+  <sc-column data="part.period.month" title="persons.flyingExperienceSearch.month">
+  </sc-column>
+  <sc-column data="part.period.year" title="persons.flyingExperienceSearch.year">
+  </sc-column>
+  <sc-column data="part.aircraft.name" title="persons.flyingExperienceSearch.aircraft">
+  </sc-column>
+  <sc-column data="part.ratingType.name" title="persons.flyingExperienceSearch.ratingType">
+  </sc-column>
+  <sc-column data="part.ratingClass.name" title="persons.flyingExperienceSearch.ratingClass">
+  </sc-column>
+  <sc-column data="part.licenceType.name" title="persons.flyingExperienceSearch.licenceType">
+  </sc-column>
+  <sc-column data="part.authorization.name" title="persons.flyingExperienceSearch.authorization">
+  </sc-column>
+  <sc-column data="part.experienceRole.name" title="persons.flyingExperienceSearch.experienceRole">
+  </sc-column>
+  <sc-column data="part.experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
+  </sc-column>
+  <sc-column width="115px">
+    <gva-button name="editBtn" gva-click="editFlyingExperience(item)" text="persons.flyingExperienceSearch.edit" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+  </sc-column>
+  <sc-column  width="100px">
+    <gva-button name="deleteBtn" gva-click="deleteFlyingExperience(item)" text="persons.flyingExperienceSearch.remove" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  </sc-column>
+</sc-datatable>

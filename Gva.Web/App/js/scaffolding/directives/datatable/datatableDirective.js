@@ -48,7 +48,7 @@ Usage <sc-datatable ng-model="data"
               bSort: sortable,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
-              sDom: '<<"span4"l><"span4"f>r>t' +
+              sDom: '<<"span4"l><"span4"f>>t' +
                   '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
               sPaginationType: 'bootstrap',
               bDeferRender: true,
