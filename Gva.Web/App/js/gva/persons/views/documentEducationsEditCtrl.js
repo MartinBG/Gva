@@ -10,12 +10,17 @@
     });
 
     $scope.save = function () {
-      return PersonDocumentEducation
-        .save(
-        { id: $stateParams.id, ind: $stateParams.ind },
-        $scope.personDocumentEducation).$promise
+      $scope.personDocumentEducationForm.$validate()
         .then(function () {
-          return $state.go('persons.documentEducations.search');
+          if ($scope.personDocumentEducationForm.$valid) {
+            return PersonDocumentEducation
+              .save(
+              { id: $stateParams.id, ind: $stateParams.ind },
+              $scope.personDocumentEducation).$promise
+              .then(function () {
+                return $state.go('persons.documentEducations.search');
+              });
+          }
         });
     };
 

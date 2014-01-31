@@ -10,11 +10,16 @@
     });
 
     $scope.save = function () {
-      return PersonDocumentEmployment
-        .save({ id: $stateParams.id, ind: $stateParams.ind },
-        $scope.personDocumentEmployment).$promise
+      $scope.personDocumentEmploymentForm.$validate()
         .then(function () {
-          return $state.go('persons.employments.search');
+          if ($scope.personDocumentEmploymentForm.$valid) {
+            return PersonDocumentEmployment
+              .save({ id: $stateParams.id, ind: $stateParams.ind },
+              $scope.personDocumentEmployment).$promise
+              .then(function () {
+                return $state.go('persons.employments.search');
+              });
+          }
         });
     };
 

@@ -4,10 +4,15 @@
 
   function DocumentEmploymentsNewCtrl($scope, $state, $stateParams, PersonDocumentEmployment) {
     $scope.save = function () {
-      return PersonDocumentEmployment
-        .save({ id: $stateParams.id }, $scope.personDocumentEmployment).$promise
+      $scope.personDocumentEmploymentForm.$validate()
         .then(function () {
-          return $state.go('persons.employments.search');
+          if ($scope.personDocumentEmploymentForm.$valid) {
+            return PersonDocumentEmployment
+              .save({ id: $stateParams.id }, $scope.personDocumentEmployment).$promise
+              .then(function () {
+                return $state.go('persons.employments.search');
+              });
+          }
         });
     };
 

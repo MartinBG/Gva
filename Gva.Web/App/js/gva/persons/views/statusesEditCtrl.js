@@ -13,10 +13,15 @@
     };
 
     $scope.save = function () {
-      return PersonStatus
-        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status).$promise
+      $scope.personStatusForm.$validate()
         .then(function () {
-          return $state.go('persons.statuses.search', { id: $stateParams.id });
+          if ($scope.personStatusForm.$valid) {
+            return PersonStatus
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status).$promise
+              .then(function () {
+                return $state.go('persons.statuses.search', { id: $stateParams.id });
+              });
+          }
         });
     };
   }

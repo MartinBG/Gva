@@ -7,7 +7,7 @@
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.editEmployment.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editEmploymentForm.$invalid"></gva-button>
+        <gva-button name="saveBtn" gva-click="save()" text="persons.editEmployment.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!editEmploymentForm.$dirty"></gva-button>
         <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editEmployment.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
       </div>
     </div>

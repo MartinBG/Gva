@@ -88,14 +88,14 @@
             }
           };
 
-          validators.push(validator);
-
           if (immediate) {
             control.$parsers.push(function (value) {
               validator(value);
 
               return value;
             });
+          } else {
+            validators.push(validator);
           }
         });
 
