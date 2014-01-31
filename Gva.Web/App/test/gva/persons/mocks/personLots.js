@@ -12,12 +12,14 @@
       personDocumentTrainings = require('./person-document-training.sample'),
       personDocumentMedicals = require('./person-document-med.sample'),
       personDocumentChecks = require('./person-document-checks.sample'),
-      personFlyingExperiences = require('./person-flyingExperience.sample');
+      personFlyingExperiences = require('./person-flyingExperience.sample'),
+      personRatingEditions = require('./person-rating-edition.sample'),
+      personRatings = require('./person-rating.sample');
 
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 22,
+      nextIndex: 26,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -185,6 +187,22 @@
         {
           partIndex: 21,
           part: personFlyingExperiences.person1FlyingExperience2
+        }
+      ],
+      personRatings: [
+        {
+          partIndex: 22,
+          part: personRatings.person1Rating1,
+          personRatingEditions: [
+            {
+              partIndex: 24,
+              part: personRatingEditions.person1Edition1
+            },
+            {
+              partIndex: 25,
+              part: personRatingEditions.person1Edition2
+            }
+          ]
         }
       ]
     },

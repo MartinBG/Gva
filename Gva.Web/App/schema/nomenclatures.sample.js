@@ -275,6 +275,20 @@
       { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' }, alias: 'ACP' }
     ],
 
+    //Номенклатура Подкласове ВС за екипажи
+    ratingSubClasses: [
+      { nomTypeValueId: 1, code: 'A1', name: 'Подклас А1', nameAlt: 'Подклас А1', alias: 'A1' },
+      { nomTypeValueId: 2, code: 'A2', name: 'Подклас А2', nameAlt: 'Подклас А2', alias: 'A2' },
+      { nomTypeValueId: 3, code: 'A3', name: 'Подклас А3', nameAlt: 'Подклас А3', alias: 'A3' },
+      { nomTypeValueId: 4, code: 'A4', name: 'Подклас А4', nameAlt: 'Подклас А4', alias: 'A4' }
+    ],
+
+    //Номенклатура Модел на квалификация на Физическо лице
+    personRatingModels: [
+      { nomTypeValueId: 1, code: 'permanent', name: 'Постоянно', nameAlt: 'Постоянно', alias: 'permanent' },
+      { nomTypeValueId: 2, code: 'temporary', name: 'Временно', nameAlt: 'Временно', alias: 'temporary' }
+    ],
+
     //Номенклатура Групи Разрешения към квалификация
     authorizationGroups: [
       { nomTypeValueId: 1, code: 'FT', name: 'За провеждане обучение', content: { StaffTypeId: 1 } },
@@ -568,7 +582,36 @@
     experienceMeasures: [
       { nomTypeValueId: 1, code: 'AAA', name: 'measure1', nameAlt: 'measure1', alias: 'measure1' },
       { nomTypeValueId: 2, code: 'BBB', name: 'measure2', nameAlt: 'measure2', alias: 'measure2' }
-    ]
+    ],
+
+    //Номенклатура Степени на квалификационен клас на Физичеко лице
+    personRatingLevels: [
+     { nomTypeValueId: 1, code: 'A', name: 'степен А', nameAlt: 'ratingA', alias: 'A' },
+     { nomTypeValueId: 2, code: 'B', name: 'степен Б', nameAlt: 'ratingB', alias: 'B' },
+     { nomTypeValueId: 3, code: 'C', name: 'степен C', nameAlt: 'ratingC', alias: 'C' }
+    ],
+
+    inspectors: [
+      { nomTypeValueId: 1, code: '1', name: 'Владимир Бонев Текнеджиев', nameAlt: 'Vladimi Bonev Teknedjiev', alias: 'Vladimir' },
+      { nomTypeValueId: 2, code: '2', name: 'Ваня Наумова Георгиева', nameAlt: 'Vanq Naumova Georgieva', alias: 'Vanq' },
+      { nomTypeValueId: 3, code: '3', name: 'Георги Мишев Христов', nameAlt: 'Georgi Mishev Hristov', alias: 'Georgi' }
+    ],
+
+    //Oграничения за класове
+    ratingLimitationTypes: [
+      { nomTypeValueId: 1, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
+      { nomTypeValueId: 2, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
+      { nomTypeValueId: 3, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
+      { nomTypeValueId: 4, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' }
+    ],
+
+    //Номенклатура Клас
+    ratingCategories: [
+      { nomTypeValueId: 1, code: 'A', name: 'A', nameAlt: 'A', alias: 'A' },
+      { nomTypeValueId: 2, code: 'A1', name: 'A1', nameAlt: 'A1', alias: 'A1' },
+      { nomTypeValueId: 3, code: 'A2', name: 'A2', nameAlt: 'A2', alias: 'A2' },
+      { nomTypeValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
+    ],
 
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

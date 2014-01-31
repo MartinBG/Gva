@@ -9,26 +9,7 @@
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          //if ($params.hdate || $params.orgid) {
-          //  var employments = [],
-          //      exists;
-          //  angular.forEach(person.personDocumentEmployments, function (employment) {
-          //    if ($params.hdate) {
-          //      var newDate = $filter('date')($params.hdate, 'mediumDate'),
-          //          oldDate = $filter('date')(employment.part.hiredate, 'mediumDate');
-          //      exists = newDate === oldDate;
-          //    } else if ($params.orgid) {
-          //      var typeId = parseInt($params.orgid, 10);
-          //      exists = employment.part.organization.nomTypeValueId === typeId;
-          //    }
-          //    if (exists) {
-          //      employments.push(employment);
-          //    }
-          //  });
-          //  return [200, employments];
-          //} else {
           return [200, person.personDocumentEmployments];
-          //}
         })
       .when('GET', '/api/persons/:id/personDocumentEmployments/:ind',
         function ($params, personLots) {

@@ -67,6 +67,15 @@
       templateUrl: 'gva/persons/forms/personFlyingExperience.html',
       controller: 'PersonFlyingExperienceCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaRatingEdition',
+      templateUrl: 'gva/persons/forms/personRatingEdition.html',
+      controller: 'PersonRatingEditionCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaRating',
+      templateUrl: 'gva/persons/forms/personRating.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state({
@@ -526,6 +535,78 @@
           'detailView@persons.view': {
             templateUrl: 'gva/persons/views/inventorySearch.html',
             controller: 'InventorySearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.ratings',
+        title: 'Класове',
+        parent: 'persons.view',
+        url: '/ratings',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.ratings.search',
+        parent: 'persons.ratings',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/ratingsSearch.html',
+            controller: 'RatingsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.ratings.new',
+        title: 'Нов клас',
+        parent: 'persons.ratings',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/ratingsNew.html',
+            controller: 'RatingsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.editions',
+        title: 'Вписвания/Потвърждения',
+        parent: 'persons.ratings',
+        url: '/:ind/editions',
+        'abstract': true
+      })
+      .state({
+        name: 'persons.editions.search',
+        parent: 'persons.editions',
+        url: '',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/editionsSearch.html',
+            controller: 'ЕditionsSearchCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.editions.new',
+        title: 'Ново вписване/потвърждение',
+        parent: 'persons.editions',
+        url: '/new',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/editionsNew.html',
+            controller: 'EditionsNewCtrl'
+          }
+        }
+      })
+      .state({
+        name: 'persons.editions.edit',
+        title: 'Редакция на вписване/потвърждение',
+        parent: 'persons.editions',
+        url: '/:childInd',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/editionsEdit.html',
+            controller: 'EditionsEditCtrl'
           }
         }
       });

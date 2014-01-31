@@ -1,0 +1,49 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="persons.ratingEditionDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.inspector"></label>
+          <sc-nomenclature alias="'inspectors'" load="true" ng-model="model.inspector"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidFrom"></label>
+          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
+          <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
+        </div>
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidTo.$invalid && form.$validated}">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidTo"></label>
+          <span name="documentDateValidToValidationSpan" ng-show="form.$validated && form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
+          <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-required="true"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.limitations"></label>
+          <sc-select class="form-control" ng-model="model.limitations" sc-select="{ allowClear: true, placeholder: ' ', data: limitationTypes, multiple: true }"></sc-select>
+        </div>
+        <div class="form-group col-sm-5">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.subclasses"></label>
+          <sc-select class="form-control" ng-model="model.ratingSubClasses" sc-select="{ allowClear: true, placeholder: ' ', data: ratingSubClasses, multiple: true }"></sc-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.notes"></label>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="control-label" l10n-text="persons.ratingEditionDirective.notesAlt"></label>
+        </div>
+      </div>
+      <div class="row3">
+        <div class="form-group col-md" style="padding-right: 27px;">
+          <sc-textarea rows="3" cols="46" ng-model="model.notes"></sc-textarea>
+        </div>
+        <div class="form-group col-md">
+          <sc-textarea rows="3" cols="46" ng-model="model.notesAlt"></sc-textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

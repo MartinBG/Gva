@@ -186,6 +186,29 @@
           totalLastMonths: 'Общ нальот за посл. 12 месеца',
           notUnique: 'Данните се дублират с вече съществуващ запис'
         },
+        ratingEditionDirective : {
+          title:'Вписване/Потвърждение',
+          documentDateValidFrom: 'Дата на вписване',
+          documentDateValidTo: 'Валидно до',
+          inspector: 'Инспектор',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          limitations: 'Ограничения',
+          subclasses: 'Подкв.класове'
+        },
+        ratingDirective: {
+          title: 'Клас',
+          staffType: 'Тип персонал',
+          ratingType: 'Тип ВС',
+          personRatingLevel: 'Степен',
+          sector: 'Сектор/работно място',
+          locationIndicator: 'Индикатор на местоположение',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingCategory: 'Категория',
+          personRatingModel: 'Модел'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -376,7 +399,7 @@
           licenceType: 'Кв.ниво',
           authorization: 'Разрешение',
           locationIndicator: 'Местоположение',
-          sector: 'Сектор/раб.място',
+          sector: 'Сектор/работно място',
           experienceRole: 'Роля',
           experienceMeasure: 'Вид опит',
           bookPageNumber: 'Номер на страница в деловодна книга',
@@ -404,6 +427,43 @@
           toDate: 'До дата',
           pageCount: 'Бр. страници',
           file: 'Файл'
+        },
+        ratingSearch: {
+          newRating : 'Нов клас',
+          ratingTypeOrRatingLevel: 'Тип ВС/Степен',
+          classOrCategory: 'Клас/Подклас (Категория)',
+          authorizationAndLimitations: 'Разрешение (ограничения)',
+          firstEditionValidFrom: 'Първоначално издаване',
+          documentDateValidFrom: 'Издаден',
+          documentDateValidTo: 'Валиден до',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          personRatingModel: 'Модел'
+        },
+        ratingEditionsSearch: {
+          newEdition : 'Ново вписване/Потвърждаване',
+          ratingTypeOrRatingLevel: 'Тип ВС/Степен',
+          classOrCategory: 'Клас/Подклас (Категория)',
+          authorizationAndLimitations: 'Разрешение (ограничения)',
+          firstEditionValidFrom: 'Първоначално издаване',
+          documentDateValidFrom: 'Дата на издаване',
+          documentDateValidTo: 'Валиден до',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          personRatingModel: 'Модел',
+          inspector: 'Инспектор'
+        },
+        ratingEditionNew: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ratingEditionEdit: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ratingNew: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       }
     });

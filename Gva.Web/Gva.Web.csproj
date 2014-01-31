@@ -158,6 +158,9 @@
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\ems\ems_bg-bg.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\js\gva\persons\forms\personRating.html" />
+    <Content Include="App\js\gva\persons\forms\personRatingEditionCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentTraining.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentTrainingCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentEducation.html" />
@@ -177,7 +180,19 @@
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\resources\personInventory.js" />
+    <Content Include="App\js\gva\persons\resources\personRating.js" />
+    <Content Include="App\js\gva\persons\resources\personEdition.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentTraining.js" />
+    <Content Include="App\js\gva\persons\views\editionsNew.html" />
+    <Content Include="App\js\gva\persons\views\editionsEdit.html" />
+    <Content Include="App\js\gva\persons\views\editionsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\editionsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\ratingsNew.html" />
+    <Content Include="App\js\gva\persons\views\editionsSearch.html" />
+    <Content Include="App\js\gva\persons\views\ratingsSearch.html" />
+    <Content Include="App\js\gva\persons\views\ratingsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\editionsSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\views\ratingsSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEdit.html" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsNew.html" />
@@ -217,6 +232,8 @@
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
+    <Content Include="App\schema\person-rating-edition.sample.js" />
+    <Content Include="App\schema\person-rating.sample.js" />
     <Content Include="App\schema\person-document-checks.sample.js" />
     <Content Include="App\test\ems\mocks\unitsHttp.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
@@ -248,6 +265,8 @@
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personLots.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentMedicalsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personRatingEditionsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personRatingsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\newDocumentIdPO.js" />

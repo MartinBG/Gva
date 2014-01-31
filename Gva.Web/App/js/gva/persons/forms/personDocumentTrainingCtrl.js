@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentTrainingCtrl($scope) {//, $stateParams, PersonDocumentTraining) {
+  function PersonDocumentTrainingCtrl($scope) {
     $scope.isPositive = function (value) {
       return (value >= 0 ? true : false);
     };

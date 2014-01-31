@@ -1,0 +1,29 @@
+﻿<div>
+  <gva-button name="createBtn" gva-click="newRating()" text="persons.ratingSearch.newRating" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+  <sc-datatable ng-model="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="rating.ratingTypeOrRatingLevel.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
+    </sc-column>
+    <sc-column data="rating.classOrSubclass" title="persons.ratingSearch.classOrCategory">
+    </sc-column>
+    <sc-column data="rating.authorizationAndLimitations" title="persons.ratingSearch.authorizationAndLimitations">
+    </sc-column>
+    <sc-column data="ratingEdition.part.documentDateValidFrom" title="persons.ratingSearch.documentDateValidFrom">
+      <span>{{item.ratingEdition.part.documentDateValidFrom | date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="ratingEdition.part.documentDateValidTo" title="persons.ratingSearch.documentDateValidTo">
+      <span>{{item.ratingEdition.part.documentDateValidTo| date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="firstEditionValidFrom" title="persons.ratingSearch.firstEditionValidFrom">
+      <span>{{item.firstEditionValidFrom | date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="ratingEdition.part.notes" title="persons.ratingSearch.notes">
+    </sc-column>
+    <sc-column data="ratingEdition.part.notesAlt" title="persons.ratingSearch.notesAlt">
+    </sc-column>
+    <sc-column data="rating.personRatingModel.name" title="persons.ratingSearch.personRatingModel">
+    </sc-column>
+    <sc-column sortable="false" class="buttons-cell">
+      <gva-button name="viewBtn" gva-click="viewEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    </sc-column>
+  </sc-datatable>
+</div>

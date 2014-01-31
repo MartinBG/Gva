@@ -10,36 +10,8 @@
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          //if ($params.number || $params.otypeid || $params.oroleid || $params.pnumber || $params.publ || $params.datef) {
-          //  var documentTrainings = [],
-          //      exists;
-          //  angular.forEach(person.personDocumentTrainings, function (documentTraining) {
-          //    if ($params.number) {
-          //      exists = documentTraining.part.documentNumber === $params.number;
-          //    } else if ($params.otypeid) {
-          //      var typeId = parseInt($params.otypeid, 10);
-          //      exists = documentTraining.part.personOtherDocumentType.nomTypeValueId === typeId;
-          //    } else if ($params.oroleid) {
-          //      var roleId = parseInt($params.oroleid, 10);
-          //      exists = documentTraining.part.personOtherDocumentRole.nomTypeValueId === roleId;
-          //    } else if ($params.pnumber){
-          //      exists = documentTraining.part.documentPersonNumber === $params.pnumber;
-          //    } else if ($params.publ) {
-          //      exists = documentTraining.part.documentPublisher === $params.publ;
-          //    } else if ($params.datef) {
-          //      var newDate = $filter('date')($params.datef, 'mediumDate'),
-          //        oldDate = $filter('date')(documentTraining.part.documentDateValidFrom, 'mediumDate');
-          //      exists = newDate === oldDate;
-          //    }
-          //    if (exists) {
-          //      documentTrainings.push(documentTraining);
-          //    }
-          //  });
-          //  return [200, documentTrainings];
-          //} else {
           return [200, person.personDocumentTrainings];
         })
-        //})
       .when('GET', '/api/persons/:id/personDocumentTrainings/:ind',
         function ($params, personLots) {
           var person = _(personLots)

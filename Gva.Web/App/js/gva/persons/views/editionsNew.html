@@ -1,0 +1,14 @@
+﻿<div>
+  <ng-form name="newRatingEditionForm" sc-validate="{}">
+
+    <gva-rating-edition name="ratingEditionForm" ng-model="model.ratingEdition"></gva-rating-edition>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <gva-button name="saveBtn" gva-click="save()" text="persons.ratingEditionNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
+                    ng-disabled="!editRatingEditionForm.$dirty"></gva-button>
+        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.ratingEditionNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+      </div>
+    </div>
+  </ng-form>
+</div>

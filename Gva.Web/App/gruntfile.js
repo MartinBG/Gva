@@ -32,7 +32,9 @@ module.exports = function (grunt) {
         'schema/person-address.sample.js',
         'schema/person-flyingExperience.sample.js',
         'schema/person-status.sample.js',
-        'schema/person.sample.js'
+        'schema/person.sample.js',
+        'schema/person-rating-edition.sample.js',
+        'schema/person-rating.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
