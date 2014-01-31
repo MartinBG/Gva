@@ -517,6 +517,17 @@
             controller: 'FlyingExperiencesEditCtrl'
           }
         }
+      })
+      .state({
+        name: 'persons.inventory',
+        parent: 'persons.view',
+        url: '/inventory',
+        views: {
+          'detailView@persons.view': {
+            templateUrl: 'gva/persons/views/inventorySearch.html',
+            controller: 'InventorySearchCtrl'
+          }
+        }
       });
   }]);
 }(angular));

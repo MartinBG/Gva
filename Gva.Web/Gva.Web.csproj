@@ -176,6 +176,7 @@
     <Content Include="App\js\gva\directives\button\buttonDirective.html" />
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
+    <Content Include="App\js\gva\persons\resources\personInventory.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentTraining.js" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEdit.html" />
     <Content Include="App\js\gva\persons\views\documentTrainingsEditCtrl.js" />
@@ -211,6 +212,8 @@
     <Content Include="App\js\gva\persons\views\documentChecksSearch.html" />
     <Content Include="App\js\gva\persons\views\documentChecksEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentChecksSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\views\inventorySearch.html" />
+    <Content Include="App\js\gva\persons\views\inventorySearchCtrl.js" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
@@ -235,6 +238,7 @@
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
     <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personInventoryHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personFlyingExperiencesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEmploymentsHttp.js" />

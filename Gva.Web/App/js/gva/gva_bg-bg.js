@@ -391,6 +391,19 @@
         flyingExperienceEdit: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        inventorySearch: {
+          bookPageNumber: 'Номер на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: 'Номер на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. страници',
+          file: 'Файл'
         }
       }
     });
