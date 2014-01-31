@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
 
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
     <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="docs.search.fromDate"></sc-filter>
@@ -29,8 +29,10 @@
     </sc-column>
     <sc-column data="correspondentName" title="docs.search.correspondentName">
     </sc-column>
-    <sc-column sortable="false">
-      <button type="button" class="btn-xs btn-info" ng-click="viewDoc(item)" l10n-text="docs.search.view"></button>
+    <sc-column sortable="false" class="buttons-cell">
+      <button type="button" class="btn btn-xs btn-primary" ng-click="viewDoc(item)">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
     </sc-column>
   </sc-datatable>
 

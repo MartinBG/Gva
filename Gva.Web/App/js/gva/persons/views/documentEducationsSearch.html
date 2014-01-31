@@ -1,36 +1,25 @@
-﻿<div class="container page-content">
-  <div class="row">
-    <div class="form-group col-sm-3 col-sm-offset-0">
-      <button sc-click="newDocumentEducation()" type="button" class="btn btn-primary" name="createBtn">
-        <span class="glyphicon" ng-class="{'glyphicon-loading':createBtn.$pending, 'glyphicon-floppy-disk': !createBtn.$pending}"></span>
-        <span l10n-text="persons.documentEducationSearch.newDocumentEducation"></span>
-      </button>
-    </div>
-  </div>
-  <sc-datatable ng-model="documentEducations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
-    </sc-column>
-    <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate">
-      <span>{{item.part.completionDate | date:'mediumDate'}}</span>
-    </sc-column>
-    <sc-column data="part.speciality" title="persons.documentEducationSearch.speciality">
-    </sc-column>
-    <sc-column data="part.school.name" title="persons.documentEducationSearch.school">
-    </sc-column>
-    <sc-column data="part.graduation.name" title="persons.documentEducationSearch.graduation">
-    </sc-column>
-    <sc-column data="part.bookPageNumber" title="persons.documentEducationSearch.bookPageNumber">
-    </sc-column>
-    <sc-column data="part.pageCount" title="persons.documentEducationSearch.pageCount">
-    </sc-column>
-    <sc-column title="persons.documentEducationSearch.file">
-      <span>{{item.file[0].name}}</span>
-    </sc-column>
-    <sc-column width="115px">
-      <gva-button name="editBtn"  sortable="false" class="btn-xs btn-info" gva-click="editDocumentEducation(item)" l10n-text="persons.documentEducationSearch.edit" icon="glyphicon-pencil"></gva-button>
-    </sc-column>
-    <sc-column  width="100px">
-      <gva-button name="deleteBtn"  sortable="false" class="btn-xs btn-info" gva-click="deleteDocumentEducation(item)" l10n-text="persons.documentEducationSearch.remove" icon="glyphicon-remove"></gva-button>
-    </sc-column>
-  </sc-datatable>
-</div>
+﻿<gva-button name="createBtn" gva-click="newDocumentEducation()" text="persons.documentEducationSearch.newDocumentEducation" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+<sc-datatable ng-model="documentEducations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
+  </sc-column>
+  <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate">
+    <span>{{item.part.completionDate | date:'mediumDate'}}</span>
+  </sc-column>
+  <sc-column data="part.speciality" title="persons.documentEducationSearch.speciality">
+  </sc-column>
+  <sc-column data="part.school.name" title="persons.documentEducationSearch.school">
+  </sc-column>
+  <sc-column data="part.graduation.name" title="persons.documentEducationSearch.graduation">
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="persons.documentEducationSearch.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="persons.documentEducationSearch.pageCount">
+  </sc-column>
+  <sc-column title="persons.documentEducationSearch.file">
+    <span>{{item.file[0].name}}</span>
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell">
+    <gva-button name="editBtn"  sortable="false" class="btn btn-xs btn-primary" gva-click="editDocumentEducation(item)" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn"  sortable="false" class="btn btn-xs btn-default" gva-click="deleteDocumentEducation(item)" icon="glyphicon-remove"></gva-button>
+  </sc-column>
+</sc-datatable>

@@ -1,45 +1,39 @@
-﻿  <div class="row">
-    <div class="form-group col-sm-3 col-sm-offset-0">
-      <gva-button name="createBtn" gva-click="newDocumentTraining()" text="persons.documentTrainingSearch.newDocumentTraining" class="btn btn-primary" icon="glyphicon-floppy-disk"></gva-button>
-    </div>
-  </div>
-  <sc-datatable ng-model="documentTrainings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
-    </sc-column>
-    <sc-column data="part.documentDateValidFrom" title="persons.documentTrainingSearch.documentDateValidFrom">
-      <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
-    </sc-column>
-    <sc-column data="part.documentDateValidTo" title="persons.documentTrainingSearch.documentDateValidTo">
-      <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
-    </sc-column>
-    <sc-column data="part.documentPublisher" title="persons.documentTrainingSearch.documentPublisher">
-    </sc-column>
-    <sc-column data="part.ratingType.name" title="persons.documentTrainingSearch.ratingType">
-    </sc-column>
-    <sc-column data="part.authorization.name" title="persons.documentTrainingSearch.authorization">
-    </sc-column>
-    <sc-column data="part.licenceType.name" title="persons.documentTrainingSearch.licenceType">
-    </sc-column>
-    <sc-column data="part.personOtherDocumentType.name" title="persons.documentTrainingSearch.personOtherDocumentType">
-    </sc-column>
-    <sc-column data="part.personOtherDocumentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole">
-    </sc-column>
-    <sc-column data="part.notes" title="persons.documentTrainingSearch.notes">
-    </sc-column>
-    <sc-column data="part.valid" title="persons.documentTrainingSearch.valid">
-      <span>{{item.part.valid.name}}</span>
-    </sc-column>
-    <sc-column data="part.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
-    </sc-column>
-    <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
-    </sc-column>
-    <sc-column data="file" title="persons.documentTrainingSearch.file">
-      <span>{{item.file[0].name}}</span>
-    </sc-column>
-    <sc-column width="115px">
-      <gva-button name="editBtn" class="btn-xs btn-info" gva-click="editDocumentTraining(item)" text="persons.documentTrainingSearch.edit" icon="glyphicon-pencil"></gva-button>
-    </sc-column>
-    <sc-column width="100px">
-      <gva-button name="deleteBtn" class="btn-xs btn-info" gva-click="deleteDocumentTraining(item)" text="persons.documentTrainingSearch.remove" icon="glyphicon-remove"></gva-button>
-    </sc-column>
-  </sc-datatable>
+﻿<gva-button name="createBtn" gva-click="newDocumentTraining()" text="persons.documentTrainingSearch.newDocumentTraining" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+<sc-datatable ng-model="documentTrainings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
+  </sc-column>
+  <sc-column data="part.documentDateValidFrom" title="persons.documentTrainingSearch.documentDateValidFrom">
+    <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+  </sc-column>
+  <sc-column data="part.documentDateValidTo" title="persons.documentTrainingSearch.documentDateValidTo">
+    <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+  </sc-column>
+  <sc-column data="part.documentPublisher" title="persons.documentTrainingSearch.documentPublisher">
+  </sc-column>
+  <sc-column data="part.ratingType.name" title="persons.documentTrainingSearch.ratingType">
+  </sc-column>
+  <sc-column data="part.authorization.name" title="persons.documentTrainingSearch.authorization">
+  </sc-column>
+  <sc-column data="part.licenceType.name" title="persons.documentTrainingSearch.licenceType">
+  </sc-column>
+  <sc-column data="part.personOtherDocumentType.name" title="persons.documentTrainingSearch.personOtherDocumentType">
+  </sc-column>
+  <sc-column data="part.personOtherDocumentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole">
+  </sc-column>
+  <sc-column data="part.notes" title="persons.documentTrainingSearch.notes">
+  </sc-column>
+  <sc-column data="part.valid" title="persons.documentTrainingSearch.valid">
+    <span>{{item.part.valid.name}}</span>
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
+  </sc-column>
+  <sc-column data="file" title="persons.documentTrainingSearch.file">
+    <span>{{item.file[0].name}}</span>
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell">
+    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentTraining(item)" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentTraining(item)" icon="glyphicon-remove"></gva-button>
+  </sc-column>
+</sc-datatable>

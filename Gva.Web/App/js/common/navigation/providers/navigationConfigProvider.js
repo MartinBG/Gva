@@ -11,7 +11,8 @@
       items: this.items,
       userFullName: this.userFullName,
       userHasPassword: this.userHasPassword,
-      showBreadcrumbBar: this.showBreadcrumbBar
+      showBreadcrumbBar: this.showBreadcrumbBar,
+      breadcrumbBarHomeState: this.breadcrumbBarHomeState
     };
   };
 
@@ -29,8 +30,13 @@
     return this;
   };
 
-  NavigationConfigProvider.prototype.showBreadcrumbBar = function (showBreadcrumbBar ) {
+  NavigationConfigProvider.prototype.showBreadcrumbBar = function (showBreadcrumbBar) {
     this.showBreadcrumbBar = showBreadcrumbBar;
+    return this;
+  };
+
+  NavigationConfigProvider.prototype.setBreadcrumbBarHomeState = function (breadcrumbBarHomeState) {
+    this.breadcrumbBarHomeState = breadcrumbBarHomeState;
     return this;
   };
 

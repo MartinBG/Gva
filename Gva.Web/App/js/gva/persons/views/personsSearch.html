@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
 
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
     <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
@@ -28,8 +28,8 @@
     </sc-column>
     <sc-column data="organization" title="persons.search.organization">
     </sc-column>
-    <sc-column sortable="false" width="115px">
-      <gva-button name="viewButton" gva-click="viewPerson(item)" text="persons.search.view" class="btn-xs btn-info" icon="glyphicon-file"></gva-button>
+    <sc-column sortable="false" class="buttons-cell">
+      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-file"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

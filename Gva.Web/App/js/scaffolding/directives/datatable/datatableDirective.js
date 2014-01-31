@@ -48,12 +48,12 @@ Usage <sc-datatable ng-model="data"
               bSort: sortable,
               aaSorting: scope.sortingData,
               aoColumnDefs: scope.aoColumnDefs,
-              sDom: '<<"span4"l><"span4"f>r>t' +
+              sDom: '<<"span4"l><"span4"f>>t' +
                   '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
               sPaginationType: 'bootstrap',
               bDeferRender: true,
               fnPreDrawCallback: function() {
-                angular.element('.dataTables_length select').select2();
+                angular.element('.dataTables_length select').addClass('input-sm').select2();
               },
               oLanguage: {
                 sInfo: l10n.get('scaffolding.scDatatable.info'),
@@ -94,7 +94,9 @@ Usage <sc-datatable ng-model="data"
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,
             sDefaultContent:'',
-            sClass: 'scdt-' + (column.data ? column.data.replace(/[\[\]\.]/g, '_') : 'empty'),
+            sClass:
+              column['class'] +
+              ' scdt-' + (column.data ? column.data.replace(/[\[\]\.]/g, '_') : 'empty'),
             sWidth: column.width
           });
         };

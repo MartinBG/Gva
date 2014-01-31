@@ -15,7 +15,7 @@
       }
 
       tElement.find('button').each(function (index, button) {
-        $(button).attr('class', btnClasses || 'btn-sm btn-default');
+        $(button).attr('class', btnClasses || 'btn btn-sm btn-default');
       });
 
       tElement.attr('class', 'btn-div');

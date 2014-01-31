@@ -32,6 +32,7 @@
 
     $scope.showBreadcrumbBar = navigationConfig.showBreadcrumbBar;
     $scope.breadcrumbBarStates = [];
+    $scope.rootUrl = $state.href(navigationConfig.breadcrumbBarHomeState);
 
     if ($scope.showBreadcrumbBar) {
       $scope.breadcrumbBarStates = $scope.getBreadcrumbBarStates($state.current);

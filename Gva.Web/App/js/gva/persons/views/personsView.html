@@ -1,34 +1,46 @@
-﻿<div class="container page-content">
+﻿<div>
   <form class="form-inline well well-sm card">
     <div class="row">
-      <div class="input-group input-group-sm col-md-7 col-lg-6">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.name"></span>
-        <input disabled name="names" type="text" class="form-control" value="{{person.names}}" />
+      <div class="form-group col-md-7 col-lg-6">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.name"></span>
+          <input disabled name="names" type="text" class="form-control" value="{{person.names}}" />
+        </div>
       </div>
-      <div class="input-group input-group-sm col-md-3">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.company"></span>
-        <input disabled name="organization" type="text" class="form-control" value="{{person.organization}}" />
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.company"></span>
+          <input disabled name="organization" type="text" class="form-control" value="{{person.organization}}" />
+        </div>
       </div>
     </div>
-    <div class="row" style="margin-top: 5px;">
-      <div class="input-group input-group-sm col-md-3 col-lg-2">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.uin"></span>
-        <input disabled name="uin" type="text" class="form-control" value="{{person.uin}}" />
+    <div class="row">
+      <div class="form-group col-md-3 col-lg-2">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.uin"></span>
+          <input disabled name="uin" type="text" class="form-control" value="{{person.uin}}" />
+        </div>
       </div>
-      <div class="input-group input-group-sm col-md-2">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.lin"></span>
-        <input disabled name="lin" type="text" class="form-control" value="{{person.lin}}" />
+      <div class="form-group col-md-2">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.lin"></span>
+          <input disabled name="lin" type="text" class="form-control" value="{{person.lin}}" />
+        </div>
       </div>
-      <div class="input-group input-group-sm col-md-2">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.age"></span>
-        <input disabled name="age" type="text" class="form-control" value="{{person.age}}" />
+      <div class="form-group col-md-2">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.age"></span>
+          <input disabled name="age" type="text" class="form-control" value="{{person.age}}" />
+        </div>
       </div>
-      <div class="input-group input-group-sm col-md-3">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.employmentCategory"></span>
-        <input disabled name="employment" type="text" class="form-control" value="{{person.employment}}" />
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="persons.viewPerson.employmentCategory"></span>
+          <input disabled name="employment" type="text" class="form-control" value="{{person.employment}}" />
+        </div>
       </div>
       <div class="form-group col-sm-offset-10 col-md-offset-0 col-lg-offset-1 col-sm-2">
-        <gva-button name="editBtn" gva-click="edit()" text="persons.viewPerson.edit" class="btn-xs btn-info pull-right" icon="glyphicon-pencil"></gva-button>
+        <gva-button name="editBtn" gva-click="edit()" text="persons.viewPerson.edit" class="btn btn-primary btn-sm pull-right" icon="glyphicon-pencil"></gva-button>
       </div>
     </div>
   </form>
@@ -47,6 +59,8 @@
         'Обучение': 'persons.documentTrainings.search',
         'Проверки': 'persons.checks.search'
        }}"></gva-tabs>
-  <div ui-view="detailView">
+  <div class="tab-content">
+    <div ui-view="detailView"></div>
+    <div class="clear"></div>
   </div>
 </div>

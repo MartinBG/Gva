@@ -15,8 +15,7 @@
           yes: 'Да',
           no: 'Не',
           'new': 'Ново лице',
-          search: 'Търси',
-          view: 'Преглед'
+          search: 'Търси'
         },
         personDataDirective: {
           title: 'Лични данни',
@@ -215,9 +214,7 @@
           address: 'Адрес',
           postalCode: 'Пощенски код',
           phone: 'Телефон',
-          valid: 'Актуален',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          valid: 'Актуален'
         },
         newStatus: {
           save: 'Запис',
@@ -234,9 +231,7 @@
           documentDateValidFrom: 'Начална дата',
           documentDateValidTo: 'Крайна дата',
           notes: 'Бележки',
-          isActive: 'Активен',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          isActive: 'Активен'
         },
         newDocumentId: {
           save: 'Запис',
@@ -264,8 +259,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга.',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newDocumentId: 'Нов документ'
         },
         medicalSearch: {
@@ -279,8 +272,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newMedical: 'Ново медицинско'
         },
         newMedical: {
@@ -301,9 +292,7 @@
           notes: 'Бележки',
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа.',
-          file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          file: 'Файл'
         },
         newEmployment: {
           save: 'Запис',
@@ -322,8 +311,6 @@
           bookPageNumber: 'Номер на стр. в деловодна книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newDocumentEducation: 'Ново образнование'
         },
         checkSearch: {
@@ -342,9 +329,7 @@
           notes: 'Бележки',
           bookPageNumber: '№ на стр. в дел. книга',
           pageCount: 'Бр. стр.',
-          file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          file: 'Файл'
         },
         editCheck: {
           save: 'Запис',
@@ -370,8 +355,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newDocumentTraining: 'Нов документ'
         },
         newDocumentTraining: {
@@ -399,8 +382,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа',
           documentDate: 'Дата на документа',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newFlyingExperience: 'Нов летателен/практически опит'
         },
         flyingExperienceNew: {

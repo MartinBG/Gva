@@ -1,11 +1,11 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="form-inline">
 
     <form name="corrForm" novalidate>
       <div class="panel panel-default">
-        <div class="panel-heading form-title"><strong l10n-text="corrs.edit.correspondentTitle"></strong></div>
+        <div class="panel-heading><strong l10n-text="corrs.edit.correspondentTitle"></strong></div>
 
-        <div class="well-sm panel-body form-body">
+        <div class="well-sm panel-body">
           <div class="row">
             <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.correspondentGroup.$invalid && saveClicked}">
               <label class="control-label" l10n-text="corrs.edit.correspondentGroup"></label>
@@ -151,8 +151,8 @@
         </div>
 
         <div class="panel panel-default" ng-show="corr.corrId">
-          <div class="panel-heading form-title"><strong l10n-text="corrs.edit.contactPersonsTitle"></strong></div>
-          <div class="well-sm panel-body form-body">
+          <div class="panel-heading"><strong l10n-text="corrs.edit.contactPersonsTitle"></strong></div>
+          <div class="well-sm panel-body">
 
             <table class="table table-striped">
               <thead>
