@@ -4,6 +4,7 @@ Usage: <sc-column model-name="property"
         sortable="true|false"
         sorting="asc|desc"
         visible="true|false"
+        class=""
         [title]>
         </sc-column>
 */
@@ -49,7 +50,8 @@ Usage: <sc-column model-name="property"
             sorting: iAttrs.sorting,
             createCell: createCellFunc,
             defaultValue: iAttrs.defaultValue,
-            width: iAttrs.width
+            width: iAttrs.width,
+            'class': iAttrs['class']
           });
         };
       }

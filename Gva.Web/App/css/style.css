@@ -270,3 +270,10 @@ form.card input.form-control[disabled]
 .padding6 {
   padding: 6px;
 }
+
+table.dataTable td.buttons-cell
+{
+  white-space: nowrap;
+  padding: 2px;
+  width: 1px;
+}

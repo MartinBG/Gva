@@ -5,3 +5,8 @@ div.dataTables_wrapper div.dataTables_length label
 	float: right;
 	text-align: left;
 }
+
+table.table.dataTable
+{
+  margin-bottom: 2px !important;
+}

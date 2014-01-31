@@ -31,10 +31,8 @@
   <sc-column data="file" title="persons.checkSearch.file">
     <span>{{item.file[0].name}}</span>
   </sc-column>
-  <sc-column>
-    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" text="persons.checkSearch.edit" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-  </sc-column>
-  <sc-column>
-    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" text="persons.checkSearch.remove" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" class="buttons-cell">
+    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
 </sc-datatable>

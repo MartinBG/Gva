@@ -18,10 +18,8 @@
   <sc-column title="persons.documentEducationSearch.file">
     <span>{{item.file[0].name}}</span>
   </sc-column>
-  <sc-column width="115px">
-    <gva-button name="editBtn"  sortable="false" class="btn btn-xs btn-primary" gva-click="editDocumentEducation(item)" l10n-text="persons.documentEducationSearch.edit" icon="glyphicon-pencil"></gva-button>
-  </sc-column>
-  <sc-column  width="100px">
-    <gva-button name="deleteBtn"  sortable="false" class="btn btn-xs btn-default" gva-click="deleteDocumentEducation(item)" l10n-text="persons.documentEducationSearch.remove" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" class="buttons-cell">
+    <gva-button name="editBtn"  sortable="false" class="btn btn-xs btn-primary" gva-click="editDocumentEducation(item)" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn"  sortable="false" class="btn btn-xs btn-default" gva-click="deleteDocumentEducation(item)" icon="glyphicon-remove"></gva-button>
   </sc-column>
 </sc-datatable>

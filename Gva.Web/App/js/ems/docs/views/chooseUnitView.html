@@ -10,7 +10,7 @@
    <sc-datatable ng-model="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
     <sc-column data="name" title="Наименование">
     </sc-column>
-    <sc-column>
+    <sc-column sortable="false" class="buttons-cell">
       <button type="button" class="btn btn-xs btn-primary" ng-click="selectUnit(item)" l10n-text="units.select" ng-disabled="!onUnitSelected"></button>
     </sc-column>
   </sc-datatable>
