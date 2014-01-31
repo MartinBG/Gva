@@ -2,49 +2,13 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentIdCtrl($scope, $stateParams, PersonDocumentId) {
+  function PersonDocumentIdCtrl($scope) {
     $scope.isPositive = function (value) {
-      return (value >= 0 ? true: false);
-    };
-
-    var checkValue = function(param, value){
-      if (!value || !$stateParams.id) {
-        return true;
-      }
-
-      var queryParams = { id: $stateParams.id };
-      if (param === 'typeid') {
-        queryParams[param] = value.nomTypeValueId;
-      } else {
-        queryParams[param] = value;
-      }
-
-      return PersonDocumentId.query(queryParams).$promise
-        .then(function (documentIds) {
-          return documentIds.length === 0 ||
-            (documentIds.length === 1  &&
-            documentIds[0].partIndex === parseInt($stateParams.ind, 10));
-        });
-    };
-
-    $scope.isUniqueDocNumber = function (value) {
-      return checkValue('number', value);
-    };
-
-    $scope.isUniqueDocTypeId = function (value) {
-      return checkValue('typeid', value);
-    };
-
-    $scope.isUniquePublisher = function (value) {
-      return checkValue('publ', value);
-    };
-
-    $scope.isUniqueValidDateFrom = function (value) {
-      return checkValue('datef', value);
+      return (value >= 0 ? true : false);
     };
   }
 
-  PersonDocumentIdCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentId'];
+  PersonDocumentIdCtrl.$inject = ['$scope'];
 
   angular.module('gva').controller('PersonDocumentIdCtrl', PersonDocumentIdCtrl);
 }(angular));

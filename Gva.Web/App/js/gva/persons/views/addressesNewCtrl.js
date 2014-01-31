@@ -4,10 +4,15 @@
 
   function AddressesNewCtrl($scope, $state, $stateParams, PersonAddress) {
     $scope.save = function () {
-      return PersonAddress
-        .save({ id: $stateParams.id }, $scope.personAddress).$promise
+      $scope.personAddressForm.$validate()
         .then(function () {
-          return $state.go('persons.addresses.search');
+          if ($scope.personAddressForm.$valid) {
+            return PersonAddress
+              .save({ id: $stateParams.id }, $scope.personAddress).$promise
+              .then(function () {
+                return $state.go('persons.addresses.search');
+              });
+          }
         });
     };
 

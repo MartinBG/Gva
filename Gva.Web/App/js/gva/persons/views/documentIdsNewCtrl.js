@@ -4,10 +4,16 @@
 
   function DocumentIdsNewCtrl($scope, $state, $stateParams, PersonDocumentId) {
     $scope.save = function () {
-      return PersonDocumentId
-        .save({ id: $stateParams.id }, $scope.personDocumentId).$promise
+      $scope.newDocumentIdForm.$validate()
         .then(function () {
-          return $state.go('persons.documentIds.search');
+          if ($scope.newDocumentIdForm.$valid) {
+            return PersonDocumentId
+              .save({ id: $stateParams.id }, $scope.personDocumentId)
+              .$promise
+              .then(function () {
+                return $state.go('persons.documentIds.search');
+              });
+          }
         });
     };
 

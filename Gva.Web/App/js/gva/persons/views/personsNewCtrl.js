@@ -3,11 +3,26 @@
   'use strict';
 
   function PersonsNewCtrl($scope, $state, Person) {
+
+
+
+
     $scope.save = function () {
-      return Person.save($scope.newPerson).$promise
+
+      $scope.newPersonForm.$validate()
       .then(function () {
-        return $state.go('persons.search');
+        if ($scope.newPersonForm.$valid) {
+          return Person.save($scope.newPerson).$promise
+            .then(function () {
+              return $state.go('persons.search');
+            });
+        }
       });
+
+      //return Person.save($scope.newPerson).$promise
+      //.then(function () {
+      //  return $state.go('persons.search');
+      //});
     };
 
     $scope.cancel = function () {
