@@ -76,7 +76,8 @@
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',
           name: 'Име на заявление',
-          number: 'Номер на заявление'
+          number: 'Номер на заявление',
+          view: 'Преглед'
         },
         personStatusDirective: {
           title: 'Състояние',
@@ -463,6 +464,17 @@
         },
         ratingNew: {
           save: 'Запис',
+          cancel: 'Отказ'
+        }
+      },
+      applications: {
+        newform: {
+          person: 'Заявител',
+          newPerson: 'Нов заявител',
+          choosePerson: 'Избери заявител'
+        },
+        choosePerson: {
+          choose: 'Избери',
           cancel: 'Отказ'
         }
       }

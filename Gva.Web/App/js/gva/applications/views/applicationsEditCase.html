@@ -1,0 +1,43 @@
+﻿<div class="tab-content">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th style="width: 250px;">Тип/№/Дата</th>
+        <th>Тип</th>
+        <th >Дело</th>
+        <th style="width: 75px;"></th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="c in application.docCase">
+      <tr>
+        <td>{{ c.regNumber }} {{ c.statusName }}</td>
+        <td>{{ c.description }}</td>
+        <td></td>
+        <td style="text-align: right;">
+          <a ng-click="viewDoc(c.docId)" style="cursor: pointer;">Преглед
+          </a>
+        </td>
+      </tr>
+      <tr ng-repeat="df in c.docFiles">
+        <td></td>
+        <td>{{ df.name }} <span ng-show="!!df.setPartName">({{ df.setPartName }})</span></td>
+        <td>
+          <div ng-if="!!df.setPartId">
+            <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.part.bookPageNumber }}</a>
+          </div>
+
+          <div ng-if="!df.setPartId">
+            <a ng-click="linkNew(c.docId, df)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(c.docId, df)" style="cursor: pointer;">Свържи с вече добавен</a>
+          </div>
+
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align: right;">
+          <a ng-click="newfile(c)" style="cursor: pointer;">Нов файл</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

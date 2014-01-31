@@ -161,6 +161,39 @@
     <Content Include="App\js\gva\persons\forms\personRating.html" />
     <Content Include="App\js\gva\persons\forms\personRatingEditionCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personRatingEdition.html" />
+    <Content Include="App\js\gva\applications\resources\application.js" />
+    <Content Include="App\js\gva\applications\resources\applicationDocPart.js" />
+    <Content Include="App\js\gva\applications\views\applicationsLink.html" />
+    <Content Include="App\js\gva\applications\views\applicationsLinkCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsLinkCommon.html" />
+    <Content Include="App\js\gva\applications\views\applicationsLinkCommonCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEdit.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditCase.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditQuals.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditLicenses.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditCaseCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditQualsCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditLicensesCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditNewFile.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditNewFileCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditAddPart.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditAddPartCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsEditLinkPart.html" />
+    <Content Include="App\js\gva\applications\views\applicationsEditLinkPartCtrl.js" />
+    <Content Include="App\js\gva\applications\views\docChoose.html" />
+    <Content Include="App\js\gva\applications\views\docChooseCtrl.js" />
+    <Content Include="App\js\gva\applications\views\personChoose.html" />
+    <Content Include="App\js\gva\applications\views\personChooseCtrl.js" />
+    <Content Include="App\js\gva\applications\views\personNew.html" />
+    <Content Include="App\js\gva\applications\views\personNewCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsNewDocCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsNewDoc.html" />
+    <Content Include="App\js\gva\applications\views\applicationsNew.html" />
+    <Content Include="App\js\gva\applications\views\applicationsNewCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
+    <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentTraining.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentTrainingCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentEducation.html" />
@@ -234,6 +267,11 @@
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\schema\person-rating-edition.sample.js" />
     <Content Include="App\schema\person-rating.sample.js" />
+    <Content Include="App\test\ems\mocks\docCases.js" />
+    <Content Include="App\test\gva\applications\mocks\applicationsHttp.js" />
+    <Content Include="App\test\gva\applications\mocks\applicationDocPartHttp.js" />
+    <Content Include="App\test\gva\applications\mocks\applicationsFactory.js" />
+    <Content Include="App\test\ems\mocks\docs.js" />
     <Content Include="App\schema\person-document-checks.sample.js" />
     <Content Include="App\test\ems\mocks\unitsHttp.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
@@ -250,6 +288,7 @@
     <Content Include="App\schema\person-flyingExperience.sample.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
+    <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
     <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbed.html" />
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
@@ -496,6 +535,7 @@
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
     <Folder Include="App\js\ems\docs\forms\" />
+    <Folder Include="App\js\gva\applications\forms\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>

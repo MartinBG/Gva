@@ -1,0 +1,35 @@
+﻿<div class="container page-content">
+
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
+    <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
+    <sc-filter type="text" name="names" class="col-sm-3" removable="true" label="persons.search.names"></sc-filter>
+    <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
+    <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
+    <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
+    <sc-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-button>
+    <sc-button action="cancel()" text="applications.choosePerson.cancel" icon="glyphicon-user"></sc-button>
+    <sc-button action="add"></sc-button>
+  </sc-search>
+
+
+  <sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="names" title="persons.search.names" ng-href="/{{id}}">
+    </sc-column>
+    <sc-column data="lin" title="persons.search.lin">
+    </sc-column>
+    <sc-column data="uin" title="persons.search.uin">
+    </sc-column>
+    <sc-column data="age" title="persons.search.age">
+    </sc-column>
+    <sc-column data="licences" title="persons.search.licences">
+    </sc-column>
+    <sc-column data="ratings" title="persons.search.ratings">
+    </sc-column>
+    <sc-column data="organization" title="persons.search.organization">
+    </sc-column>
+    <sc-column sortable="false" width="115px">
+      <gva-button name="viewButton" gva-click="choosePerson(item)" text="applications.choosePerson.choose" class="btn-xs btn-info"></gva-button>
+    </sc-column>
+  </sc-datatable>
+</div>

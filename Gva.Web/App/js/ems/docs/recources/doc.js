@@ -7,7 +7,7 @@
       function ($resource) {
         return $resource('/api/docs/:docId', { docId: '@docId' },
           {
-            'create': {
+            'createNew': {
               method: 'GET',
               url: '/api/docs/new'
             },

@@ -13,7 +13,7 @@ Usage: <sc-column model-name="property"
 (function (angular) {
   'use strict';
 
-  function ColumnDirective() {
+  function ColumnDirective($rootScope) {
     return {
       restrict: 'E',
       require: '^scDatatable',
@@ -35,7 +35,7 @@ Usage: <sc-column model-name="property"
               angular.element(nTd).empty();
               angular.element(nTd).append(clone);
 
-              if (!childScope.$$phase) {
+              if (!$rootScope.$$phase) {
                 childScope.$digest();
               }
             };
@@ -57,5 +57,8 @@ Usage: <sc-column model-name="property"
       }
     };
   }
+
+  ColumnDirective.$inject = ['$rootScope'];
+
   angular.module('scaffolding').directive('scColumn', ColumnDirective);
 }(angular));

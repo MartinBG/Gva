@@ -1,0 +1,58 @@
+﻿<div class="tab-content" ng-init="wrapper = {}">
+  <div ng-if="documentData.docPartType">
+    <ng-form name="addFormWrapper">
+      <!--DOCUMENT ID-->
+      <div ng-if="documentData.docPartType.content.setPartId === 1">
+        <gva-person-document-id name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-id>
+      </div>
+
+      <!--DOCUMENT EDUCATION-->
+      <div ng-if="documentData.docPartType.content.setPartId === 2">
+        <gva-person-document-education name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-education>
+      </div>
+
+      <!--DOCUMENT EMPLOYMENT-->
+      <div ng-if="documentData.docPartType.content.setPartId === 3">
+        <gva-person-document-employment name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-employment>
+      </div>
+
+      <!--DOCUMENT MED-->
+      <div ng-if="documentData.docPartType.content.setPartId === 4">
+        <gva-person-document-medical name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-medical>
+      </div>
+
+      <!--DOCUMENT CHECK-->
+      <div ng-if="documentData.docPartType.content.setPartId === 5">
+        <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
+      </div>
+
+      <div ng-if="!documentData.isLinkNew">
+        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="wrapper.applicationDocPart.file"></gva-person-scanned-document>
+        <div class="form-group col-sm-3 col-sm-offset-5">
+          <gva-button name="saveBtn" gva-click="addPart()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$invalid"></gva-button>
+          <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+        </div>
+      </div>
+
+      <div ng-if="documentData.isLinkNew">
+        <!--CANNOT BE EDITED-->
+        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="documentData.docFiles"></gva-person-scanned-document>
+        <div class="form-group col-sm-3 col-sm-offset-5">
+          <gva-button name="saveBtn" gva-click="linkNew()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$invalid"></gva-button>
+          <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+        </div>
+      </div>
+
+      <!--TODO ADD MORE-->
+      <div style="clear: both;"></div>
+    </ng-form>
+  </div>
+
+
+  <div ng-if="!documentData.docPartType">
+    <div class="form-group col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
+      <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>

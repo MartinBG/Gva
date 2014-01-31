@@ -12,7 +12,7 @@
 
     var nomenclatures = require('./nomenclatures.sample');
 
-    Doc.create().$promise
+    Doc.createNew().$promise
       .then(function (result) {
         $scope.doc = result;
 
