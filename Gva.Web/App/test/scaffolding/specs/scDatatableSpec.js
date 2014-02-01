@@ -92,8 +92,9 @@
     });
 
     it('correct sorting settings should be set by sc-datatable parameters', function () {
-      expect(datatablePage.datatable2.getColumnsClasses())
-        .toEqual(['sorting_disabled scdt-username', 'sorting_disabled scdt-fullname']);
+      datatablePage.datatable2.getColumnsClasses().then(function (columnsClasses) {
+        expect(columnsClasses[0]).toMatch(/sorting_disabled/);
+      });
     });
     
     it('a column should be hidden because of the sc-column parameter called visibility',

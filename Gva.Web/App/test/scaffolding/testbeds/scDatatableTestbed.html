@@ -29,8 +29,8 @@
   </div>
 
   <div class="row">
-    <sc-datatable ng-model="users2" sortable="false" pageable="false" dynamic-columns="false">
-      <sc-column data="username" title="Потребителско име" type="string" name="username">
+    <sc-datatable ng-model="users2" sortable="true" pageable="false" dynamic-columns="false">
+      <sc-column data="username" title="Потребителско име" type="string" name="username" sortable="false">
       </sc-column>
       <sc-column data="fullname" title="Име" type="string" name="name">
       </sc-column>
@@ -49,7 +49,7 @@
         <span>{{item.isActive? 'Да' : 'Не'}}</span>
       </sc-column>
       <sc-column>
-        <button type="button" class="btn-xs btn-info" ng-click="editUser(item)"></button>
+        <button type="button" class="btn-xs btn-info" ng-click="editUser(item)">Редакция</button>
       </sc-column>
     </sc-datatable>
   </div>

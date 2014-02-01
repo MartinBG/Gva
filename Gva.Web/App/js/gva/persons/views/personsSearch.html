@@ -14,22 +14,22 @@
 
 
   <sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="names" title="persons.search.names" ng-href="/{{id}}">
+    <sc-column data="names" title="persons.search.names" ng-href="/{{id}}" width="200px">
     </sc-column>
-    <sc-column data="lin" title="persons.search.lin">
+    <sc-column data="lin" title="persons.search.lin" width="60px">
     </sc-column>
-    <sc-column data="uin" title="persons.search.uin">
+    <sc-column data="uin" title="persons.search.uin" width="80px">
     </sc-column>
-    <sc-column data="age" title="persons.search.age">
+    <sc-column data="age" title="persons.search.age" width="70px">
     </sc-column>
     <sc-column data="licences" title="persons.search.licences">
     </sc-column>
     <sc-column data="ratings" title="persons.search.ratings">
     </sc-column>
-    <sc-column data="organization" title="persons.search.organization">
+    <sc-column data="organization" title="persons.search.organization" width="100px">
     </sc-column>
-    <sc-column sortable="false" class="buttons-cell">
-      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-file"></gva-button>
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

@@ -1,12 +1,7 @@
-div.dataTables_wrapper div.dataTables_length label
+div.dataTables_length label
 {
   margin-left: 5px;
-	font-weight: normal;
-	float: right;
-	text-align: left;
-}
-
-table.table.dataTable
-{
-  margin-bottom: 2px !important;
+  font-weight: normal;
+  float: right;
+  text-align: left;
 }

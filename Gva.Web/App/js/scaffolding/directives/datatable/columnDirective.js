@@ -50,7 +50,7 @@ Usage: <sc-column model-name="property"
             sorting: iAttrs.sorting,
             createCell: createCellFunc,
             defaultValue: iAttrs.defaultValue,
-            width: iAttrs.width,
+            width: iAttrs.width || null,
             'class': iAttrs['class']
           });
         };

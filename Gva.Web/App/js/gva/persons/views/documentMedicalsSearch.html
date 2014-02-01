@@ -1,6 +1,6 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentMedical()" text="persons.medicalSearch.newMedical" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
+  <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial" width="200px">
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom">
     <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
@@ -18,9 +18,9 @@
   </sc-column>
   <sc-column data="part.pageCount" title="persons.medicalSearch.pageCount">
   </sc-column>
-  <sc-column data="part.notes" title="persons.medicalSearch.notes">
+  <sc-column data="part.notes" title="persons.medicalSearch.notes" visible="false">
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
     <gva-button name="editBtn" gva-click="editDocumentMedical(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" gva-click="deleteDocumentMedical(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>

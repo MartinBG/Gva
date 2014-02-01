@@ -23,7 +23,7 @@
       navigationConfigProvider
     ) {
       $locationProvider.html5Mode(false);
-      $urlRouterProvider.otherwise('/users');
+      $urlRouterProvider.otherwise('/persons');
 
       navigationConfigProvider
         .addItem({ text: 'ЛАП', icon: 'fa fa-users', items: [
@@ -63,7 +63,7 @@
         .setUserFullName('Администратор')
         .setUserHasPassword(true)
         .showBreadcrumbBar(true)
-        .setBreadcrumbBarHomeState('users');
+        .setBreadcrumbBarHomeState('persons');
     }
   ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
     $rootScope.l10n = l10n;
