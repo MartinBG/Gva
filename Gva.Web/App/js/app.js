@@ -26,7 +26,7 @@
       $urlRouterProvider.otherwise('/users');
 
       navigationConfigProvider
-        .addItem({ text: 'Персонал', items: [
+        .addItem({ text: 'ЛАП', icon: 'fa fa-users', items: [
           { text: 'Физически лица', state: 'persons.search' },
           { text: 'Ново физическо лице', state: 'persons.new' },
           { text: 'Лицензи', url: '/licenses' },
@@ -36,23 +36,21 @@
           { text: 'Ново заявление', state: 'applications/new/doc' },
           { text: 'Свържи заявление', state: 'applications/link/common' }
         ]})
-        .addItem({ text: 'Организации', url: '/organizations', items: [
-          { text: 'Удостоверения', url: '/licenses' },
-          { text: 'Одити', url: '/licenses' },
-          { text: 'Надзор', url: '/licenses' },
-          { text: 'Ръководен Персонал', url: '/licenses' }
-        ]})
-        .addItem({text: 'Документи', icon: 'glyphicon-folder-open', state: 'docs/search', items: [
-          { text: 'Нов документ', state: 'docs/new' }
-        ]})
-        .addItem({text: 'Кореспонденти', icon: 'glyphicon-user', state: 'corrs/search', items: [
-          { text: 'Нов кореспондент', state: 'corrs/new' }
-        ]})
-        .addItem({text: 'Възд. Средства', url: '/aircraft', items: [
+        .addItem({text: 'ВС', icon: 'glyphicon glyphicon-plane', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licenses' },
           { text: 'Инспекции', url: '/licenses' }
         ]})
-        .addItem({ text: 'Админ', icon: 'glyphicon-wrench', items: [
+        .addItem({
+          text: 'Документи',
+          icon: 'glyphicon glyphicon-folder-open',
+          state: 'docs/search',
+          items: [
+            { text: 'Нов документ', state: 'docs/new' },
+            { text: 'Кореспонденти', state: 'corrs/search' },
+            { text: 'Нов кореспондент', state: 'corrs/new' }
+          ]
+        })
+        .addItem({ text: 'Админ', icon: 'glyphicon glyphicon-wrench', items: [
           { text: 'Потребители', state: 'users.search' }
         ]})
         .addItem({ text: 'Помощ', items: [
@@ -64,7 +62,8 @@
         ]})
         .setUserFullName('Администратор')
         .setUserHasPassword(true)
-        .showBreadcrumbBar(true);
+        .showBreadcrumbBar(true)
+        .setBreadcrumbBarHomeState('users');
     }
   ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
     $rootScope.l10n = l10n;

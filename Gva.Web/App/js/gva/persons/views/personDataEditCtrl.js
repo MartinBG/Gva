@@ -8,9 +8,17 @@
     });
 
     $scope.save = function () {
-      return $scope.personData.$save({ id: $stateParams.id }).then(function () {
-        return $state.go('persons.view');
-      });
+      $scope.personDataForm.$validate()
+       .then(function () {
+          if ($scope.personDataForm.$valid) {
+            return PersonData
+              .save({ id: $stateParams.id }, $scope.personData)
+              .$promise
+              .then(function () {
+                return $state.go('persons.view');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

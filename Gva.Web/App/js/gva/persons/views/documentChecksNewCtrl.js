@@ -3,12 +3,18 @@
   'use strict';
 
   function DocumentChecksNewCtrl($scope, $state, $stateParams, PersonDocumentCheck) {
+    $scope.isEdit = false;
     $scope.save = function () {
-      return PersonDocumentCheck
-        .save({ id: $stateParams.id }, $scope.personDocumentCheck).$promise
-        .then(function () {
-          return $state.go('persons.checks.search');
-        });
+      $scope.personDocumentCheckForm.$validate()
+         .then(function () {
+            if ($scope.personDocumentCheckForm.$valid) {
+              return PersonDocumentCheck
+               .save({ id: $stateParams.id }, $scope.personDocumentCheck).$promise
+               .then(function () {
+                  return $state.go('persons.checks.search');
+                });
+            }
+          });
     };
 
     $scope.cancel = function () {

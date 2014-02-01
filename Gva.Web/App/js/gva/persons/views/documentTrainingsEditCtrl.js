@@ -3,6 +3,7 @@
   'use strict';
 
   function DocumentTrainingsEditCtrl($scope, $state, $stateParams, PersonDocumentTraining) {
+    $scope.isEdit = true;
     PersonDocumentTraining
     .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
     .then(function (documentTraining) {
@@ -10,11 +11,16 @@
     });
 
     $scope.save = function () {
-      return PersonDocumentTraining
-        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentTraining)
-        .$promise
+      $scope.personDocumentTrainingForm.$validate()
         .then(function () {
-          return $state.go('persons.documentTrainings.search');
+          if ($scope.personDocumentTrainingForm.$valid) {
+            return PersonDocumentTraining
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentTraining)
+              .$promise
+              .then(function () {
+                return $state.go('persons.documentTrainings.search');
+              });
+          }
         });
     };
 

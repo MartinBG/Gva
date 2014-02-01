@@ -15,8 +15,7 @@
           yes: 'Да',
           no: 'Не',
           'new': 'Ново лице',
-          search: 'Търси',
-          view: 'Преглед'
+          search: 'Търси'
         },
         personDataDirective: {
           title: 'Лични данни',
@@ -48,7 +47,7 @@
           phone: 'Телефон'
         },
         personDocumentEducationDirective: {
-          title: 'Образнование',
+          title: 'Образование',
           documentNumber: 'Номер на документ',
           completionDate: 'Дата на завършване',
           bookPageNumber: 'Номер на страница в деловодна книга',
@@ -159,6 +158,58 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа'
         },
+        personFlyingExperienceDirective: {
+          title: 'Летателен/практически опит',
+          staffType: 'Тип персонал',
+          month: 'За месец',
+          year: 'Година',
+          organization: 'Организация',
+          aircraft: 'Рег.знак на ВС',
+          ratingType: 'Тип ВС',
+          ratingClass: 'Клас',
+          licenceType: 'Кв.ниво',
+          authorization: 'Разрешение',
+          locationIndicator: 'Местоположение',
+          sector: 'Сектор/раб.място',
+          experienceRole: 'Роля',
+          experienceMeasure: 'Вид опит',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          documentDate: 'Дата на документа',
+          dayDuration: 'Нальот(дневен)',
+          nightDuration: 'Нальот(нощен)',
+          IFR: 'IFR',
+          VFR: 'VFR',
+          dayLandings: 'Кацания(ден)',
+          nightLandings: 'Кацания(нощ)',
+          total: 'Общо количество (с натрупване)',
+          totalDoc: 'Общо количество (по документа)',
+          totalLastMonths: 'Общ нальот за посл. 12 месеца',
+          notUnique: 'Данните се дублират с вече съществуващ запис'
+        },
+        ratingEditionDirective : {
+          title:'Вписване/Потвърждение',
+          documentDateValidFrom: 'Дата на вписване',
+          documentDateValidTo: 'Валидно до',
+          inspector: 'Инспектор',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          limitations: 'Ограничения',
+          subclasses: 'Подкв.класове'
+        },
+        ratingDirective: {
+          title: 'Клас',
+          staffType: 'Тип персонал',
+          ratingType: 'Тип ВС',
+          personRatingLevel: 'Степен',
+          sector: 'Сектор/работно място',
+          locationIndicator: 'Индикатор на местоположение',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingCategory: 'Категория',
+          personRatingModel: 'Модел'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -187,9 +238,7 @@
           address: 'Адрес',
           postalCode: 'Пощенски код',
           phone: 'Телефон',
-          valid: 'Актуален',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          valid: 'Актуален'
         },
         newStatus: {
           save: 'Запис',
@@ -206,9 +255,7 @@
           documentDateValidFrom: 'Начална дата',
           documentDateValidTo: 'Крайна дата',
           notes: 'Бележки',
-          isActive: 'Активен',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          isActive: 'Активен'
         },
         newDocumentId: {
           save: 'Запис',
@@ -236,8 +283,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга.',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newDocumentId: 'Нов документ'
         },
         medicalSearch: {
@@ -251,8 +296,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newMedical: 'Ново медицинско'
         },
         newMedical: {
@@ -273,9 +316,7 @@
           notes: 'Бележки',
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа.',
-          file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          file: 'Файл'
         },
         newEmployment: {
           save: 'Запис',
@@ -294,9 +335,7 @@
           bookPageNumber: 'Номер на стр. в деловодна книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
-          newDocumentEducation: 'Ново образнование'
+          newDocumentEducation: 'Ново образование'
         },
         checkSearch: {
           newCheck: 'Нова проверка',
@@ -314,9 +353,7 @@
           notes: 'Бележки',
           bookPageNumber: '№ на стр. в дел. книга',
           pageCount: 'Бр. стр.',
-          file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий'
+          file: 'Файл'
         },
         editCheck: {
           save: 'Запис',
@@ -342,8 +379,6 @@
           bookPageNumber: 'Номер на страница в деловодна книга',
           pageCount: 'Брой страници на документа',
           file: 'Файл',
-          edit: 'Редакция',
-          remove: 'Изтрий',
           newDocumentTraining: 'Нов документ'
         },
         newDocumentTraining: {
@@ -351,6 +386,83 @@
           cancel: 'Отказ'
         },
         editDocumentTraining: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        flyingExperienceSearch: {
+          staffType: 'Тип персонал',
+          month: 'За месец',
+          year: 'Година',
+          organization: 'Организация',
+          aircraft: 'Рег.знак на ВС',
+          ratingType: 'Тип ВС',
+          ratingClass: 'Клас',
+          licenceType: 'Кв.ниво',
+          authorization: 'Разрешение',
+          locationIndicator: 'Местоположение',
+          sector: 'Сектор/работно място',
+          experienceRole: 'Роля',
+          experienceMeasure: 'Вид опит',
+          bookPageNumber: 'Номер на страница в деловодна книга',
+          pageCount: 'Брой страници на документа',
+          documentDate: 'Дата на документа',
+          newFlyingExperience: 'Нов летателен/практически опит'
+        },
+        flyingExperienceNew: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        flyingExperienceEdit: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        inventorySearch: {
+          bookPageNumber: 'Номер на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: 'Номер на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. страници',
+          file: 'Файл'
+        },
+        ratingSearch: {
+          newRating : 'Нов клас',
+          ratingTypeOrRatingLevel: 'Тип ВС/Степен',
+          classOrCategory: 'Клас/Подклас (Категория)',
+          authorizationAndLimitations: 'Разрешение (ограничения)',
+          firstEditionValidFrom: 'Първоначално издаване',
+          documentDateValidFrom: 'Издаден',
+          documentDateValidTo: 'Валиден до',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          personRatingModel: 'Модел'
+        },
+        ratingEditionsSearch: {
+          newEdition : 'Ново вписване/Потвърждаване',
+          ratingTypeOrRatingLevel: 'Тип ВС/Степен',
+          classOrCategory: 'Клас/Подклас (Категория)',
+          authorizationAndLimitations: 'Разрешение (ограничения)',
+          firstEditionValidFrom: 'Първоначално издаване',
+          documentDateValidFrom: 'Дата на издаване',
+          documentDateValidTo: 'Валиден до',
+          notes: 'Бележки',
+          notesAlt: 'Бележки лат.',
+          personRatingModel: 'Модел',
+          inspector: 'Инспектор'
+        },
+        ratingEditionNew: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ratingEditionEdit: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ratingNew: {
           save: 'Запис',
           cancel: 'Отказ'
         }

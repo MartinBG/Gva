@@ -10,11 +10,16 @@
       });
 
     $scope.save = function () {
-      return PersonAddress
-        .save({id: $stateParams.id, ind: $stateParams.ind}, $scope.personAddress).$promise
-        .then(function () {
-          return $state.go('persons.addresses.search');
-        });
+      $scope.personAddressForm.$validate()
+      .then(function () {
+        if ($scope.personAddressForm.$valid) {
+          return PersonAddress
+            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personAddress).$promise
+            .then(function () {
+              return $state.go('persons.addresses.search');
+            });
+        }
+      });
     };
 
     $scope.cancel = function () {

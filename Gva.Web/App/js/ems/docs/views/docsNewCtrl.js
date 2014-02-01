@@ -18,6 +18,7 @@
         $scope.parentDoc = parentDoc;
         $scope.parentDocInfo =
           'Към ' + parentDoc.regUri + ' ' + parentDoc.docTypeName + ' ' + parentDoc.docSubject;
+
       });
     }
 

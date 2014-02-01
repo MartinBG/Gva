@@ -10,10 +10,16 @@
       });
 
     $scope.save = function () {
-      return PersonDocumentMedical
-        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentMedical).$promise
+      $scope.personDocumentMedicalForm.$validate()
         .then(function () {
-          return $state.go('persons.medicals.search');
+          if ($scope.personDocumentMedicalForm.$valid) {
+            return PersonDocumentMedical
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentMedical)
+              .$promise
+              .then(function () {
+                return $state.go('persons.medicals.search');
+              });
+          }
         });
     };
 

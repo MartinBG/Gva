@@ -63,8 +63,21 @@
       templateUrl: 'gva/persons/forms/personDocumentTraining.html',
       controller: 'PersonDocumentTrainingCtrl'
     });
-  }])
-    .config(['$stateProvider', function ($stateProvider) {
+    scaffoldingProvider.form({
+      name: 'gvaPersonFlyingExperience',
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
+      controller: 'PersonFlyingExperienceCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaRatingEdition',
+      templateUrl: 'gva/persons/forms/personRatingEdition.html',
+      controller: 'PersonRatingEditionCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaRating',
+      templateUrl: 'gva/persons/forms/personRating.html'
+    });
+  }]).config(['$stateProvider', function ($stateProvider) {
       $stateProvider
         .state({
           name: 'applications',
@@ -243,7 +256,7 @@
         })
         .state({
           name: 'applications/edit/newfile',
-          title: 'Нов файл',
+          title: 'Нов документ',
           parent: 'applications/edit',
           url: '/newfile',
           views: {
@@ -688,6 +701,131 @@
             'detailView@persons.view': {
               templateUrl: 'gva/persons/views/documentTrainingsEdit.html',
               controller: 'DocumentTrainingsEditCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.flyingExperiences',
+          title: 'Летателен/практически опит',
+          parent: 'persons.view',
+          url: '/flyingExperiences',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.flyingExperiences.search',
+          parent: 'persons.flyingExperiences',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/flyingExperiencesSearch.html',
+              controller: 'FlyingExperiencesSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.flyingExperiences.new',
+          title: 'Нов летателен/практически опит',
+          parent: 'persons.flyingExperiences',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/flyingExperiencesNew.html',
+              controller: 'FlyingExperiencesNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.flyingExperiences.edit',
+          title: 'Редакция на летателен/практически опит',
+          parent: 'persons.flyingExperiences',
+          url: '/:ind',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/flyingExperiencesEdit.html',
+              controller: 'FlyingExperiencesEditCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.inventory',
+          parent: 'persons.view',
+          url: '/inventory',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/inventorySearch.html',
+              controller: 'InventorySearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.ratings',
+          title: 'Класове',
+          parent: 'persons.view',
+          url: '/ratings',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.ratings.search',
+          parent: 'persons.ratings',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/ratingsSearch.html',
+              controller: 'RatingsSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.ratings.new',
+          title: 'Нов клас',
+          parent: 'persons.ratings',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/ratingsNew.html',
+              controller: 'RatingsNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.editions',
+          title: 'Вписвания/Потвърждения',
+          parent: 'persons.ratings',
+          url: '/:ind/editions',
+          'abstract': true
+        })
+        .state({
+          name: 'persons.editions.search',
+          parent: 'persons.editions',
+          url: '',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/editionsSearch.html',
+              controller: 'ЕditionsSearchCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.editions.new',
+          title: 'Ново вписване/потвърждение',
+          parent: 'persons.editions',
+          url: '/new',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/editionsNew.html',
+              controller: 'EditionsNewCtrl'
+            }
+          }
+        })
+        .state({
+          name: 'persons.editions.edit',
+          title: 'Редакция на вписване/потвърждение',
+          parent: 'persons.editions',
+          url: '/:childInd',
+          views: {
+            'detailView@persons.view': {
+              templateUrl: 'gva/persons/views/editionsEdit.html',
+              controller: 'EditionsEditCtrl'
             }
           }
         });

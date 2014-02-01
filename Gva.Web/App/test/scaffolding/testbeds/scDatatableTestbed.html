@@ -1,4 +1,4 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="row">
     <button type="button" class="btn-xs btn-info" ng-click="loadManyInFirstTable()" id="loadManyInTable1Btn">Load many users in the first table</button>
     <button type="button" class="btn-xs btn-info" ng-click="loadManyInSecondTable()" id="loadManyInTable2Btn">Load many users in the second table</button>
@@ -16,7 +16,7 @@
       <sc-column data="isActive" title="Активен" type="string" name="isActive">
         <span>{{item.isActive? 'Да' : 'Не'}}</span>
       </sc-column>
-      <sc-column data="buttons">
+      <sc-column>
         <button type="button" class="btn-xs btn-info" ng-click="editUser(item)">Редакция</button>
       </sc-column>
     </sc-datatable>
@@ -38,21 +38,19 @@
   </div>
 
   <div class="row">
-    <div class="container page-content">
-      <sc-datatable ng-model="users3" filterable="false" pageable="false" dynamic-columns="false">
-        <sc-column data="username" title="Потребителско име" name="username" sortable="false">
-        </sc-column>
-        <sc-column data="fullname" title="Име" name="name" visible="false">
-        </sc-column>
-        <sc-column data="roles" title="Роли" name="roles">
-        </sc-column>
-        <sc-column data="isActive" title="Активен" name="isActive" sorting="desc">
-          <span>{{item.isActive? 'Да' : 'Не'}}</span>
-        </sc-column>
-        <sc-column>
-          <button type="button" class="btn-xs btn-info" ng-click="editUser(item)" l10n-text="common.users.search.edit"></button>
-        </sc-column>
-      </sc-datatable>
-    </div>
+    <sc-datatable ng-model="users3" filterable="false" pageable="false" dynamic-columns="false">
+      <sc-column data="username" title="Потребителско име" name="username" sortable="false">
+      </sc-column>
+      <sc-column data="fullname" title="Име" name="name" visible="false">
+      </sc-column>
+      <sc-column data="roles" title="Роли" name="roles">
+      </sc-column>
+      <sc-column data="isActive" title="Активен" name="isActive" sorting="desc">
+        <span>{{item.isActive? 'Да' : 'Не'}}</span>
+      </sc-column>
+      <sc-column>
+        <button type="button" class="btn-xs btn-info" ng-click="editUser(item)"></button>
+      </sc-column>
+    </sc-datatable>
   </div>
 </div>

@@ -1,0 +1,34 @@
+﻿<div>
+  <gva-button name="createBtn" gva-click="newEdition()" text="persons.ratingEditionsSearch.newEdition" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+  <sc-datatable ng-model="editions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="ratingEdition.part.documentDateValidFrom" title="persons.ratingEditionsSearch.documentDateValidFrom">
+      <span>{{item.ratingEdition.part.documentDateValidFrom| date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="ratingEdition.part.documentDateValidTo" title="persons.ratingEditionsSearch.documentDateValidTo">
+      <span>{{item.ratingEdition.part.documentDateValidTo| date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="firstEditionValidFrom" title="persons.ratingEditionsSearch.firstEditionValidFrom">
+      <span>{{item.firstEditionValidFrom | date:'mediumDate'}}</span>
+    </sc-column>
+    <sc-column data="rating.ratingTypeOrRatingLevel.name" title="persons.ratingEditionsSearch.ratingTypeOrRatingLevel">
+    </sc-column>
+    <sc-column data="rating.classOrSubclass" title="persons.ratingEditionsSearch.classOrCategory">
+    </sc-column>
+    <sc-column data="rating.authorizationAndLimitations" title="persons.ratingSearch.authorizationAndLimitations">
+    </sc-column>
+    <sc-column data="ratingEdition.part.notes" title="persons.ratingEditionsSearch.notes">
+    </sc-column>
+    <sc-column data="ratingEdition.part.notesAlt" title="persons.ratingEditionsSearch.notesAlt">
+    </sc-column>
+    <sc-column data="ratingEdition.part.inspector.name" title="persons.ratingEditionsSearch.inspector">
+    </sc-column>
+    <sc-column data="rating.personRatingModel.name" title="persons.ratingEditionsSearch.personRatingModel">
+    </sc-column>
+    <sc-column sortable="false" class="buttons-cell">
+      <gva-button name="editBtn" gva-click="editEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    </sc-column>
+    <sc-column sortable="false" class="buttons-cell">
+      <gva-button name="deleteBtn" gva-click="deleteEdition(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+    </sc-column>
+</sc-datatable>
+</div>

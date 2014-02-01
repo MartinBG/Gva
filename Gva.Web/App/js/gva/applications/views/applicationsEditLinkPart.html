@@ -1,6 +1,6 @@
 ﻿<div class="tab-content" ng-init="wrapper = {}">
   <div class="panel panel-default">
-    <div class="panel-heading form-title"><strong>Свържи документ в описа</strong></div>
+    <div class="panel-heading"><strong>Свържи документ в описа</strong></div>
     <div class="well-sm panel-body form-body">
 
       <div ng-if="documentData.docFiles.length > 0">
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <br />
+        <!--<br />-->
 
         <div ng-if="showDocumentId && documentData.docPartType.content.setPartId === 1">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
@@ -159,7 +159,7 @@
       </div>
 
       <div ng-if="!documentData.docFiles.length">
-        <div class="form-group col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
+        <div class="col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
           <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
         </div>
       </div>

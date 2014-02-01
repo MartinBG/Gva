@@ -1,4 +1,4 @@
-﻿<div class="tab-content">
+﻿<div>
 
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
     <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="units.name"></sc-filter>
@@ -10,12 +10,10 @@
    <sc-datatable ng-model="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
     <sc-column data="name" title="Наименование">
     </sc-column>
-    <sc-column>
-      <button type="button" class="btn-xs btn-info" ng-click="selectUnit(item)" l10n-text="units.select" ng-disabled="!onUnitSelected"></button>
+    <sc-column sortable="false" class="buttons-cell">
+      <button type="button" class="btn btn-xs btn-primary" ng-click="selectUnit(item)" l10n-text="units.select" ng-disabled="!onUnitSelected"></button>
     </sc-column>
   </sc-datatable>
   <!--todo add back button-->
-
-  <div style="clear: both;"> </div>
 
 </div>

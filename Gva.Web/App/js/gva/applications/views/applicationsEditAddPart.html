@@ -1,58 +1,53 @@
 ﻿<div class="tab-content" ng-init="wrapper = {}">
-  <div ng-if="documentData.docPartType">
-    <ng-form name="addFormWrapper">
-      <!--DOCUMENT ID-->
-      <div ng-if="documentData.docPartType.content.setPartId === 1">
-        <gva-person-document-id name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-id>
-      </div>
+  <ng-form name="addFormWrapper" sc-validate="{}">
+    <div ng-if="documentData.docPartType">
+        <div ng-if="documentData.docPartType.content.setPartId === 1">
+          <gva-person-document-id name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-id>
+        </div>
+        <div ng-if="documentData.docPartType.content.setPartId === 2">
+          <gva-person-document-education name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-education>
+        </div>
+        <div ng-if="documentData.docPartType.content.setPartId === 3">
+          <gva-person-document-employment name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-employment>
+        </div>
+        <div ng-if="documentData.docPartType.content.setPartId === 4">
+          <gva-person-document-medical name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-medical>
+        </div>
+        <div ng-if="documentData.docPartType.content.setPartId === 5">
+          <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
+        </div>
+        <!--TODO ADD MORE-->
 
-      <!--DOCUMENT EDUCATION-->
-      <div ng-if="documentData.docPartType.content.setPartId === 2">
-        <gva-person-document-education name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-education>
-      </div>
+        <ng-form name="personScannedDocumentForm">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
+            <div class="well-sm panel-body">
+              <div class="row">
+                <div class="form-group col-sm-3" ng-class="{'has-error': addFormWrapper.$validated && addFormWrapper.personScannedDocumentForm.$invalid}">
+                  <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
+                  <span ng-show="addFormWrapper.personScannedDocumentForm.$invalid && addFormWrapper.$validated && !addFormWrapper.personScannedDocumentForm.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+                  <sc-files ng-if="!documentData.isLinkNew" ng-model="wrapper.applicationDocPart.file" ng-required="true"></sc-files>
+                  <sc-files ng-if="documentData.isLinkNew" ng-model="documentData.docFiles" ng-readonly="true"></sc-files>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-form>
 
-      <!--DOCUMENT EMPLOYMENT-->
-      <div ng-if="documentData.docPartType.content.setPartId === 3">
-        <gva-person-document-employment name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-employment>
-      </div>
-
-      <!--DOCUMENT MED-->
-      <div ng-if="documentData.docPartType.content.setPartId === 4">
-        <gva-person-document-medical name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-medical>
-      </div>
-
-      <!--DOCUMENT CHECK-->
-      <div ng-if="documentData.docPartType.content.setPartId === 5">
-        <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
-      </div>
-
-      <div ng-if="!documentData.isLinkNew">
-        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="wrapper.applicationDocPart.file"></gva-person-scanned-document>
-        <div class="form-group col-sm-3 col-sm-offset-5">
-          <gva-button name="saveBtn" gva-click="addPart()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$invalid"></gva-button>
+        <div class="col-sm-3 col-sm-offset-5">
+          <gva-button ng-if="!documentData.isLinkNew" name="saveBtn" gva-click="addPart()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
+          <gva-button ng-if="documentData.isLinkNew" name="saveBtn" gva-click="linkNew()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
           <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
         </div>
-      </div>
-
-      <div ng-if="documentData.isLinkNew">
-        <!--CANNOT BE EDITED-->
-        <gva-person-scanned-document name="personScannedDocumentForm" ng-model="documentData.docFiles"></gva-person-scanned-document>
-        <div class="form-group col-sm-3 col-sm-offset-5">
-          <gva-button name="saveBtn" gva-click="linkNew()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$invalid"></gva-button>
-          <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-        </div>
-      </div>
-
-      <!--TODO ADD MORE-->
-      <div style="clear: both;"></div>
-    </ng-form>
-  </div>
-
+        
+        <div class="clear"></div>
+    </div>
+  </ng-form>
 
   <div ng-if="!documentData.docPartType">
-    <div class="form-group col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
+    <div class="col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
       <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
     </div>
-    <div style="clear: both;"></div>
+    <div class="clear"></div>
   </div>
 </div>

@@ -1,41 +1,34 @@
-﻿<ng-form class="form-inline">
+﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="panel panel-default">
-    <div class="panel-heading form-title"><strong l10n-text="persons.personMedicalDirective.title"></strong></div>
-    <div class="well-sm panel-body form-body">
+    <div class="panel-heading"><strong l10n-text="persons.personMedicalDirective.title"></strong></div>
+    <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentNumberPrefix.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentNumberPrefix"></label>
-          <span ng-show="form.documentNumberPrefix.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <span name="documentNumberPrefixValidationSpan" ng-show="form.documentNumberPrefix.$dirty && form.documentNumberPrefix.$invalid && !form.documentNumberPrefix.$error.$pending"
+          <span name="documentNumberPrefixValidationSpan" ng-show="form.$validated && form.documentNumberPrefix.$invalid"
                 class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentNumberPrefix.$error.required && 'Задължително поле' || form.documentNumberPrefix.$error.unique && 'Невалиден префикс'}}"></span>
-          <sc-text ng-model="model.documentNumberPrefix" name="documentNumberPrefix" ng-required="true" ng-init="model.documentNumberPrefix='MED BG'" sc-validate="{unique: isUniqueDocNumberPrefix}"></sc-text>
+                title="{{form.documentNumberPrefix.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.documentNumberPrefix" name="documentNumberPrefix" ng-required="true" ng-init="model.documentNumberPrefix='MED BG'"></sc-text>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentNumber.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentNumber"></label>
-          <span ng-show="form.documentNumber.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <span name="documentNumberValidationSpan" ng-show="form.documentNumber.$dirty && form.documentNumber.$invalid && !form.documentNumber.$error.$pending"
+          <span name="documentNumberValidationSpan" ng-show="form.$validated && form.documentNumber.$invalid"
                 class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentNumber.$error.required && 'Задължително поле' || form.documentNumber.$error.unique && 'Невалиден номер на документ'}}"></span>
-          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" ng-init="model.documentNumber='MED BG'" sc-validate="{unique: isUniqueDocNumber}"></sc-text>
+                title="{{form.documentNumber.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" ng-init="model.documentNumber='MED BG'"></sc-text>
         </div>
         <div class="form-group col-sm-2">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentNumberSuffix"></label>
-          <span ng-show="form.documentNumberSuffix.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <span name="documentNumberSuffixValidationSpan" ng-show="form.documentNumberSuffix.$invalid && !form.documentNumberSuffix.$error.$pending"
-                class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentNumberSuffix.$error.unique && 'Невалиден суфикс'}}"></span>
-          <sc-text ng-model="model.documentNumberSuffix" name="documentNumberSuffix" ng-init="model.documentNumberSuffix='MED BG'" sc-validate="{unique: isUniqueDocNumberSuffix}"></sc-text>
+          <sc-text ng-model="model.documentNumberSuffix" name="documentNumberSuffix" ng-init="model.documentNumberSuffix='MED BG'"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-3" ng-class="{'has-error': form.medClassType.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.medClassType"></label>
-          <span ng-show="form.medClassType.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <span name="medClassTypeValidationSpan" ng-show="form.medClassType.$dirty && form.medClassType.$invalid && !form.medClassType.$error.$pending"
+          <span name="medClassTypeValidationSpan" ng-show="form.$validated && form.medClassType.$invalid"
                 class="glyphicon glyphicon-warning-sign"
-                title="{{form.medClassType.$error.required && 'Задължително поле' || form.medClassType.$error.unique && 'Невалиден клас'}}"></span>
-          <sc-nomenclature alias="'medicalClassTypes'" load="true" name="medClassType" ng-model="model.medClassType" ng-required="true" sc-validate="{unique: isUniqueMedClass}"></sc-nomenclature>
+                title="{{form.medClassType.$error.required && 'Задължително поле'}}"></span>
+          <sc-nomenclature alias="'medicalClassTypes'" load="true" name="medClassType" ng-model="model.medClassType" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-5">
           <label class="control-label" l10n-text="persons.personMedicalDirective.limitations"></label>
@@ -43,19 +36,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-3" ng-class="{'has-error': form.documentPublisher.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentPublisher"></label>
-          <sc-text ng-model="model.documentPublisher" name="documentPublisher"></sc-text>
+          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentPublisher.$invalid" class="glyphicon glyphicon-warning-sign"
+                title="{{form.documentPublisher.$error.required && 'Задължително поле'}}"></span>
+          <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidFrom"></label>
-          <span name="documentDateValidFromValidationSpan" ng-show="form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
-          <sc-date name="documentDateValidFrom" name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
+          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
+          <sc-date name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidTo.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidTo"></label>
-          <span name="documentDateValidToValidationSpan" ng-show="form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
-          <sc-date name="documentDateValidTo" name="documentDateValidTo" ng-model="model.documentDateValidTo" ng-required="true"></sc-date>
+          <span name="documentDateValidToValidationSpan" ng-show="form.$validated && form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
+          <sc-date name="documentDateValidTo" ng-model="model.documentDateValidTo" ng-required="true"></sc-date>
         </div>
       </div>
       <div class="row">
@@ -69,17 +64,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-3" ng-class="{'has-error': form.bookPageNumber.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.bookPageNumber"></label>
-          <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$dirty && form.bookPageNumber.$invalid && !form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
+          <span name="bookPageNumberValidationSpan" ng-show="form.$validated && form.bookPageNumber.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" sc-validate="{min: isPositive}"></sc-text>
+          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-text>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-3" ng-class="{'has-error': form.pageCount.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personMedicalDirective.pageCount"></label>
-          <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
+          <span name="pageCountValidationSpan" ng-show="form.$validated && form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.pageCount" name="pageCount" sc-validate="{min: isPositive}"></sc-text>
+          <sc-text ng-model="model.pageCount" name="pageCount" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-text>
         </div>
       </div>
     </div>

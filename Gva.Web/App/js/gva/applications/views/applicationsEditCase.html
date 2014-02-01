@@ -20,7 +20,8 @@
       </tr>
       <tr ng-repeat="df in c.docFiles">
         <td></td>
-        <td>{{ df.name }} <span ng-show="!!df.setPartName">({{ df.setPartName }})</span></td>
+        <td ng-show="!!df.setPartName">{{ df.setPartName }} ({{ df.name }})</td>
+        <td ng-show="!df.setPartName">{{ df.name }}</span></td>
         <td>
           <div ng-if="!!df.setPartId">
             <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.part.bookPageNumber }}</a>
@@ -35,7 +36,7 @@
       </tr>
       <tr>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newfile(c)" style="cursor: pointer;">Нов файл</a>
+          <a ng-click="newfile(c)" style="cursor: pointer;">Нов документ</a>
         </td>
       </tr>
     </tbody>

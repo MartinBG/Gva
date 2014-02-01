@@ -9,19 +9,8 @@
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          if ($params.number) {
-            var documentEducations = [],
-                exists;
-            angular.forEach(person.personDocumentEducations, function (documentEducation) {
-              exists = documentEducation.part.documentNumber === $params.number;
-              if (exists) {
-                documentEducations.push(documentEducation);
-              }
-            });
-            return [200, documentEducations];
-          } else {
-            return [200, person.personDocumentEducations];
-          }
+          return [200, person.personDocumentEducations];
+
         })
       .when('GET', '/api/persons/:id/personDocumentEducations/:ind',
         function ($params, personLots) {

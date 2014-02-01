@@ -305,12 +305,26 @@
       { nomTypeValueId: 2, code: 'ULA', name: 'Свръхлеки самолети', nameAlt: 'Свръхлеки самолети', content: { GroupId: 1 }, alias: 'ULA' },
       { nomTypeValueId: 5, code: 'C', name: 'Радиолокационен обзор', nameAlt: 'Surveillance', content: { GroupId: 8, Code_CA: 'C' }, alias: 'C' },
       { nomTypeValueId: 6, code: 'D', name: 'Обработка на данни', nameAlt: 'Data processing', content: { GroupId: 8, Code_CA: 'D' }, alias: 'D' },
-      { nomTypeValueId: 7, code: 'E', name: 'Аеронавигационно метеорологично оборудване', nameAlt: 'Met', content: { GroupId: 8, Code_CA: 'E' } },
-      { nomTypeValueId: 8, code: 'F', name: 'Светотехнически средства', nameAlt: 'Agl', content: { GroupId: 8, Code_CA: 'F' } },
-      { nomTypeValueId: 9, code: 'A', name: 'Комуникация', nameAlt: 'Communications', content: { GroupId: 8, Code_CA: 'A' } },
-      { nomTypeValueId: 100, code: 'APP', name: 'Процедурно ОВД в летищния контролиран район', nameAlt: 'Aerodrome Control Procedural', content: { GroupId: 9, Code_CA: 'APP' } },
-      { nomTypeValueId: 101, code: 'APS', name: 'ОВД в летищния контролиран районн чрез средства за обзор', nameAlt: 'Approach Control Surveillance', content: { GroupId: 9, Code_CA: 'APS' } },
-      { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' } }
+      { nomTypeValueId: 7, code: 'E', name: 'Аеронавигационно метеорологично оборудване', nameAlt: 'Met', content: { GroupId: 8, Code_CA: 'E' }, alias: 'E' },
+      { nomTypeValueId: 8, code: 'F', name: 'Светотехнически средства', nameAlt: 'Agl', content: { GroupId: 8, Code_CA: 'F' }, alias: 'F' },
+      { nomTypeValueId: 9, code: 'A', name: 'Комуникация', nameAlt: 'Communications', content: { GroupId: 8, Code_CA: 'A' }, alias: 'A' },
+      { nomTypeValueId: 100, code: 'APP', name: 'Процедурно ОВД в летищния контролиран район', nameAlt: 'Aerodrome Control Procedural', content: { GroupId: 9, Code_CA: 'APP' }, alias: 'APP' },
+      { nomTypeValueId: 101, code: 'APS', name: 'ОВД в летищния контролиран районн чрез средства за обзор', nameAlt: 'Approach Control Surveillance', content: { GroupId: 9, Code_CA: 'APS' }, alias: 'APS' },
+      { nomTypeValueId: 102, code: 'ACP', name: 'Процедурно ОВД в контролирания район', nameAlt: 'Area Control Procedural', content: { GroupId: 9, Code_CA: 'ACP' }, alias: 'ACP' }
+    ],
+
+    //Номенклатура Подкласове ВС за екипажи
+    ratingSubClasses: [
+      { nomTypeValueId: 1, code: 'A1', name: 'Подклас А1', nameAlt: 'Подклас А1', alias: 'A1' },
+      { nomTypeValueId: 2, code: 'A2', name: 'Подклас А2', nameAlt: 'Подклас А2', alias: 'A2' },
+      { nomTypeValueId: 3, code: 'A3', name: 'Подклас А3', nameAlt: 'Подклас А3', alias: 'A3' },
+      { nomTypeValueId: 4, code: 'A4', name: 'Подклас А4', nameAlt: 'Подклас А4', alias: 'A4' }
+    ],
+
+    //Номенклатура Модел на квалификация на Физическо лице
+    personRatingModels: [
+      { nomTypeValueId: 1, code: 'permanent', name: 'Постоянно', nameAlt: 'Постоянно', alias: 'permanent' },
+      { nomTypeValueId: 2, code: 'temporary', name: 'Временно', nameAlt: 'Временно', alias: 'temporary' }
     ],
 
     //Номенклатура Групи Разрешения към квалификация
@@ -325,21 +339,21 @@
 
     //Номенклатура Разрешения към квалификация
     authorizations: [
-    { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FI(A)' },
-    { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' }, alias: 'CATII' },
-    { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
-    { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' }, alias: 'CATIIIB' },
-    { nomTypeValueId: 16, code: 'LV-TO', name: 'LV-TO (cop)', nameAlt: 'LV-TO (cop)', content: { GroupId: 421, Code_CA: 'LV-TO' } },
-    { nomTypeValueId: 100, code: 'GMS', name: 'КВД по маневрената площ на летището чрез средства за обзор', nameAlt: 'Ground Movement Surveillance ', content: { GroupId: 100, Code_CA: 'GMS' } },
-    { nomTypeValueId: 101, code: 'RAD', name: 'КВД чрез радар', nameAlt: 'Radar', content: { GroupId: 100, Code_CA: 'RAD' } },
-    { nomTypeValueId: 102, code: 'ADS', name: 'КВД чрез автоматичен зависим обзор', nameAlt: 'Automatic Dependent Surveillance', content: { GroupId: 100, Code_CA: 'ADS' } },
-    { nomTypeValueId: 103, code: 'PAR', name: 'КВД чрез прецизен радар за подход', nameAlt: 'Precision Approach Radar', content: { GroupId: 100, Code_CA: 'PAR' } },
-    { nomTypeValueId: 104, code: 'SRA', name: 'КВД чрез обзорен радар за подход', nameAlt: 'Surveillance Radar Approach ', content: { GroupId: 100, Code_CA: 'SRA' } },
-    { nomTypeValueId: 200, code: 'ASM', name: 'Планиране и разпределение на въздушното пространство', nameAlt: 'Air Space management', content: { GroupId: 100, Code_CA: 'ASM' } },
-    { nomTypeValueId: 201, code: 'ATFM', name: 'Организация на потоците въздушно движение', nameAlt: 'Air Traffic Flow Management', content: { GroupId: 100, Code_CA: 'ATFM' } },
-    { nomTypeValueId: 203, code: 'FIS', name: 'Полетно информационно обслужване на полетите', nameAlt: 'Flight Information Service', content: { GroupId: 100, Code_CA: 'FIS' } },
-    { nomTypeValueId: 205, code: 'SAR', name: 'Търсене и спасяване', nameAlt: 'Search and Rescue', content: { GroupId: 100, Code_CA: 'SAR' } },
-    { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
+      { nomTypeValueId: 1, code: 'FI(A)', name: 'Летателен инструктор на самолет', nameAlt: 'Летателен инструктор на самолет', content: { GroupId: 1 }, alias: 'FI(A)' },
+      { nomTypeValueId: 10, code: 'CAT II', name: 'CAT II (cop)', nameAlt: 'CAT II (cop)', content: { GroupId: 421, Code_CA: 'CAT II' } },
+      { nomTypeValueId: 12, code: 'CAT IIIA', name: 'CAT III A (cop)', nameAlt: 'CAT IIIA (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIA' } },
+      { nomTypeValueId: 14, code: 'CAT IIIB', name: 'CAT IIIB (cop)', nameAlt: 'CAT IIIB (cop)', content: { GroupId: 421, Code_CA: 'CAT IIIB' } },
+      { nomTypeValueId: 16, code: 'LV-TO', name: 'LV-TO (cop)', nameAlt: 'LV-TO (cop)', content: { GroupId: 421, Code_CA: 'LV-TO' } },
+      { nomTypeValueId: 100, code: 'GMS', name: 'КВД по маневрената площ на летището чрез средства за обзор', nameAlt: 'Ground Movement Surveillance ', content: { GroupId: 100, Code_CA: 'GMS' } },
+      { nomTypeValueId: 101, code: 'RAD', name: 'КВД чрез радар', nameAlt: 'Radar', content: { GroupId: 100, Code_CA: 'RAD' } },
+      { nomTypeValueId: 102, code: 'ADS', name: 'КВД чрез автоматичен зависим обзор', nameAlt: 'Automatic Dependent Surveillance', content: { GroupId: 100, Code_CA: 'ADS' } },
+      { nomTypeValueId: 103, code: 'PAR', name: 'КВД чрез прецизен радар за подход', nameAlt: 'Precision Approach Radar', content: { GroupId: 100, Code_CA: 'PAR' } },
+      { nomTypeValueId: 104, code: 'SRA', name: 'КВД чрез обзорен радар за подход', nameAlt: 'Surveillance Radar Approach ', content: { GroupId: 100, Code_CA: 'SRA' } },
+      { nomTypeValueId: 200, code: 'ASM', name: 'Планиране и разпределение на въздушното пространство', nameAlt: 'Air Space management', content: { GroupId: 100, Code_CA: 'ASM' } },
+      { nomTypeValueId: 201, code: 'ATFM', name: 'Организация на потоците въздушно движение', nameAlt: 'Air Traffic Flow Management', content: { GroupId: 100, Code_CA: 'ATFM' } },
+      { nomTypeValueId: 203, code: 'FIS', name: 'Полетно информационно обслужване на полетите', nameAlt: 'Flight Information Service', content: { GroupId: 100, Code_CA: 'FIS' } },
+      { nomTypeValueId: 205, code: 'SAR', name: 'Търсене и спасяване', nameAlt: 'Search and Rescue', content: { GroupId: 100, Code_CA: 'SAR' } },
+      { nomTypeValueId: 206, code: 'AFIS', name: 'Летищно полетно-информационно обслужване', nameAlt: 'Aerodrome Flight Information Service ', content: { GroupId: 100, Code_CA: 'AFIS' } }
     ],
 
     //Номенклатура Видове(типове) правоспособност
@@ -597,6 +611,52 @@
       { nomTypeValueId: 2, code: '2', name: 'Практическа проверка', nameAlt: '', alias: 'PracticalCheck' },
       { nomTypeValueId: 3, code: '3', name: 'Проверка на работното място', nameAlt: '', alias: 'CheckAtWork' },
       { nomTypeValueId: 4, code: '4', name: 'Тренажор', nameAlt: '', alias: 'Trainer' },
-    ]
+    ],
+
+    //Номенклатура Въздухоплавателни средства
+    aircrafts: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'aircraft1', nameAlt: 'aircraft1', alias: 'aircraft1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'aircraft2', nameAlt: 'aircraft2', alias: 'aircraft2' }
+    ],
+    //Номенклатура Роли в натрупан летателният опит
+    experienceRoles: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'type1', nameAlt: 'type1', alias: 'type1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'type2', nameAlt: 'type2', alias: 'type2' }
+    ],
+    //Номенклатура Видове летателен опит
+    experienceMeasures: [
+      { nomTypeValueId: 1, code: 'AAA', name: 'measure1', nameAlt: 'measure1', alias: 'measure1' },
+      { nomTypeValueId: 2, code: 'BBB', name: 'measure2', nameAlt: 'measure2', alias: 'measure2' }
+    ],
+
+    //Номенклатура Степени на квалификационен клас на Физичеко лице
+    personRatingLevels: [
+     { nomTypeValueId: 1, code: 'A', name: 'степен А', nameAlt: 'ratingA', alias: 'A' },
+     { nomTypeValueId: 2, code: 'B', name: 'степен Б', nameAlt: 'ratingB', alias: 'B' },
+     { nomTypeValueId: 3, code: 'C', name: 'степен C', nameAlt: 'ratingC', alias: 'C' }
+    ],
+
+    inspectors: [
+      { nomTypeValueId: 1, code: '1', name: 'Владимир Бонев Текнеджиев', nameAlt: 'Vladimi Bonev Teknedjiev', alias: 'Vladimir' },
+      { nomTypeValueId: 2, code: '2', name: 'Ваня Наумова Георгиева', nameAlt: 'Vanq Naumova Georgieva', alias: 'Vanq' },
+      { nomTypeValueId: 3, code: '3', name: 'Георги Мишев Христов', nameAlt: 'Georgi Mishev Hristov', alias: 'Georgi' }
+    ],
+
+    //Oграничения за класове
+    ratingLimitationTypes: [
+      { nomTypeValueId: 1, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
+      { nomTypeValueId: 2, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
+      { nomTypeValueId: 3, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
+      { nomTypeValueId: 4, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' }
+    ],
+
+    //Номенклатура Клас
+    ratingCategories: [
+      { nomTypeValueId: 1, code: 'A', name: 'A', nameAlt: 'A', alias: 'A' },
+      { nomTypeValueId: 2, code: 'A1', name: 'A1', nameAlt: 'A1', alias: 'A1' },
+      { nomTypeValueId: 3, code: 'A2', name: 'A2', nameAlt: 'A2', alias: 'A2' },
+      { nomTypeValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
+    ],
+
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

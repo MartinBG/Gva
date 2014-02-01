@@ -1,5 +1,5 @@
-﻿<div class="container page-content">
-  <ng-form name="editDocumentIdForm">
+﻿<div>
+  <ng-form name="editDocumentIdForm" sc-validate="{}">
 
     <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId.part"></gva-person-document-id>
 
@@ -9,7 +9,7 @@
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.editDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentIdForm.$invalid"></gva-button>
+        <gva-button name="saveBtn" gva-click="save()" text="persons.editDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentIdForm.$pristine"></gva-button>
         <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
       </div>
     </div>

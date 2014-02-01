@@ -1,11 +1,11 @@
-﻿<div class="container page-content">
+﻿<div>
   <ng-form class="form-inline" name="newStatusForm">
 
     <gva-person-status name="personStatusForm" ng-model="status.part"></gva-person-status>
 
     <div class="row">
       <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newStatus.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newStatusForm.$invalid"></gva-button>
+        <gva-button name="saveBtn" gva-click="save()" text="persons.newStatus.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!newStatusForm.$dirty"></gva-button>
         <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newStatus.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
       </div>
     </div>
