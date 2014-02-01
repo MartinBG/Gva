@@ -12,7 +12,12 @@
     };
 
     $scope.addPart = function () {
-      return $state.go('applications/edit/addpart');
+      $scope.addDocPartType.$validate()
+        .then(function () {
+          if ($scope.addDocPartType.$valid) {
+            return $state.go('applications/edit/addpart');
+          }
+        });
     };
   }
 

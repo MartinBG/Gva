@@ -256,7 +256,7 @@
         })
         .state({
           name: 'applications/edit/newfile',
-          title: 'Нов файл',
+          title: 'Нов документ',
           parent: 'applications/edit',
           url: '/newfile',
           views: {

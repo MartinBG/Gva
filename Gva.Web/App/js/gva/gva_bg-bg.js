@@ -47,7 +47,7 @@
           phone: 'Телефон'
         },
         personDocumentEducationDirective: {
-          title: 'Образнование',
+          title: 'Образование',
           documentNumber: 'Номер на документ',
           completionDate: 'Дата на завършване',
           bookPageNumber: 'Номер на страница в деловодна книга',
@@ -335,7 +335,7 @@
           bookPageNumber: 'Номер на стр. в деловодна книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          newDocumentEducation: 'Ново образнование'
+          newDocumentEducation: 'Ново образование'
         },
         checkSearch: {
           newCheck: 'Нова проверка',

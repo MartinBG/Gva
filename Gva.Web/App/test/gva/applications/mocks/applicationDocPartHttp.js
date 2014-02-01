@@ -57,11 +57,11 @@
           }
 
           //todo add files !
-          if (!!$jsonData.file) {
-            doc.publicDocFiles.push($jsonData.file[0]);
+          if (!!$jsonData.files.length) {
+            doc.publicDocFiles.push($jsonData.files[0]);
 
             applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
-            applicationLotFile.docFileId = $jsonData.file[0].key;
+            applicationLotFile.docFileId = $jsonData.files[0].key;
             applicationLotFile.lotId = parseInt($jsonData.personId, 10);
             applicationLotFile.partIndex = docPart.partIndex;
             applicationLotFile.part = docPart.part;
