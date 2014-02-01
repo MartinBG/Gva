@@ -137,9 +137,11 @@
               </div>
             </div>
 
-          <div ng-show="doc.parentDocInfo">&nbsp{{doc.parentDocInfo}}</div>
-          <br ng-show="doc.parentDocInfo"/>
-
+            <div class="row" ng-show="!!doc.parentDocId">
+              <div class="col-md-12">
+                <label>{{'Към ' + doc.docRelations[0].regNumber + ' ' + doc.docRelations[0].description}}</label>
+              </div>
+            </div>
 
             <div class="row card">
               <div class="form-group col-md-3">
