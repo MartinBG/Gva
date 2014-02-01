@@ -1,18 +1,18 @@
 ﻿<gva-button name="createBtn" gva-click="newAddress()" text="persons.addressSearch.newAddress" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="addresses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column data="part.addressType.name" title="persons.addressSearch.type">
+  <sc-column data="part.addressType.name" title="persons.addressSearch.type" width="200px">
   </sc-column>
-  <sc-column data="part.settlement.name" title="persons.addressSearch.settlement">
+  <sc-column data="part.settlement.name" title="persons.addressSearch.settlement" width="150px">
   </sc-column>
   <sc-column data="part.address" title="persons.addressSearch.address">
   </sc-column>
-  <sc-column data="part.postalCode" title="persons.addressSearch.postalCode">
+  <sc-column data="part.postalCode" title="persons.addressSearch.postalCode" width="50px">
   </sc-column>
-  <sc-column data="part.phone" title="persons.addressSearch.phone">
+  <sc-column data="part.phone" title="persons.addressSearch.phone" width="100px">
   </sc-column>
-  <sc-column data="part.valid.name" title="persons.addressSearch.valid">
+  <sc-column data="part.valid.name" title="persons.addressSearch.valid" width="100px">
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
     <gva-button name="editBtn" gva-click="editAddress(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" gva-click="deleteAddress(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>

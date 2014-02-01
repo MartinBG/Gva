@@ -163,7 +163,7 @@ select.select2-choice{
 	background-position: 0 -1px;
 }
 div.dataTables_filter label{
-	margin-bottom: 4px;
+	margin-bottom: 2px;
 }
 ul.dropdown-menu{
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.475);

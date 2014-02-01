@@ -20,7 +20,7 @@
   </sc-column>
   <sc-column data="part.personOtherDocumentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole">
   </sc-column>
-  <sc-column data="part.notes" title="persons.documentTrainingSearch.notes">
+  <sc-column data="part.notes" title="persons.documentTrainingSearch.notes" visible="false">
   </sc-column>
   <sc-column data="part.valid" title="persons.documentTrainingSearch.valid">
     <span>{{item.part.valid.name}}</span>
@@ -32,7 +32,7 @@
   <sc-column data="file" title="persons.documentTrainingSearch.file">
     <span>{{item.file[0].name}}</span>
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
     <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentTraining(item)" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentTraining(item)" icon="glyphicon-remove"></gva-button>
   </sc-column>

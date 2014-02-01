@@ -11,7 +11,9 @@
   }
 
   ScDatatable.prototype.getColumn = function (columnName) {
-    return this.element.findElements(by.css('tbody td.scdt-' + columnName)).then(function (cells) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollBody table tbody td.scdt-' + columnName)
+    ).then(function (cells) {
       return Q.all(_.map(cells, function (cell) {
         return cell.getText();
       }));
@@ -23,7 +25,9 @@
       return 'scdt-' + argument.replace(/[\[\]\.]/g, '_');
     });
 
-    return this.element.findElements(by.css('tbody tr')).then(function(rows) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollBody table tbody tr')
+    ).then(function(rows) {
       return Q.all(_.map(rows, function (row) {
         return row.findElements(by.css('td'));
       })).then(function (resolvedRows) {
@@ -55,12 +59,14 @@
   };
 
   ScDatatable.prototype.getRowButtons = function (number) {
-    return this.element.findElements(by.css('tbody tr:nth-child(' + number + ') button'));
+    return this.element.findElements(
+      by.css('.dataTables_scrollBody table tbody tr:nth-child(' + number + ') button'));
   };
 
   ScDatatable.prototype.getRow = function (number) {
-    return this.element.findElements(by.css('tbody tr:nth-child(' + number + ') td'))
-      .then(function(columns) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollBody table tbody tr:nth-child(' + number + ') td')
+    ).then(function(columns) {
       return Q.all(_.map(columns, function (cell) {
         return cell.getText();
       }));
@@ -68,7 +74,9 @@
   };
 
   ScDatatable.prototype.getHeaders = function () {
-    return this.element.findElements(by.css('thead tr th')).then(function(columns) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollHeadInner table thead tr th')
+    ).then(function(columns) {
       return Q.all(_.map(columns, function (column) {
         return column.getText();
       }));
@@ -76,7 +84,9 @@
   };
 
   ScDatatable.prototype.clickHeader = function (headerName) {
-    return this.element.findElements(by.css('thead tr th')).then(function (columns) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollHeadInner table thead tr th')
+    ).then(function (columns) {
       return Q.all(_.map(columns, function (column) {
         column.getAttribute('class').then(function (classNames) {
           if (_.contains(classNames.split(' '), 'scdt-' + headerName)) {
@@ -89,7 +99,9 @@
   };
 
   ScDatatable.prototype.getColumnsClasses = function () {
-    return this.element.findElements(by.css('thead tr th')).then(function (columns) {
+    return this.element.findElements(
+      by.css('.dataTables_scrollHeadInner table thead tr th')
+    ).then(function (columns) {
       return Q.all(_.map(columns, function (column) {
         return column.getAttribute('class');
       }));

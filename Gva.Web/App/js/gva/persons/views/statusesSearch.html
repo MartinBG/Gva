@@ -10,12 +10,12 @@
   <sc-column data="part.documentDateValidTo" title="persons.statusSearch.documentDateValidTo" type="string">
     <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
   </sc-column>
-  <sc-column data="part.notes" title="persons.statusSearch.notes" type="string">
+  <sc-column data="part.notes" title="persons.statusSearch.notes" type="string" visible="false">
   </sc-column>
   <sc-column data="part.isActive" title="persons.statusSearch.isActive" type="string">
     <span>{{item.part.isActive ? 'Да' : 'Не'}}</span>
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
     <gva-button name="editBtn" gva-click="editStatus(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" gva-click="deleteStatus(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
