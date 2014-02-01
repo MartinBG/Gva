@@ -1,82 +1,64 @@
-﻿<div class="container page-content">
+﻿<div>
   <div class="panel panel-default">
-
-    <nav class="navbar navbar-default" style="margin-bottom: 0px;">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+    <nav class="panel-heading">
+      <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
+        <button sc-click="save()" type="button" class="btn btn-default btn-sm">
+          <i class="glyphicon glyphicon-ok"></i>
+          Свържи
+        </button>
+        <button sc-click="cancel()" type="button" class="btn btn-default btn-sm">
+          <i class="glyphicon glyphicon-remove"></i>
+          Отказ
         </button>
       </div>
-
-      <div class="collapse navbar-collapse" id="menu-navigation" style="padding-left: 0px;">
-        <ul class="nav navbar-nav">
-          <li>
-            <a sc-click="save()">
-              <i class="glyphicon glyphicon-ok"></i><span>&nbsp;Свържи</span>
-            </a>
-          </li>
-          <li>
-            <a sc-click="cancel()">
-              <i class="glyphicon glyphicon-remove"></i><span>&nbsp;Отказ</span>
-            </a>
-          </li>
-        </ul>
-      </div>
     </nav>
-
-
-    <div class="well-sm panel-body form-body">
-      <form name="docForm" class="form-horizontal" style="padding-left: 30px;">
-        <div class="well-sm panel-body form-body">
+    <div class="well-sm panel-body">
+      <form name="docForm">
+        <div class="well-sm panel-body ">
 
           <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': !doc && saveClicked}">
-              <label class="control-label" l10n-text="applications.link.document"></label>
-              <span name="docSpan" ng-show="saveClicked && !doc" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
-              <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable">
-                <thead>
-                  <tr>
-                    <th><label class="control-label" l10n-text="applications.link.docNumber"></label></th>
-                    <th><label class="control-label" l10n-text="applications.link.docName"></label></th>
-                    <th><label class="control-label" l10n-text="applications.link.docStatus"></label></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{$parent.doc.regUri}}</td>
-                    <td>{{$parent.doc.docTypeName}}</td>
-                    <td>{{$parent.doc.docStatusName}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <div class="form-group col-md-6" ng-class="{'has-error': docForm.personLotId.$invalid && saveClicked}">
+              <label class="control-label" l10n-text="applications.newform.person"></label>
 
-            <div class="form-group col-sm-4" style="padding-top:27px;margin-left:auto;">
-              <div  style="float: left;"><gva-button name="clearBtn" gva-click="clear()" text="applications.link.clear" class="btn-xs btn-info"></gva-button></div>
-              <div  style="float: left; padding-left: 13px;"><gva-button name="newPersonBtn" gva-click="chooseDoc()" text="applications.link.chooseDoc" class="btn-xs btn-info"></gva-button></div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.personLotId.$invalid && saveClicked}">
-                  <label class="control-label" l10n-text="applications.newform.person"></label>
-                  <span name="docPersonLotIdSpan" ng-show="saveClicked && docForm.personLotId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.personLotId.$error.required && 'Задължително поле'}}"></span>
-                  <sc-nomenclature  ng-model="$parent.person" alias="'persons'" name="personLotId" load="true" required style="float: left;"></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-4" style="padding-top:27px;margin-left:auto;">
-              <div  style="float: left;"><gva-button name="choosePersonBtn" gva-click="choosePerson()" text="applications.newform.choosePerson" class="btn-xs btn-info"></gva-button></div>
-              <div  style="float: left; padding-left: 13px;"><gva-button name="newPersonBtn" gva-click="newPerson()" text="applications.newform.newPerson" class="btn-xs btn-info"></gva-button></div>
+              <div class="input-group input-group-sm">
+                <sc-nomenclature ng-model="$parent.person" alias="'persons'" name="personLotId" load="true" required style="float: left;"></sc-nomenclature>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="choosePerson()">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                  <button class="btn btn-default" type="button" ng-click="newPerson()">Нов заявител</button>
+                </span>
+              </div>
             </div>
           </div>
 
+          <div class="row card" ng-class="{'has-error': !$parent.doc && saveClicked}">
+            <div class="form-group col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="applications.link.docNumber"/>
+                <input disabled="disabled" type="text" class="form-control" value="{{ $parent.doc.regUri }}">
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="applications.link.docName"/>
+                <input disabled="disabled" type="text" class="form-control" value="{{ $parent.doc.docTypeName }}">
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="applications.link.docStatus"/>
+                <input disabled="disabled" type="text" class="form-control" value="{{ $parent.doc.docStatusName }}">
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+                <button sc-click="clear()" type="button" class="btn btn-default btn-sm">Изчисти</button>
+                <button sc-click="chooseDoc()" type="button" class="btn btn-default btn-sm">Избери документ</button>
+            </div>
+          </div>
+
+        </div>
       </form>
     </div>
-
-
-
-  </div>
+ </div>
 </div>
