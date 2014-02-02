@@ -139,7 +139,8 @@
               classificationName: 'Искане',
               classificationDate: '2014-01-08T17:21:55.387'
             }
-          ]
+          ],
+          applicationId: 1
         }, {
           docId: 2,
           parentDocId: null,

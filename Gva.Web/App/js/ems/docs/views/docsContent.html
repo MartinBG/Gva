@@ -6,14 +6,14 @@
   </div>
   <div class="row">
     <div class="form-group col-md-11" style="margin-bottom: 10px;">
-      <textarea rows="3" class="form-control" ng-model="doc.docBody" ng-disabled="!inEditMode"></textarea>
+      <textarea rows="3" class="form-control" ng-model="doc.docBody" ng-readonly="!inEditMode"></textarea>
     </div>
   </div>
 
   <label class="control-label" l10n-text="Вътрешни файлове"></label>
-  <sc-files ng-model="doc.privateDocFiles"></sc-files>
+  <sc-files ng-model="doc.privateDocFiles" ng-readonly="!inEditMode"></sc-files>
   <br />
   <label class="control-label" l10n-text="Публични файлове"></label>
-  <sc-files ng-model="doc.publicDocFiles"></sc-files>
+  <sc-files ng-model="doc.publicDocFiles" ng-readonly="!inEditMode"></sc-files>
 
 </div>

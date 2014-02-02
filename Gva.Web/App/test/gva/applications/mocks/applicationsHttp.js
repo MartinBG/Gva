@@ -34,13 +34,17 @@
 
         })
       .when('POST', '/api/applications',
-        function ($jsonData, applicationsFactory) {
+        function ($jsonData, applicationsFactory, docs) {
           if (!$jsonData || !$jsonData.docId || !$jsonData.lotId) {
             return [400];
           }
 
           $jsonData.applicationId = applicationsFactory.getNextApplicationId();
           applicationsFactory.saveApplication($jsonData);
+
+          var doc = _(docs).filter({docId: $jsonData.docId}).first();
+          
+          doc.applicationId = $jsonData.applicationId;
 
           return [200, $jsonData];
         })

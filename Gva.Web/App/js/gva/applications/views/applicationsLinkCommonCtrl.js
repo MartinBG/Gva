@@ -41,8 +41,8 @@
 
         Application.validateExist(newApplication).$promise.then(function (result) {
           if (result.applicationExist === false) {
-            Application.save(newApplication).$promise.then(function () {
-              $state.go('docs/search');
+            Application.save(newApplication).$promise.then(function (application) {
+              return $state.go('applications/edit/case', { id: application.applicationId });
             });
           }
         });

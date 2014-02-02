@@ -44,8 +44,8 @@
             lotId: $scope.$parent.person.nomTypeValueId,
             docId: savedDoc.docId
           };
-          Application.save(newApplication).$promise.then(function () {
-            $state.go('docs/search');
+          Application.save(newApplication).$promise.then(function (application) {
+            return $state.go('applications/edit/case', { id: application.applicationId });
           });
         });
       }
