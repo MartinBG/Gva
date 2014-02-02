@@ -8,8 +8,8 @@
         <th style="width: 75px;"></th>
       </tr>
     </thead>
-    <tbody ng-repeat="c in application.docCase">
-      <tr>
+    <tbody>
+      <tr ng-repeat-start="c in application.docCase">
         <td>{{ c.regNumber }} {{ c.statusName }}</td>
         <td>{{ c.description }}</td>
         <td></td>
@@ -34,7 +34,7 @@
         </td>
         <td></td>
       </tr>
-      <tr>
+      <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
           <a ng-click="newfile(c)" style="cursor: pointer;">Нов документ</a>
         </td>
