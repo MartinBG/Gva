@@ -28,30 +28,37 @@
           docPart.partIndex = person.nextIndex++;
 
           if (parseInt($jsonData.setPartId, 10) === 1) {
+            person.personDocumentIds = person.personDocumentIds || [];
             person.personDocumentIds.push(docPart);
             applicationLotFile.setPartName = 'Документ за самоличност';
           }
           else if (parseInt($jsonData.setPartId, 10) === 2) {
+            person.personDocumentEducations = person.personDocumentEducations || [];
             person.personDocumentEducations.push(docPart);
             applicationLotFile.setPartName = 'Образования';
           }
           else if (parseInt($jsonData.setPartId, 10) === 3) {
+            person.personDocumentEmployments = person.personDocumentEmployments || [];
             person.personDocumentEmployments.push(docPart);
             applicationLotFile.setPartName = 'Месторабота';
           }
           else if (parseInt($jsonData.setPartId, 10) === 4) {
+            person.personDocumentMedicals = person.personDocumentMedicals || [];
             person.personDocumentMedicals.push(docPart);
             applicationLotFile.setPartName = 'Медицински';
           }
           else if (parseInt($jsonData.setPartId, 10) === 5) {
+            person.personDocumentChecks = person.personDocumentChecks || [];
             person.personDocumentChecks.push(docPart);
             applicationLotFile.setPartName = 'Проверка';
           }
           else if (parseInt($jsonData.setPartId, 10) === 6) {
+            person.personDocumentTrainings = person.personDocumentTrainings || [];
             person.personDocumentTrainings.push(docPart);
             applicationLotFile.setPartName = '*';
           }
           else if (parseInt($jsonData.setPartId, 10) === 7) {
+            person.personDocumentOthers = person.personDocumentOthers || [];
             person.personDocumentOthers.push(docPart);
             applicationLotFile.setPartName = '*';
           }
@@ -98,30 +105,37 @@
           docPart.partIndex = person.nextIndex++;
 
           if (parseInt($params.setPartId, 10) === 1) {
+            person.personDocumentIds = person.personDocumentIds || [];
             person.personDocumentIds.push(docPart);
             applicationLotFile.setPartName = 'Документ за самоличност';
           }
           else if (parseInt($params.setPartId, 10) === 2) {
+            person.personDocumentEducations = person.personDocumentEducations || [];
             person.personDocumentEducations.push(docPart);
             applicationLotFile.setPartName = 'Образования';
           }
           else if (parseInt($params.setPartId, 10) === 3) {
+            person.personDocumentEmployments = person.personDocumentEmployments || [];
             person.personDocumentEmployments.push(docPart);
             applicationLotFile.setPartName = 'Месторабота';
           }
           else if (parseInt($params.setPartId, 10) === 4) {
+            person.personDocumentMedicals = person.personDocumentMedicals || [];
             person.personDocumentMedicals.push(docPart);
             applicationLotFile.setPartName = 'Медицински';
           }
           else if (parseInt($params.setPartId, 10) === 5) {
+            person.personDocumentChecks = person.personDocumentChecks || [];
             person.personDocumentChecks.push(docPart);
             applicationLotFile.setPartName = 'Проверка';
           }
           else if (parseInt($params.setPartId, 10) === 6) {
+            person.personDocumentTrainings = person.personDocumentTrainings || [];
             person.personDocumentTrainings.push(docPart);
             applicationLotFile.setPartName = '*';
           }
           else if (parseInt($params.setPartId, 10) === 7) {
+            person.personDocumentOthers = person.personDocumentOthers || [];
             person.personDocumentOthers.push(docPart);
             applicationLotFile.setPartName = '*';
           }
@@ -151,37 +165,37 @@
                 .pluck('applicationLotFileId').max().value() + 1;
 
           if (parseInt($params.setPartId, 10) === 1) {
-            docPart = _(person.personDocumentIds)
+            docPart = _(person.personDocumentIds || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = 'Документ за самоличност';
           }
           else if (parseInt($params.setPartId, 10) === 2) {
-            docPart = _(person.personDocumentEducations)
+            docPart = _(person.personDocumentEducations || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = 'Образования';
           }
           else if (parseInt($params.setPartId, 10) === 3) {
-            docPart = _(person.personDocumentEmployments)
+            docPart = _(person.personDocumentEmployments || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = 'Месторабота';
           }
           else if (parseInt($params.setPartId, 10) === 4) {
-            docPart = _(person.personDocumentMedicals)
+            docPart = _(person.personDocumentMedicals || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = 'Медицински';
           }
           else if (parseInt($params.setPartId, 10) === 5) {
-            docPart = _(person.personDocumentChecks)
+            docPart = _(person.personDocumentChecks || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = 'Проверка';
           }
           else if (parseInt($params.setPartId, 10) === 6) {
-            docPart = _(person.personDocumentTrainings)
+            docPart = _(person.personDocumentTrainings || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = '*';
           }
           else if (parseInt($params.setPartId, 10) === 7) {
-            docPart = _(person.personDocumentOthers)
+            docPart = _(person.personDocumentOthers || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
             applicationLotFile.setPartName = '*';
           }
