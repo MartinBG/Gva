@@ -38,6 +38,12 @@
       ];
 
       return {
+        getAll: function () {
+          var self = this;
+          return _(applications).map(function (application) {
+            return self.getApplication(application.applicationId);
+          }).value();
+        },
         getApplication: function (id) {
           var application = _.cloneDeep(_(applications).filter({ applicationId: id }).first());
 

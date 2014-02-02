@@ -17,7 +17,7 @@
           newDoc: 'Нов документ',
           regDate: 'Дата',
           regUri: 'Рег.№',
-          docSubject: '',
+          docSubject: 'Относно',
           docDirectionName: '',
           docStatusName: 'Статус',
           correspondentName: 'Кореспондент'

@@ -485,6 +485,17 @@
           docNumber: 'Рег.№',
           docStatus: 'Статус',
           docName: 'Име'
+        },
+        search: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          search: 'Търси',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          subject: 'Относно',
+          status: 'Статус',
+          lin: 'ЛИН',
+          applicant: 'Заявител'
         }
       }
     });

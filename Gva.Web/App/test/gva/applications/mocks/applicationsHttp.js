@@ -17,6 +17,17 @@
     }
 
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/applications',
+        function ($params, $filter, applicationsFactory) {
+          var applications = _(applicationsFactory.getAll()).map(function (application) {
+            if (application.lotId) { //todo change person data better
+              application.person = personMapper(application.personData);
+            }
+            return application;
+          }).value();
+
+          return [200, applications];
+        })
       .when('GET', '/api/applications/:id',
         function ($params, $filter, applicationsFactory) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
