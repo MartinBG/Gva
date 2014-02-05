@@ -79,7 +79,10 @@
               name: 'Медицинско свидетелство',
               bookPageNumber: element.part.bookPageNumber,
               type: null,
-              number: element.part.documentNumberPrefix + ' ' + element.part.documentNumberSuffix,
+              number: element.part.documentNumberPrefix + '-' +
+                element.part.documentNumber + '-' +
+                person.personData.part.lin + '-' +
+                element.part.documentNumberSuffix,
               date: element.part.documentDateValidFrom,
               publisher: element.part.documentPublisher,
               valid: null,

@@ -154,13 +154,41 @@
 
     //Номенклатура Типове адреси
     addressTypes: [
-      { nomTypeValueId: 1, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', alias: 'Permanent' },
-      { nomTypeValueId: 2, code: 'TMP', name: 'Настоящ адрес', nameAlt: 'Настоящ адрес' },
-      { nomTypeValueId: 3, code: 'COR', name: 'Адрес за кореспонденция', nameAlt: 'Адрес за кореспонденция', alias: 'Correspondence' },
-      { nomTypeValueId: 4, code: 'O', name: 'Седалище', nameAlt: 'Седалище' },
-      { nomTypeValueId: 101, code: 'TOP', name: 'Данни за ръководител', nameAlt: 'Данни за ръководител' },
-      { nomTypeValueId: 102, code: 'BOS', name: 'Данни за ръководител TO', nameAlt: 'Данни за ръководител TO' },
-      { nomTypeValueId: 290, code: 'TO', name: 'Адрес за базово ослужване на ВС', nameAlt: 'Адрес за базово ослужване на ВС' }
+      {
+        nomTypeValueId: 5583, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', alias: 'Permanent', content: {
+          type: 'P'
+        }
+      },
+      {
+        nomTypeValueId: 5584, code: 'TMP', name: 'Настоящ адрес', nameAlt: 'Настоящ адрес', content: {
+          type: 'P'
+        }
+      },
+      {
+        nomTypeValueId: 5585, code: 'COR', name: 'Адрес за кореспонденция', nameAlt: 'Адрес за кореспонденция', alias: 'Correspondence', content: {
+          type: 'P'
+        }
+      },
+      {
+        nomTypeValueId: 5586, code: 'O', name: 'Седалище', nameAlt: 'Седалище', content: {
+          type: 'F'
+        }
+      },
+      {
+        nomTypeValueId: 5587, code: 'TOP', name: 'Данни за ръководител', nameAlt: 'Данни за ръководител', content: {
+          type: 'F'
+        }
+      },
+      { 
+        nomTypeValueId: 5588, code: 'BOS', name: 'Данни за ръководител TO', nameAlt: 'Данни за ръководител TO', content: {
+          type: 'F'
+        }
+      },
+      {
+        nomTypeValueId: 5582, code: 'TO', name: 'Адрес за базово ослужване на ВС', nameAlt: 'Адрес за базово ослужване на ВС', content: {
+          type: 'F'
+        }
+      }
     ],
 
     //Номенклатура Организации

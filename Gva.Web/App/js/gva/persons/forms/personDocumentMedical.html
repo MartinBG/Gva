@@ -82,7 +82,7 @@
           <label class="control-label" l10n-text="persons.personMedicalDirective.pageCount"></label>
           <span name="pageCountValidationSpan" ng-show="form.$validated && form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.pageCount" name="pageCount" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-text>
+          <sc-int ng-model="model.pageCount" name="pageCount" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-int>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/:alias?term&parentId&id',
+      .when('GET', '/api/nomenclatures/:alias?term&parentId&type&id',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];
 
@@ -18,6 +18,15 @@
 
             if ($params.parentId) {
               res = $filter('filter')(res, { parentId: parseInt($params.parentId, 10) }, true);
+            }
+
+            if ($params.type) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.content.type === $params.type;
+                },
+                true);
             }
           }
 
