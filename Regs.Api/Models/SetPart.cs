@@ -17,6 +17,7 @@ namespace Regs.Api.Models
 
         public int SetPartId { get; set; }
         public int SetId { get; set; }
+        public string Alias { get; set; }
         public string PathRegex { get; set; }
         public string Schema { get; set; }
 
@@ -35,6 +36,10 @@ namespace Regs.Api.Models
             this.Property(t => t.SetPartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
+            this.Property(t => t.Alias)
+                .IsRequired()
+                .HasMaxLength(50);
+
             this.Property(t => t.PathRegex)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -46,6 +51,7 @@ namespace Regs.Api.Models
             this.ToTable("LotSetParts");
             this.Property(t => t.SetPartId).HasColumnName("LotSetPartId");
             this.Property(t => t.SetId).HasColumnName("LotSetId");
+            this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.PathRegex).HasColumnName("PathRegex");
             this.Property(t => t.Schema).HasColumnName("Schema");
 

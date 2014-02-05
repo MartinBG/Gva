@@ -4,8 +4,9 @@ GO
 CREATE TABLE [dbo].[LotSets] (
     [LotSetId]   INT           NOT NULL,
     [Name]       NVARCHAR (50) NOT NULL,
-    [Alias]      NVARCHAR (50) NULL,
-    CONSTRAINT [PK_LotSets] PRIMARY KEY ([LotSetId])
+    [Alias]      NVARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_LotSets] PRIMARY KEY ([LotSetId]),
+    CONSTRAINT [UQ_LotSet_Alias] UNIQUE NONCLUSTERED ([Alias])
 )
 GO
 

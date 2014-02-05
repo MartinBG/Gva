@@ -59,6 +59,7 @@ namespace Regs.Api.Models
                 .HasMaxLength(50);
 
             this.Property(t => t.Alias)
+                .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings

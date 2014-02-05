@@ -2,11 +2,13 @@
 GO 
 
 CREATE TABLE [dbo].[LotSetParts] (
-    [LotSetPartId]  int            NOT NULL,
-    [LotSetId]      int            NOT NULL,
+    [LotSetPartId]  int             NOT NULL,
+    [LotSetId]      int             NOT NULL,
+    [Alias]         NVARCHAR (50)   NOT NULL,
     [PathRegex]     nvarchar (100)  NOT NULL,
-    [Schema]        nvarchar (MAX) NOT NULL,
-    CONSTRAINT [PK_LotSetParts]         PRIMARY KEY ([LotSetPartId]),
+    [Schema]        nvarchar (MAX)  NOT NULL,
+    CONSTRAINT [PK_LotSetParts] PRIMARY KEY ([LotSetPartId]),
+    CONSTRAINT [UQ_LotSetParts_Alias_LotSetId] UNIQUE NONCLUSTERED ([Alias], [LotSetId]),
     CONSTRAINT [FK_LotSetParts_LotSets] FOREIGN KEY ([LotSetId]) REFERENCES [dbo].[LotSets] ([LotSetId])
 )
 GO
