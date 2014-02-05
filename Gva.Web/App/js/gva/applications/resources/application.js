@@ -7,9 +7,20 @@
       function ($resource) {
         return $resource('/api/applications/:id', { id: '@id' },
           {
-            'validateExist': {
+            'partsNew': {
               method: 'POST',
-              url: '/api/applications/validate/exist'
+              url: '/api/apps/:id/parts/new',
+              params: { id: '@id' }
+            },
+            'partsLinkNew': {
+              method: 'POST',
+              url: '/api/apps/:id/parts/linkNew',
+              params: { id: '@id' }
+            },
+            'partslinkExisting': {
+              method: 'POST',
+              url: '/api/apps/:id/parts/linkExisting',
+              params: { id: '@id' }
             }
           });
       }]);

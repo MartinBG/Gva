@@ -17,7 +17,7 @@
     $scope.markAsRead = function () {
       $scope.doc.isRead = true;
     };
- 
+
     $scope.markAsUnread = function () {
       //todo call to backend and set DocUser.HasRead flags
       $scope.doc.isRead = false;

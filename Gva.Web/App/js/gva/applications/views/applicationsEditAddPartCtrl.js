@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    ApplicationDocPart
+    Application
     ) {
     $scope.cancel = function () {
       return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
@@ -16,12 +16,11 @@
       $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
-            return ApplicationDocPart
-              .save({ id: $stateParams.id }, {
-                personId: $scope.application.lotId,
-                currentDocId: $scope.documentData.currentDocId,
+            return Application
+              .partsNew({ id: $stateParams.id }, {
+                docId: $scope.documentData.currentDocId,
                 files: $scope.wrapper.applicationDocPart.file,
-                setPartId: $scope.documentData.docPartType.content.setPartId,
+                setPartAlias: $scope.documentData.docPartType.alias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('applications/edit/case',
@@ -35,15 +34,11 @@
       $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
-            return ApplicationDocPart
-              .linkNew({
-                id: $stateParams.id,
-                setPartId: $scope.documentData.docPartType.content.setPartId
-              }, {
-                personId: $scope.application.lotId,
-                currentDocId: $scope.documentData.currentDocId,
-                part: $scope.wrapper.applicationDocPart.part,
-                docFileId: $scope.documentData.docFiles[0].key
+            return Application
+              .partsLinkNew({ id: $stateParams.id }, {
+                docFileKey: $scope.documentData.docFiles[0].key,
+                setPartAlias: $scope.documentData.docPartType.alias,
+                part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('applications/edit/case',
                   $stateParams, { reload: true });
@@ -57,7 +52,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'ApplicationDocPart'
+    'Application'
   ];
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    ApplicationDocPart,
+    Application,
     PersonDocumentId,
     PersonDocumentEducation,
     PersonDocumentEmployment,
@@ -22,25 +22,25 @@
       $scope.showDocumentCheck = false;
 
       if ($scope.documentData.docPartType) {
-        if ($scope.documentData.docPartType.content.setPartId === 1) {
+        if ($scope.documentData.docPartType.alias === 'DocumentId') {
           PersonDocumentId.query($stateParams).$promise.then(function (documentIds) {
             $scope.wrapper.documentPart = documentIds;
             $scope.showDocumentId = !!documentIds;
           });
         }
-        else if ($scope.documentData.docPartType.content.setPartId === 2) {
+        else if ($scope.documentData.docPartType.alias === 'DocumentEducation') {
           PersonDocumentEducation.query($stateParams).$promise.then(function (documentEducations) {
             $scope.wrapper.documentPart = documentEducations;
             $scope.showDocumentEducation = !!documentEducations;
           });
         }
-        else if ($scope.documentData.docPartType.content.setPartId === 3) {
+        else if ($scope.documentData.docPartType.alias === 'DocumentEmployment') {
           PersonDocumentEmployment.query($stateParams).$promise.then(function (employments) {
             $scope.wrapper.documentPart = employments;
             $scope.showDocumentEmployment = !!employments;
           });
         }
-        else if ($scope.documentData.docPartType.content.setPartId === 4) {
+        else if ($scope.documentData.docPartType.alias === 'DocumentMed') {
           PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
             $scope.wrapper.documentPart = medicals.map(function (medical) {
               var testimonial = medical.part.documentNumberPrefix + ' ' +
@@ -61,7 +61,7 @@
             $scope.showDocumentMed = !!medicals;
           });
         }
-        else if ($scope.documentData.docPartType.content.setPartId === 5) {
+        else if ($scope.documentData.docPartType.alias === 'DocumentCheck') {
           PersonDocumentCheck.query($stateParams).$promise.then(function (checks) {
             $scope.wrapper.documentPart = checks;
             $scope.showDocumentCheck = !!checks;
@@ -73,15 +73,11 @@
     };
 
     $scope.linkPart = function (item) {
-      return ApplicationDocPart
-        .linkExisting({
-          id: $stateParams.id,
-          setPartId: $scope.documentData.docPartType.content.setPartId
-        }, {
-          personId: $scope.application.lotId,
-          currentDocId: $scope.documentData.currentDocId,
-          partIndex: item.partIndex,
-          docFileId: $scope.documentData.docFiles[0].key
+      return Application
+        .partslinkExisting({ id: $stateParams.id }, {
+          docFileKey: $scope.documentData.docFiles[0].key,
+          setPartAlias: $scope.documentData.docPartType.alias,
+          partIndex: item.partIndex
         }).$promise.then(function () {
           return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
         });
@@ -89,7 +85,6 @@
     };
 
     $scope.cancel = function () {
-      $scope.documentData = null;
       return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
     };
   }
@@ -98,7 +93,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'ApplicationDocPart',
+    'Application',
     'PersonDocumentId',
     'PersonDocumentEducation',
     'PersonDocumentEmployment',

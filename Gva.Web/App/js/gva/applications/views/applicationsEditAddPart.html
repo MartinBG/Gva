@@ -1,19 +1,19 @@
 ﻿<div class="tab-content" ng-init="wrapper = {}">
   <ng-form name="addFormWrapper" sc-validate="{}">
     <div ng-if="documentData.docPartType">
-        <div ng-if="documentData.docPartType.content.setPartId === 1">
+        <div ng-if="documentData.docPartType.alias === 'DocumentId'">
           <gva-person-document-id name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-id>
         </div>
-        <div ng-if="documentData.docPartType.content.setPartId === 2">
+        <div ng-if="documentData.docPartType.alias === 'DocumentEducation'">
           <gva-person-document-education name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-education>
         </div>
-        <div ng-if="documentData.docPartType.content.setPartId === 3">
+        <div ng-if="documentData.docPartType.alias === 'DocumentEmployment'">
           <gva-person-document-employment name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-employment>
         </div>
-        <div ng-if="documentData.docPartType.content.setPartId === 4">
+        <div ng-if="documentData.docPartType.alias === 'DocumentMed'">
           <gva-person-document-medical name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-medical>
         </div>
-        <div ng-if="documentData.docPartType.content.setPartId === 5">
+        <div ng-if="documentData.docPartType.alias === 'DocumentCheck'">
           <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
         </div>
         <!--TODO ADD MORE-->
