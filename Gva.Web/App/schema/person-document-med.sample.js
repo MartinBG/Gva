@@ -12,7 +12,7 @@
       documentDateValidFrom: '2010-04-04T00:00',
       documentDateValidTo: '2010-08-04T00:00',
       medClassType: nomenclatures.get('medicalClassTypes', 'class1'),
-      documentPublisher: 'AMC Latvia',
+      documentPublisher: nomenclatures.get('medDocPublishers', 'AMC Latvia'),
       limitationsTypes: [
         nomenclatures.get('medicalLimitationTypes', 'VNL'),
         nomenclatures.get('medicalLimitationTypes', 'OML')
@@ -28,7 +28,7 @@
       documentDateValidFrom: '2005-04-04T00:00',
       documentDateValidTo: '2015-09-06T00:00',
       medClassType: nomenclatures.get('medicalClassTypes', 'class2'),
-      documentPublisher: 'Caa France',
+      documentPublisher: nomenclatures.get('medDocPublishers', 'CAA France'),
       limitationsTypes: [
         nomenclatures.get('medicalLimitationTypes', 'MCL'),
         nomenclatures.get('medicalLimitationTypes', 'VDL'),

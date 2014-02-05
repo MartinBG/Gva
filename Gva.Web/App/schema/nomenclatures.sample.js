@@ -97,23 +97,51 @@
 
     //Номенклатура Полове
     sex: [
-      { nomTypeValueId: 1, code: '', name: 'Мъж', nameAlt: 'Male', alias: 'male' },
-      { nomTypeValueId: 2, code: '', name: 'Жена', nameAlt: 'Female', alias: 'female' },
-      { nomTypeValueId: 3, code: '', name: 'Неопределен', nameAlt: 'Unknown', alias: 'unknown' }
+      { nomTypeValueId: 1, code: 'M', name: 'Мъж', nameAlt: 'Male', alias: 'male' },
+      { nomTypeValueId: 2, code: 'W', name: 'Жена', nameAlt: 'Female', alias: 'female' },
+      { nomTypeValueId: 3, code: 'U', name: 'Неизвестен', nameAlt: 'Unknown', alias: 'unknown' }
     ],
 
     //Номеклатура Държави
     countries: [
-      { nomTypeValueId: 1, code: 'AT', name: 'Austria', nameAlt: 'Austria' },
-      { nomTypeValueId: 2, code: 'BE', name: 'Belgium', nameAlt: 'Belgium' },
-      { nomTypeValueId: 3, code: 'CY', name: 'Cyprus', nameAlt: 'Cyprus' },
-      { nomTypeValueId: 4, code: 'CZ', name: 'Czech Republic', nameAlt: 'Czech Republic' },
+      {
+        nomTypeValueId: 26, code: 'AT', name: 'Austria', nameAlt: 'Austria', content: {
+          nationalityCodeCA: 'AT',
+          heading: '-', 
+          headingAlt: '-', 
+          licenceCodeCA: 'A'
+        }
+      },
+      {
+        nomTypeValueId: 27, code: 'BE', name: 'Belgium', nameAlt: 'Belgium', content: {
+          nationalityCodeCA: 'BE',
+          heading: '-',
+          headingAlt: '-',
+          licenceCodeCA: 'B'
+        }
+      },
+      {
+        nomTypeValueId: 28, code: 'CY', name: 'Cyprus', nameAlt: 'Cyprus', content: {
+          nationalityCodeCA: 'CY',
+          heading: '-',
+          hHeadingAlt: '-',
+          licenceCodeCA: 'CY'
+        }
+      },
+      {
+        nomTypeValueId: 29, code: 'CZ', name: 'Czech Republic', nameAlt: 'Czech Republic', content: {
+          nationalityCodeCA: 'CZ',
+          heading: '-',
+          headingAlt: '-',
+          licenceCodeCA: 'CZ'
+        }
+      },
       {
         nomTypeValueId: 33, code: 'BG', name: 'Република България', nameAlt: 'Republic of Bulgaria', alias: 'Bulgaria', content: {
-          nationalityCode_CA: 'BGR',
+          nationalityCodeCA: 'BGR',
           heading: 'РЕПУБЛИКА БЪЛГАРИЯ',
-          headingTrans: 'REPUBLIC OF BULGARIA',
-          licenceCode_CA: 'BGR.'
+          headingAlt: 'REPUBLIC OF BULGARIA',
+          licenceCodeCA: 'BGR.'
         }
       }
     ],
@@ -274,6 +302,24 @@
       { nomTypeValueId: 1, code: '3', name: 'Негоден', nameAlt: 'Негоден', alias: 'permanently unfit' },
       { nomTypeValueId: 2, code: '4', name: 'Временно негоден', nameAlt: 'Временно негоден', alias: 'temporary unfit' },
       { nomTypeValueId: 3, code: '5', name: 'Майчинство', nameAlt: 'Майчинство', alias: 'maternity leave' }
+    ],
+
+    //Номенклатура Издатели на документи - Медицински
+    medDocPublishers: [
+      { nomTypeValueId: 6839, name: 'AMC Latvia', alias: 'AMC Latvia' },
+      { nomTypeValueId: 6830, name: 'AMC PRAGUE', alias: 'CAA France' },
+      { nomTypeValueId: 6829, name: 'AME-SWETZERLAND', alias: 'AME-SWETZERLAND' },
+      { nomTypeValueId: 6828, name: 'Austro Control', alias: 'Austro Control' },
+      { nomTypeValueId: 6834, name: 'CAA France', alias: 'CAA France' },
+      { nomTypeValueId: 6832, name: 'FAA', alias: 'FAA' },
+      { nomTypeValueId: 6831, name: 'FR AMC', alias: 'FR AMC' },
+      { nomTypeValueId: 6833, name: 'GCAA UAE', alias: 'GCAA UAE' },
+      { nomTypeValueId: 6835, name: 'GR AME', alias: 'GR AME' },
+      { nomTypeValueId: 6827, name: 'ROMANIAN CIVIL AERONAUTICAL AUTHORITY-AME No.02' },
+      { nomTypeValueId: 6838, name: 'TR-AME-008/2', alias: 'TR-AME-008/2' },
+      { nomTypeValueId: 6836, name: 'UK AME', alias: 'UK AME' },
+      { nomTypeValueId: 6837, name: 'АМЦ01', alias: 'AMC01' },
+      { nomTypeValueId: 6826, name: 'КАМО', alias: 'KAMO' }
     ],
 
     //Номенклатура Издатели на документи - Други
@@ -570,23 +616,23 @@
 
     //kласове за медицинси
     medicalClassTypes: [
-      { nomTypeValueId: 1, code: '', name: 'клас 1', nameAlt: 'class 1', alias: 'class1' },
-      { nomTypeValueId: 2, code: '', name: 'клас 2', nameAlt: 'class 2', alias: 'class2' },
-      { nomTypeValueId: 3, code: '', name: 'клас 3', nameAlt: 'class 3', alias: 'class3' },
-      { nomTypeValueId: 4, code: '', name: 'клас 4', nameAlt: 'class 4', alias: 'class4' }
+      { nomTypeValueId: 7824, code: '01', name: 'Class-1', nameAlt: 'Class-1', alias: 'class1' },
+      { nomTypeValueId: 7825, code: '02', name: 'Class-2', nameAlt: 'Class-2', alias: 'class2' },
+      { nomTypeValueId: 7826, code: '03', name: 'Class-3', nameAlt: 'Class-3', alias: 'class3' },
+      { nomTypeValueId: 7827, code: '04', name: 'Class-4', nameAlt: 'Class-4', alias: 'class4' }
     ],
 
     //Oграничения за медицински
     medicalLimitationTypes: [
-      { nomTypeValueId: 1, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
-      { nomTypeValueId: 2, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
-      { nomTypeValueId: 3, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
-      { nomTypeValueId: 4, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' },
-      { nomTypeValueId: 5, code: 'OSL', name: 'OSL', nameAlt: 'OSL', alias: 'OSL' },
-      { nomTypeValueId: 6, code: 'TML', name: 'TML', nameAlt: 'TML', alias: 'TML' },
-      { nomTypeValueId: 7, code: 'VDL', name: 'VDL', nameAlt: 'VDL', alias: 'VDL' },
-      { nomTypeValueId: 8, code: 'VML', name: 'VML', nameAlt: 'VML', alias: 'VML' },
-      { nomTypeValueId: 9, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
+      { nomTypeValueId: 7836, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
+      { nomTypeValueId: 7831, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
+      { nomTypeValueId: 7829, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
+      { nomTypeValueId: 7835, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' },
+      { nomTypeValueId: 7828, code: 'OSL', name: 'OSL', nameAlt: 'OSL', alias: 'OSL' },
+      { nomTypeValueId: 7833, code: 'TML', name: 'TML', nameAlt: 'TML', alias: 'TML' },
+      { nomTypeValueId: 7832, code: 'VDL', name: 'VDL', nameAlt: 'VDL', alias: 'VDL' },
+      { nomTypeValueId: 7830, code: 'VML', name: 'VML', nameAlt: 'VML', alias: 'VML' },
+      { nomTypeValueId: 7834, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
     ],
 
     //типове документи за проверка

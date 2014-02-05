@@ -88,16 +88,14 @@
           notes: 'Бележки'
         },
         personMedicalDirective: {
-          documentNumberPrefix: 'Префикс',
-          documentNumber: 'Номер',
-          documentNumberSuffix: 'Суфикс',
+          testimonial: 'Свидетелство',
           documentDateValidFrom: 'От дата',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClassType: 'Клас',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
+          bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
           title: 'Свидетелство за медицинска годност'
         },
@@ -293,7 +291,7 @@
           limitations: 'Ограничения',
           documentPublisher: 'Издател',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
+          bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
           newMedical: 'Ново медицинско'

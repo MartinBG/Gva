@@ -13,7 +13,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      template: '<textarea></textarea>'
+      template: '<textarea class="form-control"></textarea>'
     };
   }
 
