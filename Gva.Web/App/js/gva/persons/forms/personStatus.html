@@ -3,30 +3,32 @@
     <div class="panel-heading"><strong l10n-text="persons.personStatusDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.personStatusType.$invalid && form.$validated}">
+        <div class="form-group col-sm-4 col-md-3 col-lg-3" ng-class="{'has-error': form.personStatusType.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personStatusDirective.personStatusType"></label>
           <span name="personStatusTypeValidationSpan" ng-show="form.personStatusType.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign"
                 title="{{form.personStatusType.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature alias="'personStatusTypes'" load="true" name="personStatusType" ng-model="model.personStatusType" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-lg-2">
           <label class="control-label" l10n-text="persons.personStatusDirective.documentNumber"></label>
           <sc-text ng-model="model.documentNumber"></sc-text>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2 col-lg-2" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
           <label class=" control-label" l10n-text="persons.personStatusDirective.documentDateValidFrom">
           </label>
           <span name="documentDateValidFromValidationSpan" ng-show="form.documentDateValidFrom.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign"
                 title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
           <sc-date name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-md-2 col-lg-2">
           <label class="control-label" l10n-text="persons.personStatusDirective.documentDateValidTo"></label>
           <sc-date name="docDateValidTo" ng-model="model.documentDateValidTo"></sc-date>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-lg-2">
           <label class="control-label" l10n-text="persons.personStatusDirective.notes"></label>
         </div>
       </div>

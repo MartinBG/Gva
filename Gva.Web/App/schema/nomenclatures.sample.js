@@ -144,6 +144,7 @@
 
     //Номенклатура Типове персонал
     staffTypes: [
+      { nomTypeValueId: 0, code: 'D', name: 'Общ документ', nameAlt: 'Общ документ', alias: 'D' },
       { nomTypeValueId: 1, code: 'M', name: 'Наземен авиационен персонал за TO на СУВД', nameAlt: 'Наземен авиационен персонал за TO на СУВД', alias: 'M' },
       { nomTypeValueId: 2, code: 'G', name: 'Наземен авиационен персонал за TO на ВС', nameAlt: 'Наземен авиационен персонал за TO', alias: 'G' },
       { nomTypeValueId: 3, code: 'F', name: 'Членове на екипажа', nameAlt: 'Членове на екипажа', alias: 'F' },
