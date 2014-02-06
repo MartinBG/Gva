@@ -4,8 +4,7 @@
 
   function ApplicationsEditCaseCtrl(
     $scope,
-    $state,
-    $stateParams
+    $state
     ) {
     $scope.linkNew = function (docId, docFile) {
       $scope.documentData.isLinkNew = true;
@@ -58,7 +57,7 @@
       //}
 
       return $state.go(path, {
-        id: $stateParams.id,
+        id: $scope.application.lotId,
         ind: docCase.partIndex
       });
     };
@@ -70,8 +69,7 @@
 
   ApplicationsEditCaseCtrl.$inject = [
     '$scope',
-    '$state',
-    '$stateParams'
+    '$state'
   ];
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);
