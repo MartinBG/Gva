@@ -262,7 +262,6 @@
     <Content Include="App\js\gva\persons\views\documentChecksSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\inventorySearch.html" />
     <Content Include="App\js\gva\persons\views\inventorySearchCtrl.js" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\schema\person-rating-edition.sample.js" />
@@ -282,8 +281,6 @@
     <Content Include="App\js\gva\persons\views\flyingExperiencesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiencesEdit.html" />
     <Content Include="App\js\gva\persons\views\flyingExperiencesEditCtrl.js" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\schema\person-flyingExperience.sample.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
@@ -325,8 +322,6 @@
     <Content Include="App\js\gva\persons\forms\personDocumentIdCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personApplication.html" />
     <Content Include="App\js\gva\persons\forms\personScannedDocument.html" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.html" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentId.js" />
     <Content Include="App\js\gva\persons\views\documentIdsEdit.html" />
     <Content Include="App\js\gva\persons\views\documentIdsEditCtrl.js" />
@@ -334,7 +329,6 @@
     <Content Include="App\js\gva\persons\views\documentIdsNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentIdsSearch.html" />
     <Content Include="App\js\gva\persons\views\documentIdsSearchCtrl.js" />
-    <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentIdsHttp.js" />
     <Content Include="App\test\gva\persons\specs\editPersonDocumentIdSpec.js" />
     <Content Include="App\test\gva\persons\specs\newPersonDocumentIdSpec.js" />
