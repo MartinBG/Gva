@@ -23,25 +23,25 @@
 
       if ($scope.documentData.docPartType) {
         if ($scope.documentData.docPartType.alias === 'DocumentId') {
-          PersonDocumentId.query($stateParams).$promise.then(function (documentIds) {
+          PersonDocumentId.query({ id: $scope.application.lotId }).$promise.then(function (documentIds) {
             $scope.wrapper.documentPart = documentIds;
             $scope.showDocumentId = !!documentIds;
           });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentEducation') {
-          PersonDocumentEducation.query($stateParams).$promise.then(function (documentEducations) {
+          PersonDocumentEducation.query({ id: $scope.application.lotId }).$promise.then(function (documentEducations) {
             $scope.wrapper.documentPart = documentEducations;
             $scope.showDocumentEducation = !!documentEducations;
           });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentEmployment') {
-          PersonDocumentEmployment.query($stateParams).$promise.then(function (employments) {
+          PersonDocumentEmployment.query({ id: $scope.application.lotId }).$promise.then(function (employments) {
             $scope.wrapper.documentPart = employments;
             $scope.showDocumentEmployment = !!employments;
           });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentMed') {
-          PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
+          PersonDocumentMedical.query({ id: $scope.application.lotId }).$promise.then(function (medicals) {
             $scope.wrapper.documentPart = medicals.map(function (medical) {
               var testimonial = medical.part.documentNumberPrefix + ' ' +
                 medical.part.documentNumber + ' ' +
@@ -62,7 +62,7 @@
           });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentCheck') {
-          PersonDocumentCheck.query($stateParams).$promise.then(function (checks) {
+          PersonDocumentCheck.query({ id: $scope.application.lotId }).$promise.then(function (checks) {
             $scope.wrapper.documentPart = checks;
             $scope.showDocumentCheck = !!checks;
           });

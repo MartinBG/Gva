@@ -167,39 +167,6 @@
 
           return [200, { applicationId: newApplication.applicationId }];
         })
-      .when('GET', '/api/nomenclatures/persons',
-        function (personLots) {
-          var noms = [],
-            nomItem = {
-              nomTypeValueId: '',
-              name: '',
-              content: []
-            };
-
-          _.forEach(personLots, function (item) {
-            var t = {};
-
-            nomItem.nomTypeValueId = item.lotId;
-            nomItem.name = item.personData.part.firstName + ' ' + item.personData.part.lastName;
-            nomItem.content = item;
-
-            _.assign(t, nomItem, true);
-            noms.push(t);
-          });
-
-          return [200, noms];
-        })
-      .when('POST', '/api/applications/validate/exist',
-        function ($jsonData, applicationsFactory) {
-          var exist = false;
-
-          if ($jsonData && $jsonData.docId && $jsonData.lotId) {
-            exist =
-              !!applicationsFactory.getApplicationByDocAndPerson($jsonData.docId, $jsonData.lotId);
-          }
-
-          return [200, { applicationExist: exist }];
-        })
       .when('POST', '/api/apps/:id/parts/new',
         function ($params, $jsonData, personLots, applicationsFactory, docs, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
