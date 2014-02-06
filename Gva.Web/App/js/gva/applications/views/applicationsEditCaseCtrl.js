@@ -26,28 +26,28 @@
       return $state.go('applications/edit/linkpart');
     };
 
-    $scope.newfile = function (c) {
+    $scope.newfile = function (docCase) {
       $scope.documentData.docPartType = null;
-      $scope.documentData.currentDocId = c.docId;
+      $scope.documentData.currentDocId = docCase.docInfo.docId;
       return $state.go('applications/edit/newfile');
     };
 
     $scope.viewPart = function (docCase) {
       var path = '';
 
-      if (docCase.setPartId === 1) {
+      if (docCase.appFile.setPartAlias === 'DocumentId') {
         path = 'persons.documentIds.edit';
       }
-      else if (docCase.setPartId === 2) {
+      else if (docCase.appFile.setPartAlias === 'DocumentEducation') {
         path = 'persons.documentEducations.edit';
       }
-      else if (docCase.setPartId === 3) {
+      else if (docCase.appFile.setPartAlias === 'DocumentEmployment') {
         path = 'persons.employments.edit';
       }
-      else if (docCase.setPartId === 4) {
+      else if (docCase.appFile.setPartAlias === 'DocumentMed') {
         path = 'persons.medicals.edit';
       }
-      else if (docCase.setPartId === 5) {
+      else if (docCase.appFile.setPartAlias === 'DocumentCheck') {
         path = 'persons.checks.edit';
       }
       //else if (docCase.setPartId === 6) {
@@ -59,7 +59,7 @@
 
       return $state.go(path, {
         id: $stateParams.id,
-        ind: docCase.partIndex
+        ind: docCase.appFile.partIndex
       });
     };
 

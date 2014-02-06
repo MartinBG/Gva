@@ -10,6 +10,21 @@
             'createNew': {
               method: 'POST',
               url: '/api/apps/new'
+            },
+            'partsNew': {
+              method: 'POST',
+              url: '/api/apps/:id/parts/new',
+              params: { id: '@id' }
+            },
+            'partsLinkNew': {
+              method: 'POST',
+              url: '/api/apps/:id/parts/linkNew',
+              params: { id: '@id' }
+            },
+            'partslinkExisting': {
+              method: 'POST',
+              url: '/api/apps/:id/parts/linkExisting',
+              params: { id: '@id' }
             }
           });
       }]);

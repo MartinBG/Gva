@@ -14,6 +14,11 @@
             'registerNew': {
               method: 'POST',
               url: '/api/docs/new/register'
+            },
+            'units': {
+              method: 'GET',
+              url: '/api/nomenclatures/units',
+              isArray: true
             }
           });
       }]);
