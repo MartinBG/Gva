@@ -322,7 +322,8 @@
       { nomTypeValueId: 733, code: '10', name: 'Летателна книжка', nameAlt: '' },
       { nomTypeValueId: 759, code: '17', name: 'Контролна карта', nameAlt: 'Контролна карта', alias: 'CtrlCard' },
       { nomTypeValueId: 760, code: '18', name: 'Контролен талон', nameAlt: 'Контролен талон', alias: 'CtrlTalon' },
-      { nomTypeValueId: 813, code: '31', name: 'Обучение', nameAlt: 'Обучение', alias: 'Training' }
+      { nomTypeValueId: 813, code: '31', name: 'Обучение', nameAlt: 'Обучение', alias: 'Training' },
+      { nomTypeValueId: 6357, code: 'ENG', name: 'Свидетелство за ниво на владеене на английски език', nameAlt: 'Свидетелство за ниво на владеене на английски език', alias: 'engTraining' }
     ],
 
     //Номенклатура Типове състояния на Физичеко лице

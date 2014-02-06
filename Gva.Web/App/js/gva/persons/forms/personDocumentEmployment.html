@@ -3,30 +3,34 @@
     <div class="panel-heading"><strong l10n-text="persons.personEmploymentDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.hiredate.$invalid && form.$validated}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.hiredate.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.hiredate"></label>
           <span name="hiredateValidationSpan" ng-show="form.hiredate.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign"
                 title="{{form.hiredate.$error.required && 'Задължително поле'}}"></span>
           <sc-date ng-model="model.hiredate" name="hiredate" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.valid.$invalid && form.$validated}">
+        <div class="form-group col-lg-2" ng-class="{'has-error': form.valid.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.valid"></label>
           <span name="docValidValidationSpan" ng-show="form.valid.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.valid.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.employmentCategory.$invalid && form.$validated}">
+        <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.employmentCategory.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.employmentCategory"></label>
           <span name="employmentCategoryValidationSpan" ng-show="form.employmentCategory.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.employmentCategory.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.employmentCategory" name="employmentCategory" alias="'employmentCategories'" load="true" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.country.$invalid && form.$validated}">
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.country.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.country"></label>
           <span name="countryValidationSpan" ng-show="form.country.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.country.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" load="true" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.organization.$invalid && form.$validated}">
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.organization.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.organization"></label>
           <span name="organizationtValidationSpan" ng-show="form.organization.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign"
                 title="{{form.organization.$error.unique && 'Невалидна организация'}}"></span>
@@ -44,13 +48,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.bookPageNumber.$invalid && form.$validated}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.bookPageNumber.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.bookPageNumber"></label>
           <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign"
                 title="{{form.bookPageNumber.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-text>
         </div>
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.pageCount.$invalid && form.$validated}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.pageCount.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personEmploymentDirective.pageCount"></label>
           <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
