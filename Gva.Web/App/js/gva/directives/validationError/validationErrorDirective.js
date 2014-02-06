@@ -10,7 +10,6 @@
 
     return {
       restrict: 'E',
-      replace: false,
       scope: {
         fieldName: '@',
         getValidations: '&validations'
@@ -34,8 +33,7 @@
   angular.module('gva')
     .constant('gvaValidationErrorConfig', {
       defaultErrorTexts: {
-        required: 'errorTexts.required',
-        min: 'errorTexts.min'
+        required: 'errorTexts.required'
       }
     })
     .directive('gvaValidationError', ValidationErrorDirective);
