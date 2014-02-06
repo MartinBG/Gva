@@ -9,7 +9,7 @@ Usage <sc-datatable ng-model="data"
 /*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function DatatableDirective(l10n, $timeout) {
+  function DatatableDirective(l10n, $timeout, $parse) {
     return {
       restrict: 'E',
       replace: true,
@@ -113,9 +113,17 @@ Usage <sc-datatable ng-model="data"
             $scope.sortingData.push([columnIndex, column.sorting]);
           }
 
+          var dataFunction = null;
+          if (column.data) {
+            var parsedExpression = $parse(column.data);
+            dataFunction = function (item) {
+              return parsedExpression(item);
+            };
+          }
+
           $scope.aoColumnDefs.push({
             sTitle: l10n.get(column.title) || '',
-            mData: column.data || null,
+            mData: dataFunction,
             bSortable: column.sortable === 'false'? false : true,
             bVisible: column.visible === 'false'? false : true,
             sType: column.type || 'string',
@@ -132,7 +140,7 @@ Usage <sc-datatable ng-model="data"
     };
   }
 
-  DatatableDirective.$inject = ['l10n', '$timeout'];
+  DatatableDirective.$inject = ['l10n', '$timeout', '$parse'];
 
   angular.module('scaffolding').directive('scDatatable', DatatableDirective);
 
