@@ -26,20 +26,6 @@
       $urlRouterProvider.otherwise('/persons');
 
       navigationConfigProvider
-        .addItem({ text: 'ЛАП', icon: 'fa fa-users', items: [
-          { text: 'Физически лица', state: 'persons.search' },
-          { text: 'Ново физическо лице', state: 'persons.new' },
-          { text: 'Лицензи', url: '/licenses' },
-          { text: 'Квалификации', url: '/qualifications' },
-          { text: 'Медицински', url: '/medical' },
-          { text: 'Заявления', state: 'applications/search' },
-          { text: 'Ново заявление', state: 'applications/new/doc' },
-          { text: 'Свържи заявление', state: 'applications/link/common' }
-        ]})
-        .addItem({text: 'ВС', icon: 'glyphicon glyphicon-plane', url: '/aircraft', items: [
-          { text: 'Удостоверения', url: '/licenses' },
-          { text: 'Инспекции', url: '/licenses' }
-        ]})
         .addItem({
           text: 'Документи',
           icon: 'glyphicon glyphicon-folder-open',
@@ -50,6 +36,20 @@
             { text: 'Нов кореспондент', state: 'corrs/new' }
           ]
         })
+        .addItem({ text: 'ЛАП', icon: 'fa fa-users', items: [
+          { text: 'Физически лица', state: 'persons.search' },
+          { text: 'Ново физическо лице', state: 'persons.new' },
+          { text: 'Лицензи', url: '/licences' },
+          { text: 'Квалификации', url: '/qualifications' },
+          { text: 'Медицински', url: '/medical' },
+          { text: 'Заявления', state: 'applications/search' },
+          { text: 'Ново заявление', state: 'applications/new/doc' },
+          { text: 'Свържи заявление', state: 'applications/link/common' }
+        ]})
+        .addItem({text: 'ВС', icon: 'glyphicon glyphicon-plane', url: '/aircraft', items: [
+          { text: 'Удостоверения', url: '/licences' },
+          { text: 'Инспекции', url: '/licences' }
+        ]})
         .addItem({ text: 'Админ', icon: 'glyphicon glyphicon-wrench', items: [
           { text: 'Потребители', state: 'users.search' }
         ]})
