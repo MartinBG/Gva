@@ -152,46 +152,6 @@
 
           return [200];
         })
-      .when('GET', '/api/corrs/new',
-        function () {
-          var newCorr = {
-            corrId: undefined,
-            correspondentType: undefined,
-            correspondentGroup: undefined,
-            displayName: undefined,
-            email: undefined,
-            bgCitizenFirstName: undefined,
-            bgCitizenLastName: undefined,
-            bgCitizenUIN: undefined,
-
-            foreignerFirstName: undefined,
-            foreignerLastName: undefined,
-            foreignerCountryId: undefined,
-            foreignerSettlement: undefined,
-            foreignerBirthDate: undefined,
-
-            LegalEntityName: undefined,
-            LegalEntityBulstat: undefined,
-
-            fLegalEntityName: undefined,
-            fLegalEntityCountryId: undefined,
-            fLegalEntityRegisterName: undefined,
-            fLegalEntityRegisterNumber: undefined,
-            fLegalEntityOtherData: undefined,
-
-            contactDistrictId: undefined,
-            contactMunicipalityId: undefined,
-            contactSettlementId: undefined,
-            contactPostCode: undefined,
-            contactAddress: undefined,
-            contactPostOfficeBox: undefined,
-            contactPhone: undefined,
-            contactFax: undefined,
-            correspondentContacts: []
-          };
-
-          return [200, newCorr];
-        })
       .when('GET', '/api/corrs/:corrId',
         function ($params, $filter) {
           var corrId = parseInt($params.corrId, 10),
@@ -207,6 +167,16 @@
         function ($params, $jsonData, $filter) {
           var corrId = parseInt($params.corrId, 10),
             corrIndex = corrs.indexOf($filter('filter')(corrs, { corrId: corrId })[0]);
+
+          if (corrIndex === -1) {
+            return [400];
+          }
+
+          _.forEach($jsonData.correspondentContacts, function (item) {
+            if (!item.correspondentContactId) {
+              item.correspondentContactId = nextCorrContactId++;
+            }
+          });
 
           if ($jsonData.correspondentType.nomTypeValueId === 1) {
             $jsonData.displayName = $jsonData.bgCitizenFirstName + ' ' +
@@ -225,27 +195,9 @@
               $jsonData.legalEntityBulstat;
           }
 
-          if (corrIndex === -1) {
-            return [400];
-          }
-
           corrs[corrIndex] = $jsonData;
 
           return [200];
-        })
-      .when('GET', '/api/corrs/contacts/new/:corrId',
-        function ($params) {
-          var corrId = parseInt($params.corrId, 10),
-            correspondentContact = {
-              correspondentContactId: nextCorrContactId++,
-              corrId: corrId,
-              name: undefined,
-              uin: undefined,
-              note: undefined,
-              isActive: true
-            };
-
-          return [200, correspondentContact];
         });
   });
 }(angular, _));

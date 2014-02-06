@@ -82,7 +82,7 @@
           contactName: 'Наименование',
           contactUin: 'Идентификационен номер',
           contactNote: 'Позиция',
-          'delete': 'изтрии',
+          'delete': 'изтрий',
           add: 'добави',
           save: 'Запис',
           cancel: 'Отказ'

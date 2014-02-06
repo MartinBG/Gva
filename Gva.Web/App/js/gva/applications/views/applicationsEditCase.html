@@ -4,7 +4,7 @@
       <tr>
         <th style="width: 250px;">Тип/№/Дата</th>
         <th>Тип</th>
-        <th >Дело</th>
+        <th>Дело</th>
         <th style="width: 75px;"></th>
       </tr>
     </thead>
@@ -26,11 +26,9 @@
           <div ng-if="df.appFile">
             <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.appFile.part.bookPageNumber }}</a>
           </div>
-
           <div ng-if="!df.appFile">
             <a ng-click="linkNew(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Свържи с вече добавен</a>
           </div>
-
         </td>
         <td></td>
       </tr>
