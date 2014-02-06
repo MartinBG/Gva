@@ -34,14 +34,11 @@
       .then(function () {
         if ($scope.docForm.$valid) {
           var newApplication = {
-            applicationId: null,
             lotId: $scope.$parent.person.nomTypeValueId,
-            doc: {
-              docId: $scope.$parent.doc.docId
-            }
+            docId: $scope.$parent.doc.docId
           };
 
-          Application.createNew(newApplication).$promise.then(function (result) {
+          Application.linkNew(newApplication).$promise.then(function (result) {
             return $state.go('applications/edit/case', { id: result.applicationId });
           });
         }

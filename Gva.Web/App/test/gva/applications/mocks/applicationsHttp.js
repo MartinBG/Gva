@@ -78,7 +78,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/apps',
+      .when('GET', '/api/apps?fromDate&toDate&lin&regUri',
         function ($params, $filter, applicationsFactory) {
           var applications = _(applicationsFactory.getAll()).map(function (application) {
             if (application.lotId) { //todo change person data better
@@ -117,51 +117,62 @@
             lotId: $jsonData.lotId
           };
 
-          if ($jsonData.doc.docId) {
-            newApplication.docId = $jsonData.doc.docId;
+          var today = new Date();
+          var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
-            var doc = _(docs).filter({docId: newApplication.docId}).first();
-            doc.applicationId = newApplication.applicationId;
+          var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData.doc);
+          delete newDoc.numberOfDocs;
+          newDoc.docId = nextDocId;
+          newDoc.docStatusId = 2;
+          newDoc.docStatusName = 'Чернова';
+          newDoc.docSubjectLabel = 'Относно';
+          newDoc.regNumber = nextDocId;
+          newDoc.regDate = new Date();
+          newDoc.regIndex = '000030';
+          newDoc.newassignmentType = 2;
+          newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
+          newDoc.applicationId = newApplication.applicationId;
+
+          var docCaseObj = {
+            docCaseId: newDoc.docId,
+            docCase: [{
+              docId: newDoc.docId,
+              regDate: newDoc.regDate,
+              regNumber: newDoc.regUri,
+              direction: newDoc.docDirectionName,
+              casePartType: newDoc.docCasePartTypeName,
+              statusName: newDoc.docStatusName,
+              description: newDoc.docTypeName
+            }]
+          };
+          docCases.push(docCaseObj);
+
+          newDoc.docRelations = docCaseObj.docCase;
+
+          docs.push(newDoc);
+
+          newApplication.docId = newDoc.docId;
+
+          applicationsFactory.saveApplication(newApplication);
+
+          return [200, { applicationId: newApplication.applicationId }];
+        })
+      .when('POST', '/api/apps/link',
+        function ($jsonData, applicationsFactory, docs) {
+          if (!$jsonData || !$jsonData.docId || !$jsonData.lotId) {
+            return [400];
           }
-          else {
-            var today = new Date();
-            var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
-            var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData.doc);
-            delete newDoc.numberOfDocs;
-            newDoc.docId = nextDocId;
-            newDoc.docStatusId = 2;
-            newDoc.docStatusName = 'Чернова';
-            newDoc.docSubjectLabel = 'Относно';
-            newDoc.regNumber = nextDocId;
-            newDoc.regDate = new Date();
-            newDoc.regIndex = '000030';
-            newDoc.newassignmentType = 2;
-            newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-            newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-            newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
-            newDoc.applicationId = newApplication.applicationId;
+          var newApplication = {
+            applicationId: applicationsFactory.getNextApplicationId(),
+            docId: $jsonData.docId,
+            lotId: $jsonData.lotId
+          };
 
-            var docCaseObj = {
-              docCaseId: newDoc.docId,
-              docCase: [{
-                docId: newDoc.docId,
-                regDate: newDoc.regDate,
-                regNumber: newDoc.regUri,
-                direction: newDoc.docDirectionName,
-                casePartType: newDoc.docCasePartTypeName,
-                statusName: newDoc.docStatusName,
-                description: newDoc.docTypeName
-              }]
-            };
-            docCases.push(docCaseObj);
-
-            newDoc.docRelations = docCaseObj.docCase;
-
-            docs.push(newDoc);
-
-            newApplication.docId = newDoc.docId;
-          }
+          var doc = _(docs).filter({docId: newApplication.docId}).first();
+          doc.applicationId = newApplication.applicationId;
 
           applicationsFactory.saveApplication(newApplication);
 

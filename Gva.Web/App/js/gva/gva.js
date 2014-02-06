@@ -89,7 +89,7 @@
         .state({
           name: 'applications/search',
           parent: 'applications',
-          url: '',
+          url: '?fromDate&toDate&lin&regUri',
           views: {
             'pageView@root': {
               templateUrl: 'gva/applications/views/applicationsSearch.html',

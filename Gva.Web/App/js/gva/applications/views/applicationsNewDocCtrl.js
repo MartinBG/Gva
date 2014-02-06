@@ -39,7 +39,6 @@
           };
 
           var newApplication = {
-            applicationId: null,
             lotId: $scope.$parent.person.nomTypeValueId,
             doc: newDoc
           };

@@ -21,11 +21,11 @@
     });
 
     $scope.search = function () {
-      $state.go('docs/search', {
+      $state.go('applications/search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
-        regUri: $scope.filters.regUri,
-        lin: $scope.filters.docName
+        lin: $scope.filters.lin,
+        regUri: $scope.filters.regUri
       });
     };
 

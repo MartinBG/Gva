@@ -23,49 +23,54 @@
 
       if ($scope.documentData.docPartType) {
         if ($scope.documentData.docPartType.alias === 'DocumentId') {
-          PersonDocumentId.query({ id: $scope.application.lotId }).$promise.then(function (documentIds) {
-            $scope.wrapper.documentPart = documentIds;
-            $scope.showDocumentId = !!documentIds;
-          });
+          PersonDocumentId.query({ id: $scope.application.lotId })
+            .$promise.then(function (documentIds) {
+              $scope.wrapper.documentPart = documentIds;
+              $scope.showDocumentId = !!documentIds;
+            });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentEducation') {
-          PersonDocumentEducation.query({ id: $scope.application.lotId }).$promise.then(function (documentEducations) {
-            $scope.wrapper.documentPart = documentEducations;
-            $scope.showDocumentEducation = !!documentEducations;
-          });
+          PersonDocumentEducation.query({ id: $scope.application.lotId })
+            .$promise.then(function (documentEducations) {
+              $scope.wrapper.documentPart = documentEducations;
+              $scope.showDocumentEducation = !!documentEducations;
+            });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentEmployment') {
-          PersonDocumentEmployment.query({ id: $scope.application.lotId }).$promise.then(function (employments) {
-            $scope.wrapper.documentPart = employments;
-            $scope.showDocumentEmployment = !!employments;
-          });
+          PersonDocumentEmployment.query({ id: $scope.application.lotId })
+            .$promise.then(function (employments) {
+              $scope.wrapper.documentPart = employments;
+              $scope.showDocumentEmployment = !!employments;
+            });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentMed') {
-          PersonDocumentMedical.query({ id: $scope.application.lotId }).$promise.then(function (medicals) {
-            $scope.wrapper.documentPart = medicals.map(function (medical) {
-              var testimonial = medical.part.documentNumberPrefix + ' ' +
-                medical.part.documentNumber + ' ' +
-                medical.part.documentNumberSuffix;
+          PersonDocumentMedical.query({ id: $scope.application.lotId })
+            .$promise.then(function (medicals) {
+              $scope.wrapper.documentPart = medicals.map(function (medical) {
+                var testimonial = medical.part.documentNumberPrefix + ' ' +
+                  medical.part.documentNumber + ' ' +
+                  medical.part.documentNumberSuffix;
 
-              medical.part.testimonial = testimonial;
+                medical.part.testimonial = testimonial;
 
-              var limitations = '';
-              for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-                limitations += medical.part.limitationsTypes[i].name + ', ';
-              }
-              limitations = limitations.substring(0, limitations.length - 2);
-              medical.part.limitations = limitations;
+                var limitations = '';
+                for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
+                  limitations += medical.part.limitationsTypes[i].name + ', ';
+                }
+                limitations = limitations.substring(0, limitations.length - 2);
+                medical.part.limitations = limitations;
 
-              return medical;
+                return medical;
+              });
+              $scope.showDocumentMed = !!medicals;
             });
-            $scope.showDocumentMed = !!medicals;
-          });
         }
         else if ($scope.documentData.docPartType.alias === 'DocumentCheck') {
-          PersonDocumentCheck.query({ id: $scope.application.lotId }).$promise.then(function (checks) {
-            $scope.wrapper.documentPart = checks;
-            $scope.showDocumentCheck = !!checks;
-          });
+          PersonDocumentCheck.query({ id: $scope.application.lotId })
+            .$promise.then(function (checks) {
+              $scope.wrapper.documentPart = checks;
+              $scope.showDocumentCheck = !!checks;
+            });
         }
 
         //todo add more

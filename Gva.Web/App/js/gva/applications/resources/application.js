@@ -11,6 +11,10 @@
               method: 'POST',
               url: '/api/apps/new'
             },
+            'linkNew': {
+              method: 'POST',
+              url: '/api/apps/link'
+            },
             'partsNew': {
               method: 'POST',
               url: '/api/apps/:id/parts/new',
