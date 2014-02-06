@@ -64,7 +64,7 @@
         })
       .when('POST', '/api/persons',
         function ($params, $jsonData, personLots) {
-          var nextLotId = _(personLots).pluck('lotId').max().value() + 1;
+          var nextLotId = Math.max(_(personLots).pluck('lotId').max().value() + 1, 1);
 
           var newPerson = {
             lotId: nextLotId,
@@ -84,7 +84,17 @@
                 partIndex: 3,
                 part: $jsonData.personDocumentId
               }
-            ]
+            ],
+            personStatuses: [],
+            personDocumentEmployments: [],
+            personDocumentEducations: [],
+            personDocumentOthers: [],
+            personDocumentTrainings: [],
+            personDocumentMedicals: [],
+            personDocumentChecks: [],
+            personFlyingExperiences: [],
+            personRatings: [],
+            personLicences: []
           };
 
           personLots.push(newPerson);
