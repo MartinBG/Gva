@@ -3,6 +3,8 @@
   'use strict';
 
   function PersonDataCtrl($scope, $stateParams, Person) {
+    $scope.model = {};
+
     $scope.isUniqueLin = function (value) {
       if (!value) {
         return true;
@@ -14,6 +16,10 @@
           return persons.length === 0 ||
             (persons.length === 1 && persons[0].id === $stateParams.id);
         });
+    };
+
+    $scope.generateLIN = function () {
+      $scope.model.lin = '11731';
     };
   }
 
