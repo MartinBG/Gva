@@ -13,15 +13,15 @@
         year: 2014
       },
       organization: nomenclatures.get('organizations', 'AAK Progres'),
-      aircraft: nomenclatures.get('aircrafts', 'aircraft1'),
+      aircraft: nomenclatures.get('aircrafts', 'LZ-001 A-11'),
       ratingType: nomenclatures.get('ratingTypes', 'BAe 146'),
       ratingClass: nomenclatures.get('ratingClasses', 'VLA'),
       sector: 'sektor',
       licenceType: nomenclatures.get('licenceTypes', 'CPA'),
       authorization: nomenclatures.get('authorizations', 'FI(A)'),
       locationIndicator: nomenclatures.get('locationIndicators', 'LBBG'),
-      experienceRole: nomenclatures.get('experienceRoles', 'type1'),
-      experienceMeasure: nomenclatures.get('experienceMeasures', 'measure1'),
+      experienceRole: nomenclatures.get('experienceRoles', 'independent'),
+      experienceMeasure: nomenclatures.get('experienceMeasures', 'whours'),
       dayIFR: {
         hours: 23,
         minutes: 33
@@ -61,15 +61,15 @@
         year: 2014
       },
       organization: nomenclatures.get('organizations', 'AAK Progres'),
-      aircraft: nomenclatures.get('aircrafts', 'aircraft1'),
+      aircraft: nomenclatures.get('aircrafts', 'LZ-001 A-11'),
       ratingType: nomenclatures.get('ratingTypes', 'BAe 146'),
       ratingClass: nomenclatures.get('ratingClasses', 'VLA'),
       sector: 'sektor',
       licenceType: nomenclatures.get('licenceTypes', 'CPA'),
       authorization: nomenclatures.get('authorizations', 'FI(A)'),
       locationIndicator: nomenclatures.get('locationIndicators', 'LBBG'),
-      experienceRole: nomenclatures.get('experienceRoles', 'type1'),
-      experienceMeasure: nomenclatures.get('experienceMeasures', 'measure1'),
+      experienceRole: nomenclatures.get('experienceRoles', 'independent'),
+      experienceMeasure: nomenclatures.get('experienceMeasures', 'whours'),
       dayIFR: {
         hours: 23,
         minutes: 33

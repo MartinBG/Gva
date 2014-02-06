@@ -205,13 +205,11 @@
     <Content Include="App\js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentEmployment.html" />
     <Content Include="App\js\gva\persons\forms\personFlyingExperience.html" />
-    <Content Include="App\js\gva\persons\forms\personFlyingExperienceCtrl.js" />
     <Content Include="App\gruntTasks\bundle.js" />
     <Content Include="App\gruntTasks\tv4.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
     <Content Include="App\js\gva\directives\button\buttonDirective.html" />
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
-    <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\resources\personInventory.js" />
     <Content Include="App\js\gva\persons\resources\personRating.js" />
     <Content Include="App\js\gva\persons\resources\personEdition.js" />

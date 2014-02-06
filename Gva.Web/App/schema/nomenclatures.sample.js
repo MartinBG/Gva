@@ -691,18 +691,50 @@
 
     //Номенклатура Въздухоплавателни средства
     aircrafts: [
-      { nomTypeValueId: 1, code: 'AAA', name: 'aircraft1', nameAlt: 'aircraft1', alias: 'aircraft1' },
-      { nomTypeValueId: 2, code: 'BBB', name: 'aircraft2', nameAlt: 'aircraft2', alias: 'aircraft2' }
+      { nomTypeValueId: 1, code: '', name: 'LZ-001 A-11', nameAlt: '', alias: 'LZ-001 A-11' },
+      { nomTypeValueId: 2, code: '', name: 'LZ-002 Вива --56 V-56', nameAlt: '', alias: 'LZ-002 Viva 56' },
+      { nomTypeValueId: 3, code: '', name: 'LZ-003 Cameron -A-210', nameAlt: '', alias: 'LZ-003 Cameron 210' }
     ],
     //Номенклатура Роли в натрупан летателният опит
     experienceRoles: [
-      { nomTypeValueId: 1, code: 'AAA', name: 'type1', nameAlt: 'type1', alias: 'type1' },
-      { nomTypeValueId: 2, code: 'BBB', name: 'type2', nameAlt: 'type2', alias: 'type2' }
+      {
+        nomTypeValueId: 7837, code: 'IE', name: 'Инструктор', nameAlt: '', alias: 'instructor', content: {
+          codeCA: null
+        }
+      },
+      {
+        nomTypeValueId: 7838, code: 'EI', name: 'Обучаем (с инструктор)', nameAlt: '', alias: 'training', content: {
+          codeCA: null
+        }
+      },
+      {
+        nomTypeValueId: 7839, code: 'CI', name: 'Под наблюдение на инструктор', nameAlt: '', alias: 'control', content: {
+          codeCA: null
+        }
+      },
+      {
+        nomTypeValueId: 7840, code: 'IN', name: 'Самостоятелен', nameAlt: '', alias: 'independent', content: {
+          codeCA: null
+        }
+      }
     ],
     //Номенклатура Видове летателен опит
     experienceMeasures: [
-      { nomTypeValueId: 1, code: 'AAA', name: 'measure1', nameAlt: 'measure1', alias: 'measure1' },
-      { nomTypeValueId: 2, code: 'BBB', name: 'measure2', nameAlt: 'measure2', alias: 'measure2' }
+      {
+        nomTypeValueId: 7841, code: 'W', name: 'Отработени часове', nameAlt: '', alias: 'whours', content: {
+          codeCA: null
+        }
+      },
+      {
+        nomTypeValueId: 7842, code: 'H', name: 'Летателни часове', nameAlt: '', alias: 'fhours', content: {
+          codeCA: null
+        }
+      },
+      {
+        nomTypeValueId: 7843, code: 'F', name: 'Брой полети', nameAlt: '', alias: 'flights', content: {
+          codeCA: null
+        }
+      }
     ],
 
     //Номенклатура Степени на квалификационен клас на Физичеко лице

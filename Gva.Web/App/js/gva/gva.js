@@ -65,8 +65,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonFlyingExperience',
-      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
-      controller: 'PersonFlyingExperienceCtrl'
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html'
     });
     scaffoldingProvider.form({
       name: 'gvaRatingEdition',
