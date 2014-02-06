@@ -7,9 +7,18 @@
       function ($resource) {
         return $resource('/api/docs/:docId', { docId: '@docId' },
           {
-            'getNew': {
+            'createNew': {
+              method: 'POST',
+              url: '/api/docs/new/create'
+            },
+            'registerNew': {
+              method: 'POST',
+              url: '/api/docs/new/register'
+            },
+            'units': {
               method: 'GET',
-              url: '/api/docs/new'
+              url: '/api/nomenclatures/units',
+              isArray: true
             }
           });
       }]);

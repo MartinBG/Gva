@@ -17,9 +17,7 @@
           </div>
         </div>
 
-        <!--<br />-->
-
-        <div ng-if="showDocumentId && documentData.docPartType.content.setPartId === 1">
+        <div ng-if="showDocumentId && documentData.docPartType.alias === 'DocumentId'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
             </sc-column>
@@ -43,7 +41,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentEducation && documentData.docPartType.content.setPartId === 2">
+        <div ng-if="showDocumentEducation && documentData.docPartType.alias === 'DocumentEducation'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
             </sc-column>
@@ -66,7 +64,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentEmployment && documentData.docPartType.content.setPartId === 3">
+        <div ng-if="showDocumentEmployment && documentData.docPartType.alias === 'DocumentEmployment'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
               <span>{{item.part.hiredate | date:'mediumDate'}}</span>
@@ -93,7 +91,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentMed && documentData.docPartType.content.setPartId === 4">
+        <div ng-if="showDocumentMed && documentData.docPartType.alias === 'DocumentMed'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
             </sc-column>
@@ -121,7 +119,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentCheck && documentData.docPartType.content.setPartId === 5">
+        <div ng-if="showDocumentCheck && documentData.docPartType.alias === 'DocumentCheck'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
             </sc-column>

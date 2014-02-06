@@ -4,39 +4,37 @@
       <tr>
         <th style="width: 250px;">Тип/№/Дата</th>
         <th>Тип</th>
-        <th >Дело</th>
+        <th>Дело</th>
         <th style="width: 75px;"></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="c in application.docCase">
-        <td>{{ c.regNumber }} {{ c.statusName }}</td>
-        <td>{{ c.description }}</td>
+      <tr ng-repeat-start="docCase in application.docCase">
+        <td>{{ docCase.docInfo.regNumber }} {{ docCase.docInfo.statusName }}</td>
+        <td>{{ docCase.docInfo.description }}</td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(c.docId)" style="cursor: pointer;">Преглед
+          <a ng-click="viewDoc(docCase.docInfo.docId)" style="cursor: pointer;">Преглед
           </a>
         </td>
       </tr>
-      <tr ng-repeat="df in c.docFiles">
+      <tr ng-repeat="df in docCase.docFiles">
         <td></td>
-        <td ng-show="!!df.setPartName">{{ df.setPartName }} ({{ df.name }})</td>
-        <td ng-show="!df.setPartName">{{ df.name }}</span></td>
+        <td ng-show="df.appFile">{{ df.appFile.setPartName }} ({{ df.docFile.name }})</td>
+        <td ng-show="!df.appFile">{{ df.docFile.name }}</span></td>
         <td>
-          <div ng-if="!!df.setPartId">
-            <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.part.bookPageNumber }}</a>
+          <div ng-if="df.appFile">
+            <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.appFile.part.bookPageNumber }}</a>
           </div>
-
-          <div ng-if="!df.setPartId">
-            <a ng-click="linkNew(c.docId, df)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(c.docId, df)" style="cursor: pointer;">Свържи с вече добавен</a>
+          <div ng-if="!df.appFile">
+            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Свържи с вече добавен</a>
           </div>
-
         </td>
         <td></td>
       </tr>
       <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newfile(c)" style="cursor: pointer;">Нов документ</a>
+          <a ng-click="newfile(docCase)" style="cursor: pointer;">Нов документ</a>
         </td>
       </tr>
     </tbody>

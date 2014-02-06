@@ -28,7 +28,7 @@
           docTypeId: 'Вид',
           docSubject: 'Относно',
           docCorrespondent: 'Кореспондент',
-          numberOfDocuments: 'Брой документи'
+          numberOfDocs: 'Брой документи'
         }
       },
       units: {
@@ -82,7 +82,7 @@
           contactName: 'Наименование',
           contactUin: 'Идентификационен номер',
           contactNote: 'Позиция',
-          'delete': 'изтрии',
+          'delete': 'изтрий',
           add: 'добави',
           save: 'Запис',
           cancel: 'Отказ'

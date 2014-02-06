@@ -8,25 +8,36 @@
     'docCases',
     'applicationLotFiles',
     function (docs, personLots, docCases, applicationLotFiles) {
-      function docFileMapper(d) {
-        var appLotFile = _(applicationLotFiles).filter({ docFileId: d.key }).first();
+      function docFileMapper(value) {
+        var docFiles = {
+          docFile: value,
+          appFile: null
+        };
+        var appLotFile = _(applicationLotFiles).filter({ docFileKey: value.key }).first();
 
         if (!!appLotFile) {
-          d.partIndex = appLotFile.partIndex;
-          d.part = appLotFile.part;
-          d.setPartName = appLotFile.setPartName;
-          d.setPartId = appLotFile.setPartId;
+          docFiles.appFile = {};
+          docFiles.appFile.partIndex = appLotFile.partIndex;
+          docFiles.appFile.part = appLotFile.part;
+          docFiles.appFile.setPartName = appLotFile.setPartName;
+          docFiles.appFile.setPartAlias = appLotFile.setPartAlias;
         }
 
-        return d;
+        return docFiles;
       }
 
-      function docCaseMapper(p) {
-        var publicDocFiles = _(docs).filter({ docId: p.docId }).first().publicDocFiles;
-        if (publicDocFiles) {
-          p.docFiles = publicDocFiles.map(docFileMapper);
+      function docCaseMapper(value) {
+        var docCase = {
+          docInfo: value,
+          docFiles: null
+        };
+        var docFiles = _(docs).filter({ docId: value.docId }).first().publicDocFiles;
+
+        if (!!docFiles) {
+          docCase.docFiles = docFiles.map(docFileMapper);
         }
-        return p;
+
+        return docCase;
       }
 
       var applications = [
@@ -56,8 +67,11 @@
 
           return application;
         },
-        getApplicationByDocAndPerson: function (docId, lotId) {
+        getByDocIdAndLotId: function (docId, lotId) {
           return _(applications).filter({ docId: docId, lotId: lotId }).first();
+        },
+        getByDocId: function (docId) {
+          return _(applications).filter({ docId: docId}).first();
         },
         getNextApplicationId: function () {
           return _(applications).pluck('applicationId').max().value() + 1;

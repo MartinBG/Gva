@@ -6,18 +6,18 @@
 
     $scope.save = function () {
       $scope.newPersonForm.$validate()
-          .then(function () {
+      .then(function () {
         if ($scope.newPersonForm.$valid) {
           return Person.save($scope.newPerson).$promise
-              .then(function (result) {
-            $scope.$parent.person = {
-              nomTypeValueId: result.lotId,
-              name: result.personData.part.firstName + ' ' + result.personData.part.lastName,
-              content: result
-            };
+            .then(function (result) {
+              $scope.$parent.person = {
+                nomTypeValueId: result.lotId,
+                name: result.personData.part.firstName + ' ' + result.personData.part.lastName,
+                content: result
+              };
 
-            goToPreviousState();
-          });
+              goToPreviousState();
+            });
         }
       });
     };

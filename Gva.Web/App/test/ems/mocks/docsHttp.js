@@ -1,30 +1,29 @@
-﻿/*global angular, _, jQuery, require*/
+﻿/*global angular, _, jQuery*/
 (function (angular, _) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
-    var nomenclatures = require('./nomenclatures.sample');
 
     var defaultDoc = {
       docId: null,
       parentDocId: null,
-      docStatusId: 2,
-      docStatusName: 'Чернова',
+      docStatusId: null,
+      docStatusName: null,
       docSubject: null,
-      docSubjectLabel: 'Относно',
+      docSubjectLabel: null,
       docTypeId: null,
       docDirectionName: null,
       docDirectionId: null,
       docTypeName: null,
       regDate: null,
       regUri: null,
-      regIndex: '000030',
+      regIndex: null,
       regNumber: null,
       correspondentName: null,
       corrRegNumber: null,
       corrRegDate: null,
-      docSourceType: 2,
+      docSourceType: null,
       docDestinationType: null,
-      assignmentType: 2,
+      assignmentType: null,
       assignmentDate: null,
       assignmentDeadline: null,
       accessCode: null,
@@ -37,7 +36,6 @@
       docUnits: [],
       docUnitsFrom: [],
       docUnitsTo: [],
-      numberOfDocuments: 1,
       isVisibleRoleFrom: true,
       isVisibleRoleTo: true,
       isVisibleRoleImportedBy: true,
@@ -55,7 +53,7 @@
       isVisibleCollapseAssignment: false,
       isVisibleCollapsePermissions: false,
       isRead: false,
-      docBody: '',
+      docBody: null,
       privateDocFiles: [],
       publicDocFiles: [],
       docWorkflows: [],
@@ -66,48 +64,137 @@
     };
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units',
-        function ($params, docs) {
-          var t = nomenclatures.get('countries', 'Belgium'),
-            result = _(docs).filter(function (d) {
-              var isMatch = true;
+        .when('GET',
+        '/api/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot',
+        function ($params, docs, applicationsFactory) {
 
+          var searchParams = _.cloneDeep($params);
+          delete searchParams.docIds;
+          delete searchParams.hasLot;
 
-              if (d || $params) {
-                return true;
-              }
-              else {
+          var docIdsArray = !!$params.docIds ? $params.docIds.split(',') : null;
+
+          var result = _(docs).filter(function (doc) {
+
+            if (docIdsArray && !_.contains(docIdsArray, doc.docId.toString())) {
+              return false;
+            }
+
+            if ($params.hasLot && $params.hasLot.toLowerCase() === 'true') {
+              if (!applicationsFactory.getByDocId(doc.docId)) {
                 return false;
               }
+            }
+            else if ($params.hasLot && $params.hasLot.toLowerCase() === 'false') {
+              if (applicationsFactory.getByDocId(doc.docId)) {
+                return false;
+              }
+            }
 
+            var isMatch = true;
+
+            _.forOwn(searchParams, function (value, param) {
+              if (!value || param === 'exact') {
+                return;
+              }
+
+              if (searchParams.exact) {
+                isMatch =
+                  isMatch && doc[param] && doc[param] === searchParams[param];
+              } else {
+                isMatch =
+                  isMatch && doc[param] && doc[param].toString().indexOf(searchParams[param]) >= 0;
+              }
+
+              //short circuit forOwn if not a match
               return isMatch;
-            })
-          .value();
+            });
 
-          t = undefined;
+            return isMatch;
+          })
+          .value();
 
           return [200, result];
         })
-      .when('POST', '/api/docs',
+      .when('POST', '/api/docs/new/create',
         function ($jsonData, docs, docCases) {
+
           if (!$jsonData) {
             return [400];
           }
 
           var today = new Date();
+          var nextDocId = _(docs).pluck('docId').max().value() + 1;
+          var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
+          delete newDoc.numberOfDocs;
 
+          newDoc.docId = nextDocId;
+          newDoc.docStatusId = 2;
+          newDoc.docStatusName = 'Чернова';
+          newDoc.docSubjectLabel = 'Относно';
+          newDoc.newassignmentType = 2;
+          newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+
+          var docCaseObj;
+          if (!newDoc.parentDocId) {
+            docCaseObj = {
+              docCaseId: newDoc.docId,
+              docCase: []
+            };
+            docCases.push(docCaseObj);
+          }
+          else {
+            docCaseObj =
+              _(docCases).filter({ docCaseId: parseInt(newDoc.parentDocId, 10)}).first();
+          }
+
+          docCaseObj.docCase.push({
+            docId: newDoc.docId,
+            regDate: newDoc.regDate,
+            regNumber: newDoc.regUri,
+            direction: newDoc.docDirectionName,
+            casePartType: newDoc.docCasePartTypeName,
+            statusName: newDoc.docStatusName,
+            description: newDoc.docTypeName
+          });
+
+          newDoc.docRelations = docCaseObj.docCase;
+
+          docs.push(newDoc);
+
+          return [200, { docId: newDoc.docId }];
+        })
+      .when('POST', '/api/docs/new/register',
+        function ($jsonData, docs, docCases) {
+          if (!$jsonData) {
+            return [400];
+          }
+
+          var registeredDocIds = [];
+
+          var today = new Date();
+          var docsNumber = !!$jsonData.numberOfDocs ? $jsonData.numberOfDocs : 1;
           var newDoc;
-          var numberOfDocs = !!$jsonData.numberOfDocuments ? $jsonData.numberOfDocuments : 1;
 
-          for (var i = 0; i < numberOfDocs; i++) {
+          var findCase = function(dc) {
+            return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
+          };
+
+          for (var i = 0; i < docsNumber; i++) {
             var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
-            newDoc = _.cloneDeep(defaultDoc);
-            jQuery.extend(newDoc, $jsonData);
+            newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
+            delete newDoc.numberOfDocs;
 
             newDoc.docId = nextDocId;
+            newDoc.docStatusId = 2;
+            newDoc.docStatusName = 'Чернова';
+            newDoc.docSubjectLabel = 'Относно';
             newDoc.regNumber = nextDocId;
             newDoc.regDate = new Date();
+            newDoc.regIndex = '000030';
+            newDoc.newassignmentType = 2;
             newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
             newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
             newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
@@ -122,7 +209,8 @@
             }
             else {
               docCaseObj =
-                _(docCases).filter({ docCaseId: parseInt(newDoc.parentDocId, 10)}).first();
+                _(docCases).filter(findCase)
+                .first();
             }
 
             docCaseObj.docCase.push({
@@ -138,9 +226,11 @@
             newDoc.docRelations = docCaseObj.docCase;
 
             docs.push(newDoc);
+
+            registeredDocIds.push(newDoc.docId);
           }
 
-          return [200, newDoc];
+          return [200, { docIds : registeredDocIds }];
         })
       .when('GET', '/api/docs/:docId',
         function ($params, docs) {

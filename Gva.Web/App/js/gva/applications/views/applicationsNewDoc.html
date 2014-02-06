@@ -13,11 +13,11 @@
       </div>
     </nav>
     <div class="well-sm panel-body">
-      <form name="docForm">
+      <ng-form name="docForm" sc-validate="{}">
         <div class="well-sm panel-body ">
 
           <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-error': docForm.personLotId.$invalid && saveClicked}">
+            <div class="form-group col-md-6" ng-class="{'has-error': docForm.personLotId.$invalid && docForm.$validated}">
               <label class="control-label" l10n-text="applications.newform.person"></label>
 
               <div class="input-group input-group-sm">
@@ -33,22 +33,22 @@
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && saveClicked}">
+            <div class="form-group col-md-6" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && docForm.$validated}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
-              <span name="docTypeGroupIdValidationSpan" ng-show="saveClicked && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
+              <span name="docTypeGroupIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
               <sc-nomenclature  ng-model="$parent.docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
             </div>
-            <div class="form-group col-md-6" ng-class="{'has-error': docForm.docTypeId.$invalid && saveClicked}">
+            <div class="form-group col-md-6" ng-class="{'has-error': docForm.docTypeId.$invalid && docForm.$validated}">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
-              <span name="docTypeIdValidationSpan" ng-show="saveClicked && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
+              <span name="docTypeIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
               <sc-nomenclature  ng-model="$parent.docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: $parent.docTypeGroup ? $parent.docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-md-12" ng-class="{'has-error': docForm.docSubject.$invalid && saveClicked}">
+            <div class="form-group col-md-12" ng-class="{'has-error': docForm.docSubject.$invalid && docForm.$validated}">
               <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
-              <span name="docSubjectValidationSpan" ng-show="saveClicked && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
+              <span name="docSubjectValidationSpan" ng-show="docForm.$validated && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
               <sc-text ng-model="$parent.docSubject" name="docSubject" required></sc-text>
             </div>
           </div>

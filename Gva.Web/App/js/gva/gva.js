@@ -89,7 +89,7 @@
         .state({
           name: 'applications/search',
           parent: 'applications',
-          url: '',
+          url: '?fromDate&toDate&lin&regUri',
           views: {
             'pageView@root': {
               templateUrl: 'gva/applications/views/applicationsSearch.html',
@@ -173,7 +173,8 @@
           name: 'applications/link/docChoose',
           title: 'Избор на документ',
           parent: 'applications/link',
-          url: '/docChoose',
+          url: '/docChoose?'+
+            'fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot',
           views: {
             'applicationsLinkView': {
               templateUrl: 'gva/applications/views/docChoose.html',

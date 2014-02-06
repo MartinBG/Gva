@@ -3,7 +3,6 @@
   'use strict';
 
   function CorrsEditCtrl(
-    $q,
     $scope,
     $filter,
     $state,
@@ -15,14 +14,8 @@
       $scope.corr = Corr.get({ corrId: $stateParams.corrId });
     } else {
       $scope.isEdit = false;
-
-      Corr.create().$promise
-        .then(function (result) {
-          $scope.corr = result;
-        });
-
+      $scope.corr = {};
     }
-    $scope.saveClicked = false;
 
     $scope.removeCorrContact = function (target) {
       var index = $scope.corr.correspondentContacts.indexOf(target);
@@ -32,22 +25,29 @@
       }
     };
 
-    $scope.addCorrContact = function () {
-      Corr.contact($stateParams)
-        .$promise
-        .then(function (res) {
-          $scope.corr.correspondentContacts.push(res);
-        });
+    $scope.addCorrContact = function (corrId) {
+      var correspondentContact = {
+        correspondentContactId: null,
+        corrId: corrId,
+        name: undefined,
+        uin: undefined,
+        note: undefined
+      };
+
+      $scope.corr.correspondentContacts = $scope.corr.correspondentContacts || [];
+      $scope.corr.correspondentContacts.push(correspondentContact);
     };
 
     $scope.save = function () {
-      $scope.saveClicked = true;
-
-      if ($scope.corrForm.$valid) {
-        $scope.corr.$save($stateParams).then(function () {
-          $state.go('corrs/search');
+      $scope.corrForm.$validate()
+        .then(function () {
+          if ($scope.corrForm.$valid) {
+            Corr.save($scope.corr).$promise
+              .then(function () {
+                $state.go('corrs/search');
+              });
+          }
         });
-      }
     };
 
     $scope.cancel = function () {
@@ -56,7 +56,6 @@
   }
 
   CorrsEditCtrl.$inject = [
-    '$q',
     '$scope',
     '$filter',
     '$state',

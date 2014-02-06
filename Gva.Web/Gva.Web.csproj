@@ -132,7 +132,6 @@
   <ItemGroup>
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
-    <Content Include="App\js\ems\docs\recources\unit.js" />
     <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
     <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\chooseUnitView.html" />
@@ -164,7 +163,6 @@
     <Content Include="App\js\gva\persons\forms\personRatingEditionCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="App\js\gva\applications\resources\application.js" />
-    <Content Include="App\js\gva\applications\resources\applicationDocPart.js" />
     <Content Include="App\js\gva\applications\views\applicationsLink.html" />
     <Content Include="App\js\gva\applications\views\applicationsLinkCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsLinkCommon.html" />
@@ -268,11 +266,9 @@
     <Content Include="App\schema\person-rating.sample.js" />
     <Content Include="App\test\ems\mocks\docCases.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsHttp.js" />
-    <Content Include="App\test\gva\applications\mocks\applicationDocPartHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsFactory.js" />
     <Content Include="App\test\ems\mocks\docs.js" />
     <Content Include="App\schema\person-document-checks.sample.js" />
-    <Content Include="App\test\ems\mocks\unitsHttp.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
     <Content Include="App\js\gva\persons\resources\personFlyingExperience.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiencesNew.html" />
