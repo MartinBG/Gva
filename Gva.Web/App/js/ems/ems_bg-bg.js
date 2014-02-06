@@ -28,7 +28,7 @@
           docTypeId: 'Вид',
           docSubject: 'Относно',
           docCorrespondent: 'Кореспондент',
-          numberOfDocuments: 'Брой документи'
+          numberOfDocs: 'Брой документи'
         }
       },
       units: {

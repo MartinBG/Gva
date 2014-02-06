@@ -7,9 +7,13 @@
       function ($resource) {
         return $resource('/api/docs/:docId', { docId: '@docId' },
           {
-            'getNew': {
-              method: 'GET',
-              url: '/api/docs/new'
+            'createNew': {
+              method: 'POST',
+              url: '/api/docs/new/create'
+            },
+            'registerNew': {
+              method: 'POST',
+              url: '/api/docs/new/register'
             }
           });
       }]);

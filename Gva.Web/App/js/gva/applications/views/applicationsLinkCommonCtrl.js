@@ -18,7 +18,7 @@
     };
 
     $scope.chooseDoc = function () {
-      $state.go('applications/link/docChoose');
+      $state.go('applications/link/docChoose', { hasLot: false });
     };
 
     $scope.cancel = function () {
@@ -30,23 +30,22 @@
     };
 
     $scope.save = function () {
-      $scope.saveClicked = true;
+      $scope.docForm.$validate()
+      .then(function () {
+        if ($scope.docForm.$valid) {
+          var newApplication = {
+            applicationId: null,
+            lotId: $scope.$parent.person.nomTypeValueId,
+            doc: {
+              docId: $scope.$parent.doc.docId
+            }
+          };
 
-      if ($scope.docForm.$valid) {
-        var newApplication = {
-          applicationId: null,
-          lotId: $scope.$parent.person.nomTypeValueId,
-          docId: $scope.$parent.doc.docId
-        };
-
-        Application.validateExist(newApplication).$promise.then(function (result) {
-          if (result.applicationExist === false) {
-            Application.save(newApplication).$promise.then(function (application) {
-              return $state.go('applications/edit/case', { id: application.applicationId });
-            });
-          }
-        });
-      }
+          Application.createNew(newApplication).$promise.then(function (result) {
+            return $state.go('applications/edit/case', { id: result.applicationId });
+          });
+        }
+      });
     };
   }
 

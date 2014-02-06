@@ -173,7 +173,8 @@
           name: 'applications/link/docChoose',
           title: 'Избор на документ',
           parent: 'applications/link',
-          url: '/docChoose',
+          url: '/docChoose?'+
+            'fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot',
           views: {
             'applicationsLinkView': {
               templateUrl: 'gva/applications/views/docChoose.html',

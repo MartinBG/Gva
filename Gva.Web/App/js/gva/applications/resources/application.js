@@ -5,11 +5,11 @@
   angular.module('gva')
     .factory('Application', ['$resource',
       function ($resource) {
-        return $resource('/api/applications/:id', { id: '@id' },
+        return $resource('/api/apps/:id', { id: '@id' },
           {
-            'validateExist': {
+            'createNew': {
               method: 'POST',
-              url: '/api/applications/validate/exist'
+              url: '/api/apps/new'
             }
           });
       }]);

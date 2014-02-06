@@ -11,7 +11,9 @@
       docTypeId: null,
       docStatusId: null,
       corrs: null,
-      units: null
+      units: null,
+      docIds: null,
+      hasLot: false
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -33,7 +35,9 @@
         docTypeId: $scope.filters.docTypeId,
         docStatusId: $scope.filters.docStatusId,
         corrs: $scope.filters.corrs,
-        units: $scope.filters.units
+        units: $scope.filters.units,
+        docIds: $scope.filters.docIds,
+        hasLot: $scope.filters.hasLot
       });
     };
 

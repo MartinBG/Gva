@@ -10,7 +10,6 @@
     Doc,
     Nomenclature
   ) {
-    $scope.saveClicked = false;
     $scope.isChild = !!$stateParams.parentDocId;
 
     if ($scope.isChild) {
@@ -22,7 +21,7 @@
     }
 
     $scope.doc = {
-      numberOfDocuments: 1,
+      numberOfDocs: 1,
       parentDocId: $stateParams.parentDocId
     };
 
@@ -43,10 +42,6 @@
       $scope.doc.docDirectionId = _($scope.docDirections).first().docDirectionId;
       $scope.doc.docDirectionName = _($scope.docDirections).first().name;
     });
-
-    $scope.isNumberOfDocsValid = function (value) {
-      return (/^\+?(0|[1-9]\d*)$/).test(value);
-    };
 
     $scope.docFormatTypeChange = function ($index) {
       _.forOwn($scope.docFormatTypes, function (item) {
@@ -76,34 +71,47 @@
       $scope.doc.docDirectionName = $scope.docDirections[$index].name;
     };
 
-    $scope.save = function () {
-      $scope.saveClicked = true;
-      if ($scope.docForm.$valid) {
+    $scope.save = function (mode) {
+      $scope.validationMode = mode;
+      $scope.docForm.$validate()
+      .then(function () {
+        if ($scope.docForm.$valid) {
+          $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomTypeValueId;
+          $scope.doc.docTypeGroupName =  $scope.docTypeGroup.name;
 
-        $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomTypeValueId;
-        $scope.doc.docTypeGroupName =  $scope.docTypeGroup.name;
+          $scope.doc.docTypeId = $scope.docType.nomTypeValueId;
+          $scope.doc.docTypeName =  $scope.docType.name;
 
-        $scope.doc.docTypeId = $scope.docType.nomTypeValueId;
-        $scope.doc.docTypeName =  $scope.docType.name;
+          if ($scope.doc.docCorrespondents && $scope.doc.docCorrespondents.length > 0) {
+            $scope.doc.correspondentName =
+              $scope.doc.docCorrespondents.map(function (correspondent) {
+                return correspondent.name;
+              })
+            .join('; ');
+          }
 
-        if ($scope.doc.docCorrespondents && $scope.doc.docCorrespondents.length > 0) {
-          $scope.doc.correspondentName = $scope.doc.docCorrespondents.map(function (correspondent) {
-            return correspondent.name;
-          })
-          .join('; ');
+          if (mode === 'register') {
+            Doc.registerNew($scope.doc).$promise.then(function (result) {
+              $state.go('docs/search', { docIds: result.docIds.join(',')});
+            });
+          }
+          else if (mode === 'create') {
+            Doc.createNew($scope.doc).$promise.then(function (result) {
+              $state.go('docs/edit/addressing', { docId: result.docId });
+            });
+          }
         }
-
-        Doc.save($scope.doc).$promise.then(function (savedDoc) {
-          if ($scope.isChild) {
-            $state.go('docs/edit/addressing', { docId: savedDoc.docId });
-          }
-          else {
-            $state.go('docs/search');
-          }
-        });
-      }
+      });
     };
 
+    $scope.isNumberOfDocsValid = function () {
+      if ($scope.validationMode === 'create' && $scope.doc.numberOfDocs) {
+        return $scope.doc.numberOfDocs === 1;
+      }
+      else {
+        return true;
+      }
+    };
 
     $scope.cancel = function () {
       if ($scope.isChild) {

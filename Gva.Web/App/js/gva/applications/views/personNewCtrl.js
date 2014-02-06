@@ -5,15 +5,20 @@
   function PersonNewCtrl($scope, $state, Person) {
 
     $scope.save = function () {
-      return Person.save($scope.newPerson).$promise
-      .then(function (result) {
-        $scope.$parent.person = {
-          nomTypeValueId: result.lotId,
-          name: result.personData.part.firstName + ' ' + result.personData.part.lastName,
-          content: result
-        };
+      $scope.newPersonForm.$validate()
+      .then(function () {
+        if ($scope.newPersonForm.$valid) {
+          return Person.save($scope.newPerson).$promise
+            .then(function (result) {
+              $scope.$parent.person = {
+                nomTypeValueId: result.lotId,
+                name: result.personData.part.firstName + ' ' + result.personData.part.lastName,
+                content: result
+              };
 
-        goToPreviousState();
+              goToPreviousState();
+            });
+        }
       });
     };
 

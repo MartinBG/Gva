@@ -6,8 +6,7 @@
     $q,
     $scope,
     $state,
-    Application,
-    Doc
+    Application
     ) {
     $scope.newPerson = function () {
       $state.go('applications/new/personNew');
@@ -22,33 +21,34 @@
     };
 
     $scope.save = function () {
-      $scope.saveClicked = true;
+      $scope.docForm.$validate()
+      .then(function () {
+        if ($scope.docForm.$valid) {
+          var newDoc = {
+            docFormatTypeId: 3,
+            docFormatTypeName: 'Хартиен',
+            docCasePartTypeId: 1,
+            docCasePartTypeName: 'Публичен',
+            docDirectionId: 1,
+            docDirectionName: 'Входящ',
+            docTypeGroupId: $scope.$parent.docTypeGroup.nomTypeValueId,
+            docTypeGroupName: $scope.$parent.docTypeGroup.name,
+            docTypeId: $scope.$parent.docType.nomTypeValueId,
+            docTypeName: $scope.$parent.docType.name,
+            docSubject: $scope.$parent.docSubject
+          };
 
-      if ($scope.docForm.$valid) {
-        var newDoc = {
-          docFormatTypeId: 3,
-          docFormatTypeName: 'Хартиен',
-          docCasePartTypeId: 1,
-          docCasePartTypeName: 'Публичен',
-          docDirectionId: 1,
-          docDirectionName: 'Входящ',
-          docTypeGroupId: $scope.$parent.docTypeGroup.nomTypeValueId,
-          docTypeGroupName: $scope.$parent.docTypeGroup.name,
-          docTypeId: $scope.$parent.docType.nomTypeValueId,
-          docTypeName: $scope.$parent.docType.name,
-          docSubject: $scope.$parent.docSubject
-        };
-        Doc.save(newDoc).$promise.then(function (savedDoc) {
           var newApplication = {
             applicationId: null,
             lotId: $scope.$parent.person.nomTypeValueId,
-            docId: savedDoc.docId
+            doc: newDoc
           };
-          Application.save(newApplication).$promise.then(function (application) {
-            return $state.go('applications/edit/case', { id: application.applicationId });
+
+          Application.createNew(newApplication).$promise.then(function (result) {
+            return $state.go('applications/edit/case', { id: result.applicationId });
           });
-        });
-      }
+        }
+      });
     };
   }
 
@@ -56,8 +56,7 @@
     '$q',
     '$scope',
     '$state',
-    'Application',
-    'Doc'
+    'Application'
   ];
 
   angular.module('gva').controller('ApplicationsNewDocCtrl', ApplicationsNewDocCtrl);

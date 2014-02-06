@@ -13,11 +13,11 @@
       </div>
     </nav>
     <div class="well-sm panel-body">
-      <form name="docForm">
+      <ng-form name="docForm" sc-validate="{}">
         <div class="well-sm panel-body ">
 
           <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-error': docForm.personLotId.$invalid && saveClicked}">
+            <div class="form-group col-md-6" ng-class="{'has-error': docForm.personLotId.$invalid && docForm.$validated}">
               <label class="control-label" l10n-text="applications.newform.person"></label>
 
               <div class="input-group input-group-sm">
@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <div class="row card" ng-class="{'has-error': !$parent.doc && saveClicked}">
+          <div class="row card" ng-class="{'has-error': !$parent.doc && docForm.$validated}">
             <div class="form-group col-md-3">
               <div class="input-group input-group-sm">
                 <span class="input-group-addon" l10n-text="applications.link.docNumber"/>

@@ -56,8 +56,11 @@
 
           return application;
         },
-        getApplicationByDocAndPerson: function (docId, lotId) {
+        getByDocIdAndLotId: function (docId, lotId) {
           return _(applications).filter({ docId: docId, lotId: lotId }).first();
+        },
+        getByDocId: function (docId) {
+          return _(applications).filter({ docId: docId}).first();
         },
         getNextApplicationId: function () {
           return _(applications).pluck('applicationId').max().value() + 1;
