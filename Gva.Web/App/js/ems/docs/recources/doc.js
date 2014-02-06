@@ -10,6 +10,11 @@
             'getNew': {
               method: 'GET',
               url: '/api/docs/new'
+            },
+            'units': {
+              method: 'GET',
+              url: '/api/nomenclatures/units',
+              isArray: true
             }
           });
       }]);

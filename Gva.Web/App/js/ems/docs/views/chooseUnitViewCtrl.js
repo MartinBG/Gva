@@ -6,7 +6,7 @@
     $state,
     $stateParams,
     $scope,
-    Unit
+    Doc
   ) {
     $scope.filters = {
       name: null
@@ -24,7 +24,7 @@
       });
     };
 
-    Unit.query($stateParams).$promise.then(function (units) {
+    Doc.units($stateParams).$promise.then(function (units) {
       $scope.units = units.map(function (unit) {
         return unit;
       });
@@ -47,7 +47,7 @@
     '$state',
     '$stateParams',
     '$scope',
-    'Unit'
+    'Doc'
   ];
 
   angular.module('ems').controller('ChooseUnitViewCtrl', ChooseUnitViewCtrl);
