@@ -159,6 +159,7 @@
     <Content Include="App\js\ems\ems_bg-bg.js" />
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
