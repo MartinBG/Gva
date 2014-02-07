@@ -43,5 +43,23 @@
       inputPage.floatDirective.set('123.449999');
       expect(inputPage.isFloat()).toEqual('true');
     });
+
+    it('should validate the model if changed.', function() {
+      expect(inputPage.hasFloatMaxErr()).toEqual('false');
+      inputPage.changeFloat();
+      expect(inputPage.hasFloatMaxErr()).toEqual('true');
+    });
+
+    it('should validate value for min.', function() {
+      expect(inputPage.hasFloatMinErr()).toEqual('false');
+      inputPage.floatDirective.set('-1');
+      expect(inputPage.hasFloatMinErr()).toEqual('true');
+    });
+
+    it('should validate value for max.', function() {
+      expect(inputPage.hasFloatMaxErr()).toEqual('false');
+      inputPage.floatDirective.set('501');
+      expect(inputPage.hasFloatMaxErr()).toEqual('true');
+    });
   });
 }(protractor, describe, beforeEach, it, expect, require));

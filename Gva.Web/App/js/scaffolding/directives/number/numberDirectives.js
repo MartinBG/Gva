@@ -21,6 +21,38 @@
 
           ngModel.$formatters.push(formatter.apply(this, injected));
 
+          if (attrs.min) {
+            var minValidator = function(value) {
+              var min = parseFloat(attrs.min);
+              if (!ngModel.$isEmpty(value) && value < min) {
+                ngModel.$setValidity('min', false);
+              } else {
+                ngModel.$setValidity('min', true);
+              }
+
+              return value;
+            };
+
+            ngModel.$parsers.push(minValidator);
+            ngModel.$formatters.push(minValidator);
+          }
+
+          if (attrs.max) {
+            var maxValidator = function(value) {
+              var max = parseFloat(attrs.max);
+              if (!ngModel.$isEmpty(value) && value > max) {
+                ngModel.$setValidity('max', false);
+              } else {
+                ngModel.$setValidity('max', true);
+              }
+
+              return value;
+            };
+
+            ngModel.$parsers.push(maxValidator);
+            ngModel.$formatters.push(maxValidator);
+          }
+
           element.on('blur', function() {
             var formatters = ngModel.$formatters,
                 idx = formatters.length,
@@ -48,7 +80,7 @@
     'scFloat',
     function () {
       return function (strValue) {
-        var num = parseFloat(strValue.replace(',', '.'));
+        var num = parseFloat((strValue || '').replace(',', '.'));
         return isNaN(num) ? undefined : Math.round((num + 0.00001) * 100) / 100;
       };
     },

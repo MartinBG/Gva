@@ -38,5 +38,23 @@
       inputPage.intDirective.set('123');
       expect(inputPage.isInt()).toEqual('true');
     });
+
+    it('should validate the model if changed.', function() {
+      expect(inputPage.hasIntMaxErr()).toEqual('false');
+      inputPage.changeInt();
+      expect(inputPage.hasIntMaxErr()).toEqual('true');
+    });
+
+    it('should validate value for min.', function() {
+      expect(inputPage.hasIntMinErr()).toEqual('false');
+      inputPage.intDirective.set('-1');
+      expect(inputPage.hasIntMinErr()).toEqual('true');
+    });
+
+    it('should validate value for max.', function() {
+      expect(inputPage.hasIntMaxErr()).toEqual('false');
+      inputPage.intDirective.set('501');
+      expect(inputPage.hasIntMaxErr()).toEqual('true');
+    });
   });
 }(protractor, describe, beforeEach, it, expect, require));

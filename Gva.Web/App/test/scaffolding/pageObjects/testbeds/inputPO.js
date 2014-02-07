@@ -16,19 +16,23 @@
     this.textareaInput = context.findElement(by.name('textareaInput'));
 
     this.dateDirective = new ScDate(context.findElement(by.name('dateDir')), context);
-    this.dateLabel = context.findElement(by.name('dateLbl'));
+    this.dateLabel = context.findElement(by.id('dateLbl'));
     this.dateBtn = context.findElement(by.name('dateBtn'));
 
     this.intDirective = new ScInt(context.findElement(by.name('intDir')));
-    this.intLabel = context.findElement(by.name('intLbl'));
+    this.intLabel = context.findElement(by.id('intLbl'));
     this.intBtn = context.findElement(by.name('intBtn'));
-    this.isIntLbl = context.findElement(by.name('isIntLbl'));
+    this.isIntLbl = context.findElement(by.id('isIntLbl'));
+    this.hasIntMinErrLbl = context.findElement(by.id('hasIntMinErrLbl'));
+    this.hasIntMaxErrLbl = context.findElement(by.id('hasIntMaxErrLbl'));
     this.isIntBtn = context.findElement(by.name('isIntBtn'));
 
     this.floatDirective = new ScFloat(context.findElement(by.name('floatDir')));
-    this.floatLabel = context.findElement(by.name('floatLbl'));
+    this.floatLabel = context.findElement(by.id('floatLbl'));
     this.floatBtn = context.findElement(by.name('floatBtn'));
-    this.isFloatLbl = context.findElement(by.name('isFloatLbl'));
+    this.isFloatLbl = context.findElement(by.id('isFloatLbl'));
+    this.hasFloatMinErrLbl = context.findElement(by.id('hasFloatMinErrLbl'));
+    this.hasFloatMaxErrLbl = context.findElement(by.id('hasFloatMaxErrLbl'));
     this.isFloatBtn = context.findElement(by.name('isFloatBtn'));
   }
 
@@ -56,6 +60,14 @@
     });
   };
 
+  InputPO.prototype.hasIntMinErr = function () {
+    return this.hasIntMinErrLbl.getText();
+  };
+
+  InputPO.prototype.hasIntMaxErr = function () {
+    return this.hasIntMaxErrLbl.getText();
+  };
+
   InputPO.prototype.changeFloat = function () {
     return this.floatBtn.click();
   };
@@ -70,6 +82,14 @@
     return this.isFloatBtn.click().then(function () {
       return isFloatLbl.getText();
     });
+  };
+
+  InputPO.prototype.hasFloatMinErr = function () {
+    return this.hasFloatMinErrLbl.getText();
+  };
+
+  InputPO.prototype.hasFloatMaxErr = function () {
+    return this.hasFloatMaxErrLbl.getText();
   };
 
   module.exports = InputPO;
