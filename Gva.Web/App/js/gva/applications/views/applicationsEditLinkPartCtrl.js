@@ -11,7 +11,8 @@
     PersonDocumentEducation,
     PersonDocumentEmployment,
     PersonDocumentMedical,
-    PersonDocumentCheck
+    PersonDocumentCheck,
+    PersonDocumentTraining
     ) {
 
     $scope.search = function () {
@@ -20,6 +21,7 @@
       $scope.showDocumentEmployment = false;
       $scope.showDocumentMed = false;
       $scope.showDocumentCheck = false;
+      $scope.showDocumentTraining = false;
 
       if ($scope.documentData.docPartType) {
         if ($scope.documentData.docPartType.alias === 'DocumentId') {
@@ -72,6 +74,13 @@
               $scope.showDocumentCheck = !!checks;
             });
         }
+        else if ($scope.documentData.docPartType.alias === 'DocumentTraining') {
+          PersonDocumentTraining.query({ id: $scope.application.lotId })
+            .$promise.then(function (documentTrainings) {
+              $scope.wrapper.documentPart = documentTrainings;
+              $scope.showDocumentTraining = !!documentTrainings;
+            });
+        }
 
         //todo add more
       }
@@ -103,7 +112,8 @@
     'PersonDocumentEducation',
     'PersonDocumentEmployment',
     'PersonDocumentMedical',
-    'PersonDocumentCheck'
+    'PersonDocumentCheck',
+    'PersonDocumentTraining'
   ];
 
   angular.module('gva').controller('ApplicationsEditLinkPartCtrl', ApplicationsEditLinkPartCtrl);

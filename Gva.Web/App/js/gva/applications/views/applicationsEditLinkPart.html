@@ -154,6 +154,43 @@
             </sc-column>
           </sc-datatable>
         </div>
+
+        <div ng-if="showDocumentTraining && documentData.docPartType.alias === 'DocumentTraining'">
+          <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
+            </sc-column>
+            <sc-column data="part.documentDateValidFrom" title="persons.documentTrainingSearch.documentDateValidFrom">
+              <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+            </sc-column>
+            <sc-column data="part.documentDateValidTo" title="persons.documentTrainingSearch.documentDateValidTo">
+              <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+            </sc-column>
+            <sc-column data="part.documentPublisher" title="persons.documentTrainingSearch.documentPublisher">
+            </sc-column>
+            <sc-column data="part.ratingType.name" title="persons.documentTrainingSearch.ratingType">
+            </sc-column>
+            <sc-column data="part.authorization.name" title="persons.documentTrainingSearch.authorization">
+            </sc-column>
+            <sc-column data="part.licenceType.name" title="persons.documentTrainingSearch.licenceType">
+            </sc-column>
+            <sc-column data="part.personOtherDocumentType.name" title="persons.documentTrainingSearch.personOtherDocumentType">
+            </sc-column>
+            <sc-column data="part.personOtherDocumentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole">
+            </sc-column>
+            <sc-column data="part.notes" title="persons.documentTrainingSearch.notes" visible="false">
+            </sc-column>
+            <sc-column data="part.valid" title="persons.documentTrainingSearch.valid">
+              <span>{{item.part.valid.name}}</span>
+            </sc-column>
+            <sc-column data="part.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
+            </sc-column>
+            <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
+            </sc-column>
+             <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
+          </sc-datatable>
+        </div>
       </div>
 
       <div ng-if="!documentData.docFiles.length">
