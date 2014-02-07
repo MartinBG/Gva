@@ -2,13 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentIdCtrl($scope) {
-    $scope.isPositive = function (value) {
-      return (value >= 0 ? true : false);
-    };
+  function PersonDocumentIdCtrl() {
   }
-
-  PersonDocumentIdCtrl.$inject = ['$scope'];
 
   angular.module('gva').controller('PersonDocumentIdCtrl', PersonDocumentIdCtrl);
 }(angular));

@@ -2,13 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentTrainingCtrl($scope) {
-    $scope.isPositive = function (value) {
-      return (value >= 0 ? true : false);
-    };
+  function PersonDocumentTrainingCtrl() {
   }
-
-  PersonDocumentTrainingCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentTraining'];
 
   angular.module('gva').controller('PersonDocumentTrainingCtrl', PersonDocumentTrainingCtrl);
 }(angular));

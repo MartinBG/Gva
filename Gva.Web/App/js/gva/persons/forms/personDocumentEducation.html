@@ -56,13 +56,13 @@
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.bookPageNumber"></label>
           <span name="bookPageNumberValidationSpan" ng-show="form.$validated && form.bookPageNumber.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.bookPageNumber.$error.required && 'Задължително поле' || form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-int ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-int>
+          <sc-int ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" min="0"></sc-int>
         </div>
         <div class="form-group col-sm-3" ng-class="{'has-error': form.pageCount.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.pageCount"></label>
           <span name="pageCountValidationSpan" ng-show="form.$validated && form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-int ng-model="model.pageCount" name="pageCount" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-int>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
         </div>
       </div>
     </div>

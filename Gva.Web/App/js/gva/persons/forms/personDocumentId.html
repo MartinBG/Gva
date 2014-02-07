@@ -62,14 +62,14 @@
           <span ng-show="form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="bookPageNumberValidationSpan" ng-show="form.bookPageNumber.$error.min || (form.bookPageNumber.$invalid && form.$validated) && !form.bookPageNumber.$error.$pending" class="glyphicon glyphicon-warning-sign"
                 title="{{form.bookPageNumber.$error.required && 'Задължително поле' || form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-int ng-model="model.bookPageNumber" name="bookPageNumber" sc-validate-immediate="true" ng-required="true" sc-validate="{min: isPositive}"></sc-int>
+          <sc-int ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true" min="0"></sc-int>
         </div>
         <div class="form-group col-sm-3" ng-class="{'has-error': form.pageCount.$invalid}">
           <label class="control-label" l10n-text="persons.personDocumentIdDirective.pageCount"></label>
           <span ng-show="form.pageCount.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="pageCountValidationSpan" ng-show="form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-int ng-model="model.pageCount" name="pageCount" sc-validate-immediate="true" sc-validate="{min: isPositive}"></sc-int>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
         </div>
       </div>
     </div>
