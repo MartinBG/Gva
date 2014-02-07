@@ -430,8 +430,7 @@
     <Content Include="App\js\scaffolding\directives\files\filesDirective.js" />
     <Content Include="App\js\scaffolding\directives\files\filesModalCtrl.js" />
     <Content Include="App\js\scaffolding\directives\files\filesCtrl.js" />
-    <Content Include="App\js\scaffolding\directives\float\floatDirective.js" />
-    <Content Include="App\js\scaffolding\directives\int\intDirective.js" />
+    <Content Include="App\js\scaffolding\directives\number\numberDirectives.js" />
     <Content Include="App\js\scaffolding\directives\select\selectDirective.js" />
     <Content Include="App\js\scaffolding\directives\text\textDirective.js" />
     <Content Include="App\js\scaffolding\providers\scaffoldingProvider.js" />
@@ -445,8 +444,7 @@
     <Content Include="App\js\scaffolding\directives\files\filesModal.html" />
     <Content Include="App\js\scaffolding\directives\files\filesModalTree.html" />
     <Content Include="App\js\scaffolding\directives\files\filesDirective.html" />
-    <Content Include="App\js\scaffolding\directives\float\floatDirective.html" />
-    <Content Include="App\js\scaffolding\directives\int\intDirective.html" />
+    <Content Include="App\js\scaffolding\directives\number\numberDirectives.html" />
     <Content Include="App\js\scaffolding\directives\select\selectDirective.html" />
     <Content Include="App\js\scaffolding\directives\text\textDirective.html" />
     <Content Include="App\js\scaffolding\directives\search\searchDirective.html" />
