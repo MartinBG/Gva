@@ -1,13 +1,11 @@
-﻿<div>
-  <ng-form name="newDocumentMedicalForm">
+﻿<ng-form name="newDocumentMedicalForm">
 
-    <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
+  <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newMedical.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!personDocumentMedicalForm.$dirty"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newMedical.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.newMedical.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!personDocumentMedicalForm.$dirty"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newMedical.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

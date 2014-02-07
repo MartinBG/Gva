@@ -1,5 +1,9 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentCheck()" text="persons.checkSearch.newCheck" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
   </sc-column>
   <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
@@ -30,13 +34,9 @@
   </sc-column>
   <sc-column data="part.pageCount" title="persons.checkSearch.pageCount">
   </sc-column>
-  <sc-column title="persons.checkSearch.file" width="30px">
-    <a target="_self" ng-show="item.file" title="{{item.file.name}}">
+  <sc-column sortable="false" title="persons.checkSearch.file" width="30px">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
 </sc-datatable>

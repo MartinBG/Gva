@@ -7,7 +7,7 @@
     </button>
     <div class="dropdown-menu" role="menu">
       <div ng-repeat="column in aoColumnDefs | filter:nonEmpty">
-        <input type="checkbox" ng-click="hideColumn(val, $index)" ng-model="column.bVisible">
+        <input type="checkbox" ng-click="hideColumn(val, column.aTargets[0])" ng-model="column.bVisible">
         <span>{{column.sTitle}}</span>
       </div>
     </div>

@@ -2,8 +2,9 @@
   <div class="panel panel-default">
     <div class="panel-heading"><strong l10n-text="persons.personDocumentEducationDirective.title"></strong></div>
     <div class="well-sm panel-body ">
+
       <div class="row">
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentNumber.$invalid && form.$validated}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.documentNumber.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.documentNumber"></label>
           <span name="documentNumberValidationSpan" ng-show="form.$validated && form.documentNumber.$invalid" class="glyphicon glyphicon-warning-sign"
                 title="{{form.documentNumber.$error.required && 'Задължително поле'}}"></span>
@@ -17,14 +18,7 @@
           <sc-date ng-model="model.completionDate" name="completionDate" ng-required="true"></sc-date>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group col-sm-7 col-md-6 col-lg-5" ng-class="{'has-error': form.speciality.$invalid && form.$validated}">
-          <label class="control-label" l10n-text="persons.personDocumentEducationDirective.speciality"></label>
-          <span name="specialityValidationSpan" ng-show="form.$validated && form.speciality.$invalid"
-                class="glyphicon glyphicon-warning-sign"></span>
-          <sc-text ng-model="model.speciality" ng-required="true" name="speciality"></sc-text>
-        </div>
-      </div>
+
       <div class="row">
         <div class="form-group col-sm-7 col-md-6 col-lg-5" ng-class="{'has-error': form.graduation.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.graduation"></label>
@@ -35,6 +29,7 @@
           </sc-nomenclature>
         </div>
       </div>
+
       <div class="row">
         <div class="form-group col-sm-7 col-md-6 col-lg-5" ng-class="{'has-error': form.school.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.school"></label>
@@ -45,16 +40,23 @@
           </sc-nomenclature>
         </div>
       </div>
+
       <div class="row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-7 col-md-6 col-lg-5" ng-class="{'has-error': form.speciality.$invalid && form.$validated}">
+          <label class="control-label" l10n-text="persons.personDocumentEducationDirective.speciality"></label>
+          <span name="specialityValidationSpan" ng-show="form.$validated && form.speciality.$invalid"
+                class="glyphicon glyphicon-warning-sign"></span>
+          <sc-text ng-model="model.speciality" ng-required="true" name="speciality"></sc-text>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-7 col-md-6 col-lg-5">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.notes"></label>
+          <sc-textarea rows="3" ng-model="model.notes"></sc-textarea>
         </div>
       </div>
-      <div class="row3">
-        <div class="form-group col-md">
-          <sc-textarea rows="3" cols="50" ng-model="model.notes"></sc-textarea>
-        </div>
-      </div>
+
       <div class="row">
         <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.bookPageNumber.$invalid && form.$validated}">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.bookPageNumber"></label>

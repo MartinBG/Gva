@@ -1,17 +1,15 @@
-﻿<div>
-  <ng-form name="editDocumentTrainingForm">
+﻿<ng-form name="editDocumentTrainingForm">
 
-    <gva-person-document-training name="personDocumentTrainingForm" ng-model="personDocumentTraining.part"></gva-person-document-training>
+  <gva-person-document-training name="personDocumentTrainingForm" ng-model="personDocumentTraining.part"></gva-person-document-training>
 
-    <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.file"></gva-person-scanned-document>
+  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.file"></gva-person-scanned-document>
 
-    <gva-person-application name="personApplicationForm" ng-model="personDocumentTraining.applications"></gva-person-application>
+  <gva-person-application name="personApplicationForm" ng-model="personDocumentTraining.applications"></gva-person-application>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.editDocumentTraining.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!editDocumentTrainingForm.$dirty"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editDocumentTraining.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.editDocumentTraining.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!editDocumentTrainingForm.$dirty"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.editDocumentTraining.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

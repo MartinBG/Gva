@@ -61,7 +61,7 @@
               <span name="documentDateValidFromValidationSpan" ng-show="form.documentDateValidFrom.$invalid && form.$validated && !form.documentDateValidFrom.$error.$pending"
                     class="glyphicon glyphicon-warning-sign"
                     title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
-              <sc-datratingclasse ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-datratingclasse>
+              <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
             </div>
             <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.documentDateValidTo.$invalid}">
               <label class="control-label" l10n-text="persons.personCheckDirective.documentDateValidTo"></label>

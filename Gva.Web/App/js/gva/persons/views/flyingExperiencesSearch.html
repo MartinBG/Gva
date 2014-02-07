@@ -53,7 +53,7 @@
   <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization">
   </sc-column>
   <sc-column title="persons.flyingExperienceSearch.file" width="30px" sortable="false">
-    <a target="_self" ng-show="item.file" title="{{item.file.name}}">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>

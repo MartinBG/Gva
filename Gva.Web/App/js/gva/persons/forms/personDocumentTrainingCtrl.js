@@ -12,7 +12,7 @@
     };
   }
 
-  PersonDocumentTrainingCtrl.$inject = ['$scope', '$stateParams', 'PersonDocumentTraining'];
+  PersonDocumentTrainingCtrl.$inject = ['$scope'];
 
   angular.module('gva').controller('PersonDocumentTrainingCtrl', PersonDocumentTrainingCtrl);
 }(angular));

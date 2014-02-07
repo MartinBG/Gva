@@ -1,5 +1,9 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentEmployment()" text="persons.employmentSearch.newEmployment" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="employments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" gva-click="editDocumentEmployment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteDocumentEmployment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
     <span>{{item.part.hiredate | date:'mediumDate'}}</span>
   </sc-column>
@@ -13,17 +17,13 @@
   </sc-column>
   <sc-column data="part.notes" title="persons.employmentSearch.notes" type="string">
   </sc-column>
-  <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
-  </sc-column>
   <sc-column data="part.bookPageNumber" title="persons.employmentSearch.bookPageNumber">
   </sc-column>
   <sc-column data="part.pageCount" title="persons.employmentSearch.pageCount">
   </sc-column>
-  <sc-column title="persons.employmentSearch.file">
-    <span>{{item.file[0].name}}</span>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" gva-click="editDocumentEmployment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" gva-click="deleteDocumentEmployment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" title="persons.employmentSearch.file">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

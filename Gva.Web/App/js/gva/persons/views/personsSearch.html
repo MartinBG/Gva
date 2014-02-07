@@ -12,6 +12,9 @@
   </sc-search>
 
   <sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    </sc-column>
     <sc-column data="lin" title="persons.search.lin" width="60px">
     </sc-column>
     <sc-column data="names" title="persons.search.names" width="200px">
@@ -25,9 +28,6 @@
     <sc-column data="ratings" title="persons.search.ratings">
     </sc-column>
     <sc-column data="organization" title="persons.search.organization" width="100px">
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell" width="1px">
-      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

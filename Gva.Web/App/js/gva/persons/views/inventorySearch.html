@@ -1,5 +1,8 @@
 ﻿<div>
   <sc-datatable ng-model="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <gva-button name="editBtn" gva-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    </sc-column>
     <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document">
@@ -20,13 +23,10 @@
     </sc-column>
     <sc-column data="pageCount" title="persons.inventorySearch.pageCount">
     </sc-column>
-    <sc-column title="persons.inventorySearch.file">
+    <sc-column sortable="false" title="persons.inventorySearch.file">
       <a target="_self" ng-show="item.file" title="{{item.file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>
-    </sc-column>
-    <sc-column>
-      <gva-button name="editBtn" gva-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>
