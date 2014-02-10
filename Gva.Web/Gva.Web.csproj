@@ -270,6 +270,8 @@
     <Content Include="App\schema\nomenclatures\boolean.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
+    <Content Include="App\schema\nomenclatures\country.js" />
+    <Content Include="App\schema\nomenclatures\employmentCategory.js" />
     <Content Include="App\schema\nomenclatures\medDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\medicalClass.js" />
     <Content Include="App\schema\nomenclatures\experienceMeasure.js" />

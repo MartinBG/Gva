@@ -98,50 +98,6 @@
       { nomTypeValueId: 3, code: 'U', name: 'Неизвестен', nameAlt: 'Unknown', alias: 'unknown' }
     ],
 
-    //Номеклатура Държави
-    countries: [
-      {
-        nomTypeValueId: 26, code: 'AT', name: 'Austria', nameAlt: 'Austria', content: {
-          nationalityCodeCA: 'AT',
-          heading: '-', 
-          headingAlt: '-', 
-          licenceCodeCA: 'A'
-        }
-      },
-      {
-        nomTypeValueId: 27, code: 'BE', name: 'Belgium', nameAlt: 'Belgium', content: {
-          nationalityCodeCA: 'BE',
-          heading: '-',
-          headingAlt: '-',
-          licenceCodeCA: 'B'
-        }
-      },
-      {
-        nomTypeValueId: 28, code: 'CY', name: 'Cyprus', nameAlt: 'Cyprus', content: {
-          nationalityCodeCA: 'CY',
-          heading: '-',
-          hHeadingAlt: '-',
-          licenceCodeCA: 'CY'
-        }
-      },
-      {
-        nomTypeValueId: 29, code: 'CZ', name: 'Czech Republic', nameAlt: 'Czech Republic', content: {
-          nationalityCodeCA: 'CZ',
-          heading: '-',
-          headingAlt: '-',
-          licenceCodeCA: 'CZ'
-        }
-      },
-      {
-        nomTypeValueId: 33, code: 'BG', name: 'Република България', nameAlt: 'Republic of Bulgaria', alias: 'Bulgaria', content: {
-          nationalityCodeCA: 'BGR',
-          heading: 'РЕПУБЛИКА БЪЛГАРИЯ',
-          headingAlt: 'REPUBLIC OF BULGARIA',
-          licenceCodeCA: 'BGR.'
-        }
-      }
-    ],
-
     cities: require('./city'),
 
     addressTypes: require('./addressType'),
@@ -150,21 +106,7 @@
 
     staffTypes: require('./staffType'),
 
-    //Номенклатура Категории персонал
-    employmentCategories: [
-      {
-        nomTypeValueId: 631, code: '1', name: 'Директор', nameAlt: 'Director', content: {
-          Code_CA: '',
-          StaffTypeId: null
-        }
-      },
-      {
-        nomTypeValueId: 650, code: '11', name: 'Втори пилот', nameAlt: 'First officer', alias: 'First officer', content: {
-          Code_CA: '11',
-          StaffTypeId: 1
-        }
-      }
-    ],
+    countries: require('./country'),
 
     schools: require('./school'),
 
@@ -213,6 +155,8 @@
     personOtherDocumentTypes: require('./personOtherDocumentType'),
 
     documentRoles: require('./documentRole'),
+
+    employmentCategories: require('./employmentCategory'),
 
     //Номенклатура Типове състояния на Физичеко лице
     personStatusTypes: require('./personStatusType'),
