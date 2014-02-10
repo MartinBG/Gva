@@ -283,6 +283,7 @@
     <Content Include="App\schema\nomenclatures\documentRole.js" />
     <Content Include="App\schema\nomenclatures\personCheckDocumentRole.js" />
     <Content Include="App\schema\nomenclatures\personCheckDocumentType.js" />
+    <Content Include="App\schema\nomenclatures\personIdDocumentType.js" />
     <Content Include="App\schema\nomenclatures\personOtherDocumentType.js" />
     <Content Include="App\schema\nomenclatures\personStatusType.js" />
     <Content Include="App\schema\nomenclatures\ratingClass.js" />
