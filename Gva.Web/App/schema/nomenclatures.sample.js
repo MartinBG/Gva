@@ -253,13 +253,7 @@
 
     graduations: require('./graduation'),
 
-    //Номенклатура Типове документи за самоличност на Физичеко лице
-    personIdDocumentTypes: [
-      { nomTypeValueId: 3, code: '3', name: 'Лична карта', nameAlt: 'Лична карта', alias: 'Id' },
-      { nomTypeValueId: 4, code: '4', name: 'Задграничен паспорт', nameAlt: 'Задграничен паспорт' },
-      { nomTypeValueId: 5, code: '5', name: 'Паспорт', nameAlt: 'Паспорт', alias: 'passport' },
-      { nomTypeValueId: 5, code: '5', name: 'Разрешение за пребиваване', nameAlt: 'Разрешение за пребиваване', alias: 'allowance' }
-    ],
+    personIdDocumentTypes: require('./personIdDocumentType'),
 
     personOtherDocumentTypes: require('./personOtherDocumentType'),
 
