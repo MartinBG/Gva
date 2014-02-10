@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-sm-3 col-md-2">
               <label class="control-label" l10n-text="persons.personCheckDirective.documentPersonNumber"></label>
-              <sc-text ng-model="model.documentPersonNumber" name="documentPersonNumber"></sc-text>
+              <sc-int ng-model="model.documentPersonNumber" name="documentPersonNumber"></sc-int>
             </div>
             <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.personCheckDocumentType.$invalid}">
               <label class="control-label" l10n-text="persons.personCheckDirective.personCheckDocumentType"></label>
@@ -80,11 +80,11 @@
           <div class="row">
             <div class="form-group col-sm-6 col-md-4">
               <label class="control-label" l10n-text="persons.personCheckDirective.ratingClass"></label>
-              <sc-nomenclature ng-model="model.ratingClass" name="ratingClass" alias="'ratingClasses'" load="true" ng-disabled="model.ratingType"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.ratingClass" name="ratingClass" alias="'ratingClasses'" ng-disabled="model.ratingType" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'ratingClassGroups' }" load="false"></sc-nomenclature>
             </div>
             <div class="form-group col-sm-6 col-md-4">
               <label class="control-label" l10n-text="persons.personCheckDirective.authorization"></label>
-              <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" load="true"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'authorizationGroups' }" load="false"></sc-nomenclature>
             </div>
           </div>
           <div class="row">
@@ -94,7 +94,7 @@
             </div>
             <div class="form-group col-sm-6 col-md-4">
               <label class="control-label" l10n-text="persons.personCheckDirective.licenceType"></label>
-              <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" load="true"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" params="{ nomTypeParentValueId: model.staffType.nomTypeValueId }" load="false"></sc-nomenclature>
             </div>
           </div>
           <div class="row">

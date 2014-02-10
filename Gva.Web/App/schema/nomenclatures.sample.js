@@ -528,13 +528,7 @@
       { nomTypeValueId: 7834, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
     ],
 
-    //типове документи за проверка
-    personCheckDocumentTypes: [
-      { nomTypeValueId: 1, code: 'BTF', name: 'Base training form', nameAlt: 'Base training form', alias: 'BaseTrainingForm' },
-      { nomTypeValueId: 2, code: 'Auth', name: 'Authorisation', nameAlt: 'Authorisation', alias: 'Authorisation' },
-      { nomTypeValueId: 3, code: 'Conf', name: 'Confirmaction', nameAlt: 'Confirmaction', alias: 'Confirmaction' },
-      { nomTypeValueId: 4, code: 'Cert', name: 'Certificate', nameAlt: 'Certificate', alias: 'Certificate' }
-    ],
+    personCheckDocumentTypes: require('./personCheckDocumentType'),
 
     //оценки при проверка на Физическо лице
     personCheckRatingValues: [
@@ -545,13 +539,8 @@
        { nomTypeValueId: 4, code: 'Comp', name: 'Компетентен', nameAlt: 'Компетентен', alias: 'competent' },
        { nomTypeValueId: 4, code: 'Incomp', name: 'Некомпетентен', nameAlt: 'Некомпетентен', alias: 'incompetent' },
     ],
-    //номенклатура Роли документи за проверка на Физичеко лице
-    personCheckDocumentRoles: [
-      { nomTypeValueId: 1, code: '1', name: 'Летателна проверка', nameAlt: '', alias: 'FlightTest' },
-      { nomTypeValueId: 2, code: '2', name: 'Практическа проверка', nameAlt: '', alias: 'PracticalCheck' },
-      { nomTypeValueId: 3, code: '3', name: 'Проверка на работното място', nameAlt: '', alias: 'CheckAtWork' },
-      { nomTypeValueId: 4, code: '4', name: 'Тренажор', nameAlt: '', alias: 'Trainer' },
-    ],
+    
+    personCheckDocumentRoles: require('./personCheckDocumentRole'),
 
     aircrafts: require('./aircraft'),
 
