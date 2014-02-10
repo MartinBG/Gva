@@ -267,10 +267,16 @@
     <Content Include="App\schema\nomenclatures\aircraft.js" />
     <Content Include="App\schema\nomenclatures\authorization.js" />
     <Content Include="App\schema\nomenclatures\authorizationGroup.js" />
+    <Content Include="App\schema\nomenclatures\boolean.js" />
+    <Content Include="App\schema\nomenclatures\addressType.js" />
+    <Content Include="App\schema\nomenclatures\city.js" />
+    <Content Include="App\schema\nomenclatures\medDocPublisher.js" />
+    <Content Include="App\schema\nomenclatures\medicalClass.js" />
     <Content Include="App\schema\nomenclatures\experienceMeasure.js" />
     <Content Include="App\schema\nomenclatures\experienceRole.js" />
     <Content Include="App\schema\nomenclatures\licenceType.js" />
     <Content Include="App\schema\nomenclatures\locationIndicator.js" />
+    <Content Include="App\schema\nomenclatures\medicalLimitation.js" />
     <Content Include="App\schema\nomenclatures\organization.js" />
     <Content Include="App\schema\nomenclatures\documentRole.js" />
     <Content Include="App\schema\nomenclatures\personCheckDocumentRole.js" />

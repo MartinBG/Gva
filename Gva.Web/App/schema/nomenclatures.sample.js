@@ -89,11 +89,7 @@
       { nomTypeValueId: 4, code: '', name: 'CH4', nameAlt: '', alias: 'CH4', parentId: 2 }
     ],
 
-    //Номенклатура Булеви стойности
-    boolean: [
-      { nomTypeValueId: 1, code: 'Y', name: 'Да', nameAlt: 'Yes', alias: 'true' },
-      { nomTypeValueId: 2, code: 'N', name: 'Не', nameAlt: 'No', alias: 'false' }
-    ],
+    boolean: require('./boolean'),
 
     //Номенклатура Полове
     sex: [
@@ -146,50 +142,9 @@
       }
     ],
 
-    //Населени места
-    cities: [
-      { nomTypeValueId: 4159, code: '68134', name: 'София', nameAlt: 'Sofia', alias: 'Sofia' },
-      { nomTypeValueId: 4661, code: '56784', name: 'гр.Пловдив', nameAlt: 'gr.Plovdiv', alias: 'Plovdiv' }
-    ],
+    cities: require('./city'),
 
-    //Номенклатура Типове адреси
-    addressTypes: [
-      {
-        nomTypeValueId: 5583, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', alias: 'Permanent', content: {
-          type: 'P'
-        }
-      },
-      {
-        nomTypeValueId: 5584, code: 'TMP', name: 'Настоящ адрес', nameAlt: 'Настоящ адрес', content: {
-          type: 'P'
-        }
-      },
-      {
-        nomTypeValueId: 5585, code: 'COR', name: 'Адрес за кореспонденция', nameAlt: 'Адрес за кореспонденция', alias: 'Correspondence', content: {
-          type: 'P'
-        }
-      },
-      {
-        nomTypeValueId: 5586, code: 'O', name: 'Седалище', nameAlt: 'Седалище', content: {
-          type: 'F'
-        }
-      },
-      {
-        nomTypeValueId: 5587, code: 'TOP', name: 'Данни за ръководител', nameAlt: 'Данни за ръководител', content: {
-          type: 'F'
-        }
-      },
-      { 
-        nomTypeValueId: 5588, code: 'BOS', name: 'Данни за ръководител TO', nameAlt: 'Данни за ръководител TO', content: {
-          type: 'F'
-        }
-      },
-      {
-        nomTypeValueId: 5582, code: 'TO', name: 'Адрес за базово ослужване на ВС', nameAlt: 'Адрес за базово ослужване на ВС', content: {
-          type: 'F'
-        }
-      }
-    ],
+    addressTypes: require('./addressType'),
 
     organizations: require('./organization'),
 
@@ -266,23 +221,7 @@
       { nomTypeValueId: 3, code: '5', name: 'Майчинство', nameAlt: 'Майчинство', alias: 'maternity leave' }
     ],
 
-    //Номенклатура Издатели на документи - Медицински
-    medDocPublishers: [
-      { nomTypeValueId: 6839, name: 'AMC Latvia', alias: 'AMC Latvia' },
-      { nomTypeValueId: 6830, name: 'AMC PRAGUE', alias: 'CAA France' },
-      { nomTypeValueId: 6829, name: 'AME-SWETZERLAND', alias: 'AME-SWETZERLAND' },
-      { nomTypeValueId: 6828, name: 'Austro Control', alias: 'Austro Control' },
-      { nomTypeValueId: 6834, name: 'CAA France', alias: 'CAA France' },
-      { nomTypeValueId: 6832, name: 'FAA', alias: 'FAA' },
-      { nomTypeValueId: 6831, name: 'FR AMC', alias: 'FR AMC' },
-      { nomTypeValueId: 6833, name: 'GCAA UAE', alias: 'GCAA UAE' },
-      { nomTypeValueId: 6835, name: 'GR AME', alias: 'GR AME' },
-      { nomTypeValueId: 6827, name: 'ROMANIAN CIVIL AERONAUTICAL AUTHORITY-AME No.02' },
-      { nomTypeValueId: 6838, name: 'TR-AME-008/2', alias: 'TR-AME-008/2' },
-      { nomTypeValueId: 6836, name: 'UK AME', alias: 'UK AME' },
-      { nomTypeValueId: 6837, name: 'АМЦ01', alias: 'AMC01' },
-      { nomTypeValueId: 6826, name: 'КАМО', alias: 'KAMO' }
-    ],
+    medDocPublishers: require('./medDocPublisher'),
 
     //Номенклатура Издатели на документи - Други
     OtherDocPublishers: [
@@ -480,26 +419,9 @@
       { nomTypeValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
     ],
 
-    //kласове за медицинси
-    medicalClassTypes: [
-      { nomTypeValueId: 7824, code: '01', name: 'Class-1', nameAlt: 'Class-1', alias: 'class1' },
-      { nomTypeValueId: 7825, code: '02', name: 'Class-2', nameAlt: 'Class-2', alias: 'class2' },
-      { nomTypeValueId: 7826, code: '03', name: 'Class-3', nameAlt: 'Class-3', alias: 'class3' },
-      { nomTypeValueId: 7827, code: '04', name: 'Class-4', nameAlt: 'Class-4', alias: 'class4' }
-    ],
+    medicalClasses: require('./medicalClass'),
 
-    //Oграничения за медицински
-    medicalLimitationTypes: [
-      { nomTypeValueId: 7836, code: 'MCL', name: 'MCL', nameAlt: 'MCL', alias: 'MCL' },
-      { nomTypeValueId: 7831, code: 'OCL', name: 'OCL', nameAlt: 'OCL', alias: 'OCL' },
-      { nomTypeValueId: 7829, code: 'OFL', name: 'OFL', nameAlt: 'OFL', alias: 'OFL' },
-      { nomTypeValueId: 7835, code: 'OML', name: 'OML', nameAlt: 'OML', alias: 'OML' },
-      { nomTypeValueId: 7828, code: 'OSL', name: 'OSL', nameAlt: 'OSL', alias: 'OSL' },
-      { nomTypeValueId: 7833, code: 'TML', name: 'TML', nameAlt: 'TML', alias: 'TML' },
-      { nomTypeValueId: 7832, code: 'VDL', name: 'VDL', nameAlt: 'VDL', alias: 'VDL' },
-      { nomTypeValueId: 7830, code: 'VML', name: 'VML', nameAlt: 'VML', alias: 'VML' },
-      { nomTypeValueId: 7834, code: 'VNL', name: 'VNL', nameAlt: 'VNL', alias: 'VNL' }
-    ],
+    medicalLimitations: require('./medicalLimitation'),
 
     personCheckDocumentTypes: require('./personCheckDocumentType'),
 
