@@ -30,168 +30,170 @@
         </div>
       </div>
 
-      <hr />
+      <div ng-if="model.staffType">
+        <hr />
 
-      <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'G'">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.aircraft"></label>
-          <sc-nomenclature ng-model="model.aircraft" alias="'aircrafts'" load="true"></sc-nomenclature>
+        <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'G'">
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.aircraft"></label>
+            <sc-nomenclature ng-model="model.aircraft" alias="'aircrafts'" load="true"></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.ratingType"></label>
+            <sc-nomenclature ng-model="model.ratingType" alias="'ratingTypes'" load="true"></sc-nomenclature>
+          </div>
         </div>
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.ratingType"></label>
-          <sc-nomenclature ng-model="model.ratingType" alias="'ratingTypes'" load="true"></sc-nomenclature>
-        </div>
-      </div>
 
-      <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'T'">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.ratingClass"></label>
-          <sc-nomenclature ng-model="model.ratingClass" alias="'ratingClasses'" load="true"></sc-nomenclature>
+        <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'T'">
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.ratingClass"></label>
+            <sc-nomenclature ng-model="model.ratingClass" alias="'ratingClasses'" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'ratingClassGroups' }" load="false"></sc-nomenclature>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.licenceType"></label>
-          <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" load="true"></sc-nomenclature>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.licenceType"></label>
+            <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" params="{ nomTypeParentValueId: model.staffType.nomTypeValueId }" load="false"></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.authorization"></label>
+            <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'authorizationGroups' }" load="false"></sc-nomenclature>
+          </div>
         </div>
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.authorization"></label>
-          <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" load="true"></sc-nomenclature>
-        </div>
-      </div>
 
-      <div class="row" ng-if="model.staffType.alias === 'T'">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.locationIndicator"></label>
-          <sc-nomenclature ng-model="model.locationIndicator" alias="'locationIndicators'" load="true"></sc-nomenclature>
+        <div class="row" ng-if="model.staffType.alias === 'T'">
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.locationIndicator"></label>
+            <sc-nomenclature ng-model="model.locationIndicator" alias="'locationIndicators'" load="true"></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-6 col-md-5 col-lg-4">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.sector"></label>
+            <sc-text ng-model="model.sector"></sc-text>
+          </div>
         </div>
-        <div class="form-group col-sm-6 col-md-5 col-lg-4">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.sector"></label>
-          <sc-text ng-model="model.sector"></sc-text>
-        </div>
-      </div>
 
-      <hr />
-
-      <div class="row">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.$validated && form.experienceRole.$invalid}">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
-          <span name="experienceRoleIndicatorValidationSpan" ng-show="form.$validated && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
-          <sc-nomenclature ng-model="model.experienceRole" name="experienceRole" alias="'experienceRoles'" load="true" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.$validated && form.experienceMeasure.$invalid}">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure"></label>
-          <span name="experienceMeasureValidationSpan" ng-show="form.$validated && form.experienceMeasure.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceMeasure.$error.required && 'Задължително поле'}}"></span>
-          <sc-nomenclature ng-model="model.experienceMeasure" name="experienceMeasure" alias="'experienceMeasures'" load="true" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
-
-      <div ng-if="model.staffType.alias === 'F'">
         <hr />
 
         <div class="row">
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayDuration"></label>
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
-              </span>
-              </span>
-              <sc-int ng-model="model.dayIFR.hours"></sc-int>
-              <span class="input-group-addon padding6">:</span>
-              <sc-int ng-model="model.dayIFR.minutes"></sc-int>
+          <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.$validated && form.experienceRole.$invalid}">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
+            <span name="experienceRoleIndicatorValidationSpan" ng-show="form.$validated && form.experienceRole.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceRole.$error.required && 'Задължително поле'}}"></span>
+            <sc-nomenclature ng-model="model.experienceRole" name="experienceRole" alias="'experienceRoles'" load="true" ng-required="true"></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-6 col-md-5 col-lg-4" ng-class="{'has-error': form.$validated && form.experienceMeasure.$invalid}">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure"></label>
+            <span name="experienceMeasureValidationSpan" ng-show="form.$validated && form.experienceMeasure.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.experienceMeasure.$error.required && 'Задължително поле'}}"></span>
+            <sc-nomenclature ng-model="model.experienceMeasure" name="experienceMeasure" alias="'experienceMeasures'" load="true" ng-required="true"></sc-nomenclature>
+          </div>
+        </div>
+
+        <div ng-if="model.staffType.alias === 'F'">
+          <hr />
+
+          <div class="row">
+            <div class="form-group col-sm-3 col-md-2">
+              <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayDuration"></label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
+                </span>
+                </span>
+                <sc-int ng-model="model.dayIFR.hours"></sc-int>
+                <span class="input-group-addon padding6">:</span>
+                <sc-int ng-model="model.dayIFR.minutes"></sc-int>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-3 col-md-2">
+              <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightDuration"></label>
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
+                </span>
+                <sc-int ng-model="model.nightIFR.hours"></sc-int>
+                <span class="input-group-addon padding6">:</span>
+                <sc-int ng-model="model.nightIFR.minutes"></sc-int>
+              </div>
             </div>
           </div>
 
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightDuration"></label>
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR">
-              </span>
-              <sc-int ng-model="model.nightIFR.hours"></sc-int>
-              <span class="input-group-addon padding6">:</span>
-              <sc-int ng-model="model.nightIFR.minutes"></sc-int>
+          <div class="row padding-top10">
+            <div class="form-group col-sm-3 col-md-2">
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
+                </span>
+                <sc-int ng-model="model.dayVFR.hours"></sc-int>
+                <span class="input-group-addon padding6">:</span>
+                <sc-int ng-model="model.dayVFR.minutes"></sc-int>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-3 col-md-2">
+              <div class="input-group input-group-sm">
+                <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
+                </span>
+                <sc-int ng-model="model.nightVFR.hours"></sc-int>
+                <span class="input-group-addon padding6">:</span>
+                <sc-int ng-model="model.nightVFR.minutes"></sc-int>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-3 col-md-2">
+              <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayLandings"></label>
+              <sc-int ng-model="model.dayLandings"></sc-int>
+            </div>
+
+            <div class="form-group col-sm-3 col-md-2">
+              <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightLandings"></label>
+              <sc-int ng-model="model.nightLandings"></sc-int>
             </div>
           </div>
         </div>
 
-        <div class="row padding-top10">
-          <div class="form-group col-sm-3 col-md-2">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
-              </span>
-              <sc-int ng-model="model.dayVFR.hours"></sc-int>
-              <span class="input-group-addon padding6">:</span>
-              <sc-int ng-model="model.dayVFR.minutes"></sc-int>
-            </div>
-          </div>
-
-          <div class="form-group col-sm-3 col-md-2">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR">
-              </span>
-              <sc-int ng-model="model.nightVFR.hours"></sc-int>
-              <span class="input-group-addon padding6">:</span>
-              <sc-int ng-model="model.nightVFR.minutes"></sc-int>
-            </div>
-          </div>
-        </div>
+        <hr />
 
         <div class="row">
+          <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
+            <span name="totalDocValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
+                  class="glyphicon glyphicon-warning-sign"
+                  title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time">
+                </span>
+              </span>
+              <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.code === 'F'"></sc-int>
+              <span class="input-group-addon padding6">:</span>
+              <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.code === 'F'"></sc-int>
+            </div>
+          </div>
+
+          <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'F'">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths"></label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time">
+                </span>
+              </span>
+              <sc-int ng-model="model.totalLastMonths.hours"></sc-int>
+              <span class="input-group-addon padding6">:</span>
+              <sc-int ng-model="model.totalLastMonths.minutes"></sc-int>
+            </div>
+          </div>
+
           <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayLandings"></label>
-            <sc-int ng-model="model.dayLandings"></sc-int>
-          </div>
-
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightLandings"></label>
-            <sc-int ng-model="model.nightLandings"></sc-int>
-          </div>
-        </div>
-      </div>
-
-      <hr />
-
-      <div class="row">
-        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
-          <span name="totalDocValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
-                class="glyphicon glyphicon-warning-sign"
-                title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time">
+            <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.total"></label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time">
+                </span>
               </span>
-            </span>
-            <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.code === 'F'"></sc-int>
-            <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.code === 'F'"></sc-int>
-          </div>
-        </div>
-
-        <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'F'">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths"></label>
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time">
-              </span>
-            </span>
-            <sc-int ng-model="model.totalLastMonths.hours"></sc-int>
-            <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.totalLastMonths.minutes"></sc-int>
-          </div>
-        </div>
-
-        <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.total"></label>
-          <div class="input-group input-group-sm">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time">
-              </span>
-            </span>
-            <sc-int ng-model="model.total.hours"></sc-int>
-            <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.total.minutes"></sc-int>
+              <sc-int ng-model="model.total.hours"></sc-int>
+              <span class="input-group-addon padding6">:</span>
+              <sc-int ng-model="model.total.minutes"></sc-int>
+            </div>
           </div>
         </div>
       </div>

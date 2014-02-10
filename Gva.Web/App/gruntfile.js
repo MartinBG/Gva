@@ -20,6 +20,7 @@ module.exports = function (grunt) {
       ],
       '<%= buildDir %>/js/sample.data.js': [
         'schema/requireShim.js',
+        'schema/nomenclatures/*.js',
         'schema/nomenclatures.sample.js',
         'schema/person-data.sample.js',
         'schema/person-document-education.sample.js',
