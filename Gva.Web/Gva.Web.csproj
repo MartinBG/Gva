@@ -273,10 +273,13 @@
     <Content Include="App\schema\nomenclatures\locationIndicator.js" />
     <Content Include="App\schema\nomenclatures\organization.js" />
     <Content Include="App\schema\nomenclatures\documentRole.js" />
+    <Content Include="App\schema\nomenclatures\personCheckDocumentRole.js" />
+    <Content Include="App\schema\nomenclatures\personCheckDocumentType.js" />
     <Content Include="App\schema\nomenclatures\personOtherDocumentType.js" />
     <Content Include="App\schema\nomenclatures\ratingClass.js" />
     <Content Include="App\schema\nomenclatures\ratingClassGroup.js" />
     <Content Include="App\schema\nomenclatures\ratingType.js" />
+    <Content Include="App\schema\nomenclatures\school.js" />
     <Content Include="App\schema\nomenclatures\staffType.js" />
     <Content Include="App\schema\person-rating-edition.sample.js" />
     <Content Include="App\schema\person-rating.sample.js" />

@@ -211,23 +211,7 @@
       }
     ],
 
-    //Номенклатура Учебни заведения
-    schools: [
-      {
-        nomTypeValueId: 673, code: '4', name: 'Университет за национално и световно стопанство (УНСС)-София', nameAlt: 'Университет за национално и световно стопанство (УНСС)-София', alias: 'UNSS', content: {
-          graduationId: 1,
-          graduationIds: [1, 3, 450],
-          pilotTraining: false
-        }
-      },
-      {
-        nomTypeValueId: 1349, code: '218', name: 'Български въздухоплавателен център', nameAlt: 'Български въздухоплавателен център', alias: 'BAC', content: {
-          graduationId: 450,
-          graduationIds: [450],
-          pilotTraining: true
-        }
-      }
-    ],
+    schools: require('./school'),
 
     documentParts: [
       {
@@ -267,12 +251,7 @@
       //}
     ],
 
-    //Номенклатура Степени на образование
-    graduations: [
-      { nomTypeValueId: 1, code: 'HS', name: 'Висше образование (бакалавър)', nameAlt: 'Висше образование (бакалавър)', alias: 'HS' },
-      { nomTypeValueId: 3, code: 'HM', name: 'Висше образование (магистър)', nameAlt: 'Висше образование (магистър)', alias: 'HM' },
-      { nomTypeValueId: 450, code: 'PQ', name: 'Професионална квалификация', nameAlt: 'Професионална квалификация', alias: 'PQ' }
-    ],
+    graduations: require('./graduation'),
 
     //Номенклатура Типове документи за самоличност на Физичеко лице
     personIdDocumentTypes: [
