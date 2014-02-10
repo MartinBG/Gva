@@ -215,11 +215,7 @@
     documentRoles: require('./documentRole'),
 
     //Номенклатура Типове състояния на Физичеко лице
-    personStatusTypes: [
-      { nomTypeValueId: 1, code: '3', name: 'Негоден', nameAlt: 'Негоден', alias: 'permanently unfit' },
-      { nomTypeValueId: 2, code: '4', name: 'Временно негоден', nameAlt: 'Временно негоден', alias: 'temporary unfit' },
-      { nomTypeValueId: 3, code: '5', name: 'Майчинство', nameAlt: 'Майчинство', alias: 'maternity leave' }
-    ],
+    personStatusTypes: require('./personStatusType'),
 
     medDocPublishers: require('./medDocPublisher'),
 
