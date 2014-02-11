@@ -9,7 +9,7 @@ Usage <sc-datatable ng-model="data"
 /*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function DatatableDirective(l10n, $timeout, $parse) {
+  function DatatableDirective(l10n, $timeout, $parse, $filter, scDatatableConfig) {
     return {
       restrict: 'E',
       replace: true,
@@ -135,7 +135,12 @@ Usage <sc-datatable ng-model="data"
           if (column.data) {
             var parsedExpression = $parse(column.data);
             dataFunction = function (item) {
-              return parsedExpression(item);
+              if (column.type === 'date') {
+                return $filter('date')(parsedExpression(item), scDatatableConfig.ddmmyyyy);
+              }
+              else {
+                return parsedExpression(item);
+              }
             };
           }
 
@@ -158,8 +163,12 @@ Usage <sc-datatable ng-model="data"
     };
   }
 
-  DatatableDirective.$inject = ['l10n', '$timeout', '$parse'];
+  DatatableDirective.$inject = ['l10n', '$timeout', '$parse', '$filter', 'scDatatableConfig'];
 
-  angular.module('scaffolding').directive('scDatatable', DatatableDirective);
+  angular.module('scaffolding')
+    .constant('scDatatableConfig', {
+      ddmmyyyy: 'mediumDate'
+    })
+    .directive('scDatatable', DatatableDirective);
 
 }(angular, _));

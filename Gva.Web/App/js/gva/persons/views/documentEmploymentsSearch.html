@@ -4,8 +4,7 @@
     <gva-button name="editBtn" gva-click="editDocumentEmployment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" gva-click="deleteDocumentEmployment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
-  <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
-    <span>{{item.part.hiredate | date:'mediumDate'}}</span>
+  <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="date">
   </sc-column>
   <sc-column data="part.employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
   </sc-column>
