@@ -80,12 +80,31 @@
     $httpBackendConfiguratorProvider
       .when('GET', '/api/apps?fromDate&toDate&lin&regUri',
         function ($params, $filter, applicationsFactory) {
-          var applications = _(applicationsFactory.getAll()).map(function (application) {
-            if (application.lotId) { //todo change person data better
-              application.person = personMapper(application.personData);
-            }
-            return application;
-          }).value();
+          var applications = applicationsFactory.getAll();
+
+          if ($params.fromDate) {
+            applications = _(applications).filter(function (app) {
+              return app.doc.regDate && app.doc.regDate >= new Date(Date.parse($params.fromDate));
+            }).value();
+          }
+
+          if ($params.toDate) {
+            applications = _(applications).filter(function (app) {
+              return app.doc.regDate && app.doc.regDate <= new Date(Date.parse($params.toDate));
+            }).value();
+          }
+
+          if ($params.lin) {
+            applications = _(applications).filter(function (app) {
+              return app.personData.part.lin && _(app.personData.part.lin).contains($params.lin);
+            }).value();
+          }
+
+          if ($params.regUri) {
+            applications = _(applications).filter(function (app) {
+              return app.doc.regUri && _(app.doc.regUri).contains($params.regUri);
+            }).value();
+          }
 
           return [200, applications];
         })
