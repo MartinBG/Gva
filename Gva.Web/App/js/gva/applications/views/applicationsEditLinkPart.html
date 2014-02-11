@@ -19,6 +19,9 @@
 
         <div ng-if="showDocumentId && documentData.docPartType.alias === 'DocumentId'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentIdSearch.documentNumber">
@@ -35,14 +38,14 @@
             </sc-column>
             <sc-column data="part.pageCount" title="persons.documentIdSearch.pageCount">
             </sc-column>
-             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
-            </sc-column>
           </sc-datatable>
         </div>
 
         <div ng-if="showDocumentEducation && documentData.docPartType.alias === 'DocumentEducation'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
             </sc-column>
             <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate">
@@ -58,14 +61,14 @@
             </sc-column>
             <sc-column data="part.pageCount" title="persons.documentEducationSearch.pageCount">
             </sc-column>
-            <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
-            </sc-column>
           </sc-datatable>
         </div>
 
         <div ng-if="showDocumentEmployment && documentData.docPartType.alias === 'DocumentEmployment'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
               <span>{{item.part.hiredate | date:'mediumDate'}}</span>
             </sc-column>
@@ -85,14 +88,14 @@
             </sc-column>
             <sc-column data="part.pageCount" title="persons.employmentSearch.pageCount">
             </sc-column>
-            <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
-            </sc-column>
           </sc-datatable>
         </div>
 
         <div ng-if="showDocumentMed && documentData.docPartType.alias === 'DocumentMed'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
             </sc-column>
             <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom">
@@ -113,14 +116,14 @@
             </sc-column>
             <sc-column data="part.notes" title="persons.medicalSearch.notes">
             </sc-column>
-            <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
-            </sc-column>
           </sc-datatable>
         </div>
 
         <div ng-if="showDocumentCheck && documentData.docPartType.alias === 'DocumentCheck'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
             </sc-column>
             <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
@@ -149,14 +152,14 @@
             </sc-column>
             <sc-column data="part.pageCount" title="persons.checkSearch.pageCount">
             </sc-column>
-            <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
-            </sc-column>
           </sc-datatable>
         </div>
 
         <div ng-if="showDocumentTraining && documentData.docPartType.alias === 'DocumentTraining'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px">
+              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+            </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
             </sc-column>
             <sc-column data="part.documentDateValidFrom" title="persons.documentTrainingSearch.documentDateValidFrom">
@@ -185,9 +188,6 @@
             <sc-column data="part.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
             </sc-column>
             <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
-            </sc-column>
-             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
             </sc-column>
           </sc-datatable>
         </div>

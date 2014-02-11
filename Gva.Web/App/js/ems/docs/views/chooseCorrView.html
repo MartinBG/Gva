@@ -7,13 +7,13 @@
 </sc-search>
 
 <sc-datatable ng-model="corrs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <button type="button" class="btn btn-xs btn-primary" ng-click="selectCorr(item)" l10n-text="corrs.search.select"></button>
+  </sc-column>
   <sc-column data="displayName" title="Наименование">
   </sc-column>
   <sc-column data="email" title="Имейл">
   </sc-column>
   <sc-column data="correspondentType.name" title="Тип">
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <button type="button" class="btn btn-xs btn-primary" ng-click="selectCorr(item)" l10n-text="corrs.search.select"></button>
   </sc-column>
 </sc-datatable>
