@@ -16,7 +16,7 @@
       expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
 
       filesPage.selectSingleFileWithDelay();
-      expect(filesPage.filesDirective.get()).toEqual('');
+      expect(filesPage.filesDirective.get()).toEqual('file1');
 
       filesPage.selectMultipleFiles();
       expect(filesPage.filesDirective.get()).toEqual('4 прикачени файла.');
@@ -75,9 +75,10 @@
 
     it('should upload file.', function () {
       filesPage.filesDirective.openModal();
-      filesPage.filesDirective.addFile('//filesCtrl.js');
-      filesPage.filesDirective.uploadFiles();
-      expect(filesPage.filesDirective.get()).toEqual('filesCtrl.js');
+      filesPage.filesDirective.addFile();
+      filesPage.filesDirective.uploadFiles().then(function () {
+        expect(filesPage.filesDirective.get()).toEqual('ptorConf.js');
+      });
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));

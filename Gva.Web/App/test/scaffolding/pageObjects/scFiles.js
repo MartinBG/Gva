@@ -1,5 +1,5 @@
-﻿/*global module, by, require*/
-(function (module, by, require){
+﻿/*global module, by, require, process*/
+(function (module, by, require, process){
   'use strict';
 
   var Q = require('q'),
@@ -28,9 +28,9 @@
     });
   };
 
-  ScFiles.prototype.addFile = function (text) {
+  ScFiles.prototype.addFile = function () {
     return this.context.findElement(by.className('test-file-upload-button')).then(function (elem) {
-      elem.sendKeys(text);
+      elem.sendKeys(process.env.GVA_PATH + 'Gva.Web\\App\\test\\ptorConf.js');
     });
   };
 
@@ -94,4 +94,4 @@
   };
 
   module.exports = ScFiles;
-}(module, by, require));
+}(module, by, require, process));
