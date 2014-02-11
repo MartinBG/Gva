@@ -15,14 +15,14 @@
               .save({ id: $stateParams.id }, $scope.personData)
               .$promise
               .then(function () {
-                return $state.go('persons.view');
+                return $state.go('root.persons.view');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.view');
+      return $state.go('root.persons.view');
     };
   }
 

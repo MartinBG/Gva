@@ -44,14 +44,14 @@
           if ($scope.corrForm.$valid) {
             Corr.save($scope.corr).$promise
               .then(function () {
-                $state.go('corrs/search');
+                $state.go('root.corrs.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      $state.go('corrs/search');
+      $state.go('root.corrs.search');
     };
   }
 

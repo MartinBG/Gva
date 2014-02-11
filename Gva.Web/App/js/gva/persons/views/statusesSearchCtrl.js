@@ -13,7 +13,10 @@
       });
 
     $scope.editStatus = function (status) {
-      return $state.go('persons.statuses.edit', { id: $stateParams.id, ind: status.partIndex });
+      return $state.go('root.persons.view.statuses.edit', {
+        id: $stateParams.id,
+        ind: status.partIndex
+      });
     };
 
     $scope.deleteStatus = function (status) {
@@ -25,7 +28,7 @@
     };
 
     $scope.newStatus = function () {
-      return $state.go('persons.statuses.new');
+      return $state.go('root.persons.view.statuses.new');
     };
   }
 

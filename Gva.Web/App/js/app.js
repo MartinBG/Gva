@@ -5,6 +5,7 @@
     'ng',
     'ui.router',
     'ui.select2',
+    'boot',
     'common',
     'scaffolding',
     'gva',
@@ -29,29 +30,29 @@
         .addItem({
           text: 'Документи',
           icon: 'glyphicon glyphicon-folder-open',
-          state: 'docs/search',
+          state: 'root.docs.search',
           items: [
-            { text: 'Нов документ', state: 'docs/new' },
-            { text: 'Кореспонденти', state: 'corrs/search' },
-            { text: 'Нов кореспондент', state: 'corrs/new' }
+            { text: 'Нов документ', state: 'root.docs.new' },
+            { text: 'Кореспонденти', state: 'root.corrs.search' },
+            { text: 'Нов кореспондент', state: 'root.corrs.new' }
           ]
         })
         .addItem({ text: 'ЛАП', icon: 'fa fa-users', items: [
-          { text: 'Физически лица', state: 'persons.search' },
-          { text: 'Ново физическо лице', state: 'persons.new' },
+          { text: 'Физически лица', state: 'root.persons.search' },
+          { text: 'Ново физическо лице', state: 'root.persons.new' },
           { text: 'Лицензи', url: '/licences' },
           { text: 'Квалификации', url: '/qualifications' },
           { text: 'Медицински', url: '/medical' },
-          { text: 'Заявления', state: 'applications/search' },
-          { text: 'Ново заявление', state: 'applications/new/doc' },
-          { text: 'Свържи заявление', state: 'applications/link/common' }
+          { text: 'Заявления', state: 'root.applications.search' },
+          { text: 'Ново заявление', state: 'root.applications.new.doc' },
+          { text: 'Свържи заявление', state: 'root.applications.link.common' }
         ]})
         .addItem({text: 'ВС', icon: 'glyphicon glyphicon-plane', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licences' },
           { text: 'Инспекции', url: '/licences' }
         ]})
         .addItem({ text: 'Админ', icon: 'glyphicon glyphicon-wrench', items: [
-          { text: 'Потребители', state: 'users.search' }
+          { text: 'Потребители', state: 'root.users.search' }
         ]})
         .addItem({ text: 'Помощ', items: [
           {
@@ -63,7 +64,7 @@
         .setUserFullName('Администратор')
         .setUserHasPassword(true)
         .showBreadcrumbBar(true)
-        .setBreadcrumbBarHomeState('persons');
+        .setBreadcrumbBarHomeState('root.persons');
     }
   ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
     $rootScope.l10n = l10n;

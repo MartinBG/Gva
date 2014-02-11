@@ -8,7 +8,7 @@
     });
 
     $scope.editDocumentEmployment = function (employment) {
-      return $state.go('persons.employments.edit',
+      return $state.go('root.persons.view.employments.edit',
         {
           id: $stateParams.id,
           ind: employment.partIndex
@@ -23,7 +23,7 @@
     };
 
     $scope.newDocumentEmployment = function () {
-      return $state.go('persons.employments.new');
+      return $state.go('root.persons.view.employments.new');
     };
   }
 

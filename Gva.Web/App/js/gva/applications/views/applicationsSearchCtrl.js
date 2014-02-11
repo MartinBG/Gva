@@ -21,7 +21,7 @@
     });
 
     $scope.search = function () {
-      $state.go('applications/search', {
+      $state.go('root.applications.search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         lin: $scope.filters.lin,
@@ -30,7 +30,7 @@
     };
 
     $scope.viewApplication = function (application) {
-      return $state.go('applications/edit/case', { id: application.applicationId });
+      return $state.go('root.applications.edit.case', { id: application.applicationId });
     };
   }
 

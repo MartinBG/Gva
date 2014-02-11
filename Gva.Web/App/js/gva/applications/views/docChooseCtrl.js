@@ -27,7 +27,7 @@
     });
 
     $scope.search = function () {
-      $state.go('applications/link/docChoose', {
+      $state.go('root.applications.link.docChoose', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         regUri: $scope.filters.regUri,
@@ -44,11 +44,11 @@
     $scope.chooseDoc = function (doc) {
       $scope.$parent.doc = doc;
 
-      return $state.go('applications/link/common');
+      return $state.go('root.applications.link.common');
     };
 
     $scope.cancel = function () {
-      return $state.go('applications/link/common');
+      return $state.go('root.applications.link.common');
     };
   }
 

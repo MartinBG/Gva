@@ -45,25 +45,25 @@
     </div>
   </form>
   <gva-tabs tab-list="{
-      'Лицензи': 'persons.licences.search',
+      'Лицензи': 'root.persons.view.licences.search',
       'Квалификации': {
-        'Класове': 'persons.ratings.search',
-        'Летателен / практически опит': 'persons.flyingExperiences.search',
-        'Обучение': 'persons.documentTrainings.search',
-        'Проверки': 'persons.checks.search'
+        'Класове': 'root.persons.view.ratings.search',
+        'Летателен / практически опит': 'root.persons.view.flyingExperiences.search',
+        'Обучение': 'root.persons.view.documentTrainings.search',
+        'Проверки': 'root.persons.view.checks.search'
        },
-      'Медицински': 'persons.medicals.search',
+      'Медицински': 'root.persons.view.medicals.search',
       'Лични данни': {
-        'Адреси': 'persons.addresses.search',
-        'Месторабота': 'persons.employments.search',
-        'Образование': 'persons.documentEducations.search',
-        'Документи за самоличност': 'persons.documentIds.search',
-        'Състояния': 'persons.statuses.search'
+        'Адреси': 'root.persons.view.addresses.search',
+        'Месторабота': 'root.persons.view.employments.search',
+        'Образование': 'root.persons.view.documentEducations.search',
+        'Документи за самоличност': 'root.persons.view.documentIds.search',
+        'Състояния': 'root.persons.view.statuses.search'
       },
-      'Опис': 'persons.inventory'
+      'Опис': 'root.persons.view.inventory'
     }"></gva-tabs>
   <div class="tab-content">
-    <div ui-view="detailView"></div>
+    <div ui-view></div>
     <div class="clear"></div>
   </div>
 </div>

@@ -11,14 +11,14 @@
             return PersonDocumentTraining
               .save({ id: $stateParams.id }, $scope.personDocumentTraining).$promise
               .then(function () {
-                return $state.go('persons.documentTrainings.search');
+                return $state.go('root.persons.view.documentTrainings.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.documentTrainings.search');
+      return $state.go('root.persons.view.documentTrainings.search');
     };
   }
 

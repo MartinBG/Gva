@@ -16,14 +16,14 @@
           return PersonAddress
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personAddress).$promise
             .then(function () {
-              return $state.go('persons.addresses.search');
+              return $state.go('root.persons.view.addresses.search');
             });
         }
       });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.addresses.search');
+      return $state.go('root.persons.view.addresses.search');
     };
   }
 

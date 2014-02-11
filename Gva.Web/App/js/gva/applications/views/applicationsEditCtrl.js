@@ -22,7 +22,7 @@
     };
 
     $scope.viewPerson = function (id) {
-      return $state.go('persons.view', { id: id });
+      return $state.go('root.persons.view', { id: id });
     };
   }
 

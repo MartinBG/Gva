@@ -9,7 +9,7 @@
     Application
     ) {
     $scope.cancel = function () {
-      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
+      return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
 
     $scope.addPart = function () {
@@ -23,7 +23,7 @@
                 setPartAlias: $scope.documentData.docPartType.alias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
-                return $state.transitionTo('applications/edit/case',
+                return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
               });
           }
@@ -40,7 +40,7 @@
                 setPartAlias: $scope.documentData.docPartType.alias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
-                return $state.transitionTo('applications/edit/case',
+                return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
               });
           }

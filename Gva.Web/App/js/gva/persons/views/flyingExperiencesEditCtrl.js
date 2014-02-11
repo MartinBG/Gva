@@ -2,14 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function FlyingExperiencesEditCtrl($scope, $state, $stateParams, PersonFlyingExperience) {
+  function FlyingExperiencesEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonFlyingExperience,
+    personFlyingExperience
+  ) {
     $scope.isEdit = true;
-
-    PersonFlyingExperience
-      .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-      .then(function (flyingExperience) {
-        $scope.personFlyingExperience = flyingExperience;
-      });
+    $scope.personFlyingExperience = personFlyingExperience;
 
     $scope.save = function () {
       $scope.personFlyingExperienceForm.$validate()
@@ -19,14 +20,14 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
-                return $state.go('persons.flyingExperiences.search');
+                return $state.go('root.persons.view.flyingExperiences.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.flyingExperiences.search');
+      return $state.go('root.persons.view.flyingExperiences.search');
     };
   }
 
@@ -34,8 +35,22 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonFlyingExperience'
+    'PersonFlyingExperience',
+    'personFlyingExperience'
   ];
+
+  FlyingExperiencesEditCtrl.$resolve = {
+    personFlyingExperience: [
+      '$stateParams',
+      'PersonFlyingExperience',
+      function ($stateParams, PersonFlyingExperience) {
+        return PersonFlyingExperience.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('FlyingExperiencesEditCtrl', FlyingExperiencesEditCtrl);
 }(angular));

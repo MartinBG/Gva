@@ -182,19 +182,16 @@
            <br />
 
           <gva-tabs tab-list="{
-          'Адресати': 'docs/edit/addressing',
-          'Прикачени файлове': 'docs/edit/content',
-          'Управление': 'docs/edit/workflows',
-          'Етапи': 'docs/edit/stages',
-          'Преписка': 'docs/edit/case',
-          'Класификация': 'docs/edit/classifications'
+          'Адресати': 'root.docs.edit.addressing',
+          'Прикачени файлове': 'root.docs.edit.content',
+          'Управление': 'root.docs.edit.workflows',
+          'Етапи': 'root.docs.edit.stages',
+          'Преписка': 'root.docs.edit.case',
+          'Класификация': 'root.docs.edit.classifications'
           }"></gva-tabs>
 
           <div class="tab-content">
-            <div ui-view="detailView">
-            </div>
-
-            <div ui-view="popView">
+            <div ui-view>
             </div>
             <div class="clear"></div>
           </div>

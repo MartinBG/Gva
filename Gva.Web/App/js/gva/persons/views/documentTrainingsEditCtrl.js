@@ -18,14 +18,14 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentTraining)
               .$promise
               .then(function () {
-                return $state.go('persons.documentTrainings.search');
+                return $state.go('root.persons.view.documentTrainings.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.documentTrainings.search');
+      return $state.go('root.persons.view.documentTrainings.search');
     };
   }
 

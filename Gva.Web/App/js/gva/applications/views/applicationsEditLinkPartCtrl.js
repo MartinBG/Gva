@@ -93,13 +93,13 @@
           setPartAlias: $scope.documentData.docPartType.alias,
           partIndex: item.partIndex
         }).$promise.then(function () {
-          return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
+          return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
         });
 
     };
 
     $scope.cancel = function () {
-      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
+      return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
   }
 

@@ -73,7 +73,7 @@
           $scope.userExists = exists;
           if (!exists) {
             $scope.user.$save().then(function () {
-              $state.go('users.search');
+              $state.go('root.users.search');
             });
           }
         });
@@ -81,7 +81,7 @@
     };
 
     $scope.cancel = function () {
-      $state.go('users.search');
+      $state.go('root.users.search');
     };
   }
   

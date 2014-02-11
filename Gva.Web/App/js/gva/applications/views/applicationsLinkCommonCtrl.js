@@ -10,19 +10,19 @@
     ) {
 
     $scope.newPerson = function () {
-      $state.go('applications/link/personNew');
+      $state.go('root.applications.link.personNew');
     };
 
     $scope.choosePerson = function () {
-      $state.go('applications/link/personChoose');
+      $state.go('root.applications.link.personChoose');
     };
 
     $scope.chooseDoc = function () {
-      $state.go('applications/link/docChoose', { hasLot: false });
+      $state.go('root.applications.link.docChoose', { hasLot: false });
     };
 
     $scope.cancel = function () {
-      $state.go('docs/search');
+      $state.go('root.docs.search');
     };
 
     $scope.clear = function () {
@@ -39,7 +39,7 @@
           };
 
           Application.linkNew(newApplication).$promise.then(function (result) {
-            return $state.go('applications/edit/case', { id: result.applicationId });
+            return $state.go('root.applications.edit.case', { id: result.applicationId });
           });
         }
       });

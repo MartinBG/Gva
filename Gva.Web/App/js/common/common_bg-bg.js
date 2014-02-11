@@ -45,6 +45,11 @@
             cancel: 'Отказ'
           }
         }
+      },
+      states: {
+        'root.users': 'Потребители',
+        'root.users.new': 'Нов потребител',
+        'root.users.edit': 'Редакция'
       }
     });
   }]);

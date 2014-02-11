@@ -19,7 +19,7 @@
     });
 
     $scope.search = function () {
-      $state.go('persons.search', {
+      $state.go('root.persons.search', {
         lin: $scope.filters.lin,
         uin: $scope.filters.uin,
         names: $scope.filters.names,
@@ -30,11 +30,11 @@
     };
 
     $scope.newPerson = function () {
-      return $state.go('persons.new');
+      return $state.go('root.persons.new');
     };
 
     $scope.viewPerson = function (person) {
-      return $state.go('persons.view', { id: person.id });
+      return $state.go('root.persons.view', { id: person.id });
     };
   }
 

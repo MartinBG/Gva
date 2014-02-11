@@ -27,7 +27,7 @@
     });
 
     $scope.search = function () {
-      $state.go('docs/search', {
+      $state.go('root.docs.search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         regUri: $scope.filters.regUri,
@@ -42,11 +42,11 @@
     };
 
     $scope.viewDoc = function (doc) {
-      return $state.go('docs/edit/addressing', { docId: doc.docId });
+      return $state.go('root.docs.edit.addressing', { docId: doc.docId });
     };
 
     $scope.newDoc = function () {
-      return $state.go('docs/new');
+      return $state.go('root.docs.new');
     };
   }
 

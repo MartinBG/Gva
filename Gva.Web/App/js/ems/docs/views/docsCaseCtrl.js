@@ -8,11 +8,11 @@
   ) {
 
     $scope.viewDoc = function (docId) {
-      return $state.go('docs/edit/addressing', { docId: docId });
+      return $state.go('root.docs.edit.addressing', { docId: docId });
     };
 
     $scope.viewApplication = function (applicationId) {
-      return $state.go('applications/edit/case', { id: applicationId });
+      return $state.go('root.applications.edit.case', { id: applicationId });
     };
   }
 

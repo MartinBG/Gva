@@ -8,7 +8,7 @@
     });
 
     $scope.editDocumentTraining = function (documentTraining) {
-      return $state.go('persons.documentTrainings.edit',
+      return $state.go('root.persons.view.documentTrainings.edit',
         {
           id: $stateParams.id,
           ind: documentTraining.partIndex
@@ -23,7 +23,7 @@
     };
 
     $scope.newDocumentTraining = function () {
-      return $state.go('persons.documentTrainings.new');
+      return $state.go('root.persons.view.documentTrainings.new');
     };
   }
 

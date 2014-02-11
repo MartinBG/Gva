@@ -17,14 +17,14 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.personDocumentEmployment).$promise
               .then(function () {
-                return $state.go('persons.employments.search');
+                return $state.go('root.persons.view.employments.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.employments.search');
+      return $state.go('root.persons.view.employments.search');
     };
   }
 

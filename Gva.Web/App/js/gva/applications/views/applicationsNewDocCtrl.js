@@ -9,15 +9,15 @@
     Application
     ) {
     $scope.newPerson = function () {
-      $state.go('applications/new/personNew');
+      $state.go('root.applications.new.personNew');
     };
 
     $scope.choosePerson = function () {
-      $state.go('applications/new/personChoose');
+      $state.go('root.applications.new.personChoose');
     };
 
     $scope.cancel = function () {
-      $state.go('docs/search');
+      $state.go('root.docs.search');
     };
 
     $scope.save = function () {
@@ -44,7 +44,7 @@
           };
 
           Application.createNew(newApplication).$promise.then(function (result) {
-            return $state.go('applications/edit/case', { id: result.applicationId });
+            return $state.go('root.applications.edit.case', { id: result.applicationId });
           });
         }
       });

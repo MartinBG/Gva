@@ -35,11 +35,14 @@
     });
 
     $scope.viewEdition = function (item) {
-      return $state.go('persons.editions.search', { id: $stateParams.id, ind: item.partIndex });
+      return $state.go('root.persons.view.editions.search', {
+        id: $stateParams.id,
+        ind: item.partIndex
+      });
     };
 
     $scope.newRating = function () {
-      return $state.go('persons.ratings.new');
+      return $state.go('root.persons.view.ratings.new');
     };
   }
 

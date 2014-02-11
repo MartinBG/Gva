@@ -1,4 +1,5 @@
-﻿/*global angular*/
+﻿/*jshint maxlen:false*/
+/*global angular*/
 (function (angular) {
   'use strict';
   angular.module('ems', [
@@ -12,187 +13,21 @@
     'l10n-tools'
   ]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state({
-        name: 'docs',
-        title: 'Документи',
-        url: '/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot',
-        parent: 'root',
-        'abstract': true
-      })
-      .state({
-        name: 'docs/search',
-        parent: 'docs',
-        url: '',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/docs/views/docsSearch.html',
-            controller: 'DocsSearchCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/new',
-        title: 'Нов документ',
-        parent: 'docs',
-        url: '/new?parentDocId',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/docs/views/docsNew.html',
-            controller: 'DocsNewCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit',
-        title: 'Редакция',
-        parent: 'docs',
-        url: '/:docId',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/docs/views/docsEdit.html',
-            controller: 'DocsEditCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/addressing',
-        title: 'Адресати',
-        parent: 'docs/edit',
-        url: '/address',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsAddressing.html',
-            controller: 'DocsAddressingCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/chooseCorr',
-        title: 'Избор кореспондент',
-        parent: 'docs/edit',
-        url: '/choosecorr?displayName&email',
-        views: {
-          'popView@docs/edit': {
-            templateUrl: 'ems/docs/views/chooseCorrView.html',
-            controller: 'ChooseCorrViewCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/chooseUnit',
-        title: 'Избор служител',
-        parent: 'docs/edit',
-        url: '/chooseunit?name',
-        views: {
-          'popView@docs/edit': {
-            templateUrl: 'ems/docs/views/chooseUnitView.html',
-            controller: 'ChooseUnitViewCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/content',
-        title: 'Прикачени файлове',
-        parent: 'docs/edit',
-        url: '/content',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsContent.html',
-            controller: 'DocsContentCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/workflows',
-        title: 'Управление',
-        parent: 'docs/edit',
-        url: '/workflows',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsWorkflows.html',
-            controller: 'DocsWorkflowsCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/stages',
-        title: 'Етапи',
-        parent: 'docs/edit',
-        url: '/stages',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsStages.html',
-            controller: 'DocsStagesCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/case',
-        title: 'Преписка',
-        parent: 'docs/edit',
-        url: '/case',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsCase.html',
-            controller: 'DocsCaseCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'docs/edit/classifications',
-        title: 'Класификация',
-        parent: 'docs/edit',
-        url: '/classifications',
-        views: {
-          'detailView@docs/edit': {
-            templateUrl: 'ems/docs/views/docsClassifications.html',
-            controller: 'DocsClassificationsCtrl'
-          }
-        }
-      });
-  }]).config(['$stateProvider', function ($stateProvider) {
-    $stateProvider
-      .state({
-        name: 'corrs',
-        title: 'Кореспонденти',
-        url: '/corrs?displayName&email',
-        parent: 'root',
-        'abstract': true
-      })
-      .state({
-        name: 'corrs/search',
-        parent: 'corrs',
-        url: '',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/corrs/views/corrSearch.html',
-            controller: 'CorrsSearchCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'corrs/new',
-        title: 'Нов кореспондент',
-        parent: 'corrs',
-        url: '/new',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/corrs/views/corrEdit.html',
-            controller: 'CorrsEditCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'corrs/edit',
-        title: 'Редакция',
-        parent: 'corrs',
-        url: '/:corrId',
-        views: {
-          'pageView@root': {
-            templateUrl: 'ems/corrs/views/corrEdit.html',
-            controller: 'CorrsEditCtrl'
-          }
-        }
-      });
+      .state(['root.docs'                     , '/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot'                                    ])
+      .state(['root.docs.search'              , ''                             , ['@root'          , 'ems/docs/views/docsSearch.html'         , 'DocsSearchCtrl'         ]])
+      .state(['root.docs.new'                 , '/new?parentDocId'             , ['@root'          , 'ems/docs/views/docsNew.html'            , 'DocsNewCtrl'            ]])
+      .state(['root.docs.edit'                , '/:docId'                      , ['@root'          , 'ems/docs/views/docsEdit.html'           , 'DocsEditCtrl'           ]])
+      .state(['root.docs.edit.addressing'     , '/address'                     , ['@root.docs.edit', 'ems/docs/views/docsAddressing.html'     , 'DocsAddressingCtrl'     ]])
+      .state(['root.docs.edit.chooseCorr'     , '/choosecorr?displayName&email', ['@root.docs.edit', 'ems/docs/views/chooseCorrView.html'     , 'ChooseCorrViewCtrl'     ]])
+      .state(['root.docs.edit.chooseUnit'     , '/chooseunit?name'             , ['@root.docs.edit', 'ems/docs/views/chooseUnitView.html'     , 'ChooseUnitViewCtrl'     ]])
+      .state(['root.docs.edit.content'        , '/content'                     , ['@root.docs.edit', 'ems/docs/views/docsContent.html'        , 'DocsContentCtrl'        ]])
+      .state(['root.docs.edit.workflows'      , '/workflows'                   , ['@root.docs.edit', 'ems/docs/views/docsWorkflows.html'      , 'DocsWorkflowsCtrl'      ]])
+      .state(['root.docs.edit.stages'         , '/stages'                      , ['@root.docs.edit', 'ems/docs/views/docsStages.html'         , 'DocsStagesCtrl'         ]])
+      .state(['root.docs.edit.case'           , '/case'                        , ['@root.docs.edit', 'ems/docs/views/docsCase.html'           , 'DocsCaseCtrl'           ]])
+      .state(['root.docs.edit.classifications', '/classifications'             , ['@root.docs.edit', 'ems/docs/views/docsClassifications.html', 'DocsClassificationsCtrl']])
+      .state(['root.corrs'                    , '/corrs?displayName&email'                                                                                                ])
+      .state(['root.corrs.search'             , ''                             , ['@root'          , 'ems/corrs/views/corrSearch.html'        , 'CorrsSearchCtrl'        ]])
+      .state(['root.corrs.new'                , '/new'                         , ['@root'          , 'ems/corrs/views/corrEdit.html'          , 'CorrsEditCtrl'          ]])
+      .state(['root.corrs.edit'               , '/:corrId'                     , ['@root'          , 'ems/corrs/views/corrEdit.html'          , 'CorrsEditCtrl'          ]]);
   }]);
 }(angular));

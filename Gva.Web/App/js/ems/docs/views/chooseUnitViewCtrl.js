@@ -19,7 +19,7 @@
     });
 
     $scope.search = function () {
-      $state.go('docs/edit/chooseUnit', {
+      $state.go('root.docs.edit.chooseUnit', {
         name: $scope.filters.name
       });
     };
@@ -33,12 +33,12 @@
     $scope.selectUnit = function (unit) {
       $scope.onUnitSelected(unit);
       //todo goto previous state
-      $state.go('docs/edit/addressing');
+      $state.go('root.docs.edit.addressing');
     };
 
     $scope.goBack = function () {
       //todo goto previous state
-      $state.go('docs/edit/addressing');
+      $state.go('root.docs.edit.addressing');
     };
 
   }

@@ -4,7 +4,7 @@
   "dependencies": {
     "angular": "1.2.5",
     "angular-i18n": "1.2.5",
-    "angular-l10n": "4vanger/angular-l10n#6cb73e3cad1adc894d99f97a097df799313e088b",
+    "angular-l10n": "georgiyordanov/angular-l10n#93382bfecc13743486a27f7e8e55338485622fb1",
     "angular-resource": "1.2.5",
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "angular-bootstrap": "0.9.0",
