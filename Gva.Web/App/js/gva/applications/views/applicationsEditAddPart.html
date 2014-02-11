@@ -16,6 +16,9 @@
         <div ng-if="documentData.docPartType.alias === 'DocumentCheck'">
           <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
         </div>
+        <div ng-if="documentData.docPartType.alias === 'DocumentTraining'">
+          <gva-person-document-training name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-training>
+        </div>
         <!--TODO ADD MORE-->
 
         <ng-form name="personScannedDocumentForm">

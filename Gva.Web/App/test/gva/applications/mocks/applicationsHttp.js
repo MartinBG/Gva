@@ -225,7 +225,7 @@
           else if ($jsonData.setPartAlias === 'DocumentTraining') {
             person.personDocumentTrainings = person.personDocumentTrainings || [];
             person.personDocumentTrainings.push(docPart);
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Обучение';
           }
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             person.personDocumentOthers = person.personDocumentOthers || [];
@@ -297,7 +297,7 @@
           else if ($jsonData.setPartAlias === 'DocumentTraining') {
             person.personDocumentTrainings = person.personDocumentTrainings || [];
             person.personDocumentTrainings.push(docPart);
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Обучение';
           }
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             person.personDocumentOthers = person.personDocumentOthers || [];
@@ -356,7 +356,7 @@
           else if ($jsonData.setPartAlias === 'DocumentTraining') {
             docPart = _(person.personDocumentTrainings || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Обучение';
           }
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             docPart = _(person.personDocumentOthers || [])

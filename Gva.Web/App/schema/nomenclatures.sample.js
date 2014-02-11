@@ -130,12 +130,12 @@
         nomTypeValueId: 5, code: '5', name: 'Проверка', nameAlt: 'DocumentCheck', alias: 'DocumentCheck', content: {
           setPartId: 5
         }
+      },
+      {
+        nomTypeValueId: 6, code: '6', name: 'Обучение', nameAlt: 'DocumentTraining', alias: 'DocumentTraining', content: {
+          setPartId: 6
+        }
       }
-      //{
-      //  nomTypeValueId: 6, code: '6', name: '*', nameAlt: 'DocumentTraining', alias: 'DocumentTraining', content: {
-      //    setPartId: 6
-      //  }
-      //},
       //{
       //  nomTypeValueId: 7, code: '7', name: '*', nameAlt: 'DocumentOther', alias: 'DocumentOther', content: {
       //    setPartId: 7
