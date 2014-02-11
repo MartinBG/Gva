@@ -21,6 +21,7 @@ gva
 3. Download selenium server from https://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.39.0.jar
 4. Add a new environment variable `SELENIUM_PATH` with value -  the path to the folder in which you have put selenium server and chormedriver
 5. Run `grunt test` (`grunt test-ie` for IE)
+6. Add a new environment variable `GVA_PATH` with value -  the path to the folder containing the project
 
 ##### To debug the tests
 1. Install `node-inspector` globally with `npm install -g node-inspector`
