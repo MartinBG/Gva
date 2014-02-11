@@ -9,6 +9,7 @@
     this.datatable1 = new ScDatatable(context.findElement(by.css('div[ng-model="users"]')));
     this.datatable2 = new ScDatatable(context.findElement(by.css('div[ng-model="users2"]')));
     this.datatable3 = new ScDatatable(context.findElement(by.css('div[ng-model="users3"]')));
+    this.datatable4 = new ScDatatable(context.findElement(by.css('div[ng-model="documents"]')));
     this.loadManyInTable1Btn = context.findElement(by.id('loadManyInTable1Btn'));
     this.loadManyInTable2Btn = context.findElement(by.id('loadManyInTable2Btn'));
     this.loadManyInTable3Btn = context.findElement(by.id('loadManyInTable3Btn'));

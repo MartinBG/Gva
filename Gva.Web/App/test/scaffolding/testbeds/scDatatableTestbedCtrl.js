@@ -26,6 +26,20 @@
         isActive: false
       }];
 
+      $scope.documents = [{
+        documentNumber: '1',
+        documentDateValidFrom: '2010-04-04T00:00',
+        documentDateValidTo: '2010-08-04T00:00'
+      }, {
+        documentNumber: '2',
+        documentDateValidFrom: '2010-06-04T00:00',
+        documentDateValidTo: '2010-08-07T00:00'
+      }, {
+        documentNumber: '3',
+        documentDateValidFrom: '2009-04-02T00:00',
+        documentDateValidTo: '2030-01-03T00:00'
+      }];
+
       $scope.users2 = $scope.users;
       $scope.users3 = $scope.users;
     }

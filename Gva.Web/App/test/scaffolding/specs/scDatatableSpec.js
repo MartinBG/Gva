@@ -133,5 +133,17 @@
       //no dynamic-columns button displayed
       expect(datatablePage.datatable3.isHideColumnButtonDisplayed()).toEqual(false);
     });
+
+    it('should display properly dates using column type', function () {
+      expect(datatablePage.datatable4.getColumns(
+          'documentNumber',
+          'documentDateValidFrom',
+          'documentDateValidTo'
+          )).toEqual([
+          ['1', '04.04.2010', '04.08.2010'],
+          ['2', '04.06.2010', '07.08.2010'],
+          ['3', '02.04.2009', '03.01.2030']
+        ]);
+    });
   });
 }(protractor, describe, beforeEach, it, expect));
