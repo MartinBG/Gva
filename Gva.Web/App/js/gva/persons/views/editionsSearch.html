@@ -1,14 +1,11 @@
 ﻿<div>
   <gva-button name="createBtn" gva-click="newEdition()" text="persons.ratingEditionsSearch.newEdition" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
   <sc-datatable ng-model="editions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="ratingEdition.part.documentDateValidFrom" title="persons.ratingEditionsSearch.documentDateValidFrom">
-      <span>{{item.ratingEdition.part.documentDateValidFrom| date:'mediumDate'}}</span>
+    <sc-column data="ratingEdition.part.documentDateValidFrom" title="persons.ratingEditionsSearch.documentDateValidFrom" type="date">
     </sc-column>
-    <sc-column data="ratingEdition.part.documentDateValidTo" title="persons.ratingEditionsSearch.documentDateValidTo">
-      <span>{{item.ratingEdition.part.documentDateValidTo| date:'mediumDate'}}</span>
+    <sc-column data="ratingEdition.part.documentDateValidTo" title="persons.ratingEditionsSearch.documentDateValidTo" type="date">
     </sc-column>
-    <sc-column data="firstEditionValidFrom" title="persons.ratingEditionsSearch.firstEditionValidFrom">
-      <span>{{item.firstEditionValidFrom | date:'mediumDate'}}</span>
+    <sc-column data="firstEditionValidFrom" title="persons.ratingEditionsSearch.firstEditionValidFrom" type="date">
     </sc-column>
     <sc-column data="rating.ratingTypeOrRatingLevel.name" title="persons.ratingEditionsSearch.ratingTypeOrRatingLevel">
     </sc-column>

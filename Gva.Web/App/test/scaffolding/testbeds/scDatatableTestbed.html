@@ -53,4 +53,15 @@
       </sc-column>
     </sc-datatable>
   </div>
+
+  <div class="row">
+    <sc-datatable ng-model="documents" sortable="true" pageable="false" dynamic-columns="false" filterable="false">
+      <sc-column data="documentNumber" title="Номер на документ" type="string">
+      </sc-column>
+      <sc-column data="documentDateValidFrom" title="Валиден от" type="date">
+      </sc-column>
+      <sc-column data="documentDateValidTo" title="Валиден до" type="date">
+      </sc-column>
+    </sc-datatable>
+  </div>
 </div>

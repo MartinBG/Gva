@@ -4,8 +4,7 @@
     <gva-button name="editBtn" gva-click="editFlyingExperience(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     <gva-button name="deleteBtn" gva-click="deleteFlyingExperience(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
-  <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate">
-    <span>{{item.part.documentDate | date:'mediumDate'}}</span>
+  <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate" type="date">
   </sc-column>
   <sc-column data="part.period.year" title="persons.flyingExperienceSearch.year">
   </sc-column>

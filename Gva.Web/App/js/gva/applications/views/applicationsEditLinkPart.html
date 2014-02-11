@@ -26,11 +26,9 @@
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentIdSearch.documentNumber">
             </sc-column>
-            <sc-column data="part.documentDateValidFrom" title="persons.documentIdSearch.documentDateValidFrom">
-              <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidFrom" title="persons.documentIdSearch.documentDateValidFrom" type="date">
             </sc-column>
-            <sc-column data="part.documentDateValidTo" title="persons.documentIdSearch.documentDateValidTo">
-              <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidTo" title="persons.documentIdSearch.documentDateValidTo" type="date">
             </sc-column>
             <sc-column data="part.valid.name" title="persons.documentIdSearch.valid">
             </sc-column>
@@ -48,8 +46,7 @@
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
             </sc-column>
-            <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate">
-              <span>{{item.part.completionDate | date:'mediumDate'}}</span>
+            <sc-column data="part.completionDate" title="persons.documentEducationSearch.completionDate" type="date">
             </sc-column>
             <sc-column data="part.speciality" title="persons.documentEducationSearch.speciality">
             </sc-column>
@@ -69,8 +66,7 @@
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
             </sc-column>
-            <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="string">
-              <span>{{item.part.hiredate | date:'mediumDate'}}</span>
+            <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="date">
             </sc-column>
             <sc-column data="part.employmentCategory.name" title="persons.employmentSearch.employmentCategory" type="string">
             </sc-column>
@@ -98,11 +94,9 @@
             </sc-column>
             <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
             </sc-column>
-            <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom">
-              <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
             </sc-column>
-            <sc-column data="part.documentDateValidTo" title="persons.medicalSearch.documentDateValidTo">
-              <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidTo" title="persons.medicalSearch.documentDateValidTo" type="date">
             </sc-column>
             <sc-column data="part.medClassType.name" title="persons.medicalSearch.medClass">
             </sc-column>
@@ -128,11 +122,9 @@
             </sc-column>
             <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
             </sc-column>
-            <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom">
-              <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom" type="date">
             </sc-column>
-            <sc-column data="part.documentDateValidTo" title="persons.checkSearch.documentDateValidTo">
-              <span>{{item.part.documentDateValidTo | date:'mediumDate'}}</span>
+            <sc-column data="part.documentDateValidTo" title="persons.checkSearch.documentDateValidTo" type="date">
             </sc-column>
             <sc-column data="part.documentPublisher" title="persons.checkSearch.documentPublisher">
             </sc-column>
