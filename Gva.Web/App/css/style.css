@@ -171,6 +171,11 @@ i.tree-image-close
   color: #b94a48;
 }
 
+div.labeless.has-error
+{
+  margin-top: 0px !important;
+}
+
 form.card input.form-control[disabled]
 {
   cursor: auto;

@@ -1,0 +1,163 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'fortunes' ]
+2 info using npm@1.3.21
+3 info using node@v0.10.24
+4 verbose cache add [ 'fortunes', null ]
+5 verbose cache add name=undefined spec="fortunes" args=["fortunes",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'fortunes',
+6 verbose parsed url   path: 'fortunes',
+6 verbose parsed url   href: 'fortunes' }
+7 silly lockFile ddb5b361-fortunes fortunes
+8 verbose lock fortunes C:\Users\Nasko\AppData\Roaming\npm-cache\ddb5b361-fortunes.lock
+9 silly lockFile ddb5b361-fortunes fortunes
+10 silly lockFile ddb5b361-fortunes fortunes
+11 verbose addNamed [ 'fortunes', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 4a459b3f-fortunes fortunes@
+14 verbose lock fortunes@ C:\Users\Nasko\AppData\Roaming\npm-cache\4a459b3f-fortunes.lock
+15 silly addNameRange { name: 'fortunes', range: '*', hasData: false }
+16 verbose url raw fortunes
+17 verbose url resolving [ 'https://registry.npmjs.org/', './fortunes' ]
+18 verbose url resolved https://registry.npmjs.org/fortunes
+19 info trying registry request attempt 1 at 12:16:36
+20 http GET https://registry.npmjs.org/fortunes
+21 http 200 https://registry.npmjs.org/fortunes
+22 silly registry.get cb [ 200,
+22 silly registry.get   { date: 'Tue, 04 Feb 2014 10:16:48 GMT',
+22 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B)',
+22 silly registry.get     etag: '"7U0NGHLQRUR7GPCRUA7XDDKKV"',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     via: '1.1 varnish',
+22 silly registry.get     'cache-control': 'max-age=1',
+22 silly registry.get     'content-length': '13633',
+22 silly registry.get     'accept-ranges': 'bytes',
+22 silly registry.get     age: '0',
+22 silly registry.get     'x-served-by': 'cache-v37-ASH, cache-fra1235-FRA',
+22 silly registry.get     'x-cache': 'MISS, MISS',
+22 silly registry.get     'x-cache-hits': '0, 0',
+22 silly registry.get     'x-timer': 'S1391509008.591070175,VS0,VS48,VE137,VE183',
+22 silly registry.get     vary: 'Accept',
+22 silly registry.get     'keep-alive': 'timeout=10, max=50',
+22 silly registry.get     connection: 'Keep-Alive' } ]
+23 silly addNameRange number 2 { name: 'fortunes', range: '*', hasData: true }
+24 silly addNameRange versions [ 'fortunes', [ '0.0.2', '0.0.3' ] ]
+25 verbose addNamed [ 'fortunes', '0.0.3' ]
+26 verbose addNamed [ '0.0.3', '0.0.3' ]
+27 silly lockFile e6012fc7-fortunes-0-0-3 fortunes@0.0.3
+28 verbose lock fortunes@0.0.3 C:\Users\Nasko\AppData\Roaming\npm-cache\e6012fc7-fortunes-0-0-3.lock
+29 silly lockFile a4cd664f--org-fortunes-fortunes-0-0-3-tgz https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz
+30 verbose lock https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz C:\Users\Nasko\AppData\Roaming\npm-cache\a4cd664f--org-fortunes-fortunes-0-0-3-tgz.lock
+31 verbose addRemoteTarball [ 'https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz',
+31 verbose addRemoteTarball   'e90a299d4de1d000e7112275ee3d17caca745077' ]
+32 info retry fetch attempt 1 at 12:16:37
+33 verbose fetch to= C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz
+34 http GET https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz
+35 http 200 https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz
+36 verbose tar unpack C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz
+37 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+38 verbose lock tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package C:\Users\Nasko\AppData\Roaming\npm-cache\d8566e1e-97279-0-8736365286167711-package.lock
+39 silly lockFile f1666574-97279-0-8736365286167711-tmp-tgz tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz
+40 verbose lock tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz C:\Users\Nasko\AppData\Roaming\npm-cache\f1666574-97279-0-8736365286167711-tmp-tgz.lock
+41 silly gunzTarPerm modes [ '755', '644' ]
+42 silly gunzTarPerm extractEntry package.json
+43 silly gunzTarPerm extractEntry README.md
+44 silly gunzTarPerm extractEntry index.js
+45 silly gunzTarPerm extractEntry lib/fortunes.js
+46 silly gunzTarPerm extractEntry test/test.index.js
+47 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+48 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+49 silly lockFile f1666574-97279-0-8736365286167711-tmp-tgz tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz
+50 silly lockFile f1666574-97279-0-8736365286167711-tmp-tgz tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\tmp.tgz
+51 verbose tar pack [ 'C:\\Users\\Nasko\\AppData\\Roaming\\npm-cache\\fortunes\\0.0.3\\package.tgz',
+51 verbose tar pack   'C:\\Users\\Nasko\\AppData\\Local\\Temp\\npm-6452-GLhshEOK\\1391508997279-0.8736365286167711\\package' ]
+52 verbose tarball C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+53 verbose folder C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+54 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+55 verbose lock tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package C:\Users\Nasko\AppData\Roaming\npm-cache\d8566e1e-97279-0-8736365286167711-package.lock
+56 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+57 verbose lock tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz C:\Users\Nasko\AppData\Roaming\npm-cache\ccf88211-cache-fortunes-0-0-3-package-tgz.lock
+58 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+59 silly lockFile d8566e1e-97279-0-8736365286167711-package tar://C:\Users\Nasko\AppData\Local\Temp\npm-6452-GLhshEOK\1391508997279-0.8736365286167711\package
+60 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+61 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+62 silly lockFile 32747f71-npm-cache-fortunes-0-0-3-package C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+63 verbose lock C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package C:\Users\Nasko\AppData\Roaming\npm-cache\32747f71-npm-cache-fortunes-0-0-3-package.lock
+64 silly lockFile 32747f71-npm-cache-fortunes-0-0-3-package C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+65 silly lockFile 32747f71-npm-cache-fortunes-0-0-3-package C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+66 verbose tar unpack C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+67 silly lockFile 411a08f8-npm-cache-fortunes-0-0-3-package tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+68 verbose lock tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package C:\Users\Nasko\AppData\Roaming\npm-cache\411a08f8-npm-cache-fortunes-0-0-3-package.lock
+69 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+70 verbose lock tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz C:\Users\Nasko\AppData\Roaming\npm-cache\ccf88211-cache-fortunes-0-0-3-package-tgz.lock
+71 silly gunzTarPerm modes [ '755', '644' ]
+72 silly gunzTarPerm extractEntry package.json
+73 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+74 silly gunzTarPerm extractEntry README.md
+75 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+76 silly gunzTarPerm extractEntry index.js
+77 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+78 silly gunzTarPerm extractEntry lib/fortunes.js
+79 silly gunzTarPerm modified mode [ 'lib/fortunes.js', 438, 420 ]
+80 silly gunzTarPerm extractEntry test/test.index.js
+81 silly gunzTarPerm modified mode [ 'test/test.index.js', 438, 420 ]
+82 silly lockFile 411a08f8-npm-cache-fortunes-0-0-3-package tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+83 silly lockFile 411a08f8-npm-cache-fortunes-0-0-3-package tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package
+84 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+85 silly lockFile ccf88211-cache-fortunes-0-0-3-package-tgz tar://C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+86 verbose chmod C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz 644
+87 silly chown skipping for windows C:\Users\Nasko\AppData\Roaming\npm-cache\fortunes\0.0.3\package.tgz
+88 silly lockFile a4cd664f--org-fortunes-fortunes-0-0-3-tgz https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz
+89 silly lockFile a4cd664f--org-fortunes-fortunes-0-0-3-tgz https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz
+90 silly lockFile e6012fc7-fortunes-0-0-3 fortunes@0.0.3
+91 silly lockFile e6012fc7-fortunes-0-0-3 fortunes@0.0.3
+92 silly lockFile 4a459b3f-fortunes fortunes@
+93 silly lockFile 4a459b3f-fortunes fortunes@
+94 silly resolved [ { name: 'fortunes',
+94 silly resolved     version: '0.0.3',
+94 silly resolved     description: 'Interface to the fortunes installed on Ubuntu.',
+94 silly resolved     license: 'MIT',
+94 silly resolved     main: 'index.js',
+94 silly resolved     author: { name: 'Kurt Symanzik', email: 'kurt@kbsymanzik.org' },
+94 silly resolved     keywords: [ 'fortune', 'fortunes' ],
+94 silly resolved     engines: { node: '*' },
+94 silly resolved     dependencies: { underscore: '*' },
+94 silly resolved     devDependencies: { mocha: '*', should: '*', underscore: '*' },
+94 silly resolved     os: [ 'linux' ],
+94 silly resolved     private: false,
+94 silly resolved     repository: { type: 'git', url: 'git@github.com:kbsymanz/fortunes.git' },
+94 silly resolved     readme: '# Fortunes\n\n_Interface to the fortune package installed on Linux (tested against Ubuntu 12.04)._\n\nProvides a simple interface to the fortune program and data in Linux. Allows for searching for fortunes based upon:\n\n- search term\n- short fortunes or not\n- specific categories\n\nAlso allows the maximum number of fortunes returned to be specified.\n\n## Prerequisites\n\nThe fortune program needs to be installed in order for this module to work because this module uses spawn to run the fortune program in order to get the data.\n\nOn Ubuntu, you install it like this:\n\n    sudo apt-get install fortune-mod\n\n## Installation\n\n    npm install fortunes\n\n## Usage\n\n    var fortunes = require(\'fortunes\');\n    var options = {\n        isShort: true,\n        max: 5,\n        term: \'men\',\n        categories: [\'computers\', \'love\', \'people\']\n    };\n    fortunes.search(function(results) {\n        // default options are used\n    });\n    fortunes.search(options, function(results) {\n        // do something with the results which are an array of strings\n    });\n    fortunes.random(function(fortune) {\n        // default options, only one result (string) is returned\n    });\n    fortunes.random(options, function(fortune) {\n        // options specified but still only one result (string) is returned\n    });\n\n## API\n\n### search\n\nParameters:\n\n- options: optional object specifying search options.\n- callback: non-optional callback.\n\nValid options are:\n\n- term: the word to search for (case-insensitive search using white-space delimiter)\n- max: the maximum number of fortunes to return\n- isShort: whether only short fortunes are returned. "Short" is based upon the fortune program implementation (Ubuntu Linux fortune-mod package is 160 characters maximum).\n- categories: an array of strings corresponding to the fortune categories to use. These correspond to the various files in the fortune data directory.\n\nDefault options are:\n\n- term: \'\'\n- max: 10\n- isShort: false\n- categories: [] (which means all categories)\n\n### random\n\nThe ```random()``` function is sugar for the ```search()``` function. Parameters and valid options are the same as for search with the exception that max is always 1 and cannot be over-ridden.\n\nNote that an array is not returned for ```random()```. Instead, a string containing the one fortune is returned.\n\n## Testing\n\n    mocha test/test.index.js\n\n## Purpose\n\nI personally needed a module that would provide me data for some other testing of some client-side applications. Using fortunes seemed like a reasonably interesting idea with lots of data to search and use. Your mileage may vary.\n\n## Future\n\nThe current implementation uses spawn to interface with the fortune program which means that the fortune program needs to be installed as a prerequisite. I don\'t have any plans to change this right now because it meets my needs and it was the path of least resistance. But it would be nice to not have this dependency.\n\n## License\n\nThe MIT License (MIT)\n\nCopyright (c) 2013 Kurt Symanzik <kurt@kbsymanzik.org>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n\n',
+94 silly resolved     readmeFilename: 'README.md',
+94 silly resolved     bugs: { url: 'https://github.com/kbsymanz/fortunes/issues' },
+94 silly resolved     homepage: 'https://github.com/kbsymanz/fortunes',
+94 silly resolved     _id: 'fortunes@0.0.3',
+94 silly resolved     dist: { shasum: 'fe9ff15f13c6a73697fee5988e542e7d27ecc9e2' },
+94 silly resolved     _from: 'fortunes@',
+94 silly resolved     _resolved: 'https://registry.npmjs.org/fortunes/-/fortunes-0.0.3.tgz' } ]
+95 info install fortunes@0.0.3 into C:\Users\Nasko\AppData\Roaming\npm
+96 info installOne fortunes@0.0.3
+97 error notsup Unsupported
+97 error notsup Not compatible with your operating system or architecture: fortunes@0.0.3
+97 error notsup Valid OS:    linux
+97 error notsup Valid Arch:  any
+97 error notsup Actual OS:   win32
+97 error notsup Actual Arch: x64
+98 error System Windows_NT 6.2.9200
+99 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "fortunes"
+100 error cwd d:\Projects\gva\Gva.Web\App
+101 error node -v v0.10.24
+102 error npm -v 1.3.21
+103 error code EBADPLATFORM
+104 verbose exit [ 1, true ]

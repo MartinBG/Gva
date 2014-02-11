@@ -17,7 +17,10 @@
         ratings: 'A 300/310, /NAT-OTS MNPS',
         organization: _(p.personDocumentEmployments).pluck('part')
           .where(function (e) { return e.valid.alias === 'true'; })
-          .pluck('organization').pluck('name').first()
+          .pluck('organization').pluck('name').first(),
+        employment: _(p.personDocumentEmployments).pluck('part')
+          .where(function (e) { return e.valid.alias === 'true'; })
+          .pluck('employmentCategory').pluck('name').first()
       };
     }
 

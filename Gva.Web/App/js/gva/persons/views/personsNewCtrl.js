@@ -3,12 +3,7 @@
   'use strict';
 
   function PersonsNewCtrl($scope, $state, Person) {
-
-
-
-
     $scope.save = function () {
-
       $scope.newPersonForm.$validate()
       .then(function () {
         if ($scope.newPersonForm.$valid) {
@@ -18,11 +13,6 @@
             });
         }
       });
-
-      //return Person.save($scope.newPerson).$promise
-      //.then(function () {
-      //  return $state.go('persons.search');
-      //});
     };
 
     $scope.cancel = function () {

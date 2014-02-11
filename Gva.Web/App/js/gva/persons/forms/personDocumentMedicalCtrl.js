@@ -4,7 +4,7 @@
 
   function PersonDocumentMedicalCtrl($scope) {
     var nomenclatures = require('./nomenclatures.sample');
-    $scope.limitationsTypes = nomenclatures.medicalLimitationTypes.map(function (limitation) {
+    $scope.limitationsTypes = nomenclatures.medicalLimitations.map(function (limitation) {
       limitation.text = limitation.name;
       limitation.id = limitation.nomTypeValueId;
       return limitation;

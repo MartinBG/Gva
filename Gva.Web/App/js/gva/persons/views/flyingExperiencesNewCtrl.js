@@ -6,7 +6,6 @@
     $scope.isEdit = false;
 
     $scope.save = function () {
-      $scope.personFlyingExperienceForm.saveIsClicked = true;
       $scope.personFlyingExperienceForm.$validate()
         .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {

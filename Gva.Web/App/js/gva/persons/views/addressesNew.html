@@ -1,13 +1,11 @@
-﻿<div>
-  <ng-form name="newAddressForm">
+﻿<ng-form name="newAddressForm">
 
-    <gva-person-address name="personAddressForm" ng-model="personAddress.part"></gva-person-address>
+  <gva-person-address name="personAddressForm" ng-model="personAddress.part"></gva-person-address>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newAddressForm.$pristine"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.newAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newAddressForm.$pristine"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

@@ -9,8 +9,8 @@
       hiredate: '2013-09-20T00:00',
       valid: nomenclatures.get('boolean', 'true'),
       organization: nomenclatures.get('organizations', 'AAK Progres'),
-      employmentCategory: nomenclatures.get('employmentCategories', 'First officer'),
-      country: nomenclatures.get('countries', 'Bulgaria'),
+      employmentCategory: nomenclatures.get('employmentCategories', '35'),
+      country: nomenclatures.get('countries', 'KWI'),
       notes: '',
       bookPageNumber: '1',
       pageCount: 1
@@ -19,8 +19,8 @@
       hiredate: '2010-04-21T00:00',
       valid: nomenclatures.get('boolean', 'true'),
       organization: nomenclatures.get('organizations', 'Wizz Air'),
-      employmentCategory: nomenclatures.get('employmentCategories', 'First officer'),
-      country: nomenclatures.get('countries', 'Bulgaria'),
+      employmentCategory: nomenclatures.get('employmentCategories', '35'),
+      country: nomenclatures.get('countries', 'KWI'),
       notes: '',
       bookPageNumber: '1',
       pageCount: 1
@@ -29,8 +29,8 @@
       hiredate: '2011-05-15T00:00',
       valid: nomenclatures.get('boolean', 'true'),
       organization: nomenclatures.get('organizations', 'Fly Emirates'),
-      employmentCategory: nomenclatures.get('employmentCategories', 'First officer'),
-      country: nomenclatures.get('countries', 'Bulgaria'),
+      employmentCategory: nomenclatures.get('employmentCategories', '35'),
+      country: nomenclatures.get('countries', 'KWI'),
       notes: '',
       bookPageNumber: '1',
       pageCount: 1

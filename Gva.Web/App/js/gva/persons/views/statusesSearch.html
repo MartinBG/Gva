@@ -1,5 +1,9 @@
 ﻿<gva-button name="createBtn" gva-click="newStatus()" text="persons.statusSearch.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="statuses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" gva-click="editStatus(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteStatus(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.personStatusType.name" title="persons.statusSearch.personStatusType" type="string">
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.statusSearch.documentNumber" type="string">
@@ -14,9 +18,5 @@
   </sc-column>
   <sc-column data="part.isActive" title="persons.statusSearch.isActive" type="string">
     <span>{{item.part.isActive ? 'Да' : 'Не'}}</span>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" gva-click="editStatus(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" gva-click="deleteStatus(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
 </sc-datatable>

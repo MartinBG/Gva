@@ -1,5 +1,9 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentId()" text="persons.documentIdSearch.newDocumentId" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="documentIds" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentId(item)" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentId(item)" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.documentIdSearch.documentNumber" width="150px">
@@ -18,11 +22,9 @@
   </sc-column>
   <sc-column data="part.pageCount" title="persons.documentIdSearch.pageCount" width="50px">
   </sc-column>
-  <sc-column data="file" title="persons.documentIdSearch.file" width="150px">
-    <span>{{item.file[0].name}}</span>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentId(item)" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentId(item)" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" title="persons.documentIdSearch.file" width="30px">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

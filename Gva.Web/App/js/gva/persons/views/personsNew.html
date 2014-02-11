@@ -1,16 +1,14 @@
-﻿<div>
-  <ng-form name="newPersonForm" sc-validate="{}">
-    <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
+﻿<ng-form name="newPersonForm" sc-validate="{}">
+  <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
 
-    <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+  <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
 
-    <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
+  <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newPerson.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newPersonForm.$pristine"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newPerson.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.newPerson.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newPersonForm.$pristine"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newPerson.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

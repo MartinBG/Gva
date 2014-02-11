@@ -5,8 +5,9 @@
   function DocumentMedicalsSearchCtrl($scope, $state, $stateParams, PersonDocumentMedical) {
     PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
       $scope.medicals = medicals.map(function (medical) {
-        var testimonial = medical.part.documentNumberPrefix + ' ' +
-          medical.part.documentNumber + ' ' +
+        var testimonial = medical.part.documentNumberPrefix + '-' +
+          medical.part.documentNumber + '-' +
+          $scope.$parent.person.lin + '-' +
           medical.part.documentNumberSuffix;
 
         medical.part.testimonial = testimonial;

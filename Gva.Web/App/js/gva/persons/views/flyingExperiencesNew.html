@@ -1,14 +1,12 @@
-﻿<div>
-  <ng-form name="editFlyingExperienceForm">
+﻿<ng-form name="newFlyingExperienceForm">
 
-    <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
+  <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.flyingExperienceNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
-                    ng-disabled="!personFlyingExperienceForm.$dirty"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.flyingExperienceNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.flyingExperienceNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
+                  ng-disabled="personFlyingExperienceForm.$pristine"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.flyingExperienceNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

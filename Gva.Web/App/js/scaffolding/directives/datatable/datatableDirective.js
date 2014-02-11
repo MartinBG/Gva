@@ -125,7 +125,7 @@ Usage <sc-datatable ng-model="data"
             sTitle: l10n.get(column.title) || '',
             mData: dataFunction,
             bSortable: column.sortable === 'false'? false : true,
-            bVisible: column.visible === 'false'? false : true,
+            bVisible: column.visible === 'false' ? false : true,
             sType: column.type || 'string',
             aTargets: [columnIndex++],
             fnCreatedCell: column.createCell,

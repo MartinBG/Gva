@@ -22,13 +22,11 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentId',
-      templateUrl: 'gva/persons/forms/personDocumentId.html',
-      controller: 'PersonDocumentIdCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentId.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEducation',
-      templateUrl: 'gva/persons/forms/personDocumentEducation.html',
-      controller: 'PersonDocumentEducationCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentEducation.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonStatus',
@@ -50,23 +48,19 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEmployment',
-      templateUrl: 'gva/persons/forms/personDocumentEmployment.html',
-      controller: 'PersonDocumentEmploymentCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentEmployment.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentCheck',
-      templateUrl: 'gva/persons/forms/personDocumentCheck.html',
-      controller: 'PersonDocumentCheckCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentCheck.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentTraining',
-      templateUrl: 'gva/persons/forms/personDocumentTraining.html',
-      controller: 'PersonDocumentTrainingCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentTraining.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonFlyingExperience',
-      templateUrl: 'gva/persons/forms/personFlyingExperience.html',
-      controller: 'PersonFlyingExperienceCtrl'
+      templateUrl: 'gva/persons/forms/personFlyingExperience.html'
     });
     scaffoldingProvider.form({
       name: 'gvaRatingEdition',

@@ -3,41 +3,41 @@
     <div class="panel-heading"><strong l10n-text="persons.personDataDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.firstName.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.firstName.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.firstName"></label>
           <span name="firstNameValidationSpan" ng-show="form.firstName.$invalid && form.$validated && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.firstName.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.firstName" name="firstName" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.middleName.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.middleName.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.middleName"></label>
           <span name="middleNameValidationSpan" ng-show="form.middleName.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.middleName.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.middleName" name="middleName" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.lastName.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.lastName.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.lastName"></label>
           <span name="lastNameValidationSpan" ng-show="form.lastName.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.lastName.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.lastName" name="lastName" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.firstNameAlt.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.firstNameAlt.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.firstNameAlt"></label>
           <span name="firstNameAltValidationSpan" ng-show="form.firstNameAlt.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.firstNameAlt.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.firstNameAlt" name="firstNameAlt" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.middleNameAlt.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.middleNameAlt.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.middleNameAlt"></label>
           <span name="middleNameAltValidationSpan" ng-show="form.middleNameAlt.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.middleNameAlt.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.middleNameAlt" name="middleNameAlt" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.$validated && form.lastNameAlt.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.lastNameAlt.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.lastNameAlt"></label>
           <span name="lastNameAltValidationSpan" ng-show="form.lastNameAlt.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.lastNameAlt.$error.required && 'Задължително поле'}}"></span>
           <sc-text ng-model="model.lastNameAlt" name="lastNameAlt" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3" ng-class="{'has-error': form.lin.$error.unique && !form.lin.$error.$pending || (form.$validated && form.lin.$invalid), 'has-warning': form.lin.$error.$pending}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.lin.$error.unique && !form.lin.$error.$pending || (form.$validated && form.lin.$invalid), 'has-warning': form.lin.$error.$pending}">
           <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
           <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
           <span name="linValidationSpan" ng-show="form.lin.$error.unique && !form.lin.$error.$pending || (form.$validated && form.lin.$invalid)" class="glyphicon glyphicon-warning-sign" title="{{form.lin.$error.required && 'Задължително поле' || form.lin.$error.unique && 'Невалиден ЛИН'}}"></span>
@@ -48,61 +48,61 @@
             </span>
           </span>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>
           <sc-text ng-model="model.uin"></sc-text>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.$validated && form.sex.$invalid}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.sex.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
           <span name="sexValidationSpan" ng-show="form.sex.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.sex.$error.required && 'Задължително поле'}}"></span>
-          <sc-nomenclature  ng-model="model.sex" name="sex" alias="'sex'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.$validated && form.dateOfBirth.$invalid}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.dateOfBirth.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.dateOfBirth"></label>
           <span name="dateOfBirthValidationSpan" ng-show="form.dateOfBirth.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.dateOfBirth.$error.required && 'Задължително поле'}}"></span>
           <sc-date ng-model="model.dateOfBirth" name="dateOfBirth" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.$validated && form.placeOfBirth.$invalid}">
+        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.placeOfBirth.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.placeOfBirth"></label>
           <span name="placeOfBirthValidationSpan" ng-show="form.placeOfBirth.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.placeOfBirth.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.placeOfBirth" name="placeOfBirth" alias="'cities'" load="false" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.$validated && form.country.$invalid}">
+        <div class="form-group col-sm-4 col-md-3" ng-class="{'has-error': form.$validated && form.country.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.country"></label>
           <span name="countryValidationSpan" ng-show="form.country.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.country.$error.required && 'Задължително поле'}}"></span>
           <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" load="false" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-4" ng-class="{'has-error': form.$validated && form.email.$invalid}">
+        <div class="form-group col-sm-6 col-md-4" ng-class="{'has-error': form.$validated && form.email.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.email"></label>
           <span name="emailValidationSpan" ng-show="form.email.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.email.$error.pattern && 'Невалиден E-mail'}}"></span>
           <sc-text ng-model="model.email" ng-pattern='/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z.]{2,5}$/' name="email"></sc-text>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6 col-md-4">
           <label class="control-label" l10n-text="persons.personDataDirective.fax"></label>
           <sc-text ng-model="model.fax"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personDataDirective.phones"></label>
           <sc-text ng-model="model.phone2"></sc-text>
         </div>
-        <div class="form-group col-sm-2 labeless">
+        <div class="form-group col-sm-3 col-md-2 labeless">
           <sc-text ng-model="model.phone3"></sc-text>
         </div>
-        <div class="form-group col-sm-2 labeless">
+        <div class="form-group col-sm-3 col-md-2 labeless">
           <sc-text ng-model="model.phone4"></sc-text>
         </div>
-        <div class="form-group col-sm-2 labeless">
+        <div class="form-group col-sm-3 col-md-2 labeless">
           <sc-text ng-model="model.phone5"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personDataDirective.companyPhone"></label>
           <sc-text ng-model="model.phone1"></sc-text>
         </div>

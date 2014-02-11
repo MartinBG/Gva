@@ -1,8 +1,14 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentCheck()" text="persons.checkSearch.newCheck" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
+  <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
+  </sc-column>
+  <sc-column data="part.personCheckDocumentRole.name" title="persons.checkSearch.personCheckDocumentRole">
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom">
     <span>{{item.part.documentDateValidFrom | date:'mediumDate'}}</span>
@@ -14,25 +20,23 @@
   </sc-column>
   <sc-column data="part.ratingType.name" title="persons.checkSearch.ratingType">
   </sc-column>
+  <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
+  </sc-column>
   <sc-column data="part.authorization.name" title="persons.checkSearch.authorization">
   </sc-column>
   <sc-column data="part.licenceType.name" title="persons.checkSearch.licenceType">
   </sc-column>
-  <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
-  </sc-column>
-  <sc-column data="part.personCheckDocumentRole.name" title="persons.checkSearch.personCheckDocumentRole">
-  </sc-column>
   <sc-column data="part.valid.name" title="persons.checkSearch.valid">
+  </sc-column>
+  <sc-column data="part.personCheckRatingValue.name" title="persons.checkSearch.ratingValue">
   </sc-column>
   <sc-column data="part.bookPageNumber" title="persons.checkSearch.bookPageNumber">
   </sc-column>
   <sc-column data="part.pageCount" title="persons.checkSearch.pageCount">
   </sc-column>
-  <sc-column data="file" title="persons.checkSearch.file">
-    <span>{{item.file[0].name}}</span>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" gva-click="editDocumentCheck(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" gva-click="deleteDocumentCheck(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" title="persons.checkSearch.file" width="30px">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

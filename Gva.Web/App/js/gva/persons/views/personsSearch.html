@@ -1,5 +1,4 @@
 ﻿<div>
-
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
     <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
     <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
@@ -12,11 +11,13 @@
     <sc-button action="add"></sc-button>
   </sc-search>
 
-
   <sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="names" title="persons.search.names" ng-href="/{{id}}" width="200px">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
     <sc-column data="lin" title="persons.search.lin" width="60px">
+    </sc-column>
+    <sc-column data="names" title="persons.search.names" width="200px">
     </sc-column>
     <sc-column data="uin" title="persons.search.uin" width="80px">
     </sc-column>
@@ -27,9 +28,6 @@
     <sc-column data="ratings" title="persons.search.ratings">
     </sc-column>
     <sc-column data="organization" title="persons.search.organization" width="100px">
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell" width="1px">
-      <gva-button name="viewButton" gva-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
     </sc-column>
   </sc-datatable>
 </div>

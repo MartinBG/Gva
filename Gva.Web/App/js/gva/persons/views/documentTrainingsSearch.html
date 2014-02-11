@@ -1,5 +1,9 @@
 ﻿<gva-button name="createBtn" gva-click="newDocumentTraining()" text="persons.documentTrainingSearch.newDocumentTraining" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="documentTrainings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentTraining(item)" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentTraining(item)" icon="glyphicon-remove"></gva-button>
+  </sc-column>
   <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.documentTrainingSearch.documentDateValidFrom">
@@ -12,6 +16,8 @@
   </sc-column>
   <sc-column data="part.ratingType.name" title="persons.documentTrainingSearch.ratingType">
   </sc-column>
+  <sc-column data="part.ratingClass.name" title="persons.documentTrainingSearch.ratingClass">
+  </sc-column>
   <sc-column data="part.authorization.name" title="persons.documentTrainingSearch.authorization">
   </sc-column>
   <sc-column data="part.licenceType.name" title="persons.documentTrainingSearch.licenceType">
@@ -20,8 +26,6 @@
   </sc-column>
   <sc-column data="part.personOtherDocumentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole">
   </sc-column>
-  <sc-column data="part.notes" title="persons.documentTrainingSearch.notes" visible="false">
-  </sc-column>
   <sc-column data="part.valid" title="persons.documentTrainingSearch.valid">
     <span>{{item.part.valid.name}}</span>
   </sc-column>
@@ -29,11 +33,9 @@
   </sc-column>
   <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
   </sc-column>
-  <sc-column data="file" title="persons.documentTrainingSearch.file">
-    <span>{{item.file[0].name}}</span>
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentTraining(item)" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentTraining(item)" icon="glyphicon-remove"></gva-button>
+  <sc-column sortable="false" title="persons.documentTrainingSearch.file">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

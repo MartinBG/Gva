@@ -1,13 +1,15 @@
 <gva-button name="createBtn" gva-click="newFlyingExperience()" text="persons.flyingExperienceSearch.newFlyingExperience" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
 <sc-datatable ng-model="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-      <sc-column data="part.staffType.name" title="persons.flyingExperienceSearch.staffType">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <gva-button name="editBtn" gva-click="editFlyingExperience(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <gva-button name="deleteBtn" gva-click="deleteFlyingExperience(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
   </sc-column>
   <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate">
     <span>{{item.part.documentDate | date:'mediumDate'}}</span>
   </sc-column>
-  <sc-column data="part.period.month" title="persons.flyingExperienceSearch.month">
-  </sc-column>
   <sc-column data="part.period.year" title="persons.flyingExperienceSearch.year">
+  </sc-column>
+  <sc-column data="part.period.month" title="persons.flyingExperienceSearch.month">
   </sc-column>
   <sc-column data="part.aircraft.name" title="persons.flyingExperienceSearch.aircraft">
   </sc-column>
@@ -15,16 +17,44 @@
   </sc-column>
   <sc-column data="part.ratingClass.name" title="persons.flyingExperienceSearch.ratingClass">
   </sc-column>
-  <sc-column data="part.licenceType.name" title="persons.flyingExperienceSearch.licenceType">
-  </sc-column>
   <sc-column data="part.authorization.name" title="persons.flyingExperienceSearch.authorization">
+  </sc-column>
+  <sc-column data="part.licenceType.name" title="persons.flyingExperienceSearch.licenceType">
   </sc-column>
   <sc-column data="part.experienceRole.name" title="persons.flyingExperienceSearch.experienceRole">
   </sc-column>
   <sc-column data="part.experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" gva-click="editFlyingExperience(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" gva-click="deleteFlyingExperience(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+  <sc-column title="persons.flyingExperienceSearch.dayIFR">
+    <span ng-show="item.part.dayIFR.hours">{{item.part.dayIFR.hours + ':' + item.part.dayIFR.minutes}}</span>
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.dayVFR">
+    <span ng-show="item.part.dayVFR.hours">{{item.part.dayVFR.hours + ':' + item.part.dayVFR.minutes}}</span>
+  </sc-column>
+  <sc-column data="part.dayLandings" title="persons.flyingExperienceSearch.dayLandings">
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.nightIFR">
+    <span ng-show="item.part.nightIFR.hours">{{item.part.nightIFR.hours + ':' + item.part.nightIFR.minutes}}</span>
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.nightVFR">
+    <span ng-show="item.part.nightVFR.hours">{{item.part.nightVFR.hours + ':' + item.part.nightVFR.minutes}}</span>
+  </sc-column>
+  <sc-column data="part.nightLandings" title="persons.flyingExperienceSearch.nightLandings">
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.totalDoc">
+    <span ng-show="item.part.totalDoc.hours">{{item.part.totalDoc.hours + ':' + item.part.totalDoc.minutes}}</span>
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.totalLastMonths">
+    <span ng-show="item.part.totalLastMonths.hours">{{item.part.totalLastMonths.hours + ':' + item.part.totalLastMonths.minutes}}</span>
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.total">
+    <span ng-show="item.part.total.hours">{{item.part.total.hours + ':' + item.part.total.minutes}}</span>
+  </sc-column>
+  <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization">
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.file" width="30px" sortable="false">
+    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

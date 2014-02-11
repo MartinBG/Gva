@@ -46,22 +46,22 @@
   </form>
   <gva-tabs tab-list="{
       'Лицензи': 'persons.licences.search',
-      'Лични данни': {
-        'Адреси': 'persons.addresses.search',
-        'Състояния': 'persons.statuses.search',
-        'Документи за самоличност': 'persons.documentIds.search',
-        'Месторабота': 'persons.employments.search',
-        'Образование': 'persons.documentEducations.search'
-      },
-      'Медицински': 'persons.medicals.search',
       'Квалификации': {
         'Класове': 'persons.ratings.search',
-        'Летателен/практически опит': 'persons.flyingExperiences.search',
+        'Летателен / практически опит': 'persons.flyingExperiences.search',
         'Обучение': 'persons.documentTrainings.search',
         'Проверки': 'persons.checks.search'
        },
-       'Опис': 'persons.inventory'
-       }"></gva-tabs>
+      'Медицински': 'persons.medicals.search',
+      'Лични данни': {
+        'Адреси': 'persons.addresses.search',
+        'Месторабота': 'persons.employments.search',
+        'Образование': 'persons.documentEducations.search',
+        'Документи за самоличност': 'persons.documentIds.search',
+        'Състояния': 'persons.statuses.search'
+      },
+      'Опис': 'persons.inventory'
+    }"></gva-tabs>
   <div class="tab-content">
     <div ui-view="detailView"></div>
     <div class="clear"></div>

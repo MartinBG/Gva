@@ -1,15 +1,13 @@
-﻿<div>
-  <ng-form name="newDocumentEmploymentForm">
+﻿<ng-form name="newDocumentEmploymentForm">
 
-    <gva-person-document-employment name="personDocumentEmploymentForm" ng-model="personDocumentEmployment.part"></gva-person-document-employment>
+  <gva-person-document-employment name="personDocumentEmploymentForm" ng-model="personDocumentEmployment.part"></gva-person-document-employment>
 
-    <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEmployment.file"></gva-person-scanned-document>
+  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEmployment.file"></gva-person-scanned-document>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <gva-button name="saveBtn" gva-click="save()" text="persons.newEmployment.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!newDocumentEmploymentForm.$dirty"></gva-button>
-        <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newEmployment.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <gva-button name="saveBtn" gva-click="save()" text="persons.newEmployment.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!newDocumentEmploymentForm.$dirty"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newEmployment.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>
