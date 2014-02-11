@@ -50,12 +50,12 @@
       };
     }
 
-    function SearchCompile(tElement, tAttrs, transcludeFn) {
+    function SearchCompile(tElement, tAttrs) {
       if (!tAttrs.btnClasses) {
         tAttrs.btnClasses = 'col-sm-3';
       }
 
-      return function ($scope, element, attrs, scSearch) {
+      return function ($scope, element, attrs, scSearch, transcludeFn) {
         transcludeFn($scope.$parent, function (clone) {
           var buttonBlock = element.find('div.btns-block');
 

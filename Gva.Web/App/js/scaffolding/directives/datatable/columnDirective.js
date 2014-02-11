@@ -18,8 +18,8 @@ Usage: <sc-column model-name="property"
       restrict: 'E',
       require: '^scDatatable',
       transclude: true,
-      compile : function(element, attrs, childTranscludeFn){
-        return function(scope, iElement, iAttrs, scDatatable){
+      compile : function (){
+        return function(scope, iElement, iAttrs, scDatatable, childTranscludeFn){
           var tempScope = scope.$new(),
               childContent = childTranscludeFn(tempScope, function () { }),
               hasChildContent = childContent.length > 1,
