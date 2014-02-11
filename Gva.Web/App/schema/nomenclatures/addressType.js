@@ -9,7 +9,7 @@
       content: { "type": "F" }
     },
 		{
-		  nomTypeValueId: 5583, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', nomTypeParentValueId: null, alias: null,
+		  nomTypeValueId: 5583, code: 'PER', name: 'Постоянен адрес', nameAlt: 'Постоянен адрес', nomTypeParentValueId: null, alias: 'Permanent',
 		  content: { "type": "P" }
 		},
 		{
@@ -17,7 +17,7 @@
 		  content: { "type": "P" }
 		},
 		{
-		  nomTypeValueId: 5585, code: 'COR', name: 'Адрес за кореспонденция', nameAlt: 'Адрес за кореспонденция', nomTypeParentValueId: null, alias: null,
+		  nomTypeValueId: 5585, code: 'COR', name: 'Адрес за кореспонденция', nameAlt: 'Адрес за кореспонденция', nomTypeParentValueId: null, alias: 'Correspondence',
 		  content: { "type": "P" }
 		},
 		{
