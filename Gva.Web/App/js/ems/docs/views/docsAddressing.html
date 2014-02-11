@@ -1,222 +1,199 @@
-﻿<div>
-  <div class="accordion" id="accordionDocAddressing">
-    <div class="accordion-group" style="border-top: none;">
-      <div id="collapseAddressing" class="accordion-body collapse in">
-        <div class="accordion-inner">
-          <div class="row">
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleFrom">
-              <label>От:</label>
-              <div class="input-group input-group-sm">
-                <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddFrom()">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleTo">
-              <label>До:</label>
-              <div class="input-group input-group-sm">
-                <sc-nomenclature ng-model="doc.docUnitsTo" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddTo()">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleMadeBy">
-              <label>Изготвил:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleImportedBy">
-              <label>Въвел:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleCCopy">
-              <label>Копие до:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-6" ng-show="doc.isVisibleCorrespondent">
-              <label>Кореспонденти:</label>
-              <div class="input-group input-group-sm">
-                <sc-nomenclature  ng-model="doc.docCorrespondents" alias="'corrs'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="chooseCorr(item)">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-           <div class="row" ng-show="doc.isVisibleCorrespondent">
-            <div class="form-group col-md-4">
-              <label>Коресп. №:</label>
-              <sc-text name="corrRegNumber" ng-model="doc.corrRegNumber" ng-readonly="!inEditMode"></sc-text>
-            </div>
-
-            <div class="form-group col-md-2">
-              <label>Дата:</label>
-              <sc-date name="corrRegDate" ng-model="doc.corrRegDate" ng-readonly="!inEditMode"></sc-date>
-            </div>
-
-            <div class="form-group col-md-3" ng-show="doc.isVisibleDocSourceTypeId">
-              <label>Получено чрез:</label>
-              <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
-            </div>
-
-            <div class="form-group col-md-3" ng-show="doc.isVisibleDocDestinationTypeId">
-              <label>Изпратено чрез:</label>
-              <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
-            </div>
-          </div>
-
-        </div>
-      </div>
+﻿<div class="row">
+  <div class="form-group col-md-6" ng-show="doc.isVisibleRoleFrom">
+    <label class="control-label" l10n-text="docs.edit.addressing.docUnitsFrom"></label>
+    <div class="input-group input-group-sm">
+      <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddFrom()">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
     </div>
-
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseAssignment">Възлагане
-        </a>
-      </div>
-      <div id="collapseAssignment" class="accordion-body collapse" ng-class="{in: doc.isVisibleCollapseAssignment}">
-        <div class="accordion-inner">
-          <div class="row">
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleInCharge">
-              <label>Отговорник:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-6" ng-show="doc.isVisibleRoleControlling">
-              <label>Контролиращ:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row" ng-show="doc.isVisibleAssignment">
-            <div class="form-group col-md-3">
-              <label>Вид възлагане:</label>
-              <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
-            </div>
-
-            <div class="form-group col-md-2">
-              <label>Дата на възлагане:</label>
-              <sc-date name="assignmentDate" ng-model="doc.assignmentDate" ng-readonly="!inEditMode"></sc-date>
-            </div>
-
-            <div class="form-group col-md-2">
-              <label>Срок до:</label>
-              <sc-date name="assignmentDeadline" ng-model="doc.assignmentDeadline" ng-readonly="!inEditMode"></sc-date>
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
+  <div class="form-group col-md-6" ng-show="doc.isVisibleRoleTo">
+    <label class="control-label" l10n-text="docs.edit.addressing.docUnitsTo"></label>
+    <div class="input-group input-group-sm">
+      <sc-nomenclature ng-model="doc.docUnitsTo" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddTo()">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
     </div>
-
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapsePermissions">Допълнителни права
-        </a>
-      </div>
-      <div id="collapsePermissions" class="accordion-body collapse" ng-class="{in: doc.isVisibleCollapsePermissions}">
-        <div class="accordion-inner">
-          <div class="row">
-            <div class="form-group col-md-4" ng-show="doc.isVisibleRoleReaders">
-              <label>Читатели:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-4" ng-show="doc.isVisibleRoleEditors">
-              <label>Редактори:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-            <div class="form-group col-md-4" ng-show="doc.isVisibleRoleRegistrators">
-              <label>Регистратори:</label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-readonly="!inEditMode"></sc-text>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-target="#collapseAccessCode">Код за достъп
-        </a>
-      </div>
-      <div id="collapseAccessCode" class="accordion-body collapse in">
-        <div class="accordion-inner">
-          <div class="row">
-            <div class="form-group col-md-3">
-              <sc-text name="accessCode" ng-model="doc.accessCode" readonly></sc-text>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
+
+<div class="row">
+  <div class="form-group col-md-6" ng-show="doc.isVisibleRoleMadeBy">
+    <label class="control-label" l10n-text="docs.edit.addressing.madeBy"></label>
+    <div class="input-group input-group-sm">
+      <sc-text ng-readonly="!inEditMode"></sc-text>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group col-md-6" ng-show="doc.isVisibleRoleImportedBy">
+    <label class="control-label" l10n-text="docs.edit.addressing.importedBy"></label>
+    <div class="input-group input-group-sm">
+      <sc-text ng-readonly="!inEditMode"></sc-text>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-6" ng-show="doc.isVisibleRoleCCopy">
+    <label class="control-label" l10n-text="docs.edit.addressing.cCopy"></label>
+    <div class="input-group input-group-sm">
+      <sc-text ng-readonly="!inEditMode"></sc-text>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group col-md-6" ng-show="doc.isVisibleCorrespondent">
+    <label class="control-label" l10n-text="docs.edit.addressing.docCorrespondents"></label>
+    <div class="input-group input-group-sm">
+      <sc-nomenclature ng-model="doc.docCorrespondents" alias="'corrs'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="chooseCorr(item)">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-show="doc.isVisibleCorrespondent">
+  <div class="form-group col-md-4">
+    <label class="control-label" l10n-text="docs.edit.addressing.corrRegNumber"></label>
+    <sc-text name="corrRegNumber" ng-model="doc.corrRegNumber" ng-readonly="!inEditMode"></sc-text>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label class="control-label" l10n-text="docs.edit.addressing.corrRegDate"></label>
+    <sc-date name="corrRegDate" ng-model="doc.corrRegDate" ng-readonly="!inEditMode"></sc-date>
+  </div>
+
+  <div class="form-group col-md-3" ng-show="doc.isVisibleDocSourceTypeId">
+    <label class="control-label" l10n-text="docs.edit.addressing.docSourceType"></label>
+    <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+  </div>
+
+  <div class="form-group col-md-3" ng-show="doc.isVisibleDocDestinationTypeId">
+    <label class="control-label" l10n-text="docs.edit.addressing.docDestinationType"></label>
+    <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+  </div>
+</div>
+
+<br />
+
+<accordion close-others="false">
+  <accordion-group is-open="doc.isVisibleCollapseAssignment">
+    <accordion-heading>
+        <a l10n-text="docs.edit.addressing.assignment" style="font-size: 12px;"></a> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': doc.isVisibleCollapseAssignment, 'glyphicon-chevron-right': !doc.isVisibleCollapseAssignment}"></i>
+    </accordion-heading>
+    <div class="row" style="padding-left: -5px;">
+      <div class="form-group col-md-6" ng-show="doc.isVisibleRoleInCharge">
+        <label class="control-label" l10n-text="docs.edit.addressing.inCharge"></label>
+        <div class="input-group input-group-sm">
+          <sc-text ng-readonly="!inEditMode"></sc-text>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-6" ng-show="doc.isVisibleRoleControlling">
+        <label class="control-label" l10n-text="docs.edit.addressing.controlling"></label>
+        <div class="input-group input-group-sm">
+          <sc-text ng-readonly="!inEditMode"></sc-text>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-show="doc.isVisibleAssignment">
+      <div class="form-group col-md-3">
+        <label class="control-label" l10n-text="docs.edit.addressing.assignmentType"></label>
+        <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label class="control-label" l10n-text="docs.edit.addressing.assignmentDate"></label>
+        <sc-date name="assignmentDate" ng-model="doc.assignmentDate" ng-readonly="!inEditMode"></sc-date>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label class="control-label" l10n-text="docs.edit.addressing.assignmentDeadline"></label>
+        <sc-date name="assignmentDeadline" ng-model="doc.assignmentDeadline" ng-readonly="!inEditMode"></sc-date>
+      </div>
+    </div>
+  </accordion-group>
+
+  <accordion-group is-open="doc.isVisibleCollapsePermissions" >
+    <accordion-heading>
+        <a l10n-text="docs.edit.addressing.permissions" style="font-size: 12px;"></a> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': doc.isVisibleCollapsePermissions, 'glyphicon-chevron-right': !doc.isVisibleCollapsePermissions}"></i>
+    </accordion-heading>
+    <div class="row">
+      <div class="form-group col-md-4" ng-show="doc.isVisibleRoleReaders">
+        <label class="control-label" l10n-text="docs.edit.addressing.readers"></label>
+        <div class="input-group input-group-sm">
+          <sc-text ng-readonly="!inEditMode"></sc-text>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4" ng-show="doc.isVisibleRoleEditors">
+        <label class="control-label" l10n-text="docs.edit.addressing.editors"></label>
+        <div class="input-group input-group-sm">
+          <sc-text ng-readonly="!inEditMode"></sc-text>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-4" ng-show="doc.isVisibleRoleRegistrators">
+        <label class="control-label" l10n-text="docs.edit.addressing.registrators"></label>
+        <div class="input-group input-group-sm">
+          <sc-text ng-readonly="!inEditMode"></sc-text>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-disabled="!inEditMode">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </accordion-group>
+
+  <accordion-group is-open="true">
+    <accordion-heading>
+        <a l10n-text="docs.edit.addressing.accessCode" style="font-size: 12px;"></a>
+    </accordion-heading>
+    <div class="row">
+    <div class="form-group col-md-3">
+      <sc-text name="accessCode" ng-model="doc.accessCode" readonly></sc-text>
+    </div>
+  </div>
+  </accordion-group>
+</accordion>

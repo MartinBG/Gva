@@ -203,7 +203,8 @@ form.card input.form-control[disabled]
   cursor: pointer;
 }
 
-.accordion
+/*TODO Remove accordion classes*/
+/*.accordion
 {
   margin-bottom: 16px;
 }
@@ -237,7 +238,7 @@ form.card input.form-control[disabled]
 {
   padding: 9px 15px;
   border-top: 1px solid #e5e5e5;
-}
+}*/
 
 /* Initial loader */
 #initial-loader

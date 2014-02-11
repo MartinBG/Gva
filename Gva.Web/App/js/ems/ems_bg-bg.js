@@ -4,6 +4,32 @@
   angular.module('ems').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       docs: {
+        edit: {
+          addressing: {
+            accessCode: 'Код за достъп',
+            permissions: 'Допълнителни права',
+            assignment: 'Възлагане',
+            readers: 'Читатели',
+            editors: 'Редактори',
+            registrators: 'Регистратори',
+            assignmentType: 'Вид възлагане',
+            assignmentDate: 'Дата на възлагане',
+            assignmentDeadline: 'Срок до',
+            controlling: 'Контролиращ',
+            inCharge: 'Отговорник',
+            corrRegNumber: 'Коресп. №',
+            corrRegDate: 'Дата',
+            docSourceType: 'Получено чрез',
+            docDestinationType: 'Изпратено чрез',
+            docCorrespondents: 'Кореспонденти',
+            cCopy: 'Копие до',
+            importedBy: 'Въвел',
+            madeBy: 'Изготвил',
+            docUnitsFrom: 'От',
+            docUnitsTo: 'До'
+          }
+
+        },
         search: {
           fromDate: 'От дата',
           toDate: 'До дата',
