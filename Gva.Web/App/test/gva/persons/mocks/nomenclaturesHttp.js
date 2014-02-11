@@ -80,9 +80,32 @@
 
           return [200, res];
         })
+      .when('GET', '/api/nomenclatures/addressTypes?term&id&type',
+        function ($params, $filter) {
+          var res = nomenclatures.addressTypes;
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+          } else {
+            if ($params.term) {
+              res = $filter('filter')(res, { name: $params.term }, false);
+            }
+          }
+
+          if ($params.type) {
+            res = $filter('filter')(
+              res,
+              function (nom) {
+                return nom.content.type === $params.type;
+              },
+              true);
+          }
+
+          return [200, res];
+        })
       .when('GET',
-          '/api/nomenclatures/:' +
-          'alias?term&parentId&type&id&staffTypeId&parentAlias&nomTypeParentValueId',
+          '/api/nomenclatures/:alias' +
+          '?term&parentId&id&staffTypeId&parentAlias&nomTypeParentValueId',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];
 
@@ -101,15 +124,6 @@
               res = $filter('filter')(
                 res,
                 { nomTypeParentValueId: parseInt($params.nomTypeParentValueId, 10) },
-                true);
-            }
-
-            if ($params.type) {
-              res = $filter('filter')(
-                res,
-                function (nom) {
-                  return nom.content.type === $params.type;
-                },
                 true);
             }
 
