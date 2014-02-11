@@ -8,7 +8,7 @@
     });
 
     $scope.editDocumentId = function (documentId) {
-      return $state.go('persons.documentIds.edit',
+      return $state.go('root.persons.view.documentIds.edit',
         {
           id: $stateParams.id,
           ind: documentId.partIndex
@@ -23,7 +23,7 @@
     };
 
     $scope.newDocumentId = function () {
-      return $state.go('persons.documentIds.new');
+      return $state.go('root.persons.view.documentIds.new');
     };
   }
 

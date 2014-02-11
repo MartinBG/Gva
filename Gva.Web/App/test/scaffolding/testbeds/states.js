@@ -4,88 +4,14 @@
   'use strict';
   angular.module('scaffolding').config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state({
-        name: 'scaffoldingTestbed',
-        parent: 'root',
-        url: '/test',
-        'abstract': true
-      })
-      .state({
-        name: 'scaffoldingTestbed/input',
-        parent: 'scaffoldingTestbed',
-        url: '/input',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scInputTestbed.html',
-            controller: 'ScInputTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/select',
-        parent: 'scaffoldingTestbed',
-        url: '/select',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scSelectTestbed.html',
-            controller: 'ScSelectTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/nomenclature',
-        parent: 'scaffoldingTestbed',
-        url: '/nom',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scNomenclatureTestbed.html',
-            controller: 'ScNomenclatureTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/search',
-        parent: 'scaffoldingTestbed',
-        url: '/search',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scSearchTestbed.html',
-            controller: 'ScSearchTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/files',
-        parent: 'scaffoldingTestbed',
-        url: '/files',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scFilesTestbed.html',
-            controller: 'ScFilesTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/datatable',
-        parent: 'scaffoldingTestbed',
-        url: '/datatable',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scDatatableTestbed.html',
-            controller: 'ScDatatableTestbedCtrl'
-          }
-        }
-      })
-      .state({
-        name: 'scaffoldingTestbed/promiseState',
-        parent: 'scaffoldingTestbed',
-        url: '/promise',
-        views: {
-          'pageView@root': {
-            templateUrl: '../test/scaffolding/testbeds/scPromiseStateTestbed.html',
-            controller: 'ScPromiseStateTestbedCtrl'
-          }
-        }
-      });
+      .state(['root.scaffoldingTestbed'             , '/test'                                                                                                        ])
+      .state(['root.scaffoldingTestbed.input'       , '/input'    , ['@root', '../test/scaffolding/testbeds/scInputTestbed.html'       , 'ScInputTestbedCtrl'       ]])
+      .state(['root.scaffoldingTestbed.select'      , '/select'   , ['@root', '../test/scaffolding/testbeds/scSelectTestbed.html'      , 'ScSelectTestbedCtrl'      ]])
+      .state(['root.scaffoldingTestbed.nomenclature', '/nom'      , ['@root', '../test/scaffolding/testbeds/scNomenclatureTestbed.html', 'ScNomenclatureTestbedCtrl']])
+      .state(['root.scaffoldingTestbed.search'      , '/search'   , ['@root', '../test/scaffolding/testbeds/scSearchTestbed.html'      , 'ScSearchTestbedCtrl'      ]])
+      .state(['root.scaffoldingTestbed.files'       , '/files'    , ['@root', '../test/scaffolding/testbeds/scFilesTestbed.html'       , 'ScFilesTestbedCtrl'       ]])
+      .state(['root.scaffoldingTestbed.datatable'   , '/datatable', ['@root', '../test/scaffolding/testbeds/scDatatableTestbed.html'   , 'ScDatatableTestbedCtrl'   ]])
+      .state(['root.scaffoldingTestbed.promiseState', '/promise'  , ['@root', '../test/scaffolding/testbeds/scPromiseStateTestbed.html', 'ScPromiseStateTestbedCtrl']])
+      .state(['root.scaffoldingTestbed.button'      , '/button'   , ['@root', '../test/gva/directives/testbeds/gvaButtonTestbed.html'  , 'GvaButtonTestbedCtrl'     ]]);
   }]);
 }(angular));

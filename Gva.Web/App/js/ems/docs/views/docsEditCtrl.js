@@ -48,11 +48,11 @@
     };
 
     $scope.chooseCorr = function () {
-      return $state.go('docs/edit/chooseCorr');
+      return $state.go('root.docs.edit.chooseCorr');
     };
 
     $scope.chooseUnit = function () {
-      return $state.go('docs/edit/chooseUnit');
+      return $state.go('root.docs.edit.chooseUnit');
     };
 
     $scope.save = function () {
@@ -66,7 +66,7 @@
     };
 
     $scope.attachNewDoc = function () {
-      $state.go('docs/new', { parentDocId: $scope.doc.docId });
+      $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
     };
 
     $scope.attachDoc = function (docTypeId) {
@@ -89,7 +89,7 @@
       };
 
       Doc.save(newDoc).$promise.then(function (savedDoc) {
-        $state.go('docs/edit/addressing', { docId: savedDoc.docId });
+        $state.go('root.docs.edit.addressing', { docId: savedDoc.docId });
       });
 
     };

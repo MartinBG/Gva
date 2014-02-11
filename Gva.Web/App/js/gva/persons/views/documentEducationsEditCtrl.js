@@ -18,14 +18,14 @@
               { id: $stateParams.id, ind: $stateParams.ind },
               $scope.personDocumentEducation).$promise
               .then(function () {
-                return $state.go('persons.documentEducations.search');
+                return $state.go('root.persons.view.documentEducations.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.documentEducations.search');
+      return $state.go('root.persons.view.documentEducations.search');
     };
   }
 

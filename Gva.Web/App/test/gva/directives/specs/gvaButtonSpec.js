@@ -6,7 +6,7 @@
     var ptor = protractor.getInstance();
 
     beforeEach(function () {
-      ptor.get('#/test/button');
+      ptor.get('#/test/gvabutton');
     });
 
     it('should execute the specified action when the button is clicked.', function () {

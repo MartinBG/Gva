@@ -13,7 +13,7 @@
       $scope.documentData.currentDocId = docId;
       $scope.documentData.docPartType = null;
 
-      return $state.go('applications/edit/newfile');
+      return $state.go('root.applications.edit.newfile');
     };
 
     $scope.linkPart = function (docId, docFile) {
@@ -22,38 +22,38 @@
       $scope.documentData.currentDocId = docId;
       $scope.documentData.docPartType = null;
 
-      return $state.go('applications/edit/linkpart');
+      return $state.go('root.applications.edit.linkpart');
     };
 
     $scope.newfile = function (docCase) {
       $scope.documentData.docPartType = null;
       $scope.documentData.currentDocId = docCase.docInfo.docId;
-      return $state.go('applications/edit/newfile');
+      return $state.go('root.applications.edit.newfile');
     };
 
     $scope.viewPart = function (docCase) {
       var path = '';
 
       if (docCase.appFile.setPartAlias === 'DocumentId') {
-        path = 'persons.documentIds.edit';
+        path = 'root.persons.view.documentIds.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentEducation') {
-        path = 'persons.documentEducations.edit';
+        path = 'root.persons.view.documentEducations.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentEmployment') {
-        path = 'persons.employments.edit';
+        path = 'root.persons.view.employments.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentMed') {
-        path = 'persons.medicals.edit';
+        path = 'root.persons.view.medicals.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentCheck') {
-        path = 'persons.checks.edit';
+        path = 'root.persons.view.checks.edit';
       }
       //else if (docCase.setPartId === 6) {
-      //path = 'persons.documentIds.edit';
+      //path = 'root.persons.view.documentIds.edit';
       //}
       //else if (docCase.setPartId === 7) {
-      //path = 'persons.documentIds.edit';
+      //path = 'root.persons.view.documentIds.edit';
       //}
 
       return $state.go(path, {
@@ -63,7 +63,7 @@
     };
 
     $scope.viewDoc = function (docId) {
-      return $state.go('docs/edit/addressing', { docId: docId });
+      return $state.go('root.docs.edit.addressing', { docId: docId });
     };
   }
 

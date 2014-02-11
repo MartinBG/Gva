@@ -10,14 +10,14 @@
             return PersonDocumentMedical
               .save({ id: $stateParams.id }, $scope.personDocumentMedical).$promise
               .then(function () {
-                return $state.go('persons.medicals.search');
+                return $state.go('root.persons.view.medicals.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.medicals.search');
+      return $state.go('root.persons.view.medicals.search');
     };
   }
 

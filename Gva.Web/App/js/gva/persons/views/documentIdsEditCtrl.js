@@ -17,14 +17,14 @@
               .save({ id: $stateParams.id }, $scope.personDocumentId)
               .$promise
               .then(function () {
-                return $state.go('persons.documentIds.search');
+                return $state.go('root.persons.view.documentIds.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.documentIds.search');
+      return $state.go('root.persons.view.documentIds.search');
     };
   }
 

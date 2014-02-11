@@ -92,12 +92,12 @@
 
           if (mode === 'register') {
             Doc.registerNew($scope.doc).$promise.then(function (result) {
-              $state.go('docs/search', { docIds: result.docIds.join(',')});
+              $state.go('root.docs.search', { docIds: result.docIds.join(',')});
             });
           }
           else if (mode === 'create') {
             Doc.createNew($scope.doc).$promise.then(function (result) {
-              $state.go('docs/edit/addressing', { docId: result.docId });
+              $state.go('root.docs.edit.addressing', { docId: result.docId });
             });
           }
         }
@@ -115,10 +115,10 @@
 
     $scope.cancel = function () {
       if ($scope.isChild) {
-        $state.go('docs/edit/addressing', { docId: $stateParams.parentDocId });
+        $state.go('root.docs.edit.addressing', { docId: $stateParams.parentDocId });
       }
       else {
-        $state.go('docs/search');
+        $state.go('root.docs.search');
       }
     };
   }

@@ -17,14 +17,14 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentMedical)
               .$promise
               .then(function () {
-                return $state.go('persons.medicals.search');
+                return $state.go('root.persons.view.medicals.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.medicals.search');
+      return $state.go('root.persons.view.medicals.search');
     };
   }
 

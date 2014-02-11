@@ -4,7 +4,7 @@
 
   function PersonApplicationCtrl($scope, $state) {
     $scope.viewApplication = function (id) {
-      return $state.transitionTo('applications/edit/case', { id: id }, { reload: true });
+      return $state.transitionTo('root.applications.edit.case', { id: id }, { reload: true });
     };
   }
 

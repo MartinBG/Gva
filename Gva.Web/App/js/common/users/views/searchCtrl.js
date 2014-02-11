@@ -14,11 +14,11 @@
     });
 
     $scope.newUser = function () {
-      $state.go('users.new');
+      $state.go('root.users.new');
     };
 
     $scope.search = function () {
-      $state.go('users.search', {
+      $state.go('root.users.search', {
         username: $scope.filters.username,
         fullname: $scope.filters.fullname,
         showActive: $scope.filters.showActive && $scope.filters.showActive.id
@@ -44,7 +44,7 @@
     });
 
     $scope.editUser = function (user) {
-      $state.go('users.edit', { userId: user.userId });
+      $state.go('root.users.edit', { userId: user.userId });
     };
   }
 

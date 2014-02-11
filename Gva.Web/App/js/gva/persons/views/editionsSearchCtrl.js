@@ -34,7 +34,7 @@
     });
     
     $scope.editEdition = function (item) {
-      return $state.go('persons.editions.edit', {
+      return $state.go('root.persons.view.editions.edit', {
         id: $stateParams.id,
         ind: $stateParams.ind,
         childInd: item.ratingEdition.partIndex
@@ -53,7 +53,7 @@
         });
     };
     $scope.newEdition = function () {
-      return $state.go('persons.editions.new');
+      return $state.go('root.persons.view.editions.new');
     };
   }
 

@@ -9,7 +9,7 @@
 
     $scope.editFlyingExperience = function (flyingExperience) {
       return $state.go(
-        'persons.flyingExperiences.edit',
+        'root.persons.view.flyingExperiences.edit',
         { id: $stateParams.id, ind: flyingExperience.partIndex }
       );
     };
@@ -22,7 +22,7 @@
     };
 
     $scope.newFlyingExperience = function () {
-      return $state.go('persons.flyingExperiences.new');
+      return $state.go('root.persons.view.flyingExperiences.new');
     };
   }
 

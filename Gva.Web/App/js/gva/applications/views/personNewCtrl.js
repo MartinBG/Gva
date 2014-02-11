@@ -28,11 +28,11 @@
 
     function goToPreviousState() {
       var previousState;
-      if ($state.$current.parent.self.name === 'applications/new') {
-        previousState = 'applications/new/doc';
+      if ($state.$current.parent.self.name === 'root.applications.new') {
+        previousState = 'root.applications.new.doc';
       }
-      else if ($state.$current.parent.self.name === 'applications/link') {
-        previousState = 'applications/link/common';
+      else if ($state.$current.parent.self.name === 'root.applications.link') {
+        previousState = 'root.applications.link.common';
       }
 
       return $state.go(previousState);

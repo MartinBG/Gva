@@ -15,11 +15,11 @@
     });
 
     $scope.newCorr = function () {
-      $state.go('corrs/new');
+      $state.go('root.corrs.new');
     };
 
     $scope.search = function () {
-      $state.go('corrs/search', {
+      $state.go('root.corrs.search', {
         displayName: $scope.filters.displayName,
         email: $scope.filters.email
       });
@@ -37,7 +37,7 @@
     });
 
     $scope.editCorr = function (corr) {
-      $state.go('corrs/edit', { corrId: corr.corrId });
+      $state.go('root.corrs.edit', { corrId: corr.corrId });
     };
   }
 

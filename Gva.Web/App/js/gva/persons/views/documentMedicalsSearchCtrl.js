@@ -24,7 +24,10 @@
     });
 
     $scope.editDocumentMedical = function (medical) {
-      return $state.go('persons.medicals.edit', { id: $stateParams.id, ind: medical.partIndex });
+      return $state.go('root.persons.view.medicals.edit', {
+        id: $stateParams.id,
+        ind: medical.partIndex
+      });
     };
 
     $scope.deleteDocumentMedical = function (medical) {
@@ -35,7 +38,7 @@
     };
 
     $scope.newDocumentMedical = function () {
-      return $state.go('persons.medicals.new');
+      return $state.go('root.persons.view.medicals.new');
     };
 
   }

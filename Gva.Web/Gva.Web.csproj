@@ -132,6 +132,7 @@
   <ItemGroup>
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
+    <Content Include="App\js\boot.js" />
     <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
     <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\chooseUnitView.html" />

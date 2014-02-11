@@ -8,14 +8,14 @@
     $stateParams
     ) {
     $scope.cancel = function () {
-      return $state.transitionTo('applications/edit/case', $stateParams, { reload: true });
+      return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
 
     $scope.addPart = function () {
       $scope.addDocPartType.$validate()
         .then(function () {
           if ($scope.addDocPartType.$valid) {
-            return $state.go('applications/edit/addpart');
+            return $state.go('root.applications.edit.addpart');
           }
         });
     };

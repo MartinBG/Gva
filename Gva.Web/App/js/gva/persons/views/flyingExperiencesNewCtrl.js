@@ -13,14 +13,14 @@
               .save({ id: $stateParams.id }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
-                return $state.go('persons.flyingExperiences.search');
+                return $state.go('root.persons.view.flyingExperiences.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.flyingExperiences.search');
+      return $state.go('root.persons.view.flyingExperiences.search');
     };
   }
 

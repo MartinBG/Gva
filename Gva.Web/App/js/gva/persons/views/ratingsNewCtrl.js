@@ -10,14 +10,14 @@
           return PersonRating
             .save({ id: $stateParams.id }, $scope.model).$promise
             .then(function () {
-              return $state.go('persons.ratings.search');
+              return $state.go('root.persons.view.ratings.search');
             });
         }
       });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.ratings.search');
+      return $state.go('root.persons.view.ratings.search');
     };
   }
 

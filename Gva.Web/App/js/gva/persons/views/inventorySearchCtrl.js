@@ -19,19 +19,19 @@
       var state;
 
       if (item.documentType === 'education') {
-        state = 'persons.documentEducations.edit';
+        state = 'root.persons.view.documentEducations.edit';
       }
       else if (item.documentType === 'documentId') {
-        state = 'persons.documentIds.edit';
+        state = 'root.persons.view.documentIds.edit';
       }
       else if (item.documentType === 'training') {
-        state = 'persons.documentTrainings.edit';
+        state = 'root.persons.view.documentTrainings.edit';
       }
       else if (item.documentType === 'medical') {
-        state = 'persons.medicals.edit';
+        state = 'root.persons.view.medicals.edit';
       }
       else if (item.documentType === 'check') {
-        state = 'persons.checks.edit';
+        state = 'root.persons.view.checks.edit';
       }
 
       $state.go(state, { ind: item.partIndex });

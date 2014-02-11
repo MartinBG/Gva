@@ -9,14 +9,14 @@
         if ($scope.newPersonForm.$valid) {
           return Person.save($scope.newPerson).$promise
             .then(function () {
-              return $state.go('persons.search');
+              return $state.go('root.persons.search');
             });
         }
       });
     };
 
     $scope.cancel = function () {
-      return $state.go('persons.search');
+      return $state.go('root.persons.search');
     };
   }
 

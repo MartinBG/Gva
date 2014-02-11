@@ -20,7 +20,7 @@
     });
 
     $scope.search = function () {
-      $state.go('docs/edit/chooseCorr', {
+      $state.go('root.docs.edit.chooseCorr', {
         displayName: $scope.filters.displayName,
         email: $scope.filters.email
       });
@@ -47,12 +47,12 @@
       //todo return function
       $scope.doc.docCorrespondents.push(nomItem);
       //todo goto previous state
-      $state.go('docs/edit/addressing');
+      $state.go('root.docs.edit.addressing');
     };
 
     $scope.goBack = function () {
       //todo goto previous state
-      $state.go('docs/edit/addressing');
+      $state.go('root.docs.edit.addressing');
     };
 
   }

@@ -8,7 +8,10 @@
     });
 
     $scope.editAddress = function (address) {
-      return $state.go('persons.addresses.edit', { id: $stateParams.id, ind: address.partIndex });
+      return $state.go('root.persons.view.addresses.edit', {
+        id: $stateParams.id,
+        ind: address.partIndex
+      });
     };
 
     $scope.deleteAddress = function (address) {
@@ -19,7 +22,7 @@
     };
 
     $scope.newAddress = function () {
-      return $state.go('persons.addresses.new');
+      return $state.go('root.persons.view.addresses.new');
     };
   }
 

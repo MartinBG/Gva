@@ -1,29 +1,21 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
-  function BreadcrumbBarCtrl($scope, $state, navigationConfig) {
+  function BreadcrumbBarCtrl($scope, $state, l10n, navigationConfig) {
     $scope.getBreadcrumbBarStates = function(state) {
       var states = [];
 
-      var lastState = state;
-      while (lastState) {
-        if (lastState.title) {
+      while (state) {
+        var title = l10n.states[state.self.name];
+        if (title) {
           states.push({
-            url: $state.href(lastState),
-            title: lastState.title
+            url: $state.href(state.self),
+            title: title
           });
         }
 
-        if (!lastState.parent){
-          break;
-        }
-
-        if (_.isString(lastState.parent)) {
-          lastState = $state.get(lastState.parent);
-        } else {
-          lastState = lastState.parent;
-        }
+        state = state.parent;
       }
 
       states.reverse();
@@ -35,15 +27,14 @@
     $scope.rootUrl = $state.href(navigationConfig.breadcrumbBarHomeState);
 
     if ($scope.showBreadcrumbBar) {
-      $scope.breadcrumbBarStates = $scope.getBreadcrumbBarStates($state.current);
-      $scope.$on('$stateChangeSuccess',
-        function(event, toState){
-          $scope.breadcrumbBarStates = $scope.getBreadcrumbBarStates(toState);
-        });
+      $scope.breadcrumbBarStates = $scope.getBreadcrumbBarStates($state.$current);
+      $scope.$on('$stateChangeSuccess', function(){
+        $scope.breadcrumbBarStates = $scope.getBreadcrumbBarStates($state.$current);
+      });
     }
   }
 
-  BreadcrumbBarCtrl.$inject = [ '$scope', '$state', 'NavigationConfig'];
+  BreadcrumbBarCtrl.$inject = ['$scope', '$state', 'l10n', 'NavigationConfig'];
 
   angular.module('common').controller('BreadcrumbBarCtrl', BreadcrumbBarCtrl);
-}(angular, _));
+}(angular));

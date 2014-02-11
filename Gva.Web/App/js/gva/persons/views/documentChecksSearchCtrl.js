@@ -8,7 +8,10 @@
     });
 
     $scope.editDocumentCheck = function (check) {
-      return $state.go('persons.checks.edit', { id: $stateParams.id, ind: check.partIndex });
+      return $state.go('root.persons.view.checks.edit', {
+        id: $stateParams.id,
+        ind: check.partIndex
+      });
     };
 
     $scope.deleteDocumentCheck = function (check) {
@@ -19,7 +22,7 @@
     };
 
     $scope.newDocumentCheck = function () {
-      return $state.go('persons.checks.new');
+      return $state.go('root.persons.view.checks.new');
     };
   }
 

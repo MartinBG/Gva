@@ -18,14 +18,14 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentCheck)
               .$promise
               .then(function () {
-                return $state.go('persons.checks.search');
+                return $state.go('root.persons.view.checks.search');
               });
           }
         });
       };
 
     $scope.cancel = function () {
-      return $state.go('persons.checks.search');
+      return $state.go('root.persons.view.checks.search');
     };
   }
 

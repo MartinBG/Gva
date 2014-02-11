@@ -87,6 +87,22 @@
           save: 'Запис',
           cancel: 'Отказ'
         }
+      },
+      states: {
+        'root.docs': 'Документи',
+        'root.docs.new': 'Нов документ',
+        'root.docs.edit': 'Редакция',
+        'root.docs.edit.addressing': 'Адресати',
+        'root.docs.edit.chooseCorr': 'Избор кореспондент',
+        'root.docs.edit.chooseUnit': 'Избор служител',
+        'root.docs.edit.content': 'Прикачени файлове',
+        'root.docs.edit.workflows': 'Управление',
+        'root.docs.edit.stages': 'Етапи',
+        'root.docs.edit.case': 'Преписка',
+        'root.docs.edit.classifications': 'Класификация',
+        'root.corrs': 'Кореспонденти',
+        'root.corrs.new': 'Нов кореспондент',
+        'root.corrs.edit': 'Редакция'
       }
     });
   }]);
