@@ -25,6 +25,8 @@ Usage <sc-datatable ng-model="data"
 
       link: function (scope, iElement, iAttrs, ngModel) {
         var table,
+            select2,
+            resizeTimeout,
             filterable = scope.filterable() === undefined? true : scope.filterable(),
             pageable = scope.pageable() === undefined? true : scope.pageable(),
             sortable = scope.sortable() === undefined? true : scope.sortable(),
@@ -58,14 +60,6 @@ Usage <sc-datatable ng-model="data"
                 aoColumnDefs: scope.aoColumnDefs,
                 sDom: '<<"span4"l><"span4"f>>t' +
                     '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
-                fnPreDrawCallback: function() {
-                  angular.element('.dataTables_length select')
-                    .addClass('input-sm')
-                    .select2({
-                      width: '50px',
-                      minimumResultsForSearch: -1
-                    });
-                },
                 oLanguage: {
                   sInfo: l10n.get('scaffolding.scDatatable.info'),
                   sLengthMenu: l10n.get('scaffolding.scDatatable.displayRecords'),
@@ -84,11 +78,18 @@ Usage <sc-datatable ng-model="data"
                 sScrollX: '100%'
               });
 
-              $timeout(function () {
+              resizeTimeout = $timeout(function () {
+                select2 = iElement
+                  .find('.dataTables_length select')
+                  .addClass('input-sm')
+                  .select2({
+                    width: '50px',
+                    minimumResultsForSearch: -1
+                  });
                 iElement.show();
                 table.css('width', '100%');
                 table.fnAdjustColumnSizing();
-              });
+              }, 0, false);
             } else {
               table.fnClearTable(false);
 
@@ -96,14 +97,31 @@ Usage <sc-datatable ng-model="data"
                 table.fnAddData(obj, false);
               });
 
-              $timeout(function () {
+              resizeTimeout = $timeout(function () {
                 table.fnAdjustColumnSizing();
-              });
+              }, 0, false);
             }
           };
+
+          // Make sure datatable is destroyed and removed.
+          // Can't use scope.on('$destroy',..) as it is fired 
+          // after the element has been removed from the dom
+          // and jQuery have already cleared its '.data()'
+          // which is required for select2 to properly dispose
+          iElement.bind('$destroy', function onDestroyDatatable() {
+            if (resizeTimeout) {
+              $timeout.cancel(resizeTimeout);
+            }
+            if (select2) {
+              select2.select2('destroy');
+            }
+            if (table) {
+              table.fnDestroy();
+            }
+          });
         }
       },
-      controller: function ($scope) {
+      controller: function ScDatatableController($scope) {
         var columnIndex = 0;
         $scope.sortingData = [];
         $scope.aoColumnDefs = [];

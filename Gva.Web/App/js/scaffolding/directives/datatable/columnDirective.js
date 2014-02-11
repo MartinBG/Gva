@@ -20,17 +20,20 @@ Usage: <sc-column model-name="property"
       transclude: true,
       compile : function(element, attrs, childTranscludeFn){
         return function(scope, iElement, iAttrs, scDatatable){
-          var tempScope = scope.$new();
-          var hasChildContent = childTranscludeFn(tempScope, function () { }).length > 1;
+          var tempScope = scope.$new(),
+              childContent = childTranscludeFn(tempScope, function () { }),
+              hasChildContent = childContent.length > 1,
+              createCellFunc;
+          childContent.remove();
           tempScope.$destroy();
 
-          var createCellFunc;
           if (hasChildContent) {
             createCellFunc = function(nTd, sData, oData){
-              var childScope = scope.$new();
+              var childScope = scope.$new(),
+                  clone = childTranscludeFn(childScope, function(){ });
+
               childScope.data = sData;
               childScope.item = oData;
-              var clone = childTranscludeFn(childScope, function(){ });
 
               angular.element(nTd).empty();
               angular.element(nTd).append(clone);
