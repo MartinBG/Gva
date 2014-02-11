@@ -91,12 +91,7 @@
 
     boolean: require('./boolean'),
 
-    //Номенклатура Полове
-    sex: [
-      { nomTypeValueId: 1, code: 'M', name: 'Мъж', nameAlt: 'Male', alias: 'male' },
-      { nomTypeValueId: 2, code: 'W', name: 'Жена', nameAlt: 'Female', alias: 'female' },
-      { nomTypeValueId: 3, code: 'U', name: 'Неизвестен', nameAlt: 'Unknown', alias: 'unknown' }
-    ],
+    gender: require('./gender'),
 
     cities: require('./city'),
 
@@ -158,7 +153,6 @@
 
     employmentCategories: require('./employmentCategory'),
 
-    //Номенклатура Типове състояния на Физичеко лице
     personStatusTypes: require('./personStatusType'),
 
     medDocPublishers: require('./medDocPublisher'),

@@ -50,7 +50,7 @@
         <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.sex.$invalid}">
           <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
           <span name="sexValidationSpan" ng-show="form.sex.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.sex.$error.required && 'Задължително поле'}}"></span>
-          <sc-nomenclature ng-model="model.sex" name="sex" alias="'sex'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
