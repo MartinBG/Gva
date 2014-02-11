@@ -7,8 +7,7 @@
 </sc-search>
 
 <sc-datatable ng-model="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column width="100" type="date" data="doc.regDate" title="applications.search.regDate">
-    <span>{{item.doc.regDate | date:'mediumDate'}}</span>
+  <sc-column width="100" type="date" data="doc.regDate" title="applications.search.regDate" type="date">
   </sc-column>
   <sc-column data="doc.regUri" title="applications.search.regUri">
   </sc-column>

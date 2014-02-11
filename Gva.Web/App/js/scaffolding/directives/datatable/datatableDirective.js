@@ -136,7 +136,7 @@ Usage <sc-datatable ng-model="data"
             var parsedExpression = $parse(column.data);
             dataFunction = function (item) {
               if (column.type === 'date') {
-                return $filter('date')(parsedExpression(item), scDatatableConfig.ddmmyyyy);
+                return $filter('date')(parsedExpression(item), scDatatableConfig.format);
               }
               else {
                 return parsedExpression(item);
@@ -167,7 +167,7 @@ Usage <sc-datatable ng-model="data"
 
   angular.module('scaffolding')
     .constant('scDatatableConfig', {
-      ddmmyyyy: 'mediumDate'
+      format: 'mediumDate'
     })
     .directive('scDatatable', DatatableDirective);
 
