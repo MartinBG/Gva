@@ -2,10 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function FlyingExperiencesSearchCtrl($scope, $state, $stateParams, PersonFlyingExperience) {
-    PersonFlyingExperience.query($stateParams).$promise.then(function (flyingExperiences) {
-      $scope.flyingExperiences = flyingExperiences;
-    });
+  function FlyingExperiencesSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonFlyingExperience,
+    flyingExperiences
+  ) {
+    $scope.flyingExperiences = flyingExperiences;
 
     $scope.editFlyingExperience = function (flyingExperience) {
       return $state.go(
@@ -30,8 +34,19 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonFlyingExperience'
+    'PersonFlyingExperience',
+    'flyingExperiences'
   ];
+
+  FlyingExperiencesSearchCtrl.$resolve = {
+    flyingExperiences: [
+      '$stateParams',
+      'PersonFlyingExperience',
+      function ($stateParams, PersonFlyingExperience) {
+        return PersonFlyingExperience.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('FlyingExperiencesSearchCtrl', FlyingExperiencesSearchCtrl);
 }(angular));

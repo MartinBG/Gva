@@ -2,7 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function FlyingExperiencesNewCtrl($scope, $state, $stateParams, PersonFlyingExperience) {
+  function FlyingExperiencesNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonFlyingExperience,
+    personFlyingExperience
+  ) {
+    $scope.personFlyingExperience = personFlyingExperience;
     $scope.isEdit = false;
 
     $scope.save = function () {
@@ -24,7 +31,19 @@
     };
   }
 
-  FlyingExperiencesNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonFlyingExperience'];
+  FlyingExperiencesNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonFlyingExperience',
+    'personFlyingExperience'
+  ];
+
+  FlyingExperiencesNewCtrl.$resolve = {
+    personFlyingExperience: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('FlyingExperiencesNewCtrl', FlyingExperiencesNewCtrl);
 }(angular));
