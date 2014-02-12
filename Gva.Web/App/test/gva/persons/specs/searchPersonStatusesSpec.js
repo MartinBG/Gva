@@ -21,16 +21,15 @@
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
         'part.documentDateValidTo', 'part.notes', 'part.isActive'))
         .toEqual([
-          ['Негоден', '1', '07.10.1912', '24.12.1912', 'note1', 'Не'],
-          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'note2', 'Не'],
-          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'note3', 'Не'],
-          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'note4', 'Да']
+          ['Негоден', '1', '07.10.1912', '24.12.1912', 'Не'],
+          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'Не'],
+          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'Не'],
+          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'Да']
         ]);
     });
 
     it('should delete a status correctly and stay on the same state', function () {
-      var btnSelector = 'tbody tr:first-child td:nth-child(8)';
-      ptor.findElement(protractor.By.css(btnSelector)).click();
+      personStatusesPage.firstDeleteBtn.click();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new Page(ptor);
@@ -39,16 +38,15 @@
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
         'part.documentDateValidTo', 'part.notes', 'part.isActive'))
         .toEqual([
-          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'note2', 'Не'],
-          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'note3', 'Не'],
-          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'note4', 'Да']
+          ['Майчинство', '2', '04.04.1812', '04.05.1812', 'Не'],
+          ['Майчинство', '32', '04.11.1922', '15.12.2012', 'Не'],
+          ['Майчинство', '21', '04.09.2012', '14.05.2812', 'Да']
         ]);
 
     });
 
     it('should go to edit status page', function() {
-      var btnSelector = 'tbody tr:first-child td:nth-child(7)';
-      ptor.findElement(protractor.By.css(btnSelector)).click();
+      personStatusesPage.firstEditBtn.click();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses/4');
     });
 

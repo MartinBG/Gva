@@ -85,7 +85,16 @@
             name: 'testName.pdf',
             relativePath: '../folder1/folder2/'
           }],
-          applications: []
+          applications: [
+            {
+              applicationId: 1,
+              applicationName: 'application1'
+            },
+            {
+              applicationId: 2,
+              applicationName: 'application2'
+            }
+          ]
         },
         {
           partIndex: 11,

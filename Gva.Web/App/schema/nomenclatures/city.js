@@ -4,11 +4,11 @@
 
   module.exports = [
     {
-      nomTypeValueId: 3731, code: '68134', name: 'София', nameAlt: 'Sofia', nomTypeParentValueId: 58, alias: null,
+      nomTypeValueId: 3731, code: '68134', name: 'София', nameAlt: 'Sofia', nomTypeParentValueId: 58, alias: 'Sofia',
       content: { 'type': 'T', 'notes': null, 'postCode': '1000', 'oblCode': 'SOF', 'obstCode': 'SOF46' }
     },
     {
-      nomTypeValueId: 4224, code: '56784', name: 'гр.Пловдив', nameAlt: 'gr.Plovdiv', nomTypeParentValueId: 58, alias: null,
+      nomTypeValueId: 4224, code: '56784', name: 'гр.Пловдив', nameAlt: 'gr.Plovdiv', nomTypeParentValueId: 58, alias: 'Plovdiv',
       content: { 'type': 'T', 'notes': null, 'postCode': null, 'oblCode': 'PDV', 'obstCode': 'PDV22' }
     },
     {

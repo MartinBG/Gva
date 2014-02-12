@@ -3,6 +3,7 @@
   'use strict';
 
   var ScText = require('../../../scaffolding/pageObjects/scText'),
+      ScTextarea = require('../../../scaffolding/pageObjects/scTextarea'),
       ScDate = require('../../../scaffolding/pageObjects/scDate'),
       ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature');
 
@@ -12,10 +13,10 @@
     this.personStatusType = new ScNomenclature('model.personStatusType', context);
     this.documentNumber = new ScText(context.findElement(by.input('model.documentNumber')));
     this.documentDateValidFrom =
-      new ScDate(context.findElement(by.css('div[name=docDateValidFrom]')), context);
+      new ScDate(context.findElement(by.css('div[name=documentDateValidFrom]')), context);
     this.documentDateValidTo =
-      new ScDate(context.findElement(by.css('div[name=docDateValidTo]')), context);
-    this.notes = new ScText(context.findElement(by.input('model.notes')));
+      new ScDate(context.findElement(by.css('div[name=documentDateValidTo]')), context);
+    this.notes = new ScTextarea(context.findElement(by.model('model.notes')));
 
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));

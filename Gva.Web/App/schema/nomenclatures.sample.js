@@ -77,18 +77,6 @@
      { nomTypeValueId: 4, code: '', name: 'Чуждестранно юридическо лице', nameAlt: 'ForeignLegalEntity', alias: 'ForeignLegalEntity' }
     ],
 
-    parentNom: [
-      { nomTypeValueId: 1, code: '', name: 'P1', nameAlt: '', alias: 'P1' },
-      { nomTypeValueId: 2, code: '', name: 'P2', nameAlt: '', alias: 'P2' },
-    ],
-
-    childrenNom: [
-      { nomTypeValueId: 1, code: '', name: 'CH1', nameAlt: '', alias: 'CH1', parentId: 1 },
-      { nomTypeValueId: 2, code: '', name: 'CH2', nameAlt: '', alias: 'CH2', parentId: 1 },
-      { nomTypeValueId: 3, code: '', name: 'CH3', nameAlt: '', alias: 'CH3', parentId: 2 },
-      { nomTypeValueId: 4, code: '', name: 'CH4', nameAlt: '', alias: 'CH4', parentId: 2 }
-    ],
-
     boolean: require('./boolean'),
 
     gender: require('./gender'),

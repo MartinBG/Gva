@@ -305,7 +305,6 @@
     <Content Include="App\js\gva\persons\views\flyingExperiencesSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiencesEdit.html" />
     <Content Include="App\js\gva\persons\views\flyingExperiencesEditCtrl.js" />
-    <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\schema\person-flyingExperience.sample.js" />
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />

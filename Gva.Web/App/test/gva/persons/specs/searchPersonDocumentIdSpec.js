@@ -29,18 +29,29 @@
           'part_pageCount',
           'file'
           )).toEqual([
-        ['Лична карта', '6765432123', '04.04.2010',
-            '04.04.2020',  'МВР София', 'Да', '3', '1', 'testName.pdf']
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1']
       ]);
     });
    
     it('should delete a documentId', function () {
-      personDocumentIdsPage.datatable.getRowButtons(1).then(function (buttons) {
-        buttons[1].click();
-        personDocumentIdsPage = new Page(ptor);
-        expect(personDocumentIdsPage.tableBody.getText())
-        .toEqual('Няма намерени резултати');
-      });
+      personDocumentIdsPage.firstDeleteBtn.click();
+      personDocumentIdsPage = new Page(ptor);
+      expect(personDocumentIdsPage.datatable.getColumns(
+          'part_personDocumentIdType_name',
+          'part_documentNumber',
+          'part_documentDateValidFrom',
+          'part.documentDateValidTo',
+          'part_documentPublisher',
+          'part_valid_name',
+          'part_bookPageNumber',
+          'part_pageCount',
+          'file'
+          )).toEqual([
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1']
+      ]);
     });
 
     it('should go to edit page', function () {

@@ -30,7 +30,7 @@
     });
    
     it('should change address data correctly', function () {
-      editPersonAddressPage.addressType.set('Седалище');
+      editPersonAddressPage.addressType.set('Настоящ адрес');
       editPersonAddressPage.valid.set('Да');
       editPersonAddressPage.settlement.set('София');
       editPersonAddressPage.address.set('ж.к. Драгалевци');
@@ -50,7 +50,7 @@
           'part_phone',
           'part_valid_name'
           )).toEqual([
-          ['Седалище', 'София', 'ж.к. Драгалевци', '1000', '0999212', 'Да'],
+          ['Настоящ адрес', 'София', 'ж.к. Драгалевци', '1000', '0999212', 'Да'],
           ['Адрес за кореспонденция', 'гр.Пловдив','жг.Толстой бл.39 ап.40', '', '', 'Да']
         ]);
     });

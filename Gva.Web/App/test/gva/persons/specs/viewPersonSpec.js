@@ -24,7 +24,7 @@
       expect(personCompany.getAttribute('value')).toEqual('AAK Progres');
 
       expect(personEmplCategory.isEnabled()).toBe(false);
-      expect(personEmplCategory.getAttribute('value')).toEqual('');
+      expect(personEmplCategory.getAttribute('value')).toEqual('Ученик Ръководител Полети');
 
       expect(personUin.isEnabled()).toBe(false);
       expect(personUin.getAttribute('value')).toEqual('7005159385');

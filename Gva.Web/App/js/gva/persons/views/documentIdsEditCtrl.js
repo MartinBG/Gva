@@ -14,7 +14,7 @@
         .then(function () {
           if ($scope.editDocumentIdForm.$valid) {
             return PersonDocumentId
-              .save({ id: $stateParams.id }, $scope.personDocumentId)
+              .save({ id: $stateParams.id, ind: $stateParams.ind}, $scope.personDocumentId)
               .$promise
               .then(function () {
                 return $state.go('root.persons.view.documentIds.search');

@@ -68,7 +68,7 @@
         </li>
         <li ng-repeat="breadcrumbBarState in breadcrumbBarStates" ng-class="{'active': $last}">
           <a ng-show="!$last" ng-href="{{breadcrumbBarState.url}}">{{breadcrumbBarState.title}}</a>
-          <span ng-show="$last"">{{breadcrumbBarState.title}}</span>
+          <span ng-show="$last">{{breadcrumbBarState.title}}</span>
         </li>
       </ul>
     </div>
