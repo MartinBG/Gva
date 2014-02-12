@@ -5,11 +5,10 @@
   exports.config = {
     seleniumServerJar: process.env.SELENIUM_PATH + 'selenium-server-standalone-2.39.0.jar',
     specs: [
-      //'test/common/specs/*.js',
-      //'test/gva/persons/specs/*.js',
-      //'test/gva/directives/specs/*.js',
-      //'test/scaffolding/specs/*.js'
-      'test/gva/persons/specs/editPersonDataSpec.js'
+      'test/common/specs/*.js',
+      'test/gva/persons/specs/*.js',
+      'test/gva/directives/specs/*.js',
+      'test/scaffolding/specs/*.js'
     ],
     baseUrl: 'http://localhost:52560',
     rootElement: 'body',
