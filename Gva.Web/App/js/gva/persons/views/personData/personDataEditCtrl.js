@@ -15,7 +15,7 @@
               .save({ id: $stateParams.id }, $scope.personData)
               .$promise
               .then(function () {
-                return $state.go('root.persons.view');
+                return $state.transitionTo('root.persons.view', $stateParams, { reload: true } );
               });
           }
         });

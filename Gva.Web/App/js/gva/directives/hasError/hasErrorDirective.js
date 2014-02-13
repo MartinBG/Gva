@@ -4,16 +4,16 @@
   'use strict';
 
   function HasErrorDirective() {
-
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        scope.$watchCollection('[form["' + attrs.gvaHasError + '"].$invalid, form.$validated]',
+        scope.$watchCollection('[form["' + attrs.gvaHasError +
+          '"].$invalid, form.$validated, form["' + attrs.gvaHasError + '"].$error.$pending]',
           function (newValue, oldValue) {
             if (newValue === oldValue) {
               return;
             }
-            if (newValue[0] && newValue[1]) {
+            if (newValue[0] && newValue[1] && !newValue[2]) {
               element.addClass('has-error');
             }
             else {

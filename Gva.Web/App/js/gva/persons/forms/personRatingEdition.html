@@ -7,14 +7,14 @@
           <label class="control-label" l10n-text="persons.ratingEditionDirective.inspector"></label>
           <sc-nomenclature alias="'inspectors'" load="true" ng-model="model.inspector"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
+        <div class="form-group col-sm-2" gva-has-error="documentDateValidFrom">
           <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidFrom"></label>
-          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentDateValidFrom" validations="{required: null}"></gva-validation-error>
           <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.documentDateValidTo.$invalid && form.$validated}">
+        <div class="form-group col-sm-2" gva-has-error="documentDateValidTo">
           <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidTo"></label>
-          <span name="documentDateValidToValidationSpan" ng-show="form.$validated && form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentDateValidTo" validations="{required: null}"></gva-validation-error>
           <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-required="true"></sc-date>
         </div>
       </div>
