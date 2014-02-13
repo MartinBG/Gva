@@ -3,6 +3,7 @@
   'use strict';
 
   var Q = require('q'),
+      path = require('path'),
       _ = require('lodash');
 
   function ScFiles(element, context) {
@@ -30,7 +31,7 @@
 
   ScFiles.prototype.addFile = function () {
     return this.context.findElement(by.className('test-file-upload-button')).then(function (elem) {
-      elem.sendKeys(process.env.GVA_PATH + 'Gva.Web\\App\\test\\ptorConf.js');
+      elem.sendKeys(path.join(process.env.GVA_PATH, 'Gva.Web\\App\\test\\ptorConf.js'));
     });
   };
 

@@ -1,7 +1,9 @@
-/*global module, process*/
+/*global module, process, require*/
 /*jshint maxlen: false */
 module.exports = function (grunt) {
   'use strict';
+
+  var path = require('path');
 
   // Project configuration.
   grunt.initConfig({
@@ -228,7 +230,7 @@ module.exports = function (grunt) {
       test_chrome: {
         options: {
           config: {
-            chromeDriver: process.env.SELENIUM_PATH + 'chromedriver',
+            chromeDriver: path.join(process.env.SELENIUM_PATH, 'chromedriver'),
             capabilities: {
               'browserName': 'chrome'
             }
@@ -238,7 +240,7 @@ module.exports = function (grunt) {
       test_ie: {
         options: {
           config: {
-            seleniumArgs: ['-Dwebdriver.ie.driver=' + process.env.SELENIUM_PATH + 'IEDriverServer.exe'],
+            seleniumArgs: ['-Dwebdriver.ie.driver=' + path.join(process.env.SELENIUM_PATH, 'IEDriverServer.exe')],
             capabilities: {
               'browserName': 'internet explorer'
             }
