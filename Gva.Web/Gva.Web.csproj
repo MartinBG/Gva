@@ -299,12 +299,6 @@
     <Content Include="App\schema\person-document-checks.sample.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
     <Content Include="App\js\gva\persons\resources\personFlyingExperience.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesNew.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesNewCtrl.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesSearch.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesSearchCtrl.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesEdit.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsNew.html" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsSearch.html" />

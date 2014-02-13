@@ -53,7 +53,7 @@
             ngModel.$formatters.push(maxValidator);
           }
 
-          element.on('blur', function() {
+          element.on('blur', function onBlurFn() {
             var formatters = ngModel.$formatters,
                 idx = formatters.length,
                 value = ngModel.$modelValue;
@@ -66,6 +66,10 @@
               ngModel.$viewValue = value;
               ngModel.$render();
             }
+          });
+
+          element.bind('$destroy', function () {
+            element.unbind('blur');
           });
         }
       };

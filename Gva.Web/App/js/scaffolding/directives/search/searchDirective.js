@@ -19,7 +19,7 @@
       };
 
       this.initialize = function () {
-        _.forOwn(filters, function(filterScope, filterName) {
+        _.forOwn(filters, function (filterScope, filterName) {
           var dropdownFilter = {
             label: filterScope.label,
             name: filterName,
@@ -56,7 +56,7 @@
       }
 
       return function ($scope, element, attrs, scSearch, transcludeFn) {
-        transcludeFn($scope.$parent, function (clone) {
+        transcludeFn($scope, function (clone) {
           var buttonBlock = element.find('div.btns-block');
 
           angular.forEach(clone, function (elem) {
@@ -65,6 +65,10 @@
             } else {
               buttonBlock.before(elem);
             }
+          });
+
+          $scope.$on('$destroy', function () {
+            clone.remove();
           });
         });
 

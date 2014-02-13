@@ -81,7 +81,7 @@
           }
         });
 
-        scope.$on('$destroy', function () {
+        element.bind('$destroy', function () {
           element.datetimepicker('destroy');
         });
       }
