@@ -12,15 +12,15 @@
             <sc-nomenclature ng-model="documentData.docPartType" name="docPartType" alias="'documentParts'" load="false" ng-required="true"></sc-nomenclature>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-primary btn-sm" ng-click="search()">Преглед на опис</button>
-            <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
+            <gva-button name="cancelSearch" gva-click="search()" l10n-text="Преглед на опис" class="btn btn-sm btn-primary"></gva-button>
+            <gva-button name="cancelBtn" gva-click="cancel()" text="Назад" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></gva-button>
           </div>
         </div>
 
         <div ng-if="showDocumentId && documentData.docPartType.alias === 'DocumentId'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
             </sc-column>
@@ -42,7 +42,7 @@
         <div ng-if="showDocumentEducation && documentData.docPartType.alias === 'DocumentEducation'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
             </sc-column>
@@ -64,7 +64,7 @@
         <div ng-if="showDocumentEmployment && documentData.docPartType.alias === 'DocumentEmployment'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="date">
             </sc-column>
@@ -90,7 +90,7 @@
         <div ng-if="showDocumentMed && documentData.docPartType.alias === 'DocumentMed'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial">
             </sc-column>
@@ -116,7 +116,7 @@
         <div ng-if="showDocumentCheck && documentData.docPartType.alias === 'DocumentCheck'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
             </sc-column>
@@ -150,7 +150,7 @@
         <div ng-if="showDocumentTraining && documentData.docPartType.alias === 'DocumentTraining'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
-              <button type="button" class="btn btn-xs btn-primary" ng-click="linkPart(item)">Избор</button>
+              <gva-button name="selectBtn" gva-click="linkPart(item)" l10n-text="Избор" class="btn btn-xs btn-primary"></gva-button>
             </sc-column>
             <sc-column data="part.documentNumber" title="persons.documentTrainingSearch.documentNumber">
             </sc-column>
@@ -187,7 +187,7 @@
 
       <div ng-if="!documentData.docFiles.length">
         <div class="col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
-          <button type="button" class="btn btn-primary btn-sm" ng-click="cancel()">Назад</button>
+          <gva-button name="cancelBtn" gva-click="cancel()" text="Назад" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></gva-button>
         </div>
       </div>
 

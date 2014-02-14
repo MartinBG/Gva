@@ -6,6 +6,7 @@
     $scope,
     $state
     ) {
+
     $scope.linkNew = function (docId, docFile) {
       $scope.documentData.isLinkNew = true;
       $scope.documentData.docFiles = [];
@@ -49,9 +50,9 @@
       else if (docCase.appFile.setPartAlias === 'DocumentCheck') {
         path = 'root.persons.view.checks.edit';
       }
-      //else if (docCase.setPartId === 6) {
-      //path = 'root.persons.view.documentIds.edit';
-      //}
+      else if (docCase.appFile.setPartAlias === 'DocumentTraining') {
+        path = 'root.persons.view.documentTrainings.edit';
+      }
       //else if (docCase.setPartId === 7) {
       //path = 'root.persons.view.documentIds.edit';
       //}

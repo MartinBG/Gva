@@ -6,13 +6,10 @@
     $stateParams,
     $state,
     $scope,
-    Application
+    Application,
+    application
     ) {
-    //$scope.application = Application.get({ id: $stateParams.id });
-
-    Application.get({ id: $stateParams.id }).$promise.then(function (application) {
-      $scope.application = application;
-    });
+    $scope.application = application;
 
     $scope.documentData = {
       docPartType: null,
@@ -30,8 +27,19 @@
     '$stateParams',
     '$state',
     '$scope',
-    'Application'
+    'Application',
+    'application'
   ];
+
+  ApplicationsEditCtrl.$resolve = {
+    application: [
+      '$stateParams',
+      'Application',
+      function ResolveApplication($stateParams, Application) {
+        return Application.get({ id: $stateParams.id }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ApplicationsEditCtrl', ApplicationsEditCtrl);
 }(angular
