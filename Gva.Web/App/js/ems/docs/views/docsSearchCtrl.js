@@ -2,7 +2,15 @@
 (function (angular, _) {
   'use strict';
 
-  function DocsSearchCtrl($scope, $state, $stateParams, Doc) {
+  function DocsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Doc,
+    docs
+  ) {
+    $scope.docs = docs;
+
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -22,12 +30,8 @@
       }
     });
 
-    Doc.query($stateParams).$promise.then(function (docs) {
-      $scope.docs = docs;
-    });
-
     $scope.search = function () {
-      $state.go('root.docs.search', {
+      return $state.go('root.docs.search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         regUri: $scope.filters.regUri,
@@ -50,7 +54,23 @@
     };
   }
 
-  DocsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc'];
+  DocsSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Doc',
+    'docs'
+  ];
+
+  DocsSearchCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Doc',
+      function ResolveDocs($stateParams, Doc) {
+        return Doc.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('DocsSearchCtrl', DocsSearchCtrl);
 }(angular, _));

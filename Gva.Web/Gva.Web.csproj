@@ -133,10 +133,10 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
-    <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
-    <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
-    <Content Include="App\js\ems\docs\views\chooseUnitView.html" />
-    <Content Include="App\js\ems\docs\views\chooseUnitViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\selectCorrView.html" />
+    <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\selectUnitView.html" />
+    <Content Include="App\js\ems\docs\views\selectUnitViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsClassifications.html" />
     <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />
@@ -299,12 +299,6 @@
     <Content Include="App\schema\person-document-checks.sample.js" />
     <Content Include="App\schema\person-document-med.sample.js" />
     <Content Include="App\js\gva\persons\resources\personFlyingExperience.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesNew.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesNewCtrl.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesSearch.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesSearchCtrl.js" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesEdit.html" />
-    <Content Include="App\js\gva\persons\views\flyingExperiencesEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsNew.html" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\flyingExperiences\flyExpsSearch.html" />

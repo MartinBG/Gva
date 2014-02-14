@@ -5,6 +5,15 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/nomenclatures/units?name',
+        function ($params, $filter) {
+          return [
+            200,
+            $filter('filter')(nomenclatures.units, {
+              name: $params.name
+            })
+          ];
+        })
       .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id',
         function ($params, $filter) {
           var res = nomenclatures.personCheckDocumentRoles;

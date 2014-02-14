@@ -4,9 +4,7 @@
     <div class="input-group input-group-sm">
       <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddFrom()">
-          <i class="glyphicon glyphicon-search"></i>
-        </button>
+        <gva-button gva-click="selectUnitFrom()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></gva-button>
       </span>
     </div>
   </div>
@@ -15,9 +13,7 @@
     <div class="input-group input-group-sm">
       <sc-nomenclature ng-model="doc.docUnitsTo" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="unitAddTo()">
-          <i class="glyphicon glyphicon-search"></i>
-        </button>
+        <gva-button gva-click="selectUnitTo()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></gva-button>
       </span>
     </div>
   </div>
@@ -65,9 +61,7 @@
     <div class="input-group input-group-sm">
       <sc-nomenclature ng-model="doc.docCorrespondents" alias="'corrs'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-disabled="!inEditMode" ng-click="chooseCorr(item)">
-          <i class="glyphicon glyphicon-search"></i>
-        </button>
+        <gva-button gva-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></gva-button>
       </span>
     </div>
   </div>
