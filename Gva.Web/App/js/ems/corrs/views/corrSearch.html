@@ -1,14 +1,14 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="corrs.search.displayName"></sc-filter>
   <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
-  <sc-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-button>
-  <sc-button action="newCorr()" text="corrs.search.new" icon="glyphicon-user"></sc-button>
-  <sc-button action="add"></sc-button>
+  <sc-search-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="newCorr()" text="corrs.search.new" icon="glyphicon-user"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
 <sc-datatable ng-model="corrs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="viewButton" gva-click="editCorr(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <sc-button name="viewButton" btn-click="editCorr(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="displayName" title="corrs.search.displayName">
   </sc-column>

@@ -27,16 +27,16 @@
       </div>
     </div>
     <div class="col-sm-2">
-      <gva-button name="editBtn" gva-click="viewPerson(application.lotId)" text="applications.edit.editPerson" class="btn btn-sm btn-primary pull-right" icon="glyphicon-pencil"></gva-button>
+      <sc-button name="editBtn" btn-click="viewPerson(application.lotId)" text="applications.edit.editPerson" class="btn btn-sm btn-primary pull-right" icon="glyphicon-pencil"></sc-button>
     </div>
   </div>
 </div>
 
-<gva-tabs tab-list="{
+<sc-tabs tab-list="{
 'Преписка': 'root.applications.edit.case',
 'Квалификации': 'root.applications.edit.quals',
 'Лицензи': 'root.applications.edit.licenses'
-}"></gva-tabs>
+}"></sc-tabs>
 
 <div ui-view>
 </div>

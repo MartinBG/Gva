@@ -2,11 +2,11 @@
 (function (protractor, describe, beforeEach, it, expect) {
   'use strict';
 
-  describe('Gva-button directive', function () {
+  describe('scButton directive', function () {
     var ptor = protractor.getInstance();
 
     beforeEach(function () {
-      ptor.get('#/test/gvabutton');
+      ptor.get('#/test/scbutton');
     });
 
     it('should execute the specified action when the button is clicked.', function () {

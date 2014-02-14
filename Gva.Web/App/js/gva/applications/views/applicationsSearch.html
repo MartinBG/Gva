@@ -3,12 +3,12 @@
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="applications.search.toDate"></sc-filter>
   <sc-filter type="text" name="lin" class="col-sm-2" removable="false" label="applications.search.lin"></sc-filter>
   <sc-filter type="text" name="regUri" class="col-sm-2" removable="false" label="applications.search.regUri"></sc-filter>
-  <sc-button action="search()" text="applications.search.search" icon="glyphicon-search"></sc-button>
+  <sc-search-button action="search()" text="applications.search.search" icon="glyphicon-search"></sc-search-button>
 </sc-search>
 
 <sc-datatable ng-model="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="viewButton" gva-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+    <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column width="100" type="date" data="doc.regDate" title="applications.search.regDate">
   </sc-column>

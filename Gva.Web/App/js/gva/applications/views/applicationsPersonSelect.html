@@ -5,9 +5,9 @@
   <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
   <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
   <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
-  <sc-button action="search()" text="applications.personSelect.search" icon="glyphicon-search"></sc-button>
-  <sc-button action="cancel()" text="applications.personSelect.cancel"></sc-button>
-  <sc-button action="add"></sc-button>
+  <sc-search-button action="search()" text="applications.personSelect.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.personSelect.cancel"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
 
@@ -27,6 +27,6 @@
   <sc-column data="organization" title="applications.personSelect.organization">
   </sc-column>
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="viewButton" gva-click="selectPerson(item)" text="applications.personSelect.select" class="btn btn-xs btn-primary"></gva-button>
+    <sc-button name="viewButton" btn-click="choosePerson(item)" text="applications.personSelect.select" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
 </sc-datatable>

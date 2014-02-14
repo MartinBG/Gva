@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function GvaButtonCtrl($scope, $q) {
+  function ScButtonCtrl($scope, $q) {
 
     $scope.promise = null;
     $scope.deferred = null;
@@ -27,7 +27,7 @@
 
   }
 
-  GvaButtonCtrl.$inject = ['$scope', '$q'];
+  ScButtonCtrl.$inject = ['$scope', '$q'];
 
-  angular.module('gva').controller('GvaButtonTestbedCtrl', GvaButtonCtrl);
+  angular.module('scaffolding').controller('ScButtonTestbedCtrl', ScButtonCtrl);
 }(angular));

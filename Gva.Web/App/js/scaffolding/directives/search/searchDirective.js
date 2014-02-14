@@ -56,7 +56,7 @@
       }
 
       return function ($scope, element, attrs, scSearch, transcludeFn) {
-        transcludeFn($scope, function (clone) {
+        transcludeFn($scope.$parent, function (clone) {
           var buttonBlock = element.find('div.btns-block');
 
           angular.forEach(clone, function (elem) {
