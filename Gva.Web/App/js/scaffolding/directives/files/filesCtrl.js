@@ -27,25 +27,64 @@
       });
       modal.result.then(function (files) {
         self.ngModel.$setViewValue(files);
-        self.updateScope(files, $scope);
+        self.updateScope(files, $scope, true);
+      });
+    };
+
+    $scope.openSingleFileModal = function () {
+      var modal = $modal.open({
+        templateUrl: 'scaffolding/directives/files/singleFileModal.html',
+        controller: 'SingleFileModalCtrl',
+        backdrop: 'static',
+        keyboard: false,
+        resolve: {
+          file: function () {
+            return self.ngModel.$viewValue;
+          },
+          isReadonly: function () {
+            return $scope.isReadonly;
+          }
+        }
+      });
+      modal.result.then(function (files) {
+        self.ngModel.$setViewValue(files);
+        self.updateScope(files, $scope, false);
       });
     };
   }
 
-  FilesCtrl.prototype.setNgModelCtrl = function (ngModel) {
+
+
+  FilesCtrl.prototype.setNgModelCtrl = function (ngModel, isMultiple) {
     var self = this;
 
     this.ngModel = ngModel;
     ngModel.$render = function () {
-      self.updateScope(ngModel.$viewValue, self.$scope);
+      self.updateScope(ngModel.$viewValue, self.$scope, isMultiple);
     };
   };
 
-  FilesCtrl.prototype.updateScope = function (files, $scope) {
+  FilesCtrl.prototype.updateScope = function (files, $scope, isMultiple) {
     var self = this;
     $scope.singleFile = false;
     $scope.noFiles = false;
-    if (!files || files.length === 0) {
+    if (!isMultiple) {
+      if (!files) {
+        $scope.noFiles = true;
+        $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFile');
+      }
+      else {
+        $scope.singleFile = true;
+        $scope.fileUrl =
+          self.scFilesConfig.fileUrl + '?' +
+          $.param({
+            'fileKey': files.key,
+            'fileName': files.name
+          });
+        $scope.uploadedFilesText = files.name;
+      }
+    }
+    else if (!files || files.length === 0) {
       $scope.noFiles = true;
       $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFiles');
     } else if (files.length === 1) {

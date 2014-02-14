@@ -6,6 +6,7 @@
 
   function Files(context) {
     this.filesDirective = new ScFiles(context.findElement(by.name('filesDir')), context);
+    this.singleFileDirective = new ScFiles(context.findElement(by.name('fileDir')), context);
     this.multipleFilesBtn = context.findElement(by.name('multipleFilesBtn'));
     this.singleFileBtn = context.findElement(by.name('singleFileBtn'));
     this.singleFileWithDelayBtn = context.findElement(by.name('loadFileWithDelayBtn'));

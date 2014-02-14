@@ -7,11 +7,16 @@
         scFiles: {
           manyFiles: '{{filesCount}} прикачени файла.',
           noFiles: 'Няма прикачени файлове.',
+          noFile: 'Няма прикачен файл.',
           modal: {
-            title: 'Прикачени файлове',
+            titleMultiple: 'Прикачени файлове',
+            titleSingle: 'Прикачен файл',
+            attachSingle: 'Избери файл',
+            attachMultiple: 'Избери файлове',
             accept: 'Запис',
             cancel: 'Отказ',
-            noFilesAttached: 'Няма прикачени файлове'
+            noFilesAttached: 'Няма прикачени файлове',
+            noFileAttached: 'Няма прикачен файл'
           }
         },
         scDatatable: {

@@ -23,9 +23,11 @@
 
       filesPage.selectSingleFile();
       expect(filesPage.filesDirective.get()).toEqual('file1');
+      expect(filesPage.singleFileDirective.get()).toEqual('file1');
 
       filesPage.deselectFiles();
       expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
+      expect(filesPage.singleFileDirective.get()).toEqual('Няма прикачен файл.');
     });
 
     it('should open modal.', function () {

@@ -1,15 +1,15 @@
 ﻿<div class="modal-header">
   <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.titleMultiple"></h3>
+  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.titleSingle"></h3>
 </div>
 <div class="modal-body">
 
-  <span class="btn btn-success fileinput-button"  ng-show="!isUploading && !isReadonly">
+  <span class="btn btn-success fileinput-button" ng-show="!isUploading && !isReadonly && !file">
     <i class="glyphicon glyphicon-plus"></i>
-    <span l10n-text="scaffolding.scFiles.modal.attachMultiple"></span>
-    <input class="test-file-upload-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple>
+    <span l10n-text="scaffolding.scFiles.modal.attachSingle"></span>
+    <input class="test-file-upload-single-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }">
   </span>
-  <div style="margin-bottom: 14px; height: 15px; position: relative;"
+<!--  <div style="margin-bottom: 14px; height: 15px; position: relative;"
     ng-show="isUploading">
     <div class="progress progress-striped" style="margin-bottom: 0; position: absolute; display: inline-block; vertical-align: middle; left: 0; right: 15px">
       <div class="progress-bar" ng-style="{width: (100 * (filesUploaded / (filesLength || 1))) + '%'}">
@@ -21,14 +21,21 @@
       </div>
     </div>
     <i class="glyphicon glyphicon-download test-icon-stop" style="position: absolute; right: 0px" ng-click="stop()"></i>
-  </div>
-  <ul class="tree tree-root" style="margin-top: 15px">
-    <li  class="test-files-root-li" ng-repeat="data in fileHierarchy" ng-include="'scaffolding/directives/files/filesModalTree.html'" ng-class="'scf-' + data.name">
-    </li>
-  </ul>
-  <span class="test-no-files-span" ng-show="!fileHierarchy.length" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFileAttached"></span>
+  </div>-->
+  <div>
+<a ng-show="!file.item.pending" ng-href="{{file.item.url}}" target="_blank">
+  <span class="test-download-link">{{file.name}}
+  </span>
+</a>
+<span class="test-file-name" ng-show="file.item.pending">{{file.name}}
+</span>
+<i class="glyphicon glyphicon-remove-circle tree-image-close"
+  ng-show="file.canRemove && !isReadonly" ng-click="remove()"></i>
+
+<span class="test-no-files-span" ng-show="!file" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFilesAttached"></span>
 
 
+</div>
 
 </div>
 <div class="modal-footer">

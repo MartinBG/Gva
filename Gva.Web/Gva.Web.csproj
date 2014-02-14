@@ -258,6 +258,8 @@
     <Content Include="App\js\gva\persons\views\documentChecksSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\inventorySearch.html" />
     <Content Include="App\js\gva\persons\views\inventorySearchCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\files\singleFileModal.html" />
+    <Content Include="App\js\scaffolding\directives\files\singleFileModalCtrl.js" />
     <Content Include="App\js\scaffolding\directives\textarea\textareaDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding_bg-bg.js" />
     <Content Include="App\schema\nomenclatures\aircraftType.js" />

@@ -27,7 +27,11 @@
             scope.isReadonly = !!iAttrs.readonly;
           });
 
-          filesCtrl.setNgModelCtrl(ngModelCtrl);
+          scope.$watch(function () {
+            scope.isMultiple = 'multiple' in iAttrs;
+          });
+
+          filesCtrl.setNgModelCtrl(ngModelCtrl, 'multiple' in iAttrs);
         }
       };
     });
