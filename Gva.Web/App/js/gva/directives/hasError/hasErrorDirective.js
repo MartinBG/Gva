@@ -8,7 +8,10 @@
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        scope.$watchCollection('[form["' + attrs.gvaHasError + '"].$invalid, form.$validated]',
+        scope.form = element.parents('ng-form').first().controller('form');
+
+        scope.$watchCollection('[form["' + attrs.gvaHasError +
+          '"].$invalid, form.$validated, form["' + attrs.gvaHasError + '"].$error.$pending]',
           function (newValue, oldValue) {
             if (newValue === oldValue) {
               return;

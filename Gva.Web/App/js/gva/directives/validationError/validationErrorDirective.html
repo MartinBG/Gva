@@ -1,1 +1,1 @@
-﻿<span ng-repeat="v in validations" name="{{v.name}}" ng-show="form[fieldName].$error[v.type] && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{v.text}}"></span>
+﻿<span ng-repeat="v in validations" ng-show="!form[fieldName].$error.$pending && form[fieldName].$error[v.type] && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{v.text}}"></span>

@@ -44,8 +44,8 @@
           { text: 'Квалификации', url: '/qualifications' },
           { text: 'Медицински', url: '/medical' },
           { text: 'Заявления', state: 'root.applications.search' },
-          { text: 'Ново заявление', state: 'root.applications.new.doc' },
-          { text: 'Свържи заявление', state: 'root.applications.link.common' }
+          { text: 'Ново заявление', state: 'root.applications.new' },
+          { text: 'Свържи заявление', state: 'root.applications.link' }
         ]})
         .addItem({text: 'ВС', icon: 'glyphicon glyphicon-plane', url: '/aircraft', items: [
           { text: 'Удостоверения', url: '/licences' },

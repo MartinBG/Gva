@@ -91,29 +91,40 @@
       nextCorrContactId = 3;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/corrs',
-        function () {
-          var noms = [],
-            nomItem = {
-              nomTypeValueId: '',
-              name: '',
-              content: []
-            };
+      .when('GET', '/api/nomenclatures/corrs?id',
+       function ($params, $filter) {
 
-          _.forEach(corrs, function (item) {
-            var t = {};
+        var res = _(corrs).map(function (item) {
+          return {
+            nomTypeValueId: item.corrId,
+            name: item.displayName
+          };
+        }).value();
 
-            nomItem.nomTypeValueId = item.corrId;
-            nomItem.name = item.displayName;
-            nomItem.content = item;
-
-            _.assign(t, nomItem, true);
-            noms.push(t);
-          });
-
-          return [200, noms];
+        if ($params.id) {
+          res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
         }
-      )
+
+        return [200, res];
+      })
+      .when('GET', '/api/nomenclatures/persons?id',
+        function ($params, $filter, personLots) {
+
+          var res = _(personLots).map(function (item) {
+            return {
+              nomTypeValueId: item.lotId,
+              name: item.personData.part.firstName + ' ' + item.personData.part.lastName
+            };
+          }).value();
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+          }
+
+          return [200, res];
+        })
+
+
       .when('GET', '/api/corrs?displayName&email',
         function ($params, $filter) {
           return [

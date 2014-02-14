@@ -10,8 +10,8 @@
   </sc-filter>
   <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
   <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
-  <sc-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-button>
-  <sc-button action="cancel()" text="applications.choosePerson.cancel"></sc-button>
+  <sc-button action="search()" text="applications.personSelect.search" icon="glyphicon-search"></sc-button>
+  <sc-button action="cancel()" text="applications.personSelect.cancel"></sc-button>
 </sc-search>
 
 <sc-datatable ng-model="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
@@ -28,6 +28,6 @@
   <sc-column data="correspondentName" title="docs.search.correspondentName">
   </sc-column>
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <button type="button" class="btn btn-xs btn-primary" ng-click="chooseDoc(item)" l10n-text="docs.search.choose"></button>
+    <button type="button" class="btn btn-xs btn-primary" ng-click="selectDoc(item)" l10n-text="docs.search.choose"></button>
   </sc-column>
 </sc-datatable>

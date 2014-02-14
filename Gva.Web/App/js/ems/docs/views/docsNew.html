@@ -21,42 +21,42 @@
       <ng-form name="docForm" sc-validate="{}">
         <div class="well-sm panel-body ">
 
-           <div class="row" ng-show="isChild">
+           <div class="row" ng-show="!!parentDoc">
               <div class="col-md-12">
-                <label>{{parentDocInfo}}</label>
+                <label>{{'Към ' + parentDoc.regUri + ' ' + parentDoc.docTypeName + ' ' + parentDoc.docSubject}}</label>
               </div>
             </div>
 
           <div class="row">
             <div class="form-group col-sm-4">
               <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
-              <sc-text ng-model="doc.caseRegUri" name="caseRegUri" ng-readonly="isChild"></sc-text>
+              <sc-text ng-model="doc.caseRegUri" name="caseRegUri" ng-readonly="!!parentDoc"></sc-text>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && docForm.$validated}">
+            <div class="form-group col-sm-4" gva-has-error="docTypeGroupId">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
-              <span name="docTypeGroupIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
+              <gva-validation-error field-name="docTypeGroupId" validations="{required: null}"></gva-validation-error>
+              <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" ng-required="true"></sc-nomenclature>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeId.$invalid && docForm.$validated}">
+            <div class="form-group col-sm-4" gva-has-error="docTypeId">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
-              <span name="docTypeIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
+              <gva-validation-error field-name="docTypeId" validations="{required: null}"></gva-validation-error>
               <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docSubject.$invalid && docForm.$validated}">
+            <div class="form-group col-sm-4" gva-has-error="docSubject">
               <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
-              <span name="docSubjectValidationSpan" ng-show="docForm.$validated && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
+              <gva-validation-error field-name="docSubject" validations="{required: null}"></gva-validation-error>
               <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
             </div>
             <div class="form-group col-sm-4">
               <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
               <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondents'" load="true" multiple></sc-nomenclature>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.numberOfDocs.$invalid && docForm.$validated}">
+            <div class="form-group col-sm-4" gva-has-error="numberOfDocs">
               <label class="control-label" l10n-text="docs.newDoc.numberOfDocs"></label>
-              <span name="numberOfDocsValidationSpan" ng-show="docForm.$validated && docForm.numberOfDocs.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.numberOfDocs.$error.required && 'Задължително поле' || docForm.numberOfDocs.$error.singleDoc && 'Невалидна стойност'}}"></span>
+              <gva-validation-error field-name="numberOfDocs" validations="{required: null}"></gva-validation-error>
               <sc-int ng-model="doc.numberOfDocs" name="numberOfDocs" required sc-validate="{singleDoc: isNumberOfDocsValid}"></sc-int>
             </div>
           </div>

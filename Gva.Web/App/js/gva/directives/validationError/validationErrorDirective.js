@@ -1,4 +1,4 @@
-﻿// Usage: 
+﻿// Usage:
 //<gva-validation-error field-name="fieldName" validations="{val1:'l10n', val2: null, ...}">
 //</gva-validation-error>
 
