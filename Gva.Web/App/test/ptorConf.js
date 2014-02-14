@@ -2,8 +2,11 @@
 (function (exports, require, global, process) {
   'use strict';
 
+  var path = require('path');
+
   exports.config = {
-    seleniumServerJar: process.env.SELENIUM_PATH + 'selenium-server-standalone-2.39.0.jar',
+    seleniumServerJar:
+      path.join(process.env.SELENIUM_PATH, 'selenium-server-standalone-2.39.0.jar'),
     specs: [
       'test/common/specs/*.js',
       'test/gva/persons/specs/*.js',

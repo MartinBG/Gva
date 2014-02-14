@@ -3,33 +3,33 @@
     <div class="panel-heading"><strong l10n-text="persons.personAddressDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-md-3 col-sm-4" ng-class="{'has-error': form.$validated && form.addressType.$invalid}">
+        <div class="form-group col-md-3 col-sm-4" gva-has-error="addressType">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressType"></label>
-          <span name="addressTypeValidationSpan" ng-show="form.addressType.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.addressType.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="addressType" validations="{required: null}"></gva-validation-error>
           <sc-nomenclature ng-model="model.addressType" name="addressType" alias="'addressTypes'" load="true" params="{ type: 'P' }" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" ng-class="{'has-error': form.$validated && form.valid.$invalid}">
+        <div class="form-group col-sm-2" gva-has-error="valid">
           <label class="control-label" l10n-text="persons.personAddressDirective.valid"></label>
-          <span name="addressValidValidationSpan" ng-show="form.valid.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.valid.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="valid" validations="{required: null}"></gva-validation-error>
           <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4" ng-class="{'has-error': form.$validated && form.address.$invalid}">
+        <div class="form-group col-sm-6 col-md-4" gva-has-error="address">
           <label class="control-label" l10n-text="persons.personAddressDirective.address"></label>
-          <span name="addressValidationSpan" ng-show="form.address.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.address.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="address" validations="{required: null}"></gva-validation-error>
           <sc-text ng-model="model.address" name="address" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-6 col-md-4" ng-class="{'has-error': form.$validated && form.addressAlt.$invalid}">
+        <div class="form-group col-sm-6 col-md-4" gva-has-error="addressAlt">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressAlt"></label>
-          <span name="addressAltValidationSpan" ng-show="form.addressAlt.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.addressAlt.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="addressAlt" validations="{required: null}"></gva-validation-error>
           <sc-text ng-model="model.addressAlt" name="addressAlt" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': form.$validated && form.settlement.$invalid}">
+        <div class="form-group col-sm-3 col-md-2" gva-has-error="settlement">
           <label class="control-label" l10n-text="persons.personAddressDirective.settlement"></label>
-          <span name="settlementValidationSpan" ng-show="form.settlement.$invalid && form.$validated" class="glyphicon glyphicon-warning-sign" title="{{form.settlement.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="settlement" validations="{required: null}"></gva-validation-error>
           <sc-nomenclature ng-model="model.settlement" name="settlement" alias="'cities'" load="true" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3 col-md-2">

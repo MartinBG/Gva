@@ -3,20 +3,16 @@
     <div class="panel-heading"><strong l10n-text="persons.personMedicalDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.documentNumberPrefix.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentNumberPrefix">
           <label class="control-label" l10n-text="persons.personMedicalDirective.testimonial"></label>
-          <span name="documentNumberPrefixValidationSpan" ng-show="form.$validated && form.documentNumberPrefix.$invalid"
-                class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentNumberPrefix.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentNumberPrefix" validations="{required: null}"></gva-validation-error>
           <sc-text ng-model="model.documentNumberPrefix" name="documentNumberPrefix" ng-required="true" ng-init="model.documentNumberPrefix='MED BG'"></sc-text>
         </div>
         <div class="form-group labeless" style="float: left;margin:auto -7px">
           <span>&#8212;</span>
         </div>
-        <div class="form-group col-md-2 col-sm-3 labeless" ng-class="{'has-error': form.documentNumber.$invalid && form.$validated}">
-          <span name="documentNumberValidationSpan" ng-show="form.$validated && form.documentNumber.$invalid"
-                class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentNumber.$error.required && 'Задължително поле'}}"></span>
+        <div class="form-group col-md-2 col-sm-3 labeless" gva-has-error="documentNumber">
+          <gva-validation-error field-name="documentNumber" validations="{required: null}"></gva-validation-error>
           <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
         </div>
         <div class="form-group labeless" style="float: left; margin: auto -7px">
@@ -33,21 +29,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.medClassType.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="medClassType">
           <label class="control-label" l10n-text="persons.personMedicalDirective.medClassType"></label>
-          <span name="medClassTypeValidationSpan" ng-show="form.$validated && form.medClassType.$invalid"
-                class="glyphicon glyphicon-warning-sign"
-                title="{{form.medClassType.$error.required && 'Задължително поле'}}"></span>
-          <sc-nomenclature alias="'medicalClasses'" load="true" name="medClassType" ng-model="model.medClassType" ng-required="true"></sc-nomenclature>
+          <gva-validation-error field-name="medClassType" validations="{required: null}"></gva-validation-error>
+          <sc-nomenclature ng-model="model.medClassType" name="medClassType" alias="'medicalClasses'" load="true" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.documentDateValidFrom.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentDateValidFrom">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidFrom"></label>
-          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentDateValidFrom.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidFrom.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentDateValidFrom" validations="{required: null}"></gva-validation-error>
           <sc-date name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.documentDateValidTo.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentDateValidTo">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidTo"></label>
-          <span name="documentDateValidToValidationSpan" ng-show="form.$validated && form.documentDateValidTo.$invalid" class="glyphicon glyphicon-warning-sign" title="{{form.documentDateValidTo.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentDateValidTo" validations="{required: null}"></gva-validation-error>
           <sc-date name="documentDateValidTo" ng-model="model.documentDateValidTo" ng-required="true"></sc-date>
         </div>
       </div>
@@ -58,10 +52,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-9 col-md-6" ng-class="{'has-error': form.documentPublisher.$invalid && form.$validated}">
+        <div class="form-group col-sm-9 col-md-6" gva-has-error="documentPublisher">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentPublisher"></label>
-          <span name="documentDateValidFromValidationSpan" ng-show="form.$validated && form.documentPublisher.$invalid" class="glyphicon glyphicon-warning-sign"
-                title="{{form.documentPublisher.$error.required && 'Задължително поле'}}"></span>
+          <gva-validation-error field-name="documentPublisher" validations="{required: null}"></gva-validation-error>
           <sc-nomenclature ng-model="model.documentPublisher" name="documentPublisher" alias="'medDocPublishers'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>
@@ -72,17 +65,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.bookPageNumber.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="bookPageNumber">
           <label class="control-label" l10n-text="persons.personMedicalDirective.bookPageNumber"></label>
-          <span name="bookPageNumberValidationSpan" ng-show="form.$validated && form.bookPageNumber.$invalid" class="glyphicon glyphicon-warning-sign"
-                title="{{form.bookPageNumber.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" min="0"></sc-text>
+          <gva-validation-error field-name="bookPageNumber" validations="{required: null}"></gva-validation-error>
+          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-md-2 col-sm-3" ng-class="{'has-error': form.pageCount.$invalid && form.$validated}">
+        <div class="form-group col-md-2 col-sm-3" gva-has-error="pageCount">
           <label class="control-label" l10n-text="persons.personMedicalDirective.pageCount"></label>
-          <span name="pageCountValidationSpan" ng-show="form.$validated && form.pageCount.$invalid" class="glyphicon glyphicon-warning-sign"
-                title="{{form.pageCount.$error.min && 'Стойността трябва да е по-голяма от 0'}}"></span>
-          <sc-text ng-model="model.pageCount" name="pageCount" min="0"></sc-text>
+          <gva-validation-error field-name="pageCount" validations="{min: null}"></gva-validation-error>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
         </div>
       </div>
     </div>

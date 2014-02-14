@@ -4,7 +4,6 @@
   'use strict';
 
   function HasErrorDirective() {
-
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -16,7 +15,7 @@
             if (newValue === oldValue) {
               return;
             }
-            if (newValue[0] && newValue[1]) {
+            if (newValue[0] && newValue[1] && !newValue[2]) {
               element.addClass('has-error');
             }
             else {

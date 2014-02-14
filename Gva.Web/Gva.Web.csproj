@@ -305,9 +305,14 @@
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
+    <Content Include="App\test\gva\directives\pageObjects\gvaTabs.js" />
+    <Content Include="App\test\gva\directives\pageObjects\testbeds\gvaTabsPO.js" />
     <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
+    <Content Include="App\test\gva\directives\specs\gvaTabsSpec.js" />
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbed.html" />
     <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
+    <Content Include="App\test\gva\directives\testbeds\gvaTabsTestbed.html" />
+    <Content Include="App\test\gva\directives\testbeds\gvaTabsTestbedCtrl.js" />
     <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personInventoryHttp.js" />

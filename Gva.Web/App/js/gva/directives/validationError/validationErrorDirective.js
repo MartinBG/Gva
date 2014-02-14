@@ -33,7 +33,8 @@
   angular.module('gva')
     .constant('gvaValidationErrorConfig', {
       defaultErrorTexts: {
-        required: 'errorTexts.required'
+        required: 'errorTexts.required',
+        min: 'errorTexts.min'
       }
     })
     .directive('gvaValidationError', ValidationErrorDirective);
