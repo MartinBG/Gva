@@ -2,7 +2,7 @@
 (function (protractor, describe, beforeEach, it, expect, require) {
   'use strict';
 
-  describe('scButton directive', function () {
+  describe('scSearchButton directive', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/testbeds/searchPO'),
         searchPage;

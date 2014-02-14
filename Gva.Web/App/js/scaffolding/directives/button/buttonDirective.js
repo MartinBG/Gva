@@ -1,4 +1,4 @@
-﻿// Usage: <gva-button name="" gva-click="" text="" class="" icon=""></gva-button>
+﻿// Usage: <sc-button name="" btn-click="" text="" class="" icon=""></sc-button>
 
 /*global angular*/
 (function (angular) {
@@ -10,10 +10,10 @@
       restrict: 'E',
       replace: true,
       scope: {
-        gvaClick: '&',
+        btnClick: '&',
         icon: '@'
       },
-      templateUrl: 'gva/directives/button/buttonDirective.html',
+      templateUrl: 'scaffolding/directives/button/buttonDirective.html',
       link: function (scope, element, attrs) {
 
         var elementCtrl = {};
@@ -28,7 +28,7 @@
           scope.$apply(function () {
             // add $event local variables to the expression context as ngClick does
 
-            var result = scope.gvaClick({ $event: event });
+            var result = scope.btnClick({ $event: event });
 
             // check if the result is promise
             if (result && result.then && typeof (result.then) === 'function') {
@@ -53,5 +53,5 @@
 
   ButtonDirective.$inject = ['$parse', 'l10n'];
 
-  angular.module('gva').directive('gvaButton', ButtonDirective);
+  angular.module('scaffolding').directive('scButton', ButtonDirective);
 }(angular));

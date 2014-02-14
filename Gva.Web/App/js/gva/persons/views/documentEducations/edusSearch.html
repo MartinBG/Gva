@@ -1,8 +1,8 @@
-﻿<gva-button name="createBtn" gva-click="newDocumentEducation()" text="persons.documentEducationSearch.newDocumentEducation" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+﻿<sc-button name="createBtn" btn-click="newDocumentEducation()" text="persons.documentEducationSearch.newDocumentEducation" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable ng-model="documentEducations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" sortable="false" class="btn btn-xs btn-primary" gva-click="editDocumentEducation(item)" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" sortable="false" class="btn btn-xs btn-default" gva-click="deleteDocumentEducation(item)" icon="glyphicon-remove"></gva-button>
+    <sc-button name="editBtn" sortable="false" class="btn btn-xs btn-primary" btn-click="editDocumentEducation(item)" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" sortable="false" class="btn btn-xs btn-default" btn-click="deleteDocumentEducation(item)" icon="glyphicon-remove"></sc-button>
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.documentEducationSearch.documentNumber">
   </sc-column>

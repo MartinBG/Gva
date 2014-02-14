@@ -1,6 +1,6 @@
 ﻿<div>
   <ul class="nav nav-tabs" ng-class="{'nav-tabs-large': secondTabList.length}">
-    <li ng-class="{active: tab.isActive}" ng-repeat="tab in tabList" class="{{'gvat-' + tab.title}}">
+    <li ng-class="{active: tab.isActive}" ng-repeat="tab in tabList" class="{{'sct-' + tab.title}}">
       <span ng-show="tab.loading" class="glyphicon glyphicon-loading"></span>
       <a ng-click="openTab(tab)" style="cursor: pointer">
         <span ng-show="tab.loading" class="glyphicon glyphicon-loading" style="position:absolute; right:50%"></span>
@@ -9,7 +9,7 @@
     </li>
   </ul>
   <ul class="nav nav-tabs" ng-show="secondTabList.length">
-    <li ng-class="{active: tab.isActive}" ng-repeat="tab in secondTabList" class="{{'gvat-' + tab.title}}">
+    <li ng-class="{active: tab.isActive}" ng-repeat="tab in secondTabList" class="{{'sct-' + tab.title}}">
       <a ng-click="openTab(tab)" style="cursor: pointer">
         <span ng-show="tab.loading" class="glyphicon glyphicon-loading" style="position:absolute; right:50%"></span>
         <span ng-class="{ 'tab-loading': tab.loading }">{{tab.title}}</span>

@@ -10,8 +10,8 @@
   </sc-filter>
   <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
   <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
-  <sc-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-button>
-  <sc-button action="cancel()" text="applications.choosePerson.cancel"></sc-button>
+  <sc-search-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.choosePerson.cancel"></sc-search-button>
 </sc-search>
 
 <sc-datatable ng-model="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">

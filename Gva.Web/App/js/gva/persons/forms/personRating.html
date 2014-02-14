@@ -51,9 +51,9 @@
         </div>
       </div>
       <div ng-show="model.staffType.code === 'F' || model.staffType.code === 'T' || model.staffType.code === 'M' || model.staffType.code === 'G'" class="row">
-        <div class="form-group col-sm-3" gva-has-error="personRatingModel">
+        <div class="form-group col-sm-3" sc-has-error="personRatingModel">
           <label class="control-label" l10n-text="persons.ratingDirective.personRatingModel"></label>
-          <gva-validation-error field-name="personRatingModel" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="personRatingModel" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.personRatingModel" name="personRatingModel" alias="'personRatingModels'" load="true" ng-required="true"></sc-nomenclature>
         </div>
       </div>

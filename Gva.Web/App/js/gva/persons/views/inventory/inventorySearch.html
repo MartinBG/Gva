@@ -1,7 +1,7 @@
 ﻿<div>
   <sc-datatable ng-model="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" width="1px">
-      <gva-button name="editBtn" gva-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+      <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
     </sc-column>

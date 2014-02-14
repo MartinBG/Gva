@@ -5,23 +5,23 @@
   var Q = require('q'),
       _ = require('lodash');
 
-  function GvaTabs(element) {
+  function ScTabs(element) {
     this.element = element;
   }
 
-  GvaTabs.prototype.clickTab = function (tabName) {
-    return this.element.findElement(by.css('li.gvat-' + tabName)).then(function (tab) {
+  ScTabs.prototype.clickTab = function (tabName) {
+    return this.element.findElement(by.css('li.sct-' + tabName)).then(function (tab) {
       return tab.click();
     });
   };
 
-  GvaTabs.prototype.getActiveTab = function () {
+  ScTabs.prototype.getActiveTab = function () {
     return this.element.findElement(by.css('li.active')).then(function (activeTab) {
       return activeTab.getText();
     });
   };
 
-  GvaTabs.prototype.getNavBar = function () {
+  ScTabs.prototype.getNavBar = function () {
     return this.element.findElements(by.tagName('ul')).then(function (navbars) {
       return Q.all(_.map(navbars, function (navbar) {
         return navbar.findElements(by.tagName('li'));
@@ -35,5 +35,5 @@
     });
   };
 
-  module.exports = GvaTabs;
+  module.exports = ScTabs;
 }(module, by, require));

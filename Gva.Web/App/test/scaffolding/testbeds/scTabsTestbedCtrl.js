@@ -2,13 +2,13 @@
 (function (angular) {
   'use strict';
 
-  function GvaTabsCtrl($scope, $state) {
+  function ScTabsCtrl($scope, $state) {
     $scope.state = '';
 
     $scope.$watch('state', function (newState) {
       if ($state.$current.name !== newState) {
         if (newState === '') {
-          $state.go('root.scaffoldingTestbed.gvatabs');
+          $state.go('root.scaffoldingTestbed.sctabs');
         }
         else {
           $state.go(newState);
@@ -21,7 +21,7 @@
     });
   }
 
-  GvaTabsCtrl.$inject = ['$scope', '$state'];
+  ScTabsCtrl.$inject = ['$scope', '$state'];
 
-  angular.module('gva').controller('GvaTabsTestbedCtrl', GvaTabsCtrl);
+  angular.module('scaffolding').controller('ScTabsTestbedCtrl', ScTabsCtrl);
 }(angular));

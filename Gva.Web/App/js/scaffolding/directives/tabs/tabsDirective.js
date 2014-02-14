@@ -1,4 +1,4 @@
-﻿// Usage: <gva-tabs tab-list="<object>"></gva-tabs>
+﻿// Usage: <sc-tabs tab-list="<object>"></sc-tabs>
 
 /*global angular, _*/
 (function (angular, _) {
@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'gva/directives/tabs/tabsDirective.html',
+      templateUrl: 'scaffolding/directives/tabs/tabsDirective.html',
       scope: {
         tabList: '&'
       },
@@ -129,5 +129,5 @@
 
   TabsDirective.$inject = ['$state'];
 
-  angular.module('gva').directive('gvaTabs', TabsDirective);
+  angular.module('scaffolding').directive('scTabs', TabsDirective);
 }(angular, _));
