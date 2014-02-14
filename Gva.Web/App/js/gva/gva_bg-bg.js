@@ -479,6 +479,40 @@
         }
       },
       applications: {
+        edit: {
+          personName: 'Име',
+          personLin: 'ЛИН',
+          status: 'Статус',
+          docTypeName: 'Относно',
+          editPerson: 'Редакция',
+          'case': {
+            regNumber: 'Тип/№/Дата',
+            description: 'Тип',
+            act: 'Дело',
+            viewDoc: 'Преглед',
+            page: 'стр.',
+            linkNew: 'Добави към дело',
+            linkPart: 'Свържи с вече добавен',
+            newFile: 'Нов документ'
+          },
+          newFile: {
+            title: 'Нов документ в описа',
+            documentType: 'Тип на документ',
+            cancel: 'Назад',
+            addPart: 'Продължи'
+          },
+          linkFile: {
+            title: 'Свържи документ в описа',
+            documentType: 'Тип на документ',
+            search: 'Търси',
+            cancel: 'Назад',
+            select: 'Избор'
+          },
+          addPart: {
+            cancel: 'Назад',
+            save: 'Запис'
+          }
+        },
         newForm: {
           person: 'Заявител',
           newPerson: 'Нов заявител',

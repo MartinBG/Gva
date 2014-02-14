@@ -1,19 +1,19 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-  <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="corrs.search.displayName"></sc-filter>
-  <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
-  <sc-button action="cancel()" text="corrs.search.back" icon="glyphicon-arrow-left"></sc-button>
-  <sc-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-button>
+  <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="docs.edit.addressing.selectCorr.displayName"></sc-filter>
+  <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="docs.edit.addressing.selectCorr.email"></sc-filter>
+  <sc-button action="cancel()" text="docs.edit.addressing.selectCorr.cancel" icon="glyphicon-arrow-left"></sc-button>
+  <sc-button action="search()" text="docs.edit.addressing.selectCorr.search" icon="glyphicon-search"></sc-button>
   <sc-button action="add"></sc-button>
 </sc-search>
 
 <sc-datatable ng-model="corrs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="selectBtn" gva-click="selectCorr(item)" class="btn btn-xs btn-primary" l10n-text="corrs.search.select"></gva-button>
+    <gva-button name="selectBtn" gva-click="selectCorr(item)" class="btn btn-xs btn-primary" l10n-text="docs.edit.addressing.selectCorr.select"></gva-button>
   </sc-column>
-  <sc-column data="displayName" title="Наименование">
+  <sc-column data="displayName" title="docs.edit.addressing.selectCorr.displayName">
   </sc-column>
-  <sc-column data="email" title="Имейл">
+  <sc-column data="email" title="docs.edit.addressing.selectCorr.email">
   </sc-column>
-  <sc-column data="correspondentType.name" title="Тип">
+  <sc-column data="correspondentType.name" title="docs.edit.addressing.selectCorr.correspondentType">
   </sc-column>
 </sc-datatable>

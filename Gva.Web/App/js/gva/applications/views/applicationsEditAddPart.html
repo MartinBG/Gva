@@ -38,9 +38,9 @@
         </ng-form>
 
         <div class="col-sm-3 col-sm-offset-5">
-          <gva-button ng-if="!documentData.isLinkNew" name="saveBtn" gva-click="addPart()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
-          <gva-button ng-if="documentData.isLinkNew" name="saveBtn" gva-click="linkNew()" text="persons.newDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
-          <gva-button name="cancelBtn" gva-click="cancel()" text="persons.newDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
+          <gva-button ng-if="!documentData.isLinkNew" name="saveBtn" gva-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
+          <gva-button ng-if="documentData.isLinkNew" name="saveBtn" gva-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></gva-button>
+          <gva-button name="cancelBtn" gva-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></gva-button>
         </div>
 
         <div class="clear"></div>
@@ -49,7 +49,7 @@
 
   <div ng-if="!documentData.docPartType">
     <div class="col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
-      <gva-button name="cancelBtn" gva-click="cancel()" text="Назад" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></gva-button>
+      <gva-button name="cancelBtn" gva-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></gva-button>
     </div>
     <div class="clear"></div>
   </div>

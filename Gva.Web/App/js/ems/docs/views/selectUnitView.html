@@ -1,14 +1,14 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-  <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="units.name"></sc-filter>
-  <sc-button action="cancel()" text="units.back" icon="glyphicon-arrow-left"></sc-button>
-  <sc-button action="search()" text="units.search" icon="glyphicon-search"></sc-button>
+  <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="docs.edit.addressing.selectUnit.name"></sc-filter>
+  <sc-button action="cancel()" text="docs.edit.addressing.selectUnit.cancel" icon="glyphicon-arrow-left"></sc-button>
+  <sc-button action="search()" text="docs.edit.addressing.selectUnit.search" icon="glyphicon-search"></sc-button>
   <sc-button action="add"></sc-button>
 </sc-search>
 
 <sc-datatable ng-model="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="selectBtn" gva-click="selectUnit(item)" class="btn btn-xs btn-primary" l10n-text="units.select"></gva-button>
+    <gva-button name="selectBtn" gva-click="selectUnit(item)" class="btn btn-xs btn-primary" l10n-text="docs.edit.addressing.selectUnit.select"></gva-button>
   </sc-column>
-  <sc-column data="name" title="Наименование">
+  <sc-column data="name" title="docs.edit.addressing.selectUnit.name">
   </sc-column>
 </sc-datatable>

@@ -5,6 +5,43 @@
     l10n.add('bg-bg', {
       docs: {
         edit: {
+          child: 'Подчинен',
+          document: 'Документ',
+          resolution: 'Резолюция',
+          task: 'Задача',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          management: 'Управление',
+          docPrepared: 'Отбелязване като изготвен',
+          docProcessed: 'Отбелязване като обработен',
+          docFinished: 'Отбелязване като приключен',
+          docCanceled: 'Отбелязване като анулиран',
+          docRegister: 'Регистриране',
+          docSignatures: 'Подписване с електронен подпис',
+          undoDocSignatures: 'Премахване на ел. подписи',
+          sign: 'Подписване',
+          discuss: 'Съгласуване',
+          approval: 'Одобрение',
+          signRequest: 'За подписване',
+          discussRequest: 'За съгласуване',
+          approvalRequest: 'За одобрение',
+          registrationRequest: 'За регистрация',
+          reverseDocPrepared: 'Връщане в статус чернова',
+          reverseDocProcessed: 'Връщане в статус изготвен',
+          reverseDocFinished: 'Връщане в статус обработен',
+          reverseDocCanceled: 'Връщане в статус обработен',
+          stagesName: 'Етапи',
+          endElectronicStage: 'Приключване',
+          nextElectronicStage: 'Следващ',
+          techEditElectronicStage: 'Техн. редакция',
+          reverseElectronicStage: 'Сторниране',
+          markRead: 'Маркирай като прочетено',
+          markUnRead: 'Маркирай като непрочетено',
+          regDate: 'Дата и час',
+          regUri: 'Номер',
+          docStatusName: 'Статус',
+          docDirectionName: 'Тип',
           addressing: {
             accessCode: 'Код за достъп',
             permissions: 'Допълнителни права',
@@ -26,7 +63,59 @@
             importedBy: 'Въвел',
             madeBy: 'Изготвил',
             docUnitsFrom: 'От',
-            docUnitsTo: 'До'
+            docUnitsTo: 'До',
+            selectCorr: {
+              displayName: 'Наименование',
+              email: 'Имейл',
+              correspondentType: 'Тип',
+              search: 'Търси',
+              cancel: 'Назад',
+              select: 'Избор'
+            },
+            selectUnit: {
+              name: 'Име',
+              search: 'Търси',
+              cancel: 'Назад',
+              select: 'Избор'
+            }
+          },
+          content: {
+            docBody: 'Текст',
+            privateDocFiles: 'Вътрешни файлове',
+            publicDocFiles: 'Публични файлове'
+          },
+          workflows: {
+            eventDate: 'Дата',
+            docWorkflowActionName: 'Действие',
+            yesNo: 'Отговор',
+            principalUnitName: 'От',
+            toUnitName: 'До',
+            note: 'Забележка',
+            'delete': 'изтрий'
+          },
+          stages: {
+            startingDate: 'Нач. дата',
+            esStageName: 'Етап',
+            esStageExecutors: 'Изпълнител',
+            expectedEndingDate: 'Очаквана дата на прикл.',
+            endingDate: 'Дата на приключване',
+            isCurrentStage: 'Текущ'
+          },
+          'case': {
+            regDate: 'Дата',
+            regNumber: 'Рег.№',
+            statusName: 'Статус',
+            description: 'Описание',
+            viewDoc: 'преглед',
+            viewApplication: 'преглед',
+            doc: 'Документ',
+            application: 'Заявление'
+          },
+          classifications: {
+            name: 'Класификационна схема',
+            date: 'Дата',
+            'delete': 'изтрий',
+            add: 'добави'
           }
 
         },
@@ -69,12 +158,11 @@
           displayName: 'Наименование',
           email: 'Имейл',
           activity: 'Активност',
+          correspondentType: 'Тип',
           onlyActive: 'Само активни',
           onlyUnactive: 'Само неактивни',
           'new': 'Нов кореспондент',
-          search: 'Търси',
-          back: 'Назад',
-          select: 'Избор'
+          search: 'Търси'
         },
         edit: {
           correspondentTitle: 'Кореспондент',

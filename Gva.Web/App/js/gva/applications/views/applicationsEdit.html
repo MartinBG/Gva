@@ -2,32 +2,32 @@
   <div class="row card">
     <div class="col-sm-4">
       <div class="input-group input-group-sm">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.name"></span>
+        <span class="input-group-addon" l10n-text="applications.edit.personName"></span>
         <input disabled name="names" type="text" class="form-control" value="{{application.person.names}}" />
       </div>
     </div>
     <div class="col-sm-2">
       <div class="input-group input-group-sm">
-        <span class="input-group-addon" l10n-text="persons.viewPerson.lin"></span>
+        <span class="input-group-addon" l10n-text="applications.edit.personLin"></span>
         <input disabled name="lin" type="text" class="form-control" value="{{application.person.lin}}" />
       </div>
     </div>
     <div class="col-sm-4">
       <div class="input-group input-group-sm">
-        <span class="input-group-addon">Статус:</span>
-        <input disabled name="status" type="text" class="form-control" value="Неприключено" />
+        <span class="input-group-addon" l10n-text="applications.edit.status"></span>
+        <input disabled name="status" type="text" class="form-control" value="{{}}" />
       </div>
     </div>
   </div>
   <div class="row card">
     <div class="col-sm-10">
       <div class="input-group input-group-sm">
-        <span class="input-group-addon">Относно</span>
+        <span class="input-group-addon" l10n-text="applications.edit.docTypeName">Относно</span>
         <sc-text ng-model="application.doc.docTypeName" disabled></sc-text>
       </div>
     </div>
     <div class="col-sm-2">
-      <gva-button name="editBtn" gva-click="viewPerson(application.lotId)" text="persons.viewPerson.edit" class="btn btn-sm btn-primary pull-right" icon="glyphicon-pencil"></gva-button>
+      <gva-button name="editBtn" gva-click="viewPerson(application.lotId)" text="applications.edit.editPerson" class="btn btn-sm btn-primary pull-right" icon="glyphicon-pencil"></gva-button>
     </div>
   </div>
 </div>
