@@ -5,7 +5,7 @@
   
   describe('Person address search page', function() {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/searchPersonAddressPO'),
+        Page = require('../../pageObjects/addresses/searchAddressPO'),
         personAddressesPage;
 
     beforeEach(function() {

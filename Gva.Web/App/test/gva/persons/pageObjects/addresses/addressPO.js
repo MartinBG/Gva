@@ -1,10 +1,10 @@
 ﻿/*global module, by, require*/
 (function (module, by, require) {
   'use strict';
-  var ScText = require('../../../scaffolding/pageObjects/scText'),
-    ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature');
+  var ScText = require('../../../../scaffolding/pageObjects/scText'),
+    ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
 
-  function PersonAddressPO(context) {
+  function AddressPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
     this.address = new ScText(context.findElement(by.input('model.address')));
     this.addressAlt = new ScText(context.findElement(by.input('model.addressAlt')));
@@ -21,13 +21,13 @@
     this.isSaveBtnDisabled = context.isElementPresent(by.css('button[disabled=disabled]'));
   }
 
-  PersonAddressPO.prototype.save = function () {
+  AddressPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  PersonAddressPO.prototype.cancel = function () {
+  AddressPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = PersonAddressPO;
+  module.exports = AddressPO;
 }(module, by, require));
