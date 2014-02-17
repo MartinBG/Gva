@@ -4,7 +4,7 @@
 
   describe('Person status search page', function () {
     var ptor = protractor.getInstance(),
-      Page = require('../pageObjects/searchPersonStatusesPO'),
+      Page = require('../../pageObjects/statuses/searchPersonStatusesPO'),
       personStatusesPage;
 
     beforeEach(function () {

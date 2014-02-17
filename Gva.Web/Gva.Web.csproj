@@ -341,11 +341,13 @@
     <Content Include="App\test\gva\persons\pageObjects\documentEducations\searchEducationPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentMedicals\editDocMedPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentMedicals\newDocMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\docMedPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentMedicals\searchDocMedPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEmployments\searchEmploymentPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEmployments\employmentPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentIds\documentIdPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentIds\searchDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\inventory\inventoryPO.js" />
     <Content Include="App\test\gva\persons\specs\documentChecks\editCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentChecks\newCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentChecks\searchCheckSpec.js" />
@@ -383,6 +385,7 @@
     <Content Include="App\test\gva\persons\specs\searchPersonDocEmplSpec.js" />
     <Content Include="App\test\gva\persons\specs\editPersonDocEmplSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\searchTrainingSpec.js" />
+    <Content Include="App\test\gva\persons\specs\inventory\searchInventorySpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\scDatatable.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSearch.js" />
     <Content Include="App\test\scaffolding\pageObjects\scText.js" />

@@ -4,8 +4,8 @@
 
   describe('Person status new page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/personStatusPO'),
-        SearchPage = require('../pageObjects/searchPersonStatusesPO'),
+        Page = require('../../pageObjects/statuses/personStatusPO'),
+        SearchPage = require('../../pageObjects/statuses/searchPersonStatusesPO'),
         newPersonStatusPage,
         personStatusesPage;
 

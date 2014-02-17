@@ -7,7 +7,7 @@
     ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
     ScSelect = require('../../../../scaffolding/pageObjects/scSelect');
 
-  function EditDocMedPO(context) {
+  function DocMedPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
     this.documentNumberPrefix = new ScText(
       context.findElement(by.input('model.documentNumberPrefix')));
@@ -29,13 +29,13 @@
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
   }
 
-  EditDocMedPO.prototype.save = function () {
+  DocMedPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  EditDocMedPO.prototype.cancel = function () {
+  DocMedPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = EditDocMedPO;
+  module.exports = DocMedPO;
 }(module, by, require));

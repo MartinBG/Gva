@@ -2,7 +2,7 @@
 (function (module, by, require) {
   'use strict';
 
-  var ScDatatable = require('../../../scaffolding/pageObjects/scDatatable');
+  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable');
 
   function SearchPersonStatusesPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));

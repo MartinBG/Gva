@@ -5,7 +5,7 @@
   
   describe('Person document medical edit page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentMedicals/editDocMedPO'),
+        Page = require('../../pageObjects/documentMedicals/docMedPO'),
         SearchPage = require('../../pageObjects/documentMedicals/searchDocMedPO'),
         editDocMedPage,
         searchDocMedPage;

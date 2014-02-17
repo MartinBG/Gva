@@ -2,10 +2,10 @@
 (function (module, by, require){
   'use strict';
 
-  var ScText = require('../../../scaffolding/pageObjects/scText'),
-      ScTextarea = require('../../../scaffolding/pageObjects/scTextarea'),
-      ScDate = require('../../../scaffolding/pageObjects/scDate'),
-      ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature');
+  var ScText = require('../../../../scaffolding/pageObjects/scText'),
+      ScTextarea = require('../../../../scaffolding/pageObjects/scTextarea'),
+      ScDate = require('../../../../scaffolding/pageObjects/scDate'),
+      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
 
   function PersonStatusPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
