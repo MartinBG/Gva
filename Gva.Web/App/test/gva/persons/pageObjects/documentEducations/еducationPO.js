@@ -1,12 +1,12 @@
 ﻿/*global module, by, require*/
 (function (module, by, require) {
   'use strict';
-  var ScText = require('../../../scaffolding/pageObjects/scText'),
-    ScTextarea = require('../../../scaffolding/pageObjects/ScTextarea'),
-    ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature'),
-    ScDate = require('../../../scaffolding/pageObjects/ScDate');
+  var ScText = require('../../../../scaffolding/pageObjects/scText'),
+    ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea'),
+    ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+    ScDate = require('../../../../scaffolding/pageObjects/ScDate');
 
-  function EditDocumentEduPO(context) {
+  function EducationPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
     this.speciality = new ScText(context.findElement(by.input('model.speciality')));
     this.graduation = new ScNomenclature('model.graduation', context);
@@ -22,13 +22,13 @@
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
   }
 
-  EditDocumentEduPO.prototype.save = function () {
+  EducationPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  EditDocumentEduPO.prototype.cancel = function () {
+  EducationPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = EditDocumentEduPO;
+  module.exports = EducationPO;
 }(module, by, require));

@@ -5,8 +5,8 @@
   
   describe('Person document employment edit page', function() {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/editDocEmplPO'),
-        SearchPage = require('../pageObjects/searchDocEmplPO'),
+        Page = require('../../pageObjects/documentEmployments/employmentPO'),
+        SearchPage = require('../../pageObjects/documentEmployments/searchEmploymentPO'),
         editDocEmplPage,
         searchDocEmplPage;
 

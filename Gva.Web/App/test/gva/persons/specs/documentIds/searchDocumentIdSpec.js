@@ -1,11 +1,10 @@
 ﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor, describe, beforeEach, it, expect) {
-
   'use strict';
-  
+
   describe('Person document Ids search page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/searchDocumentIdPO'),
+        Page = require('../../pageObjects/documentIds/searchDocumentIdPO'),
         personDocumentIdsPage;
 
     beforeEach(function () {

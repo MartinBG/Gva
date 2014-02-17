@@ -5,8 +5,8 @@
   
   describe('Person document Ids edit page', function () {
     var ptor = protractor.getInstance(),
-       Page = require('../pageObjects/editDocumentIdPO'),
-       SearchPage = require('../pageObjects/searchDocumentIdPO'),
+       Page = require('../../pageObjects/documentIds/documentIdPO'),
+       SearchPage = require('../../pageObjects/documentIds/searchDocumentIdPO'),
        editPersonDocumentIdPage,
        searchPersonDocumentIdPage;
 
@@ -30,10 +30,7 @@
       expect(editPersonDocumentIdPage.fileSpan.getText()).toEqual('testName.pdf');
       expect(editPersonDocumentIdPage.documentDateValidFrom.get()).toEqual('04.04.2010');
       expect(editPersonDocumentIdPage.documentDateValidTo.get()).toEqual('04.04.2020');
-      expect(editPersonDocumentIdPage.datatable.getColumns(
-          'applicationId',
-          'applicationName'
-          )).toEqual([
+      expect(editPersonDocumentIdPage.getApplications()).toEqual([
           ['1', 'application1'],
           ['2', 'application2']
         ]);

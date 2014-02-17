@@ -1,11 +1,13 @@
 ﻿/*global module, by, require*/
 (function (module, by, require) {
   'use strict';
-  var ScText = require('../../../scaffolding/pageObjects/scText'),
-    ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature'),
-    ScDate = require('../../../scaffolding/pageObjects/ScDate');
+  var ScText = require('../../../../scaffolding/pageObjects/scText'),
+    ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+    ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
+    ScDatatable = require('../../../../scaffolding/pageObjects/ScDatatable');
 
   function DocumentIdPO(context) {
+    this.context = context;
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
     this.personDocumentIdType = new ScNomenclature('model.personDocumentIdType', context);
     this.bookPageNumber = new ScText(context.findElement(by.input('model.bookPageNumber')));
@@ -22,6 +24,14 @@
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
     this.isSaveBtnDisabled = context.isElementPresent(by.css('button[disabled=disabled]'));
   }
+
+  DocumentIdPO.prototype.getApplications = function () {
+    return this.context.findElement(by.css('div[filterable="false"]')).then(function (datatable) {
+      var appDatatable = new ScDatatable(datatable);
+
+      return appDatatable.getColumns('applicationId', 'applicationName');
+    });
+  };
 
   DocumentIdPO.prototype.save = function () {
     this.saveBtn.click();

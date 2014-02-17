@@ -1,12 +1,11 @@
 ﻿/*global protractor, describe, beforeEach, it, expect, require*/
 (function (protractor, describe, beforeEach, it, expect) {
-
   'use strict';
-  
+
   describe('Person document employment new page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/newDocEmplPO'),
-        SearchPage = require('../pageObjects/searchDocEmplPO'),
+        Page = require('../../pageObjects/documentEmployments/employmentPO'),
+        SearchPage = require('../../pageObjects/documentEmployments/searchEmploymentPO'),
         newDocEmplPage,
         searchDocEmplPage;
 
@@ -19,7 +18,7 @@
       expect(newDocEmplPage.breadcrumb.getText())
         .toEqual('Новa месторабота');
     });
-    
+
     it('should create new document employment correctly', function () {
       newDocEmplPage.hiredate.set('20.10.2014');
       newDocEmplPage.valid.set('Не');

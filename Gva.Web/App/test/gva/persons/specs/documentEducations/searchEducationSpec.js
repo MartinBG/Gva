@@ -5,7 +5,7 @@
   
   describe('Person document education search page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/searchDocEduPO'),
+        Page = require('../../pageObjects/documentEducations/searchEducationPO'),
         personDocEduPage;
 
     beforeEach(function () {
@@ -14,7 +14,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocEduPage.breadcrumb.getText()).toEqual('Образование');
+      expect(personDocEduPage.breadcrumb.getText()).toEqual('Образования');
     });
 
     it('should display data correctly', function () {
