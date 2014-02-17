@@ -2,7 +2,7 @@
   <div class="form-group col-md-6" ng-show="doc.isVisibleRoleFrom">
     <label class="control-label" l10n-text="docs.edit.addressing.docUnitsFrom"></label>
     <div class="input-group input-group-sm">
-      <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+      <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'unit'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
         <sc-button btn-click="selectUnitFrom()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
       </span>
@@ -11,7 +11,7 @@
   <div class="form-group col-md-6" ng-show="doc.isVisibleRoleTo">
     <label class="control-label" l10n-text="docs.edit.addressing.docUnitsTo"></label>
     <div class="input-group input-group-sm">
-      <sc-nomenclature ng-model="doc.docUnitsTo" alias="'units'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
+      <sc-nomenclature ng-model="doc.docUnitsTo" alias="'unit'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
         <sc-button btn-click="selectUnitTo()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
       </span>
@@ -80,12 +80,12 @@
 
   <div class="form-group col-md-3" ng-show="doc.isVisibleDocSourceTypeId">
     <label class="control-label" l10n-text="docs.edit.addressing.docSourceType"></label>
-    <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+    <sc-nomenclature name="docSourceType" ng-model="doc.docSourceType" alias="'docSourceType'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
   </div>
 
   <div class="form-group col-md-3" ng-show="doc.isVisibleDocDestinationTypeId">
     <label class="control-label" l10n-text="docs.edit.addressing.docDestinationType"></label>
-    <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+    <sc-nomenclature name="docDestinationType" ng-model="doc.docDestinationType" alias="'docDestinationType'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
   </div>
 </div>
 
@@ -124,7 +124,7 @@
     <div class="row" ng-show="doc.isVisibleAssignment">
       <div class="form-group col-md-3">
         <label class="control-label" l10n-text="docs.edit.addressing.assignmentType"></label>
-        <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentTypes'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
+        <sc-nomenclature name="assignmentType" ng-model="doc.assignmentType" alias="'assignmentType'" load="false" required ng-readonly="!inEditMode"></sc-nomenclature>
       </div>
 
       <div class="form-group col-md-2">

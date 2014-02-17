@@ -5,8 +5,8 @@
     var nomenclatures = require('./nomenclatures.sample'),
       corrs = [{
         corrId: 1,
-        correspondentType: nomenclatures.correspondentTypes[0],
-        correspondentGroup: nomenclatures.correspondentGroups[0],
+        correspondentType: nomenclatures.correspondentType[0],
+        correspondentGroup: nomenclatures.correspondentGroup[0],
         displayName: 'ДЕЛТА КОИН 1324567890',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
@@ -53,8 +53,8 @@
         }]
       }, {
         corrId: 2,
-        correspondentType: nomenclatures.correspondentTypes[1],
-        correspondentGroup: nomenclatures.correspondentGroups[1],
+        correspondentType: nomenclatures.correspondentType[1],
+        correspondentGroup: nomenclatures.correspondentGroup[1],
         displayName: 'АЛИ БАБА 4040404040',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',

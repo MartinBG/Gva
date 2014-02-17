@@ -9,7 +9,7 @@
           <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.correspondentGroup.$invalid}">
             <label class="control-label" l10n-text="corrs.edit.correspondentGroup"></label>
             <span ng-show="corrForm.correspondentGroup.$invalid && corrForm.$validated && !corrForm.correspondentGroup.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
-            <sc-nomenclature name="correspondentGroup" ng-model="corr.correspondentGroup" alias="'correspondentGroups'" load="false" required></sc-nomenclature>
+            <sc-nomenclature name="correspondentGroup" ng-model="corr.correspondentGroup" alias="'correspondentGroup'" load="false" required></sc-nomenclature>
           </div>
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="corrs.edit.email"></label>
@@ -21,7 +21,7 @@
           <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.correspondentType.$invalid}">
             <label class="control-label" l10n-text="corrs.edit.correspondentType"></label>
             <span ng-show="corrForm.correspondentType.$invalid && corrForm.$validated && !corrForm.correspondentType.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
-            <sc-nomenclature name="correspondentType" ng-model="corr.correspondentType" alias="'correspondentTypes'" load="false" required></sc-nomenclature>
+            <sc-nomenclature name="correspondentType" ng-model="corr.correspondentType" alias="'correspondentType'" load="false" required></sc-nomenclature>
           </div>
         </div>
 

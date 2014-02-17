@@ -112,9 +112,9 @@
         return $q.all({
           parentDoc: !!$stateParams.parentDocId ?
             Doc.get({ docId: $stateParams.parentDocId }).$promise : null,
-          docFormatTypes: Nomenclature.query({ alias: 'docFormatTypes' }).$promise,
-          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartTypes' }).$promise,
-          docDirections: Nomenclature.query({ alias: 'docDirections' }).$promise
+          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
           var doc = {
             numberOfDocs: 1,

@@ -9,7 +9,7 @@
         function ($params, $filter) {
           return [
             200,
-            $filter('filter')(nomenclatures.units, {
+            $filter('filter')(nomenclatures.unit, {
               name: $params.name
             })
           ];

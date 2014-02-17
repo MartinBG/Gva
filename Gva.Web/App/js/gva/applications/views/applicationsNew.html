@@ -30,12 +30,12 @@
             <div class="form-group col-md-6" gva-has-error="docTypeGroupId">
               <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
               <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature  ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
+              <sc-nomenclature  ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroup'" load="true" required></sc-nomenclature>
             </div>
             <div class="form-group col-md-6" gva-has-error="docTypeId">
               <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
               <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature  ng-model="docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
+              <sc-nomenclature  ng-model="docType" name="docTypeId" alias="'docType'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
             </div>
           </div>
 
