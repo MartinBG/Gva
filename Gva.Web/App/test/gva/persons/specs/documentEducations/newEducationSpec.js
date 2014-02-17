@@ -5,7 +5,7 @@
   
   describe('Person document education new page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentEducations/еducationPO'),
+        Page = require('../../pageObjects/documentEducations/educationPO'),
         SearchPage = require('../../pageObjects/documentEducations/searchEducationPO'),
         newDocEduPage,
         searchDocEduPage;
