@@ -9,6 +9,10 @@
     corrs,
     selectedCorrs
   ) {
+    if (!selectedCorrs.onCorrSelect) {
+      return $state.go('^');
+    }
+
     $scope.corrs = _.map(corrs, function (corr) {
       var sc = _(selectedCorrs.corrs).filter({ nomTypeValueId: corr.corrId }).first();
 

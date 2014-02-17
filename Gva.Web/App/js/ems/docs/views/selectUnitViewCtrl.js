@@ -9,6 +9,10 @@
     units,
     selectedUnits
   ) {
+    if (!selectedUnits.onUnitSelect) {
+      return $state.go('^');
+    }
+
     $scope.units = _.map(units, function (unit) {
       var su = _(selectedUnits.units).filter({ nomTypeValueId: unit.nomTypeValueId }).first();
 
