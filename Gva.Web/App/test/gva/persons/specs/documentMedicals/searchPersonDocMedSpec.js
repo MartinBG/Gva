@@ -5,7 +5,7 @@
   
   describe('Person medical document search page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/searchDocMedPO'),
+        Page = require('../../pageObjects/documentMedicals/searchDocMedPO'),
         personDocMedPage;
 
     beforeEach(function () {
@@ -49,8 +49,8 @@
           'part_bookPageNumber',
           'part_pageCount'
           )).toEqual([
-          ['MED BG2-3244-11232-9934', '04.04.2005', '06.09.2015', 'Class-2',
-          'OSL, OML, VDL', 'CAA France', '3', '5']
+          ['MED BG-1-11232-99994', '04.04.2010', '04.08.2010',
+            'Class-1', 'OSL, OML', 'КАМО', '1', '3']
         ]);
       });
     });

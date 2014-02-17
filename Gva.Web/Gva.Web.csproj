@@ -330,9 +330,9 @@
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentChecks\checkPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentChecks\searchCheckPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\editDocMedPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\newDocMedPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\searchDocMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\editDocMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\newDocMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\searchDocMedPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEducations\еducationPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEducations\searchEducationPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEmployments\searchEmploymentPO.js" />
@@ -342,9 +342,9 @@
     <Content Include="App\test\gva\persons\specs\documentChecks\editCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentChecks\newCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentChecks\searchCheckSpec.js" />
-    <Content Include="App\test\gva\persons\specs\editPersonDocMedSpec.js" />
-    <Content Include="App\test\gva\persons\specs\newPersonDocMedSpec.js" />
-    <Content Include="App\test\gva\persons\specs\searchPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\editPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\newPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\searchPersonDocMedSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentEducations\editEducationSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentEducations\newEducationSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentEducations\searchEducationSpec.js" />

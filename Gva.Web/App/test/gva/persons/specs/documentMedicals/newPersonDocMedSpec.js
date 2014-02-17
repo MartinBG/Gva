@@ -5,8 +5,8 @@
   
   describe('Person medical document new page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../pageObjects/newDocMedPO'),
-        SearchPage = require('../pageObjects/searchDocMedPO'),
+        Page = require('../../pageObjects/documentMedicals/newDocMedPO'),
+        SearchPage = require('../../pageObjects/documentMedicals/searchDocMedPO'),
         newDocMedPage,
         searchDocMedPage;
 
@@ -17,7 +17,7 @@
 
     it('should update breadcrumb text', function () {
       expect(newDocMedPage.breadcrumb.getText())
-        .toEqual('Ново медицинско');
+        .toEqual('Новo медицинско');
     });
     
     it('should create new medical document correctly', function () {
@@ -28,7 +28,7 @@
       newDocMedPage.documentDateValidFrom.set('20.10.2014');
       newDocMedPage.documentDateValidTo.set('01.01.2020');
       newDocMedPage.documentPublisher.set('FAA');
-      newDocMedPage.limitationsTypes.set('VDL');
+      newDocMedPage.limitationsTypes.set(4);
       newDocMedPage.notes.set('notes');
       newDocMedPage.bookPageNumber.set('2');
       newDocMedPage.pageCount.set('5');
@@ -37,7 +37,7 @@
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/medicals');
       searchDocMedPage = new SearchPage(ptor);
 
-      expect(newDocMedPage.datatable.getColumns(
+      expect(searchDocMedPage.datatable.getColumns(
           'part_testimonial',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
@@ -51,8 +51,8 @@
           'OSL, OML', 'КАМО', '1', '3'],
         ['MED BG2-3244-11232-9934', '04.04.2005', '06.09.2015', 'Class-2',
           'OSL, OML, VDL', 'CAA France', '3', '5'],
-        ['1-2324a-11232-23', '20.10.2014', '01.01.2020',
-          'Class-3', 'VDL', 'FAA', '2', '5']
+        ['1-2324a-11232-23', '20.10.2014', '01.01.2020', 'Class-3', 'OCL',
+          'FAA', '2', '5']
       ]);
     });
 

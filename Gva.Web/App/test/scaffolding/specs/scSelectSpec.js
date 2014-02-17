@@ -13,9 +13,9 @@
     });
 
     it('should select the passed option.', function() {
-      expect(selectPage.selectDirective.get()).toEqual('');
+      expect(selectPage.selectDirective.getValue()).toEqual('');
       selectPage.selectOption('option2');
-      expect(selectPage.selectDirective.get()).toEqual('option2');
+      expect(selectPage.selectDirective.getValue()).toEqual('option2');
     });
 
     it('should change the model to whatever is selected.', function() {
