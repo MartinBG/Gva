@@ -292,6 +292,7 @@
     <Content Include="App\schema\nomenclatures\staffType.js" />
     <Content Include="App\schema\person-rating-edition.sample.js" />
     <Content Include="App\schema\person-rating.sample.js" />
+    <Content Include="App\test\designTemplatesMock.js" />
     <Content Include="App\test\ems\mocks\docCases.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsFactory.js" />

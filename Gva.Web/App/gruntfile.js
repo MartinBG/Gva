@@ -145,15 +145,15 @@ module.exports = function (grunt) {
         debug: true,
         mangle: false,
         compress: false,
-        sourceMap: function(path) {
+        sourceMap: function (path) {
           var n = path.lastIndexOf('/'),
               filename = path.substring(n + 1);
-          return 'build/js/' + filename.replace(/\.js/,'.js.map');
+          return 'build/js/' + filename.replace(/\.js/, '.js.map');
         },
-        sourceMappingURL: function(path) {
+        sourceMappingURL: function (path) {
           var n = path.lastIndexOf('/'),
               filename = path.substring(n + 1);
-          return filename.replace(/\.js/,'.js.map');
+          return filename.replace(/\.js/, '.js.map');
         },
         sourceMapRoot: '../../'
       },
@@ -173,12 +173,22 @@ module.exports = function (grunt) {
     copy: {
       resources: {
         files: [
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/bootstrap/dist/fonts/' },
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/font-awesome/fonts/' },
-          { expand:true, src: '{*.png,*.gif}', dest: '<%= buildDir %>/css/'   , cwd: 'bower_components/select2/' },
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/images/', cwd: 'bower_components/datatablePlugins/integration/bootstrap/images/' },
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/img'    , cwd: 'bower_components/blueimp-file-upload/img/' },
-          { expand:true, src: '**'           , dest: '<%= buildDir %>/img'    , cwd: 'img' }
+          { expand: true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/bootstrap/dist/fonts/' },
+          { expand: true, src: '**'           , dest: '<%= buildDir %>/fonts/' , cwd: 'bower_components/font-awesome/fonts/' },
+          { expand: true, src: '{*.png,*.gif}', dest: '<%= buildDir %>/css/'   , cwd: 'bower_components/select2/' },
+          { expand: true, src: '**'           , dest: '<%= buildDir %>/images/', cwd: 'bower_components/datatablePlugins/integration/bootstrap/images/' },
+          { expand: true, src: '**'           , dest: '<%= buildDir %>/img'    , cwd: 'bower_components/blueimp-file-upload/img/' },
+          { expand: true, src: '**'           , dest: '<%= buildDir %>/img'    , cwd: 'img' }
+        ]
+      },
+      templates: {
+        files: [
+          { expand: true, src: 'js/**/*.html', dest: '<%= buildDir %>/templates/' }
+        ]
+      },
+      move: {
+        files: [
+          { expand: true, src: '**', dest: '<%= buildDir %>/app/build/', cwd: '<%= buildDir %>' }
         ]
       }
     },
@@ -187,7 +197,7 @@ module.exports = function (grunt) {
         base: 'js'
       },
       navigation: {
-        src: [ 'js/common/**/*.html' ],
+        src: ['js/common/**/*.html'],
         dest: '<%= buildDir %>/templates/common.js',
         module: 'common.templates'
       },
@@ -197,7 +207,7 @@ module.exports = function (grunt) {
         module: 'gva.templates'
       },
       ems: {
-        src: [ 'js/ems/**/*.html' ],
+        src: ['js/ems/**/*.html'],
         dest: '<%= buildDir %>/templates/ems.js',
         module: 'ems.templates'
       },
@@ -207,7 +217,7 @@ module.exports = function (grunt) {
         module: 'scaffolding.templates'
       }
     },
-    watch:{
+    watch: {
       html: {
         files: ['css/**', 'js/**', 'schema/**', 'test/**'],
         tasks: ['html2js', 'bundle:debug']
@@ -309,14 +319,21 @@ module.exports = function (grunt) {
 
   grunt.loadTasks('./gruntTasks');
 
+  grunt.registerTask('addDesignTemplatesMock', function () {
+    grunt.config.data.jsBundles['<%= buildDir %>/js/test.js'].unshift('test/designTemplatesMock.js');
+  });
+
   grunt.registerTask('debug',
     ['clean', 'jshint:source', 'html2js', 'bundle:debug']);
 
+  grunt.registerTask('templates',
+    ['addDesignTemplatesMock', 'clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'copy:templates', 'copy:move', 'bundle:release']);
+
   grunt.registerTask('bundled',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy', 'bundle:release']);
+    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'bundle:release']);
 
   grunt.registerTask('release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy', 'bundle:release']);
+    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy:resources', 'bundle:release']);
 
   grunt.registerTask('test-chrome', ['express', 'protractor:test_chrome']);
 

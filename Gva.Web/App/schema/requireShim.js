@@ -4,4 +4,4 @@
     return window[match[2]].exports;
   }
   return undefined;
-}
+};
