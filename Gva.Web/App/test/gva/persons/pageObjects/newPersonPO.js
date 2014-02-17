@@ -3,7 +3,7 @@
   'use strict';
 
   var PersonDataPO = require('./personDataPO'),
-    PersonAddressPO = require('./personAddressPO'),
+    PersonAddressPO = require('./addresses/addressPO'),
     PersonDocumentIdPO = require('./personDocumentIdPO');
 
   function NewPersonPO(context) {
