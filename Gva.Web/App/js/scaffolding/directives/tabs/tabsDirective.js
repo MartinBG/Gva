@@ -20,7 +20,7 @@
         $scope.secondTabList = [];
 
         angular.forEach(_.keys(tabsObject), function (tabTitle) {
-          var newTab = { isActive: false, title: tabTitle },
+          var newTab = { isActive: false, title: tabTitle, className: tabTitle.replace(' ', '-') },
               tab = tabsObject[tabTitle];
 
           if (_.isString(tab)) {
@@ -38,7 +38,8 @@
                 title: childTabTitle,
                 isActive: false,
                 isState: true,
-                name: childTab.name
+                name: childTab.name,
+                className: childTabTitle.replace(' ', '-')
               });
             });
           }

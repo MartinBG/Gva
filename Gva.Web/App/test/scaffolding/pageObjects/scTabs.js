@@ -10,7 +10,9 @@
   }
 
   ScTabs.prototype.clickTab = function (tabName) {
-    return this.element.findElement(by.css('li.sct-' + tabName)).then(function (tab) {
+    var name = tabName.replace(' ', '-');
+
+    return this.element.findElement(by.css('li.sct-' + name)).then(function (tab) {
       return tab.click();
     });
   };

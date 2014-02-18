@@ -39,16 +39,13 @@
     });
 
     it('should navigate to different sections', function () {
-      var licencesTab = ptor.findElement(protractor.By.linkText('Лицензи')),
-          personDataTab = ptor.findElement(protractor.By.linkText('Лични данни'));
-
-      licencesTab.click();
+      viewPersonPage.tabs.clickTab('Лицензи');
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/licences');
 
-      personDataTab.click();
+      viewPersonPage.tabs.clickTab('Лични данни');
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses');
 
-      ptor.findElement(protractor.By.linkText('Състояния')).click();
+      viewPersonPage.tabs.clickTab('Състояния');
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
     });
   });
