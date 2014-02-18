@@ -5,9 +5,10 @@
   'use strict';
 
   function FilterDirective(l10n) {
-    function FilterCompile (tElement, tAttrs) {
+    function FilterCompile(tElement, tAttrs) {
       var type = tAttrs.type,
-          options = tAttrs.options;
+          options = tAttrs.options,
+          dirHtml;
 
       if (!tElement.attr('class')) {
         tElement.addClass('col-sm-3');
@@ -18,11 +19,17 @@
           type === 'float' ||
           type === 'text' ||
           type === 'select') {
-        var dirHtml, optionsHtml;
+        var optionsHtml;
 
         optionsHtml = options ? ' sc-' + type + '="' + options + '"' : '';
         dirHtml = '<sc-' + type + ' ng-model="model"' + optionsHtml + '></sc-' + type + '>';
 
+        tElement.append(dirHtml);
+      } else if (type === 'nomenclature') {
+        var alias = tAttrs.alias;
+
+        dirHtml = '<sc-nomenclature ng-model="model" alias="\'' + alias + '\'" load="true">' +
+          '</sc-nomenclature>';
         tElement.append(dirHtml);
       }
 
