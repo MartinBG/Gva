@@ -19,11 +19,16 @@
     this.documentDateValidTo =
       new ScDate(context.findElement(by.css('div[name=documentDateValidTo]')), context);
     this.documentPublisher = new ScText(context.findElement(by.input('model.documentPublisher')));
-    this.fileSpan = context.findElement(by.className('test-single-file-span'));
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
     this.isSaveBtnDisabled = context.isElementPresent(by.css('button[disabled=disabled]'));
   }
+
+  DocumentIdPO.prototype.getFile = function () {
+    return this.context.findElement(by.className('test-single-file-span')).then(function (span) {
+      return span.getText();
+    });
+  };
 
   DocumentIdPO.prototype.getApplications = function () {
     return this.context.findElement(by.css('div[filterable="false"]')).then(function (datatable) {

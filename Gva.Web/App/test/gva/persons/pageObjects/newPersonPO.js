@@ -3,8 +3,8 @@
   'use strict';
 
   var PersonDataPO = require('./personDataPO'),
-    PersonAddressPO = require('./addresses/addressPO'),
-    PersonDocumentIdPO = require('./personDocumentIdPO');
+      PersonAddressPO = require('./addresses/addressPO'),
+      PersonDocumentIdPO = require('./documentIds/documentIdPO');
 
   function NewPersonPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
@@ -13,7 +13,6 @@
     this.personData = new PersonDataPO(context);
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
-    this.isSaveBtnDisabled = context.isElementPresent(by.css('button[disabled=disabled]'));
   }
 
   NewPersonPO.prototype.save = function () {

@@ -27,7 +27,7 @@
       expect(editPersonDocumentIdPage.pageCount.get()).toEqual('1');
       expect(editPersonDocumentIdPage.documentNumber.get()).toEqual('6765432123');
       expect(editPersonDocumentIdPage.documentPublisher.get()).toEqual('МВР София');
-      expect(editPersonDocumentIdPage.fileSpan.getText()).toEqual('testName.pdf');
+      expect(editPersonDocumentIdPage.getFile()).toEqual('testName.pdf');
       expect(editPersonDocumentIdPage.documentDateValidFrom.get()).toEqual('04.04.2010');
       expect(editPersonDocumentIdPage.documentDateValidTo.get()).toEqual('04.04.2020');
       expect(editPersonDocumentIdPage.getApplications()).toEqual([

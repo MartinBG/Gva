@@ -342,6 +342,12 @@
     <Content Include="App\test\gva\persons\pageObjects\documentIds\documentIdPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentIds\searchDocumentIdPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\inventory\inventoryPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\statuses\personStatusPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\statuses\searchPersonStatusesPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\viewPersonPO.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\editCheckSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\newCheckSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\searchCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentMedicals\editPersonDocMedSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentMedicals\newPersonDocMedSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentMedicals\searchPersonDocMedSpec.js" />
@@ -355,13 +361,13 @@
     <Content Include="App\test\gva\persons\specs\documentEmployments\editEmploymentSpec.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentTrainings\searchTrainingPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentTrainings\trainingPO.js" />
-    <Content Include="App\test\gva\persons\specs\documentChecks\editCheckSpec.js" />
-    <Content Include="App\test\gva\persons\specs\documentChecks\newCheckSpec.js" />
-    <Content Include="App\test\gva\persons\specs\documentChecks\searchCheckSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\editTrainingSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\newTrainingSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\searchTrainingSpec.js" />
     <Content Include="App\test\gva\persons\specs\inventory\searchInventorySpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\editPersonStatusSpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\newPersonStatusSpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\searchPersonStatusesSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\scDatatable.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSearch.js" />
     <Content Include="App\test\scaffolding\pageObjects\scText.js" />
@@ -400,7 +406,6 @@
     <Content Include="App\test\scaffolding\pageObjects\scPromiseState.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSelect.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\searchPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\personDocumentIdPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\personsPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\addresses\searchAddressPO.js" />
     <Compile Include="App_Start\MvcConfig.cs" />
