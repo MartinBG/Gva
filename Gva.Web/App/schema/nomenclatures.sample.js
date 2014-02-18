@@ -345,6 +345,8 @@
 
     medicalLimitations: require('./medicalLimitation'),
 
+    publisherTypes: require('./publisherType'),
+
     personCheckDocumentTypes: require('./personCheckDocumentType'),
 
     //оценки при проверка на Физическо лице

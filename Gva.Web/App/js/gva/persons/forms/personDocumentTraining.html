@@ -38,9 +38,16 @@
           <div class="form-group col-sm-6 col-md-5" gva-has-error="documentPublisher">
             <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentPublisher"></label>
             <gva-validation-error field-name="documentPublisher" validations="{required: null}"></gva-validation-error>
-            <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
+            <div class="input-group input-group-sm">
+              <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="$parent.choosePublisher()">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </span>
           </div>
         </div>
+      </div>
 
         <div class="row" ng-if="model.staffType.alias === 'D'">
           <div class=" form-group col-sm-6 col-md-4">
