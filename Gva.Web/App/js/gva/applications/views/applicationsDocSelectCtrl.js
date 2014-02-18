@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ApplicationsDocSelectCtrl($scope, $state, $stateParams, Doc, doc) {
+  function ApplicationsDocSelectCtrl($scope, $state, $stateParams, Doc, selectedDoc) {
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -42,10 +42,12 @@
     };
 
     $scope.selectDoc = function (result) {
-      doc.docId = result.docId;
-      doc.regUri = result.regUri;
-      doc.docTypeName = result.docTypeName;
-      doc.docStatusName = result.docStatusName;
+      selectedDoc.push({
+        docId: result.docId,
+        regUri: result.regUri,
+        docTypeName: result.docTypeName,
+        docStatusName: result.docStatusName
+      });
       return $state.go('^');
     };
 
@@ -54,7 +56,7 @@
     };
   }
 
-  ApplicationsDocSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc', 'doc'];
+  ApplicationsDocSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc', 'selectedDoc'];
 
   angular.module('gva').controller('ApplicationsDocSelectCtrl', ApplicationsDocSelectCtrl);
 }(angular, _));

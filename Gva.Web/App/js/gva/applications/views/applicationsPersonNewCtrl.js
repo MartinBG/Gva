@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function ApplicationsPersonNewCtrl($scope, $state, Person, person) {
+  function ApplicationsPersonNewCtrl($scope, $state, Person, selectedPerson) {
 
     $scope.save = function () {
       $scope.newPersonForm.$validate()
@@ -10,7 +10,7 @@
         if ($scope.newPersonForm.$valid) {
           return Person.save($scope.newPerson).$promise
             .then(function (result) {
-              person.id = result.lotId;
+              selectedPerson.push(result.lotId);
               return $state.go('^');
             });
         }
@@ -23,7 +23,7 @@
 
   }
 
-  ApplicationsPersonNewCtrl.$inject = ['$scope', '$state', 'Person', 'person'];
+  ApplicationsPersonNewCtrl.$inject = ['$scope', '$state', 'Person', 'selectedPerson'];
 
   angular.module('gva').controller('ApplicationsPersonNewCtrl', ApplicationsPersonNewCtrl);
 }(angular));

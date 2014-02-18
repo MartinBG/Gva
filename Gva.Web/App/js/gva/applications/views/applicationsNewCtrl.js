@@ -7,9 +7,17 @@
     $scope,
     $state,
     Application,
-    person
+    application,
+    selectedPerson
     ) {
-    $scope.person = person;
+
+    if (selectedPerson.length > 0) {
+      application.person = {
+        id: selectedPerson.pop()
+      };
+    }
+
+    $scope.application = application;
 
     $scope.newPerson = function () {
       return $state.go('root.applications.new.personNew');
@@ -29,7 +37,7 @@
         if ($scope.appForm.$valid) {
 
           var newApplication = {
-            lotId: $scope.person.id,
+            lotId: $scope.application.person.id,
             doc: {
               docFormatTypeId: 3,
               docFormatTypeName: 'Хартиен',
@@ -37,11 +45,11 @@
               docCasePartTypeName: 'Публичен',
               docDirectionId: 1,
               docDirectionName: 'Входящ',
-              docTypeGroupId: $scope.docTypeGroup.nomTypeValueId,
-              docTypeGroupName: $scope.docTypeGroup.name,
-              docTypeId: $scope.docType.nomTypeValueId,
-              docTypeName: $scope.docType.name,
-              docSubject: $scope.docSubject
+              docTypeGroupId: $scope.application.docTypeGroup.nomTypeValueId,
+              docTypeGroupName: $scope.application.docTypeGroup.name,
+              docTypeId: $scope.application.docType.nomTypeValueId,
+              docTypeName: $scope.application.docType.name,
+              docSubject: $scope.application.docSubject
             }
           };
 
@@ -58,12 +66,16 @@
     '$scope',
     '$state',
     'Application',
-    'person'
+    'application',
+    'selectedPerson'
   ];
 
   ApplicationsNewCtrl.$resolve = {
-    person: function () {
+    application: function () {
       return {};
+    },
+    selectedPerson: function () {
+      return [];
     }
   };
 

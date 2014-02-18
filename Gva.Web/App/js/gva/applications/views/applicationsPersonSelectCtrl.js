@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ApplicationsPersonSelectCtrl($scope, $state, $stateParams, Person, person) {
+  function ApplicationsPersonSelectCtrl($scope, $state, $stateParams, Person, selectedPerson) {
     $scope.filters = {
       lin: null,
       uin: null
@@ -34,12 +34,18 @@
     };
 
     $scope.selectPerson = function (result) {
-      person.id = result.id;
+      selectedPerson.push(result.id);
       return $state.go('^');
     };
   }
 
-  ApplicationsPersonSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Person', 'person'];
+  ApplicationsPersonSelectCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Person',
+    'selectedPerson'
+  ];
 
   angular.module('gva').controller('ApplicationsPersonSelectCtrl', ApplicationsPersonSelectCtrl);
 }(angular, _));

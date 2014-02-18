@@ -7,12 +7,22 @@
     $scope,
     $state,
     Application,
-    person,
-    doc
+    application,
+    selectedPerson,
+    selectedDoc
     ) {
 
-    $scope.person = person;
-    $scope.doc = doc;
+    if (selectedPerson.length > 0) {
+      application.person = {
+        id: selectedPerson.pop()
+      };
+    }
+
+    if (selectedDoc.length > 0) {
+      application.doc = selectedDoc.pop();
+    }
+
+    $scope.application = application;
 
     $scope.newPerson = function () {
       return $state.go('root.applications.link.personNew');
@@ -31,10 +41,7 @@
     };
 
     $scope.clear = function () {
-      $scope.doc.docId = null;
-      $scope.doc.regUri = null;
-      $scope.doc.docTypeName = null;
-      $scope.doc.docStatusName = null;
+      $scope.application.doc = null;
     };
 
     $scope.save = function () {
@@ -43,8 +50,8 @@
         if ($scope.appForm.$valid) {
 
           var newApplication = {
-            lotId: $scope.person.id,
-            docId: $scope.doc.docId
+            lotId: $scope.application.person.id,
+            docId: $scope.application.doc.docId
           };
 
           Application.linkNew(newApplication).$promise.then(function (result) {
@@ -60,16 +67,20 @@
     '$scope',
     '$state',
     'Application',
-    'person',
-    'doc'
+    'application',
+    'selectedPerson',
+    'selectedDoc'
   ];
 
   ApplicationsLinkCtrl.$resolve = {
-    person: function () {
+    application: function () {
       return {};
     },
-    doc: function () {
-      return {};
+    selectedPerson: function () {
+      return [];
+    },
+    selectedDoc: function () {
+      return [];
     }
   };
 

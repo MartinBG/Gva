@@ -31,12 +31,12 @@
             <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
             <sc-text ng-model="doc.caseRegUri" name="caseRegUri" ng-readonly="!!parentDoc"></sc-text>
           </div>
-          <div class="form-group col-sm-4" gva-has-error="docTypeGroupId">
+          <div class="form-group col-sm-4" sc-has-error="docTypeGroupId">
             <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
             <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroup'" load="true" ng-required="true"></sc-nomenclature>
           </div>
-          <div class="form-group col-sm-4" gva-has-error="docTypeId">
+          <div class="form-group col-sm-4" sc-has-error="docTypeId">
             <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
             <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docType'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-          <div class="form-group col-sm-4" gva-has-error="docSubject">
+          <div class="form-group col-sm-4" sc-has-error="docSubject">
             <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
             <sc-validation-error field-name="docSubject" validations="{required: null}"></sc-validation-error>
             <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
@@ -53,7 +53,7 @@
             <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
             <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondent'" load="true" multiple></sc-nomenclature>
           </div>
-          <div class="form-group col-sm-4" gva-has-error="numberOfDocs">
+          <div class="form-group col-sm-4" sc-has-error="numberOfDocs">
             <label class="control-label" l10n-text="docs.newDoc.numberOfDocs"></label>
             <sc-validation-error field-name="numberOfDocs" validations="{required: null}"></sc-validation-error>
             <sc-int ng-model="doc.numberOfDocs" name="numberOfDocs" required sc-validate="{singleDoc: isNumberOfDocsValid}"></sc-int>
