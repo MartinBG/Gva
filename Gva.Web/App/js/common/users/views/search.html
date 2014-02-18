@@ -3,9 +3,9 @@
     <sc-filter type="text" name="username" class="col-sm-3" removable="false" label="common.users.search.username"></sc-filter>
     <sc-filter type="text" name="fullname" class="col-sm-2 col-md-3 col-lg-4" removable="true" label="common.users.search.name"></sc-filter>
     <sc-filter type="select" name="showActive" class="col-sm-2" removable="true" options="{ allowClear: true, placeholder: ' ', data: [{ id: 'true', text: $root.l10n.get('common.users.search.onlyActive') }, { id: 'false', text: $root.l10n.get('common.users.search.onlyUnactive')}]}" label="common.users.search.activity"></sc-filter>
-    <sc-button action="search()" text="common.users.search.search" icon="glyphicon-search"></sc-button>
-    <sc-button action="newUser()" text="common.users.search.new" icon="glyphicon-user"></sc-button>
-    <sc-button action="add"></sc-button>
+    <sc-search-button action="search()" text="common.users.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newUser()" text="common.users.search.new" icon="glyphicon-user"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
   <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">

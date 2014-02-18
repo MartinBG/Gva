@@ -1,0 +1,26 @@
+﻿<div>
+  <div class="well">
+    <select ng-model="state" data-placeholder="Pick state" ui-select2="{ allowClear: true}" style="width:150px">
+      <option value=""></option>
+      <option value="root.scaffoldingTestbed.sctabs.tab1">Tab1</option>
+      <option value="root.scaffoldingTestbed.sctabs.tab2">Tab2</option>
+      <option value="root.scaffoldingTestbed.sctabs.subtab1">Subtab1</option>
+      <option value="root.scaffoldingTestbed.sctabs.subtab2">Subtab2</option>
+      <option value="root.scaffoldingTestbed.sctabs.subtab3">Subtab3</option>
+    </select>
+
+    <div class="pull-right">
+      <label>Current state is: <span id="currentState">{{state || 'root.scaffoldingTestbed.sctabs'}}</span></label>
+    </div>
+  </div>
+  <sc-tabs tab-list="{
+      'Tab1': 'root.scaffoldingTestbed.sctabs.tab1',
+      'Tab2': 'root.scaffoldingTestbed.sctabs.tab2',
+      'Tab3': {
+        'Subtab1': 'root.scaffoldingTestbed.sctabs.subtab1',
+        'Subtab2': 'root.scaffoldingTestbed.sctabs.subtab2',
+        'Subtab3': 'root.scaffoldingTestbed.sctabs.subtab3'
+      }
+    }"></sc-tabs>
+  <div ui-view></div>
+</div>

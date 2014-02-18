@@ -1,8 +1,8 @@
-﻿<gva-button name="createBtn" gva-click="newDocumentId()" text="persons.documentIdSearch.newDocumentId" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+﻿<sc-button name="createBtn" btn-click="newDocumentId()" text="persons.documentIdSearch.newDocumentId" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable ng-model="documentIds" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <gva-button name="editBtn" class="btn btn-xs btn-primary" gva-click="editDocumentId(item)" icon="glyphicon-pencil"></gva-button>
-    <gva-button name="deleteBtn" class="btn btn-xs btn-default" gva-click="deleteDocumentId(item)" icon="glyphicon-remove"></gva-button>
+    <sc-button name="editBtn" class="btn btn-xs btn-primary" btn-click="editDocumentId(item)" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" class="btn btn-xs btn-default" btn-click="deleteDocumentId(item)" icon="glyphicon-remove"></sc-button>
   </sc-column>
   <sc-column data="part.personDocumentIdType.name" title="persons.documentIdSearch.docTypeId">
   </sc-column>

@@ -1,10 +1,10 @@
-﻿// Usage: <sc-button action="" class="" text="" icon=""></sc-button>
+﻿// Usage: <sc-search-button action="" class="" text="" icon=""></sc-search-button>
 
 /*globals angular, $ */
 (function (angular, $) {
   'use strict';
 
-  function ButtonDirective($parse, l10n) {
+  function SearchButtonDirective($parse, l10n) {
     function ButtonCompile (tElement, tAttrs) {
       var btnClasses = tElement.attr('class');
 
@@ -59,12 +59,12 @@
         action: '@',
         icon: '@'
       },
-      templateUrl: 'scaffolding/directives/search/buttonDirective.html',
+      templateUrl: 'scaffolding/directives/search/searchButtonDirective.html',
       compile: ButtonCompile
     };
   }
 
-  ButtonDirective.$inject = ['$parse', 'l10n'];
+  SearchButtonDirective.$inject = ['$parse', 'l10n'];
 
-  angular.module('scaffolding').directive('scButton', ButtonDirective);
+  angular.module('scaffolding').directive('scSearchButton', SearchButtonDirective);
 }(angular, $));

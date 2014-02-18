@@ -1,4 +1,4 @@
-﻿// Usage: <gva-tabs tab-list="<object>"></gva-tabs>
+﻿// Usage: <sc-tabs tab-list="<object>"></sc-tabs>
 
 /*global angular, _*/
 (function (angular, _) {
@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'gva/directives/tabs/tabsDirective.html',
+      templateUrl: 'scaffolding/directives/tabs/tabsDirective.html',
       scope: {
         tabList: '&'
       },
@@ -46,8 +46,12 @@
           $scope.tabList.push(newTab);
         });
 
+        $scope.$on('$stateChangeStart', function (event, toState) {
+          activateTab(toState.name, true);
+        });
+
         $scope.$on('$stateChangeSuccess', function(event, toState){
-          activateTab(toState.name);
+          stopLoader(toState.name);
         });
 
         $scope.openTab = function (newSection) {
@@ -59,7 +63,29 @@
           }
         };
 
-        function activateTab(tabName) {
+        function stopLoader(tabName) {
+          var tab;
+
+          for (var i = 0; i < $scope.tabList.length; i++) {
+            tab = $scope.tabList[i];
+
+            if (tab.isState && tab.name === tabName) {
+              tab.loading = false;
+              return;
+            }
+          }
+
+          for (var j = 0; j < $scope.secondTabList.length; j++) {
+            tab = $scope.secondTabList[j];
+
+            if (tab.isState && tab.name === tabName) {
+              tab.loading = false;
+              return;
+            }
+          }
+        }
+
+        function activateTab(tabName, loading) {
           for (var i = 0; i < $scope.tabList.length; i++) {
             var tab = $scope.tabList[i];
 
@@ -68,6 +94,7 @@
                 continue;
               }
               selectTab($scope.tabList, tab);
+              tab.loading = loading;
 
               $scope.secondTabList = [];
               return;
@@ -80,6 +107,7 @@
                   selectTab($scope.tabList, tab);
                   $scope.secondTabList = tab.children;
                   selectTab($scope.secondTabList, childTab);
+                  childTab.loading = loading;
                   return;
                 }
               }
@@ -94,12 +122,12 @@
           tab.isActive = true;
         }
 
-        activateTab($state.$current.name);
+        activateTab($state.$current.name, false);
       }
     };
   }
 
   TabsDirective.$inject = ['$state'];
 
-  angular.module('gva').directive('gvaTabs', TabsDirective);
+  angular.module('scaffolding').directive('scTabs', TabsDirective);
 }(angular, _));

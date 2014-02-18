@@ -19,7 +19,7 @@
       };
 
       this.initialize = function () {
-        _.forOwn(filters, function(filterScope, filterName) {
+        _.forOwn(filters, function (filterScope, filterName) {
           var dropdownFilter = {
             label: filterScope.label,
             name: filterName,
@@ -65,6 +65,10 @@
             } else {
               buttonBlock.before(elem);
             }
+          });
+
+          $scope.$on('$destroy', function () {
+            clone.remove();
           });
         });
 
