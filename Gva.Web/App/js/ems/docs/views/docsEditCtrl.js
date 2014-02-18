@@ -85,7 +85,7 @@
     doc: [
       '$stateParams',
       'Doc',
-      function ResolveDoc($stateParams, Doc) {
+      function resolveDoc($stateParams, Doc) {
         return Doc.get({ docId: $stateParams.docId }).$promise;
       }
     ]

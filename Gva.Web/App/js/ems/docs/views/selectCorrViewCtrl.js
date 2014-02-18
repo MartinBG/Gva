@@ -48,18 +48,18 @@
       });
     };
 
-    $scope.selectCorr = function SelectCorr(corr) {
+    $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
         nomTypeValueId: corr.corrId,
         name: corr.displayName,
         content: corr
       };
 
-      selectedCorrs.onCorrSelect(nomItem); //todo use promise
+      selectedCorrs.onCorrSelect(nomItem);
       return $state.go('^');
     };
 
-    $scope.cancel = function Cancel() {
+    $scope.cancel = function cancel() {
       return $state.go('^');
     };
   }
@@ -76,7 +76,7 @@
     corrs: [
       '$stateParams',
       'Corr',
-      function ResolveCorrs($stateParams, Corr) {
+      function resolveCorrs($stateParams, Corr) {
         return Corr.query($stateParams).$promise;
       }
     ]

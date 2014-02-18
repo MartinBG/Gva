@@ -4,10 +4,10 @@
     <div class="well-sm panel-body ">
       <ng-form name="addDocPartType" sc-validate="{}">
         <div class="row">
-          <div class="form-group col-sm-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4" ng-class="{'has-error': addDocPartType.$validated && addDocPartType.$invalid}">
+          <div class="form-group col-sm-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4" sc-has-error="docPartType">
             <label class="control-label" l10n-text="applications.edit.newFile.documentType"></label>
-            <span ng-show="addDocPartType.$invalid && addDocPartType.$validated && !addDocPartType.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
-            <sc-nomenclature ng-model="documentData.docPartType" name="docPartType" alias="'documentParts'" load="false" ng-required="true"></sc-nomenclature>
+            <sc-validation-error field-name="docPartType" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="docPartType" name="docPartType" alias="'documentParts'" load="false" ng-required="true"></sc-nomenclature>
           </div>
         </div>
 

@@ -42,7 +42,7 @@
     };
 
     $scope.selectUnit = function SelectUnit(unit) {
-      selectedUnits.onUnitSelect(unit); //todo use promise
+      selectedUnits.onUnitSelect(unit);
       return $state.go('^');
     };
 

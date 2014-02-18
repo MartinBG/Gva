@@ -154,8 +154,7 @@
               $jsonData.legalEntityBulstat;
           }
           else if ($jsonData.correspondentType.nomTypeValueId === 4) {
-            $jsonData.displayName = $jsonData.fLegalEntityName + ' ' +
-              $jsonData.legalEntityBulstat;
+            $jsonData.displayName = $jsonData.fLegalEntityName;
           }
 
           $jsonData.corrId = ++nextCorrId;

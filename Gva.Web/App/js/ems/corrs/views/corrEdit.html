@@ -1,14 +1,13 @@
 ﻿<div class="form-inline">
-
   <ng-form name="corrForm" sc-validate="{}">
     <div class="panel panel-default">
       <div class="panel-heading"><strong l10n-text="corrs.edit.correspondentTitle"></strong></div>
 
       <div class="well-sm panel-body">
         <div class="row">
-          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.correspondentGroup.$invalid}">
+          <div class="form-group col-sm-4" sc-has-error="correspondentGroup">
             <label class="control-label" l10n-text="corrs.edit.correspondentGroup"></label>
-            <span ng-show="corrForm.correspondentGroup.$invalid && corrForm.$validated && !corrForm.correspondentGroup.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+            <sc-validation-error field-name="correspondentGroup" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature name="correspondentGroup" ng-model="corr.correspondentGroup" alias="'correspondentGroup'" load="false" required></sc-nomenclature>
           </div>
           <div class="form-group col-sm-4">
@@ -18,9 +17,9 @@
         </div>
 
         <div class="row">
-          <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.correspondentType.$invalid}">
+          <div class="form-group col-sm-4" sc-has-error="correspondentType">
             <label class="control-label" l10n-text="corrs.edit.correspondentType"></label>
-            <span ng-show="corrForm.correspondentType.$invalid && corrForm.$validated && !corrForm.correspondentType.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+            <sc-validation-error field-name="correspondentType" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature name="correspondentType" ng-model="corr.correspondentType" alias="'correspondentType'" load="false" required></sc-nomenclature>
           </div>
         </div>
@@ -28,14 +27,14 @@
         <!--BgCitizen-->
         <div ng-show="corr.correspondentType.alias == 'BulgarianCitizen'">
           <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.bgCitizenFirstName.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="bgCitizenFirstName">
               <label class="control-label" l10n-text="corrs.edit.bgCitizenFirstName"></label>
-              <span ng-show="corrForm.bgCitizenFirstName.$invalid && corrForm.$validated && !corrForm.bgCitizenFirstName.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="bgCitizenFirstName" validations="{required: null}"></sc-validation-error>
               <sc-text name="bgCitizenFirstName" ng-model="corr.bgCitizenFirstName" ng-required="corr.correspondentType.alias == 'BulgarianCitizen'"></sc-text>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.bgCitizenLastName.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="bgCitizenLastName">
               <label class="control-label" l10n-text="corrs.edit.bgCitizenLastName"></label>
-              <span ng-show="corrForm.bgCitizenLastName.$invalid && corrForm.$validated && !corrForm.bgCitizenLastName.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="bgCitizenLastName" validations="{required: null}"></sc-validation-error>
               <sc-text name="bgCitizenLastName" ng-model="corr.bgCitizenLastName" ng-required="corr.correspondentType.alias == 'BulgarianCitizen'"></sc-text>
             </div>
             <div class="form-group col-sm-4">
@@ -48,14 +47,14 @@
         <!--Foreigner-->
         <div ng-show="corr.correspondentType.alias == 'Foreigner'">
           <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.foreignerFirstName.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="foreignerFirstName">
               <label class="control-label" l10n-text="corrs.edit.foreignerFirstName"></label>
-              <span ng-show="corrForm.foreignerFirstName.$invalid && corrForm.$validated && !corrForm.foreignerFirstName.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="foreignerFirstName" validations="{required: null}"></sc-validation-error>
               <sc-text name="foreignerFirstName" ng-model="corr.foreignerFirstName" ng-required="corr.correspondentType.alias == 'Foreigner'"></sc-text>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.foreignerLastName.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="foreignerLastName">
               <label class="control-label" l10n-text="corrs.edit.foreignerLastName"></label>
-              <span ng-show="corrForm.foreignerLastName.$invalid && corrForm.$validated && !corrForm.foreignerLastName.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="foreignerLastName" validations="{required: null}"></sc-validation-error>
               <sc-text name="foreignerLastName" ng-model="corr.foreignerLastName" ng-required="corr.correspondentType.alias == 'Foreigner'"></sc-text>
             </div>
             <div class="form-group col-sm-2">
@@ -79,13 +78,14 @@
         <!--LegalEntity-->
         <div ng-show="corr.correspondentType.alias == 'LegalEntity'">
           <div class="row">
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-4" sc-has-error="legalEntityName">
               <label class="control-label" l10n-text="corrs.edit.legalEntityName"></label>
-              <sc-text ng-model="corr.legalEntityName"></sc-text>
+              <sc-validation-error field-name="legalEntityName" validations="{required: null}"></sc-validation-error>
+              <sc-text name="legalEntityName" ng-model="corr.legalEntityName" ng-required="corr.correspondentType.alias == 'LegalEntity'"></sc-text>
             </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.legalEntityBulstat.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="legalEntityBulstat">
               <label class="control-label" l10n-text="corrs.edit.legalEntityBulstat"></label>
-              <span ng-show="corrForm.legalEntityBulstat.$invalid && corrForm.$validated && !corrForm.legalEntityBulstat.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="legalEntityBulstat" validations="{required: null}"></sc-validation-error>
               <sc-text name="legalEntityBulstat" ng-model="corr.legalEntityBulstat" ng-required="corr.correspondentType.alias == 'LegalEntity'"></sc-text>
             </div>
           </div>
@@ -94,9 +94,9 @@
         <!--ForeignLegalEntity-->
         <div ng-show="corr.correspondentType.alias == 'ForeignLegalEntity'">
           <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': corrForm.$validated && corrForm.fLegalEntityName.$invalid}">
+            <div class="form-group col-sm-4" sc-has-error="fLegalEntityName">
               <label class="control-label" l10n-text="corrs.edit.fLegalEntityName"></label>
-              <span ng-show="corrForm.fLegalEntityName.$invalid && corrForm.$validated && !corrForm.fLegalEntityName.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
+              <sc-validation-error field-name="fLegalEntityName" validations="{required: null}"></sc-validation-error>
               <sc-text name="fLegalEntityName" ng-model="corr.fLegalEntityName" ng-required="corr.correspondentType.alias == 'ForeignLegalEntity'"></sc-text>
             </div>
             <div class="form-group col-sm-4">

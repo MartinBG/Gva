@@ -3,13 +3,13 @@
     <div class="panel-heading"><strong l10n-text="applications.edit.linkFile.title"></strong></div>
     <div class="well-sm panel-body ">
 
-      <div ng-if="documentData.docFiles.length > 0">
+      <div ng-if="docFileKey">
         <div class="row">
           <label class="control-label col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-3" l10n-text="applications.edit.linkFile.documentType"></label>
         </div>
         <div class="row">
           <div class="form-group col-sm-offset-1 col-md-offset-2 col-lg-offset-2 col-sm-5">
-            <sc-nomenclature ng-model="documentData.docPartType" name="docPartType" alias="'documentParts'" load="false" ng-required="true"></sc-nomenclature>
+            <sc-nomenclature ng-model="wrapper.docPartType" name="docPartType" alias="'documentParts'" load="false" ng-required="true"></sc-nomenclature>
           </div>
           <div class="form-group">
             <sc-button name="cancelSearch" btn-click="search()" l10n-text="applications.edit.linkFile.search" class="btn btn-sm btn-primary"></sc-button>
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <div ng-if="showDocumentId && documentData.docPartType.alias === 'DocumentId'">
+        <div ng-if="showDocumentId && wrapper.docPartType.alias === 'DocumentId'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -39,7 +39,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentEducation && documentData.docPartType.alias === 'DocumentEducation'">
+        <div ng-if="showDocumentEducation && wrapper.docPartType.alias === 'DocumentEducation'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -61,7 +61,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentEmployment && documentData.docPartType.alias === 'DocumentEmployment'">
+        <div ng-if="showDocumentEmployment && wrapper.docPartType.alias === 'DocumentEmployment'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -87,7 +87,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentMed && documentData.docPartType.alias === 'DocumentMed'">
+        <div ng-if="showDocumentMed && wrapper.docPartType.alias === 'DocumentMed'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -113,7 +113,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentCheck && documentData.docPartType.alias === 'DocumentCheck'">
+        <div ng-if="showDocumentCheck && wrapper.docPartType.alias === 'DocumentCheck'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -147,7 +147,7 @@
           </sc-datatable>
         </div>
 
-        <div ng-if="showDocumentTraining && documentData.docPartType.alias === 'DocumentTraining'">
+        <div ng-if="showDocumentTraining && wrapper.docPartType.alias === 'DocumentTraining'">
           <sc-datatable ng-model="wrapper.documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
             <sc-column sortable="false" class="buttons-cell" width="1px">
               <sc-button name="selectBtn" btn-click="linkPart(item)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -185,7 +185,7 @@
         </div>
       </div>
 
-      <div ng-if="!documentData.docFiles.length">
+      <div ng-if="!docFileKey">
         <div class="col-sm-offset-1 col-md-offset-5 col-lg-offset-5 col-sm-5">
           <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.linkFile.cancel" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></sc-button>
         </div>

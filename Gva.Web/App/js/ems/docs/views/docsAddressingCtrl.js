@@ -12,43 +12,43 @@
   ) {
     $scope.doc = doc;
 
-    $scope.selectCorr = function SelectCorr() {
+    $scope.selectCorr = function selectCorr() {
       var doc = $scope.doc;
       selectedCorrs.corrs.splice(0);
       selectedCorrs.corrs = _.assign(selectedCorrs.corrs, doc.docCorrespondents);
       selectedCorrs.onCorrSelect = function (corr) {
         doc.docCorrespondents.push(corr);
-        selectedCorrs.onCorrSelect = null; //todo return promise?
+        selectedCorrs.onCorrSelect = null;
       };
 
       return $state.go('root.docs.edit.addressing.selectCorr');
     };
 
-    $scope.selectUnitFrom = function SelectUnitFrom() {
+    $scope.selectUnitFrom = function selectUnitFrom() {
       var doc = $scope.doc;
       selectedUnits.units.splice(0);
       selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsFrom);
       selectedUnits.onUnitSelect = function (unit) {
         doc.docUnitsFrom.push(unit);
-        selectedUnits.onUnitSelect = null; //todo return promise?
+        selectedUnits.onUnitSelect = null;
       };
 
       return $scope.selectUnit();
     };
 
-    $scope.selectUnitTo = function SelectUnitTo() {
+    $scope.selectUnitTo = function selectUnitTo() {
       var doc = $scope.doc;
       selectedUnits.units.splice(0);
       selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsTo);
       selectedUnits.onUnitSelect = function (unit) {
         doc.docUnitsTo.push(unit);
-        selectedUnits.onUnitSelect = null; //todo return promise?
+        selectedUnits.onUnitSelect = null;
       };
 
       return $scope.selectUnit();
     };
 
-    $scope.selectUnit = function SelectUnit() {
+    $scope.selectUnit = function selectUnit() {
       return $state.go('root.docs.edit.addressing.selectUnit');
     };
   }
@@ -64,7 +64,7 @@
 
   DocsAddressingCtrl.$resolve = {
     selectedCorrs: [
-      function ResolveSelectedCorrs() {
+      function resolveSelectedCorrs() {
         return {
           corrs: [],
           onCorrSelect: null
@@ -72,7 +72,7 @@
       }
     ],
     selectedUnits: [
-      function ResolveSelectedUnits() {
+      function resolveSelectedUnits() {
         return {
           units: [],
           onUnitSelect: null

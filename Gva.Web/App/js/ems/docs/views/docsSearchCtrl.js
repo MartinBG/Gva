@@ -66,7 +66,7 @@
     docs: [
       '$stateParams',
       'Doc',
-      function ResolveDocs($stateParams, Doc) {
+      function resolveDocs($stateParams, Doc) {
         return Doc.query($stateParams).$promise;
       }
     ]

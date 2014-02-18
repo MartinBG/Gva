@@ -1,36 +1,36 @@
 ﻿<div class="tab-content" ng-init="wrapper = {}">
   <ng-form name="addFormWrapper" sc-validate="{}">
-    <div ng-if="documentData.docPartType">
-        <div ng-if="documentData.docPartType.alias === 'DocumentId'">
+    <div ng-if="docPartTypeAlias">
+        <div ng-if="docPartTypeAlias === 'DocumentId'">
           <gva-person-document-id name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-id>
         </div>
-        <div ng-if="documentData.docPartType.alias === 'DocumentEducation'">
+        <div ng-if="docPartTypeAlias === 'DocumentEducation'">
           <gva-person-document-education name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-education>
         </div>
-        <div ng-if="documentData.docPartType.alias === 'DocumentEmployment'">
+        <div ng-if="docPartTypeAlias === 'DocumentEmployment'">
           <gva-person-document-employment name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-employment>
         </div>
-        <div ng-if="documentData.docPartType.alias === 'DocumentMed'">
+        <div ng-if="docPartTypeAlias === 'DocumentMed'">
           <gva-person-document-medical name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-medical>
         </div>
-        <div ng-if="documentData.docPartType.alias === 'DocumentCheck'">
+        <div ng-if="docPartTypeAlias === 'DocumentCheck'">
           <gva-person-document-check name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-check>
         </div>
-        <div ng-if="documentData.docPartType.alias === 'DocumentTraining'">
+        <div ng-if="docPartTypeAlias === 'DocumentTraining'">
           <gva-person-document-training name="addForm" ng-model="wrapper.applicationDocPart.part"></gva-person-document-training>
         </div>
         <!--TODO ADD MORE-->
 
-        <ng-form name="personScannedDocumentForm">
+        <ng-form name="personScannedDocumentForm" sc-validate="{}">
           <div class="panel panel-default">
             <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
             <div class="well-sm panel-body">
               <div class="row">
-                <div class="form-group col-sm-3" ng-class="{'has-error': addFormWrapper.$validated && addFormWrapper.personScannedDocumentForm.$invalid}">
+                <div class="form-group col-sm-3" sc-has-error="applicationDocPartFile">
                   <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
-                  <span ng-show="addFormWrapper.personScannedDocumentForm.$invalid && addFormWrapper.$validated && !addFormWrapper.personScannedDocumentForm.$error.$pending" class="glyphicon glyphicon-warning-sign" title="Задължително поле"></span>
-                  <sc-files ng-if="!documentData.isLinkNew" ng-model="wrapper.applicationDocPart.file" ng-required="true"></sc-files>
-                  <sc-files ng-if="documentData.isLinkNew" ng-model="documentData.docFiles" ng-readonly="true"></sc-files>
+                  <sc-validation-error field-name="applicationDocPartFile" validations="{required: null}"></sc-validation-error>
+                  <sc-files ng-if="isLinkNew === 'false'" name="applicationDocPartFile" ng-model="wrapper.applicationDocPart.file" ng-required="true"></sc-files>
+                  <sc-files ng-if="isLinkNew === 'true'" ng-model="docFiles" ng-readonly="true"></sc-files>
                 </div>
               </div>
             </div>
@@ -38,8 +38,8 @@
         </ng-form>
 
         <div class="col-sm-3 col-sm-offset-5">
-          <sc-button ng-if="!documentData.isLinkNew" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
-          <sc-button ng-if="documentData.isLinkNew" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
+          <sc-button ng-if="isLinkNew === 'false'" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
+          <sc-button ng-if="isLinkNew === 'true'" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
           <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
         </div>
 
@@ -47,7 +47,7 @@
     </div>
   </ng-form>
 
-  <div ng-if="!documentData.docPartType">
+  <div ng-if="!docPartTypeAlias">
     <div class="col-sm-4 col-lg-offset-5 col-md-offset-5 col-sm-offset-4">
       <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-sm btn-primary" icon="glyphicon-arrow-left"></sc-button>
     </div>

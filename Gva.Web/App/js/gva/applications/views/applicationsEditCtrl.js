@@ -11,13 +11,6 @@
     ) {
     $scope.application = application;
 
-    $scope.documentData = {
-      docPartType: null,
-      docFiles: [],
-      currentDocId: null,
-      isLinkNew: false
-    };
-
     $scope.viewPerson = function (id) {
       return $state.go('root.persons.view', { id: id });
     };
