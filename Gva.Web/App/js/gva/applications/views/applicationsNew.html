@@ -1,1 +1,54 @@
-﻿<div ui-view></div>
+﻿<div>
+  <div class="panel panel-default">
+    <nav class="panel-heading">
+      <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
+        <sc-button btn-click="save()" text="applications.newForm.register" class="btn btn-default btn-sm" icon="glyphicon glyphicon-ok"></sc-button>
+        <sc-button btn-click="cancel()" text="applications.newForm.cancel" class="btn btn-default btn-sm" icon="glyphicon glyphicon-remove"></sc-button>
+      </div>
+    </nav>
+    <div class="well-sm panel-body">
+      <ng-form name="appForm" sc-validate="{}">
+        <div class="well-sm panel-body ">
+
+          <div class="row">
+            <div class="form-group col-md-6" sc-has-error="personLotId">
+              <label class="control-label" l10n-text="applications.newForm.person"></label>
+              <sc-validation-error field-name="personLotId" validations="{required: null}"></sc-validation-error>
+              <div class="input-group input-group-sm">
+                <sc-nomenclature ng-model="application.person.id" alias="'persons'" mode="id" name="personLotId" required style="float: left;"></sc-nomenclature>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="selectPerson()">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                  <button class="btn btn-default" type="button" ng-click="newPerson()">Нов заявител</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6" sc-has-error="docTypeGroupId">
+              <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
+              <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature  ng-model="application.docTypeGroup" name="docTypeGroupId" alias="'docTypeGroup'" load="true" required></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-6" sc-has-error="docTypeId">
+              <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
+              <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature  ng-model="application.docType" name="docTypeId" alias="'docType'" load="false" params="{ parentId: application.docTypeGroup ? application.docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12" sc-has-error="docSubject">
+              <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
+              <sc-validation-error field-name="docSubject" validations="{required: null}"></sc-validation-error>
+              <sc-text ng-model="application.docSubject" name="docSubject" required></sc-text>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+ </div>
+</div>

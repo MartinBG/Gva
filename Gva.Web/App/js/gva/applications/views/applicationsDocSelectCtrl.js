@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function DocChooseCtrl($scope, $state, $stateParams, Doc) {
+  function ApplicationsDocSelectCtrl($scope, $state, $stateParams, Doc, selectedDoc) {
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -27,7 +27,7 @@
     });
 
     $scope.search = function () {
-      $state.go('root.applications.link.docChoose', {
+      $state.go('root.applications.link.docSelect', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         regUri: $scope.filters.regUri,
@@ -41,18 +41,22 @@
       });
     };
 
-    $scope.chooseDoc = function (doc) {
-      $scope.$parent.doc = doc;
-
-      return $state.go('root.applications.link.common');
+    $scope.selectDoc = function (result) {
+      selectedDoc.push({
+        docId: result.docId,
+        regUri: result.regUri,
+        docTypeName: result.docTypeName,
+        docStatusName: result.docStatusName
+      });
+      return $state.go('^');
     };
 
     $scope.cancel = function () {
-      return $state.go('root.applications.link.common');
+      return $state.go('^');
     };
   }
 
-  DocChooseCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc'];
+  ApplicationsDocSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc', 'selectedDoc'];
 
-  angular.module('gva').controller('DocChooseCtrl', DocChooseCtrl);
+  angular.module('gva').controller('ApplicationsDocSelectCtrl', ApplicationsDocSelectCtrl);
 }(angular, _));

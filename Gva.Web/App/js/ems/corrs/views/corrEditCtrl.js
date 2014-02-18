@@ -7,17 +7,18 @@
     $filter,
     $state,
     $stateParams,
-    Corr
+    Corr,
+    corr
   ) {
     if ($stateParams.corrId) {
       $scope.isEdit = true;
-      $scope.corr = Corr.get({ corrId: $stateParams.corrId });
+      $scope.corr = corr;
     } else {
       $scope.isEdit = false;
       $scope.corr = {};
     }
 
-    $scope.removeCorrContact = function (target) {
+    $scope.removeCorrContact = function removeCorrContact(target) {
       var index = $scope.corr.correspondentContacts.indexOf(target);
 
       if (index > -1) {
@@ -25,7 +26,7 @@
       }
     };
 
-    $scope.addCorrContact = function (corrId) {
+    $scope.addCorrContact = function addCorrContact(corrId) {
       var correspondentContact = {
         correspondentContactId: null,
         corrId: corrId,
@@ -38,20 +39,20 @@
       $scope.corr.correspondentContacts.push(correspondentContact);
     };
 
-    $scope.save = function () {
+    $scope.save = function save() {
       $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
             Corr.save($scope.corr).$promise
               .then(function () {
-                $state.go('root.corrs.search');
+                return $state.go('root.corrs.search');
               });
           }
         });
     };
 
-    $scope.cancel = function () {
-      $state.go('root.corrs.search');
+    $scope.cancel = function cancel() {
+      return $state.go('root.corrs.search');
     };
   }
 
@@ -60,8 +61,23 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Corr'
+    'Corr',
+    'corr'
   ];
+
+  CorrsEditCtrl.$resolve = {
+    corr: [
+      '$stateParams',
+      'Corr',
+      function resolveCorr($stateParams, Corr) {
+        if ($stateParams.corrId) {
+          return Corr.get({ corrId: $stateParams.corrId }).$promise;
+        }
+
+        return;
+      }
+    ]
+  };
 
   angular.module('ems').controller('CorrsEditCtrl', CorrsEditCtrl);
 }(angular));

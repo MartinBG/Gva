@@ -8,6 +8,17 @@
     $stateParams,
     Application
     ) {
+    $scope.isLinkNew = $stateParams.isLinkNew;
+    $scope.currentDocId = $stateParams.currentDocId;
+    $scope.docPartTypeAlias = $stateParams.docPartTypeAlias;
+    $scope.docFiles = [
+      {
+        key: $stateParams.docFileKey,
+        name: $stateParams.docFileName,
+        relativePath: null
+      }
+    ];
+
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
@@ -18,9 +29,9 @@
           if ($scope.addFormWrapper.$valid) {
             return Application
               .partsNew({ id: $stateParams.id }, {
-                docId: $scope.documentData.currentDocId,
+                docId: $stateParams.currentDocId,
                 files: $scope.wrapper.applicationDocPart.file,
-                setPartAlias: $scope.documentData.docPartType.alias,
+                setPartAlias: $stateParams.docPartTypeAlias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
@@ -36,8 +47,8 @@
           if ($scope.addFormWrapper.$valid) {
             return Application
               .partsLinkNew({ id: $stateParams.id }, {
-                docFileKey: $scope.documentData.docFiles[0].key,
-                setPartAlias: $scope.documentData.docPartType.alias,
+                docFileKey: $stateParams.docFileKey,
+                setPartAlias: $stateParams.docPartTypeAlias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',

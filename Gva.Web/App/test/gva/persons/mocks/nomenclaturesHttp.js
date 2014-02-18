@@ -5,6 +5,31 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
+      .when('GET', '/api/nomenclatures/units?name',
+        function ($params, $filter) {
+          return [
+            200,
+            $filter('filter')(nomenclatures.unit, {
+              name: $params.name
+            })
+          ];
+        })
+      .when('GET', '/api/nomenclatures/persons?id',
+        function ($params, $filter, personLots) {
+
+          var res = _(personLots).map(function (item) {
+            return {
+              nomTypeValueId: item.lotId,
+              name: item.personData.part.firstName + ' ' + item.personData.part.lastName
+            };
+          }).value();
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+          }
+
+          return [200, res];
+        })
       .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id',
         function ($params, $filter) {
           var res = nomenclatures.personCheckDocumentRoles;

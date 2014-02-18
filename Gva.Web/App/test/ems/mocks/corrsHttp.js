@@ -5,8 +5,8 @@
     var nomenclatures = require('./nomenclatures.sample'),
       corrs = [{
         corrId: 1,
-        correspondentType: nomenclatures.correspondentTypes[0],
-        correspondentGroup: nomenclatures.correspondentGroups[0],
+        correspondentType: nomenclatures.correspondentType[0],
+        correspondentGroup: nomenclatures.correspondentGroup[0],
         displayName: 'ДЕЛТА КОИН 1324567890',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
@@ -53,8 +53,8 @@
         }]
       }, {
         corrId: 2,
-        correspondentType: nomenclatures.correspondentTypes[1],
-        correspondentGroup: nomenclatures.correspondentGroups[1],
+        correspondentType: nomenclatures.correspondentType[1],
+        correspondentGroup: nomenclatures.correspondentGroup[1],
         displayName: 'АЛИ БАБА 4040404040',
         email: 'delta@coin.com',
         bgCitizenFirstName: '',
@@ -91,29 +91,40 @@
       nextCorrContactId = 3;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/corrs',
-        function () {
-          var noms = [],
-            nomItem = {
-              nomTypeValueId: '',
-              name: '',
-              content: []
-            };
+      .when('GET', '/api/nomenclatures/corrs?id',
+       function ($params, $filter) {
 
-          _.forEach(corrs, function (item) {
-            var t = {};
+        var res = _(corrs).map(function (item) {
+          return {
+            nomTypeValueId: item.corrId,
+            name: item.displayName
+          };
+        }).value();
 
-            nomItem.nomTypeValueId = item.corrId;
-            nomItem.name = item.displayName;
-            nomItem.content = item;
-
-            _.assign(t, nomItem, true);
-            noms.push(t);
-          });
-
-          return [200, noms];
+        if ($params.id) {
+          res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
         }
-      )
+
+        return [200, res];
+      })
+      .when('GET', '/api/nomenclatures/persons?id',
+        function ($params, $filter, personLots) {
+
+          var res = _(personLots).map(function (item) {
+            return {
+              nomTypeValueId: item.lotId,
+              name: item.personData.part.firstName + ' ' + item.personData.part.lastName
+            };
+          }).value();
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+          }
+
+          return [200, res];
+        })
+
+
       .when('GET', '/api/corrs?displayName&email',
         function ($params, $filter) {
           return [
@@ -143,8 +154,7 @@
               $jsonData.legalEntityBulstat;
           }
           else if ($jsonData.correspondentType.nomTypeValueId === 4) {
-            $jsonData.displayName = $jsonData.fLegalEntityName + ' ' +
-              $jsonData.legalEntityBulstat;
+            $jsonData.displayName = $jsonData.fLegalEntityName;
           }
 
           $jsonData.corrId = ++nextCorrId;

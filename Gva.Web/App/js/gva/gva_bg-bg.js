@@ -479,23 +479,76 @@
         }
       },
       applications: {
-        newform: {
+        edit: {
+          personName: 'Име',
+          personLin: 'ЛИН',
+          status: 'Статус',
+          docTypeName: 'Относно',
+          editPerson: 'Редакция',
+          'case': {
+            regNumber: 'Тип/№/Дата',
+            description: 'Тип',
+            act: 'Дело',
+            viewDoc: 'Преглед',
+            page: 'стр.',
+            linkNew: 'Добави към дело',
+            linkPart: 'Свържи с вече добавен',
+            newFile: 'Нов документ'
+          },
+          newFile: {
+            title: 'Нов документ в описа',
+            documentType: 'Тип на документ',
+            cancel: 'Назад',
+            addPart: 'Продължи'
+          },
+          linkFile: {
+            title: 'Свържи документ в описа',
+            documentType: 'Тип на документ',
+            search: 'Търси',
+            cancel: 'Назад',
+            select: 'Избор'
+          },
+          addPart: {
+            cancel: 'Назад',
+            save: 'Запис'
+          }
+        },
+        newForm: {
           person: 'Заявител',
           newPerson: 'Нов заявител',
-          choosePerson: 'Избери заявител'
-        },
-        choosePerson: {
-          choose: 'Избери',
+          selectPerson: 'Избери заявител',
+          register: 'Регистрирай',
           cancel: 'Отказ'
         },
         link: {
-          chooseDoc: 'Избор на документ',
+          person: 'Заявител',
+          selectDoc: 'Избор на документ',
           cancel: 'Отказ',
           clear: 'Изчисти',
           document: 'Документ',
           docNumber: 'Рег.№',
           docStatus: 'Статус',
-          docName: 'Име'
+          docName: 'Име',
+          link: 'Свържи'
+        },
+        personSelect: {
+          select: 'Избери',
+          cancel: 'Отказ',
+          names: 'Име',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          licences: 'Лицензи',
+          ratings: 'Квалификации',
+          organization: 'Организация',
+          age: 'Възраст',
+          yes: 'Да',
+          no: 'Не',
+          'new': 'Ново лице',
+          search: 'Търси'
+        },
+        personNew: {
+          saveAndSelect: 'Запис и избор',
+          cancel: 'Отказ'
         },
         search: {
           fromDate: 'От дата',
@@ -518,19 +571,19 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new.doc': 'Ново заявление',
-        'root.applications.new.personChoose': 'Избер на заявител',
+        'root.applications.new.personSelect': 'Избер на заявител',
         'root.applications.new.personNew': 'Нов заявител',
         'root.applications.link.common': 'Свържи заявление',
-        'root.applications.link.docChoose': 'Избор на документ',
-        'root.applications.link.personChoose': 'Избер на заявител',
+        'root.applications.link.docSelect': 'Избор на документ',
+        'root.applications.link.personSelect': 'Избер на заявител',
         'root.applications.link.personNew': 'Нов заявител',
         'root.applications.edit': 'Редакция',
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',
         'root.applications.edit.licenses': 'Лицензи',
-        'root.applications.edit.newfile': 'Нов документ',
-        'root.applications.edit.addpart': 'Добавяне',
-        'root.applications.edit.linkpart': 'Свързване',
+        'root.applications.edit.newFile': 'Нов документ',
+        'root.applications.edit.addPart': 'Добавяне',
+        'root.applications.edit.linkPart': 'Свързване',
         'root.persons': 'Физически лица',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.view': 'Лично досие',

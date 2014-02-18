@@ -3,45 +3,19 @@
   'use strict';
 
   function DocsNewCtrl(
-    $q,
     $scope,
     $state,
     $stateParams,
     Doc,
-    Nomenclature
+    Nomenclature,
+    docData
   ) {
-    $scope.isChild = !!$stateParams.parentDocId;
 
-    if ($scope.isChild) {
-      Doc.get({ docId: $stateParams.parentDocId }).$promise.then(function (parentDoc) {
-        $scope.parentDoc = parentDoc;
-        $scope.parentDocInfo =
-          'Към ' + parentDoc.regUri + ' ' + parentDoc.docTypeName + ' ' + parentDoc.docSubject;
-      });
-    }
-
-    $scope.doc = {
-      numberOfDocs: 1,
-      parentDocId: $stateParams.parentDocId
-    };
-
-    Nomenclature.query({ alias: 'docFormatTypes' }).$promise.then(function (result) {
-      $scope.docFormatTypes = result;
-      $scope.doc.docFormatTypeId = _($scope.docFormatTypes).first().docFormatTypeId;
-      $scope.doc.docFormatTypeName = _($scope.docFormatTypes).first().name;
-    });
-
-    Nomenclature.query({ alias: 'docCasePartTypes' }).$promise.then(function (result) {
-      $scope.docCasePartTypes = result;
-      $scope.doc.docCasePartTypeId = _($scope.docCasePartTypes).first().docCasePartTypeId;
-      $scope.doc.docCasePartTypeName = _($scope.docCasePartTypes).first().name;
-    });
-
-    Nomenclature.query({ alias: 'docDirections' }).$promise.then(function (result) {
-      $scope.docDirections = result;
-      $scope.doc.docDirectionId = _($scope.docDirections).first().docDirectionId;
-      $scope.doc.docDirectionName = _($scope.docDirections).first().name;
-    });
+    $scope.parentDoc = docData.parentDoc;
+    $scope.doc = docData.doc;
+    $scope.docFormatTypes = docData.docFormatTypes;
+    $scope.docCasePartTypes = docData.docCasePartTypes;
+    $scope.docDirections = docData.docDirections;
 
     $scope.docFormatTypeChange = function ($index) {
       _.forOwn($scope.docFormatTypes, function (item) {
@@ -114,7 +88,7 @@
     };
 
     $scope.cancel = function () {
-      if ($scope.isChild) {
+      if (!!$scope.parentDoc) {
         $state.go('root.docs.edit.addressing', { docId: $stateParams.parentDocId });
       }
       else {
@@ -124,13 +98,46 @@
   }
 
   DocsNewCtrl.$inject = [
-    '$q',
     '$scope',
     '$state',
     '$stateParams',
     'Doc',
-    'Nomenclature'
+    'Nomenclature',
+    'docData'
   ];
+
+  DocsNewCtrl.$resolve = {
+    docData: ['$q', '$stateParams', 'Nomenclature', 'Doc',
+      function ($q, $stateParams, Nomenclature, Doc) {
+        return $q.all({
+          parentDoc: !!$stateParams.parentDocId ?
+            Doc.get({ docId: $stateParams.parentDocId }).$promise : null,
+          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+        }).then(function (res) {
+          var doc = {
+            numberOfDocs: 1,
+            parentDocId: $stateParams.parentDocId,
+            docFormatTypeId: _(res.docFormatTypes).first().docFormatTypeId,
+            docFormatTypeName: _(res.docFormatTypes).first().name,
+            docCasePartTypeId: _(res.docCasePartTypes).first().docCasePartTypeId,
+            docCasePartTypeName: _(res.docCasePartTypes).first().name,
+            docDirectionId: _(res.docDirections).first().docDirectionId,
+            docDirectionName: _(res.docDirections).first().name
+          };
+
+          return {
+            parentDoc: res.parentDoc,
+            doc: doc,
+            docFormatTypes: res.docFormatTypes,
+            docCasePartTypes: res.docCasePartTypes,
+            docDirections: res.docDirections
+          };
+        });
+      }
+    ]
+  };
 
   angular.module('ems').controller('DocsNewCtrl', DocsNewCtrl);
 }(angular, _));

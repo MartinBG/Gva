@@ -1,4 +1,4 @@
-﻿// Usage: 
+﻿// Usage:
 //<sc-validation-error field-name="fieldName" validations="{val1:'l10n', val2: null, ...}">
 //</sc-validation-error>
 

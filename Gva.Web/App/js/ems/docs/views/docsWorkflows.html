@@ -1,29 +1,26 @@
-﻿<div>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Дата</th>
-        <th>Действие</th>
-        <th>Отговор</th>
-        <th>От</th>
-        <th>До</th>
-        <th>Забележка</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="dwf in doc.docWorkflows">
-      <tr>
-        <td>{{ dwf.eventDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td>{{ dwf.docWorkflowActionName }}</td>
-        <td>{{ dwf.yesNo ? 'Да' : 'Не' }}</td>
-        <td>{{ dwf.principalUnitName }}</td>
-        <td>{{ dwf.toUnitName }}</td>
-        <td>{{ dwf.note }}</td>
-        <td style="text-align: right;">
-          <a ng-show="doc.isVisibleDocWorkflows" ng-click="removeDocWorkflow(dwf)" style="cursor: pointer;">изтрий
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+﻿<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th><span l10n-text="docs.edit.workflows.eventDate"></span></th>
+      <th><span l10n-text="docs.edit.workflows.docWorkflowActionName"></span></th>
+      <th><span l10n-text="docs.edit.workflows.yesNo"></span></th>
+      <th><span l10n-text="docs.edit.workflows.principalUnitName"></span></th>
+      <th><span l10n-text="docs.edit.workflows.toUnitName"></span></th>
+      <th><span l10n-text="docs.edit.workflows.note"></span></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="dwf in doc.docWorkflows">
+    <tr>
+      <td>{{ dwf.eventDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dwf.docWorkflowActionName }}</td>
+      <td>{{ dwf.yesNo ? 'Да' : 'Не' }}</td>
+      <td>{{ dwf.principalUnitName }}</td>
+      <td>{{ dwf.toUnitName }}</td>
+      <td>{{ dwf.note }}</td>
+      <td style="text-align: right;">
+        <a ng-show="doc.isVisibleDocWorkflows" ng-click="removeDocWorkflow(dwf)" l10n-text="docs.edit.workflows.delete" style="cursor: pointer;"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

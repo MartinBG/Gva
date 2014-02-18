@@ -7,6 +7,8 @@
     $state,
     $stateParams
     ) {
+    $scope.docPartType = null;
+
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
@@ -15,7 +17,14 @@
       $scope.addDocPartType.$validate()
         .then(function () {
           if ($scope.addDocPartType.$valid) {
-            return $state.go('root.applications.edit.addpart');
+            return $state.go('root.applications.edit.addPart',
+              {
+                isLinkNew: $stateParams.isLinkNew,
+                currentDocId: $stateParams.currentDocId,
+                docFileKey: $stateParams.docFileKey,
+                docFileName: $stateParams.docFileName,
+                docPartTypeAlias: $scope.docPartType.alias
+              });
           }
         });
     };

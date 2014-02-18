@@ -6,57 +6,60 @@
     $scope,
     $state
     ) {
-    $scope.linkNew = function (docId, docFile) {
-      $scope.documentData.isLinkNew = true;
-      $scope.documentData.docFiles = [];
-      $scope.documentData.docFiles.push(docFile);
-      $scope.documentData.currentDocId = docId;
-      $scope.documentData.docPartType = null;
 
-      return $state.go('root.applications.edit.newfile');
+    $scope.linkNew = function (docId, docFile) {
+      return $state.go('root.applications.edit.newFile',
+        {
+          isLinkNew: true,
+          currentDocId: docId,
+          docFileKey: docFile.key,
+          docFileName: docFile.name
+        });
     };
 
     $scope.linkPart = function (docId, docFile) {
-      $scope.documentData.docFiles = [];
-      $scope.documentData.docFiles.push(docFile);
-      $scope.documentData.currentDocId = docId;
-      $scope.documentData.docPartType = null;
-
-      return $state.go('root.applications.edit.linkpart');
+      return $state.go('root.applications.edit.linkPart',
+        {
+          currentDocId: docId,
+          docFileKey: docFile.key,
+          docFileName: docFile.name
+        });
     };
 
-    $scope.newfile = function (docCase) {
-      $scope.documentData.docPartType = null;
-      $scope.documentData.currentDocId = docCase.docInfo.docId;
-      return $state.go('root.applications.edit.newfile');
+    $scope.newFile = function (docId) {
+      return $state.go('root.applications.edit.newFile',
+        {
+          isLinkNew: false,
+          currentDocId: docId
+        });
     };
 
     $scope.viewPart = function (docCase) {
-      var path = '';
+      var state;
 
       if (docCase.appFile.setPartAlias === 'DocumentId') {
-        path = 'root.persons.view.documentIds.edit';
+        state = 'root.persons.view.documentIds.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentEducation') {
-        path = 'root.persons.view.documentEducations.edit';
+        state = 'root.persons.view.documentEducations.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentEmployment') {
-        path = 'root.persons.view.employments.edit';
+        state = 'root.persons.view.employments.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentMed') {
-        path = 'root.persons.view.medicals.edit';
+        state = 'root.persons.view.medicals.edit';
       }
       else if (docCase.appFile.setPartAlias === 'DocumentCheck') {
-        path = 'root.persons.view.checks.edit';
+        state = 'root.persons.view.checks.edit';
       }
-      //else if (docCase.setPartId === 6) {
-      //path = 'root.persons.view.documentIds.edit';
-      //}
+      else if (docCase.appFile.setPartAlias === 'DocumentTraining') {
+        state = 'root.persons.view.documentTrainings.edit';
+      }
       //else if (docCase.setPartId === 7) {
-      //path = 'root.persons.view.documentIds.edit';
+      //state = 'root.persons.view.documentIds.edit';
       //}
 
-      return $state.go(path, {
+      return $state.go(state, {
         id: $scope.application.lotId,
         ind: docCase.appFile.partIndex
       });
