@@ -133,6 +133,16 @@ module.exports = function (grunt) {
     clean: {
       build: {
         src: '<%= buildDir %>'
+      },
+      'design-bundle': {
+        src: [
+          '<%= buildDir %>/css',
+          '<%= buildDir %>/fonts',
+          '<%= buildDir %>/images',
+          '<%= buildDir %>/img',
+          '<%= buildDir %>/js',
+          '<%= buildDir %>/templates'
+        ]
       }
     },
     cssmin: {
@@ -183,10 +193,10 @@ module.exports = function (grunt) {
       },
       templates: {
         files: [
-          { expand: true, src: 'js/**/*.html', dest: '<%= buildDir %>/templates/' }
+          { expand: true, src: '**/*.html', dest: '<%= buildDir %>/templates', cwd: 'js' }
         ]
       },
-      move: {
+      'design-bundle': {
         files: [
           { expand: true, src: '**', dest: '<%= buildDir %>/app/build/', cwd: '<%= buildDir %>' }
         ]
@@ -319,21 +329,21 @@ module.exports = function (grunt) {
 
   grunt.loadTasks('./gruntTasks');
 
-  grunt.registerTask('addDesignTemplatesMock', function () {
+  grunt.registerTask('add-design-templates-mock', function () {
     grunt.config.data.jsBundles['<%= buildDir %>/js/test.js'].unshift('test/designTemplatesMock.js');
   });
 
   grunt.registerTask('debug',
-    ['clean', 'jshint:source', 'html2js', 'bundle:debug']);
+    ['clean:build', 'jshint:source', 'html2js', 'bundle:debug']);
 
-  grunt.registerTask('templates',
-    ['addDesignTemplatesMock', 'clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'copy:templates', 'copy:move', 'bundle:release']);
+  grunt.registerTask('design-bundle',
+    ['add-design-templates-mock', 'clean:build', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'copy:templates', 'copy:design-bundle', 'bundle:release', 'clean:design-bundle']);
 
   grunt.registerTask('bundled',
-    ['clean', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'bundle:release']);
+    ['clean:build', 'jshint:source', 'html2js', 'concat_sourcemap', 'copy:resources', 'bundle:release']);
 
   grunt.registerTask('release',
-    ['clean', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy:resources', 'bundle:release']);
+    ['clean:build', 'jshint:source', 'html2js', 'uglify', 'cssmin', 'copy:resources', 'bundle:release']);
 
   grunt.registerTask('test-chrome', ['express', 'protractor:test_chrome']);
 
