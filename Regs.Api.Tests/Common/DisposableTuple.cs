@@ -26,6 +26,11 @@ namespace Regs.Api.Tests.Common
 
         public void Dispose(bool disposing)
         {
+            if (disposed)
+            {
+                return;
+            }
+
             try
             {
                 if (disposing)
@@ -65,6 +70,11 @@ namespace Regs.Api.Tests.Common
 
         public void Dispose(bool disposing)
         {
+            if (disposed)
+            {
+                return;
+            }
+
             try
             {
                 if (disposing)
