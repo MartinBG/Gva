@@ -5,45 +5,45 @@
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.ratingDirective.staffType"></label>
-          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" load="true" ng-disabled="$parent.isEdit"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit"></sc-nomenclature>
         </div>
         <div ng-show="model.staffType.code === 'F' || model.staffType.code === 'T' || model.staffType.code === 'M'">
           <div class=" form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.ratingClass"></label>
-            <sc-nomenclature alias="'ratingClasses'" load="true" ng-model="model.ratingClass"></sc-nomenclature>
+            <sc-nomenclature alias="'ratingClasses'" ng-model="model.ratingClass"></sc-nomenclature>
           </div>
           <div class="form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.authorization"></label>
-            <sc-nomenclature alias="'authorizations'" load="true" ng-model="model.authorization"></sc-nomenclature>
+            <sc-nomenclature alias="'authorizations'" ng-model="model.authorization"></sc-nomenclature>
           </div>
         </div>
         <div ng-show="model.staffType.code === 'G'">
           <div class="form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.aircraftTypeGroup"></label>
-            <sc-nomenclature alias="'aircraftTypeGroups'" load="true" ng-model="model.aircraftTypeGroup"></sc-nomenclature>
+            <sc-nomenclature alias="'aircraftTypeGroups'" ng-model="model.aircraftTypeGroup"></sc-nomenclature>
           </div>
           <div class="form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.ratingCategory"></label>
-            <sc-nomenclature alias="'ratingCategories'" load="true" ng-model="model.ratingCategory"></sc-nomenclature>
+            <sc-nomenclature alias="'ratingCategories'" ng-model="model.ratingCategory"></sc-nomenclature>
           </div>
         </div>
         <div ng-show="model.staffType.code === 'F'">
           <div class="form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.ratingType"></label>
-            <sc-nomenclature alias="'ratingTypes'" load="true" ng-model="model.ratingType"></sc-nomenclature>
+            <sc-nomenclature alias="'ratingTypes'" ng-model="model.ratingType"></sc-nomenclature>
           </div>
         </div>
         <div ng-show="model.staffType.code === 'M'">
           <div class="form-group col-sm-3">
             <label class="control-label" l10n-text="persons.ratingDirective.personRatingLevel"></label>
-            <sc-nomenclature alias="'personRatingLevels'" load="true" ng-model="model.personRatingLevel"></sc-nomenclature>
+            <sc-nomenclature alias="'personRatingLevels'" ng-model="model.personRatingLevel"></sc-nomenclature>
           </div>
         </div>
       </div>
       <div class="row" ng-show="model.staffType.code === 'T'">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.ratingDirective.locationIndicator"></label>
-          <sc-nomenclature alias="'locationIndicators'" load="true" ng-model="model.locationIndicator"></sc-nomenclature>
+          <sc-nomenclature alias="'locationIndicators'" ng-model="model.locationIndicator"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.ratingDirective.sector"></label>
@@ -54,7 +54,7 @@
         <div class="form-group col-sm-3" sc-has-error="personRatingModel">
           <label class="control-label" l10n-text="persons.ratingDirective.personRatingModel"></label>
           <sc-validation-error field-name="personRatingModel" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.personRatingModel" name="personRatingModel" alias="'personRatingModels'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.personRatingModel" name="personRatingModel" alias="'personRatingModels'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
     </div>

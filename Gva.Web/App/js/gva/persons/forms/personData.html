@@ -55,7 +55,7 @@
         <div class="form-group col-sm-3 col-md-2" sc-has-error="sex">
           <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
           <sc-validation-error field-name="sex" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
@@ -67,12 +67,12 @@
         <div class="form-group col-sm-3 col-md-2" sc-has-error="placeOfBirth">
           <label class="control-label" l10n-text="persons.personDataDirective.placeOfBirth"></label>
           <sc-validation-error field-name="placeOfBirth" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.placeOfBirth" name="placeOfBirth" alias="'cities'" load="false" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.placeOfBirth" name="placeOfBirth" alias="'cities'" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-4 col-md-3" sc-has-error="country">
           <label class="control-label" l10n-text="persons.personDataDirective.country"></label>
           <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" load="false" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
