@@ -7,13 +7,13 @@
 
     $scope.limitationTypes = nomenclatures.ratingLimitationTypes.map(function (limitation) {
       limitation.text = limitation.name;
-      limitation.id = limitation.nomTypeValueId;
+      limitation.id = limitation.nomValueId;
       return limitation;
     });
 
     $scope.ratingSubClasses = nomenclatures.ratingSubClasses.map(function (subclass) {
       subclass.text = subclass.name;
-      subclass.id = subclass.nomTypeValueId;
+      subclass.id = subclass.nomValueId;
       return subclass;
     });
   }

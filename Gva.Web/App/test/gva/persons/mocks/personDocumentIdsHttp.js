@@ -17,7 +17,7 @@
                   exists = documentId.part.documentNumber === $params.number;
                 } else if ($params.typeid) {
                   var typeId = parseInt($params.typeid, 10);
-                  exists = documentId.part.personDocumentIdType.nomTypeValueId === typeId;
+                  exists = documentId.part.personDocumentIdType.nomValueId === typeId;
                 } else if ($params.publ) {
                   exists = documentId.part.documentPublisher === $params.publ;
                 } else if ($params.datef) {

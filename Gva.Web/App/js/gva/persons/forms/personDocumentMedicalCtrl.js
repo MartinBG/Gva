@@ -6,7 +6,7 @@
     var nomenclatures = require('./nomenclatures.sample');
     $scope.limitationsTypes = nomenclatures.medicalLimitations.map(function (limitation) {
       limitation.text = limitation.name;
-      limitation.id = limitation.nomTypeValueId;
+      limitation.id = limitation.nomValueId;
       return limitation;
     });
   }

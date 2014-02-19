@@ -19,13 +19,13 @@
 
           var res = _(personLots).map(function (item) {
             return {
-              nomTypeValueId: item.lotId,
+              nomValueId: item.lotId,
               name: item.personData.part.firstName + ' ' + item.personData.part.lastName
             };
           }).value();
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           }
 
           return [200, res];
@@ -35,7 +35,7 @@
           var res = nomenclatures.personCheckDocumentRoles;
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -49,7 +49,7 @@
           var res = nomenclatures.personCheckDocumentTypes;
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -63,12 +63,12 @@
           var res = $filter('filter')(
              nomenclatures.documentRoles,
             function (nom) {
-              return nom.content.categoryCode === 'O';
+              return nom.textContent.categoryCode === 'O';
             },
             true);
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -82,7 +82,7 @@
           var res = nomenclatures.personOtherDocumentTypes;
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -96,7 +96,7 @@
           var res = nomenclatures.personIdDocumentTypes;
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -110,7 +110,7 @@
           var res = nomenclatures.addressTypes;
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
@@ -121,7 +121,7 @@
             res = $filter('filter')(
               res,
               function (nom) {
-                return nom.content.type === $params.type;
+                return nom.textContent.type === $params.type;
               },
               true);
           }
@@ -130,39 +130,35 @@
         })
       .when('GET',
           '/api/nomenclatures/:alias' +
-          '?term&parentId&id&staffTypeId&parentAlias&nomTypeParentValueId',
+          '?term&id&staffTypeId&parentAlias&parentValueId',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
 
-            if ($params.parentId) {
-              res = $filter('filter')(res, { parentId: parseInt($params.parentId, 10) }, true);
-            }
-
-            if ($params.nomTypeParentValueId) {
+            if ($params.parentValueId) {
               res = $filter('filter')(
                 res,
-                { nomTypeParentValueId: parseInt($params.nomTypeParentValueId, 10) },
+                { parentValueId: parseInt($params.parentValueId, 10) },
                 true);
             }
 
             if ($params.staffTypeId) {
               var parentIds = _.pluck(
                 $filter('filter')(nomenclatures[$params.parentAlias], {
-                  nomTypeParentValueId: parseInt($params.staffTypeId, 10)
+                  parentValueId: parseInt($params.staffTypeId, 10)
                 }, true),
-                'nomTypeValueId');
+                'nomValueId');
 
               res = $filter('filter')(
                 res,
                 function (nom) {
-                  return parentIds.indexOf(nom.nomTypeParentValueId) !== -1;
+                  return parentIds.indexOf(nom.parentValueId) !== -1;
                 }, true);
             }
           }

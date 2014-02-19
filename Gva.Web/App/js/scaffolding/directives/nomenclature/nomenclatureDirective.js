@@ -129,7 +129,7 @@
 
   angular.module('scaffolding')
     .constant('scNomenclatureConfig', {
-      idProp: 'nomTypeValueId',
+      idProp: 'nomValueId',
       nameProp: 'name'
     })
     .directive('scNomenclature', NomenclatureDirective);

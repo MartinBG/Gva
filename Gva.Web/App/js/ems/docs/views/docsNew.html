@@ -39,7 +39,7 @@
           <div class="form-group col-sm-4" sc-has-error="docTypeId">
             <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
             <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docType'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
+            <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docType'" load="false" params="{ parentValueId: docTypeGroup ? docTypeGroup.nomValueId : 0 }" required></sc-nomenclature>
           </div>
         </div>
 

@@ -14,7 +14,7 @@
     }
 
     $scope.units = _.map(units, function (unit) {
-      var su = _(selectedUnits.units).filter({ nomTypeValueId: unit.nomTypeValueId }).first();
+      var su = _(selectedUnits.units).filter({ nomValueId: unit.nomValueId }).first();
 
       if (!su) {
         return unit;

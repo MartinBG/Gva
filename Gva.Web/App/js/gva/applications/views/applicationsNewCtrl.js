@@ -45,9 +45,9 @@
               docCasePartTypeName: 'Публичен',
               docDirectionId: 1,
               docDirectionName: 'Входящ',
-              docTypeGroupId: $scope.application.docTypeGroup.nomTypeValueId,
+              docTypeGroupId: $scope.application.docTypeGroup.nomValueId,
               docTypeGroupName: $scope.application.docTypeGroup.name,
-              docTypeId: $scope.application.docType.nomTypeValueId,
+              docTypeId: $scope.application.docType.nomValueId,
               docTypeName: $scope.application.docType.name,
               docSubject: $scope.application.docSubject
             }

@@ -6,7 +6,7 @@
     '$resource',
     function ($resource) {
       return $resource('/api/nomenclatures/:alias?term=:term&id=:id', {
-        id: '@nomTypeValueId'
+        id: '@nomValueId'
       });
     }
   ]);

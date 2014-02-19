@@ -47,18 +47,18 @@
         <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'T'">
           <div class="form-group col-sm-6 col-md-5 col-lg-4">
             <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.ratingClass"></label>
-            <sc-nomenclature ng-model="model.ratingClass" alias="'ratingClasses'" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'ratingClassGroups' }" load="false"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.ratingClass" alias="'ratingClasses'" params="{ staffTypeId: model.staffType.nomValueId, parentAlias: 'ratingClassGroups' }" load="false"></sc-nomenclature>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-sm-6 col-md-5 col-lg-4">
             <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.licenceType"></label>
-            <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" params="{ nomTypeParentValueId: model.staffType.nomTypeValueId }" load="false"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.licenceType" alias="'licenceTypes'" params="{ parentValueId: model.staffType.nomValueId }" load="false"></sc-nomenclature>
           </div>
           <div class="form-group col-sm-6 col-md-5 col-lg-4">
             <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.authorization"></label>
-            <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeId: model.staffType.nomTypeValueId, parentAlias: 'authorizationGroups' }" load="false"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeId: model.staffType.nomValueId, parentAlias: 'authorizationGroups' }" load="false"></sc-nomenclature>
           </div>
         </div>
 

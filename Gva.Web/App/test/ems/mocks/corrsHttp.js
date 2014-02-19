@@ -96,13 +96,13 @@
 
         var res = _(corrs).map(function (item) {
           return {
-            nomTypeValueId: item.corrId,
+            nomValueId: item.corrId,
             name: item.displayName
           };
         }).value();
 
         if ($params.id) {
-          res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+          res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
         }
 
         return [200, res];
@@ -112,13 +112,13 @@
 
           var res = _(personLots).map(function (item) {
             return {
-              nomTypeValueId: item.lotId,
+              nomValueId: item.lotId,
               name: item.personData.part.firstName + ' ' + item.personData.part.lastName
             };
           }).value();
 
           if ($params.id) {
-            res = $filter('filter')(res, { nomTypeValueId: parseInt($params.id, 10) }, true)[0];
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           }
 
           return [200, res];
@@ -141,19 +141,19 @@
             return [400];
           }
 
-          if ($jsonData.correspondentType.nomTypeValueId === 1) {
+          if ($jsonData.correspondentType.nomValueId === 1) {
             $jsonData.displayName = $jsonData.bgCitizenFirstName + ' ' +
               $jsonData.bgCitizenLastName;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 2) {
+          else if ($jsonData.correspondentType.nomValueId === 2) {
             $jsonData.displayName = $jsonData.foreignerFirstName + ' ' +
               $jsonData.foreignerLastName;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 3) {
+          else if ($jsonData.correspondentType.nomValueId === 3) {
             $jsonData.displayName = $jsonData.legalEntityName + ' ' +
               $jsonData.legalEntityBulstat;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 4) {
+          else if ($jsonData.correspondentType.nomValueId === 4) {
             $jsonData.displayName = $jsonData.fLegalEntityName;
           }
 
@@ -188,19 +188,19 @@
             }
           });
 
-          if ($jsonData.correspondentType.nomTypeValueId === 1) {
+          if ($jsonData.correspondentType.nomValueId === 1) {
             $jsonData.displayName = $jsonData.bgCitizenFirstName + ' ' +
               $jsonData.bgCitizenLastName;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 2) {
+          else if ($jsonData.correspondentType.nomValueId === 2) {
             $jsonData.displayName = $jsonData.foreignerFirstName + ' ' +
               $jsonData.foreignerLastName;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 3) {
+          else if ($jsonData.correspondentType.nomValueId === 3) {
             $jsonData.displayName = $jsonData.legalEntityName + ' ' +
               $jsonData.legalEntityBulstat;
           }
-          else if ($jsonData.correspondentType.nomTypeValueId === 4) {
+          else if ($jsonData.correspondentType.nomValueId === 4) {
             $jsonData.displayName = $jsonData.fLegalEntityName + ' ' +
               $jsonData.legalEntityBulstat;
           }

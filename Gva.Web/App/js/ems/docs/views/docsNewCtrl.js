@@ -50,10 +50,10 @@
       $scope.docForm.$validate()
       .then(function () {
         if ($scope.docForm.$valid) {
-          $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomTypeValueId;
+          $scope.doc.docTypeGroupId = $scope.docTypeGroup.nomValueId;
           $scope.doc.docTypeGroupName =  $scope.docTypeGroup.name;
 
-          $scope.doc.docTypeId = $scope.docType.nomTypeValueId;
+          $scope.doc.docTypeId = $scope.docType.nomValueId;
           $scope.doc.docTypeName =  $scope.docType.name;
 
           if ($scope.doc.docCorrespondents && $scope.doc.docCorrespondents.length > 0) {

@@ -14,7 +14,7 @@
     }
 
     $scope.corrs = _.map(corrs, function (corr) {
-      var sc = _(selectedCorrs.corrs).filter({ nomTypeValueId: corr.corrId }).first();
+      var sc = _(selectedCorrs.corrs).filter({ nomValueId: corr.corrId }).first();
 
       if (!sc) {
         return {
@@ -50,7 +50,7 @@
 
     $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
-        nomTypeValueId: corr.corrId,
+        nomValueId: corr.corrId,
         name: corr.displayName,
         content: corr
       };

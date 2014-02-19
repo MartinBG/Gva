@@ -5,32 +5,32 @@
   //Номенклатура Групи Разрешения към квалификация
   module.exports = [
     {
-      nomTypeValueId: 7049, code: 'FT', name: 'За провеждане обучение', nomTypeParentValueId: 5591, alias: 'FT',
-      content: { }
+      nomValueId: 7049, code: 'FT', name: 'За провеждане обучение', parentValueId: 5591, alias: 'FT',
+      textContent: { }
     },
     {
-      nomTypeValueId: 7046, code: 'T', name: 'За ОВД', nomTypeParentValueId: 5592, alias: 'T',
-      content: {
+      nomValueId: 7046, code: 'T', name: 'За ОВД', parentValueId: 5592, alias: 'T',
+      textContent: {
         ratingClassGroupId: 6985
       }
     },
     {
-      nomTypeValueId: 7047, code: 'G', name: 'За ТО (AML)', nomTypeParentValueId: 5590, alias: 'G',
-      content: {
+      nomValueId: 7047, code: 'G', name: 'За ТО (AML)', parentValueId: 5590, alias: 'G',
+      textContent: {
         ratingClassGroupId: 6984
       }
     },
     {
-      nomTypeValueId: 7048, code: 'F', name: 'За екипаж на ВС', nomTypeParentValueId: 5591, alias: 'F',
-      content: { }
+      nomValueId: 7048, code: 'F', name: 'За екипаж на ВС', parentValueId: 5591, alias: 'F',
+      textContent: { }
     },
     {
-      nomTypeValueId: 7045, code: 'FC', name: 'Проверяващи', nomTypeParentValueId: 5591, alias: 'FC',
-      content: { }
+      nomValueId: 7045, code: 'FC', name: 'Проверяващи', parentValueId: 5591, alias: 'FC',
+      textContent: { }
     },
     {
-      nomTypeValueId: 7050, code: 'M', name: 'За ТО (СУВД)', nomTypeParentValueId: 5589, alias: 'M',
-      content: {
+      nomValueId: 7050, code: 'M', name: 'За ТО (СУВД)', parentValueId: 5589, alias: 'M',
+      textContent: {
         ratingClassGroupId: 6987
       }
     }
