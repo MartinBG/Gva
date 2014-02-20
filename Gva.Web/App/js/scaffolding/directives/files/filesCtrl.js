@@ -12,32 +12,17 @@
 
     $scope.openModal = function () {
       var modal = $modal.open({
-        templateUrl: 'scaffolding/directives/files/filesModal.html',
-        controller: 'FilesModalCtrl',
+        templateUrl: $scope.isMultiple ?
+          'scaffolding/directives/files/filesModal.html' :
+          'scaffolding/directives/files/singleFileModal.html',
+        controller: $scope.isMultiple ?
+          'FilesModalCtrl' : 'SingleFileModalCtrl',
         backdrop: 'static',
         keyboard: false,
         resolve: {
           files: function () {
             return self.ngModel.$viewValue;
           },
-          isReadonly: function () {
-            return $scope.isReadonly;
-          }
-        }
-      });
-      modal.result.then(function (files) {
-        self.ngModel.$setViewValue(files);
-        self.updateScope(files, $scope, true);
-      });
-    };
-
-    $scope.openSingleFileModal = function () {
-      var modal = $modal.open({
-        templateUrl: 'scaffolding/directives/files/singleFileModal.html',
-        controller: 'SingleFileModalCtrl',
-        backdrop: 'static',
-        keyboard: false,
-        resolve: {
           file: function () {
             return self.ngModel.$viewValue;
           },
@@ -48,10 +33,32 @@
       });
       modal.result.then(function (files) {
         self.ngModel.$setViewValue(files);
-        self.updateScope(files, $scope, false);
+        self.updateScope(files, $scope, $scope.isMultiple);
       });
     };
   }
+
+  //  $scope.openSingleFileModal = function () {
+  //    var modal = $modal.open({
+  //      templateUrl: 'scaffolding/directives/files/singleFileModal.html',
+  //      controller: 'SingleFileModalCtrl',
+  //      backdrop: 'static',
+  //      keyboard: false,
+  //      resolve: {
+  //        file: function () {
+  //          return self.ngModel.$viewValue;
+  //        },
+  //        isReadonly: function () {
+  //          return $scope.isReadonly;
+  //        }
+  //      }
+  //    });
+  //    modal.result.then(function (files) {
+  //      self.ngModel.$setViewValue(files);
+  //      self.updateScope(files, $scope, false);
+  //    });
+  //  };
+  //}
 
 
 
@@ -65,41 +72,29 @@
   };
 
   FilesCtrl.prototype.updateScope = function (files, $scope, isMultiple) {
-    var self = this;
-    $scope.singleFile = false;
-    $scope.noFiles = false;
-    if (!isMultiple) {
-      if (!files) {
-        $scope.noFiles = true;
-        $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFile');
-      }
-      else {
-        $scope.singleFile = true;
-        $scope.fileUrl =
-          self.scFilesConfig.fileUrl + '?' +
-          $.param({
-            'fileKey': files.key,
-            'fileName': files.name
-          });
-        $scope.uploadedFilesText = files.name;
-      }
-    }
-    else if (!files || files.length === 0) {
-      $scope.noFiles = true;
-      $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFiles');
-    } else if (files.length === 1) {
-      $scope.singleFile = true;
+    var self = this,
+      file;
+    $scope.noFiles = !files || files.length === 0;
+    $scope.singleFile = files && (!isMultiple || files.length === 1);
+
+    if ($scope.noFiles) {
+      $scope.uploadedFilesText = isMultiple ?
+        $scope.uploadedFilesText = self.l10n.get('scaffolding.scFiles.noFiles') :
+        self.l10n.get('scaffolding.scFiles.noFile');
+    } else if ($scope.singleFile) {
+      file = files[0] || files;
       $scope.fileUrl =
         self.scFilesConfig.fileUrl + '?' +
         $.param({
-          'fileKey': files[0].key,
-          'fileName': files[0].name
+          'fileKey': file.key,
+          'fileName': file.name
         });
-      $scope.uploadedFilesText = files[0].name;
+      $scope.uploadedFilesText = file.name;
     } else {
       $scope.uploadedFilesText =
-        self.$interpolate(
-          self.l10n.get('scaffolding.scFiles.manyFiles'))({ filesCount: files.length });
+        self.$interpolate(self.l10n.get('scaffolding.scFiles.manyFiles'))({
+          filesCount: files.length
+        });
     }
   };
 

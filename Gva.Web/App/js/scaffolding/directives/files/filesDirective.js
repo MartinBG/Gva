@@ -23,13 +23,11 @@
           var filesCtrl = controllers[0],
               ngModelCtrl = controllers[1];
 
-          scope.$watch(function () {
-            scope.isReadonly = !!iAttrs.readonly;
+          iAttrs.$observe('readonly', function(value) {
+            scope.isReadonly = !!value;
           });
 
-          scope.$watch(function () {
-            scope.isMultiple = 'multiple' in iAttrs;
-          });
+          scope.isMultiple = 'multiple' in iAttrs;
 
           filesCtrl.setNgModelCtrl(ngModelCtrl, 'multiple' in iAttrs);
         }

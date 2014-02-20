@@ -2,10 +2,12 @@
 (function (angular, _, alert, $) {
   'use strict';
 
-  function SingleFileModalCtrl($scope,
+  function SingleFileModalCtrl(
+    $scope,
     $q,
     $interpolate,
     $modalInstance,
+    l10n,
     scFilesConfig,
     file,
     isReadonly) {
@@ -14,9 +16,6 @@
       canceled;
 
     $scope.isInEdit = true;
-    $scope.fileHierarchy = [];
-    $scope.filesUploaded = 0;
-    $scope.filesLength = 0;
     $scope.file = undefined;
     $scope.scFilesConfig = scFilesConfig;
     $scope.isReadonly = isReadonly;
@@ -25,7 +24,6 @@
       $scope.file = {
         item: {
           pending: false,
-          key: file.name + ';' + file.key,
           url: scFilesConfig.fileUrl + '?' + $.param({
             'fileKey': file.key,
             'fileName': file.name
@@ -40,7 +38,7 @@
       $modalInstance.dismiss();
     };
 
-    var upload = function () {
+    function upload() {
 
       return $q.when(pendingUpload.submit()).then(function (data) {
         if (data.fileKey) {
@@ -53,14 +51,14 @@
           pendingUpload = undefined;
         }
       });
-    };
+    }
 
     $scope.ok = function () {
       if (pendingUpload) {
         $scope.isInEdit = false;
 
         upload()['catch'](function () {
-          alert('Възникна грешка. Успешно качените файлове са записани. Опитайте отново.');
+          alert(l10n.get('scaffolding.scFiles.failAlert'));
         })['finally'](function () {
           $scope.isUploading = false;
           $modalInstance.close(uploadedFile);
@@ -109,6 +107,7 @@
     '$q',
     '$interpolate',
     '$modalInstance',
+    'l10n',
     'scFilesConfig',
     'file',
     'isReadonly'
