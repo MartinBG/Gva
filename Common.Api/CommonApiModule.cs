@@ -1,4 +1,5 @@
 ﻿using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Http;
@@ -14,6 +15,7 @@ namespace Common.Api
             Bind<IDbConfiguration>().To<CommonDbConfiguration>();
             Bind<IWebApiConfig>().To<CommonApiWebApiConfig>().InCallScope();
             Bind<IUserContextProvider>().To<UserContextProvider>();
+            Bind<INomRepository>().To<NomRepository>();
         }
     }
 }

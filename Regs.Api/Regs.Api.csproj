@@ -71,8 +71,6 @@
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Repositories\LotRepository\LotRepository.cs" />
-    <Compile Include="Models\Nom.cs" />
-    <Compile Include="Models\NomValue.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\PartExt.cs" />
     <Compile Include="Models\PartOperation.cs" />

@@ -355,7 +355,7 @@
     //],
     testCorrespondent: require('./testCorrespondent'),
 
-    medicalClasses: require('./medicalClass'),
+    medClasses: require('./medicalClass'),
 
     medicalLimitations: require('./medicalLimitation'),
 

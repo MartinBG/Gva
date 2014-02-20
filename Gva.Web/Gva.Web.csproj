@@ -435,7 +435,6 @@
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LotController.cs" />
-    <Compile Include="Controllers\NomenclatureController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -49,10 +49,6 @@ namespace Gva.Web
 
         public static void RegisterRoutes(HttpConfiguration config)
         {
-            // nomenclatures
-            MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes", "Nomenclature", "GetAddressTypes");
-            MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}", "Nomenclature", "GetNoms");
-
             //persons
             MapRoute(config, HttpMethod.Post, "api/persons"       , "Person", "PostPerson");
             MapRoute(config, HttpMethod.Get, "api/persons/{lotId}", "Person", "GetPerson");

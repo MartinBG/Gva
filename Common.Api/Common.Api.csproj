@@ -75,11 +75,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
+    <Compile Include="Controllers\NomenclatureController.cs" />
     <Compile Include="Http\BlobWriteStream.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Http\BlobReadStream.cs" />
     <Compile Include="Http\MultipartBlobStreamProvider.cs" />
     <Compile Include="Http\MultipartBlobData.cs" />
+    <Compile Include="Models\Nom.cs" />
+    <Compile Include="Models\NomValue.cs" />
+    <Compile Include="Models\NomValueDO.cs" />
+    <Compile Include="Repositories\NomRepository\INomRepository.cs" />
+    <Compile Include="Repositories\NomRepository\NomRepository.cs" />
     <Compile Include="UserContext\IUserContextProvider.cs" />
     <Compile Include="UserContext\UserContext.cs" />
     <Compile Include="UserContext\UserContextProvider.cs" />

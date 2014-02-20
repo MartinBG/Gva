@@ -13,6 +13,8 @@ namespace Common.Api.Models
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new SettlementMap());
             modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new NomMap());
+            modelBuilder.Configurations.Add(new NomValueMap());
         }
     }
 }
