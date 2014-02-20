@@ -1,15 +1,14 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="text" class="col-sm-3" removable="false" label="persons.publishers.text"></sc-filter>
   <sc-filter type="nomenclature" name="publisherType" class="col-sm-3" removable="false" alias="publisherTypes" label="persons.publishers.publisherType"></sc-filter>
-  <sc-button action="$parent.goBack()" text="persons.publishers.back" icon="glyphicon-arrow-left"></sc-button>
-  <sc-button action="$parent.search()" text="persons.publishers.search" icon="glyphicon-search"></sc-button>
-  <sc-button action="add"></sc-button>
+  <sc-search-button action="goBack()" text="persons.publishers.back" icon="glyphicon-arrow-left"></sc-search-button>
+  <sc-search-button action="search()" text="persons.publishers.search" icon="glyphicon-search"></sc-search-button>
 </sc-search>
 
 <sc-datatable ng-model="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <button type="button" class="btn btn-xs btn-primary" ng-click="selectPublisher(item)" l10n-text="persons.publishers.select"></button>
+    <sc-button class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="persons.publishers.select"></sc-button>
   </sc-column>
-  <sc-column data="name" title="Наименование">
+  <sc-column data="name" sortable="true" title="persons.publishers.name">
   </sc-column>
 </sc-datatable>

@@ -1,4 +1,4 @@
-﻿/*global angular, require*/
+﻿/*global angular*/
 (function (angular) {
   'use strict';
 
@@ -7,8 +7,10 @@
     $stateParams,
     $scope,
     Publisher,
+    Nomenclature,
     publishers,
-    selectedPublisher
+    selectedPublisher,
+    publisherType
   ) {
     $scope.filters = {
       text: null,
@@ -17,21 +19,22 @@
 
     $scope.publishers = publishers;
 
-    var nomenclatures = require('./nomenclatures.sample');
-
-
-    if ($stateParams.text)
-    {
+    if ($stateParams.text) {
       $scope.filters.text = $stateParams.text;
     }
 
-    if ($stateParams.publisherTypeAlias)
-    {
-      $scope.filters.publisherType = nomenclatures.get('publisherTypes', $stateParams.publisherTypeAlias);
+    if ($stateParams.publisherTypeAlias) {
+      $scope.filters.publisherType = publisherType;
+      //Nomenclature
+      //  .get({ alias: 'publisherTypes', valueAlias: $stateParams.publisherTypeAlias })
+      //  .$promise
+      //  .then(function (pt) {
+      //    $scope.filters.publisherType = pt;
+      //  });
     }
 
     $scope.search = function () {
-      $state.go($state.current, {
+      return $state.go($state.current, {
         text: $scope.filters.text,
         publisherTypeAlias: $scope.filters.publisherType ?
           $scope.filters.publisherType.alias : undefined
@@ -40,11 +43,11 @@
 
     $scope.selectPublisher = function (publisher) {
       selectedPublisher.push(publisher.name);
-      $state.go('^');
+      return $state.go('^');
     };
 
     $scope.goBack = function () {
-      $state.go('^');
+      return $state.go('^');
     };
 
   }
@@ -54,8 +57,10 @@
     '$stateParams',
     '$scope',
     'Publisher',
+    'Nomenclature',
     'publishers',
-    'selectedPublisher'
+    'selectedPublisher',
+    'publisherType'
   ];
 
   ChoosePublisherCtrl.$resolve = {
@@ -67,6 +72,20 @@
           text: $stateParams.text,
           publisherTypeAlias: $stateParams.publisherTypeAlias
         }).$promise;
+      }
+    ],
+    publisherType: [
+      '$stateParams',
+      'Nomenclature',
+      function ($stateParams, Nomenclature) {
+        if ($stateParams.publisherTypeAlias) {
+          return Nomenclature.get({
+            alias: 'publisherTypes',
+            valueAlias: $stateParams.publisherTypeAlias
+          }).$promise;
+        } else {
+          return null;
+        }
       }
     ]
   };

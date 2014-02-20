@@ -5,7 +5,7 @@
   angular.module('scaffolding').factory('Nomenclature', [
     '$resource',
     function ($resource) {
-      return $resource('/api/nomenclatures/:alias?term=:term&id=:id', {
+      return $resource('/api/nomenclatures/:alias?term=:term&id=:id&va=:valueAlias', {
         id: '@nomValueId'
       });
     }
