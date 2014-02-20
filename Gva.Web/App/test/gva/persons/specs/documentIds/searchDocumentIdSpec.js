@@ -33,7 +33,7 @@
         ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1']
       ]);
     });
-   
+
     it('should delete a documentId', function () {
       personDocumentIdsPage.firstDeleteBtn.click();
       personDocumentIdsPage = new Page(ptor);

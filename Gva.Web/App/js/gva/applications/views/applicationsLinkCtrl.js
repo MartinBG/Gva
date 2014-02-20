@@ -37,14 +37,14 @@
     };
 
     $scope.cancel = function () {
-      return $state.go('root.docs.search');
+      return $state.go('root.applications.search');
     };
 
     $scope.clear = function () {
       $scope.application.doc = null;
     };
 
-    $scope.save = function () {
+    $scope.link = function () {
       $scope.appForm.$validate()
       .then(function () {
         if ($scope.appForm.$valid) {

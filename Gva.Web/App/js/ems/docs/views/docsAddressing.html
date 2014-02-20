@@ -4,7 +4,7 @@
     <div class="input-group input-group-sm">
       <sc-nomenclature ng-model="doc.docUnitsFrom" alias="'unit'" load="false" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
-        <sc-button btn-click="selectUnitFrom()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
+        <sc-button btn-click="selectUnitFrom()" name="selectUnitFromBtn" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
       </span>
     </div>
   </div>
@@ -61,7 +61,7 @@
     <div class="input-group input-group-sm">
       <sc-nomenclature ng-model="doc.docCorrespondents" alias="'corrs'" load="true" multiple="multiple" required ng-readonly="!inEditMode"></sc-nomenclature>
       <span class="input-group-btn">
-        <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
+        <sc-button btn-click="selectCorr()" name="selectCorrBtn" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
       </span>
     </div>
   </div>
