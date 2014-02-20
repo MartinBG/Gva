@@ -9,14 +9,14 @@
               <span l10n-text="docs.edit.child"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a sc-click="attachNewDoc()" l10n-text="docs.edit.document"></a></li>
+              <li><a sc-click="attachNewDoc()" name="attachNewDocBtn" l10n-text="docs.edit.document"></a></li>
               <li><a sc-click="attachDoc(1)" l10n-text="docs.edit.resolution"></a></li>
               <li><a sc-click="attachDoc(2)" l10n-text="docs.edit.task"></a></li>
               <li><a sc-click="attachDoc(3)" l10n-text="docs.edit.remark"></a></li>
             </ul>
           </div>
 
-          <button ng-show="!inEditMode" ng-click="enterEditMode()" type="button" class="btn btn-default btn-sm">
+          <button ng-show="!inEditMode" name="editBtn" ng-click="enterEditMode()" type="button" class="btn btn-default btn-sm">
             <i class="glyphicon glyphicon-edit"></i>
             <span l10n-text="docs.edit.edit"></span>
           </button>

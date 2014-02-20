@@ -28,7 +28,7 @@
     };
 
     $scope.cancel = function () {
-      return $state.go('^');
+      return $state.go('root.applications.search');
     };
 
     $scope.save = function () {

@@ -18,7 +18,7 @@
       expect(newPersonDocumentIdPage.breadcrumb.getText())
         .toEqual('Нов документ за самоличност');
     });
-    
+
     it('should create new document id correctly', function () {
       newPersonDocumentIdPage.personDocumentIdType.set('Задграничен паспорт');
       newPersonDocumentIdPage.documentNumber.set('1000');
@@ -50,7 +50,7 @@
         ['Задграничен паспорт', '1000', '22.12.2014', '01.08.2018', 'МВР Бургас', 'Не', '3', '5']
       ]);
     });
-    
+
     xit('should disable save button unless all required fields are filled out', function() {
       expect(newPersonDocumentIdPage.isSaveBtnDisabled).toEqual(true);
 

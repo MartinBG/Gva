@@ -1,15 +1,15 @@
 ﻿<div class="panel panel-default">
   <nav class="panel-heading">
     <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
-      <button sc-click="save('create')" type="button" class="btn btn-default btn-sm">
+      <button sc-click="save('create')" name="createBtn" type="button" class="btn btn-default btn-sm">
         <i class="glyphicon glyphicon-pencil"></i>
         Продължи
       </button>
-      <button sc-click="save('register')" type="button" class="btn btn-default btn-sm">
+      <button sc-click="save('register')" name="registerBtn" type="button" class="btn btn-default btn-sm">
         <i class="glyphicon glyphicon-ok"></i>
         Регистрирай и продължи
       </button>
-      <button sc-click="cancel()" type="button" class="btn btn-default btn-sm">
+      <button sc-click="cancel()" name="cancelBtn" type="button" class="btn btn-default btn-sm">
         <i class="glyphicon glyphicon-remove"></i>
         Отказ
       </button>
@@ -51,7 +51,7 @@
           </div>
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
-            <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondent'" multiple></sc-nomenclature>
+            <sc-nomenclature ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondent'" multiple></sc-nomenclature>
           </div>
           <div class="form-group col-sm-4" sc-has-error="numberOfDocs">
             <label class="control-label" l10n-text="docs.newDoc.numberOfDocs"></label>
