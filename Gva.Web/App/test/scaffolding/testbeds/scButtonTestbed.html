@@ -1,0 +1,12 @@
+﻿<div>
+  <sc-button name="btn" btn-click="btnClick()" text="Click" class="btn-xs btn-info" icon="glyphicon-pencil"></sc-button>
+  <sc-button name="createBtn" btn-click="create()" text="Create" class="btn-xs btn-info" icon="glyphicon-pencil"></sc-button>
+  <sc-button name="resolveBtn" btn-click="resolve()" text="Resolve" class="btn-xs btn-info" icon="glyphicon-pencil"></sc-button>
+
+  <form name="form"class="form-inline well" role="form">
+    <div class="labeless">
+      <label class="col-sm-6">Button is clicked <span name="btnLabel">{{btnClicks}}</span> times.</label>
+    </div>
+    <span name="crtBtnPending">{{createBtn.$pending}}</span>
+  </form>
+</div>

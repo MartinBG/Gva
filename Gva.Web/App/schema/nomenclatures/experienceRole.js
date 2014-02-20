@@ -5,26 +5,26 @@
   //Номенклатура Роли в натрупан летателният опит
   module.exports = [
     {
-      nomTypeValueId: 7837, code: 'IE', name: 'Инструктор', nameAlt: 'Инструктор', alias: 'instructor',
-      content: {
+      nomValueId: 7837, code: 'IE', name: 'Инструктор', nameAlt: 'Инструктор', alias: 'instructor',
+      textContent: {
         codeCA: null
       }
     },
     {
-      nomTypeValueId: 7838, code: 'EI', name: 'Обучаем (с инструктор)', nameAlt: 'Обучаем (с инструктор)', alias: 'training',
-      content: {
+      nomValueId: 7838, code: 'EI', name: 'Обучаем (с инструктор)', nameAlt: 'Обучаем (с инструктор)', alias: 'training',
+      textContent: {
         codeCA: null
       }
     },
     {
-      nomTypeValueId: 7839, code: 'CI', name: 'Под наблюдение на инструктор', nameAlt: 'Под наблюдение на инструктор', alias: 'control',
-      content: {
+      nomValueId: 7839, code: 'CI', name: 'Под наблюдение на инструктор', nameAlt: 'Под наблюдение на инструктор', alias: 'control',
+      textContent: {
         codeCA: null
       }
     },
     {
-      nomTypeValueId: 7840, code: 'IN', name: 'Самостоятелен', nameAlt: 'Самостоятелен', alias: 'independent',
-      content: {
+      nomValueId: 7840, code: 'IN', name: 'Самостоятелен', nameAlt: 'Самостоятелен', alias: 'independent',
+      textContent: {
         codeCA: null
       }
     }

@@ -1,0 +1,32 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
+  <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
+  <sc-filter type="text" name="names" class="col-sm-3" removable="true" label="persons.search.names"></sc-filter>
+  <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
+  <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
+  <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
+  <sc-search-button action="search()" text="applications.personSelect.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.personSelect.cancel"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
+</sc-search>
+
+
+<sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column data="names" title="applications.personSelect.names" ng-href="/{{id}}">
+  </sc-column>
+  <sc-column data="lin" title="applications.personSelect.lin">
+  </sc-column>
+  <sc-column data="uin" title="applications.personSelect.uin">
+  </sc-column>
+  <sc-column data="age" title="applications.personSelect.age">
+  </sc-column>
+  <sc-column data="licences" title="applications.personSelect.licences">
+  </sc-column>
+  <sc-column data="ratings" title="applications.personSelect.ratings">
+  </sc-column>
+  <sc-column data="organization" title="applications.personSelect.organization">
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="viewButton" btn-click="selectPerson(item)" text="applications.personSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column>
+</sc-datatable>

@@ -3,16 +3,16 @@
     <div class="panel-heading"><strong l10n-text="persons.personMedicalDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentNumberPrefix">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="documentNumberPrefix">
           <label class="control-label" l10n-text="persons.personMedicalDirective.testimonial"></label>
-          <gva-validation-error field-name="documentNumberPrefix" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="documentNumberPrefix" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.documentNumberPrefix" name="documentNumberPrefix" ng-required="true" ng-init="model.documentNumberPrefix='MED BG'"></sc-text>
         </div>
         <div class="form-group labeless" style="float: left;margin:auto -7px">
           <span>&#8212;</span>
         </div>
-        <div class="form-group col-md-2 col-sm-3 labeless" gva-has-error="documentNumber">
-          <gva-validation-error field-name="documentNumber" validations="{required: null}"></gva-validation-error>
+        <div class="form-group col-md-2 col-sm-3 labeless" sc-has-error="documentNumber">
+          <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
         </div>
         <div class="form-group labeless" style="float: left; margin: auto -7px">
@@ -29,19 +29,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="medClassType">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="medClassType">
           <label class="control-label" l10n-text="persons.personMedicalDirective.medClassType"></label>
-          <gva-validation-error field-name="medClassType" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.medClassType" name="medClassType" alias="'medicalClasses'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="medClassType" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.medClassType" name="medClassType" alias="'medicalClasses'" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentDateValidFrom">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="documentDateValidFrom">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidFrom"></label>
-          <gva-validation-error field-name="documentDateValidFrom" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
           <sc-date name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="documentDateValidTo">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="documentDateValidTo">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidTo"></label>
-          <gva-validation-error field-name="documentDateValidTo" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="documentDateValidTo" validations="{required: null}"></sc-validation-error>
           <sc-date name="documentDateValidTo" ng-model="model.documentDateValidTo" ng-required="true"></sc-date>
         </div>
       </div>
@@ -52,10 +52,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-9 col-md-6" gva-has-error="documentPublisher">
+        <div class="form-group col-sm-9 col-md-6" sc-has-error="documentPublisher">
           <label class="control-label" l10n-text="persons.personMedicalDirective.documentPublisher"></label>
-          <gva-validation-error field-name="documentPublisher" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.documentPublisher" name="documentPublisher" alias="'medDocPublishers'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.documentPublisher" name="documentPublisher" alias="'medDocPublishers'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
@@ -65,14 +65,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="bookPageNumber">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="bookPageNumber">
           <label class="control-label" l10n-text="persons.personMedicalDirective.bookPageNumber"></label>
-          <gva-validation-error field-name="bookPageNumber" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-md-2 col-sm-3" gva-has-error="pageCount">
+        <div class="form-group col-md-2 col-sm-3" sc-has-error="pageCount">
           <label class="control-label" l10n-text="persons.personMedicalDirective.pageCount"></label>
-          <gva-validation-error field-name="pageCount" validations="{min: null}"></gva-validation-error>
+          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
           <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
         </div>
       </div>

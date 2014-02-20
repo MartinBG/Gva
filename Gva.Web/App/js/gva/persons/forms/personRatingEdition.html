@@ -5,16 +5,16 @@
       <div class="row">
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.ratingEditionDirective.inspector"></label>
-          <sc-nomenclature alias="'inspectors'" load="true" ng-model="model.inspector"></sc-nomenclature>
+          <sc-nomenclature alias="'inspectors'" ng-model="model.inspector"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" gva-has-error="documentDateValidFrom">
+        <div class="form-group col-sm-2" sc-has-error="documentDateValidFrom">
           <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidFrom"></label>
-          <gva-validation-error field-name="documentDateValidFrom" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
           <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-2" gva-has-error="documentDateValidTo">
+        <div class="form-group col-sm-2" sc-has-error="documentDateValidTo">
           <label class="control-label" l10n-text="persons.ratingEditionDirective.documentDateValidTo"></label>
-          <gva-validation-error field-name="documentDateValidTo" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="documentDateValidTo" validations="{required: null}"></sc-validation-error>
           <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-required="true"></sc-date>
         </div>
       </div>

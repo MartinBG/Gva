@@ -1,24 +1,23 @@
-﻿<div>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Нач. дата</th>
-        <th>Етап</th>
-        <th>Изпълнител</th>
-        <th>Очаквана дата на прикл.</th>
-        <th>Дата на приключване</th>
-        <th>Текущ</th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="dess in doc.docElectronicServiceStages">
-      <tr>
-        <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td>{{ dess.electronicServiceStageName }}</td>
-        <td>{{dess.electronicServiceStageExecutors}}</td>   <!--todo must be html rendered-->
-        <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td>{{ dess.endingDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td>{{ dess.isCurrentStage ? 'Да' : 'Не' }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+﻿<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th><span l10n-text="docs.edit.stages.startingDate"></span></th>
+      <th><span l10n-text="docs.edit.stages.esStageName"></span></th>
+      <th><span l10n-text="docs.edit.stages.esStageExecutors"></span></th>
+      <th><span l10n-text="docs.edit.stages.expectedEndingDate"></span></th>
+      <th><span l10n-text="docs.edit.stages.endingDate"></span></th>
+      <th><span l10n-text="docs.edit.stages.isCurrentStage"></span></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="dess in doc.docElectronicServiceStages">
+    <tr>
+      <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dess.electronicServiceStageName }}</td>
+      <td>{{ dess.electronicServiceStageExecutors}}</td>
+      <!--todo must be html rendered-->
+      <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dess.endingDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dess.isCurrentStage ? 'Да' : 'Не' }}</td>
+    </tr>
+  </tbody>
+</table>

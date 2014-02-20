@@ -3,34 +3,34 @@
     <div class="panel-heading"><strong l10n-text="persons.personAddressDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-md-3 col-sm-4" gva-has-error="addressType">
+        <div class="form-group col-md-3 col-sm-4" sc-has-error="addressType">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressType"></label>
-          <gva-validation-error field-name="addressType" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.addressType" name="addressType" alias="'addressTypes'" load="true" params="{ type: 'P' }" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="addressType" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.addressType" name="addressType" alias="'addressTypes'" params="{ type: 'P' }" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-2" gva-has-error="valid">
+        <!--<div class="form-group col-sm-2" sc-has-error="valid">
           <label class="control-label" l10n-text="persons.personAddressDirective.valid"></label>
-          <gva-validation-error field-name="valid" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" load="true" ng-required="true"></sc-nomenclature>
-        </div>
+          <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
+        </div>-->
       </div>
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4" gva-has-error="address">
+        <div class="form-group col-sm-6 col-md-4" sc-has-error="address">
           <label class="control-label" l10n-text="persons.personAddressDirective.address"></label>
-          <gva-validation-error field-name="address" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="address" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.address" name="address" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-6 col-md-4" gva-has-error="addressAlt">
+        <div class="form-group col-sm-6 col-md-4" sc-has-error="addressAlt">
           <label class="control-label" l10n-text="persons.personAddressDirective.addressAlt"></label>
-          <gva-validation-error field-name="addressAlt" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="addressAlt" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.addressAlt" name="addressAlt" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2" gva-has-error="settlement">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="settlement">
           <label class="control-label" l10n-text="persons.personAddressDirective.settlement"></label>
-          <gva-validation-error field-name="settlement" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.settlement" name="settlement" alias="'cities'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="settlement" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.settlement" name="settlement" alias="'cities'" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personAddressDirective.postalCode"></label>

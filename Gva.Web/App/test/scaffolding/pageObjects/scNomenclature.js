@@ -41,9 +41,16 @@
   };
 
   ScNomenclature.prototype.set = function (text) {
-    this.container.click();
-    this.context.findElement(by.xpath(this.dropdownInputXPath)).sendKeys(text);
-    this.context.findElement(by.xpath(this.dropdownInputXPath)).sendKeys('\n');
+    var context = this.context,
+        dropdownInputXPath = this.dropdownInputXPath;
+
+    return this.container.click().then(function () {
+      return context.findElement(by.xpath(dropdownInputXPath)).then(function (input) {
+        input.sendKeys(text).then(function () {
+          input.sendKeys('\n');
+        });
+      });
+    });
   };
 
   ScNomenclature.prototype.clear = function () {

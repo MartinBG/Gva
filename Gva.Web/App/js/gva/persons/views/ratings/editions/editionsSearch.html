@@ -1,5 +1,5 @@
 ﻿<div>
-  <gva-button name="createBtn" gva-click="newEdition()" text="persons.ratingEditionsSearch.newEdition" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></gva-button>
+  <sc-button name="createBtn" btn-click="newEdition()" text="persons.ratingEditionsSearch.newEdition" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
   <sc-datatable ng-model="editions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column data="ratingEdition.part.documentDateValidFrom" title="persons.ratingEditionsSearch.documentDateValidFrom" type="date">
     </sc-column>
@@ -22,10 +22,10 @@
     <sc-column data="rating.personRatingModel.name" title="persons.ratingEditionsSearch.personRatingModel">
     </sc-column>
     <sc-column sortable="false" class="buttons-cell">
-      <gva-button name="editBtn" gva-click="editEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></gva-button>
+      <sc-button name="editBtn" btn-click="editEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column sortable="false" class="buttons-cell">
-      <gva-button name="deleteBtn" gva-click="deleteEdition(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></gva-button>
+      <sc-button name="deleteBtn" btn-click="deleteEdition(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
     </sc-column>
 </sc-datatable>
 </div>

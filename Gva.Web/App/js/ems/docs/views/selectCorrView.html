@@ -1,0 +1,19 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="docs.edit.addressing.selectCorr.displayName"></sc-filter>
+  <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="docs.edit.addressing.selectCorr.email"></sc-filter>
+  <sc-search-button action="cancel()" text="docs.edit.addressing.selectCorr.cancel" icon="glyphicon-arrow-left"></sc-search-button>
+  <sc-search-button action="search()" text="docs.edit.addressing.selectCorr.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
+</sc-search>
+
+<sc-datatable ng-model="corrs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="selectBtn" btn-click="selectCorr(item)" class="btn btn-xs btn-primary" l10n-text="docs.edit.addressing.selectCorr.select"></sc-button>
+  </sc-column>
+  <sc-column data="displayName" title="docs.edit.addressing.selectCorr.displayName">
+  </sc-column>
+  <sc-column data="email" title="docs.edit.addressing.selectCorr.email">
+  </sc-column>
+  <sc-column data="correspondentType.name" title="docs.edit.addressing.selectCorr.correspondentType">
+  </sc-column>
+</sc-datatable>

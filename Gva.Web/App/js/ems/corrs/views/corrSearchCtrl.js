@@ -2,7 +2,22 @@
 (function (angular, _) {
   'use strict';
 
-  function CorrsSearchCtrl($scope, $state, $stateParams, Corr) {
+  function CorrsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Corr,
+    corrs
+  ) {
+    $scope.corrs = corrs.map(function (corr) {
+      return {
+        corrId: corr.corrId,
+        displayName: corr.displayName,
+        email: corr.email,
+        correspondentType: corr.correspondentType
+      };
+    });
+
     $scope.filters = {
       displayName: null,
       email: null
@@ -14,34 +29,39 @@
       }
     });
 
-    $scope.newCorr = function () {
-      $state.go('root.corrs.new');
+    $scope.newCorr = function newCorr() {
+      return $state.go('root.corrs.new');
     };
 
-    $scope.search = function () {
-      $state.go('root.corrs.search', {
+    $scope.search = function search() {
+      return $state.go('root.corrs.search', {
         displayName: $scope.filters.displayName,
         email: $scope.filters.email
       });
     };
 
-    Corr.query($stateParams).$promise.then(function (corrs) {
-      $scope.corrs = corrs.map(function (corr) {
-        return {
-          corrId: corr.corrId,
-          displayName: corr.displayName,
-          email: corr.email,
-          correspondentType: corr.correspondentType
-        };
-      });
-    });
-
-    $scope.editCorr = function (corr) {
-      $state.go('root.corrs.edit', { corrId: corr.corrId });
+    $scope.editCorr = function editCorr(corr) {
+      return $state.go('root.corrs.edit', { corrId: corr.corrId });
     };
   }
 
-  CorrsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Corr'];
+  CorrsSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Corr',
+    'corrs'
+  ];
+
+  CorrsSearchCtrl.$resolve = {
+    corrs: [
+      '$stateParams',
+      'Corr',
+      function resolveCorrs($stateParams, Corr) {
+        return Corr.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('CorrsSearchCtrl', CorrsSearchCtrl);
 }(angular, _));

@@ -1,0 +1,33 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="docs.search.fromDate"></sc-filter>
+  <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="docs.search.toDate"></sc-filter>
+
+  <sc-filter type="text" name="regUri" class="col-sm-3" removable="false" label="docs.search.regUri"></sc-filter>
+  <sc-filter type="text" name="docName" class="col-sm-3" removable="false" label="docs.search.docName"></sc-filter>
+  <sc-filter type="int" name="docTypeId" class="col-sm-3" removable="false" label="docs.search.docTypeId">
+  </sc-filter>
+  <sc-filter type="int" name="docStatusId" class="col-sm-3" removable="false" label="docs.search.docStatusId">
+  </sc-filter>
+  <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
+  <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
+  <sc-search-button action="search()" text="applications.personSelect.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.personSelect.cancel"></sc-search-button>
+</sc-search>
+
+<sc-datatable ng-model="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
+  </sc-column>
+  <sc-column data="regUri" title="docs.search.regUri">
+  </sc-column>
+  <sc-column width="350" data="docSubject" title="docs.search.docSubject">
+  </sc-column>
+  <sc-column data="docDirectionName" title="docs.search.docDirectionName">
+  </sc-column>
+  <sc-column data="docStatusName" title="docs.search.docStatusName">
+  </sc-column>
+  <sc-column data="correspondentName" title="docs.search.correspondentName">
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <button type="button" class="btn btn-xs btn-primary" ng-click="selectDoc(item)" l10n-text="docs.search.choose"></button>
+  </sc-column>
+</sc-datatable>

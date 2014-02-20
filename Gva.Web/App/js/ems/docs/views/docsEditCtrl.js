@@ -8,9 +8,10 @@
     $filter,
     $state,
     $stateParams,
-    Doc
+    Doc,
+    doc
   ) {
-    $scope.doc = Doc.get({ docId: $stateParams.docId });
+    $scope.doc = doc;
 
     $scope.inEditMode = false;
 
@@ -31,30 +32,6 @@
       $scope.inEditMode = false;
     };
 
-    $scope.onUnitSelected = null;
-    $scope.unitAddFrom = function () {
-      $scope.onUnitSelected = function (unit) {
-        $scope.doc.docUnitsFrom.push(unit);
-        $scope.onUnitSelected = null;
-      };
-      $scope.chooseUnit();
-    };
-    $scope.unitAddTo = function () {
-      $scope.onUnitSelected = function (unit) {
-        $scope.doc.docUnitsTo.push(unit);
-        $scope.onUnitSelected = null;
-      };
-      $scope.chooseUnit();
-    };
-
-    $scope.chooseCorr = function () {
-      return $state.go('root.docs.edit.chooseCorr');
-    };
-
-    $scope.chooseUnit = function () {
-      return $state.go('root.docs.edit.chooseUnit');
-    };
-
     $scope.save = function () {
       if ($scope.editDocForm.$valid) {
         return Doc
@@ -70,7 +47,6 @@
     };
 
     $scope.attachDoc = function (docTypeId) {
-
       var newDoc = {
         parentDocId:  $scope.doc.docId,
         docFormatTypeId: 3,
@@ -101,8 +77,19 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Doc'
+    'Doc',
+    'doc'
   ];
+
+  DocsEditCtrl.$resolve = {
+    doc: [
+      '$stateParams',
+      'Doc',
+      function resolveDoc($stateParams, Doc) {
+        return Doc.get({ docId: $stateParams.docId }).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('DocsEditCtrl', DocsEditCtrl);
 }(angular));

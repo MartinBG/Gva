@@ -23,7 +23,7 @@ namespace Gva.Web
 
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(kernel, GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure((c) => WebApiConfig.Register(kernel, c));
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

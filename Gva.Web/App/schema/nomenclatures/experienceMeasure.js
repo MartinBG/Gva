@@ -5,17 +5,17 @@
   //Номенклатура Видове летателен опит
   module.exports = [
     {
-      nomTypeValueId: 7841, code: 'W', name: 'Отработени часове', nameAlt: '', alias: 'whours', content: {
+      nomValueId: 7841, code: 'W', name: 'Отработени часове', nameAlt: '', alias: 'whours', textContent: {
         codeCA: null
       }
     },
     {
-      nomTypeValueId: 7842, code: 'H', name: 'Летателни часове', nameAlt: '', alias: 'fhours', content: {
+      nomValueId: 7842, code: 'H', name: 'Летателни часове', nameAlt: '', alias: 'fhours', textContent: {
         codeCA: null
       }
     },
     {
-      nomTypeValueId: 7843, code: 'F', name: 'Брой полети', nameAlt: '', alias: 'flights', content: {
+      nomValueId: 7843, code: 'F', name: 'Брой полети', nameAlt: '', alias: 'flights', textContent: {
         codeCA: null
       }
     }

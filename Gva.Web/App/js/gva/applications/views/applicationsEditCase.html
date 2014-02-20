@@ -2,9 +2,9 @@
   <table class="table table-bordered table-condensed">
     <thead>
       <tr>
-        <th style="width: 250px;">Тип/№/Дата</th>
-        <th>Тип</th>
-        <th>Дело</th>
+        <th style="width: 250px;"><span l10n-text="applications.edit.case.regNumber"></span></th>
+        <th><span l10n-text="applications.edit.case.description"></span></th>
+        <th><span l10n-text="applications.edit.case.act"></span></th>
         <th style="width: 75px;"></th>
       </tr>
     </thead>
@@ -14,8 +14,7 @@
         <td>{{ docCase.docInfo.description }}</td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(docCase.docInfo.docId)" style="cursor: pointer;">Преглед
-          </a>
+          <a ng-click="viewDoc(docCase.docInfo.docId)" l10n-text="applications.edit.case.viewDoc" style="cursor: pointer;"></a>
         </td>
       </tr>
       <tr ng-repeat="df in docCase.docFiles">
@@ -24,17 +23,17 @@
         <td ng-show="!df.appFile">{{ df.docFile.name }}</span></td>
         <td>
           <div ng-if="df.appFile">
-            <a ng-click="viewPart(df)" style="cursor: pointer;">Дело {{ application.person.lin }} стр. {{ df.appFile.part.bookPageNumber }}</a>
+            <a ng-click="viewPart(df)" style="cursor: pointer;"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ df.appFile.part.bookPageNumber }}</a>
           </div>
           <div ng-if="!df.appFile">
-            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Добави към дело</a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile)" style="cursor: pointer;">Свържи с вече добавен</a>
+            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile)" l10n-text="applications.edit.case.linkNew" style="cursor: pointer;"></a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile)" l10n-text="applications.edit.case.linkPart" style="cursor: pointer;"></a>
           </div>
         </td>
         <td></td>
       </tr>
       <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newfile(docCase)" style="cursor: pointer;">Нов документ</a>
+          <a ng-click="newFile(docCase.docInfo.docId)" l10n-text="applications.edit.case.newFile" style="cursor: pointer;"></a>
         </td>
       </tr>
     </tbody>

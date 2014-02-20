@@ -3,44 +3,44 @@
     <div class="panel-heading"><strong l10n-text="persons.personDataDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="firstName">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="firstName">
           <label class="control-label" l10n-text="persons.personDataDirective.firstName"></label>
-          <gva-validation-error field-name="firstName" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="firstName" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.firstName" name="firstName" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="middleName">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="middleName">
           <label class="control-label" l10n-text="persons.personDataDirective.middleName"></label>
-          <gva-validation-error field-name="middleName" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="middleName" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.middleName" name="middleName" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="lastName">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="lastName">
           <label class="control-label" l10n-text="persons.personDataDirective.lastName"></label>
-          <gva-validation-error field-name="lastName" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="lastName" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.lastName" name="lastName" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="firstNameAlt">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="firstNameAlt">
           <label class="control-label" l10n-text="persons.personDataDirective.firstNameAlt"></label>
-          <gva-validation-error field-name="firstNameAlt" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="firstNameAlt" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.firstNameAlt" name="firstNameAlt" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="middleNameAlt">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="middleNameAlt">
           <label class="control-label" l10n-text="persons.personDataDirective.middleNameAlt"></label>
-          <gva-validation-error field-name="middleNameAlt" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="middleNameAlt" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.middleNameAlt" name="middleNameAlt" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="lastNameAlt">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="lastNameAlt">
           <label class="control-label" l10n-text="persons.personDataDirective.lastNameAlt"></label>
-          <gva-validation-error field-name="lastNameAlt" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="lastNameAlt" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.lastNameAlt" name="lastNameAlt" ng-required="true"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2" gva-has-error="lin">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="lin">
           <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
           <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
-          <gva-validation-error field-name="lin" validations="{required: null, lin: 'errorTexts.lin'}"></gva-validation-error>
+          <sc-validation-error field-name="lin" validations="{required: null, lin: 'errorTexts.lin'}"></sc-validation-error>
           <span class="input-group input-group-sm">
             <sc-text ng-model="model.lin" name="lin" required sc-validate-immediate="true" sc-validate="{unique: isUniqueLin}"></sc-text>
             <span class="input-group-btn">
@@ -52,33 +52,33 @@
           <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>
           <sc-text ng-model="model.uin"></sc-text>
         </div>
-        <div class="form-group col-sm-3 col-md-2" gva-has-error="sex">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="sex">
           <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
-          <gva-validation-error field-name="sex" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" load="true" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="sex" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.sex" name="sex" alias="'gender'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2" gva-has-error="dateOfBirth">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="dateOfBirth">
           <label class="control-label" l10n-text="persons.personDataDirective.dateOfBirth"></label>
-          <gva-validation-error field-name="dateOfBirth" validations="{required: null}"></gva-validation-error>
+          <sc-validation-error field-name="dateOfBirth" validations="{required: null}"></sc-validation-error>
           <sc-date ng-model="model.dateOfBirth" name="dateOfBirth" ng-required="true"></sc-date>
         </div>
-        <div class="form-group col-sm-3 col-md-2" gva-has-error="placeOfBirth">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="placeOfBirth">
           <label class="control-label" l10n-text="persons.personDataDirective.placeOfBirth"></label>
-          <gva-validation-error field-name="placeOfBirth" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.placeOfBirth" name="placeOfBirth" alias="'cities'" load="false" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="placeOfBirth" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.placeOfBirth" name="placeOfBirth" alias="'cities'" ng-required="true"></sc-nomenclature>
         </div>
-        <div class="form-group col-sm-4 col-md-3" gva-has-error="country">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="country">
           <label class="control-label" l10n-text="persons.personDataDirective.country"></label>
-          <gva-validation-error field-name="country" validations="{required: null}"></gva-validation-error>
-          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" load="false" ng-required="true"></sc-nomenclature>
+          <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4" gva-has-error="email">
+        <div class="form-group col-sm-6 col-md-4" sc-has-error="email">
           <label class="control-label" l10n-text="persons.personDataDirective.email"></label>
-          <gva-validation-error field-name="email" validations="{pattern: 'errorTexts.mail'}"></gva-validation-error>
+          <sc-validation-error field-name="email" validations="{pattern: 'errorTexts.mail'}"></sc-validation-error>
           <sc-text ng-model="model.email" ng-pattern='/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z.]{2,5}$/' name="email"></sc-text>
         </div>
         <div class="form-group col-sm-6 col-md-4">

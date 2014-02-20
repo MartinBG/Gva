@@ -1,106 +1,104 @@
-﻿<div>
-  <div class="panel panel-default">
-    <nav class="panel-heading">
-      <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
-        <button sc-click="save('create')" type="button" class="btn btn-default btn-sm">
-          <i class="glyphicon glyphicon-pencil"></i>
-          Продължи
-        </button>
-        <button sc-click="save('register')" type="button" class="btn btn-default btn-sm">
-          <i class="glyphicon glyphicon-ok"></i>
-          Регистрирай и продължи
-        </button>
-        <button sc-click="cancel()" type="button" class="btn btn-default btn-sm">
-          <i class="glyphicon glyphicon-remove"></i>
-          Отказ
-        </button>
-      </div>
-    </nav>
+﻿<div class="panel panel-default">
+  <nav class="panel-heading">
+    <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
+      <button sc-click="save('create')" type="button" class="btn btn-default btn-sm">
+        <i class="glyphicon glyphicon-pencil"></i>
+        Продължи
+      </button>
+      <button sc-click="save('register')" type="button" class="btn btn-default btn-sm">
+        <i class="glyphicon glyphicon-ok"></i>
+        Регистрирай и продължи
+      </button>
+      <button sc-click="cancel()" type="button" class="btn btn-default btn-sm">
+        <i class="glyphicon glyphicon-remove"></i>
+        Отказ
+      </button>
+    </div>
+  </nav>
 
-    <div class="well-sm panel-body">
-      <ng-form name="docForm" sc-validate="{}">
-        <div class="well-sm panel-body ">
+  <div class="well-sm panel-body">
+    <ng-form name="docForm" sc-validate="{}">
+      <div class="well-sm panel-body ">
 
-           <div class="row" ng-show="isChild">
-              <div class="col-md-12">
-                <label>{{parentDocInfo}}</label>
-              </div>
-            </div>
-
-          <div class="row">
-            <div class="form-group col-sm-4">
-              <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
-              <sc-text ng-model="doc.caseRegUri" name="caseRegUri" ng-readonly="isChild"></sc-text>
-            </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeGroupId.$invalid && docForm.$validated}">
-              <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
-              <span name="docTypeGroupIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeGroupId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeGroupId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroups'" load="true" required></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docTypeId.$invalid && docForm.$validated}">
-              <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
-              <span name="docTypeIdValidationSpan" ng-show="docForm.$validated && docForm.docTypeId.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docTypeId.$error.required && 'Задължително поле'}}"></span>
-              <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docTypes'" load="false" params="{ parentId: docTypeGroup ? docTypeGroup.nomTypeValueId : 0 }" required></sc-nomenclature>
+          <div class="row" ng-show="!!parentDoc">
+            <div class="col-md-12">
+              <label>{{'Към ' + parentDoc.regUri + ' ' + parentDoc.docTypeName + ' ' + parentDoc.docSubject}}</label>
             </div>
           </div>
 
-          <div class="row">
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.docSubject.$invalid && docForm.$validated}">
-              <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
-              <span name="docSubjectValidationSpan" ng-show="docForm.$validated && docForm.docSubject.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.docSubject.$error.required && 'Задължително поле'}}"></span>
-              <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
-            </div>
-            <div class="form-group col-sm-4">
-              <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
-              <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondents'" load="true" multiple></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-4" ng-class="{'has-error': docForm.numberOfDocs.$invalid && docForm.$validated}">
-              <label class="control-label" l10n-text="docs.newDoc.numberOfDocs"></label>
-              <span name="numberOfDocsValidationSpan" ng-show="docForm.$validated && docForm.numberOfDocs.$invalid" class="glyphicon glyphicon-warning-sign" title="{{docForm.numberOfDocs.$error.required && 'Задължително поле' || docForm.numberOfDocs.$error.singleDoc && 'Невалидна стойност'}}"></span>
-              <sc-int ng-model="doc.numberOfDocs" name="numberOfDocs" required sc-validate="{singleDoc: isNumberOfDocsValid}"></sc-int>
-            </div>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
+            <sc-text ng-model="doc.caseRegUri" name="caseRegUri" ng-readonly="!!parentDoc"></sc-text>
           </div>
-
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <div class="btn-group">
-                <button type="button" class="btn"
-                  ng-repeat="docFormatType in docFormatTypes"
-                  ng-class="{'btn-primary': docFormatType.isActive, 'btn-default': !docFormatType.isActive}"
-                  ng-click="docFormatTypeChange($index)">
-                  {{docFormatType.name}}
-                </button>
-              </div>
-            </div>
+          <div class="form-group col-sm-4" sc-has-error="docTypeGroupId">
+            <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
+            <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="docTypeGroup" name="docTypeGroupId" alias="'docTypeGroup'" ng-required="true"></sc-nomenclature>
           </div>
-
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <div class="btn-group">
-                <button type="button" class="btn"
-                  ng-repeat="docCasePartType in docCasePartTypes"
-                  ng-class="{'btn-primary': docCasePartType.isActive, 'btn-default': !docCasePartType.isActive}"
-                  ng-click="docCasePartTypeChange($index)">
-                  {{docCasePartType.name}}
-                </button>
-              </div>
-            </div>
+          <div class="form-group col-sm-4" sc-has-error="docTypeId">
+            <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
+            <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="docType" name="docTypeId" alias="'docType'" params="{ parentValueId: docTypeGroup ? docTypeGroup.nomValueId : 0 }" required></sc-nomenclature>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <div class="btn-group">
-                <button type="button"  class="btn"
-                  ng-repeat="docDirection in docDirections"
-                  ng-class="{'btn-primary': docDirection.isActive, 'btn-default': !docDirection.isActive}"
-                  ng-click="docDirectionChange($index)">
-                  {{docDirection.name}}
-                </button>
-              </div>
+        <div class="row">
+          <div class="form-group col-sm-4" sc-has-error="docSubject">
+            <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
+            <sc-validation-error field-name="docSubject" validations="{required: null}"></sc-validation-error>
+            <sc-text ng-model="doc.docSubject" name="docSubject" required></sc-text>
+          </div>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
+            <sc-nomenclature  ng-model="doc.docCorrespondents" name="testCorrespondents" alias="'testCorrespondent'" multiple></sc-nomenclature>
+          </div>
+          <div class="form-group col-sm-4" sc-has-error="numberOfDocs">
+            <label class="control-label" l10n-text="docs.newDoc.numberOfDocs"></label>
+            <sc-validation-error field-name="numberOfDocs" validations="{required: null}"></sc-validation-error>
+            <sc-int ng-model="doc.numberOfDocs" name="numberOfDocs" required sc-validate="{singleDoc: isNumberOfDocsValid}"></sc-int>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <div class="btn-group">
+              <button type="button" class="btn"
+                ng-repeat="docFormatType in docFormatTypes"
+                ng-class="{'btn-primary': docFormatType.isActive, 'btn-default': !docFormatType.isActive}"
+                ng-click="docFormatTypeChange($index)">
+                {{docFormatType.name}}
+              </button>
             </div>
           </div>
         </div>
-      </ng-form>
-    </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <div class="btn-group">
+              <button type="button" class="btn"
+                ng-repeat="docCasePartType in docCasePartTypes"
+                ng-class="{'btn-primary': docCasePartType.isActive, 'btn-default': !docCasePartType.isActive}"
+                ng-click="docCasePartTypeChange($index)">
+                {{docCasePartType.name}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <div class="btn-group">
+              <button type="button"  class="btn"
+                ng-repeat="docDirection in docDirections"
+                ng-class="{'btn-primary': docDirection.isActive, 'btn-default': !docDirection.isActive}"
+                ng-click="docDirectionChange($index)">
+                {{docDirection.name}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-form>
   </div>
 </div>

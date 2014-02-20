@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0AA2D32A-21C7-4B24-A82D-C5F0E5087521}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gva.Web</RootNamespace>
@@ -43,13 +43,21 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -65,12 +73,48 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.1\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.1.1\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.1\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.1\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -80,63 +124,19 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
-    <Content Include="App\js\ems\docs\views\chooseCorrView.html" />
-    <Content Include="App\js\ems\docs\views\chooseCorrViewCtrl.js" />
-    <Content Include="App\js\ems\docs\views\chooseUnitView.html" />
-    <Content Include="App\js\ems\docs\views\chooseUnitViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\selectCorrView.html" />
+    <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\selectUnitView.html" />
+    <Content Include="App\js\ems\docs\views\selectUnitViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsClassifications.html" />
     <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />
@@ -163,6 +163,9 @@
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\Copy of personDataCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
+    <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.html" />
+    <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\forms\personRating.html" />
     <Content Include="App\js\gva\persons\forms\personRatingEditionCtrl.js" />
@@ -170,8 +173,6 @@
     <Content Include="App\js\gva\applications\resources\application.js" />
     <Content Include="App\js\gva\applications\views\applicationsLink.html" />
     <Content Include="App\js\gva\applications\views\applicationsLinkCtrl.js" />
-    <Content Include="App\js\gva\applications\views\applicationsLinkCommon.html" />
-    <Content Include="App\js\gva\applications\views\applicationsLinkCommonCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsEdit.html" />
     <Content Include="App\js\gva\applications\views\applicationsEditCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsEditCase.html" />
@@ -186,14 +187,12 @@
     <Content Include="App\js\gva\applications\views\applicationsEditAddPartCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsEditLinkPart.html" />
     <Content Include="App\js\gva\applications\views\applicationsEditLinkPartCtrl.js" />
-    <Content Include="App\js\gva\applications\views\docChoose.html" />
-    <Content Include="App\js\gva\applications\views\docChooseCtrl.js" />
-    <Content Include="App\js\gva\applications\views\personChoose.html" />
-    <Content Include="App\js\gva\applications\views\personChooseCtrl.js" />
-    <Content Include="App\js\gva\applications\views\personNew.html" />
-    <Content Include="App\js\gva\applications\views\personNewCtrl.js" />
-    <Content Include="App\js\gva\applications\views\applicationsNewDocCtrl.js" />
-    <Content Include="App\js\gva\applications\views\applicationsNewDoc.html" />
+    <Content Include="App\js\gva\applications\views\applicationsDocSelect.html" />
+    <Content Include="App\js\gva\applications\views\applicationsDocSelectCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsPersonSelect.html" />
+    <Content Include="App\js\gva\applications\views\applicationsPersonSelectCtrl.js" />
+    <Content Include="App\js\gva\applications\views\applicationsPersonNew.html" />
+    <Content Include="App\js\gva\applications\views\applicationsPersonNewCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsNew.html" />
     <Content Include="App\js\gva\applications\views\applicationsNewCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentTraining.html" />
@@ -209,6 +208,8 @@
     <Content Include="App\js\gva\directives\button\buttonDirective.html" />
     <Content Include="App\js\gva\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\resources\publisher.js" />
+    <Content Include="App\js\scaffolding\directives\button\buttonDirective.html" />
+    <Content Include="App\js\scaffolding\directives\button\buttonDirective.js" />
     <Content Include="App\js\gva\persons\resources\personInventory.js" />
     <Content Include="App\js\gva\persons\resources\personRating.js" />
     <Content Include="App\js\gva\persons\resources\personEdition.js" />
@@ -273,6 +274,20 @@
     <Content Include="App\schema\nomenclatures\city.js" />
     <Content Include="App\schema\nomenclatures\otherDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\publisherType.js" />
+    <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
+    <Content Include="App\schema\nomenclatures\docType.js" />
+    <Content Include="App\schema\nomenclatures\docFormatType.js" />
+    <Content Include="App\schema\nomenclatures\docTypeGroup.js" />
+    <Content Include="App\schema\nomenclatures\docDirection.js" />
+    <Content Include="App\schema\nomenclatures\docCasePartType.js" />
+    <Content Include="App\schema\nomenclatures\unit.js" />
+    <Content Include="App\schema\nomenclatures\assignmentType.js" />
+    <Content Include="App\schema\nomenclatures\docSourceType.js" />
+    <Content Include="App\schema\nomenclatures\docDestinationType.js" />
+    <Content Include="App\schema\nomenclatures\docStatus.js" />
+    <Content Include="App\schema\nomenclatures\docSubject.js" />
+    <Content Include="App\schema\nomenclatures\correspondentGroup.js" />
+    <Content Include="App\schema\nomenclatures\correspondentType.js" />
     <Content Include="App\schema\nomenclatures\country.js" />
     <Content Include="App\schema\nomenclatures\employmentCategory.js" />
     <Content Include="App\schema\nomenclatures\gender.js" />
@@ -297,6 +312,7 @@
     <Content Include="App\schema\nomenclatures\staffType.js" />
     <Content Include="App\schema\person-rating-edition.sample.js" />
     <Content Include="App\schema\person-rating.sample.js" />
+    <Content Include="App\test\designTemplatesMock.js" />
     <Content Include="App\test\ems\mocks\docCases.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsFactory.js" />
@@ -320,6 +336,14 @@
     <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
     <Content Include="App\test\gva\persons\mocks\publishersHttp.js" />
+    <Content Include="App\test\scaffolding\pageObjects\scTabs.js" />
+    <Content Include="App\test\scaffolding\pageObjects\testbeds\tabsPO.js" />
+    <Content Include="App\test\scaffolding\specs\scButtonSpec.js" />
+    <Content Include="App\test\scaffolding\specs\scTabsSpec.js" />
+    <Content Include="App\test\scaffolding\testbeds\scButtonTestbed.html" />
+    <Content Include="App\test\scaffolding\testbeds\scButtonTestbedCtrl.js" />
+    <Content Include="App\test\scaffolding\testbeds\scTabsTestbed.html" />
+    <Content Include="App\test\scaffolding\testbeds\scTabsTestbedCtrl.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personInventoryHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personFlyingExperiencesHttp.js" />
@@ -335,9 +359,46 @@
     <Content Include="App\test\gva\persons\mocks\personRatingsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
-    <Content Include="App\test\gva\persons\pageObjects\newDocumentIdPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\editDocumentIdPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\searchDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentChecks\checkPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentChecks\searchCheckPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentEducations\educationPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\flyingExperiences\editFlyingExpPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\flyingExperiences\newFlyingExpPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\flyingExperiences\searchFlyingExpPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentEducations\searchEducationPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\docMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentMedicals\searchDocMedPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentEmployments\searchEmploymentPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentEmployments\employmentPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentIds\documentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentIds\searchDocumentIdPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\inventory\inventoryPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\statuses\personStatusPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\statuses\searchPersonStatusesPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\viewPersonPO.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\editCheckSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\newCheckSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentChecks\searchCheckSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\editPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\newPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentMedicals\searchPersonDocMedSpec.js" />
+    <Content Include="App\test\gva\persons\specs\flyingExperiences\editFlyingExpSpec.js" />
+    <Content Include="App\test\gva\persons\specs\flyingExperiences\newFlyingExpSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEducations\editEducationSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEducations\newEducationSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEducations\searchEducationSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEmployments\newEmploymentSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEmployments\searchEmploymentSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentEmployments\editEmploymentSpec.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentTrainings\searchTrainingPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentTrainings\trainingPO.js" />
+    <Content Include="App\test\gva\persons\specs\documentTrainings\editTrainingSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentTrainings\newTrainingSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentTrainings\searchTrainingSpec.js" />
+    <Content Include="App\test\gva\persons\specs\inventory\searchInventorySpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\editPersonStatusSpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\newPersonStatusSpec.js" />
+    <Content Include="App\test\gva\persons\specs\statuses\searchPersonStatusesSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\scDatatable.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSearch.js" />
     <Content Include="App\test\scaffolding\pageObjects\scText.js" />
@@ -346,9 +407,6 @@
     <Content Include="App\test\common\pageObjects\usersPO.js" />
     <Content Include="App\test\common\specs\editUserSpec.js" />
     <Content Include="App\test\common\specs\newUserSpec.js" />
-    <Content Include="App\test\gva\persons\specs\searchPersonStatusesSpec.js" />
-    <Content Include="App\test\gva\persons\specs\editPersonStatusSpec.js" />
-    <Content Include="App\test\gva\persons\specs\newPersonStatusSpec.js" />
     <Content Include="App\js\gva\persons\forms\personApplication.html" />
     <Content Include="App\js\gva\persons\forms\personScannedDocument.html" />
     <Content Include="App\js\gva\persons\resources\personDocumentId.js" />
@@ -359,9 +417,9 @@
     <Content Include="App\js\gva\persons\views\documentIds\idsSearch.html" />
     <Content Include="App\js\gva\persons\views\documentIds\idsSearchCtrl.js" />
     <Content Include="App\test\gva\persons\mocks\personDocumentIdsHttp.js" />
-    <Content Include="App\test\gva\persons\specs\editPersonDocumentIdSpec.js" />
-    <Content Include="App\test\gva\persons\specs\newPersonDocumentIdSpec.js" />
-    <Content Include="App\test\gva\persons\specs\searchPersonDocumentIdSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentIds\editDocumentIdSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentIds\newDocumentIdSpec.js" />
+    <Content Include="App\test\gva\persons\specs\documentIds\searchDocumentIdSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\filesPO.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\promiseStatePO.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\datatablePO.js" />
@@ -369,7 +427,7 @@
     <Content Include="App\test\scaffolding\pageObjects\testbeds\nomenclaturePO.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\selectPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\newPersonPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\personAddressPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\addresses\addressPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\personDataPO.js" />
     <Content Include="App\test\scaffolding\pageObjects\scDate.js" />
     <Content Include="App\test\scaffolding\pageObjects\scFiles.js" />
@@ -379,11 +437,8 @@
     <Content Include="App\test\scaffolding\pageObjects\scPromiseState.js" />
     <Content Include="App\test\scaffolding\pageObjects\scSelect.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\searchPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\personDocumentIdPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\personsPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\personStatusPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\searchPersonAddressPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\searchPersonStatusesPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\addresses\searchAddressPO.js" />
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -445,12 +500,12 @@
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.html" />
     <Content Include="App\js\scaffolding\directives\nomenclature\nomenclatureDirective.js" />
     <Content Include="App\js\scaffolding\directives\click\clickDirective.js" />
-    <Content Include="App\js\gva\directives\tabs\tabsDirective.html" />
-    <Content Include="App\js\gva\directives\tabs\tabsDirective.js" />
+    <Content Include="App\js\scaffolding\directives\tabs\tabsDirective.html" />
+    <Content Include="App\js\scaffolding\directives\tabs\tabsDirective.js" />
     <Content Include="App\js\scaffolding\directives\validate\validateDirective.js" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.html" />
     <Content Include="App\js\scaffolding\directives\promiseState\promiseStateDirective.js" />
-    <Content Include="App\js\scaffolding\directives\search\buttonDirective.js" />
+    <Content Include="App\js\scaffolding\directives\search\searchButtonDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\columnDirective.js" />
     <Content Include="App\js\scaffolding\directives\datatable\datatableDirective.js" />
     <Content Include="App\js\scaffolding\directives\date\dateDirective.js" />
@@ -470,7 +525,7 @@
     <Content Include="App\js\scaffolding\resources\nomenclature.js" />
     <Content Include="App\js\scaffolding\directives\search\searchDirective.js" />
     <Content Include="App\js\scaffolding\scaffolding.js" />
-    <Content Include="App\js\scaffolding\directives\search\buttonDirective.html" />
+    <Content Include="App\js\scaffolding\directives\search\searchButtonDirective.html" />
     <Content Include="App\js\scaffolding\directives\datatable\datatableDirective.html" />
     <Content Include="App\js\scaffolding\directives\date\dateDirective.html" />
     <Content Include="App\js\scaffolding\directives\search\filterDirective.html" />
@@ -533,9 +588,9 @@
     <Content Include="App\test\common\mocks\usersHttp.js" />
     <Content Include="App\test\ptorConf.js" />
     <Content Include="App\test\gvaBy.js" />
-    <Content Include="App\test\gva\persons\specs\editPersonAddressSpec.js" />
-    <Content Include="App\test\gva\persons\specs\newPersonAddressSpec.js" />
-    <Content Include="App\test\gva\persons\specs\searchPersonAddressSpec.js" />
+    <Content Include="App\test\gva\persons\specs\addresses\editAddressSpec.js" />
+    <Content Include="App\test\gva\persons\specs\addresses\newAddressSpec.js" />
+    <Content Include="App\test\gva\persons\specs\addresses\searchAddressSpec.js" />
     <Content Include="App\test\gva\persons\specs\editPersonDataSpec.js" />
     <Content Include="App\test\gva\persons\specs\viewPersonSpec.js" />
     <Content Include="App\test\common\specs\usersSpec.js" />

@@ -2,7 +2,15 @@
 (function (angular, _) {
   'use strict';
 
-  function ApplicationsSearchCtrl($scope, $state, $stateParams, Application) {
+  function ApplicationsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Application,
+    applications
+    ) {
+    $scope.applications = applications;
+
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -14,10 +22,6 @@
       if (value !== null && value !== undefined) {
         $scope.filters[param] = value;
       }
-    });
-
-    Application.query($stateParams).$promise.then(function (applications) {
-      $scope.applications = applications;
     });
 
     $scope.search = function () {
@@ -34,7 +38,23 @@
     };
   }
 
-  ApplicationsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Application'];
+  ApplicationsSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Application',
+    'applications'
+  ];
+
+  ApplicationsSearchCtrl.$resolve = {
+    applications: [
+      '$stateParams',
+      'Application',
+      function ResolveApps($stateParams, Application) {
+        return Application.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ApplicationsSearchCtrl', ApplicationsSearchCtrl);
 }(angular, _));

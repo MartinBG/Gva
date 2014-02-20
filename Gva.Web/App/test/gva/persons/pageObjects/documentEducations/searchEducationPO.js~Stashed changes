@@ -1,0 +1,27 @@
+﻿/*global module, by, require*/
+(function (module, by, require) {
+  'use strict';
+
+  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable'),
+      cont;
+
+  function SearchEducationPO(context) {
+    cont = context;
+    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.datatable =
+      new ScDatatable(context.findElement(by.css('div[ng-model="documentEducations"]')));
+    this.tableBody = context.findElement(by.css('td'));
+  }
+
+  SearchEducationPO.prototype.deleteFirst = function () {
+    cont
+      .findElement(by.css('tbody tr:first-child button[name=deleteBtn]')).click();
+  };
+
+  SearchEducationPO.prototype.editFirst = function () {
+    cont
+      .findElement(by.css('tbody tr:first-child button[name=editBtn]')).click();
+  };
+
+  module.exports = SearchEducationPO;
+}(module, by, require));
