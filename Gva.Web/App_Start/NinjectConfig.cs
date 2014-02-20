@@ -15,6 +15,7 @@ namespace Gva.Web.App_Start
             kernel.Load(new CommonModule());
             kernel.Load(new CommonApiModule());
             kernel.Load(new RegsApiModule());
+            kernel.Load(new GvaWebModule());
         }
     }
 }

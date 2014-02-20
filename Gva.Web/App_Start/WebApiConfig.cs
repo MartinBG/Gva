@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Routing;
-using Common.Http;
+﻿using Common.Http;
 using Common.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Ninject;
-using NLog.Config;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace Gva.Web
 {
@@ -50,15 +49,40 @@ namespace Gva.Web
 
         public static void RegisterRoutes(HttpConfiguration config)
         {
+            // nomenclatures
+            MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes", "Nomenclature", "GetAddressTypes");
+            MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}", "Nomenclature", "GetNoms");
+
+            //persons
+            MapRoute(config, HttpMethod.Post, "api/persons"       , "Person", "PostPerson");
+            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}", "Person", "GetPerson");
+
+            //lots
+            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/personData", "Lot", "GetPart");
+            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/{*path}", "Lot", "GetPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
+            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/{*path}", "Lot", "GetParts");
+            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/personData", "Lot", "PostPart");
+            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/{*path}", "Lot", "PostPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
+            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/{*path}", "Lot", "PostNewPart");
         }
 
-        private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)
+        private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, Dictionary<string, string> regExpressions = null)
         {
+            dynamic constraints = new ExpandoObject();
+            constraints.httpMethod = new HttpMethodConstraint(method);
+            if (regExpressions != null)
+            {
+                foreach (var prop in regExpressions)
+                {
+                    (constraints as IDictionary<string, object>)[prop.Key] = prop.Value;
+                }
+            }
+
             config.Routes.MapHttpRoute(
                 name: Guid.NewGuid().ToString(),
                 routeTemplate: route,
-                defaults: new { controller = controller, action = action },
-                constraints: new { httpMethod = new HttpMethodConstraint(method) });
+                defaults: new { controller = controller, action = action, path = "personData" },
+                constraints: (object)constraints);
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Common.Data;
 using Ninject.Modules;
-using Regs.Api;
+using Regs.Api.LotEvents.LotEventDispatcherFactory;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Regs.Api.LotEvents.LotEventDispatcherFactory;
 
 namespace Regs.Api
 {

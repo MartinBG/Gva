@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
+using Gva.Web.App_Start;
+using Gva.Web.Mappers;
+using Ninject;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Gva.Web.App_Start;
-using Ninject;
 
 namespace Gva.Web
 {
@@ -25,6 +24,12 @@ namespace Gva.Web
 
             GlobalConfiguration.Configure((c) => WebApiConfig.Register(kernel, c));
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Mapper.Configuration.ConstructServicesUsing(x => kernel.Get(x));
+            foreach (IMapper mapper in kernel.GetAll<IMapper>())
+            {
+                mapper.CreateMap();
+            }
         }
     }
 }

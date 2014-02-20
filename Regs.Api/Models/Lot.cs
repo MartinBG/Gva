@@ -259,18 +259,16 @@ namespace Regs.Api.Models
             Events.Raise(new LotEvent(LotOperation.Commit, this, toBeCommited.ToList()));
         }
 
-        public JObject GetPart(string path, int? commitId = null)
+        public PartVersion GetPart(string path, int? commitId = null)
         {
             return this.GetPartVersions(path, true, commitId)
-                .Select(pv => JObject.Parse(pv.TextContent))
                 .FirstOrDefault();
         }
 
-        public JObject[] GetParts(string path, int? commitId = null)
+        public PartVersion[] GetParts(string path, int? commitId = null)
         {
             return this.GetPartVersions(path, false, commitId)
                 .OrderBy(pv => pv.Part.Path)
-                .Select(pv => JObject.Parse(pv.TextContent))
                 .ToArray();
         }
 
