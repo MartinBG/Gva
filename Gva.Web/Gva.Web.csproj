@@ -162,7 +162,7 @@
     <Content Include="App\js\gva\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.js" />
-    <Content Include="App\js\gva\persons\forms\Copy of personDataCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
@@ -330,10 +330,6 @@
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
-    <Content Include="App\test\gva\directives\specs\gvaButtonSpec.js" />
-    <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbed.html" />
-    <Content Include="App\test\gva\directives\testbeds\gvaButtonTestbedCtrl.js" />
-    <Content Include="App\test\gva\directives\testbeds\states.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
     <Content Include="App\test\gva\persons\mocks\publishersHttp.js" />
     <Content Include="App\test\scaffolding\pageObjects\scTabs.js" />
