@@ -44,8 +44,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentMedical',
-      templateUrl: 'gva/persons/forms/personDocumentMedical.html',
-      controller: 'PersonDocumentMedicalCtrl'
+      templateUrl: 'gva/persons/forms/personDocumentMedical.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEmployment',
@@ -65,8 +64,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaRatingEdition',
-      templateUrl: 'gva/persons/forms/personRatingEdition.html',
-      controller: 'PersonRatingEditionCtrl'
+      templateUrl: 'gva/persons/forms/personRatingEdition.html'
     });
     scaffoldingProvider.form({
       name: 'gvaRating',

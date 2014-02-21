@@ -47,7 +47,6 @@
     
     it('should filter child nomenclature', function () {
       nomenclaturePage.parentNomenclature.set('Republic of Groatia');
-      nomenclaturePage.childNomenclature.click();
       expect(nomenclaturePage.childNomenclature.getDropdownResults())
         .toEqual(['Цавтат', 'Загреб', 'Велика Горица']);
     });

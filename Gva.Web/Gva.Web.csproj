@@ -164,7 +164,6 @@
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\forms\personRating.html" />
-    <Content Include="App\js\gva\persons\forms\personRatingEditionCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="App\js\gva\applications\resources\application.js" />
     <Content Include="App\js\gva\applications\views\applicationsLink.html" />
@@ -195,7 +194,6 @@
     <Content Include="App\js\gva\persons\forms\personDocumentTraining.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentEducation.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentCheck.html" />
-    <Content Include="App\js\gva\persons\forms\personDocumentMedicalCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentMedical.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentEmployment.html" />
     <Content Include="App\js\gva\persons\forms\personFlyingExperience.html" />
@@ -320,6 +318,7 @@
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
+    <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\scTabs.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\tabsPO.js" />
     <Content Include="App\test\scaffolding\specs\scButtonSpec.js" />
