@@ -94,5 +94,11 @@
     });
   };
 
+  ScFiles.prototype.isModalDisplayed = function () {
+    return this.context.findElements(by.className('modal-body')).then(function (elements) {
+      return elements.length === 1;
+    });
+  };
+
   module.exports = ScFiles;
 }(module, by, require, process));
