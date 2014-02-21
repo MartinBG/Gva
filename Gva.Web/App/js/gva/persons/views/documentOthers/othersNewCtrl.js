@@ -2,7 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function DocumentOthersNewCtrl($scope, $state, $stateParams, PersonDocumentOther) {
+  function DocumentOthersNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentOther,
+    personDocumentOther,
+    selectedPublisher
+  ) {
     $scope.save = function () {
       $scope.personDocumentOtherForm.$validate()
         .then(function () {
@@ -16,12 +23,38 @@
         });
     };
 
+    $scope.personDocumentOther = personDocumentOther;
+    $scope.personDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
+      personDocumentOther.part.documentPublisher;
+
+    $scope.choosePublisher = function () {
+      return $state.go('root.persons.view.documentOthers.new.choosePublisher');
+    };
+
     $scope.cancel = function () {
       return $state.go('root.persons.view.documentOthers.search');
     };
   }
 
-  DocumentOthersNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentOther'];
+  DocumentOthersNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentOther',
+    'personDocumentOther',
+    'selectedPublisher'
+  ];
+
+  DocumentOthersNewCtrl.$resolve = {
+    personDocumentOther: function () {
+      return {
+        part: {}
+      };
+    },
+    selectedPublisher: function () {
+      return [];
+    }
+  };
 
   angular.module('gva').controller('DocumentOthersNewCtrl', DocumentOthersNewCtrl);
 }(angular));

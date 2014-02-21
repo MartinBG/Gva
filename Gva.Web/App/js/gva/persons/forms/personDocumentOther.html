@@ -12,7 +12,7 @@
           <div>
             <div class="form-group col-sm-6 col-md-3">
               <label class="control-label" l10n-text="persons.personOtherDirective.documentPersonNumber"></label>
-              <sc-text ng-model="model.documentPersonNumber" name="documentPersonNumber" name=""></sc-text>
+              <sc-text ng-model="model.documentPersonNumber" name="documentPersonNumber" name="documentPersonNumber"></sc-text>
             </div>
           </div>
       </div>
@@ -27,19 +27,26 @@
             </div>
             <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
               <label class="control-label" l10n-text="persons.personOtherDirective.documentPublisher"></label>
-              <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
+              <div class="input-group input-group-sm">
+                <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="$parent.choosePublisher()">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
               <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentType"></label>
-          <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.personOtherDocumentType" name="personOtherDocumentType" alias="'personOtherDocumentTypes'" load="true" ng-required="true"></sc-nomenclature>
+              <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature ng-model="model.personOtherDocumentType" name="personOtherDocumentType" alias="'personOtherDocumentTypes'" ng-required="true"></sc-nomenclature>
             </div>
             <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentRole">
               <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentRole"></label>
-          <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.personOtherDocumentRole" name="personOtherDocumentRole" alias="'documentRoles'" load="true" ng-required="true"></sc-nomenclature>
+              <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature ng-model="model.personOtherDocumentRole" name="personOtherDocumentRole" alias="'documentRoles'" ng-required="true"></sc-nomenclature>
             </div>
           </div>
           <div class="row">
