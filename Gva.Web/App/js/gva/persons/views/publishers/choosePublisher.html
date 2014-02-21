@@ -1,4 +1,4 @@
-﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+﻿<sc-search name="publishersSearch" selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="text" class="col-sm-3" removable="false" label="persons.publishers.text"></sc-filter>
   <sc-filter type="nomenclature" name="publisherType" class="col-sm-3" removable="false" alias="publisherTypes" label="persons.publishers.publisherType"></sc-filter>
   <sc-search-button action="goBack()" text="persons.publishers.back" icon="glyphicon-arrow-left"></sc-search-button>
@@ -7,7 +7,7 @@
 
 <sc-datatable ng-model="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px">
-    <sc-button class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="persons.publishers.select"></sc-button>
+    <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="persons.publishers.select"></sc-button>
   </sc-column>
   <sc-column data="name" sortable="true" title="persons.publishers.name">
   </sc-column>

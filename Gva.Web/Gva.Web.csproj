@@ -338,9 +338,11 @@
     <Content Include="App\test\ems\mocks\corrsHttp.js" />
     <Content Include="App\test\ems\mocks\docsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
+    <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
     <Content Include="App\test\gva\persons\mocks\publishersHttp.js" />
+    <Content Include="App\test\gva\persons\specs\publishers\publishersSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\scTabs.js" />
     <Content Include="App\test\scaffolding\pageObjects\testbeds\tabsPO.js" />
     <Content Include="App\test\scaffolding\specs\scButtonSpec.js" />
