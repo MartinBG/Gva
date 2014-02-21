@@ -32,6 +32,7 @@
     };
 
     $scope.ok = function () {
+      var uploadedFile;
       if (pendingUpload) {
         $scope.isReadonly = true;
 
@@ -40,7 +41,7 @@
             var file = pendingUpload.files[0];
             pendingUpload = undefined;
 
-            return {
+            uploadedFile = {
               name: file.name,
               relativePath: file.relativePath,
               key: data.fileKey
@@ -48,8 +49,8 @@
           }
         })['catch'](function () {
           alert(l10n.get('scaffolding.scFiles.failAlert'));
-        })['finally'](function (file) {
-          $modalInstance.close(file);
+        })['finally'](function () {
+          $modalInstance.close(uploadedFile);
         });
       } else {
         $modalInstance.close();

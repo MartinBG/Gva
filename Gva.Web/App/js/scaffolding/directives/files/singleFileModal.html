@@ -16,7 +16,7 @@
     </a>
     <span class="test-file-name" ng-show="!file.url">{{file.name}}
     </span>
-    <i class="glyphicon glyphicon-remove-circle tree-image-close" ng-show="!isReadonly" ng-click="remove()"></i>
+    <i class="glyphicon glyphicon-remove-circle tree-image-close" ng-show="!isReadonly && file" ng-click="remove()"></i>
     <span class="test-no-files-span" ng-show="!file" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFileAttached"></span>
   </div>
 </div>
