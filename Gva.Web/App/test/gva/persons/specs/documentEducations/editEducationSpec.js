@@ -36,8 +36,8 @@
       editDocEduPage.completionDate.set('20.10.2014');
       editDocEduPage.documentNumber.set('2324a');
       editDocEduPage.speciality.set('Професионална квалификация');
-      editDocEduPage.graduation.set('');
-      editDocEduPage.school.set('Нов Български Университет-София');
+      editDocEduPage.graduation.set('Висше образование (магистър)');
+      editDocEduPage.school.set('Български въздухоплавателен център');
       editDocEduPage.bookPageNumber.set('2');
       editDocEduPage.pageCount.set('5');
       
@@ -55,7 +55,7 @@
           'part_pageCount'
           )).toEqual([
         ['2324a', '20.10.2014', 'Професионална квалификация',
-          'Нов български университет-София', 'Висше образование (бакалавър)', '2', '5']
+          'Български въздухоплавателен център', 'Висше образование (магистър)', '2', '5']
       ]);
     });
   });
