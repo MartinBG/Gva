@@ -476,6 +476,14 @@
         ratingNew: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        publishers: {
+          text: 'Текст',
+          publisherType: 'Тип',
+          name: 'Наименование',
+          back: 'Назад',
+          search: 'Търси',
+          select: 'Избор'
         }
       },
       applications: {
