@@ -9,9 +9,10 @@
     $modalInstance,
     l10n,
     scFilesConfig,
-    files,
+    modalValue,
     isReadonly) {
-    var pendingUploads = {},
+    var files = modalValue,
+      pendingUploads = {},
       uploadedFiles = {},
       canceled;
 
@@ -219,7 +220,7 @@
     '$modalInstance',
     'l10n',
     'scFilesConfig',
-    'files',
+    'modalValue',
     'isReadonly'
   ];
 

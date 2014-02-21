@@ -29,7 +29,7 @@
 
           scope.isMultiple = 'multiple' in iAttrs;
 
-          filesCtrl.setNgModelCtrl(ngModelCtrl, 'multiple' in iAttrs);
+          filesCtrl.setNgModelCtrl(ngModelCtrl, scope);
         }
       };
     });
