@@ -686,7 +686,10 @@
         'root.persons.view.editions': 'Вписвания / Потвърждения',
         'root.persons.view.editions.new': 'Ново вписване / потвърждение',
         'root.persons.view.editions.edit': 'Редакция на вписване / потвърждение',
-        'root.persons.view.inventory': 'Опис'
+        'root.persons.view.inventory': 'Опис',
+        'root.persons.view.documentOthers': 'Други документи',
+        'root.persons.view.documentOthers.new': 'Нов документ',
+        'root.persons.view.documentOthers.edit': 'Редакция на документ'
       }
     });
   }]);
