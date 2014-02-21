@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Regs.Api.Models;
+using Regs.Api.LotEvents;
 
 namespace Regs.Api.Repositories.LotRepositories
 {
@@ -11,7 +12,7 @@ namespace Regs.Api.Repositories.LotRepositories
     {
         private IUnitOfWork unitOfWork;
 
-        public LotRepository(IUnitOfWork unitOfWork, IEnumerable<IEventHandler> eventHandlers)
+        public LotRepository(IUnitOfWork unitOfWork, IEnumerable<ILotEventHandler> eventHandlers)
         {
             this.unitOfWork = unitOfWork;
 

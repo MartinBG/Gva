@@ -25,6 +25,14 @@ namespace Regs.Api.Models
         public virtual Lot Lot { get; set; }
         public virtual User Commiter { get; set; }
         public virtual ICollection<PartVersion> PartVersions { get; set; }
+
+        public void EnsureIsLoaded()
+        {
+            if (!this.IsLoaded)
+            {
+                throw new InvalidOperationException(string.Format("Commit with id {0} has not been loaded.", this.CommitId));
+            }
+        }
     }
 
     public class CommitMap : EntityTypeConfiguration<Commit>
