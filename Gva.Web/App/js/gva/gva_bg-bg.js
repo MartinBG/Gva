@@ -208,6 +208,20 @@
           ratingCategory: 'Категория',
           personRatingModel: 'Модел'
         },
+        personOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -282,6 +296,28 @@
           pageCount: 'Брой стр.',
           file: 'Файл',
           newDocumentId: 'Нов документ'
+        },
+        otherSearch: {
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         medicalSearch: {
           testimonial: 'Свидетелство',

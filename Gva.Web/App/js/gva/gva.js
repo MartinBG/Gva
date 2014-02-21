@@ -59,6 +59,10 @@
       templateUrl: 'gva/persons/forms/personDocumentTraining.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonDocumentOther',
+      templateUrl: 'gva/persons/forms/personDocumentOther.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonFlyingExperience',
       templateUrl: 'gva/persons/forms/personFlyingExperience.html'
     });
@@ -144,6 +148,10 @@
       .state(['root.persons.view.editions'                              , '/:ind/editions'                                                                                                                                                 ])
       .state(['root.persons.view.editions.search'                       , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsSearch.html'  , 'EditionsSearchCtrl'           ]])
       .state(['root.persons.view.editions.new'                          , '/new'                                       , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsNew.html'     , 'EditionsNewCtrl'              ]])
-      .state(['root.persons.view.editions.edit'                         , '/:childInd'                                 , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsEdit.html'    , 'EditionsEditCtrl'             ]]);
+      .state(['root.persons.view.editions.edit'                         , '/:childInd'                                 , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsEdit.html'    , 'EditionsEditCtrl'             ]])
+      .state(['root.persons.view.documentOthers'                        , '/documentOthers'                                                                                                                                                 ])
+      .state(['root.persons.view.documentOthers.search'                 , ''                                           , ['@root.persons.view', 'gva/persons/views/documentOthers/othersSearch.html'       , 'DocumentOthersSearchCtrl'    ]])
+      .state(['root.persons.view.documentOthers.new'                    , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentOthers/othersNew.html'          , 'DocumentOthersNewCtrl'       ]])
+      .state(['root.persons.view.documentOthers.edit'                   , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentOthers/othersEdit.html'         , 'DocumentOthersEditCtrl'      ]]);
   }]);
 }(angular));
