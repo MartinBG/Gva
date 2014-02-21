@@ -25,12 +25,6 @@
 
     if ($stateParams.publisherTypeAlias) {
       $scope.filters.publisherType = publisherType;
-      //Nomenclature
-      //  .get({ alias: 'publisherTypes', valueAlias: $stateParams.publisherTypeAlias })
-      //  .$promise
-      //  .then(function (pt) {
-      //    $scope.filters.publisherType = pt;
-      //  });
     }
 
     $scope.search = function () {
