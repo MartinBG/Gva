@@ -22,7 +22,7 @@ namespace Common.Api.Repositories.NomRepository
                 .Include(n => n.NomValues)
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }
@@ -33,9 +33,36 @@ namespace Common.Api.Repositories.NomRepository
                 .Include(n => n.NomValues)
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
-                .Select(nv => new { nv.NomValueId, nv.Name, Content = JObject.Parse(nv.TextContent) })
-                .Where(nv => nv.Content.GetValue(propName).ToString() == propValue)
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Where(nv => JObject.Parse(nv.TextContent).Value<string>(propName) == propValue)
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
+
+            return this.GetByTerm(noms, term);
+        }
+
+        public IEnumerable<NomValueDO> GetNomsWithStaffCode(string alias, string code, string term)
+        {
+            var direction = this.unitOfWork.DbContext.Set<Nom>()
+                .Include(n => n.NomValues)
+                .SingleOrDefault(n => n.Alias == "directions")
+                .NomValues
+                .SingleOrDefault(n => n.Code == code);
+
+            JToken directionToken;
+            var noms = this.unitOfWork.DbContext.Set<Nom>()
+                .Include(n => n.NomValues)
+                .SingleOrDefault(n => n.Alias == alias)
+                .NomValues
+                .Select(nv => new
+                {
+                    nv.NomValueId,
+                    nv.Name,
+                    nv.Code,
+                    Direction = JObject.Parse(nv.TextContent).TryGetValue("direction", out directionToken) ?
+                        (int?)int.Parse(directionToken.ToString()) :
+                        null
+                })
+                .Where(nv => !nv.Direction.HasValue || nv.Direction.Value == direction.NomValueId)
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }
@@ -47,7 +74,7 @@ namespace Common.Api.Repositories.NomRepository
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
                 .Where(nv => !invalidCodes.Contains(nv.Code))
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }
@@ -59,7 +86,7 @@ namespace Common.Api.Repositories.NomRepository
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
                 .Where(nv => validCodes.Contains(nv.Code))
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }
@@ -71,24 +98,23 @@ namespace Common.Api.Repositories.NomRepository
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
                 .Where(nv => nv.ParentValueId == parentValueId)
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }
 
         public IEnumerable<NomValueDO> GetNomsForGrandparent(string alias, int grandparentValueId, string parentAlias, string term)
         {
-            var parents = this.unitOfWork.DbContext.Set<Nom>()
+            this.unitOfWork.DbContext.Set<Nom>()
                 .Include(n => n.NomValues)
-                .SingleOrDefault(n => n.Alias == parentAlias)
-                .NomValues;
+                .SingleOrDefault(n => n.Alias == parentAlias);
 
             var noms = this.unitOfWork.DbContext.Set<Nom>()
                 .Include(n => n.NomValues)
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
                 .Where(nv => nv.ParentValue.ParentValueId == grandparentValueId)
-                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name });
+                .Select(nv => new NomValueDO { NomValueId = nv.NomValueId, Name = nv.Name, Code = nv.Code });
 
             return this.GetByTerm(noms, term);
         }

@@ -11,5 +11,9 @@
         public string Names { get; set; }
 
         public int Age { get; set; }
+
+        public string Organization { get; set; }
+
+        public string Employment { get; set; }
     }
 }

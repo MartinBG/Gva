@@ -45,7 +45,7 @@ namespace Gva.Web.Controllers
         public HttpResponseMessage PostNewPart(int lotId, string path, JObject part)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.CreatePart(path + "/*", (JObject)part.GetValue("part"), this.userContext);
+            lot.CreatePart(path + "/*", part.Value<JObject>("part"), this.userContext);
             lot.Commit(this.userContext);
 
             this.unitOfWork.Save();
@@ -56,7 +56,7 @@ namespace Gva.Web.Controllers
         public HttpResponseMessage PostPart(int lotId, string path, JObject part)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.UpdatePart(path, (JObject)part.GetValue("part"), this.userContext);
+            lot.UpdatePart(path, part.Value<JObject>("part"), this.userContext);
             lot.Commit(this.userContext);
 
             this.unitOfWork.Save();

@@ -23,49 +23,42 @@ namespace Common.Api.Controllers
                 this.nomRepository.GetNomsWithProperty("addressTypes", "type", type, term));
         }
 
-        public HttpResponseMessage GetTrainingRoles(string term = null)
+        public HttpResponseMessage GetTrainingRoles(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 this.nomRepository.GetNomsWithProperty("documentRoles", "categoryCode", "O", term));
         }
 
-        public HttpResponseMessage GetTrainingTypes(string term = null)
+        public HttpResponseMessage GetTrainingTypes(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 this.nomRepository.GetNomsNotWithCode("documentTypes", new string[] { "3", "4", "5" }, term));
         }
 
-        public HttpResponseMessage GetCheckRoles(string term = null)
+        public HttpResponseMessage GetCheckRoles(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
-                this.nomRepository.GetNomsWithProperty("documentRoles", "categoryCode", "T", term));
+                this.nomRepository.GetNomsWithStaffCode("documentRoles", staffCode, term));
         }
 
-        public HttpResponseMessage GetCheckTypes(string term = null)
+        public HttpResponseMessage GetCheckTypes(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 this.nomRepository.GetNomsNotWithCode("documentTypes", new string[] { "3", "4", "5" }, term));
         }
 
-        public HttpResponseMessage GetIdDocumentTypes(string term = null)
-        {
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                this.nomRepository.GetNomsWithCode("documentTypes", new string[] { "3", "4", "5" }, term));
-        }
-
-        public HttpResponseMessage GetOtherRoles(string term = null)
+        public HttpResponseMessage GetOtherRoles(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 this.nomRepository.GetNomsWithProperty("documentRoles", "categoryCode", "А", term));
         }
 
-        public HttpResponseMessage GetOtherTypes(string term = null)
+        public HttpResponseMessage GetOtherTypes(string staffCode, string term = null)
         {
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,

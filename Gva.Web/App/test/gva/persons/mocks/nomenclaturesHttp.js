@@ -30,7 +30,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id',
+      .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.personCheckDocumentRoles;
 
@@ -44,7 +44,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentTypes?term&id',
+      .when('GET', '/api/nomenclatures/personCheckDocumentTypes?term&id&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.personCheckDocumentTypes;
 
@@ -58,7 +58,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentTrainingRoles?term&id',
+      .when('GET', '/api/nomenclatures/documentTrainingRoles?term&id&staffCode',
         function ($params, $filter) {
           var res = $filter('filter')(
              nomenclatures.documentRoles,
@@ -77,7 +77,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentTrainingTypes?term&id',
+      .when('GET', '/api/nomenclatures/documentTrainingTypes?term&id&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.personOtherDocumentTypes;
 

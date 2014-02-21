@@ -12,7 +12,7 @@ namespace Common.Api.Models
         public int? ParentValueId { get; set; }
         public string Alias { get; set; }
         public string TextContent { get; set; }
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public virtual Nom Nom { get; set; }
         public virtual NomValue ParentValue { get; set; }

@@ -9,6 +9,8 @@ namespace Common.Api.Repositories.NomRepository
 
         IEnumerable<NomValueDO> GetNomsWithProperty(string alias, string propName, string propValue, string term);
 
+        IEnumerable<NomValueDO> GetNomsWithStaffCode(string alias, string code, string term);
+
         IEnumerable<NomValueDO> GetNomsNotWithCode(string alias, string[] invalidCodes, string term);
 
         IEnumerable<NomValueDO> GetNomsWithCode(string alias, string[] validCodes, string term);

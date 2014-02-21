@@ -4,6 +4,7 @@ using Gva.Web.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -27,6 +28,9 @@ namespace Gva.Web.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personDataPart = JObject.Parse(lot.GetPart("personData").TextContent);
+            var personEmployment = lot.GetParts("personDocumentEmployments")
+                .OrderByDescending(pv => pv.Part.Index)
+                .FirstOrDefault();
 
             var personBirthDate = Convert.ToDateTime(personDataPart.Value<string>("dateOfBirth"));
             DateTime now = DateTime.Today;
@@ -49,6 +53,15 @@ namespace Gva.Web.Controllers
                 Age = age
             };
 
+            if (personEmployment != null)
+            {
+                var personEmploymentPart = JObject.Parse(personEmployment.TextContent);
+
+                var organization = personEmploymentPart.Value<JObject>("organization");
+                person.Organization = organization == null ? null : organization.Value<string>("name");
+                person.Employment = personEmploymentPart.Value<JObject>("employmentCategory").Value<string>("name");
+            }
+
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 person);
@@ -60,11 +73,11 @@ namespace Gva.Web.Controllers
             {
                 var newLot = this.lotRepository.GetSet("Person").CreateLot(this.userContext);
 
-                newLot.CreatePart("personData", (JObject)person.GetValue("personData"), this.userContext);
+                newLot.CreatePart("personData", person.Value<JObject>("personData"), this.userContext);
 
-                newLot.CreatePart("personDocumentIds/*", (JObject)person.GetValue("personDocumentId"), this.userContext);
+                newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
 
-                newLot.CreatePart("personAddresses/*", (JObject)person.GetValue("personAddress"), this.userContext);
+                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
 
                 newLot.Commit(this.userContext);
 
