@@ -4,6 +4,7 @@
 
   function ScFilesCtrl($scope, $timeout) {
     $scope.files = [];
+    $scope.file = undefined;
 
     var multipleFiles = [
       { key: 'f111111111', relativePath: 'app/', name: 'file1' },
@@ -14,6 +15,8 @@
     var singleFile = [
       { key: 'f111111111', relativePath: '', name: 'file1' }
     ];
+
+    var file = { key: 'f111111111', relativePath: '', name: 'file1' };
 
     $scope.loadSingleFileWithDelay = function () {
       $scope.files = undefined;
@@ -26,11 +29,14 @@
 
     $scope.changeToSingleFile = function () {
       $scope.files = singleFile;
+      $scope.file = file;
     };
 
     $scope.changeToNoFiles = function () {
       $scope.files = [];
+      $scope.file = undefined;
     };
+
   }
 
   ScFilesCtrl.$inject = ['$scope', '$timeout'];
