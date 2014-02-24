@@ -272,6 +272,7 @@
     <Content Include="App\schema\nomenclatures\boolean.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
+    <Content Include="App\schema\nomenclatures\documentType.js" />
     <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
     <Content Include="App\schema\nomenclatures\docType.js" />
     <Content Include="App\schema\nomenclatures\docFormatType.js" />
@@ -298,10 +299,6 @@
     <Content Include="App\schema\nomenclatures\medicalLimitation.js" />
     <Content Include="App\schema\nomenclatures\organization.js" />
     <Content Include="App\schema\nomenclatures\documentRole.js" />
-    <Content Include="App\schema\nomenclatures\personCheckDocumentRole.js" />
-    <Content Include="App\schema\nomenclatures\personCheckDocumentType.js" />
-    <Content Include="App\schema\nomenclatures\personIdDocumentType.js" />
-    <Content Include="App\schema\nomenclatures\personOtherDocumentType.js" />
     <Content Include="App\schema\nomenclatures\personStatusType.js" />
     <Content Include="App\schema\nomenclatures\ratingClass.js" />
     <Content Include="App\schema\nomenclatures\ratingClassGroup.js" />

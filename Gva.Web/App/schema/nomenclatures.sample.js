@@ -141,11 +141,9 @@
 
     graduations: require('./graduation'),
 
-    personIdDocumentTypes: require('./personIdDocumentType'),
-
-    personOtherDocumentTypes: require('./personOtherDocumentType'),
-
     documentRoles: require('./documentRole'),
+
+    documentTypes: require('./documentType'),
 
     employmentCategories: require('./employmentCategory'),
 
@@ -359,8 +357,6 @@
 
     medicalLimitations: require('./medicalLimitation'),
 
-    personCheckDocumentTypes: require('./personCheckDocumentType'),
-
     //оценки при проверка на Физическо лице
     personCheckRatingValues: [
        { nomValueId: 1, code: 'Goog', name: 'Добро', nameAlt: 'good', alias: 'good' },
@@ -370,8 +366,6 @@
        { nomValueId: 4, code: 'Comp', name: 'Компетентен', nameAlt: 'Компетентен', alias: 'competent' },
        { nomValueId: 4, code: 'Incomp', name: 'Некомпетентен', nameAlt: 'Некомпетентен', alias: 'incompetent' },
     ],
-
-    personCheckDocumentRoles: require('./personCheckDocumentRole'),
 
     aircrafts: require('./aircraft'),
 

@@ -83,7 +83,6 @@
     <Compile Include="Http\MultipartBlobData.cs" />
     <Compile Include="Models\Nom.cs" />
     <Compile Include="Models\NomValue.cs" />
-    <Compile Include="Models\NomValueDO.cs" />
     <Compile Include="Repositories\NomRepository\INomRepository.cs" />
     <Compile Include="Repositories\NomRepository\NomRepository.cs" />
     <Compile Include="UserContext\IUserContextProvider.cs" />

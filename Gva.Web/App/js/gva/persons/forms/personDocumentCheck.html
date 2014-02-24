@@ -46,12 +46,12 @@
             <div class="form-group col-sm-3 col-md-2" sc-has-error="personCheckDocumentType">
               <label class="control-label" l10n-text="persons.personCheckDirective.personCheckDocumentType"></label>
               <sc-validation-error field-name="personCheckDocumentType" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.personCheckDocumentType" name="personCheckDocumentType" alias="'personCheckDocumentTypes'" ng-required="true" params="{ staffCode: model.staffType.code }"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.personCheckDocumentType" name="personCheckDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCode: model.staffType.code }"></sc-nomenclature>
             </div>
             <div class="form-group col-sm-3 col-md-2" sc-has-error="personCheckDocumentRole">
               <label class="control-label" l10n-text="persons.personCheckDirective.personCheckDocumentRole"></label>
               <sc-validation-error field-name="personCheckDocumentRole" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.personCheckDocumentRole" name="personCheckDocumentRole" alias="'personCheckDocumentRoles'" ng-required="true" params="{ staffCode: model.staffType.code }"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.personCheckDocumentRole" name="personCheckDocumentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: 'check', staffCode: model.staffType.code }"></sc-nomenclature>
             </div>
           </div>
           <div class="row">

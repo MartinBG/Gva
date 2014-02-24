@@ -15,15 +15,11 @@ namespace Common.Api
             this.MapRoute(config, HttpMethod.Post, "api/file", "Blob", "Post");
 
             // nomenclatures
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes"            , "Nomenclature", "GetAddressTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentTrainingRoles"   , "Nomenclature", "GetTrainingRoles");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentTrainingTypes"   , "Nomenclature", "GetTrainingTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/personCheckDocumentRoles", "Nomenclature", "GetCheckRoles");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/personCheckDocumentTypes", "Nomenclature", "GetCheckTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/personIdDocumentTypes"   , "Nomenclature", "GetIdDocumentTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/personOtherDocumentRole" , "Nomenclature", "GetOtherRoles");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/personOtherDocumentType" , "Nomenclature", "GetOtherTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}"                 , "Nomenclature", "GetNoms");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes"     , "Nomenclature", "GetAddressTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentRoles"    , "Nomenclature", "GetDocumentRoles");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentTypes"    , "Nomenclature", "GetDocumentTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/otherDocumentRole", "Nomenclature", "GetOtherRoles");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}"          , "Nomenclature", "GetNoms");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)

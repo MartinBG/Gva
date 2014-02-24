@@ -30,13 +30,32 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id&staffCode',
+      .when('GET', '/api/nomenclatures/documentRoles?term&id&categoryAlias&staffCode',
         function ($params, $filter) {
-          var res = nomenclatures.personCheckDocumentRoles;
+          var res = nomenclatures.documentRoles;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
+            if ($params.categoryAlias) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.categoryAlias === $params.type;
+                },
+                true);
+            }
+
+            if ($params.staffCode) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.staffAlias === undefined ||
+                         nom.textContent.staffAlias === $params.staffCode;
+                },
+                true);
+            }
+
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
@@ -44,60 +63,32 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentTypes?term&id&staffCode',
+      .when('GET', '/api/nomenclatures/documentTypes?term&id&isIdDocument&staffCode',
         function ($params, $filter) {
-          var res = nomenclatures.personCheckDocumentTypes;
+          var res = nomenclatures.documentTypes;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
-            if ($params.term) {
-              res = $filter('filter')(res, { name: $params.term }, false);
+            if ($params.isIdDocument) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.isIdDocument === $params.isIdDocument;
+                },
+                true);
             }
-          }
 
-          return [200, res];
-        })
-      .when('GET', '/api/nomenclatures/documentTrainingRoles?term&id&staffCode',
-        function ($params, $filter) {
-          var res = $filter('filter')(
-             nomenclatures.documentRoles,
-            function (nom) {
-              return nom.textContent.categoryCode === 'O';
-            },
-            true);
-
-          if ($params.id) {
-            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
-          } else {
-            if ($params.term) {
-              res = $filter('filter')(res, { name: $params.term }, false);
+            if ($params.staffCode) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.staffAlias === undefined ||
+                         nom.textContent.staffAlias === $params.staffCode;
+                },
+                true);
             }
-          }
 
-          return [200, res];
-        })
-      .when('GET', '/api/nomenclatures/documentTrainingTypes?term&id&staffCode',
-        function ($params, $filter) {
-          var res = nomenclatures.personOtherDocumentTypes;
-
-          if ($params.id) {
-            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
-          } else {
-            if ($params.term) {
-              res = $filter('filter')(res, { name: $params.term }, false);
-            }
-          }
-
-          return [200, res];
-        })
-      .when('GET', '/api/nomenclatures/personIdDocumentTypes?term&id',
-        function ($params, $filter) {
-          var res = nomenclatures.personIdDocumentTypes;
-
-          if ($params.id) {
-            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
-          } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
