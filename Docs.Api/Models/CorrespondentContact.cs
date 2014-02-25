@@ -56,7 +56,8 @@ namespace Docs.Api.Models
             // Relationships
             this.HasRequired(t => t.Correspondent)
                 .WithMany(t => t.CorrespondentContacts)
-                .HasForeignKey(d => d.CorrespondentId);
+                .HasForeignKey(d => d.CorrespondentId)
+                .WillCascadeOnDelete();
 
         }
     }

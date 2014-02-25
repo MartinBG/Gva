@@ -786,6 +786,10 @@
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docs.Api\Docs.Api.csproj">
+      <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
+      <Name>Docs.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Regs.Api\Regs.Api.csproj">
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
       <Name>Regs.Api</Name>

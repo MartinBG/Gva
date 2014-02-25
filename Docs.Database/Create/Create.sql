@@ -125,3 +125,10 @@ GO
 -- Views
 ---------------------------------------------------------------
 :r $(rootPath)"\Views\vwDocs.sql"
+
+
+---------------------------------------------------------------
+-- Insert
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\CorrespondentGroups.sql"
+:r $(rootPath)\"..\Insert\CorrespondentTypes.sql"

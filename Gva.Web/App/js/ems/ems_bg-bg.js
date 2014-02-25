@@ -269,7 +269,14 @@
           'delete': 'изтрий',
           add: 'добави',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          correspondentContact: {
+            add: 'Добавяне',
+            save: 'Запис',
+            cancel: 'Отказ',
+            edit: 'Редакция',
+            'delete': 'Изтриване'
+          }
         }
       },
       states: {
