@@ -2,26 +2,35 @@
 (function (angular) {
   'use strict';
 
-  function DocumentMedicalsSearchCtrl($scope, $state, $stateParams, PersonDocumentMedical) {
-    PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
-      $scope.medicals = medicals.map(function (medical) {
-        var testimonial = medical.part.documentNumberPrefix + '-' +
-          medical.part.documentNumber + '-' +
-          $scope.$parent.person.lin + '-' +
-          medical.part.documentNumberSuffix;
+  function DocumentMedicalsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentMedical,
+    PersonDocumentMedicalView,
+    meds
+  ) {
+    $scope.medicals = meds;
 
-        medical.part.testimonial = testimonial;
+    //PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
+    //  $scope.medicals = medicals.map(function (medical) {
+    //    var testimonial = medical.part.documentNumberPrefix + '-' +
+    //      medical.part.documentNumber + '-' +
+    //      $scope.$parent.person.lin + '-' +
+    //      medical.part.documentNumberSuffix;
 
-        var limitations = '';
-        for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-          limitations += medical.part.limitationsTypes[i].name + ', ';
-        }
-        limitations = limitations.substring(0, limitations.length - 2);
-        medical.part.limitations = limitations;
+    //    medical.part.testimonial = testimonial;
 
-        return medical;
-      });
-    });
+    //    var limitations = '';
+    //    for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
+    //      limitations += medical.part.limitationsTypes[i].name + ', ';
+    //    }
+    //    limitations = limitations.substring(0, limitations.length - 2);
+    //    medical.part.limitations = limitations;
+
+    //    return medical;
+    //  });
+    //});
 
     $scope.editDocumentMedical = function (medical) {
       return $state.go('root.persons.view.medicals.edit', {
@@ -47,8 +56,19 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentMedical'
+    'PersonDocumentMedical',
+    'PersonDocumentMedicalView',
+    'meds'
   ];
 
+  DocumentMedicalsSearchCtrl.$resolve = {
+    meds: [
+      '$stateParams',
+      'PersonDocumentMedicalView',
+      function ($stateParams, PersonDocumentMedicalView) {
+        return PersonDocumentMedicalView.query($stateParams).$promise;
+      }
+    ]
+  };
   angular.module('gva').controller('DocumentMedicalsSearchCtrl', DocumentMedicalsSearchCtrl);
 }(angular));

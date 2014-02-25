@@ -35,7 +35,7 @@
       newPersonPage.personData.firstNameAlt.set('Georgi');
       newPersonPage.personData.middleNameAlt.set('Georgiev');
       newPersonPage.personData.lastNameAlt.set('Georgiev');
-      newPersonPage.personData.sex.set('мъж');
+      newPersonPage.personData.sex.set('Мъж');
       newPersonPage.personData.lin.set('99999');
       newPersonPage.personData.uin.set('9999999999');
       newPersonPage.personData.dateOfBirth.set('01.01.1980');

@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function StatusesNewCtrl($scope, $stateParams, $state, PersonStatus) {
+  function StatusesNewCtrl(
+    $scope,
+    $stateParams,
+    $state,
+    PersonStatus,
+    status
+  ) {
+    $scope.status = status;
+
     $scope.cancel = function () {
       return $state.go('root.persons.view.statuses.search', { id: $stateParams.id });
     };
@@ -21,7 +29,19 @@
     };
   }
 
-  StatusesNewCtrl.$inject = ['$scope', '$stateParams', '$state', 'PersonStatus'];
+  StatusesNewCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    '$state',
+    'PersonStatus',
+    'status'
+  ];
+
+  StatusesNewCtrl.$resolve = {
+    status: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('StatusesNewCtrl', StatusesNewCtrl);
 }(angular));

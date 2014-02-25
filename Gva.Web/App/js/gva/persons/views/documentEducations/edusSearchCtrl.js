@@ -2,10 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function DocumentEducationsSearchCtrl($scope, $state, $stateParams, PersonDocumentEducation) {
-    PersonDocumentEducation.query($stateParams).$promise.then(function (documentEducations) {
-      $scope.documentEducations = documentEducations;
-    });
+  function DocumentEducationsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentEducation,
+    edus
+    ) {
+    $scope.documentEducations = edus;
 
     $scope.editDocumentEducation = function (documentEducation) {
       return $state.go('root.persons.view.documentEducations.edit',
@@ -30,11 +34,23 @@
     };
   }
 
-  DocumentEducationsSearchCtrl.$inject = ['$scope',
+  DocumentEducationsSearchCtrl.$inject = [
+    '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation'
+    'PersonDocumentEducation',
+    'edus'
   ];
+
+  DocumentEducationsSearchCtrl.$resolve = {
+    edus: [
+      '$stateParams',
+      'PersonDocumentEducation',
+      function ($stateParams, PersonDocumentEducation) {
+        return PersonDocumentEducation.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentEducationsSearchCtrl', DocumentEducationsSearchCtrl);
 }(angular));
