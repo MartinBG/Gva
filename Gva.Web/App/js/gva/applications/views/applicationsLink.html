@@ -15,7 +15,7 @@
               <label class="control-label" l10n-text="applications.link.person"></label>
               <sc-validation-error field-name="personLotId" validations="{required: null}"></sc-validation-error>
               <div class="input-group input-group-sm">
-                <sc-nomenclature ng-model="application.person.id" alias="'persons'" mode="id" name="personLotId" required style="float: left;"></sc-nomenclature>
+                <sc-nomenclature ng-model="appModel.person.id" alias="'persons'" mode="id" name="personLotId" required style="float: left;"></sc-nomenclature>
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button" ng-click="selectPerson()">
                     <i class="glyphicon glyphicon-search"></i>
@@ -26,23 +26,23 @@
             </div>
           </div>
 
-          <div class="row card" ng-class="{'has-error': !application.doc.docId && appForm.$validated}">
+          <div class="row card" ng-class="{'has-error': !appModel.doc.docId && appForm.$validated}">
             <div class="form-group col-md-3">
               <div class="input-group input-group-sm">
                 <span class="input-group-addon" l10n-text="applications.link.docNumber"/>
-                <input disabled="disabled" name="regUri" type="text" class="form-control" value="{{ application.doc.regUri }}">
+                <input disabled="disabled" name="regUri" type="text" class="form-control" value="{{ appModel.doc.regUri }}">
               </div>
             </div>
             <div class="form-group col-md-3">
               <div class="input-group input-group-sm">
                 <span class="input-group-addon" l10n-text="applications.link.docName"/>
-                <input disabled="disabled" name="docTypeName" type="text" class="form-control" value="{{ application.doc.docTypeName }}">
+                <input disabled="disabled" name="docTypeName" type="text" class="form-control" value="{{ appModel.doc.docTypeName }}">
               </div>
             </div>
             <div class="form-group col-md-3">
               <div class="input-group input-group-sm">
                 <span class="input-group-addon" l10n-text="applications.link.docStatus"/>
-                <input disabled="disabled" name="docStatusName" type="text" class="form-control" value="{{ application.doc.docStatusName }}">
+                <input disabled="disabled" name="docStatusName" type="text" class="form-control" value="{{ appModel.doc.docStatusName }}">
               </div>
             </div>
             <div class="form-group col-md-3">

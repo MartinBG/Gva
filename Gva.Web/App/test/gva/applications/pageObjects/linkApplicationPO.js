@@ -6,7 +6,7 @@
 
   function LinkApplicationPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
-    this.person = new ScNomenclature('application.person.id', context);
+    this.person = new ScNomenclature('appModel.person.id', context);
 
     this.selectDocBtn = context.findElement(by.name('selectDocBtn'));
     this.linkBtn = context.findElement(by.name('linkBtn'));

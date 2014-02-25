@@ -142,8 +142,25 @@
           docTypeGroupId: 'Група',
           docTypeId: 'Вид',
           docSubject: 'Относно',
-          docCorrespondent: 'Кореспондент',
-          numberOfDocs: 'Брой документи'
+          docCorrespondent: 'Кореспондент'
+        },
+        caseSelect: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          docName: 'Относно',
+          docTypeId: 'Вид на документа',
+          docStatusId: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          select: 'Избор',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент',
+          search: 'Търси',
+          cancel: 'Отказ'
         }
       },
       units: {
@@ -205,6 +222,7 @@
       states: {
         'root.docs': 'Документи',
         'root.docs.new': 'Нов документ',
+        'root.docs.new.caseSelect': 'Избор на преписка',
         'root.docs.edit': 'Редакция',
         'root.docs.edit.addressing': 'Адресати',
         'root.docs.edit.addressing.selectCorr': 'Избор кореспондент',

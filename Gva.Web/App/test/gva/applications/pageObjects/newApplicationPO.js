@@ -7,10 +7,10 @@
 
   function NewApplicationPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
-    this.person = new ScNomenclature('application.person.id', context);
-    this.docTypeGroup = new ScNomenclature('application.docTypeGroup', context);
-    this.docType = new ScNomenclature('application.docType', context);
-    this.docSubject = new ScText(context.findElement(by.input('application.docSubject')));
+    this.person = new ScNomenclature('appModel.person.id', context);
+    this.docTypeGroup = new ScNomenclature('appModel.docTypeGroup', context);
+    this.docType = new ScNomenclature('appModel.docType', context);
+    this.docSubject = new ScText(context.findElement(by.input('appModel.docSubject')));
 
     this.registerBtn = context.findElement(by.name('registerBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));

@@ -33,7 +33,6 @@
       newDocumentPage.docTypeGroup.set('Общи');
       newDocumentPage.docType.set('Резолюция');
       newDocumentPage.docSubject.set('Относно');
-      newDocumentPage.numberOfDocs.set('1');
 
       newDocumentPage.register();
 
