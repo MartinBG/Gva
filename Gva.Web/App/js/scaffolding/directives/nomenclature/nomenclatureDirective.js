@@ -92,7 +92,7 @@
       }
 
       scope.select2Options = {
-        multiple: iAttrs.multiple,
+        multiple: 'multiple' in iAttrs,
         allowClear: true,
         placeholder: ' ', //required for allowClear to work
         query: queryFunc,

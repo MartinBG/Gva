@@ -4,8 +4,7 @@
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
     ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea'),
     ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
-    ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
-    ScSelect = require('../../../../scaffolding/pageObjects/scSelect');
+    ScDate = require('../../../../scaffolding/pageObjects/ScDate');
 
   function DocMedPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
@@ -17,7 +16,7 @@
       context.findElement(by.input('model.documentNumberSuffix')));
     this.medClassType = new ScNomenclature('model.medClassType', context);
     this.documentPublisher = new ScNomenclature('model.documentPublisher', context);
-    this.limitationsTypes = new ScSelect('model.limitationsTypes', context);
+    this.limitationsTypes = new ScNomenclature('model.limitationsTypes', context);
     this.documentDateValidFrom = new ScDate(
       context.findElement(by.css('div[name=documentDateValidFrom]')), context);
     this.documentDateValidTo = new ScDate(

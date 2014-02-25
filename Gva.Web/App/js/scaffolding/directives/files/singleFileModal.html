@@ -1,0 +1,26 @@
+﻿<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.titleSingle"></h3>
+</div>
+<div class="modal-body">
+
+  <span class="btn btn-success fileinput-button" ng-show="!isReadonly && !file">
+    <i class="glyphicon glyphicon-plus"></i>
+    <span l10n-text="scaffolding.scFiles.modal.attachSingle"></span>
+    <input class="test-file-upload-single-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }">
+  </span>
+  <div style="margin-top: 15px">
+    <a ng-show="file.url" ng-href="{{file.url}}" target="_blank">
+      <span class="test-download-link">{{file.name}}
+      </span>
+    </a>
+    <span class="test-file-name" ng-show="!file.url">{{file.name}}
+    </span>
+    <i class="glyphicon glyphicon-remove-circle tree-image-close" ng-show="!isReadonly && file" ng-click="remove()"></i>
+    <span class="test-no-files-span" ng-show="!file" style="margin-top: 15px" l10n-text="scaffolding.scFiles.modal.noFileAttached"></span>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default test-button-close" ng-click="cancel()" l10n-text="scaffolding.scFiles.modal.cancel"></button>
+  <button type="button" class="btn btn-primary" ng-click="ok()" ng-disabled="isReadonly" l10n-text="scaffolding.scFiles.modal.accept"></button>
+</div>

@@ -23,17 +23,36 @@
 
       filesPage.selectSingleFile();
       expect(filesPage.filesDirective.get()).toEqual('file1');
+      expect(filesPage.singleFileDirective.get()).toEqual('file1');
 
       filesPage.deselectFiles();
       expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
+      expect(filesPage.singleFileDirective.get()).toEqual('Няма прикачен файл.');
     });
 
-    it('should open modal.', function () {
+    it('should properly update single file model value.', function () {
+      filesPage.selectSingleFile();
+      expect(filesPage.getSingleFileValue()).
+        toEqual('{"key":"f111111111","relativePath":"","name":"file1"}');
+    });
+
+    it('should open multiple files modal.', function () {
       filesPage.filesDirective.openModal();
-      expect(filesPage.filesDirective.get()).toEqual('Няма прикачени файлове.');
+      expect(filesPage.filesDirective.isModalDisplayed()).toBe(true);
     });
 
-    it('should dismiss modal', function () {
+    it('should open single file modal.', function () {
+      filesPage.singleFileDirective.openModal();
+      expect(filesPage.singleFileDirective.isModalDisplayed()).toBe(true);
+    });
+
+    it('should dismiss multiple files modal', function () {
+      filesPage.singleFileDirective.openModal();
+      filesPage.singleFileDirective.closeModal();
+      expect(filesPage.singleFileDirective.isModalDismissed()).toBe(true);
+    });
+
+    it('should dismiss single file modal', function () {
       filesPage.selectMultipleFiles();
       filesPage.filesDirective.openModal();
       filesPage.filesDirective.closeModal();

@@ -1,12 +1,12 @@
 ﻿<div class="modal-header">
   <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.title"></h3>
+  <h3 class="modal-title" l10n-text="scaffolding.scFiles.modal.titleMultiple"></h3>
 </div>
 <div class="modal-body">
 
   <span class="btn btn-success fileinput-button"  ng-show="!isUploading && !isReadonly">
     <i class="glyphicon glyphicon-plus"></i>
-    <span>Избери файлове</span>
+    <span l10n-text="scaffolding.scFiles.modal.attachMultiple"></span>
     <input class="test-file-upload-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }" multiple>
   </span>
   <div style="margin-bottom: 14px; height: 15px; position: relative;"

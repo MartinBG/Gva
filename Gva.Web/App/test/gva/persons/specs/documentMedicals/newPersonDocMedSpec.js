@@ -28,7 +28,7 @@
       newDocMedPage.documentDateValidFrom.set('20.10.2014');
       newDocMedPage.documentDateValidTo.set('01.01.2020');
       newDocMedPage.documentPublisher.set('FAA');
-      newDocMedPage.limitationsTypes.set(4);
+      newDocMedPage.limitationsTypes.set('OCL');
       newDocMedPage.notes.set('notes');
       newDocMedPage.bookPageNumber.set('2');
       newDocMedPage.pageCount.set('5');

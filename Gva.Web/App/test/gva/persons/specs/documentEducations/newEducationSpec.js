@@ -24,8 +24,8 @@
       newDocEduPage.completionDate.set('20.10.2014');
       newDocEduPage.documentNumber.set('2324a');
       newDocEduPage.speciality.set('Професионална квалификация');
-      newDocEduPage.graduation.set('');
-      newDocEduPage.school.set('Нов Български Университет-София');
+      newDocEduPage.graduation.set('Висше образование (магистър)');
+      newDocEduPage.school.set('Български въздухоплавателен център');
       newDocEduPage.bookPageNumber.set('2');
       newDocEduPage.pageCount.set('5');
       
@@ -45,7 +45,7 @@
         ['1', '04.04.1981', 'пилот', 'Български въздухоплавателен център',
           'Висше образование (бакалавър)', '2', '1'],
         ['2324a', '20.10.2014', 'Професионална квалификация',
-          'Нов български университет-София', 'Висше образование (магистър)', '2', '5']
+          'Български въздухоплавателен център', 'Висше образование (магистър)', '2', '5']
       ]);
     });
 

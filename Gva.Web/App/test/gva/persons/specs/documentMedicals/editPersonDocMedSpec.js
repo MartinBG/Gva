@@ -28,7 +28,7 @@
       expect(editDocMedPage.documentDateValidTo.get()).toEqual('04.08.2010');
       expect(editDocMedPage.documentPublisher.get()).toEqual('КАМО');
       expect(editDocMedPage.notes.get()).toEqual('Test notes');
-      expect(editDocMedPage.limitationsTypes.getValues()).toEqual(['OSL', 'OML']);
+      expect(editDocMedPage.limitationsTypes.get()).toEqual(['OSL', 'OML']);
       expect(editDocMedPage.bookPageNumber.get()).toEqual('1');
       expect(editDocMedPage.pageCount.get()).toEqual('3');
     });

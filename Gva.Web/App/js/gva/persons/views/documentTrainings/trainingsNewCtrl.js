@@ -2,7 +2,13 @@
 (function (angular) {
   'use strict';
 
-  function DocumentTrainingsNewCtrl($scope, $state, $stateParams, PersonDocumentTraining) {
+  function DocumentTrainingsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentTraining,
+    personDocumentTraining,
+    selectedPublisher) {
     $scope.isEdit = false;
     $scope.save = function () {
       $scope.personDocumentTrainingForm.$validate()
@@ -16,13 +22,37 @@
           }
         });
     };
+    $scope.personDocumentTraining = personDocumentTraining;
+    $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
+      personDocumentTraining.part.documentPublisher;
+    $scope.choosePublisher = function () {
+      return $state.go('root.persons.view.documentTrainings.new.choosePublisher');
+    };
 
     $scope.cancel = function () {
       return $state.go('root.persons.view.documentTrainings.search');
     };
   }
 
-  DocumentTrainingsNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentTraining'];
+  DocumentTrainingsNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentTraining',
+    'personDocumentTraining',
+    'selectedPublisher'
+  ];
+
+  DocumentTrainingsNewCtrl.$resolve = {
+    personDocumentTraining: function () {
+      return {
+        part: {}
+      };
+    },
+    selectedPublisher: function () {
+      return [];
+    }
+  };
 
   angular.module('gva').controller('DocumentTrainingsNewCtrl', DocumentTrainingsNewCtrl);
 }(angular));

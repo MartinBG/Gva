@@ -2,14 +2,17 @@
 (function (angular, _, alert, $) {
   'use strict';
 
-  function FilesModalCtrl($scope,
+  function FilesModalCtrl(
+    $scope,
     $q,
     $interpolate,
     $modalInstance,
+    l10n,
     scFilesConfig,
-    files,
+    modalValue,
     isReadonly) {
-    var pendingUploads = {},
+    var files = modalValue,
+      pendingUploads = {},
       uploadedFiles = {},
       canceled;
 
@@ -72,7 +75,7 @@
       $scope.filesLength = keys.length;
 
       uploadNext()['catch'](function () {
-        alert('Възникна грешка. Успешно качените файлове са записани. Опитайте отново.');
+        alert(l10n.get('scaffolding.scFiles.failAlert'));
       })['finally'](function () {
         $scope.isUploading = false;
         $scope.filesUploaded = 0;
@@ -215,8 +218,9 @@
     '$q',
     '$interpolate',
     '$modalInstance',
+    'l10n',
     'scFilesConfig',
-    'files',
+    'modalValue',
     'isReadonly'
   ];
 
