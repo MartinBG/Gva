@@ -8,7 +8,13 @@ namespace Gva.Web.Models
 
         public int PartIndex { get; set; }
 
+        public string Name { get; set; }
+
         public string BookPageNumber { get; set; }
+
+        public string Type { get; set; }
+
+        public string Number { get; set; }
 
         public DateTime? Date { get; set; }
 

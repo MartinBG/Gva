@@ -1,5 +1,4 @@
-﻿using Common.Api.Models;
-using Common.Api.Repositories.UserRepository;
+﻿using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Web.Models;
@@ -126,11 +125,13 @@ namespace Gva.Web.Controllers
                     }
                 }
 
+                var partAlias = partVersion.Part.SetPart.Alias;
                 InventoryItem inventoryItem = new InventoryItem()
                 {
-                    DocumentType = partVersion.Part.SetPart.Alias,
+                    DocumentType = partAlias,
                     PartIndex = partVersion.Part.Index.Value,
                     BookPageNumber = content.Value<string>("bookPageNumber"),
+                    Number = content.Value<string>("documentNumber"),
                     Date = content.Value<DateTime?>("documentDateValidFrom") ?? content.Value<DateTime?>("completionDate"),
                     Publisher = content.Value<string>("documentPublisher") ?? content.Value<JObject>("school").Value<string>("name"),
                     Valid = content.TryGetValue("valid", out valid) ? valid.Value<string>("name") : null,
@@ -145,6 +146,37 @@ namespace Gva.Web.Controllers
                 {
                     inventoryItem.EditedDate = partVersion.CreateDate;
                     inventoryItem.EditedBy = this.userRepository.GetUser(partVersion.CreatorId).Fullname;
+                }
+
+                if (partAlias == "education")
+                {
+                    inventoryItem.Name = "Образование";
+                    inventoryItem.Type = content.Value<JObject>("graduation").Value<string>("name");
+                }
+                else if (partAlias == "documentId")
+                {
+                    inventoryItem.Name = "Документ за самоличност";
+                    inventoryItem.Type = content.Value<JObject>("personDocumentIdType").Value<string>("name");
+                }
+                else if (partAlias == "training")
+                {
+                    inventoryItem.Name = content.Value<JObject>("personOtherDocumentRole").Value<string>("name");
+                    inventoryItem.Type = content.Value<JObject>("personOtherDocumentType").Value<string>("name");
+                }
+                else if (partAlias == "medical")
+                {
+                    inventoryItem.Name = "Медицинско свидетелство";
+                    inventoryItem.Number = string.Format(
+                        "{0}-{1}-{2}-{3}",
+                        content.Value<string>("documentNumberPrefix"),
+                        content.Value<string>("documentNumber"),
+                        JObject.Parse(lot.GetPart("personData").TextContent).Value<string>("lin"),
+                        content.Value<string>("documentNumberSuffix"));
+                }
+                else if (partAlias == "check")
+                {
+                    inventoryItem.Name = content.Value<JObject>("personCheckDocumentRole").Value<string>("name");
+                    inventoryItem.Name = content.Value<JObject>("personCheckDocumentType").Value<string>("name");
                 }
 
                 inventory.Add(inventoryItem);
