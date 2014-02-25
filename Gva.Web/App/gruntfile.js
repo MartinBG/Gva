@@ -61,7 +61,8 @@ module.exports = function (grunt) {
         'bower_components/jquery-ui/ui/jquery.ui.widget.js',
         'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
         'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-        'bower_components/angular-mocks/angular-mocks.js'
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/moment/moment.js'
       ],
       '<%= buildDir %>/js/lib.ie8.js': [
         'bower_components/html5shiv/dist/html5shiv.js',
