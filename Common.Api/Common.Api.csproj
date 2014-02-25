@@ -85,6 +85,8 @@
     <Compile Include="Models\NomValue.cs" />
     <Compile Include="Repositories\NomRepository\INomRepository.cs" />
     <Compile Include="Repositories\NomRepository\NomRepository.cs" />
+    <Compile Include="Repositories\UserRepository\IUserRepository.cs" />
+    <Compile Include="Repositories\UserRepository\UserRepository.cs" />
     <Compile Include="UserContext\IUserContextProvider.cs" />
     <Compile Include="UserContext\UserContext.cs" />
     <Compile Include="UserContext\UserContextProvider.cs" />

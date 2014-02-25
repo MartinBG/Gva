@@ -107,5 +107,20 @@ namespace Regs.Api.Repositories.LotRepositories
 
             return lot;
         }
+
+        public Commit LoadCommit(int? commitId)
+        {
+            if (!commitId.HasValue)
+            {
+                throw new Exception("Invalid commit id");
+            }
+
+            var commit = this.unitOfWork.DbContext.Set<Commit>()
+                .Include(c => c.PartVersions)
+                .SingleOrDefault(c => c.CommitId == commitId);
+            commit.IsLoaded = true;
+
+            return commit;
+        }
     }
 }
