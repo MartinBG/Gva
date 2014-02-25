@@ -140,7 +140,6 @@
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
           var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData.doc);
-          delete newDoc.numberOfDocs;
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';

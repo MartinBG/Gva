@@ -2,16 +2,13 @@
 (function (module, by, require) {
   'use strict';
   var ScText = require('../../../scaffolding/pageObjects/scText'),
-    ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature'),
-    ScInt = require('../../../scaffolding/pageObjects/scInt');
+    ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature');
 
   function DocumentPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
-    this.caseRegUri = new ScText(context.findElement(by.input('doc.caseRegUri')));
-    this.docTypeGroup = new ScNomenclature('docTypeGroup', context);
-    this.docType = new ScNomenclature('docType', context);
-    this.docSubject = new ScText(context.findElement(by.input('doc.docSubject')));
-    this.numberOfDocs = new ScInt(context.findElement(by.input('doc.numberOfDocs')));
+    this.docTypeGroup = new ScNomenclature('docModel.docTypeGroup', context);
+    this.docType = new ScNomenclature('docModel.docType', context);
+    this.docSubject = new ScText(context.findElement(by.input('docModel.doc.docSubject')));
 
     this.createBtn = context.findElement(by.name('createBtn'));
     this.registerBtn = context.findElement(by.name('registerBtn'));

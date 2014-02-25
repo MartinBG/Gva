@@ -7,17 +7,17 @@
     $scope,
     $state,
     Application,
-    application,
+    appModel,
     selectedPerson
     ) {
 
     if (selectedPerson.length > 0) {
-      application.person = {
+      appModel.person = {
         id: selectedPerson.pop()
       };
     }
 
-    $scope.application = application;
+    $scope.appModel = appModel;
 
     $scope.newPerson = function () {
       return $state.go('root.applications.new.personNew');
@@ -37,7 +37,7 @@
         if ($scope.appForm.$valid) {
 
           var newApplication = {
-            lotId: $scope.application.person.id,
+            lotId: $scope.appModel.person.id,
             doc: {
               docFormatTypeId: 3,
               docFormatTypeName: 'Хартиен',
@@ -45,11 +45,11 @@
               docCasePartTypeName: 'Публичен',
               docDirectionId: 1,
               docDirectionName: 'Входящ',
-              docTypeGroupId: $scope.application.docTypeGroup.nomValueId,
-              docTypeGroupName: $scope.application.docTypeGroup.name,
-              docTypeId: $scope.application.docType.nomValueId,
-              docTypeName: $scope.application.docType.name,
-              docSubject: $scope.application.docSubject
+              docTypeGroupId: $scope.appModel.docTypeGroup.nomValueId,
+              docTypeGroupName: $scope.appModel.docTypeGroup.name,
+              docTypeId: $scope.appModel.docType.nomValueId,
+              docTypeName: $scope.appModel.docType.name,
+              docSubject: $scope.appModel.docSubject
             }
           };
 
@@ -66,12 +66,12 @@
     '$scope',
     '$state',
     'Application',
-    'application',
+    'appModel',
     'selectedPerson'
   ];
 
   ApplicationsNewCtrl.$resolve = {
-    application: function () {
+    appModel: function () {
       return {};
     },
     selectedPerson: function () {

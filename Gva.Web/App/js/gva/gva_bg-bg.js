@@ -550,6 +550,25 @@
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
+        docSelect: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          docName: 'Относно',
+          docTypeId: 'Вид на документа',
+          docStatusId: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          newDoc: 'Нов документ',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избери'
+        },
         search: {
           fromDate: 'От дата',
           toDate: 'До дата',

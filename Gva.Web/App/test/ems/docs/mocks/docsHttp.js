@@ -64,13 +64,14 @@
     };
 
     $httpBackendConfiguratorProvider
-        .when('GET',
-        '/api/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot',
+        .when('GET','/api/docs?'+
+          'fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot&isCase',
         function ($params, docs, applicationsFactory) {
 
           var searchParams = _.cloneDeep($params);
           delete searchParams.docIds;
           delete searchParams.hasLot;
+          delete searchParams.isCase;
 
           var docIdsArray = !!$params.docIds ? $params.docIds.split(',') : null;
 
@@ -87,6 +88,17 @@
             }
             else if ($params.hasLot && $params.hasLot.toLowerCase() === 'false') {
               if (applicationsFactory.getByDocId(doc.docId)) {
+                return false;
+              }
+            }
+
+            if ($params.isCase && $params.isCase.toLowerCase() === 'true') {
+              if (!!doc.parentDocId) {
+                return false;
+              }
+            }
+            else if ($params.isCase && $params.isCase.toLowerCase() === 'false') {
+              if (!doc.parentDocId) {
                 return false;
               }
             }
@@ -126,7 +138,6 @@
           var today = new Date();
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
           var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
-          delete newDoc.numberOfDocs;
 
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
@@ -146,7 +157,9 @@
           }
           else {
             docCaseObj =
-              _(docCases).filter({ docCaseId: parseInt(newDoc.parentDocId, 10)}).first();
+              _(docCases).filter(function(dc) {
+                return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
+              }).first();
           }
 
           docCaseObj.docCase.push({
@@ -174,61 +187,53 @@
           var registeredDocIds = [];
 
           var today = new Date();
-          var docsNumber = !!$jsonData.numberOfDocs ? $jsonData.numberOfDocs : 1;
-          var newDoc;
 
-          var findCase = function(dc) {
-            return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
-          };
+          var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
-          for (var i = 0; i < docsNumber; i++) {
-            var nextDocId = _(docs).pluck('docId').max().value() + 1;
+          var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
 
-            newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
-            delete newDoc.numberOfDocs;
+          newDoc.docId = nextDocId;
+          newDoc.docStatusId = 2;
+          newDoc.docStatusName = 'Чернова';
+          newDoc.docSubjectLabel = 'Относно';
+          newDoc.regNumber = nextDocId;
+          newDoc.regDate = new Date();
+          newDoc.regIndex = '000030';
+          newDoc.newassignmentType = 2;
+          newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
 
-            newDoc.docId = nextDocId;
-            newDoc.docStatusId = 2;
-            newDoc.docStatusName = 'Чернова';
-            newDoc.docSubjectLabel = 'Относно';
-            newDoc.regNumber = nextDocId;
-            newDoc.regDate = new Date();
-            newDoc.regIndex = '000030';
-            newDoc.newassignmentType = 2;
-            newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-            newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-            newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
-
-            var docCaseObj;
-            if (!newDoc.parentDocId) {
-              docCaseObj = {
-                docCaseId: newDoc.docId,
-                docCase: []
-              };
-              docCases.push(docCaseObj);
-            }
-            else {
-              docCaseObj =
-                _(docCases).filter(findCase)
-                .first();
-            }
-
-            docCaseObj.docCase.push({
-              docId: newDoc.docId,
-              regDate: newDoc.regDate,
-              regNumber: newDoc.regUri,
-              direction: newDoc.docDirectionName,
-              casePartType: newDoc.docCasePartTypeName,
-              statusName: newDoc.docStatusName,
-              description: newDoc.docTypeName
-            });
-
-            newDoc.docRelations = docCaseObj.docCase;
-
-            docs.push(newDoc);
-
-            registeredDocIds.push(newDoc.docId);
+          var docCaseObj;
+          if (!newDoc.parentDocId) {
+            docCaseObj = {
+              docCaseId: newDoc.docId,
+              docCase: []
+            };
+            docCases.push(docCaseObj);
           }
+          else {
+            docCaseObj =
+              _(docCases).filter(function(dc) {
+                return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
+              }).first();
+          }
+
+          docCaseObj.docCase.push({
+            docId: newDoc.docId,
+            regDate: newDoc.regDate,
+            regNumber: newDoc.regUri,
+            direction: newDoc.docDirectionName,
+            casePartType: newDoc.docCasePartTypeName,
+            statusName: newDoc.docStatusName,
+            description: newDoc.docTypeName
+          });
+
+          newDoc.docRelations = docCaseObj.docCase;
+
+          docs.push(newDoc);
+
+          registeredDocIds.push(newDoc.docId);
 
           return [200, { docIds : registeredDocIds }];
         })
