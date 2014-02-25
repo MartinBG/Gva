@@ -9,7 +9,8 @@
           restrict: 'E',
           replace: true,
           scope: {
-            model: '=ngModel'
+            model: '=ngModel',
+            readonly: '=readonly'
           },
           templateUrl: options.templateUrl,
           controller: options.controller,
