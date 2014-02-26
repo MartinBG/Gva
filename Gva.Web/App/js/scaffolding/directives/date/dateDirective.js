@@ -21,7 +21,8 @@
 
         span.datepicker({
           autoclose: true,
-          format: scDateConfig.datepickerFormat
+          format: scDateConfig.datepickerFormat,
+          language: 'bg'
         });
 
         ngModel.$render = function () {
