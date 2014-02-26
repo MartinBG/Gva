@@ -31,11 +31,9 @@
     });
 
     it('should change the model to whatever date is selected.', function() {
-      var currentDate = new Date(),
-          ISOdate = currentDate.toISOString().replace(/T.*/, 'T00:00:00');
-
-      inputPage.dateDirective.selectCurrentDate();
-      expect(inputPage.getDateValue()).toEqual(ISOdate);
+      inputPage.changeDate();
+      inputPage.dateDirective.selectSpecificDate();
+      expect(inputPage.getDateValue()).toEqual('1990-07-30T00:00:00');
     });
 
     it('should validate user input.', function () {

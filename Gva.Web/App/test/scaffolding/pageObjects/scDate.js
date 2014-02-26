@@ -27,13 +27,13 @@
     });
   };
 
-  ScDate.prototype.selectCurrentDate = function () {
+  ScDate.prototype.selectSpecificDate = function () {
     var context = this.context;
 
     return this.element.findElement(by.className('glyphicon-calendar')).then(function (btn) {
       return btn.click().then(function () {
-        return context.findElement(by.css('.day.active')).then(function (dayCell) {
-          return dayCell.click();
+        return context.findElements(by.css('.day')).then(function (dayCells) {
+          return dayCells[1].click();
         });
       });
     });

@@ -15,63 +15,71 @@
         if (!ngModel) {
           return;
         }
-        var input = element.children('input');
+        var input = element.children('input'),
+            span = element.children('span'),
+            changingDate = false;
 
-        element.datetimepicker({
-          language: 'bg',
-          pickTime: false,
-          weekStart: 1
+        span.datepicker({
+          autoclose: true,
+          format: scDateConfig.datepickerFormat
         });
 
         ngModel.$render = function () {
-          if (ngModel.$viewValue) {
-            var date = moment(ngModel.$viewValue).format('DD.MM.YYYY');
-            element.datetimepicker('setValue', new Date(date));
-            input.val(date);
+          var m = moment(ngModel.$viewValue),
+            pickerValue,
+            inputValue;
+
+          if (m.isValid() && ngModel.$viewValue) {
+            pickerValue = m.startOf('day').toDate();
+            inputValue = m.format(scDateConfig.dateDisplayFormat);
+          } else {
+            pickerValue = undefined;
+            inputValue = undefined;
           }
+
+          changingDate = true;
+          span.datepicker('setDate', pickerValue);
+          changingDate = false;
+          input.val(inputValue);
         };
 
-        function changeDateOnSelect(ev) {
+        function changeDate(m) {
+          if (changingDate) {
+            return;
+          }
+
           scope.$apply(function () {
-            var modelDate,
-              dateShort;
-            if (ev.localDate) {
-              modelDate = moment(ev.localDate).startOf('day').format('YYYY-MM-DDTHH:mm:ss');
-              dateShort = moment(ev.localDate).startOf('day').format('DD.MM.YYYY');
+            if (m.isValid()) {
+              ngModel.$setViewValue(
+                m.startOf('day').format(scDateConfig.dateModelFormat));
+            } else {
+              ngModel.$setViewValue(undefined);
             }
-            ngModel.$setViewValue(modelDate);
-            input.val(dateShort);
+            ngModel.$render();
           });
+        }
+
+        function changeDateOnSelect(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+
+          changeDate(moment(ev.date));
         }
 
         function changeDateOnInput(ev) {
           ev.preventDefault();
           ev.stopPropagation();
 
-          scope.$apply(function () {
-            var date = moment(ev.target.value, scDateConfig.dateFormats)
-              .format('YYYY-MM-DDTHH:mm:ss'),
-              dateShort = moment(ev.target.value, scDateConfig.dateFormats)
-              .format('DD.MM.YYYY');
-
-            if (!date || date === 'Invalid date') {
-              input.val(null);
-              ngModel.$setViewValue(undefined);
-            } else {
-              ngModel.$setViewValue(date);
-              element.datetimepicker('setValue', new Date(date));
-              input.val(dateShort);
-            }
-          });
+          changeDate(moment(ev.target.value, scDateConfig.dateParseFormats));
         }
 
-        element.datetimepicker().on('changeDate', changeDateOnSelect);
+        span.on('changeDate', changeDateOnSelect);
         input.on('change', changeDateOnInput);
 
         element.bind('$destroy', function () {
           input.off('change', changeDateOnInput);
-          element.datetimepicker().off('changeDate', changeDateOnSelect);
-          element.datetimepicker('destroy');
+          span.off('changeDate', changeDateOnSelect);
+          span.datepicker('destroy');
         });
       }
     };
@@ -80,7 +88,10 @@
 
   angular.module('scaffolding')
     .constant('scDateConfig', {
-      dateFormats: ['DD.MM.YYYY', 'DD_MM_YYYY', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD\\MM\\YYYY']
+      dateParseFormats: ['DD.MM.YYYY', 'DD_MM_YYYY', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD\\MM\\YYYY'],
+      dateDisplayFormat: 'DD.MM.YYYY',
+      dateModelFormat: 'YYYY-MM-DDTHH:mm:ss',
+      datepickerFormat: 'dd.mm.yyyy'
     })
     .directive('scDate', DateDirective);
 }(angular, moment));
