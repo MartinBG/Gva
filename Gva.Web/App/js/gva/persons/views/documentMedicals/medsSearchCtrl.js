@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function DocumentMedicalsSearchCtrl(
@@ -7,30 +7,10 @@
     $state,
     $stateParams,
     PersonDocumentMedical,
-    PersonDocumentMedicalView,
+    person,
     meds
   ) {
     $scope.medicals = meds;
-
-    //PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
-    //  $scope.medicals = medicals.map(function (medical) {
-    //    var testimonial = medical.part.documentNumberPrefix + '-' +
-    //      medical.part.documentNumber + '-' +
-    //      $scope.$parent.person.lin + '-' +
-    //      medical.part.documentNumberSuffix;
-
-    //    medical.part.testimonial = testimonial;
-
-    //    var limitations = '';
-    //    for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-    //      limitations += medical.part.limitationsTypes[i].name + ', ';
-    //    }
-    //    limitations = limitations.substring(0, limitations.length - 2);
-    //    medical.part.limitations = limitations;
-
-    //    return medical;
-    //  });
-    //});
 
     $scope.editDocumentMedical = function (medical) {
       return $state.go('root.persons.view.medicals.edit', {
@@ -57,18 +37,37 @@
     '$state',
     '$stateParams',
     'PersonDocumentMedical',
-    'PersonDocumentMedicalView',
+    'person',
     'meds'
   ];
 
   DocumentMedicalsSearchCtrl.$resolve = {
     meds: [
       '$stateParams',
-      'PersonDocumentMedicalView',
-      function ($stateParams, PersonDocumentMedicalView) {
-        return PersonDocumentMedicalView.query($stateParams).$promise;
+      'PersonDocumentMedical',
+      'person',
+      function ($stateParams, PersonDocumentMedical, person) {
+        return PersonDocumentMedical.query($stateParams).$promise
+        .then(function (meds) {
+          return _(meds)
+          .forEach(function (med) {
+            var testimonial = med.part.documentNumberPrefix + '-' +
+              med.part.documentNumber + '-' +
+              person.lin + '-' +
+              med.part.documentNumberSuffix;
+
+            med.part.testimonial = testimonial;
+
+            var limitations = '';
+            for (var i = 0; i < med.part.limitationsTypes.length; i++) {
+              limitations += med.part.limitationsTypes[i].name + ', ';
+            }
+            limitations = limitations.substring(0, limitations.length - 2);
+            med.part.limitations = limitations;
+          }).value();
+        });
       }
     ]
   };
   angular.module('gva').controller('DocumentMedicalsSearchCtrl', DocumentMedicalsSearchCtrl);
-}(angular));
+}(angular, _));
