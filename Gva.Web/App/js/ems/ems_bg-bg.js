@@ -43,6 +43,9 @@
           docStatusName: 'Статус',
           docDirectionName: 'Тип',
           addressing: {
+            content: 'Прикачени файлове',
+            text: 'Текст',
+            classification: 'Код за достъп и класификация',
             accessCode: 'Код за достъп',
             permissions: 'Допълнителни права',
             assignment: 'Възлагане',

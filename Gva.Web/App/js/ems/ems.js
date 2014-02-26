@@ -11,7 +11,40 @@
     'ems.templates',
     'l10n',
     'l10n-tools'
-  ]).config(['$stateProvider', function ($stateProvider) {
+  ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
+    scaffoldingProvider.form({
+      name: 'emsDocInfo',
+      templateUrl: 'ems/docs/forms/docInfo.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingDocIncoming',
+      templateUrl: 'ems/docs/forms/docAddressing/docIncoming.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingDocInternal',
+      templateUrl: 'ems/docs/forms/docAddressing/docInternal.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingDocInternalOutgoing',
+      templateUrl: 'ems/docs/forms/docAddressing/docInternalOutgoing.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingDocOutgoing',
+      templateUrl: 'ems/docs/forms/docAddressing/docOutgoing.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingRemark',
+      templateUrl: 'ems/docs/forms/docAddressing/remark.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingResolution',
+      templateUrl: 'ems/docs/forms/docAddressing/resolution.html'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocAddressingTask',
+      templateUrl: 'ems/docs/forms/docAddressing/task.html'
+    });
+  }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                           , '/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot'                                    ])
       .state(['root.docs.search'                    , ''                             , ['@root'          , 'ems/docs/views/docsSearch.html'         , 'DocsSearchCtrl'         ]])
