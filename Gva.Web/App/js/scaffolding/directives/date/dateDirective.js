@@ -63,8 +63,14 @@
         function changeDateOnSelect(ev) {
           ev.preventDefault();
           ev.stopPropagation();
-
-          changeDate(moment(ev.date));
+          if (ev.date) {
+            changeDate(moment(ev.date));
+          } else {
+            scope.$apply(function () {
+              ngModel.$setViewValue(undefined);
+              ngModel.$render();
+            });
+          }
         }
 
         function changeDateOnInput(ev) {
