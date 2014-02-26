@@ -66,7 +66,7 @@
     };
 
     $scope.viewDoc = function (docId) {
-      return $state.go('root.docs.edit.addressing', { docId: docId });
+      return $state.go('root.docs.edit.data.view', { docId: docId });
     };
   }
 

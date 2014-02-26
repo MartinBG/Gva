@@ -71,7 +71,7 @@
           }
           else if (mode === 'create') {
             Doc.createNew($scope.doc).$promise.then(function (result) {
-              $state.go('root.docs.edit.addressing', { docId: result.docId });
+              $state.go('root.docs.edit.data.view', { docId: result.docId });
             });
           }
         }
@@ -89,7 +89,7 @@
 
     $scope.cancel = function () {
       if (!!$scope.parentDoc) {
-        $state.go('root.docs.edit.addressing', { docId: $stateParams.parentDocId });
+        $state.go('root.docs.edit.data.view', { docId: $stateParams.parentDocId });
       }
       else {
         $state.go('root.docs.search');

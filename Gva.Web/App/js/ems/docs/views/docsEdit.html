@@ -118,21 +118,6 @@
         </div>
       </nav>
 
-      <ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc"></ems-doc-info>
-
-      <div class="well-sm panel-body">
-          <sc-tabs tab-list="{
-          'Документ': 'root.docs.edit.addressing',
-          'Управление': 'root.docs.edit.workflows',
-          'Етапи': 'root.docs.edit.stages',
-          'Преписка': 'root.docs.edit.case'
-          }"></sc-tabs>
-
-        <div class="tab-content">
-          <div ui-view>
-          </div>
-          <div class="clear"></div>
-        </div>
-      </div>
+      <div ui-view></div>
     </div>
 </ng-form>

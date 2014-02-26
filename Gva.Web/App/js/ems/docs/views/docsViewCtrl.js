@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function DocsAddressingCtrl(
+  function DocsViewCtrl(
     $state,
     $scope,
     $stateParams,
@@ -21,7 +21,7 @@
         selectedCorrs.onCorrSelect = null;
       };
 
-      return $state.go('root.docs.edit.addressing.selectCorr');
+      return $state.go('root.docs.edit.data.view.selectCorr');
     };
 
     $scope.selectUnit = function selectUnit(message) {
@@ -99,7 +99,7 @@
         };
       }
 
-      return $state.go('root.docs.edit.addressing.selectUnit');
+      return $state.go('root.docs.edit.data.view.selectUnit');
     };
 
     $scope.removeDocClassification = function () {
@@ -109,7 +109,7 @@
     };
   }
 
-  DocsAddressingCtrl.$inject = [
+  DocsViewCtrl.$inject = [
     '$state',
     '$scope',
     '$stateParams',
@@ -118,7 +118,7 @@
     'selectedUnits'
   ];
 
-  DocsAddressingCtrl.$resolve = {
+  DocsViewCtrl.$resolve = {
     selectedCorrs: [
       function resolveSelectedCorrs() {
         return {
@@ -137,5 +137,5 @@
     ]
   };
 
-  angular.module('ems').controller('DocsAddressingCtrl', DocsAddressingCtrl);
+  angular.module('ems').controller('DocsViewCtrl', DocsViewCtrl);
 }(angular, _));
