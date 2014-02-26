@@ -80,7 +80,7 @@
         element.bind('$destroy', function () {
           input.off('change', changeDateOnInput);
           span.off('changeDate', changeDateOnSelect);
-          span.datepicker('destroy');
+          span.datepicker('remove');
         });
       }
     };
