@@ -50,6 +50,7 @@ namespace Gva.Web
         public static void RegisterRoutes(HttpConfiguration config)
         {
             //persons
+            MapRoute(config, HttpMethod.Get , "api/persons"                  , "Person", "GetPersons");
             MapRoute(config, HttpMethod.Post, "api/persons"                  , "Person", "PostPerson");
             MapRoute(config, HttpMethod.Get , "api/persons/{lotId}"          , "Person", "GetPerson");
             MapRoute(config, HttpMethod.Get , "api/persons/{lotId}/inventory", "Person", "GetInventory");

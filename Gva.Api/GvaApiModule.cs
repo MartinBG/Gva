@@ -1,8 +1,9 @@
 ﻿using Common.Data;
-using Ninject.Modules;
-using Gva.Api.Models;
-using Regs.Api.LotEvents;
 using Gva.Api.LotEventHandlers;
+using Gva.Api.Models;
+using Gva.Api.Repositories;
+using Ninject.Modules;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api
 {
@@ -12,6 +13,7 @@ namespace Gva.Api
         {
             Bind<IDbConfiguration>().To<GvaDbConfiguration>();
             Bind<ILotEventHandler>().To<PersonLotEventHandler>();
+            Bind<IPersonRepository>().To<PersonRepository>();
         }
     }
 }

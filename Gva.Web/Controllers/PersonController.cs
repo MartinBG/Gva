@@ -1,6 +1,9 @@
-﻿using Common.Api.Repositories.UserRepository;
+﻿using AutoMapper;
+using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
+using Gva.Api.Repositories;
 using Gva.Web.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
@@ -20,13 +23,29 @@ namespace Gva.Web.Controllers
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IUserRepository userRepository;
+        private IPersonRepository personRepository;
 
-        public PersonController(IUserContextProvider userContextProvider, IUnitOfWork unitOfWork, ILotRepository lotRepository, IUserRepository userRepository)
+        public PersonController(
+            IUserContextProvider userContextProvider,
+            IUnitOfWork unitOfWork,
+            ILotRepository lotRepository,
+            IUserRepository userRepository,
+            IPersonRepository personRepository)
         {
             this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.userRepository = userRepository;
+            this.personRepository = personRepository;
+        }
+
+        public HttpResponseMessage GetPersons(string lin = null, string uin = null, string names = null, string licences = null, string ratings = null, string organization = null, bool exact = false)
+        {
+            var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, exact);
+
+            return ControllerContext.Request.CreateResponse(
+                HttpStatusCode.OK,
+                Mapper.Map<IEnumerable<GvaPerson>, IEnumerable<PersonSearch>>(persons));
         }
 
         public HttpResponseMessage GetPerson(int lotId)
