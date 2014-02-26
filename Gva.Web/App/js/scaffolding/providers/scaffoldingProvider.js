@@ -15,17 +15,23 @@
           templateUrl: options.templateUrl,
           controller: options.controller,
           link: function (scope, element, attrs) {
+            var eventHandlers = {};
+
             scope.$parent[attrs.name] = scope[attrs.name];
             scope.form = scope[attrs.name];
+            scope.$raise = function (eventName, message) {
+              if (eventHandlers[eventName]) {
+                return eventHandlers[eventName](message);
+              }
+            };
 
             _.forOwn(attrs, function (value, key) {
               if (key.indexOf('scOn') === 0) {
                 var parsedFunc = $parse(value);
 
-                scope.$on(key, function (event, message) {
-                  event.stopPropagation();
-                  parsedFunc(scope.$parent, { $message: message });
-                });
+                eventHandlers[key] = function (message) {
+                  return parsedFunc(scope.$parent, { $message: message });
+                };
               }
             });
           }
