@@ -2,12 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentEducationsEditCtrl($scope, $state, $stateParams, PersonDocumentEducation) {
-    PersonDocumentEducation
-    .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-    .then(function (documentEducation) {
-      $scope.personDocumentEducation = documentEducation;
-    });
+  function DocumentEducationsEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentEducation,
+    edu
+  ) {
+    $scope.personDocumentEducation = edu;
+
 
     $scope.save = function () {
       $scope.personDocumentEducationForm.$validate()
@@ -33,8 +36,22 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation'
+    'PersonDocumentEducation',
+    'edu'
   ];
+
+  DocumentEducationsEditCtrl.$resolve = {
+    edu: [
+      '$stateParams',
+      'PersonDocumentEducation',
+      function ($stateParams, PersonDocumentEducation) {
+        return PersonDocumentEducation.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentEducationsEditCtrl', DocumentEducationsEditCtrl);
 }(angular));

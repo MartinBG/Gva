@@ -357,6 +357,8 @@
 
     medicalLimitations: require('./medicalLimitation'),
 
+    publisherTypes: require('./publisherType'),
+
     //оценки при проверка на Физическо лице
     personCheckRatingValues: [
        { nomValueId: 1, code: 'Goog', name: 'Добро', nameAlt: 'good', alias: 'good' },

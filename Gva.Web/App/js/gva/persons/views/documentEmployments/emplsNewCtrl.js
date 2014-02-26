@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentEmploymentsNewCtrl($scope, $state, $stateParams, PersonDocumentEmployment) {
+  function DocumentEmploymentsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentEmployment,
+    employment
+  ) {
+    $scope.personDocumentEmployment = employment;
+
     $scope.save = function () {
       $scope.personDocumentEmploymentForm.$validate()
         .then(function () {
@@ -25,8 +33,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEmployment'
+    'PersonDocumentEmployment',
+    'employment'
   ];
+
+  DocumentEmploymentsNewCtrl.$resolve = {
+    employment: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('DocumentEmploymentsNewCtrl', DocumentEmploymentsNewCtrl);
 }(angular));

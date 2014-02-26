@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentEducationsNewCtrl($scope, $state, $stateParams, PersonDocumentEducation) {
+  function DocumentEducationsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentEducation,
+    edu
+  ) {
+    $scope.personDocumentCheck = edu;
+
     $scope.save = function () {
       $scope.personDocumentEducationForm.$validate()
         .then(function () {
@@ -25,8 +33,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation'
+    'PersonDocumentEducation',
+    'edu'
   ];
+
+  DocumentEducationsNewCtrl.$resolve = {
+    edu: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('DocumentEducationsNewCtrl', DocumentEducationsNewCtrl);
 }(angular));

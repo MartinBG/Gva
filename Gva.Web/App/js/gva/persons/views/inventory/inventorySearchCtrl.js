@@ -1,19 +1,16 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
-  function InventorySearchCtrl($scope, $state, $stateParams, $filter, PersonInventory) {
-    PersonInventory.query($stateParams).$promise.then(function (inventory) {
-      $scope.inventory = _.map(inventory, function (element) {
-        element.date = $filter('date')(element.date, 'dd.MM.yyyy');
-        element.fromDate = $filter('date')(element.fromDate, 'dd.MM.yyyy');
-        element.toDate = $filter('date')(element.toDate, 'dd.MM.yyyy');
-        element.creationDate = $filter('date')(element.creationDate, 'dd.MM.yyyy');
-        element.editedDate = $filter('date')(element.editedDate, 'dd.MM.yyyy');
-
-        return element;
-      });
-    });
+  function InventorySearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    $filter,
+    PersonInventory,
+    inventory
+  ) {
+    $scope.inventory = inventory;
 
     $scope.edit = function (item) {
       var state;
@@ -34,11 +31,28 @@
         state = 'root.persons.view.checks.edit';
       }
 
-      $state.go(state, { ind: item.partIndex });
+      return $state.go(state, { ind: item.partIndex });
     };
   }
 
-  InventorySearchCtrl.$inject = ['$scope', '$state', '$stateParams', '$filter', 'PersonInventory'];
+  InventorySearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    '$filter',
+    'PersonInventory',
+    'inventory'
+  ];
+
+  InventorySearchCtrl.$resolve = {
+    inventory: [
+      '$stateParams',
+      'PersonInventory',
+      function ($stateParams, PersonInventory) {
+        return PersonInventory.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('InventorySearchCtrl', InventorySearchCtrl);
-}(angular, _));
+}(angular));

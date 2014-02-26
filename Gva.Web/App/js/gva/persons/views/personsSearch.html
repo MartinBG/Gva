@@ -11,9 +11,6 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <button class="btn" ng-click="getPart()">Get edition part</button>
-  <button class="btn" ng-click="getParts()">Get edition parts</button>
-
   <sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" width="1px">
       <sc-button name="viewButton" btn-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

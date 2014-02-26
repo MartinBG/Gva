@@ -2,7 +2,12 @@
 (function (angular, _) {
   'use strict';
 
-  function PersonsSearchCtrl($scope, $state, $stateParams, Person, PersonEdition) {
+  function PersonsSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Person,
+    persons) {
     $scope.filters = {
       lin: null,
       uin: null
@@ -14,9 +19,7 @@
       }
     });
 
-    Person.query($stateParams).$promise.then(function (persons) {
-      $scope.persons = persons;
-    });
+    $scope.persons = persons;
 
     $scope.search = function () {
       $state.go('root.persons.search', {
@@ -36,17 +39,25 @@
     $scope.viewPerson = function (person) {
       return $state.go('root.persons.view', { id: person.id });
     };
-
-    $scope.getPart = function () {
-      PersonEdition.get({id: 1, ind: 2, childInd: 3});
-    };
-
-    $scope.getParts = function () {
-      PersonEdition.query({id: 1, ind: 2});
-    };
   }
 
-  PersonsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Person', 'PersonEdition'];
+  PersonsSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Person',
+    'persons'
+  ];
+
+  PersonsSearchCtrl.$resolve = {
+    persons: [
+      '$stateParams',
+      'Person',
+      function ($stateParams, Person) {
+        return Person.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('PersonsSearchCtrl', PersonsSearchCtrl);
 }(angular, _));

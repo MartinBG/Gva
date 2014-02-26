@@ -41,7 +41,7 @@ namespace Common.Api.Controllers
 
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                conn.Open();
+                await conn.OpenAsync();
 
                 var blobProvider = await Request.Content.ReadAsMultipartAsync(new MultipartBlobStreamProvider(conn));
                 var firstBlobKey = blobProvider.BlobData.First().BlobKey;

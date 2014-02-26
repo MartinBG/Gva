@@ -2,12 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function DocumentMedicalsEditCtrl($scope, $state, $stateParams, PersonDocumentMedical) {
-    PersonDocumentMedical
-      .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-      .then(function (medical) {
-        $scope.personDocumentMedical = medical;
-      });
+  function DocumentMedicalsEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentMedical,
+    med
+  ) {
+    $scope.personDocumentMedical = med;
 
     $scope.save = function () {
       $scope.personDocumentMedicalForm.$validate()
@@ -28,7 +30,26 @@
     };
   }
 
-  DocumentMedicalsEditCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentMedical'];
+  DocumentMedicalsEditCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentMedical',
+    'med'
+  ];
+
+  DocumentMedicalsEditCtrl.$resolve = {
+    med: [
+      '$stateParams',
+      'PersonDocumentMedical',
+      function ($stateParams, PersonDocumentMedical) {
+        return PersonDocumentMedical.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentMedicalsEditCtrl', DocumentMedicalsEditCtrl);
 }(angular));

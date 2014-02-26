@@ -2,13 +2,18 @@
 (function (angular) {
   'use strict';
 
-  function DocumentTrainingsEditCtrl($scope, $state, $stateParams, PersonDocumentTraining) {
+  function DocumentTrainingsEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentTraining,
+    personDocumentTraining,
+    selectedPublisher
+  ) {
     $scope.isEdit = true;
-    PersonDocumentTraining
-    .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-    .then(function (documentTraining) {
-      $scope.personDocumentTraining = documentTraining;
-    });
+    $scope.personDocumentTraining = personDocumentTraining;
+    $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
+      personDocumentTraining.part.documentPublisher;
 
     $scope.save = function () {
       $scope.personDocumentTrainingForm.$validate()
@@ -24,6 +29,10 @@
         });
     };
 
+    $scope.choosePublisher = function () {
+      return $state.go('root.persons.view.documentTrainings.edit.choosePublisher');
+    };
+
     $scope.cancel = function () {
       return $state.go('root.persons.view.documentTrainings.search');
     };
@@ -33,8 +42,26 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentTraining'
+    'PersonDocumentTraining',
+    'personDocumentTraining',
+    'selectedPublisher'
   ];
+
+  DocumentTrainingsEditCtrl.$resolve = {
+    personDocumentTraining: [
+      '$stateParams',
+      'PersonDocumentTraining',
+      function ($stateParams, PersonDocumentTraining) {
+        return PersonDocumentTraining.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ],
+    selectedPublisher: function () {
+      return [];
+    }
+  };
 
   angular.module('gva').controller('DocumentTrainingsEditCtrl', DocumentTrainingsEditCtrl);
 }(angular));

@@ -67,7 +67,14 @@
             <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
               <label class="control-label" l10n-text="persons.personCheckDirective.documentPublisher"></label>
               <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
+              <div class="input-group input-group-sm">
               <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="$parent.choosePublisher()">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
           <div class="row">

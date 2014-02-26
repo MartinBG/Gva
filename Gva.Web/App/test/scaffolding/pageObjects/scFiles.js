@@ -88,10 +88,8 @@
     });
   };
 
-  ScFiles.prototype.isModalDismissed = function () {
-    return this.context.findElements(by.className('modal-body')).then(function (elements) {
-      return elements.length === 0;
-    });
+  ScFiles.prototype.isModalDisplayed = function () {
+    return this.context.isElementPresent(by.className('modal-body'));
   };
 
   module.exports = ScFiles;

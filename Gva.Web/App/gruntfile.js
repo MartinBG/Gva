@@ -53,7 +53,6 @@ module.exports = function (grunt) {
         'bower_components/angular-ui-select2/src/select2.js',
         'bower_components/angular-ui-utils/modules/jq/jq.js',
         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-        'bower_components/bootstrap/js/collapse.js', //TODO remove
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         'bower_components/bootstrap-datetimepicker/src/js/locales/*.bg.js',
@@ -62,7 +61,8 @@ module.exports = function (grunt) {
         'bower_components/jquery-ui/ui/jquery.ui.widget.js',
         'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
         'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-        'bower_components/angular-mocks/angular-mocks.js'
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/moment/moment.js'
       ],
       '<%= buildDir %>/js/lib.ie8.js': [
         'bower_components/html5shiv/dist/html5shiv.js',

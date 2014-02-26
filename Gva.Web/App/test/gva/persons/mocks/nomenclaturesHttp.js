@@ -121,12 +121,14 @@
         })
       .when('GET',
           '/api/nomenclatures/:alias' +
-          '?term&id&staffTypeId&parentAlias&parentValueId',
+          '?term&id&staffTypeId&parentAlias&parentValueId&va',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          } else if ($params.va) {
+            res = $filter('filter')(res, { alias: $params.va }, true)[0];
           } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);

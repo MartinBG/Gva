@@ -2,10 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentChecksSearchCtrl($scope, $state, $stateParams, PersonDocumentCheck) {
-    PersonDocumentCheck.query($stateParams).$promise.then(function (checks) {
-      $scope.checks = checks;
-    });
+  function DocumentChecksSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentCheck,
+    checks
+  ) {
+    $scope.checks = checks;
+
 
     $scope.editDocumentCheck = function (check) {
       return $state.go('root.persons.view.checks.edit', {
@@ -26,7 +31,23 @@
     };
   }
 
-  DocumentChecksSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentCheck'];
+  DocumentChecksSearchCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentCheck',
+    'checks'
+  ];
+
+  DocumentChecksSearchCtrl.$resolve = {
+    checks: [
+      '$stateParams',
+      'PersonDocumentCheck',
+      function ($stateParams, PersonDocumentCheck) {
+        return PersonDocumentCheck.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentChecksSearchCtrl', DocumentChecksSearchCtrl);
 }(angular));

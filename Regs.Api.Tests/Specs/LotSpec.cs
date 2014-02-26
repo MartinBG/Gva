@@ -89,7 +89,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lot1.LotId);
-                dynamic address = lot2.GetPart("/addresses/0", lot2.LastCommitId);
+                dynamic address = lot2.GetPart("/addresses/0", lot2.LastCommit.CommitId);
                 Assert.Equal("0", (string)address.address);
             });
             "can be commited partially".Assert(() =>
@@ -101,13 +101,28 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lot1.LotId);
-                dynamic address = lot2.GetPart("/addresses/1", lot2.LastCommitId);
+                dynamic address = lot2.GetPart("/addresses/1", lot2.LastCommit.CommitId);
                 Assert.Null(address);
             });
             "cannot be commited without modifications".Assert(() =>
             {
                 var lot1 = lotRepository1.GetSet("Person").CreateLot(userContext1);
                 Assert.Throws<InvalidOperationException>(() => lot1.Commit(userContext1));
+            });
+            "must contain all latest versions of all parts after every commit in its index".Assert(() =>
+            {
+                var lot1 = lotRepository1.GetSet("Person").CreateLot(userContext1);
+                lot1.CreatePart("/addresses/0", JObject.Parse("{ address: '0' }"), userContext1);
+                lot1.Commit(userContext1, new string[] { "/addresses/0" });
+                unitOfWork1.Save();
+                lot1.CreatePart("/addresses/1", JObject.Parse("{ address: '1' }"), userContext1);
+                lot1.Commit(userContext1, new string[] { "/addresses/1" });
+                unitOfWork1.Save();
+
+                var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
+                dynamic addresses = lot2.GetParts("/addresses/");
+                Assert.Equal("0", (string)addresses[0].address);
+                Assert.Equal("1", (string)addresses[1].address);
             });
         }
 
@@ -256,7 +271,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lotId);
-                dynamic previousAddress = lot2.GetPart("/addresses/0", lot2.LastCommitId);
+                dynamic previousAddress = lot2.GetPart("/addresses/0", lot2.LastCommit.CommitId);
                 Assert.Null((string)previousAddress.country);
             });
             "cannot be reset to a previous commit if all later commits have not been loaded".Assert(() =>
@@ -264,6 +279,22 @@ namespace Regs.Api.Tests.Specs
                 var lot1 = lotRepository1.GetLotIndex(lotId);
                 lot1.Commit(userContext1);
                 Assert.Throws<InvalidOperationException>(() => lot1.Reset(firstCommitId, userContext1));
+            });
+            "must have all latest versions of all existing parts in its index after reset".Assert(() => 
+            {
+                var lot1 = lotRepository1.GetLotIndex(lotId);
+                lot1.Commit(userContext1);
+
+                //load the second commit
+                lotRepository1.GetLot(lotId, secondCommitId);
+
+                lot1.Reset(secondCommitId, userContext1);
+                unitOfWork1.Save();
+
+                lotRepository1.GetLot(lotId, firstCommitId);
+                var lot2 = lotRepository2.GetLotIndex(lotId);
+                dynamic resetAddress = lot2.GetPart("/addresses/0");
+                Assert.Equal("Austria", (string)resetAddress.country);
             });
         }
     }

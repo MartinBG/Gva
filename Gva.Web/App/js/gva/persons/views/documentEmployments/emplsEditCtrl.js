@@ -2,12 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function DocumentEmploymentsEditCtrl($scope, $state, $stateParams, PersonDocumentEmployment) {
-    PersonDocumentEmployment
-    .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-    .then(function (employment) {
-      $scope.personDocumentEmployment = employment;
-    });
+  function DocumentEmploymentsEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentEmployment,
+    employment
+  ) {
+    $scope.personDocumentEmployment = employment;
 
     $scope.save = function () {
       $scope.personDocumentEmploymentForm.$validate()
@@ -32,8 +34,22 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEmployment'
+    'PersonDocumentEmployment',
+    'employment'
   ];
+
+  DocumentEmploymentsEditCtrl.$resolve = {
+    employment: [
+      '$stateParams',
+      'PersonDocumentEmployment',
+      function ($stateParams, PersonDocumentEmployment) {
+        return PersonDocumentEmployment.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentEmploymentsEditCtrl', DocumentEmploymentsEditCtrl);
 }(angular));

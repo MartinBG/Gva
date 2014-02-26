@@ -30,17 +30,29 @@ namespace Regs.Api.Models
         public virtual ICollection<Part> Parts { get; set; }
         public virtual Set Set { get; set; }
 
-        public int? LastCommitId
+        public Commit Index
         {
             get
             {
-                return this.Commits.Where(c => c.IsIndex).Select(c => c.ParentCommitId).Single();
+                return this.GetCommit();
+            }
+        }
+
+        public Commit LastCommit
+        {
+            get
+            {
+                Commit commit = this.Commits.Where(c => c.IsIndex).Select(c => c.ParentCommit).Single();
+
+                commit.EnsureIsLoaded();
+
+                return commit;
             }
         }
 
         public PartVersion CreatePart(string path, JObject json, UserContext userContext)
         {
-            Commit index = this.GetCommit();
+            Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
 
             string expandedPath;
@@ -85,8 +97,6 @@ namespace Regs.Api.Models
             };
             index.PartVersions.Add(partVersion);
 
-            Events.Raise(new LotEvent(LotOperation.AddPart, this, new List<PartVersion>() { partVersion }));
-
             return partVersion;
         }
 
@@ -106,7 +116,7 @@ namespace Regs.Api.Models
 
         public PartVersion ResetPart(string path)
         {
-            Commit index = this.GetCommit();
+            Commit index = this.Index;
 
             if (!index.ParentCommit.IsLoaded)
             {
@@ -140,14 +150,12 @@ namespace Regs.Api.Models
                 index.PartVersions.Add(prevPartVersion);
             }
 
-            Events.Raise(new LotEvent(LotOperation.ResetPart, this, new List<PartVersion>() { partVersion }));
-
             return partVersion;
         }
 
         public void Reset(int commitId, UserContext userContext)
         {
-            Commit index = this.GetCommit();
+            Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
 
             bool partVersionsInIndex = index.PartVersions
@@ -160,8 +168,7 @@ namespace Regs.Api.Models
                 throw new InvalidOperationException("Cannot reset with uncommited changes in index");
             }
 
-            Commit newLastCommit = this.GetCommit(this.LastCommitId);
-            IEnumerable<PartVersion> deletedPartVersions = new List<PartVersion>();
+            Commit newLastCommit = this.LastCommit;
 
             this.Commits.Remove(index);
 
@@ -173,9 +180,8 @@ namespace Regs.Api.Models
                 }
 
                 IEnumerable<PartVersion> partVersionsToDelete = newLastCommit.PartVersions.Where(pv => pv.OriginalCommit == newLastCommit);
-                deletedPartVersions = deletedPartVersions.Concat<PartVersion>(partVersionsToDelete);
 
-                foreach (var partVersion in partVersionsToDelete)
+                foreach (PartVersion partVersion in partVersionsToDelete)
                 {
                     Part part = partVersion.Part;
                     part.PartVersions.Remove(partVersion);
@@ -198,20 +204,22 @@ namespace Regs.Api.Models
 
             Commit newIndex = new Commit
             {
+                PartVersions = newLastCommit.PartVersions,
                 ParentCommit = newLastCommit,
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
                 IsIndex = true,
                 IsLoaded = true
             };
+
             this.Commits.Add(newIndex);
 
-            Events.Raise(new LotEvent(LotOperation.Reset, this, deletedPartVersions.ToList()));
+            Events.Raise(new ResetEvent(this, newIndex));
         }
 
         public void Commit(UserContext userContext, string[] paths = null)
         {
-            Commit index = this.GetCommit();
+            Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
 
             Commit newIndex = new Commit
@@ -256,7 +264,7 @@ namespace Regs.Api.Models
             index.CommiterId = userContext.UserId;
             index.IsIndex = false;
 
-            Events.Raise(new LotEvent(LotOperation.Commit, this, toBeCommited.ToList()));
+            Events.Raise(new CommitEvent(this, newIndex, index));
         }
 
         public PartVersion GetPart(string path, int? commitId = null)
@@ -309,7 +317,7 @@ namespace Regs.Api.Models
 
         private PartVersion UpdatePartVersion(PartVersion partVersion, JObject json, UserContext userContext)
         {
-            Commit currCommit = this.GetCommit();
+            Commit currCommit = this.Index;
             this.ModifyDate = DateTime.Now;
 
             if (partVersion.OriginalCommit == currCommit)
@@ -332,14 +340,12 @@ namespace Regs.Api.Models
             currCommit.PartVersions.Remove(partVersion);
             currCommit.PartVersions.Add(updatedPartVersion);
 
-            Events.Raise(new LotEvent(LotOperation.UpdatePart, this, new List<PartVersion>() { partVersion }));
-
             return updatedPartVersion;
         }
 
         private PartVersion DeletePartVersion(PartVersion partVersion, UserContext userContext)
         {
-            Commit currCommit = this.GetCommit();
+            Commit currCommit = this.Index;
             this.ModifyDate = DateTime.Now;
 
             if (partVersion.OriginalCommit == currCommit)
@@ -357,8 +363,6 @@ namespace Regs.Api.Models
             };
             currCommit.PartVersions.Remove(partVersion);
             currCommit.PartVersions.Add(deletedPartVersion);
-
-            Events.Raise(new LotEvent(LotOperation.DeletePart, this, new List<PartVersion>() { partVersion }));
 
             return deletedPartVersion;
         }
@@ -389,10 +393,7 @@ namespace Regs.Api.Models
                 }
             }
 
-            if (!commit.IsLoaded)
-            {
-                throw new InvalidOperationException(string.Format("Commit with id {0} has not been loaded.", commitId));
-            }
+            commit.EnsureIsLoaded();
 
             return commit;
         }
@@ -437,7 +438,8 @@ namespace Regs.Api.Models
                 .HasForeignKey(d => d.SetId);
 
             // Local-only properties
-            this.Ignore(t => t.LastCommitId);
+            this.Ignore(t => t.Index);
+            this.Ignore(t => t.LastCommit);
         }
     }
 }

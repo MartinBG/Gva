@@ -13,8 +13,6 @@ namespace Regs.Api
             Bind<IDbConfiguration>().To<RegsDbConfiguration>();
 
             Bind<ILotRepository>().To<LotRepository>();
-
-            Bind<ILotEventDispatcherFactory>().To<LotEventDispatcherFactory>();
         }
     }
 }

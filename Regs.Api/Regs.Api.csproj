@@ -60,13 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LotEvents\LotEventDispatcher\ILotEventDispatcher.cs" />
-    <Compile Include="LotEvents\LotEventDispatcher\LotEventDispatcher.cs" />
-    <Compile Include="LotEvents\LotEventDispatcherFactory\ILotEventDispatcherFactory.cs" />
-    <Compile Include="LotEvents\LotEvent.cs" />
-    <Compile Include="LotEvents\LotEventDispatcherFactory\LotEventDispatcherFactory.cs" />
-    <Compile Include="LotEvents\LotEventHandler.cs" />
-    <Compile Include="LotEvents\LotOperation.cs" />
+    <Compile Include="LotEvents\ResetEvent.cs" />
+    <Compile Include="LotEvents\CommitEvent.cs" />
+    <Compile Include="LotEvents\ILotEventHandler.cs" />
     <Compile Include="Repositories\LotRepository\ILotRepository.cs" />
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\Lot.cs" />

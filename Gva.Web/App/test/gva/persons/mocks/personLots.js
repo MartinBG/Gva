@@ -56,11 +56,11 @@
         {
           partIndex: 8,
           part: personDocumentEmployments.person1Employment,
-          file: [{
+          file: {
             key: '3a-1-ab',
             name: 'test.pdf',
             relativePath: ''
-          }],
+          },
           applications: []
         }
       ],
@@ -68,11 +68,11 @@
         {
           partIndex: 9,
           part: personDocumentEducations.person1Education,
-          file: [{
+          file: {
             key: '342-42-ab',
             name: 'testName.pdf',
             relativePath: '../folder1/folder2/'
-          }],
+          },
           applications: []
         }
       ],
@@ -80,11 +80,11 @@
         {
           partIndex: 10,
           part: personDocumentIds.person1Id,
-          file: [{
+          file: {
             key: '342-43-ab',
             name: 'testName.pdf',
             relativePath: '../folder1/folder2/'
-          }],
+          },
           applications: [
             {
               applicationId: 1,
@@ -99,7 +99,6 @@
         {
           partIndex: 11,
           part: personDocumentIds.person1Id,
-          file: [],
           applications: [
             {
               applicationId: 1,
@@ -110,7 +109,6 @@
         {
           partIndex: 12,
           part: personDocumentIds.person1Id,
-          file: [],
           applications: [
             {
               applicationId: 1,
@@ -131,11 +129,11 @@
           partIndex: 14,
           part: personDocumentTrainings.person1Training1,
           applications: [],
-          file: [{
+          file: {
             key: '311-93-wb',
             name: 'test1.pdf',
             relativePath: '../folder1/folder3/'
-          }]
+          }
         },
         {
           partIndex: 15,
@@ -146,11 +144,11 @@
           partIndex: 16,
           part: personDocumentTrainings.person1Training3,
           applications: [],
-          file: [{
+          file: {
             key: '311-93-wb',
             name: 'test3.pdf',
             relativePath: '../folder1/folder3/'
-          }]
+          }
         },
         {
           partIndex: 17,
