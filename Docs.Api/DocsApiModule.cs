@@ -4,7 +4,7 @@ using Docs.Api.Models;
 
 namespace Docs.Api
 {
-    public class GvaApiModule : NinjectModule
+    public class DocsApiModule : NinjectModule
     {
         public override void Load()
         {

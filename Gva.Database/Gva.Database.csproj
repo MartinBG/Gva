@@ -51,6 +51,7 @@
     <Content Include="Create\Tables\GvaAppLotFiles.sql" />
     <Content Include="Create\Tables\GvaFiles.sql" />
     <Content Include="Create\Tables\GvaApplications.sql" />
+    <Content Include="Create\Tables\GvaPersons.sql" />
     <Content Include="Insert\Noms\addressTypes.sql" />
     <Content Include="Insert\Noms\aircraftClases66.sql" />
     <Content Include="Insert\Noms\aircraftGroup66.sql" />

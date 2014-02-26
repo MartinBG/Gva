@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LotEventHandlers\PersonLotEventHandler.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />
     <Compile Include="Models\GvaAppLotFile.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Models\GvaLotFile.cs" />
     <Compile Include="Models\GvaLotFileType.cs" />
     <Compile Include="Models\GvaLotObject.cs" />
+    <Compile Include="Models\GvaPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
   </ItemGroup>
