@@ -24,32 +24,88 @@
       return $state.go('root.docs.edit.addressing.selectCorr');
     };
 
-    $scope.selectUnitFrom = function selectUnitFrom() {
+    $scope.selectUnit = function selectUnit(message) {
       var doc = $scope.doc;
       selectedUnits.units.splice(0);
-      selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsFrom);
-      selectedUnits.onUnitSelect = function (unit) {
-        doc.docUnitsFrom.push(unit);
-        selectedUnits.onUnitSelect = null;
-      };
 
-      return $scope.selectUnit();
-    };
+      if (message.type === 'from') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsFrom);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsFrom.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'to') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsTo);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsTo.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'cCopy') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsCCopy);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsCCopy.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'importedBy') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsImportedBy);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsImportedBy.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'madeBy') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsMadeBy);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsMadeBy.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'inCharge') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsInCharge);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsInCharge.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'controlling') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsControlling);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsControlling.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'roleReaders') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsRoleReaders);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsRoleReaders.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'editors') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsEditors);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsEditors.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
+      else if (message.type === 'registrators') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsRoleRegistrators);
+        selectedUnits.onUnitSelect = function (unit) {
+          doc.docUnitsRoleRegistrators.push(unit);
+          selectedUnits.onUnitSelect = null;
+        };
+      }
 
-    $scope.selectUnitTo = function selectUnitTo() {
-      var doc = $scope.doc;
-      selectedUnits.units.splice(0);
-      selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsTo);
-      selectedUnits.onUnitSelect = function (unit) {
-        doc.docUnitsTo.push(unit);
-        selectedUnits.onUnitSelect = null;
-      };
-
-      return $scope.selectUnit();
-    };
-
-    $scope.selectUnit = function selectUnit() {
       return $state.go('root.docs.edit.addressing.selectUnit');
+    };
+
+    $scope.removeDocClassification = function () {
+    };
+
+    $scope.addDocClassification = function () {
     };
   }
 

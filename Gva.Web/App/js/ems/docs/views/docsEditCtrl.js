@@ -43,7 +43,7 @@
     };
 
     $scope.attachNewDoc = function () {
-      $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
+      return $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
     };
 
     $scope.attachDoc = function (docTypeId) {

@@ -133,6 +133,14 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\remark.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\task.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\resolution.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\docInternalOutgoing.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\docInternal.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\docOutgoing.html" />
+    <Content Include="App\js\ems\docs\forms\docAddressing\docIncoming.html" />
+    <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\ems\docs\views\selectCorrView.html" />
     <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectUnitView.html" />
@@ -609,7 +617,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
-    <Folder Include="App\js\ems\docs\forms\" />
     <Folder Include="App\js\gva\applications\forms\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
