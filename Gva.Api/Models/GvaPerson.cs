@@ -14,6 +14,7 @@ namespace Gva.Api.Models
         public string Licences { get; set; }
         public string Ratings { get; set; }
         public string Organization { get; set; }
+        public string Employment { get; set; }
 
         public virtual Lot Lot { get; set; }
     }
@@ -52,6 +53,7 @@ namespace Gva.Api.Models
             this.Property(t => t.Licences).HasColumnName("Licences");
             this.Property(t => t.Ratings).HasColumnName("Ratings");
             this.Property(t => t.Organization).HasColumnName("Organization");
+            this.Property(t => t.Employment).HasColumnName("Employment");
 
             // Relationships
             this.HasRequired(t => t.Lot)

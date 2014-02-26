@@ -4,11 +4,11 @@ using Gva.Web.Models;
 
 namespace Gva.Web.Mappers
 {
-    public class PersonSearchMapper : IMapper
+    public class PersonMapper : IMapper
     {
         public void CreateMap()
         {
-            Mapper.CreateMap<GvaPerson, PersonSearch>()
+            Mapper.CreateMap<GvaPerson, Person>()
                 .ForMember(p => p.Id, m => m.MapFrom(p => p.GvaPersonLotId));
         }
     }

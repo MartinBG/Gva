@@ -121,6 +121,7 @@ namespace Gva.Api.LotEventHandlers
                 var personEmploymentContent = JObject.Parse(personEmploymentPart.TextContent);
                 var organization = personEmploymentContent.Value<JObject>("organization");
                 person.Organization = organization == null ? null : organization.Value<string>("name");
+                person.Employment = personEmploymentContent.Value<JObject>("employmentCategory").Value<string>("name");
             }
         }
     }

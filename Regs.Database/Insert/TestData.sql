@@ -19,6 +19,6 @@ VALUES
     (9             , 1             , 'edition'         , N'ratings/\d+/editions/\d+'     , N'{}'   ),
     (10            , 1             , 'flyingExperience', N'personFlyingExperiences/\d+'  , N'{}'   ),
     (11            , 1             , 'personStatus'    , N'personStatuses/\d+'           , N'{}'   ),
-    (12            , 1             , 'licence'         , N''                             , N'{}'   ),
-    (13            , 1             , 'rating'          , N''                             , N'{}'   ),
+    (12            , 1             , 'licence'         , N'licence'                      , N'{}'   ),
+    (13            , 1             , 'rating'          , N'rating'                       , N'{}'   )
 GO

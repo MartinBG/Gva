@@ -12,6 +12,10 @@
 
         public int Age { get; set; }
 
+        public string Licences { get; set; }
+
+        public string Ratings { get; set; }
+
         public string Organization { get; set; }
 
         public string Employment { get; set; }

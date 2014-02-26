@@ -50,5 +50,11 @@ namespace Gva.Api.Repositories
 
             return persons;
         }
+
+        public GvaPerson GetPerson(int personId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaPerson>()
+                .SingleOrDefault(p => p.GvaPersonLotId == personId);
+        }
     }
 }

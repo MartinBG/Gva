@@ -9,7 +9,7 @@ namespace Gva.Web
         {
             Bind<IMapper>().To<JObjectMapper>();
             Bind<IMapper>().To<PartVersionMapper>();
-            Bind<IMapper>().To<PersonSearchMapper>();
+            Bind<IMapper>().To<PersonMapper>();
         }
     }
 }
