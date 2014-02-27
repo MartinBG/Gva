@@ -1,0 +1,15 @@
+﻿<sc-button name="createBtn" btn-click="newCertAirworthiness()" text="aircrafts.airworthinessSearch.newAirworthiness" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="aws" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertAirworthiness(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertAirworthiness(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.aircraftCertificateType.name" title="aircrafts.airworthinessSearch.aircraftCertificateType">
+  </sc-column>
+  <sc-column data="part.refNumber" title="aircrafts.airworthinessSearch.refNumber">
+  </sc-column>
+  <sc-column data="part.issueDate" title="aircrafts.airworthinessSearch.issueDate" type="date">
+  </sc-column>
+  <sc-column data="part.validToDate" title="aircrafts.airworthinessSearch.validToDate" type="date">
+  </sc-column>
+</sc-datatable>

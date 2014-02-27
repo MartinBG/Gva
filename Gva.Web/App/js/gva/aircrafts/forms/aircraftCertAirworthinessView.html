@@ -1,0 +1,27 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.airworthinessViewDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-md-5 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.aircraftCertificateType"></label>
+          <input disabled name="aircraftCertificateType" type="text" class="form-control input-sm" value="{{model.aircraftCertificateType.name}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.refNumber"></label>
+          <input disabled name="refNumber" type="text" class="form-control input-sm" value="{{model.refNumber}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.issueDate"></label>
+          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validToDate"></label>
+          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{model.validToDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -37,7 +37,15 @@ module.exports = function (grunt) {
         'schema/person-status.sample.js',
         'schema/person.sample.js',
         'schema/person-rating-edition.sample.js',
-        'schema/person-rating.sample.js'
+        'schema/person-rating.sample.js',
+        'schema/aircrafts/aircraft-data.sample.js',
+        'schema/aircrafts/aircraft-cert-registrations.sample.js',
+        'schema/aircrafts/aircraft-cert-smods.sample.js',
+        'schema/aircrafts/aircraft-cert-marks.sample.js',
+        'schema/aircrafts/aircraft-cert-airworthinesses.sample.js',
+        'schema/aircrafts/aircraft-cert-noises.sample.js',
+        'schema/aircrafts/aircraft-cert-permitstofly.sample.js',
+        'schema/aircrafts/aircraft-cert-radios.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
@@ -99,6 +107,7 @@ module.exports = function (grunt) {
         'test/ems/docs/mocks/*.js',
         'test/gva/applications/mocks/*.js',
         'test/gva/persons/mocks/*.js',
+        'test/gva/aircrafts/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js',
         'test/gva/directives/testbeds/states.js',

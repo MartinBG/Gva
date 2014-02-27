@@ -1,0 +1,11 @@
+﻿<ng-form name="newCertNoiseForm" sc-validate="{}">
+
+  <gva-aircraft-cert-noise name="aircraftCertNoiseForm" ng-model="noise.part"></gva-aircraft-cert-noise>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.newNoise.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newCertNoiseForm.$pristine"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.newNoise.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

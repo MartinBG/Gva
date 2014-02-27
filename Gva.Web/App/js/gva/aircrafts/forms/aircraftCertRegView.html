@@ -1,0 +1,51 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.regViewDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-md-1 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.certNumber"></label>
+          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.certNumber}}" />
+        </div>
+        <div class="form-group col-md-1 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.register"></label>
+          <input disabled name="register" type="text" class="form-control input-sm" value="{{model.register.name}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.regMark"></label>
+          <input disabled name="regMark" type="text" class="form-control input-sm" value="{{model.regMark}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.certDate"></label>
+          <input disabled name="certDate" type="text" class="form-control input-sm" value="{{model.certDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-6">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.owner"></label>
+          <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.owner.name}}" />
+        </div>
+        <div class="form-group col-md-4 col-sm-6">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.oper"></label>
+          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.oper.name}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-6">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.operationType"></label>
+          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operationType.name}}" />
+        </div>
+        <div class="form-group col-md-4 col-sm-6">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.aircraftTypeCertificateType"></label>
+          <input disabled type="text" class="form-control input-sm" value="{{model.typeCert.aircraftTypeCertificateType.name}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
+          <input disabled type="text" class="form-control input-sm" value="{{model.limitations}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

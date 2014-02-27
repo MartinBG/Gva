@@ -1,0 +1,86 @@
+﻿/*global angular, require*/
+(function (angular) {
+  'use strict';
+
+  var aircraftData = require('./aircraft-data.sample'),
+      aircraftCertRegistrations = require('./aircraft-cert-registrations.sample'),
+      aircraftCertSmods = require('./aircraft-cert-smods.sample'),
+      aircraftCertMarks = require('./aircraft-cert-marks.sample'),
+      aircraftCertAirworthinesses = require('./aircraft-cert-airworthinesses.sample'),
+      aircraftCertNoises = require('./aircraft-cert-noises.sample'),
+      aircraftCertPermitsToFly = require('./aircraft-cert-permitstofly.sample'),
+      aircraftCertRadios = require('./aircraft-cert-radios.sample');
+
+  angular.module('app').constant('aircraftLots', [
+    {
+      lotId: 1,
+      nextIndex: 14,
+      aircraftData: {
+        partIndex: 1,
+        part: aircraftData.aircraft1Data
+      },
+      aircraftCertRegistrations: [
+        {
+          partIndex: 2,
+          part: aircraftCertRegistrations.aircraft1Reg1
+        },
+        {
+          partIndex: 3,
+          part: aircraftCertRegistrations.aircraft1Reg2
+        },
+        {
+          partIndex: 4,
+          part: aircraftCertRegistrations.aircraft1Reg3
+        },
+        {
+          partIndex: 5,
+          part: aircraftCertRegistrations.aircraft1Reg4
+        }
+      ],
+      aircraftCertSmods: [
+        {
+          partIndex: 6,
+          part: aircraftCertSmods.aircraft1Smod1
+        },
+        {
+          partIndex: 7,
+          part: aircraftCertSmods.aircraft1Smod2
+        }
+      ],
+      aircraftCertMarks: [
+        {
+          partIndex: 8,
+          part: aircraftCertMarks.aircraft1Mark1
+        },
+        {
+          partIndex: 9,
+          part: aircraftCertMarks.aircraft1Mark2
+        }
+      ],
+      aircraftCertAirworthinesses: [
+        {
+          partIndex: 10,
+          part: aircraftCertAirworthinesses.aircraft1Airworthiness1
+        }
+      ],
+      aircraftCertNoises: [
+        {
+          partIndex: 11,
+          part: aircraftCertNoises.aircraft1Noise1
+        }
+      ],
+      aircraftCertPermitsToFly: [
+        {
+          partIndex: 12,
+          part: aircraftCertPermitsToFly.aircraft1PermitToFly1
+        }
+      ],
+      aircraftCertRadios: [
+        {
+          partIndex: 13,
+          part: aircraftCertRadios.aircraft1Radio1
+        }
+      ]
+    }
+  ]);
+}(angular));

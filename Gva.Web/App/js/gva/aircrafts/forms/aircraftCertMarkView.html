@@ -1,0 +1,37 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.markViewDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.valid"></label>
+          <input disabled name="valid" type="text" class="form-control input-sm" value="{{model.valid.name}}" />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.mark"></label>
+          <input disabled name="scode" type="text" class="form-control input-sm" value="{{model.mark}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.ltrInNumber"></label>
+          <input disabled name="ltrInNumber" type="text" class="form-control input-sm" value="{{model.ltrInNumber}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.ltrInDate"></label>
+          <input disabled name="ltrInDate" type="text" class="form-control input-sm" value="{{model.ltrInDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.ltrCaaNumber"></label>
+          <input disabled name="ltrCaaNumber" type="text" class="form-control input-sm" value="{{model.ltrCaaNumber}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.markViewDirective.ltrCaaDate"></label>
+          <input disabled name="ltrCaaDate" type="text" class="form-control input-sm" value="{{model.ltrCaaDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

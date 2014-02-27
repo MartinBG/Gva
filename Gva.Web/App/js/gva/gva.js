@@ -74,6 +74,63 @@
       name: 'gvaRating',
       templateUrl: 'gva/persons/forms/personRating.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertRegisterView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertRegView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertSmodView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertSmodView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertMarkView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertMarkView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertAirworthinessView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertAirworthinessView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertNoiseView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertNoiseView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertPermittoflyView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertPermitToFlyView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertRadioView',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertRadioView.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertSmod',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertSmod.html',
+      controller: 'AircraftCertSmodCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertMark',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertMark.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertAirworthiness',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertAirworthiness.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertPermit',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertPermitToFly.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertNoise',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertNoise.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertRadio',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertRadio.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertReg',
+      templateUrl: 'gva/aircrafts/forms/aircraftCertReg.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -94,7 +151,7 @@
       .state(['root.applications.edit.linkPart'       , '/linkPart?currentDocId&docFileKey&docFileName'                                            , ['@root.applications.edit', 'gva/applications/views/applicationsEditLinkPart.html', 'ApplicationsEditLinkPartCtrl']]);
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.persons'                                            , '/persons?exact&lin&uin&names&licences&ratings&organization'                                                                             ])
+      .state(['root.persons'                                            , '/persons?exact&lin&uin&names&licences&ratings&organization'                                                                                                      ])
       .state(['root.persons.search'                                     , ''                                           , ['@root'             , 'gva/persons/views/personsSearch.html'                    , 'PersonsSearchCtrl'            ]])
       .state(['root.persons.new'                                        , '/new'                                       , ['@root'             , 'gva/persons/views/personsNew.html'                       , 'PersonsNewCtrl'               ]])
       .state(['root.persons.view'                                       , '/:id'                                       , ['@root'             , 'gva/persons/views/personsView.html'                      , 'PersonsViewCtrl'              ]])
@@ -155,5 +212,40 @@
       .state(['root.persons.view.documentOthers.new.choosePublisher'    , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'       , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.documentOthers.edit'                   , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentOthers/othersEdit.html'        , 'DocumentOthersEditCtrl'       ]])
       .state(['root.persons.view.documentOthers.edit.choosePublisher'   , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'       , 'ChoosePublisherCtrl'          ]]);
+  }]).config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state(['root.aircrafts'                                          , '/aircrafts'                                                                                                                                                                 ])
+      .state(['root.aircrafts.search'                                   , ''                                           , ['@root'               , 'gva/aircrafts/views/aircraftsSearch.html'                          , 'AircraftsSearchCtrl'          ]])
+      .state(['root.aircrafts.new'                                      , '/new'                                       , ['@root'               , 'gva/aircrafts/views/aircraftsNew.html'                             , 'AircraftsNewCtrl'             ]])
+      .state(['root.aircrafts.view'                                     , '/:id'                                       , ['@root'               , 'gva/aircrafts/views/aircraftsView.html'                            , 'AircraftsViewCtrl'            ]])
+      .state(['root.aircrafts.view.currentReg'                          , '/current/:ind'                              , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsView.html'                        , 'CertRegsViewCtrl'             ]])
+      .state(['root.aircrafts.view.regs'                                , '/regs'                                                                                                                                                                      ])
+      .state(['root.aircrafts.view.regs.search'                         , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsSearch.html'                      , 'CertRegsSearchCtrl'           ]])
+      .state(['root.aircrafts.view.regs.new'                            , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsNew.html'                         , 'CertRegsNewCtrl'              ]])
+      .state(['root.aircrafts.view.regs.edit'                           , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsEdit.html'                        , 'CertRegsEditCtrl'             ]])
+      .state(['root.aircrafts.view.smods'                               , '/smods'                                                                                                                                                                     ])
+      .state(['root.aircrafts.view.smods.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certSmods/smodsSearch.html'                    , 'CertSmodsSearchCtrl'          ]])
+      .state(['root.aircrafts.view.smods.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certSmods/smodsNew.html'                       , 'CertSmodsNewCtrl'             ]])
+      .state(['root.aircrafts.view.smods.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certSmods/smodsEdit.html'                      , 'CertSmodsEditCtrl'            ]])
+      .state(['root.aircrafts.view.marks'                               , '/marks'                                                                                                                                                                     ])
+      .state(['root.aircrafts.view.marks.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certMarks/marksSearch.html'                    , 'CertMarksSearchCtrl'          ]])
+      .state(['root.aircrafts.view.marks.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certMarks/marksNew.html'                       , 'CertMarksNewCtrl'             ]])
+      .state(['root.aircrafts.view.marks.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certMarks/marksEdit.html'                      , 'CertMarksEditCtrl'            ]])
+      .state(['root.aircrafts.view.airworthinesses'                     , '/airworthinesses'                                                                                                                                                           ])
+      .state(['root.aircrafts.view.airworthinesses.search'              , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certAirworthinesses/airworthinessesSearch.html', 'CertAirworthinessesSearchCtrl']])
+      .state(['root.aircrafts.view.airworthinesses.new'                 , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certAirworthinesses/airworthinessesNew.html'   , 'CertAirworthinessesNewCtrl'   ]])
+      .state(['root.aircrafts.view.airworthinesses.edit'                , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certAirworthinesses/airworthinessesEdit.html'  , 'CertAirworthinessesEditCtrl'  ]])
+      .state(['root.aircrafts.view.permits'                             , '/permits'                                                                                                                                                                   ])
+      .state(['root.aircrafts.view.permits.search'                      , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certPermits/permitsSearch.html'                , 'CertPermitsToFlySearchCtrl'   ]])
+      .state(['root.aircrafts.view.permits.new'                         , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certPermits/permitsNew.html'                   , 'CertPermitsToFlyNewCtrl'      ]])
+      .state(['root.aircrafts.view.permits.edit'                        , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certPermits/permitsEdit.html'                  , 'CertPermitsToFlyEditCtrl'     ]])
+      .state(['root.aircrafts.view.noises'                              , '/noises'                                                                                                                                                                    ])
+      .state(['root.aircrafts.view.noises.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certNoises/noisesSearch.html'                  , 'CertNoisesSearchCtrl'         ]])
+      .state(['root.aircrafts.view.noises.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certNoises/noisesNew.html'                     , 'CertNoisesNewCtrl'            ]])
+      .state(['root.aircrafts.view.noises.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certNoises/noisesEdit.html'                    , 'CertNoisesEditCtrl'           ]])
+      .state(['root.aircrafts.view.radios'                              , '/radios'                                                                                                                                                                    ])
+      .state(['root.aircrafts.view.radios.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosSearch.html'                  , 'CertRadiosSearchCtrl'         ]])
+      .state(['root.aircrafts.view.radios.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosNew.html'                     , 'CertRadiosNewCtrl'            ]])
+      .state(['root.aircrafts.view.radios.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosEdit.html'                    , 'CertRadiosEditCtrl'           ]]);
   }]);
 }(angular));

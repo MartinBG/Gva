@@ -1,0 +1,23 @@
+﻿<sc-button name="createBtn" btn-click="newCertReg()" text="aircrafts.regSearch.newReg" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="regs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertReg(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertReg(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.isActive.name" title="aircrafts.regSearch.isActive">
+  </sc-column>
+  <sc-column data="part.certNumber" title="aircrafts.regSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.certDate" title="aircrafts.regSearch.certDate" type="date">
+  </sc-column>
+  <sc-column data="part.typeCert.aircraftTypeCertificateType.name" title="aircrafts.regSearch.aircraftTypeCertificateType">
+  </sc-column>
+  <sc-column data="part.aircraftNewOld.name" title="aircrafts.regSearch.aircraftNewOld">
+  </sc-column>
+  <sc-column data="part.operationType.name" title="aircrafts.regSearch.operationType">
+  </sc-column>
+  <sc-column data="part.removal.date" title="aircrafts.regSearch.removalDate" type="date">
+  </sc-column>
+  <sc-column data="part.removal.reason" title="aircrafts.regSearch.removalReason">
+  </sc-column>
+</sc-datatable>

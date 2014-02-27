@@ -1,0 +1,19 @@
+﻿<sc-button name="createBtn" btn-click="newCertSmod()" text="aircrafts.smodSearch.newSmod" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="smods" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertSmod(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertSmod(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.valid.name" title="aircrafts.smodSearch.valid">
+  </sc-column>
+  <sc-column data="part.scode" title="aircrafts.smodSearch.scode">
+  </sc-column>
+  <sc-column data="part.ltrInNumber" title="aircrafts.smodSearch.ltrInNumber">
+  </sc-column>
+  <sc-column data="part.ltrInDate" title="aircrafts.smodSearch.ltrInDate" type="date">
+  </sc-column>
+  <sc-column data="part.ltrCaaNumber" title="aircrafts.smodSearch.ltrCaaNumber">
+  </sc-column>
+  <sc-column data="part.ltrCaaDate" title="aircrafts.smodSearch.ltrCaaDate" type="date">
+  </sc-column>
+</sc-datatable>

@@ -3,6 +3,319 @@
   'use strict';
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
+      aircrafts: {
+        viewAircraft: {
+          aircraftProducer: 'Производител',
+          aircraftCategory: 'Тип ВС',
+          icao: 'ICAO',
+          modelName: 'Модел ВС',
+          modelNameAlt: 'Модел ВС (английски)',
+          manSN: 'MSN (сериен номер)',
+          cofAType: 'CofA Type',
+          edit: 'Редакция'
+        },
+        regSearch: {
+          isActive: 'Активна',
+          certNumber: '№',
+          certDate: 'Дата на издаване',
+          aircraftTypeCertificateType: 'Типов сертификат',
+          aircraftNewOld: 'Ново ВС',
+          operationType: 'Тип на опериране',
+          removalDate: 'Дата на отписване',
+          removalReason: 'Причина за отписване',
+          newReg: 'Нова регистрация'
+        },
+        newReg: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editReg: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        regView: {
+          first: 'Първа рег.',
+          last: 'Последна рег.',
+          prev: 'Предходна рег.',
+          next: 'Следваща рег.',
+          firstReg: 'Първа рег № ',
+          lastReg: 'Посл. рег. № ',
+          register: 'рег. ',
+          regFrom: ' от '
+        },
+        smodSearch: {
+          valid: 'Валиден',
+          scode: 'S-mode code',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата',
+          newSmod: 'Нов S-code'
+        },
+        newSmod: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editSmod: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        markSearch: {
+          valid: 'Валиден',
+          mark: 'Рег. знак',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата',
+          newMark: 'Нов знак'
+        },
+        newMark: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editMark: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        airworthinessSearch: {
+          aircraftCertificateType: 'Валиден',
+          refNumber: 'Рег. знак',
+          issueDate: 'Тяхно писмо №',
+          validToDate: 'Тяхна дата',
+          newAirworthiness: 'Нова годност'
+        },
+        newAirworthiness: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAirworthiness: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        permitSearch: {
+          issuePlace: 'Място на издаване',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          pointFrom: 'Начален пункт',
+          pointTo: 'Краен пункт',
+          planStops: 'Планирани спирания',
+          crew: 'Екипаж',
+          newPermit: 'Ново разрешение'
+        },
+        newPermit: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editPermit: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        noiseSearch: {
+          regNumber: '№',
+          standart: 'Стандарт за шум',
+          issueDate: 'Дата на издаване',
+          flyover: 'Прелитане',
+          approach: 'Приближаване',
+          lateral: 'Странично',
+          overflight: 'Полет над',
+          takeoff: 'Излитане',
+          newNoise: 'Ново удостоверение'
+        },
+        newNoise: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editNoise: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        radioSearch: {
+          valid: 'Валидно',
+          certNumber: '№',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          aircraftRadioType: 'Тип на радиооборудването',
+          count: 'Брой',
+          producer: 'Производител',
+          model: 'Модел',
+          newRadio: 'Ново разрешително'
+        },
+        newRadio: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editRadio: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        regViewDirective: {
+          title: 'Текуща регистрация',
+          currentCert: 'Текущ запис',
+          lastCert: 'Последен запис',
+          firstCert: 'Първи запис',
+          certNumber: 'Рег. номер',
+          register: 'Регистър',
+          regMark: 'Рег. знак',
+          certDate: 'Дата на рег.',
+          owner: 'Собственик',
+          oper: 'Оператор',
+          operationType: 'Категория',
+          limitations: 'Ограничения',
+          aircraftTypeCertificateType: 'Типов сертификат'
+        },
+        smodViewDirective: {
+          title: 'S-code',
+          valid: 'Валиден',
+          scode: 'S-mode code',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата'
+        },
+        markViewDirective: {
+          title: 'Регистрационен знак',
+          valid: 'Валиден',
+          mark: 'Рег. знак',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата'
+        },
+        airworthinessViewDirective: {
+          title: 'Летателна годност',
+          aircraftCertificateType: 'Тип',
+          regNumber: '№',
+          refNumber: 'Реф.№',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност'
+        },
+        noiseViewDirective: {
+          title: 'Удостоверение за шум',
+          regNumber: '№',
+          standart: 'Стандарт за шум',
+          issueDate: 'Дата на издаване',
+          flyover: 'Прелитане',
+          approach: 'Приближаване',
+          lateral: 'Странично',
+          overflight: 'Полет над',
+          takeoff: 'Излитане'
+        },
+        permitViewDirective: {
+          title: 'Разрешениe за полет',
+          issuePlace: 'Място на издаване',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          pointFrom: 'Начален пункт',
+          pointTo: 'Краен пункт',
+          planStops: 'Планирани спирания',
+          crew: 'Екипаж'
+        },
+        radioViewDirective: {
+          title: 'Разрешително за използване на радиостанция',
+          valid: 'Валидно',
+          certNumber: '№',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          aircraftRadioType: 'Тип на радиооборудването',
+          count: 'Брой',
+          producer: 'Производител',
+          model: 'Модел'
+        },
+        smodDirective: {
+          title: 'S-code',
+          valid: 'Валиден',
+          scode: 'S-mode code',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата',
+          caaTo: 'ГВА писмо до',
+          caaJob: 'ГВА писмо длъжност',
+          caaToAddress: 'ГВА писмо адрес',
+          getScode: 'Генерирай S-код'
+        },
+        markDirective: {
+          title: 'Регистрационен знак',
+          valid: 'Валиден',
+          mark: 'Регистрационен знак',
+          ltrInNumber: 'Тяхно писмо №',
+          ltrInDate: 'Тяхна дата',
+          ltrCaaNumber: 'ГВА писмо №',
+          ltrCaaDate: 'ГВА дата'
+        },
+        airworthinessDirective: {
+          title: 'Летателна годност',
+          aircraftCertificateType: 'Тип',
+          regNumber: '№',
+          refNumber: 'Реф.№',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност'
+        },
+        permitDirective: {
+          title: 'Разрешениe за полет',
+          issuePlace: 'Място на издаване',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          purpose: 'Обхват на разрешението',
+          notes: 'Условия/Забележки',
+          pointFrom: 'Начален пункт',
+          pointTo: 'Краен пункт',
+          planStops: 'Планирани спирания',
+          crew: 'Екипаж',
+          purposeAlt: 'Обхват на разрешението (англ.)',
+          notesAlt: 'Условия/Забележки (англ.)',
+          pointFromAlt: 'Начален пункт (англ.)',
+          pointToAlt: 'Краен пункт (англ.)',
+          planStopsAlt: 'Планирани спирания (англ.)',
+          crewAlt: 'Екипаж (англ.)'
+        },
+        noiseDirective: {
+          title: 'Удостоверение за шум',
+          regNumber: '№',
+          standart: 'Стандарт за шум',
+          standartAlt: 'Стандарт за шум (англ.)',
+          issueDate: 'Дата на издаване',
+          flyover: 'Прелитане',
+          approach: 'Приближаване',
+          lateral: 'Странично',
+          overflight: 'Полет над',
+          takeoff: 'Излитане',
+          modifications: 'Модификации',
+          modificationsAlt: 'Модификации (англ.)',
+          notes: 'Забележки'
+        },
+        radioDirective: {
+          title: 'Разрешително за използване на радиостанция',
+          certNumber: '№',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          valid: 'Валидно',
+          aircraftRadioType: 'Тип на радиооборудването',
+          count: 'Брой',
+          producer: 'Производител',
+          model: 'Модел',
+          power: 'Мощност',
+          'class': 'Клас на излъчване',
+          bandwidth: 'Честотна лента'
+        },
+        regDirective: {
+          title: 'Регистрация',
+          typeCertTitle: 'Типов сертификат',
+          certNumber: 'Рег. номер',
+          certDate: 'Дата на издаване',
+          register: 'Регистър',
+          aircraftCertificateType: 'Вид удостоверение',
+          aircraftNewOld: 'ВС е ново',
+          operationType: 'Предвиждан тип на опериране',
+          inspector: 'Инспектор',
+          oper: 'Оператор',
+          typeCertNumber: 'Рег. номер',
+          typeCertDate: 'Дата на издаване',
+          typeCertRelease: 'Издание номер',
+          contry: 'Държава',
+          aircraftTypeCertificateType: 'Типов сертификат'
+        }
+      },
       persons: {
         search: {
           names: 'Име',
@@ -185,8 +498,8 @@
           totalLastMonths: 'Общ нальот за посл. 12 месеца',
           notUnique: 'Данните се дублират с вече съществуващ запис'
         },
-        ratingEditionDirective : {
-          title:'Вписване/Потвърждение',
+        ratingEditionDirective: {
+          title: 'Вписване/Потвърждение',
           documentDateValidFrom: 'Дата на вписване',
           documentDateValidTo: 'Валидно до',
           inspector: 'Инспектор',
@@ -477,7 +790,7 @@
           file: 'Файл'
         },
         ratingSearch: {
-          newRating : 'Нов клас',
+          newRating: 'Нов клас',
           ratingTypeOrRatingLevel: 'Тип ВС/Степен',
           classOrCategory: 'Клас/Подклас (Категория)',
           authorizationAndLimitations: 'Разрешение (ограничения)',
@@ -489,7 +802,7 @@
           personRatingModel: 'Модел'
         },
         ratingEditionsSearch: {
-          newEdition : 'Ново вписване/Потвърждаване',
+          newEdition: 'Ново вписване/Потвърждаване',
           ratingTypeOrRatingLevel: 'Тип ВС/Степен',
           classOrCategory: 'Клас/Подклас (Категория)',
           authorizationAndLimitations: 'Разрешение (ограничения)',
@@ -695,7 +1008,32 @@
         'root.persons.view.documentOthers.new': 'Нов документ',
         'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentOthers.edit': 'Редакция на документ',
-        'root.persons.view.documentOthers.edit.choosePublisher':  'Избор на издател'
+        'root.persons.view.documentOthers.edit.choosePublisher':  'Избор на издател',
+        'root.aircrafts': 'ВС',
+        'root.aircrafts.new': 'Ново ВС',
+        'root.aircrafts.view': 'Данни за ВС',
+        'root.aircrafts.view.regs': 'Регистрации',
+        'root.aircrafts.view.regs.new': 'Нова регистрация',
+        'root.aircrafts.view.regs.edit': 'Редакция на регистрация',
+        'root.aircrafts.view.currentReg': 'Текуща регистрация',
+        'root.aircrafts.view.smods': 'S-code',
+        'root.aircrafts.view.smods.new': 'Нов S-code',
+        'root.aircrafts.view.smods.edit': 'Редакция на S-code',
+        'root.aircrafts.view.marks': 'Регистрационни знакове',
+        'root.aircrafts.view.marks.new': 'Нов знак',
+        'root.aircrafts.view.marks.edit': 'Редакция на знак',
+        'root.aircrafts.view.airworthinesses': 'Летателни годности',
+        'root.aircrafts.view.airworthinesses.new': 'Нова годност',
+        'root.aircrafts.view.airworthinesses.edit': 'Редакция на годност',
+        'root.aircrafts.view.permits': 'Разрешения за полет',
+        'root.aircrafts.view.permits.new': 'Ново разрешение',
+        'root.aircrafts.view.permits.edit': 'Редакция на разрешение',
+        'root.aircrafts.view.noises': 'Удостоверения за шум',
+        'root.aircrafts.view.noises.new': 'Ново удостоверение',
+        'root.aircrafts.view.noises.edit': 'Редакция на удостоверение',
+        'root.aircrafts.view.radios': 'Разрешителни за използване на радиостанция',
+        'root.aircrafts.view.radios.new': 'Ново разрешително',
+        'root.aircrafts.view.radios.edit': 'Редакция на разрешително'
       }
     });
   }]);

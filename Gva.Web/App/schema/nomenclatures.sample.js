@@ -181,6 +181,16 @@
     aircraftTypes: require('./aircraftType'),
 
     aircraftTypeGroups: require('./aircraftTypeGroup'),
+    aircraftCategories: require('./aircraftCategory'),
+    aircraftProducers: require('./aircraftProducer'),
+    aircraftSCodeTypes: require('./aircraftSCodeType'),
+    aircraftCertificateTypes: require('./aircraftCertificateType'),
+    aircraftTypeCertificateTypes: require('./aircraftTypeCertificateType'),
+    registers: require('./register'),
+    operationTypes: require('./operationType'),
+    aircraftNewOld: require('./aircraftNewOld'),
+    aircraftRadioTypes: require('./aircraftRadioType'),
+    
 
     docFormatType: require('./docFormatType'),
 

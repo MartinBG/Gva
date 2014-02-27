@@ -1,0 +1,19 @@
+﻿<sc-button name="createBtn" btn-click="newCertMark()" text="aircrafts.markSearch.newMark" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="marks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertMark(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertMark(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.valid.name" title="aircrafts.markSearch.valid">
+  </sc-column>
+  <sc-column data="part.mark" title="aircrafts.markSearch.mark">
+  </sc-column>
+  <sc-column data="part.ltrInNumber" title="aircrafts.markSearch.ltrInNumber">
+  </sc-column>
+  <sc-column data="part.ltrInDate" title="aircrafts.markSearch.ltrInDate" type="date">
+  </sc-column>
+  <sc-column data="part.ltrCaaNumber" title="aircrafts.markSearch.ltrCaaNumber">
+  </sc-column>
+  <sc-column data="part.ltrCaaDate" title="aircrafts.markSearch.ltrCaaDate" type="date">
+  </sc-column>
+</sc-datatable>

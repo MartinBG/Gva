@@ -1,0 +1,58 @@
+﻿<ng-form name="viewCertForm" class="card">
+    <div class="well well-sm" ng-show="reg.firstReg && reg.lastReg">
+      <div class="row">
+        <div class="col-sm-12">
+          <span l10n-text="aircrafts.regView.firstReg"></span>
+          <span>{{reg.firstReg.certNumber}}(</span>
+          <span l10n-text="aircrafts.regView.register"></span>
+          <span>{{reg.firstReg.register.name}}), {{reg.firstReg.regMark}}</span>
+          <span l10n-text="aircrafts.regView.regFrom"></span>
+          <span>{{reg.firstReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <span l10n-text="aircrafts.regView.lastReg"></span>
+          <span>{{reg.lastReg.certNumber}}(</span>
+          <span l10n-text="aircrafts.regView.register"></span>
+          <span>{{reg.lastReg.register.name}}), {{reg.lastReg.regMark}}</span>
+          <span l10n-text="aircrafts.regView.regFrom"></span>
+          <span>{{reg.lastReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class ="row">
+      <div class="form-group col-md-7 col-md-offset-3 col-sm-offset-1 col-sm-10">
+        <button name="firstBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.firstIndex)" ng-disabled="!reg.prevIndex">
+          <span ng-class="{'glyphicon glyphicon-loading': firstBtn.$pending, 'fa fa-angle-double-left': !firstBtn.$pending }"></span>
+          <span l10n-text="aircrafts.regView.first"></span>
+        </button>
+        <button name="prevBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.prevIndex)" ng-disabled="!reg.prevIndex">
+          <span ng-class="{'glyphicon glyphicon-loading': prevBtn.$pending, 'fa fa-angle-left': !prevBtn.$pending }"></span>
+          <span l10n-text="aircrafts.regView.prev"></span>
+        </button>
+        <button name="nextBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.nextIndex)" ng-disabled="!reg.nextIndex">
+          <span l10n-text="aircrafts.regView.next"></span>
+          <span ng-class="{'glyphicon glyphicon-loading': nextBtn.$pending, 'fa fa-angle-right': !nextBtn.$pending }"></span>
+        </button>
+        <button name="lastBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.lastIndex)" ng-disabled="!reg.nextIndex">
+          <span l10n-text="aircrafts.regView.last"></span>
+          <span ng-class="{'glyphicon glyphicon-loading': lastBtn.$pending, 'fa fa-angle-double-right': !lastBtn.$pending }"></span>
+        </button>
+      </div>
+    </div>
+</ng-form>
+
+<gva-aircraft-cert-airworthiness-view name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-view>
+
+<gva-aircraft-cert-mark-view name="aircraftCertMarkForm" ng-model="mark.part"></gva-aircraft-cert-mark-view>
+
+<gva-aircraft-cert-register-view name="aircraftCertRegisterForm" ng-model="reg.part"></gva-aircraft-cert-register-view>
+
+<gva-aircraft-cert-smod-view name="aircraftCertSmodForm" ng-model="smod.part"></gva-aircraft-cert-smod-view>
+
+<gva-aircraft-cert-noise-view name="aircraftCertNoiseForm" ng-model="noise.part"></gva-aircraft-cert-noise-view>
+
+<gva-aircraft-cert-permittofly-view name="aircraftCertPermitToFlyForm" ng-model="permit.part"></gva-aircraft-cert-permittofly-view>
+
+<gva-aircraft-cert-radio-view name="aircraftCertPermitToFlyForm" ng-model="radio.part"></gva-aircraft-cert-radio-view>

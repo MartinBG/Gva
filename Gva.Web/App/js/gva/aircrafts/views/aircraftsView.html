@@ -1,0 +1,74 @@
+﻿<div>
+  <form class="form-inline well well-sm card">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.aircraftProducer"></span>
+          <input disabled name="producer" type="text" class="form-control" value="{{aircraft.aircraftProducer.name}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.aircraftCategory"></span>
+          <input disabled name="category" type="text" class="form-control" value="{{aircraft.aircraftCategory.name}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.icao"></span>
+          <input disabled name="icao" type="text" class="form-control" value="{{aircraft.icao}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.modelName"></span>
+          <input disabled name="name" type="text" class="form-control" value="{{aircraft.modelName}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.modelNameAlt"></span>
+          <input disabled name="nameAlt" type="text" class="form-control" value="{{aircraft.modelNameAlt}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.manSN"></span>
+          <input disabled name="manSN" type="text" class="form-control" value="{{aircraft.manSN}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-offset-10 col-md-2">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.viewAircraft.edit" class="btn btn-primary btn-sm pull-right" icon="glyphicon-pencil"></sc-button>
+      </div>
+    </div>
+  </form>
+    <sc-tabs tab-list="{
+      'Регистрация': {
+        'Текуща регистрация': 'root.aircrafts.view.currentReg',
+        'Регистрации': 'root.aircrafts.view.regs.search',
+        'Летателни годности': 'root.aircrafts.view.airworthinesses.search',
+        'Регистрационни знаци': 'root.aircrafts.view.marks.search',
+        'S-code': 'root.aircrafts.view.smods.search',
+        'Разрешения за полет': 'root.aircrafts.view.permits.search',
+        'Удостоверения за шум': 'root.aircrafts.view.noises.search',
+        'Разрешителни за радиостанция': 'root.aircrafts.view.radios.search'
+       },
+      'Свързани лица' : {},
+      'Оборудване' : {},
+      'Залози' : {},
+      'Поддръжка' : {},
+      'Инциденти' : {},
+      'Инспекции' : {},
+      'Заявления' : {},
+      'Други документи' : {},
+      'Опис' : {}
+    }"></sc-tabs>
+  <div class="tab-content">
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>
+</div>

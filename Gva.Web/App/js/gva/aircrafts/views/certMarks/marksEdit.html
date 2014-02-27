@@ -1,0 +1,11 @@
+﻿<ng-form name="editCertMarkForm" sc-validate="{}">
+
+  <gva-aircraft-cert-mark name="aircraftCertMarkForm" ng-model="mark.part"></gva-aircraft-cert-mark>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editMark.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editCertMarkForm.$pristine"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editMark.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

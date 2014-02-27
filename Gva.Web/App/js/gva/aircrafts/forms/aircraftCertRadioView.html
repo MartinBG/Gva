@@ -1,0 +1,39 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.radioViewDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.valid"></label>
+          <input disabled name="valid" type="text" class="form-control input-sm" value="{{model.valid.name}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.certNumber"></label>
+          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.certNumber}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.issueDate"></label>
+          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.validToDate"></label>
+          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{model.validToDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.aircraftRadioType"></label>
+          <input disabled name="aircraftRadioType" type="text" class="form-control input-sm" value="{{model.radios.aircraftRadioType.name}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.producer"></label>
+          <input disabled name="producer" type="text" class="form-control input-sm" value="{{model.radios.producer}}" />
+        </div>
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="aircrafts.radioViewDirective.model"></label>
+          <input disabled name="model" type="text" class="form-control input-sm" value="{{model.radios.model}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>
