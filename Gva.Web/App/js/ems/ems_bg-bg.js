@@ -122,6 +122,15 @@
           }
 
         },
+        nextStage: {
+          stage: 'Етап',
+          startingDate: 'Начална дата',
+          executors: 'Изпълнители',
+          expectedEndingDate: 'Очаквана дата прикл.',
+          endingDate: 'Дата на приключване',
+          save: 'Запис',
+          back: 'Назад'
+        },
         search: {
           fromDate: 'От дата',
           toDate: 'До дата',
@@ -231,6 +240,9 @@
         'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
         'root.docs.edit.stages': 'Етапи',
+        'root.docs.edit.stages.next': 'Следващ етап',
+        'root.docs.edit.stages.edit': 'Редакция на етап',
+        'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',

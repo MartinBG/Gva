@@ -1,5 +1,5 @@
-﻿/*global angular, _, jQuery*/
-(function (angular, _) {
+﻿/*global angular, _, require, jQuery, moment*/
+(function (angular, _, require, jQuery, moment) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
@@ -60,7 +60,7 @@
       isVisibleCollapseAssignment: false,
       isVisibleCollapsePermissions: false,
       isRead: false,
-      isDocIncoming: true,
+      isDocIncoming: false,
       isDocInternal: false,
       isDocInternalOutgoing: false,
       isDocOutgoing: false,
@@ -143,24 +143,56 @@
           return [200, result];
         })
       .when('POST', '/api/docs/new/create',
-        function ($jsonData, docs, docCases) {
+        function ($jsonData, docs, docCases, docStages) {
 
           if (!$jsonData) {
             return [400];
           }
 
-          var today = new Date();
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
           var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData);
+
+          var todayDate = moment();
 
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.newassignmentType = 2;
-          newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-          newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
+          newDoc.assignmentDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
+          newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
 
+          var docTypes = require('./docType');
+          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          if (docTypeAlias === 'resolution') {
+            newDoc.isResolution = true;
+          }
+          else if (docTypeAlias === 'task') {
+            newDoc.isTask = true;
+          }
+          else if (docTypeAlias === 'note') {
+            newDoc.isRemark = true;
+          }
+          else {
+            var docDirections = require('./docDirection');
+            var docDirectionAlias =
+              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+
+            if (docDirectionAlias === 'Incomming') {
+              newDoc.isDocIncoming = true;
+            }
+            else if (docDirectionAlias === 'Internal') {
+              newDoc.isDocInternal = true;
+            }
+              else if (docDirectionAlias === 'Outgoing') {
+              newDoc.isDocOutgoing = true;
+            }
+            else if (docDirectionAlias === 'InternalOutgoing') {
+              newDoc.isDocInternalOutgoing = true;
+            }
+          }
+
+          //Add docRelations
           var docCaseObj;
           if (!newDoc.parentDocId) {
             docCaseObj = {
@@ -188,19 +220,46 @@
 
           newDoc.docRelations = docCaseObj.docCase;
 
+          //Add docElectronicServiceStage
+          var electronicServiceStages = require('./electronicServiceStages');
+
+          var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
+
+          var eStage =
+            _(electronicServiceStages)
+            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
+            .first();
+
+          var newDocStage = {
+            docElectronicServiceStageId: nextDocEStageId,
+            electronicServiceStageId: eStage.nomValueId,
+            docId: newDoc.docId,
+            startingDate: todayDate.startOf('day').format('YYYY-MM-DDTHH:mm:ss'),
+            electronicServiceStageName: eStage.name,
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate:
+              todayDate.startOf('day').add('days', eStage.duration).format('YYYY-MM-DDTHH:mm:ss'),
+            endingDate: null,
+            isCurrentStage: true
+          };
+
+          docStages.push(newDocStage);
+
+          newDoc.docElectronicServiceStages = [newDocStage];
+
           docs.push(newDoc);
 
           return [200, { docId: newDoc.docId }];
         })
       .when('POST', '/api/docs/new/register',
-        function ($jsonData, docs, docCases) {
+        function ($jsonData, docs, docCases, docStages) {
           if (!$jsonData) {
             return [400];
           }
 
           var registeredDocIds = [];
 
-          var today = new Date();
+          var todayDate = moment();
 
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
@@ -211,13 +270,44 @@
           newDoc.docStatusName = 'Чернова';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.regNumber = nextDocId;
-          newDoc.regDate = new Date();
+          newDoc.regDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.regIndex = '000030';
           newDoc.newassignmentType = 2;
-          newDoc.assignmentDate = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-          newDoc.assignmentDeadline = new Date(today.getTime() + (48 * 60 * 60 * 1000));
-          newDoc.regUri = '000030-' + nextDocId + '-05.01.2014';
+          newDoc.assignmentDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
+          newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
+          newDoc.regUri = '000030-' + nextDocId + '-' + todayDate.format('YYYY-MM-DD');
 
+          var docTypes = require('./docType');
+          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          if (docTypeAlias === 'resolution') {
+            newDoc.isResolution = true;
+          }
+          else if (docTypeAlias === 'task') {
+            newDoc.isTask = true;
+          }
+          else if (docTypeAlias === 'note') {
+            newDoc.isRemark = true;
+          }
+          else {
+            var docDirections = require('./docDirection');
+            var docDirectionAlias =
+              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+
+            if (docDirectionAlias === 'Incomming') {
+              newDoc.isDocIncoming = true;
+            }
+            else if (docDirectionAlias === 'Internal') {
+              newDoc.isDocInternal = true;
+            }
+              else if (docDirectionAlias === 'Outgoing') {
+              newDoc.isDocOutgoing = true;
+            }
+            else if (docDirectionAlias === 'InternalOutgoing') {
+              newDoc.isDocInternalOutgoing = true;
+            }
+          }
+
+          //Add docRelations
           var docCaseObj;
           if (!newDoc.parentDocId) {
             docCaseObj = {
@@ -244,6 +334,33 @@
           });
 
           newDoc.docRelations = docCaseObj.docCase;
+
+          //Add docElectronicServiceStage
+          var electronicServiceStages = require('./electronicServiceStages');
+
+          var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
+
+          var eStage =
+            _(electronicServiceStages)
+            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
+            .first();
+
+          var newDocStage = {
+            docElectronicServiceStageId: nextDocEStageId,
+            electronicServiceStageId: eStage.nomValueId,
+            docId: newDoc.docId,
+            startingDate: todayDate.startOf('day').format('YYYY-MM-DDTHH:mm:ss'),
+            electronicServiceStageName: eStage.name,
+            electronicServiceStageExecutors: 'Служител ДКХ',
+            expectedEndingDate:
+              todayDate.startOf('day').add('days', eStage.duration).format('YYYY-MM-DDTHH:mm:ss'),
+            endingDate: null,
+            isCurrentStage: true
+          };
+
+          docStages.push(newDocStage);
+
+          newDoc.docElectronicServiceStages = [newDocStage];
 
           docs.push(newDoc);
 
@@ -275,4 +392,4 @@
           return [200];
         });
   });
-}(angular, _, jQuery));
+}(angular, _, require, jQuery, moment));

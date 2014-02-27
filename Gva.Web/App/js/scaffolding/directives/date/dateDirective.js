@@ -10,6 +10,8 @@
       restrict: 'E',
       replace: true,
       require: '?ngModel',
+      scope: {
+      },
       templateUrl: 'scaffolding/directives/date/dateDirective.html',
       link: function (scope, element, attrs, ngModel) {
         if (!ngModel) {
@@ -23,6 +25,10 @@
           autoclose: true,
           format: scDateConfig.datepickerFormat,
           language: 'bg'
+        });
+
+        attrs.$observe('readonly', function(value) {
+          scope.isReadonly = !!value;
         });
 
         ngModel.$render = function () {
@@ -63,7 +69,7 @@
         function changeDateOnSelect(ev) {
           ev.preventDefault();
           ev.stopPropagation();
-          
+
           changeDate(ev.date && moment(ev.date));
         }
 

@@ -133,6 +133,7 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
+    <Content Include="App\js\ems\docs\recources\docStage.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\remark.html" />
@@ -145,6 +146,12 @@
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\ems\docs\views\docsData.html" />
     <Content Include="App\js\common\root\views\root.html" />
+    <Content Include="App\js\ems\docs\views\endStage.html" />
+    <Content Include="App\js\ems\docs\views\endStageCtrl.js" />
+    <Content Include="App\js\ems\docs\views\editStage.html" />
+    <Content Include="App\js\ems\docs\views\editStageCtrl.js" />
+    <Content Include="App\js\ems\docs\views\nextStage.html" />
+    <Content Include="App\js\ems\docs\views\nextStageCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectCorrView.html" />
     <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectUnitView.html" />
@@ -290,6 +297,7 @@
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
     <Content Include="App\schema\nomenclatures\graduation.js" />
+    <Content Include="App\schema\nomenclatures\electronicServiceStages.js" />
     <Content Include="App\schema\nomenclatures\otherDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\publisherType.js" />
     <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
@@ -334,6 +342,8 @@
     <Content Include="App\test\ems\corrs\pageObjects\newCorrPO.js" />
     <Content Include="App\test\ems\corrs\pageObjects\searchCorrPO.js" />
     <Content Include="App\test\ems\corrs\specs\newCorrSpec.js" />
+    <Content Include="App\test\ems\docs\mocks\docsStagesHttp.js" />
+    <Content Include="App\test\ems\docs\mocks\docStages.js" />
     <Content Include="App\test\ems\docs\mocks\docCases.js" />
     <Content Include="App\test\ems\docs\pageObjects\selectCorrPO.js" />
     <Content Include="App\test\ems\docs\pageObjects\selectUnitPO.js" />

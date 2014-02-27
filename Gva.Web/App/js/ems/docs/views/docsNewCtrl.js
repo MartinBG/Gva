@@ -61,8 +61,7 @@
     };
 
     $scope.save = function (mode) {
-      $scope.docForm.$validate()
-      .then(function () {
+      $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
           if ($scope.docModel.parentDoc) {
             $scope.docModel.doc.parentDocId = $scope.docModel.parentDoc.docId;
@@ -84,11 +83,11 @@
 
           if (mode === 'register') {
             Doc.registerNew($scope.docModel.doc).$promise.then(function (result) {
-              $state.go('root.docs.search', { docIds: result.docIds.join(',')});
+              return $state.go('root.docs.search', { docIds: result.docIds.join(',')});
             });
           }
           else if (mode === 'create') {
-            Doc.createNew($scope.doc).$promise.then(function (result) {
+            Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
               return $state.go('root.docs.edit.view', { docId: result.docId });
             });
           }
@@ -101,7 +100,7 @@
         return $state.go('root.docs.edit.view', { docId: $stateParams.parentDocId });
       }
       else {
-        $state.go('root.docs.search');
+        return $state.go('root.docs.search');
       }
     };
   }

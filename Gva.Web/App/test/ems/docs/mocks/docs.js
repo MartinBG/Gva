@@ -5,8 +5,8 @@
   var nomenclatures = require('./nomenclatures.sample');
   var today = new Date();
 
-  angular.module('app').factory('docs', ['docCases',
-    function (docCases) {
+  angular.module('app').factory('docs', ['docCases', 'docStages',
+    function (docCases, docStages) {
       return [
         {
           docId: 1,
@@ -124,24 +124,7 @@
             }
           ],
           isVisibleDocWorkflows: true,
-          docElectronicServiceStages: [
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за  административна услуга',
-              electronicServiceStageExecutors: '<b>Служител ДКХ</b>',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: false
-            },
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за отстраняване на заявителя',
-              electronicServiceStageExecutors: 'Служител ДКХ',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: true
-            }
-          ],
+          docElectronicServiceStages: _.filter(docStages, { docId: 1 }),
           docRelations: _(docCases).filter({ docCaseId: 1 }).first().docCase,
           docClassifications: [
             {
@@ -151,7 +134,6 @@
             {
               classificationName: 'Услуги',
               classificationDate: '2014-01-08T17:21:55.387'
-
             },
             {
               classificationName: 'Искане',
@@ -264,24 +246,7 @@
             }
           ],
           isVisibleDocWorkflows: true,
-          docElectronicServiceStages: [
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за  административна услуга',
-              electronicServiceStageExecutors: 'Служител ДКХ',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: false
-            },
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за  административна услуга',
-              electronicServiceStageExecutors: 'Служител ДКХ',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: false
-            }
-          ],
+          docElectronicServiceStages: _.filter(docStages, { docId: 2 }),
           docRelations: _(docCases).filter({ docCaseId: 2 }).first().docCase,
           docClassifications: [
             {
@@ -390,24 +355,7 @@
             }
           ],
           isVisibleDocWorkflows: true,
-          docElectronicServiceStages: [
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за  административна услуга',
-              electronicServiceStageExecutors: 'Служител ДКХ',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: false
-            },
-            {
-              startingDate: '2014-01-08T17:21:43.303',
-              electronicServiceStageName: 'Приемане на заявление за  административна услуга',
-              electronicServiceStageExecutors: 'Служител ДКХ',
-              expectedEndingDate: null,
-              endingDate: '2014-01-09T17:38:49.683',
-              isCurrentStage: false
-            }
-          ],
+          docElectronicServiceStages: _.filter(docStages, { docId: 3 }),
           docRelations: _(docCases).filter({ docCaseId: 3 }).first().docCase,
           docClassifications: [
             {
