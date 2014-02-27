@@ -16,6 +16,7 @@
           loadedValuesPromise,
           queryFunc,
           initSelectionFunc,
+          nomObjFunc,
           paramsFunc,
           createQuery;
 
@@ -49,8 +50,16 @@
         };
       }
 
+      if (iAttrs.nomObj) {
+        nomObjFunc = $parse(iAttrs.nomObj);
+      }
+
       if (iAttrs.mode === 'id') {
         ngModel.$parsers.push(function (viewValue) {
+          if (nomObjFunc && nomObjFunc.assign) {
+            nomObjFunc.assign(scope.$parent, viewValue);
+          }
+
           if (viewValue === null || viewValue === undefined) {
             return viewValue;
           } else {
@@ -64,6 +73,10 @@
           Nomenclature
             .get(createQuery({ id: id })).$promise
             .then(function (result) {
+              if (nomObjFunc && nomObjFunc.assign) {
+                nomObjFunc.assign(scope.$parent, result);
+              }
+
               callback(result);
             });
         };
