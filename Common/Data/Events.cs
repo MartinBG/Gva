@@ -36,6 +36,11 @@ namespace Common.Data
             Handlers.Add(handler);
         }
 
+        public static void Deregister(IEventHandler handler)
+        {
+            Handlers.Remove(handler);
+        }
+
         public static void Raise(IEvent e)
         {
             foreach (var handler in Handlers)

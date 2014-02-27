@@ -8,14 +8,16 @@ using Regs.Api.LotEvents;
 
 namespace Regs.Api.Repositories.LotRepositories
 {
-    public class LotRepository : ILotRepository
+    public class LotRepository : ILotRepository, IDisposable
     {
         private IUnitOfWork unitOfWork;
+        private IEnumerable<ILotEventHandler> eventHandlers;
 
         public LotRepository(IUnitOfWork unitOfWork, IEnumerable<ILotEventHandler> eventHandlers)
         {
             this.unitOfWork = unitOfWork;
 
+            this.eventHandlers = eventHandlers;
             foreach (var eventHandler in eventHandlers)
             {
                 Events.Register(eventHandler);
@@ -122,6 +124,14 @@ namespace Regs.Api.Repositories.LotRepositories
             commit.IsLoaded = true;
 
             return commit;
+        }
+
+        public void Dispose()
+        {
+            foreach (var eventHandler in this.eventHandlers)
+            {
+                Events.Deregister(eventHandler);
+            }
         }
     }
 }
