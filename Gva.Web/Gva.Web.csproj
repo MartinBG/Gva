@@ -460,6 +460,7 @@
     <Compile Include="Mappers\JObjectMapper.cs" />
     <Compile Include="Mappers\PartVersionMapper.cs" />
     <Compile Include="Mappers\PersonMapper.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="Models\InventoryItem.cs" />
     <Compile Include="Models\PartVersionDO.cs" />
     <Compile Include="Models\Person.cs" />

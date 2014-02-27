@@ -32,7 +32,7 @@
   <sc-column data="part.pageCount" title="persons.documentTrainingSearch.pageCount">
   </sc-column>
   <sc-column sortable="false" title="persons.documentTrainingSearch.file">
-    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+    <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>

@@ -1,4 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using AutoMapper;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Data;
@@ -8,12 +14,6 @@ using Gva.Web.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 
 namespace Gva.Web.Controllers
 {
@@ -62,11 +62,17 @@ namespace Gva.Web.Controllers
             {
                 var newLot = this.lotRepository.GetSet("Person").CreateLot(this.userContext);
 
-                newLot.CreatePart("personData", person.Value<JObject>("personData"), this.userContext);
+                JObject personData = new JObject();
+                personData.Add("part", person.Value<JObject>("personData"));
+                newLot.CreatePart("personData", personData, this.userContext);
 
-                newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
+                JObject personDocumentId = new JObject();
+                personDocumentId.Add("part", person.Value<JObject>("personDocumentId"));
+                newLot.CreatePart("personDocumentIds/*", personDocumentId, this.userContext);
 
-                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
+                JObject personAddress = new JObject();
+                personAddress.Add("part", person.Value<JObject>("personAddress"));
+                newLot.CreatePart("personAddresses/*", personAddress, this.userContext);
 
                 newLot.Commit(this.userContext);
 
@@ -91,8 +97,10 @@ namespace Gva.Web.Controllers
             IList<InventoryItem> inventory = new List<InventoryItem>();
             foreach (var partVersion in partVersions)
             {
-                JObject content = JObject.Parse(partVersion.TextContent);
+                JObject content = JObject.Parse(partVersion.TextContent).Value<JObject>("part");
+                JObject file = JObject.Parse(partVersion.TextContent).Value<JObject>("file");
                 JToken valid;
+                JToken publisher;
 
                 Commit commit = lot.Commits.FirstOrDefault(c => c.IsIndex == true);
                 PartVersion firstPartVersion = null;
@@ -117,7 +125,9 @@ namespace Gva.Web.Controllers
                     BookPageNumber = content.Value<string>("bookPageNumber"),
                     Number = content.Value<string>("documentNumber"),
                     Date = content.Value<DateTime?>("documentDateValidFrom") ?? content.Value<DateTime?>("completionDate"),
-                    Publisher = content.Value<string>("documentPublisher") ?? content.Value<JObject>("school").Value<string>("name"),
+                    Publisher = content.TryGetValue("documentPublisher", out publisher) ?
+                        (publisher.Type == JTokenType.Object ? publisher.Value<string>("name") : publisher.ToString()) :
+                        content.Value<JObject>("school").Value<string>("name"),
                     Valid = content.TryGetValue("valid", out valid) ? valid.Value<string>("name") : null,
                     FromDate = content.Value<DateTime?>("documentDateValidFrom"),
                     ToDate = content.Value<DateTime?>("documentDateValidTo"),
@@ -161,6 +171,15 @@ namespace Gva.Web.Controllers
                 {
                     inventoryItem.Name = content.Value<JObject>("personCheckDocumentRole").Value<string>("name");
                     inventoryItem.Name = content.Value<JObject>("personCheckDocumentType").Value<string>("name");
+                }
+
+                if (file != null)
+                {
+                    inventoryItem.File = new File()
+                    {
+                        Key = file.Value<string>("key"),
+                        Name = file.Value<string>("name")
+                    };
                 }
 
                 inventory.Add(inventoryItem);

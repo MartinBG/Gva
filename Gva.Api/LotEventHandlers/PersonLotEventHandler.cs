@@ -1,11 +1,11 @@
-﻿using Common.Data;
+﻿using System;
+using System.Linq;
+using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.Repositories;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
-using System;
-using System.Linq;
 
 namespace Gva.Api.LotEventHandlers
 {
@@ -41,7 +41,10 @@ namespace Gva.Api.LotEventHandlers
 
             if (person == null)
             {
-                person = new GvaPerson();
+                person = new GvaPerson()
+                {
+                    Lot = lot
+                };
                 this.UpdatePersonData(person, commit);
                 this.personRepository.AddPerson(person);
             }
@@ -60,7 +63,7 @@ namespace Gva.Api.LotEventHandlers
 
             if (personDataPart != null)
             {
-                var personDataContent = JObject.Parse(personDataPart.TextContent);
+                var personDataContent = JObject.Parse(personDataPart.TextContent).Value<JObject>("part");
 
                 var personBirthDate = Convert.ToDateTime(personDataContent.Value<string>("dateOfBirth"));
                 DateTime now = DateTime.Today;
@@ -89,7 +92,7 @@ namespace Gva.Api.LotEventHandlers
             person.Licences = string.Empty;
             foreach (var personLicencePart in personLicenceParts)
             {
-                var personLicenceContent = JObject.Parse(personLicencePart.TextContent);
+                var personLicenceContent = JObject.Parse(personLicencePart.TextContent).Value<JObject>("part");
                 person.Licences += string.Format(", {0}", personLicenceContent.Value<JObject>("licenceType").Value<string>("name"));
             }
         }
@@ -102,7 +105,7 @@ namespace Gva.Api.LotEventHandlers
             person.Ratings = string.Empty;
             foreach (var personRatingPart in personRatingParts)
             {
-                var personRatingContent = JObject.Parse(personRatingPart.TextContent);
+                var personRatingContent = JObject.Parse(personRatingPart.TextContent).Value<JObject>("part");
 
                 var retingType = personRatingContent.Value<JObject>("ratingType");
                 if (retingType != null)
@@ -121,7 +124,8 @@ namespace Gva.Api.LotEventHandlers
 
             if (personEmploymentPart != null)
             {
-                var personEmploymentContent = JObject.Parse(personEmploymentPart.TextContent);
+                var personEmploymentContent = JObject.Parse(personEmploymentPart.TextContent).Value<JObject>("part");
+
                 var organization = personEmploymentContent.Value<JObject>("organization");
                 person.Organization = organization == null ? null : organization.Value<string>("name");
                 person.Employment = personEmploymentContent.Value<JObject>("employmentCategory").Value<string>("name");

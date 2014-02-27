@@ -7,5 +7,7 @@ namespace Gva.Web.Models
         public int PartIndex { get; set; }
 
         public JObject Part { get; set; }
+
+        public JObject File { get; set; }
     }
 }

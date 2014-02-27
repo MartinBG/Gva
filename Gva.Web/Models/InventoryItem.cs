@@ -35,5 +35,7 @@ namespace Gva.Web.Models
         public string EditedBy { get; set; }
 
         public DateTime? EditedDate { get; set; }
+
+        public File File { get; set; }
     }
 }
