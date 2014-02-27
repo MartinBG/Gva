@@ -56,5 +56,10 @@ namespace Gva.Api.Repositories
             return this.unitOfWork.DbContext.Set<GvaPerson>()
                 .SingleOrDefault(p => p.GvaPersonLotId == personId);
         }
+
+        public void AddPerson(GvaPerson person)
+        {
+            this.unitOfWork.DbContext.Set<GvaPerson>().Add(person);
+        }
     }
 }

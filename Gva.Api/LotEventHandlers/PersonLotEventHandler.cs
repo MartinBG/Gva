@@ -1,5 +1,6 @@
 ﻿using Common.Data;
 using Gva.Api.Models;
+using Gva.Api.Repositories;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -12,11 +13,11 @@ namespace Gva.Api.LotEventHandlers
     {
         private static string[] parts = { "data", "employment", "licence", "rating" };
 
-        private IUnitOfWork unitOfWork;
+        private IPersonRepository personRepository;
 
-        public PersonLotEventHandler(IUnitOfWork unitOfWork)
+        public PersonLotEventHandler(IPersonRepository personRepository)
         {
-            this.unitOfWork = unitOfWork;
+            this.personRepository = personRepository;
         }
 
         public void Handle(IEvent e)
@@ -36,14 +37,13 @@ namespace Gva.Api.LotEventHandlers
                 return;
             }
 
-            var person = this.unitOfWork.DbContext.Set<GvaPerson>()
-                .SingleOrDefault(p => p.GvaPersonLotId == lot.LotId);
+            var person = this.personRepository.GetPerson(lot.LotId);
 
             if (person == null)
             {
                 person = new GvaPerson();
                 this.UpdatePersonData(person, commit);
-                this.unitOfWork.DbContext.Set<GvaPerson>().Add(person);
+                this.personRepository.AddPerson(person);
             }
             else
             {
