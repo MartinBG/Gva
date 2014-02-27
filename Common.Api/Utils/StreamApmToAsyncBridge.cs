@@ -168,9 +168,9 @@ namespace Common.Api.Utils
             this.stream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
+        public override async Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
         {
-            return this.stream.WriteAsync(buffer, offset, count, cancellationToken);
+            await this.stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override void WriteByte(byte value)
