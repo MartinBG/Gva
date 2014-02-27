@@ -50,7 +50,7 @@
           }
 
           scope.$apply(function () {
-            if (m.isValid()) {
+            if (m && m.isValid()) {
               ngModel.$setViewValue(
                 m.startOf('day').format(scDateConfig.dateModelFormat));
             } else {
@@ -63,14 +63,8 @@
         function changeDateOnSelect(ev) {
           ev.preventDefault();
           ev.stopPropagation();
-          if (ev.date) {
-            changeDate(moment(ev.date));
-          } else {
-            scope.$apply(function () {
-              ngModel.$setViewValue(undefined);
-              ngModel.$render();
-            });
-          }
+          
+          changeDate(ev.date && moment(ev.date));
         }
 
         function changeDateOnInput(ev) {
