@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function DocumentMedicalsSearchCtrl(
@@ -7,30 +7,23 @@
     $state,
     $stateParams,
     PersonDocumentMedical,
-    PersonDocumentMedicalView,
-    meds
+    meds,
+    person
   ) {
-    $scope.medicals = meds;
+    $scope.medicals = _(meds).forEach(function (m) {
+      var testimonial = m.part.documentNumberPrefix + '-' +
+        m.part.documentNumber + '-' +
+        person.lin + '-' +
+        (m.part.documentNumberSuffix !== undefined ? m.part.documentNumberSuffix : '');
+      m.part.testimonial = testimonial;
 
-    //PersonDocumentMedical.query($stateParams).$promise.then(function (medicals) {
-    //  $scope.medicals = medicals.map(function (medical) {
-    //    var testimonial = medical.part.documentNumberPrefix + '-' +
-    //      medical.part.documentNumber + '-' +
-    //      $scope.$parent.person.lin + '-' +
-    //      medical.part.documentNumberSuffix;
-
-    //    medical.part.testimonial = testimonial;
-
-    //    var limitations = '';
-    //    for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-    //      limitations += medical.part.limitationsTypes[i].name + ', ';
-    //    }
-    //    limitations = limitations.substring(0, limitations.length - 2);
-    //    medical.part.limitations = limitations;
-
-    //    return medical;
-    //  });
-    //});
+      var limitations = '';
+      _(m.part.limitationsTypes).forEach(function (limitationType) {
+        limitations += limitationType.name + ', ';
+      });
+      limitations = limitations.substring(0, limitations.length - 2);
+      m.part.limitations = limitations;
+    }).value();
 
     $scope.editDocumentMedical = function (medical) {
       return $state.go('root.persons.view.medicals.edit', {
@@ -49,7 +42,6 @@
     $scope.newDocumentMedical = function () {
       return $state.go('root.persons.view.medicals.new');
     };
-
   }
 
   DocumentMedicalsSearchCtrl.$inject = [
@@ -57,18 +49,18 @@
     '$state',
     '$stateParams',
     'PersonDocumentMedical',
-    'PersonDocumentMedicalView',
-    'meds'
+    'meds',
+    'person'
   ];
 
   DocumentMedicalsSearchCtrl.$resolve = {
     meds: [
       '$stateParams',
-      'PersonDocumentMedicalView',
-      function ($stateParams, PersonDocumentMedicalView) {
-        return PersonDocumentMedicalView.query($stateParams).$promise;
+      'PersonDocumentMedical',
+      function ($stateParams, PersonDocumentMedical) {
+        return PersonDocumentMedical.query($stateParams).$promise;
       }
     ]
   };
   angular.module('gva').controller('DocumentMedicalsSearchCtrl', DocumentMedicalsSearchCtrl);
-}(angular));
+}(angular, _));

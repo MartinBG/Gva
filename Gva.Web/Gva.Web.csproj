@@ -173,7 +173,6 @@
     <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
     <Content Include="App\js\gva\persons\resources\personRatingView.js" />
     <Content Include="App\js\gva\persons\resources\personEditionView.js" />
-    <Content Include="App\js\gva\persons\resources\personDocumentMedicalView.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
@@ -340,7 +339,6 @@
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
     <Content Include="App\test\gva\persons\mocks\personRatingViewsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personRatingEditionViewsHttp.js" />
-    <Content Include="App\test\gva\persons\mocks\personDocumentMedicalViewsHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />

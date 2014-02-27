@@ -14,8 +14,8 @@
       medClassType: nomenclatures.get('medClasses', 'class1'),
       documentPublisher: nomenclatures.get('medDocPublishers', 'AMC Latvia'),
       limitationsTypes: [
-        nomenclatures.get('medicalLimitations', 'OSL'),
-        nomenclatures.get('medicalLimitations', 'OML')
+        nomenclatures.get('medLimitation', 'OSL'),
+        nomenclatures.get('medLimitation', 'OML')
       ],
       notes: 'Test notes',
       bookPageNumber: '1',
@@ -30,9 +30,9 @@
       medClassType: nomenclatures.get('medClasses', 'class2'),
       documentPublisher: nomenclatures.get('medDocPublishers', 'CAA France'),
       limitationsTypes: [
-        nomenclatures.get('medicalLimitations', 'OSL'),
-        nomenclatures.get('medicalLimitations', 'OML'),
-        nomenclatures.get('medicalLimitations', 'VDL')
+        nomenclatures.get('medLimitation', 'OSL'),
+        nomenclatures.get('medLimitation', 'OML'),
+        nomenclatures.get('medLimitation', 'VDL')
       ],
       notes: 'Test notes doc2',
       bookPageNumber: '3',

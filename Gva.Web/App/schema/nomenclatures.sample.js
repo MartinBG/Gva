@@ -355,7 +355,7 @@
 
     medClasses: require('./medicalClass'),
 
-    medicalLimitations: require('./medicalLimitation'),
+    medLimitation: require('./medicalLimitation'),
 
     publisherTypes: require('./publisherType'),
 
