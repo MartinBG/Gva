@@ -21,7 +21,7 @@
         selectedCorrs.onCorrSelect = null;
       };
 
-      return $state.go('root.docs.edit.data.view.selectCorr');
+      return $state.go('root.docs.edit.view.selectCorr');
     };
 
     $scope.selectUnit = function selectUnit(message) {
@@ -99,7 +99,7 @@
         };
       }
 
-      return $state.go('root.docs.edit.data.view.selectUnit');
+      return $state.go('root.docs.edit.view.selectUnit');
     };
 
     $scope.removeDocClassification = function () {

@@ -10,7 +10,10 @@
     specs: [
       'test/common/specs/*.js',
       'test/gva/persons/specs/**/*.js',
+      'test/gva/applications/specs/*.js',
       'test/gva/directives/specs/*.js',
+      'test/ems/docs/specs/*.js',
+      'test/ems/corrs/specs/*.js',
       'test/scaffolding/specs/*.js'
     ],
     baseUrl: 'http://localhost:52560',

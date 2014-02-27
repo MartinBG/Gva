@@ -90,6 +90,11 @@
               key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1672',
               name: 'TestFile3.pdf',
               relativePath: undefined
+            },
+            {
+              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
+              name: 'TestFile4.pdf',
+              relativePath: undefined
             }
           ],
           docWorkflows: [

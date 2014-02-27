@@ -42,7 +42,7 @@
           regUri: 'Номер',
           docStatusName: 'Статус',
           docDirectionName: 'Тип',
-          addressing: {
+          view: {
             content: 'Прикачени файлове',
             text: 'Текст',
             classification: 'Код за достъп и класификация',
@@ -145,8 +145,25 @@
           docTypeGroupId: 'Група',
           docTypeId: 'Вид',
           docSubject: 'Относно',
-          docCorrespondent: 'Кореспондент',
-          numberOfDocs: 'Брой документи'
+          docCorrespondent: 'Кореспондент'
+        },
+        caseSelect: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          docName: 'Относно',
+          docTypeId: 'Вид на документа',
+          docStatusId: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          select: 'Избор',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент',
+          search: 'Търси',
+          cancel: 'Отказ'
         }
       },
       units: {
@@ -208,12 +225,13 @@
       states: {
         'root.docs': 'Документи',
         'root.docs.new': 'Нов документ',
-        'root.docs.edit.data.view': 'Преглед',
-        'root.docs.edit.data.view.selectCorr': 'Избор на кореспондент',
-        'root.docs.edit.data.view.selectUnit': 'Избор на служител',
-        'root.docs.edit.data.workflows': 'Управление',
-        'root.docs.edit.data.stages': 'Етапи',
-        'root.docs.edit.data.case': 'Преписка',
+        'root.docs.new.caseSelect': 'Избор на преписка',
+        'root.docs.edit.view': 'Преглед',
+        'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
+        'root.docs.edit.view.selectUnit': 'Избор на служител',
+        'root.docs.edit.workflows': 'Управление',
+        'root.docs.edit.stages': 'Етапи',
+        'root.docs.edit.case': 'Преписка',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

@@ -2,7 +2,7 @@
   vutreshen
   <div class="row">
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.docUnitsFrom"></label>
+      <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" required ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.docUnitsTo"></label>
+      <label class="control-label" l10n-text="docs.edit.view.docUnitsTo"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsTo" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -23,7 +23,7 @@
 
   <div class="row">
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.madeBy"></label>
+      <label class="control-label" l10n-text="docs.edit.view.madeBy"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsMadeBy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.cCopy"></label>
+      <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -44,7 +44,7 @@
 
   <div class="row">
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.importedBy"></label>
+      <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -59,11 +59,11 @@
   <accordion close-others="false">
     <accordion-group is-open="(model.docUnitsInCharge.length > 0) || (model.docUnitsControlling.length > 0) || !!model.assignmentType || !!model.assignmentDate || !!model.assignmentDeadline" ng-if="readonly || (model.docUnitsInCharge.length > 0) || (model.docUnitsControlling.length > 0) || !!model.assignmentType || !!model.assignmentDate || !!model.assignmentDeadline">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.assignment" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.assignment" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
         <div class="form-group col-md-6">
-          <label class="control-label" l10n-text="docs.edit.addressing.inCharge"></label>
+          <label class="control-label" l10n-text="docs.edit.view.inCharge"></label>
           <div class="input-group input-group-sm">
             <sc-nomenclature ng-model="model.docUnitsInCharge" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="form-group col-md-6">
-          <label class="control-label" l10n-text="docs.edit.addressing.controlling"></label>
+          <label class="control-label" l10n-text="docs.edit.view.controlling"></label>
           <div class="input-group input-group-sm">
             <sc-nomenclature ng-model="model.docUnitsControlling" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
@@ -84,17 +84,17 @@
 
       <div class="row" style="margin-bottom: 5px;">
         <div class="form-group col-md-3">
-          <label class="control-label" l10n-text="docs.edit.addressing.assignmentType"></label>
+          <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
           <sc-nomenclature name="assignmentType" ng-model="model.assignmentType" alias="'assignmentType'" required ng-readonly="!readonly"></sc-nomenclature>
         </div>
 
         <div class="form-group col-md-2">
-          <label class="control-label" l10n-text="docs.edit.addressing.assignmentDate"></label>
+          <label class="control-label" l10n-text="docs.edit.view.assignmentDate"></label>
           <sc-date name="assignmentDate" ng-model="model.assignmentDate" ng-readonly="!readonly"></sc-date>
         </div>
 
         <div class="form-group col-md-2">
-          <label class="control-label" l10n-text="docs.edit.addressing.assignmentDeadline"></label>
+          <label class="control-label" l10n-text="docs.edit.view.assignmentDeadline"></label>
           <sc-date name="assignmentDeadline" ng-model="model.assignmentDeadline" ng-readonly="!readonly"></sc-date>
         </div>
       </div>
@@ -102,11 +102,11 @@
 
     <accordion-group is-open="(model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)" ng-if="readonly || (model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.permissions" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.permissions" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row" style="margin-bottom: 5px;">
         <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.addressing.readers"></label>
+          <label class="control-label" l10n-text="docs.edit.view.readers"></label>
           <div class="input-group input-group-sm">
             <sc-nomenclature ng-model="model.docUnitsRoleReaders" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.addressing.editors"></label>
+          <label class="control-label" l10n-text="docs.edit.view.editors"></label>
           <div class="input-group input-group-sm">
             <sc-nomenclature ng-model="model.docUnitsEditors" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
@@ -124,7 +124,7 @@
           </div>
         </div>
         <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.addressing.registrators"></label>
+          <label class="control-label" l10n-text="docs.edit.view.registrators"></label>
           <div class="input-group input-group-sm">
             <sc-nomenclature ng-model="model.docUnitsRoleRegistrators" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
@@ -137,7 +137,7 @@
 
     <accordion-group is-open="!!model.docBody" ng-if="readonly || !!model.docBody">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.text" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.text" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
         <div class="col-md-12" style="margin-bottom: 5px;">
@@ -148,7 +148,7 @@
 
     <accordion-group is-open="model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0" ng-if="readonly || model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.content" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
         <div class="col-md-12">
@@ -166,12 +166,12 @@
 
     <accordion-group is-open="false">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.classification" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.classification" style="font-size: 12px;"></a>
       </accordion-heading>
 
       <div class="row" ng-if="model.accessCode">
         <div class="form-group col-md-2">
-          <label class="control-label" l10n-text="docs.edit.addressing.accessCode"></label>
+          <label class="control-label" l10n-text="docs.edit.view.accessCode"></label>
           <sc-text name="accessCode" ng-model="model.accessCode" readonly></sc-text>
         </div>
       </div>

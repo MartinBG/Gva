@@ -9,7 +9,7 @@
               <span l10n-text="docs.edit.child"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a sc-click="attachNewDoc()" l10n-text="docs.edit.document"></a></li>
+              <li><a sc-click="attachNewDoc()" name="attachNewDocBtn" l10n-text="docs.edit.document"></a></li>
               <li><a sc-click="attachDoc(1)" l10n-text="docs.edit.resolution"></a></li>
               <li><a sc-click="attachDoc(2)" l10n-text="docs.edit.task"></a></li>
               <li><a sc-click="attachDoc(3)" l10n-text="docs.edit.remark"></a></li>
@@ -118,6 +118,21 @@
         </div>
       </nav>
 
-      <div ui-view></div>
+      <ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc"></ems-doc-info>
+
+      <div class="well-sm panel-body">
+          <sc-tabs tab-list="{
+          'Документ': 'root.docs.edit.view',
+          'Управление': 'root.docs.edit.workflows',
+          'Етапи': 'root.docs.edit.stages',
+          'Преписка': 'root.docs.edit.case'
+          }"></sc-tabs>
+
+        <div class="tab-content">
+          <div ui-view>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
     </div>
 </ng-form>

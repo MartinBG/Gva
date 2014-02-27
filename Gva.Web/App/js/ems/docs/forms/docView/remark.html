@@ -2,7 +2,7 @@
   zabelejka
   <div class="row" style="margin-bottom: 5px;">
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.importedBy"></label>
+      <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.addressing.cCopy"></label>
+      <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
       <div class="input-group input-group-sm">
         <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
@@ -24,7 +24,7 @@
   <accordion close-others="false">
     <accordion-group is-open="!!model.docBody" ng-if="readonly || !!model.docBody">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.text" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.text" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
         <div class="col-md-12" style="margin-bottom: 5px;">
@@ -35,7 +35,7 @@
 
     <accordion-group is-open="model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0" ng-if="readonly || model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.content" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
         <div class="col-md-12">
@@ -53,7 +53,7 @@
 
     <accordion-group is-open="false">
       <accordion-heading>
-          <a l10n-text="docs.edit.addressing.classification" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.view.classification" style="font-size: 12px;"></a>
       </accordion-heading>
 
       <div class="row">

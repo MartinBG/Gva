@@ -65,7 +65,7 @@
       };
 
       Doc.save(newDoc).$promise.then(function (savedDoc) {
-        $state.go('root.docs.edit.data.view', { docId: savedDoc.docId });
+        $state.go('root.docs.edit.view', { docId: savedDoc.docId });
       });
 
     };
