@@ -63,5 +63,16 @@ namespace Gva.Web.Controllers
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        public HttpResponseMessage DeletePart(int lotId, string path)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            lot.DeletePart(path, this.userContext);
+            lot.Commit(this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }

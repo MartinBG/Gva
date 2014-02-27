@@ -83,29 +83,30 @@ namespace Gva.Api.LotEventHandlers
 
         private void UpdatePersonLicences(GvaPerson person, Commit commit)
         {
-            var personLicencePart = commit.PartVersions
-                .SingleOrDefault(pv => pv.Part.SetPart.Alias == "licence" && pv.OriginalCommit == commit);
+            var personLicenceParts = commit.PartVersions
+                .Where(pv => pv.Part.SetPart.Alias == "licence" && pv.PartOperation != PartOperation.Delete);
 
-            if (personLicencePart != null)
+            person.Licences = string.Empty;
+            foreach (var personLicencePart in personLicenceParts)
             {
                 var personLicenceContent = JObject.Parse(personLicencePart.TextContent);
-                person.Licences = person.Licences ?? string.Empty;
                 person.Licences += string.Format(", {0}", personLicenceContent.Value<JObject>("licenceType").Value<string>("name"));
             }
         }
 
         private void UpdatePersonRatings(GvaPerson person, Commit commit)
         {
-            var personRatingPart = commit.PartVersions
-                .SingleOrDefault(pv => pv.Part.SetPart.Alias == "rating" && pv.OriginalCommit == commit);
+            var personRatingParts = commit.PartVersions
+                .Where(pv => pv.Part.SetPart.Alias == "rating" && pv.PartOperation != PartOperation.Delete);
 
-            if (personRatingPart != null)
+            person.Ratings = string.Empty;
+            foreach (var personRatingPart in personRatingParts)
             {
                 var personRatingContent = JObject.Parse(personRatingPart.TextContent);
+
                 var retingType = personRatingContent.Value<JObject>("ratingType");
                 if (retingType != null)
                 {
-                    person.Ratings = person.Ratings ?? string.Empty;
                     person.Ratings += string.Format(", {0}", retingType.Value<string>("name"));
                 }
             }
@@ -114,7 +115,9 @@ namespace Gva.Api.LotEventHandlers
         private void UpdatePersonEmployment(GvaPerson person, Commit commit)
         {
             var personEmploymentPart = commit.PartVersions
-                .SingleOrDefault(pv => pv.Part.SetPart.Alias == "employment" && pv.OriginalCommit == commit);
+                .Where(pv => pv.Part.SetPart.Alias == "employment" && pv.PartOperation != PartOperation.Delete)
+                .OrderByDescending(pv => pv.CreateDate)
+                .FirstOrDefault();
 
             if (personEmploymentPart != null)
             {

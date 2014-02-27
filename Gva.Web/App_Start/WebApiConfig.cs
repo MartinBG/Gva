@@ -56,12 +56,13 @@ namespace Gva.Web
             MapRoute(config, HttpMethod.Get , "api/persons/{lotId}/inventory", "Person", "GetInventory");
 
             //lots
-            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/personData", "Lot", "GetPart");
-            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/{*path}", "Lot", "GetPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
-            MapRoute(config, HttpMethod.Get, "api/persons/{lotId}/{*path}", "Lot", "GetParts");
-            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/personData", "Lot", "PostPart");
-            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/{*path}", "Lot", "PostPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
-            MapRoute(config, HttpMethod.Post, "api/persons/{lotId}/{*path}", "Lot", "PostNewPart");
+            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/personData", "Lot", "GetPart");
+            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
+            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetParts");
+            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/personData", "Lot", "PostPart");
+            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
+            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostNewPart");
+            MapRoute(config, HttpMethod.Delete, "api/persons/{lotId}/{*path}"   , "Lot", "DeletePart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
         }
 
         private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, Dictionary<string, string> regExpressions = null)
