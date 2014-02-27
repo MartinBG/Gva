@@ -142,7 +142,7 @@
       .state(['root.persons.view.ratings.search'                        , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/ratingsSearch.html'            , 'RatingsSearchCtrl'            ]])
       .state(['root.persons.view.ratings.new'                           , '/new'                                       , ['@root.persons.view', 'gva/persons/views/ratings/ratingsNew.html'               , 'RatingsNewCtrl'               ]])
       .state(['root.persons.view.editions'                              , '/:ind/editions'                                                                                                                                                 ])
-      .state(['root.persons.view.editions.search'                       , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsSearch.html'  , 'ЕditionsSearchCtrl'           ]])
+      .state(['root.persons.view.editions.search'                       , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsSearch.html'  , 'EditionsSearchCtrl'           ]])
       .state(['root.persons.view.editions.new'                          , '/new'                                       , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsNew.html'     , 'EditionsNewCtrl'              ]])
       .state(['root.persons.view.editions.edit'                         , '/:childInd'                                 , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsEdit.html'    , 'EditionsEditCtrl'             ]]);
   }]);

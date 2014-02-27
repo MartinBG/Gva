@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function RatingsNewCtrl($scope, $state, $stateParams, PersonRating) {
+  function RatingsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonRating,
+    rating
+  ) {
+    $scope.model = rating;
+
     $scope.save = function () {
       $scope.newRatingForm.$validate()
        .then(function () {
@@ -21,7 +29,19 @@
     };
   }
 
-  RatingsNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonRating'];
+  RatingsNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonRating',
+    'rating'
+  ];
+
+  RatingsNewCtrl.$resolve = {
+    rating: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('RatingsNewCtrl', RatingsNewCtrl);
 }(angular));

@@ -2,12 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AddressesEditCtrl($scope, $state, $stateParams, PersonAddress) {
-    PersonAddress
-      .get({ id: $stateParams.id, ind: $stateParams.ind }).$promise
-      .then(function (address) {
-        $scope.personAddress = address;
-      });
+  function AddressesEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonAddress,
+    address
+  ) {
+    $scope.personAddress = address;
 
     $scope.save = function () {
       $scope.personAddressForm.$validate()
@@ -27,7 +29,26 @@
     };
   }
 
-  AddressesEditCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonAddress'];
+  AddressesEditCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonAddress',
+    'address'
+  ];
+
+  AddressesEditCtrl.$resolve = {
+    address: [
+      '$stateParams',
+      'PersonAddress',
+      function ($stateParams, PersonAddress) {
+        return PersonAddress.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('AddressesEditCtrl', AddressesEditCtrl);
 }(angular));

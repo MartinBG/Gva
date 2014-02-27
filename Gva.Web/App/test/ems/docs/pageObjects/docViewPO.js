@@ -2,7 +2,7 @@
 (function (module, by) {
   'use strict';
 
-  function DocAddressingPO(context) {
+  function DocViewPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
 
     this.editBtn= context.findElement(by.name('editBtn'));
@@ -10,17 +10,17 @@
     this.selectCorrBtn = context.findElement(by.name('selectCorrBtn'));
   }
 
-  DocAddressingPO.prototype.edit = function () {
+  DocViewPO.prototype.edit = function () {
     this.editBtn.click();
   };
 
-  DocAddressingPO.prototype.selectUnitFrom = function () {
+  DocViewPO.prototype.selectUnitFrom = function () {
     this.selectUnitFromBtn.click();
   };
 
-  DocAddressingPO.prototype.selectCorr = function () {
+  DocViewPO.prototype.selectCorr = function () {
     this.selectCorrBtn.click();
   };
 
-  module.exports = DocAddressingPO;
+  module.exports = DocViewPO;
 }(module, by));

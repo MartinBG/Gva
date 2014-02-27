@@ -88,8 +88,8 @@
             });
           }
           else if (mode === 'create') {
-            Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-              $state.go('root.docs.edit.addressing', { docId: result.docId });
+            Doc.createNew($scope.doc).$promise.then(function (result) {
+              return $state.go('root.docs.edit.view', { docId: result.docId });
             });
           }
         }
@@ -97,8 +97,8 @@
     };
 
     $scope.cancel = function () {
-      if (!!$stateParams.parentDocId) {
-        $state.go('root.docs.edit.addressing', { docId: $stateParams.parentDocId });
+      if (!!$scope.parentDoc) {
+        return $state.go('root.docs.edit.view', { docId: $stateParams.parentDocId });
       }
       else {
         $state.go('root.docs.search');

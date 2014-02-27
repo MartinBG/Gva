@@ -43,7 +43,7 @@
     };
 
     $scope.attachNewDoc = function () {
-      $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
+      return $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
     };
 
     $scope.attachDoc = function (docTypeId) {
@@ -65,7 +65,7 @@
       };
 
       Doc.save(newDoc).$promise.then(function (savedDoc) {
-        $state.go('root.docs.edit.addressing', { docId: savedDoc.docId });
+        $state.go('root.docs.edit.view', { docId: savedDoc.docId });
       });
 
     };

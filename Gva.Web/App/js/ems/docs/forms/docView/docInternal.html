@@ -1,0 +1,211 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  vutreshen
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" required ng-readonly="!readonly"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="control-label" l10n-text="docs.edit.view.docUnitsTo"></label>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.docUnitsTo" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'to' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label class="control-label" l10n-text="docs.edit.view.madeBy"></label>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.docUnitsMadeBy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'madeBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <accordion close-others="false">
+    <accordion-group is-open="(model.docUnitsInCharge.length > 0) || (model.docUnitsControlling.length > 0) || !!model.assignmentType || !!model.assignmentDate || !!model.assignmentDeadline" ng-if="readonly || (model.docUnitsInCharge.length > 0) || (model.docUnitsControlling.length > 0) || !!model.assignmentType || !!model.assignmentDate || !!model.assignmentDeadline">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.assignment" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="docs.edit.view.inCharge"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="model.docUnitsInCharge" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'inCharge' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="docs.edit.view.controlling"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="model.docUnitsControlling" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'controlling' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 5px;">
+        <div class="form-group col-md-3">
+          <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
+          <sc-nomenclature name="assignmentType" ng-model="model.assignmentType" alias="'assignmentType'" required ng-readonly="!readonly"></sc-nomenclature>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="docs.edit.view.assignmentDate"></label>
+          <sc-date name="assignmentDate" ng-model="model.assignmentDate" ng-readonly="!readonly"></sc-date>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="docs.edit.view.assignmentDeadline"></label>
+          <sc-date name="assignmentDeadline" ng-model="model.assignmentDeadline" ng-readonly="!readonly"></sc-date>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group is-open="(model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)" ng-if="readonly || (model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.permissions" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row" style="margin-bottom: 5px;">
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="docs.edit.view.readers"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="model.docUnitsRoleReaders" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'roleReaders' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="docs.edit.view.editors"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="model.docUnitsEditors" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'editors' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label class="control-label" l10n-text="docs.edit.view.registrators"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="model.docUnitsRoleRegistrators" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'registrators' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group is-open="!!model.docBody" ng-if="readonly || !!model.docBody">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.text" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="col-md-12" style="margin-bottom: 5px;">
+          <sc-textarea rows="2" ng-model="model.docBody" ng-readonly="!readonly"></sc-textarea>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group is-open="model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0" ng-if="readonly || model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="col-md-12">
+          <label class="control-label" l10n-text="docs.edit.content.privateDocFiles"></label>
+          <sc-files ng-model="model.privateDocFiles" ng-readonly="!readonly" multiple></sc-files>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-bottom: 5px;">
+          <label class="control-label" l10n-text="docs.edit.content.publicDocFiles"></label>
+          <sc-files ng-model="model.publicDocFiles" ng-readonly="!readonly" multiple></sc-files>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group is-open="false">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.classification" style="font-size: 12px;"></a>
+      </accordion-heading>
+
+      <div class="row" ng-if="model.accessCode">
+        <div class="form-group col-md-2">
+          <label class="control-label" l10n-text="docs.edit.view.accessCode"></label>
+          <sc-text name="accessCode" ng-model="model.accessCode" readonly></sc-text>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th><span l10n-text="docs.edit.classifications.name"></span></th>
+                <th><span l10n-text="docs.edit.classifications.date"></span></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody ng-repeat="dc in model.docClassifications">
+              <tr>
+                <td>{{ dc.classificationName }}</td>
+                <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
+                <td style="text-align: right;">
+                  <a ng-show="readonly" sc-click="$raise('scOnRemoveDc', dc)" l10n-text="docs.edit.classifications.delete" style="cursor: pointer;"></a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td colspan="3" style="text-align: right;">
+                  <a ng-show="readonly" sc-click="$raise('scOnAddDc', dc)" l10n-text="docs.edit.classifications.add" style="cursor: pointer;"></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </accordion-group>
+
+  </accordion>
+</ng-form>

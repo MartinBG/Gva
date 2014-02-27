@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function AddressesNewCtrl($scope, $state, $stateParams, PersonAddress) {
+  function AddressesNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonAddress,
+    address
+  ) {
+    $scope.personAddress = address;
+
     $scope.save = function () {
       $scope.personAddressForm.$validate()
         .then(function () {
@@ -21,7 +29,19 @@
     };
   }
 
-  AddressesNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonAddress'];
+  AddressesNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonAddress',
+    'address'
+  ];
+
+  AddressesNewCtrl.$resolve = {
+    address: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('AddressesNewCtrl', AddressesNewCtrl);
 }(angular));

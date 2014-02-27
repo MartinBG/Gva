@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentMedicalsNewCtrl($scope, $state, $stateParams, PersonDocumentMedical) {
+  function DocumentMedicalsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentMedical,
+    med
+  ) {
+    $scope.personDocumentMedical = med;
+
     $scope.save = function () {
       $scope.personDocumentMedicalForm.$validate()
         .then(function () {
@@ -21,7 +29,19 @@
     };
   }
 
-  DocumentMedicalsNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentMedical'];
+  DocumentMedicalsNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentMedical',
+    'med'
+  ];
+
+  DocumentMedicalsNewCtrl.$resolve = {
+    med: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('DocumentMedicalsNewCtrl', DocumentMedicalsNewCtrl);
 }(angular));

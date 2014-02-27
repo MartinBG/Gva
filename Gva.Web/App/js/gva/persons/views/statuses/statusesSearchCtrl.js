@@ -2,15 +2,14 @@
 (function (angular, _) {
   'use strict';
 
-  function StatusesSearchCtrl($scope, $stateParams, $state, PersonStatus) {
-    PersonStatus.query({ id: $stateParams.id }).$promise
-      .then(function (statuses) {
-        $scope.statuses = _(statuses)
-          .forEach(function (s) {
-            s.part.isActive = new Date(s.part.documentDateValidTo) > new Date();
-          })
-          .value();
-      });
+  function StatusesSearchCtrl(
+    $scope,
+    $stateParams,
+    $state,
+    PersonStatus,
+    statuses
+  ) {
+    $scope.statuses = statuses;
 
     $scope.editStatus = function (status) {
       return $state.go('root.persons.view.statuses.edit', {
@@ -32,7 +31,30 @@
     };
   }
 
-  StatusesSearchCtrl.$inject = ['$scope', '$stateParams', '$state', 'PersonStatus'];
+  StatusesSearchCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    '$state',
+    'PersonStatus',
+    'statuses'
+  ];
+
+  StatusesSearchCtrl.$resolve = {
+    statuses: [
+      '$stateParams',
+      'PersonStatus',
+      function ($stateParams, PersonStatus) {
+        return PersonStatus.query($stateParams).$promise
+        .then(function (statuses) {
+          return _(statuses)
+          .forEach(function (s) {
+            s.part.isActive = new Date(s.part.documentDateValidTo) > new Date();
+          })
+          .value();
+        });
+      }
+    ]
+  };
 
   angular.module('gva').controller('StatusesSearchCtrl', StatusesSearchCtrl);
 }(angular, _));

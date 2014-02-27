@@ -287,3 +287,7 @@ table.dataTable td.buttons-cell
 .tab-loading {
     opacity: 0;
 }
+
+.panel-body {
+  padding: 5px 10px !important;
+}

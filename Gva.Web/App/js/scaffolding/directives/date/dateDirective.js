@@ -1,10 +1,10 @@
 ﻿// Usage: <sc-date ng-model="<model_name>" />
 
-/*global angular*/
-(function (angular) {
+/*global angular, moment*/
+(function (angular, moment) {
   'use strict';
 
-  function DateDirective ($filter) {
+  function DateDirective(scDateConfig) {
     return {
       priority: 110,
       restrict: 'E',
@@ -15,80 +15,90 @@
         if (!ngModel) {
           return;
         }
+        var input = element.children('input'),
+            span = element.children('span'),
+            changingDate = false;
 
-        element.datetimepicker({
-          language: 'bg',
-          pickTime: false,
-          weekStart: 1
+        span.datepicker({
+          autoclose: true,
+          format: scDateConfig.datepickerFormat,
+          language: 'bg'
         });
 
         ngModel.$render = function () {
-          if (ngModel.$viewValue) {
-            var date = new Date(ngModel.$viewValue),
-                day = date.getDate(),
-                month = date.getMonth() + 1,
-                year = date.getFullYear();
+          var m = moment(ngModel.$viewValue),
+            pickerValue,
+            inputValue;
 
-            element.datetimepicker('setValue', day + '.' + month + '.' + year);
+          if (m.isValid() && ngModel.$viewValue) {
+            pickerValue = m.startOf('day').toDate();
+            inputValue = m.format(scDateConfig.dateDisplayFormat);
+          } else {
+            pickerValue = undefined;
+            inputValue = undefined;
           }
+
+          changingDate = true;
+          span.datepicker('setDate', pickerValue);
+          changingDate = false;
+          input.val(inputValue);
         };
 
-        element.datetimepicker().on('changeDate', function (ev) {
+        function changeDate(m) {
+          if (changingDate) {
+            return;
+          }
+
           scope.$apply(function () {
-            var modelDate = null;
-
-            if (ev.date) {
-              var year = ev.date.getFullYear(),
-                  month = ev.date.getMonth(),
-                  day = ev.date.getDate(),
-                  date = new Date(year, month, day, 0, 0, 0, 0);
-
-              modelDate = $filter('date')(date, 'yyyy-MM-ddTHH:mm:ss');
+            if (m.isValid()) {
+              ngModel.$setViewValue(
+                m.startOf('day').format(scDateConfig.dateModelFormat));
+            } else {
+              ngModel.$setViewValue(undefined);
             }
-
-            ngModel.$setViewValue(modelDate);
+            ngModel.$render();
           });
-        });
+        }
 
-        element.children('input').on('change', function (ev) {
-          var dateArr = ev.target.value.split('.'),
-              day,
-              month,
-              year,
-              date;
-
-          if (dateArr.length !== 3) {
-            element.children('input').val(null);
-            return;
+        function changeDateOnSelect(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          if (ev.date) {
+            changeDate(moment(ev.date));
+          } else {
+            scope.$apply(function () {
+              ngModel.$setViewValue(undefined);
+              ngModel.$render();
+            });
           }
+        }
 
-          day = parseInt(dateArr[0], 10);
-          month = parseInt(dateArr[1], 10);
-          year = parseInt(dateArr[2], 10);
+        function changeDateOnInput(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
 
-          if (isNaN(day) || isNaN(month) || isNaN(year)) {
-            element.children('input').val(null);
-            return;
-          }
+          changeDate(moment(ev.target.value, scDateConfig.dateParseFormats));
+        }
 
-          date = new Date(year, month - 1, day, 0, 0, 0, 0);
-
-          if (date.getFullYear() !== year ||
-              date.getMonth() + 1 !== month ||
-              date.getDate() !== day) {
-            element.children('input').val(null);
-            return;
-          }
-        });
+        span.on('changeDate', changeDateOnSelect);
+        input.on('change', changeDateOnInput);
 
         element.bind('$destroy', function () {
-          element.datetimepicker('destroy');
+          input.off('change', changeDateOnInput);
+          span.off('changeDate', changeDateOnSelect);
+          span.datepicker('remove');
         });
       }
     };
   }
+  DateDirective.$inject = ['scDateConfig'];
 
-  DateDirective.$inject = ['$filter'];
-
-  angular.module('scaffolding').directive('scDate', DateDirective);
-}(angular));
+  angular.module('scaffolding')
+    .constant('scDateConfig', {
+      dateParseFormats: ['DD.MM.YYYY', 'DD_MM_YYYY', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD\\MM\\YYYY'],
+      dateDisplayFormat: 'DD.MM.YYYY',
+      dateModelFormat: 'YYYY-MM-DDTHH:mm:ss',
+      datepickerFormat: 'dd.mm.yyyy'
+    })
+    .directive('scDate', DateDirective);
+}(angular, moment));

@@ -2,7 +2,13 @@
 (function (angular) {
   'use strict';
 
-  function PersonsViewCtrl($scope, $state, $stateParams, Person, person) {
+  function PersonsViewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Person,
+    person
+  ) {
     $scope.person = person;
 
     $scope.edit = function () {
@@ -10,12 +16,22 @@
     };
   }
 
-  PersonsViewCtrl.$inject = ['$scope', '$state', '$stateParams', 'Person', 'person'];
+  PersonsViewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Person',
+    'person'
+  ];
 
   PersonsViewCtrl.$resolve = {
-    person: ['$stateParams', 'Person', function ($stateParams, Person) {
-      return Person.get({ id: $stateParams.id }).$promise;
-    }]
+    person: [
+      '$stateParams',
+      'Person',
+      function ($stateParams, Person) {
+        return Person.get({ id: $stateParams.id }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('PersonsViewCtrl', PersonsViewCtrl);

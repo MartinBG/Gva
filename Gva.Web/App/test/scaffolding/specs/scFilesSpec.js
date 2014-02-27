@@ -49,7 +49,7 @@
     it('should dismiss multiple files modal', function () {
       filesPage.singleFileDirective.openModal();
       filesPage.singleFileDirective.closeModal();
-      expect(filesPage.singleFileDirective.isModalDismissed()).toBe(true);
+      expect(filesPage.singleFileDirective.isModalDisplayed()).toBe(false);
     });
 
     it('should dismiss single file modal', function () {
@@ -57,7 +57,7 @@
       filesPage.filesDirective.openModal();
       filesPage.filesDirective.closeModal();
 
-      expect(filesPage.filesDirective.isModalDismissed()).toBe(true);
+      expect(filesPage.filesDirective.isModalDisplayed()).toBe(false);
       expect(filesPage.filesDirective.get()).toEqual('4 прикачени файла.');
     });
 

@@ -135,22 +135,26 @@
     <Content Include="App\js\boot.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\remark.html" />
+    <Content Include="App\js\ems\docs\forms\docView\task.html" />
+    <Content Include="App\js\ems\docs\forms\docView\resolution.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternalOutgoing.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternal.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docOutgoing.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
+    <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\ems\docs\views\selectCorrView.html" />
     <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectUnitView.html" />
     <Content Include="App\js\ems\docs\views\selectUnitViewCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docsClassifications.html" />
-    <Content Include="App\js\ems\docs\views\docsClassificationsCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />
     <Content Include="App\js\ems\docs\views\docsCaseCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsStages.html" />
     <Content Include="App\js\ems\docs\views\docsStagesCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsWorkflows.html" />
     <Content Include="App\js\ems\docs\views\docsWorkflowsCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docsContent.html" />
-    <Content Include="App\js\ems\docs\views\docsContent.js" />
-    <Content Include="App\js\ems\docs\views\docsAddressingCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docsAddressing.html" />
+    <Content Include="App\js\ems\docs\views\docsViewCtrl.js" />
+    <Content Include="App\js\ems\docs\views\docsView.html" />
     <Content Include="App\js\ems\docs\views\docsSearch.html" />
     <Content Include="App\js\ems\docs\views\docsSearchCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsNewCtrl.js" />
@@ -165,6 +169,9 @@
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\gva\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personRatingView.js" />
+    <Content Include="App\js\gva\persons\resources\personEditionView.js" />
+    <Content Include="App\js\gva\persons\resources\personDocumentMedicalView.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
@@ -321,7 +328,7 @@
     <Content Include="App\test\ems\docs\mocks\docCases.js" />
     <Content Include="App\test\ems\docs\pageObjects\selectCorrPO.js" />
     <Content Include="App\test\ems\docs\pageObjects\selectUnitPO.js" />
-    <Content Include="App\test\ems\docs\pageObjects\docAddressingPO.js" />
+    <Content Include="App\test\ems\docs\pageObjects\docViewPO.js" />
     <Content Include="App\test\ems\docs\pageObjects\searchDocumentPO.js" />
     <Content Include="App\test\ems\docs\pageObjects\newDocumentPO.js" />
     <Content Include="App\test\ems\docs\specs\editDocAddressingSpec.js" />
@@ -352,6 +359,9 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
+    <Content Include="App\test\gva\persons\mocks\personRatingViewsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personRatingEditionViewsHttp.js" />
+    <Content Include="App\test\gva\persons\mocks\personDocumentMedicalViewsHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
@@ -631,7 +641,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
-    <Folder Include="App\js\ems\docs\forms\" />
     <Folder Include="App\js\gva\applications\forms\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />

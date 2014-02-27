@@ -3,29 +3,29 @@
 
   'use strict';
 
-  describe('Edit doccument addressing page', function () {
+  describe('Edit doccument view page', function () {
     var ptor = protractor.getInstance(),
-       Page = require('../pageObjects/docAddressingPO'),
+       Page = require('../pageObjects/docViewPO'),
        SelectUnitPage = require('../pageObjects/selectUnitPO'),
        SelectCorrPage = require('../pageObjects/selectCorrPO'),
-       docAddressingPage,
+       docViewPage,
        selectUnitPage,
        selectCorrPage;
 
     beforeEach(function () {
       ptor.get('#/docs/1/address');
-      docAddressingPage = new Page(ptor);
+      docViewPage = new Page(ptor);
 
-      docAddressingPage.edit();
+      docViewPage.edit();
     });
 
     it('should update breadcrumb text', function () {
-      expect(docAddressingPage.breadcrumb.getText())
+      expect(docViewPage.breadcrumb.getText())
         .toEqual('Адресати');
     });
 
     it('should select unit and correspondent', function () {
-      docAddressingPage.selectUnitFrom();
+      docViewPage.selectUnitFrom();
 
       selectUnitPage = new SelectUnitPage(ptor);
 
@@ -34,11 +34,11 @@
 
       selectUnitPage.firstSelectBtn.click();
 
-      docAddressingPage = new Page(ptor);
-      expect(docAddressingPage.breadcrumb.getText())
+      docViewPage = new Page(ptor);
+      expect(docViewPage.breadcrumb.getText())
         .toEqual('Адресати');
 
-      docAddressingPage.selectCorr();
+      docViewPage.selectCorr();
 
       selectCorrPage = new SelectCorrPage(ptor);
 
@@ -47,8 +47,8 @@
 
       selectCorrPage.firstSelectBtn.click();
 
-      docAddressingPage = new Page(ptor);
-      expect(docAddressingPage.breadcrumb.getText())
+      docViewPage = new Page(ptor);
+      expect(docViewPage.breadcrumb.getText())
         .toEqual('Адресати');
     });
 

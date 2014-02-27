@@ -54,14 +54,15 @@ module.exports = function (grunt) {
         'bower_components/angular-ui-utils/modules/jq/jq.js',
         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
-        'bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-        'bower_components/bootstrap-datetimepicker/src/js/locales/*.bg.js',
+        'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
         'bower_components/datatable/media/js/jquery.dataTables.js',
         'bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.js',
         'bower_components/jquery-ui/ui/jquery.ui.widget.js',
         'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
         'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-        'bower_components/angular-mocks/angular-mocks.js'
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/moment/moment.js'
       ],
       '<%= buildDir %>/js/lib.ie8.js': [
         'bower_components/html5shiv/dist/html5shiv.js',
@@ -79,8 +80,8 @@ module.exports = function (grunt) {
         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'bower_components/bootstrap/js/collapse.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
-        'bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-        'bower_components/bootstrap-datetimepicker/src/js/locales/*.bg.js',
+        'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
         'bower_components/datatable/media/js/jquery.dataTables.js',
         'bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.js',
         'bower_components/jquery-ui/ui/jquery.ui.widget.js',
@@ -110,7 +111,7 @@ module.exports = function (grunt) {
         'bower_components/select2/select2.css',
         'bower_components/select2-bootstrap-css/select2-bootstrap.css',
         'bower_components/datatablePlugins/integration/bootstrap/3/dataTables.bootstrap.css',
-        'bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+        'bower_components/bootstrap-datepicker/css/datepicker3.css',
         'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
         'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
         'css/*.css'

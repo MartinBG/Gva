@@ -2,7 +2,15 @@
 (function (angular) {
   'use strict';
 
-  function DocumentIdsNewCtrl($scope, $state, $stateParams, PersonDocumentId) {
+  function DocumentIdsNewCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentId,
+    docId
+  ) {
+    $scope.personDocumentId = docId;
+
     $scope.save = function () {
       $scope.newDocumentIdForm.$validate()
         .then(function () {
@@ -22,7 +30,19 @@
     };
   }
 
-  DocumentIdsNewCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonDocumentId'];
+  DocumentIdsNewCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentId',
+    'docId'
+  ];
+
+  DocumentIdsNewCtrl.$resolve = {
+    docId: function () {
+      return {};
+    }
+  };
 
   angular.module('gva').controller('DocumentIdsNewCtrl', DocumentIdsNewCtrl);
 }(angular));
