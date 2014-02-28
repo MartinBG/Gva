@@ -100,7 +100,9 @@
             return {
               documentType: 'check',
               partIndex: element.partIndex,
-              name: element.part.personCheckDocumentRole.name,
+              name: element.part.personCheckDocumentRole === undefined ?
+                null :
+                element.part.personCheckDocumentRole.name,
               bookPageNumber: element.part.bookPageNumber,
               type: null,
               number: element.part.documentNumber,

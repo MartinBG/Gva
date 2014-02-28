@@ -73,7 +73,7 @@
       }
     },
     {
-      nomValueId: 6373, code: '15', name: 'Практическа проверка', nameAlt: 'Практическа проверка', alias: null,
+      nomValueId: 6373, code: '15', name: 'Практическа проверка', nameAlt: 'Практическа проверка', alias: 'PracticalCheck',
       textContent: {
         isPersonsOnly: 'N',
         categoryAlias: 'check'

@@ -7,7 +7,7 @@
       ScTextarea = require('../../../../scaffolding/pageObjects/scTextarea'),
       ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
 
-  function CheckPO(context) {
+  function EditCheckPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
     this.staffType = new ScNomenclature('model.staffType', context);
     this.aircraftTypeGroup = new ScNomenclature('model.aircraftTypeGroup', context);
@@ -39,13 +39,13 @@
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
   }
 
-  CheckPO.prototype.save = function () {
+  EditCheckPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  CheckPO.prototype.cancel = function () {
+  EditCheckPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = CheckPO;
+  module.exports = EditCheckPO;
 }(module, by, require));

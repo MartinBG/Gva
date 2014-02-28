@@ -4,7 +4,7 @@
 
   describe('Person document training edit page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentTrainings/trainingPO'),
+        Page = require('../../pageObjects/documentTrainings/editTrainingPO'),
         SearchPage = require('../../pageObjects/documentTrainings/searchTrainingPO'),
         editTrainingPage,
         searchTrainingPage;
@@ -38,7 +38,7 @@
       editTrainingPage.documentDateValidTo.set('22.10.2014');
       editTrainingPage.documentPublisher.set('тестов издател');
       editTrainingPage.personOtherDocumentType.set('Писмо');
-      editTrainingPage.personOtherDocumentRole.set('Обучение');
+      editTrainingPage.personOtherDocumentRole.set('Образование');
       editTrainingPage.valid.set('Не');
       editTrainingPage.bookPageNumber.set('1a');
       editTrainingPage.pageCount.set('23');
@@ -63,7 +63,7 @@
           'part.pageCount'
           )).toEqual([
         ['Тестов номер', '12.02.2013', '22.10.2014', 'тестов издател', 'Boeing 737', '',
-          'Летателен инструктор на самолет', '', 'Писмо', 'Обучение', 'Не', '1a', '23'],
+          'Летателен инструктор на самолет', '', 'Писмо', 'Образование', 'Не', '1a', '23'],
         ['BG CPA 00185-11232', '12.03.2012', '02.03.2016',
           'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', '',
           '', '', '', 'Контролен талон', 'Обучение', 'Да', '81', '1'],

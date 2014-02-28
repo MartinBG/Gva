@@ -339,6 +339,8 @@
     <Content Include="App\test\gva\applications\mocks\applicationLotFiles.js" />
     <Content Include="App\test\gva\persons\mocks\personRatingViewsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personRatingEditionViewsHttp.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentChecks\newCheckPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentTrainings\newTrainingPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
@@ -367,7 +369,7 @@
     <Content Include="App\test\gva\persons\mocks\personRatingsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personsStatusesHttp.js" />
-    <Content Include="App\test\gva\persons\pageObjects\documentChecks\checkPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentChecks\editCheckPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentChecks\searchCheckPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentEducations\educationPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\flyingExperiences\editFlyingExpPO.js" />
@@ -399,7 +401,7 @@
     <Content Include="App\test\gva\persons\specs\documentEmployments\searchEmploymentSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentEmployments\editEmploymentSpec.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentTrainings\searchTrainingPO.js" />
-    <Content Include="App\test\gva\persons\pageObjects\documentTrainings\trainingPO.js" />
+    <Content Include="App\test\gva\persons\pageObjects\documentTrainings\editTrainingPO.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\editTrainingSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\newTrainingSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentTrainings\searchTrainingSpec.js" />

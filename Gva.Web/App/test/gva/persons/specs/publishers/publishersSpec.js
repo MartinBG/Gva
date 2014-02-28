@@ -5,7 +5,7 @@
   describe('Choose publishers page', function () {
     var ptor = protractor.getInstance(),
     Page = require('../../pageObjects/publishers/publishersPO'),
-    ParentPage = require('../../pageObjects/documentTrainings/trainingPO'),
+    ParentPage = require('../../pageObjects/documentTrainings/newTrainingPO'),
     publishersPage,
     parentPage;
 
@@ -49,9 +49,9 @@
       expect(ptor.getCurrentUrl())
         .toEqual('http://localhost:52560/#/persons/1/documentTrainings/new');
       parentPage = new ParentPage(ptor);
-      parentPage.staffType.set('Общ документ');
-      expect(parentPage.documentPublisher.get())
-        .toEqual('AAK Progres');
+      parentPage.chooseStaffType('Общ документ').then(function () {
+        expect(parentPage.documentPublisher.get()).toEqual('AAK Progres');
+      });
     });
 
   });
