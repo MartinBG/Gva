@@ -17,7 +17,9 @@ namespace Regs.Api.Repositories.LotRepositories
         {
             this.unitOfWork = unitOfWork;
 
-            this.eventHandlers = eventHandlers;
+            // copy event handlers because the enumerable is a ninject object
+            // which throws an error when accessed during dispose
+            this.eventHandlers = eventHandlers.ToArray();
             foreach (var eventHandler in eventHandlers)
             {
                 Events.Register(eventHandler);

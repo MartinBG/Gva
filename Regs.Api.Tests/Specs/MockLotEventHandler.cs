@@ -1,10 +1,6 @@
 ﻿using Common.Data;
 using Regs.Api.LotEvents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Regs.Api.Tests.Common;
 
 namespace Regs.Api.Tests.Specs
 {

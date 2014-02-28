@@ -1,4 +1,6 @@
-﻿using Common.Api.UserContext;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common.Api.UserContext;
 using Common.Data;
 using Newtonsoft.Json.Linq;
 using Ninject;
@@ -8,12 +10,6 @@ using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Tests.Common;
 using SubSpec;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions;
 
@@ -29,6 +25,7 @@ namespace Regs.Api.Tests.Specs
 
             Gva.Web.App_Start.NinjectConfig.RegisterServices(this.kernel);
             this.kernel.Unbind<IUserContextProvider>();
+            this.kernel.Unbind<ILotEventHandler>();
             this.kernel.Bind<IUserContextProvider>().To<MockUserContextProvider>();
             this.kernel.Bind<ILotEventHandler>().To<MockLotEventHandler>().InCallScope();
         }
@@ -52,7 +49,7 @@ namespace Regs.Api.Tests.Specs
                 mockLotEventHandler = (MockLotEventHandler)ctx1.Item4;
 
                 lot = lotRepository1.GetSet("Person").CreateLot(userContext1);
-                lot.CreatePart("/addresses/0", JObject.Parse("{ address: '0' }"), userContext1);
+                lot.CreatePart("/personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot.Commit(userContext1);
 
                 return ctx1;
@@ -98,11 +95,11 @@ namespace Regs.Api.Tests.Specs
                 mockLotEventHandler = (MockLotEventHandler)ctx1.Item4;
 
                 lot = lotRepository1.GetSet("Person").CreateLot(userContext1);
-                lot.CreatePart("/addresses/0", JObject.Parse("{ address: '0' }"), userContext1);
+                lot.CreatePart("/personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot.Commit(userContext1);
 
-                lot.CreatePart("/addresses/1", JObject.Parse("{ address: '1' }"), userContext1);
-                lot.Commit(userContext1, new string[] { "/addresses/1" });
+                lot.CreatePart("/personAddresses/1", JObject.Parse("{ address: '1' }"), userContext1);
+                lot.Commit(userContext1, new string[] { "/personAddresses/1" });
                 unitOfWork1.Save();
 
                 var indexCommit = lot.Commits.Where(c => c.IsIndex).Single();
