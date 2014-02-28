@@ -5,12 +5,14 @@ namespace Common.Api.Repositories.NomRepository
 {
     public interface INomRepository
     {
-        NomValue GetNom(string alias, int id);
+        Nom GetNom(string alias);
 
-        NomValue GetNom(string alias, string valueAlias);
+        NomValue GetNomValue(string alias, int id);
 
-        IEnumerable<NomValue> GetNoms(string alias, int[] ids);
+        NomValue GetNomValue(string alias, string valueAlias);
 
-        IEnumerable<NomValue> GetNoms(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null);
+        IEnumerable<NomValue> GetNomValues(string alias, int[] ids);
+
+        IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null);
     }
 }

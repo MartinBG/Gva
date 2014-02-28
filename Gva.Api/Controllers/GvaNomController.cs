@@ -130,7 +130,7 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(
-                this.nomRepository.GetNoms("schools", term)
+                this.nomRepository.GetNomValues("schools", term)
                 .Where(nv => JObject.Parse(nv.TextContent).Value<JArray>("graduationIds").Values<string>().Contains(graduationId.ToString()))
                 .WithOffsetAndLimit(offset, limit));
         }
@@ -139,16 +139,16 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAddressTypes(string term = null, string type = null, int offset = 0, int? limit = null)
         {
             return Ok(
-                this.nomRepository.GetNoms("addressTypes", term)
+                this.nomRepository.GetNomValues("addressTypes", term)
                 .Where(nv => JObject.Parse(nv.TextContent).Value<string>("type") == type)
                 .WithOffsetAndLimit(offset, limit));
         }
 
         [Route("documentRoles")]
-        public IHttpActionResult GetDocumentRoles(string term = null, string categoryAlias = null, [FromUri] string[] staffCodes = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocumentRoles(string term = null, string categoryAlias = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
             return Ok(
-                this.nomRepository.GetNoms("documentRoles", term)
+                this.nomRepository.GetNomValues("documentRoles", term)
                 .Where(nv =>
                 {
                     JObject content = JObject.Parse(nv.TextContent);
@@ -160,9 +160,9 @@ namespace Gva.Api.Controllers
                     }
 
                     JToken staffAlias;
-                    if (isMatch && staffCodes != null && content.TryGetValue("staffAlias", out staffAlias))
+                    if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
                     {
-                        isMatch &= staffCodes.Contains(staffAlias.ToString());
+                        isMatch &= staffAliases.Contains(staffAlias.ToString());
                     }
 
                     return isMatch;
@@ -171,10 +171,10 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentTypes")]
-        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffCodes = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
             return Ok(
-                this.nomRepository.GetNoms("documentTypes", term)
+                this.nomRepository.GetNomValues("documentTypes", term)
                 .Where(nv =>
                 {
                     JObject content = JObject.Parse(nv.TextContent);
@@ -186,9 +186,9 @@ namespace Gva.Api.Controllers
                     }
 
                     JToken staffAlias;
-                    if (isMatch && staffCodes != null && content.TryGetValue("staffAlias", out staffAlias))
+                    if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
                     {
-                        isMatch &= staffCodes.Contains(staffAlias.ToString());
+                        isMatch &= staffAliases.Contains(staffAlias.ToString());
                     }
 
                     return isMatch;

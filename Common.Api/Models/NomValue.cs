@@ -21,7 +21,9 @@ namespace Common.Api.Models
 
         public string TextContent { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
+
+        public string OldId { get; set; }
 
         [JsonIgnore]
         public virtual Nom Nom { get; set; }
@@ -39,16 +41,14 @@ namespace Common.Api.Models
 
             // Properties
             this.Property(t => t.Code)
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(500);
 
             this.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(500);
 
             this.Property(t => t.NameAlt)
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(500);
 
             this.Property(t => t.Alias)
                 .HasMaxLength(50);

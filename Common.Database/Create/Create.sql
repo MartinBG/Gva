@@ -31,6 +31,9 @@ GO
 :r $(rootPath)"\Tables\Users\Roles.sql"
 :r $(rootPath)"\Tables\Users\UserRoles.sql"
 
+-- Noms
+:r $(rootPath)\"Tables\Noms\Noms.sql"
+:r $(rootPath)\"Tables\Noms\NomValues.sql"
 
 ---------------------------------------------------------------
 -- Insert
