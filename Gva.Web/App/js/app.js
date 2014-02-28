@@ -22,7 +22,5 @@
       $locationProvider.html5Mode(false);
       $urlRouterProvider.otherwise('/persons');
     }
-  ]).run(['l10n', '$rootScope', function (l10n, $rootScope) {
-    $rootScope.l10n = l10n;
-  }]);
+  ]);
 }(angular));

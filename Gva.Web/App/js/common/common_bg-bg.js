@@ -43,14 +43,10 @@
           search: {
             username: 'Потребителско име',
             name: 'Име',
-            activity: 'Активност',
-            onlyActive: 'Само активни',
-            onlyUnactive: 'Само неактивни',
+            activity: 'Само активни',
             roles: 'Роли',
             active: 'Активен',
             noUsersFound: 'Няма намерени потребители',
-            yes: 'Да',
-            no: 'Не',
             'new': 'Нов потребител',
             search: 'Търси'
           },
