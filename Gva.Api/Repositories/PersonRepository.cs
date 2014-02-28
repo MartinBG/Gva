@@ -1,7 +1,7 @@
-﻿using Common.Data;
-using Gva.Api.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Data;
+using Gva.Api.Models;
 
 namespace Gva.Api.Repositories
 {

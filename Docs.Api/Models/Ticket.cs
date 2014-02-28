@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,10 +6,14 @@ namespace Docs.Api.Models
     public partial class Ticket
     {
         public System.Guid TicketId { get; set; }
+
         public int DocFileId { get; set; }
-        public System.Guid OldKey { get; set; }
-        public Nullable<System.Guid> NewKey { get; set; }
-        public Nullable<int> VisualizationMode { get; set; }
+
+        public Guid OldKey { get; set; }
+
+        public Guid? NewKey { get; set; }
+
+        public int? VisualizationMode { get; set; }
     }
 
     public class TicketMap : EntityTypeConfiguration<Ticket>

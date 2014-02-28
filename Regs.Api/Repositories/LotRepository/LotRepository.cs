@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Regs.Api.Models;
 using Regs.Api.LotEvents;
+using Regs.Api.Models;
 
 namespace Regs.Api.Repositories.LotRepositories
 {

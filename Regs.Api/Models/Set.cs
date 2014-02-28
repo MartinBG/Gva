@@ -15,10 +15,13 @@ namespace Regs.Api.Models
         }
 
         public int SetId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
 
         public virtual ICollection<Lot> Lots { get; set; }
+
         public virtual ICollection<SetPart> SetParts { get; set; }
 
         public Lot CreateLot(UserContext userContext)

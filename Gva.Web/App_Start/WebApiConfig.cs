@@ -1,14 +1,14 @@
-﻿using Common.Http;
-using Common.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using Common.Http;
+using Common.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Ninject;
 
 namespace Gva.Web
 {
@@ -41,21 +41,15 @@ namespace Gva.Web
             }
         }
 
-        private static void RegisterGlobalFilters(HttpConfiguration config)
-        {
-            config.Filters.Add(new NLogTraceFilter());
-            config.Filters.Add(new NLogExceptionFilter());
-        }
-
         public static void RegisterRoutes(HttpConfiguration config)
         {
-            //persons
+            // persons
             MapRoute(config, HttpMethod.Get , "api/persons"                  , "Person", "GetPersons");
             MapRoute(config, HttpMethod.Post, "api/persons"                  , "Person", "PostPerson");
             MapRoute(config, HttpMethod.Get , "api/persons/{lotId}"          , "Person", "GetPerson");
             MapRoute(config, HttpMethod.Get , "api/persons/{lotId}/inventory", "Person", "GetInventory");
 
-            //lots
+            // lots
             MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/personData", "Lot", "GetPart");
             MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
             MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetParts");
@@ -63,6 +57,12 @@ namespace Gva.Web
             MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
             MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostNewPart");
             MapRoute(config, HttpMethod.Delete, "api/persons/{lotId}/{*path}"   , "Lot", "DeletePart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
+        }
+
+        private static void RegisterGlobalFilters(HttpConfiguration config)
+        {
+            config.Filters.Add(new NLogTraceFilter());
+            config.Filters.Add(new NLogExceptionFilter());
         }
 
         private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, Dictionary<string, string> regExpressions = null)

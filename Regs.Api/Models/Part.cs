@@ -11,13 +11,19 @@ namespace Regs.Api.Models
         }
 
         public int PartId { get; set; }
+
         public int SetPartId { get; set; }
+
         public int LotId { get; set; }
+
         public string Path { get; set; }
+
         public int? Index { get; set; }
 
         public virtual Lot Lot { get; set; }
+
         public virtual SetPart SetPart { get; set; }
+
         public virtual ICollection<PartVersion> PartVersions { get; set; }
     }
 

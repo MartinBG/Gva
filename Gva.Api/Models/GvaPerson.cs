@@ -1,19 +1,27 @@
-﻿using Regs.Api.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
     public partial class GvaPerson
     {
         public int GvaPersonLotId { get; set; }
+
         public string Lin { get; set; }
+
         public string Uin { get; set; }
+
         public string Names { get; set; }
+
         public int Age { get; set; }
+
         public string Licences { get; set; }
+
         public string Ratings { get; set; }
+
         public string Organization { get; set; }
+
         public string Employment { get; set; }
 
         public virtual Lot Lot { get; set; }

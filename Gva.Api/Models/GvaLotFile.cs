@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
@@ -12,18 +12,30 @@ namespace Gva.Api.Models
         }
 
         public int GvaLotFileId { get; set; }
-        public Nullable<int> LotPartId { get; set; }
-        public Nullable<int> GvaFileId { get; set; }
-        public Nullable<int> DocFileId { get; set; }
-        public Nullable<int> GvaLotFileTypeId { get; set; }
+
+        public int? LotPartId { get; set; }
+
+        public int? GvaFileId { get; set; }
+
+        public int? DocFileId { get; set; }
+
+        public int? GvaLotFileTypeId { get; set; }
+
         public string PageIndex { get; set; }
+
         public string PageNumber { get; set; }
+
         public bool IsActive { get; set; }
+
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
+
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
+
         public virtual GvaFile GvaFile { get; set; }
+
         public virtual GvaLotFileType GvaLotFileType { get; set; }
-        public virtual Regs.Api.Models.Part LotPart { get; set; }
+
+        public virtual Part LotPart { get; set; }
     }
 
     public class GvaLotFileMap : EntityTypeConfiguration<GvaLotFile>
@@ -65,7 +77,6 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.LotPart)
                 .WithMany()
                 .HasForeignKey(d => d.LotPartId);
-
         }
     }
 }

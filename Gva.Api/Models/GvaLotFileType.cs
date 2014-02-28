@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
@@ -13,8 +12,11 @@ namespace Gva.Api.Models
         }
 
         public int GvaLotFileTypeId { get; set; }
+
         public string Code { get; set; }
+
         public string Name { get; set; }
+
         public virtual ICollection<GvaLotFile> GvaLotFiles { get; set; }
     }
 

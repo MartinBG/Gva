@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,12 +5,19 @@ namespace Docs.Api.Models
     public partial class DocUnit
     {
         public int DocUnitId { get; set; }
+
         public int DocId { get; set; }
+
         public int UnitId { get; set; }
+
         public int DocUnitRoleId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual DocUnitRole DocUnitRole { get; set; }
+
         public virtual Unit Unit { get; set; }
     }
 
@@ -48,7 +53,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.DocUnits)
                 .HasForeignKey(d => d.UnitId);
-
         }
     }
 }

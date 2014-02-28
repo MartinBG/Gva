@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using Gva.Web.App_Start;
-using Gva.Web.Mappers;
-using Ninject;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
+using Gva.Web.App_Start;
+using Gva.Web.Mappers;
+using Ninject;
 
 namespace Gva.Web
 {

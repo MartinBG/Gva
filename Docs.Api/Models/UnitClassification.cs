@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,12 +5,19 @@ namespace Docs.Api.Models
     public partial class UnitClassification
     {
         public int UnitClassificationId { get; set; }
+
         public int UnitId { get; set; }
+
         public int ClassificationId { get; set; }
+
         public int ClassificationRoleId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ClassificationRole ClassificationRole { get; set; }
+
         public virtual Classification Classification { get; set; }
+
         public virtual Unit Unit { get; set; }
     }
 
@@ -48,7 +53,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.UnitClassifications)
                 .HasForeignKey(d => d.UnitId);
-
         }
     }
 }

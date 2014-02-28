@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Common.Api.Models
@@ -11,26 +9,47 @@ namespace Common.Api.Models
         }
 
         public int SettlementId { get; set; }
+
         public int MunicipalityId { get; set; }
+
         public int DistrictId { get; set; }
+
         public string Code { get; set; }
+
         public string MunicipalityCode { get; set; }
+
         public string DistrictCode { get; set; }
+
         public string MunicipalityCode2 { get; set; }
+
         public string DistrictCode2 { get; set; }
+
         public string Name { get; set; }
+
         public string TypeName { get; set; }
+
         public string SettlementName { get; set; }
+
         public string TypeCode { get; set; }
+
         public string MayoraltyCode { get; set; }
+
         public string Category { get; set; }
+
         public string Altitude { get; set; }
+
         public string Alias { get; set; }
+
         public string Description { get; set; }
+
         public bool IsDistrict { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual District District { get; set; }
+
         public virtual Municipality Municipality { get; set; }
     }
 
@@ -121,7 +140,6 @@ namespace Common.Api.Models
             this.HasRequired(t => t.Municipality)
                 .WithMany(t => t.Settlements)
                 .HasForeignKey(d => d.MunicipalityId);
-
         }
     }
 }

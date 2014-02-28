@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -17,15 +16,25 @@ namespace Docs.Api.Models
         }
 
         public int ClassificationId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<ClassificationRelation> ClassificationRelations { get; set; }
+
         public virtual ICollection<ClassificationRelation> ClassificationRelations1 { get; set; }
+
         public virtual ICollection<ClassificationRelation> ClassificationRelations2 { get; set; }
+
         public virtual ICollection<DocClassification> DocClassifications { get; set; }
+
         public virtual ICollection<DocTypeClassification> DocTypeClassifications { get; set; }
+
         public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
     }
 

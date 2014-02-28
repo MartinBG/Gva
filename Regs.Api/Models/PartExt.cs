@@ -1,18 +1,23 @@
-﻿using System;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace Regs.Api.Models
 {
     public partial class PartExt
     {
         public int PartId { get; set; }
+
         public int? IndexPartVersionId { get; set; }
+
         public int CommitedPartVersionId { get; set; }
+
         public int FirstPartVersionId { get; set; }
 
         public virtual Part Part { get; set; }
+
         public virtual PartVersion CommitedPartVersion { get; set; }
+
         public virtual PartVersion FirstPartVersion { get; set; }
+
         public virtual PartVersion IndexPartVersion { get; set; }
     }
 

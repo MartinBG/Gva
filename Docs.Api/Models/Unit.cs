@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -21,21 +20,37 @@ namespace Docs.Api.Models
         }
 
         public int UnitId { get; set; }
+
         public string Name { get; set; }
+
         public int UnitTypeId { get; set; }
+
         public bool InheritParentClassification { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
+
         public virtual ICollection<DocUnit> DocUnits { get; set; }
+
         public virtual ICollection<DocUser> DocUsers { get; set; }
+
         public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
+
         public virtual ICollection<DocWorkflow> DocWorkflows1 { get; set; }
+
         public virtual ICollection<ElectronicServiceStageExecutor> ElectronicServiceStageExecutors { get; set; }
+
         public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
+
         public virtual ICollection<UnitRelation> UnitRelations { get; set; }
+
         public virtual ICollection<UnitRelation> UnitRelations1 { get; set; }
+
         public virtual ICollection<UnitRelation> UnitRelations2 { get; set; }
+
         public virtual UnitType UnitType { get; set; }
     }
 
@@ -70,7 +85,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.UnitType)
                 .WithMany(t => t.Units)
                 .HasForeignKey(d => d.UnitTypeId);
-
         }
     }
 }

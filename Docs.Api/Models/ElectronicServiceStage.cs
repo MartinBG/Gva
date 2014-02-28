@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -13,18 +12,31 @@ namespace Docs.Api.Models
         }
 
         public int ElectronicServiceStageId { get; set; }
+
         public int DocTypeId { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public string Alias { get; set; }
-        public Nullable<int> Duration { get; set; }
+
+        public int? Duration { get; set; }
+
         public bool IsDurationReset { get; set; }
+
         public bool IsFirstByDefault { get; set; }
+
         public bool IsLastStage { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<DocElectronicServiceStage> DocElectronicServiceStages { get; set; }
+
         public virtual DocType DocType { get; set; }
+
         public virtual ICollection<ElectronicServiceStageExecutor> ElectronicServiceStageExecutors { get; set; }
     }
 
@@ -67,7 +79,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.DocType)
                 .WithMany(t => t.ElectronicServiceStages)
                 .HasForeignKey(d => d.DocTypeId);
-
         }
     }
 }

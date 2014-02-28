@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,12 +5,19 @@ namespace Docs.Api.Models
     public partial class UnitRelation
     {
         public int UnitRelationId { get; set; }
+
         public int UnitId { get; set; }
-        public Nullable<int> ParentUnitId { get; set; }
+
+        public int? ParentUnitId { get; set; }
+
         public int RootUnitId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Unit Unit { get; set; }
+
         public virtual Unit Unit1 { get; set; }
+
         public virtual Unit Unit2 { get; set; }
     }
 
@@ -48,7 +53,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit2)
                 .WithMany(t => t.UnitRelations2)
                 .HasForeignKey(d => d.RootUnitId);
-
         }
     }
 }

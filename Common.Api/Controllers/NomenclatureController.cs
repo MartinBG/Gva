@@ -1,9 +1,9 @@
-﻿using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 
 namespace Common.Api.Controllers
 {

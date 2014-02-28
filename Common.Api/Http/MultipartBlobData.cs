@@ -7,8 +7,8 @@ namespace Common.Api.Http
     {
         public MultipartBlobData(HttpContentHeaders headers, Guid blobKey)
         {
-            Headers = headers;
-            BlobKey = blobKey;
+            this.Headers = headers;
+            this.BlobKey = blobKey;
         }
 
         public HttpContentHeaders Headers { get; private set; }

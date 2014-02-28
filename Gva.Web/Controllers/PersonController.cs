@@ -78,6 +78,7 @@ namespace Gva.Web.Controllers
 
                 transaction.Commit();
             }
+
             this.unitOfWork.Save();
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);

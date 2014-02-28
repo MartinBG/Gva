@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,15 +5,25 @@ namespace Docs.Api.Models
     public partial class DocTypeUnitRole
     {
         public int DocTypeUnitRoleId { get; set; }
+
         public int DocTypeId { get; set; }
+
         public int DocDirectionId { get; set; }
+
         public int DocUnitRoleId { get; set; }
+
         public int UnitId { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual DocDirection DocDirection { get; set; }
+
         public virtual DocType DocType { get; set; }
+
         public virtual DocUnitRole DocUnitRole { get; set; }
+
         public virtual Unit Unit { get; set; }
     }
 
@@ -56,7 +64,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.DocTypeUnitRoles)
                 .HasForeignKey(d => d.UnitId);
-
         }
     }
 }

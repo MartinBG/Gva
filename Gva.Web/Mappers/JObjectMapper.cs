@@ -10,7 +10,9 @@ namespace Gva.Web.Mappers
             Mapper.CreateMap<JObject, JObject>().ConvertUsing(value =>
             {
                 if (value == null)
+                {
                     return null;
+                }
 
                 return new JObject(value);
             });

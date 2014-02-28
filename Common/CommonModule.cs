@@ -1,6 +1,6 @@
 ﻿using Common.Data;
-using Ninject.Modules;
 using Ninject.Extensions.NamedScope;
+using Ninject.Modules;
 
 namespace Common
 {

@@ -12,7 +12,9 @@ namespace Common.Api.Models
         }
 
         public int NomId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
 
         public virtual ICollection<NomValue> NomValues { get; set; }

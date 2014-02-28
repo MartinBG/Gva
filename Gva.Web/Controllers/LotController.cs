@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using AutoMapper;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Web.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 
 namespace Gva.Web.Controllers
 {

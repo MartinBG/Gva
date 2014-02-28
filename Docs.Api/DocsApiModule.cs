@@ -1,6 +1,6 @@
 ﻿using Common.Data;
-using Ninject.Modules;
 using Docs.Api.Models;
+using Ninject.Modules;
 
 namespace Docs.Api
 {

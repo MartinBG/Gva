@@ -1,9 +1,9 @@
-﻿using Common.Api.Models;
-using Common.Data;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Models;
+using Common.Data;
+using Newtonsoft.Json.Linq;
 
 namespace Common.Api.Repositories.NomRepository
 {

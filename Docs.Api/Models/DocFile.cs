@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -11,20 +10,35 @@ namespace Docs.Api.Models
         }
 
         public int DocFileId { get; set; }
+
         public int DocId { get; set; }
+
         public int DocFileTypeId { get; set; }
+
         public int DocFileKindId { get; set; }
+
         public string Name { get; set; }
+
         public string DocFileName { get; set; }
+
         public string DocContentStorage { get; set; }
-        public System.Guid DocFileContentId { get; set; }
-        public Nullable<System.DateTime> SignDate { get; set; }
+
+        public Guid DocFileContentId { get; set; }
+
+        public DateTime? SignDate { get; set; }
+
         public bool IsPrimary { get; set; }
+
         public bool IsSigned { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual DocFileKind DocFileKind { get; set; }
+
         public virtual DocFileType DocFileType { get; set; }
+
         public virtual Doc Doc { get; set; }
     }
 
@@ -78,7 +92,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocFiles)
                 .HasForeignKey(d => d.DocId);
-
         }
     }
 }

@@ -13,16 +13,25 @@ namespace Regs.Api.Models
         }
 
         public int PartVersionId { get; set; }
+
         public int PartId { get; set; }
+
         public string TextContent { get; set; }
+
         public int OriginalCommitId { get; set; }
+
         public int CreatorId { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         public virtual Commit OriginalCommit { get; set; }
+
         public virtual PartOperation PartOperation { get; set; }
+
         public virtual Part Part { get; set; }
+
         public virtual ICollection<Commit> Commits { get; set; }
+
         public virtual User User { get; set; }
     }
 

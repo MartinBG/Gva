@@ -1,8 +1,8 @@
-﻿using Common.Http;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using Common.Http;
 
 namespace Common.Api
 {

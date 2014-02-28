@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,19 +6,33 @@ namespace Docs.Api.Models
     public partial class DocWorkflow
     {
         public int DocWorkflowId { get; set; }
+
         public int DocId { get; set; }
+
         public int DocWorkflowActionId { get; set; }
-        public System.DateTime EventDate { get; set; }
-        public Nullable<bool> YesNo { get; set; }
+
+        public DateTime EventDate { get; set; }
+
+        public bool? YesNo { get; set; }
+
         public int UserId { get; set; }
-        public Nullable<int> ToUnitId { get; set; }
-        public Nullable<int> PrincipalUnitId { get; set; }
+
+        public int? ToUnitId { get; set; }
+
+        public int? PrincipalUnitId { get; set; }
+
         public string Note { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual DocWorkflowAction DocWorkflowAction { get; set; }
+
         public virtual Unit Unit { get; set; }
+
         public virtual Unit Unit1 { get; set; }
+
         public virtual Common.Api.Models.User User { get; set; }
     }
 
@@ -66,7 +79,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.User)
                 .WithMany()
                 .HasForeignKey(d => d.UserId);
-
         }
     }
 }

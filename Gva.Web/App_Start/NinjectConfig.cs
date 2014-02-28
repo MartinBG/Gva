@@ -1,10 +1,10 @@
-﻿using Common;
+﻿using System.Web;
+using Common;
+using Common.Api;
+using Docs.Api;
+using Gva.Api;
 using Ninject;
 using Regs.Api;
-using System.Web;
-using Common.Api;
-using Gva.Api;
-using Docs.Api;
 
 namespace Gva.Web.App_Start
 {

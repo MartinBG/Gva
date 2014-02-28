@@ -17,6 +17,7 @@ namespace Common.Api.Http
         private class Blob
         {
             public int Id { get; set; }
+
             public SHA1 SHA1 { get; set; }
         }
 
@@ -44,7 +45,7 @@ namespace Common.Api.Http
             }
 
             // if no filename parameter was found in the Content-Disposition header then return a memory stream.
-            if (String.IsNullOrEmpty(contentDisposition.FileName))
+            if (string.IsNullOrEmpty(contentDisposition.FileName))
             {
                 this.blobs.Add(null);
                 return new MemoryStream();
@@ -59,7 +60,7 @@ INSERT INTO [dbo].[Blobs] ([Key], [Hash], [Size], [Content], [IsDeleted])
 
 SET @id = SCOPE_IDENTITY();
 ",
-                    connection))
+                    this.connection))
                 {
                     SqlParameter paramId = new SqlParameter("@id", SqlDbType.Int);
                     paramId.Direction = ParameterDirection.Output;
@@ -76,8 +77,8 @@ SET @id = SCOPE_IDENTITY();
 
                     this.blobs.Add(new Blob { Id = id, SHA1 = sha1 });
 
-                    //wrap the CryptoStream in our StreamApmToAsyncBridge since the crypto stream implements only
-                    //the *Async methods but the WebApi calls the APM style Begin/End methods
+                    // wrap the CryptoStream in our StreamApmToAsyncBridge since the crypto stream implements only
+                    // the *Async methods but the WebApi calls the APM style Begin/End methods
                     return new StreamApmToAsyncBridge(cryptoStream);
                 }
             }
@@ -96,7 +97,7 @@ SET @id = SCOPE_IDENTITY();
                 {
                     // Extract name from Content-Disposition header. We know from earlier that the header is present.
                     ContentDispositionHeaderValue contentDisposition = content.Headers.ContentDisposition;
-                    string formFieldName = UnquoteToken(contentDisposition.Name) ?? String.Empty;
+                    string formFieldName = UnquoteToken(contentDisposition.Name) ?? string.Empty;
 
                     // Read the contents as string data and add to form data
                     string formFieldValue = await content.ReadAsStringAsync();
@@ -104,7 +105,7 @@ SET @id = SCOPE_IDENTITY();
                 }
                 else
                 {
-                    using (SqlTransaction trn = await Task.Run(() => connection.BeginTransaction()))
+                    using (SqlTransaction trn = await Task.Run(() => this.connection.BeginTransaction()))
                     using (SqlCommand cmdUpdate = new SqlCommand(
 @"
 DECLARE @size INT;
@@ -127,7 +128,7 @@ END
                             trn))
                     {
                         cmdUpdate.Parameters.AddWithValue("@id", blob.Id);
-                        cmdUpdate.Parameters.AddWithValue("@hash", BitConverter.ToString(blob.SHA1.Hash).Replace("-", ""));
+                        cmdUpdate.Parameters.AddWithValue("@hash", BitConverter.ToString(blob.SHA1.Hash).Replace("-", string.Empty));
 
                         SqlParameter paramKey = new SqlParameter("@blobKey", SqlDbType.UniqueIdentifier);
                         paramKey.Direction = ParameterDirection.Output;
@@ -144,27 +145,6 @@ END
 
             this.FormData = new NameValueCollection(formData);
             this.BlobData = blobData.AsReadOnly();
-        }
-
-        /// <summary>
-        /// Remove bounding quotes on a token if present
-        /// NOTE: A copy of the WebApi internal System.Net.Http.FormattingUtilities.UnquoteToken
-        /// </summary>
-        /// <param name="token">Token to unquote.</param>
-        /// <returns>Unquoted token.</returns>
-        private static string UnquoteToken(string token)
-        {
-            if (String.IsNullOrWhiteSpace(token))
-            {
-                return token;
-            }
-
-            if (token.StartsWith("\"", StringComparison.Ordinal) && token.EndsWith("\"", StringComparison.Ordinal) && token.Length > 1)
-            {
-                return token.Substring(1, token.Length - 2);
-            }
-
-            return token;
         }
 
         public void Dispose()
@@ -185,6 +165,27 @@ END
                 this.blobs = null;
                 this.connection = null;
             }
+        }
+
+        /// <summary>
+        /// Remove bounding quotes on a token if present
+        /// NOTE: A copy of the WebApi internal System.Net.Http.FormattingUtilities.UnquoteToken
+        /// </summary>
+        /// <param name="token">Token to unquote.</param>
+        /// <returns>Unquoted token.</returns>
+        private static string UnquoteToken(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return token;
+            }
+
+            if (token.StartsWith("\"", StringComparison.Ordinal) && token.EndsWith("\"", StringComparison.Ordinal) && token.Length > 1)
+            {
+                return token.Substring(1, token.Length - 2);
+            }
+
+            return token;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Gva.Web.Models
+﻿namespace Gva.Web.Models
 {
     public class File
     {

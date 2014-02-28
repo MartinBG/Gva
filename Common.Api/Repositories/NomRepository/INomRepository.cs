@@ -1,5 +1,5 @@
-﻿using Common.Api.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Common.Api.Models;
 
 namespace Common.Api.Repositories.NomRepository
 {

@@ -5,16 +5,25 @@ namespace Common.Api.Models
     public partial class NomValue
     {
         public int NomValueId { get; set; }
+
         public int NomId { get; set; }
+
         public string Code { get; set; }
+
         public string Name { get; set; }
+
         public string NameAlt { get; set; }
+
         public int? ParentValueId { get; set; }
+
         public string Alias { get; set; }
+
         public string TextContent { get; set; }
+
         public bool? IsActive { get; set; }
 
         public virtual Nom Nom { get; set; }
+
         public virtual NomValue ParentValue { get; set; }
     }
 

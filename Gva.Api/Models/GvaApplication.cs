@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -13,11 +12,17 @@ namespace Gva.Api.Models
         }
 
         public int GvaApplicationId { get; set; }
+
         public int DocId { get; set; }
+
         public int LotId { get; set; }
+
         public virtual Docs.Api.Models.Doc Doc { get; set; }
+
         public virtual Regs.Api.Models.Lot Lot { get; set; }
+
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
+
         public virtual ICollection<GvaLotObject> GvaLotObjects { get; set; }
     }
 
@@ -42,7 +47,6 @@ namespace Gva.Api.Models
             this.HasRequired(t => t.Lot)
                 .WithMany()
                 .HasForeignKey(d => d.LotId);
-
         }
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,11 +5,17 @@ namespace Docs.Api.Models
     public partial class DocIncomingDoc
     {
         public int DocIncomingDocId { get; set; }
+
         public int DocId { get; set; }
+
         public int IncomingDocId { get; set; }
+
         public bool IsDocInitial { get; set; }
+
         public System.DateTime CreateDate { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual IncomingDoc IncomingDoc { get; set; }
     }
 
@@ -38,7 +42,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.IncomingDoc)
                 .WithMany(t => t.DocIncomingDocs)
                 .HasForeignKey(d => d.IncomingDocId);
-
         }
     }
 }

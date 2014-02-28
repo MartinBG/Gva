@@ -1,14 +1,13 @@
-﻿using Common.Data;
-using Newtonsoft.Json.Linq;
-using Regs.Api.LotEvents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
-using System.Text;
-using Common.Api.UserContext;
 using System.Text.RegularExpressions;
+using Common.Api.UserContext;
+using Common.Data;
+using Newtonsoft.Json.Linq;
+using Regs.Api.LotEvents;
 
 namespace Regs.Api.Models
 {
@@ -21,13 +20,19 @@ namespace Regs.Api.Models
         }
 
         public int LotId { get; set; }
+
         public int SetId { get; set; }
+
         public int NextIndex { get; set; }
+
         public DateTime ModifyDate { get; set; }
+
         public byte[] Version { get; set; }
 
         public virtual ICollection<Commit> Commits { get; set; }
+
         public virtual ICollection<Part> Parts { get; set; }
+
         public virtual Set Set { get; set; }
 
         public Commit Index
@@ -195,7 +200,8 @@ namespace Regs.Api.Models
                 this.Commits.Remove(newLastCommit);
 
                 newLastCommit = newLastCommit.ParentCommit;
-            } while (newLastCommit != null && newLastCommit.CommitId != commitId);
+            }
+            while (newLastCommit != null && newLastCommit.CommitId != commitId);
 
             if (newLastCommit == null)
             {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -15,15 +14,25 @@ namespace Docs.Api.Models
         }
 
         public int RegisterIndexId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
+
         public string Code { get; set; }
+
         public string NumberFormat { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<Correspondent> Correspondents { get; set; }
+
         public virtual ICollection<DocRegister> DocRegisters { get; set; }
+
         public virtual ICollection<DocType> DocTypes { get; set; }
+
         public virtual ICollection<DocType> DocTypes1 { get; set; }
     }
 

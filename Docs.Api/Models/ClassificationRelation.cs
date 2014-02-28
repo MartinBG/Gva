@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,12 +5,19 @@ namespace Docs.Api.Models
     public partial class ClassificationRelation
     {
         public int ClassificationRelationId { get; set; }
+
         public int ClassificationId { get; set; }
-        public Nullable<int> ParentClassificationId { get; set; }
-        public Nullable<int> RootClassificationId { get; set; }
+
+        public int? ParentClassificationId { get; set; }
+
+        public int? RootClassificationId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Classification Classification { get; set; }
+
         public virtual Classification Classification1 { get; set; }
+
         public virtual Classification Classification2 { get; set; }
     }
 
@@ -48,7 +53,6 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.Classification2)
                 .WithMany(t => t.ClassificationRelations2)
                 .HasForeignKey(d => d.RootClassificationId);
-
         }
     }
 }

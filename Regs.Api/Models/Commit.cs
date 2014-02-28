@@ -13,17 +13,25 @@ namespace Regs.Api.Models
         }
 
         public int CommitId { get; set; }
+
         public int LotId { get; set; }
+
         public int? ParentCommitId { get; set; }
+
         public int CommiterId { get; set; }
+
         public DateTime CommitDate { get; set; }
+
         public bool IsIndex { get; set; }
 
         public bool IsLoaded { get; set; }
 
         public virtual Commit ParentCommit { get; set; }
+
         public virtual Lot Lot { get; set; }
+
         public virtual User Commiter { get; set; }
+
         public virtual ICollection<PartVersion> PartVersions { get; set; }
 
         public void EnsureIsLoaded()

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,11 +5,17 @@ namespace Docs.Api.Models
     public partial class IrregularityType
     {
         public int IrregularityTypeId { get; set; }
+
         public int DocTypeId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
+
         public string Description { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual DocType DocType { get; set; }
     }
 
@@ -49,7 +53,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.DocType)
                 .WithMany(t => t.IrregularityTypes)
                 .HasForeignKey(d => d.DocTypeId);
-
         }
     }
 }
