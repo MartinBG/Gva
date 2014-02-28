@@ -69,9 +69,9 @@ namespace Common.Api.Utils
             this.stream.Close();
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, System.Threading.CancellationToken cancellationToken)
+        public override async Task CopyToAsync(Stream destination, int bufferSize, System.Threading.CancellationToken cancellationToken)
         {
-            return this.stream.CopyToAsync(destination, bufferSize, cancellationToken);
+            await this.stream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
         public override System.Runtime.Remoting.ObjRef CreateObjRef(Type requestedType)
@@ -89,9 +89,9 @@ namespace Common.Api.Utils
             this.stream.Flush();
         }
 
-        public override Task FlushAsync(System.Threading.CancellationToken cancellationToken)
+        public override async Task FlushAsync(System.Threading.CancellationToken cancellationToken)
         {
-            return this.stream.FlushAsync(cancellationToken);
+            await this.stream.FlushAsync(cancellationToken);
         }
 
         public override int GetHashCode()
@@ -126,9 +126,9 @@ namespace Common.Api.Utils
             return this.stream.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
         {
-            return this.stream.ReadAsync(buffer, offset, count, cancellationToken);
+            return await this.stream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
         public override int ReadByte()
