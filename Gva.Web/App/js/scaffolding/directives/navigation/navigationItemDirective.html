@@ -1,0 +1,19 @@
+<li ng-class="{'active': item.active }">
+  <a ng-if="item.url" ng-href="{{ item.url }}" target="{{ item.newTab && '_blank' || '_self' }}">
+    <span ng-if="item.icon" ng-class="item.icon"></span>
+    <span>{{ item.text }}</span>
+  </a>
+
+  <a ng-if="item.state && !item.parent" name="stateLink" sc-click="stateGo()">
+    <span ng-show="item.icon" ng-class="stateLink.$pending ? 'glyphicon glyphicon-loading' : item.icon"></span>
+    <span>{{ item.text }}</span>
+  </a>
+
+  <a ng-if="!item.state && item.parent" class="dropdown-toggle">
+    <span ng-show="item.icon" ng-class="item.icon"></span>
+    <span>{{ item.text }}</span>
+    <b class="caret"></b>
+  </a>
+
+  <ul class="dropdown-menu" ng-transclude></ul>
+</li>

@@ -143,6 +143,8 @@
     <Content Include="App\js\ems\docs\forms\docView\docOutgoing.html" />
     <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
+    <Content Include="App\js\ems\docs\views\docsData.html" />
+    <Content Include="App\js\common\root\views\root.html" />
     <Content Include="App\js\ems\docs\views\selectCorrView.html" />
     <Content Include="App\js\ems\docs\views\selectCorrViewCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectUnitView.html" />
@@ -172,7 +174,13 @@
     <Content Include="App\js\gva\persons\resources\personRatingView.js" />
     <Content Include="App\js\gva\persons\resources\personEditionView.js" />
     <Content Include="App\js\gva\persons\resources\personDocumentMedicalView.js" />
+    <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.html" />
+    <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
+    <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.html" />
+    <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.html" />
+    <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.js" />
+    <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.js" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="App\js\scaffolding\directives\validationError\validationErrorDirective.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
@@ -281,6 +289,7 @@
     <Content Include="App\schema\nomenclatures\boolean.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
+    <Content Include="App\schema\nomenclatures\graduation.js" />
     <Content Include="App\schema\nomenclatures\otherDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\publisherType.js" />
     <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
@@ -521,10 +530,6 @@
     <Content Include="App\js\gva\persons\views\personsSearch.html" />
     <Content Include="App\js\gva\persons\views\personsSearchCtrl.js" />
     <Content Include="App\js\common\common_bg-bg.js" />
-    <Content Include="App\js\common\navigation\views\breadcrumbBarCtrl.js" />
-    <Content Include="App\js\common\navigation\views\navbarCtrl.js" />
-    <Content Include="App\js\common\navigation\providers\navigationConfigProvider.js" />
-    <Content Include="App\js\common\navigation\views\navbar.html" />
     <Content Include="App\js\gva\persons\forms\personAddress.html" />
     <Content Include="App\js\gva\persons\forms\personDataCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentId.html" />
@@ -689,6 +694,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\person-document-checks.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-id.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

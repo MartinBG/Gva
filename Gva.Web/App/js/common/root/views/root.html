@@ -1,0 +1,34 @@
+<sc-navigation user-fullname="Администратор" change-password-state="root.common.users.changePassword" logout-state="root.common.users.logout" class="navigation">
+  <sc-navigation-item text="common.navigation.docs.title" icon="glyphicon glyphicon-folder-open" parent="true">
+    <sc-navigation-item state="root.docs.search" text="common.navigation.docs.search"></sc-navigation-item>
+    <sc-navigation-item state="root.docs.new" text="common.navigation.docs.new"></sc-navigation-item>
+    <sc-navigation-item state="root.corrs.search" text="common.navigation.docs.corrsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.corrs.new" text="common.navigation.docs.corrsNew"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.persons.title" icon="fa fa-users" parent="true">
+    <sc-navigation-item state="root.persons.search" text="common.navigation.persons.search"></sc-navigation-item>
+    <sc-navigation-item state="root.persons.new" text="common.navigation.persons.new"></sc-navigation-item>
+    <sc-navigation-item state="root.persons.search" text="common.navigation.persons.licences"></sc-navigation-item>
+    <sc-navigation-item state="root.persons.search" text="common.navigation.persons.qualifications"></sc-navigation-item>
+    <sc-navigation-item state="root.persons.search" text="common.navigation.persons.medicals"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" text="common.navigation.persons.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.new" text="common.navigation.persons.appsNew"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.link" text="common.navigation.persons.appsLink"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.aircrafts.title" icon="glyphicon glyphicon-plane" parent="true">
+    <sc-navigation-item state="root.persons.search" text="common.navigation.aircrafts.certifications"></sc-navigation-item>
+    <sc-navigation-item state="root.persons.search" text="common.navigation.aircrafts.inspections"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true">
+    <sc-navigation-item state="root.users.search" text="common.navigation.admin.users"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.help.title" parent="true">
+    <sc-navigation-item new-tab="true" url="/docs/kr_help.pdf" text="common.navigation.help.userManual"></sc-navigation-item>
+  </sc-navigation-item>
+</sc-navigation>
+
+<sc-breadcrumb home-state="root.persons"></sc-breadcrumb>
+
+<div class="breadcrumb-page-view"></div>
+
+<div ui-view class="container"></div>

@@ -4,9 +4,40 @@
   angular.module('common').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
-        navbar: {
-          exit: 'Изход',
-          changePass: 'Смяна на паролата'
+        navigation: {
+          logout: 'Изход',
+          changePassword: 'Смяна на паролата',
+          docs: {
+            title: 'Документи',
+            search: 'Търсене',
+            'new': 'Нов документ',
+            corrsSearch: 'Кореспонденти',
+            corrsNew: 'Нов кореспондент'
+          },
+          persons: {
+            title: 'ЛАП',
+            search: 'Физически лица',
+            'new': 'Ново физическо лице',
+            licences: 'Лицензи',
+            qualifications: 'Квалификации',
+            medicals: 'Медицински',
+            appsSearch: 'Заявления',
+            appsNew: 'Ново заявление',
+            appsLink: 'Свържи заявление'
+          },
+          aircrafts: {
+            title: 'ВС',
+            certifications: 'Удостоверения',
+            inspections: 'Инспекции'
+          },
+          admin: {
+            title: 'Админ',
+            users: 'Потребители'
+          },
+          help: {
+            title: 'Помощ',
+            userManual: 'Ръководство на потребителя'
+          }
         },
         users: {
           search: {

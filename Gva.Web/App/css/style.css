@@ -285,9 +285,17 @@ table.dataTable td.buttons-cell
 
 /*tabs loading*/
 .tab-loading {
-    opacity: 0;
+  opacity: 0;
 }
 
 .panel-body {
   padding: 5px 10px !important;
+}
+
+.navigation a {
+  cursor: pointer;
+}
+
+.breadcrumb a {
+  cursor: pointer;
 }
