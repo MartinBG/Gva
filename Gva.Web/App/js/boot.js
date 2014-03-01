@@ -11,7 +11,6 @@
   ]).config([
     '$controllerProvider',
     '$stateProvider',
-    '$provide',
     function ($controllerProvider, $stateProvider) {
       $controllerProvider.register =
         _.wrap($controllerProvider.register, function (original, name, constructor) {
@@ -58,6 +57,12 @@
     }
   ]).run(function () {
     _.forOwn(states, function (state) {
+      if ((!state.self.url || state.self.url.indexOf('?') === 0) &&
+          state.parent &&
+          state.parent['abstract']) {
+        state.parent.defaultChild = state;
+      }
+
       if (_.isEmpty(state.resolve)) {
         _.forOwn(state.views, function (view) {
           if (view.controller && controllers[view.controller] &&

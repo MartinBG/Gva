@@ -53,8 +53,8 @@ a.profile_links{
 	-webkit-border-radius: 0px;
 	-o-border-radius: 0px;
 	-moz-border-radius: 0px;
-	margin-bottom:10px;
-	top: 40px !important;
+	margin-bottom:11px;
+	top: 45px !important;
 }
 .breadcrumb{
 	background-color: #f9f9f9;
@@ -67,14 +67,14 @@ a.profile_links{
 }
 .breadcrumb > li + li:before{
 	content: ">";
-	padding: 0px 2px;
+	padding-right: 2px;
 }
 .dropdown-menu > div{
 	padding-left:10px;
 	padding-right:10px;
 }
 .breadcrumb-page-view{
-	padding-top: 40px !important;
+	padding-top: 30px !important;
 }
 .btn-sm{
 	padding-left: 7px;
@@ -95,7 +95,7 @@ a.profile_links{
 	padding-top: 2px;
 }
 label{
-	margin-bottom: 1px;	
+	margin-bottom: 1px;
 }
 div.labeless{
 	margin-top: 18px !important;
@@ -242,14 +242,14 @@ form.card input.form-control[disabled]{
 	padding: 0px;
 }
 .input-group .select2-container.form-control ul.select2-choices{
-	
+
 	border-radius: 3px 0px 0px 3px;
 	-webkit-border-radius: 3px 0px 0px 3px;
 	-o-border-radius: 3px 0px 0px 3px;
 	-moz-border-radius: 3px 0px 0px 3px;
 }
 .input-group .select2-container.form-control a.select2-choice{
-	
+
 	border-radius: 3px 0px 0px 3px;
 	-webkit-border-radius: 3px 0px 0px 3px;
 	-o-border-radius: 3px 0px 0px 3px;

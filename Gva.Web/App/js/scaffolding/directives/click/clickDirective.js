@@ -4,16 +4,14 @@
 (function (angular) {
   'use strict';
 
-  function ClickDirective() {
+  function ClickDirective($parse) {
     return {
       restrict: 'A',
-      scope: {
-        scClick: '&'
-      },
       link: function (scope, element, attrs) {
         var elementCtrl = {};
+        var clickExpr = $parse(attrs.scClick);
 
-        scope.$parent[attrs.name] = elementCtrl;
+        scope[attrs.name] = elementCtrl;
 
         element.on('click', function (event) {
           if (elementCtrl.$pending) {
@@ -22,7 +20,7 @@
 
           scope.$apply(function () {
             // add $event local variables to the expression context as ngClick does
-            var result = scope.scClick({ $event: event });
+            var result = clickExpr(scope, { $event: event });
 
             // check if the result is promise
             if (result && result.then && typeof (result.then) === 'function') {
@@ -37,7 +35,7 @@
     };
   }
 
-  ClickDirective.$inject = [];
+  ClickDirective.$inject = ['$parse'];
 
   angular.module('scaffolding').directive('scClick', ClickDirective);
 }(angular));
