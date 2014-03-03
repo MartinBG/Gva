@@ -1,13 +1,13 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   /*jshint newcap: false */
   'use strict';
   function $HttpBackendConfiguratorProvider() {
-    this.patterns = [];
+    this.definitions = [];
   }
 
   $HttpBackendConfiguratorProvider.prototype.when = function (method, pattern, handler) {
-    this.patterns.push({
+    this.definitions.push({
       method: method,
       pattern: pattern,
       handler: handler
@@ -19,25 +19,19 @@
     '$urlMatcherFactory',
     '$injector',
     function ($urlMatcherFactory, $injector) {
-      return new $HttpBackendConfigurator($injector, this.patterns.map(function (pattern) {
+      return new $HttpBackendConfigurator($injector, this.definitions.map(function (definition) {
         return {
-          method: pattern.method,
-          matcher: $urlMatcherFactory.compile(pattern.pattern),
-          handler: pattern.handler
+          method: definition.method,
+          matcher: $urlMatcherFactory.compile(definition.pattern),
+          handler: definition.handler
         };
       }));
     }
   ];
 
-  function $HttpBackendConfigurator($injector, matchers) {
+  function $HttpBackendConfigurator($injector, definitions) {
     this.$injector = $injector;
-    this.matchersPerMethod = matchers.reduce(function (res, matcher) {
-      if (!res[matcher.method]) {
-        res[matcher.method] = [];
-      }
-      res[matcher.method].push(matcher);
-      return res;
-    }, {});
+    this.definitions = definitions;
   }
 
   $HttpBackendConfigurator.prototype.parseQuery = function (query) {
@@ -56,34 +50,40 @@
   };
 
   $HttpBackendConfigurator.prototype.configure = function ($httpBackend) {
-    var self = this,
-      method;
+    var self = this;
 
-    function respond(method, url, data) {
-      var matchers = self.matchersPerMethod[method],
-        urlSplit = url.split('?'),
+    function respond(definition, method, url, data) {
+      var urlSplit = url.split('?'),
         path = urlSplit[0],
-        query = self.parseQuery(urlSplit[1]),
-        i;
+        query = self.parseQuery(urlSplit[1]);
 
-      for (i = 0; i < matchers.length; i++) {
-        var match = matchers[i].matcher.exec(path, query);
-        if (match) {
-          return self.$injector.invoke(matchers[i].handler, {}, {
-            $params: match,
-            $data: data,
-            $jsonData: data && JSON.parse(data)
-          });
-        }
+      var match = definition.matcher.exec(path, query);
+      if (!match) {
+        throw new Error('Matcher could not parse the provided url!');
       }
+
+      return self.$injector.invoke(definition.handler, {}, {
+        $params: match,
+        $data: data,
+        $jsonData: data && JSON.parse(data)
+      });
     }
 
-    for (method in self.matchersPerMethod) {
-      if (self.matchersPerMethod.hasOwnProperty(method)) {
-        $httpBackend.when(method, /^.*$/).respond(respond);
-      }
-    }
+    self.definitions.forEach(function (definition) {
+      var patternWithQuery = definition.matcher.regexp.source.slice(0, -1) + '(\\?.*)?$';
+
+      $httpBackend
+        .when(definition.method, new RegExp(patternWithQuery))
+        .respond(_.partial(respond, definition));
+    });
+
+    // pass through all other requests
+    $httpBackend.when('GET', /^.*$/).passThrough();
+    $httpBackend.when('POST', /^.*$/).passThrough();
+    $httpBackend.when('PUT', /^.*$/).passThrough();
+    $httpBackend.when('DELETE', /^.*$/).passThrough();
+    $httpBackend.when('PATCH', /^.*$/).passThrough();
   };
 
   angular.module('app').provider('$httpBackendConfigurator', $HttpBackendConfiguratorProvider);
-}(angular));
+}(angular, _));
