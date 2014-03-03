@@ -368,9 +368,6 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
-    <Content Include="App\test\gva\persons\mocks\personRatingViewsHttp.js" />
-    <Content Include="App\test\gva\persons\mocks\personRatingEditionViewsHttp.js" />
-    <Content Include="App\test\gva\persons\mocks\personDocumentMedicalViewsHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\flyingExperiences\searchFlyingExpSpec.js" />
     <Content Include="App\test\gva\persons\mocks\publishers.js" />
