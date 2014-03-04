@@ -70,7 +70,8 @@
           for (var i = 0; i < $scope.tabList.length; i++) {
             tab = $scope.tabList[i];
 
-            if (tab.isState && tab.name === tabName) {
+            //if (tab.isState && tab.name === tabName) {
+            if (tab.isState && tabName.indexOf(tab.name) === 0) {
               tab.loading = false;
               return;
             }
@@ -91,7 +92,8 @@
             var tab = $scope.tabList[i];
 
             if (tab.isState) {
-              if (tab.name !== tabName) {
+              //if (tab.name !== tabName) {
+              if (tabName.indexOf(tab.name) !== 0) {
                 continue;
               }
               selectTab($scope.tabList, tab);
