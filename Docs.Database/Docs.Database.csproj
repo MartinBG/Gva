@@ -110,6 +110,7 @@
     <Content Include="Create\Tables\IncomingDocuments\IncomingDocStatuses.sql" />
     <Content Include="Create\Tables\Others\IrregularityTypes.sql" />
     <Content Include="Create\Tables\Registers\RegisterIndexes.sql" />
+    <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Tables\Units\UnitClassifications.sql" />
     <Content Include="Create\Tables\Units\UnitRelations.sql" />
     <Content Include="Create\Tables\Units\Units.sql" />

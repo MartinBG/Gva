@@ -17,6 +17,7 @@ GO
 :r $(rootPath)"\Tables\Units\Units.sql"
 :r $(rootPath)"\Tables\Units\UnitRelations.sql"
 :r $(rootPath)"\Tables\Units\UnitClassifications.sql"
+:r $(rootPath)"\Tables\Units\UnitUsers.sql"
 
 --Assignments
 :r $(rootPath)"\Tables\Assignments\AssignmentTypes.sql"

@@ -12,8 +12,8 @@ namespace Docs.Api.Models
         public Nullable<int> RootDocId { get; set; }
         public byte[] Version { get; set; }
         public virtual Doc Doc { get; set; }
-        public virtual Doc Doc1 { get; set; }
-        public virtual Doc Doc2 { get; set; }
+        public virtual Doc ParentDoc { get; set; }
+        public virtual Doc RootDoc { get; set; }
     }
 
     public class DocRelationMap : EntityTypeConfiguration<DocRelation>
@@ -42,10 +42,10 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocRelations)
                 .HasForeignKey(d => d.DocId);
-            this.HasOptional(t => t.Doc1)
+            this.HasOptional(t => t.ParentDoc)
                 .WithMany(t => t.DocRelations1)
                 .HasForeignKey(d => d.ParentDocId);
-            this.HasOptional(t => t.Doc2)
+            this.HasOptional(t => t.RootDoc)
                 .WithMany(t => t.DocRelations2)
                 .HasForeignKey(d => d.RootDocId);
 

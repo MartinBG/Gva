@@ -116,6 +116,7 @@
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationRelation.cs" />
     <Compile Include="Models\ClassificationRole.cs" />
+    <Compile Include="Models\UnitUser.cs" />
     <Compile Include="Models\DocsDbConfiguration.cs" />
     <Compile Include="Models\Correspondent.cs" />
     <Compile Include="Models\CorrespondentContact.cs" />
