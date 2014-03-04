@@ -15,6 +15,10 @@
     return this;
   };
 
+  $HttpBackendConfiguratorProvider.prototype.xwhen = function () {
+    return this;
+  };
+
   $HttpBackendConfiguratorProvider.prototype.$get = [
     '$urlMatcherFactory',
     '$injector',
