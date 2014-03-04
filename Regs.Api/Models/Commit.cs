@@ -34,6 +34,8 @@ namespace Regs.Api.Models
 
         public virtual ICollection<PartVersion> PartVersions { get; set; }
 
+        public virtual ICollection<PartVersion> ChangedPartVersions { get; set; }
+
         public void EnsureIsLoaded()
         {
             if (!this.IsLoaded)

@@ -11,8 +11,8 @@ namespace Gva.Web.Mappers
         {
             Mapper.CreateMap<PartVersion, PartVersionDO>()
                 .ForMember(pdo => pdo.PartIndex, m => m.MapFrom(p => p.Part.Index))
-                .ForMember(pdo => pdo.Part, m => m.MapFrom(p => JObject.Parse(p.TextContent).Value<JObject>("part")))
-                .ForMember(pdo => pdo.File, m => m.MapFrom(p => JObject.Parse(p.TextContent).Value<JObject>("file")));
+                .ForMember(pdo => pdo.Part, m => m.MapFrom(p => p.Content.Value<JObject>("part")))
+                .ForMember(pdo => pdo.File, m => m.MapFrom(p => p.Content.Value<JObject>("file")));
         }
     }
 }

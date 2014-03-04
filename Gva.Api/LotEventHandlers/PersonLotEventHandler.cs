@@ -58,14 +58,14 @@ namespace Gva.Api.LotEventHandlers
 
         private void UpdatePersonData(GvaPerson person, Commit commit)
         {
-            var personDataPart = commit.PartVersions
-                .SingleOrDefault(pv => pv.Part.SetPart.Alias == "data" && pv.OriginalCommit == commit);
+            var personDataPart = commit.ChangedPartVersions
+                .SingleOrDefault(pv => pv.Part.SetPart.Alias == "data");
 
             if (personDataPart != null)
             {
-                var personDataContent = JObject.Parse(personDataPart.TextContent).Value<JObject>("part");
+                var personDataContent = personDataPart.Content.Value<JObject>("part");
 
-                var personBirthDate = Convert.ToDateTime(personDataContent.Value<string>("dateOfBirth"));
+                var personBirthDate = personDataContent.Value<DateTime>("dateOfBirth");
                 DateTime now = DateTime.Today;
                 int age = now.Year - personBirthDate.Year;
                 if (now < personBirthDate.AddYears(age))
@@ -92,7 +92,7 @@ namespace Gva.Api.LotEventHandlers
             person.Licences = string.Empty;
             foreach (var personLicencePart in personLicenceParts)
             {
-                var personLicenceContent = JObject.Parse(personLicencePart.TextContent).Value<JObject>("part");
+                var personLicenceContent = personLicencePart.Content.Value<JObject>("part");
                 person.Licences += string.Format(", {0}", personLicenceContent.Value<JObject>("licenceType").Value<string>("name"));
             }
         }
@@ -105,7 +105,7 @@ namespace Gva.Api.LotEventHandlers
             person.Ratings = string.Empty;
             foreach (var personRatingPart in personRatingParts)
             {
-                var personRatingContent = JObject.Parse(personRatingPart.TextContent).Value<JObject>("part");
+                var personRatingContent = personRatingPart.Content.Value<JObject>("part");
 
                 var retingType = personRatingContent.Value<JObject>("ratingType");
                 if (retingType != null)
@@ -124,7 +124,7 @@ namespace Gva.Api.LotEventHandlers
 
             if (personEmploymentPart != null)
             {
-                var personEmploymentContent = JObject.Parse(personEmploymentPart.TextContent).Value<JObject>("part");
+                var personEmploymentContent = personEmploymentPart.Content.Value<JObject>("part");
 
                 var organization = personEmploymentContent.Value<JObject>("organization");
                 person.Organization = organization == null ? null : organization.Value<string>("name");

@@ -98,7 +98,7 @@ namespace Regs.Api.Models
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
                 Part = part,
-                TextContent = json.ToString()
+                Content = json
             };
             index.PartVersions.Add(partVersion);
 
@@ -282,7 +282,7 @@ namespace Regs.Api.Models
         public JObject GetPartContent(string path, int? commitId = null)
         {
             return this.GetPartVersions(path, true, commitId)
-                .Select(pv => JObject.Parse(pv.TextContent))
+                .Select(pv => pv.Content)
                 .FirstOrDefault();
         }
 
@@ -297,23 +297,8 @@ namespace Regs.Api.Models
         {
             return this.GetPartVersions(path, false, commitId)
                 .OrderBy(pv => pv.Part.Path)
-                .Select(pv => JObject.Parse(pv.TextContent))
+                .Select(pv => pv.Content)
                 .ToArray();
-        }
-
-        public IEnumerable<PartVersion> GetAddedPartVersions(int? commitId = null)
-        {
-            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Add }, commitId);
-        }
-
-        public IEnumerable<PartVersion> GetUpdatedPartVersions(int? commitId = null)
-        {
-            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Update }, commitId);
-        }
-
-        public IEnumerable<PartVersion> GetDeletedParts(int? commitId = null)
-        {
-            return this.GetPartsByOperations(new PartOperation[] { PartOperation.Delete }, commitId);
         }
 
         public IEnumerable<PartVersion> GetPartVersions(string path, bool exact, int? commitId = null)
@@ -343,7 +328,7 @@ namespace Regs.Api.Models
 
             if (partVersion.OriginalCommit == currCommit)
             {
-                partVersion.TextContent = json.ToString();
+                partVersion.Content = json;
                 partVersion.CreatorId = userContext.UserId;
                 partVersion.CreateDate = DateTime.Now;
                 return partVersion;
@@ -356,7 +341,7 @@ namespace Regs.Api.Models
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
                 Part = partVersion.Part,
-                TextContent = json.ToString()
+                Content = json
             };
             currCommit.PartVersions.Remove(partVersion);
             currCommit.PartVersions.Add(updatedPartVersion);
@@ -386,14 +371,6 @@ namespace Regs.Api.Models
             currCommit.PartVersions.Add(deletedPartVersion);
 
             return deletedPartVersion;
-        }
-
-        private IEnumerable<PartVersion> GetPartsByOperations(PartOperation[] partOperations, int? commitId)
-        {
-            Commit commit = this.GetCommit(commitId);
-            IEnumerable<PartVersion> partVersions = commit.PartVersions.Where(pv => partOperations.Contains(pv.PartOperation));
-
-            return partVersions;
         }
 
         private Commit GetCommit(int? commitId = null)

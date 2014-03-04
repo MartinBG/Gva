@@ -98,8 +98,8 @@ namespace Gva.Web.Controllers
             IList<InventoryItem> inventory = new List<InventoryItem>();
             foreach (var partVersion in partVersions)
             {
-                JObject content = JObject.Parse(partVersion.TextContent).Value<JObject>("part");
-                JObject file = JObject.Parse(partVersion.TextContent).Value<JObject>("file");
+                JObject content = partVersion.Content.Value<JObject>("part");
+                JObject file = partVersion.Content.Value<JObject>("file");
                 JToken valid;
                 JToken publisher;
 
@@ -165,7 +165,7 @@ namespace Gva.Web.Controllers
                         "{0}-{1}-{2}-{3}",
                         content.Value<string>("documentNumberPrefix"),
                         content.Value<string>("documentNumber"),
-                        JObject.Parse(lot.GetPart("personData").TextContent).Value<string>("lin"),
+                        lot.GetPart("personData").Content.Value<string>("lin"),
                         content.Value<string>("documentNumberSuffix"));
                 }
                 else if (partAlias == "check")
