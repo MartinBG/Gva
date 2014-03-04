@@ -80,6 +80,8 @@
     <Compile Include="Http\BlobReadStream.cs" />
     <Compile Include="Http\MultipartBlobStreamProvider.cs" />
     <Compile Include="Http\MultipartBlobData.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="UserContext\IUserContextProvider.cs" />
     <Compile Include="UserContext\UserContext.cs" />
     <Compile Include="UserContext\UserContextProvider.cs" />

@@ -26,29 +26,10 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="form-group col-md-6" sc-has-error="docTypeGroupId">
-              <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
-              <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature  ng-model="appModel.docTypeGroup" name="docTypeGroupId" alias="'docTypeGroup'" required></sc-nomenclature>
-            </div>
-            <div class="form-group col-md-6" sc-has-error="docTypeId">
-              <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
-              <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="appModel.docType" name="docTypeId" alias="'docType'" params="{ parentValueId: appModel.docTypeGroup ? appModel.docTypeGroup.nomValueId : 0 }" required></sc-nomenclature>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-md-12" sc-has-error="docSubject">
-              <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
-              <sc-validation-error field-name="docSubject" validations="{required: null}"></sc-validation-error>
-              <sc-text ng-model="appModel.docSubject" name="docSubject" required></sc-text>
-            </div>
-          </div>
+          <ems-doc-new-common name="docNewCommonForm" ng-model="appModel"></ems-doc-new-common>
 
         </div>
-      </form>
+      </ng-form>
     </div>
  </div>
 </div>

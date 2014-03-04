@@ -9,4 +9,4 @@
     { nomValueId: 4, code: '', name: 'Георги Йорданов', nameAlt: '', alias: 'georgi' },
     { nomValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
   ];
-})(typeof module === 'undefined' ? (this['testCorrespondent'] = {}) : module);
+})(typeof module === 'undefined' ? (this['correspondent'] = {}) : module);

@@ -41,7 +41,8 @@ namespace Docs.Api.Models
             // Relationships
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocUnits)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
             this.HasRequired(t => t.DocUnitRole)
                 .WithMany(t => t.DocUnits)
                 .HasForeignKey(d => d.DocUnitRoleId);

@@ -4,7 +4,7 @@
 
   module.exports = [
     {
-      "docDirectionId": 1,
+      "nomValueId": 1,
       "name": "Входящ",
       "alias": "Incoming",
       "isActive": true,
@@ -14,30 +14,30 @@
       "docs": []
     },
     {
-      "docDirectionId": 2,
+      "nomValueId": 2,
       "name": "Вътрешен",
       "alias": "Internal",
-      "isActive": false,
+      "isActive": true,
       "version": "AAAAAAAAHsk=",
       "docTypeClassifications": [],
       "docTypeUnitRoles": [],
       "docs": []
     },
     {
-      "docDirectionId": 3,
+      "nomValueId": 3,
       "name": "Изходящ",
       "alias": "Outgoing",
-      "isActive": false,
+      "isActive": true,
       "version": "AAAAAAAAHso=",
       "docTypeClassifications": [],
       "docTypeUnitRoles": [],
       "docs": []
     },
     {
-      "docDirectionId": 4,
+      "nomValueId": 4,
       "name": "Циркулярен",
       "alias": "InternalOutgoing",
-      "isActive": false,
+      "isActive": true,
       "version": "AAAAAAAAHss=",
       "docTypeClassifications": [],
       "docTypeUnitRoles": [],

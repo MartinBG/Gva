@@ -4,7 +4,7 @@
 
   module.exports = [
     {
-      "docCasePartTypeId": 1,
+      "nomValueId": 1,
       "name": "Публичен",
       "alias": "Public",
       "description": null,
@@ -14,22 +14,22 @@
       "docs": []
     },
     {
-      "docCasePartTypeId": 2,
+      "nomValueId": 2,
       "name": "Вътрешен",
       "alias": "Internal",
       "description": null,
       "version": "AAAAAAAAHt0=",
-      "isActive": false,
+      "isActive": true,
       "docCasePartMovements": [],
       "docs": []
     },
     {
-      "docCasePartTypeId": 3,
+      "nomValueId": 3,
       "name": "Контролен",
       "alias": "Control",
       "description": null,
       "version": "AAAAAAAAHt4=",
-      "isActive": false,
+      "isActive": true,
       "docCasePartMovements": [],
       "docs": []
     }

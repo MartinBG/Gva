@@ -47,6 +47,12 @@
           docStatusName: 'Статус',
           docDirectionName: 'Тип',
           view: {
+            docFile: {
+              docKind: 'Вид файл',
+              name: 'Наименование',
+              docType: 'Тип файл',
+              attachedFile: 'Прикачен файл'
+            },
             content: 'Прикачени файлове',
             text: 'Текст',
             classification: 'Код за достъп и класификация',
@@ -195,7 +201,8 @@
           docTypeGroupId: 'Група',
           docTypeId: 'Вид',
           docSubject: 'Относно',
-          docCorrespondent: 'Кореспондент'
+          docCorrespondent: 'Кореспондент',
+          docNumbers: 'Брой документи'
         },
         caseSelect: {
           fromDate: 'От дата',

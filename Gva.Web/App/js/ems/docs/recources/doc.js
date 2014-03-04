@@ -5,7 +5,7 @@
   angular.module('ems')
     .factory('Doc', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:docId', { docId: '@docId' },
+        return $resource('/api/docs/:id', { id: '@docId' },
           {
             'createNew': {
               method: 'POST',
@@ -15,6 +15,7 @@
               method: 'POST',
               url: '/api/docs/new/register'
             },
+            //?
             'units': {
               method: 'GET',
               url: '/api/nomenclatures/units',
@@ -22,27 +23,27 @@
             },
             'nextStatus': {
               method: 'POST',
-              url: '/api/docs/:docId/nextStatus'
+              url: '/api/docs/:id/nextStatus'
             },
             'reverseStatus': {
               method: 'POST',
-              url: '/api/docs/:docId/reverseStatus'
+              url: '/api/docs/:id/reverseStatus'
             },
             'cancelStatus': {
               method: 'POST',
-              url: '/api/docs/:docId/cancelStatus'
+              url: '/api/docs/:id/cancelStatus'
             },
             'setRegUri': {
               method: 'POST',
-              url: '/api/docs/:docId/setRegUri'
+              url: '/api/docs/:id/setRegUri'
             },
             'setCasePart': {
               method: 'POST',
-              url: '/api/docs/:docId/setCasePart'
+              url: '/api/docs/:id/setCasePart'
             },
             'setDocType': {
               method: 'POST',
-              url: '/api/docs/:docId/setDocType'
+              url: '/api/docs/:id/setDocType'
             }
           });
       }]);

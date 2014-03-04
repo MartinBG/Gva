@@ -5,6 +5,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Ninject.Extensions.NamedScope;
 using Common.Http;
 using Common.Api.UserContext;
+using Docs.Api.Repositories.DocRepository;
 
 namespace Docs.Api
 {
@@ -17,6 +18,7 @@ namespace Docs.Api
             Bind<IDbConfiguration>().To<DocsDbConfiguration>();
 
             Bind<ICorrespondentRepository>().To<CorrespondentRepository>();
+            Bind<IDocRepository>().To<DocRepository>();
         }
     }
 }

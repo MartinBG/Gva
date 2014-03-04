@@ -1,4 +1,5 @@
-﻿using Common.Api.UserContext;
+﻿using Common.Api.Repositories;
+using Common.Api.UserContext;
 using Docs.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
-    public interface ICorrespondentRepository
+    public interface ICorrespondentRepository : IRepository<Correspondent>
     {
         List<Correspondent> GetCorrespondents(
             string correspondentUin, 

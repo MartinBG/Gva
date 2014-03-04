@@ -53,7 +53,8 @@ namespace Docs.Api.Models
             // Relationships
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocWorkflows)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
             this.HasRequired(t => t.DocWorkflowAction)
                 .WithMany(t => t.DocWorkflows)
                 .HasForeignKey(d => d.DocWorkflowActionId);

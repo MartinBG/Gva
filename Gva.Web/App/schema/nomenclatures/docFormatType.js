@@ -4,7 +4,7 @@
 
   module.exports = [
     {
-      "docFormatTypeId": 1,
+      "nomValueId": 1,
       "name": "Електронен",
       "alias": "Electronic",
       "isActive": true,
@@ -12,18 +12,18 @@
       "docs": []
     },
     {
-      "docFormatTypeId": 2,
+      "nomValueId": 2,
       "name": "Електронен с хартия",
       "alias": "ElectronicWithPaper",
-      "isActive": false,
+      "isActive": true,
       "version": "AAAAAAAAIBM=",
       "docs": []
     },
     {
-      "docFormatTypeId": 3,
+      "nomValueId": 3,
       "name": "Хартиен",
       "alias": "Paper",
-      "isActive": false,
+      "isActive": true,
       "version": "AAAAAAAAIBQ=",
       "docs": []
     }

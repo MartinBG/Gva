@@ -77,10 +77,10 @@
           selectedUnits.onUnitSelect = null;
         };
       }
-      else if (message.type === 'roleReaders') {
-        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsRoleReaders);
+      else if (message.type === 'readers') {
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsReaders);
         selectedUnits.onUnitSelect = function (unit) {
-          doc.docUnitsRoleReaders.push(unit);
+          doc.docUnitsReaders.push(unit);
           selectedUnits.onUnitSelect = null;
         };
       }
@@ -92,9 +92,9 @@
         };
       }
       else if (message.type === 'registrators') {
-        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsRoleRegistrators);
+        selectedUnits.units = _.assign(selectedUnits.units, doc.docUnitsRegistrators);
         selectedUnits.onUnitSelect = function (unit) {
-          doc.docUnitsRoleRegistrators.push(unit);
+          doc.docUnitsRegistrators.push(unit);
           selectedUnits.onUnitSelect = null;
         };
       }

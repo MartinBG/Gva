@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 using Common.Data;
 using Docs.Api.Models;
 using Common.Api.UserContext;
+using Common.Api.Repositories;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
-    public class CorrespondentRepository : ICorrespondentRepository
+    public class CorrespondentRepository : Repository<Correspondent>, ICorrespondentRepository
     {
-        private IUnitOfWork unitOfWork;
+        //private IUnitOfWork unitOfWork;
 
         public CorrespondentRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            //this.unitOfWork = unitOfWork;
         }
 
         public List<Correspondent> GetCorrespondents(
@@ -51,6 +53,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                 .ToList();
         }
 
+        //? replace with Find(id, includes[])
         public Correspondent GetCorrespondent(int id)
         {
             return this.unitOfWork.DbContext.Set<Correspondent>()

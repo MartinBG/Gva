@@ -136,94 +136,84 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public HttpResponseMessage CreateCorrespondent(CorrespondentDO corr)
         {
-            try
+            Correspondent newCorr;
+
+            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
+
+            switch (correspondentType.Alias)
             {
-                Correspondent newCorr;
+                case "BulgarianCitizen":
+                    newCorr = this.correspondentRepository.CreateBgCitizen(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.BgCitizenFirstName,
+                        corr.BgCitizenLastName,
+                        corr.BgCitizenUIN,
+                        this.userContext);
+                    break;
+                case "Foreigner":
+                    newCorr = this.correspondentRepository.CreateForeigner(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.ForeignerFirstName,
+                        corr.ForeignerLastName,
+                        corr.ForeignerCountryId,
+                        corr.ForeignerSettlement,
+                        corr.ForeignerBirthDate,
+                        this.userContext);
+                    break;
+                case "LegalEntity":
+                    newCorr = this.correspondentRepository.CreateLegalEntity(
+                       corr.CorrespondentGroupId.Value,
+                       corr.CorrespondentTypeId.Value,
+                       true,
+                       corr.LegalEntityName,
+                       corr.LegalEntityBulstat,
+                       this.userContext);
+                    break;
+                case "ForeignLegalEntity":
+                    newCorr = this.correspondentRepository.CreateFLegalEntity(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.FLegalEntityName,
+                        corr.FLegalEntityCountryId,
+                        corr.FLegalEntityRegisterName,
+                        corr.FLegalEntityRegisterNumber,
+                        corr.FLegalEntityOtherData,
+                        this.userContext);
+                    break;
+                default:
+                    newCorr = new Correspondent();
+                    break;
+            };
 
-                CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                    .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
+            newCorr.RegisterIndexId = corr.RegisterIndexId;
+            newCorr.Email = corr.Email;
+            newCorr.ContactDistrictId = corr.ContactDistrictId;
+            newCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
+            newCorr.ContactSettlementId = corr.ContactSettlementId;
+            newCorr.ContactPostCode = corr.ContactPostCode;
+            newCorr.ContactAddress = corr.ContactAddress;
+            newCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
+            newCorr.ContactPhone = corr.ContactPhone;
+            newCorr.ContactFax = corr.ContactFax;
+            newCorr.Alias = corr.Alias;
+            newCorr.IsActive = corr.IsActive;
 
-                switch (correspondentType.Alias)
-                {
-                    case "BulgarianCitizen":
-                        newCorr = this.correspondentRepository.CreateBgCitizen(
-                            corr.CorrespondentGroupId.Value,
-                            corr.CorrespondentTypeId.Value,
-                            true,
-                            corr.BgCitizenFirstName,
-                            corr.BgCitizenLastName,
-                            corr.BgCitizenUIN,
-                            this.userContext);
-                        break;
-                    case "Foreigner":
-                        newCorr = this.correspondentRepository.CreateForeigner(
-                            corr.CorrespondentGroupId.Value,
-                            corr.CorrespondentTypeId.Value,
-                            true,
-                            corr.ForeignerFirstName,
-                            corr.ForeignerLastName,
-                            corr.ForeignerCountryId,
-                            corr.ForeignerSettlement,
-                            corr.ForeignerBirthDate,
-                            this.userContext);
-                        break;
-                    case "LegalEntity":
-                        newCorr = this.correspondentRepository.CreateLegalEntity(
-                           corr.CorrespondentGroupId.Value,
-                           corr.CorrespondentTypeId.Value,
-                           true,
-                           corr.LegalEntityName,
-                           corr.LegalEntityBulstat,
-                           this.userContext);
-                        break;
-                    case "ForeignLegalEntity":
-                        newCorr = this.correspondentRepository.CreateFLegalEntity(
-                            corr.CorrespondentGroupId.Value,
-                            corr.CorrespondentTypeId.Value,
-                            true,
-                            corr.FLegalEntityName,
-                            corr.FLegalEntityCountryId,
-                            corr.FLegalEntityRegisterName,
-                            corr.FLegalEntityRegisterNumber,
-                            corr.FLegalEntityOtherData,
-                            this.userContext);
-                        break;
-                    default:
-                        newCorr = new Correspondent();
-                        break;
-                };
-
-                newCorr.RegisterIndexId = corr.RegisterIndexId;
-                newCorr.Email = corr.Email;
-                newCorr.ContactDistrictId = corr.ContactDistrictId;
-                newCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
-                newCorr.ContactSettlementId = corr.ContactSettlementId;
-                newCorr.ContactPostCode = corr.ContactPostCode;
-                newCorr.ContactAddress = corr.ContactAddress;
-                newCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
-                newCorr.ContactPhone = corr.ContactPhone;
-                newCorr.ContactFax = corr.ContactFax;
-                newCorr.Alias = corr.Alias;
-                newCorr.IsActive = corr.IsActive;
-
-                newCorr.ModifyDate = DateTime.Now;
-                newCorr.ModifyUserId = this.userContext.UserId;
-
-                foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
-                {
-                    newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
-                }
-
-                this.unitOfWork.Save();
-
-                CorrespondentDO returnValue = new CorrespondentDO(newCorr);
-
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = returnValue.CorrespondentId, obj = returnValue });
-            }
-            catch (Exception ex)
+            foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
             {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = ex.Message });
+                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
             }
+
+            this.unitOfWork.Save();
+
+            CorrespondentDO returnValue = new CorrespondentDO(newCorr);
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = returnValue.CorrespondentId, obj = returnValue });
         }
 
         /// <summary>
@@ -235,112 +225,107 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public HttpResponseMessage UpdateCorrespondent(int id, CorrespondentDO corr)
         {
-            try
+            var oldCorr = this.correspondentRepository.GetCorrespondent(id);
+
+            //?
+            if (oldCorr == null)
             {
-                var oldCorr = this.correspondentRepository.GetCorrespondent(id);
-
-                if (oldCorr == null)
-                {
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Кореспондентът не може да бъде намерен." });
-                }
-
-                if (!oldCorr.Version.SequenceEqual(corr.Version))
-                {
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Съществува нова версия на кореспондента." });
-                }
-
-                oldCorr.BgCitizenFirstName = null;
-                oldCorr.BgCitizenLastName = null;
-                oldCorr.BgCitizenUIN = null;
-
-                oldCorr.ForeignerFirstName = null;
-                oldCorr.ForeignerLastName = null;
-                oldCorr.ForeignerCountry = null;
-                oldCorr.ForeignerCountryId = null;
-                oldCorr.ForeignerSettlement = null;
-                oldCorr.ForeignerBirthDate = null;
-
-                oldCorr.LegalEntityName = null;
-                oldCorr.LegalEntityBulstat = null;
-
-                oldCorr.FLegalEntityName = null;
-                oldCorr.FLegalEntityCountry = null;
-                oldCorr.FLegalEntityCountryId = null;
-                oldCorr.FLegalEntityRegisterName = null;
-                oldCorr.FLegalEntityRegisterNumber = null;
-                oldCorr.FLegalEntityOtherData = null;
-
-                CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                    .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
-
-                switch (correspondentType.Alias)
-                {
-                    case "BulgarianCitizen":
-                        oldCorr.BgCitizenFirstName = corr.BgCitizenFirstName;
-                        oldCorr.BgCitizenLastName = corr.BgCitizenLastName;
-                        oldCorr.BgCitizenUIN = corr.BgCitizenUIN;
-                        break;
-                    case "Foreigner":
-                        oldCorr.ForeignerFirstName = corr.ForeignerFirstName;
-                        oldCorr.ForeignerLastName = corr.ForeignerLastName;
-                        oldCorr.ForeignerCountryId = corr.ForeignerCountryId;
-                        oldCorr.ForeignerSettlement = corr.ForeignerSettlement;
-                        oldCorr.ForeignerBirthDate = corr.ForeignerBirthDate;
-                        break;
-                    case "LegalEntity":
-                        oldCorr.LegalEntityName = corr.LegalEntityName;
-                        oldCorr.LegalEntityBulstat = corr.LegalEntityBulstat;
-                        break;
-                    case "ForeignLegalEntity":
-                        oldCorr.FLegalEntityName = corr.FLegalEntityName;
-                        oldCorr.FLegalEntityCountryId = corr.FLegalEntityCountryId;
-                        oldCorr.FLegalEntityRegisterName = corr.FLegalEntityRegisterName;
-                        oldCorr.FLegalEntityRegisterNumber = corr.FLegalEntityRegisterNumber;
-                        oldCorr.FLegalEntityOtherData = corr.FLegalEntityOtherData;
-                        break;
-                };
-
-                oldCorr.CorrespondentGroupId = corr.CorrespondentGroupId.Value;
-                oldCorr.RegisterIndexId = corr.RegisterIndexId;
-                oldCorr.Email = corr.Email;
-                oldCorr.CorrespondentTypeId = corr.CorrespondentTypeId.Value;
-                oldCorr.ContactDistrictId = corr.ContactDistrictId;
-                oldCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
-                oldCorr.ContactSettlementId = corr.ContactSettlementId;
-                oldCorr.ContactPostCode = corr.ContactPostCode;
-                oldCorr.ContactAddress = corr.ContactAddress;
-                oldCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
-                oldCorr.ContactPhone = corr.ContactPhone;
-                oldCorr.ContactFax = corr.ContactFax;
-                oldCorr.Alias = corr.Alias;
-                oldCorr.IsActive = corr.IsActive;
-
-                oldCorr.ModifyDate = DateTime.Now;
-                oldCorr.ModifyUserId = this.userContext.UserId;
-
-                foreach (CorrespondentContactDO cc in corr.CorrespondentContacts.Where(e => !e.IsNew && e.IsDeleted && e.CorrespondentContactId.HasValue))
-                {
-                    oldCorr.DeleteCorrespondentContact(cc.CorrespondentContactId.Value, this.userContext);
-                }
-
-                foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsDirty && !e.IsNew && !e.IsDeleted && e.CorrespondentContactId.HasValue))
-                {
-                    oldCorr.UpdateCorrespondentContact(cc.CorrespondentContactId.Value, cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
-                }
-
-                foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsNew && !e.IsDeleted))
-                {
-                    oldCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
-                }
-
-                this.unitOfWork.Save();
-
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = oldCorr.CorrespondentId });
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Кореспондентът не може да бъде намерен." });
             }
-            catch (Exception ex)
+
+            //?
+            if (!oldCorr.Version.SequenceEqual(corr.Version))
             {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = ex.Message });
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Съществува нова версия на кореспондента." });
             }
+
+            oldCorr.BgCitizenFirstName = null;
+            oldCorr.BgCitizenLastName = null;
+            oldCorr.BgCitizenUIN = null;
+
+            oldCorr.ForeignerFirstName = null;
+            oldCorr.ForeignerLastName = null;
+            oldCorr.ForeignerCountry = null;
+            oldCorr.ForeignerCountryId = null;
+            oldCorr.ForeignerSettlement = null;
+            oldCorr.ForeignerBirthDate = null;
+
+            oldCorr.LegalEntityName = null;
+            oldCorr.LegalEntityBulstat = null;
+
+            oldCorr.FLegalEntityName = null;
+            oldCorr.FLegalEntityCountry = null;
+            oldCorr.FLegalEntityCountryId = null;
+            oldCorr.FLegalEntityRegisterName = null;
+            oldCorr.FLegalEntityRegisterNumber = null;
+            oldCorr.FLegalEntityOtherData = null;
+
+            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
+
+            switch (correspondentType.Alias)
+            {
+                case "BulgarianCitizen":
+                    oldCorr.BgCitizenFirstName = corr.BgCitizenFirstName;
+                    oldCorr.BgCitizenLastName = corr.BgCitizenLastName;
+                    oldCorr.BgCitizenUIN = corr.BgCitizenUIN;
+                    break;
+                case "Foreigner":
+                    oldCorr.ForeignerFirstName = corr.ForeignerFirstName;
+                    oldCorr.ForeignerLastName = corr.ForeignerLastName;
+                    oldCorr.ForeignerCountryId = corr.ForeignerCountryId;
+                    oldCorr.ForeignerSettlement = corr.ForeignerSettlement;
+                    oldCorr.ForeignerBirthDate = corr.ForeignerBirthDate;
+                    break;
+                case "LegalEntity":
+                    oldCorr.LegalEntityName = corr.LegalEntityName;
+                    oldCorr.LegalEntityBulstat = corr.LegalEntityBulstat;
+                    break;
+                case "ForeignLegalEntity":
+                    oldCorr.FLegalEntityName = corr.FLegalEntityName;
+                    oldCorr.FLegalEntityCountryId = corr.FLegalEntityCountryId;
+                    oldCorr.FLegalEntityRegisterName = corr.FLegalEntityRegisterName;
+                    oldCorr.FLegalEntityRegisterNumber = corr.FLegalEntityRegisterNumber;
+                    oldCorr.FLegalEntityOtherData = corr.FLegalEntityOtherData;
+                    break;
+            };
+
+            oldCorr.CorrespondentGroupId = corr.CorrespondentGroupId.Value;
+            oldCorr.RegisterIndexId = corr.RegisterIndexId;
+            oldCorr.Email = corr.Email;
+            oldCorr.CorrespondentTypeId = corr.CorrespondentTypeId.Value;
+            oldCorr.ContactDistrictId = corr.ContactDistrictId;
+            oldCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
+            oldCorr.ContactSettlementId = corr.ContactSettlementId;
+            oldCorr.ContactPostCode = corr.ContactPostCode;
+            oldCorr.ContactAddress = corr.ContactAddress;
+            oldCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
+            oldCorr.ContactPhone = corr.ContactPhone;
+            oldCorr.ContactFax = corr.ContactFax;
+            oldCorr.Alias = corr.Alias;
+            oldCorr.IsActive = corr.IsActive;
+
+            oldCorr.ModifyDate = DateTime.Now;
+            oldCorr.ModifyUserId = this.userContext.UserId;
+
+            foreach (CorrespondentContactDO cc in corr.CorrespondentContacts.Where(e => !e.IsNew && e.IsDeleted && e.CorrespondentContactId.HasValue))
+            {
+                oldCorr.DeleteCorrespondentContact(cc.CorrespondentContactId.Value, this.userContext);
+            }
+
+            foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsDirty && !e.IsNew && !e.IsDeleted && e.CorrespondentContactId.HasValue))
+            {
+                oldCorr.UpdateCorrespondentContact(cc.CorrespondentContactId.Value, cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
+            }
+
+            foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsNew && !e.IsDeleted))
+            {
+                oldCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
+            }
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = oldCorr.CorrespondentId });
         }
 
         /// <summary>
@@ -351,17 +336,10 @@ namespace Docs.Api.Controllers
         [HttpDelete]
         public HttpResponseMessage DeleteCorrespondent(int id)
         {
-            try
-            {
-                this.correspondentRepository.DeteleCorrespondent(id);
-                this.unitOfWork.Save();
+            this.correspondentRepository.DeteleCorrespondent(id);
+            this.unitOfWork.Save();
 
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
-            }
-            catch (Exception ex)
-            {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
-            }
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

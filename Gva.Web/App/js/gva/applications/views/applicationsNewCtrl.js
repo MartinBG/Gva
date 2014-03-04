@@ -39,17 +39,17 @@
           var newApplication = {
             lotId: $scope.appModel.person.id,
             doc: {
-              docFormatTypeId: 3,
-              docFormatTypeName: 'Хартиен',
-              docCasePartTypeId: 1,
-              docCasePartTypeName: 'Публичен',
-              docDirectionId: 1,
-              docDirectionName: 'Входящ',
-              docTypeGroupId: $scope.appModel.docTypeGroup.nomValueId,
+              docFormatTypeId: $scope.appModel.doc.docFormatTypeId,
+              docFormatTypeName: $scope.appModel.doc.docFormatTypeName,
+              docCasePartTypeId: $scope.appModel.doc.docCasePartTypeId,
+              docCasePartTypeName: $scope.appModel.doc.docCasePartTypeName,
+              docDirectionId: $scope.appModel.doc.docDirectionId,
+              docDirectionName: $scope.appModel.doc.docDirectionName,
+              docTypeGroupId: $scope.appModel.docTypeGroupId,
               docTypeGroupName: $scope.appModel.docTypeGroup.name,
-              docTypeId: $scope.appModel.docType.nomValueId,
+              docTypeId: $scope.appModel.docTypeId,
               docTypeName: $scope.appModel.docType.name,
-              docSubject: $scope.appModel.docSubject
+              docSubject: $scope.appModel.doc.docSubject
             }
           };
 
@@ -71,9 +71,32 @@
   ];
 
   ApplicationsNewCtrl.$resolve = {
-    appModel: function () {
-      return {};
-    },
+    appModel: ['$q', 'Nomenclature',
+      function ($q, Nomenclature) {
+        return $q.all({
+          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+        }).then(function (res) {
+
+          var doc = {
+            docFormatTypeId: _(res.docFormatTypes).first().nomValueId,
+            docFormatTypeName: _(res.docFormatTypes).first().name,
+            docCasePartTypeId: _(res.docCasePartTypes).first().nomValueId,
+            docCasePartTypeName: _(res.docCasePartTypes).first().name,
+            docDirectionId: _(res.docDirections).first().nomValueId,
+            docDirectionName: _(res.docDirections).first().name
+          };
+
+          return {
+            doc: doc,
+            docFormatTypes: res.docFormatTypes,
+            docCasePartTypes: res.docCasePartTypes,
+            docDirections: res.docDirections
+          };
+        });
+      }
+    ],
     selectedPerson: function () {
       return [];
     }

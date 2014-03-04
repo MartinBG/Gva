@@ -1,5 +1,5 @@
 ﻿/*global angular, _*/
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function SelectCorrViewCtrl(
@@ -12,19 +12,19 @@
     if (!selectedCorrs.onCorrSelect) {
       return $state.go('^');
     }
-
-    $scope.corrs = _.map(corrs, function (corr) {
-      var sc = _(selectedCorrs.corrs).filter({ nomValueId: corr.corrId }).first();
+    $scope.corrs = _.map(corrs.correspondents, function (corr) {
+      var sc = _(selectedCorrs.corrs).filter({ nomValueId: corr.correspondentId }).first();
 
       if (!sc) {
         return {
-          corrId: corr.corrId,
+          correspondentId: corr.correspondentId,
           displayName: corr.displayName,
           email: corr.email,
-          correspondentType: corr.correspondentType
+          correspondentTypeName: corr.correspondentTypeName
         };
       }
     });
+    $scope.corrCount = corrs.correspondentCount;
 
     $scope.corrs = _.filter($scope.corrs, function (corr) {
       return !!corr;
@@ -50,7 +50,7 @@
 
     $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
-        nomValueId: corr.corrId,
+        nomValueId: corr.correspondentId,
         name: corr.displayName,
         content: corr
       };
@@ -77,7 +77,11 @@
       '$stateParams',
       'Corr',
       function resolveCorrs($stateParams, Corr) {
-        return Corr.query($stateParams).$promise;
+        return Corr.get(
+          {
+            displayName: $stateParams.displayName,
+            email: $stateParams.email
+          }).$promise;
       }
     ]
   };

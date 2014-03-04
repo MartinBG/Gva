@@ -71,7 +71,7 @@ namespace Docs.Api.Models
                 Name = name,
                 UIN = uin,
                 Note = note,
-                IsActive = isActive,
+                IsActive = isActive
             };
 
             this.CorrespondentContacts.Add(correspondentContact);

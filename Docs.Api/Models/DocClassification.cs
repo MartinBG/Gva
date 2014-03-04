@@ -47,7 +47,8 @@ namespace Docs.Api.Models
                 .HasForeignKey(d => d.ClassificationId);
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocClassifications)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
 
         }
     }

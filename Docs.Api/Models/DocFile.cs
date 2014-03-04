@@ -77,7 +77,8 @@ namespace Docs.Api.Models
                 .HasForeignKey(d => d.DocFileTypeId);
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocFiles)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
 
         }
     }

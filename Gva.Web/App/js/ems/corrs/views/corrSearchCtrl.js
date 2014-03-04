@@ -9,15 +9,7 @@
     Corr,
     corrs
   ) {
-    $scope.corrs = corrs.correspondents.map(function (corr) {
-      return {
-        correspondentId: corr.correspondentId,
-        displayName: corr.displayName,
-        email: corr.email,
-        correspondentTypeName: corr.correspondentTypeName
-      };
-    });
-
+    $scope.corrs = corrs.correspondents;
     $scope.corrCount = corrs.correspondentCount;
 
     $scope.filters = {

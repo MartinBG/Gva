@@ -15,7 +15,6 @@
     $scope.$state = $state;
     $scope.doc = doc;
 
-
     $scope.isVisibleEdit = true;
     if ($scope.doc.docStatusAlias !== 'Draft') {
       $scope.isVisibleEdit = false;
@@ -24,16 +23,18 @@
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
-      $scope.doc.isRead = true;
+      throw 'not implemented';
+      //$scope.doc.isRead = true;
     };
 
     $scope.markAsUnread = function () {
-      //todo call to backend and set DocUser.HasRead flags
-      $scope.doc.isRead = false;
+      throw 'not implemented';
+      //$scope.doc.isRead = false;
     };
 
     $scope.enterEditMode = function () {
       $scope.inEditMode = true;
+      $scope.doc.docFiles = $scope.doc.publicDocFiles.concat($scope.doc.privateDocFiles);
     };
 
     $scope.exitEditMode = function () {
@@ -134,27 +135,30 @@
       return $state.go('root.docs.edit.case.docType');
     };
 
+    //? separate method for each docentry
     $scope.attachDoc = function (docTypeId) {
-      var newDoc = {
-        parentDocId:  $scope.doc.docId,
-        docFormatTypeId: 3,
-        docFormatTypeName: 'Хартиен',
-        docCasePartTypeId: 1,
-        docCasePartTypeName: 'Публичен',
-        docDirectionId: 1,
-        docDirectionName: 'Входящ',
-        docTypeId: docTypeId,
-        docTypeName:
-          docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
-        docSubject:
-          docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
-        correspondents: $scope.doc.correspondents,
-        correspondentName: $scope.doc.correspondentName
-      };
+      throw 'not implemented:' + docTypeId;
+      //var newDoc = {
+      //  parentDocId:  $scope.doc.docId,
+      //  docFormatTypeId: 3,
+      //  docFormatTypeName: 'Хартиен',
+      //  docCasePartTypeId: 1,
+      //  docCasePartTypeName: 'Публичен',
+      //  docDirectionId: 1,
+      //  docDirectionName: 'Входящ',
+      //  docTypeId: docTypeId,
+      //  docTypeName:
+      //    docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
+      //  docSubject:
+      //    docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
+      //  correspondents: $scope.doc.correspondents,
+      //  correspondentName: $scope.doc.correspondentName
+      //};
 
-      Doc.registerNew(newDoc).$promise.then(function (savedDoc) {
-        return $state.go('root.docs.edit.view', { docId: savedDoc.docId });
-      });
+      ////todo naming?
+      //Doc.registerNew(newDoc).$promise.then(function (savedDoc) {
+      //  return $state.go('root.docs.edit.view', { id: savedDoc.docId });
+      //});
     };
   }
 
@@ -174,7 +178,7 @@
       '$stateParams',
       'Doc',
       function resolveDoc($stateParams, Doc) {
-        return Doc.get({ docId: $stateParams.docId }).$promise;
+        return Doc.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

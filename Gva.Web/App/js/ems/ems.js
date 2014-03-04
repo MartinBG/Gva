@@ -13,6 +13,11 @@
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
+      name: 'emsDocNewCommon',
+      templateUrl: 'ems/docs/forms/docNew/docNewCommon.html',
+      controller: 'DocNewCommonCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'emsDocInfo',
       templateUrl: 'ems/docs/forms/docInfo.html'
     });
@@ -62,11 +67,12 @@
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.docs'                                   , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&hasLot'                                                                                                    ])
+      .state(['root.docs'                                   , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                 ])
       .state(['root.docs.search'                            , ''                                                                                                     , ['@root'           , 'ems/docs/views/docsSearch.html'     , 'DocsSearchCtrl'     ]])
       .state(['root.docs.new'                               , '/new?parentDocId'                                                                                     , ['@root'           , 'ems/docs/views/docsNew.html'        , 'DocsNewCtrl'        ]])
       .state(['root.docs.new.caseSelect'                    , '/caseSelect?csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsCase', ['@root'           , 'ems/docs/views/caseSelect.html'     , 'CaseSelectCtrl'     ]])
-      .state(['root.docs.edit'                              , '/:docId'                                                                                              , ['@root'           , 'ems/docs/views/docsEdit.html'       , 'DocsEditCtrl'       ]])
+      .state(['root.docs.news'                              , '/news'                                                                                                , ['@root'           , 'ems/docs/views/docsNews.html'       , 'DocsNewsCtrl'       ]])
+      .state(['root.docs.edit'                              , '/:id'                                                                                                 , ['@root'           , 'ems/docs/views/docsEdit.html'       , 'DocsEditCtrl'       ]])
       .state(['root.docs.edit.view'                         , '/view'                                                                                                , ['@root.docs.edit' , 'ems/docs/views/docsView.html'       , 'DocsViewCtrl'       ]])
       .state(['root.docs.edit.view.selectCorr'              , '/selectCorr?displayName&email'                                                                        , ['@root.docs.edit' , 'ems/docs/views/selectCorrView.html' , 'SelectCorrViewCtrl' ]])
       .state(['root.docs.edit.view.selectUnit'              , '/selectUnit?name'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html' , 'SelectUnitViewCtrl' ]])
