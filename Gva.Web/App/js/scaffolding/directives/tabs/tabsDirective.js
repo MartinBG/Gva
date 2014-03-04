@@ -70,8 +70,7 @@
           for (var i = 0; i < $scope.tabList.length; i++) {
             tab = $scope.tabList[i];
 
-            //if (tab.isState && tab.name === tabName) {
-            if (tab.isState && tabName.indexOf(tab.name) === 0) {
+            if (tab.isState && _(tabName).include(tab.name)) {
               tab.loading = false;
               return;
             }
@@ -80,7 +79,7 @@
           for (var j = 0; j < $scope.secondTabList.length; j++) {
             tab = $scope.secondTabList[j];
 
-            if (tab.isState && tab.name === tabName) {
+            if (tab.isState && _(tabName).include(tab.name)) {
               tab.loading = false;
               return;
             }
@@ -92,8 +91,7 @@
             var tab = $scope.tabList[i];
 
             if (tab.isState) {
-              //if (tab.name !== tabName) {
-              if (tabName.indexOf(tab.name) !== 0) {
+              if (!_(tabName).include(tab.name)) {
                 continue;
               }
               selectTab($scope.tabList, tab);
@@ -106,7 +104,7 @@
               for (var j = 0; j < tab.children.length; j++) {
                 var childTab = tab.children[j];
 
-                if (childTab.name === tabName) {
+                if (_(tabName).include(childTab.name)) {
                   selectTab($scope.tabList, tab);
                   $scope.secondTabList = tab.children;
                   selectTab($scope.secondTabList, childTab);
