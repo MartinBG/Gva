@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Gva.Web.Models
+namespace Gva.Api.ModelsDO
 {
-    public class InventoryItem
+    public class InventoryItemDO
     {
         public string DocumentType { get; set; }
 
@@ -36,6 +36,6 @@ namespace Gva.Web.Models
 
         public DateTime? EditedDate { get; set; }
 
-        public File File { get; set; }
+        public FileDO File { get; set; }
     }
 }

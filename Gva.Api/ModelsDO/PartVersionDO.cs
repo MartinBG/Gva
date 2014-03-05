@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Gva.Web.Models
+namespace Gva.Api.ModelsDO
 {
     public class PartVersionDO
     {

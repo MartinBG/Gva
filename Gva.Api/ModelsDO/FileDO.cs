@@ -1,6 +1,6 @@
-﻿namespace Gva.Web.Models
+﻿namespace Gva.Api.ModelsDO
 {
-    public class File
+    public class FileDO
     {
         public string Key { get; set; }
 

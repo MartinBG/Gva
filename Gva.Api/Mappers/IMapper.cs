@@ -1,4 +1,4 @@
-﻿namespace Gva.Web.Mappers
+﻿namespace Gva.Api.Mappers
 {
     public interface IMapper
     {

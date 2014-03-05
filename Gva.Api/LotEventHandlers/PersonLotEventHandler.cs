@@ -2,7 +2,7 @@
 using System.Linq;
 using Common.Data;
 using Gva.Api.Models;
-using Gva.Api.Repositories;
+using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -63,9 +63,9 @@ namespace Gva.Api.LotEventHandlers
 
             if (personDataPart != null)
             {
-                var personDataContent = personDataPart.Content.Value<JObject>("part");
+                dynamic personDataContent = personDataPart.Content;
 
-                var personBirthDate = personDataContent.Value<DateTime>("dateOfBirth");
+                var personBirthDate = Convert.ToDateTime(personDataContent.dateOfBirth);
                 DateTime now = DateTime.Today;
                 int age = now.Year - personBirthDate.Year;
                 if (now < personBirthDate.AddYears(age))
@@ -73,13 +73,13 @@ namespace Gva.Api.LotEventHandlers
                     age--;
                 }
 
-                person.Lin = personDataContent.Value<string>("lin");
-                person.Uin = personDataContent.Value<string>("uin");
+                person.Lin = personDataContent.lin;
+                person.Uin = personDataContent.uin;
                 person.Names = string.Format(
                     "{0} {1} {2}",
-                    personDataContent.Value<string>("firstName"),
-                    personDataContent.Value<string>("middleName"),
-                    personDataContent.Value<string>("lastName"));
+                    personDataContent.firstName,
+                    personDataContent.middleName,
+                    personDataContent.lastName);
                 person.Age = age;
             }
         }
@@ -92,8 +92,8 @@ namespace Gva.Api.LotEventHandlers
             person.Licences = string.Empty;
             foreach (var personLicencePart in personLicenceParts)
             {
-                var personLicenceContent = personLicencePart.Content.Value<JObject>("part");
-                person.Licences += string.Format(", {0}", personLicenceContent.Value<JObject>("licenceType").Value<string>("name"));
+                dynamic personLicenceContent = personLicencePart.Content;
+                person.Licences += string.Format(", {0}", personLicenceContent.licenceType.name);
             }
         }
 
@@ -105,12 +105,12 @@ namespace Gva.Api.LotEventHandlers
             person.Ratings = string.Empty;
             foreach (var personRatingPart in personRatingParts)
             {
-                var personRatingContent = personRatingPart.Content.Value<JObject>("part");
+                dynamic personRatingContent = personRatingPart.Content;
 
-                var retingType = personRatingContent.Value<JObject>("ratingType");
+                var retingType = personRatingContent.ratingType;
                 if (retingType != null)
                 {
-                    person.Ratings += string.Format(", {0}", retingType.Value<string>("name"));
+                    person.Ratings += string.Format(", {0}", retingType.name);
                 }
             }
         }
@@ -124,11 +124,11 @@ namespace Gva.Api.LotEventHandlers
 
             if (personEmploymentPart != null)
             {
-                var personEmploymentContent = personEmploymentPart.Content.Value<JObject>("part");
+                dynamic personEmploymentContent = personEmploymentPart.Content;
 
-                var organization = personEmploymentContent.Value<JObject>("organization");
-                person.Organization = organization == null ? null : organization.Value<string>("name");
-                person.Employment = personEmploymentContent.Value<JObject>("employmentCategory").Value<string>("name");
+                var organization = personEmploymentContent.organization;
+                person.Organization = organization == null ? null : organization.name;
+                person.Employment = personEmploymentContent.employmentCategory.name;
             }
         }
     }

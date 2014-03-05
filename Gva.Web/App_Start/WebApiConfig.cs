@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Routing;
+﻿using System.Web.Http;
 using Common.Http;
 using Common.Utils;
 using Newtonsoft.Json;
@@ -33,7 +28,7 @@ namespace Gva.Web
 
             RegisterGlobalFilters(config);
 
-            RegisterRoutes(config);
+            config.MapHttpAttributeRoutes();
 
             foreach (IWebApiConfig webApiConfig in kernel.GetAll<IWebApiConfig>())
             {
@@ -41,47 +36,10 @@ namespace Gva.Web
             }
         }
 
-        public static void RegisterRoutes(HttpConfiguration config)
-        {
-            // persons
-            MapRoute(config, HttpMethod.Get , "api/persons"                  , "Person", "GetPersons");
-            MapRoute(config, HttpMethod.Post, "api/persons"                  , "Person", "PostPerson");
-            MapRoute(config, HttpMethod.Get , "api/persons/{lotId}"          , "Person", "GetPerson");
-            MapRoute(config, HttpMethod.Get , "api/persons/{lotId}/inventory", "Person", "GetInventory");
-
-            // lots
-            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/personData", "Lot", "GetPart");
-            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
-            MapRoute(config, HttpMethod.Get   , "api/persons/{lotId}/{*path}"   , "Lot", "GetParts");
-            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/personData", "Lot", "PostPart");
-            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostPart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
-            MapRoute(config, HttpMethod.Post  , "api/persons/{lotId}/{*path}"   , "Lot", "PostNewPart");
-            MapRoute(config, HttpMethod.Delete, "api/persons/{lotId}/{*path}"   , "Lot", "DeletePart", new Dictionary<string, string>() { { "path", @"^(.+/)*\d+$" } });
-        }
-
         private static void RegisterGlobalFilters(HttpConfiguration config)
         {
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
-        }
-
-        private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, Dictionary<string, string> regExpressions = null)
-        {
-            dynamic constraints = new ExpandoObject();
-            constraints.httpMethod = new HttpMethodConstraint(method);
-            if (regExpressions != null)
-            {
-                foreach (var prop in regExpressions)
-                {
-                    (constraints as IDictionary<string, object>)[prop.Key] = prop.Value;
-                }
-            }
-
-            config.Routes.MapHttpRoute(
-                name: Guid.NewGuid().ToString(),
-                routeTemplate: route,
-                defaults: new { controller = controller, action = action, path = "personData" },
-                constraints: (object)constraints);
         }
     }
 }

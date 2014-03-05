@@ -1,6 +1,6 @@
-﻿namespace Gva.Web.Models
+﻿namespace Gva.Api.ModelsDO
 {
-    public class Person
+    public class PersonDO
     {
         public int Id { get; set; }
 

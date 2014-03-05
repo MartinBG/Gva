@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
 
-namespace Gva.Api.Repositories
+namespace Gva.Api.Repositories.PersonRepository
 {
     public interface IPersonRepository
     {

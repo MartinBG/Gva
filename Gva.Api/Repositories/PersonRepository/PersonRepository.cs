@@ -3,7 +3,7 @@ using System.Linq;
 using Common.Data;
 using Gva.Api.Models;
 
-namespace Gva.Api.Repositories
+namespace Gva.Api.Repositories.PersonRepository
 {
     public class PersonRepository : IPersonRepository
     {

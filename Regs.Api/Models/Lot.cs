@@ -239,6 +239,8 @@ namespace Regs.Api.Models
             List<PartVersion> toBeCommited;
             List<PartVersion> notToBeCommited;
 
+            index.ChangedPartVersions = changedPartVersions;
+
             if (paths != null)
             {
                 toBeCommited = changedPartVersions.Where(pv => paths.Contains(pv.Part.Path)).ToList();

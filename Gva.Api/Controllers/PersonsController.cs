@@ -9,15 +9,16 @@ using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
-using Gva.Api.Repositories;
-using Gva.Web.Models;
+using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
-namespace Gva.Web.Controllers
+namespace Gva.Api.Controllers
 {
-    public class PersonController : ApiController
+    [RoutePrefix("api/persons")]
+    public class PersonsController : GvaLotsController
     {
         private UserContext userContext;
         private IUnitOfWork unitOfWork;
@@ -25,12 +26,13 @@ namespace Gva.Web.Controllers
         private IUserRepository userRepository;
         private IPersonRepository personRepository;
 
-        public PersonController(
+        public PersonsController(
             IUserContextProvider userContextProvider,
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IUserRepository userRepository,
             IPersonRepository personRepository)
+            : base(lotRepository, userContextProvider, unitOfWork)
         {
             this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
@@ -39,40 +41,38 @@ namespace Gva.Web.Controllers
             this.personRepository = personRepository;
         }
 
+        [Route("")]
         public HttpResponseMessage GetPersons(string lin = null, string uin = null, string names = null, string licences = null, string ratings = null, string organization = null, bool exact = false)
         {
             var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, exact);
 
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
-                Mapper.Map<IEnumerable<GvaPerson>, IEnumerable<Person>>(persons));
+                Mapper.Map<IEnumerable<GvaPerson>, IEnumerable<PersonDO>>(persons));
         }
 
+        [Route("{lotId}")]
         public HttpResponseMessage GetPerson(int lotId)
         {
             var person = this.personRepository.GetPerson(lotId);
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
-                Mapper.Map<GvaPerson, Person>(person));
+                Mapper.Map<GvaPerson, PersonDO>(person));
         }
 
+        [Route("")]
         public HttpResponseMessage PostPerson(JObject person)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var newLot = this.lotRepository.GetSet("Person").CreateLot(this.userContext);
 
-                JObject personData = new JObject();
-                personData.Add("part", person.Value<JObject>("personData"));
-                newLot.CreatePart("personData", personData, this.userContext);
+                newLot.CreatePart("personData", person.Value<JObject>("personData"), this.userContext);
 
-                JObject personDocumentId = new JObject();
-                personDocumentId.Add("part", person.Value<JObject>("personDocumentId"));
-                newLot.CreatePart("personDocumentIds/*", personDocumentId, this.userContext);
+                newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
 
-                JObject personAddress = new JObject();
-                personAddress.Add("part", person.Value<JObject>("personAddress"));
-                newLot.CreatePart("personAddresses/*", personAddress, this.userContext);
+
+                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
 
                 newLot.Commit(this.userContext);
 
@@ -95,7 +95,7 @@ namespace Gva.Web.Controllers
                 .Concat(lot.GetParts("personDocumentMedicals"))
                 .Concat(lot.GetParts("personDocumentChecks"));
 
-            IList<InventoryItem> inventory = new List<InventoryItem>();
+            IList<InventoryItemDO> inventory = new List<InventoryItemDO>();
             foreach (var partVersion in partVersions)
             {
                 JObject content = partVersion.Content.Value<JObject>("part");
@@ -119,7 +119,7 @@ namespace Gva.Web.Controllers
                 }
 
                 var partAlias = partVersion.Part.SetPart.Alias;
-                InventoryItem inventoryItem = new InventoryItem()
+                InventoryItemDO inventoryItem = new InventoryItemDO()
                 {
                     DocumentType = partAlias,
                     PartIndex = partVersion.Part.Index.Value,
@@ -171,12 +171,12 @@ namespace Gva.Web.Controllers
                 else if (partAlias == "check")
                 {
                     inventoryItem.Name = content.Value<JObject>("personCheckDocumentRole").Value<string>("name");
-                    inventoryItem.Name = content.Value<JObject>("personCheckDocumentType").Value<string>("name");
+                    inventoryItem.Type = content.Value<JObject>("personCheckDocumentType").Value<string>("name");
                 }
 
                 if (file != null)
                 {
-                    inventoryItem.File = new File()
+                    inventoryItem.File = new FileDO()
                     {
                         Key = file.Value<string>("key"),
                         Name = file.Value<string>("name")
@@ -189,6 +189,88 @@ namespace Gva.Web.Controllers
             return ControllerContext.Request.CreateResponse(
                 HttpStatusCode.OK,
                 inventory);
+        }
+
+        [Route(@"{lotId}/{path:regex(^personAddresses/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personData$)}"),
+         Route(@"{lotId}/{path:regex(^personFlyingExperiences/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^licence$)}"),
+         Route(@"{lotId}/{path:regex(^rating$)}"),
+         Route(@"{lotId}/{path:regex(^personStatuses/\d+$)}")]
+        public HttpResponseMessage GetPart(int lotId, string path)
+        {
+            return base.GetPart(lotId, path);
+        }
+
+        //public HttpResponseMessage GetFilePart(int lotId, string path)
+        //{
+        //}
+
+        [Route(@"{lotId}/{path:regex(^personAddresses$)}"),
+         Route(@"{lotId}/{path:regex(^personFlyingExperiences$)}"),
+         Route(@"{lotId}/{path:regex(^licence$)}"),
+         Route(@"{lotId}/{path:regex(^rating$)}"),
+         Route(@"{lotId}/{path:regex(^personStatuses$)}")]
+        public HttpResponseMessage GetParts(int lotId, string path)
+        {
+            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+
+            return ControllerContext.Request.CreateResponse(
+                HttpStatusCode.OK,
+                Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
+        }
+
+        //public HttpResponseMessage GetFileParts(int lotId, string path)
+        //{
+        //}
+
+        [Route(@"{lotId}/{path:regex(^personAddresses$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentChecks$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEducations$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentIds$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentMedicals$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
+         Route(@"{lotId}/{path:regex(^personFlyingExperiences$)}"),
+         Route(@"{lotId}/{path:regex(^licence$)}"),
+         Route(@"{lotId}/{path:regex(^rating$)}"),
+         Route(@"{lotId}/{path:regex(^personStatuses$)}")]
+        public HttpResponseMessage PostNewPart(int lotId, string path, JObject content)
+        {
+            return base.PostNewPart(lotId, path, content);
+        }
+
+        [Route(@"{lotId}/{path:regex(^personAddresses/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personData$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentChecks/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEducations/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEmployments/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentIds/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentMedicals/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentTrainings/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personFlyingExperiences/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^licence$)}"),
+         Route(@"{lotId}/{path:regex(^rating$)}"),
+         Route(@"{lotId}/{path:regex(^personStatuses/\d+$)}")]
+        public HttpResponseMessage PostPart(int lotId, string path, JObject content)
+        {
+            return base.PostPart(lotId, path, content);
+        }
+
+        [Route(@"{lotId}/{path:regex(^personAddresses/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentChecks/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEducations/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEmployments/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentIds/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentMedicals/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentTrainings/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^personFlyingExperiences/\d+$)}"),
+         Route(@"{lotId}/{path:regex(^licence$)}"),
+         Route(@"{lotId}/{path:regex(^rating$)}"),
+         Route(@"{lotId}/{path:regex(^personStatuses/\d+$)}")]
+        public HttpResponseMessage DeletePart(int lotId, string path)
+        {
+            return base.DeletePart(lotId, path);
         }
     }
 }
