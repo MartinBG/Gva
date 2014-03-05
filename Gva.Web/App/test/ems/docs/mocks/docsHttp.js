@@ -86,6 +86,8 @@
           delete searchParams.docIds;
           delete searchParams.hasLot;
           delete searchParams.isCase;
+          delete searchParams.fromDate;
+          delete searchParams.toDate;
 
           var docIdsArray = !!$params.docIds ? $params.docIds.split(',') : null;
 
@@ -113,6 +115,18 @@
             }
             else if ($params.isCase && $params.isCase.toLowerCase() === 'false') {
               if (!doc.parentDocId) {
+                return false;
+              }
+            }
+
+            if ($params.fromDate) {
+              if (moment(doc.regDate).startOf('day') < moment($params.fromDate)) {
+                return false;
+              }
+            }
+
+            if ($params.toDate) {
+              if (moment($params.toDate) < moment(doc.regDate).startOf('day')) {
                 return false;
               }
             }
@@ -257,8 +271,6 @@
             return [400];
           }
 
-          var registeredDocIds = [];
-
           var todayDate = moment();
 
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
@@ -364,9 +376,7 @@
 
           docs.push(newDoc);
 
-          registeredDocIds.push(newDoc.docId);
-
-          return [200, { docIds : registeredDocIds }];
+          return [200, { docId : newDoc.docId }];
         })
       .when('GET', '/api/docs/:docId',
         function ($params, docs) {

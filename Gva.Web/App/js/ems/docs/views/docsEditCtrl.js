@@ -83,7 +83,7 @@
         correspondentName: $scope.doc.correspondentName
       };
 
-      Doc.save(newDoc).$promise.then(function (savedDoc) {
+      Doc.registerNew(newDoc).$promise.then(function (savedDoc) {
         return $state.go('root.docs.edit.view', { docId: savedDoc.docId });
       });
     };

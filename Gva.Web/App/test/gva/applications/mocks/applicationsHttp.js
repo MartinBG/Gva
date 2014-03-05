@@ -84,13 +84,14 @@
 
           if ($params.fromDate) {
             applications = _(applications).filter(function (app) {
-              return app.doc.regDate && app.doc.regDate >= new Date(Date.parse($params.fromDate));
+              return app.doc.regDate && moment(app.doc.regDate).startOf('day') >= moment($params.fromDate);
+
             }).value();
           }
 
           if ($params.toDate) {
             applications = _(applications).filter(function (app) {
-              return app.doc.regDate && app.doc.regDate <= new Date(Date.parse($params.toDate));
+              return app.doc.regDate && moment(app.doc.regDate).startOf('day') <= moment($params.toDate);
             }).value();
           }
 
