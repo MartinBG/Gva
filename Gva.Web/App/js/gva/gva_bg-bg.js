@@ -689,7 +689,9 @@
         'root.persons.view.inventory': 'Опис',
         'root.persons.view.documentOthers': 'Други документи',
         'root.persons.view.documentOthers.new': 'Нов документ',
-        'root.persons.view.documentOthers.edit': 'Редакция на документ'
+        'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
+        'root.persons.view.documentOthers.edit': 'Редакция на документ',
+        'root.persons.view.documentOthers.edit.choosePublisher':  'Избор на издател'
       }
     });
   }]);
