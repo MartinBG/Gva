@@ -34,13 +34,15 @@
     };
 
     $scope.save = function () {
-      if ($scope.editDocForm.$valid) {
-        return Doc
-          .save($stateParams, $scope.doc).$promise
-          .then(function () {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          });
-      }
+      $scope.editDocForm.$validate().then(function () {
+        if ($scope.editDocForm.$valid) {
+          return Doc
+            .save($stateParams, $scope.doc).$promise
+            .then(function () {
+              return $state.transitionTo($state.current, $stateParams, { reload: true });
+            });
+        }
+      });
     };
 
     $scope.attachNewDoc = function () {

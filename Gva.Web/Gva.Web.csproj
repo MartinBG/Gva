@@ -133,6 +133,12 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
+    <Content Include="App\js\ems\docs\forms\docView\taskCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\resolutionCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docOutgoingCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternalOutgoingCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternalCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docIncomingCtrl.js" />
     <Content Include="App\js\ems\docs\recources\docStage.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />

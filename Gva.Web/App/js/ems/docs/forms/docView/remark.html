@@ -51,9 +51,9 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="false">
+    <accordion-group is-open="model.docClassifications.length > 0" ng-if="readonly || model.docClassifications.length > 0">
       <accordion-heading>
-          <a l10n-text="docs.edit.view.classification" style="font-size: 12px;"></a>
+          <a l10n-text="docs.edit.classifications.name" style="font-size: 12px;"></a>
       </accordion-heading>
 
       <div class="row">

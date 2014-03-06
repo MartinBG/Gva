@@ -1,19 +1,21 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   izhodqsht
   <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" sc-has-error="docUnitsFrom">
       <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
+      <sc-validation-error field-name="docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" required ng-readonly="!readonly"></sc-nomenclature>
+        <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
         </span>
       </div>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" sc-has-error="docCorrespondents">
       <label class="control-label" l10n-text="docs.edit.view.docCorrespondents"></label>
+      <sc-validation-error field-name="docCorrespondents" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docCorrespondents" alias="'corrs'" multiple="multiple" required ng-readonly="!readonly"></sc-nomenclature>
+        <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'corrs'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
         </span>
@@ -88,8 +90,9 @@
       </div>
 
       <div class="row" style="margin-bottom: 5px;">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3" sc-has-error="assignmentType">
           <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
+          <sc-validation-error field-name="assignmentType" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature name="assignmentType" ng-model="model.assignmentType" alias="'assignmentType'" required ng-readonly="!readonly"></sc-nomenclature>
         </div>
 
