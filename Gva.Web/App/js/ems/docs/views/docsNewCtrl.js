@@ -83,7 +83,7 @@
 
           if (mode === 'register') {
             Doc.registerNew($scope.docModel.doc).$promise.then(function (result) {
-              return $state.go('root.docs.search', { docIds: result.docIds.join(',')});
+              return $state.go('root.docs.search', { filter: 'current', regUri: result.regUri });
             });
           }
           else if (mode === 'create') {

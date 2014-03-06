@@ -46,7 +46,7 @@
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.docs'                           , '/docs?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot'                                      ])
+      .state(['root.docs'                           , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&hasLot'                                      ])
       .state(['root.docs.search'                    , ''                             , ['@root'                , 'ems/docs/views/docsSearch.html'     , 'DocsSearchCtrl'         ]])
       .state(['root.docs.new'                       , '/new?parentDocId'             , ['@root'                , 'ems/docs/views/docsNew.html'        , 'DocsNewCtrl'            ]])
       .state(['root.docs.new.caseSelect'            , '/caseSelect?csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsCase', ['@root'          , 'ems/docs/views/caseSelect.html'         , 'CaseSelectCtrl'         ]])
