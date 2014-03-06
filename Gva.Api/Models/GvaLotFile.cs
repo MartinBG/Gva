@@ -19,7 +19,7 @@ namespace Gva.Api.Models
 
         public int? DocFileId { get; set; }
 
-        public int? GvaLotFileTypeId { get; set; }
+        public int GvaCaseTypeId { get; set; }
 
         public string PageIndex { get; set; }
 
@@ -29,11 +29,11 @@ namespace Gva.Api.Models
 
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
 
+        public virtual GvaCaseType GvaCaseType { get; set; }
+
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
 
         public virtual GvaFile GvaFile { get; set; }
-
-        public virtual GvaLotFileType GvaLotFileType { get; set; }
 
         public virtual Part LotPart { get; set; }
     }
@@ -59,7 +59,7 @@ namespace Gva.Api.Models
             this.Property(t => t.LotPartId).HasColumnName("LotPartId");
             this.Property(t => t.GvaFileId).HasColumnName("GvaFileId");
             this.Property(t => t.DocFileId).HasColumnName("DocFileId");
-            this.Property(t => t.GvaLotFileTypeId).HasColumnName("GvaLotFileTypeId");
+            this.Property(t => t.GvaCaseTypeId).HasColumnName("GvaCaseTypeId");
             this.Property(t => t.PageIndex).HasColumnName("PageIndex");
             this.Property(t => t.PageNumber).HasColumnName("PageNumber");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
@@ -71,12 +71,12 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.GvaFile)
                 .WithMany(t => t.GvaLotFiles)
                 .HasForeignKey(d => d.GvaFileId);
-            this.HasOptional(t => t.GvaLotFileType)
-                .WithMany(t => t.GvaLotFiles)
-                .HasForeignKey(d => d.GvaLotFileTypeId);
             this.HasOptional(t => t.LotPart)
                 .WithMany()
                 .HasForeignKey(d => d.LotPartId);
+            this.HasRequired(t => t.GvaCaseType)
+                .WithMany(t => t.GvaLotFiles)
+                .HasForeignKey(d => d.GvaCaseTypeId);
         }
     }
 }

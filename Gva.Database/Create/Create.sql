@@ -5,9 +5,10 @@ GO
 -- Tables
 ---------------------------------------------------------------
 
+:r $(rootPath)\"Tables\GvaCaseTypes.sql"
+:r $(rootPath)\"Tables\GvaLotCases.sql"
 :r $(rootPath)\"Tables\GvaApplications.sql"
 :r $(rootPath)\"Tables\GvaFiles.sql"
-:r $(rootPath)\"Tables\GvaLotFileTypes.sql"
 :r $(rootPath)\"Tables\GvaLotFiles.sql"
 :r $(rootPath)\"Tables\GvaAppLotFiles.sql"
 :r $(rootPath)\"Tables\GvaLotObjects.sql"

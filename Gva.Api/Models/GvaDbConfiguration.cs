@@ -7,11 +7,12 @@ namespace Gva.Api.Models
     {
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new GvaCaseTypeMap());
+            modelBuilder.Configurations.Add(new GvaLotCaseMap());
             modelBuilder.Configurations.Add(new GvaApplicationMap());
             modelBuilder.Configurations.Add(new GvaAppLotFileMap());
             modelBuilder.Configurations.Add(new GvaFileMap());
             modelBuilder.Configurations.Add(new GvaLotFileMap());
-            modelBuilder.Configurations.Add(new GvaLotFileTypeMap());
             modelBuilder.Configurations.Add(new GvaLotObjectMap());
             modelBuilder.Configurations.Add(new GvaPersonMap());
             modelBuilder.Configurations.Add(new GvaInventoryItemMap());

@@ -96,13 +96,14 @@
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
+    <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />
     <Compile Include="Models\GvaAppLotFile.cs" />
     <Compile Include="Models\GvaFile.cs" />
     <Compile Include="Models\GvaInventoryItem.cs" />
+    <Compile Include="Models\GvaLotCase.cs" />
     <Compile Include="Models\GvaLotFile.cs" />
-    <Compile Include="Models\GvaLotFileType.cs" />
     <Compile Include="Models\GvaLotObject.cs" />
     <Compile Include="Models\GvaPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
