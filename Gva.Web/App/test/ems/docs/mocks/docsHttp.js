@@ -3,6 +3,8 @@
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
+    var nomenclatures = require('./nomenclatures.sample');
+
     var defaultDoc = {
       docId: null,
       parentDocId: null,
@@ -79,23 +81,43 @@
 
     $httpBackendConfiguratorProvider
         .when('GET','/api/docs?'+
-          'fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&docIds&hasLot&isCase',
+          'filter&fromDate&toDate&regUri&docName&'+
+          'docTypeId&docStatusId&corrs&units&hasLot&isCase',
         function ($params, docs, applicationsFactory) {
 
           var searchParams = _.cloneDeep($params);
-          delete searchParams.docIds;
           delete searchParams.hasLot;
           delete searchParams.isCase;
           delete searchParams.fromDate;
           delete searchParams.toDate;
+          delete searchParams.filter;
 
-          var docIdsArray = !!$params.docIds ? $params.docIds.split(',') : null;
+          var result = docs;
 
-          var result = _(docs).filter(function (doc) {
-
-            if (docIdsArray && !_.contains(docIdsArray, doc.docId.toString())) {
-              return false;
+          if (!!$params.filter) {
+            if ($params.filter === 'current'){
+              result = _(result).filter(function (doc) {
+                return doc.docStatusId !== 4 && doc.docStatusId !==5;
+              });
             }
+            else if ($params.filter === 'finished'){
+              result = _(result).filter(function (doc) {
+                return doc.docStatusId === 4;
+              });
+            }
+            else if ($params.filter === 'draft'){
+              result = _(result).filter(function (doc) {
+                return doc.docStatusId === 1;
+              });
+            }
+            else if ($params.filter === 'portal'){
+              result = _(result).filter(function (doc) {
+                return !!doc.docSourceType && doc.docSourceType.nomValueId === 1;
+              });
+            }
+          }
+
+          result = _(result).filter(function (doc) {
 
             if ($params.hasLot && $params.hasLot.toLowerCase() === 'true') {
               if (!applicationsFactory.getByDocId(doc.docId)) {
@@ -172,6 +194,7 @@
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
           newDoc.docSubjectLabel = 'Относно';
+          newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.newassignmentType = 2;
           newDoc.assignmentDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
@@ -281,6 +304,7 @@
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
           newDoc.docSubjectLabel = 'Относно';
+          newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.regNumber = nextDocId;
           newDoc.regDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.regIndex = '000030';
@@ -376,7 +400,7 @@
 
           docs.push(newDoc);
 
-          return [200, { docId : newDoc.docId }];
+          return [200, { docId : newDoc.docId, regUri: newDoc.regUri }];
         })
       .when('GET', '/api/docs/:docId',
         function ($params, docs) {
