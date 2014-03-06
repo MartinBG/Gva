@@ -2,10 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function DocumentOthersSearchCtrl($scope, $state, $stateParams, PersonDocumentOther) {
-    PersonDocumentOther.query($stateParams).$promise.then(function (documentOthers) {
-      $scope.documentOthers = documentOthers;
-    });
+  function DocumentOthersSearchCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentOther,
+    documentOthers
+  ) {
+    $scope.documentOthers = documentOthers;
 
     $scope.editDocumentOther = function (documentOther) {
       return $state.go('root.persons.view.documentOthers.edit',
@@ -31,8 +35,19 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentOther'
+    'PersonDocumentOther',
+    'documentOthers'
   ];
+
+  DocumentOthersSearchCtrl.$resolve = {
+    documentOthers: [
+      '$stateParams',
+      'PersonDocumentOther',
+      function ($stateParams, PersonDocumentOther) {
+        return PersonDocumentOther.query($stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocumentOthersSearchCtrl', DocumentOthersSearchCtrl);
 }(angular));
