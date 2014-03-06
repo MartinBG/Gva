@@ -1,8 +1,6 @@
 packages/*
 packages/**/*
 
-Gva.Web/errors/*
-Gva.Web/errors/**/*
 TestResults/**
 
 *.tmp
