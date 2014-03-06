@@ -190,6 +190,7 @@
     <Content Include="App\js\gva\persons\views\documentOthers\othersNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearch.html" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearchCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\formName\formNameDirective.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.html" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.html" />
