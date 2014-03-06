@@ -88,7 +88,7 @@
           }
           else if (mode === 'create') {
             Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-              return $state.go('root.docs.edit.view', { docId: result.docId });
+              return $state.go('root.docs.edit.view', { docIds: result.docId });
             });
           }
         }
