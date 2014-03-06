@@ -45,6 +45,7 @@
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Tables\GvaInventoryItems.sql" />
     <Content Include="Create\Tables\GvaLotObjects.sql" />
     <Content Include="Create\Tables\GvaLotFileTypes.sql" />
     <Content Include="Create\Tables\GvaLotFiles.sql" />

@@ -14,6 +14,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaLotFileTypeMap());
             modelBuilder.Configurations.Add(new GvaLotObjectMap());
             modelBuilder.Configurations.Add(new GvaPersonMap());
+            modelBuilder.Configurations.Add(new GvaInventoryItemMap());
         }
     }
 }

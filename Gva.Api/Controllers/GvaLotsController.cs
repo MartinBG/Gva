@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using AutoMapper;
 using Common.Api.UserContext;
 using Common.Data;
@@ -23,35 +21,31 @@ namespace Gva.Api.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        public HttpResponseMessage GetPart(int lotId, string path)
+        public IHttpActionResult GetPart(int lotId, string path)
         {
             var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                Mapper.Map<PartVersion, PartVersionDO>(part));
+            return Ok(Mapper.Map<PartVersion, PartVersionDO>(part));
         }
 
-        //public HttpResponseMessage GetFilePart(int lotId, string path)
+        //public IHttpActionResult GetFilePart(int lotId, string path)
         //{
 
         //}
 
-        public HttpResponseMessage GetParts(int lotId, string path)
+        public IHttpActionResult GetParts(int lotId, string path)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
 
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
+            return Ok(Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
         }
 
-        //public HttpResponseMessage GetFileParts(int lotId, string path)
+        //public IHttpActionResult GetFileParts(int lotId, string path)
         //{
 
         //}
 
-        public HttpResponseMessage PostNewPart(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             lot.CreatePart(path + "/*", content.part, this.userContext);
@@ -64,10 +58,10 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
-        public HttpResponseMessage PostPart(int lotId, string path, dynamic content)
+        public IHttpActionResult PostPart(int lotId, string path, dynamic content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             lot.UpdatePart(path, content.part, this.userContext);
@@ -80,10 +74,10 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
-        public HttpResponseMessage DeletePart(int lotId, string path)
+        public IHttpActionResult DeletePart(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             lot.DeletePart(path, this.userContext);
@@ -91,7 +85,7 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
     }
 }
