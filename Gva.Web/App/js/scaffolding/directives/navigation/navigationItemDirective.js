@@ -18,7 +18,8 @@
         icon: '@',
         parent: '@',
         url: '@',
-        newTab: '@'
+        newTab: '@',
+        params: '&'
       },
       templateUrl: 'scaffolding/directives/navigation/navigationItemDirective.html',
       controller: function NavigationItemCtrl($scope, $state) {
@@ -33,7 +34,7 @@
         };
 
         $scope.stateGo = function stateGo() {
-          return $state.go($scope.state);
+          return $state.go($scope.state, $scope.params());
         };
       }
     };
