@@ -9,6 +9,7 @@
     $state,
     $stateParams,
     Doc,
+    DocStage,
     doc
   ) {
     $scope.doc = doc;
@@ -43,7 +44,25 @@
     };
 
     $scope.attachNewDoc = function () {
-      $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
+      return $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
+    };
+
+    $scope.endStage = function () {
+      return $state.go('root.docs.edit.stages.end');
+    };
+
+    $scope.nextStage = function () {
+      return $state.go('root.docs.edit.stages.next');
+    };
+
+    $scope.editStage = function () {
+      return $state.go('root.docs.edit.stages.edit');
+    };
+
+    $scope.reverseStage = function () {
+      return DocStage.reverse({ docId: doc.docId }).$promise.then(function (result) {
+        doc.docElectronicServiceStages = result.stages;
+      });
     };
 
     $scope.attachDoc = function (docTypeId) {
@@ -64,10 +83,9 @@
         correspondentName: $scope.doc.correspondentName
       };
 
-      Doc.save(newDoc).$promise.then(function (savedDoc) {
-        $state.go('root.docs.edit.addressing', { docId: savedDoc.docId });
+      Doc.registerNew(newDoc).$promise.then(function (savedDoc) {
+        return $state.go('root.docs.edit.view', { docId: savedDoc.docId });
       });
-
     };
   }
 
@@ -78,6 +96,7 @@
     '$state',
     '$stateParams',
     'Doc',
+    'DocStage',
     'doc'
   ];
 

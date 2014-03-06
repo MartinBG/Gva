@@ -1,0 +1,52 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="well-sm panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        <label>{{ model.docTypeName }}</label>
+      </div>
+    </div>
+
+    <div class="row" ng-show="!!model.parentDocId">
+      <div class="col-md-12">
+        <label>{{'Към ' + model.docRelations[0].regNumber + ' ' + model.docRelations[0].description}}</label>
+      </div>
+    </div>
+
+    <div class="row card">
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="docs.edit.regDate"></span>
+          <input disabled="disabled" type="text" class="form-control" value="{{ model.regDate | date:'dd.MM.yyyy HH:mm' }}">
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="docs.edit.regUri"></span>
+          <input disabled="disabled" type="text" class="form-control" value="{{ model.regUri }}">
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="docs.edit.docStatusName"></span>
+          <input disabled="disabled" type="text" class="form-control" value="{{ model.docStatusName }}">
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="docs.edit.docDirectionName"></span>
+          <input disabled="disabled" type="text" class="form-control" value="{{ model.docDirectionName }}">
+        </div>
+      </div>
+    </div>
+
+    <div class="row card">
+      <div class="form-group col-md-12">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">{{ model.docSubjectLabel }}:</span>
+          <sc-text ng-model="model.docSubject" ng-readonly="!readonly"></sc-text>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-form>

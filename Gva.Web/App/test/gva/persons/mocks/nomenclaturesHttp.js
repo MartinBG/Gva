@@ -119,6 +119,27 @@
 
           return [200, res];
         })
+      .when('GET', '/api/nomenclatures/electronicServiceStages?docTypeId&id',
+        function ($params, $filter) {
+          var res = _(nomenclatures.electronicServiceStages).map(function (item) {
+            return {
+              nomValueId: item.nomValueId,
+              name: item.name,
+              docTypeId: item.docTypeId,
+              item: item
+            };
+          }).value();
+
+          if ($params.docTypeId) {
+            res = $filter('filter')(res, { docTypeId: parseInt($params.docTypeId, 10) }, true);
+          }
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          }
+
+          return [200, res];
+        })
       .when('GET',
           '/api/nomenclatures/:alias' +
           '?term&id&staffTypeId&parentAlias&parentValueId&va',

@@ -22,67 +22,20 @@
       })[0];
     },
 
-    //units: [
-    // { nomValueId: 1, code: '', name: 'admin (Администратор)', nameAlt: '', alias: '' },
-    // { nomValueId: 2, code: '', name: 'Анка Ангелова Тонова (СТАРШИ ЕКСПЕРТ)', nameAlt: '', alias: '' },
-    // { nomValueId: 3, code: '', name: 'Анна Аристидова Андонова (НАЧАЛНИК НА ОТДЕЛ)', nameAlt: '', alias: '' },
-    // { nomValueId: 4, code: '', name: 'Антонио Красимиров Донов (ИНСПЕКТОР)', nameAlt: '', alias: '' },
-    // { nomValueId: 5, code: '', name: 'Петър', nameAlt: '', alias: '' }
-    //],
     unit: require('./unit'),
 
-    //assignmentTypes: [
-    // { nomValueId: 1, code: '', name: 'Със срок', nameAlt: '', alias: '' },
-    // { nomValueId: 2, code: '', name: 'Без срок', nameAlt: '', alias: '' }
-    //],
     assignmentType: require('./assignmentType'),
 
-    //docSourceTypes: [
-    //  { nomValueId: 1, code: '', name: 'Интернет', nameAlt: '', alias: '' },
-    //  { nomValueId: 2, code: '', name: 'Подадено на гише', nameAlt: '', alias: '' }
-    //],
     docSourceType: require('./docSourceType'),
 
-    //docDestinationTypes: [
-    //   { nomValueId: 1, code: '', name: 'Имейл', nameAlt: '', alias: '' },
-    //   { nomValueId: 2, code: '', name: 'По куриер', nameAlt: '', alias: '' }
-    //],
     docDestinationType: require('./docDestinationType'),
 
-    //Номенклатура Статуси на документ
-    //docStatuses: [
-    //  { nomValueId: 1, code: '', name: 'Чернова', nameAlt: '', alias: 'Draft' },
-    //  { nomValueId: 2, code: '', name: 'Изготвен', nameAlt: '', alias: 'Prepared' },
-    //  { nomValueId: 3, code: '', name: 'Обработен', nameAlt: '', alias: 'Processed' },
-    //  { nomValueId: 4, code: '', name: 'Приключен', nameAlt: '', alias: 'Finished' },
-    //  { nomValueId: 5, code: '', name: 'Отхвърлен', nameAlt: '', alias: 'Canceled' }
-    //],
     docStatus: require('./docStatus'),
 
-    //docSubjects: [
-    //  { nomValueId: 1, code: '', name: 'Подадено заявление', nameAlt: '', alias: '' },
-    //  { nomValueId: 2, code: '', name: 'Резолюция', nameAlt: '', alias: '' },
-    //  { nomValueId: 3, code: '', name: 'Забелвжка', nameAlt: '', alias: '' },
-    //  { nomValueId: 4, code: '', name: 'Задача', nameAlt: '', alias: '' },
-    //  { nomValueId: 5, code: '', name: 'Други', nameAlt: '', alias: '' }
-    //],
     docSubject: require('./docSubject'),
 
-    //Номенклатура Кореспондентска група
-    //correspondentGroups: [
-    //  { nomValueId: 1, code: '', name: 'Министерски съвет', nameAlt: '', alias: '' },
-    //  { nomValueId: 2, code: '', name: 'Заявители', nameAlt: 'Applicants', alias: 'Applicants' },
-    //  { nomValueId: 3, code: '', name: 'Системни', nameAlt: 'System', alias: 'System' }
-    //],
     correspondentGroup: require('./correspondentGroup'),
 
-    //Номенклатура Тип кореспондент
-    //correspondentTypes: [
-    // { nomValueId: 1, code: '', name: 'Български гражданин', nameAlt: 'BulgarianCitizen', alias: 'BulgarianCitizen' },
-    // { nomValueId: 2, code: '', name: 'Чужденец', nameAlt: 'Foreigner', alias: 'Foreigner' },
-    // { nomValueId: 3, code: '', name: 'Юридическо лице', nameAlt: 'LegalEntity', alias: 'LegalEntity' },
-    // { nomValueId: 4, code: '', name: 'Чуждестранно юридическо лице', nameAlt: 'ForeignLegalEntity', alias: 'ForeignLegalEntity' }
-    //],
     correspondentType: require('./correspondentType'),
 
     boolean: require('./boolean'),
@@ -207,151 +160,19 @@
 
     aircraftTypeGroups: require('./aircraftTypeGroup'),
 
-    //Номенклатура DocFormatTypes
-    //docFormatTypes: [
-    //  {
-    //    "docFormatTypeId": 1,
-    //    "name": "Електронен",
-    //    "alias": "Electronic",
-    //    "isActive": true,
-    //    "version": "AAAAAAAAIBI=",
-    //    "docs": []
-    //  },
-    //  {
-    //    "docFormatTypeId": 2,
-    //    "name": "Електронен с хартия",
-    //    "alias": "ElectronicWithPaper",
-    //    "isActive": false,
-    //    "version": "AAAAAAAAIBM=",
-    //    "docs": []
-    //  },
-    //  {
-    //    "docFormatTypeId": 3,
-    //    "name": "Хартиен",
-    //    "alias": "Paper",
-    //    "isActive": false,
-    //    "version": "AAAAAAAAIBQ=",
-    //    "docs": []
-    //  }
-    //],
     docFormatType: require('./docFormatType'),
 
-    //Номенклатура DocCasePartTypes
-    //docCasePartTypes: [
-    //  {
-    //    "docCasePartTypeId": 1,
-    //    "name": "Публичен",
-    //    "alias": "Public",
-    //    "description": null,
-    //    "version": "AAAAAAAAHtw=",
-    //    "isActive": true,
-    //    "docCasePartMovements": [],
-    //    "docs": []
-    //  },
-    //  {
-    //    "docCasePartTypeId": 2,
-    //    "name": "Вътрешен",
-    //    "alias": "Internal",
-    //    "description": null,
-    //    "version": "AAAAAAAAHt0=",
-    //    "isActive": false,
-    //    "docCasePartMovements": [],
-    //    "docs": []
-    //  },
-    //  {
-    //    "docCasePartTypeId": 3,
-    //    "name": "Контролен",
-    //    "alias": "Control",
-    //    "description": null,
-    //    "version": "AAAAAAAAHt4=",
-    //    "isActive": false,
-    //    "docCasePartMovements": [],
-    //    "docs": []
-    //  }
-    //],
     docCasePartType: require('./docCasePartType'),
 
-    //Номенклатура DocDirections
-    //docDirections: [
-    //  {
-    //    "docDirectionId": 1,
-    //    "name": "Входящ",
-    //    "alias": "Incomming",
-    //    "isActive": true,
-    //    "version": "AAAAAAAAHsg=",
-    //    "docTypeClassifications": [],
-    //    "docTypeUnitRoles": [],
-    //    "docs": []
-    //  },
-    //  {
-    //    "docDirectionId": 2,
-    //    "name": "Вътрешен",
-    //    "alias": "Internal",
-    //    "isActive": false,
-    //    "version": "AAAAAAAAHsk=",
-    //    "docTypeClassifications": [],
-    //    "docTypeUnitRoles": [],
-    //    "docs": []
-    //  },
-    //  {
-    //    "docDirectionId": 3,
-    //    "name": "Изходящ",
-    //    "alias": "Outgoing",
-    //    "isActive": false,
-    //    "version": "AAAAAAAAHso=",
-    //    "docTypeClassifications": [],
-    //    "docTypeUnitRoles": [],
-    //    "docs": []
-    //  },
-    //  {
-    //    "docDirectionId": 4,
-    //    "name": "Циркулярен",
-    //    "alias": "InternalOutgoing",
-    //    "isActive": false,
-    //    "version": "AAAAAAAAHss=",
-    //    "docTypeClassifications": [],
-    //    "docTypeUnitRoles": [],
-    //    "docs": []
-    //  }
-    //],
     docDirection: require('./docDirection'),
 
-    //Номенклатура DocTypeGroups
-    //docTypeGroups: [
-    //  { nomValueId: 1, code: '', name: 'Общи', nameAlt: '', alias: 'common' },
-    //  { nomValueId: 2, code: '', name: 'Електронни услуги', nameAlt: '', alias: 'electronicService' },
-    //  { nomValueId: 3, code: '', name: 'Отгвори на услуги', nameAlt: '', alias: 'serviceAnswers' },
-    //  { nomValueId: 4, code: '', name: 'Други', nameAlt: '', alias: 'others' }
-    //],
     docTypeGroup: require('./docTypeGroup'),
 
-    //Номенклатура DocTypes
-    //docTypes: [
-    //  { nomValueId: 1, code: '', name: 'Резолюция', nameAlt: '', alias: 'resolution', parentValueId: 1 },
-    //  { nomValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task', parentValueId: 1 },
-    //  { nomValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note', parentValueId: 1 },
-    //  { nomValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter', parentValueId: 1 },
-
-    //  { nomValueId: 5, code: 'М12.1.5', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – пилоти', nameAlt: '', alias: '', parentValueId: 2 },
-    //  { nomValueId: 6, code: 'М12.1.6', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – кабинен екипаж, полетни диспечери, бордни инженери, щурмани, бордни съпроводители', nameAlt: '', alias: '', parentValueId: 2 },
-    //  { nomValueId: 7, code: 'М12.1.8', name: 'Признаване на свидетелство за правоспособност на чужди граждани', nameAlt: '', alias: '', parentValueId: 2 },
-    //  { nomValueId: 8, code: 'М12.1.14', name: 'Издаване на свидетелство за правоспособност на ръководители на полети', nameAlt: '', alias: '', parentValueId: 2 },
-    //  { nomValueId: 9, code: 'М12.1.15', name: 'Издаване на свидетелство за правоспособност на инженерно-технически състав по обслужване на средствата за управление на въздушното движение (УВД), на ученик -  ръководители на полети, на асистент координатори на полети и на координатори по УВД', nameAlt: '', alias: '', parentValueId: 2 },
-    //  { nomValueId: 10, code: 'М12.1.7', name: 'Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери', nameAlt: '', alias: '', parentValueId: 2 },
-
-    //  { nomValueId: 11, code: '', name: 'Приемно предавателен протокол', nameAlt: '', alias: 'protocol', parentValueId: 4 }
-    //],
     docType: require('./docType'),
 
-    //тестови данни за кореспондент
-    //testCorrespondents: [
-    //  { nomValueId: 1, code: '', name: 'Мирослав Георгиев', nameAlt: '', alias: 'mirko' },
-    //  { nomValueId: 2, code: '', name: 'Янислав Гальов', nameAlt: '', alias: 'yani' },
-    //  { nomValueId: 3, code: '', name: 'Цветан Белчев', nameAlt: '', alias: 'seso' },
-    //  { nomValueId: 4, code: '', name: 'Георги Йорданов', nameAlt: '', alias: 'georgi' },
-    //  { nomValueId: 5, code: '', name: 'Ангел Йорданов', nameAlt: '', alias: 'angel' }
-    //],
     testCorrespondent: require('./testCorrespondent'),
+
+    electronicServiceStages: require('./electronicServiceStages'),
 
     medClasses: require('./medicalClass'),
 

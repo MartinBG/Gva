@@ -6,9 +6,10 @@
 
   module.exports = {
     person1Doc1: {
-      documentNumber: '',
+      documentNumber: '1221',
+      documentPersonNumber: '1221',
       documentDateValidFrom: '2010-03-06T00:00',
-      documentDateValidTo: null,
+      documentDateValidTo: '2013-03-06T00:00',
       documentPublisher: 'УЦ: Български въздухоплавателен център',
       documentTypeId: nomenclatures.getId('documentTypes', 'Protocol'),
       documentRoleId: nomenclatures.getId('documentRoles', 'FlightTest'),
@@ -19,6 +20,7 @@
     },
     person1Doc2: {
       documentNumber: '24',
+      documentPersonNumber: '3223',
       documentDateValidFrom: '2010-09-17T00:00',
       documentDateValidTo: null,
       documentPublisher: 'Проверяващ: Кръстю Георгиев Нешев Код:11225',
@@ -31,6 +33,7 @@
     },
     person1Doc3: {
       documentNumber: '24',
+      documentPersonNumber: '4567',
       documentDateValidFrom: '2010-09-17T00:00',
       documentDateValidTo: null,
       documentPublisher: 'Проверяващ: Кръстю Георгиев Нешев Код:11225',

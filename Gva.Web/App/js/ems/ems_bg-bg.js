@@ -42,7 +42,10 @@
           regUri: 'Номер',
           docStatusName: 'Статус',
           docDirectionName: 'Тип',
-          addressing: {
+          view: {
+            content: 'Прикачени файлове',
+            text: 'Текст',
+            classification: 'Код за достъп и класификация',
             accessCode: 'Код за достъп',
             permissions: 'Допълнителни права',
             assignment: 'Възлагане',
@@ -119,6 +122,15 @@
           }
 
         },
+        nextStage: {
+          stage: 'Етап',
+          startingDate: 'Начална дата',
+          executors: 'Изпълнители',
+          expectedEndingDate: 'Очаквана дата прикл.',
+          endingDate: 'Дата на приключване',
+          save: 'Запис',
+          back: 'Назад'
+        },
         search: {
           fromDate: 'От дата',
           toDate: 'До дата',
@@ -142,8 +154,25 @@
           docTypeGroupId: 'Група',
           docTypeId: 'Вид',
           docSubject: 'Относно',
-          docCorrespondent: 'Кореспондент',
-          numberOfDocs: 'Брой документи'
+          docCorrespondent: 'Кореспондент'
+        },
+        caseSelect: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          docName: 'Относно',
+          docTypeId: 'Вид на документа',
+          docStatusId: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          select: 'Избор',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент',
+          search: 'Търси',
+          cancel: 'Отказ'
         }
       },
       units: {
@@ -205,15 +234,16 @@
       states: {
         'root.docs': 'Документи',
         'root.docs.new': 'Нов документ',
-        'root.docs.edit': 'Редакция',
-        'root.docs.edit.addressing': 'Адресати',
-        'root.docs.edit.selectCorr': 'Избор кореспондент',
-        'root.docs.edit.selectUnit': 'Избор служител',
-        'root.docs.edit.content': 'Прикачени файлове',
+        'root.docs.new.caseSelect': 'Избор на преписка',
+        'root.docs.edit.view': 'Преглед',
+        'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
+        'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
         'root.docs.edit.stages': 'Етапи',
+        'root.docs.edit.stages.next': 'Следващ етап',
+        'root.docs.edit.stages.edit': 'Редакция на етап',
+        'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
-        'root.docs.edit.classifications': 'Класификация',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

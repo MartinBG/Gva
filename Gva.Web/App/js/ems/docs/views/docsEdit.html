@@ -1,4 +1,4 @@
-﻿<ng-form class="form-inline" name="editDocForm">
+﻿<ng-form name="editDocForm" sc-validate="{}">
     <div class="panel panel-default">
 
       <nav class="panel-heading">
@@ -9,25 +9,16 @@
               <span l10n-text="docs.edit.child"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a sc-click="attachNewDoc()" l10n-text="docs.edit.document"></a></li>
+              <li><a sc-click="attachNewDoc()" name="attachNewDocBtn" l10n-text="docs.edit.document"></a></li>
               <li><a sc-click="attachDoc(1)" l10n-text="docs.edit.resolution"></a></li>
               <li><a sc-click="attachDoc(2)" l10n-text="docs.edit.task"></a></li>
               <li><a sc-click="attachDoc(3)" l10n-text="docs.edit.remark"></a></li>
             </ul>
           </div>
 
-          <button ng-show="!inEditMode" ng-click="enterEditMode()" type="button" class="btn btn-default btn-sm">
-            <i class="glyphicon glyphicon-edit"></i>
-            <span l10n-text="docs.edit.edit"></span>
-          </button>
-          <button ng-show="inEditMode" ng-click="save()" type="button" class="btn btn-primary btn-sm">
-            <i class="glyphicon glyphicon-floppy-disk"></i>
-            <span l10n-text="docs.edit.save"></span>
-          </button>
-          <button ng-show="inEditMode" ng-click="exitEditMode()" type="button" class="btn btn-default btn-sm">
-            <i class="glyphicon glyphicon-ban-circle"></i>
-            <span l10n-text="docs.edit.cancel"></span>
-          </button>
+          <sc-button ng-show="!inEditMode" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
+          <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
+          <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
 
           <div class="btn-group" ng-show="!inEditMode">
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
@@ -100,17 +91,17 @@
               <span l10n-text="docs.edit.stagesName"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="#" l10n-text="docs.edit.endElectronicStage"></a>
+              <li ng-show="!doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate">
+                <a sc-click="endStage()" name="endStageBtn" l10n-text="docs.edit.endElectronicStage"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.nextElectronicStage"></a>
+                <a sc-click="nextStage()" name="nextStageBtn" l10n-text="docs.edit.nextElectronicStage"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.techEditElectronicStage"></a>
+                <a sc-click="editStage()" name="editStageBtn" l10n-text="docs.edit.techEditElectronicStage"></a>
               </li>
-              <li>
-                <a href="#" l10n-text="docs.edit.reverseElectronicStage"></a>
+              <li ng-show="doc.docElectronicServiceStages.length > 1">
+                <a sc-click="reverseStage()" name="reverseStageBtn" l10n-text="docs.edit.reverseElectronicStage"></a>
               </li>
             </ul>
           </div>
@@ -127,65 +118,14 @@
         </div>
       </nav>
 
+      <ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc"></ems-doc-info>
+
       <div class="well-sm panel-body">
-        <div class="well well-sm m_top_10">
-          <div class="row">
-            <div class="col-md-12">
-              <label>{{ doc.docTypeName }}</label>
-            </div>
-          </div>
-
-          <div class="row" ng-show="!!doc.parentDocId">
-            <div class="col-md-12">
-              <label>{{'Към ' + doc.docRelations[0].regNumber + ' ' + doc.docRelations[0].description}}</label>
-            </div>
-          </div>
-
-          <div class="row card">
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="docs.edit.regDate"></span>
-                <input disabled="disabled" type="text" class="form-control" value="{{ doc.regDate | date:'dd.MM.yyyy HH:mm' }}">
-              </div>
-            </div>
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="docs.edit.regUri"></span>
-                <input disabled="disabled" type="text" class="form-control" value="{{ doc.regUri }}">
-              </div>
-            </div>
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="docs.edit.docStatusName"></span>
-                <input disabled="disabled" type="text" class="form-control" value="{{ doc.docStatusName }}">
-              </div>
-            </div>
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="docs.edit.docDirectionName"></span>
-                <input disabled="disabled" type="text" class="form-control" value="{{ doc.docDirectionName }}">
-              </div>
-            </div>
-
-          </div>
-          <div class="row card">
-            <div class="form-group col-md-12">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon">{{ doc.docSubjectLabel }}:</span>
-                <sc-text ng-model="doc.docSubject" ng-disabled="!inEditMode"></sc-text>
-              </div>
-            </div>
-          </div>
-
-          <br />
-
           <sc-tabs tab-list="{
-          'Адресати': 'root.docs.edit.addressing',
-          'Прикачени файлове': 'root.docs.edit.content',
+          'Документ': 'root.docs.edit.view',
           'Управление': 'root.docs.edit.workflows',
           'Етапи': 'root.docs.edit.stages',
-          'Преписка': 'root.docs.edit.case',
-          'Класификация': 'root.docs.edit.classifications'
+          'Преписка': 'root.docs.edit.case'
           }"></sc-tabs>
 
         <div class="tab-content">
@@ -193,6 +133,6 @@
           </div>
           <div class="clear"></div>
         </div>
-
+      </div>
     </div>
 </ng-form>

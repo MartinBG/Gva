@@ -208,6 +208,20 @@
           ratingCategory: 'Категория',
           personRatingModel: 'Модел'
         },
+        personOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
         newPerson: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -282,6 +296,28 @@
           pageCount: 'Брой стр.',
           file: 'Файл',
           newDocumentId: 'Нов документ'
+        },
+        otherSearch: {
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         medicalSearch: {
           testimonial: 'Свидетелство',
@@ -558,10 +594,31 @@
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
+        docSelect: {
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          docName: 'Относно',
+          docTypeId: 'Вид на документа',
+          docStatusId: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          newDoc: 'Нов документ',
+          regDate: 'Дата',
+          regUri: 'Рег.№',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избери'
+        },
         search: {
           fromDate: 'От дата',
           toDate: 'До дата',
           search: 'Търси',
+          newApp: 'Ново',
+          linkApp: 'Свържи',
           regDate: 'Дата',
           regUri: 'Рег.№',
           subject: 'Относно',
@@ -578,10 +635,10 @@
       },
       states: {
         'root.applications': 'Заявления',
-        'root.applications.new.doc': 'Ново заявление',
+        'root.applications.new': 'Ново заявление',
         'root.applications.new.personSelect': 'Избер на заявител',
         'root.applications.new.personNew': 'Нов заявител',
-        'root.applications.link.common': 'Свържи заявление',
+        'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
         'root.applications.link.personSelect': 'Избер на заявител',
         'root.applications.link.personNew': 'Нов заявител',
@@ -611,7 +668,9 @@
         'root.persons.view.licences': 'Лицензи',
         'root.persons.view.checks': 'Проверки',
         'root.persons.view.checks.new': 'Нова проверка',
+        'root.persons.view.checks.new.choosePublisher': 'Избор на издател',
         'root.persons.view.checks.edit': 'Редакция на проверка',
+        'root.persons.view.checks.edit.choosePublisher': 'Избор на издател',
         'root.persons.view.employments': 'Месторабота',
         'root.persons.view.employments.new': 'Новa месторабота',
         'root.persons.view.employments.edit': 'Редакция на месторабота',
@@ -620,7 +679,9 @@
         'root.persons.view.medicals.edit': 'Редакция на медицинско',
         'root.persons.view.documentTrainings': 'Обучение',
         'root.persons.view.documentTrainings.new': 'Ново обучение',
+        'root.persons.view.documentTrainings.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentTrainings.edit': 'Редакция на обучение',
+        'root.persons.view.documentTrainings.edit.choosePublisher': 'Избор на издател',
         'root.persons.view.flyingExperiences': 'Летателен / практически опит',
         'root.persons.view.flyingExperiences.new': 'Нов летателен / практически опит',
         'root.persons.view.flyingExperiences.edit': 'Редакция на летателен / практически опит',
@@ -629,7 +690,12 @@
         'root.persons.view.editions': 'Вписвания / Потвърждения',
         'root.persons.view.editions.new': 'Ново вписване / потвърждение',
         'root.persons.view.editions.edit': 'Редакция на вписване / потвърждение',
-        'root.persons.view.inventory': 'Опис'
+        'root.persons.view.inventory': 'Опис',
+        'root.persons.view.documentOthers': 'Други документи',
+        'root.persons.view.documentOthers.new': 'Нов документ',
+        'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
+        'root.persons.view.documentOthers.edit': 'Редакция на документ',
+        'root.persons.view.documentOthers.edit.choosePublisher':  'Избор на издател'
       }
     });
   }]);

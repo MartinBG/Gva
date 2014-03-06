@@ -21,7 +21,7 @@
       $state.go('root.users.search', {
         username: $scope.filters.username,
         fullname: $scope.filters.fullname,
-        showActive: $scope.filters.showActive && $scope.filters.showActive.id
+        showActive: $scope.filters.showActive && $scope.filters.showActive.alias
       });
     };
 

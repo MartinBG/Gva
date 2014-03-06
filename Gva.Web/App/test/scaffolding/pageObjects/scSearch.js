@@ -55,7 +55,7 @@
           });
         }
 
-        if (type === 'select') {
+        if (type === 'select' || type === 'nomenclature') {
           return container.findElement(by.css('div.select2-container'))
                   .then(function (selectContainer) {
             return selectContainer.click().then(function () {

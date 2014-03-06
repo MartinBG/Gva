@@ -7,23 +7,10 @@
     $state,
     $stateParams,
     PersonDocumentMedical,
-    meds,
-    person
+    person,
+    meds
   ) {
-    $scope.medicals = _(meds).forEach(function (m) {
-      var testimonial = m.part.documentNumberPrefix + '-' +
-        m.part.documentNumber + '-' +
-        person.lin + '-' +
-        (m.part.documentNumberSuffix !== undefined ? m.part.documentNumberSuffix : '');
-      m.part.testimonial = testimonial;
-
-      var limitations = '';
-      _(m.part.limitationsTypes).forEach(function (limitationType) {
-        limitations += limitationType.name + ', ';
-      });
-      limitations = limitations.substring(0, limitations.length - 2);
-      m.part.limitations = limitations;
-    }).value();
+    $scope.medicals = meds;
 
     $scope.editDocumentMedical = function (medical) {
       return $state.go('root.persons.view.medicals.edit', {
@@ -49,16 +36,35 @@
     '$state',
     '$stateParams',
     'PersonDocumentMedical',
-    'meds',
-    'person'
+    'person',
+    'meds'
   ];
 
   DocumentMedicalsSearchCtrl.$resolve = {
     meds: [
       '$stateParams',
       'PersonDocumentMedical',
-      function ($stateParams, PersonDocumentMedical) {
-        return PersonDocumentMedical.query($stateParams).$promise;
+      'person',
+      function ($stateParams, PersonDocumentMedical, person) {
+        return PersonDocumentMedical.query($stateParams).$promise
+        .then(function (meds) {
+          return _(meds)
+          .forEach(function (med) {
+            var testimonial = med.part.documentNumberPrefix + '-' +
+              med.part.documentNumber + '-' +
+              person.lin + '-' +
+              med.part.documentNumberSuffix;
+
+            med.part.testimonial = testimonial;
+
+            var limitations = '';
+            for (var i = 0; i < med.part.limitationsTypes.length; i++) {
+              limitations += med.part.limitationsTypes[i].name + ', ';
+            }
+            limitations = limitations.substring(0, limitations.length - 2);
+            med.part.limitations = limitations;
+          }).value();
+        });
       }
     ]
   };

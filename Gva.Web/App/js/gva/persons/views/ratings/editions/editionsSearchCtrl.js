@@ -2,16 +2,37 @@
 (function (angular) {
   'use strict';
 
-  function EditionsSearchCtrl(
-    $scope,
-    $state,
-    $stateParams,
-    PersonEdition,
-    PersonEditionView,
-    editions
-  ) {
-    $scope.editions = editions;
+  function ЕditionsSearchCtrl($scope, $state, $stateParams, PersonEdition) {
+    PersonEdition.query($stateParams).$promise.then(function (editions) {
+      $scope.editions = editions.map(function (item) {
+        item.rating.ratingTypeOrRatingLevel = item.rating.personRatingLevel ?
+          item.rating.personRatingLevel : item.rating.ratingType;
+        var subClasses = '', i;
+        if (item.ratingEdition.part.ratingSubClasses) {
+          for (i = 0; i < item.ratingEdition.part.ratingSubClasses.length; i++) {
+            subClasses += item.ratingEdition.part.ratingSubClasses[i].name + ', ';
+          }
+          subClasses = ' ( ' + subClasses.substr(0, subClasses.length - 2) + ' )';
+        }
 
+        item.rating.classOrSubclass = item.rating.aircraftTypeGroup ?
+        item.rating.aircraftTypeGroup.name : item.rating.ratingClass.name + subClasses;
+
+        item.rating.authorizationAndLimitations = item.rating.authorization ?
+          item.rating.authorization.name : '';
+        var limitations = '';
+        if (item.ratingEdition.part.limitations) {
+          for (i = 0; i < item.ratingEdition.part.limitations.length; i++) {
+            limitations += item.ratingEdition.part.limitations[i].name + ', ';
+          }
+          limitations = limitations.substring(0, limitations.length - 2);
+          item.rating.authorizationAndLimitations += ' ' + limitations;
+        }
+
+        return item;
+      });
+    });
+    
     $scope.editEdition = function (item) {
       return $state.go('root.persons.view.editions.edit', {
         id: $stateParams.id,
@@ -36,23 +57,7 @@
     };
   }
 
-  EditionsSearchCtrl.$inject = [
-    '$scope',
-    '$state',
-    '$stateParams',
-    'PersonEdition',
-    'PersonEditionView',
-    'editions'
-  ];
-  EditionsSearchCtrl.$resolve = {
-    editions: [
-      '$stateParams',
-      'PersonEditionView',
-      function ($stateParams, PersonEditionView) {
-        return PersonEditionView.query($stateParams).$promise;
-      }
-    ]
-  };
+  ЕditionsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonEdition'];
 
-  angular.module('gva').controller('EditionsSearchCtrl', EditionsSearchCtrl);
+  angular.module('gva').controller('ЕditionsSearchCtrl', ЕditionsSearchCtrl);
 }(angular));

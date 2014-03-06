@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, _, moment*/
+(function (angular, _, moment) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
@@ -84,25 +84,30 @@
 
           if ($params.fromDate) {
             applications = _(applications).filter(function (app) {
-              return app.doc.regDate && app.doc.regDate >= new Date(Date.parse($params.fromDate));
+              return app.doc.regDate &&
+                moment(app.doc.regDate).startOf('day') >= moment($params.fromDate);
+
             }).value();
           }
 
           if ($params.toDate) {
             applications = _(applications).filter(function (app) {
-              return app.doc.regDate && app.doc.regDate <= new Date(Date.parse($params.toDate));
+              return app.doc.regDate &&
+                moment(app.doc.regDate).startOf('day') <= moment($params.toDate);
             }).value();
           }
 
           if ($params.lin) {
             applications = _(applications).filter(function (app) {
-              return app.personData.part.lin && _(app.personData.part.lin).contains($params.lin);
+              return app.personData.part.lin &&
+                _(app.personData.part.lin).contains($params.lin);
             }).value();
           }
 
           if ($params.regUri) {
             applications = _(applications).filter(function (app) {
-              return app.doc.regUri && _(app.doc.regUri).contains($params.regUri);
+              return app.doc.regUri &&
+                _(app.doc.regUri).contains($params.regUri);
             }).value();
           }
 
@@ -140,7 +145,6 @@
           var nextDocId = _(docs).pluck('docId').max().value() + 1;
 
           var newDoc = _.assign(_.cloneDeep(defaultDoc), $jsonData.doc);
-          delete newDoc.numberOfDocs;
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
@@ -402,4 +406,4 @@
           return [200];
         });
   });
-}(angular, _));
+}(angular, _, moment));

@@ -1,0 +1,49 @@
+﻿  <div class="well-sm panel-body">
+    <ng-form name="stageForm" sc-validate="{}">
+      <div class="well-sm panel-body ">
+
+        <div class="row">
+
+          <div class="form-group col-sm-10" sc-has-error="stageId">
+            <label class="control-label" l10n-text="docs.nextStage.stage"></label>
+            <sc-validation-error field-name="stageId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="stageModel.stageId" mode="id" name="stageId" alias="'electronicServiceStages'" params="{ docTypeId: stageModel.docTypeId }" ng-required="true" readonly="true"></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-2" sc-has-error="startingDate">
+            <label class="control-label" l10n-text="docs.nextStage.startingDate"></label>
+            <sc-validation-error field-name="startingDate" validations="{required: null}"></sc-validation-error>
+            <sc-date ng-model="stageModel.startingDate" name="startingDate" readonly="true" required></sc-date>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-sm-8">
+            <label class="control-label" l10n-text="docs.nextStage.executors"></label>
+            <sc-text ng-model="stageModel.executors" name="executors" readonly="true"></sc-text>
+          </div>
+
+          <div class="form-group col-sm-2" sc-has-error="expectedEndingDate">
+            <label class="control-label" l10n-text="docs.nextStage.expectedEndingDate"></label>
+            <sc-validation-error field-name="expectedEndingDate" validations="{required: null}"></sc-validation-error>
+            <sc-date ng-model="stageModel.expectedEndingDate" name="expectedEndingDate" readonly="true"></sc-date>
+          </div>
+
+          <div class="form-group col-sm-2" sc-has-error="endingDate">
+            <label class="control-label" l10n-text="docs.nextStage.endingDate"></label>
+            <sc-validation-error field-name="endingDate" validations="{required: null, invalidEndingDate: 'Изберете дата след днешната'}"></sc-validation-error>
+            <sc-date ng-model="stageModel.endingDate" name="endingDate" sc-validate="{ invalidEndingDate: isEndingDateValid }" required></sc-date>
+          </div>
+
+        </div>
+
+      </div>
+    </ng-form>
+
+    <div class="col-sm-3 col-sm-offset-5">
+      <sc-button name="saveBtn" btn-click="save()" text="docs.nextStage.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="docs.nextStage.back" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
