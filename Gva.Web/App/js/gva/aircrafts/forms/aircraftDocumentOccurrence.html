@@ -1,0 +1,65 @@
+﻿<ng-form  sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.occurrenceDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-3" sc-has-error="aircraftOccurrenceClass">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.aircraftOccurrenceClass"></label>
+          <sc-validation-error field-name="aircraftOccurrenceClass" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.aircraftOccurrenceClass" name="aircraftOccurrenceClass" alias="'aircraftOccurrenceClasses'" ng-required="true"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-3" sc-has-error="country">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.country"></label>
+          <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2"  sc-has-error="localDate">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.localDate"></label>
+          <sc-validation-error field-name="localDate" validations="{required: null}"></sc-validation-error>
+          <sc-date ng-model="model.localDate" ng-required="true" name="localDate"></sc-date>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="localTime">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.localTime"></label>
+          <sc-validation-error field-name="localTime" validations="{required: null}"></sc-validation-error>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-time">
+              </span>
+            </span>
+            <sc-int ng-model="model.localTime.hours" ng-required="true" name="localTime"></sc-int>
+            <span class="input-group-addon padding6">:</span>
+            <sc-int ng-model="model.localTime.minutes" ng-required="true" name="localTime"></sc-int>
+          </div>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="area">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.area"></label>
+          <sc-validation-error field-name="area" validations="{required: null}"></sc-validation-error>
+          <sc-text ng-model="model.area" name="area" ng-required="true"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.notes"></label>
+          <sc-textarea rows="3" ng-model="model.notes"></sc-textarea>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.occurrenceNotes"></label>
+          <sc-textarea rows="3" ng-model="model.occurrenceNotes"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.bookPageNumber"></label>
+          <sc-text ng-model="model.bookPageNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.pageCount"></label>
+          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -532,6 +532,38 @@
         editInspection: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        occurrenceSearch: {
+          localTime: 'Час на инцидента',
+          newOccurrence: 'Нов инцидент',
+          localDate: 'Дата на инцидента',
+          aircraftOccurrenceClass: 'Клас',
+          country: 'Държава',
+          area: 'Място на инцидента',
+          occurrenceNotes: 'Бележки по инцидента',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в деловодна книга',
+          pageCount: 'Бр. страници на документа'
+        },
+        newOccurrence: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOccurrence: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        occurrenceDirective: {
+          title: 'Инцидент',
+          localDate: 'Дата на инцидента',
+          localTime: 'Час на инцидента',
+          aircraftOccurrenceClass: 'Клас',
+          country: 'Държава',
+          area: 'Място на инцидента',
+          occurrenceNotes: 'Бележки по инцидента',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в деловодна книга',
+          pageCount: 'Бр. страници на документа'
         }
       },
       persons: {

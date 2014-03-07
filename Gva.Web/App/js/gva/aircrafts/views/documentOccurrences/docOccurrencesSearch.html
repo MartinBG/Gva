@@ -1,0 +1,26 @@
+﻿<sc-button name="createBtn" btn-click="newOccurrence()" text="aircrafts.occurrenceSearch.newOccurrence" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="aircraftDocumentOccurrences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editOccurrence(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteOccurrence(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.localDate" title="aircrafts.occurrenceSearch.localDate" type="date">
+  </sc-column>
+  <sc-column data="part.localTime" title="aircrafts.occurrenceSearch.localTime">
+    <span>{{item.part.localTime.hours}}:{{item.part.localTime.minutes}}</span>
+  </sc-column>
+  <sc-column data="part.aircraftOccurrenceClass.name" title="aircrafts.occurrenceSearch.aircraftOccurrenceClass">
+  </sc-column>
+  <sc-column data="part.country.name" title="aircrafts.occurrenceSearch.country">
+  </sc-column>
+  <sc-column data="part.area" title="aircrafts.occurrenceSearch.area">
+  </sc-column>
+  <sc-column data="part.occurrenceNotes" title="aircrafts.occurrenceSearch.occurrenceNotes">
+  </sc-column>
+  <sc-column data="part.notes" title="aircrafts.occurrenceSearch.notes">
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="aircrafts.occurrenceSearch.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="aircrafts.occurrenceSearch.pageCount">
+  </sc-column>
+</sc-datatable>

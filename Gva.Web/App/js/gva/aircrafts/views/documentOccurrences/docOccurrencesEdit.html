@@ -1,0 +1,11 @@
+﻿<ng-form name="editAircraftDocumentOccurrenceForm">
+
+  <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part"></gva-aircraft-document-occurrence>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editOccurrence.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!aircraftDocumentOccurrenceForm.$dirty"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editOccurrence.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

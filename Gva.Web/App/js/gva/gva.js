@@ -153,6 +153,10 @@
       templateUrl: 'gva/aircrafts/forms/aircraftInspection.html',
       controller: 'AircraftInspectionCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftDocumentOccurrence',
+      templateUrl: 'gva/aircrafts/forms/aircraftDocumentOccurrence.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -285,6 +289,10 @@
       .state(['root.aircrafts.view.inspections'                         , '/inspections'                                                                                                                                                               ])
       .state(['root.aircrafts.view.inspections.search'                  , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsSearch.html'            , 'InspectionsSearchCtrl'        ]])
       .state(['root.aircrafts.view.inspections.new'                     , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsNew.html'               , 'InspectionsNewCtrl'           ]])
-      .state(['root.aircrafts.view.inspections.edit'                    , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsEdit.html'              , 'InspectionsEditCtrl'          ]]);
+      .state(['root.aircrafts.view.inspections.edit'                    , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsEdit.html'              , 'InspectionsEditCtrl'          ]])
+      .state(['root.aircrafts.view.occurrences'                         , '/documentOccurrences'                                                                                                                                                       ])
+      .state(['root.aircrafts.view.occurrences.search'                  , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOccurrences/docOccurrencesSearch.html' , 'DocOccurrencesSearchCtrl'     ]])
+      .state(['root.aircrafts.view.occurrences.new'                     , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOccurrences/docOccurrencesNew.html'    , 'DocOccurrencesNewCtrl'        ]])
+      .state(['root.aircrafts.view.occurrences.edit'                    , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOccurrences/docOccurrencesEdit.html'   , 'DocOccurrencesEditCtrl'       ]]);
   }]);
 }(angular));

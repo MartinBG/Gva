@@ -319,6 +319,9 @@
     checkers: require('./checker'),
 
     //Номенклатура Ниво от несъответствие
-    disparityLevels: require('./disparityLevel')
+    disparityLevels: require('./disparityLevel'),
+
+    //Номенклатура Класове инциденти с ВС.
+    aircraftOccurrenceClasses: require('./aircraftOccurrenceClass')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);
