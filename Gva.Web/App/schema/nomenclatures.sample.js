@@ -300,6 +300,7 @@
       { nomValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
     ],
 
+
     //Номенклатура Причини за одит
     auditReasons: require('./auditReason'),
 
@@ -322,6 +323,21 @@
     disparityLevels: require('./disparityLevel'),
 
     //Номенклатура Класове инциденти с ВС.
-    aircraftOccurrenceClasses: require('./aircraftOccurrenceClass')
+    aircraftOccurrenceClasses: require('./aircraftOccurrenceClass'),
+
+    //Номенклатура Ограничения по част М/Ф и част 145
+    lim145limitations: [
+      { nomValueId: 1, code: 'A1', name: 'А1 - Самолети над 5700 кг', nameAlt: 'А1 - Самолети над 5700 кг', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'А2 - Самолети 5700 кг и по-малко', nameAlt: 'А2 - Самолети 5700 кг и по-малко', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'А3 - Хеликоптери', nameAlt: 'А3 - Хеликоптери', alias: 'A3' },
+      { nomValueId: 4, code: 'B1', name: 'B1 - Турбини', nameAlt: 'B1 - Турбини', alias: 'B1' }
+    ],
+
+    //Номенклатура Физически лица
+    persons: [
+      { nomValueId: 1, code: 'P2', name: 'Петър Лалов', nameAlt: 'Петър Лалов', alias: 'P1' },
+      { nomValueId: 2, code: 'P2', name: 'Пламен Илиев', nameAlt: 'Пламен Илиев', alias: 'P2' },
+      { nomValueId: 3, code: 'P3', name: 'Пламен Пилев', nameAlt: 'Пламен Пилев', alias: 'P3' },
+    ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

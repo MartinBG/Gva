@@ -1,0 +1,11 @@
+﻿﻿<ng-form name="editAircraftMaintenanceForm">
+
+  <gva-aircraft-maintenance name="aircraftMaintenanceForm" ng-model="aircraftMaintenance.part"></gva-aircraft-maintenance>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editMaintenance.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!aircraftMaintenanceForm.$dirty"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editMaintenance.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

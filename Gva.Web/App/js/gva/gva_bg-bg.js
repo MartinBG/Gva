@@ -564,6 +564,32 @@
           notes: 'Бележки',
           bookPageNumber: '№ стр. в деловодна книга',
           pageCount: 'Бр. страници на документа'
+        },
+        newMaintenance: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editMaintenance: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        searchMaintenance: {
+          newMaintenance: 'Нова поддръжка',
+          lim145limitation: 'Дейност по част M/F, 145',
+          notes: 'Описание',
+          fromDate: 'Период: от дата',
+          toDate: 'Период: до дата',
+          organization: 'Организация',
+          person: 'Физическо лице'
+        },
+        maintenanceDirective: {
+          title: 'Поддръжка',
+          lim145limitation: 'Дейност по част M/F, 145',
+          notes: 'Описание',
+          fromDate: 'Период: от дата',
+          toDate: 'Период: до дата',
+          organization: 'Организация',
+          person: 'Физическо лице'
         }
       },
       persons: {
