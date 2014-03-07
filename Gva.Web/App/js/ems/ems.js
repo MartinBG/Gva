@@ -18,19 +18,23 @@
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocIncoming',
-      templateUrl: 'ems/docs/forms/docView/docIncoming.html'
+      templateUrl: 'ems/docs/forms/docView/docIncoming.html',
+      controller: 'DocIncomingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocInternal',
-      templateUrl: 'ems/docs/forms/docView/docInternal.html'
+      templateUrl: 'ems/docs/forms/docView/docInternal.html',
+      controller: 'DocInternalCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocInternalOutgoing',
-      templateUrl: 'ems/docs/forms/docView/docInternalOutgoing.html'
+      templateUrl: 'ems/docs/forms/docView/docInternalOutgoing.html',
+      controller: 'DocInternalOutgoingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocOutgoing',
-      templateUrl: 'ems/docs/forms/docView/docOutgoing.html'
+      templateUrl: 'ems/docs/forms/docView/docOutgoing.html',
+      controller: 'DocOutgoingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewRemark',
@@ -38,11 +42,23 @@
     });
     scaffoldingProvider.form({
       name: 'emsDocViewResolution',
-      templateUrl: 'ems/docs/forms/docView/resolution.html'
+      templateUrl: 'ems/docs/forms/docView/resolution.html',
+      controller: 'ResolutionCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewTask',
-      templateUrl: 'ems/docs/forms/docView/task.html'
+      templateUrl: 'ems/docs/forms/docView/task.html',
+      controller: 'TaskCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocFiles',
+      templateUrl: 'ems/docs/forms/docView/docFiles.html',
+      controller: 'DocFilesCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocClassification',
+      templateUrl: 'ems/docs/forms/docView/docClassification.html',
+      controller: 'DocClassificationCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider

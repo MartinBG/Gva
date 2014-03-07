@@ -73,28 +73,86 @@
           isRemark: false,
           isTask: false,
           docBody: '',
-          privateDocFiles: [
+          docFiles: [
             {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1670',
-              name: 'TestFile1.pdf',
-              relativePath: undefined
-            }
-          ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1671',
-              name: 'TestFile2.pdf',
-              relativePath: undefined
+              docFileId: 1,
+              docId: 1,
+              docFileKindId: 1,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1670&fileName=TestFile1.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1670',
+                name: 'TestFile1.pdf',
+                relativePath: undefined
+              },
+              name: 'Искане',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
             },
             {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1672',
-              name: 'TestFile3.pdf',
-              relativePath: undefined
+              docFileId: 2,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1671&fileName=TestFile2.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1671',
+                name: 'TestFile2.pdf',
+                relativePath: undefined
+              },
+              name: 'Актуален учредителен акт',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
             },
             {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
-              name: 'TestFile4.pdf',
-              relativePath: undefined
+              docFileId: 3,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1672&fileName=TestFile3.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1672',
+                name: 'TestFile3.pdf',
+                relativePath: undefined
+              },
+              name: 'Договор',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
+            },
+            {
+              docFileId: 4,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1673&fileName=TestFile4.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
+                name: 'TestFile4.pdf',
+                relativePath: undefined
+              },
+              name: 'Документ за актуална търговска или съдебна регистрация ',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
             }
           ],
           docWorkflows: [
@@ -205,20 +263,7 @@
           isResolution: false,
           isTask: false,
           docBody: '',
-          privateDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1600',
-              name: 'TestFile112.pdf',
-              relativePath: undefined
-            }
-          ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
-              name: 'TestFile4.pdf',
-              relativePath: undefined
-            }
-          ],
+          docFiles: [],
           docWorkflows: [
             {
               eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
@@ -314,20 +359,7 @@
           isVisibleCollapsePermissions: false,
           isRead: false,
           docBody: '',
-          privateDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1611',
-              name: 'TestFile111.pdf',
-              relativePath: undefined
-            }
-          ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1674',
-              name: 'TestFile5.pdf',
-              relativePath: undefined
-            }
-          ],
+          docFiles: [],
           docWorkflows: [
             {
               eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),

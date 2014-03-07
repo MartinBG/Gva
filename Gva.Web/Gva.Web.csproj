@@ -133,6 +133,16 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docClassificationCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docClassification.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docFiles.html" />
+    <Content Include="App\js\ems\docs\forms\docView\taskCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\resolutionCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docOutgoingCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternalOutgoingCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docInternalCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docIncomingCtrl.js" />
     <Content Include="App\js\ems\docs\recources\docStage.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />
@@ -184,6 +194,7 @@
     <Content Include="App\js\gva\persons\views\documentOthers\othersNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearch.html" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearchCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\formName\formNameDirective.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.html" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.html" />

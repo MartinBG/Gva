@@ -5,11 +5,8 @@
   function DocsWorkflowsCtrl(
     $scope
   ) {
-
     $scope.removeDocWorkflow = function () {
-
     };
-
   }
 
   DocsWorkflowsCtrl.$inject = [

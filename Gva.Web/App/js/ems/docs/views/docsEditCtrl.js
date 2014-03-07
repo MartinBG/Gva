@@ -12,6 +12,7 @@
     DocStage,
     doc
   ) {
+    $scope.$state = $state;
     $scope.doc = doc;
 
     $scope.inEditMode = false;
@@ -30,17 +31,19 @@
     };
 
     $scope.exitEditMode = function () {
-      $scope.inEditMode = false;
+      return $state.transitionTo($state.current, $stateParams, { reload: true });
     };
 
     $scope.save = function () {
-      if ($scope.editDocForm.$valid) {
-        return Doc
-          .save($stateParams, $scope.doc).$promise
-          .then(function () {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          });
-      }
+      $scope.editDocForm.$validate().then(function () {
+        if ($scope.editDocForm.$valid) {
+          return Doc
+            .save($stateParams, $scope.doc).$promise
+            .then(function () {
+              return $state.transitionTo($state.current, $stateParams, { reload: true });
+            });
+        }
+      });
     };
 
     $scope.attachNewDoc = function () {

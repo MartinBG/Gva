@@ -7,7 +7,7 @@
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        scope.form = element.parents('ng-form').first().controller('form');
+        scope.form = element.parent().controller('form');
         scope.$watchCollection('[form["' + attrs.scHasError +
           '"].$invalid, form.$validated, form["' + attrs.scHasError + '"].$error.$pending]',
           function (newValue, oldValue) {
