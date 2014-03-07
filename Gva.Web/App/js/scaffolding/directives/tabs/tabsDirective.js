@@ -83,24 +83,18 @@
         function stopLoader(tabName) {
           var tab;
 
-          var stateMatch = true;
-          var checkStateMatching = function(value, param) {
-            if (!stateMatch || !$stateParams[param] || $stateParams[param] !== value) {
-              stateMatch = false;
-            }
-          };
-
           for (var i = 0; i < $scope.tabList.length; i++) {
             tab = $scope.tabList[i];
 
             if (tab.isState && _(tabName).include(tab.name)) {
-              stateMatch = true;
 
-              if (!!tab.stateParams) {
-                _.forOwn(tab.stateParams, checkStateMatching);
+              if (tab.hasOwnProperty('stateParams')){
+                if (stateMatch(tab.stateParams)) {
+                  tab.loading = false;
+                  return;
+                }
               }
-              
-              if (stateMatch) {
+              else {
                 tab.loading = false;
                 return;
               }
@@ -118,29 +112,15 @@
         }
 
         function activateTab(tabName, loading) {
-
-          var stateMatch = true;
-          var checkStateMatching = function(value, param) {
-            if (!stateMatch || !$stateParams[param] || $stateParams[param] !== value) {
-              stateMatch = false;
-            }
-          };
-
           for (var i = 0; i < $scope.tabList.length; i++) {
             var tab = $scope.tabList[i];
 
             if (tab.isState) {
-              stateMatch = true;
-
               if (!_(tabName).include(tab.name)) {
-                stateMatch = false;
+                continue;
               }
 
-              if (!!tab.stateParams) {
-                _.forOwn(tab.stateParams, checkStateMatching);
-              }
-
-              if (!stateMatch) {
+              if (tab.hasOwnProperty('stateParams') && !stateMatch(tab.stateParams)) {
                 continue;
               }
 
@@ -171,6 +151,14 @@
             tab.isActive = false;
           });
           tab.isActive = true;
+        }
+
+        function stateMatch (tabStateParams) {
+          return _.pairs(tabStateParams).reduce(function(stateMatching, kvp) {
+            return stateMatching &&
+              $stateParams.hasOwnProperty(kvp[0]) &&
+              $stateParams[kvp[0]] === kvp[1];
+          }, true);
         }
 
         activateTab($state.$current.name, false);
