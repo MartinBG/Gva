@@ -11,12 +11,13 @@
       aircraftCertPermitsToFly = require('./aircraft-cert-permitstofly.sample'),
       aircraftCertRadios = require('./aircraft-cert-radios.sample'),
       aircraftDocumentDebts = require('./aircraft-document-debts.sample'),
-      aircraftDocumentDebtsFM = require('./aircraft-document-debtsfm.sample');
+      aircraftDocumentDebtsFM = require('./aircraft-document-debtsfm.sample'),
+      aircraftDocumentOthers = require('./aircraft-document-other.sample');
 
   angular.module('app').constant('aircraftLots', [
     {
       lotId: 1,
-      nextIndex: 16,
+      nextIndex: 18,
       aircraftData: {
         partIndex: 1,
         part: aircraftData.aircraft1Data
@@ -93,6 +94,16 @@
         {
           partIndex: 15,
           part: aircraftDocumentDebtsFM.aircraft1Debt1
+        }
+      ],
+      aircraftDocumentOthers: [
+        {
+          partIndex: 16,
+          part: aircraftDocumentOthers.aircraft1DocOther1
+        },
+        {
+          partIndex: 17,
+          part: aircraftDocumentOthers.aircraft1DocOther2
         }
       ]
     },

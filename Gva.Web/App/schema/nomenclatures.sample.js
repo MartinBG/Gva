@@ -118,6 +118,8 @@
 
     personOtherDocumentTypes: require('./personOtherDocumentType'),
 
+    otherDocumentTypes: require('./otherDocumentType'),
+
     documentRoles: require('./documentRole'),
 
     employmentCategories: require('./employmentCategory'),

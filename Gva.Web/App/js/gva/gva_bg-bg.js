@@ -436,6 +436,40 @@
           closeAplicationDate: 'Дата',
           closeCaaAplicationNumber: 'Писмо на ГВА за заличаване - номер',
           closeCaaAplicationDate: 'Дата'
+        },
+        aircraftOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          otherDocumentType: 'Тип документ',
+          aircraftOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        otherSearch: {
+          newDocument: 'Нов документ',
+          documentNumber: 'Документ №',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          otherDocumentType: 'Тип документ',
+          aircraftOtherDocumentRole: 'Роля',
+          valid: 'Валидно',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ'
         }
       },
       persons: {
@@ -1161,7 +1195,10 @@
         'root.aircrafts.view.debts.edit': 'Редакция на залог',
         'root.aircrafts.view.debtsFM': 'Залози',
         'root.aircrafts.view.debtsFM.new': 'Ново залог',
-        'root.aircrafts.view.debtsFM.edit': 'Редакция на залог'
+        'root.aircrafts.view.debtsFM.edit': 'Редакция на залог',
+        'root.aircrafts.view.others': 'Други документи',
+        'root.aircrafts.view.others.new': 'Нов документ',
+        'root.aircrafts.view.others.edit': 'Редакция на документ'
       }
     });
   }]);

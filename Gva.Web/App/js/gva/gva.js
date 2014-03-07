@@ -143,6 +143,10 @@
       name: 'gvaAircraftDocumentDebtFm',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentDebtFM.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftDocumentOther',
+      templateUrl: 'gva/aircrafts/forms/aircraftDocumentOther.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -267,6 +271,10 @@
       .state(['root.aircrafts.view.debtsFM'                             , '/debtsFM'                                                                                                                                                                   ])
       .state(['root.aircrafts.view.debtsFM.search'                      , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsSearch.html'                   , 'DocDebtsFMSearchCtrl'         ]])
       .state(['root.aircrafts.view.debtsFM.new'                         , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsNew.html'                      , 'DocDebtsFMNewCtrl'            ]])
-      .state(['root.aircrafts.view.debtsFM.edit'                        , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsEdit.html'                     , 'DocDebtsFMEditCtrl'           ]]);
+      .state(['root.aircrafts.view.debtsFM.edit'                        , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsEdit.html'                     , 'DocDebtsFMEditCtrl'           ]])
+      .state(['root.aircrafts.view.others'                              , '/others'                                                                                                                                                                    ])
+      .state(['root.aircrafts.view.others.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersSearch.html'              , 'AircraftOthersSearchCtrl'     ]])
+      .state(['root.aircrafts.view.others.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersNew.html'                 , 'AircraftOthersNewCtrl'        ]])
+      .state(['root.aircrafts.view.others.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersEdit.html'                , 'AircraftOthersEditCtrl'       ]]);
   }]);
 }(angular));
