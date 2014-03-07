@@ -20,6 +20,20 @@
 
           return [200, personRatings];
         })
+      .when('GET', '/api/persons/:id/ratings/:ind',
+        function ($params, personLots) {
+          var person = _(personLots)
+            .filter({ lotId: parseInt($params.id, 10) }).first();
+
+          var rating = _(person.personRatings)
+            .filter({ partIndex: parseInt($params.ind, 10) }).first();
+
+          return [200, {
+            partIndex: rating.partIndex,
+            rating: rating.part,
+            firstEditionValidFrom: rating.personRatingEditions[0].part.documentDateValidFrom
+          }];
+        })
       .when('POST', '/api/persons/:id/ratings',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)

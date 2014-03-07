@@ -22,14 +22,14 @@
                 childInd: $stateParams.childInd
               }, $scope.item).$promise
               .then(function () {
-                return $state.go('root.persons.view.editions.search');
+                return $state.go('root.persons.view.ratings.editions.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('root.persons.view.editions.search');
+      return $state.go('root.persons.view.ratings.editions.search');
     };
   }
 

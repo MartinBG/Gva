@@ -112,8 +112,22 @@ namespace Regs.Api.Models
             return this.UpdatePartVersion(partVersion, json, userContext);
         }
 
-        public PartVersion DeletePart(string path, UserContext userContext)
+        public PartVersion DeletePart(string path, UserContext userContext, bool lastPartOnly = false)
         {
+            if (lastPartOnly)
+            {
+                var allPartsPath = Regex.Match(path, @".+/\d+/[^/\d]+").Value;
+
+                var lastPartVersion = this.GetPartVersions(allPartsPath, false)
+                    .OrderByDescending(pv => pv.Part.Index)
+                    .First();
+
+                if (lastPartVersion.Part.Path != path)
+                {
+                    throw new Exception("Cannot delete part that is not last!");
+                }
+            }
+
             PartVersion partVersion = this.GetPartVersions(path, true).Single();
 
             return this.DeletePartVersion(partVersion, userContext);
@@ -309,7 +323,7 @@ namespace Regs.Api.Models
             var partVersions =
                 commit.PartVersions
                 .Where(pv =>
-                    (exact ? pv.Part.Path == path : pv.Part.Path.StartsWith(path)) &&
+                    (exact ? pv.Part.Path == path : Regex.IsMatch(pv.Part.Path, "^" + path + @"/\d+$")) &&
                     pv.PartOperation != PartOperation.Delete);
 
             if (exact)

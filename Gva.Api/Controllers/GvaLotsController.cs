@@ -3,6 +3,7 @@ using AutoMapper;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -11,12 +12,18 @@ namespace Gva.Api.Controllers
     public abstract class GvaLotsController : ApiController
     {
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
         private UserContext userContext;
         private IUnitOfWork unitOfWork;
 
-        public GvaLotsController(ILotRepository lotRepository, IUserContextProvider userContextProvider, IUnitOfWork unitOfWork)
+        public GvaLotsController(
+            ILotRepository lotRepository,
+            IFileRepository fileRepository,
+            IUserContextProvider userContextProvider,
+            IUnitOfWork unitOfWork)
         {
             this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
             this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
         }
@@ -45,16 +52,25 @@ namespace Gva.Api.Controllers
 
         //}
 
+        public IHttpActionResult GetFileParts(int lotId, string path)
+        {
+            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+
+            return Ok();
+        }
+
         public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.CreatePart(path + "/*", content.part, this.userContext);
-            lot.Commit(this.userContext);
+
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
 
             if (content.file != null)
             {
-
+                this.fileRepository.AddFileReference(partVersion.Part, content.file.key, content.file.name);
             }
+
+            lot.Commit(this.userContext);
 
             this.unitOfWork.Save();
 
@@ -64,13 +80,14 @@ namespace Gva.Api.Controllers
         public IHttpActionResult PostPart(int lotId, string path, dynamic content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.UpdatePart(path, content.part, this.userContext);
-            lot.Commit(this.userContext);
+            PartVersion partVersion = lot.UpdatePart(path, content.part, this.userContext);
 
             if (content.file != null)
             {
-
+                this.fileRepository.AddFileReference(partVersion.Part, content.file.key, content.file.name);
             }
+
+            lot.Commit(this.userContext);
 
             this.unitOfWork.Save();
 

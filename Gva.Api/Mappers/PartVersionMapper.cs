@@ -11,6 +11,11 @@ namespace Gva.Api.Mappers
         {
             Mapper.CreateMap<PartVersion, PartVersionDO>().ConvertUsing(pv =>
             {
+                if (pv == null)
+                {
+                    return null;
+                }
+
                 return new PartVersionDO()
                 {
                     PartIndex = pv.Part.Index.Value,
