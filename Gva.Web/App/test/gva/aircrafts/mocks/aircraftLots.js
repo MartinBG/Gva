@@ -81,6 +81,14 @@
           part: aircraftCertRadios.aircraft1Radio1
         }
       ]
+    },
+    {
+      lotId: 2,
+      nextIndex: 2,
+      aircraftData: {
+        partIndex: 1,
+        part: aircraftData.aircraft2Data
+      }
     }
   ]);
 }(angular));

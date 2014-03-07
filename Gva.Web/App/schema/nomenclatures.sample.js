@@ -190,7 +190,10 @@
     operationTypes: require('./operationType'),
     aircraftNewOld: require('./aircraftNewOld'),
     aircraftRadioTypes: require('./aircraftRadioType'),
-    
+    cofATypes: require('./CofAType'),
+    easaTypes: require('./EASAType'),
+    euRegTypes: require('./EURegType'),
+    easaCategories: require('./EASACategory'),
 
     docFormatType: require('./docFormatType'),
 

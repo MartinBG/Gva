@@ -1,1 +1,34 @@
-﻿AIRCRAFTS SEARCH
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="aircrafts.search.manSN"></sc-filter>
+    <sc-filter type="text" name="model" class="col-sm-3" removable="false" label="aircrafts.search.model"></sc-filter>
+    <sc-filter type="text" name="icao" class="col-sm-3" removable="true" label="aircrafts.search.icao"></sc-filter>
+    <sc-search-button action="search()" text="aircrafts.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newAircraft()" text="aircrafts.search.new" icon="glyphicon-plane"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable ng-model="aircrafts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <sc-button name="viewButton" btn-click="viewAircraft(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="manSN" title="aircrafts.search.manSN">
+    </sc-column>
+    <sc-column data="model" title="aircrafts.search.model">
+    </sc-column>
+    <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date">
+    </sc-column>
+    <sc-column data="icao" title="aircrafts.search.icao">
+    </sc-column>
+    <sc-column data="aircraftCategory.name" title="aircrafts.search.aircraftCategory">
+    </sc-column>
+    <sc-column data="aircraftProducer.name" title="aircrafts.search.aircraftProducer">
+    </sc-column>
+    <sc-column data="engine" title="aircrafts.search.engine">
+    </sc-column>
+    <sc-column data="propeller" title="aircrafts.search.propeller">
+    </sc-column>
+    <sc-column data="ModifOrWingColor" title="aircrafts.search.ModifOrWingColor">
+    </sc-column>
+  </sc-datatable>
+</div>

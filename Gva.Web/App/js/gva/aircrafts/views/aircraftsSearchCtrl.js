@@ -9,7 +9,10 @@
     Aircraft,
     aircrafts) {
 
-    $scope.filters = {};
+    $scope.filters = {
+      manSN: null,
+      model: null
+    };
 
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
@@ -21,6 +24,9 @@
 
     $scope.search = function () {
       $state.go('root.aircrafts.search', {
+        manSN: $scope.filters.manSN,
+        model: $scope.filters.model,
+        icao: $scope.filters.icao
       });
     };
 
@@ -45,8 +51,8 @@
     aircrafts: [
       '$stateParams',
       'Aircraft',
-      function () {
-        return [];
+      function ($stateParams, Aircraft) {
+        return Aircraft.query($stateParams).$promise;
       }
     ]
   };

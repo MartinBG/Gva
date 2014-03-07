@@ -26,7 +26,9 @@
 
   AircraftsNewCtrl.$resolve = {
     aircraft: function () {
-      return {};
+      return {
+        aircraftData: {}
+      };
     }
   };
 

@@ -4,12 +4,54 @@
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       aircrafts: {
+        search: {
+          manSN: 'Сериен номер',
+          model: 'Модел',
+          outputDate: 'Дата на производство',
+          icao: 'ICAO код',
+          aircraftCategory: 'Тип ВС',
+          aircraftProducer: 'Производител',
+          engine: 'Двигател',
+          propeller: 'Витло',
+          ModifOrWingColor: 'Модификация/Цвят на крило',
+          'new': 'Ново ВС',
+          search: 'Търси'
+        },
+        aircraftDataDirective: {
+          title: 'Данни за ВС',
+          manSN: 'Сериен номер',
+          model: 'Модел',
+          modelAlt: 'Модел (английски)',
+          outputDate: 'Дата на производство',
+          icao: 'ICAO код',
+          aircraftCategory: 'Тип ВС',
+          aircraftProducer: 'Производител',
+          engine: 'Двигател',
+          engineAlt: 'Двигател (английски)',
+          propeller: 'Витло',
+          propellerAlt: 'Витло (английски)',
+          ModifOrWingColor: 'Модификация/Цвят на крило',
+          ModifOrWingColorAlt: 'Модификация/Цвят на крило (английски)',
+          docRoom: 'Документацията е в стая',
+          cofAType: 'CofA Type',
+          tcds: 'TCDS',
+          easaType: 'EASA Type',
+          easaCategory: 'EASA Категория',
+          euRegType: 'EASA Reg',
+          maxMassL: 'Макс. маса при излитане',
+          maxMassT: 'Макс. маса при кацане/Полезен товар',
+          seats: 'Брой места'
+        },
+        newAircraft: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         viewAircraft: {
           aircraftProducer: 'Производител',
           aircraftCategory: 'Тип ВС',
           icao: 'ICAO',
-          modelName: 'Модел ВС',
-          modelNameAlt: 'Модел ВС (английски)',
+          model: 'Модел ВС',
+          modelAlt: 'Модел ВС (английски)',
           manSN: 'MSN (сериен номер)',
           cofAType: 'CofA Type',
           edit: 'Редакция'
@@ -111,9 +153,9 @@
           cancel: 'Отказ'
         },
         noiseSearch: {
-          regNumber: '№',
-          standart: 'Стандарт за шум',
+          tcdsn: 'TCDSN',
           issueDate: 'Дата на издаване',
+          issueNumber: '№',
           flyover: 'Прелитане',
           approach: 'Приближаване',
           lateral: 'Странично',
@@ -191,8 +233,8 @@
         },
         noiseViewDirective: {
           title: 'Удостоверение за шум',
-          regNumber: '№',
-          standart: 'Стандарт за шум',
+          issueNumber: '№',
+          tcdsn: 'TCDSN',
           issueDate: 'Дата на издаване',
           flyover: 'Прелитане',
           approach: 'Приближаване',
@@ -271,9 +313,9 @@
         },
         noiseDirective: {
           title: 'Удостоверение за шум',
-          regNumber: '№',
-          standart: 'Стандарт за шум',
-          standartAlt: 'Стандарт за шум (англ.)',
+          issueNumber: '№',
+          tcdsn: 'TCDSN',
+          chapter: 'Chapter',
           issueDate: 'Дата на издаване',
           flyover: 'Прелитане',
           approach: 'Приближаване',

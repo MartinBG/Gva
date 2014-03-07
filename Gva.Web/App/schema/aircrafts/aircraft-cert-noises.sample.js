@@ -8,8 +8,9 @@
     aircraft1Noise1: {
       certId: '5',
       issueDate: '2013-09-04T00:00',
-      standart: 'ИКАО Анекс 16, том І, Глава: 6',
-      standartAlt: 'ICAO Annex 16, Volume I, Chapter: 6',
+      issueNumber: '333',
+      tcdsn: '',
+      chapter: 'ИКАО Анекс 16, том І, Глава: 6',
       flyover: '',
       approach:  '',
       lateral:  '',
