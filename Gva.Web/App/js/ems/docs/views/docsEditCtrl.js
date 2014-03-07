@@ -12,6 +12,7 @@
     DocStage,
     doc
   ) {
+    $scope.$state = $state;
     $scope.doc = doc;
 
     $scope.inEditMode = false;
@@ -30,7 +31,7 @@
     };
 
     $scope.exitEditMode = function () {
-      $scope.inEditMode = false;
+      return $state.transitionTo($state.current, $stateParams, { reload: true });
     };
 
     $scope.save = function () {

@@ -9,6 +9,7 @@
           document: 'Документ',
           resolution: 'Резолюция',
           task: 'Задача',
+          remark: 'Забележка',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',

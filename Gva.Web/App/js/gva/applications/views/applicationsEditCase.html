@@ -19,14 +19,14 @@
       </tr>
       <tr ng-repeat="df in docCase.docFiles">
         <td></td>
-        <td ng-show="df.appFile">{{ df.appFile.setPartName }} ({{ df.docFile.name }})</td>
-        <td ng-show="!df.appFile">{{ df.docFile.name }}</span></td>
+        <td ng-show="df.appFile">{{ df.appFile.setPartName }} (<a ng-href="{{df.docFile.docFileUrl}}" target="_blank"><span>{{ df.docFile.docFile.name }}</span></a>)</td>
+        <td ng-show="!df.appFile"><a ng-href="{{df.docFile.docFileUrl}}" target="_blank"><span>{{ df.docFile.docFile.name }}</span></a></td>
         <td>
           <div ng-if="df.appFile">
             <a ng-click="viewPart(df)" style="cursor: pointer;"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ df.appFile.part.bookPageNumber }}</a>
           </div>
           <div ng-if="!df.appFile">
-            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile)" l10n-text="applications.edit.case.linkNew" style="cursor: pointer;"></a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile)" l10n-text="applications.edit.case.linkPart" style="cursor: pointer;"></a>
+            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile.docFile)" l10n-text="applications.edit.case.linkNew" style="cursor: pointer;"></a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile.docFile)" l10n-text="applications.edit.case.linkPart" style="cursor: pointer;"></a>
           </div>
         </td>
         <td></td>

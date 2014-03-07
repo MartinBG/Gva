@@ -11,13 +11,11 @@
     $scope.isLinkNew = $stateParams.isLinkNew;
     $scope.currentDocId = $stateParams.currentDocId;
     $scope.docPartTypeAlias = $stateParams.docPartTypeAlias;
-    $scope.docFiles = [
-      {
-        key: $stateParams.docFileKey,
-        name: $stateParams.docFileName,
-        relativePath: null
-      }
-    ];
+    $scope.docFile = {
+      key: $stateParams.docFileKey,
+      name: $stateParams.docFileName,
+      relativePath: null
+    };
 
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
@@ -30,7 +28,7 @@
             return Application
               .partsNew({ id: $stateParams.id }, {
                 docId: $stateParams.currentDocId,
-                files: $scope.wrapper.applicationDocPart.file,
+                file: $scope.wrapper.applicationDocPart.docFile,
                 setPartAlias: $stateParams.docPartTypeAlias,
                 part: $scope.wrapper.applicationDocPart.part
               }).$promise.then(function () {

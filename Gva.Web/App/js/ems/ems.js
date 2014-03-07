@@ -50,6 +50,16 @@
       templateUrl: 'ems/docs/forms/docView/task.html',
       controller: 'TaskCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocFiles',
+      templateUrl: 'ems/docs/forms/docView/docFiles.html',
+      controller: 'DocFilesCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocClassification',
+      templateUrl: 'ems/docs/forms/docView/docClassification.html',
+      controller: 'DocClassificationCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                           , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&hasLot'                                      ])

@@ -25,12 +25,36 @@
           <div class="panel panel-default">
             <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
             <div class="well-sm panel-body">
+              <table class="table table-bordered table-condensed" ng-if="isLinkNew === 'false'">
+                <thead>
+                    <tr>
+                      <th>Наименование</th>
+                      <th>Вид файл</th>
+                      <th>Тип файл</th>
+                      <th>Прикачен файл</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                     <td style="width: 400px;" sc-has-error="name">
+                      <sc-text name="name" ng-model="wrapper.applicationDocPart.docFile.name" required></sc-text>
+                    </td>
+                    <td style="width: 150px;" sc-has-error="docFileKind">
+                        <sc-nomenclature name="docFileKind" ng-model="wrapper.applicationDocPart.docFile.docFileKindId" nom-obj="wrapper.applicationDocPart.docFile.docFileKind" mode="id" alias="'docFileKinds'" required></sc-nomenclature>
+                    </td>
+                    <td style="width: 250px;" sc-has-error="docFileType">
+                      <sc-nomenclature name="docFileType" ng-model="wrapper.applicationDocPart.docFile.docFileTypeId" nom-obj="wrapper.applicationDocPart.docFile.docFileType" mode="id" alias="'docFileTypes'" required></sc-nomenclature>
+                    </td>
+                    <td sc-has-error="docFile">
+                      <sc-files name="docFile" ng-model="wrapper.applicationDocPart.docFile.docFile" required></sc-files>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <div class="row">
-                <div class="form-group col-sm-3" sc-has-error="applicationDocPartFile">
+                <div class="form-group col-sm-3" ng-if="isLinkNew === 'true'">
                   <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
-                  <sc-validation-error field-name="applicationDocPartFile" validations="{required: null}"></sc-validation-error>
-                  <sc-files ng-if="isLinkNew === 'false'" name="applicationDocPartFile" ng-model="wrapper.applicationDocPart.file" ng-required="true"></sc-files>
-                  <sc-files ng-if="isLinkNew === 'true'" ng-model="docFiles" ng-readonly="true"></sc-files>
+                  <sc-files ng-model="docFile" ng-readonly="true"></sc-files>
                 </div>
               </div>
             </div>

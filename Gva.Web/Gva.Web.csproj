@@ -133,6 +133,10 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\uxp.css" />
     <Content Include="App\js\boot.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docClassificationCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docClassification.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docFiles.html" />
     <Content Include="App\js\ems\docs\forms\docView\taskCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\resolutionCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docOutgoingCtrl.js" />
