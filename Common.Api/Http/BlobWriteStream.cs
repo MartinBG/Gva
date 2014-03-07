@@ -89,14 +89,14 @@ namespace Common.Api.Http
             if (this.isFirstChunk)
             {
                 cmdFirstChunk.Parameters.AddWithValue("@firstChunk", bytesToWrite);
-                await cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken);
+                cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
                 this.isFirstChunk = false;
             }
             else
             {
                 paramChunk.Value = bytesToWrite;
                 paramLength.Value = chunkIndex;
-                await cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken);
+                cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
             }
 
             chunkIndex = 0;
