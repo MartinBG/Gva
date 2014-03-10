@@ -177,7 +177,7 @@
 
           return [200, result];
         })
-      .when('POST', '/api/docs/new/create',
+        .when('POST', '/api/docs/new/create',
         function ($jsonData, docs, docCases, docStages) {
 
           if (!$jsonData) {
@@ -257,7 +257,7 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStages');
+          var electronicServiceStages = require('./electronicServiceStage');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
@@ -287,7 +287,7 @@
 
           return [200, { docId: newDoc.docId }];
         })
-      .when('POST', '/api/docs/new/register',
+        .when('POST', '/api/docs/new/register',
         function ($jsonData, docs, docCases, docStages) {
           if (!$jsonData) {
             return [400];
@@ -371,7 +371,7 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStages');
+          var electronicServiceStages = require('./electronicServiceStage');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
@@ -401,7 +401,7 @@
 
           return [200, { docId : newDoc.docId, regUri: newDoc.regUri }];
         })
-      .when('GET', '/api/docs/:docId',
+        .when('GET', '/api/docs/:docId',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -411,7 +411,7 @@
 
           return [200, doc];
         })
-       .when('POST', '/api/docs/:docId',
+        .when('POST', '/api/docs/:docId',
         function ($params, $jsonData, $filter, docs) {
           var docId = parseInt($params.docId, 10),
             docIndex = docs.indexOf($filter('filter')(docs, { docId: docId })[0]);
@@ -423,6 +423,88 @@
           docs[docIndex] = $jsonData;
 
           return [200];
+        })
+        .when('POST', '/api/docs/:docId/nextStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          switch(doc.docStatusId) {
+          case 1:
+            doc.docStatusId = 2;
+            doc.docStatusName = 'Изготвен';
+            break;
+          case 2:
+            doc.docStatusId = 3;
+            doc.docStatusName = 'Обработен';
+            break;
+          case 3:
+            doc.docStatusId = 4;
+            doc.docStatusName = 'Приключен';
+            break;
+          default:
+            break;
+          }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/reverseStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          switch(doc.docStatusId) {
+          case 2:
+            doc.docStatusId = 1;
+            doc.docStatusName = 'Чернова';
+            break;
+          case 3:
+            doc.docStatusId = 2;
+            doc.docStatusName = 'Изготвен';
+            break;
+          case 4:
+          case 5:
+            doc.docStatusId = 3;
+            doc.docStatusName = 'Обработен';
+            break;
+          default:
+            break;
+          }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/cancelStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          doc.docStatusId = 5;
+          doc.docStatusName = 'Отхвърлен';
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/setRegUri',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          if (!doc.regUri) {
+            doc.regUri = '000030-' + doc.docId + '-' + moment().format('YYYY-MM-DD');
+          }
+
+          return [200, { docId: doc.docId }];
         });
   });
 }(angular, _, require, jQuery, moment));

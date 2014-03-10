@@ -1,0 +1,143 @@
+﻿/*global angular*/
+(function (angular) {
+  'use strict';
+
+  angular.module('app').constant('docWorkflows', [
+    {
+      docWorkflowId: 1,
+      docId: 1,
+      docWorkFlowActionId: 5,
+      docWorkflowActionName: 'Подпис',
+      eventDate: '2014-01-09T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 2,
+      docId: 1,
+      docWorkFlowActionId: 6,
+      docWorkflowActionName: 'Съгласуване',
+      eventDate: '2014-01-10T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 3,
+      docId: 1,
+      docWorkFlowActionId: 7,
+      docWorkflowActionName: 'Одобрение',
+      eventDate: '2014-01-11T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 4,
+      docId: 2,
+      docWorkFlowActionId: 5,
+      docWorkflowActionName: 'Подпис',
+      eventDate: '2014-01-09T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 5,
+      docId: 2,
+      docWorkFlowActionId: 6,
+      docWorkflowActionName: 'Съгласуване',
+      eventDate: '2014-01-10T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 6,
+      docId: 2,
+      docWorkFlowActionId: 7,
+      docWorkflowActionName: 'Одобрение',
+      eventDate: '2014-01-11T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 7,
+      docId: 3,
+      docWorkFlowActionId: 5,
+      docWorkflowActionName: 'Подпис',
+      eventDate: '2014-01-09T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 8,
+      docId: 3,
+      docWorkFlowActionId: 6,
+      docWorkflowActionName: 'Съгласуване',
+      eventDate: '2014-01-10T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    },
+    {
+      docWorkflowId: 9,
+      docId: 3,
+      docWorkFlowActionId: 7,
+      docWorkflowActionName: 'Одобрение',
+      eventDate: '2014-01-11T17:38:49.683',
+      yesNo: true,
+      userId: 1,
+      userName: 'Admin',
+      toUnitId: null,
+      toUnitName: null,
+      principalUnitId: null,
+      principalUnitName: null,
+      note: null
+    }
+  ]);
+
+}(angular));

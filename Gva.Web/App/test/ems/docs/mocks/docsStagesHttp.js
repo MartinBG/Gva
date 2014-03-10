@@ -24,7 +24,7 @@
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
-          var electronicServiceStages = require('./electronicServiceStages');
+          var electronicServiceStages = require('./electronicServiceStage');
           var stage = _(electronicServiceStages)
             .filter({ nomValueId: $jsonData.electronicServiceStageId })
             .first();
@@ -59,7 +59,7 @@
             return [400];
           }
 
-          var electronicServiceStages = require('./electronicServiceStages');
+          var electronicServiceStages = require('./electronicServiceStage');
           var stage = _(electronicServiceStages)
             .filter({ nomValueId: $jsonData.electronicServiceStageId })
             .first();

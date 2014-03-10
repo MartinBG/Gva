@@ -92,4 +92,4 @@
     { nomValueId: 87, docTypeId: 11, name: 'Уведомяване за нередности и предоставяне на допълнителни документи', description: '', alias: 'IrregularitiesNotification', duration: 30, isDurationReset: false, isFirstByDefault: false, isLastStage: false, isActive: true },
     { nomValueId: 88, docTypeId: 11, name: 'Приключване на разглеждането по същество и изготвяне на проекто-прдложение до комисята', description: '', alias: 'CreateProjectSuggestion', duration: 0, isDurationReset: false, isFirstByDefault: false, isLastStage: false, isActive: true }
   ];
-})(typeof module === 'undefined' ? (this['electronicServiceStages'] = {}) : module);
+})(typeof module === 'undefined' ? (this['electronicServiceStage'] = {}) : module);

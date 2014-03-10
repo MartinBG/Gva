@@ -5,8 +5,8 @@
   var nomenclatures = require('./nomenclatures.sample');
   var today = new Date();
 
-  angular.module('app').factory('docs', ['docCases', 'docStages',
-    function (docCases, docStages) {
+  angular.module('app').factory('docs', ['docCases', 'docStages', 'docWorkflows',
+    function (docCases, docStages, docWorkflows) {
       return [
         {
           docId: 1,
@@ -155,32 +155,7 @@
               isInEdit: false
             }
           ],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docWorkflows: _.filter(docWorkflows, { docId: 1 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 1 }),
           docRelations: _(docCases).filter({ docCaseId: 1 }).first().docCase,
@@ -264,32 +239,7 @@
           isTask: false,
           docBody: '',
           docFiles: [],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docWorkflows: _.filter(docWorkflows, { docId: 2 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 2 }),
           docRelations: _(docCases).filter({ docCaseId: 2 }).first().docCase,
@@ -360,32 +310,7 @@
           isRead: false,
           docBody: '',
           docFiles: [],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docWorkflows: _.filter(docWorkflows, { docId: 3 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 3 }),
           docRelations: _(docCases).filter({ docCaseId: 3 }).first().docCase,
