@@ -120,6 +120,10 @@
       return $state.go('root.docs.edit.workflows.approvalConfirm');
     };
 
+    $scope.editCasePart = function () {
+      return $state.go('root.docs.edit.case.casePart');
+    };
+
     $scope.attachDoc = function (docTypeId) {
       var newDoc = {
         parentDocId:  $scope.doc.docId,

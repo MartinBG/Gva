@@ -35,6 +35,10 @@
             'setRegUri': {
               method: 'POST',
               url: '/api/docs/:docId/setRegUri'
+            },
+            'setCasePart': {
+              method: 'POST',
+              url: '/api/docs/:docId/setCasePart'
             }
           });
       }]);

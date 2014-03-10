@@ -14,6 +14,8 @@
           save: 'Запис',
           cancel: 'Отказ',
           management: 'Управление',
+          caseManagement: 'Преписка',
+          casePart: 'Част на преписка',
           docPrepared: 'Отбелязване като изготвен',
           docProcessed: 'Отбелязване като обработен',
           docFinished: 'Отбелязване като приключен',
@@ -129,7 +131,12 @@
             viewDoc: 'преглед',
             viewApplication: 'преглед',
             doc: 'Документ',
-            application: 'Заявление'
+            application: 'Заявление',
+            casePart: {
+              partOf: 'Част от преписка',
+              save: 'Запис',
+              cancel: 'Отказ'
+            }
           },
           classifications: {
             name: 'Класификационна схема',
@@ -268,6 +275,7 @@
         'root.docs.edit.stages.edit': 'Редакция на етап',
         'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
+        'root.docs.edit.case.casePart': 'Смяна на част на преписка',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

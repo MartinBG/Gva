@@ -198,8 +198,8 @@
           newDoc.assignmentDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
 
-          var docTypes = require('./docType');
-          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          var docTypeAlias =
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -210,9 +210,8 @@
             newDoc.isRemark = true;
           }
           else {
-            var docDirections = require('./docDirection');
-            var docDirectionAlias =
-              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+            var docDirectionAlias =_(nomenclatures.docDirection)
+              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
 
             if (docDirectionAlias === 'Incomming') {
               newDoc.isDocIncoming = true;
@@ -257,12 +256,11 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStage');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
           var eStage =
-            _(electronicServiceStages)
+            _(nomenclatures.electronicServiceStage)
             .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
             .first();
 
@@ -312,8 +310,8 @@
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.regUri = '000030-' + nextDocId + '-' + todayDate.format('YYYY-MM-DD');
 
-          var docTypes = require('./docType');
-          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          var docTypeAlias =
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -324,9 +322,8 @@
             newDoc.isRemark = true;
           }
           else {
-            var docDirections = require('./docDirection');
-            var docDirectionAlias =
-              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+            var docDirectionAlias = _(nomenclatures.docDirection)
+              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
 
             if (docDirectionAlias === 'Incomming') {
               newDoc.isDocIncoming = true;
@@ -371,12 +368,11 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStage');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
           var eStage =
-            _(electronicServiceStages)
+            _(nomenclatures.electronicServiceStage)
             .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
             .first();
 
@@ -432,21 +428,19 @@
             return [400];
           }
 
-          switch(doc.docStatusId) {
-          case 1:
-            doc.docStatusId = 2;
-            doc.docStatusName = 'Изготвен';
-            break;
-          case 2:
-            doc.docStatusId = 3;
-            doc.docStatusName = 'Обработен';
-            break;
-          case 3:
-            doc.docStatusId = 4;
-            doc.docStatusName = 'Приключен';
-            break;
-          default:
-            break;
+          var currentStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: doc.docStatusId })
+              .first();
+
+          if (currentStatus.alias === 'Draft' ||
+              currentStatus.alias === 'Prepared' ||
+              currentStatus.alias === 'Processed') {
+            var newStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: currentStatus.nomValueId + 1 })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
           }
 
           return [200, { docId: doc.docId }];
@@ -459,22 +453,28 @@
             return [400];
           }
 
-          switch(doc.docStatusId) {
-          case 2:
-            doc.docStatusId = 1;
-            doc.docStatusName = 'Чернова';
-            break;
-          case 3:
-            doc.docStatusId = 2;
-            doc.docStatusName = 'Изготвен';
-            break;
-          case 4:
-          case 5:
-            doc.docStatusId = 3;
-            doc.docStatusName = 'Обработен';
-            break;
-          default:
-            break;
+          var currentStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: doc.docStatusId })
+              .first();
+
+          var newStatus;
+          if (currentStatus.alias === 'Prepared' ||
+              currentStatus.alias === 'Processed' ||
+              currentStatus.alias === 'Finished') {
+            newStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: currentStatus.nomValueId - 1 })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
+          }
+          else if (currentStatus.alias === 'Canceled') {
+            newStatus = _(nomenclatures.docStatus)
+              .filter({ alias: 'Processed' })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
           }
 
           return [200, { docId: doc.docId }];
@@ -487,8 +487,12 @@
             return [400];
           }
 
-          doc.docStatusId = 5;
-          doc.docStatusName = 'Отхвърлен';
+          var cancelStatus = _(nomenclatures.docStatus)
+              .filter({ alias: 'Canceled' })
+              .first();
+
+          doc.docStatusId = cancelStatus.nomValueId;
+          doc.docStatusName = cancelStatus.name;
 
           return [200, { docId: doc.docId }];
         })
@@ -503,6 +507,30 @@
           if (!doc.regUri) {
             doc.regUri = '000030-' + doc.docId + '-' + moment().format('YYYY-MM-DD');
           }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/setCasePart',
+        function ($params, $jsonData, docs, docCases) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          var newDocCasePartType = _(nomenclatures.docCasePartType)
+            .filter({ docCasePartTypeId: $jsonData.docCasePartTypeId })
+            .first();
+
+          if (!doc || !newDocCasePartType) {
+            return [400];
+          }
+
+          doc.docCasePartTypeId = newDocCasePartType.docCasePartTypeId;
+          doc.docCasePartTypeName = newDocCasePartType.name;
+
+          var docCase = _(docCases).filter(function (item) {
+            return _(item.docCase).any({ docId: doc.docId });
+          }).first().docCase;
+
+          var docItem = _(docCase).filter({ docId: doc.docId }).first();
+          docItem.casePartType = newDocCasePartType.name;
 
           return [200, { docId: doc.docId }];
         });

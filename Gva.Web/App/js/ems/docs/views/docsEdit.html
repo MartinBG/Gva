@@ -106,6 +106,17 @@
             </ul>
           </div>
 
+          <div class="btn-group" ng-show="!inEditMode">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+              <span l10n-text="docs.edit.caseManagement"></span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a sc-click="editCasePart()" name="editCasePartBtn" l10n-text="docs.edit.casePart"></a>
+              </li>
+            </ul>
+          </div>
+
           <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
             <i class="glyphicon glyphicon-eye-open"></i>
             <span l10n-text="docs.edit.markRead"></span>
