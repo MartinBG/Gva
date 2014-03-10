@@ -14,8 +14,8 @@
     <tr>
       <td>{{ dwf.eventDate | date:'dd.MM.yyyy HH:mm' }}</td>
       <td>{{ dwf.docWorkflowActionName }}</td>
-      <td>{{ dwf.yesNo ? 'Да' : 'Не' }}</td>
-      <td>{{ dwf.principalUnitName }}</td>
+      <td>{{ dwf.yesNo === true ? 'Да' : (dwf.yesNo === false ? 'Не' : '') }}</td>
+      <td>{{ dwf.userName }}</td>
       <td>{{ dwf.toUnitName }}</td>
       <td>{{ dwf.note }}</td>
       <td style="text-align: right;">

@@ -68,6 +68,58 @@
       });
     };
 
+    $scope.nextStatus = function () {
+      return Doc.nextStatus({ docId: doc.docId }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
+    };
+
+    $scope.reverseStatus = function () {
+      return Doc.reverseStatus({ docId: doc.docId }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
+    };
+
+    $scope.cancelStatus = function () {
+      return Doc.cancelStatus({ docId: doc.docId }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
+    };
+
+    $scope.setRegUri = function () {
+      return Doc.setRegUri({ docId: doc.docId }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
+    };
+
+    $scope.signRequest = function () {
+      return $state.go('root.docs.edit.workflows.signRequest');
+    };
+
+    $scope.discussRequest = function () {
+      return $state.go('root.docs.edit.workflows.discussRequest');
+    };
+
+    $scope.approvalRequest = function () {
+      return $state.go('root.docs.edit.workflows.approvalRequest');
+    };
+
+    $scope.registrationRequest = function () {
+      return $state.go('root.docs.edit.workflows.registrationRequest');
+    };
+
+    $scope.signConfirm = function () {
+      return $state.go('root.docs.edit.workflows.signConfirm');
+    };
+
+    $scope.discussConfirm = function () {
+      return $state.go('root.docs.edit.workflows.discussConfirm');
+    };
+
+    $scope.approvalConfirm = function () {
+      return $state.go('root.docs.edit.workflows.approvalConfirm');
+    };
+
     $scope.attachDoc = function (docTypeId) {
       var newDoc = {
         parentDocId:  $scope.doc.docId,

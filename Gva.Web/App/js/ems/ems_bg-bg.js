@@ -8,8 +8,8 @@
           child: 'Подчинен',
           document: 'Документ',
           resolution: 'Резолюция',
-          task: 'Задача',
           remark: 'Забележка',
+          task: 'Задача',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -95,7 +95,23 @@
             principalUnitName: 'От',
             toUnitName: 'До',
             note: 'Забележка',
-            'delete': 'изтрий'
+            'delete': 'изтрий',
+            request: {
+              toUnit: 'Към служител',
+              fromUser: 'От',
+              note: 'Забележка',
+              save: 'Запис',
+              cancel: 'Отказ'
+            },
+            confirm: {
+              fromUser: 'От служител',
+              note: 'Забележка',
+              sign: 'Подписвам',
+              approve: 'Одобрявам',
+              coordinate: 'Съгласувам',
+              save: 'Запис',
+              cancel: 'Отказ'
+            }
           },
           stages: {
             startingDate: 'Нач. дата',
@@ -240,6 +256,13 @@
         'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
         'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
+        'root.docs.edit.workflows.signRequest': 'Искане за подпис',
+        'root.docs.edit.workflows.discussRequest': 'Искане за съгласуване',
+        'root.docs.edit.workflows.approvalRequest': 'Искане за одобрение',
+        'root.docs.edit.workflows.registrationRequest': 'Искане за регистрация',
+        'root.docs.edit.workflows.signConfirm': 'Подписване',
+        'root.docs.edit.workflows.discussConfirm': 'Съгласуване',
+        'root.docs.edit.workflows.approvalConfirm': 'Одобрение',
         'root.docs.edit.stages': 'Етапи',
         'root.docs.edit.stages.next': 'Следващ етап',
         'root.docs.edit.stages.edit': 'Редакция на етап',

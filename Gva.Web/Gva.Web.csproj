@@ -143,6 +143,7 @@
     <Content Include="App\js\ems\docs\forms\docView\docInternalOutgoingCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docInternalCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docIncomingCtrl.js" />
+    <Content Include="App\js\ems\docs\recources\docWorkflow.js" />
     <Content Include="App\js\ems\docs\recources\docStage.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />
@@ -155,6 +156,10 @@
     <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\common\root\views\root.html" />
+    <Content Include="App\js\ems\docs\views\workflowConfirm.html" />
+    <Content Include="App\js\ems\docs\views\workflowConfirmCtrl.js" />
+    <Content Include="App\js\ems\docs\views\workflowRequestCtrl.js" />
+    <Content Include="App\js\ems\docs\views\workflowRequest.html" />
     <Content Include="App\js\ems\docs\views\endStage.html" />
     <Content Include="App\js\ems\docs\views\endStageCtrl.js" />
     <Content Include="App\js\ems\docs\views\editStage.html" />
@@ -306,8 +311,9 @@
     <Content Include="App\schema\nomenclatures\boolean.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
+    <Content Include="App\schema\nomenclatures\docWorkflowAction.js" />
     <Content Include="App\schema\nomenclatures\graduation.js" />
-    <Content Include="App\schema\nomenclatures\electronicServiceStages.js" />
+    <Content Include="App\schema\nomenclatures\electronicServiceStage.js" />
     <Content Include="App\schema\nomenclatures\otherDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\publisherType.js" />
     <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
@@ -352,6 +358,8 @@
     <Content Include="App\test\ems\corrs\pageObjects\newCorrPO.js" />
     <Content Include="App\test\ems\corrs\pageObjects\searchCorrPO.js" />
     <Content Include="App\test\ems\corrs\specs\newCorrSpec.js" />
+    <Content Include="App\test\ems\docs\mocks\docWorkflowsHttp.js" />
+    <Content Include="App\test\ems\docs\mocks\docWorkflows.js" />
     <Content Include="App\test\ems\docs\mocks\docsStagesHttp.js" />
     <Content Include="App\test\ems\docs\mocks\docStages.js" />
     <Content Include="App\test\ems\docs\mocks\docCases.js" />

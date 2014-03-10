@@ -194,7 +194,7 @@
 
     testCorrespondent: require('./testCorrespondent'),
 
-    electronicServiceStages: require('./electronicServiceStages'),
+    electronicServiceStages: require('./electronicServiceStage'),
 
     medicalClasses: require('./medicalClass'),
 

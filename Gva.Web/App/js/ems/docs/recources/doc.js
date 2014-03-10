@@ -19,6 +19,22 @@
               method: 'GET',
               url: '/api/nomenclatures/units',
               isArray: true
+            },
+            'nextStatus': {
+              method: 'POST',
+              url: '/api/docs/:docId/nextStatus'
+            },
+            'reverseStatus': {
+              method: 'POST',
+              url: '/api/docs/:docId/reverseStatus'
+            },
+            'cancelStatus': {
+              method: 'POST',
+              url: '/api/docs/:docId/cancelStatus'
+            },
+            'setRegUri': {
+              method: 'POST',
+              url: '/api/docs/:docId/setRegUri'
             }
           });
       }]);
