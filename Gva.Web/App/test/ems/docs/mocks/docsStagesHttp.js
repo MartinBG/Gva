@@ -3,6 +3,8 @@
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
+    var nomenclatures = require('./nomenclatures.sample');
+
     $httpBackendConfiguratorProvider
       .when('GET', '/api/docs/:docId/stages/current',
         function($params, docStages) {
@@ -24,8 +26,7 @@
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
-          var electronicServiceStages = require('./electronicServiceStage');
-          var stage = _(electronicServiceStages)
+          var stage = _(nomenclatures.electronicServiceStage)
             .filter({ nomValueId: $jsonData.electronicServiceStageId })
             .first();
 
@@ -59,8 +60,7 @@
             return [400];
           }
 
-          var electronicServiceStages = require('./electronicServiceStage');
-          var stage = _(electronicServiceStages)
+          var stage = _(nomenclatures.electronicServiceStage)
             .filter({ nomValueId: $jsonData.electronicServiceStageId })
             .first();
 

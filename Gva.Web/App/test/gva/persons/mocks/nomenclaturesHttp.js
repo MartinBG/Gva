@@ -149,6 +149,21 @@
 
           return [200, res];
         })
+      .when('GET', '/api/nomenclatures/docCasePartTypes?id',
+        function ($params, $filter) {
+          var res = _(nomenclatures.docCasePartType).map(function (item) {
+            return {
+              nomValueId: item.docCasePartTypeId,
+              name: item.name
+            };
+          }).value();
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          }
+
+          return [200, res];
+        })
       .when('GET',
           '/api/nomenclatures/:alias' +
           '?term&id&staffTypeId&parentAlias&parentValueId&va',

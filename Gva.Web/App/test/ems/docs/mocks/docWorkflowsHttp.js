@@ -3,14 +3,15 @@
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
+    var nomenclatures = require('./nomenclatures.sample');
+
     $httpBackendConfiguratorProvider
       .when('POST', '/api/docs/:docId/workflow/add',
       function ($params, $jsonData, docWorkflows) {
         var docId = parseInt($params.docId, 10);
 
-        var docWorkflowActions = require('./docWorkflowAction');
         var todayDate = moment(),
-            workflowAction = _(docWorkflowActions)
+            workflowAction = _(nomenclatures.docWorkflowActions)
             .filter({ nomValueId: $jsonData.docWorkflowActionId })
             .first();
 

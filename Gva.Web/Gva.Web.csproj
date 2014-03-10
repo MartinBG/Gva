@@ -156,6 +156,8 @@
     <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\common\root\views\root.html" />
+    <Content Include="App\js\ems\docs\views\editCasePart.html" />
+    <Content Include="App\js\ems\docs\views\editCasePartCtrl.js" />
     <Content Include="App\js\ems\docs\views\workflowConfirm.html" />
     <Content Include="App\js\ems\docs\views\workflowConfirmCtrl.js" />
     <Content Include="App\js\ems\docs\views\workflowRequestCtrl.js" />
