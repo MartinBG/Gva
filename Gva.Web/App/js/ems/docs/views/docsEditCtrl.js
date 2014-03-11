@@ -15,6 +15,12 @@
     $scope.$state = $state;
     $scope.doc = doc;
 
+
+    $scope.isVisibleEdit = true;
+    if ($scope.doc.docStatusAlias !== 'Draft') {
+      $scope.isVisibleEdit = false;
+    }
+
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {

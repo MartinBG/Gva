@@ -192,6 +192,7 @@
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
+          newDoc.docStatusAlias = 'Draft';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.newassignmentType = 2;
@@ -300,6 +301,7 @@
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
+          newDoc.docStatusAlias = 'Draft';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.regNumber = nextDocId;
@@ -441,6 +443,7 @@
 
             doc.docStatusId = newStatus.nomValueId;
             doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
           }
 
           return [200, { docId: doc.docId }];
@@ -467,6 +470,7 @@
 
             doc.docStatusId = newStatus.nomValueId;
             doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
           }
           else if (currentStatus.alias === 'Canceled') {
             newStatus = _(nomenclatures.docStatus)
@@ -475,6 +479,7 @@
 
             doc.docStatusId = newStatus.nomValueId;
             doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
           }
 
           return [200, { docId: doc.docId }];
@@ -493,6 +498,7 @@
 
           doc.docStatusId = cancelStatus.nomValueId;
           doc.docStatusName = cancelStatus.name;
+          doc.docStatusAlias = newStatus.alias;
 
           return [200, { docId: doc.docId }];
         })
