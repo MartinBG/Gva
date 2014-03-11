@@ -11,7 +11,7 @@
         var docId = parseInt($params.docId, 10);
 
         var todayDate = moment(),
-            workflowAction = _(nomenclatures.docWorkflowActions)
+            workflowAction = _(nomenclatures.docWorkflowAction)
             .filter({ nomValueId: $jsonData.docWorkflowActionId })
             .first();
 

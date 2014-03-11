@@ -130,7 +130,7 @@
         })
       .when('GET', '/api/nomenclatures/electronicServiceStages?docTypeId&id',
         function ($params, $filter) {
-          var res = _(nomenclatures.electronicServiceStages).map(function (item) {
+          var res = _(nomenclatures.electronicServiceStage).map(function (item) {
             return {
               nomValueId: item.nomValueId,
               name: item.name,
