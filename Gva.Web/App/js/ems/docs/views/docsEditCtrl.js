@@ -130,6 +130,10 @@
       return $state.go('root.docs.edit.case.casePart');
     };
 
+    $scope.editDocType = function () {
+      return $state.go('root.docs.edit.case.docType');
+    };
+
     $scope.attachDoc = function (docTypeId) {
       var newDoc = {
         parentDocId:  $scope.doc.docId,
