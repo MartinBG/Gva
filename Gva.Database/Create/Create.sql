@@ -25,6 +25,7 @@ GO
 -- Insert Noms
 ---------------------------------------------------------------
 
+:r $(rootPath)\"..\Insert\TestData.sql"
 :r $(rootPath)\"..\Insert\Noms\gender.sql"
 :r $(rootPath)\"..\Insert\Noms\countries.sql"
 :r $(rootPath)\"..\Insert\Noms\cities.sql"

@@ -94,6 +94,7 @@ namespace Gva.Api.LotEventHandlers
             if (partAlias == "education")
             {
                 inventoryItem.Name = "Образование";
+                inventoryItem.Publisher = content.school.name;
                 inventoryItem.Type = content.graduation.name;
             }
             else if (partAlias == "documentId")

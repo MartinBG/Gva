@@ -98,6 +98,7 @@
     <Content Include="Insert\Noms\ratingTypes.sql" />
     <Content Include="Insert\Noms\schools.sql" />
     <Content Include="Insert\Noms\staffTypes.sql" />
+    <Content Include="Insert\TestData.sql" />
     <Content Include="MigrationTool\gruntfile.js" />
     <Content Include="MigrationTool\migration.js" />
     <Content Include="MigrationTool\templates\addressTypes.txt" />

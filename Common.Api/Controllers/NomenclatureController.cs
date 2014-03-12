@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
@@ -16,35 +14,42 @@ namespace Common.Api.Controllers
             this.nomRepository = nomRepository;
         }
 
-        public HttpResponseMessage GetAddressTypes(string type, string term = null)
+        public IHttpActionResult GetSchools(int? graduationId = null, string term = null)
         {
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                this.nomRepository.GetNomsWithProperty("addressTypes", "type", type, term));
+            if (!graduationId.HasValue)
+            {
+                return Ok(new List<NomValue>());
+            }
+
+            return Ok(this.nomRepository.GetNomsContainingProperty("schools", "graduationIds", graduationId.ToString(), term));
         }
 
-        public HttpResponseMessage GetDocumentRoles(string categoryAlias, string staffCode, string term = null)
+        public IHttpActionResult GetAddressTypes(string type, string term = null)
         {
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                this.nomRepository.GetDocumentRoles(categoryAlias, new string[] { staffCode }, term));
+            return Ok(this.nomRepository.GetNomsWithProperty("addressTypes", "type", type, term));
         }
 
-        public HttpResponseMessage GetDocumentTypes(bool isIdDocument, string staffCode = null, string term = null)
+        public IHttpActionResult GetDocumentRoles(string categoryAlias, string staffCode, string term = null)
         {
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                this.nomRepository.GetDocumentTypes(isIdDocument, staffCode, term));
+            return Ok(this.nomRepository.GetDocumentRoles(categoryAlias, new string[] { staffCode }, term));
         }
 
-        public HttpResponseMessage GetOtherRoles(string term = null)
+        public IHttpActionResult GetDocumentTypes(bool isIdDocument, string staffCode = null, string term = null)
         {
-            return ControllerContext.Request.CreateResponse(
-                HttpStatusCode.OK,
-                this.nomRepository.GetDocumentRoles("other", new string[] { "F", "G", "T" }, term));
+            return Ok(this.nomRepository.GetDocumentTypes(isIdDocument, new string[] { staffCode }, term));
         }
 
-        public HttpResponseMessage GetNoms(string alias, int? id = null, string term = null, int? parentValueId = null, int? staffTypeId = null, string parentAlias = null)
+        public IHttpActionResult GetOtherRoles(string term = null)
+        {
+            return Ok(this.nomRepository.GetDocumentRoles("other", new string[] { "F", "G", "T" }, term));
+        }
+
+        public IHttpActionResult GetOtherTypes(string term = null)
+        {
+            return Ok(this.nomRepository.GetDocumentTypes(false, new string[] { "F", "G", "T" }, term));
+        }
+
+        public IHttpActionResult GetNoms(string alias, int? id = null, string term = null, int? parentValueId = null, int? staffTypeId = null, string parentAlias = null)
         {
             IEnumerable<NomValue> noms;
 
@@ -64,7 +69,7 @@ namespace Common.Api.Controllers
                 }
             }
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, noms);
+            return Ok(noms);
         }
     }
 }

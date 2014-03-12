@@ -15,11 +15,13 @@ namespace Common.Api
             this.MapRoute(config, HttpMethod.Post, "api/file", "Blob", "Post");
 
             // nomenclatures
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes"     , "Nomenclature", "GetAddressTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentRoles"    , "Nomenclature", "GetDocumentRoles");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentTypes"    , "Nomenclature", "GetDocumentTypes");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/otherDocumentRole", "Nomenclature", "GetOtherRoles");
-            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}"          , "Nomenclature", "GetNoms");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/schools"           , "Nomenclature", "GetSchools");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/addressTypes"      , "Nomenclature", "GetAddressTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentRoles"     , "Nomenclature", "GetDocumentRoles");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/documentTypes"     , "Nomenclature", "GetDocumentTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/otherDocumentRoles", "Nomenclature", "GetOtherRoles");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/otherDocumentTypes", "Nomenclature", "GetOtherTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}"           , "Nomenclature", "GetNoms");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)

@@ -25,8 +25,6 @@ namespace Gva.Api.Models
 
         public string PageNumber { get; set; }
 
-        public bool IsActive { get; set; }
-
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
 
         public virtual GvaCaseType GvaCaseType { get; set; }
@@ -62,7 +60,6 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaCaseTypeId).HasColumnName("GvaCaseTypeId");
             this.Property(t => t.PageIndex).HasColumnName("PageIndex");
             this.Property(t => t.PageNumber).HasColumnName("PageNumber");
-            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasOptional(t => t.DocFile)

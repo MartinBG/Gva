@@ -25,6 +25,7 @@ namespace Gva.Api
 
             Bind<IMapper>().To<JObjectMapper>();
             Bind<IMapper>().To<PartVersionMapper>();
+            Bind<IMapper>().To<FilePartVersionMapper>();
             Bind<IMapper>().To<PersonMapper>();
             Bind<IMapper>().To<RatingPartVersionMapper>();
             Bind<IMapper>().To<InventoryItemMapper>();

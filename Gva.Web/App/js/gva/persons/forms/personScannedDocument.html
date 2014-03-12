@@ -1,12 +1,31 @@
-﻿<ng-form class="form-inline">
+﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-sm-3">
-          <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
-          <sc-files ng-model="model"></sc-files>
+    <div class="panel-heading">
+      <strong l10n-text="persons.personScannedDocumentDirective.title"></strong>
+      <button class="btn btn-sm btn-default pull-right" ng-click="addFile()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <div class="well-sm panel-body" ng-show="model.length">
+      <div ng-repeat="file in model | filter:showFile()">
+        <div class="row" >
+          <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
+            <label class="control-label" l10n-text="persons.personScannedDocumentDirective.bookPageNumber"></label>
+            <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
+            <sc-text ng-model="file.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
+          </div>
+          <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+            <label class="control-label" l10n-text="persons.personScannedDocumentDirective.pageCount"></label>
+            <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+            <sc-int ng-model="file.pageCount" name="pageCount" min="0"></sc-int>
+          </div>
+          <div class="form-group col-sm-3">
+            <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
+            <sc-files ng-model="file.file"></sc-files>
+          </div>
+          <button type="button" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)">&times;</button>
         </div>
+        <hr ng-hide="$last" />
       </div>
     </div>
   </div>

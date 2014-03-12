@@ -37,16 +37,20 @@ namespace Common.Api.Repositories.NomRepository
             return this.GetByTerm(noms, term);
         }
 
+        public IEnumerable<NomValue> GetNomsContainingProperty(string alias, string propName, string propValue, string term)
+        {
+            var noms = this.unitOfWork.DbContext.Set<Nom>()
+                .Include(n => n.NomValues)
+                .SingleOrDefault(n => n.Alias == alias)
+                .NomValues
+                .Where(nv => (dynamic)JObject.Parse(nv.TextContent).Value<JArray>(propName).Select(t => (string)t).Contains(propValue));
+
+            return this.GetByTerm(noms, term);
+        }
+
         public IEnumerable<NomValue> GetDocumentRoles(string categoryAlias, string[] staffCodes, string term)
         {
             JToken staffAlias;
-
-            var res = this.unitOfWork.DbContext.Set<Nom>()
-                .Include(n => n.NomValues)
-                .SingleOrDefault(n => n.Alias == "documentRoles")
-                .NomValues
-                .Where(
-                    nv => JObject.Parse(nv.TextContent).Value<string>("categoryAlias") == categoryAlias);
 
             var noms = this.unitOfWork.DbContext.Set<Nom>()
                 .Include(n => n.NomValues)
@@ -59,19 +63,17 @@ namespace Common.Api.Repositories.NomRepository
             return this.GetByTerm(noms, term);
         }
 
-        public IEnumerable<NomValue> GetDocumentTypes(bool isIdDocument, string staffCode, string term)
+        public IEnumerable<NomValue> GetDocumentTypes(bool isIdDocument, string[] staffCodes, string term)
         {
+            JToken staffAlias;
+
             var noms = this.unitOfWork.DbContext.Set<Nom>()
                 .Include(n => n.NomValues)
                 .SingleOrDefault(n => n.Alias == "documentTypes")
                 .NomValues
-                .Where(nv => JObject.Parse(nv.TextContent).Value<bool>("isIdDocument") == isIdDocument);
-
-            if (!string.IsNullOrWhiteSpace(staffCode))
-            {
-                JToken staffAlias;
-                noms = noms.Where(nv => !JObject.Parse(nv.TextContent).TryGetValue("staffAlias", out staffAlias) || staffAlias.ToString() == staffCode);
-            }
+                .Where(
+                    nv => JObject.Parse(nv.TextContent).Value<bool>("isIdDocument") == isIdDocument &&
+                    (!JObject.Parse(nv.TextContent).TryGetValue("staffAlias", out staffAlias) || staffCodes.Contains(staffAlias.ToString())));
 
             return this.GetByTerm(noms, term);
         }

@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Gva.Api.ModelsDO
 {
     public class FileDO
     {
-        public string Key { get; set; }
+        public int LotFileId { get; set; }
 
-        public string Name { get; set; }
+        public FileDataDO File { get; set; }
 
-        public IEnumerable<ApplicationDO> Applications { get; set; }
+        public string BookPageNumber { get; set; }
+
+        public string PageCount { get; set; }
     }
 }

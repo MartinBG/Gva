@@ -64,11 +64,10 @@ namespace Gva.Api.Models
                 .HasMaxLength(50);
 
             this.Property(t => t.BookPageNumber)
-                .IsRequired()
                 .HasMaxLength(50);
 
             this.Property(t => t.Type)
-                .HasMaxLength(50);
+                .HasMaxLength(150);
 
             this.Property(t => t.Number)
                 .HasMaxLength(50);

@@ -182,6 +182,7 @@
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personScannedDocumentCtrl.js" />
     <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.html" />
     <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentOther.html" />

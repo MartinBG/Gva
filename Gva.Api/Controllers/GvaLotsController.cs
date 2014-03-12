@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using AutoMapper;
 using Common.Api.UserContext;
 using Common.Data;
@@ -35,10 +36,12 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<PartVersion, PartVersionDO>(part));
         }
 
-        //public IHttpActionResult GetFilePart(int lotId, string path)
-        //{
+        public IHttpActionResult GetFilePart(int lotId, string path)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-        //}
+            return Ok(Mapper.Map<PartVersion, FilePartVersionDO>(partVersion));
+        }
 
         public IHttpActionResult GetParts(int lotId, string path)
         {
@@ -47,16 +50,11 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
         }
 
-        //public IHttpActionResult GetFileParts(int lotId, string path)
-        //{
-
-        //}
-
         public IHttpActionResult GetFileParts(int lotId, string path)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
 
-            return Ok();
+            return Ok(Mapper.Map<PartVersion[], FilePartVersionDO[]>(partVersions));
         }
 
         public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
@@ -65,10 +63,7 @@ namespace Gva.Api.Controllers
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
 
-            if (content.file != null)
-            {
-                this.fileRepository.AddFileReference(partVersion.Part, content.file.key, content.file.name);
-            }
+            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
 
             lot.Commit(this.userContext);
 
@@ -82,10 +77,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
             PartVersion partVersion = lot.UpdatePart(path, content.part, this.userContext);
 
-            if (content.file != null)
-            {
-                this.fileRepository.AddFileReference(partVersion.Part, content.file.key, content.file.name);
-            }
+            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
 
             lot.Commit(this.userContext);
 
@@ -97,7 +89,8 @@ namespace Gva.Api.Controllers
         public IHttpActionResult DeletePart(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.DeletePart(path, this.userContext);
+            var partVersion = lot.DeletePart(path, this.userContext);
+            this.fileRepository.DeleteFileReferences(partVersion.PartId);
             lot.Commit(this.userContext);
 
             this.unitOfWork.Save();

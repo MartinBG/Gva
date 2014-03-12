@@ -111,9 +111,18 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<RatingPartVersionDO>(Tuple.Create<PartVersion, PartVersion, PartVersion>(part, firstEdition, null)));
         }
 
-        //public IHttpActionResult GetFilePart(int lotId, string path)
-        //{
-        //}
+        [Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentChecks/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentMedicals/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
+        public IHttpActionResult GetFilePart(int lotId, string path)
+        {
+            return base.GetFilePart(lotId, path);
+        }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
@@ -147,9 +156,18 @@ namespace Gva.Api.Controllers
             return Ok(result);
         }
 
-        //public IHttpActionResult GetFileParts(int lotId, string path)
-        //{
-        //}
+        [Route(@"{lotId}/{path:regex(^personDocumentIds$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentChecks$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEducations$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentMedicals$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentTheoreticalexams$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentOthers$)}")]
+        public IHttpActionResult GetFileParts(int lotId, string path)
+        {
+            return base.GetFileParts(lotId, path);
+        }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentChecks$)}"),
@@ -162,7 +180,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
          Route(@"{lotId}/{*path:regex(^licences/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
-         Route(@"{lotId}/{*path:regex(^personStatuses$)}")]
+         Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
         public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
@@ -199,7 +218,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^licences/\d+/editions/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
         public IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -214,7 +234,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
         public IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);

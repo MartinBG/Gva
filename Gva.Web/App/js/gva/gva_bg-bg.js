@@ -50,8 +50,6 @@
           title: 'Образование',
           documentNumber: '№ на документ',
           completionDate: 'Дата на завършване',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           speciality: 'Специалност',
           graduation: 'Степен на образование',
           school: 'Учебно заведение',
@@ -65,13 +63,13 @@
           documentDateValidFrom: 'От дата',
           documentDateValidTo: 'Валиден до',
           documentPublisher: 'Издаден от',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки'
         },
         personScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл'
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.'
         },
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',
@@ -95,8 +93,6 @@
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClassType: 'Клас',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
           title: 'Свидетелство за медицинска годност'
         },
         personEmploymentDirective: {
@@ -106,8 +102,6 @@
           organization: 'Организация',
           employmentCategory: 'Категория длъжност',
           country: 'Страна',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки'
         },
         personCheckDirective: {
@@ -126,8 +120,6 @@
           personCheckDocumentRole: 'Роля на документ',
           aircraftTypeGroup: 'Тип/Група ВС',
           valid: 'Валиден',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки',
           sector: 'Сектор/работно място',
           locationIndicator: 'Индикатор на местоположение',
@@ -152,9 +144,7 @@
           personOtherDocumentType: 'Тип документ',
           personOtherDocumentRole: 'Роля на документ',
           valid: 'Валиден',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.'
+          notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
           title: 'Летателен/практически опит',
@@ -218,9 +208,7 @@
           notes: 'Бележки',
           personOtherDocumentType: 'Тип документ',
           personOtherDocumentRole: 'Роля',
-          valid: 'Действителен',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.'
+          valid: 'Действителен'
         },
         newPerson: {
           save: 'Запис',
@@ -309,7 +297,8 @@
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          file: 'Файл'
         },
         newOther: {
           save: 'Запис',

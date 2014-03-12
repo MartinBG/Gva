@@ -21,6 +21,7 @@ VALUES
     (11            , 1             , 'personStatus'    , N'^personStatuses/\d+$'                , N'{}'   ),
     (12            , 1             , 'licence'         , N'^licences/\d+$'                      , N'{}'   ),
     (13            , 1             , 'licenceEdition'  , N'^licences/\d+/editions/\d+$'         , N'{}'   ),
-    (14            , 1             , 'rating'          , N'^ratings/\d$'                        , N'{}'   ),
-    (15            , 1             , 'ratingEdition'   , N'^ratings/\d/editions/\d$'            , N'{}'   )
+    (14            , 1             , 'rating'          , N'^ratings/\d+$'                       , N'{}'   ),
+    (15            , 1             , 'ratingEdition'   , N'^ratings/\d+/editions/\d+$'          , N'{}'   ),
+    (16            , 1             , 'other'           , N'^personDocumentOthers/\d+$'          , N'{}'   )
 GO

@@ -35,7 +35,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonScannedDocument',
-      templateUrl: 'gva/persons/forms/personScannedDocument.html'
+      templateUrl: 'gva/persons/forms/personScannedDocument.html',
+      controller: 'PersonScannedDocCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonApplication',
