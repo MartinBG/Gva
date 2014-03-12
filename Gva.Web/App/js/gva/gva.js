@@ -10,7 +10,8 @@
     'gva.templates',
     'common',
     'l10n',
-    'l10n-tools'
+    'l10n-tools',
+    'scrollto'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
       name: 'gvaPersonData',
@@ -147,6 +148,11 @@
       name: 'gvaAircraftDocumentOther',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOther.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftInspection',
+      templateUrl: 'gva/aircrafts/forms/aircraftInspection.html',
+      controller: 'AircraftInspectionCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -275,6 +281,10 @@
       .state(['root.aircrafts.view.others'                              , '/others'                                                                                                                                                                    ])
       .state(['root.aircrafts.view.others.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersSearch.html'              , 'AircraftOthersSearchCtrl'     ]])
       .state(['root.aircrafts.view.others.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersNew.html'                 , 'AircraftOthersNewCtrl'        ]])
-      .state(['root.aircrafts.view.others.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersEdit.html'                , 'AircraftOthersEditCtrl'       ]]);
+      .state(['root.aircrafts.view.others.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOthers/othersEdit.html'                , 'AircraftOthersEditCtrl'       ]])
+      .state(['root.aircrafts.view.inspections'                         , '/inspections'                                                                                                                                                               ])
+      .state(['root.aircrafts.view.inspections.search'                  , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsSearch.html'            , 'InspectionsSearchCtrl'        ]])
+      .state(['root.aircrafts.view.inspections.new'                     , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsNew.html'               , 'InspectionsNewCtrl'           ]])
+      .state(['root.aircrafts.view.inspections.edit'                    , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/inspections/inspectionsEdit.html'              , 'InspectionsEditCtrl'          ]]);
   }]);
 }(angular));

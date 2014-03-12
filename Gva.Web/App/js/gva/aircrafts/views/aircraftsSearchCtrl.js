@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Aircraft,
     aircrafts) {
 
     $scope.filters = {
@@ -43,7 +42,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Aircraft',
     'aircrafts'
   ];
 

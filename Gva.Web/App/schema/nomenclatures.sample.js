@@ -300,5 +300,25 @@
       { nomValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
     ],
 
+    //Номенклатура Причини за одит
+    auditReasons: require('./auditReason'),
+
+    //Номенклатура Видове одит
+    auditTypes: require('./auditType'),
+
+    //Номенклатура Състояния за одит
+    auditStates: require('./auditState'),
+
+    //Номенклатура Резултати от одит
+    auditResults: require('./auditResult'),
+
+    //Номенклатура Изисквания към раздел
+    auditPartRequirements: require('./auditPartRequirement'),
+
+    //Номенклатура Проверяващи
+    checkers: require('./checker'),
+
+    //Номенклатура Ниво от несъответствие
+    disparityLevels: require('./disparityLevel')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);
