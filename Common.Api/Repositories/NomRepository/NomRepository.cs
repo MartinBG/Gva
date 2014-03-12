@@ -43,7 +43,7 @@ namespace Common.Api.Repositories.NomRepository
                 .Include(n => n.NomValues)
                 .SingleOrDefault(n => n.Alias == alias)
                 .NomValues
-                .Where(nv => (dynamic)JObject.Parse(nv.TextContent).Value<JArray>(propName).Select(t => (string)t).Contains(propValue));
+                .Where(nv => (dynamic)JObject.Parse(nv.TextContent).Value<JArray>(propName).Values<string>().Contains(propValue));
 
             return this.GetByTerm(noms, term);
         }

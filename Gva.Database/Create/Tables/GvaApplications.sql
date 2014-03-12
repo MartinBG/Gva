@@ -5,9 +5,11 @@ CREATE TABLE [dbo].[GvaApplications] (
     [GvaApplicationId]    INT  NOT NULL IDENTITY,
     [DocId]               INT  NOT NULL,
     [LotId]               INT  NOT NULL,
-    CONSTRAINT [PK_GvaApplications]      PRIMARY KEY ([GvaApplicationId]),
-    CONSTRAINT [FK_GvaApplications_Lots] FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId]),
-    CONSTRAINT [FK_GvaApplications_Docs] FOREIGN KEY ([DocId]) REFERENCES [dbo].[Docs] ([DocId])
+    [GvaAppLotPartId]     INT   NOT NULL,
+    CONSTRAINT [PK_GvaApplications]           PRIMARY KEY ([GvaApplicationId]),
+    CONSTRAINT [FK_GvaApplications_Lots]      FOREIGN KEY ([LotId])            REFERENCES [dbo].[Lots] ([LotId]),
+    CONSTRAINT [FK_GvaApplications_Docs]      FOREIGN KEY ([DocId])            REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_GvaApplicationss_LotParts] FOREIGN KEY ([GvaAppLotPartId])  REFERENCES [dbo].[LotParts]        ([LotPartId])
 )
 GO
 
