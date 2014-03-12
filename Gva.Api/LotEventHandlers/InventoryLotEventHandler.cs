@@ -10,7 +10,7 @@ namespace Gva.Api.LotEventHandlers
 {
     public class InventoryLotEventHandler : ILotEventHandler
     {
-        private static string[] parts = { "education", "documentId", "training", "medical", "check" };
+        private static string[] parts = { "education", "documentId", "training", "medical", "check", "other" };
 
         private IInventoryRepository inventoryRepository;
         private IUserRepository userRepository;
@@ -119,6 +119,10 @@ namespace Gva.Api.LotEventHandlers
                     content.documentNumberSuffix);
             }
             else if (partAlias == "check")
+            {
+                inventoryItem.Name = content.documentRole.name;
+            }
+            else if (partAlias == "other")
             {
                 inventoryItem.Name = content.documentRole.name;
             }
