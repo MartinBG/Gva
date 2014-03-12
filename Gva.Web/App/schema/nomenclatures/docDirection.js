@@ -6,7 +6,7 @@
     {
       "docDirectionId": 1,
       "name": "Входящ",
-      "alias": "Incomming",
+      "alias": "Incoming",
       "isActive": true,
       "version": "AAAAAAAAHsg=",
       "docTypeClassifications": [],

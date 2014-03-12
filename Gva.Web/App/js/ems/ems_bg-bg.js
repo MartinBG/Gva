@@ -16,6 +16,7 @@
           management: 'Управление',
           caseManagement: 'Преписка',
           casePart: 'Част на преписка',
+          docType: 'Техн. редакция на документ',
           docPrepared: 'Отбелязване като изготвен',
           docProcessed: 'Отбелязване като обработен',
           docFinished: 'Отбелязване като приключен',
@@ -136,6 +137,23 @@
               partOf: 'Част от преписка',
               save: 'Запис',
               cancel: 'Отказ'
+            },
+            docType: {
+              docTypeGroup: 'Група',
+              docType: 'Вид',
+              docDirection: 'Част от преписка',
+              save: 'Запис',
+              cancel: 'Отказ',
+              from: 'От',
+              to: 'До',
+              cCopy: 'Копие до',
+              importedBy: 'Въвел',
+              madeBy: 'Изготвил',
+              inCharge: 'Отговорник',
+              controlling: 'Контролиращ',
+              roleReaders: 'Читатели',
+              editors: 'Редактори',
+              roleRegistrators: 'Регистратори'
             }
           },
           classifications: {
@@ -144,7 +162,6 @@
             'delete': 'изтрий',
             add: 'добави'
           }
-
         },
         nextStage: {
           stage: 'Етап',
@@ -153,7 +170,7 @@
           expectedEndingDate: 'Очаквана дата прикл.',
           endingDate: 'Дата на приключване',
           save: 'Запис',
-          back: 'Назад'
+          cancel: 'Отказ'
         },
         search: {
           fromDate: 'От дата',
@@ -276,6 +293,7 @@
         'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
         'root.docs.edit.case.casePart': 'Смяна на част на преписка',
+        'root.docs.edit.case.docType': 'Техническа редакция на документ',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

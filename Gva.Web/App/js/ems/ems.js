@@ -84,6 +84,8 @@
       .state(['root.docs.edit.stages.end'           , '/end'                         , ['@root.docs.edit' , 'ems/docs/views/endStage.html'            , 'EndStageCtrl'           ]])
       .state(['root.docs.edit.case'                 , '/case'                        , ['@root.docs.edit' , 'ems/docs/views/docsCase.html'            , 'DocsCaseCtrl'           ]])
       .state(['root.docs.edit.case.casePart'    , '/casePart'                    , ['@root.docs.edit' , 'ems/docs/views/editCasePart.html'        , 'EditCasePartCtrl'       ]])
+      .state(['root.docs.edit.case.docType'     , '/docType'                     , ['@root.docs.edit' , 'ems/docs/views/editDocType.html'        , 'EditDocTypeCtrl'       ]])
+      .state(['root.docs.edit.case.docType.selectUnit'      , '/selectUnit?name'             , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'      , 'SelectUnitViewCtrl'     ]])
       .state(['root.corrs'                          , '/corrs?displayName&email'                                                                                                  ])
       .state(['root.corrs.search'                   , ''                             , ['@root'                , 'ems/corrs/views/corrSearch.html'    , 'CorrsSearchCtrl'        ]])
       .state(['root.corrs.new'                      , '/new'                         , ['@root'                , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'          ]])

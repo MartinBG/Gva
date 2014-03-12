@@ -114,6 +114,9 @@
               <li>
                 <a sc-click="editCasePart()" name="editCasePartBtn" l10n-text="docs.edit.casePart"></a>
               </li>
+              <li ng-hide="!!doc.isResolution || !!doc.isRemark || !!doc.isTask">
+                <a sc-click="editDocType()" name="editCasePartBtn" l10n-text="docs.edit.docType"></a>
+              </li>
             </ul>
           </div>
 

@@ -1,0 +1,63 @@
+﻿<div class="well-sm panel-body">
+  <ng-form name="docTypeForm" sc-validate="{}">
+      <div class="well-sm panel-body ">
+
+
+        <div class="row">
+
+          <div class="form-group col-sm-4" sc-has-error="docTypeGroupId">
+            <label class="control-label" l10n-text="docs.edit.case.docType.docTypeGroup"></label>
+            <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="doc.docTypeGroupId" mode="id" name="docTypeGroupId" alias="'docTypeGroup'" required></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-4" sc-has-error="docTypeId">
+            <label class="control-label" l10n-text="docs.edit.case.docType.docType"></label>
+            <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="doc.docTypeId" nom-obj="doc.docType" mode="id" name="docTypeId" alias="'docType'" params="{ parentValueId: doc.docTypeGroupId ? doc.docTypeGroupId : 0 }" required></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-4" sc-has-error="docDirectionId">
+            <label class="control-label" l10n-text="docs.edit.case.docType.docDirection"></label>
+            <sc-validation-error field-name="docDirectionId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="doc.docDirectionId" nom-obj="doc.docDirection" mode="id" name="docDirectionId" alias="'docDirections'" required></sc-nomenclature>
+          </div>
+
+        </div>
+
+        <div ng-repeat="rowFields in missingFields" ng-show="showFields">
+          <div class="row">
+            <div class="form-group col-sm-4" ng-repeat="field in rowFields">
+              <label class="control-label" l10n-text="{{'docs.edit.case.docType.'+field}}" style="color:red;"></label>
+              <div class="input-group input-group-sm">
+                <sc-nomenclature ng-model="oldDoc[fullFieldName(field)]" alias="'unit'" multiple="multiple" readonly></sc-nomenclature>
+                <span class="input-group-btn">
+                  <sc-button class="btn btn-default" icon="glyphicon glyphicon-search" disabled></sc-button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-repeat="rowFields in allFields" ng-show="showFields">
+          <div class="row">
+            <div class="form-group col-sm-4" ng-repeat="field in rowFields">
+              <label class="control-label" l10n-text="{{'docs.edit.case.docType.'+field}}"></label>
+              <div class="input-group input-group-sm">
+                <sc-nomenclature ng-model="doc[fullFieldName(field)]" alias="'unit'" multiple="multiple"></sc-nomenclature>
+                <span class="input-group-btn">
+                  <sc-button btn-click="selectUnit(field)" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-form>
+
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="save()" text="docs.edit.case.docType.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.case.docType.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+  </div>
+</div>

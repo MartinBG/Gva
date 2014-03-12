@@ -39,6 +39,10 @@
             'setCasePart': {
               method: 'POST',
               url: '/api/docs/:docId/setCasePart'
+            },
+            'setDocType': {
+              method: 'POST',
+              url: '/api/docs/:docId/setDocType'
             }
           });
       }]);
