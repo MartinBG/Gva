@@ -11,7 +11,8 @@
   ]).config([
     '$controllerProvider',
     '$stateProvider',
-    function ($controllerProvider, $stateProvider) {
+    '$provide',
+    function ($controllerProvider, $stateProvider, $provide) {
       $controllerProvider.register =
         _.wrap($controllerProvider.register, function (original, name, constructor) {
           if (angular.isObject(name)) {
@@ -53,6 +54,14 @@
       $stateProvider.decorator('resolve', function (state) {
         states[state.self.name] = state;
         return state.resolve;
+      });
+
+      $provide.decorator('$state', function($delegate) {
+        $delegate.getWrapper = function (stateName) {
+          return states[stateName];
+        };
+
+        return $delegate;
       });
     }
   ]).run(function () {

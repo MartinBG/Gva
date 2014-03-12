@@ -4,7 +4,7 @@
 (function (angular, _) {
   'use strict';
 
-  function TabsDirective ($state, $stateParams) {
+  function TabsDirective($state, $stateParams, l10n) {
     return {
       priority: 110,
       restrict: 'E',
@@ -13,24 +13,38 @@
       scope: {
         tabList: '&'
       },
-      link: function ($scope) {
-        var tabsObject = $scope.tabList();
+      link: function ($scope, iElem, iAttrs) {
+        var tabsObject = $scope.tabList(),
+          loading = false;
+
+        iAttrs.$observe('disabled', function (value) {
+          $scope.isDisabled = !!value;
+        });
 
         $scope.tabList = [];
         $scope.secondTabList = [];
 
         angular.forEach(_.keys(tabsObject), function (tabTitle) {
-          var newTab = { isActive: false, title: tabTitle, className: tabTitle.replace(' ', '-') },
+          var newTab = {
+            isActive: false,
+            title: l10n.get(tabTitle) || tabTitle,
+            className: tabTitle.replace(' ', '-')
+          },
               tab = tabsObject[tabTitle];
 
           if (_.isString(tab)) {
             newTab.isState = true;
             newTab.name = $state.get(tab).name;
+            newTab.state = $state.getWrapper(tab)['abstract'] ?
+              $state.getWrapper(tab).defaultChild : $state.getWrapper(tab);
           }
           else {
             if (!!tab.state && !!tab.stateParams) {
               newTab.isState = true;
               newTab.name = $state.get(tab.state).name;
+              newTab.state = $state.getWrapper(tab.state)['abstract'] ?
+                $state.getWrapper(tab.state).defaultChild :
+                $state.getWrapper(tab.state);
               newTab.stateParams = tab.stateParams;
             }
             else {
@@ -40,10 +54,14 @@
               angular.forEach(_.keys(tab), function (childTabTitle) {
                 var childTab = $state.get(tab[childTabTitle]);
                 newTab.children.push({
-                  title: childTabTitle,
+                  parent: newTab,
+                  title: l10n.get(childTabTitle) || childTabTitle,
                   isActive: false,
                   isState: true,
                   name: childTab.name,
+                  state: $state.getWrapper(childTab.name)['abstract'] ?
+                    $state.getWrapper(childTab.name).defaultChild :
+                    $state.getWrapper(childTab.name),
                   className: childTabTitle.replace(' ', '-')
                 });
               });
@@ -54,29 +72,50 @@
         });
 
         $scope.$on('$stateChangeStart', function (event, toState) {
-          activateTab(toState.name, true);
+          if (!loading) {
+            activateTab(toState.name);
+          }
+          loading = false;
         });
 
-        $scope.$on('$stateChangeSuccess', function(event, toState){
+        $scope.$on('$stateChangeSuccess', function (event, toState) {
           stopLoader(toState.name);
         });
 
+
         $scope.openTab = function (newSection) {
+          loading = true;
+          if ($scope.isDisabled) {
+            loading = false;
+            return;
+          }
           if (newSection.isActive) {
+            loading = false;
             return;
           }
 
           if (newSection.isState) {
             if (!!newSection.stateParams) {
               var newStateParams = _.assign(_.cloneDeep($stateParams), newSection.stateParams);
-              $state.go(newSection.name, newStateParams);
+              selectTab($scope.tabList, newSection, true);
+              $state.go(newSection.state, newStateParams);
             }
             else {
-              $state.go(newSection.name);
+              if (newSection.parent) {
+                selectTab($scope.secondTabList, newSection, true);
+                $state.go(newSection.state);
+              } else {
+                $scope.secondTabList = [];
+                selectTab($scope.tabList, newSection, true);
+                $state.go(newSection.state);
+              }
             }
           }
           else {
-            $state.go(newSection.children[0].name);
+            selectTab($scope.tabList, newSection, true);
+            $scope.secondTabList = newSection.children;
+            selectTab($scope.secondTabList, newSection.children[0], true);
+            return $state.go(newSection.children[0].state);
           }
         };
 
@@ -87,8 +126,7 @@
             tab = $scope.tabList[i];
 
             if (tab.isState && _(tabName).include(tab.name)) {
-
-              if (tab.hasOwnProperty('stateParams')){
+              if (tab.hasOwnProperty('stateParams')) {
                 if (stateMatch(tab.stateParams)) {
                   tab.loading = false;
                   return;
@@ -100,18 +138,19 @@
               }
             }
           }
-
           for (var j = 0; j < $scope.secondTabList.length; j++) {
             tab = $scope.secondTabList[j];
 
             if (tab.isState && _(tabName).include(tab.name)) {
               tab.loading = false;
+              tab.parent.loading = false;
               return;
             }
           }
+          closeTabs();
         }
 
-        function activateTab(tabName, loading) {
+        function activateTab(tabName) {
           for (var i = 0; i < $scope.tabList.length; i++) {
             var tab = $scope.tabList[i];
 
@@ -124,8 +163,7 @@
                 continue;
               }
 
-              selectTab($scope.tabList, tab);
-              tab.loading = loading;
+              selectTab($scope.tabList, tab, false);
 
               $scope.secondTabList = [];
               return;
@@ -135,26 +173,34 @@
                 var childTab = tab.children[j];
 
                 if (_(tabName).include(childTab.name)) {
-                  selectTab($scope.tabList, tab);
+                  selectTab($scope.tabList, tab, false);
                   $scope.secondTabList = tab.children;
-                  selectTab($scope.secondTabList, childTab);
-                  childTab.loading = loading;
+                  selectTab($scope.secondTabList, childTab, false);
                   return;
                 }
               }
             }
           }
+          closeTabs();
         }
 
-        function selectTab (tabList, tab) {
+        function closeTabs() {
+          $scope.secondTabList = [];
+          angular.forEach($scope.tabList, function (tab) {
+            tab.isActive = false;
+          });
+        }
+
+        function selectTab(tabList, tab, loading) {
           angular.forEach(tabList, function (tab) {
             tab.isActive = false;
           });
+          tab.loading = loading;
           tab.isActive = true;
         }
 
-        function stateMatch (tabStateParams) {
-          return _.pairs(tabStateParams).reduce(function(stateMatching, kvp) {
+        function stateMatch(tabStateParams) {
+          return _.pairs(tabStateParams).reduce(function (stateMatching, kvp) {
             return stateMatching &&
               $stateParams.hasOwnProperty(kvp[0]) &&
               $stateParams[kvp[0]] === kvp[1];
@@ -166,7 +212,7 @@
     };
   }
 
-  TabsDirective.$inject = ['$state', '$stateParams'];
+  TabsDirective.$inject = ['$state', '$stateParams', 'l10n'];
 
   angular.module('scaffolding').directive('scTabs', TabsDirective);
 }(angular, _));
