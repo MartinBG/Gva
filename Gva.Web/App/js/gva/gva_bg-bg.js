@@ -208,7 +208,43 @@
           notes: 'Бележки',
           personOtherDocumentType: 'Тип документ',
           personOtherDocumentRole: 'Роля',
-          valid: 'Действителен'
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        personDocApplicationDirective: {
+          title: 'Заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        personDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        newPersonDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editPersonDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         newPerson: {
           save: 'Запис',
@@ -620,7 +656,8 @@
         required: 'Задължително поле',
         min: 'Стойността на полето трябва да е по-голяма от 0',
         mail: 'Невалиден E-mail',
-        lin: 'Невалиден ЛИН'
+        lin: 'Невалиден ЛИН',
+        date: 'Невалидна дата'
       },
       states: {
         'root.applications': 'Заявления',
@@ -684,7 +721,10 @@
         'root.persons.view.documentOthers.new': 'Нов документ',
         'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentOthers.edit': 'Редакция на документ',
-        'root.persons.view.documentOthers.edit.choosePublisher':  'Избор на издател'
+        'root.persons.view.documentOthers.edit.choosePublisher': 'Избор на издател',
+        'root.persons.view.documentApplications': 'Заявления',
+        'root.persons.view.documentApplications.new': 'Новo заявление',
+        'root.persons.view.documentApplications.edit': 'Редакция на заявление'
       }
     });
   }]);

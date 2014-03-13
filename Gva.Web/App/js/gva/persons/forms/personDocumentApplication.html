@@ -1,0 +1,60 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="persons.personDocApplicationDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.documentNumber"></label>
+          <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.applicationType"></label>
+          <sc-nomenclature ng-model="model.applicationType" alias="'applicationTypes'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.applicationPaymentType"></label>
+          <sc-nomenclature ng-model="model.applicationPaymentType" alias="'applicationPaymentTypes'"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="persons.personDocApplicationDirective.taxAmount"></label>
+        <sc-float ng-model="model.taxAmount" name="taxAmount"></sc-float>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.currency"></label>
+          <sc-nomenclature ng-model="model.currency" alias="'currencies'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="requestDate">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.requestDate"></label>
+          <sc-validation-error field-name="requestDate" validations="{requestDate: 'errorTexts.date'}"></sc-validation-error>
+          <sc-date ng-model="model.requestDate" name="requestDate" sc-validate="{requestDate: validateDate}"></sc-date>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDate">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.documentDate"></label>
+          <sc-validation-error field-name="documentDate" validations="{documentDate: 'errorTexts.date', required: null}"></sc-validation-error>
+          <sc-date ng-model="model.documentDate" name="documentDate" sc-validate="{documentDate: validateDate}" ng-required="true"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.notes"></label>
+          <sc-textarea rows="3" ng-model="model.notes" name="notes"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.bookPageNumber"></label>
+          <sc-text ng-model="model.bookPageNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+          <label class="control-label" l10n-text="persons.personDocApplicationDirective.pageCount"></label>
+          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

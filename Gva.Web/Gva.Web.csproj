@@ -152,6 +152,7 @@
     <Content Include="App\js\ems\docs\forms\docView\docOutgoing.html" />
     <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
+    <Content Include="App\js\ems\docs\views\docsData.html" />
     <Content Include="App\js\common\root\views\root.html" />
     <Content Include="App\js\ems\docs\views\endStage.html" />
     <Content Include="App\js\ems\docs\views\endStageCtrl.js" />
@@ -193,6 +194,19 @@
     <Content Include="App\js\gva\persons\views\documentOthers\othersNewCtrl.js" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearch.html" />
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personRatingView.js" />
+    <Content Include="App\js\gva\persons\resources\personEditionView.js" />
+    <Content Include="App\js\gva\persons\forms\personDocumentApplication.html" />
+    <Content Include="App\js\gva\persons\forms\personDocumentApplicationCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personDocumentApplication.js" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsEdit.html" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsNew.html" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsSearch.html" />
+    <Content Include="App\js\gva\persons\views\documentApplications\docApplicationsSearchCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.html" />
+    <Content Include="App\js\scaffolding\directives\breadcrumb\breadcrumbDirective.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.html" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.html" />
@@ -299,6 +313,8 @@
     <Content Include="App\schema\nomenclatures\aircraftType.js" />
     <Content Include="App\schema\nomenclatures\aircraftTypeGroup.js" />
     <Content Include="App\schema\nomenclatures\aircraft.js" />
+    <Content Include="App\schema\nomenclatures\applicationPaymentType.js" />
+    <Content Include="App\schema\nomenclatures\applicationType.js" />
     <Content Include="App\schema\nomenclatures\authorization.js" />
     <Content Include="App\schema\nomenclatures\authorizationGroup.js" />
     <Content Include="App\schema\nomenclatures\boolean.js" />
@@ -307,6 +323,8 @@
     <Content Include="App\schema\nomenclatures\documentType.js" />
     <Content Include="App\schema\nomenclatures\graduation.js" />
     <Content Include="App\schema\nomenclatures\electronicServiceStages.js" />
+    <Content Include="App\schema\nomenclatures\currencies.js" />
+    <Content Include="App\schema\nomenclatures\graduation.js" />
     <Content Include="App\schema\nomenclatures\otherDocPublisher.js" />
     <Content Include="App\schema\nomenclatures\publisherType.js" />
     <Content Include="App\schema\nomenclatures\testCorrespondent.js" />
@@ -344,6 +362,7 @@
     <Content Include="App\schema\person-rating-edition.sample.js" />
     <Content Include="App\schema\person-rating.sample.js" />
     <Content Include="App\test\designTemplatesMock.js" />
+    <Content Include="App\test\ems\mocks\docCases.js" />
     <Content Include="App\test\ems\corrs\pageObjects\newCorrPO.js" />
     <Content Include="App\test\ems\corrs\pageObjects\searchCorrPO.js" />
     <Content Include="App\test\ems\corrs\specs\newCorrSpec.js" />
@@ -387,6 +406,7 @@
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentOthers\docOtherPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentOthers\searchDocOtherPO.js" />
+    <Content Include="App\test\gva\persons\mocks\personDocumentApplicationsHttp.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />
     <Content Include="App\test\gva\persons\specs\documentOthers\editPersonDocOtherSpec.js" />
     <Content Include="App\test\gva\persons\specs\documentOthers\newPersonDocOtherSpec.js" />
@@ -724,6 +744,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\person-document-id.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\person-document-application.sample.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

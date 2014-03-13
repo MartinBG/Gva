@@ -225,5 +225,14 @@
       { nomValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
     ],
 
+    //Номенклатура Видове заявления
+    applicationTypes: require('./applicationType'),
+
+    //Номенклатура Видове плащания по заявления
+    applicationPaymentTypes: require('./applicationPaymentType'),
+
+    //Номенклатура Парични единици
+    currencies: require('./currency')
+
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

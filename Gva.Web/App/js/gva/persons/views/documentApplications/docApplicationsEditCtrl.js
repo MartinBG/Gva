@@ -1,0 +1,55 @@
+﻿/*global angular*/
+(function (angular) {
+  'use strict';
+
+  function DocApplicationsEditCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    PersonDocumentApplication,
+    personDocumentApplication) {
+
+    $scope.personDocumentApplication = personDocumentApplication;
+
+    $scope.save = function () {
+      $scope.personDocumentApplicationForm.$validate()
+      .then(function () {
+        if ($scope.personDocumentApplicationForm.$valid) {
+          return PersonDocumentApplication
+            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentApplication)
+            .$promise
+            .then(function () {
+              return $state.go('root.persons.view.documentApplications.search');
+            });
+        }
+      });
+    };
+
+    $scope.cancel = function () {
+      return $state.go('root.persons.view.documentApplications.search');
+    };
+  }
+
+  DocApplicationsEditCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'PersonDocumentApplication',
+    'personDocumentApplication'
+  ];
+
+  DocApplicationsEditCtrl.$resolve = {
+    personDocumentApplication: [
+      '$stateParams',
+      'PersonDocumentApplication',
+      function ($stateParams, PersonDocumentApplication) {
+        return PersonDocumentApplication.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
+      }
+    ]
+  };
+
+  angular.module('gva').controller('DocApplicationsEditCtrl', DocApplicationsEditCtrl);
+}(angular));
