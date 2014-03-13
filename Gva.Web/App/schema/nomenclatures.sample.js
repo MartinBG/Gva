@@ -22,6 +22,26 @@
       })[0];
     },
 
+    getById: function (nom, id) {
+      return this[nom].filter(function (nomValue) {
+        return nomValue.nomValueId === id;
+      })[0];
+    },
+
+    docFileKinds: [
+      { nomValueId: 1, code: '', name: 'Вътрешен файл', nameAlt: '', alias: 'PrivateAttachedFile' },
+      { nomValueId: 2, code: '', name: 'Публичен файл', nameAlt: '', alias: 'PublicAttachedFile' }
+    ],
+
+    docFileTypes: [
+     { nomValueId: 1, code: '', name: 'Документ Microsoft Word (.doc)', nameAlt: '', alias: 'DOC' },
+     { nomValueId: 2, code: '', name: 'Документ Microsoft Word (.docx)', nameAlt: '', alias: 'DOCX' },
+     { nomValueId: 3, code: '', name: 'Документ Microsoft Excel (.xls)', nameAlt: '', alias: 'XLS' },
+     { nomValueId: 4, code: '', name: 'Документ Microsoft Excel (.xlsx)', nameAlt: '', alias: 'XLSX' },
+     { nomValueId: 5, code: '', name: 'Документ в преносим формат (.pdf)', nameAlt: '', alias: 'PDF' },
+     { nomValueId: 6, code: '', name: 'Текстов документ(.txt)', nameAlt: '', alias: 'TXT' }
+    ],
+
     unit: require('./unit'),
 
     assignmentType: require('./assignmentType'),
@@ -172,7 +192,9 @@
 
     testCorrespondent: require('./testCorrespondent'),
 
-    electronicServiceStages: require('./electronicServiceStages'),
+    electronicServiceStage: require('./electronicServiceStage'),
+
+    docWorkflowAction: require('./docWorkflowAction'),
 
     medClasses: require('./medicalClass'),
 

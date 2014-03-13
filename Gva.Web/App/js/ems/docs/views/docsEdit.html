@@ -16,7 +16,7 @@
             </ul>
           </div>
 
-          <sc-button ng-show="!inEditMode" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
+          <sc-button ng-show="!inEditMode && ($state.current.name === 'root.docs.edit.view') && isVisibleEdit" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
           <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
           <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
 
@@ -27,19 +27,19 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li>
-                <a href="#" l10n-text="docs.edit.docPrepared"></a>
+                <a sc-click="nextStatus()" l10n-text="docs.edit.docPrepared"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.docProcessed"></a>
+                <a sc-click="nextStatus()" l10n-text="docs.edit.docProcessed"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.docFinished"></a>
+                <a sc-click="nextStatus()" l10n-text="docs.edit.docFinished"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.docCanceled"></a>
+                <a sc-click="cancelStatus()" l10n-text="docs.edit.docCanceled"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.docRegister"></a>
+                <a sc-click="setRegUri()" l10n-text="docs.edit.docRegister"></a>
               </li>
                 <li>
                 <a href="#" l10n-text="docs.edit.docSignatures"></a>
@@ -49,39 +49,39 @@
               </li>
               <li class="divider"></li>
               <li>
-                <a href="#" l10n-text="docs.edit.sign"></a>
+                <a sc-click="signConfirm()" l10n-text="docs.edit.sign"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.discuss"></a>
+                <a sc-click="discussConfirm()" l10n-text="docs.edit.discuss"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.approval"></a>
+                <a sc-click="approvalConfirm()" l10n-text="docs.edit.approval"></a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="#" l10n-text="docs.edit.signRequest"></a>
+                <a sc-click="signRequest()" l10n-text="docs.edit.signRequest"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.discussRequest"></a>
+                <a sc-click="discussRequest()" l10n-text="docs.edit.discussRequest"></a>
               </li>
               <li>
-                <a href="#" l10n-text="docs.edit.approvalRequest"></a>
+                <a sc-click="approvalRequest()" l10n-text="docs.edit.approvalRequest"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.registrationRequest"></a>
+                <a sc-click="registrationRequest()" l10n-text="docs.edit.registrationRequest"></a>
               </li>
                 <li class="divider"></li>
                 <li>
-                <a href="#" l10n-text="docs.edit.reverseDocPrepared"></a>
+                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocPrepared"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.reverseDocProcessed"></a>
+                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocProcessed"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.reverseDocFinished"></a>
+                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocFinished"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.reverseDocCanceled"></a>
+                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocCanceled"></a>
               </li>
             </ul>
           </div>
@@ -102,6 +102,20 @@
               </li>
               <li ng-show="doc.docElectronicServiceStages.length > 1">
                 <a sc-click="reverseStage()" name="reverseStageBtn" l10n-text="docs.edit.reverseElectronicStage"></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="btn-group" ng-show="!inEditMode">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+              <span l10n-text="docs.edit.caseManagement"></span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a sc-click="editCasePart()" name="editCasePartBtn" l10n-text="docs.edit.casePart"></a>
+              </li>
+              <li ng-hide="!!doc.isResolution || !!doc.isRemark || !!doc.isTask">
+                <a sc-click="editDocType()" name="editCasePartBtn" l10n-text="docs.edit.docType"></a>
               </li>
             </ul>
           </div>

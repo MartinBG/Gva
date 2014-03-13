@@ -26,10 +26,19 @@
 
         tElement.append(dirHtml);
       } else if (type === 'nomenclature') {
-        var alias = tAttrs.alias;
+        var alias = tAttrs.alias,
+          load = tAttrs.load || 'true',
+          mode = tAttrs.mode,
+          nomObj = tAttrs.nomObj,
+          multiple = tAttrs.multiple,
+          modeHtml = mode ? ' mode="' + mode + '"' : '',
+          nomObjHtml = nomObj ? ' nom-obj="' + nomObj + '"' : '',
+          multipleHtml = multiple ? ' multiple="' + multiple + '"' : '';
 
-        dirHtml = '<sc-nomenclature ng-model="model" alias="\'' + alias + '\'" load="true">' +
+        dirHtml = '<sc-nomenclature ng-model="model" alias="\'' + alias +
+          '\'" load="' + load + '" ' + modeHtml + nomObjHtml + multipleHtml + '>' +
           '</sc-nomenclature>';
+
         tElement.append(dirHtml);
       }
 

@@ -5,14 +5,15 @@
   var nomenclatures = require('./nomenclatures.sample');
   var today = new Date();
 
-  angular.module('app').factory('docs', ['docCases', 'docStages',
-    function (docCases, docStages) {
+  angular.module('app').factory('docs', ['docCases', 'docStages', 'docWorkflows',
+    function (docCases, docStages, docWorkflows) {
       return [
         {
           docId: 1,
           parentDocId: null,
           docStatusId: 1,
           docStatusName: 'Чернова',
+          docStatusAlias: 'Draft',
           docSubject: 'Заявление',
           docSubjectLabel: 'Относно',
           docTypeId: 1,
@@ -73,56 +74,89 @@
           isRemark: false,
           isTask: false,
           docBody: '',
-          privateDocFiles: [
+          docFiles: [
             {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1670',
-              name: 'TestFile1.pdf',
-              relativePath: undefined
+              docFileId: 1,
+              docId: 1,
+              docFileKindId: 1,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1670&fileName=TestFile1.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1670',
+                name: 'TestFile1.pdf',
+                relativePath: undefined
+              },
+              name: 'Искане',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
+            },
+            {
+              docFileId: 2,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1671&fileName=TestFile2.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1671',
+                name: 'TestFile2.pdf',
+                relativePath: undefined
+              },
+              name: 'Актуален учредителен акт',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
+            },
+            {
+              docFileId: 3,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1672&fileName=TestFile3.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1672',
+                name: 'TestFile3.pdf',
+                relativePath: undefined
+              },
+              name: 'Договор',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
+            },
+            {
+              docFileId: 4,
+              docId: 1,
+              docFileKindId: 2,
+              docFileKind: nomenclatures.docFileKinds[0],
+              docFileTypeId: 1,
+              docFileType: nomenclatures.docFileTypes[0],
+              docFileUrl: 'api/file?fileKey=04BCC096-AB2F-4C77-AB82-' +
+                 '6FC3E9CE1673&fileName=TestFile4.pdf',
+              docFile: {
+                key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
+                name: 'TestFile4.pdf',
+                relativePath: undefined
+              },
+              name: 'Документ за актуална търговска или съдебна регистрация ',
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
             }
           ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1671',
-              name: 'TestFile2.pdf',
-              relativePath: undefined
-            },
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1672',
-              name: 'TestFile3.pdf',
-              relativePath: undefined
-            },
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
-              name: 'TestFile4.pdf',
-              relativePath: undefined
-            }
-          ],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docWorkflows: _.filter(docWorkflows, { docId: 1 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 1 }),
           docRelations: _(docCases).filter({ docCaseId: 1 }).first().docCase,
@@ -146,6 +180,7 @@
           parentDocId: null,
           docStatusId: 2,
           docStatusName: 'Изготвен',
+          docStatusAlias: 'Prepared',
           docSubjectLabel: 'Относно',
           docSubject: 'Заявление за добавяне на автомати',
           docTypeId: 1,
@@ -205,46 +240,8 @@
           isResolution: false,
           isTask: false,
           docBody: '',
-          privateDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1600',
-              name: 'TestFile112.pdf',
-              relativePath: undefined
-            }
-          ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1673',
-              name: 'TestFile4.pdf',
-              relativePath: undefined
-            }
-          ],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docFiles: [],
+          docWorkflows: _.filter(docWorkflows, { docId: 2 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 2 }),
           docRelations: _(docCases).filter({ docCaseId: 2 }).first().docCase,
@@ -268,6 +265,7 @@
           parentDocId: null,
           docStatusId: 3,
           docStatusName: 'Обработен',
+          docStatusAlias: 'Processed',
           docSubjectLabel: 'Относно',
           docSubject: 'Искане за закриване на обект',
           docTypeId: 2,
@@ -314,46 +312,8 @@
           isVisibleCollapsePermissions: false,
           isRead: false,
           docBody: '',
-          privateDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1611',
-              name: 'TestFile111.pdf',
-              relativePath: undefined
-            }
-          ],
-          publicDocFiles: [
-            {
-              key: '04BCC096-AB2F-4C77-AB82-6FC3E9CE1674',
-              name: 'TestFile5.pdf',
-              relativePath: undefined
-            }
-          ],
-          docWorkflows: [
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Подпис',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Съгласуване',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            },
-            {
-              eventDate: new Date(today.getTime() + (24 * 60 * 60 * 1000)),
-              docWorkflowActionName: 'Одобрение',
-              yesNo: true,
-              principalUnitName: 'admin',
-              toUnitName: '',
-              note: null
-            }
-          ],
+          docFiles: [],
+          docWorkflows: _.filter(docWorkflows, { docId: 3 }),
           isVisibleDocWorkflows: true,
           docElectronicServiceStages: _.filter(docStages, { docId: 3 }),
           docRelations: _(docCases).filter({ docCaseId: 3 }).first().docCase,

@@ -70,8 +70,7 @@
       isResolution: false,
       isTask: false,
       docBody: null,
-      privateDocFiles: [],
-      publicDocFiles: [],
+      docFiles: [],
       docWorkflows: [],
       isVisibleDocWorkflows: true,
       docElectronicServiceStages: [],
@@ -178,7 +177,7 @@
 
           return [200, result];
         })
-      .when('POST', '/api/docs/new/create',
+        .when('POST', '/api/docs/new/create',
         function ($jsonData, docs, docCases, docStages) {
 
           if (!$jsonData) {
@@ -193,14 +192,15 @@
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
+          newDoc.docStatusAlias = 'Draft';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.newassignmentType = 2;
           newDoc.assignmentDate = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
 
-          var docTypes = require('./docType');
-          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          var docTypeAlias =
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -211,11 +211,10 @@
             newDoc.isRemark = true;
           }
           else {
-            var docDirections = require('./docDirection');
-            var docDirectionAlias =
-              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+            var docDirectionAlias =_(nomenclatures.docDirection)
+              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
 
-            if (docDirectionAlias === 'Incomming') {
+            if (docDirectionAlias === 'Incoming') {
               newDoc.isDocIncoming = true;
             }
             else if (docDirectionAlias === 'Internal') {
@@ -258,12 +257,11 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStages');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
           var eStage =
-            _(electronicServiceStages)
+            _(nomenclatures.electronicServiceStage)
             .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
             .first();
 
@@ -288,7 +286,7 @@
 
           return [200, { docId: newDoc.docId }];
         })
-      .when('POST', '/api/docs/new/register',
+        .when('POST', '/api/docs/new/register',
         function ($jsonData, docs, docCases, docStages) {
           if (!$jsonData) {
             return [400];
@@ -303,6 +301,7 @@
           newDoc.docId = nextDocId;
           newDoc.docStatusId = 2;
           newDoc.docStatusName = 'Чернова';
+          newDoc.docStatusAlias = 'Draft';
           newDoc.docSubjectLabel = 'Относно';
           newDoc.docSourceType = nomenclatures.docSourceType[1];
           newDoc.regNumber = nextDocId;
@@ -313,8 +312,8 @@
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
           newDoc.regUri = '000030-' + nextDocId + '-' + todayDate.format('YYYY-MM-DD');
 
-          var docTypes = require('./docType');
-          var docTypeAlias = _(docTypes).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+          var docTypeAlias =
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -325,11 +324,10 @@
             newDoc.isRemark = true;
           }
           else {
-            var docDirections = require('./docDirection');
-            var docDirectionAlias =
-              _(docDirections).filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+            var docDirectionAlias = _(nomenclatures.docDirection)
+              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
 
-            if (docDirectionAlias === 'Incomming') {
+            if (docDirectionAlias === 'Incoming') {
               newDoc.isDocIncoming = true;
             }
             else if (docDirectionAlias === 'Internal') {
@@ -372,12 +370,11 @@
           newDoc.docRelations = docCaseObj.docCase;
 
           //Add docElectronicServiceStage
-          var electronicServiceStages = require('./electronicServiceStages');
 
           var nextDocEStageId = _(docStages).pluck('docElectronicServiceStageId').max().value() + 1;
 
           var eStage =
-            _(electronicServiceStages)
+            _(nomenclatures.electronicServiceStage)
             .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
             .first();
 
@@ -402,7 +399,7 @@
 
           return [200, { docId : newDoc.docId, regUri: newDoc.regUri }];
         })
-      .when('GET', '/api/docs/:docId',
+        .when('GET', '/api/docs/:docId',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -412,7 +409,7 @@
 
           return [200, doc];
         })
-       .when('POST', '/api/docs/:docId',
+        .when('POST', '/api/docs/:docId',
         function ($params, $jsonData, $filter, docs) {
           var docId = parseInt($params.docId, 10),
             docIndex = docs.indexOf($filter('filter')(docs, { docId: docId })[0]);
@@ -424,6 +421,166 @@
           docs[docIndex] = $jsonData;
 
           return [200];
+        })
+        .when('POST', '/api/docs/:docId/nextStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          var currentStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: doc.docStatusId })
+              .first();
+
+          if (currentStatus.alias === 'Draft' ||
+              currentStatus.alias === 'Prepared' ||
+              currentStatus.alias === 'Processed') {
+            var newStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: currentStatus.nomValueId + 1 })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
+          }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/reverseStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          var currentStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: doc.docStatusId })
+              .first();
+
+          var newStatus;
+          if (currentStatus.alias === 'Prepared' ||
+              currentStatus.alias === 'Processed' ||
+              currentStatus.alias === 'Finished') {
+            newStatus = _(nomenclatures.docStatus)
+              .filter({ nomValueId: currentStatus.nomValueId - 1 })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
+          }
+          else if (currentStatus.alias === 'Canceled') {
+            newStatus = _(nomenclatures.docStatus)
+              .filter({ alias: 'Processed' })
+              .first();
+
+            doc.docStatusId = newStatus.nomValueId;
+            doc.docStatusName = newStatus.name;
+            doc.docStatusAlias = newStatus.alias;
+          }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/cancelStatus',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          var cancelStatus = _(nomenclatures.docStatus)
+              .filter({ alias: 'Canceled' })
+              .first();
+
+          doc.docStatusId = cancelStatus.nomValueId;
+          doc.docStatusName = cancelStatus.name;
+          doc.docStatusAlias = cancelStatus.alias;
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/setRegUri',
+        function ($params, docs) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          if (!doc.regUri) {
+            doc.regUri = '000030-' + doc.docId + '-' + moment().format('YYYY-MM-DD');
+          }
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/setCasePart',
+        function ($params, $jsonData, docs, docCases) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          var newDocCasePartType = _(nomenclatures.docCasePartType)
+            .filter({ docCasePartTypeId: $jsonData.docCasePartTypeId })
+            .first();
+
+          if (!doc || !newDocCasePartType) {
+            return [400];
+          }
+
+          doc.docCasePartTypeId = newDocCasePartType.docCasePartTypeId;
+          doc.docCasePartTypeName = newDocCasePartType.name;
+
+          var docCase = _(docCases).filter(function (item) {
+            return _(item.docCase).any({ docId: doc.docId });
+          }).first().docCase;
+
+          var docItem = _(docCase).filter({ docId: doc.docId }).first();
+          docItem.casePartType = newDocCasePartType.name;
+
+          return [200, { docId: doc.docId }];
+        })
+        .when('POST', '/api/docs/:docId/setDocType',
+        function ($params, $jsonData, docs, docCases) {
+          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+
+          if (!doc) {
+            return [400];
+          }
+
+          doc.docTypeGroupId = $jsonData.docTypeGroupId;
+          doc.docTypeId = $jsonData.docTypeId;
+          doc.docTypeName = $jsonData.docType.name;
+          doc.docDirectionId = $jsonData.docDirectionId;
+          doc.docDirectionName = $jsonData.docDirection.name;
+
+          doc.docUnitsFrom = $jsonData.docUnitsFrom;
+          doc.docUnitsTo = $jsonData.docUnitsTo;
+          doc.docUnitsCCopy = $jsonData.docUnitsCCopy;
+          doc.docUnitsImportedBy = $jsonData.docUnitsImportedBy;
+          doc.docUnitsMadeBy = $jsonData.docUnitsMadeBy;
+          doc.docUnitsInCharge = $jsonData.docUnitsInCharge;
+          doc.docUnitsControlling = $jsonData.docUnitsControlling;
+          doc.docUnitsRoleReaders = $jsonData.docUnitsRoleReaders;
+          doc.docUnitsEditors = $jsonData.docUnitsEditors;
+          doc.docUnitsRoleRegistrators = $jsonData.docUnitsRoleRegistrators;
+
+          doc.isDocIncoming = $jsonData.isDocIncoming;
+          doc.isDocInternal = $jsonData.isDocInternal;
+          doc.isDocOutgoing = $jsonData.isDocOutgoing;
+          doc.isDocInternalOutgoing = $jsonData.isDocInternalOutgoing;
+          doc.isResolution = $jsonData.isResolution;
+          doc.isRemark = $jsonData.isRemark;
+          doc.isTask = $jsonData.isTask;
+
+          var docCase = _(docCases).filter(function (item) {
+            return _(item.docCase).any({ docId: doc.docId });
+          }).first().docCase;
+
+          var docItem = _(docCase).filter({ docId: doc.docId }).first();
+          docItem.direction = $jsonData.docDirection.name;
+
+          return [200, { docId: doc.docId }];
         });
   });
 }(angular, _, require, jQuery, moment));

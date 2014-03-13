@@ -101,12 +101,6 @@
 
       return $state.go('root.docs.edit.view.selectUnit');
     };
-
-    $scope.removeDocClassification = function () {
-    };
-
-    $scope.addDocClassification = function () {
-    };
   }
 
   DocsViewCtrl.$inject = [

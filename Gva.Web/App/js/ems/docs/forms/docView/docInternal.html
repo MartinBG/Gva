@@ -1,15 +1,17 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   vutreshen
   <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" sc-has-error="docUnitsFrom">
       <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
+      <sc-validation-error field-name="docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" required ng-readonly="!readonly"></sc-nomenclature>
+        <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
         </span>
       </div>
     </div>
+
     <div class="form-group col-md-6">
       <label class="control-label" l10n-text="docs.edit.view.docUnitsTo"></label>
       <div class="input-group input-group-sm">
@@ -83,8 +85,9 @@
       </div>
 
       <div class="row" style="margin-bottom: 5px;">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-3" sc-has-error="assignmentType">
           <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
+          <sc-validation-error field-name="assignmentType" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature name="assignmentType" ng-model="model.assignmentType" alias="'assignmentType'" required ng-readonly="!readonly"></sc-nomenclature>
         </div>
 
@@ -146,25 +149,41 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0" ng-if="readonly || model.privateDocFiles.length > 0 || model.publicDocFiles.length > 0">
+     <accordion-group is-open="model.docFiles.length > 0" ng-if="readonly || model.docFiles.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
-      <div class="row">
-        <div class="col-md-12">
-          <label class="control-label" l10n-text="docs.edit.content.privateDocFiles"></label>
-          <sc-files ng-model="model.privateDocFiles" ng-readonly="!readonly" multiple></sc-files>
+
+      <div ng-if="!readonly">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label class="control-label">Вътрешни файлове</label>
+            <div class="input-group input-group-sm">
+              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 1}">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label class="control-label">Публични файлове</label>
+            <div class="input-group input-group-sm">
+              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 2}">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12" style="margin-bottom: 5px;">
-          <label class="control-label" l10n-text="docs.edit.content.publicDocFiles"></label>
-          <sc-files ng-model="model.publicDocFiles" ng-readonly="!readonly" multiple></sc-files>
-        </div>
-      </div>
+
+      <ems-doc-view-doc-files name="docFilesForm" ng-model="model" readonly="readonly" ng-if="readonly"></ems-doc-view-doc-files>
     </accordion-group>
 
-    <accordion-group is-open="false">
+    <accordion-group is-open="model.docClassifications.length > 0" ng-if="readonly || model.accessCode">
       <accordion-heading>
           <a l10n-text="docs.edit.view.classification" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -176,35 +195,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th><span l10n-text="docs.edit.classifications.name"></span></th>
-                <th><span l10n-text="docs.edit.classifications.date"></span></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody ng-repeat="dc in model.docClassifications">
-              <tr>
-                <td>{{ dc.classificationName }}</td>
-                <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
-                <td style="text-align: right;">
-                  <a ng-show="readonly" sc-click="$raise('scOnRemoveDc', dc)" l10n-text="docs.edit.classifications.delete" style="cursor: pointer;"></a>
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <td colspan="3" style="text-align: right;">
-                  <a ng-show="readonly" sc-click="$raise('scOnAddDc', dc)" l10n-text="docs.edit.classifications.add" style="cursor: pointer;"></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <ems-doc-view-doc-classification name="docClassificationForm" ng-model="model" readonly="readonly"></ems-doc-view-doc-classification>
     </accordion-group>
 
   </accordion>

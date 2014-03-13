@@ -1,0 +1,31 @@
+﻿  <div class="well-sm panel-body">
+    <ng-form name="workflowForm" sc-validate="{}">
+      <div class="well-sm panel-body ">
+
+        <div class="row">
+
+          <div class="form-group col-sm-4" sc-has-error="toUnits">
+            <label class="control-label" l10n-text="docs.edit.workflows.request.toUnit"></label>
+            <sc-nomenclature ng-model="workflowModel.toUnits" name="toUnits" alias="'unit'" multiple required></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-4" sc-has-error="note">
+            <label class="control-label" l10n-text="docs.edit.workflows.request.note"></label>
+            <sc-textarea rows="1" class="form-control" ng-model="workflowModel.note"></sc-textarea>
+          </div>
+
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="docs.edit.workflows.request.fromUser"></label>
+            <sc-text ng-model="workflowModel.userName" name="userName" readonly="true"></sc-text>
+          </div>
+
+        </div>
+
+      </div>
+    </ng-form>
+
+    <div class="col-sm-3 col-sm-offset-5">
+      <sc-button name="saveBtn" btn-click="save()" text="docs.edit.workflows.request.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.workflows.request.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>

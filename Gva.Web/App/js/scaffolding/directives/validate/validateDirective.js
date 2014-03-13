@@ -26,7 +26,7 @@
       require: ['?ngModel', '?form'],
       scope: false,
       link: function (scope, element, attrs, controllers) {
-        var parentForms = _.map(element.parents('ng-form'), function (formElem) {
+        var parentForms = _.map(element.parents('ng-form, [ng-form]'), function (formElem) {
               return angular.element(formElem).controller('form');
             }),
             scValidate = $parse(attrs.scValidate)(scope),

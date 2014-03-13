@@ -18,19 +18,23 @@
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocIncoming',
-      templateUrl: 'ems/docs/forms/docView/docIncoming.html'
+      templateUrl: 'ems/docs/forms/docView/docIncoming.html',
+      controller: 'DocIncomingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocInternal',
-      templateUrl: 'ems/docs/forms/docView/docInternal.html'
+      templateUrl: 'ems/docs/forms/docView/docInternal.html',
+      controller: 'DocInternalCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocInternalOutgoing',
-      templateUrl: 'ems/docs/forms/docView/docInternalOutgoing.html'
+      templateUrl: 'ems/docs/forms/docView/docInternalOutgoing.html',
+      controller: 'DocInternalOutgoingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocOutgoing',
-      templateUrl: 'ems/docs/forms/docView/docOutgoing.html'
+      templateUrl: 'ems/docs/forms/docView/docOutgoing.html',
+      controller: 'DocOutgoingCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewRemark',
@@ -38,11 +42,23 @@
     });
     scaffoldingProvider.form({
       name: 'emsDocViewResolution',
-      templateUrl: 'ems/docs/forms/docView/resolution.html'
+      templateUrl: 'ems/docs/forms/docView/resolution.html',
+      controller: 'ResolutionCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewTask',
-      templateUrl: 'ems/docs/forms/docView/task.html'
+      templateUrl: 'ems/docs/forms/docView/task.html',
+      controller: 'TaskCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocFiles',
+      templateUrl: 'ems/docs/forms/docView/docFiles.html',
+      controller: 'DocFilesCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocViewDocClassification',
+      templateUrl: 'ems/docs/forms/docView/docClassification.html',
+      controller: 'DocClassificationCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -55,11 +71,21 @@
       .state(['root.docs.edit.view.selectCorr'      , '/selectCorr?displayName&email', ['@root.docs.edit' , 'ems/docs/views/selectCorrView.html'      , 'SelectCorrViewCtrl'     ]])
       .state(['root.docs.edit.view.selectUnit'      , '/selectUnit?name'             , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'      , 'SelectUnitViewCtrl'     ]])
       .state(['root.docs.edit.workflows'            , '/workflows'                   , ['@root.docs.edit' , 'ems/docs/views/docsWorkflows.html'       , 'DocsWorkflowsCtrl'      ]])
+      .state(['root.docs.edit.workflows.signRequest', '/signRequest'                 , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
+      .state(['root.docs.edit.workflows.discussRequest', '/discussRequest'           , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
+      .state(['root.docs.edit.workflows.approvalRequest', '/approvalRequest'           , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
+      .state(['root.docs.edit.workflows.registrationRequest', '/registrationRequest' , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
+      .state(['root.docs.edit.workflows.signConfirm', '/signConfirm'                 , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
+      .state(['root.docs.edit.workflows.discussConfirm', '/discussConfirm'           , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
+      .state(['root.docs.edit.workflows.approvalConfirm', '/approvalConfirm'           , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
       .state(['root.docs.edit.stages'               , '/stages'                      , ['@root.docs.edit' , 'ems/docs/views/docsStages.html'          , 'DocsStagesCtrl'         ]])
       .state(['root.docs.edit.stages.next'          , '/next'                        , ['@root.docs.edit' , 'ems/docs/views/nextStage.html'           , 'NextStageCtrl'          ]])
       .state(['root.docs.edit.stages.edit'          , '/edit'                        , ['@root.docs.edit' , 'ems/docs/views/editStage.html'           , 'EditStageCtrl'          ]])
       .state(['root.docs.edit.stages.end'           , '/end'                         , ['@root.docs.edit' , 'ems/docs/views/endStage.html'            , 'EndStageCtrl'           ]])
       .state(['root.docs.edit.case'                 , '/case'                        , ['@root.docs.edit' , 'ems/docs/views/docsCase.html'            , 'DocsCaseCtrl'           ]])
+      .state(['root.docs.edit.case.casePart'    , '/casePart'                    , ['@root.docs.edit' , 'ems/docs/views/editCasePart.html'        , 'EditCasePartCtrl'       ]])
+      .state(['root.docs.edit.case.docType'     , '/docType'                     , ['@root.docs.edit' , 'ems/docs/views/editDocType.html'        , 'EditDocTypeCtrl'       ]])
+      .state(['root.docs.edit.case.docType.selectUnit'      , '/selectUnit?name'             , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'      , 'SelectUnitViewCtrl'     ]])
       .state(['root.corrs'                          , '/corrs?displayName&email'                                                                                                  ])
       .state(['root.corrs.search'                   , ''                             , ['@root'                , 'ems/corrs/views/corrSearch.html'    , 'CorrsSearchCtrl'        ]])
       .state(['root.corrs.new'                      , '/new'                         , ['@root'                , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'          ]])

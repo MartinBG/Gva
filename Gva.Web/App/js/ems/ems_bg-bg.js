@@ -8,11 +8,15 @@
           child: 'Подчинен',
           document: 'Документ',
           resolution: 'Резолюция',
+          remark: 'Забележка',
           task: 'Задача',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
           management: 'Управление',
+          caseManagement: 'Преписка',
+          casePart: 'Част на преписка',
+          docType: 'Техн. редакция на документ',
           docPrepared: 'Отбелязване като изготвен',
           docProcessed: 'Отбелязване като обработен',
           docFinished: 'Отбелязване като приключен',
@@ -94,7 +98,23 @@
             principalUnitName: 'От',
             toUnitName: 'До',
             note: 'Забележка',
-            'delete': 'изтрий'
+            'delete': 'изтрий',
+            request: {
+              toUnit: 'Към служител',
+              fromUser: 'От',
+              note: 'Забележка',
+              save: 'Запис',
+              cancel: 'Отказ'
+            },
+            confirm: {
+              fromUser: 'От служител',
+              note: 'Забележка',
+              sign: 'Подписвам',
+              approve: 'Одобрявам',
+              coordinate: 'Съгласувам',
+              save: 'Запис',
+              cancel: 'Отказ'
+            }
           },
           stages: {
             startingDate: 'Нач. дата',
@@ -112,7 +132,29 @@
             viewDoc: 'преглед',
             viewApplication: 'преглед',
             doc: 'Документ',
-            application: 'Заявление'
+            application: 'Заявление',
+            casePart: {
+              partOf: 'Част от преписка',
+              save: 'Запис',
+              cancel: 'Отказ'
+            },
+            docType: {
+              docTypeGroup: 'Група',
+              docType: 'Вид',
+              docDirection: 'Част от преписка',
+              save: 'Запис',
+              cancel: 'Отказ',
+              from: 'От',
+              to: 'До',
+              cCopy: 'Копие до',
+              importedBy: 'Въвел',
+              madeBy: 'Изготвил',
+              inCharge: 'Отговорник',
+              controlling: 'Контролиращ',
+              roleReaders: 'Читатели',
+              editors: 'Редактори',
+              roleRegistrators: 'Регистратори'
+            }
           },
           classifications: {
             name: 'Класификационна схема',
@@ -120,7 +162,6 @@
             'delete': 'изтрий',
             add: 'добави'
           }
-
         },
         nextStage: {
           stage: 'Етап',
@@ -129,7 +170,7 @@
           expectedEndingDate: 'Очаквана дата прикл.',
           endingDate: 'Дата на приключване',
           save: 'Запис',
-          back: 'Назад'
+          cancel: 'Отказ'
         },
         search: {
           fromDate: 'От дата',
@@ -239,11 +280,20 @@
         'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
         'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
+        'root.docs.edit.workflows.signRequest': 'Искане за подпис',
+        'root.docs.edit.workflows.discussRequest': 'Искане за съгласуване',
+        'root.docs.edit.workflows.approvalRequest': 'Искане за одобрение',
+        'root.docs.edit.workflows.registrationRequest': 'Искане за регистрация',
+        'root.docs.edit.workflows.signConfirm': 'Подписване',
+        'root.docs.edit.workflows.discussConfirm': 'Съгласуване',
+        'root.docs.edit.workflows.approvalConfirm': 'Одобрение',
         'root.docs.edit.stages': 'Етапи',
         'root.docs.edit.stages.next': 'Следващ етап',
         'root.docs.edit.stages.edit': 'Редакция на етап',
         'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
+        'root.docs.edit.case.casePart': 'Смяна на част на преписка',
+        'root.docs.edit.case.docType': 'Техническа редакция на документ',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

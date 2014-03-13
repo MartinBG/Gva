@@ -1,8 +1,9 @@
-﻿/*global angular, _, moment*/
+﻿/*global angular, _, require, moment*/
 (function (angular, _, moment) {
   'use strict';
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
+    var nomenclatures = require('./nomenclatures.sample');
     var defaultDoc = {
       docId: null,
       parentDocId: null,
@@ -54,8 +55,7 @@
       isVisibleCollapsePermissions: false,
       isRead: false,
       docBody: null,
-      privateDocFiles: [],
-      publicDocFiles: [],
+      docFiles: [],
       docWorkflows: [],
       isVisibleDocWorkflows: true,
       docElectronicServiceStages: [],
@@ -256,11 +256,34 @@
             applicationLotFile.setPartName = '*';
           }
 
-          if (!!$jsonData.files.length) {
-            doc.publicDocFiles.push($jsonData.files[0]);
+          if (!!$jsonData.file) {
+            var nextDocFileId = 0;
+            _(docs).map(function (doc) {
+              var id = _(doc.docFiles).pluck('docFileId').max().value();
+              if (id > nextDocFileId) {
+                nextDocFileId = id;
+              }
+            });
+            nextDocFileId++;
+
+            var docFile = {
+              docFileId: nextDocFileId,
+              docId: doc.docId,
+              docFileKindId: $jsonData.file.docFileKindId,
+              docFileKind: nomenclatures.getById('docFileKinds', $jsonData.file.docFileKindId),
+              docFileTypeId: $jsonData.file.docFileTypeId,
+              docFileType: nomenclatures.getById('docFileTypes', $jsonData.file.docFileTypeId),
+              docFile: $jsonData.file.docFile,
+              isNew: false,
+              isDirty: false,
+              isDeleted: false,
+              isInEdit: false
+            };
+
+            doc.docFiles.push(docFile);
 
             applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
-            applicationLotFile.docFileKey = $jsonData.files[0].key;
+            applicationLotFile.docFileKey = $jsonData.file.docFile.key;
             applicationLotFile.lotId = application.lotId;
             applicationLotFile.partIndex = docPart.partIndex;
             applicationLotFile.part = docPart.part;
@@ -275,9 +298,13 @@
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
           var doc = _(docs).filter(function (doc) {
-            return _(doc.publicDocFiles).filter({ key: $jsonData.docFileKey }).first();
+            return _(doc.docFiles).filter(function (docFile) {
+              return _(docFile).filter({ key: $jsonData.docFileKey }).first();
+            });
           }).first();
-          var docFile = _(doc.publicDocFiles).filter({ key: $jsonData.docFileKey }).first();
+          var docFile = _(doc.docFiles).filter(function (docFile) {
+            return _(docFile).filter({ key: $jsonData.docFileKey }).first();
+          }).first();
           var applicationLotFile = {},
               docPart = {},
               nextApplicationLotFileId = _(applicationLotFiles)
@@ -329,8 +356,8 @@
           }
 
           applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
-          applicationLotFile.docFileKey = docFile.key;
-          applicationLotFile.lotId = application.lotId;
+          applicationLotFile.docFileKey = docFile.docFile.key;
+          applicationLotFile.lotId = person.lotId;
           applicationLotFile.partIndex = docPart.partIndex;
           applicationLotFile.part = $jsonData.part;
           applicationLotFile.setPartAlias = $jsonData.setPartAlias;
@@ -343,9 +370,13 @@
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
           var doc = _(docs).filter(function (doc) {
-            return _(doc.publicDocFiles).filter({ key: $jsonData.docFileKey }).first();
+            return _(doc.docFiles).filter(function (docFile) {
+              return _(docFile).filter({ key: $jsonData.docFileKey }).first();
+            });
           }).first();
-          var docFile = _(doc.publicDocFiles).filter({ key: $jsonData.docFileKey }).first();
+          var docFile = _(doc.docFiles).filter(function (docFile) {
+            return _(docFile).filter({ key: $jsonData.docFileKey }).first();
+          }).first();
           var docPart = null,
               applicationLotFile = {},
               nextApplicationLotFileId = _(applicationLotFiles)
@@ -395,8 +426,8 @@
             });
 
             applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
-            applicationLotFile.docFileKey = docFile.key;
-            applicationLotFile.lotId = parseInt($jsonData.personId, 10);
+            applicationLotFile.docFileKey = docFile.docFile.key;
+            applicationLotFile.lotId = person.lotId;
             applicationLotFile.part = docPart.part;
             applicationLotFile.partIndex = docPart.partIndex;
             applicationLotFile.setPartAlias = $jsonData.setPartAlias;

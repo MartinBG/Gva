@@ -1,21 +1,21 @@
 ﻿<div ng-if="doc.isDocIncoming">
-  <ems-doc-view-doc-incoming name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-incoming>
+  <ems-doc-view-doc-incoming name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-incoming>
 </div>
 <div ng-if="doc.isDocInternal">
-  <ems-doc-view-doc-internal name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-internal>
+  <ems-doc-view-doc-internal name="docViewForm" sc-on-select-unit="selectUnit($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-internal>
 </div>
 <div ng-if="doc.isDocOutgoing">
-  <ems-doc-view-doc-outgoing name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-outgoing>
+  <ems-doc-view-doc-outgoing name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-outgoing>
 </div>
 <div ng-if="doc.isDocInternalOutgoing">
-  <ems-doc-view-doc-internal-outgoing name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-internal-outgoing>
+  <ems-doc-view-doc-internal-outgoing name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" readonly="inEditMode" ng-model="doc"></ems-doc-view-doc-internal-outgoing>
 </div>
 <div ng-if="doc.isResolution">
-  <ems-doc-view-resolution name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-resolution>
+  <ems-doc-view-resolution name="docViewForm" sc-on-select-unit="selectUnit($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-resolution>
 </div>
 <div ng-if="doc.isRemark">
-  <ems-doc-view-remark name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-remark>
+  <ems-doc-view-remark name="docViewForm" sc-on-select-unit="selectUnit($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-remark>
 </div>
 <div ng-if="doc.isTask">
-  <ems-doc-view-task name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-remove-dc="removeDocClassification($message)" sc-on-add-dc="addDocClassification($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-task>
+  <ems-doc-view-task name="docViewForm" sc-on-select-unit="selectUnit($message)" readonly="inEditMode" ng-model="doc"></ems-doc-view-task>
 </div>

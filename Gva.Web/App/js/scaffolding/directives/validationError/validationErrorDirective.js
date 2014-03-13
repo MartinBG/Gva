@@ -16,7 +16,7 @@
       },
       templateUrl: 'scaffolding/directives/validationError/validationErrorDirective.html',
       link: function (scope, element) {
-        scope.form = element.parents('ng-form').first().controller('form');
+        scope.form = element.parent().controller('form');
         scope.validations = [];
         _.forOwn(scope.getValidations(), function (text, type) {
           scope.validations.push({

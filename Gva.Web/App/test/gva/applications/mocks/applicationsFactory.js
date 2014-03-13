@@ -13,7 +13,7 @@
           docFile: value,
           appFile: null
         };
-        var appLotFile = _(applicationLotFiles).filter({ docFileKey: value.key }).first();
+        var appLotFile = _(applicationLotFiles).filter({ docFileKey: value.docFile.key }).first();
 
         if (!!appLotFile) {
           docFiles.appFile = {};
@@ -31,7 +31,7 @@
           docInfo: value,
           docFiles: null
         };
-        var docFiles = _(docs).filter({ docId: value.docId }).first().publicDocFiles;
+        var docFiles = _(docs).filter({ docId: value.docId }).first().docFiles;
 
         if (!!docFiles) {
           docCase.docFiles = docFiles.map(docFileMapper);
