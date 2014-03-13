@@ -9,9 +9,11 @@ Usage: <sc-column model-name="property"
         </sc-column>
 */
 
-/*global angular*/
-(function (angular) {
+/*global angular, navigator*/
+(function (angular, navigator) {
   'use strict';
+
+  var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
 
   function ColumnDirective($rootScope) {
     return {
@@ -22,7 +24,7 @@ Usage: <sc-column model-name="property"
         return function(scope, iElement, iAttrs, scDatatable, childTranscludeFn){
           var tempScope = scope.$new(),
               childContent = childTranscludeFn(tempScope, function () { }),
-              hasChildContent = childContent.length > 1,
+              hasChildContent = childContent.length > 1 || (msie < 9 && childContent.length > 0),
               createCellFunc;
           childContent.remove();
           tempScope.$destroy();
@@ -64,4 +66,4 @@ Usage: <sc-column model-name="property"
   ColumnDirective.$inject = ['$rootScope'];
 
   angular.module('scaffolding').directive('scColumn', ColumnDirective);
-}(angular));
+}(angular, navigator));

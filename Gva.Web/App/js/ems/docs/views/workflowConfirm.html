@@ -13,7 +13,7 @@
             <label ng-show="workflowModel.docWorkflowActionId === 5" class="control-label" l10n-text="docs.edit.workflows.confirm.sign"></label>
             <label ng-show="workflowModel.docWorkflowActionId === 6" class="control-label" l10n-text="docs.edit.workflows.confirm.coordinate"></label>
             <label ng-show="workflowModel.docWorkflowActionId === 7" class="control-label" l10n-text="docs.edit.workflows.confirm.approve"></label>
-            <sc-select name="confirm" class="form-control input-sm" ng-model="workflowModel.confirm" required sc-select="{ allowClear: true, placeholder: ' ', data: [{ text: 'Да', id: true }, { text: 'Не', id: false }] }"><sc-select/>
+            <sc-select name="confirm" class="form-control input-sm" ng-model="workflowModel.confirm" required sc-select="{ allowClear: true, placeholder: ' ', data: [{ text: 'Да', id: true }, { text: 'Не', id: false }] }"></sc-select>
           </div>
 
           <div class="form-group col-sm-4" sc-has-error="note">
