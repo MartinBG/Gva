@@ -6,12 +6,13 @@
     organizationAddresses = require('./organization-address.sample'),
     certAirportOperators = require('./organization-cert-airportoperator.sample'),
     organizationAuditplans = require('./organization-auditplan.sample'),
-    staffManagement = require('./organization-staff-managment.sample');
+    staffManagement = require('./organization-staff-managment.sample'),
+    organizationOtherDocuments = require('./organization-document-other.sample');
 
   angular.module('app').constant('organizationLots', [
     {
       lotId: 1,
-      nextIndex: 10,
+      nextIndex: 13,
       organizationData: {
         partIndex: 1,
         part: organizationData.organization1Data
@@ -54,6 +55,20 @@
         {
           partIndex: 9,
           part: staffManagement.staffManagement2
+        }
+      ],
+      organizationDocumentOthers: [
+        {
+          partIndex: 10,
+          part: organizationOtherDocuments.organization1Doc1
+        },
+        {
+          partIndex: 11,
+          part: organizationOtherDocuments.organization1Doc2
+        },
+        {
+          partIndex: 12,
+          part: organizationOtherDocuments.organization1Doc3
         }
       ]
     }

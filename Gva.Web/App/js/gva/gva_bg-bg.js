@@ -1482,6 +1482,14 @@
         }
       },
       organizations: {
+        publishers: {
+          text: 'Текст',
+          publisherType: 'Тип',
+          name: 'Наименование',
+          back: 'Назад',
+          search: 'Търси',
+          select: 'Избор'
+        },
         search: {
           newOrganization: 'Нова организация',
           search: 'Търси',
@@ -1568,6 +1576,38 @@
         editStaffManagement: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        otherSearch: {
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          organizationOtherDocumentType: 'Тип документ',
+          organizationOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          newOther: 'Нов документ'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        organizationOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          organizationOtherDocumentType: 'Тип документ',
+          organizationOtherDocumentRole: 'Роля',
+          valid: 'Действителен'
         },
         staffManagementDirective: {
           title: 'Ръководен персонал',

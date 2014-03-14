@@ -390,6 +390,10 @@
     ],
 
     //Номенклатура Изисквания към раздел
-    auditPartRequirements: require('./auditPartRequirement')
+    auditPartRequirements: require('./auditPartRequirement'),
+
+    organizationOtherDocumentTypes: require('./personOtherDocumentType'),
+
+    organizationOtherDocumentRoles: require('./documentRole')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);
