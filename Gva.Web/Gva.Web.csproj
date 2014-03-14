@@ -479,8 +479,10 @@
     <Content Include="App\js\gva\aircrafts\views\documentOccurrences\docOccurrencesSearchCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationCertAirportOperator.html" />
     <Content Include="App\js\gva\organizations\forms\organizationData.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAddress.html" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertAirportOperators.js" />
     <Content Include="App\js\gva\organizations\resources\organization.js" />
     <Content Include="App\js\gva\organizations\resources\organizationData.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAddress.js" />
@@ -490,6 +492,12 @@
     <Content Include="App\js\gva\organizations\views\addresses\addrNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearch.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsNew.html" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\certAirportOperators\certAirportOperatorsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationsNew.html" />
     <Content Include="App\js\gva\organizations\views\organizationsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationsSearch.html" />
@@ -942,6 +950,7 @@
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
     <Content Include="App\test\scaffolding\pageObjects\breadcrumb.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationCertAirportOperatorsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationLots.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationDataHttp.js" />
@@ -1222,6 +1231,9 @@
     <ExcludeFromPackageFiles Include="App\test\**\*.*">
       <InProject>false</InProject>
     </ExcludeFromPackageFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\organizations\organization-cert-airportoperator.sample.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

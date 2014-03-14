@@ -3,12 +3,13 @@
   'use strict';
 
   var organizationData = require('./organization-data.sample'),
-    organizationAddresses = require('./organization-address.sample');
+    organizationAddresses = require('./organization-address.sample'),
+    certAirportOperators = require('./organization-cert-airportoperator.sample');
 
   angular.module('app').constant('organizationLots', [
     {
       lotId: 1,
-      nextIndex: 4,
+      nextIndex: 6,
       organizationData: {
         partIndex: 1,
         part: organizationData.organization1Data
@@ -21,6 +22,16 @@
         {
           partIndex: 3,
           part: organizationAddresses.organization1Address2
+        }
+      ],
+      certAirportOperators: [
+        {
+          partIndex: 4,
+          part: certAirportOperators.organization1CertAirportOperator1
+        },
+        {
+          partIndex: 5,
+          part: certAirportOperators.organization1CertAirportOperator2
         }
       ]
     }

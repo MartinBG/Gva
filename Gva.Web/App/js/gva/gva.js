@@ -204,6 +204,10 @@
       name: 'gvaOrganizationAddress',
       templateUrl: 'gva/organizations/forms/organizationAddress.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationCertAirportOperator',
+      templateUrl: 'gva/organizations/forms/organizationCertAirportOperator.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -380,6 +384,10 @@
       .state(['root.organizations.view.addresses'                       , '/addresses'                                                                                                                                                               ])
       .state(['root.organizations.view.addresses.search'                , ''                                           , ['@root.organizations.view', 'gva/organizations/views/addresses/addrSearch.html'          , 'OrganizationAddressesSearchCtrl'     ]])
       .state(['root.organizations.view.addresses.new'                   , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/addresses/addrNew.html'             , 'OrganizationAddressesNewCtrl'        ]])
-      .state(['root.organizations.view.addresses.edit'                  , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/addresses/addrEdit.html'            , 'OrganizationAddressesEditCtrl'       ]]);
+      .state(['root.organizations.view.addresses.edit'                  , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/addresses/addrEdit.html'            , 'OrganizationAddressesEditCtrl'       ]])
+      .state(['root.organizations.view.certAirportOperators'            , '/certAirportOperators'                                                                                                                                                                      ])
+      .state(['root.organizations.view.certAirportOperators.search'     , ''                                           , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsSearch.html', 'CertAirportOperatorsSearchCtrl' ]])
+      .state(['root.organizations.view.certAirportOperators.new'        , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsNew.html'   , 'CertAirportOperatorsNewCtrl'    ]])
+      .state(['root.organizations.view.certAirportOperators.edit'       , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsEdit.html'  , 'CertAirportOperatorsEditCtrl'   ]]);
   }]);
 }(angular));

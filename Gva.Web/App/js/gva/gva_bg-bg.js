@@ -1506,6 +1506,14 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        editCertAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        newCertAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         newAddress: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -1562,6 +1570,9 @@
           postalCode: 'Пощенски код',
           contactPerson: 'Лице за контакти',
           email: 'E-мейл адрес'
+        },
+        certAirportOperatorDirective: {
+          title: 'Лиценз на летищен оператор'
         }
       },
       errorTexts: {
