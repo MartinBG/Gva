@@ -9,7 +9,10 @@
         name: organization.organizationData.part.name,
         CAO: organization.organizationData.part.CAO,
         uin: organization.organizationData.part.uin,
-        organizationType: organization.organizationData.part.organizationType.name
+        organizationType: organization.organizationData.part.organizationType.name,
+        dateCAOValidTo: organization.organizationData.part.dateCAOValidTo,
+        dateValidTo: organization.organizationData.part.dateValidTo,
+        valid: organization.organizationData.part.valid.name
       };
     }
 

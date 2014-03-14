@@ -380,6 +380,13 @@
     organizationTypes: require('./organizationsType'),
 
     //Номенклатура Видове организации
-    organizationKinds: require('./organizationKind')
+    organizationKinds: require('./organizationKind'),
+
+    //Номенклатура Физически лица
+    persons: [
+      { nomValueId: 1, code: 'P2', name: 'Петър Лалов', nameAlt: 'Петър Лалов', alias: 'P1' },
+      { nomValueId: 2, code: 'P2', name: 'Пламен Илиев', nameAlt: 'Пламен Илиев', alias: 'P2' },
+      { nomValueId: 3, code: 'P3', name: 'Пламен Пилев', nameAlt: 'Пламен Пилев', alias: 'P3' },
+    ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

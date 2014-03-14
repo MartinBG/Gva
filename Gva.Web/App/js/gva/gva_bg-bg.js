@@ -1488,7 +1488,8 @@
           CAO: 'CAO',
           valid: 'Валидност',
           organizationType: 'Тип организация',
-          dateValidTo: 'Валидност до'
+          dateValidTo: 'Валидност до',
+          dateCAOValidTo: 'САО - дата на валидност'
         },
         viewOrganization: {
           name: 'Наименование',
@@ -1505,6 +1506,27 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        newAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        addressSearch: {
+          newAddress: 'Нов aдрес',
+          addressType: 'Тип',
+          valid: 'Валидно',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          addressAlt: ' Адрес на поддържащ език',
+          phone: 'Телефон(и) за връзка на този адрес',
+          fax: 'Факс',
+          postalCode: 'Пощенски код',
+          contactPerson: 'Лице за контакти',
+          email: 'E-мейл адрес'
+        },
         organizationDataDirective: {
           title: 'Данни за организация',
           name: 'Наименование',
@@ -1514,7 +1536,7 @@
           CAO: 'CAO №',
           dateCAOFirstIssue: 'Първо издаване',
           dateCAOLastIssue: 'Последна ревизия',
-          dateCAOValidTo: 'Валидност',
+          dateCAOValidTo: 'САО - дата на валидност',
           ICAO: 'ICAO №',
           IATA: 'IATA №',
           SITA: 'SITA №',
@@ -1526,6 +1548,20 @@
           valid: 'Валидност',
           dateValidTo: 'Валидност до',
           docRoom: 'Документацията е в стая'
+        },
+        organizationAddressDirective: {
+          title: 'Адрес',
+          newAddress: 'Нов aдрес',
+          addressType: 'Тип',
+          valid: 'Валидно',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          addressAlt: ' Адрес на поддържащ език',
+          phone: 'Телефон(и) за връзка на този адрес',
+          fax: 'Факс',
+          postalCode: 'Пощенски код',
+          contactPerson: 'Лице за контакти',
+          email: 'E-мейл адрес'
         }
       },
       errorTexts: {
@@ -1664,7 +1700,11 @@
         'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка',
         'root.organizations': 'Организации',
         'root.organizations.new': 'Нова организация',
-        'root.organizations.view': 'Данни за организация'
+        'root.organizations.view': 'Данни за организация',
+        'root.organizations.view.edit': 'Редакция',
+        'root.organizations.view.addresses': 'Адреси',
+        'root.organizations.view.addresses.new': 'Нов адрес',
+        'root.organizations.view.addresses.edit': 'Редакция на адрес'
       }
     });
   }]);

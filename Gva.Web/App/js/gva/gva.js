@@ -200,6 +200,10 @@
       name: 'gvaOrganizationData',
       templateUrl: 'gva/organizations/forms/organizationData.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAddress',
+      templateUrl: 'gva/organizations/forms/organizationAddress.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -368,10 +372,14 @@
       .state(['root.aircrafts.view.parts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsSearch.html'                          , 'PartsSearchCtrl'                ]])
       .state(['root.aircrafts.view.parts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsNew.html'                             , 'PartsNewCtrl'                   ]])
       .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                            , 'PartsEditCtrl'                  ]])
-      .state(['root.organizations'                                      , '/organizations'                                                                                                                                                                  ])
-      .state(['root.organizations.search'                               , ''                                           , ['@root'               , 'gva/organizations/views/organizationsSearch.html'                  , 'OrganizationsSearchCtrl'          ]])
-      .state(['root.organizations.new'                                  , '/new'                                       , ['@root'               , 'gva/organizations/views/organizationsNew.html'                     , 'OrganizationsNewCtrl'             ]])
-      .state(['root.organizations.view'                                 , '/:id'                                       , ['@root'               , 'gva/organizations/views/organizationsView.html'                    , 'OrganizationsViewCtrl'            ]])
-      .state(['root.organizations.view.edit'                            , '/organizationData'                          , ['@root'               , 'gva/organizations/views/organizationData/organizationDataEdit.html', 'OrganizationDataEditCtrl'         ]]);
+      .state(['root.organizations'                                      , '/organizations'                                                                                                                                                                 ])
+      .state(['root.organizations.search'                               , ''                                           , ['@root'                   , 'gva/organizations/views/organizationsSearch.html'                  , 'OrganizationsSearchCtrl'      ]])
+      .state(['root.organizations.new'                                  , '/new'                                       , ['@root'                   , 'gva/organizations/views/organizationsNew.html'                     , 'OrganizationsNewCtrl'         ]])
+      .state(['root.organizations.view'                                 , '/:id'                                       , ['@root'                   , 'gva/organizations/views/organizationsView.html'                    , 'OrganizationsViewCtrl'        ]])
+      .state(['root.organizations.view.edit'                            , '/organizationData'                          , ['@root'                   , 'gva/organizations/views/organizationData/organizationDataEdit.html', 'OrganizationDataEditCtrl'     ]])
+      .state(['root.organizations.view.addresses'                       , '/addresses'                                                                                                                                                               ])
+      .state(['root.organizations.view.addresses.search'                , ''                                           , ['@root.organizations.view', 'gva/organizations/views/addresses/addrSearch.html'          , 'OrganizationAddressesSearchCtrl'     ]])
+      .state(['root.organizations.view.addresses.new'                   , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/addresses/addrNew.html'             , 'OrganizationAddressesNewCtrl'        ]])
+      .state(['root.organizations.view.addresses.edit'                  , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/addresses/addrEdit.html'            , 'OrganizationAddressesEditCtrl'       ]]);
   }]);
 }(angular));

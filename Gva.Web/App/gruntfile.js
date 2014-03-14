@@ -59,7 +59,8 @@ module.exports = function (grunt) {
         'schema/aircrafts/aircraft-maintenance.sample.js',
         'schema/aircrafts/aircraft-document-owner.sample.js',
         'schema/aircrafts/aircraft-parts.sample.js',
-        'schema/organizations/organization-data.sample.js'
+        'schema/organizations/organization-data.sample.js',
+        'schema/organizations/organization-address.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
