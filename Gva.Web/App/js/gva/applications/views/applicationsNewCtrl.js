@@ -50,7 +50,9 @@
               docTypeId: $scope.appModel.docType.nomValueId,
               docTypeName: $scope.appModel.docType.name,
               docSubject: $scope.appModel.docSubject
-            }
+            },
+            appPart: $scope.appModel.appPart,
+            appFile: $scope.appModel.appFile
           };
 
           Application.createNew(newApplication).$promise.then(function (result) {

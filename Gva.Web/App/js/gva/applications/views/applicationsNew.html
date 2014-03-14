@@ -47,8 +47,48 @@
             </div>
           </div>
 
+          <gva-person-document-application name="personDocumentApplicationForm" ng-model="appModel.appPart"></gva-person-document-application>
+
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
+            <div class="well-sm panel-body">
+              <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                      <th>Наименование</th>
+                      <th>Вид файл</th>
+                      <th>Тип файл</th>
+                      <th>Прикачен файл</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td style="width: 400px;" sc-has-error="name">
+                      <sc-text name="name" ng-model="appModel.appFile.name" required></sc-text>
+                    </td>
+                    <td style="width: 150px;" sc-has-error="docFileKind">
+                        <sc-nomenclature name="docFileKind" ng-model="appModel.appFile.docFileKindId" nom-obj="appModel.appFile.docFileKind" mode="id" alias="'docFileKinds'" required></sc-nomenclature>
+                    </td>
+                    <td style="width: 250px;" sc-has-error="docFileType">
+                      <sc-nomenclature name="docFileType" ng-model="appModel.appFile.docFileTypeId" nom-obj="appModel.appFile.docFileType" mode="id" alias="'docFileTypes'" required></sc-nomenclature>
+                    </td>
+                    <td sc-has-error="docFile">
+                      <sc-files name="docFile" ng-model="appModel.appFile.docFile" required></sc-files>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="form-group col-sm-3" ng-if="isLinkNew === 'true'">
+                  <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
+                  <sc-files ng-model="docFile" ng-readonly="true"></sc-files>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </form>
     </div>
- </div>
+  </div>
 </div>
