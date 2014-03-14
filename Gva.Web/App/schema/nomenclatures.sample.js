@@ -104,12 +104,17 @@
         nomValueId: 6, code: '6', name: 'Обучение', nameAlt: 'DocumentTraining', alias: 'DocumentTraining', textContent: {
           setPartId: 6
         }
+      },
+      {
+        nomValueId: 7, code: '7', name: 'Друг документ', nameAlt: 'DocumentOther', alias: 'DocumentOther', textContent: {
+          setPartId: 7
+        }
+      },
+      {
+        nomValueId: 8, code: '8', name: 'Заявление', nameAlt: 'DocumentApplication', alias: 'DocumentApplication', textContent: {
+          setPartId: 8
+        }
       }
-      //{
-      //  nomValueId: 7, code: '7', name: '*', nameAlt: 'DocumentOther', alias: 'DocumentOther', textContent: {
-      //    setPartId: 7
-      //  }
-      //}
     ],
 
     graduations: require('./graduation'),

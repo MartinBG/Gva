@@ -194,7 +194,7 @@
             lotId: $jsonData.lotId
           };
 
-          var doc = _(docs).filter({docId: newApplication.docId}).first();
+          var doc = _(docs).filter({ docId: newApplication.docId }).first();
           doc.applicationId = newApplication.applicationId;
 
           applicationsFactory.saveApplication(newApplication);
@@ -215,10 +215,10 @@
           docPart.file = [];
           docPart.part = $jsonData.part;
           docPart.partIndex = person.nextIndex++;
-          docPart.applications.push({
-            applicationId: parseInt($params.id, 10),
-            applicationName: application.doc.docTypeName
-          });
+          //docPart.applications.push({
+          //  applicationId: parseInt($params.id, 10),
+          //  applicationName: application.doc.docTypeName
+          //});
 
           if ($jsonData.setPartAlias === 'DocumentId') {
             person.personDocumentIds = person.personDocumentIds || [];
@@ -253,7 +253,12 @@
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             person.personDocumentOthers = person.personDocumentOthers || [];
             person.personDocumentOthers.push(docPart);
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Друг документ';
+          }
+          else if ($jsonData.setPartAlias === 'DocumentApplication') {
+            person.personDocumentApplications = person.personDocumentApplications || [];
+            person.personDocumentApplications.push(docPart);
+            applicationLotFile.setPartName = 'Заявление';
           }
 
           if (!!$jsonData.file) {
@@ -293,7 +298,7 @@
 
           return [200];
         })
-        .when('POST', '/api/apps/:id/parts/linkNew',
+      .when('POST', '/api/apps/:id/parts/linkNew',
         function ($params, $jsonData, docs, personLots, applicationsFactory, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
@@ -314,10 +319,10 @@
           docPart.file = [];
           docPart.part = $jsonData.part;
           docPart.partIndex = person.nextIndex++;
-          docPart.applications.push({
-            applicationId: parseInt($params.id, 10),
-            applicationName: application.doc.docTypeName
-          });
+          //docPart.applications.push({
+          //  applicationId: parseInt($params.id, 10),
+          //  applicationName: application.doc.docTypeName
+          //});
 
           if ($jsonData.setPartAlias === 'DocumentId') {
             person.personDocumentIds = person.personDocumentIds || [];
@@ -352,7 +357,12 @@
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             person.personDocumentOthers = person.personDocumentOthers || [];
             person.personDocumentOthers.push(docPart);
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Друг документ';
+          }
+          else if ($jsonData.setPartAlias === 'DocumentApplication') {
+            person.personDocumentApplications = person.personDocumentApplications || [];
+            person.personDocumentApplications.push(docPart);
+            applicationLotFile.setPartName = 'Заявление';
           }
 
           applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
@@ -365,7 +375,7 @@
 
           return [200];
         })
-        .when('POST', '/api/apps/:id/parts/linkExisting',
+      .when('POST', '/api/apps/:id/parts/linkExisting',
         function ($params, $jsonData, applicationsFactory, personLots, docs, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
@@ -415,15 +425,20 @@
           else if ($jsonData.setPartAlias === 'DocumentOther') {
             docPart = _(person.personDocumentOthers || [])
               .filter({ partIndex: $jsonData.partIndex }).first();
-            applicationLotFile.setPartName = '*';
+            applicationLotFile.setPartName = 'Друг документ';
+          }
+          else if ($jsonData.setPartAlias === 'DocumentApplication') {
+            docPart = _(person.personDocumentApplications || [])
+            .filter({ partIndex: $jsonData.partIndex }).first();
+            applicationLotFile.setPartName = 'Заявление';
           }
 
           if (docPart) {
-            docPart.applications.push(
-            {
-              applicationId: parseInt($params.id, 10),
-              applicationName: application.doc.docTypeName
-            });
+            //docPart.applications.push(
+            //{
+            //  applicationId: parseInt($params.id, 10),
+            //  applicationName: application.doc.docTypeName
+            //});
 
             applicationLotFile.applicationLotFileId = nextApplicationLotFileId;
             applicationLotFile.docFileKey = docFile.docFile.key;

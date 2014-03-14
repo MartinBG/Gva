@@ -17,7 +17,7 @@
       $scope.addDocPartType.$validate()
         .then(function () {
           if ($scope.addDocPartType.$valid) {
-            return $state.go('root.applications.edit.addPart',
+            return $state.go('root.applications.edit.case.addPart',
               {
                 isLinkNew: $stateParams.isLinkNew,
                 currentDocId: $stateParams.currentDocId,
