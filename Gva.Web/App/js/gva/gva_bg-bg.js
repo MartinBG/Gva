@@ -1549,6 +1549,38 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        staffManagementSearch: {
+          newStaffManagement: 'Нов ръководен персонал',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец',
+          position: 'Предлагана длъжност',
+          person: 'Предложено лице',
+          testDate: 'Дата на полагане на писмен тест',
+          testScore: 'Оценка от писмен тест',
+          number: 'Заявление',
+          valid: 'Валиден'
+        },
+        newStaffManagement: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStaffManagement: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        staffManagementDirective: {
+          title: 'Ръководен персонал',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец',
+          position: 'Предлагана длъжност',
+          person: 'Предложено лице',
+          testDate: 'Дата на полагане на писмен тест',
+          testScore: 'Оценка от писмен тест',
+          number: 'Заявление',
+          valid: 'Валиден'
+        },
         auditplanDirective: {
           title: 'План за одит',
           auditPartRequirement: 'Изискване',

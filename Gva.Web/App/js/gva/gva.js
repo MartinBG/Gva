@@ -212,6 +212,10 @@
       name: 'gvaOrganizationAuditplan',
       templateUrl: 'gva/organizations/forms/organizationAuditplan.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationStaffManagement',
+      templateUrl: 'gva/organizations/forms/organizationStaffManagement.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -396,6 +400,10 @@
       .state(['root.organizations.view.auditplans'                      , '/auditplans'                                                                                                                                                                                 ])
       .state(['root.organizations.view.auditplans.search'               , ''                                           , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansSearch.html'                    , 'AuditplansSearchCtrl'           ]])
       .state(['root.organizations.view.auditplans.new'                  , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansNew.html'                       , 'AuditplansNewCtrl'              ]])
-      .state(['root.organizations.view.auditplans.edit'                 , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansEdit.html'                      , 'AuditplansEditCtrl'             ]]);
+      .state(['root.organizations.view.auditplans.edit'                 , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansEdit.html'                      , 'AuditplansEditCtrl'             ]])
+      .state(['root.organizations.view.staffManagement'                 , '/staffManagement'                                                                                                                                                                            ])
+      .state(['root.organizations.view.staffManagement.search'          , ''                                           , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementSearch.html'          , 'StaffManagementSearchCtrl'      ]])
+      .state(['root.organizations.view.staffManagement.new'             , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementNew.html'             , 'StaffManagementNewCtrl'         ]])
+      .state(['root.organizations.view.staffManagement.edit'            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementEdit.html'            , 'StaffManagementEditCtrl'        ]]);
   }]);
 }(angular));

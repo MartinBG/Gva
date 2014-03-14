@@ -62,7 +62,8 @@ module.exports = function (grunt) {
         'schema/organizations/organization-data.sample.js',
         'schema/organizations/organization-address.sample.js',
         'schema/organizations/organization-cert-airportoperator.sample.js',
-        'schema/organizations/organization-auditplan.sample.js'
+        'schema/organizations/organization-auditplan.sample.js',
+        'schema/organizations/organization-staff-managment.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
