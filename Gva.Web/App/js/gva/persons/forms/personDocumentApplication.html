@@ -7,7 +7,9 @@
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.documentNumber"></label>
           <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
         </div>
-        <div class="form-group col-sm-3 col-md-2">
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-9 col-md-6">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.applicationType"></label>
           <sc-nomenclature ng-model="model.applicationType" alias="'applicationTypes'"></sc-nomenclature>
         </div>
@@ -39,20 +41,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4">
+        <div class="form-group col-sm-9 col-md-6">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.notes"></label>
           <sc-textarea rows="3" ng-model="model.notes" name="notes"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="persons.personDocApplicationDirective.bookPageNumber"></label>
-          <sc-text ng-model="model.bookPageNumber"></sc-text>
-        </div>
-        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
-          <label class="control-label" l10n-text="persons.personDocApplicationDirective.pageCount"></label>
-          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
-          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
         </div>
       </div>
     </div>

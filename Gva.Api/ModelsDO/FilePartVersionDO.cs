@@ -10,7 +10,5 @@ namespace Gva.Api.ModelsDO
         public JObject Part { get; set; }
 
         public FileDO[] Files { get; set; }
-
-        public IEnumerable<ApplicationDO> Applications { get; set; }
     }
 }

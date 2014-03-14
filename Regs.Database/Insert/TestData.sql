@@ -23,5 +23,6 @@ VALUES
     (13            , 1             , 'licenceEdition'  , N'^licences/\d+/editions/\d+$'         , N'{}'   ),
     (14            , 1             , 'rating'          , N'^ratings/\d+$'                       , N'{}'   ),
     (15            , 1             , 'ratingEdition'   , N'^ratings/\d+/editions/\d+$'          , N'{}'   ),
-    (16            , 1             , 'other'           , N'^personDocumentOthers/\d+$'          , N'{}'   )
+    (16            , 1             , 'other'           , N'^personDocumentOthers/\d+$'          , N'{}'   ),
+    (17            , 1             , 'application'     , N'^personDocumentApplications/\d+$'    , N'{}'   )
 GO

@@ -48,7 +48,8 @@
   DocumentChecksNewCtrl.$resolve = {
     personDocumentCheck: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     },
     selectedPublisher: function () {

@@ -69,7 +69,8 @@
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
           bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.'
+          pageCount: 'Брой стр.',
+          applications: 'Заявления'
         },
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',

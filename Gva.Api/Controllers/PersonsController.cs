@@ -14,6 +14,8 @@ using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using System.Data.Entity;
+using Common.Api.Models;
 
 namespace Gva.Api.Controllers
 {
@@ -25,6 +27,7 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IInventoryRepository inventoryRepository;
         private IPersonRepository personRepository;
+        private IFileRepository fileRepository;
 
         public PersonsController(
             IUserContextProvider userContextProvider,
@@ -40,6 +43,7 @@ namespace Gva.Api.Controllers
             this.lotRepository = lotRepository;
             this.inventoryRepository = inventoryRepository;
             this.personRepository = personRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("")]
@@ -89,6 +93,22 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<IEnumerable<GvaInventoryItem>, IEnumerable<InventoryItemDO>>(inventory));
         }
 
+        [Route("{lotId}/applications")]
+        public IHttpActionResult GetApplications(int lotId, string term = null)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            var applications = Mapper.Map<GvaApplication[], ApplicationDO[]>(this.fileRepository.GetApplications(lotId));
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                term = term.ToLower();
+                applications = applications.Where(n => n.ApplicationName.ToLower().Contains(term)).ToArray();
+            }
+
+            return Ok(applications);
+        }
+
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personData$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
@@ -118,7 +138,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentMedicals/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult GetFilePart(int lotId, string path)
         {
             return base.GetFilePart(lotId, path);
@@ -163,7 +184,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{path:regex(^personDocumentMedicals$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentTheoreticalexams$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
-         Route(@"{lotId}/{path:regex(^personDocumentOthers$)}")]
+         Route(@"{lotId}/{path:regex(^personDocumentOthers$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
         public IHttpActionResult GetFileParts(int lotId, string path)
         {
             return base.GetFileParts(lotId, path);
@@ -181,7 +203,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^licences/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
         public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
@@ -219,7 +242,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^licences/\d+/editions/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -235,7 +259,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);

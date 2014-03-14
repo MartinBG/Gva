@@ -46,7 +46,10 @@
   DocumentTrainingsNewCtrl.$resolve = {
     personDocumentTraining: function () {
       return {
-        part: {}
+        part: {
+          part: {},
+          files: []
+        }
       };
     },
     selectedPublisher: function () {

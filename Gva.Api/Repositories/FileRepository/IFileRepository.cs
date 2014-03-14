@@ -1,4 +1,6 @@
-﻿using Gva.Api.ModelsDO;
+﻿using System.Collections.Generic;
+using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
@@ -10,8 +12,12 @@ namespace Gva.Api.Repositories.FileRepository
 
         void DeleteFileReferences(int partId);
 
-        FileDO[] GetFileReferences(int partId);
+        GvaLotFile[] GetFileReferences(int partId);
 
-        ApplicationDO[] GetFileApplications(int partId);
+        GvaApplication[] GetApplications(int lotId);
+
+        void AddApplication(GvaApplication application);
+
+        void DeleteApplication(int gvaAppLotPartId);
     }
 }

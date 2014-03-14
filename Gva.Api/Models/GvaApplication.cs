@@ -14,7 +14,7 @@ namespace Gva.Api.Models
 
         public int GvaApplicationId { get; set; }
 
-        public int DocId { get; set; }
+        public int? DocId { get; set; }
 
         public int LotId { get; set; }
 

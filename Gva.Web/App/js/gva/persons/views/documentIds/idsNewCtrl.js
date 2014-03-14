@@ -40,7 +40,10 @@
 
   DocumentIdsNewCtrl.$resolve = {
     docId: function () {
-      return {};
+      return {
+        part: {},
+        files: []
+      };
     }
   };
 

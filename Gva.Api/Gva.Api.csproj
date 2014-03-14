@@ -83,8 +83,10 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\PersonLotEventHandler.cs" />
+    <Compile Include="Mappers\ApplicationMapper.cs" />
     <Compile Include="Mappers\FilePartVersionMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Mappers\InventoryItemMapper.cs" />
@@ -92,7 +94,6 @@
     <Compile Include="Mappers\PartVersionMapper.cs" />
     <Compile Include="Mappers\PersonMapper.cs" />
     <Compile Include="Mappers\RatingPartVersionMapper.cs" />
-    <Compile Include="Mappers\Resolvers\ApplicationsResolver.cs" />
     <Compile Include="Mappers\Resolvers\FileResolver.cs" />
     <Compile Include="ModelsDO\ApplicationDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />

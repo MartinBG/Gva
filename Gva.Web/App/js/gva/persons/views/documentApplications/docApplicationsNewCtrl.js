@@ -40,7 +40,8 @@
   DocApplicationsNewCtrl.$resolve = {
     personDocumentApplication: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

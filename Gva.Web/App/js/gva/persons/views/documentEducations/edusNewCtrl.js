@@ -39,7 +39,10 @@
 
   DocumentEducationsNewCtrl.$resolve = {
     edu: function () {
-      return {};
+      return {
+        part: {},
+        files: []
+      };
     }
   };
 

@@ -48,7 +48,10 @@
   DocumentOthersNewCtrl.$resolve = {
     personDocumentOther: function () {
       return {
-        part: {}
+        part: {
+          part: {},
+          files: []
+        }
       };
     },
     selectedPublisher: function () {

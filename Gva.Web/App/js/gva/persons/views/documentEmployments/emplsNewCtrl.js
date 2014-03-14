@@ -39,7 +39,10 @@
 
   DocumentEmploymentsNewCtrl.$resolve = {
     employment: function () {
-      return {};
+      return {
+        part: {},
+        files: []
+      };
     }
   };
 

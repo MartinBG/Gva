@@ -39,7 +39,10 @@
 
   DocumentMedicalsNewCtrl.$resolve = {
     med: function () {
-      return {};
+      return {
+        part: {},
+        files: []
+      };
     }
   };
 

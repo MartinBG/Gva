@@ -19,6 +19,7 @@ namespace Gva.Api
 
             Bind<ILotEventHandler>().To<PersonLotEventHandler>();
             Bind<ILotEventHandler>().To<InventoryLotEventHandler>();
+            Bind<ILotEventHandler>().To<ApplicationLotEventHandler>();
 
             Bind<IPersonRepository>().To<PersonRepository>();
             Bind<IApplicationRepository>().To<ApplicationRepository>();
@@ -31,6 +32,7 @@ namespace Gva.Api
             Bind<IMapper>().To<PersonMapper>();
             Bind<IMapper>().To<RatingPartVersionMapper>();
             Bind<IMapper>().To<InventoryItemMapper>();
+            Bind<IMapper>().To<ApplicationMapper>();
         }
     }
 }
