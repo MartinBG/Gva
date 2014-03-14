@@ -2,6 +2,7 @@
 using Gva.Api.LotEventHandlers;
 using Gva.Api.Mappers;
 using Gva.Api.Models;
+using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -20,6 +21,7 @@ namespace Gva.Api
             Bind<ILotEventHandler>().To<InventoryLotEventHandler>();
 
             Bind<IPersonRepository>().To<PersonRepository>();
+            Bind<IApplicationRepository>().To<ApplicationRepository>();
             Bind<IInventoryRepository>().To<InventoryRepository>();
             Bind<IFileRepository>().To<FileRepository>();
 

@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\InventoryLotEventHandler.cs" />
@@ -113,6 +114,8 @@
     <Compile Include="Models\GvaPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
+    <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
+    <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />
     <Compile Include="Repositories\FileRepository\FileRepository.cs" />
     <Compile Include="Repositories\FileRepository\IFileRepository.cs" />
     <Compile Include="Repositories\InventoryRepository\IInventoryRepository.cs" />
