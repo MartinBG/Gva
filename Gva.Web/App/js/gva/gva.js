@@ -135,6 +135,14 @@
       name: 'gvaAircraftData',
       templateUrl: 'gva/aircrafts/forms/aircraftData.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftDocumentDebt',
+      templateUrl: 'gva/aircrafts/forms/aircraftDocumentDebt.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftDocumentDebtFm',
+      templateUrl: 'gva/aircrafts/forms/aircraftDocumentDebtFM.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -251,6 +259,14 @@
       .state(['root.aircrafts.view.radios'                              , '/radios'                                                                                                                                                                    ])
       .state(['root.aircrafts.view.radios.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosSearch.html'                  , 'CertRadiosSearchCtrl'         ]])
       .state(['root.aircrafts.view.radios.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosNew.html'                     , 'CertRadiosNewCtrl'            ]])
-      .state(['root.aircrafts.view.radios.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosEdit.html'                    , 'CertRadiosEditCtrl'           ]]);
+      .state(['root.aircrafts.view.radios.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/certRadios/radiosEdit.html'                    , 'CertRadiosEditCtrl'           ]])
+      .state(['root.aircrafts.view.debts'                               , '/debts'                                                                                                                                                                     ])
+      .state(['root.aircrafts.view.debts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebts/debtsSearch.html'                     , 'DocDebtsSearchCtrl'           ]])
+      .state(['root.aircrafts.view.debts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebts/debtsNew.html'                        , 'DocDebtsNewCtrl'              ]])
+      .state(['root.aircrafts.view.debts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebts/debtsEdit.html'                       , 'DocDebtsEditCtrl'             ]])
+      .state(['root.aircrafts.view.debtsFM'                             , '/debtsFM'                                                                                                                                                                   ])
+      .state(['root.aircrafts.view.debtsFM.search'                      , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsSearch.html'                   , 'DocDebtsFMSearchCtrl'         ]])
+      .state(['root.aircrafts.view.debtsFM.new'                         , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsNew.html'                      , 'DocDebtsFMNewCtrl'            ]])
+      .state(['root.aircrafts.view.debtsFM.edit'                        , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/docDebtsFM/debtsEdit.html'                     , 'DocDebtsFMEditCtrl'           ]]);
   }]);
 }(angular));

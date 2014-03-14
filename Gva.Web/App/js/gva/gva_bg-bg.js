@@ -190,6 +190,42 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        debtSearchFM: {
+          certId: 'Регистрация №',
+          regDate: 'Дата',
+          aircraftDebtType: 'Ипотека/Запор',
+          documentNumber: 'Вх.док ГВА',
+          documentDate: 'Дата на док',
+          aircraftCreditor: 'Кредитор',
+          inspector: 'Инспектор',
+          newDebt: 'Нов залог'
+        },
+        newDebtFM: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDebtFM: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        debtSearch: {
+          certId: 'Регистрация №',
+          regDate: 'Дата',
+          aircraftDebtType: 'Ипотека/Запор',
+          contractNumber: 'Вх.док ГВА',
+          contractDate: 'Дата на док',
+          creditorName: 'Кредитор',
+          inspector: 'Инспектор',
+          newDebt: 'Нов залог'
+        },
+        newDebt: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDebt: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         regViewDirective: {
           title: 'Текуща регистрация',
           currentCert: 'Текущ запис',
@@ -356,6 +392,50 @@
           typeCertRelease: 'Издание номер',
           contry: 'Държава',
           aircraftTypeCertificateType: 'Типов сертификат'
+        },
+        debtDirectiveFM: {
+          title: 'Залог/запор',
+          certId: 'Регистрация №',
+          regDate: 'Дата',
+          regTime: 'Час',
+          aircraftDebtType: 'Ипотека/Запор',
+          documentNumber: 'Вх.док ГВА',
+          documentDate: 'Дата на док',
+          aircraftCreditor: 'Кредитор',
+          creditorDocument: 'Док. и дата писма на кредитор',
+          inspector: 'Инспектор'
+        },
+        debtDirective: {
+          title: 'Залог/запор',
+          certId: 'Регистрация №',
+          regDate: 'Дата',
+          regTime: 'Час',
+          aircraftDebtType: 'Ипотека/Запор',
+          contractNumber: 'Вх.док ГВА',
+          contractDate: 'Дата на док',
+          inspector: 'Инспектор',
+          creditorName: 'Кредитор',
+          creditorNameAlt: 'Кредитор (англ.)',
+          creditorData: 'Данни за кредитора',
+          creditorAddress: 'Адрес',
+          creditorEmail: 'Е-майл',
+          creditorContact: 'Лице за контакт',
+          creditorPhone: 'Телефон',
+          startDate: 'Дата на вписване',
+          startReason: 'Основание за вписване',
+          startReasonAlt: 'Основание за вписване (англ.)',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          ltrNumber: 'Писмо на ГВА - номер',
+          ltrDate: 'Дата',
+          endDate: 'Дата на заличаване',
+          endReason: 'Основание за заличаване',
+          closeInspector: 'Инспектор',
+          closeAplicationNumber: 'Писмо за заличаване - номер',
+          closeAplicationDate: 'Дата',
+          closeCaaAplicationNumber: 'Писмо на ГВА за заличаване - номер',
+          closeCaaAplicationDate: 'Дата'
         }
       },
       persons: {
@@ -1075,7 +1155,13 @@
         'root.aircrafts.view.noises.edit': 'Редакция на удостоверение',
         'root.aircrafts.view.radios': 'Разрешителни за използване на радиостанция',
         'root.aircrafts.view.radios.new': 'Ново разрешително',
-        'root.aircrafts.view.radios.edit': 'Редакция на разрешително'
+        'root.aircrafts.view.radios.edit': 'Редакция на разрешително',
+        'root.aircrafts.view.debts': 'Залози',
+        'root.aircrafts.view.debts.new': 'Ново залог',
+        'root.aircrafts.view.debts.edit': 'Редакция на залог',
+        'root.aircrafts.view.debtsFM': 'Залози',
+        'root.aircrafts.view.debtsFM.new': 'Ново залог',
+        'root.aircrafts.view.debtsFM.edit': 'Редакция на залог'
       }
     });
   }]);

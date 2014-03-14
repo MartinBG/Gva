@@ -1,0 +1,21 @@
+﻿<sc-button name="createBtn" btn-click="newDocumentDebt()" text="aircrafts.debtSearch.newDebt" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="debts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteDocumentDebt(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.certId" title="aircrafts.debtSearch.certId">
+  </sc-column>
+  <sc-column data="part.regDate" title="aircrafts.debtSearch.regDate" type="date">
+  </sc-column>
+  <sc-column data="part.aircraftDebtType.name" title="aircrafts.debtSearch.aircraftDebtType">
+  </sc-column>
+  <sc-column data="part.contractNumber" title="aircrafts.debtSearch.contractNumber">
+  </sc-column>
+  <sc-column data="part.contractDate" title="aircrafts.debtSearch.contractDate" type="date">
+  </sc-column>
+  <sc-column data="part.creditorName" title="aircrafts.debtSearch.creditorName">
+  </sc-column>
+  <sc-column data="part.inspector.name" title="aircrafts.debtSearch.inspector">
+  </sc-column>
+</sc-datatable>
