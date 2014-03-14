@@ -1535,6 +1535,26 @@
           contactPerson: 'Лице за контакти',
           email: 'E-мейл адрес'
         },
+        auditplanSearch: {
+          newAuditplan: 'Нов план за одит',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец'
+        },
+        newAuditplan: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAuditplan: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        auditplanDirective: {
+          title: 'План за одит',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец'
+        },
         organizationDataDirective: {
           title: 'Данни за организация',
           name: 'Наименование',

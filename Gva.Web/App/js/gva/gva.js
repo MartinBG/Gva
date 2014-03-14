@@ -208,6 +208,10 @@
       name: 'gvaOrganizationCertAirportOperator',
       templateUrl: 'gva/organizations/forms/organizationCertAirportOperator.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAuditplan',
+      templateUrl: 'gva/organizations/forms/organizationAuditplan.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -388,6 +392,10 @@
       .state(['root.organizations.view.certAirportOperators'            , '/certAirportOperators'                                                                                                                                                                      ])
       .state(['root.organizations.view.certAirportOperators.search'     , ''                                           , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsSearch.html', 'CertAirportOperatorsSearchCtrl' ]])
       .state(['root.organizations.view.certAirportOperators.new'        , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsNew.html'   , 'CertAirportOperatorsNewCtrl'    ]])
-      .state(['root.organizations.view.certAirportOperators.edit'       , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsEdit.html'  , 'CertAirportOperatorsEditCtrl'   ]]);
+      .state(['root.organizations.view.certAirportOperators.edit'       , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsEdit.html'  , 'CertAirportOperatorsEditCtrl'   ]])
+      .state(['root.organizations.view.auditplans'                      , '/auditplans'                                                                                                                                                                                 ])
+      .state(['root.organizations.view.auditplans.search'               , ''                                           , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansSearch.html'                    , 'AuditplansSearchCtrl'           ]])
+      .state(['root.organizations.view.auditplans.new'                  , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansNew.html'                       , 'AuditplansNewCtrl'              ]])
+      .state(['root.organizations.view.auditplans.edit'                 , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansEdit.html'                      , 'AuditplansEditCtrl'             ]]);
   }]);
 }(angular));

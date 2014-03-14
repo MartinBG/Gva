@@ -387,6 +387,9 @@
       { nomValueId: 1, code: 'P2', name: 'Петър Лалов', nameAlt: 'Петър Лалов', alias: 'P1' },
       { nomValueId: 2, code: 'P2', name: 'Пламен Илиев', nameAlt: 'Пламен Илиев', alias: 'P2' },
       { nomValueId: 3, code: 'P3', name: 'Пламен Пилев', nameAlt: 'Пламен Пилев', alias: 'P3' },
-    ]
+    ],
+
+    //Номенклатура Изисквания към раздел
+    auditPartRequirements: require('./auditPartRequirement')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);
