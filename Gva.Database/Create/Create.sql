@@ -70,3 +70,4 @@ GO
 :r $(rootPath)\"..\Insert\Noms\applicationTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\applicationpaymentTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\currencies.sql"
+:r $(rootPath)\"..\Insert\Noms\yesNoOptions.sql"

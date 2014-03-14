@@ -66,6 +66,7 @@
     <Content Include="Insert\Noms\authorizations.sql" />
     <Content Include="Insert\Noms\caa.sql" />
     <Content Include="Insert\Noms\cities.sql" />
+    <Content Include="Insert\Noms\yesNoOptions.sql" />
     <Content Include="Insert\Noms\countries.sql" />
     <Content Include="Insert\Noms\currencies.sql" />
     <Content Include="Insert\Noms\directions.sql" />
