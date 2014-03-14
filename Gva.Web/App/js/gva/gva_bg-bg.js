@@ -1481,6 +1481,53 @@
           applicant: 'Заявител'
         }
       },
+      organizations: {
+        search: {
+          newOrganization: 'Нова организация',
+          search: 'Търси',
+          CAO: 'CAO',
+          valid: 'Валидност',
+          organizationType: 'Тип организация',
+          dateValidTo: 'Валидност до'
+        },
+        viewOrganization: {
+          name: 'Наименование',
+          CAO: 'CAO',
+          uin: 'Булстат',
+          organizationType: 'Тип организация',
+          edit: 'Редакция'
+        },
+        newOrganization: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOrganization: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        organizationDataDirective: {
+          title: 'Данни за организация',
+          name: 'Наименование',
+          nameAlt: 'Наименование на поддържащ език',
+          code: 'Идентификационен код',
+          uin: 'Булстат',
+          CAO: 'CAO №',
+          dateCAOFirstIssue: 'Първо издаване',
+          dateCAOLastIssue: 'Последна ревизия',
+          dateCAOValidTo: 'Валидност',
+          ICAO: 'ICAO №',
+          IATA: 'IATA №',
+          SITA: 'SITA №',
+          organizationType: 'Тип организация',
+          organizationKind: 'Вип организация',
+          phones: 'Телефони',
+          webSite: 'Web сайт',
+          notes: 'Бележки',
+          valid: 'Валидност',
+          dateValidTo: 'Валидност до',
+          docRoom: 'Документацията е в стая'
+        }
+      },
       errorTexts: {
         required: 'Задължително поле',
         min: 'Стойността на полето трябва да е по-голяма от 0',
@@ -1614,7 +1661,10 @@
         'root.aircrafts.view.occurrences.edit': 'Редакция на инцидент',
         'root.aircrafts.view.maintenances': 'Поддръжки',
         'root.aircrafts.view.maintenances.new': 'Новa поддръжка',
-        'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка'
+        'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка',
+        'root.organizations': 'Организации',
+        'root.organizations.new': 'Нова организация',
+        'root.organizations.view': 'Данни за организация'
       }
     });
   }]);

@@ -1,0 +1,11 @@
+﻿<ng-form name="newOrganizationForm" sc-validate="{}">
+
+  <gva-organization-data name="organizationForm" ng-model="organization.organizationData"></gva-organization-data>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="organizations.newOrganization.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newOrganizationForm.$pristine"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newOrganization.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>
