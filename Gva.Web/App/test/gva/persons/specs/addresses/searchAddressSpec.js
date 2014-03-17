@@ -6,7 +6,9 @@
   describe('Person address search page', function() {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/addresses/searchAddressPO'),
-        personAddressesPage;
+        EditPage = require('../../pageObjects/addresses/addressPO'),
+        personAddressesPage,
+        editAddressesPage;
 
     beforeEach(function() {
       ptor.get('#/persons/1/addresses');
@@ -14,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personAddressesPage.breadcrumb.getText()).toEqual('Адреси');
+      expect(personAddressesPage.breadcrumb.get()).toEqual('Адреси');
     });
 
     it('should display data correctly', function () {
@@ -44,7 +46,8 @@
 
     it('should go to edit page', function() {
       personAddressesPage.firstEditBtn.click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses/2');
+      editAddressesPage = new EditPage(ptor);
+      expect(editAddressesPage.breadcrumb.get()).toEqual('Редакция на адрес');
     });
   });
 

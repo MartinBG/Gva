@@ -16,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editDocEduPage.breadcrumb.getText()).toEqual('Редакция на образование');
+      expect(editDocEduPage.breadcrumb.get()).toEqual('Редакция на образование');
     });
 
     it('should display correct filled out data', function () {
@@ -42,8 +42,8 @@
       editDocEduPage.pageCount.set('5');
       
       editDocEduPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentEducations');
       searchDocEduPage = new SearchPage(ptor);
+      expect(searchDocEduPage.breadcrumb.get()).toEqual('Образования');
 
       expect(searchDocEduPage.datatable.getColumns(
           'part_documentNumber',

@@ -16,7 +16,7 @@
     });
     
     it('should update breadcrumb text', function () {
-      expect(editPersonDocumentIdPage.breadcrumb.getText())
+      expect(editPersonDocumentIdPage.breadcrumb.get())
         .toEqual('Редакция на документ за самоличност');
     });
 
@@ -48,8 +48,8 @@
 
       editPersonDocumentIdPage.save();
 
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds');
       searchPersonDocumentIdPage = new SearchPage(ptor);
+      expect(searchPersonDocumentIdPage.breadcrumb.get()).toEqual('Документи за самоличност');
 
       expect(searchPersonDocumentIdPage.datatable.getColumns(
           'part_personDocumentIdType_name',

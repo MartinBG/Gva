@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editPersonStatusPage.breadcrumb.getText()).toEqual('Редакция на състояние');
+      expect(editPersonStatusPage.breadcrumb.get()).toEqual('Редакция на състояние');
     });
 
     it('should display status data correctly', function () {
@@ -38,9 +38,9 @@
       editPersonStatusPage.documentDateValidTo.set('22.12.2014');
       editPersonStatusPage.notes.set('test');
       editPersonStatusPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new SearchPage(ptor);
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
 
       expect(personStatusesPage.datatable.getColumns(
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
@@ -60,9 +60,9 @@
       editPersonStatusPage.documentDateValidTo.set('22.12.2014');
       editPersonStatusPage.notes.set('test');
       editPersonStatusPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new SearchPage(ptor);
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
 
       expect(personStatusesPage.datatable.getColumns(
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',

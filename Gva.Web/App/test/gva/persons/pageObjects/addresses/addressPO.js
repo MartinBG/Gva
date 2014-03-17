@@ -2,10 +2,11 @@
 (function (module, by, require) {
   'use strict';
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
-    ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
+    ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function AddressPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.address = new ScText(context.findElement(by.input('model.address')));
     this.addressAlt = new ScText(context.findElement(by.input('model.addressAlt')));
     this.addressType = new ScNomenclature('model.addressType', context);

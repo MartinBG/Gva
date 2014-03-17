@@ -5,7 +5,9 @@
   describe('Edit person data page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/personDataPO'),
-        editPersonDataPage;
+        ViewPage = require('../pageObjects/viewPersonPO'),
+        editPersonDataPage,
+        viewPersonDataPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/personData');
@@ -38,7 +40,9 @@
       editPersonDataPage.firstName.set('Vasil');
 
       editPersonDataPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1');
+
+      viewPersonDataPage = new ViewPage(ptor);
+      expect(viewPersonDataPage.breadcrumb.get()).toEqual('Лично досие');
 
       expect(ptor.findElement(protractor.By.name('names')).getAttribute('value'))
         .toEqual('Vasil Иванов Иванов');
@@ -46,8 +50,8 @@
 
     it('should be able to return to view person page', function () {
       editPersonDataPage.cancel();
-
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1');
+      viewPersonDataPage = new ViewPage(ptor);
+      expect(viewPersonDataPage.breadcrumb.get()).toEqual('Лично досие');
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));

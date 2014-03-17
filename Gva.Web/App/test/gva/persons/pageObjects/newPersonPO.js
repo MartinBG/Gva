@@ -7,8 +7,9 @@
       PersonDocumentIdPO = require('./documentIds/documentIdPO');
 
   function NewPersonPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    
     this.personAddress = new PersonAddressPO(context);
+    this.breadcrumb = this.personAddress.breadcrumb;
     this.personDocumentId = new PersonDocumentIdPO(context);
     this.personData = new PersonDataPO(context);
     this.saveBtn = context.findElement(by.name('saveBtn'));

@@ -5,10 +5,11 @@
     ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
     ScDate = require('../../../../scaffolding/pageObjects/scDate'),
     ScInt = require('../../../../scaffolding/pageObjects/scInt'),
-    ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea');
+    ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function PersonDocumentTrainingPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.staffType = new ScNomenclature('model.staffType', context);
     this.documentNumber = new ScText(context.findElement(by.input('model.documentNumber')));
     this.documentPersonNumber =

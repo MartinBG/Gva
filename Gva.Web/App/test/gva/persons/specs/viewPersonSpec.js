@@ -5,7 +5,9 @@
   describe('View person page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/viewPersonPO'),
-        viewPersonPage;
+        PersonDataPage = require('../pageObjects/personDataPO'),
+        viewPersonPage,
+        personDataPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1');
@@ -35,18 +37,22 @@
 
     it('should navigate to edit person page', function () {
       viewPersonPage.edit();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/personData');
+      personDataPage = new PersonDataPage(ptor);
+      expect(personDataPage.breadcrumb.get()).toEqual('Редакция');
     });
 
     it('should navigate to different sections', function () {
       viewPersonPage.tabs.clickTab('Лицензи');
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/licences');
-
+      viewPersonPage = new Page(ptor);
+      expect(viewPersonPage.breadcrumb.get()).toEqual('Лицензи');
+      
       viewPersonPage.tabs.clickTab('Лични данни');
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses');
+      viewPersonPage = new Page(ptor);
+      expect(viewPersonPage.breadcrumb.get()).toEqual('Адреси');
 
       viewPersonPage.tabs.clickTab('Състояния');
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
+      viewPersonPage = new Page(ptor);
+      expect(viewPersonPage.breadcrumb.get()).toEqual('Състояния');
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));

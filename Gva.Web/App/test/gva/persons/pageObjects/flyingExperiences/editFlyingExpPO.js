@@ -3,10 +3,11 @@
   'use strict';
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
       ScInt = require('../../../../scaffolding/pageObjects/scInt'),
-      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
+      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+      Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function EditFlyingExpPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.staffType = new ScNomenclature('model.staffType', context);
     this.month = new ScText(context.findElement(by.input('model.period.month')));
     this.year = new ScInt(context.findElement(by.input('model.period.year')));

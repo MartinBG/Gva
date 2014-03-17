@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newDocEmplPage.breadcrumb.getText())
+      expect(newDocEmplPage.breadcrumb.get())
         .toEqual('Новa месторабота');
     });
 
@@ -30,7 +30,9 @@
       newDocEmplPage.pageCount.set('5');
 
       newDocEmplPage.save();
+
       searchDocEmplPage = new SearchPage(ptor);
+      expect(searchDocEmplPage.breadcrumb.get()).toEqual('Месторабота');
 
       expect(searchDocEmplPage.datatable.getColumns(
           'part_hiredate',
@@ -49,7 +51,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newDocEmplPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/employments');
+      searchDocEmplPage = new SearchPage(ptor);
+      expect(searchDocEmplPage.breadcrumb.get()).toEqual('Месторабота');
     });
   });
 

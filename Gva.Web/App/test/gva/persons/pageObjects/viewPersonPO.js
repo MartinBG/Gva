@@ -2,9 +2,11 @@
 (function (module, by, require) {
   'use strict';
 
-  var ScTabs = require('../../../scaffolding/pageObjects/scTabs');
+  var ScTabs = require('../../../scaffolding/pageObjects/scTabs'),
+      Breadcrumb = require('../../../scaffolding/pageObjects/breadcrumb');
 
   function ViewPersonPO(context) {
+    this.breadcrumb = new Breadcrumb(context);
     this.name = context.findElement(by.name('names'));
     this.company = context.findElement(by.name('organization'));
     this.emplCategory = context.findElement(by.name('employment'));

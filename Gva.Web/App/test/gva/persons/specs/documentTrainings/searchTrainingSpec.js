@@ -6,7 +6,9 @@
   describe('Person document training search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentTrainings/searchTrainingPO'),
-        personDocumentTrainingsPage;
+        EditPage = require('../../pageObjects/documentTrainings/trainingPO'),
+        personDocumentTrainingsPage,
+        editTrainingPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/documentTrainings');
@@ -14,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocumentTrainingsPage.breadcrumb.getText()).toEqual('Обучение');
+      expect(personDocumentTrainingsPage.breadcrumb.get()).toEqual('Обучение');
     });
 
     it('should display data correctly', function () {
@@ -78,8 +80,8 @@
     it('should go to edit page', function () {
       personDocumentTrainingsPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        expect(ptor.getCurrentUrl())
-          .toEqual('http://localhost:52560/#/persons/1/documentTrainings/14');
+        editTrainingPage = new EditPage(ptor);
+        expect(editTrainingPage.breadcrumb.get()).toEqual('Редакция на обучение');
       });
     });
   });

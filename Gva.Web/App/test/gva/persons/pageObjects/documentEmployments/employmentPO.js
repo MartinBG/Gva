@@ -4,10 +4,11 @@
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
     ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea'),
     ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
-    ScDate = require('../../../../scaffolding/pageObjects/ScDate');
+    ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function EmploymentPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.valid = new ScNomenclature('model.valid', context);
     this.employmentCategory = new ScNomenclature('model.employmentCategory', context);
     this.organization = new ScNomenclature('model.organization', context);

@@ -5,7 +5,9 @@
   describe('Edit user page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/newUserPO'),
-        editUserPage;
+        SearchPage = require('../pageObjects/usersPO'),
+        editUserPage,
+        searchUserPage;
 
     beforeEach(function () {
       ptor.get('#/users/2');
@@ -13,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editUserPage.breadcrumb.getText()).toEqual('Редакция');
+      expect(editUserPage.breadcrumb.get()).toEqual('Редакция');
     });
 
     it('should display user', function () {
@@ -29,12 +31,8 @@
       expect(editUserPage.fullname.get()).toEqual('Peter Atanasov');
 
       editUserPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/users');
-    });
-
-    it('should be able to return to all users page', function () {
-      editUserPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/users');
+      searchUserPage = new SearchPage(ptor);
+      expect(searchUserPage.breadcrumb.get()).toEqual('Потребители');
     });
 
   });

@@ -16,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newDocEduPage.breadcrumb.getText())
+      expect(newDocEduPage.breadcrumb.get())
         .toEqual('Ново образование');
     });
     
@@ -30,8 +30,9 @@
       newDocEduPage.pageCount.set('5');
       
       newDocEduPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentEducations');
+
       searchDocEduPage = new SearchPage(ptor);
+      expect(searchDocEduPage.breadcrumb.get()).toEqual('Образования');
 
       expect(searchDocEduPage.datatable.getColumns(
           'part_documentNumber',
@@ -51,7 +52,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newDocEduPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentEducations');
+      SearchPage = new SearchPage(ptor);
+      expect(SearchPage.breadcrumb.get()).toEqual('Образования');
     });
   });
 

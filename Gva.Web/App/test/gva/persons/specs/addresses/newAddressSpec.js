@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newAddressPage.breadcrumb.getText()).toEqual('Нов адрес');
+      expect(newAddressPage.breadcrumb.get()).toEqual('Нов адрес');
     });
 
     it('should create new address correctly', function () {
@@ -28,8 +28,9 @@
       newAddressPage.phone.set('0999212');
 
       newAddressPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses');
+
       searchAddressPage = new SearchPage(ptor);
+      expect(searchAddressPage.breadcrumb.get()).toEqual('Адреси');
 
       expect(searchAddressPage.datatable.getColumns(
           'part_addressType_name',
@@ -67,9 +68,9 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newAddressPage.cancel();
-      ptor.getCurrentUrl().then(function (url) {
-        expect(url).toEqual('http://localhost:52560/#/persons/1/addresses');
-      });
+
+      searchAddressPage = new SearchPage(ptor);
+      expect(searchAddressPage.breadcrumb.get()).toEqual('Адреси');
     });
   });
 

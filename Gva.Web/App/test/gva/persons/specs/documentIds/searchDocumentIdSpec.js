@@ -5,7 +5,9 @@
   describe('Person document Ids search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentIds/searchDocumentIdPO'),
-        personDocumentIdsPage;
+        EditPage = require('../../pageObjects/documentIds/documentIdPO'),
+        personDocumentIdsPage,
+        editDocumentIdsPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/documentIds');
@@ -13,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocumentIdsPage.breadcrumb.getText()).toEqual('Документи за самоличност');
+      expect(personDocumentIdsPage.breadcrumb.get()).toEqual('Документи за самоличност');
     });
 
     it('should display data correctly', function () {
@@ -56,7 +58,8 @@
     it('should go to edit page', function () {
       personDocumentIdsPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds/10');
+        editDocumentIdsPage = new EditPage(ptor);
+        expect(editDocumentIdsPage.breadcrumb.get()).toEqual('Редакция на документ за самоличност');
       });
     });
   });

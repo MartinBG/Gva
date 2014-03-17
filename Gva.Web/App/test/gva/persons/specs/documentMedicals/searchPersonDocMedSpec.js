@@ -6,7 +6,9 @@
   describe('Person medical document search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentMedicals/searchDocMedPO'),
-        personDocMedPage;
+        EditPage = require('../../pageObjects/documentMedicals/docMedPO'),
+        personDocMedPage,
+        editDocMedPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/medicals');
@@ -14,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocMedPage.breadcrumb.getText()).toEqual('Медицински');
+      expect(personDocMedPage.breadcrumb.get()).toEqual('Медицински');
     });
 
     it('should display data correctly', function () {
@@ -58,8 +60,8 @@
     it('should go to edit page', function () {
       personDocMedPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        expect(ptor.getCurrentUrl())
-          .toEqual('http://localhost:52560/#/persons/1/medicals/18');
+        editDocMedPage = new EditPage(ptor);
+        expect(editDocMedPage.breadcrumb.get()).toEqual('Редакция на медицинско');
       });
     });
   });

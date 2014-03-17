@@ -5,7 +5,9 @@
   describe('Person document check search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentChecks/searchCheckPO'),
-        personChecksPage;
+        EditPage = require('../../pageObjects/documentChecks/checkPO'),
+        personChecksPage,
+        editCheckPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/checks');
@@ -13,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personChecksPage.breadcrumb.getText()).toEqual('Проверки');
+      expect(personChecksPage.breadcrumb.get()).toEqual('Проверки');
     });
 
     it('should display data correctly', function () {
@@ -47,7 +49,8 @@
 
     it('should go to edit page', function () {
       personChecksPage.firstEditBtn.click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks/20');
+      editCheckPage = new EditPage(ptor);
+      expect(editCheckPage.breadcrumb.get()).toEqual('Редакция на проверка');
     });
   });
 

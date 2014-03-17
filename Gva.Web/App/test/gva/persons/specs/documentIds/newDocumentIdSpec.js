@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newPersonDocumentIdPage.breadcrumb.getText())
+      expect(newPersonDocumentIdPage.breadcrumb.get())
         .toEqual('Нов документ за самоличност');
     });
 
@@ -30,8 +30,8 @@
       newPersonDocumentIdPage.documentDateValidTo.set('01.08.2018');
       newPersonDocumentIdPage.save();
 
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds');
       searchPersonDocumentIdPage = new SearchPage(ptor);
+      expect(searchPersonDocumentIdPage.breadcrumb.get()).toEqual('Документи за самоличност');
 
       expect(searchPersonDocumentIdPage.datatable.getColumns(
           'part_personDocumentIdType_name',
@@ -78,7 +78,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newPersonDocumentIdPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentIds');
+      searchPersonDocumentIdPage = new SearchPage(ptor);
+      expect(searchPersonDocumentIdPage.breadcrumb.get()).toEqual('Документи за самоличност');
     });
   });
 

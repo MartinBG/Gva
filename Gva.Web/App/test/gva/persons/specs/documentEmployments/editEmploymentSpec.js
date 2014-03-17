@@ -16,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editDocEmplPage.breadcrumb.getText()).toEqual('Редакция на месторабота');
+      expect(editDocEmplPage.breadcrumb.get()).toEqual('Редакция на месторабота');
     });
 
     it('should display correct filled out data', function () {
@@ -43,8 +43,9 @@
       editDocEmplPage.pageCount.set('5');
       
       editDocEmplPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/employments');
+
       searchDocEmplPage = new SearchPage(ptor);
+      expect(searchDocEmplPage.breadcrumb.get()).toEqual('Месторабота');
 
       expect(searchDocEmplPage.datatable.getColumns(
           'part_hiredate',

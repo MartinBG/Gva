@@ -5,11 +5,11 @@
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
       ScTextarea = require('../../../../scaffolding/pageObjects/scTextarea'),
       ScDate = require('../../../../scaffolding/pageObjects/scDate'),
-      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
+      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+      Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function PersonStatusPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
-
+    this.breadcrumb = new Breadcrumb(context);
     this.personStatusType = new ScNomenclature('model.personStatusType', context);
     this.documentNumber = new ScText(context.findElement(by.input('model.documentNumber')));
     this.documentDateValidFrom =

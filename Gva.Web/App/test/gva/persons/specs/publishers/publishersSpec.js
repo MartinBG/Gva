@@ -39,16 +39,14 @@
 
     it('should redirect to new person page', function () {
       publishersPage.searchForm.clickButton('goBack');
-      ptor.getCurrentUrl().then(function (url) {
-        expect(url).toEqual('http://localhost:52560/#/persons/1/documentTrainings/new');
-      });
+      parentPage = new ParentPage(ptor);
+      expect(parentPage.breadcrumb.get()).toEqual('Ново обучение');
     });
 
     it('should select publisher and pass it to parent', function () {
       publishersPage.firstSelectBtn.click();
-      expect(ptor.getCurrentUrl())
-        .toEqual('http://localhost:52560/#/persons/1/documentTrainings/new');
       parentPage = new ParentPage(ptor);
+      expect(parentPage.breadcrumb.get()).toEqual('Ново обучение');
       parentPage.staffType.set('Общ документ');
       expect(parentPage.documentPublisher.get())
         .toEqual('AAK Progres');

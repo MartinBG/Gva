@@ -16,12 +16,13 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newPersonPage.breadcrumb.getText()).toEqual('Ново физическо лице');
+      expect(newPersonPage.breadcrumb.get()).toEqual('Ново физическо лице');
     });
 
     it('should redirect to search page on cancel', function () {
       newPersonPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons');
+      searchPersonsPage = new SearchPage(ptor);
+      expect(searchPersonsPage.breadcrumb.get()).toEqual('Физически лица');
     });
 
     xit('should disable save button when form is not valid', function () {
@@ -59,9 +60,10 @@
       newPersonPage.personDocumentId.documentPublisher.set('Карнобат еър');
 
       newPersonPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons');
 
       searchPersonsPage = new SearchPage(ptor);
+      expect(searchPersonsPage.breadcrumb.get()).toEqual('Физически лица');
+
       expect(searchPersonsPage.datatable.getColumns('lin', 'names', 'uin', 'age')).toEqual([
         ['11232', 'Иван Иванов Иванов', '7005159385', '43'],
         ['12345', 'Атанас Иванов Иванов', '7903245888', '34'],

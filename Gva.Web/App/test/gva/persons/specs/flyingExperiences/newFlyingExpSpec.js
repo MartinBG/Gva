@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newFlyingExpPage.breadcrumb.getText())
+      expect(newFlyingExpPage.breadcrumb.get())
         .toEqual('Нов летателен / практически опит');
     });
 
@@ -34,10 +34,8 @@
         newFlyingExpPage.totalDocMinutes.set('45');
         newFlyingExpPage.save();
 
-        expect(ptor.getCurrentUrl()).toEqual(
-          'http://localhost:52560/#/persons/1/flyingExperiences'
-        );
         searchFlyingExpPage = new SearchPage(ptor);
+        expect(searchFlyingExpPage.breadcrumb.get()).toEqual('Летателен / практически опит');
 
         expect(searchFlyingExpPage.datatable.getColumns(
           'part_period_year',
@@ -85,7 +83,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newFlyingExpPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/flyingExperiences');
+      searchFlyingExpPage = new SearchPage(ptor);
+      expect(searchFlyingExpPage.breadcrumb.get()).toEqual('Летателен / практически опит');
     });
   });
 

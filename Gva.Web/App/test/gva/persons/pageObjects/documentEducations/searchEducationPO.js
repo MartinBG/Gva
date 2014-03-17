@@ -2,10 +2,11 @@
 (function (module, by, require) {
   'use strict';
 
-  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable');
+  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function SearchDocEduPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
       context.findElement(by.css('div[ng-model="documentEducations"]')));
     this.tableBody = context.findElement(by.css('td'));

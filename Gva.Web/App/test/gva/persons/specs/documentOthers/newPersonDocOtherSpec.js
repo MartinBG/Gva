@@ -16,8 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newDocOtherPage.breadcrumb.getText())
-        .toEqual('Нов документ');
+      expect(newDocOtherPage.breadcrumb.get()).toEqual('Нов документ');
     });
     
     it('should create new document correctly', function () {
@@ -33,8 +32,8 @@
       newDocOtherPage.pageCount.set('5');
       
       newDocOtherPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentOthers');
       searchDocOtherPage = new SearchPage(ptor);
+      expect(searchDocOtherPage.breadcrumb.get()).toEqual('Други документи');
 
       expect(searchDocOtherPage.datatable.getColumns(
           'part_documentNumber',
@@ -53,7 +52,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newDocOtherPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentOthers');
+      searchDocOtherPage = new SearchPage(ptor);
+      expect(searchDocOtherPage.breadcrumb.get()).toEqual('Други документи');
     });
   });
 

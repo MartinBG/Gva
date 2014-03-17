@@ -5,10 +5,11 @@
       ScInt = require('../../../../scaffolding/pageObjects/scInt'),
       ScDate = require('../../../../scaffolding/pageObjects/scDate'),
       ScTextarea = require('../../../../scaffolding/pageObjects/scTextarea'),
-      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
+      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+      Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function CheckPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.staffType = new ScNomenclature('model.staffType', context);
     this.aircraftTypeGroup = new ScNomenclature('model.aircraftTypeGroup', context);
     this.ratingType = new ScNomenclature('model.ratingType', context);

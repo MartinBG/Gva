@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editAddressPage.breadcrumb.getText()).toEqual('Редакция на адрес');
+      expect(editAddressPage.breadcrumb.get()).toEqual('Редакция на адрес');
     });
 
     it('should display correct filled out data', function () {
@@ -36,8 +36,9 @@
       editAddressPage.phone.set('0999212');
 
       editAddressPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/addresses');
+
       searchAddressPage = new SearchPage(ptor);
+      expect(searchAddressPage.breadcrumb.get()).toEqual('Адреси');
 
       expect(searchAddressPage.datatable.getColumns(
           'part_addressType_name',

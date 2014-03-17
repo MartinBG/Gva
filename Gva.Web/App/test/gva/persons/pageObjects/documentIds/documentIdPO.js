@@ -4,11 +4,12 @@
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
     ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
     ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
-    ScDatatable = require('../../../../scaffolding/pageObjects/ScDatatable');
+    ScDatatable = require('../../../../scaffolding/pageObjects/ScDatatable'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function DocumentIdPO(context) {
     this.context = context;
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.personDocumentIdType = new ScNomenclature('model.personDocumentIdType', context);
     this.bookPageNumber = new ScText(context.findElement(by.input('model.bookPageNumber')));
     this.pageCount = new ScText(context.findElement(by.input('model.pageCount')));

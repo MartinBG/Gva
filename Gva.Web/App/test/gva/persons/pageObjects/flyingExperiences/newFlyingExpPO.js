@@ -3,11 +3,12 @@
   'use strict';
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
       ScInt = require('../../../../scaffolding/pageObjects/scInt'),
-      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature');
+      ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
+      Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function NewFlyingExpPO(context) {
     this.context = context;
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
 
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));

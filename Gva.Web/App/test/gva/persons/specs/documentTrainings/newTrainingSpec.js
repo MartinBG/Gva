@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newTrainingPage.breadcrumb.getText()).toEqual('Ново обучение');
+      expect(newTrainingPage.breadcrumb.get()).toEqual('Ново обучение');
     });
 
     it('should create new training document correctly', function () {
@@ -31,8 +31,8 @@
       newTrainingPage.pageCount.set('23');
 
       newTrainingPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentTrainings');
       searchTrainingPage = new SearchPage(ptor);
+      expect(searchTrainingPage.breadcrumb.get()).toEqual('Обучение');
 
       expect(searchTrainingPage.datatable.getColumns(
           'part.documentNumber',
@@ -77,8 +77,8 @@
       newTrainingPage.pageCount.set('23');
 
       newTrainingPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentTrainings');
       searchTrainingPage = new SearchPage(ptor);
+      expect(searchTrainingPage.breadcrumb.get()).toEqual('Обучение');
 
       expect(searchTrainingPage.datatable.getColumns(
           'part.documentNumber',

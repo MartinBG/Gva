@@ -3,10 +3,11 @@
   'use strict';
 
   var ScText = require('../../scaffolding/pageObjects/scText'),
-      ScTextarea = require('../../scaffolding/pageObjects/scTextarea');
+      ScTextarea = require('../../scaffolding/pageObjects/scTextarea'),
+      Breadcrumb = require('../../scaffolding/pageObjects/breadcrumb');
 
   function NewUserPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
 
     this.username = new ScText(context.findElement(by.input('user.username')));
     this.usernameExistsError = context.findElement(by.id('usernameExists'));

@@ -16,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editDocMedPage.breadcrumb.getText()).toEqual('Редакция на медицинско');
+      expect(editDocMedPage.breadcrumb.get()).toEqual('Редакция на медицинско');
     });
 
     it('should display correct filled out data', function () {
@@ -46,8 +46,8 @@
       editDocMedPage.pageCount.set('5');
 
       editDocMedPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/medicals');
       searchDocMedPage = new SearchPage(ptor);
+      expect(searchDocMedPage.breadcrumb.get()).toEqual('Медицински');
 
       expect(searchDocMedPage.datatable.getColumns(
           'part_testimonial',

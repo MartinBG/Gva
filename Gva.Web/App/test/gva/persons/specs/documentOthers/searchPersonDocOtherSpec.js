@@ -6,7 +6,9 @@
   describe('Person document other search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentOthers/searchDocOtherPO'),
-        personDocOtherPage;
+        EditPage = require('../../pageObjects/documentOthers/docOtherPO'),
+        personDocOtherPage,
+        editDocOtherPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/documentOthers');
@@ -14,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocOtherPage.breadcrumb.getText()).toEqual('Други документи');
+      expect(personDocOtherPage.breadcrumb.get()).toEqual('Други документи');
     });
 
     it('should display data correctly', function () {
@@ -51,8 +53,8 @@
     it('should go to edit page', function () {
         personDocOtherPage.datatable.getRowButtons(1).then(function (buttons) {
           buttons[0].click();
-          expect(ptor.getCurrentUrl())
-            .toEqual('http://localhost:52560/#/persons/1/documentOthers/13');
+          editDocOtherPage = new EditPage(ptor);
+          expect(editDocOtherPage.breadcrumb.get()).toEqual('Редакция на документ');
         });
       });
   });

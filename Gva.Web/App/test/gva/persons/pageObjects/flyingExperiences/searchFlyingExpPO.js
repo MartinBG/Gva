@@ -2,10 +2,11 @@
 (function (module, by, require) {
   'use strict';
 
-  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable');
+  var ScDatatable = require('../../../../scaffolding/pageObjects/scDatatable'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function SearchFlyingExpPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
       context.findElement(by.css('div[ng-model="flyingExperiences"]'))
     );

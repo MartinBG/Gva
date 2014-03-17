@@ -4,10 +4,11 @@
   var ScText = require('../../../../scaffolding/pageObjects/scText'),
     ScTextarea = require('../../../../scaffolding/pageObjects/ScTextarea'),
     ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
-    ScDate = require('../../../../scaffolding/pageObjects/ScDate');
+    ScDate = require('../../../../scaffolding/pageObjects/ScDate'),
+    Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
   function DocMedPO(context) {
-    this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
+    this.breadcrumb = new Breadcrumb(context);
     this.documentNumberPrefix = new ScText(
       context.findElement(by.input('model.documentNumberPrefix')));
     this.documentNumber = new ScText(

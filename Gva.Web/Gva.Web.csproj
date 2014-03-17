@@ -400,6 +400,7 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
+    <Content Include="App\test\scaffolding\pageObjects\breadcrumb.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentOthers\docOtherPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\documentOthers\searchDocOtherPO.js" />
     <Content Include="App\test\gva\persons\pageObjects\publishers\publishersPO.js" />

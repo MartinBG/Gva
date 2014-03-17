@@ -4,10 +4,11 @@
 
   var ScText = require('../../../scaffolding/pageObjects/scText'),
       ScNomenclature = require('../../../scaffolding/pageObjects/scNomenclature'),
-      ScDate = require('../../../scaffolding/pageObjects/scDate');
+      ScDate = require('../../../scaffolding/pageObjects/scDate'),
+      Breadcrumb = require('../../../scaffolding/pageObjects/breadcrumb');
 
   function PersonDataPO(context) {
-    
+    this.breadcrumb = new Breadcrumb(context);
     this.firstName = new ScText(context.findElement(by.input('model.firstName')));
     this.middleName = new ScText(context.findElement(by.input('model.middleName')));
     this.lastName = new ScText(context.findElement(by.input('model.lastName')));

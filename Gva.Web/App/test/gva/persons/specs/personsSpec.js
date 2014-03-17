@@ -5,7 +5,9 @@
   describe('Persons search page', function () {
     var ptor = protractor.getInstance(),
     Page = require('../pageObjects/personsPO'),
-    personsPage;
+    NewPage = require('../pageObjects/newPersonPO'),
+    personsPage,
+    newPersonsPage;
 
     beforeEach(function () {
       ptor.get('#/persons');
@@ -47,9 +49,8 @@
 
     it('should redirect to new person page', function () {
       personsPage.searchForm.clickButton('newPerson');
-      ptor.getCurrentUrl().then(function (url) {
-        expect(url).toEqual('http://localhost:52560/#/persons/new');
-      });
+      newPersonsPage = new NewPage(ptor);
+      expect(newPersonsPage.breadcrumb.get()).toEqual('Ново физическо лице');
     });
 
   });

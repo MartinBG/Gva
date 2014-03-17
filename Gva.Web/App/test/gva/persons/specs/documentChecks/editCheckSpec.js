@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editCheckPage.breadcrumb.getText()).toEqual('Редакция на проверка');
+      expect(editCheckPage.breadcrumb.get()).toEqual('Редакция на проверка');
     });
 
     it('should display correct filled out data', function () {
@@ -40,8 +40,9 @@
       editCheckPage.pageCount.set('456');
 
       editCheckPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks');
+
       searchCheckPage = new SearchPage(ptor);
+      expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
 
       expect(searchCheckPage.datatable.getColumns(
           'part_personCheckDocumentType_name',

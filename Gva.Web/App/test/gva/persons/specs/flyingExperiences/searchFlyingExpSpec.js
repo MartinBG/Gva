@@ -5,7 +5,9 @@
   describe('Person flying experience search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/flyingExperiences/searchFlyingExpPO'),
-        personFlyingExpPage;
+        EditPage = require('../../pageObjects/flyingExperiences/editFlyingExpPO'),
+        personFlyingExpPage,
+        editFlyingExpPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/flyingExperiences');
@@ -13,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personFlyingExpPage.breadcrumb.getText()).toEqual('Летателен / практически опит');
+      expect(personFlyingExpPage.breadcrumb.get()).toEqual('Летателен / практически опит');
     });
 
     it('should display data correctly', function () {
@@ -79,9 +81,9 @@
     it('should go to edit page', function () {
       personFlyingExpPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        expect(ptor.getCurrentUrl()).toEqual(
-          'http://localhost:52560/#/persons/1/flyingExperiences/22'
-        );
+        editFlyingExpPage = new EditPage(ptor);
+        expect(editFlyingExpPage.breadcrumb.get())
+          .toEqual('Редакция на летателен / практически опит');
       });
     });
   });

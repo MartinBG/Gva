@@ -5,7 +5,9 @@
   describe('New user page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../pageObjects/newUserPO'),
-        newUserPage;
+        SearchPage = require('../pageObjects/usersPO'),
+        newUserPage,
+        searchUserPage;
 
     beforeEach(function () {
       ptor.get('#/users/new');
@@ -13,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newUserPage.breadcrumb.getText()).toEqual('Нов потребител');
+      expect(newUserPage.breadcrumb.get()).toEqual('Нов потребител');
     });
 
     it('should validate username', function () {
@@ -61,7 +63,8 @@
       newUserPage.isActive.click();
 
       newUserPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/users');
+      searchUserPage = new SearchPage(ptor);
+      expect(searchUserPage.breadcrumb.get()).toEqual('Потребители');
     });
   });
 }(protractor, describe, beforeEach, it, expect, require));

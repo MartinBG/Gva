@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newCheckPage.breadcrumb.getText()).toEqual('Нова проверка');
+      expect(newCheckPage.breadcrumb.get()).toEqual('Нова проверка');
     });
 
     it('should create new check correctly', function () {
@@ -28,8 +28,9 @@
       newCheckPage.bookPageNumber.set('123');
 
       newCheckPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks');
+
       searchCheckPage = new SearchPage(ptor);
+      expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
 
       expect(searchCheckPage.datatable.getColumns(
           'part_personCheckDocumentType_name',
@@ -47,7 +48,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       newCheckPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks');
+      searchCheckPage = new SearchPage(ptor);
+      expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
     });
   });
 

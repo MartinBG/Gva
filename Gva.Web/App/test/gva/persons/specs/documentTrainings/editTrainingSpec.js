@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(editTrainingPage.breadcrumb.getText()).toEqual('Редакция на обучение');
+      expect(editTrainingPage.breadcrumb.get()).toEqual('Редакция на обучение');
     });
 
     it('should display correct filled out data', function () {
@@ -44,8 +44,8 @@
       editTrainingPage.pageCount.set('23');
 
       editTrainingPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentTrainings');
       searchTrainingPage = new SearchPage(ptor);
+      expect(searchTrainingPage.breadcrumb.get()).toEqual('Обучение');
 
       expect(searchTrainingPage.datatable.getColumns(
           'part.documentNumber',
@@ -76,7 +76,8 @@
 
     it('should go to search view at clicking on cancel button', function () {
       editTrainingPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentTrainings');
+      searchTrainingPage = new SearchPage(ptor);
+      expect(searchTrainingPage.breadcrumb.get()).toEqual('Обучение');
     });
   });
 

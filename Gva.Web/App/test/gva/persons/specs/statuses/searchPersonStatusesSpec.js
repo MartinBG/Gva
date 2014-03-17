@@ -5,7 +5,10 @@
   describe('Person status search page', function () {
     var ptor = protractor.getInstance(),
       Page = require('../../pageObjects/statuses/searchPersonStatusesPO'),
-      personStatusesPage;
+      EditPage = require('../../pageObjects/statuses/personStatusPO'),
+      personStatusesPage,
+      editStatusesPage,
+      newStatusesPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/statuses');
@@ -13,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personStatusesPage.breadcrumb.getText()).toEqual('Състояния');
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
     });
 
     it('should display all person statuses correctly', function () {
@@ -30,9 +33,9 @@
 
     it('should delete a status correctly and stay on the same state', function () {
       personStatusesPage.firstDeleteBtn.click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new Page(ptor);
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
 
       expect(personStatusesPage.datatable.getColumns(
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
@@ -47,12 +50,14 @@
 
     it('should go to edit status page', function() {
       personStatusesPage.firstEditBtn.click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses/4');
+      editStatusesPage = new EditPage(ptor);
+      expect(editStatusesPage.breadcrumb.get()).toEqual('Редакция на състояние');
     });
 
     it('should go to new status page', function () {
       ptor.findElement(protractor.By.name('createBtn')).click();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses/new');
+      newStatusesPage = new EditPage(ptor);
+      expect(newStatusesPage.breadcrumb.get()).toEqual('Ново състояние');
     });
 
   });

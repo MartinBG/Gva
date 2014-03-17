@@ -15,7 +15,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(newPersonStatusPage.breadcrumb.getText()).toEqual('Ново състояние');
+      expect(newPersonStatusPage.breadcrumb.get()).toEqual('Ново състояние');
     });
 
     xit('should disable the save button when requried fields are not filled', function () {
@@ -29,9 +29,9 @@
       newPersonStatusPage.documentDateValidTo.set('22.12.2222');
       newPersonStatusPage.notes.set('test123');
       newPersonStatusPage.save();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new SearchPage(ptor);
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
 
       expect(personStatusesPage.datatable.getColumns(
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',
@@ -52,9 +52,9 @@
       newPersonStatusPage.documentDateValidTo.set('22.12.2222');
       newPersonStatusPage.notes.set('test123');
       newPersonStatusPage.cancel();
-      expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/statuses');
 
       personStatusesPage = new SearchPage(ptor);
+      expect(personStatusesPage.breadcrumb.get()).toEqual('Състояния');
 
       expect(personStatusesPage.datatable.getColumns(
         'part.personStatusType.name', 'part.documentNumber', 'part.documentDateValidFrom',

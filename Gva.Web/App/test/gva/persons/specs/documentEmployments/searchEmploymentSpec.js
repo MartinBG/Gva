@@ -6,7 +6,9 @@
   describe('Person document employment search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentEmployments/searchEmploymentPO'),
-        personDocEmplPage;
+        EditPage = require('../../pageObjects/documentEmployments/employmentPO'),
+        personDocEmplPage,
+        editDocEmplPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/employments');
@@ -14,7 +16,7 @@
     });
 
     it('should update breadcrumb text', function () {
-      expect(personDocEmplPage.breadcrumb.getText()).toEqual('Месторабота');
+      expect(personDocEmplPage.breadcrumb.get()).toEqual('Месторабота');
     });
 
     it('should display data correctly', function () {
@@ -43,7 +45,8 @@
     it('should go to edit page', function () {
       personDocEmplPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/employments/8');
+        editDocEmplPage = new EditPage(ptor);
+        expect(editDocEmplPage.breadcrumb.get()).toEqual('Редакция на месторабота');
       });
     });
   });
