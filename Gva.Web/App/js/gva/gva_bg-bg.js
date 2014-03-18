@@ -1422,7 +1422,16 @@
         'root.aircrafts.view.owners.edit': 'Редакция на свързано лице',
         'root.aircrafts.view.parts': 'Оборудване',
         'root.aircrafts.view.parts.new': 'Ново оборудване',
-        'root.aircrafts.view.parts.edit': 'Редакция на оборудване'
+        'root.aircrafts.view.parts.edit': 'Редакция на оборудване',
+        'root.aircrafts.view.inspections': 'Инспекции',
+        'root.aircrafts.view.inspections.new': 'Нова инспекция',
+        'root.aircrafts.view.inspections.edit': 'Редакция на инспекция',
+        'root.aircrafts.view.occurrences': 'Инциденти',
+        'root.aircrafts.view.occurrences.new': 'Нов инцидент',
+        'root.aircrafts.view.occurrences.edit': 'Редакция на инцидент',
+        'root.aircrafts.view.maintenances': 'Поддръжки',
+        'root.aircrafts.view.maintenances.new': 'Новa поддръжка',
+        'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка'
       }
     });
   }]);
