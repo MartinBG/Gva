@@ -497,6 +497,41 @@
           pageCount: 'Брой стр.',
           newOther: 'Нов документ'
         },
+        aircraftOwnerDirective: {
+          title: 'Свързано лице',
+          aircraftRelation: 'Тип отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: '№ на документ',
+          documentDate: 'Дата на документ',
+          fromDate: 'В сила от',
+          toDate: 'Дата на прекратявне на отношенията',
+          reasonTerminate: 'Причина за прекратяване',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        newOwner: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOwner: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ownerSearch: {
+          newOwner: 'Ново свързано лице',
+          aircraftRelation: 'Отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: 'Документ №',
+          documentDate: 'Дата на документ',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ'
+        },
         inspectionDirective: {
           title: 'Инспекция',
           documentNumber: '№ на документ',

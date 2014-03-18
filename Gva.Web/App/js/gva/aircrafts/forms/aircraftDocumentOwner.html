@@ -1,0 +1,71 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="aircrafts.aircraftOwnerDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-4" sc-has-error="aircraftRelation">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.aircraftRelation"></label>
+          <sc-validation-error field-name="aircraftRelation" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.aircraftRelation" name="aircraftRelation" alias="'aircraftRelations'" ng-required="true"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.person"></label>
+          <sc-nomenclature ng-model="model.person" name="person" alias="'persons'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.organization"></label>
+          <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-2" sc-has-error="documentNumber">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.documentNumber"></label>
+          <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
+          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
+        </div>
+        <div class="form-group col-sm-4 col-md-2" sc-has-error="documentDate">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.documentDate"></label>
+          <sc-validation-error field-name="documentDate" validations="{required: null}"></sc-validation-error>
+          <sc-date ng-model="model.documentDate" name="documentDate" ng-required="true"></sc-date>
+        </div>
+        <div class="form-group col-sm-4 col-md-2" sc-has-error="fromDate">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.fromDate"></label>
+          <sc-validation-error field-name="fromDate" validations="{required: null}"></sc-validation-error>
+          <sc-date ng-model="model.fromDate" name="fromDate" ng-required="true"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-2">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.toDate"></label>
+          <sc-date ng-model="model.toDate" name="toDate"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-8">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.reasonTerminate"></label>
+          <sc-textarea rows="2" cols="50" ng-model="model.reasonTerminate" name="reasonTerminate"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-8">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.notes"></label>
+          <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.bookPageNumber"></label>
+          <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
+          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+          <label class="control-label" l10n-text="aircrafts.aircraftOwnerDirective.pageCount"></label>
+          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>
