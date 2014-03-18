@@ -1,0 +1,23 @@
+﻿<sc-button name="createBtn" btn-click="newPart()" text="aircrafts.partSearch.newPart" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="parts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editPart(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deletePart(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.aircraftPart.name" title="aircrafts.partSearch.aircraftPart">
+  </sc-column>
+  <sc-column data="part.partProducer.name" title="aircrafts.partSearch.partProducer">
+  </sc-column>
+  <sc-column data="part.model" title="aircrafts.partSearch.model">
+  </sc-column>
+  <sc-column data="part.sn" title="aircrafts.partSearch.sn">
+  </sc-column>
+  <sc-column data="part.count" title="aircrafts.partSearch.count">
+  </sc-column>
+  <sc-column data="part.aircraftPartStatus.name" title="aircrafts.partSearch.aircraftPartStatus">
+  </sc-column>
+  <sc-column data="part.manDate" title="aircrafts.partSearch.manDate" type="date">
+  </sc-column>
+  <sc-column data="part.manPlace" title="aircrafts.partSearch.manPlace">
+  </sc-column>
+</sc-datatable>

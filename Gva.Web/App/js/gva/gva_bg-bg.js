@@ -532,6 +532,40 @@
           pageCount: 'Брой стр.',
           newOther: 'Нов документ'
         },
+        aircraftPartDirective: {
+          title: 'Oборудване',
+          aircraftPart: 'Тип',
+          partProducer: 'Производител',
+          model: 'Модел',
+          modelAlt: 'Модел (англ.)',
+          sn: 'Сериен №',
+          count: 'Брой',
+          aircraftPartStatus: 'Ново',
+          manDate: 'Дата на производство',
+          manPlace: 'Място на производство',
+          description: 'Описание на характеристики'
+        },
+        newPart: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editPart: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        partSearch: {
+          newPart: 'Ново оборудване',
+          aircraftPart: 'Тип',
+          partProducer: 'Производител',
+          model: 'Модел',
+          modelAlt: 'Модел (англ.)',
+          sn: 'Сериен №',
+          count: 'Брой',
+          aircraftPartStatus: 'Ново',
+          manDate: 'Дата на производство',
+          manPlace: 'Място на производство',
+          description: 'Характеристики'
+        },
         inspectionDirective: {
           title: 'Инспекция',
           documentNumber: '№ на документ',
@@ -1382,7 +1416,13 @@
         'root.aircrafts.view.debtsFM.edit': 'Редакция на залог',
         'root.aircrafts.view.others': 'Други документи',
         'root.aircrafts.view.others.new': 'Нов документ',
-        'root.aircrafts.view.others.edit': 'Редакция на документ'
+        'root.aircrafts.view.others.edit': 'Редакция на документ',
+        'root.aircrafts.view.owners': 'Свързани лица',
+        'root.aircrafts.view.owners.new': 'Ново свързано лице',
+        'root.aircrafts.view.owners.edit': 'Редакция на свързано лице',
+        'root.aircrafts.view.parts': 'Оборудване',
+        'root.aircrafts.view.parts.new': 'Ново оборудване',
+        'root.aircrafts.view.parts.edit': 'Редакция на оборудване'
       }
     });
   }]);

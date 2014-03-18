@@ -169,6 +169,10 @@
       name: 'gvaAircraftDocumentOwner',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOwner.html'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftPart',
+      templateUrl: 'gva/aircrafts/forms/aircraftPart.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                     , '/applications'                                                                                                                                                                                                 ])
@@ -317,6 +321,10 @@
       .state(['root.aircrafts.view.owners'                              , '/owners'                                                                                                                                                                    ])
       .state(['root.aircrafts.view.owners.search'                       , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOwners/ownersSearch.html'              , 'DocumentOwnersSearchCtrl'     ]])
       .state(['root.aircrafts.view.owners.new'                          , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOwners/ownersNew.html'                 , 'DocumentOwnersNewCtrl'        ]])
-      .state(['root.aircrafts.view.owners.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOwners/ownersEdit.html'                , 'DocumentOwnersEditCtrl'       ]]);
+      .state(['root.aircrafts.view.owners.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/documentOwners/ownersEdit.html'                , 'DocumentOwnersEditCtrl'       ]])
+      .state(['root.aircrafts.view.parts'                               , '/parts'                                                                                                                                                                     ])
+      .state(['root.aircrafts.view.parts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsSearch.html'                        , 'PartsSearchCtrl'              ]])
+      .state(['root.aircrafts.view.parts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsNew.html'                           , 'PartsNewCtrl'                 ]])
+      .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                          , 'PartsEditCtrl'                ]]);
   }]);
 }(angular));

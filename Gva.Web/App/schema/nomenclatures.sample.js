@@ -201,6 +201,11 @@
     aircraftDebtTypes: require('./aircraftDebtType'),
     aircraftCreditors: require('./aircraftCreditor'),
 
+
+    aircraftParts: require('./aircraftPart'),
+    aircraftPartProducers: require('./aircraftPartProducer'),
+    aircraftPartStatuses: require('./aircraftPartStatus'),
+
     //aircraftRelations: require('/aircraftRelation'),
 
     aircraftRelations: [
