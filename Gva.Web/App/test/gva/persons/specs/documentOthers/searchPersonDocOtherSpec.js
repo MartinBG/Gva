@@ -22,12 +22,9 @@
           'part_documentNumber',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_documentPublisher',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher'
           )).toEqual([
-        ['1221', '06.03.2010', '06.03.2013',
-          'УЦ: Български въздухоплавателен център', '62', '1']
+        ['1221', '06.03.2010', '06.03.2013', 'УЦ: Български въздухоплавателен център']
       ]);
     });
 
@@ -39,9 +36,7 @@
         'part_documentNumber',
         'part_documentDateValidFrom',
         'part_documentDateValidTo',
-        'part_documentPublisher',
-        'part_bookPageNumber',
-        'part_pageCount'
+        'part_documentPublisher'
           )).toEqual([
           []
         ]);

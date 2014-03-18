@@ -26,8 +26,6 @@
       newDocEduPage.speciality.set('Професионална квалификация');
       newDocEduPage.graduation.set('Висше образование (магистър)');
       newDocEduPage.school.set('Български въздухоплавателен център');
-      newDocEduPage.bookPageNumber.set('2');
-      newDocEduPage.pageCount.set('5');
       
       newDocEduPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/documentEducations');
@@ -38,14 +36,12 @@
           'part_completionDate',
           'part_speciality',
           'part_school_name',
-          'part_graduation_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_graduation_name'
           )).toEqual([
         ['1', '04.04.1981', 'пилот', 'Български въздухоплавателен център',
-          'Висше образование (бакалавър)', '2', '1'],
+          'Висше образование (бакалавър)'],
         ['2324a', '20.10.2014', 'Професионална квалификация',
-          'Български въздухоплавателен център', 'Висше образование (магистър)', '2', '5']
+          'Български въздухоплавателен център', 'Висше образование (магистър)']
       ]);
     });
 

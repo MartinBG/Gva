@@ -28,30 +28,24 @@
       expect(editCheckPage.documentDateValidTo.get()).toEqual('15.05.1970');
       expect(editCheckPage.documentPublisher.get()).toEqual('Проверяващ');
       expect(editCheckPage.valid.get()).toEqual('Да');
-      expect(editCheckPage.bookPageNumber.get()).toEqual('3');
-      expect(editCheckPage.pageCount.get()).toEqual('5');
     });
 
-    it('should change address data correctly', function () {
+    it('should change check data correctly', function () {
       editCheckPage.personCheckDocumentType.set('Писмо');
       editCheckPage.personCheckDocumentRole.set('Тренажор');
       editCheckPage.valid.set('Не');
-      editCheckPage.bookPageNumber.set('123');
-      editCheckPage.pageCount.set('456');
 
       editCheckPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks');
       searchCheckPage = new SearchPage(ptor);
 
       expect(searchCheckPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
-          'part_valid_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentType_name',
+          'part_documentRole_name',
+          'part_valid_name'
           )).toEqual([
-          ['Писмо', 'Тренажор', 'Не', '123', '456'],
-          ['Справка', 'Практическа проверка', 'Не', '2', '6']
+          ['Писмо', 'Тренажор', 'Не'],
+          ['Справка', 'Практическа проверка', 'Не']
         ]);
     });
   });

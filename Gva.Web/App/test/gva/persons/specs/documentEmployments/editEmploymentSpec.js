@@ -20,16 +20,12 @@
     });
 
     it('should display correct filled out data', function () {
-
       expect(editDocEmplPage.hiredate.get()).toEqual('20.09.2013');
       expect(editDocEmplPage.valid.get()).toEqual('Да');
       expect(editDocEmplPage.employmentCategory.get()).toEqual('Ученик Ръководител Полети');
       expect(editDocEmplPage.organization.get()).toEqual('AAK Progres');
       expect(editDocEmplPage.country.get()).toEqual('Кувейт');
       expect(editDocEmplPage.notes.get()).toEqual('');
-      expect(editDocEmplPage.bookPageNumber.get()).toEqual('1');
-      expect(editDocEmplPage.pageCount.get()).toEqual('1');
-
     });
    
     it('should change employment data correctly', function () {
@@ -39,8 +35,6 @@
       editDocEmplPage.organization.set('Wizz Air');
       editDocEmplPage.country.set('Малави');
       editDocEmplPage.notes.set('some notes..');
-      editDocEmplPage.bookPageNumber.set('2');
-      editDocEmplPage.pageCount.set('5');
       
       editDocEmplPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/employments');
@@ -52,11 +46,9 @@
           'part_organization_name',
           'part_country_name',
           'part_valid_name',
-          'part_notes',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_notes'
           )).toEqual([
-          ['20.10.2014', 'Координатор по УВД', 'Wizz Air', 'Малави', 'Не', 'some notes..', '2', '5']
+          ['20.10.2014', 'Координатор по УВД', 'Wizz Air', 'Малави', 'Не', 'some notes..']
         ]);
     });
   });

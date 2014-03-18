@@ -18,15 +18,14 @@
 
     it('should display data correctly', function () {
       expect(personChecksPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
+          'part_documentType_name',
+          'part_documentRole_name',
           'part_documentDateValidFrom',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber'
+          'part_valid_name'
           )).toEqual([
-          ['Свидетелство', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да', '3'],
-          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не', '2']
+          ['Свидетелство', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да'],
+          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не']
         ]);
     });
 
@@ -34,14 +33,13 @@
       personChecksPage.firstDeleteBtn.click();
       personChecksPage = new Page(ptor);
       expect(personChecksPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
+          'part_documentType_name',
+          'part_documentRole_name',
           'part_documentDateValidFrom',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber'
+          'part_valid_name'
           )).toEqual([
-          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не', '2']
+          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не']
         ]);
     });
 

@@ -37,14 +37,11 @@
               self.documentPublisher =
                 new ScText(context.findElement(by.input('model.documentPublisher')));
               self.personOtherDocumentType =
-                new ScNomenclature('model.personOtherDocumentType', context);
+                new ScNomenclature('model.documentType', context);
               self.personOtherDocumentRole =
-                new ScNomenclature('model.personOtherDocumentRole', context);
+                new ScNomenclature('model.documentRole', context);
               self.valid = new ScNomenclature('model.valid', context);
               self.notes = new ScTextarea(context.findElement(by.model('model.notes')));
-              self.bookPageNumber =
-                new ScText(context.findElement(by.input('model.bookPageNumber')));
-              self.pageCount = new ScInt(context.findElement(by.input('model.pageCount')));
             });
           });
         });

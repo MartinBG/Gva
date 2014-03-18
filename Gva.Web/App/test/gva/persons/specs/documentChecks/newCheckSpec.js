@@ -25,23 +25,21 @@
         newCheckPage.documentDateValidFrom.set('12.10.2013');
         newCheckPage.documentPublisher.set('алабала');
         newCheckPage.valid.set('Да');
-        newCheckPage.bookPageNumber.set('123');
 
         newCheckPage.save();
         expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/checks');
         searchCheckPage = new SearchPage(ptor);
 
         expect(searchCheckPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
+          'part_documentType_name',
+          'part_documentRole_name',
           'part_documentDateValidFrom',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber'
+          'part_valid_name'
         )).toEqual([
-          ['Свидетелство', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да', '3'],
-          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не', '2'],
-          ['Протокол', 'Тренажор', '12.10.2013', 'алабала', 'Да', '123']
+          ['Свидетелство', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да'],
+          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не'],
+          ['Протокол', 'Тренажор', '12.10.2013', 'алабала', 'Да']
         ]);
       });
     });

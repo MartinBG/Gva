@@ -23,17 +23,9 @@
     it('should display correct filled out data', function () {
       expect(editPersonDocumentIdPage.personDocumentIdType.get()).toEqual('Лична карта');
       expect(editPersonDocumentIdPage.valid.get()).toEqual('Да');
-      expect(editPersonDocumentIdPage.bookPageNumber.get()).toEqual('3');
-      expect(editPersonDocumentIdPage.pageCount.get()).toEqual('1');
-      expect(editPersonDocumentIdPage.documentNumber.get()).toEqual('6765432123');
       expect(editPersonDocumentIdPage.documentPublisher.get()).toEqual('МВР София');
-      expect(editPersonDocumentIdPage.getFile()).toEqual('testName.pdf');
       expect(editPersonDocumentIdPage.documentDateValidFrom.get()).toEqual('04.04.2010');
       expect(editPersonDocumentIdPage.documentDateValidTo.get()).toEqual('04.04.2020');
-      expect(editPersonDocumentIdPage.getApplications()).toEqual([
-          ['1', 'application1'],
-          ['2', 'application2']
-        ]);
     });
    
     it('should change document id data correctly', function () {
@@ -41,8 +33,6 @@
       editPersonDocumentIdPage.documentNumber.set('1000');
       editPersonDocumentIdPage.documentDateValidFrom.set('22.12.2014');
       editPersonDocumentIdPage.documentPublisher.set('МВР Бургас');
-      editPersonDocumentIdPage.pageCount.set('5');
-      editPersonDocumentIdPage.bookPageNumber.set('3');
       editPersonDocumentIdPage.valid.set('Не');
       editPersonDocumentIdPage.documentDateValidTo.set('01.08.2018');
 
@@ -52,19 +42,16 @@
       searchPersonDocumentIdPage = new SearchPage(ptor);
 
       expect(searchPersonDocumentIdPage.datatable.getColumns(
-          'part_personDocumentIdType_name',
+          'part_documentType_name',
           'part_documentNumber',
           'part_documentDateValidFrom',
           'part.documentDateValidTo',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber',
-          'part_pageCount',
-          'file'
+          'part_valid_name'
           )).toEqual([
-          ['Задграничен паспорт', '1000', '22.12.2014', '01.08.2018', 'МВР Бургас', 'Не', '3', '5'],
-          ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
-          ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1']
+          ['Задграничен паспорт', '1000', '22.12.2014', '01.08.2018', 'МВР Бургас', 'Не'],
+          ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да'],
+          ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да']
         ]);
     });
   });

@@ -35,9 +35,9 @@
                 context.findElement(by.input('model.documentPersonNumber'))
               );
               self.personCheckDocumentType =
-                new ScNomenclature('model.personCheckDocumentType', context);
+                new ScNomenclature('model.documentType', context);
               self.personCheckDocumentRole =
-                new ScNomenclature('model.personCheckDocumentRole', context);
+                new ScNomenclature('model.documentRole', context);
               self.documentDateValidFrom = new ScDate(
                 context.findElement(by.name('documentDateValidFrom')),
                 context);
@@ -51,9 +51,6 @@
               self.licenceType = new ScNomenclature('model.licenceType', context);
               self.valid = new ScNomenclature('model.valid', context);
               self.notes = new ScTextarea(context.findElement(by.name('notes')));
-              self.bookPageNumber =
-                new ScText(context.findElement(by.input('model.bookPageNumber')));
-              self.pageCount = new ScInt(context.findElement(by.input('model.pageCount')));
             });
           });
         });

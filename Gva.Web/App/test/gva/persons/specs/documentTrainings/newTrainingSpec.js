@@ -27,8 +27,6 @@
         newTrainingPage.personOtherDocumentType.set('Писмо');
         newTrainingPage.personOtherDocumentRole.set('Тренажор');
         newTrainingPage.valid.set('Не');
-        newTrainingPage.bookPageNumber.set('1a');
-        newTrainingPage.pageCount.set('23');
 
         newTrainingPage.save();
         expect(ptor.getCurrentUrl())
@@ -44,24 +42,22 @@
             'part.ratingClass.name',
             'part.authorization.name',
             'part.licenceType.name',
-            'part.personOtherDocumentType.name',
-            'part.personOtherDocumentRole.name',
-            'part.valid',
-            'part.bookPageNumber',
-            'part.pageCount'
+            'part.documentType.name',
+            'part.documentRole.name',
+            'part.valid'
             )).toEqual([
           ['BG FCL/CPA-00001-11232', '27.02.2013', '',
             'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', 'Boeing 737', '',
-            'Летателен инструктор на самолет', '', 'Контролен талон', 'Обучение', 'Да', '87', '1'],
+            'Летателен инструктор на самолет', '', 'Контролен талон', 'Обучение', 'Да'],
           ['BG CPA 00185-11232', '12.03.2012', '02.03.2016',
             'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', '',
-            '', '', '', 'Контролен талон', 'Обучение', 'Да', '81', '1'],
+            '', '', '', 'Контролен талон', 'Обучение', 'Да'],
           ['5-6448', '12.03.2012', '', 'Инспектор: Георги Мишев Христов Код:46', '', '',
-            'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не', '79', '1'],
+            'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не'],
           ['80', '10.03.2012', '', 'УЦ: Ратан', '', '', '',
-            '', 'Свидетелство', 'Теоретично обучение', 'Да', '79', '1'],
+            '', 'Свидетелство', 'Теоретично обучение', 'Да'],
           ['Тестов номер', '12.02.2013', '22.10.2014', 'тестов издател', '', '', '',
-            '', 'Писмо', 'Тренажор', 'Не', '1a', '23']
+            '', 'Писмо', 'Тренажор', 'Не']
         ]);
       });
     }, 15000);
@@ -75,8 +71,6 @@
         newTrainingPage.personOtherDocumentType.set('Писмо');
         newTrainingPage.personOtherDocumentRole.set('Тренажор');
         newTrainingPage.valid.set('Не');
-        newTrainingPage.bookPageNumber.set('1a');
-        newTrainingPage.pageCount.set('23');
 
         newTrainingPage.cancel();
         expect(ptor.getCurrentUrl())
@@ -92,22 +86,20 @@
             'part.ratingClass.name',
             'part.authorization.name',
             'part.licenceType.name',
-            'part.personOtherDocumentType.name',
-            'part.personOtherDocumentRole.name',
-            'part.valid',
-            'part.bookPageNumber',
-            'part.pageCount'
+            'part.documentType.name',
+            'part.documentRole.name',
+            'part.valid'
             )).toEqual([
           ['BG FCL/CPA-00001-11232', '27.02.2013', '',
             'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', 'Boeing 737', '',
-            'Летателен инструктор на самолет', '', 'Контролен талон', 'Обучение', 'Да', '87', '1'],
+            'Летателен инструктор на самолет', '', 'Контролен талон', 'Обучение', 'Да'],
           ['BG CPA 00185-11232', '12.03.2012', '02.03.2016',
             'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', '',
-            '', '', '', 'Контролен талон', 'Обучение', 'Да', '81', '1'],
+            '', '', '', 'Контролен талон', 'Обучение', 'Да'],
           ['5-6448', '12.03.2012', '', 'Инспектор: Георги Мишев Христов Код:46', '', '',
-            'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не', '79', '1'],
+            'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не'],
           ['80', '10.03.2012', '', 'УЦ: Ратан', '', '', '',
-            '', 'Свидетелство', 'Теоретично обучение', 'Да', '79', '1']
+            '', 'Свидетелство', 'Теоретично обучение', 'Да']
         ]);
       });
     });

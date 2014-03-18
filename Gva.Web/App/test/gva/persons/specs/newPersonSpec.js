@@ -55,7 +55,6 @@
       newPersonPage.personDocumentId.documentNumber.set('D-0001');
       newPersonPage.personDocumentId.documentDateValidFrom.set('10.10.2010');
       newPersonPage.personDocumentId.documentDateValidTo.set('10.10.2013');
-      newPersonPage.personDocumentId.bookPageNumber.set('1');
       newPersonPage.personDocumentId.documentPublisher.set('Карнобат еър');
 
       newPersonPage.save();

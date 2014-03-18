@@ -26,8 +26,6 @@
       newDocEmplPage.organization.set('Wizz Air');
       newDocEmplPage.country.set('Малави');
       newDocEmplPage.notes.set('some notes..');
-      newDocEmplPage.bookPageNumber.set('2');
-      newDocEmplPage.pageCount.set('5');
 
       newDocEmplPage.save();
       searchDocEmplPage = new SearchPage(ptor);
@@ -38,12 +36,10 @@
           'part_organization_name',
           'part_country_name',
           'part_valid_name',
-          'part_notes',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_notes'
           )).toEqual([
-          ['20.09.2013', 'Ученик Ръководител Полети', 'AAK Progres', 'Кувейт', 'Да', '', '1', '1'],
-          ['20.10.2014', 'Координатор по УВД', 'Wizz Air', 'Малави', 'Не', 'some notes..', '2', '5']
+          ['20.09.2013', 'Ученик Ръководител Полети', 'AAK Progres', 'Кувейт', 'Да', ''],
+          ['20.10.2014', 'Координатор по УВД', 'Wizz Air', 'Малави', 'Не', 'some notes..']
         ]);
     });
 

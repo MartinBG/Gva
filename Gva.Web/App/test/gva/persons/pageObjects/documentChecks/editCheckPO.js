@@ -18,8 +18,8 @@
     this.documentPersonNumber = new ScInt(
       context.findElement(by.input('model.documentPersonNumber'))
     );
-    this.personCheckDocumentType = new ScNomenclature('model.personCheckDocumentType', context);
-    this.personCheckDocumentRole = new ScNomenclature('model.personCheckDocumentRole', context);
+    this.personCheckDocumentType = new ScNomenclature('model.documentType', context);
+    this.personCheckDocumentRole = new ScNomenclature('model.documentRole', context);
     this.documentDateValidFrom = new ScDate(
       context.findElement(by.name('documentDateValidFrom')),
       context);
@@ -32,8 +32,6 @@
     this.licenceType = new ScNomenclature('model.licenceType', context);
     this.valid = new ScNomenclature('model.valid', context);
     this.notes = new ScTextarea(context.findElement(by.name('notes')));
-    this.bookPageNumber = new ScText(context.findElement(by.input('model.bookPageNumber')));
-    this.pageCount = new ScInt(context.findElement(by.input('model.pageCount')));
 
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));

@@ -29,8 +29,6 @@
       expect(editDocMedPage.documentPublisher.get()).toEqual('КАМО');
       expect(editDocMedPage.notes.get()).toEqual('Test notes');
       expect(editDocMedPage.limitationsTypes.get()).toEqual(['OSL', 'OML']);
-      expect(editDocMedPage.bookPageNumber.get()).toEqual('1');
-      expect(editDocMedPage.pageCount.get()).toEqual('3');
     });
     
     it('should change medical data correctly', function () {
@@ -42,8 +40,6 @@
       editDocMedPage.documentDateValidTo.set('01.01.2020');
       editDocMedPage.documentPublisher.set('FAA');
       editDocMedPage.notes.set('notes');
-      editDocMedPage.bookPageNumber.set('2');
-      editDocMedPage.pageCount.set('5');
 
       editDocMedPage.save();
       expect(ptor.getCurrentUrl()).toEqual('http://localhost:52560/#/persons/1/medicals');
@@ -55,13 +51,11 @@
           'part_documentDateValidTo',
           'part_medClassType_name',
           'part_limitations',
-          'part_documentPublisher_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher_name'
           )).toEqual([
-        ['1-2324a-11232-23', '20.10.2014', '01.01.2020', 'Class-3', 'OSL, OML', 'FAA', '2', '5'],
+        ['1-2324a-11232-23', '20.10.2014', '01.01.2020', 'Class-3', 'OSL, OML', 'FAA'],
         ['MED BG2-3244-11232-9934', '04.04.2005', '06.09.2015', 'Class-2',
-          'OSL, OML, VDL', 'CAA France', '3', '5']
+          'OSL, OML, VDL', 'CAA France']
       ]);
     });
   });
