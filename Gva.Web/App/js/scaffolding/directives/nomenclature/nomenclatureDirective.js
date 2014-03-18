@@ -47,11 +47,11 @@
         };
       }
 
-      if (iAttrs.nomObj) {
-        nomObjFunc = $parse(iAttrs.nomObj);
-      }
-
       if (iAttrs.mode === 'id') {
+        if (iAttrs.nomObj) {
+          nomObjFunc = $parse(iAttrs.nomObj);
+        }
+
         ngModel.$parsers.push(function (viewValue) {
           if (nomObjFunc && nomObjFunc.assign) {
             nomObjFunc.assign(scope.$parent, viewValue);
