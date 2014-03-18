@@ -41,7 +41,10 @@
     personDocumentApplication: function () {
       return {
         part: {},
-        files: []
+        files: {
+          hideApplications: true,
+          files: []
+        }
       };
     }
   };

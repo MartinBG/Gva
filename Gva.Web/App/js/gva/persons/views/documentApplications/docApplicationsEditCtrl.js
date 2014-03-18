@@ -46,7 +46,14 @@
         return PersonDocumentApplication.get({
           id: $stateParams.id,
           ind: $stateParams.ind
-        }).$promise;
+        }).$promise.then(function (application) {
+          application.files = {
+            hideApplications: true,
+            files: application.files
+          };
+
+          return application;
+        });
       }
     ]
   };

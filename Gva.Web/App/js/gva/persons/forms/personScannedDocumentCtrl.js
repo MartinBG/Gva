@@ -1,9 +1,17 @@
-﻿/*global angular, Select2*/
-(function (angular, Select2) {
+﻿/*global angular, Select2, _*/
+(function (angular, Select2, _) {
   'use strict';
 
   function PersonScannedDocCtrl($scope, $state, $stateParams, $compile, PersonApplication) {
     $scope.lotId = $stateParams.id;
+
+    if (_.isArray($scope.model)) {
+      $scope.hideApplications = false;
+    }
+    else {
+      $scope.hideApplications = $scope.model.hideApplications;
+      $scope.model = $scope.model.files;
+    }
 
     $scope.appSelectOpt = {
       multiple: true,
@@ -78,4 +86,4 @@
   ];
 
   angular.module('gva').controller('PersonScannedDocCtrl', PersonScannedDocCtrl);
-}(angular, Select2));
+}(angular, Select2, _));
