@@ -357,6 +357,7 @@
     <Content Include="App\js\gva\persons\views\documentOthers\othersSearchCtrl.js" />
     <Content Include="App\js\scaffolding\directives\formName\formNameDirective.js" />
     <Content Include="App\js\gva\aircrafts\resources\auditPartRequirement.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftAuditDetail.js" />
     <Content Include="App\js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationItemDirective.html" />
     <Content Include="App\js\scaffolding\directives\navigation\navigationDirective.html" />
@@ -488,7 +489,7 @@
     <Content Include="App\schema\nomenclatures\authorizationGroup.js" />
     <Content Include="App\schema\nomenclatures\boolean.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
-    <Content Include="App\schema\nomenclatures\checker.js" />
+    <Content Include="App\schema\nomenclatures\examiner.js" />
     <Content Include="App\schema\nomenclatures\city.js" />
     <Content Include="App\schema\nomenclatures\aircraftRelation.js" />
     <Content Include="App\schema\nomenclatures\aircraftPart.js" />
@@ -587,7 +588,7 @@
     <Content Include="App\test\gva\aircrafts\mocks\aircraftDocumentOthersHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftsInspectionsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditPartRequirements.js" />
-    <Content Include="App\test\gva\aircrafts\mocks\auditPartRequirementsHttp.js" />
+    <Content Include="App\test\gva\aircrafts\mocks\auditDetailsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditResults.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditResultsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftsDocumentOccurrencesHttp.js" />

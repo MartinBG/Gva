@@ -75,10 +75,9 @@
       auditDetails: auditDetails,
       examiners: [{
         sortOrder: 1,
-        checker: nomenclatures.get('checkers', '28')
+        examiner: nomenclatures.get('examiners', '28')
       }],
-      disparities: [],
-      disparityNumber: 0
+      disparities: []
     },
     aircraft1Inspection2: {
       documentNumber: '2341а',
@@ -95,10 +94,9 @@
       auditDetails: auditDetails,
       examiners: [{
         sortOrder: 2,
-        checker: nomenclatures.get('checkers', '28')
+        examiner: nomenclatures.get('examiners', '28')
       }],
-      disparities: [],
-      disparityNumber: 0
+      disparities: []
     }
   };
 })(typeof module === 'undefined' ? (this['aircraft-inspections.sample'] = {}) : module);

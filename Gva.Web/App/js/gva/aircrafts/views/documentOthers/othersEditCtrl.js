@@ -13,7 +13,7 @@
     $scope.aircraftDocumentOther = aircraftDocumentOther;
 
     $scope.save = function () {
-      $scope.aircraftDocumentOtherForm.$validate()
+      return $scope.aircraftDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.aircraftDocumentOtherForm.$valid) {
             return AircraftDocumentOther

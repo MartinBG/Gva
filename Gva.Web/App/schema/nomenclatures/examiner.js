@@ -7,4 +7,4 @@
       { nomValueId: 1, code: '28', name: 'Васил Дяков', nameAlt: 'Васил Дяков', alias: '28' },
       { nomValueId: 2, code: '25', name: 'Венцислав Михайлов', nameAlt: 'Венцислав Михайлов', alias: '25' }
   ];
-})(typeof module === 'undefined' ? (this['checker'] = {}) : module);
+})(typeof module === 'undefined' ? (this['examiner'] = {}) : module);

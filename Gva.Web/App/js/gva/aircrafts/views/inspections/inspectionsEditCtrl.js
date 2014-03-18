@@ -11,7 +11,7 @@
     $scope.aircraftInspection = aircraftInspection;
 
     $scope.save = function () {
-      $scope.aircraftInspectionForm.$validate()
+      return $scope.aircraftInspectionForm.$validate()
       .then(function () {
         if ($scope.aircraftInspectionForm.$valid) {
           return AircraftInspection

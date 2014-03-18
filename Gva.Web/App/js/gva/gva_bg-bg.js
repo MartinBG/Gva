@@ -580,8 +580,8 @@
           inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
           inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
           auditAddress: 'Адрес на одитирания обект',
-          insertAscertainments: 'Въведи списъка за обобщени констатации',
-          ascertainmentsTable: {
+          insertAuditDetails: 'Въведи списъка за обобщени констатации',
+          auditDetailsTable: {
             title: 'Главни обобщени констатации',
             subject: 'Тема',
             conclusion: 'Констатация',
@@ -603,7 +603,7 @@
           },
           examinersTable: {
             examinersTitle: 'Одитори',
-            checker: 'Одитор',
+            examiner: 'Одитор',
             sortOrder: 'Пореден №',
             noAvailableExaminers: 'Няма налични одитори'
           }

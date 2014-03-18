@@ -1,93 +1,77 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function AircraftInspectionCtrl($scope, $q, AuditResult, AuditPartRequirement) {
-
+  function AircraftInspectionCtrl($scope, AuditDetails) {
+    
     $scope.deleteExaminer = function removeExaminer(examiner) {
       var index = $scope.model.examiners.indexOf(examiner);
       $scope.model.examiners.splice(index, 1);
     };
 
     $scope.addExaminer = function () {
-      var sortOder = 1;
-      if ($scope.model.examiners.length > 0) {
-        var lastNumber = _.max(_.pluck($scope.model.examiners, 'sortOrder'));
-        sortOder = ++lastNumber;
-      }
+      var sortOder = Math.max(0, _.max(_.pluck($scope.model.examiners, 'sortOrder'))) + 1;
 
       $scope.model.examiners.push({
         sortOrder: sortOder
       });
     };
 
+    $scope.watchList = [];
+
     $scope.addDisparity = function (detail) {
-      detail.disparitiesList = detail.disparitiesList || [];
+      detail.disparities = detail.disparities || [];
 
-      var maxSortNumber = $scope.model.disparityNumber;
+      var maxSortNumber = 0;
 
-      _.each($scope.model.auditDetails, function (disparity) {
-        var max = _.max(disparity.disparitiesList);
+      _.each($scope.model.auditDetails, function (auditDetail) {
+        var max = _.max(auditDetail.disparities);
         if( max > maxSortNumber) {
           maxSortNumber = max;
         }
       });
-
-      $scope.model.disparityNumber = ++maxSortNumber;
-
-      detail.disparitiesList.push($scope.model.disparityNumber);
+      maxSortNumber = ++maxSortNumber;
+      detail.disparities.push(maxSortNumber);
 
       $scope.model.disparities.push({
-        sortOrder: $scope.model.disparityNumber,
+        sortOrder: maxSortNumber,
         subject: detail.subject
       });
+      var watchString = 'model.disparities[' + $scope.model.disparities.length + '].sortOrder';
+      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
     };
 
     $scope.deleteDisparity = function (disparity) {
       var auditDetail = _.where($scope.model.auditDetails, { subject: disparity.subject })[0];
 
-      var sortOrderIndex = auditDetail.disparitiesList.indexOf(disparity.sortOrder);
-      auditDetail.disparitiesList.splice(sortOrderIndex, 1);
+      var sortOrderIndex = auditDetail.disparities.indexOf(disparity.sortOrder);
+      auditDetail.disparities.splice(sortOrderIndex, 1);
 
       var index = $scope.model.disparities.indexOf(disparity);
       $scope.model.disparities.splice(index, 1);
+      $scope.watchList[index]();
     };
 
-    $scope.insertAscertainments = function () {
-      var auditPartRequirementPromise = AuditPartRequirement.query().$promise,
-        auditResultPromise = AuditResult.get({ alias: 'Not executed' }).$promise;
-
-      $q.all([auditPartRequirementPromise, auditResultPromise]).then(function (results) {
-        var auditPartRequirements = results[0],
-          defaultAuditResult = results[1];
-
-        _.each(auditPartRequirements, function (requirement) {
-          $scope.model.auditDetails.push({
-            subject: requirement,
-            code: requirement.nomValueId,
-            auditResult: defaultAuditResult
-          });
-        });
-      });
+    $scope.insertAuditDetails = function () {
+      $scope.model.auditDetails = AuditDetails.query({ type: 'aircrafts' });
     };
 
-    $scope.changedSortOrder = function (disparity) {
-      var auditDetail = _.where($scope.model.auditDetails, { subject: disparity.subject })[0];
-
-      var sortOrderIndex = auditDetail.disparitiesList.indexOf(disparity.oldValue);
-      auditDetail.disparitiesList[sortOrderIndex] = disparity.sortOrder;
-      disparity.oldValue = disparity.sortOrder;
+    $scope.changedSortOrder = function (newValue, oldValue) {
+      if (_.where($scope.model.disparities, { sortOrder: newValue })[0]) {
+        var subject = _.where($scope.model.disparities, { sortOrder: newValue })[0].subject,
+          auditDetail = _.where($scope.model.auditDetails, { subject: subject })[0],
+          sortOrderIndex = auditDetail.disparities.indexOf(oldValue);
+        auditDetail.disparities[sortOrderIndex] = newValue;
+      }
     };
 
-    $scope.deleteSortOrderOldValue = function (disparity) {
-      delete disparity.oldValue;
-    };
+    for (var index = 0; index < $scope.model.disparities.length; index++) {
+      var watchString = 'model.disparities[' + index + '].sortOrder';
+      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
+    }
 
-    $scope.saveSortOrderOldValue = function (disparity) {
-      disparity.oldValue = disparity.sortOrder;
-    };
   }
 
-  AircraftInspectionCtrl.$inject = [ '$scope', '$q', 'AuditResult', 'AuditPartRequirement' ];
+  AircraftInspectionCtrl.$inject = ['$scope', 'AuditDetails'];
 
   angular.module('gva').controller('AircraftInspectionCtrl', AircraftInspectionCtrl);
 }(angular, _));

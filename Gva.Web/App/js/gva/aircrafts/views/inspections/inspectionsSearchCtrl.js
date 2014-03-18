@@ -11,11 +11,6 @@
 
     $scope.aircraftInspections = aircraftInspections;
 
-    $scope.search = function () {
-      $state.go('root.aircrafts.view.inspections.search', {
-      });
-    };
-
     $scope.newInspection = function () {
       return $state.go('root.aircrafts.view.inspections.new');
     };

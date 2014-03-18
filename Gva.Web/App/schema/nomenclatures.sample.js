@@ -345,7 +345,7 @@
     auditPartRequirements: require('./auditPartRequirement'),
 
     //Номенклатура Проверяващи
-    checkers: require('./checker'),
+    examiners: require('./examiner'),
 
     //Номенклатура Ниво от несъответствие
     disparityLevels: require('./disparityLevel'),
