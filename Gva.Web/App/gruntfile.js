@@ -44,6 +44,7 @@ module.exports = function (grunt) {
         'schema/aircrafts/aircraft-cert-marks.sample.js',
         'schema/aircrafts/aircraft-cert-airworthinesses.sample.js',
         'schema/aircrafts/aircraft-cert-noises.sample.js',
+        'schema/aircrafts/aircraft-cert-noisesfm.sample.js',
         'schema/aircrafts/aircraft-cert-permitstofly.sample.js',
         'schema/aircrafts/aircraft-cert-radios.sample.js',
         'schema/aircrafts/aircraft-document-debts.sample.js',

@@ -163,6 +163,17 @@
           takeoff: 'Излитане',
           newNoise: 'Ново удостоверение'
         },
+        noiseSearchFM: {
+          standart: 'Стандарт',
+          issueDate: 'Дата на издаване',
+          issueNumber: '№',
+          flyover: 'Прелитане',
+          approach: 'Приближаване',
+          lateral: 'Странично',
+          overflight: 'Полет над',
+          takeoff: 'Излитане',
+          newNoise: 'Ново удостоверение'
+        },
         newNoise: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -348,6 +359,21 @@
           crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
+          title: 'Удостоверение за шум',
+          issueNumber: '№',
+          standart: 'Стандарт',
+          standartAlt: 'Стандарт (англ.)',
+          issueDate: 'Дата на издаване',
+          flyover: 'Прелитане',
+          approach: 'Приближаване',
+          lateral: 'Странично',
+          overflight: 'Полет над',
+          takeoff: 'Излитане',
+          modifications: 'Модификации',
+          modificationsAlt: 'Модификации (англ.)',
+          notes: 'Забележки'
+        },
+        noiseDirectiveFM: {
           title: 'Удостоверение за шум',
           issueNumber: '№',
           tcdsn: 'TCDSN',
@@ -1307,6 +1333,9 @@
         'root.aircrafts.view.noises': 'Удостоверения за шум',
         'root.aircrafts.view.noises.new': 'Ново удостоверение',
         'root.aircrafts.view.noises.edit': 'Редакция на удостоверение',
+        'root.aircrafts.view.radiosFM': 'Разрешителни за използване на радиостанция',
+        'root.aircrafts.view.noisesFM.new': 'Ново удостоверение',
+        'root.aircrafts.view.noisesFM.edit': 'Редакция на удостоверение',
         'root.aircrafts.view.radios': 'Разрешителни за използване на радиостанция',
         'root.aircrafts.view.radios.new': 'Ново разрешително',
         'root.aircrafts.view.radios.edit': 'Редакция на разрешително',

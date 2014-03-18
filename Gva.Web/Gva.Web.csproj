@@ -214,6 +214,7 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftInspectionCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentOccurrence.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircrafttMaintenance.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftCertNoiseFM.html" />
     <Content Include="App\js\gva\aircrafts\resources\aircraft.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertRegistration.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertSmod.js" />
@@ -230,6 +231,7 @@
     <Content Include="App\js\gva\aircrafts\resources\auditResult.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftDocumentOccurrence.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftMaintenance.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftCertNoiseFM.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftMaintenances\maintenancesNew.html" />
     <Content Include="App\js\gva\aircrafts\views\aircraftMaintenances\maintenancesNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftMaintenances\maintenancesSearch.html" />
@@ -288,6 +290,12 @@
     <Content Include="App\js\gva\aircrafts\views\certRadios\radiosSearchCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\aircraftData\aircraftDataEditCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesEdit.html" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesEditCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesNew.html" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesNewCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesSearch.html" />
+    <Content Include="App\js\gva\aircrafts\views\certNoisesFM\noisesSearchCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\docDebts\debtsEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\docDebts\debtsEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\docDebts\debtsNew.html" />
@@ -449,6 +457,7 @@
     <Content Include="App\schema\aircrafts\aircraft-document-other.sample.js" />
     <Content Include="App\schema\aircrafts\aircraft-inspections.sample.js" />
     <Content Include="App\schema\aircrafts\aircraft-document-occurrences.sample.js" />
+    <Content Include="App\schema\aircrafts\aircraft-cert-noisesfm.sample.js" />
     <Content Include="App\schema\nomenclatures\aircraftOccurrenceClass.js" />
     <Content Include="App\schema\aircrafts\aircraft-maintenance.sample.js" />
     <Content Include="App\schema\nomenclatures\aircraftType.js" />
@@ -561,6 +570,7 @@
     <Content Include="App\test\gva\aircrafts\mocks\auditResultsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftsDocumentOccurrencesHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftMaintenanceHttp.js" />
+    <Content Include="App\test\gva\aircrafts\mocks\aircraftCertNoisesFMHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsHttp.js" />
     <Content Include="App\test\gva\applications\mocks\applicationsFactory.js" />
     <Content Include="App\test\ems\docs\mocks\docs.js" />
