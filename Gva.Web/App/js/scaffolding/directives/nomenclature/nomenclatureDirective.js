@@ -1,5 +1,5 @@
 ﻿// Usage:
-// <sc-nomenclature alias="" mode="id|object" load="true|false" params="" multiple ng-model="">
+// <sc-nomenclature alias="" mode="id|object" params="" multiple ng-model="">
 // </sc-nomenclature>
 
 /*global angular, _, $, Select2*/
@@ -12,9 +12,6 @@
           nameProp = scNomenclatureConfig.nameProp,
           alias = scope.alias(),
           query = { alias: alias },
-          load = scope.load() || false,
-          loadedValuesPromise,
-          queryFunc,
           initSelectionFunc,
           nomObjFunc,
           paramsFunc,
@@ -82,33 +79,17 @@
         };
       }
 
-      if (load) {
-        loadedValuesPromise = Nomenclature.query(createQuery()).$promise;
-
-        queryFunc = function (query) {
-          loadedValuesPromise.then(function (result) {
-            var filter = {};
-            filter[nameProp] = query.term;
-            query.callback({
-              results: $filter('filter')(result, filter)
-            });
-          });
-        };
-      } else {
-        queryFunc = function (query) {
+      scope.select2Options = {
+        multiple: 'multiple' in iAttrs,
+        allowClear: true,
+        placeholder: ' ', //required for allowClear to work
+        query: function (query) {
           Nomenclature
             .query(createQuery({ term: query.term })).$promise
             .then(function (result) {
               query.callback({ results: result });
             });
-        };
-      }
-
-      scope.select2Options = {
-        multiple: 'multiple' in iAttrs,
-        allowClear: true,
-        placeholder: ' ', //required for allowClear to work
-        query: queryFunc,
+        },
         initSelection: initSelectionFunc,
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [];
@@ -130,8 +111,7 @@
       replace: true,
       templateUrl: 'scaffolding/directives/nomenclature/nomenclatureDirective.html',
       scope: {
-        alias: '&',
-        load: '&'
+        alias: '&'
       },
       require: '?ngModel',
       link: { pre: preLink }
