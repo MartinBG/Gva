@@ -84,7 +84,7 @@ namespace Gva.Api.LotEventHandlers
             inventoryItem.BookPageNumber = content.bookPageNumber;
             inventoryItem.PageCount = content.pageCount;
             inventoryItem.Number = content.documentNumber;
-            inventoryItem.Valid = content.valid == null ? null : content.valid.name;
+            inventoryItem.Valid = content.valid == null ? null : content.valid.code == "Y";
             inventoryItem.FromDate = content.documentDateValidFrom;
             inventoryItem.ToDate = content.documentDateValidTo;
             inventoryItem.Type = content.documentType == null ? null : content.documentType.name;
