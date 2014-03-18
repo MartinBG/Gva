@@ -394,6 +394,29 @@
 
     organizationOtherDocumentTypes: require('./personOtherDocumentType'),
 
-    organizationOtherDocumentRoles: require('./documentRole')
+    organizationOtherDocumentRoles: require('./documentRole'),
+
+    audits: [
+      { nomValueId: 1, code: 'A1', name: 'Audit1', nameAlt: 'Audit1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'Audit2', nameAlt: 'Audit2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'Audit3', nameAlt: 'Audit3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'Audit4', nameAlt: 'Audit4', alias: 'A4' }
+    ],
+
+    // Номенклатура Летище/Площадки
+    airports: [
+      { nomValueId: 1, code: 'A1', name: 'airport1', nameAlt: 'airport1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'airport2', nameAlt: 'airport2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'airport3', nameAlt: 'airport3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'airport4', nameAlt: 'airport4', alias: 'A4' }
+    ],
+
+    //Номенклатура Типове дейности на летищен оператор
+    airportoperatorActivityTypes: [
+      { nomValueId: 1, code: 'A1', name: 'airportoperatorActivityType1', nameAlt: 'airportoperatorActivityType1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'airportoperatorActivityType2', nameAlt: 'airportoperatorActivityType2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'airportoperatorActivityType3', nameAlt: 'airportoperatorActivityType3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'airportoperatorActivityType4', nameAlt: 'airportoperatorActivityType4', alias: 'A4' }
+    ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

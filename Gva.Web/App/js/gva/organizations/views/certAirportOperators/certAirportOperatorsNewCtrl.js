@@ -11,15 +11,10 @@
     $scope.certAirportOperator = certAirportOperator;
 
     $scope.save = function () {
-      $scope.certAirportOperatorForm.$validate()
+      return CertAirportOperator
+        .save({ id: $stateParams.id }, $scope.certAirportOperator).$promise
         .then(function () {
-          if ($scope.certAirportOperatorForm.$valid) {
-            return CertAirportOperator
-              .save({ id: $stateParams.id }, $scope.certAirportOperator).$promise
-              .then(function () {
-                return $state.go('root.organizations.view.certAirportOperators.search');
-              });
-          }
+          return $state.go('root.organizations.view.certAirportOperators.search');
         });
     };
 
@@ -38,7 +33,11 @@
 
   CertAirportOperatorsNewCtrl.$resolve = {
     certAirportOperator: function () {
-      return {};
+      return {
+        part: {
+          includedDocuments: []
+        }
+      };
     }
   };
 

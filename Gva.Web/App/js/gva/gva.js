@@ -206,7 +206,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationCertAirportOperator',
-      templateUrl: 'gva/organizations/forms/organizationCertAirportOperator.html'
+      templateUrl: 'gva/organizations/forms/organizationCertAirportOperator.html',
+      controller: 'OrganizationCertAirportOperatorCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationAuditplan',

@@ -1522,6 +1522,21 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        certAirportOperatorSearch: {
+          newCertAirportOperator: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
         newAddress: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -1664,7 +1679,33 @@
           email: 'E-мейл адрес'
         },
         certAirportOperatorDirective: {
-          title: 'Лиценз на летищен оператор'
+          title: 'Лицензи на летищен оператор',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          ext: 'Продължение',
+          date: 'Дата на издаване',
+          validToDateExt: 'Дата на изтичане',
+          airportoperatorActivityTypes: 'Дейности',
+          includedDocuments: 'Приложени документи',
+          approvalDate: 'Дата на одобрение',
+          linkedDocumentId: 'Връзка с документ от документите',
+          revokeDate: 'Дата на отнемане',
+          revokeinspector: 'Инспектор',
+          revokeTitle: 'Отнемане',
+          documentsTable: {
+            includedDocuments: 'Приложени документи',
+            inspector: 'Инспектор',
+            approvalDate: 'Дата на одобрение',
+            linkedDocumentId: 'Връзка с документ от документите',
+            noAvailableDocuments: 'Няма налични приложени документи'
+          },
+          revokeCause: 'Причина за отнемане'
         }
       },
       errorTexts: {
@@ -1807,7 +1848,21 @@
         'root.organizations.view.edit': 'Редакция',
         'root.organizations.view.addresses': 'Адреси',
         'root.organizations.view.addresses.new': 'Нов адрес',
-        'root.organizations.view.addresses.edit': 'Редакция на адрес'
+        'root.organizations.view.addresses.edit': 'Редакция на адрес',
+        'root.organizations.view.certAirportOperators': 'Лицензи на летищен оператор',
+        'root.organizations.view.certAirportOperators.new': 'Нов лиценз',
+        'root.organizations.view.certAirportOperators.edit': 'Редакция на лиценз',
+        'root.organizations.view.auditplans': 'План за надзор',
+        'root.organizations.view.auditplans.new': 'Нов план за одит',
+        'root.organizations.view.auditplans.edit': 'Редакция на план за одит',
+        'root.organizations.view.documentOthers': 'Други документи',
+        'root.organizations.view.documentOthers.new': 'Нов документ',
+        'root.organizations.view.documentOthers.new.choosePublisher': 'Избор на издател',
+        'root.organizations.view.documentOthers.edit': 'Редакция на документ',
+        'root.organizations.view.documentOthers.edit.choosePublisher': 'Избор на издател',
+        'root.organizations.view.staffManagement': 'Ръководен персонал',
+        'root.organizations.view.staffManagement.new': 'Нов ръководен персонал',
+        'root.organizations.view.staffManagement.edit': 'Редакция на ръководен персонал'
       }
     });
   }]);

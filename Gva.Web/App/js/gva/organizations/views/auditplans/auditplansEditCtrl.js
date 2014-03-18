@@ -12,7 +12,7 @@
     $scope.organizationAuditplan = organizationAuditplan;
 
     $scope.save = function () {
-      $scope.organizationAuditplanForm.$validate()
+      return $scope.organizationAuditplanForm.$validate()
       .then(function () {
         if ($scope.organizationAuditplanForm.$valid) {
           return OrganizationAuditplan

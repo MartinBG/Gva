@@ -6,7 +6,7 @@
     $scope.organization = organization;
 
     $scope.save = function () {
-      $scope.newOrganizationForm.$validate()
+      return $scope.newOrganizationForm.$validate()
       .then(function () {
         if ($scope.newOrganizationForm.$valid) {
           return Organization.save($scope.organization).$promise

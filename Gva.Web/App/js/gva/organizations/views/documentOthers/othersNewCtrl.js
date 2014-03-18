@@ -11,7 +11,7 @@
     selectedPublisher
   ) {
     $scope.save = function () {
-      $scope.organizationDocumentOtherForm.$validate()
+      return $scope.organizationDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.organizationDocumentOtherForm.$valid) {
             return OrganizationDocumentOther

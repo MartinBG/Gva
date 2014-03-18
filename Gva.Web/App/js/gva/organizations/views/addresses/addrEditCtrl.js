@@ -12,7 +12,7 @@
     $scope.organizationAddress = organizationAddress;
 
     $scope.save = function () {
-      $scope.organizationAddressForm.$validate()
+      return $scope.organizationAddressForm.$validate()
       .then(function () {
         if ($scope.organizationAddressForm.$valid) {
           return OrganizationAddress

@@ -1,9 +1,31 @@
-﻿<sc-button name="createBtn" btn-click="newAddress()" text="organizations.addressSearch.newCertAirportOperator" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+﻿<sc-button name="createBtn" btn-click="newCertAirportOperator()" text="organizations.certAirportOperatorSearch.newCertAirportOperator" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable ng-model="certAirportOperators" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
     <sc-button name="editBtn" btn-click="editCertAirportOperator(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     <sc-button name="deleteBtn" btn-click="deleteCertAirportOperator(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
-  <!--<sc-column data="part.addressType.name" title="organizations.addressSearch.addressType">
-  </sc-column>-->
+  <sc-column data="part.certNumber" title="organizations.certAirportOperatorSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.issueDate" title="organizations.certAirportOperatorSearch.issueDate" type="date">
+  </sc-column>
+  <sc-column data="part.validToDate" title="organizations.certAirportOperatorSearch.validToDate"  type="date">
+  </sc-column>
+  <sc-column data="part.audit.name" title="organizations.certAirportOperatorSearch.audit">
+  </sc-column>
+   <sc-column data="part.airport.name" title="organizations.certAirportOperatorSearch.airport">
+  </sc-column>
+  <sc-column data="part.organization.name" title="organizations.certAirportOperatorSearch.organization">
+  </sc-column>
+  <sc-column data="part.inspector.name" title="organizations.certAirportOperatorSearch.inspector">
+  </sc-column>
+  <sc-column data="part.valid.name" title="organizations.certAirportOperatorSearch.valid">
+  </sc-column>
+  <sc-column data="part.ext.date" title="organizations.certAirportOperatorSearch.date" type="date">
+  </sc-column>
+  <sc-column data="part.ext.validToDate" title="organizations.certAirportOperatorSearch.validToDateExt" type="date">
+  </sc-column>
+  <sc-column data="part.revokeDate" title="organizations.certAirportOperatorSearch.revokeDate" type="date">
+  </sc-column>
+  <sc-column data="part.revokeCause" title="organizations.certAirportOperatorSearch.revokeCause">
+  </sc-column>
 </sc-datatable>

@@ -12,7 +12,7 @@
     $scope.organizationData = organizationData;
 
     $scope.save = function () {
-      $scope.organizationDataForm.$validate()
+      return $scope.organizationDataForm.$validate()
       .then(function () {
         if ($scope.organizationDataForm.$valid) {
           return OrganizationData

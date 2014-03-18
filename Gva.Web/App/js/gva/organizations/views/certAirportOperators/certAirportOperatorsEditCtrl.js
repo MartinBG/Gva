@@ -12,17 +12,12 @@
     $scope.certAirportOperator = certAirportOperator;
 
     $scope.save = function () {
-      $scope.certAirportOperatorForm.$validate()
-      .then(function () {
-        if ($scope.certAirportOperatorForm.$valid) {
-          return CertAirportOperator
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.certAirportOperator)
-            .$promise
-            .then(function () {
-              return $state.go('root.organizations.view.certAirportOperators.search');
-            });
-        }
-      });
+      return CertAirportOperator
+        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.certAirportOperator)
+        .$promise
+        .then(function () {
+          return $state.go('root.organizations.view.certAirportOperators.search');
+        });
     };
 
     $scope.cancel = function () {
@@ -34,14 +29,14 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAddress',
+    'CertAirportOperator',
     'certAirportOperator'
   ];
 
   CertAirportOperatorsEditCtrl.$resolve = {
     certAirportOperator: [
       '$stateParams',
-      'OrganizationAddress',
+      'CertAirportOperator',
       function ($stateParams, OrganizationAddress) {
         return OrganizationAddress.get({
           id: $stateParams.id,

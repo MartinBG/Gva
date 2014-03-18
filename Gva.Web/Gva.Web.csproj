@@ -481,6 +481,7 @@
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationAuditplan.html" />
     <Content Include="App\js\gva\organizations\forms\organizationCertAirportOperator.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationCertAirportOperatorCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationData.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAddress.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
