@@ -158,6 +158,11 @@
       controller: 'AircraftInspectionCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaAircraftAuditDetail',
+      templateUrl: 'gva/aircrafts/forms/aircraftAuditDetail.html',
+      controller: 'AircraftAuditDetailCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOccurrence',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOccurrence.html'
     });

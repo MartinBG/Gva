@@ -190,6 +190,7 @@
     <Content Include="App\js\ems\docs\views\docsEdit.html" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\ems\ems_bg-bg.js" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftAuditDetail.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRadioView.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertSmodView.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertMarkView.html" />
@@ -217,6 +218,7 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertNoiseFM.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftPart.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftAuditDetailCtrl.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraft.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertRegistration.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertSmod.js" />
@@ -909,6 +911,8 @@
     <Folder Include="App\js\gva\applications\forms\" />
     <Folder Include="App\test\gva\aircrafts\pageObjects\" />
     <Folder Include="App\test\gva\aircrafts\specs\" />
+    <Folder Include="App\test\gva\organizations\pageObjects\" />
+    <Folder Include="App\test\gva\organizations\specs\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
