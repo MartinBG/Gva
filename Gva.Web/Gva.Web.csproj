@@ -480,12 +480,13 @@
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationAuditplan.html" />
-    <Content Include="App\js\gva\organizations\forms\organizationCertAirportOperator.html" />
-    <Content Include="App\js\gva\organizations\forms\organizationCertAirportOperatorCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationCertOperator.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationCertOperatorCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationData.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAddress.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="App\js\gva\organizations\forms\organizationDocumentOther.html" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertGroundServiceOperators.js" />
     <Content Include="App\js\gva\organizations\resources\organizationStaffManagement.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAuditplans.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirportOperators.js" />
@@ -517,6 +518,12 @@
     <Content Include="App\js\gva\organizations\views\documentOthers\othersNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersSearch.html" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsNew.html" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationsNew.html" />
     <Content Include="App\js\gva\organizations\views\organizationsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationsSearch.html" />
@@ -888,6 +895,7 @@
     <Content Include="App\schema\person-document-other.sample.js" />
     <Content Include="App\schema\person-document-training.sample.js" />
     <Content Include="App\schema\person-flyingExperience.sample.js" />
+    <Content Include="App\schema\organizations\organization-cert-groundserviceoperator.sample.js" />
     <Content Include="App\schema\organizations\organization-auditplan.sample.js" />
     <Content Include="App\schema\organizations\organization-data.sample.js" />
     <Content Include="App\schema\organizations\organization-address.sample.js" />
@@ -981,6 +989,7 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationCertGroundServiceOperatorsHttp.js" />
     <Content Include="App\test\scaffolding\pageObjects\breadcrumb.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffManagementHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationAuditplansHttp.js" />

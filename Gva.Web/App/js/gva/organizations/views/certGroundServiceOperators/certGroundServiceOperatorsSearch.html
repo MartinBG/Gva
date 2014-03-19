@@ -1,0 +1,31 @@
+﻿<sc-button name="createBtn" btn-click="newCertGroundServiceOperator()" text="organizations.certGroundServiceOperatorSearch.newCertGroundServiceOperator" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="organizationCertGroundServiceOperator" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertGroundServiceOperator(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertGroundServiceOperator(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.certNumber" title="organizations.certGroundServiceOperatorSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.issueDate" title="organizations.certGroundServiceOperatorSearch.issueDate" type="date">
+  </sc-column>
+  <sc-column data="part.validToDate" title="organizations.certGroundServiceOperatorSearch.validToDate"  type="date">
+  </sc-column>
+  <sc-column data="part.audit.name" title="organizations.certGroundServiceOperatorSearch.audit">
+  </sc-column>
+   <sc-column data="part.airport.name" title="organizations.certGroundServiceOperatorSearch.airport">
+  </sc-column>
+  <sc-column data="part.organization.name" title="organizations.certGroundServiceOperatorSearch.organization">
+  </sc-column>
+  <sc-column data="part.inspector.name" title="organizations.certGroundServiceOperatorSearch.inspector">
+  </sc-column>
+  <sc-column data="part.valid.name" title="organizations.certGroundServiceOperatorSearch.valid">
+  </sc-column>
+  <sc-column data="part.ext.date" title="organizations.certGroundServiceOperatorSearch.date" type="date">
+  </sc-column>
+  <sc-column data="part.ext.validToDate" title="organizations.certGroundServiceOperatorSearch.validToDateExt" type="date">
+  </sc-column>
+  <sc-column data="part.revokeDate" title="organizations.certGroundServiceOperatorSearch.revokeDate" type="date">
+  </sc-column>
+  <sc-column data="part.revokeCause" title="organizations.certGroundServiceOperatorSearch.revokeCause">
+  </sc-column>
+</sc-datatable>

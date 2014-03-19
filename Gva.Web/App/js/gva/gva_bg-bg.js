@@ -1612,6 +1612,29 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        certGroundServiceOperatorSearch: {
+          newCertGroundServiceOperator: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newCertGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         organizationOtherDirective: {
           title: 'Друг документ',
           documentNumber: 'Док No',
@@ -1678,8 +1701,8 @@
           contactPerson: 'Лице за контакти',
           email: 'E-мейл адрес'
         },
-        certAirportOperatorDirective: {
-          title: 'Лицензи на летищен оператор',
+        certOperatorDirective: {
+          title: 'Лиценз',
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -1691,7 +1714,7 @@
           ext: 'Продължение',
           date: 'Дата на издаване',
           validToDateExt: 'Дата на изтичане',
-          airportoperatorActivityTypes: 'Дейности',
+          activityTypes: 'Дейности',
           includedDocuments: 'Приложени документи',
           approvalDate: 'Дата на одобрение',
           linkedDocumentId: 'Връзка с документ от документите',
@@ -1862,7 +1885,13 @@
         'root.organizations.view.documentOthers.edit.choosePublisher': 'Избор на издател',
         'root.organizations.view.staffManagement': 'Ръководен персонал',
         'root.organizations.view.staffManagement.new': 'Нов ръководен персонал',
-        'root.organizations.view.staffManagement.edit': 'Редакция на ръководен персонал'
+        'root.organizations.view.staffManagement.edit': 'Редакция на ръководен персонал',
+        'root.organizations.view.certGroundServiceOperators':
+          'Лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.certGroundServiceOperators.new':
+          'Нов лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.certGroundServiceOperators.edit':
+          'Редакция на лиценз на оператор по наземно обслужване или самообслужване'
       }
     });
   }]);

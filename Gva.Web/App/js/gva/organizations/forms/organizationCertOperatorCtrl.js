@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function OrganizationCertAirportOperatorCtrl($scope) {
+  function OrganizationCertOperatorCtrl($scope) {
 
     $scope.deleteDocument = function removeDocument(document) {
       var index = $scope.model.includedDocuments.indexOf(document);
@@ -15,5 +15,5 @@
   }
 
   angular.module('gva')
-    .controller('OrganizationCertAirportOperatorCtrl', OrganizationCertAirportOperatorCtrl);
+    .controller('OrganizationCertOperatorCtrl', OrganizationCertOperatorCtrl);
 }(angular));

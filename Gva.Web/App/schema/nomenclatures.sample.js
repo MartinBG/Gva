@@ -382,16 +382,6 @@
     //Номенклатура Видове организации
     organizationKinds: require('./organizationKind'),
 
-    //Номенклатура Физически лица
-    persons: [
-      { nomValueId: 1, code: 'P2', name: 'Петър Лалов', nameAlt: 'Петър Лалов', alias: 'P1' },
-      { nomValueId: 2, code: 'P2', name: 'Пламен Илиев', nameAlt: 'Пламен Илиев', alias: 'P2' },
-      { nomValueId: 3, code: 'P3', name: 'Пламен Пилев', nameAlt: 'Пламен Пилев', alias: 'P3' },
-    ],
-
-    //Номенклатура Изисквания към раздел
-    auditPartRequirements: require('./auditPartRequirement'),
-
     organizationOtherDocumentTypes: require('./personOtherDocumentType'),
 
     organizationOtherDocumentRoles: require('./documentRole'),
@@ -417,6 +407,31 @@
       { nomValueId: 2, code: 'A2', name: 'airportoperatorActivityType2', nameAlt: 'airportoperatorActivityType2', alias: 'A2' },
       { nomValueId: 3, code: 'A3', name: 'airportoperatorActivityType3', nameAlt: 'airportoperatorActivityType3', alias: 'A3' },
       { nomValueId: 4, code: 'A4', name: 'airportoperatorActivityType4', nameAlt: 'airportoperatorActivityType4', alias: 'A4' }
+    ],
+
+    //Номенклатура Проверяващи
+    examiners: require('./examiner'),
+
+    //Номенклатура Ниво от несъответствие
+    disparityLevels: require('./disparityLevel'),
+
+    //Номенклатура Класове инциденти с ВС.
+    aircraftOccurrenceClasses: require('./aircraftOccurrenceClass'),
+
+    //Номенклатура Ограничения по част М/Ф и част 145
+    lim145limitations: [
+      { nomValueId: 1, code: 'A1', name: 'А1 - Самолети над 5700 кг', nameAlt: 'А1 - Самолети над 5700 кг', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'А2 - Самолети 5700 кг и по-малко', nameAlt: 'А2 - Самолети 5700 кг и по-малко', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'А3 - Хеликоптери', nameAlt: 'А3 - Хеликоптери', alias: 'A3' },
+      { nomValueId: 4, code: 'B1', name: 'B1 - Турбини', nameAlt: 'B1 - Турбини', alias: 'B1' }
+    ],
+
+    //Номенклатура Типове дейности на оператор по наземно обслужване или самообслужване
+    groundServiceOperatorActivityTypes: [
+      { nomValueId: 1, code: 'A1', name: 'groundserviceoperatorActivityType1', nameAlt: 'groundserviceoperatorActivityType1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'groundserviceoperatorActivityType2', nameAlt: 'groundserviceoperatorActivityType2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'groundserviceoperatorActivityType3', nameAlt: 'groundserviceoperatorActivityType3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'groundserviceoperatorActivityType4', nameAlt: 'groundserviceoperatorActivityType4', alias: 'A4' }
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);
