@@ -1,40 +1,45 @@
 <ng-form  class="form-inline" sc-validate="{}">
   <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.inspectionDirective.title"></strong></div>
+    <div class="panel-heading" ng-if="$parent.aircraftInspection"><strong l10n-text="common.inspectionDirective.aircraftTitle"></strong></div>
+    <div class="panel-heading" ng-if="$parent.organizationInspection"><strong l10n-text="common.inspectionDirective.organizationTitle"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
         <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="aircrafts.inspectionDirective.documentNumber"></label>
+          <label class="control-label" l10n-text="common.inspectionDirective.documentNumber"></label>
           <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" ng-if="$parent.organizationInspection">
+          <label class="control-label" l10n-text="common.inspectionDirective.auditPart"></label>
+          <sc-nomenclature  ng-model="model.auditPart" name="auditPart" alias="'auditParts'"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-2" sc-has-error="auditReason">
-          <label class="control-label" l10n-text="aircrafts.inspectionDirective.auditReason"></label>
+          <label class="control-label" l10n-text="common.inspectionDirective.auditReason"></label>
           <sc-validation-error field-name="auditReason" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.auditReason" name="auditReason" alias="'auditReasons'" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-2" sc-has-error="auditType">
-          <label class="control-label" l10n-text="aircrafts.inspectionDirective.auditType"></label>
+          <label class="control-label" l10n-text="common.inspectionDirective.auditType"></label>
           <sc-validation-error field-name="auditType" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.auditType" name="auditType" alias="'auditTypes'" ng-required="true"></sc-nomenclature>
         </div>
         <div class="form-group col-sm-2" sc-has-error="auditState">
-          <label class="control-label" l10n-text="aircrafts.inspectionDirective.auditState"></label>
+          <label class="control-label" l10n-text="common.inspectionDirective.auditState"></label>
           <sc-validation-error field-name="auditState" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.auditState" name="auditState" alias="'auditStates'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-6 col-md-6" sc-has-error="subject">
-          <label class="control-label" l10n-text="aircrafts.inspectionDirective.subject"></label>
+          <label class="control-label" l10n-text="common.inspectionDirective.subject"></label>
           <sc-validation-error field-name="subject" validations="{required: null}"></sc-validation-error>
           <sc-textarea rows="3" cols="50" ng-model="model.subject" name="subject" ng-required="true"></sc-textarea>
         </div>
       </div>
       <div class="row" sc-has-error="notification">
         <div class="form-group  col-sm-6 col-md-6">
-            <label class="control-label col-md-9 col-sm-4" l10n-text="aircrafts.inspectionDirective.notification" style="margin-left:-15px"></label>
+            <label class="control-label col-md-9 col-sm-4" l10n-text="common.inspectionDirective.notification" style="margin-left:-15px"></label>
             <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
           <div class="col-sm-4 col-md-3 pull-right" style="margin-right:-15px">
             <sc-nomenclature  ng-model="model.notification" name="notification" alias="'boolean'" ng-required="true"></sc-nomenclature>
@@ -43,54 +48,54 @@
       </div>
       <div class="row">
          <div class="form-group  col-sm-6 col-md-6">
-          <label class="control-label  col-sm-7 -md-8" l10n-text="aircrafts.inspectionDirective.inspectionFrom" style="margin-right:-25px; margin-left:-15px"></label>
+          <label class="control-label  col-sm-7 -md-8" l10n-text="common.inspectionDirective.inspectionFrom" style="margin-right:-25px; margin-left:-15px"></label>
           <sc-date class="col-sm-4 pull-right col-md-3" ng-model="model.inspectionFrom" ></sc-date>
         </div>
       </div>
       <div class="form-group row">
         <div class="form-group  col-sm-6 col-md-6">
-          <label class="control-label col-sm-7 col-md-8" l10n-text="aircrafts.inspectionDirective.inspectionTo" style="margin-right:-25px; margin-left:-15px"></label>
+          <label class="control-label col-sm-7 col-md-8" l10n-text="common.inspectionDirective.inspectionTo" style="margin-right:-25px; margin-left:-15px"></label>
           <sc-date class="col-sm-4 pull-right col-md-3" ng-model="model.inspectionTo"></sc-date>
         </div>
       </div>
 
       <div class="row col-sm-12 col-md-12" style="padding-top:10px;">
         <div class="panel panel-default">
-          <div class="panel-heading"><strong l10n-text="aircrafts.inspectionDirective.auditAddress"></strong></div>
+          <div class="panel-heading"><strong l10n-text="common.inspectionDirective.auditAddress"></strong></div>
             <div class="well-sm panel-body">
               <div class="row">
                 <div class="form-group col-sm-6 col-md-4" sc-has-error="inspectionPlace">
-                  <label class="control-label" l10n-text="aircrafts.inspectionDirective.inspectionPlace"></label>
+                  <label class="control-label" l10n-text="common.inspectionDirective.inspectionPlace"></label>
                   <sc-validation-error field-name="inspectionPlace" validations="{required: null}"></sc-validation-error>
                   <sc-text ng-model="model.inspectionPlace" name="inspectionPlace" ng-required="true"></sc-text>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-sm-3 col-md-2" sc-has-error="startDate">
-                  <label class="control-label" l10n-text="aircrafts.inspectionDirective.startDate"></label>
+                  <label class="control-label" l10n-text="common.inspectionDirective.startDate"></label>
                   <sc-validation-error field-name="startDate" validations="{required: null}"></sc-validation-error>
                   <sc-date ng-model="model.startDate" name="startDate" ng-required="true"></sc-date>
                 </div>
                 <div class="form-group col-sm-3 col-md-2">
-                  <label class="control-label" l10n-text="aircrafts.inspectionDirective.endDate"></label>
+                  <label class="control-label" l10n-text="common.inspectionDirective.endDate"></label>
                   <sc-date ng-model="model.endDate"></sc-date>
                 </div>
               </div>
             </div>
         </div>
         
-        <gva-aircraft-audit-detail name="auditDetailsForm" ng-model="model"></gva-aircraft-audit-detail>
+        <gva-common-audit-detail name="auditDetailsForm" ng-model="model"></gva-common-audit-detail>
 
           <div class="panel panel-default">
-            <div class="panel-heading"><strong l10n-text="aircrafts.inspectionDirective.examinersTable.examinersTitle"></strong></div>
+            <div class="panel-heading"><strong l10n-text="common.inspectionDirective.examinersTable.examinersTitle"></strong></div>
               <div class="well-sm panel-body">
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th l10n-text="aircrafts.inspectionDirective.examinersTable.sortOrder"></th>
+                      <th l10n-text="common.inspectionDirective.examinersTable.sortOrder"></th>
                       <th ng-class="{'has-error': model.examiners.length === 0}">
                         <div sc-has-error="examiner" >
-                          <label class="control-label" l10n-text="aircrafts.inspectionDirective.examinersTable.examiner"></label>
+                          <label class="control-label" l10n-text="common.inspectionDirective.examinersTable.examiner"></label>
                           <sc-validation-error field-name="examiner" validations="{required: null}"></sc-validation-error>
                         </div>
                       </th>
@@ -111,7 +116,7 @@
                     </tr>
                     <tr ng-repeat-end></tr>
                     <tr class="sort-disabled" ng-if="!model.examiners.length">
-                      <td colspan="8" class="text-center" l10n-text="aircrafts.inspectionDirective.examinersTable.noAvailableExaminers"></td>
+                      <td colspan="8" class="text-center" l10n-text="common.inspectionDirective.examinersTable.noAvailableExaminers"></td>
                     </tr>
                     <tr>
                       <td colspan="4" style="text-align: right; width: 1px;">

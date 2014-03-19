@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function InspectionsEditCtrl(
+  function AircraftsInspectionsEditCtrl(
     $scope,
     $state,
     $stateParams,
@@ -30,7 +30,7 @@
     };
   }
 
-  InspectionsEditCtrl.$inject = [
+  AircraftsInspectionsEditCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
@@ -38,7 +38,7 @@
     'aircraftInspection'
   ];
 
-  InspectionsEditCtrl.$resolve = {
+  AircraftsInspectionsEditCtrl.$resolve = {
     aircraftInspection: [
       '$stateParams',
       'AircraftInspection',
@@ -51,5 +51,5 @@
     ]
   };
 
-  angular.module('gva').controller('InspectionsEditCtrl', InspectionsEditCtrl);
+  angular.module('gva').controller('AircraftsInspectionsEditCtrl', AircraftsInspectionsEditCtrl);
 }(angular));

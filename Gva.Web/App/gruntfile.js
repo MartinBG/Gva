@@ -66,7 +66,8 @@ module.exports = function (grunt) {
         'schema/organizations/organization-staff-managment.sample.js',
         'schema/organizations/organization-document-other.sample.js',
         'schema/organizations/organization-cert-groundserviceoperator.sample.js',
-        'schema/organizations/organization-cert-groundserviceoperatorssnooperational.sample.js'
+        'schema/organizations/organization-cert-groundserviceoperatorssnooperational.sample.js',
+        'schema/organizations/organization-inspections.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
@@ -127,6 +128,7 @@ module.exports = function (grunt) {
         'test/common/mocks/*.js',
         'test/ems/corrs/mocks/*.js',
         'test/ems/docs/mocks/*.js',
+        'test/gva/common/mocks/*.js',
         'test/gva/applications/mocks/*.js',
         'test/gva/persons/mocks/*.js',
         'test/gva/aircrafts/mocks/*.js',

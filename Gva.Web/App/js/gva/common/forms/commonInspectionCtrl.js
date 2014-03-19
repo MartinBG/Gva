@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function AircraftInspectionCtrl($scope) {
+  function CommonInspectionCtrl($scope) {
     
     $scope.deleteExaminer = function removeExaminer(examiner) {
       var index = $scope.model.examiners.indexOf(examiner);
@@ -17,5 +17,5 @@
     };
   }
 
-  angular.module('gva').controller('AircraftInspectionCtrl', AircraftInspectionCtrl);
+  angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));

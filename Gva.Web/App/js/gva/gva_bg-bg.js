@@ -3,6 +3,54 @@
   'use strict';
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
+      common: {
+        auditDetailDirective: {
+          auditDetailsTable: {
+            title: 'Главни обобщени констатации',
+            subject: 'Тема',
+            conclusion: 'Констатация',
+            disparity: 'Несъответствия',
+            code: 'Код'
+          },
+          disparitiesTable: {
+            subject: 'Тема',
+            disparitiesTitle: 'Несъответствия',
+            sortOrder: 'Пореден №',
+            refNumber: 'Референтен №',
+            description: 'Описание на несъответствие',
+            disparityLevel: 'Ниво',
+            removalDate: 'Дата за отстраняване',
+            rectifyAction: 'Внесени коригиращи действия',
+            closureDate: 'Дата на закриване',
+            closureDocument: '№ на документ за закриване',
+            noAvailableDisparities: 'Няма налични несъответствия'
+          },
+          insertAuditDetails: 'Въведи списъка за обобщени констатации'
+        },
+        inspectionDirective: {
+          organizationTitle: 'Одит',
+          aircraftTitle: 'Инспекция',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора е предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект',
+          inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
+          inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
+          auditAddress: 'Адрес на одитирания обект',
+          examinersTable: {
+            examinersTitle: 'Одитори',
+            examiner: 'Одитор',
+            sortOrder: 'Пореден №',
+            noAvailableExaminers: 'Няма налични одитори'
+          },
+          auditPart: 'Част'
+        }
+      },
       aircrafts: {
         search: {
           manSN: 'Сериен номер',
@@ -707,48 +755,6 @@
           manDate: 'Дата на производство',
           manPlace: 'Място на производство',
           description: 'Характеристики'
-        },
-        inspectionDirective: {
-          title: 'Инспекция',
-          documentNumber: '№ на документ',
-          auditState: 'Състояние',
-          auditReason: 'Причина',
-          auditType: 'Вид одит',
-          subject: 'Предмет на одит',
-          notification: 'Оператора е предварително уведомен',
-          startDate: 'Начална дата',
-          endDate: 'Крайна дата',
-          inspectionPlace: 'Адрес на одитирания обект',
-          inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
-          inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
-          auditAddress: 'Адрес на одитирания обект',
-          insertAuditDetails: 'Въведи списъка за обобщени констатации',
-          auditDetailsTable: {
-            title: 'Главни обобщени констатации',
-            subject: 'Тема',
-            conclusion: 'Констатация',
-            disparity: 'Несъответствия',
-            code: 'Код'
-          },
-          disparitiesTable: {
-            subject: 'Тема',
-            disparitiesTitle: 'Несъответствия',
-            sortOrder: 'Пореден №',
-            refNumber: 'Референтен №',
-            description: 'Описание на несъответствие',
-            disparityLevel: 'Ниво',
-            removalDate: 'Дата за отстраняване',
-            rectifyAction: 'Внесени коригиращи действия',
-            closureDate: 'Дата на закриване',
-            closureDocument: '№ на документ за закриване',
-            noAvailableDisparities: 'Няма налични несъответствия'
-          },
-          examinersTable: {
-            examinersTitle: 'Одитори',
-            examiner: 'Одитор',
-            sortOrder: 'Пореден №',
-            noAvailableExaminers: 'Няма налични одитори'
-          }
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -1655,6 +1661,26 @@
           cancel: 'Отказ'
         },
         editCertGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        inspectionSearch: {
+          newInspection: 'Нов одит',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект'
+        },
+        newInspection: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editInspection: {
           save: 'Запис',
           cancel: 'Отказ'
         },

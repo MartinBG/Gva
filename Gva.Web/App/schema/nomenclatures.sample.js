@@ -409,9 +409,6 @@
       { nomValueId: 4, code: 'A4', name: 'airportoperatorActivityType4', nameAlt: 'airportoperatorActivityType4', alias: 'A4' }
     ],
 
-    //Номенклатура Проверяващи
-    examiners: require('./examiner'),
-
     //Номенклатура Ниво от несъответствие
     disparityLevels: require('./disparityLevel'),
 
@@ -432,6 +429,9 @@
       { nomValueId: 2, code: 'A2', name: 'groundserviceoperatorActivityType2', nameAlt: 'groundserviceoperatorActivityType2', alias: 'A2' },
       { nomValueId: 3, code: 'A3', name: 'groundserviceoperatorActivityType3', nameAlt: 'groundserviceoperatorActivityType3', alias: 'A3' },
       { nomValueId: 4, code: 'A4', name: 'groundserviceoperatorActivityType4', nameAlt: 'groundserviceoperatorActivityType4', alias: 'A4' }
-    ]
+    ],
+
+    //Номенклатура Раздел
+    auditParts: require('./auditPart')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

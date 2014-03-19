@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function InspectionsNewCtrl(
+  function AircraftsInspectionsNewCtrl(
     $scope,
     $state,
     $stateParams,
@@ -29,7 +29,7 @@
     };
   }
 
-  InspectionsNewCtrl.$inject = [
+  AircraftsInspectionsNewCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
@@ -37,20 +37,19 @@
     'aircraftInspection'
   ];
 
-  InspectionsNewCtrl.$resolve = {
+  AircraftsInspectionsNewCtrl.$resolve = {
     aircraftInspection: [
       function () {
         return {
           part: {
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
-            disparities: [],
-            disparityNumber: 0
+            disparities: []
           }
         };
       }
     ]
   };
 
-  angular.module('gva').controller('InspectionsNewCtrl', InspectionsNewCtrl);
+  angular.module('gva').controller('AircraftsInspectionsNewCtrl', AircraftsInspectionsNewCtrl);
 }(angular));

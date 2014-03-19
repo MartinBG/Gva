@@ -171,14 +171,9 @@
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOther.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftInspection',
-      templateUrl: 'gva/aircrafts/forms/aircraftInspection.html',
-      controller: 'AircraftInspectionCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAircraftAuditDetail',
-      templateUrl: 'gva/aircrafts/forms/aircraftAuditDetail.html',
-      controller: 'AircraftAuditDetailCtrl'
+      name: 'gvaCommonInspection',
+      templateUrl: 'gva/common/forms/commonInspection.html',
+      controller: 'CommonInspectionCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOccurrence',
@@ -230,6 +225,11 @@
       name: 'gvaOrganizationEquipment',
       templateUrl: 'gva/organizations/forms/organizationEquipment.html',
       controller: 'OrganizationEquipmentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonAuditDetail',
+      templateUrl: 'gva/common/forms/commonAuditDetail.html',
+      controller: 'CommonAuditDetailCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -433,6 +433,10 @@
       .state(['root.organizations.view.certGroundServiceOperatorsSnoOperational'       , '/certGroundServiceOperatorsSnoOperational'                                                                                                                                                                                                              ])
       .state(['root.organizations.view.certGroundServiceOperatorsSnoOperational.search', ''                                           , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalSearch.html', 'CertGroundServiceOperatorsSnoOperationalSearchCtrl']])
       .state(['root.organizations.view.certGroundServiceOperatorsSnoOperational.new'   , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalNew.html'   , 'CertGroundServiceOperatorsSnoOperationalNewCtrl'   ]])
-      .state(['root.organizations.view.certGroundServiceOperatorsSnoOperational.edit'  , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalEdit.html'  , 'CertGroundServiceOperatorsSnoOperationalEditCtrl'  ]]);
+      .state(['root.organizations.view.certGroundServiceOperatorsSnoOperational.edit'  , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalEdit.html'  , 'CertGroundServiceOperatorsSnoOperationalEditCtrl'  ]])
+      .state(['root.organizations.view.inspections'                                    , '/inspections'                                                                                                                                                                                                                                           ])
+      .state(['root.organizations.view.inspections.search'                             , ''                                           , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsSearch.html'                                             , 'OrganizationsInspectionsSearchCtrl'                 ]])
+      .state(['root.organizations.view.inspections.new'                                , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsNew.html'                                                , 'OrganizationsInspectionsNewCtrl'                    ]])
+      .state(['root.organizations.view.inspections.edit'                               , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                   ]]);
   }]);
 }(angular));

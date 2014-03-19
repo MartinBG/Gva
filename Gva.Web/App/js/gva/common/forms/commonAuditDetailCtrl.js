@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function AircraftAuditDetailCtrl($scope, AuditDetails) {
+  function CommonAuditDetailCtrl($scope, AuditDetails) {
     $scope.watchList = [];
 
     $scope.addDisparity = function (detail) {
@@ -38,7 +38,11 @@
     };
 
     $scope.insertAuditDetails = function () {
-      $scope.model.auditDetails = AuditDetails.query({ type: 'aircrafts' });
+      if ($scope.$parent.form.$name === 'aircraftInspectionForm') {
+        $scope.model.auditDetails = AuditDetails.query({ type: 'aircrafts' });
+      } else if ($scope.$parent.form.$name === 'organizationInspectionForm') {
+        $scope.model.auditDetails = AuditDetails.query({ type: 'organizations' });
+      }
     };
 
     $scope.changedSortOrder = function (newValue, oldValue) {
@@ -57,7 +61,7 @@
 
   }
 
-  AircraftAuditDetailCtrl.$inject = ['$scope', 'AuditDetails'];
+  CommonAuditDetailCtrl.$inject = ['$scope', 'AuditDetails'];
 
-  angular.module('gva').controller('AircraftAuditDetailCtrl', AircraftAuditDetailCtrl);
+  angular.module('gva').controller('CommonAuditDetailCtrl', CommonAuditDetailCtrl);
 }(angular, _));
