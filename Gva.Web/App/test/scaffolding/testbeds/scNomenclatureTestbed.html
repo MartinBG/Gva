@@ -37,5 +37,29 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label class="control-label">ObjectMode multiple</label>
+        <sc-nomenclature ng-model="multipleObjVal" alias="'gender'" multiple="multiple"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-5">
+        <div class="labeless">
+          <span id="multipleObjVal">{{multipleObjVal}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label class="control-label">IdMode multiple</label>
+        <sc-nomenclature ng-model="multipleIdVal" alias="'countries'" mode="id" multiple="multiple"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-5">
+        <div class="labeless">
+          <span id="multipleIdVal">{{multipleIdVal}}</span>
+        </div>
+      </div>
+    </div>
+
   </form>
 </div>

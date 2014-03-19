@@ -60,11 +60,22 @@
 
   ScNomenclature.prototype.set = function (text) {
     var context = this.context,
+        container = this.container,
         dropdownResultByTextXpath = this.dropdownResultByTextXpath.replace('$TERM$', text);
 
-    return this.container.click().then(function () {
-      return context.findElement(by.xpath(dropdownResultByTextXpath)).then(function (result) {
-        return result.click();
+    return this.multiple.then(function (multiple) {
+      var clickPromise;
+
+      if (multiple) {
+        clickPromise = container.findElement(by.css('li.select2-search-field input')).click();
+      } else {
+        clickPromise = container.click();
+      }
+
+      return clickPromise.then(function () {
+        return context.findElement(by.xpath(dropdownResultByTextXpath)).then(function (result) {
+          return result.click();
+        });
       });
     });
   };

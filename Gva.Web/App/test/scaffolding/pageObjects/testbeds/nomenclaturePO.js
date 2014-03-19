@@ -14,6 +14,11 @@
     this.childNomenclature = new ScNomenclature('childVal', context);
     this.selectedParentNomIdSpan = context.findElement(by.id('selectedParentNomId'));
     this.selectedChildNomIdSpan = context.findElement(by.id('selectedChildNomId'));
+
+    this.multipleObjValNomenclature = new ScNomenclature('multipleObjVal', context);
+    this.multipleIdValNomenclature = new ScNomenclature('multipleIdVal', context);
+    this.selectedMultipleObjValSpan = context.findElement(by.id('multipleObjVal'));
+    this.selectedMultipleIdValSpan = context.findElement(by.id('multipleIdVal'));
   }
 
   NomenclaturePO.prototype.selectedNomId = function () {
@@ -30,6 +35,14 @@
 
   NomenclaturePO.prototype.selectedChildNomId = function () {
     return this.selectedChildNomIdSpan.getText();
+  };
+
+  NomenclaturePO.prototype.selectedMultipleObjVal = function () {
+    return this.selectedMultipleObjValSpan.getText();
+  };
+
+  NomenclaturePO.prototype.selectedMultipleIdVal = function () {
+    return this.selectedMultipleIdValSpan.getText();
   };
 
   NomenclaturePO.prototype.changeNomValue = function () {

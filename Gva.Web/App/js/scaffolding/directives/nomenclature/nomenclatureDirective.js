@@ -11,7 +11,7 @@
       var idProp = scNomenclatureConfig.idProp,
           nameProp = scNomenclatureConfig.nameProp,
           alias = scope.alias(),
-          query = { alias: alias },
+          isMultiple = angular.isDefined(iAttrs.multiple),
           initSelectionFunc,
           nomObjFunc,
           paramsFunc,
@@ -28,7 +28,7 @@
       if (iAttrs.params) {
         paramsFunc = $parse(iAttrs.params);
         createQuery = function (params) {
-          return _.assign({}, query, params, paramsFunc(scope.$parent));
+          return _.assign({}, { alias: alias }, params, paramsFunc(scope.$parent));
         };
 
         scope.$parent.$watch(function () {
@@ -43,7 +43,7 @@
         true);
       } else {
         createQuery = function (params) {
-          return _.assign({}, query, params);
+          return _.assign({}, { alias: alias }, params);
         };
       }
 
@@ -59,16 +59,26 @@
 
           if (viewValue === null || viewValue === undefined) {
             return viewValue;
+          } else if (_.isArray(viewValue)) {
+            return _.map(viewValue, function (item) {
+              return item[idProp];
+            });
           } else {
             return viewValue[idProp];
           }
         });
 
         initSelectionFunc = function (element, callback) {
-          var id = element.val();
+          var val = element.select2('val'),
+              resultPromise;
 
-          Nomenclature
-            .get(createQuery({ id: id })).$promise
+          if (isMultiple) {
+            resultPromise = Nomenclature.query(createQuery({ ids: val.join(',') })).$promise;
+          } else {
+            resultPromise = Nomenclature.get(createQuery({ id: val })).$promise;
+          }
+
+          resultPromise
             .then(function (result) {
               if (nomObjFunc && nomObjFunc.assign) {
                 nomObjFunc.assign(scope.$parent, result);
@@ -80,7 +90,7 @@
       }
 
       scope.select2Options = {
-        multiple: 'multiple' in iAttrs,
+        multiple: isMultiple,
         allowClear: true,
         placeholder: ' ', //required for allowClear to work
         query: function (query) {

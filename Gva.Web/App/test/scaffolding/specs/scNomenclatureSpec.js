@@ -50,5 +50,27 @@
       expect(nomenclaturePage.childNomenclature.getDropdownResults())
         .toEqual(['Цавтат', 'Загреб', 'Велика Горица']);
     });
+
+    it('should display initial value for multiple object mode nomenclature', function () {
+      expect(nomenclaturePage.multipleObjValNomenclature.get()).toEqual(['Мъж']);
+    });
+
+    it('should update model for multiple object mode nomenclature', function () {
+      nomenclaturePage.multipleObjValNomenclature.set('Жена');
+      expect(nomenclaturePage.multipleObjValNomenclature.get()).toEqual(['Мъж', 'Жена']);
+      expect(nomenclaturePage.selectedMultipleObjVal()).toEqual(
+        '[{"nomValueId":1,"code":"M","name":"Мъж","nameAlt":"Male","alias":"male"},' +
+        '{"nomValueId":2,"code":"W","name":"Жена","nameAlt":"Female","alias":"female"}]');
+    });
+
+    it('should display initial value for multiple id mode nomenclature', function () {
+      expect(nomenclaturePage.multipleIdValNomenclature.get()).toEqual(['Азербайджан']);
+    });
+
+    it('should update model for multiple id mode nomenclature', function () {
+      nomenclaturePage.multipleIdValNomenclature.set('Кувейт');
+      expect(nomenclaturePage.multipleIdValNomenclature.get()).toEqual(['Азербайджан', 'Кувейт']);
+      expect(nomenclaturePage.selectedMultipleIdVal()).toEqual('[6,14]');
+    });
   });
 }(protractor, describe, beforeEach, it, expect, require));

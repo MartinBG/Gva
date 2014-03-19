@@ -181,12 +181,19 @@
         })
       .when('GET',
           '/api/nomenclatures/:alias' +
-          '?term&id&staffTypeId&parentAlias&parentValueId&va',
+          '?term&id&ids&staffTypeId&parentAlias&parentValueId&va',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          } else if ($params.ids) {
+            var ids = _.map($params.ids.split(','), function (idStr) {
+              return parseInt(idStr, 10);
+            });
+            res = _.filter(res, function (nom) {
+              return _.contains(ids, nom.nomValueId);
+            });
           } else if ($params.va) {
             res = $filter('filter')(res, { alias: $params.va }, true)[0];
           } else {
