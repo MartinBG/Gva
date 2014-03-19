@@ -40,13 +40,11 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetApplications(DateTime? fromDate = null, DateTime? toDate = null, string lin = null, string regUri = null)
+        public IHttpActionResult GetApplications(DateTime? fromDate = null, DateTime? toDate = null, string lin = null)
         {
-            var applications = this.applicationRepository.GetApplications(fromDate, toDate, lin, regUri);
+            var applications = this.applicationRepository.GetApplications(fromDate, toDate, lin);
 
             return Ok(applications);
         }
-
-       
     }
 }

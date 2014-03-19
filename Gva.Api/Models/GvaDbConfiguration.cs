@@ -10,6 +10,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaCaseTypeMap());
             modelBuilder.Configurations.Add(new GvaLotCaseMap());
             modelBuilder.Configurations.Add(new GvaApplicationMap());
+            modelBuilder.Configurations.Add(new GvaApplicationSearchMap());
             modelBuilder.Configurations.Add(new GvaAppLotFileMap());
             modelBuilder.Configurations.Add(new GvaFileMap());
             modelBuilder.Configurations.Add(new GvaLotFileMap());

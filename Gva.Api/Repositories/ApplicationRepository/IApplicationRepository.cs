@@ -1,15 +1,24 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
 using System;
+using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
     public interface IApplicationRepository
     {
-        IEnumerable<GvaApplication> GetApplications(DateTime? fromDate, DateTime? toDate, string lin, string regUri);
+        IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin);
 
-        GvaApplication GetApplication(int applicationId);
+        GvaApplication[] GetNomApplications(int lotId);
 
-        void AddApplication(GvaApplication application);
+        void AddGvaApplication(GvaApplication gvaApplication);
+
+        void DeleteGvaApplication(int gvaAppLotPartId);
+
+        GvaApplicationSearch GetGvaApplicationSearch(int lotPartId);
+
+        void AddGvaApplicationSearch(GvaApplicationSearch gvaApplicationSearch);
+
+        void DeleteGvaApplicationSearch(int lotPartId);
     }
 }

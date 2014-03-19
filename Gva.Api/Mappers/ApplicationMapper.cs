@@ -8,7 +8,7 @@ namespace Gva.Api.Mappers
     {
         public void CreateMap()
         {
-            Mapper.CreateMap<GvaApplication, ApplicationDO>()
+            Mapper.CreateMap<GvaApplication, ApplicationNomDO>()
                 .ForMember(a => a.ApplicationId, m => m.MapFrom(ga => ga.GvaApplicationId))
                 .ForMember(a => a.PartIndex, m => m.MapFrom(ga => ga.GvaAppLotPart.Index))
                 .ForMember(a => a.ApplicationName, m => m.ResolveUsing(ga =>

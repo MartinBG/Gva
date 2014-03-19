@@ -16,6 +16,7 @@ using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using System.Data.Entity;
 using Common.Api.Models;
+using Gva.Api.Repositories.ApplicationRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -28,6 +29,8 @@ namespace Gva.Api.Controllers
         private IInventoryRepository inventoryRepository;
         private IPersonRepository personRepository;
         private IFileRepository fileRepository;
+        private IApplicationRepository applicationRepository;
+
 
         public PersonsController(
             IUserContextProvider userContextProvider,
@@ -35,7 +38,8 @@ namespace Gva.Api.Controllers
             ILotRepository lotRepository,
             IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IApplicationRepository applicationRepository)
             : base(lotRepository, fileRepository, userContextProvider, unitOfWork)
         {
             this.userContext = userContextProvider.GetCurrentUserContext();
@@ -44,6 +48,7 @@ namespace Gva.Api.Controllers
             this.inventoryRepository = inventoryRepository;
             this.personRepository = personRepository;
             this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("")]
@@ -98,7 +103,7 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            var applications = Mapper.Map<GvaApplication[], ApplicationDO[]>(this.fileRepository.GetApplications(lotId));
+            var applications = Mapper.Map<GvaApplication[], ApplicationNomDO[]>(this.applicationRepository.GetNomApplications(lotId));
 
             if (!string.IsNullOrWhiteSpace(term))
             {
@@ -203,8 +208,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^licences/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
         public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
@@ -259,8 +263,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
         public IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
@@ -283,6 +286,40 @@ namespace Gva.Api.Controllers
             this.unitOfWork.Save();
 
             return Ok();
+        }
+
+        [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
+        public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
+
+            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
+
+            lot.Commit(this.userContext);
+
+            GvaApplication application = new GvaApplication()
+            {
+                Lot = lot,
+                GvaAppLotPart = partVersion.Part
+            };
+
+            applicationRepository.AddGvaApplication(application);
+
+            this.unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
+        public IHttpActionResult DeleteApplication(int lotId, string path)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+
+            applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
+
+            return base.DeletePart(lotId, path);
         }
     }
 }

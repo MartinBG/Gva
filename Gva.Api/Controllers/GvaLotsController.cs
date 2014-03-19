@@ -90,7 +90,7 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var partVersion = lot.DeletePart(path, this.userContext);
-            this.fileRepository.DeleteFileReferences(partVersion.PartId);
+            this.fileRepository.DeleteFileReferences(partVersion.Part.PartId);
             lot.Commit(this.userContext);
 
             this.unitOfWork.Save();

@@ -72,33 +72,6 @@ namespace Gva.Api.Repositories.FileRepository
                 .ToArray();
         }
 
-        public GvaApplication[] GetApplications(int lotId)
-        {
-            return this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotPart)
-                .Where(a => a.LotId == lotId)
-                .ToArray();
-        }
-
-        public void AddApplication(GvaApplication application)
-        {
-            this.unitOfWork.DbContext.Set<GvaApplication>().Add(application);
-        }
-
-        public void DeleteApplication(int gvaAppLotPartId)
-        {
-            var application = this.unitOfWork.DbContext.Set<GvaApplication>()
-                .Include(a => a.GvaAppLotFiles)
-                .SingleOrDefault(a => a.GvaAppLotPartId == gvaAppLotPartId);
-
-            foreach (var appFile in application.GvaAppLotFiles.ToList())
-            {
-                this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(appFile);
-            }
-
-            this.unitOfWork.DbContext.Set<GvaApplication>().Remove(application);
-        }
-
         private GvaLotFile AddLotFile(Part part, dynamic fileObj)
         {
             var key = new Guid((string)fileObj.file.key);

@@ -640,14 +640,14 @@
           select: 'Избери'
         },
         search: {
-          fromDate: 'От дата',
-          toDate: 'До дата',
+          fromDate: 'От дата на заявител',
+          toDate: 'До дата на заявител',
           search: 'Търси',
           newApp: 'Ново',
           linkApp: 'Свържи',
-          regDate: 'Дата',
-          regUri: 'Рег.№',
-          subject: 'Относно',
+          requestDate: 'Дата на заявител',
+          documentNumber: '№ на документ',
+          applicationType: 'Тип заявление',
           status: 'Статус',
           lin: 'ЛИН',
           applicant: 'Заявител'

@@ -13,11 +13,5 @@ namespace Gva.Api.Repositories.FileRepository
         void DeleteFileReferences(int partId);
 
         GvaLotFile[] GetFileReferences(int partId);
-
-        GvaApplication[] GetApplications(int lotId);
-
-        void AddApplication(GvaApplication application);
-
-        void DeleteApplication(int gvaAppLotPartId);
     }
 }

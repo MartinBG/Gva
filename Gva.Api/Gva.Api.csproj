@@ -95,7 +95,8 @@
     <Compile Include="Mappers\PersonMapper.cs" />
     <Compile Include="Mappers\RatingPartVersionMapper.cs" />
     <Compile Include="Mappers\Resolvers\FileResolver.cs" />
-    <Compile Include="ModelsDO\ApplicationDO.cs" />
+    <Compile Include="ModelsDO\ApplicationListDO.cs" />
+    <Compile Include="ModelsDO\ApplicationNomDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
+    <Compile Include="Models\GvaApplicationSearch.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />

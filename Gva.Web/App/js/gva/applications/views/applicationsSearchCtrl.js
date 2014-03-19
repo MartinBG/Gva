@@ -28,13 +28,20 @@
       return $state.go('root.applications.search', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
-        lin: $scope.filters.lin,
-        regUri: $scope.filters.regUri
+        lin: $scope.filters.lin
       });
     };
 
     $scope.viewApplication = function (application) {
-      return $state.go('root.applications.edit.case', { id: application.applicationId });
+      if (application.docId) {
+        return $state.go('root.applications.edit.case', { id: application.applicationId });
+      }
+      else {
+        return $state.go('root.persons.view.documentApplications.edit', {
+          id: application.personId,
+          ind: application.appPartIndex
+        });
+      }
     };
 
     $scope.newApp = function () {

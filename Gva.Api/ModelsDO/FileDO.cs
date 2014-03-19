@@ -7,7 +7,7 @@ namespace Gva.Api.ModelsDO
     {
         public FileDO()
         {
-            this.Applications = new List<ApplicationDO>();
+            this.Applications = new List<ApplicationNomDO>();
         }
 
         public int LotFileId { get; set; }
@@ -20,6 +20,6 @@ namespace Gva.Api.ModelsDO
 
         public bool IsDocFile { get; set; }
 
-        public List<ApplicationDO> Applications { get; set; }
+        public List<ApplicationNomDO> Applications { get; set; }
     }
 }

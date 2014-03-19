@@ -34,7 +34,7 @@ namespace Gva.Api.Mappers.Resolvers
                     LotFileId = lotFile.GvaLotFileId,
                     BookPageNumber = lotFile.PageIndex,
                     PageCount = lotFile.PageNumber,
-                    Applications = Mapper.Map<List<GvaApplication>, List<ApplicationDO>>(lotFile.GvaAppLotFiles.Select(af => af.GvaApplication).ToList())
+                    Applications = Mapper.Map<List<GvaApplication>, List<ApplicationNomDO>>(lotFile.GvaAppLotFiles.Select(af => af.GvaApplication).ToList())
                 };
 
                 FileDataDO fileData = new FileDataDO();

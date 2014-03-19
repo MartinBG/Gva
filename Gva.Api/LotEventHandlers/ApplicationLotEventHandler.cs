@@ -4,16 +4,17 @@ using Gva.Api.Models;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
+using Gva.Api.Repositories.ApplicationRepository;
 
 namespace Gva.Api.LotEventHandlers
 {
     public class ApplicationLotEventHandler : ILotEventHandler
     {
-        private IFileRepository fileRepository;
+        private IApplicationRepository applicationRepository;
 
-        public ApplicationLotEventHandler(IFileRepository fileRepository)
+        public ApplicationLotEventHandler(IApplicationRepository applicationRepository)
         {
-            this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         public void Handle(IEvent e)
@@ -32,18 +33,36 @@ namespace Gva.Api.LotEventHandlers
             {
                 if (applicationPart.PartOperation == PartOperation.Add)
                 {
-                    GvaApplication application = new GvaApplication()
+                    dynamic applicationPartContent = applicationPart.Content;
+
+                    GvaApplicationSearch gvaApplicationSearch = new GvaApplicationSearch()
                     {
-                        Lot = lot,
-                        GvaAppLotPart = applicationPart.Part
+                        RequestDate = applicationPartContent.requestDate,
+                        DocumentNumber = applicationPartContent.documentNumber,
+                        ApplicationTypeName = applicationPartContent.applicationType != null ? applicationPartContent.applicationType.name : null,
+                        //StatusName = applicationPartContent.applicationStatus != null ? applicationPartContent.applicationStatus.name : null
                     };
 
-                    this.fileRepository.AddApplication(application);
+                    this.applicationRepository.AddGvaApplicationSearch(gvaApplicationSearch);
                 }
 
                 if (applicationPart.PartOperation == PartOperation.Delete)
                 {
-                    this.fileRepository.DeleteApplication(applicationPart.Part.PartId);
+                    this.applicationRepository.DeleteGvaApplicationSearch(applicationPart.Part.PartId);
+                }
+
+                if (applicationPart.PartOperation == PartOperation.Update)
+                {
+                    dynamic applicationPartContent = applicationPart.Content;
+
+                    var gvaApplicationSearch = this.applicationRepository.GetGvaApplicationSearch(applicationPart.Part.PartId);
+
+                    if (gvaApplicationSearch != null)
+                    {
+                        gvaApplicationSearch.RequestDate = applicationPartContent.requestDate;
+                        gvaApplicationSearch.DocumentNumber = applicationPartContent.documentNumber;
+                        gvaApplicationSearch.ApplicationTypeName = applicationPartContent.applicationType != null ? applicationPartContent.applicationType.name : null;
+                    }
                 }
             }
         }
