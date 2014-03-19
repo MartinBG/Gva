@@ -79,7 +79,7 @@ namespace Gva.Api.Controllers
 
                 dynamic personData = person.Value<JObject>("personData");
                 newLot.CreatePart("personData", personData, this.userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, personData.Content.Value<JArray>("caseTypes"));
+                this.caseTypeRepository.AddCaseTypes(newLot, personData.Value<JArray>("caseTypes"));
 
                 newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
 
@@ -284,7 +284,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult PostPersonData(int lotId, string path, JObject content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            this.caseTypeRepository.AddCaseTypes(lot, content.Value<JArray>("caseTypes"));
+            this.caseTypeRepository.AddCaseTypes(lot, (content as dynamic).part.caseTypes);
 
             return base.PostPart(lotId, path, content);
         }
