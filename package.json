@@ -1,0 +1,12 @@
+{
+  "name": "gva",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-copy": "0.5.0",
+    "grunt-msbuild": "0.1.11",
+    "grunt-run-grunt": "angelyordanov/grunt-run-grunt#103bea96da66b15c86b841d93ce8fd611541fbde"
+  }
+}

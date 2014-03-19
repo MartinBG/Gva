@@ -317,7 +317,10 @@ module.exports = function (grunt) {
     bundle: {
       options: {
         appPath: '/app',
-        bundles: ['<%= jsBundles %>', '<%= cssBundles %>']
+        bundles: ['<%= jsBundles %>', '<%= cssBundles %>'],
+        data: {
+          fullVersion: grunt.option('fullVersion')
+        }
       },
       debug: {
         options: {

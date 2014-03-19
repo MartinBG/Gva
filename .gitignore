@@ -3,7 +3,12 @@ packages/**/*
 
 TestResults/**
 
+build/*
+build/**/*
+
+node_modules/*
+node_modules/**/*
+
 *.tmp
 *.suo
 *.csproj.user
-
