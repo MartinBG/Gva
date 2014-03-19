@@ -66,6 +66,7 @@ namespace Gva.Api.Repositories.FileRepository
             return this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.DocFile)
                 .Include(f => f.GvaFile)
+                .Include(f => f.GvaCaseType)
                 .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaAppLotFiles.Select(gf => gf.GvaApplication))
                 .Where(f => f.LotPartId == partId)
@@ -76,25 +77,19 @@ namespace Gva.Api.Repositories.FileRepository
         {
             var key = new Guid((string)fileObj.file.key);
 
-            var file = this.unitOfWork.DbContext.Set<GvaFile>()
-                .SingleOrDefault(f => f.FileContentId == key);
-
-            if (file == null)
+            var file = new GvaFile()
             {
-                file = new GvaFile()
-                {
-                    Filename = (string)fileObj.file.name,
-                    FileContentId = key
-                };
+                Filename = (string)fileObj.file.name,
+                FileContentId = key
+            };
 
-                this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
-            }
+            this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
 
             GvaLotFile newLotFile = new GvaLotFile()
             {
                 LotPart = part,
                 GvaFile = file,
-                GvaCaseTypeId = 1, // TO DO
+                GvaCaseTypeId = fileObj.caseType.nomValueId,
                 PageNumber = fileObj.bookPageNumber,
                 PageIndex = fileObj.pageCount
             };
@@ -117,6 +112,7 @@ namespace Gva.Api.Repositories.FileRepository
 
         private void UpdateLotFile(GvaLotFile lotFile, dynamic fileObj)
         {
+            lotFile.GvaCaseTypeId = fileObj.caseType.nomValueId;
             lotFile.PageNumber = fileObj.bookPageNumber;
             lotFile.PageIndex = fileObj.pageCount;
 
@@ -160,13 +156,8 @@ namespace Gva.Api.Repositories.FileRepository
                 this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(gvaAppLotFile);
             }
 
-            var gvaFile = lotFile.GvaFile;
+            this.unitOfWork.DbContext.Set<GvaFile>().Remove(lotFile.GvaFile);
             this.unitOfWork.DbContext.Set<GvaLotFile>().Remove(lotFile);
-
-            if (gvaFile.GvaLotFiles.Count == 0)
-            {
-                this.unitOfWork.DbContext.Set<GvaFile>().Remove(gvaFile);
-            }
         }
     }
 }

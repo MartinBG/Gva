@@ -87,6 +87,7 @@
     <Compile Include="LotEventHandlers\InventoryLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\PersonLotEventHandler.cs" />
     <Compile Include="Mappers\ApplicationMapper.cs" />
+    <Compile Include="Mappers\CaseTypeNomMapper.cs" />
     <Compile Include="Mappers\FilePartVersionMapper.cs" />
     <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Mappers\InventoryItemMapper.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />
+    <Compile Include="Repositories\CaseTypeRepository\CaseTypeRepository.cs" />
+    <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\FileRepository\FileRepository.cs" />
     <Compile Include="Repositories\FileRepository\IFileRepository.cs" />
     <Compile Include="Repositories\InventoryRepository\IInventoryRepository.cs" />

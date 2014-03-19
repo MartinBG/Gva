@@ -3,6 +3,7 @@ using Gva.Api.LotEventHandlers;
 using Gva.Api.Mappers;
 using Gva.Api.Models;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -25,6 +26,7 @@ namespace Gva.Api
             Bind<IApplicationRepository>().To<ApplicationRepository>();
             Bind<IInventoryRepository>().To<InventoryRepository>();
             Bind<IFileRepository>().To<FileRepository>();
+            Bind<ICaseTypeRepository>().To<CaseTypeRepository>();
 
             Bind<IMapper>().To<JObjectMapper>();
             Bind<IMapper>().To<PartVersionMapper>();
@@ -33,6 +35,7 @@ namespace Gva.Api
             Bind<IMapper>().To<RatingPartVersionMapper>();
             Bind<IMapper>().To<InventoryItemMapper>();
             Bind<IMapper>().To<ApplicationMapper>();
+            Bind<IMapper>().To<CaseTypeNomMapper>();
         }
     }
 }

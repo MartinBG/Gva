@@ -27,7 +27,7 @@
       newDocOtherPage.documentDateValidTo.set('01.01.2020');
       newDocOtherPage.documentPublisher.set('AAK Progres');
       newDocOtherPage.personOtherDocumentType.set('Протокол');
-      newDocOtherPage.personOtherDocumentRole.set('Летателна проверка');
+      newDocOtherPage.personOtherDocumentRole.set('Нарушение');
       newDocOtherPage.notes.set('notes');
 
       newDocOtherPage.save();

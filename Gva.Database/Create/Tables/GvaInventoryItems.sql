@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[GvaInventoryItems] (
     [LotId]              INT              NOT NULL,
     [LotPartId]          INT              NOT NULL,
     [DocumentType]       NVARCHAR(50)     NOT NULL,
-    [Name]               NVARCHAR(50)     NOT NULL,
+    [Name]               NVARCHAR(MAX)    NOT NULL,
     [BookPageNumber]     NVARCHAR(50)     NULL,
     [PageCount]          INT              NULL,
     [Type]               NVARCHAR(150)    NULL,

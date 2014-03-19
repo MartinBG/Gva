@@ -30,6 +30,48 @@
 
           return [200, res];
         })
+      .when('GET', '/api/nomenclatures/otherDocumentRoles?term&id',
+        function ($params, $filter) {
+          var res = nomenclatures.documentRoles;
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          } else {
+            res = $filter('filter')(
+              res,
+              function (nom) {
+                return nom.textContent.categoryAlias === 'other';
+              },
+              true);
+
+            if ($params.term) {
+              res = $filter('filter')(res, { name: $params.term }, false);
+            }
+          }
+
+          return [200, res];
+        })
+      .when('GET', '/api/nomenclatures/otherDocumentTypes?term&id',
+        function ($params, $filter) {
+          var res = nomenclatures.documentTypes;
+
+          if ($params.id) {
+            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
+          } else {
+            res = $filter('filter')(
+              res,
+              function (nom) {
+                return nom.textContent.isIdDocument === 'false';
+              },
+              true);
+
+            if ($params.term) {
+              res = $filter('filter')(res, { name: $params.term }, false);
+            }
+          }
+
+          return [200, res];
+        })
       .when('GET', '/api/nomenclatures/documentRoles?term&id&categoryAlias&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.documentRoles;
@@ -50,8 +92,7 @@
               res = $filter('filter')(
                 res,
                 function (nom) {
-                  return nom.textContent.staffAlias === undefined ||
-                         nom.textContent.staffAlias === $params.staffCode;
+                  return nom.textContent.staffAlias === undefined;
                 },
                 true);
             }

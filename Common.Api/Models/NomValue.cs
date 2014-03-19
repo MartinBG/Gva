@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
+using Newtonsoft.Json;
 
 namespace Common.Api.Models
 {
@@ -22,8 +23,10 @@ namespace Common.Api.Models
 
         public bool? IsActive { get; set; }
 
+        [JsonIgnore]
         public virtual Nom Nom { get; set; }
 
+        [JsonIgnore]
         public virtual NomValue ParentValue { get; set; }
     }
 

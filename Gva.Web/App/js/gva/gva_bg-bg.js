@@ -34,7 +34,8 @@
           email: 'E-mail',
           fax: 'Факс',
           companyPhone: 'Служебен телефон',
-          phones: 'Телефони'
+          phones: 'Телефони',
+          caseTypes: 'Типове дела'
         },
         personAddressDirective: {
           title: 'Адрес',
@@ -70,6 +71,7 @@
           fileName: 'Име на файл',
           bookPageNumber: '№ стр. в дело',
           pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
           applications: 'Заявления'
         },
         personApplicationDirective: {

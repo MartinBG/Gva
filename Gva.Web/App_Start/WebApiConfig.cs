@@ -31,7 +31,6 @@ namespace Gva.Web
 
             config.MapHttpAttributeRoutes();
 
-            Mapper.Configuration.ConstructServicesUsing(x => kernel.Get(x));
             foreach (IWebApiConfig webApiConfig in kernel.GetAll<IWebApiConfig>())
             {
                 webApiConfig.RegisterRoutes(config);

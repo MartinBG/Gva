@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Common.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.FileRepository;
@@ -34,6 +35,7 @@ namespace Gva.Api.Mappers.Resolvers
                     LotFileId = lotFile.GvaLotFileId,
                     BookPageNumber = lotFile.PageIndex,
                     PageCount = lotFile.PageNumber,
+                    CaseType = Mapper.Map<GvaCaseType, NomValue>(lotFile.GvaCaseType),
                     Applications = Mapper.Map<List<GvaApplication>, List<ApplicationNomDO>>(lotFile.GvaAppLotFiles.Select(af => af.GvaApplication).ToList())
                 };
 

@@ -107,6 +107,12 @@
           <sc-text ng-model="model.phone1"></sc-text>
         </div>
       </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="persons.personDataDirective.caseTypes"></label>
+          <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'personCaseTypes'" multiple></sc-nomenclature>
+        </div>
+      </div>
     </div>
   </div>
 </ng-form>

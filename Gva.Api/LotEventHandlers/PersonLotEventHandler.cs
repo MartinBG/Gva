@@ -3,7 +3,6 @@ using System.Linq;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.Repositories.PersonRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -120,7 +119,7 @@ namespace Gva.Api.LotEventHandlers
             var personEmploymentPart = commit.PartVersions
                 .Where(pv => pv.Part.SetPart.Alias == "employment" && pv.PartOperation != PartOperation.Delete)
                 .OrderByDescending(pv => pv.CreateDate)
-                .FirstOrDefault();
+                .FirstOrDefault(pv => (pv.Content as dynamic).valid.code == "Y");
 
             if (personEmploymentPart != null)
             {

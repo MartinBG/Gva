@@ -20,7 +20,7 @@ namespace Gva.Api.ModelsDO
 
         public string Publisher { get; set; }
 
-        public string Valid { get; set; }
+        public bool Valid { get; set; }
 
         public DateTime? FromDate { get; set; }
 

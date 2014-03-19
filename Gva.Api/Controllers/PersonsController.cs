@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using AutoMapper;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -30,7 +32,7 @@ namespace Gva.Api.Controllers
         private IPersonRepository personRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
-
+        private ICaseTypeRepository caseTypeRepository;
 
         public PersonsController(
             IUserContextProvider userContextProvider,
@@ -39,7 +41,8 @@ namespace Gva.Api.Controllers
             IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
             IFileRepository fileRepository,
-            IApplicationRepository applicationRepository)
+            IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository)
             : base(lotRepository, fileRepository, userContextProvider, unitOfWork)
         {
             this.userContext = userContextProvider.GetCurrentUserContext();
@@ -49,6 +52,7 @@ namespace Gva.Api.Controllers
             this.personRepository = personRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("")]
@@ -73,10 +77,11 @@ namespace Gva.Api.Controllers
             {
                 var newLot = this.lotRepository.GetSet("Person").CreateLot(this.userContext);
 
-                newLot.CreatePart("personData", person.Value<JObject>("personData"), this.userContext);
+                dynamic personData = person.Value<JObject>("personData");
+                newLot.CreatePart("personData", personData, this.userContext);
+                this.caseTypeRepository.AddCaseTypes(newLot, personData.Content.Value<JArray>("caseTypes"));
 
                 newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
-
 
                 newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
 
@@ -112,6 +117,29 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(applications);
+        }
+
+        [Route("~/api/nomenclatures/personCaseTypes")]
+        public IHttpActionResult GetCaseTypes(int? lotId = null, string term = null)
+        {
+            IEnumerable<GvaCaseType> caseTypes;
+            if (lotId.HasValue)
+            {
+                caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId.Value);
+            }
+            else
+            {
+                var set = this.lotRepository.GetSet("Person");
+                caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set.SetId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                term = term.ToLower();
+                caseTypes = caseTypes.Where(ct => ct.Name.ToLower().Contains(term));
+            }
+
+            return Ok(Mapper.Map<IEnumerable<GvaCaseType>, IEnumerable<NomValue>>(caseTypes));
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
@@ -234,7 +262,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personData$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentChecks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
@@ -250,6 +277,15 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
+            return base.PostPart(lotId, path, content);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^personData$)}")]
+        public IHttpActionResult PostPersonData(int lotId, string path, JObject content)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            this.caseTypeRepository.AddCaseTypes(lot, content.Value<JArray>("caseTypes"));
+
             return base.PostPart(lotId, path, content);
         }
 

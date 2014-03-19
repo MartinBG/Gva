@@ -27,8 +27,7 @@ namespace Gva.Api.Models
             this.HasKey(t => t.GvaLotCaseId);
 
             // Properties
-            this.Property(t => t.GvaLotCaseId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            this.Property(t => t.GvaLotCaseId);
 
             // Table & Column Mappings
             this.ToTable("GvaLotCases");

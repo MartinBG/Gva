@@ -41,7 +41,7 @@ namespace Gva.Api.LotEventHandlers
                 }
                 else
                 {
-                    var inventoryItem = this.inventoryRepository.GetInventoryItem(partVersion.PartId);
+                    var inventoryItem = this.inventoryRepository.GetInventoryItem(partVersion.Part.PartId);
 
                     if (partVersion.PartOperation == PartOperation.Update)
                     {

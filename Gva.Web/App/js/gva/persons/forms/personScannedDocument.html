@@ -10,6 +10,11 @@
       <div ng-repeat="file in model | filter:showFile()">
         <ng-form name="innerForm" sc-validate="{}">
           <div class="row">
+            <div class="form-group col-sm-2" sc-has-error="caseType">
+              <label class="control-label" l10n-text="persons.personScannedDocumentDirective.caseType"></label>
+              <sc-validation-error field-name="caseType" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature ng-model="file.caseType" name="caseType" alias="'personCaseTypes'" params="{lotId: lotId}" ng-required="true"></sc-nomenclature>
+            </div>
             <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
               <label class="control-label" l10n-text="persons.personScannedDocumentDirective.bookPageNumber"></label>
               <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
@@ -20,7 +25,7 @@
               <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
               <sc-int ng-model="file.pageCount" name="pageCount" min="0"></sc-int>
             </div>
-            <div class="form-group col-sm-4 col-md-3" sc-has-error="file">
+            <div class="form-group col-sm-3" sc-has-error="file">
               <label class="control-label" l10n-text="persons.personScannedDocumentDirective.fileName"></label>
               <sc-validation-error field-name="file" validations="{required: null}"></sc-validation-error>
               <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-required="true"></sc-files>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
@@ -17,6 +18,8 @@ namespace Gva.Api.ModelsDO
         public string BookPageNumber { get; set; }
 
         public string PageCount { get; set; }
+
+        public NomValue CaseType { get; set; }
 
         public bool IsDocFile { get; set; }
 

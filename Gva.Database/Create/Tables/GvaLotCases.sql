@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[GvaLotCases] (
-    [GvaLotCaseId]   INT NOT NULL,
+    [GvaLotCaseId]   INT NOT NULL IDENTITY,
     [GvaCaseTypeId]  INT NOT NULL,
     [LotId]          INT NOT NULL,
     CONSTRAINT [PK_GvaLotCases] PRIMARY KEY ([GvaLotCaseId]),
