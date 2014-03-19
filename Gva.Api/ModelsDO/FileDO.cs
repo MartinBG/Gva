@@ -17,7 +17,7 @@ namespace Gva.Api.ModelsDO
 
         public string BookPageNumber { get; set; }
 
-        public string PageCount { get; set; }
+        public int? PageCount { get; set; }
 
         public NomValue CaseType { get; set; }
 

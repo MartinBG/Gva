@@ -90,8 +90,8 @@ namespace Gva.Api.Repositories.FileRepository
                 LotPart = part,
                 GvaFile = file,
                 GvaCaseTypeId = fileObj.caseType.nomValueId,
-                PageNumber = fileObj.bookPageNumber,
-                PageIndex = fileObj.pageCount
+                PageNumber = (int?)fileObj.pageCount,
+                PageIndex = fileObj.bookPageNumber
             };
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
@@ -113,8 +113,8 @@ namespace Gva.Api.Repositories.FileRepository
         private void UpdateLotFile(GvaLotFile lotFile, dynamic fileObj)
         {
             lotFile.GvaCaseTypeId = fileObj.caseType.nomValueId;
-            lotFile.PageNumber = fileObj.bookPageNumber;
-            lotFile.PageIndex = fileObj.pageCount;
+            lotFile.PageNumber = fileObj.pageCount;
+            lotFile.PageIndex = fileObj.bookPageNumber;
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
                 (JArray)fileObj.applications,

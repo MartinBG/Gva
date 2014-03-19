@@ -20,9 +20,9 @@
     };
 
     $scope.save = function () {
-      $scope.personDocumentCheckForm.$validate()
+      $scope.editDocumentCheckForm.$validate()
       .then(function () {
-        if ($scope.personDocumentCheckForm.$valid) {
+        if ($scope.editDocumentCheckForm.$valid) {
           return PersonDocumentCheck
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentCheck)
             .$promise

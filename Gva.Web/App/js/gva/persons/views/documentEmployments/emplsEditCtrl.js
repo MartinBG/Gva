@@ -12,9 +12,9 @@
     $scope.personDocumentEmployment = employment;
 
     $scope.save = function () {
-      $scope.personDocumentEmploymentForm.$validate()
+      $scope.editDocumentEmploymentForm.$validate()
         .then(function () {
-          if ($scope.personDocumentEmploymentForm.$valid) {
+          if ($scope.editDocumentEmploymentForm.$valid) {
             return PersonDocumentEmployment
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.personDocumentEmployment).$promise

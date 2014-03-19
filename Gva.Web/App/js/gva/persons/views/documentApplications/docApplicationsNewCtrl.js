@@ -13,9 +13,9 @@
     $scope.personDocumentApplication = personDocumentApplication;
 
     $scope.save = function () {
-      $scope.personDocumentApplicationForm.$validate()
+      $scope.newDocumentApplicationForm.$validate()
          .then(function () {
-            if ($scope.personDocumentApplicationForm.$valid) {
+            if ($scope.newDocumentApplicationForm.$valid) {
               return PersonDocumentApplication
               .save({ id: $stateParams.id }, $scope.personDocumentApplication).$promise
               .then(function () {

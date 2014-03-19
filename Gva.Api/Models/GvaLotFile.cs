@@ -23,7 +23,7 @@ namespace Gva.Api.Models
 
         public string PageIndex { get; set; }
 
-        public string PageNumber { get; set; }
+        public int? PageNumber { get; set; }
 
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
 
@@ -45,9 +45,6 @@ namespace Gva.Api.Models
 
             // Properties
             this.Property(t => t.PageIndex)
-                .HasMaxLength(50);
-
-            this.Property(t => t.PageNumber)
                 .IsRequired()
                 .HasMaxLength(50);
 

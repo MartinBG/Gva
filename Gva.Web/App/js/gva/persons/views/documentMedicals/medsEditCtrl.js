@@ -12,9 +12,9 @@
     $scope.personDocumentMedical = med;
 
     $scope.save = function () {
-      $scope.personDocumentMedicalForm.$validate()
+      $scope.editDocumentMedicalForm.$validate()
         .then(function () {
-          if ($scope.personDocumentMedicalForm.$valid) {
+          if ($scope.editDocumentMedicalForm.$valid) {
             return PersonDocumentMedical
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentMedical)
               .$promise

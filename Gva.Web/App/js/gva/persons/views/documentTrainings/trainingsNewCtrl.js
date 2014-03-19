@@ -11,9 +11,9 @@
     selectedPublisher) {
     $scope.isEdit = false;
     $scope.save = function () {
-      $scope.personDocumentTrainingForm.$validate()
+      $scope.newDocumentTrainingForm.$validate()
         .then(function () {
-          if ($scope.personDocumentTrainingForm.$valid) {
+          if ($scope.newDocumentTrainingForm.$valid) {
             return PersonDocumentTraining
               .save({ id: $stateParams.id }, $scope.personDocumentTraining).$promise
               .then(function () {

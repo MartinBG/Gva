@@ -9,12 +9,12 @@
     PersonDocumentEducation,
     edu
   ) {
-    $scope.personDocumentCheck = edu;
+    $scope.personDocumentEducation = edu;
 
     $scope.save = function () {
-      $scope.personDocumentEducationForm.$validate()
+      $scope.newDocumentEducationForm.$validate()
         .then(function () {
-          if ($scope.personDocumentEducationForm.$valid) {
+          if ($scope.newDocumentEducationForm.$valid) {
             return PersonDocumentEducation
               .save({ id: $stateParams.id }, $scope.personDocumentEducation).$promise
               .then(function () {
