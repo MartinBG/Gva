@@ -1612,6 +1612,29 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        certGroundServiceOperatorSnoOperationalSearch: {
+          newCertGroundServiceOperatorSnoOperational: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newCertGroundServiceOperatorsSnoOperational: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertGroundServiceOperatorsSnoOperational: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         certGroundServiceOperatorSearch: {
           newCertGroundServiceOperator: 'Нов лиценз',
           certNumber: '№ на удостоверение',
@@ -1729,6 +1752,13 @@
             noAvailableDocuments: 'Няма налични приложени документи'
           },
           revokeCause: 'Причина за отнемане'
+        },
+        equipmentDirective: {
+          title: 'Съоръжения',
+          name: 'Наименование',
+          id: 'Инвентарен №',
+          count: 'Брой',
+          noAvailableEquipments: 'Няма налични съоръжения'
         }
       },
       errorTexts: {
@@ -1891,7 +1921,13 @@
         'root.organizations.view.certGroundServiceOperators.new':
           'Нов лиценз на оператор по наземно обслужване или самообслужване',
         'root.organizations.view.certGroundServiceOperators.edit':
-          'Редакция на лиценз на оператор по наземно обслужване или самообслужване'
+          'Редакция на лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.certGroundServiceOperatorsSnoOperational':
+          'Удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване',
+        'root.organizations.view.certGroundServiceOperatorsSnoOperational.new':
+          'Ново удостоверение',
+        'root.organizations.view.certGroundServiceOperatorsSnoOperational.edit':
+          'Редакция на удостоверение'
       }
     });
   }]);

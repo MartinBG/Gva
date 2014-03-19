@@ -1,0 +1,42 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="organizations.equipmentDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th l10n-text="organizations.equipmentDirective.name"></th>
+            <th l10n-text="organizations.equipmentDirective.id"></th>
+            <th l10n-text="organizations.equipmentDirective.count"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat-start="equipment in model.ssno">
+            <td>
+              <sc-text ng-model="equipment.name"></sc-text>
+            </td>
+            <td class="col-sm-3 col-md-2">
+              <sc-text ng-model="equipment.id"></sc-text>
+            </td>
+            <td class="col-sm-3 col-md-3">
+              <sc-int ng-model="equipment.count"></sc-int>
+            </td>
+            <td style="text-align: right; width: 1px;">
+              <sc-button name="deleteEquipmentBtn" type="button" class="btn btn-primary btn-sm" btn-click="deleteEquipment(equipment)" icon="glyphicon-remove"></sc-button>
+            </td>
+          </tr>
+          <tr ng-repeat-end></tr>
+          <tr class="sort-disabled" ng-if="!model.ssno.length">
+            <td colspan="8" class="text-center" l10n-text="organizations.equipmentDirective.noAvailableEquipments"></td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: right; width: 1px;">
+              <sc-button name="addBtn" type="button" btn-click="addEquipment()" class="btn btn-primary btn-sm" icon="glyphicon-plus"></sc-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-form>

@@ -8,7 +8,9 @@
     organizationAuditplans = require('./organization-auditplan.sample'),
     staffManagement = require('./organization-staff-managment.sample'),
     organizationOtherDocuments = require('./organization-document-other.sample'),
-    certGroundServiceOperators = require('./organization-cert-groundserviceoperator.sample');
+    certGroundServiceOperators = require('./organization-cert-groundserviceoperator.sample'),
+    certGroundServiceOperatorsSnoOperational =
+    require('./organization-cert-groundserviceoperatorssnooperational.sample');
 
   angular.module('app').constant('organizationLots', [
     {
@@ -80,6 +82,16 @@
         {
           partIndex: 14,
           part: certGroundServiceOperators.organization1CertCertGroundServiceOperator2
+        }
+      ],
+      certGroundServiceOperatorsSnoOperational: [
+        {
+          partIndex: 13,
+          part: certGroundServiceOperatorsSnoOperational.certGroundDerviceOperatorSnoOperational1
+        },
+        {
+          partIndex: 14,
+          part: certGroundServiceOperatorsSnoOperational.certGroundDerviceOperatorSnoOperational2
         }
       ]
     }
