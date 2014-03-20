@@ -165,6 +165,21 @@
           validToDate: 'Тяхна дата',
           newAirworthiness: 'Нова годност'
         },
+        airworthinessFMSearch: {
+          issueDate: 'От дата',
+          validFromDate: 'Валидно от',
+          validToDate: 'Валидно до',
+          inspector: 'Заверил инспектор',
+          incomingDocNumber: 'Вх. номер ГВА',
+          incomingDocDate: 'Дата',
+          EASA25IssueDate: 'EASA Form 25',
+          EASA24IssueDate: 'EASA Form 24',
+          EASA24IssueValidToDate: 'EASA Form 24 Valid',
+          EASA15IssueDate: 'Form 15 Issue',
+          EASA15IssueValidToDate: 'Form 15 Valid',
+          EASA15IssueRefNo: 'EASA Form 15a',
+          newAirworthiness: 'Нова годност'
+        },
         newAirworthiness: {
           save: 'Запис',
           cancel: 'Отказ'
@@ -378,6 +393,21 @@
           refNumber: 'Реф.№',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност'
+        },
+        airworthinessFMDirective: {
+          title: 'Летателна годност',
+          issueDate: 'От дата',
+          validFromDate: 'Валидно от',
+          validToDate: 'Валидно до',
+          inspector: 'Заверил инспектор',
+          incomingDocNumber: 'Вх. номер ГВА',
+          incomingDocDate: 'Дата',
+          EASA25IssueDate: 'EASA Form 25',
+          EASA24IssueDate: 'EASA Form 24',
+          EASA24IssueValidToDate: 'EASA Form 24 Valid',
+          EASA15IssueDate: 'Form 15 Issue',
+          EASA15IssueValidToDate: 'Form 15 Valid',
+          EASA15IssueRefNo: 'EASA Form 15a'
         },
         permitDirective: {
           title: 'Разрешениe за полет',
@@ -1438,6 +1468,9 @@
         'root.aircrafts.view.airworthinesses': 'Летателни годности',
         'root.aircrafts.view.airworthinesses.new': 'Нова годност',
         'root.aircrafts.view.airworthinesses.edit': 'Редакция на годност',
+        'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
+        'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
+        'root.aircrafts.view.airworthinessesFM.edit': 'Редакция на годност',
         'root.aircrafts.view.permits': 'Разрешения за полет',
         'root.aircrafts.view.permits.new': 'Ново разрешение',
         'root.aircrafts.view.permits.edit': 'Редакция на разрешение',
