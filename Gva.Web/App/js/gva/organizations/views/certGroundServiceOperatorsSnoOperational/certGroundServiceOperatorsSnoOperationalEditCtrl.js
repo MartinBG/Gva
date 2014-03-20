@@ -19,12 +19,12 @@
         .$promise
         .then(function () {
           return $state
-            .go('root.organizations.view.certGroundServiceOperatorsSnoOperational.search');
+            .go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('root.organizations.view.certGroundServiceOperatorsSnoOperational.search');
+      return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
     };
   }
 

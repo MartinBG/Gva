@@ -13,7 +13,7 @@
       organizationCertGroundServiceOperatorsSnoOperational;
 
     $scope.editCertGroundServiceOperatorSnoOperational = function (cert) {
-      return $state.go('root.organizations.view.certGroundServiceOperatorsSnoOperational.edit', {
+      return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.edit', {
         id: $stateParams.id,
         ind: cert.partIndex
       });
@@ -28,7 +28,7 @@
     };
 
     $scope.newCertGroundServiceOperatorSnoOperational = function () {
-      return $state.go('root.organizations.view.certGroundServiceOperatorsSnoOperational.new');
+      return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.new');
     };
   }
 

@@ -1948,11 +1948,11 @@
           'Нов лиценз на оператор по наземно обслужване или самообслужване',
         'root.organizations.view.certGroundServiceOperators.edit':
           'Редакция на лиценз на оператор по наземно обслужване или самообслужване',
-        'root.organizations.view.certGroundServiceOperatorsSnoOperational':
+        'root.organizations.view.groundServiceOperatorsSnoOperational':
           'Удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване',
-        'root.organizations.view.certGroundServiceOperatorsSnoOperational.new':
+        'root.organizations.view.groundServiceOperatorsSnoOperational.new':
           'Ново удостоверение',
-        'root.organizations.view.certGroundServiceOperatorsSnoOperational.edit':
+        'root.organizations.view.groundServiceOperatorsSnoOperational.edit':
           'Редакция на удостоверение'
       }
     });

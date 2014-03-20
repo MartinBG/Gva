@@ -40,11 +40,16 @@
           <sc-nomenclature ng-model="model.valid" alias="'boolean'"></sc-nomenclature>
         </div>
       </div>
-      <div class="row">
+      <div class="row" ng-if="$parent.certAirportOperator">
         <div class="form-group col-sm-5 col-md-4">
           <label class="control-label" l10n-text="organizations.certOperatorDirective.activityTypes"></label>
-          <sc-nomenclature ng-if="$parent.certAirportOperator" ng-model="model.airportoperatorActivityTypes" alias="'airportoperatorActivityTypes'"  multiple="multiple"></sc-nomenclature>
-          <sc-nomenclature  ng-if="$parent.organizationCertGroundServiceOperator" ng-model="model.groundServiceOperatorActivityTypes" alias="'groundServiceOperatorActivityTypes'"  multiple="multiple"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.airportoperatorActivityTypes" alias="'airportoperatorActivityTypes'" multiple="multiple"></sc-nomenclature>
+         </div>
+      </div>
+      <div class="row" ng-if="$parent.organizationCertGroundServiceOperator">
+        <div class="form-group col-sm-5 col-md-4">
+          <label class="control-label" l10n-text="organizations.certOperatorDirective.activityTypes"></label>
+           <sc-nomenclature ng-model="model.groundServiceOperatorActivityTypes" alias="'groundServiceOperatorActivityTypes'" multiple="multiple"></sc-nomenclature>
         </div>
       </div>
     </div>
