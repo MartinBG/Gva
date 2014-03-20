@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,14 +6,23 @@ namespace Docs.Api.Models
     public partial class DocElectronicServiceStage
     {
         public int DocElectronicServiceStageId { get; set; }
+
         public int DocId { get; set; }
+
         public int ElectronicServiceStageId { get; set; }
-        public System.DateTime StartingDate { get; set; }
-        public Nullable<System.DateTime> ExpectedEndingDate { get; set; }
-        public Nullable<System.DateTime> EndingDate { get; set; }
+
+        public DateTime StartingDate { get; set; }
+
+        public DateTime? ExpectedEndingDate { get; set; }
+
+        public DateTime? EndingDate { get; set; }
+
         public bool IsCurrentStage { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual ElectronicServiceStage ElectronicServiceStage { get; set; }
     }
 
@@ -50,7 +58,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.ElectronicServiceStage)
                 .WithMany(t => t.DocElectronicServiceStages)
                 .HasForeignKey(d => d.ElectronicServiceStageId);
-
         }
     }
 }

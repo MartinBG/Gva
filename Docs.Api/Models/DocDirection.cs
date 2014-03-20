@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -14,12 +13,19 @@ namespace Docs.Api.Models
         }
 
         public int DocDirectionId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<Doc> Docs { get; set; }
+
         public virtual ICollection<DocTypeClassification> DocTypeClassifications { get; set; }
+
         public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
     }
 

@@ -29,7 +29,7 @@
         <div class="form-group col-sm-7 col-md-6 col-lg-5" sc-has-error="school">
           <label class="control-label" l10n-text="persons.personDocumentEducationDirective.school"></label>
           <sc-validation-error field-name="school" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.school" name="school" alias="'schools'" ng-required="true">
+          <sc-nomenclature ng-model="model.school" name="school" alias="'schools'" params="{graduationId: model.graduation.nomValueId}" ng-required="true">
           </sc-nomenclature>
         </div>
       </div>
@@ -49,18 +49,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
-          <label class="control-label" l10n-text="persons.personDocumentEducationDirective.bookPageNumber"></label>
-          <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
-        </div>
-        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
-          <label class="control-label" l10n-text="persons.personDocumentEducationDirective.pageCount"></label>
-          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
-          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
-        </div>
-      </div>
     </div>
   </div>
 </ng-form>

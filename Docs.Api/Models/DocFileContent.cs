@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,9 +5,13 @@ namespace Docs.Api.Models
     public partial class DocFileContent
     {
         public int DocFileContentId { get; set; }
+
         public System.Guid Key { get; set; }
+
         public string Hash { get; set; }
+
         public int Size { get; set; }
+
         public byte[] Content { get; set; }
     }
 

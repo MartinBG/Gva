@@ -8,7 +8,7 @@
       ScNomenclature = require('../../../../scaffolding/pageObjects/scNomenclature'),
       Breadcrumb = require('../../../../scaffolding/pageObjects/breadcrumb');
 
-  function CheckPO(context) {
+  function EditCheckPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.staffType = new ScNomenclature('model.staffType', context);
     this.aircraftTypeGroup = new ScNomenclature('model.aircraftTypeGroup', context);
@@ -19,8 +19,8 @@
     this.documentPersonNumber = new ScInt(
       context.findElement(by.input('model.documentPersonNumber'))
     );
-    this.personCheckDocumentType = new ScNomenclature('model.personCheckDocumentType', context);
-    this.personCheckDocumentRole = new ScNomenclature('model.personCheckDocumentRole', context);
+    this.personCheckDocumentType = new ScNomenclature('model.documentType', context);
+    this.personCheckDocumentRole = new ScNomenclature('model.documentRole', context);
     this.documentDateValidFrom = new ScDate(
       context.findElement(by.name('documentDateValidFrom')),
       context);
@@ -33,20 +33,18 @@
     this.licenceType = new ScNomenclature('model.licenceType', context);
     this.valid = new ScNomenclature('model.valid', context);
     this.notes = new ScTextarea(context.findElement(by.name('notes')));
-    this.bookPageNumber = new ScText(context.findElement(by.input('model.bookPageNumber')));
-    this.pageCount = new ScInt(context.findElement(by.input('model.pageCount')));
 
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));
   }
 
-  CheckPO.prototype.save = function () {
+  EditCheckPO.prototype.save = function () {
     this.saveBtn.click();
   };
 
-  CheckPO.prototype.cancel = function () {
+  EditCheckPO.prototype.cancel = function () {
     this.cancelBtn.click();
   };
 
-  module.exports = CheckPO;
+  module.exports = EditCheckPO;
 }(module, by, require));

@@ -1,11 +1,13 @@
-﻿<ng-form name="editInspectionForm">
+﻿<div>
+  <ng-form name="editRatingEditionForm" sc-validate="{}">
 
-  <gva-aircraft-inspection name="aircraftInspectionForm" ng-model="aircraftInspection.part"></gva-aircraft-inspection>
+    <gva-rating-edition name="ratingEditionForm" ng-model="item.part"></gva-rating-edition>
 
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="persons.editInspection.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!aircraftInspectionForm.$dirty"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editInspection.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="row">
+      <div class="form-group col-sm-3 col-sm-offset-4">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.ratingEditionEdit.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.ratingEditionEdit.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      </div>
     </div>
-  </div>
-</ng-form>
+  </ng-form>
+</div>

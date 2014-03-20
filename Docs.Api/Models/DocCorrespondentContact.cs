@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,10 +5,15 @@ namespace Docs.Api.Models
     public partial class DocCorrespondentContact
     {
         public int DocCorrespondentContactId { get; set; }
+
         public int DocId { get; set; }
+
         public int CorrespondentContactId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual CorrespondentContact CorrespondentContact { get; set; }
+
         public virtual Doc Doc { get; set; }
     }
 
@@ -42,7 +45,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocCorrespondentContacts)
                 .HasForeignKey(d => d.DocId);
-
         }
     }
 }

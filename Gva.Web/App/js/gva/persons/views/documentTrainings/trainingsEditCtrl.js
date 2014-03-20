@@ -16,9 +16,9 @@
       personDocumentTraining.part.documentPublisher;
 
     $scope.save = function () {
-      $scope.personDocumentTrainingForm.$validate()
+      $scope.editDocumentTrainingForm.$validate()
         .then(function () {
-          if ($scope.personDocumentTrainingForm.$valid) {
+          if ($scope.editDocumentTrainingForm.$valid) {
             return PersonDocumentTraining
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentTraining)
               .$promise

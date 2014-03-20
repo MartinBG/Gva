@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Common.Api.Models
@@ -11,13 +9,21 @@ namespace Common.Api.Models
         }
 
         public int CountryId { get; set; }
+
         public string Name { get; set; }
+
         public string NumericCode { get; set; }
+
         public string Alpha3Code { get; set; }
+
         public string Alpha2Code { get; set; }
+
         public string Alias { get; set; }
+
         public string Description { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
     }
 

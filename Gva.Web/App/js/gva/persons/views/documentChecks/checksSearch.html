@@ -6,9 +6,9 @@
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.personCheckDocumentType.name" title="persons.checkSearch.personCheckDocumentType">
+  <sc-column data="part.documentType.name" title="persons.checkSearch.personCheckDocumentType">
   </sc-column>
-  <sc-column data="part.personCheckDocumentRole.name" title="persons.checkSearch.personCheckDocumentRole">
+  <sc-column data="part.documentRole.name" title="persons.checkSearch.personCheckDocumentRole">
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom" type="date">
   </sc-column>
@@ -28,12 +28,12 @@
   </sc-column>
   <sc-column data="part.personCheckRatingValue.name" title="persons.checkSearch.ratingValue">
   </sc-column>
-  <sc-column data="part.bookPageNumber" title="persons.checkSearch.bookPageNumber">
+  <sc-column data="files[0].bookPageNumber" title="persons.checkSearch.bookPageNumber">
   </sc-column>
-  <sc-column data="part.pageCount" title="persons.checkSearch.pageCount">
+  <sc-column data="files[0].pageCount" title="persons.checkSearch.pageCount">
   </sc-column>
   <sc-column sortable="false" title="persons.checkSearch.file" width="30px">
-    <a target="_self" ng-show="item.file" title="{{item.file[0].name}}">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>

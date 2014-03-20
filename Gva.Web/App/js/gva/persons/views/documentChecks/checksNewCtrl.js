@@ -20,9 +20,9 @@
     };
 
     $scope.save = function () {
-      $scope.personDocumentCheckForm.$validate()
+      $scope.newDocumentCheckForm.$validate()
          .then(function () {
-            if ($scope.personDocumentCheckForm.$valid) {
+            if ($scope.newDocumentCheckForm.$valid) {
               return PersonDocumentCheck
               .save({ id: $stateParams.id }, $scope.personDocumentCheck).$promise
               .then(function () {
@@ -48,7 +48,8 @@
   DocumentChecksNewCtrl.$resolve = {
     personDocumentCheck: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     },
     selectedPublisher: function () {

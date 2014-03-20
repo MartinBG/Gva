@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -12,10 +11,15 @@ namespace Common.Api.Models
         }
 
         public int RoleId { get; set; }
+
         public string Name { get; set; }
+
         public string Permissions { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<User> Users { get; set; }
     }
 
@@ -57,8 +61,6 @@ namespace Common.Api.Models
                     m.MapLeftKey("RoleId");
                     m.MapRightKey("UserId");
                 });
-
-
         }
     }
 }

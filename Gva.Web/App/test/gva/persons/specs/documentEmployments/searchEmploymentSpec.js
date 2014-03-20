@@ -26,11 +26,9 @@
           'part_organization_name',
           'part_country_name',
           'part_valid_name',
-          'part_notes',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_notes'
           )).toEqual([
-        ['20.09.2013', 'Ученик Ръководител Полети', 'AAK Progres', 'Кувейт', 'Да', '', '1', '1']
+        ['20.09.2013', 'Ученик Ръководител Полети', 'AAK Progres', 'Кувейт', 'Да', '']
       ]);
     });
    

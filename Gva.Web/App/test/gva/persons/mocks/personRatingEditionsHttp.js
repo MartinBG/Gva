@@ -12,16 +12,7 @@
           var rating = _(person.personRatings)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          var personRatingEditions = _.map(rating.personRatingEditions, function (ratingEdition) {
-            return {
-              partIndex: ratingEdition.partIndex,
-              rating: rating.part,
-              ratingEdition: ratingEdition,
-              firstEditionValidFrom: rating.personRatingEditions[0].part.documentDateValidFrom
-            };
-          });
-
-          return [200, personRatingEditions];
+          return [200, rating.personRatingEditions];
         })
       .when('GET', '/api/persons/:id/ratings/:ind/editions/:childInd',
         function ($params, personLots) {
@@ -34,11 +25,7 @@
           var ratingEdition = _(rating.personRatingEditions)
             .filter({ partIndex: parseInt($params.childInd, 10) }).first();
 
-          return [200, {
-            partIndex: ratingEdition.partIndex,
-            rating: rating,
-            ratingEdition: ratingEdition
-          }];
+          return [200, ratingEdition];
         })
       .when('POST', '/api/persons/:id/ratings/:ind/editions',
         function ($params, $jsonData, personLots) {
@@ -50,7 +37,7 @@
 
           var personRatingEdition = {
             partIndex: person.nextIndex++,
-            part: $jsonData.ratingEdition
+            part: $jsonData.part
           };
 
           rating.personRatingEditions.push(personRatingEdition);
@@ -68,8 +55,7 @@
           var ratingEdition = _(rating.personRatingEditions)
             .filter({ partIndex: parseInt($params.childInd, 10) }).first();
 
-          _.assign(rating.part, $jsonData.rating.part);
-          _.assign(ratingEdition.part, $jsonData.ratingEdition.part);
+          _.assign(ratingEdition.part, $jsonData.part);
 
           return [200];
         })

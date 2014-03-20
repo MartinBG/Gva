@@ -4,7 +4,7 @@
 
   describe('Person document training edit page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentTrainings/trainingPO'),
+        Page = require('../../pageObjects/documentTrainings/editTrainingPO'),
         SearchPage = require('../../pageObjects/documentTrainings/searchTrainingPO'),
         editTrainingPage,
         searchTrainingPage;
@@ -28,8 +28,6 @@
       expect(editTrainingPage.personOtherDocumentType.get()).toEqual('Контролен талон');
       expect(editTrainingPage.personOtherDocumentRole.get()).toEqual('Обучение');
       expect(editTrainingPage.valid.get()).toEqual('Да');
-      expect(editTrainingPage.bookPageNumber.get()).toEqual('87');
-      expect(editTrainingPage.pageCount.get()).toEqual('1');
     });
 
     it('should change training data correctly', function () {
@@ -38,10 +36,8 @@
       editTrainingPage.documentDateValidTo.set('22.10.2014');
       editTrainingPage.documentPublisher.set('тестов издател');
       editTrainingPage.personOtherDocumentType.set('Писмо');
-      editTrainingPage.personOtherDocumentRole.set('Обучение');
+      editTrainingPage.personOtherDocumentRole.set('Образование');
       editTrainingPage.valid.set('Не');
-      editTrainingPage.bookPageNumber.set('1a');
-      editTrainingPage.pageCount.set('23');
 
       editTrainingPage.save();
       searchTrainingPage = new SearchPage(ptor);
@@ -56,21 +52,19 @@
           'part.ratingClass.name',
           'part.authorization.name',
           'part.licenceType.name',
-          'part.personOtherDocumentType.name',
-          'part.personOtherDocumentRole.name',
-          'part.valid',
-          'part.bookPageNumber',
-          'part.pageCount'
+          'part.documentType.name',
+          'part.documentRole.name',
+          'part.valid'
           )).toEqual([
         ['Тестов номер', '12.02.2013', '22.10.2014', 'тестов издател', 'Boeing 737', '',
-          'Летателен инструктор на самолет', '', 'Писмо', 'Обучение', 'Не', '1a', '23'],
+          'Летателен инструктор на самолет', '', 'Писмо', 'Образование', 'Не'],
         ['BG CPA 00185-11232', '12.03.2012', '02.03.2016',
           'ВА: ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ (BG)', '',
-          '', '', '', 'Контролен талон', 'Обучение', 'Да', '81', '1'],
+          '', '', '', 'Контролен талон', 'Обучение', 'Да'],
         ['5-6448', '12.03.2012', '', 'Инспектор: Георги Мишев Христов Код:46', '', '',
-          'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не', '79', '1'],
+          'Летателен инструктор на самолет', '', 'Контролна карта', 'Обучение', 'Не'],
         ['80', '10.03.2012', '', 'УЦ: Ратан', '', '', '',
-          '', 'Свидетелство', 'Теоретично обучение', 'Да', '79', '1']
+          '', 'Свидетелство', 'Теоретично обучение', 'Да']
       ]);
     });
 

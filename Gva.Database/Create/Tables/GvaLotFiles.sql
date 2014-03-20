@@ -3,18 +3,17 @@ GO
 
 CREATE TABLE [dbo].[GvaLotFiles] (
     [GvaLotFileId]      INT           NOT NULL IDENTITY,
-    [LotPartId]         INT           NULL,
+    [LotPartId]         INT           NOT NULL,
     [GvaFileId]         INT           NULL,
     [DocFileId]         INT           NULL,
-    [GvaLotFileTypeId]  INT           NULL,
-    [PageIndex]         NVARCHAR (50) NULL,
-    [PageNumber]        NVARCHAR (50) NOT NULL,
-    [IsActive]          BIT           NOT NULL,
+    [GvaCaseTypeId]     INT           NOT NULL,
+    [PageIndex]         NVARCHAR (50) NOT NULL,
+    [PageNumber]        INT           NULL,
     CONSTRAINT [PK_GvaLotFiles]                 PRIMARY KEY ([GvaLotFileId]),
-    CONSTRAINT [FK_GvaLotFiles_DocFiles]        FOREIGN KEY([DocFileId])        REFERENCES [dbo].[DocFiles]        ([DocFileId]),
-    CONSTRAINT [FK_GvaLotFiles_GvaFiles]        FOREIGN KEY([GvaFileId])        REFERENCES [dbo].[GvaFiles]        ([GvaFileId]),
-    CONSTRAINT [FK_GvaLotFiles_LotParts]        FOREIGN KEY([LotPartId])        REFERENCES [dbo].[LotParts]        ([LotPartId]),
-    CONSTRAINT [FK_GvaLotFiles_GvaLotFileTypes] FOREIGN KEY([GvaLotFileTypeId]) REFERENCES [dbo].[GvaLotFileTypes] ([GvaLotFileTypeId])
+    CONSTRAINT [FK_GvaLotFiles_DocFiles]        FOREIGN KEY([DocFileId])        REFERENCES [dbo].[DocFiles]     ([DocFileId]),
+    CONSTRAINT [FK_GvaLotFiles_GvaFiles]        FOREIGN KEY([GvaFileId])        REFERENCES [dbo].[GvaFiles]     ([GvaFileId]),
+    CONSTRAINT [FK_GvaLotFiles_LotParts]        FOREIGN KEY([LotPartId])        REFERENCES [dbo].[LotParts]     ([LotPartId]),
+    CONSTRAINT [FK_GvaLotFiles_GvaCaseTypes]    FOREIGN KEY([GvaCaseTypeId])    REFERENCES [dbo].[GvaCaseTypes] ([GvaCaseTypeId]),
 )
 GO
 
@@ -23,8 +22,7 @@ exec spDescColumn N'GvaLotFiles', N'GvaLotFileId'     , N'Уникален си�
 exec spDescColumn N'GvaLotFiles', N'LotPartId'        , N'Част от партидата.'
 exec spDescColumn N'GvaLotFiles', N'GvaFileId'        , N'Файл.'
 exec spDescColumn N'GvaLotFiles', N'DocFileId'        , N'Файл от документооборота.'
-exec spDescColumn N'GvaLotFiles', N'GvaLotFileTypeId' , N'Тип на файла в описа.'
+exec spDescColumn N'GvaLotFiles', N'GvaCaseTypeId'    , N'Тип дело.'
 exec spDescColumn N'GvaLotFiles', N'PageIndex'        , N'Номер на страницата в описа.'
 exec spDescColumn N'GvaLotFiles', N'PageNumber'       , N'Брой страници.'
-exec spDescColumn N'GvaLotFiles', N'IsActive'         , N'Маркер за валидност.'
 GO

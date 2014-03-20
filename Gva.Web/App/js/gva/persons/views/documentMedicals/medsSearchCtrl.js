@@ -29,7 +29,6 @@
     $scope.newDocumentMedical = function () {
       return $state.go('root.persons.view.medicals.new');
     };
-
   }
 
   DocumentMedicalsSearchCtrl.$inject = [

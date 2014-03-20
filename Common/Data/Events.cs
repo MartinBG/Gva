@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Data
 {
@@ -15,12 +12,12 @@ namespace Common.Data
         {
             get
             {
-                //Initializing the static field through a property.
+                // Initializing the static field through a property.
 
-                //From MSDN:
-                //Do not specify initial values for fields marked with ThreadStaticAttribute,
-                //because such initialization occurs only once, when the class constructor executes
-                //and therefore affects only one thread.
+                // From MSDN:
+                // Do not specify initial values for fields marked with ThreadStaticAttribute,
+                // because such initialization occurs only once, when the class constructor executes
+                // and therefore affects only one thread.
 
                 if (handlers == null)
                 {
@@ -34,6 +31,11 @@ namespace Common.Data
         public static void Register(IEventHandler handler)
         {
             Handlers.Add(handler);
+        }
+
+        public static void Deregister(IEventHandler handler)
+        {
+            Handlers.Remove(handler);
         }
 
         public static void Raise(IEvent e)

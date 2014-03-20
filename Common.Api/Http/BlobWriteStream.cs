@@ -30,15 +30,14 @@ namespace Common.Api.Http
             string keyColumn,
             object keyValue)
         {
-
             this.cmdFirstChunk = new SqlCommand(
-                String.Format(@"UPDATE [{0}].[{1}] SET [{2}] = @firstChunk WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn),
+                string.Format(@"UPDATE [{0}].[{1}] SET [{2}] = @firstChunk WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn),
                 connection,
                 transaction);
             this.cmdFirstChunk.Parameters.AddWithValue("@key", keyValue);
 
             this.cmdAppendChunk = new SqlCommand(
-                String.Format(@"UPDATE [{0}].[{1}] SET [{2}].WRITE(@chunk, NULL, @length) WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn),
+                string.Format(@"UPDATE [{0}].[{1}] SET [{2}].WRITE(@chunk, NULL, @length) WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn),
                 connection,
                 transaction);
             this.cmdAppendChunk.Parameters.AddWithValue("@key", keyValue);
@@ -49,18 +48,51 @@ namespace Common.Api.Http
             this.cmdAppendChunk.Parameters.Add(this.paramLength);
         }
 
+        public override bool CanRead
+        {
+            get { return false; }
+        }
+
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return true; }
+        }
+
+        public override long Length
+        {
+            get { throw new InvalidOperationException(); }
+        }
+
+        public override long Position
+        {
+            get
+            {
+                throw new InvalidOperationException();
+            }
+
+            set
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
         public override async Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
         {
             while (count > 0)
             {
-                int take = Math.Min(count, CHUNK_SIZE - chunkIndex);
+                int take = Math.Min(count, CHUNK_SIZE - this.chunkIndex);
 
-                Buffer.BlockCopy(buffer, offset, chunkBuffer, chunkIndex, take);
-                chunkIndex += take;
+                Buffer.BlockCopy(buffer, offset, this.chunkBuffer, this.chunkIndex, take);
+                this.chunkIndex += take;
                 offset += take;
                 count -= take;
 
-                if (chunkIndex == CHUNK_SIZE)
+                if (this.chunkIndex == CHUNK_SIZE)
                 {
                     await this.FlushAsync(cancellationToken);
                 }
@@ -69,37 +101,37 @@ namespace Common.Api.Http
 
         public override async Task FlushAsync(CancellationToken cancellationToken)
         {
-            if (chunkIndex == 0)
+            if (this.chunkIndex == 0)
             {
                 return;
             }
 
             byte[] bytesToWrite;
 
-            if (chunkIndex < CHUNK_SIZE)
+            if (this.chunkIndex < CHUNK_SIZE)
             {
-                bytesToWrite = new byte[chunkIndex];
-                Buffer.BlockCopy(chunkBuffer, 0, bytesToWrite, 0, chunkIndex);
+                bytesToWrite = new byte[this.chunkIndex];
+                Buffer.BlockCopy(this.chunkBuffer, 0, bytesToWrite, 0, this.chunkIndex);
             }
             else
             {
-                bytesToWrite = chunkBuffer;
+                bytesToWrite = this.chunkBuffer;
             }
 
             if (this.isFirstChunk)
             {
-                cmdFirstChunk.Parameters.AddWithValue("@firstChunk", bytesToWrite);
-                cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
+                this.cmdFirstChunk.Parameters.AddWithValue("@firstChunk", bytesToWrite);
+                this.cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
                 this.isFirstChunk = false;
             }
             else
             {
-                paramChunk.Value = bytesToWrite;
-                paramLength.Value = chunkIndex;
-                cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
+                this.paramChunk.Value = bytesToWrite;
+                this.paramLength.Value = this.chunkIndex;
+                this.cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
             }
 
-            chunkIndex = 0;
+            this.chunkIndex = 0;
         }
 
         public override void Write(byte[] buffer, int offset, int count)
@@ -119,26 +151,26 @@ namespace Common.Api.Http
 
         public override void EndWrite(IAsyncResult asyncResult)
         {
-            Task task = ((Task)asyncResult);
+            Task task = (Task)asyncResult;
             if (task.Exception != null)
             {
                 throw task.Exception.InnerException;
             }
         }
 
-        public override bool CanRead
+        public override int Read(byte[] buffer, int offset, int count)
         {
-            get { return false; }
+            throw new InvalidOperationException();
         }
 
-        public override bool CanSeek
+        public override long Seek(long offset, SeekOrigin origin)
         {
-            get { return false; }
+            throw new InvalidOperationException();
         }
 
-        public override bool CanWrite
+        public override void SetLength(long value)
         {
-            get { return true; }
+            throw new InvalidOperationException();
         }
 
         protected override void Dispose(bool disposing)
@@ -160,38 +192,6 @@ namespace Common.Api.Http
                 this.cmdAppendChunk = null;
                 base.Dispose(disposing);
             }
-        }
-
-        public override long Length
-        {
-            get { throw new InvalidOperationException(); }
-        }
-
-        public override long Position
-        {
-            get
-            {
-                throw new InvalidOperationException();
-            }
-            set
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void SetLength(long value)
-        {
-            throw new InvalidOperationException();
         }
     }
 }

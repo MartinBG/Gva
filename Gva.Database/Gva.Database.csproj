@@ -45,12 +45,16 @@
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Tables\GvaApplicationSearches.sql" />
+    <Content Include="Create\Tables\GvaInventoryItems.sql" />
+    <Content Include="Create\Tables\GvaLotCases.sql" />
+    <Content Include="Create\Tables\GvaCaseTypes.sql" />
     <Content Include="Create\Tables\GvaLotObjects.sql" />
-    <Content Include="Create\Tables\GvaLotFileTypes.sql" />
     <Content Include="Create\Tables\GvaLotFiles.sql" />
     <Content Include="Create\Tables\GvaAppLotFiles.sql" />
     <Content Include="Create\Tables\GvaFiles.sql" />
     <Content Include="Create\Tables\GvaApplications.sql" />
+    <Content Include="Create\Tables\GvaPersons.sql" />
     <Content Include="Insert\Noms\addressTypes.sql" />
     <Content Include="Insert\Noms\aircraftClases66.sql" />
     <Content Include="Insert\Noms\aircraftGroup66.sql" />
@@ -63,6 +67,7 @@
     <Content Include="Insert\Noms\authorizations.sql" />
     <Content Include="Insert\Noms\caa.sql" />
     <Content Include="Insert\Noms\cities.sql" />
+    <Content Include="Insert\Noms\yesNoOptions.sql" />
     <Content Include="Insert\Noms\countries.sql" />
     <Content Include="Insert\Noms\currencies.sql" />
     <Content Include="Insert\Noms\directions.sql" />
@@ -95,6 +100,7 @@
     <Content Include="Insert\Noms\ratingTypes.sql" />
     <Content Include="Insert\Noms\schools.sql" />
     <Content Include="Insert\Noms\staffTypes.sql" />
+    <Content Include="Insert\TestData.sql" />
     <Content Include="MigrationTool\gruntfile.js" />
     <Content Include="MigrationTool\migration.js" />
     <Content Include="MigrationTool\templates\addressTypes.txt" />

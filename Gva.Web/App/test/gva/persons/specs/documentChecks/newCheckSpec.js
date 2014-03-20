@@ -4,7 +4,7 @@
 
   describe('Person document check new page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentChecks/checkPO'),
+        Page = require('../../pageObjects/documentChecks/newCheckPO'),
         SearchPage = require('../../pageObjects/documentChecks/searchCheckPO'),
         newCheckPage,
         searchCheckPage;
@@ -19,36 +19,38 @@
     });
 
     it('should create new check correctly', function () {
-      newCheckPage.staffType.set('Членове на екипажа');
-      newCheckPage.personCheckDocumentType.set('Програма');
-      newCheckPage.personCheckDocumentRole.set('Тренажор');
-      newCheckPage.documentDateValidFrom.set('12.10.2013');
-      newCheckPage.documentPublisher.set('алабала');
-      newCheckPage.valid.set('Да');
-      newCheckPage.bookPageNumber.set('123');
+      newCheckPage.chooseStaffType('Членове на екипажа').then(function () {
+        newCheckPage.personCheckDocumentType.set('Протокол');
+        newCheckPage.personCheckDocumentRole.set('Тренажор');
+        newCheckPage.documentDateValidFrom.set('12.10.2013');
+        newCheckPage.documentPublisher.set('алабала');
+        newCheckPage.valid.set('Да');
 
-      newCheckPage.save();
+        newCheckPage.save();
+        
+        searchCheckPage = new SearchPage(ptor);
+        
+        expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
 
-      searchCheckPage = new SearchPage(ptor);
-      expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
-
-      expect(searchCheckPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
+        expect(searchCheckPage.datatable.getColumns(
+          'part_documentType_name',
+          'part_documentRole_name',
           'part_documentDateValidFrom',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber'
-          )).toEqual([
-          ['Base training form', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да', '3'],
-          ['Authorisation', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не', '2'],
-          ['Програма', 'Тренажор', '12.10.2013', 'алабала', 'Да', '123']
+          'part_valid_name'
+        )).toEqual([
+          ['Свидетелство', 'Летателна проверка', '02.05.1970', 'Проверяващ', 'Да'],
+          ['Справка', 'Практическа проверка', '02.05.2000', 'МВР Бургас', 'Не'],
+          ['Протокол', 'Тренажор', '12.10.2013', 'алабала', 'Да']
         ]);
+      });
     });
 
     it('should go to search view at clicking on cancel button', function () {
       newCheckPage.cancel();
+      
       searchCheckPage = new SearchPage(ptor);
+      
       expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
     });
   });

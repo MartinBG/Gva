@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Gva.Web.Controllers
 {
@@ -13,7 +8,8 @@ namespace Gva.Web.Controllers
         private Regs.Api.Repositories.LotRepositories.ILotRepository lotManager;
         private Common.Api.UserContext.UserContext userContext;
 
-        public HomeController(Common.Data.IUnitOfWork unitOfWork, 
+        public HomeController(
+            Common.Data.IUnitOfWork unitOfWork,
             Regs.Api.Repositories.LotRepositories.ILotRepository lotManager,
             Common.Api.UserContext.IUserContextProvider userContextProvider)
         {
@@ -24,7 +20,7 @@ namespace Gva.Web.Controllers
 
         public ActionResult Index()
         {
-            return File(Server.MapPath("~/App/build/index.html"), "text/html");
+            return this.File(Server.MapPath("~/App/build/index.html"), "text/html");
         }
     }
 }

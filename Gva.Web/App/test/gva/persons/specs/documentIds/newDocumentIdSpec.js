@@ -24,8 +24,6 @@
       newPersonDocumentIdPage.documentNumber.set('1000');
       newPersonDocumentIdPage.documentDateValidFrom.set('22.12.2014');
       newPersonDocumentIdPage.documentPublisher.set('МВР Бургас');
-      newPersonDocumentIdPage.pageCount.set('5');
-      newPersonDocumentIdPage.bookPageNumber.set('3');
       newPersonDocumentIdPage.valid.set('Не');
       newPersonDocumentIdPage.documentDateValidTo.set('01.08.2018');
       newPersonDocumentIdPage.save();
@@ -34,22 +32,19 @@
       expect(searchPersonDocumentIdPage.breadcrumb.get()).toEqual('Документи за самоличност');
 
       expect(searchPersonDocumentIdPage.datatable.getColumns(
-          'part_personDocumentIdType_name',
+          'part_documentType_name',
           'part_documentNumber',
           'part_documentDateValidFrom',
           'part.documentDateValidTo',
           'part_documentPublisher',
-          'part_valid_name',
-          'part_bookPageNumber',
-          'part_pageCount',
-          'file'
+          'part_valid_name'
           )).toEqual([
-        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
-        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
-        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да', '3', '1'],
-        ['Задграничен паспорт', '1000', '22.12.2014', '01.08.2018', 'МВР Бургас', 'Не', '3', '5']
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да'],
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да'],
+        ['Лична карта', '6765432123', '04.04.2010', '04.04.2020', 'МВР София', 'Да'],
+        ['Задграничен паспорт', '1000', '22.12.2014', '01.08.2018', 'МВР Бургас', 'Не']
       ]);
-    });
+    }, 15000);
 
     xit('should disable save button unless all required fields are filled out', function() {
       expect(newPersonDocumentIdPage.isSaveBtnDisabled).toEqual(true);
@@ -58,12 +53,6 @@
       newPersonDocumentIdPage.documentNumber.set('1000');
       newPersonDocumentIdPage.documentPublisher.set('МВР Бургас');
       newPersonDocumentIdPage.valid.set('Не');
-
-      newPersonDocumentIdPage = new Page(ptor);
-      expect(newPersonDocumentIdPage.isSaveBtnDisabled).toEqual(true);
-
-      newPersonDocumentIdPage.pageCount.set('5');
-      newPersonDocumentIdPage.bookPageNumber.set('3');
 
       newPersonDocumentIdPage = new Page(ptor);
       expect(newPersonDocumentIdPage.isSaveBtnDisabled).toEqual(true);

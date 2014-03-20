@@ -19,13 +19,10 @@
     this.documentDateValidTo =
       new ScDate(context.findElement(by.css('div[name=documentDateValidTo]')), context);
     this.documentPublisher = new ScText(context.findElement(by.input('model.documentPublisher')));
-    this.personOtherDocumentType = new ScNomenclature('model.personOtherDocumentType', context);
-    this.personOtherDocumentRole = new ScNomenclature('model.personOtherDocumentRole', context);
+    this.personOtherDocumentType = new ScNomenclature('model.documentType', context);
+    this.personOtherDocumentRole = new ScNomenclature('model.documentRole', context);
     this.valid = new ScNomenclature('model.valid', context);
     this.notes = new ScTextarea(context.findElement(by.model('model.notes')));
-    this.bookPageNumber = new ScText(context.findElement(by.input('model.bookPageNumber')));
-    this.pageCount = new ScInt(context.findElement(by.input('model.pageCount')));
-
 
     this.saveBtn = context.findElement(by.name('saveBtn'));
     this.cancelBtn = context.findElement(by.name('cancelBtn'));

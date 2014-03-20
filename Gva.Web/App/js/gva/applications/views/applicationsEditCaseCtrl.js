@@ -4,11 +4,13 @@
 
   function ApplicationsEditCaseCtrl(
     $scope,
-    $state
+    $state,
+    application
     ) {
+    $scope.application = application;
 
     $scope.linkNew = function (docId, docFile) {
-      return $state.go('root.applications.edit.newFile',
+      return $state.go('root.applications.edit.case.newFile',
         {
           isLinkNew: true,
           currentDocId: docId,
@@ -18,7 +20,7 @@
     };
 
     $scope.linkPart = function (docId, docFile) {
-      return $state.go('root.applications.edit.linkPart',
+      return $state.go('root.applications.edit.case.linkPart',
         {
           currentDocId: docId,
           docFileKey: docFile.key,
@@ -27,7 +29,7 @@
     };
 
     $scope.newFile = function (docId) {
-      return $state.go('root.applications.edit.newFile',
+      return $state.go('root.applications.edit.case.newFile',
         {
           isLinkNew: false,
           currentDocId: docId
@@ -55,9 +57,12 @@
       else if (docCase.appFile.setPartAlias === 'DocumentTraining') {
         state = 'root.persons.view.documentTrainings.edit';
       }
-      //else if (docCase.setPartId === 7) {
-      //state = 'root.persons.view.documentIds.edit';
-      //}
+      else if (docCase.appFile.setPartAlias === 'DocumentOther') {
+        state = 'root.persons.view.documentOthers.edit';
+      }
+      else if (docCase.appFile.setPartAlias === 'DocumentApplication') {
+        state = 'root.persons.view.documentApplications.edit';
+      }
 
       return $state.go(state, {
         id: $scope.application.lotId,
@@ -72,7 +77,8 @@
 
   ApplicationsEditCaseCtrl.$inject = [
     '$scope',
-    '$state'
+    '$state',
+    'application'
   ];
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);

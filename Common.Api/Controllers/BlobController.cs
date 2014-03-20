@@ -46,7 +46,6 @@ namespace Common.Api.Controllers
                 var blobProvider = await Request.Content.ReadAsMultipartAsync(new MultipartBlobStreamProvider(conn));
                 var firstBlobKey = blobProvider.BlobData.First().BlobKey;
 
-
                 return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey });
             }
         }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,20 +5,35 @@ namespace Docs.Api.Models
     public partial class AdministrativeEmail
     {
         public int AdministrativeEmailId { get; set; }
+
         public int TypeId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> CorrespondentId { get; set; }
-        public Nullable<int> CorrespondentContactId { get; set; }
+
+        public int? UserId { get; set; }
+
+        public int? CorrespondentId { get; set; }
+
+        public int? CorrespondentContactId { get; set; }
+
         public string Param1 { get; set; }
+
         public string Param2 { get; set; }
+
         public string Param3 { get; set; }
+
         public string Param4 { get; set; }
+
         public string Param5 { get; set; }
+
         public int StatusId { get; set; }
+
         public string Subject { get; set; }
+
         public string Body { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual AdministrativeEmailStatus AdministrativeEmailStatus { get; set; }
+
         public virtual AdministrativeEmailType AdministrativeEmailType { get; set; }
     }
 
@@ -80,7 +93,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.AdministrativeEmailType)
                 .WithMany(t => t.AdministrativeEmails)
                 .HasForeignKey(d => d.TypeId);
-
         }
     }
 }

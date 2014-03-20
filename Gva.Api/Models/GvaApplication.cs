@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
@@ -13,11 +13,21 @@ namespace Gva.Api.Models
         }
 
         public int GvaApplicationId { get; set; }
-        public int DocId { get; set; }
+
+        public int? DocId { get; set; }
+
         public int LotId { get; set; }
+
+        public int GvaAppLotPartId { get; set; }
+
         public virtual Docs.Api.Models.Doc Doc { get; set; }
+
         public virtual Regs.Api.Models.Lot Lot { get; set; }
+
+        public virtual Part GvaAppLotPart { get; set; }
+
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
+
         public virtual ICollection<GvaLotObject> GvaLotObjects { get; set; }
     }
 
@@ -34,6 +44,7 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.DocId).HasColumnName("DocId");
             this.Property(t => t.LotId).HasColumnName("LotId");
+            this.Property(t => t.GvaAppLotPartId).HasColumnName("GvaAppLotPartId");
 
             // Relationships
             this.HasRequired(t => t.Doc)
@@ -42,7 +53,9 @@ namespace Gva.Api.Models
             this.HasRequired(t => t.Lot)
                 .WithMany()
                 .HasForeignKey(d => d.LotId);
-
+            this.HasRequired(t => t.GvaAppLotPart)
+                .WithMany()
+                .HasForeignKey(d => d.GvaAppLotPartId);
         }
     }
 }

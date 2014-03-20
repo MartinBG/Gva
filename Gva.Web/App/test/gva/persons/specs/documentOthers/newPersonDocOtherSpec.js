@@ -18,7 +18,7 @@
     it('should update breadcrumb text', function () {
       expect(newDocOtherPage.breadcrumb.get()).toEqual('Нов документ');
     });
-    
+
     it('should create new document correctly', function () {
       newDocOtherPage.documentNumber.set('1');
       newDocOtherPage.documentPersonNumber.set('2324a');
@@ -26,11 +26,9 @@
       newDocOtherPage.documentDateValidTo.set('01.01.2020');
       newDocOtherPage.documentPublisher.set('AAK Progres');
       newDocOtherPage.personOtherDocumentType.set('Протокол');
-      newDocOtherPage.personOtherDocumentRole.set('Летателна проверка');
+      newDocOtherPage.personOtherDocumentRole.set('Нарушение');
       newDocOtherPage.notes.set('notes');
-      newDocOtherPage.bookPageNumber.set('2');
-      newDocOtherPage.pageCount.set('5');
-      
+
       newDocOtherPage.save();
       searchDocOtherPage = new SearchPage(ptor);
       expect(searchDocOtherPage.breadcrumb.get()).toEqual('Други документи');
@@ -39,14 +37,10 @@
           'part_documentNumber',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_documentPublisher',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher'
           )).toEqual([
-        ['1221', '06.03.2010', '06.03.2013',
-          'УЦ: Български въздухоплавателен център', '62', '1'],
-        ['1', '20.10.2014', '01.01.2020',
-          'AAK Progres', '2', '5']
+        ['1221', '06.03.2010', '06.03.2013', 'УЦ: Български въздухоплавателен център'],
+        ['1', '20.10.2014', '01.01.2020', 'AAK Progres']
       ]);
     });
 

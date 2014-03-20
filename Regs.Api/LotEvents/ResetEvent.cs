@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Data;
+﻿using Common.Data;
 using Regs.Api.Models;
 
 namespace Regs.Api.LotEvents

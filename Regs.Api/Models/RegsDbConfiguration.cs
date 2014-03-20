@@ -9,8 +9,6 @@ namespace Regs.Api.Models
         {
             modelBuilder.Configurations.Add(new CommitMap());
             modelBuilder.Configurations.Add(new LotMap());
-            modelBuilder.Configurations.Add(new NomMap());
-            modelBuilder.Configurations.Add(new NomValueMap());
             modelBuilder.Configurations.Add(new PartMap());
             modelBuilder.Configurations.Add(new PartVersionMap());
             modelBuilder.Configurations.Add(new SetMap());

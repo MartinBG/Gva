@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Routing;
+﻿using System.Web.Http;
+using AutoMapper;
 using Common.Http;
 using Common.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Ninject;
-using NLog.Config;
 
 namespace Gva.Web
 {
@@ -34,7 +29,7 @@ namespace Gva.Web
 
             RegisterGlobalFilters(config);
 
-            RegisterRoutes(config);
+            config.MapHttpAttributeRoutes();
 
             foreach (IWebApiConfig webApiConfig in kernel.GetAll<IWebApiConfig>())
             {
@@ -46,19 +41,6 @@ namespace Gva.Web
         {
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
-        }
-
-        public static void RegisterRoutes(HttpConfiguration config)
-        {
-        }
-
-        private static void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)
-        {
-            config.Routes.MapHttpRoute(
-                name: Guid.NewGuid().ToString(),
-                routeTemplate: route,
-                defaults: new { controller = controller, action = action },
-                constraints: new { httpMethod = new HttpMethodConstraint(method) });
         }
     }
 }

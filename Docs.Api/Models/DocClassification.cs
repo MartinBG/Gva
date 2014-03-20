@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,13 +5,21 @@ namespace Docs.Api.Models
     public partial class DocClassification
     {
         public int DocClassificationId { get; set; }
+
         public int DocId { get; set; }
+
         public int ClassificationId { get; set; }
+
         public int ClassificationByUserId { get; set; }
+
         public System.DateTime ClassificationDate { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Classification Classification { get; set; }
+
         public virtual Doc Doc { get; set; }
     }
 
@@ -49,7 +55,6 @@ namespace Docs.Api.Models
                 .WithMany(t => t.DocClassifications)
                 .HasForeignKey(d => d.DocId)
                 .WillCascadeOnDelete();
-
         }
     }
 }

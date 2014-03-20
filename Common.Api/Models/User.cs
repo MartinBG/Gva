@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -12,15 +11,25 @@ namespace Common.Api.Models
         }
 
         public int UserId { get; set; }
+
         public string Username { get; set; }
+
         public string PasswordHash { get; set; }
+
         public string PasswordSalt { get; set; }
+
         public bool HasPassword { get; set; }
+
         public string Fullname { get; set; }
+
         public string Notes { get; set; }
+
         public string CertificateThumbprint { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<Role> Roles { get; set; }
     }
 

@@ -1,6 +1,6 @@
-﻿using Common.Api.Models;
-using System.Linq;
+﻿using System.Linq;
 using System.Security;
+using Common.Api.Models;
 
 namespace Common.Api.UserContext
 {

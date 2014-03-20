@@ -2,28 +2,58 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Regs.Api.Models
 {
     public partial class PartVersion
     {
+        private JObject content = null;
+
         public PartVersion()
         {
             this.Commits = new List<Commit>();
         }
 
         public int PartVersionId { get; set; }
+
         public int PartId { get; set; }
+
         public string TextContent { get; set; }
+
         public int OriginalCommitId { get; set; }
+
         public int CreatorId { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         public virtual Commit OriginalCommit { get; set; }
+
         public virtual PartOperation PartOperation { get; set; }
+
         public virtual Part Part { get; set; }
+
         public virtual ICollection<Commit> Commits { get; set; }
+
         public virtual User User { get; set; }
+
+        public JObject Content
+        {
+            get
+            {
+                if (this.content == null)
+                {
+                    this.content = JObject.Parse(this.TextContent);
+                }
+
+                return this.content;
+            }
+            set
+            {
+                this.content = value;
+                this.TextContent = value.ToString();
+            }
+        }
     }
 
     public class PartVersionMap : EntityTypeConfiguration<PartVersion>
@@ -45,7 +75,7 @@ namespace Regs.Api.Models
 
             // Relationships
             this.HasRequired(t => t.OriginalCommit)
-                .WithMany()
+                .WithMany(t => t.ChangedPartVersions)
                 .HasForeignKey(d => d.OriginalCommitId);
 
             this.HasRequired(t => t.Part)
@@ -56,6 +86,9 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.User)
                 .WithMany()
                 .HasForeignKey(d => d.CreatorId);
+
+            // Local-only properties
+            this.Ignore(t => t.Content);
         }
     }
 }

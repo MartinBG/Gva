@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Gva.Web
@@ -18,8 +14,7 @@ namespace Gva.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{*pathInfo}",
-                defaults: new { controller = "Home", action = "Index" }
-            );
+                defaults: new { controller = "Home", action = "Index" });
         }
     }
 }

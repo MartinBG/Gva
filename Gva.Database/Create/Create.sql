@@ -5,12 +5,16 @@ GO
 -- Tables
 ---------------------------------------------------------------
 
+:r $(rootPath)\"Tables\GvaCaseTypes.sql"
+:r $(rootPath)\"Tables\GvaLotCases.sql"
 :r $(rootPath)\"Tables\GvaApplications.sql"
 :r $(rootPath)\"Tables\GvaFiles.sql"
-:r $(rootPath)\"Tables\GvaLotFileTypes.sql"
 :r $(rootPath)\"Tables\GvaLotFiles.sql"
 :r $(rootPath)\"Tables\GvaAppLotFiles.sql"
 :r $(rootPath)\"Tables\GvaLotObjects.sql"
+:r $(rootPath)\"Tables\GvaPersons.sql"
+:r $(rootPath)\"Tables\GvaInventoryItems.sql"
+:r $(rootPath)\"Tables\GvaApplicationSearches.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -22,6 +26,7 @@ GO
 -- Insert Noms
 ---------------------------------------------------------------
 
+:r $(rootPath)\"..\Insert\TestData.sql"
 :r $(rootPath)\"..\Insert\Noms\gender.sql"
 :r $(rootPath)\"..\Insert\Noms\countries.sql"
 :r $(rootPath)\"..\Insert\Noms\cities.sql"
@@ -66,3 +71,4 @@ GO
 :r $(rootPath)\"..\Insert\Noms\applicationTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\applicationpaymentTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\currencies.sql"
+:r $(rootPath)\"..\Insert\Noms\yesNoOptions.sql"

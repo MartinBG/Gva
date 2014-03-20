@@ -3,7 +3,7 @@
     <sc-column sortable="false" class="buttons-cell" width="1px">
       <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
+    <sc-column data="files[0].bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document">
     </sc-column>
@@ -15,16 +15,16 @@
     </sc-column>
     <sc-column data="publisher" title="persons.inventorySearch.publisher">
     </sc-column>
-    <sc-column data="valid" title="persons.inventorySearch.valid">
+    <sc-column data="valid" title="persons.inventorySearch.valid" type="boolean">
     </sc-column>
     <sc-column data="fromDate" title="persons.inventorySearch.fromDate" type="date">
     </sc-column>
     <sc-column data="toDate" title="persons.inventorySearch.toDate" type="date">
     </sc-column>
-    <sc-column data="pageCount" title="persons.inventorySearch.pageCount">
+    <sc-column data="files[0].pageCount" title="persons.inventorySearch.pageCount">
     </sc-column>
     <sc-column sortable="false" title="persons.inventorySearch.file">
-      <a target="_self" ng-show="item.file" title="{{item.file.name}}">
+      <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>
     </sc-column>

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -12,13 +11,21 @@ namespace Docs.Api.Models
         }
 
         public int CorrespondentContactId { get; set; }
+
         public int CorrespondentId { get; set; }
+
         public string Name { get; set; }
+
         public string UIN { get; set; }
+
         public string Note { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Correspondent Correspondent { get; set; }
+
         public virtual ICollection<DocCorrespondentContact> DocCorrespondentContacts { get; set; }
     }
 
@@ -58,7 +65,6 @@ namespace Docs.Api.Models
                 .WithMany(t => t.CorrespondentContacts)
                 .HasForeignKey(d => d.CorrespondentId)
                 .WillCascadeOnDelete();
-
         }
     }
 }

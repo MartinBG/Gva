@@ -1,0 +1,27 @@
+﻿<sc-button name="createBtn" btn-click="newApplication()" text="persons.personDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="personDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteApplication(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.applicationType.name" title="persons.personDocApplicationSearch.applicationType">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="persons.personDocApplicationSearch.documentNumber">
+  </sc-column>
+   <sc-column data="part.requestDate" title="persons.personDocApplicationSearch.requestDate" type="date">
+  </sc-column>
+  <sc-column data="part.documentDate" title="persons.personDocApplicationSearch.documentDate" type="date">
+  </sc-column>
+  <sc-column data="part.applicationPaymentType.name" title="persons.personDocApplicationSearch.applicationPaymentType">
+  </sc-column>
+  <sc-column data="part.taxAmount" title="persons.personDocApplicationSearch.taxAmount">
+  </sc-column>
+  <sc-column data="part.currency.name" title="persons.personDocApplicationSearch.currency">
+  </sc-column>
+  <sc-column data="part.notes" title="persons.personDocApplicationSearch.notes">
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="persons.personDocApplicationSearch.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="persons.personDocApplicationSearch.pageCount">
+  </sc-column>
+</sc-datatable>

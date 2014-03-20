@@ -4,7 +4,7 @@
 
   describe('Person document check edit page', function () {
     var ptor = protractor.getInstance(),
-        Page = require('../../pageObjects/documentChecks/checkPO'),
+        Page = require('../../pageObjects/documentChecks/editCheckPO'),
         SearchPage = require('../../pageObjects/documentChecks/searchCheckPO'),
         editCheckPage,
         searchCheckPage;
@@ -22,22 +22,18 @@
       expect(editCheckPage.staffType.get()).toEqual('Наземен авиационен персонал за TO на ВС');
       expect(editCheckPage.documentNumber.get()).toEqual('11232');
       expect(editCheckPage.documentPersonNumber.get()).toEqual('7005159385');
-      expect(editCheckPage.personCheckDocumentType.get()).toEqual('Base training form');
+      expect(editCheckPage.personCheckDocumentType.get()).toEqual('Свидетелство');
       expect(editCheckPage.personCheckDocumentRole.get()).toEqual('Летателна проверка');
       expect(editCheckPage.documentDateValidFrom.get()).toEqual('02.05.1970');
       expect(editCheckPage.documentDateValidTo.get()).toEqual('15.05.1970');
       expect(editCheckPage.documentPublisher.get()).toEqual('Проверяващ');
       expect(editCheckPage.valid.get()).toEqual('Да');
-      expect(editCheckPage.bookPageNumber.get()).toEqual('3');
-      expect(editCheckPage.pageCount.get()).toEqual('5');
     });
 
-    it('should change address data correctly', function () {
-      editCheckPage.personCheckDocumentType.set('Описание');
+    it('should change check data correctly', function () {
+      editCheckPage.personCheckDocumentType.set('Писмо');
       editCheckPage.personCheckDocumentRole.set('Тренажор');
       editCheckPage.valid.set('Не');
-      editCheckPage.bookPageNumber.set('123');
-      editCheckPage.pageCount.set('456');
 
       editCheckPage.save();
 
@@ -45,14 +41,12 @@
       expect(searchCheckPage.breadcrumb.get()).toEqual('Проверки');
 
       expect(searchCheckPage.datatable.getColumns(
-          'part_personCheckDocumentType_name',
-          'part_personCheckDocumentRole_name',
-          'part_valid_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentType_name',
+          'part_documentRole_name',
+          'part_valid_name'
           )).toEqual([
-          ['Описание', 'Тренажор', 'Не', '123', '456'],
-          ['Authorisation', 'Практическа проверка', 'Не', '2', '6']
+          ['Писмо', 'Тренажор', 'Не'],
+          ['Справка', 'Практическа проверка', 'Не']
         ]);
     });
   });

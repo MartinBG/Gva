@@ -718,7 +718,8 @@
           email: 'E-mail',
           fax: 'Факс',
           companyPhone: 'Служебен телефон',
-          phones: 'Телефони'
+          phones: 'Телефони',
+          caseTypes: 'Типове дела'
         },
         personAddressDirective: {
           title: 'Адрес',
@@ -734,8 +735,6 @@
           title: 'Образование',
           documentNumber: '№ на документ',
           completionDate: 'Дата на завършване',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           speciality: 'Специалност',
           graduation: 'Степен на образование',
           school: 'Учебно заведение',
@@ -749,13 +748,15 @@
           documentDateValidFrom: 'От дата',
           documentDateValidTo: 'Валиден до',
           documentPublisher: 'Издаден от',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки'
         },
         personScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл'
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
         },
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',
@@ -779,8 +780,6 @@
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClassType: 'Клас',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
           title: 'Свидетелство за медицинска годност'
         },
         personEmploymentDirective: {
@@ -790,8 +789,6 @@
           organization: 'Организация',
           employmentCategory: 'Категория длъжност',
           country: 'Страна',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки'
         },
         personCheckDirective: {
@@ -810,8 +807,6 @@
           personCheckDocumentRole: 'Роля на документ',
           aircraftTypeGroup: 'Тип/Група ВС',
           valid: 'Валиден',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           notes: 'Бележки',
           sector: 'Сектор/работно място',
           locationIndicator: 'Индикатор на местоположение',
@@ -836,9 +831,7 @@
           personOtherDocumentType: 'Тип документ',
           personOtherDocumentRole: 'Роля на документ',
           valid: 'Валиден',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.'
+          notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
           title: 'Летателен/практически опит',
@@ -905,6 +898,40 @@
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.'
+        },
+        personDocApplicationDirective: {
+          title: 'Заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        personDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        newPersonDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editPersonDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         newPerson: {
           save: 'Запис',
@@ -993,7 +1020,8 @@
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          file: 'Файл'
         },
         newOther: {
           save: 'Запис',
@@ -1298,14 +1326,14 @@
           select: 'Избери'
         },
         search: {
-          fromDate: 'От дата',
-          toDate: 'До дата',
+          fromDate: 'От дата на заявител',
+          toDate: 'До дата на заявител',
           search: 'Търси',
           newApp: 'Ново',
           linkApp: 'Свържи',
-          regDate: 'Дата',
-          regUri: 'Рег.№',
-          subject: 'Относно',
+          requestDate: 'Дата на заявител',
+          documentNumber: '№ на документ',
+          applicationType: 'Тип заявление',
           status: 'Статус',
           lin: 'ЛИН',
           applicant: 'Заявител'
@@ -1315,7 +1343,8 @@
         required: 'Задължително поле',
         min: 'Стойността на полето трябва да е по-голяма от 0',
         mail: 'Невалиден E-mail',
-        lin: 'Невалиден ЛИН'
+        lin: 'Невалиден ЛИН',
+        date: 'Невалидна дата'
       },
       states: {
         'root.applications': 'Заявления',
@@ -1330,9 +1359,9 @@
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',
         'root.applications.edit.licenses': 'Лицензи',
-        'root.applications.edit.newFile': 'Нов документ',
-        'root.applications.edit.addPart': 'Добавяне',
-        'root.applications.edit.linkPart': 'Свързване',
+        'root.applications.edit.case.newFile': 'Нов документ',
+        'root.applications.edit.case.addPart': 'Добавяне',
+        'root.applications.edit.case.linkPart': 'Свързване',
         'root.persons': 'Физически лица',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.view': 'Лично досие',
@@ -1380,6 +1409,9 @@
         'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentOthers.edit': 'Редакция на документ',
         'root.persons.view.documentOthers.edit.choosePublisher': 'Избор на издател',
+        'root.persons.view.documentApplications': 'Заявления',
+        'root.persons.view.documentApplications.new': 'Новo заявление',
+        'root.persons.view.documentApplications.edit': 'Редакция на заявление',
         'root.aircrafts': 'ВС',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',

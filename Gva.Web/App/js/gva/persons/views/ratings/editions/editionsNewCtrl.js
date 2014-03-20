@@ -18,14 +18,14 @@
           return PersonEdition
           .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.model).$promise
           .then(function () {
-            return $state.go('root.persons.view.editions.search');
+            return $state.go('root.persons.view.ratings.editions.search');
           });
         }
       });
     };
 
     $scope.cancel = function () {
-      return $state.go('root.persons.view.editions.search');
+      return $state.go('root.persons.view.ratings.editions.search');
     };
   }
 

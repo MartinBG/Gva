@@ -26,14 +26,12 @@
           'part_documentDateValidTo',
           'part_medClassType_name',
           'part_limitations',
-          'part_documentPublisher_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher_name'
           )).toEqual([
         ['MED BG-1-11232-99994', '04.04.2010', '04.08.2010', 'Class-1',
-          'OSL, OML', 'КАМО', '1', '3'],
+          'OSL, OML', 'КАМО'],
         ['MED BG2-3244-11232-9934', '04.04.2005', '06.09.2015', 'Class-2',
-          'OSL, OML, VDL', 'CAA France', '3', '5']
+          'OSL, OML, VDL', 'CAA France']
       ]);
     });
    
@@ -47,12 +45,10 @@
           'part_documentDateValidTo',
           'part_medClassType_name',
           'part_limitations',
-          'part_documentPublisher_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher_name'
           )).toEqual([
           ['MED BG-1-11232-99994', '04.04.2010', '04.08.2010',
-            'Class-1', 'OSL, OML', 'КАМО', '1', '3']
+            'Class-1', 'OSL, OML', 'КАМО']
         ]);
       });
     });

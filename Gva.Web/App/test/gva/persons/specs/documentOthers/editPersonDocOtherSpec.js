@@ -28,16 +28,12 @@
       expect(editDocOtherPage.documentDateValidTo.get()).toEqual('06.03.2013');
       expect(editDocOtherPage.personOtherDocumentType.get()).toEqual('Протокол');
       expect(editDocOtherPage.personOtherDocumentRole.get()).toEqual('Летателна проверка');
-      expect(editDocOtherPage.bookPageNumber.get()).toEqual('62');
-      expect(editDocOtherPage.pageCount.get()).toEqual('1');
     });
-    
+
     it('should change document data correctly', function () {
       editDocOtherPage.documentNumber.set('9800');
       editDocOtherPage.documentDateValidFrom.set('01.01.2010');
       editDocOtherPage.documentDateValidTo.set('01.01.2020');
-      editDocOtherPage.bookPageNumber.set('1');
-      editDocOtherPage.pageCount.set('2');
 
       editDocOtherPage.save();
       searchDocOtherPage = new SearchPage(ptor);
@@ -47,12 +43,9 @@
           'part_documentNumber',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_documentPublisher',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher'
           )).toEqual([
-        ['9800', '01.01.2010', '01.01.2020',
-          'УЦ: Български въздухоплавателен център', '1', '2']
+        ['9800', '01.01.2010', '01.01.2020', 'УЦ: Български въздухоплавателен център']
       ]);
     });
   });

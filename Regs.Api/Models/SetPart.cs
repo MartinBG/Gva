@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Regs.Api.Models
 {
@@ -16,12 +12,17 @@ namespace Regs.Api.Models
         }
 
         public int SetPartId { get; set; }
+
         public int SetId { get; set; }
+
         public string Alias { get; set; }
+
         public string PathRegex { get; set; }
+
         public string Schema { get; set; }
 
         public virtual ICollection<Part> Parts { get; set; }
+
         public virtual Set Set { get; set; }
     }
 

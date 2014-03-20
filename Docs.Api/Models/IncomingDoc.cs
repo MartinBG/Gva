@@ -13,13 +13,21 @@ namespace Docs.Api.Models
         }
 
         public int IncomingDocId { get; set; }
-        public System.Guid DocumentGuid { get; set; }
-        public System.DateTime IncomingDate { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
+
+        public Guid DocumentGuid { get; set; }
+
+        public DateTime IncomingDate { get; set; }
+
+        public DateTime? ModifyDate { get; set; }
+
         public int IncomingDocStatusId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<DocIncomingDoc> DocIncomingDocs { get; set; }
+
         public virtual ICollection<IncomingDocFile> IncomingDocFiles { get; set; }
+
         public virtual IncomingDocStatus IncomingDocStatus { get; set; }
     }
 
@@ -50,7 +58,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.IncomingDocStatus)
                 .WithMany(t => t.IncomingDocs)
                 .HasForeignKey(d => d.IncomingDocStatusId);
-
         }
     }
 }

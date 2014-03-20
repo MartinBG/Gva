@@ -30,6 +30,9 @@
       else if (item.documentType === 'check') {
         state = 'root.persons.view.checks.edit';
       }
+      else if (item.documentType === 'other') {
+        state = 'root.persons.view.documentOthers.edit';
+      }
 
       return $state.go(state, { ind: item.partIndex });
     };

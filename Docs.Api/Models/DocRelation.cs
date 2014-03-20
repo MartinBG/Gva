@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,12 +5,19 @@ namespace Docs.Api.Models
     public partial class DocRelation
     {
         public int DocRelationId { get; set; }
+
         public int DocId { get; set; }
-        public Nullable<int> ParentDocId { get; set; }
-        public Nullable<int> RootDocId { get; set; }
+
+        public int? ParentDocId { get; set; }
+
+        public int? RootDocId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual Doc ParentDoc { get; set; }
+        
         public virtual Doc RootDoc { get; set; }
     }
 
@@ -49,7 +54,6 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.RootDoc)
                 .WithMany(t => t.DocRelations2)
                 .HasForeignKey(d => d.RootDocId);
-
         }
     }
 }

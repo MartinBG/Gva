@@ -16,49 +16,93 @@ namespace Docs.Api.Models
         }
 
         public int CorrespondentId { get; set; }
+
         public int CorrespondentGroupId { get; set; }
-        public Nullable<int> RegisterIndexId { get; set; }
+
+        public int? RegisterIndexId { get; set; }
+
         public string Email { get; set; }
+
         public string DisplayName { get; set; }
+
         public int CorrespondentTypeId { get; set; }
+
         public string BgCitizenFirstName { get; set; }
+
         public string BgCitizenLastName { get; set; }
+
         public string BgCitizenUIN { get; set; }
+
         public string ForeignerFirstName { get; set; }
+
         public string ForeignerLastName { get; set; }
-        public Nullable<int> ForeignerCountryId { get; set; }
+
+        public int? ForeignerCountryId { get; set; }
+
         public string ForeignerSettlement { get; set; }
-        public Nullable<System.DateTime> ForeignerBirthDate { get; set; }
+
+        public DateTime? ForeignerBirthDate { get; set; }
+
         public string LegalEntityName { get; set; }
+
         public string LegalEntityBulstat { get; set; }
+
         public string FLegalEntityName { get; set; }
-        public Nullable<int> FLegalEntityCountryId { get; set; }
+
+        public int? FLegalEntityCountryId { get; set; }
+
         public string FLegalEntityRegisterName { get; set; }
+
         public string FLegalEntityRegisterNumber { get; set; }
+
         public string FLegalEntityOtherData { get; set; }
-        public Nullable<int> ContactDistrictId { get; set; }
-        public Nullable<int> ContactMunicipalityId { get; set; }
-        public Nullable<int> ContactSettlementId { get; set; }
+
+        public int? ContactDistrictId { get; set; }
+
+        public int? ContactMunicipalityId { get; set; }
+
+        public int? ContactSettlementId { get; set; }
+
         public string ContactPostCode { get; set; }
+
         public string ContactAddress { get; set; }
+
         public string ContactPostOfficeBox { get; set; }
+
         public string ContactPhone { get; set; }
+
         public string ContactFax { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
-        public Nullable<int> ModifyUserId { get; set; }
+
+        public DateTime? ModifyDate { get; set; }
+
+        public int? ModifyUserId { get; set; }
+
         public string Alias { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<CorrespondentContact> CorrespondentContacts { get; set; }
+
         public virtual CorrespondentGroup CorrespondentGroup { get; set; }
+
         public virtual CorrespondentType CorrespondentType { get; set; }
+
         public virtual Common.Api.Models.Country ForeignerCountry { get; set; }
+        
         public virtual Common.Api.Models.Country FLegalEntityCountry { get; set; }
+
         public virtual Common.Api.Models.District District { get; set; }
+
         public virtual Common.Api.Models.Municipality Municipality { get; set; }
+
         public virtual RegisterIndex RegisterIndex { get; set; }
+
         public virtual Common.Api.Models.Settlement Settlement { get; set; }
+
         public virtual Common.Api.Models.User User { get; set; }
+
         public virtual ICollection<DocCorrespondent> DocCorrespondents { get; set; }
 
         public CorrespondentContact CreateCorrespondentContact(string name, string uin, string note, bool isActive, UserContext userContext)
@@ -255,7 +299,6 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.User)
                 .WithMany()
                 .HasForeignKey(d => d.ModifyUserId);
-
         }
     }
 }

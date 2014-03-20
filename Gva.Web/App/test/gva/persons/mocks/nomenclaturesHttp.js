@@ -30,13 +30,20 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentRoles?term&id',
+      .when('GET', '/api/nomenclatures/otherDocumentRoles?term&id',
         function ($params, $filter) {
-          var res = nomenclatures.personCheckDocumentRoles;
+          var res = nomenclatures.documentRoles;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
+            res = $filter('filter')(
+              res,
+              function (nom) {
+                return nom.textContent.categoryAlias === 'other';
+              },
+              true);
+
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
@@ -44,13 +51,20 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/personCheckDocumentTypes?term&id',
+      .when('GET', '/api/nomenclatures/otherDocumentTypes?term&id',
         function ($params, $filter) {
-          var res = nomenclatures.personCheckDocumentTypes;
+          var res = nomenclatures.documentTypes;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
+            res = $filter('filter')(
+              res,
+              function (nom) {
+                return nom.textContent.isIdDocument === 'false';
+              },
+              true);
+
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
@@ -58,18 +72,31 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentTrainingRoles?term&id',
+      .when('GET', '/api/nomenclatures/documentRoles?term&id&categoryAlias&staffCode',
         function ($params, $filter) {
-          var res = $filter('filter')(
-             nomenclatures.documentRoles,
-            function (nom) {
-              return nom.textContent.categoryCode === 'O';
-            },
-            true);
+          var res = nomenclatures.documentRoles;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
+            if ($params.categoryAlias) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.categoryAlias === $params.type;
+                },
+                true);
+            }
+
+            if ($params.staffCode) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.staffAlias === undefined;
+                },
+                true);
+            }
+
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }
@@ -77,27 +104,32 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentTrainingTypes?term&id',
+      .when('GET', '/api/nomenclatures/documentTypes?term&id&isIdDocument&staffCode',
         function ($params, $filter) {
-          var res = nomenclatures.personOtherDocumentTypes;
+          var res = nomenclatures.documentTypes;
 
           if ($params.id) {
             res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
           } else {
-            if ($params.term) {
-              res = $filter('filter')(res, { name: $params.term }, false);
+            if ($params.isIdDocument) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.isIdDocument === $params.isIdDocument;
+                },
+                true);
             }
-          }
 
-          return [200, res];
-        })
-      .when('GET', '/api/nomenclatures/personIdDocumentTypes?term&id',
-        function ($params, $filter) {
-          var res = nomenclatures.personIdDocumentTypes;
+            if ($params.staffCode) {
+              res = $filter('filter')(
+                res,
+                function (nom) {
+                  return nom.textContent.staffAlias === undefined ||
+                         nom.textContent.staffAlias === $params.staffCode;
+                },
+                true);
+            }
 
-          if ($params.id) {
-            res = $filter('filter')(res, { nomValueId: parseInt($params.id, 10) }, true)[0];
-          } else {
             if ($params.term) {
               res = $filter('filter')(res, { name: $params.term }, false);
             }

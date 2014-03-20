@@ -104,23 +104,24 @@
         nomValueId: 6, code: '6', name: 'Обучение', nameAlt: 'DocumentTraining', alias: 'DocumentTraining', textContent: {
           setPartId: 6
         }
+      },
+      {
+        nomValueId: 7, code: '7', name: 'Друг документ', nameAlt: 'DocumentOther', alias: 'DocumentOther', textContent: {
+          setPartId: 7
+        }
+      },
+      {
+        nomValueId: 8, code: '8', name: 'Заявление', nameAlt: 'DocumentApplication', alias: 'DocumentApplication', textContent: {
+          setPartId: 8
+        }
       }
-      //{
-      //  nomValueId: 7, code: '7', name: '*', nameAlt: 'DocumentOther', alias: 'DocumentOther', textContent: {
-      //    setPartId: 7
-      //  }
-      //}
     ],
 
     graduations: require('./graduation'),
 
-    personIdDocumentTypes: require('./personIdDocumentType'),
-
-    personOtherDocumentTypes: require('./personOtherDocumentType'),
-
-    otherDocumentTypes: require('./otherDocumentType'),
-
     documentRoles: require('./documentRole'),
+
+    documentTypes: require('./documentType'),
 
     employmentCategories: require('./employmentCategory'),
 
@@ -273,13 +274,11 @@
 
     docWorkflowAction: require('./docWorkflowAction'),
 
-    medicalClasses: require('./medicalClass'),
+    medClasses: require('./medicalClass'),
 
-    medicalLimitations: require('./medicalLimitation'),
+    medLimitation: require('./medicalLimitation'),
 
     publisherTypes: require('./publisherType'),
-
-    personCheckDocumentTypes: require('./personCheckDocumentType'),
 
     //оценки при проверка на Физическо лице
     personCheckRatingValues: [
@@ -290,8 +289,6 @@
        { nomValueId: 4, code: 'Comp', name: 'Компетентен', nameAlt: 'Компетентен', alias: 'competent' },
        { nomValueId: 4, code: 'Incomp', name: 'Некомпетентен', nameAlt: 'Некомпетентен', alias: 'incompetent' },
     ],
-
-    personCheckDocumentRoles: require('./personCheckDocumentRole'),
 
     aircrafts: require('./aircraft'),
 
@@ -328,6 +325,14 @@
       { nomValueId: 4, code: 'B1', name: 'B1', nameAlt: 'B1', alias: 'B1' }
     ],
 
+    //Номенклатура Видове заявления
+    applicationTypes: require('./applicationType'),
+
+    //Номенклатура Видове плащания по заявления
+    applicationPaymentTypes: require('./applicationPaymentType'),
+
+    //Номенклатура Парични единици
+    currencies: require('./currency'),
 
     //Номенклатура Причини за одит
     auditReasons: require('./auditReason'),

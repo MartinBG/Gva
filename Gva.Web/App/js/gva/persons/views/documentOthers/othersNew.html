@@ -1,6 +1,8 @@
-﻿<ng-form name="newDocumentOtherForm">
+﻿<ng-form name="newDocumentOtherForm" sc-validate="{}">
 
   <gva-person-document-other name="personDocumentOtherForm" ng-model="personDocumentOther.part"></gva-person-document-other>
+
+  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentOther.files"></gva-person-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

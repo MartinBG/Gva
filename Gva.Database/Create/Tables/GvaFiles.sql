@@ -2,9 +2,9 @@
 GO 
 
 CREATE TABLE [dbo].[GvaFiles] (
-    [GvaFileId]     INT           NOT NULL IDENTITY,
-    [Filename]      NVARCHAR (50) NOT NULL,
-    [FileContentId] INT           NOT NULL,
+    [GvaFileId]     INT              NOT NULL IDENTITY,
+    [Filename]      NVARCHAR (50)    NOT NULL,
+    [FileContentId] UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_GvaFiles] PRIMARY KEY ([GvaFileId])
 )
 GO

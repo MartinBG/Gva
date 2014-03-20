@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -13,16 +12,27 @@ namespace Docs.Api.Models
         }
 
         public int DocFileTypeId { get; set; }
+
         public string Name { get; set; }
+
         public string Alias { get; set; }
+
         public string DocTypeUri { get; set; }
+
         public bool HasEmbeddedUri { get; set; }
+
         public string MimeType { get; set; }
+
         public string Extention { get; set; }
+
         public bool IsEditable { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<DocFile> DocFiles { get; set; }
+
         public virtual ICollection<IncomingDocFile> IncomingDocFiles { get; set; }
     }
 

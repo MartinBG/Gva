@@ -19,7 +19,7 @@
       expect(newDocMedPage.breadcrumb.get())
         .toEqual('Новo медицинско');
     });
-    
+
     it('should create new medical document correctly', function () {
       newDocMedPage.documentNumberPrefix.set('1');
       newDocMedPage.documentNumber.set('2324a');
@@ -30,9 +30,7 @@
       newDocMedPage.documentPublisher.set('FAA');
       newDocMedPage.limitationsTypes.set('OCL');
       newDocMedPage.notes.set('notes');
-      newDocMedPage.bookPageNumber.set('2');
-      newDocMedPage.pageCount.set('5');
-      
+
       newDocMedPage.save();
       searchDocMedPage = new SearchPage(ptor);
       expect(searchDocMedPage.breadcrumb.get()).toEqual('Медицински');
@@ -43,16 +41,13 @@
           'part_documentDateValidTo',
           'part_medClassType_name',
           'part_limitations',
-          'part_documentPublisher_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_documentPublisher_name'
           )).toEqual([
         ['MED BG-1-11232-99994', '04.04.2010', '04.08.2010', 'Class-1',
-          'OSL, OML', 'КАМО', '1', '3'],
+          'OSL, OML', 'КАМО'],
         ['MED BG2-3244-11232-9934', '04.04.2005', '06.09.2015', 'Class-2',
-          'OSL, OML, VDL', 'CAA France', '3', '5'],
-        ['1-2324a-11232-23', '20.10.2014', '01.01.2020', 'Class-3', 'OCL',
-          'FAA', '2', '5']
+          'OSL, OML, VDL', 'CAA France'],
+        ['1-2324a-11232-23', '20.10.2014', '01.01.2020', 'Class-3', 'OCL', 'FAA']
       ]);
     });
 

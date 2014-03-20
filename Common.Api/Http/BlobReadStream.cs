@@ -27,13 +27,46 @@ namespace Common.Api.Http
         {
             this.connectionStringName = connectionStringName;
             this.cmdReadChunk = new SqlCommand(
-                String.Format(@"SELECT [{2}] FROM [{0}].[{1}] WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn));
+                string.Format(@"SELECT [{2}] FROM [{0}].[{1}] WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn));
             this.cmdReadChunk.Parameters.AddWithValue("@key", keyValue);
+        }
+
+        public override bool CanRead
+        {
+            get { return true; }
+        }
+
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+
+        public override long Length
+        {
+            get { throw new InvalidOperationException(); }
+        }
+
+        public override long Position
+        {
+            get
+            {
+                throw new InvalidOperationException();
+            }
+
+            set
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
         {
-            if (chunkReader == null)
+            if (this.chunkReader == null)
             {
                 this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.connectionStringName].ConnectionString);
                 this.cmdReadChunk.Connection = this.connection;
@@ -71,19 +104,24 @@ namespace Common.Api.Http
             return this.ReadAsync(buffer, offset, count).Result;
         }
 
-        public override bool CanRead
+        public override void Flush()
         {
-            get { return true; }
+            throw new InvalidOperationException();
         }
 
-        public override bool CanSeek
+        public override long Seek(long offset, SeekOrigin origin)
         {
-            get { return false; }
+            throw new InvalidOperationException();
         }
 
-        public override bool CanWrite
+        public override void SetLength(long value)
         {
-            get { return false; }
+            throw new InvalidOperationException();
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new InvalidOperationException();
         }
 
         protected override void Dispose(bool disposing)
@@ -106,43 +144,6 @@ namespace Common.Api.Http
                 this.chunkReader = null;
                 base.Dispose(disposing);
             }
-        }
-
-        public override void Flush()
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override long Length
-        {
-            get { throw new InvalidOperationException(); }
-        }
-
-        public override long Position
-        {
-            get
-            {
-                throw new InvalidOperationException();
-            }
-            set
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void SetLength(long value)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw new InvalidOperationException();
         }
     }
 }

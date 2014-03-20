@@ -2,39 +2,11 @@
 (function (angular) {
   'use strict';
 
-  function ЕditionsSearchCtrl($scope, $state, $stateParams, PersonEdition) {
-    PersonEdition.query($stateParams).$promise.then(function (editions) {
-      $scope.editions = editions.map(function (item) {
-        item.rating.ratingTypeOrRatingLevel = item.rating.personRatingLevel ?
-          item.rating.personRatingLevel : item.rating.ratingType;
-        var subClasses = '', i;
-        if (item.ratingEdition.part.ratingSubClasses) {
-          for (i = 0; i < item.ratingEdition.part.ratingSubClasses.length; i++) {
-            subClasses += item.ratingEdition.part.ratingSubClasses[i].name + ', ';
-          }
-          subClasses = ' ( ' + subClasses.substr(0, subClasses.length - 2) + ' )';
-        }
+  function EditionsSearchCtrl($scope, $state, $stateParams, PersonEdition, editions) {
+    $scope.editions = editions;
 
-        item.rating.classOrSubclass = item.rating.aircraftTypeGroup ?
-        item.rating.aircraftTypeGroup.name : item.rating.ratingClass.name + subClasses;
-
-        item.rating.authorizationAndLimitations = item.rating.authorization ?
-          item.rating.authorization.name : '';
-        var limitations = '';
-        if (item.ratingEdition.part.limitations) {
-          for (i = 0; i < item.ratingEdition.part.limitations.length; i++) {
-            limitations += item.ratingEdition.part.limitations[i].name + ', ';
-          }
-          limitations = limitations.substring(0, limitations.length - 2);
-          item.rating.authorizationAndLimitations += ' ' + limitations;
-        }
-
-        return item;
-      });
-    });
-    
     $scope.editEdition = function (item) {
-      return $state.go('root.persons.view.editions.edit', {
+      return $state.go('root.persons.view.ratings.editions.edit', {
         id: $stateParams.id,
         ind: $stateParams.ind,
         childInd: item.ratingEdition.partIndex
@@ -52,12 +24,62 @@
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
     };
+
     $scope.newEdition = function () {
-      return $state.go('root.persons.view.editions.new');
+      return $state.go('root.persons.view.ratings.editions.new');
     };
   }
 
-  ЕditionsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonEdition'];
+  EditionsSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'PersonEdition', 'editions'];
 
-  angular.module('gva').controller('ЕditionsSearchCtrl', ЕditionsSearchCtrl);
+  EditionsSearchCtrl.$resolve = {
+    editions: [
+      '$stateParams',
+      'PersonRating',
+      'PersonEdition',
+      function ($stateParams, PersonRating, PersonEdition) {
+        return PersonRating.get($stateParams).$promise.then(function (rating) {
+          return PersonEdition.query($stateParams).$promise.then(function (editions) {
+            return editions.map(function (item) {
+              var mappedItem = {
+                ratingEdition: item,
+                rating: {
+                  firstEditionValidFrom: rating.firstEditionValidFrom,
+                  ratingTypeOrRatingLevel: rating.rating.personRatingLevel ?
+                    rating.rating.personRatingLevel : rating.rating.ratingType,
+                  authorizationAndLimitations: rating.rating.authorization ?
+                    rating.rating.authorization.name : '',
+                  personRatingModel: rating.rating.personRatingModel
+                }
+              };
+
+              var subClasses = '', i;
+              if (item.part.ratingSubClasses) {
+                for (i = 0; i < item.part.ratingSubClasses.length; i++) {
+                  subClasses += item.part.ratingSubClasses[i].name + ', ';
+                }
+                subClasses = ' ( ' + subClasses.substr(0, subClasses.length - 2) + ' )';
+              }
+
+              mappedItem.rating.classOrSubclass = rating.rating.aircraftTypeGroup ?
+                rating.rating.aircraftTypeGroup.name : rating.rating.ratingClass.name + subClasses;
+
+              var limitations = '';
+              if (item.part.limitations) {
+                for (i = 0; i < item.part.limitations.length; i++) {
+                  limitations += item.part.limitations[i].name + ', ';
+                }
+                limitations = limitations.substring(0, limitations.length - 2);
+                rating.authorizationAndLimitations += ' ' + limitations;
+              }
+
+              return mappedItem;
+            });
+          });
+        });
+      }
+    ]
+  };
+
+  angular.module('gva').controller('EditionsSearchCtrl', EditionsSearchCtrl);
 }(angular));

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,14 +6,23 @@ namespace Docs.Api.Models
     public partial class IncomingDocFile
     {
         public int IncomingDocFileId { get; set; }
+
         public int IncomingDocId { get; set; }
+
         public int DocFileTypeId { get; set; }
+
         public string Name { get; set; }
+
         public string DocFileName { get; set; }
+
         public string DocContentStorage { get; set; }
-        public Nullable<System.Guid> DocFileContentId { get; set; }
+
+        public Guid? DocFileContentId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual DocFileType DocFileType { get; set; }
+
         public virtual IncomingDoc IncomingDoc { get; set; }
     }
 
@@ -61,7 +69,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.IncomingDoc)
                 .WithMany(t => t.IncomingDocFiles)
                 .HasForeignKey(d => d.IncomingDocId);
-
         }
     }
 }

@@ -24,11 +24,8 @@
       expect(editDocEduPage.completionDate.get()).toEqual('04.04.1981');
       expect(editDocEduPage.documentNumber.get()).toEqual('1');
       expect(editDocEduPage.speciality.get()).toEqual('пилот');
-      expect(editDocEduPage.fileSpan.getText()).toEqual('testName.pdf');
       expect(editDocEduPage.graduation.get()).toEqual('Висше образование (бакалавър)');
       expect(editDocEduPage.school.get()).toEqual('Български въздухоплавателен център');
-      expect(editDocEduPage.bookPageNumber.get()).toEqual('2');
-      expect(editDocEduPage.pageCount.get()).toEqual('1');
 
     });
 
@@ -38,8 +35,6 @@
       editDocEduPage.speciality.set('Професионална квалификация');
       editDocEduPage.graduation.set('Висше образование (магистър)');
       editDocEduPage.school.set('Български въздухоплавателен център');
-      editDocEduPage.bookPageNumber.set('2');
-      editDocEduPage.pageCount.set('5');
       
       editDocEduPage.save();
       searchDocEduPage = new SearchPage(ptor);
@@ -50,12 +45,10 @@
           'part_completionDate',
           'part_speciality',
           'part_school_name',
-          'part_graduation_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_graduation_name'
           )).toEqual([
         ['2324a', '20.10.2014', 'Професионална квалификация',
-          'Български въздухоплавателен център', 'Висше образование (магистър)', '2', '5']
+          'Български въздухоплавателен център', 'Висше образование (магистър)']
       ]);
     });
   });

@@ -6,8 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    Application
+    Application,
+    applicationDocPart,
+    selectedPublisher
     ) {
+    $scope.applicationDocPart = applicationDocPart;
+    $scope.applicationDocPart.part.documentPublisher = selectedPublisher.pop() ||
+      applicationDocPart.part.documentPublisher;
+
     $scope.isLinkNew = $stateParams.isLinkNew;
     $scope.currentDocId = $stateParams.currentDocId;
     $scope.docPartTypeAlias = $stateParams.docPartTypeAlias;
@@ -28,9 +34,9 @@
             return Application
               .partsNew({ id: $stateParams.id }, {
                 docId: $stateParams.currentDocId,
-                file: $scope.wrapper.applicationDocPart.docFile,
+                file: $scope.applicationDocPart.docFile,
                 setPartAlias: $stateParams.docPartTypeAlias,
-                part: $scope.wrapper.applicationDocPart.part
+                part: $scope.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
@@ -47,7 +53,7 @@
               .partsLinkNew({ id: $stateParams.id }, {
                 docFileKey: $stateParams.docFileKey,
                 setPartAlias: $stateParams.docPartTypeAlias,
-                part: $scope.wrapper.applicationDocPart.part
+                part: $scope.applicationDocPart.part
               }).$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
@@ -55,14 +61,31 @@
           }
         });
     };
+
+    $scope.choosePublisher = function () {
+      return $state.go('root.applications.edit.case.addPart.choosePublisher');
+    };
   }
 
   ApplicationsEditAddPartCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'Application'
+    'Application',
+    'applicationDocPart',
+    'selectedPublisher'
   ];
+
+  ApplicationsEditAddPartCtrl.$resolve = {
+    applicationDocPart: function () {
+      return {
+        part: {}
+      };
+    },
+    selectedPublisher: function () {
+      return [];
+    }
+  };
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);
 }(angular

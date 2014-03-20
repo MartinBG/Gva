@@ -1,6 +1,8 @@
-﻿<ng-form name="newDocumentMedicalForm">
+﻿<ng-form name="newDocumentMedicalForm" sc-validate="{}">
 
   <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
+
+  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files"></gva-person-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models
@@ -7,10 +5,15 @@ namespace Gva.Api.Models
     public partial class GvaLotObject
     {
         public int GvaLotObjectId { get; set; }
-        public Nullable<int> GvaApplicationId { get; set; }
+
+        public int? GvaApplicationId { get; set; }
+
         public int LotPartId { get; set; }
+
         public bool IsActive { get; set; }
+
         public virtual GvaApplication GvaApplication { get; set; }
+
         public virtual Regs.Api.Models.Part LotPart { get; set; }
     }
 
@@ -36,7 +39,6 @@ namespace Gva.Api.Models
             this.HasRequired(t => t.LotPart)
                 .WithMany()
                 .HasForeignKey(d => d.LotPartId);
-
         }
     }
 }

@@ -49,7 +49,6 @@ namespace Common.Api.Utils
                     {
                         callback(tcs.Task);
                     }
-
                 },
                 CancellationToken.None,
                 TaskContinuationOptions.None,

@@ -1,10 +1,8 @@
-﻿<ng-form name="editDocumentEmploymentForm">
+﻿<ng-form name="editDocumentEmploymentForm" sc-validate="{}">
 
   <gva-person-document-employment name="personDocumentEmploymentForm" ng-model="personDocumentEmployment.part"></gva-person-document-employment>
 
-  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEmployment.file"></gva-person-scanned-document>
-
-  <gva-person-application name="personApplicationForm" ng-model="personDocumentEmployment.applications"></gva-person-application>
+  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEmployment.files"></gva-person-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

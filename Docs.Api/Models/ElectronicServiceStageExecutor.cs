@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -7,11 +5,17 @@ namespace Docs.Api.Models
     public partial class ElectronicServiceStageExecutor
     {
         public int ElectronicServiceStageExecutorId { get; set; }
+
         public int ElectronicServiceStageId { get; set; }
+
         public int UnitId { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ElectronicServiceStage ElectronicServiceStage { get; set; }
+
         public virtual Unit Unit { get; set; }
     }
 
@@ -44,7 +48,6 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.ElectronicServiceStageExecutors)
                 .HasForeignKey(d => d.UnitId);
-
         }
     }
 }

@@ -13,6 +13,70 @@ namespace Common.Api.Utils
             this.stream = stream;
         }
 
+        public override bool CanRead
+        {
+            get { return this.stream.CanRead; }
+        }
+
+        public override bool CanSeek
+        {
+            get { return this.stream.CanSeek; }
+        }
+
+        public override bool CanTimeout
+        {
+            get { return this.stream.CanTimeout; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return this.stream.CanWrite; }
+        }
+
+        public override long Length
+        {
+            get { return this.stream.Length; }
+        }
+
+        public override long Position
+        {
+            get
+            {
+                return this.stream.Position;
+            }
+
+            set
+            {
+                this.stream.Position = value;
+            }
+        }
+
+        public override int ReadTimeout
+        {
+            get
+            {
+                return this.stream.ReadTimeout;
+            }
+
+            set
+            {
+                this.stream.ReadTimeout = value;
+            }
+        }
+
+        public override int WriteTimeout
+        {
+            get
+            {
+                return this.stream.WriteTimeout;
+            }
+
+            set
+            {
+                this.stream.WriteTimeout = value;
+            }
+        }
+
         public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
         {
             return this.stream.ReadAsync(buffer, offset, count).ToApm(callback, state);
@@ -37,31 +101,11 @@ namespace Common.Api.Utils
 
         public override void EndWrite(IAsyncResult asyncResult)
         {
-            Task task = ((Task)asyncResult);
+            Task task = (Task)asyncResult;
             if (task.Exception != null)
             {
                 throw task.Exception.InnerException;
             }
-        }
-
-        public override bool CanRead
-        {
-            get { return this.stream.CanRead; }
-        }
-
-        public override bool CanSeek
-        {
-            get { return this.stream.CanSeek; }
-        }
-
-        public override bool CanTimeout
-        {
-            get { return this.stream.CanTimeout; }
-        }
-
-        public override bool CanWrite
-        {
-            get { return this.stream.CanWrite; }
         }
 
         public override void Close()
@@ -104,23 +148,6 @@ namespace Common.Api.Utils
             return this.stream.InitializeLifetimeService();
         }
 
-        public override long Length
-        {
-            get { return this.stream.Length; }
-        }
-
-        public override long Position
-        {
-            get
-            {
-                return this.stream.Position;
-            }
-            set
-            {
-                this.stream.Position = value;
-            }
-        }
-
         public override int Read(byte[] buffer, int offset, int count)
         {
             return this.stream.Read(buffer, offset, count);
@@ -134,18 +161,6 @@ namespace Common.Api.Utils
         public override int ReadByte()
         {
             return this.stream.ReadByte();
-        }
-
-        public override int ReadTimeout
-        {
-            get
-            {
-                return this.stream.ReadTimeout;
-            }
-            set
-            {
-                this.stream.ReadTimeout = value;
-            }
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -176,18 +191,6 @@ namespace Common.Api.Utils
         public override void WriteByte(byte value)
         {
             this.stream.WriteByte(value);
-        }
-
-        public override int WriteTimeout
-        {
-            get
-            {
-                return this.stream.WriteTimeout;
-            }
-            set
-            {
-                this.stream.WriteTimeout = value;
-            }
         }
     }
 }

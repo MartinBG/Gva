@@ -115,6 +115,7 @@
     <Content Include="Create\Tables\Units\UnitRelations.sql" />
     <Content Include="Create\Tables\Units\Units.sql" />
     <Content Include="Create\Tables\Units\UnitTypes.sql" />
+    <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Views\vwDocs.sql" />
     <Content Include="Insert\Assignments\AssignmentTypes.sql" />
     <Content Include="Insert\Classifications\Classifications.sql" />
@@ -143,6 +144,30 @@
     <Content Include="Insert\Units\UnitRelations.sql" />
     <Content Include="Insert\Units\Units.sql" />
     <Content Include="Insert\Units\UnitTypes.sql" />
+    <Content Include="Insert\Classifications\ClassificationRelations.sql" />
+    <Content Include="Insert\Classifications\ClassificationRoles.sql" />
+    <Content Include="Insert\Classifications\Classifications.sql" />
+    <Content Include="Insert\Correspondents\CorrespondentGroups.sql" />
+    <Content Include="Insert\Correspondents\CorrespondentTypes.sql" />
+    <Content Include="Insert\Docs\DocCasePartTypes.sql" />
+    <Content Include="Insert\Docs\DocDestinationTypes.sql" />
+    <Content Include="Insert\Docs\DocDirections.sql" />
+    <Content Include="Insert\Docs\DocEntryTypes.sql" />
+    <Content Include="Insert\Docs\DocFormatTypes.sql" />
+    <Content Include="Insert\Docs\DocSourceTypes.sql" />
+    <Content Include="Insert\Docs\DocStatuses.sql" />
+    <Content Include="Insert\Docs\DocTypeClassifications.sql" />
+    <Content Include="Insert\Docs\DocTypeGroups.sql" />
+    <Content Include="Insert\Docs\DocTypes.sql" />
+    <Content Include="Insert\Docs\DocUnitPermissions.sql" />
+    <Content Include="Insert\Docs\DocUnitRoles.sql" />
+    <Content Include="Insert\Docs\DocWorkflowActions.sql" />
+    <Content Include="Insert\Docs\RegisterIndexes.sql" />
+    <Content Include="Insert\Units\UnitClassifications.sql" />
+    <Content Include="Insert\Units\UnitRelations.sql" />
+    <Content Include="Insert\Units\Units.sql" />
+    <Content Include="Insert\Units\UnitTypes.sql" />
+    <Content Include="Insert\Units\UnitUsers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

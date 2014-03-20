@@ -25,12 +25,10 @@
           'part_completionDate',
           'part_speciality',
           'part_school_name',
-          'part_graduation_name',
-          'part_bookPageNumber',
-          'part_pageCount'
+          'part_graduation_name'
           )).toEqual([
         ['1', '04.04.1981', 'пилот', 'Български въздухоплавателен център',
-          'Висше образование (бакалавър)', '2', '1']
+          'Висше образование (бакалавър)']
       ]);
     });
    

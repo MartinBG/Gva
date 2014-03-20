@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Regs.Api.Models;
 using Regs.Api.LotEvents;
+using Regs.Api.Models;
 
 namespace Regs.Api.Repositories.LotRepositories
 {
-    public class LotRepository : ILotRepository
+    public class LotRepository : ILotRepository, IDisposable
     {
         private IUnitOfWork unitOfWork;
+        private IEnumerable<ILotEventHandler> eventHandlers;
 
         public LotRepository(IUnitOfWork unitOfWork, IEnumerable<ILotEventHandler> eventHandlers)
         {
             this.unitOfWork = unitOfWork;
 
+            // copy event handlers because the enumerable is a ninject object
+            // which throws an error when accessed during dispose
+            this.eventHandlers = eventHandlers.ToArray();
             foreach (var eventHandler in eventHandlers)
             {
                 Events.Register(eventHandler);
@@ -107,6 +111,29 @@ namespace Regs.Api.Repositories.LotRepositories
             commit.IsLoaded = true;
 
             return lot;
+        }
+
+        public Commit LoadCommit(int? commitId)
+        {
+            if (!commitId.HasValue)
+            {
+                throw new Exception("Invalid commit id");
+            }
+
+            var commit = this.unitOfWork.DbContext.Set<Commit>()
+                .Include(c => c.PartVersions)
+                .SingleOrDefault(c => c.CommitId == commitId);
+            commit.IsLoaded = true;
+
+            return commit;
+        }
+
+        public void Dispose()
+        {
+            foreach (var eventHandler in this.eventHandlers)
+            {
+                Events.Deregister(eventHandler);
+            }
         }
     }
 }

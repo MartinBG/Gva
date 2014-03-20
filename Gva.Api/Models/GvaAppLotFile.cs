@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
@@ -8,10 +6,15 @@ namespace Gva.Api.Models
     public partial class GvaAppLotFile
     {
         public int GvaApplicationId { get; set; }
+
         public int GvaLotFileId { get; set; }
-        public Nullable<int> DocFileId { get; set; }
+
+        public int? DocFileId { get; set; }
+
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
+
         public virtual GvaApplication GvaApplication { get; set; }
+
         public virtual GvaLotFile GvaLotFile { get; set; }
     }
 
@@ -45,7 +48,6 @@ namespace Gva.Api.Models
             this.HasRequired(t => t.GvaLotFile)
                 .WithMany(t => t.GvaAppLotFiles)
                 .HasForeignKey(d => d.GvaLotFileId);
-
         }
     }
 }

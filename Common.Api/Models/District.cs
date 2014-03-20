@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -13,16 +12,27 @@ namespace Common.Api.Models
         }
 
         public int DistrictId { get; set; }
+
         public string Code { get; set; }
+
         public string Code2 { get; set; }
+
         public string SecondLevelRegionCode { get; set; }
+
         public string Name { get; set; }
+
         public string MainSettlementCode { get; set; }
+
         public string Alias { get; set; }
+
         public string Description { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<Municipality> Municipalities { get; set; }
+
         public virtual ICollection<Settlement> Settlements { get; set; }
     }
 

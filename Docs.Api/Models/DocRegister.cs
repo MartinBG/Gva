@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -12,11 +11,17 @@ namespace Docs.Api.Models
         }
 
         public int DocRegisterId { get; set; }
-        public Nullable<int> RegisterIndexId { get; set; }
+
+        public int? RegisterIndexId { get; set; }
+
         public string Alias { get; set; }
+
         public int CurrentNumber { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual RegisterIndex RegisterIndex { get; set; }
+
         public virtual ICollection<Doc> Docs { get; set; }
     }
 
@@ -50,7 +55,6 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.RegisterIndex)
                 .WithMany(t => t.DocRegisters)
                 .HasForeignKey(d => d.RegisterIndexId);
-
         }
     }
 }

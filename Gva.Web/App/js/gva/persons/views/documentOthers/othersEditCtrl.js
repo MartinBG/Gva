@@ -16,9 +16,9 @@
       personDocumentOther.part.documentPublisher;
 
     $scope.save = function () {
-      $scope.personDocumentOtherForm.$validate()
+      $scope.editDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.personDocumentOtherForm.$valid) {
+          if ($scope.editDocumentOtherForm.$valid) {
             return PersonDocumentOther
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentOther)
               .$promise

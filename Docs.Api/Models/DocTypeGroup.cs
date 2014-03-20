@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
@@ -12,10 +11,15 @@ namespace Docs.Api.Models
         }
 
         public int DocTypeGroupId { get; set; }
+
         public string Name { get; set; }
+
         public bool IsElectronicService { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ICollection<DocType> DocTypes { get; set; }
     }
 

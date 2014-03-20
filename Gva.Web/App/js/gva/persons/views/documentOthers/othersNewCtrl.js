@@ -11,9 +11,9 @@
     selectedPublisher
   ) {
     $scope.save = function () {
-      $scope.personDocumentOtherForm.$validate()
+      $scope.newDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.personDocumentOtherForm.$valid) {
+          if ($scope.newDocumentOtherForm.$valid) {
             return PersonDocumentOther
               .save({ id: $stateParams.id }, $scope.personDocumentOther).$promise
               .then(function () {
@@ -48,7 +48,8 @@
   DocumentOthersNewCtrl.$resolve = {
     personDocumentOther: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     },
     selectedPublisher: function () {

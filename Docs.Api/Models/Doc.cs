@@ -25,58 +25,111 @@ namespace Docs.Api.Models
         }
 
         public int DocId { get; set; }
+
         public int DocDirectionId { get; set; }
+
         public int DocEntryTypeId { get; set; }
-        public Nullable<int> DocCasePartTypeId { get; set; }
+
+        public int? DocCasePartTypeId { get; set; }
+
         public string DocSubject { get; set; }
+
         public string DocBody { get; set; }
+
         public int DocStatusId { get; set; }
-        public Nullable<int> DocSourceTypeId { get; set; }
-        public Nullable<int> DocDestinationTypeId { get; set; }
-        public Nullable<int> DocTypeId { get; set; }
-        public Nullable<int> DocFormatTypeId { get; set; }
-        public Nullable<int> DocRegisterId { get; set; }
+
+        public int? DocSourceTypeId { get; set; }
+
+        public int? DocDestinationTypeId { get; set; }
+
+        public int? DocTypeId { get; set; }
+
+        public int? DocFormatTypeId { get; set; }
+
+        public int? DocRegisterId { get; set; }
+
         public string RegUri { get; set; }
+
         public string RegIndex { get; set; }
-        public Nullable<int> RegNumber { get; set; }
-        public Nullable<System.DateTime> RegDate { get; set; }
+
+        public int? RegNumber { get; set; }
+
+        public DateTime? RegDate { get; set; }
+
         public string ExternalRegNumber { get; set; }
+
         public string CorrRegNumber { get; set; }
-        public Nullable<System.DateTime> CorrRegDate { get; set; }
+
+        public DateTime? CorrRegDate { get; set; }
+
         public string AccessCode { get; set; }
-        public Nullable<int> AssignmentTypeId { get; set; }
-        public Nullable<System.DateTime> AssignmentDate { get; set; }
-        public Nullable<System.DateTime> AssignmentDeadline { get; set; }
+
+        public int? AssignmentTypeId { get; set; }
+
+        public DateTime? AssignmentDate { get; set; }
+
+        public DateTime? AssignmentDeadline { get; set; }
+
         public bool IsCase { get; set; }
+
         public bool IsRegistered { get; set; }
+
         public bool IsSigned { get; set; }
-        public Nullable<System.Guid> LockObjectId { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
-        public Nullable<int> ModifyUserId { get; set; }
+
+        public Guid? LockObjectId { get; set; }
+
+        public DateTime? ModifyDate { get; set; }
+
+        public int? ModifyUserId { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual AssignmentType AssignmentType { get; set; }
+
         public virtual DocCasePartType DocCasePartType { get; set; }
+
         public virtual ICollection<DocClassification> DocClassifications { get; set; }
+
         public virtual ICollection<DocCorrespondentContact> DocCorrespondentContacts { get; set; }
+
         public virtual ICollection<DocCorrespondent> DocCorrespondents { get; set; }
+
         public virtual DocDestinationType DocDestinationType { get; set; }
+
         public virtual DocDirection DocDirection { get; set; }
+
         public virtual ICollection<DocElectronicServiceStage> DocElectronicServiceStages { get; set; }
+
         public virtual DocEntryType DocEntryType { get; set; }
+
         public virtual ICollection<DocFile> DocFiles { get; set; }
+
         public virtual DocFormatType DocFormatType { get; set; }
+
         public virtual ICollection<DocIncomingDoc> DocIncomingDocs { get; set; }
+
         public virtual DocRegister DocRegister { get; set; }
+
         public virtual ICollection<DocRelation> DocRelations { get; set; }
+
         public virtual ICollection<DocRelation> DocRelations1 { get; set; }
+
         public virtual ICollection<DocRelation> DocRelations2 { get; set; }
+
         public virtual DocSourceType DocSourceType { get; set; }
+
         public virtual DocStatus DocStatus { get; set; }
+
         public virtual DocType DocType { get; set; }
+
         public virtual Common.Api.Models.User User { get; set; }
+
         public virtual ICollection<DocUnit> DocUnits { get; set; }
+
         public virtual ICollection<DocUser> DocUsers { get; set; }
+
         public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
 
         #region DocCorrespondents
@@ -701,7 +754,6 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.User)
                 .WithMany()
                 .HasForeignKey(d => d.ModifyUserId);
-
         }
     }
 }
