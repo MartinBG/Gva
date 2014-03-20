@@ -141,6 +141,10 @@
       templateUrl: 'gva/aircrafts/forms/aircraftData.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaAircraftDataApex',
+      templateUrl: 'gva/aircrafts/forms/aircraftDataApex.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentDebt',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentDebt.html'
     });
@@ -266,6 +270,8 @@
       .state(['root.aircrafts.new'                                      , '/new'                                       , ['@root'               , 'gva/aircrafts/views/aircraftsNew.html'                             , 'AircraftsNewCtrl'             ]])
       .state(['root.aircrafts.view'                                     , '/:id'                                       , ['@root'               , 'gva/aircrafts/views/aircraftsView.html'                            , 'AircraftsViewCtrl'            ]])
       .state(['root.aircrafts.view.edit'                                , '/aircraftData'                              , ['@root'               , 'gva/aircrafts/views/aircraftData/aircraftDataEdit.html'            , 'AircraftDataEditCtrl'         ]])
+      .state(['root.aircrafts.newApex'                                  , '/newApex'                                   , ['@root'               , 'gva/aircrafts/views/aircraftsApexNew.html'                         , 'AircraftsApexNewCtrl'         ]])
+      .state(['root.aircrafts.view.editApex'                            , '/aircraftDataApex'                          , ['@root'               , 'gva/aircrafts/views/aircraftDataApex/aircraftDataEdit.html'        , 'AircraftDataApexEditCtrl'     ]])
       .state(['root.aircrafts.view.currentReg'                          , '/current/:ind'                              , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsView.html'                        , 'CertRegsViewCtrl'             ]])
       .state(['root.aircrafts.view.regs'                                , '/regs'                                                                                                                                                                      ])
       .state(['root.aircrafts.view.regs.search'                         , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/certRegs/regsSearch.html'                      , 'CertRegsSearchCtrl'           ]])

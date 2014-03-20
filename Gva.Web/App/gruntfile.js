@@ -39,6 +39,7 @@ module.exports = function (grunt) {
         'schema/person-rating-edition.sample.js',
         'schema/person-rating.sample.js',
         'schema/aircrafts/aircraft-data.sample.js',
+        'schema/aircrafts/aircraft-dataapex.sample.js',
         'schema/aircrafts/aircraft-cert-registrations.sample.js',
         'schema/aircrafts/aircraft-cert-smods.sample.js',
         'schema/aircrafts/aircraft-cert-marks.sample.js',
