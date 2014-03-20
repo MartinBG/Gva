@@ -1,5 +1,4 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  zabelejka
   <div class="row" style="margin-bottom: 5px;">
     <div class="form-group col-md-6">
       <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
@@ -33,7 +32,7 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="model.docFiles.length > 0" ng-if="readonly || model.docFiles.length > 0">
+    <accordion-group is-open="model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -43,9 +42,9 @@
           <div class="form-group col-md-12">
             <label class="control-label">Вътрешни файлове</label>
             <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 1}">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              <span ng-repeat="df in model.publicDocFiles">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
               </span>
             </div>
           </div>
@@ -55,9 +54,9 @@
           <div class="form-group col-md-12">
             <label class="control-label">Публични файлове</label>
             <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 2}">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              <span ng-repeat="df in model.privateDocFiles">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
               </span>
             </div>
           </div>

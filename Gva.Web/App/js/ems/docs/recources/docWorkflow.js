@@ -5,15 +5,15 @@
   angular.module('ems')
     .factory('DocWorkflow', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:docId/workflow', { docId: '@docId' },
+        return $resource('/api/docs/:id/workflow', { id: '@docId' },
           {
             'add': {
               method: 'POST',
-              url: '/api/docs/:docId/workflow/add'
+              url: '/api/docs/:id/workflow/add'
             },
             'remove': {
               method: 'POST',
-              url: '/api/docs/:docId/workflow/remove'
+              url: '/api/docs/:id/workflow/remove'
             }
           });
       }]);

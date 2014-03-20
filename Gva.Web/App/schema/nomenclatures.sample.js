@@ -267,7 +267,7 @@
 
     docType: require('./docType'),
 
-    testCorrespondent: require('./testCorrespondent'),
+    correspondent: require('./correspondent'),
 
     electronicServiceStage: require('./electronicServiceStage'),
 

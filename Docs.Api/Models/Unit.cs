@@ -18,6 +18,7 @@ namespace Docs.Api.Models
             this.UnitRelations = new List<UnitRelation>();
             this.UnitRelations1 = new List<UnitRelation>();
             this.UnitRelations2 = new List<UnitRelation>();
+            this.UnitUsers = new List<UnitUser>();
         }
 
         public int UnitId { get; set; }
@@ -36,6 +37,7 @@ namespace Docs.Api.Models
         public virtual ICollection<UnitRelation> UnitRelations { get; set; }
         public virtual ICollection<UnitRelation> UnitRelations1 { get; set; }
         public virtual ICollection<UnitRelation> UnitRelations2 { get; set; }
+        public virtual ICollection<UnitUser> UnitUsers { get; set; }
         public virtual UnitType UnitType { get; set; }
     }
 

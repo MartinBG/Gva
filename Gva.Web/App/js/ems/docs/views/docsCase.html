@@ -9,20 +9,19 @@
       <th style="width: 75px;" ng-show="doc.applicationId"><span l10n-text="docs.edit.case.application"></span></th>
     </tr>
   </thead>
-  <tbody ng-repeat="dr in doc.docRelations">
-    <tr ng-style="{ 'font-weight': dr.docId === doc.docId ? 'bold' : 'normal'}">
-      <td>{{ dr.regDate | date:'dd.MM.yyyy HH:mm' }}</td>
-      <td>{{ dr.regNumber + ' | ' + dr.casePartType + ' | ' + dr.direction }}</td>
-      <!--todo must be html rendered-->
-      <td>{{ dr.statusName }}</td>
-      <td>{{ dr.description }}</td>
-      <!--todo must be html rendered-->
+  <tbody ng-repeat="dr in docRelations">
+    <tr ng-style="{ 'font-weight': dr.docId === docId ? 'bold' : 'normal'}">
+      <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td ng-bind-html="dr.docDataHtml"></td>
+      <td>{{ dr.docDocStatusName }}</td>
+      <td ng-bind-html="dr.docDescriptionHtml"></td>
       <td style="text-align: right;">
         <a ng-click="viewDoc(dr.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
       </td>
-      <td style="text-align: right;" ng-show="doc.applicationId">
+      <!--//?-->
+    <!--  <td style="text-align: right;" ng-show="doc.applicationId">
         <a ng-show="$index === 0" ng-click="viewApplication(doc.applicationId)" l10n-text="docs.edit.case.viewApplication" style="cursor: pointer;"></a>
-      </td>
+      </td>-->
     </tr>
   </tbody>
 </table>

@@ -17,6 +17,7 @@ GO
 :r $(rootPath)"\Tables\Units\Units.sql"
 :r $(rootPath)"\Tables\Units\UnitRelations.sql"
 :r $(rootPath)"\Tables\Units\UnitClassifications.sql"
+:r $(rootPath)"\Tables\Units\UnitUsers.sql"
 
 --Assignments
 :r $(rootPath)"\Tables\Assignments\AssignmentTypes.sql"
@@ -125,3 +126,44 @@ GO
 -- Views
 ---------------------------------------------------------------
 :r $(rootPath)"\Views\vwDocs.sql"
+
+
+---------------------------------------------------------------
+-- Insert
+---------------------------------------------------------------
+--classifications
+:r $(rootPath)\"..\Insert\Classifications\Classifications.sql"
+:r $(rootPath)\"..\Insert\Classifications\ClassificationRelations.sql"
+:r $(rootPath)\"..\Insert\Classifications\ClassificationRoles.sql"
+
+--correspondents
+:r $(rootPath)\"..\Insert\Correspondents\CorrespondentGroups.sql"
+:r $(rootPath)\"..\Insert\Correspondents\CorrespondentTypes.sql"
+
+--assignments
+:r $(rootPath)\"..\Insert\Assignments\AssignmentTypes.sql"
+
+--docs
+:r $(rootPath)\"..\Insert\Docs\RegisterIndexes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocCasePartTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocDestinationTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocDirections.sql"
+:r $(rootPath)\"..\Insert\Docs\DocEntryTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocFormatTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocStatuses.sql"
+:r $(rootPath)\"..\Insert\Docs\DocSourceTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\Docs\DocTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocTypeClassifications.sql"
+:r $(rootPath)\"..\Insert\Docs\DocUnitPermissions.sql"
+:r $(rootPath)\"..\Insert\Docs\DocUnitRoles.sql"
+:r $(rootPath)\"..\Insert\Docs\DocWorkflowActions.sql"
+:r $(rootPath)\"..\Insert\Docs\DocFileKinds.sql"
+:r $(rootPath)\"..\Insert\Docs\DocFileTypes.sql"
+
+--units
+:r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
+:r $(rootPath)\"..\Insert\Units\Units.sql"
+:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
+:r $(rootPath)\"..\Insert\Units\UnitUsers.sql"
+:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"

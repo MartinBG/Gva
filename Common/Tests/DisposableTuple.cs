@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Regs.Api.Tests.Common
+namespace Common.Tests
 {
     public class DisposableTuple<T1, T2> : IDisposable
     {

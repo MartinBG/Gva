@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Api.UserContext;
 
-namespace Regs.Api.Tests.Common
+namespace Regs.Api.Tests.Mocks
 {
     public class MockUserContextProvider : IUserContextProvider
     {

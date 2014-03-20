@@ -1,6 +1,6 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="corrs.search.displayName"></sc-filter>
-  <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
+  <sc-filter type="text" name="correspondentEmail" class="col-sm-3" removable="true" label="corrs.search.email"></sc-filter>
   <sc-search-button action="search()" text="corrs.search.search" icon="glyphicon-search"></sc-search-button>
   <sc-search-button action="newCorr()" text="corrs.search.new" icon="glyphicon-user"></sc-search-button>
   <sc-search-button action="add"></sc-search-button>
@@ -14,6 +14,6 @@
   </sc-column>
   <sc-column data="email" title="corrs.search.email">
   </sc-column>
-  <sc-column data="correspondentType.name" title="corrs.search.correspondentType">
+  <sc-column data="correspondentTypeName" title="corrs.search.correspondentType">
   </sc-column>
 </sc-datatable>

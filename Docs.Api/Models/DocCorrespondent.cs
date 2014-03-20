@@ -41,7 +41,8 @@ namespace Docs.Api.Models
                 .HasForeignKey(d => d.CorrespondentId);
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocCorrespondents)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
 
         }
     }

@@ -1,6 +1,8 @@
+using Common.Api.UserContext;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 
 namespace Docs.Api.Models
 {
@@ -76,6 +78,527 @@ namespace Docs.Api.Models
         public virtual ICollection<DocUnit> DocUnits { get; set; }
         public virtual ICollection<DocUser> DocUsers { get; set; }
         public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
+
+        #region DocCorrespondents
+
+        public DocCorrespondent CreateDocCorrespondent(int correspondentId, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocCorrespondent docCorrespondent = new DocCorrespondent
+            {
+                CorrespondentId = correspondentId
+            };
+
+            this.DocCorrespondents.Add(docCorrespondent);
+
+            return docCorrespondent;
+        }
+
+        public DocCorrespondent CreateDocCorrespondent(Correspondent correspondent, UserContext userContext)
+        {
+            return this.CreateDocCorrespondent(correspondent.CorrespondentId, userContext);
+        }
+
+        public void DeleteDocCorrespondent(DocCorrespondent docCorrespondent, UserContext userContext)
+        {
+            bool result = this.DocCorrespondents.Remove(docCorrespondent);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docCorrespondent to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocCorrespondent(int docCorrespondentId, UserContext userContext)
+        {
+            DocCorrespondent docCorrespondent = this.DocCorrespondents.FirstOrDefault(e => e.DocCorrespondentId == docCorrespondentId);
+
+            if (docCorrespondent != null)
+            {
+                this.DeleteDocCorrespondent(docCorrespondent, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docCorrespondent with ID = {0} found.", docCorrespondentId));
+            }
+        }
+
+        #endregion
+
+        #region DocRelations
+
+        public DocRelation CreateDocRelation(int? parentDocId, int? rootDocId, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocRelation docRelation = new DocRelation
+            {
+                ParentDocId = parentDocId,
+                RootDocId = rootDocId
+            };
+
+            if (!docRelation.RootDocId.HasValue)
+            {
+                docRelation.RootDoc = this;
+                this.IsCase = true;
+            }
+            else
+            {
+                this.IsCase = this.DocId == docRelation.RootDocId.Value;
+            }
+
+            this.DocRelations.Add(docRelation);
+
+            return docRelation;
+        }
+
+        public void UpdateDocRelation(int docRelationId, int? parentDocId, int? rootDocId, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocRelation docRelation = this.DocRelations.FirstOrDefault(e => e.DocRelationId == docRelationId);
+
+            if (docRelation != null)
+            {
+                docRelation.ParentDocId = parentDocId;
+                docRelation.RootDocId = rootDocId;
+
+                if (!docRelation.RootDocId.HasValue)
+                {
+                    docRelation.RootDoc = this;
+                    this.IsCase = true; //? DocEntryTypeId dependant
+                }
+                else
+                {
+                    this.IsCase = this.DocId == docRelation.RootDocId.Value;
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format("No docRelation contact with ID = {0} found.", docRelationId));
+            }
+        }
+
+        public void DeleteDocRelation(DocRelation docRelation, UserContext userContext)
+        {
+            bool result = this.DocRelations.Remove(docRelation);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+
+                if (!this.DocRelations.Any())
+                {
+                    throw new Exception("Document can not exist with no docRelations.");
+                }
+            }
+            else
+            {
+                throw new Exception("The docRelation to be removed is not contained in the doc.");
+            }
+        }
+
+        public void DeleteDocRelation(int docRelationId, UserContext userContext)
+        {
+            DocRelation docRelation = this.DocRelations.FirstOrDefault(e => e.DocRelationId == docRelationId);
+
+            if (docRelation != null)
+            {
+                this.DeleteDocRelation(docRelation, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docRelation with ID = {0} found.", docRelationId));
+            }
+        }
+
+        #endregion
+
+        #region DocClassifications
+
+        public DocClassification CreateDocClassification(int classificationId, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocClassification docClassification = new DocClassification
+            {
+                ClassificationByUserId = userContext.UserId,
+                ClassificationDate = currentDate,
+                ClassificationId = classificationId,
+                IsActive = true
+            };
+
+            this.DocClassifications.Add(docClassification);
+
+            return docClassification;
+        }
+
+        public DocClassification CreateDocClassification(Classification classification, UserContext userContext)
+        {
+            return this.CreateDocClassification(classification.ClassificationId, userContext);
+        }
+
+        public void DisableDocClassification(DocClassification docClassification, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            docClassification.IsActive = false;
+        }
+
+        public void DisableDocClassification(int docClassificationId, UserContext userContext)
+        {
+            DocClassification docClassification = this.DocClassifications.FirstOrDefault(e => e.DocClassificationId == docClassificationId);
+
+            if (docClassification != null)
+            {
+                this.DisableDocClassification(docClassification, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docClassification with ID = {0} found.", docClassificationId));
+            }
+        }
+
+        public void DeleteDocClassification(DocClassification docClassification, UserContext userContext)
+        {
+            bool result = this.DocClassifications.Remove(docClassification);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docClassification to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocClassification(int docClassificationId, UserContext userContext)
+        {
+            DocClassification docClassification = this.DocClassifications.FirstOrDefault(e => e.DocClassificationId == docClassificationId);
+
+            if (docClassification != null)
+            {
+                this.DeleteDocClassification(docClassification, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docClassification with ID = {0} found.", docClassificationId));
+            }
+        }
+
+        #endregion
+
+        #region DocUnits
+
+        public DocUnit CreateDocUnit(int unitId, int docUnitRoleId, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocUnit docUnit = new DocUnit
+            {
+                DocUnitRoleId = docUnitRoleId,
+                UnitId = unitId
+            };
+
+            this.DocUnits.Add(docUnit);
+
+            return docUnit;
+        }
+
+        public DocUnit CreateDocUnit(Unit unit, DocUnitRole docUnitRole, UserContext userContext)
+        {
+            return this.CreateDocUnit(unit.UnitId, docUnitRole.DocUnitRoleId, userContext);
+        }
+
+        public void DeleteDocUnit(DocUnit docUnit, UserContext userContext)
+        {
+            bool result = this.DocUnits.Remove(docUnit);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docUnit to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocUnit(int docUnitId, UserContext userContext)
+        {
+            DocUnit docUnit = this.DocUnits.FirstOrDefault(e => e.DocUnitId == docUnitId);
+
+            if (docUnit != null)
+            {
+                this.DeleteDocUnit(docUnit, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docUnit with ID = {0} found.", docUnitId));
+            }
+        }
+
+        #endregion
+
+        #region DocWorkflows
+
+        public DocWorkflow CreateDocWorkflow(
+            int docWorkflowActionId,
+            DateTime eventDate,
+            bool? yesNo,
+            int? toUnitId,
+            int? principalUnitId,
+            string note,
+            int unitUserId,
+            UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocWorkflow docWorkflow = new DocWorkflow
+            {
+                DocWorkflowActionId = docWorkflowActionId,
+                EventDate = eventDate,
+                Note = note,
+                PrincipalUnitId = principalUnitId,
+                ToUnitId = toUnitId,
+                YesNo = yesNo,
+                UnitUserId = unitUserId
+            };
+
+            this.DocWorkflows.Add(docWorkflow);
+
+            return docWorkflow;
+        }
+
+        public DocWorkflow CreateDocWorkflow(
+            DocWorkflowAction docWorkflowAction,
+            DateTime eventDate,
+            bool? yesNo,
+            int? toUnitId,
+            int? principalUnitId,
+            string note,
+            int unitUserId,
+            UserContext userContext)
+        {
+            return CreateDocWorkflow(
+                docWorkflowAction.DocWorkflowActionId,
+                eventDate,
+                yesNo,
+                toUnitId,
+                principalUnitId,
+                note,
+                unitUserId,
+                userContext
+                );
+        }
+
+        public void DeleteDocWorkflow(DocWorkflow docWorkflow, UserContext userContext)
+        {
+            bool result = this.DocWorkflows.Remove(docWorkflow);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docWorkflow to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocWorkflow(int docWorkflowId, UserContext userContext)
+        {
+            DocWorkflow docWorkflow = this.DocWorkflows.FirstOrDefault(e => e.DocWorkflowId == docWorkflowId);
+
+            if (docWorkflow != null)
+            {
+                this.DeleteDocWorkflow(docWorkflow, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docWorkflow with ID = {0} found.", docWorkflowId));
+            }
+        }
+
+        #endregion
+
+        #region DocFiles
+
+        public DocFile CreateDocFile(
+            int docFileKindId,
+            int docFileTypeId,
+            string name,
+            string docFileName,
+            string docContentStorage,
+            Guid docFileContentId,
+            bool isPrimary,
+            bool isActive,
+            UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocFile docFile = new DocFile
+            {
+                DocFileKindId = docFileKindId,
+                DocFileTypeId = docFileTypeId,
+                Name = name,
+                DocFileName = docFileName,
+                DocContentStorage = docContentStorage,
+                DocFileContentId = docFileContentId,
+                IsPrimary = isPrimary,
+                IsActive = isActive
+            };
+
+            this.DocFiles.Add(docFile);
+
+            return docFile;
+        }
+
+        public DocFile CreateDocFile(
+            int docFileKindId,
+            int docFileTypeId,
+            string name,
+            string docFileName,
+            string docContentStorage,
+            Guid docFileContentId,
+            UserContext userContext)
+        {
+            return this.CreateDocFile(
+                docFileKindId,
+                docFileTypeId,
+                name,
+                docFileName,
+                docContentStorage,
+                docFileContentId,
+                false,
+                true,
+                userContext);
+        }
+
+        public DocFile UpdateDocFile(
+            DocFile docFile,
+            int docFileKindId,
+            int docFileTypeId,
+            string name,
+            string docFileName,
+            string docContentStorage,
+            Guid docFileContentId,
+            UserContext userContext)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DocFile UpdateDocFile(
+            int docFileId,
+            int docFileKindId,
+            int docFileTypeId,
+            string name,
+            string docFileName,
+            string docContentStorage,
+            Guid docFileContentId,
+            UserContext userContext)
+        {
+            DocFile docFile = this.DocFiles.FirstOrDefault(e => e.DocFileId == docFileId);
+
+            if (docFile != null)
+            {
+                return this.UpdateDocFile(
+                    docFile,
+                    docFileKindId,
+                    docFileTypeId,
+                    name,
+                    docFileName,
+                    docContentStorage,
+                    docFileContentId,
+                    userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docFile with ID = {0} found.", docFileId));
+            }
+        }
+
+        public void DeleteDocFile(DocFile docFile, UserContext userContext)
+        {
+            bool result = this.DocFiles.Remove(docFile);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docFile to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocFile(int docFileId, UserContext userContext)
+        {
+            DocFile docFile = this.DocFiles.FirstOrDefault(e => e.DocFileId == docFileId);
+
+            if (docFile != null)
+            {
+                this.DeleteDocFile(docFile, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docFile with ID = {0} found.", docFileId));
+            }
+        }
+
+        #endregion
+
+        public void Register(int? docRegisterId, string regUri, string regIndex, int? regNumber, DateTime? regDate, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            this.DocRegisterId = docRegisterId;
+            this.RegUri = regUri;
+            this.RegIndex = regIndex;
+            this.RegNumber = regNumber;
+            this.RegDate = regDate;
+            this.IsRegistered = true;
+        }
+
+        public void EnsureDocRelationsAreLoaded()
+        {
+            if (!this.DocRelations.Any())
+            {
+                throw new InvalidOperationException(string.Format("Doc with id {0} has not loaded its docRelations.", this.DocId));
+            }
+        }
     }
 
     public class DocMap : EntityTypeConfiguration<Doc>

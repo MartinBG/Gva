@@ -5,27 +5,27 @@
   angular.module('ems')
     .factory('DocStage', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:docId/stages', { docId: '@docId' },
+        return $resource('/api/docs/:id/stages', { id: '@docId' },
           {
             'current': {
               method: 'GET',
-              url: '/api/docs/:docId/stages/current'
+              url: '/api/docs/:id/stages/current'
             },
             'next': {
               method: 'POST',
-              url: '/api/docs/:docId/stages/next'
+              url: '/api/docs/:id/stages/next'
             },
             'edit': {
               method: 'POST',
-              url: '/api/docs/:docId/stages/edit'
+              url: '/api/docs/:id/stages/edit'
             },
             'end': {
               method: 'POST',
-              url: '/api/docs/:docId/stages/end'
+              url: '/api/docs/:id/stages/end'
             },
             'reverse': {
               method: 'POST',
-              url: '/api/docs/:docId/stages/reverse'
+              url: '/api/docs/:id/stages/reverse'
             }
           });
       }]);

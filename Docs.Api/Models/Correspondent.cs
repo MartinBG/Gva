@@ -1,6 +1,9 @@
+using Common.Api.UserContext;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 
 namespace Docs.Api.Models
 {
@@ -49,14 +52,74 @@ namespace Docs.Api.Models
         public virtual ICollection<CorrespondentContact> CorrespondentContacts { get; set; }
         public virtual CorrespondentGroup CorrespondentGroup { get; set; }
         public virtual CorrespondentType CorrespondentType { get; set; }
-        public virtual Common.Api.Models.Country Country { get; set; }
-        public virtual Common.Api.Models.Country Country1 { get; set; }
+        public virtual Common.Api.Models.Country ForeignerCountry { get; set; }
+        public virtual Common.Api.Models.Country FLegalEntityCountry { get; set; }
         public virtual Common.Api.Models.District District { get; set; }
         public virtual Common.Api.Models.Municipality Municipality { get; set; }
         public virtual RegisterIndex RegisterIndex { get; set; }
         public virtual Common.Api.Models.Settlement Settlement { get; set; }
         public virtual Common.Api.Models.User User { get; set; }
         public virtual ICollection<DocCorrespondent> DocCorrespondents { get; set; }
+
+        public CorrespondentContact CreateCorrespondentContact(string name, string uin, string note, bool isActive, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            CorrespondentContact correspondentContact = new CorrespondentContact
+            {
+                Name = name,
+                UIN = uin,
+                Note = note,
+                IsActive = isActive
+            };
+
+            this.CorrespondentContacts.Add(correspondentContact);
+
+            return correspondentContact;
+        }
+
+        public void UpdateCorrespondentContact(int correspondentContactId, string name, string uin, string note, bool isActive, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            CorrespondentContact correspondentContact = this.CorrespondentContacts.FirstOrDefault(e => e.CorrespondentContactId == correspondentContactId);
+
+            if (correspondentContact != null)
+            {
+                correspondentContact.Name = name;
+                correspondentContact.UIN = uin;
+                correspondentContact.Note = note;
+                correspondentContact.IsActive = isActive;
+            }
+            else
+            {
+                throw new Exception(string.Format("No correspondent contact with ID = {0} found.", correspondentContactId));
+            }
+        }
+
+        public void DeleteCorrespondentContact(CorrespondentContact correspondentContact, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            this.CorrespondentContacts.Remove(correspondentContact);
+        }
+
+        public void DeleteCorrespondentContact(int correspondentContactId, UserContext userContext)
+        {
+            CorrespondentContact correspondentContact = this.CorrespondentContacts.FirstOrDefault(e => e.CorrespondentContactId == correspondentContactId);
+
+            if (correspondentContact != null)
+            {
+                this.DeleteCorrespondentContact(correspondentContact, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No correspondent contact with ID = {0} found.", correspondentContactId));
+            }
+        }
     }
 
     public class CorrespondentMap : EntityTypeConfiguration<Correspondent>
@@ -133,7 +196,7 @@ namespace Docs.Api.Models
             this.Property(t => t.CorrespondentGroupId).HasColumnName("CorrespondentGroupId");
             this.Property(t => t.RegisterIndexId).HasColumnName("RegisterIndexId");
             this.Property(t => t.Email).HasColumnName("Email");
-            this.Property(t => t.DisplayName).HasColumnName("DisplayName");
+            this.Property(t => t.DisplayName).HasColumnName("DisplayName").HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
             this.Property(t => t.CorrespondentTypeId).HasColumnName("CorrespondentTypeId");
             this.Property(t => t.BgCitizenFirstName).HasColumnName("BgCitizenFirstName");
             this.Property(t => t.BgCitizenLastName).HasColumnName("BgCitizenLastName");
@@ -171,10 +234,10 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.CorrespondentType)
                 .WithMany(t => t.Correspondents)
                 .HasForeignKey(d => d.CorrespondentTypeId);
-            this.HasOptional(t => t.Country)
+            this.HasOptional(t => t.ForeignerCountry)
                 .WithMany()
                 .HasForeignKey(d => d.ForeignerCountryId);
-            this.HasOptional(t => t.Country1)
+            this.HasOptional(t => t.FLegalEntityCountry)
                 .WithMany()
                 .HasForeignKey(d => d.FLegalEntityCountryId);
             this.HasOptional(t => t.District)
@@ -184,7 +247,7 @@ namespace Docs.Api.Models
                 .WithMany()
                 .HasForeignKey(d => d.ContactMunicipalityId);
             this.HasOptional(t => t.RegisterIndex)
-                .WithMany()
+                .WithMany(t => t.Correspondents)
                 .HasForeignKey(d => d.RegisterIndexId);
             this.HasOptional(t => t.Settlement)
                 .WithMany()

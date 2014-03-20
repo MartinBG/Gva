@@ -67,12 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DisposableTuple.cs" />
-    <Compile Include="Common\MockUserContextProvider.cs" />
+    <Compile Include="Mocks\MockUserContextProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specs\CommitEventSpec.cs" />
     <Compile Include="Specs\LotSpec.cs" />
-    <Compile Include="Specs\MockLotEventHandler.cs" />
+    <Compile Include="Mocks\MockLotEventHandler.cs" />
     <Compile Include="SubSpec\SubSpec.cs" />
     <Compile Include="SubSpec\SubSpec.Thesis.cs" />
     <Compile Include="SubSpec\SubSpecUtils.cs" />

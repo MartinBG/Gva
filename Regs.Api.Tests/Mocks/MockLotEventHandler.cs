@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Regs.Api.Tests.Specs
+namespace Regs.Api.Tests.Mocks
 {
     public class MockLotEventHandler : ILotEventHandler
     {

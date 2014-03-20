@@ -11,7 +11,7 @@ namespace Docs.Api.Models
         public int DocWorkflowActionId { get; set; }
         public System.DateTime EventDate { get; set; }
         public Nullable<bool> YesNo { get; set; }
-        public int UserId { get; set; }
+        public int UnitUserId { get; set; }
         public Nullable<int> ToUnitId { get; set; }
         public Nullable<int> PrincipalUnitId { get; set; }
         public string Note { get; set; }
@@ -20,7 +20,7 @@ namespace Docs.Api.Models
         public virtual DocWorkflowAction DocWorkflowAction { get; set; }
         public virtual Unit Unit { get; set; }
         public virtual Unit Unit1 { get; set; }
-        public virtual Common.Api.Models.User User { get; set; }
+        public virtual UnitUser UnitUser { get; set; }
     }
 
     public class DocWorkflowMap : EntityTypeConfiguration<DocWorkflow>
@@ -44,7 +44,7 @@ namespace Docs.Api.Models
             this.Property(t => t.DocWorkflowActionId).HasColumnName("DocWorkflowActionId");
             this.Property(t => t.EventDate).HasColumnName("EventDate");
             this.Property(t => t.YesNo).HasColumnName("YesNo");
-            this.Property(t => t.UserId).HasColumnName("UserId");
+            this.Property(t => t.UnitUserId).HasColumnName("UnitUserId");
             this.Property(t => t.ToUnitId).HasColumnName("ToUnitId");
             this.Property(t => t.PrincipalUnitId).HasColumnName("PrincipalUnitId");
             this.Property(t => t.Note).HasColumnName("Note");
@@ -53,7 +53,8 @@ namespace Docs.Api.Models
             // Relationships
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocWorkflows)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
             this.HasRequired(t => t.DocWorkflowAction)
                 .WithMany(t => t.DocWorkflows)
                 .HasForeignKey(d => d.DocWorkflowActionId);
@@ -63,9 +64,9 @@ namespace Docs.Api.Models
             this.HasOptional(t => t.Unit1)
                 .WithMany(t => t.DocWorkflows1)
                 .HasForeignKey(d => d.PrincipalUnitId);
-            this.HasRequired(t => t.User)
+            this.HasRequired(t => t.UnitUser)
                 .WithMany()
-                .HasForeignKey(d => d.UserId);
+                .HasForeignKey(d => d.UnitUserId);
 
         }
     }

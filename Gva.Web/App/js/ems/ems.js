@@ -13,6 +13,11 @@
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
+      name: 'emsDocNewCommon',
+      templateUrl: 'ems/docs/forms/docNew/docNewCommon.html',
+      controller: 'DocNewCommonCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'emsDocInfo',
       templateUrl: 'ems/docs/forms/docInfo.html'
     });
@@ -62,33 +67,34 @@
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.docs'                           , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&hasLot'                                      ])
-      .state(['root.docs.search'                    , ''                             , ['@root'                , 'ems/docs/views/docsSearch.html'     , 'DocsSearchCtrl'         ]])
-      .state(['root.docs.new'                       , '/new?parentDocId'             , ['@root'                , 'ems/docs/views/docsNew.html'        , 'DocsNewCtrl'            ]])
-      .state(['root.docs.new.caseSelect'            , '/caseSelect?csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsCase', ['@root'          , 'ems/docs/views/caseSelect.html'         , 'CaseSelectCtrl'         ]])
-      .state(['root.docs.edit'                      , '/:docId'                      , ['@root'                , 'ems/docs/views/docsEdit.html'       , 'DocsEditCtrl'           ]])
-      .state(['root.docs.edit.view'                 , '/view'                        , ['@root.docs.edit' , 'ems/docs/views/docsView.html'            , 'DocsViewCtrl'           ]])
-      .state(['root.docs.edit.view.selectCorr'      , '/selectCorr?displayName&email', ['@root.docs.edit' , 'ems/docs/views/selectCorrView.html'      , 'SelectCorrViewCtrl'     ]])
-      .state(['root.docs.edit.view.selectUnit'      , '/selectUnit?name'             , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'      , 'SelectUnitViewCtrl'     ]])
-      .state(['root.docs.edit.workflows'            , '/workflows'                   , ['@root.docs.edit' , 'ems/docs/views/docsWorkflows.html'       , 'DocsWorkflowsCtrl'      ]])
-      .state(['root.docs.edit.workflows.signRequest', '/signRequest'                 , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
-      .state(['root.docs.edit.workflows.discussRequest', '/discussRequest'           , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
-      .state(['root.docs.edit.workflows.approvalRequest', '/approvalRequest'           , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
-      .state(['root.docs.edit.workflows.registrationRequest', '/registrationRequest' , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html'     , 'WorkflowRequestCtrl'    ]])
-      .state(['root.docs.edit.workflows.signConfirm', '/signConfirm'                 , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
-      .state(['root.docs.edit.workflows.discussConfirm', '/discussConfirm'           , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
-      .state(['root.docs.edit.workflows.approvalConfirm', '/approvalConfirm'           , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html'     , 'WorkflowConfirmCtrl'    ]])
-      .state(['root.docs.edit.stages'               , '/stages'                      , ['@root.docs.edit' , 'ems/docs/views/docsStages.html'          , 'DocsStagesCtrl'         ]])
-      .state(['root.docs.edit.stages.next'          , '/next'                        , ['@root.docs.edit' , 'ems/docs/views/nextStage.html'           , 'NextStageCtrl'          ]])
-      .state(['root.docs.edit.stages.edit'          , '/edit'                        , ['@root.docs.edit' , 'ems/docs/views/editStage.html'           , 'EditStageCtrl'          ]])
-      .state(['root.docs.edit.stages.end'           , '/end'                         , ['@root.docs.edit' , 'ems/docs/views/endStage.html'            , 'EndStageCtrl'           ]])
-      .state(['root.docs.edit.case'                 , '/case'                        , ['@root.docs.edit' , 'ems/docs/views/docsCase.html'            , 'DocsCaseCtrl'           ]])
-      .state(['root.docs.edit.case.casePart'    , '/casePart'                    , ['@root.docs.edit' , 'ems/docs/views/editCasePart.html'        , 'EditCasePartCtrl'       ]])
-      .state(['root.docs.edit.case.docType'     , '/docType'                     , ['@root.docs.edit' , 'ems/docs/views/editDocType.html'        , 'EditDocTypeCtrl'       ]])
-      .state(['root.docs.edit.case.docType.selectUnit'      , '/selectUnit?name'             , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'      , 'SelectUnitViewCtrl'     ]])
-      .state(['root.corrs'                          , '/corrs?displayName&email'                                                                                                  ])
-      .state(['root.corrs.search'                   , ''                             , ['@root'                , 'ems/corrs/views/corrSearch.html'    , 'CorrsSearchCtrl'        ]])
-      .state(['root.corrs.new'                      , '/new'                         , ['@root'                , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'          ]])
-      .state(['root.corrs.edit'                     , '/:corrId'                     , ['@root'                , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'          ]]);
+      .state(['root.docs'                                   , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                 ])
+      .state(['root.docs.search'                            , ''                                                                                                     , ['@root'           , 'ems/docs/views/docsSearch.html'     , 'DocsSearchCtrl'     ]])
+      .state(['root.docs.new'                               , '/new?parentDocId'                                                                                     , ['@root'           , 'ems/docs/views/docsNew.html'        , 'DocsNewCtrl'        ]])
+      .state(['root.docs.new.caseSelect'                    , '/caseSelect?csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsCase', ['@root'           , 'ems/docs/views/caseSelect.html'     , 'CaseSelectCtrl'     ]])
+      .state(['root.docs.news'                              , '/news'                                                                                                , ['@root'           , 'ems/docs/views/docsNews.html'       , 'DocsNewsCtrl'       ]])
+      .state(['root.docs.edit'                              , '/:id'                                                                                                 , ['@root'           , 'ems/docs/views/docsEdit.html'       , 'DocsEditCtrl'       ]])
+      .state(['root.docs.edit.view'                         , '/view'                                                                                                , ['@root.docs.edit' , 'ems/docs/views/docsView.html'       , 'DocsViewCtrl'       ]])
+      .state(['root.docs.edit.view.selectCorr'              , '/selectCorr?displayName&email'                                                                        , ['@root.docs.edit' , 'ems/docs/views/selectCorrView.html' , 'SelectCorrViewCtrl' ]])
+      .state(['root.docs.edit.view.selectUnit'              , '/selectUnit?name'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html' , 'SelectUnitViewCtrl' ]])
+      .state(['root.docs.edit.workflows'                    , '/workflows'                                                                                           , ['@root.docs.edit' , 'ems/docs/views/docsWorkflows.html'  , 'DocsWorkflowsCtrl'  ]])
+      .state(['root.docs.edit.workflows.signRequest'        , '/signRequest'                                                                                         , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html', 'WorkflowRequestCtrl']])
+      .state(['root.docs.edit.workflows.discussRequest'     , '/discussRequest'                                                                                      , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html', 'WorkflowRequestCtrl']])
+      .state(['root.docs.edit.workflows.approvalRequest'    , '/approvalRequest'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html', 'WorkflowRequestCtrl']])
+      .state(['root.docs.edit.workflows.registrationRequest', '/registrationRequest'                                                                                 , ['@root.docs.edit' , 'ems/docs/views/workflowRequest.html', 'WorkflowRequestCtrl']])
+      .state(['root.docs.edit.workflows.signConfirm'        , '/signConfirm'                                                                                         , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html', 'WorkflowConfirmCtrl']])
+      .state(['root.docs.edit.workflows.discussConfirm'     , '/discussConfirm'                                                                                      , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html', 'WorkflowConfirmCtrl']])
+      .state(['root.docs.edit.workflows.approvalConfirm'    , '/approvalConfirm'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/workflowConfirm.html', 'WorkflowConfirmCtrl']])
+      .state(['root.docs.edit.stages'                       , '/stages'                                                                                              , ['@root.docs.edit' , 'ems/docs/views/docsStages.html'     , 'DocsStagesCtrl'     ]])
+      .state(['root.docs.edit.stages.next'                  , '/next'                                                                                                , ['@root.docs.edit' , 'ems/docs/views/nextStage.html'      , 'NextStageCtrl'      ]])
+      .state(['root.docs.edit.stages.edit'                  , '/edit'                                                                                                , ['@root.docs.edit' , 'ems/docs/views/editStage.html'      , 'EditStageCtrl'      ]])
+      .state(['root.docs.edit.stages.end'                   , '/end'                                                                                                 , ['@root.docs.edit' , 'ems/docs/views/endStage.html'       , 'EndStageCtrl'       ]])
+      .state(['root.docs.edit.case'                         , '/case'                                                                                                , ['@root.docs.edit' , 'ems/docs/views/docsCase.html'       , 'DocsCaseCtrl'       ]])
+      .state(['root.docs.edit.case.casePart'                , '/casePart'                                                                                            , ['@root.docs.edit' , 'ems/docs/views/editCasePart.html'   , 'EditCasePartCtrl'   ]])
+      .state(['root.docs.edit.case.docType'                 , '/docType'                                                                                             , ['@root.docs.edit' , 'ems/docs/views/editDocType.html'    , 'EditDocTypeCtrl'    ]])
+      .state(['root.docs.edit.case.docType.selectUnit'      , '/selectUnit?name'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html' , 'SelectUnitViewCtrl' ]])
+      .state(['root.corrs'                                  , '/corrs?displayName&correspondentEmail&limit&offset'                                                                                                                                      ])
+      .state(['root.corrs.search'                           , ''                                                                                                     , ['@root'           , 'ems/corrs/views/corrSearch.html'    , 'CorrsSearchCtrl'    ]])
+      .state(['root.corrs.new'                              , '/new'                                                                                                 , ['@root'           , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'      ]])
+      .state(['root.corrs.edit'                             , '/:id'                                                                                                 , ['@root'           , 'ems/corrs/views/corrEdit.html'      , 'CorrsEditCtrl'      ]]);
   }]);
 }(angular));

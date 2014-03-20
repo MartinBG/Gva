@@ -1,5 +1,4 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  vutreshen-izhodqsht
   <div class="row">
     <div class="form-group col-md-6" sc-has-error="docUnitsFrom">
       <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
@@ -57,7 +56,7 @@
       <label class="control-label" l10n-text="docs.edit.view.docCorrespondents"></label>
       <sc-validation-error field-name="docCorrespondents" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'corrs'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="!readonly"></sc-nomenclature>
+        <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="!readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
         </span>
@@ -108,10 +107,9 @@
       </div>
 
       <div class="row" style="margin-bottom: 5px;">
-        <div class="form-group col-md-3" sc-has-error="assignmentType">
+        <div class="form-group col-md-3">
           <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
-          <sc-validation-error field-name="assignmentType" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature name="assignmentType" ng-model="model.assignmentType" alias="'assignmentType'" required ng-readonly="!readonly"></sc-nomenclature>
+          <sc-nomenclature name="assignmentType" ng-model="model.assignmentTypeId" mode="id" alias="'assignmentType'" ng-readonly="!readonly"></sc-nomenclature>
         </div>
 
         <div class="form-group col-md-2">
@@ -126,7 +124,7 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="(model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)" ng-if="readonly || (model.docUnitsRoleReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRoleRegistrators.length > 0)">
+    <accordion-group is-open="(model.docUnitsReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRegistrators.length > 0)" ng-if="readonly || (model.docUnitsReaders.length > 0) || (model.docUnitsEditors.length > 0) || (model.docUnitsRegistrators.length > 0)">
       <accordion-heading>
           <a l10n-text="docs.edit.view.permissions" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -134,9 +132,9 @@
         <div class="form-group col-md-4">
           <label class="control-label" l10n-text="docs.edit.view.readers"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsRoleReaders" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsReaders" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'roleReaders' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
+              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'readers' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
             </span>
           </div>
         </div>
@@ -152,7 +150,7 @@
         <div class="form-group col-md-4">
           <label class="control-label" l10n-text="docs.edit.view.registrators"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsRoleRegistrators" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsRegistrators" alias="'unit'" multiple="multiple" ng-readonly="!readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'registrators' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!readonly"></sc-button>
             </span>
@@ -172,7 +170,7 @@
       </div>
     </accordion-group>
 
-     <accordion-group is-open="model.docFiles.length > 0" ng-if="readonly || model.docFiles.length > 0">
+     <accordion-group is-open="model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -182,9 +180,9 @@
           <div class="form-group col-md-12">
             <label class="control-label">Вътрешни файлове</label>
             <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 1}">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              <span ng-repeat="df in model.publicDocFiles">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
               </span>
             </div>
           </div>
@@ -194,9 +192,9 @@
           <div class="form-group col-md-12">
             <label class="control-label">Публични файлове</label>
             <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.docFiles | filter: { docFileKindId: 2}">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i> 
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.docFile.name }}</span></a>)
+              <span ng-repeat="df in model.privateDocFiles">
+                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
               </span>
             </div>
           </div>

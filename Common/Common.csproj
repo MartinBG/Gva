@@ -115,11 +115,14 @@
     <Compile Include="Data\Events.cs" />
     <Compile Include="Data\IEvent.cs" />
     <Compile Include="Data\IEventHandler.cs" />
+    <Compile Include="Extensions\Helper.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Http\IMvcConfig.cs" />
     <Compile Include="Http\IWebApiConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonModule.cs" />
+    <Compile Include="Tests\DisposableTuple.cs" />
+    <Compile Include="Utils\CodeGenerator.cs" />
     <Compile Include="Utils\Expressions\ExpressionExpanderExtensions.cs" />
     <Compile Include="Utils\Expressions\ExpressionHelper.cs" />
     <Compile Include="Utils\Expressions\ExpressionParameterRebinder.cs" />

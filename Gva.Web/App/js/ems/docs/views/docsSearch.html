@@ -1,15 +1,18 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="docs.search.fromDate"></sc-filter>
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="docs.search.toDate"></sc-filter>
-
   <sc-filter type="text" name="regUri" class="col-sm-3" removable="false" label="docs.search.regUri"></sc-filter>
   <sc-filter type="text" name="docName" class="col-sm-3" removable="false" label="docs.search.docName"></sc-filter>
   <sc-filter type="int" name="docTypeId" class="col-sm-3" removable="false" label="docs.search.docTypeId">
   </sc-filter>
   <sc-filter type="int" name="docStatusId" class="col-sm-3" removable="false" label="docs.search.docStatusId">
   </sc-filter>
-  <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
-  <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
+<!--<sc-filter type="nomenclature" name="corrs" class="col-sm-3" removable="false" alias="correspondent" load="true" mode="id" multiple="multiple" label="docs.search.corrs">
+  </sc-filter>-->
+  <sc-filter type="nomenclature" name="corrs" class="col-sm-3" removable="false" alias="correspondent" load="false" mode="id" label="docs.search.corrs">
+  </sc-filter>
+  <sc-filter type="nomenclature" name="units" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="docs.search.units">
+  </sc-filter>
   <sc-search-button action="search()" text="persons.search.search" icon="glyphicon-search"></sc-search-button>
   <sc-search-button action="newDoc()" text="docs.search.newDoc"></sc-search-button>
 </sc-search>
@@ -53,10 +56,10 @@
           filter: 'draft'
         }
       },
-      'От портал': {
+      'Неприключени': {
         state: 'root.docs.search',
         stateParams: {
-          filter: 'portal'
+          filter: 'unfinished'
         }
       },
       'Всички': {
@@ -64,10 +67,19 @@
         stateParams: {
           filter: 'all'
         }
+      },
+      'От портал': {
+        state: 'root.docs.search',
+        stateParams: {
+          filter: 'portal'
+        }
       }
     }"></sc-tabs>
 
   <div class="tab-content">
+
+    <div ng-if="!!msg"><p class="alert alert-info" ng-bind-html="msg"></p></div>
+
     <sc-datatable ng-model="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" width="1px">
       <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

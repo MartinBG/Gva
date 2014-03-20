@@ -10,10 +10,11 @@ using Newtonsoft.Json.Linq;
 using Ninject;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Regs.Api.Tests.Common;
+using Regs.Api.Tests.Mocks;
 using SubSpec;
 using Xunit;
 using Xunit.Extensions;
+using Common.Tests;
 
 namespace Regs.Api.Tests.Specs
 {

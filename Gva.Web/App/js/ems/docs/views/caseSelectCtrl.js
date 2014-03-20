@@ -33,8 +33,9 @@
       isCase: true
     };
 
-    Doc.query(stateParams).$promise.then(function (docs) {
-      $scope.docs = docs;
+    Doc.get(stateParams).$promise.then(function (docs) {
+      $scope.docs = docs.documents;
+      $scope.docCount = docs.documentCount;
     });
 
     $scope.search = function () {

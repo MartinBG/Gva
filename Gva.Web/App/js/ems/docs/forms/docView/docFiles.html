@@ -2,26 +2,26 @@
   <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-          <th>Наименование</th>
-          <th>Вид файл</th>
-          <th>Тип файл</th>
-          <th>Прикачен файл</th>
+          <th l10n-text="docs.edit.view.docFile.docKind"></th>
+          <th l10n-text="docs.edit.view.docFile.name"></th>
+          <th l10n-text="docs.edit.view.docFile.docType"></th>
+          <th l10n-text="docs.edit.view.docFile.attachedFile"></th>
           <th style="width: 70px;"></th>
         </tr>
     </thead>
     <tbody>
       <tr ng-repeat="df in model.docFiles | filter: { isDeleted: false }" ng-form sc-form-name="{ local: 'form', parent: 's' + $index }" sc-validate="{}">
-        <td style="width: 400px;" sc-has-error="name">
+        <td style="width: 150px;" sc-has-error="docFileKind">
+            <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
+        </td>
+        <td style="width: 300px;" sc-has-error="name">
           <sc-text name="name" ng-model="df.name" ng-readonly="!df.isInEdit" required></sc-text>
         </td>
-        <td style="width: 150px;" sc-has-error="docFileKind">
-            <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKinds'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
-        </td>
-        <td style="width: 250px;" sc-has-error="docFileType">
-          <sc-nomenclature name="docFileType" ng-model="df.docFileTypeId" nom-obj="df.docFileType" mode="id" alias="'docFileTypes'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
+        <td style="width: 350px;" sc-has-error="docFileType">
+          <sc-nomenclature name="docFileType" ng-model="df.docFileTypeId" nom-obj="df.docFileType" mode="id" alias="'docFileType'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
         </td>
         <td sc-has-error="docFile">
-          <sc-files name="docFile" ng-model="df.docFile" ng-readonly="!readonly" required></sc-files>
+          <sc-files name="docFile" ng-model="df.file" ng-readonly="!readonly" required></sc-files>
         </td>
         <td style="text-align: right; width: 1px;">
           <span ng-show="df.isInEdit">

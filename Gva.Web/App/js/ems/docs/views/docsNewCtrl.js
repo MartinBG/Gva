@@ -11,46 +11,11 @@
     docModel,
     parentDoc
   ) {
-
     if (parentDoc.length > 0) {
       docModel.parentDoc = parentDoc.pop();
     }
 
     $scope.docModel = docModel;
-
-    $scope.docFormatTypeChange = function ($index) {
-      _.forOwn($scope.docModel.docFormatTypes, function (item) {
-        item.isActive = false;
-      });
-      $scope.docModel.docFormatTypes[$index].isActive = true;
-      $scope.docModel.doc.docFormatTypeId =
-        $scope.docModel.docFormatTypes[$index].docFormatTypeId;
-      $scope.docModel.doc.docFormatTypeName =
-        $scope.docModel.docFormatTypes[$index].name;
-    };
-
-    $scope.docCasePartTypeChange = function ($index) {
-      _.forOwn($scope.docModel.docCasePartTypes, function (item) {
-        item.isActive = false;
-      });
-
-      $scope.docModel.docCasePartTypes[$index].isActive = true;
-      $scope.docModel.doc.docCasePartTypeId =
-        $scope.docModel.docCasePartTypes[$index].docCasePartTypeId;
-      $scope.docModel.doc.docCasePartTypeName =
-        $scope.docModel.docCasePartTypes[$index].name;
-    };
-
-    $scope.docDirectionChange = function ($index) {
-      _.forOwn($scope.docModel.docDirections, function (item) {
-        item.isActive = false;
-      });
-      $scope.docModel.docDirections[$index].isActive = true;
-      $scope.docModel.doc.docDirectionId =
-        $scope.docModel.docDirections[$index].docDirectionId;
-      $scope.docModel.doc.docDirectionName =
-        $scope.docModel.docDirections[$index].name;
-    };
 
     $scope.clearCase = function () {
       $scope.docModel.parentDoc = null;
@@ -60,37 +25,33 @@
       return $state.go('root.docs.new.caseSelect');
     };
 
-    $scope.save = function (mode) {
+    $scope.setParentDocId = function () {
+      if ($scope.docModel.parentDoc) {
+        $scope.docModel.doc.parentDocId = $scope.docModel.parentDoc.docId;
+      }
+    };
+
+    $scope.register = function () {
+      $scope.setParentDocId();
+      $scope.docModel.doc.register = true;
+
       $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          if ($scope.docModel.parentDoc) {
-            $scope.docModel.doc.parentDocId = $scope.docModel.parentDoc.docId;
-          }
-          $scope.docModel.doc.docTypeGroupId = $scope.docModel.docTypeGroup.nomValueId;
-          $scope.docModel.doc.docTypeGroupName =  $scope.docModel.docTypeGroup.name;
+          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
+            return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
+          });
+        }
+      });
+    };
 
-          $scope.docModel.doc.docTypeId = $scope.docModel.docType.nomValueId;
-          $scope.docModel.doc.docTypeName =  $scope.docModel.docType.name;
-
-          if ($scope.docModel.doc.docCorrespondents &&
-              $scope.docModel.doc.docCorrespondents.length > 0) {
-            $scope.docModel.doc.correspondentName =
-              $scope.docModel.doc.docCorrespondents.map(function (correspondent) {
-                return correspondent.name;
-              })
-            .join('; ');
-          }
-
-          if (mode === 'register') {
-            Doc.registerNew($scope.docModel.doc).$promise.then(function (result) {
-              return $state.go('root.docs.search', { filter: 'current', regUri: result.regUri });
-            });
-          }
-          else if (mode === 'create') {
-            Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-              return $state.go('root.docs.edit.view', { docId: result.docId });
-            });
-          }
+    $scope.save = function () {
+      $scope.setParentDocId();
+      $scope.docForm.$validate().then(function () {
+        if ($scope.docForm.$valid) {
+          //?rename
+          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
+            return $state.go('root.docs.edit.view', { id: result.docId });
+          });
         }
       });
     };
@@ -125,12 +86,16 @@
         }).then(function (res) {
           var doc = {
             parentDocId: null,
-            docFormatTypeId: _(res.docFormatTypes).first().docFormatTypeId,
+            docFormatTypeId: _(res.docFormatTypes).first().nomValueId,
             docFormatTypeName: _(res.docFormatTypes).first().name,
-            docCasePartTypeId: _(res.docCasePartTypes).first().docCasePartTypeId,
+            docCasePartTypeId: _(res.docCasePartTypes).first().nomValueId,
             docCasePartTypeName: _(res.docCasePartTypes).first().name,
-            docDirectionId: _(res.docDirections).first().docDirectionId,
-            docDirectionName: _(res.docDirections).first().name
+            docDirectionId: _(res.docDirections).first().nomValueId,
+            docDirectionName: _(res.docDirections).first().name,
+            docTypeGroupId: undefined,
+            docTypeId: undefined,
+            correspondents: undefined,
+            register: false
           };
 
           return {

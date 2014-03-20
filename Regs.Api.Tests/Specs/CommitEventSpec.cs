@@ -1,12 +1,13 @@
 ﻿using Common.Api.UserContext;
 using Common.Data;
+using Common.Tests;
 using Newtonsoft.Json.Linq;
 using Ninject;
 using Ninject.Extensions.NamedScope;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Regs.Api.Tests.Common;
+using Regs.Api.Tests.Mocks;
 using SubSpec;
 using System;
 using System.Collections.Generic;

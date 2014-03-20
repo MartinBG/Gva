@@ -42,9 +42,9 @@
       docUnitsMadeBy: [],
       docUnitsInCharge: [],
       docUnitsControlling: [],
-      docUnitsRoleReaders: [],
+      docUnitsReaders: [],
       docUnitsEditors: [],
-      docUnitsRoleRegistrators: [],
+      docUnitsRegistrators: [],
       isVisibleRoleFrom: true,
       isVisibleRoleTo: true,
       isVisibleRoleImportedBy: true,
@@ -79,9 +79,9 @@
     };
 
     $httpBackendConfiguratorProvider
-        .when('GET','/api/docs?'+
-          'filter&fromDate&toDate&regUri&docName&'+
-          'docTypeId&docStatusId&corrs&units&hasLot&isCase',
+        .when('GET', '/api/docs?' +
+          'filter&fromDate&toDate&regUri&docName&' +
+          'docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot', //? hasLot
         function ($params, docs, applicationsFactory) {
 
           var searchParams = _.cloneDeep($params);
@@ -94,22 +94,22 @@
           var result = docs;
 
           if (!!$params.filter) {
-            if ($params.filter === 'current'){
+            if ($params.filter === 'current') {
               result = _(result).filter(function (doc) {
-                return doc.docStatusId !== 4 && doc.docStatusId !==5;
+                return doc.docStatusId !== 4 && doc.docStatusId !== 5;
               });
             }
-            else if ($params.filter === 'finished'){
+            else if ($params.filter === 'finished') {
               result = _(result).filter(function (doc) {
                 return doc.docStatusId === 4;
               });
             }
-            else if ($params.filter === 'draft'){
+            else if ($params.filter === 'draft') {
               result = _(result).filter(function (doc) {
                 return doc.docStatusId === 1;
               });
             }
-            else if ($params.filter === 'portal'){
+            else if ($params.filter === 'portal') {
               result = _(result).filter(function (doc) {
                 return !!doc.docSourceType && doc.docSourceType.nomValueId === 1;
               });
@@ -175,7 +175,11 @@
           })
           .value();
 
-          return [200, result];
+          return [200, {
+            documents: result,
+            documentCount: result.length,
+            msg: ''
+          }];
         })
         .when('POST', '/api/docs/new/create',
         function ($jsonData, docs, docCases, docStages) {
@@ -200,7 +204,7 @@
           newDoc.assignmentDeadline = todayDate.format('YYYY-MM-DDTHH:mm:ss');
 
           var docTypeAlias =
-            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId }).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -211,8 +215,8 @@
             newDoc.isRemark = true;
           }
           else {
-            var docDirectionAlias =_(nomenclatures.docDirection)
-              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+            var docDirectionAlias = _(nomenclatures.docDirection)
+              .filter({ docDirectionId: newDoc.docDirectionId }).first().alias;
 
             if (docDirectionAlias === 'Incoming') {
               newDoc.isDocIncoming = true;
@@ -220,7 +224,7 @@
             else if (docDirectionAlias === 'Internal') {
               newDoc.isDocInternal = true;
             }
-              else if (docDirectionAlias === 'Outgoing') {
+            else if (docDirectionAlias === 'Outgoing') {
               newDoc.isDocOutgoing = true;
             }
             else if (docDirectionAlias === 'InternalOutgoing') {
@@ -239,8 +243,8 @@
           }
           else {
             docCaseObj =
-              _(docCases).filter(function(dc) {
-                return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
+              _(docCases).filter(function (dc) {
+                return _(dc.docCase).some({ docId: parseInt(newDoc.parentDocId, 10) });
               }).first();
           }
 
@@ -262,7 +266,7 @@
 
           var eStage =
             _(nomenclatures.electronicServiceStage)
-            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
+            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true })
             .first();
 
           var newDocStage = {
@@ -313,7 +317,7 @@
           newDoc.regUri = '000030-' + nextDocId + '-' + todayDate.format('YYYY-MM-DD');
 
           var docTypeAlias =
-            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId}).first().alias;
+            _(nomenclatures.docType).filter({ nomValueId: newDoc.docTypeId }).first().alias;
           if (docTypeAlias === 'resolution') {
             newDoc.isResolution = true;
           }
@@ -325,7 +329,7 @@
           }
           else {
             var docDirectionAlias = _(nomenclatures.docDirection)
-              .filter({ docDirectionId: newDoc.docDirectionId}).first().alias;
+              .filter({ docDirectionId: newDoc.docDirectionId }).first().alias;
 
             if (docDirectionAlias === 'Incoming') {
               newDoc.isDocIncoming = true;
@@ -333,7 +337,7 @@
             else if (docDirectionAlias === 'Internal') {
               newDoc.isDocInternal = true;
             }
-              else if (docDirectionAlias === 'Outgoing') {
+            else if (docDirectionAlias === 'Outgoing') {
               newDoc.isDocOutgoing = true;
             }
             else if (docDirectionAlias === 'InternalOutgoing') {
@@ -352,8 +356,8 @@
           }
           else {
             docCaseObj =
-              _(docCases).filter(function(dc) {
-                return _(dc.docCase).some({ docId : parseInt(newDoc.parentDocId, 10)});
+              _(docCases).filter(function (dc) {
+                return _(dc.docCase).some({ docId: parseInt(newDoc.parentDocId, 10) });
               }).first();
           }
 
@@ -375,7 +379,7 @@
 
           var eStage =
             _(nomenclatures.electronicServiceStage)
-            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true})
+            .filter({ docTypeId: newDoc.docTypeId, isFirstByDefault: true })
             .first();
 
           var newDocStage = {
@@ -397,11 +401,11 @@
 
           docs.push(newDoc);
 
-          return [200, { docId : newDoc.docId, regUri: newDoc.regUri }];
+          return [200, { docId: newDoc.docId, regUri: newDoc.regUri }];
         })
-        .when('GET', '/api/docs/:docId',
+        .when('GET', '/api/docs/:id',
         function ($params, docs) {
-          var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
+          var doc = _(docs).filter({ docId: parseInt($params.id, 10) }).first();
 
           if (!doc) {
             return [400];
@@ -409,9 +413,9 @@
 
           return [200, doc];
         })
-        .when('POST', '/api/docs/:docId',
+        .when('POST', '/api/docs/:id',
         function ($params, $jsonData, $filter, docs) {
-          var docId = parseInt($params.docId, 10),
+          var docId = parseInt($params.id, 10),
             docIndex = docs.indexOf($filter('filter')(docs, { docId: docId })[0]);
 
           if (docIndex === -1) {

@@ -13,7 +13,7 @@
         docFileKind: target.docFileKind,
         docFileTypeId: target.docFileTypeId,
         docFileType: target.docFileType,
-        docFile: target.docFile,
+        file: target.file,
         isNew: target.isNew,
         isDirty: target.isDirty,
         isDeleted: target.isDeleted,
@@ -37,7 +37,7 @@
         target.docFileKind = target.prevValues.docFileKind;
         target.docFileTypeId = target.prevValues.docFileTypeId;
         target.docFileType = target.prevValues.docFileType;
-        target.docFile = target.prevValues.docFile;
+        target.file = target.prevValues.file;
         target.isNew = target.prevValues.isNew;
         target.isDirty = target.prevValues.isDirty;
         target.isDeleted = target.prevValues.isDeleted;
@@ -60,12 +60,13 @@
 
     $scope.addDocFile = function addDocFile(id) {
       var docFile = {
+        docFileId: undefined,
         docId: id,
         docFileKindId: undefined,
         docFileKind: {},
         docFileTypeId: undefined,
         docFileType: {},
-        docFile: undefined,
+        file: undefined,
         isNew: true,
         isDirty: false,
         isDeleted: false,

@@ -4,6 +4,7 @@ using Common.Data;
 using Common.Http;
 using Ninject.Extensions.NamedScope;
 using Ninject.Modules;
+using Common.Api.Repositories;
 
 namespace Common.Api
 {

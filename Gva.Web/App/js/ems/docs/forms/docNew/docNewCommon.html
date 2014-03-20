@@ -1,0 +1,64 @@
+﻿<ng-form sc-validate="{}">
+
+  <div class="row">
+    <div class="form-group col-sm-4" sc-has-error="docTypeGroupId">
+      <label class="control-label" l10n-text="docs.newDoc.docTypeGroupId"></label>
+      <sc-validation-error field-name="docTypeGroupId" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature name="docTypeGroupId" ng-model="model.doc.docTypeGroupId" nom-obj="model.docTypeGroup" mode="id" alias="'docTypeGroup'" ng-required="true"></sc-nomenclature>
+    </div>
+
+    <div class="form-group col-sm-4" sc-has-error="docTypeId">
+      <label class="control-label" l10n-text="docs.newDoc.docTypeId"></label>
+      <sc-validation-error field-name="docTypeId" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature name="docTypeId" ng-model="model.doc.docTypeId" nom-obj="model.docType" mode="id" alias="'docType'" params="{ parentValueId: model.docTypeGroup ? model.docTypeGroup.nomValueId : -1 }" required></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="btn-group">
+        <button type="button" class="btn"
+          ng-repeat="docFormatType in model.docFormatTypes"
+          ng-class="{ 'btn-primary': model.doc.docFormatTypeId == docFormatType.nomValueId, 'btn-default': !(model.doc.docFormatTypeId == docFormatType.nomValueId) }"
+          ng-click="docFormatTypeChange($index)">
+          {{docFormatType.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="btn-group">
+        <button type="button" class="btn"
+          ng-repeat="docCasePartType in model.docCasePartTypes"
+          ng-class="{ 'btn-primary': model.doc.docCasePartTypeId == docCasePartType.nomValueId, 'btn-default': !(model.doc.docCasePartTypeId == docCasePartType.nomValueId) }"
+          ng-click="docCasePartTypeChange($index)">
+          {{docCasePartType.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="btn-group">
+        <button type="button"  class="btn"
+          ng-repeat="docDirection in model.docDirections"
+          ng-class="{ 'btn-primary': model.doc.docDirectionId == docDirection.nomValueId, 'btn-default': !(model.doc.docDirectionId == docDirection.nomValueId) }"
+          ng-click="docDirectionChange($index)">
+          {{docDirection.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8" sc-has-error="docSubject">
+      <label class="control-label" l10n-text="docs.newDoc.docSubject"></label>
+      <sc-validation-error field-name="docSubject" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.doc.docSubject" name="docSubject" required></sc-text>
+    </div>
+  </div>
+
+</ng-form>

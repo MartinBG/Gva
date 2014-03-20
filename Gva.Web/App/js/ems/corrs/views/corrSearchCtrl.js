@@ -9,18 +9,12 @@
     Corr,
     corrs
   ) {
-    $scope.corrs = corrs.map(function (corr) {
-      return {
-        corrId: corr.corrId,
-        displayName: corr.displayName,
-        email: corr.email,
-        correspondentType: corr.correspondentType
-      };
-    });
+    $scope.corrs = corrs.correspondents;
+    $scope.corrCount = corrs.correspondentCount;
 
     $scope.filters = {
       displayName: null,
-      email: null
+      correspondentEmail: null
     };
 
     _.forOwn($stateParams, function(value, param) {
@@ -36,12 +30,12 @@
     $scope.search = function search() {
       return $state.go('root.corrs.search', {
         displayName: $scope.filters.displayName,
-        email: $scope.filters.email
+        correspondentEmail: $scope.filters.correspondentEmail
       });
     };
 
     $scope.editCorr = function editCorr(corr) {
-      return $state.go('root.corrs.edit', { corrId: corr.corrId });
+      return $state.go('root.corrs.edit', { id: corr.correspondentId });
     };
   }
 
@@ -58,7 +52,7 @@
       '$stateParams',
       'Corr',
       function resolveCorrs($stateParams, Corr) {
-        return Corr.query($stateParams).$promise;
+        return Corr.get($stateParams).$promise;
       }
     ]
   };

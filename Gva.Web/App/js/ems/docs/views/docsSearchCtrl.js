@@ -6,10 +6,13 @@
     $scope,
     $state,
     $stateParams,
+    $sce,
     Doc,
     docs
   ) {
-    $scope.docs = docs;
+    $scope.docs = docs.documents;
+    $scope.docCount = docs.documentCount;
+    $scope.msg = $sce.trustAsHtml(docs.msg);
 
     $scope.filters = {
       filter: null,
@@ -48,7 +51,7 @@
     };
 
     $scope.viewDoc = function (doc) {
-      return $state.go('root.docs.edit.view', { docId: doc.docId });
+      return $state.go('root.docs.edit.view', { id: doc.docId });
     };
 
     $scope.newDoc = function () {
@@ -60,6 +63,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    '$sce',
     'Doc',
     'docs'
   ];
@@ -69,7 +73,7 @@
       '$stateParams',
       'Doc',
       function resolveDocs($stateParams, Doc) {
-        return Doc.query($stateParams).$promise;
+        return Doc.get($stateParams).$promise;
       }
     ]
   };
