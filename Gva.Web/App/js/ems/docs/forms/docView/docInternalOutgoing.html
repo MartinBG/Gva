@@ -175,33 +175,8 @@
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
 
-      <div ng-if="!readonly">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label class="control-label">Вътрешни файлове</label>
-            <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.publicDocFiles">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-md-12">
-            <label class="control-label">Публични файлове</label>
-            <div class="input-group input-group-sm">
-              <span ng-repeat="df in model.privateDocFiles">
-                <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
-                <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <ems-doc-view-doc-files name="docFilesForm" ng-model="model" readonly="readonly" ng-if="readonly"></ems-doc-view-doc-files>
+      <ems-doc-files-view name="docFilesViewForm" ng-model="model" ng-if="!readonly"></ems-doc-files-view>
+      <ems-doc-files-edit name="docFilesForm" ng-model="model" readonly="readonly" ng-if="readonly"></ems-doc-files-edit>
     </accordion-group>
 
     <accordion-group is-open="model.docClassifications.length > 0" ng-if="readonly || model.accessCode">

@@ -1,0 +1,25 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="control-label" l10n-text="docs.edit.content.privateDocFiles"></label>
+        <div class="input-group input-group-sm">
+          <span ng-repeat="df in model.privateDocFiles">
+            <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+            <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label class="control-label" l10n-text="docs.edit.content.publicDocFiles"></label>
+        <div class="input-group input-group-sm">
+          <span ng-repeat="df in model.publicDocFiles">
+            <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
+            <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
+          </span>
+        </div>
+      </div>
+    </div>
+</ng-form>

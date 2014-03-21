@@ -23,10 +23,11 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Delete, "api/corrs/{id}", "Correspondent", "DeleteCorrespondent");
 
             //docs
-            this.MapRoute(config, HttpMethod.Get , "api/docs"           , "Doc", "GetDocs");
-            this.MapRoute(config, HttpMethod.Post, "api/docs/new/create", "Doc", "CreateDoc"); //?
-            this.MapRoute(config, HttpMethod.Get , "api/docs/{id}"      , "Doc", "GetDoc");
-            this.MapRoute(config, HttpMethod.Post, "api/docs/{id}"      , "Doc", "UpdateDoc");
+            this.MapRoute(config, HttpMethod.Get , "api/docs"            , "Doc", "GetDocs");
+            this.MapRoute(config, HttpMethod.Post, "api/docs/new/create" , "Doc", "CreateDoc"); //?
+            this.MapRoute(config, HttpMethod.Post, "api/docs/{id}/create", "Doc", "CreateChildDoc"); //?
+            this.MapRoute(config, HttpMethod.Get , "api/docs/{id}"       , "Doc", "GetDoc");
+            this.MapRoute(config, HttpMethod.Post, "api/docs/{id}"       , "Doc", "UpdateDoc");
 
             //mock noms
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/correspondentType" , "MockNom", "GetCorrespondentTypes");

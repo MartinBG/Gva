@@ -53,8 +53,29 @@
       });
     };
 
-    $scope.attachNewDoc = function () {
+    $scope.attachDoc = function () {
       return $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
+    };
+
+    $scope.attachDocInternal = function (docEntryTypeAlias) {
+      return Doc
+        .createChild({ docId: doc.docId, docEntryTypeAlias: docEntryTypeAlias })
+        .$promise
+        .then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
+    $scope.attachResolution = function () {
+      return $scope.attachDocInternal('Resolution');
+    };
+
+    $scope.attachTask = function () {
+      return $scope.attachDocInternal('Task');
+    };
+
+    $scope.attachRemark = function () {
+      return $scope.attachDocInternal('Remark');
     };
 
     $scope.endStage = function () {
@@ -133,32 +154,6 @@
 
     $scope.editDocType = function () {
       return $state.go('root.docs.edit.case.docType');
-    };
-
-    //? separate method for each docentry
-    $scope.attachDoc = function (docTypeId) {
-      throw 'not implemented:' + docTypeId;
-      //var newDoc = {
-      //  parentDocId:  $scope.doc.docId,
-      //  docFormatTypeId: 3,
-      //  docFormatTypeName: 'Хартиен',
-      //  docCasePartTypeId: 1,
-      //  docCasePartTypeName: 'Публичен',
-      //  docDirectionId: 1,
-      //  docDirectionName: 'Входящ',
-      //  docTypeId: docTypeId,
-      //  docTypeName:
-      //    docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
-      //  docSubject:
-      //    docTypeId === 1 ? 'Резолюция' : (docTypeId === 2 ? 'Задача' : 'Забележка'),
-      //  correspondents: $scope.doc.correspondents,
-      //  correspondentName: $scope.doc.correspondentName
-      //};
-
-      ////todo naming?
-      //Doc.registerNew(newDoc).$promise.then(function (savedDoc) {
-      //  return $state.go('root.docs.edit.view', { id: savedDoc.docId });
-      //});
     };
   }
 

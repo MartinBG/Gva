@@ -56,9 +56,13 @@
       controller: 'TaskCtrl'
     });
     scaffoldingProvider.form({
-      name: 'emsDocViewDocFiles',
-      templateUrl: 'ems/docs/forms/docView/docFiles.html',
-      controller: 'DocFilesCtrl'
+      name: 'emsDocFilesEdit',
+      templateUrl: 'ems/docs/forms/docView/docFilesEdit.html',
+      controller: 'DocFilesEditCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsDocFilesView',
+      templateUrl: 'ems/docs/forms/docView/docFilesView.html'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocClassification',

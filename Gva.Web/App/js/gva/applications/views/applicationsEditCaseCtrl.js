@@ -71,7 +71,7 @@
     };
 
     $scope.viewDoc = function (docId) {
-      return $state.go('root.docs.edit.view', { docId: docId });
+      return $state.go('root.docs.edit.view', { id: docId });
     };
   }
 

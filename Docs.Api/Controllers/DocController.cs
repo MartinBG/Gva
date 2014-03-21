@@ -385,10 +385,9 @@ namespace Docs.Api.Controllers
                         newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
                     }
 
-                    //?
-                    if (preDoc.Correspondents.HasValue)
+                    foreach (var correspondent in preDoc.Correspondents)
                     {
-                        newDoc.CreateDocCorrespondent(preDoc.Correspondents.Value, this.userContext);
+                        newDoc.CreateDocCorrespondent(correspondent, this.userContext);
                     }
 
                     if (newDoc.IsCase)
@@ -422,6 +421,87 @@ namespace Docs.Api.Controllers
                     string ids = Helper.GetStringFromIdList(createdDocs.Select(e => e.DocId).ToList());
                     return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { ids = ids });
                 }
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CreateChildDoc(int id, string docEntryTypeAlias = null)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+                DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
+                DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
+                DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Paper".ToLower());
+                DocType docType = null;
+                string docSubject = string.Empty;
+
+                switch (docEntryTypeAlias.ToLower())
+                {
+                    case "resolution":
+                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
+                        docSubject = "Разпределение чрез резолюция";
+                        break;
+                    case "task":
+                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
+                        docSubject = "Разпределение чрез задача";
+                        break;
+                    case "remark":
+                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
+                        docSubject = "Допълнителна информация чрез забележка";
+                        break;
+                };
+
+                Doc newDoc = this.docRepository.CreateDoc(
+                    internalDocDirection.DocDirectionId,
+                    documentEntryType.DocEntryTypeId,
+                    draftStatus.DocStatusId,
+                    docSubject,
+                    internalDocCasePartType.DocCasePartTypeId,
+                    null,
+                    null,
+                    docType.DocTypeId,
+                    paperDocFormatType.DocFormatTypeId,
+                    null,
+                    this.userContext);
+
+                DocRelation parentRelation = this.unitOfWork.DbContext.Set<DocRelation>()
+                    .FirstOrDefault(e => e.DocId == id);
+                newDoc.CreateDocRelation(id, parentRelation.RootDocId, this.userContext);
+
+                //? parent/child classifications inheritance
+                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                    .ToList();
+
+                foreach (var docTypeClassification in docTypeClassifications)
+                {
+                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
+                }
+
+                List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
+                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                    .ToList();
+
+                foreach (var docTypeUnitRole in docTypeUnitRoles)
+                {
+                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
+                }
+
+                this.unitOfWork.Save();
+
+                this.docRepository.spSetDocUsers(newDoc.DocId);
+
+                transaction.Commit();
+
+                PreDocDO returnValue = new PreDocDO(newDoc);
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
             }
         }
 
@@ -906,7 +986,8 @@ namespace Docs.Api.Controllers
 
                 #region DocFiles
 
-                List<DocFileDO> allDocFiles = doc.PublicDocFiles.Union(doc.PrivateDocFiles).ToList();
+                //List<DocFileDO> allDocFiles = doc.PublicDocFiles.Union(doc.PrivateDocFiles).ToList();
+                List<DocFileDO> allDocFiles = doc.DocFiles;
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))
                 {

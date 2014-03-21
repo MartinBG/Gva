@@ -1,4 +1,5 @@
 ﻿using Common.Api.Models;
+using Common.Extensions;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using System;
@@ -374,6 +375,7 @@ namespace Docs.Api.Controllers
         public HttpResponseMessage GetUnits(
             string term = null,
             int? id = null,
+            string ids = null,
             string va = null
             )
         {
@@ -403,6 +405,23 @@ namespace Docs.Api.Controllers
                     .FirstOrDefault();
 
                 return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, singleValue);
+            }
+
+            if (!string.IsNullOrEmpty(ids))
+            {
+                List<int> unitIds = Helper.GetIdListFromString(ids);
+                var selectedValue = query
+                    .Where(e => unitIds.Contains(e.UnitId))
+                    .Select(e => new
+                    {
+                        nomValueId = e.UnitId,
+                        name = e.Name,
+                        alias = e.Name,
+                        isActive = e.IsActive
+                    })
+                    .ToList();
+
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, selectedValue);
             }
 
             var arrayValue = query
@@ -499,6 +518,7 @@ namespace Docs.Api.Controllers
         public HttpResponseMessage GetCorrespondents(
             string term = null,
             int? id = null,
+            string ids = null,
             string va = null
             )
         {
@@ -528,6 +548,23 @@ namespace Docs.Api.Controllers
                     .FirstOrDefault();
 
                 return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, singleValue);
+            }
+
+            if (!string.IsNullOrEmpty(ids))
+            {
+                List<int> corrIds = Helper.GetIdListFromString(ids);
+                var selectedValue = query
+                    .Where(e => corrIds.Contains(e.CorrespondentId))
+                    .Select(e => new
+                    {
+                        nomValueId = e.CorrespondentId,
+                        name = e.DisplayName,
+                        alias = e.Alias,
+                        isActive = e.IsActive
+                    })
+                    .ToList();
+
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, selectedValue);
             }
 
             var arrayValue = query

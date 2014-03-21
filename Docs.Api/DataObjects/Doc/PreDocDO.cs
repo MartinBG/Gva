@@ -12,7 +12,7 @@ namespace Docs.Api.DataObjects
         public PreDocDO()
         {
             this.DocNumbers = 1;
-            //this.Correspondents = new List<int>();
+            this.Correspondents = new List<int>();
         }
 
         public PreDocDO(Doc doc)
@@ -37,8 +37,7 @@ namespace Docs.Api.DataObjects
 
                 if (doc.DocCorrespondents != null && doc.DocCorrespondents.Any())
                 {
-                    //?
-                    this.Correspondents = doc.DocCorrespondents.First().CorrespondentId;
+                    this.Correspondents = doc.DocCorrespondents.Select(e => e.CorrespondentId).ToList();
                 }
             }
         }
@@ -52,9 +51,7 @@ namespace Docs.Api.DataObjects
         public Nullable<int> DocTypeId { get; set; }
         public string DocSubject { get; set; }
 
-        public Nullable<int> Correspondents { get; set; }
-        //?
-        //public List<int> Correspondents { get; set; }
+        public List<int> Correspondents { get; set; }
 
         public bool Register { get; set; }
         public int DocNumbers { get; set; }

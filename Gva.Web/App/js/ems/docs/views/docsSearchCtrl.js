@@ -24,13 +24,17 @@
       docStatusId: null,
       corrs: null,
       units: null,
-      docIds: null,
+      ds: null,
       hasLot: null
     };
 
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
+        if (param === 'corrs' || param === 'units') {
+          $scope.filters[param] = value.split(',');
+        } else {
+          $scope.filters[param] = value;
+        }
       }
     });
 
@@ -45,7 +49,7 @@
         docStatusId: $scope.filters.docStatusId,
         corrs: $scope.filters.corrs,
         units: $scope.filters.units,
-        docIds: $scope.filters.docIds,
+        ds: undefined,
         hasLot: $scope.filters.hasLot
       });
     };

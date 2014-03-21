@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocFilesCtrl(
+  function DocFilesEditCtrl(
     $scope
   ) {
 
@@ -78,9 +78,9 @@
     };
   }
 
-  DocFilesCtrl.$inject = [
+  DocFilesEditCtrl.$inject = [
     '$scope'
   ];
 
-  angular.module('ems').controller('DocFilesCtrl', DocFilesCtrl);
+  angular.module('ems').controller('DocFilesEditCtrl', DocFilesEditCtrl);
 }(angular));

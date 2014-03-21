@@ -9,7 +9,7 @@
     doc
   ) {
     $scope.docId = doc.docId;
-    $scope.docRelations = _.map(doc.docRelations, function (docRelation) {
+    $scope.docRelations = _.map(_.cloneDeep(doc.docRelations), function (docRelation) {
       docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
       docRelation.docDescriptionHtml = $sce.trustAsHtml(docRelation.docDescriptionHtml);
 
@@ -17,7 +17,7 @@
     });
 
     $scope.viewDoc = function (docId) {
-      return $state.go('root.docs.edit.view', { docId: docId });
+      return $state.go('root.docs.edit.view', { id: docId });
     };
 
     $scope.viewApplication = function (applicationId) {

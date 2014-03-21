@@ -62,7 +62,7 @@ namespace Docs.Api.Repositories.DocRepository
                 throw new Exception(string.Format("DocRelation is missing for doc ID = {0}", id));
             }
 
-            Tuple<string, object>[] keyValues = new Tuple<string, object>[] { new Tuple<string, object>("RootDocId", id) };
+            Tuple<string, object>[] keyValues = new Tuple<string, object>[] { new Tuple<string, object>("RootDocId", currentRelation.RootDocId) };
 
             return this.FindInStore<DocRelation>(keyValues, includes);
         }
@@ -448,12 +448,10 @@ namespace Docs.Api.Repositories.DocRepository
         {
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
 
-            DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
             DocStatus docStatusDraft = docStatuses.FirstOrDefault(e => e.Alias == "Draft");
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusFinished.DocStatusId
-                && e.DocStatusId != docStatusCanceled.DocStatusId
+            predicate = predicate.And(e => e.DocStatusId != docStatusCanceled.DocStatusId
                 && e.DocStatusId != docStatusDraft.DocStatusId)
                 .And(e => e.DocWorkflows.Any(dw => dw.ToUnitId.HasValue && dw.ToUnitId == unitUser.UnitId));
 
@@ -499,14 +497,12 @@ namespace Docs.Api.Repositories.DocRepository
         {
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
 
-            DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
             DocStatus docStatusDraft = docStatuses.FirstOrDefault(e => e.Alias == "Draft");
 
             List<int> docUnitRoleIds = docUnitRoles.Select(e => e.DocUnitRoleId).ToList();
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusFinished.DocStatusId
-                && e.DocStatusId != docStatusCanceled.DocStatusId
+            predicate = predicate.And(e => e.DocStatusId != docStatusCanceled.DocStatusId
                 && e.DocStatusId != docStatusDraft.DocStatusId)
                 .And(e => e.DocUnits.Any(du => du.UnitId == unitUser.UnitId && docUnitRoleIds.Contains(du.DocUnitRoleId)));
 

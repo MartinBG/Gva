@@ -201,9 +201,12 @@
 
         function stateMatch(tabStateParams) {
           return _.pairs(tabStateParams).reduce(function (stateMatching, kvp) {
-            return stateMatching &&
-              $stateParams.hasOwnProperty(kvp[0]) &&
-              $stateParams[kvp[0]] === kvp[1];
+            var param = kvp[0],
+                value = kvp[1],
+                paramUndefined = !value && !$stateParams[param],
+                paramPresent = $stateParams.hasOwnProperty(param) &&
+                  $stateParams[param] === value;
+            return stateMatching && (paramUndefined || paramPresent);
           }, true);
         }
 

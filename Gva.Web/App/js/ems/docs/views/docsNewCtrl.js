@@ -57,8 +57,8 @@
     };
 
     $scope.cancel = function () {
-      if (!!$scope.parentDoc) {
-        return $state.go('root.docs.edit.view', { docId: $stateParams.parentDocId });
+      if (!!$scope.docModel.parentDoc) {
+        return $state.go('root.docs.edit.view', { id: $stateParams.parentDocId });
       }
       else {
         return $state.go('root.docs.search');

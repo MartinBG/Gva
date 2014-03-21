@@ -13,6 +13,7 @@ namespace Docs.Api.DataObjects
         {
             this.PrivateDocFiles = new List<DocFileDO>();
             this.PublicDocFiles = new List<DocFileDO>();
+            this.DocFiles = new List<DocFileDO>();
             this.DocRelations = new List<DocRelationDO>();
             this.DocClassifications = new List<DocClassificationDO>();
             //this.DocUnits = new List<DocUnitDO>();
@@ -177,8 +178,11 @@ namespace Docs.Api.DataObjects
         public string DocCasePartTypeAlias { get; set; }
         public string DocCasePartTypeName { get; set; }
 
+        //for presentation
         public List<DocFileDO> PrivateDocFiles { get; set; }
         public List<DocFileDO> PublicDocFiles { get; set; }
+        //for edit
+        public List<DocFileDO> DocFiles { get; set; }
 
         public List<DocRelationDO> DocRelations { get; set; }
         public List<DocClassificationDO> DocClassifications { get; set; }

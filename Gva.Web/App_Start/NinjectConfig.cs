@@ -14,11 +14,11 @@ namespace Gva.Web.App_Start
         {
             kernel.Bind<HttpContextBase>().ToMethod(ctx => new HttpContextWrapper(HttpContext.Current)).InTransientScope();
 
-            kernel.Load(new CommonModule());
-            kernel.Load(new CommonApiModule());
             kernel.Load(new DocsApiModule());
             kernel.Load(new GvaApiModule());
             kernel.Load(new RegsApiModule());
+            kernel.Load(new CommonApiModule());
+            kernel.Load(new CommonModule());
         }
     }
 }

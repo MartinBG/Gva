@@ -183,10 +183,11 @@
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\ems\docs\forms\docNew\docNewCommon.html" />
     <Content Include="App\js\ems\docs\forms\docNew\docNewCommonCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesView.html" />
     <Content Include="App\js\ems\docs\forms\docView\docClassification.html" />
     <Content Include="App\js\ems\docs\forms\docView\docClassificationCtrl.js" />
-    <Content Include="App\js\ems\docs\forms\docView\docFiles.html" />
-    <Content Include="App\js\ems\docs\forms\docView\docFilesCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesEdit.html" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesEditCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="App\js\ems\docs\forms\docView\docIncomingCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docInternal.html" />
