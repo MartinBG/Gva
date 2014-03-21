@@ -6,9 +6,9 @@
   describe('Person inventory search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/inventory/inventoryPO'),
-        SearchPage = require('../../pageObjects/documentEducations/searchEducationPO'),
+        EducationPage = require('../../pageObjects/documentEducations/educationPO'),
         inventoryPage,
-        searchDocEduPage;
+        editDocEduPage;
 
     beforeEach(function () {
       ptor.get('#/persons/1/inventory');
@@ -58,8 +58,8 @@
     it('should go to edit page', function () {
       inventoryPage.datatable.getRowButtons(1).then(function (buttons) {
         buttons[0].click();
-        searchDocEduPage = new SearchPage(ptor);
-        expect(searchDocEduPage.breadcrumb.get()).toEqual('Образования');
+        editDocEduPage = new EducationPage(ptor);
+        expect(editDocEduPage.breadcrumb.get()).toEqual('Редакция на образование');
       });
     });
   });

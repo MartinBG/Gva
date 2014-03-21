@@ -6,7 +6,7 @@
   describe('Person document training search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentTrainings/searchTrainingPO'),
-        EditPage = require('../../pageObjects/documentTrainings/trainingPO'),
+        EditPage = require('../../pageObjects/documentTrainings/editTrainingPO'),
         personDocumentTrainingsPage,
         editTrainingPage;
 

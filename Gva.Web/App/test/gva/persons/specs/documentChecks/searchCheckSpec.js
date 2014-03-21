@@ -5,7 +5,7 @@
   describe('Person document check search page', function () {
     var ptor = protractor.getInstance(),
         Page = require('../../pageObjects/documentChecks/searchCheckPO'),
-        EditPage = require('../../pageObjects/documentChecks/checkPO'),
+        EditPage = require('../../pageObjects/documentChecks/editCheckPO'),
         personChecksPage,
         editCheckPage;
 

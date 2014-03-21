@@ -57,128 +57,84 @@
         {
           partIndex: 8,
           part: personDocumentEmployments.person1Employment,
-          file: {
-            key: '3a-1-ab',
-            name: 'test.pdf',
-            relativePath: ''
-          },
-          applications: []
+          files: []
         }
       ],
       personDocumentEducations: [
         {
           partIndex: 9,
           part: personDocumentEducations.person1Education,
-          file: {
-            key: '342-42-ab',
-            name: 'testName.pdf',
-            relativePath: '../folder1/folder2/'
-          },
-          applications: []
+          files: []
         }
       ],
       personDocumentIds: [
         {
           partIndex: 10,
           part: personDocumentIds.person1Id,
-          file: {
-            key: '342-43-ab',
-            name: 'testName.pdf',
-            relativePath: '../folder1/folder2/'
-          },
-          applications: [
-            {
-              applicationId: 1,
-              applicationName: 'application1'
-            },
-            {
-              applicationId: 2,
-              applicationName: 'application2'
-            }
-          ]
+          files: []
         },
         {
           partIndex: 11,
           part: personDocumentIds.person1Id,
-          applications: [
-            {
-              applicationId: 1,
-              applicationName: 'Издаване на свидетелство за правоспособност на авиационен персонал'
-            }
-          ]
+          files: []
         },
         {
           partIndex: 12,
           part: personDocumentIds.person1Id,
-          applications: [
-            {
-              applicationId: 1,
-              applicationName: 'Издаване на свидетелство за правоспособност на авиационен персонал'
-            }
-          ]
+          files: []
         }
       ],
       personDocumentOthers: [
         {
           partIndex: 13,
           part: personDocumentOthers.person1Doc1,
-          applications: []
+          files: []
         }
       ],
       personDocumentTrainings: [
         {
           partIndex: 14,
           part: personDocumentTrainings.person1Training1,
-          applications: [],
-          file: {
-            key: '311-93-wb',
-            name: 'test1.pdf',
-            relativePath: '../folder1/folder3/'
-          }
+          files: []
         },
         {
           partIndex: 15,
           part: personDocumentTrainings.person1Training2,
-          applications: []
+          files: []
         },
         {
           partIndex: 16,
           part: personDocumentTrainings.person1Training3,
-          applications: [],
-          file: {
-            key: '311-93-wb',
-            name: 'test3.pdf',
-            relativePath: '../folder1/folder3/'
-          }
+          files: []
         },
         {
           partIndex: 17,
           part: personDocumentTrainings.person1Training4,
-          applications: []
+          files: []
         }
       ],
       personDocumentMedicals: [
         {
           partIndex: 18,
           part: personDocumentMedicals.person1Medical1,
-          applications: []
+          files: []
         },
         {
           partIndex: 19,
           part: personDocumentMedicals.person1Medical2,
-          applications: []
+          files: []
         }
       ],
       personDocumentChecks: [
         {
           partIndex: 20,
           part: personDocumentChecks.person1Check1,
-          applications: []
+          files: []
         },
         {
           partIndex: 21,
           part: personDocumentChecks.person1Check2,
-          applications: []
+          files: []
         }
       ],
       personFlyingExperiences: [
@@ -229,7 +185,7 @@
         {
           partIndex: 2,
           part: personDocumentEmployments.person2Employment,
-          applications: []
+          files: []
         }
       ]
     },
@@ -244,7 +200,7 @@
         {
           partIndex: 2,
           part: personDocumentEmployments.person3Employment,
-          applications: []
+          files: []
         }
       ]
     }
