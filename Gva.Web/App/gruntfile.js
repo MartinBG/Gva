@@ -42,6 +42,7 @@ module.exports = function (grunt) {
         'schema/aircrafts/aircraft-data.sample.js',
         'schema/aircrafts/aircraft-dataapex.sample.js',
         'schema/aircrafts/aircraft-cert-registrations.sample.js',
+        'schema/aircrafts/aircraft-cert-registrationsfm.sample.js',
         'schema/aircrafts/aircraft-cert-smods.sample.js',
         'schema/aircrafts/aircraft-cert-marks.sample.js',
         'schema/aircrafts/aircraft-cert-airworthinesses.sample.js',

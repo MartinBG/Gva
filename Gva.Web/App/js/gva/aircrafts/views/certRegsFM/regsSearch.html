@@ -1,0 +1,25 @@
+﻿<sc-button name="createBtn" btn-click="newCertReg()" text="aircrafts.regFMSearch.newReg" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="regs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertReg(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertReg(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.isActive.name" title="aircrafts.regFMSearch.isActive">
+  </sc-column>
+  <sc-column data="part.certNumber" title="aircrafts.regFMSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.certDate" title="aircrafts.regFMSearch.certDate" type="date">
+  </sc-column>
+  <sc-column data="part.regMark" title="aircrafts.regFMSearch.regMark">
+  </sc-column>
+  <sc-column data="part.incomingDocNumber" title="aircrafts.regFMSearch.incomingDocNumber">
+  </sc-column>
+  <sc-column data="part.incomingDocDate" title="aircrafts.regFMSearch.incomingDocDate" type="date">
+  </sc-column>
+  <sc-column data="part.inspector.name" title="aircrafts.regFMSearch.inspector" >
+  </sc-column>
+  <sc-column data="part.owner.name" title="aircrafts.regFMSearch.owner">
+  </sc-column>
+  <sc-column data="part.operator.name" title="aircrafts.regFMSearch.operator">
+  </sc-column>
+</sc-datatable>

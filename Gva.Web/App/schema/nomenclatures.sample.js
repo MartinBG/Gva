@@ -207,7 +207,10 @@
     aircraftPartProducers: require('./aircraftPartProducer'),
     aircraftPartStatuses: require('./aircraftPartStatus'),
 
-    //aircraftRelations: require('/aircraftRelation'),
+    aircraftLimitations: require('./aircraftLimitation'),
+    aircraftRegStatuses: require('./aircraftRegStatus'),
+
+    //aircraftRelations: require('./aircraftRelation'),
 
     aircraftRelations: [
       {
