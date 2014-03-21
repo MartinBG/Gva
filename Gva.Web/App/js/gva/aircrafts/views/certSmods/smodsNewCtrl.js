@@ -14,7 +14,7 @@
     $scope.smod = aircraftCertSmod;
 
     $scope.save = function () {
-      $scope.aircraftCertSmodForm.$validate()
+      return $scope.aircraftCertSmodForm.$validate()
          .then(function () {
             if ($scope.aircraftCertSmodForm.$valid) {
               return AircraftCertSmod

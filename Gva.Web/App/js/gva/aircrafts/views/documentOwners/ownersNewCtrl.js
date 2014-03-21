@@ -10,7 +10,7 @@
     aircraftDocumentOwner
   ) {
     $scope.save = function () {
-      $scope.aircraftDocumentOwnerForm.$validate()
+      return $scope.aircraftDocumentOwnerForm.$validate()
         .then(function () {
           if ($scope.aircraftDocumentOwnerForm.$valid) {
             return AircraftDocumentOwner

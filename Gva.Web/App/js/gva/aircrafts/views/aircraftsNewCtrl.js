@@ -6,7 +6,7 @@
     $scope.aircraft = aircraft;
 
     $scope.save = function () {
-      $scope.newAircraftForm.$validate()
+      return $scope.newAircraftForm.$validate()
       .then(function () {
         if ($scope.newAircraftForm.$valid) {
           return Aircraft.save($scope.aircraft).$promise

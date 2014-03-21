@@ -13,7 +13,7 @@
     $scope.aircraftPart = aircraftPart;
 
     $scope.save = function () {
-      $scope.aircraftPartForm.$validate()
+      return $scope.aircraftPartForm.$validate()
         .then(function () {
           if ($scope.aircraftPartForm.$valid) {
             return AircraftPart

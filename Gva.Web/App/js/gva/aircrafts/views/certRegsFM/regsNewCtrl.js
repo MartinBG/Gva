@@ -14,7 +14,7 @@
     $scope.reg = aircraftCertRegistration;
 
     $scope.save = function () {
-      $scope.aircraftCertRegForm.$validate()
+      return $scope.aircraftCertRegForm.$validate()
          .then(function () {
             if ($scope.aircraftCertRegForm.$valid) {
               return AircraftCertRegistrationFM

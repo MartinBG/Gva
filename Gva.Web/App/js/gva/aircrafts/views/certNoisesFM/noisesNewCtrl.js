@@ -14,7 +14,7 @@
     $scope.noise = aircraftCertNoise;
 
     $scope.save = function () {
-      $scope.aircraftCertNoiseForm.$validate()
+      return $scope.aircraftCertNoiseForm.$validate()
          .then(function () {
             if ($scope.aircraftCertNoiseForm.$valid) {
               return AircraftCertNoiseFM

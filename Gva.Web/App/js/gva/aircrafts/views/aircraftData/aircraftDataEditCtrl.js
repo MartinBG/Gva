@@ -12,7 +12,7 @@
     $scope.aircraftData = aircraftData;
 
     $scope.save = function () {
-      $scope.aircraftDataForm.$validate()
+      return $scope.aircraftDataForm.$validate()
       .then(function () {
         if ($scope.aircraftDataForm.$valid) {
           return AircraftData
