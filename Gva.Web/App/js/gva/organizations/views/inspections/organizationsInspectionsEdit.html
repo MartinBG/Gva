@@ -1,0 +1,11 @@
+﻿<ng-form name="editInspectionForm">
+
+  <gva-common-inspection name="organizationInspectionForm" ng-model="organizationInspection.part"></gva-common-inspection>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="organizations.editInspection.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!organizationInspectionForm.$dirty"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editInspection.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

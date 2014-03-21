@@ -1,0 +1,58 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="organizations.staffManagementDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3" sc-has-error="auditPartRequirement">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.auditPartRequirement"></label>
+          <sc-validation-error field-name="auditPartRequirement" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.auditPartRequirement" name="auditPartRequirement" alias="'auditPartRequirements'" ng-required="true"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.planYear"></label>
+          <sc-text ng-model="model.planYear" name="planYear"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.planMonth"></label>
+          <sc-text ng-model="model.planMonth" name="planMonth"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="position">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.position"></label>
+          <sc-validation-error field-name="position" validations="{required: null}"></sc-validation-error>
+          <sc-text ng-model="model.position" name="position" ng-required="true"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="person">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.person"></label>
+          <sc-validation-error field-name="person" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.person" name="person" alias="'persons'" ng-required="true"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2 col-md-2" sc-has-error="number">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.number"></label>
+          <sc-validation-error field-name="number" validations="{required: null}"></sc-validation-error>
+          <sc-int ng-model="model.number" name="number" ng-required="true"></sc-int>
+        </div>
+        <div class="form-group col-sm-2 col-md-2" sc-has-error="valid">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.valid"></label>
+          <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.testDate"></label>
+          <sc-date ng-model="model.testDate"></sc-date>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.testScore"></label>
+          <sc-nomenclature ng-model="model.testScore" alias="'boolean'"></sc-nomenclature>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

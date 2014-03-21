@@ -58,7 +58,19 @@ module.exports = function (grunt) {
         'schema/aircrafts/aircraft-document-occurrences.sample.js',
         'schema/aircrafts/aircraft-maintenance.sample.js',
         'schema/aircrafts/aircraft-document-owner.sample.js',
-        'schema/aircrafts/aircraft-parts.sample.js'
+        'schema/aircrafts/aircraft-parts.sample.js',
+        'schema/organizations/organization-data.sample.js',
+        'schema/organizations/organization-address.sample.js',
+        'schema/organizations/organization-cert-airportoperator.sample.js',
+        'schema/organizations/organization-auditplan.sample.js',
+        'schema/organizations/organization-staff-managment.sample.js',
+        'schema/organizations/organization-document-other.sample.js',
+        'schema/organizations/organization-cert-groundserviceoperator.sample.js',
+        'schema/organizations/organization-cert-groundserviceoperatorssnooperational.sample.js',
+        'schema/organizations/organization-inspections.sample.js',
+        'schema/organizations/organization-approval.sample.js',
+        'schema/organizations/organization-amendment.sample.js',
+        'schema/organizations//organization-staff-examiner.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
@@ -119,9 +131,11 @@ module.exports = function (grunt) {
         'test/common/mocks/*.js',
         'test/ems/corrs/mocks/*.js',
         'test/ems/docs/mocks/*.js',
+        'test/gva/common/mocks/*.js',
         'test/gva/applications/mocks/*.js',
         'test/gva/persons/mocks/*.js',
         'test/gva/aircrafts/mocks/*.js',
+        'test/gva/organizations/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js',
         'test/gva/directives/testbeds/states.js',

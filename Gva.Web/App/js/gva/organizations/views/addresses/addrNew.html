@@ -1,0 +1,11 @@
+﻿<ng-form name="newAddressForm">
+
+  <gva-organization-address name="organizationAddressForm" ng-model="organizationAddress.part"></gva-organization-address>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
+      <sc-button name="saveBtn" btn-click="save()" text="organizations.newAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newAddressForm.$pristine"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    </div>
+  </div>
+</ng-form>

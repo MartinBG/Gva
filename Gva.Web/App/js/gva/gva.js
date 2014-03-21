@@ -171,16 +171,6 @@
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOther.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftInspection',
-      templateUrl: 'gva/aircrafts/forms/aircraftInspection.html',
-      controller: 'AircraftInspectionCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAircraftAuditDetail',
-      templateUrl: 'gva/aircrafts/forms/aircraftAuditDetail.html',
-      controller: 'AircraftAuditDetailCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOccurrence',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOccurrence.html'
     });
@@ -195,6 +185,64 @@
     scaffoldingProvider.form({
       name: 'gvaAircraftPart',
       templateUrl: 'gva/aircrafts/forms/aircraftPart.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationData',
+      templateUrl: 'gva/organizations/forms/organizationData.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAddress',
+      templateUrl: 'gva/organizations/forms/organizationAddress.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationCertAirportOperator',
+      templateUrl: 'gva/organizations/forms/organizationCertAirportOperator.html',
+      controller: 'OrganizationCertAirportOperatorCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationCertOperator',
+      templateUrl: 'gva/organizations/forms/organizationCertOperator.html',
+      controller: 'OrganizationCertOperatorCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAuditplan',
+      templateUrl: 'gva/organizations/forms/organizationAuditplan.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationStaffManagement',
+      templateUrl: 'gva/organizations/forms/organizationStaffManagement.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationStaffExaminer',
+      templateUrl: 'gva/organizations/forms/organizationStaffExaminer.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationDocumentOther',
+      templateUrl: 'gva/organizations/forms/organizationDocumentOther.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationEquipment',
+      templateUrl: 'gva/organizations/forms/organizationEquipment.html',
+      controller: 'OrganizationEquipmentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationApproval',
+      templateUrl: 'gva/organizations/forms/organizationApproval.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAmendment',
+      templateUrl: 'gva/organizations/forms/organizationAmendment.html',
+      controller: 'OrganizationAmendmentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonInspection',
+      templateUrl: 'gva/common/forms/commonInspection.html',
+      controller: 'CommonInspectionCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonAuditDetail',
+      templateUrl: 'gva/common/forms/commonAuditDetail.html',
+      controller: 'CommonAuditDetailCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -243,9 +291,9 @@
       .state(['root.persons.view.checks'                                , '/checks'                                                                                                                                                                 ])
       .state(['root.persons.view.checks.search'                         , ''                                           , ['@root.persons.view', 'gva/persons/views/documentChecks/checksSearch.html'               , 'DocumentChecksSearchCtrl'     ]])
       .state(['root.persons.view.checks.new'                            , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentChecks/checksNew.html'                  , 'DocumentChecksNewCtrl'        ]])
-      .state(['root.persons.view.checks.new.choosePublisher'            , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.checks.new.choosePublisher'            , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.checks.edit'                           , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentChecks/checksEdit.html'                 , 'DocumentChecksEditCtrl'       ]])
-      .state(['root.persons.view.checks.edit.choosePublisher'           , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.checks.edit.choosePublisher'           , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.employments'                           , '/employments'                                                                                                                                                            ])
       .state(['root.persons.view.employments.search'                    , ''                                           , ['@root.persons.view', 'gva/persons/views/documentEmployments/emplsSearch.html'           , 'DocumentEmploymentsSearchCtrl']])
       .state(['root.persons.view.employments.new'                       , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentEmployments/emplsNew.html'              , 'DocumentEmploymentsNewCtrl'   ]])
@@ -257,9 +305,9 @@
       .state(['root.persons.view.documentTrainings'                     , '/documentTrainings'                                                                                                                                                      ])
       .state(['root.persons.view.documentTrainings.search'              , ''                                           , ['@root.persons.view', 'gva/persons/views/documentTrainings/trainingsSearch.html'         , 'DocumentTrainingsSearchCtrl'  ]])
       .state(['root.persons.view.documentTrainings.new'                 , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentTrainings/trainingsNew.html'            , 'DocumentTrainingsNewCtrl'     ]])
-      .state(['root.persons.view.documentTrainings.new.choosePublisher' , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.documentTrainings.new.choosePublisher' , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.documentTrainings.edit'                , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentTrainings/trainingsEdit.html'           , 'DocumentTrainingsEditCtrl'    ]])
-      .state(['root.persons.view.documentTrainings.edit.choosePublisher', '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.documentTrainings.edit.choosePublisher', '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.flyingExperiences'                     , '/flyingExperiences'                                                                                                                                                      ])
       .state(['root.persons.view.flyingExperiences.search'              , ''                                           , ['@root.persons.view', 'gva/persons/views/flyingExperiences/flyExpsSearch.html'           , 'FlyingExperiencesSearchCtrl'  ]])
       .state(['root.persons.view.flyingExperiences.new'                 , '/new'                                       , ['@root.persons.view', 'gva/persons/views/flyingExperiences/flyExpsNew.html'              , 'FlyingExperiencesNewCtrl'     ]])
@@ -277,7 +325,7 @@
       .state(['root.persons.view.documentOthers.new'                    , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentOthers/othersNew.html'                  , 'DocumentOthersNewCtrl'        ]])
       .state(['root.persons.view.documentOthers.new.choosePublisher'    , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.documentOthers.edit'                   , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentOthers/othersEdit.html'                 , 'DocumentOthersEditCtrl'       ]])
-      .state(['root.persons.view.documentOthers.edit.choosePublisher'   , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/persons/views/publishers/choosePublisher.html'                , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.documentOthers.edit.choosePublisher'   , '/choosepublisher?text&publisherTypeAlias'   , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.documentApplications'                  , '/documentApplications'                                                                                                                                                    ])
       .state(['root.persons.view.documentApplications.search'           , ''                                           , ['@root.persons.view', 'gva/persons/views/documentApplications/docApplicationsSearch.html', 'DocApplicationsSearchCtrl'    ]])
       .state(['root.persons.view.documentApplications.new'              , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentApplications/docApplicationsNew.html'   , 'DocApplicationsNewCtrl'       ]])
@@ -364,5 +412,58 @@
       .state(['root.aircrafts.view.parts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsSearch.html'                          , 'PartsSearchCtrl'                ]])
       .state(['root.aircrafts.view.parts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsNew.html'                             , 'PartsNewCtrl'                   ]])
       .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                            , 'PartsEditCtrl'                  ]]);
+    
+  }]).config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state(['root.organizations'                                                     , '/organizations'                                                                                                                                                                                                                                        ])
+      .state(['root.organizations.search'                                              , ''                                           , ['@root'                   , 'gva/organizations/views/organizationsSearch.html'                                                                    , 'OrganizationsSearchCtrl'                           ]])
+      .state(['root.organizations.new'                                                 , '/new'                                       , ['@root'                   , 'gva/organizations/views/organizationsNew.html'                                                                       , 'OrganizationsNewCtrl'                              ]])
+      .state(['root.organizations.view'                                                , '/:id'                                       , ['@root'                   , 'gva/organizations/views/organizationsView.html'                                                                      , 'OrganizationsViewCtrl'                             ]])
+      .state(['root.organizations.view.edit'                                           , '/organizationData'                          , ['@root'                   , 'gva/organizations/views/organizationData/organizationDataEdit.html'                                                  , 'OrganizationDataEditCtrl'                          ]])
+      .state(['root.organizations.view.addresses'                                      , '/addresses'                                                                                                                                                                                                                                            ])
+      .state(['root.organizations.view.addresses.search'                               , ''                                           , ['@root.organizations.view', 'gva/organizations/views/addresses/addrSearch.html'                                                                   , 'OrganizationAddressesSearchCtrl'                   ]])
+      .state(['root.organizations.view.addresses.new'                                  , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/addresses/addrNew.html'                                                                      , 'OrganizationAddressesNewCtrl'                      ]])
+      .state(['root.organizations.view.addresses.edit'                                 , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/addresses/addrEdit.html'                                                                     , 'OrganizationAddressesEditCtrl'                     ]])
+      .state(['root.organizations.view.certAirportOperators'                           , '/certAirportOperators'                                                                                                                                                                                                                                 ])
+      .state(['root.organizations.view.certAirportOperators.search'                    , ''                                           , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsSearch.html'                                        , 'CertAirportOperatorsSearchCtrl'                    ]])
+      .state(['root.organizations.view.certAirportOperators.new'                       , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsNew.html'                                           , 'CertAirportOperatorsNewCtrl'                       ]])
+      .state(['root.organizations.view.certAirportOperators.edit'                      , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certAirportOperators/certAirportOperatorsEdit.html'                                          , 'CertAirportOperatorsEditCtrl'                      ]])
+      .state(['root.organizations.view.auditplans'                                     , '/auditplans'                                                                                                                                                                                                                                            ])
+      .state(['root.organizations.view.auditplans.search'                              , ''                                           , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansSearch.html'                                                            , 'AuditplansSearchCtrl'                              ]])
+      .state(['root.organizations.view.auditplans.new'                                 , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansNew.html'                                                               , 'AuditplansNewCtrl'                                 ]])
+      .state(['root.organizations.view.auditplans.edit'                                , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/auditplans/auditplansEdit.html'                                                              , 'AuditplansEditCtrl'                                ]])
+      .state(['root.organizations.view.staffManagement'                                , '/staffManagement'                                                                                                                                                                                                                                       ])
+      .state(['root.organizations.view.staffManagement.search'                         , ''                                           , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementSearch.html'                                                  , 'StaffManagementSearchCtrl'                         ]])
+      .state(['root.organizations.view.staffManagement.new'                            , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementNew.html'                                                     , 'StaffManagementNewCtrl'                            ]])
+      .state(['root.organizations.view.staffManagement.edit'                           , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffManagement/staffManagementEdit.html'                                                    , 'StaffManagementEditCtrl'                           ]])
+      .state(['root.organizations.view.documentOthers'                                 , '/documentOthers'                                                                                                                                                                                                                                        ])
+      .state(['root.organizations.view.documentOthers.search'                          , ''                                           , ['@root.organizations.view', 'gva/organizations/views/documentOthers/othersSearch.html'                                                            , 'OrganizationDocOthersSearchCtrl'                   ]])
+      .state(['root.organizations.view.documentOthers.new'                             , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/documentOthers/othersNew.html'                                                               , 'OrganizationDocOthersNewCtrl'                      ]])
+      .state(['root.organizations.view.documentOthers.new.choosePublisher'             , '/choosepublisher?text&publisherTypeAlias'   , ['@root.organizations.view', 'gva/common/views/publishers/choosePublisher.html'                                                                    , 'ChoosePublisherCtrl'                               ]])
+      .state(['root.organizations.view.documentOthers.edit'                            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/documentOthers/othersEdit.html'                                                              , 'OrganizationDocOthersEditCtrl'                     ]])
+      .state(['root.organizations.view.documentOthers.edit.choosePublisher'            , '/choosepublisher?text&publisherTypeAlias'   , ['@root.organizations.view', 'gva/common/views/publishers/choosePublisher.html'                                                                    , 'ChoosePublisherCtrl'                               ]])
+      .state(['root.organizations.view.certGroundServiceOperators'                     , '/certGroundServiceOperators'                                                                                                                                                                                                                            ])
+      .state(['root.organizations.view.certGroundServiceOperators.search'              , ''                                           , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperators/certGroundServiceOperatorsSearch.html'                            , 'CertGroundServiceOperatorsSearchCtrl'              ]])
+      .state(['root.organizations.view.certGroundServiceOperators.new'                 , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperators/certGroundServiceOperatorsNew.html'                               , 'CertGroundServiceOperatorsNewCtrl'                 ]])
+      .state(['root.organizations.view.certGroundServiceOperators.edit'                , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperators/certGroundServiceOperatorsEdit.html'                              , 'CertGroundServiceOperatorsEditCtrl'                ]])
+      .state(['root.organizations.view.groundServiceOperatorsSnoOperational'           , '/groundServiceOperatorsSnoOperational'                                                                                                                                                                                                                  ])
+      .state(['root.organizations.view.groundServiceOperatorsSnoOperational.search'    , ''                                           , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalSearch.html', 'CertGroundServiceOperatorsSnoOperationalSearchCtrl']])
+      .state(['root.organizations.view.groundServiceOperatorsSnoOperational.new'       , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalNew.html'   , 'CertGroundServiceOperatorsSnoOperationalNewCtrl'   ]])
+      .state(['root.organizations.view.groundServiceOperatorsSnoOperational.edit'      , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/certGroundServiceOperatorsSnoOperational/certGroundServiceOperatorsSnoOperationalEdit.html'  , 'CertGroundServiceOperatorsSnoOperationalEditCtrl'  ]])
+      .state(['root.organizations.view.inspections'                                    , '/inspections'                                                                                                                                                                                                                                           ])
+      .state(['root.organizations.view.inspections.search'                             , ''                                           , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsSearch.html'                                             , 'OrganizationsInspectionsSearchCtrl'                ]])
+      .state(['root.organizations.view.inspections.new'                                , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsNew.html'                                                , 'OrganizationsInspectionsNewCtrl'                   ]])
+      .state(['root.organizations.view.inspections.edit'                               , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]])
+      .state(['root.organizations.view.approvals'                                      , '/approvals'                                                                                                                                                                                                                                             ])
+      .state(['root.organizations.view.approvals.search'                               , ''                                           , ['@root.organizations.view', 'gva/organizations/views/approvals/approvalsSearch.html'                                                              , 'ApprovalsSearchCtrl'                               ]])
+      .state(['root.organizations.view.approvals.new'                                  , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/approvals/approvalsNew.html'                                                                 , 'ApprovalsNewCtrl'                                  ]])
+      .state(['root.organizations.view.amendments'                                     , '/:ind/amendments'                                                                                                                                                                                                                                       ])
+      .state(['root.organizations.view.amendments.search'                              , ''                                           , ['@root.organizations.view', 'gva/organizations/views/approvals/amendments/amendmentsSearch.html'                                                  , 'AmendmentsSearchCtrl'                              ]])
+      .state(['root.organizations.view.amendments.new'                                 , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/approvals/amendments/amendmentsNew.html'                                                     , 'AmendmentsNewCtrl'                                 ]])
+      .state(['root.organizations.view.amendments.edit'                                , '/:childInd'                                 , ['@root.organizations.view', 'gva/organizations/views/approvals/amendments/amendmentsEdit.html'                                                    , 'AmendmentsEditCtrl'                                ]])
+      .state(['root.organizations.view.staffExaminers'                                 , '/staffExaminers'                                                                                                                                                                                                                                        ])
+      .state(['root.organizations.view.staffExaminers.search'                          , ''                                           , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
+      .state(['root.organizations.view.staffExaminers.new'                             , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])
+      .state(['root.organizations.view.staffExaminers.edit'                            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]]);
   }]);
 }(angular));

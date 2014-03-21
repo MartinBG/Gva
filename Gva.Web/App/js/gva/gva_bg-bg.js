@@ -3,6 +3,62 @@
   'use strict';
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
+      common: {
+        publishers: {
+          text: 'Текст',
+          publisherType: 'Тип',
+          name: 'Наименование',
+          back: 'Назад',
+          search: 'Търси',
+          select: 'Избор'
+        },
+        auditDetailDirective: {
+          auditDetailsTable: {
+            title: 'Главни обобщени констатации',
+            subject: 'Тема',
+            conclusion: 'Констатация',
+            disparity: 'Несъответствия',
+            code: 'Код'
+          },
+          disparitiesTable: {
+            subject: 'Тема',
+            disparitiesTitle: 'Несъответствия',
+            sortOrder: 'Пореден №',
+            refNumber: 'Референтен №',
+            description: 'Описание на несъответствие',
+            disparityLevel: 'Ниво',
+            removalDate: 'Дата за отстраняване',
+            rectifyAction: 'Внесени коригиращи действия',
+            closureDate: 'Дата на закриване',
+            closureDocument: '№ на документ за закриване',
+            noAvailableDisparities: 'Няма налични несъответствия'
+          },
+          insertAuditDetails: 'Въведи списъка за обобщени констатации'
+        },
+        inspectionDirective: {
+          organizationTitle: 'Одит',
+          aircraftTitle: 'Инспекция',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора е предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект',
+          inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
+          inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
+          auditAddress: 'Адрес на одитирания обект',
+          examinersTable: {
+            examinersTitle: 'Одитори',
+            examiner: 'Одитор',
+            sortOrder: 'Пореден №',
+            noAvailableExaminers: 'Няма налични одитори'
+          },
+          auditPart: 'Част'
+        }
+      },
       aircrafts: {
         search: {
           manSN: 'Сериен номер',
@@ -708,48 +764,6 @@
           manPlace: 'Място на производство',
           description: 'Характеристики'
         },
-        inspectionDirective: {
-          title: 'Инспекция',
-          documentNumber: '№ на документ',
-          auditState: 'Състояние',
-          auditReason: 'Причина',
-          auditType: 'Вид одит',
-          subject: 'Предмет на одит',
-          notification: 'Оператора е предварително уведомен',
-          startDate: 'Начална дата',
-          endDate: 'Крайна дата',
-          inspectionPlace: 'Адрес на одитирания обект',
-          inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
-          inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
-          auditAddress: 'Адрес на одитирания обект',
-          insertAuditDetails: 'Въведи списъка за обобщени констатации',
-          auditDetailsTable: {
-            title: 'Главни обобщени констатации',
-            subject: 'Тема',
-            conclusion: 'Констатация',
-            disparity: 'Несъответствия',
-            code: 'Код'
-          },
-          disparitiesTable: {
-            subject: 'Тема',
-            disparitiesTitle: 'Несъответствия',
-            sortOrder: 'Пореден №',
-            refNumber: 'Референтен №',
-            description: 'Описание на несъответствие',
-            disparityLevel: 'Ниво',
-            removalDate: 'Дата за отстраняване',
-            rectifyAction: 'Внесени коригиращи действия',
-            closureDate: 'Дата на закриване',
-            closureDocument: '№ на документ за закриване',
-            noAvailableDisparities: 'Няма налични несъответствия'
-          },
-          examinersTable: {
-            examinersTitle: 'Одитори',
-            examiner: 'Одитор',
-            sortOrder: 'Пореден №',
-            noAvailableExaminers: 'Няма налични одитори'
-          }
-        },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
           documentNumber: '№ на документ',
@@ -1366,14 +1380,6 @@
         ratingNew: {
           save: 'Запис',
           cancel: 'Отказ'
-        },
-        publishers: {
-          text: 'Текст',
-          publisherType: 'Тип',
-          name: 'Наименование',
-          back: 'Назад',
-          search: 'Търси',
-          select: 'Избор'
         }
       },
       applications: {
@@ -1479,6 +1485,413 @@
           status: 'Статус',
           lin: 'ЛИН',
           applicant: 'Заявител'
+        }
+      },
+      organizations: {
+        search: {
+          newOrganization: 'Нова организация',
+          search: 'Търси',
+          CAO: 'CAO',
+          valid: 'Валидност',
+          organizationType: 'Тип организация',
+          dateValidTo: 'Валидност до',
+          dateCAOValidTo: 'САО - дата на валидност'
+        },
+        viewOrganization: {
+          name: 'Наименование',
+          CAO: 'CAO',
+          uin: 'Булстат',
+          organizationType: 'Тип организация',
+          edit: 'Редакция'
+        },
+        newOrganization: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOrganization: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        newCertAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        certAirportOperatorSearch: {
+          newCertAirportOperator: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAddress: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        addressSearch: {
+          newAddress: 'Нов aдрес',
+          addressType: 'Тип',
+          valid: 'Валидно',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          addressAlt: ' Адрес на поддържащ език',
+          phone: 'Телефон(и) за връзка на този адрес',
+          fax: 'Факс',
+          postalCode: 'Пощенски код',
+          contactPerson: 'Лице за контакти',
+          email: 'E-мейл адрес'
+        },
+        auditplanSearch: {
+          newAuditplan: 'Нов план за одит',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец'
+        },
+        newAuditplan: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAuditplan: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        staffManagementSearch: {
+          newStaffManagement: 'Нов ръководен персонал',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец',
+          position: 'Предлагана длъжност',
+          person: 'Предложено лице',
+          testDate: 'Дата на полагане на писмен тест',
+          testScore: 'Оценка от писмен тест',
+          number: 'Заявление',
+          valid: 'Валиден'
+        },
+        newStaffManagement: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStaffManagement: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        staffExaminerSearch: {
+          newStaffExaminer: 'Нов проверяващи',
+          nomValueId: 'Идентификатор',
+          code: 'Код',
+          name: 'Наименование',
+          valid: 'Валиден',
+          person: 'Физическо лице',
+          content: {
+            stampNumber: '№ на печат',
+            organization: 'Организация',
+            permitedAW: 'Разрешена проверка на ЛГ',
+            permitedCheck: 'Разрешена проверка на лица'
+          }
+        },
+        newStaffExaminer: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStaffChecker: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        otherSearch: {
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          organizationOtherDocumentType: 'Тип документ',
+          organizationOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          newOther: 'Нов документ'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        certGroundServiceOperatorSnoOperationalSearch: {
+          newCertGroundServiceOperatorSnoOperational: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newCertGroundServiceOperatorsSnoOperational: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertGroundServiceOperatorsSnoOperational: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        certGroundServiceOperatorSearch: {
+          newCertGroundServiceOperator: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          date: 'Дата на издаване на продължение',
+          validToDateExt: 'Дата на изтичане на продължение',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newCertGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        inspectionSearch: {
+          newInspection: 'Нов одит',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект'
+        },
+        newInspection: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editInspection: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        amendmentSearch: {
+          newAmendment: 'Ново изменение',
+          organizationType: 'Тип одобрение',
+          documentNumber: 'Референтен № на описание',
+          documentDateIssue: 'Дата на издаване',
+          changeNum: 'Изменение',
+          back: 'Назад'
+        },
+        newAmendment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAmendment: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        approvalSearch: {
+          newApproval: 'Ново удостоверение',
+          organizationType: 'Тип одобрение',
+          documentNumber: ' Номер на одобрението',
+          documentNumberAmendment: 'Референтен № на описание',
+          documentFirstDateIssue: 'Дата на първо издаване',
+          documentDateIssueAmendment: 'Дата на изменение',
+          changeNumAmendment: 'Номер на изменение',
+          approvalState: 'Състояние'
+        },
+        newApproval: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        organizationOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          organizationOtherDocumentType: 'Тип документ',
+          organizationOtherDocumentRole: 'Роля',
+          valid: 'Действителен'
+        },
+        staffManagementDirective: {
+          title: 'Ръководен персонал',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец',
+          position: 'Предлагана длъжност',
+          person: 'Предложено лице',
+          testDate: 'Дата на полагане на писмен тест',
+          testScore: 'Оценка от писмен тест',
+          number: 'Заявление',
+          valid: 'Валиден'
+        },
+        auditplanDirective: {
+          title: 'План за одит',
+          auditPartRequirement: 'Изискване',
+          planYear: 'Година',
+          planMonth: 'Месец'
+        },
+        organizationDataDirective: {
+          title: 'Данни за организация',
+          name: 'Наименование',
+          nameAlt: 'Наименование на поддържащ език',
+          code: 'Идентификационен код',
+          uin: 'Булстат',
+          CAO: 'CAO №',
+          dateCAOFirstIssue: 'Първо издаване',
+          dateCAOLastIssue: 'Последна ревизия',
+          dateCAOValidTo: 'САО - дата на валидност',
+          ICAO: 'ICAO №',
+          IATA: 'IATA №',
+          SITA: 'SITA №',
+          organizationType: 'Тип организация',
+          organizationKind: 'Вип организация',
+          phones: 'Телефони',
+          webSite: 'Web сайт',
+          notes: 'Бележки',
+          valid: 'Валидност',
+          dateValidTo: 'Валидност до',
+          docRoom: 'Документацията е в стая'
+        },
+        organizationAddressDirective: {
+          title: 'Адрес',
+          newAddress: 'Нов aдрес',
+          addressType: 'Тип',
+          valid: 'Валидно',
+          settlement: 'Населено място',
+          address: 'Адрес',
+          addressAlt: ' Адрес на поддържащ език',
+          phone: 'Телефон(и) за връзка на този адрес',
+          fax: 'Факс',
+          postalCode: 'Пощенски код',
+          contactPerson: 'Лице за контакти',
+          email: 'E-мейл адрес'
+        },
+        certOperatorDirective: {
+          title: 'Лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          airport: 'Летище',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          ext: 'Продължение',
+          date: 'Дата на издаване',
+          validToDateExt: 'Дата на изтичане',
+          activityTypes: 'Дейности',
+          includedDocuments: 'Приложени документи',
+          approvalDate: 'Дата на одобрение',
+          linkedDocumentId: 'Връзка с документ от документите',
+          revokeDate: 'Дата на отнемане',
+          revokeinspector: 'Инспектор',
+          revokeTitle: 'Отнемане',
+          documentsTable: {
+            includedDocuments: 'Приложени документи',
+            inspector: 'Инспектор',
+            approvalDate: 'Дата на одобрение',
+            linkedDocumentId: 'Връзка с документ от документите',
+            noAvailableDocuments: 'Няма налични приложени документи'
+          },
+          revokeCause: 'Причина за отнемане'
+        },
+        equipmentDirective: {
+          title: 'Съоръжения',
+          name: 'Наименование',
+          id: 'Инвентарен №',
+          count: 'Брой',
+          noAvailableEquipments: 'Няма налични съоръжения'
+        },
+        approvalDirective: {
+          title: 'Удостоверение за одобрение',
+          organizationType: 'Тип одобрение',
+          documentNumber: 'Номер',
+          documentDateIssue: 'Дата на издаване',
+          approvalState: 'Състояние на одобрението',
+          approvalStateDate: 'Дата',
+          approvalStateNote: 'Бележки по състоянието'
+        },
+        amendmentDirective: {
+          title: 'Изменение',
+          organizationType: 'Тип одобрение',
+          documentNumber: 'Референтен № на описание	',
+          documentDateIssue: 'Дата на издаване',
+          changeNum: '№ на изменение',
+          noAvailableLimitations: 'Няма налични данни',
+          lims147: {
+            title: 'Обхват на одобрение - EASA Форма 11',
+            sortOrder: 'Маркер за сортиране',
+            lim147limitation: 'Ограничение по част 147',
+            lim147limitationText: 'Ограничения - свободен текст'
+          },
+          lims145: {
+            title: 'Обхват на одобрение - EASA Форма 3',
+            base: 'Базово',
+            lim145limitation: 'Ограничение по част MF/145',
+            lim145limitationText: 'Ограничения - свободен текст',
+            line: 'Линейно'
+          },
+          limsMG: {
+            title: 'Обхват на одобрение - EASA Форма 14',
+            typeAC: 'Тип ВС',
+            qualitySystem: 'Организация',
+            awapproval: 'Разрешен преглед на летателната годност',
+            pfapproval: 'Разрешен Permits to Fly'
+          },
+          includedDocuments: {
+            title: 'Приложени документи към одобрение на организация',
+            inspector: 'Инспектор',
+            approvalDate: 'Дата на одобрение',
+            linkedLim: 'Връзка с Обхват на одобрение',
+            linkedDocumentId: 'Връзка с документ от документите на организацията',
+            noAvailableDocuments: 'Няма налични документи'
+          }
+        },
+        staffExaminerDirective: {
+          title: 'Проверяващ',
+          newStaffManagement: 'Нов проверяващи',
+          nomValueId: 'Идентификатор',
+          code: 'Код',
+          name: 'Наименование',
+          nameAlt: 'Наименование на поддържащ език',
+          alias: 'Псевдоним',
+          valid: 'Валиден',
+          person: 'Физическо лице',
+          content: {
+            title: 'Допълнителни данни',
+            stampNumber: '№ на печат',
+            organization: 'Организация',
+            permitedAW: 'Разрешена проверка на ЛГ',
+            permitedCheck: 'Разрешена проверка на лица'
+          }
         }
       },
       errorTexts: {
@@ -1614,7 +2027,40 @@
         'root.aircrafts.view.occurrences.edit': 'Редакция на инцидент',
         'root.aircrafts.view.maintenances': 'Поддръжки',
         'root.aircrafts.view.maintenances.new': 'Новa поддръжка',
-        'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка'
+        'root.aircrafts.view.maintenances.edit': 'Редакция на поддръжка',
+        'root.organizations': 'Организации',
+        'root.organizations.new': 'Нова организация',
+        'root.organizations.view': 'Данни за организация',
+        'root.organizations.view.edit': 'Редакция',
+        'root.organizations.view.addresses': 'Адреси',
+        'root.organizations.view.addresses.new': 'Нов адрес',
+        'root.organizations.view.addresses.edit': 'Редакция на адрес',
+        'root.organizations.view.certAirportOperators': 'Лицензи на летищен оператор',
+        'root.organizations.view.certAirportOperators.new': 'Нов лиценз',
+        'root.organizations.view.certAirportOperators.edit': 'Редакция на лиценз',
+        'root.organizations.view.auditplans': 'План за надзор',
+        'root.organizations.view.auditplans.new': 'Нов план за одит',
+        'root.organizations.view.auditplans.edit': 'Редакция на план за одит',
+        'root.organizations.view.documentOthers': 'Други документи',
+        'root.organizations.view.documentOthers.new': 'Нов документ',
+        'root.organizations.view.documentOthers.new.choosePublisher': 'Избор на издател',
+        'root.organizations.view.documentOthers.edit': 'Редакция на документ',
+        'root.organizations.view.documentOthers.edit.choosePublisher': 'Избор на издател',
+        'root.organizations.view.staffManagement': 'Ръководен персонал',
+        'root.organizations.view.staffManagement.new': 'Нов ръководен персонал',
+        'root.organizations.view.staffManagement.edit': 'Редакция на ръководен персонал',
+        'root.organizations.view.certGroundServiceOperators':
+          'Лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.certGroundServiceOperators.new':
+          'Нов лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.certGroundServiceOperators.edit':
+          'Редакция на лиценз на оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.groundServiceOperatorsSnoOperational':
+          'Удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване',
+        'root.organizations.view.groundServiceOperatorsSnoOperational.new':
+          'Ново удостоверение',
+        'root.organizations.view.groundServiceOperatorsSnoOperational.edit':
+          'Редакция на удостоверение'
       }
     });
   }]);

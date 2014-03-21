@@ -374,6 +374,78 @@
       { nomValueId: 1, code: 'P2', name: 'Петър Лалов', nameAlt: 'Петър Лалов', alias: 'P1' },
       { nomValueId: 2, code: 'P2', name: 'Пламен Илиев', nameAlt: 'Пламен Илиев', alias: 'P2' },
       { nomValueId: 3, code: 'P3', name: 'Пламен Пилев', nameAlt: 'Пламен Пилев', alias: 'P3' },
+    ],
+
+    //Номенклатура Класификатор на организации
+    organizationTypes: require('./organizationsType'),
+
+    //Номенклатура Видове организации
+    organizationKinds: require('./organizationKind'),
+
+    organizationOtherDocumentTypes: require('./otherDocumentType'),
+
+    organizationOtherDocumentRoles: require('./documentRole'),
+
+    audits: [
+      { nomValueId: 1, code: 'A1', name: 'Audit1', nameAlt: 'Audit1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'Audit2', nameAlt: 'Audit2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'Audit3', nameAlt: 'Audit3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'Audit4', nameAlt: 'Audit4', alias: 'A4' }
+    ],
+
+    // Номенклатура Летище/Площадки
+    airports: [
+      { nomValueId: 1, code: 'A1', name: 'airport1', nameAlt: 'airport1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'airport2', nameAlt: 'airport2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'airport3', nameAlt: 'airport3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'airport4', nameAlt: 'airport4', alias: 'A4' }
+    ],
+
+    //Номенклатура Типове дейности на летищен оператор
+    airportoperatorActivityTypes: [
+      { nomValueId: 1, code: 'A1', name: 'airportoperatorActivityType1', nameAlt: 'airportoperatorActivityType1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'airportoperatorActivityType2', nameAlt: 'airportoperatorActivityType2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'airportoperatorActivityType3', nameAlt: 'airportoperatorActivityType3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'airportoperatorActivityType4', nameAlt: 'airportoperatorActivityType4', alias: 'A4' }
+    ],
+
+    //Номенклатура Типове дейности на оператор по наземно обслужване или самообслужване
+    groundServiceOperatorActivityTypes: [
+      { nomValueId: 1, code: 'A1', name: 'groundserviceoperatorActivityType1', nameAlt: 'groundserviceoperatorActivityType1', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'groundserviceoperatorActivityType2', nameAlt: 'groundserviceoperatorActivityType2', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'groundserviceoperatorActivityType3', nameAlt: 'groundserviceoperatorActivityType3', alias: 'A3' },
+      { nomValueId: 4, code: 'A4', name: 'groundserviceoperatorActivityType4', nameAlt: 'groundserviceoperatorActivityType4', alias: 'A4' }
+    ],
+
+    //Номенклатура Раздел
+    auditParts: require('./auditPart'),
+
+    approvalStates: [
+      {
+        nomValueId: 1, code: '1', name: 'Валидно', parentValueId: null, alias: '1'
+      },
+      {
+        nomValueId: 2, code: '2', name: 'Върнато', parentValueId: null, alias: '2'
+      },
+      {
+        nomValueId: 3, code: '3', name: 'Ограничено', parentValueId: null, alias: null
+      },
+      {
+        nomValueId: 4, code: '4', name: 'Прекратено', parentValueId: null, alias: '3'
+      },
+      {
+        nomValueId: 5, code: '5', name: 'Анулирано', parentValueId: null, alias: null
+      },
+      {
+        nomValueId: 6, code: '6', name: 'Временно спрени всички права по одобрението', parentValueId: null, alias: null
+      }
+    ],
+
+    lim147limitations: [
+      { nomValueId: 1, code: 'A1', name: 'Самолети с турбинни двигатели', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'Самолети с бутални двигатели', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'Вертолети с турбинни двигатели', alias: 'A3' },
+      { nomValueId: 4, code: 'B1', name: 'Вертолети с бутални двигатели', alias: 'B1' }
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

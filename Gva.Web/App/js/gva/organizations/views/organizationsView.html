@@ -1,0 +1,62 @@
+﻿<div>
+  <form class="form-inline well well-sm card">
+    <div class="row">
+      <div class="form-group col-md-3 col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="organizations.viewOrganization.name"></span>
+          <input disabled name="name" type="text" class="form-control" value="{{organization.name}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3 col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="organizations.viewOrganization.CAO"></span>
+          <input disabled name="CAO" type="text" class="form-control" value="{{organization.CAO}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3 col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="organizations.viewOrganization.uin"></span>
+          <input disabled name="uin" type="text" class="form-control" value="{{organization.uin}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3 col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="organizations.viewOrganization.organizationType"></span>
+          <input disabled name="organizationType" type="text" class="form-control" value="{{aircraft.organizationType.name}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-offset-10 col-md-2">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.viewOrganization.edit" class="btn btn-primary btn-sm pull-right" icon="glyphicon-pencil"></sc-button>
+      </div>
+    </div>
+  </form>
+    <sc-tabs tab-list="{
+      'Организация': {
+        'Текуща организация': 'root.organizations'
+       },
+      'Удостоверения за одобрение': 'root.organizations.view.approvals',
+      'Одити и надзор': {
+       'План за надзор': 'root.organizations.view.auditplans',
+       'Одит': 'root.organizations.view.inspections'
+      },
+      'Персонал': {
+        'Ръководен персонал': 'root.organizations.view.staffManagement',
+        'Проверяващи ЛГ': 'root.organizations.view.staffExaminers'
+      },
+      'Адреси': 'root.organizations.view.addresses',
+      'Летищен оператор': {
+        'Лиценз на летищен оператор': 'root.organizations.view.certAirportOperators',
+        'Лиценз на оператор по наземно обслужване или самообслужване': 'root.organizations.view.certGroundServiceOperators',
+        'Удостоверение за експлоатационна годност': 'root.organizations.view.groundServiceOperatorsSnoOperational'
+      },
+      'Други документи': 'root.organizations.view.documentOthers'
+    }"></sc-tabs>
+  <div class="tab-content">
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>
+</div>
