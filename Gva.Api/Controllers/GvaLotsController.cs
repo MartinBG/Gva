@@ -6,7 +6,11 @@ using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Models;
+using System.Linq;
+using System.Data.Entity;
 using Regs.Api.Repositories.LotRepositories;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Gva.Api.Controllers
 {
@@ -36,11 +40,11 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<PartVersion, PartVersionDO>(part));
         }
 
-        public IHttpActionResult GetFilePart(int lotId, string path)
+        public IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-            return Ok(Mapper.Map<PartVersion, FilePartVersionDO>(partVersion));
+            return Ok(Mapper.Map<FilePartVersionDO>(Tuple.Create(partVersion, caseTypeId)));
         }
 
         public IHttpActionResult GetParts(int lotId, string path)
@@ -50,11 +54,22 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
         }
 
-        public IHttpActionResult GetFileParts(int lotId, string path)
+        public IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            if (caseTypeId.HasValue)
+            {
+                partVersions = partVersions
+                    .Join(
+                        this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value),
+                        (pv) => pv.PartId,
+                        (f) => f.LotPartId,
+                        (pv, f) => pv)
+                    .Distinct()
+                    .ToArray();
+            }
 
-            return Ok(Mapper.Map<PartVersion[], FilePartVersionDO[]>(partVersions));
+            return Ok(Mapper.Map<IEnumerable<FilePartVersionDO>>(partVersions.Select(pv => Tuple.Create(pv, caseTypeId))));
         }
 
         public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
@@ -63,7 +78,7 @@ namespace Gva.Api.Controllers
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
 
-            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
+            this.fileRepository.AddFileReferences(partVersion, content.files);
 
             lot.Commit(this.userContext);
 
@@ -77,7 +92,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
             PartVersion partVersion = lot.UpdatePart(path, content.part, this.userContext);
 
-            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
+            this.fileRepository.AddFileReferences(partVersion, content.files);
 
             lot.Commit(this.userContext);
 
@@ -90,7 +105,7 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var partVersion = lot.DeletePart(path, this.userContext);
-            this.fileRepository.DeleteFileReferences(partVersion.Part.PartId);
+            this.fileRepository.DeleteFileReferences(partVersion);
             lot.Commit(this.userContext);
 
             this.unitOfWork.Save();

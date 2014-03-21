@@ -10,10 +10,10 @@ namespace Gva.Api.Mappers
     {
         public void CreateMap()
         {
-            Mapper.CreateMap<PartVersion, FilePartVersionDO>()
-                .ForMember(pv => pv.PartIndex, m => m.MapFrom(p => p.Part.Index))
-                .ForMember(pv => pv.Part, m => m.MapFrom(p => p.Content))
-                .ForMember(pv => pv.Files, m => m.ResolveUsing<FileResolver>().FromMember(p => Tuple.Create(p.Part.LotId, p.PartId)));
+            Mapper.CreateMap<Tuple<PartVersion, int?>, FilePartVersionDO>()
+                .ForMember(pv => pv.PartIndex, m => m.MapFrom(t => t.Item1.Part.Index))
+                .ForMember(pv => pv.Part, m => m.MapFrom(t => t.Item1.Content))
+                .ForMember(pv => pv.Files, m => m.ResolveUsing<FileResolver>().FromMember(t => Tuple.Create(t.Item1.Part.LotId, t.Item1.PartId, t.Item2)));
         }
     }
 }

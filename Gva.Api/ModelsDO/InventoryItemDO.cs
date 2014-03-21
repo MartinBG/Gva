@@ -36,6 +36,6 @@ namespace Gva.Api.ModelsDO
 
         public DateTime? EditedDate { get; set; }
 
-        public FileDO[] Files { get; set; }
+        public FileDataDO File { get; set; }
     }
 }

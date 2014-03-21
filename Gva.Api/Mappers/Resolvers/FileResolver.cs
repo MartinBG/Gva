@@ -10,7 +10,7 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Mappers.Resolvers
 {
-    public class FileResolver : ValueResolver<Tuple<int, int>, FileDO[]>
+    public class FileResolver : ValueResolver<Tuple<int, int, int?>, FileDO[]>
     {
         private IFileRepository fileRepository;
         private ILotRepository lotRepository;
@@ -21,11 +21,11 @@ namespace Gva.Api.Mappers.Resolvers
             this.lotRepository = lotRepository;
         }
 
-        protected override FileDO[] ResolveCore(Tuple<int, int> tuple)
+        protected override FileDO[] ResolveCore(Tuple<int, int, int?> tuple)
         {
             this.lotRepository.GetLotIndex(tuple.Item1);
 
-            var lotFiles = this.fileRepository.GetFileReferences(tuple.Item2);
+            var lotFiles = this.fileRepository.GetFileReferences(tuple.Item2, tuple.Item3);
 
             var files = new List<FileDO>();
             foreach (var lotFile in lotFiles)

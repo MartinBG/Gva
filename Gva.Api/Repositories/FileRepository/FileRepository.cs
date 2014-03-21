@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Common.Data;
+using Gva.Api.LotEvents;
 using Gva.Api.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
@@ -17,51 +20,61 @@ namespace Gva.Api.Repositories.FileRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddFileReferences(Part part, dynamic files)
+        public void AddFileReferences(PartVersion partVersion, dynamic files)
         {
-            if (files == null)
+            List<GvaLotFile> addedFiles = new List<GvaLotFile>();
+            List<GvaLotFile> updatedFiles = new List<GvaLotFile>();
+            List<GvaLotFile> deletedFiles = new List<GvaLotFile>();
+
+            if (files != null)
             {
-                return;
+                foreach (var fileObj in files)
+                {
+                    if ((bool)fileObj.isAdded)
+                    {
+                        var newFile = this.AddLotFile(partVersion.Part, fileObj);
+                        addedFiles.Add(newFile);
+                        continue;
+                    }
+
+                    var lotFileId = (int)fileObj.lotFileId;
+                    var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                            .Include(f => f.GvaAppLotFiles)
+                            .Include(f => f.GvaFile)
+                            .Include(f => f.DocFile)
+                            .Include(f => f.GvaFile.GvaLotFiles)
+                            .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
+
+                    if ((bool)fileObj.isDeleted)
+                    {
+                        this.DeleteLotFile(lotFile);
+                        deletedFiles.Add(lotFile);
+                        continue;
+                    }
+
+                    this.UpdateLotFile(lotFile, fileObj);
+                    updatedFiles.Add(lotFile);
+                }
             }
 
-            foreach (var fileObj in files)
-            {
-                if ((bool)fileObj.isAdded)
-                {
-                    this.AddLotFile(part, fileObj);
-                    continue;
-                }
-
-                var lotFileId = (int)fileObj.lotFileId;
-                var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
-                        .Include(f => f.GvaAppLotFiles)
-                        .Include(f => f.GvaFile)
-                        .Include(f => f.GvaFile.GvaLotFiles)
-                        .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
-
-                if ((bool)fileObj.isDeleted)
-                {
-                    this.DeleteLotFile(lotFile);
-                    continue;
-                }
-
-                this.UpdateLotFile(lotFile, fileObj);
-            }
+            Events.Raise(new FileEvent(addedFiles, updatedFiles, deletedFiles, partVersion));
         }
 
-        public void DeleteFileReferences(int partId)
+        public void DeleteFileReferences(PartVersion partVersion)
         {
             var lotFiles = this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.GvaFile)
-                .Where(f => f.LotPartId == partId);
+                .Where(f => f.LotPartId == partVersion.Part.PartId);
 
             foreach (var lotFile in lotFiles)
             {
                 this.DeleteLotFile(lotFile);
             }
+
+            Events.Raise(new FileEvent(new List<GvaLotFile>(), new List<GvaLotFile>(), new List<GvaLotFile>(), partVersion));
         }
 
-        public GvaLotFile[] GetFileReferences(int partId)
+        public GvaLotFile[] GetFileReferences(int partId, int? caseType)
         {
             return this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.DocFile)
@@ -69,7 +82,15 @@ namespace Gva.Api.Repositories.FileRepository
                 .Include(f => f.GvaCaseType)
                 .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaAppLotFiles.Select(gf => gf.GvaApplication))
-                .Where(f => f.LotPartId == partId)
+                .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
+                .ToArray();
+        }
+
+        public GvaLotFile[] GetFileReferencesForLot(int lotId, int caseType)
+        {
+            return this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Include(f => f.GvaCaseType)
+                .Where(f => f.LotPart.LotId == lotId && f.GvaCaseTypeId == caseType)
                 .ToArray();
         }
 

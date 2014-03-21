@@ -43,10 +43,8 @@
       '$stateParams',
       'PersonDocumentApplication',
       function ($stateParams, PersonDocumentApplication) {
-        return PersonDocumentApplication.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise.then(function (application) {
+        return PersonDocumentApplication.get($stateParams).$promise
+            .then(function (application) {
           application.files = {
             hideApplications: true,
             files: application.files

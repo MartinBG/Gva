@@ -52,10 +52,7 @@
       '$stateParams',
       'PersonDocumentTraining',
       function ($stateParams, PersonDocumentTraining) {
-        return PersonDocumentTraining.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise;
+        return PersonDocumentTraining.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

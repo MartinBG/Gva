@@ -20,17 +20,30 @@ namespace Gva.Api.Repositories.InventoryRepository
             this.unitOfWork.DbContext.Set<GvaInventoryItem>().Add(inventoryItem);
         }
 
-        public GvaInventoryItem GetInventoryItem(int partId)
+        public GvaInventoryItem GetInventoryItem(int partId, int? caseTypeId)
         {
             return this.unitOfWork.DbContext.Set<GvaInventoryItem>()
-                .SingleOrDefault(i => i.PartId == partId);
+                .SingleOrDefault(i => i.PartId == partId && (caseTypeId.HasValue ? i.CaseTypeId == caseTypeId : i.CaseTypeId.Equals(null)));
         }
 
-        public IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId)
+        public IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId, int? caseTypeId)
         {
             return this.unitOfWork.DbContext.Set<GvaInventoryItem>()
                 .Include(i => i.Part)
-                .Where(i => i.LotId == lotId);
+                .Where(i => i.LotId == lotId && (caseTypeId.HasValue ? i.CaseTypeId == caseTypeId : true))
+                .OrderBy(i => i.PageIndex);
+        }
+
+        public void DeleteInventoryItemsForPart(int partId)
+        {
+            var inventoryItems = this.unitOfWork.DbContext.Set<GvaInventoryItem>()
+                .Where(i => i.PartId == partId)
+                .ToList();
+
+            foreach (var inventoryItem in inventoryItems)
+            {
+                this.unitOfWork.DbContext.Set<GvaInventoryItem>().Remove(inventoryItem);
+            }
         }
 
         public void DeleteInventoryItem(GvaInventoryItem inventoryItem)

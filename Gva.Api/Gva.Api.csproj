@@ -86,6 +86,7 @@
     <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\PersonLotEventHandler.cs" />
+    <Compile Include="LotEvents\FileEvent.cs" />
     <Compile Include="Mappers\ApplicationMapper.cs" />
     <Compile Include="Mappers\CaseTypeNomMapper.cs" />
     <Compile Include="Mappers\FilePartVersionMapper.cs" />

@@ -9,6 +9,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
@@ -16,9 +17,6 @@ using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using System.Data.Entity;
-using Common.Api.Models;
-using Gva.Api.Repositories.ApplicationRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -81,7 +79,8 @@ namespace Gva.Api.Controllers
                 newLot.CreatePart("personData", personData, this.userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, personData.Value<JArray>("caseTypes"));
 
-                newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
+                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
+                this.fileRepository.AddFileReferences(documentIdPart, null);
 
                 newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
 
@@ -96,9 +95,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{lotId}/inventory")]
-        public IHttpActionResult GetInventory(int lotId)
+        public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId);
+            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
 
             return Ok(Mapper.Map<IEnumerable<GvaInventoryItem>, IEnumerable<InventoryItemDO>>(inventory));
         }
@@ -120,8 +119,14 @@ namespace Gva.Api.Controllers
         }
 
         [Route("~/api/nomenclatures/personCaseTypes")]
-        public IHttpActionResult GetCaseTypes(int? lotId = null, string term = null)
+        public IHttpActionResult GetCaseTypes(int? lotId = null, string term = null, int? id = null)
         {
+            if (id.HasValue)
+            {
+                var caseType = this.caseTypeRepository.GetCaseType(id.Value);
+                return Ok(Mapper.Map<GvaCaseType, NomValue>(caseType));
+            }
+
             IEnumerable<GvaCaseType> caseTypes;
             if (lotId.HasValue)
             {
@@ -173,9 +178,9 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult GetFilePart(int lotId, string path)
+        public IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
-            return base.GetFilePart(lotId, path);
+            return base.GetFilePart(lotId, path, caseTypeId);
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
@@ -219,9 +224,9 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
-        public IHttpActionResult GetFileParts(int lotId, string path)
+        public IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
-            return base.GetFileParts(lotId, path);
+            return base.GetFileParts(lotId, path, caseTypeId);
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
@@ -331,7 +336,7 @@ namespace Gva.Api.Controllers
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
 
-            this.fileRepository.AddFileReferences(partVersion.Part, content.files);
+            this.fileRepository.AddFileReferences(partVersion, content.files);
 
             lot.Commit(this.userContext);
 

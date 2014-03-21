@@ -8,6 +8,8 @@ namespace Gva.Api.Repositories.CaseTypeRepository
     {
         void AddCaseTypes(Lot lot, dynamic caseTypes);
 
+        GvaCaseType GetCaseType(int caseTypeId);
+
         IEnumerable<GvaCaseType> GetCaseTypesForSet(int setId);
 
         IEnumerable<GvaCaseType> GetCaseTypesForLot(int lotId);

@@ -43,10 +43,7 @@
       '$stateParams',
       'PersonDocumentId',
       function ($stateParams, PersonDocumentId) {
-        return PersonDocumentId.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise;
+        return PersonDocumentId.get($stateParams).$promise;
       }
     ]
   };

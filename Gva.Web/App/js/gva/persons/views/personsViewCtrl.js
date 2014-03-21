@@ -10,6 +10,12 @@
     person
   ) {
     $scope.person = person;
+    $scope.caseType = parseInt($stateParams.caseTypeId, 10);
+
+    $scope.changeCaseType = function () {
+      $stateParams.caseTypeId = $scope.caseType;
+      $state.go($state.current, $stateParams, { reload: true });
+    };
 
     $scope.edit = function () {
       return $state.go('root.persons.view.edit');
@@ -29,7 +35,7 @@
       '$stateParams',
       'Person',
       function ($stateParams, Person) {
-        return Person.get({ id: $stateParams.id }).$promise;
+        return Person.get($stateParams).$promise;
       }
     ]
   };

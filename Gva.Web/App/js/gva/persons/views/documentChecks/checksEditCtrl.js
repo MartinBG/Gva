@@ -52,10 +52,7 @@
       '$stateParams',
       'PersonDocumentCheck',
       function ($stateParams, PersonDocumentCheck) {
-        return PersonDocumentCheck.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise;
+        return PersonDocumentCheck.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

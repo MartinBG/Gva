@@ -44,10 +44,7 @@
       '$stateParams',
       'PersonDocumentEducation',
       function ($stateParams, PersonDocumentEducation) {
-        return PersonDocumentEducation.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise;
+        return PersonDocumentEducation.get($stateParams).$promise;
       }
     ]
   };

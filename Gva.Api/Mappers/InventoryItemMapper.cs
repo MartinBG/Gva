@@ -12,7 +12,12 @@ namespace Gva.Api.Mappers
         {
             Mapper.CreateMap<GvaInventoryItem, InventoryItemDO>()
                 .ForMember(i => i.PartIndex, m => m.MapFrom(i => i.Part.Index.Value))
-                .ForMember(i => i.Files, m => m.ResolveUsing<FileResolver>().FromMember(i => Tuple.Create(i.Part.LotId, i.PartId)));
+                .ForMember(i => i.File, m => m.ResolveUsing(i => 
+                    {
+                        return i.FileContentId.HasValue ?
+                            new FileDataDO { Key = i.FileContentId.Value, Name = i.Filename } :
+                            null;
+                    }));
         }
     }
 }

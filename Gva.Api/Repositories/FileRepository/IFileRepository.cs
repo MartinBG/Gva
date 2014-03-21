@@ -8,10 +8,12 @@ namespace Gva.Api.Repositories.FileRepository
 {
     public interface IFileRepository
     {
-        void AddFileReferences(Part part, dynamic files);
+        void AddFileReferences(PartVersion partVersion, dynamic files);
 
-        void DeleteFileReferences(int partId);
+        void DeleteFileReferences(PartVersion partVersion);
 
-        GvaLotFile[] GetFileReferences(int partId);
+        GvaLotFile[] GetFileReferences(int partId, int? casetype);
+
+        GvaLotFile[] GetFileReferencesForLot(int lotId, int caseType);
     }
 }
