@@ -7,6 +7,8 @@ namespace Gva.Api.ModelsDO
     {
         public int PartIndex { get; set; }
 
+        public int PartId { get; set; }
+
         public JObject Part { get; set; }
 
         public FileDO[] Files { get; set; }

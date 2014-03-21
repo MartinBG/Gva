@@ -2,14 +2,17 @@
 using Gva.Api.Models;
 using System;
 using Gva.Api.ModelsDO;
+using Common.Api.Repositories;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
-    public interface IApplicationRepository
+    public interface IApplicationRepository : IRepository<GvaApplication>
     {
         IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin);
 
         GvaApplication[] GetNomApplications(int lotId);
+
+        IEnumerable<GvaApplication> GetLinkedToDocsApplications();
 
         void AddGvaApplication(GvaApplication gvaApplication);
 
@@ -20,5 +23,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
         void AddGvaApplicationSearch(GvaApplicationSearch gvaApplicationSearch);
 
         void DeleteGvaApplicationSearch(int lotPartId);
+
+        void AddGvaLotFile(GvaLotFile gvaLotFile);
+
+        void AddGvaAppLotFile(GvaAppLotFile gvaAppLotFile);
     }
 }

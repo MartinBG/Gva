@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\GvaNomenclaturesController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />
@@ -98,6 +99,12 @@
     <Compile Include="Mappers\Resolvers\FileResolver.cs" />
     <Compile Include="ModelsDO\ApplicationListDO.cs" />
     <Compile Include="ModelsDO\ApplicationNomDO.cs" />
+    <Compile Include="ModelsDO\ApplicationDO.cs" />
+    <Compile Include="ModelsDO\ApplicationDocRelationDO.cs" />
+    <Compile Include="ModelsDO\ApplicationLotFileDO.cs" />
+    <Compile Include="ModelsDO\ApplicationNewDO.cs" />
+    <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
+    <Compile Include="ModelsDO\ApplicationPartDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />

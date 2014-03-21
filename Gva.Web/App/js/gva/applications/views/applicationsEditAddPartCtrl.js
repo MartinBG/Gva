@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ApplicationsEditAddPartCtrl(
@@ -7,21 +7,40 @@
     $state,
     $stateParams,
     Application,
-    applicationDocPart,
+    application,
+    applicationCommonData,
     selectedPublisher
     ) {
-    $scope.applicationDocPart = applicationDocPart;
-    $scope.applicationDocPart.part.documentPublisher = selectedPublisher.pop() ||
-      applicationDocPart.part.documentPublisher;
+    if (_.isEmpty(applicationCommonData)) {
+      return $state.go('^');
+    }
+    else {
+      $scope.applicationDocPart = {
+        isLinkNew: applicationCommonData.isLinkNew,
+        currentDocId: applicationCommonData.currentDocId,
+        setPartAlias: applicationCommonData.setPartAlias,
+        part: {},
+        appFile: {
+          lotId: application.lotId,
+          name: applicationCommonData.name,
+          docFileId: applicationCommonData.docFileId,
+          docFileKindId: applicationCommonData.docFileKindId,
+          docFileTypeId: applicationCommonData.docFileTypeId,
+          docFile: null
+        }
+      };
 
-    $scope.isLinkNew = $stateParams.isLinkNew;
-    $scope.currentDocId = $stateParams.currentDocId;
-    $scope.docPartTypeAlias = $stateParams.docPartTypeAlias;
-    $scope.docFile = {
-      key: $stateParams.docFileKey,
-      name: $stateParams.docFileName,
-      relativePath: null
-    };
+      if (applicationCommonData.isLinkNew) {
+        $scope.applicationDocPart.appFile.docFile = {
+          key: applicationCommonData.docFileKey,
+          name: applicationCommonData.docFileName,
+          relativePath: null
+        };
+      }
+    }
+
+    $scope.applicationDocPart.part.documentPublisher = selectedPublisher.pop() ||
+      $scope.applicationDocPart.part.documentPublisher;
 
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
@@ -31,13 +50,16 @@
       $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
+            var newPart = {
+              docId: $scope.applicationDocPart.currentDocId,
+              appFile: $scope.applicationDocPart.appFile,
+              setPartAlias: $scope.applicationDocPart.setPartAlias,
+              appPart: $scope.applicationDocPart.part
+            };
+
             return Application
-              .partsNew({ id: $stateParams.id }, {
-                docId: $stateParams.currentDocId,
-                file: $scope.applicationDocPart.docFile,
-                setPartAlias: $stateParams.docPartTypeAlias,
-                part: $scope.applicationDocPart.part
-              }).$promise.then(function () {
+              .partsNew({ id: $stateParams.id }, newPart)
+              .$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
               });
@@ -49,15 +71,18 @@
       $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
+            var linkNew = {
+              appFile: $scope.applicationDocPart.appFile,
+              setPartAlias: $scope.applicationDocPart.setPartAlias,
+              appPart: $scope.applicationDocPart.part
+            };
+
             return Application
-              .partsLinkNew({ id: $stateParams.id }, {
-                docFileKey: $stateParams.docFileKey,
-                setPartAlias: $stateParams.docPartTypeAlias,
-                part: $scope.applicationDocPart.part
-              }).$promise.then(function () {
-                return $state.transitionTo('root.applications.edit.case',
-                  $stateParams, { reload: true });
-              });
+                .partsLinkNew({ id: $stateParams.id }, linkNew)
+                .$promise.then(function () {
+                  return $state.transitionTo('root.applications.edit.case',
+                    $stateParams, { reload: true });
+                });
           }
         });
     };
@@ -72,21 +97,17 @@
     '$state',
     '$stateParams',
     'Application',
-    'applicationDocPart',
+    'application',
+    'applicationCommonData',
     'selectedPublisher'
   ];
 
   ApplicationsEditAddPartCtrl.$resolve = {
-    applicationDocPart: function () {
-      return {
-        part: {}
-      };
-    },
+
     selectedPublisher: function () {
       return [];
     }
   };
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);
-}(angular
-));
+}(angular, _));

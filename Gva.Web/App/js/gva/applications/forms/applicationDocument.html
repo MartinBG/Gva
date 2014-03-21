@@ -1,0 +1,55 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="applications.applicationDocument.title"></strong>
+    </div>
+    <div class="well-sm panel-body">
+      <div>
+        <div class="row">
+            <div class="form-group col-sm-2" sc-has-error="name">
+                <label class="control-label" l10n-text="applications.applicationDocument.name"></label>
+                <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
+                <sc-text name="name" ng-model="model.name" required ng-readonly="readonly"></sc-text>
+            </div>
+
+            <div class="form-group col-sm-2" sc-has-error="docFileKind">
+                <label class="control-label" l10n-text="applications.applicationDocument.fileKind"></label>
+                <sc-validation-error field-name="docFileKind" validations="{required: null}"></sc-validation-error>
+                <sc-nomenclature name="docFileKind" ng-model="model.docFileKindId" nom-obj="model.docFileKind" mode="id" alias="'docFileKind'" required ng-readonly="readonly"></sc-nomenclature>
+            </div>
+
+            <div class="form-group col-sm-5" sc-has-error="docFileType">
+                <label class="control-label" l10n-text="applications.applicationDocument.fileType"></label>
+                <sc-validation-error field-name="docFileType" validations="{required: null}"></sc-validation-error>
+                <sc-nomenclature name="docFileType" ng-model="model.docFileTypeId" nom-obj="model.docFileType" mode="id" alias="'docFileType'" required ng-readonly="readonly"></sc-nomenclature>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-2" sc-has-error="caseType">
+              <label class="control-label" l10n-text="applications.applicationDocument.caseType"></label>
+              <sc-validation-error field-name="caseType" validations="{required: null}"></sc-validation-error>
+              <sc-nomenclature ng-model="model.caseTypeId" name="caseType" mode="id" nom-obj="model.caseType" alias="'personCaseTypes'" params="{lotId: model.lotId}" required></sc-nomenclature>
+            </div>
+
+            <div class="form-group col-sm-2" sc-has-error="bookPageNumber">
+                <label class="control-label" l10n-text="applications.applicationDocument.pageIndex"></label>
+                <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
+                <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" required></sc-text>
+            </div>
+
+            <div class="form-group col-sm-2" sc-has-error="pageCount">
+                <label class="control-label" l10n-text="applications.applicationDocument.pageNumber"></label>
+                <sc-validation-error field-name="pageCount" validations="{required: null}"></sc-validation-error>
+                <sc-int ng-model="model.pageCount" name="pageCount" min="0" required></sc-int>
+            </div>
+
+            <div class="form-group col-sm-3" sc-has-error="docFile">
+                <label class="control-label" l10n-text="applications.applicationDocument.attachment"></label>
+                <sc-validation-error field-name="docFile" validations="{required: null}"></sc-validation-error>
+                <sc-files name="docFile" ng-model="model.docFile" required ng-readonly="readonly"></sc-files>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

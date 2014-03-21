@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using Regs.Api.Models;
+using System;
 
 namespace Gva.Api.Models
 {
@@ -14,11 +15,11 @@ namespace Gva.Api.Models
 
         public int GvaApplicationId { get; set; }
 
-        public int? DocId { get; set; }
+        public Nullable<int> DocId { get; set; }
 
         public int LotId { get; set; }
 
-        public int GvaAppLotPartId { get; set; }
+        public Nullable<int> GvaAppLotPartId { get; set; }
 
         public virtual Docs.Api.Models.Doc Doc { get; set; }
 
@@ -47,13 +48,13 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaAppLotPartId).HasColumnName("GvaAppLotPartId");
 
             // Relationships
-            this.HasRequired(t => t.Doc)
+            this.HasOptional(t => t.Doc)
                 .WithMany()
                 .HasForeignKey(d => d.DocId);
             this.HasRequired(t => t.Lot)
                 .WithMany()
                 .HasForeignKey(d => d.LotId);
-            this.HasRequired(t => t.GvaAppLotPart)
+            this.HasOptional(t => t.GvaAppLotPart)
                 .WithMany()
                 .HasForeignKey(d => d.GvaAppLotPartId);
         }

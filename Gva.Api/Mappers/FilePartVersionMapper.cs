@@ -13,6 +13,7 @@ namespace Gva.Api.Mappers
             Mapper.CreateMap<Tuple<PartVersion, int?, FileResolver>, FilePartVersionDO>()
                 .ForMember(pv => pv.PartIndex, m => m.MapFrom(t => t.Item1.Part.Index))
                 .ForMember(pv => pv.Part, m => m.MapFrom(t => t.Item1.Content))
+                .ForMember(pv => pv.PartId, m => m.MapFrom(t => t.Item1.Part.PartId))
                 .ForMember(pv => pv.Files, m => m.ResolveUsing(t => t.Item3.Resolve(Tuple.Create(t.Item1.Part.LotId, t.Item1.PartId, t.Item2))));
         }
     }

@@ -30,6 +30,9 @@
 
           <gva-person-document-application name="personDocumentApplicationForm" ng-model="appModel.appPart"></gva-person-document-application>
 
+          <!--<gva-person-scanned-document name="personScannedDocumentForm" ng-model="appModel.appFiles"></gva-person-scanned-document>-->
+
+
           <div class="panel panel-default">
             <div class="panel-heading"><strong l10n-text="persons.personScannedDocumentDirective.title"></strong></div>
             <div class="well-sm panel-body">
@@ -39,20 +42,29 @@
                       <th>Наименование</th>
                       <th>Вид файл</th>
                       <th>Тип файл</th>
+                      <th>№ стр. в дело</th>
+                      <th>Брой стр.</th>
                       <th>Прикачен файл</th>
                     </tr>
                 </thead>
                 <tbody>
                   <tr>
-                      <td style="width: 400px;" sc-has-error="name">
+                      <td style="width: 200px;" sc-has-error="name">
                       <sc-text name="name" ng-model="appModel.appFile.name" required></sc-text>
                     </td>
                     <td style="width: 150px;" sc-has-error="docFileKind">
-                        <sc-nomenclature name="docFileKind" ng-model="appModel.appFile.docFileKindId" nom-obj="appModel.appFile.docFileKind" mode="id" alias="'docFileKinds'" required></sc-nomenclature>
+                        <sc-nomenclature name="docFileKind" ng-model="appModel.appFile.docFileKindId" nom-obj="appModel.appFile.docFileKind" mode="id" alias="'docFileKind'" required></sc-nomenclature>
                     </td>
                     <td style="width: 250px;" sc-has-error="docFileType">
-                      <sc-nomenclature name="docFileType" ng-model="appModel.appFile.docFileTypeId" nom-obj="appModel.appFile.docFileType" mode="id" alias="'docFileTypes'" required></sc-nomenclature>
+                      <sc-nomenclature name="docFileType" ng-model="appModel.appFile.docFileTypeId" nom-obj="appModel.appFile.docFileType" mode="id" alias="'docFileType'" required></sc-nomenclature>
                     </td>
+                    <td style="width: 100px;" sc-has-error="bookPageNumber">
+                      <sc-text ng-model="appModel.appFile.bookPageNumber" name="bookPageNumber" required></sc-text>
+                    </td>
+                    <td style="width: 100px;" sc-has-error="pageCount">
+                      <sc-int ng-model="appModel.appFile.pageCount" name="pageCount" min="0" required></sc-int>
+                    </td>
+
                     <td sc-has-error="docFile">
                       <sc-files name="docFile" ng-model="appModel.appFile.docFile" required></sc-files>
                     </td>

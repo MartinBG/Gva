@@ -45,10 +45,10 @@
               docCasePartTypeName: $scope.appModel.doc.docCasePartTypeName,
               docDirectionId: $scope.appModel.doc.docDirectionId,
               docDirectionName: $scope.appModel.doc.docDirectionName,
-              docTypeGroupId: $scope.appModel.docTypeGroupId,
-              docTypeGroupName: $scope.appModel.docTypeGroup.name,
-              docTypeId: $scope.appModel.docTypeId,
-              docTypeName: $scope.appModel.docType.name,
+              docTypeGroupId: $scope.appModel.doc.docTypeGroupId,
+              docTypeGroupName: $scope.appModel.doc.docTypeGroup.name,
+              docTypeId: $scope.appModel.doc.docTypeId,
+              docTypeName: $scope.appModel.doc.docType.name,
               docSubject: $scope.appModel.doc.docSubject
             },
             appPart: $scope.appModel.appPart,
@@ -56,7 +56,7 @@
           };
 
           Application.createNew(newApplication).$promise.then(function (result) {
-            return $state.go('root.applications.edit.case', { id: result.applicationId });
+            return $state.go('root.applications.edit.case', { id: result.gvaApplicationId });
           });
         }
       });

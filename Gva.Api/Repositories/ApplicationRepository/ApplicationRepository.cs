@@ -5,32 +5,32 @@ using Gva.Api.Models;
 using System;
 using System.Data.Entity;
 using Gva.Api.ModelsDO;
+using AutoMapper;
+using Common.Api.Repositories;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
-    public class ApplicationRepository : IApplicationRepository
+    public class ApplicationRepository : Repository<GvaApplication>, IApplicationRepository
     {
-        private IUnitOfWork unitOfWork;
-
         public ApplicationRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
         }
 
         public IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin)
         {
             var applications = this.unitOfWork.DbContext.Set<GvaApplication>().AsQueryable()
-                .Join(this.unitOfWork.DbContext.Set<GvaApplicationSearch>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.LotPartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
+                .GroupJoin(this.unitOfWork.DbContext.Set<GvaApplicationSearch>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.LotPartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
                 .Join(this.unitOfWork.DbContext.Set<GvaPerson>().AsQueryable(), ga => ga.GApplication.LotId, gp => gp.GvaPersonLotId, (ga, gp) => new { GApplication = ga.GApplication, GApplicationSearch = ga.GApplicationSearch, GPerson = gp });
 
             if (fromDate.HasValue)
             {
-                applications = applications.Where(e => e.GApplicationSearch.RequestDate.HasValue && e.GApplicationSearch.RequestDate.Value >= fromDate.Value);
+                applications = applications.Where(e => e.GApplicationSearch.FirstOrDefault() == null || (e.GApplicationSearch.FirstOrDefault().RequestDate.HasValue && e.GApplicationSearch.FirstOrDefault().RequestDate.Value >= fromDate.Value));
             }
 
             if (toDate.HasValue)
             {
-                applications = applications.Where(e => e.GApplicationSearch.RequestDate.HasValue && e.GApplicationSearch.RequestDate.Value <= toDate.Value);
+                applications = applications.Where(e => e.GApplicationSearch.FirstOrDefault() == null || (e.GApplicationSearch.FirstOrDefault().RequestDate.HasValue && e.GApplicationSearch.FirstOrDefault().RequestDate.Value <= toDate.Value));
             }
 
             if (!string.IsNullOrWhiteSpace(lin))
@@ -44,14 +44,19 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 DocId = e.GApplication.DocId,
                 AppPartId = e.GApplication.GvaAppLotPartId,
                 AppPartIndex = e.GApplication.GvaAppLotPart.Index,
-                AppPartRequestDate = e.GApplicationSearch.RequestDate,
-                AppPartDocumentNumber = e.GApplicationSearch.DocumentNumber,
-                AppPartApplicationTypeName = e.GApplicationSearch.ApplicationTypeName,
-                AppPartStatusName = e.GApplicationSearch.StatusName,
+                AppPartRequestDate = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().RequestDate : null,
+                AppPartDocumentNumber = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().DocumentNumber : null,
+                AppPartApplicationTypeName = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().ApplicationTypeName : null,
+                AppPartStatusName = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().StatusName : null,
                 PersonId = e.GApplication.LotId,
                 PersonLin = e.GPerson.Lin,
                 PersonNames = e.GPerson.Names
             });
+        }
+
+        public IEnumerable<GvaApplication> GetLinkedToDocsApplications()
+        {
+            return this.unitOfWork.DbContext.Set<GvaApplication>().Where(e => e.DocId.HasValue).AsQueryable();
         }
 
         public GvaApplication[] GetNomApplications(int lotId)
@@ -104,6 +109,16 @@ namespace Gva.Api.Repositories.ApplicationRepository
             {
                 this.unitOfWork.DbContext.Set<GvaApplicationSearch>().Remove(gvaApplicationSearch);
             }
+        }
+
+        public void AddGvaLotFile(GvaLotFile gvaLotFile)
+        {
+            this.unitOfWork.DbContext.Set<GvaLotFile>().Add(gvaLotFile);
+        }
+
+        public void AddGvaAppLotFile(GvaAppLotFile gvaAppLotFile)
+        {
+            this.unitOfWork.DbContext.Set<GvaAppLotFile>().Add(gvaAppLotFile);
         }
     }
 }

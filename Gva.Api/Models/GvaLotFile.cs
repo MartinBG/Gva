@@ -20,7 +20,7 @@ namespace Gva.Api.Models
 
         public int? DocFileId { get; set; }
 
-        public int GvaCaseTypeId { get; set; }
+        public int? GvaCaseTypeId { get; set; }
 
         public string PageIndex { get; set; }
 
@@ -58,7 +58,6 @@ namespace Gva.Api.Models
 
             // Properties
             this.Property(t => t.PageIndex)
-                .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings
@@ -82,7 +81,7 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.LotPart)
                 .WithMany()
                 .HasForeignKey(d => d.LotPartId);
-            this.HasRequired(t => t.GvaCaseType)
+            this.HasOptional(t => t.GvaCaseType)
                 .WithMany(t => t.GvaLotFiles)
                 .HasForeignKey(d => d.GvaCaseTypeId);
         }
