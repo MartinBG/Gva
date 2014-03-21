@@ -52,7 +52,8 @@ module.exports = function (grunt) {
           '!Docs.Database/Properties/AssemblyInfo.cs',
           '!Gva.Database/Properties/AssemblyInfo.cs',
           '!Regs.Database/Properties/AssemblyInfo.cs',
-          '!Regs.Api.Tests/Properties/AssemblyInfo.cs'
+          '!Regs.Api.Tests/Properties/AssemblyInfo.cs',
+          '!Docs.Api.Tests/Properties/AssemblyInfo.cs'
         ]
       }
     },
@@ -124,19 +125,20 @@ module.exports = function (grunt) {
         origPreserveBOM = grunt.file.preserveBOM,
         versionRegEx = /\[assembly:\s*AssemblyVersion\(".*?"\)\]/g,
         fileVersionRegEx = /\[assembly:\s*AssemblyFileVersion\(".*?"\)\]/g,
-        informationalVersionRegEx = /\[assembly:\s*AssemblyInformationalVersion\(".*?"\)\]/g;
+        informationalVersionRegEx = /\[assembly:\s*AssemblyInformationalVersion\(".*?"\)\]/g,
+        success = true;
     
     function replace(str, regex, newSubStr, errorMsg) {
       if (str.match(regex)) {
         return str.replace(regex, newSubStr);
       } else {
         grunt.log.error(errorMsg);
+        success = false;
         return false;
       }
     }
     
     grunt.file.preserveBOM = true;
-    var success = true;
     this.filesSrc.forEach(function(file) {
       if (!success) {
         return;
