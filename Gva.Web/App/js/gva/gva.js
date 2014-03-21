@@ -171,11 +171,6 @@
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOther.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonInspection',
-      templateUrl: 'gva/common/forms/commonInspection.html',
-      controller: 'CommonInspectionCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOccurrence',
       templateUrl: 'gva/aircrafts/forms/aircraftDocumentOccurrence.html'
     });
@@ -225,6 +220,20 @@
       name: 'gvaOrganizationEquipment',
       templateUrl: 'gva/organizations/forms/organizationEquipment.html',
       controller: 'OrganizationEquipmentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationApproval',
+      templateUrl: 'gva/organizations/forms/organizationApproval.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationAmendment',
+      templateUrl: 'gva/organizations/forms/organizationAmendment.html',
+      controller: 'OrganizationAmendmentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonInspection',
+      templateUrl: 'gva/common/forms/commonInspection.html',
+      controller: 'CommonInspectionCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaCommonAuditDetail',
@@ -398,7 +407,10 @@
       .state(['root.aircrafts.view.parts'                               , '/parts'                                                                                                                                                                         ])
       .state(['root.aircrafts.view.parts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsSearch.html'                          , 'PartsSearchCtrl'                ]])
       .state(['root.aircrafts.view.parts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsNew.html'                             , 'PartsNewCtrl'                   ]])
-      .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                            , 'PartsEditCtrl'                  ]])
+      .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                            , 'PartsEditCtrl'                  ]]);
+    
+  }]).config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
       .state(['root.organizations'                                                     , '/organizations'                                                                                                                                                                                                                                        ])
       .state(['root.organizations.search'                                              , ''                                           , ['@root'                   , 'gva/organizations/views/organizationsSearch.html'                                                                    , 'OrganizationsSearchCtrl'                           ]])
       .state(['root.organizations.new'                                                 , '/new'                                       , ['@root'                   , 'gva/organizations/views/organizationsNew.html'                                                                       , 'OrganizationsNewCtrl'                              ]])
@@ -437,6 +449,13 @@
       .state(['root.organizations.view.inspections'                                    , '/inspections'                                                                                                                                                                                                                                           ])
       .state(['root.organizations.view.inspections.search'                             , ''                                           , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsSearch.html'                                             , 'OrganizationsInspectionsSearchCtrl'                ]])
       .state(['root.organizations.view.inspections.new'                                , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsNew.html'                                                , 'OrganizationsInspectionsNewCtrl'                   ]])
-      .state(['root.organizations.view.inspections.edit'                               , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]]);
+      .state(['root.organizations.view.inspections.edit'                               , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]])
+      .state(['root.organizations.view.approvals'                                      , '/approvals'                                                                                                                                                                                                                                             ])
+      .state(['root.organizations.view.approvals.search'                               , ''                                           , ['@root.organizations.view'      , 'gva/organizations/views/approvals/approvalsSearch.html'                                                        , 'ApprovalsSearchCtrl'                               ]])
+      .state(['root.organizations.view.approvals.new'                                  , '/new'                                       , ['@root.organizations.view'      , 'gva/organizations/views/approvals/approvalsNew.html'                                                           , 'ApprovalsNewCtrl'                                  ]])
+      .state(['root.organizations.view.amendments'                                     , '/:ind/amendments'                                                                                                                                                                                                                                       ])
+      .state(['root.organizations.view.amendments.search'                              , ''                                           , ['@root.organizations.view'      , 'gva/organizations/views/approvals/amendments/amendmentsSearch.html'                                            , 'AmendmentsSearchCtrl'                              ]])
+      .state(['root.organizations.view.amendments.new'                                 , '/new'                                       , ['@root.organizations.view'      , 'gva/organizations/views/approvals/amendments/amendmentsNew.html'                                               , 'AmendmentsNewCtrl'                                 ]])
+      .state(['root.organizations.view.amendments.edit'                                , '/:childInd'                                 , ['@root.organizations.view'      , 'gva/organizations/views/approvals/amendments/amendmentsEdit.html'                                              , 'AmendmentsEditCtrl'                                ]]);
   }]);
 }(angular));

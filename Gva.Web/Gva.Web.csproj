@@ -501,6 +501,9 @@
     <Content Include="App\js\gva\aircrafts\views\documentOccurrences\docOccurrencesSearchCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationAmendment.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationAmendmentCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationApproval.html" />
     <Content Include="App\js\gva\organizations\forms\organizationEquipmentCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationAuditplan.html" />
     <Content Include="App\js\gva\organizations\forms\organizationCertOperator.html" />
@@ -520,12 +523,24 @@
     <Content Include="App\js\gva\organizations\resources\organizationData.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAddress.js" />
     <Content Include="App\js\gva\organizations\resources\organizationDocumentOther.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationAmendment.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationApproval.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrEdit.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrNew.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearch.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNew.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsNew.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\auditplans\auditplansEdit.html" />
     <Content Include="App\js\gva\organizations\views\auditplans\auditplansEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\auditplans\auditplansNew.html" />
@@ -935,6 +950,7 @@
     <Content Include="App\schema\person-document-other.sample.js" />
     <Content Include="App\schema\person-document-training.sample.js" />
     <Content Include="App\schema\person-flyingExperience.sample.js" />
+    <Content Include="App\schema\organizations\organization-approval.sample.js" />
     <Content Include="App\schema\organizations\organization-inspections.sample.js" />
     <Content Include="App\schema\organizations\organization-cert-groundserviceoperator.sample.js" />
     <Content Include="App\schema\organizations\organization-auditplan.sample.js" />
@@ -1044,6 +1060,8 @@
     <Content Include="App\test\gva\organizations\mocks\organizationInspectionsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationCertGroundServiceOperatorsSnoOperationalHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationCertGroundServiceOperatorsHttp.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationAmendmentsHttp.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationApprovalsHttp.js" />
     <Content Include="App\test\scaffolding\pageObjects\breadcrumb.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffManagementHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationAuditplansHttp.js" />
@@ -1335,6 +1353,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\schema\organizations\organization-cert-groundserviceoperatorssnooperational.sample.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App\schema\organizations\organization-amendment.sample.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

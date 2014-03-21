@@ -382,7 +382,7 @@
     //Номенклатура Видове организации
     organizationKinds: require('./organizationKind'),
 
-    organizationOtherDocumentTypes: require('./personOtherDocumentType'),
+    organizationOtherDocumentTypes: require('./otherDocumentType'),
 
     organizationOtherDocumentRoles: require('./documentRole'),
 
@@ -409,20 +409,6 @@
       { nomValueId: 4, code: 'A4', name: 'airportoperatorActivityType4', nameAlt: 'airportoperatorActivityType4', alias: 'A4' }
     ],
 
-    //Номенклатура Ниво от несъответствие
-    disparityLevels: require('./disparityLevel'),
-
-    //Номенклатура Класове инциденти с ВС.
-    aircraftOccurrenceClasses: require('./aircraftOccurrenceClass'),
-
-    //Номенклатура Ограничения по част М/Ф и част 145
-    lim145limitations: [
-      { nomValueId: 1, code: 'A1', name: 'А1 - Самолети над 5700 кг', nameAlt: 'А1 - Самолети над 5700 кг', alias: 'A1' },
-      { nomValueId: 2, code: 'A2', name: 'А2 - Самолети 5700 кг и по-малко', nameAlt: 'А2 - Самолети 5700 кг и по-малко', alias: 'A2' },
-      { nomValueId: 3, code: 'A3', name: 'А3 - Хеликоптери', nameAlt: 'А3 - Хеликоптери', alias: 'A3' },
-      { nomValueId: 4, code: 'B1', name: 'B1 - Турбини', nameAlt: 'B1 - Турбини', alias: 'B1' }
-    ],
-
     //Номенклатура Типове дейности на оператор по наземно обслужване или самообслужване
     groundServiceOperatorActivityTypes: [
       { nomValueId: 1, code: 'A1', name: 'groundserviceoperatorActivityType1', nameAlt: 'groundserviceoperatorActivityType1', alias: 'A1' },
@@ -432,6 +418,34 @@
     ],
 
     //Номенклатура Раздел
-    auditParts: require('./auditPart')
+    auditParts: require('./auditPart'),
+
+    approvalStates: [
+      {
+        nomValueId: 1, code: '1', name: 'Валидно', parentValueId: null, alias: '1'
+      },
+      {
+        nomValueId: 2, code: '2', name: 'Върнато', parentValueId: null, alias: '2'
+      },
+      {
+        nomValueId: 3, code: '3', name: 'Ограничено', parentValueId: null, alias: null
+      },
+      {
+        nomValueId: 4, code: '4', name: 'Прекратено', parentValueId: null, alias: '3'
+      },
+      {
+        nomValueId: 5, code: '5', name: 'Анулирано', parentValueId: null, alias: null
+      },
+      {
+        nomValueId: 6, code: '6', name: 'Временно спрени всички права по одобрението', parentValueId: null, alias: null
+      }
+    ],
+
+    lim147limitations: [
+      { nomValueId: 1, code: 'A1', name: 'Самолети с турбинни двигатели', alias: 'A1' },
+      { nomValueId: 2, code: 'A2', name: 'Самолети с бутални двигатели', alias: 'A2' },
+      { nomValueId: 3, code: 'A3', name: 'Вертолети с турбинни двигатели', alias: 'A3' },
+      { nomValueId: 4, code: 'B1', name: 'Вертолети с бутални двигатели', alias: 'B1' }
+    ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

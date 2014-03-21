@@ -1,0 +1,20 @@
+﻿<sc-button name="createBtn" btn-click="newApproval()" text="organizations.approvalSearch.newApproval" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="organizationApprovals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column data="approval.organizationType.name" title="organizations.approvalSearch.organizationType">
+  </sc-column>
+  <sc-column data="approval.documentNumber" title="organizations.approvalSearch.documentNumber">
+  </sc-column>
+  <sc-column data="amendment.part.documentNumber" title="organizations.approvalSearch.documentNumberAmendment">
+  </sc-column>
+  <sc-column data="documentFirstDateIssue" title="organizations.approvalSearch.documentFirstDateIssue" type="date">
+  </sc-column>
+  <sc-column data="amendment.part.documentDateIssue" title="organizations.approvalSearch.documentDateIssueAmendment">
+  </sc-column>
+  <sc-column data="amendment.part.changeNum" title="organizations.approvalSearch.changeNumAmendment">
+  </sc-column>
+  <sc-column data="approval.approvalState.name" title="organizations.approvalSearch.approvalState">
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell">
+    <sc-button name="viewBtn" btn-click="viewAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+</sc-datatable>

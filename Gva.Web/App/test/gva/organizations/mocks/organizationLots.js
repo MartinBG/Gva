@@ -11,12 +11,14 @@
     certGroundServiceOperators = require('./organization-cert-groundserviceoperator.sample'),
     certGroundServiceOperatorsSnoOperational =
     require('./organization-cert-groundserviceoperatorssnooperational.sample'),
-    organizationInspections = require('./organization-inspections.sample');
+    organizationInspections = require('./organization-inspections.sample'),
+    organizationApprovals = require('./organization-approval.sample'),
+    organizationAmendments = require('./organization-amendment.sample');
 
   angular.module('app').constant('organizationLots', [
     {
       lotId: 1,
-      nextIndex: 17,
+      nextIndex: 20,
       organizationData: {
         partIndex: 1,
         part: organizationData.organization1Data
@@ -102,7 +104,23 @@
         },
         {
           partIndex: 16,
-          part: organizationInspections.organization1Inspection2
+          part: organizationInspections.Inspection2
+        }
+      ],
+      organizationApprovals: [
+        {
+          partIndex: 17,
+          part: organizationApprovals.organization1Approval1,
+          amendments: [
+            {
+              partIndex: 18,
+              part: organizationAmendments.organization1Amendment1
+            },
+            {
+              partIndex: 19,
+              part: organizationAmendments.organization1Amendment2
+            }
+          ]
         }
       ]
     }
