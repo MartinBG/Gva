@@ -3,10 +3,12 @@
   'use strict';
 
   var aircraftData = require('./aircraft-data.sample'),
+      aircraftDataApex = require('./aircraft-dataapex.sample'),
       aircraftCertRegistrations = require('./aircraft-cert-registrations.sample'),
       aircraftCertSmods = require('./aircraft-cert-smods.sample'),
       aircraftCertMarks = require('./aircraft-cert-marks.sample'),
       aircraftCertAirworthinesses = require('./aircraft-cert-airworthinesses.sample'),
+      aircraftCertAirworthinessesFM = require('./aircraft-cert-airworthinessesfm.sample'),
       aircraftCertNoises = require('./aircraft-cert-noises.sample'),
       aircraftCertNoisesFM = require('./aircraft-cert-noisesfm.sample'),
       aircraftCertPermitsToFly = require('./aircraft-cert-permitstofly.sample'),
@@ -23,10 +25,14 @@
   angular.module('app').constant('aircraftLots', [
     {
       lotId: 1,
-      nextIndex: 30,
+      nextIndex: 32,
       aircraftData: {
         partIndex: 1,
         part: aircraftData.aircraft1Data
+      },
+      aircraftDataApex: {
+        partIndex: 30,
+        part: aircraftDataApex.aircraft1Data
       },
       aircraftCertRegistrations: [
         {
@@ -70,6 +76,12 @@
         {
           partIndex: 10,
           part: aircraftCertAirworthinesses.aircraft1Airworthiness1
+        }
+      ],
+      aircraftCertAirworthinessesFM: [
+        {
+          partIndex: 31,
+          part: aircraftCertAirworthinessesFM.aircraft1Airworthiness1
         }
       ],
       aircraftCertNoises: [
@@ -171,10 +183,14 @@
     },
     {
       lotId: 2,
-      nextIndex: 2,
+      nextIndex: 3,
       aircraftData: {
         partIndex: 1,
         part: aircraftData.aircraft2Data
+      },
+      aircraftDataApex: {
+        partIndex: 2,
+        part: aircraftDataApex.aircraft2Data
       }
     }
   ]);

@@ -1,0 +1,27 @@
+﻿<sc-button name="createBtn" btn-click="newCertAirworthiness()" text="aircrafts.airworthinessFMSearch.newAirworthiness" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="aws" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editCertAirworthiness(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteCertAirworthiness(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.issueDate" title="aircrafts.airworthinessFMSearch.issueDate" type="date">
+  </sc-column>
+  <sc-column data="part.validFromDate" title="aircrafts.airworthinessFMSearch.validFromDate" type="date">
+  </sc-column>
+  <sc-column data="part.validToDate" title="aircrafts.airworthinessFMSearch.validToDate" type="date">
+  </sc-column>
+  <sc-column data="part.inspector.name" title="aircrafts.airworthinessFMSearch.inspector" type="date">
+  </sc-column>
+  <sc-column data="part.incomingDocNumber" title="aircrafts.airworthinessFMSearch.incomingDocNumber">
+  </sc-column>
+  <sc-column data="part.incomingDocDate" title="aircrafts.airworthinessFMSearch.incomingDocDate" type="date">
+  </sc-column>
+  <sc-column data="part.EASA25IssueDate" title="aircrafts.airworthinessFMSearch.EASA25IssueDate" type="date">
+  </sc-column>
+  <sc-column data="part.EASA24IssueDate" title="aircrafts.airworthinessFMSearch.EASA24IssueDate" type="date">
+  </sc-column>
+  <sc-column data="part.EASA15IssueDate" title="aircrafts.airworthinessFMSearch.EASA15IssueDate" type="date">
+  </sc-column>
+  <sc-column data="part.EASA15IssueRefNo" title="aircrafts.airworthinessFMSearch.EASA15IssueRefNo">
+  </sc-column>
+</sc-datatable>
