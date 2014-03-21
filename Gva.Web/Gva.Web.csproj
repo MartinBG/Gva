@@ -501,6 +501,8 @@
     <Content Include="App\js\gva\aircrafts\views\documentOccurrences\docOccurrencesSearchCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\common\views\publishers\choosePublisher.html" />
+    <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffExaminer.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendment.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendmentCtrl.js" />
@@ -593,8 +595,6 @@
     <Content Include="App\js\gva\organizations\views\organizationsViewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationData\organizationDataEdit.html" />
     <Content Include="App\js\gva\organizations\views\organizationData\organizationDataEditCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\publishers\choosePublisher.html" />
-    <Content Include="App\js\gva\organizations\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementEdit.html" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementNew.html" />
@@ -763,8 +763,6 @@
     <Content Include="App\js\gva\persons\views\personsSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\personsView.html" />
     <Content Include="App\js\gva\persons\views\personsViewCtrl.js" />
-    <Content Include="App\js\gva\persons\views\publishers\choosePublisher.html" />
-    <Content Include="App\js\gva\persons\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\persons\views\ratings\editions\editionsEdit.html" />
     <Content Include="App\js\gva\persons\views\ratings\editions\editionsEditCtrl.js" />
     <Content Include="App\js\gva\persons\views\ratings\editions\editionsNew.html" />

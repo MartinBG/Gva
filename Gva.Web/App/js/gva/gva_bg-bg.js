@@ -4,6 +4,14 @@
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
+        publishers: {
+          text: 'Текст',
+          publisherType: 'Тип',
+          name: 'Наименование',
+          back: 'Назад',
+          search: 'Търси',
+          select: 'Избор'
+        },
         auditDetailDirective: {
           auditDetailsTable: {
             title: 'Главни обобщени констатации',
@@ -1372,14 +1380,6 @@
         ratingNew: {
           save: 'Запис',
           cancel: 'Отказ'
-        },
-        publishers: {
-          text: 'Текст',
-          publisherType: 'Тип',
-          name: 'Наименование',
-          back: 'Назад',
-          search: 'Търси',
-          select: 'Избор'
         }
       },
       applications: {
@@ -1488,14 +1488,6 @@
         }
       },
       organizations: {
-        publishers: {
-          text: 'Текст',
-          publisherType: 'Тип',
-          name: 'Наименование',
-          back: 'Назад',
-          search: 'Търси',
-          select: 'Избор'
-        },
         search: {
           newOrganization: 'Нова организация',
           search: 'Търси',
