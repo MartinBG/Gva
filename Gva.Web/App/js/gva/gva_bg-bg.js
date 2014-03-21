@@ -1598,6 +1598,28 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        staffExaminerSearch: {
+          newStaffExaminer: 'Нов проверяващи',
+          nomValueId: 'Идентификатор',
+          code: 'Код',
+          name: 'Наименование',
+          valid: 'Валиден',
+          person: 'Физическо лице',
+          content: {
+            stampNumber: '№ на печат',
+            organization: 'Организация',
+            permitedAW: 'Разрешена проверка на ЛГ',
+            permitedCheck: 'Разрешена проверка на лица'
+          }
+        },
+        newStaffExaminer: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editStaffChecker: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         otherSearch: {
           documentNumber: 'Док No',
           documentPersonNumber: 'No в списъка (групов документ)',
@@ -1859,6 +1881,24 @@
             linkedLim: 'Връзка с Обхват на одобрение',
             linkedDocumentId: 'Връзка с документ от документите на организацията',
             noAvailableDocuments: 'Няма налични документи'
+          }
+        },
+        staffExaminerDirective: {
+          title: 'Проверяващ',
+          newStaffManagement: 'Нов проверяващи',
+          nomValueId: 'Идентификатор',
+          code: 'Код',
+          name: 'Наименование',
+          nameAlt: 'Наименование на поддържащ език',
+          alias: 'Псевдоним',
+          valid: 'Валиден',
+          person: 'Физическо лице',
+          content: {
+            title: 'Допълнителни данни',
+            stampNumber: '№ на печат',
+            organization: 'Организация',
+            permitedAW: 'Разрешена проверка на ЛГ',
+            permitedCheck: 'Разрешена проверка на лица'
           }
         }
       },

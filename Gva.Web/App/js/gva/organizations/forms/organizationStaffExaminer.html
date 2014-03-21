@@ -1,0 +1,68 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="organizations.staffExaminerDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.nomValueId"></label>
+          <sc-int ng-model="model.nomValueId"></sc-int>
+        </div>
+         <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.code"></label>
+          <sc-text ng-model="model.code"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.name"></label>
+          <sc-text ng-model="model.name"></sc-text>
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.nameAlt"></label>
+          <sc-text ng-model="model.nameAlt"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.alias"></label>
+          <sc-text ng-model="model.alias"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.valid"></label>
+          <sc-nomenclature ng-model="model.valid" alias="'boolean'"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.person"></label>
+          <sc-nomenclature ng-model="model.parentValue" alias="'persons'"></sc-nomenclature>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="organizations.staffExaminerDirective.content.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+         <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.stampNumber"></label>
+          <sc-text ng-model="model.content.stampNumber"></sc-text>
+        </div>
+        <div class="form-group col-sm-2 col-md-2">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.organization"></label>
+          <sc-nomenclature ng-model="model.content.organization" alias="'organizations'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.permitedAW"></label>
+          <sc-nomenclature ng-model="model.content.permitedAW" alias="'boolean'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+          <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.permitedCheck"></label>
+          <sc-nomenclature ng-model="model.content.permitedCheck" alias="'boolean'"></sc-nomenclature>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>
