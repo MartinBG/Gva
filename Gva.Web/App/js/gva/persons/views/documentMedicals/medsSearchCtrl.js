@@ -53,7 +53,7 @@
             var testimonial = med.part.documentNumberPrefix + '-' +
               med.part.documentNumber + '-' +
               person.lin + '-' +
-              med.part.documentNumberSuffix;
+              (med.part.documentNumberSuffix || '');
 
             med.part.testimonial = testimonial;
 

@@ -20,18 +20,17 @@ namespace Gva.Api.Repositories.InventoryRepository
             this.unitOfWork.DbContext.Set<GvaInventoryItem>().Add(inventoryItem);
         }
 
-        public GvaInventoryItem GetInventoryItem(int partId, int? caseTypeId)
+        public GvaInventoryItem GetInventoryItem(int partId)
         {
             return this.unitOfWork.DbContext.Set<GvaInventoryItem>()
-                .SingleOrDefault(i => i.PartId == partId && (caseTypeId.HasValue ? i.CaseTypeId == caseTypeId : i.CaseTypeId.Equals(null)));
+                .SingleOrDefault(i => i.PartId == partId);
         }
 
-        public IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId, int? caseTypeId)
+        public IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaInventoryItem>()
                 .Include(i => i.Part)
-                .Where(i => i.LotId == lotId && (caseTypeId.HasValue ? i.CaseTypeId == caseTypeId : true))
-                .OrderBy(i => i.PageIndex);
+                .Where(i => i.LotId == lotId);
         }
 
         public void DeleteInventoryItemsForPart(int partId)

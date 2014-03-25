@@ -30,35 +30,40 @@ namespace Gva.Api.Mappers.Resolvers
             var files = new List<FileDO>();
             foreach (var lotFile in lotFiles)
             {
-                FileDO file = new FileDO()
-                {
-                    LotFileId = lotFile.GvaLotFileId,
-                    BookPageNumber = lotFile.PageIndex,
-                    PageCount = lotFile.PageNumber,
-                    CaseType = Mapper.Map<GvaCaseType, NomValue>(lotFile.GvaCaseType),
-                    Applications = Mapper.Map<List<GvaApplication>, List<ApplicationNomDO>>(lotFile.GvaAppLotFiles.Select(af => af.GvaApplication).ToList())
-                };
-
-                FileDataDO fileData = new FileDataDO();
-                if (lotFile.DocFileId.HasValue)
-                {
-                    fileData.Name = lotFile.DocFile.DocFileName;
-                    fileData.Key = lotFile.DocFile.DocFileContentId;
-                    file.IsDocFile = true;
-                }
-                else
-                {
-                    fileData.Name = lotFile.GvaFile.Filename;
-                    fileData.Key = lotFile.GvaFile.FileContentId;
-                    file.IsDocFile = false;
-                }
-
-                file.File = fileData;
-
-                files.Add(file);
+                files.Add(this.GetFileDO(lotFile));
             }
 
             return files.ToArray();
+        }
+
+        private FileDO GetFileDO(GvaLotFile lotFile)
+        {
+            FileDO file = new FileDO()
+            {
+                LotFileId = lotFile.GvaLotFileId,
+                BookPageNumber = lotFile.PageIndex,
+                PageCount = lotFile.PageNumber,
+                CaseType = Mapper.Map<GvaCaseType, NomValue>(lotFile.GvaCaseType),
+                Applications = Mapper.Map<List<GvaApplication>, List<ApplicationNomDO>>(lotFile.GvaAppLotFiles.Select(af => af.GvaApplication).ToList())
+            };
+
+            FileDataDO fileData = new FileDataDO();
+            if (lotFile.DocFileId.HasValue)
+            {
+                fileData.Name = lotFile.DocFile.DocFileName;
+                fileData.Key = lotFile.DocFile.DocFileContentId;
+                file.IsDocFile = true;
+            }
+            else
+            {
+                fileData.Name = lotFile.GvaFile.Filename;
+                fileData.Key = lotFile.GvaFile.FileContentId;
+                file.IsDocFile = false;
+            }
+
+            file.File = fileData;
+
+            return file;
         }
     }
 }

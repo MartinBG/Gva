@@ -5,14 +5,8 @@ CREATE TABLE [dbo].[GvaInventoryItems] (
     [GvaInventoryItemId] INT              NOT NULL IDENTITY,
     [LotId]              INT              NOT NULL,
     [LotPartId]          INT              NOT NULL,
-    [GvaCaseTypeId]      INT              NULL,
-    [Filename]           NVARCHAR (50)    NULL,
-    [FileContentId]      UNIQUEIDENTIFIER NULL,
     [DocumentType]       NVARCHAR(50)     NOT NULL,
     [Name]               NVARCHAR(MAX)    NOT NULL,
-    [BookPageNumber]     NVARCHAR(50)     NULL,
-    [PageIndex]          NVARCHAR(50)     NULL,
-    [PageCount]          INT              NULL,
     [Type]               NVARCHAR(150)    NULL,
     [Number]             NVARCHAR(50)     NULL,
     [Date]               DATETIME2(7)     NULL,
@@ -26,8 +20,7 @@ CREATE TABLE [dbo].[GvaInventoryItems] (
     [EditedDate]         DATETIME2(7)     NULL,
     CONSTRAINT [PK_GvaInventoryItems]              PRIMARY KEY ([GvaInventoryItemId]),
     CONSTRAINT [FK_GvaInventoryItems_Lots]         FOREIGN KEY ([LotId])         REFERENCES [dbo].[Lots] ([LotId]),
-    CONSTRAINT [FK_GvaInventoryItems_LotParts]     FOREIGN KEY ([LotPartId])     REFERENCES [dbo].[LotParts] ([LotPartId]),
-    CONSTRAINT [FK_GvaInventoryItems_GvaCaseTypes] FOREIGN KEY ([GvaCaseTypeId]) REFERENCES [dbo].[GvaCaseTypes] ([GvaCaseTypeId])
+    CONSTRAINT [FK_GvaInventoryItems_LotParts]     FOREIGN KEY ([LotPartId])     REFERENCES [dbo].[LotParts] ([LotPartId])
 )
 GO
 
@@ -35,14 +28,8 @@ exec spDescTable  N'GvaInventoryItems', N'Опис.'
 exec spDescColumn N'GvaInventoryItems', N'GvaInventoryItemId', N'Уникален системно генериран идентификатор.'
 exec spDescColumn N'GvaInventoryItems', N'LotId'             , N'Идентификатор на партидата.'
 exec spDescColumn N'GvaInventoryItems', N'LotPartId'         , N'Идентификатор на част от партидата.'
-exec spDescColumn N'GvaInventoryItems', N'GvaCaseTypeId'     , N'Идентификатор на тип дело.'
-exec spDescColumn N'GvaInventoryItems', N'Filename'          , N'Име на файла.'
-exec spDescColumn N'GvaInventoryItems', N'FileContentId'     , N'Съдържание на файла.'
 exec spDescColumn N'GvaInventoryItems', N'DocumentType'      , N'Вид документ.'
 exec spDescColumn N'GvaInventoryItems', N'Name'              , N'Единен граждански номер.'
-exec spDescColumn N'GvaInventoryItems', N'BookPageNumber'    , N'Номер на страница в делов. книга.'
-exec spDescColumn N'GvaInventoryItems', N'PageIndex'         , N'Форматиран номер на страница в делов. книга.'
-exec spDescColumn N'GvaInventoryItems', N'PageCount'         , N'Брой страници в делов. книга.'
 exec spDescColumn N'GvaInventoryItems', N'Type'              , N'Тип документ.'
 exec spDescColumn N'GvaInventoryItems', N'Number'            , N'Номер на документ.'
 exec spDescColumn N'GvaInventoryItems', N'Date'              , N'Дата.'

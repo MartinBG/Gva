@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using System.Text.RegularExpressions;
 using Regs.Api.Models;
 
 namespace Gva.Api.Models
@@ -23,6 +24,8 @@ namespace Gva.Api.Models
 
         public string PageIndex { get; set; }
 
+        public string FormPageIndex { get; set; }
+
         public int? PageNumber { get; set; }
 
         public virtual Docs.Api.Models.DocFile DocFile { get; set; }
@@ -34,6 +37,16 @@ namespace Gva.Api.Models
         public virtual GvaFile GvaFile { get; set; }
 
         public virtual Part LotPart { get; set; }
+
+        public void SavePageIndex(string pageIndex)
+        {
+            this.PageIndex = pageIndex;
+
+            var pageIndexNumPart = Regex.Match(pageIndex, @"^\d+");
+            this.FormPageIndex = pageIndexNumPart.Success ?
+                string.Format("{0:D5}{1}", int.Parse(pageIndexNumPart.Value), pageIndex.Substring(pageIndexNumPart.Value.Length)) :
+                pageIndex;
+        }
     }
 
     public class GvaLotFileMap : EntityTypeConfiguration<GvaLotFile>
@@ -56,6 +69,7 @@ namespace Gva.Api.Models
             this.Property(t => t.DocFileId).HasColumnName("DocFileId");
             this.Property(t => t.GvaCaseTypeId).HasColumnName("GvaCaseTypeId");
             this.Property(t => t.PageIndex).HasColumnName("PageIndex");
+            this.Property(t => t.FormPageIndex).HasColumnName("FormPageIndex");
             this.Property(t => t.PageNumber).HasColumnName("PageNumber");
 
             // Relationships

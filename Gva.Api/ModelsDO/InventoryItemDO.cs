@@ -10,8 +10,6 @@ namespace Gva.Api.ModelsDO
 
         public string Name { get; set; }
 
-        public string BookPageNumber { get; set; }
-
         public string Type { get; set; }
 
         public string Number { get; set; }
@@ -20,13 +18,11 @@ namespace Gva.Api.ModelsDO
 
         public string Publisher { get; set; }
 
-        public bool Valid { get; set; }
+        public bool? Valid { get; set; }
 
         public DateTime? FromDate { get; set; }
 
         public DateTime? ToDate { get; set; }
-
-        public int? PageCount { get; set; }
 
         public string CreatedBy { get; set; }
 
@@ -36,6 +32,6 @@ namespace Gva.Api.ModelsDO
 
         public DateTime? EditedDate { get; set; }
 
-        public FileDataDO File { get; set; }
+        public FileDO File { get; set; }
     }
 }

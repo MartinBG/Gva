@@ -97,9 +97,41 @@ namespace Gva.Api.Controllers
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
+            var inventoryItems = this.inventoryRepository.GetInventoryItemsForLot(lotId);
 
-            return Ok(Mapper.Map<IEnumerable<GvaInventoryItem>, IEnumerable<InventoryItemDO>>(inventory));
+            List<Tuple<GvaInventoryItem, GvaLotFile>> inventory;
+            if (caseTypeId.HasValue)
+            {
+                var lotFiles = this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value);
+
+                inventory = inventoryItems
+                    .Join(
+                        lotFiles,
+                        i => i.PartId,
+                        f => f.LotPartId,
+                        (i, f) => Tuple.Create(i, f))
+                    .ToList();
+            }
+            else
+            {
+                inventory = new List<Tuple<GvaInventoryItem, GvaLotFile>>();
+                foreach (var inventoryItem in inventoryItems)
+                {
+                    var lotFiles = this.fileRepository.GetFileReferences(inventoryItem.PartId, null);
+
+                    if (lotFiles.Length == 0)
+                    {
+                        inventory.Add(Tuple.Create<GvaInventoryItem, GvaLotFile>(inventoryItem, null));
+                    }
+
+                    foreach (var lotFile in lotFiles)
+                    {
+                        inventory.Add(Tuple.Create(inventoryItem, lotFile));
+                    }
+                }
+            }
+
+            return Ok(Mapper.Map<List<InventoryItemDO>>(inventory));
         }
 
         [Route("{lotId}/applications")]

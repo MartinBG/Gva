@@ -7,9 +7,9 @@ namespace Gva.Api.Repositories.InventoryRepository
     {
         void AddInventoryItem(GvaInventoryItem inventoryItem);
 
-        GvaInventoryItem GetInventoryItem(int partId, int? caseTypeId);
+        GvaInventoryItem GetInventoryItem(int partId);
 
-        IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId, int? caseTypeId);
+        IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId);
 
         void DeleteInventoryItemsForPart(int partId);
 

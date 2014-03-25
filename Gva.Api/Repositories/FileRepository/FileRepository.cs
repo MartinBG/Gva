@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
-using Gva.Api.LotEvents;
 using Gva.Api.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
@@ -56,8 +55,6 @@ namespace Gva.Api.Repositories.FileRepository
                     updatedFiles.Add(lotFile);
                 }
             }
-
-            Events.Raise(new FileEvent(addedFiles, updatedFiles, deletedFiles, partVersion));
         }
 
         public void DeleteFileReferences(PartVersion partVersion)
@@ -70,8 +67,6 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 this.DeleteLotFile(lotFile);
             }
-
-            Events.Raise(new FileEvent(new List<GvaLotFile>(), new List<GvaLotFile>(), new List<GvaLotFile>(), partVersion));
         }
 
         public GvaLotFile[] GetFileReferences(int partId, int? caseType)
@@ -83,6 +78,7 @@ namespace Gva.Api.Repositories.FileRepository
                 .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaAppLotFiles.Select(gf => gf.GvaApplication))
                 .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
+                .OrderBy(f => f.FormPageIndex)
                 .ToArray();
         }
 
@@ -90,7 +86,10 @@ namespace Gva.Api.Repositories.FileRepository
         {
             return this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.GvaCaseType)
+                .Include(f => f.DocFile)
+                .Include(f => f.GvaFile)
                 .Where(f => f.LotPart.LotId == lotId && f.GvaCaseTypeId == caseType)
+                .OrderBy(f => f.FormPageIndex)
                 .ToArray();
         }
 
@@ -111,9 +110,9 @@ namespace Gva.Api.Repositories.FileRepository
                 LotPart = part,
                 GvaFile = file,
                 GvaCaseTypeId = fileObj.caseType.nomValueId,
-                PageNumber = (int?)fileObj.pageCount,
-                PageIndex = fileObj.bookPageNumber
+                PageNumber = (int?)fileObj.pageCount
             };
+            newLotFile.SavePageIndex((string)fileObj.bookPageNumber);
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
 
@@ -135,7 +134,7 @@ namespace Gva.Api.Repositories.FileRepository
         {
             lotFile.GvaCaseTypeId = fileObj.caseType.nomValueId;
             lotFile.PageNumber = fileObj.pageCount;
-            lotFile.PageIndex = fileObj.bookPageNumber;
+            lotFile.SavePageIndex((string)fileObj.bookPageNumber);
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
                 (JArray)fileObj.applications,
