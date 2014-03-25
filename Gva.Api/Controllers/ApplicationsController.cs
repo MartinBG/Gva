@@ -314,9 +314,11 @@ namespace Gva.Api.Controllers
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
+                    GvaCaseTypeId = (int)appFile.caseTypeId,
                     PageIndex = (string)appFile.bookPageNumber,
                     PageNumber = (int)appFile.pageCount
                 };
+                lotFile.SavePageIndex(lotFile.PageIndex);
 
                 GvaApplication application = new GvaApplication()
                 {

@@ -31,6 +31,12 @@
       return $state.go('root.applications.search');
     };
 
+    $scope.$watch('appModel.person.id', function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        appModel.appFile.lotId = newVal;
+      }
+    }, true);
+
     $scope.save = function () {
       $scope.appForm.$validate()
       .then(function () {
@@ -94,7 +100,8 @@
             doc: doc,
             docFormatTypes: res.docFormatTypes,
             docCasePartTypes: res.docCasePartTypes,
-            docDirections: res.docDirections
+            docDirections: res.docDirections,
+            appFile: {}
           };
         });
       }

@@ -287,6 +287,10 @@
       templateUrl: 'gva/airports/forms/airportDocumentApplication.html',
       controller: 'AirportDocumentApplicationCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaApplicationDocument',
+      templateUrl: 'gva/applications/forms/applicationDocument.html'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
