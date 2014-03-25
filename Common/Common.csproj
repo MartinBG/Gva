@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
@@ -107,6 +108,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\IDbConfiguration.cs" />
@@ -134,6 +136,8 @@
     <Compile Include="Utils\NLogTraceFilter.cs" />
     <Compile Include="Utils\RequestIdLayoutRenderer.cs" />
     <Compile Include="Utils\SuppressFormsAuthenticationRedirectModule.cs" />
+    <Compile Include="WordTemplates\WordCustomXmlToContentControls.cs" />
+    <Compile Include="WordTemplates\WordTemplateProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
