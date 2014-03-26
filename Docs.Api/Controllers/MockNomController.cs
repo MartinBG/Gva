@@ -776,5 +776,30 @@ namespace Docs.Api.Controllers
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, arrayValue);
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetYesNo(
+            string term = null,
+            int? id = null,
+            string va = null
+            )
+        {
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new[] {
+                new 
+                { 
+                    nomValueId = 0,
+                    name = "Не",
+                    alias = "No",
+                    isActive = true
+                },
+                new 
+                { 
+                    nomValueId = 1,
+                    name = "Да",
+                    alias = "Yes",
+                    isActive = true
+                }
+            });
+        }
     }
 }

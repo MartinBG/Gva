@@ -104,20 +104,26 @@
             principalUnitName: 'От',
             toUnitName: 'До',
             note: 'Забележка',
+            author: 'Въвел',
             'delete': 'изтрий',
             request: {
               toUnit: 'Към служител',
+              toUnitSign: 'Към служител за ПОДПИСВАНЕ',
+              toUnitDiscuss: 'Към служител за СЪГЛАСУВАНЕ',
+              toUnitApproval: 'Към служител за ОДОБРЕНИЕ',
+              toUnitRegistration: 'Към служител за РЕГИСТРАЦИЯ',
               fromUser: 'От',
               note: 'Забележка',
               save: 'Запис',
               cancel: 'Отказ'
             },
             confirm: {
+              author: 'Въвел',
               fromUser: 'От служител',
               note: 'Забележка',
-              sign: 'Подписвам',
-              approve: 'Одобрявам',
-              coordinate: 'Съгласувам',
+              sign: 'ПОДПИСВАМ',
+              approve: 'ОДОБРЯВАМ',
+              discuss: 'СЪГЛАСУВАМ',
               save: 'Запис',
               cancel: 'Отказ'
             }

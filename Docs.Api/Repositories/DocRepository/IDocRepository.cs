@@ -20,11 +20,26 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterId(int id);
 
+        Doc NextDocStatus(
+            int id,
+            byte[] docVersion,
+            bool forceClosure,
+            List<DocStatus> docStatuses,
+            List<DocCasePartType> docCasePartTypes,
+            UserContext userContext,
+            out List<DocRelation> docRelations);
+
+        Doc ReverseDocStatus(int id, byte[] docVersion, List<DocStatus> docStatuses, UserContext userContext);
+
+        Doc CancelDoc(int id, byte[] docVersion, DocStatus cancelDocStatus, UserContext userContext);
+
+        Doc UpdateDocCasePartType(int id, byte[] docVersion, int docCasePartTypeId, UserContext userContext);
+
         List<DocRelation> GetCaseRelationsByDocId(int id, params Expression<Func<DocRelation, object>>[] includes);
 
         List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser);
 
-        void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext);
+        void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext, bool checkVersion = false, byte[] docVersion = null);
 
         void GenerateAccessCode(Doc doc, UserContext userContext);
 
@@ -39,7 +54,7 @@ namespace Docs.Api.Repositories.DocRepository
             int? docTypeId,
             int? docFormatTypeId,
             int? docRegisterId,
-            UserContext userContext); 
+            UserContext userContext);
 
         List<Doc> GetCurrentCaseDocs(
             DateTime? fromDate,

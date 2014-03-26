@@ -5,41 +5,39 @@
   function WorkflowConfirmCtrl(
     $scope,
     $state,
+    $stateParams,
+    l10n,
     DocWorkflow,
     doc,
     workflowModel
   ) {
-    switch($state.current.url) {
+    $scope.workflowModel = workflowModel;
+    switch ($state.current.url) {
     case '/signConfirm':
-      workflowModel.docWorkflowActionId = 5;
+      $scope.workflowModel.docWorkflowActionAlias = 'Sign';
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.confirm.sign');
       break;
     case '/discussConfirm':
-      workflowModel.docWorkflowActionId = 6;
+      $scope.workflowModel.docWorkflowActionAlias = 'Discuss';
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.confirm.discuss');
       break;
     case '/approvalConfirm':
-      workflowModel.docWorkflowActionId = 7;
+      $scope.workflowModel.docWorkflowActionAlias = 'Approval';
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.confirm.approve');
       break;
     }
-
-    $scope.workflowModel = workflowModel;
 
     $scope.save = function () {
       $scope.workflowForm.$validate().then(function () {
         if ($scope.workflowForm.$valid) {
-
-          var workflowData = {
-            confirm:$scope.workflowModel.confirm.id,
-            note: $scope.workflowModel.note,
-            userId: $scope.workflowModel.userId,
-            userName: $scope.workflowModel.userName,
-            docWorkflowActionId: $scope.workflowModel.docWorkflowActionId
-          };
-
-          return DocWorkflow.add({ docId: workflowModel.docId }, workflowData).$promise
-            .then(function (result) {
-            doc.docWorkflows = result.docWorkflows;
-            return $state.go('^');
-          });
+          return DocWorkflow.save({
+            docId: $scope.workflowModel.docId,
+            docVersion: $scope.workflowModel.docVersion
+          }, $scope.workflowModel)
+        .$promise
+            .then(function () {
+              return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
+            });
         }
       });
     };
@@ -52,6 +50,8 @@
   WorkflowConfirmCtrl.$inject = [
     '$scope',
     '$state',
+    '$stateParams',
+    'l10n',
     'DocWorkflow',
     'doc',
     'workflowModel'
@@ -61,9 +61,13 @@
     workflowModel: ['doc',
       function (doc) {
         return {
+          canChooseUnit: doc.canSubstituteManagement,
           docId: doc.docId,
-          userId: 1,
-          userName: 'Admin'
+          docVersion: doc.version,
+          unitUserId: doc.unitUser.unitUserId,
+          principalUnitId: doc.unitUser.unitId,
+          username: doc.unitUser.username,
+          unitName: doc.unitUser.unitName
         };
       }
     ]

@@ -15,17 +15,15 @@ using System.Data.SqlClient;
 using Common.Api.Repositories;
 using Common.Utils;
 using System.Linq.Expressions;
+using System.Data.Entity.Core;
 
 namespace Docs.Api.Repositories.DocRepository
 {
     public class DocRepository : Repository<Doc>, IDocRepository
     {
-        //private IUnitOfWork unitOfWork;
-
         public DocRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-            //this.unitOfWork = unitOfWork;
         }
 
         public string spSetDocUsers(int id)
@@ -50,6 +48,222 @@ namespace Docs.Api.Repositories.DocRepository
             parameters.Add(new SqlParameter("DocId", id));
 
             return this.ExecProcedure<int?>("spGetDocRegisterId", parameters).FirstOrDefault();
+        }
+
+        public Doc NextDocStatus(
+            int id,
+            byte[] docVersion,
+            bool forceClosure,
+            List<DocStatus> docStatuses,
+            List<DocCasePartType> docCasePartTypes,
+            UserContext userContext,
+            out List<DocRelation> docRelations)
+        {
+            Doc doc = this.Find(id,
+                e => e.DocStatus,
+                e => e.DocRelations);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.ModifyDate = DateTime.Now;
+            doc.ModifyUserId = userContext.UserId;
+
+            docRelations = new List<DocRelation>();
+            DocStatus newDocStatus;
+
+            switch (doc.DocStatus.Alias)
+            {
+                case "Draft":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+                    break;
+                case "Prepared":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+
+                    #region Sending ResolutionOrTaskAssigned mail
+                    //?
+                    //List<DocUnit> docUnits = new List<DocUnit>();
+
+                    //if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
+                    //{
+                    //    DocUnitRole docUnitRoleInCharge = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("InCharge");
+                    //    DocUnitRole docUnitRoleControlling = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("Controlling");
+                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleInCharge.DocUnitRoleId || du.DocUnitRoleId == docUnitRoleControlling.DocUnitRoleId).ToList());
+                    //}
+                    //else if (doc.DocEntryType.Alias == "Document")
+                    //{
+                    //    DocUnitRole docUnitRoleTo = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("To");
+                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId).ToList());
+                    //}
+
+                    //if (docUnits.Count > 0)
+                    //{
+                    //    AdministrativeEmailType taskAssignedEmailType = this.unitOfWork.Repo<AdministrativeEmailType>().GetByAlias("ResolutionOrTaskAssigned");
+                    //    AdministrativeEmailStatus emailStatusNew = this.unitOfWork.Repo<AdministrativeEmailStatus>().GetByAlias("New");
+
+                    //    foreach (var docUnit in docUnits)
+                    //    {
+                    //        User toUser = this.unitOfWork.Repo<User>().GetByUnitId(docUnit.UnitId);
+                    //        if (!String.IsNullOrWhiteSpace(toUser.Email))
+                    //        {
+                    //            AdministrativeEmail email = new AdministrativeEmail();
+                    //            email.TypeId = taskAssignedEmailType.AdministrativeEmailTypeId;
+                    //            email.UserId = toUser.UserId;
+                    //            email.Param1 = String.Format(Request.RequestUri.OriginalString.Replace(Request.RequestUri.PathAndQuery, "/#/docs/{0}"), doc.DocId);
+                    //            email.StatusId = emailStatusNew.AdministrativeEmailStatusId;
+                    //            email.Subject = taskAssignedEmailType.Subject;
+                    //            email.Body = taskAssignedEmailType.Body.Replace("@@Param1", email.Param1);
+
+                    //            this.unitOfWork.Repo<AdministrativeEmail>().Add(email);
+                    //        }
+                    //    }
+                    //}
+
+                    #endregion
+
+                    break;
+                case "Processed":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Finished");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+
+                    if (doc.IsCase)
+                    {
+                        int caseDocId = doc.DocRelations.FirstOrDefault().RootDocId.Value;
+
+                        DocCasePartType dcptControl = docCasePartTypes.SingleOrDefault(e => e.Alias == "Control");
+                        DocStatus cancelStatus = docStatuses.SingleOrDefault(e => e.Alias == "Canceled");
+
+                        var caseDocRelations = this.GetCaseRelationsByDocId(caseDocId,
+                            e => e.Doc.DocCasePartType,
+                            //e => e.Doc.DocCasePartMovements.Select(dc => dc.User), //?
+                            e => e.Doc.DocDirection,
+                            e => e.Doc.DocType,
+                            e => e.Doc.DocStatus,
+                            e => e.RootDoc,
+                            e => e.ParentDoc.DocType)
+                            .Where(e => e.RootDocId == caseDocId
+                                && e.Doc.DocId != id
+                                && e.Doc.DocCasePartTypeId != dcptControl.DocCasePartTypeId
+                                && e.Doc.DocStatusId != newDocStatus.DocStatusId
+                                && e.Doc.DocStatusId != cancelStatus.DocStatusId)
+                            .ToList();
+
+                        if (caseDocRelations.Any())
+                        {
+                            if (forceClosure)
+                            {
+                                foreach (var item in docRelations)
+                                {
+                                    item.Doc.DocStatusId = newDocStatus.DocStatusId;
+                                    item.Doc.DocStatus = newDocStatus;
+                                }
+                            }
+                            else
+                            {
+                                docRelations = caseDocRelations;
+                            }
+                        }
+                    }
+                    break;
+                case "Finished":
+                default:
+                    throw new Exception("Unreachable next doc status");
+            };
+
+            return doc;
+        }
+
+        public Doc ReverseDocStatus(int id, byte[] docVersion, List<DocStatus> docStatuses, UserContext userContext)
+        {
+            Doc doc = this.Find(id,
+                e => e.DocStatus,
+                e => e.DocRelations);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.ModifyDate = DateTime.Now;
+            doc.ModifyUserId = userContext.UserId;
+
+            DocStatus newDocStatus;
+
+            switch (doc.DocStatus.Alias)
+            {
+                case "Prepared":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Draft");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+                    break;
+                case "Processed":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+                    break;
+                case "Finished":
+                case "Canceled":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+                    break;
+                case "Draft":
+                default:
+                    throw new Exception("Unreachable previous doc status");
+            };
+
+            return doc;
+        }
+
+        public Doc CancelDoc(int id, byte[] docVersion, DocStatus cancelDocStatus, UserContext userContext)
+        {
+            Doc doc = this.Find(id,
+                e => e.DocStatus,
+                e => e.DocRelations);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.ModifyDate = DateTime.Now;
+            doc.ModifyUserId = userContext.UserId;
+            doc.DocStatusId = cancelDocStatus.DocStatusId;
+
+            return doc;
+        }
+
+        public Doc UpdateDocCasePartType(int id, byte[] docVersion, int docCasePartTypeId, UserContext userContext)
+        {
+            Doc doc = this.Find(id);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.DocCasePartTypeId = docCasePartTypeId;
+            doc.ModifyDate = DateTime.Now;
+            doc.ModifyUserId = userContext.UserId;
+
+            //?
+            //        DocCasePartMovement dcpm = new DocCasePartMovement();
+            //        dcpm.Doc = doc;
+            //        dcpm.DocCasePartTypeId = doc.DocCasePartTypeId;
+            //        dcpm.UserId = userContext.UserId;
+            //        dcpm.MovementDate = DateTime.Now;
+            //        this.unitOfWork.Repo<DocCasePartMovement>().Add(dcpm);
+
+            return doc;
         }
 
         public List<DocRelation> GetCaseRelationsByDocId(int id, params Expression<Func<DocRelation, object>>[] includes)
@@ -80,9 +294,14 @@ namespace Docs.Api.Repositories.DocRepository
                 .ToList();
         }
 
-        public void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext)
+        public void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext, bool checkVersion = false, byte[] docVersion = null)
         {
             doc.EnsureDocRelationsAreLoaded();
+
+            if (checkVersion)
+            {
+                doc.EnsureForProperVersion(docVersion);
+            }
 
             DateTime currentDate = DateTime.Now;
 
@@ -125,14 +344,14 @@ namespace Docs.Api.Repositories.DocRepository
                 userContext);
 
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
-                .SingleOrDefault(e => e.Alias.ToLower() == "registration");
+                .SingleOrDefault(e => e.Alias.ToLower() == "Registration".ToLower());
 
             doc.CreateDocWorkflow(
                 docWorkflowAction,
                 currentDate,
                 null,
                 null,
-                null,
+                unitUser.UnitId,
                 doc.RegUri,
                 unitUser.UnitUserId,
                 userContext);

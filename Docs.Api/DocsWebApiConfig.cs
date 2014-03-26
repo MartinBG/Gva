@@ -23,11 +23,18 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Delete, "api/corrs/{id}", "Correspondent", "DeleteCorrespondent");
 
             //docs
-            this.MapRoute(config, HttpMethod.Get , "api/docs"            , "Doc", "GetDocs");
-            this.MapRoute(config, HttpMethod.Post, "api/docs/new/create" , "Doc", "CreateDoc"); //?
-            this.MapRoute(config, HttpMethod.Post, "api/docs/{id}/create", "Doc", "CreateChildDoc"); //?
-            this.MapRoute(config, HttpMethod.Get , "api/docs/{id}"       , "Doc", "GetDoc");
-            this.MapRoute(config, HttpMethod.Post, "api/docs/{id}"       , "Doc", "UpdateDoc");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs"                        , "Doc", "GetDocs");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/new/create"             , "Doc", "CreateDoc"); //?
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"            , "Doc", "CreateChildDoc"); //?
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setCasePart"       , "Doc", "UpdateDocCasePartType");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/register"          , "Doc", "RegisterDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/next"              , "Doc", "SetNextStatus");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/reverse"           , "Doc", "ReverseStatus");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/cancel"            , "Doc", "CancelDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/workflow"          , "Doc", "CreateDocWorkflow");
+            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}/workflow/{itemId}" , "Doc", "DeleteDocWorkflow");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                   , "Doc", "GetDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                   , "Doc", "UpdateDoc");
 
             //mock noms
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/correspondentType" , "MockNom", "GetCorrespondentTypes");
@@ -45,6 +52,7 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/assignmentType"    , "MockNom", "GetAssignmentTypes");
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/docFileKind"       , "MockNom", "GetDocFileKinds");
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/docFileType"       , "MockNom", "GetDocFileTypes");
+            this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/yesNo"             , "MockNom", "GetYesNo");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)

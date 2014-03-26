@@ -1,15 +1,12 @@
 ﻿<div class="well-sm panel-body">
   <ng-form name="casePartForm" sc-validate="{}">
       <div class="well-sm panel-body ">
-
         <div class="row">
-
           <div class="form-group col-sm-4" sc-has-error="docCasePartTypeId">
             <label class="control-label" l10n-text="docs.edit.case.casePart.partOf"></label>
-            <sc-nomenclature ng-model="casePartModel.docCasePartTypeId" mode="id" name="docCasePartTypeId" alias="'docCasePartTypes'" required></sc-nomenclature>
+            <sc-nomenclature ng-model="docCasePartTypeId" mode="id" name="docCasePartTypeId" alias="'docCasePartType'" required></sc-nomenclature>
           </div>
         </div>
-
       </div>
     </ng-form>
 

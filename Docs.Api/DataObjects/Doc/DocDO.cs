@@ -16,8 +16,6 @@ namespace Docs.Api.DataObjects
             this.DocFiles = new List<DocFileDO>();
             this.DocRelations = new List<DocRelationDO>();
             this.DocClassifications = new List<DocClassificationDO>();
-            //this.DocUnits = new List<DocUnitDO>();
-            //?
             this.DocUnitsFrom = new List<NomDo>();
             this.DocUnitsTo = new List<NomDo>();
             this.DocUnitsImportedBy = new List<NomDo>();
@@ -30,7 +28,6 @@ namespace Docs.Api.DataObjects
             this.DocUnitsRegistrators = new List<NomDo>();
 
             this.DocCorrespondents = new List<NomDo>();
-            //this.DocCorrespondentContacts = new List<DocCorrespondentContactDO>();
             this.DocWorkflows = new List<DocWorkflowDO>();
             this.DocElectronicServiceStages = new List<DocElectronicServiceStageDO>();
             this.DocUsers = new List<DocUserDO>();
@@ -38,11 +35,9 @@ namespace Docs.Api.DataObjects
             //this.DocLinks = new List<DocLinkDO>();
         }
 
-        public DocDO(Doc d, UnitUser systemUnitUser, UnitUser unitUser = null)
+        public DocDO(Doc d, UnitUser unitUser = null)
             : this()
         {
-            //this._systemUserId = systemUnitUser.UserId;
-
             if (d != null)
             {
                 this.DocId = d.DocId;
@@ -105,14 +100,13 @@ namespace Docs.Api.DataObjects
                     this.DocCasePartTypeName = d.DocCasePartType.Name;
                 }
 
+                this.UnitUser = new UnitUserDO(unitUser);
                 if (d.DocUsers != null && unitUser != null)
                 {
                     this.IsRead = d.DocUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
                 }
             }
         }
-
-        private int _systemUserId;
 
         public Nullable<int> DocId { get; set; }
         public int DocDirectionId { get; set; }
@@ -160,7 +154,7 @@ namespace Docs.Api.DataObjects
         public bool IsTask { get; set; }
 
         //? to be re-done all that is below
-        public bool IsCaseElectronicService { get; set; }
+        //public bool IsCaseElectronicService { get; set; }
 
         public string DocEntryTypeAlias { get; set; }
         public string DocEntryTypeName { get; set; }
@@ -178,6 +172,8 @@ namespace Docs.Api.DataObjects
         public string DocCasePartTypeAlias { get; set; }
         public string DocCasePartTypeName { get; set; }
 
+        public UnitUserDO UnitUser { get; set; }
+
         //for presentation
         public List<DocFileDO> PrivateDocFiles { get; set; }
         public List<DocFileDO> PublicDocFiles { get; set; }
@@ -186,8 +182,7 @@ namespace Docs.Api.DataObjects
 
         public List<DocRelationDO> DocRelations { get; set; }
         public List<DocClassificationDO> DocClassifications { get; set; }
-        //?
-        //public List<DocUnitDO> DocUnits { get; set; }
+
         public List<NomDo> DocUnitsFrom { get; set; }
         public List<NomDo> DocUnitsTo { get; set; }
         public List<NomDo> DocUnitsImportedBy { get; set; }
@@ -199,12 +194,27 @@ namespace Docs.Api.DataObjects
         public List<NomDo> DocUnitsEditors { get; set; }
         public List<NomDo> DocUnitsRegistrators { get; set; }
 
-        //public List<DocCorrespondentDO> DocCorrespondents { get; set; }
         public List<NomDo> DocCorrespondents { get; set; }
-        //public List<DocCorrespondentContactDO> DocCorrespondentContacts { get; set; }
         public List<DocWorkflowDO> DocWorkflows { get; set; }
         public List<DocElectronicServiceStageDO> DocElectronicServiceStages { get; set; }
         public List<DocUserDO> DocUsers { get; set; }
+
+        public DocRelationDO ParentDocRelation
+        {
+            get
+            {
+                DocRelationDO current = this.DocRelations.FirstOrDefault(e => e.DocId == this.DocId);
+
+                if (current != null && current.ParentDocId.HasValue)
+                {
+                    return this.DocRelations.FirstOrDefault(e => e.DocId == current.ParentDocId.Value);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         //public List<DocLinkDO> DocLinks { get; set; }
 

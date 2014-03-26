@@ -1,19 +1,22 @@
-﻿  <div class="well-sm panel-body">
-    <ng-form name="workflowForm" sc-validate="{}">
+﻿<div class="well-sm panel-body">
+  <ng-form name="workflowForm" sc-validate="{}">
       <div class="well-sm panel-body ">
 
         <div class="row">
 
           <div class="form-group col-sm-4">
-            <label class="control-label" l10n-text="docs.edit.workflows.confirm.fromUser"></label>
-            <sc-text ng-model="workflowModel.userName" name="userName" readonly="true"></sc-text>
+            <label class="control-label" l10n-text="docs.edit.workflows.confirm.author"></label>
+            <sc-text ng-model="workflowModel.username" name="userName" readonly="true"></sc-text>
           </div>
 
-          <div class="form-group col-sm-4" sc-has-error="confirm">
-            <label ng-show="workflowModel.docWorkflowActionId === 5" class="control-label" l10n-text="docs.edit.workflows.confirm.sign"></label>
-            <label ng-show="workflowModel.docWorkflowActionId === 6" class="control-label" l10n-text="docs.edit.workflows.confirm.coordinate"></label>
-            <label ng-show="workflowModel.docWorkflowActionId === 7" class="control-label" l10n-text="docs.edit.workflows.confirm.approve"></label>
-            <sc-select name="confirm" class="form-control input-sm" ng-model="workflowModel.confirm" required sc-select="{ allowClear: true, placeholder: ' ', data: [{ text: 'Да', id: true }, { text: 'Не', id: false }] }"></sc-select>
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="docs.edit.workflows.confirm.fromUser"></label>
+            <sc-nomenclature ng-model="workflowModel.principalUnitId" alias="'unit'" mode="id" readonly="workflowModel.canChoose"></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-4" sc-has-error="yesNo">
+            <label class="control-label">{{ workflowModel.confirmTitle }}</label>
+            <sc-nomenclature name="yesNo" ng-model="workflowModel.yesNoId" alias="'yesNo'" mode="id" ng-required="true"></sc-nomenclature>
           </div>
 
           <div class="form-group col-sm-4" sc-has-error="note">
@@ -26,8 +29,8 @@
       </div>
     </ng-form>
 
-    <div class="col-sm-3 col-sm-offset-5">
-      <sc-button name="saveBtn" btn-click="save()" text="docs.edit.workflows.confirm.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.workflows.confirm.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
-    </div>
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="save()" text="docs.edit.workflows.confirm.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.workflows.confirm.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
   </div>
+</div>

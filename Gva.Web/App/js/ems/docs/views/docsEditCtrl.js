@@ -10,6 +10,7 @@
     $stateParams,
     Doc,
     DocStage,
+    DocStatus,
     doc
   ) {
     $scope.$state = $state;
@@ -30,6 +31,14 @@
     $scope.markAsUnread = function () {
       throw 'not implemented';
       //$scope.doc.isRead = false;
+    };
+
+    $scope.eSign = function () {
+      throw 'not implemented';
+    };
+
+    $scope.undoESign = function () {
+      throw 'not implemented';
     };
 
     $scope.enterEditMode = function () {
@@ -97,27 +106,52 @@
     };
 
     $scope.nextStatus = function () {
-      return Doc.nextStatus({ docId: doc.docId }).$promise.then(function () {
-        return $state.transitionTo($state.current, $stateParams, { reload: true });
-      });
+      return DocStatus.next({
+        docId: doc.docId,
+        docVersion: doc.version
+      })
+        .$promise
+        .then(function (data) {
+          if (data && data.docRelations) {
+            //? implement dialog for asking to finish all docs in case
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          } else {
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          }
+        });
     };
 
     $scope.reverseStatus = function () {
-      return Doc.reverseStatus({ docId: doc.docId }).$promise.then(function () {
-        return $state.transitionTo($state.current, $stateParams, { reload: true });
-      });
+      return DocStatus.reverse({
+        docId: doc.docId,
+        docVersion: doc.version
+      })
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     $scope.cancelStatus = function () {
-      return Doc.cancelStatus({ docId: doc.docId }).$promise.then(function () {
-        return $state.transitionTo($state.current, $stateParams, { reload: true });
-      });
+      return DocStatus.cancel({
+        docId: doc.docId,
+        docVersion: doc.version
+      })
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
-    $scope.setRegUri = function () {
-      return Doc.setRegUri({ docId: doc.docId }).$promise.then(function () {
-        return $state.transitionTo($state.current, $stateParams, { reload: true });
-      });
+    $scope.register = function () {
+      return Doc.register({
+        docId: doc.docId,
+        docVersion: doc.version
+      })
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     $scope.signRequest = function () {
@@ -155,6 +189,10 @@
     $scope.editDocType = function () {
       return $state.go('root.docs.edit.case.docType');
     };
+
+    $scope.goToDoc = function (message) {
+      return $state.go('root.docs.edit.view', { id: message.docId });
+    };
   }
 
   DocsEditCtrl.$inject = [
@@ -165,6 +203,7 @@
     '$stateParams',
     'Doc',
     'DocStage',
+    'DocStatus',
     'doc'
   ];
 

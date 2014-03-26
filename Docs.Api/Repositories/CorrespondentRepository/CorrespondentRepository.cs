@@ -13,19 +13,16 @@ namespace Docs.Api.Repositories.CorrespondentRepository
 {
     public class CorrespondentRepository : Repository<Correspondent>, ICorrespondentRepository
     {
-        //private IUnitOfWork unitOfWork;
-
         public CorrespondentRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-            //this.unitOfWork = unitOfWork;
         }
 
         public List<Correspondent> GetCorrespondents(
-            string displayName, 
-            string correspondentEmail, 
-            int limit, 
-            int offset, 
+            string displayName,
+            string correspondentEmail,
+            int limit,
+            int offset,
             out int totalCount)
         {
             var query =
@@ -64,11 +61,11 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         }
 
         public Correspondent CreateBgCitizen(
-            int correspondentGroupId, 
-            int correspondentTypeId, 
-            bool isActive, 
-            string bgCitizenFirstName, 
-            string bgCitizenLastName, 
+            int correspondentGroupId,
+            int correspondentTypeId,
+            bool isActive,
+            string bgCitizenFirstName,
+            string bgCitizenLastName,
             string bgCitizenUIN,
             UserContext userContext)
         {
@@ -88,13 +85,13 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         }
 
         public Correspondent CreateForeigner(
-            int correspondentGroupId, 
-            int correspondentTypeId, 
-            bool isActive, 
-            string foreignerFirstName, 
-            string foreignerLastName, 
-            int? foreignerCountryId, 
-            string foreignerSettlement, 
+            int correspondentGroupId,
+            int correspondentTypeId,
+            bool isActive,
+            string foreignerFirstName,
+            string foreignerLastName,
+            int? foreignerCountryId,
+            string foreignerSettlement,
             DateTime? foreignerBirthDate,
             UserContext userContext)
         {
@@ -116,10 +113,10 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         }
 
         public Correspondent CreateLegalEntity(
-            int correspondentGroupId, 
-            int correspondentTypeId, 
-            bool isActive, 
-            string legalEntityName, 
+            int correspondentGroupId,
+            int correspondentTypeId,
+            bool isActive,
+            string legalEntityName,
             string legalEntityBulstat,
             UserContext userContext)
         {
@@ -138,13 +135,13 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         }
 
         public Correspondent CreateFLegalEntity(
-            int correspondentGroupId, 
-            int correspondentTypeId, 
-            bool isActive, 
-            string fLegalEntityName, 
-            int? fLegalEntityCountryId, 
-            string fLegalEntityRegisterName, 
-            string fLegalEntityRegisterNumber, 
+            int correspondentGroupId,
+            int correspondentTypeId,
+            bool isActive,
+            string fLegalEntityName,
+            int? fLegalEntityCountryId,
+            string fLegalEntityRegisterName,
+            string fLegalEntityRegisterNumber,
             string fLegalEntityOtherData,
             UserContext userContext)
         {

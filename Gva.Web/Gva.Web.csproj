@@ -212,6 +212,7 @@
     <Content Include="App\js\ems\docs\forms\docView\resolutionCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\task.html" />
     <Content Include="App\js\ems\docs\forms\docView\taskCtrl.js" />
+    <Content Include="App\js\ems\docs\recources\docStatus.js" />
     <Content Include="App\js\ems\docs\recources\doc.js" />
     <Content Include="App\js\ems\docs\recources\docStage.js" />
     <Content Include="App\js\ems\docs\recources\docWorkflow.js" />

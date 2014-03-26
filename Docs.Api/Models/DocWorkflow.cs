@@ -29,9 +29,9 @@ namespace Docs.Api.Models
 
         public virtual DocWorkflowAction DocWorkflowAction { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual Unit ToUnit { get; set; }
 
-        public virtual Unit Unit1 { get; set; }
+        public virtual Unit PrincipalUnit { get; set; }
 
         public virtual UnitUser UnitUser { get; set; }
     }
@@ -71,10 +71,10 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.DocWorkflowAction)
                 .WithMany(t => t.DocWorkflows)
                 .HasForeignKey(d => d.DocWorkflowActionId);
-            this.HasOptional(t => t.Unit)
+            this.HasOptional(t => t.ToUnit)
                 .WithMany(t => t.DocWorkflows)
                 .HasForeignKey(d => d.ToUnitId);
-            this.HasOptional(t => t.Unit1)
+            this.HasOptional(t => t.PrincipalUnit)
                 .WithMany(t => t.DocWorkflows1)
                 .HasForeignKey(d => d.PrincipalUnitId);
             this.HasRequired(t => t.UnitUser)

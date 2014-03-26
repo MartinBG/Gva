@@ -1,6 +1,7 @@
 using Common.Api.UserContext;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 
@@ -643,6 +644,14 @@ namespace Docs.Api.Models
             this.RegNumber = regNumber;
             this.RegDate = regDate;
             this.IsRegistered = true;
+        }
+
+        public void EnsureForProperVersion(byte[] version)
+        {
+            if (!this.Version.SequenceEqual(version))
+            {
+                throw new OptimisticConcurrencyException("Doc has been modified.");
+            }
         }
 
         public void EnsureDocRelationsAreLoaded()

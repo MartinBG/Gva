@@ -39,13 +39,13 @@
                 <a sc-click="cancelStatus()" l10n-text="docs.edit.docCanceled"></a>
               </li>
                 <li>
-                <a sc-click="setRegUri()" l10n-text="docs.edit.docRegister"></a>
+                <a sc-click="register()" l10n-text="docs.edit.docRegister"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.docSignatures"></a>
+                <a sc-click="eSign()" l10n-text="docs.edit.docSignatures"></a>
               </li>
                 <li>
-                <a href="#" l10n-text="docs.edit.undoDocSignatures"></a>
+                <a sc-click="undoESign()" l10n-text="docs.edit.undoDocSignatures"></a>
               </li>
               <li class="divider"></li>
               <li>
@@ -132,7 +132,7 @@
         </div>
       </nav>
 
-      <ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc"></ems-doc-info>
+      <ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
 
       <div class="well-sm panel-body">
           <sc-tabs tab-list="{

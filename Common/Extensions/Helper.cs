@@ -143,6 +143,16 @@ namespace Common.Extensions
 
         #endregion
 
+        public static byte[] StringToVersion(string version)
+        {
+            return Convert.FromBase64String(version);
+        }
+
+        public static string VersionToString(byte[] version)
+        {
+            return Convert.ToBase64String(version);
+        }
+
         public static string CalculateSHA1(byte[] content)
         {
             SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();

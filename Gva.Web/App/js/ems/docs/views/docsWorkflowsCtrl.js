@@ -4,20 +4,29 @@
 
   function DocsWorkflowsCtrl(
     $scope,
+    $state,
+    $stateParams,
     DocWorkflow,
     doc
   ) {
     $scope.removeDocWorkflow = function (dwf) {
-      return DocWorkflow.remove({ docId: doc.docId, docWorkflowId: dwf.docWorkflowId }).$promise
-        .then(function (result) {
-        doc.docWorkflows = result.docWorkflows;
-      });
+      return DocWorkflow.remove({
+        docId: doc.docId,
+        docVersion: doc.version,
+        itemId: dwf.docWorkflowId
+      })
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
   }
 
   DocsWorkflowsCtrl.$inject = [
     '$scope',
     'DocWorkflow',
+    '$state',
+    '$stateParams',
     'doc'
   ];
 

@@ -26,25 +26,20 @@
               url: '/api/nomenclatures/units',
               isArray: true
             },
-            'nextStatus': {
+            'register': {
               method: 'POST',
-              url: '/api/docs/:id/nextStatus'
-            },
-            'reverseStatus': {
-              method: 'POST',
-              url: '/api/docs/:id/reverseStatus'
-            },
-            'cancelStatus': {
-              method: 'POST',
-              url: '/api/docs/:id/cancelStatus'
-            },
-            'setRegUri': {
-              method: 'POST',
-              url: '/api/docs/:id/setRegUri'
+              url: '/api/docs/:id/register',
+              params: {
+                docVersion: '@docVersion'
+              }
             },
             'setCasePart': {
               method: 'POST',
-              url: '/api/docs/:id/setCasePart'
+              url: '/api/docs/:id/setCasePart',
+              params: {
+                docVersion: '@docVersion',
+                docCasePartTypeId: '@docCasePartTypeId'
+              }
             },
             'setDocType': {
               method: 'POST',

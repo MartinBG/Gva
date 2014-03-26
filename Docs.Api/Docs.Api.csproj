@@ -97,6 +97,7 @@
     <Compile Include="DataObjects\Doc\DocUnitDO.cs" />
     <Compile Include="DataObjects\Doc\DocUserDO.cs" />
     <Compile Include="DataObjects\Doc\DocWorkflowDO.cs" />
+    <Compile Include="DataObjects\Doc\UnitUserDO.cs" />
     <Compile Include="DocsApiModule.cs" />
     <Compile Include="DocsWebApiConfig.cs" />
     <Compile Include="Enums\DocView.cs" />

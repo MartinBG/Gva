@@ -7,23 +7,26 @@
     $state,
     $stateParams,
     Doc,
-    doc,
-    casePartModel
+    doc
   ) {
-    $scope.casePartModel = casePartModel;
+    $scope.docId = doc.docId;
+    $scope.docVersion = doc.version;
+    $scope.docCasePartTypeId = doc.docCasePartTypeId;
 
     $scope.save = function () {
       $scope.casePartForm.$validate().then(function () {
         if ($scope.casePartForm.$valid) {
-          if ($scope.casePartModel.docCasePartTypeId !== doc.docCasePartTypeId) {
-            var casePartData = {
-              docCasePartTypeId: $scope.casePartModel.docCasePartTypeId
-            };
-
-            return Doc.setCasePart({ docId: casePartModel.docId }, casePartData).$promise
+          if ($scope.docCasePartTypeId !== doc.docCasePartTypeId) {
+            return Doc
+              .setCasePart({
+                docId: $scope.docId,
+                docVersion: $scope.docVersion,
+                docCasePartTypeId: $scope.docCasePartTypeId
+              })
+              .$promise
               .then(function () {
-              return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });
-            });
+                return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });
+              });
           }
           else {
             return $state.go('^');
@@ -42,20 +45,8 @@
     '$state',
     '$stateParams',
     'Doc',
-    'doc',
-    'casePartModel'
+    'doc'
   ];
-
-  EditCasePartCtrl.$resolve = {
-    casePartModel: ['doc',
-      function (doc) {
-        return {
-          docId: doc.docId,
-          docCasePartTypeId: doc.docCasePartTypeId
-        };
-      }
-    ]
-  };
 
   angular.module('ems').controller('EditCasePartCtrl', EditCasePartCtrl);
 }(angular));

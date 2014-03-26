@@ -109,14 +109,16 @@
     ],
     parentDoc: ['$stateParams', 'Doc', function ($stateParams, Doc) {
       if (!!$stateParams.parentDocId) {
-        return Doc.get({ docId: $stateParams.parentDocId }).$promise.then(function (result) {
-          return [{
-            docId: result.docId,
-            regUri: result.regUri,
-            docTypeName: result.docTypeName,
-            docSubject: result.docSubject
-          }];
-        });
+        return Doc.get({ id: $stateParams.parentDocId })
+          .$promise
+          .then(function (result) {
+            return [{
+              docId: result.docId,
+              regUri: result.regUri,
+              docTypeName: result.docTypeName,
+              docSubject: result.docSubject
+            }];
+          });
       }
       else {
         return [];

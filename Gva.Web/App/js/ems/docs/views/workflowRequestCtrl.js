@@ -5,45 +5,46 @@
   function WorkflowRequestCtrl(
     $scope,
     $state,
+    $stateParams,
+    l10n,
     DocWorkflow,
     doc,
     workflowModel
   ) {
-
-    switch($state.current.url) {
+    $scope.workflowModel = workflowModel;
+    switch ($state.current.url) {
     case '/signRequest':
-      workflowModel.docWorkflowActionId = 1;
+      $scope.workflowModel.docWorkflowActionAlias = 'SignRequest';
+      //docs.edit.workflows.request.toUnit
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitSign');
       break;
     case '/discussRequest':
-      workflowModel.docWorkflowActionId = 2;
+      $scope.workflowModel.docWorkflowActionAlias = 'DiscussRequest';
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitDiscuss');
       break;
     case '/approvalRequest':
-      workflowModel.docWorkflowActionId = 3;
+      $scope.workflowModel.docWorkflowActionAlias = 'ApprovalRequest';
+      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitApproval');
       break;
     case '/registrationRequest':
-      workflowModel.docWorkflowActionId = 4;
+      $scope.workflowModel.docWorkflowActionAlias = 'RegistrationRequest';
+      $scope.workflowModel.confirmTitle =
+        l10n.get('docs.edit.workflows.request.toUnitRegistration');
       break;
     }
-
-    $scope.workflowModel = workflowModel;
 
     $scope.save = function () {
       $scope.workflowForm.$validate().then(function () {
         if ($scope.workflowForm.$valid) {
 
-          var workflowData = {
-            toUnits: $scope.workflowModel.toUnits,
-            note: $scope.workflowModel.note,
-            userId: $scope.workflowModel.userId,
-            userName: $scope.workflowModel.userName,
-            docWorkflowActionId: $scope.workflowModel.docWorkflowActionId
-          };
-
-          return DocWorkflow.add({ docId: workflowModel.docId }, workflowData).$promise
-            .then(function (result) {
-            doc.docWorkflows = result.docWorkflows;
-            return $state.go('^');
-          });
+          return DocWorkflow.save({
+            docId: $scope.workflowModel.docId,
+            docVersion: $scope.workflowModel.docVersion
+          }, $scope.workflowModel)
+            .$promise
+            .then(function () {
+              return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
+            });
         }
       });
     };
@@ -56,6 +57,8 @@
   WorkflowRequestCtrl.$inject = [
     '$scope',
     '$state',
+    '$stateParams',
+    'l10n',
     'DocWorkflow',
     'doc',
     'workflowModel'
@@ -65,9 +68,13 @@
     workflowModel: ['doc',
       function (doc) {
         return {
+          canChooseUnit: doc.canSubstituteManagement,
           docId: doc.docId,
-          userId: 1,
-          userName: 'Admin'
+          docVersion: doc.version,
+          unitUserId: doc.unitUser.unitUserId,
+          principalUnitId: doc.unitUser.unitId,
+          username: doc.unitUser.username,
+          unitName: doc.unitUser.unitName
         };
       }
     ]
