@@ -36,6 +36,12 @@ namespace Gva.Api.Mappers.Resolvers
             return files.ToArray();
         }
 
+        //expose the protected ResolveCore method to use the resolver by itself
+        public FileDO[] Resolve(Tuple<int, int, int?> tuple)
+        {
+            return this.ResolveCore(tuple);
+        }
+
         private FileDO GetFileDO(GvaLotFile lotFile)
         {
             FileDO file = new FileDO()

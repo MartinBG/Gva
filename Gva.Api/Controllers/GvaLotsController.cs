@@ -5,12 +5,14 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.FileRepository;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using System.Linq;
 using System.Data.Entity;
 using Regs.Api.Repositories.LotRepositories;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using Gva.Api.Mappers.Resolvers;
 
 namespace Gva.Api.Controllers
 {
@@ -18,19 +20,22 @@ namespace Gva.Api.Controllers
     {
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
-        private UserContext userContext;
         private IUnitOfWork unitOfWork;
+        private ILotEventDispatcher lotEventDispatcher;
+        private FileResolver fileResolver;
 
         public GvaLotsController(
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            IUserContextProvider userContextProvider,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            ILotEventDispatcher lotEventDispatcher,
+            FileResolver fileResolver)
         {
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
-            this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
+            this.lotEventDispatcher = lotEventDispatcher;
+            this.fileResolver = fileResolver;
         }
 
         public IHttpActionResult GetPart(int lotId, string path)
@@ -44,7 +49,7 @@ namespace Gva.Api.Controllers
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-            return Ok(Mapper.Map<FilePartVersionDO>(Tuple.Create(partVersion, caseTypeId)));
+            return Ok(Mapper.Map<FilePartVersionDO>(Tuple.Create(partVersion, caseTypeId, fileResolver)));
         }
 
         public IHttpActionResult GetParts(int lotId, string path)
@@ -69,18 +74,19 @@ namespace Gva.Api.Controllers
                     .ToArray();
             }
 
-            return Ok(Mapper.Map<IEnumerable<FilePartVersionDO>>(partVersions.Select(pv => Tuple.Create(pv, caseTypeId))));
+            return Ok(Mapper.Map<IEnumerable<FilePartVersionDO>>(partVersions.Select(pv => Tuple.Create(pv, caseTypeId, fileResolver))));
         }
 
         public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.files);
 
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
 
             this.unitOfWork.Save();
 
@@ -89,12 +95,13 @@ namespace Gva.Api.Controllers
 
         public IHttpActionResult PostPart(int lotId, string path, dynamic content)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion partVersion = lot.UpdatePart(path, content.part, this.userContext);
+            PartVersion partVersion = lot.UpdatePart(path, content.part, userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.files);
 
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
 
             this.unitOfWork.Save();
 
@@ -103,10 +110,11 @@ namespace Gva.Api.Controllers
 
         public IHttpActionResult DeletePart(int lotId, string path)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(path, this.userContext);
+            var partVersion = lot.DeletePart(path, userContext);
             this.fileRepository.DeleteFileReferences(partVersion);
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
 
             this.unitOfWork.Save();
 

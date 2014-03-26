@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using Autofac;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Tests;
 using Newtonsoft.Json.Linq;
-using Ninject;
-using Ninject.Extensions.NamedScope;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -18,42 +15,43 @@ namespace Regs.Api.Tests.Specs
 {
     public class EventsSpec
     {
-        private IKernel kernel;
+        private IContainer container;
 
         public EventsSpec()
         {
-            this.kernel = new StandardKernel();
-
-            Gva.Web.App_Start.NinjectConfig.RegisterServices(this.kernel);
-            this.kernel.Unbind<IUserContextProvider>();
-            this.kernel.Unbind<ILotEventHandler>();
-            this.kernel.Bind<IUserContextProvider>().To<MockUserContextProvider>();
-            this.kernel.Bind<ILotEventHandler>().To<MockLotEventHandler>().InCallScope();
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterType<RegsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<LotRepository>().As<ILotRepository>();
+            builder.RegisterType<LotEventDispatcher>().As<ILotEventDispatcher>();
+            builder.RegisterType<MockLotEventHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            this.container = builder.Build();
         }
 
         [Specification, AutoRollback]
         public void CommitEventSpec()
         {
-            IUnitOfWork unitOfWork1 = null;
-            ILotRepository lotRepository1 = null;
-            UserContext userContext1 = null;
+            IUnitOfWork unitOfWork = null;
+            ILotRepository lotRepository = null;
             MockLotEventHandler mockLotEventHandler = null;
+            ILotEventDispatcher lotEventDispatcher = null;
+            UserContext userContext = null;
             Lot lot = null;
 
             "A lot".ContextFixture(() =>
             {
-                var ctx1 = kernel.Get<DisposableTuple<IUnitOfWork, ILotRepository, IUserContextProvider, ILotEventHandler>>();
+                var lf = container.BeginLifetimeScope();
+                unitOfWork = lf.Resolve<IUnitOfWork>();
+                lotRepository = lf.Resolve<ILotRepository>();
+                mockLotEventHandler = (MockLotEventHandler)lf.Resolve<ILotEventHandler>();
+                lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
+                userContext = new UserContext(1);
 
-                unitOfWork1 = ctx1.Item1;
-                lotRepository1 = ctx1.Item2;
-                userContext1 = ctx1.Item3.GetCurrentUserContext();
-                mockLotEventHandler = (MockLotEventHandler)ctx1.Item4;
+                lot = lotRepository.GetSet("Person").CreateLot(userContext);
+                lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
+                lot.Commit(userContext, lotEventDispatcher);
 
-                lot = lotRepository1.GetSet("Person").CreateLot(userContext1);
-                lot.CreatePart("/personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
-                lot.Commit(userContext1);
-
-                return ctx1;
+                return lf;
             });
 
             "fires a commit event when commited".Assert(() =>
@@ -80,28 +78,29 @@ namespace Regs.Api.Tests.Specs
         [Specification, AutoRollback]
         public void ResetEventSpec()
         {
-            IUnitOfWork unitOfWork1 = null;
-            ILotRepository lotRepository1 = null;
-            UserContext userContext1 = null;
+            IUnitOfWork unitOfWork = null;
+            ILotRepository lotRepository = null;
             MockLotEventHandler mockLotEventHandler = null;
+            ILotEventDispatcher lotEventDispatcher = null;
+            UserContext userContext = null;
             Lot lot = null;
 
             "A lot".ContextFixture(() =>
             {
-                var ctx1 = kernel.Get<DisposableTuple<IUnitOfWork, ILotRepository, IUserContextProvider, ILotEventHandler>>();
+                var lf = container.BeginLifetimeScope();
+                unitOfWork = lf.Resolve<IUnitOfWork>();
+                lotRepository = lf.Resolve<ILotRepository>();
+                mockLotEventHandler = (MockLotEventHandler)lf.Resolve<ILotEventHandler>();
+                lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
+                userContext = new UserContext(1);
 
-                unitOfWork1 = ctx1.Item1;
-                lotRepository1 = ctx1.Item2;
-                userContext1 = ctx1.Item3.GetCurrentUserContext();
-                mockLotEventHandler = (MockLotEventHandler)ctx1.Item4;
+                lot = lotRepository.GetSet("Person").CreateLot(userContext);
+                lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
+                lot.Commit(userContext, lotEventDispatcher);
 
-                lot = lotRepository1.GetSet("Person").CreateLot(userContext1);
-                lot.CreatePart("/personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
-                lot.Commit(userContext1);
-
-                lot.CreatePart("/personAddresses/1", JObject.Parse("{ address: '1' }"), userContext1);
-                lot.Commit(userContext1, new string[] { "/personAddresses/1" });
-                unitOfWork1.Save();
+                lot.CreatePart("personAddresses/1", JObject.Parse("{ address: '1' }"), userContext);
+                lot.Commit(userContext, lotEventDispatcher, new string[] { "personAddresses/1" });
+                unitOfWork.Save();
 
                 var indexCommit = lot.Commits.Where(c => c.IsIndex).Single();
                 var secondCommit = indexCommit.ParentCommit;
@@ -110,11 +109,11 @@ namespace Regs.Api.Tests.Specs
                 int secondCommitId = secondCommit.CommitId;
 
                 //load the second commit
-                lotRepository1.GetLot(lot.LotId, secondCommitId);
+                lotRepository.GetLot(lot.LotId, secondCommitId);
 
-                lot.Reset(firstCommitId, userContext1);
+                lot.Reset(firstCommitId, userContext, lotEventDispatcher);
 
-                return ctx1;
+                return lf;
             });
 
             "fires a reset event when reset".Assert(() =>

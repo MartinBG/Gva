@@ -19,7 +19,7 @@ namespace Gva.Api.LotEventHandlers
             this.personRepository = personRepository;
         }
 
-        public void Handle(IEvent e)
+        public void Handle(ILotEvent e)
         {
             CommitEvent commitEvent = e as CommitEvent;
             if (commitEvent == null)

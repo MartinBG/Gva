@@ -1,17 +1,18 @@
-﻿using Common.Data;
-using Ninject.Modules;
+﻿using Autofac;
+using Common.Data;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Regs.Api
 {
-    public class RegsApiModule : NinjectModule
+    public class RegsApiModule : Module
     {
-        public override void Load()
+        protected override void Load(ContainerBuilder moduleBuilder)
         {
-            Bind<IDbConfiguration>().To<RegsDbConfiguration>();
-
-            Bind<ILotRepository>().To<LotRepository>();
+            moduleBuilder.RegisterType<RegsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            moduleBuilder.RegisterType<LotRepository>().As<ILotRepository>();
+            moduleBuilder.RegisterType<LotEventDispatcher>().As<ILotEventDispatcher>();
         }
     }
 }

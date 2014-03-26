@@ -7,6 +7,7 @@ using AutoMapper;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Mappers.Resolvers;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -15,15 +16,16 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/persons")]
+    [Authorize]
     public class PersonsController : GvaLotsController
     {
-        private UserContext userContext;
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IInventoryRepository inventoryRepository;
@@ -31,19 +33,20 @@ namespace Gva.Api.Controllers
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private ILotEventDispatcher lotEventDispatcher;
 
         public PersonsController(
-            IUserContextProvider userContextProvider,
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ICaseTypeRepository caseTypeRepository)
-            : base(lotRepository, fileRepository, userContextProvider, unitOfWork)
+            ICaseTypeRepository caseTypeRepository,
+            ILotEventDispatcher lotEventDispatcher,
+            FileResolver fileResolver)
+            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher, fileResolver)
         {
-            this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.inventoryRepository = inventoryRepository;
@@ -51,6 +54,7 @@ namespace Gva.Api.Controllers
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.lotEventDispatcher = lotEventDispatcher;
         }
 
         [Route("")]
@@ -73,18 +77,19 @@ namespace Gva.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var newLot = this.lotRepository.GetSet("Person").CreateLot(this.userContext);
+                UserContext userContext = this.Request.GetUserContext();
+                var newLot = this.lotRepository.GetSet("Person").CreateLot(userContext);
 
                 dynamic personData = person.Value<JObject>("personData");
-                newLot.CreatePart("personData", personData, this.userContext);
+                newLot.CreatePart("personData", personData, userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, personData.Value<JArray>("caseTypes"));
 
-                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), this.userContext);
+                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), userContext);
                 this.fileRepository.AddFileReferences(documentIdPart, null);
 
-                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), this.userContext);
+                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), userContext);
 
-                newLot.Commit(this.userContext);
+                newLot.Commit(userContext, lotEventDispatcher);
 
                 transaction.Commit();
             }
@@ -283,16 +288,17 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{path:regex(^ratings$)}")]
         public IHttpActionResult PostNewRating(int lotId, string path, dynamic content)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.rating.part, this.userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.rating.part, userContext);
 
             lot.CreatePart(
                 string.Format("{0}/{1}/editions/*", path, partVersion.Part.Index),
                 content.ratingEdition.part,
-                this.userContext);
+                userContext);
 
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
             this.unitOfWork.Save();
 
             return Ok();
@@ -346,15 +352,16 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}")]
         public IHttpActionResult DeleteEdition(int lotId, string path)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.DeletePart(path, this.userContext, true);
+            lot.DeletePart(path, userContext, true);
 
             if (lot.GetParts(Regex.Match(path, @".+/\d+/[^/\d]+").Value).Count() == 0)
             {
-                lot.DeletePart(Regex.Match(path, @"[^/\d]+/\d+").Value, this.userContext);
+                lot.DeletePart(Regex.Match(path, @"[^/\d]+/\d+").Value, userContext);
             }
 
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
 
             this.unitOfWork.Save();
 
@@ -364,13 +371,14 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
         public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
         {
+            UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, this.userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.files);
 
-            lot.Commit(this.userContext);
+            lot.Commit(userContext, lotEventDispatcher);
 
             GvaApplication application = new GvaApplication()
             {

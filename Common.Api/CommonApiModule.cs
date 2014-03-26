@@ -1,24 +1,26 @@
-﻿using Common.Api.Models;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Common.Api.Controllers;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
-using Common.Api.UserContext;
 using Common.Data;
 using Common.Http;
-using Ninject.Extensions.NamedScope;
-using Ninject.Modules;
-using Common.Api.Repositories;
 
 namespace Common.Api
 {
-    public class CommonApiModule : NinjectModule
+    public class CommonApiModule : Module
     {
-        public override void Load()
+        protected override void Load(ContainerBuilder moduleBuilder)
         {
-            Bind<IDbConfiguration>().To<CommonDbConfiguration>();
-            Bind<IWebApiConfig>().To<CommonApiWebApiConfig>().InCallScope();
-            Bind<IUserContextProvider>().To<UserContextProvider>();
-            Bind<INomRepository>().To<NomRepository>();
-            Bind<IUserRepository>().To<UserRepository>();
+            moduleBuilder.RegisterType<CommonDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            moduleBuilder.RegisterType<CommonApiWebApiConfig>().As<IWebApiConfig>().SingleInstance();
+            moduleBuilder.RegisterType<NomRepository>().As<INomRepository>();
+            moduleBuilder.RegisterType<UserRepository>().As<IUserRepository>();
+
+            //controllers
+            moduleBuilder.RegisterType<BlobController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<NomenclatureController>().InstancePerApiRequest();
         }
     }
 }

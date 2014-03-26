@@ -172,7 +172,7 @@ namespace Regs.Api.Models
             return partVersion;
         }
 
-        public void Reset(int commitId, UserContext userContext)
+        public void Reset(int commitId, UserContext userContext, ILotEventDispatcher lotEventDispatcher)
         {
             Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
@@ -234,10 +234,10 @@ namespace Regs.Api.Models
 
             this.Commits.Add(newIndex);
 
-            Events.Raise(new ResetEvent(this, newIndex));
+            lotEventDispatcher.Dispatch(new ResetEvent(this, newIndex));
         }
 
-        public void Commit(UserContext userContext, string[] paths = null)
+        public void Commit(UserContext userContext, ILotEventDispatcher lotEventDispatcher, string[] paths = null)
         {
             Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
@@ -262,7 +262,6 @@ namespace Regs.Api.Models
 
                 foreach (var partVersion in notToBeCommited)
                 {
-                    partVersion.OriginalCommit = newIndex;
                     index.PartVersions.Remove(partVersion);
                 }
             }
@@ -286,7 +285,7 @@ namespace Regs.Api.Models
             index.CommiterId = userContext.UserId;
             index.IsIndex = false;
 
-            Events.Raise(new CommitEvent(this, newIndex, index));
+            lotEventDispatcher.Dispatch(new CommitEvent(this, newIndex, index));
         }
 
         public PartVersion GetPart(string path, int? commitId = null)

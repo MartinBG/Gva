@@ -14,26 +14,27 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.LotEvents;
+using Gva.Api.Mappers.Resolvers;
 
 namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/apps")]
     public class ApplicationsController : GvaLotsController
     {
-        private UserContext userContext;
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
         public ApplicationsController(
-            IUserContextProvider userContextProvider,
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            IFileRepository fileRepository)
-            : base(lotRepository, fileRepository, userContextProvider, unitOfWork)
+            IFileRepository fileRepository,
+            ILotEventDispatcher lotEventDispatcher,
+            FileResolver fileResolver)
+            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher, fileResolver)
         {
-            this.userContext = userContextProvider.GetCurrentUserContext();
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;

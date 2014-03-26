@@ -1,14 +1,14 @@
-﻿using Common.Data;
-using Ninject.Extensions.NamedScope;
-using Ninject.Modules;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Common.Data;
 
 namespace Common
 {
-    public class CommonModule : NinjectModule
+    public class CommonModule : Module
     {
-        public override void Load()
+        protected override void Load(ContainerBuilder moduleBuilder)
         {
-            Bind<IUnitOfWork>().To<UnitOfWork>().InCallScope();
+            moduleBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerApiRequest();
         }
     }
 }

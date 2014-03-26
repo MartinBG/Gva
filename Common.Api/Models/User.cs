@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace Common.Api.Models
 {
-    public partial class User
+    public class User
     {
         public User()
         {
@@ -11,26 +14,42 @@ namespace Common.Api.Models
         }
 
         public int UserId { get; set; }
-
         public string Username { get; set; }
+        public string Fullname { get; set; }
+        public string Notes { get; set; }
+        public string CertificateThumbprint { get; set; }
+        public bool IsActive { get; set; }
+        public bool HasPassword { get; set; }
+        public byte[] Version { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
 
+        //server only
+        [JsonIgnore]
         public string PasswordHash { get; set; }
-
+        [JsonIgnore]
         public string PasswordSalt { get; set; }
 
-        public bool HasPassword { get; set; }
+        //client only
+        public string Password { get; set; }
 
-        public string Fullname { get; set; }
+        public void SetPassword(string password)
+        {
+            if (password == null)
+            {
+                this.PasswordSalt = null;
+                this.PasswordHash = null;
+            }
+            else
+            {
+                this.PasswordSalt = Crypto.GenerateSalt();
+                this.PasswordHash = Crypto.HashPassword(password + this.PasswordSalt);
+            }
+        }
 
-        public string Notes { get; set; }
-
-        public string CertificateThumbprint { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public byte[] Version { get; set; }
-
-        public virtual ICollection<Role> Roles { get; set; }
+        public bool VerifyPassword(string password)
+        {
+            return Crypto.VerifyHashedPassword(this.PasswordHash, password + this.PasswordSalt);
+        }
     }
 
     public class UserMap : EntityTypeConfiguration<User>
@@ -41,21 +60,8 @@ namespace Common.Api.Models
             this.HasKey(t => t.UserId);
 
             // Properties
-            this.Property(t => t.Username)
-                .IsRequired()
-                .HasMaxLength(200);
-
-            this.Property(t => t.PasswordHash)
-                .HasMaxLength(200);
-
-            this.Property(t => t.PasswordSalt)
-                .HasMaxLength(200);
-
-            this.Property(t => t.Fullname)
-                .HasMaxLength(200);
-
-            this.Property(t => t.CertificateThumbprint)
-                .HasMaxLength(200);
+            this.Property(t => t.UserId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.Version)
                 .IsRequired()
@@ -75,6 +81,8 @@ namespace Common.Api.Models
             this.Property(t => t.CertificateThumbprint).HasColumnName("CertificateThumbprint");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.Version).HasColumnName("Version");
+
+            this.Ignore(u => u.Password);
         }
     }
 }

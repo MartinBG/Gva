@@ -3,7 +3,7 @@ using Regs.Api.Models;
 
 namespace Regs.Api.LotEvents
 {
-    public class ResetEvent : IEvent
+    public class ResetEvent : ILotEvent
     {
         public ResetEvent(Lot lot, Commit newIndex)
         {

@@ -1,24 +1,27 @@
-﻿using Common.Data;
-using Ninject.Modules;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Common.Data;
+using Common.Http;
+using Docs.Api.Controllers;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
-using Ninject.Extensions.NamedScope;
-using Common.Http;
-using Common.Api.UserContext;
 using Docs.Api.Repositories.DocRepository;
 
 namespace Docs.Api
 {
-    public class DocsApiModule : NinjectModule
+    public class DocsApiModule : Module
     {
-        public override void Load()
+        protected override void Load(ContainerBuilder moduleBuilder)
         {
-            Bind<IWebApiConfig>().To<DocsWebApiConfig>();
-            Bind<IMvcConfig>().To<DocsMvcConfig>();
-            Bind<IDbConfiguration>().To<DocsDbConfiguration>();
+            moduleBuilder.RegisterType<DocsWebApiConfig>().As<IWebApiConfig>().SingleInstance();
+            moduleBuilder.RegisterType<DocsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            moduleBuilder.RegisterType<CorrespondentRepository>().As<ICorrespondentRepository>();
+            moduleBuilder.RegisterType<DocRepository>().As<IDocRepository>();
 
-            Bind<ICorrespondentRepository>().To<CorrespondentRepository>();
-            Bind<IDocRepository>().To<DocRepository>();
+            //controllers
+            moduleBuilder.RegisterType<CorrespondentController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<DocController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<MockNomController>().InstancePerApiRequest();
         }
     }
 }

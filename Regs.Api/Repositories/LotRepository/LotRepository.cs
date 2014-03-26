@@ -1,29 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
 namespace Regs.Api.Repositories.LotRepositories
 {
-    public class LotRepository : ILotRepository, IDisposable
+    public class LotRepository : ILotRepository
     {
         private IUnitOfWork unitOfWork;
-        private IEnumerable<ILotEventHandler> eventHandlers;
 
-        public LotRepository(IUnitOfWork unitOfWork, IEnumerable<ILotEventHandler> eventHandlers)
+        public LotRepository(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-
-            // copy event handlers because the enumerable is a ninject object
-            // which throws an error when accessed during dispose
-            this.eventHandlers = eventHandlers.ToArray();
-            foreach (var eventHandler in eventHandlers)
-            {
-                Events.Register(eventHandler);
-            }
         }
 
         public Set GetSet(int setId)
@@ -126,14 +115,6 @@ namespace Regs.Api.Repositories.LotRepositories
             commit.IsLoaded = true;
 
             return commit;
-        }
-
-        public void Dispose()
-        {
-            foreach (var eventHandler in this.eventHandlers)
-            {
-                Events.Deregister(eventHandler);
-            }
         }
     }
 }

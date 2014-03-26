@@ -2,7 +2,8 @@
 
 namespace Regs.Api.LotEvents
 {
-    public interface ILotEventHandler : IEventHandler
+    public interface ILotEventHandler
     {
+        void Handle(ILotEvent e);
     }
 }

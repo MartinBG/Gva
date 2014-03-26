@@ -1,34 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Autofac;
 using Common.Api.UserContext;
 using Common.Data;
-using Newtonsoft.Json.Linq;
-using Ninject;
+using Common.Tests;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
-using Docs.Api.Tests.Mocks;
 using SubSpec;
 using Xunit;
 using Xunit.Extensions;
-using Common.Tests;
 
 namespace Docs.Api.Tests.Specs
 {
     public class CorrespondentSpec
     {
-        private IKernel kernel;
+        private IContainer container;
 
         public CorrespondentSpec()
         {
-            this.kernel = new StandardKernel();
-
-            Gva.Web.App_Start.NinjectConfig.RegisterServices(this.kernel);
-            this.kernel.Unbind<IUserContextProvider>();
-            this.kernel.Bind<IUserContextProvider>().To<MockUserContextProvider>();
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterType<DocsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<CorrespondentRepository>().As<ICorrespondentRepository>();
+            this.container = builder.Build();
         }
 
         [Specification, AutoRollback]
@@ -44,19 +39,17 @@ namespace Docs.Api.Tests.Specs
 
             "A new correspondent setup".ContextFixture(() =>
             {
-                var ctx1 = kernel.Get<DisposableTuple<IUnitOfWork, ICorrespondentRepository, IUserContextProvider>>();
+                var lf1 = container.BeginLifetimeScope();
+                unitOfWork1 = lf1.Resolve<IUnitOfWork>();
+                correspondentRepository1 = lf1.Resolve<ICorrespondentRepository>();
+                userContext1 = new UserContext(1);
 
-                unitOfWork1 = ctx1.Item1;
-                correspondentRepository1 = ctx1.Item2;
-                userContext1 = ctx1.Item3.GetCurrentUserContext();
+                var lf2 = container.BeginLifetimeScope();
+                unitOfWork2 = lf2.Resolve<IUnitOfWork>();
+                correspondentRepository2 = lf2.Resolve<ICorrespondentRepository>();
+                userContext2 = new UserContext(1);
 
-                var ctx2 = kernel.Get<DisposableTuple<IUnitOfWork, ICorrespondentRepository, IUserContextProvider>>();
-
-                unitOfWork2 = ctx2.Item1;
-                correspondentRepository2 = ctx2.Item2;
-                userContext2 = ctx2.Item3.GetCurrentUserContext();
-
-                return DisposableTuple.Create(ctx1, ctx2);
+                return DisposableTuple.Create(lf1, lf2);
             });
 
             "can be created as bg citizen".Assert(() =>
@@ -109,11 +102,11 @@ namespace Docs.Api.Tests.Specs
 
             "An existing correspondent and nomenclatures".ContextFixture(() =>
             {
-                using (var tempCtx = kernel.Get<DisposableTuple<IUnitOfWork, ICorrespondentRepository, IUserContextProvider>>())
+                using (var lf = container.BeginLifetimeScope())
                 {
-                    var unitOfWork = tempCtx.Item1;
-                    var correspondentRepository = tempCtx.Item2;
-                    var userContext = tempCtx.Item3.GetCurrentUserContext();
+                    var unitOfWork = lf.Resolve<IUnitOfWork>();
+                    var correspondentRepository = lf.Resolve<ICorrespondentRepository>();
+                    var userContext = new UserContext(1);
 
                     var corr1 = correspondentRepository.CreateLegalEntity(2, 3, true, "Фирма Х", "102030405", userContext);
 
@@ -125,19 +118,17 @@ namespace Docs.Api.Tests.Specs
                     crCorrespondentIdWithContacts = corr2.CorrespondentId;
                 }
 
-                var ctx1 = kernel.Get<DisposableTuple<IUnitOfWork, ICorrespondentRepository, IUserContextProvider>>();
+                var lf1 = container.BeginLifetimeScope();
+                unitOfWork1 = lf1.Resolve<IUnitOfWork>();
+                correspondentRepository1 = lf1.Resolve<ICorrespondentRepository>();
+                userContext1 = new UserContext(1);
 
-                unitOfWork1 = ctx1.Item1;
-                correspondentRepository1 = ctx1.Item2;
-                userContext1 = ctx1.Item3.GetCurrentUserContext();
+                var lf2 = container.BeginLifetimeScope();
+                unitOfWork2 = lf2.Resolve<IUnitOfWork>();
+                correspondentRepository2 = lf2.Resolve<ICorrespondentRepository>();
+                userContext2 = new UserContext(1);
 
-                var ctx2 = kernel.Get<DisposableTuple<IUnitOfWork, ICorrespondentRepository, IUserContextProvider>>();
-
-                unitOfWork2 = ctx2.Item1;
-                correspondentRepository2 = ctx2.Item2;
-                userContext2 = ctx2.Item3.GetCurrentUserContext();
-
-                return DisposableTuple.Create(ctx1, ctx2);
+                return DisposableTuple.Create(lf1, lf2);
             });
 
             "can be found and edited".Assert(() =>

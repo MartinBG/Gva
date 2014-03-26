@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.Entity;
+using Common.Api.UserContext;
 
 namespace Docs.Api.Controllers
 {
@@ -19,15 +20,12 @@ namespace Docs.Api.Controllers
     {
         private Common.Data.IUnitOfWork unitOfWork;
         private Docs.Api.Repositories.DocRepository.IDocRepository docRepository;
-        private Common.Api.UserContext.UserContext userContext;
 
         public DocController(Common.Data.IUnitOfWork unitOfWork,
-            Docs.Api.Repositories.DocRepository.IDocRepository docRepository,
-            Common.Api.UserContext.IUserContextProvider userContextProvider)
+            Docs.Api.Repositories.DocRepository.IDocRepository docRepository)
         {
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
-            this.userContext = userContextProvider.GetCurrentUserContext();
         }
 
         /// <summary>
@@ -64,7 +62,7 @@ namespace Docs.Api.Controllers
             string ds = null
             )
         {
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.Request.GetUserContext().UserId);
             DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
@@ -334,6 +332,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UserContext userContext = this.Request.GetUserContext();
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
@@ -353,7 +352,7 @@ namespace Docs.Api.Controllers
                         preDoc.DocTypeId,
                         preDoc.DocFormatTypeId,
                         null,
-                        this.userContext);
+                        userContext);
 
                     int? rootDocId = null;
                     if (preDoc.ParentDocId.HasValue)
@@ -364,7 +363,7 @@ namespace Docs.Api.Controllers
                             rootDocId = parentDocRelation.RootDocId;
                         }
                     }
-                    newDoc.CreateDocRelation(preDoc.ParentDocId, rootDocId, this.userContext);
+                    newDoc.CreateDocRelation(preDoc.ParentDocId, rootDocId, userContext);
 
                     //? parent/child classifications inheritance
                     List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
@@ -373,7 +372,7 @@ namespace Docs.Api.Controllers
 
                     foreach (var docTypeClassification in docTypeClassifications)
                     {
-                        newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
+                        newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
                     }
 
                     List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
@@ -382,17 +381,17 @@ namespace Docs.Api.Controllers
 
                     foreach (var docTypeUnitRole in docTypeUnitRoles)
                     {
-                        newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
+                        newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
                     }
 
                     foreach (var correspondent in preDoc.Correspondents)
                     {
-                        newDoc.CreateDocCorrespondent(correspondent, this.userContext);
+                        newDoc.CreateDocCorrespondent(correspondent, userContext);
                     }
 
                     if (newDoc.IsCase)
                     {
-                        this.docRepository.GenerateAccessCode(newDoc, this.userContext);
+                        this.docRepository.GenerateAccessCode(newDoc, userContext);
                     }
 
                     this.unitOfWork.Save();
@@ -401,7 +400,7 @@ namespace Docs.Api.Controllers
 
                     if (preDoc.Register)
                     {
-                        this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
+                        this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
                     }
 
                     this.unitOfWork.Save();
@@ -429,6 +428,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UserContext userContext = this.Request.GetUserContext();
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
@@ -469,11 +469,11 @@ namespace Docs.Api.Controllers
                     docType.DocTypeId,
                     paperDocFormatType.DocFormatTypeId,
                     null,
-                    this.userContext);
+                    userContext);
 
                 DocRelation parentRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                     .FirstOrDefault(e => e.DocId == id);
-                newDoc.CreateDocRelation(id, parentRelation.RootDocId, this.userContext);
+                newDoc.CreateDocRelation(id, parentRelation.RootDocId, userContext);
 
                 //? parent/child classifications inheritance
                 List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
@@ -482,7 +482,7 @@ namespace Docs.Api.Controllers
 
                 foreach (var docTypeClassification in docTypeClassifications)
                 {
-                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
+                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
                 }
 
                 List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
@@ -491,7 +491,7 @@ namespace Docs.Api.Controllers
 
                 foreach (var docTypeUnitRole in docTypeUnitRoles)
                 {
-                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
+                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
                 }
 
                 this.unitOfWork.Save();
@@ -515,7 +515,7 @@ namespace Docs.Api.Controllers
         {
             DateTime currentDate = DateTime.Now;
 
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.Request.GetUserContext().UserId);
 
             List<DocUser> docUsers = this.docRepository.GetActiveDocUsersForDocByUnitId(id, unitUser);
 
@@ -782,6 +782,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UserContext userContext = this.Request.GetUserContext();
                 DateTime currentDate = DateTime.Now;
                 var oldDoc = this.docRepository.Find(id,
                         e => e.DocCorrespondents,
@@ -810,7 +811,7 @@ namespace Docs.Api.Controllers
                 oldDoc.AssignmentDate = doc.AssignmentDate;
                 oldDoc.AssignmentDeadline = doc.AssignmentDeadline;
                 oldDoc.ModifyDate = DateTime.Now;
-                oldDoc.ModifyUserId = this.userContext.UserId;
+                oldDoc.ModifyUserId = userContext.UserId;
 
                 #region DocUnits
 
@@ -852,12 +853,12 @@ namespace Docs.Api.Controllers
                     }
                     else
                     {
-                        oldDoc.DeleteDocUnit(listDocUnits[i], this.userContext);
+                        oldDoc.DeleteDocUnit(listDocUnits[i], userContext);
                     }
                 }
                 foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
                 {
-                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, this.userContext);
+                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, userContext);
                 }
 
                 #endregion
@@ -878,12 +879,12 @@ namespace Docs.Api.Controllers
                     }
                     else
                     {
-                        oldDoc.DeleteDocCorrespondent(listDocCorrespondents[i], this.userContext);
+                        oldDoc.DeleteDocCorrespondent(listDocCorrespondents[i], userContext);
                     }
                 }
                 foreach (var du in doc.DocCorrespondents.Where(e => !e.IsProcessed))
                 {
-                    oldDoc.CreateDocCorrespondent(du.NomValueId, this.userContext);
+                    oldDoc.CreateDocCorrespondent(du.NomValueId, userContext);
                 }
 
                 #endregion
@@ -991,7 +992,7 @@ namespace Docs.Api.Controllers
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))
                 {
-                    oldDoc.DeleteDocFile(file.DocFileId.Value, this.userContext);
+                    oldDoc.DeleteDocFile(file.DocFileId.Value, userContext);
                     //? mark as deleted
                     //DocFile df = this.unitOfWork.Repo<DocFile>().Find(file.DocFileId.Value);
                     //df.IsActive = false;
@@ -1008,7 +1009,7 @@ namespace Docs.Api.Controllers
                         file.File.Name,
                         "",
                         file.File.Key,
-                        this.userContext);
+                        userContext);
                 }
 
                 foreach (var file in allDocFiles.Where(e => e.IsNew && !e.IsDeleted))
@@ -1022,7 +1023,7 @@ namespace Docs.Api.Controllers
                         file.File.Key,
                         false,
                         true,
-                        this.userContext);
+                        userContext);
                 }
 
                 //?

@@ -4,6 +4,13 @@
   angular.module('common').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
+        login: {
+          modalTitle: 'Вход',
+          loginBtn: 'Влез',
+          username: 'Потребителско име',
+          password: 'Парола',
+          invalidUsernameAndPassword: 'Невалидно потребителско име или парола'
+        },
         navigation: {
           logout: 'Изход',
           changePassword: 'Смяна на паролата',

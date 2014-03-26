@@ -12,9 +12,9 @@ namespace Regs.Api.Tests.Mocks
             this.unitOfWork = unitOfWork;
         }
 
-        public IEvent Event { get; set; }
+        public ILotEvent Event { get; set; }
 
-        public void Handle(IEvent e)
+        public void Handle(ILotEvent e)
         {
             this.Event = e;
         }
