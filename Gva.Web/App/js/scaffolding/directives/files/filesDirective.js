@@ -24,7 +24,7 @@
               ngModelCtrl = controllers[1];
 
           iAttrs.$observe('readonly', function(value) {
-            scope.isReadonly = value === 'true';
+            scope.isReadonly = value === true;
           });
 
           scope.isMultiple = 'multiple' in iAttrs;
