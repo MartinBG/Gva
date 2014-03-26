@@ -13,27 +13,28 @@
           select: 'Избор'
         },
         auditDetailDirective: {
-          auditDetailsTable: {
-            title: 'Главни обобщени констатации',
-            subject: 'Тема',
-            conclusion: 'Констатация',
-            disparity: 'Несъответствия',
-            code: 'Код'
-          },
-          disparitiesTable: {
-            subject: 'Тема',
-            disparitiesTitle: 'Несъответствия',
-            sortOrder: 'Пореден №',
-            refNumber: 'Референтен №',
-            description: 'Описание на несъответствие',
-            disparityLevel: 'Ниво',
-            removalDate: 'Дата за отстраняване',
-            rectifyAction: 'Внесени коригиращи действия',
-            closureDate: 'Дата на закриване',
-            closureDocument: '№ на документ за закриване',
-            noAvailableDisparities: 'Няма налични несъответствия'
-          },
+          auditPart: 'Част',
+          title: 'Главни обобщени констатации',
+          subject: 'Тема',
+          auditResult: 'Констатация',
+          disparity: 'Несъответствия',
+          code: 'Код',
           insertAuditDetails: 'Въведи списъка за обобщени констатации'
+        },
+        disparityDirective: {
+          disparitiesRecommendationsTitle2: 'Установени несъответствия от описанието',
+          disparitiesTitle: 'Несъответствия',
+          subject: 'Тема',
+          sortOrder: 'Пореден №',
+          refNumber: 'Референтен №',
+          description: 'Описание на несъответствие',
+          disparityLevel: 'Ниво',
+          removalDate: 'Дата за отстраняване',
+          rectifyAction: 'Внесени коригиращи действия',
+          closureDate: 'Дата на закриване',
+          closureDocument: '№ на документ за закриване',
+          noAvailableDisparities: 'Няма намерени резултати',
+          auditPart: 'Част'
         },
         inspectionDirective: {
           organizationTitle: 'Одит',
@@ -54,7 +55,7 @@
             examinersTitle: 'Одитори',
             examiner: 'Одитор',
             sortOrder: 'Пореден №',
-            noAvailableExaminers: 'Няма налични одитори'
+            noAvailableExaminers: 'Няма намерени резултати'
           },
           auditPart: 'Част'
         }
@@ -1728,6 +1729,15 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        chooseAudits: {
+          add: 'Запиши',
+          back: 'Назад',
+          inspectionFrom: 'Начална дата на изпълнение на одита',
+          inspectionTo: 'Крайна дата на изпълнение на одита',
+          subject: 'Предмет на одит',
+          documentNumber: '№ на документ',
+          usedAudits: 'Използвани одити:'
+        },
         organizationOtherDirective: {
           title: 'Друг документ',
           documentNumber: 'Док No',
@@ -1739,6 +1749,17 @@
           organizationOtherDocumentType: 'Тип документ',
           organizationOtherDocumentRole: 'Роля',
           valid: 'Действителен'
+        },
+        recommendationSearch: {
+          newRecommendation: 'Нов доклад'
+        },
+        newRecommendation: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editRecommendation: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         staffManagementDirective: {
           title: 'Ръководен персонал',
@@ -1892,6 +1913,79 @@
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
           }
+        },
+        recommendationDirective: {
+          title: 'Доклад от препоръки',
+          commonData: {
+            title: '1. Общи положения',
+            auditorsTitle: 'Инспектори по Част 1',
+            recommendationPart: 'Тип',
+            form: 'Форма за заявен обхват на одобрението',
+            formDate: 'от дата',
+            formText: '№ на изменението',
+            interviewedStaff: 'Интервюиран персонал',
+            fromDate: 'Период на надзора от',
+            toDate: 'до',
+            part1: 'Част 1',
+            part2: 'Част 2',
+            part3: 'Част 3',
+            part4: 'Част 4',
+            part5: 'Част 5',
+            finished1Date: 'Дата на приключване',
+            finished2Date: 'Дата на приключване',
+            finished3Date: 'Дата на приключване',
+            finished4Date: 'Дата на приключване',
+            finished5Date: 'Дата на приключване',
+            town: 'Отдел ЛГ гр.',
+            documentDescription: 'Описание, издание, ревизия Част 3',
+            recommendation: 'Препоръки'
+          },
+          auditorsReview: {
+            title: '2. Одиторски преглед за съответствие',
+            auditorsTitle: 'Инспектори по Част 2',
+            chooseAudit: 'Избор на одити към доклада от препоръки',
+            subject: 'Тема',
+            auditResult: 'Констатация',
+            disparity: 'Несъответствия',
+            auditPart: 'Част',
+            chooseAudits: 'Избор на одити към доклада от препоръки'
+          },
+          accordance: {
+            title: '3. Съответсвие с описанието',
+            AuditDetailTitle: 'Главни обобщени констатации',
+            auditorsTitle: 'Инспектори по Част 3',
+            auditPart: 'Част',
+            subject: 'Тема',
+            auditResult: 'Констатация',
+            disparity: 'Несъответствия',
+            code: 'Код',
+            insertAuditDetails: 'Въведи списъка за обобщени констатации'
+          },
+          disparities: {
+            title: '4. Установени несъответсвия',
+            auditorsTitle: 'Инспектори по Част 4',
+            disparitiesRecommendationsTitle1: 'Установени несъответствия от одиторски преглед',
+            sortOrder: 'Пореден №',
+            refNumber: 'Референтен №',
+            description: 'Описание на несъответствие',
+            subject: 'Тема',
+            disparityLevel: 'Ниво',
+            removalDate: 'Дата за отстраняване',
+            rectifyAction: 'Внесени коригиращи действия',
+            closureDate: 'Дата на закриване',
+            closureDocument: '№ на документ за закриване',
+            auditPart: 'Част'
+          },
+          recommendations: {
+            title: '5. Препоръки',
+            auditorsTitle: 'Инспектори по Част 5'
+          }
+        },
+        recomendationAuditorDirective: {
+          examiner: 'Одитор',
+          sortOrder: 'Пореден №',
+          noAvailableExaminers: 'Няма намерени резултати',
+          part: 'Част'
         }
       },
       errorTexts: {
@@ -2060,7 +2154,14 @@
         'root.organizations.view.groundServiceOperatorsSnoOperational.new':
           'Ново удостоверение',
         'root.organizations.view.groundServiceOperatorsSnoOperational.edit':
-          'Редакция на удостоверение'
+          'Редакция на удостоверение',
+        'root.organizations.view.recommendations': 'Доклад от препоръки',
+        'root.organizations.view.recommendations.new': 'Нов доклад от препоръки',
+        'root.organizations.view.recommendations.new.chooseAudits': 'Избор на одити',
+        'root.organizations.view.recommendations.new.editDisparity': 'Редакция на несъответствие',
+        'root.organizations.view.recommendations.edit': 'Редакция на доклад от препоръки',
+        'root.organizations.view.recommendations.edit.chooseAudits': 'Избор на одити',
+        'root.organizations.view.recommendations.edit.editDisparity': 'Редакция на несъответствие'
       }
     });
   }]);

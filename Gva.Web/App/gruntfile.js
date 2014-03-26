@@ -70,7 +70,8 @@ module.exports = function (grunt) {
         'schema/organizations/organization-inspections.sample.js',
         'schema/organizations/organization-approval.sample.js',
         'schema/organizations/organization-amendment.sample.js',
-        'schema/organizations//organization-staff-examiner.sample.js'
+        'schema/organizations//organization-staff-examiner.sample.js',
+        'schema/organizations/organization-recommendation.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
@@ -126,7 +127,7 @@ module.exports = function (grunt) {
       ],
       '<%= buildDir %>/js/test.js': [
         'test/delay.js',
-        //'test/e2eMocksSetup.js',
+        'test/e2eMocksSetup.js',
         'test/httpBackendConfiguratorProvider.js',
         'test/common/mocks/*.js',
         'test/ems/corrs/mocks/*.js',

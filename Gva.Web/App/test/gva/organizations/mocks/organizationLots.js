@@ -14,7 +14,8 @@
     organizationInspections = require('./organization-inspections.sample'),
     organizationApprovals = require('./organization-approval.sample'),
     organizationAmendments = require('./organization-amendment.sample'),
-    staffExaminers = require('./organization-staff-examiner.sample');
+    staffExaminers = require('./organization-staff-examiner.sample'),
+    recommendations = require('./organization-recommendation.sample');
 
   angular.module('app').constant('organizationLots', [
     {
@@ -105,7 +106,7 @@
         },
         {
           partIndex: 16,
-          part: organizationInspections.Inspection2
+          part: organizationInspections.organization1Inspection2
         }
       ],
       organizationApprovals: [
@@ -132,6 +133,16 @@
         {
           partIndex: 21,
           part: staffExaminers.staffExaminer2
+        }
+      ],
+      recommendations: [
+        {
+          partIndex: 22,
+          part: recommendations.recommendation1
+        },
+        {
+          partIndex: 23,
+          part: recommendations.recommendation2
         }
       ]
     }

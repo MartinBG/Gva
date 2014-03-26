@@ -14,9 +14,22 @@
               auditDetails.push({
                 subject: requirement,
                 code: requirement.nomValueId,
-                auditResult: defaultAuditResult
+                auditResult: defaultAuditResult,
+                disparities: [],
+                auditPart: requirement.auditPart,
+                group: requirement.group
               });
             });
+
+            auditDetails = _.map(_.groupBy(auditDetails, function (detail) {
+              return detail.group;
+            }), function (data) {
+              return {
+                groupTitle: data[0].group,
+                group: data
+              };
+            });
+
             return [200, auditDetails];
           });
 

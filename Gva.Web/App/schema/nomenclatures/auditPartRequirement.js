@@ -72,10 +72,37 @@
       nomValueId: 22, code: '22', name: 'Технически записи', nameAlt: 'Технически записи', parentValueId: null, alias: 'technical notes', type: 'organizations'
     },
     {
-      nomValueId: 23, code: '24', name: 'Докладване на събития', nameAlt: 'Докладване на събития', parentValueId: null, alias: 'events announcement', type: 'organizations'
+      nomValueId: 23, code: '23', name: 'Докладване на събития', nameAlt: 'Докладване на събития', parentValueId: null, alias: 'events announcement', type: 'organizations'
     },
     {
-      nomValueId: 24, code: '25', name: 'Процедури и качество', nameAlt: 'Процедури и качество', parentValueId: null, alias: 'procedures and quality', type: 'organizations'
+      nomValueId: 24, code: '24', name: 'Процедури и качество', nameAlt: 'Процедури и качество', parentValueId: null, alias: 'procedures and quality', type: 'organizations'
+    },
+    {
+      nomValueId: 25, code: '25', name: 'Корпоративен ангажимент на отговорния ръководител', nameAlt: 'Корпоративен ангажимент на отговорния ръководител', parentValueId: null, type: 'organizationRecommendations', group: 'Част 0 Обща организация', auditPart: '0.1'
+    },
+    {
+      nomValueId: 26, code: '26', name: 'Обща информация', nameAlt: 'Обща информация', parentValueId: null, type: 'organizationRecommendations', group: 'Част 0 Обща организация', auditPart: '0.2'
+    },
+    {
+      nomValueId: 27, code: '27', name: 'Ръководен персонал', nameAlt: 'Ръководен персонал', parentValueId: null, type: 'organizationRecommendations', group: 'Част 0 Обща организация', auditPart: '0.3'
+    },
+    {
+      nomValueId: 28, code: '28', name: 'Организационна структурна схема', nameAlt: 'Организационна структурна схема', parentValueId: null, type: 'organizationRecommendations', group: 'Част 0 Обща организация', auditPart: '0.4'
+    },
+    {
+      nomValueId: 29, code: '29', name: 'Използване на технически борден дневник и прилагане на МЕЛ(за търговски въздушни превози)Използване на система за записи на постоянна летателна годност(за нетърговски въздушни превози)', parentValueId: null, type: 'organizationRecommendations', group: 'Част 1 Процедури за управление постоянна ЛГ', auditPart: '1.1'
+    },
+    {
+      nomValueId: 30, code: '30', name: 'Програма за ТО на ВС – разработка, изменение и одобрение', parentValueId: null, type: 'organizationRecommendations', group: 'Част 1 Процедури за управление постоянна ЛГ', auditPart: '1.2'
+    },
+    {
+      nomValueId: 31, code: '31', name: 'Записи за времена и за постоянна летателна годност, отговорности, съхранение, достъп.', parentValueId: null, type: 'organizationRecommendations', group: 'Част 1 Процедури за управление постоянна ЛГ', auditPart: '1.3'
+    },
+    {
+      nomValueId: 32, code: '32', name: 'Политика за качество на дейността по поддържане постоянна летателна годност, план и процедури за одит.', parentValueId: null, type: 'organizationRecommendations', group: 'Част 2 Система за качество', auditPart: '2.1'
+    },
+    {
+      nomValueId: 33, code: '33', name: 'Наблюдения върху дейността по управление на постоянна ЛГ.', parentValueId: null, type: 'organizationRecommendations', group: 'Част 2 Система за качество', auditPart: '2.2'
     }
   ];
 })(typeof module === 'undefined' ? (this['auditPartRequirement'] = {}) : module);

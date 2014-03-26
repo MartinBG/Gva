@@ -418,7 +418,14 @@
     ],
 
     //Номенклатура Раздел
-    auditParts: require('./auditPart'),
+    auditParts: [
+      { nomValueId: 50101, code: '1', name: 'Trial', nameAlt: 'Trial', alias: 'Trial' },
+      { nomValueId: 50102, code: '2', name: 'BC - ACAM инспекция', nameAlt: 'BC - ACAM инспекция', alias: 'BC - ACAM' },
+      { nomValueId: 50103, code: '3', name: 'Част 145', nameAlt: 'Част 145', alias: '145' },
+      { nomValueId: 50104, code: '4', name: 'Част 147', nameAlt: 'Част 147', alias: '147' },
+      { nomValueId: 50105, code: '5', name: 'Част М подчаст F', nameAlt: 'Част М подчаст F', alias: 'm/f' },
+      { nomValueId: 50106, code: '6', name: 'Част М подчаст G', nameAlt: 'Част М подчаст G', alias: 'm/g' }
+    ],
 
     approvalStates: [
       {
@@ -446,6 +453,22 @@
       { nomValueId: 2, code: 'A2', name: 'Самолети с бутални двигатели', alias: 'A2' },
       { nomValueId: 3, code: 'A3', name: 'Вертолети с турбинни двигатели', alias: 'A3' },
       { nomValueId: 4, code: 'B1', name: 'Вертолети с бутални двигатели', alias: 'B1' }
+    ],
+
+    recommendationParts: [
+      { nomValueId: 50101, code: '1', name: 'Trial', nameAlt: 'Trial', alias: 'Trial' },
+      { nomValueId: 50102, code: '2', name: 'BC - ACAM инспекция', nameAlt: 'BC - ACAM инспекция', alias: 'BC - ACAM' },
+      { nomValueId: 50103, code: '3', name: 'Част 145', nameAlt: 'Част 145', alias: '145' },
+      { nomValueId: 50104, code: '4', name: 'Част 147', nameAlt: 'Част 147', alias: '147' },
+      { nomValueId: 50105, code: '5', name: 'Част М подчаст F', nameAlt: 'Част М подчаст F', alias: 'm/f' },
+      { nomValueId: 50106, code: '6', name: 'Част М подчаст G', nameAlt: 'Част М подчаст G', alias: 'm/g' }
+    ],
+
+    recommendationPartNumbers: [
+      { nomValueId: 1, code: '1', name: '1', alias: '1' },
+      { nomValueId: 2, code: '2', name: '2', alias: '2' },
+      { nomValueId: 3, code: '3', name: '3', alias: '3' },
+      { nomValueId: 4, code: '4', name: '4', alias: '4' }
     ]
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

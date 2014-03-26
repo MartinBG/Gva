@@ -7,55 +7,68 @@
         {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '1',
-          subject: nomenclatures.get('auditPartRequirements', 'Cockpit')
+          subject: nomenclatures.get('auditPartRequirements', 'Cockpit'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '2',
-          subject: nomenclatures.get('auditPartRequirements', 'Facilities')
+          subject: nomenclatures.get('auditPartRequirements', 'Facilities'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '3',
-          subject: nomenclatures.get('auditPartRequirements', 'Fuselage')
+          subject: nomenclatures.get('auditPartRequirements', 'Fuselage'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '4',
-          subject: nomenclatures.get('auditPartRequirements', 'Wings')
+          subject: nomenclatures.get('auditPartRequirements', 'Wings'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '5',
-          subject: nomenclatures.get('auditPartRequirements', 'Stabilizers')
+          subject: nomenclatures.get('auditPartRequirements', 'Stabilizers'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '6',
-          subject: nomenclatures.get('auditPartRequirements', 'Landing')
+          subject: nomenclatures.get('auditPartRequirements', 'Landing'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '7',
-          subject: nomenclatures.get('auditPartRequirements', 'Engines')
+          subject: nomenclatures.get('auditPartRequirements', 'Engines'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '8',
-          subject: nomenclatures.get('auditPartRequirements', 'Baggage')
+          subject: nomenclatures.get('auditPartRequirements', 'Baggage'),
+          disparities: []
         },{
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '9',
-          subject: nomenclatures.get('auditPartRequirements', 'Additional compartments')
+          subject: nomenclatures.get('auditPartRequirements', 'Additional compartments'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '10',
-          subject: nomenclatures.get('auditPartRequirements', 'CEA')
+          subject: nomenclatures.get('auditPartRequirements', 'CEA'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '11',
-          subject: nomenclatures.get('auditPartRequirements', 'Accordance with the requirements')
+          subject: nomenclatures.get('auditPartRequirements', 'Accordance with the requirements'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '12',
-          subject: nomenclatures.get('auditPartRequirements', 'Tests')
+          subject: nomenclatures.get('auditPartRequirements', 'Tests'),
+          disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '13',
-          subject: nomenclatures.get('auditPartRequirements', 'Other specific')
+          subject: nomenclatures.get('auditPartRequirements', 'Other specific'),
+          disparities: []
         }
   ];
 

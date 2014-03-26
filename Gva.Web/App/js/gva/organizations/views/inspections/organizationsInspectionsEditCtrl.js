@@ -15,10 +15,15 @@
       .then(function () {
         if ($scope.organizationInspectionForm.$valid) {
           return OrganizationInspection
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.organizationInspection)
+            .save({
+              id: $stateParams.id,
+              ind: $stateParams.childInd ? $stateParams.childInd : $stateParams.ind
+            }, $scope.organizationInspection)
             .$promise
             .then(function () {
-              return $state.go('root.organizations.view.inspections.search');
+              return $stateParams.childInd ?
+                $state.go('^') :
+                $state.go('root.organizations.view.inspections.search');
             });
         }
       });
@@ -26,7 +31,9 @@
 
 
     $scope.cancel = function () {
-      return $state.go('root.organizations.view.inspections.search');
+      return $stateParams.childInd ?
+        $state.go('^') :
+        $state.go('root.organizations.view.inspections.search');
     };
   }
 
@@ -45,7 +52,7 @@
       function ($stateParams, OrganizationInspection) {
         return OrganizationInspection.get({
           id: $stateParams.id,
-          ind: $stateParams.ind
+          ind: $stateParams.childInd? $stateParams.childInd: $stateParams.ind
         }).$promise;
       }
     ]

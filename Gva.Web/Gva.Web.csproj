@@ -494,8 +494,14 @@
     <Content Include="App\js\gva\aircrafts\views\documentOccurrences\docOccurrencesSearchCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsSearch.html" />
     <Content Include="App\js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\common\forms\commonDisparity.html" />
+    <Content Include="App\js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationRecommendationAuditorCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationRecommendationAuditor.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationRecommendationCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationRecommendation.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffExaminer.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendment.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendmentCtrl.js" />
@@ -509,6 +515,7 @@
     <Content Include="App\js\gva\organizations\forms\organizationEquipment.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="App\js\gva\organizations\forms\organizationDocumentOther.html" />
+    <Content Include="App\js\gva\organizations\resources\organizationRecommendation.js" />
     <Content Include="App\js\gva\organizations\resources\organizationStaffExaminer.js" />
     <Content Include="App\js\gva\organizations\resources\organizationInspection.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertGroundServiceOperatorsSnoOperational.js" />
@@ -556,6 +563,14 @@
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperatorsSnoOperational\certGroundServiceOperatorsSnoOperationalNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperatorsSnoOperational\certGroundServiceOperatorsSnoOperationalSearch.html" />
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperatorsSnoOperational\certGroundServiceOperatorsSnoOperationalSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\recommendations\audits\chooseAudits.html" />
+    <Content Include="App\js\gva\organizations\views\recommendations\audits\chooseAuditsCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsNew.html" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\recommendations\recommendationsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersEdit.html" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersNew.html" />
@@ -874,8 +889,6 @@
     <Content Include="App\schema\nomenclatures\auditState.js" />
     <Content Include="App\schema\nomenclatures\auditType.js" />
     <Content Include="App\schema\nomenclatures\aircraft.js" />
-    <Content Include="App\schema\nomenclatures\auditPart.js" />
-    <Content Include="App\schema\nomenclatures\auditPartRequirement.js" />
     <Content Include="App\schema\nomenclatures\authorization.js" />
     <Content Include="App\schema\nomenclatures\authorizationGroup.js" />
     <Content Include="App\schema\nomenclatures\boolean.js" />
@@ -940,6 +953,7 @@
     <Content Include="App\schema\nomenclatures\school.js" />
     <Content Include="App\schema\nomenclatures\staffType.js" />
     <Content Include="App\schema\nomenclatures\unit.js" />
+    <Content Include="App\schema\organizations\organization-recommendation.sample.js" />
     <Content Include="App\schema\organizations\organization-staff-examiner.sample.js" />
     <Content Include="App\schema\person-address.sample.js" />
     <Content Include="App\schema\person-data.sample.js" />
@@ -1059,6 +1073,7 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationRecommendationsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffExaminersHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationInspectionsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationCertGroundServiceOperatorsSnoOperationalHttp.js" />

@@ -235,6 +235,16 @@
       controller: 'OrganizationAmendmentCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaOrganizationRecommendation',
+      templateUrl: 'gva/organizations/forms/organizationRecommendation.html',
+      controller: 'OrganizationRecommendationCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaOrganizationRecommendationAuditor',
+      templateUrl: 'gva/organizations/forms/organizationRecommendationAuditor.html',
+      controller: 'OrganizationRecommendationAuditorCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaCommonInspection',
       templateUrl: 'gva/common/forms/commonInspection.html',
       controller: 'CommonInspectionCtrl'
@@ -243,6 +253,11 @@
       name: 'gvaCommonAuditDetail',
       templateUrl: 'gva/common/forms/commonAuditDetail.html',
       controller: 'CommonAuditDetailCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonDisparity',
+      templateUrl: 'gva/common/forms/commonDisparity.html',
+      controller: 'CommonDisparityCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -412,7 +427,6 @@
       .state(['root.aircrafts.view.parts.search'                        , ''                                           , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsSearch.html'                          , 'PartsSearchCtrl'                ]])
       .state(['root.aircrafts.view.parts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsNew.html'                             , 'PartsNewCtrl'                   ]])
       .state(['root.aircrafts.view.parts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'gva/aircrafts/views/parts/partsEdit.html'                            , 'PartsEditCtrl'                  ]]);
-    
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.organizations'                                                     , '/organizations'                                                                                                                                                                                                                                        ])
@@ -464,6 +478,14 @@
       .state(['root.organizations.view.staffExaminers'                                 , '/staffExaminers'                                                                                                                                                                                                                                        ])
       .state(['root.organizations.view.staffExaminers.search'                          , ''                                           , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
       .state(['root.organizations.view.staffExaminers.new'                             , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])
-      .state(['root.organizations.view.staffExaminers.edit'                            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]]);
+      .state(['root.organizations.view.staffExaminers.edit'                            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]])
+      .state(['root.organizations.view.recommendations'                                , '/recommendations'                                                                                                                                                                                                                                      ])
+      .state(['root.organizations.view.recommendations.search'                         , ''                                           , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsSearch.html'                                                  , 'RecommendationsSearchCtrl'                         ]])
+      .state(['root.organizations.view.recommendations.new'                            , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsNew.html'                                                     , 'RecommendationsNewCtrl'                            ]])
+      .state(['root.organizations.view.recommendations.new.chooseAudits'               , '/chooseAudits'                              , ['@root.organizations.view', 'gva/organizations/views/recommendations/audits/chooseAudits.html'                                                    , 'ChooseAuditsCtrl'                                  ]])
+      .state(['root.organizations.view.recommendations.new.editDisparity'              , '/:childInd'                                 , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]])
+      .state(['root.organizations.view.recommendations.edit'                           , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsEdit.html'                                                    , 'RecommendationsEditCtrl'                           ]])
+      .state(['root.organizations.view.recommendations.edit.chooseAudits'              , '/chooseAudits'                              , ['@root.organizations.view', 'gva/organizations/views/recommendations/audits/chooseAudits.html'                                                    , 'ChooseAuditsCtrl'                                  ]])
+      .state(['root.organizations.view.recommendations.edit.editDisparity'             , '/:childInd'                                 , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]]);
   }]);
 }(angular));
