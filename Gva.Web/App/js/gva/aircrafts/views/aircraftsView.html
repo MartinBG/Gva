@@ -47,29 +47,27 @@
     </div>
   </form>
     <sc-tabs tab-list="{
-      'Регистрация': {
-        'Текуща регистрация': 'root.aircrafts.view.currentReg',
-        'Регистрации': 'root.aircrafts.view.regsFM',
-        'Летателни годности': 'root.aircrafts.view.airworthinesses',
-        'Регистрационни знаци': 'root.aircrafts.view.marks',
-        'S-code': 'root.aircrafts.view.smods',
-        'Разрешения за полет': 'root.aircrafts.view.permits',
-        'Удостоверения за шум': 'root.aircrafts.view.noisesFM',
-        'Разрешителни за радиостанция': 'root.aircrafts.view.radios'
+      'aircrafts.tabs.reg': {
+        'aircrafts.tabs.currentReg': 'root.aircrafts.view.currentReg',
+        'aircrafts.tabs.regs': 'root.aircrafts.view.regsFM',
+        'aircrafts.tabs.airworthinesses': 'root.aircrafts.view.airworthinessesFM',
+        'aircrafts.tabs.marks': 'root.aircrafts.view.marks',
+        'aircrafts.tabs.smods': 'root.aircrafts.view.smods',
+        'aircrafts.tabs.permits': 'root.aircrafts.view.permits',
+        'aircrafts.tabs.noisesFM': 'root.aircrafts.view.noisesFM',
+        'aircrafts.tabs.radios': 'root.aircrafts.view.radios'
        },
-      'Свързани лица' : 'root.aircrafts.view.owners',
-      'Оборудване' : 'root.aircrafts.view.parts',
-      'Залози' : 'root.aircrafts.view.debtsFM',
-      'Поддръжки' : 'root.aircrafts.view.maintenances',
-      'Инциденти':'root.aircrafts.view.occurrences',
-      'Инспекции': {
-        'Инспекции': 'root.aircrafts.view.inspections'
-      },
-      'Заявления' : 'root.aircrafts.view.applications',
-      'Документи': {
-        'Други': 'root.aircrafts.view.others'
+      'aircrafts.tabs.owners' : 'root.aircrafts.view.owners',
+      'aircrafts.tabs.parts' : 'root.aircrafts.view.parts',
+      'aircrafts.tabs.debts' : 'root.aircrafts.view.debtsFM',
+      'aircrafts.tabs.maintenances' : 'root.aircrafts.view.maintenances',
+      'aircrafts.tabs.occurrences':'root.aircrafts.view.occurrences',
+      'aircrafts.tabs.inspections': 'root.aircrafts.view.inspections',
+      'aircrafts.tabs.applications' : 'root.aircrafts.view.applications',
+      'aircrafts.tabs.docs': {
+        'aircrafts.tabs.others': 'root.aircrafts.view.others'
        },
-      'Опис' : {}
+      'aircrafts.tabs.inventory' : {}
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

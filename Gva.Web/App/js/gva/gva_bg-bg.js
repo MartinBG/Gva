@@ -286,6 +286,28 @@
         }
       },
       aircrafts: {
+        tabs: {
+          reg: 'Регистрация',
+          currentReg: 'Текуща регистрация',
+          regs: 'Регистрации',
+          airworthinesses: 'Летателни годности',
+          marks: 'Регистрационни знаци',
+          smods: 'S-code',
+          permits: 'Разрешения за полет',
+          noisesFM: 'Удостоверения за шум',
+          radios: 'Разрешителни за радиостанция',
+          docs: 'Документи',
+          parts: 'Оборудване',
+          debts: 'Залози',
+          maintenances: 'Поддръжки',
+          occurrences: 'Инциденти',
+          inspections: 'Инспекции',
+          owners: 'Свързани лица',
+          others: 'Други',
+          opers: 'Експлоатационна годност',
+          applications: 'Заявления',
+          inventory: 'Опис'
+        },
         search: {
           manSN: 'Сериен номер',
           model: 'Модел',
