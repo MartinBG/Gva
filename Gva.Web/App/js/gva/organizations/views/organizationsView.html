@@ -35,26 +35,23 @@
     </div>
   </form>
     <sc-tabs tab-list="{
-      'Организация': {
-        'Текуща организация': 'root.organizations'
-       },
-      'Удостоверения за одобрение': 'root.organizations.view.approvals',
-      'Одити и надзор': {
-        'Одит': 'root.organizations.view.inspections',
-        'Доклад от препоръки': 'root.organizations.view.recommendations',
-        'План за надзор': 'root.organizations.view.auditplans'
+      'organizations.tabs.approvals': 'root.organizations.view.approvals',
+      'organizations.tabs.inspections': {
+        'organizations.tabs.inspection': 'root.organizations.view.inspections',
+        'organizations.tabs.recommendations': 'root.organizations.view.recommendations',
+        'organizations.tabs.auditplans': 'root.organizations.view.auditplans'
       },
-      'Персонал': {
-        'Ръководен персонал': 'root.organizations.view.staffManagement',
-        'Проверяващи ЛГ': 'root.organizations.view.staffExaminers'
+      'organizations.tabs.staff': {
+        'organizations.tabs.staffManagement': 'root.organizations.view.staffManagement',
+        'organizations.tabs.staffExaminers': 'root.organizations.view.staffExaminers'
       },
-      'Адреси': 'root.organizations.view.addresses',
-      'Летищен оператор': {
-        'Лиценз на летищен оператор': 'root.organizations.view.certAirportOperators',
-        'Лиценз на оператор по наземно обслужване или самообслужване': 'root.organizations.view.certGroundServiceOperators',
-        'Удостоверение за експлоатационна годност': 'root.organizations.view.groundServiceOperatorsSnoOperational'
+      'organizations.tabs.addresses': 'root.organizations.view.addresses',
+      'organizations.tabs.aiportOperator': {
+        'organizations.tabs.certAirportOperators': 'root.organizations.view.certAirportOperators',
+        'organizations.tabs.certGroundServiceOperators': 'root.organizations.view.certGroundServiceOperators',
+        'organizations.tabs.documentOthers': 'root.organizations.view.groundServiceOperatorsSnoOperational'
       },
-      'Други документи': 'root.organizations.view.documentOthers'
+      'organizations.tabs.staffManagement': 'root.organizations.view.documentOthers'
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

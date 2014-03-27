@@ -1,0 +1,24 @@
+﻿<sc-button name="createBtn" btn-click="newInspection()" text="airports.inspectionSearch.newInspection" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="airportInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editInspection(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.auditState.name" title="organizations.inspectionSearch.auditState">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="organizations.inspectionSearch.documentNumber" width="200px">
+  </sc-column>
+  <sc-column data="part.auditReason.name" title="organizations.inspectionSearch.auditReason">
+  </sc-column>
+  <sc-column data="part.auditType.name" title="organizations.inspectionSearch.auditType">
+  </sc-column>
+  <sc-column data="part.subject" title="organizations.inspectionSearch.subject">
+  </sc-column>
+  <sc-column data="part.notification.name" title="organizations.inspectionSearch.notification">
+  </sc-column>
+  <sc-column data="part.startDate" title="organizations.inspectionSearch.startDate" type="date">
+  </sc-column>
+  <sc-column data="part.endDate" title="organizations.inspectionSearch.endDate" type="date">
+  </sc-column>
+  <sc-column data="part.inspectionPlace" title="organizations.inspectionSearch.inspectionPlace">
+  </sc-column>
+</sc-datatable>

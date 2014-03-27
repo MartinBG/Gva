@@ -38,7 +38,7 @@
         },
         inspectionDirective: {
           organizationTitle: 'Одит',
-          aircraftTitle: 'Инспекция',
+          title: 'Инспекция',
           documentNumber: '№ на документ',
           auditState: 'Състояние',
           auditReason: 'Причина',
@@ -57,7 +57,8 @@
             sortOrder: 'Пореден №',
             noAvailableExaminers: 'Няма намерени резултати'
           },
-          auditPart: 'Част'
+          auditPart: 'Част',
+          recommendationsReport: 'Доклад от препоръки свързан с одит'
         }
       },
       airports: {
@@ -67,7 +68,8 @@
           owners: 'Свързани лица',
           others: 'Други',
           opers: 'Експлоатационна годност',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          inspections: 'Инспекции'
         },
         search: {
           airportType: 'Тип',
@@ -152,6 +154,26 @@
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
           newOther: 'Нов документ'
+        },
+        inspectionSearch: {
+          newInspection: 'Нов одит',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект'
+        },
+        newInspection: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editInspection: {
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         airportOwnerDirective: {
           title: 'Свързано лице',
@@ -1692,6 +1714,22 @@
         }
       },
       organizations: {
+        tabs: {
+          approvals: 'Удостоверения за одобрение',
+          inspections: 'Одити и надзор',
+          inspection: 'Одит',
+          recommendations: 'Доклад от препоръки',
+          auditplans: 'План за надзор',
+          staff: 'Персонал',
+          staffManagement: 'Ръководен персонал',
+          staffExaminers: 'Проверяващи ЛГ',
+          addresses: 'Адреси',
+          aiportOperator: 'Летищен оператор',
+          certAirportOperators:'Лиценз на летищен оператор',
+          certGroundServiceOperators: 'Лиценз на оператор по наземно обслужване или самообслужване',
+          groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
+          documentOthers: 'Други документи'
+        },
         search: {
           newOrganization: 'Нова организация',
           search: 'Търси',
@@ -2373,6 +2411,18 @@
         'root.organizations.view.recommendations.edit': 'Редакция на доклад от препоръки',
         'root.organizations.view.recommendations.edit.chooseAudits': 'Избор на одити',
         'root.organizations.view.recommendations.edit.editDisparity': 'Редакция на несъответствие',
+        'root.organizations.view.inspections': 'Одит',
+        'root.organizations.view.inspections.new': 'Нов одит',
+        'root.organizations.view.inspections.edit': 'Редакция на одит',
+        'root.organizations.view.approvals': 'Удостоверение за одобрение',
+        'root.organizations.view.approvals.new': 'Ново удостоверение за одобрение',
+        'root.organizations.view.approvals.edit': 'Редакция на удостоверение за одобрение',
+        'root.organizations.view.amendments': 'Изменения на удостоверение за одобрение',
+        'root.organizations.view.amendments.new': 'Ново изменение',
+        'root.organizations.view.amendments.edit': 'Редакция на изменение',
+        'root.organizations.view.staffExaminers': 'Проверяващи',
+        'root.organizations.view.staffExaminers.new': 'Нов проверяващ',
+        'root.organizations.view.staffExaminers.edit': 'Редакция на проверяващ',
         'root.airports': 'Летища',
         'root.airports.new': 'Ново летище',
         'root.airports.view': 'Данни за летище',
@@ -2385,7 +2435,10 @@
         'root.airports.view.opers.edit': 'Редакция на удостоверение',
         'root.airports.view.applications': 'Заявления',
         'root.airports.view.applications.new': 'Новo заявление',
-        'root.airports.view.applications.edit': 'Редакция на заявление'
+        'root.airports.view.applications.edit': 'Редакция на заявление',
+        'root.airports.view.inspections': 'Инспекции',
+        'root.airports.view.inspections.new': 'Нова инспекция',
+        'root.airports.view.inspections.edit': 'Редакция на инспекция'
       }
     });
   }]);

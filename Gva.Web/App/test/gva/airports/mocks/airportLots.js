@@ -6,7 +6,8 @@
       airportDocumentOthers = require('./airport-document-other.sample'),
       airportDocumentOwners = require('./airport-document-owner.sample'),
       airportCertOperationals = require('./airport-cert-operational.sample'),
-      airportDocumentApplications = require('./airport-document-application.sample');
+      airportDocumentApplications = require('./airport-document-application.sample'),
+     airportInspections = require('./airport-inspections.sample');
 
   angular.module('app').constant('airportLots', [
     {
@@ -54,6 +55,16 @@
         {
           partIndex: 9,
           part: airportDocumentApplications.airport1Application2
+        }
+      ],
+      organizationInspections: [
+        {
+          partIndex: 10,
+          part: airportInspections.airport1Inspection1
+        },
+        {
+          partIndex: 12,
+          part: airportInspections.airport1Inspection2
         }
       ]
     },

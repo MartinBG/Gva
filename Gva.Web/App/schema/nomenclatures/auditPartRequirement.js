@@ -103,6 +103,41 @@
     },
     {
       nomValueId: 33, code: '33', name: 'Наблюдения върху дейността по управление на постоянна ЛГ.', parentValueId: null, type: 'organizationRecommendations', group: 'Част 2 Система за качество', auditPart: '2.2'
-    }
+    },
+
+
+    {
+      nomValueId: 34,  name: 'Сгради и съоръжения', nameAlt: 'Сгради и съоръжения', parentValueId: null, alias: 'Buildings', type: 'airports'
+    },
+    {
+      nomValueId: 35,  name: 'Персонал', nameAlt: 'Персонал', parentValueId: null, alias: 'staff', type: 'airports'
+    },
+    {
+      nomValueId: 36,  name: 'Удостоверяващ персонал', nameAlt: 'Удостоверяващ персонал', parentValueId: null, alias: 'cert staff', type: 'airports'
+    },
+    {
+      nomValueId: 37,  name: 'Оборудване, инструменти и пр', nameAlt: 'Оборудване, инструменти и пр', parentValueId: null, alias: 'equipment', type: 'airports'
+    },
+    {
+      nomValueId: 38,  name: 'Приемане на компоненти', nameAlt: 'Приемане на компоненти', parentValueId: null, alias: 'components acceptance', type: 'airports'
+    },
+    {
+      nomValueId: 39,  name: 'Данни за ТО', nameAlt: 'Данни за ТО', parentValueId: null, alias: 'data for TO', type: 'airports'
+    },
+    {
+      nomValueId: 40,  name: 'Производствено планиране', nameAlt: 'Производствено планиране', parentValueId: null, alias: 'production planning', type: 'airports'
+    },
+    {
+      nomValueId: 41,  name: 'Удостоверяване на ТО', nameAlt: 'Удостоверяване на ТО', parentValueId: null, alias: 'cert for TO', type: 'airports'
+    },
+    {
+      nomValueId: 42,  name: 'Технически записи', nameAlt: 'Технически записи', parentValueId: null, alias: 'technical notes', type: 'airports'
+    },
+    {
+      nomValueId: 43,  name: 'Докладване на събития', nameAlt: 'Докладване на събития', parentValueId: null, alias: 'events announcement', type: 'airports'
+    },
+    {
+      nomValueId: 44,  name: 'Процедури и качество', nameAlt: 'Процедури и качество', parentValueId: null, alias: 'procedures and quality', type: 'airports'
+    },
   ];
 })(typeof module === 'undefined' ? (this['auditPartRequirement'] = {}) : module);

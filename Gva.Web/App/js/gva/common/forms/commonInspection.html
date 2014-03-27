@@ -1,6 +1,6 @@
 <ng-form  class="form-inline" sc-validate="{}">
   <div class="panel panel-default">
-    <div class="panel-heading" ng-if="$parent.aircraftInspection"><strong l10n-text="common.inspectionDirective.aircraftTitle"></strong></div>
+    <div class="panel-heading" ng-if="$parent.aircraftInspection || $parent.airportInspection"><strong l10n-text="common.inspectionDirective.title"></strong></div>
     <div class="panel-heading" ng-if="$parent.organizationInspection"><strong l10n-text="common.inspectionDirective.organizationTitle"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
@@ -56,6 +56,12 @@
         <div class="form-group  col-sm-6 col-md-6">
           <label class="control-label col-sm-7 col-md-8" l10n-text="common.inspectionDirective.inspectionTo" style="margin-right:-25px; margin-left:-15px"></label>
           <sc-date class="col-sm-4 pull-right col-md-3" ng-model="model.inspectionTo"></sc-date>
+        </div>
+      </div>
+       <div class="row" ng-if="$parent.organizationInspection">
+         <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="common.inspectionDirective.recommendationsReport"></label>
+          <sc-text ng-model="model.recommendationsReport"></sc-text>
         </div>
       </div>
 

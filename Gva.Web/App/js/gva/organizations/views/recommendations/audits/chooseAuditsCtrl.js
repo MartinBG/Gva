@@ -6,7 +6,6 @@
     $state,
     $stateParams,
     $scope,
-    OrganizationInspection,
     organizationRecommendation,
     availableAudits,
     usedAudits) {
@@ -38,7 +37,6 @@
     '$state',
     '$stateParams',
     '$scope',
-    'OrganizationInspection',
     'organizationRecommendation',
     'availableAudits',
     'usedAudits'

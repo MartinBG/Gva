@@ -12,6 +12,8 @@
         $scope.model.auditDetails = AuditDetails.query({ type: 'aircrafts' });
       } else if ($scope.$parent.form.$name === 'organizationInspectionForm') {
         $scope.model.auditDetails = AuditDetails.query({ type: 'organizations' });
+      } else if ($scope.$parent.form.$name === 'airportInspectionForm') {
+        $scope.model.auditDetails = AuditDetails.query({ type: 'airports' });
       }
     };
 
