@@ -59,6 +59,7 @@ module.exports = function (grunt) {
         'schema/aircrafts/aircraft-maintenance.sample.js',
         'schema/aircrafts/aircraft-document-owner.sample.js',
         'schema/aircrafts/aircraft-parts.sample.js',
+        'schema/aircrafts/aircraft-document-application.sample.js',
         'schema/organizations/organization-data.sample.js',
         'schema/organizations/organization-address.sample.js',
         'schema/organizations/organization-cert-airportoperator.sample.js',

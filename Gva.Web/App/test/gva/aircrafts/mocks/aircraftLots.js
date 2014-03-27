@@ -21,12 +21,13 @@
       aircraftDocumentOccurrences = require('./aircraft-document-occurrences.sample'),
       aircraftMaintenances = require('./aircraft-maintenance.sample'),
       aircraftDocumentOwners = require('./aircraft-document-owner.sample'),
-      aircraftParts = require('./aircraft-parts.sample');
+      aircraftParts = require('./aircraft-parts.sample'),
+      aircraftDocumentApplications = require('./aircraft-document-application.sample');
 
   angular.module('app').constant('aircraftLots', [
     {
       lotId: 1,
-      nextIndex: 36,
+      nextIndex: 38,
       aircraftData: {
         partIndex: 1,
         part: aircraftData.aircraft1Data
@@ -61,7 +62,8 @@
         {
           partIndex: 33,
           part: aircraftCertRegistrationsFM.aircraft1Reg2
-        },        {
+        },
+        {
           partIndex: 34,
           part: aircraftCertRegistrationsFM.aircraft1Reg3
         },
@@ -196,6 +198,16 @@
         {
           partIndex: 29,
           part: aircraftParts.aircraft1Part2
+        }
+      ],
+      aircraftDocumentApplications: [
+        {
+          partIndex: 36,
+          part: aircraftDocumentApplications.aircraft1Application1
+        },
+        {
+          partIndex: 37,
+          part: aircraftDocumentApplications.aircraft1Application2
         }
       ]
     },

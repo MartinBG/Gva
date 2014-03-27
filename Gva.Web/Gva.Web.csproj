@@ -253,6 +253,15 @@
     <Content Include="App\js\ems\ems_bg-bg.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertAirworthiness.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentApplication.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentApplicationCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftDocumentApplication.js" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsEdit.html" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsEditCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsNew.html" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsNewCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsSearch.html" />
+    <Content Include="App\js\gva\aircrafts\views\documentApplications\docApplicationsSearchCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportDataCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportCertOperationalCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportDocumentApplication.html" />
@@ -911,6 +920,7 @@
     <Content Include="App\schema\aircrafts\aircraft-inspections.sample.js" />
     <Content Include="App\schema\aircrafts\aircraft-maintenance.sample.js" />
     <Content Include="App\schema\aircrafts\aircraft-parts.sample.js" />
+    <Content Include="App\schema\aircrafts\aircraft-document-application.sample.js" />
     <Content Include="App\schema\airports\airport-document-owner.sample.js" />
     <Content Include="App\schema\airports\airport-document-other.sample.js" />
     <Content Include="App\schema\airports\airport-data.sample.js" />
@@ -1083,6 +1093,7 @@
     <Content Include="App\test\gva\aircrafts\mocks\aircraftDocumentDebtsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftDocumentOthersHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\aircraftsInspectionsHttp.js" />
+    <Content Include="App\test\gva\aircrafts\mocks\aircraftDocumentApplicationsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditPartRequirements.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditPartRequirementsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditResults.js" />

@@ -1067,6 +1067,40 @@
           toDate: 'Период: до дата',
           organization: 'Организация',
           person: 'Физическо лице'
+        },
+        aircraftDocApplicationDirective: {
+          title: 'Заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        aircraftDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        newAircraftDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAircraftDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       },
       persons: {
