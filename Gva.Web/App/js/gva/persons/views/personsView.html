@@ -52,26 +52,26 @@
     </form>
   </div>
   <sc-tabs tab-list="{
-      'Лицензи': 'root.persons.view.licences',
-      'Квалификации': {
-        'Класове': 'root.persons.view.ratings',
-        'Летателен / практически опит': 'root.persons.view.flyingExperiences',
-        'Обучение': 'root.persons.view.documentTrainings',
-        'Проверки': 'root.persons.view.checks'
+      'persons.tabs.licences': 'root.persons.view.licences',
+      'persons.tabs.qualifications': {
+        'persons.tabs.ratings': 'root.persons.view.ratings',
+        'persons.tabs.flyingExperiences': 'root.persons.view.flyingExperiences',
+        'persons.tabs.documentTrainings': 'root.persons.view.documentTrainings',
+        'persons.tabs.checks': 'root.persons.view.checks'
        },
-      'Медицински': 'root.persons.view.medicals',
-      'Лични данни': {
-        'Адреси': 'root.persons.view.addresses',
-        'Месторабота': 'root.persons.view.employments',
-        'Образование': 'root.persons.view.documentEducations',
-        'Документи за самоличност': 'root.persons.view.documentIds',
-        'Състояния': 'root.persons.view.statuses'
+      'persons.tabs.medicals': 'root.persons.view.medicals',
+      'persons.tabs.personData': {
+        'persons.tabs.addresses': 'root.persons.view.addresses',
+        'persons.tabs.employments': 'root.persons.view.employments',
+        'persons.tabs.documentEducations': 'root.persons.view.documentEducations',
+        'persons.tabs.documentIds': 'root.persons.view.documentIds',
+        'persons.tabs.statuses': 'root.persons.view.statuses'
       },
-      'Документи': {
-        'Други': 'root.persons.view.documentOthers'
+      'persons.tabs.docs': {
+        'persons.tabs.others': 'root.persons.view.documentOthers'
       },
-      'Опис': 'root.persons.view.inventory',
-      'Заявления': 'root.persons.view.documentApplications.search'
+      'persons.tabs.inventory': 'root.persons.view.inventory',
+      'persons.tabs.applications': 'root.persons.view.documentApplications'
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

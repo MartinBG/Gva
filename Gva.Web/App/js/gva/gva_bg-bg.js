@@ -1126,6 +1126,25 @@
         }
       },
       persons: {
+        tabs: {
+          licences: 'Лицензи',
+          qualifications: 'Квалификации',
+          ratings: 'Класове',
+          flyingExperiences: 'Летателен / практически опит',
+          documentTrainings: 'Обучение',
+          checks: 'Проверки',
+          medicals: 'Медицински',
+          personData: 'Лични данни',
+          addresses: 'Адреси',
+          employments: 'Месторабота',
+          documentEducations: 'Образование',
+          documentIds: 'Документи за самоличност',
+          statuses: 'Състояния',
+          docs: 'Документи',
+          others: 'Други',
+          inventory: 'Опис',
+          applications: 'Заявления'
+        },
         search: {
           names: 'Име',
           lin: 'ЛИН',
