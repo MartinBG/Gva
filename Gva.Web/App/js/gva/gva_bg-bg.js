@@ -156,7 +156,7 @@
           newOther: 'Нов документ'
         },
         inspectionSearch: {
-          newInspection: 'Нов одит',
+          newInspection: 'Нова инспекция',
           documentNumber: '№ на документ',
           auditState: 'Състояние',
           auditReason: 'Причина',

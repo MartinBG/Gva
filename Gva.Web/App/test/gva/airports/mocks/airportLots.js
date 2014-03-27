@@ -7,12 +7,12 @@
       airportDocumentOwners = require('./airport-document-owner.sample'),
       airportCertOperationals = require('./airport-cert-operational.sample'),
       airportDocumentApplications = require('./airport-document-application.sample'),
-     airportInspections = require('./airport-inspections.sample');
+      airportInspections = require('./airport-inspections.sample');
 
   angular.module('app').constant('airportLots', [
     {
       lotId: 1,
-      nextIndex: 10,
+      nextIndex: 12,
       airportData: {
         partIndex: 1,
         part: airportData.airport1Data
@@ -57,13 +57,13 @@
           part: airportDocumentApplications.airport1Application2
         }
       ],
-      organizationInspections: [
+      airportInspections: [
         {
           partIndex: 10,
           part: airportInspections.airport1Inspection1
         },
         {
-          partIndex: 12,
+          partIndex: 11,
           part: airportInspections.airport1Inspection2
         }
       ]

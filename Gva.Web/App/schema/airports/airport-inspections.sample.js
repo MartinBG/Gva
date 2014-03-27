@@ -96,7 +96,7 @@
     auditDetails2 = auditDetails1;
 
   module.exports = {
-    organization1Inspection1: {
+    airport1Inspection1: {
       documentNumber: '2341',
       auditReason: nomenclatures.get('auditReasons', 'Change'),
       auditType: nomenclatures.get('auditTypes', 'Planned'),
@@ -115,7 +115,7 @@
       }],
       disparities: disparities1
     },
-    organization1Inspection2: {
+    airport1Inspection2: {
       documentNumber: '2341а',
       auditReason: nomenclatures.get('auditReasons', 'Superintendance'),
       auditType: nomenclatures.get('auditTypes', 'Planned'),
