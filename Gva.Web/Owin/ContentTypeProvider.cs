@@ -18,7 +18,7 @@ namespace Gva.Web.Owin
                 {".eot", "application/octet-stream"},
                 {".svg", "application/octet-stream"},
                 {".otf", "application/octet-stream"},
-                {".woff", "application/x-font-woff"},
+                {".woff", "application/font-woff"},
 
                 {".png", "image/png"},
                 {".jpg", "image/jpeg"},
