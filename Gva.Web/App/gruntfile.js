@@ -73,6 +73,8 @@ module.exports = function (grunt) {
         'schema/organizations/organization-amendment.sample.js',
         'schema/organizations//organization-staff-examiner.sample.js',
         'schema/organizations/organization-recommendation.sample.js',
+        'schema/organizations/organization-reg-ground-service-operator.sample.js',
+        'schema/organizations/organization-reg-airport-operator.sample.js',
         'schema/airports/airport-data.sample.js',
         'schema/airports/airport-document-other.sample.js',
         'schema/airports/airport-document-owner.sample.js',

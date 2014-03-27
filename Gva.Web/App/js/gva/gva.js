@@ -250,19 +250,8 @@
       controller: 'OrganizationRecommendationAuditorCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonInspection',
-      templateUrl: 'gva/common/forms/commonInspection.html',
-      controller: 'CommonInspectionCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaCommonAuditDetail',
-      templateUrl: 'gva/common/forms/commonAuditDetail.html',
-      controller: 'CommonAuditDetailCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaCommonDisparity',
-      templateUrl: 'gva/common/forms/commonDisparity.html',
-      controller: 'CommonDisparityCtrl'
+      name: 'gvaOrganizationRegister',
+      templateUrl: 'gva/organizations/forms/organizationRegister.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAirportData',
@@ -290,6 +279,21 @@
     scaffoldingProvider.form({
       name: 'gvaApplicationDocument',
       templateUrl: 'gva/applications/forms/applicationDocument.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonInspection',
+      templateUrl: 'gva/common/forms/commonInspection.html',
+      controller: 'CommonInspectionCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonAuditDetail',
+      templateUrl: 'gva/common/forms/commonAuditDetail.html',
+      controller: 'CommonAuditDetailCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonDisparity',
+      templateUrl: 'gva/common/forms/commonDisparity.html',
+      controller: 'CommonDisparityCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
@@ -515,6 +519,14 @@
       .state(['root.organizations.view.staffExaminers.search'                          , ''                                           , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
       .state(['root.organizations.view.staffExaminers.new'                             , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])
       .state(['root.organizations.view.staffExaminers.edit'                            , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]])
+      .state(['root.organizations.view.regAirportOperators'                            , '/regAirportOperators'                                                                                                                                                                                                                                   ])
+      .state(['root.organizations.view.regAirportOperators.search'                     , ''                                           , ['@root.organizations.view', 'gva/organizations/views/regAirportOperators/regAirportOperatorsSearch.html'                                          , 'RegAirportOperatorsSearchCtrl'                     ]])
+      .state(['root.organizations.view.regAirportOperators.new'                        , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/regAirportOperators/regAirportOperatorsNew.html'                                             , 'RegAirportOperatorsNewCtrl'                        ]])
+      .state(['root.organizations.view.regAirportOperators.edit'                       , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/regAirportOperators/regAirportOperatorsEdit.html'                                            , 'RegAirportOperatorsEditCtrl'                       ]])
+      .state(['root.organizations.view.regGroundServiceOperators'                      , '/regGroundServiceOperators'                                                                                                                                                                                                                             ])
+      .state(['root.organizations.view.regGroundServiceOperators.search'               , ''                                           , ['@root.organizations.view', 'gva/organizations/views/regGroundServiceOperators/regGroundServiceOperatorsSearch.html'                              , 'RegGroundServiceOperatorsSearchCtrl'               ]])
+      .state(['root.organizations.view.regGroundServiceOperators.new'                  , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/regGroundServiceOperators/regGroundServiceOperatorsNew.html'                                 , 'RegGroundServiceOperatorsNewCtrl'                  ]])
+      .state(['root.organizations.view.regGroundServiceOperators.edit'                 , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/regGroundServiceOperators/regGroundServiceOperatorsEdit.html'                                , 'RegGroundServiceOperatorsEditCtrl'                 ]])
       .state(['root.organizations.view.recommendations'                                , '/recommendations'                                                                                                                                                                                                                                      ])
       .state(['root.organizations.view.recommendations.search'                         , ''                                           , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsSearch.html'                                                  , 'RecommendationsSearchCtrl'                         ]])
       .state(['root.organizations.view.recommendations.new'                            , '/new'                                       , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsNew.html'                                                     , 'RecommendationsNewCtrl'                            ]])

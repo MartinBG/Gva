@@ -13,8 +13,7 @@
     $scope.usedAudits = usedAudits;
 
     $scope.addAudits = function () {
-      organizationRecommendation.part.includedAudits
-        .splice(0, organizationRecommendation.part.includedAudits.length);
+      organizationRecommendation.part.includedAudits = [];
 
       _.each(_.filter($scope.availableAudits, { 'checked': true }), function (audit) {
         organizationRecommendation.part.includedAudits.push(audit.partIndex);

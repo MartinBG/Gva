@@ -8,7 +8,7 @@
     airport1Oper1: {
       issueDate: '2013-09-04T00:00',
       issueNumber: '333',
-      valiToDate: '2018-09-04T00:00',
+      validToDate: '2018-09-04T00:00',
       audit: '333',
       organization: nomenclatures.get('organizations', 'AAK Progres'),
       inspector: nomenclatures.get('inspectors', 'Vladimir'),
@@ -32,7 +32,7 @@
     airport1Oper2: {
       issueDate: '2014-01-14T00:00',
       issueNumber: '333',
-      valiToDate: '2018-12-22T00:00',
+      validToDate: '2018-12-22T00:00',
       audit: '334',
       organization: nomenclatures.get('organizations', 'Wizz Air'),
       inspector: nomenclatures.get('inspectors', 'Georgi'),

@@ -552,6 +552,7 @@
     <Content Include="App\js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="App\js\gva\organizations\forms\organizationRecommendationAuditorCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationRecommendationAuditor.html" />
     <Content Include="App\js\gva\organizations\forms\organizationRecommendationCtrl.js" />
@@ -569,6 +570,8 @@
     <Content Include="App\js\gva\organizations\forms\organizationEquipment.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="App\js\gva\organizations\forms\organizationDocumentOther.html" />
+    <Content Include="App\js\gva\organizations\resources\organizationRegAirportOperator.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationRegGroundServiceOperator.js" />
     <Content Include="App\js\gva\organizations\resources\organizationRecommendation.js" />
     <Content Include="App\js\gva\organizations\resources\organizationStaffExaminer.js" />
     <Content Include="App\js\gva\organizations\resources\organizationInspection.js" />
@@ -625,6 +628,18 @@
     <Content Include="App\js\gva\organizations\views\recommendations\recommendationsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\recommendations\recommendationsSearch.html" />
     <Content Include="App\js\gva\organizations\views\recommendations\recommendationsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsNew.html" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\regAirportOperators\regAirportOperatorsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsNew.html" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersEdit.html" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersNew.html" />
@@ -1025,6 +1040,8 @@
     <Content Include="App\schema\nomenclatures\school.js" />
     <Content Include="App\schema\nomenclatures\staffType.js" />
     <Content Include="App\schema\nomenclatures\unit.js" />
+    <Content Include="App\schema\organizations\organization-reg-airport-operator.sample.js" />
+    <Content Include="App\schema\organizations\organization-reg-ground-service-operator.sample.js" />
     <Content Include="App\schema\organizations\organization-recommendation.sample.js" />
     <Content Include="App\schema\organizations\organization-staff-examiner.sample.js" />
     <Content Include="App\schema\person-address.sample.js" />
@@ -1154,6 +1171,7 @@
     <Content Include="App\test\gva\applications\specs\addPartToCaseSpec.js" />
     <Content Include="App\test\gva\applications\specs\linkApplicaionSpec.js" />
     <Content Include="App\test\gva\applications\specs\newApplicaionSpec.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationRegGroundServiceOperatorsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationRecommendationsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffExaminersHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationInspectionsHttp.js" />

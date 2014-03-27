@@ -15,12 +15,16 @@
     organizationApprovals = require('./organization-approval.sample'),
     organizationAmendments = require('./organization-amendment.sample'),
     staffExaminers = require('./organization-staff-examiner.sample'),
-    recommendations = require('./organization-recommendation.sample');
+    recommendations = require('./organization-recommendation.sample'),
+    organizationRegGroundServiceOperators =
+    require('./organization-reg-ground-service-operator.sample'),
+    organizationRegAirportOperators = require('./organization-reg-airport-operator.sample');
+
 
   angular.module('app').constant('organizationLots', [
     {
       lotId: 1,
-      nextIndex: 24,
+      nextIndex: 28,
       organizationData: {
         partIndex: 1,
         part: organizationData.organization1Data
@@ -143,6 +147,26 @@
         {
           partIndex: 23,
           part: recommendations.recommendation2
+        }
+      ],
+      organizationRegAirportOperators: [
+        {
+          partIndex: 24,
+          part: organizationRegAirportOperators.register1
+        },
+        {
+          partIndex: 25,
+          part: organizationRegAirportOperators.register2
+        }
+      ],
+      organizationRegGroundServiceOperators: [
+        {
+          partIndex: 26,
+          part: organizationRegGroundServiceOperators.register1
+        },
+        {
+          partIndex: 27,
+          part: organizationRegGroundServiceOperators.register2
         }
       ]
     }

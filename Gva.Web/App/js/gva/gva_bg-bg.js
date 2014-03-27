@@ -213,7 +213,7 @@
           title: 'Удостоверение за експлоатационна годност',
           issueNumber: 'Номер на удостоверение',
           issueDate: 'Дата на издаване',
-          valiToDate: 'Срок на валидност',
+          validToDate: 'Срок на валидност',
           audit: 'Инспекция',
           organization: 'Организация',
           inspector: 'Проверил',
@@ -244,7 +244,7 @@
           newOper: 'Ново удостоверение',
           issueDate: 'Дата на издаване',
           issueNumber: 'Удостоверение №',
-          valiToDate: 'Срок на валидност',
+          validToDate: 'Срок на валидност',
           audit: 'Инспекция',
           organization: 'Организация',
           inspector: 'Проверил',
@@ -1812,9 +1812,14 @@
           addresses: 'Адреси',
           aiportOperator: 'Летищен оператор',
           certAirportOperators:'Лиценз на летищен оператор',
-          certGroundServiceOperators: 'Лиценз на оператор по наземно обслужване или самообслужване',
+          certGroundServiceOperators:
+            'Лиценз на оператор по наземно обслужване или самообслужване',
           groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
-          documentOthers: 'Други документи'
+          documentOthers: 'Други документи',
+          registers: 'Регистри',
+          regAirportOperators: 'Издадени лицензи за летищен оператор',
+          regGroundServiceOperators:
+            'Издадени лицензи за оператор по наземно обслужване или самообслужване'
         },
         search: {
           newOrganization: 'Нова организация',
@@ -2096,6 +2101,42 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        regAirportOperatorSearch: {
+          newRegAirportOperator: 'Ново удостоверение',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          organization: 'Организация',
+          address: 'Седалище и адрес на управление на оператора',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newRegAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editRegAirportOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        regGroundServiceOperatorSearch: {
+          newRegGroundServiceOperator: 'Ново удостоверение',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          organization: 'Организация',
+          address: 'Седалище и адрес на управление на оператора',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
+        },
+        newRegGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editRegGroundServiceOperator: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         staffManagementDirective: {
           title: 'Ръководен персонал',
           auditPartRequirement: 'Изискване',
@@ -2321,6 +2362,21 @@
           sortOrder: 'Пореден №',
           noAvailableExaminers: 'Няма намерени резултати',
           part: 'Част'
+        },
+        organizationRegisterDirective: {
+          titleAirportOperator: 'Регистър за издадени лицензи за летищен оператор',
+          titleGroundServiceOperator:
+            'Регистър за издадени лицензи за оператор по наземно обслужване или самообслужване',
+          certNumber: '№ на удостоверение',
+          airport: 'Летище',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          organization: 'Организация',
+          address: 'Седалище и адрес на управление на оператора',
+          activityTypes: 'Дейности',
+          revokeTitle: 'Отнемане',
+          revokeDate: 'Дата на отнемане',
+          revokeCause: 'Причина за отнемане'
         }
       },
       errorTexts: {
@@ -2512,6 +2568,14 @@
         'root.organizations.view.staffExaminers': 'Проверяващи',
         'root.organizations.view.staffExaminers.new': 'Нов проверяващ',
         'root.organizations.view.staffExaminers.edit': 'Редакция на проверяващ',
+        'root.organizations.view.regAirportOperators':
+          'Регистър за издадени лицензи за летищен оператор',
+        'root.organizations.view.regAirportOperators.new': 'Нов лиценз',
+        'root.organizations.view.regAirportOperators.edit': 'Редакция на лиценз',
+        'root.organizations.view.regGroundServiceOperators':
+          'Регистър за издадени лицензи за оператор по наземно обслужване или самообслужване',
+        'root.organizations.view.regGroundServiceOperators.new': 'Нов лиценз',
+        'root.organizations.view.regGroundServiceOperators.edit': 'Редакция на лиценз',
         'root.airports': 'Летища',
         'root.airports.new': 'Ново летище',
         'root.airports.view': 'Данни за летище',
