@@ -1751,7 +1751,15 @@
           valid: 'Действителен'
         },
         recommendationSearch: {
-          newRecommendation: 'Нов доклад'
+          newRecommendation: 'Нов доклад',
+          recommendationPart: 'Тип',
+          formDate: 'Форма за заявен обхват на одобрението от дата',
+          formText: 'Форма за заявен обхват на одобрението № на изменението',
+          interviewedStaff: 'Интервюиран персонал',
+          fromDate: 'Период на надзора от',
+          toDate: 'до',
+          documentDescription: 'Описание, издание, ревизия Част 3',
+          recommendation: 'Препоръки'
         },
         newRecommendation: {
           save: 'Запис',

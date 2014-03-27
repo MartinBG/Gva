@@ -4,6 +4,20 @@
     <sc-button name="editBtn" btn-click="editRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     <sc-button name="deleteBtn" btn-click="deleteRecommendation(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
- <!-- <sc-column data="part.nomValueId" title="organizations.staffExaminerSearch.nomValueId">
-  </sc-column>-->
+  <sc-column data="part.recommendationPart.name" title="organizations.recommendationSearch.recommendationPart">
+  </sc-column>
+  <sc-column data="part.formDate" title="organizations.recommendationSearch.formDate" type="date">
+  </sc-column>
+  <sc-column data="part.formText" title="organizations.recommendationSearch.formText">
+  </sc-column>
+  <sc-column data="part.interviewedStaff" title="organizations.recommendationSearch.interviewedStaff">
+  </sc-column>
+  <sc-column data="part.fromDate" title="organizations.recommendationSearch.fromDate" type="date">
+  </sc-column>
+  <sc-column data="part.toDate" title="organizations.recommendationSearch.toDate" type="date">
+  </sc-column>
+  <sc-column data="part.documentDescription" title="organizations.recommendationSearch.documentDescription">
+  </sc-column>
+  <sc-column data="part.recommendation" title="organizations.recommendationSearch.recommendation">
+  </sc-column>
 </sc-datatable>

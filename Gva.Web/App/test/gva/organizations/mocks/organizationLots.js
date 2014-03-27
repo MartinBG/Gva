@@ -20,7 +20,7 @@
   angular.module('app').constant('organizationLots', [
     {
       lotId: 1,
-      nextIndex: 22,
+      nextIndex: 24,
       organizationData: {
         partIndex: 1,
         part: organizationData.organization1Data
