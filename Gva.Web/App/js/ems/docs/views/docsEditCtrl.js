@@ -100,8 +100,16 @@
     };
 
     $scope.reverseStage = function () {
-      return DocStage.reverse({ docId: doc.docId }).$promise.then(function (result) {
-        doc.docElectronicServiceStages = result.stages;
+      return $state.go('root.docs.edit.stages').then(function () {
+        return DocStage.reverse({
+          id: doc.docId,
+          docVersion: doc.version
+        })
+          .$promise
+          .then(function () {
+            //?
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          });
       });
     };
 
@@ -145,7 +153,7 @@
 
     $scope.register = function () {
       return Doc.register({
-        docId: doc.docId,
+        id: doc.docId,
         docVersion: doc.version
       })
         .$promise

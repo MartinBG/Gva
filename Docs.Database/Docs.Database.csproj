@@ -139,6 +139,8 @@
     <Content Include="Insert\Docs\DocTypes.sql" />
     <Content Include="Insert\Docs\DocUnitPermissions.sql" />
     <Content Include="Insert\Docs\DocUnitRoles.sql" />
+    <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql" />
+    <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStages.sql" />
     <Content Include="Insert\Units\UnitClassifications.sql" />
     <Content Include="Insert\Units\UnitUsers.sql" />
     <Content Include="Insert\Units\UnitRelations.sql" />

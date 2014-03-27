@@ -9,12 +9,11 @@
       <th><span l10n-text="docs.edit.stages.isCurrentStage"></span></th>
     </tr>
   </thead>
-  <tbody ng-repeat="dess in doc.docElectronicServiceStages">
+  <tbody ng-repeat="dess in docElectronicServiceStages">
     <tr>
       <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>
       <td>{{ dess.electronicServiceStageName }}</td>
-      <td>{{ dess.electronicServiceStageExecutors}}</td>
-      <!--todo must be html rendered-->
+      <td ng-bind-html="dess.electronicServiceStageExecutors"></td>
       <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy HH:mm' }}</td>
       <td>{{ dess.endingDate | date:'dd.MM.yyyy HH:mm' }}</td>
       <td>{{ dess.isCurrentStage ? 'Да' : 'Не' }}</td>

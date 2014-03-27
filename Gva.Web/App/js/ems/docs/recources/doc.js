@@ -14,11 +14,9 @@
             'createChild': {
               method: 'POST',
               url: '/api/docs/:id/create',
-              params: { docEntryTypeAlias: '@docEntryTypeAlias' }
-            },
-            'registerNew': {
-              method: 'POST',
-              url: '/api/docs/new/register'
+              params: {
+                docEntryTypeAlias: '@docEntryTypeAlias'
+              }
             },
             //?
             'units': {
@@ -40,11 +38,12 @@
                 docVersion: '@docVersion',
                 docCasePartTypeId: '@docCasePartTypeId'
               }
-            },
-            'setDocType': {
-              method: 'POST',
-              url: '/api/docs/:id/setDocType'
             }
+            //?
+            //'setDocType': {
+            //  method: 'POST',
+            //  url: '/api/docs/:id/setDocType'
+            //}
           });
       }]);
 }(angular));

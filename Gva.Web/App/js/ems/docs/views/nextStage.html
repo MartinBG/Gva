@@ -4,10 +4,10 @@
 
         <div class="row">
 
-          <div class="form-group col-sm-10" sc-has-error="stageId">
+          <div class="form-group col-sm-10" sc-has-error="electronicServiceStageId">
             <label class="control-label" l10n-text="docs.nextStage.stage"></label>
-            <sc-validation-error field-name="stageId" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="stageModel.stageId" mode="id" name="stageId" alias="'electronicServiceStages'" params="{ docTypeId: stageModel.docTypeId }" ng-required="true"></sc-nomenclature>
+            <sc-validation-error field-name="electronicServiceStageId" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="stageModel.electronicServiceStageId" nom-obj="stageModel.electronicServiceStage" mode="id" name="electronicServiceStageId" alias="'electronicServiceStage'" params="{ docTypeId: stageModel.docTypeId }" ng-required="true"></sc-nomenclature>
           </div>
 
           <div class="form-group col-sm-2" sc-has-error="startingDate">
@@ -22,7 +22,7 @@
 
           <div class="form-group col-sm-8">
             <label class="control-label" l10n-text="docs.nextStage.executors"></label>
-            <sc-text ng-model="stageModel.executors" name="executors" readonly="true"></sc-text>
+            <sc-text ng-model="stageModel.electronicServiceStage.executorName" name="executors" readonly="true"></sc-text>
           </div>
 
           <div class="form-group col-sm-2" sc-has-error="expectedEndingDate">

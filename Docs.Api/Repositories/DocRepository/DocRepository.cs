@@ -50,6 +50,17 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<int?>("spGetDocRegisterId", parameters).FirstOrDefault();
         }
 
+        public List<DocElectronicServiceStage> GetCaseElectronicServiceStagesByDocId(
+            int id,
+            params Expression<Func<DocElectronicServiceStage, object>>[] includes)
+        {
+            int caseId = this.GetCaseId(id);
+
+            Tuple<string, object>[] keyValues = new Tuple<string, object>[] { new Tuple<string, object>("DocId", caseId) };
+
+            return this.FindInStore<DocElectronicServiceStage>(keyValues, includes);
+        }
+
         public Doc NextDocStatus(
             int id,
             byte[] docVersion,
@@ -268,6 +279,15 @@ namespace Docs.Api.Repositories.DocRepository
 
         public List<DocRelation> GetCaseRelationsByDocId(int id, params Expression<Func<DocRelation, object>>[] includes)
         {
+            int caseId = this.GetCaseId(id);
+
+            Tuple<string, object>[] keyValues = new Tuple<string, object>[] { new Tuple<string, object>("RootDocId", caseId) };
+
+            return this.FindInStore<DocRelation>(keyValues, includes);
+        }
+
+        public int GetCaseId(int id)
+        {
             DocRelation currentRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                 .FirstOrDefault(e => e.DocId == id);
 
@@ -276,9 +296,12 @@ namespace Docs.Api.Repositories.DocRepository
                 throw new Exception(string.Format("DocRelation is missing for doc ID = {0}", id));
             }
 
-            Tuple<string, object>[] keyValues = new Tuple<string, object>[] { new Tuple<string, object>("RootDocId", currentRelation.RootDocId) };
+            if (!currentRelation.RootDocId.HasValue)
+            {
+                throw new Exception(string.Format("DocRelation is missing RootDocId for doc ID = {0}", id));
+            }
 
-            return this.FindInStore<DocRelation>(keyValues, includes);
+            return currentRelation.RootDocId.Value;
         }
 
         public List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser)
@@ -294,7 +317,12 @@ namespace Docs.Api.Repositories.DocRepository
                 .ToList();
         }
 
-        public void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext, bool checkVersion = false, byte[] docVersion = null)
+        public void RegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            bool checkVersion = false,
+            byte[] docVersion = null)
         {
             doc.EnsureDocRelationsAreLoaded();
 

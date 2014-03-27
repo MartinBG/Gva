@@ -54,7 +54,8 @@ namespace Docs.Api.Models
             // Relationships
             this.HasRequired(t => t.Doc)
                 .WithMany(t => t.DocElectronicServiceStages)
-                .HasForeignKey(d => d.DocId);
+                .HasForeignKey(d => d.DocId)
+                .WillCascadeOnDelete();
             this.HasRequired(t => t.ElectronicServiceStage)
                 .WithMany(t => t.DocElectronicServiceStages)
                 .HasForeignKey(d => d.ElectronicServiceStageId);

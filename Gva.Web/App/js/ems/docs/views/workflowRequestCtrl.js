@@ -38,7 +38,7 @@
         if ($scope.workflowForm.$valid) {
 
           return DocWorkflow.save({
-            docId: $scope.workflowModel.docId,
+            id: $scope.workflowModel.docId,
             docVersion: $scope.workflowModel.docVersion
           }, $scope.workflowModel)
             .$promise

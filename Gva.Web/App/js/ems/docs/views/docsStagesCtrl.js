@@ -1,18 +1,31 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function DocsStagesCtrl(
-    $scope
+    $scope,
+    $sce,
+    doc
   ) {
+    $scope.docId = doc.docId;
+    $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
+      function (docElectronicServiceStage) {
+        docElectronicServiceStage.electronicServiceStageExecutors =
+          $sce.trustAsHtml(docElectronicServiceStage.electronicServiceStageExecutors);
 
-    $scope.blabla = '<b>asdf</b>';
+        return docElectronicServiceStage;
+      });
 
+    $scope.removeDocStage = function () {
+      throw 'not implemented';
+    };
   }
 
   DocsStagesCtrl.$inject = [
-    '$scope'
+    '$scope',
+    '$sce',
+    'doc'
   ];
 
   angular.module('ems').controller('DocsStagesCtrl', DocsStagesCtrl);
-}(angular));
+}(angular, _));

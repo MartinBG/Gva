@@ -7,25 +7,26 @@
       function ($resource) {
         return $resource('/api/docs/:id/stages', { id: '@docId' },
           {
-            'current': {
-              method: 'GET',
-              url: '/api/docs/:id/stages/current'
-            },
-            'next': {
-              method: 'POST',
-              url: '/api/docs/:id/stages/next'
-            },
             'edit': {
               method: 'POST',
-              url: '/api/docs/:id/stages/edit'
+              url: '/api/docs/:id/stages/edit',
+              params: {
+                docVersion: '@docVersion'
+              }
             },
             'end': {
               method: 'POST',
-              url: '/api/docs/:id/stages/end'
+              url: '/api/docs/:id/stages/end',
+              params: {
+                docVersion: '@docVersion'
+              }
             },
             'reverse': {
-              method: 'POST',
-              url: '/api/docs/:id/stages/reverse'
+              method: 'DELETE',
+              url: '/api/docs/:id/stages',
+              params: {
+                docVersion: '@docVersion'
+              }
             }
           });
       }]);

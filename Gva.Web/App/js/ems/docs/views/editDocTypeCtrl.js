@@ -43,7 +43,7 @@
       $scope.docTypeForm.$validate().then(function () {
         if ($scope.docTypeForm.$valid) {
 
-          return Doc.setDocType({ docId: $scope.oldDoc.docId }, $scope.doc).$promise
+          return Doc.setDocType({ id: $scope.oldDoc.docId }, $scope.doc).$promise
             .then(function () {
             return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });
           });

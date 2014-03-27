@@ -20,6 +20,10 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterId(int id);
 
+        List<DocElectronicServiceStage> GetCaseElectronicServiceStagesByDocId(
+            int id,
+            params Expression<Func<DocElectronicServiceStage, object>>[] includes);
+
         Doc NextDocStatus(
             int id,
             byte[] docVersion,
@@ -37,9 +41,16 @@ namespace Docs.Api.Repositories.DocRepository
 
         List<DocRelation> GetCaseRelationsByDocId(int id, params Expression<Func<DocRelation, object>>[] includes);
 
+        int GetCaseId(int id);
+
         List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser);
 
-        void RegisterDoc(Doc doc, UnitUser unitUser, UserContext userContext, bool checkVersion = false, byte[] docVersion = null);
+        void RegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            bool checkVersion = false,
+            byte[] docVersion = null);
 
         void GenerateAccessCode(Doc doc, UserContext userContext);
 

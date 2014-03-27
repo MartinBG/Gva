@@ -26,6 +26,7 @@ namespace Docs.Api.DataObjects
                 this.IsCurrentStage = d.IsCurrentStage;
                 this.Version = d.Version;
 
+                //?
                 if (d.ElectronicServiceStage != null)
                 {
                     this.ElectronicServiceStageAlias = d.ElectronicServiceStage.Alias;
@@ -33,13 +34,13 @@ namespace Docs.Api.DataObjects
                     this.ElectronicServiceStageDuration = d.ElectronicServiceStage.Duration ?? 0;
                     this.ElectronicServiceStageDocTypeId = d.ElectronicServiceStage.DocTypeId;
 
-                    if (d.ElectronicServiceStage.ElectronicServiceStageExecutors != null && d.ElectronicServiceStage.ElectronicServiceStageExecutors.Any(e => e.IsActive))
+                    if (d.ElectronicServiceStage.ElectronicServiceStageExecutors != null
+                        && d.ElectronicServiceStage.ElectronicServiceStageExecutors.Any(e => e.IsActive))
                     {
                         StringBuilder sb = new StringBuilder();
                         var executors = d.ElectronicServiceStage.ElectronicServiceStageExecutors.Where(e => e.IsActive).ToList();
                         foreach (var executor in executors)
                         {
-
                             if (executor.Unit != null)
                             {
                                 if (sb.Length > 0)
@@ -56,13 +57,12 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public Nullable<int> DocElectronicServiceStageId { get; set; }
-        public Nullable<int> DocId { get; set; }
-        public Nullable<int> ElectronicServiceStageId { get; set; }
-        public Nullable<System.DateTime> StartingDate { get; set; }
-        public Nullable<System.DateTime> ExpectedEndingDate { get; set; }
-        public Nullable<System.DateTime> EndingDate { get; set; }
-        public int DocTypeId { get; set; }
+        public int? DocElectronicServiceStageId { get; set; }
+        public int? DocId { get; set; }
+        public int ElectronicServiceStageId { get; set; }
+        public DateTime StartingDate { get; set; }
+        public DateTime? ExpectedEndingDate { get; set; }
+        public DateTime? EndingDate { get; set; }
         public bool IsCurrentStage { get; set; }
         public byte[] Version { get; set; }
 
@@ -71,7 +71,6 @@ namespace Docs.Api.DataObjects
         public string ElectronicServiceStageName { get; set; }
         public int ElectronicServiceStageDuration { get; set; }
         public int ElectronicServiceStageDocTypeId { get; set; }
-
         public string ElectronicServiceStageExecutors { get; set; }
     }
 }

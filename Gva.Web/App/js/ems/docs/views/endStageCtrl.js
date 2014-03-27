@@ -5,32 +5,29 @@
   function EndStageCtrl(
     $scope,
     $state,
+    $stateParams,
     DocStage,
     doc,
     stageModel
   ) {
     $scope.stageModel = stageModel;
 
-    $scope.cancel = function () {
-      return $state.go('^');
-    };
-
     $scope.save = function () {
       $scope.stageForm.$validate().then(function () {
         if ($scope.stageForm.$valid) {
-
-          var stageData = {
-            docElectronicServiceStageId: $scope.stageModel.docElectronicServiceStageId,
-            endingDate: $scope.stageModel.endingDate
-          };
-
-          return DocStage.end({ docId: stageModel.docId }, stageData).$promise
-            .then(function (result) {
-            doc.docElectronicServiceStages = result.stages;
-            return $state.go('^');
-          });
+          return DocStage.end({
+            id: $scope.stageModel.docId,
+            docVersion: $scope.stageModel.docVersion
+          }, $scope.stageModel).$promise
+            .then(function () {
+              return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
+            });
         }
       });
+    };
+
+    $scope.cancel = function () {
+      return $state.go('^');
     };
 
     $scope.isEndingDateValid = function () {
@@ -46,6 +43,7 @@
   EndStageCtrl.$inject = [
     '$scope',
     '$state',
+    '$stateParams',
     'DocStage',
     'doc',
     'stageModel'
@@ -54,18 +52,15 @@
   EndStageCtrl.$resolve = {
     stageModel: ['Nomenclature', 'doc', 'DocStage',
       function (Nomenclature, doc, DocStage) {
-        return DocStage.current({ docId: doc.docId}).$promise.then(function (result) {
-          return {
-            docElectronicServiceStageId: result.docElectronicServiceStageId,
-            stageId: result.electronicServiceStageId,
-            docId: doc.docId,
-            docTypeId: doc.docTypeId,
-            startingDate: result.startingDate,
-            executors: result.electronicServiceStageExecutors,
-            expectedEndingDate: result.expectedEndingDate,
-            endingDate: result.endingDate
-          };
-        });
+        return DocStage.get({
+          id: doc.docId,
+          docVersion: doc.version
+        })
+          .$promise
+          .then(function (result) {
+            result.docVersion = doc.version;
+            return result;
+          });
       }
     ]
   };

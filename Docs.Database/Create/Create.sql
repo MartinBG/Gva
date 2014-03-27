@@ -161,6 +161,10 @@ GO
 :r $(rootPath)\"..\Insert\Docs\DocFileKinds.sql"
 :r $(rootPath)\"..\Insert\Docs\DocFileTypes.sql"
 
+--electronic service stages
+:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
+:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"
+
 --units
 :r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
 :r $(rootPath)\"..\Insert\Units\Units.sql"

@@ -727,24 +727,17 @@ namespace Docs.Api.Controllers
                     e => e.Doc.DocType,
                     e => e.Doc.DocStatus)
                    .Select(e => new DocRelationDO(e))
-                   );
+                );
 
             #endregion
 
             #region DocElectronicServiceStages
 
-            //?
-            //Doc caseDoc = this.docRepository.Find(caseDocId,
-            //    e => e.DocType,
-            //    e => e.DocElectronicServiceStages.Select(d => d.ElectronicServiceStage.ElectronicServiceStageExecutors.Select(ee => ee.Unit)));
-
-            //if (caseDoc.DocType.IsElectronicService)
-            //{
-            //    foreach (var dess in caseDoc.DocElectronicServiceStages)
-            //    {
-            //        returnValue.DocElectronicServiceStages.Add(new DocElectronicServiceStageDO(dess));
-            //    }
-            //}
+            returnValue.DocElectronicServiceStages.AddRange(
+                this.docRepository.GetCaseElectronicServiceStagesByDocId(id,
+                    e => e.ElectronicServiceStage.ElectronicServiceStageExecutors.Select(ee => ee.Unit))
+                    .Select(e => new DocElectronicServiceStageDO(e))
+                );
 
             #endregion
 
@@ -1241,6 +1234,97 @@ namespace Docs.Api.Controllers
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
             doc.DeleteDocWorkflow(itemId, this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CreateDocElectronicServiceStage(
+            int id,
+            string docVersion,
+            DocElectronicServiceStageDO docElectronicServiceStage)
+        {
+            Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
+                e => e.DocElectronicServiceStages);
+
+            doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
+
+            doc.CreateDocElectronicServiceStage(
+                docElectronicServiceStage.ElectronicServiceStageId,
+                docElectronicServiceStage.StartingDate,
+                docElectronicServiceStage.ExpectedEndingDate,
+                docElectronicServiceStage.EndingDate,
+                true,
+                this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetCurrentDocElectronicServiceStage(int id, string docVersion)
+        {
+            Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
+                e => e.DocElectronicServiceStages);
+
+            doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, doc.GetCurrentDocElectronicServiceStage());
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateCurrentDocElectronicServiceStage(
+            int id,
+            string docVersion,
+            DocElectronicServiceStageDO docElectronicServiceStage)
+        {
+            Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
+                e => e.DocElectronicServiceStages);
+
+            doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
+
+            doc.UpdateCurrentDocElectronicServiceStage(
+                docElectronicServiceStage.ElectronicServiceStageId,
+                docElectronicServiceStage.StartingDate,
+                docElectronicServiceStage.ExpectedEndingDate,
+                docElectronicServiceStage.EndingDate,
+                this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage EndCurrentDocElectronicServiceStage(
+            int id,
+            string docVersion,
+            DocElectronicServiceStageDO docElectronicServiceStage)
+        {
+            Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
+                e => e.DocElectronicServiceStages);
+
+            doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
+
+            doc.EndCurrentDocElectronicServiceStage(docElectronicServiceStage.EndingDate.Value, this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpDelete]
+        public HttpResponseMessage DeleteCurrentDocElectronicServiceStage(int id, string docVersion)
+        {
+            Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
+                e => e.DocElectronicServiceStages);
+
+            doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
+
+            doc.ReverseDocElectronicServiceStage(doc.GetCurrentDocElectronicServiceStage(), this.userContext);
 
             this.unitOfWork.Save();
 

@@ -1,14 +1,10 @@
-﻿using Common.Api.Models;
-using Common.Extensions;
-using Docs.Api.DataObjects;
+﻿using Common.Extensions;
 using Docs.Api.Models;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Docs.Api.Controllers
@@ -800,6 +796,67 @@ namespace Docs.Api.Controllers
                     isActive = true
                 }
             });
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetElectronicServiceStages(
+            string term = null,
+            int? id = null,
+            string va = null,
+            int? docTypeId = null
+            )
+        {
+            var query = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                .Include(e => e.ElectronicServiceStageExecutors.Select(ee => ee.Unit))
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(e => e.Name.ToLower().Contains(term.ToLower()));
+            }
+
+            if (!string.IsNullOrEmpty(va))
+            {
+                query = query.Where(e => e.Alias.ToLower().Contains(va.ToLower()));
+            }
+
+            if (docTypeId.HasValue)
+            {
+                query = query.Where(e => e.DocTypeId == docTypeId.Value);
+            }
+
+            if (id.HasValue)
+            {
+                var singleValue = query
+                    .Where(e => e.ElectronicServiceStageId == id.Value)
+                    .Select(e => new
+                    {
+                        nomValueId = e.ElectronicServiceStageId,
+                        name = e.Name,
+                        alias = e.Alias,
+                        isActive = e.IsActive,
+                        executorName = e.ElectronicServiceStageExecutors.FirstOrDefault() != null ?
+                            e.ElectronicServiceStageExecutors.FirstOrDefault().Unit.Name : "Непосочен"
+                    })
+                    .FirstOrDefault();
+
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, singleValue);
+            }
+
+            var arrayValue = query
+                .Where(e => e.IsActive)
+                .Select(e => new
+                {
+                    nomValueId = e.ElectronicServiceStageId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive,
+                    executorName = e.ElectronicServiceStageExecutors.FirstOrDefault() != null ?
+                            e.ElectronicServiceStageExecutors.FirstOrDefault().Unit.Name : "Непосочен"
+                })
+                .ToList();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, arrayValue);
         }
     }
 }

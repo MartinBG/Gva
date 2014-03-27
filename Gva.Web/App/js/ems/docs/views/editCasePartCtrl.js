@@ -19,10 +19,10 @@
           if ($scope.docCasePartTypeId !== doc.docCasePartTypeId) {
             return Doc
               .setCasePart({
-                docId: $scope.docId,
+                id: $scope.docId,
                 docVersion: $scope.docVersion,
                 docCasePartTypeId: $scope.docCasePartTypeId
-              })
+              }, {})
               .$promise
               .then(function () {
                 return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });

@@ -633,6 +633,201 @@ namespace Docs.Api.Models
 
         #endregion
 
+        #region DocElectronicServiceStages
+
+        public DocElectronicServiceStage GetCurrentDocElectronicServiceStage()
+        {
+            return this.DocElectronicServiceStages
+                .SingleOrDefault(e => e.IsCurrentStage);
+        }
+
+        public DocElectronicServiceStage UpdateCurrentDocElectronicServiceStage(
+            int electronicServiceStageId,
+            DateTime startingDate,
+            DateTime? expectedEndingDate,
+            DateTime? endingDate,
+            UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocElectronicServiceStage current = this.DocElectronicServiceStages
+                .SingleOrDefault(e => e.IsCurrentStage);
+
+            if (current != null)
+            {
+                current.ElectronicServiceStageId = electronicServiceStageId;
+                current.StartingDate = startingDate;
+                current.ExpectedEndingDate = expectedEndingDate;
+                current.EndingDate = endingDate;
+
+                return current;
+            }
+            else
+            {
+                throw new Exception("There is no current docElectronicServiceStage in the doc.");
+            }
+        }
+
+        public DocElectronicServiceStage UpdateCurrentDocElectronicServiceStage(
+            DocElectronicServiceStage docElectronicServiceStage,
+            UserContext userContext)
+        {
+            return UpdateCurrentDocElectronicServiceStage(
+                docElectronicServiceStage.ElectronicServiceStageId,
+                docElectronicServiceStage.StartingDate,
+                docElectronicServiceStage.ExpectedEndingDate,
+                docElectronicServiceStage.EndingDate,
+                userContext);
+        }
+
+        public DocElectronicServiceStage EndCurrentDocElectronicServiceStage(UserContext userContext)
+        {
+            DateTime current = DateTime.Now;
+
+            this.ModifyDate = current;
+            this.ModifyUserId = userContext.UserId;
+
+            DocElectronicServiceStage currentStage = this.DocElectronicServiceStages
+                .SingleOrDefault(e => e.IsCurrentStage);
+
+            if (currentStage != null)
+            {
+                currentStage.IsCurrentStage = false;
+                currentStage.EndingDate = current;
+
+                return currentStage;
+            }
+            else
+            {
+                throw new Exception("There is no current docElectronicServiceStage in the doc.");
+            }
+        }
+
+        public DocElectronicServiceStage EndCurrentDocElectronicServiceStage(DateTime endDate, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            DocElectronicServiceStage currentStage = this.DocElectronicServiceStages
+                .SingleOrDefault(e => e.IsCurrentStage);
+
+            if (currentStage != null)
+            {
+                currentStage.IsCurrentStage = false;
+                currentStage.EndingDate = endDate;
+
+                return currentStage;
+            }
+            else
+            {
+                throw new Exception("There is no current docElectronicServiceStage in the doc.");
+            }
+        }
+
+        public DocElectronicServiceStage CreateDocElectronicServiceStage(
+            int electronicServiceStageId,
+            DateTime startingDate,
+            DateTime? expectedEndingDate,
+            DateTime? endingDate,
+            bool isCurrentStage,
+            UserContext userContext)
+        {
+            DateTime current = DateTime.Now;
+
+            this.ModifyDate = current;
+            this.ModifyUserId = userContext.UserId;
+
+            DocElectronicServiceStage previous = this.DocElectronicServiceStages
+                .SingleOrDefault(e => e.IsCurrentStage);
+            if (previous != null)
+            {
+                previous.IsCurrentStage = false;
+                if (!previous.EndingDate.HasValue)
+                {
+                    previous.EndingDate = current;
+                }
+            }
+
+            DocElectronicServiceStage docElectronicServiceStage = new DocElectronicServiceStage
+            {
+                ElectronicServiceStageId = electronicServiceStageId,
+                EndingDate = endingDate,
+                ExpectedEndingDate = expectedEndingDate,
+                IsCurrentStage = isCurrentStage,
+                StartingDate = startingDate
+            };
+
+            this.DocElectronicServiceStages.Add(docElectronicServiceStage);
+
+            return docElectronicServiceStage;
+        }
+
+        public DocElectronicServiceStage CreateDocElectronicServiceStage(
+            DocElectronicServiceStage docElectronicServiceStage,
+            UserContext userContext)
+        {
+            return this.CreateDocElectronicServiceStage(
+                docElectronicServiceStage.ElectronicServiceStageId,
+                docElectronicServiceStage.StartingDate,
+                docElectronicServiceStage.ExpectedEndingDate,
+                docElectronicServiceStage.EndingDate,
+                docElectronicServiceStage.IsCurrentStage,
+                userContext);
+        }
+
+        public void DeleteDocElectronicServiceStage(
+            DocElectronicServiceStage docElectronicServiceStage,
+            UserContext userContext)
+        {
+            bool result = this.DocElectronicServiceStages.Remove(docElectronicServiceStage);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docElectronicServiceStage to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocElectronicServiceStage(int docElectronicServiceStageId, UserContext userContext)
+        {
+            DocElectronicServiceStage docElectronicServiceStage =
+                this.DocElectronicServiceStages.FirstOrDefault(e => e.DocElectronicServiceStageId == docElectronicServiceStageId);
+
+            if (docElectronicServiceStage != null)
+            {
+                this.DeleteDocElectronicServiceStage(docElectronicServiceStage, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docElectronicServiceStage with ID = {0} found.", docElectronicServiceStageId));
+            }
+        }
+
+        public DocElectronicServiceStage ReverseDocElectronicServiceStage(
+            DocElectronicServiceStage docElectronicServiceStage,
+            UserContext userContext)
+        {
+            if (this.DocElectronicServiceStages.Count < 2)
+            {
+                throw new Exception(string.Format("Can not reverse doc ID = {0} with less than 2 docElectronicServiceStages.", this.DocId));
+            }
+
+            this.DeleteDocElectronicServiceStage(docElectronicServiceStage, userContext);
+
+            DocElectronicServiceStage last = this.DocElectronicServiceStages.OrderByDescending(e => e.DocElectronicServiceStageId).FirstOrDefault();
+            last.IsCurrentStage = true;
+
+            return last;
+        }
+
+        #endregion
+
         public void Register(int? docRegisterId, string regUri, string regIndex, int? regNumber, DateTime? regDate, UserContext userContext)
         {
             this.ModifyDate = DateTime.Now;

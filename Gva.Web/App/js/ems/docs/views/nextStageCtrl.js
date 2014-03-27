@@ -5,6 +5,7 @@
   function NextStageCtrl(
     $scope,
     $state,
+    $stateParams,
     DocStage,
     doc,
     stageModel
@@ -14,19 +15,13 @@
     $scope.save = function () {
       $scope.stageForm.$validate().then(function () {
         if ($scope.stageForm.$valid) {
-
-          var stageData = {
-            electronicServiceStageId: $scope.stageModel.stageId,
-            startingDate: $scope.stageModel.startingDate,
-            expectedEndingDate: $scope.stageModel.expectedEndingDate,
-            endingDate: $scope.stageModel.endingDate
-          };
-
-          return DocStage.next({ docId: stageModel.docId }, stageData).$promise
-            .then(function (result) {
-            doc.docElectronicServiceStages = result.stages;
-            return $state.go('^');
-          });
+          return DocStage.save({
+            id: $scope.stageModel.docId,
+            docVersion: $scope.stageModel.docVersion
+          }, $scope.stageModel).$promise
+            .then(function () {
+              return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
+            });
         }
       });
     };
@@ -40,7 +35,7 @@
         return true;
       }
       else {
-        return moment($scope.stageModel.endingDate) > moment($scope.stageModel.startingDate);
+        return moment($scope.stageModel.endingDate) >= moment($scope.stageModel.startingDate);
       }
     };
   }
@@ -48,6 +43,7 @@
   NextStageCtrl.$inject = [
     '$scope',
     '$state',
+    '$stateParams',
     'DocStage',
     'doc',
     'stageModel'
@@ -58,9 +54,9 @@
       function (Nomenclature, doc) {
         return {
           docId: doc.docId,
+          docVersion: doc.version,
           docTypeId: doc.docTypeId,
-          startingDate: moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss'),
-          executors: 'Служител ДКХ'
+          startingDate: moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
         };
       }
     ]

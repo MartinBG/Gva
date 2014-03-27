@@ -91,7 +91,7 @@
               <span l10n-text="docs.edit.stagesName"></span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li ng-show="!doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate">
+              <li ng-show="doc.docElectronicServiceStages.length > 0 && !doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate">
                 <a sc-click="endStage()" name="endStageBtn" l10n-text="docs.edit.endElectronicStage"></a>
               </li>
               <li>
