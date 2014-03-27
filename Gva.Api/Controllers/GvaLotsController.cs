@@ -38,28 +38,28 @@ namespace Gva.Api.Controllers
             this.fileResolver = fileResolver;
         }
 
-        public IHttpActionResult GetPart(int lotId, string path)
+        public virtual IHttpActionResult GetPart(int lotId, string path)
         {
             var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
             return Ok(Mapper.Map<PartVersion, PartVersionDO>(part));
         }
 
-        public IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
+        public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
             return Ok(Mapper.Map<FilePartVersionDO>(Tuple.Create(partVersion, caseTypeId, fileResolver)));
         }
 
-        public IHttpActionResult GetParts(int lotId, string path)
+        public virtual IHttpActionResult GetParts(int lotId, string path)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
 
             return Ok(Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
         }
 
-        public IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId)
+        public virtual IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
             if (caseTypeId.HasValue)
@@ -77,7 +77,7 @@ namespace Gva.Api.Controllers
             return Ok(Mapper.Map<IEnumerable<FilePartVersionDO>>(partVersions.Select(pv => Tuple.Create(pv, caseTypeId, fileResolver))));
         }
 
-        public IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
+        public virtual IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -93,7 +93,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        public IHttpActionResult PostPart(int lotId, string path, dynamic content)
+        public virtual IHttpActionResult PostPart(int lotId, string path, dynamic content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -108,7 +108,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        public IHttpActionResult DeletePart(int lotId, string path)
+        public virtual IHttpActionResult DeletePart(int lotId, string path)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
