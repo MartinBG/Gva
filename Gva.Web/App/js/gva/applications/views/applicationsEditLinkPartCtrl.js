@@ -14,9 +14,12 @@
     PersonDocumentCheck,
     PersonDocumentTraining,
     PersonDocumentOther,
-    PersonDocumentApplication
+    PersonDocumentApplication,
+    application,
+    applicationCommonData
     ) {
-    $scope.docFileKey = $stateParams.docFileKey;
+    $scope.application = application;
+
     $scope.docPartType = null;
 
     $scope.search = function () {
@@ -30,28 +33,28 @@
       $scope.showDocumentApplication = false;
 
       if ($scope.docPartType) {
-        if ($scope.docPartType.alias === 'DocumentId') {
+        if ($scope.docPartType.alias === 'documentId') {
           PersonDocumentId.query({ id: $scope.application.lotId })
             .$promise.then(function (documentIds) {
               $scope.documentPart = documentIds;
               $scope.showDocumentId = !!documentIds;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentEducation') {
+        else if ($scope.docPartType.alias === 'education') {
           PersonDocumentEducation.query({ id: $scope.application.lotId })
             .$promise.then(function (documentEducations) {
               $scope.documentPart = documentEducations;
               $scope.showDocumentEducation = !!documentEducations;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentEmployment') {
+        else if ($scope.docPartType.alias === 'employment') {
           PersonDocumentEmployment.query({ id: $scope.application.lotId })
             .$promise.then(function (employments) {
               $scope.documentPart = employments;
               $scope.showDocumentEmployment = !!employments;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentMed') {
+        else if ($scope.docPartType.alias === 'medical') {
           PersonDocumentMedical.query({ id: $scope.application.lotId })
             .$promise.then(function (medicals) {
               $scope.documentPart = medicals.map(function (medical) {
@@ -73,28 +76,28 @@
               $scope.showDocumentMed = !!medicals;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentCheck') {
+        else if ($scope.docPartType.alias === 'check') {
           PersonDocumentCheck.query({ id: $scope.application.lotId })
             .$promise.then(function (checks) {
               $scope.documentPart = checks;
               $scope.showDocumentCheck = !!checks;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentTraining') {
+        else if ($scope.docPartType.alias === 'training') {
           PersonDocumentTraining.query({ id: $scope.application.lotId })
             .$promise.then(function (documentTrainings) {
               $scope.documentPart = documentTrainings;
               $scope.showDocumentTraining = !!documentTrainings;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentOther') {
+        else if ($scope.docPartType.alias === 'other') {
           PersonDocumentOther.query({ id: $scope.application.lotId })
             .$promise.then(function (documentOthers) {
               $scope.documentPart = documentOthers;
               $scope.showDocumentOther = !!documentOthers;
             });
         }
-        else if ($scope.docPartType.alias === 'DocumentApplication') {
+        else if ($scope.docPartType.alias === 'application') {
           PersonDocumentApplication.query({ id: $scope.application.lotId })
             .$promise.then(function (documentApplications) {
               $scope.documentPart = documentApplications;
@@ -104,15 +107,19 @@
       }
     };
 
-    $scope.linkPart = function (item) {
+    $scope.linkPart = function (partId) {
+      var linkExisting = {
+        docFileId: applicationCommonData.docFileId,
+        partId: partId
+      };
+
       return Application
-        .partslinkExisting({ id: $stateParams.id }, {
-          docFileKey: $stateParams.docFileKey,
-          setPartAlias: $scope.docPartType.alias,
-          partIndex: item.partIndex
-        }).$promise.then(function () {
-          return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
-        });
+        .partslinkExisting({ id: $stateParams.id }, linkExisting)
+          .$promise.then(function () {
+            return $state.transitionTo('root.applications.edit.case',
+              $stateParams, { reload: true }
+            );
+          });
 
     };
 
@@ -133,7 +140,9 @@
     'PersonDocumentCheck',
     'PersonDocumentTraining',
     'PersonDocumentOther',
-    'PersonDocumentApplication'
+    'PersonDocumentApplication',
+    'application',
+    'applicationCommonData'
   ];
 
   angular.module('gva').controller('ApplicationsEditLinkPartCtrl', ApplicationsEditLinkPartCtrl);

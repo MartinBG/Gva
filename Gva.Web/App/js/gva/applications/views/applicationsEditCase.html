@@ -9,31 +9,31 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="docCase in application.docCase">
-        <td>{{ docCase.docInfo.regNumber }} {{ docCase.docInfo.statusName }}</td>
-        <td>{{ docCase.docInfo.description }}</td>
+      <tr ng-repeat-start="adc in application.applicationDocCase">
+        <td><strong ng-bind-html="adc.docDataHtml"></strong></td>
+        <td><strong ng-bind-html="adc.docDescriptionHtml"></strong></td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(docCase.docInfo.docId)" l10n-text="applications.edit.case.viewDoc" style="cursor: pointer;"></a>
+          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a>
         </td>
       </tr>
-      <tr ng-repeat="df in docCase.docFiles">
+      <tr ng-repeat="alf in adc.applicationLotFiles">
         <td></td>
-        <td ng-show="df.appFile">{{ df.appFile.setPartName }} (<a ng-href="{{df.docFile.docFileUrl}}" target="_blank"><span>{{ df.docFile.docFile.name }}</span></a>)</td>
-        <td ng-show="!df.appFile"><a ng-href="{{df.docFile.docFileUrl}}" target="_blank"><span>{{ df.docFile.docFile.name }}</span></a></td>
+        <td ng-if="alf.hasAppFile">{{ alf.setPartName }} (<a ng-href="{{alf.docFileUrl}}" target="_blank"><span>{{ alf.file.name }}</span></a>)</td>
+        <td ng-if="!alf.hasAppFile"><a ng-href="{{alf.docFileUrl}}" target="_blank"><span>{{ alf.file.name }}</span></a></td>
         <td>
-          <div ng-if="df.appFile">
-            <a ng-click="viewPart(df)" style="cursor: pointer;"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ df.appFile.part.bookPageNumber }}</a>
+          <div ng-if="alf.hasAppFile">
+            <a ng-click="viewPart(alf)"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ alf.pageNumber }}</a>
           </div>
-          <div ng-if="!df.appFile">
-            <a ng-click="linkNew(docCase.docInfo.docId, df.docFile.docFile)" l10n-text="applications.edit.case.linkNew" style="cursor: pointer;"></a> / <a ng-click="linkPart(docCase.docInfo.docId, df.docFile.docFile)" l10n-text="applications.edit.case.linkPart" style="cursor: pointer;"></a>
+          <div ng-if="!alf.hasAppFile">
+            <a ng-click="linkNew(adc.docId, alf)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(adc.docId, alf.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
           </div>
         </td>
         <td></td>
       </tr>
       <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newFile(docCase.docInfo.docId)" l10n-text="applications.edit.case.newFile" style="cursor: pointer;"></a>
+          <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a>
         </td>
       </tr>
     </tbody>

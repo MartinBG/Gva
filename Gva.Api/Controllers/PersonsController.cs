@@ -371,22 +371,27 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
         public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
-
-            this.fileRepository.AddFileReferences(partVersion, content.files);
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            GvaApplication application = new GvaApplication()
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                Lot = lot,
-                GvaAppLotPart = partVersion.Part
-            };
+                UserContext userContext = this.Request.GetUserContext();
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            applicationRepository.AddGvaApplication(application);
+                PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+
+                this.fileRepository.AddFileReferences(partVersion, content.files);
+
+                lot.Commit(userContext, lotEventDispatcher);
+
+                GvaApplication application = new GvaApplication()
+                {
+                    Lot = lot,
+                    GvaAppLotPart = partVersion.Part
+                };
+
+                applicationRepository.AddGvaApplication(application);
+
+                transaction.Commit();
+            }
 
             this.unitOfWork.Save();
 
@@ -396,11 +401,22 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult DeleteApplication(int lotId, string path)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            IHttpActionResult result;
 
-            applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-            return base.DeletePart(lotId, path);
+                applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
+
+                result = base.DeletePart(lotId, path);
+
+                transaction.Commit();
+            }
+
+            this.unitOfWork.Save();
+
+            return result;
         }
     }
 }

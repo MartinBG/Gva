@@ -55,7 +55,7 @@
           };
 
           Application.linkNew(newApplication).$promise.then(function (result) {
-            return $state.go('root.applications.edit.case', { id: result.applicationId });
+            return $state.go('root.applications.edit.case', { id: result.gvaApplicationId });
           });
         }
       });

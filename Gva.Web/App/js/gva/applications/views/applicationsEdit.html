@@ -3,27 +3,19 @@
     <div class="col-sm-4">
       <div class="input-group input-group-sm">
         <span class="input-group-addon" l10n-text="applications.edit.personName"></span>
-        <input disabled name="names" type="text" class="form-control" value="{{application.person.names}}" />
+        <input name="names" type="text" class="form-control" value="{{application.person.names}}" disabled/>
       </div>
     </div>
     <div class="col-sm-2">
       <div class="input-group input-group-sm">
         <span class="input-group-addon" l10n-text="applications.edit.personLin"></span>
-        <input disabled name="lin" type="text" class="form-control" value="{{application.person.lin}}" />
+        <input name="lin" type="text" class="form-control" value="{{application.person.lin}}" disabled/>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="input-group input-group-sm">
         <span class="input-group-addon" l10n-text="applications.edit.status"></span>
-        <input disabled name="status" type="text" class="form-control" value="{{}}" />
-      </div>
-    </div>
-  </div>
-  <div class="row card">
-    <div class="col-sm-10">
-      <div class="input-group input-group-sm">
-        <span class="input-group-addon" l10n-text="applications.edit.docTypeName">Относно</span>
-        <sc-text ng-model="application.doc.docTypeName" disabled></sc-text>
+        <input name="status" type="text" class="form-control" value="{{}}" disabled/>
       </div>
     </div>
     <div class="col-sm-2">

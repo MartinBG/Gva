@@ -7,6 +7,10 @@
       function ($resource) {
         return $resource('/api/apps/:id', { id: '@id' },
           {
+            'notLinkedDocs': {
+              method: 'GET',
+              url: '/api/apps/notLinkedDocs'
+            },
             'createNew': {
               method: 'POST',
               url: '/api/apps/new'

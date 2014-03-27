@@ -17,6 +17,8 @@ namespace Regs.Api.Models
 
         public string Alias { get; set; }
 
+        public string Name { get; set; }
+
         public string PathRegex { get; set; }
 
         public string Schema { get; set; }
@@ -41,6 +43,10 @@ namespace Regs.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
             this.Property(t => t.PathRegex)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -53,6 +59,7 @@ namespace Regs.Api.Models
             this.Property(t => t.SetPartId).HasColumnName("LotSetPartId");
             this.Property(t => t.SetId).HasColumnName("LotSetId");
             this.Property(t => t.Alias).HasColumnName("Alias");
+            this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.PathRegex).HasColumnName("PathRegex");
             this.Property(t => t.Schema).HasColumnName("Schema");
 

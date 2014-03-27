@@ -37,6 +37,7 @@ GO
 :r $(rootPath)\"..\Insert\Noms\schools.sql"
 :r $(rootPath)\"..\Insert\Noms\directions.sql"
 :r $(rootPath)\"..\Insert\Noms\documentTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\documentParts.sql"
 :r $(rootPath)\"..\Insert\Noms\documentRoles.sql"
 :r $(rootPath)\"..\Insert\Noms\personIddocumentTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\personCheckDocumentRoles.sql"

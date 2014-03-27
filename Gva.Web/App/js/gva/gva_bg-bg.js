@@ -1361,7 +1361,8 @@
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
-          taxAmount: 'Платена такса'
+          taxAmount: 'Платена такса',
+          file: 'Файл'
         },
         newPersonDocApplication: {
           save: 'Запис',
@@ -1767,6 +1768,16 @@
           status: 'Статус',
           lin: 'ЛИН',
           applicant: 'Заявител'
+        },
+        applicationDocument: {
+          title: 'Сканиран (електронен) документ',
+          name: 'Наименование',
+          fileKind: 'Вид файл',
+          fileType: 'Тип файл',
+          caseType: 'Тип дело',
+          pageIndex: '№ стр. в дело',
+          pageNumber: 'Брой стр.',
+          attachment: 'Прикачен файл'
         }
       },
       organizations: {

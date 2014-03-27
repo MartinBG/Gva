@@ -8,7 +8,7 @@ namespace Gva.Api.ModelsDO
         public int ApplicationId { get; set; }
         public int? DocId { get; set; }
 
-        public int AppPartId { get; set; }
+        public int? AppPartId { get; set; }
         public int? AppPartIndex { get; set; }
         public DateTime? AppPartRequestDate { get; set; }
         public string AppPartDocumentNumber { get; set; }
