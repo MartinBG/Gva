@@ -66,7 +66,8 @@
           certs: 'Удостоверения',
           owners: 'Свързани лица',
           others: 'Други',
-          opers: 'Експлоатационна годност'
+          opers: 'Експлоатационна годност',
+          applications: 'Заявления'
         },
         search: {
           airportType: 'Тип',
@@ -226,6 +227,40 @@
           organization: 'Организация',
           inspector: 'Проверил',
           valid: 'Валиден'
+        },
+        airportDocApplicationDirective: {
+          title: 'Заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        airportDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        newAirportDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAirportDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       },
       aircrafts: {
@@ -2347,7 +2382,10 @@
         'root.airports.view.others.edit': 'Редакция на документ',
         'root.airports.view.opers': 'Удостоверения за експлоатационна годност',
         'root.airports.view.opers.new': 'Ново удостоверение',
-        'root.airports.view.opers.edit': 'Редакция на удостоверение'
+        'root.airports.view.opers.edit': 'Редакция на удостоверение',
+        'root.airports.view.applications': 'Заявления',
+        'root.airports.view.applications.new': 'Новo заявление',
+        'root.airports.view.applications.edit': 'Редакция на заявление'
       }
     });
   }]);

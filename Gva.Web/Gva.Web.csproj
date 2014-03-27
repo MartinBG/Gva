@@ -255,6 +255,15 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
     <Content Include="App\js\gva\airports\forms\airportDataCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportCertOperationalCtrl.js" />
+    <Content Include="App\js\gva\airports\forms\airportDocumentApplication.html" />
+    <Content Include="App\js\gva\airports\forms\airportDocumentApplicationCtrl.js" />
+    <Content Include="App\js\gva\airports\resources\airportDocumentApplication.js" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsEdit.html" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsEditCtrl.js" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsNew.html" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsNewCtrl.js" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsSearch.html" />
+    <Content Include="App\js\gva\airports\views\documentApplications\docApplicationsSearchCtrl.js" />
     <Content Include="App\js\gva\common\forms\commonAuditDetail.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRadioView.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertSmodView.html" />
@@ -899,6 +908,7 @@
     <Content Include="App\schema\airports\airport-document-other.sample.js" />
     <Content Include="App\schema\airports\airport-data.sample.js" />
     <Content Include="App\schema\airports\airport-cert-operational.sample.js" />
+    <Content Include="App\schema\airports\airport-document-application.sample.js" />
     <Content Include="App\schema\nomenclatures.sample.js" />
     <Content Include="App\schema\nomenclatures\addressType.js" />
     <Content Include="App\schema\nomenclatures\aircraft.js" />
@@ -1069,6 +1079,7 @@
     <Content Include="App\test\gva\aircrafts\mocks\auditPartRequirementsHttp.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditResults.js" />
     <Content Include="App\test\gva\aircrafts\mocks\auditResultsHttp.js" />
+    <Content Include="App\test\gva\airports\mocks\airportDocumentApplicationsHttp.js" />
     <Content Include="App\test\gva\common\mocks\auditPartRequirements.js" />
     <Content Include="App\test\gva\common\mocks\auditDetailsHttp.js" />
     <Content Include="App\test\gva\common\mocks\auditResults.js" />

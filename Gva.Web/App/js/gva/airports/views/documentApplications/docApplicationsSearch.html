@@ -1,0 +1,27 @@
+﻿<sc-button name="createBtn" btn-click="newApplication()" text="airports.airportDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="airportDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-button name="editBtn" btn-click="editApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteApplication(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.applicationType.name" title="airports.airportDocApplicationSearch.applicationType">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="airports.airportDocApplicationSearch.documentNumber">
+  </sc-column>
+   <sc-column data="part.requestDate" title="airports.airportDocApplicationSearch.requestDate" type="date">
+  </sc-column>
+  <sc-column data="part.documentDate" title="airports.airportDocApplicationSearch.documentDate" type="date">
+  </sc-column>
+  <sc-column data="part.applicationPaymentType.name" title="airports.airportDocApplicationSearch.applicationPaymentType">
+  </sc-column>
+  <sc-column data="part.taxAmount" title="airports.airportDocApplicationSearch.taxAmount">
+  </sc-column>
+  <sc-column data="part.currency.name" title="airports.airportDocApplicationSearch.currency">
+  </sc-column>
+  <sc-column data="part.notes" title="airports.airportDocApplicationSearch.notes">
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="airports.airportDocApplicationSearch.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="airports.airportDocApplicationSearch.pageCount">
+  </sc-column>
+</sc-datatable>

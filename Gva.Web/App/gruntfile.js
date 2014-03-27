@@ -75,8 +75,8 @@ module.exports = function (grunt) {
         'schema/airports/airport-data.sample.js',
         'schema/airports/airport-document-other.sample.js',
         'schema/airports/airport-document-owner.sample.js',
-        'schema/airports/airport-cert-operational.sample.js'
-
+        'schema/airports/airport-cert-operational.sample.js',
+        'schema/airports/airport-document-application.sample.js'
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'

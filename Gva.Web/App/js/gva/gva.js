@@ -277,6 +277,11 @@
       templateUrl: 'gva/airports/forms/airportCertOperational.html',
       controller: 'AirportCertOperationalCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAirportDocumentApplication',
+      templateUrl: 'gva/airports/forms/airportDocumentApplication.html',
+      controller: 'AirportDocumentApplicationCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -523,6 +528,10 @@
       .state(['root.airports.view.opers'                        , '/opers'                                                                                                                                                                     ])
       .state(['root.airports.view.opers.search'                 , ''                                         , ['@root.airports.view', 'gva/airports/views/certOpers/opersSearch.html'                       , 'AirportOpersSearchCtrl'        ]])
       .state(['root.airports.view.opers.new'                    , '/new'                                     , ['@root.airports.view', 'gva/airports/views/certOpers/opersNew.html'                          , 'AirportOpersNewCtrl'           ]])
-      .state(['root.airports.view.opers.edit'                   , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/certOpers/opersEdit.html'                         , 'AirportOpersEditCtrl'          ]]);
+      .state(['root.airports.view.opers.edit'                   , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/certOpers/opersEdit.html'                         , 'AirportOpersEditCtrl'          ]])
+      .state(['root.airports.view.applications'                 , '/applications'                                                                                                                                                              ])
+      .state(['root.airports.view.applications.search'          , ''                                         , ['@root.airports.view', 'gva/airports/views/documentApplications/docApplicationsSearch.html'  , 'AirportApplicationsSearchCtrl' ]])
+      .state(['root.airports.view.applications.new'             , '/new'                                     , ['@root.airports.view', 'gva/airports/views/documentApplications/docApplicationsNew.html'     , 'AirportApplicationsNewCtrl'    ]])
+      .state(['root.airports.view.applications.edit'            , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/documentApplications/docApplicationsEdit.html'    , 'AirportApplicationsEditCtrl'   ]]);
     }]);
 }(angular));
