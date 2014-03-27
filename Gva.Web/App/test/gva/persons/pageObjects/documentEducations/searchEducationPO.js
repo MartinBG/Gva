@@ -8,7 +8,7 @@
   function SearchDocEduPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
-      context.findElement(by.css('div[ng-model="documentEducations"]')));
+      context.findElement(by.css('div[items="documentEducations"]')));
     this.tableBody = context.findElement(by.css('td'));
   }
 

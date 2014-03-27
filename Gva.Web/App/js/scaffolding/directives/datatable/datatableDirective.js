@@ -1,182 +1,251 @@
 ﻿/*
-Usage <sc-datatable ng-model="data"
+Usage <sc-datatable items="data"
         filterable="true|false"
         pageable="true|false"
         sortable="true|false"
-        dynamic-columns="true|false">
+        dynamic-columns="true|false"
+        row-class="{'class' : expression}">
  </sc-datatable>
 */
-/*global angular, _*/
-(function (angular, _) {
+/*global angular, $, _*/
+(function (angular, $, _) {
   'use strict';
-  function DatatableDirective(l10n, $timeout, $parse, $filter, scDatatableConfig) {
+  function DatatableDirective(l10n, $timeout, $parse) {
     return {
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl:'scaffolding/directives/datatable/datatableDirective.html',
-      require: '?ngModel',
+      templateUrl: 'scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         filterable: '&',
         pageable: '&',
         sortable: '&',
         dynamicColumns: '&'
       },
+      link: function ($scope, $element, $attrs) {
+        var select2,
+            tableHeader,
+            tableRows = [],
+            dataTable = $element.find('table'),
+            rowClassExpr = $parse($attrs.rowClass),
+            sortable = $scope.sortable() === undefined ? true : $scope.sortable();
 
-      link: function (scope, iElement, iAttrs, ngModel) {
-        var table,
-            select2,
-            resizeTimeout,
-            filterable = scope.filterable() === undefined? true : scope.filterable(),
-            pageable = scope.pageable() === undefined? true : scope.pageable(),
-            sortable = scope.sortable() === undefined? true : scope.sortable(),
-            dynamicColumns = scope.dynamicColumns() === undefined? true : scope.dynamicColumns();
+        $scope.filterable = $scope.filterable() === undefined ? true : $scope.filterable();
+        $scope.pageable = $scope.pageable() === undefined ? true : $scope.pageable();
+        $scope.dynamicColumns =
+          $scope.dynamicColumns() === undefined ? true : $scope.dynamicColumns();
 
-        if(dynamicColumns) {
-          //TODO find a way to do that with an inline filter
-          scope.nonEmpty = function (col) {
-            return col.sTitle !== '';
-          };
-          scope.canHideColumns = true;
-          scope.hideColumn = function (value, i) {
-            if (table) {
-              table.fnSetColumnVis(i, !scope.aoColumnDefs[i].bVisible);
-            }
-          };
-        }
-
-        if(ngModel) {
-          ngModel.$render = function () {
-            if (!table) {
-              iElement.hide();
-              table = iElement.find('table').dataTable({
-                aaData: ngModel.$viewValue,
-                bDestroy: true,
-                bFilter: filterable,
-                bPaginate: pageable,
-                bAutoWidth: false,
-                bSort: sortable,
-                aaSorting: scope.sortingData,
-                aoColumnDefs: scope.aoColumnDefs,
-                sDom: '<<"span4"l><"span4"f>>t' +
-                    '<"row-fluid"<"span4 pull-left"i><"span4"p>>',
-                oLanguage: {
-                  sInfo: l10n.get('scaffolding.scDatatable.info'),
-                  sLengthMenu: l10n.get('scaffolding.scDatatable.displayRecords'),
-                  sEmptyTable: l10n.get('scaffolding.scDatatable.noDataAvailable'),
-                  sInfoEmpty: '',
-                  sZeroRecords: l10n.get('scaffolding.scDatatable.noDataAvailable'),
-                  sSearch: l10n.get('scaffolding.scDatatable.search'),
-                  sInfoFiltered: l10n.get('scaffolding.scDatatable.filtered'),
-                  oPaginate: {
-                    sFirst: l10n.get('scaffolding.scDatatable.firstPage'),
-                    sLast: l10n.get('scaffolding.scDatatable.lastPage'),
-                    sNext: l10n.get('scaffolding.scDatatable.nextPage'),
-                    sPrevious: l10n.get('scaffolding.scDatatable.previousPage')
-                  }
-                },
-                sScrollX: '100%'
-              });
-
-              resizeTimeout = $timeout(function () {
-                select2 = iElement
-                  .find('.dataTables_length select')
-                  .addClass('input-sm')
-                  .select2({
-                    width: '50px',
-                    minimumResultsForSearch: -1
-                  });
-                iElement.show();
-                table.css('width', '100%');
-                table.fnAdjustColumnSizing();
-              }, 0, false);
-            } else {
-              table.fnClearTable(false);
-
-              _(ngModel.$viewValue).forEach(function(obj) {
-                table.fnAddData(obj, false);
-              });
-
-              resizeTimeout = $timeout(function () {
-                table.fnAdjustColumnSizing();
-              }, 0, false);
-            }
-          };
-
-          // Make sure datatable is destroyed and removed.
-          // Can't use scope.on('$destroy',..) as it is fired 
-          // after the element has been removed from the dom
-          // and jQuery have already cleared its '.data()'
-          // which is required for select2 to properly dispose
-          iElement.bind('$destroy', function onDestroyDatatable() {
-            if (resizeTimeout) {
-              $timeout.cancel(resizeTimeout);
-            }
-            if (select2) {
-              select2.select2('destroy');
-            }
-            if (table) {
-              table.fnDestroy();
-            }
+        select2 = $element
+          .find('select')
+          .addClass('input-sm')
+          .select2({
+            width: '60px',
+            minimumResultsForSearch: -1
           });
-        }
-      },
-      controller: function ScDatatableController($scope) {
-        var columnIndex = 0;
-        $scope.sortingData = [];
-        $scope.aoColumnDefs = [];
 
-        this.addColumn =  function(column){
-          if(column.sorting) {
-            $scope.sortingData.push([columnIndex, column.sorting]);
+        if ($scope.dynamicColumns) {
+          //TODO find a way to do that with an inline filter
+          $scope.nonEmpty = function (col) {
+            return col.title !== '';
+          };
+
+          $scope.hideColumn = function (i) {
+            $scope.columnDefs[i].visible = !$scope.columnDefs[i].visible;
+            renderHeader();
+            render();
+          };
+        }
+
+        var renderHeader = function () {
+          if (tableHeader) {
+            tableHeader.remove();
           }
 
-          var dataFunction = null;
-          if (column.data) {
-            var parsedExpression = $parse(column.data);
-            dataFunction = function (item) {
-              if (column.type === 'date') {
-                return $filter('date')(parsedExpression(item), scDatatableConfig.format);
+          var headerElement = $('<tr></tr>');
+
+          _($scope.columnDefs).forEach(function (columnDef, index) {
+            if (!columnDef.visible) {
+              return;
+            }
+
+            var headerCell = $('<th></th>')
+              .html(columnDef.title + ' <span></span>')
+              .width(columnDef.width)
+              .addClass(columnDef.columnClass);
+
+            if (sortable) {
+              if (columnDef.sortable) {
+                var sortingSpan = $('span', headerCell);
+
+                headerCell.addClass('sorting');
+                sortingSpan.addClass('glyphicon glyphicon-sort');
+
+                headerCell.on('click', function () {
+                  $scope.$apply(function () {
+                    if (sortingSpan.hasClass('glyphicon-sort-by-attributes')) {
+                      $('th.sorting span', headerElement).removeClass();
+                      $('th.sorting span', headerElement).addClass('glyphicon glyphicon-sort');
+
+                      sortingSpan.removeClass();
+                      sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes-alt');
+
+                      $scope.setSortingData(index, 'desc');
+                    }
+                    else {
+                      $('th.sorting span', headerElement).removeClass();
+                      $('th.sorting span', headerElement).addClass('glyphicon glyphicon-sort');
+
+                      sortingSpan.removeClass();
+                      sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes');
+
+                      $scope.setSortingData(index, 'asc');
+                    }
+                  });
+                });
               }
-              else if (column.type === 'boolean') {
-                var value = parsedExpression(item);
-                if (value === undefined) {
-                  return null;
+            }
+
+            headerElement.append(headerCell);
+          });
+
+          dataTable.append(headerElement);
+          tableHeader = headerElement;
+        };
+
+        var destroyRows = function () {
+          var i, row;
+
+          if (tableRows.length > 0) {
+            for (i = 0; i < tableRows.length; i++) {
+              row = tableRows[i];
+
+              row.rowElement.remove();
+              if (row.scope) {
+                row.scope.$destroy();
+                row.scope = null;
+              }
+            }
+
+            tableRows = [];
+          }
+        };
+
+        var render = function () {
+          var i, j, l1, l2, row, childScope, rowElement, columnDef;
+
+          destroyRows();
+
+          for (i = 0, l1 = $scope.pageItems.length; i < l1; i++) {
+            childScope = null;
+            row = {};
+            rowElement = $('<tr></tr>');
+
+            // disable W083: Don't make functions within a loop.
+            // because this function is not used as a callback in the future
+            // jshint -W083
+            _.forOwn(rowClassExpr($scope.pageItems[i].item), function (value, key) {
+              if (value) {
+                rowElement.addClass(key);
+              }
+            });
+            // jshint +W083
+
+            for (j = 0, l2 = $scope.columnDefs.length; j < l2; j++) {
+              columnDef = $scope.columnDefs[j];
+
+              if (!columnDef.visible) {
+                continue;
+              }
+
+              var cellData = $scope.pageItems[i][j];
+              var cell = $('<td></td>').addClass(columnDef.columnClass);
+
+              if (columnDef.hasContent) {
+                if (!childScope) {
+                  childScope = $scope.$parent.$new();
+                  childScope.item = $scope.pageItems[i].item;
+                  row.scope = childScope;
+                  rowElement.on('$destroy', angular.bind(childScope, childScope.$destroy));
                 }
 
-                return parsedExpression(item) ? 'Да' : 'Не';
+                var clone = columnDef.transcludeFn(childScope, angular.noop);
+
+                rowElement.append(
+                  cell.append(clone));
+              }
+              else if (cellData !== undefined && cellData !== null) {
+                rowElement.append(
+                  cell.html(cellData));
               }
               else {
-                return parsedExpression(item);
+                rowElement.append(
+                  cell.html(columnDef.defaultContent));
               }
-            };
+            }
+
+            dataTable.append(rowElement);
+            row.rowElement = rowElement;
+            tableRows.push(row);
           }
 
-          $scope.aoColumnDefs.push({
-            sTitle: l10n.get(column.title) || '',
-            mData: dataFunction,
-            bSortable: column.sortable === 'false'? false : true,
-            bVisible: column.visible === 'false' ? false : true,
-            sType: column.type || 'string',
-            aTargets: [columnIndex++],
-            fnCreatedCell: column.createCell,
-            sDefaultContent: '',
-            sClass:
-              (column['class'] || '') +
-              ' scdt-' + (column.data ? column.data.replace(/[\[\]\.]/g, '_') : 'empty'),
-            sWidth: column.width
-          });
+          if ($scope.pageItems.length === 0) {
+            row = {};
+            rowElement = $('<tr></tr>');
+
+            rowElement.append(
+              $('<td></td>')
+                .attr('colspan', _.filter($scope.columnDefs, 'visible').length)
+                  .append(
+                    $('<div></div>')
+                      .html($scope.dataTableTexts.noDataAvailable)));
+
+            dataTable.append(rowElement);
+            row.rowElement = rowElement;
+            tableRows.push(row);
+          }
         };
-      }
+
+        var initializing = true;
+        $scope.$parent.$watchCollection($attrs.items, function (items) {
+          if (initializing) {
+            renderHeader();
+            initializing = false;
+          }
+          if (!items) {
+            return;
+          }
+          $scope.setItems(items);
+          render();
+        });
+
+        $scope.$watch('pageSize', function (pageSize) {
+          $scope.setPageSize(pageSize);
+        });
+
+        $scope.$watchCollection('pageItems', function () {
+          render();
+        });
+
+        $scope.$watch('filter', function (filter) {
+          $scope.setFilter(filter);
+        });
+
+        $element.bind('$destroy', function onDestroyDatatable() {
+          if (select2) {
+            select2.select2('destroy');
+          }
+
+          destroyRows();
+
+          dataTable.remove();
+        });
+      },
+      controller: 'DatatableCtrl'
     };
   }
 
-  DatatableDirective.$inject = ['l10n', '$timeout', '$parse', '$filter', 'scDatatableConfig'];
+  DatatableDirective.$inject = ['l10n', '$timeout', '$parse'];
 
-  angular.module('scaffolding')
-    .constant('scDatatableConfig', {
-      format: 'mediumDate'
-    })
-    .directive('scDatatable', DatatableDirective);
+  angular.module('scaffolding').directive('scDatatable', DatatableDirective);
 
-}(angular, _));
+}(angular, $, _));

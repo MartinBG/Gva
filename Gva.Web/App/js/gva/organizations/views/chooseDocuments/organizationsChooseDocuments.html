@@ -17,8 +17,8 @@
     </div>
   </div>
 
-  <sc-datatable ng-model="availableDocuments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-    <sc-column  sortable="false" class="buttons-cell" width="1px">
+  <sc-datatable items="availableDocuments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
       <input type="checkbox" ng-model="item.checked">
     </sc-column>
      <sc-column data="file.bookPageNumber" title="organizations.chooseDocuments.bookPageNumber" width="80px">
@@ -41,7 +41,7 @@
     </sc-column>
     <sc-column data="file.pageCount" title="organizations.chooseDocuments.pageCount">
     </sc-column>
-    <sc-column sortable="false" title="organizations.chooseDocuments.file">
+    <sc-column sortable="false" title="organizations.chooseDocuments.file" has-content="true">
       <a target="_self" ng-href="api/file?fileKey={{item.file.file.key}}&fileName={{item.file.file.name}}" ng-show="item.file" title="{{item.file.file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>

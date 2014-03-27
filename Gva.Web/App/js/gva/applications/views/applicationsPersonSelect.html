@@ -11,7 +11,7 @@
 </sc-search>
 
 
-<sc-datatable ng-model="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column data="names" title="applications.personSelect.names" ng-href="/{{id}}">
   </sc-column>
   <sc-column data="lin" title="applications.personSelect.lin">
@@ -26,7 +26,7 @@
   </sc-column>
   <sc-column data="organization" title="applications.personSelect.organization">
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="viewButton" btn-click="selectPerson(item)" text="applications.personSelect.select" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
 </sc-datatable>

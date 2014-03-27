@@ -6,7 +6,7 @@
       ScSearch = require('../../../../scaffolding/pageObjects/scSearch');
 
   function PublishersPO(context) {
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="publishers"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="publishers"]')));
     this.searchForm = new ScSearch(context.findElement(by.name('publishersSearch')), context);
     this.firstSelectBtn = context
       .findElement(by.css('tbody tr:first-child button[name=selectBtn]'));

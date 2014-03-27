@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newInspection()" text="organizations.inspectionSearch.newInspection" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="organizationInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="organizationInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editInspection(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.auditState.name" title="organizations.inspectionSearch.auditState">
@@ -21,7 +21,7 @@
   </sc-column>
   <sc-column data="part.inspectionPlace" title="organizations.inspectionSearch.inspectionPlace">
   </sc-column>
-  <sc-column sortable="false" title="organizations.inspectionSearch.file" width="30px">
+  <sc-column sortable="false" title="organizations.inspectionSearch.file" width="30px" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>

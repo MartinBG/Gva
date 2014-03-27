@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newInspection()" text="airports.inspectionSearch.newInspection" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="airportInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="airportInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editInspection(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.auditState.name" title="organizations.inspectionSearch.auditState">

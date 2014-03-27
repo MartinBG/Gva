@@ -8,7 +8,7 @@
   function SearchEducationPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.datatable =
-      new ScDatatable(context.findElement(by.css('div[ng-model="documentTrainings"]')));
+      new ScDatatable(context.findElement(by.css('div[items="documentTrainings"]')));
     this.tableBody = context.findElement(by.css('td'));
     this.firstDeleteBtn = context
       .findElement(by.css('tbody tr:first-child button[name=deleteBtn]'));

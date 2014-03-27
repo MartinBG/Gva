@@ -8,7 +8,7 @@
   function SearchDocOtherPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
-      context.findElement(by.css('div[ng-model="documentOthers"]')));
+      context.findElement(by.css('div[items="documentOthers"]')));
   }
 
   module.exports = SearchDocOtherPO;

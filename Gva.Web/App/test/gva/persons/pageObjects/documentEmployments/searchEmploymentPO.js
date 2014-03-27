@@ -7,7 +7,7 @@
 
   function SearchDocEmplPO(context) {
     this.breadcrumb = new Breadcrumb(context);
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="employments"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="employments"]')));
     this.tableBody = context.findElement(by.css('td'));
   }
 

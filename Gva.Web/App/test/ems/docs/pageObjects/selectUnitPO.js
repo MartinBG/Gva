@@ -7,7 +7,7 @@
   function SelectUnitPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
 
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="units"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="units"]')));
     this.tableBody = context.findElement(by.css('td'));
     this.firstSelectBtn = context
       .findElement(by.css('tbody tr:first-child button[name=selectBtn]'));

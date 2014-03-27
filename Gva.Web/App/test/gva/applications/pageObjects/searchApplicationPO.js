@@ -6,7 +6,7 @@
 
   function SearchApplicationPO(context) {
     this.breadcrumb = context.findElement(by.xpath('//ul[@class="breadcrumb"]/li[last()]'));
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="applications"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="applications"]')));
     this.tableBody = context.findElement(by.css('td'));
     this.firstEditBtn = context
       .findElement(by.css('tbody tr:first-child button[name=viewButton]'));

@@ -8,7 +8,7 @@
   function SearchDocMedPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
-      context.findElement(by.css('div[ng-model="medicals"]')));
+      context.findElement(by.css('div[items="medicals"]')));
   }
 
   module.exports = SearchDocMedPO;

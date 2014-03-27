@@ -7,7 +7,7 @@
 
   function SearchCheckPO(context) {
     this.breadcrumb = new Breadcrumb(context);
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="checks"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="checks"]')));
     this.firstDeleteBtn = context
       .findElement(by.css('tbody tr:first-child button[name=deleteBtn]'));
     this.firstEditBtn = context

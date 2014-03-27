@@ -10,8 +10,8 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-datatable ng-model="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px">
+  <sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
       <sc-button name="viewButton" btn-click="viewOrganization(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
       <sc-column data="name" title="organizations.search.name" width="60px">

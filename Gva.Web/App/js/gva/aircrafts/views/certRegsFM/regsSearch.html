@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newCertReg()" text="aircrafts.regFMSearch.newReg" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="regs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="regs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editCertReg(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.isActive? 'Да' : 'Не'" title="aircrafts.regFMSearch.isActive">

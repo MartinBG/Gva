@@ -5,8 +5,8 @@
   <sc-search-button action="search()" text="common.publishers.search" icon="glyphicon-search"></sc-search-button>
 </sc-search>
 
-<sc-datatable ng-model="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="common.publishers.select"></sc-button>
   </sc-column>
   <sc-column data="name" sortable="true" title="common.publishers.name">

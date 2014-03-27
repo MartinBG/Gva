@@ -7,7 +7,7 @@
 
   function SearchDocumentIdPO(context) {
     this.breadcrumb = new Breadcrumb(context);
-    this.datatable = new ScDatatable(context.findElement(by.css('div[ng-model="documentIds"]')));
+    this.datatable = new ScDatatable(context.findElement(by.css('div[items="documentIds"]')));
     this.firstDeleteBtn = context
       .findElement(by.css('tbody tr:first-child button[name=deleteBtn]'));
     this.firstEditBtn = context

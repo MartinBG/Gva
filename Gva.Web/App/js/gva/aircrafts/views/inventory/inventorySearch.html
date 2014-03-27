@@ -1,6 +1,6 @@
 ﻿<div>
-  <sc-datatable ng-model="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px">
+  <sc-datatable items="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
       <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="file.bookPageNumber" title="aircrafts.inventorySearch.bookPageNumber" width="80px">
@@ -23,7 +23,7 @@
     </sc-column>
     <sc-column data="file.pageCount" title="aircrafts.inventorySearch.pageCount">
     </sc-column>
-    <sc-column sortable="false" title="aircrafts.inventorySearch.file">
+    <sc-column sortable="false" title="aircrafts.inventorySearch.file" has-content="true">
       <a target="_self" ng-href="api/file?fileKey={{item.file.file.key}}&fileName={{item.file.file.name}}" ng-show="item.file" title="{{item.file.file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>

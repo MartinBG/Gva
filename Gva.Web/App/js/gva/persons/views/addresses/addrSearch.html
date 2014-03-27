@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newAddress()" text="persons.addressSearch.newAddress" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="addresses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="addresses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editAddress(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.addressType.name" title="persons.addressSearch.type" width="200px">

@@ -25,14 +25,14 @@
           lastPage: 'Последна страница',
           nextPage: 'Следваща',
           previousPage: 'Предишна  ',
-          info: 'Намерени общo _TOTAL_ резултата (от _START_ до _END_)',
+          info: 'Намерени общo {{total}} резултата (от {{start}} до {{end}})',
           datatableInfo: 'Показани резултати от ',
           to: ' до ',
           all: ' от общо ',
           noDataAvailable: 'Няма намерени резултати',
-          displayRecords: '_MENU_ на страница',
+          displayRecords: ' на страница',
           search: 'Търси',
-          filtered: ' (филтрирани от _MAX_ записа)',
+          filtered: ' (филтрирани от {{max}} записа)',
           deleteColumns: 'Колони'
         }
       }

@@ -679,6 +679,7 @@
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="App\js\scaffolding\directives\datatable\datatableCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personAddress.html" />
     <Content Include="App\js\gva\persons\forms\personApplication.html" />
     <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />

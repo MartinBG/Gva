@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newCertNoise()" text="aircrafts.noiseSearch.newNoise" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="noises" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="noises" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editCertNoise(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     <sc-button name="deleteBtn" btn-click="deleteCertNoise(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>

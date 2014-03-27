@@ -1,6 +1,6 @@
 ﻿<div>
   <sc-button name="createBtn" btn-click="newRating()" text="persons.ratingSearch.newRating" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-  <sc-datatable ng-model="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column data="rating.ratingTypeOrRatingLevel.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>
     <sc-column data="rating.classOrSubclass" title="persons.ratingSearch.classOrCategory">
@@ -19,7 +19,7 @@
     </sc-column>
     <sc-column data="rating.personRatingModel.name" title="persons.ratingSearch.personRatingModel">
     </sc-column>
-    <sc-column sortable="false" class="buttons-cell">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-click="viewEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
   </sc-datatable>

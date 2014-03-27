@@ -148,14 +148,14 @@
         </accordion-heading>
         <sc-button name="chooseAuditsBtn" type="button" btn-click="chooseAudits()" class="btn btn-primary btn-sm" icon="glyphicon-plus"
               text="organizations.recommendationDirective.auditorsReview.chooseAudits"></sc-button>
-        <sc-datatable ng-model="model.part.auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
+        <sc-datatable items="model.part.auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
           <sc-column data="auditPart.name" title="organizations.recommendationDirective.auditorsReview.auditPart">
           </sc-column>
           <sc-column data="subject.name" title="organizations.recommendationDirective.auditorsReview.subject">
           </sc-column>
           <sc-column data="auditResult.name" title="organizations.recommendationDirective.auditorsReview.auditResult">
           </sc-column>
-          <sc-column title="organizations.recommendationDirective.auditorsReview.disparity">
+          <sc-column title="organizations.recommendationDirective.auditorsReview.disparity" has-content="true">
             <span>{{item.disparities.join(',')}}</span>
           </sc-column>
         </sc-datatable>
@@ -243,7 +243,7 @@
         <div class="well-sm panel-body">
           <div class="panel panel-default ">
             <div class="panel-heading"><strong l10n-text="organizations.recommendationDirective.disparities.disparitiesRecommendationsTitle1"></strong></div>
-              <sc-datatable ng-model="model.part.auditorsReview.disparities" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+              <sc-datatable items="model.part.auditorsReview.disparities" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
               <sc-column data="auditPart.name" title="organizations.recommendationDirective.disparities.auditPart">
               </sc-column>
               <sc-column data="sortOrder" title="organizations.recommendationDirective.disparities.sortOrder">
@@ -264,7 +264,7 @@
               </sc-column>
               <sc-column data="closureDocument" title="organizations.recommendationDirective.disparities.closureDocument">
               </sc-column>
-              <sc-column sortable="false" class="buttons-cell" width="1px">
+              <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
                 <sc-button name="editBtn" btn-click="editDisparity(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
               </sc-column>
             </sc-datatable>

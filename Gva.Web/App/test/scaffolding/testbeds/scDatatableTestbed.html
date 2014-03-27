@@ -6,17 +6,17 @@
   </div>
 
   <div class="row">
-    <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-datatable items="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column data="username" title="Потребителско име" type="string" name="username">
       </sc-column>
       <sc-column data="fullname" title="Име" type="string" name="name">
       </sc-column>
       <sc-column data="roles" title="Роли" type="string" name="roles">
       </sc-column>
-      <sc-column data="isActive" title="Активен" type="string" name="isActive">
+      <sc-column data="isActive" title="Активен" type="string" name="isActive" has-content="true">
         <span>{{item.isActive? 'Да' : 'Не'}}</span>
       </sc-column>
-      <sc-column>
+      <sc-column has-content="true">
         <button type="button" class="btn-xs btn-info" ng-click="editUser(item)">Редакция</button>
       </sc-column>
     </sc-datatable>
@@ -29,7 +29,7 @@
   </div>
 
   <div class="row">
-    <sc-datatable ng-model="users2" sortable="true" pageable="false" dynamic-columns="false">
+    <sc-datatable items="users2" sortable="true" pageable="false" dynamic-columns="false">
       <sc-column data="username" title="Потребителско име" type="string" name="username" sortable="false">
       </sc-column>
       <sc-column data="fullname" title="Име" type="string" name="name">
@@ -38,24 +38,24 @@
   </div>
 
   <div class="row">
-    <sc-datatable ng-model="users3" filterable="false" pageable="false" dynamic-columns="false">
+    <sc-datatable items="users3" filterable="false" pageable="false" dynamic-columns="false">
       <sc-column data="username" title="Потребителско име" name="username" sortable="false">
       </sc-column>
       <sc-column data="fullname" title="Име" name="name" visible="false">
       </sc-column>
       <sc-column data="roles" title="Роли" name="roles">
       </sc-column>
-      <sc-column data="isActive" title="Активен" name="isActive" sorting="desc">
+      <sc-column data="isActive" title="Активен" name="isActive" sorting="desc" has-content="true">
         <span>{{item.isActive? 'Да' : 'Не'}}</span>
       </sc-column>
-      <sc-column>
+      <sc-column has-content="true">
         <button type="button" class="btn-xs btn-info" ng-click="editUser(item)">Редакция</button>
       </sc-column>
     </sc-datatable>
   </div>
 
   <div class="row">
-    <sc-datatable ng-model="documents" sortable="true" pageable="false" dynamic-columns="false" filterable="false">
+    <sc-datatable items="documents" sortable="true" pageable="false" dynamic-columns="false" filterable="false">
       <sc-column data="documentNumber" title="Номер на документ" type="string">
       </sc-column>
       <sc-column data="documentDateValidFrom" title="Валиден от" type="date">

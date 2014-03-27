@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newStaffExaminer()" text="organizations.staffExaminerSearch.newStaffExaminer" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="organizationStaffExaminers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="organizationStaffExaminers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editStaffChecker(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     <sc-button name="deleteBtn" btn-click="deleteStaffChecker(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
@@ -22,7 +22,7 @@
   </sc-column>
   <sc-column data="part.content.permitedCheck.name" title="organizations.staffExaminerSearch.content.permitedCheck">
   </sc-column>
-  <sc-column sortable="false" title="organizations.staffExaminerSearch.file" width="30px">
+  <sc-column sortable="false" title="organizations.staffExaminerSearch.file" width="30px" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>

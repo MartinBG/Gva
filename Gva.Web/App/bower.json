@@ -14,8 +14,6 @@
     "es5-shim": "2.1.0",
     "bootstrap": "3.0.3",
     "bootstrap-datepicker": "eternicode/bootstrap-datepicker#8bc254a136110369684dc05a48171682ff1f3a81",
-    "datatable": "DataTables/DataTables#2d3c29a9d5e9880e5bc31656d0b67ef152595995",
-    "datatablePlugins": "DataTables/Plugins#f3e99a6c02335066fafabb038edd8ce116038338",
     "angular-ui-select2": "angelyordanov/ui-select2#a5e96d30acc6753be4ecdaabf3fa90efa9ca3de0",
     "select2": "3.4.3",
     "jquery-modern": "jquery#2.0.3",

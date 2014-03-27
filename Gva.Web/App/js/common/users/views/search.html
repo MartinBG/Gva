@@ -8,17 +8,17 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-datatable ng-model="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="users" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column data="username" title="Потребителско име">
     </sc-column>
     <sc-column data="fullname" title="Име">
     </sc-column>
     <sc-column data="roles" title="Роли">
     </sc-column>
-    <sc-column data="isActive" title="Активен">
+    <sc-column data="isActive" title="Активен" has-content="true">
       <span>{{item.isActive ? 'Да' : 'Не'}}</span>
     </sc-column>
-    <sc-column sortable="false" class="buttons-cell" width="1px">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
       <button type="button" class="btn btn-xs btn-primary" ng-click="editUser(item)">
         <span class="glyphicon glyphicon-pencil"></span>
       </button>

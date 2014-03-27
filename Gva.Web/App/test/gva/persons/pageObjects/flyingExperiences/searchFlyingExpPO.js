@@ -8,7 +8,7 @@
   function SearchFlyingExpPO(context) {
     this.breadcrumb = new Breadcrumb(context);
     this.datatable = new ScDatatable(
-      context.findElement(by.css('div[ng-model="flyingExperiences"]'))
+      context.findElement(by.css('div[items="flyingExperiences"]'))
     );
     this.tableBody = context.findElement(by.css('td'));
     this.firstDeleteBtn = context

@@ -5,8 +5,8 @@
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
-<sc-datatable ng-model="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="selectBtn" btn-click="selectUnit(item)" class="btn btn-xs btn-primary" text="docs.edit.view.selectUnit.select"></sc-button>
   </sc-column>
   <sc-column data="name" title="docs.edit.view.selectUnit.name">

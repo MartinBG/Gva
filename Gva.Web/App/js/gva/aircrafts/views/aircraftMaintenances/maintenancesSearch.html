@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newMaintenance()" text="aircrafts.searchMaintenance.newMaintenance" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable ng-model="aircraftMaintenances" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px">
+<sc-datatable items="aircraftMaintenances" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editMaintenance(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     <sc-button name="deleteBtn" btn-click="deleteMaintenance(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
