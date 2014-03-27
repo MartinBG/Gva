@@ -1,0 +1,131 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="airports.airportOperDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="airports.airportOperDirective.issueDate"></label>
+          <sc-date ng-model="model.issueDate" name="issueDate"></sc-date>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="airports.airportOperDirective.issueNumber"></label>
+          <sc-text ng-model="model.issueNumber" name="issueNumber" ></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="airports.airportOperDirective.valiToDate"></label>
+          <sc-date ng-model="model.valiToDate" name="valiToDate"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="airports.airportOperDirective.organization"></label>
+          <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="airports.airportOperDirective.inspector"></label>
+          <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-2">
+          <label class="control-label" l10n-text="airports.airportOperDirective.valid"></label>
+          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12" style="padding-top:10px;">
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong l10n-text="airports.airportOperDirective.includedDocuments"></strong></div>
+              <div class="well-sm panel-body">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th l10n-text="airports.airportOperDirective.inspector"></th>
+                      <th l10n-text="airports.airportOperDirective.approvalDate" class="col-sm-4 col-md-2"></th>
+                      <th l10n-text="airports.airportOperDirective.linkedDocument"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat-start="doc in model.includedDocuments">
+                      <td>
+                        <sc-nomenclature ng-model="doc.inspector" alias="'inspectors'"></sc-nomenclature>
+                      </td>
+                      <td>
+                        <sc-date ng-model="doc.approvalDate"></sc-date>
+                      </td>
+                      <td>
+                        <sc-text ng-model="doc.linkedDocument"></sc-text>
+                      </td>
+                      <td style="text-align: right; width: 1px;">
+                        <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteDoc(doc)" icon="glyphicon-remove"></sc-button>
+                      </td>
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    <tr class="sort-disabled" ng-if="!model.includedDocuments.length">
+                      <td colspan="8" class="text-center" l10n-text="airports.airportOperDirective.noAvailableDocs"></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" style="text-align: right; width: 1px;">
+                        <sc-button type="button" btn-click="addDoc()" class="btn btn-primary btn-sm" icon="glyphicon-plus"></sc-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      <accordion>
+        <accordion-group style="margin-top: 5px;">
+          <accordion-heading>
+            <a l10n-text="airports.airportOperDirective.ext" style="font-size: 12px;"></a>
+          </accordion-heading>
+          <div class="row">
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="airports.airportOperDirective.extDate"></label>
+              <sc-date ng-model="model.ext.date" name="extDate"></sc-date>
+            </div>
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="airports.airportOperDirective.extValidToDate"></label>
+              <sc-date ng-model="model.ext.validToDate" name="extValidToDate"></sc-date>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="airports.airportOperDirective.extInspector"></label>
+              <sc-nomenclature ng-model="model.ext.inspector" name="extInspector" alias="'inspectors'"></sc-nomenclature>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+      
+      <accordion>
+        <accordion-group style="margin-top: 5px;">
+          <accordion-heading>
+            <a l10n-text="airports.airportOperDirective.revoke" style="font-size: 12px;"></a>
+          </accordion-heading>
+          <div class="row">
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="airports.airportOperDirective.revokeDate"></label>
+              <sc-date ng-model="model.revokeDate" name="revokeDate"></sc-date>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="airports.airportOperDirective.revokeInspector"></label>
+              <sc-nomenclature ng-model="model.revokeInspector" name="revokeInspector" alias="'inspectors'"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="airports.airportOperDirective.revokeCause"></label>
+              <sc-text ng-model="model.revokeCause" name="revokeCause"></sc-text>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</ng-form>

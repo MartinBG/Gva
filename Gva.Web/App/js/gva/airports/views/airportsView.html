@@ -1,0 +1,62 @@
+﻿<div>
+  <form class="form-inline well well-sm card">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.name"></span>
+          <input disabled name="producer" type="text" class="form-control" value="{{airport.name}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.nameAlt"></span>
+          <input disabled name="category" type="text" class="form-control" value="{{airport.nameAlt}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.icao"></span>
+          <input disabled name="icao" type="text" class="form-control" value="{{airport.icao}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.airportType"></span>
+          <input disabled name="name" type="text" class="form-control" value="{{airport.airportType.name}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.runway"></span>
+          <input disabled name="nameAlt" type="text" class="form-control" value="{{airport.runway}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="airports.viewAirport.course"></span>
+          <input disabled name="manSN" type="text" class="form-control" value="{{airport.course}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-offset-10 col-md-2">
+        <sc-button name="editBtn" btn-click="edit()" text="airports.viewAirport.edit" class="btn btn-primary btn-sm pull-right" icon="glyphicon-pencil"></sc-button>
+      </div>
+    </div>
+  </form>
+<sc-tabs tab-list="{
+      'airports.tabs.owners' : 'root.airports.view.owners',
+      'airports.tabs.docs': {
+        'airports.tabs.others': 'root.airports.view.others'
+       },
+      'airports.tabs.certs': {
+        'airports.tabs.opers': 'root.airports.view.opers'
+       }
+    }"></sc-tabs>
+  <div class="tab-content">
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>
+</div>

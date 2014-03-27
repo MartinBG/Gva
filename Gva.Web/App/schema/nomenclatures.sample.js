@@ -233,6 +233,10 @@
       }
     ],
 
+    airportTypes: require('./airportType'),
+    
+    airportRelations: require('./airportRelation'),
+
     //Номенклатура DocFormatTypes
     //docFormatTypes: [
     //  {

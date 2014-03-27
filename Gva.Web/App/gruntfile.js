@@ -71,7 +71,12 @@ module.exports = function (grunt) {
         'schema/organizations/organization-approval.sample.js',
         'schema/organizations/organization-amendment.sample.js',
         'schema/organizations//organization-staff-examiner.sample.js',
-        'schema/organizations/organization-recommendation.sample.js'
+        'schema/organizations/organization-recommendation.sample.js',
+        'schema/airports/airport-data.sample.js',
+        'schema/airports/airport-document-other.sample.js',
+        'schema/airports/airport-document-owner.sample.js',
+        'schema/airports/airport-cert-operational.sample.js'
+
       ],
       '<%= buildDir %>/js/templates.js': [
         'build/templates/*.js'
@@ -137,6 +142,7 @@ module.exports = function (grunt) {
         'test/gva/persons/mocks/*.js',
         'test/gva/aircrafts/mocks/*.js',
         'test/gva/organizations/mocks/*.js',
+        'test/gva/airports/mocks/*.js',
         'test/scaffolding/testbeds/states.js',
         'test/scaffolding/testbeds/*.js',
         'test/gva/directives/testbeds/states.js',

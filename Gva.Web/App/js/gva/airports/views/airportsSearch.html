@@ -1,0 +1,31 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="airports.search.name"></sc-filter>
+    <sc-filter type="text" name="icao" class="col-sm-3" removable="false" label="airports.search.icao"></sc-filter>
+    <sc-search-button action="search()" text="airports.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newAirport()" text="airports.search.new" icon="glyphicon-plane"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable ng-model="airports" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <sc-button name="viewButton" btn-click="viewAirport(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="airportType.name" title="airports.search.airportType">
+    </sc-column>
+    <sc-column data="name" title="airports.search.name">
+    </sc-column>
+    <sc-column data="icao" title="airports.search.icao">
+    </sc-column>
+    <sc-column data="place" title="airports.search.place">
+    </sc-column>
+    <sc-column data="runway" title="airports.search.runway">
+    </sc-column>
+    <sc-column data="course" title="airports.search.course">
+    </sc-column>
+    <sc-column data="excess" title="airports.search.excess">
+    </sc-column>
+    <sc-column data="concrete" title="airports.search.concrete">
+    </sc-column>
+  </sc-datatable>
+</div>

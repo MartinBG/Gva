@@ -60,6 +60,174 @@
           auditPart: 'Част'
         }
       },
+      airports: {
+        tabs: {
+          docs: 'Документи',
+          certs: 'Удостоверения',
+          owners: 'Свързани лица',
+          others: 'Други',
+          opers: 'Експлоатационна годност'
+        },
+        search: {
+          airportType: 'Тип',
+          name: 'Наименование',
+          place: 'Местоположение',
+          icao: 'ICAO код',
+          runway: 'Полоса',
+          course: 'Курс',
+          excess: 'Превишение ',
+          concrete: 'Полоса-бетон',
+          'new': 'Ново летище',
+          search: 'Търси'
+        },
+        airportDataDirective: {
+          title: 'Данни за летище',
+          airportType: 'Тип',
+          name: 'Наименование',
+          nameAlt: 'Наименование (англ.)',
+          place: 'Местоположение',
+          icao: 'ICAO код',
+          runway: 'Полоса',
+          course: 'Курс',
+          excess: 'Превишение ',
+          concrete: 'Полоса-бетон',
+          latitude: 'Ширина',
+          longitude: 'Дължина',
+          frequencies: 'Радиочестоти',
+          frequency: 'Честота',
+          radioNavigationAids: 'Радионавигационни средства',
+          aid: 'Средство',
+          parameters: 'Параметри',
+          noAvailableFrequencies: 'Няма налични радиочестоти',
+          noAvailableAids: 'Няма налични радионавигационни средства',
+          coordinates: 'Координати на контролна точка'
+        },
+        viewAirport: {
+          airportType: 'Тип',
+          name: 'Наименование',
+          nameAlt: 'Наименование (англ.)',
+          place: 'Местоположение',
+          icao: 'ICAO код',
+          runway: 'Полоса',
+          course: 'Курс',
+          excess: 'Превишение ',
+          concrete: 'Полоса-бетон',
+          edit: 'Редакция'
+        },
+        newAirport: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        airportOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          otherDocumentType: 'Тип документ',
+          airportOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        otherSearch: {
+          newDocument: 'Нов документ',
+          documentNumber: 'Документ №',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          otherDocumentType: 'Тип документ',
+          aircraftOtherDocumentRole: 'Роля',
+          valid: 'Валидно',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ'
+        },
+        airportOwnerDirective: {
+          title: 'Свързано лице',
+          airportRelation: 'Тип отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: '№ на документ',
+          documentDate: 'Дата на документ',
+          fromDate: 'В сила от',
+          toDate: 'Дата на прекратявне на отношенията',
+          reasonTerminate: 'Причина за прекратяване',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        newOwner: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOwner: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ownerSearch: {
+          newOwner: 'Ново свързано лице',
+          airportRelation: 'Отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: 'Документ №',
+          documentDate: 'Дата на документ',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        airportOperDirective: {
+          title: 'Удостоверение за експлоатационна годност',
+          issueNumber: 'Номер на удостоверение',
+          issueDate: 'Дата на издаване',
+          valiToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          includedDocuments: 'Приложени документи',
+          approvalDate: 'Дата на одобрение',
+          docInspector: 'Инспектор',
+          linkedDocument: 'Документ',
+          noAvailableDocs: 'Няма налични документи',
+          ext: 'Продължение',
+          extDate: 'Дата на издаване',
+          extValidToDate: 'Дата на изтичане',
+          extInspector: 'Проверил',
+          revoke: 'Отнемане',
+          revokeDate: 'Дата на отнемане',
+          revokeInspector: 'Инспектор',
+          revokeCause: 'Причина за отнемане'
+        },
+        newOper: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOper: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        operSearch: {
+          newOper: 'Ново удостоверение',
+          issueDate: 'Дата на издаване',
+          issueNumber: 'Удостоверение №',
+          valiToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          inspector: 'Проверил',
+          valid: 'Валиден'
+        }
+      },
       aircrafts: {
         search: {
           manSN: 'Сериен номер',
@@ -2169,7 +2337,17 @@
         'root.organizations.view.recommendations.new.editDisparity': 'Редакция на несъответствие',
         'root.organizations.view.recommendations.edit': 'Редакция на доклад от препоръки',
         'root.organizations.view.recommendations.edit.chooseAudits': 'Избор на одити',
-        'root.organizations.view.recommendations.edit.editDisparity': 'Редакция на несъответствие'
+        'root.organizations.view.recommendations.edit.editDisparity': 'Редакция на несъответствие',
+        'root.airports': 'Летища',
+        'root.airports.new': 'Ново летище',
+        'root.airports.view': 'Данни за летище',
+        'root.airports.view.edit': 'Редакция',
+        'root.airports.view.others': 'Други документи',
+        'root.airports.view.others.new': 'Нов документ',
+        'root.airports.view.others.edit': 'Редакция на документ',
+        'root.airports.view.opers': 'Удостоверения за експлоатационна годност',
+        'root.airports.view.opers.new': 'Ново удостоверение',
+        'root.airports.view.opers.edit': 'Редакция на удостоверение'
       }
     });
   }]);

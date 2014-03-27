@@ -259,6 +259,24 @@
       templateUrl: 'gva/common/forms/commonDisparity.html',
       controller: 'CommonDisparityCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAirportData',
+      templateUrl: 'gva/airports/forms/airportData.html',
+      controller: 'AirportDataCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirportDocumentOther',
+      templateUrl: 'gva/airports/forms/airportDocumentOther.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirportDocumentOwner',
+      templateUrl: 'gva/airports/forms/airportDocumentOwner.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirportCertOperational',
+      templateUrl: 'gva/airports/forms/airportCertOperational.html',
+      controller: 'AirportCertOperationalCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
@@ -487,5 +505,24 @@
       .state(['root.organizations.view.recommendations.edit'                           , '/:ind'                                      , ['@root.organizations.view', 'gva/organizations/views/recommendations/recommendationsEdit.html'                                                    , 'RecommendationsEditCtrl'                           ]])
       .state(['root.organizations.view.recommendations.edit.chooseAudits'              , '/chooseAudits'                              , ['@root.organizations.view', 'gva/organizations/views/recommendations/audits/chooseAudits.html'                                                    , 'ChooseAuditsCtrl'                                  ]])
       .state(['root.organizations.view.recommendations.edit.editDisparity'             , '/:childInd'                                 , ['@root.organizations.view', 'gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]]);
-  }]);
+  }]).config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+      .state(['root.airports'                                   , '/airports?name&icao'                                                                                                                                                        ])
+      .state(['root.airports.search'                            , ''                                         , ['@root'               , 'gva/airports/views/airportsSearch.html'                             , 'AirportsSearchCtrl'            ]])
+      .state(['root.airports.new'                               , '/new'                                     , ['@root'               , 'gva/airports/views/airportsNew.html'                                , 'AirportsNewCtrl'               ]])
+      .state(['root.airports.view'                              , '/:id'                                     , ['@root'               , 'gva/airports/views/airportsView.html'                               , 'AirportsViewCtrl'              ]])
+      .state(['root.airports.view.edit'                         , '/airportData'                             , ['@root'               , 'gva/airports/views/airportData/airportDataEdit.html'                , 'AirportDataEditCtrl'           ]])
+      .state(['root.airports.view.others'                       , '/others'                                                                                                                                                                    ])
+      .state(['root.airports.view.others.search'                , ''                                         , ['@root.airports.view', 'gva/airports/views/documentOthers/othersSearch.html'                 , 'AirportOthersSearchCtrl'       ]])
+      .state(['root.airports.view.others.new'                   , '/new'                                     , ['@root.airports.view', 'gva/airports/views/documentOthers/othersNew.html'                    , 'AirportOthersNewCtrl'          ]])
+      .state(['root.airports.view.others.edit'                  , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/documentOthers/othersEdit.html'                   , 'AirportOthersEditCtrl'         ]])
+      .state(['root.airports.view.owners'                       , '/owners'                                                                                                                                                                    ])
+      .state(['root.airports.view.owners.search'                , ''                                         , ['@root.airports.view', 'gva/airports/views/documentOwners/ownersSearch.html'                 , 'AirportOwnersSearchCtrl'       ]])
+      .state(['root.airports.view.owners.new'                   , '/new'                                     , ['@root.airports.view', 'gva/airports/views/documentOwners/ownersNew.html'                    , 'AirportOwnersNewCtrl'          ]])
+      .state(['root.airports.view.owners.edit'                  , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/documentOwners/ownersEdit.html'                   , 'AirportOwnersEditCtrl'         ]])
+      .state(['root.airports.view.opers'                        , '/opers'                                                                                                                                                                     ])
+      .state(['root.airports.view.opers.search'                 , ''                                         , ['@root.airports.view', 'gva/airports/views/certOpers/opersSearch.html'                       , 'AirportOpersSearchCtrl'        ]])
+      .state(['root.airports.view.opers.new'                    , '/new'                                     , ['@root.airports.view', 'gva/airports/views/certOpers/opersNew.html'                          , 'AirportOpersNewCtrl'           ]])
+      .state(['root.airports.view.opers.edit'                   , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/certOpers/opersEdit.html'                         , 'AirportOpersEditCtrl'          ]]);
+    }]);
 }(angular));
