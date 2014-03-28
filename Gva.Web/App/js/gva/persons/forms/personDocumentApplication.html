@@ -3,20 +3,20 @@
     <div class="panel-heading"><strong l10n-text="persons.personDocApplicationDirective.title"></strong></div>
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2">
+        <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.documentNumber"></label>
           <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-9 col-md-6" sc-has-error="applicationType">
+        <div class="form-group col-sm-10" sc-has-error="applicationType">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.applicationType"></label>
           <sc-validation-error field-name="applicationType" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.applicationType" name="applicationType" alias="'applicationTypes'" required></sc-nomenclature>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2">
+        <div class="form-group col-sm-4 col-md-6">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.applicationPaymentType"></label>
           <sc-nomenclature ng-model="model.applicationPaymentType" alias="'applicationPaymentTypes'"></sc-nomenclature>
         </div>
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-9 col-md-6">
+        <div class="form-group col-sm-10">
           <label class="control-label" l10n-text="persons.personDocApplicationDirective.notes"></label>
           <sc-textarea rows="3" ng-model="model.notes" name="notes"></sc-textarea>
         </div>

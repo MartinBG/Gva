@@ -1,7 +1,7 @@
 ﻿<div>
   <div class="panel panel-default">
     <nav class="panel-heading">
-      <div class="collapse navbar-collapse" id="Div1" style="padding: 0px;">
+      <div class="collapse navbar-collapse" style="padding: 0px;">
         <sc-button btn-click="save()" name="registerBtn" text="applications.newForm.register" class="btn btn-default btn-sm" icon="glyphicon glyphicon-ok"></sc-button>
         <sc-button btn-click="cancel()" name="cancelBtn" text="applications.newForm.cancel" class="btn btn-default btn-sm" icon="glyphicon glyphicon-remove"></sc-button>
       </div>
@@ -9,9 +9,8 @@
     <div class="well-sm panel-body">
       <ng-form name="appForm" sc-validate="{}">
         <div class="well-sm panel-body ">
-
           <div class="row">
-            <div class="form-group col-md-6" sc-has-error="personLotId">
+            <div class="form-group col-sm-10" sc-has-error="personLotId">
               <label class="control-label" l10n-text="applications.newForm.person"></label>
               <sc-validation-error field-name="personLotId" validations="{required: null}"></sc-validation-error>
               <div class="input-group input-group-sm">

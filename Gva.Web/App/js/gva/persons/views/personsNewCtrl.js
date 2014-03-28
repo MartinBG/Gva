@@ -6,7 +6,7 @@
     $scope.newPerson = person;
 
     $scope.save = function () {
-      $scope.newPersonForm.$validate()
+      return $scope.newPersonForm.$validate()
       .then(function () {
         if ($scope.newPersonForm.$valid) {
           return Person.save($scope.newPerson).$promise

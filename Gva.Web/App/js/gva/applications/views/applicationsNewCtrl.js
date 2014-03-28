@@ -38,10 +38,9 @@
     }, true);
 
     $scope.save = function () {
-      $scope.appForm.$validate()
+      return $scope.appForm.$validate()
       .then(function () {
         if ($scope.appForm.$valid) {
-
           var newApplication = {
             lotId: $scope.appModel.person.id,
             doc: {
@@ -61,8 +60,8 @@
             appFile: $scope.appModel.appFile
           };
 
-          Application.createNew(newApplication).$promise.then(function (result) {
-            return $state.go('root.applications.edit.case', { id: result.gvaApplicationId });
+          return Application.create(newApplication).$promise.then(function (app) {
+            return $state.go('root.applications.edit.case', { id: app.id });
           });
         }
       });

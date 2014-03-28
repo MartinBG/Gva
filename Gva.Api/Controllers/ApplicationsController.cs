@@ -165,7 +165,7 @@ namespace Gva.Api.Controllers
             }
         }
 
-        [Route("{id}/parts/new")]
+        [Route("{id}/parts/create")]
         public IHttpActionResult PostNewPart(int id, ApplicationPartDO newPart)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -258,7 +258,7 @@ namespace Gva.Api.Controllers
             }
         }
 
-        [Route("new")]
+        [Route("create")]
         public IHttpActionResult PostNewApplication(ApplicationNewDO applicationNewDO)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -338,13 +338,11 @@ namespace Gva.Api.Controllers
                 applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
+                this.docRepository.spSetDocUsers(doc.DocId);
 
                 transaction.Commit();
 
-                return Ok(new
-                {
-                    gvaApplicationId = application.GvaApplicationId
-                });
+                return Ok(new { id = application.GvaApplicationId });
             }
         }
 
@@ -365,10 +363,7 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
 
-                return Ok(new
-                {
-                    gvaApplicationId = application.GvaApplicationId
-                });
+                return Ok(new { id = application.GvaApplicationId });
             }
         }
 

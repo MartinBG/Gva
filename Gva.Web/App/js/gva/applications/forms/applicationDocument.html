@@ -6,7 +6,7 @@
     <div class="well-sm panel-body">
       <div>
         <div class="row">
-            <div class="form-group col-sm-2" sc-has-error="name">
+            <div class="form-group col-sm-3" sc-has-error="name">
                 <label class="control-label" l10n-text="applications.applicationDocument.name"></label>
                 <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
                 <sc-text name="name" ng-model="model.name" required ng-readonly="readonly"></sc-text>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-sm-2" sc-has-error="caseType">
+            <div class="form-group col-sm-3" sc-has-error="caseType">
               <label class="control-label" l10n-text="applications.applicationDocument.caseType"></label>
               <sc-validation-error field-name="caseType" validations="{required: null}"></sc-validation-error>
               <sc-nomenclature ng-model="model.caseTypeId" name="caseType" mode="id" nom-obj="model.caseType" alias="'personCaseTypes'" params="{lotId: model.lotId}" required></sc-nomenclature>

@@ -35,9 +35,9 @@
       $scope.setParentDocId();
       $scope.docModel.doc.register = true;
 
-      $scope.docForm.$validate().then(function () {
+      return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
+          return Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
             return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
           });
         }
@@ -46,10 +46,10 @@
 
     $scope.save = function () {
       $scope.setParentDocId();
-      $scope.docForm.$validate().then(function () {
+      return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
           //?rename
-          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
+          return Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
             return $state.go('root.docs.edit.view', { id: result.docId });
           });
         }

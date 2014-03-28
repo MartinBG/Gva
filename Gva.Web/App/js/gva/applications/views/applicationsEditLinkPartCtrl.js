@@ -114,7 +114,7 @@
       };
 
       return Application
-        .partslinkExisting({ id: $stateParams.id }, linkExisting)
+        .linkExistingPart({ id: $stateParams.id }, linkExisting)
           .$promise.then(function () {
             return $state.transitionTo('root.applications.edit.case',
               $stateParams, { reload: true }

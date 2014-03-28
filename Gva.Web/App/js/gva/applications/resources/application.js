@@ -11,25 +11,25 @@
               method: 'GET',
               url: '/api/apps/notLinkedDocs'
             },
-            'createNew': {
+            'create': {
               method: 'POST',
-              url: '/api/apps/new'
+              url: '/api/apps/create'
             },
-            'linkNew': {
+            'link': {
               method: 'POST',
               url: '/api/apps/link'
             },
-            'partsNew': {
+            'createPart': {
               method: 'POST',
-              url: '/api/apps/:id/parts/new',
+              url: '/api/apps/:id/parts/create',
               params: { id: '@id' }
             },
-            'partsLinkNew': {
+            'linkNewPart': {
               method: 'POST',
               url: '/api/apps/:id/parts/linkNew',
               params: { id: '@id' }
             },
-            'partslinkExisting': {
+            'linkExistingPart': {
               method: 'POST',
               url: '/api/apps/:id/parts/linkExisting',
               params: { id: '@id' }

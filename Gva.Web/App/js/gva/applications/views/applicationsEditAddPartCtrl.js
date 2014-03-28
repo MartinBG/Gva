@@ -58,7 +58,7 @@
             };
 
             return Application
-              .partsNew({ id: $stateParams.id }, newPart)
+              .createPart({ id: $stateParams.id }, newPart)
               .$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
@@ -78,7 +78,7 @@
             };
 
             return Application
-                .partsLinkNew({ id: $stateParams.id }, linkNew)
+                .linkNewPart({ id: $stateParams.id }, linkNew)
                 .$promise.then(function () {
                   return $state.transitionTo('root.applications.edit.case',
                     $stateParams, { reload: true });

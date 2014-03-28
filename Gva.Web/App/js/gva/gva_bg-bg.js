@@ -1690,7 +1690,7 @@
           personLin: 'ЛИН',
           status: 'Статус',
           docTypeName: 'Относно',
-          editPerson: 'Редакция',
+          viewPerson: 'Преглед',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',

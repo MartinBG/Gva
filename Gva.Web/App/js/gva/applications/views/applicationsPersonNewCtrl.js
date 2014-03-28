@@ -5,12 +5,12 @@
   function ApplicationsPersonNewCtrl($scope, $state, Person, selectedPerson) {
 
     $scope.save = function () {
-      $scope.newPersonForm.$validate()
+      return $scope.newPersonForm.$validate()
       .then(function () {
         if ($scope.newPersonForm.$valid) {
           return Person.save($scope.newPerson).$promise
-            .then(function (result) {
-              selectedPerson.push(result.lotId);
+            .then(function (person) {
+              selectedPerson.push(person.id);
               return $state.go('^');
             });
         }

@@ -91,12 +91,12 @@ namespace Gva.Api.Controllers
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
+                this.unitOfWork.Save();
+
                 transaction.Commit();
+
+                return Ok(new { id = newLot.LotId });
             }
-
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route("{lotId}/inventory")]

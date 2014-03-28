@@ -45,7 +45,7 @@
     };
 
     $scope.link = function () {
-      $scope.appForm.$validate()
+      return $scope.appForm.$validate()
       .then(function () {
         if ($scope.appForm.$valid) {
 
@@ -54,8 +54,8 @@
             docId: $scope.appModel.doc.docId
           };
 
-          Application.linkNew(newApplication).$promise.then(function (result) {
-            return $state.go('root.applications.edit.case', { id: result.gvaApplicationId });
+          return Application.link(newApplication).$promise.then(function (app) {
+            return $state.go('root.applications.edit.case', { id: app.id });
           });
         }
       });
