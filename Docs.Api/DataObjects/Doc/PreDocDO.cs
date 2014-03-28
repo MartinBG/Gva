@@ -42,13 +42,13 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public Nullable<int> DocId { get; set; }
-        public Nullable<int> ParentDocId { get; set; }
-        public Nullable<int> DocFormatTypeId { get; set; }
-        public Nullable<int> DocCasePartTypeId { get; set; }
+        public int? DocId { get; set; }
+        public int? ParentDocId { get; set; }
+        public int? DocFormatTypeId { get; set; }
+        public int? DocCasePartTypeId { get; set; }
         public int DocDirectionId { get; set; }
-        public Nullable<int> DocTypeGroupId { get; set; }
-        public Nullable<int> DocTypeId { get; set; }
+        public int? DocTypeGroupId { get; set; }
+        public int? DocTypeId { get; set; }
         public string DocSubject { get; set; }
 
         public List<int> Correspondents { get; set; }

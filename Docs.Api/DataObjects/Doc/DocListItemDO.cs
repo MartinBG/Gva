@@ -54,7 +54,7 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public Nullable<int> DocId { get; set; }
+        public int? DocId { get; set; }
         public DateTime? RegDate { get; set; }
         public string RegUri { get; set; }
         public string DocSubject { get; set; }

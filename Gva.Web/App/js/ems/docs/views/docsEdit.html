@@ -112,7 +112,7 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li>
-                <a sc-click="editCasePart()" name="editCasePartBtn" l10n-text="docs.edit.casePart"></a>
+                <a ng-hide="doc.isCase" sc-click="editCasePart()" name="editCasePartBtn" l10n-text="docs.edit.casePart"></a>
               </li>
               <li ng-hide="!!doc.isResolution || !!doc.isRemark || !!doc.isTask">
                 <a sc-click="editDocType()" name="editCasePartBtn" l10n-text="docs.edit.docType"></a>

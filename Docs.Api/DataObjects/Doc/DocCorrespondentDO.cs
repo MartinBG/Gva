@@ -57,8 +57,8 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public Nullable<int> DocCorrespondentId { get; set; }
-        public Nullable<int> DocId { get; set; }
+        public int? DocCorrespondentId { get; set; }
+        public int? DocId { get; set; }
         public int CorrespondentId { get; set; }
         public byte[] Version { get; set; }
 

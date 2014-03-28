@@ -62,14 +62,14 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public Nullable<int> DocWorkflowId { get; set; }
-        public Nullable<int> DocId { get; set; }
+        public int? DocWorkflowId { get; set; }
+        public int? DocId { get; set; }
         public int DocWorkflowActionId { get; set; }
-        public System.DateTime EventDate { get; set; }
+        public DateTime EventDate { get; set; }
         public bool? YesNo { get; set; }
         public int UnitUserId { get; set; }
-        public Nullable<int> ToUnitId { get; set; }
-        public Nullable<int> PrincipalUnitId { get; set; }
+        public int? ToUnitId { get; set; }
+        public int? PrincipalUnitId { get; set; }
         public string Note { get; set; }
         public byte[] Version { get; set; }
 
@@ -86,67 +86,5 @@ namespace Docs.Api.DataObjects
         public string Username { get; set; }
         public Nullable<int> UserUnitId { get; set; }
         public string UserUnitName { get; set; }
-
-        //public DocUnitDO CurrentDocUnit { get; set; }
-
-        //public bool IsRequest
-        //{
-        //    get
-        //    {
-        //        return DocWorkflowActionAlias.ToLower().EndsWith("request");
-        //    }
-        //}
-
-        //public string ActionText
-        //{
-        //    get
-        //    {
-        //        switch (DocWorkflowActionAlias.ToLower())
-        //        {
-        //            case "sign":
-        //                return "Подписвам";
-        //            case "discuss":
-        //                return "Съгласувам";
-        //            case "approval":
-        //                return "Одобрявам";
-        //            case "signrequest":
-        //                return "За подписване";
-        //            case "discussrequest":
-        //                return "За съгласуване";
-        //            case "approvalrequest":
-        //                return "За одобрение";
-        //            default:
-        //                return "";
-        //        }
-        //    }
-        //}
-
-        //public string DialogTitle
-        //{
-        //    get
-        //    {
-        //        switch (DocWorkflowActionAlias.ToLower())
-        //        {
-        //            case "sign":
-        //                return "Подписване";
-        //            case "discuss":
-        //                return "Съгласуване";
-        //            case "approval":
-        //                return "Одобряване";
-        //            case "signrequest":
-        //                return "Искане за подпис";
-        //            case "discussrequest":
-        //                return "Искане за съгласуване";
-        //            case "approvalrequest":
-        //                return "Искане за одобрение";
-        //            default:
-        //                return "";
-        //        }
-        //    }
-        //}
-
-        ////
-        //public bool IsNew { get; set; }
-        //public bool IsDeleted { get; set; }
     }
 }

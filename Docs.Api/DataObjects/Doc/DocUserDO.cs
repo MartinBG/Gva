@@ -25,8 +25,15 @@ namespace Docs.Api.DataObjects
                 this.ActivateDate = d.ActivateDate;
                 this.DeactivateDate = d.DeactivateDate;
 
-                this.UnitName = d.Unit != null ? d.Unit.Name : string.Empty;
-                this.DocUnitPermissionName = d.DocUnitPermission != null ? d.DocUnitPermission.Name : string.Empty;
+                if (d.Unit != null)
+                {
+                    this.UnitName = d.Unit.Name;
+                }
+
+                if (d.DocUnitPermission != null)
+                {
+                    this.DocUnitPermissionName = d.DocUnitPermission.Name;
+                }
             }
         }
 
@@ -35,8 +42,8 @@ namespace Docs.Api.DataObjects
         public int DocUnitPermissionId { get; set; }
         public bool HasRead { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<System.DateTime> ActivateDate { get; set; }
-        public Nullable<System.DateTime> DeactivateDate { get; set; }
+        public DateTime? ActivateDate { get; set; }
+        public DateTime? DeactivateDate { get; set; }
 
         public string UnitName { get; set; }
         public string DocUnitPermissionName { get; set; }

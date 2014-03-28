@@ -14,10 +14,10 @@ namespace Docs.Api.DataObjects
 
         public string EmailTo { get; set; }
         public string EmailToName { get; set; }
-        public Nullable<int> CorrespondentContactId { get; set; }
-        public Nullable<int> CorrespondentId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> TypeId { get; set; }
+        public int? CorrespondentContactId { get; set; }
+        public int? CorrespondentId { get; set; }
+        public int? UserId { get; set; }
+        public int? TypeId { get; set; }
 
         public string Subject { get; set; }
         public string Body { get; set; }
