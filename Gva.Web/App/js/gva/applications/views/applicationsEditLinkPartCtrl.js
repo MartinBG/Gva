@@ -15,8 +15,7 @@
     PersonDocumentTraining,
     PersonDocumentOther,
     PersonDocumentApplication,
-    application,
-    applicationCommonData
+    application
     ) {
     $scope.application = application;
 
@@ -109,7 +108,7 @@
 
     $scope.linkPart = function (partId) {
       var linkExisting = {
-        docFileId: applicationCommonData.docFileId,
+        docFileId: $stateParams.docFileId,
         partId: partId
       };
 
@@ -141,8 +140,7 @@
     'PersonDocumentTraining',
     'PersonDocumentOther',
     'PersonDocumentApplication',
-    'application',
-    'applicationCommonData'
+    'application'
   ];
 
   angular.module('gva').controller('ApplicationsEditLinkPartCtrl', ApplicationsEditLinkPartCtrl);

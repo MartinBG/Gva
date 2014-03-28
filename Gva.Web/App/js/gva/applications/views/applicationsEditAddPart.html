@@ -1,42 +1,42 @@
 ﻿<div class="tab-content">
   <ng-form name="addFormWrapper" sc-validate="{}">
-    <div ng-if="applicationDocPart.setPartAlias === 'documentId'">
-      <gva-person-document-id name="addForm" ng-model="applicationDocPart.part"></gva-person-document-id>
+    <div ng-if="applicationPart.setPartAlias === 'documentId'">
+      <gva-person-document-id name="addForm" ng-model="applicationPart.part"></gva-person-document-id>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'education'">
-      <gva-person-document-education name="addForm" ng-model="applicationDocPart.part"></gva-person-document-education>
+    <div ng-if="applicationPart.setPartAlias === 'education'">
+      <gva-person-document-education name="addForm" ng-model="applicationPart.part"></gva-person-document-education>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'employment'">
-      <gva-person-document-employment name="addForm" ng-model="applicationDocPart.part"></gva-person-document-employment>
+    <div ng-if="applicationPart.setPartAlias === 'employment'">
+      <gva-person-document-employment name="addForm" ng-model="applicationPart.part"></gva-person-document-employment>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'medical'">
-      <gva-person-document-medical name="addForm" ng-model="applicationDocPart.part"></gva-person-document-medical>
+    <div ng-if="applicationPart.setPartAlias === 'medical'">
+      <gva-person-document-medical name="addForm" ng-model="applicationPart.part"></gva-person-document-medical>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'check'">
-      <gva-person-document-check name="addForm" ng-model="applicationDocPart.part"></gva-person-document-check>
+    <div ng-if="applicationPart.setPartAlias === 'check'">
+      <gva-person-document-check name="addForm" ng-model="applicationPart.part"></gva-person-document-check>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'training'">
-      <gva-person-document-training name="addForm" ng-model="applicationDocPart.part"></gva-person-document-training>
+    <div ng-if="applicationPart.setPartAlias === 'training'">
+      <gva-person-document-training name="addForm" ng-model="applicationPart.part"></gva-person-document-training>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'other'">
-      <gva-person-document-other name="addForm" ng-model="applicationDocPart.part"></gva-person-document-other>
+    <div ng-if="applicationPart.setPartAlias === 'other'">
+      <gva-person-document-other name="addForm" ng-model="applicationPart.part"></gva-person-document-other>
     </div>
-    <div ng-if="applicationDocPart.setPartAlias === 'application'">
-      <gva-person-document-application name="addForm" ng-model="applicationDocPart.part"></gva-person-document-application>
-    </div>
-
-    <div ng-if="!applicationDocPart.isLinkNew">
-      <gva-application-document name="appFile" ng-model="applicationDocPart.appFile"></gva-application-document>
+    <div ng-if="applicationPart.setPartAlias === 'application'">
+      <gva-person-document-application name="addForm" ng-model="applicationPart.part"></gva-person-document-application>
     </div>
 
-    <div ng-if="applicationDocPart.isLinkNew">
-      <gva-application-document name="appFile" ng-model="applicationDocPart.appFile" readonly="true"></gva-application-document>
+    <div ng-if="!applicationPart.hasDocFile">
+      <gva-application-document name="appFile" ng-model="applicationPart.appFile"></gva-application-document>
+    </div>
+
+    <div ng-if="applicationPart.hasDocFile">
+      <gva-application-document name="appFile" ng-model="applicationPart.appFile" readonly="true"></gva-application-document>
     </div>
 
     <div class="row">
       <div class="form-group col-sm-4 col-sm-offset-5 col-sm-4">
-        <sc-button ng-if="!applicationDocPart.isLinkNew" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
-        <sc-button ng-if="applicationDocPart.isLinkNew" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
+        <sc-button ng-if="!applicationPart.hasDocFile" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
+        <sc-button ng-if="applicationPart.hasDocFile" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
         <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
       </div>
     </div>

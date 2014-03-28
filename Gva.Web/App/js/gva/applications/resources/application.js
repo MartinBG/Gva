@@ -33,6 +33,11 @@
               method: 'POST',
               url: '/api/apps/:id/parts/linkExisting',
               params: { id: '@id' }
+            },
+            'getDocFile': {
+              method: 'GET',
+              url: '/api/apps/docFile',
+              params: { docFileId: '@docFileId' }
             }
           });
       }]);

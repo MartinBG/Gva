@@ -26,7 +26,7 @@
             <a ng-click="viewPart(alf)"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ alf.pageNumber }}</a>
           </div>
           <div ng-if="!alf.hasAppFile">
-            <a ng-click="linkNew(adc.docId, alf)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(adc.docId, alf.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
+            <a ng-click="linkNew(adc.docId, alf.docFileId)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(alf.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
           </div>
         </td>
         <td></td>

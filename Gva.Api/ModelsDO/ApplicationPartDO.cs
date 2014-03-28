@@ -13,10 +13,10 @@ namespace Gva.Api.ModelsDO
         public dynamic AppFile { get; set; }
 
         //link existing
-        public int PartId { get; set; }
-        public int DocFileId { get; set; }
+        public int? PartId { get; set; }
+        public int? DocFileId { get; set; }
 
         //new part
-        public int DocId { get; set; }
+        public int? DocId { get; set; }
     }
 }

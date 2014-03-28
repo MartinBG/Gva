@@ -1,17 +1,12 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function ApplicationsEditNewFileCtrl(
     $scope,
     $state,
-    $stateParams,
-    applicationCommonData
+    $stateParams
     ) {
-    if (_.isEmpty(applicationCommonData)) {
-      return $state.go('^');
-    }
-
     $scope.docPartType = null;
 
     $scope.cancel = function () {
@@ -19,12 +14,14 @@
     };
 
     $scope.addPart = function () {
-      $scope.addDocPartType.$validate()
+      return $scope.addDocPartType.$validate()
         .then(function () {
           if ($scope.addDocPartType.$valid) {
-            applicationCommonData.setPartAlias = $scope.docPartType.alias;
-
-            return $state.go('root.applications.edit.case.addPart');
+            return $state.go('root.applications.edit.case.addPart', {
+              docId: $stateParams.docId,
+              docFileId: $stateParams.docFileId,
+              setPartAlias: $scope.docPartType.alias
+            });
           }
         });
     };
@@ -33,9 +30,8 @@
   ApplicationsEditNewFileCtrl.$inject = [
     '$scope',
     '$state',
-    '$stateParams',
-    'applicationCommonData'
+    '$stateParams'
   ];
 
   angular.module('gva').controller('ApplicationsEditNewFileCtrl', ApplicationsEditNewFileCtrl);
-}(angular, _));
+}(angular));

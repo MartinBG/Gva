@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function ApplicationsEditAddPartCtrl(
@@ -7,54 +7,27 @@
     $state,
     $stateParams,
     Application,
-    application,
-    applicationCommonData,
+    applicationPart,
     selectedPublisher
     ) {
-    if (_.isEmpty(applicationCommonData)) {
-      return $state.go('^');
-    }
-    else {
-      $scope.applicationDocPart = {
-        isLinkNew: applicationCommonData.isLinkNew,
-        currentDocId: applicationCommonData.currentDocId,
-        setPartAlias: applicationCommonData.setPartAlias,
-        part: {},
-        appFile: {
-          lotId: application.lotId,
-          name: applicationCommonData.name,
-          docFileId: applicationCommonData.docFileId,
-          docFileKindId: applicationCommonData.docFileKindId,
-          docFileTypeId: applicationCommonData.docFileTypeId,
-          docFile: null
-        }
-      };
-
-      if (applicationCommonData.isLinkNew) {
-        $scope.applicationDocPart.appFile.docFile = {
-          key: applicationCommonData.docFileKey,
-          name: applicationCommonData.docFileName,
-          relativePath: null
-        };
-      }
-    }
-
-    $scope.applicationDocPart.part.documentPublisher = selectedPublisher.pop() ||
-      $scope.applicationDocPart.part.documentPublisher;
+    $scope.applicationPart = applicationPart;
+ 
+    $scope.applicationPart.part.documentPublisher = selectedPublisher.pop() ||
+      $scope.applicationPart.part.documentPublisher;
 
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
     };
 
     $scope.addPart = function () {
-      $scope.addFormWrapper.$validate()
+      return $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
             var newPart = {
-              docId: $scope.applicationDocPart.currentDocId,
-              appFile: $scope.applicationDocPart.appFile,
-              setPartAlias: $scope.applicationDocPart.setPartAlias,
-              appPart: $scope.applicationDocPart.part
+              docId: $scope.applicationPart.docId,
+              appFile: $scope.applicationPart.appFile,
+              setPartAlias: $scope.applicationPart.setPartAlias,
+              appPart: $scope.applicationPart.part
             };
 
             return Application
@@ -68,13 +41,13 @@
     };
 
     $scope.linkNew = function () {
-      $scope.addFormWrapper.$validate()
+      return $scope.addFormWrapper.$validate()
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
             var linkNew = {
-              appFile: $scope.applicationDocPart.appFile,
-              setPartAlias: $scope.applicationDocPart.setPartAlias,
-              appPart: $scope.applicationDocPart.part
+              appFile: $scope.applicationPart.appFile,
+              setPartAlias: $scope.applicationPart.setPartAlias,
+              appPart: $scope.applicationPart.part
             };
 
             return Application
@@ -97,17 +70,44 @@
     '$state',
     '$stateParams',
     'Application',
-    'application',
-    'applicationCommonData',
+    'applicationPart',
     'selectedPublisher'
   ];
 
   ApplicationsEditAddPartCtrl.$resolve = {
+    applicationPart: [
+      '$stateParams',
+      'Application',
+      'application',
+      function ($stateParams, Application, application) {
+        if (!!$stateParams.docFileId) {
+          return Application.getDocFile({ docFileId: $stateParams.docFileId }).$promise
+            .then(function (docFile) {
+              docFile.lotId = application.lotId;
+              return {
+                hasDocFile: !!$stateParams.docFileId,
+                setPartAlias: $stateParams.setPartAlias,
+                appFile: docFile,
+                part: {}
+              };
+            });
+        }
 
+        return {
+          docId: $stateParams.docId,
+          hasDocFile: !!$stateParams.docFileId,
+          setPartAlias: $stateParams.setPartAlias,
+          appFile: {
+            lotId: application.lotId
+          },
+          part: {}
+        };
+      }
+    ],
     selectedPublisher: function () {
       return [];
     }
   };
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);
-}(angular, _));
+}(angular));

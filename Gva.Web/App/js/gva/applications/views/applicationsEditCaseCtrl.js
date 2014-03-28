@@ -6,8 +6,7 @@
     $scope,
     $state,
     $sce,
-    application,
-    applicationCommonData
+    application
     ) {
     $scope.application = application;
 
@@ -23,31 +22,26 @@
     });
 
 
-    $scope.linkNew = function (docId, appLotFile) {
-      applicationCommonData.isLinkNew = true;
-      applicationCommonData.currentDocId = appLotFile.docId;
-      applicationCommonData.docFileKey = appLotFile.file.key;
-      applicationCommonData.docFileName = appLotFile.file.name;
-      applicationCommonData.name = appLotFile.name;
-      applicationCommonData.docFileId = appLotFile.docFileId;
-      applicationCommonData.docFileKindId = appLotFile.docFileKindId;
-      applicationCommonData.docFileTypeId = appLotFile.docFileTypeId;
-
-      return $state.go('root.applications.edit.case.newFile');
+    $scope.linkNew = function (docId, docFileId) {
+      return $state.go('root.applications.edit.case.newFile', {
+        docId: docId,
+        docFileId: docFileId
+      });
     };
 
-    $scope.linkPart = function (docId, docFileId) {
-      applicationCommonData.docFileId = docFileId;
-      applicationCommonData.currentDocId = docId;
+    $scope.linkPart = function (docFileId) {
+      //applicationCommonData.docFileId = docFileId;
+      //applicationCommonData.currentDocId = docId;
 
-      return $state.go('root.applications.edit.case.linkPart');
+      return $state.go('root.applications.edit.case.linkPart', {
+        docFileId: docFileId
+      });
     };
 
     $scope.newFile = function (docId) {
-      applicationCommonData.isLinkNew = false;
-      applicationCommonData.currentDocId = docId;
-
-      return $state.go('root.applications.edit.case.newFile');
+      return $state.go('root.applications.edit.case.newFile', {
+        docId: docId
+      });
     };
 
     $scope.viewPart = function (docCase) {
@@ -93,15 +87,8 @@
     '$scope',
     '$state',
     '$sce',
-    'application',
-    'applicationCommonData'
+    'application'
   ];
-
-  ApplicationsEditCaseCtrl.$resolve = {
-    applicationCommonData: function () {
-      return {};
-    }
-  };
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);
 }(angular, _));

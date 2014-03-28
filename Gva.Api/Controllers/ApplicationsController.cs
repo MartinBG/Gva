@@ -168,6 +168,11 @@ namespace Gva.Api.Controllers
         [Route("{id}/parts/create")]
         public IHttpActionResult PostNewPart(int id, ApplicationPartDO newPart)
         {
+            if (newPart.DocId == null)
+            {
+                throw new InvalidOperationException(string.Format("Error: empty parameters."));
+            }
+
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
@@ -186,14 +191,14 @@ namespace Gva.Api.Controllers
                     application.GvaAppLotPart = partVersion.Part;
                 }
 
-                var doc = this.docRepository.Find(newPart.DocId);
+                var doc = this.docRepository.Find(newPart.DocId.Value);
                 var docFile = doc.CreateDocFile(
                     (int)newPart.AppFile.docFileKindId,
                     (int)newPart.AppFile.docFileTypeId,
                     (string)newPart.AppFile.name,
-                    (string)newPart.AppFile.docFile.name,
+                    (string)newPart.AppFile.file.name,
                     String.Empty,
-                    (Guid)newPart.AppFile.docFile.key,
+                    (Guid)newPart.AppFile.file.key,
                     true,
                     true,
                     userContext);
@@ -227,6 +232,11 @@ namespace Gva.Api.Controllers
         [Route("{id}/parts/linkExisting")]
         public IHttpActionResult PostLinkExistingPart(int id, ApplicationPartDO linkExistingPart)
         {
+            if (linkExistingPart.DocFileId == null || linkExistingPart.PartId == null)
+            {
+                throw new InvalidOperationException(string.Format("Error: empty parameters."));
+            }
+
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 GvaApplication application = this.applicationRepository.Find(id);
@@ -425,6 +435,21 @@ namespace Gva.Api.Controllers
                 documentCount = totalCount,
                 msg = sb.ToString()
             });
+        }
+
+        [Route("docFile")]
+        public IHttpActionResult GetDocFile(int? docFileId = null)
+        {
+            if (docFileId == null)
+            {
+                //return Forbidden;
+            }
+
+            DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().Find(docFileId.Value);
+
+            DocFileDO returnValue = new DocFileDO(docFile);
+
+            return Ok(returnValue);
         }
     }
 }
