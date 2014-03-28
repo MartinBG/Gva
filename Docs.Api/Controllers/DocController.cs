@@ -21,12 +21,20 @@ namespace Docs.Api.Controllers
     {
         private Common.Data.IUnitOfWork unitOfWork;
         private Docs.Api.Repositories.DocRepository.IDocRepository docRepository;
+        private UserContext userContext;
 
         public DocController(Common.Data.IUnitOfWork unitOfWork,
             Docs.Api.Repositories.DocRepository.IDocRepository docRepository)
         {
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
+        }
+
+        protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+
+            this.userContext = this.Request.GetUserContext();
         }
 
         /// <summary>
@@ -63,8 +71,7 @@ namespace Docs.Api.Controllers
             string ds = null
             )
         {
-            UserContext userContext = this.Request.GetUserContext();
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
@@ -339,8 +346,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
-                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
 
@@ -441,8 +447,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
-                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
                 DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
@@ -528,12 +533,10 @@ namespace Docs.Api.Controllers
         {
             DateTime currentDate = DateTime.Now;
 
-            UserContext userContext = this.Request.GetUserContext();
-
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
                 .Include(e => e.User)
                 .Include(e => e.Unit)
-                .FirstOrDefault(e => e.UserId == userContext.UserId);
+                .FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
             List<DocUser> docUsers = this.docRepository.GetActiveDocUsersForDocByUnitId(id, unitUser);
 
@@ -794,25 +797,13 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
                 DateTime currentDate = DateTime.Now;
                 var oldDoc = this.docRepository.Find(id,
                         e => e.DocCorrespondents,
                         e => e.DocFiles,
                         e => e.DocUnits);
 
-                //? check for permissions to update
-                //?
-                if (oldDoc == null)
-                {
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Документът не може да бъде намерен." });
-                }
-
-                //?
-                if (!oldDoc.Version.SequenceEqual(doc.Version))
-                {
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Съществува нова версия на документа." });
-                }
+                oldDoc.EnsureForProperVersion(doc.Version);
 
                 oldDoc.DocSourceTypeId = doc.DocSourceTypeId;
                 oldDoc.DocSubject = doc.DocSubject;
@@ -1090,7 +1081,7 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public HttpResponseMessage RegisterDoc(int id, string docVersion)
         {
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
             Doc doc = this.docRepository.Find(id,
                 e => e.DocRelations);

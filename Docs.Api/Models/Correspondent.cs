@@ -2,6 +2,7 @@ using Common.Api.UserContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Core;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 
@@ -105,6 +106,8 @@ namespace Docs.Api.Models
 
         public virtual ICollection<DocCorrespondent> DocCorrespondents { get; set; }
 
+        #region CorrespondentContact
+
         public CorrespondentContact CreateCorrespondentContact(string name, string uin, string note, bool isActive, UserContext userContext)
         {
             this.ModifyDate = DateTime.Now;
@@ -162,6 +165,16 @@ namespace Docs.Api.Models
             else
             {
                 throw new Exception(string.Format("No correspondent contact with ID = {0} found.", correspondentContactId));
+            }
+        }
+
+        #endregion
+
+        public void EnsureForProperVersion(byte[] version)
+        {
+            if (!this.Version.SequenceEqual(version))
+            {
+                throw new OptimisticConcurrencyException("Doc has been modified.");
             }
         }
     }

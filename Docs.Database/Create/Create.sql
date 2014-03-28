@@ -143,6 +143,13 @@ GO
 --assignments
 :r $(rootPath)\"..\Insert\Assignments\AssignmentTypes.sql"
 
+--units
+:r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
+:r $(rootPath)\"..\Insert\Units\Units.sql"
+:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
+:r $(rootPath)\"..\Insert\Units\UnitUsers.sql"
+:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"
+
 --docs
 :r $(rootPath)\"..\Insert\Docs\RegisterIndexes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocCasePartTypes.sql"
@@ -165,9 +172,4 @@ GO
 :r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
 :r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"
 
---units
-:r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
-:r $(rootPath)\"..\Insert\Units\Units.sql"
-:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
-:r $(rootPath)\"..\Insert\Units\UnitUsers.sql"
-:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"
+

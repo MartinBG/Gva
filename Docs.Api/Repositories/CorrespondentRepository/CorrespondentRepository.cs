@@ -162,13 +162,15 @@ namespace Docs.Api.Repositories.CorrespondentRepository
             return correspondent;
         }
 
-        public void DeteleCorrespondent(int id)
+        public void DeteleCorrespondent(int id, byte[] corrVersion)
         {
             Correspondent correspondent = this.unitOfWork.DbContext.Set<Correspondent>()
                 .FirstOrDefault(e => e.CorrespondentId == id);
 
             if (correspondent != null)
             {
+                correspondent.EnsureForProperVersion(corrVersion);
+
                 this.unitOfWork.DbContext.Set<Correspondent>().Remove(correspondent);
             }
             else

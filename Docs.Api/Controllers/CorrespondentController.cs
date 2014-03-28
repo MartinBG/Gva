@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Common.Api.UserContext;
+using Common.Extensions;
 
 namespace Docs.Api.Controllers
 {
@@ -17,12 +18,20 @@ namespace Docs.Api.Controllers
     {
         private Common.Data.IUnitOfWork unitOfWork;
         private Docs.Api.Repositories.CorrespondentRepository.ICorrespondentRepository correspondentRepository;
+        private UserContext userContext;
 
         public CorrespondentController(Common.Data.IUnitOfWork unitOfWork,
             Docs.Api.Repositories.CorrespondentRepository.ICorrespondentRepository correspondentRepository)
         {
             this.unitOfWork = unitOfWork;
             this.correspondentRepository = correspondentRepository;
+        }
+
+        protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+
+            this.userContext = this.Request.GetUserContext();
         }
 
         /// <summary>
@@ -139,7 +148,6 @@ namespace Docs.Api.Controllers
             CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
                 .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
 
-            UserContext userContext = this.Request.GetUserContext();
             switch (correspondentType.Alias)
             {
                 case "BulgarianCitizen":
@@ -150,7 +158,7 @@ namespace Docs.Api.Controllers
                         corr.BgCitizenFirstName,
                         corr.BgCitizenLastName,
                         corr.BgCitizenUIN,
-                        userContext);
+                        this.userContext);
                     break;
                 case "Foreigner":
                     newCorr = this.correspondentRepository.CreateForeigner(
@@ -162,7 +170,7 @@ namespace Docs.Api.Controllers
                         corr.ForeignerCountryId,
                         corr.ForeignerSettlement,
                         corr.ForeignerBirthDate,
-                        userContext);
+                        this.userContext);
                     break;
                 case "LegalEntity":
                     newCorr = this.correspondentRepository.CreateLegalEntity(
@@ -171,7 +179,7 @@ namespace Docs.Api.Controllers
                        true,
                        corr.LegalEntityName,
                        corr.LegalEntityBulstat,
-                       userContext);
+                       this.userContext);
                     break;
                 case "ForeignLegalEntity":
                     newCorr = this.correspondentRepository.CreateFLegalEntity(
@@ -183,7 +191,7 @@ namespace Docs.Api.Controllers
                         corr.FLegalEntityRegisterName,
                         corr.FLegalEntityRegisterNumber,
                         corr.FLegalEntityOtherData,
-                        userContext);
+                        this.userContext);
                     break;
                 default:
                     newCorr = new Correspondent();
@@ -205,14 +213,20 @@ namespace Docs.Api.Controllers
 
             foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
             {
-                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, userContext);
+                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
             }
 
             this.unitOfWork.Save();
 
             CorrespondentDO returnValue = new CorrespondentDO(newCorr);
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = returnValue.CorrespondentId, obj = returnValue });
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
+                new
+                {
+                    err = "",
+                    correspondentId = returnValue.CorrespondentId,
+                    obj = returnValue
+                });
         }
 
         /// <summary>
@@ -226,17 +240,7 @@ namespace Docs.Api.Controllers
         {
             var oldCorr = this.correspondentRepository.GetCorrespondent(id);
 
-            //?
-            if (oldCorr == null)
-            {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Кореспондентът не може да бъде намерен." });
-            }
-
-            //?
-            if (!oldCorr.Version.SequenceEqual(corr.Version))
-            {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "Съществува нова версия на кореспондента." });
-            }
+            oldCorr.EnsureForProperVersion(corr.Version);
 
             oldCorr.BgCitizenFirstName = null;
             oldCorr.BgCitizenLastName = null;
@@ -304,28 +308,38 @@ namespace Docs.Api.Controllers
             oldCorr.Alias = corr.Alias;
             oldCorr.IsActive = corr.IsActive;
 
-            UserContext userContext = this.Request.GetUserContext();
             oldCorr.ModifyDate = DateTime.Now;
-            oldCorr.ModifyUserId = userContext.UserId;
+            oldCorr.ModifyUserId = this.userContext.UserId;
 
             foreach (CorrespondentContactDO cc in corr.CorrespondentContacts.Where(e => !e.IsNew && e.IsDeleted && e.CorrespondentContactId.HasValue))
             {
-                oldCorr.DeleteCorrespondentContact(cc.CorrespondentContactId.Value, userContext);
+                oldCorr.DeleteCorrespondentContact(cc.CorrespondentContactId.Value, this.userContext);
             }
 
             foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsDirty && !e.IsNew && !e.IsDeleted && e.CorrespondentContactId.HasValue))
             {
-                oldCorr.UpdateCorrespondentContact(cc.CorrespondentContactId.Value, cc.Name, cc.UIN, cc.Note, cc.IsActive, userContext);
+                oldCorr.UpdateCorrespondentContact(
+                    cc.CorrespondentContactId.Value,
+                    cc.Name,
+                    cc.UIN,
+                    cc.Note,
+                    cc.IsActive,
+                    this.userContext);
             }
 
             foreach (var cc in corr.CorrespondentContacts.Where(e => e.IsNew && !e.IsDeleted))
             {
-                oldCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, userContext);
+                oldCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
             }
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { err = "", correspondentId = oldCorr.CorrespondentId });
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
+                new
+                {
+                    err = "",
+                    correspondentId = oldCorr.CorrespondentId
+                });
         }
 
         /// <summary>
@@ -334,9 +348,9 @@ namespace Docs.Api.Controllers
         /// <param name="id">Идентификатор на кореспондент</param>
         /// <returns></returns>
         [HttpDelete]
-        public HttpResponseMessage DeleteCorrespondent(int id)
+        public HttpResponseMessage DeleteCorrespondent(int id, string corrVersion)
         {
-            this.correspondentRepository.DeteleCorrespondent(id);
+            this.correspondentRepository.DeteleCorrespondent(id, Helper.StringToVersion(corrVersion));
             this.unitOfWork.Save();
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);

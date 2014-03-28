@@ -10,6 +10,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using SubSpec;
 using Xunit;
 using Xunit.Extensions;
+using Common.Extensions;
 
 namespace Docs.Api.Tests.Specs
 {
@@ -184,7 +185,8 @@ namespace Docs.Api.Tests.Specs
 
             "can be deleted".Assert(() =>
             {
-                correspondentRepository1.DeteleCorrespondent(crCorrespondentId);
+                var corr1 = correspondentRepository1.GetCorrespondent(crCorrespondentId);
+                correspondentRepository1.DeteleCorrespondent(crCorrespondentId, corr1.Version);
                 unitOfWork1.Save();
 
                 var corr2 = correspondentRepository2.GetCorrespondent(crCorrespondentId);
