@@ -269,21 +269,13 @@ namespace Gva.Api.Controllers
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
                 DocSourceType manuelSoruce = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
 
-                var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-
-                dynamic personAppData = applicationNewDO.AppPart;
-
-                PartVersion partVersion = lot.CreatePart("personDocumentApplications/*", personAppData, userContext);
-
-                lot.Commit(userContext, lotEventDispatcher);
-
                 Doc doc = docRepository.CreateDoc(
                     applicationNewDO.Doc.DocDirectionId,
                     documentEntryType.DocEntryTypeId,
                     draftStatus.DocStatusId,
                     applicationNewDO.Doc.DocSubject,
                     applicationNewDO.Doc.DocCasePartTypeId,
-                    null,
+                    manuelSoruce.DocSourceTypeId,
                     applicationNewDO.Doc.DocDestinationTypeId,
                     applicationNewDO.Doc.DocTypeId,
                     applicationNewDO.Doc.DocFormatTypeId,
@@ -297,52 +289,20 @@ namespace Gva.Api.Controllers
                 };
                 doc.DocRelations.Add(docRelation);
 
-                dynamic appFile = applicationNewDO.AppFile;
-                var docFile = doc.CreateDocFile(
-                    (int)appFile.docFileKindId,
-                    (int)appFile.docFileTypeId,
-                    (string)appFile.name,
-                    (string)appFile.docFile.name,
-                    String.Empty,
-                    (Guid)appFile.docFile.key,
-                    true,
-                    true,
-                    userContext);
-
-
-                GvaLotFile lotFile = new GvaLotFile()
-                {
-                    LotPart = partVersion.Part,
-                    DocFile = docFile,
-                    GvaCaseTypeId = (int)appFile.caseTypeId,
-                    PageIndex = (string)appFile.bookPageNumber,
-                    PageNumber = (int)appFile.pageCount
-                };
-                lotFile.SavePageIndex(lotFile.PageIndex);
-
-                GvaApplication application = new GvaApplication()
+                GvaApplication gvaApplication = new GvaApplication()
                 {
                     LotId = applicationNewDO.LotId,
                     Doc = doc,
-                    GvaAppLotPart = partVersion.Part
                 };
 
-                GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
-                {
-                    GvaApplication = application,
-                    GvaLotFile = lotFile,
-                    DocFile = docFile
-
-                };
-
-                applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
+                applicationRepository.AddGvaApplication(gvaApplication);
 
                 this.unitOfWork.Save();
                 this.docRepository.spSetDocUsers(doc.DocId);
 
                 transaction.Commit();
 
-                return Ok(new { id = application.GvaApplicationId });
+                return Ok(new { id = gvaApplication.GvaApplicationId });
             }
         }
 
