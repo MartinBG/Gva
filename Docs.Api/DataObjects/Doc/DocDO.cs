@@ -132,7 +132,6 @@ namespace Docs.Api.DataObjects
         public Nullable<int> AssignmentTypeId { get; set; }
         public Nullable<System.DateTime> AssignmentDate { get; set; }
         public Nullable<System.DateTime> AssignmentDeadline { get; set; }
-        public bool IsExamined { get; set; }
         public bool IsCase { get; set; }
         public bool IsRegistered { get; set; }
         public bool IsSigned { get; set; }
@@ -270,26 +269,26 @@ namespace Docs.Api.DataObjects
 
         public void Set()
         {
-            if (this.DocDirectionAlias == "Incomming")
-            {
-                this.IsDocIncoming = true;
-            }
-            else if (this.DocDirectionAlias == "Internal")
-            {
-                this.IsDocInternal = true;
-            }
-            else if (this.DocDirectionAlias == "Outgoing")
-            {
-                this.IsDocOutgoing = true;
-            }
-            else if (this.DocDirectionAlias == "InternalOutgoing")
-            {
-                this.IsDocInternalOutgoing = true;
-            }
-
             if (this.DocEntryTypeAlias == "Document")
             {
                 this.IsDocument = true;
+
+                if (this.DocDirectionAlias == "Incomming")
+                {
+                    this.IsDocIncoming = true;
+                }
+                else if (this.DocDirectionAlias == "Internal")
+                {
+                    this.IsDocInternal = true;
+                }
+                else if (this.DocDirectionAlias == "Outgoing")
+                {
+                    this.IsDocOutgoing = true;
+                }
+                else if (this.DocDirectionAlias == "InternalOutgoing")
+                {
+                    this.IsDocInternalOutgoing = true;
+                }
             }
             else if (this.DocEntryTypeAlias == "Resolution")
             {

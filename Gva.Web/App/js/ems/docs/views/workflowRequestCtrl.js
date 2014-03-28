@@ -15,16 +15,18 @@
     switch ($state.current.url) {
     case '/signRequest':
       $scope.workflowModel.docWorkflowActionAlias = 'SignRequest';
-      //docs.edit.workflows.request.toUnit
-      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitSign');
+      $scope.workflowModel.confirmTitle =
+        l10n.get('docs.edit.workflows.request.toUnitSign');
       break;
     case '/discussRequest':
       $scope.workflowModel.docWorkflowActionAlias = 'DiscussRequest';
-      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitDiscuss');
+      $scope.workflowModel.confirmTitle =
+        l10n.get('docs.edit.workflows.request.toUnitDiscuss');
       break;
     case '/approvalRequest':
       $scope.workflowModel.docWorkflowActionAlias = 'ApprovalRequest';
-      $scope.workflowModel.confirmTitle = l10n.get('docs.edit.workflows.request.toUnitApproval');
+      $scope.workflowModel.confirmTitle =
+        l10n.get('docs.edit.workflows.request.toUnitApproval');
       break;
     case '/registrationRequest':
       $scope.workflowModel.docWorkflowActionAlias = 'RegistrationRequest';
@@ -36,7 +38,6 @@
     $scope.save = function () {
       $scope.workflowForm.$validate().then(function () {
         if ($scope.workflowForm.$valid) {
-
           return DocWorkflow.save({
             id: $scope.workflowModel.docId,
             docVersion: $scope.workflowModel.docVersion

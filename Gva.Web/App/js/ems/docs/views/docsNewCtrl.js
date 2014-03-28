@@ -37,9 +37,11 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-            return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
-          });
+          return Doc.save($scope.docModel.doc)
+            .$promise
+            .then(function (result) {
+              return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
+            });
         }
       });
     };
@@ -48,10 +50,11 @@
       $scope.setParentDocId();
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          //?rename
-          return Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-            return $state.go('root.docs.edit.view', { id: result.docId });
-          });
+          return Doc.save($scope.docModel.doc)
+            .$promise
+            .then(function (result) {
+              return $state.go('root.docs.edit.view', { id: result.docId });
+            });
         }
       });
     };

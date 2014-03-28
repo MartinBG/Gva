@@ -1,3 +1,4 @@
+using System;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -12,6 +13,10 @@ namespace Docs.Api.Models
 
         public int DocUnitRoleId { get; set; }
 
+        public DateTime AddDate { get; set; }
+
+        public int AddUserId { get; set; }
+
         public byte[] Version { get; set; }
 
         public virtual Doc Doc { get; set; }
@@ -19,6 +24,8 @@ namespace Docs.Api.Models
         public virtual DocUnitRole DocUnitRole { get; set; }
 
         public virtual Unit Unit { get; set; }
+
+        public virtual Common.Api.Models.User User { get; set; }
     }
 
     public class DocUnitMap : EntityTypeConfiguration<DocUnit>
@@ -41,6 +48,8 @@ namespace Docs.Api.Models
             this.Property(t => t.DocId).HasColumnName("DocId");
             this.Property(t => t.UnitId).HasColumnName("UnitId");
             this.Property(t => t.DocUnitRoleId).HasColumnName("DocUnitRoleId");
+            this.Property(t => t.AddDate).HasColumnName("AddDate");
+            this.Property(t => t.AddUserId).HasColumnName("AddUserId");
             this.Property(t => t.Version).HasColumnName("Version");
 
             // Relationships
@@ -54,6 +63,9 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.DocUnits)
                 .HasForeignKey(d => d.UnitId);
+            this.HasRequired(t => t.User)
+                .WithMany()
+                .HasForeignKey(d => d.AddUserId);
         }
     }
 }

@@ -372,7 +372,9 @@ namespace Docs.Api.Models
             DocUnit docUnit = new DocUnit
             {
                 DocUnitRoleId = docUnitRoleId,
-                UnitId = unitId
+                UnitId = unitId,
+                AddUserId = userContext.UserId,
+                AddDate = currentDate
             };
 
             this.DocUnits.Add(docUnit);
@@ -683,20 +685,20 @@ namespace Docs.Api.Models
 
         public DocElectronicServiceStage EndCurrentDocElectronicServiceStage(UserContext userContext)
         {
-            DateTime current = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
 
-            this.ModifyDate = current;
+            this.ModifyDate = currentDate;
             this.ModifyUserId = userContext.UserId;
 
-            DocElectronicServiceStage currentStage = this.DocElectronicServiceStages
+            DocElectronicServiceStage current = this.DocElectronicServiceStages
                 .SingleOrDefault(e => e.IsCurrentStage);
 
-            if (currentStage != null)
+            if (current != null)
             {
-                currentStage.IsCurrentStage = false;
-                currentStage.EndingDate = current;
+                current.IsCurrentStage = false;
+                current.EndingDate = currentDate;
 
-                return currentStage;
+                return current;
             }
             else
             {
@@ -733,9 +735,9 @@ namespace Docs.Api.Models
             bool isCurrentStage,
             UserContext userContext)
         {
-            DateTime current = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
 
-            this.ModifyDate = current;
+            this.ModifyDate = currentDate;
             this.ModifyUserId = userContext.UserId;
 
             DocElectronicServiceStage previous = this.DocElectronicServiceStages
@@ -745,7 +747,7 @@ namespace Docs.Api.Models
                 previous.IsCurrentStage = false;
                 if (!previous.EndingDate.HasValue)
                 {
-                    previous.EndingDate = current;
+                    previous.EndingDate = currentDate;
                 }
             }
 

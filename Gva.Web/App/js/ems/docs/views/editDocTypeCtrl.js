@@ -35,20 +35,23 @@
       }
     }, true);
 
-    $scope.cancel = function () {
-      return $state.go('^');
-    };
-
     $scope.save = function () {
       $scope.docTypeForm.$validate().then(function () {
         if ($scope.docTypeForm.$valid) {
-
-          return Doc.setDocType({ id: $scope.oldDoc.docId }, $scope.doc).$promise
+          return Doc.setDocType({
+            id: $scope.oldDoc.docId,
+            docVersion: $scope.oldDoc.version
+          }, $scope.doc)
+            .$promise
             .then(function () {
-            return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });
-          });
+              return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });
+            });
         }
       });
+    };
+
+    $scope.cancel = function () {
+      return $state.go('^');
     };
 
     $scope.fullFieldName = function (shortFieldName) {
@@ -66,12 +69,12 @@
 
       docTypeModel.missingFields = $scope.missingFields;
       docTypeModel.allFields = $scope.allFields;
-      docTypeModel.showFields= $scope.showFields;
+      docTypeModel.showFields = $scope.showFields;
 
       return $state.go('root.docs.edit.case.docType.selectUnit');
     };
 
-    function createFieldsObj (from, to, cCopy, importedBy, madeBy, inCharge,
+    function createFieldsObj(from, to, cCopy, importedBy, madeBy, inCharge,
       controlling, roleReaders, editors, roleRegistrators) {
       return {
         from: from,
@@ -87,7 +90,7 @@
       };
     }
 
-    function getModeName (docTypeId, docDirectionId) {
+    function getModeName(docTypeId, docDirectionId) {
       var modeName;
       if (docTypeId === 1) {
         modeName = 'resolution';
@@ -116,15 +119,15 @@
       return modeName;
     }
 
-    function calculateFields () {
+    function calculateFields() {
       var missingFields = [[]];
       var allFields = [[]];
 
       var oldModeName = getModeName(doc.docTypeId, doc.docDirectionId);
       var newModeName = getModeName($scope.doc.docTypeId, $scope.doc.docDirectionId);
 
-      var oldModeFields = _(modeFields).filter( {modeName: oldModeName} ).first().fields;
-      var newModeFields = _(modeFields).filter( {modeName: newModeName} ).first().fields;
+      var oldModeFields = _(modeFields).filter({ modeName: oldModeName }).first().fields;
+      var newModeFields = _(modeFields).filter({ modeName: newModeName }).first().fields;
 
       _(fieldsList).forEach(function (item) {
         if (newModeFields[item] === true) {
@@ -149,7 +152,7 @@
         $scope.doc[item.docFlagname] = false;
       });
 
-      var newMode = _(modeFields).filter( {modeName: newModeName} ).first();
+      var newMode = _(modeFields).filter({ modeName: newModeName }).first();
       $scope.doc[newMode.docFlagname] = true;
 
       $scope.missingFields = missingFields;

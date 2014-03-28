@@ -107,7 +107,6 @@
         })
           .$promise
           .then(function () {
-            //?
             return $state.transitionTo($state.current, $stateParams, { reload: true });
           });
       });
@@ -155,7 +154,7 @@
       return Doc.register({
         id: doc.docId,
         docVersion: doc.version
-      })
+      }, {})
         .$promise
         .then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });

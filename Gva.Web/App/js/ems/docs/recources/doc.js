@@ -7,10 +7,10 @@
       function ($resource) {
         return $resource('/api/docs/:id', { id: '@docId' },
           {
-            'createNew': {
-              method: 'POST',
-              url: '/api/docs/new/create'
-            },
+            //'createNew': {
+            //  method: 'POST',
+            //  url: '/api/docs/new/create'
+            //},
             'createChild': {
               method: 'POST',
               url: '/api/docs/:id/create',
@@ -38,12 +38,14 @@
                 docVersion: '@docVersion',
                 docCasePartTypeId: '@docCasePartTypeId'
               }
+            },
+            'setDocType': {
+              method: 'POST',
+              url: '/api/docs/:id/setDocType',
+              params: {
+                docVersion: '@docVersion'
+              }
             }
-            //?
-            //'setDocType': {
-            //  method: 'POST',
-            //  url: '/api/docs/:id/setDocType'
-            //}
           });
       }]);
 }(angular));

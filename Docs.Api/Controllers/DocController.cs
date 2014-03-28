@@ -1079,6 +1079,76 @@ namespace Docs.Api.Controllers
         }
 
         [HttpPost]
+        public HttpResponseMessage UpdateTechDoc(int id, string docVersion, DocDO doc)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var oldDoc = this.docRepository.Find(id, e => e.DocUnits);
+
+                #region DocUnits
+
+                List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
+
+                doc.DocUnitsFrom.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "From").DocUnitRoleId; });
+                doc.DocUnitsTo.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "To").DocUnitRoleId; });
+                doc.DocUnitsImportedBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "ImportedBy").DocUnitRoleId; });
+                doc.DocUnitsMadeBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "MadeBy").DocUnitRoleId; });
+                doc.DocUnitsCCopy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "CCopy").DocUnitRoleId; });
+                doc.DocUnitsInCharge.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "InCharge").DocUnitRoleId; });
+                doc.DocUnitsControlling.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Controlling").DocUnitRoleId; });
+                doc.DocUnitsReaders.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Readers").DocUnitRoleId; });
+                doc.DocUnitsEditors.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Editors").DocUnitRoleId; });
+                doc.DocUnitsRegistrators.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Registrators").DocUnitRoleId; });
+
+                var allDocUnits = doc.DocUnitsTo.Union(
+                    doc.DocUnitsFrom.Union(
+                        doc.DocUnitsImportedBy.Union(
+                            doc.DocUnitsMadeBy.Union(
+                                doc.DocUnitsCCopy.Union(
+                                    doc.DocUnitsInCharge.Union(
+                                        doc.DocUnitsControlling.Union(
+                                            doc.DocUnitsReaders.Union(
+                                                doc.DocUnitsEditors.Union(
+                                                    doc.DocUnitsRegistrators)))))))));
+
+                var listDocUnits = oldDoc.DocUnits.ToList();
+
+                for (var i = 0; i < listDocUnits.Count; i++)
+                {
+                    var matching = allDocUnits
+                        .Where(e => e.NomValueId == listDocUnits[i].UnitId && e.ForeignKeyId == listDocUnits[i].DocUnitRoleId)
+                        .ToList();
+
+                    if (matching.Any())
+                    {
+                        matching.ForEach(e => { e.IsProcessed = true; });
+                    }
+                    else
+                    {
+                        oldDoc.DeleteDocUnit(listDocUnits[i], userContext);
+                    }
+                }
+                foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
+                {
+                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, userContext);
+                }
+
+                #endregion
+
+                oldDoc.DocTypeId= doc.DocTypeId;
+                oldDoc.DocDirectionId = doc.DocDirectionId;
+
+                this.unitOfWork.Save();
+
+                this.docRepository.spSetDocUsers(oldDoc.DocId);
+
+                transaction.Commit();
+
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            }
+        }
+
+        [HttpPost]
         public HttpResponseMessage RegisterDoc(int id, string docVersion)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);

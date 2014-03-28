@@ -10,7 +10,13 @@
     Doc,
     docs
   ) {
-    $scope.docs = docs.documents;
+    $scope.docs = _.map(docs.documents, function (doc) {
+      doc.correspondentNames =
+        $sce.trustAsHtml(doc.correspondentNames);
+
+      return doc;
+    });
+
     $scope.docCount = docs.documentCount;
     $scope.msg = $sce.trustAsHtml(docs.msg);
 
