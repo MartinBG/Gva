@@ -58,7 +58,14 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetPersons(string lin = null, string uin = null, string names = null, string licences = null, string ratings = null, string organization = null, bool exact = false)
+        public IHttpActionResult GetPersons(
+            string lin = null,
+            string uin = null,
+            string names = null,
+            string licences = null,
+            string ratings = null,
+            string organization = null,
+            bool exact = false)
         {
             var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, exact);
 
@@ -153,35 +160,6 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(applications);
-        }
-
-        [Route("~/api/nomenclatures/personCaseTypes")]
-        public IHttpActionResult GetCaseTypes(int? lotId = null, string term = null, int? id = null)
-        {
-            if (id.HasValue)
-            {
-                var caseType = this.caseTypeRepository.GetCaseType(id.Value);
-                return Ok(Mapper.Map<GvaCaseType, NomValue>(caseType));
-            }
-
-            IEnumerable<GvaCaseType> caseTypes;
-            if (lotId.HasValue)
-            {
-                caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId.Value);
-            }
-            else
-            {
-                var set = this.lotRepository.GetSet("Person");
-                caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set.SetId);
-            }
-
-            if (!string.IsNullOrWhiteSpace(term))
-            {
-                term = term.ToLower();
-                caseTypes = caseTypes.Where(ct => ct.Name.ToLower().Contains(term));
-            }
-
-            return Ok(Mapper.Map<IEnumerable<GvaCaseType>, IEnumerable<NomValue>>(caseTypes));
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),

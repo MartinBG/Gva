@@ -45,7 +45,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonsController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<GvaNomenclaturesController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<GvaNomController>().InstancePerApiRequest();
         }
     }
 }

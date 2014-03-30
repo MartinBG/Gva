@@ -12,7 +12,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using Common.Utils.Expressions;
+using Common.Linq;
 using NLog;
 
 namespace Common.Data

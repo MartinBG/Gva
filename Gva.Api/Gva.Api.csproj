@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
-    <Compile Include="Controllers\GvaNomenclaturesController.cs" />
+    <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />

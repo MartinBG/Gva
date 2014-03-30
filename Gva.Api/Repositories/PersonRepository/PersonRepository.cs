@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
+using Common.Linq;
 using Gva.Api.Models;
 using System.Data.Entity;
 
@@ -15,41 +16,31 @@ namespace Gva.Api.Repositories.PersonRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaPerson> GetPersons(string lin, string uin, string names, string licences, string ratings, string organization, bool exact)
+        public IEnumerable<GvaPerson> GetPersons(
+            string lin = null,
+            string uin = null,
+            string names = null,
+            string licences = null,
+            string ratings = null,
+            string organization = null,
+            bool exact = false,
+            int offset = 0,
+            int? limit = null)
         {
-            var persons = this.unitOfWork.DbContext.Set<GvaPerson>().AsQueryable();
+            var predicate = PredicateBuilder.True<GvaPerson>();
 
-            if (!string.IsNullOrWhiteSpace(lin))
-            {
-                persons = persons.Where(p => exact ? p.Lin == lin : p.Lin.Contains(lin));
-            }
+            predicate = predicate
+                .AndStringMatches(p => p.Lin, lin, exact)
+                .AndStringMatches(p => p.Uin, uin, exact)
+                .AndStringMatches(p => p.Names, names, exact)
+                .AndStringMatches(p => p.Licences, licences, exact)
+                .AndStringMatches(p => p.Ratings, ratings, exact)
+                .AndStringMatches(p => p.Organization, organization, exact);
 
-            if (!string.IsNullOrWhiteSpace(uin))
-            {
-                persons = persons.Where(p => exact ? p.Uin == uin : p.Uin.Contains(uin));
-            }
-
-            if (!string.IsNullOrWhiteSpace(names))
-            {
-                persons = persons.Where(p => exact ? p.Names == names : p.Names.Contains(names));
-            }
-
-            if (!string.IsNullOrWhiteSpace(licences))
-            {
-                persons = persons.Where(p => exact ? p.Licences == licences : p.Licences.Contains(licences));
-            }
-
-            if (!string.IsNullOrWhiteSpace(ratings))
-            {
-                persons = persons.Where(p => exact ? p.Ratings == ratings : p.Ratings.Contains(ratings));
-            }
-
-            if (!string.IsNullOrWhiteSpace(organization))
-            {
-                persons = persons.Where(p => exact ? p.Organization == organization : p.Organization.Contains(organization));
-            }
-
-            return persons;
+            return this.unitOfWork.DbContext.Set<GvaPerson>()
+                .Where(predicate)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
         }
 
         public GvaPerson GetPerson(int personId)

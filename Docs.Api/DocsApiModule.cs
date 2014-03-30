@@ -21,7 +21,8 @@ namespace Docs.Api
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<DocController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<MockNomController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<DocNomController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<UnitController>().InstancePerApiRequest();
         }
     }
 }

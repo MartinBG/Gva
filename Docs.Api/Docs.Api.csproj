@@ -74,8 +74,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\DocController.cs" />
-    <Compile Include="Controllers\MockNomController.cs" />
+    <Compile Include="Controllers\DocNomController.cs" />
     <Compile Include="Controllers\CorrespondentController.cs" />
     <Compile Include="DataObjects\Correspondent\CorrespondentContactDO.cs" />
     <Compile Include="DataObjects\Correspondent\CorrespondentDO.cs" />

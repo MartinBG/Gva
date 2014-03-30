@@ -5,18 +5,12 @@ namespace Common.Api.Repositories.NomRepository
 {
     public interface INomRepository
     {
-        IEnumerable<NomValue> GetNoms(string alias, string term);
+        NomValue GetNom(string alias, int id);
 
-        IEnumerable<NomValue> GetNomsWithProperty(string alias, string propName, string propValue, string term);
+        NomValue GetNom(string alias, string valueAlias);
 
-        IEnumerable<NomValue> GetNomsContainingProperty(string alias, string propName, string propValue, string term);
+        IEnumerable<NomValue> GetNoms(string alias, int[] ids);
 
-        IEnumerable<NomValue> GetDocumentRoles(string categoryAlias, string[] staffCodes, string term);
-
-        IEnumerable<NomValue> GetDocumentTypes(bool isIdDocument, string[] staffCodes, string term);
-
-        IEnumerable<NomValue> GetNomsForParent(string alias, int parentValueId, string term);
-
-        IEnumerable<NomValue> GetNomsForGrandparent(string alias, int grandparentValueId, string parentAlias, string term);
+        IEnumerable<NomValue> GetNoms(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null);
     }
 }

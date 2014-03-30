@@ -98,12 +98,12 @@
           <div class="form-group col-sm-6 col-md-4">
             <label class=" control-label" l10n-text="persons.personDocumentTrainingDirective.ratingClass">
             </label>
-            <sc-nomenclature ng-model="model.ratingClass" ng-disabled="model.ratingType" name="ratingClass" alias="'ratingClasses'" params="{ staffTypeId: model.staffType.nomValueId, parentAlias: 'ratingClassGroups' }">
+            <sc-nomenclature ng-model="model.ratingClass" ng-disabled="model.ratingType" name="ratingClass" alias="'ratingClasses'" params="{ grandParentValueId: model.staffType.nomValueId }">
             </sc-nomenclature>
           </div>
           <div class="form-group col-sm-6 col-md-5">
             <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.authorization"></label>
-            <sc-nomenclature ng-model="model.authorization" name="authorization" alias="'authorizations'" params="{ staffTypeId: model.staffType.nomValueId, parentAlias: 'authorizationGroups' }">
+            <sc-nomenclature ng-model="model.authorization" name="authorization" alias="'authorizations'" params="{ grandParentValueId: model.staffType.nomValueId }">
             </sc-nomenclature>
           </div>
         </div>
@@ -112,13 +112,13 @@
           <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
             <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentType"></label>
             <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCode: model.staffType.code }">
+            <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCodes: [model.staffType.code] }">
             </sc-nomenclature>
           </div>
           <div class="form-group col-sm-6 col-md-5" sc-has-error="personOtherDocumentRole">
             <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentRole"></label>
             <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffCode: model.staffType.code }">
+            <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffCodes: [model.staffType.code] }">
             </sc-nomenclature>
           </div>
         </div>

@@ -20,7 +20,7 @@ namespace Common.Api
 
             //controllers
             moduleBuilder.RegisterType<BlobController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<NomenclatureController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<NomController>().InstancePerApiRequest();
         }
     }
 }

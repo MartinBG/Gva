@@ -45,10 +45,11 @@ namespace Gva.Api.Repositories.CaseTypeRepository
                 .SingleOrDefault(ct => ct.GvaCaseTypeId == caseTypeId);
         }
 
-        public IEnumerable<GvaCaseType> GetCaseTypesForSet(int setId)
+        public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias)
         {
             return this.unitOfWork.DbContext.Set<GvaCaseType>()
-                .Where(ct => ct.LotSetId == setId);
+                .Where(ct => ct.LotSet.Alias == setAlias)
+                .ToList();
         }
 
         public IEnumerable<GvaCaseType> GetCaseTypesForLot(int lotId)

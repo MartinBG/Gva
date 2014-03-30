@@ -73,7 +73,7 @@
               resultPromise;
 
           if (isMultiple) {
-            resultPromise = Nomenclature.query(createQuery({ ids: val.join(',') })).$promise;
+            resultPromise = Nomenclature.query(createQuery({ ids: val })).$promise;
           } else {
             resultPromise = Nomenclature.get(createQuery({ id: val })).$promise;
           }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Common.Utils.Expressions
+namespace Common.Linq
 {
     public static class PredicateBuilder
     {

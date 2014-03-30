@@ -97,7 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
-    <Compile Include="Controllers\NomenclatureController.cs" />
+    <Compile Include="Controllers\NomController.cs" />
     <Compile Include="Http\BlobWriteStream.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Http\BlobReadStream.cs" />
