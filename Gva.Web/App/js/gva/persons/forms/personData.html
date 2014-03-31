@@ -108,9 +108,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-3 col-md-2">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="caseTypes">
           <label class="control-label" l10n-text="persons.personDataDirective.caseTypes"></label>
-          <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'personCaseTypes'" multiple></sc-nomenclature>
+          <sc-validation-error field-name="caseTypes" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'personCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple></sc-nomenclature>
         </div>
       </div>
     </div>

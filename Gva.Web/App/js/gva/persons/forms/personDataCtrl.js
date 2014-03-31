@@ -21,6 +21,10 @@
     $scope.generateLIN = function () {
       $scope.model.lin = '11731';
     };
+
+    $scope.requireCaseTypes = function () {
+      return $scope.model.caseTypes.length > 0;
+    };
   }
 
   PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person'];
