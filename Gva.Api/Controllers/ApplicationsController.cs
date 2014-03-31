@@ -113,10 +113,9 @@ namespace Gva.Api.Controllers
         [Route("{id}/parts/linkNew")]
         public IHttpActionResult PostLinkNewPart(int id, ApplicationPartDO linkNewPart)
         {
-            //todo 
             if (string.IsNullOrEmpty(linkNewPart.SetPartAlias))
             {
-                throw new InvalidOperationException(string.Format("Error: empty parameters."));
+                return BadRequest();
             }
 
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -170,7 +169,7 @@ namespace Gva.Api.Controllers
         {
             if (newPart.DocId == null)
             {
-                throw new InvalidOperationException(string.Format("Error: empty parameters."));
+                return BadRequest();
             }
 
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -234,7 +233,7 @@ namespace Gva.Api.Controllers
         {
             if (linkExistingPart.DocFileId == null || linkExistingPart.PartId == null)
             {
-                throw new InvalidOperationException(string.Format("Error: empty parameters."));
+                return BadRequest();
             }
 
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -507,11 +506,12 @@ namespace Gva.Api.Controllers
         }
 
         [Route("docFile")]
+        [HttpGet]
         public IHttpActionResult GetDocFile(int? docFileId = null)
         {
             if (docFileId == null)
             {
-                //return Forbidden;
+                return BadRequest();
             }
 
             DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().Find(docFileId.Value);
@@ -519,6 +519,20 @@ namespace Gva.Api.Controllers
             DocFileDO returnValue = new DocFileDO(docFile);
 
             return Ok(returnValue);
+        }
+
+        [Route("doc")]
+        [HttpGet]
+        public IHttpActionResult GetDoc(int? docId = null)
+        {
+            if (docId == null)
+            {
+                return BadRequest();
+            }
+
+            Doc doc = this.unitOfWork.DbContext.Set<Doc>().Find(docId.Value);
+
+            return Ok(new { documentNumber = doc.RegUri });
         }
     }
 }

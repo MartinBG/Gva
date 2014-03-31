@@ -38,6 +38,11 @@
               method: 'GET',
               url: '/api/apps/docFile',
               params: { docFileId: '@docFileId' }
+            },
+            'getDoc': {
+              method: 'GET',
+              url: '/api/apps/doc',
+              params: { docId: '@docId' }
             }
           });
       }]);

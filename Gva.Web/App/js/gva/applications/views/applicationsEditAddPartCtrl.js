@@ -11,7 +11,7 @@
     selectedPublisher
     ) {
     $scope.applicationPart = applicationPart;
- 
+
     $scope.applicationPart.part.documentPublisher = selectedPublisher.pop() ||
       $scope.applicationPart.part.documentPublisher;
 
@@ -76,32 +76,42 @@
 
   ApplicationsEditAddPartCtrl.$resolve = {
     applicationPart: [
+      '$q',
       '$stateParams',
       'Application',
       'application',
-      function ($stateParams, Application, application) {
+      function ($q, $stateParams, Application, application) {
+        var docFile = $q.defer(),
+            doc = $q.defer();
+
+        if ($stateParams.setPartAlias === 'application' && !!$stateParams.docId) {
+          doc = Application.getDoc({ docId: $stateParams.docId });
+        }
         if (!!$stateParams.docFileId) {
-          return Application.getDocFile({ docFileId: $stateParams.docFileId }).$promise
-            .then(function (docFile) {
-              docFile.lotId = application.lotId;
-              return {
-                hasDocFile: !!$stateParams.docFileId,
-                setPartAlias: $stateParams.setPartAlias,
-                appFile: docFile,
-                part: {}
-              };
-            });
+          docFile = Application.getDocFile({ docFileId: $stateParams.docFileId });
         }
 
-        return {
-          docId: $stateParams.docId,
-          hasDocFile: !!$stateParams.docFileId,
-          setPartAlias: $stateParams.setPartAlias,
-          appFile: {
-            lotId: application.lotId
-          },
-          part: {}
-        };
+        return $q.all({
+          doc: doc.$promise,
+          docFile: docFile.$promise
+        }).then(function (res) {
+          var part = {};
+          res.docFile = res.docFile || {};
+          res.docFile.lotId = application.lotId;
+
+          if ($stateParams.setPartAlias === 'application') {
+            part.documentNumber = res.doc.documentNumber;
+            //applicationType = docType?
+          }
+
+          return {
+            docId: $stateParams.docId,
+            hasDocFile: !!$stateParams.docFileId,
+            setPartAlias: $stateParams.setPartAlias,
+            appFile: res.docFile,
+            part: part
+          };
+        });
       }
     ],
     selectedPublisher: function () {
