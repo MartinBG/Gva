@@ -1,0 +1,52 @@
+﻿<div class="tab-content">
+  <div class="panel panel-default">
+    
+
+      <div class="panel panel-default">
+      <nav class="panel-heading">
+        <div class="collapse navbar-collapse" style="padding: 0px;">
+          <button sc-click="register()" name="registerBtn" type="button" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-ok"></i>
+            Регистрирай
+          </button>
+          <button sc-click="cancel()" name="cancelBtn" type="button" class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-remove"></i>
+            Отказ
+          </button>
+        </div>
+      </nav>
+
+      <div class="well-sm panel-body">
+        <ng-form name="docForm" sc-validate="{}">
+          <div class="well-sm panel-body ">
+
+            <div class="row">
+              <div class="form-group col-md-8">
+                <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
+                <div>
+                  <sc-text name="caseRegUri" readonly="true"
+                    value="{{docModel.parentDoc ? docModel.parentDoc.regUri + ' ' + docModel.parentDoc.docTypeName + ' ' + docModel.parentDoc.docSubject : ''}}">
+                  </sc-text>
+                </div>
+              </div>
+            </div>
+
+            <ems-doc-new-common name="docNewCommonForm" ng-model="docModel"></ems-doc-new-common>
+
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
+                <sc-nomenclature ng-model="docModel.doc.correspondents" name="correspondents" alias="'correspondent'" mode="id" multiple></sc-nomenclature>
+              </div>
+            </div>
+
+          </div>
+        </ng-form>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>

@@ -509,5 +509,27 @@ namespace Gva.Api.Controllers
 
             return Ok(new { documentNumber = doc.RegUri });
         }
+
+        [Route("{id}/attachDocFile")]
+        [HttpPost]
+        public IHttpActionResult PostAttachDocFile(int id, int docId, DocFileDO[] files)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var doc = this.docRepository.Find(docId);
+                foreach(var file in files)
+                {
+                    doc.CreateDocFile(file.DocFileKindId, file.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+
+            return Ok();
+        }
     }
 }

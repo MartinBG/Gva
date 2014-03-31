@@ -44,6 +44,18 @@
       });
     };
 
+    $scope.newDocFile = function (docId) {
+      return $state.go('root.applications.edit.case.newDocFile', {
+        docId: docId
+      });
+    };
+
+    $scope.childDoc = function (docId) {
+      return $state.go('root.applications.edit.case.childDoc', {
+        parentDocId: docId
+      });
+    };
+
     $scope.viewPart = function (docCase) {
       var state;
 

@@ -1696,16 +1696,23 @@
             description: 'Тип',
             act: 'Дело',
             viewDoc: 'Преглед',
+            childDoc: 'Подчинен документ',
             page: 'стр.',
             linkNew: 'Добави страница',
             linkPart: 'Свържи със страница',
-            newFile: 'Нов файл и страница'
+            newFile: 'Нов файл и страница',
+            newDocFile: 'Нов файл по съществуваща страница'
           },
           newFile: {
             title: 'Нов документ в описа',
             documentType: 'Тип на документ',
             cancel: 'Назад',
             addPart: 'Продължи'
+          },
+          newDocFile: {
+            title: 'Нов файл',
+            cancel: 'Назад',
+            save: 'Запиши'
           },
           linkFile: {
             title: 'Свържи документ в описа',

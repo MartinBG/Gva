@@ -5,7 +5,7 @@
         <th style="width: 250px;"><span l10n-text="applications.edit.case.regNumber"></span></th>
         <th><span l10n-text="applications.edit.case.description"></span></th>
         <th><span l10n-text="applications.edit.case.act"></span></th>
-        <th style="width: 75px;"></th>
+        <th style="width: 200px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
         <td><strong ng-bind-html="adc.docDescriptionHtml"></strong></td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a>
+          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a> / <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a>
         </td>
       </tr>
       <tr ng-repeat="alf in adc.applicationLotFiles">
@@ -33,7 +33,7 @@
       </tr>
       <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a>
+          <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a> / <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
         </td>
       </tr>
     </tbody>

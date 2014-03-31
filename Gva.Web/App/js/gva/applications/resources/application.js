@@ -43,6 +43,11 @@
               method: 'GET',
               url: '/api/apps/doc',
               params: { docId: '@docId' }
+            },
+            'attachDocFile': {
+              method: 'POST',
+              url: '/api/apps/:id/attachDocFile',
+              params: { docId: '@docId' }
             }
           });
       }]);
