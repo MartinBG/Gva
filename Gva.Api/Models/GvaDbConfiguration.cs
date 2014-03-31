@@ -8,6 +8,7 @@ namespace Gva.Api.Models
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new GvaCaseTypeMap());
+            modelBuilder.Configurations.Add(new GvaCorrespondentMap());
             modelBuilder.Configurations.Add(new GvaLotCaseMap());
             modelBuilder.Configurations.Add(new GvaApplicationMap());
             modelBuilder.Configurations.Add(new GvaApplicationSearchMap());

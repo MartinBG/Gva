@@ -2,6 +2,7 @@
 using System.Linq;
 using Common.Data;
 using Gva.Api.Models;
+using System.Data.Entity;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -60,6 +61,18 @@ namespace Gva.Api.Repositories.PersonRepository
         public void AddPerson(GvaPerson person)
         {
             this.unitOfWork.DbContext.Set<GvaPerson>().Add(person);
+        }
+
+        public GvaCorrespondent GetGvaCorrespondentByPersonId(int lotId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaCorrespondent>()
+                .Include(e => e.Correspondent)
+                .SingleOrDefault(p => p.LotId == lotId);
+        }
+
+        public void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent)
+        {
+            this.unitOfWork.DbContext.Set<GvaCorrespondent>().Add(gvaCorrespondent);
         }
     }
 }

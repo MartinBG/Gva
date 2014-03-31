@@ -112,6 +112,7 @@
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
+    <Compile Include="Models\GvaCorrespondent.cs" />
     <Compile Include="Models\GvaApplicationSearch.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />

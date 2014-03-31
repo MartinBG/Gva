@@ -8,6 +8,7 @@ GO
 :r $(rootPath)\"Tables\GvaCaseTypes.sql"
 :r $(rootPath)\"Tables\GvaLotCases.sql"
 :r $(rootPath)\"Tables\GvaApplications.sql"
+:r $(rootPath)\"Tables\GvaCorrespondents.sql"
 :r $(rootPath)\"Tables\GvaFiles.sql"
 :r $(rootPath)\"Tables\GvaLotFiles.sql"
 :r $(rootPath)\"Tables\GvaAppLotFiles.sql"
