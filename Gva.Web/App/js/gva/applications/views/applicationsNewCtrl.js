@@ -53,7 +53,11 @@
           };
 
           return Application.create(newApplication).$promise.then(function (app) {
-            return $state.go('root.applications.edit.case', { id: app.id });
+            return $state.go('root.applications.edit.case.addPart', {
+              id: app.applicationId,
+              docId: app.docId,
+              setPartAlias: 'application'
+            });
           });
         }
       });

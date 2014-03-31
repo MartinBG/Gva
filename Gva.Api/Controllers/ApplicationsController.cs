@@ -275,6 +275,7 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
                 DocSourceType manuelSoruce = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
@@ -302,6 +303,17 @@ namespace Gva.Api.Controllers
                 {
                     newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
                 }
+
+                List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
+                        .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                        .ToList();
+
+                foreach (var docTypeUnitRole in docTypeUnitRoles)
+                {
+                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
+                }
+
+                this.docRepository.GenerateAccessCode(newDoc, userContext);
 
                 GvaApplication newGvaApplication = new GvaApplication()
                 {
@@ -355,9 +367,17 @@ namespace Gva.Api.Controllers
 
                 this.docRepository.spSetDocUsers(newDoc.DocId);
 
+                this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
+
+                this.unitOfWork.Save();
+
                 transaction.Commit();
 
-                return Ok(new { id = newGvaApplication.GvaApplicationId });
+                return Ok(new 
+                { 
+                    applicationId = newGvaApplication.GvaApplicationId,
+                    docId = newGvaApplication.DocId,
+                });
             }
         }
 
@@ -378,7 +398,11 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
 
-                return Ok(new { id = application.GvaApplicationId });
+                return Ok(new
+                {
+                    applicationId = application.GvaApplicationId,
+                    docId = application.DocId,
+                });
             }
         }
 
