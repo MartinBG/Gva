@@ -73,6 +73,7 @@
     <Content Include="Create\Tables\Correspondents\CorrespondentGroups.sql" />
     <Content Include="Create\Tables\Correspondents\Correspondents.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocCasePartMovements.sql" />
     <Content Include="Create\Tables\Documents\DocCasePartTypes.sql" />
     <Content Include="Create\Tables\Documents\DocClassifications.sql" />
     <Content Include="Create\Tables\Documents\DocCorrespondentContacts.sql" />

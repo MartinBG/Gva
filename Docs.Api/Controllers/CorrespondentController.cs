@@ -14,6 +14,7 @@ using Common.Extensions;
 
 namespace Docs.Api.Controllers
 {
+    [Authorize]
     public class CorrespondentController : ApiController
     {
         private Common.Data.IUnitOfWork unitOfWork;

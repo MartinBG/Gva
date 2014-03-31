@@ -67,6 +67,8 @@ GO
 :r $(rootPath)"\Tables\Documents\DocUnitPermissions.sql"
 :r $(rootPath)"\Tables\Documents\DocUsers.sql"
 
+:r $(rootPath)"\Tables\Documents\DocCasePartMovements.sql"
+
 --Others
 :r $(rootPath)"\Tables\Others\IrregularityTypes.sql"
 

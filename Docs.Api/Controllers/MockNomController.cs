@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Docs.Api.Controllers
 {
+    [Authorize]
     public class MockNomController : ApiController
     {
         private Common.Data.IUnitOfWork unitOfWork;

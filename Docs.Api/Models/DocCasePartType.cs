@@ -7,6 +7,7 @@ namespace Docs.Api.Models
     {
         public DocCasePartType()
         {
+            this.DocCasePartMovements = new List<DocCasePartMovement>();
             this.Docs = new List<Doc>();
         }
 
@@ -21,6 +22,8 @@ namespace Docs.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
+
+        public virtual ICollection<DocCasePartMovement> DocCasePartMovements { get; set; }
 
         public virtual ICollection<Doc> Docs { get; set; }
     }

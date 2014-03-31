@@ -11,6 +11,7 @@ namespace Docs.Api.Models
     {
         public Doc()
         {
+            this.DocCasePartMovements = new List<DocCasePartMovement>();
             this.DocClassifications = new List<DocClassification>();
             this.DocCorrespondentContacts = new List<DocCorrespondentContact>();
             this.DocCorrespondents = new List<DocCorrespondent>();
@@ -88,6 +89,8 @@ namespace Docs.Api.Models
         public byte[] Version { get; set; }
 
         public virtual AssignmentType AssignmentType { get; set; }
+
+        public virtual ICollection<DocCasePartMovement> DocCasePartMovements { get; set; }
 
         public virtual DocCasePartType DocCasePartType { get; set; }
 
@@ -826,6 +829,71 @@ namespace Docs.Api.Models
             last.IsCurrentStage = true;
 
             return last;
+        }
+
+        #endregion
+
+        #region DocCasePartMovements
+
+        public DocCasePartMovement CreateDocCasePartMovement(int docCasePartTypeId, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocCasePartMovement docCasePartMovement = new DocCasePartMovement
+            {
+                DocCasePartTypeId = docCasePartTypeId,
+                UserId = userContext.UserId,
+                MovementDate = currentDate
+            };
+
+            this.DocCasePartMovements.Add(docCasePartMovement);
+
+            return docCasePartMovement;
+        }
+
+        public DocCasePartMovement CreateDocCasePartMovement(DocCasePartMovement docCasePartMovement, UserContext userContext)
+        {
+            if (docCasePartMovement.DocCasePartTypeId.HasValue)
+            {
+                return this.CreateDocCasePartMovement(docCasePartMovement.DocCasePartTypeId.Value, userContext);
+            }
+            else
+            {
+                throw new Exception("The docCasePartMovement has no DocCasePartTypeId ID.");
+            }
+        }
+
+        public void DeleteDocCasePartMovement(DocCasePartMovement docCasePartMovement, UserContext userContext)
+        {
+            bool result = this.DocCasePartMovements.Remove(docCasePartMovement);
+
+            if (result)
+            {
+                this.ModifyDate = DateTime.Now;
+                this.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                throw new Exception("The docCorrespondent to be removed is not contained in the doc.");
+            }
+
+        }
+
+        public void DeleteDocCasePartMovement(int docCasePartMovementId, UserContext userContext)
+        {
+            DocCasePartMovement docCasePartMovement = this.DocCasePartMovements.FirstOrDefault(e => e.DocCasePartMovementId == docCasePartMovementId);
+
+            if (docCasePartMovement != null)
+            {
+                this.DeleteDocCasePartMovement(docCasePartMovement, userContext);
+            }
+            else
+            {
+                throw new Exception(string.Format("No docCasePartMovement with ID = {0} found.", docCasePartMovementId));
+            }
         }
 
         #endregion

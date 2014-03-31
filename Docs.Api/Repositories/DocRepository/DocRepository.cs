@@ -150,14 +150,11 @@ namespace Docs.Api.Repositories.DocRepository
                         DocCasePartType dcptControl = docCasePartTypes.SingleOrDefault(e => e.Alias == "Control");
                         DocStatus cancelStatus = docStatuses.SingleOrDefault(e => e.Alias == "Canceled");
 
-                        var caseDocRelations = this.GetCaseRelationsByDocId(caseDocId,
+                        List<DocRelation> caseDocRelations = this.GetCaseRelationsByDocId(caseDocId,
                             e => e.Doc.DocCasePartType,
-                            //e => e.Doc.DocCasePartMovements.Select(dc => dc.User), //?
                             e => e.Doc.DocDirection,
                             e => e.Doc.DocType,
-                            e => e.Doc.DocStatus,
-                            e => e.RootDoc,
-                            e => e.ParentDoc.DocType)
+                            e => e.Doc.DocStatus)
                             .Where(e => e.RootDocId == caseDocId
                                 && e.Doc.DocId != id
                                 && e.Doc.DocCasePartTypeId != dcptControl.DocCasePartTypeId
@@ -266,13 +263,7 @@ namespace Docs.Api.Repositories.DocRepository
             doc.ModifyDate = DateTime.Now;
             doc.ModifyUserId = userContext.UserId;
 
-            //?
-            //        DocCasePartMovement dcpm = new DocCasePartMovement();
-            //        dcpm.Doc = doc;
-            //        dcpm.DocCasePartTypeId = doc.DocCasePartTypeId;
-            //        dcpm.UserId = userContext.UserId;
-            //        dcpm.MovementDate = DateTime.Now;
-            //        this.unitOfWork.Repo<DocCasePartMovement>().Add(dcpm);
+            doc.CreateDocCasePartMovement(docCasePartTypeId, userContext);
 
             return doc;
         }

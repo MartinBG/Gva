@@ -17,6 +17,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Docs.Api.Controllers
 {
+    [Authorize]
     public class DocController : ApiController
     {
         private Common.Data.IUnitOfWork unitOfWork;
@@ -376,7 +377,12 @@ namespace Docs.Api.Controllers
                             rootDocId = parentDocRelation.RootDocId;
                         }
                     }
-                    newDoc.CreateDocRelation(preDoc.ParentDocId, rootDocId, userContext);
+                    newDoc.CreateDocRelation(preDoc.ParentDocId, rootDocId, this.userContext);
+
+                    if (preDoc.DocCasePartTypeId.HasValue)
+                    {
+                        newDoc.CreateDocCasePartMovement(preDoc.DocCasePartTypeId.Value, this.userContext);
+                    }
 
                     //? parent/child classifications inheritance
                     List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
@@ -385,7 +391,7 @@ namespace Docs.Api.Controllers
 
                     foreach (var docTypeClassification in docTypeClassifications)
                     {
-                        newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
+                        newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
                     }
 
                     List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
@@ -394,17 +400,17 @@ namespace Docs.Api.Controllers
 
                     foreach (var docTypeUnitRole in docTypeUnitRoles)
                     {
-                        newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
+                        newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
                     }
 
                     foreach (var correspondent in preDoc.Correspondents)
                     {
-                        newDoc.CreateDocCorrespondent(correspondent, userContext);
+                        newDoc.CreateDocCorrespondent(correspondent, this.userContext);
                     }
 
                     if (newDoc.IsCase)
                     {
-                        this.docRepository.GenerateAccessCode(newDoc, userContext);
+                        this.docRepository.GenerateAccessCode(newDoc, this.userContext);
                     }
 
                     this.unitOfWork.Save();
@@ -413,7 +419,7 @@ namespace Docs.Api.Controllers
 
                     if (preDoc.Register)
                     {
-                        this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
+                        this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
                     }
 
                     this.unitOfWork.Save();
@@ -491,7 +497,7 @@ namespace Docs.Api.Controllers
 
                 DocRelation parentRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                     .FirstOrDefault(e => e.DocId == id);
-                newDoc.CreateDocRelation(id, parentRelation.RootDocId, userContext);
+                newDoc.CreateDocRelation(id, parentRelation.RootDocId, this.userContext);
 
                 //? parent/child classifications inheritance
                 List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
@@ -500,7 +506,7 @@ namespace Docs.Api.Controllers
 
                 foreach (var docTypeClassification in docTypeClassifications)
                 {
-                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
+                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
                 }
 
                 List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
@@ -509,7 +515,7 @@ namespace Docs.Api.Controllers
 
                 foreach (var docTypeUnitRole in docTypeUnitRoles)
                 {
-                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
+                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
                 }
 
                 this.unitOfWork.Save();
@@ -725,7 +731,7 @@ namespace Docs.Api.Controllers
             returnValue.DocRelations.AddRange(
                 this.docRepository.GetCaseRelationsByDocId(id,
                     e => e.Doc.DocCasePartType,
-                //e => e.Doc.DocCasePartMovements.Select(dc => dc.User),
+                    e => e.Doc.DocCasePartMovements.Select(dc => dc.User),
                     e => e.Doc.DocDirection,
                     e => e.Doc.DocType,
                     e => e.Doc.DocStatus)
@@ -856,12 +862,12 @@ namespace Docs.Api.Controllers
                     }
                     else
                     {
-                        oldDoc.DeleteDocUnit(listDocUnits[i], userContext);
+                        oldDoc.DeleteDocUnit(listDocUnits[i], this.userContext);
                     }
                 }
                 foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
                 {
-                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, userContext);
+                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, this.userContext);
                 }
 
                 #endregion
@@ -882,12 +888,12 @@ namespace Docs.Api.Controllers
                     }
                     else
                     {
-                        oldDoc.DeleteDocCorrespondent(listDocCorrespondents[i], userContext);
+                        oldDoc.DeleteDocCorrespondent(listDocCorrespondents[i], this.userContext);
                     }
                 }
                 foreach (var du in doc.DocCorrespondents.Where(e => !e.IsProcessed))
                 {
-                    oldDoc.CreateDocCorrespondent(du.NomValueId, userContext);
+                    oldDoc.CreateDocCorrespondent(du.NomValueId, this.userContext);
                 }
 
                 #endregion
@@ -995,11 +1001,11 @@ namespace Docs.Api.Controllers
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))
                 {
-                    oldDoc.DeleteDocFile(file.DocFileId.Value, userContext);
+                    oldDoc.DeleteDocFile(file.DocFileId.Value, this.userContext);
                     //? mark as deleted
                     //DocFile df = this.unitOfWork.Repo<DocFile>().Find(file.DocFileId.Value);
                     //df.IsActive = false;
-                    //df.Name = string.Format("{0} (изтрит от {1})", df.Name, userContext.FullName);
+                    //df.Name = string.Format("{0} (изтрит от {1})", df.Name, this.userContext.FullName);
                 }
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && !e.IsDeleted && e.IsDirty && e.DocFileId.HasValue))
@@ -1125,12 +1131,12 @@ namespace Docs.Api.Controllers
                     }
                     else
                     {
-                        oldDoc.DeleteDocUnit(listDocUnits[i], userContext);
+                        oldDoc.DeleteDocUnit(listDocUnits[i], this.userContext);
                     }
                 }
                 foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
                 {
-                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, userContext);
+                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, this.userContext);
                 }
 
                 #endregion
