@@ -12,14 +12,14 @@
         <td>{{ dc.classificationName }}</td>
         <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
         <td style="text-align: right;">
-          <a ng-show="readonly" sc-click="removeDocClassification(dc)" l10n-text="docs.edit.classifications.delete"></a>
+          <a ng-show="!readonly" sc-click="removeDocClassification(dc)" l10n-text="docs.edit.classifications.delete"></a>
         </td>
       </tr>
     </tbody>
     <tbody>
       <tr>
         <td colspan="3" style="text-align: right;">
-          <a ng-show="readonly" sc-click="addDocClassification(dc)" l10n-text="docs.edit.classifications.add"></a>
+          <a ng-show="!readonly" sc-click="addDocClassification(dc)" l10n-text="docs.edit.classifications.add"></a>
         </td>
       </tr>
     </tbody>
