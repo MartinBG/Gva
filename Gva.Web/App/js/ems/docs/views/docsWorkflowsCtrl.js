@@ -11,10 +11,10 @@
   ) {
     $scope.removeDocWorkflow = function (dwf) {
       return DocWorkflow.remove({
-        docId: doc.docId,
+        id: doc.docId,
         docVersion: doc.version,
         itemId: dwf.docWorkflowId
-      })
+      }, {})
         .$promise
         .then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
@@ -24,9 +24,9 @@
 
   DocsWorkflowsCtrl.$inject = [
     '$scope',
-    'DocWorkflow',
     '$state',
     '$stateParams',
+    'DocWorkflow',
     'doc'
   ];
 
