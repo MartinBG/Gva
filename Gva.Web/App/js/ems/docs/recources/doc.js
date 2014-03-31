@@ -45,6 +45,20 @@
               params: {
                 docVersion: '@docVersion'
               }
+            },
+            'markAsRead': {
+              method: 'POST',
+              url: '/api/docs/:id/markAsRead',
+              params: {
+                docVersion: '@docVersion'
+              }
+            },
+            'markAsUnread': {
+              method: 'POST',
+              url: '/api/docs/:id/markAsUnread',
+              params: {
+                docVersion: '@docVersion'
+              }
             }
           });
       }]);

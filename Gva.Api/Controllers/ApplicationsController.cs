@@ -454,33 +454,8 @@ namespace Gva.Api.Controllers
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
-            List<int> loadedDocIds = returnValue.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
-            List<DocUser> docUsersForList = this.unitOfWork.DbContext.Set<DocUser>()
-               .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
-               .ToList();
-
             foreach (var item in returnValue)
             {
-                if (docView == DocView.ForControl || docView == DocView.ForManagement)
-                {
-                    int? rootId = this.unitOfWork.DbContext.Set<DocRelation>()
-                        .FirstOrDefault(e => e.DocId == item.DocId)
-                        .RootDocId;
-
-                    if (rootId.HasValue)
-                    {
-                        DocRelation rootDocRelation = this.unitOfWork.DbContext.Set<DocRelation>()
-                            .Include(e => e.Doc.DocDirection)
-                            .Include(e => e.Doc.DocCasePartType)
-                            .Include(e => e.Doc.DocType)
-                            .FirstOrDefault(e => e.DocId == rootId.Value);
-
-                        item.CaseDocRelation = new DocRelationDO(rootDocRelation);
-                    }
-                }
-
-                item.SetDocUsers(docUsersForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
-
                 var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
                     .Include(e => e.Correspondent.CorrespondentType)
                     .Where(e => e.DocId == item.DocId)

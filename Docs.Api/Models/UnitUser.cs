@@ -7,11 +7,17 @@ namespace Docs.Api.Models
     public partial class UnitUser
     {
         public int UnitUserId { get; set; }
+
         public int UserId { get; set; }
+
         public int UnitId { get; set; }
+
         public bool IsActive { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual Unit Unit { get; set; }
+
         public virtual Common.Api.Models.User User { get; set; }
     }
 

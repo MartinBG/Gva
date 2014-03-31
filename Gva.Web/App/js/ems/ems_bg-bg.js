@@ -48,9 +48,9 @@
           docDirectionName: 'Тип',
           view: {
             docFile: {
-              docKind: 'Вид файл',
+              kind: 'Вид файл',
               name: 'Наименование',
-              docType: 'Тип файл',
+              type: 'Тип файл',
               attachedFile: 'Прикачен файл'
             },
             content: 'Прикачени файлове',
@@ -188,7 +188,7 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           docName: 'Относно',
-          docTypeId: 'Вид на документа',
+          docType: 'Вид на документа',
           docStatusId: 'Статус на документа',
           corrs: 'Кореспонденти',
           units: 'Отнесено към',

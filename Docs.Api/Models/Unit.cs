@@ -7,6 +7,7 @@ namespace Docs.Api.Models
     {
         public Unit()
         {
+            this.DocHasReads = new List<DocHasRead>();
             this.DocTypeUnitRoles = new List<DocTypeUnitRole>();
             this.DocUnits = new List<DocUnit>();
             this.DocUsers = new List<DocUser>();
@@ -31,6 +32,8 @@ namespace Docs.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
+
+        public virtual ICollection<DocHasRead> DocHasReads { get; set; }
 
         public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
 

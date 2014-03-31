@@ -46,13 +46,22 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        public void SetDocUsers(List<DocUser> docUsers, UnitUser unitUser = null)
+        public void SetIsRead(List<DocHasRead> docHasReads, UnitUser unitUser = null)
         {
-            if (docUsers != null && unitUser != null)
+            if (docHasReads != null && unitUser != null)
             {
-                this.IsRead = docUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
+                this.IsRead = docHasReads.Any(e => e.UnitId == unitUser.UnitId && e.HasRead);
             }
         }
+
+        //? is it going to be used somewhere to set docusers?
+        //public void SetDocUsers(List<DocUser> docUsers, UnitUser unitUser = null)
+        //{
+        //    if (docUsers != null && unitUser != null)
+        //    {
+        //        this.IsRead = docUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
+        //    }
+        //}
 
         public int? DocId { get; set; }
         public DateTime? RegDate { get; set; }

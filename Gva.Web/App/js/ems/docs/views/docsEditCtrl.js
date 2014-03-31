@@ -24,13 +24,27 @@
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
-      throw 'not implemented';
-      //$scope.doc.isRead = true;
+      return Doc
+        .markAsRead({
+          id: $scope.doc.docId,
+          docVersion: $scope.doc.version
+        }, {})
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     $scope.markAsUnread = function () {
-      throw 'not implemented';
-      //$scope.doc.isRead = false;
+      return Doc
+        .markAsUnread({
+          id: $scope.doc.docId,
+          docVersion: $scope.doc.version
+        }, {})
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     $scope.eSign = function () {

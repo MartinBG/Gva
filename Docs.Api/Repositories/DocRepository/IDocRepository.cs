@@ -20,6 +20,10 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterId(int id);
 
+        Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext);
+
+        Doc MarkAsUnread(int id, byte[] docVersion, int unitId, UserContext userContext);
+
         List<DocElectronicServiceStage> GetCaseElectronicServiceStagesByDocId(
             int id,
             params Expression<Func<DocElectronicServiceStage, object>>[] includes);

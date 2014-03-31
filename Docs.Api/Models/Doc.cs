@@ -17,6 +17,7 @@ namespace Docs.Api.Models
             this.DocCorrespondents = new List<DocCorrespondent>();
             this.DocElectronicServiceStages = new List<DocElectronicServiceStage>();
             this.DocFiles = new List<DocFile>();
+            this.DocHasReads = new List<DocHasRead>();
             this.DocIncomingDocs = new List<DocIncomingDoc>();
             this.DocRelations = new List<DocRelation>();
             this.DocRelations1 = new List<DocRelation>();
@@ -111,6 +112,8 @@ namespace Docs.Api.Models
         public virtual ICollection<DocFile> DocFiles { get; set; }
 
         public virtual DocFormatType DocFormatType { get; set; }
+
+        public virtual ICollection<DocHasRead> DocHasReads { get; set; }
 
         public virtual ICollection<DocIncomingDoc> DocIncomingDocs { get; set; }
 
@@ -856,14 +859,7 @@ namespace Docs.Api.Models
 
         public DocCasePartMovement CreateDocCasePartMovement(DocCasePartMovement docCasePartMovement, UserContext userContext)
         {
-            if (docCasePartMovement.DocCasePartTypeId.HasValue)
-            {
-                return this.CreateDocCasePartMovement(docCasePartMovement.DocCasePartTypeId.Value, userContext);
-            }
-            else
-            {
-                throw new Exception("The docCasePartMovement has no DocCasePartTypeId ID.");
-            }
+            return this.CreateDocCasePartMovement(docCasePartMovement.DocCasePartTypeId, userContext);
         }
 
         public void DeleteDocCasePartMovement(DocCasePartMovement docCasePartMovement, UserContext userContext)
@@ -893,6 +889,68 @@ namespace Docs.Api.Models
             else
             {
                 throw new Exception(string.Format("No docCasePartMovement with ID = {0} found.", docCasePartMovementId));
+            }
+        }
+
+        #endregion
+
+        #region DocHasReads
+
+        public void MarkAsRead(int unitId, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocHasRead docHasRead = this.DocHasReads.SingleOrDefault(e => e.UnitId == unitId);
+
+            if (docHasRead != null)
+            {
+                docHasRead.HasRead = true;
+                docHasRead.ModifyDate = currentDate;
+                docHasRead.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                docHasRead = new DocHasRead
+                {
+                    HasRead = true,
+                    UnitId = unitId,
+                    ModifyDate = currentDate,
+                    ModifyUserId = userContext.UserId
+                };
+
+                this.DocHasReads.Add(docHasRead);
+            }
+        }
+
+        public void MarkAsUnread(int unitId, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            DocHasRead docHasRead = this.DocHasReads.SingleOrDefault(e => e.UnitId == unitId);
+
+            if (docHasRead != null)
+            {
+                docHasRead.HasRead = false;
+                docHasRead.ModifyDate = currentDate;
+                docHasRead.ModifyUserId = userContext.UserId;
+            }
+            else
+            {
+                docHasRead = new DocHasRead
+                {
+                    HasRead = false,
+                    UnitId = unitId,
+                    ModifyDate = currentDate,
+                    ModifyUserId = userContext.UserId
+                };
+
+                this.DocHasReads.Add(docHasRead);
             }
         }
 

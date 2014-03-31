@@ -50,6 +50,38 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<int?>("spGetDocRegisterId", parameters).FirstOrDefault();
         }
 
+        public Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext)
+        {
+            Doc doc = this.Find(id, e => e.DocHasReads);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.MarkAsRead(unitId, userContext);
+
+            return doc;
+        }
+
+        public Doc MarkAsUnread(int id, byte[] docVersion, int unitId, UserContext userContext)
+        {
+            Doc doc = this.Find(id, e => e.DocHasReads);
+
+            if (doc == null)
+            {
+                throw new Exception("Doc now found");
+            }
+
+            doc.EnsureForProperVersion(docVersion);
+
+            doc.MarkAsUnread(unitId, userContext);
+
+            return doc;
+        }
+
         public List<DocElectronicServiceStage> GetCaseElectronicServiceStagesByDocId(
             int id,
             params Expression<Func<DocElectronicServiceStage, object>>[] includes)

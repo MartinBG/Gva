@@ -14,6 +14,7 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new CorrespondentGroupMap());
             modelBuilder.Configurations.Add(new CorrespondentMap());
             modelBuilder.Configurations.Add(new CorrespondentTypeMap());
+            modelBuilder.Configurations.Add(new DocCasePartMovementMap());
             modelBuilder.Configurations.Add(new DocCasePartTypeMap());
             modelBuilder.Configurations.Add(new DocClassificationMap());
             modelBuilder.Configurations.Add(new DocCorrespondentContactMap());
@@ -27,6 +28,7 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocFileMap());
             modelBuilder.Configurations.Add(new DocFileTypeMap());
             modelBuilder.Configurations.Add(new DocFormatTypeMap());
+            modelBuilder.Configurations.Add(new DocHasReadMap());
             modelBuilder.Configurations.Add(new DocIncomingDocMap());
             modelBuilder.Configurations.Add(new DocRegisterMap());
             modelBuilder.Configurations.Add(new DocRelationMap());

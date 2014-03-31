@@ -268,6 +268,11 @@ namespace Docs.Api.Controllers
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
             List<int> loadedDocIds = returnValue.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
+
+            List<DocHasRead> docHasReadsForList = this.unitOfWork.DbContext.Set<DocHasRead>()
+                .Where(du => du.UnitId == unitUser.UnitId && loadedDocIds.Contains(du.DocId))
+               .ToList();
+
             List<DocUser> docUsersForList = this.unitOfWork.DbContext.Set<DocUser>()
                .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
                .ToList();
@@ -292,7 +297,7 @@ namespace Docs.Api.Controllers
                     }
                 }
 
-                item.SetDocUsers(docUsersForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
+                item.SetIsRead(docHasReadsForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
 
                 var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
                     .Include(e => e.Correspondent.CorrespondentType)
@@ -569,6 +574,10 @@ namespace Docs.Api.Controllers
             //    {
             //        return ControllerContext.Request.CreateResponse(HttpStatusCode.Forbidden);
             //    }
+
+            this.unitOfWork.DbContext.Set<DocHasRead>()
+            .Where(e => e.DocId == id)
+            .ToList();
 
             this.unitOfWork.DbContext.Set<DocFile>()
              .Include(e => e.DocFileType)
@@ -1141,7 +1150,7 @@ namespace Docs.Api.Controllers
 
                 #endregion
 
-                oldDoc.DocTypeId= doc.DocTypeId;
+                oldDoc.DocTypeId = doc.DocTypeId;
                 oldDoc.DocDirectionId = doc.DocDirectionId;
 
                 this.unitOfWork.Save();
@@ -1392,6 +1401,38 @@ namespace Docs.Api.Controllers
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
             doc.ReverseDocElectronicServiceStage(doc.GetCurrentDocElectronicServiceStage(), this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage MarkAsRead(int id, string docVersion)
+        {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            this.docRepository.MarkAsRead(
+                id,
+                Helper.StringToVersion(docVersion),
+                unitUser.UnitId,
+                this.userContext);
+
+            this.unitOfWork.Save();
+
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage MarkAsUnread(int id, string docVersion)
+        {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            this.docRepository.MarkAsUnread(
+                id,
+                Helper.StringToVersion(docVersion),
+                unitUser.UnitId,
+                this.userContext);
 
             this.unitOfWork.Save();
 

@@ -101,9 +101,10 @@ namespace Docs.Api.DataObjects
                 }
 
                 this.UnitUser = new UnitUserDO(unitUser);
-                if (d.DocUsers != null && unitUser != null)
+
+                if (d.DocHasReads != null && unitUser != null)
                 {
-                    this.IsRead = d.DocUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
+                    this.IsRead = d.DocHasReads.Any(e => e.UnitId == unitUser.UnitId && e.HasRead);
                 }
             }
         }

@@ -7,13 +7,21 @@ namespace Docs.Api.Models
     public partial class DocCasePartMovement
     {
         public int DocCasePartMovementId { get; set; }
+
         public int DocId { get; set; }
-        public Nullable<int> DocCasePartTypeId { get; set; }
-        public System.DateTime MovementDate { get; set; }
+
+        public int DocCasePartTypeId { get; set; }
+
+        public DateTime MovementDate { get; set; }
+
         public int UserId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual DocCasePartType DocCasePartType { get; set; }
+
         public virtual Doc Doc { get; set; }
+
         public virtual Common.Api.Models.User User { get; set; }
     }
 

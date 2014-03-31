@@ -66,6 +66,7 @@ GO
 :r $(rootPath)"\Tables\Documents\DocTypeClassifications.sql"
 :r $(rootPath)"\Tables\Documents\DocUnitPermissions.sql"
 :r $(rootPath)"\Tables\Documents\DocUsers.sql"
+:r $(rootPath)"\Tables\Documents\DocHasReads.sql"
 
 :r $(rootPath)"\Tables\Documents\DocCasePartMovements.sql"
 

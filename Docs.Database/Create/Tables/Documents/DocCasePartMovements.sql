@@ -5,7 +5,7 @@ CREATE TABLE DocCasePartMovements
 (
     DocCasePartMovementId		INT IDENTITY (1, 1) NOT NULL,
 	DocId						INT NOT NULL,
-	DocCasePartTypeId			INT NULL,
+	DocCasePartTypeId			INT NOT NULL,
     MovementDate				DATETIME NOT NULL,
 	UserId						INT NOT NULL,
     Version						ROWVERSION     NOT NULL,
