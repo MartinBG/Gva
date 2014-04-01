@@ -14,7 +14,7 @@
         <td><strong ng-bind-html="adc.docDescriptionHtml"></strong></td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a> / <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a>
+          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a> / <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a> {{(adc.nextStatusText ? '/': '')}} <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
         </td>
       </tr>
       <tr ng-repeat="alf in adc.applicationLotFiles">

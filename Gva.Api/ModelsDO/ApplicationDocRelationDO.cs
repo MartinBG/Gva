@@ -32,6 +32,8 @@ namespace Gva.Api.ModelsDO
                     this.DocDocDirectionName = d.Doc.DocDirection != null ? d.Doc.DocDirection.Name : string.Empty;
                     this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
                     this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.DocStatus.Name : string.Empty;
+                    this.DocDocStatusAlias = d.Doc.DocStatus.Alias;
+                    this.DocVersion = d.Doc.Version;
                 }
             }
         }
@@ -45,6 +47,8 @@ namespace Gva.Api.ModelsDO
         public string DocDocDirectionName { get; set; }
         public string DocRegUri { get; set; }
         public string DocDocStatusName { get; set; }
+        public string DocDocStatusAlias { get; set; }
+        public byte[] DocVersion { get; set; }
 
         public string DocDocTypeName { get; set; }
         public string DocSubject { get; set; }

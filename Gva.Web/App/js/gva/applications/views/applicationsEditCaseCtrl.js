@@ -5,12 +5,30 @@
   function ApplicationsEditCaseCtrl(
     $scope,
     $state,
+    $stateParams,
     $sce,
-    application
+    application,
+    DocStatus
     ) {
     $scope.application = application;
 
     _.map(application.applicationDocCase, function (adc) {
+
+      switch (adc.docDocStatusAlias) {
+      case 'Draft':
+        adc.nextStatusText = 'Отбелязване като изготвен';
+        break;
+      case 'Prepared':
+        adc.nextStatusText = 'Отбелязване като обработен';
+        break;
+      case 'Processed':
+        adc.nextStatusText = 'Отбелязване като приключен';
+        break;
+      default:
+        adc.nextStatusText = null;
+        break;
+      }
+
       if (!adc.docDataHtml.$$unwrapTrustedValue) {
         adc.docDataHtml = $sce.trustAsHtml(adc.docDataHtml);
       }
@@ -21,6 +39,16 @@
       return adc;
     });
 
+    $scope.nextStatus = function (docId, docVersion) {
+      return DocStatus.next({
+        docId: docId,
+        docVersion: docVersion
+      })
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
+    };
 
     $scope.linkNew = function (docId, docFileId) {
       return $state.go('root.applications.edit.case.newFile', {
@@ -98,8 +126,10 @@
   ApplicationsEditCaseCtrl.$inject = [
     '$scope',
     '$state',
+    '$stateParams',
     '$sce',
-    'application'
+    'application',
+    'DocStatus'
   ];
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);
