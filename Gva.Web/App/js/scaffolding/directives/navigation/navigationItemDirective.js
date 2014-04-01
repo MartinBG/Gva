@@ -34,7 +34,7 @@
         };
 
         $scope.stateGo = function stateGo() {
-          return $state.go($scope.state, $scope.params());
+          return $state.go($scope.state, $scope.params(), { inherit: false });
         };
       }
     };
