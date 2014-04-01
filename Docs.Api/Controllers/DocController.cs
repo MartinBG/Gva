@@ -373,45 +373,36 @@ namespace Docs.Api.Controllers
                         null,
                         userContext);
 
-                    int? rootDocId = null;
+                    DocRelation parentDocRelation = null;
                     if (preDoc.ParentDocId.HasValue)
                     {
-                        DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == preDoc.ParentDocId.Value);
-                        if (parentDocRelation != null)
-                        {
-                            rootDocId = parentDocRelation.RootDocId;
-                        }
+                        parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == preDoc.ParentDocId.Value);
                     }
-                    newDoc.CreateDocRelation(preDoc.ParentDocId, rootDocId, this.userContext);
 
-                    if (preDoc.DocCasePartTypeId.HasValue)
+                    ElectronicServiceStage electronicServiceStage = null;
+                    if (parentDocRelation == null)
                     {
-                        newDoc.CreateDocCasePartMovement(preDoc.DocCasePartTypeId.Value, this.userContext);
+                        electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                            .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
                     }
 
-                    //? parent/child classifications inheritance
                     List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
                         .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                         .ToList();
-
-                    foreach (var docTypeClassification in docTypeClassifications)
-                    {
-                        newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
-                    }
 
                     List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
                         .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                         .ToList();
 
-                    foreach (var docTypeUnitRole in docTypeUnitRoles)
-                    {
-                        newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
-                    }
-
-                    foreach (var correspondent in preDoc.Correspondents)
-                    {
-                        newDoc.CreateDocCorrespondent(correspondent, this.userContext);
-                    }
+                    newDoc.CreateDocProperties(
+                        parentDocRelation,
+                        preDoc.DocCasePartTypeId,
+                        docTypeClassifications,
+                        electronicServiceStage,
+                        docTypeUnitRoles,
+                        preDoc.Correspondents,
+                        null,
+                        this.userContext);
 
                     if (newDoc.IsCase)
                     {
@@ -436,8 +427,11 @@ namespace Docs.Api.Controllers
 
                 if (createdDocs.Count == 1 && !preDoc.Register)
                 {
-                    PreDocDO returnValue = new PreDocDO(createdDocs.FirstOrDefault());
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
+                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
+                        new
+                        {
+                            docId = createdDocs.FirstOrDefault().DocId
+                        });
                 }
                 else
                 {
@@ -500,28 +494,26 @@ namespace Docs.Api.Controllers
                     null,
                     userContext);
 
-                DocRelation parentRelation = this.unitOfWork.DbContext.Set<DocRelation>()
+                DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                     .FirstOrDefault(e => e.DocId == id);
-                newDoc.CreateDocRelation(id, parentRelation.RootDocId, this.userContext);
 
-                //? parent/child classifications inheritance
                 List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
                     .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                     .ToList();
-
-                foreach (var docTypeClassification in docTypeClassifications)
-                {
-                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, this.userContext);
-                }
 
                 List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
                     .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                     .ToList();
 
-                foreach (var docTypeUnitRole in docTypeUnitRoles)
-                {
-                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, this.userContext);
-                }
+                newDoc.CreateDocProperties(
+                       parentDocRelation,
+                       internalDocCasePartType.DocCasePartTypeId,
+                       docTypeClassifications,
+                       null,
+                       docTypeUnitRoles,
+                       null,
+                       null,
+                       this.userContext);
 
                 this.unitOfWork.Save();
 
@@ -529,8 +521,11 @@ namespace Docs.Api.Controllers
 
                 transaction.Commit();
 
-                PreDocDO returnValue = new PreDocDO(newDoc);
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
+                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
+                    new
+                    {
+                        docId = newDoc.DocId
+                    });
             }
         }
 
@@ -584,11 +579,6 @@ namespace Docs.Api.Controllers
              .Include(e => e.DocFileKind)
              .Where(e => e.DocId == id)
              .ToList();
-
-            //? redundant
-            //this.unitOfWork.DbContext.Set<DocRelation>()
-            // .Where(e => e.DocId == id)
-            // .ToList();
 
             this.unitOfWork.DbContext.Set<DocUnit>()
              .Include(e => e.Unit)
@@ -1005,7 +995,6 @@ namespace Docs.Api.Controllers
 
                 #region DocFiles
 
-                //List<DocFileDO> allDocFiles = doc.PublicDocFiles.Union(doc.PrivateDocFiles).ToList();
                 List<DocFileDO> allDocFiles = doc.DocFiles;
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))

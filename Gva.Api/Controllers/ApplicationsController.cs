@@ -20,6 +20,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
+using Docs.Api.Repositories.CorrespondentRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -31,14 +32,17 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IPersonRepository personRepository;
         private IDocRepository docRepository;
+        private ICorrespondentRepository correspondentRepository;
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public ApplicationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IPersonRepository personRepository,
             IDocRepository docRepository,
+            ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
@@ -49,9 +53,17 @@ namespace Gva.Api.Controllers
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
             this.docRepository = docRepository;
+            this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
             this.docRepository = docRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+        }
+
+        protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+
+            this.userContext = this.Request.GetUserContext();
         }
 
         [Route("")]
@@ -73,7 +85,7 @@ namespace Gva.Api.Controllers
 
             if (application == null)
             {
-                return StatusCode(System.Net.HttpStatusCode.NoContent); 
+                return StatusCode(System.Net.HttpStatusCode.NoContent);
             }
 
             ApplicationDO returnValue = new ApplicationDO(application);
@@ -277,7 +289,51 @@ namespace Gva.Api.Controllers
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
+                DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Public".ToLower());
                 DocSourceType manuelSoruce = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
+
+                var gvaCorrespondent = personRepository.GetGvaCorrespondentByPersonId(applicationNewDO.LotId);
+                Correspondent correspondent;
+                if (gvaCorrespondent == null)
+                {
+                    var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
+                    dynamic personData = lot.GetPartContent("personData");
+
+                    CorrespondentGroup applicantCorrespondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>().SingleOrDefault(e => e.Alias == "Applicants");//?
+                    CorrespondentType bgCorrespondentType = this.unitOfWork.DbContext.Set<CorrespondentType>().SingleOrDefault(e => e.Alias == "BulgarianCitizen");//?
+
+                    correspondent = this.correspondentRepository.CreateBgCitizen(
+                        applicantCorrespondentGroup.CorrespondentGroupId,
+                        bgCorrespondentType.CorrespondentTypeId,
+                        true,
+                        (string)personData.firstName,
+                        (string)personData.lastName,
+                        personData.uin,
+                        this.userContext);
+
+                    correspondent.Email = (string)personData.email;
+
+                    correspondent.CreateCorrespondentContact(
+                        String.Format("{0} {1} {2}", (string)personData.firstName, (string)personData.middleName, (string)personData.lastName),
+                        (string)personData.uin,
+                        null,
+                        true,
+                        userContext);
+
+                    this.unitOfWork.Save();
+
+                    gvaCorrespondent = new GvaCorrespondent();
+                    gvaCorrespondent.Correspondent = correspondent;
+                    gvaCorrespondent.LotId = applicationNewDO.LotId;
+                    gvaCorrespondent.IsActive = true;
+
+                    this.personRepository.AddGvaCorrespondent(gvaCorrespondent);
+                }
+                else
+                {
+                    correspondent = gvaCorrespondent.Correspondent;
+                }
 
                 Doc newDoc = docRepository.CreateDoc(
                     applicationNewDO.Doc.DocDirectionId,
@@ -292,27 +348,32 @@ namespace Gva.Api.Controllers
                     null,
                     userContext);
 
-                newDoc.CreateDocRelation(null, null, userContext);
-
                 List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
                     .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                     .ToList();
-
-                foreach (var docTypeClassification in docTypeClassifications)
-                {
-                    newDoc.CreateDocClassification(docTypeClassification.ClassificationId, userContext);
-                }
 
                 List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
                         .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                         .ToList();
 
-                foreach (var docTypeUnitRole in docTypeUnitRoles)
-                {
-                    newDoc.CreateDocUnit(docTypeUnitRole.UnitId, docTypeUnitRole.DocTypeUnitRoleId, userContext);
-                }
+                ElectronicServiceStage electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                        .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
+
+                newDoc.CreateDocProperties(
+                        null,
+                        internalDocCasePartType.DocCasePartTypeId,
+                        docTypeClassifications,
+                        electronicServiceStage,
+                        docTypeUnitRoles,
+                        correspondent != null ? new List<int> { correspondent.CorrespondentId } : null,
+                        null,
+                        this.userContext);
 
                 this.docRepository.GenerateAccessCode(newDoc, userContext);
+
+                this.docRepository.spSetDocUsers(newDoc.DocId);
+
+                this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
 
                 GvaApplication newGvaApplication = new GvaApplication()
                 {
@@ -322,58 +383,12 @@ namespace Gva.Api.Controllers
 
                 applicationRepository.AddGvaApplication(newGvaApplication);
 
-                var gvaCorrespondent = personRepository.GetGvaCorrespondentByPersonId(applicationNewDO.LotId);
-                Correspondent correspondent;
-                if (gvaCorrespondent == null)
-                {
-                    var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-                    dynamic personData = lot.GetPartContent("personData");
-
-                    CorrespondentGroup applicantCorrespondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>().SingleOrDefault(e => e.Alias == "Applicants");//?
-                    CorrespondentType bgCorrespondentType = this.unitOfWork.DbContext.Set<CorrespondentType>().SingleOrDefault(e => e.Alias == "BulgarianCitizen");//?
-
-                    correspondent = new Correspondent();
-                    correspondent.CorrespondentGroupId = applicantCorrespondentGroup.CorrespondentGroupId;
-                    correspondent.CorrespondentTypeId = bgCorrespondentType.CorrespondentTypeId;
-                    correspondent.Email = (string)personData.email;
-                    correspondent.BgCitizenFirstName = (string)personData.firstName;
-                    correspondent.BgCitizenLastName = (string)personData.lastName;
-                    correspondent.BgCitizenUIN = (string)personData.uin;
-                    correspondent.IsActive = true;
-
-                    correspondent.CreateCorrespondentContact(
-                        String.Format("{0} {1} {2}", (string)personData.firstName, (string)personData.middleName, (string)personData.lastName), 
-                        (string)personData.uin,
-                        null,
-                        true,
-                        userContext);
-
-                    gvaCorrespondent = new GvaCorrespondent();
-                    gvaCorrespondent.Correspondent = correspondent;
-                    gvaCorrespondent.LotId = applicationNewDO.LotId;
-                    gvaCorrespondent.IsActive = true;
-
-                    this.personRepository.AddGvaCorrespondent(gvaCorrespondent);
-                }
-                else
-                {
-                    correspondent = gvaCorrespondent.Correspondent;
-                }
-
-                newDoc.CreateDocCorrespondent(correspondent, userContext);
-
-                this.unitOfWork.Save();
-
-                this.docRepository.spSetDocUsers(newDoc.DocId);
-
-                this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
-
                 this.unitOfWork.Save();
 
                 transaction.Commit();
 
-                return Ok(new 
-                { 
+                return Ok(new
+                {
                     applicationId = newGvaApplication.GvaApplicationId,
                     docId = newGvaApplication.DocId,
                 });

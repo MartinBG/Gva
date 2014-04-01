@@ -15,33 +15,6 @@ namespace Docs.Api.DataObjects
             this.Correspondents = new List<int>();
         }
 
-        public PreDocDO(Doc doc)
-            : this()
-        {
-            if (doc != null)
-            {
-                this.DocId = doc.DocId;
-                if (doc.DocRelations != null && doc.DocRelations.Any())
-                {
-                    this.ParentDocId = doc.DocRelations.First().ParentDocId;
-                }
-                this.DocFormatTypeId = doc.DocFormatTypeId;
-                this.DocCasePartTypeId = doc.DocCasePartTypeId;
-                this.DocDirectionId = doc.DocDirectionId;
-                if (doc.DocType != null)
-                {
-                    this.DocTypeGroupId = doc.DocType.DocTypeGroupId;
-                }
-                this.DocTypeId = doc.DocTypeId;
-                this.DocSubject = doc.DocSubject;
-
-                if (doc.DocCorrespondents != null && doc.DocCorrespondents.Any())
-                {
-                    this.Correspondents = doc.DocCorrespondents.Select(e => e.CorrespondentId).ToList();
-                }
-            }
-        }
-
         public int? DocId { get; set; }
         public int? ParentDocId { get; set; }
         public int? DocFormatTypeId { get; set; }

@@ -956,6 +956,88 @@ namespace Docs.Api.Models
 
         #endregion
 
+        public void CreateDocProperties(
+            DocRelation parentDocRelation,
+            int? docCasePartTypeId,
+            List<DocTypeClassification> docTypeClassifications,
+            ElectronicServiceStage electronicServiceStage,
+            List<DocTypeUnitRole> docTypeUnitRoles,
+            List<int> correspondents,
+            List<DocFile> docFiles,
+            UserContext userContext
+            )
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            if (parentDocRelation != null)
+            {
+                this.CreateDocRelation(parentDocRelation.DocId, parentDocRelation.RootDocId, userContext);
+            }
+            else
+            {
+                this.CreateDocRelation(null, null, userContext);
+            }
+
+            if (docCasePartTypeId.HasValue)
+            {
+                this.CreateDocCasePartMovement(docCasePartTypeId.Value, userContext);
+            }
+
+            //? parent/child classifications inheritance
+            if (docTypeClassifications != null)
+            {
+                foreach (var item in docTypeClassifications)
+                {
+                    this.CreateDocClassification(item.ClassificationId, userContext);
+                }
+            }
+
+            if (electronicServiceStage != null)
+            {
+                this.CreateDocElectronicServiceStage(
+                    electronicServiceStage.ElectronicServiceStageId,
+                    currentDate,
+                    null,
+                    null,
+                    true,
+                    userContext);
+            }
+
+            //? set doc author
+            if (docTypeUnitRoles != null)
+            {
+                foreach (var item in docTypeUnitRoles)
+                {
+                    this.CreateDocUnit(item.UnitId, item.DocTypeUnitRoleId, userContext);
+                }
+            }
+
+            if (correspondents != null)
+            {
+                foreach (var item in correspondents)
+                {
+                    this.CreateDocCorrespondent(item, userContext);
+                }
+            }
+
+            if (docFiles != null)
+            {
+                foreach (var item in docFiles)
+                {
+                    this.DocFiles.Add(item);
+                }
+            }
+        }
+
+        public void UpdateDocProperties(
+            )
+        {
+            throw new NotImplementedException();
+        }
+
         public void Register(int? docRegisterId, string regUri, string regIndex, int? regNumber, DateTime? regDate, UserContext userContext)
         {
             this.ModifyDate = DateTime.Now;

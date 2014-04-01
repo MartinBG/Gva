@@ -17,9 +17,11 @@
 
       $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-            return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
-          });
+          Doc.save($scope.docModel.doc)
+            .$promise
+            .then(function (result) {
+              return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
+            });
         }
       });
     };
@@ -27,9 +29,11 @@
     $scope.save = function () {
       $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          Doc.createNew($scope.docModel.doc).$promise.then(function (result) {
-            return $state.go('root.docs.edit.view', { id: result.docId });
-          });
+          Doc.save($scope.docModel.doc)
+            .$promise
+            .then(function (result) {
+              return $state.go('root.docs.edit.view', { id: result.docId });
+            });
         }
       });
     };

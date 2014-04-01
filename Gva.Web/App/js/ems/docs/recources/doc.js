@@ -7,10 +7,6 @@
       function ($resource) {
         return $resource('/api/docs/:id', { id: '@docId' },
           {
-            //'createNew': {
-            //  method: 'POST',
-            //  url: '/api/docs/new/create'
-            //},
             'createChild': {
               method: 'POST',
               url: '/api/docs/:id/create',

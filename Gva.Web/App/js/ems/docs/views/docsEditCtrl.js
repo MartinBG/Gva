@@ -82,7 +82,10 @@
 
     $scope.attachDocInternal = function (docEntryTypeAlias) {
       return Doc
-        .createChild({ docId: doc.docId, docEntryTypeAlias: docEntryTypeAlias })
+        .createChild({
+          id: doc.docId,
+          docEntryTypeAlias: docEntryTypeAlias
+        }, {})
         .$promise
         .then(function (result) {
           return $state.go('root.docs.edit.view', { id: result.docId });

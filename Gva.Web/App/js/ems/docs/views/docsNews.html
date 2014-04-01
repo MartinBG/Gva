@@ -33,7 +33,7 @@
           <div class="form-group col-sm-4" sc-has-error="docNumbers">
             <label class="control-label" l10n-text="docs.newDoc.docNumbers"></label>
             <sc-validation-error field-name="docNumbers" validations="{required: null}"></sc-validation-error>
-            <sc-int ng-model="docModel.doc.docNumbers" name="docNumbers" required></sc-int>
+            <sc-int ng-model="docModel.doc.docNumbers" name="docNumbers" required min="1" max="99"></sc-int>
           </div>
         </div>
 
