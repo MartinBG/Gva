@@ -39,6 +39,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
             return this.unitOfWork.DbContext.Set<GvaPerson>()
                 .Where(predicate)
+                .OrderBy(p => p.Names)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }

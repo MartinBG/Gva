@@ -45,6 +45,7 @@ namespace Common.Api.Repositories.NomRepository
 
             return this.unitOfWork.DbContext.Set<NomValue>()
                 .Where(predicate)
+                .OrderBy(nv => nv.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }

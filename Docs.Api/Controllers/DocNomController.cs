@@ -48,6 +48,8 @@ namespace Docs.Api.Controllers
             var results = 
                 this.unitOfWork.DbContext.Set<CorrespondentGroup>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.CorrespondentGroupId,
@@ -55,7 +57,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -88,6 +89,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<CorrespondentType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.CorrespondentTypeId,
@@ -95,7 +98,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -128,6 +130,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocFormatType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocFormatTypeId,
@@ -135,7 +139,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -168,6 +171,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocCasePartType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocCasePartTypeId,
@@ -175,7 +180,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -208,6 +212,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocDirection>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocDirectionId,
@@ -215,7 +221,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -248,6 +253,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocTypeGroup>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocTypeGroupId,
@@ -255,7 +262,6 @@ namespace Docs.Api.Controllers
                     alias = e.Name, //todo is doctypegroup going to have alias?
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -288,6 +294,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocTypeId,
@@ -295,7 +303,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -335,6 +342,7 @@ namespace Docs.Api.Controllers
 
                 query = query
                     .Where(predicate)
+                    .OrderBy(e => e.Name)
                     .WithOffsetAndLimit(offset, limit);
             }
 
@@ -379,6 +387,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<Unit>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.UnitId,
@@ -386,7 +396,6 @@ namespace Docs.Api.Controllers
                     alias = e.Name,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -426,6 +435,7 @@ namespace Docs.Api.Controllers
 
                 query = query
                     .Where(predicate)
+                    .OrderBy(e => e.DisplayName)
                     .WithOffsetAndLimit(offset, limit);
             }
 
@@ -469,6 +479,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocSourceType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocSourceTypeId,
@@ -476,7 +488,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -509,6 +520,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<AssignmentType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.AssignmentTypeId,
@@ -516,7 +529,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -549,6 +561,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocFileKind>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocFileKindId,
@@ -556,7 +570,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -589,6 +602,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocFileType>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     nomValueId = e.DocFileTypeId,
@@ -596,7 +611,6 @@ namespace Docs.Api.Controllers
                     alias = e.Alias,
                     isActive = e.IsActive
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
             return Ok(results);
@@ -639,6 +653,8 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
                 .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
                     e.ElectronicServiceStageId,
@@ -647,7 +663,6 @@ namespace Docs.Api.Controllers
                     e.IsActive,
                     ExecutorName = e.ElectronicServiceStageExecutors.FirstOrDefault().Unit.Name
                 })
-                .WithOffsetAndLimit(offset, limit)
                 .ToList()
                 .Select(e => new
                 {

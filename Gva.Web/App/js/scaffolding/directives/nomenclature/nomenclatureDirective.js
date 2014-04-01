@@ -94,10 +94,13 @@
         allowClear: true,
         placeholder: ' ', //required for allowClear to work
         query: function (query) {
+          var pageSize = scNomenclatureConfig.pageSize,
+              page = query.page - 1;
           Nomenclature
-            .query(createQuery({ term: query.term })).$promise
+            .query(createQuery({ term: query.term, offset: page * pageSize, limit: pageSize }))
+            .$promise
             .then(function (result) {
-              query.callback({ results: result });
+              query.callback({ results: result, more: result.length === pageSize });
             });
         },
         initSelection: initSelectionFunc,
@@ -133,7 +136,8 @@
   angular.module('scaffolding')
     .constant('scNomenclatureConfig', {
       idProp: 'nomValueId',
-      nameProp: 'name'
+      nameProp: 'name',
+      pageSize: 20
     })
     .directive('scNomenclature', NomenclatureDirective);
 }(angular, _, $, Select2));
