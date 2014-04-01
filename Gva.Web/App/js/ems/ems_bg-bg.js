@@ -203,7 +203,10 @@
           correspondentName: 'Кореспондент'
         },
         newDoc: {
+          kontinue: 'Продължи',
+          registerAndShow: 'Регистрирай и продължи',
           caseRegUri: 'Към преписка',
+          cancel: 'Отказ',
           docTypeGroupId: 'Група',
           docTypeId: 'Вид',
           docSubject: 'Относно',
