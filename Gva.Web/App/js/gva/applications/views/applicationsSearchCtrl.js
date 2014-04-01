@@ -33,15 +33,7 @@
     };
 
     $scope.viewApplication = function (application) {
-      if (application.docId) {
-        return $state.go('root.applications.edit.case', { id: application.applicationId });
-      }
-      else {
-        return $state.go('root.persons.view.documentApplications.edit', {
-          id: application.personId,
-          ind: application.appPartIndex
-        });
-      }
+      return $state.go('root.applications.edit.case', { id: application.applicationId });
     };
 
     $scope.newApp = function () {

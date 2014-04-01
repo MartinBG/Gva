@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO
     {
         public ApplicationDocRelationDO()
         {
-            this.ApplicationLotFiles = new List<ApplicationLotFileDO>();
+            this.ApplicationLotFilesLinked = new List<ApplicationLotFileDO>();
         }
 
         public ApplicationDocRelationDO(DocRelation d)
@@ -53,7 +53,7 @@ namespace Gva.Api.ModelsDO
         public string DocDocTypeName { get; set; }
         public string DocSubject { get; set; }
 
-        public List<ApplicationLotFileDO> ApplicationLotFiles { get; set; }
+        public List<ApplicationLotFileDO> ApplicationLotFilesLinked { get; set; }
 
         public string DocDataHtml
         {

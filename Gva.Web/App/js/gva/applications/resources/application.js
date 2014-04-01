@@ -22,17 +22,28 @@
             'createPart': {
               method: 'POST',
               url: '/api/apps/:id/parts/create',
-              params: { id: '@id' }
+              params: {
+                id: '@id',
+                docId: '@docId',
+                setPartAlias: '@setPartAlias'
+              }
             },
             'linkNewPart': {
               method: 'POST',
               url: '/api/apps/:id/parts/linkNew',
-              params: { id: '@id' }
+              params: {
+                id: '@id',
+                setPartAlias: '@setPartAlias'
+              }
             },
             'linkExistingPart': {
               method: 'POST',
               url: '/api/apps/:id/parts/linkExisting',
-              params: { id: '@id' }
+              params: {
+                id: '@id',
+                docFileId: '@docFileId',
+                partId: '@partId'
+              }
             },
             'getDocFile': {
               method: 'GET',

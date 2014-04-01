@@ -13,7 +13,6 @@
     $scope.application = application;
 
     _.map(application.applicationDocCase, function (adc) {
-
       switch (adc.docDocStatusAlias) {
       case 'Draft':
         adc.nextStatusText = 'Отбелязване като изготвен';
@@ -58,9 +57,6 @@
     };
 
     $scope.linkPart = function (docFileId) {
-      //applicationCommonData.docFileId = docFileId;
-      //applicationCommonData.currentDocId = docId;
-
       return $state.go('root.applications.edit.case.linkPart', {
         docFileId: docFileId
       });
@@ -84,37 +80,37 @@
       });
     };
 
-    $scope.viewPart = function (docCase) {
+    $scope.viewPart = function (value) {
       var state;
 
-      if (docCase.setPartAlias === 'documentId') {
+      if (value.setPartAlias === 'documentId') {
         state = 'root.persons.view.documentIds.edit';
       }
-      else if (docCase.setPartAlias === 'education') {
+      else if (value.setPartAlias === 'education') {
         state = 'root.persons.view.documentEducations.edit';
       }
-      else if (docCase.setPartAlias === 'employment') {
+      else if (value.setPartAlias === 'employment') {
         state = 'root.persons.view.employments.edit';
       }
-      else if (docCase.setPartAlias === 'medical') {
+      else if (value.setPartAlias === 'medical') {
         state = 'root.persons.view.medicals.edit';
       }
-      else if (docCase.setPartAlias === 'check') {
+      else if (value.setPartAlias === 'check') {
         state = 'root.persons.view.checks.edit';
       }
-      else if (docCase.setPartAlias === 'training') {
+      else if (value.setPartAlias === 'training') {
         state = 'root.persons.view.documentTrainings.edit';
       }
-      else if (docCase.setPartAlias === 'other') {
+      else if (value.setPartAlias === 'other') {
         state = 'root.persons.view.documentOthers.edit';
       }
-      else if (docCase.setPartAlias === 'application') {
+      else if (value.setPartAlias === 'application') {
         state = 'root.persons.view.documentApplications.edit';
       }
 
       return $state.go(state, {
         id: $scope.application.lotId,
-        ind: docCase.partIndex
+        ind: value.partIndex
       });
     };
 

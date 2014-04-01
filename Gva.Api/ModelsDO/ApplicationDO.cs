@@ -2,6 +2,7 @@
 using Gva.Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gva.Api.ModelsDO
 {
@@ -10,6 +11,8 @@ namespace Gva.Api.ModelsDO
         public ApplicationDO()
         {
             this.ApplicationDocCase = new List<ApplicationDocRelationDO>();
+            this.ApplicationLotFilesUnlinked = new List<ApplicationLotFileDO>();
+            
         }
 
         public ApplicationDO(GvaApplication g)
@@ -31,5 +34,7 @@ namespace Gva.Api.ModelsDO
 
         public PersonDO Person { get; set; }
         public List<ApplicationDocRelationDO> ApplicationDocCase { get; set; }
+
+        public List<ApplicationLotFileDO> ApplicationLotFilesUnlinked { get; set; }
     }
 }

@@ -24,14 +24,16 @@
         .then(function () {
           if ($scope.addFormWrapper.$valid) {
             var newPart = {
-              docId: $scope.applicationPart.docId,
               appFile: $scope.applicationPart.appFile,
-              setPartAlias: $scope.applicationPart.setPartAlias,
               appPart: $scope.applicationPart.part
             };
 
             return Application
-              .createPart({ id: $stateParams.id }, newPart)
+              .createPart({
+                id: $stateParams.id,
+                docId: $scope.applicationPart.docId,
+                setPartAlias: $scope.applicationPart.setPartAlias
+              }, newPart)
               .$promise.then(function () {
                 return $state.transitionTo('root.applications.edit.case',
                   $stateParams, { reload: true });
@@ -46,16 +48,18 @@
           if ($scope.addFormWrapper.$valid) {
             var linkNew = {
               appFile: $scope.applicationPart.appFile,
-              setPartAlias: $scope.applicationPart.setPartAlias,
               appPart: $scope.applicationPart.part
             };
 
             return Application
-                .linkNewPart({ id: $stateParams.id }, linkNew)
-                .$promise.then(function () {
-                  return $state.transitionTo('root.applications.edit.case',
-                    $stateParams, { reload: true });
-                });
+              .linkNewPart({
+                id: $stateParams.id,
+                setPartAlias: $scope.applicationPart.setPartAlias
+              }, linkNew)
+              .$promise.then(function () {
+                return $state.transitionTo('root.applications.edit.case',
+                  $stateParams, { reload: true });
+              });
           }
         });
     };

@@ -104,7 +104,6 @@
     <Compile Include="ModelsDO\ApplicationLotFileDO.cs" />
     <Compile Include="ModelsDO\ApplicationNewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
-    <Compile Include="ModelsDO\ApplicationPartDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />

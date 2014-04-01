@@ -15,20 +15,51 @@ namespace Docs.Api.DataObjects
             this.File = new BlobDO();
         }
 
-        public ApplicationLotFileDO(DocFile docFile, GvaAppLotFile appFile)
+        public ApplicationLotFileDO(GvaAppLotFile appFile, DocFile docFile)
             : this()
         {
             this.HasAppFile = appFile == null ? false : true;
+
             if (appFile != null)
             {
+                this.GvaLotFileId = appFile.GvaLotFileId;
                 this.PartIndex = appFile.GvaLotFile.LotPart.Index;
                 this.SetPartName = appFile.GvaLotFile.LotPart.SetPart.Name;
                 this.SetPartAlias = appFile.GvaLotFile.LotPart.SetPart.Alias;
                 this.PageNumber = appFile.GvaLotFile.PageNumber;
                 this.PageIndex = appFile.GvaLotFile.PageIndex;
-            }
 
-            if (docFile != null)
+                if (appFile.GvaLotFile.GvaCaseType != null)
+                {
+                    this.GvaCaseTypeName = appFile.GvaLotFile.GvaCaseType.Name;
+                }
+
+                if (appFile.DocFile != null)
+                {
+                    this.DocFileId = appFile.DocFile.DocFileId;
+                    this.DocFileKindId = appFile.DocFile.DocFileKindId;
+                    this.DocFileTypeId = appFile.DocFile.DocFileTypeId;
+                    this.DocId = appFile.DocFile.DocId;
+                    this.Name = appFile.DocFile.Name;
+
+                    this.File.Key = appFile.DocFile.DocFileContentId;
+                    this.File.Name = appFile.DocFile.DocFileName;
+                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.DocFile.DocFileContentId, appFile.DocFile.DocFileName);
+                }
+                else if (appFile.GvaLotFile.GvaFile != null)
+                {
+                    this.File.Key = appFile.GvaLotFile.GvaFile.FileContentId;
+                    this.File.Name = appFile.GvaLotFile.GvaFile.Filename;
+                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.GvaLotFile.GvaFile.FileContentId, appFile.GvaLotFile.GvaFile.Filename);
+                }
+                else if (appFile.GvaLotFile.DocFile != null)
+                {
+                    this.File.Key = appFile.GvaLotFile.DocFile.DocFileContentId;
+                    this.File.Name = appFile.GvaLotFile.DocFile.DocFileName;
+                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.GvaLotFile.DocFile.DocFileContentId, appFile.GvaLotFile.DocFile.DocFileName);
+                }
+            }
+            else if (docFile != null)
             {
                 this.DocFileId = docFile.DocFileId;
                 this.DocFileKindId = docFile.DocFileKindId;
@@ -38,18 +69,19 @@ namespace Docs.Api.DataObjects
 
                 this.File.Key = docFile.DocFileContentId;
                 this.File.Name = docFile.DocFileName;
-                this.File.RelativePath = "";
-                this.DocFileUrl = string.Format("api/file?fileKey={0}&fileName={1}", docFile.DocFileContentId, docFile.DocFileName);
+                this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", docFile.DocFileContentId, docFile.DocFileName);
             }
         }
 
-        public string PageIndex { get; set; }
-        public int? PageNumber { get; set; } 
+        public bool HasAppFile { get; set; }
+        public int GvaLotFileId { get; set; }
         public int? PartIndex { get; set; }
         public string SetPartName { get; set; }
         public string SetPartAlias { get; set; }
-        public bool HasAppFile { get; set; }
-
+        public int? PageNumber { get; set; }
+        public string PageIndex { get; set; }
+        public string GvaCaseTypeName { get; set; }
+        
         public int? DocFileId { get; set; }
         public int DocFileKindId { get; set; }
         public int DocFileTypeId { get; set; }
@@ -57,7 +89,6 @@ namespace Docs.Api.DataObjects
         public string Name { get; set; }
 
         public BlobDO File { get; set; }
-
-        public string DocFileUrl { get; set; }
+        public string FileUrl { get; set; }
     }
 }

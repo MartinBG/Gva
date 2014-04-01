@@ -17,16 +17,16 @@
           <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a> / <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a> {{(adc.nextStatusText ? '/': '')}} <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
         </td>
       </tr>
-      <tr ng-repeat="alf in adc.applicationLotFiles">
+      <tr ng-repeat="item in adc.applicationLotFilesLinked">
         <td></td>
-        <td ng-if="alf.hasAppFile">{{ alf.setPartName }} (<a ng-href="{{alf.docFileUrl}}" target="_blank"><span>{{ alf.file.name }}</span></a>)</td>
-        <td ng-if="!alf.hasAppFile"><a ng-href="{{alf.docFileUrl}}" target="_blank"><span>{{ alf.file.name }}</span></a></td>
+        <td ng-if="item.hasAppFile">{{ item.setPartName }} (<a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a>)</td>
+        <td ng-if="!item.hasAppFile"><a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a></td>
         <td>
-          <div ng-if="alf.hasAppFile">
-            <a ng-click="viewPart(alf)"><span l10n-text="applications.edit.case.act"></span> {{ application.person.lin }} <span l10n-text="applications.edit.case.page"></span> {{ alf.pageNumber }}</a>
+          <div ng-if="item.hasAppFile">
+            <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
           </div>
-          <div ng-if="!alf.hasAppFile">
-            <a ng-click="linkNew(adc.docId, alf.docFileId)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(alf.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
+          <div ng-if="!item.hasAppFile">
+            <a ng-click="linkNew(adc.docId, item.docFileId)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(item.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
           </div>
         </td>
         <td></td>
@@ -36,6 +36,23 @@
           <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a> / <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
         </td>
       </tr>
+      <tr>
+        <td>
+          <strong l10n-text="applications.edit.unlinkedLotParts"></strong>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr ng-repeat="item in application.applicationLotFilesUnlinked">
+        <td></td>
+        <td>{{ item.setPartName }} (<a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a>)</td>
+        <td>
+          <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
+        </td>
+        <td></td>
+      </tr>
+
     </tbody>
   </table>
 </div>

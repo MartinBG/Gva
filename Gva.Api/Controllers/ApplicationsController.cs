@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Http;
 using Docs.Api.Repositories.CorrespondentRepository;
+using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Controllers
 {
@@ -55,7 +56,6 @@ namespace Gva.Api.Controllers
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
-            this.docRepository = docRepository;
             this.lotEventDispatcher = lotEventDispatcher;
         }
 
@@ -92,40 +92,69 @@ namespace Gva.Api.Controllers
 
             returnValue.Person = Mapper.Map<GvaPerson, PersonDO>(this.personRepository.GetPerson(application.LotId));
 
-            var docRelations = this.docRepository.GetCaseRelationsByDocId(application.DocId.Value,
-                e => e.Doc.DocFiles,
-                e => e.Doc.DocDirection,
-                e => e.Doc.DocType,
-                e => e.Doc.DocStatus,
-                e => e.Doc.DocEntryType
-                );
+            var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                .Include(e => e.GvaLotFile.LotPart.SetPart)
+                .Include(e => e.GvaLotFile.GvaCaseType)
+                .Include(e => e.GvaLotFile.DocFile)
+                .Include(e => e.GvaLotFile.GvaFile)
+                .Include(e => e.DocFile)
+                .Where(e => e.GvaApplicationId == id)
+                .ToList();
 
-            foreach (var dr in docRelations)
+            if (application.DocId.HasValue)
             {
-                ApplicationDocRelationDO applicationDocRelation = new ApplicationDocRelationDO(dr);
+                var docRelations = this.docRepository.GetCaseRelationsByDocId(application.DocId.Value,
+                    e => e.Doc.DocFiles,
+                    e => e.Doc.DocDirection,
+                    e => e.Doc.DocType,
+                    e => e.Doc.DocStatus,
+                    e => e.Doc.DocEntryType
+                    );
 
-                if (dr.Doc.DocEntryType.Alias == "Document")
+                List<GvaAppLotFile> appFilesLinked = new List<GvaAppLotFile>();
+
+                foreach (var dr in docRelations)
                 {
-                    foreach (var docFile in dr.Doc.DocFiles)
+                    ApplicationDocRelationDO applicationDocRelation = new ApplicationDocRelationDO(dr);
+
+                    if (dr.Doc.DocEntryType.Alias == "Document")
                     {
-                        var appFile = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
-                            .Include(e => e.GvaLotFile.LotPart.SetPart)
-                            .FirstOrDefault(e => e.DocFileId == docFile.DocFileId);
+                        foreach (var docFile in dr.Doc.DocFiles)
+                        {
+                            GvaAppLotFile appFile = appFilesAll.FirstOrDefault(e => e.DocFileId == docFile.DocFileId);
+                            if (appFile != null)
+                            {
+                                appFilesLinked.Add(appFile);
+                            }
 
-                        applicationDocRelation.ApplicationLotFiles.Add(new ApplicationLotFileDO(docFile, appFile));
+                            applicationDocRelation.ApplicationLotFilesLinked.Add(new ApplicationLotFileDO(appFile, docFile));
+                        }
+
+                        returnValue.ApplicationDocCase.Add(applicationDocRelation);
                     }
-
-                    returnValue.ApplicationDocCase.Add(applicationDocRelation);
                 }
-            }
 
+                returnValue.ApplicationLotFilesUnlinked = appFilesAll
+                    .Except(appFilesLinked)
+                    .ToList()
+                    .Select(e => new ApplicationLotFileDO(e, null))
+                    .ToList();
+            }
+            else
+            {
+                returnValue.ApplicationLotFilesUnlinked = appFilesAll
+                    .ToList()
+                    .Select(e => new ApplicationLotFileDO(e, null))
+                    .ToList();
+            }
+            
             return Ok(returnValue);
         }
 
         [Route("{id}/parts/linkNew")]
-        public IHttpActionResult PostLinkNewPart(int id, ApplicationPartDO linkNewPart)
+        public IHttpActionResult PostLinkNewPart(int? id, string setPartAlias, JObject linkNewPart)
         {
-            if (string.IsNullOrEmpty(linkNewPart.SetPartAlias))
+            if (!id.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
                 return BadRequest();
             }
@@ -134,12 +163,15 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
-                GvaApplication application = this.applicationRepository.Find(id);
+                dynamic appPart = linkNewPart.Value<JObject>("appPart");
+                dynamic appFile = linkNewPart.Value<JObject>("appFile");
+
+                GvaApplication application = this.applicationRepository.Find(id.Value);
                 Lot lot = this.lotRepository.GetLotIndex(application.LotId);
 
-                SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == linkNewPart.SetPartAlias);
+                SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
-                PartVersion partVersion = lot.CreatePart(path, linkNewPart.AppPart, userContext);
+                PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
                 if (setPart.Alias == "application")
@@ -147,17 +179,17 @@ namespace Gva.Api.Controllers
                     application.GvaAppLotPart = partVersion.Part;
                 }
 
-                int docFileId = (int)linkNewPart.AppFile.docFileId;
+                int docFileId = (int)appFile.docFileId;
                 DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == docFileId);
 
                 GvaLotFile lotFile = new GvaLotFile()
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
-                    GvaCaseTypeId = (int)linkNewPart.AppFile.caseTypeId,
-                    PageNumber = (int)linkNewPart.AppFile.pageCount
+                    GvaCaseTypeId = (int)appFile.caseTypeId,
+                    PageNumber = (int)appFile.pageCount
                 };
-                lotFile.SavePageIndex((string)linkNewPart.AppFile.bookPageNumber);
+                lotFile.SavePageIndex((string)appFile.bookPageNumber);
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {
@@ -177,9 +209,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/create")]
-        public IHttpActionResult PostNewPart(int id, ApplicationPartDO newPart)
+        public IHttpActionResult PostCreatePart(int? id, int? docId, string setPartAlias, JObject newPart)
         {
-            if (newPart.DocId == null)
+            if (!id.HasValue || !docId.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
                 return BadRequest();
             }
@@ -188,13 +220,16 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
-                GvaApplication application = this.applicationRepository.Find(id);
+                dynamic appPart = newPart.Value<JObject>("appPart");
+                dynamic appFile = newPart.Value<JObject>("appFile");
+
+                GvaApplication application = this.applicationRepository.Find(id.Value);
                 Lot lot = this.lotRepository.GetLotIndex(application.LotId);
 
-                SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == newPart.SetPartAlias);
+                SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
 
-                PartVersion partVersion = lot.CreatePart(path, newPart.AppPart, userContext);
+                PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
                 if (setPart.Alias == "application")
@@ -202,14 +237,14 @@ namespace Gva.Api.Controllers
                     application.GvaAppLotPart = partVersion.Part;
                 }
 
-                var doc = this.docRepository.Find(newPart.DocId.Value);
+                var doc = this.docRepository.Find(docId.Value);
                 var docFile = doc.CreateDocFile(
-                    (int)newPart.AppFile.docFileKindId,
-                    (int)newPart.AppFile.docFileTypeId,
-                    (string)newPart.AppFile.name,
-                    (string)newPart.AppFile.file.name,
+                    (int)appFile.docFileKindId,
+                    (int)appFile.docFileTypeId,
+                    (string)appFile.name,
+                    (string)appFile.file.name,
                     String.Empty,
-                    (Guid)newPart.AppFile.file.key,
+                    (Guid)appFile.file.key,
                     true,
                     true,
                     userContext);
@@ -218,10 +253,10 @@ namespace Gva.Api.Controllers
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
-                    GvaCaseTypeId = (int)newPart.AppFile.caseTypeId,
-                    PageNumber = (int)newPart.AppFile.pageCount
+                    GvaCaseTypeId = (int)appFile.caseTypeId,
+                    PageNumber = (int)appFile.pageCount
                 };
-                lotFile.SavePageIndex((string)newPart.AppFile.bookPageNumber);
+                lotFile.SavePageIndex((string)appFile.bookPageNumber);
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {
@@ -241,35 +276,49 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/linkExisting")]
-        public IHttpActionResult PostLinkExistingPart(int id, ApplicationPartDO linkExistingPart)
+        public IHttpActionResult PostLinkExistingPart(int? id, int? docFileId, int? partId)
         {
-            if (linkExistingPart.DocFileId == null || linkExistingPart.PartId == null)
+            if (!id.HasValue || !docFileId.HasValue || !partId.HasValue)
             {
                 return BadRequest();
             }
 
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                GvaApplication application = this.applicationRepository.Find(id);
-                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == linkExistingPart.DocFileId);
+                GvaApplication application = this.applicationRepository.Find(id.Value);
+                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == docFileId.Value);
 
                 GvaLotFile gvaLotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
                     .Include(e => e.LotPart.SetPart)
-                    .FirstOrDefault(e => e.LotPartId == linkExistingPart.PartId);
+                    .FirstOrDefault(e => e.LotPartId == partId);
 
-                if (gvaLotFile.LotPart.SetPart.Alias == "application")
+                if (gvaLotFile != null)
                 {
-                    application.GvaAppLotPart = gvaLotFile.LotPart;
+                    if (gvaLotFile.LotPart.SetPart.Alias == "application")
+                    {
+                        application.GvaAppLotPart = gvaLotFile.LotPart;
+                    }
+
+                    GvaAppLotFile gvaAppLotFile = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                        .Include(e => e.DocFile)
+                        .FirstOrDefault(e => e.GvaLotFileId == gvaLotFile.GvaLotFileId);
+
+                    if (gvaAppLotFile == null)
+                    {
+                        GvaAppLotFile addGvaAppLotFile = new GvaAppLotFile()
+                        {
+                            GvaApplication = application,
+                            GvaLotFile = gvaLotFile,
+                            DocFile = docFile
+                        };
+
+                        this.applicationRepository.AddGvaAppLotFile(addGvaAppLotFile);
+                    }
+                    else if (gvaAppLotFile.DocFile == null)
+                    {
+                        gvaAppLotFile.DocFile = docFile;
+                    }
                 }
-
-                GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
-                {
-                    GvaApplication = application,
-                    GvaLotFile = gvaLotFile,
-                    DocFile = docFile
-                };
-
-                this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
 

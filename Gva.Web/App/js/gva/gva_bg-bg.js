@@ -1691,6 +1691,7 @@
           status: 'Статус',
           docTypeName: 'Относно',
           viewPerson: 'Преглед',
+          unlinkedLotParts:'Други документи извън преписката',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',
@@ -1724,6 +1725,14 @@
           addPart: {
             cancel: 'Назад',
             save: 'Запис'
+          },
+          unlinkedParts: {
+            setPartName: 'Тип страница',
+            gvaCaseTypeName: 'Тип дело',
+            pageNumber: '№ стр. в дело',
+            pageIndex: 'Брой стр.',
+            file: 'Файл',
+            viewPart: 'Преглед'
           }
         },
         newForm: {
