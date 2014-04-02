@@ -57,7 +57,7 @@
         units: $scope.filters.units,
         ds: undefined,
         hasLot: $scope.filters.hasLot
-      });
+      }, { reload: true });
     };
 
     $scope.viewDoc = function (doc) {

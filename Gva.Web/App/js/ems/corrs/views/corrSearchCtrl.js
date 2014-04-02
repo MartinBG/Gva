@@ -31,7 +31,7 @@
       return $state.go('root.corrs.search', {
         displayName: $scope.filters.displayName,
         correspondentEmail: $scope.filters.correspondentEmail
-      });
+      }, { reload: true });
     };
 
     $scope.editCorr = function editCorr(corr) {

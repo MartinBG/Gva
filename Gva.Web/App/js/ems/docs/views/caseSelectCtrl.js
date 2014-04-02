@@ -49,7 +49,7 @@
         csCorrs: $scope.filters.csCorrs,
         csUnits: $scope.filters.csUnits,
         csIsCase: true
-      });
+      }, { reload: true });
     };
 
     $scope.selectDoc = function (result) {
