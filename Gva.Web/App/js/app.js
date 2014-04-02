@@ -23,7 +23,25 @@
       $locationProvider.html5Mode(false);
       $urlRouterProvider.otherwise('/persons');
     }
-  ]).run(['$rootScope', '$modal', function ($rootScope, $modal) {
+  ]).config(['$provide', function($provide) {
+    $provide.decorator('$exceptionHandler', [
+      '$delegate',
+      '$injector',
+      function($delegate, $injector) {
+        var $rootScope;
+        return function(exception, cause) {
+          $delegate(exception, cause);
+
+          try {
+            $rootScope = $rootScope || $injector.get('$rootScope');
+            $rootScope.$broadcast('exceptionHandlerError', exception, cause);
+          } catch (e) {
+            //swallow all exception so that we don't end up in an infinite loop
+          }
+        };
+      }
+    ]);
+  }]).run(['$rootScope', '$modal', function ($rootScope, $modal) {
     var authenticating;
     $rootScope.$on('authRequired', function (event, authService) {
       if (authenticating) {

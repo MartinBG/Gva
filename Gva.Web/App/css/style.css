@@ -299,3 +299,9 @@ table.dataTable td.buttons-cell
 .breadcrumb a {
   cursor: pointer;
 }
+
+.alert-container .alert
+{
+  margin-bottom: 6px;
+  padding: 9px;
+}
