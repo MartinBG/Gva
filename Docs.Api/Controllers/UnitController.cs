@@ -15,7 +15,7 @@ namespace Docs.Api.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [Route("api/nomenclature/units")]
+        [Route("api/nomenclatures/units")]
         public IHttpActionResult GetUnits(string name = null)
         {
             var predicate =

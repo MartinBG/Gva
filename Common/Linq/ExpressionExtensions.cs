@@ -79,6 +79,26 @@ namespace Common.Linq
             return expr;
         }
 
+        public static Expression<Func<T, bool>> AndDateTimeGreaterThanOrEqual<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, DateTime?>> prop, DateTime? value)
+        {
+            if (!value.HasValue)
+            {
+                return expr;
+            }
+
+            return expr.AndPropertyGreaterThanOrEqual(prop, value);
+        }
+
+        public static Expression<Func<T, bool>> AndDateTimeLessThanOrEqual<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, DateTime?>> prop, DateTime? value)
+        {
+            if (!value.HasValue)
+            {
+                return expr;
+            }
+
+            return expr.AndPropertyLessThanOrEqual(prop, value);
+        }
+
         private static Expression<Func<T, bool>> AndStringContainsInternal<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, string>> prop, string value)
         {
             return expr.And(
@@ -96,6 +116,26 @@ namespace Common.Linq
             return expr.And(
                 Expression.Lambda<Func<T1, bool>>(
                     Expression.Equal(
+                        prop.Body,
+                        Expression.Constant(value, typeof(T2))),
+                    prop.Parameters));
+        }
+
+        private static Expression<Func<T1, bool>> AndPropertyGreaterThanOrEqual<T1, T2>(this Expression<Func<T1, bool>> expr, Expression<Func<T1, T2>> prop, T2 value)
+        {
+            return expr.And(
+                Expression.Lambda<Func<T1, bool>>(
+                    Expression.GreaterThanOrEqual(
+                        prop.Body,
+                        Expression.Constant(value, typeof(T2))),
+                    prop.Parameters));
+        }
+
+        private static Expression<Func<T1, bool>> AndPropertyLessThanOrEqual<T1, T2>(this Expression<Func<T1, bool>> expr, Expression<Func<T1, T2>> prop, T2 value)
+        {
+            return expr.And(
+                Expression.Lambda<Func<T1, bool>>(
+                    Expression.LessThanOrEqual(
                         prop.Body,
                         Expression.Constant(value, typeof(T2))),
                     prop.Parameters));

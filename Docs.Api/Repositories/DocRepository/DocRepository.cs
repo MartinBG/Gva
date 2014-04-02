@@ -483,40 +483,14 @@ namespace Docs.Api.Repositories.DocRepository
             List<int> unitIds = Helper.GetIdListFromString(units);
             List<int> docIds = Helper.GetIdListFromString(ds);
 
-            if (fromDate.HasValue)
-            {
-                predicate = predicate.And(d => d.RegDate.HasValue && d.RegDate.Value >= fromDate.Value);
-            }
-
-            if (toDate.HasValue)
-            {
-                predicate = predicate.And(d => d.RegDate.HasValue && d.RegDate.Value <= toDate.Value);
-            }
-
-            if (!String.IsNullOrWhiteSpace(regUri))
-            {
-                predicate = predicate.And(d => d.RegUri.Contains(regUri));
-            }
-
-            if (!String.IsNullOrWhiteSpace(docName))
-            {
-                predicate = predicate.And(d => d.DocSubject.Contains(docName));
-            }
-
-            if (docTypeId.HasValue)
-            {
-                predicate = predicate.And(d => d.DocTypeId == docTypeId.Value);
-            }
-
-            if (docStatusId.HasValue)
-            {
-                predicate = predicate.And(d => d.DocStatusId == docStatusId.Value);
-            }
-
-            if (isCase.HasValue)
-            {
-                predicate = predicate.And(d => d.IsCase == isCase.Value);
-            }
+            predicate = predicate
+                .AndDateTimeGreaterThanOrEqual(e => e.RegDate, fromDate)
+                .AndDateTimeLessThanOrEqual(e => e.RegDate, toDate)
+                .AndStringContains(e => e.RegUri, regUri)
+                .AndStringContains(e => e.DocSubject, docName)
+                .AndEquals(e => e.DocTypeId.Value, docTypeId)
+                .AndEquals(e => e.DocStatusId, docStatusId)
+                .AndEquals(e => e.IsCase, isCase);
 
             if (corrIds.Any())
             {
@@ -569,6 +543,7 @@ namespace Docs.Api.Repositories.DocRepository
                 units,
                 ds);
 
+            //? optimize
             IQueryable<Doc> query = this.unitOfWork.DbContext.Set<DocRelation>()
                 .Join(this.unitOfWork.DbContext.Set<DocRelation>(), dr => dr.RootDocId, dr2 => dr2.RootDocId, (dr, dr2) => new { OrgDocId = dr.DocId, DocId = dr2.DocId })
                 .Join(this.unitOfWork.DbContext.Set<DocUser>(), dr => dr.DocId, du => du.DocId, (dr, du) => new { OrgDocId = dr.OrgDocId, DocUser = du })
@@ -620,14 +595,14 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
-
             DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusFinished.DocStatusId
-                && e.DocStatusId != docStatusCanceled.DocStatusId)
-                .And(e => e.IsCase);
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.IsCase)
+                .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId);
 
             return GetDocsInternal(
                 fromDate,
@@ -668,14 +643,13 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
-
             DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
 
-            predicate = predicate.And(e => e.DocStatusId == docStatusFinished.DocStatusId
-                || e.DocStatusId == docStatusCanceled.DocStatusId)
-                .And(e => e.IsCase);
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.IsCase)
+                .And(e => e.DocStatusId == docStatusFinished.DocStatusId || e.DocStatusId == docStatusCanceled.DocStatusId);
 
             return GetDocsInternal(
                 fromDate,
@@ -716,13 +690,13 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
-
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
             DocStatus docStatusDraft = docStatuses.FirstOrDefault(e => e.Alias == "Draft");
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusCanceled.DocStatusId
-                && e.DocStatusId != docStatusDraft.DocStatusId)
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocStatusId != docStatusDraft.DocStatusId)
                 .And(e => e.DocWorkflows.Any(dw => dw.ToUnitId.HasValue && dw.ToUnitId == unitUser.UnitId));
 
             return GetDocsInternal(
@@ -765,15 +739,15 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
-
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
             DocStatus docStatusDraft = docStatuses.FirstOrDefault(e => e.Alias == "Draft");
 
             List<int> docUnitRoleIds = docUnitRoles.Select(e => e.DocUnitRoleId).ToList();
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusCanceled.DocStatusId
-                && e.DocStatusId != docStatusDraft.DocStatusId)
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocStatusId != docStatusDraft.DocStatusId)
                 .And(e => e.DocUnits.Any(du => du.UnitId == unitUser.UnitId && docUnitRoleIds.Contains(du.DocUnitRoleId)));
 
             return GetDocsInternal(
@@ -815,10 +789,11 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
             DocStatus docStatusDraft = docStatuses.FirstOrDefault(e => e.Alias == "Draft");
 
-            predicate = predicate.And(e => e.DocStatusId == docStatusDraft.DocStatusId);
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocStatusId == docStatusDraft.DocStatusId);
 
             return GetDocsInternal(
                 fromDate,
@@ -859,11 +834,13 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
             DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
             DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
 
-            predicate = predicate.And(e => e.DocStatusId != docStatusFinished.DocStatusId && e.DocStatusId != docStatusCanceled.DocStatusId);
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId);
 
             return GetDocsInternal(
                 fromDate,
@@ -905,11 +882,9 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount)
         {
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
-            DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
-            DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
-
-            predicate = predicate.And(e => e.DocSourceTypeId == docSourceType.DocSourceTypeId);
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocSourceTypeId == docSourceType.DocSourceTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -953,7 +928,8 @@ namespace Docs.Api.Repositories.DocRepository
             List<int> unitIds = Helper.GetIdListFromString(units);
             List<int> docIds = Helper.GetIdListFromString(ds);
 
-            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder.True<Doc>();
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>();
 
             return GetDocsInternal(
                 fromDate,
