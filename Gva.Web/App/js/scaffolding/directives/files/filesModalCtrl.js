@@ -7,6 +7,7 @@
     $q,
     $interpolate,
     $modalInstance,
+    $exceptionHandler,
     l10n,
     scFilesConfig,
     modalValue,
@@ -74,7 +75,8 @@
       $scope.filesUploaded = 0;
       $scope.filesLength = keys.length;
 
-      uploadNext()['catch'](function () {
+      uploadNext()['catch'](function (error) {
+        $exceptionHandler(error);
         alert(l10n.get('scaffolding.scFiles.failAlert'));
       })['finally'](function () {
         $scope.isUploading = false;
@@ -218,6 +220,7 @@
     '$q',
     '$interpolate',
     '$modalInstance',
+    '$exceptionHandler',
     'l10n',
     'scFilesConfig',
     'modalValue',

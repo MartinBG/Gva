@@ -6,7 +6,13 @@
 (function (angular, _, $, Select2) {
   'use strict';
 
-  function NomenclatureDirective($filter, $parse, Nomenclature, scNomenclatureConfig) {
+  function NomenclatureDirective(
+    $filter,
+    $parse,
+    $exceptionHandler,
+    Nomenclature,
+    scNomenclatureConfig
+  ) {
     function preLink(scope, iElement, iAttrs, ngModel) {
       var idProp = scNomenclatureConfig.idProp,
           nameProp = scNomenclatureConfig.nameProp,
@@ -85,6 +91,8 @@
               }
 
               callback(result);
+            }, function (error) {
+              $exceptionHandler(error);
             });
         };
       }
@@ -101,6 +109,8 @@
             .$promise
             .then(function (result) {
               query.callback({ results: result, more: result.length === pageSize });
+            }, function (error) {
+              $exceptionHandler(error);
             });
         },
         initSelection: initSelectionFunc,
@@ -131,7 +141,13 @@
     };
   }
 
-  NomenclatureDirective.$inject = ['$filter', '$parse', 'Nomenclature', 'scNomenclatureConfig'];
+  NomenclatureDirective.$inject = [
+    '$filter',
+    '$parse',
+    '$exceptionHandler',
+    'Nomenclature',
+    'scNomenclatureConfig'
+  ];
 
   angular.module('scaffolding')
     .constant('scNomenclatureConfig', {

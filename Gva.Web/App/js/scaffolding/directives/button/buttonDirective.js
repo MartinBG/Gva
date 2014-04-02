@@ -4,7 +4,7 @@
 (function (angular) {
   'use strict';
 
-  function ButtonDirective($parse, l10n) {
+  function ButtonDirective($parse, $exceptionHandler, l10n) {
 
     return {
       restrict: 'E',
@@ -15,7 +15,6 @@
       },
       templateUrl: 'scaffolding/directives/button/buttonDirective.html',
       link: function (scope, element, attrs) {
-
         var elementCtrl = {};
 
         scope.$parent[attrs.name] = elementCtrl;
@@ -27,14 +26,15 @@
 
           scope.$apply(function () {
             // add $event local variables to the expression context as ngClick does
-
             var result = scope.btnClick({ $event: event });
 
             // check if the result is promise
             if (result && result.then && typeof (result.then) === 'function') {
               scope.$pending = true;
               elementCtrl.$pending = true;
-              result['finally'](function () {
+              result['catch'](function (error) {
+                $exceptionHandler(error);
+              })['finally'](function () {
                 delete elementCtrl.$pending;
                 delete scope.$pending;
               });
@@ -46,12 +46,11 @@
         if (!scope.text) {
           scope.text = attrs.text;
         }
-
       }
     };
   }
 
-  ButtonDirective.$inject = ['$parse', 'l10n'];
+  ButtonDirective.$inject = ['$parse', '$exceptionHandler', 'l10n'];
 
   angular.module('scaffolding').directive('scButton', ButtonDirective);
 }(angular));

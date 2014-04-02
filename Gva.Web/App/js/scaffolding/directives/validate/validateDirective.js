@@ -79,7 +79,7 @@
                   removePendingValidation(parentForm);
                 });
 
-                throw reason;
+                return $q.reject(reason);
               });
             } else {
               control.$setValidity(validationErrorKey, isValid);

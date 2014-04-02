@@ -4,7 +4,7 @@
 (function (angular) {
   'use strict';
 
-  function ClickDirective($parse) {
+  function ClickDirective($parse, $exceptionHandler) {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -25,7 +25,9 @@
             // check if the result is promise
             if (result && result.then && typeof (result.then) === 'function') {
               elementCtrl.$pending = true;
-              result['finally'](function () {
+              result['catch'](function (error) {
+                $exceptionHandler(error);
+              })['finally'](function () {
                 delete elementCtrl.$pending;
               });
             }
@@ -35,7 +37,7 @@
     };
   }
 
-  ClickDirective.$inject = ['$parse'];
+  ClickDirective.$inject = ['$parse', '$exceptionHandler'];
 
   angular.module('scaffolding').directive('scClick', ClickDirective);
 }(angular));

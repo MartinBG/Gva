@@ -6,6 +6,7 @@
     $scope,
     $q,
     $modalInstance,
+    $exceptionHandler,
     l10n,
     scFilesConfig,
     modalValue,
@@ -47,7 +48,8 @@
               key: data.fileKey
             };
           }
-        })['catch'](function () {
+        })['catch'](function (error) {
+          $exceptionHandler(error);
           alert(l10n.get('scaffolding.scFiles.failAlert'));
         })['finally'](function () {
           $modalInstance.close(uploadedFile);
@@ -85,6 +87,7 @@
     '$scope',
     '$q',
     '$modalInstance',
+    '$exceptionHandler',
     'l10n',
     'scFilesConfig',
     'modalValue',
