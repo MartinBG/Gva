@@ -35,7 +35,13 @@
       '$stateParams',
       'Person',
       function ($stateParams, Person) {
-        return Person.get($stateParams).$promise;
+        return Person.get($stateParams).$promise.then(function (person) {
+          /*jshint -W052*/
+          person.age = ~~((Date.now() - new Date(person.birtDate)) / 31557600000);
+          /*jshint +W052*/
+
+          return person;
+        });
       }
     ]
   };

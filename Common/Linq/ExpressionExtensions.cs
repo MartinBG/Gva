@@ -53,6 +53,32 @@ namespace Common.Linq
             return expr.AndStringContainsInternal(prop, value);
         }
 
+        public static Expression<Func<T, bool>> AndCollectionContains<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, IEnumerable<string>>> prop, string value)
+        {
+            if (value == null)
+            {
+                return expr;
+            }
+
+            var valueArr = value.Split(',').Select(r => r.Trim().ToLower());
+
+            foreach (var val in valueArr)
+            {
+                expr = expr.And(
+                    Expression.Lambda<Func<T, bool>>(
+                        Expression.Call(
+                        typeof(Enumerable),
+                        "Contains",
+                        new[] { typeof(string) },
+                        prop.Body,
+                        Expression.Constant(val)),
+                    prop.Parameters));
+
+            }
+
+            return expr;
+        }
+
         private static Expression<Func<T, bool>> AndStringContainsInternal<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, string>> prop, string value)
         {
             return expr.And(

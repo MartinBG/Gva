@@ -8,6 +8,7 @@ namespace Regs.Api.Models
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CommitMap());
+            modelBuilder.Configurations.Add(new CommitVersionMap());
             modelBuilder.Configurations.Add(new LotMap());
             modelBuilder.Configurations.Add(new PartMap());
             modelBuilder.Configurations.Add(new PartVersionMap());

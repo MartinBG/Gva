@@ -10,11 +10,6 @@ namespace Regs.Api.Models
     {
         private JObject content = null;
 
-        public PartVersion()
-        {
-            this.Commits = new List<Commit>();
-        }
-
         public int PartVersionId { get; set; }
 
         public int PartId { get; set; }
@@ -33,8 +28,6 @@ namespace Regs.Api.Models
 
         public virtual Part Part { get; set; }
 
-        public virtual ICollection<Commit> Commits { get; set; }
-
         public virtual User User { get; set; }
 
         public JObject Content
@@ -52,6 +45,14 @@ namespace Regs.Api.Models
             {
                 this.content = value;
                 this.TextContent = value.ToString();
+            }
+        }
+
+        public dynamic DynamicContent
+        {
+            get
+            {
+                return this.Content;
             }
         }
     }

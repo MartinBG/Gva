@@ -90,7 +90,7 @@ namespace Gva.Api.Controllers
 
             ApplicationDO returnValue = new ApplicationDO(application);
 
-            returnValue.Person = Mapper.Map<GvaPerson, PersonDO>(this.personRepository.GetPerson(application.LotId));
+            returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(e => e.GvaLotFile.LotPart.SetPart)

@@ -73,7 +73,7 @@ namespace Regs.Api.Models
                 expandedPath = path;
             }
 
-            if (index.PartVersions.Any(pv => pv.Part.Path == expandedPath))
+            if (index.CommitVersions.Any(pc => pc.PartVersion.Part.Path == expandedPath))
             {
                 throw new Exception(string.Format("Specified path ({0}) is already in index", expandedPath.ToString()));
             }
@@ -100,7 +100,14 @@ namespace Regs.Api.Models
                 Part = part,
                 Content = json
             };
-            index.PartVersions.Add(partVersion);
+
+            CommitVersion commitVersion = new CommitVersion
+            {
+                PartVersion = partVersion,
+                Commit = index
+            };
+
+            index.CommitVersions.Add(commitVersion);
 
             return partVersion;
         }
@@ -144,7 +151,8 @@ namespace Regs.Api.Models
 
             this.ModifyDate = DateTime.Now;
 
-            PartVersion partVersion = index.PartVersions
+            PartVersion partVersion = index.CommitVersions
+                .Select(cv => cv.PartVersion)
                 .FirstOrDefault(pv => 
                     pv.Part.Path == path &&
                     pv.OriginalCommit == index);
@@ -163,10 +171,17 @@ namespace Regs.Api.Models
                 this.Parts.Remove(part);
             }
 
-            PartVersion prevPartVersion = index.ParentCommit.PartVersions.FirstOrDefault(pv => pv.Part.Path == path && pv.PartOperation != PartOperation.Delete);
-            if (prevPartVersion != null)
+            CommitVersion prevCommitVersion = index.ParentCommit.CommitVersions.FirstOrDefault(pv => pv.PartVersion.Part.Path == path && pv.PartVersion.PartOperation != PartOperation.Delete);
+            if (prevCommitVersion != null)
             {
-                index.PartVersions.Add(prevPartVersion);
+                CommitVersion newCommitVersion = new CommitVersion
+                {
+                    Commit = index,
+                    PartVersion = prevCommitVersion.PartVersion,
+                    OldPartVersion = prevCommitVersion.PartVersion
+                };
+
+                index.CommitVersions.Add(newCommitVersion);
             }
 
             return partVersion;
@@ -177,12 +192,12 @@ namespace Regs.Api.Models
             Commit index = this.Index;
             this.ModifyDate = DateTime.Now;
 
-            bool partVersionsInIndex = index.PartVersions
+            bool commitVersionsInIndex = index.CommitVersions
                 .Any(pv =>
-                    pv.PartOperation != PartOperation.Delete &&
-                    pv.OriginalCommit == index);
+                    pv.PartVersion.PartOperation != PartOperation.Delete &&
+                    pv.PartVersion.OriginalCommit == index);
 
-            if (partVersionsInIndex)
+            if (commitVersionsInIndex)
             {
                 throw new InvalidOperationException("Cannot reset with uncommited changes in index");
             }
@@ -198,7 +213,9 @@ namespace Regs.Api.Models
                     throw new InvalidOperationException("Cannot reset if any of the commits from the index to the new index is not loaded.");
                 }
 
-                IEnumerable<PartVersion> partVersionsToDelete = newLastCommit.PartVersions.Where(pv => pv.OriginalCommit == newLastCommit);
+                IEnumerable<PartVersion> partVersionsToDelete = newLastCommit.CommitVersions
+                    .Select(cv => cv.PartVersion)
+                    .Where(pv => pv.OriginalCommit == newLastCommit);
 
                 foreach (PartVersion partVersion in partVersionsToDelete)
                 {
@@ -224,13 +241,21 @@ namespace Regs.Api.Models
 
             Commit newIndex = new Commit
             {
-                PartVersions = newLastCommit.PartVersions,
                 ParentCommit = newLastCommit,
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
                 IsIndex = true,
                 IsLoaded = true
             };
+            newIndex.CommitVersions = newLastCommit.CommitVersions
+                .Select(cv =>
+                    new CommitVersion
+                    {
+                        Commit = newIndex,
+                        PartVersion = cv.PartVersion,
+                        OldPartVersion = cv.OldPartVersion
+                    })
+                .ToList();
 
             this.Commits.Add(newIndex);
 
@@ -249,26 +274,26 @@ namespace Regs.Api.Models
                 CommitDate = DateTime.Now
             };
 
-            List<PartVersion> changedPartVersions = index.PartVersions.Where(pv => pv.OriginalCommit == index).ToList();
-            List<PartVersion> toBeCommited;
-            List<PartVersion> notToBeCommited;
+            List<CommitVersion> changedCommitVersions = index.CommitVersions.Where(pv => pv.PartVersion.OriginalCommit == index).ToList();
+            List<CommitVersion> toBeCommited;
+            List<CommitVersion> notToBeCommited;
 
-            index.ChangedPartVersions = changedPartVersions;
+            index.ChangedPartVersions = changedCommitVersions.Select(cv => cv.PartVersion).ToList();
 
             if (paths != null)
             {
-                toBeCommited = changedPartVersions.Where(pv => paths.Contains(pv.Part.Path)).ToList();
-                notToBeCommited = changedPartVersions.Except(toBeCommited).ToList();
+                toBeCommited = changedCommitVersions.Where(cv => paths.Contains(cv.PartVersion.Part.Path)).ToList();
+                notToBeCommited = changedCommitVersions.Except(toBeCommited).ToList();
 
-                foreach (var partVersion in notToBeCommited)
+                foreach (var commitVersion in notToBeCommited)
                 {
-                    index.PartVersions.Remove(partVersion);
+                    index.CommitVersions.Remove(commitVersion);
                 }
             }
             else
             {
-                toBeCommited = changedPartVersions;
-                notToBeCommited = new List<PartVersion>();
+                toBeCommited = changedCommitVersions;
+                notToBeCommited = new List<CommitVersion>();
             }
 
             if (toBeCommited.Count == 0)
@@ -278,7 +303,16 @@ namespace Regs.Api.Models
 
             newIndex.IsIndex = true;
             newIndex.IsLoaded = true;
-            newIndex.PartVersions = new Collection<PartVersion>(notToBeCommited.Union(index.PartVersions.Where(pv => pv.PartOperation != PartOperation.Delete)).ToList());
+            newIndex.CommitVersions = notToBeCommited
+                .Union(index.CommitVersions.Where(cv => cv.PartVersion.PartOperation != PartOperation.Delete))
+                .Select(cv =>
+                    new CommitVersion
+                    {
+                        Commit = newIndex,
+                        PartVersion = cv.PartVersion,
+                        OldPartVersion = cv.OldPartVersion
+                    })
+                .ToList();
             this.Commits.Add(newIndex);
 
             index.CommitDate = DateTime.Now;
@@ -320,7 +354,8 @@ namespace Regs.Api.Models
         {
             Commit commit = this.GetCommit(commitId);
             var partVersions =
-                commit.PartVersions
+                commit.CommitVersions
+                .Select(cv => cv.PartVersion)
                 .Where(pv =>
                     (exact ? pv.Part.Path == path : Regex.IsMatch(pv.Part.Path, "^" + path + @"/\d+$")) &&
                     pv.PartOperation != PartOperation.Delete);
@@ -358,8 +393,17 @@ namespace Regs.Api.Models
                 Part = partVersion.Part,
                 Content = json
             };
-            currCommit.PartVersions.Remove(partVersion);
-            currCommit.PartVersions.Add(updatedPartVersion);
+
+            var commitVersion = currCommit.CommitVersions.SingleOrDefault(cv => cv.PartVersion.Part == partVersion.Part);
+            currCommit.CommitVersions.Remove(commitVersion);
+
+            CommitVersion newCommitVersion = new CommitVersion
+            {
+                Commit = currCommit,
+                PartVersion = updatedPartVersion,
+                OldPartVersion = partVersion
+            };
+            currCommit.CommitVersions.Add(newCommitVersion);
 
             return updatedPartVersion;
         }
@@ -380,10 +424,20 @@ namespace Regs.Api.Models
                 PartOperation = PartOperation.Delete,
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
-                Part = partVersion.Part
+                Part = partVersion.Part,
+                Content = partVersion.Content
             };
-            currCommit.PartVersions.Remove(partVersion);
-            currCommit.PartVersions.Add(deletedPartVersion);
+
+            var commitVersion = currCommit.CommitVersions.SingleOrDefault(cv => cv.PartVersion.Part == partVersion.Part);
+            currCommit.CommitVersions.Remove(commitVersion);
+
+            CommitVersion newCommitVersion = new CommitVersion
+            {
+                Commit = currCommit,
+                PartVersion = deletedPartVersion,
+                OldPartVersion = partVersion
+            };
+            currCommit.CommitVersions.Add(newCommitVersion);
 
             return deletedPartVersion;
         }

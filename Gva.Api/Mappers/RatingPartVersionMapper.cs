@@ -15,7 +15,7 @@ namespace Gva.Api.Mappers
                 .ForMember(r => r.RatingEdition, m => m.MapFrom(t => t.Item3))
                 .ForMember(
                     r => r.FirstEditionValidFrom,
-                    m => m.MapFrom(t => Convert.ToDateTime(t.Item2.Content.Value<string>("documentDateValidFrom"))));
+                    m => m.MapFrom(t => t.Item2.Content.Value<DateTime>("documentDateValidFrom")));
         }
     }
 }

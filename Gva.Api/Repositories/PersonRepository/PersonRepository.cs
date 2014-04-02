@@ -4,6 +4,8 @@ using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
 using System.Data.Entity;
+using Gva.Api.ModelsDO;
+using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -16,7 +18,7 @@ namespace Gva.Api.Repositories.PersonRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaPerson> GetPersons(
+        public IEnumerable<GvaViewPerson> GetPersons(
             string lin = null,
             string uin = null,
             string names = null,
@@ -27,32 +29,52 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<GvaPerson>();
+            var gvaPersons = this.unitOfWork.DbContext.Set<GvaViewPersonData>();
+            var gvaRatings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>();
+            var gvaLicences = this.unitOfWork.DbContext.Set<GvaViewPersonLicence>();
+
+            var predicate = PredicateBuilder.True<GvaViewPerson>();
 
             predicate = predicate
-                .AndStringMatches(p => p.Lin, lin, exact)
-                .AndStringMatches(p => p.Uin, uin, exact)
-                .AndStringMatches(p => p.Names, names, exact)
-                .AndStringMatches(p => p.Licences, licences, exact)
-                .AndStringMatches(p => p.Ratings, ratings, exact)
-                .AndStringMatches(p => p.Organization, organization, exact);
+                .AndStringMatches(p => p.Data.Lin, lin, exact)
+                .AndStringMatches(p => p.Data.Uin, uin, exact)
+                .AndStringMatches(p => p.Data.Names, names, exact)
+                .AndCollectionContains(p => p.Licences.Select(l => l.LicenceType), licences)
+                .AndCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
+                .AndStringMatches(p => p.Data.Organization, organization, exact);
 
-            return this.unitOfWork.DbContext.Set<GvaPerson>()
+            return gvaPersons
+                .GroupJoin(
+                    gvaRatings,
+                    p => p.GvaPersonLotId,
+                    pr => pr.LotId,
+                    (p, pr) =>
+                        new
+                        {
+                            Data = p,
+                            Ratings = pr
+                        })
+                .GroupJoin(
+                    gvaLicences,
+                    p => p.Data.GvaPersonLotId,
+                    pl => pl.LotId,
+                    (p, pl) =>
+                        new GvaViewPerson
+                        {
+                            Data = p.Data,
+                            Ratings = p.Ratings,
+                            Licences = pl
+                        })
                 .Where(predicate)
-                .OrderBy(p => p.Names)
+                .OrderBy(p => p.Data.Names)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
 
-        public GvaPerson GetPerson(int personId)
+        public GvaViewPersonData GetPerson(int personId)
         {
-            return this.unitOfWork.DbContext.Set<GvaPerson>()
+            return this.unitOfWork.DbContext.Set<GvaViewPersonData>()
                 .SingleOrDefault(p => p.GvaPersonLotId == personId);
-        }
-
-        public void AddPerson(GvaPerson person)
-        {
-            this.unitOfWork.DbContext.Set<GvaPerson>().Add(person);
         }
 
         public GvaCorrespondent GetGvaCorrespondentByPersonId(int lotId)

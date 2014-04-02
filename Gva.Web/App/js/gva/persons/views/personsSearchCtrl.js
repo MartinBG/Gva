@@ -54,7 +54,16 @@
       '$stateParams',
       'Person',
       function ($stateParams, Person) {
-        return Person.query($stateParams).$promise;
+        return Person.query($stateParams).$promise.then(function (persons) {
+          return _(persons)
+          .forEach(function (person) {
+            /*jshint -W052*/
+            person.age = ~~((Date.now() - new Date(person.birtDate)) / 31557600000);
+            /*jshint +W052*/
+            person.licences = _.pluck(person.licences, 'licenceType').join(' , ');
+            person.ratings = _.pluck(person.ratings, 'ratingType').join(' , ');
+          }).value();
+        });
       }
     ]
   };

@@ -69,14 +69,15 @@ namespace Gva.Api.Controllers
         {
             var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, exact);
 
-            return Ok(Mapper.Map<IEnumerable<GvaPerson>, IEnumerable<PersonDO>>(persons));
+            return Ok(persons.Select(p => new PersonDO(p)));
         }
 
         [Route("{lotId}")]
         public IHttpActionResult GetPerson(int lotId)
         {
             var person = this.personRepository.GetPerson(lotId);
-            return Ok(Mapper.Map<GvaPerson, PersonDO>(person));
+
+            return Ok(new PersonDO(person));
         }
 
         [Route("")]

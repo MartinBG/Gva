@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
     public interface IPersonRepository
     {
-        IEnumerable<GvaPerson> GetPersons(
+        IEnumerable<GvaViewPerson> GetPersons(
             string lin = null,
             string uin = null,
             string names = null,
@@ -16,9 +17,7 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
-        GvaPerson GetPerson(int personId);
-
-        void AddPerson(GvaPerson person);
+        GvaViewPersonData GetPerson(int personId);
 
         GvaCorrespondent GetGvaCorrespondentByPersonId(int lotId);
 

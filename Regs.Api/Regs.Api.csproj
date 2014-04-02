@@ -69,12 +69,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LotEvents\CommitEventHandler.cs" />
     <Compile Include="LotEvents\ILotEvent.cs" />
     <Compile Include="LotEvents\ILotEventDispatcher.cs" />
     <Compile Include="LotEvents\LotEventDispatcher.cs" />
     <Compile Include="LotEvents\ResetEvent.cs" />
     <Compile Include="LotEvents\CommitEvent.cs" />
     <Compile Include="LotEvents\ILotEventHandler.cs" />
+    <Compile Include="Models\CommitVersion.cs" />
     <Compile Include="Repositories\LotRepository\ILotRepository.cs" />
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\Lot.cs" />

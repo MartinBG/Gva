@@ -1,18 +1,23 @@
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
+using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
     public partial class GvaApplicationSearch
     {
         public int LotPartId { get; set; }
-        public Nullable<System.DateTime> RequestDate { get; set; }
+
+        public DateTime? RequestDate { get; set; }
+
         public string DocumentNumber { get; set; }
+
         public string ApplicationTypeName { get; set; }
+
         public string StatusName { get; set; }
-        public virtual Regs.Api.Models.Part LotPart { get; set; }
+
+        public virtual Part LotPart { get; set; }
     }
 
     public class GvaApplicationSearchMap : EntityTypeConfiguration<GvaApplicationSearch>

@@ -21,7 +21,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             var applications = this.unitOfWork.DbContext.Set<GvaApplication>().AsQueryable()
                 .GroupJoin(this.unitOfWork.DbContext.Set<GvaApplicationSearch>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.LotPartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
-                .Join(this.unitOfWork.DbContext.Set<GvaPerson>().AsQueryable(), ga => ga.GApplication.LotId, gp => gp.GvaPersonLotId, (ga, gp) => new { GApplication = ga.GApplication, GApplicationSearch = ga.GApplicationSearch, GPerson = gp });
+                .Join(this.unitOfWork.DbContext.Set<GvaViewPersonData>().AsQueryable(), ga => ga.GApplication.LotId, gp => gp.GvaPersonLotId, (ga, gp) => new { GApplication = ga.GApplication, GApplicationSearch = ga.GApplicationSearch, GPerson = gp });
 
             if (fromDate.HasValue)
             {

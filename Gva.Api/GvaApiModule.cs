@@ -3,6 +3,7 @@ using Autofac.Integration.WebApi;
 using Common.Data;
 using Gva.Api.Controllers;
 using Gva.Api.LotEventHandlers;
+using Gva.Api.LotEventHandlers.PersonView;
 using Gva.Api.Mappers;
 using Gva.Api.Mappers.Resolvers;
 using Gva.Api.Models;
@@ -21,7 +22,10 @@ namespace Gva.Api
         {
             moduleBuilder.RegisterType<GvaDbConfiguration>().As<IDbConfiguration>().SingleInstance();
 
-            moduleBuilder.RegisterType<PersonLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonLicenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonRatingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<InventoryLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<ApplicationLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
@@ -34,7 +38,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<JObjectMapper>().As<IMapper>().SingleInstance();
             moduleBuilder.RegisterType<PartVersionMapper>().As<IMapper>().SingleInstance();
             moduleBuilder.RegisterType<FilePartVersionMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<PersonMapper>().As<IMapper>().SingleInstance();
             moduleBuilder.RegisterType<RatingPartVersionMapper>().As<IMapper>().SingleInstance();
             moduleBuilder.RegisterType<InventoryItemMapper>().As<IMapper>().SingleInstance();
             moduleBuilder.RegisterType<ApplicationMapper>().As<IMapper>().SingleInstance();

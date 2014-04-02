@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaPerson
+    public partial class GvaViewPersonData
     {
         public int GvaPersonLotId { get; set; }
 
@@ -14,11 +15,7 @@ namespace Gva.Api.Models
 
         public string Names { get; set; }
 
-        public int Age { get; set; }
-
-        public string Licences { get; set; }
-
-        public string Ratings { get; set; }
+        public DateTime BirtDate { get; set; }
 
         public string Organization { get; set; }
 
@@ -27,9 +24,9 @@ namespace Gva.Api.Models
         public virtual Lot Lot { get; set; }
     }
 
-    public class GvaPersonMap : EntityTypeConfiguration<GvaPerson>
+    public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPersonData>
     {
-        public GvaPersonMap()
+        public GvaViewPersonMap()
         {
             // Primary Key
             this.HasKey(t => t.GvaPersonLotId);
@@ -51,15 +48,16 @@ namespace Gva.Api.Models
             this.Property(t => t.Organization)
                 .HasMaxLength(50);
 
+            this.Property(t => t.Employment)
+                .HasMaxLength(50);
+
             // Table & Column Mappings
-            this.ToTable("GvaPersons");
+            this.ToTable("GvaViewPersons");
             this.Property(t => t.GvaPersonLotId).HasColumnName("GvaPersonLotId");
             this.Property(t => t.Lin).HasColumnName("Lin");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Names).HasColumnName("Names");
-            this.Property(t => t.Age).HasColumnName("Age");
-            this.Property(t => t.Licences).HasColumnName("Licences");
-            this.Property(t => t.Ratings).HasColumnName("Ratings");
+            this.Property(t => t.BirtDate).HasColumnName("BirtDate");
             this.Property(t => t.Organization).HasColumnName("Organization");
             this.Property(t => t.Employment).HasColumnName("Employment");
 

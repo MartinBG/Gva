@@ -48,7 +48,9 @@ namespace Regs.Api.Repositories.LotRepositories
             }
 
             Commit commit = this.unitOfWork.DbContext.Set<Commit>()
-                .Include(c => c.PartVersions)
+                .Include(c => c.CommitVersions)
+                .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
+                .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
                 .Where(c => c.LotId == lotId && c.IsIndex == true)
                 .SingleOrDefault();
 
@@ -75,7 +77,9 @@ namespace Regs.Api.Repositories.LotRepositories
             if (commitId.HasValue)
             {
                 commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Include(c => c.PartVersions)
+                    .Include(c => c.CommitVersions)
+                    .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
+                    .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
                     .SingleOrDefault(c => c.CommitId == commitId);
                 if (commit.LotId != lotId)
                 {
@@ -87,14 +91,15 @@ namespace Regs.Api.Repositories.LotRepositories
                 commit = this.unitOfWork.DbContext.Set<Commit>()
                     .Where(c => c.LotId == lotId && c.IsIndex == true)
                     .Select(c => c.ParentCommit)
+                    .Include(c => c.CommitVersions)
+                    .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
+                    .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
                     .SingleOrDefault();
 
                 if (commit == null)
                 {
                     throw new Exception(string.Format("The specified lot with id {0} does not have a non-index commit.", lotId));
                 }
-
-                this.unitOfWork.DbContext.Entry(commit).Collection(c => c.PartVersions).Load();
             }
 
             commit.IsLoaded = true;
@@ -110,7 +115,9 @@ namespace Regs.Api.Repositories.LotRepositories
             }
 
             var commit = this.unitOfWork.DbContext.Set<Commit>()
-                .Include(c => c.PartVersions)
+                .Include(c => c.CommitVersions)
+                .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
+                .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
                 .SingleOrDefault(c => c.CommitId == commitId);
             commit.IsLoaded = true;
 

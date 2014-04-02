@@ -9,7 +9,7 @@ namespace Regs.Api.Models
     {
         public Commit()
         {
-            this.PartVersions = new List<PartVersion>();
+            this.CommitVersions = new List<CommitVersion>();
         }
 
         public int CommitId { get; set; }
@@ -32,7 +32,7 @@ namespace Regs.Api.Models
 
         public virtual User Commiter { get; set; }
 
-        public virtual ICollection<PartVersion> PartVersions { get; set; }
+        public virtual ICollection<CommitVersion> CommitVersions { get; set; }
 
         public virtual ICollection<PartVersion> ChangedPartVersions { get; set; }
 
@@ -62,15 +62,6 @@ namespace Regs.Api.Models
             this.Property(t => t.IsIndex).HasColumnName("IsIndex");
 
             // Relationships
-            this.HasMany(t => t.PartVersions)
-                .WithMany(t => t.Commits)
-                .Map(m =>
-                {
-                    m.ToTable("LotCommitVersions");
-                    m.MapLeftKey("LotCommitId");
-                    m.MapRightKey("LotPartVersionId");
-                });
-
             this.HasOptional(t => t.ParentCommit)
                 .WithMany()
                 .HasForeignKey(d => d.ParentCommitId);
