@@ -12,19 +12,20 @@
     $scope.airportDocumentApplication = airportDocumentApplication;
 
     $scope.save = function () {
-      $scope.editDocumentApplicationForm.$validate()
-      .then(function () {
-        if ($scope.editDocumentApplicationForm.$valid) {
-          return AirportDocumentApplication
-            .save(
-            { id: $stateParams.id, ind: $stateParams.ind },
-            $scope.airportDocumentApplication)
-            .$promise
-            .then(function () {
-              return $state.go('root.airports.view.applications.search');
-            });
-        }
-      });
+      return $scope.editDocumentApplicationForm.$validate()
+        .then(function () {
+          if ($scope.editDocumentApplicationForm.$valid) {
+            return AirportDocumentApplication
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.airportDocumentApplication)
+              .$promise
+              .then(function () {
+                return $state.go('root.airports.view.applications.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

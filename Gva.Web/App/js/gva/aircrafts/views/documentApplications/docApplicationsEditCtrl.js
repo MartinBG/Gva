@@ -12,19 +12,20 @@
     $scope.aircraftDocumentApplication = aircraftDocumentApplication;
 
     $scope.save = function () {
-      $scope.editDocumentApplicationForm.$validate()
-      .then(function () {
-        if ($scope.editDocumentApplicationForm.$valid) {
-          return AircraftDocumentApplication
-            .save(
-            { id: $stateParams.id, ind: $stateParams.ind },
-            $scope.aircraftDocumentApplication)
-            .$promise
-            .then(function () {
-              return $state.go('root.aircrafts.view.applications.search');
-            });
-        }
-      });
+      return $scope.editDocumentApplicationForm.$validate()
+        .then(function () {
+          if ($scope.editDocumentApplicationForm.$valid) {
+            return AircraftDocumentApplication
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.aircraftDocumentApplication)
+              .$promise
+              .then(function () {
+                return $state.go('root.aircrafts.view.applications.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

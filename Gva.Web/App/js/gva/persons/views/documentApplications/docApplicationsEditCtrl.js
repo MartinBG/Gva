@@ -12,17 +12,20 @@
     $scope.personDocumentApplication = personDocumentApplication;
 
     $scope.save = function () {
-      $scope.editDocumentApplicationForm.$validate()
-      .then(function () {
-        if ($scope.editDocumentApplicationForm.$valid) {
-          return PersonDocumentApplication
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentApplication)
-            .$promise
-            .then(function () {
-              return $state.go('root.persons.view.documentApplications.search');
-            });
-        }
-      });
+      return $scope.editDocumentApplicationForm.$validate()
+        .then(function () {
+          if ($scope.editDocumentApplicationForm.$valid) {
+            return PersonDocumentApplication
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.personDocumentApplication)
+              .$promise
+              .then(function () {
+                return $state.go('root.persons.view.documentApplications.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

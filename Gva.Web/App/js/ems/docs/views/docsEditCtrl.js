@@ -65,10 +65,11 @@
     };
 
     $scope.save = function () {
-      $scope.editDocForm.$validate().then(function () {
+      return $scope.editDocForm.$validate().then(function () {
         if ($scope.editDocForm.$valid) {
           return Doc
-            .save($stateParams, $scope.doc).$promise
+            .save($stateParams, $scope.doc)
+            .$promise
             .then(function () {
               return $state.transitionTo($state.current, $stateParams, { reload: true });
             });

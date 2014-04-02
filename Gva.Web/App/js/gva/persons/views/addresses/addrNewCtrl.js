@@ -12,11 +12,12 @@
     $scope.personAddress = address;
 
     $scope.save = function () {
-      $scope.personAddressForm.$validate()
+      return $scope.personAddressForm.$validate()
         .then(function () {
           if ($scope.personAddressForm.$valid) {
             return PersonAddress
-              .save({ id: $stateParams.id }, $scope.personAddress).$promise
+              .save({ id: $stateParams.id }, $scope.personAddress)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.addresses.search');
               });

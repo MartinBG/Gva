@@ -12,16 +12,17 @@
     $scope.model = edition;
 
     $scope.save = function () {
-      $scope.newRatingEditionForm.$validate()
-      .then(function () {
-        if ($scope.newRatingEditionForm.$valid) {
-          return PersonEdition
-          .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.model).$promise
-          .then(function () {
-            return $state.go('root.persons.view.ratings.editions.search');
-          });
-        }
-      });
+      return $scope.newRatingEditionForm.$validate()
+        .then(function () {
+          if ($scope.newRatingEditionForm.$valid) {
+            return PersonEdition
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.model)
+              .$promise
+              .then(function () {
+                return $state.go('root.persons.view.ratings.editions.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

@@ -36,12 +36,13 @@
     }, true);
 
     $scope.save = function () {
-      $scope.docTypeForm.$validate().then(function () {
+      return $scope.docTypeForm.$validate().then(function () {
         if ($scope.docTypeForm.$valid) {
-          return Doc.setDocType({
-            id: $scope.oldDoc.docId,
-            docVersion: $scope.oldDoc.version
-          }, $scope.doc)
+          return Doc
+            .setDocType({
+              id: $scope.oldDoc.docId,
+              docVersion: $scope.oldDoc.version
+            }, $scope.doc)
             .$promise
             .then(function () {
               return $state.transitionTo('root.docs.edit.case', $stateParams, { reload: true });

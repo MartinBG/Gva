@@ -37,7 +37,8 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc.save($scope.docModel.doc)
+          return Doc
+            .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
               return $state.go('root.docs.search', { filter: 'all', ds: result.ids });

@@ -12,12 +12,15 @@
     $scope.personDocumentEmployment = employment;
 
     $scope.save = function () {
-      $scope.editDocumentEmploymentForm.$validate()
+      return $scope.editDocumentEmploymentForm.$validate()
         .then(function () {
           if ($scope.editDocumentEmploymentForm.$valid) {
             return PersonDocumentEmployment
-              .save({ id: $stateParams.id, ind: $stateParams.ind },
-              $scope.personDocumentEmployment).$promise
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.personDocumentEmployment)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.employments.search');
               });

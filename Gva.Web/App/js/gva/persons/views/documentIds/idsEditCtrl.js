@@ -12,7 +12,7 @@
     $scope.personDocumentId = docId;
 
     $scope.save = function () {
-      $scope.editDocumentIdForm.$validate()
+      return $scope.editDocumentIdForm.$validate()
         .then(function () {
           if ($scope.editDocumentIdForm.$valid) {
             return PersonDocumentId

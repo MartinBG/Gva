@@ -28,13 +28,14 @@
     }
 
     $scope.save = function () {
-      $scope.workflowForm.$validate().then(function () {
+      return $scope.workflowForm.$validate().then(function () {
         if ($scope.workflowForm.$valid) {
-          return DocWorkflow.save({
-            id: $scope.workflowModel.docId,
-            docVersion: $scope.workflowModel.docVersion
-          }, $scope.workflowModel)
-        .$promise
+          return DocWorkflow
+            .save({
+              id: $scope.workflowModel.docId,
+              docVersion: $scope.workflowModel.docVersion
+            }, $scope.workflowModel)
+            .$promise
             .then(function () {
               return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
             });

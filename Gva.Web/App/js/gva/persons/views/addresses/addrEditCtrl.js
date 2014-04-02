@@ -12,16 +12,17 @@
     $scope.personAddress = address;
 
     $scope.save = function () {
-      $scope.personAddressForm.$validate()
-      .then(function () {
-        if ($scope.personAddressForm.$valid) {
-          return PersonAddress
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personAddress).$promise
-            .then(function () {
-              return $state.go('root.persons.view.addresses.search');
-            });
-        }
-      });
+      return $scope.personAddressForm.$validate()
+        .then(function () {
+          if ($scope.personAddressForm.$valid) {
+            return PersonAddress
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personAddress)
+              .$promise
+              .then(function () {
+                return $state.go('root.persons.view.addresses.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

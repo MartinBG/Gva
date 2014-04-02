@@ -7,15 +7,17 @@
     $state,
     $stateParams,
     OrganizationStaffExaminer,
-    organizationStaffExaminer) {
+    organizationStaffExaminer
+  ) {
     $scope.organizationStaffExaminer = organizationStaffExaminer;
 
     $scope.save = function () {
-      $scope.organizationStaffExaminersForm.$validate()
+      return $scope.organizationStaffExaminersForm.$validate()
         .then(function () {
           if ($scope.organizationStaffExaminersForm.$valid) {
             return OrganizationStaffExaminer
-              .save({ id: $stateParams.id }, $scope.organizationStaffExaminer).$promise
+              .save({ id: $stateParams.id }, $scope.organizationStaffExaminer)
+              .$promise
               .then(function () {
                 return $state.go('root.organizations.view.staffExaminers.search');
               });

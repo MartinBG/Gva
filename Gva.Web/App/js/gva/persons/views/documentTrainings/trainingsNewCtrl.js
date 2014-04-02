@@ -11,11 +11,12 @@
     selectedPublisher) {
     $scope.isEdit = false;
     $scope.save = function () {
-      $scope.newDocumentTrainingForm.$validate()
+      return $scope.newDocumentTrainingForm.$validate()
         .then(function () {
           if ($scope.newDocumentTrainingForm.$valid) {
             return PersonDocumentTraining
-              .save({ id: $stateParams.id }, $scope.personDocumentTraining).$promise
+              .save({ id: $stateParams.id }, $scope.personDocumentTraining)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.documentTrainings.search');
               });

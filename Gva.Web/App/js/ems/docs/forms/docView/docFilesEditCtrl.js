@@ -2,10 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function DocFilesEditCtrl(
-    $scope
-  ) {
-
+  function DocFilesEditCtrl($scope) {
     $scope.editDocFile = function editDocFile(target) {
       target.isInEdit = true;
       target.prevValues = {
@@ -22,7 +19,7 @@
     };
 
     $scope.saveDocFile = function saveDocFile(target, form) {
-      form.$validate().then(function () {
+      return form.$validate().then(function () {
         if (form.$valid) {
           target.isDirty = true;
           target.isInEdit = false;

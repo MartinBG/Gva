@@ -12,7 +12,7 @@
     $scope.personDocumentEmployment = employment;
 
     $scope.save = function () {
-      $scope.newDocumentEmploymentForm.$validate()
+      return $scope.newDocumentEmploymentForm.$validate()
         .then(function () {
           if ($scope.newDocumentEmploymentForm.$valid) {
             return PersonDocumentEmployment

@@ -11,11 +11,12 @@
     $scope.organizationRecommendation = organizationRecommendation;
 
     $scope.save = function () {
-      $scope.organizationRecommendationsForm.$validate()
+      return $scope.organizationRecommendationsForm.$validate()
         .then(function () {
           if ($scope.organizationRecommendationsForm.$valid) {
             return OrganizationRecommendation
-              .save({ id: $stateParams.id }, $scope.organizationRecommendation).$promise
+              .save({ id: $stateParams.id }, $scope.organizationRecommendation)
+              .$promise
               .then(function () {
                 return $state.go('root.organizations.view.recommendations.search');
               });

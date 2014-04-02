@@ -15,9 +15,10 @@
     $scope.register = function () {
       $scope.docModel.doc.register = true;
 
-      $scope.docForm.$validate().then(function () {
+      return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          Doc.save($scope.docModel.doc)
+          return Doc
+            .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
               return $state.go('root.docs.search', { filter: 'all', ds: result.ids });
@@ -27,7 +28,7 @@
     };
 
     $scope.save = function () {
-      $scope.docForm.$validate().then(function () {
+      return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
           Doc.save($scope.docModel.doc)
             .$promise

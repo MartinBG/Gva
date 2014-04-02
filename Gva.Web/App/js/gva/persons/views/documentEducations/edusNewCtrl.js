@@ -12,11 +12,12 @@
     $scope.personDocumentEducation = edu;
 
     $scope.save = function () {
-      $scope.newDocumentEducationForm.$validate()
+      return $scope.newDocumentEducationForm.$validate()
         .then(function () {
           if ($scope.newDocumentEducationForm.$valid) {
             return PersonDocumentEducation
-              .save({ id: $stateParams.id }, $scope.personDocumentEducation).$promise
+              .save({ id: $stateParams.id }, $scope.personDocumentEducation)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.documentEducations.search');
               });

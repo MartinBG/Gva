@@ -12,18 +12,20 @@
     $scope.organizationRecommendation = organizationRecommendation;
 
     $scope.save = function () {
-      $scope.organizationRecommendationsForm.$validate()
-      .then(function () {
-        if ($scope.organizationRecommendationsForm.$valid) {
-          return OrganizationRecommendation
-            .save({ id: $stateParams.id, ind: $stateParams.ind },
-            $scope.organizationRecommendation)
-            .$promise
-            .then(function () {
-              return $state.go('root.organizations.view.recommendations.search');
-            });
-        }
-      });
+      return $scope.organizationRecommendationsForm.$validate()
+        .then(function () {
+          if ($scope.organizationRecommendationsForm.$valid) {
+            return OrganizationRecommendation
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.organizationRecommendation)
+              .$promise
+              .then(function () {
+                return $state.go('root.organizations.view.recommendations.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

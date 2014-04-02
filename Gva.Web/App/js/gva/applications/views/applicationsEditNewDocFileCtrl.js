@@ -16,12 +16,14 @@
     };
 
     $scope.save = function () {
-      $scope.newDocFile.$validate().then(function () {
+      return $scope.newDocFile.$validate().then(function () {
         if ($scope.newDocFile.$valid) {
-          return Application.attachDocFile({
-            id: $stateParams.id,
-            docId: $stateParams.docId
-          }, $scope.files.docFiles).$promise
+          return Application
+            .attachDocFile({
+              id: $stateParams.id,
+              docId: $stateParams.docId
+            }, $scope.files.docFiles)
+            .$promise
             .then(function () {
               return $state.transitionTo('root.applications.edit.case', {
                 id: $stateParams.id

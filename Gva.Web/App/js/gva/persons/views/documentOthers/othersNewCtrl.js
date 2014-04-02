@@ -11,11 +11,12 @@
     selectedPublisher
   ) {
     $scope.save = function () {
-      $scope.newDocumentOtherForm.$validate()
+      return $scope.newDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.newDocumentOtherForm.$valid) {
             return PersonDocumentOther
-              .save({ id: $stateParams.id }, $scope.personDocumentOther).$promise
+              .save({ id: $stateParams.id }, $scope.personDocumentOther)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.documentOthers.search');
               });

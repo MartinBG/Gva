@@ -12,11 +12,12 @@
     $scope.personDocumentMedical = med;
 
     $scope.save = function () {
-      $scope.newDocumentMedicalForm.$validate()
+      return $scope.newDocumentMedicalForm.$validate()
         .then(function () {
           if ($scope.newDocumentMedicalForm.$valid) {
             return PersonDocumentMedical
-              .save({ id: $stateParams.id }, $scope.personDocumentMedical).$promise
+              .save({ id: $stateParams.id }, $scope.personDocumentMedical)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.medicals.search');
               });

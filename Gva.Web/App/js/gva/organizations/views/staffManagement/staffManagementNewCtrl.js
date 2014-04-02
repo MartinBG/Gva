@@ -11,11 +11,12 @@
     $scope.organizationStaffManagement = organizationStaffManagement;
 
     $scope.save = function () {
-      $scope.organizationStaffManagementForm.$validate()
+      return $scope.organizationStaffManagementForm.$validate()
         .then(function () {
           if ($scope.organizationStaffManagementForm.$valid) {
             return OrganizationStaffManagement
-              .save({ id: $stateParams.id }, $scope.organizationStaffManagement).$promise
+              .save({ id: $stateParams.id }, $scope.organizationStaffManagement)
+              .$promise
               .then(function () {
                 return $state.go('root.organizations.view.staffManagement.search');
               });

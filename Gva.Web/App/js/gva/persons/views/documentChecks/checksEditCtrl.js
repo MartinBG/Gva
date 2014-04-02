@@ -20,17 +20,17 @@
     };
 
     $scope.save = function () {
-      $scope.editDocumentCheckForm.$validate()
-      .then(function () {
-        if ($scope.editDocumentCheckForm.$valid) {
-          return PersonDocumentCheck
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentCheck)
-            .$promise
-            .then(function () {
-              return $state.go('root.persons.view.checks.search');
-            });
-        }
-      });
+      return $scope.editDocumentCheckForm.$validate()
+        .then(function () {
+          if ($scope.editDocumentCheckForm.$valid) {
+            return PersonDocumentCheck
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentCheck)
+              .$promise
+              .then(function () {
+                return $state.go('root.persons.view.checks.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

@@ -82,10 +82,12 @@
     };
 
     $scope.save = function save() {
-      $scope.corrForm.$validate()
+      return $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
-            Corr.save($scope.corr).$promise
+            return Corr
+              .save($scope.corr)
+              .$promise
               .then(function () {
                 return $state.go('root.corrs.search');
               });

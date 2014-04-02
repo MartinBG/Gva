@@ -13,16 +13,17 @@
     $scope.aircraftDocumentApplication = aircraftDocumentApplication;
 
     $scope.save = function () {
-      $scope.newDocumentApplicationForm.$validate()
-         .then(function () {
-            if ($scope.newDocumentApplicationForm.$valid) {
-              return AircraftDocumentApplication
-              .save({ id: $stateParams.id }, $scope.aircraftDocumentApplication).$promise
+      return $scope.newDocumentApplicationForm.$validate()
+        .then(function () {
+          if ($scope.newDocumentApplicationForm.$valid) {
+            return AircraftDocumentApplication
+              .save({ id: $stateParams.id }, $scope.aircraftDocumentApplication)
+              .$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.applications.search');
               });
-            }
-          });
+          }
+        });
     };
 
     $scope.cancel = function () {

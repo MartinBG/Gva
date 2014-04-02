@@ -14,7 +14,7 @@
     $scope.docCasePartTypeId = doc.docCasePartTypeId;
 
     $scope.save = function () {
-      $scope.casePartForm.$validate().then(function () {
+      return $scope.casePartForm.$validate().then(function () {
         if ($scope.casePartForm.$valid) {
           if ($scope.docCasePartTypeId !== doc.docCasePartTypeId) {
             return Doc

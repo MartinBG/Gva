@@ -12,15 +12,16 @@
     $scope.item = edition;
 
     $scope.save = function () {
-      $scope.editRatingEditionForm.$validate()
-       .then(function () {
+      return $scope.editRatingEditionForm.$validate()
+        .then(function () {
           if ($scope.editRatingEditionForm.$valid) {
             return PersonEdition
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind,
                 childInd: $stateParams.childInd
-              }, $scope.item).$promise
+              }, $scope.item)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.ratings.editions.search');
               });

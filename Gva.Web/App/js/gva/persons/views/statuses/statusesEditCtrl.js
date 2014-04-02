@@ -16,11 +16,12 @@
     };
 
     $scope.save = function () {
-      $scope.personStatusForm.$validate()
+      return $scope.personStatusForm.$validate()
         .then(function () {
           if ($scope.personStatusForm.$valid) {
             return PersonStatus
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status).$promise
+              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status)
+              .$promise
               .then(function () {
                 return $state.go('root.persons.view.statuses.search', { id: $stateParams.id });
               });

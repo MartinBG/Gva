@@ -13,7 +13,7 @@
     $scope.personFlyingExperience = personFlyingExperience;
 
     $scope.save = function () {
-      $scope.personFlyingExperienceForm.$validate()
+      return $scope.personFlyingExperienceForm.$validate()
         .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {
             return PersonFlyingExperience

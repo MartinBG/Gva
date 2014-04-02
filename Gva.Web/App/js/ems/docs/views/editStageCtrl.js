@@ -13,12 +13,14 @@
     $scope.stageModel = stageModel;
 
     $scope.save = function () {
-      $scope.stageForm.$validate().then(function () {
+      return $scope.stageForm.$validate().then(function () {
         if ($scope.stageForm.$valid) {
-          return DocStage.edit({
-            id: $scope.stageModel.docId,
-            docVersion: $scope.stageModel.docVersion
-          }, $scope.stageModel).$promise
+          return DocStage
+            .edit({
+              id: $scope.stageModel.docId,
+              docVersion: $scope.stageModel.docVersion
+            }, $scope.stageModel)
+            .$promise
             .then(function () {
               return $state.transitionTo($state.$current.parent, $stateParams, { reload: true });
             });

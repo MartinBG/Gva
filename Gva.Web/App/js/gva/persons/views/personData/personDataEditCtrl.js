@@ -12,17 +12,17 @@
     $scope.personData = personData;
 
     $scope.save = function () {
-      $scope.personDataForm.$validate()
-      .then(function () {
-        if ($scope.personDataForm.$valid) {
-          return PersonData
-          .save({ id: $stateParams.id }, $scope.personData)
-          .$promise
-          .then(function () {
-            return $state.transitionTo('root.persons.view', $stateParams, { reload: true });
-          });
-        }
-      });
+      return $scope.personDataForm.$validate()
+        .then(function () {
+          if ($scope.personDataForm.$valid) {
+            return PersonData
+              .save({ id: $stateParams.id }, $scope.personData)
+              .$promise
+              .then(function () {
+                return $state.transitionTo('root.persons.view', $stateParams, { reload: true });
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

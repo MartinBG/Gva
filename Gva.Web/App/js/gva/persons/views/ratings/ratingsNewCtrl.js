@@ -12,16 +12,16 @@
     $scope.model = rating;
 
     $scope.save = function () {
-      $scope.newRatingForm.$validate()
+      return $scope.newRatingForm.$validate()
        .then(function () {
-        if ($scope.newRatingForm.$valid) {
-          return PersonRating
-            .save({ id: $stateParams.id }, $scope.model).$promise
-            .then(function () {
-              return $state.go('root.persons.view.ratings.search');
-            });
-        }
-      });
+          if ($scope.newRatingForm.$valid) {
+            return PersonRating
+              .save({ id: $stateParams.id }, $scope.model).$promise
+              .then(function () {
+                return $state.go('root.persons.view.ratings.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

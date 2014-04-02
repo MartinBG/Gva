@@ -13,16 +13,17 @@
     $scope.airportDocumentApplication = airportDocumentApplication;
 
     $scope.save = function () {
-      $scope.newDocumentApplicationForm.$validate()
-         .then(function () {
-            if ($scope.newDocumentApplicationForm.$valid) {
-              return AirportDocumentApplication
-              .save({ id: $stateParams.id }, $scope.airportDocumentApplication).$promise
+      return $scope.newDocumentApplicationForm.$validate()
+        .then(function () {
+          if ($scope.newDocumentApplicationForm.$valid) {
+            return AirportDocumentApplication
+              .save({ id: $stateParams.id }, $scope.airportDocumentApplication)
+              .$promise
               .then(function () {
                 return $state.go('root.airports.view.applications.search');
               });
-            }
-          });
+          }
+        });
     };
 
     $scope.cancel = function () {

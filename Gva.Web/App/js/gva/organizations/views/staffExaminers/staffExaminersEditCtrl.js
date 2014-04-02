@@ -12,18 +12,20 @@
     $scope.organizationStaffExaminer = organizationStaffExaminer;
 
     $scope.save = function () {
-      $scope.organizationStaffExaminersForm.$validate()
-      .then(function () {
-        if ($scope.organizationStaffExaminersForm.$valid) {
-          return OrganizationStaffExaminer
-            .save({ id: $stateParams.id, ind: $stateParams.ind },
-            $scope.organizationStaffExaminer)
-            .$promise
-            .then(function () {
-              return $state.go('root.organizations.view.staffExaminers.search');
-            });
-        }
-      });
+      return $scope.organizationStaffExaminersForm.$validate()
+        .then(function () {
+          if ($scope.organizationStaffExaminersForm.$valid) {
+            return OrganizationStaffExaminer
+              .save({
+                id: $stateParams.id,
+                ind: $stateParams.ind
+              }, $scope.organizationStaffExaminer)
+              .$promise
+              .then(function () {
+                return $state.go('root.organizations.view.staffExaminers.search');
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

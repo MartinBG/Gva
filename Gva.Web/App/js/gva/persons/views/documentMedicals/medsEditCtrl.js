@@ -12,7 +12,7 @@
     $scope.personDocumentMedical = med;
 
     $scope.save = function () {
-      $scope.editDocumentMedicalForm.$validate()
+      return $scope.editDocumentMedicalForm.$validate()
         .then(function () {
           if ($scope.editDocumentMedicalForm.$valid) {
             return PersonDocumentMedical
