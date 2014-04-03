@@ -19,7 +19,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin)
         {
             var applications = this.unitOfWork.DbContext.Set<GvaApplication>().AsQueryable()
-                .GroupJoin(this.unitOfWork.DbContext.Set<GvaApplicationSearch>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.LotPartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
+                .GroupJoin(this.unitOfWork.DbContext.Set<GvaViewApplication>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.PartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
                 .Join(this.unitOfWork.DbContext.Set<GvaViewPersonData>().AsQueryable(), ga => ga.GApplication.LotId, gp => gp.GvaPersonLotId, (ga, gp) => new { GApplication = ga.GApplication, GApplicationSearch = ga.GApplicationSearch, GPerson = gp });
 
             if (fromDate.HasValue)
@@ -85,28 +85,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 }
 
                 this.unitOfWork.DbContext.Set<GvaApplication>().Remove(application);
-            }
-        }
-
-        public GvaApplicationSearch GetGvaApplicationSearch(int lotPartId)
-        {
-            return this.unitOfWork.DbContext.Set<GvaApplicationSearch>()
-                .SingleOrDefault(e => e.LotPartId == lotPartId);
-        }
-
-        public void AddGvaApplicationSearch(GvaApplicationSearch gvaApplicationSearch)
-        {
-            this.unitOfWork.DbContext.Set<GvaApplicationSearch>().Add(gvaApplicationSearch);
-        }
-
-        public void DeleteGvaApplicationSearch(int lotPartId)
-        {
-            GvaApplicationSearch gvaApplicationSearch = this.unitOfWork.DbContext.Set<GvaApplicationSearch>()
-                .SingleOrDefault(e => e.LotPartId == lotPartId);
-
-            if (gvaApplicationSearch != null)
-            {
-                this.unitOfWork.DbContext.Set<GvaApplicationSearch>().Remove(gvaApplicationSearch);
             }
         }
 

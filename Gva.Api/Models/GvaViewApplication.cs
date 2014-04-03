@@ -5,9 +5,9 @@ using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaApplicationSearch
+    public partial class GvaViewApplication
     {
-        public int LotPartId { get; set; }
+        public int PartId { get; set; }
 
         public DateTime? RequestDate { get; set; }
 
@@ -17,18 +17,18 @@ namespace Gva.Api.Models
 
         public string StatusName { get; set; }
 
-        public virtual Part LotPart { get; set; }
+        public virtual Part Part { get; set; }
     }
 
-    public class GvaApplicationSearchMap : EntityTypeConfiguration<GvaApplicationSearch>
+    public class GvaViewApplicationMap : EntityTypeConfiguration<GvaViewApplication>
     {
-        public GvaApplicationSearchMap()
+        public GvaViewApplicationMap()
         {
             // Primary Key
-            this.HasKey(t => t.LotPartId);
+            this.HasKey(t => t.PartId);
 
             // Properties
-            this.Property(t => t.LotPartId)
+            this.Property(t => t.PartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.DocumentNumber)
@@ -41,15 +41,15 @@ namespace Gva.Api.Models
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("GvaApplicationSearches");
-            this.Property(t => t.LotPartId).HasColumnName("LotPartId");
+            this.ToTable("GvaViewApplications");
+            this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.RequestDate).HasColumnName("RequestDate");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.ApplicationTypeName).HasColumnName("ApplicationTypeName");
             this.Property(t => t.StatusName).HasColumnName("StatusName");
 
             // Relationships
-            this.HasRequired(t => t.LotPart)
+            this.HasRequired(t => t.Part)
                 .WithOptional();
 
         }

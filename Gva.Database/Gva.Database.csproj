@@ -46,7 +46,7 @@
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
     <Content Include="Create\Tables\GvaCorrespondents.sql" />
-    <Content Include="Create\Tables\GvaApplicationSearches.sql" />
+    <Content Include="Create\Tables\GvaViewApplications.sql" />
     <Content Include="Create\Tables\GvaViewInventoryItems.sql" />
     <Content Include="Create\Tables\GvaLotCases.sql" />
     <Content Include="Create\Tables\GvaCaseTypes.sql" />

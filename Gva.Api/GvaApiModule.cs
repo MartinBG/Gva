@@ -2,7 +2,7 @@
 using Autofac.Integration.WebApi;
 using Common.Data;
 using Gva.Api.Controllers;
-using Gva.Api.LotEventHandlers;
+using Gva.Api.LotEventHandlers.ApplicationView;
 using Gva.Api.LotEventHandlers.InventoryView;
 using Gva.Api.LotEventHandlers.PersonView;
 using Gva.Api.Models;
@@ -33,7 +33,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<MedicalHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<OtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<TrainingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<ApplicationLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<ApplicationsHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();

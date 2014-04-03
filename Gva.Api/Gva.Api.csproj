@@ -78,7 +78,7 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
-    <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />
+    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\ApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\CheckHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\DocumentIdHandler.cs" />
@@ -100,13 +100,12 @@
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
-    <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
-    <Compile Include="Models\GvaApplicationSearch.cs" />
+    <Compile Include="Models\GvaViewApplication.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />

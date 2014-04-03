@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Gva.Api.Models;
-using System;
-using Gva.Api.ModelsDO;
+﻿using System;
+using System.Collections.Generic;
 using Common.Api.Repositories;
+using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
@@ -17,12 +17,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         void AddGvaApplication(GvaApplication gvaApplication);
 
         void DeleteGvaApplication(int gvaAppLotPartId);
-
-        GvaApplicationSearch GetGvaApplicationSearch(int lotPartId);
-
-        void AddGvaApplicationSearch(GvaApplicationSearch gvaApplicationSearch);
-
-        void DeleteGvaApplicationSearch(int lotPartId);
 
         void AddGvaLotFile(GvaLotFile gvaLotFile);
 

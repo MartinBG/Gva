@@ -43,9 +43,9 @@ namespace Gva.Api.Models
         public virtual Part Part { get; set; }
     }
 
-    public class GvaInventoryItemMap : EntityTypeConfiguration<GvaViewInventoryItem>
+    public class GvaViewInventoryItemMap : EntityTypeConfiguration<GvaViewInventoryItem>
     {
-        public GvaInventoryItemMap()
+        public GvaViewInventoryItemMap()
         {
             // Primary Key
             this.HasKey(t => t.InventoryItemId);
