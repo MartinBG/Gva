@@ -1,10 +1,22 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
+using Regs.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
     public class RatingPartVersionDO
     {
+        public RatingPartVersionDO(
+            PartVersion rating,
+            PartVersion ratingEdition,
+            PartVersion firstRatingEdition)
+        {
+            this.PartIndex = rating.Part.Index.Value;
+            this.Rating = rating.Content;
+            this.RatingEdition = ratingEdition == null ? null : new PartVersionDO(ratingEdition);
+            this.FirstEditionValidFrom = firstRatingEdition.Content.Value<DateTime>("documentDateValidFrom");
+        }
+
         public int PartIndex { get; set; }
 
         public JObject Rating { get; set; }

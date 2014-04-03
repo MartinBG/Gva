@@ -3,9 +3,8 @@ using Autofac.Integration.WebApi;
 using Common.Data;
 using Gva.Api.Controllers;
 using Gva.Api.LotEventHandlers;
+using Gva.Api.LotEventHandlers.InventoryView;
 using Gva.Api.LotEventHandlers.PersonView;
-using Gva.Api.Mappers;
-using Gva.Api.Mappers.Resolvers;
 using Gva.Api.Models;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
@@ -26,7 +25,14 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonLicenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonRatingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<InventoryLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<ApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<CheckHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<DocumentIdHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EducationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<MedicalHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<OtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<TrainingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<ApplicationLotEventHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
@@ -34,15 +40,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>();
             moduleBuilder.RegisterType<CaseTypeRepository>().As<ICaseTypeRepository>();
-
-            moduleBuilder.RegisterType<JObjectMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<PartVersionMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<FilePartVersionMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<RatingPartVersionMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<InventoryItemMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<ApplicationMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<CaseTypeNomMapper>().As<IMapper>().SingleInstance();
-            moduleBuilder.RegisterType<FileResolver>();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerApiRequest();

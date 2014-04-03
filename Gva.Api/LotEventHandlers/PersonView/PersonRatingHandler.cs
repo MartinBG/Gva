@@ -15,7 +15,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 setPartAlias: "rating",
                 partMatcher: pv => pv.DynamicContent.ratingType != null,
                 viewMatcher: pv =>
-                    v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.PartId)
+                    v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
         }
 

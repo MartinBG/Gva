@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using AutoMapper;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -12,7 +11,6 @@ using System.Data.Entity;
 using Regs.Api.Repositories.LotRepositories;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using Gva.Api.Mappers.Resolvers;
 
 namespace Gva.Api.Controllers
 {
@@ -22,59 +20,56 @@ namespace Gva.Api.Controllers
         private IFileRepository fileRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
-        private FileResolver fileResolver;
 
         public GvaLotsController(
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IUnitOfWork unitOfWork,
-            ILotEventDispatcher lotEventDispatcher,
-            FileResolver fileResolver)
+            ILotEventDispatcher lotEventDispatcher)
         {
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.fileResolver = fileResolver;
         }
 
         public virtual IHttpActionResult GetPart(int lotId, string path)
         {
             var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
-            return Ok(Mapper.Map<PartVersion, PartVersionDO>(part));
+            return Ok(new PartVersionDO(part));
         }
 
         public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
-            return Ok(Mapper.Map<FilePartVersionDO>(Tuple.Create(partVersion, caseTypeId, fileResolver)));
+            return Ok(new PartVersionDO(partVersion, lotFiles));
         }
 
         public virtual IHttpActionResult GetParts(int lotId, string path)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
 
-            return Ok(Mapper.Map<PartVersion[], PartVersionDO[]>(parts));
+            return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
         public virtual IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
-            if (caseTypeId.HasValue)
+
+            List<PartVersionDO> partVersionDOs = new List<PartVersionDO>();
+            foreach (var partVersion in partVersions)
             {
-                partVersions = partVersions
-                    .Join(
-                        this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value),
-                        (pv) => pv.PartId,
-                        (f) => f.LotPartId,
-                        (pv, f) => pv)
-                    .Distinct()
-                    .ToArray();
+                var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFiles.Length != 0)
+                {
+                    partVersionDOs.Add(new PartVersionDO(partVersion, lotFiles));
+                }
             }
 
-            return Ok(Mapper.Map<IEnumerable<FilePartVersionDO>>(partVersions.Select(pv => Tuple.Create(pv, caseTypeId, fileResolver))));
+            return Ok(partVersionDOs);
         }
 
         public virtual IHttpActionResult PostNewPart(int lotId, string path, dynamic content)

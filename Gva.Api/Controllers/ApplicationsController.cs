@@ -1,27 +1,25 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
 using Docs.Api.DataObjects;
 using Docs.Api.Enums;
 using Docs.Api.Models;
+using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
+using Newtonsoft.Json.Linq;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Regs.Api.LotEvents;
-using Gva.Api.Mappers.Resolvers;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Web.Http;
-using Docs.Api.Repositories.CorrespondentRepository;
-using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Controllers
 {
@@ -46,9 +44,8 @@ namespace Gva.Api.Controllers
             ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
             IFileRepository fileRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            FileResolver fileResolver)
-            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher, fileResolver)
+            ILotEventDispatcher lotEventDispatcher)
+            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;

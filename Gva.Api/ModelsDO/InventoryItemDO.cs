@@ -1,9 +1,29 @@
 ﻿using System;
+using Gva.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
     public class InventoryItemDO
     {
+        public InventoryItemDO(GvaViewInventoryItem inventoryItem, GvaLotFile lotFile)
+        {
+            this.DocumentType = inventoryItem.DocumentType;
+            this.PartIndex = inventoryItem.Part.Index.Value;
+            this.Name = inventoryItem.Name;
+            this.Type = inventoryItem.Type;
+            this.Number = inventoryItem.Number;
+            this.Date = inventoryItem.Date;
+            this.Publisher = inventoryItem.Publisher;
+            this.Valid = inventoryItem.Valid;
+            this.FromDate = inventoryItem.FromDate;
+            this.ToDate = inventoryItem.ToDate;
+            this.CreatedBy = inventoryItem.CreatedBy;
+            this.CreationDate = inventoryItem.CreationDate;
+            this.EditedBy = inventoryItem.EditedBy;
+            this.EditedDate = inventoryItem.EditedDate;
+            this.File = lotFile == null ? null : new FileDO(lotFile);
+        }
+
         public string DocumentType { get; set; }
 
         public int PartIndex { get; set; }

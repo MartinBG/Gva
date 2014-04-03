@@ -14,7 +14,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 setAlias: "Person",
                 setPartAlias: "licence",
                 viewMatcher: pv =>
-                    v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.PartId)
+                    v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
         }
 

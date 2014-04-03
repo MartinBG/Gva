@@ -139,6 +139,11 @@ Usage <sc-datatable ng-model="data"
                 return $filter('date')(parsedExpression(item), scDatatableConfig.format);
               }
               else if (column.type === 'boolean') {
+                var value = parsedExpression(item);
+                if (value === undefined) {
+                  return null;
+                }
+
                 return parsedExpression(item) ? 'Да' : 'Не';
               }
               else {

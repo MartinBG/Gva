@@ -5,14 +5,6 @@ namespace Gva.Api.Repositories.InventoryRepository
 {
     public interface IInventoryRepository
     {
-        void AddInventoryItem(GvaInventoryItem inventoryItem);
-
-        GvaInventoryItem GetInventoryItem(int partId);
-
-        IEnumerable<GvaInventoryItem> GetInventoryItemsForLot(int lotId);
-
-        void DeleteInventoryItemsForPart(int partId);
-
-        void DeleteInventoryItem(GvaInventoryItem inventoryItem);
+        IEnumerable<GvaViewInventoryItem> GetInventoryItemsForLot(int lotId);
     }
 }

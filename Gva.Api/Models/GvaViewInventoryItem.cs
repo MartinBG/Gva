@@ -4,7 +4,7 @@ using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaInventoryItem
+    public partial class GvaViewInventoryItem
     {
         public int InventoryItemId { get; set; }
 
@@ -43,7 +43,7 @@ namespace Gva.Api.Models
         public virtual Part Part { get; set; }
     }
 
-    public class GvaInventoryItemMap : EntityTypeConfiguration<GvaInventoryItem>
+    public class GvaInventoryItemMap : EntityTypeConfiguration<GvaViewInventoryItem>
     {
         public GvaInventoryItemMap()
         {
@@ -57,14 +57,11 @@ namespace Gva.Api.Models
             this.Property(t => t.Name)
                 .IsRequired();
 
-            this.Property(t => t.Type)
-                .HasMaxLength(150);
-
             this.Property(t => t.Number)
                 .HasMaxLength(50);
 
             this.Property(t => t.Publisher)
-                .HasMaxLength(50);
+                .HasMaxLength(150);
 
             this.Property(t => t.CreatedBy)
                 .IsRequired()
@@ -74,8 +71,8 @@ namespace Gva.Api.Models
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("GvaInventoryItems");
-            this.Property(t => t.InventoryItemId).HasColumnName("GvaInventoryItemId");
+            this.ToTable("GvaViewInventoryItems");
+            this.Property(t => t.InventoryItemId).HasColumnName("GvaViewInvItemId");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.DocumentType).HasColumnName("DocumentType");

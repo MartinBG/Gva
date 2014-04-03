@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Http;
-using AutoMapper;
-using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Gva.Api.Mappers.Resolvers;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -43,9 +39,8 @@ namespace Gva.Api.Controllers
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            FileResolver fileResolver)
-            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher, fileResolver)
+            ILotEventDispatcher lotEventDispatcher)
+            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -112,7 +107,7 @@ namespace Gva.Api.Controllers
         {
             var inventoryItems = this.inventoryRepository.GetInventoryItemsForLot(lotId);
 
-            List<Tuple<GvaInventoryItem, GvaLotFile>> inventory;
+            List<InventoryItemDO> inventory;
             if (caseTypeId.HasValue)
             {
                 var lotFiles = this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value);
@@ -122,29 +117,29 @@ namespace Gva.Api.Controllers
                         lotFiles,
                         i => i.PartId,
                         f => f.LotPartId,
-                        (i, f) => Tuple.Create(i, f))
+                        (i, f) => new InventoryItemDO(i, f))
                     .ToList();
             }
             else
             {
-                inventory = new List<Tuple<GvaInventoryItem, GvaLotFile>>();
+                inventory = new List<InventoryItemDO>();
                 foreach (var inventoryItem in inventoryItems)
                 {
                     var lotFiles = this.fileRepository.GetFileReferences(inventoryItem.PartId, null);
 
                     if (lotFiles.Length == 0)
                     {
-                        inventory.Add(Tuple.Create<GvaInventoryItem, GvaLotFile>(inventoryItem, null));
+                        inventory.Add(new InventoryItemDO(inventoryItem, null));
                     }
 
                     foreach (var lotFile in lotFiles)
                     {
-                        inventory.Add(Tuple.Create(inventoryItem, lotFile));
+                        inventory.Add(new InventoryItemDO(inventoryItem, lotFile));
                     }
                 }
             }
 
-            return Ok(Mapper.Map<List<InventoryItemDO>>(inventory));
+            return Ok(inventory);
         }
 
         [Route("{lotId}/applications")]
@@ -152,7 +147,7 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            var applications = Mapper.Map<GvaApplication[], ApplicationNomDO[]>(this.applicationRepository.GetNomApplications(lotId));
+            var applications = this.applicationRepository.GetNomApplications(lotId).Select(a => new ApplicationNomDO(a));
 
             if (!string.IsNullOrWhiteSpace(term))
             {
@@ -182,7 +177,7 @@ namespace Gva.Api.Controllers
             var part = lot.GetPart(path);
             var firstEdition = lot.GetParts(path + "/editions").FirstOrDefault();
 
-            return Ok(Mapper.Map<RatingPartVersionDO>(Tuple.Create<PartVersion, PartVersion, PartVersion>(part, firstEdition, null)));
+            return Ok(new RatingPartVersionDO(part, null, firstEdition));
         }
 
         [Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
@@ -221,11 +216,7 @@ namespace Gva.Api.Controllers
             {
                 var partEditions = lot.GetParts(part.Part.Path + "/editions");
 
-                result.Add(Mapper.Map<RatingPartVersionDO>(
-                    Tuple.Create(
-                        part,
-                        partEditions.FirstOrDefault(),
-                        partEditions.LastOrDefault())));
+                result.Add(new RatingPartVersionDO(part, partEditions.FirstOrDefault(), partEditions.LastOrDefault()));
             }
 
             return Ok(result);

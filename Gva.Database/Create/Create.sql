@@ -16,7 +16,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewPersons.sql"
 :r $(rootPath)\"Tables\GvaViewPersonLicences.sql"
 :r $(rootPath)\"Tables\GvaViewPersonRatings.sql"
-:r $(rootPath)\"Tables\GvaInventoryItems.sql"
+:r $(rootPath)\"Tables\GvaViewInventoryItems.sql"
 :r $(rootPath)\"Tables\GvaApplicationSearches.sql"
 
 ---------------------------------------------------------------

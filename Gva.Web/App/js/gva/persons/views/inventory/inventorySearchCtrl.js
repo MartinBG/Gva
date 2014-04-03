@@ -33,6 +33,12 @@
       else if (item.documentType === 'other') {
         state = 'root.persons.view.documentOthers.edit';
       }
+      else if (item.documentType === 'application') {
+        state = 'root.persons.view.documentApplications.edit';
+      }
+      else if (item.documentType === 'employment') {
+        state = 'root.persons.view.employments.edit';
+      }
 
       return $state.go(state, { ind: item.partIndex });
     };

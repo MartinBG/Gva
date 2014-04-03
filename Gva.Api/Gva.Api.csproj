@@ -38,12 +38,6 @@
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi2.3.2.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
@@ -85,20 +79,18 @@
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\ApplicationLotEventHandler.cs" />
-    <Compile Include="LotEventHandlers\InventoryLotEventHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\ApplicationHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\CheckHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\DocumentIdHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\EducationHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\EmploymentHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\MedicalHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\OtherHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\TrainingHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonEmploymentHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonLicenceHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonRatingHandler.cs" />
-    <Compile Include="Mappers\ApplicationMapper.cs" />
-    <Compile Include="Mappers\CaseTypeNomMapper.cs" />
-    <Compile Include="Mappers\FilePartVersionMapper.cs" />
-    <Compile Include="Mappers\IMapper.cs" />
-    <Compile Include="Mappers\InventoryItemMapper.cs" />
-    <Compile Include="Mappers\JObjectMapper.cs" />
-    <Compile Include="Mappers\PartVersionMapper.cs" />
-    <Compile Include="Mappers\RatingPartVersionMapper.cs" />
-    <Compile Include="Mappers\Resolvers\FileResolver.cs" />
     <Compile Include="ModelsDO\ApplicationListDO.cs" />
     <Compile Include="ModelsDO\ApplicationNomDO.cs" />
     <Compile Include="ModelsDO\ApplicationDO.cs" />
@@ -120,7 +112,7 @@
     <Compile Include="Models\GvaApplication.cs" />
     <Compile Include="Models\GvaAppLotFile.cs" />
     <Compile Include="Models\GvaFile.cs" />
-    <Compile Include="Models\GvaInventoryItem.cs" />
+    <Compile Include="Models\GvaViewInventoryItem.cs" />
     <Compile Include="Models\GvaLotCase.cs" />
     <Compile Include="Models\GvaLotFile.cs" />
     <Compile Include="Models\GvaLotObject.cs" />

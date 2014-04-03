@@ -4,7 +4,6 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
 using Autofac.Integration.WebApi.Owin;
-using AutoMapper;
 using Common;
 using Common.Api;
 using Common.Api.OAuth;
@@ -12,7 +11,6 @@ using Common.Http;
 using Common.Utils;
 using Docs.Api;
 using Gva.Api;
-using Gva.Api.Mappers;
 using Gva.Web.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
@@ -102,12 +100,6 @@ namespace Gva.Web
             foreach (IWebApiConfig webApiConfig in container.Resolve<IEnumerable<IWebApiConfig>>())
             {
                 webApiConfig.RegisterRoutes(config);
-            }
-
-            Mapper.Configuration.ConstructServicesUsing(x => container.Resolve(x));
-            foreach (IMapper mapper in container.Resolve<IEnumerable<IMapper>>())
-            {
-                mapper.CreateMap();
             }
 
             app.UseAutofacWebApi(config);

@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using Common.Api.Repositories;
 using Common.Data;
 using Gva.Api.Models;
-using System;
-using System.Data.Entity;
 using Gva.Api.ModelsDO;
-using AutoMapper;
-using Common.Api.Repositories;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
