@@ -85,6 +85,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blob\BlobReadStream.cs" />
+    <Compile Include="Blob\BlobWriter.cs" />
+    <Compile Include="Blob\BlobWriteStream.cs" />
     <Compile Include="Data\IDbConfiguration.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork.cs" />

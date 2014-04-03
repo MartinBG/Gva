@@ -7,7 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Common.Api.Http;
+using Common.Api.Blob;
+using Common.Blob;
 
 namespace Common.Api.Controllers
 {
@@ -43,10 +44,13 @@ namespace Common.Api.Controllers
             {
                 await conn.OpenAsync();
 
-                var blobProvider = await Request.Content.ReadAsMultipartAsync(new MultipartBlobStreamProvider(conn));
-                var firstBlobKey = blobProvider.BlobData.First().BlobKey;
+                using (var multipartProvider = new MultipartBlobStreamProvider(conn))
+                {
+                    var blobProvider = await Request.Content.ReadAsMultipartAsync(multipartProvider);
+                    var firstBlobKey = blobProvider.BlobData.First().BlobKey;
 
-                return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey });
+                    return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey });
+                }
             }
         }
     }

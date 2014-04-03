@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http.Headers;
 
-namespace Common.Api.Http
+namespace Common.Api.Blob
 {
     public class MultipartBlobData
     {

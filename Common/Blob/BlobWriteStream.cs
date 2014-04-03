@@ -2,11 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Common.Api.Utils;
 
-namespace Common.Api.Http
+namespace Common.Blob
 {
     public class BlobWriteStream : Stream
     {
@@ -81,7 +78,7 @@ namespace Common.Api.Http
             }
         }
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             while (count > 0)
             {
@@ -94,12 +91,12 @@ namespace Common.Api.Http
 
                 if (this.chunkIndex == CHUNK_SIZE)
                 {
-                    await this.FlushAsync(cancellationToken);
+                    this.Flush();
                 }
             }
         }
 
-        public override async Task FlushAsync(CancellationToken cancellationToken)
+        public override void Flush()
         {
             if (this.chunkIndex == 0)
             {
@@ -121,41 +118,17 @@ namespace Common.Api.Http
             if (this.isFirstChunk)
             {
                 this.cmdFirstChunk.Parameters.AddWithValue("@firstChunk", bytesToWrite);
-                this.cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
+                this.cmdFirstChunk.ExecuteNonQuery();
                 this.isFirstChunk = false;
             }
             else
             {
                 this.paramChunk.Value = bytesToWrite;
                 this.paramLength.Value = this.chunkIndex;
-                this.cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken).Wait();
+                this.cmdAppendChunk.ExecuteNonQuery();
             }
 
             this.chunkIndex = 0;
-        }
-
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            this.WriteAsync(buffer, offset, count).Wait();
-        }
-
-        public override void Flush()
-        {
-            this.FlushAsync().Wait();
-        }
-
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            return this.WriteAsync(buffer, offset, count).ToApm(callback, state);
-        }
-
-        public override void EndWrite(IAsyncResult asyncResult)
-        {
-            Task task = (Task)asyncResult;
-            if (task.Exception != null)
-            {
-                throw task.Exception.InnerException;
-            }
         }
 
         public override int Read(byte[] buffer, int offset, int count)

@@ -98,11 +98,9 @@
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
     <Compile Include="Controllers\NomController.cs" />
-    <Compile Include="Http\BlobWriteStream.cs" />
     <Compile Include="Controllers\BlobController.cs" />
-    <Compile Include="Http\BlobReadStream.cs" />
-    <Compile Include="Http\MultipartBlobStreamProvider.cs" />
-    <Compile Include="Http\MultipartBlobData.cs" />
+    <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
+    <Compile Include="Blob\MultipartBlobData.cs" />
     <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -123,8 +121,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonApiModule.cs" />
-    <Compile Include="Utils\StreamApmToAsyncBridge.cs" />
-    <Compile Include="Utils\TaskUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

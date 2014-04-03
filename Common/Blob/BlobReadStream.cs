@@ -3,10 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Threading.Tasks;
-using Common.Api.Utils;
 
-namespace Common.Api.Http
+namespace Common.Blob
 {
     public class BlobReadStream : Stream
     {
@@ -64,44 +62,22 @@ namespace Common.Api.Http
             }
         }
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken)
+        public override int Read(byte[] buffer, int offset, int count)
         {
             if (this.chunkReader == null)
             {
                 this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.connectionStringName].ConnectionString);
                 this.cmdReadChunk.Connection = this.connection;
 
-                await this.connection.OpenAsync(cancellationToken);
-                this.chunkReader = await this.cmdReadChunk.ExecuteReaderAsync(CommandBehavior.SequentialAccess, cancellationToken);
-                await this.chunkReader.ReadAsync(cancellationToken);
+                this.connection.Open();
+                this.chunkReader = this.cmdReadChunk.ExecuteReader(CommandBehavior.SequentialAccess);
+                this.chunkReader.Read();
             }
 
             int read = (int)this.chunkReader.GetBytes(0, this.readerOffset, buffer, offset, count);
             this.readerOffset += read;
 
             return read;
-        }
-
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            return base.ReadAsync(buffer, offset, count).ToApm(callback, state);
-        }
-
-        public override int EndRead(IAsyncResult asyncResult)
-        {
-            try
-            {
-                return ((Task<int>)asyncResult).Result;
-            }
-            catch (AggregateException ae)
-            {
-                throw ae.InnerException;
-            }
-        }
-
-        public override int Read(byte[] buffer, int offset, int count)
-        {
-            return this.ReadAsync(buffer, offset, count).Result;
         }
 
         public override void Flush()

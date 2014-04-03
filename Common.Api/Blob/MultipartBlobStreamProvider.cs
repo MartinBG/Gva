@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Common.Api.Utils;
+using Common.Blob;
 
-namespace Common.Api.Http
+namespace Common.Api.Blob
 {
     public class MultipartBlobStreamProvider : MultipartStreamProvider, IDisposable
     {
-        private class Blob
-        {
-            public int Id { get; set; }
-
-            public SHA1 SHA1 { get; set; }
-        }
-
-        private List<Blob> blobs = new List<Blob>();
+        private List<BlobWriter> blobWriters = new List<BlobWriter>();
 
         private SqlConnection connection;
 
@@ -47,40 +38,15 @@ namespace Common.Api.Http
             // if no filename parameter was found in the Content-Disposition header then return a memory stream.
             if (string.IsNullOrEmpty(contentDisposition.FileName))
             {
-                this.blobs.Add(null);
+                this.blobWriters.Add(null);
                 return new MemoryStream();
             }
-            // if we have a file name then write contents out to our BlobWriteStream which will write it to the database
+            // if we have a file name then write contents to with the BlobWriter which will write it to the database
             else
             {
-                using (SqlCommand cmdInsert = new SqlCommand(
-@"
-INSERT INTO [dbo].[Blobs] ([Key], [Hash], [Size], [Content], [IsDeleted]) 
-    VALUES (newid(), NULL, NULL, NULL, 0);
-
-SET @id = SCOPE_IDENTITY();
-",
-                    this.connection))
-                {
-                    SqlParameter paramId = new SqlParameter("@id", SqlDbType.Int);
-                    paramId.Direction = ParameterDirection.Output;
-                    cmdInsert.Parameters.Add(paramId);
-
-                    cmdInsert.ExecuteNonQuery();
-
-                    int id = (int)paramId.Value;
-
-                    BlobWriteStream blobStream = new BlobWriteStream(this.connection, null, "dbo", "Blobs", "Content", "BlobId", id);
-
-                    SHA1 sha1 = new SHA1Managed();
-                    CryptoStream cryptoStream = new CryptoStream(blobStream, sha1, CryptoStreamMode.Write);
-
-                    this.blobs.Add(new Blob { Id = id, SHA1 = sha1 });
-
-                    // wrap the CryptoStream in our StreamApmToAsyncBridge since the crypto stream implements only
-                    // the *Async methods but the WebApi calls the APM style Begin/End methods
-                    return new StreamApmToAsyncBridge(cryptoStream);
-                }
+                var blobWriter = new BlobWriter(this.connection);
+                this.blobWriters.Add(blobWriter);
+                return blobWriter.OpenStream();
             }
         }
 
@@ -91,9 +57,9 @@ SET @id = SCOPE_IDENTITY();
 
             for (int index = 0; index < this.Contents.Count; index++)
             {
-                Blob blob = this.blobs[index];
+                BlobWriter blobWriter = this.blobWriters[index];
                 HttpContent content = this.Contents[index];
-                if (blob == null)
+                if (blobWriter == null)
                 {
                     // Extract name from Content-Disposition header. We know from earlier that the header is present.
                     ContentDispositionHeaderValue contentDisposition = content.Headers.ContentDisposition;
@@ -105,41 +71,9 @@ SET @id = SCOPE_IDENTITY();
                 }
                 else
                 {
-                    using (SqlTransaction trn = await Task.Run(() => this.connection.BeginTransaction()))
-                    using (SqlCommand cmdUpdate = new SqlCommand(
-@"
-DECLARE @size INT;
-
-SELECT @size = DATALENGTH([Content]) FROM [dbo].[Blobs] WHERE [BlobId] = @id;
-
-SELECT @blobKey = [Key] FROM [dbo].[Blobs] WHERE [Hash] = @hash AND [Size] = @size;
-
-IF (@blobKey IS NULL)
-BEGIN
-    UPDATE [dbo].[Blobs] SET [Hash] = @hash, [Size] = @size WHERE [BlobId] = @id;
-    SELECT @blobKey = [Key] FROM [dbo].[Blobs] WHERE [BlobId] = @id;
-END
-ELSE
-BEGIN
-    UPDATE [dbo].[Blobs] SET [IsDeleted] = 1 WHERE [BlobId] = @id;
-END
-",
-                            this.connection,
-                            trn))
-                    {
-                        cmdUpdate.Parameters.AddWithValue("@id", blob.Id);
-                        cmdUpdate.Parameters.AddWithValue("@hash", BitConverter.ToString(blob.SHA1.Hash).Replace("-", string.Empty));
-
-                        SqlParameter paramKey = new SqlParameter("@blobKey", SqlDbType.UniqueIdentifier);
-                        paramKey.Direction = ParameterDirection.Output;
-                        cmdUpdate.Parameters.Add(paramKey);
-
-                        await cmdUpdate.ExecuteNonQueryAsync();
-
-                        await Task.Run(() => trn.Commit());
-
-                        blobData.Add(new MultipartBlobData(content.Headers, (Guid)paramKey.Value));
-                    }
+                    Guid blobKey = blobWriter.GetBlobKey();
+                    blobWriter.Dispose();
+                    blobData.Add(new MultipartBlobData(content.Headers, blobKey));
                 }
             }
 
@@ -155,14 +89,21 @@ END
 
         protected void Dispose(bool disposing)
         {
-            if (disposing && this.blobs != null)
+            try
             {
-                foreach (var blob in this.blobs)
+                if (disposing && this.blobWriters != null)
                 {
-                    blob.SHA1.Dispose();
+                    foreach (var blobWriter in this.blobWriters)
+                    {
+                        blobWriter.Dispose();
+                    }
                 }
+            }
+            finally
+            {
+                this.blobWriters = null;
 
-                this.blobs = null;
+                //we are not managing the connection so we are not disposing it
                 this.connection = null;
             }
         }
