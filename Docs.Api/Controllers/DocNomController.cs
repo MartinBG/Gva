@@ -284,11 +284,12 @@ namespace Docs.Api.Controllers
         }
 
         [Route("docType")]
-        public IHttpActionResult GetDocTypes(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocTypes(string term = null, int? parentValueId = null, int offset = 0, int? limit = null)
         {
             var predicate =
                 PredicateBuilder.True<DocType>()
                 .AndStringContains(e => e.Name, term)
+                .AndEquals(e => e.DocTypeGroupId, parentValueId)
                 .And(e => e.IsActive);
 
             var results =
