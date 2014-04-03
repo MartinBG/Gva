@@ -187,6 +187,7 @@
     <Content Include="App\js\common\users\views\editCtrl.js" />
     <Content Include="App\js\common\users\views\search.html" />
     <Content Include="App\js\common\users\views\searchCtrl.js" />
+    <Content Include="App\js\app_bg-bg.js" />
     <Content Include="App\js\ems\corrs\resources\corr.js" />
     <Content Include="App\js\ems\corrs\views\corrEdit.html" />
     <Content Include="App\js\ems\corrs\views\corrEditCtrl.js" />

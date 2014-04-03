@@ -2,18 +2,32 @@
 (function (angular) {
   'use strict';
 
-  function RootCtrl($scope) {
+  function RootCtrl($scope, $timeout) {
     $scope.alerts = [];
-    $scope.$on('exceptionHandlerError', function (event, error) {
+    $scope.removeAlert = function (alert) {
+      var index = $scope.alerts.indexOf(alert);
+      //check if it has already been removed by the user or a timeout
+      if (index >= 0) {
+        $scope.alerts.splice(index, 1);
+      }
+    };
+
+    $scope.$on('alert', function (event, msg, type) {
       try {
-        $scope.alerts.push(error);
+        var alert = { message: msg, type: type };
+        $scope.alerts.push(alert);
+
+        //remove the alert after 60 seconds
+        $timeout(function () {
+          $scope.removeAlert(alert);
+        }, 60 * 1000);
       } catch (e) {
         //swallow all exception so that we don't end up in an infinite loop
       }
     });
   }
 
-  RootCtrl.$inject = ['$scope' ];
+  RootCtrl.$inject = ['$scope', '$timeout' ];
 
   angular.module('common').controller('RootCtrl', RootCtrl);
 }(angular));

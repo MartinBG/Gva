@@ -33,8 +33,8 @@
 <div class="breadcrumb-page-view"></div>
 
 <div class="container alert-container">
-  <alert ng-repeat="alert in alerts" type="'danger'" close="alerts.splice($index, 1)">
-    Възникна грешка! Моля презаредете страницата с F5 и опитайте отново.
+  <alert ng-repeat="alert in alerts" type="alert.type" close="removeAlert(alert)">
+    {{alert.message}}
   </alert>
 </div>
 

@@ -49,8 +49,7 @@
             };
           }
         })['catch'](function (error) {
-          $exceptionHandler(error);
-          alert(l10n.get('scaffolding.scFiles.failAlert'));
+          $exceptionHandler(error, l10n.get('scaffolding.scFiles.failAlert'));
         })['finally'](function () {
           $modalInstance.close(uploadedFile);
         });
