@@ -32,10 +32,22 @@ namespace Docs.Api.Repositories.DocRepository
             int id,
             byte[] docVersion,
             bool forceClosure,
+            string targetDocStatusAlias,
             List<DocStatus> docStatuses,
             List<DocCasePartType> docCasePartTypes,
             UserContext userContext,
             out List<DocRelation> docRelations);
+
+        Doc NextDocStatus(
+            int id,
+            byte[] docVersion,
+            bool forceClosure,
+            List<DocStatus> docStatuses,
+            List<DocCasePartType> docCasePartTypes,
+            UserContext userContext,
+            out List<DocRelation> docRelations);
+
+        Doc ReverseDocStatus(int id, byte[] docVersion, string targetDocStatusAlias, List<DocStatus> docStatuses, UserContext userContext);
 
         Doc ReverseDocStatus(int id, byte[] docVersion, List<DocStatus> docStatuses, UserContext userContext);
 

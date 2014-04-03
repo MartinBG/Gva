@@ -14,12 +14,6 @@
                 docEntryTypeAlias: '@docEntryTypeAlias'
               }
             },
-            //?
-            'units': {
-              method: 'GET',
-              url: '/api/nomenclatures/units',
-              isArray: true
-            },
             'register': {
               method: 'POST',
               url: '/api/docs/:id/register',

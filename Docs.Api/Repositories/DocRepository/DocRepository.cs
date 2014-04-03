@@ -97,6 +97,19 @@ namespace Docs.Api.Repositories.DocRepository
             int id,
             byte[] docVersion,
             bool forceClosure,
+            string targetDocStatusAlias,
+            List<DocStatus> docStatuses,
+            List<DocCasePartType> docCasePartTypes,
+            UserContext userContext,
+            out List<DocRelation> docRelations)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Doc NextDocStatus(
+            int id,
+            byte[] docVersion,
+            bool forceClosure,
             List<DocStatus> docStatuses,
             List<DocCasePartType> docCasePartTypes,
             UserContext userContext,
@@ -217,6 +230,11 @@ namespace Docs.Api.Repositories.DocRepository
             };
 
             return doc;
+        }
+
+        public Doc ReverseDocStatus(int id, byte[] docVersion, string targetDocStatusAlias, List<DocStatus> docStatuses, UserContext userContext)
+        {
+            throw new NotImplementedException();
         }
 
         public Doc ReverseDocStatus(int id, byte[] docVersion, List<DocStatus> docStatuses, UserContext userContext)

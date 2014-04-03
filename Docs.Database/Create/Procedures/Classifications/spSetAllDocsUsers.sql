@@ -1,3 +1,4 @@
+--//? has to be re-done for the new permissions
 print 'spSetAllDocsUsers'
 GO
 

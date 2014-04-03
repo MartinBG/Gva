@@ -962,6 +962,8 @@ namespace Docs.Api.Models
             List<DocTypeClassification> docTypeClassifications,
             ElectronicServiceStage electronicServiceStage,
             List<DocTypeUnitRole> docTypeUnitRoles,
+            DocUnitRole importedBy,
+            UnitUser unitUser,
             List<int> correspondents,
             List<DocFile> docFiles,
             UserContext userContext
@@ -1006,13 +1008,17 @@ namespace Docs.Api.Models
                     userContext);
             }
 
-            //? set doc author
             if (docTypeUnitRoles != null)
             {
                 foreach (var item in docTypeUnitRoles)
                 {
                     this.CreateDocUnit(item.UnitId, item.DocTypeUnitRoleId, userContext);
                 }
+            }
+
+            if (importedBy != null && unitUser != null)
+            {
+                this.CreateDocUnit(unitUser.UnitId, importedBy.DocUnitRoleId, userContext);
             }
 
             if (correspondents != null)

@@ -62,7 +62,7 @@
     workflowModel: ['doc',
       function (doc) {
         return {
-          canChooseUnit: doc.canSubstituteManagement,
+          canSubstituteWorkflow: doc.flags.canSubstituteWorkflow,
           docId: doc.docId,
           docVersion: doc.version,
           unitUserId: doc.unitUser.unitUserId,

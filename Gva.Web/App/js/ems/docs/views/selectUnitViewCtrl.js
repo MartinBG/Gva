@@ -49,7 +49,6 @@
     $scope.cancel = function Cancel() {
       return $state.go('^');
     };
-
   }
 
   SelectUnitViewCtrl.$inject = [
@@ -63,9 +62,11 @@
   SelectUnitViewCtrl.$resolve = {
     units: [
       '$stateParams',
-      'Doc',
-      function ResolveUnits($stateParams, Doc) {
-        return Doc.units($stateParams).$promise;
+      'Nomenclature',
+      function ResolveUnits($stateParams, Nomenclature) {
+        var params = _.assign({ alias: 'units' }, { name: $stateParams.name });
+
+        return Nomenclature.query(params).$promise;
       }
     ]
   };

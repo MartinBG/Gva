@@ -5,3 +5,13 @@ INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocD
 
 SET IDENTITY_INSERT [DocTypeClassifications] OFF
 GO
+
+DECLARE @i INT
+
+WHILE EXISTS(SELECT null FROM DocTypes WHERE DocTypeId NOT IN (SELECT DocTypeId FROM DocTypeClassifications))
+BEGIN
+	SELECT TOP 1 @i = DocTypeId FROM DocTypes WHERE DocTypeId NOT IN (SELECT DocTypeId FROM DocTypeClassifications)
+	INSERT INTO [DocTypeClassifications]([DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(@i,1,1,1);
+END 
+
+GO

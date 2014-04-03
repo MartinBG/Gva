@@ -1,4 +1,5 @@
-﻿print 'spSetUserDocs'
+﻿--//? has to be re-done for the new permissions
+print 'spSetUserDocs'
 GO
 
 IF  EXISTS (SELECT * FROM sys.procedures WHERE object_id = OBJECT_ID(N'spSetUserDocs'))

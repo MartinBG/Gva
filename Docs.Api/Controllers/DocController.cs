@@ -394,12 +394,17 @@ namespace Docs.Api.Controllers
                         .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                         .ToList();
 
+                    DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                        .SingleOrDefault(e => e.Alias == "ImportedBy");
+
                     newDoc.CreateDocProperties(
                         parentDocRelation,
                         preDoc.DocCasePartTypeId,
                         docTypeClassifications,
                         electronicServiceStage,
                         docTypeUnitRoles,
+                        importedBy,
+                        unitUser,
                         preDoc.Correspondents,
                         null,
                         this.userContext);
@@ -505,12 +510,17 @@ namespace Docs.Api.Controllers
                     .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                     .ToList();
 
+                DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                        .SingleOrDefault(e => e.Alias == "ImportedBy");
+
                 newDoc.CreateDocProperties(
                        parentDocRelation,
                        internalDocCasePartType.DocCasePartTypeId,
                        docTypeClassifications,
                        null,
                        docTypeUnitRoles,
+                       importedBy,
+                       unitUser,
                        null,
                        null,
                        this.userContext);
@@ -546,7 +556,10 @@ namespace Docs.Api.Controllers
 
             List<DocUser> docUsers = this.docRepository.GetActiveDocUsersForDocByUnitId(id, unitUser);
 
-            if (!docUsers.Any())
+            DocUnitPermission readPermission = this.unitOfWork.DbContext.Set<DocUnitPermission>()
+                .SingleOrDefault(e => e.Alias == "Read");
+
+            if (!docUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
             {
                 return ControllerContext.Request.CreateResponse(HttpStatusCode.Forbidden);
             }
@@ -563,12 +576,7 @@ namespace Docs.Api.Controllers
                 return ControllerContext.Request.CreateResponse(HttpStatusCode.NoContent);
             }
 
-            //?
-            //    DocUnitPermission readPermission = this.unitOfWork.Repo<DocUnitPermission>().GetByAlias("Read");
-            //    if (!docUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
-            //    {
-            //        return ControllerContext.Request.CreateResponse(HttpStatusCode.Forbidden);
-            //    }
+            #region Load
 
             this.unitOfWork.DbContext.Set<DocHasRead>()
             .Where(e => e.DocId == id)
@@ -608,37 +616,9 @@ namespace Docs.Api.Controllers
              .Where(e => e.DocId == id)
              .ToList();
 
-            var returnValue = new DocDO(doc, unitUser);
+            #endregion
 
-            //docusers get permissions
-            //returnValue.CanRead = true;
-            //foreach (var item in docUsers)
-            //{
-            //    if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "Edit")
-            //    {
-            //        returnValue.CanEdit = true;
-            //    }
-            //    else if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "Register")
-            //    {
-            //        returnValue.CanRegister = true;
-            //    }
-            //    else if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "Management")
-            //    {
-            //        returnValue.CanManagement = true;
-            //    }
-            //    else if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "ESign")
-            //    {
-            //        returnValue.CanESign = true;
-            //    }
-            //    else if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "Finish")
-            //    {
-            //        returnValue.CanFinish = true;
-            //    }
-            //    else if (item.DocId == doc.DocId && item.DocUnitPermission.Alias == "Reverse")
-            //    {
-            //        returnValue.CanReverse = true;
-            //    }
-            //}
+            var returnValue = new DocDO(doc, unitUser);
 
             #region DocCorrespondents
 
@@ -749,43 +729,23 @@ namespace Docs.Api.Controllers
 
             #endregion
 
-            //    if (Statics.AdministrativeBody == AdministrativeBody.DKH)
-            //    {
-            //        List<int> docIds = returnValue.DocRelations.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
-            //        //dkhApplications
-            //        var dkhApplications = this.unitOfWork.Repo<DkhApplication>().Query()
-            //            .Include(e => e.Unit)
-            //            .Where(e => docIds.Contains(e.ApplicationDocId))
-            //            .ToList();
+            #region Set permissions
 
-            //        foreach (var item in dkhApplications)
-            //        {
-            //            returnValue.DocLinks.Add(new DocLinkDO
-            //            {
-            //                Id = item.DkhApplicationId,
-            //                Url = "#/dkhApps/",
-            //                Name = string.Format("Предложение от {0:dd.MM.yyyy} възложено на {1}", item.StartDate, item.Unit.Name)
-            //            });
-            //        }
+            returnValue.CanRead = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Read");
+            returnValue.CanEdit = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Edit");
+            returnValue.CanRegister = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Register");
+            returnValue.CanManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Management");
+            returnValue.CanESign = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "ESign");
+            returnValue.CanFinish = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Finish");
+            returnValue.CanReverse = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Reverse");
 
-            //        //dkhAgendas
-            //        var dkhAgendas = this.unitOfWork.Repo<DkhAgenda>().Query()
-            //            .Include(e => e.Unit)
-            //            .Where(e => e.CaseDocId.HasValue && docIds.Contains(e.CaseDocId.Value))
-            //            .ToList();
+            returnValue.CanSubstituteManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "SubstituteManagement");
+            returnValue.CanDeleteManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DeleteManagement");
+            returnValue.CanEditTechElectronicServiceStage = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTech");
+            returnValue.CanEditTech = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTechElectronicServiceStage");
 
-            //        foreach (var item in dkhAgendas)
-            //        {
-            //            returnValue.DocLinks.Add(new DocLinkDO
-            //            {
-            //                Id = item.DkhAgendaId,
-            //                Url = "#/dkhAgendas/",
-            //                Name = string.Format("Заседание от {0:dd.MM.yyyy} възложено на {1}", item.StartDate, item.Unit.Name)
-            //            });
-            //        }
-            //    }
+            #endregion
 
-            //returnValue.SetupFlags();
             returnValue.Set();
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
@@ -1426,6 +1386,13 @@ namespace Docs.Api.Controllers
             this.unitOfWork.Save();
 
             return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage ReadExternalLinks(int id)
+        {
+            //? implement connection to application
+            throw new NotImplementedException();
         }
     }
 }

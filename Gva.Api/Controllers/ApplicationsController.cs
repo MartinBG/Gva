@@ -408,12 +408,17 @@ namespace Gva.Api.Controllers
                 ElectronicServiceStage electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
                         .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
 
+                DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                        .SingleOrDefault(e => e.Alias == "ImportedBy");
+
                 newDoc.CreateDocProperties(
                         null,
                         internalDocCasePartType.DocCasePartTypeId,
                         docTypeClassifications,
                         electronicServiceStage,
                         docTypeUnitRoles,
+                        importedBy,
+                        unitUser,
                         correspondent != null ? new List<int> { correspondent.CorrespondentId } : null,
                         null,
                         this.userContext);
