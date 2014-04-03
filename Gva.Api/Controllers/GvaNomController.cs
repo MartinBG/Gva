@@ -53,7 +53,8 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
-        [Route("personCaseTypes/{id:int}")]
+        [Route("personCaseTypes/{id:int}"),
+         Route("organizationCaseTypes/{id:int}")]
         public IHttpActionResult GetCaseType(int id)
         {
             var caseType = this.caseTypeRepository.GetCaseType(id);
@@ -64,8 +65,9 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route("personCaseTypes")]
-        public IHttpActionResult GetCaseTypes(string term = null, int? lotId = null)
+
+        [Route("{set:regex(^(?:person|organization)$)}CaseTypes")]
+        public IHttpActionResult GetCaseTypes(string set, string term = null, int? lotId = null)
         {
             IEnumerable<GvaCaseType> caseTypes;
             if (lotId.HasValue)
@@ -74,7 +76,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                caseTypes = this.caseTypeRepository.GetCaseTypesForSet("Person");
+                caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set);
             }
 
             if (!string.IsNullOrWhiteSpace(term))

@@ -7,13 +7,13 @@
     $state,
     $stateParams,
     OrganizationCertGroundServiceOperatorsSnoOperational,
-    organizationCertGroundServiceOperatorSnoOperational) {
-    $scope.certGroundServiceOperatorSnoOperational =
-      organizationCertGroundServiceOperatorSnoOperational;
+    certificate
+    ) {
 
+    $scope.certificate = certificate;
     $scope.save = function () {
       return OrganizationCertGroundServiceOperatorsSnoOperational
-        .save({ id: $stateParams.id }, $scope.certGroundServiceOperatorSnoOperational)
+        .save({ id: $stateParams.id }, $scope.certificate)
         .$promise
         .then(function () {
           return $state
@@ -31,11 +31,11 @@
     '$state',
     '$stateParams',
     'OrganizationCertGroundServiceOperatorsSnoOperational',
-    'organizationCertGroundServiceOperatorSnoOperational'
+    'certificate'
   ];
 
   CertGroundServiceOperatorsSnoOperationalNewCtrl.$resolve = {
-    organizationCertGroundServiceOperatorSnoOperational: function () {
+    certificate: function () {
       return {
         part: {
           includedDocuments: [],

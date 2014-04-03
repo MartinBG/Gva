@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsHandler.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="LotEventHandlers\InventoryView\MedicalHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\OtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\TrainingHandler.cs" />
+    <Compile Include="LotEventHandlers\OrganizationLotEventHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonEmploymentHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonLicenceHandler.cs" />
@@ -98,6 +100,8 @@
     <Compile Include="ModelsDO\ApplicationLotFileDO.cs" />
     <Compile Include="ModelsDO\ApplicationNewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
+    <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
+    <Compile Include="ModelsDO\OrganizationDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
@@ -106,6 +110,7 @@
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
     <Compile Include="Models\GvaViewApplication.cs" />
+    <Compile Include="Models\GvaViewOrganization.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />
@@ -125,6 +130,8 @@
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />
     <Compile Include="Repositories\CaseTypeRepository\CaseTypeRepository.cs" />
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
+    <Compile Include="Repositories\OrganizationRepository\IOrganizationRepository.cs" />
+    <Compile Include="Repositories\OrganizationRepository\OrganizationRepository.cs" />
     <Compile Include="Repositories\FileRepository\FileRepository.cs" />
     <Compile Include="Repositories\FileRepository\IFileRepository.cs" />
     <Compile Include="Repositories\InventoryRepository\IInventoryRepository.cs" />

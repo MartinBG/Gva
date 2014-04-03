@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/approvals/:ind/amendments',
+      .when('GET', '/api/organizations/:id/organizationApprovals/:ind/amendments',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
            .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -22,7 +22,7 @@
 
           return [200, amendments];
         })
-      .when('GET', '/api/organizations/:id/approvals/:ind/amendments/:childInd',
+      .when('GET', '/api/organizations/:id/organizationApprovals/:ind/amendments/:childInd',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
            .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -39,7 +39,7 @@
             amendment: amendment
           }];
         })
-      .when('POST', '/api/organizations/:id/approvals/:ind/amendments',
+      .when('POST', '/api/organizations/:id/organizationApprovals/:ind/amendments',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -56,7 +56,7 @@
 
           return [200];
         })
-      .when('POST', '/api/organizations/:id/approvals/:ind/amendments/:childInd',
+      .when('POST', '/api/organizations/:id/organizationApprovals/:ind/amendments/:childInd',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -72,7 +72,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/organizations/:id/approvals/:ind/amendments/:childInd',
+      .when('DELETE', '/api/organizations/:id/organizationApprovals/:ind/amendments/:childInd',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

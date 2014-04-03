@@ -5,10 +5,10 @@
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
         .when('GET', '/api/auditDetails?type',
-          function ($params, auditPartRequirements, auditResults) {
+          function ($params, auditPartRequirmants, auditResults) {
             var auditDetails = [],
               defaultAuditResult = _.where(auditResults, { alias: 'Not executed' })[0],
-              requirements = _.where(auditPartRequirements, { type: $params.type });
+              requirements = _.where(auditPartRequirmants, { type: $params.type });
 
             _.each(requirements, function (requirement) {
               auditDetails.push({

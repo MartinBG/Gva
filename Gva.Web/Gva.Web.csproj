@@ -524,6 +524,7 @@
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\gva.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
+    <Content Include="App\js\gva\organizations\forms\organizationDataCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationAddress.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendment.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendmentCtrl.js" />
@@ -542,6 +543,8 @@
     <Content Include="App\js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffExaminer.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationScannedDocument.html" />
+    <Content Include="App\js\gva\organizations\forms\organizationScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\organizations\resources\organization.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAddress.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAmendment.js" />
@@ -558,6 +561,8 @@
     <Content Include="App\js\gva\organizations\resources\organizationRegGroundServiceOperator.js" />
     <Content Include="App\js\gva\organizations\resources\organizationStaffExaminer.js" />
     <Content Include="App\js\gva\organizations\resources\organizationStaffManagement.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationDocumentApplication.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationApplication.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrEdit.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrNew.html" />
@@ -570,6 +575,7 @@
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearch.html" />
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNew.html" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsSearch.html" />
@@ -598,6 +604,14 @@
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsSearch.html" />
     <Content Include="App\js\gva\organizations\views\certGroundServiceOperators\certGroundServiceOperatorsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsNew.html" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsSearch.html" />
+    <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\documentOthers\chooseDocuments\organizationsChooseDocuments.html" />
+    <Content Include="App\js\gva\organizations\views\documentOthers\chooseDocuments\organizationsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersEdit.html" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersNew.html" />
@@ -655,8 +669,8 @@
     <Content Include="App\js\gva\persons\forms\personApplicationCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personData.html" />
     <Content Include="App\js\gva\persons\forms\personDataCtrl.js" />
-    <Content Include="App\js\gva\persons\forms\personDocumentApplication.html" />
-    <Content Include="App\js\gva\persons\forms\personDocumentApplicationCtrl.js" />
+    <Content Include="App\js\gva\common\forms\commonDocumentApplication.html" />
+    <Content Include="App\js\gva\common\forms\commonDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personDocumentCheck.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentEducation.html" />
     <Content Include="App\js\gva\persons\forms\personDocumentEmployment.html" />
@@ -1074,6 +1088,7 @@
     <Content Include="App\test\gva\organizations\mocks\organizationsHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffExaminersHttp.js" />
     <Content Include="App\test\gva\organizations\mocks\organizationStaffManagementHttp.js" />
+    <Content Include="App\test\gva\organizations\mocks\organizationDocumentApplicationsHttp.js" />
     <Content Include="App\test\gva\persons\mocks\nomenclaturesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personAddressesHttp.js" />
     <Content Include="App\test\gva\persons\mocks\personDataHttp.js" />

@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationInspection,
-    organizationInspection) {
+    organizationInspection
+    ) {
     $scope.organizationInspection = organizationInspection;
 
     $scope.save = function () {

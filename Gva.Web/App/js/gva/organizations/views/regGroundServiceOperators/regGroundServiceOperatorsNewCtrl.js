@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRegGroundServiceOperator,
-    organizationRegGroundServiceOperator) {
+    organizationRegGroundServiceOperator
+    ) {
     $scope.organizationRegGroundServiceOperator = organizationRegGroundServiceOperator;
 
     $scope.save = function () {

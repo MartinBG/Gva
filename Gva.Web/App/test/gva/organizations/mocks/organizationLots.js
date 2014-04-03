@@ -62,25 +62,30 @@
       staffManagement: [
         {
           partIndex: 8,
-          part: staffManagement.staffManagement1
+          part: staffManagement.staffManagement1,
+          files: []
         },
         {
           partIndex: 9,
-          part: staffManagement.staffManagement2
+          part: staffManagement.staffManagement2,
+          files: []
         }
       ],
       organizationDocumentOthers: [
         {
           partIndex: 10,
-          part: organizationOtherDocuments.organization1Doc1
+          part: organizationOtherDocuments.organization1Doc1,
+          files: []
         },
         {
           partIndex: 11,
-          part: organizationOtherDocuments.organization1Doc2
+          part: organizationOtherDocuments.organization1Doc2,
+          files: []
         },
         {
           partIndex: 12,
-          part: organizationOtherDocuments.organization1Doc3
+          part: organizationOtherDocuments.organization1Doc3,
+          files: []
         }
       ],
       certGroundServiceOperators: [
@@ -106,11 +111,13 @@
       organizationInspections: [
         {
           partIndex: 15,
-          part: organizationInspections.organization1Inspection1
+          part: organizationInspections.organization1Inspection1,
+          files: []
         },
         {
           partIndex: 16,
-          part: organizationInspections.organization1Inspection2
+          part: organizationInspections.organization1Inspection2,
+          files: []
         }
       ],
       organizationApprovals: [
@@ -120,11 +127,13 @@
           amendments: [
             {
               partIndex: 18,
-              part: organizationAmendments.organization1Amendment1
+              part: organizationAmendments.organization1Amendment1,
+              files: []
             },
             {
               partIndex: 19,
-              part: organizationAmendments.organization1Amendment2
+              part: organizationAmendments.organization1Amendment2,
+              files: []
             }
           ]
         }
@@ -132,21 +141,25 @@
       staffExaminers: [
         {
           partIndex: 20,
-          part: staffExaminers.staffExaminer1
+          part: staffExaminers.staffExaminer1,
+          files: []
         },
         {
           partIndex: 21,
-          part: staffExaminers.staffExaminer2
+          part: staffExaminers.staffExaminer2,
+          files: []
         }
       ],
       recommendations: [
         {
           partIndex: 22,
-          part: recommendations.recommendation1
+          part: recommendations.recommendation1,
+          files: []
         },
         {
           partIndex: 23,
-          part: recommendations.recommendation2
+          part: recommendations.recommendation2,
+          files: []
         }
       ],
       organizationRegAirportOperators: [
@@ -168,7 +181,8 @@
           partIndex: 27,
           part: organizationRegGroundServiceOperators.register2
         }
-      ]
+      ],
+      organizationDocumentApplications: []
     }
   ]);
 }(angular));

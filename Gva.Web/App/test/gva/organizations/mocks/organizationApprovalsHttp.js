@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/approvals',
+      .when('GET', '/api/organizations/:id/organizationApprovals',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -21,7 +21,7 @@
 
           return [200, organizationApprovals];
         })
-      .when('POST', '/api/organizations/:id/approvals',
+      .when('POST', '/api/organizations/:id/organizationApprovals',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

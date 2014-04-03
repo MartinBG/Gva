@@ -7,23 +7,16 @@
     $stateParams,
     $scope,
     organizationRecommendation,
-    availableAudits,
-    usedAudits) {
+    availableAudits) {
     $scope.availableAudits = availableAudits;
-    $scope.usedAudits = usedAudits;
 
-    $scope.addAudits = function () {
+    $scope.save = function () {
       organizationRecommendation.part.includedAudits = [];
 
       _.each(_.filter($scope.availableAudits, { 'checked': true }), function (audit) {
         organizationRecommendation.part.includedAudits.push(audit.partIndex);
       });
       return $state.go('^');
-    };
-
-    $scope.removeAudit = function (audit) {
-      organizationRecommendation.part.includedAudits =
-        _.without(organizationRecommendation.part.includedAudits, audit.partIndex);
     };
 
     $scope.goBack = function () {
@@ -37,8 +30,7 @@
     '$stateParams',
     '$scope',
     'organizationRecommendation',
-    'availableAudits',
-    'usedAudits'
+    'availableAudits'
   ];
 
   ChooseAuditsCtrl.$resolve = {
@@ -55,20 +47,6 @@
                   availableAudit.checked = true;
                 }
                 return availableAudit;
-              });
-            });
-      }
-    ],
-    usedAudits: [
-      '$stateParams',
-      'OrganizationInspection',
-      'organizationRecommendation',
-      function ($stateParams, OrganizationInspection, organizationRecommendation) {
-        return OrganizationInspection.query({ id: $stateParams.id })
-            .$promise.then(function (availableAudits) {
-              return _.filter(availableAudits, function (availableAudit) {
-                return _.contains(organizationRecommendation.part.includedAudits,
-                  availableAudit.partIndex);
               });
             });
       }

@@ -22,4 +22,9 @@
   </sc-column>
   <sc-column data="part.content.permitedCheck.name" title="organizations.staffExaminerSearch.content.permitedCheck">
   </sc-column>
+  <sc-column sortable="false" title="organizations.staffExaminerSearch.file" width="30px">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
 </sc-datatable>

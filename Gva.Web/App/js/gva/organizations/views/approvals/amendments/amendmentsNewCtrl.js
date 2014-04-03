@@ -7,15 +7,17 @@
     $state,
     $stateParams,
     OrganizationAmendment,
-    organizationAmendment) {
-    $scope.organizationAmendment = organizationAmendment;
+    organizationAmendment
+    ) {
+    $scope.amendment = organizationAmendment;
 
     $scope.save = function () {
       return $scope.organizationAmendmentForm.$validate()
         .then(function () {
           if ($scope.organizationAmendmentForm.$valid) {
             return OrganizationAmendment
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.organizationAmendment)
+              .save({ id: $stateParams.id, ind: $stateParams.ind },
+              $scope.amendment)
               .$promise
               .then(function () {
                 return $state.go('root.organizations.view.amendments.search');
@@ -40,11 +42,15 @@
   AmendmentsNewCtrl.$resolve = {
     organizationAmendment: function () {
       return {
-        amendment: {
+        part: {
           includedDocuments: [],
           lims145: [],
           lims147: [],
           limsMG: []
+        },
+        files: {
+          hideApplications: false,
+          files: []
         }
       };
     }

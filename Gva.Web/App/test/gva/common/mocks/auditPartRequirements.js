@@ -2,7 +2,7 @@
 (function (angular, require) {
   'use strict';
 
-  var auditPartRequirements = require('./auditPartRequirement');
+  var auditPartRequirmants = require('./auditPartRequirement');
 
-  angular.module('app').constant('auditPartRequirements', auditPartRequirements);
+  angular.module('app').constant('auditPartRequirmants', auditPartRequirmants);
 }(angular, require));

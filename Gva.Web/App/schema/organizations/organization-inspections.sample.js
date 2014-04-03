@@ -7,70 +7,70 @@
         {
           auditResult: nomenclatures.get('auditResults', 'Small corrective actions are required'),
           code: '14',
-          subject: nomenclatures.get('auditPartRequirements', 'Buildings'),
+          subject: nomenclatures.get('auditPartRequirmants', 'Buildings'),
           disparities: [1, 2]
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '15',
-          subject: nomenclatures.get('auditPartRequirements', 'staff'),
+          subject: nomenclatures.get('auditPartRequirmants', 'staff'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '16',
-          subject: nomenclatures.get('auditPartRequirements', 'cert staff'),
+          subject: nomenclatures.get('auditPartRequirmants', 'cert staff'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '17',
-          subject: nomenclatures.get('auditPartRequirements', 'equipment'),
+          subject: nomenclatures.get('auditPartRequirmants', 'equipment'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '18',
-          subject: nomenclatures.get('auditPartRequirements', 'components acceptance'),
+          subject: nomenclatures.get('auditPartRequirmants', 'components acceptance'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '19',
-          subject: nomenclatures.get('auditPartRequirements', 'data for TO'),
+          subject: nomenclatures.get('auditPartRequirmants', 'data for TO'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '20',
-          subject: nomenclatures.get('auditPartRequirements', 'production planning'),
+          subject: nomenclatures.get('auditPartRequirmants', 'production planning'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '21',
-          subject: nomenclatures.get('auditPartRequirements', 'cert for TO'),
+          subject: nomenclatures.get('auditPartRequirmants', 'cert for TO'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '22',
-          subject: nomenclatures.get('auditPartRequirements', 'technical notes'),
+          subject: nomenclatures.get('auditPartRequirmants', 'technical notes'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '23',
-          subject: nomenclatures.get('auditPartRequirements', 'events announcement'),
+          subject: nomenclatures.get('auditPartRequirmants', 'events announcement'),
           disparities: []
         }, {
           auditResult: nomenclatures.get('auditResults', 'Not executed'),
           code: '24',
-          subject: nomenclatures.get('auditPartRequirements', 'procedures and quality'),
+          subject: nomenclatures.get('auditPartRequirmants', 'procedures and quality'),
           disparities: []
         }
     ],
     disparities1 = [
       {
-        subject: nomenclatures.get('auditPartRequirements', 'Buildings'),
+        subject: nomenclatures.get('auditPartRequirmants', 'Buildings'),
         sortOrder: 1,
         refNumber: '121',
         description: 'description test',
         disparityLevel: nomenclatures.get('disparityLevels', '0')
       },
       {
-        subject: nomenclatures.get('auditPartRequirements', 'Buildings'),
+        subject: nomenclatures.get('auditPartRequirmants', 'Buildings'),
         refNumber: '122',
         sortOrder: 2,
         description: 'description test2',
@@ -79,14 +79,14 @@
     ],
     disparities2 = [
       {
-        subject: nomenclatures.get('auditPartRequirements', 'Buildings'),
+        subject: nomenclatures.get('auditPartRequirmants', 'Buildings'),
         sortOrder: 1,
         refNumber: '121a',
         description: 'description test2A',
         disparityLevel: nomenclatures.get('disparityLevels', '1')
       },
       {
-        subject: nomenclatures.get('auditPartRequirements', 'Buildings'),
+        subject: nomenclatures.get('auditPartRequirmants', 'Buildings'),
         refNumber: '122b',
         sortOrder: 2,
         description: 'description test3A',

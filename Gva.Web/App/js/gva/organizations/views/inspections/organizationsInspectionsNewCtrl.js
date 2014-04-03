@@ -7,8 +7,10 @@
     $state,
     $stateParams,
     OrganizationInspection,
-    organizationInspection) {
+    organizationInspection
+    ) {
     $scope.organizationInspection = organizationInspection;
+
 
     $scope.save = function () {
       return $scope.organizationInspectionForm.$validate()
@@ -45,6 +47,10 @@
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
             disparities: []
+          },
+          files: {
+            hideApplications: false,
+            files: []
           }
         };
       }

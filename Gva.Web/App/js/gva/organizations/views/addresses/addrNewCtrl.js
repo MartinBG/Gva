@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationAddress,
-    organizationAddress) {
+    organizationAddress
+    ) {
     $scope.organizationAddress = organizationAddress;
 
     $scope.save = function () {

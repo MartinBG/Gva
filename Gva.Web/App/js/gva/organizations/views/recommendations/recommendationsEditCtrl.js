@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRecommendation,
-    organizationRecommendation) {
+    organizationRecommendation
+    ) {
 
     $scope.organizationRecommendation = organizationRecommendation;
 

@@ -4,7 +4,7 @@
   function CommonInspectionCtrl($scope) {
     $scope.watchList = [];
 
-    $scope.deleteExaminer = function removeExaminer(examiner) {
+    $scope.deleteExaminer = function (examiner) {
       var index = $scope.model.examiners.indexOf(examiner);
       $scope.model.examiners.splice(index, 1);
     };

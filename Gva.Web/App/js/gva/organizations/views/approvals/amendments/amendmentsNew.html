@@ -1,6 +1,8 @@
 ﻿<ng-form name="newAmendmentForm">
 
-  <gva-organization-amendment name="organizationAmendmentForm" ng-model="organizationAmendment.amendment"></gva-organization-amendment>
+  <gva-organization-amendment name="organizationAmendmentForm" ng-model="amendment.part"></gva-organization-amendment>
+
+  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="amendment.files"></gva-organization-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

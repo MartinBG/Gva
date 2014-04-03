@@ -1,8 +1,10 @@
 ﻿<div>
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-    <sc-filter type="text" name="CAO" class="col-sm-3" removable="false" label="organizations.search.CAO"></sc-filter>
-    <sc-filter type="text" name="valid" class="col-sm-3" removable="false" label="organizations.search.valid"></sc-filter>
-    <sc-filter type="text" name="organizationType" class="col-sm-3" removable="true" label="organizations.search.organizationType"></sc-filter>
+    <sc-filter type="text" name="name" class="col-sm-2" removable="false" label="organizations.search.name"></sc-filter>
+    <sc-filter type="text" name="CAO" class="col-sm-2" removable="true" label="organizations.search.CAO"></sc-filter>
+    <sc-filter type="text" name="uin" class="col-sm-2" removable="true" label="organizations.search.uin"></sc-filter>
+    <sc-filter type="date" name="dateValidTo" class="col-sm-2" removable="true" label="organizations.search.dateValidTo"></sc-filter>
+    <sc-filter type="date" name="dateCAOValidTo" class="col-sm-2" removable="true" label="organizations.search.dateCAOValidTo"></sc-filter>
     <sc-search-button action="search()" text="organizations.search.search" icon="glyphicon-search"></sc-search-button>
     <sc-search-button action="newOrganization()" text="organizations.search.newOrganization" icon="glyphicon-user"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
@@ -12,11 +14,15 @@
     <sc-column sortable="false" class="buttons-cell" width="1px">
       <sc-button name="viewButton" btn-click="viewOrganization(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
+      <sc-column data="name" title="organizations.search.name" width="60px">
+    </sc-column>
     <sc-column data="CAO" title="organizations.search.CAO" width="60px">
     </sc-column>
-    <sc-column data="valid" title="organizations.search.valid">
+    <sc-column data="uin" title="organizations.search.uin" width="60px">
     </sc-column>
-    <sc-column data="organizationType" title="organizations.search.organizationType">
+    <sc-column data="valid.name" title="organizations.search.valid">
+    </sc-column>
+    <sc-column data="organizationType.name" title="organizations.search.organizationType">
     </sc-column>
     <sc-column data="dateValidTo" title="organizations.search.dateValidTo" type="date">
     </sc-column>

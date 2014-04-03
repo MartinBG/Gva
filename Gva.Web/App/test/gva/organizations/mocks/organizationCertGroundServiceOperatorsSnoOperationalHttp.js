@@ -4,14 +4,14 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/groundServiceOperatorsSnoOperational',
+      .when('GET', '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           return [200, organization.certGroundServiceOperatorsSnoOperational];
         })
-      .when('GET', '/api/organizations/:id/groundServiceOperatorsSnoOperational/:ind',
+      .when('GET', '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational/:ind',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -26,7 +26,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/organizations/:id/groundServiceOperatorsSnoOperational',
+      .when('POST', '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -39,7 +39,7 @@
 
           return [200];
         })
-      .when('POST', '/api/organizations/:id/groundServiceOperatorsSnoOperational/:ind',
+      .when('POST', '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -51,7 +51,8 @@
 
           return [200];
         })
-      .when('DELETE', '/api/organizations/:id/groundServiceOperatorsSnoOperational/:ind',
+      .when('DELETE',
+      '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

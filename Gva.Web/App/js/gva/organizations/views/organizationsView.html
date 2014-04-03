@@ -24,7 +24,7 @@
       <div class="form-group col-md-3 col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="organizations.viewOrganization.organizationType"></span>
-          <input disabled name="organizationType" type="text" class="form-control" value="{{aircraft.organizationType.name}}" />
+          <input disabled name="organizationType" type="text" class="form-control" value="{{organization.organizationType}}" />
         </div>
       </div>
     </div>
@@ -36,6 +36,11 @@
   </form>
     <sc-tabs tab-list="{
       'organizations.tabs.approvals': 'root.organizations.view.approvals',
+      'organizations.tabs.aiportOperator': {
+        'organizations.tabs.certAirportOperators': 'root.organizations.view.certAirportOperators',
+        'organizations.tabs.certGroundServiceOperators': 'root.organizations.view.certGroundServiceOperators',
+        'organizations.tabs.groundServiceOperatorsSnoOperational': 'root.organizations.view.groundServiceOperatorsSnoOperational'
+      },
       'organizations.tabs.inspections': {
         'organizations.tabs.inspection': 'root.organizations.view.inspections',
         'organizations.tabs.recommendations': 'root.organizations.view.recommendations',
@@ -46,17 +51,14 @@
         'organizations.tabs.staffExaminers': 'root.organizations.view.staffExaminers'
       },
       'organizations.tabs.addresses': 'root.organizations.view.addresses',
-      'organizations.tabs.aiportOperator': {
-        'organizations.tabs.certAirportOperators': 'root.organizations.view.certAirportOperators',
-        'organizations.tabs.certGroundServiceOperators': 'root.organizations.view.certGroundServiceOperators',
-        'organizations.tabs.groundServiceOperatorsSnoOperational': 'root.organizations.view.groundServiceOperatorsSnoOperational'
-      },
-      'organizations.tabs.staffManagement': 'root.organizations.view.staffManagement',
       'organizations.tabs.registers': {
         'organizations.tabs.regAirportOperators': 'root.organizations.view.regAirportOperators',
         'organizations.tabs.regGroundServiceOperators': 'root.organizations.view.regGroundServiceOperators'
       },
-      'organizations.tabs.documentOthers':'root.organizations.view.documentOthers'
+      'organizations.tabs.docs': {
+        'organizations.tabs.others': 'root.organizations.view.documentOthers'
+      },
+      'organizations.tabs.applications': 'root.organizations.view.documentApplications'
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

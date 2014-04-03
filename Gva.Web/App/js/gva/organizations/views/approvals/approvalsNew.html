@@ -1,8 +1,10 @@
 ﻿<ng-form name="newApprovalForm">
  
-  <gva-organization-approval name="organizationApprovalForm" ng-model="organizationApproval.approval.part"></gva-organization-approval>
+  <gva-organization-approval name="organizationApprovalForm" ng-model="model.approval.part"></gva-organization-approval>
 
-  <gva-organization-amendment name="organizationAmendmentForm" ng-model="organizationApproval.amendment.part"></gva-organization-amendment>
+  <gva-organization-amendment name="organizationAmendmentForm" ng-model="model.organizationAmendment.part"></gva-organization-amendment>
+
+  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="model.organizationAmendment.files"></gva-organization-scanned-document>
   
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

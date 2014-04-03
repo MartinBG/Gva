@@ -6,12 +6,12 @@
 
   module.exports = {
     organization1Auditplan1: {
-      auditPartRequirement: nomenclatures.get('auditPartRequirements', 'Cockpit'),
+      auditPartRequirement: nomenclatures.get('auditPartRequirmants', 'Cockpit'),
       planYear: '2015',
       planMonth: 'Декември'
     },
     organization1Auditplan2: {
-      auditPartRequirement: nomenclatures.get('auditPartRequirements', 'Facilities'),
+      auditPartRequirement: nomenclatures.get('auditPartRequirmants', 'Facilities'),
       planYear: '2015',
       planMonth: 'Декември'
     }

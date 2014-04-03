@@ -9,7 +9,7 @@
     OrganizationAmendment,
     organizationAmendment
   ) {
-    $scope.organizationAmendment = organizationAmendment;
+    $scope.amendment = organizationAmendment;
 
     $scope.save = function () {
       return $scope.organizationAmendmentForm.$validate()
@@ -20,7 +20,7 @@
               id: $stateParams.id,
               ind: $stateParams.ind,
               childInd: $stateParams.childInd
-            }, $scope.organizationAmendment)
+            }, $scope.amendment)
             .$promise
             .then(function () {
               return $state.go('root.organizations.view.amendments.search');

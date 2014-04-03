@@ -1817,6 +1817,8 @@
       },
       organizations: {
         tabs: {
+          docs: 'Документи',
+          others: 'Други',
           approvals: 'Удостоверения за одобрение',
           inspections: 'Одити и надзор',
           inspection: 'Одит',
@@ -1831,15 +1833,18 @@
           certGroundServiceOperators:
             'Лиценз на оператор по наземно обслужване или самообслужване',
           groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
-          documentOthers: 'Други документи',
           registers: 'Регистри',
           regAirportOperators: 'Издадени лицензи за летищен оператор',
           regGroundServiceOperators:
-            'Издадени лицензи за оператор по наземно обслужване или самообслужване'
+            'Издадени лицензи за оператор по наземно обслужване или самообслужване',
+          applications: 'Заявления',
+          inventory: 'Опис'
         },
         search: {
+          uin: 'Булстат',
           newOrganization: 'Нова организация',
           search: 'Търси',
+          name: 'Наименование',
           CAO: 'CAO',
           valid: 'Валидност',
           organizationType: 'Тип организация',
@@ -1860,6 +1865,18 @@
         editOrganization: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        chooseDocuments: {
+          save: 'Запиши',
+          back: 'Назад',
+          documentNumber: '№ на документ',
+          documentPersonNumber: 'No в списъка (групов документ)',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          organizationOtherDocumentType: 'Тип документ',
+          organizationOtherDocumentRole: 'Роля'
         },
         editCertAirportOperator: {
           save: 'Запис',
@@ -1882,7 +1899,8 @@
           date: 'Дата на издаване на продължение',
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане'
+          revokeCause: 'Причина за отнемане',
+          file: 'Заявление'
         },
         newAddress: {
           save: 'Запис',
@@ -1929,7 +1947,8 @@
           testDate: 'Дата на полагане на писмен тест',
           testScore: 'Оценка от писмен тест',
           number: 'Заявление',
-          valid: 'Валиден'
+          valid: 'Валиден',
+          file: 'Заявление'
         },
         newStaffManagement: {
           save: 'Запис',
@@ -1951,7 +1970,8 @@
             organization: 'Организация',
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
-          }
+          },
+          file: 'Заявление'
         },
         newStaffExaminer: {
           save: 'Запис',
@@ -1994,7 +2014,8 @@
           date: 'Дата на издаване на продължение',
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане'
+          revokeCause: 'Причина за отнемане',
+          file: 'Заявление'
         },
         newCertGroundServiceOperatorsSnoOperational: {
           save: 'Запис',
@@ -2017,7 +2038,8 @@
           date: 'Дата на издаване на продължение',
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане'
+          revokeCause: 'Причина за отнемане',
+          file: 'Заявление'
         },
         newCertGroundServiceOperator: {
           save: 'Запис',
@@ -2037,7 +2059,8 @@
           notification: 'Оператора предварително уведомен',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
-          inspectionPlace: 'Адрес на одитирания обект'
+          inspectionPlace: 'Адрес на одитирания обект',
+          file: 'Заявление'
         },
         newInspection: {
           save: 'Запис',
@@ -2053,7 +2076,8 @@
           documentNumber: 'Референтен № на описание',
           documentDateIssue: 'Дата на издаване',
           changeNum: 'Изменение',
-          back: 'Назад'
+          back: 'Назад',
+          file: 'Заявление'
         },
         newAmendment: {
           save: 'Запис',
@@ -2078,13 +2102,12 @@
           cancel: 'Отказ'
         },
         chooseAudits: {
-          add: 'Запиши',
+          save: 'Запиши',
           back: 'Назад',
           inspectionFrom: 'Начална дата на изпълнение на одита',
           inspectionTo: 'Крайна дата на изпълнение на одита',
           subject: 'Предмет на одит',
-          documentNumber: '№ на документ',
-          usedAudits: 'Използвани одити:'
+          documentNumber: '№ на документ'
         },
         organizationOtherDirective: {
           title: 'Друг документ',
@@ -2107,7 +2130,8 @@
           fromDate: 'Период на надзора от',
           toDate: 'до',
           documentDescription: 'Описание, издание, ревизия Част 3',
-          recommendation: 'Препоръки'
+          recommendation: 'Препоръки',
+          file: 'Заявление'
         },
         newRecommendation: {
           save: 'Запис',
@@ -2153,6 +2177,28 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        organizationDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса',
+          file: 'Файл'
+        },
+        newOrganizationDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editOrganizationnDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         staffManagementDirective: {
           title: 'Ръководен персонал',
           auditPartRequirement: 'Изискване',
@@ -2185,13 +2231,14 @@
           IATA: 'IATA №',
           SITA: 'SITA №',
           organizationType: 'Тип организация',
-          organizationKind: 'Вип организация',
+          organizationKind: 'Вид организация',
           phones: 'Телефони',
           webSite: 'Web сайт',
           notes: 'Бележки',
           valid: 'Валидност',
           dateValidTo: 'Валидност до',
-          docRoom: 'Документацията е в стая'
+          docRoom: 'Документацията е в стая',
+          caseTypes: 'Типове дела'
         },
         organizationAddressDirective: {
           title: 'Адрес',
@@ -2229,6 +2276,7 @@
           revokeTitle: 'Отнемане',
           documentsTable: {
             includedDocuments: 'Приложени документи',
+            chooseDocuments: 'Избери документи',
             inspector: 'Инспектор',
             approvalDate: 'Дата на одобрение',
             linkedDocumentId: 'Връзка с документ от документите',
@@ -2281,6 +2329,7 @@
           },
           includedDocuments: {
             title: 'Приложени документи към одобрение на организация',
+            chooseDocuments: 'Избери документи',
             inspector: 'Инспектор',
             approvalDate: 'Дата на одобрение',
             linkedLim: 'Връзка с Обхват на одобрение',
@@ -2393,6 +2442,14 @@
           revokeTitle: 'Отнемане',
           revokeDate: 'Дата на отнемане',
           revokeCause: 'Причина за отнемане'
+        },
+        organizationScannedDocumentDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
         }
       },
       errorTexts: {
@@ -2592,6 +2649,9 @@
           'Регистър за издадени лицензи за оператор по наземно обслужване или самообслужване',
         'root.organizations.view.regGroundServiceOperators.new': 'Нов лиценз',
         'root.organizations.view.regGroundServiceOperators.edit': 'Редакция на лиценз',
+        'root.organizations.view.documentApplications': 'Заявления',
+        'root.organizations.view.documentApplications.new': 'Новo заявление',
+        'root.organizations.view.documentApplications.edit': 'Редакция на заявление',
         'root.airports': 'Летища',
         'root.airports.new': 'Ново летище',
         'root.airports.view': 'Данни за летище',

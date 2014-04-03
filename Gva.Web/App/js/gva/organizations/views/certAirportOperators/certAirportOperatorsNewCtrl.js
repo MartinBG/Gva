@@ -6,13 +6,16 @@
     $scope,
     $state,
     $stateParams,
+    OrganizationDocumentOther,
     CertAirportOperator,
-    certAirportOperator) {
-    $scope.certAirportOperator = certAirportOperator;
+    certificate
+    ) {
+    $scope.certificate = certificate;
 
     $scope.save = function () {
       return CertAirportOperator
-        .save({ id: $stateParams.id }, $scope.certAirportOperator).$promise
+        .save({ id: $stateParams.id }, $scope.certificate)
+        .$promise
         .then(function () {
           return $state.go('root.organizations.view.certAirportOperators.search');
         });
@@ -27,12 +30,13 @@
     '$scope',
     '$state',
     '$stateParams',
+    'OrganizationDocumentOther',
     'CertAirportOperator',
-    'certAirportOperator'
+    'certificate'
   ];
 
   CertAirportOperatorsNewCtrl.$resolve = {
-    certAirportOperator: function () {
+    certificate: function () {
       return {
         part: {
           includedDocuments: []

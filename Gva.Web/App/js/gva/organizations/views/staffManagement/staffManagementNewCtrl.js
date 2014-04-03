@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationStaffManagement,
-    organizationStaffManagement) {
+    organizationStaffManagement
+    ) {
     $scope.organizationStaffManagement = organizationStaffManagement;
 
     $scope.save = function () {
@@ -39,7 +40,13 @@
 
   StaffManagementNewCtrl.$resolve = {
     organizationStaffManagement: function () {
-      return {};
+      return {
+        part: {},
+        files: {
+          hideApplications: false,
+          files: []
+        }
+      };
     }
   };
 

@@ -15,14 +15,19 @@
         </div>
       </div>
      <div class="row">
-        <div class="form-group col-sm-4 col-md-3" sc-has-error="code">
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="code">
           <label class="control-label" l10n-text="organizations.organizationDataDirective.code"></label>
           <sc-validation-error field-name="code" validations="{required: null}"></sc-validation-error>
           <sc-text ng-model="model.code" name="code" ng-required="true"></sc-text>
         </div>
-        <div class="form-group col-sm-4 col-md-3">
+        <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="organizations.organizationDataDirective.uin"></label>
           <sc-text ng-model="model.uin"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="caseTypes">
+          <label class="control-label" l10n-text="organizations.organizationDataDirective.caseTypes"></label>
+          <sc-validation-error field-name="caseTypes" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+          <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'organizationCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple></sc-nomenclature>
         </div>
       </div>
       <div class="row">

@@ -48,7 +48,8 @@
   OrganizationDocOthersNewCtrl.$resolve = {
     organizationDocumentOther: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     },
     selectedPublisher: function () {

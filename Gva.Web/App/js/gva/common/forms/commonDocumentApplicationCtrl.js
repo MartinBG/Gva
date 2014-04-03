@@ -4,7 +4,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentApplicationCtrl($scope) {
+  function CommonDocumentApplicationCtrl($scope) {
     $scope.validateDate = function () {
       if (!$scope.model.requestDate || !$scope.model.documentDate) {
         return true;
@@ -15,5 +15,5 @@
   }
 
 
-  angular.module('gva').controller('PersonDocumentApplicationCtrl', PersonDocumentApplicationCtrl);
+  angular.module('gva').controller('CommonDocumentApplicationCtrl', CommonDocumentApplicationCtrl);
 }(angular));

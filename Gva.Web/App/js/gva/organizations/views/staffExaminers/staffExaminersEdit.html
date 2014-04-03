@@ -2,6 +2,8 @@
 
   <gva-organization-staff-examiner name="organizationStaffExaminersForm" ng-model="organizationStaffExaminer.part"></gva-organization-staff-examiner>
 
+  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="organizationStaffExaminer.files"></gva-organization-scanned-document>
+
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
       <sc-button name="saveBtn" btn-click="save()" text="organizations.editStaffChecker.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editStaffCheckers.$pristine"></sc-button>

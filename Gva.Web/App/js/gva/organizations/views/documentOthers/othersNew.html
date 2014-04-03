@@ -2,6 +2,8 @@
 
   <gva-organization-document-other name="organizationDocumentOtherForm" ng-model="organizationDocumentOther.part"></gva-organization-document-other>
 
+  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentOther.files"></gva-organization-scanned-document>
+
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
       <sc-button name="saveBtn" btn-click="save()" text="organizations.newOther.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!organizationDocumentOtherForm.$dirty"></sc-button>

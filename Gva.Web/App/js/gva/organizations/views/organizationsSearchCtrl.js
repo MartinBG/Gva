@@ -6,12 +6,11 @@
     $scope,
     $state,
     $stateParams,
-    organizations) {
+    organizations
+    ) {
 
     $scope.filters = {
-      CAO: null,
-      valid: null,
-      organizationType: null
+      name: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -25,8 +24,10 @@
     $scope.search = function () {
       $state.go('root.organizations.search', {
         CAO: $scope.filters.CAO,
-        valid: $scope.filters.valid,
-        organizationType: $scope.filters.organizationType
+        uin: $scope.filters.uin,
+        dateValidTo: $scope.filters.dateValidTo,
+        dateCAOValidTo: $scope.filters.dateCAOValidTo,
+        name: $scope.filters.name
       });
     };
 

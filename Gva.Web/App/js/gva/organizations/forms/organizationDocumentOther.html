@@ -27,7 +27,7 @@
               <label class="control-label" l10n-text="organizations.organizationOtherDirective.documentDateValidTo"></label>
               <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo"></sc-date>
             </div>
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
+          <!--  <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
               <label class="control-label" l10n-text="organizations.organizationOtherDirective.documentPublisher"></label>
               <div class="input-group input-group-sm">
                 <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
@@ -35,18 +35,18 @@
                   <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search"></sc-button>
                 </span>
               </div>
-            </div>
+            </div>-->
           </div>
           <div class="row">
             <div class="form-group col-sm-6 col-md-4" sc-has-error="organizationOtherDocumentType">
               <label class="control-label" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentType"></label>
               <sc-validation-error field-name="organizationOtherDocumentType" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.organizationOtherDocumentType" name="organizationOtherDocumentType" alias="'organizationOtherDocumentTypes'" ng-required="true"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.DocumentType" name="organizationOtherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true"></sc-nomenclature>
             </div>
             <div class="form-group col-sm-6 col-md-4" sc-has-error="organizationOtherDocumentRole">
               <label class="control-label" l10n-text="organizations.organizationOtherDirective.organizationOtherDocumentRole"></label>
               <sc-validation-error field-name="organizationOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.organizationOtherDocumentRole" name="organizationOtherDocumentRole" alias="'organizationOtherDocumentRoles'" ng-required="true"></sc-nomenclature>
+              <sc-nomenclature ng-model="model.documentRole" name="organizationOtherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other'}" ng-required="true"></sc-nomenclature>
             </div>
           </div>
           <div class="row">

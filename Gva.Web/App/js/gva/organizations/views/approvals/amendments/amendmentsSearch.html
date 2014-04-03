@@ -1,18 +1,23 @@
 ﻿<sc-button name="createBtn" btn-click="newAmendment()" text="organizations.amendmentSearch.newAmendment" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-button name="backtn" btn-click="goBack()" text="organizations.amendmentSearch.back" class="btn btn-sm btn-primary pull-left" icon="glyphicon-arrow-left" style="margin-left: 5px;"></sc-button>
 <sc-datatable ng-model="organizationAmendments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="amendment.part.organizationType.name" title="organizations.amendmentSearch.organizationType">
-    </sc-column>
-    <sc-column data="amendment.part.documentNumber" title="organizations.amendmentSearch.documentNumber">
-    </sc-column>
-    <sc-column data="amendment.part.documentDateIssue" title="organizations.amendmentSearch.documentDateIssue" type="date">
-    </sc-column>
-    <sc-column data="amendment.part.changeNum" title="organizations.amendmentSearch.changeNum">
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell">
-      <sc-button name="editBtn" btn-click="editAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-show="item === organizationAmendments[0]"></sc-button>
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell">
-     <sc-button name="deleteBtn" btn-click="deleteAmendment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-show="item === organizationAmendments[0]"></sc-button>
-    </sc-column>
+  <sc-column data="part.organizationType.name" title="organizations.amendmentSearch.organizationType">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="organizations.amendmentSearch.documentNumber">
+  </sc-column>
+  <sc-column data="part.documentDateIssue" title="organizations.amendmentSearch.documentDateIssue" type="date">
+  </sc-column>
+  <sc-column data="part.changeNum" title="organizations.amendmentSearch.changeNum">
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell">
+    <sc-button name="editBtn" btn-click="editAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-show="item === organizationAmendments[0]"></sc-button>
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell">
+    <sc-button name="deleteBtn" btn-click="deleteAmendment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-show="item === organizationAmendments[0]"></sc-button>
+  </sc-column>
+  <sc-column sortable="false" title="organizations.amendmentSearch.file" width="30px">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
 </sc-datatable>

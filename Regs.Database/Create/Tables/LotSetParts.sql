@@ -4,8 +4,8 @@ GO
 CREATE TABLE [dbo].[LotSetParts] (
     [LotSetPartId]  int             NOT NULL,
     [LotSetId]      int             NOT NULL,
-    [Alias]         NVARCHAR (50)   NOT NULL,
-    [Name]         NVARCHAR (50)   NOT NULL,
+    [Alias]         NVARCHAR (100)   NOT NULL,
+    [Name]          NVARCHAR (100)   NOT NULL,
     [PathRegex]     nvarchar (100)  NOT NULL,
     [Schema]        nvarchar (MAX)  NOT NULL,
     CONSTRAINT [PK_LotSetParts] PRIMARY KEY ([LotSetPartId]),

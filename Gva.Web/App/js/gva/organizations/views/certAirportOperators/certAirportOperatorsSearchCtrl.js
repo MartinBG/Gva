@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     CertAirportOperator,
-    certAirportOperators) {
+    certAirportOperators
+    ) {
 
     $scope.certAirportOperators = certAirportOperators;
 

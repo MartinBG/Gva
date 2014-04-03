@@ -138,7 +138,7 @@ module.exports = function (grunt) {
       ],
       '<%= buildDir %>/js/test.js': [
         'test/delay.js',
-        'test/e2eMocksSetup.js',
+        //'test/e2eMocksSetup.js',
         'test/httpBackendConfiguratorProvider.js',
         'test/common/mocks/*.js',
         'test/ems/corrs/mocks/*.js',

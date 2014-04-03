@@ -8,7 +8,7 @@
     $stateParams,
     Organization,
     organization
-  ) {
+    ) {
     $scope.organization = organization;
 
     $scope.edit = function () {

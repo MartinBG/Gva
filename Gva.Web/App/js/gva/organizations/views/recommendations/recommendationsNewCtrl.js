@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRecommendation,
-    organizationRecommendation) {
+    organizationRecommendation
+    ) {
     $scope.organizationRecommendation = organizationRecommendation;
 
     $scope.save = function () {
@@ -55,6 +56,10 @@
           part3: { examiners: [] },
           part4: { examiners: [] },
           part5: { examiners: [] }
+        },
+        files: {
+          hideApplications: false,
+          files: []
         }
       };
     }

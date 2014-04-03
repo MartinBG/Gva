@@ -10,6 +10,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
+using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
 
@@ -36,6 +37,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
+            moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>();
@@ -46,6 +48,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<OrganizationsController>().InstancePerApiRequest();
         }
     }
 }

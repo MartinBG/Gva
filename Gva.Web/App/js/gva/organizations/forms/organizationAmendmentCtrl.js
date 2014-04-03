@@ -1,15 +1,15 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function OrganizationAmendmentCtrl($scope) {
+  function OrganizationAmendmentCtrl($scope, $state) {
 
-    $scope.deleteDocument = function removeDocument(document) {
+    $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
       $scope.model.includedDocuments.splice(index, 1);
     };
 
-    $scope.addDocument = function () {
-      $scope.model.includedDocuments.push({});
+    $scope.chooseDocuments = function () {
+      $state.go($state.current.name + '.chooseDocuments');
     };
 
     $scope.deleteLimitation147 = function (limitation) {
@@ -43,6 +43,8 @@
       $scope.model.limsMG.push({});
     };
   }
+
+  OrganizationAmendmentCtrl.$inject = ['$scope', '$state'];
 
   angular.module('gva').controller('OrganizationAmendmentCtrl', OrganizationAmendmentCtrl);
 }(angular, _));

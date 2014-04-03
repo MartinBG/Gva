@@ -4,6 +4,7 @@
 
   angular.module('gva').factory('OrganizationCertGroundServiceOperatorsSnoOperational',
     ['$resource', function ($resource) {
-      return $resource('/api/organizations/:id/groundServiceOperatorsSnoOperational/:ind');
+      var path = '/api/organizations/:id/organizationGroundServiceOperatorsSnoOperational/:ind';
+      return $resource(path);
     }]);
 }(angular));
