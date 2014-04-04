@@ -1829,9 +1829,9 @@
           staffExaminers: 'Проверяващи ЛГ',
           addresses: 'Адреси',
           aiportOperator: 'Летищен оператор',
-          certAirportOperators:'Лиценз на летищен оператор',
-          certGroundServiceOperators:
-            'Лиценз на оператор по наземно обслужване или самообслужване',
+          certAirportOperators:'Лиценз',
+          groundServiceOperators: 'Оператор по наземно обслужване',
+          certGroundServiceOperators: 'Лиценз',
           groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
           registers: 'Регистри',
           regAirportOperators: 'Издадени лицензи за летищен оператор',
@@ -1900,7 +1900,7 @@
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
           revokeCause: 'Причина за отнемане',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newAddress: {
           save: 'Запис',
@@ -1948,7 +1948,7 @@
           testScore: 'Оценка от писмен тест',
           number: 'Заявление',
           valid: 'Валиден',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newStaffManagement: {
           save: 'Запис',
@@ -1971,7 +1971,7 @@
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
           },
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newStaffExaminer: {
           save: 'Запис',
@@ -2015,7 +2015,7 @@
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
           revokeCause: 'Причина за отнемане',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newCertGroundServiceOperatorsSnoOperational: {
           save: 'Запис',
@@ -2039,7 +2039,7 @@
           validToDateExt: 'Дата на изтичане на продължение',
           revokeDate: 'Дата на отнемане',
           revokeCause: 'Причина за отнемане',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newCertGroundServiceOperator: {
           save: 'Запис',
@@ -2060,7 +2060,7 @@
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newInspection: {
           save: 'Запис',
@@ -2077,7 +2077,7 @@
           documentDateIssue: 'Дата на издаване',
           changeNum: 'Изменение',
           back: 'Назад',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newAmendment: {
           save: 'Запис',
@@ -2095,7 +2095,9 @@
           documentFirstDateIssue: 'Дата на първо издаване',
           documentDateIssueAmendment: 'Дата на изменение',
           changeNumAmendment: 'Номер на изменение',
-          approvalState: 'Състояние'
+          approvalState: 'Състояние',
+          file: 'Преписка (Заявление)',
+          recommendationReport: 'Доклад от препоръки'
         },
         newApproval: {
           save: 'Запис',
@@ -2131,7 +2133,7 @@
           toDate: 'до',
           documentDescription: 'Описание, издание, ревизия Част 3',
           recommendation: 'Препоръки',
-          file: 'Заявление'
+          file: 'Преписка (Заявление)'
         },
         newRecommendation: {
           save: 'Запис',

@@ -38,6 +38,9 @@
             certifications: 'Удостоверения',
             inspections: 'Инспекции'
           },
+          organizations: {
+            title: 'Саро'
+          },
           admin: {
             title: 'Админ',
             users: 'Потребители'
