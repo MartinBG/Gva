@@ -1734,7 +1734,7 @@
           status: 'Статус',
           docTypeName: 'Относно',
           viewPerson: 'Преглед',
-          unlinkedLotParts:'Други документи извън преписката',
+          unlinkedLotParts:'Документи извън преписката',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',
@@ -1745,7 +1745,7 @@
             linkNew: 'Добави страница',
             linkPart: 'Свържи със страница',
             newFile: 'Нов файл и страница',
-            newDocFile: 'Нов файл по съществуваща страница'
+            newDocFile: 'Нов файл'
           },
           newFile: {
             title: 'Нов документ в описа',
@@ -1779,14 +1779,12 @@
           }
         },
         newForm: {
-          person: 'Заявител',
           newPerson: 'Нов заявител',
           selectPerson: 'Избери заявител',
           register: 'Регистрирай',
           cancel: 'Отказ'
         },
         link: {
-          person: 'Заявител',
           selectDoc: 'Избор на документ',
           cancel: 'Отказ',
           clear: 'Изчисти',
@@ -1797,6 +1795,8 @@
           link: 'Свържи'
         },
         personSelect: {
+          person: 'Заявител',
+          newPerson: 'Нов заявител',
           select: 'Избери',
           cancel: 'Отказ',
           names: 'Име',
@@ -1845,7 +1845,7 @@
           applicationType: 'Тип заявление',
           status: 'Статус',
           lin: 'ЛИН',
-          applicant: 'Заявител'
+          description: 'Описание'
         },
         applicationDocument: {
           title: 'Сканиран (електронен) документ',

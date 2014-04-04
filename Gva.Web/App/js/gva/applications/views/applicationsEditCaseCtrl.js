@@ -6,13 +6,13 @@
     $scope,
     $state,
     $stateParams,
-    $sce,
+    //$sce,
     application,
     DocStatus
     ) {
     $scope.application = application;
 
-    _.map(application.applicationDocCase, function (adc) {
+    _.map(application.appDocCase, function (adc) {
       switch (adc.docDocStatusAlias) {
       case 'Draft':
         adc.nextStatusText = 'Отбелязване като изготвен';
@@ -26,13 +26,6 @@
       default:
         adc.nextStatusText = null;
         break;
-      }
-
-      if (!adc.docDataHtml.$$unwrapTrustedValue) {
-        adc.docDataHtml = $sce.trustAsHtml(adc.docDataHtml);
-      }
-      if (!adc.docDescriptionHtml.$$unwrapTrustedValue) {
-        adc.docDescriptionHtml = $sce.trustAsHtml(adc.docDescriptionHtml);
       }
 
       return adc;
@@ -123,7 +116,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    '$sce',
+    //'$sce',
     'application',
     'DocStatus'
   ];

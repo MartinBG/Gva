@@ -44,19 +44,16 @@ namespace Docs.Api.DataObjects
 
                     this.File.Key = appFile.DocFile.DocFileContentId;
                     this.File.Name = appFile.DocFile.DocFileName;
-                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.DocFile.DocFileContentId, appFile.DocFile.DocFileName);
                 }
                 else if (appFile.GvaLotFile.GvaFile != null)
                 {
                     this.File.Key = appFile.GvaLotFile.GvaFile.FileContentId;
                     this.File.Name = appFile.GvaLotFile.GvaFile.Filename;
-                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.GvaLotFile.GvaFile.FileContentId, appFile.GvaLotFile.GvaFile.Filename);
                 }
                 else if (appFile.GvaLotFile.DocFile != null)
                 {
                     this.File.Key = appFile.GvaLotFile.DocFile.DocFileContentId;
                     this.File.Name = appFile.GvaLotFile.DocFile.DocFileName;
-                    this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", appFile.GvaLotFile.DocFile.DocFileContentId, appFile.GvaLotFile.DocFile.DocFileName);
                 }
             }
             else if (docFile != null)
@@ -69,7 +66,6 @@ namespace Docs.Api.DataObjects
 
                 this.File.Key = docFile.DocFileContentId;
                 this.File.Name = docFile.DocFileName;
-                this.FileUrl = string.Format("api/file?fileKey={0}&fileName={1}", docFile.DocFileContentId, docFile.DocFileName);
             }
         }
 

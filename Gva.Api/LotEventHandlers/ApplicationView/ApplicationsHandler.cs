@@ -19,6 +19,7 @@ namespace Gva.Api.LotEventHandlers.ApplicationView
 
         public override void Fill(GvaViewApplication application, PartVersion partVersion)
         {
+            application.Lot = partVersion.Part.Lot;
             application.Part = partVersion.Part;
             application.RequestDate = partVersion.DynamicContent.requestDate;
             application.DocumentNumber = partVersion.DynamicContent.documentNumber;

@@ -4,8 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using Common.Api.Repositories;
 using Common.Data;
+using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Regs.Api.Models;
+
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
@@ -16,41 +19,62 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
         }
 
-        public IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin)
+        public IEnumerable<ApplicationListDO> GetApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string lin = null,
+            int offset = 0,
+            int? limit = null
+            )
         {
-            var applications = this.unitOfWork.DbContext.Set<GvaApplication>().AsQueryable()
-                .GroupJoin(this.unitOfWork.DbContext.Set<GvaViewApplication>().AsQueryable(), ga => ga.GvaAppLotPartId, gas => gas.PartId, (ga, gas) => new { GApplication = ga, GApplicationSearch = gas })
-                .Join(this.unitOfWork.DbContext.Set<GvaViewPersonData>().AsQueryable(), ga => ga.GApplication.LotId, gp => gp.GvaPersonLotId, (ga, gp) => new { GApplication = ga.GApplication, GApplicationSearch = ga.GApplicationSearch, GPerson = gp });
+            var applicationsJoin =
+                from a in this.unitOfWork.DbContext.Set<GvaApplication>()
+                join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId
+                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId
+                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va.LotId equals p.LotId
+                select new
+                {
+                    GApplication = a,
+                    GApplicationPart = part,
+                    GViewApplication = va,
+                    GViewPerson = p
+                };
 
-            if (fromDate.HasValue)
+            var predicate = PredicateBuilder.True(new
             {
-                applications = applications.Where(e => e.GApplicationSearch.FirstOrDefault() == null || (e.GApplicationSearch.FirstOrDefault().RequestDate.HasValue && e.GApplicationSearch.FirstOrDefault().RequestDate.Value >= fromDate.Value));
-            }
-
-            if (toDate.HasValue)
-            {
-                applications = applications.Where(e => e.GApplicationSearch.FirstOrDefault() == null || (e.GApplicationSearch.FirstOrDefault().RequestDate.HasValue && e.GApplicationSearch.FirstOrDefault().RequestDate.Value <= toDate.Value));
-            }
-
-            if (!string.IsNullOrWhiteSpace(lin))
-            {
-                applications = applications.Where(e => e.GPerson.Lin == lin);
-            }
-
-            return applications.Select(e => new ApplicationListDO()
-            {
-                ApplicationId = e.GApplication.GvaApplicationId,
-                DocId = e.GApplication.DocId,
-                AppPartId = e.GApplication.GvaAppLotPartId,
-                AppPartIndex = e.GApplication.GvaAppLotPart.Index,
-                AppPartRequestDate = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().RequestDate : null,
-                AppPartDocumentNumber = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().DocumentNumber : null,
-                AppPartApplicationTypeName = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().ApplicationTypeName : null,
-                AppPartStatusName = e.GApplicationSearch.FirstOrDefault() != null ? e.GApplicationSearch.FirstOrDefault().StatusName : null,
-                PersonId = e.GApplication.LotId,
-                PersonLin = e.GPerson.Lin,
-                PersonNames = e.GPerson.Names
+                GApplication = new GvaApplication(),
+                GApplicationPart = new Part(),
+                GViewApplication = new GvaViewApplication(),
+                GViewPerson = new GvaViewPerson()
             });
+
+            predicate = predicate
+                .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.RequestDate, fromDate)
+                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.RequestDate, toDate)
+                .AndStringContains(e => e.GViewPerson.Lin, lin);
+
+            var applications = applicationsJoin
+                .Where(predicate)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
+
+            return applications
+                .Select(e => new ApplicationListDO()
+                {
+                    ApplicationId = e.GApplication.GvaApplicationId,
+                    DocId = e.GApplication.DocId,
+                    AppPartId = e.GApplication.GvaAppLotPartId,
+                    AppPartIndex = e.GApplicationPart.Index,
+                    AppPartRequestDate = e.GViewApplication.RequestDate,
+                    AppPartDocumentNumber = e.GViewApplication.DocumentNumber,
+                    AppPartApplicationTypeName = e.GViewApplication.ApplicationTypeName,
+                    AppPartStatusName = e.GViewApplication.StatusName,
+                    PersonId = e.GViewPerson.LotId,
+                    PersonLin = e.GViewPerson.Lin,
+                    PersonNames = e.GViewPerson.Names
+                })
+                .ToList();
         }
 
         public IEnumerable<GvaApplication> GetLinkedToDocsApplications()

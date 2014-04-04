@@ -85,8 +85,8 @@
       'Application',
       'application',
       function ($q, $stateParams, Application, application) {
-        var docFile = $q.defer(),
-            doc = $q.defer();
+        var docFile,
+            doc;
 
         if ($stateParams.setPartAlias === 'application' && !!$stateParams.docId) {
           doc = Application.getDoc({ docId: $stateParams.docId });
@@ -96,16 +96,18 @@
         }
 
         return $q.all({
-          doc: doc.$promise,
-          docFile: docFile.$promise
+          doc: doc && doc.$promise,
+          docFile: docFile && docFile.$promise
         }).then(function (res) {
           var part = {};
           res.docFile = res.docFile || {};
+
+          //add lotId for the applicationDocument form to filter the case type by lot
           res.docFile.lotId = application.lotId;
 
           if ($stateParams.setPartAlias === 'application') {
             part.documentNumber = res.doc.documentNumber;
-            //applicationType = docType?
+            //todo applicationType = docType?
           }
 
           return {

@@ -9,6 +9,8 @@ namespace Gva.Api.Models
     {
         public int PartId { get; set; }
 
+        public int? LotId { get; set; }
+
         public DateTime? RequestDate { get; set; }
 
         public string DocumentNumber { get; set; }
@@ -16,6 +18,8 @@ namespace Gva.Api.Models
         public string ApplicationTypeName { get; set; }
 
         public string StatusName { get; set; }
+
+        public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
     }
@@ -43,15 +47,19 @@ namespace Gva.Api.Models
             // Table & Column Mappings
             this.ToTable("GvaViewApplications");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
+            this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.RequestDate).HasColumnName("RequestDate");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.ApplicationTypeName).HasColumnName("ApplicationTypeName");
             this.Property(t => t.StatusName).HasColumnName("StatusName");
 
             // Relationships
+            this.HasOptional(t => t.Lot)
+                .WithMany()
+                .HasForeignKey(t => t.LotId);
+
             this.HasRequired(t => t.Part)
                 .WithOptional();
-
         }
     }
 }

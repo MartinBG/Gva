@@ -10,8 +10,8 @@ namespace Gva.Api.ModelsDO
     {
         public ApplicationDO()
         {
-            this.ApplicationDocCase = new List<ApplicationDocRelationDO>();
-            this.ApplicationLotFilesUnlinked = new List<ApplicationLotFileDO>();
+            this.AppDocCase = new List<ApplicationDocRelationDO>();
+            this.AppFilesNotInCase = new List<ApplicationLotFileDO>();
             
         }
 
@@ -32,9 +32,11 @@ namespace Gva.Api.ModelsDO
         public int LotId { get; set; }
         public int? GvaAppLotPartId { get; set; }
 
+        public string LotSetAlias { get; set; }
         public PersonDO Person { get; set; }
-        public List<ApplicationDocRelationDO> ApplicationDocCase { get; set; }
 
-        public List<ApplicationLotFileDO> ApplicationLotFilesUnlinked { get; set; }
+        public List<ApplicationDocRelationDO> AppDocCase { get; set; }
+
+        public List<ApplicationLotFileDO> AppFilesNotInCase { get; set; }
     }
 }

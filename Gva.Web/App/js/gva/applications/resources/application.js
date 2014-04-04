@@ -57,7 +57,7 @@
             },
             'attachDocFile': {
               method: 'POST',
-              url: '/api/apps/:id/attachDocFile',
+              url: '/api/apps/:id/docFiles/create',
               params: { docId: '@docId' }
             }
           });

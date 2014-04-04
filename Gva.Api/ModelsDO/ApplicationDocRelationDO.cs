@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO
     {
         public ApplicationDocRelationDO()
         {
-            this.ApplicationLotFilesLinked = new List<ApplicationLotFileDO>();
+            this.ApplicationLotFiles = new List<ApplicationLotFileDO>();
         }
 
         public ApplicationDocRelationDO(DocRelation d)
@@ -53,23 +53,7 @@ namespace Gva.Api.ModelsDO
         public string DocDocTypeName { get; set; }
         public string DocSubject { get; set; }
 
-        public List<ApplicationLotFileDO> ApplicationLotFilesLinked { get; set; }
-
-        public string DocDataHtml
-        {
-            get
-            {
-                return string.Format("{0}:{1}<br/>{2}", this.DocDocDirectionName, this.DocRegUri, this.DocDocStatusName);
-            }
-        }
-
-        public string DocDescriptionHtml
-        {
-            get
-            {
-                return string.Format("{0}: {1}", this.DocDocTypeName, this.DocSubject);
-            }
-        }
+        public List<ApplicationLotFileDO> ApplicationLotFiles { get; set; }
 
     }
 }

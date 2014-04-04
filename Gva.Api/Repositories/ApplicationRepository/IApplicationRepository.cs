@@ -8,7 +8,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
 {
     public interface IApplicationRepository : IRepository<GvaApplication>
     {
-        IEnumerable<ApplicationListDO> GetApplications(DateTime? fromDate, DateTime? toDate, string lin);
+        IEnumerable<ApplicationListDO> GetApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string lin = null,
+            int offset = 0,
+            int? limit = null
+            );
 
         GvaApplication[] GetNomApplications(int lotId);
 

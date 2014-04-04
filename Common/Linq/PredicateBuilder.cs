@@ -11,7 +11,17 @@ namespace Common.Linq
             return f => true;
         }
 
+        public static Expression<Func<T, bool>> True<T>(T typeInference)
+        {
+            return f => true;
+        }
+
         public static Expression<Func<T, bool>> False<T>()
+        {
+            return f => false;
+        }
+
+        public static Expression<Func<T, bool>> False<T>(T typeInference)
         {
             return f => false;
         }

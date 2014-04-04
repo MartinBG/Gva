@@ -15,8 +15,21 @@ namespace Gva.Api.ModelsDO
         public string AppPartApplicationTypeName { get; set; }
         public string AppPartStatusName { get; set; }
 
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
         public string PersonLin { get; set; }
         public string PersonNames { get; set; }
+
+        public string Description
+        {
+            get
+            {
+                if (PersonId.HasValue)
+                {
+                    return string.Format("{0} - {1}", this.PersonLin, this.PersonNames);
+                }
+
+                return "";
+            }
+        }
     }
 }

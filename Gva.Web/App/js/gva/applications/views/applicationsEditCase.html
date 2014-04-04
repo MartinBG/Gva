@@ -9,18 +9,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="adc in application.applicationDocCase">
-        <td><strong ng-bind-html="adc.docDataHtml"></strong></td>
-        <td><strong ng-bind-html="adc.docDescriptionHtml"></strong></td>
+      <tr ng-repeat-start="adc in application.appDocCase">
+        <td>
+          <a ng-click="viewDoc(adc.docId)">
+            <strong>{{ adc.docDocDirectionName }} : {{ adc.docRegUri }}</strong><br />
+            <strong>{{ adc.docDocStatusName }}</strong>
+          </a>
+        </td>
+        <td>
+          <strong>{{ adc.docDocTypeName }} : {{ adc.docSubject }}</strong>
+        </td>
         <td></td>
         <td style="text-align: right;">
-          <a ng-click="viewDoc(adc.docId)" l10n-text="applications.edit.case.viewDoc"></a> / <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a> {{(adc.nextStatusText ? '/': '')}} <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
+          <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a> 
+          <br />
+          <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
         </td>
       </tr>
-      <tr ng-repeat="item in adc.applicationLotFilesLinked">
+      <tr ng-repeat="item in adc.applicationLotFiles">
         <td></td>
-        <td ng-if="item.hasAppFile">{{ item.setPartName }} (<a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a>)</td>
-        <td ng-if="!item.hasAppFile"><a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a></td>
+        <td ng-if="item.hasAppFile">{{ item.setPartName }} (<a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" title="{{item.file.name}}">{{item.file.name}}</a>)</td>
+        <td ng-if="!item.hasAppFile"><a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" title="{{item.file.name}}">{{item.file.name}}</a></td>
         <td>
           <div ng-if="item.hasAppFile">
             <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
@@ -33,7 +42,9 @@
       </tr>
       <tr ng-repeat-end>
         <td colspan="4" style="text-align: right;">
-          <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a> / <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
+          <a ng-click="newFile(adc.docId)" l10n-text="applications.edit.case.newFile"></a>
+          <br />
+          <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
         </td>
       </tr>
       <tr>
@@ -44,7 +55,7 @@
         <td></td>
         <td></td>
       </tr>
-      <tr ng-repeat="item in application.applicationLotFilesUnlinked">
+      <tr ng-repeat="item in application.appFilesNotInCase">
         <td></td>
         <td>{{ item.setPartName }} (<a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a>)</td>
         <td>

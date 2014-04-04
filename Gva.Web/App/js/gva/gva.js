@@ -14,6 +14,14 @@
     'scrollto'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
+      name: 'gvaApplicationDocument',
+      templateUrl: 'gva/applications/forms/applicationDocument.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaApplicationSelectPerson',
+      templateUrl: 'gva/applications/forms/selectPerson.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonData',
       templateUrl: 'gva/persons/forms/personData.html',
       controller: 'PersonDataCtrl'
@@ -278,10 +286,6 @@
       controller: 'AirportDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaApplicationDocument',
-      templateUrl: 'gva/applications/forms/applicationDocument.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaCommonInspection',
       templateUrl: 'gva/common/forms/commonInspection.html',
       controller: 'CommonInspectionCtrl'
@@ -303,25 +307,25 @@
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                            ])
-      .state(['root.applications.search'                           , '?fromDate&toDate&lin'                                                                                                , ['@root'                  , 'gva/applications/views/applicationsSearch.html'      , 'ApplicationsSearchCtrl'      ]])
-      .state(['root.applications.new'                              , '/new'                                                                                                                , ['@root'                  , 'gva/applications/views/applicationsNew.html'         , 'ApplicationsNewCtrl'         ]])
-      .state(['root.applications.new.personSelect'                 , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                                                     , ['@root'                  , 'gva/applications/views/applicationsPersonSelect.html', 'ApplicationsPersonSelectCtrl']])
-      .state(['root.applications.new.personNew'                    , '/personNew'                                                                                                          , ['@root'                  , 'gva/applications/views/applicationsPersonNew.html'   , 'ApplicationsPersonNewCtrl'   ]])
-      .state(['root.applications.link'                             , '/link'                                                                                                               , ['@root'                  , 'gva/applications/views/applicationsLink.html'        , 'ApplicationsLinkCtrl'        ]])
-      .state(['root.applications.link.docSelect'                   , '/docSelect?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units'                                         , ['@root'                  , 'gva/applications/views/applicationsDocSelect.html'   , 'ApplicationsDocSelectCtrl'   ]])
-      .state(['root.applications.link.personSelect'                , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                                                     , ['@root'                  , 'gva/applications/views/applicationsPersonSelect.html', 'ApplicationsPersonSelectCtrl']])
-      .state(['root.applications.link.personNew'                   , '/personNew'                                                                                                          , ['@root'                  , 'gva/applications/views/applicationsPersonNew.html'   , 'ApplicationsPersonNewCtrl'   ]])
-      .state(['root.applications.edit'                             , '/:id'                                                                                                                , ['@root'                  , 'gva/applications/views/applicationsEdit.html'        , 'ApplicationsEditCtrl'        ]])
-      .state(['root.applications.edit.case', '/case', ['@root.applications.edit', 'gva/applications/views/applicationsEditCase.html', 'ApplicationsEditCaseCtrl']])
-      .state(['root.applications.edit.quals'                       , '/quals'                                                                                                              , ['@root.applications.edit', 'gva/applications/views/applicationsEditQuals.html'   , 'ApplicationsEditQualsCtrl'   ]])
-      .state(['root.applications.edit.licenses'                    , '/licenses'                                                                                                           , ['@root.applications.edit', 'gva/applications/views/applicationsEditLicenses.html', 'ApplicationsEditLicensesCtrl']])
-      .state(['root.applications.edit.case.newFile', '/newFile?docId&docFileId', ['@root.applications.edit', 'gva/applications/views/applicationsEditNewFile.html', 'ApplicationsEditNewFileCtrl']])
-      .state(['root.applications.edit.case.newDocFile', '/newDocFile?docId', ['@root.applications.edit', 'gva/applications/views/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
-      .state(['root.applications.edit.case.childDoc', '/childDoc?parentDocId', ['@root.applications.edit', 'gva/applications/views/applicationsEditChildDoc.html', 'ApplicationsEditChildDocCtrl']])
-      .state(['root.applications.edit.case.addPart', '/addPart?docId&docFileId&setPartAlias', ['@root.applications.edit', 'gva/applications/views/applicationsEditAddPart.html', 'ApplicationsEditAddPartCtrl']])
-      .state(['root.applications.edit.case.addPart.choosePublisher', '/choosepublisher?text&publisherTypeAlias'                                                                            , ['@root.applications.edit', 'gva/common/views/publishers/choosePublisher'         , 'ChoosePublisherCtrl'         ]])
-      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                                                 , ['@root.applications.edit', 'gva/applications/views/applicationsEditLinkPart.html', 'ApplicationsEditLinkPartCtrl']]);
+      .state(['root.applications'                                  , '/applications'                                                                                                                                                                                                                               ])
+      .state(['root.applications.search'                           , '?fromDate&toDate&lin'                                                                                                , ['@root'                  , 'gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
+      .state(['root.applications.new'                              , '/new'                                                                                                                , ['@root'                  , 'gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
+      .state(['root.applications.new.personSelect'                 , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                                                     , ['@root'                  , 'gva/applications/views/applicationsPersonSelect.html'  , 'ApplicationsPersonSelectCtrl'  ]])
+      .state(['root.applications.new.personNew'                    , '/personNew'                                                                                                          , ['@root'                  , 'gva/applications/views/applicationsPersonNew.html'     , 'ApplicationsPersonNewCtrl'     ]])
+      .state(['root.applications.link'                             , '/link'                                                                                                               , ['@root'                  , 'gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
+      .state(['root.applications.link.docSelect'                   , '/docSelect?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units'                                         , ['@root'                  , 'gva/applications/views/applicationsDocSelect.html'     , 'ApplicationsDocSelectCtrl'     ]])
+      .state(['root.applications.link.personSelect'                , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                                                     , ['@root'                  , 'gva/applications/views/applicationsPersonSelect.html'  , 'ApplicationsPersonSelectCtrl'  ]])
+      .state(['root.applications.link.personNew'                   , '/personNew'                                                                                                          , ['@root'                  , 'gva/applications/views/applicationsPersonNew.html'     , 'ApplicationsPersonNewCtrl'     ]])
+      .state(['root.applications.edit'                             , '/:id'                                                                                                                , ['@root'                  , 'gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
+      .state(['root.applications.edit.case'                        , '/case'                                                                                                               , ['@root.applications.edit', 'gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
+      .state(['root.applications.edit.quals'                       , '/quals'                                                                                                              , ['@root.applications.edit', 'gva/applications/views/applicationsEditQuals.html'     , 'ApplicationsEditQualsCtrl'     ]])
+      .state(['root.applications.edit.licenses'                    , '/licenses'                                                                                                           , ['@root.applications.edit', 'gva/applications/views/applicationsEditLicenses.html'  , 'ApplicationsEditLicensesCtrl'  ]])
+      .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                                            , ['@root.applications.edit', 'gva/applications/views/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
+      .state(['root.applications.edit.case.newDocFile'             , '/newDocFile?docId'                                                                                                   , ['@root.applications.edit', 'gva/applications/views/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
+      .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                                               , ['@root.applications.edit', 'gva/applications/views/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
+      .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias'                                                                               , ['@root.applications.edit', 'gva/applications/views/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
+      .state(['root.applications.edit.case.addPart.choosePublisher', '/choosepublisher?text&publisherTypeAlias'                                                                            , ['@root.applications.edit', 'gva/common/views/publishers/choosePublisher'           , 'ChoosePublisherCtrl'           ]])
+      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                                                 , ['@root.applications.edit', 'gva/applications/views/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]]);
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.persons'                                            , '/persons?exact&lin&uin&names&licences&ratings&organization'                                                                                                              ])

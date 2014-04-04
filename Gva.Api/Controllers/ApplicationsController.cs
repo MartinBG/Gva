@@ -64,25 +64,24 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetApplications(DateTime? fromDate = null, DateTime? toDate = null, string lin = null)
+        public IHttpActionResult GetApplications(DateTime? fromDate = null, DateTime? toDate = null, string lin = null, int offset = 0, int? limit = null)
         {
-            var applications = this.applicationRepository.GetApplications(fromDate, toDate, lin);
+            var applications = this.applicationRepository.GetApplications(fromDate: fromDate, toDate: toDate, lin: lin, offset: offset, limit: limit);
 
             return Ok(applications);
         }
 
-        [Route("{id}")]
+        [Route("{id:int}")]
         public IHttpActionResult GetApplication(int id)
         {
             var application = this.applicationRepository.Find(id,
                 e => e.GvaAppLotFiles.Select(f => f.DocFile),
                 e => e.GvaAppLotFiles.Select(f => f.GvaLotFile),
-                //e => e.GvaLotObjects,
                 e => e.Doc.DocFiles);
 
             if (application == null)
             {
-                return StatusCode(System.Net.HttpStatusCode.NoContent);
+                throw new Exception("Cannot find application with id " + id);
             }
 
             ApplicationDO returnValue = new ApplicationDO(application);
@@ -108,38 +107,38 @@ namespace Gva.Api.Controllers
                     e => e.Doc.DocEntryType
                     );
 
-                List<GvaAppLotFile> appFilesLinked = new List<GvaAppLotFile>();
+                List<GvaAppLotFile> appFilesInCase = new List<GvaAppLotFile>();
 
                 foreach (var dr in docRelations)
                 {
-                    ApplicationDocRelationDO applicationDocRelation = new ApplicationDocRelationDO(dr);
+                    ApplicationDocRelationDO appDocRelation = new ApplicationDocRelationDO(dr);
 
                     if (dr.Doc.DocEntryType.Alias == "Document")
                     {
                         foreach (var docFile in dr.Doc.DocFiles)
                         {
-                            GvaAppLotFile appFile = appFilesAll.FirstOrDefault(e => e.DocFileId == docFile.DocFileId);
-                            if (appFile != null)
+                            GvaAppLotFile appFileInDoc = appFilesAll.FirstOrDefault(e => e.DocFileId == docFile.DocFileId);
+                            if (appFileInDoc != null)
                             {
-                                appFilesLinked.Add(appFile);
+                                appFilesInCase.Add(appFileInDoc);
                             }
 
-                            applicationDocRelation.ApplicationLotFilesLinked.Add(new ApplicationLotFileDO(appFile, docFile));
+                            appDocRelation.ApplicationLotFiles.Add(new ApplicationLotFileDO(appFileInDoc, docFile));
                         }
 
-                        returnValue.ApplicationDocCase.Add(applicationDocRelation);
+                        returnValue.AppDocCase.Add(appDocRelation);
                     }
                 }
 
-                returnValue.ApplicationLotFilesUnlinked = appFilesAll
-                    .Except(appFilesLinked)
+                returnValue.AppFilesNotInCase = appFilesAll
+                    .Except(appFilesInCase)
                     .ToList()
                     .Select(e => new ApplicationLotFileDO(e, null))
                     .ToList();
             }
             else
             {
-                returnValue.ApplicationLotFilesUnlinked = appFilesAll
+                returnValue.AppFilesNotInCase = appFilesAll
                     .ToList()
                     .Select(e => new ApplicationLotFileDO(e, null))
                     .ToList();
@@ -149,7 +148,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/linkNew")]
-        public IHttpActionResult PostLinkNewPart(int? id, string setPartAlias, JObject linkNewPart)
+        public IHttpActionResult PostCreateDocFilePartAndLink(int? id, string setPartAlias, JObject linkNewPart)
         {
             if (!id.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
@@ -206,7 +205,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/create")]
-        public IHttpActionResult PostCreatePart(int? id, int? docId, string setPartAlias, JObject newPart)
+        public IHttpActionResult PostCreatePartAndLink(int? id, int? docId, string setPartAlias, JObject newPart)
         {
             if (!id.HasValue || !docId.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
@@ -273,7 +272,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/linkExisting")]
-        public IHttpActionResult PostLinkExistingPart(int? id, int? docFileId, int? partId)
+        public IHttpActionResult PostLinkPart(int? id, int? docFileId, int? partId)
         {
             if (!id.HasValue || !docFileId.HasValue || !partId.HasValue)
             {
@@ -325,6 +324,27 @@ namespace Gva.Api.Controllers
             }
         }
 
+        [Route("{id}/docFiles/create")]
+        public IHttpActionResult PostCreateDocFile(int id, int docId, DocFileDO[] files)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var doc = this.docRepository.Find(docId);
+                foreach (var file in files)
+                {
+                    doc.CreateDocFile(file.DocFileKindId, file.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+
+            return Ok();
+        }
+
         [Route("create")]
         public IHttpActionResult PostNewApplication(ApplicationNewDO applicationNewDO)
         {
@@ -355,7 +375,7 @@ namespace Gva.Api.Controllers
                         true,
                         (string)personData.firstName,
                         (string)personData.lastName,
-                        personData.uin,
+                        (string)personData.uin,
                         this.userContext);
 
                     correspondent.Email = (string)personData.email;
@@ -422,6 +442,8 @@ namespace Gva.Api.Controllers
 
                 this.docRepository.GenerateAccessCode(newDoc, userContext);
 
+                this.unitOfWork.Save();
+
                 this.docRepository.spSetDocUsers(newDoc.DocId);
 
                 this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
@@ -470,7 +492,6 @@ namespace Gva.Api.Controllers
                 });
             }
         }
-
 
         [Route("notLinkedDocs")]
         public IHttpActionResult GetNotLinkedDocs(
@@ -574,28 +595,6 @@ namespace Gva.Api.Controllers
             Doc doc = this.unitOfWork.DbContext.Set<Doc>().Find(docId.Value);
 
             return Ok(new { documentNumber = doc.RegUri });
-        }
-
-        [Route("{id}/attachDocFile")]
-        [HttpPost]
-        public IHttpActionResult PostAttachDocFile(int id, int docId, DocFileDO[] files)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var doc = this.docRepository.Find(docId);
-                foreach(var file in files)
-                {
-                    doc.CreateDocFile(file.DocFileKindId, file.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
-                }
-
-                this.unitOfWork.Save();
-
-                transaction.Commit();
-            }
-
-            return Ok();
         }
     }
 }
