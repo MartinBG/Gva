@@ -44,7 +44,7 @@ namespace Docs.Api.Controllers
         /// <param name="offset">Параметър за страницирането</param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetCorrespondents(
+        public IHttpActionResult GetCorrespondents(
             int limit = 10,
             int offset = 0,
             string displayName = null,
@@ -63,7 +63,7 @@ namespace Docs.Api.Controllers
                 .Select(e => new CorrespondentDO(e))
                 .ToList();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new
+            return Ok(new
             {
                 correspondents = returnValue,
                 correspondentCount = totalCount
@@ -76,13 +76,13 @@ namespace Docs.Api.Controllers
         /// <param name="id">Идентификатор на кореспондент</param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetCorrespondent(int id)
+        public IHttpActionResult GetCorrespondent(int id)
         {
             Correspondent correspondent = this.correspondentRepository.GetCorrespondent(id);
 
             if (correspondent == null)
             {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.NoContent);
+                return NotFound();
             }
 
             CorrespondentDO returnValue = new CorrespondentDO(correspondent);
@@ -94,7 +94,7 @@ namespace Docs.Api.Controllers
 
             returnValue.SetupFlags();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
+            return Ok(returnValue);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Docs.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetNewCorrespondent()
+        public IHttpActionResult GetNewCorrespondent()
         {
             CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
                     .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
@@ -133,7 +133,7 @@ namespace Docs.Api.Controllers
 
             returnValue.SetupFlags();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
+            return Ok(returnValue);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Docs.Api.Controllers
         /// <param name="corr">Данни на кореспондента</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage CreateCorrespondent(CorrespondentDO corr)
+        public IHttpActionResult CreateCorrespondent(CorrespondentDO corr)
         {
             Correspondent newCorr;
 
@@ -221,8 +221,7 @@ namespace Docs.Api.Controllers
 
             CorrespondentDO returnValue = new CorrespondentDO(newCorr);
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
-                new
+            return Ok(new
                 {
                     err = "",
                     correspondentId = returnValue.CorrespondentId,
@@ -237,7 +236,7 @@ namespace Docs.Api.Controllers
         /// <param name="corr">Нови данни на кореспондент</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage UpdateCorrespondent(int id, CorrespondentDO corr)
+        public IHttpActionResult UpdateCorrespondent(int id, CorrespondentDO corr)
         {
             var oldCorr = this.correspondentRepository.GetCorrespondent(id);
 
@@ -335,8 +334,7 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
-                new
+            return Ok(new
                 {
                     err = "",
                     correspondentId = oldCorr.CorrespondentId
@@ -349,12 +347,12 @@ namespace Docs.Api.Controllers
         /// <param name="id">Идентификатор на кореспондент</param>
         /// <returns></returns>
         [HttpDelete]
-        public HttpResponseMessage DeleteCorrespondent(int id, string corrVersion)
+        public IHttpActionResult DeleteCorrespondent(int id, string corrVersion)
         {
             this.correspondentRepository.DeteleCorrespondent(id, Helper.StringToVersion(corrVersion));
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
     }
 }

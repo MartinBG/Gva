@@ -55,7 +55,7 @@ namespace Docs.Api.Controllers
         /// <param name="offset">Параметър за страницирането</param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetDocs(
+        public IHttpActionResult GetDocs(
             int limit = 10,
             int offset = 0,
             string filter = null,
@@ -333,13 +333,13 @@ namespace Docs.Api.Controllers
                 }
             }
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new
-            {
-                docView = docView.ToString(),
-                documents = returnValue,
-                documentCount = totalCount,
-                msg = sb.ToString()
-            });
+            return Ok(new
+                {
+                    docView = docView.ToString(),
+                    documents = returnValue,
+                    documentCount = totalCount,
+                    msg = sb.ToString()
+                });
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Docs.Api.Controllers
         /// <param name="preDoc">Данни за нов документ</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage CreateDoc(PreDocDO preDoc)
+        public IHttpActionResult CreateDoc(PreDocDO preDoc)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -432,8 +432,7 @@ namespace Docs.Api.Controllers
 
                 if (createdDocs.Count == 1 && !preDoc.Register)
                 {
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
-                        new
+                    return Ok(new
                         {
                             docId = createdDocs.FirstOrDefault().DocId
                         });
@@ -441,7 +440,11 @@ namespace Docs.Api.Controllers
                 else
                 {
                     string ids = Helper.GetStringFromIdList(createdDocs.Select(e => e.DocId).ToList());
-                    return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, new { ids = ids });
+
+                    return Ok(new
+                        {
+                            ids = ids
+                        });
                 }
             }
         }
@@ -453,7 +456,7 @@ namespace Docs.Api.Controllers
         /// <param name="docEntryTypeAlias">Тип на документа</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage CreateChildDoc(int id, string docEntryTypeAlias = null)
+        public IHttpActionResult CreateChildDoc(int id, string docEntryTypeAlias = null)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -531,8 +534,7 @@ namespace Docs.Api.Controllers
 
                 transaction.Commit();
 
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
-                    new
+                return Ok(new
                     {
                         docId = newDoc.DocId
                     });
@@ -545,7 +547,7 @@ namespace Docs.Api.Controllers
         /// <param name="id">Идентификатор на документ</param>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetDoc(int id)
+        public IHttpActionResult GetDoc(int id)
         {
             DateTime currentDate = DateTime.Now;
 
@@ -561,7 +563,7 @@ namespace Docs.Api.Controllers
 
             if (!docUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
             {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.Forbidden);
+                return BadRequest();
             }
 
             var doc = this.docRepository.Find(id,
@@ -573,7 +575,7 @@ namespace Docs.Api.Controllers
 
             if (doc == null)
             {
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.NoContent);
+                return NotFound();
             }
 
             #region Load
@@ -748,7 +750,7 @@ namespace Docs.Api.Controllers
 
             returnValue.Set();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, returnValue);
+            return Ok(returnValue);
         }
 
         /// <summary>
@@ -758,7 +760,7 @@ namespace Docs.Api.Controllers
         /// <param name="doc">Нови данни на документ</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage UpdateDoc(int id, DocDO doc)
+        public IHttpActionResult UpdateDoc(int id, DocDO doc)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -1012,7 +1014,7 @@ namespace Docs.Api.Controllers
 
                 transaction.Commit();
 
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, true);
+                return Ok();
             }
         }
 
@@ -1023,7 +1025,7 @@ namespace Docs.Api.Controllers
         /// <param name="docCasePartTypeId">Идентификатор на тип раздел</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage UpdateDocCasePartType(int id, string docVersion, int docCasePartTypeId)
+        public IHttpActionResult UpdateDocCasePartType(int id, string docVersion, int docCasePartTypeId)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -1038,12 +1040,12 @@ namespace Docs.Api.Controllers
 
                 transaction.Commit();
 
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+                return Ok();
             }
         }
 
         [HttpPost]
-        public HttpResponseMessage UpdateTechDoc(int id, string docVersion, DocDO doc)
+        public IHttpActionResult UpdateTechDoc(int id, string docVersion, DocDO doc)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -1108,12 +1110,12 @@ namespace Docs.Api.Controllers
 
                 transaction.Commit();
 
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+                return Ok();
             }
         }
 
         [HttpPost]
-        public HttpResponseMessage RegisterDoc(int id, string docVersion)
+        public IHttpActionResult RegisterDoc(int id, string docVersion)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
@@ -1129,7 +1131,7 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         /// <summary>
@@ -1140,7 +1142,7 @@ namespace Docs.Api.Controllers
         /// <param name="closure">Автоматично приключване на всички подчиненни документи</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage SetNextStatus(
+        public IHttpActionResult SetNextStatus(
             int id,
             string docVersion,
             bool? closure = null)
@@ -1161,8 +1163,8 @@ namespace Docs.Api.Controllers
             if (docRelations.Any())
             {
                 List<DocRelationDO> docRelationDOs = docRelations.Select(e => new DocRelationDO(e)).ToList();
-                return ControllerContext.Request.CreateResponse(HttpStatusCode.OK,
-                    new
+
+                return Ok(new
                     {
                         docRelations = docRelationDOs
                     });
@@ -1170,7 +1172,7 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         /// <summary>
@@ -1180,7 +1182,7 @@ namespace Docs.Api.Controllers
         /// <param name="docVersion">Версия на документ</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage CancelDoc(int id, string docVersion)
+        public IHttpActionResult CancelDoc(int id, string docVersion)
         {
             DocStatus cancelDocStatus = this.unitOfWork.DbContext.Set<DocStatus>()
                 .SingleOrDefault(e => e.Alias.ToLower() == "Canceled".ToLower());
@@ -1193,7 +1195,7 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         /// <summary>
@@ -1203,7 +1205,7 @@ namespace Docs.Api.Controllers
         /// <param name="docVersion">Версия на документ</param>
         /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage ReverseStatus(int id, string docVersion)
+        public IHttpActionResult ReverseStatus(int id, string docVersion)
         {
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().ToList();
 
@@ -1215,11 +1217,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPost]
-        public HttpResponseMessage CreateDocWorkflow(int id, string docVersion, DocWorkflowDO docWorkflow)
+        public IHttpActionResult CreateDocWorkflow(int id, string docVersion, DocWorkflowDO docWorkflow)
         {
             Doc doc = this.docRepository.Find(id);
 
@@ -1247,11 +1249,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpDelete]
-        public HttpResponseMessage DeleteDocWorkflow(int id, int itemId, string docVersion)
+        public IHttpActionResult DeleteDocWorkflow(int id, int itemId, string docVersion)
         {
             Doc doc = this.docRepository.Find(id,
                 e => e.DocWorkflows);
@@ -1262,11 +1264,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPost]
-        public HttpResponseMessage CreateDocElectronicServiceStage(
+        public IHttpActionResult CreateDocElectronicServiceStage(
             int id,
             string docVersion,
             DocElectronicServiceStageDO docElectronicServiceStage)
@@ -1286,22 +1288,22 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpGet]
-        public HttpResponseMessage GetCurrentDocElectronicServiceStage(int id, string docVersion)
+        public IHttpActionResult GetCurrentDocElectronicServiceStage(int id, string docVersion)
         {
             Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
                 e => e.DocElectronicServiceStages);
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, doc.GetCurrentDocElectronicServiceStage());
+            return Ok(doc.GetCurrentDocElectronicServiceStage());
         }
 
         [HttpPost]
-        public HttpResponseMessage UpdateCurrentDocElectronicServiceStage(
+        public IHttpActionResult UpdateCurrentDocElectronicServiceStage(
             int id,
             string docVersion,
             DocElectronicServiceStageDO docElectronicServiceStage)
@@ -1320,11 +1322,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPost]
-        public HttpResponseMessage EndCurrentDocElectronicServiceStage(
+        public IHttpActionResult EndCurrentDocElectronicServiceStage(
             int id,
             string docVersion,
             DocElectronicServiceStageDO docElectronicServiceStage)
@@ -1338,11 +1340,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpDelete]
-        public HttpResponseMessage DeleteCurrentDocElectronicServiceStage(int id, string docVersion)
+        public IHttpActionResult DeleteCurrentDocElectronicServiceStage(int id, string docVersion)
         {
             Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
                 e => e.DocElectronicServiceStages);
@@ -1353,11 +1355,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPost]
-        public HttpResponseMessage MarkAsRead(int id, string docVersion)
+        public IHttpActionResult MarkAsRead(int id, string docVersion)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
@@ -1369,11 +1371,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPost]
-        public HttpResponseMessage MarkAsUnread(int id, string docVersion)
+        public IHttpActionResult MarkAsUnread(int id, string docVersion)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
@@ -1385,11 +1387,11 @@ namespace Docs.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpGet]
-        public HttpResponseMessage ReadExternalLinks(int id)
+        public IHttpActionResult ReadExternalLinks(int id)
         {
             //? implement connection to application
             throw new NotImplementedException();
