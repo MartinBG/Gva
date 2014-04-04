@@ -1882,14 +1882,18 @@
         chooseDocuments: {
           save: 'Запиши',
           back: 'Назад',
-          documentNumber: '№ на документ',
-          documentPersonNumber: 'No в списъка (групов документ)',
-          documentDateValidFrom: 'Издаден на',
-          documentDateValidTo: 'Валидно до',
-          documentPublisher: 'Издател',
-          notes: 'Бележки',
-          organizationOtherDocumentType: 'Тип документ',
-          organizationOtherDocumentRole: 'Роля'
+          filter: 'Търси',
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
         },
         editCertAirportOperator: {
           save: 'Запис',
@@ -2285,7 +2289,7 @@
           activityTypes: 'Дейности',
           includedDocuments: 'Приложени документи',
           approvalDate: 'Дата на одобрение',
-          linkedDocumentId: 'Връзка с документ от документите',
+          linkedDocument: 'Връзка с документ от документите',
           revokeDate: 'Дата на отнемане',
           revokeinspector: 'Инспектор',
           revokeTitle: 'Отнемане',
@@ -2294,7 +2298,7 @@
             chooseDocuments: 'Избери документи',
             inspector: 'Инспектор',
             approvalDate: 'Дата на одобрение',
-            linkedDocumentId: 'Връзка с документ от документите',
+            linkedDocument: 'Връзка с документ от документите',
             noAvailableDocuments: 'Няма налични приложени документи'
           },
           revokeCause: 'Причина за отнемане'
@@ -2348,7 +2352,7 @@
             inspector: 'Инспектор',
             approvalDate: 'Дата на одобрение',
             linkedLim: 'Връзка с Обхват на одобрение',
-            linkedDocumentId: 'Връзка с документ от документите на организацията',
+            linkedDocument: 'Връзка с документ от документите на организацията',
             noAvailableDocuments: 'Няма налични документи'
           }
         },

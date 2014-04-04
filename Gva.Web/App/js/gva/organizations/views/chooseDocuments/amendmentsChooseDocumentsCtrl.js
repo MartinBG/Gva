@@ -7,20 +7,42 @@
     $stateParams,
     $scope,
     organizationAmendment,
-    availableDocuments) {
+    availableDocuments
+    ) {
     $scope.availableDocuments = availableDocuments;
+
+    $scope.documentsOptions = [
+      { id: 'other', text: 'Други документи' },
+      { id: 'application', text: 'Заявления' }
+    ];
+
+    if ($stateParams.documentTypes) {
+      $scope.documentTypes = _.filter($scope.documentsOptions, function (tag) {
+        return _.contains($stateParams.documentTypes, tag.id);
+      });
+    }
 
     $scope.save = function () {
       _.each(_.filter($scope.availableDocuments, { 'checked': true }), function (document) {
-        organizationAmendment.part.includedDocuments.push({ linkedDocumentId: document.partIndex });
+        organizationAmendment.part.includedDocuments.push(
+          {
+            partIndex: document.partIndex,
+            documentType: document.documentType
+          });
       });
       return $state.go('^');
+    };
+
+    $scope.search = function () {
+      return $state.go($state.current, {
+        id: $stateParams.id,
+        documentTypes: _.pluck($scope.documentTypes, 'id')
+      });
     };
 
     $scope.goBack = function () {
       return $state.go('^');
     };
-
   }
 
   AmendmentsChooseDocumentsCtrl.$inject = [
@@ -34,14 +56,17 @@
   AmendmentsChooseDocumentsCtrl.$resolve = {
     availableDocuments: [
       '$stateParams',
-      'OrganizationDocumentOther',
+      'OrganizationInventory',
       'organizationAmendment',
-      function ($stateParams, OrganizationDocumentOther, organizationAmendment) {
-        return OrganizationDocumentOther.query({ id: $stateParams.id })
+      function ($stateParams, OrganizationInventory, organizationAmendment) {
+        return OrganizationInventory.query({
+          id: $stateParams.id,
+          documentTypes: $stateParams.documentTypes ? $stateParams.documentTypes.split(',') : null
+        })
             .$promise.then(function (availableDocuments) {
               return _.reject(availableDocuments, function (availableDocument) {
                 var count = _.where(organizationAmendment.part.includedDocuments,
-                  { linkedDocumentId: availableDocument.partIndex }).length;
+                  { partIndex: availableDocument.partIndex }).length;
                 return count > 0;
               });
             });

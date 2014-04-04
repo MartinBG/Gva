@@ -27,12 +27,12 @@
         {
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2011-04-06T00:00',
-          linkedDocumentId: 2
+          linkedDocument: 2
         },
         {
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2014-05-02T00:00',
-          linkedDocumentId: 3
+          linkedDocument: 3
         }
       ],
       revokeDate: '2014-02-06T00:00',
@@ -60,12 +60,12 @@
         {
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2011-04-06T00:00',
-          linkedDocumentId: 2
+          linkedDocument: 2
         },
         {
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2014-05-02T00:00',
-          linkedDocumentId: 3
+          linkedDocument: 3
         }
       ],
       revokeDate: '2014-02-06T00:00',

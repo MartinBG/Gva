@@ -169,7 +169,7 @@
             </th>
             <th l10n-text="organizations.amendmentDirective.includedDocuments.approvalDate"></th>
             <th l10n-text="organizations.amendmentDirective.includedDocuments.linkedLim"></th>
-            <th l10n-text="organizations.amendmentDirective.includedDocuments.linkedDocumentId"></th>
+            <th l10n-text="organizations.amendmentDirective.includedDocuments.linkedDocument"></th>
             <th></th>
           </tr>
         </thead>
@@ -185,7 +185,7 @@
               <sc-int ng-model="document.linkedLim"></sc-int>
             </td>
             <td class="col-sm-3 col-md-3">
-              <sc-int ng-model="document.linkedDocumentId"></sc-int>
+              <a class="glyphicon glyphicon-file" ng-click="viewDocument(document)"></a>
             </td>
             <td style="text-align: right; width: 1px;">
               <sc-button name="deleteDocumentBtn" type="button" class="btn btn-primary btn-sm" btn-click="deleteDocument(document)" icon="glyphicon-remove"></sc-button>

@@ -578,7 +578,7 @@
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearch.html" />
     <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearchCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsChooseDocumentsCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\chooseDocuments\amendmentsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNew.html" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsSearch.html" />
@@ -613,8 +613,8 @@
     <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsSearch.html" />
     <Content Include="App\js\gva\organizations\views\documentApplications\organizationsDocApplicationsSearchCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\documentOthers\chooseDocuments\organizationsChooseDocuments.html" />
-    <Content Include="App\js\gva\organizations\views\documentOthers\chooseDocuments\organizationsChooseDocumentsCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\chooseDocuments\organizationsChooseDocuments.html" />
+    <Content Include="App\js\gva\organizations\views\chooseDocuments\organizationsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersEdit.html" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\documentOthers\othersNew.html" />

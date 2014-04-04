@@ -39,13 +39,13 @@
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2011-04-06T00:00',
           linkedLim: 2,
-          linkedDocumentId: 4
+          linkedDocument: 4
         },
         {
           inspector: nomenclatures.get('inspectors', 'Vladimir'),
           approvalDate: '2011-04-06T00:00',
           linkedLim: 3,
-          linkedDocumentId: 5
+          linkedDocument: 5
         }
       ]
     },

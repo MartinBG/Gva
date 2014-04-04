@@ -11,6 +11,19 @@
     $scope.chooseDocuments = function () {
       $state.go($state.current.name + '.chooseDocuments');
     };
+
+    $scope.viewDocument = function (document) {
+      var state;
+
+      if (document.documentType === 'other') {
+        state = 'root.organizations.view.documentOthers.edit';
+      }
+      else if (document.documentType === 'application') {
+        state = 'root.organizations.view.documentApplications.edit';
+      }
+
+      return $state.go(state, { ind: document.partIndex });
+    };
   }
 
   OrganizationCertOperatorCtrl.$inject = ['$scope','$state'];
