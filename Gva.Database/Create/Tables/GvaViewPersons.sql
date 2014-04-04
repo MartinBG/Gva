@@ -2,20 +2,20 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewPersons] (
-    [GvaPersonLotId] INT           NOT NULL,
+    [LotId]          INT           NOT NULL,
     [Lin]            NVARCHAR(50)  NOT NULL,
     [Uin]            NVARCHAR(50)  NULL,
     [Names]          NVARCHAR(MAX) NOT NULL,
     [BirtDate]       DATETIME2 (7) NOT NULL,
     [Organization]   NVARCHAR(50)  NULL,
     [Employment]     NVARCHAR(50)  NULL,
-    CONSTRAINT [PK_GvaViewPersons]      PRIMARY KEY ([GvaPersonLotId]),
-    CONSTRAINT [FK_GvaViewPersons_Lots] FOREIGN KEY ([GvaPersonLotId]) REFERENCES [dbo].[Lots] ([LotId])
+    CONSTRAINT [PK_GvaViewPersons]      PRIMARY KEY ([LotId]),
+    CONSTRAINT [FK_GvaViewPersons_Lots] FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
 )
 GO
 
 exec spDescTable  N'GvaViewPersons', N'Физически лица.'
-exec spDescColumn N'GvaViewPersons', N'GvaPersonLotId', N'Идентификатор на партида на физическо лице.'
+exec spDescColumn N'GvaViewPersons', N'LotId', N'Идентификатор на партида на физическо лице.'
 exec spDescColumn N'GvaViewPersons', N'Lin'           , N'Личен идентификационен номер.'
 exec spDescColumn N'GvaViewPersons', N'Uin'           , N'Единен граждански номер.'
 exec spDescColumn N'GvaViewPersons', N'Names'         , N'Имена.'

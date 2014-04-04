@@ -17,7 +17,7 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
-        GvaViewPersonData GetPerson(int personId);
+        GvaViewPerson GetPerson(int personId);
 
         GvaCorrespondent GetGvaCorrespondentByPersonId(int lotId);
 

@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [LotPartId]      INT           NOT NULL,
     [RatingType]     NVARCHAR(MAX) NOT NULL,
     CONSTRAINT [PK_GvaViewPersonRatings]          PRIMARY KEY ([LotId], [LotPartId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_Lots]     FOREIGN KEY ([LotId])              REFERENCES [dbo].[Lots] ([LotId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_Lots]     FOREIGN KEY ([LotId])          REFERENCES [dbo].[Lots] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonRatings_LotParts] FOREIGN KEY ([LotPartId])      REFERENCES [dbo].[LotParts] ([LotPartId])
 )
 GO

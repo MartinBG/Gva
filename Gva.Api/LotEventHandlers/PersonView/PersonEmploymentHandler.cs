@@ -5,7 +5,7 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.PersonView
 {
-    public class PersonEmploymentHandler : CommitEventHandler<GvaViewPersonData>
+    public class PersonEmploymentHandler : CommitEventHandler<GvaViewPerson>
     {
         public PersonEmploymentHandler(IUnitOfWork unitOfWork)
             : base(
@@ -14,12 +14,12 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 setPartAlias: "employment",
                 partMatcher: pv => pv.DynamicContent.valid.code == "Y",
                 viewMatcher: pv =>
-                    v => v.GvaPersonLotId == pv.Part.Lot.LotId,
+                    v => v.LotId == pv.Part.Lot.LotId,
                 isPrincipalHandler: false)
         {
         }
 
-        public override void Fill(GvaViewPersonData person, PartVersion part)
+        public override void Fill(GvaViewPerson person, PartVersion part)
         {
             person.Employment = part.DynamicContent.employmentCategory.name;
 
@@ -29,7 +29,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
             }
         }
 
-        public override void Clear(GvaViewPersonData person)
+        public override void Clear(GvaViewPerson person)
         {
             person.Employment = null;
             person.Organization = null;

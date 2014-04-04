@@ -6,7 +6,7 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.PersonView
 {
-    public class PersonDataHandler : CommitEventHandler<GvaViewPersonData>
+    public class PersonDataHandler : CommitEventHandler<GvaViewPerson>
     {
         public PersonDataHandler(IUnitOfWork unitOfWork)
             : base(
@@ -14,11 +14,11 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 setAlias: "Person",
                 setPartAlias: "data",
                 viewMatcher: pv =>
-                    v => v.GvaPersonLotId == pv.Part.Lot.LotId)
+                    v => v.LotId == pv.Part.Lot.LotId)
         {
         }
 
-        public override void Fill(GvaViewPersonData person, PartVersion part)
+        public override void Fill(GvaViewPerson person, PartVersion part)
         {
             person.Lot = part.Part.Lot;
 
@@ -32,7 +32,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
             person.BirtDate = Convert.ToDateTime(part.DynamicContent.dateOfBirth);
         }
 
-        public override void Clear(GvaViewPersonData person)
+        public override void Clear(GvaViewPerson person)
         {
             throw new NotSupportedException();
         }

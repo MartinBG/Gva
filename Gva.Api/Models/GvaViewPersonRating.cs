@@ -6,15 +6,17 @@ namespace Gva.Api.Models
 {
     public partial class GvaViewPersonRating
     {
-        public int LotId { get; set; }
-
         public int PartId { get; set; }
+
+        public int? LotId { get; set; }
 
         public string RatingType { get; set; }
 
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
+
+        public virtual GvaViewPerson Person { get; set; }
     }
 
     public class GvaViewPersonRatingMap : EntityTypeConfiguration<GvaViewPersonRating>
@@ -22,12 +24,9 @@ namespace Gva.Api.Models
         public GvaViewPersonRatingMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.PartId });
+            this.HasKey(t => t.PartId);
 
             // Properties
-            this.Property(t => t.LotId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             this.Property(t => t.PartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
@@ -38,13 +37,17 @@ namespace Gva.Api.Models
             this.Property(t => t.RatingType).HasColumnName("RatingType");
 
             // Relationships
-            this.HasRequired(t => t.Lot)
+            this.HasOptional(t => t.Lot)
                 .WithMany()
                 .HasForeignKey(t => t.LotId);
 
             this.HasRequired(t => t.Part)
-                .WithMany()
-                .HasForeignKey(t => t.PartId);
+                .WithOptional();
+
+            // Hack mapping to workaround joins
+            this.HasOptional(t => t.Person)
+                .WithMany(t => t.Ratings)
+                .HasForeignKey(d => d.LotId);
         }
     }
 }

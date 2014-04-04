@@ -121,7 +121,6 @@
     <Compile Include="Models\GvaLotFile.cs" />
     <Compile Include="Models\GvaLotObject.cs" />
     <Compile Include="Models\GvaViewPerson.cs" />
-    <Compile Include="Models\GvaViewPersonData.cs" />
     <Compile Include="Models\GvaViewPersonLicence.cs" />
     <Compile Include="Models\GvaViewPersonRating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

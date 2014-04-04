@@ -34,7 +34,7 @@ namespace Gva.Api.Controllers
             var person = this.personRepository.GetPerson(id);
             return Ok(new
             {
-                nomValueId = person.GvaPersonLotId,
+                nomValueId = person.LotId,
                 name = person.Names
             });
         }
@@ -46,8 +46,8 @@ namespace Gva.Api.Controllers
                 this.personRepository.GetPersons(names: term, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
-                    nomValueId = e.Data.GvaPersonLotId,
-                    name = e.Data.Names
+                    nomValueId = e.LotId,
+                    name = e.Names
                 });
 
             return Ok(returnValue);

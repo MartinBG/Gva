@@ -7,16 +7,16 @@ namespace Gva.Api.ModelsDO
     public class PersonDO
     {
         public PersonDO(GvaViewPerson person)
-            : this(person.Data, person.Licences, person.Ratings)
+            : this(person, person.Licences, person.Ratings)
         {
         }
 
         public PersonDO(
-            GvaViewPersonData personData,
+            GvaViewPerson personData,
             IEnumerable<GvaViewPersonLicence> personLicences = null,
             IEnumerable<GvaViewPersonRating> personRatings = null)
         {
-            this.Id = personData.GvaPersonLotId;
+            this.Id = personData.LotId;
             this.Lin = personData.Lin;
             this.Uin = personData.Uin;
             this.Names = personData.Names;
