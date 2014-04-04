@@ -37,7 +37,8 @@
 
     $scope.search = function Search() {
       return $state.go($state.current, {
-        name: $scope.filters.name
+        name: $scope.filters.name,
+        stamp: new Date().getTime()
       });
     };
 

@@ -44,7 +44,8 @@
     $scope.search = function Search() {
       return $state.go($state.current, {
         displayName: $scope.filters.displayName,
-        email: $scope.filters.email
+        email: $scope.filters.email,
+        stamp: new Date().getTime()
       });
     };
 
