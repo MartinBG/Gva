@@ -16,7 +16,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaViewOrganization> GetOrganizations(
+        public IEnumerable<GvaViewOrganizationData> GetOrganizations(
             string name,
             string CAO,
             string uin,
@@ -25,7 +25,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<GvaViewOrganization>()
+            var predicate = PredicateBuilder.True<GvaViewOrganizationData>()
                 .AndStringContains(o => o.CAO, CAO)
                 .AndStringContains(o => o.Uin, uin)
                 .AndStringContains(o => o.Name, name);
@@ -42,22 +42,22 @@ namespace Gva.Api.Repositories.OrganizationRepository
                 predicate = predicate.And(o => o.DateCAOValidTo < maxDate);
             }
 
-            return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
+            return this.unitOfWork.DbContext.Set<GvaViewOrganizationData>()
                 .Where(predicate)
                 .OrderBy(o => o.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
 
-        public GvaViewOrganization GetOrganization(int organizationId)
+        public GvaViewOrganizationData GetOrganization(int organizationId)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
-                .SingleOrDefault(p => p.GvaViewOrganizationLotId == organizationId);
+            return this.unitOfWork.DbContext.Set<GvaViewOrganizationData>()
+                .SingleOrDefault(p => p.GvaOrganizationLotId == organizationId);
         }
 
-        public void AddOrganization(GvaViewOrganization organization)
+        public void AddOrganization(GvaViewOrganizationData organization)
         {
-            this.unitOfWork.DbContext.Set<GvaViewOrganization>().Add(organization);
+            this.unitOfWork.DbContext.Set<GvaViewOrganizationData>().Add(organization);
         }
     }
 }

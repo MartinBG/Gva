@@ -6,9 +6,9 @@ using Common.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaViewOrganization
+    public partial class GvaViewOrganizationData
     {
-        public int GvaViewOrganizationLotId { get; set; }
+        public int GvaOrganizationLotId { get; set; }
 
         public string Name { get; set; }
 
@@ -27,15 +27,15 @@ namespace Gva.Api.Models
         public virtual Lot Lot { get; set; }
     }
 
-    public class GvaViewOrganizationMap : EntityTypeConfiguration<GvaViewOrganization>
+    public class GvaViewOrganizationMap : EntityTypeConfiguration<GvaViewOrganizationData>
     {
         public GvaViewOrganizationMap()
         {
             // Primary Key
-            this.HasKey(t => t.GvaViewOrganizationLotId);
+            this.HasKey(t => t.GvaOrganizationLotId);
 
             // Properties
-            this.Property(t => t.GvaViewOrganizationLotId)
+            this.Property(t => t.GvaOrganizationLotId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Name)
@@ -56,7 +56,7 @@ namespace Gva.Api.Models
 
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizations");
-            this.Property(t => t.GvaViewOrganizationLotId).HasColumnName("GvaViewOrganizationLotId");
+            this.Property(t => t.GvaOrganizationLotId).HasColumnName("GvaOrganizationLotId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.CAO).HasColumnName("CAO");

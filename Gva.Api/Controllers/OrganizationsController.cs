@@ -60,7 +60,7 @@ namespace Gva.Api.Controllers
             var organizations = this.organizationRepository.GetOrganizations(name, CAO, uin, dateValidTo, dateCAOValidTo, 0 , null)
                 .Select(o => new OrganizationDO()
                 {
-                    Id = o.GvaViewOrganizationLotId,
+                    Id = o.GvaOrganizationLotId,
                     Name = o.Name,
                     Uin = o.Uin,
                     CAO = o.CAO,
@@ -78,7 +78,7 @@ namespace Gva.Api.Controllers
         {
             var organization = this.organizationRepository.GetOrganization(lotId);
             OrganizationDO organizationDO = new OrganizationDO() {
-                Id = organization.GvaViewOrganizationLotId,
+                Id = organization.GvaOrganizationLotId,
                 Name = organization.Name,
                 CAO = organization.CAO,
                 Uin = organization.Uin,

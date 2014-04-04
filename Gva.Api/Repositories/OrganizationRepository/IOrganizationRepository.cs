@@ -6,7 +6,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
 {
     public interface IOrganizationRepository
     {
-        IEnumerable<GvaViewOrganization> GetOrganizations(
+        IEnumerable<GvaViewOrganizationData> GetOrganizations(
             string name,
             string CAO,
             string uin,
@@ -15,8 +15,8 @@ namespace Gva.Api.Repositories.OrganizationRepository
             int offset,
             int? limit);
 
-        GvaViewOrganization GetOrganization(int organizationId);
+        GvaViewOrganizationData GetOrganization(int organizationId);
 
-        void AddOrganization(GvaViewOrganization organization);
+        void AddOrganization(GvaViewOrganizationData organization);
     }
 }

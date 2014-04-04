@@ -88,7 +88,7 @@
     <Compile Include="LotEventHandlers\InventoryView\MedicalHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\OtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\TrainingHandler.cs" />
-    <Compile Include="LotEventHandlers\OrganizationLotEventHandler.cs" />
+    <Compile Include="LotEventHandlers\OrganizationView\OrganizationDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonEmploymentHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonLicenceHandler.cs" />

@@ -4,6 +4,7 @@ using Common.Data;
 using Gva.Api.Controllers;
 using Gva.Api.LotEventHandlers.ApplicationView;
 using Gva.Api.LotEventHandlers.InventoryView;
+using Gva.Api.LotEventHandlers.OrganizationView;
 using Gva.Api.LotEventHandlers.PersonView;
 using Gva.Api.Models;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -35,6 +36,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<TrainingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<ApplicationsHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<OrganizationDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();

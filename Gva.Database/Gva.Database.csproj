@@ -49,7 +49,6 @@
     <Content Include="Create\Tables\GvaViewApplications.sql" />
     <Content Include="Create\Tables\GvaViewInventoryItems.sql" />
     <Content Include="Create\Tables\GvaViewOrganizations.sql" />
-    <Content Include="Create\Tables\GvaInventoryItems.sql" />
     <Content Include="Create\Tables\GvaLotCases.sql" />
     <Content Include="Create\Tables\GvaCaseTypes.sql" />
     <Content Include="Create\Tables\GvaLotObjects.sql" />
