@@ -545,6 +545,9 @@
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="App\js\gva\organizations\forms\organizationScannedDocument.html" />
     <Content Include="App\js\gva\organizations\forms\organizationScannedDocumentCtrl.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationInventory.js" />
+    <Content Include="App\js\gva\organizations\views\inventory\organizationsInventorySearch.html" />
+    <Content Include="App\js\gva\organizations\views\inventory\organizationsInventorySearchCtrl.js" />
     <Content Include="App\js\gva\organizations\resources\organization.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAddress.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAmendment.js" />

@@ -1,0 +1,32 @@
+﻿<div>
+  <sc-datatable ng-model="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px">
+      <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="file.bookPageNumber" title="organizations.inventorySearch.bookPageNumber" width="80px">
+    </sc-column>
+    <sc-column data="name" title="organizations.inventorySearch.document">
+    </sc-column>
+    <sc-column data="type" title="organizations.inventorySearch.type">
+    </sc-column>
+    <sc-column data="number" title="organizations.inventorySearch.docNumber">
+    </sc-column>
+    <sc-column data="date" title="organizations.inventorySearch.date" type="date">
+    </sc-column>
+    <sc-column data="publisher" title="organizations.inventorySearch.publisher">
+    </sc-column>
+    <sc-column data="valid" title="organizations.inventorySearch.valid" type="boolean">
+    </sc-column>
+    <sc-column data="fromDate" title="organizations.inventorySearch.fromDate" type="date">
+    </sc-column>
+    <sc-column data="toDate" title="organizations.inventorySearch.toDate" type="date">
+    </sc-column>
+    <sc-column data="file.pageCount" title="organizations.inventorySearch.pageCount">
+    </sc-column>
+    <sc-column sortable="false" title="organizations.inventorySearch.file">
+      <a target="_self" ng-href="api/file?fileKey={{item.file.file.key}}&fileName={{item.file.file.name}}" ng-show="item.file" title="{{item.file.file.name}}">
+        <span class="glyphicon glyphicon-file"></span>
+      </a>
+    </sc-column>
+  </sc-datatable>
+</div>

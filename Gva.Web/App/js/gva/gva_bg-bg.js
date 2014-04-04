@@ -1837,8 +1837,8 @@
           regAirportOperators: 'Издадени лицензи за летищен оператор',
           regGroundServiceOperators:
             'Издадени лицензи за оператор по наземно обслужване или самообслужване',
-          applications: 'Заявления',
-          inventory: 'Опис'
+          inventory: 'Опис',
+          applications: 'Заявления'
         },
         search: {
           uin: 'Булстат',
@@ -1865,6 +1865,19 @@
         editOrganization: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        inventorySearch: {
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
         },
         chooseDocuments: {
           save: 'Запиши',
@@ -2197,7 +2210,7 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        editOrganizationnDocApplication: {
+        editOrganizationDocApplication: {
           save: 'Запис',
           cancel: 'Отказ'
         },

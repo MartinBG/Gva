@@ -17,11 +17,11 @@ namespace Regs.Api.LotEvents
 
         public CommitEventHandler(
             IUnitOfWork unitOfWork,
-            string setAlias,
             string setPartAlias,
             Func<PartVersion, Expression<Func<TView, bool>>> viewMatcher,
             Func<PartVersion, bool> partMatcher = null,
-            bool isPrincipalHandler = true)
+            bool isPrincipalHandler = true,
+            string setAlias = null)
         {
             this.unitOfWork = unitOfWork;
             this.setAlias = setAlias;
@@ -46,7 +46,7 @@ namespace Regs.Api.LotEvents
             var commit = commitEvent.Commit;
             var lot = commitEvent.Lot;
 
-            if (lot.Set.Alias != this.setAlias)
+            if (!String.IsNullOrEmpty(this.setAlias) && lot.Set.Alias != this.setAlias)
             {
                 return;
             }

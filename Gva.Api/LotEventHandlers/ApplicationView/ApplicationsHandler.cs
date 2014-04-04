@@ -11,7 +11,6 @@ namespace Gva.Api.LotEventHandlers.ApplicationView
         public ApplicationsHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
-                setAlias: "Person",
                 setPartAlias: "application",
                 viewMatcher: pv =>
                     v => v.PartId == pv.Part.PartId)
