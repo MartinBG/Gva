@@ -289,7 +289,20 @@ table.dataTable td.buttons-cell
 }
 
 .panel-body {
-  padding: 5px 10px !important;
+  padding: 10px !important;
+}
+
+.form-header {
+  font-weight: bold;
+  padding-bottom: 2px;
+  color: #2a6496;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+
+.form-header:first-child {
+    margin-top: 0px;
 }
 
 .navigation a {

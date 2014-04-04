@@ -9,13 +9,18 @@
           restrict: 'E',
           replace: true,
           scope: {
-            model: '=ngModel',
-            readonly: '=readonly'
+            model: '=ngModel'
           },
           templateUrl: options.templateUrl,
           controller: options.controller,
           link: function (scope, element, attrs) {
             var eventHandlers = {};
+
+            if (attrs.readonly) {
+              scope.$parent.$watch(attrs.readonly, function (readonly) {
+                scope.readonly = readonly;
+              });
+            }
 
             scope.$parent[attrs.name] = scope[attrs.name];
             scope.form = scope[attrs.name];
