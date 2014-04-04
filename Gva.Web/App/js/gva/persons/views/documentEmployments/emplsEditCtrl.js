@@ -10,6 +10,15 @@
     employment
   ) {
     $scope.personDocumentEmployment = employment;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentEmploymentForm.$validate()
@@ -28,8 +37,11 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.employments.search');
+    $scope.deleteEmployment = function () {
+      return PersonDocumentEmployment.remove({ id: $stateParams.id, ind: employment.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.persons.view.employments.search');
+        });
     };
   }
 

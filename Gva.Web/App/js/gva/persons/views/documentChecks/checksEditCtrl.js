@@ -11,12 +11,21 @@
     selectedPublisher
   ) {
     $scope.isEdit = true;
+    $scope.editMode = null;
 
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.personDocumentCheck.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentCheck.part.documentPublisher;
     $scope.choosePublisher = function () {
       return $state.go('root.persons.view.checks.edit.choosePublisher');
+    };
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
     };
 
     $scope.save = function () {
@@ -33,8 +42,13 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.checks.search');
+    $scope.deleteCheck = function () {
+      return PersonDocumentCheck.remove({
+        id: $stateParams.id,
+        ind: personDocumentCheck.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.persons.view.checks.search');
+      });
     };
   }
 

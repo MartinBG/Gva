@@ -1,152 +1,145 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="persons.personDocumentTrainingDirective.title"></strong></div>
-    <div class="well-sm panel-body">
 
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="staffType">
+      <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.staffType"></label>
+      <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit" ng-required="true" ng-readonly="readonly">
+      </sc-nomenclature>
+    </div>
+  </div>
+
+  <div ng-show="model.staffType">
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-4">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentNumber"></label>
+        <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-6 col-md-4">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentPersonNumber"></label>
+        <sc-int ng-model="model.documentPersonNumber" name="documentPersonNumber" ng-readonly="readonly"></sc-int>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDateValidFrom">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentDateValidFrom"></label>
+        <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
+        <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true" ng-readonly="readonly"></sc-date>
+      </div>
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentDateValidTo"></label>
+        <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
+      </div>
+      <div class="form-group col-sm-6 col-md-5" sc-has-error="documentPublisher">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentPublisher"></label>
+        <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
+        <div class="input-group input-group-sm">
+          <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
+          <span class="input-group-btn">
+            <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-if="model.staffType.alias === 'D'">
+      <div class=" form-group col-sm-6 col-md-4">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.ratingType"></label>
+        <sc-nomenclature ng-model="model.ratingType" name="ratingType" alias="'ratingTypes'" ng-disabled="model.ratingClass" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.aircraftTypeGroup"></label>
+        <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row" ng-if="model.staffType.alias === 'fligthCrew' || model.staffType.alias === 'ovd' || model.staffType.alias === 'to_vs'">
+      <div class=" form-group col-sm-6 col-md-4" ng-if="model.staffType.alias === 'fligthCrew'">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.ratingType"></label>
+        <sc-nomenclature ng-model="model.ratingType" name="ratingType" alias="'ratingTypes'" ng-disabled="model.ratingClass" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-4" ng-if="model.staffType.alias === 'to_vs'">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.aircraftTypeGroup"></label>
+        <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5" ng-class="{'col-md-5': model.staffType.alias === 'fligthCrew' || model.staffType.alias === 'to_vs', 'col-md-4': model.staffType.alias === 'T'}">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.licenceType"></label>
+        <sc-nomenclature ng-model="model.licenceType" name="licenceType" alias="'licenceTypes'" params="{ parentValueId: model.staffType.nomValueId }" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row" ng-if="model.staffType.alias === 'ovd'">
+      <div class="form-group col-sm-6 col-md-4">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.locationIndicator"></label>
+        <sc-nomenclature ng-model="model.locationIndicator" name="locationIndicator" alias="'locationIndicators'" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.sector"></label>
+        <sc-text ng-model="model.sector" name="sector" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-4">
+        <label class=" control-label" l10n-text="persons.personDocumentTrainingDirective.ratingClass">
+        </label>
+        <sc-nomenclature ng-model="model.ratingClass" ng-disabled="model.ratingType" name="ratingClass" alias="'ratingClasses'" params="{ grandParentValueId: model.staffType.nomValueId }" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.authorization"></label>
+        <sc-nomenclature ng-model="model.authorization" name="authorization" alias="'authorizations'" params="{ grandParentValueId: model.staffType.nomValueId }" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentType"></label>
+        <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCodes: [model.staffType.code] }" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5" sc-has-error="personOtherDocumentRole">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentRole"></label>
+        <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffCodes: [model.staffType.code] }" ng-readonly="readonly">
+        </sc-nomenclature>
+      </div>
+    </div>
+
+    <div ng-if="model.personOtherDocumentRole.alias === 'engTraining'">
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4" sc-has-error="staffType">
-          <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.staffType"></label>
-          <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit" ng-required="true">
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.engLangLevel"></label>
+          <sc-nomenclature ng-model="model.engLangLevel" name="engLangLevel" alias="'engLangLevels'" ng-readonly="readonly">
           </sc-nomenclature>
         </div>
       </div>
+    </div>
 
-      <div ng-show="model.staffType">
-
-        <div class="row">
-          <div class="form-group col-sm-6 col-md-4">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentNumber"></label>
-            <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
-          </div>
-          <div class="form-group col-sm-6 col-md-4">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentPersonNumber"></label>
-            <sc-int ng-model="model.documentPersonNumber" name="documentPersonNumber"></sc-int>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDateValidFrom">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentDateValidFrom"></label>
-            <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
-            <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true"></sc-date>
-          </div>
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentDateValidTo"></label>
-            <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo"></sc-date>
-          </div>
-          <div class="form-group col-sm-6 col-md-5" sc-has-error="documentPublisher">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.documentPublisher"></label>
-            <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
-            <div class="input-group input-group-sm">
-              <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
-              <span class="input-group-btn">
-              <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search"></sc-button>
-            </span>
-          </div>
-        </div>
-      </div>
-
-        <div class="row" ng-if="model.staffType.alias === 'D'">
-          <div class=" form-group col-sm-6 col-md-4">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.ratingType"></label>
-            <sc-nomenclature ng-model="model.ratingType" name="ratingType" alias="'ratingTypes'" ng-disabled="model.ratingClass">
-            </sc-nomenclature>
-          </div>
-          <div class="form-group col-sm-6 col-md-5">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.aircraftTypeGroup"></label>
-            <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'">
-            </sc-nomenclature>
-          </div>
-        </div>
-
-        <div class="row" ng-if="model.staffType.alias === 'F' || model.staffType.alias === 'T' || model.staffType.alias === 'G'">
-          <div class=" form-group col-sm-6 col-md-4" ng-if="model.staffType.alias === 'F'">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.ratingType"></label>
-            <sc-nomenclature ng-model="model.ratingType" name="ratingType" alias="'ratingTypes'" ng-disabled="model.ratingClass">
-            </sc-nomenclature>
-          </div>
-          <div class="form-group col-sm-6 col-md-4" ng-if="model.staffType.alias === 'G'">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.aircraftTypeGroup"></label>
-            <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'">
-            </sc-nomenclature>
-          </div>
-          <div class="form-group col-sm-6 col-md-5" ng-class="{'col-md-5': model.staffType.alias === 'F' || model.staffType.alias === 'G', 'col-md-4': model.staffType.alias === 'T'}">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.licenceType"></label>
-            <sc-nomenclature ng-model="model.licenceType" name="licenceType" alias="'licenceTypes'" params="{ parentValueId: model.staffType.nomValueId }">
-            </sc-nomenclature>
-          </div>
-        </div>
-
-        <div ng-if="model.staffType.alias === 'T'">
-          <div class="row">
-            <div class="form-group col-sm-6 col-md-4">
-              <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.locationIndicator"></label>
-              <sc-nomenclature ng-model="model.locationIndicator" name="locationIndicator" alias="'locationIndicators'">
-              </sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-6 col-md-5">
-              <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.sector"></label>
-              <sc-text ng-model="model.sector" name="sector"></sc-text>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-sm-6 col-md-4">
-            <label class=" control-label" l10n-text="persons.personDocumentTrainingDirective.ratingClass">
-            </label>
-            <sc-nomenclature ng-model="model.ratingClass" ng-disabled="model.ratingType" name="ratingClass" alias="'ratingClasses'" params="{ grandParentValueId: model.staffType.nomValueId }">
-            </sc-nomenclature>
-          </div>
-          <div class="form-group col-sm-6 col-md-5">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.authorization"></label>
-            <sc-nomenclature ng-model="model.authorization" name="authorization" alias="'authorizations'" params="{ grandParentValueId: model.staffType.nomValueId }">
-            </sc-nomenclature>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentType"></label>
-            <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCodes: [model.staffType.code] }">
-            </sc-nomenclature>
-          </div>
-          <div class="form-group col-sm-6 col-md-5" sc-has-error="personOtherDocumentRole">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentRole"></label>
-            <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffCodes: [model.staffType.code] }">
-            </sc-nomenclature>
-          </div>
-        </div>
-
-        <div ng-if="model.personOtherDocumentRole.alias === 'engTraining'">
-          <div class="row">
-            <div class="form-group col-sm-6 col-md-4">
-              <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.engLangLevel"></label>
-              <sc-nomenclature ng-model="model.engLangLevel" name="engLangLevel" alias="'engLangLevels'">
-              </sc-nomenclature>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
-            <label class=" control-label" l10n-text="persons.personDocumentTrainingDirective.valid"></label>
-            <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-sm-12 col-md-9">
-            <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.notes"></label>
-            <sc-textarea rows="3" ng-model="model.notes"></sc-textarea>
-          </div>
-        </div>
-
+    <div class="row">
+      <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
+        <label class=" control-label" l10n-text="persons.personDocumentTrainingDirective.valid"></label>
+        <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-9">
+        <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.notes"></label>
+        <sc-textarea rows="3" ng-model="model.notes" ng-readonly="readonly"></sc-textarea>
+      </div>
+    </div>
+
   </div>
 </ng-form>

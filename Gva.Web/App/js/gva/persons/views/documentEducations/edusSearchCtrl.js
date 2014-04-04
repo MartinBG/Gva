@@ -19,16 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentEducation = function (documentEducation) {
-      return PersonDocumentEducation.remove({
-        id: $stateParams.id,
-        ind: documentEducation.partIndex
-      })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentEducation = function () {
       return $state.go('root.persons.view.documentEducations.new');
     };

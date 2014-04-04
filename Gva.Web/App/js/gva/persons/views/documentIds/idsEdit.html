@@ -1,13 +1,27 @@
 ﻿<ng-form name="editDocumentIdForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.editDocumentId.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editDocumentId.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteDocId()" text="persons.editDocumentId.deleteDocId"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editDocumentId.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editDocumentId.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId.part"></gva-person-document-id>
+    <div class="well-sm panel-body">
+      <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId.part" readonly="!editMode"></gva-person-document-id>
 
-  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentId.files"></gva-person-scanned-document>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="persons.editDocumentId.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentIdForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editDocumentId.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentId.files" readonly="!editMode"></gva-person-scanned-document>
     </div>
   </div>
 </ng-form>

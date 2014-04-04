@@ -1,12 +1,19 @@
-﻿<ng-form name="newFlyingExperienceForm">
+﻿<ng-form name="newFlyingExperienceForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.flyingExperienceNew.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.flyingExperienceNew.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.flyingExperienceNew.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="persons.flyingExperienceNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
-                  ng-disabled="personFlyingExperienceForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.flyingExperienceNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part"></gva-person-flying-experience>
     </div>
   </div>
 </ng-form>

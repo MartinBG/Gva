@@ -10,6 +10,15 @@
     docId
   ) {
     $scope.personDocumentId = docId;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentIdForm.$validate()
@@ -25,8 +34,11 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.documentIds.search');
+    $scope.deleteDocId = function () {
+      return PersonDocumentId.remove({ id: $stateParams.id, ind: docId.partIndex })
+          .$promise.then(function () {
+        return $state.go('root.persons.view.documentIds.search');
+      });
     };
   }
 

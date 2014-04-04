@@ -1,13 +1,21 @@
 ﻿<ng-form name="newDocumentMedicalForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newMedical.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.newMedical.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newMedical.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
+    <div class="well-sm panel-body">
+      <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
 
-  <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files"></gva-person-scanned-document>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="persons.newMedical.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!personDocumentMedicalForm.$dirty"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newMedical.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files"></gva-person-scanned-document>
     </div>
   </div>
 </ng-form>

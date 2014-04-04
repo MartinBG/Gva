@@ -1,58 +1,52 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="persons.personOtherDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div>
-          <div class="form-group col-sm-6 col-md-3">
-            <label class="control-label" l10n-text="persons.personOtherDirective.documentNumber"></label>
-            <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
-          </div>
-        </div>
-          <div>
-            <div class="form-group col-sm-6 col-md-3">
-              <label class="control-label" l10n-text="persons.personOtherDirective.documentPersonNumber"></label>
-              <sc-text ng-model="model.documentPersonNumber" name="documentPersonNumber" name="documentPersonNumber"></sc-text>
-            </div>
-          </div>
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-3">
+      <label class="control-label" l10n-text="persons.personOtherDirective.documentNumber"></label>
+      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-6 col-md-3">
+      <label class="control-label" l10n-text="persons.personOtherDirective.documentPersonNumber"></label>
+      <sc-text ng-model="model.documentPersonNumber" name="documentPersonNumber" name="documentPersonNumber" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="persons.personOtherDirective.documentDateValidFrom"></label>
+      <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="persons.personOtherDirective.documentDateValidTo"></label>
+      <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
+      <label class="control-label" l10n-text="persons.personOtherDirective.documentPublisher"></label>
+      <div class="input-group input-group-sm">
+        <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
+        <span class="input-group-btn">
+          <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+        </span>
       </div>
-          <div class="row">
-            <div class="form-group col-sm-3 col-md-2">
-              <label class="control-label" l10n-text="persons.personOtherDirective.documentDateValidFrom"></label>
-              <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ></sc-date>
-            </div>
-            <div class="form-group col-sm-3 col-md-2">
-              <label class="control-label" l10n-text="persons.personOtherDirective.documentDateValidTo"></label>
-              <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo"></sc-date>
-            </div>
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
-              <label class="control-label" l10n-text="persons.personOtherDirective.documentPublisher"></label>
-              <div class="input-group input-group-sm">
-                <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
-                <span class="input-group-btn">
-                  <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search"></sc-button>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
-              <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentType"></label>
-              <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffCodes: ['F', 'G', 'T'] }" ng-required="true"></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentRole">
-              <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentRole"></label>
-              <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other', staffCodes: ['F', 'G', 'T'] }" ng-required="true"></sc-nomenclature>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-12 col-md-8">
-              <label class="control-label" l10n-text="persons.personOtherDirective.notes"></label>
-              <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes"></sc-textarea>
-            </div>
-          </div>
-      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
+      <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentType"></label>
+      <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffCodes: ['F', 'G', 'T'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentRole">
+      <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentRole"></label>
+      <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other', staffCodes: ['F', 'G', 'T'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-8">
+      <label class="control-label" l10n-text="persons.personOtherDirective.notes"></label>
+      <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
+    </div>
   </div>
 </ng-form>

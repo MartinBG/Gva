@@ -1,10 +1,22 @@
-﻿<ng-form name="editPersonForm">
-  <gva-person-data name="personDataForm" ng-model="personData.part"></gva-person-data>
+﻿<ng-form name="editPersonForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.editPersonData.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editPersonData.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editPersonData.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editPersonData.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="persons.newPerson.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editPersonForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newPerson.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-person-data name="personDataForm" ng-model="personData.part" readonly="!editMode"></gva-person-data>
     </div>
   </div>
 </ng-form>

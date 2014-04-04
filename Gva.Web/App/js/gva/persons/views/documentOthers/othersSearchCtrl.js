@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentOther = function (documentOther) {
-      return PersonDocumentOther.remove({ id: $stateParams.id, ind: documentOther.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOther = function () {
       return $state.go('root.persons.view.documentOthers.new');
     };

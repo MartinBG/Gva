@@ -10,6 +10,15 @@
     personData
   ) {
     $scope.personData = personData;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.personDataForm.$validate()
@@ -23,10 +32,6 @@
               });
           }
         });
-    };
-
-    $scope.cancel = function () {
-      return $state.go('root.persons.view');
     };
   }
 

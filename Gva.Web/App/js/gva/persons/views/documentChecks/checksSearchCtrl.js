@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteDocumentCheck = function (check) {
-      return PersonDocumentCheck.remove({ id: $stateParams.id, ind: check.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentCheck = function () {
       return $state.go('root.persons.view.checks.new');
     };

@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteDocumentMedical = function (medical) {
-      return PersonDocumentMedical.remove({ id: $stateParams.id, ind: medical.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentMedical = function () {
       return $state.go('root.persons.view.medicals.new');
     };

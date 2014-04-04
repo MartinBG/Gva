@@ -1,49 +1,44 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="persons.personEmploymentDirective.title"></strong></div>
-    <div class="well-sm panel-body">
 
-      <div class="row">
-        <div class="form-group col-sm-3 col-md-2" sc-has-error="hiredate">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.hiredate"></label>
-          <sc-validation-error field-name="hiredate" validations="{required: null}"></sc-validation-error>
-          <sc-date ng-model="model.hiredate" name="hiredate" ng-required="true"></sc-date>
-        </div>
-        <div class="form-group col-sm-2" sc-has-error="valid">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.valid"></label>
-          <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="organization">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.organization"></label>
-          <sc-validation-error field-name="organization" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'"></sc-nomenclature>
-        </div>
-        <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="employmentCategory">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.employmentCategory"></label>
-          <sc-validation-error field-name="employmentCategory" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.employmentCategory" name="employmentCategory" alias="'employmentCategories'" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="country">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.country"></label>
-          <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-12 col-md-10 col-lg-8">
-          <label class="control-label" l10n-text="persons.personEmploymentDirective.notes"></label>
-          <sc-textarea rows="3" ng-model="model.notes"></sc-textarea>
-        </div>
-      </div>
-
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2" sc-has-error="hiredate">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.hiredate"></label>
+      <sc-validation-error field-name="hiredate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.hiredate" name="hiredate" ng-required="true" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-2" sc-has-error="valid">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.valid"></label>
+      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="organization">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.organization"></label>
+      <sc-validation-error field-name="organization" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="employmentCategory">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.employmentCategory"></label>
+      <sc-validation-error field-name="employmentCategory" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.employmentCategory" name="employmentCategory" alias="'employmentCategories'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="country">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.country"></label>
+      <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-10 col-lg-8">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.notes"></label>
+      <sc-textarea rows="3" ng-model="model.notes" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
 </ng-form>

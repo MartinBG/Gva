@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentTraining = function (documentTraining) {
-      return PersonDocumentTraining.remove({ id: $stateParams.id, ind: documentTraining.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentTraining = function () {
       return $state.go('root.persons.view.documentTrainings.new');
     };

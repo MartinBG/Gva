@@ -10,6 +10,15 @@
     med
   ) {
     $scope.personDocumentMedical = med;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentMedicalForm.$validate()
@@ -25,8 +34,11 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.medicals.search');
+    $scope.deleteMedical = function () {
+      return PersonDocumentMedical.remove({ id: $stateParams.id, ind: med.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.persons.view.medicals.search');
+        });
     };
   }
 

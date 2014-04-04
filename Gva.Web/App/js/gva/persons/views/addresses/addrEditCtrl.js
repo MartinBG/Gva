@@ -10,6 +10,15 @@
     address
   ) {
     $scope.personAddress = address;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.personAddressForm.$validate()
@@ -25,8 +34,11 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.addresses.search');
+    $scope.deleteAddress = function () {
+      return PersonAddress.remove({ id: $stateParams.id, ind: address.partIndex })
+          .$promise.then(function () {
+        return $state.go('root.persons.view.addresses.search');
+      });
     };
   }
 

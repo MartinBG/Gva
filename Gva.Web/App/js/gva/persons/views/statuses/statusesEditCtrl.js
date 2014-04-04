@@ -10,9 +10,14 @@
     status
   ) {
     $scope.status = status;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
 
     $scope.cancel = function () {
-      return $state.go('root.persons.view.statuses.search', { id: $stateParams.id });
+      $scope.editMode = null;
     };
 
     $scope.save = function () {
@@ -23,9 +28,17 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status)
               .$promise
               .then(function () {
-                return $state.go('root.persons.view.statuses.search', { id: $stateParams.id });
+                return $state.go('root.persons.view.statuses.search');
               });
           }
+        });
+    };
+
+    $scope.deleteStatus = function () {
+      return PersonStatus
+        .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
+        .then(function () {
+          return $state.go('root.persons.view.statuses.search');
         });
     };
   }

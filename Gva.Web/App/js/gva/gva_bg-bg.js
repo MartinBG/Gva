@@ -1179,7 +1179,6 @@
           caseTypes: 'Типове дела'
         },
         personAddressDirective: {
-          title: 'Адрес',
           addressType: 'Вид',
           settlement: 'Населено място',
           address: 'Адрес',
@@ -1189,7 +1188,6 @@
           phone: 'Телефон'
         },
         personDocumentEducationDirective: {
-          title: 'Образование',
           documentNumber: '№ на документ',
           completionDate: 'Дата на завършване',
           speciality: 'Специалност',
@@ -1198,7 +1196,6 @@
           notes: 'Бележки'
         },
         personDocumentIdDirective: {
-          title: 'Документ за самоличност',
           personDocumentIdTypeId: 'Тип документ',
           valid: 'Валиден',
           documentNumber: '№ на документ',
@@ -1222,7 +1219,6 @@
           view: 'Преглед'
         },
         personStatusDirective: {
-          title: 'Състояние',
           personStatusType: 'Причина',
           documentNumber: '№ на документа',
           documentDateValidFrom: 'Начална дата',
@@ -1236,11 +1232,9 @@
           documentPublisher: 'Издател',
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClassType: 'Клас',
-          notes: 'Бележки',
-          title: 'Свидетелство за медицинска годност'
+          notes: 'Бележки'
         },
         personEmploymentDirective: {
-          title: 'Месторабота',
           hiredate: 'Дата на назначаване',
           valid: 'Валиден',
           organization: 'Организация',
@@ -1249,7 +1243,6 @@
           notes: 'Бележки'
         },
         personCheckDirective: {
-          title: 'Проверка',
           staffType: 'Вид персонал',
           documentNumber: '№ на документа',
           documentPersonNumber: '№ в списъка',
@@ -1270,7 +1263,6 @@
           ratingType: 'Тип ВС'
         },
         personDocumentTrainingDirective: {
-          title: 'Обучение',
           staffType: 'Тип персонал',
           documentNumber: '№ на документ',
           documentPersonNumber: '№ в списъка (групов документ)',
@@ -1291,7 +1283,6 @@
           notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
-          title: 'Летателен/практически опит',
           staffType: 'Тип персонал',
           month: 'За месец',
           year: 'Година',
@@ -1343,7 +1334,6 @@
           personRatingModel: 'Модел'
         },
         personOtherDirective: {
-          title: 'Друг документ',
           documentNumber: 'Док No',
           documentPersonNumber: 'No в списъка (групов документ)',
           documentDateValidFrom: 'Издаден на',
@@ -1357,7 +1347,6 @@
           pageCount: 'Брой стр.'
         },
         personDocApplicationDirective: {
-          title: 'Заявление',
           documentNumber: '№ на документ',
           documentDate: 'От дата',
           requestDate: 'Дата на заявител',
@@ -1384,14 +1373,28 @@
           file: 'Файл'
         },
         newPersonDocApplication: {
+          title: 'Ново заявление',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editPersonDocApplication: {
+          title: 'Редакция на заявление',
+          save: 'Запис',
+          cancel: 'Отказ',
+          edit: 'Редакция',
+          deleteApplication: 'Изтрий'
+        },
+        newPerson: {
+          title: 'Ново лице',
+          personDataForm: 'Лични данни',
+          documentIdForm: 'Документ за самоличност',
+          addressForm: 'Адрес',
           save: 'Запис',
           cancel: 'Отказ'
         },
-        newPerson: {
+        editPersonData: {
+          title: 'Редакция на лични данни',
+          edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -1405,12 +1408,16 @@
           edit: 'Редакция'
         },
         newAddress: {
+          title: 'Нов адрес',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAddress: {
+          title: 'Редакция на адрес',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteAddress: 'Изтрий'
         },
         addressSearch: {
           newAddress: 'Нов aдрес',
@@ -1422,12 +1429,16 @@
           valid: 'Актуален'
         },
         newStatus: {
+          title: 'Ново състояние',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editStatus: {
+          title: 'Редакция на състояние',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteStatus: 'Изтрий'
         },
         statusSearch: {
           newState: 'Ново Състояние',
@@ -1439,20 +1450,28 @@
           isActive: 'Валидно'
         },
         newDocumentId: {
+          title: 'Нов документ за самоличност',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editDocumentId: {
+          title: 'Редакция на документ за самоличност',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteDocId: 'Изтрий'
         },
         newDocumentEducation: {
+          title: 'Ново обучение',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editDocumentEducation: {
+          title: 'Редакция на обучение',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteEdu: 'Изтрий'
         },
         documentIdSearch: {
           docTypeId: 'Документ',
@@ -1482,12 +1501,16 @@
           file: 'Файл'
         },
         newOther: {
+          title: 'Нов документ',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOther: {
+          title: 'Редакция на документ',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOther: 'Изтрий'
         },
         medicalSearch: {
           testimonial: 'Свидетелство',
@@ -1503,12 +1526,16 @@
           newMedical: 'Ново медицинско'
         },
         newMedical: {
+          title: 'Ново свидетелство за медицинска годност',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editMedical: {
+          title: 'Редакция на свидетелство за медицинска годност',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteMed: 'Изтрий'
         },
         employmentSearch: {
           newEmployment: 'Нова месторабота',
@@ -1523,12 +1550,16 @@
           file: 'Файл'
         },
         newEmployment: {
+          title: 'Нова месторабота',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editEmployment: {
+          title: 'Редакция на месторабота',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteEmpl: 'Изтрий'
         },
         documentEducationSearch: {
           documentNumber: '№ на документа',
@@ -1562,10 +1593,14 @@
           file: 'Файл'
         },
         editCheck: {
+          title: 'Редакция на проверка',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteCheck: 'Изтрий'
         },
         newCheck: {
+          title: 'Нова проверка',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -1589,12 +1624,16 @@
           newDocumentTraining: 'Нов документ'
         },
         newDocumentTraining: {
+          title: 'Ново обучение',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editDocumentTraining: {
+          title: 'Редакция на обучение',
           save: 'Запис',
-          cancel: 'Отказ'
+          edit: 'Редакция',
+          cancel: 'Отказ',
+          deleteTraining: 'Изтрий'
         },
         flyingExperienceSearch: {
           staffType: 'Тип персонал',
@@ -1626,12 +1665,16 @@
           file: 'Файл'
         },
         flyingExperienceNew: {
+          title: 'Нов летателен/практически опит',
           save: 'Запис',
           cancel: 'Отказ'
         },
         flyingExperienceEdit: {
+          title: 'Редакция на летателен/практически опит',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteFlyingExp: 'Изтрий'
         },
         inventorySearch: {
           bookPageNumber: '№ на страница',

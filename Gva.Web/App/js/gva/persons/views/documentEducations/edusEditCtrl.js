@@ -10,6 +10,15 @@
     edu
   ) {
     $scope.personDocumentEducation = edu;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentEducationForm.$validate()
@@ -28,8 +37,14 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.documentEducations.search');
+    $scope.deleteEdu = function () {
+      return PersonDocumentEducation.remove({
+        id: $stateParams.id,
+        ind: edu.partIndex
+      })
+        .$promise.then(function () {
+          return $state.go('root.persons.view.documentEducations.search');
+        });
     };
   }
 

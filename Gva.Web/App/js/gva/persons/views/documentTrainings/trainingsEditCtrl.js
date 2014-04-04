@@ -14,6 +14,15 @@
     $scope.personDocumentTraining = personDocumentTraining;
     $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentTraining.part.documentPublisher;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentTrainingForm.$validate()
@@ -33,8 +42,13 @@
       return $state.go('root.persons.view.documentTrainings.edit.choosePublisher');
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.documentTrainings.search');
+    $scope.deleteTraining = function () {
+      return PersonDocumentTraining.remove({
+        id: $stateParams.id,
+        ind: personDocumentTraining.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.persons.view.documentTrainings.search');
+      });
     };
   }
 

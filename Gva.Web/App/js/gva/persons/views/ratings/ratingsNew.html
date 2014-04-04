@@ -1,15 +1,13 @@
-﻿<div>
-  <ng-form name="newRatingForm" sc-validate="{}">
-    <gva-rating name="ratingEditionForm" ng-model="model.rating.part"></gva-rating>
+﻿<ng-form name="newRatingForm" sc-validate="{}">
+  <gva-rating name="ratingForm" ng-model="model.rating.part"></gva-rating>
 
-    <gva-rating-edition name="ratingEditionForm" ng-model="model.ratingEdition.part"></gva-rating-edition>
+  <gva-rating-edition name="ratingEditionForm" ng-model="model.ratingEdition.part"></gva-rating-edition>
 
-    <div class="row">
-      <div class="form-group col-sm-3 col-sm-offset-4">
-        <sc-button name="saveBtn" btn-click="save()" text="persons.ratingNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
-                    ng-disabled="!newRatingForm.$dirty"></sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.ratingNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
-      </div>
+  <div class="row">
+    <div class="form-group col-sm-3 col-sm-offset-4">
+      <sc-button name="saveBtn" btn-click="save()" text="persons.ratingNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk"
+                  ng-disabled="!newRatingForm.$dirty"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="persons.ratingNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
     </div>
-  </ng-form>
-</div>
+  </div>
+</ng-form>

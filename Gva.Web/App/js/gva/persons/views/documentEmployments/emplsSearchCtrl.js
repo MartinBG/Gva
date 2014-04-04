@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentEmployment = function (employment) {
-      return PersonDocumentEmployment.remove({ id: $stateParams.id, ind: employment.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentEmployment = function () {
       return $state.go('root.persons.view.employments.new');
     };

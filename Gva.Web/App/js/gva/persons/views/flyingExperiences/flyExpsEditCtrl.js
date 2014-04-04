@@ -11,6 +11,15 @@
   ) {
     $scope.isEdit = true;
     $scope.personFlyingExperience = personFlyingExperience;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.personFlyingExperienceForm.$validate()
@@ -26,8 +35,13 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.flyingExperiences.search');
+    $scope.deleteFlyingExp = function () {
+      return PersonFlyingExperience.remove({
+        id: $stateParams.id,
+        ind: personFlyingExperience.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.persons.view.flyingExperiences.search');
+      });
     };
   }
 

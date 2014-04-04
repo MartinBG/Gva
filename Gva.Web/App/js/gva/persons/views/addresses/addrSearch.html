@@ -2,7 +2,6 @@
 <sc-datatable ng-model="addresses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px">
     <sc-button name="editBtn" btn-click="editAddress(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    <sc-button name="deleteBtn" btn-click="deleteAddress(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
   <sc-column data="part.addressType.name" title="persons.addressSearch.type" width="200px">
   </sc-column>

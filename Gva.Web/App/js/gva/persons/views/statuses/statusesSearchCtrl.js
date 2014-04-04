@@ -18,14 +18,6 @@
       });
     };
 
-    $scope.deleteStatus = function (status) {
-      return PersonStatus
-        .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newStatus = function () {
       return $state.go('root.persons.view.statuses.new');
     };

@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteAddress = function (address) {
-      return PersonAddress.remove({ id: $stateParams.id, ind: address.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newAddress = function () {
       return $state.go('root.persons.view.addresses.new');
     };

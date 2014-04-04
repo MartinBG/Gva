@@ -14,6 +14,15 @@
     $scope.personDocumentOther = personDocumentOther;
     $scope.personDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentOther.part.documentPublisher;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
 
     $scope.save = function () {
       return $scope.editDocumentOtherForm.$validate()
@@ -33,8 +42,13 @@
       return $state.go('root.persons.view.documentOthers.edit.choosePublisher');
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.persons.view.documentOthers.search');
+    $scope.deleteOther = function () {
+      return PersonDocumentOther.remove({
+        id: $stateParams.id,
+        ind: personDocumentOther.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.persons.view.documentOthers.search');
+      });
     };
   }
 
