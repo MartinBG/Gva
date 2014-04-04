@@ -8,7 +8,7 @@
     $httpBackendConfiguratorProvider
         .when('GET', '/api/docs?' +
           'filter&fromDate&toDate&regUri&docName&' +
-          'docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot', //? hasLot
+          'docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot',
         function ($params, docs, applicationsFactory) {
 
           var searchParams = _.cloneDeep($params);

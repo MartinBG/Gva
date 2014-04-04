@@ -21,7 +21,7 @@
   </div>
 
   <accordion close-others="false">
-    <accordion-group is-open="!!model.docBody" ng-if="!readonly || !!model.docBody">
+    <accordion-group is-open="model.openAccordion || !!model.docBody" ng-if="!readonly || !!model.docBody">
       <accordion-heading>
           <a l10n-text="docs.edit.view.text" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -32,7 +32,7 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
+    <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
       </accordion-heading>
@@ -41,7 +41,7 @@
       <ems-doc-files-edit name="docFilesForm" ng-model="model" readonly="readonly" ng-if="!readonly"></ems-doc-files-edit>
     </accordion-group>
 
-    <accordion-group is-open="model.docClassifications.length > 0" ng-if="!readonly || model.docClassifications.length > 0">
+    <accordion-group is-open="model.openAccordion || model.docClassifications.length > 0" ng-if="!readonly || model.docClassifications.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.classifications.name" style="font-size: 12px;"></a>
       </accordion-heading>

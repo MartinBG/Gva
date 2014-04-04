@@ -16,6 +16,7 @@
     $scope.$state = $state;
     $scope.doc = doc;
 
+    $scope.doc.openAccordion = false;
     $scope.doc.flags = {};
 
     $scope.doc.flags.isVisibleCreateChildDoc = true;
@@ -147,6 +148,9 @@
             .then(function () {
               return $state.transitionTo($state.current, $stateParams, { reload: true });
             });
+        }
+        else {
+          $scope.doc.openAccordion = true;
         }
       });
     };

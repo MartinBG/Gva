@@ -26,7 +26,6 @@ namespace Docs.Api.DataObjects
                 this.IsCurrentStage = d.IsCurrentStage;
                 this.Version = d.Version;
 
-                //?
                 if (d.ElectronicServiceStage != null)
                 {
                     this.ElectronicServiceStageAlias = d.ElectronicServiceStage.Alias;
