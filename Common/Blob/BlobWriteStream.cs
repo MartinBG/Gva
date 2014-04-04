@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Common.Blob
 {
@@ -78,57 +80,109 @@ namespace Common.Blob
             }
         }
 
+        private bool WriteChunk(byte[] buffer, ref int offset, ref int count)
+        {
+            int take = Math.Min(count, CHUNK_SIZE - this.chunkIndex);
+
+            Buffer.BlockCopy(buffer, offset, this.chunkBuffer, this.chunkIndex, take);
+            this.chunkIndex += take;
+            offset += take;
+            count -= take;
+
+            return this.chunkIndex == CHUNK_SIZE;
+        }
+
+        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            while (count > 0)
+            {
+                if (this.WriteChunk(buffer, ref offset, ref count))
+                {
+                    await this.FlushAsync(cancellationToken);
+                }
+            }
+        }
+
         public override void Write(byte[] buffer, int offset, int count)
         {
             while (count > 0)
             {
-                int take = Math.Min(count, CHUNK_SIZE - this.chunkIndex);
-
-                Buffer.BlockCopy(buffer, offset, this.chunkBuffer, this.chunkIndex, take);
-                this.chunkIndex += take;
-                offset += take;
-                count -= take;
-
-                if (this.chunkIndex == CHUNK_SIZE)
+                if (this.WriteChunk(buffer, ref offset, ref count))
                 {
                     this.Flush();
                 }
             }
         }
 
-        public override void Flush()
+        private byte[] GetChunk()
         {
             if (this.chunkIndex == 0)
+            {
+                return new byte[0];
+            }
+
+            byte[] chunk;
+
+            if (this.chunkIndex < CHUNK_SIZE)
+            {
+                chunk = new byte[this.chunkIndex];
+                Buffer.BlockCopy(this.chunkBuffer, 0, chunk, 0, this.chunkIndex);
+            }
+            else
+            {
+                //if we have to write the whole chunk reuse its array
+                chunk = this.chunkBuffer;
+            }
+
+            this.chunkIndex = 0;
+
+            return chunk;
+        }
+
+        public override async Task FlushAsync(CancellationToken cancellationToken)
+        {
+            byte[] chunk = this.GetChunk();
+
+            if (chunk.Length == 0)
             {
                 return;
             }
 
-            byte[] bytesToWrite;
-
-            if (this.chunkIndex < CHUNK_SIZE)
+            if (this.isFirstChunk)
             {
-                bytesToWrite = new byte[this.chunkIndex];
-                Buffer.BlockCopy(this.chunkBuffer, 0, bytesToWrite, 0, this.chunkIndex);
+                this.cmdFirstChunk.Parameters.AddWithValue("@firstChunk", chunk);
+                await this.cmdFirstChunk.ExecuteNonQueryAsync(cancellationToken);
+                this.isFirstChunk = false;
             }
             else
             {
-                bytesToWrite = this.chunkBuffer;
+                this.paramChunk.Value = chunk;
+                this.paramLength.Value = this.chunkIndex;
+                await this.cmdAppendChunk.ExecuteNonQueryAsync(cancellationToken);
+            }
+        }
+
+        public override void Flush()
+        {
+            byte[] chunk = this.GetChunk();
+
+            if (chunk.Length == 0)
+            {
+                return;
             }
 
             if (this.isFirstChunk)
             {
-                this.cmdFirstChunk.Parameters.AddWithValue("@firstChunk", bytesToWrite);
+                this.cmdFirstChunk.Parameters.AddWithValue("@firstChunk", chunk);
                 this.cmdFirstChunk.ExecuteNonQuery();
                 this.isFirstChunk = false;
             }
             else
             {
-                this.paramChunk.Value = bytesToWrite;
+                this.paramChunk.Value = chunk;
                 this.paramLength.Value = this.chunkIndex;
                 this.cmdAppendChunk.ExecuteNonQuery();
             }
-
-            this.chunkIndex = 0;
         }
 
         public override int Read(byte[] buffer, int offset, int count)

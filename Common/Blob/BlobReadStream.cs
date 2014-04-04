@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Common.Blob
 {
@@ -62,22 +64,54 @@ namespace Common.Blob
             }
         }
 
-        public override int Read(byte[] buffer, int offset, int count)
+        private void CreateConnection()
+        {
+            this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.connectionStringName].ConnectionString);
+            this.cmdReadChunk.Connection = this.connection;
+        }
+
+        private int GetBytes(byte[] buffer, int offset, int count)
+        {
+            int read = (int)this.chunkReader.GetBytes(0, this.readerOffset, buffer, offset, count);
+            this.readerOffset += read;
+
+            return read;
+        }
+
+        private void InitReader()
         {
             if (this.chunkReader == null)
             {
-                this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.connectionStringName].ConnectionString);
-                this.cmdReadChunk.Connection = this.connection;
+                this.CreateConnection();
 
                 this.connection.Open();
                 this.chunkReader = this.cmdReadChunk.ExecuteReader(CommandBehavior.SequentialAccess);
                 this.chunkReader.Read();
             }
+        }
 
-            int read = (int)this.chunkReader.GetBytes(0, this.readerOffset, buffer, offset, count);
-            this.readerOffset += read;
+        private async Task InitReaderAsync(CancellationToken cancellationToken)
+        {
+            if (this.chunkReader == null)
+            {
+                this.CreateConnection();
 
-            return read;
+                await this.connection.OpenAsync(cancellationToken);
+                this.chunkReader = await this.cmdReadChunk.ExecuteReaderAsync(CommandBehavior.SequentialAccess, cancellationToken);
+                await this.chunkReader.ReadAsync(cancellationToken);
+            }
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            this.InitReader();
+            return this.GetBytes(buffer, offset, count);
+        }
+
+        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            await this.InitReaderAsync(cancellationToken);
+            return this.GetBytes(buffer, offset, count);
         }
 
         public override void Flush()
