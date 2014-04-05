@@ -42,3 +42,4 @@ INSERT INTO Noms (NomId, Name, Alias) VALUES (41,'Видове организа�
 INSERT INTO Noms (NomId, Name, Alias) VALUES (42,'Видове заявления','applicationTypes');
 INSERT INTO Noms (NomId, Name, Alias) VALUES (43,'Видове плащания по заявления','applicationpaymentTypes');
 INSERT INTO Noms (NomId, Name, Alias) VALUES (44,'Парични единици','currencies');
+

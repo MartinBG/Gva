@@ -2,7 +2,8 @@
     ([LotSetId], [Name]         , [Alias]         )
 VALUES
     (1         , N'Персонал'    , N'Person'       ),
-    (2         , N'Организация' , N'Organization' )
+    (2         , N'Организация' , N'Organization' ),
+    (3         , N'ВС'          ,N'Aircraft'      )
 GO
 
 
@@ -41,5 +42,25 @@ VALUES
     (30            , 2         ,'Друг документ'                                                                          , 'other'                                           , N'^organizationDocumentOthers/\d+$'                      , N'{}'   ),
     (31            , 2         ,'Ръководен персонал'                                                                     , 'staffManagement'                                 , N'^organizationStaffManagement/\d+$'                     , N'{}'   ),
     (32            , 2         ,'Данни за организация'                                                                   , 'data'                                            , N'^organizationData$'                                    , N'{}'   ),
-    (33            , 2         ,'Заявление'                                                                              , 'application'                                     , N'^organizationDocumentApplications/\d+$'                , N'{}'   )
+    (33            , 2         ,'Заявление'                                                                              , 'application'                                     , N'^organizationDocumentApplications/\d+$'                , N'{}'   ),
+    (34            , 3         ,'Данни за ВС'                                                                            , 'aircraftData'                                    , N'^aircraftData$'                                        , N'{}'   ),
+    (35            , 3         ,'Свързано лице'                                                                          , 'aircraftOwner'                                   , N'^aircraftDocumentOwners/\d+$'                          , N'{}'   ),
+    (36            , 3         ,'Оборудване'                                                                             , 'aircraftPart'                                    , N'^aircraftParts/\d+$'                                   , N'{}'   ),
+    (37            , 3         ,'Залог/запор'                                                                            , 'aircraftDebtFM'                                  , N'^aircraftDocumentDebtsFM/\d+$'                         , N'{}'   ),
+    (38            , 3         ,'Залог/запор'                                                                            , 'aircraftDebt'                                    , N'^aircraftDocumentDebts/\d+$'                           , N'{}'   ),
+    (39            , 3         ,'Подръжка'                                                                               , 'aircraftMaintenance'                             , N'^maintenances/\d+$'                                    , N'{}'   ),
+    (40            , 3         ,'Инцидент'                                                                               , 'aircraftOccurrence'                              , N'^documentOccurrences/\d+$'                             , N'{}'   ),
+    (41            , 3         ,'Инспекция'                                                                              , 'aircraftInspection'                              , N'^inspections/\d+$'                                     , N'{}'   ),
+    (42            , 3         ,'Заявление'                                                                              , 'aircraftApplication'                             , N'^aircraftDocumentApplications/\d+$'                    , N'{}'   ),
+    (43            , 3         ,'Друг документ'                                                                          , 'aircraftOther'                                   , N'^aircraftDocumentOthers/\d+$'                          , N'{}'   ),
+    (44            , 3         ,'Регистация'                                                                             , 'aircraftRegistration'                            , N'^aircraftCertRegistrations/\d+$'                       , N'{}'   ),
+    (45            , 3         ,'Регистация'                                                                             , 'aircraftRegistrationFM'                          , N'^aircraftCertRegistrationsFM/\d+$'                     , N'{}'   ),
+    (46            , 3         ,'Летателна годност'                                                                      , 'aircraftAirworthiness'                           , N'^aircraftCertAirworthinesses/\d+$'                     , N'{}'   ),
+    (47            , 3         ,'Летателна годност'                                                                      , 'aircraftAirworthinessFM'                         , N'^aircraftCertAirworthinessesFM/\d+$'                   , N'{}'   ),
+    (48            , 3         ,'Регистрационен знак'                                                                    , 'aircraftMark'                                    , N'^aircraftCertMarks/\d+$'                               , N'{}'   ),
+    (49            , 3         ,'S-mode код'                                                                             , 'aircraftSmod'                                    , N'^aircraftCertSmods/\d+$'                               , N'{}'   ),
+    (50            , 3         ,'Разрешително за полет'                                                                  , 'aircraftPermit'                                  , N'^aircraftCertPermitsToFly/\d+$'                        , N'{}'   ),
+    (51            , 3         ,'Удосотоверение за шум'                                                                  , 'aircraftNoise'                                   , N'^aircraftCertNoises/\d+$'                              , N'{}'   ),
+    (52            , 3         ,'Удосотоверение за шум'                                                                  , 'aircraftNoiseFM'                                 , N'^aircraftCertNoisesFM/\d+$'                            , N'{}'   ),
+    (53            , 3         ,'Разрешително за радиостанция'                                                           , 'aircraftRadio'                                   , N'^aircraftCertRadios/\d+$'                              , N'{}'   )
 GO

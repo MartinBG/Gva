@@ -13,9 +13,9 @@
     $scope.aircraftDocumentOther = aircraftDocumentOther;
 
     $scope.save = function () {
-      return $scope.aircraftDocumentOtherForm.$validate()
+      return $scope.editDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.aircraftDocumentOtherForm.$valid) {
+          if ($scope.editDocumentOtherForm.$valid) {
             return AircraftDocumentOther
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftDocumentOther)
               .$promise

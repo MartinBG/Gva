@@ -11,9 +11,9 @@
     $scope.aircraftInspection = aircraftInspection;
 
     $scope.save = function () {
-      return $scope.aircraftInspectionForm.$validate()
+      return $scope.newInspectionForm.$validate()
       .then(function () {
-        if ($scope.aircraftInspectionForm.$valid) {
+        if ($scope.newInspectionForm.$valid) {
           return AircraftInspection
             .save({ id: $stateParams.id }, $scope.aircraftInspection)
             .$promise
@@ -45,7 +45,8 @@
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
             disparities: []
-          }
+          },
+          files: []
         };
       }
     ]

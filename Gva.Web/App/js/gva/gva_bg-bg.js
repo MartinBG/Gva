@@ -149,7 +149,7 @@
           documentDateValidTo: 'До дата',
           documentPublisher: 'Издател',
           otherDocumentType: 'Тип документ',
-          aircraftOtherDocumentRole: 'Роля',
+          otherDocumentRole: 'Роля',
           valid: 'Валидно',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
@@ -321,6 +321,14 @@
           'new': 'Ново ВС',
           search: 'Търси'
         },
+        aircraftScannedDocumentDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
+        },
         aircraftDataDirective: {
           title: 'Данни за ВС',
           manSN: 'Сериен номер',
@@ -448,12 +456,23 @@
           newReg: 'Нова регистрация'
         },
         newReg: {
+          title: 'Нова регистрация',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editReg: {
+          title: 'Редакция на регистрация',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteReg: 'Изтриване',
+          dereg: 'Дерегистрация'
+        },
+        deregReg: {
+          title: 'Дерегистриране',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deregData: 'Данни за дерегистрация'
         },
         regView: {
           first: 'Първа рег.',
@@ -604,7 +623,10 @@
           documentDate: 'Дата на док',
           aircraftCreditor: 'Кредитор',
           inspector: 'Инспектор',
-          newDebt: 'Нов залог'
+          newDebt: 'Нов залог',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newDebtFM: {
           save: 'Запис',
@@ -622,7 +644,10 @@
           contractDate: 'Дата на док',
           creditorName: 'Кредитор',
           inspector: 'Инспектор',
-          newDebt: 'Нов залог'
+          newDebt: 'Нов залог',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newDebt: {
           save: 'Запис',
@@ -645,7 +670,9 @@
           oper: 'Оператор',
           operationType: 'Категория',
           limitations: 'Ограничения',
-          aircraftTypeCertificateType: 'Типов сертификат'
+          aircraftTypeCertificateType: 'Типов сертификат',
+          dereg: 'Дерегистрирай',
+          rereg: 'Пререгистрирай'
         },
         smodViewDirective: {
           title: 'S-code',
@@ -863,7 +890,10 @@
           removalText: 'Основание за отписване - описание',
           removalDocumentNumber: 'Номер на документ за отписване',
           removalDocumentDate: 'Дата на документ за отписване',
-          removalInspector: 'Инспектор, отписал ВС'
+          removalInspector: 'Инспектор, отписал ВС',
+          removalCountry: 'Държава',
+          removalNotes: 'Забележки/Изключения',
+          removalNotesAlt: 'Забележки/Изключения (англ.)'
         },
         debtDirectiveFM: {
           title: 'Залог/запор',
@@ -917,7 +947,7 @@
           documentPublisher: 'Издател',
           notes: 'Бележки',
           otherDocumentType: 'Тип документ',
-          aircraftOtherDocumentRole: 'Роля',
+          otherDocumentRole: 'Роля',
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.'
@@ -937,10 +967,11 @@
           documentDateValidTo: 'До дата',
           documentPublisher: 'Издател',
           otherDocumentType: 'Тип документ',
-          aircraftOtherDocumentRole: 'Роля',
+          otherDocumentRole: 'Роля',
           valid: 'Валидно',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
+          file: 'Файл',
           newOther: 'Нов документ'
         },
         aircraftOwnerDirective: {
@@ -976,6 +1007,7 @@
           toDate: 'До дата',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
+          file: 'Файл',
           newOther: 'Нов документ'
         },
         aircraftPartDirective: {
@@ -1022,7 +1054,10 @@
           notification: 'Оператора предварително уведомен',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
-          inspectionPlace: 'Адрес на одитирания обект'
+          inspectionPlace: 'Адрес на одитирания обект',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newInspection: {
           save: 'Запис',
@@ -1041,8 +1076,9 @@
           area: 'Място на инцидента',
           occurrenceNotes: 'Бележки по инцидента',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в деловодна книга',
-          pageCount: 'Бр. страници на документа'
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newOccurrence: {
           save: 'Запис',
@@ -1109,8 +1145,9 @@
           documentDate: 'От дата',
           requestDate: 'Дата на заявител',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
+          bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
+          file: 'Файл',
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
@@ -1123,6 +1160,19 @@
         editAircraftDocApplication: {
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        inventorySearch: {
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
         }
       },
       persons: {

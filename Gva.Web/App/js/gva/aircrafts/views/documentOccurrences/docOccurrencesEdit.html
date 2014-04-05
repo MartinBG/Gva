@@ -1,6 +1,8 @@
-﻿<ng-form name="editAircraftDocumentOccurrenceForm">
+﻿<ng-form name="editAircraftDocumentOccurrenceForm" sc-validate="{}">
 
   <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part"></gva-aircraft-document-occurrence>
+
+  <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files"></gva-aircraft-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

@@ -75,11 +75,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
-    <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsHandler.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftDataHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftApplicationHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftInspectionHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftDebtHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOccurrenceHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOwnerHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\ApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\CheckHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\DocumentIdHandler.cs" />
@@ -93,6 +100,7 @@
     <Compile Include="LotEventHandlers\PersonView\PersonEmploymentHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonLicenceHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonRatingHandler.cs" />
+    <Compile Include="Controllers\AircraftController.cs" />
     <Compile Include="ModelsDO\ApplicationListDO.cs" />
     <Compile Include="ModelsDO\ApplicationNomDO.cs" />
     <Compile Include="ModelsDO\ApplicationDO.cs" />
@@ -102,15 +110,18 @@
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
+    <Compile Include="ModelsDO\AircraftDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
+    <Compile Include="Models\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
     <Compile Include="Models\GvaViewApplication.cs" />
     <Compile Include="Models\GvaViewOrganization.cs" />
+    <Compile Include="Models\GvaAircraft.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />
@@ -131,6 +142,8 @@
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository\IOrganizationRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository\OrganizationRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\IAircraftRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\AircraftRepository.cs" />
     <Compile Include="Repositories\FileRepository\FileRepository.cs" />
     <Compile Include="Repositories\FileRepository\IFileRepository.cs" />
     <Compile Include="Repositories\InventoryRepository\IInventoryRepository.cs" />
@@ -159,7 +172,9 @@
       <Name>Regs.Api</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Mappers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

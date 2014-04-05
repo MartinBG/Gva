@@ -21,4 +21,13 @@
   </sc-column>
   <sc-column data="part.inspectionPlace" title="aircrafts.inspectionSearch.inspectionPlace">
   </sc-column>
+  <sc-column data="files[0].bookPageNumber" title="aircrafts.inspectionSearch.bookPageNumber" width="50px">
+  </sc-column>
+  <sc-column data="files[0].pageCount" title="aircrafts.inspectionSearch.pageCount" width="50px">
+  </sc-column>
+  <sc-column sortable="false" title="aircrafts.inspectionSearch.file" width="30px">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
 </sc-datatable>

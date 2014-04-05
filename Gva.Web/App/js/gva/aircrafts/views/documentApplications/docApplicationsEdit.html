@@ -2,6 +2,8 @@
 
   <gva-aircraft-document-application name="aircraftDocumentApplicationForm" ng-model="aircraftDocumentApplication.part"></gva-aircraft-document-application>
 
+  <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentApplication.files"></gva-aircraft-scanned-document>
+
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
       <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAircraftDocApplication.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editDocumentApplicationForm.$pristine"></sc-button>

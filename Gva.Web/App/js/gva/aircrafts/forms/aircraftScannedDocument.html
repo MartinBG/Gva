@@ -1,0 +1,41 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.aircraftScannedDocumentDirective.title"></strong>
+      <button class="btn btn-sm btn-default pull-right" ng-click="addFile()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <div class="well-sm panel-body" ng-show="model.length">
+      <div ng-repeat="file in model | filter:showFile()">
+        <ng-form name="innerForm" sc-validate="{}">
+          <div class="row">
+            <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
+              <label class="control-label" l10n-text="aircrafts.aircraftScannedDocumentDirective.bookPageNumber"></label>
+              <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
+              <sc-text ng-model="file.bookPageNumber" name="bookPageNumber" ng-required="true"></sc-text>
+            </div>
+            <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+              <label class="control-label" l10n-text="aircrafts.aircraftScannedDocumentDirective.pageCount"></label>
+              <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+              <sc-int ng-model="file.pageCount" name="pageCount" min="0"></sc-int>
+            </div>
+            <div class="form-group col-sm-3" sc-has-error="file">
+              <label class="control-label" l10n-text="aircrafts.aircraftScannedDocumentDirective.fileName"></label>
+              <sc-validation-error field-name="file" validations="{required: null}"></sc-validation-error>
+              <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-required="true"></sc-files>
+            </div>
+            <button type="button" ng-hide="file.isDocFile" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)">&times;</button>
+          </div>
+          <div class="row" ng-hide="hideApplications">
+            <div class="form-group col-sm-10 col-md-7">
+              <label class="control-label" l10n-text="aircrafts.aircraftScannedDocumentDirective.applications"></label>
+              <sc-select ng-model="file.applications" sc-select="appSelectOpt"></sc-select>
+            </div>
+          </div>
+          <hr ng-hide="$last" />
+        </ng-form>
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -6,30 +6,15 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistration,
-    AircraftCertSmod,
+    AircraftCertRegistrationCurrentFM,
     AircraftCertMark,
-    AircraftCertAirworthiness,
-    AircraftCertNoise,
-    AircraftCertPermitToFly,
-    AircraftCertRadio,
     aircraftCertRegistration,
-    aircraftCertSmod,
-    aircraftCertMark,
-    aircraftCertAirworthiness,
-    aircraftCertNoise,
-    aircraftCertPermitToFly,
-    aircraftCertRadio
+    marks
   ) {
     $scope.isEdit = true;
 
     $scope.reg = aircraftCertRegistration;
-    $scope.smod = aircraftCertSmod;
-    $scope.mark = aircraftCertMark;
-    $scope.aw = aircraftCertAirworthiness;
-    $scope.noise = aircraftCertNoise;
-    $scope.permit = aircraftCertPermitToFly;
-    $scope.radio = aircraftCertRadio;
+    $scope.marks = marks;
 
     $scope.switchReg = function (ind) {
       return $state.go($state.current,
@@ -38,97 +23,56 @@
           ind: ind
         });
     };
+
+    $scope.editCertMark = function (mark) {
+      return $state.go('root.aircrafts.view.marks.edit', {
+        id: $stateParams.id,
+        ind: mark.partIndex
+      });
+    };
+
+    $scope.deleteCertMark = function (mark) {
+      return AircraftCertMark.remove({ id: $stateParams.id, ind: mark.partIndex })
+        .$promise.then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
+    };
+
+    $scope.newCertMark = function () {
+      return $state.go('root.aircrafts.view.marks.new');
+    };
+
+    $scope.newCertAirworthiness = function () {
+      return $state.go('root.aircrafts.view.airworthinessesFM.new');
+    };
+
   }
 
   CertRegsViewCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistration',
-    'AircraftCertSmod',
+    'AircraftCertRegistrationCurrentFM',
     'AircraftCertMark',
-    'AircraftCertAirworthiness',
-    'AircraftCertNoise',
-    'AircraftCertPermitToFly',
-    'AircraftCertRadio',
     'aircraftCertRegistration',
-    'aircraftCertSmod',
-    'aircraftCertMark',
-    'aircraftCertAirworthiness',
-    'aircraftCertNoise',
-    'aircraftCertPermitToFly',
-    'aircraftCertRadio'
+    'marks'
   ];
 
   CertRegsViewCtrl.$resolve = {
     aircraftCertRegistration: [
       '$stateParams',
-      'AircraftCertRegistration',
-      function ($stateParams, AircraftCertRegistration) {
-        return AircraftCertRegistration.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind || 'current'
+      'AircraftCertRegistrationCurrentFM',
+      function ($stateParams, AircraftCertRegistrationCurrentFM) {
+        return AircraftCertRegistrationCurrentFM.get({
+          id: $stateParams.id
         }).$promise;
       }
     ],
-    aircraftCertSmod: [
-      '$stateParams',
-      'AircraftCertSmod',
-      function ($stateParams, AircraftCertSmod) {
-        return AircraftCertSmod.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
-      }
-    ],
-    aircraftCertMark: [
+    marks: [
       '$stateParams',
       'AircraftCertMark',
       function ($stateParams, AircraftCertMark) {
-        return AircraftCertMark.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
-      }
-    ],
-    aircraftCertAirworthiness: [
-      '$stateParams',
-      'AircraftCertAirworthiness',
-      function ($stateParams, AircraftCertAirworthiness) {
-        return AircraftCertAirworthiness.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
-      }
-    ],
-    aircraftCertNoise: [
-      '$stateParams',
-      'AircraftCertNoise',
-      function ($stateParams, AircraftCertNoise) {
-        return AircraftCertNoise.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
-      }
-    ],
-    aircraftCertPermitToFly: [
-      '$stateParams',
-      'AircraftCertPermitToFly',
-      function ($stateParams, AircraftCertPermitToFly) {
-        return AircraftCertPermitToFly.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
-      }
-    ],
-    aircraftCertRadio: [
-      '$stateParams',
-      'AircraftCertRadio',
-      function ($stateParams, AircraftCertRadio) {
-        return AircraftCertRadio.get({
-          id: $stateParams.id,
-          ind: 'current'
-        }).$promise;
+        return AircraftCertMark.query($stateParams).$promise;
       }
     ]
   };

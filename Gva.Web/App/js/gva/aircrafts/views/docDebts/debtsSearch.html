@@ -18,4 +18,13 @@
   </sc-column>
   <sc-column data="part.inspector.name" title="aircrafts.debtSearch.inspector">
   </sc-column>
+  <sc-column data="files[0].bookPageNumber" title="aircrafts.debtSearch.bookPageNumber" width="50px">
+  </sc-column>
+  <sc-column data="files[0].pageCount" title="aircrafts.debtSearch.pageCount" width="50px">
+  </sc-column>
+  <sc-column sortable="false" title="aircrafts.debtSearch.file" width="30px">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
 </sc-datatable>

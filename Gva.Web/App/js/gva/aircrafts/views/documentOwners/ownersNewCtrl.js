@@ -10,9 +10,9 @@
     aircraftDocumentOwner
   ) {
     $scope.save = function () {
-      return $scope.aircraftDocumentOwnerForm.$validate()
+      return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
-          if ($scope.aircraftDocumentOwnerForm.$valid) {
+          if ($scope.newDocumentOwnerForm.$valid) {
             return AircraftDocumentOwner
               .save({ id: $stateParams.id }, $scope.aircraftDocumentOwner).$promise
               .then(function () {
@@ -40,7 +40,8 @@
   DocumentOwnersNewCtrl.$resolve = {
     aircraftDocumentOwner: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

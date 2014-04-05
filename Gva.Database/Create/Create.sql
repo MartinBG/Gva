@@ -19,6 +19,8 @@ GO
 :r $(rootPath)\"Tables\GvaViewInventoryItems.sql"
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
+:r $(rootPath)\"Tables\GvaViewAircrafts.sql"
+:r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -77,3 +79,40 @@ GO
 :r $(rootPath)\"..\Insert\Noms\applicationpaymentTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\currencies.sql"
 :r $(rootPath)\"..\Insert\Noms\yesNoOptions.sql"
+
+---------------------------------------------------------------
+-- Aircrafts test noms from Apex
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\Noms\aircraftCategories.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftProducers.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftRelations.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftParts.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftPartProducers.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftPartStatuses.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftDebtTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftCreditors.sql"
+:r $(rootPath)\"..\Insert\Noms\inspectors.sql"
+:r $(rootPath)\"..\Insert\Noms\lim145limitations.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftOccurrenceClasses.sql"
+:r $(rootPath)\"..\Insert\Noms\auditReasons.sql"
+:r $(rootPath)\"..\Insert\Noms\auditTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\auditStates.sql"
+:r $(rootPath)\"..\Insert\Noms\otherDocumentTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftCertificateTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\registers.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftNewOld.sql"
+:r $(rootPath)\"..\Insert\Noms\operationTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftTypeCertificateTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftLimitations.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftRegStatuses.sql"
+:r $(rootPath)\"..\Insert\Noms\examiners.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftRadioTypes.sql"
+
+---------------------------------------------------------------
+-- Aircrafts test noms from FM
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\Noms\cofATypes.sql"
+:r $(rootPath)\"..\Insert\Noms\easaTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\easaCategories.sql"
+:r $(rootPath)\"..\Insert\Noms\euRegTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\removalReasons.sql"

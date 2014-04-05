@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteCertReg = function (reg) {
-      return AircraftCertRegistrationFM.remove({ id: $stateParams.id, ind: reg.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertReg = function () {
       return $state.go('root.aircrafts.view.regsFM.new');
     };

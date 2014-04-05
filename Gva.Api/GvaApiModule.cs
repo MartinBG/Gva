@@ -13,7 +13,9 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
+using Gva.Api.Repositories.AircraftRepository;
 using Regs.Api.LotEvents;
+using Gva.Api.LotEventHandlers.AircraftView;
 
 namespace Gva.Api
 {
@@ -22,7 +24,6 @@ namespace Gva.Api
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             moduleBuilder.RegisterType<GvaDbConfiguration>().As<IDbConfiguration>().SingleInstance();
-
             moduleBuilder.RegisterType<PersonDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonLicenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
@@ -38,7 +39,16 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<OrganizationDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
+            moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftDebtHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftInspectionHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftOccurrenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftOtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftOwnerHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
+            moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
@@ -49,8 +59,10 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonsController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerApiRequest();
+
         }
     }
 }

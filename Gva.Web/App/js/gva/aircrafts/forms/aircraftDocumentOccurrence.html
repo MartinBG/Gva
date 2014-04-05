@@ -49,17 +49,6 @@
           <sc-textarea rows="3" ng-model="model.occurrenceNotes"></sc-textarea>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.bookPageNumber"></label>
-          <sc-text ng-model="model.bookPageNumber"></sc-text>
-        </div>
-        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
-          <label class="control-label" l10n-text="aircrafts.occurrenceDirective.pageCount"></label>
-          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
-          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
-        </div>
-      </div>
     </div>
   </div>
 </ng-form>

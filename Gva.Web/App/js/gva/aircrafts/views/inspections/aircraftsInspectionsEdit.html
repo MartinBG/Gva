@@ -1,6 +1,8 @@
-﻿<ng-form name="editInspectionForm">
+﻿<ng-form name="editInspectionForm" sc-validate="{}">
 
   <gva-common-inspection name="aircraftInspectionForm" ng-model="aircraftInspection.part"></gva-common-inspection>
+
+  <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftInspection.files"></gva-aircraft-scanned-document>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">

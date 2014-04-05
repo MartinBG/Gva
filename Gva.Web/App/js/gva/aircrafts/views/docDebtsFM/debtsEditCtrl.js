@@ -14,9 +14,9 @@
     $scope.debt = aircraftDocumentDebt;
 
     $scope.save = function () {
-      return $scope.aircraftDocumentDebtForm.$validate()
+      return $scope.editDocumentDebtForm.$validate()
       .then(function () {
-        if ($scope.aircraftDocumentDebtForm.$valid) {
+        if ($scope.editDocumentDebtForm.$valid) {
           return AircraftDocumentDebtFM
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.debt)
             .$promise

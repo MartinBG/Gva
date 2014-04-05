@@ -277,6 +277,10 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftPart.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircrafttMaintenance.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftScannedDocument.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftScannedDocumentCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="App\js\gva\aircrafts\resources\aircraft.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftApex.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertAirworthiness.js" />
@@ -300,6 +304,9 @@
     <Content Include="App\js\gva\aircrafts\resources\aircraftInspection.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftMaintenance.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftPart.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftApplication.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftInventory.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftCertRegistrationCurrentFM.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftDataApex\aircraftDataEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\aircraftDataApex\aircraftDataEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />
@@ -360,6 +367,8 @@
     <Content Include="App\js\gva\aircrafts\views\certRadios\radiosNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\certRadios\radiosSearch.html" />
     <Content Include="App\js\gva\aircrafts\views\certRadios\radiosSearchCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsDereg.html" />
+    <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsDeregCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsNew.html" />
@@ -422,6 +431,8 @@
     <Content Include="App\js\gva\aircrafts\views\inspections\aircraftsInspectionsNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\inspections\aircraftsInspectionsSearch.html" />
     <Content Include="App\js\gva\aircrafts\views\inspections\aircraftsInspectionsSearchCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\inventory\inventorySearch.html" />
+    <Content Include="App\js\gva\aircrafts\views\inventory\inventorySearchCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\parts\partsEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\parts\partsEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\parts\partsNew.html" />

@@ -7,6 +7,7 @@ using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.PersonRepository;
+using Gva.Api.Repositories.AircraftRepository;
 using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Controllers
@@ -15,15 +16,18 @@ namespace Gva.Api.Controllers
     public class GvaNomController : ApiController
     {
         private IPersonRepository personRepository;
+        private IAircraftRepository aircraftRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
 
         public GvaNomController(
             IPersonRepository personRepository,
+            IAircraftRepository aircraftRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
         {
             this.personRepository = personRepository;
+            this.aircraftRepository = aircraftRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
         }
@@ -48,6 +52,31 @@ namespace Gva.Api.Controllers
                 {
                     nomValueId = e.LotId,
                     name = e.Names
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("aircrafts/{id:int}")]
+        public IHttpActionResult GetAircraft(int id)
+        {
+            var aircraft = this.aircraftRepository.GetAircraft(id);
+            return Ok(new
+            {
+                nomValueId = aircraft.LotId,
+                name = aircraft.Model
+            });
+        }
+
+        [Route("aircrafts")]
+        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.aircraftRepository.GetAircrafts(model: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Model
                 });
 
             return Ok(returnValue);

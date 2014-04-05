@@ -13,9 +13,9 @@
     $scope.aircraftDocumentOwner = aircraftDocumentOwner;
 
     $scope.save = function () {
-      return $scope.aircraftDocumentOwnerForm.$validate()
+      return $scope.editDocumentOwnerForm.$validate()
         .then(function () {
-          if ($scope.aircraftDocumentOwnerForm.$valid) {
+          if ($scope.editDocumentOwnerForm.$valid) {
             return AircraftDocumentOwner
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftDocumentOwner)
               .$promise

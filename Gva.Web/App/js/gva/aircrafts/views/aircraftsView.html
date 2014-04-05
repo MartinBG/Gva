@@ -4,13 +4,13 @@
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.aircraftProducer"></span>
-          <input disabled name="producer" type="text" class="form-control" value="{{aircraft.aircraftProducer.name}}" />
+          <input disabled name="producer" type="text" class="form-control" value="{{aircraft.aircraftProducer}}" />
         </div>
       </div>
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.aircraftCategory"></span>
-          <input disabled name="category" type="text" class="form-control" value="{{aircraft.aircraftCategory.name}}" />
+          <input disabled name="category" type="text" class="form-control" value="{{aircraft.aircraftCategory}}" />
         </div>
       </div>
       <div class="form-group col-md-3">
@@ -67,7 +67,7 @@
       'aircrafts.tabs.docs': {
         'aircrafts.tabs.others': 'root.aircrafts.view.others'
        },
-      'aircrafts.tabs.inventory' : {}
+      'aircrafts.tabs.inventory' : 'root.aircrafts.view.inventory'
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

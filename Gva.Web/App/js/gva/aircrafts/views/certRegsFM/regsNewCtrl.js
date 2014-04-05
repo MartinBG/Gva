@@ -14,9 +14,9 @@
     $scope.reg = aircraftCertRegistration;
 
     $scope.save = function () {
-      return $scope.aircraftCertRegForm.$validate()
+      return $scope.newCertRegForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertRegForm.$valid) {
+            if ($scope.newCertRegForm.$valid) {
               return AircraftCertRegistrationFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
@@ -41,7 +41,9 @@
   CertRegsFMNewCtrl.$resolve = {
     aircraftCertRegistration: function () {
       return {
-        part: {}
+        part: {
+          isActive: true
+        }
       };
     }
   };

@@ -39,12 +39,14 @@
           <label class="control-label" l10n-text="aircrafts.regViewDirective.aircraftTypeCertificateType"></label>
           <input disabled type="text" class="form-control input-sm" value="{{model.typeCert.aircraftTypeCertificateType.name}}" />
         </div>
+        <sc-button name="reregButton" btn-click="rereg()" text="aircrafts.regViewDirective.rereg" class="btn btn-sm btn-primary col-md-2" icon="glyphicon-repeat" style="margin-top:18px;"></sc-button>
       </div>
       <div class="row">
         <div class="form-group col-md-8">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
           <input disabled type="text" class="form-control input-sm" value="{{model.limitations}}" />
         </div>
+        <sc-button name="deregButton" btn-click="dereg()" text="aircrafts.regViewDirective.dereg" class="btn btn-sm btn-danger col-md-2" icon="glyphicon-ban-circle" style="margin-top:18px;"></sc-button>
       </div>
     </div>
   </div>

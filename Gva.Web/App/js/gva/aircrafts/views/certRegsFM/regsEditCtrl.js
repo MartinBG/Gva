@@ -12,11 +12,22 @@
     $scope.isEdit = true;
 
     $scope.reg = aircraftCertRegistration;
+    
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+    };
+
 
     $scope.save = function () {
-      return $scope.aircraftCertRegForm.$validate()
+      return $scope.editCertRegForm.$validate()
       .then(function () {
-        if ($scope.aircraftCertRegForm.$valid) {
+        if ($scope.editCertRegForm.$valid) {
           return AircraftCertRegistrationFM
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
             .$promise
@@ -27,8 +38,25 @@
       });
     };
 
-    $scope.cancel = function () {
+    $scope.deleteReg = function () {
+      return AircraftCertRegistrationFM.remove({
+        id: $stateParams.id,
+        ind: aircraftCertRegistration.partIndex
+      })
+          .$promise.then(function () {
+        return $state.go('root.aircrafts.view.regsFM.search');
+      });
+    };
+
+    $scope.back = function () {
       return $state.go('root.aircrafts.view.regsFM.search');
+    };
+
+    $scope.dereg = function () {
+      return $state.go('root.aircrafts.view.regsFM.dereg', {
+        id: $stateParams.id,
+        ind: $stateParams.ind
+      });
     };
   }
 
