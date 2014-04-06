@@ -105,13 +105,13 @@
       <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
         <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentType"></label>
         <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffCodes: [model.staffType.code] }" ng-readonly="readonly">
+        <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffAliases: [model.staffType.alias] }" ng-readonly="readonly">
         </sc-nomenclature>
       </div>
       <div class="form-group col-sm-6 col-md-5" sc-has-error="personOtherDocumentRole">
         <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentRole"></label>
         <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffCodes: [model.staffType.code] }" ng-readonly="readonly">
+        <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" ng-required="true" alias="'documentRoles'" params="{ categoryAlias: 'training', staffAliases: [model.staffType.alias] }" ng-readonly="readonly">
         </sc-nomenclature>
       </div>
     </div>

@@ -19,23 +19,23 @@ namespace Common.Api.Controllers
 
         public IHttpActionResult GetNom(string alias, int id)
         {
-            return Ok(this.nomRepository.GetNom(alias, id));
+            return Ok(this.nomRepository.GetNomValue(alias, id));
         }
 
         public IHttpActionResult GetNom(string alias, string valueAlias)
         {
-            return Ok(this.nomRepository.GetNom(alias, valueAlias));
+            return Ok(this.nomRepository.GetNomValue(alias, valueAlias));
         }
 
         public IHttpActionResult GetNoms(string alias, [FromUri] int[] ids, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
         {
             if (ids != null && ids.Length > 0)
             {
-                return Ok(this.nomRepository.GetNoms(alias, ids));
+                return Ok(this.nomRepository.GetNomValues(alias, ids));
             }
             else
             {
-                return Ok(this.nomRepository.GetNoms(alias, term, parentValueId, grandParentValueId, offset, limit));
+                return Ok(this.nomRepository.GetNomValues(alias, term, parentValueId, grandParentValueId, offset, limit));
             }
         }
     }

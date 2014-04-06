@@ -50,8 +50,6 @@
     <Content Include="Create\Tables\LotCommitVersions.sql" />
     <Content Include="Create\Tables\LotCommits.sql" />
     <Content Include="Create\Tables\LotPartVersions.sql" />
-    <Content Include="Create\Tables\NomValues.sql" />
-    <Content Include="Create\Tables\Noms.sql" />
     <Content Include="Create\Tables\LotParts.sql" />
     <Content Include="Create\Tables\LotSets.sql" />
     <Content Include="Create\Tables\Lots.sql" />

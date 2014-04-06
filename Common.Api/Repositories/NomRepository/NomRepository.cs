@@ -17,24 +17,31 @@ namespace Common.Api.Repositories.NomRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public NomValue GetNom(string alias, int id)
+        public Nom GetNom(string alias)
+        {
+            return this.unitOfWork.DbContext.Set<Nom>()
+              .Include(n => n.NomValues)
+              .SingleOrDefault(n => n.Alias == alias);
+        }
+
+        public NomValue GetNomValue(string alias, int id)
         {
             return this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == alias && nv.NomValueId == id).SingleOrDefault();
         }
 
-        public NomValue GetNom(string alias, string valueAlias)
+        public NomValue GetNomValue(string alias, string valueAlias)
         {
             return this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == alias && nv.Alias == valueAlias).SingleOrDefault();
         }
 
-        public IEnumerable<NomValue> GetNoms(string alias, int[] ids)
+        public IEnumerable<NomValue> GetNomValues(string alias, int[] ids)
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
                 .Where(nv => nv.Nom.Alias == alias && ids.Contains(nv.NomValueId))
                 .ToList();
         }
 
-        public IEnumerable<NomValue> GetNoms(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
+        public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
         {
             var predicate =
                 PredicateBuilder.True<NomValue>()

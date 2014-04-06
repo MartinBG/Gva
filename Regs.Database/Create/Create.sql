@@ -16,10 +16,6 @@ GO
 :r $(rootPath)\"Tables\LotCommitVersions.sql"
 :r $(rootPath)\"Tables\LotPartExts.sql"
 
--- Noms
-:r $(rootPath)\"Tables\Noms.sql"
-:r $(rootPath)\"Tables\NomValues.sql"
-
 
 ---------------------------------------------------------------
 -- Diagram
