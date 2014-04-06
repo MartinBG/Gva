@@ -171,7 +171,7 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocCasePartType>()
                 .Where(predicate)
-                .OrderBy(e => e.Name)
+                .OrderBy(e => e.DocCasePartTypeId)
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
