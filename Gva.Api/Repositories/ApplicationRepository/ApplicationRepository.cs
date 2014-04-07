@@ -86,7 +86,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             return this.unitOfWork.DbContext.Set<GvaApplication>()
                 .Include(a => a.GvaAppLotPart)
-                .Where(a => a.LotId == lotId)
+                .Where(a => a.LotId == lotId && a.GvaAppLotPart != null)
                 .ToArray();
         }
 

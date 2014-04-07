@@ -22,6 +22,9 @@ namespace Gva.Api.ModelsDO
 
             this.IsDocFile = lotFile.DocFileId.HasValue;
             this.Applications = lotFile.GvaAppLotFiles
+                .Where(af =>
+                    af.GvaApplication != null &&
+                    af.GvaApplication.GvaAppLotPart != null)
                 .Select(af => new ApplicationNomDO(af.GvaApplication))
                 .ToList();
         }
