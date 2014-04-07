@@ -33,6 +33,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.Api", "Gva.Api\Gva.Api.csproj", "{F9AFA12D-933E-4C98-B53A-92D603201EDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Api.Tests", "Docs.Api.Tests\Docs.Api.Tests.csproj", "{C3A35BBC-F16D-4DAA-9563-B5FF57D5F821}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.MigrationTool", "Gva.MigrationTool\Gva.MigrationTool.csproj", "{F8CA1465-3C89-4C8C-9589-78B550E70FFC}"
 EndProject
 Global
@@ -84,7 +85,6 @@ Global
 		{C3A35BBC-F16D-4DAA-9563-B5FF57D5F821}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3A35BBC-F16D-4DAA-9563-B5FF57D5F821}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8CA1465-3C89-4C8C-9589-78B550E70FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8CA1465-3C89-4C8C-9589-78B550E70FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8CA1465-3C89-4C8C-9589-78B550E70FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8CA1465-3C89-4C8C-9589-78B550E70FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
