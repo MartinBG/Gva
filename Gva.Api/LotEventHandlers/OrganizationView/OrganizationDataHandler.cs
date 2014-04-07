@@ -6,7 +6,7 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.OrganizationView
 {
-    public class OrganizationDataHandler : CommitEventHandler<GvaViewOrganizationData>
+    public class OrganizationDataHandler : CommitEventHandler<GvaViewOrganization>
     {
         public OrganizationDataHandler(IUnitOfWork unitOfWork)
             : base(
@@ -14,11 +14,11 @@ namespace Gva.Api.LotEventHandlers.OrganizationView
                 setAlias: "Organization",
                 setPartAlias: "data",
                 viewMatcher: pv =>
-                    v => v.GvaOrganizationLotId == pv.Part.Lot.LotId)
+                    v => v.LotId == pv.Part.Lot.LotId)
         {
         }
 
-        public override void Fill(GvaViewOrganizationData organization, PartVersion part)
+        public override void Fill(GvaViewOrganization organization, PartVersion part)
         {
 
             organization.Lot = part.Part.Lot;
@@ -33,7 +33,7 @@ namespace Gva.Api.LotEventHandlers.OrganizationView
 
         }
 
-        public override void Clear(GvaViewOrganizationData organization)
+        public override void Clear(GvaViewOrganization organization)
         {
             throw new NotSupportedException();
         }

@@ -6,7 +6,7 @@
         <div class="form-group col-sm-4 col-md-3" sc-has-error="auditPartRequirement">
           <label class="control-label" l10n-text="organizations.staffManagementDirective.auditPartRequirement"></label>
           <sc-validation-error field-name="auditPartRequirement" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.auditPartRequirement" name="auditPartRequirement" alias="'auditPartRequirements'" ng-required="true"></sc-nomenclature>
+          <sc-nomenclature ng-model="model.auditPartRequirement" name="auditPartRequirement" alias="'auditPartRequirmants'" ng-required="true"></sc-nomenclature>
         </div>
       </div>
       <div class="row">
@@ -32,18 +32,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-2 col-md-2" sc-has-error="number">
-          <label class="control-label" l10n-text="organizations.staffManagementDirective.number"></label>
+        <div class="form-group col-sm-10 col-md-7" sc-has-error="application">
+          <label class="control-label" l10n-text="organizations.staffManagementDirective.application"></label>
           <sc-validation-error field-name="number" validations="{required: null}"></sc-validation-error>
-          <sc-int ng-model="model.number" name="number" ng-required="true"></sc-int>
+          <sc-select ng-model="application" sc-select="appSelectOpt" name="application" ng-required="true"></sc-select>
         </div>
+      </div>
+      <div class="row">
         <div class="form-group col-sm-2 col-md-2" sc-has-error="valid">
           <label class="control-label" l10n-text="organizations.staffManagementDirective.valid"></label>
           <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
         </div>
-      </div>
-      <div class="row">
         <div class="form-group col-sm-4 col-md-3">
           <label class="control-label" l10n-text="organizations.staffManagementDirective.testDate"></label>
           <sc-date ng-model="model.testDate"></sc-date>

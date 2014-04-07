@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewOrganizations] (
-    [GvaOrganizationLotId] INT           NOT NULL,
+    [LotId] INT           NOT NULL,
     [Name]                 NVARCHAR(100) NOT NULL,
     [CAO]                  NVARCHAR(50)  NULL,
     [Valid]                NVARCHAR(50)  NOT NULL,
@@ -10,13 +10,13 @@ CREATE TABLE [dbo].[GvaViewOrganizations] (
     [Uin]                  NVARCHAR(50)  NULL,
     [DateValidTo]          DATETIME2(7)  NULL,
     [DateCAOValidTo]       DATETIME2(7)  NULL,
-    CONSTRAINT [PK_GvaViewOrganizations]      PRIMARY KEY ([GvaOrganizationLotId]),
-    CONSTRAINT [FK_GvaViewOrganizations_Lots]  FOREIGN KEY ([GvaOrganizationLotId]) REFERENCES [dbo].[Lots] ([LotId])
+    CONSTRAINT [PK_GvaViewOrganizations]      PRIMARY KEY ([LotId]),
+    CONSTRAINT [FK_GvaViewOrganizations_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
 )
 GO
 
 exec spDescTable  N'GvaViewOrganizations', N'Организации.'
-exec spDescColumn N'GvaViewOrganizations', N'GvaOrganizationLotId', N'Идентификатор на партида на организация.'
+exec spDescColumn N'GvaViewOrganizations', N'LotId', N'Идентификатор на партида на организация.'
 exec spDescColumn N'GvaViewOrganizations', N'Name'                    , N'Наменование.'
 exec spDescColumn N'GvaViewOrganizations', N'CAO'                     , N'CAO номер.'
 exec spDescColumn N'GvaViewOrganizations', N'Valid'                   , N'Валидност.'

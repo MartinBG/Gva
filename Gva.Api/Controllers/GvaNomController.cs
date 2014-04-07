@@ -9,6 +9,7 @@ using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.AircraftRepository;
 using Newtonsoft.Json.Linq;
+using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -17,17 +18,20 @@ namespace Gva.Api.Controllers
     {
         private IPersonRepository personRepository;
         private IAircraftRepository aircraftRepository;
+        private IOrganizationRepository organizationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
 
         public GvaNomController(
             IPersonRepository personRepository,
             IAircraftRepository aircraftRepository,
+            IOrganizationRepository organizationRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
         {
             this.personRepository = personRepository;
             this.aircraftRepository = aircraftRepository;
+            this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
         }
@@ -77,6 +81,31 @@ namespace Gva.Api.Controllers
                 {
                     nomValueId = e.LotId,
                     name = e.Model
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("organizations/{id:int}")]
+        public IHttpActionResult GetOrganization(int id)
+        {
+            var organization = this.organizationRepository.GetOrganization(id);
+            return Ok(new
+            {
+                nomValueId = organization.LotId,
+                name = organization.Name
+            });
+        }
+
+        [Route("organizations")]
+        public IHttpActionResult GetOrganizations(string name = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.organizationRepository.GetOrganizations(name: name, offset: offset, limit: limit, uin: null, CAO: null, dateCAOValidTo: null, dateValidTo: null)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Name
                 });
 
             return Ok(returnValue);

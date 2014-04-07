@@ -6,17 +6,16 @@ namespace Gva.Api.Repositories.OrganizationRepository
 {
     public interface IOrganizationRepository
     {
-        IEnumerable<GvaViewOrganizationData> GetOrganizations(
+        IEnumerable<GvaViewOrganization> GetOrganizations(
             string name,
             string CAO,
             string uin,
             DateTime? dateValidTo,
             DateTime? dateCAOValidTo,
-            int offset,
-            int? limit);
+            bool exact = false,
+            int offset = 0,
+            int? limit = null);
 
-        GvaViewOrganizationData GetOrganization(int organizationId);
-
-        void AddOrganization(GvaViewOrganizationData organization);
+        GvaViewOrganization GetOrganization(int organizationId);
     }
 }

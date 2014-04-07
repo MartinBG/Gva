@@ -16,19 +16,20 @@ namespace Gva.Api.Repositories.OrganizationRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaViewOrganizationData> GetOrganizations(
+        public IEnumerable<GvaViewOrganization> GetOrganizations(
             string name,
             string CAO,
             string uin,
             DateTime? dateValidTo,
             DateTime? dateCAOValidTo,
+            bool exact,
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<GvaViewOrganizationData>()
-                .AndStringContains(o => o.CAO, CAO)
-                .AndStringContains(o => o.Uin, uin)
-                .AndStringContains(o => o.Name, name);
+            var predicate = PredicateBuilder.True<GvaViewOrganization>()
+                .AndStringMatches(o => o.CAO, CAO, exact)
+                .AndStringMatches(o => o.Uin, uin, exact)
+                .AndStringMatches(o => o.Name, name, exact);
 
             if (dateValidTo != null)
             {
@@ -42,22 +43,17 @@ namespace Gva.Api.Repositories.OrganizationRepository
                 predicate = predicate.And(o => o.DateCAOValidTo < maxDate);
             }
 
-            return this.unitOfWork.DbContext.Set<GvaViewOrganizationData>()
+            return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
                 .Where(predicate)
                 .OrderBy(o => o.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
 
-        public GvaViewOrganizationData GetOrganization(int organizationId)
+        public GvaViewOrganization GetOrganization(int organizationId)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewOrganizationData>()
-                .SingleOrDefault(p => p.GvaOrganizationLotId == organizationId);
-        }
-
-        public void AddOrganization(GvaViewOrganizationData organization)
-        {
-            this.unitOfWork.DbContext.Set<GvaViewOrganizationData>().Add(organization);
+            return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
+                .SingleOrDefault(p => p.LotId == organizationId);
         }
     }
 }

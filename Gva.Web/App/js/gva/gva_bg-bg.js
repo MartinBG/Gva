@@ -2320,8 +2320,8 @@
           person: 'Предложено лице',
           testDate: 'Дата на полагане на писмен тест',
           testScore: 'Оценка от писмен тест',
-          number: 'Заявление',
-          valid: 'Валиден'
+          valid: 'Валиден',
+          application: 'Заявление'
         },
         auditplanDirective: {
           title: 'План за одит',

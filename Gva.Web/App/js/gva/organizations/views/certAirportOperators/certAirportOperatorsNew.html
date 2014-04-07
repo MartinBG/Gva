@@ -1,10 +1,10 @@
-﻿<ng-form name="newCertAirportOperatorForm">
+﻿<ng-form name="certAirportOperatorForm">
 
-  <gva-organization-cert-operator name="certAirportOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
+  <gva-organization-cert-operator name="newCertAirportOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertAirportOperator.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newCertAirportOperatorForm.$pristine"></sc-button>
+      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertAirportOperator.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="certAirportOperatorForm.$pristine"></sc-button>
       <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertAirportOperator.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
     </div>
   </div>

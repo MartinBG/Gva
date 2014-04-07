@@ -55,39 +55,17 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetOrganizations(string name = null, string CAO = null, string uin = null, DateTime? dateValidTo = null, DateTime? dateCAOValidTo = null)
+        public IHttpActionResult GetOrganizations(string name = null, string CAO = null, string uin = null, DateTime? dateValidTo = null, DateTime? dateCAOValidTo = null, bool exact = false)
         {
-            var organizations = this.organizationRepository.GetOrganizations(name, CAO, uin, dateValidTo, dateCAOValidTo, 0 , null)
-                .Select(o => new OrganizationDO()
-                {
-                    Id = o.GvaOrganizationLotId,
-                    Name = o.Name,
-                    Uin = o.Uin,
-                    CAO = o.CAO,
-                    OrganizationType = o.OrganizationType,
-                    Valid = o.Valid,
-                    DateCAOValidTo = o.DateValidTo,
-                    DateValidTo = o.DateCAOValidTo
-                });
-
-            return Ok(organizations);
+            var organizations = this.organizationRepository.GetOrganizations(name, CAO, uin, dateValidTo, dateCAOValidTo, exact);
+            return Ok(organizations.Select(o => new OrganizationDO(o)));
         }
 
         [Route("{lotId}")]
         public IHttpActionResult GetOrganization(int lotId)
         {
             var organization = this.organizationRepository.GetOrganization(lotId);
-            OrganizationDO organizationDO = new OrganizationDO() {
-                Id = organization.GvaOrganizationLotId,
-                Name = organization.Name,
-                CAO = organization.CAO,
-                Uin = organization.Uin,
-                OrganizationType = organization.OrganizationType,
-                Valid = organization.Valid,
-                DateCAOValidTo = organization.DateValidTo,
-                DateValidTo = organization.DateCAOValidTo            
-            };
-
+            OrganizationDO organizationDO = new OrganizationDO(organization);
             return Ok(organizationDO);
         }
 

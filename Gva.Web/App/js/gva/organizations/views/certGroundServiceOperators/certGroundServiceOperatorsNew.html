@@ -1,10 +1,10 @@
-﻿<ng-form name="newCertGroundServiceOperatorForm">
+﻿<ng-form name="certGroundServiceOperatorForm">
 
-  <gva-organization-cert-operator name="certGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
+  <gva-organization-cert-operator name="newCertGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
 
   <div class="row">
     <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperator.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!newCertGroundServiceOperatorForm.$dirty"></sc-button>
+      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperator.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!certGroundServiceOperatorForm.$dirty"></sc-button>
       <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertGroundServiceOperator.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
     </div>
   </div>

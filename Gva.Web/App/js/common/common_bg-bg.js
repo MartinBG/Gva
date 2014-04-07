@@ -39,7 +39,7 @@
             inspections: 'Инспекции'
           },
           organizations: {
-            title: 'Саро'
+            title: 'САРО'
           },
           admin: {
             title: 'Админ',
