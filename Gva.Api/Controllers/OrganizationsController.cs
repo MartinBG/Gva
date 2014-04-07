@@ -109,7 +109,7 @@ namespace Gva.Api.Controllers
 
                 if (documentTypes.Length > 0)
                 {
-                    inventory = inventory.Where(item => documentTypes.Contains(item.DocumentType)).ToList();
+                    inventory = inventory.Where(item => documentTypes.Contains(item.SetPartAlias)).ToList();
                 }
             }
 

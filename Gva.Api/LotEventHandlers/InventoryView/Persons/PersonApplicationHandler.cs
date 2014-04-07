@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class AircraftOtherHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class PersonApplicationHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public AircraftOtherHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PersonApplicationHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
-                setAlias: "Aircraft",
-                setPartAlias: "aircraftOther",
+                setAlias: "Person",
+                setPartAlias: "personApplication",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -28,14 +28,14 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Part = partVersion.Part;
 
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
-            invItem.Name = partVersion.DynamicContent.documentRole.name;
-            invItem.Type = partVersion.DynamicContent.documentType.name;
+            invItem.Name = partVersion.Part.SetPart.Name;
+            invItem.Type = partVersion.DynamicContent.applicationType.name;
             invItem.Number = partVersion.DynamicContent.documentNumber;
-            invItem.Date = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.Publisher = partVersion.DynamicContent.documentPublisher;
+            invItem.Date = partVersion.DynamicContent.documentDate;
+            invItem.Publisher = null;
             invItem.Valid = null;
-            invItem.FromDate = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.ToDate = partVersion.DynamicContent.documentDateValidTo;
+            invItem.FromDate = null;
+            invItem.ToDate = null;
 
             if (partVersion.PartOperation == PartOperation.Add)
             {
@@ -49,7 +49,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             }
         }
 
-        public override void Clear(GvaViewInventoryItem inventory)
+        public override void Clear(GvaViewInventoryItem person)
         {
             throw new NotSupportedException();
         }

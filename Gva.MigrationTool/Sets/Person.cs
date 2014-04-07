@@ -39,20 +39,30 @@ namespace Gva.MigrationTool.Sets
                 var userRepository = new UserRepository(unitOfWork);
                 var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
                 {
-                    new ApplicationsHandler(unitOfWork),
-                    new ApplicationHandler(unitOfWork, userRepository),
-                    new CheckHandler(unitOfWork, userRepository),
-                    new DocumentIdHandler(unitOfWork, userRepository),
-                    new EducationHandler(unitOfWork, userRepository),
-                    new EmploymentHandler(unitOfWork, userRepository),
-                    new MedicalHandler(unitOfWork, userRepository),
-                    new OtherHandler(unitOfWork, userRepository),
-                    new TrainingHandler(unitOfWork, userRepository),
-                    new OrganizationDataHandler(unitOfWork),
-                    new PersonDataHandler(unitOfWork),
-                    new PersonEmploymentHandler(unitOfWork),
-                    new PersonLicenceHandler(unitOfWork),
-                    new PersonRatingHandler(unitOfWork)
+                    new ApplicationsViewAircraftHandler(unitOfWork),
+                    new ApplicationsViewPersonHandler(unitOfWork),
+                    new ApplicationsViewOrganizationHandler(unitOfWork),
+                    new AircraftApplicationHandler(unitOfWork, userRepository),
+                    new AircraftDebtHandler(unitOfWork, userRepository),
+                    new AircraftInspectionHandler(unitOfWork, userRepository),
+                    new AircraftOccurrenceHandler(unitOfWork, userRepository),
+                    new AircraftOtherHandler(unitOfWork, userRepository),
+                    new AircraftOwnerHandler(unitOfWork, userRepository),
+                    new OrganizationApplicationHandler(unitOfWork, userRepository),
+                    new OrganizationOtherHandler(unitOfWork, userRepository),
+                    new PersonApplicationHandler(unitOfWork, userRepository),
+                    new PersonCheckHandler(unitOfWork, userRepository),
+                    new PersonDocumentIdHandler(unitOfWork, userRepository),
+                    new PersonEducationHandler(unitOfWork, userRepository),
+                    new PersonEmploymentHandler(unitOfWork, userRepository),
+                    new PersonMedicalHandler(unitOfWork, userRepository),
+                    new PersonOtherHandler(unitOfWork, userRepository),
+                    new PersonTrainingHandler(unitOfWork, userRepository),
+                    new OrganizationViewDataHandler(unitOfWork),
+                    new PersonViewDataHandler(unitOfWork),
+                    new PersonViewEmploymentHandler(unitOfWork),
+                    new PersonViewLicenceHandler(unitOfWork),
+                    new PersonViewRatingHandler(unitOfWork)
                 });
 
                 var context = new UserContext(2);

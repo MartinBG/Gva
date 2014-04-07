@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div ng-if="showDocumentId && docPartType.alias === 'documentId'">
+      <div ng-if="showDocumentId && docPartType.alias === 'personDocumentId'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -45,7 +45,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentEducation && docPartType.alias === 'education'">
+      <div ng-if="showDocumentEducation && docPartType.alias === 'personEducation'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -72,7 +72,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentEmployment && docPartType.alias === 'employment'">
+      <div ng-if="showDocumentEmployment && docPartType.alias === 'personEmployment'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -103,7 +103,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentMed && docPartType.alias === 'medical'">
+      <div ng-if="showDocumentMed && docPartType.alias === 'personMedical'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -134,7 +134,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentCheck && docPartType.alias === 'check'">
+      <div ng-if="showDocumentCheck && docPartType.alias === 'personCheck'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -175,7 +175,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentTraining && docPartType.alias === 'training'">
+      <div ng-if="showDocumentTraining && docPartType.alias === 'personTraining'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -215,7 +215,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentOther && docPartType.alias === 'other'">
+      <div ng-if="showDocumentOther && docPartType.alias === 'personOther'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
@@ -248,7 +248,7 @@
         </sc-datatable>
       </div>
 
-      <div ng-if="showDocumentApplication && docPartType.alias === 'application'">
+      <div ng-if="showDocumentApplication && docPartType.alias === 'pesronApplication'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
             <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>

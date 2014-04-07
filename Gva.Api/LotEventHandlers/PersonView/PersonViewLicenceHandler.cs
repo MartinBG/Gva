@@ -6,13 +6,13 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.PersonView
 {
-    public class PersonLicenceHandler : CommitEventHandler<GvaViewPersonLicence>
+    public class PersonViewLicenceHandler : CommitEventHandler<GvaViewPersonLicence>
     {
-        public PersonLicenceHandler(IUnitOfWork unitOfWork)
+        public PersonViewLicenceHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
-                setPartAlias: "licence",
+                setPartAlias: "personLicence",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {

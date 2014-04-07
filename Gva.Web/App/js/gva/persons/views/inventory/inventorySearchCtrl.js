@@ -15,28 +15,28 @@
     $scope.edit = function (item) {
       var state;
 
-      if (item.documentType === 'education') {
+      if (item.setPartAlias === 'personEducation') {
         state = 'root.persons.view.documentEducations.edit';
       }
-      else if (item.documentType === 'documentId') {
+      else if (item.setPartAlias === 'personDocumentId') {
         state = 'root.persons.view.documentIds.edit';
       }
-      else if (item.documentType === 'training') {
+      else if (item.setPartAlias === 'personTraining') {
         state = 'root.persons.view.documentTrainings.edit';
       }
-      else if (item.documentType === 'medical') {
+      else if (item.setPartAlias === 'personMedical') {
         state = 'root.persons.view.medicals.edit';
       }
-      else if (item.documentType === 'check') {
+      else if (item.setPartAlias === 'personCheck') {
         state = 'root.persons.view.checks.edit';
       }
-      else if (item.documentType === 'other') {
+      else if (item.setPartAlias === 'personOther') {
         state = 'root.persons.view.documentOthers.edit';
       }
-      else if (item.documentType === 'application') {
+      else if (item.setPartAlias === 'personApplication') {
         state = 'root.persons.view.documentApplications.edit';
       }
-      else if (item.documentType === 'employment') {
+      else if (item.setPartAlias === 'personEmployment') {
         state = 'root.persons.view.employments.edit';
       }
 

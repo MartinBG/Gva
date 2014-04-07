@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    //$sce,
     application,
     DocStatus
     ) {
@@ -76,28 +75,28 @@
     $scope.viewPart = function (value) {
       var state;
 
-      if (value.setPartAlias === 'documentId') {
+      if (value.setPartAlias === 'personDocumentId') {
         state = 'root.persons.view.documentIds.edit';
       }
-      else if (value.setPartAlias === 'education') {
+      else if (value.setPartAlias === 'personEducation') {
         state = 'root.persons.view.documentEducations.edit';
       }
-      else if (value.setPartAlias === 'employment') {
+      else if (value.setPartAlias === 'personEmployment') {
         state = 'root.persons.view.employments.edit';
       }
-      else if (value.setPartAlias === 'medical') {
+      else if (value.setPartAlias === 'personMedical') {
         state = 'root.persons.view.medicals.edit';
       }
-      else if (value.setPartAlias === 'check') {
+      else if (value.setPartAlias === 'personCheck') {
         state = 'root.persons.view.checks.edit';
       }
-      else if (value.setPartAlias === 'training') {
+      else if (value.setPartAlias === 'personTraining') {
         state = 'root.persons.view.documentTrainings.edit';
       }
-      else if (value.setPartAlias === 'other') {
+      else if (value.setPartAlias === 'personOther') {
         state = 'root.persons.view.documentOthers.edit';
       }
-      else if (value.setPartAlias === 'application') {
+      else if (value.setPartAlias === 'personApplication') {
         state = 'root.persons.view.documentApplications.edit';
       }
 
@@ -116,7 +115,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    //'$sce',
     'application',
     'DocStatus'
   ];

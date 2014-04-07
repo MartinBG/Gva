@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewInventoryItems] (
     [GvaViewInvItemId] INT              NOT NULL IDENTITY,
     [LotId]            INT              NOT NULL,
     [LotPartId]        INT              NOT NULL,
-    [DocumentType]     NVARCHAR(50)     NOT NULL,
+    [SetPartAlias]     NVARCHAR(50)     NOT NULL,
     [Name]             NVARCHAR(MAX)    NOT NULL,
     [Type]             NVARCHAR(MAX)    NULL,
     [Number]           NVARCHAR(50)     NULL,
@@ -28,7 +28,7 @@ exec spDescTable  N'GvaViewInventoryItems', N'Опис.'
 exec spDescColumn N'GvaViewInventoryItems', N'GvaViewInvItemId', N'Уникален системно генериран идентификатор.'
 exec spDescColumn N'GvaViewInventoryItems', N'LotId'           , N'Идентификатор на партидата.'
 exec spDescColumn N'GvaViewInventoryItems', N'LotPartId'       , N'Идентификатор на част от партидата.'
-exec spDescColumn N'GvaViewInventoryItems', N'DocumentType'    , N'Вид документ.'
+exec spDescColumn N'GvaViewInventoryItems', N'SetPartAlias'    , N'Вид документ.'
 exec spDescColumn N'GvaViewInventoryItems', N'Name'            , N'Единен граждански номер.'
 exec spDescColumn N'GvaViewInventoryItems', N'Type'            , N'Тип документ.'
 exec spDescColumn N'GvaViewInventoryItems', N'Number'          , N'Номер на документ.'

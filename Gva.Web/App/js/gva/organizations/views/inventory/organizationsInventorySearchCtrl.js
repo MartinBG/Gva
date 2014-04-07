@@ -15,10 +15,10 @@
     $scope.edit = function (item) {
       var state;
 
-      if (item.documentType === 'other') {
+      if (item.setPartAlias === 'organizationOther') {
         state = 'root.organizations.view.documentOthers.edit';
       }
-      else if (item.documentType === 'application') {
+      else if (item.setPartAlias === 'organizationApplication') {
         state = 'root.organizations.view.documentApplications.edit';
       }
 

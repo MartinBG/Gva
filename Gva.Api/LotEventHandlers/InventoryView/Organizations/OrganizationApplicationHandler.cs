@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class DocumentIdHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class OrganizationApplicationHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public DocumentIdHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public OrganizationApplicationHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
-                setAlias: "Person",
-                setPartAlias: "documentId",
+                setAlias: "Organization",
+                setPartAlias: "organizationApplication",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -27,15 +27,15 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
 
-            invItem.DocumentType = partVersion.Part.SetPart.Alias;
+            invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = partVersion.DynamicContent.documentType.name;
+            invItem.Type = partVersion.DynamicContent.applicationType.name;
             invItem.Number = partVersion.DynamicContent.documentNumber;
-            invItem.Date = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.Publisher = partVersion.DynamicContent.documentPublisher;
-            invItem.Valid = partVersion.DynamicContent.valid.code == "Y";
-            invItem.FromDate = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.ToDate = partVersion.DynamicContent.documentDateValidTo;
+            invItem.Date = partVersion.DynamicContent.documentDate;
+            invItem.Publisher = null;
+            invItem.Valid = null;
+            invItem.FromDate = null;
+            invItem.ToDate = null;
 
             if (partVersion.PartOperation == PartOperation.Add)
             {

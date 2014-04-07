@@ -15,19 +15,19 @@
     $scope.edit = function (item) {
       var state;
 
-      if (item.documentType === 'aircraftOther') {
+      if (item.setPartAlias === 'aircraftOther') {
         state = 'root.aircrafts.view.others.edit';
       }
-      else if (item.documentType === 'aircraftOwner') {
+      else if (item.setPartAlias === 'aircraftOwner') {
         state = 'root.aircrafts.view.owners.edit';
       }
-      else if (item.documentType === 'aircraftOccurrence') {
+      else if (item.setPartAlias === 'aircraftOccurrence') {
         state = 'root.aircrafts.view.occurrences.edit';
       }
-      else if (item.documentType === 'aircraftDebtFM') {
+      else if (item.setPartAlias === 'aircraftDebtFM') {
         state = 'root.aircrafts.view.debtsFM.edit';
       }
-      else if (item.documentType === 'aircraftApplication') {
+      else if (item.setPartAlias === 'aircraftApplication') {
         state = 'root.aircrafts.view.applications.edit';
       }
 

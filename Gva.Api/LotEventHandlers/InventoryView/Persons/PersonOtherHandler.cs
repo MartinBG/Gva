@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class AircraftOtherHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class PersonOtherHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public AircraftOtherHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PersonOtherHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
-                setAlias: "Aircraft",
-                setPartAlias: "aircraftOther",
+                setAlias: "Person",
+                setPartAlias: "personOther",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -49,7 +49,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             }
         }
 
-        public override void Clear(GvaViewInventoryItem inventory)
+        public override void Clear(GvaViewInventoryItem person)
         {
             throw new NotSupportedException();
         }

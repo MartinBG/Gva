@@ -6,12 +6,13 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.ApplicationView
 {
-    public class ApplicationsHandler : CommitEventHandler<GvaViewApplication>
+    public class ApplicationsViewOrganizationHandler : CommitEventHandler<GvaViewApplication>
     {
-        public ApplicationsHandler(IUnitOfWork unitOfWork)
+        public ApplicationsViewOrganizationHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
-                setPartAlias: "application",
+                setAlias: "Organization",
+                setPartAlias: "organizationApplication",
                 viewMatcher: pv =>
                     v => v.PartId == pv.Part.PartId)
         {

@@ -1,27 +1,27 @@
 ﻿<div class="tab-content">
   <ng-form name="addFormWrapper" sc-validate="{}">
-    <div ng-if="applicationPart.setPartAlias === 'documentId'">
+    <div ng-if="applicationPart.setPartAlias === 'personDocumentId'">
       <gva-person-document-id name="addForm" ng-model="applicationPart.part"></gva-person-document-id>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'education'">
+    <div ng-if="applicationPart.setPartAlias === 'personEducation'">
       <gva-person-document-education name="addForm" ng-model="applicationPart.part"></gva-person-document-education>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'employment'">
+    <div ng-if="applicationPart.setPartAlias === 'personEmployment'">
       <gva-person-document-employment name="addForm" ng-model="applicationPart.part"></gva-person-document-employment>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'medical'">
+    <div ng-if="applicationPart.setPartAlias === 'personMedical'">
       <gva-person-document-medical name="addForm" ng-model="applicationPart.part"></gva-person-document-medical>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'check'">
+    <div ng-if="applicationPart.setPartAlias === 'personCheck'">
       <gva-person-document-check name="addForm" ng-model="applicationPart.part"></gva-person-document-check>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'training'">
+    <div ng-if="applicationPart.setPartAlias === 'personTraining'">
       <gva-person-document-training name="addForm" ng-model="applicationPart.part"></gva-person-document-training>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'other'">
+    <div ng-if="applicationPart.setPartAlias === 'personOther'">
       <gva-person-document-other name="addForm" ng-model="applicationPart.part"></gva-person-document-other>
     </div>
-    <div ng-if="applicationPart.setPartAlias === 'application'">
+    <div ng-if="applicationPart.setPartAlias === 'personApplication'">
       <gva-common-document-application name="addForm" ng-model="applicationPart.part"></gva-common-document-application>
     </div>
 

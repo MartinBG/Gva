@@ -88,7 +88,7 @@
         var docFile,
             doc;
 
-        if ($stateParams.setPartAlias === 'application' && !!$stateParams.docId) {
+        if ($stateParams.setPartAlias === 'personApplication' && !!$stateParams.docId) {
           doc = Application.getDoc({ docId: $stateParams.docId });
         }
         if (!!$stateParams.docFileId) {
@@ -105,7 +105,7 @@
           //add lotId for the applicationDocument form to filter the case type by lot
           res.docFile.lotId = application.lotId;
 
-          if ($stateParams.setPartAlias === 'application') {
+          if ($stateParams.setPartAlias === 'personApplication') {
             part.documentNumber = res.doc.documentNumber;
             //todo applicationType = docType?
           }

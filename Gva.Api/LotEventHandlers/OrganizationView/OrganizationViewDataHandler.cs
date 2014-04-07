@@ -6,13 +6,13 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.OrganizationView
 {
-    public class OrganizationDataHandler : CommitEventHandler<GvaViewOrganization>
+    public class OrganizationViewDataHandler : CommitEventHandler<GvaViewOrganization>
     {
-        public OrganizationDataHandler(IUnitOfWork unitOfWork)
+        public OrganizationViewDataHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Organization",
-                setPartAlias: "data",
+                setPartAlias: "organizationData",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId)
         {

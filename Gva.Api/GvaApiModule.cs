@@ -24,28 +24,41 @@ namespace Gva.Api
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             moduleBuilder.RegisterType<GvaDbConfiguration>().As<IDbConfiguration>().SingleInstance();
-            moduleBuilder.RegisterType<PersonDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<PersonLicenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<PersonRatingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<ApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<CheckHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<DocumentIdHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<EducationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<EmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<MedicalHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<OtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<TrainingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<ApplicationsHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<OrganizationDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
+            //ApplicationView
+            moduleBuilder.RegisterType<ApplicationsViewAircraftHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<ApplicationsViewPersonHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<ApplicationsViewOrganizationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+
+            //AircraftView
+            moduleBuilder.RegisterType<AircraftViewDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+
+            //InventaryView
             moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftDebtHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftInspectionHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftOccurrenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftOtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftOwnerHandler>().As<ILotEventHandler>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<AircraftDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<OrganizationApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<OrganizationOtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonCheckHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonDocumentIdHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonEducationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonMedicalHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonOtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonTrainingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+
+            //OrganizationView
+            moduleBuilder.RegisterType<OrganizationViewDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            
+            //PersonView
+            moduleBuilder.RegisterType<PersonViewDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonViewEmploymentHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonViewLicenceHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<PersonViewRatingHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>();
@@ -62,7 +75,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerApiRequest();
-
         }
     }
 }

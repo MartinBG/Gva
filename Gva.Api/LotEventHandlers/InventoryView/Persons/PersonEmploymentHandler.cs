@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class MedicalHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class PersonEmploymentHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public MedicalHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PersonEmploymentHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
-                setPartAlias: "medical",
+                setPartAlias: "personEmployment",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -27,20 +27,15 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
 
-            invItem.DocumentType = partVersion.Part.SetPart.Alias;
+            invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = null;
-            invItem.Number = string.Format(
-                    "{0}-{1}-{2}-{3}",
-                    partVersion.DynamicContent.documentNumberPrefix,
-                    partVersion.DynamicContent.documentNumber,
-                    partVersion.Part.Lot.GetPart("personData").DynamicContent.lin,
-                    partVersion.DynamicContent.documentNumberSuffix);
-            invItem.Date = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.Publisher = partVersion.DynamicContent.documentPublisher.name;
-            invItem.Valid = null;
-            invItem.FromDate = partVersion.DynamicContent.documentDateValidFrom;
-            invItem.ToDate = partVersion.DynamicContent.documentDateValidTo;
+            invItem.Type = partVersion.DynamicContent.employmentCategory.name;
+            invItem.Number = null;
+            invItem.Date = partVersion.DynamicContent.hiredate;
+            invItem.Publisher = partVersion.DynamicContent.organization == null ? null : partVersion.DynamicContent.organization.name;
+            invItem.Valid = partVersion.DynamicContent.valid.code == "Y";
+            invItem.FromDate = partVersion.DynamicContent.hiredate;
+            invItem.ToDate = null;
 
             if (partVersion.PartOperation == PartOperation.Add)
             {

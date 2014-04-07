@@ -12,7 +12,7 @@ namespace Gva.Api.Models
 
         public int PartId { get; set; }
 
-        public string DocumentType { get; set; }
+        public string SetPartAlias { get; set; }
 
         public string Name { get; set; }
 
@@ -50,7 +50,7 @@ namespace Gva.Api.Models
             // Primary Key
             this.HasKey(t => t.InventoryItemId);
 
-            this.Property(t => t.DocumentType)
+            this.Property(t => t.SetPartAlias)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -75,7 +75,7 @@ namespace Gva.Api.Models
             this.Property(t => t.InventoryItemId).HasColumnName("GvaViewInvItemId");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
-            this.Property(t => t.DocumentType).HasColumnName("DocumentType");
+            this.Property(t => t.SetPartAlias).HasColumnName("SetPartAlias");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Type).HasColumnName("Type");
             this.Property(t => t.Number).HasColumnName("Number");

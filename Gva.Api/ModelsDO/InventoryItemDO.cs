@@ -7,7 +7,7 @@ namespace Gva.Api.ModelsDO
     {
         public InventoryItemDO(GvaViewInventoryItem inventoryItem, GvaLotFile lotFile)
         {
-            this.DocumentType = inventoryItem.DocumentType;
+            this.SetPartAlias = inventoryItem.SetPartAlias;
             this.PartIndex = inventoryItem.Part.Index.Value;
             this.Name = inventoryItem.Name;
             this.Type = inventoryItem.Type;
@@ -24,7 +24,7 @@ namespace Gva.Api.ModelsDO
             this.File = lotFile == null ? null : new FileDO(lotFile);
         }
 
-        public string DocumentType { get; set; }
+        public string SetPartAlias { get; set; }
 
         public int PartIndex { get; set; }
 

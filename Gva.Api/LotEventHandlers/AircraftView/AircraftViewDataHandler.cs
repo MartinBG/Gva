@@ -6,9 +6,9 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.AircraftView
 {
-    public class AircraftDataHandler : CommitEventHandler<GvaViewAircraft>
+    public class AircraftViewDataHandler : CommitEventHandler<GvaViewAircraft>
     {
-        public AircraftDataHandler(IUnitOfWork unitOfWork)
+        public AircraftViewDataHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Aircraft",

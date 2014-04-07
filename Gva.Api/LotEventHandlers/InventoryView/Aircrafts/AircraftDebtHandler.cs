@@ -14,6 +14,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
         public AircraftDebtHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Aircraft",
                 setPartAlias: "aircraftDebtFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
@@ -26,7 +27,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
 
-            invItem.DocumentType = partVersion.Part.SetPart.Alias;
+            invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.DynamicContent.aircraftDebtType.name;
             invItem.Number = partVersion.DynamicContent.documentNumber;
             invItem.Date = partVersion.DynamicContent.documentDate;

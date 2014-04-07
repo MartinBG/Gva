@@ -5,13 +5,13 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.PersonView
 {
-    public class PersonEmploymentHandler : CommitEventHandler<GvaViewPerson>
+    public class PersonViewEmploymentHandler : CommitEventHandler<GvaViewPerson>
     {
-        public PersonEmploymentHandler(IUnitOfWork unitOfWork)
+        public PersonViewEmploymentHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
-                setPartAlias: "employment",
+                setPartAlias: "personEmployment",
                 partMatcher: pv => pv.DynamicContent.valid.code == "Y",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId,

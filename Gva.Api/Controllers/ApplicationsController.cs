@@ -184,7 +184,7 @@ namespace Gva.Api.Controllers
                 PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                if (setPart.Alias == "application")
+                if (setPart.Alias == "personpplication")
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
@@ -242,7 +242,7 @@ namespace Gva.Api.Controllers
                 PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                if (setPart.Alias == "application")
+                if (setPart.Alias == "personApplication")
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
@@ -304,7 +304,7 @@ namespace Gva.Api.Controllers
 
                 if (gvaLotFile != null)
                 {
-                    if (gvaLotFile.LotPart.SetPart.Alias == "application")
+                    if (gvaLotFile.LotPart.SetPart.Alias == "personApplication")
                     {
                         application.GvaAppLotPart = gvaLotFile.LotPart;
                     }

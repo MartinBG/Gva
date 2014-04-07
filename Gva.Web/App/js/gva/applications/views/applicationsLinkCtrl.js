@@ -58,7 +58,7 @@
             return $state.go('root.applications.edit.case.addPart', {
               id: app.applicationId,
               docId: app.docId,
-              setPartAlias: 'application'
+              setPartAlias: 'personApplication'
             });
           });
         }

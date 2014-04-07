@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class EmploymentHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class PersonEducationHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public EmploymentHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PersonEducationHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
-                setPartAlias: "employment",
+                setPartAlias: "personEducation",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -27,14 +27,14 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
 
-            invItem.DocumentType = partVersion.Part.SetPart.Alias;
+            invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = partVersion.DynamicContent.employmentCategory.name;
-            invItem.Number = null;
-            invItem.Date = partVersion.DynamicContent.hiredate;
-            invItem.Publisher = partVersion.DynamicContent.organization == null ? null : partVersion.DynamicContent.organization.name;
-            invItem.Valid = partVersion.DynamicContent.valid.code == "Y";
-            invItem.FromDate = partVersion.DynamicContent.hiredate;
+            invItem.Type = partVersion.DynamicContent.graduation.name;
+            invItem.Number = partVersion.DynamicContent.documentNumber;
+            invItem.Date = partVersion.DynamicContent.completionDate;
+            invItem.Publisher = partVersion.DynamicContent.school.name;
+            invItem.Valid = null;
+            invItem.FromDate = null;
             invItem.ToDate = null;
 
             if (partVersion.PartOperation == PartOperation.Add)

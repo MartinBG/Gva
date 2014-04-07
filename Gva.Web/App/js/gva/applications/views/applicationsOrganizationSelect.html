@@ -1,0 +1,30 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="text" name="name" class="col-sm-2" removable="false" label="applications.organizationSelect.name"></sc-filter>
+  <sc-filter type="text" name="CAO" class="col-sm-2" removable="true" label="applications.organizationSelect.CAO"></sc-filter>
+  <sc-filter type="text" name="uin" class="col-sm-2" removable="true" label="applications.organizationSelect.uin"></sc-filter>
+  <sc-filter type="date" name="dateValidTo" class="col-sm-2" removable="true" label="applications.organizationSelect.dateValidTo"></sc-filter>
+  <sc-filter type="date" name="dateCAOValidTo" class="col-sm-2" removable="true" label="applications.organizationSelect.dateCAOValidTo"></sc-filter>
+  <sc-search-button action="search()" text="applications.organizationSelect.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.organizationSelect.cancel"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
+</sc-search>
+
+<sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="name" title="applications.organizationSelect.name" width="60px">
+    </sc-column>
+    <sc-column data="CAO" title="applications.organizationSelect.CAO" width="60px">
+    </sc-column>
+    <sc-column data="uin" title="applications.organizationSelect.uin" width="60px">
+    </sc-column>
+    <sc-column data="valid.name" title="applications.organizationSelect.valid">
+    </sc-column>
+    <sc-column data="organizationType.name" title="applications.organizationSelect.organizationType">
+    </sc-column>
+    <sc-column data="dateValidTo" title="applications.organizationSelect.dateValidTo" type="date">
+    </sc-column>
+    <sc-column data="dateCAOValidTo" title="applications.organizationSelect.dateCAOValidTo" type="date">
+    </sc-column>
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="viewButton" btn-click="selectOrganization(item)" text="applications.organizationSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    </sc-column>
+  </sc-datatable>

@@ -7,15 +7,15 @@ using Regs.Api.Models;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
-    public class TrainingHandler : CommitEventHandler<GvaViewInventoryItem>
+    public class PersonTrainingHandler : CommitEventHandler<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
 
-        public TrainingHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PersonTrainingHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
-                setPartAlias: "training",
+                setPartAlias: "personTraining",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -27,7 +27,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
 
-            invItem.DocumentType = partVersion.Part.SetPart.Alias;
+            invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.DynamicContent.documentRole.name;
             invItem.Type = partVersion.DynamicContent.documentType.name;
             invItem.Number = partVersion.DynamicContent.documentNumber;
