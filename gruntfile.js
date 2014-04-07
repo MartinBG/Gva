@@ -53,7 +53,8 @@ module.exports = function (grunt) {
           '!Gva.Database/Properties/AssemblyInfo.cs',
           '!Regs.Database/Properties/AssemblyInfo.cs',
           '!Regs.Api.Tests/Properties/AssemblyInfo.cs',
-          '!Docs.Api.Tests/Properties/AssemblyInfo.cs'
+          '!Docs.Api.Tests/Properties/AssemblyInfo.cs',
+          '!Gva.MigrationTool/Properties/AssemblyInfo.cs'
         ]
       }
     },
