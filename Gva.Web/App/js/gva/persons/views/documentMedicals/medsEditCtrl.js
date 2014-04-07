@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,6 +9,8 @@
     PersonDocumentMedical,
     med
   ) {
+    var originalMedical = _.cloneDeep(med);
+
     $scope.personDocumentMedical = med;
     $scope.editMode = null;
 
@@ -18,6 +20,8 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
+      $scope.personDocumentMedical.part = _.cloneDeep(originalMedical.part);
+      $scope.$broadcast('cancel', originalMedical);
     };
 
     $scope.save = function () {

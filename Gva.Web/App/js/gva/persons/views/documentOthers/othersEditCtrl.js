@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -10,6 +10,7 @@
     personDocumentOther,
     selectedPublisher
   ) {
+    var originalDoc = _.cloneDeep(personDocumentOther);
 
     $scope.personDocumentOther = personDocumentOther;
     $scope.personDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
@@ -22,6 +23,8 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
+      $scope.personDocumentOther.part = _.cloneDeep(originalDoc.part);
+      $scope.$broadcast('cancel', originalDoc);
     };
 
     $scope.save = function () {

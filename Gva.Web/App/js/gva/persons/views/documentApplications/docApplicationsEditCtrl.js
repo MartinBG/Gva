@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -8,6 +8,7 @@
     $stateParams,
     PersonDocumentApplication,
     personDocumentApplication) {
+    var originalApplication = _.cloneDeep(personDocumentApplication);
 
     $scope.personDocumentApplication = personDocumentApplication;
     $scope.editMode = null;
@@ -18,6 +19,8 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
+      $scope.personDocumentApplication.part = _.cloneDeep(originalApplication.part);
+      $scope.$broadcast('cancel', originalApplication);
     };
 
     $scope.save = function () {

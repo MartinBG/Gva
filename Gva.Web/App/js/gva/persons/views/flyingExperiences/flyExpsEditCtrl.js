@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,6 +9,8 @@
     PersonFlyingExperience,
     personFlyingExperience
   ) {
+    var originalFlyingExp = _.cloneDeep(personFlyingExperience);
+
     $scope.isEdit = true;
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.editMode = null;
@@ -19,6 +21,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
+      $scope.personFlyingExperience = _.cloneDeep(originalFlyingExp);
     };
 
     $scope.save = function () {

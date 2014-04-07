@@ -5,13 +5,22 @@
   function PersonScannedDocCtrl($scope, $state, $stateParams, $compile, PersonApplication) {
     $scope.lotId = $stateParams.id;
 
-    if (_.isArray($scope.model)) {
-      $scope.hideApplications = false;
-    }
-    else {
-      $scope.hideApplications = $scope.model.hideApplications;
-      $scope.model = $scope.model.files;
-    }
+    var init = function () {
+      if (_.isArray($scope.model)) {
+        $scope.hideApplications = false;
+      }
+      else {
+        $scope.hideApplications = $scope.model.hideApplications;
+        $scope.model = $scope.model.files;
+      }
+
+      angular.forEach($scope.model, function (file) {
+        file.isDeleted = false;
+        file.isAdded = false;
+      });
+    };
+
+    init();
 
     $scope.appSelectOpt = {
       multiple: true,
@@ -38,11 +47,6 @@
         });
       }
     };
-
-    angular.forEach($scope.model, function (file) {
-      file.isDeleted = false;
-      file.isAdded = false;
-    });
 
     $scope.addFile = function () {
       $scope.model.unshift({
@@ -75,6 +79,11 @@
         ind: partIndex
       });
     };
+
+    $scope.$on('cancel', function (e, model) {
+      $scope.model = _.cloneDeep(model.files);
+      init();
+    });
   }
 
   PersonScannedDocCtrl.$inject = [
