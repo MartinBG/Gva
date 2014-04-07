@@ -95,20 +95,26 @@ module.exports = function (grunt) {
   });
   
   grunt.registerTask('setVersion', function() {
-    var done = this.async();
+    var done = this.async(),
+        version = grunt.config.get('pkg').version;
+    
+    if (!version || !/^\d+\.\d+\.\d+\.\d+$/.test(version)) {
+      grunt.log.error('package.json does not have version in the format major.minor.build.revision!');
+      done(false);
+      return;
+    }
+    
     grunt.util.spawn({
       cmd: 'git',
       args: ['rev-parse', 'HEAD']
     }, function (error, result) {
       var revision,
-          version,
           fullVersion;
       if (error) {
         grunt.log.error(error);
         done(false);
       } else {
         revision = result.toString().substr(0, 6);
-        version = grunt.config.get('pkg').version || '1.0.0';
         fullVersion = version + '#' + revision;
         grunt.config.set('setAssemblyVersion.options.version', version);
         grunt.config.set('setAssemblyVersion.options.fullVersion', fullVersion);
