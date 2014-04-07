@@ -20,6 +20,7 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -30,6 +31,7 @@ namespace Gva.Api.Controllers
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IPersonRepository personRepository;
+        private IOrganizationRepository organizationRepository;
         private IDocRepository docRepository;
         private ICorrespondentRepository correspondentRepository;
         private IApplicationRepository applicationRepository;
@@ -40,6 +42,7 @@ namespace Gva.Api.Controllers
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IPersonRepository personRepository,
+            IOrganizationRepository organizationRepository,
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
@@ -50,6 +53,7 @@ namespace Gva.Api.Controllers
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
+            this.organizationRepository = organizationRepository;
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
@@ -77,6 +81,7 @@ namespace Gva.Api.Controllers
             var application = this.applicationRepository.Find(id,
                 e => e.GvaAppLotFiles.Select(f => f.DocFile),
                 e => e.GvaAppLotFiles.Select(f => f.GvaLotFile),
+                e => e.Lot.Set,
                 e => e.Doc.DocFiles);
 
             if (application == null)
@@ -86,7 +91,16 @@ namespace Gva.Api.Controllers
 
             ApplicationDO returnValue = new ApplicationDO(application);
 
-            returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
+            if (application.Lot.Set.Alias == "Person")
+            {
+                returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
+            }
+            else if (application.Lot.Set.Alias == "Organization")
+            {
+                returnValue.Organization = new OrganizationDO(this.organizationRepository.GetOrganization(application.LotId));
+            }
+
+            
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(e => e.GvaLotFile.LotPart.SetPart)

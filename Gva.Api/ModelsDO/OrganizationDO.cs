@@ -4,17 +4,16 @@ namespace Gva.Api.ModelsDO
 {
     public class OrganizationDO
     {
-
-        public OrganizationDO(GvaViewOrganization organizationData)
+        public OrganizationDO(GvaViewOrganization o)
         {
-            this.Id = organizationData.LotId;
-            this.Name = organizationData.Name;
-            this.CAO = organizationData.CAO;
-            this.Uin = organizationData.Uin;
-            this.Valid = organizationData.Valid;
-            this.OrganizationType = organizationData.OrganizationType;
-            this.DateValidTo = organizationData.DateValidTo;
-            this.DateCAOValidTo = organizationData.DateCAOValidTo;
+            this.Id = o.LotId;
+            this.Name = o.Name;
+            this.CAO = o.CAO;
+            this.Uin = o.Uin;
+            this.Valid = o.Valid;
+            this.OrganizationType = o.OrganizationType;
+            this.DateValidTo = o.DateCAOValidTo;
+            this.DateCAOValidTo = o.DateValidTo;
         }
 
         public int Id { get; set; }

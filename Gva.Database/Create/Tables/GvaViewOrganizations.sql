@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewOrganizations] (
-    [LotId] INT           NOT NULL,
+    [LotId]                INT           NOT NULL,
     [Name]                 NVARCHAR(100) NOT NULL,
     [CAO]                  NVARCHAR(50)  NULL,
     [Valid]                NVARCHAR(50)  NOT NULL,

@@ -17,5 +17,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
             int? limit = null);
 
         GvaViewOrganization GetOrganization(int organizationId);
+
+        void AddOrganization(GvaViewOrganization organization);
     }
 }

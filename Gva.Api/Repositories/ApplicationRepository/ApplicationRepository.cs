@@ -29,15 +29,21 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             var applicationsJoin =
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
-                join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId
-                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId
-                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va.LotId equals p.LotId
+                join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId into part1
+                from part2 in part1.DefaultIfEmpty()
+                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId into va1
+                from va2 in va1.DefaultIfEmpty()
+                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
+                from p2 in p1.DefaultIfEmpty()
+                join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>() on va2.LotId equals o.LotId into o1
+                from o2 in o1.DefaultIfEmpty()
                 select new
                 {
                     GApplication = a,
-                    GApplicationPart = part,
-                    GViewApplication = va,
-                    GViewPerson = p
+                    GApplicationPart = part2,
+                    GViewApplication = va2,
+                    GViewPerson = p2,
+                    GViewOrganization = o2
                 };
 
             var predicate = PredicateBuilder.True(new
@@ -45,7 +51,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 GApplication = new GvaApplication(),
                 GApplicationPart = new Part(),
                 GViewApplication = new GvaViewApplication(),
-                GViewPerson = new GvaViewPerson()
+                GViewPerson = new GvaViewPerson(),
+                GViewOrganization = new GvaViewOrganization()
             });
 
             predicate = predicate
@@ -65,14 +72,17 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     ApplicationId = e.GApplication.GvaApplicationId,
                     DocId = e.GApplication.DocId,
                     AppPartId = e.GApplication.GvaAppLotPartId,
-                    AppPartIndex = e.GApplicationPart.Index,
-                    AppPartRequestDate = e.GViewApplication.RequestDate,
-                    AppPartDocumentNumber = e.GViewApplication.DocumentNumber,
-                    AppPartApplicationTypeName = e.GViewApplication.ApplicationTypeName,
-                    AppPartStatusName = e.GViewApplication.StatusName,
-                    PersonId = e.GViewPerson.LotId,
-                    PersonLin = e.GViewPerson.Lin,
-                    PersonNames = e.GViewPerson.Names
+                    AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : null,
+                    AppPartRequestDate = e.GViewApplication != null ? e.GViewApplication.RequestDate : null,
+                    AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,
+                    AppPartApplicationTypeName = e.GViewApplication != null ? e.GViewApplication.ApplicationTypeName : null,
+                    AppPartStatusName = e.GViewApplication != null ? e.GViewApplication.StatusName : null,
+                    PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,
+                    PersonLin = e.GViewPerson != null ? e.GViewPerson.Lin : null,
+                    PersonNames =  e.GViewPerson != null ? e.GViewPerson.Names : null,
+                    GvaOrganizationId = e.GViewOrganization != null ? (int?)e.GViewOrganization.LotId : null,
+                    GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,
+                    GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null
                 })
                 .ToList();
         }

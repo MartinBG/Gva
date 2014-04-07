@@ -24,6 +24,7 @@ namespace Gva.Api.ModelsDO
                 this.DocId = g.DocId;
                 this.LotId = g.LotId;
                 this.GvaAppLotPartId = g.GvaAppLotPartId;
+                this.LotSetAlias = g.Lot.Set.Alias;
             }
         }
 
@@ -34,6 +35,7 @@ namespace Gva.Api.ModelsDO
 
         public string LotSetAlias { get; set; }
         public PersonDO Person { get; set; }
+        public OrganizationDO Organization { get; set; }
 
         public List<ApplicationDocRelationDO> AppDocCase { get; set; }
 

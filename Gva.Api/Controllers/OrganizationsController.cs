@@ -65,8 +65,9 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetOrganization(int lotId)
         {
             var organization = this.organizationRepository.GetOrganization(lotId);
-            OrganizationDO organizationDO = new OrganizationDO(organization);
-            return Ok(organizationDO);
+            OrganizationDO returnValue = new OrganizationDO(organization);
+
+            return Ok(returnValue);
         }
 
         [Route("{lotId}/organizationInventory")]

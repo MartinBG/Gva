@@ -19,6 +19,10 @@ namespace Gva.Api.ModelsDO
         public string PersonLin { get; set; }
         public string PersonNames { get; set; }
 
+        public int? GvaOrganizationId { get; set; }
+        public string GvaOrganizationName { get; set; }
+        public string GvaOrganizationUin { get; set; }
+
         public string Description
         {
             get
@@ -26,6 +30,10 @@ namespace Gva.Api.ModelsDO
                 if (PersonId.HasValue)
                 {
                     return string.Format("{0} - {1}", this.PersonLin, this.PersonNames);
+                }
+                else if (GvaOrganizationId.HasValue)
+                {
+                    return string.Format("{0} - {1}", this.GvaOrganizationUin, this.GvaOrganizationName);
                 }
 
                 return "";
