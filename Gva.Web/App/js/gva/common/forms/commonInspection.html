@@ -13,7 +13,7 @@
           <sc-nomenclature  ng-model="model.auditPart" name="auditPart" alias="'auditParts'"></sc-nomenclature>
         </div>
       </div>
-<!--      <div class="row">
+      <div class="row">
         <div class="form-group col-sm-2" sc-has-error="auditReason">
           <label class="control-label" l10n-text="common.inspectionDirective.auditReason"></label>
           <sc-validation-error field-name="auditReason" validations="{required: null}"></sc-validation-error>
@@ -29,7 +29,7 @@
           <sc-validation-error field-name="auditState" validations="{required: null}"></sc-validation-error>
           <sc-nomenclature ng-model="model.auditState" name="auditState" alias="'auditStates'" ng-required="true"></sc-nomenclature>
         </div>
-      </div>-->
+      </div>
       <div class="row">
         <div class="form-group col-sm-6 col-md-6" sc-has-error="subject">
           <label class="control-label" l10n-text="common.inspectionDirective.subject"></label>
@@ -58,10 +58,20 @@
           <sc-date class="col-sm-4 pull-right col-md-3" ng-model="model.inspectionTo"></sc-date>
         </div>
       </div>
-       <div class="row" ng-if="$parent.organizationInspection">
-         <div class="form-group col-sm-3 col-md-4">
-          <label class="control-label" l10n-text="common.inspectionDirective.recommendationsReport"></label>
-          <sc-text ng-model="model.recommendationsReport"></sc-text>
+      <div class="row form-group" ng-if="$parent.organizationInspection">
+        <div class="form-group  col-sm-10 col-md-10">
+          <label class="control-label" l10n-text="common.inspectionDirective.recommendationReports"></label>
+          <sc-datatable items="model.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+            <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+              <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+            </sc-column>
+            <sc-column data="recommendationPartName" title="common.inspectionDirective.recommendationPart">
+            </sc-column>
+            <sc-column data="formDate" title="common.inspectionDirective.formDate" type="date">
+            </sc-column>
+            <sc-column data="formText" title="common.inspectionDirective.formText">
+            </sc-column>
+          </sc-datatable>
         </div>
       </div>
     </div>

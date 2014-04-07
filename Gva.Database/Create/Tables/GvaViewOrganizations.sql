@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[GvaViewOrganizations] (
 GO
 
 exec spDescTable  N'GvaViewOrganizations', N'Организации.'
-exec spDescColumn N'GvaViewOrganizations', N'LotId', N'Идентификатор на партида на организация.'
+exec spDescColumn N'GvaViewOrganizations', N'LotId'                   , N'Идентификатор на партида на организация.'
 exec spDescColumn N'GvaViewOrganizations', N'Name'                    , N'Наменование.'
 exec spDescColumn N'GvaViewOrganizations', N'CAO'                     , N'CAO номер.'
 exec spDescColumn N'GvaViewOrganizations', N'Valid'                   , N'Валидност.'

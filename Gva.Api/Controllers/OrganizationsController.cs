@@ -246,11 +246,52 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}")]
         public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}")]
+        public IHttpActionResult PostNewRecommendationPart(int lotId, string path, dynamic content)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+         
+            this.fileRepository.AddFileReferences(partVersion, content.files);
+
+            foreach (int auditPartIndex in content.part.includedAudits)
+            {
+                
+                dynamic audit = base.GetFilePart(lotId, "organizationInspections/" + auditPartIndex, null);
+                audit.Content.Part.recommendationReports = audit.Content.Part.recommendationReports as JArray;
+
+                string recommendationPartName = content.part.recommendationPart != null ? content.part.recommendationPart.name : null;
+
+                if (audit.Content.Part.recommendationReports == null)
+                {
+                    audit.Content.Part.recommendationReports = new JArray();
+                }
+
+                audit.Content.Part.recommendationReports.Add(new JObject(
+                      new JProperty("partIndex", partVersion.Part.Index),
+                      new JProperty("formDate", content.part.formDate),
+                      new JProperty("formText", content.part.formText),
+                      new JProperty("recommendationPartName", recommendationPartName)));
+
+                PartVersion auditPartVersion = lot.UpdatePart("organizationInspections/" + auditPartIndex, audit.Content.Part, userContext);
+
+                this.fileRepository.AddFileReferences(auditPartVersion, audit.Content.Files);
+
+            }
+
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationData$)}"),
@@ -265,12 +306,56 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
         public IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
+        public IHttpActionResult PostRecommendationPart(int lotId, string path, dynamic content)
+        {
+            base.PostPart(lotId, path, content as JObject);
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            foreach (int auditPartIndex in content.part.includedAudits)
+            {
+
+                dynamic audit = base.GetFilePart(lotId, "organizationInspections/" + auditPartIndex, null);
+
+                string recommendationPartName = content.part.recommendationPart != null ? content.part.recommendationPart.name : null;
+                foreach(dynamic report in audit.Content.Part.recommendationReports)
+                {
+                    if (report.partIndex == content.partIndex) 
+                    {
+                        return Ok();
+                    }
+                }
+
+                if (audit.Content.Part.recommendationReports == null)
+                {
+                    audit.Content.Part.recommendationReports = new JArray();
+                }
+
+                audit.Content.Part.recommendationReports.Add(new JObject(
+                        new JProperty("partIndex", content.partIndex),
+                        new JProperty("formDate", content.part.formDate),
+                        new JProperty("formText", content.part.formText),
+                        new JProperty("recommendationPartName", recommendationPartName)));
+
+               
+                PartVersion partVersion = lot.UpdatePart("organizationInspections/" + auditPartIndex, audit.Content.Part, userContext);
+
+                this.fileRepository.AddFileReferences(partVersion, audit.Content.Files);
+
+                lot.Commit(userContext, lotEventDispatcher);
+            }
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route(@"{lotId}/{path:regex(^organizationApprovals$)}")]

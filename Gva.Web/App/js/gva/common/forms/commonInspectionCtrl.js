@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function CommonInspectionCtrl($scope) {
+  function CommonInspectionCtrl($scope, $state, $stateParams) {
     $scope.watchList = [];
 
     $scope.deleteExaminer = function (examiner) {
@@ -58,7 +58,15 @@
       $scope.model.disparities.splice(index, 1);
       $scope.watchList[index]();
     };
+
+    $scope.viewRecommendation = function (recommendation) {
+      return $state.go('root.organizations.view.recommendations.edit', {
+        id: $stateParams.id,
+        ind: recommendation.partIndex
+      });
+    };
   }
+  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams'];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));

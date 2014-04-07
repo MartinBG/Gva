@@ -58,7 +58,11 @@
             noAvailableExaminers: 'Няма намерени резултати'
           },
           auditPart: 'Част',
-          recommendationsReport: 'Доклад от препоръки свързан с одит'
+          recommendationReports: 'Доклади от препоръки свързани с одит:',
+          recommendationPart: 'Тип',
+          formText: '№ на изменението',
+          formDate:'Форма за заявен обхват на одобрението от дата'
+
         }
       },
       airports: {
