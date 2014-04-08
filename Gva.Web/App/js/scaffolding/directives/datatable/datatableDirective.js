@@ -61,7 +61,8 @@ Usage <sc-datatable items="data"
             tableHeader.remove();
           }
 
-          var headerElement = $('<tr></tr>');
+          tableHeader = $('<thead></thead>');
+          var headerRow = $('<tr></tr>');
 
           _($scope.columnDefs).forEach(function (columnDef, index) {
             if (!columnDef.visible) {
@@ -83,8 +84,8 @@ Usage <sc-datatable items="data"
                 headerCell.on('click', function () {
                   $scope.$apply(function () {
                     if (sortingSpan.hasClass('glyphicon-sort-by-attributes')) {
-                      $('th.sorting span', headerElement).removeClass();
-                      $('th.sorting span', headerElement).addClass('glyphicon glyphicon-sort');
+                      $('th.sorting span', headerRow).removeClass();
+                      $('th.sorting span', headerRow).addClass('glyphicon glyphicon-sort');
 
                       sortingSpan.removeClass();
                       sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes-alt');
@@ -92,8 +93,8 @@ Usage <sc-datatable items="data"
                       $scope.setSortingData(index, 'desc');
                     }
                     else {
-                      $('th.sorting span', headerElement).removeClass();
-                      $('th.sorting span', headerElement).addClass('glyphicon glyphicon-sort');
+                      $('th.sorting span', headerRow).removeClass();
+                      $('th.sorting span', headerRow).addClass('glyphicon glyphicon-sort');
 
                       sortingSpan.removeClass();
                       sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes');
@@ -105,11 +106,11 @@ Usage <sc-datatable items="data"
               }
             }
 
-            headerElement.append(headerCell);
+            headerRow.append(headerCell);
           });
 
-          dataTable.append(headerElement);
-          tableHeader = headerElement;
+          tableHeader.append(headerRow);
+          dataTable.append(tableHeader);
         };
 
         var destroyRows = function () {

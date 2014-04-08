@@ -28,7 +28,9 @@
       datatablePage.loadManyEntriesInTable2();
       datatablePage.datatable2.setFilterInput('iztrit');
       expect(datatablePage.datatable2.getInfoText())
-        .toEqual('Намерени общo 1,024 резултата (от 1 до 1,024) (филтрирани от 4,096 записа)');
+        .toEqual('Намерени общo 1,024 резултата (от 1 до 1,024)');
+      expect(datatablePage.datatable2.getFilteredText())
+        .toEqual('(филтрирани от 4,096 записа)');
     });
 
     it('should load 4096 users', function() {
@@ -93,7 +95,7 @@
 
     it('correct sorting settings should be set by sc-datatable parameters', function () {
       datatablePage.datatable2.getColumnsClasses().then(function (columnsClasses) {
-        expect(columnsClasses[0]).toMatch(/sorting_disabled/);
+        expect(columnsClasses[1]).toMatch(/sorting/);
       });
     });
     
@@ -114,9 +116,10 @@
       ' and many users are loaded',
       function () {
         datatablePage.loadManyEntriesInTable3().then(function () {
-          datatablePage.datatable3.clickHeader('isActive');
-          expect(datatablePage.datatable3.getRow(3069))
-            .toEqual(['peter', 'Role1, Role2', 'Да', 'Редакция']);
+          datatablePage.datatable3.clickHeader('isActive').then(function () {
+            expect(datatablePage.datatable3.getRow(3096))
+              .toEqual(['peter', 'Role1, Role2', 'Да', 'Редакция']);
+          });
         });
       });
    

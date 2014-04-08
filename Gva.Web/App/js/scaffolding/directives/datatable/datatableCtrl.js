@@ -157,6 +157,9 @@
     $scope.setItems = function (items) {
       $scope.items = [];
       $scope.currentPage = 1;
+      if (!$scope.pageable) {
+        $scope.pageSize = items.length;
+      }
 
       for (var i = 0, l1 = items.length; i < l1; i++) {
         var mappedItem = [];

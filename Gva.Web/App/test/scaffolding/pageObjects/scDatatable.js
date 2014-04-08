@@ -12,7 +12,7 @@
 
   ScDatatable.prototype.getColumn = function (columnName) {
     return this.element.findElements(
-      by.css('.dataTables_scrollBody table tbody td.scdt-' + columnName)
+      by.css('.table tbody td.scdt-' + columnName)
     ).then(function (cells) {
       return Q.all(_.map(cells, function (cell) {
         return cell.getText();
@@ -26,7 +26,7 @@
     });
 
     return this.element.findElements(
-      by.css('.dataTables_scrollBody table tbody tr')
+      by.css('.table tbody tr')
     ).then(function(rows) {
       return Q.all(_.map(rows, function (row) {
         return row.findElements(by.css('td'));
@@ -60,12 +60,12 @@
 
   ScDatatable.prototype.getRowButtons = function (number) {
     return this.element.findElements(
-      by.css('.dataTables_scrollBody table tbody tr:nth-child(' + number + ') button'));
+      by.css('.table tbody tr:nth-child(' + number + ') button'));
   };
 
   ScDatatable.prototype.getRow = function (number) {
     return this.element.findElements(
-      by.css('.dataTables_scrollBody table tbody tr:nth-child(' + number + ') td')
+      by.css('.table tbody tr:nth-child(' + number + ') td')
     ).then(function(columns) {
       return Q.all(_.map(columns, function (cell) {
         return cell.getText();
@@ -75,7 +75,7 @@
 
   ScDatatable.prototype.getHeaders = function () {
     return this.element.findElements(
-      by.css('.dataTables_scrollHeadInner table thead tr th')
+      by.css('.table thead tr th')
     ).then(function(columns) {
       return Q.all(_.map(columns, function (column) {
         return column.getText();
@@ -85,13 +85,12 @@
 
   ScDatatable.prototype.clickHeader = function (headerName) {
     return this.element.findElements(
-      by.css('.dataTables_scrollHeadInner table thead tr th')
+      by.css('.table thead tr th')
     ).then(function (columns) {
       return Q.all(_.map(columns, function (column) {
         column.getAttribute('class').then(function (classNames) {
           if (_.contains(classNames.split(' '), 'scdt-' + headerName)) {
-            column.click();
-            return;
+            return column.click();
           }
         });
       }));
@@ -100,7 +99,7 @@
 
   ScDatatable.prototype.getColumnsClasses = function () {
     return this.element.findElements(
-      by.css('.dataTables_scrollHeadInner table thead tr th')
+      by.css('.table thead tr th')
     ).then(function (columns) {
       return Q.all(_.map(columns, function (column) {
         return column.getAttribute('class');
@@ -109,7 +108,7 @@
   };
 
   ScDatatable.prototype.setLengthFilterOption = function (number) {
-    var cssOptionSelector = ' .dataTables_length select' +
+    var cssOptionSelector = 'select' +
       ' option:nth-child(' + (number + 1) + ')';
     this.element.findElement(by.css(cssOptionSelector)).click();
   };
@@ -126,12 +125,12 @@
 
   ScDatatable.prototype.goToPage = function (pageNumber) {
     this.element
-      .findElement(by.css(' ul[class=pagination] li:nth-child(' + (pageNumber + 1) + ') a'))
+      .findElement(by.css('.pagination li:nth-child(' + (pageNumber + 1) + ') a'))
       .click();
   };
 
   ScDatatable.prototype.filterInput = function () {
-    return this.element.findElement(by.css('div[class=dataTables_filter] input'));
+    return this.element.findElement(by.css('input[ng-model="filter"]'));
   };
 
   ScDatatable.prototype.isHideColumnButtonDisplayed = function () {
@@ -154,12 +153,16 @@
   };
 
   ScDatatable.prototype.setFilterInput = function (text) {
-    return this.element.findElement(by.css('div[class=dataTables_filter] input'))
+    return this.element.findElement(by.css('input[ng-model="filter"]'))
     .sendKeys(text);
   };
 
   ScDatatable.prototype.getInfoText = function () {
-    return this.element.findElement(by.css('div[class=dataTables_info]')).getText();
+    return this.element.findElement(by.css('.datatable-info-text')).getText();
+  };
+
+  ScDatatable.prototype.getFilteredText = function () {
+    return this.element.findElement(by.css('.datatable-filtered-text')).getText();
   };
 
   module.exports = ScDatatable;
