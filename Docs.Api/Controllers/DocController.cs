@@ -294,17 +294,26 @@ namespace Docs.Api.Controllers
                             .FirstOrDefault(e => e.DocId == rootId.Value);
 
                         item.CaseDocRelation = new DocRelationDO(rootDocRelation);
+
+                        var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
+                            .Include(e => e.Correspondent.CorrespondentType)
+                            .Where(e => e.DocId == rootId.Value)
+                            .ToList();
+
+                        item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
                     }
+                }
+                else
+                {
+                    var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
+                        .Include(e => e.Correspondent.CorrespondentType)
+                        .Where(e => e.DocId == item.DocId)
+                        .ToList();
+
+                    item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
                 }
 
                 item.SetIsRead(docHasReadsForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
-
-                var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
-                    .Include(e => e.Correspondent.CorrespondentType)
-                    .Where(e => e.DocId == item.DocId)
-                    .ToList();
-
-                item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
             }
 
             StringBuilder sb = new StringBuilder();

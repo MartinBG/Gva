@@ -201,7 +201,8 @@
           docSubject: 'Относно',
           docDirectionName: '',
           docStatusName: 'Статус',
-          correspondentName: 'Кореспондент'
+          correspondentName: 'Кореспондент',
+          kase: 'Преписка'
         },
         newDoc: {
           kontinue: 'Продължи',

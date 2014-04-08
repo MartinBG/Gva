@@ -17,18 +17,11 @@
 
 
 <div class="panel">
-    <sc-tabs tab-list="{
+  <sc-tabs tab-list="{
       'Текущи преписки': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'current',
-          ds: undefined
-        }
-      },
-      'Нова поща': {
-        state: 'root.docs.search',
-        stateParams: {
-          filter: 'new',
           ds: undefined
         }
       },
@@ -84,25 +77,54 @@
 
   <div class="tab-content">
 
-    <div ng-if="!!msg"><p class="alert alert-info" ng-bind-html="msg"></p></div>
+    <div ng-if="!!msg">
+      <p class="alert alert-info" ng-bind-html="msg"></p>
+    </div>
 
-    <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-      <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    </sc-column>
-    <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
-    </sc-column>
-    <sc-column data="regUri" title="docs.search.regUri">
-    </sc-column>
-    <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
-    </sc-column>
-    <sc-column data="docDirectionName" title="docs.search.docDirectionName">
-    </sc-column>
-    <sc-column data="docStatusName" title="docs.search.docStatusName">
-    </sc-column>
-    <sc-column data="correspondentNames" title="docs.search.correspondentName">
-    </sc-column>
-  </sc-datatable>
+    <div ng-show="!(filters.filter === 'manage' || filters.filter === 'control')">
+      <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+        </sc-column>
+        <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
+        </sc-column>
+        <sc-column data="regUri" title="docs.search.regUri">
+        </sc-column>
+        <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        </sc-column>
+        <sc-column data="docDirectionName" title="docs.search.docDirectionName">
+        </sc-column>
+        <sc-column data="docStatusName" title="docs.search.docStatusName">
+        </sc-column>
+        <sc-column data="correspondentNames" title="docs.search.correspondentName">
+        </sc-column>
+      </sc-datatable>
+    </div>
+
+    <div ng-show="filters.filter === 'manage' || filters.filter === 'control'">
+      <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+        </sc-column>
+        <sc-column width="100" data="caseDocRelation.docDataHtml" title="docs.search.kase">
+        </sc-column>
+        <sc-column width="100" data="caseDocRelation.docDescriptionHtml">
+        </sc-column>
+        <sc-column data="correspondentNames" title="docs.search.correspondentName">
+        </sc-column>
+        <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
+        </sc-column>
+        <sc-column data="regUri" title="docs.search.regUri">
+        </sc-column>
+        <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        </sc-column>
+        <sc-column data="docDirectionName" title="docs.search.docDirectionName">
+        </sc-column>
+        <sc-column data="docStatusName" title="docs.search.docStatusName">
+        </sc-column>
+      </sc-datatable>
+    </div>
+
     <div class="clear"></div>
   </div>
 </div>
