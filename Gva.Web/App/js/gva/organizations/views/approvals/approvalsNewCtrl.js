@@ -17,9 +17,9 @@
     };
 
     $scope.save = function () {
-      return $scope.organizationApprovalForm.$validate()
+      return $scope.newApprovalForm.$validate()
         .then(function () {
-          if ($scope.organizationApprovalForm.$valid) {
+          if ($scope.newApprovalForm.$valid) {
             return OrganizationApproval
               .save({ id: $stateParams.id }, $scope.model).$promise
               .then(function () {

@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,24 @@
     OrganizationData,
     organizationData
   ) {
+    var originalOrganizationData = _.cloneDeep(organizationData);
+
     $scope.organizationData = organizationData;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationData = _.cloneDeep(originalOrganizationData);
+    };
 
     $scope.save = function () {
-      return $scope.organizationDataForm.$validate()
+      return $scope.editOrganizationForm.$validate()
       .then(function () {
-        if ($scope.organizationDataForm.$valid) {
+        if ($scope.editOrganizationForm.$valid) {
           return OrganizationData
           .save({ id: $stateParams.id }, $scope.organizationData)
           .$promise
@@ -23,10 +35,6 @@
           });
         }
       });
-    };
-
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view');
     };
   }
 

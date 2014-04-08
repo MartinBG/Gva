@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,8 +9,20 @@
     OrganizationDocumentApplication,
     organizationDocumentApplication
     ) {
+    var originalApplication = _.cloneDeep(organizationDocumentApplication);
 
     $scope.organizationDocumentApplication = organizationDocumentApplication;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationDocumentApplication.part = _.cloneDeep(originalApplication.part);
+      $scope.$broadcast('cancel', originalApplication);
+    };
 
     $scope.save = function () {
       $scope.editDocumentApplicationForm.$validate()
@@ -27,8 +39,12 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.documentApplications.search');
+    $scope.deleteApplication = function () {
+      return OrganizationDocumentApplication
+        .remove({ id: $stateParams.id, ind: organizationDocumentApplication.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.organizations.view.documentApplications.search');
+        });
     };
   }
 

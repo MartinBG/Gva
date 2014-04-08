@@ -12,10 +12,15 @@
     $scope.certificate = certificate;
 
     $scope.save = function () {
-      return OrganizationCertGroundServiceOperator
-        .save({ id: $stateParams.id }, $scope.certificate).$promise
+      return $scope.newCertGroundServiceOperatorForm.$validate()
         .then(function () {
-          return $state.go('root.organizations.view.certGroundServiceOperators.search');
+          if ($scope.newCertGroundServiceOperatorForm.$valid) {
+            return OrganizationCertGroundServiceOperator
+              .save({ id: $stateParams.id }, $scope.certificate).$promise
+              .then(function () {
+                return $state.go('root.organizations.view.certGroundServiceOperators.search');
+              });
+          }
         });
     };
 

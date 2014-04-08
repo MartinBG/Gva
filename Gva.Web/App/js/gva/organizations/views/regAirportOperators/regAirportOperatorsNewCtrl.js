@@ -12,9 +12,9 @@
     $scope.organizationRegAirportOperator = organizationRegAirportOperator;
 
     $scope.save = function () {
-      return $scope.organizationRegAirportOperatorForm.$validate()
+      return $scope.newRegAirportOperatorForm.$validate()
         .then(function () {
-          if ($scope.organizationRegAirportOperatorForm.$valid) {
+          if ($scope.newRegAirportOperatorForm.$valid) {
             return OrganizationRegAirportOperator
               .save({ id: $stateParams.id }, $scope.organizationRegAirportOperator)
               .$promise

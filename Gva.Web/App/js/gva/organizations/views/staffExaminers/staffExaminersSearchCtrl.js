@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteStaffChecker = function (staffExaminer) {
-      return OrganizationStaffExaminer
-        .remove({ id: $stateParams.id, ind: staffExaminer.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newStaffExaminer = function () {
       return $state.go('root.organizations.view.staffExaminers.new');
     };

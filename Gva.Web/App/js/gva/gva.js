@@ -234,8 +234,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationStaffManagement',
-      templateUrl: 'gva/organizations/forms/organizationStaffManagement.html',
-      controller: 'OrganizationStaffManagementCtrl'
+      templateUrl: 'gva/organizations/forms/organizationStaffManagement.html'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationStaffExaminer',

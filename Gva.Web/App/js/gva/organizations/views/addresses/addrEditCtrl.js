@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,24 @@
     OrganizationAddress,
     organizationAddress
   ) {
+    var originalAddress = _.cloneDeep(organizationAddress);
+
     $scope.organizationAddress = organizationAddress;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationAddress = _.cloneDeep(originalAddress);
+    };
 
     $scope.save = function () {
-      return $scope.organizationAddressForm.$validate()
+      return $scope.editAddressForm.$validate()
       .then(function () {
-        if ($scope.organizationAddressForm.$valid) {
+        if ($scope.editAddressForm.$valid) {
           return OrganizationAddress
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.organizationAddress)
             .$promise
@@ -25,8 +37,13 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.addresses.search');
+    $scope.deleteAddress = function () {
+      return OrganizationAddress.remove({
+        id: $stateParams.id,
+        ind: organizationAddress.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.organizations.view.addresses.search');
+      });
     };
   }
 

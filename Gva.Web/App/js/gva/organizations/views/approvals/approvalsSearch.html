@@ -1,5 +1,8 @@
 ﻿<sc-button name="createBtn" btn-click="newApproval()" text="organizations.approvalSearch.newApproval" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="organizationApprovals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-button name="viewBtn" btn-click="viewAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
   <sc-column data="approval.organizationType.name" title="organizations.approvalSearch.organizationType">
   </sc-column>
   <sc-column data="approval.documentNumber" title="organizations.approvalSearch.documentNumber">
@@ -14,9 +17,6 @@
   </sc-column>
   <sc-column data="approval.approvalState.name" title="organizations.approvalSearch.approvalState">
   </sc-column>
-  <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="viewBtn" btn-click="viewAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-  </sc-column>
   <sc-column sortable="false" title="organizations.approvalSearch.recommendationReport" width="30px">
   </sc-column>
   <sc-column sortable="false" title="organizations.approvalSearch.file" width="30px" has-content="true">
@@ -24,7 +24,4 @@
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>
-</sc-datatable>
-  
-
 </sc-datatable>

@@ -12,9 +12,9 @@
     $scope.organizationStaffExaminer = organizationStaffExaminer;
 
     $scope.save = function () {
-      return $scope.organizationStaffExaminersForm.$validate()
+      return $scope.newStaffExaminer.$validate()
         .then(function () {
-          if ($scope.organizationStaffExaminersForm.$valid) {
+          if ($scope.newStaffExaminer.$valid) {
             return OrganizationStaffExaminer
               .save({ id: $stateParams.id }, $scope.organizationStaffExaminer)
               .$promise

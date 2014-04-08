@@ -12,9 +12,9 @@
     $scope.organizationRegGroundServiceOperator = organizationRegGroundServiceOperator;
 
     $scope.save = function () {
-      return $scope.organizationRegGroundServiceOperatorForm.$validate()
+      return $scope.newRegGroundServiceOperatorForm.$validate()
         .then(function () {
-          if ($scope.organizationRegGroundServiceOperatorForm.$valid) {
+          if ($scope.newRegGroundServiceOperatorForm.$valid) {
             return OrganizationRegGroundServiceOperator
               .save({ id: $stateParams.id }, $scope.organizationRegGroundServiceOperator)
               .$promise

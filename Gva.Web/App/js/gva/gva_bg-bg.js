@@ -1213,7 +1213,6 @@
           search: 'Търси'
         },
         personDataDirective: {
-          title: 'Лични данни',
           lin: 'ЛИН',
           uin: 'ЕГН',
           dateOfBirth: 'Дата на раждане',
@@ -1432,7 +1431,7 @@
           cancel: 'Отказ'
         },
         editPersonDocApplication: {
-          title: 'Редакция на заявление',
+          title: 'Преглед на заявление',
           save: 'Запис',
           cancel: 'Отказ',
           edit: 'Редакция',
@@ -1447,7 +1446,7 @@
           cancel: 'Отказ'
         },
         editPersonData: {
-          title: 'Редакция на лични данни',
+          title: 'Преглед на лични данни',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ'
@@ -1467,7 +1466,7 @@
           cancel: 'Отказ'
         },
         editAddress: {
-          title: 'Редакция на адрес',
+          title: 'Преглед на адрес',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1488,7 +1487,7 @@
           cancel: 'Отказ'
         },
         editStatus: {
-          title: 'Редакция на състояние',
+          title: 'Преглед на състояние',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1509,7 +1508,7 @@
           cancel: 'Отказ'
         },
         editDocumentId: {
-          title: 'Редакция на документ за самоличност',
+          title: 'Преглед на документ за самоличност',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1521,7 +1520,7 @@
           cancel: 'Отказ'
         },
         editDocumentEducation: {
-          title: 'Редакция на обучение',
+          title: 'Преглед на обучение',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1560,7 +1559,7 @@
           cancel: 'Отказ'
         },
         editOther: {
-          title: 'Редакция на документ',
+          title: 'Преглед на документ',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1585,7 +1584,7 @@
           cancel: 'Отказ'
         },
         editMedical: {
-          title: 'Редакция на свидетелство за медицинска годност',
+          title: 'Преглед на свидетелство за медицинска годност',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1609,7 +1608,7 @@
           cancel: 'Отказ'
         },
         editEmployment: {
-          title: 'Редакция на месторабота',
+          title: 'Преглед на месторабота',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1647,7 +1646,7 @@
           file: 'Файл'
         },
         editCheck: {
-          title: 'Редакция на проверка',
+          title: 'Преглед на проверка',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1683,7 +1682,7 @@
           cancel: 'Отказ'
         },
         editDocumentTraining: {
-          title: 'Редакция на обучение',
+          title: 'Преглед на обучение',
           save: 'Запис',
           edit: 'Редакция',
           cancel: 'Отказ',
@@ -1724,7 +1723,7 @@
           cancel: 'Отказ'
         },
         flyingExperienceEdit: {
-          title: 'Редакция на летателен/практически опит',
+          title: 'Преглед на летателен/практически опит',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -1956,10 +1955,13 @@
           edit: 'Редакция'
         },
         newOrganization: {
+          title: 'Нова организация',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOrganization: {
+          title: 'Преглед на данни за организация',
+          edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -1993,10 +1995,14 @@
           file: 'Файл'
         },
         editCertAirportOperator: {
+          title: 'Преглед на лиценз на летищен оператор',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteCertOp: 'Изтрий'
         },
         newCertAirportOperator: {
+          title: 'Нов лиценз на летищен оператор',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -2017,12 +2023,16 @@
           file: 'Преписка (Заявление)'
         },
         newAddress: {
+          title: 'Нов адрес',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAddress: {
+          title: 'Преглед на адрес',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteAddress: 'Изтрий'
         },
         addressSearch: {
           newAddress: 'Нов aдрес',
@@ -2044,12 +2054,16 @@
           planMonth: 'Месец'
         },
         newAuditplan: {
+          title: 'Нов план за одит',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAuditplan: {
+          title: 'Преглед на план за одит',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteAuditplan: 'Изтрий'
         },
         staffManagementSearch: {
           newStaffManagement: 'Нов ръководен персонал',
@@ -2065,12 +2079,16 @@
           file: 'Преписка (Заявление)'
         },
         newStaffManagement: {
+          title: 'Нов ръководен персонал',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editStaffManagement: {
+          title: 'Преглед на ръководен персонал',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteStaffMng: 'Изтрий'
         },
         staffExaminerSearch: {
           newStaffExaminer: 'Нов проверяващи',
@@ -2088,12 +2106,16 @@
           file: 'Преписка (Заявление)'
         },
         newStaffExaminer: {
+          title: 'Нов проверяващ',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editStaffChecker: {
+          title: 'Преглед на проверяващ',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteStaffChecker: 'Изтрий'
         },
         otherSearch: {
           documentNumber: 'Док No',
@@ -2108,12 +2130,16 @@
           newOther: 'Нов документ'
         },
         newOther: {
+          title: 'Нов документ',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOther: {
+          title: 'Преглед на документ',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteDocument: 'Изтрий'
         },
         certGroundServiceOperatorSnoOperationalSearch: {
           newCertGroundServiceOperatorSnoOperational: 'Нов лиценз',
@@ -2132,12 +2158,18 @@
           file: 'Преписка (Заявление)'
         },
         newCertGroundServiceOperatorsSnoOperational: {
+          title: 'Ново удостоверение за експлоатационна годност',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          equipmentForm: 'Съоръжения'
         },
         editCertGroundServiceOperatorsSnoOperational: {
+          title: 'Преглед на удостоверение за експлоатационна годност',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteCertGround: 'Изтрий',
+          equipmentForm: 'Съоръжения'
         },
         certGroundServiceOperatorSearch: {
           newCertGroundServiceOperator: 'Нов лиценз',
@@ -2156,12 +2188,16 @@
           file: 'Преписка (Заявление)'
         },
         newCertGroundServiceOperator: {
+          title: 'Нов лиценз на оператор по наземно обслужване / самообслужване',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editCertGroundServiceOperator: {
+          title: 'Преглед на лиценз на оператор по наземно обслужване / самообслужване',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteCertOp: 'Изтрий'
         },
         inspectionSearch: {
           newInspection: 'Нов одит',
@@ -2226,7 +2262,6 @@
           documentNumber: '№ на документ'
         },
         organizationOtherDirective: {
-          title: 'Друг документ',
           documentNumber: 'Док No',
           documentPersonNumber: 'No в списъка (групов документ)',
           documentDateValidFrom: 'Издаден на',
@@ -2268,12 +2303,16 @@
           revokeCause: 'Причина за отнемане'
         },
         newRegAirportOperator: {
+          title: 'Нов лиценз за летищен оператор',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editRegAirportOperator: {
+          title: 'Редакция на лиценз за летищен оператор',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOperator: 'Изтрий'
         },
         regGroundServiceOperatorSearch: {
           newRegGroundServiceOperator: 'Ново удостоверение',
@@ -2286,12 +2325,16 @@
           revokeCause: 'Причина за отнемане'
         },
         newRegGroundServiceOperator: {
+          title: 'Нов лиценз за оператор по наземно обслужване / самообслужване',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editRegGroundServiceOperator: {
+          title: 'Преглед на лиценз за оператор по наземно обслужване / самообслужване',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOperator: 'Изтрий'
         },
         organizationDocApplicationSearch: {
           newApplication: 'Ново заявление',
@@ -2308,15 +2351,18 @@
           file: 'Файл'
         },
         newOrganizationDocApplication: {
+          title: 'Ново заявление',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOrganizationDocApplication: {
+          title: 'Преглед на заявление',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteApplication: 'Изтрий'
         },
         staffManagementDirective: {
-          title: 'Ръководен персонал',
           auditPartRequirement: 'Изискване',
           planYear: 'Година',
           planMonth: 'Месец',
@@ -2324,17 +2370,14 @@
           person: 'Предложено лице',
           testDate: 'Дата на полагане на писмен тест',
           testScore: 'Оценка от писмен тест',
-          valid: 'Валиден',
-          application: 'Заявление'
+          valid: 'Валиден'
         },
         auditplanDirective: {
-          title: 'План за одит',
           auditPartRequirement: 'Изискване',
           planYear: 'Година',
           planMonth: 'Месец'
         },
         organizationDataDirective: {
-          title: 'Данни за организация',
           name: 'Наименование',
           nameAlt: 'Наименование на поддържащ език',
           code: 'Идентификационен код',
@@ -2357,7 +2400,6 @@
           caseTypes: 'Типове дела'
         },
         organizationAddressDirective: {
-          title: 'Адрес',
           newAddress: 'Нов aдрес',
           addressType: 'Тип',
           valid: 'Валидно',
@@ -2371,7 +2413,6 @@
           email: 'E-мейл адрес'
         },
         certOperatorDirective: {
-          title: 'Лиценз',
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -2401,7 +2442,6 @@
           revokeCause: 'Причина за отнемане'
         },
         equipmentDirective: {
-          title: 'Съоръжения',
           name: 'Наименование',
           id: 'Инвентарен №',
           count: 'Брой',
@@ -2454,7 +2494,6 @@
           }
         },
         staffExaminerDirective: {
-          title: 'Проверяващ',
           newStaffManagement: 'Нов проверяващи',
           nomValueId: 'Идентификатор',
           code: 'Код',
@@ -2545,9 +2584,6 @@
           part: 'Част'
         },
         organizationRegisterDirective: {
-          titleAirportOperator: 'Регистър за издадени лицензи за летищен оператор',
-          titleGroundServiceOperator:
-            'Регистър за издадени лицензи за оператор по наземно обслужване или самообслужване',
           certNumber: '№ на удостоверение',
           airport: 'Летище',
           issueDate: 'Дата на издаване',

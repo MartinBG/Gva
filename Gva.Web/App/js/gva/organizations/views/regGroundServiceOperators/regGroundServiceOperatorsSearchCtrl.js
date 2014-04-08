@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteRegGroundServiceOperator = function (plan) {
-      return OrganizationRegGroundServiceOperator
-        .remove({ id: $stateParams.id, ind: plan.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newRegGroundServiceOperator = function () {
       return $state.go('root.organizations.view.regGroundServiceOperators.new');
     };

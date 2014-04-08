@@ -1,13 +1,21 @@
 ﻿<ng-form name="newDocumentApplicationForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newOrganizationDocApplication.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newOrganizationDocApplication.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newOrganizationDocApplication.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-common-document-application name="organizationDocumentApplicationForm" ng-model="organizationDocumentApplication.part"></gva-common-document-application>
+    <div class="well-sm panel-body">
+      <gva-common-document-application name="organizationDocumentApplicationForm" ng-model="organizationDocumentApplication.part"></gva-common-document-application>
 
-  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentApplication.files"></gva-organization-scanned-document>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newOrganizationDocApplication.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newDocumentApplicationForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newOrganizationDocApplication.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentApplication.files"></gva-organization-scanned-document>
     </div>
   </div>
 </ng-form>

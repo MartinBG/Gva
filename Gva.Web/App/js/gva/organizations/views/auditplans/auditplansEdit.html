@@ -1,11 +1,25 @@
-﻿<ng-form name="editAuditplanForm">
+﻿<ng-form name="editAuditplanForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.editAuditplan.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editAuditplan.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteAuditplan()" text="organizations.editAuditplan.deleteAuditplan"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editAuditplan.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editAuditplan.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-organization-auditplan name="organizationAuditplanForm" ng-model="organizationAuditplan.part"></gva-organization-auditplan>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.editAuditplan.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editAuditplanForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editAuditplan.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-organization-auditplan name="organizationAuditplanForm" ng-model="organizationAuditplan.part" readonly="!editMode"></gva-organization-auditplan>
     </div>
   </div>
 </ng-form>

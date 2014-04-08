@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteCertGroundServiceOperator = function (cert) {
-      return OrganizationCertGroundServiceOperator
-        .remove({ id: $stateParams.id, ind: cert.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertGroundServiceOperator = function () {
       return $state.go('root.organizations.view.certGroundServiceOperators.new');
     };

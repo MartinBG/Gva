@@ -1,13 +1,28 @@
-﻿<ng-form name="certGroundServiceOperatorsSnoOperationalForm">
+﻿<ng-form name="editCertGroundServiceOperatorsSnoOperationalForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.editCertGroundServiceOperatorsSnoOperational.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertGroundServiceOperatorsSnoOperational.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteCert()" text="organizations.editCertGroundServiceOperatorsSnoOperational.deleteCertGround"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertGroundServiceOperatorsSnoOperational.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertGroundServiceOperatorsSnoOperational.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-organization-cert-operator name="editCertGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part"></gva-organization-cert-operator>
+    <div class="well-sm panel-body">
+      <gva-organization-cert-operator name="certGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part" readonly="!editMode"></gva-organization-cert-operator>
 
-  <gva-organization-equipment ng-model="certificate.part" name="organizationEquipmentForm"></gva-organization-equipment>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertGroundServiceOperatorsSnoOperational.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertGroundServiceOperatorsSnoOperational.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <h5 class="form-header" l10n-text="organizations.editCertGroundServiceOperatorsSnoOperational.equipmentForm"></h5>
+      <gva-organization-equipment ng-model="certificate.part" name="organizationEquipmentForm" readonly="!editMode"></gva-organization-equipment>
     </div>
   </div>
 </ng-form>

@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,13 +9,24 @@
     OrganizationCertGroundServiceOperator,
     certificate
     ) {
+    var originalCertificate = _.cloneDeep(certificate);
 
     $scope.certificate = certificate;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.certificate = _.cloneDeep(originalCertificate);
+    };
 
     $scope.save = function () {
-      return $scope.certGroundServiceOperatorForm.$validate()
+      return $scope.editCertGroundServiceOperatorForm.$validate()
         .then(function () {
-          if ($scope.certGroundServiceOperatorForm.$valid) {
+          if ($scope.editCertGroundServiceOperatorForm.$valid) {
             return OrganizationCertGroundServiceOperator
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.certificate)
@@ -27,8 +38,12 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.certGroundServiceOperators.search');
+    $scope.deleteCertGroundServiceOperator = function () {
+      return OrganizationCertGroundServiceOperator
+        .remove({ id: $stateParams.id, ind: certificate.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.organizations.view.certGroundServiceOperators.search');
+        });
     };
   }
 

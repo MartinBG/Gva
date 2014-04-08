@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,24 @@
     OrganizationRegGroundServiceOperator,
     organizationRegGroundServiceOperator
     ) {
+    var originalOperator = _.cloneDeep(organizationRegGroundServiceOperator);
+
     $scope.organizationRegGroundServiceOperator = organizationRegGroundServiceOperator;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationRegGroundServiceOperator = _.cloneDeep(originalOperator);
+    };
 
     $scope.save = function () {
-      return $scope.organizationRegGroundServiceOperatorForm.$validate()
+      return $scope.editRegGroundServiceOperatorForm.$validate()
       .then(function () {
-        if ($scope.organizationRegGroundServiceOperatorForm.$valid) {
+        if ($scope.editRegGroundServiceOperatorForm.$valid) {
           return OrganizationRegGroundServiceOperator
             .save({ id: $stateParams.id, ind: $stateParams.ind },
             $scope.organizationRegGroundServiceOperator)
@@ -26,8 +38,14 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.regGroundServiceOperators.search');
+    $scope.deleteRegGroundServiceOperator = function () {
+      return OrganizationRegGroundServiceOperator
+        .remove({
+          id: $stateParams.id,
+          ind: organizationRegGroundServiceOperator.partIndex
+        }).$promise.then(function () {
+          return $state.go('root.organizations.view.regGroundServiceOperators.search');
+        });
     };
   }
 

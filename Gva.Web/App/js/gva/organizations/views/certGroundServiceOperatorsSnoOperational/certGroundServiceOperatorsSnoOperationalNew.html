@@ -1,13 +1,21 @@
-﻿<ng-form name="certGroundServiceOperatorsSnoOperationalForm">
-
-  <gva-organization-cert-operator name="newCertGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part"></gva-organization-cert-operator>
-  
-  <gva-organization-equipment ng-model="certificate.part" name="organizationEquipmentForm"></gva-organization-equipment>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperatorsSnoOperational.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertGroundServiceOperatorsSnoOperational.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+﻿<ng-form name="newCertGroundServiceOperatorsSnoOperationalForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newCertGroundServiceOperatorsSnoOperational.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperatorsSnoOperational.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertGroundServiceOperatorsSnoOperational.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
     </div>
+
+    <div class="well-sm panel-body">
+      <gva-organization-cert-operator name="certGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part"></gva-organization-cert-operator>
+
+      <h5 class="form-header" l10n-text="organizations.newCertGroundServiceOperatorsSnoOperational.equipmentForm"></h5>
+      <gva-organization-equipment ng-model="certificate.part" name="organizationEquipmentForm"></gva-organization-equipment>
   </div>
 </ng-form>

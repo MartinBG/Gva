@@ -11,9 +11,9 @@
     selectedPublisher
   ) {
     $scope.save = function () {
-      return $scope.organizationDocumentOtherForm.$validate()
+      return $scope.newDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.organizationDocumentOtherForm.$valid) {
+          if ($scope.newDocumentOtherForm.$valid) {
             return OrganizationDocumentOther
               .save({ id: $stateParams.id }, $scope.organizationDocumentOther).$promise
               .then(function () {

@@ -12,9 +12,9 @@
     $scope.organizationAddress = organizationAddress;
 
     $scope.save = function () {
-      return $scope.organizationAddressForm.$validate()
+      return $scope.newAddressForm.$validate()
         .then(function () {
-          if ($scope.organizationAddressForm.$valid) {
+          if ($scope.newAddressForm.$valid) {
             return OrganizationAddress
               .save({ id: $stateParams.id }, $scope.organizationAddress).$promise
               .then(function () {

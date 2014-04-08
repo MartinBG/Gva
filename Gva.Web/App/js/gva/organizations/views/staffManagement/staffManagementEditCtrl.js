@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,25 @@
     OrganizationStaffManagement,
     organizationStaffManagement
   ) {
+    var originalStaffManagement = _.cloneDeep(organizationStaffManagement);
+
     $scope.organizationStaffManagement = organizationStaffManagement;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationStaffManagement.part = _.cloneDeep(originalStaffManagement.part);
+      $scope.$broadcast('cancel', originalStaffManagement);
+    };
 
     $scope.save = function () {
-      return $scope.organizationStaffManagementForm.$validate()
+      return $scope.editStaffManagement.$validate()
         .then(function () {
-          if ($scope.organizationStaffManagementForm.$valid) {
+          if ($scope.editStaffManagement.$valid) {
             return OrganizationStaffManagement
               .save({
                 id: $stateParams.id,
@@ -28,8 +41,12 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.staffManagement.search');
+    $scope.deleteStaffManagement = function () {
+      return OrganizationStaffManagement
+        .remove({ id: $stateParams.id, ind: organizationStaffManagement.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.organizations.view.staffManagement.search');
+        });
     };
   }
 

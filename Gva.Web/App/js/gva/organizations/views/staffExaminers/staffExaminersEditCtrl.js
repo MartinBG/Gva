@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,25 @@
     OrganizationStaffExaminer,
     organizationStaffExaminer
   ) {
+    var originalStaffExaminer = _.cloneDeep(organizationStaffExaminer);
+
     $scope.organizationStaffExaminer = organizationStaffExaminer;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationStaffExaminer.part = _.cloneDeep(originalStaffExaminer.part);
+      $scope.$broadcast('cancel', originalStaffExaminer);
+    };
 
     $scope.save = function () {
-      return $scope.organizationStaffExaminersForm.$validate()
+      return $scope.editStaffChecker.$validate()
         .then(function () {
-          if ($scope.organizationStaffExaminersForm.$valid) {
+          if ($scope.editStaffChecker.$valid) {
             return OrganizationStaffExaminer
               .save({
                 id: $stateParams.id,
@@ -28,8 +41,13 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.staffExaminers.search');
+    $scope.deleteStaffChecker = function () {
+      return OrganizationStaffExaminer.remove({
+          id: $stateParams.id,
+          ind: organizationStaffExaminer.partIndex
+        }).$promise.then(function () {
+          return $state.go('root.organizations.view.staffExaminers.search');
+        });
     };
   }
 

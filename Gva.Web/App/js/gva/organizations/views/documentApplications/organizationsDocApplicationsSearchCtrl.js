@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteApplication = function (application) {
-      return OrganizationDocumentApplication
-        .remove({ id: $stateParams.id, ind: application.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newApplication = function () {
       return $state.go('root.organizations.view.documentApplications.new');
     };

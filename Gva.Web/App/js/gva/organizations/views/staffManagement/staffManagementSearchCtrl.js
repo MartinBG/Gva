@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteStaffManagement = function (staffManagement) {
-      return OrganizationStaffManagement
-        .remove({ id: $stateParams.id, ind: staffManagement.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newStaffManagement = function () {
       return $state.go('root.organizations.view.staffManagement.new');
     };

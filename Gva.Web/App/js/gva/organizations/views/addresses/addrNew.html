@@ -1,11 +1,19 @@
-﻿<ng-form name="newAddressForm">
+﻿<ng-form name="newAddressForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newAddress.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newAddress.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newAddress.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-organization-address name="organizationAddressForm" ng-model="organizationAddress.part"></gva-organization-address>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newAddress.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newAddressForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newAddress.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-organization-address name="organizationAddressForm" ng-model="organizationAddress.part"></gva-organization-address>
     </div>
   </div>
 </ng-form>

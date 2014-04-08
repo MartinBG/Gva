@@ -536,7 +536,6 @@
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\gva.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
-    <Content Include="App\js\gva\organizations\forms\organizationStaffManagementCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationDataCtrl.js" />
     <Content Include="App\js\gva\organizations\forms\organizationAddress.html" />
     <Content Include="App\js\gva\organizations\forms\organizationAmendment.html" />

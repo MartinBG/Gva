@@ -12,12 +12,17 @@
 
     $scope.certificate = certificate;
     $scope.save = function () {
-      return OrganizationCertGroundServiceOperatorsSnoOperational
-        .save({ id: $stateParams.id }, $scope.certificate)
-        .$promise
+      return $scope.newCertGroundServiceOperatorsSnoOperationalForm.$validate()
         .then(function () {
-          return $state
-            .go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
+          if ($scope.newCertGroundServiceOperatorsSnoOperationalForm.$valid) {
+            return OrganizationCertGroundServiceOperatorsSnoOperational
+              .save({ id: $stateParams.id }, $scope.certificate)
+              .$promise
+              .then(function () {
+                return $state
+                  .go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
+              });
+          }
         });
     };
 

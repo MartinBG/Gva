@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteAuditplan = function (plan) {
-      return OrganizationAuditplan.remove({ id: $stateParams.id, ind: plan.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newAuditplan = function () {
       return $state.go('root.organizations.view.auditplans.new');
     };

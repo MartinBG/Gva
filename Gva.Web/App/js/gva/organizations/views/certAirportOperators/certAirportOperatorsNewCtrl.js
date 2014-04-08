@@ -13,11 +13,16 @@
     $scope.certificate = certificate;
 
     $scope.save = function () {
-      return CertAirportOperator
-        .save({ id: $stateParams.id }, $scope.certificate)
-        .$promise
+      return $scope.certAirportOperatorForm.$validate()
         .then(function () {
-          return $state.go('root.organizations.view.certAirportOperators.search');
+          if ($scope.certAirportOperatorForm.$valid) {
+            return CertAirportOperator
+              .save({ id: $stateParams.id }, $scope.certificate)
+              .$promise
+              .then(function () {
+                return $state.go('root.organizations.view.certAirportOperators.search');
+              });
+          }
         });
     };
 

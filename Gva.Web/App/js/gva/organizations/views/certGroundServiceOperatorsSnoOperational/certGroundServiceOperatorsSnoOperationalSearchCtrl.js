@@ -20,14 +20,6 @@
       });
     };
 
-    $scope.deleteCertGroundServiceOperatorSnoOperational = function (cert) {
-      return OrganizationCertGroundServiceOperatorsSnoOperational
-        .remove({ id: $stateParams.id, ind: cert.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertGroundServiceOperatorSnoOperational = function () {
       return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.new');
     };

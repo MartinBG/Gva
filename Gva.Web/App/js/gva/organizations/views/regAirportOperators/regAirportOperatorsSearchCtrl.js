@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteRegAirportOperator = function (plan) {
-      return OrganizationRegAirportOperator.remove({ id: $stateParams.id, ind: plan.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newRegAirportOperator = function () {
       return $state.go('root.organizations.view.regAirportOperators.new');
     };

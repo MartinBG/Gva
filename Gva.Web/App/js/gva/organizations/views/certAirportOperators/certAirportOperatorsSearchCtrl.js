@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteCertAirportOperator = function (cert) {
-      return CertAirportOperator.remove({ id: $stateParams.id, ind: cert.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertAirportOperator = function () {
       return $state.go('root.organizations.view.certAirportOperators.new');
     };

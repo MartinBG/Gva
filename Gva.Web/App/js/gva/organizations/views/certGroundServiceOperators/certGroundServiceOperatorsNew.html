@@ -1,11 +1,18 @@
-﻿<ng-form name="certGroundServiceOperatorForm">
-
-  <gva-organization-cert-operator name="newCertGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperator.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!certGroundServiceOperatorForm.$dirty"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertGroundServiceOperator.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+﻿<ng-form name="newCertGroundServiceOperatorForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newCertGroundServiceOperator.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newCertGroundServiceOperator.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newCertGroundServiceOperator.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
     </div>
+
+    <div class="well-sm panel-body">
+      <gva-organization-cert-operator name="certGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-cert-operator>
   </div>
 </ng-form>
