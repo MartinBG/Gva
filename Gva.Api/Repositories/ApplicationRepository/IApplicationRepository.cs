@@ -27,5 +27,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
         void AddGvaLotFile(GvaLotFile gvaLotFile);
 
         void AddGvaAppLotFile(GvaAppLotFile gvaAppLotFile);
+
+        GvaCorrespondent GetGvaCorrespondentByLotId(int lotId);
+
+        void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent);
     }
 }

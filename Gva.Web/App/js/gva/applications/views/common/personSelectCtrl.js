@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ApplicationsPersonSelectCtrl($scope, $state, $stateParams, Person, selectedPerson) {
+  function PersonSelectCtrl($scope, $state, $stateParams, Person, selectedPerson) {
     $scope.filters = {
       lin: null,
       uin: null
@@ -39,7 +39,7 @@
     };
   }
 
-  ApplicationsPersonSelectCtrl.$inject = [
+  PersonSelectCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
@@ -47,5 +47,5 @@
     'selectedPerson'
   ];
 
-  angular.module('gva').controller('ApplicationsPersonSelectCtrl', ApplicationsPersonSelectCtrl);
+  angular.module('gva').controller('PersonSelectCtrl', PersonSelectCtrl);
 }(angular, _));

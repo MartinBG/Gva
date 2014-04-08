@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function ApplicationsOrganizationSelectCtrl(
+  function OrganizationSelectCtrl(
     $scope,
     $state,
     $stateParams,
@@ -24,7 +24,7 @@
     });
 
     $scope.search = function () {
-      $state.go('root.organizations.search', {
+      $state.go('root.applications.new.organizationSelect', {
         CAO: $scope.filters.CAO,
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,
@@ -43,7 +43,7 @@
     };
   }
 
-  ApplicationsOrganizationSelectCtrl.$inject = [
+  OrganizationSelectCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
@@ -52,5 +52,5 @@
   ];
 
   angular.module('gva').controller(
-    'ApplicationsOrganizationSelectCtrl', ApplicationsOrganizationSelectCtrl);
+    'OrganizationSelectCtrl', OrganizationSelectCtrl);
 }(angular, _));

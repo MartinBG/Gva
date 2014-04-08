@@ -41,11 +41,7 @@
     aircraftInspection: [
       function () {
         return {
-          part: {
-            examiners: [{ sortOrder: 1 }],
-            auditDetails: [],
-            disparities: []
-          },
+          part: {},
           files: []
         };
       }

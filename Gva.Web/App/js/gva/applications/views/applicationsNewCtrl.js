@@ -6,9 +6,12 @@
     $q,
     $scope,
     $state,
+    $stateParams,
     Application,
     appModel,
-    selectedPerson
+    selectedPerson,
+    selectedOrganization,
+    selectedAircraft
     ) {
 
     if (selectedPerson.length > 0) {
@@ -16,15 +19,40 @@
         id: selectedPerson.pop()
       };
     }
+    if (selectedOrganization.length > 0) {
+      appModel.organization = {
+        id: selectedOrganization.pop()
+      };
+    }
+    if (selectedAircraft.length > 0) {
+      appModel.aircraft = {
+        id: selectedAircraft.pop()
+      };
+    }
 
     $scope.appModel = appModel;
+    $scope.filter = $stateParams.filter;
+    $scope.setPartAlias = '';
 
     $scope.newPerson = function () {
       return $state.go('root.applications.new.personNew');
     };
-
     $scope.selectPerson = function () {
       return $state.go('root.applications.new.personSelect');
+    };
+
+    $scope.newOrganization = function () {
+      return $state.go('root.applications.new.organizationNew');
+    };
+    $scope.selectOrganization = function () {
+      return $state.go('root.applications.new.organizationSelect');
+    };
+
+    $scope.newAircraft = function () {
+      return $state.go('root.applications.new.aircraftNew');
+    };
+    $scope.selectAircraft = function () {
+      return $state.go('root.applications.new.aircraftSelect');
     };
 
     $scope.cancel = function () {
@@ -36,7 +64,8 @@
       .then(function () {
         if ($scope.appForm.$valid) {
           var newApplication = {
-            lotId: $scope.appModel.person.id,
+            lotSetAlias: $scope.filter,
+            lotId: null,
             doc: {
               docFormatTypeId: $scope.appModel.doc.docFormatTypeId,
               docFormatTypeName: $scope.appModel.doc.docFormatTypeName,
@@ -52,11 +81,24 @@
             }
           };
 
+          if ($scope.filter === 'Person') {
+            newApplication.lotId = $scope.appModel.person.id;
+            $scope.setPartAlias = 'personApplication';
+          }
+          else if ($scope.filter === 'Organization') {
+            newApplication.lotId = $scope.appModel.organization.id;
+            $scope.setPartAlias = 'organizationApplication';
+          }
+          else if ($scope.filter === 'Aircraft') {
+            newApplication.lotId = $scope.appModel.aircraft.id;
+            $scope.setPartAlias = 'aircraftApplication';
+          }
+
           return Application.create(newApplication).$promise.then(function (app) {
             return $state.go('root.applications.edit.case.addPart', {
               id: app.applicationId,
               docId: app.docId,
-              setPartAlias: 'application'
+              setPartAlias: $scope.setPartAlias
             });
           });
         }
@@ -68,9 +110,12 @@
     '$q',
     '$scope',
     '$state',
+    '$stateParams',
     'Application',
     'appModel',
-    'selectedPerson'
+    'selectedPerson',
+    'selectedOrganization',
+    'selectedAircraft'
   ];
 
   ApplicationsNewCtrl.$resolve = {
@@ -101,6 +146,12 @@
       }
     ],
     selectedPerson: function () {
+      return [];
+    },
+    selectedOrganization: function () {
+      return [];
+    },
+    selectedAircraft: function () {
       return [];
     }
   };

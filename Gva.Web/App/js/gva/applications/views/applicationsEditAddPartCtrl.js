@@ -88,7 +88,11 @@
         var docFile,
             doc;
 
-        if ($stateParams.setPartAlias === 'personApplication' && !!$stateParams.docId) {
+        if (($stateParams.setPartAlias === 'personApplication' ||
+          $stateParams.setPartAlias === 'organizationApplication' ||
+          $stateParams.setPartAlias === 'aircraftApplication') &&
+          !!$stateParams.docId
+          ) {
           doc = Application.getDoc({ docId: $stateParams.docId });
         }
         if (!!$stateParams.docFileId) {
@@ -105,7 +109,9 @@
           //add lotId for the applicationDocument form to filter the case type by lot
           res.docFile.lotId = application.lotId;
 
-          if ($stateParams.setPartAlias === 'personApplication') {
+          if ($stateParams.setPartAlias === 'personApplication' ||
+            $stateParams.setPartAlias === 'organizationApplication' ||
+            $stateParams.setPartAlias === 'aircraftApplication') {
             part.documentNumber = res.doc.documentNumber;
             //todo applicationType = docType?
           }

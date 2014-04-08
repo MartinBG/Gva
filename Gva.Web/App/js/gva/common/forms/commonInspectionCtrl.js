@@ -4,6 +4,10 @@
   function CommonInspectionCtrl($scope, $state, $stateParams) {
     $scope.watchList = [];
 
+    $scope.model.examiners = $scope.model.examiners || [{ sortOrder: 1 }];
+    $scope.model.auditDetails = $scope.model.auditDetails || [];
+    $scope.model.disparities = $scope.model.disparities || [];
+
     $scope.deleteExaminer = function (examiner) {
       var index = $scope.model.examiners.indexOf(examiner);
       $scope.model.examiners.splice(index, 1);

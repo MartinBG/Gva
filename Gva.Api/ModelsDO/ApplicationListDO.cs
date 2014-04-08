@@ -23,17 +23,26 @@ namespace Gva.Api.ModelsDO
         public string GvaOrganizationName { get; set; }
         public string GvaOrganizationUin { get; set; }
 
+        public int? GvaAircraftId { get; set; }
+        public string GvaAircraftCategory { get; set; }
+        public string GvaAircraftProducer { get; set; }
+        public string GvaAircraftICAO { get; set; }
+
         public string Description
         {
             get
             {
-                if (PersonId.HasValue)
+                if (this.PersonId.HasValue)
                 {
                     return string.Format("{0} - {1}", this.PersonLin, this.PersonNames);
                 }
-                else if (GvaOrganizationId.HasValue)
+                else if (this.GvaOrganizationId.HasValue)
                 {
                     return string.Format("{0} - {1}", this.GvaOrganizationUin, this.GvaOrganizationName);
+                }
+                else if (this.GvaAircraftId.HasValue)
+                {
+                    return string.Format("{0} - {1} - {2}", this.GvaAircraftProducer, this.GvaAircraftCategory, this.GvaAircraftICAO);
                 }
 
                 return "";

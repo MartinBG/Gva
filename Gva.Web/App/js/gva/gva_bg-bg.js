@@ -1782,11 +1782,19 @@
       },
       applications: {
         edit: {
+          aircraftProducer: 'Производител',
+          aircraftCategory: 'Тип ВС',
+          aircraftICAO: 'ICAO код',
+          organizationName: 'Име',
+          organizationCAO: 'САО',
+          organizationUIN: 'Булстат',
           personName: 'Име',
           personLin: 'ЛИН',
           status: 'Статус',
           docTypeName: 'Относно',
           viewPerson: 'Преглед',
+          viewOrganization: 'Преглед',
+          viewAircraft: 'Преглед',
           unlinkedLotParts:'Документи извън преписката',
           'case': {
             regNumber: 'Тип/№/Дата',
@@ -1846,6 +1854,44 @@
           docStatus: 'Статус',
           docName: 'Име',
           link: 'Свържи'
+        },
+        aircraftNew: {
+          saveAndSelect: 'Запис и избор',
+          cancel: 'Отказ'
+        },
+        aircraftSelect: {
+          aircraft: 'Въздухоплавателно средство',
+          newAircraft: 'Ново ВС',
+          manSN: 'Сериен номер',
+          model: 'Модел',
+          icao: 'ICAO код',
+          outputDate: 'Дата на производство',
+          aircraftCategory: 'Тип ВС',
+          aircraftProducer: 'Производител',
+          engine: 'Двигател',
+          propeller: 'Витло',
+          modifOrWingColor: 'Модификация/Цвят на крило',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избери'
+        },
+        organizationSelect: {
+          organization: 'Организация',
+          newOrganization: 'Нова организация',
+          uin: 'ЕГН',
+          name: 'Наименование',
+          CAO: 'CAO',
+          dateValidTo: 'Валидност до',
+          dateCAOValidTo: 'САО - дата на валидност',
+          valid: 'Валидност',
+          organizationType: 'Тип организация',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избери'
+        },
+        organizationNew: {
+          saveAndSelect: 'Запис и избор',
+          cancel: 'Отказ'
         },
         personSelect: {
           person: 'Заявител',
@@ -2614,12 +2660,20 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
-        'root.applications.new.personSelect': 'Избер на заявител',
+        'root.applications.new.personSelect': 'Избор на заявител',
         'root.applications.new.personNew': 'Нов заявител',
+        'root.applications.new.organizationSelect': 'Избор на организация',
+        'root.applications.new.organizationNew': 'Нова организация',
+        'root.applications.new.aircraftSelect': 'Избор на ВС',
+        'root.applications.new.aircraftNew': 'Ново ВС',
         'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
-        'root.applications.link.personSelect': 'Избер на заявител',
+        'root.applications.link.personSelect': 'Избор на заявител',
         'root.applications.link.personNew': 'Нов заявител',
+        'root.applications.link.organizationSelect': 'Избор на организация',
+        'root.applications.link.organizationNew': 'Нова организация',
+        'root.applications.link.aircraftSelect': 'Избор на ВС',
+        'root.applications.link.aircraftNew': 'Ново ВС',
         'root.applications.edit': 'Редакция',
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',

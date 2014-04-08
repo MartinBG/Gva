@@ -37,13 +37,16 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from p2 in p1.DefaultIfEmpty()
                 join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>() on va2.LotId equals o.LotId into o1
                 from o2 in o1.DefaultIfEmpty()
+                join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>() on va2.LotId equals ac.LotId into ac1
+                from ac2 in ac1.DefaultIfEmpty()
                 select new
                 {
                     GApplication = a,
                     GApplicationPart = part2,
                     GViewApplication = va2,
                     GViewPerson = p2,
-                    GViewOrganization = o2
+                    GViewOrganization = o2,
+                    GViewAircraft = ac2
                 };
 
             var predicate = PredicateBuilder.True(new
@@ -52,7 +55,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 GApplicationPart = new Part(),
                 GViewApplication = new GvaViewApplication(),
                 GViewPerson = new GvaViewPerson(),
-                GViewOrganization = new GvaViewOrganization()
+                GViewOrganization = new GvaViewOrganization(),
+                GViewAircraft = new GvaViewAircraft()
             });
 
             predicate = predicate
@@ -82,7 +86,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     PersonNames =  e.GViewPerson != null ? e.GViewPerson.Names : null,
                     GvaOrganizationId = e.GViewOrganization != null ? (int?)e.GViewOrganization.LotId : null,
                     GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,
-                    GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null
+                    GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null,
+                    GvaAircraftId = e.GViewAircraft != null ? (int?)e.GViewAircraft.LotId : null,
+                    GvaAircraftCategory = e.GViewAircraft != null ? e.GViewAircraft.AircraftCategory : null,
+                    GvaAircraftProducer = e.GViewAircraft != null ? e.GViewAircraft.AircraftProducer : null,
+                    GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
                 })
                 .ToList();
         }
@@ -130,6 +138,18 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public void AddGvaAppLotFile(GvaAppLotFile gvaAppLotFile)
         {
             this.unitOfWork.DbContext.Set<GvaAppLotFile>().Add(gvaAppLotFile);
+        }
+
+        public GvaCorrespondent GetGvaCorrespondentByLotId(int lotId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaCorrespondent>()
+                .Include(e => e.Correspondent)
+                .SingleOrDefault(p => p.LotId == lotId);
+        }
+
+        public void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent)
+        {
+            this.unitOfWork.DbContext.Set<GvaCorrespondent>().Add(gvaCorrespondent);
         }
     }
 }

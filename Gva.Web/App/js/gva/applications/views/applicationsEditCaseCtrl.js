@@ -99,6 +99,27 @@
       else if (value.setPartAlias === 'personApplication') {
         state = 'root.persons.view.documentApplications.edit';
       }
+      else if (value.setPartAlias === 'organizationOther') {
+        state = 'root.organizations.view.documentOthers.edit';
+      }
+      else if (value.setPartAlias === 'organizationApplication') {
+        state = 'root.organizations.view.documentApplications.edit';
+      }
+      else if (value.setPartAlias === 'aircraftOwner') {
+        state = 'root.aircrafts.view.owners.edit';
+      }
+      else if (value.setPartAlias === 'aircraftDebtFM') {
+        state = 'root.aircrafts.view.debtsFM.edit';
+      }
+      else if (value.setPartAlias === 'aircraftOccurrence') {
+        state = 'root.aircrafts.view.occurrences.edit';
+      }
+      else if (value.setPartAlias === 'aircraftApplication') {
+        state = 'root.aircrafts.view.applications.edit';
+      }
+      else if (value.setPartAlias === 'aircraftOther') {
+        state = 'root.aircrafts.view.others.edit';
+      }
 
       return $state.go(state, {
         id: $scope.application.lotId,

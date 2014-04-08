@@ -55,10 +55,5 @@ namespace Gva.Api.Repositories.OrganizationRepository
             return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
                 .SingleOrDefault(p => p.LotId == organizationId);
         }
-
-        public void AddOrganization(GvaViewOrganization organization)
-        {
-            this.unitOfWork.DbContext.Set<GvaViewOrganization>().Add(organization);
-        }
     }
 }

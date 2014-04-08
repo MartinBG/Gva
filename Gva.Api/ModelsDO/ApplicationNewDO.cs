@@ -9,6 +9,8 @@ namespace Gva.Api.ModelsDO
     {
         public int LotId { get; set; }
 
+        public string LotSetAlias { get; set; }
+
         public DocDO Doc { get; set; }
 
         public JObject AppPart { get; set; }

@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function ApplicationsPersonNewCtrl($scope, $state, Person, selectedPerson) {
+  function PersonNewCtrl($scope, $state, Person, selectedPerson) {
 
     $scope.save = function () {
       return $scope.newPersonForm.$validate()
@@ -23,7 +23,7 @@
 
   }
 
-  ApplicationsPersonNewCtrl.$inject = ['$scope', '$state', 'Person', 'selectedPerson'];
+  PersonNewCtrl.$inject = ['$scope', '$state', 'Person', 'selectedPerson'];
 
-  angular.module('gva').controller('ApplicationsPersonNewCtrl', ApplicationsPersonNewCtrl);
+  angular.module('gva').controller('PersonNewCtrl', PersonNewCtrl);
 }(angular));

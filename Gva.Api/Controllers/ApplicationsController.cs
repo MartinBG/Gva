@@ -21,6 +21,8 @@ using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.OrganizationRepository;
+using System.Text.RegularExpressions;
+using Gva.Api.Repositories.AircraftRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -32,6 +34,7 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IPersonRepository personRepository;
         private IOrganizationRepository organizationRepository;
+        private IAircraftRepository aircraftRepository;
         private IDocRepository docRepository;
         private ICorrespondentRepository correspondentRepository;
         private IApplicationRepository applicationRepository;
@@ -43,6 +46,7 @@ namespace Gva.Api.Controllers
             ILotRepository lotRepository,
             IPersonRepository personRepository,
             IOrganizationRepository organizationRepository,
+            IAircraftRepository aircraftRepository,
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
@@ -54,6 +58,7 @@ namespace Gva.Api.Controllers
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
             this.organizationRepository = organizationRepository;
+            this.aircraftRepository = aircraftRepository;
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
@@ -99,8 +104,10 @@ namespace Gva.Api.Controllers
             {
                 returnValue.Organization = new OrganizationDO(this.organizationRepository.GetOrganization(application.LotId));
             }
-
-            
+            else if (application.Lot.Set.Alias == "Aircraft")
+            {
+                returnValue.Aircraft = new AircraftDO(this.aircraftRepository.GetAircraft(application.LotId));
+            }
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(e => e.GvaLotFile.LotPart.SetPart)
@@ -157,12 +164,12 @@ namespace Gva.Api.Controllers
                     .Select(e => new ApplicationLotFileDO(e, null))
                     .ToList();
             }
-            
+
             return Ok(returnValue);
         }
 
         [Route("{id}/parts/linkNew")]
-        public IHttpActionResult PostCreateDocFilePartAndLink(int? id, string setPartAlias, JObject linkNewPart)
+        public IHttpActionResult PostCreatePartAndLink(int? id, string setPartAlias, JObject linkNewPart)
         {
             if (!id.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
@@ -184,7 +191,7 @@ namespace Gva.Api.Controllers
                 PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                if (setPart.Alias == "personpplication")
+                if  (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
@@ -219,7 +226,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{id}/parts/create")]
-        public IHttpActionResult PostCreatePartAndLink(int? id, int? docId, string setPartAlias, JObject newPart)
+        public IHttpActionResult PostCreateDocFilePartAndLink(int? id, int? docId, string setPartAlias, JObject newPart)
         {
             if (!id.HasValue || !docId.HasValue || string.IsNullOrEmpty(setPartAlias))
             {
@@ -242,7 +249,7 @@ namespace Gva.Api.Controllers
                 PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                if (setPart.Alias == "personApplication")
+                if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
@@ -304,14 +311,14 @@ namespace Gva.Api.Controllers
 
                 if (gvaLotFile != null)
                 {
-                    if (gvaLotFile.LotPart.SetPart.Alias == "personApplication")
+                    if (Regex.IsMatch(gvaLotFile.LotPart.SetPart.Alias, @"\w+(Application)"))
                     {
                         application.GvaAppLotPart = gvaLotFile.LotPart;
                     }
 
                     GvaAppLotFile gvaAppLotFile = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                         .Include(e => e.DocFile)
-                        .FirstOrDefault(e => e.GvaLotFileId == gvaLotFile.GvaLotFileId);
+                        .FirstOrDefault(e => e.GvaApplicationId == id && e.GvaLotFileId == gvaLotFile.GvaLotFileId);
 
                     if (gvaAppLotFile == null)
                     {
@@ -346,7 +353,7 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var doc = this.docRepository.Find(docId);
-                foreach (var file in files)
+                foreach (var file in files.Where(e => e.IsNew && !e.IsDeleted))
                 {
                     doc.CreateDocFile(file.DocFileKindId, file.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
                 }
@@ -373,33 +380,63 @@ namespace Gva.Api.Controllers
                     .SingleOrDefault(e => e.Alias.ToLower() == "Public".ToLower());
                 DocSourceType manuelSoruce = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
 
-                var gvaCorrespondent = personRepository.GetGvaCorrespondentByPersonId(applicationNewDO.LotId);
-                Correspondent correspondent;
+                var gvaCorrespondent = this.applicationRepository.GetGvaCorrespondentByLotId(applicationNewDO.LotId);
+                Correspondent correspondent = null;
                 if (gvaCorrespondent == null)
                 {
                     var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-                    dynamic personData = lot.GetPartContent("personData");
-
                     CorrespondentGroup applicantCorrespondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>().SingleOrDefault(e => e.Alias == "Applicants");//?
                     CorrespondentType bgCorrespondentType = this.unitOfWork.DbContext.Set<CorrespondentType>().SingleOrDefault(e => e.Alias == "BulgarianCitizen");//?
 
-                    correspondent = this.correspondentRepository.CreateBgCitizen(
-                        applicantCorrespondentGroup.CorrespondentGroupId,
-                        bgCorrespondentType.CorrespondentTypeId,
-                        true,
-                        (string)personData.firstName,
-                        (string)personData.lastName,
-                        (string)personData.uin,
-                        this.userContext);
+                    if (applicationNewDO.LotSetAlias == "Person")
+                    {
+                        dynamic personData = lot.GetPartContent("personData");
 
-                    correspondent.Email = (string)personData.email;
+                        correspondent = this.correspondentRepository.CreateBgCitizen(
+                         applicantCorrespondentGroup.CorrespondentGroupId,
+                         bgCorrespondentType.CorrespondentTypeId,
+                         true,
+                         (string)personData.firstName,
+                         (string)personData.lastName,
+                         (string)personData.uin,
+                         this.userContext);
+                        correspondent.Email = (string)personData.email;
 
-                    correspondent.CreateCorrespondentContact(
+                        correspondent.CreateCorrespondentContact(
                         String.Format("{0} {1} {2}", (string)personData.firstName, (string)personData.middleName, (string)personData.lastName),
                         (string)personData.uin,
                         null,
                         true,
                         userContext);
+                    }
+                    //todo ??
+                    else if (applicationNewDO.LotSetAlias == "Organization")
+                    {
+                        dynamic organizationData = lot.GetPartContent("organizationData");
+
+                        correspondent = this.correspondentRepository.CreateBgCitizen(
+                        applicantCorrespondentGroup.CorrespondentGroupId,
+                        bgCorrespondentType.CorrespondentTypeId,
+                        true,
+                        (string)organizationData.name,
+                        "",
+                        "",
+                        this.userContext);
+                    }
+                    //todo ??
+                    else if (applicationNewDO.LotSetAlias == "Aircraft")
+                    {
+                        dynamic aircraftData = lot.GetPartContent("aircraftData");
+
+                        correspondent = this.correspondentRepository.CreateBgCitizen(
+                        applicantCorrespondentGroup.CorrespondentGroupId,
+                        bgCorrespondentType.CorrespondentTypeId,
+                        true,
+                        ((string)aircraftData.model + " " + (string)aircraftData.icao),
+                        "",
+                        "",
+                        this.userContext);
+                    }
 
                     this.unitOfWork.Save();
 
@@ -408,7 +445,7 @@ namespace Gva.Api.Controllers
                     gvaCorrespondent.LotId = applicationNewDO.LotId;
                     gvaCorrespondent.IsActive = true;
 
-                    this.personRepository.AddGvaCorrespondent(gvaCorrespondent);
+                    this.applicationRepository.AddGvaCorrespondent(gvaCorrespondent);
                 }
                 else
                 {

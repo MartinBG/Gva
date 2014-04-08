@@ -5,8 +5,10 @@
   function ApplicationsEditNewFileCtrl(
     $scope,
     $state,
-    $stateParams
+    $stateParams,
+    application
     ) {
+    $scope.lotSetId = application.lotSetId;
     $scope.docPartType = null;
 
     $scope.cancel = function () {
@@ -30,7 +32,8 @@
   ApplicationsEditNewFileCtrl.$inject = [
     '$scope',
     '$state',
-    '$stateParams'
+    '$stateParams',
+    'application'
   ];
 
   angular.module('gva').controller('ApplicationsEditNewFileCtrl', ApplicationsEditNewFileCtrl);

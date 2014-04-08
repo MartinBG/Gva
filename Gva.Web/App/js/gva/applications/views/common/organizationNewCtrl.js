@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function ApplicationsOrganizationNewCtrl(
+  function OrganizationNewCtrl(
     $scope,
     $state,
     Organization,
@@ -27,7 +27,7 @@
     };
   }
 
-  ApplicationsOrganizationNewCtrl.$inject = [
+  OrganizationNewCtrl.$inject = [
     '$scope',
     '$state',
     'Organization',
@@ -35,5 +35,5 @@
   ];
 
   angular.module('gva').controller(
-    'ApplicationsOrganizationNewCtrl', ApplicationsOrganizationNewCtrl);
+    'OrganizationNewCtrl', OrganizationNewCtrl);
 }(angular));

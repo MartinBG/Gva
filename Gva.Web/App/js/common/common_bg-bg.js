@@ -35,11 +35,19 @@
           },
           aircrafts: {
             title: 'ВС',
+            search: 'Въздухоплавателни средства',
             certifications: 'Удостоверения',
-            inspections: 'Инспекции'
+            inspections: 'Инспекции',
+            appsSearch: 'Заявления',
+            appsNew: 'Ново заявление',
+            appsLink: 'Свържи заявление'
           },
           organizations: {
-            title: 'САРО'
+            title: 'САРО',
+            search: 'Търсене',
+            appsSearch: 'Заявления',
+            appsNew: 'Ново заявление',
+            appsLink: 'Свържи заявление'
           },
           admin: {
             title: 'Админ',

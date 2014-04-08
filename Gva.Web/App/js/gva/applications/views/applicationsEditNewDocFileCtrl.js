@@ -16,6 +16,12 @@
     };
 
     $scope.save = function () {
+      if (!$scope.files.docFiles) {
+        return $state.transitionTo('root.applications.edit.case', {
+          id: $stateParams.id
+        });
+      }
+
       return $scope.newDocFile.$validate().then(function () {
         if ($scope.newDocFile.$valid) {
           return Application

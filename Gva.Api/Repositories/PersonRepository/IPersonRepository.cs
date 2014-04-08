@@ -19,9 +19,5 @@ namespace Gva.Api.Repositories.PersonRepository
             int? limit = null);
 
         GvaViewPerson GetPerson(int personId);
-
-        GvaCorrespondent GetGvaCorrespondentByPersonId(int lotId);
-
-        void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent);
     }
 }
