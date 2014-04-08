@@ -531,7 +531,6 @@
     <Content Include="App\js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="App\js\gva\common\forms\commonInspection.html" />
     <Content Include="App\js\gva\common\forms\commonInspectionCtrl.js" />
-    <Content Include="App\js\gva\common\resources\auditDetail.js" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\gva.js" />

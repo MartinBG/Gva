@@ -53,7 +53,6 @@ namespace Common.Api.Models
             this.Property(t => t.Alias)
                 .HasMaxLength(50);
 
-            this.Property(t => t.TextContent);
 
             this.Property(t => t.IsActive)
                 .IsRequired();

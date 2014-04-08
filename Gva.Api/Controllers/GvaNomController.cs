@@ -10,6 +10,7 @@ using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.AircraftRepository;
 using Newtonsoft.Json.Linq;
 using Gva.Api.Repositories.OrganizationRepository;
+using System;
 
 namespace Gva.Api.Controllers
 {
@@ -253,6 +254,130 @@ namespace Gva.Api.Controllers
                     return isMatch;
                 })
                 .WithOffsetAndLimit(offset, limit));
+        }
+
+        [Route("auditPartRequirements")]
+        public IHttpActionResult GetAuditPartRequirements(string type = null, string auditPartCode = null)
+        {
+            JObject defaultAuditResult = this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
+                .Select(n => new JObject(
+                    new JProperty("nomValueId", n.NomValueId),
+                    new JProperty("code", n.Code),
+                    new JProperty("name", n.Name))).First();
+
+            var requirements = this.nomRepository.GetNomValues("auditPartRequirmants");
+
+            JArray auditPartRequirements = new JArray();
+
+            if (type == "aircrafts")
+            {
+                requirements = requirements.Where(r => r.OldId == "21");
+
+                foreach (dynamic requirement in requirements)
+                {
+                    if (requirement.Code == "145.А.75") 
+                    {
+                        continue;
+                    }
+
+                    auditPartRequirements.Add(
+                        new JObject(
+                            new JProperty("subject", requirement.Name),
+                            new JProperty("auditResult", defaultAuditResult),
+                            new JProperty("disparities", new JArray()),
+                            new JProperty("code", Convert.ToInt32(requirement.Code))
+                    ));
+                }
+            }
+
+
+            if (type == "organizations")
+            {
+                if(auditPartCode == "TR")
+                {
+                    requirements = requirements.Where(r => r.OldId == "22");
+                }
+                else if (auditPartCode == "145")
+                {
+                    requirements = requirements.Where(r => r.OldId == "1");
+                }
+                else if (auditPartCode == "147")
+                {
+                    requirements = requirements.Where(r => r.OldId == "4");
+                }
+                else if (auditPartCode == "ACAM")
+                {
+                    requirements = requirements.Where(r => (int.Parse(r.OldId) <= 211 && int.Parse(r.OldId) >= 200) || r.OldId == "42");
+                }
+                else if (auditPartCode == "MF")
+                {
+                    requirements = requirements.Where(r => r.OldId == "2");
+                }
+                else if (auditPartCode == "MG")
+                {
+                    requirements = requirements.Where(r => r.OldId == "3");
+                }
+
+                foreach (dynamic requirement in requirements)
+                {
+                    auditPartRequirements.Add(
+                        new JObject(
+                            new JProperty("subject", requirement.Name),
+                            new JProperty("auditResult", defaultAuditResult),
+                            new JProperty("disparities", new JArray()),
+                            new JProperty("code", requirement.Code)
+                    ));
+                }
+
+            }
+            return Ok(auditPartRequirements.OrderBy(e => e.SelectToken("code")));
+        }
+
+        [Route("auditDetails")]
+        public IHttpActionResult GetAuditDetails(string type = null) 
+        {
+            JObject defaultAuditResult =   this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
+                .Select( n => new JObject(
+                    new JProperty("nomValueId", n.NomValueId ),
+                    new JProperty("code", n.Code),
+                    new JProperty("name", n.Name))).First();
+
+
+            JArray auditDetails = new JArray();
+
+            if(type == "organizationRecommendations")
+            {
+                this.nomRepository.GetNomValues("auditPartSections").ToArray();
+                var requirements = this.nomRepository.GetNomValues("auditPartSectionDetails")
+                    .Where(d => JObject.Parse(d.ParentValue.TextContent).SelectToken("idPart") != null)
+                    .Where(d => JObject.Parse(d.ParentValue.TextContent).SelectToken("idPart").ToString() == "4")
+                    .GroupBy(d => d.ParentValue.Code)
+                    .OrderBy(d => d.Key);
+
+                foreach(dynamic requirement in requirements)
+                {
+                    JArray elements = new JArray();
+                    foreach (dynamic element in requirement)
+                    {
+                        string sortOrder = JObject.Parse(element.TextContent).SelectToken("sortOrder");
+
+                        elements.Add(new JObject(
+                            new JProperty("groupTitle", element.ParentValue.Code + ' ' + element.ParentValue.Name),
+                            new JProperty("subject", element.Name),
+                            new JProperty("auditResult", defaultAuditResult),
+                            new JProperty("disparities", new JArray()),
+                            new JProperty("auditPart", element.Code),
+                            new JProperty("titlePart", element.Code.Split('.')[0]),
+                            new JProperty("sortOrder", sortOrder)
+                        ));
+                    }
+                     auditDetails.Add( new JObject(
+                        new JProperty("groupTitle", elements.First().SelectToken("groupTitle")),
+                        new JProperty("group", elements.OrderBy(e => e.SelectToken("titlePart")).ThenBy(e => Convert.ToInt32(e.SelectToken("sortOrder"))))));
+                }
+            }
+
+            return Ok(auditDetails);
         }
     }
 }

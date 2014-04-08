@@ -4,7 +4,11 @@
       <div class="panel panel-default">
           <div class="panel-heading"><strong l10n-text="common.auditDetailDirective.title"></strong></div>
             <div class="well-sm panel-body">
-              <sc-button btn-click="insertAuditDetails()" ng-if="!model.auditDetails.length" text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
+              <sc-button btn-click="insertAuditDetails()" ng-disabled="!model.auditPart" 
+                 ng-if="!model.auditDetails.length && $parent.form.$name === 'organizationInspectionForm'" 
+                text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
+              <sc-button btn-click="insertAuditDetails()" ng-if="!model.auditDetails.length && $parent.form.$name === 'aircraftInspectionForm'" 
+                text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
               <table class="table table-striped table-bordered"  ng-if="model.auditDetails.length > 0" >
                 <thead>
                   <tr>
@@ -25,14 +29,14 @@
                       {{detail.code}}
                     </td>
                     <td class="col-sm-4 col-md-3">
-                      {{detail.subject.name}}
+                      {{detail.subject}}
                     </td>
                     <td class="col-sm-4 col-md-3">
                       <sc-nomenclature ng-model="detail.auditResult" alias="'auditResults'" name="auditResult" ng-required="true"></sc-nomenclature>
                     </td>
                     <td class="row">
                       <sc-button name="addDisparityBtn" type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-sm pull-right" icon="glyphicon-plus" 
-                         ng-show="detail.auditResult.code === '3' || detail.auditResult.code === '4'">
+                         ng-show="detail.auditResult.code === '1' || detail.auditResult.code === '2'">
                       </sc-button>
                       <div class="nav-pills pull-left" ng-repeat="detail in detail.disparities">
                           <a href="" scroll-to=".disparity{{detail}}">

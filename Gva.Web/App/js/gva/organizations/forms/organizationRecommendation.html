@@ -149,9 +149,9 @@
         <sc-button name="chooseAuditsBtn" type="button" btn-click="chooseAudits()" class="btn btn-primary btn-sm" icon="glyphicon-plus"
               text="organizations.recommendationDirective.auditorsReview.chooseAudits"></sc-button>
         <sc-datatable items="model.part.auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
-          <sc-column data="auditPart.name" title="organizations.recommendationDirective.auditorsReview.auditPart">
+          <sc-column data="auditPart" title="organizations.recommendationDirective.auditorsReview.auditPart">
           </sc-column>
-          <sc-column data="subject.name" title="organizations.recommendationDirective.auditorsReview.subject">
+          <sc-column data="subject" title="organizations.recommendationDirective.auditorsReview.subject">
           </sc-column>
           <sc-column data="auditResult.name" title="organizations.recommendationDirective.auditorsReview.auditResult">
           </sc-column>
@@ -183,7 +183,6 @@
                       <thead>
                         <tr>
                           <th l10n-text="organizations.recommendationDirective.accordance.auditPart"></th>
-                          <th l10n-text="organizations.recommendationDirective.accordance.code"></th>
                           <th l10n-text="organizations.recommendationDirective.accordance.subject"></th>
                           <th>
                             <div sc-has-error="auditResult"  class="col-sm-2 col-md-2">
@@ -202,18 +201,15 @@
                           <td style="width: 10px;">
                             {{detail.auditPart}}
                           </td>
-                          <td style="width: 10px;">
-                            {{detail.code}}
-                          </td>
                           <td class="col-sm-4 col-md-3">
-                            {{detail.subject.name}}
+                            {{detail.subject}}
                           </td>
                           <td class="col-sm-4 col-md-3">
                             <sc-nomenclature ng-model="detail.auditResult" name="auditResult" alias="'auditResults'" ng-required="true"></sc-nomenclature>
                           </td>
                           <td class="row">
                             <sc-button name="addDisparityBtn" type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-sm pull-right" icon="glyphicon-plus" 
-                                ng-show="detail.auditResult.code === '3' || detail.auditResult.code === '4'">
+                                ng-show="detail.auditResult.code === '1' || detail.auditResult.code === '2'">
                             </sc-button>
                             <div class="nav-pills pull-left" ng-repeat="detail in detail.disparities">
                                 <a href="" scroll-to=".disparity{{detail}}">

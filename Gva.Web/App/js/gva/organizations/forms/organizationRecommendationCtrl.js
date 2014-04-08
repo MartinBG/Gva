@@ -6,7 +6,7 @@
     $state,
     $stateParams,
     OrganizationInspection,
-    AuditDetails) {
+    Nomenclature) {
 
     $scope.watchList = [];
     $scope.model.part.auditorsReview.auditDetails = [];
@@ -54,8 +54,10 @@
 
 
     $scope.insertAuditDetails = function () {
-      $scope.model.part.descriptionReview.auditDetails =
-        AuditDetails.query({ type: 'organizationRecommendations' });
+      Nomenclature.query({ alias: 'auditDetails', type: 'organizationRecommendations'})
+        .$promise.then(function (details) {
+        $scope.model.part.descriptionReview.auditDetails = details;
+      });
     };
 
     $scope.changedSortOrder = function (newValue, oldValue) {
@@ -127,7 +129,7 @@
   }
 
   OrganizationRecommendationCtrl.$inject =
-    ['$scope', '$state', '$stateParams', 'OrganizationInspection', 'AuditDetails'];
+    ['$scope', '$state', '$stateParams', 'OrganizationInspection', 'Nomenclature'];
 
   angular.module('gva')
     .controller('OrganizationRecommendationCtrl', OrganizationRecommendationCtrl);

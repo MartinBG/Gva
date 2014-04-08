@@ -1766,7 +1766,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 .Materialize(r =>
                     new NomValue
                     {
-                        OldId = r.Field<object>("ID").ToString(),
+                        OldId = r.Field<object>("ID_PART").ToString(),
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("SUBJECT"),
                         NameAlt = null,
@@ -1806,7 +1806,8 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContent = JsonConvert.SerializeObject(
                             new
                             {
-                                sortOrder = r.Field<short?>("SORT_ORDER").ToString(),
+                                idPart = r.Field<long?>("ID_PART").ToString(),
+                                sortOrder = r.Field<short?>("SORT_ORDER").ToString()
                             })
                     })
                 .ToList();
