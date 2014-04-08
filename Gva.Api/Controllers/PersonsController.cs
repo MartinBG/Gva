@@ -60,9 +60,10 @@ namespace Gva.Api.Controllers
             string licences = null,
             string ratings = null,
             string organization = null,
+            string caseTypeAlias = null,
             bool exact = false)
         {
-            var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, exact);
+            var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, caseTypeAlias, exact);
 
             return Ok(persons.Select(p => new PersonDO(p)));
         }

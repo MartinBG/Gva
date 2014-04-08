@@ -25,6 +25,7 @@ namespace Gva.Api.Repositories.PersonRepository
             string licences = null,
             string ratings = null,
             string organization = null,
+            string caseTypeAlias = null,
             bool exact = false,
             int offset = 0,
             int? limit = null)
@@ -39,10 +40,21 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
                 .AndStringMatches(p => p.Organization, organization, exact);
 
-            return this.unitOfWork.DbContext.Set<GvaViewPerson>()
+            var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
                 .Include(p => p.Licences)
                 .Include(p => p.Ratings)
-                .Where(predicate)
+                .Where(predicate);
+
+            if (!string.IsNullOrEmpty(caseTypeAlias))
+            {
+                persons = from p in persons
+                          join lc in this.unitOfWork.DbContext.Set<GvaLotCase>() on p.LotId equals lc.LotId
+                          join ct in this.unitOfWork.DbContext.Set<GvaCaseType>() on lc.GvaCaseTypeId equals ct.GvaCaseTypeId
+                          where ct.Alias == caseTypeAlias
+                          select p;
+            }
+
+            return persons
                 .OrderBy(p => p.Names)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();

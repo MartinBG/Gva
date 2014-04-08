@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[NomValues](
     [ParentValueId]   INT            NULL,
     [Alias]           NVARCHAR (50)  NULL,
     [TextContent]     NVARCHAR (MAX) NULL,
-    [IsActive]        BIT            NULL,
+    [IsActive]        BIT            NOT NULL,
     [OldId]           NVARCHAR(500)  NULL,
     CONSTRAINT [PK_NomValues]           PRIMARY KEY ([NomValueId]),
     CONSTRAINT [FK_NomValues_Noms]      FOREIGN KEY ([NomId])         REFERENCES [dbo].[Noms] ([NomId]),

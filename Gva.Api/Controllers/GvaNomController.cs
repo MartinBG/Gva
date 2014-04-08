@@ -37,6 +37,8 @@ namespace Gva.Api.Controllers
         }
 
         [Route("persons/{id:int}")]
+        [Route("inspectors/{id:int}")]
+        [Route("examiners/{id:int}")]
         public IHttpActionResult GetPerson(int id)
         {
             var person = this.personRepository.GetPerson(id);
@@ -52,6 +54,34 @@ namespace Gva.Api.Controllers
         {
             var returnValue =
                 this.personRepository.GetPersons(names: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Names
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("inspectors")]
+        public IHttpActionResult GetInspectors(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.personRepository.GetPersons(caseTypeAlias: "inspector", names: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Names
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("examiners")]
+        public IHttpActionResult GetExaminers(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.personRepository.GetPersons(caseTypeAlias: "examiner", names: term, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,

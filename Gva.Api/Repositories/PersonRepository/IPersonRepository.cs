@@ -13,6 +13,7 @@ namespace Gva.Api.Repositories.PersonRepository
             string licences = null,
             string ratings = null,
             string organization = null,
+            string caseTypeAlias = null,
             bool exact = false,
             int offset = 0,
             int? limit = null);

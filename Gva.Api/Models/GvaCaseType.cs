@@ -18,6 +18,8 @@ namespace Gva.Api.Models
 
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public int? LotSetId { get; set; }
 
         public virtual Set LotSet { get; set; }
@@ -42,10 +44,17 @@ namespace Gva.Api.Models
             this.Property(t => t.Name)
                 .HasMaxLength(200);
 
+            this.Property(t => t.Name)
+                .HasMaxLength(200);
+
+            this.Property(t => t.Alias)
+                .HasMaxLength(200);
+
             // Table & Column Mappings
             this.ToTable("GvaCaseTypes");
             this.Property(t => t.GvaCaseTypeId).HasColumnName("GvaCaseTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.LotSetId).HasColumnName("LotSetId");
 
             // Relationships
