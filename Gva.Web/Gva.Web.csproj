@@ -503,8 +503,8 @@
     <Content Include="App\js\gva\applications\forms\selectOrganization.html" />
     <Content Include="App\js\gva\applications\forms\selectPerson.html" />
     <Content Include="App\js\gva\applications\resources\application.js" />
-    <Content Include="App\js\gva\applications\views\applicationsDocSelect.html" />
-    <Content Include="App\js\gva\applications\views\applicationsDocSelectCtrl.js" />
+    <Content Include="App\js\gva\applications\views\common\docSelect.html" />
+    <Content Include="App\js\gva\applications\views\common\docSelectCtrl.js" />
     <Content Include="App\js\gva\applications\views\applicationsEdit.html" />
     <Content Include="App\js\gva\applications\views\applicationsEditAddPart.html" />
     <Content Include="App\js\gva\applications\views\applicationsEditAddPartCtrl.js" />

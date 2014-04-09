@@ -191,7 +191,7 @@ namespace Gva.Api.Controllers
                 PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                if  (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
+                if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
@@ -237,8 +237,8 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
-                dynamic appPart = newPart.Value<JObject>("appPart");
-                dynamic appFile = newPart.Value<JObject>("appFile");
+                //dynamic appPart = newPart.Value<JObject>("appPart");
+                //dynamic appFile = newPart.Value<JObject>("appFile");
 
                 GvaApplication application = this.applicationRepository.Find(id.Value);
                 Lot lot = this.lotRepository.GetLotIndex(application.LotId);
@@ -246,22 +246,27 @@ namespace Gva.Api.Controllers
                 SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
 
-                PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
+                PartVersion partVersion = lot.CreatePart(path, newPart.Value<JObject>("appPart"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
                 if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
-               
+
                 var doc = this.docRepository.Find(docId.Value);
                 var docFile = doc.CreateDocFile(
-                    (int)appFile.docFileKindId,
-                    (int)appFile.docFileTypeId,
-                    (string)appFile.name,
-                    (string)appFile.file.name,
+                    (int)newPart.SelectToken("appFile.docFileKindId"),
+                    (int)newPart.SelectToken("appFile.docFileTypeId"),
+                    (string)newPart.SelectToken("appFile.name"),
+                    (string)newPart.SelectToken("appFile.file.name"),
+                    //(int)appFile.docFileKindId,
+                    //(int)appFile.docFileTypeId,
+                    //(string)appFile.name,
+                    //(string)appFile.file.name,
                     String.Empty,
-                    (Guid)appFile.file.key,
+                    (Guid)newPart.SelectToken("appFile.file.key"),
+                    //(Guid)appFile.file.key,
                     true,
                     true,
                     userContext);
@@ -270,10 +275,10 @@ namespace Gva.Api.Controllers
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
-                    GvaCaseTypeId = (int)appFile.caseTypeId,
-                    PageNumber = (int)appFile.pageCount
+                    GvaCaseTypeId = (int)newPart.SelectToken("appFile.caseTypeId"),
+                    PageNumber = (int)newPart.SelectToken("appFile.pageCount")
                 };
-                lotFile.SavePageIndex((string)appFile.bookPageNumber);
+                lotFile.SavePageIndex((string)newPart.SelectToken("appFile.bookPageNumber"));
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {

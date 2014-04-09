@@ -1,17 +1,18 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="docs.search.fromDate"></sc-filter>
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="docs.search.toDate"></sc-filter>
-
   <sc-filter type="text" name="regUri" class="col-sm-3" removable="false" label="docs.search.regUri"></sc-filter>
   <sc-filter type="text" name="docName" class="col-sm-3" removable="false" label="docs.search.docName"></sc-filter>
-  <sc-filter type="int" name="docTypeId" class="col-sm-3" removable="false" label="docs.search.docType">
+  <sc-filter type="nomenclature" name="docTypeId" class="col-sm-3" removable="false" alias="docType" load="false" mode="id" label="docs.search.docType">
   </sc-filter>
-  <sc-filter type="int" name="docStatusId" class="col-sm-3" removable="false" label="docs.search.docStatus">
+  <sc-filter type="nomenclature" name="docStatusId" class="col-sm-3" alias="docStatus" load="false" mode="id" removable="false" label="docs.search.docStatus">
   </sc-filter>
-  <sc-filter type="text" name="corrs" class="col-sm-3" removable="false" label="docs.search.corrs"></sc-filter>
-  <sc-filter type="text" name="units" class="col-sm-3" removable="false" label="docs.search.units"></sc-filter>
-  <sc-search-button action="search()" text="applications.docSelect.search" icon="glyphicon-search"></sc-search-button>
-  <sc-search-button action="cancel()" text="applications.docSelect.cancel"></sc-search-button>
+  <sc-filter type="nomenclature" name="corrs" class="col-sm-3" removable="false" alias="correspondent" load="false" mode="id" label="docs.search.corrs" multiple="multiple">
+  </sc-filter>
+  <sc-filter type="nomenclature" name="units" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="docs.search.units" multiple="multiple">
+  </sc-filter>
+  <sc-search-button action="search()" text="applications.docSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.docSelect.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
 </sc-search>
 
 <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">

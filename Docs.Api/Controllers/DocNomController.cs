@@ -309,6 +309,47 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("docStatus/{id:int}")]
+        public IHttpActionResult GetDocStatus(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<DocStatus>()
+                .Where(e => e.DocStatusId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.DocStatusId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("docStatus")]
+        public IHttpActionResult GetDocStatuses(string term = null, int? parentValueId = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<DocStatus>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<DocStatus>()
+                .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.DocStatusId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
         [Route("unit/{id:int}")]
         public IHttpActionResult GetUnit(int id)
         {

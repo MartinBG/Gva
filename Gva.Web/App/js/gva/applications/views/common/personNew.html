@@ -1,14 +1,28 @@
 ﻿<ng-form name="newPersonForm" sc-validate="{}">
-  <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
+   <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="applications.personNew.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="applications.personNew.saveAndSelect"
+          class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.personNew.cancel"
+          class="btn btn-default btn-sm" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+    <div class="well-sm panel-body">
 
-  <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
+      <h5 class="form-header" l10n-text="applications.personNew.personDataForm"></h5>
+      <gva-person-data name="personDataForm" ng-model="newPerson.personData"></gva-person-data>
 
-  <div class="row">
-    <div class="form-group col-sm-4 col-sm-offset-4">
-      <sc-button name="saveBtn" btn-click="save()" text="applications.personNew.saveAndSelect" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newPersonForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="applications.personNew.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <h5 class="form-header" l10n-text="applications.personNew.documentIdForm"></h5>
+      <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId"></gva-person-document-id>
+
+      <h5 class="form-header" l10n-text="applications.personNew.addressForm"></h5>
+      <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+
     </div>
   </div>
 </ng-form>

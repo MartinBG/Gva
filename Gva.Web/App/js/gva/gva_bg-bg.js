@@ -1912,25 +1912,26 @@
             newDocFile: 'Нов файл'
           },
           newFile: {
-            title: 'Нов документ в описа',
+            title: 'Нова страница в описа',
             documentType: 'Тип на документ',
-            cancel: 'Назад',
+            cancel: 'Отказ',
             addPart: 'Продължи'
           },
           newDocFile: {
             title: 'Нов файл',
-            cancel: 'Назад',
-            save: 'Запиши'
+            cancel: 'Отказ',
+            save: 'Запис'
           },
           linkFile: {
             title: 'Свържи документ в описа',
             documentType: 'Тип на документ',
             search: 'Търси',
-            cancel: 'Назад',
+            cancel: 'Отказ',
             select: 'Избор'
           },
           addPart: {
-            cancel: 'Назад',
+            title: 'Нова страница в описа',
+            cancel: 'Отказ',
             save: 'Запис'
           },
           unlinkedParts: {
@@ -1959,6 +1960,7 @@
           link: 'Свържи'
         },
         aircraftNew: {
+          title: 'Ново въздухоплавателно средство',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -1993,6 +1995,7 @@
           select: 'Избери'
         },
         organizationNew: {
+          title: 'Нова организация',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -2014,6 +2017,10 @@
           search: 'Търси'
         },
         personNew: {
+          title: 'Ново лице',
+          personDataForm: 'Лични данни',
+          documentIdForm: 'Документ за самоличност',
+          addressForm: 'Адрес',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -2134,7 +2141,7 @@
           file: 'Файл'
         },
         chooseDocuments: {
-          save: 'Запиши',
+          save: 'Запис',
           back: 'Назад',
           filter: 'Търси',
           bookPageNumber: '№ на страница',
@@ -2451,7 +2458,7 @@
           cancel: 'Отказ'
         },
         chooseAudits: {
-          save: 'Запиши',
+          save: 'Запис',
           back: 'Назад',
           inspectionFrom: 'Начална дата на изпълнение на одита',
           inspectionTo: 'Крайна дата на изпълнение на одита',

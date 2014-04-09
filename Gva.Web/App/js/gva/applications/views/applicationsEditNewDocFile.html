@@ -1,17 +1,20 @@
 ﻿<div class="tab-content">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="applications.edit.newDocFile.title"></strong></div>
-    <div class="well-sm panel-body ">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="applications.edit.newDocFile.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="applications.edit.newDocFile.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.newDocFile.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
       <ng-form name="newDocFile" sc-validate="{}">
-
         <ems-doc-files-edit name="docFilesForm" ng-model="files" readonly="false"></ems-doc-files-edit>
-
-        <div class="row">
-          <div class="form-group col-sm-4 col-sm-offset-5 col-sm-4">
-            <sc-button name="saveBtn" btn-click="save()" text="applications.edit.newDocFile.save" class="btn btn-primary"></sc-button>
-            <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.newDocFile.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
-          </div>
-        </div>
       </ng-form>
     </div>
   </div>

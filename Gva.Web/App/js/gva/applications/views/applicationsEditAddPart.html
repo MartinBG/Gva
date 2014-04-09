@@ -1,69 +1,82 @@
 ﻿<div class="tab-content">
   <ng-form name="addFormWrapper" sc-validate="{}">
-    <!--Person-->
-    <div ng-if="applicationPart.setPartAlias === 'personDocumentId'">
-      <gva-person-document-id name="addForm" ng-model="applicationPart.part"></gva-person-document-id>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personEducation'">
-      <gva-person-document-education name="addForm" ng-model="applicationPart.part"></gva-person-document-education>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personEmployment'">
-      <gva-person-document-employment name="addForm" ng-model="applicationPart.part"></gva-person-document-employment>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personMedical'">
-      <gva-person-document-medical name="addForm" ng-model="applicationPart.part"></gva-person-document-medical>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personCheck'">
-      <gva-person-document-check name="addForm" ng-model="applicationPart.part"></gva-person-document-check>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personTraining'">
-      <gva-person-document-training name="addForm" ng-model="applicationPart.part"></gva-person-document-training>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'personOther'">
-      <gva-person-document-other name="addForm" ng-model="applicationPart.part"></gva-person-document-other>
-    </div>
+    <div class="panel panel-default" style="margin-top: 10px">
+      <div class="panel-heading">
+        <strong l10n-text="applications.edit.addPart.title"></strong>
+        <div class="pull-right">
+          <sc-button ng-if="!applicationPart.hasDocFile" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save"
+            class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+          </sc-button>
+          <sc-button ng-if="applicationPart.hasDocFile" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save"
+            class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+          </sc-button>
+          <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.addPart.cancel"
+            class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+          </sc-button>
 
-    <!--Organization-->
-    <div ng-if="applicationPart.setPartAlias === 'organizationOther'">
-      <gva-organization-document-other name="addForm" ng-model="applicationPart.part"></gva-organization-document-other>
-    </div>
-
-    <!--Aircraft-->
-    <div ng-if="applicationPart.setPartAlias === 'aircraftOwner'">
-      <gva-aircraft-document-owner name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-owner>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'aircraftDebtFM'">
-      <gva-aircraft-document-debt-fm name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-debt-fm>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'aircraftInspection'">
-      <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'aircraftOccurrence'">
-      <gva-aircraft-document-occurrence name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-occurrence>
-    </div>
-    <div ng-if="applicationPart.setPartAlias === 'aircraftOther'">
-      <gva-aircraft-document-other name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-other>
-    </div>
-
-    <!--Applications-->
-    <div ng-if="applicationPart.setPartAlias === 'personApplication' || applicationPart.setPartAlias === 'organizationApplication' || applicationPart.setPartAlias === 'aircraftApplication'">
-      <gva-common-document-application name="addForm" ng-model="applicationPart.part"></gva-common-document-application>
-    </div>
-
-    <div ng-if="!applicationPart.hasDocFile">
-      <gva-application-document name="appFile" ng-model="applicationPart.appFile"></gva-application-document>
-    </div>
-
-    <div ng-if="applicationPart.hasDocFile">
-      <gva-application-document name="appFile" ng-model="applicationPart.appFile" readonly="true"></gva-application-document>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-sm-4 col-sm-offset-5 col-sm-4">
-        <sc-button ng-if="!applicationPart.hasDocFile" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
-        <sc-button ng-if="applicationPart.hasDocFile" name="saveBtn" btn-click="linkNew()" text="applications.edit.addPart.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="addFormWrapper.$pristine"></sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.addPart.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+        </div>
       </div>
+
+      <div class="well-sm panel-body">
+        <!--Person-->
+        <div ng-if="applicationPart.setPartAlias === 'personDocumentId'">
+          <gva-person-document-id name="addForm" ng-model="applicationPart.part"></gva-person-document-id>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personEducation'">
+          <gva-person-document-education name="addForm" ng-model="applicationPart.part"></gva-person-document-education>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personEmployment'">
+          <gva-person-document-employment name="addForm" ng-model="applicationPart.part"></gva-person-document-employment>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personMedical'">
+          <gva-person-document-medical name="addForm" ng-model="applicationPart.part"></gva-person-document-medical>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personCheck'">
+          <gva-person-document-check name="addForm" ng-model="applicationPart.part"></gva-person-document-check>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personTraining'">
+          <gva-person-document-training name="addForm" ng-model="applicationPart.part"></gva-person-document-training>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'personOther'">
+          <gva-person-document-other name="addForm" ng-model="applicationPart.part"></gva-person-document-other>
+        </div>
+
+        <!--Organization-->
+        <div ng-if="applicationPart.setPartAlias === 'organizationOther'">
+          <gva-organization-document-other name="addForm" ng-model="applicationPart.part"></gva-organization-document-other>
+        </div>
+
+        <!--Aircraft-->
+        <div ng-if="applicationPart.setPartAlias === 'aircraftOwner'">
+          <gva-aircraft-document-owner name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-owner>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'aircraftDebtFM'">
+          <gva-aircraft-document-debt-fm name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-debt-fm>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'aircraftInspection'">
+          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'aircraftOccurrence'">
+          <gva-aircraft-document-occurrence name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-occurrence>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'aircraftOther'">
+          <gva-aircraft-document-other name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-other>
+        </div>
+
+        <!--Applications-->
+        <div ng-if="applicationPart.setPartAlias === 'personApplication' || applicationPart.setPartAlias === 'organizationApplication' || applicationPart.setPartAlias === 'aircraftApplication'">
+          <gva-common-document-application name="addForm" ng-model="applicationPart.part"></gva-common-document-application>
+        </div>
+      
+        <div ng-if="!applicationPart.hasDocFile">
+          <gva-application-document name="appFile" ng-model="applicationPart.appFile"></gva-application-document>
+        </div>
+        <div ng-if="applicationPart.hasDocFile">
+          <gva-application-document name="appFile" ng-model="applicationPart.appFile" readonly="true"></gva-application-document>
+        </div>
+
+      </div>
+
     </div>
   </ng-form>
 </div>

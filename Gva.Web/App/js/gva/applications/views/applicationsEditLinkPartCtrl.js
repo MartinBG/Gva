@@ -50,28 +50,28 @@
 
       if ($scope.docPartType) {
         if ($scope.docPartType.alias === 'personDocumentId') {
-          PersonDocumentId.query({ id: $scope.application.lotId })
+          return PersonDocumentId.query({ id: $scope.application.lotId })
             .$promise.then(function (documentIds) {
               $scope.documentPart = documentIds;
               $scope.showDocumentId = !!documentIds;
             });
         }
         else if ($scope.docPartType.alias === 'personEducation') {
-          PersonDocumentEducation.query({ id: $scope.application.lotId })
+          return PersonDocumentEducation.query({ id: $scope.application.lotId })
             .$promise.then(function (documentEducations) {
               $scope.documentPart = documentEducations;
               $scope.showDocumentEducation = !!documentEducations;
             });
         }
         else if ($scope.docPartType.alias === 'personEmployment') {
-          PersonDocumentEmployment.query({ id: $scope.application.lotId })
+          return PersonDocumentEmployment.query({ id: $scope.application.lotId })
             .$promise.then(function (employments) {
               $scope.documentPart = employments;
               $scope.showDocumentEmployment = !!employments;
             });
         }
         else if ($scope.docPartType.alias === 'personMedical') {
-          PersonDocumentMedical.query({ id: $scope.application.lotId })
+          return PersonDocumentMedical.query({ id: $scope.application.lotId })
             .$promise.then(function (medicals) {
               $scope.documentPart = medicals.map(function (medical) {
                 var testimonial = medical.part.documentNumberPrefix + ' ' +
@@ -93,84 +93,84 @@
             });
         }
         else if ($scope.docPartType.alias === 'personCheck') {
-          PersonDocumentCheck.query({ id: $scope.application.lotId })
+          return PersonDocumentCheck.query({ id: $scope.application.lotId })
             .$promise.then(function (checks) {
               $scope.documentPart = checks;
               $scope.showDocumentCheck = !!checks;
             });
         }
         else if ($scope.docPartType.alias === 'personTraining') {
-          PersonDocumentTraining.query({ id: $scope.application.lotId })
+          return PersonDocumentTraining.query({ id: $scope.application.lotId })
             .$promise.then(function (documentTrainings) {
               $scope.documentPart = documentTrainings;
               $scope.showDocumentTraining = !!documentTrainings;
             });
         }
         else if ($scope.docPartType.alias === 'personOther') {
-          PersonDocumentOther.query({ id: $scope.application.lotId })
+          return PersonDocumentOther.query({ id: $scope.application.lotId })
             .$promise.then(function (documentOthers) {
               $scope.documentPart = documentOthers;
               $scope.showDocumentOther = !!documentOthers;
             });
         }
         else if ($scope.docPartType.alias === 'personApplication') {
-          PersonDocumentApplication.query({ id: $scope.application.lotId })
+          return PersonDocumentApplication.query({ id: $scope.application.lotId })
             .$promise.then(function (documentApplications) {
               $scope.documentPart = documentApplications;
               $scope.showDocumentApplication = !!documentApplications;
             });
         }
         else if ($scope.docPartType.alias === 'organizationOther') {
-          OrganizationDocumentOther.query({ id: $scope.application.lotId })
+          return OrganizationDocumentOther.query({ id: $scope.application.lotId })
             .$promise.then(function (organizationOthers) {
               $scope.documentPart = organizationOthers;
               $scope.showODocumentOther = !!organizationOthers;
             });
         }
         else if ($scope.docPartType.alias === 'organizationApplication') {
-          OrganizationDocumentApplication.query({ id: $scope.application.lotId })
+          return OrganizationDocumentApplication.query({ id: $scope.application.lotId })
             .$promise.then(function (organizationApplications) {
               $scope.documentPart = organizationApplications;
               $scope.showODocumentApplication = !!organizationApplications;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOwner') {
-          AircraftDocumentOwner.query({ id: $scope.application.lotId })
+          return AircraftDocumentOwner.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOwners) {
               $scope.documentPart = aircraftDocumentOwners;
               $scope.showADocumentOwner = !!aircraftDocumentOwners;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftDebtFM') {
-          AircraftDocumentDebtFM.query({ id: $scope.application.lotId })
+          return AircraftDocumentDebtFM.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentDebtFMs) {
               $scope.documentPart = aircraftDocumentDebtFMs;
               $scope.showADocumentDebtFM = !!aircraftDocumentDebtFMs;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftInspection') {
-          AircraftInspection.query({ id: $scope.application.lotId })
+          return AircraftInspection.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftInspections) {
               $scope.documentPart = aircraftInspections;
               $scope.showAInspection = !!aircraftInspections;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOccurrence') {
-          AircraftDocumentOccurrence.query({ id: $scope.application.lotId })
+          return AircraftDocumentOccurrence.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOccurrences) {
               $scope.documentPart = aircraftDocumentOccurrences;
               $scope.showADocumentOccurrence = !!aircraftDocumentOccurrences;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftApplication') {
-          AircraftDocumentApplication.query({ id: $scope.application.lotId })
+          return AircraftDocumentApplication.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentApplications) {
               $scope.documentPart = aircraftDocumentApplications;
               $scope.showADocumentApplication = !!aircraftDocumentApplications;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOther') {
-          AircraftDocumentOther.query({ id: $scope.application.lotId })
+          return AircraftDocumentOther.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOthers) {
               $scope.documentPart = aircraftDocumentOthers;
               $scope.showADocumentOther = !!aircraftDocumentOthers;
