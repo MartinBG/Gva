@@ -9,7 +9,7 @@
     OrganizationApproval,
     organizationApproval,
     organizationAmendment
-    ) {
+  ) {
 
     $scope.model = {
       approval : organizationApproval,

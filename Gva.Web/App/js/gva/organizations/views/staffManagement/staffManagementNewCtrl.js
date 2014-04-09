@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationStaffManagement,
     organizationStaffManagement
-    ) {
+  ) {
     $scope.organizationStaffManagement = organizationStaffManagement;
 
     $scope.save = function () {

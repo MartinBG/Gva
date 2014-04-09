@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRegGroundServiceOperator,
     organizationRegGroundServiceOperators
-    ) {
+  ) {
 
     $scope.organizationRegGroundServiceOperators = organizationRegGroundServiceOperators;
 

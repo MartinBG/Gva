@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationApproval,
     organizationApprovals
-    ) {
+  ) {
 
     $scope.organizationApprovals = organizationApprovals;
 

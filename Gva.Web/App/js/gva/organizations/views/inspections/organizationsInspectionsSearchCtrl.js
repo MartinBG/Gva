@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationInspection,
     organizationInspections
-    ) {
+  ) {
 
     $scope.organizationInspections = organizationInspections;
 

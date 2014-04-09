@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationInspection,
     organizationInspection
-    ) {
+  ) {
     var originalInspection = _.cloneDeep(organizationInspection);
 
     $scope.organizationInspection = organizationInspection;

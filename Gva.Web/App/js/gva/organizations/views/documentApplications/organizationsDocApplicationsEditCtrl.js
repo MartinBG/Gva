@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationDocumentApplication,
     organizationDocumentApplication
-    ) {
+  ) {
     var originalApplication = _.cloneDeep(organizationDocumentApplication);
 
     $scope.organizationDocumentApplication = organizationDocumentApplication;

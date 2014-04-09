@@ -8,7 +8,7 @@
     $scope,
     organizationAmendment,
     availableDocuments
-    ) {
+  ) {
     $scope.availableDocuments = availableDocuments;
 
     $scope.documentsOptions = [

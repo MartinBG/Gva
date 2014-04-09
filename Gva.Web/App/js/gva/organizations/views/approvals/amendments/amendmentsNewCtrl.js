@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationAmendment,
     organizationAmendment
-    ) {
+  ) {
     $scope.amendment = organizationAmendment;
 
     $scope.save = function () {

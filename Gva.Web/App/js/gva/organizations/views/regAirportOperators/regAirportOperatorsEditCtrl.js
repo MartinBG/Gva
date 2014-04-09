@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRegAirportOperator,
     organizationRegAirportOperator
-    ) {
+  ) {
     var originalOperator = _.cloneDeep(organizationRegAirportOperator);
 
     $scope.organizationRegAirportOperator = organizationRegAirportOperator;

@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationAuditplan,
     organizationAuditplan
-    ) {
+  ) {
     $scope.organizationAuditplan = organizationAuditplan;
 
     $scope.save = function () {

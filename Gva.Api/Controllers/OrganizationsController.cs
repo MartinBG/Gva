@@ -66,6 +66,7 @@ namespace Gva.Api.Controllers
         {
             var organization = this.organizationRepository.GetOrganization(lotId);
             OrganizationDO returnValue = new OrganizationDO(organization);
+            returnValue.CaseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId).Select(ct => ct.Name).ToList();
 
             return Ok(returnValue);
         }
@@ -161,7 +162,9 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
@@ -185,7 +188,9 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
@@ -241,6 +246,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationInspections$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
@@ -301,6 +308,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationInspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
@@ -383,6 +392,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationInspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),

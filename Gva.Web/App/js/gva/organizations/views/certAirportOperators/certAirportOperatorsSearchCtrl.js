@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CertAirportOperatorsSearchCtrl(
@@ -8,9 +8,13 @@
     $stateParams,
     CertAirportOperator,
     certAirportOperators
-    ) {
+  ) {
 
-    $scope.certAirportOperators = certAirportOperators;
+    $scope.certAirportOperators = _.map(certAirportOperators, function(certificate){
+      certificate.activities = _.pluck(certificate.part.airportoperatorActivityTypes, 'name')
+        .join(',</br>');
+      return certificate;
+    });
 
     $scope.editCertAirportOperator = function (cert) {
       return $state.go('root.organizations.view.certAirportOperators.edit', {
@@ -44,4 +48,4 @@
 
   angular.module('gva')
     .controller('CertAirportOperatorsSearchCtrl', CertAirportOperatorsSearchCtrl);
-}(angular));
+}(angular, _));

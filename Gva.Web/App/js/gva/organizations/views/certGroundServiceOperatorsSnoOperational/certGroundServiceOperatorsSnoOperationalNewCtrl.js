@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationCertGroundServiceOperatorsSnoOperational,
     certificate
-    ) {
+  ) {
 
     $scope.certificate = certificate;
     $scope.save = function () {

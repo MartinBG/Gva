@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRegGroundServiceOperator,
     organizationRegGroundServiceOperator
-    ) {
+  ) {
     var originalOperator = _.cloneDeep(organizationRegGroundServiceOperator);
 
     $scope.organizationRegGroundServiceOperator = organizationRegGroundServiceOperator;

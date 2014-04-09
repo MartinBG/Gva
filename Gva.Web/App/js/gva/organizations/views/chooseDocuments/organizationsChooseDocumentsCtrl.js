@@ -8,7 +8,7 @@
     $scope,
     certificate,
     availableDocuments
-    ) {
+  ) {
     $scope.availableDocuments = availableDocuments;
 
     $scope.documentsOptions = [

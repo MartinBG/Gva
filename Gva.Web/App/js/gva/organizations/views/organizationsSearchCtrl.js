@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     organizations
-    ) {
+  ) {
 
     $scope.filters = {
       name: null

@@ -9,27 +9,8 @@
   </sc-column>
   <sc-column data="part.validToDate" title="organizations.certGroundServiceOperatorSearch.validToDate"  type="date">
   </sc-column>
-  <sc-column data="part.audit.name" title="organizations.certGroundServiceOperatorSearch.audit">
+  <sc-column data="part.airport.name" title="organizations.certGroundServiceOperatorSearch.airport">
   </sc-column>
-   <sc-column data="part.airport.name" title="organizations.certGroundServiceOperatorSearch.airport">
-  </sc-column>
-  <sc-column data="part.organization.name" title="organizations.certGroundServiceOperatorSearch.organization">
-  </sc-column>
-  <sc-column data="part.inspector.name" title="organizations.certGroundServiceOperatorSearch.inspector">
-  </sc-column>
-  <sc-column data="part.valid.name" title="organizations.certGroundServiceOperatorSearch.valid">
-  </sc-column>
-  <sc-column data="part.ext.date" title="organizations.certGroundServiceOperatorSearch.date" type="date">
-  </sc-column>
-  <sc-column data="part.ext.validToDate" title="organizations.certGroundServiceOperatorSearch.validToDateExt" type="date">
-  </sc-column>
-  <sc-column data="part.revokeDate" title="organizations.certGroundServiceOperatorSearch.revokeDate" type="date">
-  </sc-column>
-  <sc-column data="part.revokeCause" title="organizations.certGroundServiceOperatorSearch.revokeCause">
-  </sc-column>
-  <sc-column sortable="false" title="organizations.certGroundServiceOperatorSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
+    <sc-column data="activities" title="organizations.certGroundServiceOperatorSearch.activities">
   </sc-column>
 </sc-datatable>

@@ -2073,9 +2073,13 @@
           staffManagement: 'Ръководен персонал',
           staffExaminers: 'Проверяващи ЛГ',
           addresses: 'Адреси',
-          aiportOperator: 'Летищен оператор',
+          airportOperator: 'Летищен оператор',
           certAirportOperators:'Лиценз',
           groundServiceOperators: 'Оператор по наземно обслужване',
+          airOperator:'Авиационен оператор',
+          certAirOperators:'Свидетелство',
+          airNavigationServiceDeliverer: 'Доставчик АО',
+          certAirNavigationServiceDeliverer: 'Свидетелство',
           certGroundServiceOperators: 'Лиценз',
           groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
           registers: 'Регистри',
@@ -2160,16 +2164,46 @@
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
-          organization: 'Организация',
           airport: 'Летище',
-          inspector: 'Проверил',
-          valid: 'Валиден',
-          date: 'Дата на издаване на продължение',
-          validToDateExt: 'Дата на изтичане на продължение',
-          revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане',
-          file: 'Преписка (Заявление)'
+          activities: 'Дейности'
+        },
+        editCertAirOperator: {
+          title: 'Преглед на свидетелство на летищен оператор',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteCertOp: 'Изтрий'
+        },
+        newCertAirOperator: {
+          title: 'Ново свидетелство на летищен оператор',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        certAirOperatorSearch: {
+          newCertAirOperator: 'Ново свидетелство',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          specs: 'Спецификации'
+        },
+        editCertAirNavigationServiceDeliverer: {
+          title: 'Преглед на свидетелство на доставчик на аеронавигационно обслужване',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteCertOp: 'Изтрий'
+        },
+        newCertAirNavigationServiceDeliverer: {
+          title: 'Ново свидетелство на доставчик на аеронавигационно обслужване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        certAirNavigationServiceDelivererSearch: {
+          newCertAirNavigationServiceDeliverer: 'Ново свидетелство',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          specs: 'Спецификации'
         },
         newAddress: {
           title: 'Нов адрес',
@@ -2295,16 +2329,7 @@
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
-          organization: 'Организация',
-          airport: 'Летище',
-          inspector: 'Проверил',
-          valid: 'Валиден',
-          date: 'Дата на издаване на продължение',
-          validToDateExt: 'Дата на изтичане на продължение',
-          revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане',
-          file: 'Преписка (Заявление)'
+          airport: 'Летище'
         },
         newCertGroundServiceOperatorsSnoOperational: {
           title: 'Ново удостоверение за експлоатационна годност',
@@ -2325,16 +2350,8 @@
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
-          organization: 'Организация',
           airport: 'Летище',
-          inspector: 'Проверил',
-          valid: 'Валиден',
-          date: 'Дата на издаване на продължение',
-          validToDateExt: 'Дата на изтичане на продължение',
-          revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане',
-          file: 'Преписка (Заявление)'
+          activities: 'Дейности'
         },
         newCertGroundServiceOperator: {
           title: 'Нов лиценз на оператор по наземно обслужване / самообслужване',
@@ -2575,7 +2592,7 @@
           contactPerson: 'Лице за контакти',
           email: 'E-мейл адрес'
         },
-        certOperatorDirective: {
+        certificateDirective: {
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -2593,6 +2610,7 @@
           linkedDocument: 'Връзка с документ от документите',
           revokeDate: 'Дата на отнемане',
           revokeinspector: 'Инспектор',
+          specs: 'Сецификации',
           revokeTitle: 'Отнемане',
           documentsTable: {
             includedDocuments: 'Приложени документи',
@@ -2921,6 +2939,14 @@
         'root.organizations.view.certAirportOperators': 'Лицензи на летищен оператор',
         'root.organizations.view.certAirportOperators.new': 'Нов лиценз',
         'root.organizations.view.certAirportOperators.edit': 'Редакция на лиценз',
+        'root.organizations.view.certAirOperators': 'Свидетелство за авиационен оператор',
+        'root.organizations.view.certAirOperators.new': 'Ново cвидетелство',
+        'root.organizations.view.certAirOperators.edit': 'Редакция на видетелство',
+        'root.organizations.view.certAirNavigationServiceDeliverers':
+          'Свидетелство за извършване на аеронавигационно обслужване',
+        'root.organizations.view.certAirNavigationServiceDeliverers.new': 'Ново свидетелство',
+        'root.organizations.view.certAirNavigationServiceDeliverers.edit':
+          'Редакция на свидетелство',
         'root.organizations.view.auditplans': 'План за надзор',
         'root.organizations.view.auditplans.new': 'Нов план за одит',
         'root.organizations.view.auditplans.edit': 'Редакция на план за одит',

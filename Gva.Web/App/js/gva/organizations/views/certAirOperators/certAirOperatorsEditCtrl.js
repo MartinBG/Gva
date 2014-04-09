@@ -2,11 +2,11 @@
 (function (angular) {
   'use strict';
 
-  function CertAirportOperatorsEditCtrl(
+  function CertAirOperatorsEditCtrl(
     $scope,
     $state,
     $stateParams,
-    CertAirportOperator,
+    CertAirOperator,
     certificate
   ) {
     var originalCertificate = _.cloneDeep(certificate);
@@ -24,41 +24,41 @@
     };
 
     $scope.save = function () {
-      return $scope.certAirportOperatorForm.$validate()
+      return $scope.certAirOperatorForm.$validate()
         .then(function () {
-          if ($scope.certAirportOperatorForm.$valid) {
-            return CertAirportOperator
+          if ($scope.certAirOperatorForm.$valid) {
+            return CertAirOperator
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.certificate)
               .$promise
               .then(function () {
-                return $state.go('root.organizations.view.certAirportOperators.search');
+                return $state.go('root.organizations.view.certAirOperators.search');
               });
           }
         });
     };
 
-    $scope.deleteCertAirportOperator = function () {
-      return CertAirportOperator.remove({ id: $stateParams.id, ind: certificate.partIndex })
+    $scope.deleteCertAirOperator = function () {
+      return CertAirOperator.remove({ id: $stateParams.id, ind: certificate.partIndex })
         .$promise.then(function () {
-          return $state.go('root.organizations.view.certAirportOperators.search');
+          return $state.go('root.organizations.view.certAirOperators.search');
         });
     };
   }
 
-  CertAirportOperatorsEditCtrl.$inject = [
+  CertAirOperatorsEditCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirportOperator',
+    'CertAirOperator',
     'certificate'
   ];
 
-  CertAirportOperatorsEditCtrl.$resolve = {
+  CertAirOperatorsEditCtrl.$resolve = {
     certificate: [
       '$stateParams',
-      'CertAirportOperator',
-      function ($stateParams, CertAirportOperator) {
-        return CertAirportOperator.get({
+      'CertAirOperator',
+      function ($stateParams, CertAirOperator) {
+        return CertAirOperator.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;
@@ -66,5 +66,5 @@
     ]
   };
 
-  angular.module('gva').controller('CertAirportOperatorsEditCtrl', CertAirportOperatorsEditCtrl);
+  angular.module('gva').controller('CertAirOperatorsEditCtrl', CertAirOperatorsEditCtrl);
 }(angular));

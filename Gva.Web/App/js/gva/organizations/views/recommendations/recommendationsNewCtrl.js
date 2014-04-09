@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRecommendation,
     organizationRecommendation
-    ) {
+  ) {
     $scope.organizationRecommendation = organizationRecommendation;
 
     $scope.save = function () {

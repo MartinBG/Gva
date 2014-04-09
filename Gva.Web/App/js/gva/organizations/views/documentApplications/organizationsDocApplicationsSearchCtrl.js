@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationDocumentApplication,
     organizationDocumentApplications
-    ) {
+  ) {
     $scope.organizationDocumentApplications = organizationDocumentApplications;
 
 

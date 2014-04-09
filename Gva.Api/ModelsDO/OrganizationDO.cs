@@ -1,5 +1,6 @@
 ﻿using Gva.Api.Models;
 using System;
+using System.Collections.Generic;
 namespace Gva.Api.ModelsDO
 {
     public class OrganizationDO
@@ -31,6 +32,8 @@ namespace Gva.Api.ModelsDO
         public DateTime? DateValidTo { get; set; }
 
         public DateTime? DateCAOValidTo { get; set; }
+
+        public List<string> CaseTypes { get; set; }
 
     }
 }

@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRegAirportOperator,
     organizationRegAirportOperators
-    ) {
+  ) {
 
     $scope.organizationRegAirportOperators = organizationRegAirportOperators;
 

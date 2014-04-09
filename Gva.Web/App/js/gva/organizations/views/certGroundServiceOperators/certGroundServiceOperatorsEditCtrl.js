@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationCertGroundServiceOperator,
     certificate
-    ) {
+  ) {
     var originalCertificate = _.cloneDeep(certificate);
 
     $scope.certificate = certificate;

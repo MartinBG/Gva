@@ -2,43 +2,43 @@
 (function (angular) {
   'use strict';
 
-  function CertAirportOperatorsNewCtrl(
+  function CertAirOperatorsNewCtrl(
     $scope,
     $state,
     $stateParams,
-    CertAirportOperator,
+    CertAirOperator,
     certificate
   ) {
     $scope.certificate = certificate;
 
     $scope.save = function () {
-      return $scope.certAirportOperatorForm.$validate()
+      return $scope.certAirOperatorForm.$validate()
         .then(function () {
-          if ($scope.certAirportOperatorForm.$valid) {
-            return CertAirportOperator
+          if ($scope.certAirOperatorForm.$valid) {
+            return CertAirOperator
               .save({ id: $stateParams.id }, $scope.certificate)
               .$promise
               .then(function () {
-                return $state.go('root.organizations.view.certAirportOperators.search');
+                return $state.go('root.organizations.view.certAirOperators.search');
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('root.organizations.view.certAirportOperators.search');
+      return $state.go('root.organizations.view.certAirOperators.search');
     };
   }
 
-  CertAirportOperatorsNewCtrl.$inject = [
+  CertAirOperatorsNewCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirportOperator',
+    'CertAirOperator',
     'certificate'
   ];
 
-  CertAirportOperatorsNewCtrl.$resolve = {
+  CertAirOperatorsNewCtrl.$resolve = {
     certificate: function () {
       return {
         part: {
@@ -48,5 +48,5 @@
     }
   };
 
-  angular.module('gva').controller('CertAirportOperatorsNewCtrl', CertAirportOperatorsNewCtrl);
+  angular.module('gva').controller('CertAirOperatorsNewCtrl', CertAirOperatorsNewCtrl);
 }(angular));

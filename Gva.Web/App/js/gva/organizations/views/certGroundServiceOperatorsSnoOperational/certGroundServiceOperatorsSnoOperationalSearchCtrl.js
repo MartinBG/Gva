@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationCertGroundServiceOperatorsSnoOperational,
     organizationCertGroundServiceOperatorsSnoOperational
-    ) {
+  ) {
 
     $scope.certGroundServiceOperatorsSnoOperational =
       organizationCertGroundServiceOperatorsSnoOperational;

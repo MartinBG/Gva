@@ -8,7 +8,7 @@
     $stateParams,
     OrganizationRecommendation,
     organizationRecommendation
-    ) {
+  ) {
     var originalRecommendation = _.cloneDeep(organizationRecommendation);
 
     $scope.organizationRecommendation = organizationRecommendation;

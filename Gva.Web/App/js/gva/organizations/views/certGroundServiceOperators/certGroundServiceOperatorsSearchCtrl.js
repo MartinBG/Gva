@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CertGroundServiceOperatorsSearchCtrl(
@@ -8,10 +8,15 @@
     $stateParams,
     OrganizationCertGroundServiceOperator,
     organizationCertGroundServiceOperator
-    ) {
+  ) {
 
-    $scope.organizationCertGroundServiceOperator = organizationCertGroundServiceOperator;
+    $scope.organizationCertGroundServiceOperator = _.map(organizationCertGroundServiceOperator,
+      function(certificate){
+      certificate.activities = _.pluck(certificate.part.groundServiceOperatorActivityTypes, 'name')
+        .join(',</br>');
 
+      return certificate;
+    });
     $scope.editCertGroundServiceOperator = function (cert) {
       return $state.go('root.organizations.view.certGroundServiceOperators.edit', {
         id: $stateParams.id,
@@ -44,4 +49,4 @@
 
   angular.module('gva')
     .controller('CertGroundServiceOperatorsSearchCtrl', CertGroundServiceOperatorsSearchCtrl);
-}(angular));
+}(angular, _));
