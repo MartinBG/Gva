@@ -253,7 +253,7 @@ namespace Gva.Api.Controllers
                 {
                     application.GvaAppLotPart = partVersion.Part;
                 }
-
+               
                 var doc = this.docRepository.Find(docId.Value);
                 var docFile = doc.CreateDocFile(
                     (int)appFile.docFileKindId,
@@ -646,6 +646,25 @@ namespace Gva.Api.Controllers
             Doc doc = this.unitOfWork.DbContext.Set<Doc>().Find(docId.Value);
 
             return Ok(new { documentNumber = doc.RegUri });
+        }
+
+        [Route("app")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationByDocId(int? docId = null)
+        {
+            if (docId == null)
+            {
+                return BadRequest();
+            }
+
+            var application = this.applicationRepository.GetGvaApplicationByDocId(docId.Value);
+
+            if (application != null)
+            {
+                return Ok(new { id = application.GvaApplicationId });
+            }
+
+            return Ok();
         }
     }
 }

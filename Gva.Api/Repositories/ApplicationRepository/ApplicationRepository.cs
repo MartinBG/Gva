@@ -151,5 +151,11 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             this.unitOfWork.DbContext.Set<GvaCorrespondent>().Add(gvaCorrespondent);
         }
+
+        public GvaApplication GetGvaApplicationByDocId(int docId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaApplication>()
+                .FirstOrDefault(e => e.DocId == docId);
+        }
     }
 }

@@ -380,3 +380,7 @@ table.sc-data-table th.sorting span
 .table-responsive {
   margin-bottom: 0px;
 }
+
+#menu-navigation a, #app-case a{
+  cursor: pointer;
+}

@@ -6,8 +6,11 @@
     $scope,
     $state,
     $sce,
+    Application,
+    application,
     doc
   ) {
+    $scope.appId = application.id;
     $scope.docId = doc.docId;
     $scope.docRelations = _.map(_.cloneDeep(doc.docRelations), function (docRelation) {
       docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
@@ -29,8 +32,20 @@
     '$scope',
     '$state',
     '$sce',
+    'Application',
+    'application',
     'doc'
   ];
+
+  DocsCaseCtrl.$resolve = {
+    application: [
+      '$stateParams',
+      'Application',
+      function resolveApplication($stateParams, Application) {
+        return Application.getApplication({ docId: $stateParams.id }).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('DocsCaseCtrl', DocsCaseCtrl);
 }(angular, _));

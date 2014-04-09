@@ -143,7 +143,7 @@
             statusName: 'Статус',
             description: 'Описание',
             viewDoc: 'преглед',
-            viewApplication: 'преглед',
+            viewApplication: 'Преглед на заявление',
             doc: 'Документ',
             application: 'Заявление',
             casePart: {

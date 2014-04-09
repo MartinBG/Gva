@@ -59,6 +59,11 @@
               method: 'POST',
               url: '/api/apps/:id/docFiles/create',
               params: { docId: '@docId' }
+            },
+            'getApplication': {
+              method: 'GET',
+              url: '/api/apps/app',
+              params: { docId: '@docId' }
             }
           });
       }]);
