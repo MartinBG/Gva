@@ -53,6 +53,9 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static void migrateNomenclatures(OracleConnection con)
         {
+            System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
+
             using (IUnitOfWork uow = new UnitOfWork(
                 new IDbConfiguration[] { new RegsDbConfiguration(), new CommonDbConfiguration(), new DocsDbConfiguration(), new GvaDbConfiguration() }))
             {
@@ -65,6 +68,8 @@ namespace Gva.MigrationTool.Nomenclatures
                 context = cont;
                 repo = rep;
                 unitOfWork = uow;
+
+                noms["boolean"] = rep.GetNomValues("boolean").ToDictionary(n => "no old id " + n.NomValueId);
 
                 migrateGenders();
                 unitOfWork.Save();
@@ -294,6 +299,9 @@ namespace Gva.MigrationTool.Nomenclatures
                 migrateEngLangLevels();
                 unitOfWork.Save();
             }
+
+            timer.Stop();
+            Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
         }
 
         public static void migrateGenders()

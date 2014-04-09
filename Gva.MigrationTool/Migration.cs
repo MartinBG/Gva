@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using Gva.MigrationTool.Sets;
 using Gva.MigrationTool.Nomenclatures;
 using Regs.Api.LotEvents;
+using Newtonsoft.Json.Serialization;
 
 namespace Gva.MigrationTool
 {
@@ -29,8 +30,21 @@ namespace Gva.MigrationTool
                 try
                 {
                     conn.Open();
+
+                    JsonConvert.DefaultSettings = () =>
+                    {
+                        return new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                            NullValueHandling = NullValueHandling.Ignore,
+                            DefaultValueHandling = DefaultValueHandling.Include,
+                            DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        };
+                    };
+
                     Nomenclature.migrateNomenclatures(conn);
-                    //Person.migratePersons(conn, Nomenclature.noms);
+                    Person.migratePersons(conn, Nomenclature.noms);
                 }
                 catch (OracleException e)
                 {

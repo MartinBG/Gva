@@ -30,6 +30,9 @@ namespace Gva.MigrationTool.Sets
 
         public static void migratePersons(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n)
         {
+            System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
+
             using (IUnitOfWork unitOfWork = new UnitOfWork(
                 new IDbConfiguration[] { new RegsDbConfiguration(), new CommonDbConfiguration(), new DocsDbConfiguration(), new GvaDbConfiguration() }))
             {
@@ -75,95 +78,92 @@ namespace Gva.MigrationTool.Sets
                 {
                     var lot = personSet.CreateLot(context);
 
-                    System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
-                    timer.Start();
-
                     var personData = Person.getPersonData(con, personId);
-                    lot.CreatePart("/personData", personData, context);
+                    lot.CreatePart("personData", personData, context);
 
                     var personAddresses = Person.getPersonAddresses(con, personId);
                     foreach (var address in personAddresses)
                     {
-                        lot.CreatePart("/addresses/*", address, context);
+                        lot.CreatePart("personAddresses/*", address, context);
                     }
 
                     var personDocumentIds = Person.getPersonDocumentIds(con, personId);
                     foreach (var docId in personDocumentIds)
                     {
-                        lot.CreatePart("/personDocumentIds/*", docId, context);
+                        lot.CreatePart("personDocumentIds/*", docId, context);
                     }
 
                     var personDocumentChecks = Person.getPersonDocumentChecks(con, personId);
                     foreach (var docCheck in personDocumentChecks)
                     {
-                        lot.CreatePart("/personDocumentChecks/*", docCheck, context);
+                        lot.CreatePart("personDocumentChecks/*", docCheck, context);
                     }
 
                     var personDocumentEducations = Person.getPersonDocumentEducations(con, personId);
                     foreach (var docEducation in personDocumentEducations)
                     {
-                        lot.CreatePart("/personDocumentEducations/*", docEducation, context);
+                        lot.CreatePart("personDocumentEducations/*", docEducation, context);
                     }
 
                     var personDocumentEmployments = Person.getPersonDocumentEmployments(con, personId);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
-                        lot.CreatePart("/personDocumentEmployments/*", docEmployment, context);
+                        lot.CreatePart("personDocumentEmployments/*", docEmployment, context);
                     }
 
                     var personDocumentMedicals = Person.getPersonDocumentMedicals(con, personId);
                     foreach (var docMedical in personDocumentMedicals)
                     {
-                        lot.CreatePart("/personDocumentMedicals/*", docMedical, context);
+                        lot.CreatePart("personDocumentMedicals/*", docMedical, context);
                     }
 
                     var personDocumentOthers = Person.getPersonDocumentOthers(con, personId);
                     foreach (var docOther in personDocumentOthers)
                     {
-                        lot.CreatePart("/personDocumentOthers/*", docOther, context);
+                        lot.CreatePart("personDocumentOthers/*", docOther, context);
                     }
 
                     //var personDocumentApplications = Person.getPersonDocumentApplications(con, personId);
                     //foreach (var docApplication in personDocumentApplications)
                     //{
-                    //    lot.CreatePart("/personDocumentApplications/*", docApplication, context);
+                    //    lot.CreatePart("personDocumentApplications/*", docApplication, context);
                     //}
 
-                    var personDocumentTheoreticalExams = Person.getPersonDocumentTheoreticalExams(con, personId);
-                    foreach (var docTheoreticalExam in personDocumentTheoreticalExams)
-                    {
-                        lot.CreatePart("/personDocumentTheoreticalexams/*", docTheoreticalExam, context);
-                    }
+                    //var personDocumentTheoreticalExams = Person.getPersonDocumentTheoreticalExams(con, personId);
+                    //foreach (var docTheoreticalExam in personDocumentTheoreticalExams)
+                    //{
+                    //    lot.CreatePart("personDocumentTheoreticalexams/*", docTheoreticalExam, context);
+                    //}
 
                     var personDocumentTrainings = Person.getPersonDocumentTrainings(con, personId);
                     foreach (var docTraining in personDocumentTrainings)
                     {
-                        lot.CreatePart("/personDocumentTrainings/*", docTraining, context);
+                        lot.CreatePart("personDocumentTrainings/*", docTraining, context);
                     }
 
                     var personFlyingExperiences = Person.getPersonFlyingExperiences(con, personId);
                     foreach (var flyingExperience in personFlyingExperiences)
                     {
-                        lot.CreatePart("/personFlyingExperiences/*", flyingExperience, context);
+                        lot.CreatePart("personFlyingExperiences/*", flyingExperience, context);
                     }
 
-                    var personRatings = Person.getPersonRatings(con, personId);
-                    foreach (var personRating in personRatings)
-                    {
-                        var p = lot.CreatePart("/ratings/*", personRating, context);
+                    //var personRatings = Person.getPersonRatings(con, personId);
+                    //foreach (var personRating in personRatings)
+                    //{
+                    //    var p = lot.CreatePart("ratings/*", personRating, context);
 
-                        var personRatingEditions = Person.getPersonRatingEditions(con, (int)personRating.GetValue("__oldId"));
-                        foreach (var personRatingEdition in personRatingEditions)
-                        {
-                            lot.CreatePart(p.Part.Path + "/ratingDates/*", personRatingEdition, context);
+                    //    var personRatingEditions = Person.getPersonRatingEditions(con, (int)personRating.GetValue("__oldId"));
+                    //    foreach (var personRatingEdition in personRatingEditions)
+                    //    {
+                    //        lot.CreatePart(p.Part.Path + "/editions/*", personRatingEdition, context);
 
-                        }
-                    }
+                    //    }
+                    //}
 
                     var personStatuses = Person.getPersonStatuses(con, personId);
                     foreach (var personStatus in personStatuses)
                     {
-                        lot.CreatePart("/personStatuses/*", personStatus, context);
+                        lot.CreatePart("personStatuses/*", personStatus, context);
                     }
 
                     //var personLicences = Person.getPersonLicences(con, personId);
@@ -171,23 +171,15 @@ namespace Gva.MigrationTool.Sets
                     //{
                     //    lot.CreatePart("/licences/*", personLicence, context);
                     //}
-                    timer.Stop();
-                    Console.WriteLine("get - {0}", timer.ElapsedMilliseconds);
-                    timer.Reset(); timer.Start();
 
                     lot.Commit(context, lotEventDispatcher);
 
-                    timer.Stop();
-                    Console.WriteLine("Commit - {0}", timer.ElapsedMilliseconds);
-                    timer.Reset(); timer.Start();
-
                     unitOfWork.Save();
-
-                    timer.Stop();
-                    Console.WriteLine("Save - {0}", timer.ElapsedMilliseconds);
-
                 }
             }
+
+            timer.Stop();
+            Console.WriteLine("Person migration time - {0}", timer.Elapsed.TotalMinutes);
         }
 
         public static IList<int> getPersonIds(OracleConnection con)
@@ -303,18 +295,18 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
                         documentPublisher = r.Field<string>("DOC_PUBLISHER"),
-                        staffTypeId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        ratingTypeId = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()).NomValueId(),
-                        aircraftTypeGroupId = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("ID_AC_GROUP").ToString()).NomValueId(),
-                        ratingClassId = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()).NomValueId(),
-                        authorizationId = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()).NomValueId(),
-                        licenceTypeId = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()).NomValueId(),
-                        locationIndicatorId = noms["locationIndicators"].ByOldId(r.Field<long?>("ID_INDICATOR").ToString()).NomValueId(),
+                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
+                        ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                        aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("ID_AC_GROUP").ToString()),
+                        ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
+                        authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
+                        licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
+                        locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("ID_INDICATOR").ToString()),
                         sector = r.Field<string>("SECTOR"),
-                        personCheckRatingValueId = noms["personCheckRatingValues"].ByCode(r.Field<string>("RATING_VALUE")).NomValueId(),
-                        personCheckDocumentTypeId = noms["documentTypes"].ByOldId(r.Field<decimal?>("DOCUMENT_TYPE_ID").ToString()).NomValueId(),
-                        personCheckDocumentRoleId = noms["documentRoles"].ByOldId(r.Field<decimal?>("DOCUMENT_ROLE_ID").ToString()).NomValueId(),
-                        valid = r.Field<string>("VALID_YN") == "Y" ? true : false,
+                        personCheckRatingValue = noms["personCheckRatingValues"].ByCode(r.Field<string>("RATING_VALUE")),
+                        documentType = noms["documentTypes"].ByOldId(r.Field<decimal?>("DOCUMENT_TYPE_ID").ToString()),
+                        documentRole = noms["documentRoles"].ByOldId(r.Field<decimal?>("DOCUMENT_ROLE_ID").ToString()),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                         notes = r.Field<string>("NOTES"),
                         bookPageNumber = r.Field<decimal?>("BOOK_PAGE_NO"),
                         pageCount = r.Field<decimal?>("PAGES_COUNT")

@@ -2,6 +2,7 @@
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Gva.Api.Models;
+using Regs.Api.Extensions;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -26,15 +27,15 @@ namespace Gva.Api.LotEventHandlers.InventoryView
         {
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
-
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
+
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = partVersion.DynamicContent.employmentCategory.name;
+            invItem.Type = partVersion.GetString("employmentCategory.name");
             invItem.Number = null;
-            invItem.Date = partVersion.DynamicContent.hiredate;
-            invItem.Publisher = partVersion.DynamicContent.organization == null ? null : partVersion.DynamicContent.organization.name;
-            invItem.Valid = partVersion.DynamicContent.valid.code == "Y";
-            invItem.FromDate = partVersion.DynamicContent.hiredate;
+            invItem.Date = partVersion.GetDate("hiredate");
+            invItem.Publisher = partVersion.GetString("organization.name");
+            invItem.Valid = partVersion.GetString("valid.code") == "Y";
+            invItem.FromDate = partVersion.GetDate("hiredate");
             invItem.ToDate = null;
 
             if (partVersion.PartOperation == PartOperation.Add)

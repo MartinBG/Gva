@@ -42,7 +42,7 @@ GO
 
 :r $(rootPath)\"..\Insert\gvaCaseTypes.sql"
 :r $(rootPath)\"..\Insert\noms.sql"
-:r $(rootPath)\"..\Insert\yesNoOptions.sql"
+:r $(rootPath)\"..\Insert\boolean.sql"
 :r $(rootPath)\"..\Insert\documentParts.sql"
 
 ---------------------------------------------------------------
@@ -50,6 +50,7 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\migrationNomValues.sql"
+--DBCC CHECKIDENT ('NomValues', RESEED, 999)
 
 ---------------------------------------------------------------
 -- Aircrafts test noms from Apex

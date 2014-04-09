@@ -2,6 +2,7 @@
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Gva.Api.Models;
+using Regs.Api.Extensions;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -26,13 +27,13 @@ namespace Gva.Api.LotEventHandlers.InventoryView
         {
             invItem.Lot = partVersion.Part.Lot;
             invItem.Part = partVersion.Part;
-
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
+
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = partVersion.DynamicContent.graduation.name;
-            invItem.Number = partVersion.DynamicContent.documentNumber;
-            invItem.Date = partVersion.DynamicContent.completionDate;
-            invItem.Publisher = partVersion.DynamicContent.school.name;
+            invItem.Type = partVersion.GetString("graduation.name");
+            invItem.Number = partVersion.GetString("documentNumber");
+            invItem.Date = partVersion.GetDate("completionDate");
+            invItem.Publisher = partVersion.GetString("school.name");
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;

@@ -96,7 +96,7 @@
     <Content Include="Insert\migrationNomValues.sql" />
     <Content Include="Insert\migrationUser.sql" />
     <Content Include="Insert\noms.sql" />
-    <Content Include="Insert\yesNoOptions.sql" />
+    <Content Include="Insert\boolean.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
