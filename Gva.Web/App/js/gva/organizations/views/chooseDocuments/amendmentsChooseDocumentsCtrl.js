@@ -63,7 +63,7 @@
           id: $stateParams.id,
           documentTypes: $stateParams.documentTypes ? $stateParams.documentTypes.split(',') : null
         })
-            .$promise.then(function (availableDocuments) {
+          .$promise.then(function (availableDocuments) {
               return _.reject(availableDocuments, function (availableDocument) {
                 var count = _.where(organizationAmendment.part.includedDocuments,
                   { partIndex: availableDocument.partIndex }).length;

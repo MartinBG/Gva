@@ -160,7 +160,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
@@ -172,6 +171,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
@@ -184,7 +184,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
@@ -196,6 +195,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)

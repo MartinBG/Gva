@@ -9,15 +9,15 @@
   </sc-column>
   <sc-column data="part.changeNum" title="organizations.amendmentSearch.changeNum">
   </sc-column>
+  <sc-column sortable="false" title="organizations.amendmentSearch.file" width="30px" has-content="true">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-show="item === organizationAmendments[0]"></sc-button>
   </sc-column>
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="deleteBtn" btn-click="deleteAmendment(item)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-show="item === organizationAmendments[0]"></sc-button>
-  </sc-column>
-  <sc-column sortable="false" title="organizations.amendmentSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
   </sc-column>
 </sc-datatable>

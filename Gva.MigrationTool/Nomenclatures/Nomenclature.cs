@@ -1822,7 +1822,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "1", "145"},
                 { "2", "MF"},
                 { "3", "MG"},
-                { "4","147"}
+                { "4", "147"}
             };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SECTION")
