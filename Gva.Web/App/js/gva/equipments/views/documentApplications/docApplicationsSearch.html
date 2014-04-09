@@ -1,0 +1,31 @@
+﻿<sc-button name="createBtn" btn-click="newApplication()" text="equipments.equipmentDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="equipmentDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button name="editBtn" btn-click="editApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.applicationType.name" title="equipments.equipmentDocApplicationSearch.applicationType">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="equipments.equipmentDocApplicationSearch.documentNumber">
+  </sc-column>
+   <sc-column data="part.requestDate" title="equipments.equipmentDocApplicationSearch.requestDate" type="date">
+  </sc-column>
+  <sc-column data="part.documentDate" title="equipments.equipmentDocApplicationSearch.documentDate" type="date">
+  </sc-column>
+  <sc-column data="part.applicationPaymentType.name" title="equipments.equipmentDocApplicationSearch.applicationPaymentType">
+  </sc-column>
+  <sc-column data="part.taxAmount" title="equipments.equipmentDocApplicationSearch.taxAmount">
+  </sc-column>
+  <sc-column data="part.currency.name" title="equipments.equipmentDocApplicationSearch.currency">
+  </sc-column>
+  <sc-column data="part.notes" title="equipments.equipmentDocApplicationSearch.notes">
+  </sc-column>
+  <sc-column data="files[0].bookPageNumber" title="equipments.equipmentDocApplicationSearch.bookPageNumber" width="50px">
+  </sc-column>
+  <sc-column data="files[0].pageCount" title="equipments.equipmentDocApplicationSearch.pageCount" width="50px">
+  </sc-column>
+  <sc-column sortable="false" title="equipments.equipmentDocApplicationSearch.file" width="30px" has-content="true">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
+</sc-datatable>

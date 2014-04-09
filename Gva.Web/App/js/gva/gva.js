@@ -333,6 +333,33 @@
       templateUrl: 'gva/common/forms/commonDocumentApplication.html',
       controller: 'CommonDocumentApplicationCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentData',
+      templateUrl: 'gva/equipments/forms/equipmentData.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentDocumentOther',
+      templateUrl: 'gva/equipments/forms/equipmentDocumentOther.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentDocumentOwner',
+      templateUrl: 'gva/equipments/forms/equipmentDocumentOwner.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentCertOperational',
+      templateUrl: 'gva/equipments/forms/equipmentCertOperational.html',
+      controller: 'EquipmentCertOperationalCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentDocumentApplication',
+      templateUrl: 'gva/equipments/forms/equipmentDocumentApplication.html',
+      controller: 'EquipmentDocumentApplicationCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaEquipmentScannedDocument',
+      templateUrl: 'gva/equipments/forms/equipmentScannedDocument.html',
+      controller: 'EquipmentScannedDocCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications'                                                                                                                                                                                             ])
@@ -646,5 +673,33 @@
       .state(['root.airports.view.inspections.new'              , '/new'                                     , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsNew.html'          , 'AirportsInspectionsNewCtrl'    ]])
       .state(['root.airports.view.inspections.edit'             , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsEdit.html'         , 'AirportsInspectionsEditCtrl'   ]])
       .state(['root.airports.view.inventory'                    , '/inventory'                               , ['@root.airports.view', 'gva/airports/views/inventory/inventorySearch.html'                   , 'AirportInventorySearchCtrl'    ]]);
+    }]).config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+      .state(['root.equipments'                                   , '/equipments?name'                                                                                                                                                                ])
+      .state(['root.equipments.search'                            , ''                                         , ['@root'               , 'gva/equipments/views/equipmentsSearch.html'                             , 'EquipmentsSearchCtrl'           ]])
+      .state(['root.equipments.new'                               , '/new'                                     , ['@root'               , 'gva/equipments/views/equipmentsNew.html'                                , 'EquipmentsNewCtrl'              ]])
+      .state(['root.equipments.view'                              , '/:id'                                     , ['@root'               , 'gva/equipments/views/equipmentsView.html'                               , 'EquipmentsViewCtrl'             ]])
+      .state(['root.equipments.view.edit'                         , '/equipmentData'                           , ['@root'               , 'gva/equipments/views/equipmentData/equipmentDataEdit.html'              , 'EquipmentDataEditCtrl'          ]])
+      .state(['root.equipments.view.others'                       , '/others'                                                                                                                                                                         ])
+      .state(['root.equipments.view.others.search'                , ''                                         , ['@root.equipments.view', 'gva/equipments/views/documentOthers/othersSearch.html'                 , 'EquipmentOthersSearchCtrl'      ]])
+      .state(['root.equipments.view.others.new'                   , '/new'                                     , ['@root.equipments.view', 'gva/equipments/views/documentOthers/othersNew.html'                    , 'EquipmentOthersNewCtrl'         ]])
+      .state(['root.equipments.view.others.edit'                  , '/:ind'                                    , ['@root.equipments.view', 'gva/equipments/views/documentOthers/othersEdit.html'                   , 'EquipmentOthersEditCtrl'        ]])
+      .state(['root.equipments.view.owners'                       , '/owners'                                                                                                                                                                         ])
+      .state(['root.equipments.view.owners.search'                , ''                                         , ['@root.equipments.view', 'gva/equipments/views/documentOwners/ownersSearch.html'                 , 'EquipmentOwnersSearchCtrl'      ]])
+      .state(['root.equipments.view.owners.new'                   , '/new'                                     , ['@root.equipments.view', 'gva/equipments/views/documentOwners/ownersNew.html'                    , 'EquipmentOwnersNewCtrl'         ]])
+      .state(['root.equipments.view.owners.edit'                  , '/:ind'                                    , ['@root.equipments.view', 'gva/equipments/views/documentOwners/ownersEdit.html'                   , 'EquipmentOwnersEditCtrl'        ]])
+      .state(['root.equipments.view.opers'                        , '/opers'                                                                                                                                                                          ])
+      .state(['root.equipments.view.opers.search'                 , ''                                         , ['@root.equipments.view', 'gva/equipments/views/certOpers/opersSearch.html'                       , 'EquipmentOpersSearchCtrl'       ]])
+      .state(['root.equipments.view.opers.new'                    , '/new'                                     , ['@root.equipments.view', 'gva/equipments/views/certOpers/opersNew.html'                          , 'EquipmentOpersNewCtrl'          ]])
+      .state(['root.equipments.view.opers.edit'                   , '/:ind'                                    , ['@root.equipments.view', 'gva/equipments/views/certOpers/opersEdit.html'                         , 'EquipmentOpersEditCtrl'         ]])
+      .state(['root.equipments.view.applications'                 , '/applications'                                                                                                                                                                   ])
+      .state(['root.equipments.view.applications.search'          , ''                                         , ['@root.equipments.view', 'gva/equipments/views/documentApplications/docApplicationsSearch.html'  , 'EquipmentApplicationsSearchCtrl']])
+      .state(['root.equipments.view.applications.new'             , '/new'                                     , ['@root.equipments.view', 'gva/equipments/views/documentApplications/docApplicationsNew.html'     , 'EquipmentApplicationsNewCtrl'   ]])
+      .state(['root.equipments.view.applications.edit'            , '/:ind'                                    , ['@root.equipments.view', 'gva/equipments/views/documentApplications/docApplicationsEdit.html'    , 'EquipmentApplicationsEditCtrl'  ]])
+      .state(['root.equipments.view.inspections'                  , '/inspections'                                                                                                                                                                    ])
+      .state(['root.equipments.view.inspections.search'           , ''                                         , ['@root.equipments.view', 'gva/equipments/views/inspections/equipmentsInspectionsSearch.html'     , 'EquipmentsInspectionsSearchCtrl']])
+      .state(['root.equipments.view.inspections.new'              , '/new'                                     , ['@root.equipments.view', 'gva/equipments/views/inspections/equipmentsInspectionsNew.html'        , 'EquipmentsInspectionsNewCtrl'   ]])
+      .state(['root.equipments.view.inspections.edit'             , '/:ind'                                    , ['@root.equipments.view', 'gva/equipments/views/inspections/equipmentsInspectionsEdit.html'       , 'EquipmentsInspectionsEditCtrl'  ]])
+      .state(['root.equipments.view.inventory'                    , '/inventory'                               , ['@root.equipments.view', 'gva/equipments/views/inventory/inventorySearch.html'                   , 'EquipmentInventorySearchCtrl'   ]]);
     }]);
 }(angular));

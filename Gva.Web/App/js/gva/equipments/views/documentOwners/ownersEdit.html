@@ -1,0 +1,26 @@
+﻿<ng-form name="editDocumentOwnerForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="equipments.editOther.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="equipments.editOwner.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteOwner()" text="equipments.editOwner.deleteOwner"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="equipments.editOwner.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="equipments.editOwner.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+
+  <div class="well-sm panel-body">
+    <gva-equipment-document-owner name="equipmentDocumentOwnerForm" ng-model="equipmentDocumentOwner.part" readonly="!editMode"></gva-equipment-document-owner>
+
+    <gva-equipment-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files" readonly="!editMode"></gva-equipment-scanned-document>
+  </div>
+</ng-form>

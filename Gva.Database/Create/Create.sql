@@ -21,6 +21,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
 :r $(rootPath)\"Tables\GvaViewAircrafts.sql"
 :r $(rootPath)\"Tables\GvaViewAirports.sql"
+:r $(rootPath)\"Tables\GvaViewEquipments.sql"
 --:r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 
 ---------------------------------------------------------------
@@ -88,3 +89,10 @@ GO
 --:r $(rootPath)\"..\Insert\Noms\easaCategories.sql"
 --:r $(rootPath)\"..\Insert\Noms\euRegTypes.sql"
 --:r $(rootPath)\"..\Insert\Noms\removalReasons.sql"
+
+---------------------------------------------------------------
+-- Equipments test noms
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
+:r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
+

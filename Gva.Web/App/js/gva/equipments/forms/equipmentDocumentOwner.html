@@ -1,0 +1,54 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="equipmentRelation">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.equipmentRelation"></label>
+      <sc-validation-error field-name="equipmentRelation" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.equipmentRelation" name="equipmentRelation" alias="'equipmentRelations'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.person"></label>
+      <sc-nomenclature ng-model="model.person" name="person" alias="'persons'" ng-disabled="model.organization" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-4">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.organization"></label>
+      <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'" ng-disabled="model.person" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-2" sc-has-error="documentNumber">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.documentNumber"></label>
+      <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-4 col-md-2" sc-has-error="documentDate">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.documentDate"></label>
+      <sc-validation-error field-name="documentDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.documentDate" name="documentDate" ng-required="true" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-4 col-md-2" sc-has-error="fromDate">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.fromDate"></label>
+      <sc-validation-error field-name="fromDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.fromDate" name="fromDate" ng-required="true" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-2">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.toDate"></label>
+      <sc-date ng-model="model.toDate" name="toDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-8">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.reasonTerminate"></label>
+      <sc-textarea rows="2" cols="50" ng-model="model.reasonTerminate" name="reasonTerminate" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-8">
+      <label class="control-label" l10n-text="equipments.equipmentOwnerDirective.notes"></label>
+      <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+</ng-form>

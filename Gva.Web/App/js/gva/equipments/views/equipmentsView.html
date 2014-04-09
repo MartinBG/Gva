@@ -1,0 +1,65 @@
+﻿<div>
+  <form class="form-inline well well-sm card">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.equipmentType"></span>
+          <input disabled name="equipmentType" type="text" class="form-control" value="{{equipment.equipmentType}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.name"></span>
+          <input disabled name="name" type="text" class="form-control" value="{{equipment.name}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.equipmentProducer"></span>
+          <input disabled name="equipmentProducer" type="text" class="form-control" value="{{equipment.equipmentProducer}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.manPlace"></span>
+          <input disabled name="manPlace" type="text" class="form-control" value="{{equipment.manPlace}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.manDate"></span>
+          <input disabled name="manDate" type="text" class="form-control" value="{{equipment.manDate | date : dd.MM.yyyy}}" />
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="equipments.viewEquipment.place"></span>
+          <input disabled name="place" type="text" class="form-control" value="{{equipment.place}}" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-offset-10 col-md-2">
+        <sc-button name="editBtn" btn-click="edit()" text="equipments.viewEquipment.edit" class="btn btn-primary btn-sm pull-right" icon="glyphicon-pencil"></sc-button>
+      </div>
+    </div>
+  </form>
+<sc-tabs tab-list="{
+      'equipments.tabs.owners' : 'root.equipments.view.owners',
+      'equipments.tabs.inspections' : 'root.equipments.view.inspections',
+      'equipments.tabs.docs': {
+        'equipments.tabs.others': 'root.equipments.view.others'
+       },
+      'equipments.tabs.certs': {
+        'equipments.tabs.opers': 'root.equipments.view.opers'
+       },
+      'equipments.tabs.applications' : 'root.equipments.view.applications',
+      'equipments.tabs.inventory' : 'root.equipments.view.inventory'
+    }"></sc-tabs>
+  <div class="tab-content">
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>
+</div>

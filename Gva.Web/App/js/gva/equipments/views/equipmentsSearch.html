@@ -1,0 +1,28 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="equipments.search.name"></sc-filter>
+    <sc-search-button action="search()" text="equipments.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newEquipment()" text="equipments.search.new" icon="glyphicon-plane"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable items="equipments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="viewButton" btn-click="viewEquipment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="equipmentType" title="equipments.search.equipmentType">
+    </sc-column>
+    <sc-column data="name" title="equipments.search.name">
+    </sc-column>
+    <sc-column data="equipmentProducer" title="equipments.search.equipmentProducer">
+    </sc-column>
+    <sc-column data="manPlace" title="equipments.search.manPlace">
+    </sc-column>
+    <sc-column data="manDate" title="equipments.search.manDate" type="date">
+    </sc-column>
+    <sc-column data="place" title="equipments.search.place">
+    </sc-column>
+    <sc-column data="operationalDate" title="equipments.search.operationalDate" type="date">
+    </sc-column>
+  </sc-datatable>
+</div>

@@ -45,6 +45,7 @@
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Tables\GvaViewEquipments.sql" />
     <Content Include="Create\Tables\GvaViewAirports.sql" />
     <Content Include="Create\Tables\GvaViewAircraftRegistrations.sql" />
     <Content Include="Create\Tables\GvaCorrespondents.sql" />
@@ -81,6 +82,8 @@
     <Content Include="Insert\Noms\auditStates.sql" />
     <Content Include="Insert\Noms\auditTypes.sql" />
     <Content Include="Insert\Noms\cofATypes.sql" />
+    <Content Include="Insert\Noms\equipmentTypes.sql" />
+    <Content Include="Insert\Noms\equipmentProducers.sql" />
     <Content Include="Insert\Noms\easaCategories.sql" />
     <Content Include="Insert\Noms\easaTypes.sql" />
     <Content Include="Insert\Noms\euRegTypes.sql" />

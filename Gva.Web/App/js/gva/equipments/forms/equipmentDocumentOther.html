@@ -1,0 +1,42 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentNumber"></label>
+      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentDateValidFrom"></label>
+      <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentDateValidTo"></label>
+      <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentPublisher"></label>
+      <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentType">
+        <label class="control-label" l10n-text="equipments.equipmentOtherDirective.otherDocumentType"></label>
+        <sc-validation-error field-name="otherDocumentType" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.documentType" name="otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffAliases: ['fligthCrew', 'to_vs', 'ovd'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-4" sc-has-error="equipmentOtherDocumentRole">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.equipmentOtherDocumentRole"></label>
+      <sc-validation-error field-name="equipmentOtherDocumentRole" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.documentRole" name="equipmentOtherDocumentRole" alias="'documentRoles'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-2">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.valid"></label>
+      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-8">
+      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.notes"></label>
+      <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+</ng-form>

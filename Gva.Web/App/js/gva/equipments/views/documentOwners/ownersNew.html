@@ -1,0 +1,20 @@
+﻿<ng-form name="newDocumentOwnerForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="equipments.newOther.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="equipments.newOwner.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="equipments.newOwner.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-equipment-document-owner name="equipmentDocumentOwnerForm" ng-model="equipmentDocumentOwner.part"></gva-equipment-document-owner>
+
+      <gva-equipment-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files"></gva-equipment-scanned-document>
+    </div>
+  </div>
+</ng-form>

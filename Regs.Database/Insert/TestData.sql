@@ -1,16 +1,17 @@
 ﻿INSERT INTO [LotSets]
-    ([LotSetId], [Name]         , [Alias]         )
+    ([LotSetId], [Name]         , [Alias]        )
 VALUES
-    (1         , N'Персонал'    , N'Person'       ),
-    (2         , N'Организация' , N'Organization' ),
-    (3         , N'ВС'          ,N'Aircraft'      ),
-    (4         , N'Летище'      ,N'Airport'       )
+    (1         , N'Персонал'    , N'Person'      ),
+    (2         , N'Организация' , N'Organization'),
+    (3         , N'ВС'          , N'Aircraft'    ),
+    (4         , N'Летище'      , N'Airport'     ),
+    (5         , N'Съоръжение'  , N'Equipment'   )
 GO
 
 
 INSERT INTO [LotSetParts]
-    ([LotSetPartId], [LotSetId], [Name]                                                                                  , [Alias]                                           , [PathRegex]                                              , [Schema])
-VALUES                                                                                                                                                                                                                                  
+    ([LotSetPartId], [LotSetId], [Name]                                                                                  , [Alias]                                                       , [PathRegex]                                              , [Schema])
+VALUES                                                                                                                                                                                                                                                        
     (1             , 1         ,'Адрес'                                                                                  , 'personAddress'                                               , N'^personAddresses/\d+$'                                 , N'{}'   ),
     (2             , 1         ,'Лични данни'                                                                            , 'personData'                                                  , N'^personData$'                                          , N'{}'   ),
     (3             , 1         ,'Документ за самоличност'                                                                , 'personDocumentId'                                            , N'^personDocumentIds/\d+$'                               , N'{}'   ),
@@ -30,7 +31,7 @@ VALUES
     (17            , 1         ,'Заявление'                                                                              , 'personApplication'                                           , N'^personDocumentApplications/\d+$'                      , N'{}'   ),
     (18            , 2         ,'Адрес'                                                                                  , 'organizationAddress'                                         , N'^organizationAddresses/\d+$'                           , N'{}'   ),
     (19            , 2         ,'План за одит'                                                                           , 'organizationAuditplan'                                       , N'^organizationAuditplans/\d+$'                          , N'{}'   ),
-    (20            , 2         ,'Лиценз на летищен оператор'                                                             , 'organizationCertAirportOperator'                             , N'^organizationCertAirportOperators/\d+$'                , N'{}'   ),
+    (20            , 2         ,'Лиценз на летищен оператор'                                                             , 'organizationCertEquipmentOperator'                           , N'^organizationCertEquipmentOperators/\d+$'              , N'{}'   ),
     (21            , 2         ,'Лиценз на оператор по наземно обслужване или самообслужване'                            , 'organizationCertGroundServiceOperator'                       , N'^organizationCertGroundServiceOperators/\d+$'          , N'{}'   ),
     (22            , 2         ,'Удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване' , 'organizationOrganizationGroundServiceOperatorSnoOperational' , N'^organizationGroundServiceOperatorsSnoOperational/\d+$', N'{}'   ),
     (23            , 2         ,'Свидетелство за авиационен оператор'                                                    , 'organizationCertAirOperator'                                 , N'^organizationCertAirOperators/\d+$'                    , N'{}'   ),
@@ -72,5 +73,11 @@ VALUES
     (59            , 4         ,'Друг документ'                                                                          , 'airportOther'                                                , N'^airportDocumentOthers/\d+$'                           , N'{}'   ),
     (60            , 4         ,'Заявление'                                                                              , 'airportApplication'                                          , N'^airportDocumentApplications/\d+$'                     , N'{}'   ),
     (61            , 4         ,'Eксплоатационна годност'                                                                , 'airportOperational'                                          , N'^airportCertOperationals/\d+$'                         , N'{}'   ),
-    (62            , 4         ,'Инспекция'                                                                              , 'airportInspection'                                           , N'^inspections/\d+$'                                     , N'{}'   )
+    (62            , 4         ,'Инспекция'                                                                              , 'airportInspection'                                           , N'^inspections/\d+$'                                     , N'{}'   ),
+    (63            , 5         ,'Данни за съoръжение'                                                                    , 'equipmentData'                                               , N'^equipmentData$'                                       , N'{}'   ),
+    (64            , 5         ,'Свързано лице'                                                                          , 'equipmentOwner'                                              , N'^equipmentDocumentOwners/\d+$'                         , N'{}'   ),
+    (65            , 5         ,'Друг документ'                                                                          , 'equipmentOther'                                              , N'^equipmentDocumentOthers/\d+$'                         , N'{}'   ),
+    (66            , 5         ,'Заявление'                                                                              , 'equipmentApplication'                                        , N'^equipmentDocumentApplications/\d+$'                   , N'{}'   ),
+    (67            , 5         ,'Eксплоатационна годност'                                                                , 'equipmentOperational'                                        , N'^equipmentCertOperationals/\d+$'                       , N'{}'   ),
+    (68            , 5         ,'Инспекция'                                                                              , 'equipmentInspection'                                         , N'^inspections/\d+$'                                     , N'{}'   )
 GO

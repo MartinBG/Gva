@@ -1,0 +1,128 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong l10n-text="equipments.equipmentOperDirective.title"></strong></div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.issueDate"></label>
+          <sc-date ng-model="model.issueDate" name="issueDate" ng-readonly="readonly"></sc-date>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.issueNumber"></label>
+          <sc-text ng-model="model.issueNumber" name="issueNumber" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.validToDate"></label>
+          <sc-date ng-model="model.validToDate" name="validToDate" ng-readonly="readonly"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.organization"></label>
+          <sc-nomenclature ng-model="model.organization" name="organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.inspector"></label>
+          <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-2">
+          <label class="control-label" l10n-text="equipments.equipmentOperDirective.valid"></label>
+          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h5 l10n-text="equipments.equipmentOperDirective.includedDocuments"></h5>
+              <div class="well-sm panel-body">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th l10n-text="equipments.equipmentOperDirective.inspector"class="col-md-4"></th>
+                      <th l10n-text="equipments.equipmentOperDirective.approvalDate" class="col-sm-4 col-md-2"></th>
+                      <th l10n-text="equipments.equipmentOperDirective.linkedDocument"></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat-start="doc in model.includedDocuments">
+                      <td>
+                        <sc-nomenclature ng-model="doc.inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+                      </td>
+                      <td>
+                        <sc-date ng-model="doc.approvalDate" ng-readonly="readonly"></sc-date>
+                      </td>
+                      <td>
+                        <sc-text ng-model="doc.linkedDocument" ng-readonly="readonly"></sc-text>
+                      </td>
+                      <td style="text-align: right; width: 1px;">
+                        <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteDoc(doc)" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+                      </td>
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    <tr class="sort-disabled" ng-if="!model.includedDocuments.length">
+                      <td colspan="8" class="text-center" l10n-text="equipments.equipmentOperDirective.noAvailableDocs"></td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" style="text-align: right; width: 1px;">
+                        <sc-button type="button" btn-click="addDoc()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+      </div>
+      <accordion>
+        <accordion-group style="margin-top: 5px;">
+          <accordion-heading>
+            <a l10n-text="equipments.equipmentOperDirective.ext" style="font-size: 12px;"></a>
+          </accordion-heading>
+          <div class="row">
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.extDate"></label>
+              <sc-date ng-model="model.ext.date" name="extDate" ng-readonly="readonly"></sc-date>
+            </div>
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.extValidToDate"></label>
+              <sc-date ng-model="model.ext.validToDate" name="extValidToDate" ng-readonly="readonly"></sc-date>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.extInspector"></label>
+              <sc-nomenclature ng-model="model.ext.inspector" name="extInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+      
+      <accordion>
+        <accordion-group style="margin-top: 5px;">
+          <accordion-heading>
+            <a l10n-text="equipments.equipmentOperDirective.revoke" style="font-size: 12px;"></a>
+          </accordion-heading>
+          <div class="row">
+            <div class="form-group col-md-2 col-sm-4">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.revokeDate"></label>
+              <sc-date ng-model="model.revokeDate" name="revokeDate" ng-readonly="readonly"></sc-date>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.revokeInspector"></label>
+              <sc-nomenclature ng-model="model.revokeInspector" name="revokeInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-4 col-sm-8">
+              <label class="control-label" l10n-text="equipments.equipmentOperDirective.revokeCause"></label>
+              <sc-text ng-model="model.revokeCause" name="revokeCause" ng-readonly="readonly"></sc-text>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</ng-form>

@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -85,12 +86,17 @@
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
     <Compile Include="LotEventHandlers\AirportView\AirportDataHandler.cs" />
+    <Compile Include="LotEventHandlers\EquipmentView\EquipmentDataHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftInspectionHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftDebtHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOccurrenceHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOwnerHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOtherHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentApplicationHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentInspectionHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentOtherHandler.cs" />
+    <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentOwnerHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Organizations\OrganizationOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonCheckHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonDocumentIdHandler.cs" />
@@ -120,6 +126,7 @@
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\AirportDO.cs" />
+    <Compile Include="ModelsDO\EquipmentDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
     <Compile Include="ModelsDO\AircraftDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
@@ -128,6 +135,7 @@
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
+    <Compile Include="Models\GvaViewEquipment.cs" />
     <Compile Include="Models\GvaViewAirport.cs" />
     <Compile Include="Models\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
@@ -153,6 +161,8 @@
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\AirportRepository\AirportRepository.cs" />
     <Compile Include="Repositories\AirportRepository\IAirportRepository.cs" />
+    <Compile Include="Repositories\EquipmentRepository\EquipmentRepository.cs" />
+    <Compile Include="Repositories\EquipmentRepository\IEquipmentRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository\IOrganizationRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository\OrganizationRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRepository.cs" />

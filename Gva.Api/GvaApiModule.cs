@@ -16,8 +16,10 @@ using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.AircraftRepository;
 using Regs.Api.LotEvents;
 using Gva.Api.LotEventHandlers.AircraftView;
-using Gva.Api.Repositories.AirportRepository;
+using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.LotEventHandlers.EquipmentView;
 using Gva.Api.LotEventHandlers.AirportView;
+using Gva.Api.Repositories.AirportRepository;
 
 namespace Gva.Api
 {
@@ -69,10 +71,17 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportOwnerHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AirportApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AirportInspectionHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+
+            moduleBuilder.RegisterType<EquipmentDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EquipmentOtherHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EquipmentOwnerHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EquipmentApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EquipmentInspectionHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>();
+            moduleBuilder.RegisterType<EquipmentRepository>().As<IEquipmentRepository>();
             moduleBuilder.RegisterType<AirportRepository>().As<IAirportRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
@@ -84,6 +93,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<PersonsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AirportsController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<EquipmentsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftsController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerApiRequest();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerApiRequest();

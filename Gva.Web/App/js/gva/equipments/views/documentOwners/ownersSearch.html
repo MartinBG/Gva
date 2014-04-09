@@ -1,0 +1,32 @@
+﻿<sc-button name="createBtn" btn-click="newDocumentOwner()" text="equipments.ownerSearch.newOwner" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="documentOwners" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button name="editBtn" btn-click="editDocumentOwner(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="deleteBtn" btn-click="deleteDocumentOwner(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+  </sc-column>
+  <sc-column data="part.equipmentRelation.name" title="equipments.ownerSearch.equipmentRelation">
+  </sc-column>
+  <sc-column data="part.person.name" title="equipments.ownerSearch.person">
+  </sc-column>
+  <sc-column data="part.organization.name" title="equipments.ownerSearch.organization">
+  </sc-column>
+  <sc-column data="part.documentNumber" title="equipments.ownerSearch.documentNumber">
+  </sc-column>
+  <sc-column data="part.documentDate" title="equipments.ownerSearch.documentDate" type="date">
+  </sc-column>
+  <sc-column data="part.fromDate" title="equipments.ownerSearch.fromDate" type="date">
+  </sc-column>
+  <sc-column data="part.toDate" title="equipments.ownerSearch.toDate" type="date">
+  </sc-column>
+  <sc-column data="part.notes" title="equipments.ownerSearch.notes" visible="false">
+  </sc-column>
+  <sc-column data="files[0].bookPageNumber" title="equipments.ownerSearch.bookPageNumber" width="50px">
+  </sc-column>
+  <sc-column data="files[0].pageCount" title="equipments.ownerSearch.pageCount" width="50px">
+  </sc-column>
+  <sc-column sortable="false" title="equipments.ownerSearch.file" width="30px" has-content="true">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
+  </sc-column>
+</sc-datatable>

@@ -130,6 +130,8 @@
           edit: 'Редакция'
         },
         newAirport: {
+          title: 'Ново съоръжение',
+          airportDataForm: 'Данни за летище',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -323,6 +325,282 @@
           title: 'Ново заявление'
         },
         editAirportDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteApplication: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на заявление'
+        },
+        inventorySearch: {
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
+        }
+      },
+      equipments: {
+        tabs: {
+          docs: 'Документи',
+          certs: 'Удостоверения',
+          owners: 'Свързани лица',
+          others: 'Други',
+          opers: 'Експлоатационна годност',
+          applications: 'Заявления',
+          inspections: 'Инспекции',
+          inventory: 'Опис'
+        },
+        search: {
+          equipmentType: 'Тип',
+          name: 'Наименование',
+          equipmentProducer: 'Производител',
+          manPlace: 'Място на производство',
+          manDate: 'Дата на производство',
+          place: 'Местоположение',
+          operationalDate: 'Дата на въвеждане в експлоатация',
+          note: 'Допълнително описание',
+          'new': 'Ново съоръжение',
+          search: 'Търси'
+        },
+        equipmentScannedDocumentDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
+        },
+        equipmentDataDirective: {
+          title: 'Данни за съоръжение',
+          equipmentType: 'Тип',
+          name: 'Наименование',
+          equipmentProducer: 'Производител',
+          manPlace: 'Място на производство',
+          manDate: 'Дата на производство',
+          place: 'Местоположение',
+          operationalDate: 'Дата на въвеждане в експлоатация',
+          note: 'Допълнително описание',
+          coordinates: 'Координати',
+          elevation: 'Кота на терена',
+          call: 'Позивна',
+          frequencies: 'Работни честоти',
+          behavior: 'Режим на работа',
+          power: 'Изходяща мощност',
+          range: 'Радиус на действие'
+        },
+        viewEquipment: {
+          equipmentType: 'Тип',
+          name: 'Наименование',
+          equipmentProducer: 'Производител',
+          manPlace: 'Място на производство',
+          manDate: 'Дата на производство',
+          place: 'Местоположение',
+          operationalDate: 'Дата на въвеждане в експлоатация',
+          note: 'Допълнително описание',
+          edit: 'Редакция'
+        },
+        newEquipment: {
+          title: 'Ново съоръжение',
+          equipmentDataForm: 'Данни за съоръжение',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editEquipmentData: {
+          title: 'Редакция на данни за съоръжение',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        equipmentOtherDirective: {
+          title: 'Друг документ',
+          documentNumber: 'Док No',
+          documentDateValidFrom: 'Издаден на',
+          documentDateValidTo: 'Валидно до',
+          documentPublisher: 'Издател',
+          notes: 'Бележки',
+          otherDocumentType: 'Тип документ',
+          equipmentOtherDocumentRole: 'Роля',
+          valid: 'Действителен',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.'
+        },
+        newOther: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          title: 'Нов документ'
+        },
+        editOther: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          edit: 'Редакция',
+          deleteOther: 'Изтриване',
+          title: 'Редакция на документ'
+        },
+        otherSearch: {
+          newDocument: 'Нов документ',
+          documentNumber: 'Документ №',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          otherDocumentType: 'Тип документ',
+          otherDocumentRole: 'Роля',
+          valid: 'Валидно',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          newOther: 'Нов документ',
+          file: 'Файл'
+        },
+        inspectionSearch: {
+          newInspection: 'Нова инспекция',
+          documentNumber: '№ на документ',
+          auditState: 'Състояние',
+          auditReason: 'Причина',
+          auditType: 'Вид одит',
+          subject: 'Предмет на одит',
+          notification: 'Оператора предварително уведомен',
+          startDate: 'Начална дата',
+          endDate: 'Крайна дата',
+          inspectionPlace: 'Адрес на одитирания обект',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
+        },
+        newInspection: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          title: 'Нова инспекция'
+        },
+        editInspection: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          edit: 'Редакция',
+          deleteInspection: 'Изтриване',
+          title: 'Редакция на инспекция'
+        },
+        equipmentOwnerDirective: {
+          title: 'Свързано лице',
+          equipmentRelation: 'Тип отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: '№ на документ',
+          documentDate: 'Дата на документ',
+          fromDate: 'В сила от',
+          toDate: 'Дата на прекратявне на отношенията',
+          reasonTerminate: 'Причина за прекратяване',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
+        },
+        newOwner: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          title: 'Ново свързано лице'
+        },
+        editOwner: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteOwner: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на свързано лице'
+        },
+        ownerSearch: {
+          newOwner: 'Ново свързано лице',
+          equipmentRelation: 'Отношение',
+          person: 'Физическо лице',
+          organization: 'Организация',
+          documentNumber: 'Документ №',
+          documentDate: 'Дата на документ',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
+        },
+        equipmentOperDirective: {
+          title: 'Удостоверение за експлоатационна годност',
+          issueNumber: 'Номер на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          inspector: 'Проверил',
+          valid: 'Валиден',
+          includedDocuments: 'Приложени документи',
+          approvalDate: 'Дата на одобрение',
+          docInspector: 'Инспектор',
+          linkedDocument: 'Документ',
+          noAvailableDocs: 'Няма налични документи',
+          ext: 'Продължение',
+          extDate: 'Дата на издаване',
+          extValidToDate: 'Дата на изтичане',
+          extInspector: 'Проверил',
+          revoke: 'Отнемане',
+          revokeDate: 'Дата на отнемане',
+          revokeInspector: 'Инспектор',
+          revokeCause: 'Причина за отнемане'
+        },
+        newOper: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          title: 'Ново удостоверение'
+        },
+        editOper: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteOper: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на удостоверение'
+        },
+        operSearch: {
+          newOper: 'Ново удостоверение',
+          issueDate: 'Дата на издаване',
+          issueNumber: 'Удостоверение №',
+          validToDate: 'Срок на валидност',
+          audit: 'Инспекция',
+          organization: 'Организация',
+          inspector: 'Проверил',
+          valid: 'Валиден'
+        },
+        equipmentDocApplicationDirective: {
+          title: 'Заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
+        equipmentDocApplicationSearch: {
+          newApplication: 'Ново заявление',
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса',
+          file: 'Файл'
+        },
+        newEquipmentDocApplication: {
+          save: 'Запис',
+          cancel: 'Отказ',
+          title: 'Ново заявление'
+        },
+        editEquipmentDocApplication: {
           save: 'Запис',
           cancel: 'Отказ',
           deleteApplication: 'Изтриване',
@@ -2955,6 +3233,7 @@
         'root.aircrafts.view.applications': 'Инспекции',
         'root.aircrafts.view.applications.new': 'Нова инспекция',
         'root.aircrafts.view.applications.edit': 'Редакция на инспекция',
+        'root.aircrafts.view.inventory': 'Опис',
         'root.organizations': 'Организации',
         'root.organizations.new': 'Нова организация',
         'root.organizations.view': 'Данни за организация',
@@ -3036,6 +3315,9 @@
         'root.airports.view.others': 'Други документи',
         'root.airports.view.others.new': 'Нов документ',
         'root.airports.view.others.edit': 'Редакция на документ',
+        'root.airports.view.owners': 'Свързани лица',
+        'root.airports.view.owners.new': 'Ново свързано лице',
+        'root.airports.view.owners.edit': 'Редакция на свързано лице',
         'root.airports.view.opers': 'Удостоверения за експлоатационна годност',
         'root.airports.view.opers.new': 'Ново удостоверение',
         'root.airports.view.opers.edit': 'Редакция на удостоверение',
@@ -3044,7 +3326,28 @@
         'root.airports.view.applications.edit': 'Редакция на заявление',
         'root.airports.view.inspections': 'Инспекции',
         'root.airports.view.inspections.new': 'Нова инспекция',
-        'root.airports.view.inspections.edit': 'Редакция на инспекция'
+        'root.airports.view.inspections.edit': 'Редакция на инспекция',
+        'root.airports.view.inventory': 'Опис',
+        'root.equipments': 'Съоръжения',
+        'root.equipments.new': 'Ново съоръжение',
+        'root.equipments.view': 'Данни за съоръжение',
+        'root.equipments.view.edit': 'Редакция',
+        'root.equipments.view.others': 'Други документи',
+        'root.equipments.view.others.new': 'Нов документ',
+        'root.equipments.view.others.edit': 'Редакция на документ',
+        'root.equipments.view.owners': 'Свързани лица',
+        'root.equipments.view.owners.new': 'Ново свързано лице',
+        'root.equipments.view.owners.edit': 'Редакция на свързано лице',
+        'root.equipments.view.opers': 'Удостоверения за експлоатационна годност',
+        'root.equipments.view.opers.new': 'Ново удостоверение',
+        'root.equipments.view.opers.edit': 'Редакция на удостоверение',
+        'root.equipments.view.applications': 'Заявления',
+        'root.equipments.view.applications.new': 'Новo заявление',
+        'root.equipments.view.applications.edit': 'Редакция на заявление',
+        'root.equipments.view.inspections': 'Инспекции',
+        'root.equipments.view.inspections.new': 'Нова инспекция',
+        'root.equipments.view.inspections.edit': 'Редакция на инспекция',
+        'root.equipments.view.inventory': 'Опис'
       }
     });
   }]);
