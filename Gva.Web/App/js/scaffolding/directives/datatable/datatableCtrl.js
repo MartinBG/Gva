@@ -158,7 +158,7 @@
       $scope.items = [];
       $scope.currentPage = 1;
       if (!$scope.pageable) {
-        $scope.pageSize = items.length;
+        $scope.pageSize = items.length || 1;
       }
 
       for (var i = 0, l1 = items.length; i < l1; i++) {
