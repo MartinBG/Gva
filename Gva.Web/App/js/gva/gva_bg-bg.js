@@ -2078,6 +2078,8 @@
           groundServiceOperators: 'Оператор по наземно обслужване',
           airOperator:'Авиационен оператор',
           certAirOperators:'Свидетелство',
+          airCarrier:'Въдушен превозвач',
+          certAirCarriers:'Лиценз',
           airNavigationServiceDeliverer: 'Доставчик АО',
           certAirNavigationServiceDeliverer: 'Свидетелство',
           certGroundServiceOperators: 'Лиценз',
@@ -2365,6 +2367,25 @@
           cancel: 'Отказ',
           deleteCertOp: 'Изтрий'
         },
+        certAirCarrierSearch: {
+          newCertAirCarrier: 'Нов лиценз',
+          certNumber: '№ на удостоверение',
+          issueDate: 'Дата на издаване',
+          validToDate: 'Срок на валидност',
+          aircarrierServices: 'Предлагани услуги'
+        },
+        newCertAirCarrier: {
+          title: 'Нов лиценз на оператор на оператор на въздушен превозвач',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editCertAirCarrier: {
+          title: 'Преглед на лиценз на оператор на въздушен превозвач',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteCertOp: 'Изтрий'
+        },
         inspectionSearch: {
           newInspection: 'Нов одит',
           documentNumber: '№ на документ',
@@ -2612,6 +2633,8 @@
           revokeinspector: 'Инспектор',
           specs: 'Сецификации',
           revokeTitle: 'Отнемане',
+          aircrafts: 'Списък с ВС за опериране',
+          aircarrierServices: 'Списък с предлагани услуги',
           documentsTable: {
             includedDocuments: 'Приложени документи',
             chooseDocuments: 'Избери документи',
@@ -2941,7 +2964,10 @@
         'root.organizations.view.certAirportOperators.edit': 'Редакция на лиценз',
         'root.organizations.view.certAirOperators': 'Свидетелство за авиационен оператор',
         'root.organizations.view.certAirOperators.new': 'Ново cвидетелство',
-        'root.organizations.view.certAirOperators.edit': 'Редакция на видетелство',
+        'root.organizations.view.certAirOperators.edit': 'Редакция на свидетелство',
+        'root.organizations.view.certAirCarriers': 'Оперативен лиценз на въздушен превозвач',
+        'root.organizations.view.certAirCarriers.new': 'Нов лиценз',
+        'root.organizations.view.certAirCarriers.edit': 'Редакция на лиценз',
         'root.organizations.view.certAirNavigationServiceDeliverers':
           'Свидетелство за извършване на аеронавигационно обслужване',
         'root.organizations.view.certAirNavigationServiceDeliverers.new': 'Ново свидетелство',

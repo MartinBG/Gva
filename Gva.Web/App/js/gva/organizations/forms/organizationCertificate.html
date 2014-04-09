@@ -60,6 +60,20 @@
       <sc-text ng-model="model.specs" ng-readonly="readonly"></sc-text>
     </div>
   </div>
+  <div ng-if="$parent.certAirCarrierForm">
+    <div class="row">
+      <div class="form-group col-sm-7 col-md-6">
+        <label class="control-label" l10n-text="organizations.certificateDirective.aircrafts"></label>
+        <sc-nomenclature ng-model="model.aircrafts" alias="'aircrafts'" ng-readonly="readonly" multiple="multiple"></sc-nomenclature>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-7 col-md-6">
+        <label class="control-label" l10n-text="organizations.certificateDirective.aircarrierServices"></label>
+        <sc-nomenclature ng-model="model.aircarrierServices" alias="'aircarrierServices'" ng-readonly="readonly" multiple="multiple"></sc-nomenclature>
+      </div>
+    </div>
+  </div>
 
   <h5 class="form-header" l10n-text="organizations.certificateDirective.ext"></h5>
   <div class="row">

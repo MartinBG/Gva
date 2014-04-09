@@ -41,6 +41,14 @@
       });
     }
 
+    if(_.contains(organization.caseTypes, 'ВП')) {
+      $scope.tablist =  _.extend($scope.tablist, {
+        'organizations.tabs.airCarrier': {
+          'organizations.tabs.certAirCarriers': 'root.organizations.view.certAirCarriers'
+        }
+      });
+    }
+
     if(_.contains(organization.caseTypes, 'АО')) {
       $scope.tablist =  _.extend($scope.tablist, {
         'organizations.tabs.airOperator': {

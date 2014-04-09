@@ -572,8 +572,9 @@
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="App\js\gva\organizations\forms\organizationScannedDocument.html" />
     <Content Include="App\js\gva\organizations\forms\organizationScannedDocumentCtrl.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertAirCarrier.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirNavigationServiceDeliverers.js" />
-    <Content Include="App\js\gva\organizations\resources\organizationCertAirOperators.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertAirOperator.js" />
     <Content Include="App\js\gva\organizations\resources\organizationInventory.js" />
     <Content Include="App\js\gva\organizations\views\certAirOperators\certAirOperatorsEdit.html" />
     <Content Include="App\js\gva\organizations\views\certAirOperators\certAirOperatorsEditCtrl.js" />
@@ -587,6 +588,12 @@
     <Content Include="App\js\gva\organizations\views\certAirNavigationServiceDeliverers\certAirNavigationServiceDeliverersNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\certAirNavigationServiceDeliverers\certAirNavigationServiceDeliverersSearch.html" />
     <Content Include="App\js\gva\organizations\views\certAirNavigationServiceDeliverers\certAirNavigationServiceDeliverersSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersEdit.html" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersEditCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersNew.html" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersNewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersSearch.html" />
+    <Content Include="App\js\gva\organizations\views\certAirCarriers\certAirCarriersSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\inventory\organizationsInventorySearch.html" />
     <Content Include="App\js\gva\organizations\views\inventory\organizationsInventorySearchCtrl.js" />
     <Content Include="App\js\gva\organizations\resources\organization.js" />
@@ -594,8 +601,8 @@
     <Content Include="App\js\gva\organizations\resources\organizationAmendment.js" />
     <Content Include="App\js\gva\organizations\resources\organizationApproval.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAuditplans.js" />
-    <Content Include="App\js\gva\organizations\resources\organizationCertAirportOperators.js" />
-    <Content Include="App\js\gva\organizations\resources\organizationCertGroundServiceOperators.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertAirportOperator.js" />
+    <Content Include="App\js\gva\organizations\resources\organizationCertGroundServiceOperator.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertGroundServiceOperatorsSnoOperational.js" />
     <Content Include="App\js\gva\organizations\resources\organizationData.js" />
     <Content Include="App\js\gva\organizations\resources\organizationDocumentOther.js" />

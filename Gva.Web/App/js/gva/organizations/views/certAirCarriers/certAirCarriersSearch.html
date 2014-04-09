@@ -1,0 +1,14 @@
+﻿<sc-button name="createBtn" btn-click="newCertAirCarrier()" text="organizations.certAirCarrierSearch.newCertAirCarrier" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="certAirCarriers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button name="editBtn" btn-click="editCertAirCarrier(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.certNumber" title="organizations.certAirCarrierSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.issueDate" title="organizations.certAirCarrierSearch.issueDate" type="date">
+  </sc-column>
+  <sc-column data="part.validToDate" title="organizations.certAirCarrierSearch.validToDate"  type="date">
+  </sc-column>
+  <sc-column data="part.services" title="organizations.certAirCarrierSearch.aircarrierServices">
+  </sc-column>
+</sc-datatable>
