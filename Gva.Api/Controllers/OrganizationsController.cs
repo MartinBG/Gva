@@ -301,8 +301,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^organizationData$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationAddresses/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^organizationAddresses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationAuditplans/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirportOperators/\d+$)}"),
@@ -321,6 +320,17 @@ namespace Gva.Api.Controllers
         {
             return base.PostPart(lotId, path, content);
         }
+
+
+        [Route(@"{lotId}/{*path:regex(^organizationData$)}")]
+        public IHttpActionResult PostOrganizationData(int lotId, string path, JObject content)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            this.caseTypeRepository.AddCaseTypes(lot, (content as dynamic).part.caseTypes);
+
+            return base.PostPart(lotId, path, content);
+        }
+
 
         [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public IHttpActionResult PostRecommendationPart(int lotId, string path, dynamic content)
