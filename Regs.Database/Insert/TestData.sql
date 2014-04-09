@@ -3,7 +3,8 @@
 VALUES
     (1         , N'Персонал'    , N'Person'       ),
     (2         , N'Организация' , N'Organization' ),
-    (3         , N'ВС'          ,N'Aircraft'      )
+    (3         , N'ВС'          ,N'Aircraft'      ),
+    (4         , N'Летище'      ,N'Airport'       )
 GO
 
 
@@ -62,5 +63,11 @@ VALUES
     (50            , 3         ,'Разрешително за полет'                                                                  , 'aircraftPermit'                                              , N'^aircraftCertPermitsToFly/\d+$'                        , N'{}'   ),
     (51            , 3         ,'Удосотоверение за шум'                                                                  , 'aircraftNoise'                                               , N'^aircraftCertNoises/\d+$'                              , N'{}'   ),
     (52            , 3         ,'Удосотоверение за шум'                                                                  , 'aircraftNoiseFM'                                             , N'^aircraftCertNoisesFM/\d+$'                            , N'{}'   ),
-    (53            , 3         ,'Разрешително за радиостанция'                                                           , 'aircraftRadio'                                               , N'^aircraftCertRadios/\d+$'                              , N'{}'   )
+    (53            , 3         ,'Разрешително за радиостанция'                                                           , 'aircraftRadio'                                               , N'^aircraftCertRadios/\d+$'                              , N'{}'   ),
+    (54            , 4         ,'Данни за летище'                                                                        , 'airportData'                                                 , N'^airportData$'                                         , N'{}'   ),
+    (55            , 4         ,'Свързано лице'                                                                          , 'airportOwner'                                                , N'^airportDocumentOwners/\d+$'                           , N'{}'   ),
+    (56            , 4         ,'Друг документ'                                                                          , 'airportOther'                                                , N'^airportDocumentOthers/\d+$'                           , N'{}'   ),
+    (57            , 4         ,'Заявление'                                                                              , 'airportApplication'                                          , N'^airportDocumentApplications/\d+$'                     , N'{}'   ),
+    (58            , 4         ,'Eксплоатационна годност'                                                                , 'airportOperational'                                          , N'^airportCertOperationals/\d+$'                         , N'{}'   ),
+    (59            , 4         ,'Инспекция'                                                                              , 'airportInspection'                                           , N'^inspections/\d+$'                                     , N'{}'   )
 GO

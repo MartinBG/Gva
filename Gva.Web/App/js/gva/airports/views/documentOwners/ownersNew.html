@@ -1,11 +1,20 @@
-﻿<ng-form name="newDocumentOwnerForm">
+﻿<ng-form name="newDocumentOwnerForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="airports.newOther.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="airports.newOwner.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.newOwner.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-airport-document-owner name="airportDocumentOwnerForm" ng-model="airportDocumentOwner.part"></gva-airport-document-owner>
 
-  <gva-airport-document-owner name="airportDocumentOwnerForm" ng-model="airportDocumentOwner.part"></gva-airport-document-owner>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="airports.newOwner.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="airportDocumentOwnerForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="airports.newOwner.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-airport-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentOwner.files"></gva-airport-scanned-document>
     </div>
   </div>
 </ng-form>

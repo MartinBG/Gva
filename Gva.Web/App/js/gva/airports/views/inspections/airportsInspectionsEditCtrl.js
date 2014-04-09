@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function AirportsInspectionsEditCtrl(
@@ -8,22 +8,24 @@
     $stateParams,
     AirportInspection,
     airportInspection) {
+    var originalDoc = _.cloneDeep(airportInspection);
+
     $scope.airportInspection = airportInspection;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
 
     $scope.save = function () {
-      return $scope.airportInspectionForm.$validate()
+      return $scope.editInspectionForm.$validate()
       .then(function () {
-        if ($scope.airportInspectionForm.$valid) {
+        if ($scope.editInspectionForm.$valid) {
           return AirportInspection
-            .save({
-              id: $stateParams.id,
-              ind: $stateParams.childInd ? $stateParams.childInd : $stateParams.ind
-            }, $scope.airportInspection)
+            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportInspection)
             .$promise
             .then(function () {
-              return $stateParams.childInd ?
-                $state.go('^') :
-                $state.go('root.airports.view.inspections.search');
+              return $state.go('root.airports.view.inspections.search');
             });
         }
       });
@@ -31,9 +33,17 @@
 
 
     $scope.cancel = function () {
-      return $stateParams.childInd ?
-        $state.go('^') :
-        $state.go('root.airports.view.inspections.search');
+      $scope.editMode = null;
+      $scope.airportInspection.part = _.cloneDeep(originalDoc.part);
+    };
+    
+    $scope.deleteInspection = function () {
+      return AirportInspection.remove({
+        id: $stateParams.id,
+        ind: airportInspection.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.airports.view.inspections.search');
+      });
     };
   }
 
@@ -52,12 +62,11 @@
       function ($stateParams, AirportInspection) {
         return AirportInspection.get({
           id: $stateParams.id,
-          ind: $stateParams.childInd? $stateParams.childInd: $stateParams.ind
+          ind: $stateParams.ind
         }).$promise;
       }
     ]
   };
 
-  angular.module('gva')
-    .controller('AirportsInspectionsEditCtrl', AirportsInspectionsEditCtrl);
-}(angular));
+  angular.module('gva').controller('AirportsInspectionsEditCtrl', AirportsInspectionsEditCtrl);
+}(angular, _));

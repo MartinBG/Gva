@@ -47,28 +47,37 @@
 
 <gva-aircraft-cert-airworthiness-view name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-view>
 
+<gva-aircraft-cert-mark-view name="aircraftCertMarkForm" ng-model="mark.part"></gva-aircraft-cert-mark-view>
+
 <ng-form class="form-inline">
   <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.markViewDirective.title"></strong></div>
+    <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
     <div class="well-sm panel-body">
-      <sc-button name="createBtn" btn-click="newCertMark()" text="aircrafts.markSearch.newMark" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-datatable items="marks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-        <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-          <sc-button name="editBtn" btn-click="editCertMark(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-        </sc-column>
-        <sc-column data="part.valid.name" title="aircrafts.markSearch.valid">
-        </sc-column>
-        <sc-column data="part.mark" title="aircrafts.markSearch.mark">
-        </sc-column>
-        <sc-column data="part.ltrInNumber" title="aircrafts.markSearch.ltrInNumber">
-        </sc-column>
-        <sc-column data="part.ltrInDate" title="aircrafts.markSearch.ltrInDate" type="date">
-        </sc-column>
-        <sc-column data="part.ltrCaaNumber" title="aircrafts.markSearch.ltrCaaNumber">
-        </sc-column>
-        <sc-column data="part.ltrCaaDate" title="aircrafts.markSearch.ltrCaaDate" type="date">
-        </sc-column>
-      </sc-datatable>
+       <sc-datatable ng-model="debts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+         <sc-column data="part.certId" title="aircrafts.debtSearchFM.certId">
+         </sc-column>
+         <sc-column data="part.regDate" title="aircrafts.debtSearchFM.regDate" type="date">
+         </sc-column>
+         <sc-column data="part.aircraftDebtType.name" title="aircrafts.debtSearchFM.aircraftDebtType">
+         </sc-column>
+         <sc-column data="part.documentNumber" title="aircrafts.debtSearchFM.documentNumber">
+         </sc-column>
+         <sc-column data="part.documentDate" title="aircrafts.debtSearchFM.documentDate" type="date">
+         </sc-column>
+         <sc-column data="part.aircraftCreditor.name" title="aircrafts.debtSearchFM.aircraftCreditor">
+         </sc-column>
+         <sc-column data="part.inspector.name" title="aircrafts.debtSearchFM.inspector">
+         </sc-column>
+         <sc-column data="files[0].bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber" width="50px">
+         </sc-column>
+         <sc-column data="files[0].pageCount" title="aircrafts.debtSearchFM.pageCount" width="50px">
+         </sc-column>
+         <sc-column sortable="false" title="aircrafts.debtSearchFM.file" width="30px">
+           <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files [0].file.name}}">
+             <span class="glyphicon glyphicon-file"></span>
+           </a>
+         </sc-column>
+       </sc-datatable>
     </div>
   </div>
 </ng-form>

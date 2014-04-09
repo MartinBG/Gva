@@ -17,8 +17,7 @@
         .then(function () {
           if ($scope.newDocumentApplicationForm.$valid) {
             return AirportDocumentApplication
-              .save({ id: $stateParams.id }, $scope.airportDocumentApplication)
-              .$promise
+              .save({ id: $stateParams.id }, $scope.airportDocumentApplication).$promise
               .then(function () {
                 return $state.go('root.airports.view.applications.search');
               });

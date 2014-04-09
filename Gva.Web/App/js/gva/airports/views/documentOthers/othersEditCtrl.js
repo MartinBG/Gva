@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function AirportOthersEditCtrl(
@@ -9,13 +9,19 @@
     AirportDocumentOther,
     airportDocumentOther
   ) {
+    var originalDoc = _.cloneDeep(airportDocumentOther);
 
     $scope.airportDocumentOther = airportDocumentOther;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
 
     $scope.save = function () {
-      return $scope.airportDocumentOtherForm.$validate()
+      return $scope.editDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.airportDocumentOtherForm.$valid) {
+          if ($scope.editDocumentOtherForm.$valid) {
             return AirportDocumentOther
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportDocumentOther)
               .$promise
@@ -25,9 +31,18 @@
           }
         });
     };
-
     $scope.cancel = function () {
-      return $state.go('root.airports.view.others.search');
+      $scope.editMode = null;
+      $scope.airportDocumentOther.part = _.cloneDeep(originalDoc.part);
+    };
+    
+    $scope.deleteOther = function () {
+      return AirportDocumentOther.remove({
+        id: $stateParams.id,
+        ind: airportDocumentOther.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.airports.view.others.search');
+      });
     };
   }
 
@@ -53,4 +68,4 @@
   };
 
   angular.module('gva').controller('AirportOthersEditCtrl', AirportOthersEditCtrl);
-}(angular));
+}(angular, _));

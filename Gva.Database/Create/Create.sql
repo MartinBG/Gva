@@ -20,7 +20,8 @@ GO
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
 :r $(rootPath)\"Tables\GvaViewAircrafts.sql"
-:r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
+:r $(rootPath)\"Tables\GvaViewAirports.sql"
+--:r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 
 ---------------------------------------------------------------
 -- Diagram

@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function AirportOpersEditCtrl(
@@ -9,13 +9,19 @@
     AirportCertOperational,
     airportCertOper
   ) {
+    var originalCert = _.cloneDeep(airportCertOper);
 
     $scope.airportCertOper = airportCertOper;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
 
     $scope.save = function () {
-      return $scope.airportCertOperForm.$validate()
+      return $scope.editDocumentOperForm.$validate()
         .then(function () {
-          if ($scope.airportCertOperForm.$valid) {
+          if ($scope.editDocumentOperForm.$valid) {
             return AirportCertOperational
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportCertOper)
               .$promise
@@ -27,7 +33,17 @@
     };
 
     $scope.cancel = function () {
-      return $state.go('root.airports.view.opers.search');
+      $scope.editMode = null;
+      $scope.airportCertOper.part = _.cloneDeep(originalCert.part);
+    };
+    
+    $scope.deleteOper = function () {
+      return AirportCertOperational.remove({
+        id: $stateParams.id,
+        ind: airportCertOper.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.airports.view.opers.search');
+      });
     };
   }
 
@@ -53,4 +69,4 @@
   };
 
   angular.module('gva').controller('AirportOpersEditCtrl', AirportOpersEditCtrl);
-}(angular));
+}(angular, _));

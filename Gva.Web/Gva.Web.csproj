@@ -447,6 +447,11 @@
     <Content Include="App\js\gva\airports\forms\airportDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOther.html" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOwner.html" />
+    <Content Include="App\js\gva\airports\forms\airportScannedDocument.html" />
+    <Content Include="App\js\gva\airports\forms\airportScannedDocumentCtrl.js" />
+    <Content Include="App\js\gva\airports\resources\airportInventory.js" />
+    <Content Include="App\js\gva\airports\views\inventory\inventorySearch.html" />
+    <Content Include="App\js\gva\airports\views\inventory\inventorySearchCtrl.js" />
     <Content Include="App\js\gva\airports\resources\airport.js" />
     <Content Include="App\js\gva\airports\resources\airportCertOperational.js" />
     <Content Include="App\js\gva\airports\resources\airportData.js" />
@@ -454,6 +459,7 @@
     <Content Include="App\js\gva\airports\resources\airportDocumentOther.js" />
     <Content Include="App\js\gva\airports\resources\airportDocumentOwner.js" />
     <Content Include="App\js\gva\airports\resources\airportInspection.js" />
+    <Content Include="App\js\gva\airports\resources\airportApplication.js" />
     <Content Include="App\js\gva\airports\views\airportData\airportDataEdit.html" />
     <Content Include="App\js\gva\airports\views\airportData\airportDataEditCtrl.js" />
     <Content Include="App\js\gva\airports\views\airportsNew.html" />

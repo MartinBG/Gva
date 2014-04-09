@@ -11,9 +11,9 @@
     $scope.airportInspection = airportInspection;
 
     $scope.save = function () {
-      return $scope.airportInspectionForm.$validate()
+      return $scope.newInspectionForm.$validate()
       .then(function () {
-        if ($scope.airportInspectionForm.$valid) {
+        if ($scope.newInspectionForm.$valid) {
           return AirportInspection
             .save({ id: $stateParams.id }, $scope.airportInspection)
             .$promise
@@ -45,12 +45,12 @@
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
             disparities: []
-          }
+          },
+          files: []
         };
       }
     ]
   };
 
-  angular.module('gva')
-    .controller('AirportsInspectionsNewCtrl', AirportsInspectionsNewCtrl);
+  angular.module('gva').controller('AirportsInspectionsNewCtrl', AirportsInspectionsNewCtrl);
 }(angular));

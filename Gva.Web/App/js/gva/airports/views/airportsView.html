@@ -4,13 +4,13 @@
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="airports.viewAirport.name"></span>
-          <input disabled name="producer" type="text" class="form-control" value="{{airport.name}}" />
+          <input disabled name="name" type="text" class="form-control" value="{{airport.name}}" />
         </div>
       </div>
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="airports.viewAirport.nameAlt"></span>
-          <input disabled name="category" type="text" class="form-control" value="{{airport.nameAlt}}" />
+          <input disabled name="nameAlt" type="text" class="form-control" value="{{airport.nameAlt}}" />
         </div>
       </div>
       <div class="form-group col-md-3">
@@ -24,19 +24,19 @@
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="airports.viewAirport.airportType"></span>
-          <input disabled name="name" type="text" class="form-control" value="{{airport.airportType.name}}" />
+          <input disabled name="airportType" type="text" class="form-control" value="{{airport.airportType}}" />
         </div>
       </div>
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="airports.viewAirport.runway"></span>
-          <input disabled name="nameAlt" type="text" class="form-control" value="{{airport.runway}}" />
+          <input disabled name="runway" type="text" class="form-control" value="{{airport.runway}}" />
         </div>
       </div>
       <div class="form-group col-md-3">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="airports.viewAirport.course"></span>
-          <input disabled name="manSN" type="text" class="form-control" value="{{airport.course}}" />
+          <input disabled name="course" type="text" class="form-control" value="{{airport.course}}" />
         </div>
       </div>
     </div>
@@ -55,7 +55,8 @@
       'airports.tabs.certs': {
         'airports.tabs.opers': 'root.airports.view.opers'
        },
-      'airports.tabs.applications' : 'root.airports.view.applications'
+      'airports.tabs.applications' : 'root.airports.view.applications',
+      'airports.tabs.inventory' : 'root.airports.view.inventory'
     }"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>

@@ -49,6 +49,10 @@
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление'
           },
+          airports: {
+            title: 'Летища',
+            search: 'Търсене'
+          },
           admin: {
             title: 'Админ',
             users: 'Потребители'

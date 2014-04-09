@@ -1,10 +1,21 @@
-﻿<ng-form name="editAirportForm">
-  <gva-airport-data name="airportDataForm" ng-model="airportData.part"></gva-airport-data>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="airports.newAirport.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editAirportForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="airports.newAirport.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+﻿<ng-form name="editAirportForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="airports.editAirportData.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="airports.editAirportData.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="airports.editAirportData.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.editAirportData.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-airport-data name="airportDataForm" ng-model="airportData.part" readonly="!editMode"></gva-airport-data>
     </div>
   </div>
 </ng-form>

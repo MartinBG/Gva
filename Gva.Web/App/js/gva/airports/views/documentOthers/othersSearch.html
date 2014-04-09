@@ -14,12 +14,17 @@
   </sc-column>
   <sc-column data="part.otherDocumentType.name" title="airports.otherSearch.otherDocumentType">
   </sc-column>
-  <sc-column data="part.airportOtherDocumentRole.name" title="airports.otherSearch.airportOtherDocumentRole">
-  </sc-column>
-  <sc-column data="part.bookPageNumber" title="airports.otherSearch.bookPageNumber" width="50px">
-  </sc-column>
-  <sc-column data="part.pageCount" title="airports.otherSearch.pageCount" width="50px">
+  <sc-column data="part.airportOtherDocumentRole.name" title="airports.otherSearch.otherDocumentRole">
   </sc-column>
   <sc-column data="part.notes" title="airports.otherSearch.notes" visible="false">
+  </sc-column>
+  <sc-column data="files[0].bookPageNumber" title="airports.otherSearch.bookPageNumber" width="50px">
+  </sc-column>
+  <sc-column data="files[0].pageCount" title="airports.otherSearch.pageCount" width="50px">
+  </sc-column>
+  <sc-column sortable="false" title="airports.otherSearch.file" width="30px" has-content="true">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+      <span class="glyphicon glyphicon-file"></span>
+    </a>
   </sc-column>
 </sc-datatable>

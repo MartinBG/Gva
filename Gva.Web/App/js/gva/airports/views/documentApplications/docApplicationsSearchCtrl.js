@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteApplication = function (application) {
-      return AirportDocumentApplication.remove({ id: $stateParams.id, ind: application.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newApplication = function () {
       return $state.go('root.airports.view.applications.new');
     };

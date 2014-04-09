@@ -10,9 +10,9 @@
     airportCertOper
   ) {
     $scope.save = function () {
-      return $scope.airportCertOperForm.$validate()
+      return $scope.newCertOperForm.$validate()
         .then(function () {
-          if ($scope.airportCertOperForm.$valid) {
+          if ($scope.newCertOperForm.$valid) {
             return AirportCertOperational
               .save({ id: $stateParams.id }, $scope.airportCertOper).$promise
               .then(function () {

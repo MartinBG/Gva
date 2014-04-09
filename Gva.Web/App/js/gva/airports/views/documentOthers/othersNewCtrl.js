@@ -10,9 +10,9 @@
     airportDocumentOther
   ) {
     $scope.save = function () {
-      return $scope.airportDocumentOtherForm.$validate()
+      return $scope.newDocumentOtherForm.$validate()
         .then(function () {
-          if ($scope.airportDocumentOtherForm.$valid) {
+          if ($scope.newDocumentOtherForm.$valid) {
             return AirportDocumentOther
               .save({ id: $stateParams.id }, $scope.airportDocumentOther).$promise
               .then(function () {
@@ -40,7 +40,8 @@
   AirportOthersNewCtrl.$resolve = {
     airportDocumentOther: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

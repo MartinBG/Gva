@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function AirportDataEditCtrl(
@@ -9,7 +9,19 @@
     AirportData,
     airportData
   ) {
+    var originalAirportData = _.cloneDeep(airportData);
+
     $scope.airportData = airportData;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.airportData = _.cloneDeep(originalAirportData);
+    };
 
     $scope.save = function () {
       return $scope.airportDataForm.$validate()
@@ -23,10 +35,6 @@
           });
         }
       });
-    };
-
-    $scope.cancel = function () {
-      return $state.go('root.airports.view');
     };
   }
 
@@ -49,4 +57,4 @@
   };
 
   angular.module('gva').controller('AirportDataEditCtrl', AirportDataEditCtrl);
-}(angular));
+}(angular, _));

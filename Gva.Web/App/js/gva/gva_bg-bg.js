@@ -72,7 +72,8 @@
           others: 'Други',
           opers: 'Експлоатационна годност',
           applications: 'Заявления',
-          inspections: 'Инспекции'
+          inspections: 'Инспекции',
+          inventory: 'Опис'
         },
         search: {
           airportType: 'Тип',
@@ -85,6 +86,14 @@
           concrete: 'Полоса-бетон',
           'new': 'Ново летище',
           search: 'Търси'
+        },
+        airportScannedDocumentDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
         },
         airportDataDirective: {
           title: 'Данни за летище',
@@ -124,6 +133,12 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        editAirportData: {
+          title: 'Редакция на данни за летище',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         airportOtherDirective: {
           title: 'Друг документ',
           documentNumber: 'Док No',
@@ -139,11 +154,15 @@
         },
         newOther: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          title: 'Нов документ'
         },
         editOther: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          edit: 'Редакция',
+          deleteOther: 'Изтриване',
+          title: 'Редакция на документ'
         },
         otherSearch: {
           newDocument: 'Нов документ',
@@ -156,7 +175,8 @@
           valid: 'Валидно',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          file: 'Файл'
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -168,15 +188,22 @@
           notification: 'Оператора предварително уведомен',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
-          inspectionPlace: 'Адрес на одитирания обект'
+          inspectionPlace: 'Адрес на одитирания обект',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newInspection: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          title: 'Нова инспекция'
         },
         editInspection: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          edit: 'Редакция',
+          deleteInspection: 'Изтриване',
+          title: 'Редакция на инспекция'
         },
         airportOwnerDirective: {
           title: 'Свързано лице',
@@ -190,15 +217,20 @@
           reasonTerminate: 'Причина за прекратяване',
           notes: 'Бележки',
           bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.'
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newOwner: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          title: 'Ново свързано лице'
         },
         editOwner: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOwner: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на свързано лице'
         },
         ownerSearch: {
           newOwner: 'Ново свързано лице',
@@ -210,7 +242,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.'
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         airportOperDirective: {
           title: 'Удостоверение за експлоатационна годност',
@@ -237,11 +270,15 @@
         },
         newOper: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          title: 'Ново удостоверение'
         },
         editOper: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOper: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на удостоверение'
         },
         operSearch: {
           newOper: 'Ново удостоверение',
@@ -277,15 +314,33 @@
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
-          taxAmount: 'Платена такса'
+          taxAmount: 'Платена такса',
+          file: 'Файл'
         },
         newAirportDocApplication: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          title: 'Ново заявление'
         },
         editAirportDocApplication: {
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteApplication: 'Изтриване',
+          edit: 'Редакция',
+          title: 'Редакция на заявление'
+        },
+        inventorySearch: {
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
         }
       },
       aircrafts: {
@@ -490,7 +545,8 @@
           firstReg: 'Първа рег № ',
           lastReg: 'Посл. рег. № ',
           register: 'рег. ',
-          regFrom: ' от '
+          regFrom: ' от ',
+          debts: 'Залози'
         },
         smodSearch: {
           valid: 'Валиден',

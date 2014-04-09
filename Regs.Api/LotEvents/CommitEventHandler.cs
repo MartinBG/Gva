@@ -14,6 +14,7 @@ namespace Regs.Api.LotEvents
         private Func<PartVersion, bool> partMatcher;
         private Func<PartVersion, Expression<Func<TView, bool>>> viewMatcher;
         private bool isPrincipalHandler;
+        private object viewMatcher1;
 
         public CommitEventHandler(
             IUnitOfWork unitOfWork,
@@ -29,6 +30,14 @@ namespace Regs.Api.LotEvents
             this.partMatcher = partMatcher ?? (pv => true);
             this.viewMatcher = viewMatcher;
             this.isPrincipalHandler = isPrincipalHandler;
+        }
+
+        public CommitEventHandler(IUnitOfWork unitOfWork, string setPartAlias, object viewMatcher1)
+        {
+            // TODO: Complete member initialization
+            this.unitOfWork = unitOfWork;
+            this.setPartAlias = setPartAlias;
+            this.viewMatcher1 = viewMatcher1;
         }
 
         public abstract void Fill(TView view, PartVersion partVersion);

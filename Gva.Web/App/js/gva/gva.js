@@ -218,6 +218,11 @@
       controller: 'AircraftDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaAirportScannedDocument',
+      templateUrl: 'gva/airports/forms/airportScannedDocument.html',
+      controller: 'AirportScannedDocCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaOrganizationData',
       templateUrl: 'gva/organizations/forms/organizationData.html',
       controller: 'OrganizationDataCtrl'
@@ -621,6 +626,7 @@
       .state(['root.airports.view.inspections'                  , '/inspections'                                                                                                                                                                ])
       .state(['root.airports.view.inspections.search'           , ''                                         , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsSearch.html'       , 'AirportsInspectionsSearchCtrl' ]])
       .state(['root.airports.view.inspections.new'              , '/new'                                     , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsNew.html'          , 'AirportsInspectionsNewCtrl'    ]])
-      .state(['root.airports.view.inspections.edit'             , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsEdit.html'         , 'AirportsInspectionsEditCtrl'   ]]);
+      .state(['root.airports.view.inspections.edit'             , '/:ind'                                    , ['@root.airports.view', 'gva/airports/views/inspections/airportsInspectionsEdit.html'         , 'AirportsInspectionsEditCtrl'   ]])
+      .state(['root.airports.view.inventory'                    , '/inventory'                               , ['@root.airports.view', 'gva/airports/views/inventory/inventorySearch.html'                   , 'AirportInventorySearchCtrl'    ]]);
     }]);
 }(angular));

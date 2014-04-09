@@ -10,9 +10,9 @@
     airportDocumentOwner
   ) {
     $scope.save = function () {
-      return $scope.airportDocumentOwnerForm.$validate()
+      return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
-          if ($scope.airportDocumentOwnerForm.$valid) {
+          if ($scope.newDocumentOwnerForm.$valid) {
             return AirportDocumentOwner
               .save({ id: $stateParams.id }, $scope.airportDocumentOwner).$promise
               .then(function () {
@@ -40,7 +40,8 @@
   AirportOwnersNewCtrl.$resolve = {
     airportDocumentOwner: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };
