@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,10 +9,10 @@
     AircraftCertRegistrationFM,
     aircraftCertRegistration
   ) {
-    $scope.isEdit = true;
+    var originalRegistration = _.cloneDeep(aircraftCertRegistration);
 
+    $scope.isEdit = true;
     $scope.reg = aircraftCertRegistration;
-    
     $scope.editMode = null;
 
     $scope.edit = function () {
@@ -21,8 +21,8 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
+      $scope.reg = _.cloneDeep(originalRegistration);
     };
-
 
     $scope.save = function () {
       return $scope.editCertRegForm.$validate()

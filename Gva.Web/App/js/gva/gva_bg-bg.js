@@ -524,7 +524,7 @@
           cancel: 'Отказ'
         },
         editReg: {
-          title: 'Редакция на регистрация',
+          title: 'Преглед на регистрация',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -928,7 +928,6 @@
           bandwidth: 'Честотна лента'
         },
         regDirective: {
-          title: 'Регистрация',
           typeCertTitle: 'Типов сертификат',
           certNumber: 'Рег. номер',
           certDate: 'Дата на издаване',
@@ -945,7 +944,6 @@
           aircraftTypeCertificateType: 'Типов сертификат'
         },
         regFMDirective: {
-          title: 'Регистрация',
           certNumber: 'Рег. номер',
           certDate: 'Дата на издаване',
           register: 'Регистър',
