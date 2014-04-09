@@ -2259,14 +2259,10 @@
         },
         staffManagementSearch: {
           newStaffManagement: 'Нов ръководен персонал',
-          auditPartRequirement: 'Изискване',
-          planYear: 'Година',
-          planMonth: 'Месец',
           position: 'Предлагана длъжност',
           person: 'Предложено лице',
           testDate: 'Дата на полагане на писмен тест',
-          testScore: 'Оценка от писмен тест',
-          number: 'Заявление',
+          testScore: 'Оценка',
           valid: 'Валиден',
           file: 'Преписка (Заявление)'
         },
