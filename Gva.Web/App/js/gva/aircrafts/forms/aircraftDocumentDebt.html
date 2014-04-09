@@ -1,154 +1,161 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.debtDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.regDate"></label>
-          <sc-date ng-model="model.regDate" name="regDate"></sc-date>
-        </div>
-        <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.regTime"></label>
-          <span name="regTimeValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
-                  class="glyphicon glyphicon-warning-sign"
-                  title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
-          <div class="input-group input-group-sm">
-            <sc-int ng-model="model.regTime.hours" min="0" max="23" name="hours"></sc-int>
-            <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.regTime.minutes" min="0" max="59" name="minutes"></sc-int>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time">
-              </span>
-            </span>
-          </div>
-        </div>
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.aircraftDebtType"></label>
-          <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.contractNumber"></label>
-          <sc-text ng-model="model.contractNumber" name="contractNumber"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.contractDate"></label>
-          <sc-date ng-model="model.contractDate" name="contractDate"></sc-date>
-        </div>
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.regDate"></label>
+      <sc-date ng-model="model.regDate" name="regDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.regTime"></label>
+      <span name="regTimeValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
+              class="glyphicon glyphicon-warning-sign"
+              title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
+      <div class="input-group input-group-sm">
+        <sc-int ng-model="model.regTime.hours" min="0" max="23" name="hours" ng-readonly="readonly"></sc-int>
+        <span class="input-group-addon padding6">:</span>
+        <sc-int ng-model="model.regTime.minutes" min="0" max="59" name="minutes" ng-readonly="readonly"></sc-int>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-time">
+          </span>
+        </span>
       </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.creditorName"></label>
-          <sc-text ng-model="model.creditorName" name="creditorName"></sc-text>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.creditorNameAlt"></label>
-          <sc-text ng-model="model.creditorNameAlt" name="creditorNameAlt"></sc-text>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.startDate"></label>
-          <sc-date ng-model="model.startDate" name="startDate"></sc-date>
-        </div>
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.inspector"></label>
-          <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'"></sc-nomenclature>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.startReason"></label>
-          <sc-textarea rows="2" ng-model="model.startReason" name="startReason"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.startReasonAlt"></label>
-          <sc-textarea rows="2" ng-model="model.startReasonAlt" name="startReasonAlt"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.ltrNumber"></label>
-          <sc-text ng-model="model.ltrNumber" name="ltrNumber"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.ltrDate"></label>
-          <sc-date ng-model="model.ltrDate" name="ltrDate"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.endDate"></label>
-          <sc-date ng-model="model.endDate" name="endDate"></sc-date>
-        </div>
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.closeInspector"></label>
-          <sc-nomenclature ng-model="model.closeInspector" name="closeInspector" alias="'inspectors'"></sc-nomenclature>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.endReason"></label>
-          <sc-textarea rows="2" ng-model="model.endReason" name="endReason"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.closeAplicationNumber"></label>
-          <sc-text ng-model="model.closeAplicationNumber" name="closeAplicationNumber"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.closeAplicationDate"></label>
-          <sc-date ng-model="model.closeAplicationDate" name="closeAplicationDate"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.closeCaaAplicationNumber"></label>
-          <sc-text ng-model="model.closeCaaAplicationNumber" name="closeCaaAplicationNumber"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.closeCaaAplicationDate"></label>
-          <sc-date ng-model="model.closeCaaAplicationDate" name="closeCaaAplicationDate"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-12 col-md-8">
-          <label class="control-label" l10n-text="aircrafts.debtDirective.notes"></label>
-          <sc-textarea rows="2" cols="50" ng-model="model.notes"></sc-textarea>
-        </div>
-      </div>
-      <accordion>
-        <accordion-group style="margin-top: 5px;" class="col-md-8 col-sm-12">
-          <accordion-heading>
-            <a l10n-text="aircrafts.debtDirective.creditorData" style="font-size: 12px;"></a>
-          </accordion-heading>
-          <div class="row">
-            <div class="form-group col-md-8">
-              <label class="control-label" l10n-text="aircrafts.debtDirective.creditorAddress"></label>
-              <sc-text ng-model="model.creditorAddress" name="creditorAddress"></sc-text>
-            </div>
-            <div class="form-group col-md-4">
-              <label class="control-label" l10n-text="aircrafts.debtDirective.creditorEmail"></label>
-              <sc-text ng-model="model.creditorEmail" name="creditorEmail"></sc-text>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-8">
-              <label class="control-label" l10n-text="aircrafts.debtDirective.creditorContact"></label>
-              <sc-text ng-model="model.creditorContact" name="creditorContact"></sc-text>
-            </div>
-            <div class="form-group col-md-4">
-              <label class="control-label" l10n-text="aircrafts.debtDirective.creditorPhone"></label>
-              <sc-text ng-model="model.creditorPhone" name="creditorPhone"></sc-text>
-            </div>
-          </div>
-        </accordion-group>
-      </accordion>
+    </div>
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.aircraftDebtType"></label>
+      <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.contractNumber"></label>
+      <sc-text ng-model="model.contractNumber" name="contractNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.contractDate"></label>
+      <sc-date ng-model="model.contractDate" name="contractDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.creditorName"></label>
+      <sc-text ng-model="model.creditorName" name="creditorName" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.creditorNameAlt"></label>
+      <sc-text ng-model="model.creditorNameAlt" name="creditorNameAlt" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.startDate"></label>
+      <sc-date ng-model="model.startDate" name="startDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-4 col-sm-8">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.inspector"></label>
+      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.startReason"></label>
+      <sc-textarea rows="2" ng-model="model.startReason" name="startReason" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.startReasonAlt"></label>
+      <sc-textarea rows="2" ng-model="model.startReasonAlt" name="startReasonAlt" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.ltrNumber"></label>
+      <sc-text ng-model="model.ltrNumber" name="ltrNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.ltrDate"></label>
+      <sc-date ng-model="model.ltrDate" name="ltrDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.endDate"></label>
+      <sc-date ng-model="model.endDate" name="endDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-4 col-sm-8">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.closeInspector"></label>
+      <sc-nomenclature ng-model="model.closeInspector" name="closeInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.endReason"></label>
+      <sc-textarea rows="2" ng-model="model.endReason" name="endReason" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.closeAplicationNumber"></label>
+      <sc-text ng-model="model.closeAplicationNumber" name="closeAplicationNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.closeAplicationDate"></label>
+      <sc-date ng-model="model.closeAplicationDate" name="closeAplicationDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.closeCaaAplicationNumber"></label>
+      <sc-text ng-model="model.closeCaaAplicationNumber" name="closeCaaAplicationNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.closeCaaAplicationDate"></label>
+      <sc-date ng-model="model.closeCaaAplicationDate" name="closeCaaAplicationDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-8">
+      <label class="control-label" l10n-text="aircrafts.debtDirective.notes"></label>
+      <sc-textarea rows="2" cols="50" ng-model="model.notes" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showCreditor = false">
+    <a l10n-text="aircrafts.debtDirective.creditorData" ng-click="showCreditor = !showCreditor" style="cursor:pointer;"></a>
+  </h5>
+  <div ng-show="showCreditor">
+    <div class="row">
+      <div class="form-group col-md-8">
+        <label class="control-label" l10n-text="aircrafts.debtDirective.creditorAddress"></label>
+        <sc-text ng-model="model.creditorAddress" name="creditorAddress" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="control-label" l10n-text="aircrafts.debtDirective.creditorEmail"></label>
+        <sc-text ng-model="model.creditorEmail" name="creditorEmail" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-8">
+        <label class="control-label" l10n-text="aircrafts.debtDirective.creditorContact"></label>
+        <sc-text ng-model="model.creditorContact" name="creditorContact" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-md-4">
+        <label class="control-label" l10n-text="aircrafts.debtDirective.creditorPhone"></label>
+        <sc-text ng-model="model.creditorPhone" name="creditorPhone" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+  </div>
+
 </ng-form>

@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -8,12 +8,24 @@
     $stateParams,
     AircraftMaintenance,
     aircraftMaintenance) {
+    var originalMaintenance = _.cloneDeep(aircraftMaintenance);
+
     $scope.aircraftMaintenance = aircraftMaintenance;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftMaintenance = _.cloneDeep(originalMaintenance);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftMaintenanceForm.$validate()
+      return $scope.editAircraftMaintenanceForm.$validate()
       .then(function () {
-        if ($scope.aircraftMaintenanceForm.$valid) {
+        if ($scope.editAircraftMaintenanceForm.$valid) {
           return AircraftMaintenance
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftMaintenance)
             .$promise
@@ -24,8 +36,12 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.maintenances.search');
+    $scope.deleteMaintenance = function () {
+      return AircraftMaintenance
+        .remove({ id: $stateParams.id, ind: aircraftMaintenance.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.maintenances.search');
+        });
     };
   }
 

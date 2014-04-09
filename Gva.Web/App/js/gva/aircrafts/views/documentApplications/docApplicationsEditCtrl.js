@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -8,8 +8,20 @@
     $stateParams,
     AircraftDocumentApplication,
     aircraftDocumentApplication) {
+    var originalApplication = _.cloneDeep(aircraftDocumentApplication);
 
     $scope.aircraftDocumentApplication = aircraftDocumentApplication;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftDocumentApplication.part = _.cloneDeep(originalApplication.part);
+      $scope.$broadcast('cancel', originalApplication);
+    };
 
     $scope.save = function () {
       return $scope.editDocumentApplicationForm.$validate()
@@ -28,8 +40,13 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.applications.search');
+    $scope.deleteApplication = function () {
+      return AircraftDocumentApplication.remove({
+        id: $stateParams.id,
+        ind: aircraftDocumentApplication.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.aircrafts.view.applications.search');
+        });
     };
   }
 

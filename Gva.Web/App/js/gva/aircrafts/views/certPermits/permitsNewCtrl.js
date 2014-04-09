@@ -14,9 +14,9 @@
     $scope.permit = aircraftCertPermitToFly;
 
     $scope.save = function () {
-      return $scope.aircraftCertPermitForm.$validate()
+      return $scope.newCertPermitForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertPermitForm.$valid) {
+            if ($scope.newCertPermitForm.$valid) {
               return AircraftCertPermitToFly
               .save({ id: $stateParams.id }, $scope.permit).$promise
               .then(function () {

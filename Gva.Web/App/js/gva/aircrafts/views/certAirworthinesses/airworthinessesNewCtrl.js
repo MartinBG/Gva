@@ -14,9 +14,9 @@
     $scope.aw = aircraftCertAirworthiness;
 
     $scope.save = function () {
-      return $scope.aircraftCertAirworthinessForm.$validate()
+      return $scope.newCertAirworthinessForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertAirworthinessForm.$valid) {
+            if ($scope.newCertAirworthinessForm.$valid) {
               return AircraftCertAirworthiness
               .save({ id: $stateParams.id }, $scope.aw).$promise
               .then(function () {

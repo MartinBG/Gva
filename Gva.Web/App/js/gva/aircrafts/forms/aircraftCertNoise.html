@@ -1,72 +1,74 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.noiseDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4" sc-has-error="issueNumber">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.issueNumber"></label>
-          <sc-validation-error field-name="issueNumber" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.issueNumber" name="issueNumber" ng-required="true"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.issueDate"></label>
-          <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
-          <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.standart"></label>
-          <sc-textarea rows="2" ng-model="model.standart" name="standart"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.standartAlt"></label>
-          <sc-textarea rows="2" ng-model="model.standartAlt" name="standartAlt"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.flyover"></label>
-          <sc-float ng-model="model.flyover" name="flyover"></sc-float>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.approach"></label>
-          <sc-float ng-model="model.approach" name="approach"></sc-float>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.lateral"></label>
-          <sc-float ng-model="model.lateral" name="lateral"></sc-float>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.overflight"></label>
-          <sc-float ng-model="model.overflight" name="overflight"></sc-float>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.takeoff"></label>
-          <sc-float ng-model="model.takeoff" name="takeoff"></sc-float>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.modifications"></label>
-          <sc-textarea rows="2" ng-model="model.modifications" name="modifications"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.modificationsAlt"></label>
-          <sc-textarea rows="2" ng-model="model.modificationsAlt" name="modificationsAlt"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.noiseDirective.notes"></label>
-          <sc-textarea rows="2" ng-model="model.notes" name="notes"></sc-textarea>
-        </div>
-      </div>
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="issueNumber">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.issueNumber"></label>
+      <sc-validation-error field-name="issueNumber" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.issueNumber" name="issueNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.issueDate"></label>
+      <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.standart"></label>
+      <sc-textarea rows="2" ng-model="model.standart" name="standart" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.standartAlt"></label>
+      <sc-textarea rows="2" ng-model="model.standartAlt" name="standartAlt" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.flyover"></label>
+      <sc-float ng-model="model.flyover" name="flyover" ng-readonly="readonly"></sc-float>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.approach"></label>
+      <sc-float ng-model="model.approach" name="approach" ng-readonly="readonly"></sc-float>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.lateral"></label>
+      <sc-float ng-model="model.lateral" name="lateral" ng-readonly="readonly"></sc-float>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.overflight"></label>
+      <sc-float ng-model="model.overflight" name="overflight" ng-readonly="readonly"></sc-float>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.takeoff"></label>
+      <sc-float ng-model="model.takeoff" name="takeoff" ng-readonly="readonly"></sc-float>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.modifications"></label>
+      <sc-textarea rows="2" ng-model="model.modifications" name="modifications" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.modificationsAlt"></label>
+      <sc-textarea rows="2" ng-model="model.modificationsAlt" name="modificationsAlt" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="aircrafts.noiseDirective.notes"></label>
+      <sc-textarea rows="2" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
 </ng-form>

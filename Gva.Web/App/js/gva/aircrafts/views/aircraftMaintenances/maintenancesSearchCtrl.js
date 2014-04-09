@@ -26,14 +26,6 @@
         ind: maintenance.partIndex
       });
     };
-
-    $scope.deleteMaintenance = function (maintenance) {
-      return AircraftMaintenance
-        .remove({ id: $stateParams.id, ind: maintenance.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
   }
 
   MaintenancesSearchCtrl.$inject = [

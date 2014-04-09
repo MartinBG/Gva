@@ -22,8 +22,6 @@
           insertAuditDetails: 'Въведи списъка за обобщени констатации'
         },
         disparityDirective: {
-          disparitiesRecommendationsTitle2: 'Установени несъответствия от описанието',
-          disparitiesTitle: 'Несъответствия',
           subject: 'Тема',
           sortOrder: 'Пореден №',
           refNumber: 'Референтен №',
@@ -44,12 +42,12 @@
           auditReason: 'Причина',
           auditType: 'Вид одит',
           subject: 'Предмет на одит',
-          notification: 'Оператора е предварително уведомен',
+          notification: 'Предварително уведомяване',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',
-          inspectionFrom: 'Начална дата на периода, в който ВС може да бъде видяно',
-          inspectionTo: 'Крайна дата на периода, в който ВС може да бъде видяно',
+          inspectionFrom: 'Начална дата',
+          inspectionTo: 'Крайна дата',
           auditAddress: 'Адрес на одитирания обект',
           examinersTable: {
             examinersTitle: 'Одитори',
@@ -61,8 +59,9 @@
           recommendationReports: 'Доклади от препоръки свързани с одит:',
           recommendationPart: 'Тип',
           formText: '№ на изменението',
-          formDate:'Форма за заявен обхват на одобрението от дата'
-
+          formDate:'Форма за заявен обхват на одобрението от дата',
+          inspectionPeriod: 'Период, в който ВС може да бъде видяно',
+          disparitiesTitle: 'Несъответствия'
         }
       },
       airports: {
@@ -334,7 +333,6 @@
           applications: 'Заявления'
         },
         aircraftDataDirective: {
-          title: 'Данни за ВС',
           manSN: 'Сериен номер',
           model: 'Модел',
           modelAlt: 'Модел (английски)',
@@ -359,7 +357,6 @@
           seats: 'Брой места'
         },
         aircraftDataApexDirective: {
-          title: 'Данни за ВС',
           model: 'Модел',
           name: 'Наименование',
           nameAlt: 'Наименование (английски)',
@@ -398,6 +395,13 @@
           incommingApprovalDate: 'Дата'
         },
         newAircraft: {
+          title: 'Ново ВС',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAircraft: {
+          title: 'Преглед на данни за ВС',
+          edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -498,12 +502,16 @@
           newSmod: 'Нов S-code'
         },
         newSmod: {
+          title: 'Нов mode S код',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editSmod: {
+          title: 'Преглед на mode S код',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteSmod: 'Изтрий'
         },
         markSearch: {
           valid: 'Валиден',
@@ -515,12 +523,16 @@
           newMark: 'Нов знак'
         },
         newMark: {
+          title: 'Нов регистрационен знак',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editMark: {
+          title: 'Преглед на регистрационен знак',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteMark: 'Изтрий'
         },
         airworthinessSearch: {
           aircraftCertificateType: 'Валиден',
@@ -545,12 +557,16 @@
           newAirworthiness: 'Нова годност'
         },
         newAirworthiness: {
+          title: 'Нова летателна годност',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAirworthiness: {
+          title: 'Преглед на летателна годност',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteAirworthiness: 'Изтрий'
         },
         permitSearch: {
           issuePlace: 'Място на издаване',
@@ -563,12 +579,16 @@
           newPermit: 'Ново разрешение'
         },
         newPermit: {
+          title: 'Ново разрешение за полет',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editPermit: {
+          title: 'Преглед на разрешение за полет',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deletePermit: 'Изтрий'
         },
         noiseSearch: {
           tcdsn: 'TCDSN',
@@ -593,12 +613,16 @@
           newNoise: 'Ново удостоверение'
         },
         newNoise: {
+          title: 'Ново удостоверение за съответствие с нормите за авиационен шум',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editNoise: {
+          title: 'Преглед на удостоверение за съответствие с нормите за авиационен шум',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteNoise: 'Изтрий'
         },
         radioSearch: {
           valid: 'Валидно',
@@ -612,12 +636,16 @@
           newRadio: 'Ново разрешително'
         },
         newRadio: {
+          title: 'Ново разрешително за използване на радиостанция',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editRadio: {
+          title: 'Преглед на разрешително за използване на радиостанция',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteRadio: 'Изтрий'
         },
         debtSearchFM: {
           certId: 'Регистрация №',
@@ -633,12 +661,16 @@
           file: 'Файл'
         },
         newDebtFM: {
+          title: 'Нов залог/запор',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editDebtFM: {
+          title: 'Преглед на залог/запор',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteDebt: 'Изтрий'
         },
         debtSearch: {
           certId: 'Регистрация №',
@@ -654,12 +686,16 @@
           file: 'Файл'
         },
         newDebt: {
+          title: 'Нов залог/запор',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editDebt: {
+          title: 'Преглед на залог/запор',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteDebt: 'Изтрий'
         },
         regViewDirective: {
           title: 'Текуща регистрация',
@@ -737,7 +773,6 @@
           model: 'Модел'
         },
         smodDirective: {
-          title: 'S-code',
           valid: 'Валиден',
           scode: 'S-mode code',
           ltrInNumber: 'Тяхно писмо №',
@@ -750,7 +785,6 @@
           getScode: 'Генерирай S-код'
         },
         markDirective: {
-          title: 'Регистрационен знак',
           valid: 'Валиден',
           mark: 'Регистрационен знак',
           ltrInNumber: 'Тяхно писмо №',
@@ -759,7 +793,6 @@
           ltrCaaDate: 'ГВА дата'
         },
         airworthinessDirective: {
-          title: 'Летателна годност',
           aircraftCertificateType: 'Тип',
           regNumber: '№',
           refNumber: 'Реф.№',
@@ -767,7 +800,6 @@
           validToDate: 'Срок на валидност'
         },
         airworthinessFMDirective: {
-          title: 'Летателна годност',
           issueDate: 'От дата',
           validFromDate: 'Валидно от',
           validToDate: 'Валидно до',
@@ -782,7 +814,6 @@
           EASA15IssueRefNo: 'EASA Form 15a'
         },
         permitDirective: {
-          title: 'Разрешениe за полет',
           issuePlace: 'Място на издаване',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -800,7 +831,6 @@
           crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
-          title: 'Удостоверение за шум',
           issueNumber: '№',
           standart: 'Стандарт',
           standartAlt: 'Стандарт (англ.)',
@@ -815,7 +845,6 @@
           notes: 'Забележки'
         },
         noiseDirectiveFM: {
-          title: 'Удостоверение за шум',
           issueNumber: '№',
           tcdsn: 'TCDSN',
           chapter: 'Chapter',
@@ -830,7 +859,6 @@
           notes: 'Забележки'
         },
         radioDirective: {
-          title: 'Разрешително за използване на радиостанция',
           certNumber: '№',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -900,7 +928,6 @@
           removalNotesAlt: 'Забележки/Изключения (англ.)'
         },
         debtDirectiveFM: {
-          title: 'Залог/запор',
           certId: 'Регистрация №',
           regDate: 'Дата',
           regTime: 'Час',
@@ -912,7 +939,6 @@
           inspector: 'Инспектор'
         },
         debtDirective: {
-          title: 'Залог/запор',
           certId: 'Регистрация №',
           regDate: 'Дата',
           regTime: 'Час',
@@ -957,12 +983,16 @@
           pageCount: 'Брой стр.'
         },
         newOther: {
+          title: 'Нов документ',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOther: {
+          title: 'Преглед на документ',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteDoc: 'Изтрий'
         },
         otherSearch: {
           newDocument: 'Нов документ',
@@ -979,7 +1009,6 @@
           newOther: 'Нов документ'
         },
         aircraftOwnerDirective: {
-          title: 'Свързано лице',
           aircraftRelation: 'Тип отношение',
           person: 'Физическо лице',
           organization: 'Организация',
@@ -993,12 +1022,16 @@
           pageCount: 'Брой стр.'
         },
         newOwner: {
+          title: 'Ново свързано лице',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOwner: {
+          title: 'Преглед на свързано лице',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOwner: 'Изтрий'
         },
         ownerSearch: {
           newOwner: 'Ново свързано лице',
@@ -1015,7 +1048,6 @@
           newOther: 'Нов документ'
         },
         aircraftPartDirective: {
-          title: 'Oборудване',
           aircraftPart: 'Тип',
           partProducer: 'Производител',
           model: 'Модел',
@@ -1028,12 +1060,16 @@
           description: 'Описание на характеристики'
         },
         newPart: {
+          title: 'Нови системи, устройства и оборудване',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editPart: {
+          title: 'Преглед на системи, устройства и оборудване',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deletePart: 'Изтрий'
         },
         partSearch: {
           newPart: 'Ново оборудване',
@@ -1064,12 +1100,16 @@
           file: 'Файл'
         },
         newInspection: {
+          title: 'Нова инспекция',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editInspection: {
+          title: 'Преглед на инспекция',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteInsp: 'Изтрий'
         },
         occurrenceSearch: {
           localTime: 'Час на инцидента',
@@ -1085,15 +1125,18 @@
           file: 'Файл'
         },
         newOccurrence: {
+          title: 'Нов инцидент',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editOccurrence: {
+          title: 'Преглед на инцидент',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteOcc: 'Изтрий'
         },
         occurrenceDirective: {
-          title: 'Инцидент',
           localDate: 'Дата на инцидента',
           localTime: 'Час на инцидента',
           aircraftOccurrenceClass: 'Клас',
@@ -1105,12 +1148,16 @@
           pageCount: 'Бр. страници на документа'
         },
         newMaintenance: {
+          title: 'Нова поддръжка',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editMaintenance: {
+          title: 'Преглед на поддръжка',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteMaintenance: 'Изтрий'
         },
         searchMaintenance: {
           newMaintenance: 'Нова поддръжка',
@@ -1122,7 +1169,6 @@
           person: 'Физическо лице'
         },
         maintenanceDirective: {
-          title: 'Поддръжка',
           lim145limitation: 'Дейност по част M/F, 145',
           notes: 'Описание',
           fromDate: 'Период: от дата',
@@ -1131,7 +1177,6 @@
           person: 'Физическо лице'
         },
         aircraftDocApplicationDirective: {
-          title: 'Заявление',
           documentNumber: '№ на документ',
           documentDate: 'От дата',
           requestDate: 'Дата на заявител',
@@ -1158,12 +1203,16 @@
           taxAmount: 'Платена такса'
         },
         newAircraftDocApplication: {
+          title: 'Ново заявление',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAircraftDocApplication: {
+          title: 'Преглед на заявление',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteApplication: 'Изтрий'
         },
         inventorySearch: {
           bookPageNumber: '№ на страница',

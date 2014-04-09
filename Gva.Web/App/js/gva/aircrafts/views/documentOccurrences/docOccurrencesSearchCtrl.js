@@ -26,14 +26,6 @@
         ind: occurrence.partIndex
       });
     };
-
-    $scope.deleteOccurrence = function (occurrence) {
-      return AircraftDocumentOccurrence
-        .remove({ id: $stateParams.id, ind: occurrence.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
   }
 
   DocOccurrencesSearchCtrl.$inject = [

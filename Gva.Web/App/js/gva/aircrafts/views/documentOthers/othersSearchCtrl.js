@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentOther = function (documentOther) {
-      return AircraftDocumentOther.remove({ id: $stateParams.id, ind: documentOther.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOther = function () {
       return $state.go('root.aircrafts.view.others.new');
     };

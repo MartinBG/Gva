@@ -1,47 +1,46 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.aircraftOtherDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentNumber"></label>
-            <sc-text ng-model="model.documentNumber" name="documentNumber"></sc-text>
-          </div>
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentDateValidFrom"></label>
-            <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ></sc-date>
-          </div>
-          <div class="form-group col-sm-3 col-md-2">
-            <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentDateValidTo"></label>
-            <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo"></sc-date>
-          </div>
-          <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
-            <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentPublisher"></label>
-            <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true"></sc-text>
-          </div>
-        </div>
-          <div class="row">
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentType">
-              <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentType"></label>
-              <sc-validation-error field-name="otherDocumentType" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.otherDocumentType" name="otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffAliases: ['fligthCrew', 'to_vs', 'ovd'] }" ng-required="true"></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentRole">
-              <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole"></label>
-              <sc-validation-error field-name="otherDocumentRole" validations="{required: null}"></sc-validation-error>
-              <sc-nomenclature ng-model="model.otherDocumentRole" name="otherDocumentRole" alias="'otherDocumentRoles'" ng-required="true"></sc-nomenclature>
-            </div>
-            <div class="form-group col-sm-6 col-md-2">
-              <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.valid"></label>
-              <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'"></sc-nomenclature>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-12 col-md-8">
-              <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.notes"></label>
-              <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes"></sc-textarea>
-            </div>
-          </div>
+
+  <div class="row">
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentNumber"></label>
+        <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
       </div>
-  </div>
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentDateValidFrom"></label>
+        <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-readonly="readonly"></sc-date>
+      </div>
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentDateValidTo"></label>
+        <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
+      </div>
+      <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.documentPublisher"></label>
+        <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentType">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentType"></label>
+        <sc-validation-error field-name="otherDocumentType" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.otherDocumentType" name="otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffAliases: ['fligthCrew', 'to_vs', 'ovd'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentRole">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole"></label>
+        <sc-validation-error field-name="otherDocumentRole" validations="{required: null}"></sc-validation-error>
+        <sc-nomenclature ng-model="model.otherDocumentRole" name="otherDocumentRole" alias="'otherDocumentRoles'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-2">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.valid"></label>
+        <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12 col-md-8">
+        <label class="control-label" l10n-text="aircrafts.aircraftOtherDirective.notes"></label>
+        <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
+      </div>
+    </div>
+
 </ng-form>

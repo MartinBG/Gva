@@ -1,13 +1,27 @@
 ﻿<ng-form name="editAircraftDocumentOccurrenceForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.editOccurrence.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editOccurrence.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteOccurrence()" text="aircrafts.editOccurrence.deleteOcc"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editOccurrence.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editOccurrence.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part"></gva-aircraft-document-occurrence>
+    <div class="well-sm panel-body">
+      <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part" readonly="!editMode"></gva-aircraft-document-occurrence>
 
-  <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files"></gva-aircraft-scanned-document>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editOccurrence.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="!aircraftDocumentOccurrenceForm.$dirty"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editOccurrence.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files" readonly="!editMode"></gva-aircraft-scanned-document>
     </div>
   </div>
 </ng-form>

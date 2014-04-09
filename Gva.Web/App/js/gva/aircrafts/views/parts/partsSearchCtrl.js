@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deletePart = function (part) {
-      return AircraftPart.remove({ id: $stateParams.id, ind: part.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newPart = function () {
       return $state.go('root.aircrafts.view.parts.new');
     };

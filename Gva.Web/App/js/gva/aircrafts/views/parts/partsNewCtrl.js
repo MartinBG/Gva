@@ -10,9 +10,9 @@
     aircraftPart
   ) {
     $scope.save = function () {
-      return $scope.aircraftPartForm.$validate()
+      return $scope.newPartForm.$validate()
         .then(function () {
-          if ($scope.aircraftPartForm.$valid) {
+          if ($scope.newPartForm.$valid) {
             return AircraftPart
               .save({ id: $stateParams.id }, $scope.aircraftPart).$promise
               .then(function () {

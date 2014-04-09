@@ -1,43 +1,42 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.markDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrInNumber">
-          <label class="control-label" l10n-text="aircrafts.markDirective.ltrInNumber"></label>
-          <sc-validation-error field-name="ltrInNumber" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.ltrInNumber" name="ltrInNumber" ng-required="true"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrInDate">
-          <label class="control-label" l10n-text="aircrafts.markDirective.ltrInDate"></label>
-          <sc-validation-error field-name="ltrInDate" validations="{required: null}"></sc-validation-error>
-          <sc-date ng-model="model.ltrInDate" name="ltrInDate" ng-required="true"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrCaaNumber">
-          <label class="control-label" l10n-text="aircrafts.markDirective.ltrCaaNumber"></label>
-          <sc-validation-error field-name="ltrCaaNumber" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.ltrCaaNumber" name="ltrCaaNumber" ng-required="true"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrCaaDate">
-          <label class="control-label" l10n-text="aircrafts.markDirective.ltrCaaDate"></label>
-          <sc-validation-error field-name="ltrCaaDate" validations="{required: null}"></sc-validation-error>
-          <sc-date ng-model="model.ltrCaaDate" name="ltrCaaDate" ng-required="true"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-4 col-md-4" sc-has-error="mark">
-          <label class="control-label" l10n-text="aircrafts.markDirective.mark"></label>
-          <sc-validation-error field-name="mark" validations="{required: null}"></sc-validation-error>
-            <sc-text ng-model="model.mark" name="mark" required></sc-text>
-        </div>
-        <div class="form-group col-sm-2" sc-has-error="valid">
-          <label class="control-label" l10n-text="aircrafts.markDirective.valid"></label>
-          <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrInNumber">
+      <label class="control-label" l10n-text="aircrafts.markDirective.ltrInNumber"></label>
+      <sc-validation-error field-name="ltrInNumber" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.ltrInNumber" name="ltrInNumber" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrInDate">
+      <label class="control-label" l10n-text="aircrafts.markDirective.ltrInDate"></label>
+      <sc-validation-error field-name="ltrInDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.ltrInDate" name="ltrInDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrCaaNumber">
+      <label class="control-label" l10n-text="aircrafts.markDirective.ltrCaaNumber"></label>
+      <sc-validation-error field-name="ltrCaaNumber" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.ltrCaaNumber" name="ltrCaaNumber" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrCaaDate">
+      <label class="control-label" l10n-text="aircrafts.markDirective.ltrCaaDate"></label>
+      <sc-validation-error field-name="ltrCaaDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.ltrCaaDate" name="ltrCaaDate" ng-required="true" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-4" sc-has-error="mark">
+      <label class="control-label" l10n-text="aircrafts.markDirective.mark"></label>
+      <sc-validation-error field-name="mark" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.mark" name="mark" required ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-2" sc-has-error="valid">
+      <label class="control-label" l10n-text="aircrafts.markDirective.valid"></label>
+      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
 </ng-form>

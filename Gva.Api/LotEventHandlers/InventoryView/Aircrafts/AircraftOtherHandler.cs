@@ -28,8 +28,8 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Part = partVersion.Part;
 
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
-            invItem.Name = partVersion.DynamicContent.documentRole.name;
-            invItem.Type = partVersion.DynamicContent.documentType.name;
+            invItem.Name = partVersion.DynamicContent.otherDocumentRole.name;
+            invItem.Type = partVersion.DynamicContent.otherDocumentType.name;
             invItem.Number = partVersion.DynamicContent.documentNumber;
             invItem.Date = partVersion.DynamicContent.documentDateValidFrom;
             invItem.Publisher = partVersion.DynamicContent.documentPublisher;

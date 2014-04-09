@@ -14,16 +14,16 @@
     $scope.aw = aircraftCertAirworthiness;
 
     $scope.save = function () {
-      return $scope.aircraftCertAirworthinessForm.$validate()
-         .then(function () {
-            if ($scope.aircraftCertAirworthinessForm.$valid) {
-              return AircraftCertAirworthinessFM
-              .save({ id: $stateParams.id }, $scope.aw).$promise
-              .then(function () {
-                return $state.go('root.aircrafts.view.airworthinessesFM.search');
-              });
-            }
-          });
+      return $scope.newCertAirworthinessForm.$validate()
+        .then(function () {
+          if ($scope.newCertAirworthinessForm.$valid) {
+            return AircraftCertAirworthinessFM
+                .save({ id: $stateParams.id }, $scope.aw).$promise
+                .then(function () {
+              return $state.go('root.aircrafts.view.airworthinessesFM.search');
+            });
+          }
+        });
     };
 
     $scope.cancel = function () {

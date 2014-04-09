@@ -11,19 +11,11 @@
   ) {
     $scope.aircraftDocumentApplications = aircraftDocumentApplications;
 
-
     $scope.editApplication = function (application) {
       return $state.go('root.aircrafts.view.applications.edit', {
         id: $stateParams.id,
         ind: application.partIndex
       });
-    };
-
-    $scope.deleteApplication = function (application) {
-      return AircraftDocumentApplication.remove({ id: $stateParams.id, ind: application.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
     };
 
     $scope.newApplication = function () {

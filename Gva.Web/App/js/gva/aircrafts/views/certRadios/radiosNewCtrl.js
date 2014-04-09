@@ -14,9 +14,9 @@
     $scope.radio = aircraftCertRadio;
 
     $scope.save = function () {
-      return $scope.aircraftCertRadioForm.$validate()
+      return $scope.newCertRadioForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertRadioForm.$valid) {
+            if ($scope.newCertRadioForm.$valid) {
               return AircraftCertRadio
               .save({ id: $stateParams.id }, $scope.radio).$promise
               .then(function () {

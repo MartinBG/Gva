@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -8,7 +8,20 @@
     $stateParams,
     AircraftInspection,
     aircraftInspection) {
+    var originalInspection = _.cloneDeep(aircraftInspection);
+
     $scope.aircraftInspection = aircraftInspection;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftInspection.part = _.cloneDeep(originalInspection.part);
+      $scope.$broadcast('cancel', originalInspection);
+    };
 
     $scope.save = function () {
       return $scope.editInspectionForm.$validate()
@@ -24,9 +37,13 @@
       });
     };
 
-
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.inspections.search');
+    $scope.deleteInspection = function () {
+      return AircraftInspection.remove({
+        id: $stateParams.id,
+        ind: aircraftInspection.partIndex
+      }).$promise.then(function () {
+        return $state.go('root.aircrafts.view.inspections.search');
+      });
     };
   }
 

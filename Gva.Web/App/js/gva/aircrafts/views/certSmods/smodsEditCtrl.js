@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,14 +9,25 @@
     AircraftCertSmod,
     aircraftCertSmod
   ) {
-    $scope.isEdit = true;
+    var originalSmod = _.cloneDeep(aircraftCertSmod);
 
+    $scope.isEdit = true;
     $scope.smod = aircraftCertSmod;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.smod = _.cloneDeep(originalSmod);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftCertSmodForm.$validate()
+      return $scope.editCertSmodForm.$validate()
       .then(function () {
-        if ($scope.aircraftCertSmodForm.$valid) {
+        if ($scope.editCertSmodForm.$valid) {
           return AircraftCertSmod
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.smod)
             .$promise
@@ -27,8 +38,11 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.smods.search');
+    $scope.deleteSmod = function () {
+      return AircraftCertSmod.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.smods.search');
+        });
     };
   }
 

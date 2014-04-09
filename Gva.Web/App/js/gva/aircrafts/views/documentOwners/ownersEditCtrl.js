@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,8 +9,20 @@
     AircraftDocumentOwner,
     aircraftDocumentOwner
   ) {
+    var originalOwner = _.cloneDeep(aircraftDocumentOwner);
 
     $scope.aircraftDocumentOwner = aircraftDocumentOwner;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftDocumentOwner.part = _.cloneDeep(originalOwner.part);
+      $scope.$broadcast('cancel', originalOwner);
+    };
 
     $scope.save = function () {
       return $scope.editDocumentOwnerForm.$validate()
@@ -26,8 +38,13 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.owners.search');
+    $scope.deleteOwner = function () {
+      return AircraftDocumentOwner.remove({
+        id: $stateParams.id,
+        ind: aircraftDocumentOwner.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.aircrafts.view.owners.search');
+        });
     };
   }
 

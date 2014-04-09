@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,14 +9,25 @@
     AircraftCertMark,
     aircraftCertMark
   ) {
-    $scope.isEdit = true;
+    var originalMark = _.cloneDeep(aircraftCertMark);
 
+    $scope.isEdit = true;
     $scope.mark = aircraftCertMark;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.mark = _.cloneDeep(originalMark);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftCertMarkForm.$validate()
+      return $scope.editCertMarkForm.$validate()
       .then(function () {
-        if ($scope.aircraftCertMarkForm.$valid) {
+        if ($scope.editCertMarkForm.$valid) {
           return AircraftCertMark
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.mark)
             .$promise
@@ -27,8 +38,11 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.marks.search');
+    $scope.deleteMark = function () {
+      return AircraftCertMark.remove({ id: $stateParams.id, ind: aircraftCertMark.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.marks.search');
+        });
     };
   }
 

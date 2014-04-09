@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteCertMark = function (mark) {
-      return AircraftCertMark.remove({ id: $stateParams.id, ind: mark.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertMark = function () {
       return $state.go('root.aircrafts.view.marks.new');
     };

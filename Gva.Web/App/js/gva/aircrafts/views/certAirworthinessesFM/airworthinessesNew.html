@@ -1,11 +1,19 @@
 ﻿<ng-form name="newCertAirworthinessForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.newAirworthiness.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.newAirworthiness.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.newAirworthiness.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-fm>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.newAirworthiness.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newCertAirworthinessForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.newAirworthiness.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-fm>
     </div>
   </div>
 </ng-form>

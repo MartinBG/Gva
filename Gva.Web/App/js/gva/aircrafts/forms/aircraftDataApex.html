@@ -1,184 +1,173 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.aircraftDataApexDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-md-3 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.name"></label>
-          <sc-text ng-model="model.name" name="name"></sc-text>
-        </div>
-        <div class="form-group col-md-3 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.nameAlt"></label>
-          <sc-text ng-model="model.nameAlt" name="nameAlt"></sc-text>
-        </div>
-        <div class="form-group col-md-3 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.model"></label>
-          <sc-text ng-model="model.model" name="model"></sc-text>
-        </div>
-        <div class="form-group col-md-3 col-sm-6" sc-has-error="series">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.series"></label>
-          <sc-validation-error field-name="series" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.series" name="series" ng-required="true"></sc-text>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftTypeGroup">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftTypeGroup"></label>
-          <sc-validation-error field-name="aircraftTypeGroup" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCategory">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftCategory"></label>
-          <sc-validation-error field-name="aircraftCategory" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.aircraftCategory" name="aircraftCategory" alias="'aircraftCategories'" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftSCodeType">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftSCodeType"></label>
-          <sc-validation-error field-name="aircraftSCodeType" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.aircraftSCodeType" name="aircraftSCodeType" alias="'aircraftSCodeTypes'" ng-required="true"></sc-nomenclature>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftProducer">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftProducer"></label>
-          <sc-validation-error field-name="aircraftProducer" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.aircraftProducer" name="aircraftProducer" alias="'aircraftProducers'" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-3 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manPlace"></label>
-          <sc-text ng-model="model.manPlace" name="manPlace"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manDate"></label>
-          <sc-date ng-model="model.manDate" name="manDate"></sc-date>
-        </div>
-        <div class="form-group col-md-3 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manSN"></label>
-          <sc-text ng-model="model.manSN" name="manSN"></sc-text>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.beaconCodeELT"></label>
-          <sc-text ng-model="model.beaconCodeELT" name="beaconCodeELT"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.maxMassT"></label>
-          <sc-text ng-model="model.maxMassT" name="maxMassT"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.maxMassL"></label>
-          <sc-text ng-model="model.maxMassL" name="maxMassL"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.icao"></label>
-          <sc-text ng-model="model.icao" name="icao"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.docRoom"></label>
-          <sc-text ng-model="model.docRoom" name="docRoom"></sc-text>
-        </div>
-      </div>
-      <accordion>
-        <accordion-group style="margin-top: 5px;">
-          <accordion-heading>
-            <a l10n-text="aircrafts.aircraftDataApexDirective.massData" style="font-size: 12px;"></a>
-          </accordion-heading>
-          <div class="row">
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.mass"></label>
-              <sc-text ng-model="model.mass.mass" name="mass"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.cax"></label>
-              <sc-text ng-model="model.mass.cax" name="cax"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.date"></label>
-              <sc-date ng-model="model.mass.date" name="date"></sc-date>
-            </div>
-          </div>
-        </accordion-group>
-      </accordion>
-      <accordion>
-        <accordion-group style="margin-top: 5px;">
-          <accordion-heading>
-            <a l10n-text="aircrafts.aircraftDataApexDirective.ultralightData" style="font-size: 12px;"></a>
-          </accordion-heading>
-          <div class="row">
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.color"></label>
-              <sc-text ng-model="model.ultralight.color" name="color"></sc-text>
-            </div>
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.colorAlt"></label>
-              <sc-text ng-model="model.ultralight.colorAlt" name="colorAlt"></sc-text>
-            </div>
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.seats"></label>
-              <sc-date ng-model="model.ultralight.seats" name="seats"></sc-date>
-            </div>
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.payload"></label>
-              <sc-date ng-model="model.ultralight.payload" name="payload"></sc-date>
-            </div>
-          </div>
-        </accordion-group>
-      </accordion>
-      <accordion>
-        <accordion-group style="margin-top: 5px;">
-          <accordion-heading>
-            <a l10n-text="aircrafts.aircraftDataApexDirective.noiseData" style="font-size: 12px;"></a>
-          </accordion-heading>
-          <div class="row">
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.flyover"></label>
-              <sc-text ng-model="model.noise.flyover" name="flyover"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approach"></label>
-              <sc-text ng-model="model.noise.approach" name="approach"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.lateral"></label>
-              <sc-text ng-model="model.noise.lateral" name="lateral"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.overflight"></label>
-              <sc-text ng-model="model.noise.overflight" name="overflight"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.takeoff"></label>
-              <sc-text ng-model="model.noise.takeoff" name="takeoff"></sc-text>
-            </div>
-          </div>
-        </accordion-group>
-      </accordion>
-      <accordion>
-        <accordion-group style="margin-top: 5px;">
-          <accordion-heading>
-            <a l10n-text="aircrafts.aircraftDataApexDirective.radioData" style="font-size: 12px;"></a>
-          </accordion-heading>
-          <div class="row">
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approvalNumber"></label>
-              <sc-text ng-model="model.radio.approvalNumber" name="approvalNumber"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approvalDate"></label>
-              <sc-date ng-model="model.radio.approvalDate" name="approvalDate"></sc-date>
-            </div>
-            <div class="form-group col-md-3 col-sm-6">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.incommingApprovalNumber"></label>
-              <sc-text ng-model="model.radio.incommingApprovalNumber" name="incommingApprovalNumber"></sc-text>
-            </div>
-            <div class="form-group col-md-2 col-sm-4">
-              <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.incommingApprovalDate"></label>
-              <sc-date ng-model="model.radio.incommingApprovalDate" name="incommingApprovalDate"></sc-date>
-            </div>
-          </div>
-        </accordion-group>
-      </accordion>
+
+  <div class="row">
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.name"></label>
+      <sc-text ng-model="model.name" name="name" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.nameAlt"></label>
+      <sc-text ng-model="model.nameAlt" name="nameAlt" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-3 col-sm-6" sc-has-error="model">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.model"></label>
+      <sc-validation-error field-name="model" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.model" name="model" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-3 col-sm-6" sc-has-error="series">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.series"></label>
+      <sc-validation-error field-name="series" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.series" name="series" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftTypeGroup">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftTypeGroup"></label>
+      <sc-validation-error field-name="aircraftTypeGroup" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCategory">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftCategory"></label>
+      <sc-validation-error field-name="aircraftCategory" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftCategory" name="aircraftCategory" alias="'aircraftCategories'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftSCodeType">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftSCodeType"></label>
+      <sc-validation-error field-name="aircraftSCodeType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftSCodeType" name="aircraftSCodeType" alias="'aircraftSCodeTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftProducer">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.aircraftProducer"></label>
+      <sc-validation-error field-name="aircraftProducer" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftProducer" name="aircraftProducer" alias="'aircraftProducers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manPlace"></label>
+      <sc-text ng-model="model.manPlace" name="manPlace" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manDate"></label>
+      <sc-date ng-model="model.manDate" name="manDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.manSN"></label>
+      <sc-text ng-model="model.manSN" name="manSN" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-8">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.beaconCodeELT"></label>
+      <sc-text ng-model="model.beaconCodeELT" name="beaconCodeELT" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.maxMassT"></label>
+      <sc-text ng-model="model.maxMassT" name="maxMassT" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.maxMassL"></label>
+      <sc-text ng-model="model.maxMassL" name="maxMassL" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.icao"></label>
+      <sc-text ng-model="model.icao" name="icao" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.docRoom"></label>
+      <sc-text ng-model="model.docRoom" name="docRoom" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showMassData = false">
+    <a l10n-text="aircrafts.aircraftDataApexDirective.massData" ng-click="showMassData = !showMassData" style="cursor:pointer;"></a>
+  </h5>
+  <div class="row" ng-show="showMassData">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.mass"></label>
+      <sc-text ng-model="model.mass.mass" name="mass" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.cax"></label>
+      <sc-text ng-model="model.mass.cax" name="cax" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.date"></label>
+      <sc-date ng-model="model.mass.date" name="date" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showUltralightData = false">
+    <a l10n-text="aircrafts.aircraftDataApexDirective.ultralightData" ng-click="showUltralightData = !showUltralightData" style="cursor:pointer;"></a>
+  </h5>
+  <div class="row" ng-show="showUltralightData">
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.color"></label>
+      <sc-text ng-model="model.ultralight.color" name="color" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.colorAlt"></label>
+      <sc-text ng-model="model.ultralight.colorAlt" name="colorAlt" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.seats"></label>
+      <sc-date ng-model="model.ultralight.seats" name="seats" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.payload"></label>
+      <sc-date ng-model="model.ultralight.payload" name="payload" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showNoiseData = false">
+    <a l10n-text="aircrafts.aircraftDataApexDirective.noiseData" ng-click="showNoiseData = !showNoiseData" style="cursor:pointer;"></a>
+  </h5>
+  <div class="row" ng-show="showNoiseData">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.flyover"></label>
+      <sc-text ng-model="model.noise.flyover" name="flyover" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approach"></label>
+      <sc-text ng-model="model.noise.approach" name="approach" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.lateral"></label>
+      <sc-text ng-model="model.noise.lateral" name="lateral" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.overflight"></label>
+      <sc-text ng-model="model.noise.overflight" name="overflight" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.takeoff"></label>
+      <sc-text ng-model="model.noise.takeoff" name="takeoff" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showRadioData = false">
+    <a l10n-text="aircrafts.aircraftDataApexDirective.radioData" ng-click="showRadioData = !showRadioData" style="cursor:pointer;"></a>
+  </h5>
+  <div class="row" ng-show="showRadioData">
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approvalNumber"></label>
+      <sc-text ng-model="model.radio.approvalNumber" name="approvalNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.approvalDate"></label>
+      <sc-date ng-model="model.radio.approvalDate" name="approvalDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-3 col-sm-6">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.incommingApprovalNumber"></label>
+      <sc-text ng-model="model.radio.incommingApprovalNumber" name="incommingApprovalNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataApexDirective.incommingApprovalDate"></label>
+      <sc-date ng-model="model.radio.incommingApprovalDate" name="incommingApprovalDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
 </ng-form>

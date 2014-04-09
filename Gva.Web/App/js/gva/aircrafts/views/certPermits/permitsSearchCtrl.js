@@ -11,19 +11,11 @@
   ) {
     $scope.permits = permits;
 
-
     $scope.editCertPermit = function (permit) {
       return $state.go('root.aircrafts.view.permits.edit', {
         id: $stateParams.id,
         ind: permit.partIndex
       });
-    };
-
-    $scope.deleteCertPermit = function (permit) {
-      return AircraftCertPermitToFly.remove({ id: $stateParams.id, ind: permit.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
     };
 
     $scope.newCertPermit = function () {

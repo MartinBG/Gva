@@ -11,19 +11,11 @@
   ) {
     $scope.noises = noises;
 
-
     $scope.editCertNoise = function (noise) {
       return $state.go('root.aircrafts.view.noises.edit', {
         id: $stateParams.id,
         ind: noise.partIndex
       });
-    };
-
-    $scope.deleteCertNoise = function (noise) {
-      return AircraftCertNoise.remove({ id: $stateParams.id, ind: noise.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
     };
 
     $scope.newCertNoise = function () {

@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -8,7 +8,20 @@
     $stateParams,
     AircraftDocumentOccurrence,
     aircraftDocumentOccurrence) {
+    var originalOccurrence = _.cloneDeep(aircraftDocumentOccurrence);
+
     $scope.aircraftDocumentOccurrence = aircraftDocumentOccurrence;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftDocumentOccurrence.part = _.cloneDeep(originalOccurrence.part);
+      $scope.$broadcast('cancel', originalOccurrence);
+    };
 
     $scope.save = function () {
       return $scope.editAircraftDocumentOccurrenceForm.$validate()
@@ -24,8 +37,12 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.occurrences.search');
+    $scope.deleteOccurrence = function () {
+      return AircraftDocumentOccurrence
+        .remove({ id: $stateParams.id, ind: aircraftDocumentOccurrence.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.occurrences.search');
+        });
     };
   }
 

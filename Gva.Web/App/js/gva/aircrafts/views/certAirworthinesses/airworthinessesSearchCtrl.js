@@ -19,13 +19,6 @@
       });
     };
 
-    $scope.deleteCertAirworthiness = function (aw) {
-      return AircraftCertAirworthiness.remove({ id: $stateParams.id, ind: aw.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertAirworthiness = function () {
       return $state.go('root.aircrafts.view.airworthinesses.new');
     };

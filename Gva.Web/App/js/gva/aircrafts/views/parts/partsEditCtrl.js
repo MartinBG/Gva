@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,13 +9,24 @@
     AircraftPart,
     aircraftPart
   ) {
+    var originalPart = _.cloneDeep(aircraftPart);
 
     $scope.aircraftPart = aircraftPart;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aircraftPart = _.cloneDeep(originalPart);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftPartForm.$validate()
+      return $scope.editPartForm.$validate()
         .then(function () {
-          if ($scope.aircraftPartForm.$valid) {
+          if ($scope.editPartForm.$valid) {
             return AircraftPart
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftPart)
               .$promise
@@ -26,8 +37,11 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.parts.search');
+    $scope.deletePart = function () {
+      return AircraftPart.remove({ id: $stateParams.id, ind: aircraftPart.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.parts.search');
+        });
     };
   }
 

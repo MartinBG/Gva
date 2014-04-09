@@ -14,9 +14,9 @@
     $scope.smod = aircraftCertSmod;
 
     $scope.save = function () {
-      return $scope.aircraftCertSmodForm.$validate()
+      return $scope.newCertSmodForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertSmodForm.$valid) {
+            if ($scope.newCertSmodForm.$valid) {
               return AircraftCertSmod
               .save({ id: $stateParams.id }, $scope.smod).$promise
               .then(function () {

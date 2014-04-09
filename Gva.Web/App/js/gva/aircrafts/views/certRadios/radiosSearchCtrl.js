@@ -11,19 +11,11 @@
   ) {
     $scope.radios = radios;
 
-
     $scope.editCertRadio = function (radio) {
       return $state.go('root.aircrafts.view.radios.edit', {
         id: $stateParams.id,
         ind: radio.partIndex
       });
-    };
-
-    $scope.deleteCertRadio = function (radio) {
-      return AircraftCertRadio.remove({ id: $stateParams.id, ind: radio.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
     };
 
     $scope.newCertRadio = function () {

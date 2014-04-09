@@ -14,9 +14,9 @@
     $scope.mark = aircraftCertMark;
 
     $scope.save = function () {
-      return $scope.aircraftCertMarkForm.$validate()
+      return $scope.newCertMarkForm.$validate()
          .then(function () {
-            if ($scope.aircraftCertMarkForm.$valid) {
+            if ($scope.newCertMarkForm.$valid) {
               return AircraftCertMark
               .save({ id: $stateParams.id }, $scope.mark).$promise
               .then(function () {

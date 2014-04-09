@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,14 +9,25 @@
     AircraftCertAirworthiness,
     aircraftCertAirworthiness
   ) {
-    $scope.isEdit = true;
+    var originalAirworthiness = _.cloneDeep(aircraftCertAirworthiness);
 
+    $scope.isEdit = true;
     $scope.aw = aircraftCertAirworthiness;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.aw = _.cloneDeep(originalAirworthiness);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftCertAirworthinessForm.$validate()
+      return $scope.editCertAirworthinessForm.$validate()
       .then(function () {
-        if ($scope.aircraftCertAirworthinessForm.$valid) {
+        if ($scope.editCertAirworthinessForm.$valid) {
           return AircraftCertAirworthiness
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aw)
             .$promise
@@ -27,8 +38,13 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.airworthinesses.search');
+    $scope.deleteAirworthiness = function () {
+      return AircraftCertAirworthiness.remove({
+        id: $stateParams.id,
+        ind: aircraftCertAirworthiness.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.aircrafts.view.airworthinesses.search');
+        });
     };
   }
 

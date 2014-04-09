@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,9 +9,21 @@
     AircraftDocumentDebtFM,
     aircraftDocumentDebt
   ) {
-    $scope.isEdit = true;
+    var originalDebt = _.cloneDeep(aircraftDocumentDebt);
 
+    $scope.isEdit = true;
     $scope.debt = aircraftDocumentDebt;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.debt.part = _.cloneDeep(originalDebt.part);
+      $scope.$broadcast('cancel', originalDebt);
+    };
 
     $scope.save = function () {
       return $scope.editDocumentDebtForm.$validate()
@@ -27,8 +39,13 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.debtsFM.search');
+    $scope.deleteDocumentDebt = function () {
+      return AircraftDocumentDebtFM.remove({
+        id: $stateParams.id,
+        ind: aircraftDocumentDebt.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.aircrafts.view.debtsFM.search');
+        });
     };
   }
 

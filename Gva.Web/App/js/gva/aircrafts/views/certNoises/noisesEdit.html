@@ -1,11 +1,25 @@
 ﻿<ng-form name="editCertNoiseForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.editNoise.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editNoise.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteNoise()" text="aircrafts.editNoise.deleteNoise"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editNoise.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editNoise.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-aircraft-cert-noise name="aircraftCertNoiseForm" ng-model="noise.part"></gva-aircraft-cert-noise>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editNoise.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="editCertNoiseForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editNoise.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+    <div class="well-sm panel-body">
+      <gva-aircraft-cert-noise name="aircraftCertNoiseForm" ng-model="noise.part" readonly="!editMode"></gva-aircraft-cert-noise>
     </div>
   </div>
 </ng-form>

@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,14 +9,25 @@
     AircraftCertPermitToFly,
     aircraftCertPermitToFly
   ) {
-    $scope.isEdit = true;
+    var originalPermit = _.cloneDeep(aircraftCertPermitToFly);
 
+    $scope.isEdit = true;
     $scope.permit = aircraftCertPermitToFly;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.permit = _.cloneDeep(originalPermit);
+    };
 
     $scope.save = function () {
-      return $scope.aircraftCertPermitForm.$validate()
+      return $scope.editCertPermitForm.$validate()
       .then(function () {
-        if ($scope.aircraftCertPermitForm.$valid) {
+        if ($scope.editCertPermitForm.$valid) {
           return AircraftCertPermitToFly
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.permit)
             .$promise
@@ -27,8 +38,13 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.aircrafts.view.permits.search');
+    $scope.deletePermit = function () {
+      return AircraftCertPermitToFly.remove({
+        id: $stateParams.id,
+        ind: aircraftCertPermitToFly.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.aircrafts.view.permits.search');
+        });
     };
   }
 

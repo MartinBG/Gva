@@ -19,13 +19,6 @@
         });
     };
 
-    $scope.deleteDocumentOwner = function (documentOwner) {
-      return AircraftDocumentOwner.remove({ id: $stateParams.id, ind: documentOwner.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOwner = function () {
       return $state.go('root.aircrafts.view.owners.new');
     };
