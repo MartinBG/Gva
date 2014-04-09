@@ -1762,11 +1762,27 @@ namespace Gva.MigrationTool.Nomenclatures
         public static void migrateAuditPartRequirmants()
         {
             Nom nom = repo.GetNom("auditPartRequirmants");
+            var idPartAliases = new Dictionary<string, string>()
+            {
+                { "1", "145"},
+                { "2", "MF"},
+                { "3", "MG"},
+                { "4","147"},
+                { "21", "aircrafts"},
+                { "22", "TR"},
+                { "42", "ACAM"}
+            };
+
+            for(int i = 200; i <= 211; i++)
+            {
+                idPartAliases.Add(i.ToString(), "ACAM");
+            }
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_REQUIREMENT")
                 .Materialize(r =>
                     new NomValue
                     {
-                        OldId = r.Field<object>("ID_PART").ToString(),
+                        OldId = r.Field<object>("ID").ToString(),
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("SUBJECT"),
                         NameAlt = null,
@@ -1776,7 +1792,8 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContent = JsonConvert.SerializeObject(
                             new
                             {
-                                sortOrder = r.Field<decimal?>("SORT_ORDER").ToString(),
+                                idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
+                                sortOrder = r.Field<decimal?>("SORT_ORDER").ToString()
                             })
                     })
                 .ToList();
@@ -1792,6 +1809,14 @@ namespace Gva.MigrationTool.Nomenclatures
         public static void migrateAuditPartSections()
         {
             Nom nom = repo.GetNom("auditPartSections");
+            var idPartAliases = new Dictionary<string, string>()
+            {
+                { "1", "145"},
+                { "2", "MF"},
+                { "3", "MG"},
+                { "4","147"}
+            };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SECTION")
                 .Materialize(r =>
                     new NomValue
@@ -1806,7 +1831,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContent = JsonConvert.SerializeObject(
                             new
                             {
-                                idPart = r.Field<long?>("ID_PART").ToString(),
+                                idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
                                 sortOrder = r.Field<short?>("SORT_ORDER").ToString()
                             })
                     })

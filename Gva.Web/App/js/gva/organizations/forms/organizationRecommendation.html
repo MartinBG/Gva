@@ -141,7 +141,7 @@
           </div>
       </accordion-group>
     <accordion>
-    <accordion>
+   <accordion>
       <accordion-group style="margin-top: 5px;" class="col-md-12 col-sm-12">
         <accordion-heading>
           <a l10n-text="organizations.recommendationDirective.auditorsReview.title" style="font-size: 12px;"></a>
@@ -149,7 +149,7 @@
         <sc-button name="chooseAuditsBtn" type="button" btn-click="chooseAudits()" class="btn btn-primary btn-sm" icon="glyphicon-plus"
               text="organizations.recommendationDirective.auditorsReview.chooseAudits"></sc-button>
         <sc-datatable items="model.part.auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
-          <sc-column data="auditPart" title="organizations.recommendationDirective.auditorsReview.auditPart">
+          <sc-column data="auditPart.name" title="organizations.recommendationDirective.auditorsReview.auditPart">
           </sc-column>
           <sc-column data="subject" title="organizations.recommendationDirective.auditorsReview.subject">
           </sc-column>
@@ -177,7 +177,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><strong l10n-text="organizations.recommendationDirective.accordance.AuditDetailTitle"></strong></div>
                   <div class="well-sm panel-body">
-                    <sc-button btn-click="insertAuditDetails()" ng-if="!model.part.descriptionReview.auditDetails.length" 
+                    <sc-button btn-click="insertAuditDetails()" ng-disabled="!model.part.recommendationPart" ng-if="!model.part.descriptionReview.auditDetails.length && !insertionBtnIsClicked" 
                       text="organizations.recommendationDirective.accordance.insertAuditDetails" class="btn btn-default"></sc-button>
                     <table class="table table-striped table-bordered"  ng-if="model.part.descriptionReview.auditDetails.length > 0" >
                       <thead>
@@ -198,7 +198,7 @@
                           <td colspan="5" class="text-center" style="background: #A8A8A8; color: white">{{auditDetailGroup.groupTitle}}</td>
                         </tr>
                         <tr ng-repeat="detail in auditDetailGroup.group">
-                          <td style="width: 10px;">
+                          <td >
                             {{detail.auditPart}}
                           </td>
                           <td class="col-sm-4 col-md-3">
@@ -220,6 +220,9 @@
                         </tr>
                       </tbody>
                     </table>
+                    <div class="sort-disabled" ng-if="!model.part.descriptionReview.auditDetails.length && insertionBtnIsClicked">
+                      <span colspan="8" l10n-text="organizations.recommendationDirective.disparities.noAvailableDisparities"></span>
+                    </div>
                   </div>
               </div>
           </div>
@@ -239,31 +242,59 @@
         <div class="well-sm panel-body">
           <div class="panel panel-default ">
             <div class="panel-heading"><strong l10n-text="organizations.recommendationDirective.disparities.disparitiesRecommendationsTitle1"></strong></div>
-              <sc-datatable items="model.part.auditorsReview.disparities" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-              <sc-column data="auditPart.name" title="organizations.recommendationDirective.disparities.auditPart">
-              </sc-column>
-              <sc-column data="sortOrder" title="organizations.recommendationDirective.disparities.sortOrder">
-              </sc-column>
-              <sc-column data="subject.name" title="organizations.recommendationDirective.disparities.subject">
-              </sc-column>
-              <sc-column data="refNumber" title="organizations.recommendationDirective.disparities.refNumber">
-              </sc-column>
-              <sc-column data="description" title="organizations.recommendationDirective.disparities.description">
-              </sc-column>
-              <sc-column data="disparityLevel.name" title="organizations.recommendationDirective.disparities.disparityLevel">
-              </sc-column>
-              <sc-column data="removalDate" title="organizations.recommendationDirective.disparities.removalDate">
-              </sc-column>
-              <sc-column data="rectifyAction" title="organizations.recommendationDirective.disparities.rectifyAction">
-              </sc-column>
-              <sc-column data="closureDate" title="organizations.recommendationDirective.disparities.closureDate">
-              </sc-column>
-              <sc-column data="closureDocument" title="organizations.recommendationDirective.disparities.closureDocument">
-              </sc-column>
-              <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-                <sc-button name="editBtn" btn-click="editDisparity(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-              </sc-column>
-            </sc-datatable>
+               <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th l10n-text="organizations.recommendationDirective.disparities.sortOrder"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.subject"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.refNumber"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.description"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.disparityLevel"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.removalDate"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.rectifyAction"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.closureDate"></th>
+                    <th l10n-text="organizations.recommendationDirective.disparities.closureDocument"></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="disparity in model.part.auditorsReview.disparities">
+                    <td style="width: 10px;">
+                      {{disparity.auditPart.name}}
+                    </td>
+                    <td class="col-sm-1 col-md-1">
+                      {{disparity.sortOrder}}
+                    </td>
+                    <td class="col-sm-3 col-md-2">
+                      {{disparity.subject.name}}
+                    </td>
+                    <td>
+                      {{disparity.refNumber}}
+                    </td>
+                     <td>
+                      {{disparity.description}}
+                    </td>
+                     <td>
+                      {{disparity.disparityLevel.name}}
+                    </td>
+                     <td>
+                      {{disparity.removalDate | date:'mediumDate'}}
+                    </td>
+                     <td>
+                      {{disparity.closureDate | date:'mediumDate'}}
+                    </td>
+                     <td>
+                      {{disparity.closureDocument}}
+                    </td>
+                    <td class="row">
+                      <sc-button name="editBtn" btn-click="editDisparity(disparity)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+                    </td>
+                  </tr>
+                  <tr class="sort-disabled" ng-if="!model.part.auditorsReview.disparities.length">
+                    <td colspan="8" l10n-text="organizations.recommendationDirective.disparities.noAvailableDisparities"></td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
         </div>
 

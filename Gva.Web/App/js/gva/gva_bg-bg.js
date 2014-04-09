@@ -2725,7 +2725,8 @@
             rectifyAction: 'Внесени коригиращи действия',
             closureDate: 'Дата на закриване',
             closureDocument: '№ на документ за закриване',
-            auditPart: 'Част'
+            auditPart: 'Част',
+            noAvailableDisparities: 'Няма намерени резултати'
           },
           recommendations: {
             title: '5. Препоръки',

@@ -8,23 +8,28 @@
     };
 
     $scope.insertAuditDetails = function () {
+      var queryString = {};
       if ($scope.$parent.form.$name === 'aircraftInspectionForm') {
-        $scope.model.auditDetails = Nomenclature.query({
+        queryString = {
           alias: 'auditPartRequirements',
           type: 'aircrafts'
-        });
+        };
       } else if ($scope.$parent.form.$name === 'organizationInspectionForm') {
-        $scope.model.auditDetails = Nomenclature.query({
+        queryString = {
           alias: 'auditPartRequirements',
           auditPartCode: $scope.model.auditPart.code,
           type: 'organizations'
-        });
+        };
       } else if ($scope.$parent.form.$name === 'airportInspectionForm') {
-        $scope.model.auditDetails = Nomenclature.query({
+        queryString = {
           alias: 'auditDetails',
           type: 'airports'
-        });
+        };
       }
+      return Nomenclature.query(queryString)
+        .$promise.then(function (details) {
+          $scope.model.auditDetails = details;
+        });
     };
 
   }

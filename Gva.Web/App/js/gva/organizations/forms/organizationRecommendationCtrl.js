@@ -54,7 +54,12 @@
 
 
     $scope.insertAuditDetails = function () {
-      Nomenclature.query({ alias: 'auditDetails', type: 'organizationRecommendations'})
+      $scope.insertionBtnIsClicked = true;
+      return Nomenclature.query({
+        alias: 'auditDetails',
+        type: 'organizationRecommendations',
+        auditPartCode: $scope.model.part.recommendationPart.code
+      })
         .$promise.then(function (details) {
         $scope.model.part.descriptionReview.auditDetails = details;
       });
