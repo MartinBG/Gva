@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,25 @@
     OrganizationInspection,
     organizationInspection
     ) {
+    var originalInspection = _.cloneDeep(organizationInspection);
+
     $scope.organizationInspection = organizationInspection;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationInspection.part = _.cloneDeep(originalInspection.part);
+      $scope.$broadcast('cancel', originalInspection);
+    };
 
     $scope.save = function () {
-      return $scope.organizationInspectionForm.$validate()
+      return $scope.editInspectionForm.$validate()
       .then(function () {
-        if ($scope.organizationInspectionForm.$valid) {
+        if ($scope.editInspectionForm.$valid) {
           return OrganizationInspection
             .save({
               id: $stateParams.id,
@@ -30,11 +43,15 @@
       });
     };
 
-
-    $scope.cancel = function () {
-      return $stateParams.childInd ?
-        $state.go('^') :
-        $state.go('root.organizations.view.inspections.search');
+    $scope.deleteInspection = function () {
+      return OrganizationInspection.remove({
+        id: $stateParams.id,
+        ind: organizationInspection.partIndex
+      }).$promise.then(function () {
+        return $stateParams.childInd ?
+          $state.go('^') :
+          $state.go('root.organizations.view.inspections.search');
+      });
     };
   }
 

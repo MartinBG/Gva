@@ -13,9 +13,9 @@
 
 
     $scope.save = function () {
-      return $scope.organizationInspectionForm.$validate()
+      return $scope.newInspectionForm.$validate()
       .then(function () {
-        if ($scope.organizationInspectionForm.$valid) {
+        if ($scope.newInspectionForm.$valid) {
           return OrganizationInspection
             .save({ id: $stateParams.id }, $scope.organizationInspection)
             .$promise

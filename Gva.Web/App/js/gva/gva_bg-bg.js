@@ -2308,12 +2308,16 @@
           file: 'Преписка (Заявление)'
         },
         newInspection: {
+          title: 'Нова инспекция',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editInspection: {
+          title: 'Преглед на инспекция',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteInspection: 'Изтрий'
         },
         amendmentSearch: {
           newAmendment: 'Ново изменение',
