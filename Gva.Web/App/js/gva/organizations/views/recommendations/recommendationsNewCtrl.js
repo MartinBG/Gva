@@ -12,9 +12,9 @@
     $scope.organizationRecommendation = organizationRecommendation;
 
     $scope.save = function () {
-      return $scope.organizationRecommendationsForm.$validate()
+      return $scope.newRecommendation.$validate()
         .then(function () {
-          if ($scope.organizationRecommendationsForm.$valid) {
+          if ($scope.newRecommendation.$valid) {
             return OrganizationRecommendation
               .save({ id: $stateParams.id }, $scope.organizationRecommendation)
               .$promise

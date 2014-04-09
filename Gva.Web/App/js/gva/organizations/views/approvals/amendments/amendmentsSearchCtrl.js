@@ -20,17 +20,6 @@
       });
     };
 
-    $scope.deleteAmendment = function (amendment) {
-      return OrganizationAmendment.remove({
-        id: $stateParams.id,
-        ind: $stateParams.ind,
-        childInd: amendment.partIndex
-      })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newAmendment = function () {
       return $state.go('root.organizations.view.amendments.new');
     };

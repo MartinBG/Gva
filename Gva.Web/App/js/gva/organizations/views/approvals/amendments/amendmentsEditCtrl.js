@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,12 +9,25 @@
     OrganizationAmendment,
     organizationAmendment
   ) {
+    var originalAmendment = _.cloneDeep(organizationAmendment);
+
     $scope.amendment = organizationAmendment;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.amendment.part = _.cloneDeep(originalAmendment.part);
+      $scope.$broadcast('cancel', originalAmendment);
+    };
 
     $scope.save = function () {
-      return $scope.organizationAmendmentForm.$validate()
+      return $scope.editAmendmentForm.$validate()
       .then(function () {
-        if ($scope.organizationAmendmentForm.$valid) {
+        if ($scope.editAmendmentForm.$valid) {
           return OrganizationAmendment
             .save({
               id: $stateParams.id,
@@ -29,8 +42,14 @@
       });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.amendments.search');
+    $scope.deleteAmendment = function () {
+      return OrganizationAmendment.remove({
+        id: $stateParams.id,
+        ind: $stateParams.ind,
+        childInd: organizationAmendment.partIndex
+      }).$promise.then(function () {
+          return $state.go('root.organizations.view.amendments.search');
+        });
     };
   }
 

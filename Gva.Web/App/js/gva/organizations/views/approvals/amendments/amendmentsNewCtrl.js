@@ -12,9 +12,9 @@
     $scope.amendment = organizationAmendment;
 
     $scope.save = function () {
-      return $scope.organizationAmendmentForm.$validate()
+      return $scope.newAmendmentForm.$validate()
         .then(function () {
-          if ($scope.organizationAmendmentForm.$valid) {
+          if ($scope.newAmendmentForm.$valid) {
             return OrganizationAmendment
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.amendment)

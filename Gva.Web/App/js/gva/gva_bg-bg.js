@@ -2383,12 +2383,16 @@
           file: 'Преписка (Заявление)'
         },
         newAmendment: {
+          title: 'Ново изменение',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAmendment: {
+          title: 'Преглед на изменение',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteAmendment: 'Изтрий'
         },
         approvalSearch: {
           newApproval: 'Ново удостоверение',
@@ -2403,6 +2407,8 @@
           recommendationReport: 'Доклад от препоръки'
         },
         newApproval: {
+          title: 'Ново удостоверение за одобрение',
+          amendmentTitle: 'Изменение',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -2438,12 +2444,16 @@
           file: 'Преписка (Заявление)'
         },
         newRecommendation: {
+          title: 'Нов доклад от препоръки',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editRecommendation: {
+          title: 'Преглед на доклад от препоръки',
+          edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          deleteRecommendation: 'Изтрий'
         },
         regAirportOperatorSearch: {
           newRegAirportOperator: 'Ново удостоверение',
@@ -2601,7 +2611,6 @@
           noAvailableEquipments: 'Няма налични съоръжения'
         },
         approvalDirective: {
-          title: 'Удостоверение за одобрение',
           organizationType: 'Тип одобрение',
           documentNumber: 'Номер',
           documentDateIssue: 'Дата на издаване',
@@ -2610,7 +2619,6 @@
           approvalStateNote: 'Бележки по състоянието'
         },
         amendmentDirective: {
-          title: 'Изменение',
           organizationType: 'Тип одобрение',
           documentNumber: 'Референтен № на описание	',
           documentDateIssue: 'Дата на издаване',
@@ -2664,7 +2672,6 @@
           }
         },
         recommendationDirective: {
-          title: 'Доклад от препоръки',
           commonData: {
             title: '1. Общи положения',
             auditorsTitle: 'Инспектори по Част 1',
@@ -2686,7 +2693,7 @@
             finished4Date: 'Дата на приключване',
             finished5Date: 'Дата на приключване',
             town: 'Отдел ЛГ гр.',
-            documentDescription: 'Описание, издание, ревизия Част 3',
+            documentDescription: 'Описание, издание, ревизия',
             recommendation: 'Препоръки'
           },
           auditorsReview: {
@@ -2714,6 +2721,7 @@
             title: '4. Установени несъответсвия',
             auditorsTitle: 'Инспектори по Част 4',
             disparitiesRecommendationsTitle1: 'Установени несъответствия от одиторски преглед',
+            disparitiesRecommendationsTitle2: 'Установени несъответствия от описанието',
             sortOrder: 'Пореден №',
             refNumber: 'Референтен №',
             description: 'Описание на несъответствие',

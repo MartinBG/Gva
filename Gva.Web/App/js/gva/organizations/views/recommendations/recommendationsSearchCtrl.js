@@ -19,14 +19,6 @@
       });
     };
 
-    $scope.deleteRecommendation = function (recommendation) {
-      return OrganizationRecommendation
-        .remove({ id: $stateParams.id, ind: recommendation.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newRecommendation = function () {
       return $state.go('root.organizations.view.recommendations.new');
     };

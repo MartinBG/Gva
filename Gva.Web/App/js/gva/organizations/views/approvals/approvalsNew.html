@@ -1,15 +1,24 @@
 ﻿<ng-form name="newApprovalForm" sc-validate="{}">
- 
-  <gva-organization-approval name="organizationApprovalForm" ng-model="model.approval.part"></gva-organization-approval>
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newApproval.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newApproval.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newApproval.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-organization-amendment name="organizationAmendmentForm" ng-model="model.organizationAmendment.part"></gva-organization-amendment>
+    <div class="well-sm panel-body">
+      <gva-organization-approval name="organizationApprovalForm" ng-model="model.approval.part"></gva-organization-approval>
 
-  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="model.organizationAmendment.files"></gva-organization-scanned-document>
-  
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newApproval.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newApprovalForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newApproval.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <h5 class="form-header" l10n-text="organizations.newApproval.amendmentTitle"></h5>
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="model.organizationAmendment.part"></gva-organization-amendment>
+
+      <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="model.organizationAmendment.files"></gva-organization-scanned-document>
     </div>
   </div>
 </ng-form>

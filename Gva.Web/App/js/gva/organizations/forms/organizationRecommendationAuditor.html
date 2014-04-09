@@ -1,52 +1,52 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>
-        <div sc-has-error="part">
-          <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.part"></label>
-          <sc-validation-error field-name="part" validations="{required: null}"></sc-validation-error>
-        </div>
-      </th>
-      <th>
-        <div sc-has-error="sortOrder">
-          <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.sortOrder"></label>
-          <sc-validation-error field-name="sortOrder" validations="{required: null}"></sc-validation-error>
-        </div>
-      </th>
-      <th>
-        <div sc-has-error="examiner">
-          <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.examiner"></label>
-          <sc-validation-error field-name="examiner" validations="{required: null}"></sc-validation-error>
-        </div>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat-start="examiner in model.examiners">
-      <td class="col-sm-1 col-md-1">
-        <sc-nomenclature ng-model="examiner.part" name="part" ng-required="true" alias="'recommendationPartNumbers'"></sc-nomenclature>
-      </td>
-      <td class="col-sm-1 col-md-1">
-        <sc-int ng-model="examiner.sortOrder" name="sortOrder"></sc-int>
-      </td>
-      <td>
-        <sc-nomenclature ng-model="examiner.examiner" name="examiner" ng-required="true" alias="'examiners'"></sc-nomenclature>
-      </td>
-      <td style="text-align: right; width: 1px;">
-        <sc-button name="deleteExaminerBtn" type="button" class="btn btn-primary btn-sm" btn-click="deleteExaminer(examiner)" icon="glyphicon-remove"></sc-button>
-      </td>
-    </tr>
-    <tr ng-repeat-end></tr>
-    <tr class="sort-disabled" ng-if="!model.examiners.length">
-      <td colspan="8" l10n-text="organizations.recomendationAuditorDirective.noAvailableExaminers"></td>
-    </tr>
-    <tr>
-      <td colspan="4" style="text-align: right; width: 1px;">
-        <sc-button name="addExaminerBtn" type="button" btn-click="addExaminer()" class="btn btn-primary btn-sm" icon="glyphicon-plus"></sc-button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>
+          <div sc-has-error="part">
+            <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.part"></label>
+            <sc-validation-error field-name="part" validations="{required: null}"></sc-validation-error>
+          </div>
+        </th>
+        <th>
+          <div sc-has-error="sortOrder">
+            <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.sortOrder"></label>
+            <sc-validation-error field-name="sortOrder" validations="{required: null}"></sc-validation-error>
+          </div>
+        </th>
+        <th>
+          <div sc-has-error="examiner">
+            <label class="control-label" l10n-text="organizations.recomendationAuditorDirective.examiner"></label>
+            <sc-validation-error field-name="examiner" validations="{required: null}"></sc-validation-error>
+          </div>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="examiner in model.examiners">
+        <td class="col-sm-1 col-md-1">
+          <sc-nomenclature ng-model="examiner.part" name="part" ng-required="true" alias="'recommendationPartNumbers'" ng-readonly="readonly"></sc-nomenclature>
+        </td>
+        <td class="col-sm-1 col-md-1">
+          <sc-int ng-model="examiner.sortOrder" name="sortOrder" ng-readonly="readonly"></sc-int>
+        </td>
+        <td>
+          <sc-nomenclature ng-model="examiner.examiner" name="examiner" ng-required="true" alias="'examiners'" ng-readonly="readonly"></sc-nomenclature>
+        </td>
+        <td style="text-align: right; width: 1px;">
+          <sc-button name="deleteExaminerBtn" type="button" class="btn btn-primary btn-sm" btn-click="deleteExaminer(examiner)" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+        </td>
+      </tr>
+      <tr ng-repeat-end></tr>
+      <tr class="sort-disabled" ng-if="!model.examiners.length">
+        <td colspan="8" l10n-text="organizations.recomendationAuditorDirective.noAvailableExaminers"></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align: right; width: 1px;">
+          <sc-button name="addExaminerBtn" type="button" btn-click="addExaminer()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ng-form>

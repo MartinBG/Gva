@@ -1,39 +1,38 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="organizations.approvalDirective.title"></strong></div>
-    <div class="well-sm panel-body">
-      <div class="row">
-        <div class="form-group col-sm-4 col-md-3" sc-has-error="organizationType">
-          <label class="control-label" l10n-text="organizations.approvalDirective.organizationType"></label>
-          <sc-validation-error field-name="organizationType" validations="{required: null}"></sc-validation-error>
-          <sc-nomenclature ng-model="model.organizationType" name="organizationType" alias="'organizationTypes'" ng-required="true"></sc-nomenclature>
-        </div>
-        <div class="form-group col-sm-2 col-md-2" sc-has-error="documentNumber">
-          <label class="control-label" l10n-text="organizations.approvalDirective.documentNumber"></label>
-          <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
-          <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
-        </div>
-        <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="organizations.approvalDirective.documentDateIssue"></label>
-          <sc-date ng-model="model.documentDateIssue"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-4 col-md-3">
-          <label class="control-label" l10n-text="organizations.approvalDirective.approvalState"></label>
-          <sc-nomenclature ng-model="model.approvalState"alias="'approvalStates'"></sc-nomenclature>
-        </div>
-        <div class="form-group col-sm-3 col-md-2">
-          <label class="control-label" l10n-text="organizations.approvalDirective.approvalStateDate"></label>
-          <sc-date ng-model="model.approvalStateDate"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-sm-7 col-md-5">
-          <label class="control-label" l10n-text="organizations.approvalDirective.approvalStateNote"></label>
-          <sc-textarea rows="3" cols="50" ng-model="model.approvalStateNote" name="approvalStateNote"></sc-textarea>
-        </div>
-      </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3" sc-has-error="organizationType">
+      <label class="control-label" l10n-text="organizations.approvalDirective.organizationType"></label>
+      <sc-validation-error field-name="organizationType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.organizationType" name="organizationType" alias="'organizationTypes'" ng-required="true"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-2 col-md-2" sc-has-error="documentNumber">
+      <label class="control-label" l10n-text="organizations.approvalDirective.documentNumber"></label>
+      <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
+      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="organizations.approvalDirective.documentDateIssue"></label>
+      <sc-date ng-model="model.documentDateIssue"></sc-date>
     </div>
   </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="organizations.approvalDirective.approvalState"></label>
+      <sc-nomenclature ng-model="model.approvalState"alias="'approvalStates'"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="organizations.approvalDirective.approvalStateDate"></label>
+      <sc-date ng-model="model.approvalStateDate"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="organizations.approvalDirective.approvalStateNote"></label>
+      <sc-textarea rows="3" cols="50" ng-model="model.approvalStateNote" name="approvalStateNote"></sc-textarea>
+    </div>
+  </div>
+
 </ng-form>

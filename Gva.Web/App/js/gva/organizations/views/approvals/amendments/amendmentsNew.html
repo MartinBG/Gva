@@ -1,13 +1,21 @@
-﻿<ng-form name="newAmendmentForm">
+﻿<ng-form name="newAmendmentForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.newAmendment.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newAmendment.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newAmendment.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
 
-  <gva-organization-amendment name="organizationAmendmentForm" ng-model="amendment.part"></gva-organization-amendment>
+    <div class="well-sm panel-body">
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="amendment.part"></gva-organization-amendment>
 
-  <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="amendment.files"></gva-organization-scanned-document>
-
-  <div class="row">
-    <div class="form-group col-md-3 col-sm-offset-4 col-sm-4">
-      <sc-button name="saveBtn" btn-click="save()" text="organizations.newAmendment.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="newAmendmentForm.$pristine"></sc-button>
-      <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newAmendment.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="amendment.files"></gva-organization-scanned-document>
     </div>
   </div>
 </ng-form>

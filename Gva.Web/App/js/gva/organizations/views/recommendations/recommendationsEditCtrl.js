@@ -1,4 +1,4 @@
-﻿/*global angular*/
+﻿/*global angular,_*/
 (function (angular) {
   'use strict';
 
@@ -9,13 +9,24 @@
     OrganizationRecommendation,
     organizationRecommendation
     ) {
+    var originalRecommendation = _.cloneDeep(organizationRecommendation);
 
     $scope.organizationRecommendation = organizationRecommendation;
+    $scope.editMode = null;
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.organizationRecommendation = _.cloneDeep(originalRecommendation);
+    };
 
     $scope.save = function () {
-      return $scope.organizationRecommendationsForm.$validate()
+      return $scope.editRecommendation.$validate()
         .then(function () {
-          if ($scope.organizationRecommendationsForm.$valid) {
+          if ($scope.editRecommendation.$valid) {
             return OrganizationRecommendation
               .save({
                 id: $stateParams.id,
@@ -29,8 +40,12 @@
         });
     };
 
-    $scope.cancel = function () {
-      return $state.go('root.organizations.view.recommendations.search');
+    $scope.deleteRecommendation = function () {
+      return OrganizationRecommendation
+        .remove({ id: $stateParams.id, ind: organizationRecommendation.partIndex })
+        .$promise.then(function () {
+          return $state.go('root.organizations.view.recommendations.search');
+        });
     };
   }
 
