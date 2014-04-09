@@ -336,8 +336,6 @@ table.sc-data-table th.sorting span
   overflow-x: scroll;
   overflow-y: hidden;
   border: 1px solid #dddddd;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  -webkit-overflow-scrolling: touch;
 }
 .table-responsive > .table {
   margin-bottom: 0;

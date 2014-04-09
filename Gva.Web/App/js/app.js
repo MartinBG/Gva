@@ -43,8 +43,15 @@
         };
       }
     ]);
+  }]).config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.headers.get = {
+      'cache-control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    };
   }]).run(['$rootScope', '$modal', function ($rootScope, $modal) {
     var authenticating;
+
     $rootScope.$on('authRequired', function (event, authService) {
       if (authenticating) {
         return;
