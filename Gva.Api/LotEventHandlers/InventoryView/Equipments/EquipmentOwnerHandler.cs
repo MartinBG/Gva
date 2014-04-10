@@ -4,6 +4,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
+using Common.Json;
 
 namespace Gva.Api.LotEventHandlers.InventoryView
 {
@@ -27,12 +28,12 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Part = partVersion.Part;
 
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
-            invItem.Name = partVersion.DynamicContent.equipmentRelation.name;
-            invItem.Number = partVersion.DynamicContent.documentNumber;
-            invItem.Date = partVersion.DynamicContent.documentDate;
+            invItem.Name = partVersion.Content.Get<string>("equipmentRelation.name");
+            invItem.Number = partVersion.Content.Get<string>("documentNumber");
+            invItem.Date = partVersion.Content.Get<DateTime?>("documentDate");
             invItem.Valid = null;
-            invItem.FromDate = partVersion.DynamicContent.fromDate;
-            invItem.ToDate = partVersion.DynamicContent.toDate;
+            invItem.FromDate = partVersion.Content.Get<DateTime?>("fromDate");
+            invItem.ToDate = partVersion.Content.Get<DateTime?>("toDate");
 
             if (partVersion.PartOperation == PartOperation.Add)
             {
