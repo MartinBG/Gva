@@ -11184,7 +11184,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (6589, 5, N'G', N'Наземен авиационен персонал за TO на ВС', N'Наземен авиационен персонал за TO', NULL, N'to_vs', N'{}', 1, N'4')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (6590, 5, N'F', N'Членове на екипажа', N'Членове на екипажа', NULL, N'fligthCrew', N'{}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (6590, 5, N'F', N'Членове на екипажа', N'Членове на екипажа', NULL, N'flightCrew', N'{}', 1, N'1')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (6591, 5, N'T', N'Наземен авиационен персонал за ОВД', N'Наземен авиационен персонал за ОВД', NULL, N'ovd', N'{}', 1, N'2')
 GO
@@ -12377,15 +12377,15 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7184, 10, N'135', N'Обява', N'Обява', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'1359')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7185, 10, N'136', N'Licence authentication form (155a)', N'Licence authentication form (155a)', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"isIdDocument":false}', 1, N'1360')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7185, 10, N'136', N'Licence authentication form (155a)', N'Licence authentication form (155a)', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"isIdDocument":false}', 1, N'1360')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7186, 10, N'138', N'Confirmation', N'Confirmation', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1362')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7186, 10, N'138', N'Confirmation', N'Confirmation', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1362')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7187, 10, N'OPS', N'Описание', N'Описание', NULL, NULL, N'{"direction":7174,"isPersonsOnly":false,"isIdDocument":false}', 1, N'1077')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7188, 10, N'LUC', N'Летателно обучение в УЦ', N'Летателно обучение в УЦ', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1097')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7188, 10, N'LUC', N'Летателно обучение в УЦ', N'Летателно обучение в УЦ', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1097')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7189, 10, N'42', N'Индивидуална програма за първоначално летателно обучение', N'Индивидуална програма за първоначално летателно обучение', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'775')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7189, 10, N'42', N'Индивидуална програма за първоначално летателно обучение', N'Индивидуална програма за първоначално летателно обучение', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'775')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7190, 10, N'11', N'Свидетелство за медицинска годност', N'Medical certificate', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'646')
 GO
@@ -12395,7 +12395,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7193, 10, N'15', N'Контролен талон', N'Контролен талон', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'663')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7194, 10, N'16', N'Справка за часове', N'Справка за часове', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'664')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7194, 10, N'16', N'Справка за часове', N'Справка за часове', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'664')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7195, 10, N'18', N'Трудов договор', N'Трудов договор', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'666')
 GO
@@ -12413,41 +12413,41 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7202, 10, N'85', N'Уведомление', N'Уведомление', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'829')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7203, 10, N'87', N'Airplane Qualification and check ride ', N'Airplane Qualification and check ride', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'831')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7203, 10, N'87', N'Airplane Qualification and check ride ', N'Airplane Qualification and check ride', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'831')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7204, 10, N'89', N'Approved courses list', N'Approved courses list', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'836')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7204, 10, N'89', N'Approved courses list', N'Approved courses list', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'836')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7205, 10, N'91', N'IEM FCL 1.240 (b)(1) - Application and report form', N'IEM FCL 1.240 (b)(1) - Application and report form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'851')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7205, 10, N'91', N'IEM FCL 1.240 (b)(1) - Application and report form', N'IEM FCL 1.240 (b)(1) - Application and report form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'851')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7206, 10, N'93', N'Упражнение', N'Упражнение', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'853')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7207, 10, N'95', N'Доклад', N'Доклад', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'856')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7208, 10, N'96', N'Flight Cabin Attendant''s License', N'Flight Cabin Attendant''s License', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'876')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7208, 10, N'96', N'Flight Cabin Attendant''s License', N'Flight Cabin Attendant''s License', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'876')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7209, 10, N'97', N'Qualification record', N'Qualification record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'877')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7209, 10, N'97', N'Qualification record', N'Qualification record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'877')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7210, 10, N'98', N'Training and check record', N'Training and check record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'878')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7210, 10, N'98', N'Training and check record', N'Training and check record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'878')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7211, 10, N'99', N'Record of training', N'Record of training', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'879')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7211, 10, N'99', N'Record of training', N'Record of training', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'879')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7212, 10, N'100', N'Flight log', N'Flight log', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'880')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7212, 10, N'100', N'Flight log', N'Flight log', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'880')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7213, 10, N'101', N'Applicarion and reprot form', N'Applicarion and reprot form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'881')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7213, 10, N'101', N'Applicarion and reprot form', N'Applicarion and reprot form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'881')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7214, 10, N'102', N'Route check report', N'Route check report', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'882')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7214, 10, N'102', N'Route check report', N'Route check report', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'882')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7215, 10, N'104', N'Operations Manual ', N'Operations Manual ', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'898')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7215, 10, N'104', N'Operations Manual ', N'Operations Manual ', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'898')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7216, 10, N'105', N'План за наземна подготовка', N'План за наземна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'917')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7216, 10, N'105', N'План за наземна подготовка', N'План за наземна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'917')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7217, 10, N'109', N'Справка за нальота', N'Справка за нальота', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'940')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7217, 10, N'109', N'Справка за нальота', N'Справка за нальота', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'940')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7218, 10, N'107', N'Допълнително споразумение', N'Допълнително споразумение', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'938')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7219, 10, N'108', N'Справка за пролетени часове', N'Справка за пролетени часове', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'939')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7219, 10, N'108', N'Справка за пролетени часове', N'Справка за пролетени часове', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'939')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7220, 10, N'112', N'Office copy', N'Office copy', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'958')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7220, 10, N'112', N'Office copy', N'Office copy', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'958')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7221, 10, N'120', N'Reccurent training', N'Reccurent training', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1060')
 GO
@@ -12463,31 +12463,31 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7227, 10, N'23', N'Въпросник', N'Въпросник', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'703')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7228, 10, N'30', N'Акт за извършване на проверка по ТП и ТС на пилоти', N'Акт за извършване на проверка по ТП и ТС на пилоти', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'763')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7228, 10, N'30', N'Акт за извършване на проверка по ТП и ТС на пилоти', N'Акт за извършване на проверка по ТП и ТС на пилоти', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'763')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7229, 10, N'31', N'Certificate', N'Certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'764')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7229, 10, N'31', N'Certificate', N'Certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'764')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7230, 10, N'32', N'Свидетелство за правоспособнос-Професионален пилот -ATPL', N'Свидетелство за правоспособнос-Професионален пилот -ATPL', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'765')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7230, 10, N'32', N'Свидетелство за правоспособнос-Професионален пилот -ATPL', N'Свидетелство за правоспособнос-Професионален пилот -ATPL', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'765')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7231, 10, N'33', N'Акт за летателна проверка', N'Акт за летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'766')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7231, 10, N'33', N'Акт за летателна проверка', N'Акт за летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'766')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7232, 10, N'34', N'Акт за извършване на проверка на практическата работа на бордна домакиня/домакин/', N'Акт за извършване на проверка на практическата работа на бордна домакиня/домакин/', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'767')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7232, 10, N'34', N'Акт за извършване на проверка на практическата работа на бордна домакиня/домакин/', N'Акт за извършване на проверка на практическата работа на бордна домакиня/домакин/', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'767')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7233, 10, N'35', N'Протокол за практическа проверка на стюард/еса', N'Протокол за практическа проверка на стюард/еса', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'768')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7233, 10, N'35', N'Протокол за практическа проверка на стюард/еса', N'Протокол за практическа проверка на стюард/еса', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 0, N'768')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7234, 10, N'44', N'Акт за проверка техниката на пилотиране на самолет', N'Акт за проверка техниката на пилотиране на самолет', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'777')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7234, 10, N'44', N'Акт за проверка техниката на пилотиране на самолет', N'Акт за проверка техниката на пилотиране на самолет', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'777')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7235, 10, N'45', N'Протокол за извършване на проверка по ТП и ТС на пилоти', N'Протокол за извършване на проверка по ТП и ТС на пилоти', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'778')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7235, 10, N'45', N'Протокол за извършване на проверка по ТП и ТС на пилоти', N'Протокол за извършване на проверка по ТП и ТС на пилоти', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'778')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7236, 10, N'65', N'Полетно задание', N'Полетно задание', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'802')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7236, 10, N'65', N'Полетно задание', N'Полетно задание', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'802')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7237, 10, N'74', N'Договор', N'Договор', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'811')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7238, 10, N'76', N'Attestation', N'Attestation', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'813')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7238, 10, N'76', N'Attestation', N'Attestation', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'813')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7239, 10, N'88', N'Line Check', N'Line Check', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'832')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7239, 10, N'88', N'Line Check', N'Line Check', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'832')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7240, 10, N'94', N'Type rating course', N'Type rating course', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'854')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7240, 10, N'94', N'Type rating course', N'Type rating course', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'854')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7241, 10, N'121', N'Военна книжка', N'Военна книжка', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1061')
 GO
@@ -12501,23 +12501,23 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7246, 10, N'10', N'Заповед', N'Order', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'623')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7247, 10, N'17', N'Задача за полет', N'Задача за полет', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'665')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7247, 10, N'17', N'Задача за полет', N'Задача за полет', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'665')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7248, 10, N'19', N'Декларация', N'Декларация', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'682')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7249, 10, N'39', N'Програма за летателна подготовка', N'Програма за летателна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'772')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7249, 10, N'39', N'Програма за летателна подготовка', N'Програма за летателна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'772')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7250, 10, N'58', N'Flight / simulator training record', N'Flight / simulator training record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'791')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7250, 10, N'58', N'Flight / simulator training record', N'Flight / simulator training record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'791')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7251, 10, N'59', N'Proficiency and IRR check form', N'Proficiency and IRR check form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'792')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7251, 10, N'59', N'Proficiency and IRR check form', N'Proficiency and IRR check form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'792')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7252, 10, N'75', N'Lesson - Initial', N'Lesson - Initial', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'812')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7252, 10, N'75', N'Lesson - Initial', N'Lesson - Initial', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'812')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7253, 10, N'110', N'План', N'План', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'941')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7254, 10, N'114', N'Уверение', N'Уверение', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1017')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7255, 10, N'117', N'Certificate of completion', N'Certificate of completion', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1057')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7255, 10, N'117', N'Certificate of completion', N'Certificate of completion', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1057')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7256, 10, N'1', N'Удостоверение', N'Удостоверение', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1')
 GO
@@ -12529,13 +12529,13 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7260, 10, N'5', N'Паспорт', N'Паспорт', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":true}', 1, N'5')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7261, 10, N'78', N'Flight time certificate', N'Flight time certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'822')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7261, 10, N'78', N'Flight time certificate', N'Flight time certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'822')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7262, 10, N'82', N'Simulator information', N'Simulator information', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'826')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7262, 10, N'82', N'Simulator information', N'Simulator information', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'826')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7263, 10, N'83', N'Pilot flight training / evaluation', N'Pilot flight training / evaluation', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'827')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7263, 10, N'83', N'Pilot flight training / evaluation', N'Pilot flight training / evaluation', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'827')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7264, 10, N'84', N'Statement of qualification', N'Statement of qualification', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'828')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7264, 10, N'84', N'Statement of qualification', N'Statement of qualification', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'828')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7265, 10, N'8', N'Диплома', N'Diploma', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'644')
 GO
@@ -12543,81 +12543,81 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7267, 10, N'7', N'Свидетелство', N'Certificate', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'643')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7268, 10, N'9', N'Летателна книжка', N'Log book', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'645')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7268, 10, N'9', N'Летателна книжка', N'Log book', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'645')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7269, 10, N'13', N'Програма за придобиване на квалификационен клас', N'Програма за придобиване на квалификационен клас', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'648')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7270, 10, N'36', N'Journey Log', N'Journey Log', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'769')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7270, 10, N'36', N'Journey Log', N'Journey Log', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'769')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7271, 10, N'37', N'Изпитен протокол', N'Изпитен протокол', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'770')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7272, 10, N'38', N'Служебна бележка*', N'Служебна бележка', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'771')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7273, 10, N'40', N'Свидетелство за правоспособност на професионален пилот -Трети клас - CPL', N'Свидетелство за правоспособност на професионален пилот -Трети клас - CPL', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'773')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7273, 10, N'40', N'Свидетелство за правоспособност на професионален пилот -Трети клас - CPL', N'Свидетелство за правоспособност на професионален пилот -Трети клас - CPL', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'773')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7274, 10, N'41', N'Crew member certificate', N'Crew member certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'774')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7274, 10, N'41', N'Crew member certificate', N'Crew member certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'774')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7275, 10, N'43', N'Протокол от летателна проверка', N'Протокол от летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'776')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7275, 10, N'43', N'Протокол от летателна проверка', N'Протокол от летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'776')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7276, 10, N'46', N'Training task', N'Training task', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'779')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7276, 10, N'46', N'Training task', N'Training task', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'779')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7277, 10, N'47', N'Pilot proficiency / qualification check', N'Pilot proficiency / qualification check', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'780')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7277, 10, N'47', N'Pilot proficiency / qualification check', N'Pilot proficiency / qualification check', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'780')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7278, 10, N'48', N'Base training form', N'Base training form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'781')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7278, 10, N'48', N'Base training form', N'Base training form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'781')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7279, 10, N'49', N'Дневник', N'Logbook', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'782')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7280, 10, N'50', N'Training progress record', N'Training progress record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'783')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7280, 10, N'50', N'Training progress record', N'Training progress record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'783')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7281, 10, N'51', N'Удостоверение за обучението на пилота', N'Certificate of pilot training', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'784')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7281, 10, N'51', N'Удостоверение за обучението на пилота', N'Certificate of pilot training', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'784')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7282, 10, N'52', N'Certificate of pilot training', N'Certificate of pilot training', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'785')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7282, 10, N'52', N'Certificate of pilot training', N'Certificate of pilot training', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'785')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7283, 10, N'53', N'Flight / Technical log', N'Flight / Technical log', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'786')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7283, 10, N'53', N'Flight / Technical log', N'Flight / Technical log', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'786')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7284, 10, N'54', N'Zero flight time training', N'Zero flight time training', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'787')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7284, 10, N'54', N'Zero flight time training', N'Zero flight time training', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'787')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7285, 10, N'55', N'Pilot emergency training record', N'Pilot emergency training record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'788')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7285, 10, N'55', N'Pilot emergency training record', N'Pilot emergency training record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'788')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7286, 10, N'56', N'Simulator training and type rating', N'Simulator training and type rating', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'789')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7286, 10, N'56', N'Simulator training and type rating', N'Simulator training and type rating', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'789')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7287, 10, N'60', N'Upgrade to captain', N'Upgrade to captain', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'793')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7287, 10, N'60', N'Upgrade to captain', N'Upgrade to captain', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'793')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7288, 10, N'61', N'Proficiency check form', N'Proficiency check form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'794')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7288, 10, N'61', N'Proficiency check form', N'Proficiency check form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'794')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7289, 10, N'62', N'Теоретичен тест', N'Теоретичен тест', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'795')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7290, 10, N'63', N'Simulator proficiency check form', N'Simulator proficiency check form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'796')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7290, 10, N'63', N'Simulator proficiency check form', N'Simulator proficiency check form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'796')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7291, 10, N'64', N'Индивидуална програма за възстановяване ', N'Индивидуална програма за възстановяване ', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'797')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7292, 10, N'66', N'RHS or ILS CAT 2/3A qualification form', N'RHS or ILS CAT 2/3A qualification form', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'803')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7292, 10, N'66', N'RHS or ILS CAT 2/3A qualification form', N'RHS or ILS CAT 2/3A qualification form', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'803')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7293, 10, N'67', N'Base training certificate', N'Base training certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'804')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7293, 10, N'67', N'Base training certificate', N'Base training certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'804')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7294, 10, N'68', N'Pilot standardisation report', N'Pilot standardisation report', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'805')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7294, 10, N'68', N'Pilot standardisation report', N'Pilot standardisation report', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'805')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7295, 10, N'69', N'Combined LPC and OPC checklist', N'Combined LPC and OPC checklist', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'806')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7295, 10, N'69', N'Combined LPC and OPC checklist', N'Combined LPC and OPC checklist', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'806')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7296, 10, N'70', N'Certificate of test', N'Certificate of test', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'807')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7296, 10, N'70', N'Certificate of test', N'Certificate of test', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'807')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7297, 10, N'71', N'Syntetic training device qalification certificate', N'Syntetic training device qalification certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'808')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7297, 10, N'71', N'Syntetic training device qalification certificate', N'Syntetic training device qalification certificate', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'808')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7298, 10, N'72', N'Authorisation', N'Authorisation', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'809')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7298, 10, N'72', N'Authorisation', N'Authorisation', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'809')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7299, 10, N'73', N'Skill Test', N'Skill Test', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'810')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7299, 10, N'73', N'Skill Test', N'Skill Test', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'810')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7300, 10, N'77', N'Flight crew line check', N'Flight crew line check', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'814')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7300, 10, N'77', N'Flight crew line check', N'Flight crew line check', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'814')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7301, 10, N'79', N'Flight crew training record', N'Flight crew training record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'823')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7301, 10, N'79', N'Flight crew training record', N'Flight crew training record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'823')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7302, 10, N'80', N'Pilot training record', N'Pilot training record', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'824')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7302, 10, N'80', N'Pilot training record', N'Pilot training record', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'824')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7303, 10, N'86', N'Обяснение', N'Обяснение', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'830')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7304, 10, N'92', N'To whom it may concern', N'To whom it may concern', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'852')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7304, 10, N'92', N'To whom it may concern', N'To whom it may concern', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'852')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7305, 10, N'111', N'Client training audit', N'Client training audit', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'957')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7305, 10, N'111', N'Client training audit', N'Client training audit', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'957')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7306, 10, N'119', N'Licence', N'Licence', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1059')
 GO
@@ -12625,15 +12625,15 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7308, 10, N'125', N'Curriculum vitae', N'Curriculum vitae', NULL, NULL, N'{"isPersonsOnly":false,"isIdDocument":false}', 1, N'1119')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7309, 10, N'57', N'Line training', N'Line training', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'790')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7309, 10, N'57', N'Line training', N'Line training', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'790')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7310, 10, N'106', N'Differences', N'Differences', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'937')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7310, 10, N'106', N'Differences', N'Differences', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'937')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7311, 10, N'116', N'Запис от изпълнение на полетна задача', N'Запис от изпълнение на полетна задача', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1037')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7311, 10, N'116', N'Запис от изпълнение на полетна задача', N'Запис от изпълнение на полетна задача', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'1037')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7312, 10, N'81', N'Crew memorandum', N'Crew memorandum', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'825')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7312, 10, N'81', N'Crew memorandum', N'Crew memorandum', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'825')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7313, 10, N'90', N'Standard course', N'Standard course', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'837')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7313, 10, N'90', N'Standard course', N'Standard course', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"isIdDocument":false}', 1, N'837')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7314, 10, N'29', N'Програма за възстановяване на квалификационен клас', N'Програма за възстановяване на квалификационен клас', NULL, NULL, N'{"isPersonsOnly":true,"isIdDocument":false}', 1, N'762')
 GO
@@ -12697,7 +12697,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7344, 11, N'8', N'Платена такса', N'Платена такса', NULL, NULL, N'{"isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1418')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7345, 11, N'119', N'Временно прекратяване', N'Временно прекратяване', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1443')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7345, 11, N'119', N'Временно прекратяване', N'Временно прекратяване', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1443')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7346, 11, N'TRA', N'Тренировка в АУЦ', N'Тренировка в АУЦ', NULL, NULL, N'{"direction":7176,"staffAlias":"ovd","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'1000')
 GO
@@ -12757,7 +12757,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7374, 11, N'12', N'Притежавано свидетелство за правоспособност', N'Owned licence', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'737')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7375, 11, N'16', N'Допускане до производствени полети', N'Допускане до производствени полети', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"categoryCode":"A","categoryAlias":"other"}', 1, N'753')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7375, 11, N'16', N'Допускане до производствени полети', N'Допускане до производствени полети', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"categoryCode":"A","categoryAlias":"other"}', 1, N'753')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7376, 11, N'17', N'Контролна карта', N'Контролна карта', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'759')
 GO
@@ -12779,7 +12779,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7385, 11, N'43', N'Допускане ', N'Допускане ', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'894')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7386, 11, N'116', N'Прекъсване на теоретични изпити 1,490', N'Прекъсване на теоретични изпити 1,490', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1440')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7386, 11, N'116', N'Прекъсване на теоретични изпити 1,490', N'Прекъсване на теоретични изпити 1,490', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1440')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7387, 11, N'50', N'Проверяващ', N'Проверяващ', NULL, NULL, N'{"isPersonsOnly":true,"categoryCode":"F","categoryAlias":"flying"}', 1, N'974')
 GO
@@ -12789,21 +12789,21 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7390, 11, N'29', N'Друго обучение', N'Друго обучение', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'794')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7391, 11, N'32', N'Допуск до полети като командир', N'Допуск до полети като командир', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'832')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7391, 11, N'32', N'Допуск до полети като командир', N'Допуск до полети като командир', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'832')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7392, 11, N'33', N'Допускане до полети като инструктор', N'Допускане до полети като инструктор', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'833')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7392, 11, N'33', N'Допускане до полети като инструктор', N'Допускане до полети като инструктор', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'833')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7393, 11, N'34', N'Simulator training', N'Simulator training', NULL, NULL, N'{"isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'834')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7394, 11, N'113', N'Нарушение', N'Нарушение', NULL, NULL, N'{"isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1437')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7395, 11, N'117', N'Преустановени права теоретични изпити чл.57 Наредба №39', N'Преустановени права теоретични изпити чл.57 Наредба №39', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1441')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7395, 11, N'117', N'Преустановени права теоретични изпити чл.57 Наредба №39', N'Преустановени права теоретични изпити чл.57 Наредба №39', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1441')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7396, 11, N'48', N'Оценка входящо ниво и индивидуални възможности', N'Оценка входящо ниво и индивидуални възможности', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"F","categoryAlias":"flying"}', 1, N'955')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7397, 11, N'49', N'Военна книжка', N'Военна книжка', NULL, NULL, N'{"isPersonsOnly":true,"categoryCode":"F","categoryAlias":"flying"}', 1, N'956')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7398, 11, N'20', N'Задача за полет', N'Задача за полет', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'762')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7398, 11, N'20', N'Задача за полет', N'Задача за полет', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'762')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7399, 11, N'22', N'Деклариране', N'Декларация', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'772')
 GO
@@ -12815,11 +12815,11 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7403, 11, N'31', N'Обучение', N'Обучение', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'813')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7404, 11, N'42', N'Наземна подготовка', N'Наземна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'876')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7404, 11, N'42', N'Наземна подготовка', N'Наземна подготовка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'876')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7405, 11, N'46', N'Уверение', N'Уверение', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'934')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7406, 11, N'1', N'Летателна проверка', N'Летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"T","categoryAlias":"check"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7406, 11, N'1', N'Летателна проверка', N'Летателна проверка', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"T","categoryAlias":"check"}', 1, N'1')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7407, 11, N'2', N'Документ за самоличност', N'Документ за самоличност', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"P","categoryAlias":"docId"}', 1, N'2')
 GO
@@ -12827,7 +12827,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7409, 11, N'4', N'Теоретично обучение', N'Теоретично обучение', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'4')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7410, 11, N'5', N'Летателно обучение', N'Летателно обучение', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'5')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7410, 11, N'5', N'Летателно обучение', N'Летателно обучение', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'5')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7411, 11, N'6', N'Теоретичен изпит', N'Теоретичен изпит', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'6')
 GO
@@ -12837,11 +12837,11 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7414, 11, N'41', N'Отговор', N'Отговор', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'875')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7415, 11, N'9', N'Летателно обучение - копие от всичките записи', N'Flight training - copy of all records', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'732')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7415, 11, N'9', N'Летателно обучение - копие от всичките записи', N'Flight training - copy of all records', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'732')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7416, 11, N'08', N'Образование', N'Education', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"E","categoryAlias":"graduation"}', 1, N'731')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7417, 11, N'10', N'Летателна книжка', N'Log book', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'733')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7417, 11, N'10', N'Летателна книжка', N'Log book', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'733')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7418, 11, N'14', N'Програма за преминато обучение', N'Flight', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"O","categoryAlias":"training"}', 1, N'738')
 GO
@@ -12851,7 +12851,7 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7421, 11, N'52', N'Сведение', N'Сведение', NULL, NULL, N'{"isPersonsOnly":false,"categoryCode":"F","categoryAlias":"flying"}', 1, N'976')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7422, 11, N'114', N'Потвърждение', N'Потвърждение', NULL, NULL, N'{"direction":7172,"staffAlias":"fligthCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1438')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7422, 11, N'114', N'Потвърждение', N'Потвърждение', NULL, NULL, N'{"direction":7172,"staffAlias":"flightCrew","isPersonsOnly":true,"categoryCode":"O","categoryAlias":"training"}', 1, N'1438')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (7423, 11, N'FTO', N'Удостоверение за одобрение на организация за летателно обучение', N'FTO Approval Certificate', NULL, NULL, N'{"direction":7174,"isPersonsOnly":false,"categoryCode":"A","categoryAlias":"other"}', 1, N'1357')
 GO
@@ -16019,297 +16019,297 @@ INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [Par
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8984, 52, N'TR', N'Trial', NULL, NULL, NULL, N'{"description":"Опит "}', 1, N'22')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8985, 53, N'01A.1', N'Типов дизайн и промени в типовия дизайн', NULL, 8978, NULL, N'{"sortOrder":"1"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8985, 53, N'01A.1', N'Типов дизайн и промени в типовия дизайн', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"1"}', 1, N'200')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8986, 53, N'02A.2', N'Ограничение на летателната годност', NULL, 8978, NULL, N'{"sortOrder":"2"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8986, 53, N'02A.2', N'Ограничение на летателната годност', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"2"}', 1, N'201')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8987, 53, N'03A.3', N'Директиви за летателна годност', NULL, 8978, NULL, N'{"sortOrder":"3"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8987, 53, N'03A.3', N'Директиви за летателна годност', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"3"}', 1, N'202')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8988, 53, N'04B.1', N'Оглед на ВС', NULL, 8978, NULL, N'{"sortOrder":"4"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8988, 53, N'04B.1', N'Оглед на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"4"}', 1, N'203')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8989, 53, N'05B.2', N'Ръководство по летателна експлоатация', NULL, 8978, NULL, N'{"sortOrder":"5"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8989, 53, N'05B.2', N'Ръководство по летателна експлоатация', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"5"}', 1, N'204')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8990, 53, N'06B.3', N'Маса и центровка на ВС', NULL, 8978, NULL, N'{"sortOrder":"6"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8990, 53, N'06B.3', N'Маса и центровка на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"6"}', 1, N'205')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8991, 53, N'07B.4', N'Знаци, маркировка и табели', NULL, 8978, NULL, N'{"sortOrder":"7"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8991, 53, N'07B.4', N'Знаци, маркировка и табели', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"7"}', 1, N'206')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8992, 53, N'08B.5', N'Експлоатационно оборудване (включително аварийно-спасително оборудване)', NULL, 8978, NULL, N'{"sortOrder":"8"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8992, 53, N'08B.5', N'Експлоатационно оборудване (включително аварийно-спасително оборудване)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"8"}', 1, N'207')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8993, 53, N'10C.1', N'Програма за техническо обслужване на ВС', NULL, 8978, NULL, N'{"sortOrder":"10"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8993, 53, N'10C.1', N'Програма за техническо обслужване на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"10"}', 1, N'209')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8994, 53, N'11C.2', N'Ограничения на ресурса (включително компоненти с ограничена наработка)', NULL, 8978, NULL, N'{"sortOrder":"11"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8994, 53, N'11C.2', N'Ограничения на ресурса (включително компоненти с ограничена наработка)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"11"}', 1, N'210')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8995, 53, N'12C.3', N'Наръчник за структурни поправки (Повреди и структурни поправки)F', NULL, 8978, NULL, N'{"sortOrder":"12"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8995, 53, N'12C.3', N'Наръчник за структурни поправки (Повреди и структурни поправки)F', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"12"}', 1, N'211')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8996, 53, N'145.А.25', N'Сгради и съоръжения', NULL, 8979, NULL, N'{"sortOrder":"1"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8996, 53, N'145.А.25', N'Сгради и съоръжения', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"1"}', 1, N'1')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8997, 53, N'145.А.30', N'Персонал', NULL, 8979, NULL, N'{"sortOrder":"2"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8997, 53, N'145.А.30', N'Персонал', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"2"}', 1, N'2')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8998, 53, N'145.А.35', N'Удостоверяващ персонал', NULL, 8979, NULL, N'{"sortOrder":"3"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8998, 53, N'145.А.35', N'Удостоверяващ персонал', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"3"}', 1, N'3')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8999, 53, N'147.А.100', N'Изисквания към сгради и съоръжения', NULL, 8982, NULL, N'{"sortOrder":"1"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (8999, 53, N'147.А.100', N'Изисквания към сгради и съоръжения', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"1"}', 1, N'4')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9000, 53, N'147.А.105', N'Изисквания към персонал', NULL, 8982, NULL, N'{"sortOrder":"2"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9000, 53, N'147.А.105', N'Изисквания към персонал', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"2"}', 1, N'5')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9001, 53, N'147.А.110', N'Записи', NULL, 8982, NULL, N'{"sortOrder":"3"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9001, 53, N'147.А.110', N'Записи', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"3"}', 1, N'6')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9002, 53, N'М.А.703', N'Обхват на одобрение', NULL, 8981, NULL, N'{"sortOrder":"1"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9002, 53, N'М.А.703', N'Обхват на одобрение', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"1"}', 1, N'7')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9003, 53, N'М.А.705', N'Сгради и съоръжения', NULL, 8981, NULL, N'{"sortOrder":"3"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9003, 53, N'М.А.705', N'Сгради и съоръжения', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"3"}', 1, N'9')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9004, 53, N'М.А.603', N'Обхват на одобрение', NULL, 8980, NULL, N'{"sortOrder":"1"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9004, 53, N'М.А.603', N'Обхват на одобрение', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"1"}', 1, N'10')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9005, 53, N'М.А.605', N'Сгради и съоръжения', NULL, 8980, NULL, N'{"sortOrder":"3"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9005, 53, N'М.А.605', N'Сгради и съоръжения', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"3"}', 1, N'12')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9006, 53, N'145.А.40', N'Оборудване, инструменти и пр.', NULL, 8979, NULL, N'{"sortOrder":"4"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9006, 53, N'145.А.40', N'Оборудване, инструменти и пр.', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"4"}', 1, N'13')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9007, 53, N'145.А.42', N'Приемане на компоненти', NULL, 8979, NULL, N'{"sortOrder":"5"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9007, 53, N'145.А.42', N'Приемане на компоненти', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"5"}', 1, N'14')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9008, 53, N'145.А.45', N'Данни за ТО', NULL, 8979, NULL, N'{"sortOrder":"6"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9008, 53, N'145.А.45', N'Данни за ТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"6"}', 1, N'15')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9009, 53, N'145.А.47', N'Производствено планиране', NULL, 8979, NULL, N'{"sortOrder":"7"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9009, 53, N'145.А.47', N'Производствено планиране', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"7"}', 1, N'16')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9010, 53, N'145.А.50', N'Удостоверяване на ТО', NULL, 8979, NULL, N'{"sortOrder":"8"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9010, 53, N'145.А.50', N'Удостоверяване на ТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"8"}', 1, N'17')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9011, 53, N'145.А.55', N'Технически записи', NULL, 8979, NULL, N'{"sortOrder":"9"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9011, 53, N'145.А.55', N'Технически записи', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"9"}', 1, N'18')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9012, 53, N'145.А.60', N'Докладване на събития', NULL, 8979, NULL, N'{"sortOrder":"10"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9012, 53, N'145.А.60', N'Докладване на събития', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"10"}', 1, N'19')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9013, 53, N'145.А.65', N'Процедури и качество', NULL, 8979, NULL, N'{"sortOrder":"11"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9013, 53, N'145.А.65', N'Процедури и качество', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"11"}', 1, N'20')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9014, 53, N'145.А.75', N'Права на ОТО', NULL, 8979, NULL, N'{"sortOrder":"13"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9014, 53, N'145.А.75', N'Права на ОТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"13"}', 1, N'21')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9015, 53, N'145.А.80', N'Ограничения на ОТО', NULL, 8979, NULL, N'{"sortOrder":"14"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9015, 53, N'145.А.80', N'Ограничения на ОТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"14"}', 1, N'22')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9016, 53, N'145.А.85', N'Промени в ОТО', NULL, 8979, NULL, N'{"sortOrder":"15"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9016, 53, N'145.А.85', N'Промени в ОТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"15"}', 1, N'23')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9017, 53, N'145.А.90', N'Поддържане на валидността', NULL, 8979, NULL, N'{"sortOrder":"16"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9017, 53, N'145.А.90', N'Поддържане на валидността', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"16"}', 1, N'24')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9018, 53, N'М.А.606', N'Изисквания към персонала', NULL, 8980, NULL, N'{"sortOrder":"4"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9018, 53, N'М.А.606', N'Изисквания към персонала', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"4"}', 1, N'25')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9019, 53, N'М.А.607', N'Удостоверяващ персонал', NULL, 8980, NULL, N'{"sortOrder":"5"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9019, 53, N'М.А.607', N'Удостоверяващ персонал', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"5"}', 1, N'26')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9020, 53, N'М.А.608', N'Инструменти и оборудване', NULL, 8980, NULL, N'{"sortOrder":"6"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9020, 53, N'М.А.608', N'Инструменти и оборудване', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"6"}', 1, N'27')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9021, 53, N'М.А.609', N'Данни за ТО', NULL, 8980, NULL, N'{"sortOrder":"7"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9021, 53, N'М.А.609', N'Данни за ТО', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"7"}', 1, N'28')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9022, 53, N'М.А.610', N'Работна поръчка за ТО', NULL, 8980, NULL, N'{"sortOrder":"8"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9022, 53, N'М.А.610', N'Работна поръчка за ТО', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"8"}', 1, N'29')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9023, 53, N'М.А.611', N'Стандарти за ТО', NULL, 8980, NULL, N'{"sortOrder":"9"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9023, 53, N'М.А.611', N'Стандарти за ТО', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"9"}', 1, N'30')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9024, 53, N'М.А.612', N'Удостоверяване ТО на ВС', NULL, 8980, NULL, N'{"sortOrder":"10"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9024, 53, N'М.А.612', N'Удостоверяване ТО на ВС', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"10"}', 1, N'31')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9025, 53, N'М.А.613', N'Удостоверяване ТО на компонент', NULL, 8980, NULL, N'{"sortOrder":"11"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9025, 53, N'М.А.613', N'Удостоверяване ТО на компонент', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"11"}', 1, N'32')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9026, 53, N'М.А.614', N'Записи за постоянна летателна годност', NULL, 8980, NULL, N'{"sortOrder":"12"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9026, 53, N'М.А.614', N'Записи за постоянна летателна годност', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"12"}', 1, N'33')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9027, 53, N'М.А.615', N'Права на организацията', NULL, 8980, NULL, N'{"sortOrder":"13"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9027, 53, N'М.А.615', N'Права на организацията', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"13"}', 1, N'34')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9028, 53, N'М.А.616', N'Преглед на организацията', NULL, 8980, NULL, N'{"sortOrder":"14"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9028, 53, N'М.А.616', N'Преглед на организацията', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"14"}', 1, N'35')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9029, 53, N'М.А.617', N'Промени в организацията', NULL, 8980, NULL, N'{"sortOrder":"15"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9029, 53, N'М.А.617', N'Промени в организацията', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"15"}', 1, N'36')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9030, 53, N'М.А.706', N'Изисквания към персонала', NULL, 8981, NULL, N'{"sortOrder":"4"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9030, 53, N'М.А.706', N'Изисквания към персонала', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"4"}', 1, N'37')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9031, 53, N'М.А.707', N'Персонал за преглед на летателната годност', NULL, 8981, NULL, N'{"sortOrder":"5"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9031, 53, N'М.А.707', N'Персонал за преглед на летателната годност', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"5"}', 1, N'38')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9032, 53, N'М.А.708', N'Управление на постоянна летателна годност', NULL, 8981, NULL, N'{"sortOrder":"6"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9032, 53, N'М.А.708', N'Управление на постоянна летателна годност', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"6"}', 1, N'39')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9033, 53, N'М.А.201', N'Притежатели на САО - под изпълнителско договаряне', NULL, 8981, NULL, N'{"sortOrder":"7"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9033, 53, N'М.А.201', N'Притежатели на САО - под изпълнителско договаряне', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"7"}', 1, N'40')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9034, 53, N'М.А.302', N'Програма за ТО', NULL, 8981, NULL, N'{"sortOrder":"8"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9034, 53, N'М.А.302', N'Програма за ТО', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"8"}', 1, N'41')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9035, 53, N'М.А.303', N'Директиви за летателна годност', NULL, 8981, NULL, N'{"sortOrder":"9"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9035, 53, N'М.А.303', N'Директиви за летателна годност', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"9"}', 1, N'42')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9036, 53, N'М.А.304', N'Модификации и поправки', NULL, 8981, NULL, N'{"sortOrder":"10"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9036, 53, N'М.А.304', N'Модификации и поправки', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"10"}', 1, N'43')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9037, 53, N'М.А.305', N'Записи', NULL, 8981, NULL, N'{"sortOrder":"11"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9037, 53, N'М.А.305', N'Записи', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"11"}', 1, N'44')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9038, 53, N'М.А.306', N'Технически борден дневник', NULL, 8981, NULL, N'{"sortOrder":"12"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9038, 53, N'М.А.306', N'Технически борден дневник', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"12"}', 1, N'45')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9039, 53, N'М.А.709', N'Документация', NULL, 8981, NULL, N'{"sortOrder":"13"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9039, 53, N'М.А.709', N'Документация', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"13"}', 1, N'46')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9040, 53, N'М.А.710', N'Преглед на летателната годност', NULL, 8981, NULL, N'{"sortOrder":"14"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9040, 53, N'М.А.710', N'Преглед на летателната годност', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"14"}', 1, N'47')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9041, 53, N'М.А.711', N'Права на организацията', NULL, 8981, NULL, N'{"sortOrder":"15"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9041, 53, N'М.А.711', N'Права на организацията', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"15"}', 1, N'48')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9042, 53, N'М.А.712', N'Система за качество', NULL, 8981, NULL, N'{"sortOrder":"16"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9042, 53, N'М.А.712', N'Система за качество', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"16"}', 1, N'49')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9043, 53, N'М.А.713', N'Промени в организацията', NULL, 8981, NULL, N'{"sortOrder":"17"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9043, 53, N'М.А.713', N'Промени в организацията', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"17"}', 1, N'50')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9044, 53, N'М.А.714', N'Съхранение на записи', NULL, 8981, NULL, N'{"sortOrder":"18"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9044, 53, N'М.А.714', N'Съхранение на записи', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"18"}', 1, N'51')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9045, 53, N'147.А.115', N'Учебни помагала', NULL, 8982, NULL, N'{"sortOrder":"4"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9045, 53, N'147.А.115', N'Учебни помагала', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"4"}', 1, N'52')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9046, 53, N'147.А.120', N'Материали за обучение по ТО', NULL, 8982, NULL, N'{"sortOrder":"5"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9046, 53, N'147.А.120', N'Материали за обучение по ТО', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"5"}', 1, N'53')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9047, 53, N'147.А.125', N'Записи', NULL, 8982, NULL, N'{"sortOrder":"6"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9047, 53, N'147.А.125', N'Записи', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"6"}', 1, N'54')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9048, 53, N'147.А.130', N'Процедури за обучение и система за качество', NULL, 8982, NULL, N'{"sortOrder":"7"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9048, 53, N'147.А.130', N'Процедури за обучение и система за качество', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"7"}', 1, N'55')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9049, 53, N'147.А.135', N'Изпити', NULL, 8982, NULL, N'{"sortOrder":"8"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9049, 53, N'147.А.135', N'Изпити', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"8"}', 1, N'56')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9050, 53, N'147.А.145', N'Права', NULL, 8982, NULL, N'{"sortOrder":"10"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9050, 53, N'147.А.145', N'Права', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"10"}', 1, N'57')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9051, 53, N'147.А.150', N'Промени', NULL, 8982, NULL, N'{"sortOrder":"11"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9051, 53, N'147.А.150', N'Промени', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"11"}', 1, N'58')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9052, 53, N'147.А.200', N'Одобрени курсове за базово обучение', NULL, 8982, NULL, N'{"sortOrder":"12"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9052, 53, N'147.А.200', N'Одобрени курсове за базово обучение', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"12"}', 1, N'59')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9053, 53, N'147.А.205', N'Изпити по базово обучение', NULL, 8982, NULL, N'{"sortOrder":"13"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9053, 53, N'147.А.205', N'Изпити по базово обучение', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"13"}', 1, N'60')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9054, 53, N'147.А.210', N'Практическа проверка базови знания', NULL, 8982, NULL, N'{"sortOrder":"14"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9054, 53, N'147.А.210', N'Практическа проверка базови знания', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"14"}', 1, N'61')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9055, 53, N'147.А.300', N'Обучение по тип/задача по ВС', NULL, 8982, NULL, N'{"sortOrder":"15"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9055, 53, N'147.А.300', N'Обучение по тип/задача по ВС', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"15"}', 1, N'62')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9056, 53, N'147.А.305', N'Изпити и проверки', NULL, 8982, NULL, N'{"sortOrder":"16"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9056, 53, N'147.А.305', N'Изпити и проверки', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"16"}', 1, N'63')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9057, 53, N'1', N'Пилотска кабина', NULL, 8983, NULL, N'{"sortOrder":"1"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9057, 53, N'1', N'Пилотска кабина', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"1"}', 1, N'64')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9058, 53, N'2', N'Пътнически салони, тоалетни и кухни', NULL, 8983, NULL, N'{"sortOrder":"2"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9058, 53, N'2', N'Пътнически салони, тоалетни и кухни', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"2"}', 1, N'65')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9059, 53, N'3', N'Фюзелаж', NULL, 8983, NULL, N'{"sortOrder":"3"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9059, 53, N'3', N'Фюзелаж', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"3"}', 1, N'66')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9060, 53, N'4', N'Крила', NULL, 8983, NULL, N'{"sortOrder":"4"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9060, 53, N'4', N'Крила', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"4"}', 1, N'67')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9061, 53, N'5', N'Стабилизатори', NULL, 8983, NULL, N'{"sortOrder":"5"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9061, 53, N'5', N'Стабилизатори', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"5"}', 1, N'68')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9062, 53, N'6', N'Колесник', NULL, 8983, NULL, N'{"sortOrder":"6"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9062, 53, N'6', N'Колесник', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"6"}', 1, N'69')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9063, 53, N'7', N'Двигатели / пилони / витла', NULL, 8983, NULL, N'{"sortOrder":"7"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9063, 53, N'7', N'Двигатели / пилони / витла', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"7"}', 1, N'70')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9064, 53, N'8', N'Багажни / товарни отсеци', NULL, 8983, NULL, N'{"sortOrder":"8"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9064, 53, N'8', N'Багажни / товарни отсеци', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"8"}', 1, N'71')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9065, 53, N'9', N'Допълнителни отсеци', NULL, 8983, NULL, N'{"sortOrder":"9"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9065, 53, N'9', N'Допълнителни отсеци', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"9"}', 1, N'72')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9066, 53, N'10', N'СЕА', NULL, 8983, NULL, N'{"sortOrder":"10"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9066, 53, N'10', N'СЕА', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"10"}', 1, N'73')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9067, 53, N'11', N'Съответствие с изискванията на ACAS/EGPWS/RVSM/BRNAV/AWO/FM immunity /други', NULL, 8983, NULL, N'{"sortOrder":"11"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9067, 53, N'11', N'Съответствие с изискванията на ACAS/EGPWS/RVSM/BRNAV/AWO/FM immunity /други', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"11"}', 1, N'74')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9068, 53, N'12', N'Изпитания', NULL, 8983, NULL, N'{"sortOrder":"12"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9068, 53, N'12', N'Изпитания', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"12"}', 1, N'75')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9069, 53, N'13', N'Други специфични', NULL, 8983, NULL, N'{"sortOrder":"13"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9069, 53, N'13', N'Други специфични', NULL, 8983, NULL, N'{"idPart":"aircrafts","sortOrder":"13"}', 1, N'76')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9070, 53, N'145.А.70', N'Описанието на организацията за ТО', NULL, 8979, NULL, N'{"sortOrder":"12"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9070, 53, N'145.А.70', N'Описанието на организацията за ТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"12"}', 1, N'84')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9071, 53, N'М.А.604', N'Ръководство на организацията за ТО', NULL, 8980, NULL, N'{"sortOrder":"2"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9071, 53, N'М.А.604', N'Ръководство на организацията за ТО', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"2"}', 1, N'85')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9072, 53, N'М.А.704', N'Описанието на организацията за УППЛГ', NULL, 8981, NULL, N'{"sortOrder":"2"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9072, 53, N'М.А.704', N'Описанието на организацията за УППЛГ', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"2"}', 1, N'86')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9073, 53, N'147.А.140', N'Описанието на организацията за обучение', NULL, 8982, NULL, N'{"sortOrder":"9"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9073, 53, N'147.А.140', N'Описанието на организацията за обучение', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"9"}', 1, N'87')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9074, 53, N'147.А.160', N'Несъответствия', NULL, 8982, NULL, N'{"sortOrder":"17"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9074, 53, N'147.А.160', N'Несъответствия', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"17"}', 1, N'128')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9075, 53, N'AC_01', N'Ограничение на летателната годност', NULL, 8978, NULL, N'{"sortOrder":"1"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9075, 53, N'AC_01', N'Ограничение на летателната годност', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"1"}', 1, N'168')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9076, 53, N'AC_02', N'Знаци, маркировка и табели', NULL, 8978, NULL, N'{"sortOrder":"2"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9076, 53, N'AC_02', N'Знаци, маркировка и табели', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"2"}', 1, N'169')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9077, 53, N'AC_03', N'Записи (включително Технически борден дневник)', NULL, 8978, NULL, N'{"sortOrder":"3"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9077, 53, N'AC_03', N'Записи (включително Технически борден дневник)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"3"}', 1, N'170')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9078, 53, N'AC_05', N'Ограничения на ресурса (включително компоненти с ограничена наработка)', NULL, 8978, NULL, N'{"sortOrder":"5"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9078, 53, N'AC_05', N'Ограничения на ресурса (включително компоненти с ограничена наработка)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"5"}', 1, N'172')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9079, 53, N'AC_06', N'Наръчник за структурни поправки (Повреди и структурни поправки)', NULL, 8978, NULL, N'{"sortOrder":"6"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9079, 53, N'AC_06', N'Наръчник за структурни поправки (Повреди и структурни поправки)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"6"}', 1, N'173')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9080, 53, N'AC_07', N'Експлоатационно оборудване (включително аварийно-спасително оборудване)', NULL, 8978, NULL, N'{"sortOrder":"7"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9080, 53, N'AC_07', N'Експлоатационно оборудване (включително аварийно-спасително оборудване)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"7"}', 1, N'174')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9081, 53, N'AC_08', N'Списък на минимално-допустимото оборудване (MEL или CDL)', NULL, 8978, NULL, N'{"sortOrder":"8"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9081, 53, N'AC_08', N'Списък на минимално-допустимото оборудване (MEL или CDL)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"8"}', 1, N'175')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9082, 53, N'AC_09', N'Ръководство по летателна експлоатация', NULL, 8978, NULL, N'{"sortOrder":"9"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9082, 53, N'AC_09', N'Ръководство по летателна експлоатация', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"9"}', 1, N'176')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9083, 53, N'AC_10', N'Маса и центровка на ВС', NULL, 8978, NULL, N'{"sortOrder":"10"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9083, 53, N'AC_10', N'Маса и центровка на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"10"}', 1, N'177')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9084, 53, N'AC_11', N'Програма за надеждност', NULL, 8978, NULL, N'{"sortOrder":"11"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9084, 53, N'AC_11', N'Програма за надеждност', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"11"}', 1, N'178')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9085, 53, N'AC_12', N'Типов дизайн', NULL, 8978, NULL, N'{"sortOrder":"12"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9085, 53, N'AC_12', N'Типов дизайн', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"12"}', 1, N'179')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9086, 53, N'AC_13', N'Програма за техническо обслужване на ВС', NULL, 8978, NULL, N'{"sortOrder":"13"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9086, 53, N'AC_13', N'Програма за техническо обслужване на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"13"}', 1, N'180')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9087, 53, N'AC_14', N'Директиви за летателна годност', NULL, 8978, NULL, N'{"sortOrder":"14"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9087, 53, N'AC_14', N'Директиви за летателна годност', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"14"}', 1, N'181')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9088, 53, N'09B.6', N'Списък на минимално-допустимото оборудване (MEL или CDL)', NULL, 8978, NULL, N'{"sortOrder":"9"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9088, 53, N'09B.6', N'Списък на минимално-допустимото оборудване (MEL или CDL)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"9"}', 1, N'208')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9089, 53, N'13C.4', N'Записи (включително Технически борден дневник)', NULL, 8978, NULL, N'{"sortOrder":"13"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9089, 53, N'13C.4', N'Записи (включително Технически борден дневник)', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"13"}', 1, N'212')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9090, 53, N'TR1', N'Opit za vyvejdane na novi tipove oditi', NULL, 8984, NULL, N'{"sortOrder":"1"}', 1, N'22')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9090, 53, N'TR1', N'Opit za vyvejdane na novi tipove oditi', NULL, 8984, NULL, N'{"idPart":"TR","sortOrder":"1"}', 1, N'148')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9091, 53, N'TR2', N'Opiti - vtora 4ast', NULL, 8984, NULL, N'{"sortOrder":"2"}', 1, N'22')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9091, 53, N'TR2', N'Opiti - vtora 4ast', NULL, 8984, NULL, N'{"idPart":"TR","sortOrder":"2"}', 1, N'149')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9092, 53, N'М.А.202', N'Докладване на събития', NULL, 8981, NULL, N'{"sortOrder":"19"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9092, 53, N'М.А.202', N'Докладване на събития', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"19"}', 1, N'110')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9093, 53, N'М.А.716', N'Несъответствия', NULL, 8981, NULL, N'{"sortOrder":"21"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9093, 53, N'М.А.716', N'Несъответствия', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"21"}', 1, N'112')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9094, 53, N'М.А.307', N'Прехвърляне на записите по ППЛГ на ВС', NULL, 8981, NULL, N'{"sortOrder":"20"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9094, 53, N'М.А.307', N'Прехвърляне на записите по ППЛГ на ВС', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"20"}', 1, N'111')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9095, 53, N'145.А.95', N'Несъответствия', NULL, 8979, NULL, N'{"sortOrder":"17"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9095, 53, N'145.А.95', N'Несъответствия', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"17"}', 1, N'113')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9096, 53, N'AC_04', N'Контрол на конфигурацията', NULL, 8978, NULL, N'{"sortOrder":"4"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9096, 53, N'AC_04', N'Контрол на конфигурацията', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"4"}', 1, N'171')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9097, 53, N'AC_15', N'Оглед на ВС', NULL, 8978, NULL, N'{"sortOrder":"15"}', 1, N'42')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9097, 53, N'AC_15', N'Оглед на ВС', NULL, 8978, NULL, N'{"idPart":"ACAM","sortOrder":"15"}', 1, N'182')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9098, 53, N'M.A.401', N'Данни за ТО', NULL, 8981, NULL, N'{"sortOrder":"22"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9098, 53, N'M.A.401', N'Данни за ТО', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"22"}', 1, N'188')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9099, 53, N'M.A.403', N'Дефекти на ВС', NULL, 8981, NULL, N'{"sortOrder":"23"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9099, 53, N'M.A.403', N'Дефекти на ВС', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"23"}', 1, N'189')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9100, 53, N'M.A.702', N'Заявление', NULL, 8981, NULL, N'{"sortOrder":"24"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9100, 53, N'M.A.702', N'Заявление', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"24"}', 1, N'190')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9101, 53, N'M.A.715', N'Продължаване валидността на одобрението', NULL, 8981, NULL, N'{"sortOrder":"25"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9101, 53, N'M.A.715', N'Продължаване валидността на одобрението', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"25"}', 1, N'191')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9102, 53, N'145.A.15', N'Заявление', NULL, 8979, NULL, N'{"sortOrder":"18"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9102, 53, N'145.A.15', N'Заявление', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"18"}', 1, N'192')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9103, 53, N'145.A.20', N'Обхват на одобрение', NULL, 8979, NULL, N'{"sortOrder":"19"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9103, 53, N'145.A.20', N'Обхват на одобрение', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"19"}', 1, N'193')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9104, 53, N'M.A.202', N'Докладване на събития', NULL, 8980, NULL, N'{"sortOrder":"16"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9104, 53, N'M.A.202', N'Докладване на събития', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"16"}', 1, N'194')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9105, 53, N'M.A.602', N'Заявление', NULL, 8980, NULL, N'{"sortOrder":"17"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9105, 53, N'M.A.602', N'Заявление', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"17"}', 1, N'195')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9106, 53, N'M.A.618', N'Продължаване валидността на одобрението', NULL, 8980, NULL, N'{"sortOrder":"18"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9106, 53, N'M.A.618', N'Продължаване валидността на одобрението', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"18"}', 1, N'196')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9107, 53, N'M.A.619', N'Несъответствия', NULL, 8980, NULL, N'{"sortOrder":"19"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9107, 53, N'M.A.619', N'Несъответствия', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"19"}', 1, N'197')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9108, 53, N'147.A.15', N'Подаване на заявление', NULL, 8982, NULL, N'{"sortOrder":"18"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9108, 53, N'147.A.15', N'Подаване на заявление', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"18"}', 1, N'198')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9109, 53, N'147.A.155', N'Запазване на валидността', NULL, 8982, NULL, N'{"sortOrder":"19"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9109, 53, N'147.A.155', N'Запазване на валидността', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"19"}', 1, N'199')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9110, 54, N'Част 1', N'Управление', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"1"}', 1, N'1')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9110, 54, N'Част 1', N'Управление', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"1"}', 1, N'1')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9111, 54, N'Част 2', N'Процедури за ТО', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"2"}', 1, N'2')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9111, 54, N'Част 2', N'Процедури за ТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"2"}', 1, N'2')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9112, 54, N'Част 1', N'Управление', NULL, 8982, NULL, N'{"idPart":"4","sortOrder":"1"}', 1, N'3')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9112, 54, N'Част 1', N'Управление', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"1"}', 1, N'3')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9113, 54, N'Част 2', N'Процедури за обучение и изпитване', NULL, 8982, NULL, N'{"idPart":"4","sortOrder":"2"}', 1, N'4')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9113, 54, N'Част 2', N'Процедури за обучение и изпитване', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"2"}', 1, N'4')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9114, 54, N'Част 0', N'Обща организация', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"1"}', 1, N'5')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9114, 54, N'Част 0', N'Обща организация', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"1"}', 1, N'5')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9115, 54, N'Част 1', N'Процедури за управление постоянна ЛГ', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"2"}', 1, N'6')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9115, 54, N'Част 1', N'Процедури за управление постоянна ЛГ', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"2"}', 1, N'6')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9116, 54, N'Част A', N'Общи положения', NULL, 8980, NULL, N'{"idPart":"2","sortOrder":"1"}', 1, N'7')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9116, 54, N'Част A', N'Общи положения', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"1"}', 1, N'7')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9117, 54, N'Част B', N'Описание', NULL, 8980, NULL, N'{"idPart":"2","sortOrder":"2"}', 1, N'8')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9117, 54, N'Част B', N'Описание', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"2"}', 1, N'8')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9118, 54, N'Част L 2', N'Допълнителни процедури за линейно ТО', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"3"}', 1, N'9')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9118, 54, N'Част L 2', N'Допълнителни процедури за линейно ТО', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"3"}', 1, N'9')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9119, 54, N'Част 3', N'Процедури от системата за качество', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"4"}', 1, N'10')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9119, 54, N'Част 3', N'Процедури от системата за качество', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"4"}', 1, N'10')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9120, 54, N'Част 4', N'Връзки с авиационни оператори', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"5"}', 1, N'11')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9120, 54, N'Част 4', N'Връзки с авиационни оператори', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"5"}', 1, N'11')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9121, 54, N'Част 5', N'Приложения', NULL, 8979, NULL, N'{"idPart":"1","sortOrder":"6"}', 1, N'12')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9121, 54, N'Част 5', N'Приложения', NULL, 8979, NULL, N'{"idPart":"145","sortOrder":"6"}', 1, N'12')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9122, 54, N'Част С', N'Основни процедури', NULL, 8980, NULL, N'{"idPart":"2","sortOrder":"3"}', 1, N'13')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9122, 54, N'Част С', N'Основни процедури', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"3"}', 1, N'13')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9123, 54, N'Част D', N'Работни процедури', NULL, 8980, NULL, N'{"idPart":"2","sortOrder":"4"}', 1, N'14')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9123, 54, N'Част D', N'Работни процедури', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"4"}', 1, N'14')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9124, 54, N'Част Е', N'Приложения', NULL, 8980, NULL, N'{"idPart":"2","sortOrder":"5"}', 1, N'15')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9124, 54, N'Част Е', N'Приложения', NULL, 8980, NULL, N'{"idPart":"MF","sortOrder":"5"}', 1, N'15')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9125, 54, N'Част 2', N'Система за качество', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"3"}', 1, N'16')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9125, 54, N'Част 2', N'Система за качество', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"3"}', 1, N'16')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9126, 54, N'Част 3', N'Договорено ТО', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"4"}', 1, N'17')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9126, 54, N'Част 3', N'Договорено ТО', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"4"}', 1, N'17')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9127, 54, N'Част 4', N'Процедури за преглед на ЛГ', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"5"}', 1, N'18')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9127, 54, N'Част 4', N'Процедури за преглед на ЛГ', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"5"}', 1, N'18')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9128, 54, N'Част 5', N'Приложения', NULL, 8981, NULL, N'{"idPart":"3","sortOrder":"6"}', 1, N'19')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9128, 54, N'Част 5', N'Приложения', NULL, 8981, NULL, N'{"idPart":"MG","sortOrder":"6"}', 1, N'19')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9129, 54, N'Част 3', N'Процедури от системата за качество на организацията за обучение', NULL, 8982, NULL, N'{"idPart":"4","sortOrder":"3"}', 1, N'20')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9129, 54, N'Част 3', N'Процедури от системата за качество на организацията за обучение', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"3"}', 1, N'20')
 GO
-INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9130, 54, N'Част 4', N'Приложения', NULL, 8982, NULL, N'{"idPart":"4","sortOrder":"4"}', 1, N'21')
+INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9130, 54, N'Част 4', N'Приложения', NULL, 8982, NULL, N'{"idPart":"147","sortOrder":"4"}', 1, N'21')
 GO
 INSERT [dbo].[NomValues] ([NomValueId], [NomId], [Code], [Name], [NameAlt], [ParentValueId], [Alias], [TextContent], [IsActive], [OldId]) VALUES (9131, 55, N'1.1.', N'Корпоративен ангажимент на отговорния ръководител', NULL, 9110, NULL, N'{"sortOrder":"1"}', 1, N'1')
 GO

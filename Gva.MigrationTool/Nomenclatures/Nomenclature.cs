@@ -431,7 +431,7 @@ namespace Gva.MigrationTool.Nomenclatures
             Nom nom = repo.GetNom("staffTypes");
             var aliases = new Dictionary<string, string>()
             {
-                { "F", "fligthCrew" },
+                { "F", "flightCrew" },
                 { "T", "ovd"},
                 { "G", "to_vs"},
                 { "M", "to_suvd"}
