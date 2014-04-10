@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
@@ -19,41 +20,36 @@ namespace Gva.Api.Repositories.FileRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddFileReferences(PartVersion partVersion, dynamic files)
+        public void AddFileReferences(PartVersion partVersion, IEnumerable<FileDO> files)
         {
-            List<GvaLotFile> addedFiles = new List<GvaLotFile>();
-            List<GvaLotFile> updatedFiles = new List<GvaLotFile>();
-            List<GvaLotFile> deletedFiles = new List<GvaLotFile>();
-
-            if (files != null)
+            if (files == null)
             {
-                foreach (var fileObj in files)
+                return;
+            }
+
+            foreach (var fileObj in files)
+            {
+                if ((bool)fileObj.IsAdded)
                 {
-                    if ((bool)fileObj.isAdded)
-                    {
-                        var newFile = this.AddLotFile(partVersion.Part, fileObj);
-                        addedFiles.Add(newFile);
-                        continue;
-                    }
-
-                    var lotFileId = (int)fileObj.lotFileId;
-                    var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
-                            .Include(f => f.GvaAppLotFiles)
-                            .Include(f => f.GvaFile)
-                            .Include(f => f.DocFile)
-                            .Include(f => f.GvaFile.GvaLotFiles)
-                            .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
-
-                    if ((bool)fileObj.isDeleted)
-                    {
-                        this.DeleteLotFile(lotFile);
-                        deletedFiles.Add(lotFile);
-                        continue;
-                    }
-
-                    this.UpdateLotFile(lotFile, fileObj);
-                    updatedFiles.Add(lotFile);
+                    var newFile = this.AddLotFile(partVersion.Part, fileObj);
+                    continue;
                 }
+
+                var lotFileId = (int)fileObj.LotFileId;
+                var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                        .Include(f => f.GvaAppLotFiles)
+                        .Include(f => f.GvaFile)
+                        .Include(f => f.DocFile)
+                        .Include(f => f.GvaFile.GvaLotFiles)
+                        .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
+
+                if ((bool)fileObj.IsDeleted)
+                {
+                    this.DeleteLotFile(lotFile);
+                    continue;
+                }
+
+                this.UpdateLotFile(lotFile, fileObj);
             }
         }
 
@@ -93,14 +89,12 @@ namespace Gva.Api.Repositories.FileRepository
                 .ToArray();
         }
 
-        private GvaLotFile AddLotFile(Part part, dynamic fileObj)
+        private GvaLotFile AddLotFile(Part part, FileDO fileObj)
         {
-            var key = new Guid((string)fileObj.file.key);
-
             var file = new GvaFile()
             {
-                Filename = (string)fileObj.file.name,
-                FileContentId = key
+                Filename = (string)fileObj.File.Name,
+                FileContentId = fileObj.File.Key
             };
 
             this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
@@ -109,18 +103,18 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 LotPart = part,
                 GvaFile = file,
-                GvaCaseTypeId = fileObj.caseType.nomValueId,
-                PageNumber = (int?)fileObj.pageCount
+                GvaCaseTypeId = fileObj.CaseType.NomValueId,
+                PageNumber = (int?)fileObj.PageCount
             };
-            newLotFile.SavePageIndex((string)fileObj.bookPageNumber);
+            newLotFile.SavePageIndex((string)fileObj.BookPageNumber);
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
 
-            foreach (var application in fileObj.applications)
+            foreach (var application in fileObj.Applications)
             {
                 GvaAppLotFile appLotFile = new GvaAppLotFile()
                 {
-                    GvaApplicationId = application.applicationId,
+                    GvaApplicationId = application.ApplicationId,
                     GvaLotFile = newLotFile
                 };
 
@@ -130,16 +124,16 @@ namespace Gva.Api.Repositories.FileRepository
             return newLotFile;
         }
 
-        private void UpdateLotFile(GvaLotFile lotFile, dynamic fileObj)
+        private void UpdateLotFile(GvaLotFile lotFile, FileDO fileObj)
         {
-            lotFile.GvaCaseTypeId = fileObj.caseType.nomValueId;
-            lotFile.PageNumber = fileObj.pageCount;
-            lotFile.SavePageIndex((string)fileObj.bookPageNumber);
+            lotFile.GvaCaseTypeId = fileObj.CaseType.NomValueId;
+            lotFile.PageNumber = fileObj.PageCount;
+            lotFile.SavePageIndex((string)fileObj.BookPageNumber);
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
-                (JArray)fileObj.applications,
+                fileObj.Applications,
                 gf => gf.GvaApplicationId,
-                a => a.Value<int>("applicationId"),
+                a => a.ApplicationId,
                 (gf, a) => gf);
 
             var removedApplications = lotFile.GvaAppLotFiles.Except(nonModifiedApps).ToList();
@@ -148,14 +142,14 @@ namespace Gva.Api.Repositories.FileRepository
                 this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(application);
             }
 
-            foreach (var application in fileObj.applications)
+            foreach (var application in fileObj.Applications)
             {
-                var appLotFile = lotFile.GvaAppLotFiles.SingleOrDefault(af => af.GvaApplicationId == (int)application.applicationId);
+                var appLotFile = lotFile.GvaAppLotFiles.SingleOrDefault(af => af.GvaApplicationId == (int)application.ApplicationId);
                 if (appLotFile == null)
                 {
                     appLotFile = new GvaAppLotFile()
                     {
-                        GvaApplicationId = application.applicationId,
+                        GvaApplicationId = application.ApplicationId,
                         GvaLotFile = lotFile
                     };
 

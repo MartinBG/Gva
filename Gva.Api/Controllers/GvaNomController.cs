@@ -4,6 +4,7 @@ using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Linq;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -198,7 +199,7 @@ namespace Gva.Api.Controllers
 
             return Ok(
                 this.nomRepository.GetNomValues("schools", term)
-                .Where(nv => JObject.Parse(nv.TextContent).Value<JArray>("graduationIds").Values<string>().Contains(graduationId.ToString()))
+                .Where(nv => JObject.Parse(nv.TextContent).GetItems<string>("graduationIds").Contains(graduationId.ToString()))
                 .WithOffsetAndLimit(offset, limit));
         }
 
@@ -207,60 +208,80 @@ namespace Gva.Api.Controllers
         {
             return Ok(
                 this.nomRepository.GetNomValues("addressTypes", term)
-                .Where(nv => JObject.Parse(nv.TextContent).Value<string>("type") == type)
+                .Where(nv => JObject.Parse(nv.TextContent).Get<string>("type") == type)
                 .WithOffsetAndLimit(offset, limit));
         }
 
         [Route("documentRoles")]
         public IHttpActionResult GetDocumentRoles(string term = null, string categoryAlias = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
-            return Ok(
-                this.nomRepository.GetNomValues("documentRoles", term)
-                .Where(nv =>
-                {
-                    JObject content = JObject.Parse(nv.TextContent);
-                    bool isMatch = true;
-
-                    if (categoryAlias != null)
+            IEnumerable<NomValue> nomValues;
+            if (categoryAlias == null && (staffAliases == null || staffAliases.Length == 0))
+            {
+                nomValues = this.nomRepository.GetNomValues("documentRoles", term: term, offset: offset, limit: limit);
+            }
+            else
+            {
+                nomValues =
+                    this.nomRepository.GetNomValues("documentRoles", term)
+                    .Where(nv =>
                     {
-                        isMatch &= content.Value<string>("categoryAlias") == categoryAlias;
-                    }
+                        JObject content = JObject.Parse(nv.TextContent);
+                        bool isMatch = true;
 
-                    JToken staffAlias;
-                    if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
-                    {
-                        isMatch &= staffAliases.Contains(staffAlias.ToString());
-                    }
+                        if (categoryAlias != null)
+                        {
+                            isMatch &= content.Get<string>("categoryAlias") == categoryAlias;
+                        }
 
-                    return isMatch;
-                })
-                .WithOffsetAndLimit(offset, limit));
+                        JToken staffAlias;
+                        if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
+                        {
+                            isMatch &= staffAliases.Contains(staffAlias.ToString());
+                        }
+
+                        return isMatch;
+                    })
+                    .WithOffsetAndLimit(offset, limit);
+            }
+
+            return Ok(nomValues);
         }
 
         [Route("documentTypes")]
         public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
-            return Ok(
-                this.nomRepository.GetNomValues("documentTypes", term)
-                .Where(nv =>
-                {
-                    JObject content = JObject.Parse(nv.TextContent);
-                    bool isMatch = true;
-
-                    if (isIdDocument != null)
+            IEnumerable<NomValue> nomValues;
+            if (isIdDocument == null && (staffAliases == null || staffAliases.Length > 0))
+            {
+                nomValues = this.nomRepository.GetNomValues("documentTypes", term: term, offset: offset, limit: limit);
+            }
+            else
+            {
+                nomValues =
+                    this.nomRepository.GetNomValues("documentTypes", term)
+                    .Where(nv =>
                     {
-                        isMatch &= content.Value<bool>("isIdDocument") == isIdDocument;
-                    }
+                        JObject content = JObject.Parse(nv.TextContent);
+                        bool isMatch = true;
 
-                    JToken staffAlias;
-                    if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
-                    {
-                        isMatch &= staffAliases.Contains(staffAlias.ToString());
-                    }
+                        if (isIdDocument != null)
+                        {
+                            isMatch &= content.Get<bool>("isIdDocument") == isIdDocument;
+                        }
 
-                    return isMatch;
-                })
-                .WithOffsetAndLimit(offset, limit));
+                        JToken staffAlias;
+                        if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
+                        {
+                            isMatch &= staffAliases.Contains(staffAlias.ToString());
+                        }
+
+                        return isMatch;
+                    })
+                    .WithOffsetAndLimit(offset, limit);
+            }
+
+            return Ok(nomValues);
         }
 
         [Route("auditPartRequirements")]
@@ -272,17 +293,17 @@ namespace Gva.Api.Controllers
                     new JProperty("code", n.Code),
                     new JProperty("name", n.Name))).First();
 
-            var requirements = this.nomRepository.GetNomValues("auditPartRequirmants").Where(r => JObject.Parse(r.TextContent).SelectToken("idPart") != null);
+            var requirements = this.nomRepository.GetNomValues("auditPartRequirmants").Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
 
             if (type == "organizations" || type == "aircrafts")
             {
-                requirements = requirements.Where(r => JObject.Parse(r.TextContent).SelectToken("idPart").ToString() == auditPartCode);
+                requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == auditPartCode);
             }
 
             JArray auditPartRequirements = new JArray();
             foreach (var requirement in requirements)
             {
-                string sortOrder = JObject.Parse(requirement.TextContent).SelectToken("sortOrder").ToString();
+                string sortOrder = JObject.Parse(requirement.TextContent).Get<string>("sortOrder");
                 auditPartRequirements.Add(
                     new JObject(
                         new JProperty("subject", requirement.Name),
@@ -293,7 +314,7 @@ namespace Gva.Api.Controllers
                 ));
             }
 
-            return Ok(auditPartRequirements.OrderBy(e => Convert.ToInt32(e.SelectToken("sortOrder"))));
+            return Ok(auditPartRequirements.OrderBy(e => e.Get<int>("sortOrder")));
         }
 
         [Route("auditDetails")]
@@ -313,31 +334,34 @@ namespace Gva.Api.Controllers
 
                 this.nomRepository.GetNomValues("auditPartSections").ToArray();
                 var requirements = this.nomRepository.GetNomValues("auditPartSectionDetails")
-                    .Where(d => JObject.Parse(d.ParentValue.TextContent).SelectToken("idPart") != null)
-                    .Where(d => JObject.Parse(d.ParentValue.TextContent).SelectToken("idPart").ToString() == auditPartCode)
+                    .Where(d => JObject.Parse(d.ParentValue.TextContent).Get<string>("idPart") == auditPartCode)
                     .GroupBy(d => d.ParentValue.Code)
                     .OrderBy(d => d.Key);
 
-                foreach(dynamic requirement in requirements)
+                foreach(var requirement in requirements)
                 {
                     JArray elements = new JArray();
-                    foreach (dynamic element in requirement)
+                    foreach (var element in requirement)
                     {
-                        string sortOrder = JObject.Parse(element.TextContent).SelectToken("sortOrder");
+                        string sortOrder = JObject.Parse(element.TextContent).Get<string>("sortOrder");
 
-                        elements.Add(new JObject(
-                            new JProperty("groupTitle", element.ParentValue.Code + ' ' + element.ParentValue.Name),
-                            new JProperty("subject", element.Name),
-                            new JProperty("auditResult", defaultAuditResult),
-                            new JProperty("disparities", new JArray()),
-                            new JProperty("auditPart", element.Code),
-                            new JProperty("titlePart", element.Code.Split('.')[0]),
-                            new JProperty("sortOrder", sortOrder)
-                        ));
+                        elements.Add(
+                            new JObject(
+                                new JProperty("groupTitle", element.ParentValue.Code + ' ' + element.ParentValue.Name),
+                                new JProperty("subject", element.Name),
+                                new JProperty("auditResult", defaultAuditResult),
+                                new JProperty("disparities", new JArray()),
+                                new JProperty("auditPart", element.Code),
+                                new JProperty("titlePart", element.Code.Split('.')[0]),
+                                new JProperty("sortOrder", sortOrder)));
                     }
-                     auditDetails.Add( new JObject(
-                        new JProperty("groupTitle", elements.First().SelectToken("groupTitle")),
-                        new JProperty("group", elements.OrderBy(e => e.SelectToken("titlePart")).ThenBy(e => Convert.ToInt32(e.SelectToken("sortOrder"))))));
+                     auditDetails.Add(
+                        new JObject(
+                            new JProperty("groupTitle", elements.First().Get("groupTitle")),
+                            new JProperty("group",
+                                elements
+                                .OrderBy(e => e.Get<string>("titlePart"))
+                                .ThenBy(e => e.Get<int>("sortOrder")))));
                 }
             }
 

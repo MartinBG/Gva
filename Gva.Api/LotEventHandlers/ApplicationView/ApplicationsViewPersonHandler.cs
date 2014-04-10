@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -22,10 +23,10 @@ namespace Gva.Api.LotEventHandlers.ApplicationView
         {
             application.Lot = partVersion.Part.Lot;
             application.Part = partVersion.Part;
-            application.RequestDate = partVersion.DynamicContent.requestDate;
-            application.DocumentNumber = partVersion.DynamicContent.documentNumber;
-            application.ApplicationTypeName = partVersion.DynamicContent.applicationType.name;
-            application.StatusName = partVersion.DynamicContent.applicationStatus == null ? null : partVersion.DynamicContent.applicationStatus.name;
+            application.RequestDate = partVersion.Content.Get<DateTime?>("requestDate");
+            application.DocumentNumber = partVersion.Content.Get<string>("documentNumber");
+            application.ApplicationTypeName = partVersion.Content.Get<string>("applicationType.name");
+            application.StatusName = partVersion.Content.Get<string>("applicationStatus.name");
         }
 
         public override void Clear(GvaViewApplication application)

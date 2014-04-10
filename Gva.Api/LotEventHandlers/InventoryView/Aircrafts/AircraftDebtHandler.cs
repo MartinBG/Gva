@@ -1,6 +1,7 @@
 ﻿using System;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -28,10 +29,10 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Part = partVersion.Part;
 
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
-            invItem.Name = partVersion.DynamicContent.aircraftDebtType.name;
-            invItem.Number = partVersion.DynamicContent.documentNumber;
-            invItem.Date = partVersion.DynamicContent.documentDate;
-            invItem.Publisher = partVersion.DynamicContent.documentPublisher;
+            invItem.Name = partVersion.Content.Get<string>("aircraftDebtType.name");
+            invItem.Number = partVersion.Content.Get<string>("documentNumber");
+            invItem.Date = partVersion.Content.Get<DateTime?>("documentDate");
+            invItem.Publisher = partVersion.Content.Get<string>("documentPublisher");
 
             if (partVersion.PartOperation == PartOperation.Add)
             {

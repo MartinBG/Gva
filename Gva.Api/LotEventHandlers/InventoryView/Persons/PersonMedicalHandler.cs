@@ -1,8 +1,8 @@
 ﻿using System;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
-using Regs.Api.Extensions;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -33,15 +33,15 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Type = null;
             invItem.Number = string.Format(
                     "{0}-{1}-{2}-{3}",
-                    partVersion.GetString("documentNumberPrefix"),
-                    partVersion.GetString("documentNumber"),
-                    partVersion.Part.Lot.GetPart("personData").GetString("lin"),
-                    partVersion.GetString("documentNumberSuffix"));
-            invItem.Date = partVersion.GetDate("documentDateValidFrom");
-            invItem.Publisher = partVersion.GetString("documentPublisher.name");
+                    partVersion.Content.Get<string>("documentNumberPrefix"),
+                    partVersion.Content.Get<string>("documentNumber"),
+                    partVersion.Part.Lot.GetPart("personData").Content.Get<string>("lin"),
+                    partVersion.Content.Get<string>("documentNumberSuffix"));
+            invItem.Date = partVersion.Content.Get<DateTime?>("documentDateValidFrom");
+            invItem.Publisher = partVersion.Content.Get<string>("documentPublisher.name");
             invItem.Valid = null;
-            invItem.FromDate = partVersion.GetDate("documentDateValidFrom");
-            invItem.ToDate = partVersion.GetDate("documentDateValidTo");
+            invItem.FromDate = partVersion.Content.Get<DateTime?>("documentDateValidFrom");
+            invItem.ToDate = partVersion.Content.Get<DateTime?>("documentDateValidTo");
 
             if (partVersion.PartOperation == PartOperation.Add)
             {

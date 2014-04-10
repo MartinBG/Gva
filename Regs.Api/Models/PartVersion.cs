@@ -47,14 +47,6 @@ namespace Regs.Api.Models
                 this.TextContent = value.ToString();
             }
         }
-
-        public dynamic DynamicContent
-        {
-            get
-            {
-                return this.Content;
-            }
-        }
     }
 
     public class PartVersionMap : EntityTypeConfiguration<PartVersion>

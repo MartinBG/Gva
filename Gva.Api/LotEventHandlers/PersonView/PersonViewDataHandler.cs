@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -22,14 +23,14 @@ namespace Gva.Api.LotEventHandlers.PersonView
         {
             person.Lot = part.Part.Lot;
 
-            person.Lin =part.DynamicContent.lin;
-            person.Uin = part.DynamicContent.uin;
+            person.Lin =part.Content.Get<string>("lin");
+            person.Uin = part.Content.Get<string>("uin");
             person.Names = string.Format(
                 "{0} {1} {2}",
-                part.DynamicContent.firstName,
-                part.DynamicContent.middleName,
-                part.DynamicContent.lastName);
-            person.BirtDate = Convert.ToDateTime(part.DynamicContent.dateOfBirth);
+                part.Content.Get<string>("firstName"),
+                part.Content.Get<string>("middleName"),
+                part.Content.Get<string>("lastName"));
+            person.BirtDate = part.Content.Get<DateTime>("dateOfBirth");
         }
 
         public override void Clear(GvaViewPerson person)

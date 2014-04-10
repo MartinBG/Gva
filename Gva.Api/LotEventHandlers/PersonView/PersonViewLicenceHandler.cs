@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -22,7 +23,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
         {
             licence.Lot = part.Part.Lot;
             licence.Part = part.Part;
-            licence.LicenceType = part.DynamicContent.licenceType.name;
+            licence.LicenceType = part.Content.Get<string>("licenceType.name");
         }
 
         public override void Clear(GvaViewPersonLicence licence)

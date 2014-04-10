@@ -116,7 +116,7 @@ namespace Common.Tests
         {
             try
             {
-                if (disposing)
+                if (disposing && !disposed)
                 {
                     using (Item1 as IDisposable)
                     using (Item2 as IDisposable)

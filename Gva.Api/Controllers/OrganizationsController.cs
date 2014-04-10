@@ -6,6 +6,7 @@ using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -141,9 +142,8 @@ namespace Gva.Api.Controllers
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.GetSet("Organization").CreateLot(userContext);
 
-                dynamic organizationData = organization.Value<JObject>("organizationData");
-                newLot.CreatePart("organizationData", organizationData, userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, organizationData.Value<JArray>("caseTypes"));
+                newLot.CreatePart("organizationData", organization.Get<JObject>("organizationData"), userContext);
+                this.caseTypeRepository.AddCaseTypes(newLot, organization.GetItems<JObject>("organizationData.caseTypes"));
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -257,44 +257,38 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}")]
-        public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}")]
-        public IHttpActionResult PostNewRecommendationPart(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewRecommendationPart(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
-         
-            this.fileRepository.AddFileReferences(partVersion, content.files);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
-            foreach (int auditPartIndex in content.part.includedAudits)
+            foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
-                
-                dynamic audit = base.GetFilePart(lotId, "organizationInspections/" + auditPartIndex, null);
-                audit.Content.Part.recommendationReports = audit.Content.Part.recommendationReports as JArray;
+                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
 
-                string recommendationPartName = content.part.recommendationPart != null ? content.part.recommendationPart.name : null;
-
-                if (audit.Content.Part.recommendationReports == null)
+                JArray recommendations = inspection["recommendationReports"] as JArray;
+                if (recommendations == null)
                 {
-                    audit.Content.Part.recommendationReports = new JArray();
+                    inspection["recommendationReports"] = recommendations = new JArray();
                 }
 
-                audit.Content.Part.recommendationReports.Add(new JObject(
-                      new JProperty("partIndex", partVersion.Part.Index),
-                      new JProperty("formDate", content.part.formDate),
-                      new JProperty("formText", content.part.formText),
-                      new JProperty("recommendationPartName", recommendationPartName)));
+                recommendations.Add(
+                    new JObject(
+                        new JProperty("partIndex", partVersion.Part.Index),
+                        new JProperty("formDate", content.Get("part.formDate")),
+                        new JProperty("formText", content.Get("part.formText")),
+                        new JProperty("recommendationPartName", content.Get<string>("part.recommendationPart.name"))));
 
-                PartVersion auditPartVersion = lot.UpdatePart("organizationInspections/" + auditPartIndex, audit.Content.Part, userContext);
-
-                this.fileRepository.AddFileReferences(auditPartVersion, audit.Content.Files);
-
+                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
             }
 
             lot.Commit(userContext, lotEventDispatcher);
@@ -320,7 +314,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
-        public IHttpActionResult PostPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
         }
@@ -337,44 +331,43 @@ namespace Gva.Api.Controllers
 
 
         [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
-        public IHttpActionResult PostRecommendationPart(int lotId, string path, dynamic content)
+        public IHttpActionResult PostRecommendationPart(int lotId, string path, JObject content)
         {
-            base.PostPart(lotId, path, content as JObject);
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            foreach (int auditPartIndex in content.part.includedAudits)
+            PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+
+            int recommendationPartIndex = content.Get<int>("partIndex");
+            foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
+                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
 
-                dynamic audit = base.GetFilePart(lotId, "organizationInspections/" + auditPartIndex, null);
-
-                string recommendationPartName = content.part.recommendationPart != null ? content.part.recommendationPart.name : null;
-                foreach(dynamic report in audit.Content.Part.recommendationReports)
+                JArray recommendations = inspection["recommendationReports"] as JArray;
+                if (recommendations == null)
                 {
-                    if (report.partIndex == content.partIndex) 
-                    {
-                        return Ok();
-                    }
+                    inspection["recommendationReports"] = recommendations = new JArray();
                 }
 
-                if (audit.Content.Part.recommendationReports == null)
+                JObject recommendation =
+                    recommendations
+                    .FirstOrDefault(t => t.Get<int>("partIndex") == recommendationPartIndex) as JObject;
+
+                if (recommendation == null)
                 {
-                    audit.Content.Part.recommendationReports = new JArray();
+                    recommendation = new JObject(new JProperty("partIndex", content.Get("partIndex")));
+                    recommendations.Add(recommendation);
                 }
 
-                audit.Content.Part.recommendationReports.Add(new JObject(
-                        new JProperty("partIndex", content.partIndex),
-                        new JProperty("formDate", content.part.formDate),
-                        new JProperty("formText", content.part.formText),
-                        new JProperty("recommendationPartName", recommendationPartName)));
+                recommendation["formDate"] = content.Get("part.formDate");
+                recommendation["formText"] = content.Get("part.formText");
+                recommendation["recommendationPartName"] = content.Get<string>("part.recommendationPart.name");
 
-               
-                PartVersion partVersion = lot.UpdatePart("organizationInspections/" + auditPartIndex, audit.Content.Part, userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, audit.Content.Files);
-
-                lot.Commit(userContext, lotEventDispatcher);
+                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
             }
+
+            lot.Commit(userContext, lotEventDispatcher);
 
             this.unitOfWork.Save();
 
@@ -382,16 +375,16 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{path:regex(^organizationApprovals$)}")]
-        public IHttpActionResult PostNewApproval(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewApproval(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.approval.part, userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("approval.part"), userContext);
 
             lot.CreatePart(
                 string.Format("{0}/{1}/amendments/*", path, partVersion.Part.Index),
-                content.organizationAmendment.part,
+                content.Get<JObject>("organizationAmendment.part"),
                 userContext);
 
             lot.Commit(userContext, lotEventDispatcher);
@@ -440,16 +433,16 @@ namespace Gva.Api.Controllers
         }
 
          [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, content.files);
+                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
                 lot.Commit(userContext, lotEventDispatcher);
 

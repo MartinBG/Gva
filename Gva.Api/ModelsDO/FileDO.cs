@@ -7,6 +7,10 @@ namespace Gva.Api.ModelsDO
 {
     public class FileDO
     {
+        public FileDO()
+        {
+        }
+
         public FileDO(GvaLotFile lotFile)
         {
             this.LotFileId = lotFile.GvaLotFileId;
@@ -28,6 +32,10 @@ namespace Gva.Api.ModelsDO
                 .Select(af => new ApplicationNomDO(af.GvaApplication))
                 .ToList();
         }
+
+        public bool IsAdded { get;set; }
+
+        public bool IsDeleted { get; set; }
 
         public int LotFileId { get; set; }
 

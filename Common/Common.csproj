@@ -94,6 +94,7 @@
     <Compile Include="Extensions\Helper.cs" />
     <Compile Include="Http\IMvcConfig.cs" />
     <Compile Include="Http\IWebApiConfig.cs" />
+    <Compile Include="Json\JTokenExtensions.cs" />
     <Compile Include="Linq\EnumerableExtensions.cs" />
     <Compile Include="Linq\QueryableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

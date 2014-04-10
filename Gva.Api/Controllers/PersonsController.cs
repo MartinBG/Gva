@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -84,14 +85,13 @@ namespace Gva.Api.Controllers
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.GetSet("Person").CreateLot(userContext);
 
-                dynamic personData = person.Value<JObject>("personData");
-                newLot.CreatePart("personData", personData, userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, personData.Value<JArray>("caseTypes"));
+                newLot.CreatePart("personData", person.Get<JObject>("personData"), userContext);
+                this.caseTypeRepository.AddCaseTypes(newLot, person.GetItems<JObject>("personData.caseTypes"));
 
-                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Value<JObject>("personDocumentId"), userContext);
+                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Get<JObject>("personDocumentId"), userContext);
                 this.fileRepository.AddFileReferences(documentIdPart, null);
 
-                newLot.CreatePart("personAddresses/*", person.Value<JObject>("personAddress"), userContext);
+                newLot.CreatePart("personAddresses/*", person.Get<JObject>("personAddress"), userContext);
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -251,23 +251,23 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
-        public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
 
         //[Route(@"{lotId}/{path:regex(^licences$)}")]
         [Route(@"{lotId}/{path:regex(^ratings$)}")]
-        public IHttpActionResult PostNewRating(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewRating(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.rating.part, userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("rating.part"), userContext);
 
             lot.CreatePart(
                 string.Format("{0}/{1}/editions/*", path, partVersion.Part.Index),
-                content.ratingEdition.part,
+                content.Get<JObject>("ratingEdition.part"),
                 userContext);
 
             lot.Commit(userContext, lotEventDispatcher);
@@ -290,7 +290,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult PostPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
         }
@@ -299,7 +299,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult PostPersonData(int lotId, string path, JObject content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            this.caseTypeRepository.AddCaseTypes(lot, (content as dynamic).part.caseTypes);
+            this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes"));
 
             return base.PostPart(lotId, path, content);
         }
@@ -341,16 +341,16 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, content.files);
+                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
                 lot.Commit(userContext, lotEventDispatcher);
 

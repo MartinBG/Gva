@@ -1,6 +1,7 @@
 ﻿using System;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -34,8 +35,8 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.Date = null;
             invItem.Publisher = null;
             invItem.Valid = null;
-            invItem.FromDate = partVersion.DynamicContent.inspectionFrom;
-            invItem.ToDate = partVersion.DynamicContent.inspectionTo;
+            invItem.FromDate = partVersion.Content.Get<DateTime?>("inspectionFrom");
+            invItem.ToDate = partVersion.Content.Get<DateTime?>("inspectionTo");
 
             if (partVersion.PartOperation == PartOperation.Add)
             {

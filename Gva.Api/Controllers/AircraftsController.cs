@@ -6,6 +6,7 @@ using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -78,9 +79,8 @@ namespace Gva.Api.Controllers
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.GetSet("Aircraft").CreateLot(userContext);
 
-                dynamic aircraftData = aircraft.Value<JObject>("aircraftData");
-                newLot.CreatePart("aircraftData", aircraftData, userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, aircraftData.Value<JArray>("caseTypes"));
+                newLot.CreatePart("aircraftData", aircraft.Get<JObject>("aircraftData"), userContext);
+                this.caseTypeRepository.AddCaseTypes(newLot, aircraft.GetItems<JObject>("aircraftData.caseTypes"));
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -151,16 +151,16 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, content.files);
+                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
                 lot.Commit(userContext, lotEventDispatcher);
 
@@ -296,7 +296,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios$)}")]
-        public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
@@ -320,7 +320,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}")]
-        public IHttpActionResult PostPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
         }

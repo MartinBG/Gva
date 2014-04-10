@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Docs.Api.DataObjects;
 using Docs.Api.Enums;
 using Docs.Api.Models;
@@ -237,9 +238,6 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
-                //dynamic appPart = newPart.Value<JObject>("appPart");
-                //dynamic appFile = newPart.Value<JObject>("appFile");
-
                 GvaApplication application = this.applicationRepository.Find(id.Value);
                 Lot lot = this.lotRepository.GetLotIndex(application.LotId);
 
@@ -256,17 +254,12 @@ namespace Gva.Api.Controllers
 
                 var doc = this.docRepository.Find(docId.Value);
                 var docFile = doc.CreateDocFile(
-                    (int)newPart.SelectToken("appFile.docFileKindId"),
-                    (int)newPart.SelectToken("appFile.docFileTypeId"),
-                    (string)newPart.SelectToken("appFile.name"),
-                    (string)newPart.SelectToken("appFile.file.name"),
-                    //(int)appFile.docFileKindId,
-                    //(int)appFile.docFileTypeId,
-                    //(string)appFile.name,
-                    //(string)appFile.file.name,
+                    newPart.Get<int>("appFile.docFileKindId"),
+                    newPart.Get<int>("appFile.docFileTypeId"),
+                    newPart.Get<string>("appFile.name"),
+                    newPart.Get<string>("appFile.file.name"),
                     String.Empty,
-                    (Guid)newPart.SelectToken("appFile.file.key"),
-                    //(Guid)appFile.file.key,
+                    newPart.Get<Guid>("appFile.file.key"),
                     true,
                     true,
                     userContext);
@@ -275,10 +268,10 @@ namespace Gva.Api.Controllers
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
-                    GvaCaseTypeId = (int)newPart.SelectToken("appFile.caseTypeId"),
-                    PageNumber = (int)newPart.SelectToken("appFile.pageCount")
+                    GvaCaseTypeId = newPart.Get<int>("appFile.caseTypeId"),
+                    PageNumber = newPart.Get<int>("appFile.pageCount")
                 };
-                lotFile.SavePageIndex((string)newPart.SelectToken("appFile.bookPageNumber"));
+                lotFile.SavePageIndex(newPart.Get<string>("appFile.bookPageNumber"));
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {

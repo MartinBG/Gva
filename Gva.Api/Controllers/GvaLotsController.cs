@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
@@ -11,6 +12,7 @@ using System.Data.Entity;
 using Regs.Api.Repositories.LotRepositories;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Controllers
 {
@@ -79,14 +81,14 @@ namespace Gva.Api.Controllers
             return Ok(partVersionDOs);
         }
 
-        public virtual IHttpActionResult PostNewPart(int lotId, string path, dynamic content)
+        public virtual IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
-            this.fileRepository.AddFileReferences(partVersion, content.files);
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
             lot.Commit(userContext, lotEventDispatcher);
 
@@ -95,13 +97,13 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        public virtual IHttpActionResult PostPart(int lotId, string path, dynamic content)
+        public virtual IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion partVersion = lot.UpdatePart(path, content.part, userContext);
+            PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
 
-            this.fileRepository.AddFileReferences(partVersion, content.files);
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
             lot.Commit(userContext, lotEventDispatcher);
 

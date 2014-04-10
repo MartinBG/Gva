@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -13,7 +14,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
                 setPartAlias: "personRating",
-                partMatcher: pv => pv.DynamicContent.ratingType != null,
+                partMatcher: pv => pv.Content.Get<string>("ratingType") != null,
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
@@ -23,7 +24,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
         {
             rating.Lot = part.Part.Lot;
             rating.Part = part.Part;
-            rating.RatingType = part.DynamicContent.ratingType.name;
+            rating.RatingType = part.Content.Get<string>("ratingType.name");
         }
 
         public override void Clear(GvaViewPersonRating rating)

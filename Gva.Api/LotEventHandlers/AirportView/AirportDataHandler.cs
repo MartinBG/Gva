@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -22,15 +23,15 @@ namespace Gva.Api.LotEventHandlers.AirportView
         {
             airport.Lot = part.Part.Lot;
 
-            airport.Name = part.DynamicContent.name;
-            airport.NameAlt = part.DynamicContent.nameAlt;
-            airport.Place = part.DynamicContent.place;
-            airport.AirportType = part.DynamicContent.airportType.name;
-            airport.ICAO = part.DynamicContent.icao;
-            airport.Runway = part.DynamicContent.runway;
-            airport.Course = part.DynamicContent.course;
-            airport.Excess = part.DynamicContent.excess;
-            airport.Concrete = part.DynamicContent.concrete;
+            airport.Name = part.Content.Get<string>("name");
+            airport.NameAlt = part.Content.Get<string>("nameAlt");
+            airport.Place = part.Content.Get<string>("place");
+            airport.AirportType = part.Content.Get<string>("airportType.name");
+            airport.ICAO = part.Content.Get<string>("icao");
+            airport.Runway = part.Content.Get<string>("runway");
+            airport.Course = part.Content.Get<string>("course");
+            airport.Excess = part.Content.Get<string>("excess");
+            airport.Concrete = part.Content.Get<string>("concrete");
         }
 
         public override void Clear(GvaViewAirport airport)

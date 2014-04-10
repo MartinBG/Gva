@@ -2,7 +2,9 @@
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
+using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.CaseTypeRepository
@@ -16,7 +18,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddCaseTypes(Lot lot, dynamic caseTypes)
+        public void AddCaseTypes(Lot lot, IEnumerable<JObject> caseTypes)
         {
             var lotCases = this.unitOfWork.DbContext.Set<GvaLotCase>()
                 .Where(lc => lc.LotId == lot.LotId)
@@ -32,7 +34,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
                 GvaLotCase lotCase = new GvaLotCase
                 {
                     Lot = lot,
-                    GvaCaseTypeId = caseType.nomValueId
+                    GvaCaseTypeId = caseType.Get<int>("nomValueId")
                 };
 
                 this.unitOfWork.DbContext.Set<GvaLotCase>().Add(lotCase);

@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using System;
+using Common.Json;
+
 namespace Gva.Api.ModelsDO
 {
     public class ApprovalPartVersionDO
@@ -11,7 +13,7 @@ namespace Gva.Api.ModelsDO
             this.Approval = partVersion.Content;
             this.Amendment = new PartVersionDO(partVersion, null);
 
-            this.DocumentFirstDateIssue = Convert.ToDateTime(JObject.Parse(firstAmendment.Content.ToString()).SelectToken("documentDateIssue"));
+            this.DocumentFirstDateIssue = firstAmendment.Content.Get<DateTime>("documentDateIssue");
         }
 
         public int PartIndex { get; set; }

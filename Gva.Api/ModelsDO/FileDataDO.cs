@@ -5,6 +5,10 @@ namespace Gva.Api.ModelsDO
 {
     public class FileDataDO
     {
+        public FileDataDO()
+        {
+        }
+
         public FileDataDO(GvaLotFile lotFile)
         {
             if (lotFile.DocFileId.HasValue)

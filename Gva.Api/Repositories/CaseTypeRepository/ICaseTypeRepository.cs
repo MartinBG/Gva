@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
+using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.CaseTypeRepository
 {
     public interface ICaseTypeRepository
     {
-        void AddCaseTypes(Lot lot, dynamic caseTypes);
+        void AddCaseTypes(Lot lot, IEnumerable<JObject> caseTypes);
 
         GvaCaseType GetCaseType(int caseTypeId);
 

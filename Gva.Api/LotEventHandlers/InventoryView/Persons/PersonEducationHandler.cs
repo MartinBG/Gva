@@ -1,8 +1,8 @@
 ﻿using System;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
-using Regs.Api.Extensions;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -30,10 +30,10 @@ namespace Gva.Api.LotEventHandlers.InventoryView
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
 
             invItem.Name = partVersion.Part.SetPart.Name;
-            invItem.Type = partVersion.GetString("graduation.name");
-            invItem.Number = partVersion.GetString("documentNumber");
-            invItem.Date = partVersion.GetDate("completionDate");
-            invItem.Publisher = partVersion.GetString("school.name");
+            invItem.Type = partVersion.Content.Get<string>("graduation.name");
+            invItem.Number = partVersion.Content.Get<string>("documentNumber");
+            invItem.Date = partVersion.Content.Get<DateTime?>("completionDate");
+            invItem.Publisher = partVersion.Content.Get<string>("school.name");
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
