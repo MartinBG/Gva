@@ -1,41 +1,40 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong l10n-text="airports.airportScannedDocumentDirective.title"></strong>
-      <button class="btn btn-sm btn-default pull-right" ng-click="addFile()" ng-disabled="readonly">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-    </div>
-    <div class="well-sm panel-body" ng-show="model.length">
-      <div ng-repeat="file in model | filter:showFile()">
-        <ng-form name="innerForm" sc-validate="{}">
-          <div class="row">
-            <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
-              <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.bookPageNumber"></label>
-              <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
-              <sc-text ng-model="file.bookPageNumber" name="bookPageNumber" ng-required="true" ng-readonly="readonly"></sc-text>
-            </div>
-            <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
-              <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.pageCount"></label>
-              <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
-              <sc-int ng-model="file.pageCount" name="pageCount" min="0" ng-readonly="readonly"></sc-int>
-            </div>
-            <div class="form-group col-sm-3" sc-has-error="file">
-              <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.fileName"></label>
-              <sc-validation-error field-name="file" validations="{required: null}"></sc-validation-error>
-              <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-required="true"></sc-files>
-            </div>
-            <button type="button" ng-hide="file.isDocFile" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)" ng-readonly="readonly">&times;</button>
-          </div>
-          <div class="row" ng-hide="hideApplications">
-            <div class="form-group col-sm-10 col-md-7">
-              <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.applications"></label>
-              <sc-select ng-model="file.applications" sc-select="appSelectOpt" ng-readonly="readonly"></sc-select>
-            </div>
-          </div>
-          <hr ng-hide="$last" />
-        </ng-form>
+  <h5 class="form-header" l10n-text="airports.airportScannedDocumentDirective.title" style="margin-top:10px;"></h5>
+  <button class="btn btn-xs btn-default pull-right" ng-click="addFile()" style="position:relative; top:-25px" ng-disabled="readonly">
+    <span class="glyphicon glyphicon-plus"></span>
+  </button>
+  <div ng-repeat="file in model | filter:showFile()">
+    <ng-form name="innerForm" sc-validate="{}">
+      <div class="row">
+        <div class="form-group col-sm-2" sc-has-error="caseType">
+          <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.caseType"></label>
+          <sc-validation-error field-name="caseType" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="file.caseType" name="caseType" alias="'airportCaseTypes'" params="{lotId: lotId}" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="bookPageNumber">
+          <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.bookPageNumber"></label>
+          <sc-validation-error field-name="bookPageNumber" validations="{required: null}"></sc-validation-error>
+          <sc-text ng-model="file.bookPageNumber" name="bookPageNumber" ng-required="true" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-sm-3 col-md-2" sc-has-error="pageCount">
+          <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.pageCount"></label>
+          <sc-validation-error field-name="pageCount" validations="{min: null}"></sc-validation-error>
+          <sc-int ng-model="file.pageCount" name="pageCount" min="0" ng-readonly="readonly"></sc-int>
+        </div>
+        <div class="form-group col-sm-3" sc-has-error="file">
+          <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.fileName"></label>
+          <sc-validation-error field-name="file" validations="{required: null}"></sc-validation-error>
+          <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-required="true" ng-readonly="readonly"></sc-files>
+        </div>
+        <button type="button" ng-hide="file.isDocFile || readonly" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)">&times;</button>
       </div>
-    </div>
+      <div class="row" ng-hide="hideApplications">
+        <div class="form-group col-sm-10 col-md-7">
+          <label class="control-label" l10n-text="airports.airportScannedDocumentDirective.applications"></label>
+          <sc-select ng-model="file.applications" sc-select="appSelectOpt" ng-readonly="readonly"></sc-select>
+        </div>
+      </div>
+      <hr ng-hide="$last" />
+    </ng-form>
   </div>
 </ng-form>

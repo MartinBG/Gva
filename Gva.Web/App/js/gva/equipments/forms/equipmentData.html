@@ -40,4 +40,49 @@
       <sc-date ng-model="model.operationalDate" name="operationalDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-md-8 col-sm-12">
+      <label class="control-label" l10n-text="equipments.equipmentDataDirective.note"></label>
+      <sc-textarea ng-model="model.note" name="note" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+  <accordion>
+    <accordion-group style="margin-top: 5px;">
+      <accordion-heading>
+        <a l10n-text="equipments.equipmentDataDirective.otherData" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.coordinates"></label>
+          <sc-text ng-model="model.ext.coordinates" name="coordinates" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.elevation"></label>
+          <sc-text ng-model="model.ext.elevation" name="elevation" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.call"></label>
+          <sc-text ng-model="model.ext.call" name="call" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.frequencies"></label>
+          <sc-text ng-model="model.ext.frequencies" name="frequencies" ng-readonly="readonly"></sc-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.behavior"></label>
+          <sc-text ng-model="model.ext.behavior" name="behavior" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.power"></label>
+          <sc-text ng-model="model.ext.power" name="power" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="equipments.equipmentDataDirective.range"></label>
+          <sc-text ng-model="model.ext.range" name="range" ng-readonly="readonly"></sc-text>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
 </ng-form>
