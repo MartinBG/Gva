@@ -1,5 +1,6 @@
 ﻿<div class="well well-sm">
   <div class="row card">
+
     <div ng-if="application.lotSetAlias == 'Person'">
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
@@ -27,19 +28,19 @@
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.organizationName"></span>
-          <input name="names" type="text" class="form-control" value="{{application.organization.name}}" disabled />
+          <input name="name" type="text" class="form-control" value="{{application.organization.name}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.organizationUIN"></span>
-          <input name="lin" type="text" class="form-control" value="{{application.organization.uin}}" disabled />
+          <input name="uin" type="text" class="form-control" value="{{application.organization.uin}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.organizationCAO"></span>
-          <input name="lin" type="text" class="form-control" value="{{application.organization.cao}}" disabled />
+          <input name="cao" type="text" class="form-control" value="{{application.organization.cao}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">
@@ -50,25 +51,66 @@
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.aircraftProducer"></span>
-          <input name="names" type="text" class="form-control" value="{{application.aircraft.aircraftProducer}}" disabled />
+          <input name="aircraftProducer" type="text" class="form-control" value="{{application.aircraft.aircraftProducer}}" disabled />
         </div>
       </div>
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.aircraftCategory"></span>
-          <input name="lin" type="text" class="form-control" value="{{application.aircraft.aircraftCategory}}" disabled />
+          <input name="aircraftCategory" type="text" class="form-control" value="{{application.aircraft.aircraftCategory}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.aircraftICAO"></span>
-          <input name="lin" type="text" class="form-control" value="{{application.aircraft.icao}}" disabled />
+          <input name="icao" type="text" class="form-control" value="{{application.aircraft.icao}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">
         <sc-button name="editBtn" btn-click="viewAircraft(application.lotId)" text="applications.edit.viewAircraft" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
+    <div ng-if="application.lotSetAlias == 'Airport'">
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="applications.edit.airportName"></span>
+          <input name="names" type="text" class="form-control" value="{{application.airport.name}}" disabled />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="applications.edit.airportType"></span>
+          <input name="airportType" type="text" class="form-control" value="{{application.airport.airportType}}" disabled />
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <sc-button name="editBtn" btn-click="viewAirport(application.lotId)" text="applications.edit.viewAirport" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
+      </div>
+    </div>
+    <div ng-if="application.lotSetAlias == 'Equipment'">
+      <div class="col-sm-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="applications.edit.equipmentName"></span>
+          <input name="name" type="text" class="form-control" value="{{application.equipment.name}}" disabled />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="applications.edit.equipmentType"></span>
+          <input name="equipmentType" type="text" class="form-control" value="{{application.equipment.equipmentType}}" disabled />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon" l10n-text="applications.edit.equipmentProducer"></span>
+          <input name="equipmentProducer" type="text" class="form-control" value="{{application.equipment.equipmentProducer}}" disabled />
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <sc-button name="editBtn" btn-click="viewEquipment(application.lotId)" text="applications.edit.viewEquipment" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
+      </div>
+    </div>
+
   </div>
 </div>
 

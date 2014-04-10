@@ -1,0 +1,19 @@
+﻿<ng-form name="newEquipmentForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="applications.equipmentNew.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="applications.equipmentNew.saveAndSelect"
+          class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.equipmentNew.cancel"
+          class="btn btn-default btn-sm" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-equipment-data name="equipmentDataForm" ng-model="equipment.equipmentData"></gva-equipment-data>
+    </div>
+  </div>
+</ng-form>

@@ -39,6 +39,8 @@ namespace Gva.Api.ModelsDO
         public PersonDO Person { get; set; }
         public OrganizationDO Organization { get; set; }
         public AircraftDO Aircraft { get; set; }
+        public AirportDO Airport { get; set; }
+        public EquipmentDO Equipment { get; set; }
 
         public List<ApplicationDocRelationDO> AppDocCase { get; set; }
 

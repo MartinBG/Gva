@@ -90,7 +90,9 @@
 
         if (($stateParams.setPartAlias === 'personApplication' ||
           $stateParams.setPartAlias === 'organizationApplication' ||
-          $stateParams.setPartAlias === 'aircraftApplication') &&
+          $stateParams.setPartAlias === 'aircraftApplication' ||
+          $stateParams.setPartAlias === 'airportApplication' ||
+          $stateParams.setPartAlias === 'equipmentApplication') &&
           !!$stateParams.docId
           ) {
           doc = Application.getDoc({ docId: $stateParams.docId });
@@ -111,7 +113,9 @@
 
           if ($stateParams.setPartAlias === 'personApplication' ||
             $stateParams.setPartAlias === 'organizationApplication' ||
-            $stateParams.setPartAlias === 'aircraftApplication') {
+            $stateParams.setPartAlias === 'aircraftApplication' ||
+            $stateParams.setPartAlias === 'airportApplication' ||
+            $stateParams.setPartAlias === 'equipmentApplication') {
             part.documentNumber = res.doc.documentNumber;
             //todo applicationType = docType?
           }

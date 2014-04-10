@@ -120,6 +120,30 @@
       else if (value.setPartAlias === 'aircraftOther') {
         state = 'root.aircrafts.view.others.edit';
       }
+      else if (value.setPartAlias === 'airportOwner') {
+        state = 'root.airports.view.owners.edit';
+      }
+      else if (value.setPartAlias === 'airportOther') {
+        state = 'root.airports.view.others.edit';
+      }
+      else if (value.setPartAlias === 'airportApplication') {
+        state = 'root.airports.view.applications.edit';
+      }
+      else if (value.setPartAlias === 'airportInspection') {
+        state = 'root.airports.view.inspections.edit';
+      }
+      else if (value.setPartAlias === 'equipmentOwner') {
+        state = 'root.equipments.view.owners.edit';
+      }
+      else if (value.setPartAlias === 'equipmentOther') {
+        state = 'root.equipments.view.others.edit';
+      }
+      else if (value.setPartAlias === 'equipmentApplication') {
+        state = 'root.equipments.view.applications.edit';
+      }
+      else if (value.setPartAlias === 'equipmentInspection') {
+        state = 'root.equipments.view.inspections.edit';
+      }
 
       return $state.go(state, {
         id: $scope.application.lotId,

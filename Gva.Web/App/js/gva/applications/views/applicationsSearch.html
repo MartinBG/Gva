@@ -3,14 +3,18 @@
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="applications.search.toDate"></sc-filter>
   <sc-filter type="text" name="lin" class="col-sm-2" removable="true" label="applications.search.lin"></sc-filter>
   <sc-search-button action="search()" name="searchBtn" class="btn btn-primary btn-sm" text="applications.search.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="newApp()" name="newAppBtn" text="applications.search.newApp" icon="glyphicon glyphicon-plus"></sc-search-button>
+  <sc-search-button action="linkApp()" name="linkAppBtn" text="applications.search.linkApp" icon="glyphicon glyphicon-link"></sc-search-button>
   <sc-search-button action="add"></sc-search-button>
-<!--  <sc-search-button action="newApp()" name="newAppBtn" text="applications.search.newApp"></sc-search-button>
-  <sc-search-button action="linkApp()" name="linkAppBtn" text="applications.search.linkApp"></sc-search-button>-->
 </sc-search>
 
 <sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="lotSetName" title="applications.search.lotSetName">
+  </sc-column>
+  <sc-column data="description" title="applications.search.description">
   </sc-column>
   <sc-column data="appPartRequestDate" width="100" type="date" title="applications.search.requestDate">
   </sc-column>
@@ -19,7 +23,5 @@
   <sc-column data="appPartApplicationTypeName" width="350" title="applications.search.applicationType">
   </sc-column>
   <sc-column data="appPartStatusName" title="applications.search.status">
-  </sc-column>
-  <sc-column data="description" title="applications.search.description">
   </sc-column>
 </sc-datatable>

@@ -8,6 +8,7 @@ namespace Gva.Api.ModelsDO
         public int ApplicationId { get; set; }
         public int? DocId { get; set; }
 
+        public string LotSetName { get; set; }
         public int? AppPartId { get; set; }
         public int? AppPartIndex { get; set; }
         public DateTime? AppPartRequestDate { get; set; }
@@ -28,6 +29,15 @@ namespace Gva.Api.ModelsDO
         public string GvaAircraftProducer { get; set; }
         public string GvaAircraftICAO { get; set; }
 
+        public int? GvaAirportId { get; set; }
+        public string GvaAirportType { get; set; }
+        public string GvaAirportName { get; set; }
+
+        public int? GvaEquipmentId { get; set; }
+        public string GvaEquipmentName { get; set; }
+        public string GvaEquipmentType { get; set; }
+        public string GvaEquipmentProducer { get; set; }
+
         public string Description
         {
             get
@@ -43,6 +53,14 @@ namespace Gva.Api.ModelsDO
                 else if (this.GvaAircraftId.HasValue)
                 {
                     return string.Format("{0} - {1} - {2}", this.GvaAircraftProducer, this.GvaAircraftCategory, this.GvaAircraftICAO);
+                }
+                else if (this.GvaAirportId.HasValue)
+                {
+                    return string.Format("{0} - {1}", this.GvaAirportType, this.GvaAirportName);
+                }
+                else if (this.GvaEquipmentId.HasValue)
+                {
+                    return string.Format("{0} - {1} - {2}", this.GvaEquipmentName, this.GvaEquipmentType, this.GvaEquipmentProducer);
                 }
 
                 return "";

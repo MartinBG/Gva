@@ -9,12 +9,14 @@ using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
+using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
+using System;
 
 namespace Gva.Api.Controllers
 {
@@ -26,6 +28,7 @@ namespace Gva.Api.Controllers
         private IPersonRepository personRepository;
         private IAircraftRepository aircraftRepository;
         private IAirportRepository airportRepository;
+        private IEquipmentRepository equipmentRepository;
         private IOrganizationRepository organizationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
@@ -36,6 +39,7 @@ namespace Gva.Api.Controllers
             IPersonRepository personRepository,
             IAircraftRepository aircraftRepository,
             IAirportRepository airportRepository,
+            IEquipmentRepository equipmentRepository,
             IOrganizationRepository organizationRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
@@ -45,6 +49,7 @@ namespace Gva.Api.Controllers
             this.personRepository = personRepository;
             this.aircraftRepository = aircraftRepository;
             this.airportRepository = airportRepository;
+            this.equipmentRepository = equipmentRepository;
             this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
@@ -159,11 +164,47 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
+        [Route("airports/{id:int}")]
+        public IHttpActionResult GetAirport(int id)
+        {
+            var airport = this.airportRepository.GetAirport(id);
+            return Ok(new
+            {
+                nomValueId = airport.LotId,
+                name = airport.Name
+            });
+        }
+
         [Route("airports")]
         public IHttpActionResult GetAirports(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
                 this.airportRepository.GetAirports(name: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Name
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("equipments/{id:int}")]
+        public IHttpActionResult GetEquipment(int id)
+        {
+            var equipment = this.equipmentRepository.GetEquipment(id);
+            return Ok(new
+            {
+                nomValueId = equipment.LotId,
+                name = equipment.Name
+            });
+        }
+
+        [Route("equipments")]
+        public IHttpActionResult GetEquipments(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.equipmentRepository.GetEquipments(name: term, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,

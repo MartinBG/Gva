@@ -23,6 +23,14 @@
     AircraftDocumentDebtFM,
     AircraftDocumentOwner,
     AircraftDocumentApplication,
+    AirportDocumentOwner,
+    AirportDocumentOther,
+    AirportInspection,
+    AirportDocumentApplication,
+    EquipmentDocumentOwner,
+    EquipmentDocumentOther,
+    EquipmentInspection,
+    EquipmentDocumentApplication,
     application
     ) {
     $scope.application = application;
@@ -40,13 +48,20 @@
       $scope.showPDocumentApplication = false;
       $scope.showODocumentOther = false;
       $scope.showODocumentApplication = false;
-
       $scope.showADocumentOther = false;
       $scope.showADocumentOccurrence = false;
       $scope.showAInspection = false;
       $scope.showADocumentDebtFM = false;
       $scope.showADocumentOwner = false;
       $scope.showADocumentApplication = false;
+      $scope.showAPDocumentOwner = false;
+      $scope.showAPDocumentOther = false;
+      $scope.showAPInspection = false;
+      $scope.showAPDocumentApplication = false;
+      $scope.showEDocumentOwner = false;
+      $scope.showEDocumentOther = false;
+      $scope.showEInspection = false;
+      $scope.showEDocumentApplication = false;
 
       if ($scope.docPartType) {
         if ($scope.docPartType.alias === 'personDocumentId') {
@@ -176,6 +191,64 @@
               $scope.showADocumentOther = !!aircraftDocumentOthers;
             });
         }
+
+        else if ($scope.docPartType.alias === 'airportApplication') {
+          return AirportDocumentApplication.query({ id: $scope.application.lotId })
+            .$promise.then(function (airportDocumentApplications) {
+              $scope.documentPart = airportDocumentApplications;
+              $scope.showAPDocumentApplication = !!airportDocumentApplications;
+            });
+        }
+        else if ($scope.docPartType.alias === 'airportOwner') {
+          return AirportDocumentOwner.query({ id: $scope.application.lotId })
+            .$promise.then(function (airportDocumentOwners) {
+              $scope.documentPart = airportDocumentOwners;
+              $scope.showAPDocumentOwner = !!airportDocumentOwners;
+            });
+        }
+        else if ($scope.docPartType.alias === 'airportOther') {
+          return AirportDocumentOther.query({ id: $scope.application.lotId })
+            .$promise.then(function (airportDocumentOthers) {
+              $scope.documentPart = airportDocumentOthers;
+              $scope.showAPDocumentOther = !!airportDocumentOthers;
+            });
+        }
+        else if ($scope.docPartType.alias === 'airportInspection') {
+          return AirportInspection.query({ id: $scope.application.lotId })
+            .$promise.then(function (airportInspections) {
+              $scope.documentPart = airportInspections;
+              $scope.showAPInspection = !!airportInspections;
+            });
+        }
+
+        else if ($scope.docPartType.alias === 'equipmentOwner') {
+          return EquipmentDocumentOwner.query({ id: $scope.application.lotId })
+            .$promise.then(function (equipmentDocumentOwners) {
+              $scope.documentPart = equipmentDocumentOwners;
+              $scope.showEDocumentOwner = !!equipmentDocumentOwners;
+            });
+        }
+        else if ($scope.docPartType.alias === 'equipmentOther') {
+          return EquipmentDocumentOther.query({ id: $scope.application.lotId })
+            .$promise.then(function (equipmentDocumentOthers) {
+              $scope.documentPart = equipmentDocumentOthers;
+              $scope.showEDocumentOther = !!equipmentDocumentOthers;
+            });
+        }
+        else if ($scope.docPartType.alias === 'equipmentInspection') {
+          return EquipmentInspection.query({ id: $scope.application.lotId })
+            .$promise.then(function (equipmentInspections) {
+              $scope.documentPart = equipmentInspections;
+              $scope.showEInspection = !!equipmentInspections;
+            });
+        }
+        else if ($scope.docPartType.alias === 'equipmentApplication') {
+          return EquipmentDocumentApplication.query({ id: $scope.application.lotId })
+            .$promise.then(function (equipmentDocumentApplications) {
+              $scope.documentPart = equipmentDocumentApplications;
+              $scope.showEDocumentApplication = !!equipmentDocumentApplications;
+            });
+        }
       }
     };
 
@@ -221,6 +294,14 @@
     'AircraftDocumentDebtFM',
     'AircraftDocumentOwner',
     'AircraftDocumentApplication',
+    'AirportDocumentOwner',
+    'AirportDocumentOther',
+    'AirportInspection',
+    'AirportDocumentApplication',
+    'EquipmentDocumentOwner',
+    'EquipmentDocumentOther',
+    'EquipmentInspection',
+    'EquipmentDocumentApplication',
     'application'
   ];
 

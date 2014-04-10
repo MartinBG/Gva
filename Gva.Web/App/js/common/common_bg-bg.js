@@ -51,7 +51,17 @@
           },
           airports: {
             title: 'Летища',
-            search: 'Търсене'
+            search: 'Търсене',
+            appsSearch: 'Заявления',
+            appsNew: 'Ново заявление',
+            appsLink: 'Свържи заявление'
+          },
+          equipments: {
+            title: 'СВНК',
+            search: 'Търсене',
+            appsSearch: 'Заявления',
+            appsNew: 'Ново заявление',
+            appsLink: 'Свържи заявление'
           },
           admin: {
             title: 'Админ',

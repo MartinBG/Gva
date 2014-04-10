@@ -1,0 +1,26 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.equipmentSelect.name"></sc-filter>
+  <sc-search-button action="search()" text="applications.equipmentSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="applications.equipmentSelect.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
+</sc-search>
+
+<sc-datatable items="equipments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+   <sc-button btn-click="selectEquipment(item)" text="applications.equipmentSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column>
+  <sc-column data="equipmentType" title="applications.equipmentSelect.equipmentType">
+  </sc-column>
+  <sc-column data="name" title="applications.equipmentSelect.name">
+  </sc-column>
+  <sc-column data="equipmentProducer" title="applications.equipmentSelect.equipmentProducer">
+  </sc-column>
+  <sc-column data="manPlace" title="applications.equipmentSelect.manPlace">
+  </sc-column>
+  <sc-column data="manDate" title="applications.equipmentSelect.manDate" type="date">
+  </sc-column>
+  <sc-column data="place" title="applications.equipmentSelect.place">
+  </sc-column>
+  <sc-column data="operationalDate" title="applications.equipmentSelect.operationalDate" type="date">
+  </sc-column>
+</sc-datatable>

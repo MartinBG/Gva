@@ -19,15 +19,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="place">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="manPlace">
       <label class="control-label" l10n-text="equipments.equipmentDataDirective.manPlace"></label>
       <sc-validation-error field-name="manPlace" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.manPlace" name="manPlace" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.manPlace" name="manPlace" ng-readonly="readonly" ng-required="true"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="manDate">
       <label class="control-label" l10n-text="equipments.equipmentDataDirective.manDate"></label>
       <sc-validation-error field-name="manDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.manDate" name="manDate" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.manDate" name="manDate" ng-readonly="readonly" ng-required="true"></sc-date>
     </div>
   </div>
   <div class="row">

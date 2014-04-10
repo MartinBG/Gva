@@ -12,6 +12,7 @@
     $scope.applications = applications;
 
     $scope.filters = {
+      filter: null,
       fromDate: null,
       toDate: null,
       regUri: null,
@@ -26,6 +27,7 @@
 
     $scope.search = function () {
       return $state.go('root.applications.search', {
+        filter: $scope.filters.filter,
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         lin: $scope.filters.lin
@@ -37,11 +39,11 @@
     };
 
     $scope.newApp = function () {
-      return $state.go('root.applications.new');
+      return $state.go('root.applications.new', $stateParams);
     };
 
     $scope.linkApp = function () {
-      return $state.go('root.applications.link');
+      return $state.go('root.applications.link', $stateParams);
     };
   }
 

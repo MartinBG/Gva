@@ -1,0 +1,15 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-sm-10" sc-has-error="airportLotId">
+      <label class="control-label" l10n-text="applications.airportSelect.airport"></label>
+      <sc-validation-error field-name="airportLotId" validations="{required: null}"></sc-validation-error>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.airport.id" alias="'airports'" mode="id" name="airportLotId" required style="float: left;"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectAirport')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+          <sc-button btn-click="$raise('scOnNewAirport')" class="btn btn-default" text="applications.airportSelect.newAirport"></sc-button>
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -63,8 +63,34 @@
           <gva-aircraft-document-other name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-other>
         </div>
 
+        <!--Airport-->
+        <div ng-if="applicationPart.setPartAlias === 'airportOwner'">
+          <gva-airport-document-owner name="addForm" ng-model="applicationPart.part"></gva-airport-document-owner>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'airportOther'">
+          <gva-airport-document-other name="addForm" ng-model="applicationPart.part"></gva-airport-document-other>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'airportInspection'">
+          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
+        </div>
+
+        <!--Equipment-->
+        <div ng-if="applicationPart.setPartAlias === 'equipmentOwner'">
+          <gva-equipment-document-owner name="addForm" ng-model="applicationPart.part"></gva-equipment-document-owner>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'equipmentOther'">
+          <gva-equipment-document-other name="addForm" ng-model="applicationPart.part"></gva-equipment-document-other>
+        </div>
+        <div ng-if="applicationPart.setPartAlias === 'equipmentInspection'">
+          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
+        </div>
+
         <!--Applications-->
-        <div ng-if="applicationPart.setPartAlias === 'personApplication' || applicationPart.setPartAlias === 'organizationApplication' || applicationPart.setPartAlias === 'aircraftApplication'">
+        <div ng-if="applicationPart.setPartAlias === 'personApplication' || 
+                    applicationPart.setPartAlias === 'organizationApplication' || 
+                    applicationPart.setPartAlias === 'aircraftApplication' ||
+                    applicationPart.setPartAlias === 'airportApplication' ||
+                    applicationPart.setPartAlias === 'equipmentApplication'">
           <gva-common-document-application name="addForm" ng-model="applicationPart.part"></gva-common-document-application>
         </div>
 

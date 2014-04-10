@@ -22,6 +22,14 @@
     $scope.viewAircraft = function (id) {
       return $state.go('root.aircrafts.view', { id: id });
     };
+
+    $scope.viewAirport = function (id) {
+      return $state.go('root.airports.view', { id: id });
+    };
+
+    $scope.viewEquipment = function (id) {
+      return $state.go('root.equipments.view', { id: id });
+    };
   }
 
   ApplicationsEditCtrl.$inject = [

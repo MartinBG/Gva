@@ -11,9 +11,10 @@
     appModel,
     selectedPerson,
     selectedOrganization,
-    selectedAircraft
+    selectedAircraft,
+    selectedAirport,
+    selectedEquipment
     ) {
-
     if (selectedPerson.length > 0) {
       appModel.person = {
         id: selectedPerson.pop()
@@ -27,6 +28,16 @@
     if (selectedAircraft.length > 0) {
       appModel.aircraft = {
         id: selectedAircraft.pop()
+      };
+    }
+    if (selectedAirport.length > 0) {
+      appModel.airport = {
+        id: selectedAirport.pop()
+      };
+    }
+    if (selectedEquipment.length > 0) {
+      appModel.equipment = {
+        id: selectedEquipment.pop()
       };
     }
 
@@ -53,6 +64,20 @@
     };
     $scope.selectAircraft = function () {
       return $state.go('root.applications.new.aircraftSelect');
+    };
+
+    $scope.newAirport = function () {
+      return $state.go('root.applications.new.airportNew');
+    };
+    $scope.selectAirport = function () {
+      return $state.go('root.applications.new.airportSelect');
+    };
+
+    $scope.newEquipment = function () {
+      return $state.go('root.applications.new.equipmentNew');
+    };
+    $scope.selectEquipment = function () {
+      return $state.go('root.applications.new.equipmentSelect');
     };
 
     $scope.cancel = function () {
@@ -93,6 +118,14 @@
             newApplication.lotId = $scope.appModel.aircraft.id;
             $scope.setPartAlias = 'aircraftApplication';
           }
+          else if ($scope.filter === 'Airport') {
+            newApplication.lotId = $scope.appModel.airport.id;
+            $scope.setPartAlias = 'airportApplication';
+          }
+          else if ($scope.filter === 'Equipment') {
+            newApplication.lotId = $scope.appModel.equipment.id;
+            $scope.setPartAlias = 'equipmentApplication';
+          }
 
           return Application.create(newApplication).$promise.then(function (app) {
             return $state.go('root.applications.edit.case.addPart', {
@@ -115,7 +148,9 @@
     'appModel',
     'selectedPerson',
     'selectedOrganization',
-    'selectedAircraft'
+    'selectedAircraft',
+    'selectedAirport',
+    'selectedEquipment'
   ];
 
   ApplicationsNewCtrl.$resolve = {
@@ -152,6 +187,12 @@
       return [];
     },
     selectedAircraft: function () {
+      return [];
+    },
+    selectedAirport: function () {
+      return [];
+    },
+    selectedEquipment: function () {
       return [];
     }
   };

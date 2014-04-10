@@ -1,0 +1,15 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-sm-10" sc-has-error="equipmentLotId">
+      <label class="control-label" l10n-text="applications.equipmentSelect.equipment"></label>
+      <sc-validation-error field-name="equipmentLotId" validations="{required: null}"></sc-validation-error>
+      <div class="input-group input-group-sm">
+        <sc-nomenclature ng-model="model.equipment.id" alias="'equipments'" mode="id" name="equipmentLotId" required style="float: left;"></sc-nomenclature>
+        <span class="input-group-btn">
+          <sc-button btn-click="$raise('scOnSelectEquipment')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+          <sc-button btn-click="$raise('scOnNewEquipment')" class="btn btn-default" text="applications.equipmentSelect.newEquipment"></sc-button>
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -76,9 +76,8 @@ namespace Gva.Api.Controllers
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.GetSet("Equipment").CreateLot(userContext);
 
-                dynamic equipmentData = equipment.Value<JObject>("equipmentData");
-                newLot.CreatePart("equipmentData", equipmentData, userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, equipmentData.Value<JArray>("caseTypes"));
+                newLot.CreatePart("equipmentData", equipment.Get<JObject>("equipmentData"), userContext);
+                this.caseTypeRepository.AddCaseTypes(newLot, equipment.GetItems<JObject>("equipmentData.caseTypes"));
 
                 newLot.Commit(userContext, lotEventDispatcher);
 

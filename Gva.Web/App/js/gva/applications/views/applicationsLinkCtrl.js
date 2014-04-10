@@ -12,6 +12,8 @@
     selectedPerson,
     selectedOrganization,
     selectedAircraft,
+    selectedAirport,
+    selectedEquipment,
     selectedDoc
     ) {
     if (selectedPerson.length > 0) {
@@ -27,6 +29,16 @@
     if (selectedAircraft.length > 0) {
       appModel.aircraft = {
         id: selectedAircraft.pop()
+      };
+    }
+    if (selectedAirport.length > 0) {
+      appModel.airport = {
+        id: selectedAirport.pop()
+      };
+    }
+    if (selectedEquipment.length > 0) {
+      appModel.equipment = {
+        id: selectedEquipment.pop()
       };
     }
 
@@ -57,6 +69,20 @@
     };
     $scope.selectAircraft = function () {
       return $state.go('root.applications.link.aircraftSelect');
+    };
+
+    $scope.newAirport = function () {
+      return $state.go('root.applications.link.airportNew');
+    };
+    $scope.selectAirport = function () {
+      return $state.go('root.applications.link.airportSelect');
+    };
+
+    $scope.newEquipment = function () {
+      return $state.go('root.applications.link.equipmentNew');
+    };
+    $scope.selectEquipment = function () {
+      return $state.go('root.applications.link.equipmentSelect');
     };
 
     $scope.selectDoc = function () {
@@ -93,6 +119,14 @@
             newApplication.lotId = $scope.appModel.aircraft.id;
             $scope.setPartAlias = 'aircraftApplication';
           }
+          else if ($scope.filter === 'Airport') {
+            newApplication.lotId = $scope.appModel.airport.id;
+            $scope.setPartAlias = 'airportApplication';
+          }
+          else if ($scope.filter === 'Equipment') {
+            newApplication.lotId = $scope.appModel.equipment.id;
+            $scope.setPartAlias = 'equipmentApplication';
+          }
 
           return Application.link(newApplication).$promise.then(function (app) {
             return $state.go('root.applications.edit.case.addPart', {
@@ -116,6 +150,8 @@
     'selectedPerson',
     'selectedOrganization',
     'selectedAircraft',
+    'selectedAirport',
+    'selectedEquipment',
     'selectedDoc'
   ];
 
@@ -130,6 +166,12 @@
       return [];
     },
     selectedPerson: function () {
+      return [];
+    },
+    selectedAirport: function () {
+      return [];
+    },
+    selectedEquipment: function () {
       return [];
     },
     selectedDoc: function () {

@@ -29,6 +29,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             var applicationsJoin =
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
+                join lot in this.unitOfWork.DbContext.Set<Lot>() on a.LotId equals lot.LotId
+                join set in this.unitOfWork.DbContext.Set<Set>() on lot.SetId equals set.SetId
                 join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId into part1
                 from part2 in part1.DefaultIfEmpty()
                 join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId into va1
@@ -39,24 +41,34 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from o2 in o1.DefaultIfEmpty()
                 join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>() on va2.LotId equals ac.LotId into ac1
                 from ac2 in ac1.DefaultIfEmpty()
+                join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>() on va2.LotId equals ap.LotId into ap1
+                from ap2 in ap1.DefaultIfEmpty()
+                join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>() on va2.LotId equals eq.LotId into eq1
+                from eq2 in eq1.DefaultIfEmpty()
                 select new
                 {
                     GApplication = a,
+                    Set = set,
                     GApplicationPart = part2,
                     GViewApplication = va2,
                     GViewPerson = p2,
                     GViewOrganization = o2,
-                    GViewAircraft = ac2
+                    GViewAircraft = ac2,
+                    GViewAirport = ap2,
+                    GViewEquipment = eq2
                 };
 
             var predicate = PredicateBuilder.True(new
             {
                 GApplication = new GvaApplication(),
+                Set = new Set(),
                 GApplicationPart = new Part(),
                 GViewApplication = new GvaViewApplication(),
                 GViewPerson = new GvaViewPerson(),
                 GViewOrganization = new GvaViewOrganization(),
-                GViewAircraft = new GvaViewAircraft()
+                GViewAircraft = new GvaViewAircraft(),
+                GViewAirport = new GvaViewAirport(),
+                GViewEquipment = new GvaViewEquipment()
             });
 
             predicate = predicate
@@ -75,6 +87,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 {
                     ApplicationId = e.GApplication.GvaApplicationId,
                     DocId = e.GApplication.DocId,
+                    LotSetName = e.Set.Name,
                     AppPartId = e.GApplication.GvaAppLotPartId,
                     AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : null,
                     AppPartRequestDate = e.GViewApplication != null ? e.GViewApplication.RequestDate : null,
@@ -91,6 +104,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAircraftCategory = e.GViewAircraft != null ? e.GViewAircraft.AircraftCategory : null,
                     GvaAircraftProducer = e.GViewAircraft != null ? e.GViewAircraft.AircraftProducer : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
+                    GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
+                    GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType : null,
+                    GvaAirportName = e.GViewAirport != null ? e.GViewAirport.Name : null,
+                    GvaEquipmentId = e.GViewEquipment != null ? (int?)e.GViewEquipment.LotId : null,
+                    GvaEquipmentName = e.GViewEquipment != null ? e.GViewEquipment.Name : null,
+                    GvaEquipmentType = e.GViewEquipment != null ? e.GViewEquipment.EquipmentType : null,
+                    GvaEquipmentProducer = e.GViewEquipment != null ? e.GViewEquipment.EquipmentProducer : null
                 })
                 .ToList();
         }

@@ -50,7 +50,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentEducation && docPartType.alias === 'personEducation'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -77,7 +76,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentEmployment && docPartType.alias === 'personEmployment'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -108,7 +106,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentMed && docPartType.alias === 'personMedical'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -139,7 +136,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentCheck && docPartType.alias === 'personCheck'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -180,7 +176,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentTraining && docPartType.alias === 'personTraining'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -220,7 +215,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentOther && docPartType.alias === 'personOther'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -253,7 +247,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showPDocumentApplication && docPartType.alias === 'personApplication'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -311,7 +304,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-
       <div ng-if="showODocumentApplication && docPartType.alias === 'organizationApplication'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -535,6 +527,266 @@
           </sc-column>
         </sc-datatable>
         </div>
+
+      <!--Airport Documents-->
+      <div ng-if="showAPDocumentOther && docPartType.alias === 'airportOther'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.documentNumber" title="airports.otherSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.documentDateValidFrom" title="airports.otherSearch.documentDateValidFrom" type="date">
+          </sc-column>
+          <sc-column data="part.documentDateValidTo" title="airports.otherSearch.documentDateValidTo" type="date">
+          </sc-column>
+          <sc-column data="part.documentPublisher" title="airports.otherSearch.documentPublisher">
+          </sc-column>
+          <sc-column data="part.otherDocumentType.name" title="airports.otherSearch.otherDocumentType">
+          </sc-column>
+          <sc-column data="part.airportOtherDocumentRole.name" title="airports.otherSearch.otherDocumentRole">
+          </sc-column>
+          <sc-column data="part.notes" title="airports.otherSearch.notes" visible="false">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="airports.otherSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="airports.otherSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="airports.otherSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showAPDocumentOwner && docPartType.alias === 'airportOwner'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.airportRelation.name" title="airports.ownerSearch.airportRelation">
+          </sc-column>
+          <sc-column data="part.person.name" title="airports.ownerSearch.person">
+          </sc-column>
+          <sc-column data="part.organization.name" title="airports.ownerSearch.organization">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="airports.ownerSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.documentDate" title="airports.ownerSearch.documentDate" type="date">
+          </sc-column>
+          <sc-column data="part.fromDate" title="airports.ownerSearch.fromDate" type="date">
+          </sc-column>
+          <sc-column data="part.toDate" title="airports.ownerSearch.toDate" type="date">
+          </sc-column>
+          <sc-column data="part.notes" title="airports.ownerSearch.notes" visible="false">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="airports.ownerSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="airports.ownerSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="airports.ownerSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showAPInspection && docPartType.alias === 'airportInspection'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.auditState.name" title="airports.inspectionSearch.auditState">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="airports.inspectionSearch.documentNumber" width="200px">
+          </sc-column>
+          <sc-column data="part.auditReason.name" title="airports.inspectionSearch.auditReason">
+          </sc-column>
+          <sc-column data="part.auditType.name" title="airports.inspectionSearch.auditType">
+          </sc-column>
+          <sc-column data="part.subject" title="airports.inspectionSearch.subject">
+          </sc-column>
+          <sc-column data="part.notification.name" title="airports.inspectionSearch.notification">
+          </sc-column>
+          <sc-column data="part.startDate" title="airports.inspectionSearch.startDate" type="date">
+          </sc-column>
+          <sc-column data="part.endDate" title="airports.inspectionSearch.endDate" type="date">
+          </sc-column>
+          <sc-column data="part.inspectionPlace" title="airports.inspectionSearch.inspectionPlace">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="airports.inspectionSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="airports.inspectionSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="airports.inspectionSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showAPDocumentApplication && docPartType.alias === 'airportApplication'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.applicationType.name" title="airports.airportDocApplicationSearch.applicationType">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="airports.airportDocApplicationSearch.documentNumber">
+          </sc-column>
+            <sc-column data="part.requestDate" title="airports.airportDocApplicationSearch.requestDate" type="date">
+          </sc-column>
+          <sc-column data="part.documentDate" title="airports.airportDocApplicationSearch.documentDate" type="date">
+          </sc-column>
+          <sc-column data="part.applicationPaymentType.name" title="airports.airportDocApplicationSearch.applicationPaymentType">
+          </sc-column>
+          <sc-column data="part.taxAmount" title="airports.airportDocApplicationSearch.taxAmount">
+          </sc-column>
+          <sc-column data="part.currency.name" title="airports.airportDocApplicationSearch.currency">
+          </sc-column>
+          <sc-column data="part.notes" title="airports.airportDocApplicationSearch.notes">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="airports.airportDocApplicationSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="airports.airportDocApplicationSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="airports.airportDocApplicationSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <!--Equipment Documents-->
+      <div ng-if="showEDocumentOther && docPartType.alias === 'equipmentOther'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.documentNumber" title="equipments.otherSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.documentDateValidFrom" title="equipments.otherSearch.documentDateValidFrom" type="date">
+          </sc-column>
+          <sc-column data="part.documentDateValidTo" title="equipments.otherSearch.documentDateValidTo" type="date">
+          </sc-column>
+          <sc-column data="part.documentPublisher" title="equipments.otherSearch.documentPublisher">
+          </sc-column>
+          <sc-column data="part.otherDocumentType.name" title="equipments.otherSearch.otherDocumentType">
+          </sc-column>
+          <sc-column data="part.equipmentOtherDocumentRole.name" title="equipments.otherSearch.otherDocumentRole">
+          </sc-column>
+          <sc-column data="part.notes" title="equipments.otherSearch.notes" visible="false">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="equipments.otherSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="equipments.otherSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="equipments.otherSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showEDocumentOwner && docPartType.alias === 'equipmentOwner'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.equipmentRelation.name" title="equipments.ownerSearch.equipmentRelation">
+          </sc-column>
+          <sc-column data="part.person.name" title="equipments.ownerSearch.person">
+          </sc-column>
+          <sc-column data="part.organization.name" title="equipments.ownerSearch.organization">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="equipments.ownerSearch.documentNumber">
+          </sc-column>
+          <sc-column data="part.documentDate" title="equipments.ownerSearch.documentDate" type="date">
+          </sc-column>
+          <sc-column data="part.fromDate" title="equipments.ownerSearch.fromDate" type="date">
+          </sc-column>
+          <sc-column data="part.toDate" title="equipments.ownerSearch.toDate" type="date">
+          </sc-column>
+          <sc-column data="part.notes" title="equipments.ownerSearch.notes" visible="false">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="equipments.ownerSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="equipments.ownerSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="equipments.ownerSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showEInspection && docPartType.alias === 'equipmentInspection'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.auditState.name" title="equipments.inspectionSearch.auditState">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="equipments.inspectionSearch.documentNumber" width="200px">
+          </sc-column>
+          <sc-column data="part.auditReason.name" title="equipments.inspectionSearch.auditReason">
+          </sc-column>
+          <sc-column data="part.auditType.name" title="equipments.inspectionSearch.auditType">
+          </sc-column>
+          <sc-column data="part.subject" title="equipments.inspectionSearch.subject">
+          </sc-column>
+          <sc-column data="part.notification.name" title="equipments.inspectionSearch.notification">
+          </sc-column>
+          <sc-column data="part.startDate" title="equipments.inspectionSearch.startDate" type="date">
+          </sc-column>
+          <sc-column data="part.endDate" title="equipments.inspectionSearch.endDate" type="date">
+          </sc-column>
+          <sc-column data="part.inspectionPlace" title="equipments.inspectionSearch.inspectionPlace">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="equipments.inspectionSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="equipments.inspectionSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="equipments.inspectionSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
+      <div ng-if="showEDocumentApplication && docPartType.alias === 'equipmentApplication'">
+        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+          </sc-column>
+          <sc-column data="part.applicationType.name" title="equipments.equipmentDocApplicationSearch.applicationType">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="equipments.equipmentDocApplicationSearch.documentNumber">
+          </sc-column>
+           <sc-column data="part.requestDate" title="equipments.equipmentDocApplicationSearch.requestDate" type="date">
+          </sc-column>
+          <sc-column data="part.documentDate" title="equipments.equipmentDocApplicationSearch.documentDate" type="date">
+          </sc-column>
+          <sc-column data="part.applicationPaymentType.name" title="equipments.equipmentDocApplicationSearch.applicationPaymentType">
+          </sc-column>
+          <sc-column data="part.taxAmount" title="equipments.equipmentDocApplicationSearch.taxAmount">
+          </sc-column>
+          <sc-column data="part.currency.name" title="equipments.equipmentDocApplicationSearch.currency">
+          </sc-column>
+          <sc-column data="part.notes" title="equipments.equipmentDocApplicationSearch.notes">
+          </sc-column>
+          <sc-column data="files[0].bookPageNumber" title="equipments.equipmentDocApplicationSearch.bookPageNumber" width="50px">
+          </sc-column>
+          <sc-column data="files[0].pageCount" title="equipments.equipmentDocApplicationSearch.pageCount" width="50px">
+          </sc-column>
+          <sc-column sortable="false" title="equipments.equipmentDocApplicationSearch.file" width="30px" has-content="true">
+            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
+      </div>
 
     </div>
   </div>

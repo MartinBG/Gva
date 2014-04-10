@@ -12,7 +12,7 @@
     <sc-navigation-item state="root.persons.search" text="common.navigation.persons.licences"></sc-navigation-item>
     <sc-navigation-item state="root.persons.search" text="common.navigation.persons.qualifications"></sc-navigation-item>
     <sc-navigation-item state="root.persons.search" text="common.navigation.persons.medicals"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.search" text="common.navigation.persons.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Person' }" text="common.navigation.persons.appsSearch"></sc-navigation-item>
     <sc-navigation-item state="root.applications.new" params="{ filter: 'Person' }" text="common.navigation.persons.appsNew"></sc-navigation-item>
     <sc-navigation-item state="root.applications.link" params="{ filter: 'Person' }" text="common.navigation.persons.appsLink"></sc-navigation-item>
   </sc-navigation-item>
@@ -20,18 +20,27 @@
     <sc-navigation-item state="root.aircrafts.search" text="common.navigation.aircrafts.search"></sc-navigation-item>
     <sc-navigation-item state="root.persons.search" text="common.navigation.aircrafts.certifications"></sc-navigation-item>
     <sc-navigation-item state="root.persons.search" text="common.navigation.aircrafts.inspections"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.search" text="common.navigation.aircrafts.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Aircraft' }" text="common.navigation.aircrafts.appsSearch"></sc-navigation-item>
     <sc-navigation-item state="root.applications.new" params="{ filter: 'Aircraft' }" text="common.navigation.aircrafts.appsNew"></sc-navigation-item>
     <sc-navigation-item state="root.applications.link" params="{ filter: 'Aircraft' }" text="common.navigation.aircrafts.appsLink"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.organizations.title" parent="true">
     <sc-navigation-item state="root.organizations.search" text="common.navigation.organizations.search"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.search" text="common.navigation.organizations.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsSearch"></sc-navigation-item>
     <sc-navigation-item state="root.applications.new" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsNew"></sc-navigation-item>
     <sc-navigation-item state="root.applications.link" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsLink"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airports.title" parent="true">
     <sc-navigation-item state="root.airports.search" text="common.navigation.airports.search"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Airport' }" text="common.navigation.airports.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.new" params="{ filter: 'Airport' }" text="common.navigation.airports.appsNew"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.link" params="{ filter: 'Airport' }" text="common.navigation.airports.appsLink"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.equipments.title" parent="true">
+    <sc-navigation-item state="root.equipments.search" text="common.navigation.equipments.search"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Equipment' }" text="common.navigation.equipments.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.new" params="{ filter: 'Equipment' }" text="common.navigation.equipments.appsNew"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.link" params="{ filter: 'Equipment' }" text="common.navigation.equipments.appsLink"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true">
     <sc-navigation-item state="root.users.search" text="common.navigation.admin.users"></sc-navigation-item>

@@ -19,4 +19,14 @@ INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,Text
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'aircraftOccurrence'     ,N'Инцидент'                ,NULL,3,N'aircraftOccurrence'     ,1,NULL);
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'aircraftApplication'    ,N'Заявление'               ,NULL,3,N'aircraftApplication'    ,1,NULL);
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'aircraftOther'          ,N'Друг документ'           ,NULL,3,N'aircraftOther'          ,1,NULL);
+
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'airportOwner'           ,N'Свързано лице'           ,NULL,4,N'airportOwner'           ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'airportOther'           ,N'Друг документ'           ,NULL,4,N'airportOther'           ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'airportApplication'     ,N'Заявление'               ,NULL,4,N'airportApplication'     ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'airportInspection'      ,N'Инспекция'               ,NULL,4,N'airportInspection'      ,1,NULL);
+
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'equipmentOwner'         ,N'Свързано лице'           ,NULL,5,N'equipmentOwner'         ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'equipmentOther'         ,N'Друг документ'           ,NULL,5,N'equipmentOther'         ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'equipmentApplication'   ,N'Заявление'               ,NULL,5,N'equipmentApplication'   ,1,NULL);
+INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'equipmentInspection'    ,N'Инспекция'               ,NULL,5,N'equipmentInspection'    ,1,NULL);
 GO

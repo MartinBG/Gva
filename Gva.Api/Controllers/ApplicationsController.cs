@@ -24,6 +24,8 @@ using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.OrganizationRepository;
 using System.Text.RegularExpressions;
 using Gva.Api.Repositories.AircraftRepository;
+using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.Repositories.AirportRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -36,6 +38,8 @@ namespace Gva.Api.Controllers
         private IPersonRepository personRepository;
         private IOrganizationRepository organizationRepository;
         private IAircraftRepository aircraftRepository;
+        private IAirportRepository airportRepository;
+        private IEquipmentRepository equipmentRepository;
         private IDocRepository docRepository;
         private ICorrespondentRepository correspondentRepository;
         private IApplicationRepository applicationRepository;
@@ -48,6 +52,8 @@ namespace Gva.Api.Controllers
             IPersonRepository personRepository,
             IOrganizationRepository organizationRepository,
             IAircraftRepository aircraftRepository,
+            IAirportRepository airportRepository,
+            IEquipmentRepository equipmentRepository,
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
@@ -60,6 +66,8 @@ namespace Gva.Api.Controllers
             this.personRepository = personRepository;
             this.organizationRepository = organizationRepository;
             this.aircraftRepository = aircraftRepository;
+            this.airportRepository = airportRepository;
+            this.equipmentRepository = equipmentRepository;
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
@@ -108,6 +116,14 @@ namespace Gva.Api.Controllers
             else if (application.Lot.Set.Alias == "Aircraft")
             {
                 returnValue.Aircraft = new AircraftDO(this.aircraftRepository.GetAircraft(application.LotId));
+            }
+            else if (application.Lot.Set.Alias == "Airport")
+            {
+                returnValue.Airport = new AirportDO(this.airportRepository.GetAirport(application.LotId));
+            }
+            else if (application.Lot.Set.Alias == "Equipment")
+            {
+                returnValue.Equipment = new EquipmentDO(this.equipmentRepository.GetEquipment(application.LotId));
             }
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
@@ -428,6 +444,34 @@ namespace Gva.Api.Controllers
                         bgCorrespondentType.CorrespondentTypeId,
                         true,
                         (aircraftData.Get<string>("model") + " " + aircraftData.Get<string>("icao")),
+                        "",
+                        "",
+                        this.userContext);
+                    }
+                    //todo ?
+                    else if (applicationNewDO.LotSetAlias == "Airport")
+                    {
+                        JObject airportData = lot.GetPartContent("airportData");
+
+                        correspondent = this.correspondentRepository.CreateBgCitizen(
+                        applicantCorrespondentGroup.CorrespondentGroupId,
+                        bgCorrespondentType.CorrespondentTypeId,
+                        true,
+                        (airportData.Get<string>("name") + " " + airportData.Get<string>("airportType.name")),
+                        "",
+                        "",
+                        this.userContext);
+                    }
+                    //todo ?
+                    else if (applicationNewDO.LotSetAlias == "Equipment")
+                    {
+                        JObject equipmentData = lot.GetPartContent("equipmentData");
+
+                        correspondent = this.correspondentRepository.CreateBgCitizen(
+                        applicantCorrespondentGroup.CorrespondentGroupId,
+                        bgCorrespondentType.CorrespondentTypeId,
+                        true,
+                        (equipmentData.Get<string>("name") + " " + equipmentData.Get<string>("equipmentType.name")),
                         "",
                         "",
                         this.userContext);

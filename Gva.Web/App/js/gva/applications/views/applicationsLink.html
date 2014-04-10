@@ -18,6 +18,12 @@
           <div ng-if="filter === 'Aircraft'">
             <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" sc-on-select-aircraft="selectAircraft()" sc-on-new-aircraft="newAircraft()"></gva-application-select-aircraft>
           </div>
+          <div ng-if="filter === 'Airport'">
+            <gva-application-select-airport name="airportForm" ng-model="appModel" sc-on-select-airport="selectAirport()" sc-on-new-airport="newAirport()"></gva-application-select-airport>
+          </div>
+          <div ng-if="filter === 'Equipment'">
+            <gva-application-select-equipment name="equipmentForm" ng-model="appModel" sc-on-select-equipment="selectEquipment()" sc-on-new-equipment="newEquipment()"></gva-application-select-equipment>
+          </div>
 
           <br />
           <div class="row card" ng-class="{'has-error': !appModel.doc.docId && appForm.$validated}">
