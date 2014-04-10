@@ -66,6 +66,19 @@ namespace Gva.Api.Controllers
             return Ok(applications);
         }
 
+        [Route("organizationsAudits")]
+        public IHttpActionResult GetOrganizationsAudits(int lotId)
+        {
+            var audits = this.lotRepository.GetLotIndex(lotId).GetParts("organizationInspections")
+                .Select(i => new 
+                {
+                    nomValueId = i.Part.Index,
+                    name = i.Content.Get<string>("documentNumber")
+                });
+
+           return Ok(audits);
+        }
+
         [Route("persons/{id:int}")]
         [Route("inspectors/{id:int}")]
         [Route("examiners/{id:int}")]
@@ -283,6 +296,7 @@ namespace Gva.Api.Controllers
 
             return Ok(nomValues);
         }
+
         [Route("documentParts")]
         public IHttpActionResult GetDocumentParts(string set = null, int? parentValueId = null)
         {

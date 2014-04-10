@@ -2894,7 +2894,7 @@
           certNumber: '№ на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
+          audit: 'Одит',
           organization: 'Организация',
           airport: 'Летище',
           inspector: 'Проверил',

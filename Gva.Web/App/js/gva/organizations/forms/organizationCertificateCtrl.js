@@ -1,7 +1,9 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function OrganizationCertificateCtrl($scope, $state) {
+  function OrganizationCertificateCtrl($scope, $state, $stateParams) {
+
+    $scope.lotId = $stateParams.id;
 
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
@@ -26,7 +28,7 @@
     };
   }
 
-  OrganizationCertificateCtrl.$inject = ['$scope','$state'];
+  OrganizationCertificateCtrl.$inject = ['$scope','$state', '$stateParams'];
 
   angular.module('gva')
     .controller('OrganizationCertificateCtrl', OrganizationCertificateCtrl);
