@@ -2560,18 +2560,10 @@
         },
         staffExaminerSearch: {
           newStaffExaminer: 'Нов проверяващи',
-          nomValueId: 'Идентификатор',
-          code: 'Код',
-          name: 'Наименование',
+          code: 'Идентификационен код',
           valid: 'Валиден',
           person: 'Физическо лице',
-          content: {
-            stampNumber: '№ на печат',
-            organization: 'Организация',
-            permitedAW: 'Разрешена проверка на ЛГ',
-            permitedCheck: 'Разрешена проверка на лица'
-          },
-          application: 'Преписка (Заявление)'
+          stampNumber: '№ на печат'
         },
         newStaffExaminer: {
           title: 'Нов проверяващ',
@@ -2658,7 +2650,7 @@
           aircarrierServices: 'Предлагани услуги'
         },
         newCertAirCarrier: {
-          title: 'Нов лиценз на оператор на оператор на въздушен превозвач',
+          title: 'Нов лиценз на оператор на въздушен превозвач',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -2754,13 +2746,14 @@
         },
         recommendationSearch: {
           newRecommendation: 'Нов доклад',
-          recommendationPart: 'Тип',
-          formDate: 'Форма за заявен обхват на одобрението от дата',
-          formText: 'Форма за заявен обхват на одобрението № на изменението',
+          recommendationPart: 'Част',
+          formText: '№ на изменението',
           interviewedStaff: 'Интервюиран персонал',
-          fromDate: 'Период на надзора от',
-          toDate: 'до',
-          documentDescription: 'Описание, издание, ревизия Част 3',
+          finished1Date: 'Прикл. Част 1',
+          finished2Date: 'Прикл. Част 2',
+          finished3Date: 'Прикл. Част 3',
+          finished4Date: 'Прикл. Част 4',
+          finished5Date: 'Прикл. Част 5',
           recommendation: 'Препоръки',
           application: 'Преписка (Заявление)'
         },

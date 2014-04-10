@@ -3,24 +3,12 @@
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editStaffChecker(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.nomValueId" title="organizations.staffExaminerSearch.nomValueId">
-  </sc-column>
   <sc-column data="part.code" title="organizations.staffExaminerSearch.code">
   </sc-column>
-  <sc-column data="part.name" title="organizations.staffExaminerSearch.name">
+  <sc-column data="part.person.name" title="organizations.staffExaminerSearch.person">
   </sc-column>
   <sc-column data="part.valid.name" type="date" title="organizations.staffExaminerSearch.valid">
   </sc-column>
-  <sc-column data="part.parentValue.name" type="date" title="organizations.staffExaminerSearch.person">
-  </sc-column>
-  <sc-column data="part.content.stampNumber" title="organizations.staffExaminerSearch.content.stampNumber">
-  </sc-column>
-  <sc-column data="part.content.organization.name" title="organizations.staffExaminerSearch.content.organization">
-  </sc-column>
-  <sc-column data="part.content.permitedAW.name" title="organizations.staffExaminerSearch.content.permitedAW">
-  </sc-column>
-  <sc-column data="part.content.permitedCheck.name" title="organizations.staffExaminerSearch.content.permitedCheck">
-  </sc-column>
-  <sc-column data="applications[0].applicationName" title="organizations.staffExaminerSearch.application" width="500px">
+  <sc-column data="part.stampNumber" title="organizations.staffExaminerSearch.stampNumber">
   </sc-column>
 </sc-datatable>

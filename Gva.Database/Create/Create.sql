@@ -100,5 +100,6 @@ GO
 ---------------------------------------------------------------
 -- Organizations test noms
 ---------------------------------------------------------------
-:r $(rootPath)\"..\Insert\disparityLevels.sql"
-:r $(rootPath)\"..\Insert\recommendationPartNumbers.sql"
+:r $(rootPath)\"..\Insert\Noms\disparityLevels.sql"
+:r $(rootPath)\"..\Insert\Noms\recommendationPartNumbers.sql"
+:r $(rootPath)\"..\Insert\Noms\aircarrierServices.sql"
