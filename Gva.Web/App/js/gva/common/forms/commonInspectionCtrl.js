@@ -4,62 +4,77 @@
   function CommonInspectionCtrl($scope, $state, $stateParams) {
     $scope.watchList = [];
 
-    $scope.model.examiners = $scope.model.examiners || [{ sortOrder: 1 }];
-    $scope.model.auditDetails = $scope.model.auditDetails || [];
-    $scope.model.disparities = $scope.model.disparities || [];
+    if ($scope.$parent.organizationInspection) {
+      $scope.applicationStateName = 'root.organizations.view.documentApplications.edit';
+    }
+    else if ($scope.$parent.aircraftInspection) {
+      $scope.applicationStateName = 'root.aircrafts.view.applications.edit';
+    }
+    else if ($scope.$parent.airportInspection) {
+      $scope.applicationStateName = 'root.airports.view.applications.edit';
+    }
+    else if ($scope.$parent.equipmentInspection) {
+      $scope.applicationStateName = 'root.equipments.view.applications.edit';
+    }
+
+    $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
+    $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
+    $scope.model.part.disparities = $scope.model.part.disparities || [];
 
     $scope.deleteExaminer = function (examiner) {
-      var index = $scope.model.examiners.indexOf(examiner);
-      $scope.model.examiners.splice(index, 1);
+      var index = $scope.model.part.examiners.indexOf(examiner);
+      $scope.model.part.examiners.splice(index, 1);
     };
 
     $scope.addExaminer = function () {
-      var sortOder = Math.max(0, _.max(_.pluck($scope.model.examiners, 'sortOrder'))) + 1;
+      var sortOder = Math.max(0, _.max(_.pluck($scope.model.part.examiners, 'sortOrder'))) + 1;
 
-      $scope.model.examiners.push({
+      $scope.model.part.examiners.push({
         sortOrder: sortOder
       });
     };
 
     $scope.changedSortOrder = function (newValue, oldValue) {
-      if (_.where($scope.model.disparities, { sortOrder: newValue })[0]) {
-        var subject = _.where($scope.model.disparities, { sortOrder: newValue })[0].subject,
-          auditDetail = _.where($scope.model.auditDetails, { subject: subject })[0],
+      if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
+        var subject = _.where($scope.model.part.disparities, { sortOrder: newValue })[0].subject,
+          auditDetail = _.where($scope.model.part.auditDetails, { subject: subject })[0],
           sortOrderIndex = auditDetail.disparities.indexOf(oldValue);
         auditDetail.disparities[sortOrderIndex] = newValue;
       }
     };
 
-    for (var index = 0; index < $scope.model.disparities.length; index++) {
-      var watchString = 'model.disparities[' + index + '].sortOrder';
+    for (var index = 0; index < $scope.model.part.disparities.length; index++) {
+      var watchString = 'model.part.disparities[' + index + '].sortOrder';
       $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
     }
 
     $scope.addDisparity = function (detail) {
       var maxSortNumber = 0;
 
-      _.each($scope.model.auditDetails, function (auditDetail) {
+      _.each($scope.model.part.auditDetails, function (auditDetail) {
         maxSortNumber = Math.max(maxSortNumber, _.max(auditDetail.disparities));
       });
 
       detail.disparities.push(++maxSortNumber);
 
-      $scope.model.disparities.push({
+      $scope.model.part.disparities.push({
         sortOrder: maxSortNumber,
         subject: detail.subject
       });
-      var watchString = 'model.disparities[' + $scope.model.disparities.length + '].sortOrder';
+      var watchString = 'model.part.disparities[' +
+        $scope.model.part.disparities.length +
+        '].sortOrder';
       $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
     };
 
     $scope.deleteDisparity = function (disparity) {
-      var auditDetail = _.where($scope.model.auditDetails, { subject: disparity.subject })[0];
+      var auditDetail = _.where($scope.model.part.auditDetails, { subject: disparity.subject })[0];
 
       var sortOrderIndex = auditDetail.disparities.indexOf(disparity.sortOrder);
       auditDetail.disparities.splice(sortOrderIndex, 1);
 
-      var index = $scope.model.disparities.indexOf(disparity);
-      $scope.model.disparities.splice(index, 1);
+      var index = $scope.model.part.disparities.indexOf(disparity);
+      $scope.model.part.disparities.splice(index, 1);
       $scope.watchList[index]();
     };
 

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Http;
-using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
-using Gva.Api.Repositories.EquipmentRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -151,16 +149,16 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^equipmentDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, dynamic content)
+        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.part, userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, content.files);
+                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
                 lot.Commit(userContext, lotEventDispatcher);
 
@@ -210,11 +208,16 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^equipmentDocumentOwners/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentDocumentApplications/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
+        public override IHttpActionResult GetApplicationPart(int lotId, string path)
+        {
+            return base.GetApplicationPart(lotId, path);
         }
 
         [Route(@"{lotId}/{*path:regex(^equipmentData$)}")]
@@ -234,13 +237,17 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^equipmentDocumentOwners$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentDocumentApplications$)}"),
-         Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections$)}")]
+         Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
         }
 
+        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
+        public override IHttpActionResult GetApplicationParts(int lotId, string path)
+        {
+            return base.GetApplicationParts(lotId, path);
+        }
 
         [Route(@"{lotId}/{*path:regex(^equipmentDocumentOwners$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}"),

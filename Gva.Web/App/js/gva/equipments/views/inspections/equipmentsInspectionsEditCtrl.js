@@ -31,10 +31,9 @@
       });
     };
 
-
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.equipmentInspection.part = _.cloneDeep(originalDoc.part);
+      $scope.equipmentInspection = _.cloneDeep(originalDoc);
     };
     
     $scope.deleteInspection = function () {

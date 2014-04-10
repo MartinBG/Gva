@@ -41,8 +41,7 @@
     aircraftInspection: [
       function () {
         return {
-          part: {},
-          files: []
+          part: {}
         };
       }
     ]

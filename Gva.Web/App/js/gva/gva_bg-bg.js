@@ -194,7 +194,7 @@
           inspectionPlace: 'Адрес на одитирания обект',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          file: 'Файл'
+          application: 'Преписка (Заявление)'
         },
         newInspection: {
           save: 'Запис',
@@ -471,7 +471,7 @@
           inspectionPlace: 'Адрес на одитирания обект',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          file: 'Файл'
+          application: 'Преписка (Заявление)'
         },
         newInspection: {
           save: 'Запис',
@@ -1431,7 +1431,7 @@
           inspectionPlace: 'Адрес на одитирания обект',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
-          file: 'Файл'
+          application: 'Преписка (Заявление)'
         },
         newInspection: {
           title: 'Нова инспекция',

@@ -45,8 +45,7 @@
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
             disparities: []
-          },
-          files: []
+          }
         };
       }
     ]

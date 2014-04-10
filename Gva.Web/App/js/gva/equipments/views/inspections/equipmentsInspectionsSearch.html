@@ -25,9 +25,6 @@
   </sc-column>
   <sc-column data="files[0].pageCount" title="equipments.inspectionSearch.pageCount" width="50px">
   </sc-column>
-  <sc-column sortable="false" title="equipments.inspectionSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
+  <sc-column data="applications[0].applicationName" title="equipments.inspectionSearch.application" width="500">
   </sc-column>
 </sc-datatable>

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Http;
-using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
-using Gva.Api.Repositories.AirportRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -210,11 +207,16 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
+        public override IHttpActionResult GetApplicationPart(int lotId, string path)
+        {
+            return base.GetApplicationPart(lotId, path);
         }
 
         [Route(@"{lotId}/{*path:regex(^airportData$)}")]
@@ -234,13 +236,17 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentApplications$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections$)}")]
+         Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
         }
 
+        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
+        public override IHttpActionResult GetApplicationParts(int lotId, string path)
+        {
+            return base.GetApplicationParts(lotId, path);
+        }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}"),

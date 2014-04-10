@@ -34,7 +34,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.airportInspection.part = _.cloneDeep(originalDoc.part);
+      $scope.airportInspection = _.cloneDeep(originalDoc);
     };
     
     $scope.deleteInspection = function () {

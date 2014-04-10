@@ -6,7 +6,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
 (function (angular, Select2) {
   'use strict';
 
-  function ApplicationsDirective($state, $stateParams, $compile, Application) {
+  function ApplicationsDirective($state, $stateParams, $compile, $parse, Application) {
     function preLink(scope, iElement, iAttrs) {
       scope.appSelectOpt = {
         multiple: true,
@@ -35,7 +35,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
       };
 
       scope.viewApplication = function (partIndex) {
-        $state.go(iAttrs.stateName, {
+        $state.go($parse(iAttrs.stateName)(scope), {
           id: $stateParams.id,
           ind: partIndex
         });
@@ -50,7 +50,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
     };
   }
 
-  ApplicationsDirective.$inject = ['$state', '$stateParams', '$compile', 'Application'];
+  ApplicationsDirective.$inject = ['$state', '$stateParams', '$compile', '$parse', 'Application'];
 
   angular.module('gva').directive('gvaApplications', ApplicationsDirective);
 }(angular, Select2));

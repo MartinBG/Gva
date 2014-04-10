@@ -39,7 +39,7 @@
   <div class="row">
     <div class="form-group col-sm-6 col-md-6">
       <label class="control-label" l10n-text="common.inspectionDirective.applications"></label>
-      <gva-applications ng-model="model.applications" state-name="root.organizations.view.documentApplications.edit" ng-readonly="readonly"></gva-applications>
+      <gva-applications ng-model="model.applications" state-name="applicationStateName" ng-readonly="readonly"></gva-applications>
     </div>
   </div>
 
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="common.inspectionDirective.inspectionFrom"></label>
-      <sc-date ng-model="model.inspectionFrom" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.part.inspectionFrom" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="common.inspectionDirective.inspectionTo"></label>
@@ -109,7 +109,7 @@
     <thead>
       <tr>
         <th l10n-text="common.inspectionDirective.examinersTable.sortOrder"></th>
-        <th ng-class="{'has-error': model.examiners.length === 0}">
+        <th ng-class="{'has-error': model.part.examiners.length === 0}">
           <div sc-has-error="examiner" >
             <label class="control-label" l10n-text="common.inspectionDirective.examinersTable.examiner"></label>
             <sc-validation-error field-name="examiner" validations="{required: null}"></sc-validation-error>
@@ -124,14 +124,14 @@
           <sc-int ng-model="examiner.sortOrder" ng-readonly="readonly"></sc-int>
         </td>
         <td>
-          <sc-nomenclature ng-model="examiner.examiner" name="examiner" ng-required="true && model.partIndex" alias="'examiners'" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-model="examiner.examiner" name="examiner" ng-required="true" alias="'examiners'" ng-readonly="readonly"></sc-nomenclature>
         </td>
         <td style="text-align: right; width: 1px;">
           <sc-button name="deleteExaminerBtn" type="button" class="btn btn-primary btn-sm" btn-click="deleteExaminer(examiner)" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
         </td>
       </tr>
       <tr ng-repeat-end></tr>
-      <tr class="sort-disabled" ng-if="!model.examiners.length">
+      <tr class="sort-disabled" ng-if="!model.part.examiners.length">
         <td colspan="8" class="text-center" l10n-text="common.inspectionDirective.examinersTable.noAvailableExaminers"></td>
       </tr>
       <tr>
