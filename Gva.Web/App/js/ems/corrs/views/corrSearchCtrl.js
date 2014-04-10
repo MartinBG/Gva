@@ -28,7 +28,7 @@
     };
 
     $scope.search = function search() {
-      return $state.go('root.corrs.search', {
+      return $state.go($state.current, {
         displayName: $scope.filters.displayName,
         correspondentEmail: $scope.filters.correspondentEmail
       }, { reload: true });

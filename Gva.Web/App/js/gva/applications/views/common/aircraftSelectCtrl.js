@@ -19,11 +19,11 @@
     });
 
     $scope.search = function () {
-      $state.go('root.applications.new.aircraftSelect', {
+      $state.go($state.current, {
         manSN: $scope.filters.manSN,
         model: $scope.filters.model,
         icao: $scope.filters.icao
-      });
+      }, { reload: true });
     };
 
     $scope.cancel = function () {

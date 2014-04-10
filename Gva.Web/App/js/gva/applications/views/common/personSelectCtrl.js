@@ -19,14 +19,14 @@
     });
 
     $scope.search = function () {
-      $state.go('root.applications.new.personSelect', {
+      $state.go($state.current, {
         lin: $scope.filters.lin,
         uin: $scope.filters.uin,
         names: $scope.filters.names,
         licences: $scope.filters.licences,
         ratings: $scope.filters.ratings,
         organization: $scope.filters.organization
-      });
+      }, { reload: true });
     };
 
     $scope.cancel = function () {

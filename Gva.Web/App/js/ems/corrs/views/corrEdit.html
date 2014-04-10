@@ -1,7 +1,16 @@
-﻿<div class="form-inline">
-  <ng-form name="corrForm" sc-validate="{}">
+﻿<ng-form name="corrForm" class="form-inline" sc-validate="{}">
     <div class="panel panel-default">
-      <div class="panel-heading"><strong l10n-text="corrs.edit.correspondentTitle"></strong></div>
+      <div class="panel-heading">
+        <strong l10n-text="corrs.edit.correspondentTitle"></strong>
+        <div class="pull-right">
+          <sc-button name="saveBtn" btn-click="save()" text="corrs.edit.save"
+            class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk">
+          </sc-button>
+          <sc-button name="cancelBtn" btn-click="cancel()" text="corrs.edit.cancel"
+            class="btn btn-default btn-sm" icon="glyphicon-ban-circle">
+          </sc-button>
+        </div>
+      </div>
 
       <div class="well-sm panel-body">
         <div class="row">
@@ -157,55 +166,49 @@
 
       </div>
 
-      <div class="panel panel-default" ng-show="corr.correspondentId">
-        <div class="panel-heading"><strong l10n-text="corrs.edit.contactPersonsTitle"></strong></div>
-        <table class="table table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th l10n-text="corrs.edit.contactName"></th>
-              <th l10n-text="corrs.edit.contactUin"></th>
-              <th l10n-text="corrs.edit.contactNote"></th>
-              <th style="width: 70px;"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="contact in corr.correspondentContacts | filter: { isDeleted: false }">
-              <td>
-                <sc-text ng-model="contact.name" ng-readonly="!contact.isInEdit" ng-required="true"></sc-text>
-              </td>
-              <td>
-                <sc-text ng-model="contact.uin" ng-readonly="!contact.isInEdit"></sc-text>
-              </td>
-              <td>
-                <sc-text ng-model="contact.note" ng-readonly="!contact.isInEdit"></sc-text>
-              </td>
-              <td style="text-align: right; width: 1px;">
-                <span ng-show="contact.isInEdit">
-                  <sc-button btn-click="saveCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved"></sc-button>
-                  <sc-button btn-click="cancelCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove"></sc-button>
-                </span>
-                <span ng-show="!contact.isInEdit">
-                  <sc-button btn-click="editCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-                  <sc-button btn-click="removeCorrContact(contact)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="4" style="text-align: right; width: 1px;">
-                <sc-button btn-click="addCorrContact(corr.correspondentId)" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3 col-sm-offset-5">
-          <sc-button name="saveBtn" btn-click="save()" text="corrs.edit.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-disabled="corrForm.$pristine"></sc-button>
-          <sc-button name="cancelBtn" btn-click="cancel()" text="corrs.edit.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+      <div class="well-sm panel-body" ng-if="corr.correspondentId">
+          <h5 class="form-header" l10n-text="applications.personNew.personDataForm"></h5>
+          
+          <table class="table table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th l10n-text="corrs.edit.contactName"></th>
+                <th l10n-text="corrs.edit.contactUin"></th>
+                <th l10n-text="corrs.edit.contactNote"></th>
+                <th style="width: 70px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="contact in corr.correspondentContacts | filter: { isDeleted: false }">
+                <td>
+                  <sc-text ng-model="contact.name" ng-readonly="!contact.isInEdit" ng-required="true"></sc-text>
+                </td>
+                <td>
+                  <sc-text ng-model="contact.uin" ng-readonly="!contact.isInEdit"></sc-text>
+                </td>
+                <td>
+                  <sc-text ng-model="contact.note" ng-readonly="!contact.isInEdit"></sc-text>
+                </td>
+                <td style="text-align: right; width: 1px;">
+                  <span ng-show="contact.isInEdit">
+                    <sc-button btn-click="saveCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved"></sc-button>
+                    <sc-button btn-click="cancelCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove"></sc-button>
+                  </span>
+                  <span ng-show="!contact.isInEdit">
+                    <sc-button btn-click="editCorrContact(contact)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+                    <sc-button btn-click="removeCorrContact(contact)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: right; width: 1px;">
+                  <sc-button btn-click="addCorrContact(corr.correspondentId)" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
       </div>
-    </div>
   </ng-form>
 
-</div>

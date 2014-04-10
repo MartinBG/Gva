@@ -8,6 +8,9 @@
 </sc-search>
 
 <sc-datatable items="aircrafts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+   <sc-button btn-click="selectAircraft(item)" text="applications.aircraftSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column>
   <sc-column data="manSN" title="applications.aircraftSelect.manSN">
   </sc-column>
   <sc-column data="model" title="applications.aircraftSelect.model">
@@ -25,8 +28,5 @@
   <sc-column data="propeller" title="applications.aircraftSelect.propeller">
   </sc-column>
   <sc-column data="modifOrWingColor" title="applications.aircraftSelect.modifOrWingColor">
-  </sc-column>
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-   <sc-button name="viewButton" btn-click="selectAircraft(item)" text="applications.aircraftSelect.select" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
 </sc-datatable>

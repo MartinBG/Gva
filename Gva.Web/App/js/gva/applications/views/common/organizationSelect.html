@@ -10,21 +10,21 @@
 </sc-search>
 
 <sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column data="name" title="applications.organizationSelect.name" width="60px">
-    </sc-column>
-    <sc-column data="CAO" title="applications.organizationSelect.CAO" width="60px">
-    </sc-column>
-    <sc-column data="uin" title="applications.organizationSelect.uin" width="60px">
-    </sc-column>
-    <sc-column data="valid.name" title="applications.organizationSelect.valid">
-    </sc-column>
-    <sc-column data="organizationType.name" title="applications.organizationSelect.organizationType">
-    </sc-column>
-    <sc-column data="dateValidTo" title="applications.organizationSelect.dateValidTo" type="date">
-    </sc-column>
-    <sc-column data="dateCAOValidTo" title="applications.organizationSelect.dateCAOValidTo" type="date">
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-      <sc-button name="viewButton" btn-click="selectOrganization(item)" text="applications.organizationSelect.select" class="btn btn-xs btn-primary"></sc-button>
-    </sc-column>
-  </sc-datatable>
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button btn-click="selectOrganization(item)" text="applications.organizationSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column>
+  <sc-column data="name" title="applications.organizationSelect.name" width="60px">
+  </sc-column>
+  <sc-column data="CAO" title="applications.organizationSelect.CAO" width="60px">
+  </sc-column>
+  <sc-column data="uin" title="applications.organizationSelect.uin" width="60px">
+  </sc-column>
+  <sc-column data="valid.name" title="applications.organizationSelect.valid">
+  </sc-column>
+  <sc-column data="organizationType.name" title="applications.organizationSelect.organizationType">
+  </sc-column>
+  <sc-column data="dateValidTo" title="applications.organizationSelect.dateValidTo" type="date">
+  </sc-column>
+  <sc-column data="dateCAOValidTo" title="applications.organizationSelect.dateCAOValidTo" type="date">
+  </sc-column>
+</sc-datatable>

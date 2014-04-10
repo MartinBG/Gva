@@ -67,7 +67,7 @@
         <div ng-if="applicationPart.setPartAlias === 'personApplication' || applicationPart.setPartAlias === 'organizationApplication' || applicationPart.setPartAlias === 'aircraftApplication'">
           <gva-common-document-application name="addForm" ng-model="applicationPart.part"></gva-common-document-application>
         </div>
-      
+
         <div ng-if="!applicationPart.hasDocFile">
           <gva-application-document name="appFile" ng-model="applicationPart.appFile"></gva-application-document>
         </div>

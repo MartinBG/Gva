@@ -1,9 +1,9 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="applications.search.fromDate"></sc-filter>
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="applications.search.toDate"></sc-filter>
-  <sc-filter type="text" name="lin" class="col-sm-2" removable="false" label="applications.search.lin"></sc-filter>
-<!--  <sc-filter type="text" name="regUri" class="col-sm-2" removable="false" label="applications.search.regUri"></sc-filter>-->
-  <sc-search-button action="search()" name="searchBtn" text="applications.search.search" icon="glyphicon-search"></sc-search-button>
+  <sc-filter type="text" name="lin" class="col-sm-2" removable="true" label="applications.search.lin"></sc-filter>
+  <sc-search-button action="search()" name="searchBtn" class="btn btn-primary btn-sm" text="applications.search.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
 <!--  <sc-search-button action="newApp()" name="newAppBtn" text="applications.search.newApp"></sc-search-button>
   <sc-search-button action="linkApp()" name="linkAppBtn" text="applications.search.linkApp"></sc-search-button>-->
 </sc-search>

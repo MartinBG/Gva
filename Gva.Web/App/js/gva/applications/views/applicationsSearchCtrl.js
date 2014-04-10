@@ -29,7 +29,7 @@
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         lin: $scope.filters.lin
-      });
+      }, { reload: true });
     };
 
     $scope.viewApplication = function (application) {

@@ -181,15 +181,12 @@ namespace Gva.Api.Controllers
             {
                 UserContext userContext = this.Request.GetUserContext();
 
-                dynamic appPart = linkNewPart.Value<JObject>("appPart");
-                dynamic appFile = linkNewPart.Value<JObject>("appFile");
-
                 GvaApplication application = this.applicationRepository.Find(id.Value);
                 Lot lot = this.lotRepository.GetLotIndex(application.LotId);
 
                 SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
-                PartVersion partVersion = lot.CreatePart(path, appPart, userContext);
+                PartVersion partVersion = lot.CreatePart(path, linkNewPart.Value<JObject>("appPart"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
                 if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
@@ -197,17 +194,17 @@ namespace Gva.Api.Controllers
                     application.GvaAppLotPart = partVersion.Part;
                 }
 
-                int docFileId = (int)appFile.docFileId;
+                int docFileId = linkNewPart.Get<int>("appFile.docFileId");
                 DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == docFileId);
 
                 GvaLotFile lotFile = new GvaLotFile()
                 {
                     LotPart = partVersion.Part,
                     DocFile = docFile,
-                    GvaCaseTypeId = (int)appFile.caseTypeId,
-                    PageNumber = (int)appFile.pageCount
+                    GvaCaseTypeId = linkNewPart.Get<int>("appFile.caseTypeId"),
+                    PageNumber = linkNewPart.Get<int>("appFile.pageCount")
                 };
-                lotFile.SavePageIndex((string)appFile.bookPageNumber);
+                lotFile.SavePageIndex(linkNewPart.Get<string>("appFile.bookPageNumber"));
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {
@@ -388,21 +385,21 @@ namespace Gva.Api.Controllers
 
                     if (applicationNewDO.LotSetAlias == "Person")
                     {
-                        dynamic personData = lot.GetPartContent("personData");
+                        JObject personData = lot.GetPartContent("personData");
 
                         correspondent = this.correspondentRepository.CreateBgCitizen(
                          applicantCorrespondentGroup.CorrespondentGroupId,
                          bgCorrespondentType.CorrespondentTypeId,
                          true,
-                         (string)personData.firstName,
-                         (string)personData.lastName,
-                         (string)personData.uin,
+                         personData.Get<string>("firstName"),
+                         personData.Get<string>("lastName"),
+                         personData.Get<string>("uin"),
                          this.userContext);
-                        correspondent.Email = (string)personData.email;
+                        correspondent.Email = personData.Get<string>("email");
 
                         correspondent.CreateCorrespondentContact(
-                        String.Format("{0} {1} {2}", (string)personData.firstName, (string)personData.middleName, (string)personData.lastName),
-                        (string)personData.uin,
+                        String.Format("{0} {1} {2}", personData.Get<string>("firstName"), personData.Get<string>("middleName"), personData.Get<string>("lastName")),
+                        personData.Get<string>("uin"),
                         null,
                         true,
                         userContext);
@@ -410,13 +407,13 @@ namespace Gva.Api.Controllers
                     //todo ??
                     else if (applicationNewDO.LotSetAlias == "Organization")
                     {
-                        dynamic organizationData = lot.GetPartContent("organizationData");
+                        JObject organizationData = lot.GetPartContent("organizationData");
 
                         correspondent = this.correspondentRepository.CreateBgCitizen(
                         applicantCorrespondentGroup.CorrespondentGroupId,
                         bgCorrespondentType.CorrespondentTypeId,
                         true,
-                        (string)organizationData.name,
+                        organizationData.Get<string>("name"),
                         "",
                         "",
                         this.userContext);
@@ -424,13 +421,13 @@ namespace Gva.Api.Controllers
                     //todo ??
                     else if (applicationNewDO.LotSetAlias == "Aircraft")
                     {
-                        dynamic aircraftData = lot.GetPartContent("aircraftData");
+                        JObject aircraftData = lot.GetPartContent("aircraftData");
 
                         correspondent = this.correspondentRepository.CreateBgCitizen(
                         applicantCorrespondentGroup.CorrespondentGroupId,
                         bgCorrespondentType.CorrespondentTypeId,
                         true,
-                        ((string)aircraftData.model + " " + (string)aircraftData.icao),
+                        (aircraftData.Get<string>("model") + " " + aircraftData.Get<string>("icao")),
                         "",
                         "",
                         this.userContext);

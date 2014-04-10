@@ -24,13 +24,13 @@
     });
 
     $scope.search = function () {
-      $state.go('root.applications.new.organizationSelect', {
+      $state.go($state.current, {
         CAO: $scope.filters.CAO,
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,
         dateCAOValidTo: $scope.filters.dateCAOValidTo,
         name: $scope.filters.name
-      });
+      }, { reload: true });
     };
 
     $scope.cancel = function () {

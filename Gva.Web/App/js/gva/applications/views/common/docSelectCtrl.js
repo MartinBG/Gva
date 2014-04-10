@@ -29,7 +29,7 @@
     });
 
     $scope.search = function () {
-      return $state.go('root.applications.link.docSelect', {
+      return $state.go($state.current, {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         regUri: $scope.filters.regUri,
@@ -38,7 +38,7 @@
         docStatusId: $scope.filters.docStatusId,
         corrs: $scope.filters.corrs,
         units: $scope.filters.units
-      });
+      }, { reload: true });
     };
 
     $scope.selectDoc = function (result) {
