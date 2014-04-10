@@ -2,16 +2,17 @@
 using Regs.Api.Models;
 using System;
 using Common.Json;
+using Gva.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
     public class ApprovalPartVersionDO
     {
-        public ApprovalPartVersionDO(PartVersion partVersion, PartVersion firstAmendment, PartVersion lastAmendment)
+        public ApprovalPartVersionDO(PartVersion partVersion, PartVersion firstAmendment, PartVersion lastAmendment, GvaApplication[] lotObjects)
         {
             this.PartIndex = partVersion.Part.Index.Value;
             this.Approval = partVersion.Content;
-            this.Amendment = new PartVersionDO(partVersion, null);
+            this.Amendment = new PartVersionDO(firstAmendment, lotObjects);
 
             this.DocumentFirstDateIssue = firstAmendment.Content.Get<DateTime>("documentDateIssue");
         }

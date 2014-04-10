@@ -2,11 +2,11 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="common.inspectionDirective.documentNumber"></label>
-      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-3 col-md-2" ng-if="$parent.organizationInspection">
       <label class="control-label" l10n-text="common.inspectionDirective.auditPart"></label>
-      <sc-nomenclature  ng-model="model.auditPart" name="auditPart" alias="'auditParts'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature  ng-model="model.part.auditPart" name="auditPart" alias="'auditParts'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
@@ -14,17 +14,17 @@
     <div class="form-group col-sm-2" sc-has-error="auditReason">
       <label class="control-label" l10n-text="common.inspectionDirective.auditReason"></label>
       <sc-validation-error field-name="auditReason" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.auditReason" name="auditReason" alias="'auditReasons'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.auditReason" name="auditReason" alias="'auditReasons'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-2" sc-has-error="auditType">
       <label class="control-label" l10n-text="common.inspectionDirective.auditType"></label>
       <sc-validation-error field-name="auditType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.auditType" name="auditType" alias="'auditTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.auditType" name="auditType" alias="'auditTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-2" sc-has-error="auditState">
       <label class="control-label" l10n-text="common.inspectionDirective.auditState"></label>
       <sc-validation-error field-name="auditState" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.auditState" name="auditState" alias="'auditStatuses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.auditState" name="auditState" alias="'auditStatuses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
@@ -32,7 +32,14 @@
     <div class="form-group col-sm-6 col-md-6" sc-has-error="subject">
       <label class="control-label" l10n-text="common.inspectionDirective.subject"></label>
       <sc-validation-error field-name="subject" validations="{required: null}"></sc-validation-error>
-      <sc-textarea rows="3" cols="50" ng-model="model.subject" name="subject" ng-required="true" ng-readonly="readonly"></sc-textarea>
+      <sc-textarea rows="3" cols="50" ng-model="model.part.subject" name="subject" ng-required="true" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-6">
+      <label class="control-label" l10n-text="common.inspectionDirective.applications"></label>
+      <gva-applications ng-model="model.applications" state-name="root.organizations.view.documentApplications.edit" ng-readonly="readonly"></gva-applications>
     </div>
   </div>
 
@@ -41,7 +48,7 @@
     <div class="form-group col-sm-4 col-md-3" sc-has-error="notification">
       <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
       <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature  ng-model="model.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature  ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
@@ -52,13 +59,13 @@
     </div>
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="common.inspectionDirective.inspectionTo"></label>
-      <sc-date ng-model="model.inspectionTo" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.part.inspectionTo" ng-readonly="readonly"></sc-date>
     </div>
   </div>
 
   <div ng-if="$parent.organizationInspection">
     <h5 class="form-header" l10n-text="common.inspectionDirective.recommendationReports" style="margin-top:10px;"></h5>
-    <sc-datatable items="model.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-datatable items="model.part.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
       <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
         <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
       </sc-column>
@@ -76,26 +83,26 @@
     <div class="form-group col-sm-6 col-md-4" sc-has-error="inspectionPlace">
       <label class="control-label" l10n-text="common.inspectionDirective.inspectionPlace"></label>
       <sc-validation-error field-name="inspectionPlace" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.inspectionPlace" name="inspectionPlace" ng-required="true" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.inspectionPlace" name="inspectionPlace" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="startDate">
       <label class="control-label" l10n-text="common.inspectionDirective.startDate"></label>
       <sc-validation-error field-name="startDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.startDate" name="startDate" ng-required="true" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.part.startDate" name="startDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="common.inspectionDirective.endDate"></label>
-      <sc-date ng-model="model.endDate" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.part.endDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>
 
   <h5 class="form-header" l10n-text="common.auditDetailDirective.title"></h5>
-  <gva-common-audit-detail name="auditDetailsForm" ng-model="model" readonly="readonly"></gva-common-audit-detail>
+  <gva-common-audit-detail name="auditDetailsForm" ng-model="model.part" readonly="readonly"></gva-common-audit-detail>
 
   <h5 class="form-header" l10n-text="common.inspectionDirective.disparitiesTitle"></h5>
-  <gva-common-disparity name="disparitiesForm" ng-model="model" readonly="readonly"></gva-common-disparity>
+  <gva-common-disparity name="disparitiesForm" ng-model="model.part" readonly="readonly"></gva-common-disparity>
 
   <h5 class="form-header" l10n-text="common.inspectionDirective.examinersTable.examinersTitle"></h5>
   <table class="table table-striped table-bordered">
@@ -112,7 +119,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="examiner in model.examiners">
+      <tr ng-repeat-start="examiner in model.part.examiners">
         <td class="col-sm-1 col-md-1">
           <sc-int ng-model="examiner.sortOrder" ng-readonly="readonly"></sc-int>
         </td>

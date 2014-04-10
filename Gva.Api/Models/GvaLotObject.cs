@@ -10,8 +10,6 @@ namespace Gva.Api.Models
 
         public int LotPartId { get; set; }
 
-        public bool IsActive { get; set; }
-
         public virtual GvaApplication GvaApplication { get; set; }
 
         public virtual Regs.Api.Models.Part LotPart { get; set; }
@@ -30,7 +28,6 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaLotObjectId).HasColumnName("GvaLotObjectId");
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.LotPartId).HasColumnName("LotPartId");
-            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasOptional(t => t.GvaApplication)

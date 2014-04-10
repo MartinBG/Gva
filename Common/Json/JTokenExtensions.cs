@@ -45,7 +45,8 @@ namespace Common.Json
 
         public static IEnumerable<T> GetItems<T>(this JToken o, string path)
         {
-            var tokens = o.SelectToken(path).Values<JToken>();
+            var token = o.SelectToken(path);
+            var tokens = token == null ? null : token.Values<JToken>();
             if (tokens == null)
             {
                 return Enumerable.Empty<T>();

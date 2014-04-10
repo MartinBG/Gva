@@ -40,13 +40,7 @@
 
   StaffManagementNewCtrl.$resolve = {
     organizationStaffManagement: function () {
-      return {
-        part: {},
-        files: {
-          hideApplications: false,
-          files: []
-        }
-      };
+      return { };
     }
   };
 

@@ -20,8 +20,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.organizationStaffExaminer.part = _.cloneDeep(originalStaffExaminer.part);
-      $scope.$broadcast('cancel', originalStaffExaminer);
+      $scope.organizationStaffExaminer = _.cloneDeep(originalStaffExaminer);
     };
 
     $scope.save = function () {

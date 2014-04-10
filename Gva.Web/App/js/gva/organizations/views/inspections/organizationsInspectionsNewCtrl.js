@@ -47,10 +47,6 @@
             examiners: [{ sortOrder: 1 }],
             auditDetails: [],
             disparities: []
-          },
-          files: {
-            hideApplications: false,
-            files: []
           }
         };
       }

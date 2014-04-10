@@ -607,6 +607,9 @@
     <Content Include="App\js\gva\equipments\views\inspections\equipmentsInspectionsSearchCtrl.js" />
     <Content Include="App\js\gva\equipments\views\inventory\inventorySearch.html" />
     <Content Include="App\js\gva\equipments\views\inventory\inventorySearchCtrl.js" />
+    <Content Include="App\js\gva\directives\application\applicationDirective.html" />
+    <Content Include="App\js\gva\directives\application\applicationDirective.js" />
+    <Content Include="App\js\gva\directives\resources\application.js" />
     <Content Include="App\js\gva\gva.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
     <Content Include="App\js\gva\organizations\forms\organizationDataCtrl.js" />
@@ -1353,9 +1356,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
-    <Folder Include="App\js\gva\directives\button\" />
-    <Folder Include="App\js\gva\directives\hasError\" />
-    <Folder Include="App\js\gva\directives\validationError\" />
     <Folder Include="App\js\gva\persons\views\publishers\" />
     <Folder Include="App\test\ems\mocks\" />
     <Folder Include="App\test\gva\aircrafts\pageObjects\" />

@@ -61,7 +61,8 @@
           formText: '№ на изменението',
           formDate:'Форма за заявен обхват на одобрението от дата',
           inspectionPeriod: 'Период, в който ВС може да бъде видяно',
-          disparitiesTitle: 'Несъответствия'
+          disparitiesTitle: 'Несъответствия',
+          applications: 'Заявления'
         }
       },
       airports: {
@@ -2543,7 +2544,7 @@
           testDate: 'Дата на полагане на писмен тест',
           testScore: 'Оценка',
           valid: 'Валиден',
-          file: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)'
         },
         newStaffManagement: {
           title: 'Нов ръководен персонал',
@@ -2570,7 +2571,7 @@
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
           },
-          file: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)'
         },
         newStaffExaminer: {
           title: 'Нов проверяващ',
@@ -2679,7 +2680,7 @@
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',
-          file: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)'
         },
         newInspection: {
           title: 'Нова инспекция',
@@ -2700,7 +2701,7 @@
           documentDateIssue: 'Дата на издаване',
           changeNum: 'Изменение',
           back: 'Назад',
-          file: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)'
         },
         newAmendment: {
           title: 'Ново изменение',
@@ -2723,7 +2724,7 @@
           documentDateIssueAmendment: 'Дата на изменение',
           changeNumAmendment: 'Номер на изменение',
           approvalState: 'Състояние',
-          file: 'Преписка (Заявление)',
+          application: 'Преписка (Заявление)',
           recommendationReport: 'Доклад от препоръки'
         },
         newApproval: {
@@ -2761,7 +2762,7 @@
           toDate: 'до',
           documentDescription: 'Описание, издание, ревизия Част 3',
           recommendation: 'Препоръки',
-          file: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)'
         },
         newRecommendation: {
           title: 'Нов доклад от препоръки',
@@ -2853,7 +2854,8 @@
           person: 'Предложено лице',
           testDate: 'Дата на полагане на писмен тест',
           testScore: 'Оценка от писмен тест',
-          valid: 'Валиден'
+          valid: 'Валиден',
+          applications: 'Заявления'
         },
         auditplanDirective: {
           auditPartRequirement: 'Изискване',
@@ -2947,6 +2949,7 @@
           documentDateIssue: 'Дата на издаване',
           changeNum: '№ на изменение',
           noAvailableLimitations: 'Няма налични данни',
+          applications: 'Заявления',
           lims147: {
             title: 'Обхват на одобрение - EASA Форма 11',
             sortOrder: 'Маркер за сортиране',
@@ -2992,7 +2995,8 @@
             organization: 'Организация',
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
-          }
+          },
+          applications: 'Заявления'
         },
         recommendationDirective: {
           commonData: {
@@ -3017,7 +3021,8 @@
             finished5Date: 'Дата на приключване',
             town: 'Отдел ЛГ гр.',
             documentDescription: 'Описание, издание, ревизия',
-            recommendation: 'Препоръки'
+            recommendation: 'Препоръки',
+            applications: 'Заявления'
           },
           auditorsReview: {
             title: '2. Одиторски преглед за съответствие',

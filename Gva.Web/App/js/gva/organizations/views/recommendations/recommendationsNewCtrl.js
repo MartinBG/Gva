@@ -56,10 +56,6 @@
           part3: { examiners: [] },
           part4: { examiners: [] },
           part5: { examiners: [] }
-        },
-        files: {
-          hideApplications: false,
-          files: []
         }
       };
     }

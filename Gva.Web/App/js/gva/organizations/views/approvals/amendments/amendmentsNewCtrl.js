@@ -47,10 +47,6 @@
           lims145: [],
           lims147: [],
           limsMG: []
-        },
-        files: {
-          hideApplications: false,
-          files: []
         }
       };
     }

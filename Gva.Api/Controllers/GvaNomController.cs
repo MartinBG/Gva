@@ -3,22 +3,26 @@ using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
-using Common.Linq;
 using Common.Json;
+using Common.Linq;
 using Gva.Api.Models;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Gva.Api.Repositories.PersonRepository;
+using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
-using Newtonsoft.Json.Linq;
+using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.OrganizationRepository;
-using System;
+using Gva.Api.Repositories.PersonRepository;
+using Newtonsoft.Json.Linq;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/nomenclatures")]
     public class GvaNomController : ApiController
     {
+        private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
         private IPersonRepository personRepository;
         private IAircraftRepository aircraftRepository;
         private IAirportRepository airportRepository;
@@ -27,6 +31,8 @@ namespace Gva.Api.Controllers
         private INomRepository nomRepository;
 
         public GvaNomController(
+            ILotRepository lotRepository,
+            IApplicationRepository applicationRepository,
             IPersonRepository personRepository,
             IAircraftRepository aircraftRepository,
             IAirportRepository airportRepository,
@@ -34,12 +40,30 @@ namespace Gva.Api.Controllers
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
         {
+            this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
             this.personRepository = personRepository;
             this.aircraftRepository = aircraftRepository;
             this.airportRepository = airportRepository;
             this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
+        }
+
+        [Route("{lotId}/applications")]
+        public IHttpActionResult GetApplications(int lotId, string term = null)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            var applications = this.applicationRepository.GetNomApplications(lotId).Select(a => new ApplicationNomDO(a));
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                term = term.ToLower();
+                applications = applications.Where(n => n.ApplicationName.ToLower().Contains(term)).ToArray();
+            }
+
+            return Ok(applications);
         }
 
         [Route("persons/{id:int}")]

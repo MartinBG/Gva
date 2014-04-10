@@ -114,7 +114,12 @@
       </div>
     </div>
 
-    <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="model.files" readonly="readonly"></gva-organization-scanned-document>
+   <div class="row" style="margin-bottom:10px">
+      <div class="form-group col-sm-6 col-md-4">
+        <label class="control-label" l10n-text="organizations.recommendationDirective.commonData.applications"></label>
+        <gva-applications ng-model="model.applications" state-name="root.organizations.view.documentApplications.edit" ng-readonly="readonly"></gva-applications>
+      </div>
+    </div>
 
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.commonData.auditorsTitle"></h5>
     <gva-organization-recommendation-auditor ng-model="model.part.part1" name="examinersForm1" readonly="readonly"></gva-organization-recommendation-auditor>

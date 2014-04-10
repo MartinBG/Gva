@@ -42,7 +42,7 @@ namespace Gva.Api.Controllers
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
+            : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;

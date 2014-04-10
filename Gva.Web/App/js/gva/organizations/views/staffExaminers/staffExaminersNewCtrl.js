@@ -40,13 +40,7 @@
 
   StaffExaminersNewCtrl.$resolve = {
     organizationStaffExaminer: function () {
-      return {
-        part: {},
-        files: {
-          hideApplications: false,
-          files: []
-        }
-      };
+      return { };
     }
   };
 

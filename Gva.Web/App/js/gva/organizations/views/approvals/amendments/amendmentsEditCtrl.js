@@ -20,8 +20,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.amendment.part = _.cloneDeep(originalAmendment.part);
-      $scope.$broadcast('cancel', originalAmendment);
+      $scope.amendment = _.cloneDeep(originalAmendment);
     };
 
     $scope.save = function () {

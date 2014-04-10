@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Http;
-using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
@@ -13,11 +12,11 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
+using Gva.Api.Repositories.OrganizationRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -43,7 +42,7 @@ namespace Gva.Api.Controllers
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
+            : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -171,16 +170,21 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-         [Route(@"{lotId}/{*path:regex(^organizationInspections/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
+         [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
+          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^organizationInspections/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}")]
+        public override IHttpActionResult GetApplicationPart(int lotId, string path)
+        {
+            return base.GetApplicationPart(lotId, path);
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationAddresses$)}"),
@@ -198,16 +202,21 @@ namespace Gva.Api.Controllers
             return base.GetParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^organizationInspections$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
+        [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^organizationInspections$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}")]
+        public override IHttpActionResult GetApplicationParts(int lotId, string path)
+        {
+            return base.GetApplicationParts(lotId, path);
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}")]
@@ -218,7 +227,10 @@ namespace Gva.Api.Controllers
             var part = lot.GetPart(path);
             var firstAmendment = lot.GetParts(path + "/amendments").FirstOrDefault();
 
-            return Ok(new ApprovalPartVersionDO(part, firstAmendment, null));
+            return Ok(new ApprovalPartVersionDO(part,
+                firstAmendment,
+                null,
+                this.applicationRepository.GetApplicationRefs(firstAmendment.PartId)));
         }
 
 
@@ -232,11 +244,13 @@ namespace Gva.Api.Controllers
             foreach (var part in parts)
             {
                 var partEditions = lot.GetParts(part.Part.Path + "/amendments");
+                var firstPartEdition = partEditions.FirstOrDefault();
 
                 result.Add(new ApprovalPartVersionDO(
                         part,
-                        partEditions.FirstOrDefault(),
-                        partEditions.LastOrDefault()));
+                        firstPartEdition,
+                        partEditions.LastOrDefault(),
+                        this.applicationRepository.GetApplicationRefs(firstPartEdition.PartId)));
             }
 
             return Ok(result);
@@ -269,7 +283,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
 
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
@@ -337,7 +351,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
-            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
 
             int recommendationPartIndex = content.Get<int>("partIndex");
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
@@ -382,10 +396,13 @@ namespace Gva.Api.Controllers
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("approval.part"), userContext);
 
-            lot.CreatePart(
+            var amendmentPartVersion = lot.CreatePart(
                 string.Format("{0}/{1}/amendments/*", path, partVersion.Part.Index),
                 content.Get<JObject>("organizationAmendment.part"),
                 userContext);
+            this.applicationRepository.AddApplicationRefs(
+                amendmentPartVersion,
+                content.GetItems<ApplicationNomDO>("organizationAmendment.applications"));
 
             lot.Commit(userContext, lotEventDispatcher);
             this.unitOfWork.Save();

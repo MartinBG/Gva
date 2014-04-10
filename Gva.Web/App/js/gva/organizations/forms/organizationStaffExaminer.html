@@ -3,37 +3,44 @@
   <div class="row">
     <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.nomValueId"></label>
-      <sc-int ng-model="model.nomValueId" ng-readonly="readonly"></sc-int>
+      <sc-int ng-model="model.part.nomValueId" ng-readonly="readonly"></sc-int>
     </div>
       <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.code"></label>
-      <sc-text ng-model="model.code" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.code" ng-readonly="readonly"></sc-text>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.name"></label>
-      <sc-text ng-model="model.name" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.name" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.nameAlt"></label>
-      <sc-text ng-model="model.nameAlt" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.nameAlt" ng-readonly="readonly"></sc-text>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.alias"></label>
-      <sc-text ng-model="model.alias" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.alias" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.valid"></label>
-      <sc-nomenclature ng-model="model.valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.person"></label>
-      <sc-nomenclature ng-model="model.parentValue" alias="'persons'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.parentValue" alias="'persons'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-9 col-md-6">
+      <label class="control-label" l10n-text="organizations.staffExaminerDirective.applications"></label>
+      <gva-applications ng-model="model.applications" state-name="root.organizations.view.documentApplications.edit" ng-readonly="readonly"></gva-applications>
     </div>
   </div>
 
@@ -41,25 +48,25 @@
   <div class="row">
       <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.stampNumber"></label>
-      <sc-text ng-model="model.content.stampNumber" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.part.content.stampNumber" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-2 col-md-2">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.organization"></label>
-      <sc-nomenclature ng-model="model.content.organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.content.organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.permitedAW"></label>
-      <sc-nomenclature ng-model="model.content.permitedAW" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.content.permitedAW" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.content.permitedCheck"></label>
-      <sc-nomenclature ng-model="model.content.permitedCheck" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.part.content.permitedCheck" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
