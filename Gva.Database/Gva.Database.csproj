@@ -62,8 +62,8 @@
     <Content Include="Create\Tables\GvaViewPersonLicences.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
-    <Content Include="Insert\recommendationPartNumbers.sql" />
-    <Content Include="Insert\disparityLevels.sql" />
+    <Content Include="Insert\Noms\recommendationPartNumbers.sql" />
+    <Content Include="Insert\Noms\disparityLevels.sql" />
     <Content Include="Insert\Noms\aircraftCategories.sql" />
     <Content Include="Insert\Noms\aircraftCertificateTypes.sql" />
     <Content Include="Insert\Noms\aircraftCreditors.sql" />

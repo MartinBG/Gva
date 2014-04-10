@@ -27,7 +27,7 @@
         organizationAmendment.part.includedDocuments.push(
           {
             partIndex: document.partIndex,
-            documentType: document.documentType
+            setPartAlias: document.setPartAlias
           });
       });
       return $state.go('^');

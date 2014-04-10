@@ -45,8 +45,6 @@ GO
 :r $(rootPath)\"..\Insert\noms.sql"
 :r $(rootPath)\"..\Insert\boolean.sql"
 :r $(rootPath)\"..\Insert\documentParts.sql"
-:r $(rootPath)\"..\Insert\disparityLevels.sql"
-:r $(rootPath)\"..\Insert\recommendationPartNumbers.sql"
 
 ---------------------------------------------------------------
 -- Insert Migration Noms Values
@@ -98,3 +96,9 @@ GO
 :r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
 :r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
 
+
+---------------------------------------------------------------
+-- Organizations test noms
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\disparityLevels.sql"
+:r $(rootPath)\"..\Insert\recommendationPartNumbers.sql"
