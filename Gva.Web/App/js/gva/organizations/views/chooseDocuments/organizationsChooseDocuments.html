@@ -7,12 +7,7 @@
   </div>
   <div class="row">
     <div class="form-group col-sm-11 col-md-9">
-      <input type="hidden" ng-model="documentTypes" class="input-sm col-sm-5 col-md-4" 
-        ui-select2="{
-          allowClear: true,
-          placeholder: '',
-          tags: documentsOptions
-        }"/>
+      <sc-nomenclature ng-model="documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'organization'}"></sc-nomenclature>
       <sc-button name="searchBtn" btn-click="search()" text="organizations.chooseDocuments.filter" class="btn btn-sm btn-primary pull-left"></sc-button>
     </div>
   </div>

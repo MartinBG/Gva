@@ -33,7 +33,7 @@
     <tbody>
       <tr ng-repeat="disparity in model.disparities" class="disparity{{disparity.sortOrder}}">
         <td style="width: 10px;" ng-if="form.$name === 'recomendationDisparitiesFromDescriptionForm'">
-          {{disparity.auditPart.name}}
+          {{disparity.auditPart}}
         </td>
         <td style="width: 10px;">
           <sc-int ng-model="disparity.sortOrder" ng-readonly="readonly"></sc-int>

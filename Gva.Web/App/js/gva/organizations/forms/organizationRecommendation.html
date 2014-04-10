@@ -212,22 +212,19 @@
           <th l10n-text="organizations.recommendationDirective.disparities.description"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.disparityLevel"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.removalDate"></th>
-          <th l10n-text="organizations.recommendationDirective.disparities.rectifyAction"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.closureDate"></th>
+          <th l10n-text="organizations.recommendationDirective.disparities.rectifyAction"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.closureDocument"></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="disparity in model.part.auditorsReview.disparities">
-          <td style="width: 10px;">
-            {{disparity.auditPart.name}}
-          </td>
           <td class="col-sm-1 col-md-1">
             {{disparity.sortOrder}}
           </td>
           <td class="col-sm-3 col-md-2">
-            {{disparity.subject.name}}
+            {{disparity.subject}}
           </td>
           <td>
             {{disparity.refNumber}}
@@ -244,7 +241,10 @@
             <td>
             {{disparity.closureDate | date:'mediumDate'}}
           </td>
-            <td>
+          <td>
+            {{disparity.rectifyAction}}
+          </td>
+          <td>
             {{disparity.closureDocument}}
           </td>
           <td class="row">

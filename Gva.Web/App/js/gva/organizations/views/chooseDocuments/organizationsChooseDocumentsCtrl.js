@@ -7,18 +7,17 @@
     $stateParams,
     $scope,
     certificate,
-    availableDocuments
+    availableDocuments,
+    Nomenclature
   ) {
     $scope.availableDocuments = availableDocuments;
 
-    $scope.documentsOptions = [
-      { id: 'other', text: 'Други документи' },
-      { id: 'application', text: 'Заявления' }
-    ];
-
     if ($stateParams.documentTypes) {
-      $scope.documentTypes = _.filter($scope.documentsOptions, function (tag) {
-        return _.contains($stateParams.documentTypes, tag.id);
+      Nomenclature.query({alias: 'documentParts', set: 'organization'})
+      .$promise.then(function(documentTypes){
+        $scope.documentParts = _.filter(documentTypes, function (type) {
+          return _.contains($stateParams.documentTypes, type.alias);
+        });
       });
     }
 
@@ -36,7 +35,7 @@
     $scope.search = function () {
       return $state.go($state.current, {
         id: $stateParams.id,
-        documentTypes: _.pluck($scope.documentTypes, 'id')
+        documentTypes: _.pluck($scope.documentParts, 'alias')
       });
     };
 
@@ -51,7 +50,8 @@
     '$stateParams',
     '$scope',
     'certificate',
-    'availableDocuments'
+    'availableDocuments',
+    'Nomenclature'
   ];
 
   OrganizationsChooseDocumentsCtrl.$resolve = {
@@ -60,16 +60,19 @@
       'OrganizationInventory',
       'certificate',
       function ($stateParams, OrganizationInventory, certificate) {
-        return OrganizationInventory.query({
-          id: $stateParams.id,
-          documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null
-        }).$promise.then(function (availableDocuments) {
-              return _.reject(availableDocuments, function (availableDocument) {
-                var count = _.where(certificate.part.includedDocuments,
-                  { partIndex: availableDocument.partIndex }).length;
-                return count > 0;
-              });
+        return OrganizationInventory
+          .query({
+            id: $stateParams.id,
+            documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null
+          })
+          .$promise
+          .then(function (availableDocuments) {
+            return _.reject(availableDocuments, function (availableDocument) {
+              var count = _.where(certificate.part.includedDocuments,
+                { partIndex: availableDocument.partIndex }).length;
+              return count > 0;
             });
+          });
       }
     ]
   };

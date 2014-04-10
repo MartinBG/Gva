@@ -324,7 +324,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult PostOrganizationData(int lotId, string path, JObject content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            this.caseTypeRepository.AddCaseTypes(lot, (content as dynamic).part.caseTypes);
+            this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes"));
 
             return base.PostPart(lotId, path, content);
         }

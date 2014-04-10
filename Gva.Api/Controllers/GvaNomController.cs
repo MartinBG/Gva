@@ -213,7 +213,13 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentRoles")]
-        public IHttpActionResult GetDocumentRoles(string term = null, string categoryAlias = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocumentRoles(
+            string term = null,
+            string categoryAlias = null,
+            [FromUri] string[] staffAliases = null,
+            [FromUri] string[] categoryCodes = null,
+            int offset = 0,
+            int? limit = null)
         {
             IEnumerable<NomValue> nomValues;
             if (categoryAlias == null && (staffAliases == null || staffAliases.Length == 0))
@@ -234,6 +240,12 @@ namespace Gva.Api.Controllers
                             isMatch &= content.Get<string>("categoryAlias") == categoryAlias;
                         }
 
+                        JToken categoryCode;
+                        if (isMatch && categoryCodes != null && categoryCodes.Length > 0 && content.TryGetValue("categoryCode", out categoryCode))
+                        {
+                            isMatch &= categoryCodes.Contains(categoryCode.ToString());
+                        }
+
                         JToken staffAlias;
                         if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
                         {
@@ -243,6 +255,23 @@ namespace Gva.Api.Controllers
                         return isMatch;
                     })
                     .WithOffsetAndLimit(offset, limit);
+            }
+
+            return Ok(nomValues);
+        }
+        [Route("documentParts")]
+        public IHttpActionResult GetDocumentParts(string set = null, int? parentValueId = null)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("documentParts");
+
+            if(!string.IsNullOrEmpty(set))
+            {
+                nomValues = nomValues.Where(p => p.Code.Contains(set));
+            }
+
+            if (parentValueId != null)
+            {
+                nomValues = nomValues.Where(n => n.ParentValueId == parentValueId);
             }
 
             return Ok(nomValues);

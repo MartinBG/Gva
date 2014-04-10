@@ -45,6 +45,8 @@ GO
 :r $(rootPath)\"..\Insert\noms.sql"
 :r $(rootPath)\"..\Insert\boolean.sql"
 :r $(rootPath)\"..\Insert\documentParts.sql"
+:r $(rootPath)\"..\Insert\disparityLevels.sql"
+:r $(rootPath)\"..\Insert\recommendationPartNumbers.sql"
 
 ---------------------------------------------------------------
 -- Insert Migration Noms Values
