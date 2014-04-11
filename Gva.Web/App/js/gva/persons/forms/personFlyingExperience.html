@@ -154,9 +154,9 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span>
           </span>
-          <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.code === 'F'" ng-readonly="readonly"></sc-int>
+          <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
           <span class="input-group-addon padding6">:</span>
-          <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.code === 'F'" ng-readonly="readonly"></sc-int>
+          <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
         </div>
       </div>
 

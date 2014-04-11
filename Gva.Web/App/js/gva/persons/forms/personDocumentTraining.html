@@ -68,7 +68,7 @@
         <sc-nomenclature ng-model="model.aircraftTypeGroup" name="aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-readonly="readonly">
         </sc-nomenclature>
       </div>
-      <div class="form-group col-sm-6 col-md-5" ng-class="{'col-md-5': model.staffType.alias === 'flightCrew' || model.staffType.alias === 'to_vs', 'col-md-4': model.staffType.alias === 'T'}">
+      <div class="form-group col-sm-6 col-md-5" ng-class="{'col-md-5': model.staffType.alias === 'flightCrew' || model.staffType.alias === 'to_vs', 'col-md-4': model.staffType.alias === 'ovd'}">
         <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.licenceType"></label>
         <sc-nomenclature ng-model="model.licenceType" name="licenceType" alias="'licenceTypes'" params="{ parentValueId: model.staffType.nomValueId }" ng-readonly="readonly">
         </sc-nomenclature>

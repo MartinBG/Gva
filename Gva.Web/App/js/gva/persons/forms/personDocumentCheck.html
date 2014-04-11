@@ -6,14 +6,14 @@
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div ng-show="model.staffType.code === 'G'">
+    <div ng-show="model.staffType.alias === 'to_vs'">
       <div class="form-group col-sm-6 col-md-4">
         <label class="control-label" l10n-text="persons.personCheckDirective.aircraftTypeGroup"></label>
         <sc-nomenclature ng-model="model.aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
     <div>
-      <div ng-show="model.staffType.code === 'F'">
+      <div ng-show="model.staffType.alias === 'flightCrew'">
         <div class="form-group col-sm-4 col-md-3">
           <label class="control-label" l10n-text="persons.personCheckDirective.ratingType"></label>
           <sc-nomenclature ng-model="model.ratingType" alias="'ratingTypes'" name="ratingType" ng-disabled="model.ratingClass" ng-readonly="readonly"></sc-nomenclature>
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="row" ng-show="model.staffType.code === 'T'">
+  <div class="row" ng-show="model.staffType.alias === 'ovd'">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="persons.personCheckDirective.locationIndicator"></label>
       <sc-nomenclature ng-model="model.locationIndicator" alias="'locationIndicators'" ng-readonly="readonly"></sc-nomenclature>
