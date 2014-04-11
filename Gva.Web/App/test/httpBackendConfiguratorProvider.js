@@ -66,11 +66,15 @@
         throw new Error('Matcher could not parse the provided url!');
       }
 
-      return self.$injector.invoke(definition.handler, {}, {
-        $params: match,
-        $data: data,
-        $jsonData: data && JSON.parse(data)
-      });
+      try {
+        return self.$injector.invoke(definition.handler, {}, {
+          $params: match,
+          $data: data,
+          $jsonData: data && JSON.parse(data)
+        });
+      } catch(e) {
+        return [500, e];
+      }
     }
 
     self.definitions.forEach(function (definition) {
