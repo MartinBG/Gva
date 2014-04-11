@@ -88,13 +88,32 @@
           'new': 'Ново летище',
           search: 'Търси'
         },
+        chooseDocuments: {
+          save: 'Запис',
+          back: 'Назад',
+          filter: 'Търси',
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
+        },
         airportScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
           bookPageNumber: '№ стр. в дело',
           pageCount: 'Брой стр.',
           caseType: 'Тип дело',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          revokeCause: 'Причина за отнемане',
+          noAvailableDocuments: 'Няма налични приложени документи',
+          chooseDocuments: 'Избери документи'
         },
         airportDataDirective: {
           title: 'Данни за летище',
@@ -269,7 +288,9 @@
           revoke: 'Отнемане',
           revokeDate: 'Дата на отнемане',
           revokeInspector: 'Инспектор',
-          revokeCause: 'Причина за отнемане'
+          revokeCause: 'Причина за отнемане',
+          chooseDocuments: 'Избери документи',
+          noAvailableDocuments: 'Няма налични приложени документи'
         },
         newOper: {
           save: 'Запис',

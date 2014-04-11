@@ -452,6 +452,8 @@
     <Content Include="App\js\gva\airports\forms\airportScannedDocument.html" />
     <Content Include="App\js\gva\airports\forms\airportScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\airports\resources\airportInventory.js" />
+    <Content Include="App\js\gva\airports\views\chooseDocuments\chooseDocuments.html" />
+    <Content Include="App\js\gva\airports\views\chooseDocuments\chooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\airports\views\inventory\inventorySearch.html" />
     <Content Include="App\js\gva\airports\views\inventory\inventorySearchCtrl.js" />
     <Content Include="App\js\gva\airports\resources\airport.js" />
