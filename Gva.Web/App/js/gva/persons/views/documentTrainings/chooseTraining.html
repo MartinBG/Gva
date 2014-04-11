@@ -1,0 +1,23 @@
+﻿<div>
+  <sc-button name="addBtn" btn-click="addTrainings()" text="persons.chooseTraining.add" class="btn btn-sm btn-primary pull-left" icon="glyphicon-plus"></sc-button>
+  <sc-button name="backtn" btn-click="goBack()" text="persons.chooseTraining.back" class="btn btn-sm btn-primary pull-left" icon="glyphicon-arrow-left" style="margin-left: 5px;"></sc-button>
+  <sc-datatable items="trainings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <input type="checkbox" ng-checked="selectedTrainings | contains:item" sc-click="selectTraining($event, item)">
+    </sc-column>
+    <sc-column data="part.documentNumber" title="persons.chooseTraining.number">
+    </sc-column>
+    <sc-column data="part.documentDateValidFrom" type="date" title="persons.chooseTraining.dateValidFrom">
+    </sc-column>
+    <sc-column data="part.documentDateValidTo" type="date" title="persons.chooseTraining.dateValidTo">
+    </sc-column>
+    <sc-column data="part.documentPublisher"title="persons.chooseTraining.publisher">
+    </sc-column>
+    <sc-column data="part.ratingType.name" title="persons.chooseTraining.ratingType">
+    </sc-column>
+    <sc-column data="part.personOtherDocumentType.name" title="persons.chooseTraining.docType">
+    </sc-column>
+    <sc-column data="part.personOtherDocumentRole.name" title="persons.chooseTraining.docRole">
+    </sc-column>
+  </sc-datatable>
+</div>

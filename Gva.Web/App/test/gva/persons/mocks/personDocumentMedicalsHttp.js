@@ -38,7 +38,7 @@
 
           person.personDocumentMedicals.push(personDocumentMedical);
 
-          return [200];
+          return [200, {partIndex: personDocumentMedical.partIndex}];
         })
       .when('POST', '/api/persons/:id/personDocumentMedicals/:ind',
         function ($params, $jsonData, personLots) {
@@ -50,7 +50,7 @@
 
           _.assign(personDocumentMedical, $jsonData);
 
-          return [200];
+          return [200, { partIndex: personDocumentMedical.partIndex }];
         })
       .when('DELETE', '/api/persons/:id/personDocumentMedicals/:ind',
         function ($params, $jsonData, personLots) {

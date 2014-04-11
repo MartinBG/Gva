@@ -9,18 +9,18 @@
       personDocumentEducations = require('./person-document-education.sample'),
       personDocumentIds = require('./person-document-id.sample'),
       personDocumentOthers = require('./person-document-other.sample'),
+      personDocumentExams = require('./person-document-exam.sample'),
       personDocumentTrainings = require('./person-document-training.sample'),
       personDocumentMedicals = require('./person-document-med.sample'),
       personDocumentChecks = require('./person-document-checks.sample'),
       personFlyingExperiences = require('./person-flyingExperience.sample'),
-      personRatingEditions = require('./person-rating-edition.sample'),
       personRatings = require('./person-rating.sample'),
       personDocumentApplications = require('./person-document-application.sample');
 
   angular.module('app').constant('personLots', [
     {
       lotId: 1,
-      nextIndex: 29,
+      nextIndex: 31,
       personData: {
         partIndex: 1,
         part: personData.person1Data
@@ -150,26 +150,35 @@
       personRatings: [
         {
           partIndex: 24,
-          part: personRatings.person1Rating1,
-          personRatingEditions: [
-            {
-              partIndex: 25,
-              part: personRatingEditions.person1Edition1
-            },
-            {
-              partIndex: 26,
-              part: personRatingEditions.person1Edition2
-            }
-          ]
+          part: personRatings.person1Rating1
+        },
+        {
+          partIndex: 25,
+          part: personRatings.person1Rating2
+        },
+        {
+          partIndex: 26,
+          part: personRatings.person1Rating3
+        }
+      ],
+      personLicences: [],
+      personDocumentExams: [
+        {
+          partIndex: 27,
+          part: personDocumentExams.person1Exam1
+        },
+        {
+          partIndex: 28,
+          part: personDocumentExams.person1Exam2
         }
       ],
       personDocumentApplications: [
         {
-          partIndex: 27,
+          partIndex: 29,
           part: personDocumentApplications.application1
         },
         {
-          partIndex: 28,
+          partIndex: 30,
           part: personDocumentApplications.application2
         }
       ]
@@ -187,7 +196,19 @@
           part: personDocumentEmployments.person2Employment,
           files: []
         }
-      ]
+      ],
+      personAddresses: [],
+      personStatuses: [],
+      personDocumentEducations: [],
+      personDocumentIds: [],
+      personDocumentOthers: [],
+      personDocumentTrainings: [],
+      personDocumentMedicals: [],
+      personDocumentChecks: [],
+      personFlyingExperiences: [],
+      personRatings: [],
+      personLicences: [],
+      personDocumentExams: []
     },
     {
       lotId: 3,
@@ -202,7 +223,19 @@
           part: personDocumentEmployments.person3Employment,
           files: []
         }
-      ]
+      ],
+      personAddresses: [],
+      personStatuses: [],
+      personDocumentEducations: [],
+      personDocumentIds: [],
+      personDocumentOthers: [],
+      personDocumentTrainings: [],
+      personDocumentMedicals: [],
+      personDocumentChecks: [],
+      personFlyingExperiences: [],
+      personRatings: [],
+      personLicences: [],
+      personDocumentExams: []
     }
   ]);
 }(angular));

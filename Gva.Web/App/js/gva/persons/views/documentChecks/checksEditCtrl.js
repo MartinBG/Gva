@@ -11,8 +11,6 @@
     selectedPublisher
   ) {
     var originalCheck = _.cloneDeep(personDocumentCheck);
-
-    $scope.isEdit = true;
     $scope.editMode = null;
 
     $scope.personDocumentCheck = personDocumentCheck;
@@ -28,8 +26,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.personDocumentCheck.part = _.cloneDeep(originalCheck.part);
-      $scope.$broadcast('cancel', originalCheck);
+      $scope.personDocumentCheck = _.cloneDeep(originalCheck);
     };
 
     $scope.save = function () {

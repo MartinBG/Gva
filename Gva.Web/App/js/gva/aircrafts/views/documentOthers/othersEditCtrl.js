@@ -20,8 +20,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.aircraftDocumentOther.part = _.cloneDeep(originalDocument.part);
-      $scope.$broadcast('cancel', originalDocument);
+      $scope.aircraftDocumentOther = _.cloneDeep(originalDocument);
     };
 
     $scope.save = function () {

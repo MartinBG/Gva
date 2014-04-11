@@ -34,25 +34,24 @@ namespace Common.Json
 
         public static IEnumerable<JToken> GetItems(this JToken o, string path)
         {
-            var tokens = o.SelectToken(path).Values<JToken>();
-            if (tokens == null)
+            var token = o.SelectToken(path);
+            if (token == null)
             {
                 return Enumerable.Empty<JToken>();
             }
 
-            return tokens;
+            return token;
         }
 
         public static IEnumerable<T> GetItems<T>(this JToken o, string path)
         {
             var token = o.SelectToken(path);
-            var tokens = token == null ? null : token.Values<JToken>();
-            if (tokens == null)
+            if (token == null)
             {
                 return Enumerable.Empty<T>();
             }
 
-            return tokens.Select(t => t.ToObject<T>());
+            return token.Select(t => t.ToObject<T>());
         }
     }
 }

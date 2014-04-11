@@ -1,5 +1,5 @@
-﻿/*global angular,_*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function FlyingExperiencesEditCtrl(
@@ -11,7 +11,6 @@
   ) {
     var originalFlyingExp = _.cloneDeep(personFlyingExperience);
 
-    $scope.isEdit = true;
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.editMode = null;
 
@@ -70,4 +69,4 @@
   };
 
   angular.module('gva').controller('FlyingExperiencesEditCtrl', FlyingExperiencesEditCtrl);
-}(angular));
+}(angular, _));

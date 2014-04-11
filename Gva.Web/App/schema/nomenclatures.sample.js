@@ -464,6 +464,12 @@
       { nomValueId: 2, code: '2', name: '2', alias: '2' },
       { nomValueId: 3, code: '3', name: '3', alias: '3' },
       { nomValueId: 4, code: '4', name: '4', alias: '4' }
-    ]
+    ],
+    
+    //Номенклатура Ограничения (Part-66)
+    limitation66Types: require('./limitation66Type'),
+
+    //Номенклатура Видове действия относно правоспособност
+    licenceActions: require('./licenceAction')
   };
 })(typeof module === 'undefined' ? (this['nomenclatures.sample'] = {}) : module);

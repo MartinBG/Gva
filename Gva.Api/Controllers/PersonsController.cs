@@ -163,23 +163,12 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personData$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+/editions/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
-        public IHttpActionResult GetRatingPart(int lotId, string path)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var part = lot.GetPart(path);
-            var firstEdition = lot.GetParts(path + "/editions").FirstOrDefault();
-
-            return Ok(new RatingPartVersionDO(part, null, firstEdition));
         }
 
         [Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
@@ -187,7 +176,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentMedicals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
@@ -198,30 +187,12 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+/editions$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
+         Route(@"{lotId}/{*path:regex(^licences$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
-        }
-
-        //Route(@"{lotId}/{path:regex(^licences$)}"),
-        [Route(@"{lotId}/{path:regex(^ratings$)}")]
-        public IHttpActionResult GetRatingParts(int lotId, string path)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var parts = lot.GetParts(path);
-
-            var result = new List<RatingPartVersionDO>();
-            foreach (var part in parts)
-            {
-                var partEditions = lot.GetParts(part.Part.Path + "/editions");
-
-                result.Add(new RatingPartVersionDO(part, partEditions.FirstOrDefault(), partEditions.LastOrDefault()));
-            }
-
-            return Ok(result);
         }
 
         [Route(@"{lotId}/{path:regex(^personDocumentIds$)}"),
@@ -229,7 +200,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{path:regex(^personDocumentEducations$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentMedicals$)}"),
-         Route(@"{lotId}/{path:regex(^personDocumentTheoreticalexams$)}"),
+         Route(@"{lotId}/{path:regex(^personDocumentExams$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
@@ -244,36 +215,16 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentMedicals$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentExams$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+/editions$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+/editions$)}"),
+         Route(@"{lotId}/{*path:regex(^licences$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
-        }
-
-        //[Route(@"{lotId}/{path:regex(^licences$)}")]
-        [Route(@"{lotId}/{path:regex(^ratings$)}")]
-        public IHttpActionResult PostNewRating(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("rating.part"), userContext);
-
-            lot.CreatePart(
-                string.Format("{0}/{1}/editions/*", path, partVersion.Part.Index),
-                content.Get<JObject>("ratingEdition.part"),
-                userContext);
-
-            lot.Commit(userContext, lotEventDispatcher);
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
@@ -282,11 +233,11 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentMedicals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentExams\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+/editions/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
@@ -310,34 +261,16 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentMedicals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTheoreticalexams\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^personDocumentExams\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^licences/\d+/editions/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+/editions/\d+$)}")]
-        public IHttpActionResult DeleteEdition(int lotId, string path)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.DeletePart(path, userContext, true);
-
-            if (lot.GetParts(Regex.Match(path, @".+/\d+/[^/\d]+").Value).Count() == 0)
-            {
-                lot.DeletePart(Regex.Match(path, @"[^/\d]+/\d+").Value, userContext);
-            }
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]

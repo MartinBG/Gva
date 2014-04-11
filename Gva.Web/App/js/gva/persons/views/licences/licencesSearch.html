@@ -1,3 +1,18 @@
 ﻿<div>
-  LICENCES SEARCH
+  <sc-button name="createBtn" btn-click="newLicence()" text="persons.licencesSearch.newLicence" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+  <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button name="viewBtn" btn-click="viewLicence(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="part.licenceNumber" title="persons.licencesSearch.licenceNumber">
+    </sc-column>
+    <sc-column data="part.licenceType.name" title="persons.licencesSearch.licenceType">
+    </sc-column>
+    <sc-column data="(part.editions | last).documentDateValidFrom" title="persons.licencesSearch.documentDateValidFrom" type="date">
+    </sc-column>
+    <sc-column data="(part.editions | last).documentDateValidTo" title="persons.licencesSearch.documentDateValidTo" type="date">
+    </sc-column>
+    <sc-column data="(part.editions | first).documentDateValidFrom" title="persons.licencesSearch.firstEditionValidFrom" type="date">
+    </sc-column>
+  </sc-datatable>
 </div>

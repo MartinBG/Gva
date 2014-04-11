@@ -1,0 +1,21 @@
+﻿<sc-button name="createBtn" btn-click="newExam()" text="persons.searchExam.newExam" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable ng-model="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button name="editBtn" btn-click="editExam(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.documentNumber" title="persons.searchExam.documentNumber">
+  </sc-column>
+  <sc-column data="part.documentDateValidFrom" type="date" title="persons.searchExam.documentDateValidFrom">
+  </sc-column>
+  <sc-column data="part.documentPublisher" title="persons.searchExam.documentPublisher">
+  </sc-column>
+  <sc-column data="part.valid.name" title="persons.searchExam.valid">
+  </sc-column>
+  <sc-column data="part.notes" title="persons.searchExam.notes"">
+  </sc-column>
+  <sc-column data="part.bookPageNumber" title="persons.searchExam.bookPageNumber">
+  </sc-column>
+  <sc-column data="part.pageCount" title="persons.searchExam.pageCount">
+  </sc-column>
+  </sc-column>
+</sc-datatable>

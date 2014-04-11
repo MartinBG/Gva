@@ -4,7 +4,7 @@
     <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.staffType"></label>
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
 
     <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
@@ -154,9 +154,9 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span>
           </span>
-          <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.code === 'F'" ng-readonly="readonly"></sc-int>
+          <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
           <span class="input-group-addon padding6">:</span>
-          <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.code === 'F'" ng-readonly="readonly"></sc-int>
+          <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
         </div>
       </div>
 

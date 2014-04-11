@@ -134,7 +134,6 @@
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
-    <Compile Include="ModelsDO\RatingPartVersionDO.cs" />
     <Compile Include="Models\GvaViewEquipment.cs" />
     <Compile Include="Models\GvaViewAirport.cs" />
     <Compile Include="Models\GvaViewAircraft.cs" />

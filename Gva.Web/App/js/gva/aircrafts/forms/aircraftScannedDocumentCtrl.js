@@ -5,7 +5,7 @@
   function AircraftScannedDocCtrl($scope, $state, $stateParams, $compile, AircraftApplication) {
     $scope.lotId = $stateParams.id;
 
-    var init = function () {
+    $scope.$watch('model', function () {
       if (_.isArray($scope.model)) {
         $scope.hideApplications = false;
       }
@@ -18,9 +18,7 @@
         file.isDeleted = false;
         file.isAdded = false;
       });
-    };
-
-    init();
+    });
 
     $scope.appSelectOpt = {
       multiple: true,
@@ -83,11 +81,6 @@
         ind: partIndex
       });
     };
-
-    $scope.$on('cancel', function (e, model) {
-      $scope.model = _.cloneDeep(model.files);
-      init();
-    });
   }
 
   AircraftScannedDocCtrl.$inject = [

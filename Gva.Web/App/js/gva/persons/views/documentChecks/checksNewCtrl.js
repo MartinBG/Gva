@@ -10,8 +10,6 @@
     personDocumentCheck,
     selectedPublisher
   ) {
-    $scope.isEdit = false;
-
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.personDocumentCheck.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentCheck.part.documentPublisher;
