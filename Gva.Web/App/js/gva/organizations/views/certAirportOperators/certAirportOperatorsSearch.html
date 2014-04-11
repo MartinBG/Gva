@@ -11,6 +11,6 @@
   </sc-column>
   <sc-column data="part.airport.name" title="organizations.certAirportOperatorSearch.airport">
   </sc-column>
-  <sc-column data="activities" title="organizations.certAirportOperatorSearch.activities">
+  <sc-column data="(part.airportoperatorActivityTypes| pluck:'name' | join:', </br>')" title="organizations.certAirportOperatorSearch.activities">
   </sc-column>
 </sc-datatable>

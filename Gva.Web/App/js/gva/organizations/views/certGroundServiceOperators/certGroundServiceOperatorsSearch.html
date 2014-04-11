@@ -1,5 +1,5 @@
 ﻿<sc-button name="createBtn" btn-click="newCertGroundServiceOperator()" text="organizations.certGroundServiceOperatorSearch.newCertGroundServiceOperator" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="organizationCertGroundServiceOperator" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="organizationCertGroundServiceOperators" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editCertGroundServiceOperator(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
@@ -11,6 +11,6 @@
   </sc-column>
   <sc-column data="part.airport.name" title="organizations.certGroundServiceOperatorSearch.airport">
   </sc-column>
-    <sc-column data="activities" title="organizations.certGroundServiceOperatorSearch.activities">
+    <sc-column data="(part.groundServiceOperatorActivityTypes| pluck:'name' | join:', </br>')" title="organizations.certGroundServiceOperatorSearch.activities">
   </sc-column>
 </sc-datatable>

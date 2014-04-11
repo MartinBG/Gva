@@ -1398,7 +1398,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\js\ems\corrs\forms\" />
-    <Folder Include="App\js\gva\persons\views\publishers\" />
     <Folder Include="App\test\ems\mocks\" />
     <Folder Include="App\test\gva\aircrafts\pageObjects\" />
     <Folder Include="App\test\gva\aircrafts\specs\" />
