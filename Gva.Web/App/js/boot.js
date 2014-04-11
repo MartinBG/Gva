@@ -21,7 +21,7 @@
             controllers[name] = constructor;
           }
 
-          return original.call($controllerProvider, name, constructor);
+          return original.apply($controllerProvider, [name, constructor]);
         });
 
       $stateProvider.state = _.wrap($stateProvider.state, function (original, name, definition) {
@@ -40,14 +40,14 @@
             };
           }
 
-          return original.call($stateProvider, {
+          return original.apply($stateProvider, [{
             name: stateArray[0],
             url: stateArray[1],
             views: views,
             'abstract': stateArray.length === 2
-          });
+          }]);
         } else {
-          return original.call($stateProvider, name, definition);
+          return original.apply($stateProvider, [name, definition]);
         }
       });
 
@@ -61,10 +61,28 @@
           return states[stateName];
         };
 
+        var originalGo = $delegate.go;
+        $delegate.go = function (to, params, options, payload) {
+          if (payload) {
+            $delegate.$$payload = _.cloneDeep(payload);
+          }
+
+          return originalGo.apply($delegate, [to, params, options]);
+        };
+
+        var originalTransitionTo = $delegate.transitionTo;
+        $delegate.transitionTo = function (to, toParams, options, payload) {
+          if (payload) {
+            $delegate.$$payload = _.cloneDeep(payload);
+          }
+
+          return originalTransitionTo.apply($delegate, [to, toParams, options]);
+        };
+
         return $delegate;
       });
     }
-  ]).run(function () {
+  ]).run([function () {
     _.forOwn(states, function (state) {
       if ((!state.self.url || state.self.url.indexOf('?') === 0) &&
           state.parent &&
@@ -81,5 +99,12 @@
         });
       }
     });
-  });
+  }]).run(['$rootScope', '$state', function ($rootScope, $state) {
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
+      $state.previous = $state.getWrapper($state.get(fromState).name);
+      $state.payload = $state.$$payload;
+
+      $state.$$payload = null;
+    });
+  }]);
 }(angular, _));
