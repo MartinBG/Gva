@@ -23,8 +23,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.organizationDocumentOther.part = _.cloneDeep(originalDocument.part);
-      $scope.$broadcast('cancel', originalDocument);
+      $scope.organizationDocumentOther = _.cloneDeep(originalDocument);
     };
 
     $scope.save = function () {

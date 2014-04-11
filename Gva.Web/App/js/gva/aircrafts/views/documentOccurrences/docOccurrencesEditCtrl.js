@@ -19,8 +19,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.aircraftDocumentOccurrence.part = _.cloneDeep(originalOccurrence.part);
-      $scope.$broadcast('cancel', originalOccurrence);
+      $scope.aircraftDocumentOccurrence = _.cloneDeep(originalOccurrence);
     };
 
     $scope.save = function () {

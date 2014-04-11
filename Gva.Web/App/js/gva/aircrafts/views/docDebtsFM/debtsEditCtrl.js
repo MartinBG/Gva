@@ -21,8 +21,7 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.debt.part = _.cloneDeep(originalDebt.part);
-      $scope.$broadcast('cancel', originalDebt);
+      $scope.debt = _.cloneDeep(originalDebt);
     };
 
     $scope.save = function () {
