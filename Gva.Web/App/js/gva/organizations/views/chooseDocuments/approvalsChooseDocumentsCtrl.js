@@ -2,29 +2,20 @@
 (function (angular, _) {
   'use strict';
 
-  function AmendmentsChooseDocumentsCtrl(
+  function ApprovalsChooseDocumentsCtrl(
     $state,
     $stateParams,
     $scope,
-    organizationAmendment,
+    organizationApproval,
     availableDocuments,
-    Nomenclature
+    documentParts
   ) {
     $scope.availableDocuments = availableDocuments;
-
-    if ($stateParams.documentTypes) {
-      Nomenclature.query({alias: 'documentParts', set: 'organization'})
-      .$promise.then(function(documentTypes){
-        $scope.documentParts = _.filter(documentTypes, function (type) {
-          return _.contains($stateParams.documentTypes, type.alias);
-        });
-      });
-    }
-
+    $scope.documentParts = documentParts;
 
     $scope.save = function () {
       _.each(_.filter($scope.availableDocuments, { 'checked': true }), function (document) {
-        organizationAmendment.part.includedDocuments.push(
+        _.last(organizationApproval.part.amendments).includedDocuments.push(
           {
             partIndex: document.partIndex,
             setPartAlias: document.setPartAlias
@@ -45,21 +36,21 @@
     };
   }
 
-  AmendmentsChooseDocumentsCtrl.$inject = [
+  ApprovalsChooseDocumentsCtrl.$inject = [
     '$state',
     '$stateParams',
     '$scope',
-    'organizationAmendment',
+    'organizationApproval',
     'availableDocuments',
-    'Nomenclature'
+    'documentParts'
   ];
 
-  AmendmentsChooseDocumentsCtrl.$resolve = {
+  ApprovalsChooseDocumentsCtrl.$resolve = {
     availableDocuments: [
       '$stateParams',
       'OrganizationInventory',
-      'organizationAmendment',
-      function ($stateParams, OrganizationInventory, organizationAmendment) {
+      'organizationApproval',
+      function ($stateParams, OrganizationInventory, organizationApproval) {
         return OrganizationInventory
           .query({
             id: $stateParams.id,
@@ -68,15 +59,32 @@
           .$promise
           .then(function (availableDocuments) {
             return _.reject(availableDocuments, function (availableDocument) {
-              var count = _.where(organizationAmendment.part.includedDocuments,
+              var lastAmendment = _.last(organizationApproval.part.amendments),
+                count = _.where(lastAmendment.includedDocuments,
                 { partIndex: availableDocument.partIndex }).length;
               return count > 0;
             });
           });
       }
+    ],
+    documentParts: [
+      '$stateParams',
+      'Nomenclature',
+      function ($stateParams, Nomenclature) {
+        if ($stateParams.documentTypes) {
+          return Nomenclature.query({alias: 'documentParts', set: 'organization'})
+          .$promise.then(function(documentTypes){
+            return  _.filter(documentTypes, function (type) {
+              return _.contains($stateParams.documentTypes, type.alias);
+            });
+          });
+        } else {
+          return [];
+        }
+      }
     ]
   };
 
   angular.module('gva')
-    .controller('AmendmentsChooseDocumentsCtrl', AmendmentsChooseDocumentsCtrl);
+    .controller('ApprovalsChooseDocumentsCtrl', ApprovalsChooseDocumentsCtrl);
 }(angular, _));

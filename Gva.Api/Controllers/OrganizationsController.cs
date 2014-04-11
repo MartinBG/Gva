@@ -164,7 +164,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),]
+         Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
@@ -181,7 +181,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}")]
         public override IHttpActionResult GetApplicationPart(int lotId, string path)
         {
             return base.GetApplicationPart(lotId, path);
@@ -196,7 +197,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}"),]
+         Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
@@ -213,47 +214,11 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals$)}")]
         public override IHttpActionResult GetApplicationParts(int lotId, string path)
         {
             return base.GetApplicationParts(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}")]
-        public IHttpActionResult GetApprovalPart(int lotId, string path, int? caseTypeId = null)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var part = lot.GetPart(path);
-            var firstAmendment = lot.GetParts(path + "/amendments").FirstOrDefault();
-
-            return Ok(new ApprovalPartVersionDO(part,
-                firstAmendment,
-                null,
-                this.applicationRepository.GetApplicationRefs(firstAmendment.PartId)));
-        }
-
-
-        [Route(@"{lotId}/{path:regex(^organizationApprovals$)}")]
-        public IHttpActionResult GetApprovalParts(int lotId, string path, int? caseTypeId = null)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var parts = lot.GetParts(path);
-
-            var result = new List<ApprovalPartVersionDO>();
-            foreach (var part in parts)
-            {
-                var partEditions = lot.GetParts(part.Part.Path + "/amendments");
-                var firstPartEdition = partEditions.FirstOrDefault();
-
-                result.Add(new ApprovalPartVersionDO(
-                        part,
-                        firstPartEdition,
-                        partEditions.LastOrDefault(),
-                        this.applicationRepository.GetApplicationRefs(firstPartEdition.PartId)));
-            }
-
-            return Ok(result);
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationAddresses$)}"),
@@ -265,7 +230,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationInspections$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffExaminers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
@@ -327,6 +292,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
@@ -388,28 +354,6 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{path:regex(^organizationApprovals$)}")]
-        public IHttpActionResult PostNewApproval(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("approval.part"), userContext);
-
-            var amendmentPartVersion = lot.CreatePart(
-                string.Format("{0}/{1}/amendments/*", path, partVersion.Part.Index),
-                content.Get<JObject>("organizationAmendment.part"),
-                userContext);
-            this.applicationRepository.AddApplicationRefs(
-                amendmentPartVersion,
-                content.GetItems<ApplicationNomDO>("organizationAmendment.applications"));
-
-            lot.Commit(userContext, lotEventDispatcher);
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
-
         [Route(@"{lotId}/{*path:regex(^organizationAddresses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationAuditplans/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffManagement/\d+$)}"),
@@ -423,6 +367,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
@@ -461,26 +406,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}")]
-        public IHttpActionResult DeleteAmendment(int lotId, string path)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.DeletePart(path, userContext, true);
-
-            if (lot.GetParts(Regex.Match(path, @".+/\d+/[^/\d]+").Value).Count() == 0)
-            {
-                lot.DeletePart(Regex.Match(path, @"[^/\d]+/\d+").Value, userContext);
-            }
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
-
-         [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
+        [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
         public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())

@@ -8,18 +8,11 @@
     $scope,
     certificate,
     availableDocuments,
-    Nomenclature
+    documentParts
   ) {
     $scope.availableDocuments = availableDocuments;
 
-    if ($stateParams.documentTypes) {
-      Nomenclature.query({alias: 'documentParts', set: 'organization'})
-      .$promise.then(function(documentTypes){
-        $scope.documentParts = _.filter(documentTypes, function (type) {
-          return _.contains($stateParams.documentTypes, type.alias);
-        });
-      });
-    }
+    $scope.documentParts = documentParts;
 
     $scope.save = function () {
       _.each(_.filter($scope.availableDocuments, { 'checked': true }),
@@ -51,7 +44,7 @@
     '$scope',
     'certificate',
     'availableDocuments',
-    'Nomenclature'
+    'documentParts'
   ];
 
   OrganizationsChooseDocumentsCtrl.$resolve = {
@@ -73,6 +66,22 @@
               return count > 0;
             });
           });
+      }
+    ],
+    documentParts: [
+      '$stateParams',
+      'Nomenclature',
+      function ($stateParams, Nomenclature) {
+        if ($stateParams.documentTypes) {
+          return Nomenclature.query({alias: 'documentParts', set: 'organization'})
+          .$promise.then(function(documentTypes){
+            return  _.filter(documentTypes, function (type) {
+              return _.contains($stateParams.documentTypes, type.alias);
+            });
+          });
+        } else {
+          return [];
+        }
       }
     ]
   };

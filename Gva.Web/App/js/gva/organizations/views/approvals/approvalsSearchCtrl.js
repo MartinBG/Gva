@@ -12,15 +12,8 @@
 
     $scope.organizationApprovals = organizationApprovals;
 
-    $scope.deleteApproval = function (approval) {
-      return OrganizationApproval.remove({ id: $stateParams.id, ind: approval.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.viewAmendment = function (item) {
-      return $state.go('root.organizations.view.amendments.search', {
+      return $state.go('root.organizations.view.approvals.edit', {
         id: $stateParams.id,
         ind: item.partIndex
       });

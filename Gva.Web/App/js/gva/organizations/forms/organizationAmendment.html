@@ -2,25 +2,25 @@
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.amendmentDirective.organizationType"></label>
-      <sc-nomenclature ng-model="model.part.organizationType" alias="'organizationTypes'" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.organizationType" alias="'organizationTypes'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
       <label class="control-label" l10n-text="organizations.amendmentDirective.documentNumber"></label>
-      <sc-text ng-model="model.part.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="organizations.amendmentDirective.documentDateIssue"></label>
-      <sc-date ng-model="model.part.documentDateIssue" ng-readonly="readonly"></sc-date>
+      <sc-date ng-model="model.documentDateIssue" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="organizations.amendmentDirective.changeNum"></label>
-      <sc-int ng-model="model.part.changeNum" ng-readonly="readonly"></sc-int>
+      <sc-int ng-model="model.changeNum" ng-readonly="readonly"></sc-int>
     </div>
   </div>
 
@@ -42,9 +42,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="limitation in model.part.lims147">
+      <tr ng-repeat-start="limitation in model.lims147">
         <td class="col-sm-1 col-md-1">
-          <sc-int ng-model="limitation.part.sortOrder" ng-readonly="readonly"></sc-int>
+          <sc-int ng-model="limitation.sortOrder" ng-readonly="readonly"></sc-int>
         </td>
         <td>
           <sc-nomenclature ng-model="limitation.lim147limitation" alias="'lim147limitations'" ng-readonly="readonly"></sc-nomenclature>
@@ -57,7 +57,7 @@
         </td>
       </tr>
       <tr ng-repeat-end></tr>
-      <tr class="sort-disabled" ng-if="!model.part.lims147.length">
+      <tr class="sort-disabled" ng-if="!model.lims147.length">
         <td colspan="8" class="text-center" l10n-text="organizations.amendmentDirective.noAvailableLimitations"></td>
       </tr>
       <tr>
@@ -80,7 +80,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="limitation in model.part.lims145">
+      <tr ng-repeat-start="limitation in model.lims145">
         <td>
           <sc-nomenclature ng-model="limitation.lim145limitation" alias="'lim145limitations'" ng-readonly="readonly"></sc-nomenclature>
         </td>
@@ -98,7 +98,7 @@
         </td>
       </tr>
       <tr ng-repeat-end></tr>
-      <tr class="sort-disabled" ng-if="!model.part.lims145.length">
+      <tr class="sort-disabled" ng-if="!model.lims145.length">
         <td colspan="8" class="text-center" l10n-text="organizations.amendmentDirective.noAvailableLimitations"></td>
       </tr>
       <tr>
@@ -121,7 +121,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="limitation in model.part.limsMG">
+      <tr ng-repeat-start="limitation in model.limsMG">
         <td>
           <sc-text ng-model="limitation.typeAC" ng-readonly="readonly"></sc-text>
         </td>
@@ -139,7 +139,7 @@
         </td>
       </tr>
       <tr ng-repeat-end></tr>
-      <tr class="sort-disabled" ng-if="!model.part.limsMG.length">
+      <tr class="sort-disabled" ng-if="!model.limsMG.length">
         <td colspan="8" class="text-center" l10n-text="organizations.amendmentDirective.noAvailableLimitations"></td>
       </tr>
       <tr>
@@ -168,7 +168,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="document in model.part.includedDocuments">
+      <tr ng-repeat-start="document in model.includedDocuments">
         <td>
           <sc-nomenclature ng-model="document.inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
         </td>
@@ -186,7 +186,7 @@
         </td>
       </tr>
       <tr ng-repeat-end></tr>
-      <tr class="sort-disabled" ng-if="!model.part.includedDocuments.length">
+      <tr class="sort-disabled" ng-if="!model.includedDocuments.length">
         <td colspan="8" class="text-center" l10n-text="organizations.amendmentDirective.includedDocuments.noAvailableDocuments"></td>
       </tr>
     </tbody>

@@ -653,6 +653,8 @@
     <Content Include="App\js\gva\organizations\resources\organizationCertAirNavigationServiceDeliverers.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirOperator.js" />
     <Content Include="App\js\gva\organizations\resources\organizationInventory.js" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsEdit.html" />
+    <Content Include="App\js\gva\organizations\views\approvals\approvalsEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\certAirOperators\certAirOperatorsEdit.html" />
     <Content Include="App\js\gva\organizations\views\certAirOperators\certAirOperatorsEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\certAirOperators\certAirOperatorsNew.html" />
@@ -675,7 +677,6 @@
     <Content Include="App\js\gva\organizations\views\inventory\organizationsInventorySearchCtrl.js" />
     <Content Include="App\js\gva\organizations\resources\organization.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAddress.js" />
-    <Content Include="App\js\gva\organizations\resources\organizationAmendment.js" />
     <Content Include="App\js\gva\organizations\resources\organizationApproval.js" />
     <Content Include="App\js\gva\organizations\resources\organizationAuditplans.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirportOperator.js" />
@@ -697,13 +698,7 @@
     <Content Include="App\js\gva\organizations\views\addresses\addrNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearch.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearchCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsEdit.html" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsEditCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNew.html" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsNewCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearch.html" />
-    <Content Include="App\js\gva\organizations\views\approvals\amendments\amendmentsSearchCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\chooseDocuments\amendmentsChooseDocumentsCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\chooseDocuments\approvalsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNew.html" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsSearch.html" />

@@ -2300,7 +2300,7 @@
           personRatingModel: 'Модел',
           inspector: 'Инспектор',
           newEdition: 'Ново вписване',
-          editLastEdition: 'Реакция',
+          editLastEdition: 'Редакция',
           deleteLastEdition: 'Изтриване',
           save: 'Запис',
           cancel: 'Отказ'
@@ -2988,9 +2988,28 @@
           application: 'Преписка (Заявление)',
           recommendationReport: 'Доклад от препоръки'
         },
-        newApproval: {
+        approvalNew: {
           title: 'Ново удостоверение за одобрение',
           amendmentTitle: 'Изменение',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        approvalEdit: {
+          title: 'Изменение',
+          amendmentTitle: 'Изменение',
+          approvalForm: 'Удостоверение за одобрение',
+          amendmentForm: 'Изменение',
+          amendments: 'Изменения',
+          newAmendment: 'Ново изменение',
+          editLastAmendment: 'Редакция',
+          deleteLastAmendment: 'Изтриване',
+          organizationType: 'Тип одобрение',
+          documentNumber: ' Номер на одобрението',
+          documentFirstDateIssue: 'Дата на първо издаване',
+          documentDateIssueAmendment: 'Дата на изменение',
+          changeNumAmendment: 'Номер на изменение',
+          approvalState: 'Състояние',
+          documentNumberAmendment: 'Референтен № на описание на изменение',
           save: 'Запис',
           cancel: 'Отказ'
         },

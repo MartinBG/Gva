@@ -1,22 +1,22 @@
 ﻿<ng-form name="newApprovalForm" sc-validate="{}">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong l10n-text="organizations.newApproval.title"></strong>
+      <strong l10n-text="organizations.approvalNew.title"></strong>
       <div class="pull-right">
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.newApproval.save"
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalNew.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newApproval.cancel"
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.approvalNew.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-approval name="organizationApprovalForm" ng-model="model.approval.part"></gva-organization-approval>
+      <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part"></gva-organization-approval>
 
-      <h5 class="form-header" l10n-text="organizations.newApproval.amendmentTitle"></h5>
-      <gva-organization-amendment name="organizationAmendmentForm" ng-model="model.organizationAmendment"></gva-organization-amendment>
+      <h5 class="form-header" l10n-text="organizations.approvalNew.amendmentTitle"></h5>
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="approval.part.amendments[0]"></gva-organization-amendment>
     </div>
   </div>
 </ng-form>

@@ -7,21 +7,17 @@
     $state,
     $stateParams,
     OrganizationApproval,
-    organizationApproval,
-    organizationAmendment
+    organizationApproval
   ) {
 
-    $scope.model = {
-      approval : organizationApproval,
-      organizationAmendment : organizationAmendment
-    };
+    $scope.approval = organizationApproval;
 
     $scope.save = function () {
       return $scope.newApprovalForm.$validate()
         .then(function () {
           if ($scope.newApprovalForm.$valid) {
             return OrganizationApproval
-              .save({ id: $stateParams.id }, $scope.model).$promise
+              .save({ id: $stateParams.id }, $scope.approval).$promise
               .then(function () {
                 return $state.go('root.organizations.view.approvals.search');
               });
@@ -39,27 +35,19 @@
     '$state',
     '$stateParams',
     'OrganizationApproval',
-    'organizationApproval',
-    'organizationAmendment'
+    'organizationApproval'
   ];
 
   ApprovalsNewCtrl.$resolve = {
     organizationApproval: function () {
       return {
-        part: {}
-      };
-    },
-    organizationAmendment: function () {
-      return {
         part: {
-          includedDocuments: [],
-          lims145: [],
-          lims147: [],
-          limsMG: []
-        },
-        files: {
-          hideApplications: false,
-          files: []
+          amendments: [{
+            includedDocuments: [],
+            lims145: [],
+            lims147: [],
+            limsMG: []
+          }]
         }
       };
     }
