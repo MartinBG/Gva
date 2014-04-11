@@ -3,7 +3,7 @@
   <sc-button name="backBtn" btn-click="goBack()" text="organizations.chooseAudits.back" class="btn btn-sm btn-primary pull-left" icon="glyphicon-arrow-left" style="margin-left: 5px;"></sc-button>
    <sc-datatable items="availableAudits" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
     <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
-      <input type="checkbox" ng-model="item.checked">
+      <input type="checkbox" ng-model="item.checked" ng-disabled="item.disabled">
     </sc-column>
     <sc-column data="part.documentNumber" title="organizations.chooseAudits.documentNumber">
     </sc-column>

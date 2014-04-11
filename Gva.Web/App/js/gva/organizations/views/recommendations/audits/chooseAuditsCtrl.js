@@ -46,6 +46,11 @@
                   availableAudit.partIndex)) {
                   availableAudit.checked = true;
                 }
+
+                if(availableAudit.part.auditDetails.length === 0){
+                  availableAudit.disabled = true;
+                }
+
                 return availableAudit;
               });
             });

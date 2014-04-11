@@ -423,11 +423,42 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
+        public IHttpActionResult DeleteRecommendationPart(int lotId, string path)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            PartVersion part = lot.GetPart(path);
+
+            foreach (int inspectionPartIndex in part.Content.GetItems<int>("includedAudits"))
+            {
+                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
+
+                JArray recommendations = inspection["recommendationReports"] as JArray;
+
+                JObject recommendation =
+                    recommendations
+                    .FirstOrDefault(t => t.Get<int>("partIndex") == part.Part.Index) as JObject;
+
+                recommendations.Remove(recommendation);
+
+                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
+            }
+
+            lot.DeletePart(path, userContext, false);
+
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}")]
