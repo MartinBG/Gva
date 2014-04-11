@@ -2,7 +2,6 @@
 <sc-datatable items="documentOwners" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editDocumentOwner(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    <sc-button name="deleteBtn" btn-click="deleteDocumentOwner(item)" class="btn btn-xs btn-default" icon="glyphicon-remove"></sc-button>
   </sc-column>
   <sc-column data="part.equipmentRelation.name" title="equipments.ownerSearch.equipmentRelation">
   </sc-column>
