@@ -1,5 +1,5 @@
-﻿/*global angular,_*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function FlyingExperiencesEditCtrl(
@@ -69,4 +69,4 @@
   };
 
   angular.module('gva').controller('FlyingExperiencesEditCtrl', FlyingExperiencesEditCtrl);
-}(angular));
+}(angular, _));
