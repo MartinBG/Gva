@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('Application', ['$resource', function ($resource) {
+  angular.module('gva').factory('ApplicationNom', ['$resource', function ($resource) {
     return $resource('/api/nomenclatures/:id/applications');
   }]);
 }(angular));

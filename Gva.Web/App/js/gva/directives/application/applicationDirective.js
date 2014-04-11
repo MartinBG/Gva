@@ -6,7 +6,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
 (function (angular, Select2) {
   'use strict';
 
-  function ApplicationsDirective($state, $stateParams, $compile, $parse, Application) {
+  function ApplicationsDirective($state, $stateParams, $compile, $parse, ApplicationNom) {
     function preLink(scope, iElement, iAttrs) {
       scope.appSelectOpt = {
         multiple: true,
@@ -25,7 +25,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
           container.append($compile(elem)(scope));
         },
         query: function (query) {
-          Application.query({ id: $stateParams.id, term: query.term }).$promise
+          ApplicationNom.query({ id: $stateParams.id, term: query.term }).$promise
               .then(function (result) {
                 query.callback({
                   results: result
@@ -50,7 +50,13 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
     };
   }
 
-  ApplicationsDirective.$inject = ['$state', '$stateParams', '$compile', '$parse', 'Application'];
+  ApplicationsDirective.$inject = [
+    '$state',
+    '$stateParams',
+    '$compile',
+    '$parse',
+    'ApplicationNom'
+  ];
 
   angular.module('gva').directive('gvaApplications', ApplicationsDirective);
 }(angular, Select2));
