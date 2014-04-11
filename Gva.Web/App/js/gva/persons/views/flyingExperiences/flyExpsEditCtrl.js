@@ -11,7 +11,6 @@
   ) {
     var originalFlyingExp = _.cloneDeep(personFlyingExperience);
 
-    $scope.isEdit = true;
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.editMode = null;
 

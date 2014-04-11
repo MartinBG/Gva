@@ -10,7 +10,6 @@
     personFlyingExperience
   ) {
     $scope.personFlyingExperience = personFlyingExperience;
-    $scope.isEdit = false;
 
     $scope.save = function () {
       return $scope.personFlyingExperienceForm.$validate()

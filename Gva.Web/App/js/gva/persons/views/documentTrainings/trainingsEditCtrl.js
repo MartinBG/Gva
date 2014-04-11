@@ -12,7 +12,6 @@
   ) {
     var originalTraining = _.cloneDeep(personDocumentTraining);
 
-    $scope.isEdit = true;
     $scope.personDocumentTraining = personDocumentTraining;
     $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentTraining.part.documentPublisher;

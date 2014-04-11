@@ -8,8 +8,8 @@
     $stateParams,
     PersonDocumentTraining,
     personDocumentTraining,
-    selectedPublisher) {
-    $scope.isEdit = false;
+    selectedPublisher
+  ) {
     $scope.save = function () {
       return $scope.newDocumentTrainingForm.$validate()
         .then(function () {

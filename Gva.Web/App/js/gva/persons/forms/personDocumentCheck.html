@@ -4,7 +4,7 @@
     <div class="form-group col-md-4 col-sm-6" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.personCheckDirective.staffType"></label>
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="$parent.isEdit" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div ng-show="model.staffType.alias === 'to_vs'">
       <div class="form-group col-sm-6 col-md-4">

@@ -11,8 +11,6 @@
     selectedPublisher
   ) {
     var originalCheck = _.cloneDeep(personDocumentCheck);
-
-    $scope.isEdit = true;
     $scope.editMode = null;
 
     $scope.personDocumentCheck = personDocumentCheck;
