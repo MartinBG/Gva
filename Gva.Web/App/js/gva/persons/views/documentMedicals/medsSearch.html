@@ -3,7 +3,8 @@
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editDocumentMedical(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.testimonial" title="persons.medicalSearch.testimonial" width="200px">
+  <sc-column title="persons.medicalSearch.testimonial" width="200px" has-content="true">
+    {{item.part.documentNumberPrefix}}-{{item.part.documentNumber}}-{{person.lin}}-{{item.part.documentNumberSuffix}}
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.medicalSearch.documentDateValidFrom" type="date">
   </sc-column>
@@ -11,7 +12,7 @@
   </sc-column>
   <sc-column data="part.medClassType.name" title="persons.medicalSearch.medClass">
   </sc-column>
-  <sc-column data="part.limitations" title="persons.medicalSearch.limitations">
+  <sc-column data="part.limitationsTypes | pluck:'name' | join:', '" title="persons.medicalSearch.limitations">
   </sc-column>
   <sc-column data="part.documentPublisher.name" title="persons.medicalSearch.documentPublisher">
   </sc-column>

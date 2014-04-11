@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function DocumentMedicalsSearchCtrl(
@@ -10,6 +10,7 @@
     person,
     meds
   ) {
+    $scope.person = person;
     $scope.medicals = meds;
 
     $scope.editDocumentMedical = function (medical) {
@@ -37,29 +38,10 @@
     meds: [
       '$stateParams',
       'PersonDocumentMedical',
-      'person',
-      function ($stateParams, PersonDocumentMedical, person) {
-        return PersonDocumentMedical.query($stateParams).$promise
-        .then(function (meds) {
-          return _(meds)
-          .forEach(function (med) {
-            var testimonial = med.part.documentNumberPrefix + '-' +
-              med.part.documentNumber + '-' +
-              person.lin + '-' +
-              (med.part.documentNumberSuffix || '');
-
-            med.part.testimonial = testimonial;
-
-            var limitations = '';
-            for (var i = 0; i < med.part.limitationsTypes.length; i++) {
-              limitations += med.part.limitationsTypes[i].name + ', ';
-            }
-            limitations = limitations.substring(0, limitations.length - 2);
-            med.part.limitations = limitations;
-          }).value();
-        });
+      function ($stateParams, PersonDocumentMedical) {
+        return PersonDocumentMedical.query($stateParams).$promise;
       }
     ]
   };
   angular.module('gva').controller('DocumentMedicalsSearchCtrl', DocumentMedicalsSearchCtrl);
-}(angular, _));
+}(angular));
