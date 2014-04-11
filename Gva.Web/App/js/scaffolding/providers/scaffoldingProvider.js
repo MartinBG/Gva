@@ -31,12 +31,23 @@
             };
 
             _.forOwn(attrs, function (value, key) {
+              // event handler
               if (key.indexOf('scOn') === 0) {
                 var parsedFunc = $parse(value);
 
                 eventHandlers[key] = function (message) {
                   return parsedFunc(scope.$parent, { $message: message });
                 };
+              }
+
+              // data attribute
+              if (key.indexOf('scData') === 0) {
+                var dataKey = key.substring('scData'.length);
+                dataKey = dataKey[0].toLowerCase() + dataKey.substring(1);
+
+                scope.$parent.$watch(value, function (newValue) {
+                  scope[dataKey] = newValue;
+                });
               }
             });
           }
