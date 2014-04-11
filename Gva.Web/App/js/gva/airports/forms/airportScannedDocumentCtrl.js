@@ -12,7 +12,7 @@
       $scope.hideApplications = $scope.model.hideApplications;
       $scope.model = $scope.model.files;
     }
-    
+
     $scope.appSelectOpt = {
       multiple: true,
       id: function (app) {
@@ -74,7 +74,7 @@
     };
 
     $scope.viewApplication = function (partIndex) {
-      $state.go('root.airports.view.documentApplications.edit', {
+      $state.go('root.airports.view.applications.edit', {
         id: $stateParams.id,
         ind: partIndex
       });

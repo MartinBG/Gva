@@ -142,11 +142,11 @@ namespace Gva.Api.Controllers
         [Route("aircrafts/{id:int}")]
         public IHttpActionResult GetAircraft(int id)
         {
-            var aircraft = this.aircraftRepository.GetAircraft(id);
+            var returnValue = this.aircraftRepository.GetAircraft(id);
             return Ok(new
             {
-                nomValueId = aircraft.LotId,
-                name = aircraft.Model
+                nomValueId = returnValue.LotId,
+                name = returnValue.Model
             });
         }
 
@@ -167,11 +167,11 @@ namespace Gva.Api.Controllers
         [Route("airports/{id:int}")]
         public IHttpActionResult GetAirport(int id)
         {
-            var airport = this.airportRepository.GetAirport(id);
+            var returnValue = this.airportRepository.GetAirport(id);
             return Ok(new
             {
-                nomValueId = airport.LotId,
-                name = airport.Name
+                nomValueId = returnValue.LotId,
+                name = returnValue.Name
             });
         }
 
@@ -192,11 +192,11 @@ namespace Gva.Api.Controllers
         [Route("equipments/{id:int}")]
         public IHttpActionResult GetEquipment(int id)
         {
-            var equipment = this.equipmentRepository.GetEquipment(id);
+            var returnValue = this.equipmentRepository.GetEquipment(id);
             return Ok(new
             {
-                nomValueId = equipment.LotId,
-                name = equipment.Name
+                nomValueId = returnValue.LotId,
+                name = returnValue.Name
             });
         }
 
@@ -212,6 +212,17 @@ namespace Gva.Api.Controllers
                 });
 
             return Ok(returnValue);
+        }
+
+        [Route("organizations/{id:int}")]
+        public IHttpActionResult GetOrganization(int id)
+        {
+            var returnValue = this.organizationRepository.GetOrganization(id);
+            return Ok(new
+            {
+                nomValueId = returnValue.LotId,
+                name = returnValue.Name
+            });
         }
 
         [Route("organizations")]

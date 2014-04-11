@@ -45,6 +45,8 @@ namespace Gva.MigrationTool.Sets
                     new ApplicationsViewAircraftHandler(unitOfWork),
                     new ApplicationsViewPersonHandler(unitOfWork),
                     new ApplicationsViewOrganizationHandler(unitOfWork),
+                    new ApplicationsViewAirportHandler(unitOfWork),
+                    new ApplicationsViewEquipmentHandler(unitOfWork),
                     new AircraftApplicationHandler(unitOfWork, userRepository),
                     new AircraftDebtHandler(unitOfWork, userRepository),
                     new AircraftInspectionHandler(unitOfWork, userRepository),

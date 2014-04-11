@@ -86,6 +86,8 @@
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
     <Compile Include="LotEventHandlers\AirportView\AirportDataHandler.cs" />
+    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAirportHandler.cs" />
+    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewEquipmentHandler.cs" />
     <Compile Include="LotEventHandlers\EquipmentView\EquipmentDataHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftInspectionHandler.cs" />
