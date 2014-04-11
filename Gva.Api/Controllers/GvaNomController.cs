@@ -30,6 +30,7 @@ namespace Gva.Api.Controllers
         private IAirportRepository airportRepository;
         private IEquipmentRepository equipmentRepository;
         private IOrganizationRepository organizationRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
 
@@ -41,6 +42,7 @@ namespace Gva.Api.Controllers
             IAirportRepository airportRepository,
             IEquipmentRepository equipmentRepository,
             IOrganizationRepository organizationRepository,
+            IAircraftRegistrationRepository aircraftRegistrationRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
         {
@@ -51,6 +53,7 @@ namespace Gva.Api.Controllers
             this.airportRepository = airportRepository;
             this.equipmentRepository = equipmentRepository;
             this.organizationRepository = organizationRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
         }
@@ -235,6 +238,20 @@ namespace Gva.Api.Controllers
                     nomValueId = e.LotId,
                     name = e.Name
                 });
+
+            return Ok(returnValue);
+        }
+
+        [Route("registrations")]
+        public IHttpActionResult GetRegistrations(string term = null, int offset = 0, int? limit = null, int? parentValueId = null)
+        {
+            var returnValue =
+                            this.aircraftRegistrationRepository.GetRegistrations(parentValueId)
+                            .Select(e => new
+                            {
+                                nomValueId = e.LotId,
+                                name = e.CertNumber
+                            });
 
             return Ok(returnValue);
         }

@@ -81,6 +81,7 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="Models\GvaViewAircraftRegistration.cs" />
     <Compile Include="Models\GvaViewEquipment.cs" />
     <Compile Include="Models\GvaViewAirport.cs" />
     <Compile Include="Models\GvaViewAircraft.cs" />
@@ -156,6 +158,8 @@
     <Compile Include="Models\GvaViewPersonRating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
+    <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />
     <Compile Include="Repositories\CaseTypeRepository\CaseTypeRepository.cs" />

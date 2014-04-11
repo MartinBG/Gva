@@ -29,13 +29,13 @@ namespace Gva.Api.Models
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("GvaViewPersonLicences");
+            this.ToTable("GvaViewAircraftRegistrations");
             this.Property(t => t.LotPartId).HasColumnName("LotPartId");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.CertNumber).HasColumnName("Name");
+            this.Property(t => t.CertNumber).HasColumnName("CertNumber");
 
             // Relationships
-            this.HasOptional(t => t.Lot)
+            this.HasRequired(t => t.Lot)
                 .WithMany()
                 .HasForeignKey(t => t.LotId);
 

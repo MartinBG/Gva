@@ -39,11 +39,16 @@
     'aircraftCertAirworthiness'
   ];
   CertAirworthinessesFMNewCtrl.$resolve = {
-    aircraftCertAirworthiness: function () {
-      return {
-        part: {}
-      };
-    }
+    aircraftCertAirworthiness: [
+      '$stateParams',
+      function ($stateParams) {
+        return {
+          part: {
+            lotId: $stateParams.id
+          }
+        };
+      }
+    ]
   };
 
   angular.module('gva').controller('CertAirworthinessesFMNewCtrl', CertAirworthinessesFMNewCtrl);

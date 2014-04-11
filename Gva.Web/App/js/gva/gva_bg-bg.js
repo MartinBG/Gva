@@ -1186,7 +1186,8 @@
           EASA24IssueValidToDate: 'EASA Form 24 Valid',
           EASA15IssueDate: 'Form 15 Issue',
           EASA15IssueValidToDate: 'Form 15 Valid',
-          EASA15IssueRefNo: 'EASA Form 15a'
+          EASA15IssueRefNo: 'EASA Form 15a',
+          registration: 'Регистрация №'
         },
         permitDirective: {
           issuePlace: 'Място на издаване',

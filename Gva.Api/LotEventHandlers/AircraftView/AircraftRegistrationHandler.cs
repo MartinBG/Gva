@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Data;
+using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -21,6 +22,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         {
             reg.Lot = part.Part.Lot;
             reg.Part = part.Part;
+            reg.CertNumber = part.Content.Get<string>("certNumber");
         }
 
         public override void Clear(GvaViewAircraftRegistration registration)

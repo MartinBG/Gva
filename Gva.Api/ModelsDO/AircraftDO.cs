@@ -20,6 +20,8 @@ namespace Gva.Api.ModelsDO
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
             this.ModifOrWingColor = aircraftData.ModifOrWingColor;
+            this.ModifOrWingColor = aircraftData.ModifOrWingColor;
+            this.Mark = aircraftData.Mark;
         }
         public int Id { get; set; }
 

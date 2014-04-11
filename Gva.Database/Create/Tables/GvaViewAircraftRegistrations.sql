@@ -4,8 +4,9 @@ GO
 CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [LotPartId] INT           NOT NULL,
     [LotId] INT           NOT NULL,
-    [CertNumber]            NVARCHAR(50)  NULL,
+    [CertNumber]            NVARCHAR(50)  NOT NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]      PRIMARY KEY ([LotPartId]),
+    CONSTRAINT [FK_GvaAircraftRegistrations_LotParts]  FOREIGN KEY ([LotPartId]) REFERENCES [dbo].[LotParts] ([LotPartId]),
     CONSTRAINT [FK_GvaAircraftRegistrations_GvaViewAircrafts]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
 )
 GO
