@@ -169,6 +169,8 @@
     <Content Include="App\js\boot.js" />
     <Content Include="App\js\common\common.js" />
     <Content Include="App\js\common\common_bg-bg.js" />
+    <Content Include="App\js\common\filters\joinFilter.js" />
+    <Content Include="App\js\common\filters\lodashFilters.js" />
     <Content Include="App\js\common\login\loginModal.html" />
     <Content Include="App\js\common\login\loginModalCtrl.js" />
     <Content Include="App\js\common\root\views\rootCtrl.js" />
