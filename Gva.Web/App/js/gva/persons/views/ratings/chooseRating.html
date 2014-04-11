@@ -1,0 +1,25 @@
+﻿<div>
+  <sc-button name="addBtn" btn-click="addRatings()" text="persons.chooseRating.add" class="btn btn-sm btn-primary pull-left" icon="glyphicon-plus"></sc-button>
+  <sc-button name="backtn" btn-click="goBack()" text="persons.chooseRating.back" class="btn btn-sm btn-primary pull-left" icon="glyphicon-arrow-left" style="margin-left: 5px;"></sc-button>
+  <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)">
+    </sc-column>
+    <sc-column data="part.personRatingLevel.name || part.ratingType.name" title="persons.chooseRating.ratingTypeOrRatingLevel">
+    </sc-column>
+    <sc-column data="part.aircraftTypeGroup.name ||
+                     (part.ratingClass.name || '') +
+                     ((part.editions | last).ratingSubClasses &&
+                        ' (' + ((part.editions | last).ratingSubClasses | pluck:'name' | join:', ') + ')')"
+               title="persons.chooseRating.classOrCategory">
+    </sc-column>
+    <sc-column data="(part.authorization.name || '') + ' ' +
+                    ((part.editions | last).limitations | pluck:'name' | join:', ')"
+               title="persons.chooseRating.authorizationAndLimitations">
+    </sc-column>
+    <sc-column data="(part.editions | last).documentDateValidFrom" type="date" title="persons.chooseRating.lastEditionValidFrom">
+    </sc-column>
+    <sc-column data="(part.editions | last).documentDateValidTo" type="date" title="persons.chooseRating.lastEditionValidTo">
+    </sc-column>
+  </sc-datatable>
+</div>

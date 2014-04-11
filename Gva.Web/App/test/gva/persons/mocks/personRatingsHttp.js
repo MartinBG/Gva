@@ -9,16 +9,7 @@
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personRatings = _.map(person.personRatings, function (rating) {
-            return {
-              partIndex: rating.partIndex,
-              rating: rating.part,
-              ratingEdition: rating.personRatingEditions[rating.personRatingEditions.length - 1],
-              firstEditionValidFrom: rating.personRatingEditions[0].part.documentDateValidFrom
-            };
-          });
-
-          return [200, personRatings];
+          return [200, person.personRatings];
         })
       .when('GET', '/api/persons/:id/ratings/:ind',
         function ($params, personLots) {
@@ -28,27 +19,42 @@
           var rating = _(person.personRatings)
             .filter({ partIndex: parseInt($params.ind, 10) }).first();
 
-          return [200, {
-            partIndex: rating.partIndex,
-            rating: rating.part,
-            firstEditionValidFrom: rating.personRatingEditions[0].part.documentDateValidFrom
-          }];
+          return [200, rating];
         })
       .when('POST', '/api/persons/:id/ratings',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
-          var personRating = {
-            partIndex: person.nextIndex++,
-            part: $jsonData.rating.part,
-            personRatingEditions: [{
-              partIndex: person.nextIndex++,
-              part: $jsonData.ratingEdition.part
-            }]
-          };
+          var rating = $jsonData;
 
-          person.personRatings.push(personRating);
+          rating.partIndex = person.nextIndex++;
+
+          person.personRatings.push(rating);
+
+          return [200, {partIndex: rating.partIndex}];
+        })
+      .when('POST', '/api/persons/:id/ratings/:ind',
+        function ($params, $jsonData, personLots) {
+          var person = _(personLots)
+            .filter({ lotId: parseInt($params.id, 10) }).first();
+
+          var rating = _(person.personRatings)
+            .filter({ partIndex: parseInt($params.ind, 10) }).first();
+
+          _.assign(rating, $jsonData);
+
+          return [200];
+        })
+      .when('DELETE', '/api/persons/:id/ratings/:ind',
+        function ($params, $jsonData, personLots) {
+          var person = _(personLots)
+            .filter({ lotId: parseInt($params.id, 10) }).first();
+
+          var personRatingInd = _(person.personRatings)
+            .findIndex({ partIndex: parseInt($params.ind, 10) });
+
+          person.personRatings.splice(personRatingInd, 1);
 
           return [200];
         });

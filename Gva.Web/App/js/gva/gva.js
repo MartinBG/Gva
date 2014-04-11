@@ -111,6 +111,19 @@
       controller: 'AircraftScannedDocCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaLicence',
+      templateUrl: 'gva/persons/forms/personLicence.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaLicenceEdition',
+      templateUrl: 'gva/persons/forms/personLicenceEdition.html',
+      controller: 'PersonLicenceEditionCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentExam',
+      templateUrl: 'gva/persons/forms/personDocumentExam.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaAircraftCertRegisterView',
       templateUrl: 'gva/aircrafts/forms/aircraftCertRegView.html',
       controller: 'AircraftCertRegViewCtrl'
@@ -428,8 +441,28 @@
       .state(['root.persons.view.documentEducations.search'             , ''                                           , ['@root.persons.view', 'gva/persons/views/documentEducations/edusSearch.html'             , 'DocumentEducationsSearchCtrl' ]])
       .state(['root.persons.view.documentEducations.new'                , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentEducations/edusNew.html'                , 'DocumentEducationsNewCtrl'    ]])
       .state(['root.persons.view.documentEducations.edit'               , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentEducations/edusEdit.html'               , 'DocumentEducationsEditCtrl'   ]])
-      .state(['root.persons.view.licences'                              , '/licences'                                                                                                                                                               ])
-      .state(['root.persons.view.licences.search'                       , ''                                           , ['@root.persons.view', 'gva/persons/views/licences/licencesSearch.html'                   , 'LicencesSearchCtrl'           ]])
+      .state(['root.persons.view.licences'                                 , '/licences'                                                                                                                                                      ])
+      .state(['root.persons.view.licences.search'                          , ''                                          , ['@root.persons.view', 'gva/persons/views/licences/licencesSearch.html'          , 'LicencesSearchCtrl'           ]])
+      .state(['root.persons.view.licences.new'                             , '/new'                                      , ['@root.persons.view', 'gva/persons/views/licences/licencesNew.html'             , 'LicencesNewCtrl'              ]])
+      .state(['root.persons.view.licences.new.chooseRating'                , '/chooseRating'                             , ['@root.persons.view', 'gva/persons/views/ratings/chooseRating.html'             , 'ChooseRatingCtrl'             ]])
+      .state(['root.persons.view.licences.new.newRating'                   , '/newRating'                                , ['@root.persons.view', 'gva/persons/views/ratings/ratingsNew.html'               , 'AddRatingCtrl'                ]])
+      .state(['root.persons.view.licences.new.chooseMedical'               , '/chooseMedical'                            , ['@root.persons.view', 'gva/persons/views/documentMedicals/chooseMedical.html'   , 'ChooseMedicalCtrl'            ]])
+      .state(['root.persons.view.licences.new.newMedical'                  , '/newMedical'                               , ['@root.persons.view', 'gva/persons/views/documentMedicals/medsNew.html'         , 'AddMedicalCtrl'               ]])
+      .state(['root.persons.view.licences.new.chooseTraining'              , '/chooseTraining'                           , ['@root.persons.view', 'gva/persons/views/documentTrainings/chooseTraining.html' , 'ChooseTrainingCtrl'           ]])
+      .state(['root.persons.view.licences.new.newTraining'                 , '/newTraining'                              , ['@root.persons.view', 'gva/persons/views/documentTrainings/trainingsNew.html'   , 'AddTrainingCtrl'              ]])
+      .state(['root.persons.view.licences.new.newTraining.choosePublisher' , '/choosepublisher?text&publisherTypeAlias'  , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'        , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.licences.new.chooseExam'                  , '/chooseExam'                               , ['@root.persons.view', 'gva/persons/views/documentExams/chooseExam.html'         , 'ChooseExamCtrl'               ]])
+      .state(['root.persons.view.licences.new.newExam'                     , '/newExam'                                  , ['@root.persons.view', 'gva/persons/views/documentExams/examsNew.html'           , 'AddExamCtrl'                  ]])
+      .state(['root.persons.view.licences.edit'                            , '/:ind'                                     , ['@root.persons.view', 'gva/persons/views/licences/licencesEdit.html'            , 'LicencesEditCtrl'             ]])
+      .state(['root.persons.view.licences.edit.chooseRating'               , '/chooseRating'                             , ['@root.persons.view', 'gva/persons/views/ratings/chooseRating.html'             , 'ChooseRatingCtrl'             ]])
+      .state(['root.persons.view.licences.edit.newRating'                  , '/newRating'                                , ['@root.persons.view', 'gva/persons/views/ratings/ratingsNew.html'               , 'AddRatingCtrl'                ]])
+      .state(['root.persons.view.licences.edit.chooseMedical'              , '/chooseMedical'                            , ['@root.persons.view', 'gva/persons/views/documentMedicals/chooseMedical.html'   , 'ChooseMedicalCtrl'            ]])
+      .state(['root.persons.view.licences.edit.newMedical'                 , '/newMedical'                               , ['@root.persons.view', 'gva/persons/views/documentMedicals/medsNew.html'         , 'AddMedicalCtrl'               ]])
+      .state(['root.persons.view.licences.edit.chooseTraining'             , '/chooseTraining'                           , ['@root.persons.view', 'gva/persons/views/documentTrainings/chooseTraining.html' , 'ChooseTrainingCtrl'           ]])
+      .state(['root.persons.view.licences.edit.newTraining'                , '/newTraining'                              , ['@root.persons.view', 'gva/persons/views/documentTrainings/trainingsNew.html'   , 'AddTrainingCtrl'              ]])
+      .state(['root.persons.view.licences.edit.newTraining.choosePublisher', '/choosepublisher?text&publisherTypeAlias'  , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'        , 'ChoosePublisherCtrl'          ]])
+      .state(['root.persons.view.licences.edit.chooseExam'                 , '/chooseExam'                               , ['@root.persons.view', 'gva/persons/views/documentExams/chooseExam.html'         , 'ChooseExamCtrl'               ]])
+      .state(['root.persons.view.licences.edit.newExam'                    , '/newExam'                                  , ['@root.persons.view', 'gva/persons/views/documentExams/examsNew.html'           , 'AddExamCtrl'                  ]])
       .state(['root.persons.view.checks'                                , '/checks'                                                                                                                                                                 ])
       .state(['root.persons.view.checks.search'                         , ''                                           , ['@root.persons.view', 'gva/persons/views/documentChecks/checksSearch.html'               , 'DocumentChecksSearchCtrl'     ]])
       .state(['root.persons.view.checks.new'                            , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentChecks/checksNew.html'                  , 'DocumentChecksNewCtrl'        ]])
@@ -458,10 +491,11 @@
       .state(['root.persons.view.ratings'                               , '/ratings'                                                                                                                                                                ])
       .state(['root.persons.view.ratings.search'                        , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/ratingsSearch.html'                     , 'RatingsSearchCtrl'            ]])
       .state(['root.persons.view.ratings.new'                           , '/new'                                       , ['@root.persons.view', 'gva/persons/views/ratings/ratingsNew.html'                        , 'RatingsNewCtrl'               ]])
-      .state(['root.persons.view.ratings.editions'                      , '/:ind/editions'                                                                                                                                                          ])
-      .state(['root.persons.view.ratings.editions.search'               , ''                                           , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsSearch.html'           , 'EditionsSearchCtrl'           ]])
-      .state(['root.persons.view.ratings.editions.new'                  , '/new'                                       , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsNew.html'              , 'EditionsNewCtrl'              ]])
-      .state(['root.persons.view.ratings.editions.edit'                 , '/:childInd'                                 , ['@root.persons.view', 'gva/persons/views/ratings/editions/editionsEdit.html'             , 'EditionsEditCtrl'             ]])
+      .state(['root.persons.view.ratings.edit'                          , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/ratings/ratingsEdit.html'                       , 'RatingsEditCtrl'              ]])
+      .state(['root.persons.view.exams'                                 , '/exams'                                                                                                                                            ])
+      .state(['root.persons.view.exams.search'                          , ''                                           , ['@root.persons.view', 'gva/persons/views/documentExams/examsSearch.html', 'DocumentExamsSearchCtrl' ]])
+      .state(['root.persons.view.exams.new'                             , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentExams/examsNew.html'   , 'DocumentExamsNewCtrl'    ]])
+      .state(['root.persons.view.exams.edit'                            , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentExams/examsEdit.html'  , 'DocumentExamsEditCtrl'   ]])
       .state(['root.persons.view.documentOthers'                        , '/documentOthers'                                                                                                                                                          ])
       .state(['root.persons.view.documentOthers.search'                 , ''                                           , ['@root.persons.view', 'gva/persons/views/documentOthers/othersSearch.html'               , 'DocumentOthersSearchCtrl'     ]])
       .state(['root.persons.view.documentOthers.new'                    , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentOthers/othersNew.html'                  , 'DocumentOthersNewCtrl'        ]])

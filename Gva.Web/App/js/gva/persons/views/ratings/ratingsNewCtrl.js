@@ -9,14 +9,14 @@
     PersonRating,
     rating
   ) {
-    $scope.model = rating;
+    $scope.rating = rating;
 
     $scope.save = function () {
       return $scope.newRatingForm.$validate()
-       .then(function () {
+        .then(function () {
           if ($scope.newRatingForm.$valid) {
             return PersonRating
-              .save({ id: $stateParams.id }, $scope.model).$promise
+              .save({ id: $stateParams.id }, $scope.rating).$promise
               .then(function () {
                 return $state.go('root.persons.view.ratings.search');
               });
@@ -39,7 +39,11 @@
 
   RatingsNewCtrl.$resolve = {
     rating: function () {
-      return {};
+      return {
+        part: {
+          editions: [{}]
+        }
+      };
     }
   };
 

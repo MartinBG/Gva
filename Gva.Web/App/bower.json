@@ -15,6 +15,7 @@
     "bootstrap": "3.0.3",
     "bootstrap-datepicker": "eternicode/bootstrap-datepicker#8bc254a136110369684dc05a48171682ff1f3a81",
     "angular-ui-select2": "angelyordanov/ui-select2#a5e96d30acc6753be4ecdaabf3fa90efa9ca3de0",
+    "angular-ui-sortable": "angular-ui/ui-sortable#65ff2f66501ad2ac14f8d61c4a6ff5a000134d0d",
     "select2": "3.4.3",
     "jquery-modern": "jquery#2.0.3",
     "jquery-legacy": "belchev/jquery-angular-node-names#f3fd1c1b968720f5b0de2ec4ffb641136be9ddf6",

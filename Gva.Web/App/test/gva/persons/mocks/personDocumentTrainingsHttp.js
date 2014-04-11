@@ -37,7 +37,7 @@
 
             person.personDocumentTrainings.push(personDocumentTraining);
 
-            return [200, person];
+            return [200, { partIndex: personDocumentTraining.partIndex }];
           })
         .when('POST', '/api/persons/:id/personDocumentTrainings/:ind',
           function ($params, $jsonData, personLots) {

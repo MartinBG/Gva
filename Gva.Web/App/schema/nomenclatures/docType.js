@@ -3,10 +3,10 @@
   'use strict';
 
   module.exports = [
-    { nomValueId: 1, code: '', name: 'Резолюция', nameAlt: '', alias: 'resolution', parentValueId: 1 },
-    { nomValueId: 2, code: '', name: 'Задача', nameAlt: '', alias: 'task', parentValueId: 1 },
-    { nomValueId: 3, code: '', name: 'Забележка', nameAlt: '', alias: 'note', parentValueId: 1 },
-    { nomValueId: 4, code: '', name: 'Писмо', nameAlt: '', alias: 'letter', parentValueId: 1 },
+    { nomValueId: 1, code: '1', name: 'Резолюция', nameAlt: '', alias: 'resolution', parentValueId: 1 },
+    { nomValueId: 2, code: '2', name: 'Задача', nameAlt: '', alias: 'task', parentValueId: 1 },
+    { nomValueId: 3, code: '3', name: 'Забележка', nameAlt: '', alias: 'note', parentValueId: 1 },
+    { nomValueId: 4, code: '4', name: 'Писмо', nameAlt: '', alias: 'letter', parentValueId: 1 },
 
     { nomValueId: 5, code: 'М12.1.5', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – пилоти', nameAlt: '', alias: '', parentValueId: 2 },
     { nomValueId: 6, code: 'М12.1.6', name: 'Издаване на свидетелство за правоспособност на авиационен персонал – кабинен екипаж, полетни диспечери, бордни инженери, щурмани, бордни съпроводители', nameAlt: '', alias: '', parentValueId: 2 },

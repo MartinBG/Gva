@@ -129,10 +129,10 @@ namespace Gva.MigrationTool.Sets
                     //    lot.CreatePart("personDocumentApplications/*", docApplication, context);
                     //}
 
-                    //var personDocumentTheoreticalExams = Person.getPersonDocumentTheoreticalExams(con, personId);
-                    //foreach (var docTheoreticalExam in personDocumentTheoreticalExams)
+                    //var personDocumentExams = Person.getPersonDocumentExams(con, personId);
+                    //foreach (var docExam in personDocumentExams)
                     //{
-                    //    lot.CreatePart("personDocumentTheoreticalexams/*", docTheoreticalExam, context);
+                    //    lot.CreatePart("personDocumentExams/*", docExam, context);
                     //}
 
                     var personDocumentTrainings = Person.getPersonDocumentTrainings(con, personId);
@@ -452,7 +452,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentTheoreticalExams(OracleConnection con, int personId)
+        public static IList<JObject> getPersonDocumentExams(OracleConnection con, int personId)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM 

@@ -9,6 +9,7 @@
     'l10n-tools',
     'auth',
     'boot',
+    'ui.sortable',
     'common',
     'scaffolding',
     'gva',

@@ -121,6 +121,11 @@ div.labeless{
 .table > thead > tr:first-child > td, .table > tbody > tr:first-child > td, .table > tfoot > tr:first-child > td{
 	border-top: none;
 }
+.table > thead > tr.ui-sortable-helper > td,
+.table > tbody > tr.ui-sortable-helper > td,
+.table > tfoot > tr.ui-sortable-helper > td{
+	background-color: #DDDDDD;
+}
 .table > thead > tr > th{
 	padding-right: 16px;
 	border: none;

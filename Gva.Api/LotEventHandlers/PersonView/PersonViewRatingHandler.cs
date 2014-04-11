@@ -14,7 +14,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 unitOfWork: unitOfWork,
                 setAlias: "Person",
                 setPartAlias: "personRating",
-                partMatcher: pv => pv.Content.Get<string>("ratingType") != null,
+                partMatcher: pv => pv.Content.Get("ratingType") != null,
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
         {
