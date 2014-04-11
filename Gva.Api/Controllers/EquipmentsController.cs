@@ -90,7 +90,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{lotId}/inventory")]
-        public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
+        public IHttpActionResult GetInventory(int lotId, [FromUri] string[] documentTypes = null, int? caseTypeId = null)
         {
             this.lotRepository.GetLotIndex(lotId);
             var inventoryItems = this.inventoryRepository.GetInventoryItemsForLot(lotId);
@@ -125,6 +125,11 @@ namespace Gva.Api.Controllers
                         inventory.Add(new InventoryItemDO(inventoryItem, lotFile));
                     }
                 }
+            }
+
+            if (documentTypes.Length > 0)
+            {
+                inventory = inventory.Where(item => documentTypes.Contains(item.SetPartAlias)).ToList();
             }
 
             return Ok(inventory);

@@ -1,0 +1,45 @@
+﻿<div>
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <sc-button name="saveBtn" btn-click="save()" text="equipments.chooseDocuments.save" class="btn btn-sm btn-primary pull-left"></sc-button>
+      <sc-button name="backBtn" btn-click="goBack()" text="equipments.chooseDocuments.back" class="btn btn-sm btn-primary pull-left" style="margin-left: 5px;"></sc-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-11 col-md-9">
+      <sc-nomenclature ng-model="documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'equipment'}"></sc-nomenclature>
+      <sc-button name="searchBtn" btn-click="search()" text="equipments.chooseDocuments.filter" class="btn btn-sm btn-primary pull-left"></sc-button>
+    </div>
+  </div>
+
+  <sc-datatable items="availableDocuments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <input type="checkbox" ng-model="item.checked">
+    </sc-column>
+     <sc-column data="file.bookPageNumber" title="equipments.chooseDocuments.bookPageNumber" width="80px">
+    </sc-column>
+    <sc-column data="name" title="equipments.chooseDocuments.document">
+    </sc-column>
+    <sc-column data="type" title="equipments.chooseDocuments.type">
+    </sc-column>
+    <sc-column data="number" title="equipments.chooseDocuments.docNumber">
+    </sc-column>
+    <sc-column data="date" title="equipments.chooseDocuments.date" type="date">
+    </sc-column>
+    <sc-column data="publisher" title="equipments.chooseDocuments.publisher">
+    </sc-column>
+    <sc-column data="valid" title="equipments.chooseDocuments.valid" type="boolean">
+    </sc-column>
+    <sc-column data="fromDate" title="equipments.chooseDocuments.fromDate" type="date">
+    </sc-column>
+    <sc-column data="toDate" title="equipments.chooseDocuments.toDate" type="date">
+    </sc-column>
+    <sc-column data="file.pageCount" title="equipments.chooseDocuments.pageCount">
+    </sc-column>
+    <sc-column sortable="false" title="equipments.chooseDocuments.file" has-content="true">
+      <a target="_self" ng-href="api/file?fileKey={{item.file.file.key}}&fileName={{item.file.file.name}}" ng-show="item.file" title="{{item.file.file.name}}">
+        <span class="glyphicon glyphicon-file"></span>
+      </a>
+    </sc-column>
+  </sc-datatable>
+</div>

@@ -369,6 +369,22 @@
           'new': 'Ново съоръжение',
           search: 'Търси'
         },
+        chooseDocuments: {
+          save: 'Запис',
+          back: 'Назад',
+          filter: 'Търси',
+          bookPageNumber: '№ на страница',
+          document: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          pageCount: 'Бр. стр.',
+          file: 'Файл'
+        },
         equipmentScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
@@ -546,7 +562,9 @@
           revoke: 'Отнемане',
           revokeDate: 'Дата на отнемане',
           revokeInspector: 'Инспектор',
-          revokeCause: 'Причина за отнемане'
+          revokeCause: 'Причина за отнемане',
+          noAvailableDocuments: 'Няма налични приложени документи',
+          chooseDocuments: 'Избери документи'
         },
         newOper: {
           save: 'Запис',
