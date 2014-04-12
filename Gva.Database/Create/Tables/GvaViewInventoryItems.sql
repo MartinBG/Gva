@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[GvaViewInventoryItems] (
     [SetPartAlias]     NVARCHAR(50)     NOT NULL,
     [Name]             NVARCHAR(MAX)    NOT NULL,
     [Type]             NVARCHAR(MAX)    NULL,
-    [Number]           NVARCHAR(50)     NULL,
+    [Number]           NVARCHAR(100)     NULL,
     [Date]             DATETIME2(7)     NULL,
     [Publisher]        NVARCHAR(150)    NULL,
     [Valid]            BIT              NULL,

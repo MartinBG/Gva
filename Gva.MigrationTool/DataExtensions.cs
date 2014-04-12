@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool
 {
@@ -81,7 +82,14 @@ namespace Gva.MigrationTool
                 foreach (object val in clause.Parameters)
                 {
                     DbParameter param = command.CreateParameter();
-                    param.ParameterName = String.Format(":P{0}{1}", i, j);
+                    if (connection is Oracle.DataAccess.Client.OracleConnection)
+                    {
+                        param.ParameterName = String.Format(":P{0}{1}", i, j);
+                    }
+                    else
+                    {
+                        param.ParameterName = String.Format("@P{0}{1}", i, j);
+                    }
                     param.Value = val;
 
                     dbParameters.Add(param);

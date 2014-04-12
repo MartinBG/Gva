@@ -17,6 +17,8 @@ using Gva.MigrationTool.Sets;
 using Gva.MigrationTool.Nomenclatures;
 using Regs.Api.LotEvents;
 using Newtonsoft.Json.Serialization;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace Gva.MigrationTool
 {
@@ -24,13 +26,14 @@ namespace Gva.MigrationTool
     {
         static void Main(string[] args)
         {
-            string connStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
-            using (OracleConnection conn = new OracleConnection(connStr))
+            string oracleConnStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
+            string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
+
+            using (OracleConnection oracleConn = new OracleConnection(oracleConnStr))
+            using (SqlConnection sqlConn = new SqlConnection(sqlConnStr))
             {
                 try
                 {
-                    conn.Open();
-
                     JsonConvert.DefaultSettings = () =>
                     {
                         return new JsonSerializerSettings()
@@ -43,17 +46,26 @@ namespace Gva.MigrationTool
                         };
                     };
 
-                    Nomenclature.migrateNomenclatures(conn);
-                    Person.migratePersons(conn, Nomenclature.noms);
+                    oracleConn.Open();
+                    sqlConn.Open();
+                    Nomenclature.migrateNomenclatures(oracleConn);
+                    Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms);
+                    //Person.migratePersons(oracleConn, Nomenclature.noms);
                 }
                 catch (OracleException e)
                 {
                     Console.WriteLine("Exception Message: " + e.Message);
                     Console.WriteLine("Exception Source: " + e.Source);
                 }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Exception Message: " + e.Message);
+                    Console.WriteLine("Exception Source: " + e.Source);
+                }
                 finally
                 {
-                    conn.Dispose();
+                    oracleConn.Dispose();
+                    sqlConn.Dispose();
                 }
 
             }

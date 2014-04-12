@@ -25,6 +25,11 @@ namespace Gva.MigrationTool.Nomenclatures
             return nomValues.Where(v => v.Value.Code == code).Select(v => v.Value).SingleOrDefault();
         }
 
+        public static NomValue ByName(this Dictionary<string, NomValue> nomValues, string name)
+        {
+            return nomValues.Where(v => v.Value.Name == name).Select(v => v.Value).SingleOrDefault();
+        }
+
         public static NomValue ByOldId(this Dictionary<string, NomValue> nomValues, string OldId)
         {
             return nomValues.Where(v => v.Value.OldId == OldId).Select(v => v.Value).SingleOrDefault();
@@ -1769,7 +1774,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static void migrateAuditPartRequirmants()
         {
-            Nom nom = repo.GetNom("auditPartRequirmants");
+            Nom nom = repo.GetNom("auditPartRequirements");
             var idPartAliases = new Dictionary<string, string>()
             {
                 { "1", "145"},
@@ -1806,10 +1811,10 @@ namespace Gva.MigrationTool.Nomenclatures
                     })
                 .ToList();
 
-            noms["auditPartRequirmants"] = new Dictionary<string, NomValue>();
+            noms["auditPartRequirements"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                noms["auditPartRequirmants"][row.OldId] = row;
+                noms["auditPartRequirements"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }

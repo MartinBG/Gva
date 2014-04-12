@@ -47,7 +47,7 @@ INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (49 ,N'Огранич
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (50 ,N'Класове ограничения по част М/Ф и част 145'                             ,N'lim145classes'                      )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (51 ,N'Ограничения по част М/Ф и част 145'                                     ,N'lim145limitations'                  )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (52 ,N'Раздел'                                                                 ,N'auditParts'                         )
-INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (53 ,N'Изисквания към раздел'                                                  ,N'auditPartRequirmants'               )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (53 ,N'Изисквания към раздел'                                                  ,N'auditPartRequirements'              )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (54 ,N'Раздел (част) в част 3 на доклад в подкрепа на'                         ,N'auditPartSections'                  )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (55 ,N'Изисквания към раздел (част) в част 3 на доклад в подкрепа на'          ,N'auditPartSectionDetails'            )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (56 ,N'Причини за одит'                                                        ,N'auditReasons'                       )

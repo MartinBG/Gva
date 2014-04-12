@@ -36,7 +36,7 @@ namespace Gva.Api.Models
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.DocumentNumber)
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.ApplicationTypeName)
                 .HasMaxLength(500);

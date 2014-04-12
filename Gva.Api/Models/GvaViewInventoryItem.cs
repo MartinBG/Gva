@@ -58,7 +58,7 @@ namespace Gva.Api.Models
                 .IsRequired();
 
             this.Property(t => t.Number)
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.Publisher)
                 .HasMaxLength(150);
