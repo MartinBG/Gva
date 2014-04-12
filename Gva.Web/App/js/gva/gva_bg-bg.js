@@ -2956,30 +2956,9 @@
           cancel: 'Отказ',
           deleteInspection: 'Изтрий'
         },
-        amendmentSearch: {
-          newAmendment: 'Ново изменение',
-          organizationType: 'Тип одобрение',
-          documentNumber: 'Референтен № на описание',
-          documentDateIssue: 'Дата на издаване',
-          changeNum: 'Изменение',
-          back: 'Назад',
-          application: 'Преписка (Заявление)'
-        },
-        newAmendment: {
-          title: 'Ново изменение',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editAmendment: {
-          title: 'Преглед на изменение',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteAmendment: 'Изтрий'
-        },
         approvalSearch: {
           newApproval: 'Ново удостоверение',
-          organizationType: 'Тип одобрение',
+          approvalType: 'Тип одобрение',
           documentNumber: ' Номер на одобрението',
           documentNumberAmendment: 'Референтен № на описание',
           documentFirstDateIssue: 'Дата на първо издаване',
@@ -3004,7 +2983,7 @@
           newAmendment: 'Ново изменение',
           editLastAmendment: 'Редакция',
           deleteLastAmendment: 'Изтриване',
-          organizationType: 'Тип одобрение',
+          approvalType: 'Тип одобрение',
           documentNumber: ' Номер на одобрението',
           documentFirstDateIssue: 'Дата на първо издаване',
           documentDateIssueAmendment: 'Дата на изменение',
@@ -3218,7 +3197,7 @@
           noAvailableEquipments: 'Няма налични съоръжения'
         },
         approvalDirective: {
-          organizationType: 'Тип одобрение',
+          approvalType: 'Тип одобрение',
           documentNumber: 'Номер',
           documentDateIssue: 'Дата на издаване',
           approvalState: 'Състояние на одобрението',
@@ -3226,27 +3205,26 @@
           approvalStateNote: 'Бележки по състоянието'
         },
         amendmentDirective: {
-          organizationType: 'Тип одобрение',
           documentNumber: 'Референтен № на описание	',
           documentDateIssue: 'Дата на издаване',
           changeNum: '№ на изменение',
           noAvailableLimitations: 'Няма налични данни',
           applications: 'Заявления',
           lims147: {
-            title: 'Обхват на одобрение - EASA Форма 11',
+            title: 'Обхват на одобрение',
             sortOrder: 'Маркер за сортиране',
             lim147limitation: 'Ограничение по част 147',
             lim147limitationText: 'Ограничения - свободен текст'
           },
           lims145: {
-            title: 'Обхват на одобрение - EASA Форма 3',
+            title: 'Обхват на одобрение',
             base: 'Базово',
             lim145limitation: 'Ограничение по част MF/145',
             lim145limitationText: 'Ограничения - свободен текст',
             line: 'Линейно'
           },
           limsMG: {
-            title: 'Обхват на одобрение - EASA Форма 14',
+            title: 'Обхват на одобрение',
             typeAC: 'Тип ВС',
             qualitySystem: 'Организация',
             awapproval: 'Разрешен преглед на летателната годност',

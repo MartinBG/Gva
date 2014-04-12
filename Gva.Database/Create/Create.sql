@@ -91,15 +91,14 @@ GO
 --:r $(rootPath)\"..\Insert\Noms\removalReasons.sql"
 
 ---------------------------------------------------------------
--- Equipments test noms
----------------------------------------------------------------
-:r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
-:r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
-
-
----------------------------------------------------------------
 -- Organizations test noms
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\Noms\disparityLevels.sql"
 :r $(rootPath)\"..\Insert\Noms\recommendationPartNumbers.sql"
 :r $(rootPath)\"..\Insert\Noms\aircarrierServices.sql"
+
+---------------------------------------------------------------
+-- Equipments test noms
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
+:r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
