@@ -1310,7 +1310,8 @@
           documentDate: 'Дата на док',
           aircraftCreditor: 'Кредитор',
           creditorDocument: 'Док. и дата писма на кредитор',
-          inspector: 'Инспектор'
+          inspector: 'Инспектор',
+          registration: 'Регистрация'
         },
         debtDirective: {
           certId: 'Регистрация №',

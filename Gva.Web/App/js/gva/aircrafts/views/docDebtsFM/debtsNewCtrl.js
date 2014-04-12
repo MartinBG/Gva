@@ -39,12 +39,17 @@
     'aircraftDocumentDebt'
   ];
   DocDebtsFMNewCtrl.$resolve = {
-    aircraftDocumentDebt: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    aircraftDocumentDebt: [
+      '$stateParams',
+      function ($stateParams) {
+        return {
+          part: {
+            lotId : $stateParams.id
+          },
+          files: []
+        };
+      }
+    ]
   };
 
   angular.module('gva').controller('DocDebtsFMNewCtrl', DocDebtsFMNewCtrl);

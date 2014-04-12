@@ -3,7 +3,7 @@
     <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.registration"></label>
       <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
   </div>
   <div class="row">
