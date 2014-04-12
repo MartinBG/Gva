@@ -625,7 +625,7 @@
     <Content Include="App\js\gva\equipments\views\inventory\inventorySearchCtrl.js" />
     <Content Include="App\js\gva\directives\application\applicationDirective.html" />
     <Content Include="App\js\gva\directives\application\applicationDirective.js" />
-    <Content Include="App\js\gva\directives\resources\application.js" />
+    <Content Include="App\js\gva\directives\resources\applicationNom.js" />
     <Content Include="App\js\gva\gva.js" />
     <Content Include="App\js\gva\gva_bg-bg.js" />
     <Content Include="App\js\gva\organizations\forms\organizationDataCtrl.js" />
