@@ -9,7 +9,7 @@
     <div class="form-group col-sm-6 col-md-4" sc-has-error="partProducer">
       <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.partProducer"></label>
       <sc-validation-error field-name="partProducer" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.partProducer" name="partProducer" alias="'aircraftPartProducers'" params="{ parentValueId: model.aircraftPart.nomValueId }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.partProducer" name="partProducer" alias="'aircraftProducers'" params="{ makeRadio: model.aircraftPart.code === 'RAD', makeEngine: model.aircraftPart.code === 'ENG', makePropeller: model.aircraftPart.code === 'PRP' }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 

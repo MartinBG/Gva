@@ -503,6 +503,37 @@ namespace Gva.Api.Controllers
 
             return Ok(auditDetails);
         }
+
+        [Route("aircraftProducers")]
+        public IHttpActionResult GetAircraftProducers(string term = null, int offset = 0, int? limit = null, bool? makeEngine = false, bool? makeRadio = false, bool? makePropeller = false, bool? makeAircraft = false)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("aircraftProducers").Where(ap =>
+            {
+                JObject content = JObject.Parse(ap.TextContent);
+                bool isMatch = true;
+
+                if (makeEngine.Value)
+                {
+                    isMatch &= content.Get<bool>("makeEngine");
+                }
+                else if (makeRadio.Value)
+                {
+                    isMatch &= content.Get<bool>("makeRadio");
+                }
+                else if (makePropeller.Value)
+                {
+                    isMatch &= content.Get<bool>("makePropeller");
+                }
+                else if (makeAircraft.Value)
+                {
+                    isMatch &= content.Get<bool>("makeAircraft");
+                }
+
+                return isMatch;
+            });
+
+            return Ok(nomValues);
+        }
     }
 }
 
