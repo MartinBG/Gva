@@ -4,7 +4,7 @@
 (function (angular, _) {
   'use strict';
 
-  function TabsDirective($state, $stateParams, l10n) {
+  function TabsDirective($state, $stateParams, $exceptionHandler, l10n) {
     return {
       priority: 110,
       restrict: 'E',
@@ -98,16 +98,22 @@
             if (!!newSection.stateParams) {
               var newStateParams = _.assign(_.cloneDeep($stateParams), newSection.stateParams);
               selectTab($scope.tabList, newSection, true);
-              $state.go(newSection.state, newStateParams);
+              $state.go(newSection.state, newStateParams)['catch'](function (error) {
+                $exceptionHandler(error);
+              });
             }
             else {
               if (newSection.parent) {
                 selectTab($scope.secondTabList, newSection, true);
-                $state.go(newSection.state);
+                $state.go(newSection.state)['catch'](function (error) {
+                  $exceptionHandler(error);
+                });
               } else {
                 $scope.secondTabList = [];
                 selectTab($scope.tabList, newSection, true);
-                $state.go(newSection.state);
+                $state.go(newSection.state)['catch'](function (error) {
+                  $exceptionHandler(error);
+                });
               }
             }
           }
@@ -115,7 +121,9 @@
             selectTab($scope.tabList, newSection, true);
             $scope.secondTabList = newSection.children;
             selectTab($scope.secondTabList, newSection.children[0], true);
-            return $state.go(newSection.children[0].state);
+            return $state.go(newSection.children[0].state)['catch'](function (error) {
+              $exceptionHandler(error);
+            });
           }
         };
 
@@ -215,7 +223,7 @@
     };
   }
 
-  TabsDirective.$inject = ['$state', '$stateParams', 'l10n'];
+  TabsDirective.$inject = ['$state', '$stateParams', '$exceptionHandler', 'l10n'];
 
   angular.module('scaffolding').directive('scTabs', TabsDirective);
 }(angular, _));
