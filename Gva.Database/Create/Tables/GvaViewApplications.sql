@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewApplications] (
     [LotPartId]           INT           NOT NULL,
     [LotId]               INT           NOT NULL,
     [RequestDate]         DATETIME      NULL,
-    [DocumentNumber]      NVARCHAR(20)  NULL,
+    [DocumentNumber]      NVARCHAR(50)  NULL,
     [ApplicationTypeName] NVARCHAR(500) NULL,
     [StatusName]          NVARCHAR(50)  NULL,
     CONSTRAINT [PK_GvaViewApplications]           PRIMARY KEY ([LotId], [LotPartId]),
