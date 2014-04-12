@@ -39,12 +39,23 @@
   ];
 
   DocumentIdsNewCtrl.$resolve = {
-    docId: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    docId: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('DocumentIdsNewCtrl', DocumentIdsNewCtrl);

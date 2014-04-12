@@ -39,12 +39,23 @@
   ];
 
   DocumentMedicalsNewCtrl.$resolve = {
-    med: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    med: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('DocumentMedicalsNewCtrl', DocumentMedicalsNewCtrl);

@@ -7,12 +7,18 @@
     $state,
     $stateParams,
     Airport,
-    airport
+    airport,
+    application
   ) {
     $scope.airport = airport;
+    $scope.application = application;
 
     $scope.edit = function () {
       return $state.go('root.airports.view.edit');
+    };
+
+    $scope.viewApplication = function (appId) {
+      return $state.go('root.applications.edit.case', { id: appId });
     };
   }
 
@@ -21,7 +27,8 @@
     '$state',
     '$stateParams',
     'Airport',
-    'airport'
+    'airport',
+    'application'
   ];
 
   AirportsViewCtrl.$resolve = {
@@ -30,6 +37,17 @@
       'Airport',
       function ($stateParams, Airport) {
         return Airport.get({ id: $stateParams.id }).$promise;
+      }
+    ],
+    application: [
+      '$stateParams',
+      'AirportApplication',
+      function ResolveApplication($stateParams, AirportApplication) {
+        if (!!$stateParams.appId) {
+          return AirportApplication.get($stateParams).$promise;
+        }
+
+        return null;
       }
     ]
   };

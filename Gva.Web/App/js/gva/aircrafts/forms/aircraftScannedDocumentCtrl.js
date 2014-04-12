@@ -76,7 +76,7 @@
     };
 
     $scope.viewApplication = function (partIndex) {
-      $state.go('root.aircrafts.view.documentApplications.edit', {
+      $state.go('root.aircrafts.view.applications.edit', {
         id: $stateParams.id,
         ind: partIndex
       });

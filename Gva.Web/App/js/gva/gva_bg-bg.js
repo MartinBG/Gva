@@ -147,7 +147,8 @@
           course: 'Курс',
           excess: 'Превишение ',
           concrete: 'Полоса-бетон',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          viewApplication: 'Обратно към заявление: '
         },
         newAirport: {
           title: 'Ново съоръжение',
@@ -442,7 +443,8 @@
           place: 'Местоположение',
           operationalDate: 'Дата на въвеждане в експлоатация',
           note: 'Допълнително описание',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          viewApplication: 'Обратно към заявление: '
         },
         newEquipment: {
           title: 'Ново съоръжение',
@@ -787,7 +789,8 @@
           modelAlt: 'Модел ВС (английски)',
           manSN: 'MSN (сериен номер)',
           cofAType: 'CofA Type',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          viewApplication: 'Обратно към заявление: '
         },
         regSearch: {
           isActive: 'Активна',
@@ -1971,7 +1974,8 @@
           age: 'Възраст',
           company: 'Фирма',
           employmentCategory: 'Длъжност',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          viewApplication: 'Обратно към заявление: '
         },
         newAddress: {
           title: 'Нов адрес',
@@ -2668,7 +2672,8 @@
           CAO: 'CAO',
           uin: 'Булстат',
           organizationType: 'Тип организация',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          viewApplication: 'Обратно към заявление: '
         },
         newOrganization: {
           title: 'Нова организация',

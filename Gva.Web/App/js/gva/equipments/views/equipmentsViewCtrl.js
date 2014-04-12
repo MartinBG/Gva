@@ -7,12 +7,18 @@
     $state,
     $stateParams,
     Equipment,
-    equipment
+    equipment,
+    application
   ) {
     $scope.equipment = equipment;
+    $scope.application = application;
 
     $scope.edit = function () {
       return $state.go('root.equipments.view.edit');
+    };
+
+    $scope.viewApplication = function (appId) {
+      return $state.go('root.applications.edit.case', { id: appId });
     };
   }
 
@@ -21,7 +27,8 @@
     '$state',
     '$stateParams',
     'Equipment',
-    'equipment'
+    'equipment',
+    'application'
   ];
 
   EquipmentsViewCtrl.$resolve = {
@@ -30,6 +37,17 @@
       'Equipment',
       function ($stateParams, Equipment) {
         return Equipment.get({ id: $stateParams.id }).$promise;
+      }
+    ],
+    application: [
+      '$stateParams',
+      'EquipmentApplication',
+      function ResolveApplication($stateParams, EquipmentApplication) {
+        if (!!$stateParams.appId) {
+          return EquipmentApplication.get($stateParams).$promise;
+        }
+
+        return null;
       }
     ]
   };

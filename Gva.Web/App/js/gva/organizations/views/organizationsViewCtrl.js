@@ -7,12 +7,18 @@
     $state,
     $stateParams,
     Organization,
-    organization
+    organization,
+    application
   ) {
     $scope.organization = organization;
+    $scope.application = application;
 
     $scope.edit = function () {
       return $state.go('root.organizations.view.edit');
+    };
+
+    $scope.viewApplication = function (appId) {
+      return $state.go('root.applications.edit.case', { id: appId });
     };
 
     $scope.tablist = {};
@@ -95,7 +101,8 @@
     '$state',
     '$stateParams',
     'Organization',
-    'organization'
+    'organization',
+    'application'
   ];
 
   OrganizationsViewCtrl.$resolve = {
@@ -104,6 +111,17 @@
       'Organization',
       function ($stateParams, Organization) {
         return Organization.get({ id: $stateParams.id }).$promise;
+      }
+    ],
+    application: [
+      '$stateParams',
+      'OrganizationApplication',
+      function ResolveApplication($stateParams, OrganizationApplication) {
+        if (!!$stateParams.appId) {
+          return OrganizationApplication.get($stateParams).$promise;
+        }
+
+        return null;
       }
     ]
   };

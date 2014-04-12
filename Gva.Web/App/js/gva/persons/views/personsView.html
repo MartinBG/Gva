@@ -1,6 +1,6 @@
 ﻿<div>
   <div class="row">
-    <form class="form-inline well well-sm card col-md-10" style="margin-left:15px;">
+    <form class="form-inline well well-sm card col-md-10" style="margin-left: 15px;">
       <div class="row">
         <div class="form-group col-md-7 col-lg-6">
           <div class="input-group input-group-sm">
@@ -45,12 +45,17 @@
         </div>
       </div>
     </form>
-    <form class="form-inline col-md-2 pull-right" style="margin-right:-15px;margin-top:49px">
+    <form class="form-inline col-md-2 pull-right" style="margin-right: -15px; margin-top: 49px">
       <div class="form-group col-sm-12">
         <sc-nomenclature ng-model="caseType" name="caseType" alias="'personCaseTypes'" mode="id" params="{lotId: person.id}" ng-change="changeCaseType()"></sc-nomenclature>
       </div>
     </form>
   </div>
+
+  <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
+    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="persons.viewPerson.viewApplication"></span>{{ application.applicationName }}</a>
+  </div>
+
   <sc-tabs tab-list="{
       'persons.tabs.licences': 'root.persons.view.licences',
       'persons.tabs.qualifications': {

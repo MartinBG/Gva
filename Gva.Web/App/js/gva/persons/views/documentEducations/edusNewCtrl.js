@@ -39,12 +39,23 @@
   ];
 
   DocumentEducationsNewCtrl.$resolve = {
-    edu: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    edu: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('DocumentEducationsNewCtrl', DocumentEducationsNewCtrl);

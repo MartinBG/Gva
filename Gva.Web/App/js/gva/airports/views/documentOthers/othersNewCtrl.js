@@ -38,12 +38,23 @@
   ];
 
   AirportOthersNewCtrl.$resolve = {
-    airportDocumentOther: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    airportDocumentOther: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('AirportOthersNewCtrl', AirportOthersNewCtrl);

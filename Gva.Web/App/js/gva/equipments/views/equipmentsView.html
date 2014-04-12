@@ -46,7 +46,12 @@
       </div>
     </div>
   </form>
-<sc-tabs tab-list="{
+
+  <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
+    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="equipments.viewEquipment.viewApplication"></span>{{ application.applicationName }}</a>
+  </div>
+
+  <sc-tabs tab-list="{
       'equipments.tabs.owners' : 'root.equipments.view.owners',
       'equipments.tabs.inspections' : 'root.equipments.view.inspections',
       'equipments.tabs.docs': {

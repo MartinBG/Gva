@@ -38,12 +38,23 @@
   ];
 
   DocOccurrencesNewCtrl.$resolve = {
-    aircraftDocumentOccurrence: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    aircraftDocumentOccurrence: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('DocOccurrencesNewCtrl', DocOccurrencesNewCtrl);

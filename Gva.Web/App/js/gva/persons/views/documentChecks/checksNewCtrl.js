@@ -45,12 +45,23 @@
     'selectedPublisher'
   ];
   DocumentChecksNewCtrl.$resolve = {
-    personDocumentCheck: function () {
-      return {
-        part: {},
-        files: []
-      };
-    },
+    personDocumentCheck: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ],
     selectedPublisher: function () {
       return [];
     }

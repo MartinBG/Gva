@@ -19,6 +19,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaApplication[] GetNomApplications(int lotId);
 
+        GvaApplication GetNomApplication(int applicationId);
+
         IEnumerable<GvaApplication> GetLinkedToDocsApplications();
 
         void AddGvaApplication(GvaApplication gvaApplication);

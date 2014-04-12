@@ -135,7 +135,6 @@ namespace Gva.Api.Controllers
             return Ok(inventory);
         }
 
-
         [Route("{lotId}/applications")]
         public IHttpActionResult GetApplications(int lotId, string term = null)
         {
@@ -150,6 +149,16 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(applications);
+        }
+
+        [Route("{lotId}/applications/{appId}")]
+        public IHttpActionResult GetApplication(int lotId, int appId)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            var returnValue = new ApplicationNomDO(this.applicationRepository.GetNomApplication(appId));
+
+            return Ok(returnValue);
         }
 
         [Route(@"{lotId}/{*path:regex(^equipmentDocumentApplications$)}")]

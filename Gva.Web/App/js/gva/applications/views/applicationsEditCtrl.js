@@ -12,23 +12,23 @@
     $scope.application = application;
 
     $scope.viewPerson = function (id) {
-      return $state.go('root.persons.view', { id: id });
+      return $state.go('root.persons.view', { id: id, appId: application.applicationId });
     };
 
     $scope.viewOrganization = function (id) {
-      return $state.go('root.organizations.view', { id: id });
+      return $state.go('root.organizations.view', { id: id, appId: application.applicationId });
     };
 
     $scope.viewAircraft = function (id) {
-      return $state.go('root.aircrafts.view', { id: id });
+      return $state.go('root.aircrafts.view', { id: id, appId: application.applicationId });
     };
 
     $scope.viewAirport = function (id) {
-      return $state.go('root.airports.view', { id: id });
+      return $state.go('root.airports.view', { id: id, appId: application.applicationId });
     };
 
     $scope.viewEquipment = function (id) {
-      return $state.go('root.equipments.view', { id: id });
+      return $state.go('root.equipments.view', { id: id, appId: application.applicationId });
     };
   }
 

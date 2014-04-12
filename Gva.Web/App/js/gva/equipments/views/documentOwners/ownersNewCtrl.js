@@ -38,12 +38,23 @@
   ];
 
   EquipmentOwnersNewCtrl.$resolve = {
-    equipmentDocumentOwner: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    equipmentDocumentOwner: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('EquipmentOwnersNewCtrl', EquipmentOwnersNewCtrl);

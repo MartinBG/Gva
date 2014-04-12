@@ -46,7 +46,12 @@
       </div>
     </div>
   </form>
-    <sc-tabs tab-list="{
+
+  <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
+    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="aircrafts.viewAircraft.viewApplication"></span>{{ application.applicationName }}</a>
+  </div>
+
+  <sc-tabs tab-list="{
       'aircrafts.tabs.reg': {
         'aircrafts.tabs.currentReg': 'root.aircrafts.view.currentReg',
         'aircrafts.tabs.regs': 'root.aircrafts.view.regsFM',

@@ -46,12 +46,23 @@
   ];
 
   OrganizationDocOthersNewCtrl.$resolve = {
-    organizationDocumentOther: function () {
-      return {
-        part: {},
-        files: []
-      };
-    },
+    organizationDocumentOther: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
+      }
+    ],
     selectedPublisher: function () {
       return [];
     }

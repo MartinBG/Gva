@@ -147,7 +147,8 @@
 
       return $state.go(state, {
         id: $scope.application.lotId,
-        ind: value.partIndex
+        ind: value.partIndex,
+        appId: application.applicationId
       });
     };
 

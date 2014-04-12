@@ -41,13 +41,24 @@
   DocDebtsFMNewCtrl.$resolve = {
     aircraftDocumentDebt: [
       '$stateParams',
-      function ($stateParams) {
-        return {
-          part: {
-            lotId : $stateParams.id
-          },
-          files: []
-        };
+      'application',
+      function ($stateParams, application) {
+        if (application) {
+          return {
+            part: {
+              lotId : $stateParams.id
+            },
+            files: [{ applications: [application] }]
+          };
+        }
+        else {
+          return {
+            part: {
+              lotId : $stateParams.id
+            },
+            files: []
+          };
+        }
       }
     ]
   };

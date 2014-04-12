@@ -128,6 +128,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .ToArray();
         }
 
+        public GvaApplication GetNomApplication(int applicationId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaApplication>()
+                .Include(a => a.GvaAppLotPart.Lot)
+                .FirstOrDefault(a => a.GvaApplicationId == applicationId);
+        }
+
         public void AddGvaApplication(GvaApplication gvaApplication)
         {
             this.unitOfWork.DbContext.Set<GvaApplication>().Add(gvaApplication);

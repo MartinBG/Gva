@@ -7,9 +7,11 @@
     $state,
     $stateParams,
     Person,
-    person
+    person,
+    application
   ) {
     $scope.person = person;
+    $scope.application = application;
     $scope.caseType = parseInt($stateParams.caseTypeId, 10);
 
     $scope.changeCaseType = function () {
@@ -20,6 +22,10 @@
     $scope.edit = function () {
       return $state.go('root.persons.view.edit');
     };
+
+    $scope.viewApplication = function (appId) {
+      return $state.go('root.applications.edit.case', { id: appId });
+    };
   }
 
   PersonsViewCtrl.$inject = [
@@ -27,7 +33,8 @@
     '$state',
     '$stateParams',
     'Person',
-    'person'
+    'person',
+    'application'
   ];
 
   PersonsViewCtrl.$resolve = {
@@ -42,6 +49,17 @@
 
           return person;
         });
+      }
+    ],
+    application: [
+      '$stateParams',
+      'PersonApplication',
+      function ResolveApplication($stateParams, PersonApplication) {
+        if (!!$stateParams.appId) {
+          return PersonApplication.get($stateParams).$promise;
+        }
+
+        return null;
       }
     ]
   };
