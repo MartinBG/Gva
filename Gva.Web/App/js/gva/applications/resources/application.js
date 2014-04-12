@@ -60,9 +60,9 @@
               url: '/api/apps/:id/docFiles/create',
               params: { docId: '@docId' }
             },
-            'getApplication': {
+            'getApplicationByDocId': {
               method: 'GET',
-              url: '/api/apps/app',
+              url: '/api/apps/appByDocId',
               params: { docId: '@docId' }
             }
           });

@@ -687,7 +687,7 @@ namespace Gva.Api.Controllers
             return Ok(new { documentNumber = doc.RegUri });
         }
 
-        [Route("app")]
+        [Route("appByDocId")]
         [HttpGet]
         public IHttpActionResult GetApplicationByDocId(int? docId = null)
         {
@@ -705,5 +705,6 @@ namespace Gva.Api.Controllers
 
             return Ok();
         }
+
     }
 }

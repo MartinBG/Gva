@@ -42,7 +42,7 @@
       '$stateParams',
       'Application',
       function resolveApplication($stateParams, Application) {
-        return Application.getApplication({ docId: $stateParams.id }).$promise;
+        return Application.getApplicationByDocId({ docId: $stateParams.id }).$promise;
       }
     ]
   };
