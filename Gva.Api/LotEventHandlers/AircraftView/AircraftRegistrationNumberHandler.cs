@@ -14,7 +14,8 @@ namespace Gva.Api.LotEventHandlers.AircraftView
                 unitOfWork: unitOfWork,
                 setPartAlias: "aircraftRegistrationFM",
                 viewMatcher: pv =>
-                    v => v.LotId == pv.Part.Lot.LotId)
+                    v => v.LotId == pv.Part.Lot.LotId,
+                isPrincipalHandler: false)
         {
         }
 
@@ -25,7 +26,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
 
         public override void Clear(GvaViewAircraft aircraft)
         {
-            throw new NotSupportedException();
+            aircraft.Mark = null;
         }
     }
 }

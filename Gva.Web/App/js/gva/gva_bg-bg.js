@@ -1087,7 +1087,10 @@
           limitations: 'Ограничения',
           aircraftTypeCertificateType: 'Типов сертификат',
           dereg: 'Дерегистрирай',
-          rereg: 'Пререгистрирай'
+          rereg: 'Пререгистрирай',
+          incomingDocNumber: 'Вх. номер ГВА',
+          incomingDocDate: 'От дата',
+          category: 'Категория'
         },
         smodViewDirective: {
           title: 'S-code',

@@ -21,32 +21,38 @@
         </div>
       </div>
       <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.incomingDocNumber"></label>
+          <input disabled name="incomingDocNumber" type="text" class="form-control input-sm" value="{{model.incomingDocNumber}}" />
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.incomingDocDate"></label>
+          <input disabled name="incomingDocDate" type="text" class="form-control input-sm" value="{{model.incomingDocDate | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+      <div class="row">
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.owner"></label>
           <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.owner.name}}" />
         </div>
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.oper"></label>
-          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.oper.name}}" />
+          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operator.name}}" />
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-4 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.operationType"></label>
-          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operationType.name}}" />
-        </div>
-        <div class="form-group col-md-4 col-sm-6">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.aircraftTypeCertificateType"></label>
-          <input disabled type="text" class="form-control input-sm" value="{{model.typeCert.aircraftTypeCertificateType.name}}" />
+        <div class="form-group col-md-8 col-sm-12">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.category"></label>
+          <input disabled name="category" type="text" class="form-control input-sm" value="{{model.category.name}}" />
         </div>
         <sc-button name="reregButton" btn-click="rereg()" text="aircrafts.regViewDirective.rereg" class="btn btn-sm btn-primary col-md-2" icon="glyphicon-repeat" style="margin-top:18px;"></sc-button>
       </div>
       <div class="row">
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-8 col-sm-12">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
           <input disabled type="text" class="form-control input-sm" value="{{model.limitations}}" />
         </div>
-        <sc-button name="deregButton" btn-click="dereg()" text="aircrafts.regViewDirective.dereg" class="btn btn-sm btn-danger col-md-2" icon="glyphicon-ban-circle" style="margin-top:18px;"></sc-button>
+        <sc-button name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-sm btn-danger col-md-2" icon="glyphicon-ban-circle" style="margin-top:18px;"></sc-button>
       </div>
     </div>
   </div>

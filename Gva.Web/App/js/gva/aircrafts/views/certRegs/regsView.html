@@ -35,7 +35,7 @@
           <span l10n-text="aircrafts.regView.next"></span>
           <span ng-class="{'glyphicon glyphicon-loading': nextBtn.$pending, 'fa fa-angle-right': !nextBtn.$pending }"></span>
         </button>
-        <button name="lastBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.lastIndex)" ng-disabled="!reg.nextIndex">
+        <button name="lastBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(reg.lastIndex)">
           <span l10n-text="aircrafts.regView.last"></span>
           <span ng-class="{'glyphicon glyphicon-loading': lastBtn.$pending, 'fa fa-angle-double-right': !lastBtn.$pending }"></span>
         </button>

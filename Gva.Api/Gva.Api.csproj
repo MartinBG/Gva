@@ -82,6 +82,7 @@
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationHandler.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNumberHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />

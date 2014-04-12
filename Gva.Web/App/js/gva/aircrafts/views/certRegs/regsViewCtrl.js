@@ -35,8 +35,8 @@
     '$state',
     '$stateParams',
     'AircraftCertRegistrationCurrentFM',
-    'AircraftDocumentDebtFM',
     'aircraftCertRegistration',
+    'AircraftDocumentDebtFM',
     'debts'
   ];
 
