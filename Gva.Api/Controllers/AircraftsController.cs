@@ -228,13 +228,11 @@ namespace Gva.Api.Controllers
         {
             return base.GetPart(lotId, path);
         }
-        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/current/\d*$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/current/\d*$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/current$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/current$)}")]
-        public override IHttpActionResult GetRegPart(int lotId)
+        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent/\d+$)}")]
+        public override IHttpActionResult GetRegistrations(int lotId)
         {
-            return base.GetRegPart(lotId);
+            return base.GetRegistrations(lotId);
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),

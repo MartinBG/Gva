@@ -46,11 +46,12 @@ namespace Gva.Api.Controllers
             return Ok(new PartVersionDO(part));
         }
 
-        public virtual IHttpActionResult GetRegPart(int lotId)
+        public virtual IHttpActionResult GetRegistrations(int lotId)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM").OrderBy(e => e.CreateDate).Last();
+            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
+            var airworthinesses = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertAirworthinessesFM");
 
-            return Ok(new PartVersionDO(part));
+            return Ok(new RegistrationsDO(registrations, airworthinesses));
         }
 
         public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)

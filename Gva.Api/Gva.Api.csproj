@@ -84,6 +84,8 @@
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNumberHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationAwHandler.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNewAwHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
@@ -130,14 +132,18 @@
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\AirportDO.cs" />
+    <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\EquipmentDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
     <Compile Include="ModelsDO\AircraftDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
-    <Compile Include="ModelsDO\PartVersionDO.cs" />
+    <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="Models\GvaViewAircraftAw.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\GvaViewAircraftRegistration.cs" />
     <Compile Include="Models\GvaViewEquipment.cs" />
     <Compile Include="Models\GvaViewAirport.cs" />
@@ -160,6 +166,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\AircraftRegistrationAwRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationAwRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />

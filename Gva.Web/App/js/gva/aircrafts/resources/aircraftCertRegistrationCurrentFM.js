@@ -5,6 +5,6 @@
   angular.module('gva').factory(
     'AircraftCertRegistrationCurrentFM',
     ['$resource', function ($resource) {
-    return $resource('/api/aircrafts/:id/aircraftCertRegistrationsFM/current/:ind');
+    return $resource('/api/aircrafts/:id/aircraftCertRegistrationsCurrent');
   }]);
 }(angular));

@@ -7,6 +7,8 @@
     $state,
     $stateParams,
     AircraftCertRegistrationCurrentFM,
+    AircraftCertRegistrationFM,
+    aircraftCertRegistrations,
     aircraftCertRegistration,
     AircraftDocumentDebtFM,
     debts
@@ -14,6 +16,8 @@
     $scope.isEdit = true;
 
     $scope.reg = aircraftCertRegistration;
+    $scope.regs = aircraftCertRegistrations;
+    $stateParams.ind = aircraftCertRegistration.partIndex;
     $scope.debts = debts;
 
     $scope.switchReg = function (ind) {
@@ -35,18 +39,31 @@
     '$state',
     '$stateParams',
     'AircraftCertRegistrationCurrentFM',
+    'AircraftCertRegistrationFM',
+    'aircraftCertRegistrations',
     'aircraftCertRegistration',
     'AircraftDocumentDebtFM',
     'debts'
   ];
 
   CertRegsViewCtrl.$resolve = {
-    aircraftCertRegistration: [
+    aircraftCertRegistrations: [
       '$stateParams',
       'AircraftCertRegistrationCurrentFM',
       function ($stateParams, AircraftCertRegistrationCurrentFM) {
         return AircraftCertRegistrationCurrentFM.get({
           id: $stateParams.id
+        }).$promise;
+      }
+    ],
+    aircraftCertRegistration: [
+      '$stateParams',
+      'AircraftCertRegistrationFM',
+      'aircraftCertRegistrations',
+      function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrations) {
+        return AircraftCertRegistrationFM.get({
+          id: $stateParams.id,
+          ind: aircraftCertRegistrations.currentIndex
         }).$promise;
       }
     ],

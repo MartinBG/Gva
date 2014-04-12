@@ -40,6 +40,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftViewDataHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftRegistrationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftRegistrationNumberHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftRegistrationAwHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             //InventaryView
             moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
@@ -87,6 +88,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<EquipmentRepository>().As<IEquipmentRepository>();
             moduleBuilder.RegisterType<AirportRepository>().As<IAirportRepository>();
             moduleBuilder.RegisterType<AircraftRegistrationRepository>().As<IAircraftRegistrationRepository>();
+            moduleBuilder.RegisterType<AircraftRegistrationAwRepository>().As<IAircraftRegistrationAwRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>();
