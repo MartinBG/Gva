@@ -60,6 +60,10 @@
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.propellerAlt"></label>
       <sc-text ng-model="model.propellerAlt" name="propellerAlt" ng-readonly="readonly"></sc-text>
     </div>
+    <div class="form-group col-sm-4 col-md-2">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.cofAType"></label>
+      <sc-nomenclature ng-model="model.cofAType" name="cofAType" alias="'cofATypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
   </div>
 
   <div class="row">
@@ -71,50 +75,46 @@
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.ModifOrWingColorAlt"></label>
       <sc-text ng-model="model.ModifOrWingColorAlt" name="ModifOrWingColorAlt" ng-readonly="readonly"></sc-text>
     </div>
+    <div class="form-group col-sm-4 col-md-2">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.docRoom"></label>
+      <sc-text ng-model="model.docRoom" name="docRoom" ng-readonly="readonly"></sc-text>
+    </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-4 col-md-3">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.maxMassT"></label>
-      <sc-int ng-model="model.maxMassT" name="maxMassT" ng-readonly="readonly"></sc-int>
-    </div>
-    <div class="form-group col-sm-4 col-md-3">
+    <div class="form-group col-sm-8 col-md-5">
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.maxMassL"></label>
       <sc-int ng-model="model.maxMassL" name="maxMassL" ng-readonly="readonly"></sc-int>
     </div>
-    <div class="form-group col-sm-4 col-md-3">
+    <div class="form-group col-sm-8 col-md-5">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.maxMassT"></label>
+      <sc-int ng-model="model.maxMassT" name="maxMassT" ng-readonly="readonly"></sc-int>
+    </div>
+    <div class="form-group col-sm-4 col-md-2">
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.seats"></label>
       <sc-text ng-model="model.seats" name="seats" ng-readonly="readonly"></sc-text>
     </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.docRoom"></label>
-      <sc-text ng-model="model.docRoom" name="docRoom" ng-readonly="readonly"></sc-text>
+    <div class="form-group col-sm-6 col-md-3">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.easaType"></label>
+      <sc-nomenclature ng-model="model.easaType" name="easaType" alias="'easaTypes'" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.cofAType"></label>
-      <sc-nomenclature ng-model="model.cofAType" name="cofAType" alias="'cofATypes'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.tcds"></label>
-      <sc-text ng-model="model.tcds" name="tcds" ng-readonly="readonly"></sc-text>
+    <div class="form-group col-sm-4 col-md-2">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.euRegType"></label>
+      <sc-nomenclature ng-model="model.euRegType" name="euRegType" alias="'euRegTypes'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.easaType"></label>
-      <sc-nomenclature ng-model="model.easaType" name="easaType" alias="'easaTypes'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-6 col-md-4">
+    <div class="form-group col-sm-8 col-md-5">
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.easaCategory"></label>
       <sc-nomenclature ng-model="model.easaCategory" name="easaCategory" alias="'easaCategories'" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.euRegType"></label>
-      <sc-nomenclature ng-model="model.euRegType" name="euRegType" alias="'euRegTypes'" ng-readonly="readonly"></sc-nomenclature>
+    <div class="form-group col-sm-8 col-md-5">
+      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.tcds"></label>
+      <sc-text ng-model="model.tcds" name="tcds" ng-readonly="readonly"></sc-text>
     </div>
   </div>
 

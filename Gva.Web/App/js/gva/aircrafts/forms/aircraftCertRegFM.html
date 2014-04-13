@@ -1,22 +1,22 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.register"></label>
-      <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.certNumber"></label>
       <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
       <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.certDate"></label>
-      <sc-date ng-model="model.certDate" name="certDate" ng-readonly="readonly"></sc-date>
+    <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.register"></label>
+      <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.regMark"></label>
       <sc-text ng-model="model.regMark" name="regMark" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.certDate"></label>
+      <sc-date ng-model="model.certDate" name="certDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>
   <div class="row">
@@ -29,10 +29,11 @@
       <sc-date ng-model="model.incomingDocDate" name="incomingDocDate" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.regMark"></label>
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.incomingDocDesc"></label>
       <sc-text ng-model="model.incomingDocDesc" name="incomingDocDesc" ng-readonly="readonly"></sc-text>
     </div>
   </div>
+  <h5 class="form-header"></h5>
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="owner">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.owner"></label>
@@ -45,6 +46,7 @@
       <sc-nomenclature ng-model="model.operator" name="operator" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
+  <h5 class="form-header"></h5>
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="category">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.category"></label>
@@ -57,6 +59,7 @@
       <sc-nomenclature ng-model="model.limitation" name="limitation" alias="'aircraftLimitations'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
+  <h5 class="form-header"></h5>
   <div class="row">
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingDocNumber"></label>
@@ -83,6 +86,7 @@
       <sc-textarea rows="2" ng-model="model.leasingAgreement" name="leasingAgreement" ng-readonly="readonly"></sc-textarea>
     </div>
   </div>
+  <h5 class="form-header"></h5>
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="status">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.status"></label>
