@@ -29,6 +29,11 @@
 
         attrs.$observe('readonly', function(value) {
           scope.isReadonly = !!value;
+          if (value) {
+            span.data('datepicker')._detachEvents();
+          } else {
+            span.data('datepicker')._attachEvents();
+          }
         });
 
         ngModel.$render = function () {
