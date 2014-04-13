@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Regs.Api.LotEvents
 {
@@ -13,7 +14,8 @@ namespace Regs.Api.LotEvents
 
         public void Dispatch(ILotEvent e)
         {
-            foreach (var handler in this.handlers)
+            //TODO think of a better way to execute the principal event handlers first
+            foreach (var handler in this.handlers.OrderByDescending(h => h is CommitEventHandler && ((CommitEventHandler)h).IsPrincipal))
             {
                 handler.Handle(e);
             }

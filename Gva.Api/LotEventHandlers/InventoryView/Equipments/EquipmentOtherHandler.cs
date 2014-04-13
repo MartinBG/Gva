@@ -15,6 +15,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
         public EquipmentOtherHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Equipment",
                 setPartAlias: "equipmentOther",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)

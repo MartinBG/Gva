@@ -16,7 +16,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
                 partMatcher: pv => pv.Content.Get<string>("valid.code") == "Y",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId,
-                isPrincipalHandler: false)
+                isPrincipal: false)
         {
         }
 

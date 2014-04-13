@@ -15,6 +15,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
         public AirportInspectionHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Airport",
                 setPartAlias: "airportInspection",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.PartId == pv.Part.PartId)
