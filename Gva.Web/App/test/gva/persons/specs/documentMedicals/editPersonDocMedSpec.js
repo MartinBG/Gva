@@ -23,19 +23,19 @@
       expect(editDocMedPage.documentNumberPrefix.get()).toEqual('MED BG');
       expect(editDocMedPage.documentNumber.get()).toEqual('1');
       expect(editDocMedPage.documentNumberSuffix.get()).toEqual('99994');
-      expect(editDocMedPage.medClassType.get()).toEqual('Class-1');
+      expect(editDocMedPage.medClass.get()).toEqual('Class-1');
       expect(editDocMedPage.documentDateValidFrom.get()).toEqual('04.04.2010');
       expect(editDocMedPage.documentDateValidTo.get()).toEqual('04.08.2010');
       expect(editDocMedPage.documentPublisher.get()).toEqual('КАМО');
       expect(editDocMedPage.notes.get()).toEqual('Test notes');
-      expect(editDocMedPage.limitationsTypes.get()).toEqual(['OSL', 'OML']);
+      expect(editDocMedPage.limitations.get()).toEqual(['OSL', 'OML']);
     });
     
     it('should change medical data correctly', function () {
       editDocMedPage.documentNumberPrefix.set('1');
       editDocMedPage.documentNumber.set('2324a');
       editDocMedPage.documentNumberSuffix.set('23');
-      editDocMedPage.medClassType.set('Class-3');
+      editDocMedPage.medClass.set('Class-3');
       editDocMedPage.documentDateValidFrom.set('20.10.2014');
       editDocMedPage.documentDateValidTo.set('01.01.2020');
       editDocMedPage.documentPublisher.set('FAA');
@@ -49,7 +49,7 @@
           'part_testimonial',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_medClassType_name',
+          'part_medClass_name',
           'part_limitations',
           'part_documentPublisher_name'
           )).toEqual([

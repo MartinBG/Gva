@@ -44,6 +44,14 @@
   </div>
 
   <div class="row">
+    <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
+      <label class=" control-label" l10n-text="persons.personOtherDirective.valid"></label>
+      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="form-group col-sm-12 col-md-8">
       <label class="control-label" l10n-text="persons.personOtherDirective.notes"></label>
       <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>

@@ -24,7 +24,7 @@
           'part_testimonial',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_medClassType_name',
+          'part_medClass_name',
           'part_limitations',
           'part_documentPublisher_name'
           )).toEqual([
@@ -43,7 +43,7 @@
           'part_testimonial',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_medClassType_name',
+          'part_medClass_name',
           'part_limitations',
           'part_documentPublisher_name'
           )).toEqual([

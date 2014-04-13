@@ -14,7 +14,15 @@ namespace Gva.Api.ModelsDO
         public FileDO(GvaLotFile lotFile)
         {
             this.LotFileId = lotFile.GvaLotFileId;
-            this.File = new FileDataDO(lotFile);
+            if (lotFile.DocFile != null)
+            {
+                this.File = new FileDataDO(lotFile.DocFile);
+            }
+            else if (lotFile.GvaFile != null)
+            {
+                this.File = new FileDataDO(lotFile.GvaFile);
+            }
+
             this.BookPageNumber = lotFile.PageIndex;
             this.PageCount = lotFile.PageNumber;
 

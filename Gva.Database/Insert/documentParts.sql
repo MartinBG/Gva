@@ -1,6 +1,4 @@
-﻿INSERT INTO Noms (NomId, Name, Alias) VALUES (80,N'Типове документи',N'documentParts');
-GO
-
+﻿GO
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'personDocumentId'       ,N'Документ за самоличност' ,NULL,1,N'personDocumentId'       ,1,NULL);
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'personEducation'        ,N'Образования'             ,NULL,1,N'personEducation'        ,1,NULL);
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(80,N'personEmployment'       ,N'Месторабота'             ,NULL,1,N'personEmployment'       ,1,NULL);

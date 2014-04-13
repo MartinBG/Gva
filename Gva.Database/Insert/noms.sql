@@ -74,4 +74,7 @@ INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (76 ,N'Типове �
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (77 ,N'Оценки при проверка на Физическо лице'                                  ,N'personCheckRatingValues'            )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (78 ,N'Модел на квалификация на Физическо лице'                                ,N'personRatingModels'                 )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (79 ,N'Нива на владеене на английски език'                                     ,N'engLangLevels'                      )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (80 ,N'Типове документи',                                                       N'documentParts'                      )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (81 ,N'Да/Не номенклатура'                                                     ,N'boolean'                            )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (82 ,N'Типове персонал за обучение'                                            ,N'trainingStaffTypes'                 )
 GO

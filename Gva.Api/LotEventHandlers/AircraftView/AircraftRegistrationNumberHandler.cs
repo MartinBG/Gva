@@ -12,10 +12,11 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         public AircraftRegistrationNumberHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Aircraft",
                 setPartAlias: "aircraftRegistrationFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId,
-                isPrincipalHandler: false)
+                isPrincipal: false)
         {
         }
 

@@ -6,20 +6,34 @@
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
+  </div>
 
-    <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
+  <hr />
+
+  <div class="row" ng-if="model.staffType.alias">
+    <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDate">
+      <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.documentDate"></label>
+      <sc-validation-error field-name="documentDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.documentDate" name="documentDate" ng-required="true" ng-readonly="readonly"></sc-date>
+    </div>
+
+    <div class="form-group col-sm-2 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.month"></label>
       <sc-text ng-model="model.period.month" ng-readonly="readonly"></sc-text>
     </div>
 
-    <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
+    <div class="form-group col-sm-2 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.year"></label>
-      <sc-int ng-model="model.period.year" ng-readonly="readonly"></sc-int>
+      <sc-text ng-model="model.period.year" ng-readonly="readonly"></sc-text>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.sender"></label>
+      <sc-text ng-model="model.notes" ng-readonly="true"></sc-text>
     </div>
   </div>
 
   <div class="row" ng-if="model.staffType.alias === 'flightCrew'">
-    <hr />
     <div class="form-group col-sm-6 col-md-5 col-lg-4">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.organization"></label>
       <sc-nomenclature ng-model="model.organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>

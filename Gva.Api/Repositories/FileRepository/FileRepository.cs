@@ -91,13 +91,18 @@ namespace Gva.Api.Repositories.FileRepository
 
         private GvaLotFile AddLotFile(Part part, FileDO fileObj)
         {
-            var file = new GvaFile()
+            GvaFile file = null;
+            if (fileObj.File != null)
             {
-                Filename = (string)fileObj.File.Name,
-                FileContentId = fileObj.File.Key
-            };
+                file = new GvaFile()
+                {
+                    Filename = fileObj.File.Name,
+                    MimeType = fileObj.File.MimeType,
+                    FileContentId = fileObj.File.Key
+                };
 
-            this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
+                this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
+            }
 
             GvaLotFile newLotFile = new GvaLotFile()
             {

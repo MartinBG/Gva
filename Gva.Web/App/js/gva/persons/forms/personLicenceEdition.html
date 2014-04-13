@@ -213,7 +213,7 @@
             <th l10n-text="persons.licenceEditionDirective.medsTable.number"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidTo"></th>
-            <th l10n-text="persons.licenceEditionDirective.medsTable.medClassType"></th>
+            <th l10n-text="persons.licenceEditionDirective.medsTable.medClass"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.limitations"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.publisher"></th>
           </tr>
@@ -228,8 +228,8 @@
             <td>{{medical.part.documentNumberPrefix}}-{{medical.part.documentNumber}}-{{person.lin}}-{{medical.part.documentNumberSuffix}}</td>
             <td>{{medical.part.documentDateValidFrom}}</td>
             <td>{{medical.part.documentDateValidTo}}</td>
-            <td>{{medical.part.medClassType.name}}</td>
-            <td>{{medical.part.limitationsTypes | pluck:'name' | join:', '}}</td>
+            <td>{{medical.part.medClass.name}}</td>
+            <td>{{medical.part.limitations | pluck:'name' | join:', '}}</td>
             <td>{{medical.part.documentPublisher.name}}</td>
           </tr>
         </tbody>

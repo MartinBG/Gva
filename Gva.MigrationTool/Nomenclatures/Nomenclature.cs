@@ -20,19 +20,39 @@ namespace Gva.MigrationTool.Nomenclatures
 {
     public static class Nomenclature
     {
-        public static NomValue ByCode(this Dictionary<string, NomValue> nomValues, string code)
+        public static NomValue ByCodeOrDefault(this Dictionary<string, NomValue> nomValues, string code)
         {
             return nomValues.Where(v => v.Value.Code == code).Select(v => v.Value).SingleOrDefault();
         }
 
+        public static NomValue ByCode(this Dictionary<string, NomValue> nomValues, string code)
+        {
+            if (code == null)
+            {
+                return null;
+            }
+
+            return nomValues.Where(v => v.Value.Code == code).Select(v => v.Value).Single();
+        }
+
         public static NomValue ByName(this Dictionary<string, NomValue> nomValues, string name)
         {
-            return nomValues.Where(v => v.Value.Name == name).Select(v => v.Value).SingleOrDefault();
+            if (name == null)
+            {
+                return null;
+            }
+
+            return nomValues.Where(v => v.Value.Name == name).Select(v => v.Value).Single();
         }
 
         public static NomValue ByOldId(this Dictionary<string, NomValue> nomValues, string OldId)
         {
-            return nomValues.Where(v => v.Value.OldId == OldId).Select(v => v.Value).SingleOrDefault();
+            if (OldId == null || !nomValues.ContainsKey(OldId))
+            {
+                return null;
+            }
+
+            return nomValues[OldId];
         }
 
         public static string Code(this NomValue nomValue)
@@ -466,6 +486,38 @@ namespace Gva.MigrationTool.Nomenclatures
                 noms["staffTypes"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
+
+            Nom trainingStaffTypesNom = repo.GetNom("trainingStaffTypes");
+            var copiedResults = results.Select(v =>
+                new NomValue
+                {
+                    OldId = v.OldId,
+                    Code = v.Code,
+                    Name = v.Name,
+                    NameAlt = v.NameAlt,
+                    ParentValueId = v.ParentValueId,
+                    Alias = v.Alias,
+                    TextContent = v.TextContent,
+                    IsActive = v.IsActive
+                });
+
+            noms["trainingStaffTypes"] = new Dictionary<string, NomValue>();
+            foreach (var row in copiedResults)
+            {
+                noms["trainingStaffTypes"][row.OldId] = row;
+                trainingStaffTypesNom.NomValues.Add(row);
+            }
+
+            NomValue generalDocument =
+                new NomValue
+                {
+                    NomValueId = 0,
+                    Name = "Общ документ",
+                    Alias = "general"
+                };
+
+            noms["trainingStaffTypes"]["0"] = generalDocument;
+            trainingStaffTypesNom.NomValues.Add(generalDocument);
         }
 
         public static void migrateEmploymentCategories()
@@ -618,7 +670,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
                                 staffAlias =
                                     noms["staffTypes"]
-                                    .ByCode(
+                                    .ByCodeOrDefault(
                                         noms["directions"]
                                         .ByOldId(r.Field<string>("ID_DIRECTION"))
                                         .Code())
@@ -666,7 +718,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
                                 staffAlias =
                                     noms["staffTypes"]
-                                    .ByCode(
+                                    .ByCodeOrDefault(
                                         noms["directions"]
                                         .ByOldId(r.Field<string>("ID_DIRECTION"))
                                         .Code())

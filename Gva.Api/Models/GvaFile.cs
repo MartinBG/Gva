@@ -17,6 +17,8 @@ namespace Gva.Api.Models
 
         public Guid FileContentId { get; set; }
 
+        public string MimeType { get; set; }
+
         public virtual ICollection<GvaLotFile> GvaLotFiles { get; set; }
     }
 
@@ -32,10 +34,15 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.MimeType)
+                .IsOptional()
+                .HasMaxLength(50);
+
             // Table & Column Mappings
             this.ToTable("GvaFiles");
             this.Property(t => t.GvaFileId).HasColumnName("GvaFileId");
             this.Property(t => t.Filename).HasColumnName("Filename");
+            this.Property(t => t.MimeType).HasColumnName("MimeType");
             this.Property(t => t.FileContentId).HasColumnName("FileContentId");
         }
     }

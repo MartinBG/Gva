@@ -24,11 +24,11 @@
       newDocMedPage.documentNumberPrefix.set('1');
       newDocMedPage.documentNumber.set('2324a');
       newDocMedPage.documentNumberSuffix.set('23');
-      newDocMedPage.medClassType.set('Class-3');
+      newDocMedPage.medClass.set('Class-3');
       newDocMedPage.documentDateValidFrom.set('20.10.2014');
       newDocMedPage.documentDateValidTo.set('01.01.2020');
       newDocMedPage.documentPublisher.set('FAA');
-      newDocMedPage.limitationsTypes.set('OCL');
+      newDocMedPage.limitations.set('OCL');
       newDocMedPage.notes.set('notes');
 
       newDocMedPage.save();
@@ -39,7 +39,7 @@
           'part_testimonial',
           'part_documentDateValidFrom',
           'part_documentDateValidTo',
-          'part_medClassType_name',
+          'part_medClass_name',
           'part_limitations',
           'part_documentPublisher_name'
           )).toEqual([

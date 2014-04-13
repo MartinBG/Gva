@@ -16,6 +16,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
             IAircraftRegistrationAwRepository aircraftRegistrationAwRepository)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Aircraft",
                 setPartAlias: "aircraftRegistrationFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.LotPartId == pv.Part.PartId)

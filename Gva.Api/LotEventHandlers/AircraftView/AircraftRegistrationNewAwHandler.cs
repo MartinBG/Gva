@@ -13,10 +13,11 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         public AircraftRegistrationNewAwHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Aircraft",
                 setPartAlias: "aircraftAirworthinessFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.LotPartId == pv.Content.Get<int>("registration.nomValueId"),
-                isPrincipalHandler: false)
+                isPrincipal: false)
         {
         }
 

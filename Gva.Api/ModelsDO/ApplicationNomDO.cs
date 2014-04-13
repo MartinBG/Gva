@@ -7,7 +7,8 @@ namespace Gva.Api.ModelsDO
     public class ApplicationNomDO
     {
         public ApplicationNomDO()
-        { }
+        {
+        }
 
         public ApplicationNomDO(GvaApplication application)
         {

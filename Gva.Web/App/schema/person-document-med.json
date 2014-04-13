@@ -24,7 +24,7 @@
       "type": "string", 
       "description": "Валидно до"
     },
-    "medClassType": {
+    "medClass": {
       "type": "number", 
       "description": "Клас"
     },
@@ -32,7 +32,7 @@
       "type": "string", 
       "description": "Издател на документа"
     },       
-    "limitationsTypes": {
+    "limitations": {
       "type": "array", 
       "description": "граничения към свидетелство за медицинска годност",
     },

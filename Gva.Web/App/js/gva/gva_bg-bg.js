@@ -1715,7 +1715,7 @@
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
           limitations: 'Ограничения към свидетелство за медицинска годност',
-          medClassType: 'Клас',
+          medClass: 'Клас',
           notes: 'Бележки'
         },
         personEmploymentDirective: {
@@ -1768,8 +1768,10 @@
         },
         personFlyingExperienceDirective: {
           staffType: 'Тип персонал',
+          documentDate: 'Дата на документа',
           month: 'За месец',
           year: 'Година',
+          sender: 'Подател',
           organization: 'Организация',
           aircraft: 'Рег.знак на ВС',
           ratingType: 'Тип ВС',
@@ -1782,7 +1784,6 @@
           experienceMeasure: 'Вид опит',
           bookPageNumber: '№ стр. в дело',
           pageCount: 'Брой стр.',
-          documentDate: 'Дата',
           dayDuration: 'Нальот(дневен)',
           nightDuration: 'Нальот(нощен)',
           IFR: 'IFR',
@@ -1897,7 +1898,7 @@
             number: 'Свидетелство',
             dateValidFrom: 'От дата',
             dateValidTo: 'Валидно до',
-            medClassType: 'Клас',
+            medClass: 'Клас',
             limitations: 'Ограничения',
             publisher: 'Издател'
           }
@@ -2343,7 +2344,7 @@
           number: 'Свидетелство',
           dateValidFrom: 'От дата',
           dateValidTo: 'Валидно до',
-          medClassType: 'Клас',
+          medClass: 'Клас',
           limitations: 'Ограничения',
           publisher: 'Издател',
           add: 'Добави',

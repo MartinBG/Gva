@@ -1,4 +1,5 @@
 ﻿using System;
+using Docs.Api.Models;
 using Gva.Api.Models;
 
 namespace Gva.Api.ModelsDO
@@ -9,22 +10,23 @@ namespace Gva.Api.ModelsDO
         {
         }
 
-        public FileDataDO(GvaLotFile lotFile)
+        public FileDataDO(DocFile docFile)
         {
-            if (lotFile.DocFileId.HasValue)
-            {
-                this.Name = lotFile.DocFile.DocFileName;
-                this.Key = lotFile.DocFile.DocFileContentId;
-            }
-            else
-            {
-                this.Name = lotFile.GvaFile.Filename;
-                this.Key = lotFile.GvaFile.FileContentId;
-            }
+            this.Name = docFile.DocFileName;
+            this.Key = docFile.DocFileContentId;
+        }
+
+        public FileDataDO(GvaFile gvaFile)
+        {
+            this.Name = gvaFile.Filename;
+            this.MimeType = gvaFile.MimeType;
+            this.Key = gvaFile.FileContentId;
         }
 
         public Guid Key { get; set; }
 
         public string Name { get; set; }
+
+        public string MimeType { get; set; }
     }
 }

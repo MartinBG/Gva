@@ -13,6 +13,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         public AircraftRegistrationAwHandler(IUnitOfWork unitOfWork)
             : base(
                 unitOfWork: unitOfWork,
+                setAlias: "Aircraft",
                 setPartAlias: "aircraftAirworthinessFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.LotPartId == pv.Part.PartId)

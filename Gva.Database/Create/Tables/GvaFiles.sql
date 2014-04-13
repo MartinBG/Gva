@@ -4,6 +4,7 @@ GO
 CREATE TABLE [dbo].[GvaFiles] (
     [GvaFileId]     INT              NOT NULL IDENTITY,
     [Filename]      NVARCHAR (50)    NOT NULL,
+    [MimeType]      NVARCHAR (50)    NULL,
     [FileContentId] UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_GvaFiles] PRIMARY KEY ([GvaFileId])
 )

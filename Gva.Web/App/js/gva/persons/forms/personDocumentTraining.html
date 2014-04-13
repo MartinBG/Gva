@@ -4,7 +4,7 @@
     <div class="form-group col-sm-6 col-md-4" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.staffType"></label>
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly">
+      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'trainingStaffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly">
       </sc-nomenclature>
     </div>
   </div>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="row" ng-if="model.staffType.alias === 'D'">
+    <div class="row" ng-if="model.staffType.alias === 'general'">
       <div class=" form-group col-sm-6 col-md-4">
         <label class="control-label" l10n-text="persons.personDocumentTrainingDirective.ratingType"></label>
         <sc-nomenclature ng-model="model.ratingType" name="ratingType" alias="'ratingTypes'" ng-disabled="model.ratingClass" ng-readonly="readonly">

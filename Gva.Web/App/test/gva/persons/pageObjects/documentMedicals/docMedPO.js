@@ -15,9 +15,9 @@
       context.findElement(by.input('model.documentNumber')));
     this.documentNumberSuffix = new ScText(
       context.findElement(by.input('model.documentNumberSuffix')));
-    this.medClassType = new ScNomenclature('model.medClassType', context);
+    this.medClass = new ScNomenclature('model.medClass', context);
     this.documentPublisher = new ScNomenclature('model.documentPublisher', context);
-    this.limitationsTypes = new ScNomenclature('model.limitationsTypes', context);
+    this.limitations = new ScNomenclature('model.limitations', context);
     this.documentDateValidFrom = new ScDate(
       context.findElement(by.css('div[name=documentDateValidFrom]')), context);
     this.documentDateValidTo = new ScDate(

@@ -96,8 +96,8 @@
                 medical.part.testimonial = testimonial;
 
                 var limitations = '';
-                for (var i = 0; i < medical.part.limitationsTypes.length; i++) {
-                  limitations += medical.part.limitationsTypes[i].name + ', ';
+                for (var i = 0; i < medical.part.limitations.length; i++) {
+                  limitations += medical.part.limitations[i].name + ', ';
                 }
                 limitations = limitations.substring(0, limitations.length - 2);
                 medical.part.limitations = limitations;
