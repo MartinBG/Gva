@@ -21,6 +21,6 @@
   <div class="well-sm panel-body">
     <gva-equipment-document-owner name="equipmentDocumentOwnerForm" ng-model="equipmentDocumentOwner.part" readonly="!editMode"></gva-equipment-document-owner>
 
-    <gva-equipment-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files" readonly="!editMode"></gva-equipment-scanned-document>
+    <gva-common-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files" readonly="!editMode" sc-data-set-part="'equipment'"></gva-common-scanned-document>
   </div>
 </ng-form>

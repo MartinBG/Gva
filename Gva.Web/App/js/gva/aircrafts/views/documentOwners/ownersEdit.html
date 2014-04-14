@@ -21,7 +21,7 @@
     <div class="well-sm panel-body">
       <gva-aircraft-document-owner name="aircraftDocumentOwnerForm" ng-model="aircraftDocumentOwner.part" readonly="!editMode"></gva-aircraft-document-owner>
 
-      <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOwner.files" readonly="!editMode"></gva-aircraft-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOwner.files" readonly="!editMode" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

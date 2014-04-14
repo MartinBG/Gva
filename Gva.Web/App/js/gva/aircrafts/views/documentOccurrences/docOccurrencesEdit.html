@@ -21,7 +21,7 @@
     <div class="well-sm panel-body">
       <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part" readonly="!editMode"></gva-aircraft-document-occurrence>
 
-      <gva-aircraft-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files" readonly="!editMode"></gva-aircraft-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files" readonly="!editMode" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

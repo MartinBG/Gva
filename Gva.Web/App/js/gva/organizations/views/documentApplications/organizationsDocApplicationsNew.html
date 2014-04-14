@@ -15,7 +15,7 @@
     <div class="well-sm panel-body">
       <gva-common-document-application name="organizationDocumentApplicationForm" ng-model="organizationDocumentApplication.part"></gva-common-document-application>
 
-      <gva-organization-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentApplication.files"></gva-organization-scanned-document>
+      <gva-common-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentApplication.files" sc-data-set-part="'organization'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

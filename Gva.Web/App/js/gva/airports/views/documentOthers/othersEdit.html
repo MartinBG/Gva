@@ -20,6 +20,6 @@
   <div class="well-sm panel-body">
     <gva-airport-document-other name="airportDocumentOtherForm" ng-model="airportDocumentOther.part" readonly="!editMode"></gva-airport-document-other>
 
-    <gva-airport-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentOther.files" readonly="!editMode"></gva-airport-scanned-document>
+    <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentOther.files" readonly="!editMode" sc-data-set-part="'airport'"></gva-common-scanned-document>
   </div>
 </ng-form>

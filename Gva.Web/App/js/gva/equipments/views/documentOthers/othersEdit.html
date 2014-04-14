@@ -20,6 +20,6 @@
   <div class="well-sm panel-body">
     <gva-equipment-document-other name="equipmentDocumentOtherForm" ng-model="equipmentDocumentOther.part" readonly="!editMode"></gva-equipment-document-other>
 
-    <gva-equipment-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOther.files" readonly="!editMode"></gva-equipment-scanned-document>
+    <gva-common-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOther.files" readonly="!editMode" sc-data-set-part="'equipment'"></gva-common-scanned-document>
   </div>
 </ng-form>

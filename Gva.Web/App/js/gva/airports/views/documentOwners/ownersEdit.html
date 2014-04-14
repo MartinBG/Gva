@@ -21,6 +21,6 @@
   <div class="well-sm panel-body">
     <gva-airport-document-owner name="airportDocumentOwnerForm" ng-model="airportDocumentOwner.part" readonly="!editMode"></gva-airport-document-owner>
 
-    <gva-airport-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentOwner.files" readonly="!editMode"></gva-airport-scanned-document>
+    <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentOwner.files" readonly="!editMode" sc-data-set-part="'airport'"></gva-common-scanned-document>
   </div>
 </ng-form>

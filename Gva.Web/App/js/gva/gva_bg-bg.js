@@ -112,17 +112,6 @@
           pageCount: 'Бр. стр.',
           file: 'Файл'
         },
-        airportScannedDocumentDirective: {
-          title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело',
-          applications: 'Заявления',
-          revokeCause: 'Причина за отнемане',
-          noAvailableDocuments: 'Няма налични приложени документи',
-          chooseDocuments: 'Избери документи'
-        },
         airportDataDirective: {
           title: 'Данни за летище',
           airportType: 'Тип',
@@ -414,14 +403,6 @@
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
           file: 'Файл'
-        },
-        equipmentScannedDocumentDirective: {
-          title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело',
-          applications: 'Заявления'
         },
         equipmentDataDirective: {
           title: 'Данни за съоръжение',
@@ -2896,7 +2877,8 @@
           organizationOtherDocumentType: 'Тип документ',
           organizationOtherDocumentRole: 'Роля',
           valid: 'Действителен',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          file: 'Файл'
         },
         newOther: {
           title: 'Нов документ',
@@ -3383,14 +3365,6 @@
           revokeTitle: 'Отнемане',
           revokeDate: 'Дата на отнемане',
           revokeCause: 'Причина за отнемане'
-        },
-        organizationScannedDocumentDirective: {
-          title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело',
-          applications: 'Заявления'
         }
       },
       errorTexts: {

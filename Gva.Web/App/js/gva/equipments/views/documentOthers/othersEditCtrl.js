@@ -18,6 +18,11 @@
       $scope.editMode = 'edit';
     };
 
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.equipmentDocumentOther = _.cloneDeep(originalDoc);
+    };
+
     $scope.save = function () {
       return $scope.editDocumentOtherForm.$validate()
         .then(function () {
@@ -31,11 +36,7 @@
           }
         });
     };
-    $scope.cancel = function () {
-      $scope.editMode = null;
-      $scope.equipmentDocumentOther.part = _.cloneDeep(originalDoc.part);
-    };
-    
+
     $scope.deleteOther = function () {
       return EquipmentDocumentOther.remove({
         id: $stateParams.id,

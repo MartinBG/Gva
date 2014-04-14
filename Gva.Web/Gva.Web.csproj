@@ -279,8 +279,6 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftPart.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircrafttMaintenance.html" />
-    <Content Include="App\js\gva\aircrafts\forms\aircraftScannedDocument.html" />
-    <Content Include="App\js\gva\aircrafts\forms\aircraftScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="App\js\gva\aircrafts\resources\aircraft.js" />
@@ -449,8 +447,6 @@
     <Content Include="App\js\gva\airports\forms\airportDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOther.html" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOwner.html" />
-    <Content Include="App\js\gva\airports\forms\airportScannedDocument.html" />
-    <Content Include="App\js\gva\airports\forms\airportScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\airports\resources\airportInventory.js" />
     <Content Include="App\js\gva\airports\views\chooseDocuments\chooseDocuments.html" />
     <Content Include="App\js\gva\airports\views\chooseDocuments\chooseDocumentsCtrl.js" />
@@ -572,8 +568,6 @@
     <Content Include="App\js\gva\equipments\forms\equipmentDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\equipments\forms\equipmentDocumentOther.html" />
     <Content Include="App\js\gva\equipments\forms\equipmentDocumentOwner.html" />
-    <Content Include="App\js\gva\equipments\forms\equipmentScannedDocument.html" />
-    <Content Include="App\js\gva\equipments\forms\equipmentScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\equipments\resources\equipment.js" />
     <Content Include="App\js\gva\equipments\resources\equipmentApplication.js" />
     <Content Include="App\js\gva\equipments\resources\equipmentCertOperational.js" />
@@ -649,8 +643,6 @@
     <Content Include="App\js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffExaminer.html" />
     <Content Include="App\js\gva\organizations\forms\organizationStaffManagement.html" />
-    <Content Include="App\js\gva\organizations\forms\organizationScannedDocument.html" />
-    <Content Include="App\js\gva\organizations\forms\organizationScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirCarrier.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirNavigationServiceDeliverers.js" />
     <Content Include="App\js\gva\organizations\resources\organizationCertAirOperator.js" />

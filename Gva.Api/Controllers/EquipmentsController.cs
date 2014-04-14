@@ -135,22 +135,6 @@ namespace Gva.Api.Controllers
             return Ok(inventory);
         }
 
-        [Route("{lotId}/applications")]
-        public IHttpActionResult GetApplications(int lotId, string term = null)
-        {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var applications = this.applicationRepository.GetNomApplications(lotId).Select(a => new ApplicationNomDO(a));
-
-            if (!string.IsNullOrWhiteSpace(term))
-            {
-                term = term.ToLower();
-                applications = applications.Where(n => n.ApplicationName.ToLower().Contains(term)).ToArray();
-            }
-
-            return Ok(applications);
-        }
-
         [Route("{lotId}/applications/{appId}")]
         public IHttpActionResult GetApplication(int lotId, int appId)
         {

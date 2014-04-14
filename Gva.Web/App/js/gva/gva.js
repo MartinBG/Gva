@@ -101,11 +101,6 @@
       controller: 'PersonDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftScannedDocument',
-      templateUrl: 'gva/aircrafts/forms/aircraftScannedDocument.html',
-      controller: 'AircraftScannedDocCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaLicence',
       templateUrl: 'gva/persons/forms/personLicence.html',
       controller: 'PersonLicenceCtrl'
@@ -235,11 +230,6 @@
       controller: 'AircraftDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirportScannedDocument',
-      templateUrl: 'gva/airports/forms/airportScannedDocument.html',
-      controller: 'AirportScannedDocCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaOrganizationData',
       templateUrl: 'gva/organizations/forms/organizationData.html',
       controller: 'OrganizationDataCtrl'
@@ -301,11 +291,6 @@
     scaffoldingProvider.form({
       name: 'gvaOrganizationRegister',
       templateUrl: 'gva/organizations/forms/organizationRegister.html'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaOrganizationScannedDocument',
-      templateUrl: 'gva/organizations/forms/organizationScannedDocument.html',
-      controller: 'OrganizationScannedDocCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAirportData',
@@ -376,11 +361,6 @@
       name: 'gvaEquipmentDocumentApplication',
       templateUrl: 'gva/equipments/forms/equipmentDocumentApplication.html',
       controller: 'EquipmentDocumentApplicationCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaEquipmentScannedDocument',
-      templateUrl: 'gva/equipments/forms/equipmentScannedDocument.html',
-      controller: 'EquipmentScannedDocCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
