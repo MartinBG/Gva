@@ -399,40 +399,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-      <div ng-if="showAInspection && docPartType.alias === 'aircraftInspection'">
-        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
-          </sc-column>
-          <sc-column data="part.auditState.name" title="aircrafts.inspectionSearch.auditState">
-          </sc-column>
-          <sc-column data="part.documentNumber" title="aircrafts.inspectionSearch.documentNumber" width="200px">
-          </sc-column>
-          <sc-column data="part.auditReason.name" title="aircrafts.inspectionSearch.auditReason">
-          </sc-column>
-          <sc-column data="part.auditType.name" title="aircrafts.inspectionSearch.auditType">
-          </sc-column>
-          <sc-column data="part.subject" title="aircrafts.inspectionSearch.subject">
-          </sc-column>
-          <sc-column data="part.notification.name" title="aircrafts.inspectionSearch.notification">
-          </sc-column>
-          <sc-column data="part.startDate" title="aircrafts.inspectionSearch.startDate" type="date">
-          </sc-column>
-          <sc-column data="part.endDate" title="aircrafts.inspectionSearch.endDate" type="date">
-          </sc-column>
-          <sc-column data="part.inspectionPlace" title="aircrafts.inspectionSearch.inspectionPlace">
-          </sc-column>
-          <sc-column data="files[0].bookPageNumber" title="aircrafts.inspectionSearch.bookPageNumber" width="50px">
-          </sc-column>
-          <sc-column data="files[0].pageCount" title="aircrafts.inspectionSearch.pageCount" width="50px">
-          </sc-column>
-          <sc-column sortable="false" title="aircrafts.inspectionSearch.file" width="30px" has-content="true">
-            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-              <span class="glyphicon glyphicon-file"></span>
-            </a>
-          </sc-column>
-        </sc-datatable>
-      </div>
       <div ng-if="showADocumentDebtFM && docPartType.alias === 'aircraftDebtFM'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -591,40 +557,6 @@
           </sc-column>
         </sc-datatable>
       </div>
-      <div ng-if="showAPInspection && docPartType.alias === 'airportInspection'">
-        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
-          </sc-column>
-          <sc-column data="part.auditState.name" title="airports.inspectionSearch.auditState">
-          </sc-column>
-          <sc-column data="part.documentNumber" title="airports.inspectionSearch.documentNumber" width="200px">
-          </sc-column>
-          <sc-column data="part.auditReason.name" title="airports.inspectionSearch.auditReason">
-          </sc-column>
-          <sc-column data="part.auditType.name" title="airports.inspectionSearch.auditType">
-          </sc-column>
-          <sc-column data="part.subject" title="airports.inspectionSearch.subject">
-          </sc-column>
-          <sc-column data="part.notification.name" title="airports.inspectionSearch.notification">
-          </sc-column>
-          <sc-column data="part.startDate" title="airports.inspectionSearch.startDate" type="date">
-          </sc-column>
-          <sc-column data="part.endDate" title="airports.inspectionSearch.endDate" type="date">
-          </sc-column>
-          <sc-column data="part.inspectionPlace" title="airports.inspectionSearch.inspectionPlace">
-          </sc-column>
-          <sc-column data="files[0].bookPageNumber" title="airports.inspectionSearch.bookPageNumber" width="50px">
-          </sc-column>
-          <sc-column data="files[0].pageCount" title="airports.inspectionSearch.pageCount" width="50px">
-          </sc-column>
-          <sc-column sortable="false" title="airports.inspectionSearch.file" width="30px" has-content="true">
-            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-              <span class="glyphicon glyphicon-file"></span>
-            </a>
-          </sc-column>
-        </sc-datatable>
-      </div>
       <div ng-if="showAPDocumentApplication && docPartType.alias === 'airportApplication'">
         <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -715,40 +647,6 @@
           <sc-column data="files[0].pageCount" title="equipments.ownerSearch.pageCount" width="50px">
           </sc-column>
           <sc-column sortable="false" title="equipments.ownerSearch.file" width="30px" has-content="true">
-            <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
-              <span class="glyphicon glyphicon-file"></span>
-            </a>
-          </sc-column>
-        </sc-datatable>
-      </div>
-      <div ng-if="showEInspection && docPartType.alias === 'equipmentInspection'">
-        <sc-datatable items="documentPart" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-          <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-            <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
-          </sc-column>
-          <sc-column data="part.auditState.name" title="equipments.inspectionSearch.auditState">
-          </sc-column>
-          <sc-column data="part.documentNumber" title="equipments.inspectionSearch.documentNumber" width="200px">
-          </sc-column>
-          <sc-column data="part.auditReason.name" title="equipments.inspectionSearch.auditReason">
-          </sc-column>
-          <sc-column data="part.auditType.name" title="equipments.inspectionSearch.auditType">
-          </sc-column>
-          <sc-column data="part.subject" title="equipments.inspectionSearch.subject">
-          </sc-column>
-          <sc-column data="part.notification.name" title="equipments.inspectionSearch.notification">
-          </sc-column>
-          <sc-column data="part.startDate" title="equipments.inspectionSearch.startDate" type="date">
-          </sc-column>
-          <sc-column data="part.endDate" title="equipments.inspectionSearch.endDate" type="date">
-          </sc-column>
-          <sc-column data="part.inspectionPlace" title="equipments.inspectionSearch.inspectionPlace">
-          </sc-column>
-          <sc-column data="files[0].bookPageNumber" title="equipments.inspectionSearch.bookPageNumber" width="50px">
-          </sc-column>
-          <sc-column data="files[0].pageCount" title="equipments.inspectionSearch.pageCount" width="50px">
-          </sc-column>
-          <sc-column sortable="false" title="equipments.inspectionSearch.file" width="30px" has-content="true">
             <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files[0].file.name}}">
               <span class="glyphicon glyphicon-file"></span>
             </a>

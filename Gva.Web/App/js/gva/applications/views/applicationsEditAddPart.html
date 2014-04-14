@@ -53,9 +53,6 @@
         <div ng-if="applicationPart.setPartAlias === 'aircraftDebtFM'">
           <gva-aircraft-document-debt-fm name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-debt-fm>
         </div>
-        <div ng-if="applicationPart.setPartAlias === 'aircraftInspection'">
-          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
-        </div>
         <div ng-if="applicationPart.setPartAlias === 'aircraftOccurrence'">
           <gva-aircraft-document-occurrence name="addForm" ng-model="applicationPart.part"></gva-aircraft-document-occurrence>
         </div>
@@ -70,9 +67,6 @@
         <div ng-if="applicationPart.setPartAlias === 'airportOther'">
           <gva-airport-document-other name="addForm" ng-model="applicationPart.part"></gva-airport-document-other>
         </div>
-        <div ng-if="applicationPart.setPartAlias === 'airportInspection'">
-          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
-        </div>
 
         <!--Equipment-->
         <div ng-if="applicationPart.setPartAlias === 'equipmentOwner'">
@@ -81,13 +75,10 @@
         <div ng-if="applicationPart.setPartAlias === 'equipmentOther'">
           <gva-equipment-document-other name="addForm" ng-model="applicationPart.part"></gva-equipment-document-other>
         </div>
-        <div ng-if="applicationPart.setPartAlias === 'equipmentInspection'">
-          <gva-common-inspection name="addForm" ng-model="applicationPart.part"></gva-common-inspection>
-        </div>
 
         <!--Applications-->
-        <div ng-if="applicationPart.setPartAlias === 'personApplication' || 
-                    applicationPart.setPartAlias === 'organizationApplication' || 
+        <div ng-if="applicationPart.setPartAlias === 'personApplication' ||
+                    applicationPart.setPartAlias === 'organizationApplication' ||
                     applicationPart.setPartAlias === 'aircraftApplication' ||
                     applicationPart.setPartAlias === 'airportApplication' ||
                     applicationPart.setPartAlias === 'equipmentApplication'">
