@@ -39,26 +39,52 @@
   ];
 
   RecommendationsNewCtrl.$resolve = {
-    organizationRecommendation: function () {
-      return {
-        part: {
-          includedAudits: [],
-          auditorsReview: {
-            auditDetails: [],
-            disparities: []
-          },
-          descriptionReview: {
-            auditDetails: [],
-            disparities: []
-          },
-          part1: { examiners: [] },
-          part2: { examiners: [] },
-          part3: { examiners: [] },
-          part4: { examiners: [] },
-          part5: { examiners: [] }
+    organizationRecommendation: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {
+              includedAudits: [],
+              auditorsReview: {
+                auditDetails: [],
+                disparities: []
+              },
+              descriptionReview: {
+                auditDetails: [],
+                disparities: []
+              },
+              part1: { examiners: [] },
+              part2: { examiners: [] },
+              part3: { examiners: [] },
+              part4: { examiners: [] },
+              part5: { examiners: [] }
+            },
+            applications: [application]
+          };
         }
-      };
-    }
+        else {
+          return {
+            part: {
+              includedAudits: [],
+              auditorsReview: {
+                auditDetails: [],
+                disparities: []
+              },
+              descriptionReview: {
+                auditDetails: [],
+                disparities: []
+              },
+              part1: { examiners: [] },
+              part2: { examiners: [] },
+              part3: { examiners: [] },
+              part4: { examiners: [] },
+              part5: { examiners: [] }
+            }
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('RecommendationsNewCtrl', RecommendationsNewCtrl);

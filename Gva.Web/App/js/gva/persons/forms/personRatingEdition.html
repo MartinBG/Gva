@@ -41,4 +41,10 @@
       <sc-textarea rows="3" ng-model="model.notesAlt" ng-readonly="readonly"></sc-textarea>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-sm-9 col-md-7">
+      <label class="control-label" l10n-text="persons.ratingEditionDirective.applications"></label>
+      <gva-applications ng-model="model.applications" set-part="'person'" ng-readonly="readonly"></gva-applications>
+    </div>
+  </div>
 </ng-form>

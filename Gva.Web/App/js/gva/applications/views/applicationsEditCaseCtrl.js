@@ -145,6 +145,31 @@
         state = 'root.equipments.view.inspections.edit';
       }
 
+      if (value.setPartAlias === 'personRating') {
+        state = 'root.persons.view.ratings.edit';
+      }
+      else if (value.setPartAlias === 'personLicence') {
+        state = 'root.persons.view.licences.edit';
+      }
+      else if (value.setPartAlias === 'aircraftInspection') {
+        state = 'root.aircrafts.view.inspections.edit';
+      }
+      else if (value.setPartAlias === 'airportInspection') {
+        state = 'root.airports.view.inspections.edit';
+      }
+      else if (value.setPartAlias === 'equipmentInspection') {
+        state = 'root.equipments.view.inspections.edit';
+      }
+      else if (value.setPartAlias === 'organizationInspection') {
+        state = 'root.organizations.view.inspections.edit';
+      }
+      else if (value.setPartAlias === 'organizationRecommendation') {
+        state = 'root.organizations.view.edit';
+      }
+      else if (value.setPartAlias === 'organizationStaffManagement') {
+        state = 'root.organizations.view.staffManagement.edit';
+      }
+
       return $state.go(state, {
         id: $scope.application.lotId,
         ind: value.partIndex,

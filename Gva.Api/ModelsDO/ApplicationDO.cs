@@ -45,5 +45,7 @@ namespace Gva.Api.ModelsDO
         public List<ApplicationDocRelationDO> AppDocCase { get; set; }
 
         public List<ApplicationLotFileDO> AppFilesNotInCase { get; set; }
+
+        public List<ApplicationLotObjectDO> AppLotObjects { get; set; }
     }
 }

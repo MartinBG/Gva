@@ -38,13 +38,25 @@
   ];
 
   RatingsNewCtrl.$resolve = {
-    rating: function () {
-      return {
-        part: {
-          editions: [{}]
+    rating: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {
+              editions: [{ applications: [application] }]
+            }
+          };
         }
-      };
-    }
+        else {
+          return {
+            part: {
+              editions: [{}]
+            }
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('RatingsNewCtrl', RatingsNewCtrl);

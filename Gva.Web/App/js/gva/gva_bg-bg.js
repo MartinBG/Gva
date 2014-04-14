@@ -1810,7 +1810,8 @@
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
           limitations: 'Ограничения',
-          subclasses: 'Подкласове'
+          subclasses: 'Подкласове',
+          applications: 'Заявления'
         },
         ratingDirective: {
           staffType: 'Тип персонал',
@@ -1918,7 +1919,8 @@
             firstEditionValidFrom: 'Първоначално издаване',
             documentDateValidFrom: 'Издаден',
             documentDateValidTo: 'Валиден до'
-          }
+          },
+          applications: 'Заявления'
         },
         personOtherDirective: {
           documentNumber: 'Док No',
@@ -2445,6 +2447,7 @@
           viewAirport: 'Преглед',
           viewEquipment: 'Преглед',
           unlinkedLotParts: 'Документи извън преписката',
+          appLotObjects: 'Вписвания',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',
@@ -2455,7 +2458,8 @@
             linkNew: 'Добави страница',
             linkPart: 'Свържи със страница',
             newFile: 'Нов файл и страница',
-            newDocFile: 'Нов файл'
+            newDocFile: 'Нов файл',
+            viewPart: 'Преглед'
           },
           newFile: {
             title: 'Нова страница в описа',

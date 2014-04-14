@@ -4,7 +4,7 @@
       <tr>
         <th style="width: 250px;"><span l10n-text="applications.edit.case.regNumber"></span></th>
         <th><span l10n-text="applications.edit.case.description"></span></th>
-        <th><span l10n-text="applications.edit.case.act"></span></th>
+        <th style="width: 150px;"><span l10n-text="applications.edit.case.act"></span></th>
         <th style="width: 200px;"></th>
       </tr>
     </thead>
@@ -57,10 +57,24 @@
       </tr>
       <tr ng-repeat="item in application.appFilesNotInCase">
         <td></td>
-        <td>{{ item.setPartName }} (<a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a>)</td>
+        <td>{{ item.setPartName }} <a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a></td>
         <td>
           <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
         </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <strong l10n-text="applications.edit.appLotObjects"></strong>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr ng-repeat="item in application.appLotObjects">
+        <td></td>
+        <td>{{ item.setPartName }}</td>
+        <td><a ng-click="viewPart(item)"><span l10n-text="applications.edit.case.viewPart"></span></a></td>
         <td></td>
       </tr>
 
