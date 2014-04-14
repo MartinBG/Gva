@@ -20,19 +20,6 @@
       });
     };
 
-    $scope.isUniqueLin = function (value) {
-      if (!value) {
-        return true;
-      }
-
-      return Person.query({ lin: value, exact: true })
-        .$promise
-        .then(function (persons) {
-          return persons.length === 0 ||
-            (persons.length === 1 && persons[0].id === $stateParams.id);
-        });
-    };
-
     $scope.requireCaseTypes = function () {
       return $scope.model.caseTypes.length > 0;
     };
