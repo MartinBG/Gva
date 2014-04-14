@@ -1,16 +1,27 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, moment*/
+(function (angular, moment) {
   'use strict';
 
   function LicencesSearchCtrl(
     $scope,
     $state,
     $stateParams,
+    $filter,
     PersonLicence,
     licences
   ) {
     $scope.licences = licences;
     
+    $scope.isInvalidLicence = function(item){
+      return item.part.valid.code === 'N';
+    };
+    $scope.isExpiredLicence = function(item) {
+      var currentDate = new Date(),
+        documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo;
+
+      return moment(currentDate).isAfter(documentDateValidTo);
+    };
+
     $scope.viewLicence = function (licence) {
       return $state.go('root.persons.view.licences.edit', {
         id: $stateParams.id,
@@ -24,7 +35,7 @@
   }
 
   LicencesSearchCtrl.$inject =
-    ['$scope', '$state', '$stateParams', 'PersonLicence', 'licences'];
+    ['$scope', '$state', '$stateParams', '$filter', 'PersonLicence', 'licences'];
 
   LicencesSearchCtrl.$resolve = {
     licences: [
@@ -37,4 +48,4 @@
   };
 
   angular.module('gva').controller('LicencesSearchCtrl', LicencesSearchCtrl);
-}(angular));
+}(angular, moment));

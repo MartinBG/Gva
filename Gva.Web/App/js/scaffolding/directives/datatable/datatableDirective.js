@@ -144,11 +144,12 @@ Usage <sc-datatable items="data"
             // disable W083: Don't make functions within a loop.
             // because this function is not used as a callback in the future
             // jshint -W083
-            _.forOwn(rowClassExpr($scope.pageItems[i].item), function (value, key) {
-              if (value) {
-                rowElement.addClass(key);
-              }
-            });
+            _.forOwn(rowClassExpr($scope.$parent, { item: $scope.pageItems[i].item }),
+              function (value, key) {
+                if (value) {
+                  rowElement.addClass(key);
+                }
+              });
             // jshint +W083
 
             for (j = 0, l2 = $scope.columnDefs.length; j < l2; j++) {

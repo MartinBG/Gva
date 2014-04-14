@@ -386,3 +386,14 @@ table.sc-data-table th.sorting span
 table.table thead th {
     background-color: #f5f5f5;
 }
+
+.validLicence {
+    background-color: #ffff99
+}
+
+.invalidLicence {
+    background-color: #ffcc99
+}
+.expiredLicence {
+    background-color: #C0C0C0
+}
