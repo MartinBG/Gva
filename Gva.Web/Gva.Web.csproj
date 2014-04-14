@@ -782,6 +782,7 @@
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personLicenceCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personNextLin.js" />
     <Content Include="App\js\gva\persons\resources\personLastLicenceNumber.js" />
     <Content Include="App\js\gva\persons\views\licences\chooseLicence.html" />
     <Content Include="App\js\gva\persons\views\licences\chooseLicenceCtrl.js" />

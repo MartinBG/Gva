@@ -56,6 +56,7 @@ namespace Gva.Api.Controllers
         [Route("")]
         public IHttpActionResult GetPersons(
             string lin = null,
+            string linType = null,
             string uin = null,
             string names = null,
             string licences = null,
@@ -64,7 +65,7 @@ namespace Gva.Api.Controllers
             string caseTypeAlias = null,
             bool exact = false)
         {
-            var persons = this.personRepository.GetPersons(lin, uin, names, licences, ratings, organization, caseTypeAlias, exact);
+            var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, exact);
 
             return Ok(persons.Select(p => new PersonDO(p)));
         }
@@ -102,7 +103,7 @@ namespace Gva.Api.Controllers
                 return Ok(new { id = newLot.LotId });
             }
         }
-
+        
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
@@ -193,7 +194,38 @@ namespace Gva.Api.Controllers
             return base.GetFileParts(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{regex(^lastLicenceNumber$)}")]
+
+        [Route("nextLin")]
+        public IHttpActionResult GetNextLin(string linType = null)
+        {
+            var persons = this.personRepository.GetPersons(linType: linType);
+            int nextLin = 0;
+            if (persons.Count() != 0)
+            {
+                int lastLin = persons.OrderBy(p => int.Parse(p.Lin)).Select(p => int.Parse(p.Lin)).Last();
+                nextLin = ++lastLin;
+            }
+            else
+            {
+                var lins = new Dictionary<string, int>()
+                {
+                    { "pilots", 10000 },
+                    { "flyingCrew", 20000},
+                    { "crewStaff", 30000},
+                    { "HeadFlights", 40000},
+                    { "AirlineEngineers", 50000},
+                    { "dispatchers", 60000},
+                    { "paratroopers", 70000},
+                    { "engineersRVD", 80000},
+                    { "deltaplaner", 90000}
+                };
+                nextLin = lins[linType];
+            }
+
+            return Ok(new JObject(new JProperty("nextLin", nextLin)));
+        }
+
+        [Route(@"{lotId}/lastLicenceNumber")]
         public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceType)
         {
 

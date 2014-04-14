@@ -18,6 +18,7 @@ namespace Gva.Api.ModelsDO
         {
             this.Id = personData.LotId;
             this.Lin = personData.Lin;
+            this.LinType = personData.LinType;
             this.Uin = personData.Uin;
             this.Names = personData.Names;
             this.BirtDate = personData.BirtDate;
@@ -34,6 +35,8 @@ namespace Gva.Api.ModelsDO
         public int Id { get; set; }
 
         public string Lin { get; set; }
+
+        public string LinType { get; set; }
 
         public string Uin { get; set; }
 

@@ -12,6 +12,8 @@ namespace Gva.Api.Models
 
         public string Lin { get; set; }
 
+        public string LinType { get; set; }
+
         public string Uin { get; set; }
 
         public string Names { get; set; }
@@ -44,6 +46,10 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.LinType)
+                .IsRequired()
+                .HasMaxLength(50);
+
             this.Property(t => t.Uin)
                 .HasMaxLength(50);
 
@@ -60,6 +66,7 @@ namespace Gva.Api.Models
             this.ToTable("GvaViewPersons");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Lin).HasColumnName("Lin");
+            this.Property(t => t.LinType).HasColumnName("LinType");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Names).HasColumnName("Names");
             this.Property(t => t.BirtDate).HasColumnName("BirtDate");

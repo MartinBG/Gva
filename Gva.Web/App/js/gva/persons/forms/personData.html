@@ -37,17 +37,22 @@
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="lin">
+    <div class="col-sm-2 col-md-2" sc-has-error="lin">
       <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
-      <span ng-show="form.lin.$error.$pending" class="glyphicon glyphicon-loading"></span>
-      <sc-validation-error field-name="lin" validations="{required: null, lin: 'errorTexts.lin'}"></sc-validation-error>
-      <span class="input-group input-group-sm">
-        <sc-text ng-model="model.lin" name="lin" required sc-validate-immediate="true" sc-validate="{unique: isUniqueLin}" ng-readonly="readonly"></sc-text>
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="generateLIN()" ng-disabled="readonly">Вземи ЛИН</button>
-        </span>
-      </span>
+      <sc-validation-error field-name="lin" validations="{required: null}"></sc-validation-error>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="text-align: left; width: 120px">
+            {{model.linType || 'Избери '}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="type in linTypes"><a ng-click="setLin(type)">{{type.name}}</a></li>
+          </ul>
+        </div>
+        <input type="text" style="width: 50px;" class="form-control input-sm" name="lin" ng-model="model.lin" ng-readonly="true" ng-required="true">
+      </div>
     </div>
+
     <div class="form-group col-sm-3 col-md-2">
       <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>
       <sc-text ng-model="model.uin" ng-readonly="readonly"></sc-text>

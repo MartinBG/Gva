@@ -20,6 +20,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public IEnumerable<GvaViewPerson> GetPersons(
             string lin = null,
+            string linType = null,
             string uin = null,
             string names = null,
             string licences = null,
@@ -34,6 +35,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
             predicate = predicate
                 .AndStringMatches(p => p.Lin, lin, exact)
+                .AndStringMatches(p => p.LinType, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
                 .AndCollectionContains(p => p.Licences.Select(l => l.LicenceType), licences)

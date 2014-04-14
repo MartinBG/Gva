@@ -23,7 +23,8 @@ namespace Gva.Api.LotEventHandlers.PersonView
         {
             person.Lot = part.Part.Lot;
 
-            person.Lin =part.Content.Get<string>("lin");
+            person.Lin = part.Content.Get<string>("lin");
+            person.LinType = part.Content.Get<string>("linType");
             person.Uin = part.Content.Get<string>("uin");
             person.Names = string.Format(
                 "{0} {1} {2}",
