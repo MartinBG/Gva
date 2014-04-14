@@ -98,12 +98,14 @@ module.exports = function (grunt) {
     var done = this.async(),
         version = grunt.config.get('pkg').version;
     
-    if (!version || !/^\d+\.\d+\.\d+\.\d+$/.test(version)) {
+    if (!version || !/^\d+\.\d+\.\d+$/.test(version)) {
       grunt.log.error('package.json does not have version in the format major.minor.build.revision!');
       done(false);
       return;
     }
-    
+
+    version = version + '.0';
+
     grunt.util.spawn({
       cmd: 'git',
       args: ['rev-parse', 'HEAD']

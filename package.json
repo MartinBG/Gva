@@ -1,6 +1,6 @@
 {
   "name": "gva",
-  "version": "1.0.0.0",
+  "version": "1.0.0",
   "devDependencies": {
     "grunt": "0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
