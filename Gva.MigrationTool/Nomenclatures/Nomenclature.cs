@@ -2393,9 +2393,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "S", new Tuple<string,string>("Задоволително" , "Satisfactory" )},
                 { "I", new Tuple<string,string>("Недостатъчно"  , "Insufficient" )},
                 { "U", new Tuple<string,string>("Неприемливо"   , "Unacceptable" )},
-                { "C", new Tuple<string,string>("Компетентен"   , "Competent"    )},
-                { "N", new Tuple<string,string>("Некомпетентен" , "Incompetent"  )}
+                { "К", new Tuple<string,string>("Компетентен"   , "Competent"    )},
+                { "Н", new Tuple<string,string>("Некомпетентен" , "Incompetent"  )},
+
+                //TODO
+                { "C", new Tuple<string,string>("C"             , ""             )}
             };
+
             int OldId = 1;
             noms["personCheckRatingValues"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)

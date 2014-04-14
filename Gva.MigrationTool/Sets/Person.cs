@@ -82,7 +82,7 @@ namespace Gva.MigrationTool.Sets
                 Set personSet = lotRepository.GetSet("Person");
 
                 var personIds = Person.getPersonIds(con);
-                foreach (var personId in new int[] { 6730 })// personIds)
+                foreach (var personId in personIds) //new int[] { 6730 })
                 {
                     var lot = personSet.CreateLot(userContext);
 
@@ -322,9 +322,18 @@ namespace Gva.MigrationTool.Sets
                     //    lot.CreatePart("/licences/*", personLicence, context);
                     //}
 
-                    lot.Commit(userContext, lotEventDispatcher);
+                    try
+                    {
+                        lot.Commit(userContext, lotEventDispatcher);
+                    }
+                    //swallow the Cannot commit without modifications exception
+                    catch (InvalidOperationException)
+                    {
+                    }
 
                     unitOfWork.Save();
+
+                    Console.WriteLine("Migrated personId: {0}", personId);
                 }
             }
 
