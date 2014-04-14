@@ -5,14 +5,11 @@
   angular.module('gva').factory('Aircraft', ['$resource', function($resource) {
     return $resource('/api/aircrafts/:id', {}, {
       'checkRegMark': {
-        method: 'POST',
-        url: '/api/aircrafts/checkRegMark/:regMark',
-        params: {
-          regMark: '@regMark'
-        }
+        method: 'GET',
+        url: '/api/aircrafts/checkRegMark'
       },
       'getNextCertNumber': {
-        method: 'POST',
+        method: 'GET',
         url: '/api/aircrafts/getNextCertNumber'
       }
     });

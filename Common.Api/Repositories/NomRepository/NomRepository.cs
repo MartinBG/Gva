@@ -56,5 +56,12 @@ namespace Common.Api.Repositories.NomRepository
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
+
+        public IEnumerable<NomValue> GetNomValues(string alias)
+        {
+            return this.unitOfWork.DbContext.Set<NomValue>()
+                .Where(nv => nv.Nom.Alias == alias)
+                .ToList();
+        }
     }
 }

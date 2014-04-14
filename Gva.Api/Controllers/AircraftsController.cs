@@ -135,10 +135,10 @@ namespace Gva.Api.Controllers
 
             return Ok(inventory);
         }
-        
-        [HttpPost]
-        [Route("checkRegMark/{regMark}")]
-        public IHttpActionResult CheckRegMark(string regMark)
+
+        [HttpGet]
+        [Route("checkRegMark")]
+        public IHttpActionResult CheckRegMark(string regMark = null)
         {
             System.Threading.Thread.Sleep(500);
 
@@ -148,7 +148,6 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [HttpPost]
         [Route("getNextCertNumber")]
         public IHttpActionResult GetNextCertNumber()
         {

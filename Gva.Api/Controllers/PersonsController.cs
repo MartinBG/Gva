@@ -286,7 +286,10 @@ namespace Gva.Api.Controllers
                 nextLin = lins[linType];
             }
 
-            return Ok(new JObject(new JProperty("nextLin", nextLin)));
+            return Ok(new
+            {
+                NextLin = nextLin
+            });
         }
 
         [Route("{lotId}/lastLicenceNumber")]

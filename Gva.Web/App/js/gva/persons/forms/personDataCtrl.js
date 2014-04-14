@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonDataCtrl($scope, $stateParams, Person, Nomenclature, PersonNextLin) {
+  function PersonDataCtrl($scope, $stateParams, Person, Nomenclature) {
     Nomenclature.query({alias: 'linTypes'})
       .$promise.then(function(linTypes){
         $scope.linTypes = linTypes;
@@ -10,12 +10,14 @@
 
     $scope.setLin = function(item){
       $scope.model.linType = item.name;
-      PersonNextLin.get({
+      $scope.model.lin = null;
+
+      Person.getNextLin({
         linType: item.code
-      }).$promise
-        .then(function(result){
-          $scope.model.lin = result.nextLin;
-        });
+      })
+      .$promise .then(function(result){
+        $scope.model.lin = result.nextLin;
+      });
     };
 
     $scope.isUniqueLin = function (value) {
@@ -36,7 +38,7 @@
     };
   }
 
-  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person', 'Nomenclature', 'PersonNextLin'];
+  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person', 'Nomenclature'];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
 }(angular));
