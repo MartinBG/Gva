@@ -30,7 +30,7 @@ namespace Gva.MigrationTool
             string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
 
             using (OracleConnection oracleConn = new OracleConnection(oracleConnStr))
-            //using (SqlConnection sqlConn = new SqlConnection(sqlConnStr))
+            using (SqlConnection sqlConn = new SqlConnection(sqlConnStr))
             {
                 try
                 {
@@ -47,10 +47,10 @@ namespace Gva.MigrationTool
                     };
 
                     oracleConn.Open();
-                    //sqlConn.Open();
+                    sqlConn.Open();
                     Nomenclature.migrateNomenclatures(oracleConn);
-                    //Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms);
-                    Person.migratePersons(oracleConn, Nomenclature.noms);
+                    Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms);
+                    //Person.migratePersons(oracleConn, Nomenclature.noms);
                 }
                 catch (OracleException e)
                 {
@@ -65,7 +65,7 @@ namespace Gva.MigrationTool
                 finally
                 {
                     oracleConn.Dispose();
-                    //sqlConn.Dispose();
+                    sqlConn.Dispose();
                 }
 
             }
