@@ -852,7 +852,8 @@
           save: 'Запис',
           cancel: 'Отказ',
           deleteReg: 'Изтриване',
-          dereg: 'Дерегистрация'
+          dereg: 'Дерегистрация',
+          rereg: 'Пререгистрация'
         },
         deregReg: {
           title: 'Дерегистриране',
@@ -869,7 +870,8 @@
           lastReg: 'Посл. рег. № ',
           register: 'рег. ',
           regFrom: ' от ',
-          debts: 'Залози'
+          debts: 'Залози',
+          newReg: 'Нова регистрация'
         },
         smodSearch: {
           valid: 'Валиден',
@@ -1119,8 +1121,11 @@
           aircraftCertificateType: 'Тип',
           regNumber: '№',
           refNumber: 'Реф.№',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност'
+          issueDate: 'Издадено на',
+          validToDate: 'Валидно до',
+          validFromDate: 'Валидно от',
+          inspector: 'Заверил инспектор',
+          'new': 'Нова заверка ЛГ'
         },
         noiseViewDirective: {
           title: 'Удостоверение за шум',

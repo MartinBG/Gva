@@ -16,14 +16,17 @@ namespace Gva.Api.LotEventHandlers.AircraftView
                 setAlias: "Aircraft",
                 setPartAlias: "aircraftAirworthinessFM",
                 viewMatcher: pv =>
-                    v => v.LotId == pv.Part.Lot.LotId && v.LotPartId == pv.Content.Get<int>("registration.nomValueId"),
+                {
+                    var registrationPartIndex = pv.Content.Get<int>("registration.nomValueId");
+                    return v => v.LotId == pv.Part.Lot.LotId && v.Part.Index == registrationPartIndex;
+                },
                 isPrincipal: false)
         {
         }
 
         public override void Fill(GvaViewAircraftRegistration reg, PartVersion part)
         {
-            reg.CertAirworthinessId = part.PartId;
+            reg.CertAirworthinessId = part.Part.Index;
         }
 
         public override void Clear(GvaViewAircraftRegistration reg)

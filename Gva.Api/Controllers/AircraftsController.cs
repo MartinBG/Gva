@@ -29,6 +29,7 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IInventoryRepository inventoryRepository;
         private IAircraftRepository aircraftRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
@@ -39,6 +40,7 @@ namespace Gva.Api.Controllers
             ILotRepository lotRepository,
             IInventoryRepository inventoryRepository,
             IAircraftRepository aircraftRepository,
+            IAircraftRegistrationRepository aircraftRegistrationRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
@@ -49,6 +51,7 @@ namespace Gva.Api.Controllers
             this.lotRepository = lotRepository;
             this.inventoryRepository = inventoryRepository;
             this.aircraftRepository = aircraftRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
@@ -235,11 +238,67 @@ namespace Gva.Api.Controllers
         {
             return base.GetPart(lotId, path);
         }
-        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent/\d+$)}")]
-        public override IHttpActionResult GetRegistrations(int lotId)
+
+
+        public RegistrationsDO GetRegistrationsData(IEnumerable<PartVersion> registrations, IEnumerable<GvaViewAircraftRegistration> registrationsView, int? lotInd = null)
         {
-            return base.GetRegistrations(lotId);
+            RegistrationsDO regsData = new RegistrationsDO();
+            var regs = registrations.OrderByDescending(r => r.CreateDate).ToArray();
+            int regIndex;
+            int? regPartId;
+            if (lotInd.HasValue)
+            {
+                var currentReg = regs.Where(e => e.Part.Index == lotInd).FirstOrDefault();
+                regsData.CurrentIndex = currentReg.Part.Index;
+                regIndex = Array.IndexOf(regs, currentReg);
+                regPartId = currentReg.PartId;
+            }
+            else
+            {
+                var currentReg = regs.FirstOrDefault();
+                regsData.CurrentIndex = currentReg.Part.Index;
+                regIndex = Array.IndexOf(regs, currentReg);
+                regPartId = currentReg.PartId;
+            }
+            regsData.AirworthinessIndex = registrationsView.Where(e => e.LotPartId == regPartId).FirstOrDefault().CertAirworthinessId;
+            regsData.LastIndex = regs[0].Part.Index.Value;
+            regsData.NextIndex = regIndex > 0 ? regs[regIndex - 1].Part.Index : null;
+            regsData.PrevIndex = regIndex < regs.Length - 1 ? regs[regIndex + 1].Part.Index : null;
+            regsData.FirstIndex = regs[regs.Length - 1].Part.Index.Value;
+            regsData.LastReg = regs[0].Content;
+            regsData.FirstReg = regs[regs.Length - 1].Content;
+
+            return regsData;
+        }
+        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}")]
+        public IHttpActionResult GetRegistrations(int lotId)
+        {
+            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
+            if (registrations.Length > 0)
+            {
+                var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
+
+                return Ok(GetRegistrationsData(registrations, registrationsView));
+            }
+            else
+            {
+                return Ok(new { notRegistered = true });
+            }
+        }
+
+        [Route(@"{lotId}/{path:regex(^aircraftCertRegistrationsCurrent$)}/{lotInd}")]
+        public IHttpActionResult GetRegistrations(int lotId, int? lotInd = null)
+        {
+            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
+            if (registrations.Length > 0)
+            {
+                var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
+                return Ok(GetRegistrationsData(registrations, registrationsView, lotInd));
+            }
+            else
+            {
+                return Ok(new { notRegistered = true });
+            }
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),

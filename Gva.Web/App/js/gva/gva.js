@@ -129,7 +129,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessView',
-      templateUrl: 'gva/aircrafts/forms/aircraftCertAirworthinessView.html'
+      templateUrl: 'gva/aircrafts/forms/aircraftCertAirworthinessView.html',
+      controller: 'AircraftCertAirworthinessViewCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertNoiseView',

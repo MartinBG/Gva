@@ -8,16 +8,21 @@
     $stateParams,
     AircraftCertRegistrationCurrentFM,
     AircraftCertRegistrationFM,
+    AircraftCertAirworthinessFM,
     aircraftCertRegistrations,
     aircraftCertRegistration,
+    aircraftCertAirworthiness,
     AircraftDocumentDebtFM,
     debts
   ) {
     $scope.isEdit = true;
 
-    $scope.reg = aircraftCertRegistration;
     $scope.regs = aircraftCertRegistrations;
-    $stateParams.ind = aircraftCertRegistration.partIndex;
+    $scope.reg = aircraftCertRegistration;
+    $scope.aw = aircraftCertAirworthiness;
+    if (!aircraftCertRegistrations.notRegistered) {
+      $stateParams.ind = aircraftCertRegistration.partIndex;
+    }
     $scope.debts = debts;
 
     $scope.switchReg = function (ind) {
@@ -25,11 +30,18 @@
         {
           id: $stateParams.id,
           ind: ind
+        },
+        {
+          reload: true
         });
     };
 
     $scope.newCertAirworthiness = function () {
       return $state.go('root.aircrafts.view.airworthinessesFM.new');
+    };
+    
+    $scope.newReg = function () {
+      return $state.go('root.aircrafts.view.regsFM.new');
     };
 
   }
@@ -40,8 +52,10 @@
     '$stateParams',
     'AircraftCertRegistrationCurrentFM',
     'AircraftCertRegistrationFM',
+    'AircraftCertAirworthinessFM',
     'aircraftCertRegistrations',
     'aircraftCertRegistration',
+    'aircraftCertAirworthiness',
     'AircraftDocumentDebtFM',
     'debts'
   ];
@@ -52,7 +66,8 @@
       'AircraftCertRegistrationCurrentFM',
       function ($stateParams, AircraftCertRegistrationCurrentFM) {
         return AircraftCertRegistrationCurrentFM.get({
-          id: $stateParams.id
+          id: $stateParams.id,
+          ind: $stateParams.ind
         }).$promise;
       }
     ],
@@ -61,17 +76,41 @@
       'AircraftCertRegistrationFM',
       'aircraftCertRegistrations',
       function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrations) {
-        return AircraftCertRegistrationFM.get({
-          id: $stateParams.id,
-          ind: aircraftCertRegistrations.currentIndex
-        }).$promise;
+        if (!aircraftCertRegistrations.notRegistered) {
+          return AircraftCertRegistrationFM.get({
+            id: $stateParams.id,
+            ind: aircraftCertRegistrations.currentIndex
+          }).$promise;
+        }
+        else {
+          return undefined;
+        }
+      }
+    ],
+    aircraftCertAirworthiness: [
+      '$stateParams',
+      'AircraftCertAirworthinessFM',
+      'aircraftCertRegistrations',
+      function ($stateParams, AircraftCertAirworthinessFM, aircraftCertRegistrations) {
+        if (!aircraftCertRegistrations.notRegistered &&
+          aircraftCertRegistrations.airworthinessIndex) {
+          return AircraftCertAirworthinessFM.get({
+            id: $stateParams.id,
+            ind: aircraftCertRegistrations.airworthinessIndex
+          }).$promise;
+        }
+        else {
+          return undefined;
+        }
       }
     ],
     debts: [
       '$stateParams',
       'AircraftDocumentDebtFM',
       function ($stateParams, AircraftDocumentDebtFM) {
-        return AircraftDocumentDebtFM.query($stateParams).$promise;
+        return AircraftDocumentDebtFM.query({
+          id: $stateParams.id
+        }).$promise;
       }
     ]
   };

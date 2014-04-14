@@ -249,7 +249,7 @@ namespace Gva.Api.Controllers
                             this.aircraftRegistrationRepository.GetRegistrations(parentValueId)
                             .Select(e => new
                             {
-                                nomValueId = e.LotPartId,
+                                nomValueId = e.Part.Index,
                                 name = e.CertNumber
                             });
 

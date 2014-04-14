@@ -1,6 +1,12 @@
 ﻿<ng-form class="form-inline">
   <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.regViewDirective.title"></strong></div>
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.regViewDirective.title"></strong>
+       <div class="pull-right">
+         <sc-button name="reregButton" btn-click="rereg()" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"></sc-button>
+         <sc-button name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
+       </div>
+    </div>
     <div class="well-sm panel-body">
       <div class="row">
         <div class="form-group col-md-1 col-sm-3">
@@ -45,14 +51,12 @@
           <label class="control-label" l10n-text="aircrafts.regViewDirective.category"></label>
           <input disabled name="category" type="text" class="form-control input-sm" value="{{model.category.name}}" />
         </div>
-        <sc-button name="reregButton" btn-click="rereg()" text="aircrafts.regViewDirective.rereg" class="btn btn-sm btn-primary col-md-2" icon="glyphicon-repeat" style="margin-top:18px;"></sc-button>
       </div>
       <div class="row">
         <div class="form-group col-md-8 col-sm-12">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
           <input disabled type="text" class="form-control input-sm" value="{{model.limitations}}" />
         </div>
-        <sc-button name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-sm btn-danger col-md-2" icon="glyphicon-ban-circle" style="margin-top:18px;"></sc-button>
       </div>
     </div>
   </div>

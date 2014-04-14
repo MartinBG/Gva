@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Models;
 
 namespace Gva.Api.Controllers
 {
@@ -44,14 +45,6 @@ namespace Gva.Api.Controllers
             var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
 
             return Ok(new PartVersionDO(part));
-        }
-
-        public virtual IHttpActionResult GetRegistrations(int lotId)
-        {
-            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
-            var airworthinesses = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertAirworthinessesFM");
-
-            return Ok(new RegistrationsDO(registrations, airworthinesses));
         }
 
         public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)

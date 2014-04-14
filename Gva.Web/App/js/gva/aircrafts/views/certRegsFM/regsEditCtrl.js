@@ -18,6 +18,9 @@
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };
+    $scope.rereg = function () {
+      return $state.go('root.aircrafts.view.regsFM.new');
+    };
 
     $scope.cancel = function () {
       $scope.editMode = null;

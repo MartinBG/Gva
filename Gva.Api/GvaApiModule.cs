@@ -41,6 +41,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftRegistrationHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftRegistrationNumberHandler>().As<ILotEventHandler>().InstancePerApiRequest();
             moduleBuilder.RegisterType<AircraftRegistrationAwHandler>().As<ILotEventHandler>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<AircraftRegistrationNewAwHandler>().As<ILotEventHandler>().InstancePerApiRequest();
 
             //InventaryView
             moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerApiRequest();

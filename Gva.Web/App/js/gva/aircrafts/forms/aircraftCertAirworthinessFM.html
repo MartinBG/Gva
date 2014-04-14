@@ -12,13 +12,15 @@
       <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-md-2 col-sm-4">
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="validFromDate">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validFromDate"></label>
-      <sc-date ng-model="model.validFromDate" name="validFromDate" ng-readonly="readonly"></sc-date>
+      <sc-validation-error field-name="validFromDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.validFromDate" name="validFromDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-md-2 col-sm-4">
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="validToDate">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
-      <sc-date ng-model="model.validToDate" name="validToDate" ng-readonly="readonly"></sc-date>
+      <sc-validation-error field-name="validToDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.validToDate" name="validToDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>
 

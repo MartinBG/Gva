@@ -19,7 +19,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         }
         public IEnumerable<GvaViewAircraftRegistration> GetRegistrations(int? aircraftId = null)
         {
-            var gvaRegistrations = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>();
+            var gvaRegistrations = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>().Include(e => e.Part);
             if (aircraftId.HasValue)
             {
                 return gvaRegistrations
