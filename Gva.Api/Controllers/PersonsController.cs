@@ -99,10 +99,18 @@ namespace Gva.Api.Controllers
                 newLot.CreatePart("personData", person.Get<JObject>("personData"), userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, person.GetItems<JObject>("personData.caseTypes"));
 
-                var documentIdPart = newLot.CreatePart("personDocumentIds/*", person.Get<JObject>("personDocumentId"), userContext);
-                this.fileRepository.AddFileReferences(documentIdPart, null);
+                var personDocumentId = person.Get<JObject>("personDocumentId");
+                if (personDocumentId != null)
+                {
+                    var documentIdPart = newLot.CreatePart("personDocumentIds/*", personDocumentId, userContext);
+                    this.fileRepository.AddFileReferences(documentIdPart, null);
+                }
 
-                newLot.CreatePart("personAddresses/*", person.Get<JObject>("personAddress"), userContext);
+                var personAddress = person.Get<JObject>("personAddress");
+                if (personAddress != null)
+                {
+                    newLot.CreatePart("personAddresses/*", personAddress, userContext);
+                }
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
