@@ -59,11 +59,6 @@
       templateUrl: 'gva/persons/forms/personStatus.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonScannedDocument',
-      templateUrl: 'gva/persons/forms/personScannedDocument.html',
-      controller: 'PersonScannedDocCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaPersonApplication',
       templateUrl: 'gva/persons/forms/personApplication.html',
       controller: 'PersonApplicationCtrl'
@@ -334,6 +329,11 @@
       name: 'gvaAirportDocumentApplication',
       templateUrl: 'gva/airports/forms/airportDocumentApplication.html',
       controller: 'AirportDocumentApplicationCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaCommonScannedDocument',
+      templateUrl: 'gva/common/forms/commonScannedDocument.html',
+      controller: 'CommonScannedDocCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaCommonInspection',

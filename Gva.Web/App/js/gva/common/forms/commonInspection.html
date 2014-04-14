@@ -4,7 +4,7 @@
       <label class="control-label" l10n-text="common.inspectionDirective.documentNumber"></label>
       <sc-text ng-model="model.part.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
     </div>
-    <div class="form-group col-sm-3 col-md-2" ng-if="$parent.organizationInspection">
+    <div class="form-group col-sm-3 col-md-2" ng-if="setPart === 'organization'">
       <label class="control-label" l10n-text="common.inspectionDirective.auditPart"></label>
       <sc-nomenclature  ng-model="model.part.auditPart" name="auditPart" alias="'auditParts'" ng-readonly="readonly"></sc-nomenclature>
     </div>
@@ -39,7 +39,7 @@
   <div class="row">
     <div class="form-group col-sm-6 col-md-6">
       <label class="control-label" l10n-text="common.inspectionDirective.applications"></label>
-      <gva-applications ng-model="model.applications" state-name="applicationStateName" ng-readonly="readonly"></gva-applications>
+      <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="readonly"></gva-applications>
     </div>
   </div>
 
@@ -63,7 +63,7 @@
     </div>
   </div>
 
-  <div ng-if="$parent.organizationInspection">
+  <div ng-if="setPart === 'organization'">
     <h5 class="form-header" l10n-text="common.inspectionDirective.recommendationReports" style="margin-top:10px;"></h5>
     <sc-datatable items="model.part.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
       <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">

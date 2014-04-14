@@ -4,19 +4,6 @@
   function CommonInspectionCtrl($scope, $state, $stateParams) {
     $scope.watchList = [];
 
-    if ($scope.$parent.organizationInspection) {
-      $scope.applicationStateName = 'root.organizations.view.documentApplications.edit';
-    }
-    else if ($scope.$parent.aircraftInspection) {
-      $scope.applicationStateName = 'root.aircrafts.view.applications.edit';
-    }
-    else if ($scope.$parent.airportInspection) {
-      $scope.applicationStateName = 'root.airports.view.applications.edit';
-    }
-    else if ($scope.$parent.equipmentInspection) {
-      $scope.applicationStateName = 'root.equipments.view.applications.edit';
-    }
-
     $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];

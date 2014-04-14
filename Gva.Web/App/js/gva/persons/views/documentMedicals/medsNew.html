@@ -15,7 +15,7 @@
     <div class="well-sm panel-body">
       <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
 
-      <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files"></gva-person-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files" sc-data-set-part="'person'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

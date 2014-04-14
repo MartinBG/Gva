@@ -561,6 +561,8 @@
     <Content Include="App\js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="App\js\gva\common\forms\commonInspection.html" />
     <Content Include="App\js\gva\common\forms\commonInspectionCtrl.js" />
+    <Content Include="App\js\gva\common\forms\commonScannedDocument.html" />
+    <Content Include="App\js\gva\common\forms\commonScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="App\js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="App\js\gva\equipments\forms\equipmentCertOperational.html" />
@@ -815,8 +817,6 @@
     <Content Include="App\js\gva\persons\forms\personLicenceEditionCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personRating.html" />
     <Content Include="App\js\gva\persons\forms\personRatingEdition.html" />
-    <Content Include="App\js\gva\persons\forms\personScannedDocument.html" />
-    <Content Include="App\js\gva\persons\forms\personScannedDocumentCtrl.js" />
     <Content Include="App\js\gva\persons\forms\personStatus.html" />
     <Content Include="App\js\gva\persons\resources\person.js" />
     <Content Include="App\js\gva\persons\resources\personAddress.js" />

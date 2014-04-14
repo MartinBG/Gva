@@ -21,7 +21,7 @@
     <div class="well-sm panel-body">
       <gva-person-document-training name="personDocumentTrainingForm" ng-model="personDocumentTraining.part" readonly="!editMode" sc-data-is-new="false"></gva-person-document-training>
 
-      <gva-person-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.files" readonly="!editMode"></gva-person-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.files" readonly="!editMode" sc-data-set-part="'person'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

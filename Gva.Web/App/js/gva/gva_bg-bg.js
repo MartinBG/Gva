@@ -12,6 +12,14 @@
           search: 'Търси',
           select: 'Избор'
         },
+        scannedDocumentlDirective: {
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело',
+          applications: 'Заявления'
+        },
         auditDetailDirective: {
           auditPart: 'Част',
           title: 'Главни обобщени констатации',
@@ -1688,14 +1696,6 @@
           documentPublisher: 'Издаден от',
           notes: 'Бележки'
         },
-        personScannedDocumentDirective: {
-          title: 'Електронен (сканиран) документ',
-          fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело',
-          applications: 'Заявления'
-        },
         personApplicationDirective: {
           title: 'Документът е приложен към заявления:',
           name: 'Име на заявление',
@@ -2164,6 +2164,7 @@
           notes: 'Бележки',
           bookPageNumber: '№ стр. в дело',
           pageCount: 'Брой стр.',
+          file: 'Файл',
           newExam: 'Нов теоретичен изпит'
         },
         editExam: {

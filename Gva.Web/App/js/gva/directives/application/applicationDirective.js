@@ -7,7 +7,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
   'use strict';
 
   function ApplicationsDirective($state, $stateParams, $compile, $parse, ApplicationNom) {
-    function preLink(scope, iElement, iAttrs) {
+    function preLink(scope) {
       scope.appSelectOpt = {
         multiple: true,
         id: function (app) {
@@ -33,9 +33,29 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
               });
         }
       };
+    }
+
+    function postLink(scope, iElement, iAttrs) {
+      var setPart = $parse(iAttrs.setPart)(scope),
+          stateName;
+      if (setPart === 'person') {
+        stateName = 'root.persons.view.documentApplications.edit';
+      }
+      else if (setPart === 'organization') {
+        stateName = 'root.organizations.view.documentApplications.edit';
+      }
+      else if (setPart === 'aircraft') {
+        stateName = 'root.aircrafts.view.applications.edit';
+      }
+      else if (setPart === 'airport') {
+        stateName = 'root.airports.view.applications.edit';
+      }
+      else if (setPart === 'equipment') {
+        stateName = 'root.equipments.view.applications.edit';
+      }
 
       scope.viewApplication = function (partIndex) {
-        $state.go($parse(iAttrs.stateName)(scope), {
+        $state.go(stateName, {
           id: $stateParams.id,
           ind: partIndex
         });
@@ -46,7 +66,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
       restrict: 'E',
       replace: true,
       template: '<input type="hidden" class="input-sm form-control" ui-select2="appSelectOpt" />',
-      link: { pre: preLink }
+      link: { pre: preLink, post: postLink }
     };
   }
 
