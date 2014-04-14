@@ -1,18 +1,15 @@
 ﻿<div class="panel panel-default">
   <nav class="panel-heading">
     <div class="collapse navbar-collapse" style="padding: 0px;">
-      <button sc-click="save()" name="createBtn" type="button" class="btn btn-primary btn-sm">
-        <i class="glyphicon glyphicon-pencil"></i>
-        <span l10n-text="docs.newDoc.kontinue"></span>
-      </button>
-      <button sc-click="register()" name="registerBtn" type="button" class="btn btn-primary btn-sm">
-        <i class="glyphicon glyphicon-ok"></i>
-        <span l10n-text="docs.newDoc.registerAndShow"></span>
-      </button>
-      <button sc-click="cancel()" name="cancelBtn" type="button" class="btn btn-default btn-sm">
-        <i class="glyphicon glyphicon-remove"></i>
-        <span l10n-text="docs.newDoc.cancel"></span>
-      </button>
+      <sc-button name="createBtn" btn-click="save()" text="docs.newDoc.kontinue"
+          class="btn btn-default btn-sm" icon="glyphicon-pencil">
+      </sc-button>
+      <sc-button name="registerBtn" btn-click="register()" text="docs.newDoc.registerAndShow"
+        class="btn btn-default btn-sm" icon="glyphicon-ok">
+      </sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="docs.newDoc.cancel"
+        class="btn btn-default btn-sm" icon="glyphicon-remove">
+      </sc-button>
     </div>
   </nav>
 

@@ -72,6 +72,10 @@ namespace Docs.Api.Controllers
             string ds = null
             )
         {
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            limit = 1000;
+            offset = 0;
+
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
