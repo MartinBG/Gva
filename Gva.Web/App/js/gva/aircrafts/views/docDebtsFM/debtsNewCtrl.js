@@ -48,7 +48,7 @@
             part: {
               lotId : $stateParams.id
             },
-            files: [{ applications: [application] }]
+            files: [{ isAdded: true, applications: [application] }]
           };
         }
         else {

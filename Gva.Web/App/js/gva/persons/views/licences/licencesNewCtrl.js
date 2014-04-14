@@ -22,14 +22,14 @@
 
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {
-          if ($scope.newLicenceForm.$valid) {
-            return PersonLicence
-              .save({ id: $stateParams.id }, $scope.licence).$promise
-              .then(function () {
-                return $state.go('root.persons.view.licences.search');
-              });
-          }
-        });
+        if ($scope.newLicenceForm.$valid) {
+          return PersonLicence
+            .save({ id: $stateParams.id }, $scope.licence).$promise
+            .then(function () {
+              return $state.go('root.persons.view.licences.search');
+            });
+        }
+      });
     };
 
     $scope.cancel = function () {
@@ -48,13 +48,25 @@
   ];
 
   LicencesNewCtrl.$resolve = {
-    licence: function () {
-      return {
-        part: {
-          editions: [{}]
+    licence: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {
+              editions: [{ applications: [application] }]
+            }
+          };
         }
-      };
-    }
+        else {
+          return {
+            part: {
+              editions: [{}]
+            }
+          };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('LicencesNewCtrl', LicencesNewCtrl);

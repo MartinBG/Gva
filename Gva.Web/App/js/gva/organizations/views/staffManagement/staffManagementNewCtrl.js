@@ -39,9 +39,19 @@
   ];
 
   StaffManagementNewCtrl.$resolve = {
-    organizationStaffManagement: function () {
-      return { };
-    }
+    organizationStaffManagement: [
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            applications: [application]
+          };
+        }
+        else {
+          return { };
+        }
+      }
+    ]
   };
 
   angular.module('gva').controller('StaffManagementNewCtrl', StaffManagementNewCtrl);

@@ -132,6 +132,7 @@
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\AirportDO.cs" />
+    <Compile Include="ModelsDO\ApplicationLotObjectDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\EquipmentDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />

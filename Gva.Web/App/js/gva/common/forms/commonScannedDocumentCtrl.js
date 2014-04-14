@@ -19,7 +19,7 @@
 
       angular.forEach($scope.model, function (file) {
         file.isDeleted = false;
-        file.isAdded = false;
+        file.isAdded = file.isAdded || false;
       });
     });
 

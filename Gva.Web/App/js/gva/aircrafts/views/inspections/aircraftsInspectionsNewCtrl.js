@@ -39,10 +39,20 @@
 
   AircraftsInspectionsNewCtrl.$resolve = {
     aircraftInspection: [
-      function () {
-        return {
-          part: {}
-        };
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {},
+            applications: [application]
+          };
+        }
+        else {
+          return {
+            part: {},
+            files: []
+          };
+        }
       }
     ]
   };

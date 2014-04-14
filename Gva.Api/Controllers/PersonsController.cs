@@ -78,6 +78,16 @@ namespace Gva.Api.Controllers
             return Ok(new PersonDO(person));
         }
 
+        [Route("{lotId}/applications/{appId}")]
+        public IHttpActionResult GetApplication(int lotId, int appId)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            var returnValue = new ApplicationNomDO(this.applicationRepository.GetNomApplication(appId));
+
+            return Ok(returnValue);
+        }
+
         [Route("")]
         public IHttpActionResult PostPerson(JObject person)
         {
@@ -148,8 +158,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personData$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
@@ -170,10 +178,66 @@ namespace Gva.Api.Controllers
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
+        [Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
+        public override IHttpActionResult GetApplicationPart(int lotId, string path)
+        {
+            return base.GetApplicationPart(lotId, path);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^licences$)}"),
+        Route(@"{lotId}/{*path:regex(^ratings$)}")]
+        public override IHttpActionResult GetApplicationParts(int lotId, string path)
+        {
+            return base.GetApplicationParts(lotId, path);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^licences$)}"),
+        Route(@"{lotId}/{*path:regex(^ratings$)}")]
+        public IHttpActionResult PostNewApplicationPart(int lotId, string path, JObject content)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+
+            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
+
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+
+            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("part.editions[0].applications"));
+
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok(new { partIndex = partVersion.Part.Index });
+        }
+
+        [Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
+        Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
+        public IHttpActionResult PostApplicationPart(int lotId, string path, JObject content)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
+
+            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+
+            var editions = content.GetItems<JObject>("part.editions");
+
+            foreach (var edition in editions)
+            {
+                this.applicationRepository.AddApplicationRefs(partVersion, edition.GetItems<ApplicationNomDO>("applications"));
+            }
+
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
+        }
+
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
-         Route(@"{lotId}/{*path:regex(^licences$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
@@ -248,8 +312,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentExams$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
-         Route(@"{lotId}/{*path:regex(^licences$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
@@ -266,8 +328,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentExams\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]

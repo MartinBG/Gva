@@ -41,14 +41,28 @@
 
   OrganizationsInspectionsNewCtrl.$resolve = {
     organizationInspection: [
-      function () {
-        return {
-          part: {
-            examiners: [{ sortOrder: 1 }],
-            auditDetails: [],
-            disparities: []
-          }
-        };
+      'application',
+      function (application) {
+        if (application) {
+          return {
+            part: {
+              examiners: [{ sortOrder: 1 }],
+              auditDetails: [],
+              disparities: []
+            },
+            applications: [application]
+          };
+        }
+        else {
+          return {
+            part: {
+              examiners: [{ sortOrder: 1 }],
+              auditDetails: [],
+              disparities: []
+            },
+            files: []
+          };
+        }
       }
     ]
   };

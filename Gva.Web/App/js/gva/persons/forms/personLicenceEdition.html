@@ -83,6 +83,12 @@
       <sc-textarea rows="3" ng-model="model.notesAlt" ng-readonly="readonly && !backFromChild"></sc-textarea>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-sm-9 col-md-7">
+      <label class="control-label" l10n-text="persons.licenceEditionDirective.applications"></label>
+      <gva-applications ng-model="model.applications" set-part="'person'" ng-readonly="readonly"></gva-applications>
+    </div>
+  </div>
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.ratings"></h5>
   <div class="row">
     <div class="form-group col-sm-12">
@@ -251,7 +257,7 @@
       </table>
     </div>
   </div>
-  <div  ng-if="staffType.alias === 'flightCrew'">
+  <div ng-if="staffType.alias === 'flightCrew'">
     <h5 class="form-header" l10n-text="persons.licenceEditionDirective.licences"></h5>
     <div class="row">
       <div class="form-group col-sm-12">
