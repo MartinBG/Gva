@@ -74,7 +74,7 @@ GO
 --:r $(rootPath)\"..\Insert\Noms\auditStates.sql"
 --:r $(rootPath)\"..\Insert\Noms\otherDocumentTypes.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftCertificateTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\registers.sql"
+:r $(rootPath)\"..\Insert\Noms\registers.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftNewOld.sql"
 --:r $(rootPath)\"..\Insert\Noms\operationTypes.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftTypeCertificateTypes.sql"

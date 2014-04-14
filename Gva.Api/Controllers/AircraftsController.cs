@@ -132,6 +132,30 @@ namespace Gva.Api.Controllers
 
             return Ok(inventory);
         }
+        
+        [HttpPost]
+        [Route("checkRegMark/{regMark}")]
+        public IHttpActionResult CheckRegMark(string regMark)
+        {
+            System.Threading.Thread.Sleep(500);
+
+            return Ok(new
+            {
+                IsValid = true
+            });
+        }
+
+        [HttpPost]
+        [Route("getNextCertNumber")]
+        public IHttpActionResult GetNextCertNumber()
+        {
+            System.Threading.Thread.Sleep(500);
+
+            return Ok(new
+            {
+                CertNumber = new Random().Next() % 99999
+            });
+        }
 
         [Route("{lotId}/applications/{appId}")]
         public IHttpActionResult GetApplication(int lotId, int appId)

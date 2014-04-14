@@ -1,0 +1,64 @@
+﻿<ng-form name="newRegForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.newRegWizzard.title"></strong>
+      <div class="pull-right">
+        <sc-button btn-click="cancel()" text="aircrafts.newRegWizzard.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegister"
+          class="btn btn-default btn-xs" icon="glyphicon-chevron-left">
+        </sc-button>
+        <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button" ng-if="currentStep !== steps.regMarkInUse">
+          <span l10n-text="aircrafts.newRegWizzard.forward"></span>
+          <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !forwardButton.$pending, 'glyphicon-loading': forwardButton.$pending}"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="form-inline">
+        <div class="row">
+          <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
+            <label class="control-label" l10n-text="aircrafts.newRegWizzard.register"></label>
+            <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="currentStep !== steps.chooseRegister"></sc-nomenclature>
+          </div>
+          <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber" ng-if="currentStep !== steps.chooseRegister">
+            <label class="control-label" l10n-text="aircrafts.newRegWizzard.certNumber"></label>
+            <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
+            <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true" ng-if="currentStep !== steps.chooseRegNumber"></sc-text>
+            <span class="input-group input-group-sm" ng-if="currentStep === steps.chooseRegNumber">
+              <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-text>
+              <span class="input-group-btn">
+                <button name="nextNumberButton" class="btn btn-default" type="button" sc-click="getNextCertNumber()">
+                  <span class="glyphicon glyphicon-loading" ng-show="nextNumberButton.$pending"></span>
+                  <span l10n-text="aircrafts.newRegWizzard.skipNumber"></span>
+                </button>
+              </span>
+            </span>
+          </div>
+          <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark" ng-if="[steps.chooseRegister, steps.chooseRegNumber].indexOf(currentStep) < 0">
+            <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
+            <sc-validation-error field-name="regMark" validations="{required: null}"></sc-validation-error>
+            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegMark"></sc-text>
+          </div>
+          <div class="form-group has-success col-sm-4 col-sm-8" ng-if="currentStep === steps.confirmRegMark">
+            <label class="control-label"></label>
+            <span class="help-block">
+              <span class="glyphicon glyphicon-ok"></span> 
+              <span l10n-text="aircrafts.newRegWizzard.confirmRegMark"></span>
+            </span>
+          </div>
+          <div class="form-group has-error col-sm-4 col-sm-8" ng-if="currentStep === steps.regMarkInUse">
+            <label class="control-label"></label>
+            <span class="help-block">
+              <span class="glyphicon glyphicon-remove"></span> 
+              <span l10n-text="aircrafts.newRegWizzard.regMarkInUse"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

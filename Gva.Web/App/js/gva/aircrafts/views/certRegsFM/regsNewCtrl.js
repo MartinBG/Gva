@@ -13,6 +13,12 @@
 
     $scope.reg = aircraftCertRegistration;
 
+    if ($state.payload) {
+      $scope.reg.part.register = $state.payload.register;
+      $scope.reg.part.certNumber = $state.payload.certNumber;
+      $scope.reg.part.regMark = $state.payload.regMark;
+    }
+
     $scope.save = function () {
       return $scope.newCertRegForm.$validate()
          .then(function () {

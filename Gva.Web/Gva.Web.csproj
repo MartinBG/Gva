@@ -389,6 +389,8 @@
     <Content Include="App\js\gva\aircrafts\views\certSmods\smodsNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\certSmods\smodsSearch.html" />
     <Content Include="App\js\gva\aircrafts\views\certSmods\smodsSearchCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsNewWizzard.html" />
+    <Content Include="App\js\gva\aircrafts\views\certRegsFM\regsNewWizzardCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\docDebtsFM\debtsEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\docDebtsFM\debtsEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\docDebtsFM\debtsNew.html" />

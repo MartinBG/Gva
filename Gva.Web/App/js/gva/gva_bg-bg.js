@@ -834,6 +834,18 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        newRegWizzard: {
+          title: 'Нова регистрация',
+          forward: 'Напред',
+          back: 'Назад',
+          cancel: 'Отказ',
+          register: 'Регистър',
+          certNumber: 'Рег. номер',
+          skipNumber: 'Пропусни',
+          regMark: 'Регистрационен знак',
+          confirmRegMark: 'Желаният регистрационен знак е свободен.',
+          regMarkInUse: 'Желаният регистрационен знак е запазен за ВС:'
+        },
         editReg: {
           title: 'Преглед на регистрация',
           edit: 'Редакция',

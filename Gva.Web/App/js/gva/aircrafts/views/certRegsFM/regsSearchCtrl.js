@@ -20,7 +20,7 @@
     };
 
     $scope.newCertReg = function () {
-      return $state.go('root.aircrafts.view.regsFM.new');
+      return $state.go('root.aircrafts.view.regsFM.newWizzard');
     };
   }
 

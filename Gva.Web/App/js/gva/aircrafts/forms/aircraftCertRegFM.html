@@ -1,18 +1,16 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.certNumber"></label>
-      <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
+    <div class="form-group col-sm-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.register"></label>
-      <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-readonly="true"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.certNumber"></label>
+      <sc-text ng-model="model.certNumber" name="certNumber" ng-readonly="true"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.regMark"></label>
-      <sc-text ng-model="model.regMark" name="regMark" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.regMark" name="regMark" ng-readonly="true"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.certDate"></label>
