@@ -24,9 +24,9 @@
     };
 
     $scope.save = function () {
-      return $scope.personDataForm.$validate()
+      return $scope.editPersonForm.$validate()
         .then(function () {
-          if ($scope.personDataForm.$valid) {
+          if ($scope.editPersonForm.$valid) {
             return PersonData
               .save({ id: $stateParams.id }, $scope.personData)
               .$promise

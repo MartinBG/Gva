@@ -12,9 +12,9 @@
     $scope.personAddress = address;
 
     $scope.save = function () {
-      return $scope.personAddressForm.$validate()
+      return $scope.newAddressForm.$validate()
         .then(function () {
-          if ($scope.personAddressForm.$valid) {
+          if ($scope.newAddressForm.$valid) {
             return PersonAddress
               .save({ id: $stateParams.id }, $scope.personAddress)
               .$promise
