@@ -30,7 +30,7 @@
     };
 
     $scope.newAircraft = function () {
-      return $state.go('root.aircrafts.new');
+      return $state.go('root.aircrafts.newWizzard');
     };
 
     $scope.viewAircraft = function (aircraft) {

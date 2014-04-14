@@ -442,6 +442,8 @@
     <Content Include="App\js\gva\aircrafts\views\parts\partsNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\parts\partsSearch.html" />
     <Content Include="App\js\gva\aircrafts\views\parts\partsSearchCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\views\aircraftsNewWizzard.html" />
+    <Content Include="App\js\gva\aircrafts\views\aircraftsNewWizzardCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportCertOperational.html" />
     <Content Include="App\js\gva\airports\forms\airportCertOperationalCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportData.html" />

@@ -41,7 +41,7 @@
     };
     
     $scope.newReg = function () {
-      return $state.go('root.aircrafts.view.regsFM.new');
+      return $state.go('root.aircrafts.view.regsFM.newWizzard');
     };
 
   }

@@ -764,6 +764,16 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        newWizzard: {
+          title: 'Ново ВС',
+          save: 'Запис',
+          forward: 'Напред',
+          back: 'Назад',
+          cancel: 'Отказ',
+          aircraftProducer: 'Производител',
+          aircraftCategory: 'Категория ВС',
+          aircraftModel: 'Модел ВС'
+        },
         editAircraft: {
           title: 'Преглед на данни за ВС',
           edit: 'Редакция',

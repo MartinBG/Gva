@@ -16,7 +16,9 @@ namespace Gva.Api.ModelsDO
             this.OutputDate = aircraftData.OutputDate;
             this.ICAO = aircraftData.ICAO;
             this.AircraftCategory = aircraftData.AircraftCategory;
+            this.AircraftCategoryId = aircraftData.AircraftCategoryId;
             this.AircraftProducer = aircraftData.AircraftProducer;
+            this.AircraftProducerId = aircraftData.AircraftProducerId;
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
             this.ModifOrWingColor = aircraftData.ModifOrWingColor;
@@ -37,7 +39,11 @@ namespace Gva.Api.ModelsDO
 
         public string AircraftCategory { get; set; }
 
+        public int AircraftCategoryId { get; set; }
+
         public string AircraftProducer { get; set; }
+
+        public int AircraftProducerId { get; set; }
 
         public string Engine { get; set; }
 

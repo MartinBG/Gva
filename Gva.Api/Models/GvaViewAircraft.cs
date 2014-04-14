@@ -1,4 +1,5 @@
-﻿using Regs.Api.Models;
+﻿using Common.Api.Models;
+using Regs.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +21,11 @@ namespace Gva.Api.Models
 
         public string AircraftCategory { get; set; }
 
+        public int AircraftCategoryId { get; set; }
+
         public string AircraftProducer { get; set; }
+
+        public int AircraftProducerId { get; set; }
 
         public string Engine { get; set; }
 
@@ -62,7 +67,9 @@ namespace Gva.Api.Models
             this.Property(t => t.OutputDate).HasColumnName("OutputDate");
             this.Property(t => t.ICAO).HasColumnName("ICAO");
             this.Property(t => t.AircraftCategory).HasColumnName("AircraftCategory");
+            this.Property(t => t.AircraftCategoryId).HasColumnName("AircraftCategoryId");
             this.Property(t => t.AircraftProducer).HasColumnName("AircraftProducer");
+            this.Property(t => t.AircraftProducerId).HasColumnName("AircraftProducerId");
             this.Property(t => t.Engine).HasColumnName("Engine");
             this.Property(t => t.Propeller).HasColumnName("Propeller");
             this.Property(t => t.ModifOrWingColor).HasColumnName("ModifOrWingColor");

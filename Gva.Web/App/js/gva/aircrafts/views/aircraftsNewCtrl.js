@@ -5,13 +5,28 @@
   function AircraftsNewCtrl($scope, $state, Aircraft, aircraft) {
     $scope.aircraft = aircraft;
 
+    if ($state.payload) {
+      if ($state.payload.aircraftModel) {
+        $scope.aircraft.aircraftData.aircraftProducer =
+          $state.payload.aircraftModel.aircraftProducer;
+        $scope.aircraft.aircraftData.aircraftCategory =
+          $state.payload.aircraftModel.aircraftCategory;
+        $scope.aircraft.aircraftData.model = $state.payload.aircraftModel.name;
+        $scope.aircraft.aircraftData.modelAlt = $state.payload.aircraftModel.nameAlt;
+      } else {
+        $scope.aircraft.aircraftData.aircraftProducer = $state.payload.aircraftProducer;
+        $scope.aircraft.aircraftData.aircraftCategory = $state.payload.aircraftCategory;
+      }
+    }
     $scope.save = function () {
       return $scope.newAircraftForm.$validate()
       .then(function () {
         if ($scope.newAircraftForm.$valid) {
           return Aircraft.save($scope.aircraft).$promise
-            .then(function () {
-              return $state.go('root.aircrafts.search');
+            .then(function (aircraft) {
+              return $state.go('root.aircrafts.view.regsFM.newWizzard', {
+                id: aircraft.id
+              });
             });
         }
       });

@@ -78,13 +78,13 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetOrganizationsAudits(int lotId)
         {
             var audits = this.lotRepository.GetLotIndex(lotId).GetParts("organizationInspections")
-                .Select(i => new 
+                .Select(i => new
                 {
                     nomValueId = i.Part.Index,
                     name = i.Content.Get<string>("documentNumber")
                 });
 
-           return Ok(audits);
+            return Ok(audits);
         }
 
         [Route("persons/{id:int}")]
@@ -154,14 +154,18 @@ namespace Gva.Api.Controllers
         }
 
         [Route("aircrafts")]
-        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null, string category = "", string producer = "")
         {
             var returnValue =
                 this.aircraftRepository.GetAircrafts(model: term, exact: false, offset: offset, limit: limit)
-                .Select(e => new
+                .Where(e => e.AircraftCategory.Contains(category) && e.AircraftProducer.Contains(producer)).Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Model
+                    name = e.Model,
+                    nameAlt = e.ModelAlt,
+                    // TODO HACK
+                    aircraftCategory = this.nomRepository.GetNomValue("aircraftCategories", e.AircraftCategoryId),
+                    aircraftProducer = this.nomRepository.GetNomValue("aircraftProducers", e.AircraftProducerId)
                 });
 
             return Ok(returnValue);
@@ -371,7 +375,7 @@ namespace Gva.Api.Controllers
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("documentParts");
 
-            if(!string.IsNullOrEmpty(set))
+            if (!string.IsNullOrEmpty(set))
             {
                 nomValues = nomValues.Where(p => p.Code.Contains(set));
             }
@@ -403,7 +407,7 @@ namespace Gva.Api.Controllers
             if (fclCode == "Y")
             {
                 nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("licenceCode").Contains("FCL"));
-                
+
             }
 
             if (!string.IsNullOrEmpty(staffTypeAlias))
@@ -412,7 +416,7 @@ namespace Gva.Api.Controllers
             }
             return Ok(nomValues);
         }
-        
+
         [Route("documentTypes")]
         public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
@@ -483,18 +487,18 @@ namespace Gva.Api.Controllers
         }
 
         [Route("auditDetails")]
-        public IHttpActionResult GetAuditDetails(string type = null, string auditPartCode = null) 
+        public IHttpActionResult GetAuditDetails(string type = null, string auditPartCode = null)
         {
-            JObject defaultAuditResult =   this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
-                .Select( n => new JObject(
-                    new JProperty("nomValueId", n.NomValueId ),
+            JObject defaultAuditResult = this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
+                .Select(n => new JObject(
+                    new JProperty("nomValueId", n.NomValueId),
                     new JProperty("code", n.Code),
                     new JProperty("name", n.Name))).First();
 
 
             JArray auditDetails = new JArray();
 
-            if(type == "organizationRecommendations")
+            if (type == "organizationRecommendations")
             {
 
                 this.nomRepository.GetNomValues("auditPartSections").ToArray();
@@ -503,7 +507,7 @@ namespace Gva.Api.Controllers
                     .GroupBy(d => d.ParentValue.Code)
                     .OrderBy(d => d.Key);
 
-                foreach(var requirement in requirements)
+                foreach (var requirement in requirements)
                 {
                     JArray elements = new JArray();
                     foreach (var element in requirement)
@@ -520,13 +524,13 @@ namespace Gva.Api.Controllers
                                 new JProperty("titlePart", element.Code.Split('.')[0]),
                                 new JProperty("sortOrder", sortOrder)));
                     }
-                     auditDetails.Add(
-                        new JObject(
-                            new JProperty("groupTitle", elements.First().Get("groupTitle")),
-                            new JProperty("group",
-                                elements
-                                .OrderBy(e => e.Get<string>("titlePart"))
-                                .ThenBy(e => e.Get<int>("sortOrder")))));
+                    auditDetails.Add(
+                       new JObject(
+                           new JProperty("groupTitle", elements.First().Get("groupTitle")),
+                           new JProperty("group",
+                               elements
+                               .OrderBy(e => e.Get<string>("titlePart"))
+                               .ThenBy(e => e.Get<int>("sortOrder")))));
                 }
             }
 
