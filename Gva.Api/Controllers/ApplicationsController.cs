@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.AirportRepository;
+using System.IO;
 
 namespace Gva.Api.Controllers
 {
@@ -273,9 +274,17 @@ namespace Gva.Api.Controllers
                 }
 
                 var doc = this.docRepository.Find(docId.Value);
+                var docFileTypes = this.unitOfWork.DbContext.Set<DocFileType>().ToList();
+
+                var docFileType = docFileTypes.FirstOrDefault(e => e.Extention == Path.GetExtension(newPart.Get<string>("appFile.file.name")));
+                if (docFileType == null)
+                {
+                    docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
+                }
+
                 var docFile = doc.CreateDocFile(
                     newPart.Get<int>("appFile.docFileKindId"),
-                    newPart.Get<int>("appFile.docFileTypeId"),
+                    docFileType.DocFileTypeId,
                     newPart.Get<string>("appFile.name"),
                     newPart.Get<string>("appFile.file.name"),
                     String.Empty,
@@ -371,9 +380,18 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var doc = this.docRepository.Find(docId);
+                var docFileTypes = this.unitOfWork.DbContext.Set<DocFileType>().ToList();
+
                 foreach (var file in files.Where(e => e.IsNew && !e.IsDeleted))
                 {
-                    doc.CreateDocFile(file.DocFileKindId, file.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
+                    var docFileType = docFileTypes.FirstOrDefault(e => e.Extention == Path.GetExtension(file.File.Name));
+
+                    if (docFileType == null)
+                    {
+                        docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
+                    }
+
+                    doc.CreateDocFile(file.DocFileKindId, docFileType.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
                 }
 
                 this.unitOfWork.Save();

@@ -4,8 +4,7 @@
         <tr>
           <th l10n-text="docs.edit.view.docFile.kind"></th>
           <th l10n-text="docs.edit.view.docFile.name"></th>
-          <th l10n-text="docs.edit.view.docFile.type"></th>
-          <th l10n-text="docs.edit.view.docFile.attachedFile"></th>
+          <th l10n-text="docs.edit.view.docFile.attachedFile" style="width: 300px;"></th>
           <th style="width: 70px;"></th>
         </tr>
     </thead>
@@ -16,9 +15,6 @@
         </td>
         <td style="width: 300px;" sc-has-error="name">
           <sc-text name="name" ng-model="df.name" ng-readonly="!df.isInEdit" required></sc-text>
-        </td>
-        <td style="width: 350px;" sc-has-error="docFileType">
-          <sc-nomenclature name="docFileType" ng-model="df.docFileTypeId" nom-obj="df.docFileType" mode="id" alias="'docFileType'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
         </td>
         <td sc-has-error="docFile">
           <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>

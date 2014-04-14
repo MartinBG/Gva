@@ -32,10 +32,10 @@
           <gva-person-document-medical name="addForm" ng-model="applicationPart.part"></gva-person-document-medical>
         </div>
         <div ng-if="applicationPart.setPartAlias === 'personCheck'">
-          <gva-person-document-check name="addForm" ng-model="applicationPart.part"></gva-person-document-check>
+          <gva-person-document-check name="addForm" ng-model="applicationPart.part" sc-data-is-new="true"></gva-person-document-check>
         </div>
         <div ng-if="applicationPart.setPartAlias === 'personTraining'">
-          <gva-person-document-training name="addForm" ng-model="applicationPart.part"></gva-person-document-training>
+          <gva-person-document-training name="addForm" ng-model="applicationPart.part" sc-data-is-new="true"></gva-person-document-training>
         </div>
         <div ng-if="applicationPart.setPartAlias === 'personOther'">
           <gva-person-document-other name="addForm" ng-model="applicationPart.part"></gva-person-document-other>

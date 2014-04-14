@@ -576,7 +576,17 @@ namespace Docs.Api.Models
             Guid docFileContentId,
             UserContext userContext)
         {
-            throw new NotImplementedException();
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            docFile.DocFileKindId = docFileKindId;
+            docFile.DocFileTypeId = docFileTypeId;
+            docFile.Name = name;
+            docFile.DocFileName = docFileName;
+            docFile.DocContentStorage = docContentStorage;
+            docFile.DocFileContentId = docFileContentId;
+
+            return docFile;
         }
 
         public DocFile UpdateDocFile(

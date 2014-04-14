@@ -14,6 +14,7 @@ using System.Web.Http;
 using System.Data.Entity;
 using Common.Api.UserContext;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Docs.Api.Controllers
 {
@@ -971,6 +972,7 @@ namespace Docs.Api.Controllers
                 #region DocFiles
 
                 List<DocFileDO> allDocFiles = doc.DocFiles;
+                List<DocFileType> docFileTypes = this.unitOfWork.DbContext.Set<DocFileType>().ToList();
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))
                 {
@@ -983,29 +985,26 @@ namespace Docs.Api.Controllers
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && !e.IsDeleted && e.IsDirty && e.DocFileId.HasValue))
                 {
-                    oldDoc.UpdateDocFile(
-                        file.DocFileId.Value,
-                        file.DocFileKindId,
-                        file.DocFileTypeId,
-                        file.Name,
-                        file.File.Name,
-                        "",
-                        file.File.Key,
-                        userContext);
+                    var docFileType = docFileTypes.FirstOrDefault(e => e.Extention == Path.GetExtension(file.File.Name));
+
+                    if (docFileType == null)
+                    {
+                        docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
+                    }
+                    
+                    oldDoc.UpdateDocFile(file.DocFileId.Value, file.DocFileKindId, docFileType.DocFileTypeId, file.Name, file.File.Name, "", file.File.Key, userContext);
                 }
 
                 foreach (var file in allDocFiles.Where(e => e.IsNew && !e.IsDeleted))
                 {
-                    oldDoc.CreateDocFile(
-                        file.DocFileKindId,
-                        file.DocFileTypeId,
-                        file.Name,
-                        file.File.Name,
-                        "",
-                        file.File.Key,
-                        false,
-                        true,
-                        userContext);
+                    var docFileType = docFileTypes.FirstOrDefault(e => e.Extention == Path.GetExtension(file.File.Name));
+
+                    if (docFileType == null)
+                    {
+                        docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
+                    }
+
+                    oldDoc.CreateDocFile(file.DocFileKindId, docFileType.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
                 }
 
                 //?
