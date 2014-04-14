@@ -45,7 +45,7 @@
         if (application) {
           return {
             part: {},
-            files: [{ applications: [application] }]
+            files: [{ isAdded: true, applications: [application] }]
           };
         }
         else {
