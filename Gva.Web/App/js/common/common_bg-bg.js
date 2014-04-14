@@ -43,25 +43,45 @@
             appsLink: 'Свържи заявление'
           },
           organizations: {
-            title: 'САРО',
+            title: 'Орг',
             search: 'Търсене',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление'
           },
           airports: {
-            title: 'Летища',
-            search: 'Търсене',
+            title: 'ЛЛП',
+            search: 'Летища и лет. площадки',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление'
           },
           equipments: {
-            title: 'СВНК',
+            title: 'СУВД',
             search: 'Търсене',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление'
+          },
+          airportOperators: {
+            title: 'ЛО',
+            search: 'Летищни оператори'
+          },
+          educationOrgs: {
+            title: 'АУЦ',
+            search: 'Организации за обучение'
+          },
+          airCarriers: {
+            title: 'ВП',
+            search: 'Въздушни превозвачи'
+          },
+          airOperators: {
+            title: 'САО',
+            search: 'Авиационни оператори'
+          },
+          airNavSvcProviders: {
+            title: 'АНО',
+            search: 'Доставчици на АНО'
           },
           admin: {
             title: 'Админ',
