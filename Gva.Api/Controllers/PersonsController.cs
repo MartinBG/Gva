@@ -263,7 +263,8 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetNextLin(string linType = null)
         {
             var persons = this.personRepository.GetPersons(linType: linType);
-            int nextLin = 0;
+
+            int nextLin;
             if (persons.Count() != 0)
             {
                 int lastLin = persons.OrderBy(p => int.Parse(p.Lin)).Select(p => int.Parse(p.Lin)).Last();
@@ -273,15 +274,15 @@ namespace Gva.Api.Controllers
             {
                 var lins = new Dictionary<string, int>()
                 {
-                    { "pilots", 10000 },
-                    { "flyingCrew", 20000},
-                    { "crewStaff", 30000},
-                    { "HeadFlights", 40000},
-                    { "AirlineEngineers", 50000},
-                    { "dispatchers", 60000},
-                    { "paratroopers", 70000},
-                    { "engineersRVD", 80000},
-                    { "deltaplaner", 90000}
+                    { "pilots", 10001 },
+                    { "flyingCrew", 20001 },
+                    { "crewStaff", 30001 },
+                    { "HeadFlights", 40001 },
+                    { "AirlineEngineers", 50001 },
+                    { "dispatchers", 60001 },
+                    { "paratroopers", 70001 },
+                    { "engineersRVD", 80001 },
+                    { "deltaplaner", 90001 }
                 };
                 nextLin = lins[linType];
             }

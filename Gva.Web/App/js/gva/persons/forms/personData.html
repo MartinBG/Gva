@@ -43,7 +43,7 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="text-align: left; width: 120px">
-            {{model.linType || 'Избери '}} <span class="caret"></span>
+            {{model.linType.name || 'Избери'}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
             <li ng-repeat="type in linTypes"><a ng-click="setLin(type)">{{type.name}}</a></li>

@@ -8,8 +8,8 @@
         $scope.linTypes = linTypes;
       });
 
-    $scope.setLin = function(item){
-      $scope.model.linType = item.name;
+    $scope.setLin = function (item) {
+      $scope.model.linType = item;
       $scope.model.lin = null;
 
       Person.getNextLin({
