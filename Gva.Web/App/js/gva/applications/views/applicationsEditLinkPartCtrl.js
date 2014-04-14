@@ -62,21 +62,21 @@
           return PersonDocumentId.query({ id: $scope.application.lotId })
             .$promise.then(function (documentIds) {
               $scope.documentPart = documentIds;
-              $scope.showDocumentId = !!documentIds;
+              $scope.showPDocumentId = !!documentIds;
             });
         }
         else if ($scope.docPartType.alias === 'personEducation') {
           return PersonDocumentEducation.query({ id: $scope.application.lotId })
             .$promise.then(function (documentEducations) {
               $scope.documentPart = documentEducations;
-              $scope.showDocumentEducation = !!documentEducations;
+              $scope.showPDocumentEducation = !!documentEducations;
             });
         }
         else if ($scope.docPartType.alias === 'personEmployment') {
           return PersonDocumentEmployment.query({ id: $scope.application.lotId })
             .$promise.then(function (employments) {
               $scope.documentPart = employments;
-              $scope.showDocumentEmployment = !!employments;
+              $scope.showPDocumentEmployment = !!employments;
             });
         }
         else if ($scope.docPartType.alias === 'personMedical') {
@@ -98,35 +98,35 @@
 
                 return medical;
               });
-              $scope.showDocumentMed = !!medicals;
+              $scope.showPDocumentMed = !!medicals;
             });
         }
         else if ($scope.docPartType.alias === 'personCheck') {
           return PersonDocumentCheck.query({ id: $scope.application.lotId })
             .$promise.then(function (checks) {
               $scope.documentPart = checks;
-              $scope.showDocumentCheck = !!checks;
+              $scope.showPDocumentCheck = !!checks;
             });
         }
         else if ($scope.docPartType.alias === 'personTraining') {
           return PersonDocumentTraining.query({ id: $scope.application.lotId })
             .$promise.then(function (documentTrainings) {
               $scope.documentPart = documentTrainings;
-              $scope.showDocumentTraining = !!documentTrainings;
+              $scope.showPDocumentTraining = !!documentTrainings;
             });
         }
         else if ($scope.docPartType.alias === 'personOther') {
           return PersonDocumentOther.query({ id: $scope.application.lotId })
             .$promise.then(function (documentOthers) {
               $scope.documentPart = documentOthers;
-              $scope.showDocumentOther = !!documentOthers;
+              $scope.showPDocumentOther = !!documentOthers;
             });
         }
         else if ($scope.docPartType.alias === 'personApplication') {
           return PersonDocumentApplication.query({ id: $scope.application.lotId })
             .$promise.then(function (documentApplications) {
               $scope.documentPart = documentApplications;
-              $scope.showDocumentApplication = !!documentApplications;
+              $scope.showPDocumentApplication = !!documentApplications;
             });
         }
         else if ($scope.docPartType.alias === 'organizationOther') {
