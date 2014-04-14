@@ -34,57 +34,55 @@ namespace Gva.MigrationTool.Sets
 
         public static void migratePersons(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n)
         {
+            noms = n;
+
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
-            using (IUnitOfWork unitOfWork = new UnitOfWork(
-                new IDbConfiguration[] { new RegsDbConfiguration(), new CommonDbConfiguration(), new DocsDbConfiguration(), new GvaDbConfiguration() }))
+            IList<int> personIds = Person.getPersonIds(con);
+
+            foreach (var personId in personIds) //new int[] { 6730 })
             {
-                unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
-
-                var lotRepository = new LotRepository(unitOfWork);
-                var userRepository = new UserRepository(unitOfWork);
-                var fileRepository = new FileRepository(unitOfWork);
-                var applicationRepository = new ApplicationRepository(unitOfWork);
-                var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
+                using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
                 {
-                    new ApplicationsViewAircraftHandler(unitOfWork),
-                    new ApplicationsViewPersonHandler(unitOfWork),
-                    new ApplicationsViewOrganizationHandler(unitOfWork),
-                    new ApplicationsViewAirportHandler(unitOfWork),
-                    new ApplicationsViewEquipmentHandler(unitOfWork),
-                    new AircraftApplicationHandler(unitOfWork, userRepository),
-                    new AircraftDebtHandler(unitOfWork, userRepository),
-                    new AircraftInspectionHandler(unitOfWork, userRepository),
-                    new AircraftOccurrenceHandler(unitOfWork, userRepository),
-                    new AircraftOtherHandler(unitOfWork, userRepository),
-                    new AircraftOwnerHandler(unitOfWork, userRepository),
-                    new OrganizationApplicationHandler(unitOfWork, userRepository),
-                    new OrganizationOtherHandler(unitOfWork, userRepository),
-                    new PersonApplicationHandler(unitOfWork, userRepository),
-                    new PersonCheckHandler(unitOfWork, userRepository),
-                    new PersonDocumentIdHandler(unitOfWork, userRepository),
-                    new PersonEducationHandler(unitOfWork, userRepository),
-                    new PersonEmploymentHandler(unitOfWork, userRepository),
-                    new PersonMedicalHandler(unitOfWork, userRepository),
-                    new PersonOtherHandler(unitOfWork, userRepository),
-                    new PersonTrainingHandler(unitOfWork, userRepository),
-                    new OrganizationViewDataHandler(unitOfWork),
-                    new PersonViewDataHandler(unitOfWork),
-                    new PersonViewEmploymentHandler(unitOfWork),
-                    new PersonViewLicenceHandler(unitOfWork),
-                    new PersonViewRatingHandler(unitOfWork)
-                });
+                    unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                var userContext = new UserContext(2);
+                    var userContext = new UserContext(2);
+                    var lotRepository = new LotRepository(unitOfWork);
+                    var userRepository = new UserRepository(unitOfWork);
+                    var fileRepository = new FileRepository(unitOfWork);
+                    var applicationRepository = new ApplicationRepository(unitOfWork);
+                    var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
+                    {
+                        new ApplicationsViewAircraftHandler(unitOfWork),
+                        new ApplicationsViewPersonHandler(unitOfWork),
+                        new ApplicationsViewOrganizationHandler(unitOfWork),
+                        new ApplicationsViewAirportHandler(unitOfWork),
+                        new ApplicationsViewEquipmentHandler(unitOfWork),
+                        new AircraftApplicationHandler(unitOfWork, userRepository),
+                        new AircraftDebtHandler(unitOfWork, userRepository),
+                        new AircraftInspectionHandler(unitOfWork, userRepository),
+                        new AircraftOccurrenceHandler(unitOfWork, userRepository),
+                        new AircraftOtherHandler(unitOfWork, userRepository),
+                        new AircraftOwnerHandler(unitOfWork, userRepository),
+                        new OrganizationApplicationHandler(unitOfWork, userRepository),
+                        new OrganizationOtherHandler(unitOfWork, userRepository),
+                        new PersonApplicationHandler(unitOfWork, userRepository),
+                        new PersonCheckHandler(unitOfWork, userRepository),
+                        new PersonDocumentIdHandler(unitOfWork, userRepository),
+                        new PersonEducationHandler(unitOfWork, userRepository),
+                        new PersonEmploymentHandler(unitOfWork, userRepository),
+                        new PersonMedicalHandler(unitOfWork, userRepository),
+                        new PersonOtherHandler(unitOfWork, userRepository),
+                        new PersonTrainingHandler(unitOfWork, userRepository),
+                        new OrganizationViewDataHandler(unitOfWork),
+                        new PersonViewDataHandler(unitOfWork),
+                        new PersonViewEmploymentHandler(unitOfWork),
+                        new PersonViewLicenceHandler(unitOfWork),
+                        new PersonViewRatingHandler(unitOfWork)
+                    });
 
-                noms = n;
-                Set personSet = lotRepository.GetSet("Person");
-
-                var personIds = Person.getPersonIds(con);
-                foreach (var personId in personIds) //new int[] { 6730 })
-                {
-                    var lot = personSet.CreateLot(userContext);
+                    var lot = lotRepository.GetSet("Person").CreateLot(userContext);
 
                     var personData = Person.getPersonData(con, personId);
                     lot.CreatePart("personData", personData, userContext);

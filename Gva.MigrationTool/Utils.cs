@@ -9,6 +9,10 @@ using Regs.Api.Models;
 using Common.Json;
 using Gva.Api.ModelsDO;
 using Common.Api.UserContext;
+using Common.Data;
+using Common.Api.Models;
+using Docs.Api.Models;
+using Gva.Api.Models;
 
 namespace Gva.MigrationTool
 {
@@ -51,6 +55,18 @@ namespace Gva.MigrationTool
             }
 
             return o;
+        }
+
+        public static IUnitOfWork CreateUnitOfWork()
+        {
+            return new UnitOfWork(
+                new IDbConfiguration[]
+                {
+                    new RegsDbConfiguration(),
+                    new CommonDbConfiguration(),
+                    new DocsDbConfiguration(),
+                    new GvaDbConfiguration()
+                });
         }
     }
 }
