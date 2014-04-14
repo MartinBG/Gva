@@ -219,6 +219,20 @@ namespace Gva.Api.Controllers
             return base.GetFileParts(lotId, path, caseTypeId);
         }
 
+        [Route(@"{lotId}/{regex(^lastLicenceNumber$)}")]
+        public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceType)
+        {
+
+            PartVersion[] licences = this.lotRepository.GetLotIndex(lotId).GetParts("licences");
+
+            string licenceNumber = licences.Where(l => l.Content.Get("licenceType.code").ToString() == licenceType)
+                .OrderBy(l => l.Part.PartId)
+                .Where(l => l.Content.Get("licenceNumber") != null)
+                .Select(l => l.Content.Get("licenceNumber").ToString()).FirstOrDefault();
+
+            return Ok(new JObject(new JProperty("number", licenceNumber)));
+        }
+
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentChecks$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations$)}"),

@@ -384,6 +384,35 @@ namespace Gva.Api.Controllers
             return Ok(nomValues);
         }
 
+        [Route("limitations66")]
+        public IHttpActionResult GetLimitations66(string general = null)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("limitations66");
+            if (!string.IsNullOrEmpty(general))
+            {
+                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("general") == general);
+            }
+
+            return Ok(nomValues);
+        }
+
+        [Route("licenceTypes")]
+        public IHttpActionResult GetLlcenceTypes(string staffTypeAlias = null, string fclCode = null)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes");
+            if (fclCode == "Y")
+            {
+                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("licenceCode").Contains("FCL"));
+                
+            }
+
+            if (!string.IsNullOrEmpty(staffTypeAlias))
+            {
+                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("staffTypeAlias") == staffTypeAlias);
+            }
+            return Ok(nomValues);
+        }
+        
         [Route("documentTypes")]
         public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
         {
@@ -429,7 +458,7 @@ namespace Gva.Api.Controllers
                     new JProperty("code", n.Code),
                     new JProperty("name", n.Name))).First();
 
-            var requirements = this.nomRepository.GetNomValues("auditPartRequirmants").Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
+            var requirements = this.nomRepository.GetNomValues("auditPartRequirements").Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
 
             if (type == "organizations" || type == "aircrafts")
             {

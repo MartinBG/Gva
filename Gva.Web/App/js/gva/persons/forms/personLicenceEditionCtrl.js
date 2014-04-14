@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, _, moment*/
+(function (angular, _, moment) {
   'use strict';
 
   function PersonLicenceEditionCtrl(
@@ -10,18 +10,21 @@
     PersonRating,
     PersonDocumentTraining,
     PersonDocumentExam,
-    PersonDocumentMedical
+    PersonDocumentMedical,
+    PersonLicence
   ) {
     $q.all([
       PersonRating.query({ id: $stateParams.id }).$promise,
       PersonDocumentTraining.query({ id: $stateParams.id }).$promise,
       PersonDocumentExam.query({ id: $stateParams.id }).$promise,
-      PersonDocumentMedical.query({ id: $stateParams.id }).$promise
+      PersonDocumentMedical.query({ id: $stateParams.id }).$promise,
+      PersonLicence.query({ id: $stateParams.id }).$promise
     ]).then(function (results) {
       var ratings = results[0];
       var trainings = results[1];
       var exams = results[2];
       var medicals = results[3];
+      var licences = results[4];
 
       $scope.$watch('model', function () {
         if (!$scope.model) {
@@ -32,6 +35,7 @@
         $scope.model.includedTrainings = $scope.model.includedTrainings || [];
         $scope.model.includedExams = $scope.model.includedExams || [];
         $scope.model.includedMedicals = $scope.model.includedMedicals || [];
+        $scope.model.includedLicences = $scope.model.includedLicences || [];
 
         // coming from a child state and carrying payload
         if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
@@ -49,6 +53,10 @@
 
           if ($state.payload.selectedRatings) {
             [].push.apply($scope.model.includedRatings, $state.payload.selectedRatings);
+          }
+
+          if ($state.payload.selectedLicences) {
+            [].push.apply($scope.model.includedLicences, $state.payload.selectedLicences);
           }
         }
       });
@@ -98,11 +106,27 @@
           });
         });
 
+        $scope.$watchCollection('model.includedLicences', function () {
+          if (!$scope.model) {
+            return;
+          }
+
+          $scope.includedLicences = _.map($scope.model.includedLicences, function (ind) {
+            return _.find(licences, { partIndex: ind });
+          });
+        });
+
         // removing the watcher after the model have been set
         unbindWatcher();
       });
     });
 
+    $scope.$watch('isNew', function(){
+      if($scope.isNew && $scope.model.documentDateValidFrom === undefined){
+        $scope.model.documentDateValidFrom = moment(new Date());
+      }
+    });
+    
     $scope.addRating = function () {
       return $state.go('.newRating');
     };
@@ -143,6 +167,12 @@
       });
     };
 
+    $scope.addExistingLicence = function () {
+      return $state.go('.chooseLicence', {}, {}, {
+        selectedLicences: $scope.model.includedLicences
+      });
+    };
+
     $scope.removeRating = function (rating) {
       $scope.model.includedRatings =
         _.without($scope.model.includedRatings, rating.partIndex);
@@ -162,6 +192,11 @@
       $scope.model.includedMedicals =
         _.without($scope.model.includedMedicals, document.partIndex);
     };
+
+    $scope.removeLicence = function (document) {
+      $scope.model.includedLicences =
+        _.without($scope.model.includedLicences, document.partIndex);
+    };
   }
 
   PersonLicenceEditionCtrl.$inject = [
@@ -172,8 +207,9 @@
     'PersonRating',
     'PersonDocumentTraining',
     'PersonDocumentExam',
-    'PersonDocumentMedical'
+    'PersonDocumentMedical',
+    'PersonLicence'
   ];
 
   angular.module('gva').controller('PersonLicenceEditionCtrl', PersonLicenceEditionCtrl);
-}(angular, _));
+}(angular, _, moment));

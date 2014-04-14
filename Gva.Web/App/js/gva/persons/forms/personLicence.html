@@ -5,13 +5,22 @@
       <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-required="true" ng-readonly="readonly" ng-disabled="!isNew"></sc-nomenclature>
     </div>
+    <div class="form-group col-sm-2"  ng-if="model.staffType.alias === 'flightCrew'">
+      <label class="control-label" l10n-text="persons.licenceDirective.fcl"></label>
+      <sc-nomenclature alias="'boolean'" ng-model="model.fcl" ng-readonly="readonly" ng-disabled="!isNew"></sc-nomenclature>
+    </div>
   </div>
   <div ng-if="model.staffType">
     <div class="row">
       <div class=" form-group col-sm-3" sc-has-error="licenceType">
         <label class="control-label" l10n-text="persons.licenceDirective.licenceType"></label>
         <sc-validation-error field-name="licenceType" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature alias="'licenceTypes'" name="licenceType" ng-model="model.licenceType" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature alias="'licenceTypes'" name="licenceType" ng-model="model.licenceType" ng-required="true" ng-readonly="readonly"
+           params="{staffTypeAlias: model.staffType.alias, fclCode: model.fcl.code}" ></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="persons.licenceDirective.lastLicenceNumber"></label>
+        <sc-text ng-model="model.lastLicenceNumber" ng-readonly="true"></sc-text>
       </div>
     </div>
     <div class="row">

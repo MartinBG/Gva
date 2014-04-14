@@ -10,7 +10,7 @@
     licences
   ) {
     $scope.licences = licences;
-
+    
     $scope.viewLicence = function (licence) {
       return $state.go('root.persons.view.licences.edit', {
         id: $stateParams.id,

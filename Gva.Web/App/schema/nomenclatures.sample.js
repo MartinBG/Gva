@@ -354,7 +354,7 @@
     auditResults: require('./auditResult'),
 
     //Номенклатура Изисквания към раздел
-    auditPartRequirmants: require('./auditPartRequirement'),
+    auditPartRequirements: require('./auditPartRequirement'),
 
     //Номенклатура Проверяващи
     examiners: require('./examiner'),

@@ -6,7 +6,7 @@
 
   module.exports = {
     staffManagement1: {
-      auditPartRequirement: nomenclatures.get('auditPartRequirmants', 'Cockpit'),
+      auditPartRequirement: nomenclatures.get('auditPartRequirements', 'Cockpit'),
       planYear: '2015',
       planMonth: 'Декември',
       position: 'тест длъжност',
@@ -17,7 +17,7 @@
       valid: nomenclatures.get('boolean', 'true')
     },
     staffManagement2: {
-      auditPartRequirement: nomenclatures.get('auditPartRequirmants', 'Facilities'),
+      auditPartRequirement: nomenclatures.get('auditPartRequirements', 'Facilities'),
       planYear: '2012',
       planMonth: 'Април',
       position: 'тест длъжност2',

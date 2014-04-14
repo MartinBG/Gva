@@ -1023,6 +1023,14 @@ namespace Gva.MigrationTool.Nomenclatures
         public static void migrateLicenceTypes()
         {
             Nom nom = repo.GetNom("licenceTypes");
+            var aliases = new Dictionary<string, string>()
+            {
+                { "1", "flightCrew" },
+                { "2", "ovd"},
+                { "4", "to_vs"},
+                { "5", "to_suvd"}
+            };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LICENCE_TYPE")
                 .Materialize(r =>
                     new NomValue
@@ -1048,8 +1056,8 @@ namespace Gva.MigrationTool.Nomenclatures
                                 licenceTypeDictionary2Id = noms["licenceTypeDictionary"].ByOldId(r.Field<decimal?>("LICENCE_DICTIONARY2_ID").ToString()).NomValueId(),
                                 licenceCode = r.Field<string>("LICENCE_CODE"),
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
-                                qlfCode = r.Field<string>("QLF_CODE")
-
+                                qlfCode = r.Field<string>("QLF_CODE"),
+                                staffTypeAlias = aliases[r.Field<object>("STAFF_TYPE_ID").ToString()]
                             })
                     })
                 .ToList();

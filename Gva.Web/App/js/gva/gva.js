@@ -112,7 +112,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaLicence',
-      templateUrl: 'gva/persons/forms/personLicence.html'
+      templateUrl: 'gva/persons/forms/personLicence.html',
+      controller: 'PersonLicenceCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaLicenceEdition',
@@ -453,6 +454,7 @@
       .state(['root.persons.view.licences.new.newTraining.choosePublisher' , '/choosepublisher?text&publisherTypeAlias'  , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'        , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.licences.new.chooseExam'                  , '/chooseExam'                               , ['@root.persons.view', 'gva/persons/views/documentExams/chooseExam.html'         , 'ChooseExamCtrl'               ]])
       .state(['root.persons.view.licences.new.newExam'                     , '/newExam'                                  , ['@root.persons.view', 'gva/persons/views/documentExams/examsNew.html'           , 'AddExamCtrl'                  ]])
+      .state(['root.persons.view.licences.new.chooseLicence'               , '/chooseLicence'                            , ['@root.persons.view', 'gva/persons/views/licences/chooseLicence.html'           , 'ChooseLicenceCtrl'            ]])
       .state(['root.persons.view.licences.edit'                            , '/:ind'                                     , ['@root.persons.view', 'gva/persons/views/licences/licencesEdit.html'            , 'LicencesEditCtrl'             ]])
       .state(['root.persons.view.licences.edit.chooseRating'               , '/chooseRating'                             , ['@root.persons.view', 'gva/persons/views/ratings/chooseRating.html'             , 'ChooseRatingCtrl'             ]])
       .state(['root.persons.view.licences.edit.newRating'                  , '/newRating'                                , ['@root.persons.view', 'gva/persons/views/ratings/ratingsNew.html'               , 'AddRatingCtrl'                ]])
@@ -463,6 +465,7 @@
       .state(['root.persons.view.licences.edit.newTraining.choosePublisher', '/choosepublisher?text&publisherTypeAlias'  , ['@root.persons.view', 'gva/common/views/publishers/choosePublisher.html'        , 'ChoosePublisherCtrl'          ]])
       .state(['root.persons.view.licences.edit.chooseExam'                 , '/chooseExam'                               , ['@root.persons.view', 'gva/persons/views/documentExams/chooseExam.html'         , 'ChooseExamCtrl'               ]])
       .state(['root.persons.view.licences.edit.newExam'                    , '/newExam'                                  , ['@root.persons.view', 'gva/persons/views/documentExams/examsNew.html'           , 'AddExamCtrl'                  ]])
+      .state(['root.persons.view.licences.edit.chooseLicence'              , '/chooseLicence'                            , ['@root.persons.view', 'gva/persons/views/licences/chooseLicence.html'           , 'ChooseLicenceCtrl'            ]])
       .state(['root.persons.view.checks'                                , '/checks'                                                                                                                                                                 ])
       .state(['root.persons.view.checks.search'                         , ''                                           , ['@root.persons.view', 'gva/persons/views/documentChecks/checksSearch.html'               , 'DocumentChecksSearchCtrl'     ]])
       .state(['root.persons.view.checks.new'                            , '/new'                                       , ['@root.persons.view', 'gva/persons/views/documentChecks/checksNew.html'                  , 'DocumentChecksNewCtrl'        ]])

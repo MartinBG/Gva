@@ -1831,7 +1831,9 @@
           licenceType: 'Вид',
           licenceNumber: 'Лиценз No',
           valid: 'Действителен',
-          documentDateFirstIssue: 'Дата на първо издаване'
+          documentDateFirstIssue: 'Дата на първо издаване',
+          fcl: 'FCL',
+          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No'
         },
         licenceEditionDirective: {
           documentDateValidFrom: 'Дата на издаване',
@@ -1840,9 +1842,14 @@
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
           limitations: 'Ограничения',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
-          paperNumber: '№ на хартиеният лист на свидетелство за правоспособност',
+          AT_a_Ids: 'Aeroplanes Turbine A',
+          AT_b1_Ids: 'Aeroplanes Turbine B1',
+          AP_a_Ids: 'Aeroplanes Piston A',
+          AP_b1_Ids: 'Aeroplanes Piston B1',
+          HT_a_Ids: 'Helicopters Turbine A',
+          HT_b1_Ids: 'Helicopters Turbine B1',
+          avionics_Ids: 'Avionics B2',
+          PE_b3_Ids: 'B3 Piston-engine non pressurised aeroplanes of 2 000 Kg MTOM and below',
           licenceAction: 'Основание',
           ratings: 'Квалификационни класове към лиценза',
           addRating: 'Нов клас',
@@ -1854,10 +1861,10 @@
           addTraining: 'Ново обучение',
           addExistingTraining: 'Съществуващо обучение',
           addExistingExam: 'Съществуващ изпит',
+          addExistingLicence: 'Съществуващ лиценз',
           noTrainings: 'Няма избрани обучения',
           availableTrainings: 'Налични обучения',
           noAvailableTrainings: 'Няма налични обучения',
-          fcl: 'FCL',
           ratingsTable: {
             ratingType: 'Тип ВС (раб.място)',
             ratingClass: 'Клас (категория)',
@@ -1901,6 +1908,18 @@
             medClass: 'Клас',
             limitations: 'Ограничения',
             publisher: 'Издател'
+          },
+          licences: 'Лицензи',
+          addExistingMLicence: 'Съществуващ лиценз',
+          noLicences: 'Няма избрани лицензи',
+          availableLicences: 'Налични лицензи',
+          noAvailableLicences: 'Няма налични лицензи',
+          licencesTable: {
+            licenceNumber: 'Лиценз No',
+            licenceType: 'Наименование',
+            firstEditionValidFrom: 'Първоначално издаване',
+            documentDateValidFrom: 'Издаден',
+            documentDateValidTo: 'Валиден до'
           }
         },
         personOtherDirective: {
@@ -2361,6 +2380,15 @@
           add: 'Добави',
           back: 'Назад'
         },
+        chooseLicence: {
+          licenceNumber: 'Лиценз No',
+          licenceType: 'Наименование',
+          firstEditionValidFrom: 'Първоначално издаване',
+          documentDateValidFrom: 'Издаден',
+          documentDateValidTo: 'Валиден до',
+          add: 'Добави',
+          back: 'Назад'
+        },
         licencesSearch: {
           newLicence: 'Нов лиценз',
           licenceNumber: 'Лиценз No',
@@ -2389,7 +2417,7 @@
           pageCount: 'Брой стр.',
           licenceAction: 'Основание',
           newEdition: 'Ново вписване',
-          editLastEdition: 'Реакция',
+          editLastEdition: 'Редакция',
           deleteLastEdition: 'Изтриване',
           save: 'Запис',
           cancel: 'Отказ'
