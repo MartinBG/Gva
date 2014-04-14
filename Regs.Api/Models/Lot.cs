@@ -265,14 +265,6 @@ namespace Regs.Api.Models
         public void Commit(UserContext userContext, ILotEventDispatcher lotEventDispatcher, string[] paths = null)
         {
             Commit index = this.Index;
-            this.ModifyDate = DateTime.Now;
-
-            Commit newIndex = new Commit
-            {
-                ParentCommit = index,
-                CommiterId = userContext.UserId,
-                CommitDate = DateTime.Now
-            };
 
             List<CommitVersion> changedCommitVersions = index.CommitVersions.Where(pv => pv.PartVersion.OriginalCommit == index).ToList();
             List<CommitVersion> toBeCommited;
@@ -300,6 +292,16 @@ namespace Regs.Api.Models
             {
                 throw new InvalidOperationException("Cannot commit without modifications (empty commit)");
             }
+
+            //update the date to force EF update
+            this.ModifyDate = DateTime.Now;
+
+            Commit newIndex = new Commit
+            {
+                ParentCommit = index,
+                CommiterId = userContext.UserId,
+                CommitDate = DateTime.Now
+            };
 
             newIndex.IsIndex = true;
             newIndex.IsLoaded = true;
