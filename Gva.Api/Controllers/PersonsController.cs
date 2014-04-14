@@ -225,7 +225,7 @@ namespace Gva.Api.Controllers
             return Ok(new JObject(new JProperty("nextLin", nextLin)));
         }
 
-        [Route(@"{lotId}/lastLicenceNumber")]
+        [Route("{lotId}/lastLicenceNumber")]
         public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceType)
         {
 

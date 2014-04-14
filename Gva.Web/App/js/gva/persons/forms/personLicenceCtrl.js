@@ -6,6 +6,7 @@
     $scope.$watch('model.licenceType', function(){
       if(!$scope.model.lastLicenceNumber && !!$scope.model.licenceType){
         PersonLastLicenceNumber.get({
+          id: $stateParams.id,
           licenceType: $scope.model.licenceType.code
         }).$promise
           .then(function(lastLicenceNumber){

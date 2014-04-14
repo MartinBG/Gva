@@ -13,6 +13,7 @@
     PersonDocumentMedical,
     PersonLicence
   ) {
+
     $q.all([
       PersonRating.query({ id: $stateParams.id }).$promise,
       PersonDocumentTraining.query({ id: $stateParams.id }).$promise,

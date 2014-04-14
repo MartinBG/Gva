@@ -9,10 +9,10 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-licence name="licenceForm" ng-model="licence.part" sc-data-person="person" sc-data-is-new="true"></gva-licence>
+      <gva-licence name="licenceForm" ng-model="licence.part" sc-data-person="person" sc-data-is-new="true" sc-data-back-from-child="backFromChild"></gva-licence>
 
       <gva-licence-edition name="licenceEditionForm" ng-if="licence.part.staffType" ng-model="licence.part.editions[0]"
-        sc-data-staff-type="licence.part.staffType" sc-data-person="person" sc-data-is-new="true"></gva-licence-edition>
+        sc-data-staff-type="licence.part.staffType" sc-data-person="person" sc-data-is-new="true" sc-data-back-from-child="backFromChild"></gva-licence-edition>
     </div>
   </div>
 </ng-form>

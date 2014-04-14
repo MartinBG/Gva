@@ -13,6 +13,12 @@
     $scope.licence = licence;
     $scope.editMode = null;
 
+    $scope.backFromChild = false;
+
+    if ($state.previous && $state.previous.includes[$state.current.name]) {
+      $scope.backFromChild = true;
+    }
+
     $scope.$watch('licence.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;
       $scope.lastEdition = lastEdition;

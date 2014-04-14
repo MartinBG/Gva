@@ -14,6 +14,12 @@
     $scope.person = person;
     $scope.licence = licence;
 
+    $scope.backFromChild = false;
+
+    if ($state.previous && $state.previous.includes[$state.current.name]) {
+      $scope.backFromChild = true;
+    }
+
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {
           if ($scope.newLicenceForm.$valid) {
