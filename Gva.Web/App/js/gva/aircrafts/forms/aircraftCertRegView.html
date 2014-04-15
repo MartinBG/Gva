@@ -3,8 +3,8 @@
     <div class="panel-heading">
       <strong l10n-text="aircrafts.regViewDirective.title"></strong>
        <div class="pull-right">
-         <sc-button name="reregButton" btn-click="rereg()" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"></sc-button>
-         <sc-button name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
+         <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"></sc-button>
+         <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
        </div>
     </div>
     <div class="well-sm panel-body">

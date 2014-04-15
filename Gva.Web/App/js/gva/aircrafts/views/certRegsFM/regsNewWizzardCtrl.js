@@ -6,7 +6,8 @@
     $scope,
     $state,
     $stateParams,
-    Aircraft
+    Aircraft,
+    oldReg
   ) {
     $scope.steps = {
       chooseRegister: {},
@@ -38,6 +39,9 @@
                 });
             case $scope.steps.chooseRegNumber:
               $scope.currentStep = $scope.steps.chooseRegMark;
+              if (oldReg) {
+                $scope.model.regMark = oldReg.part.regMark;
+              }
               break;
             case $scope.steps.chooseRegMark:
               return Aircraft.checkRegMark({ lotId: $stateParams.id, regMark: $scope.model.regMark })
@@ -50,7 +54,7 @@
                   }
                 });
             case $scope.steps.confirmRegMark:
-              return $state.go('root.aircrafts.view.regsFM.new', {}, {}, $scope.model);
+              return $state.go('root.aircrafts.view.regsFM.new', { oldInd: $stateParams.oldInd }, {}, $scope.model);
             }
           }
         });
@@ -88,11 +92,23 @@
     };
   }
 
+  CertRegsFMNewWizzardCtrl.$resolve = {
+    oldReg: [
+      '$stateParams',
+      'AircraftCertRegistrationFM',
+      function ($stateParams, AircraftCertRegistrationFM) {
+        return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+          .$promise;
+      }
+    ]
+  };
+
   CertRegsFMNewWizzardCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'Aircraft'
+    'Aircraft',
+    'oldReg'
   ];
 
   angular.module('gva').controller('CertRegsFMNewWizzardCtrl', CertRegsFMNewWizzardCtrl);

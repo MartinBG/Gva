@@ -3,8 +3,8 @@
   'use strict';
 
   function AircraftCertRegViewCtrl($scope, $state, $stateParams) {
-    $scope.rereg = function () {
-      return $state.go('root.aircrafts.view.regsFM.new');
+    $scope.rereg = function (ind) {
+      return $state.go('root.aircrafts.view.regsFM.newWizzard', { oldInd: ind });
     };
 
     $scope.dereg = function (ind) {

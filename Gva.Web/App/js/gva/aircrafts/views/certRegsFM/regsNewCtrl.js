@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CertRegsFMNewCtrl(
@@ -7,11 +7,16 @@
     $state,
     $stateParams,
     AircraftCertRegistrationFM,
-    aircraftCertRegistration
+    aircraftCertRegistration,
+    oldReg
   ) {
     $scope.isEdit = false;
 
     $scope.reg = aircraftCertRegistration;
+
+    if (oldReg) {
+      _.defaults($scope.reg.part, _.cloneDeep(oldReg.part));
+    }
 
     if ($state.payload) {
       $scope.reg.part.register = $state.payload.register;
@@ -42,17 +47,35 @@
     '$state',
     '$stateParams',
     'AircraftCertRegistrationFM',
-    'aircraftCertRegistration'
+    'aircraftCertRegistration',
+    'oldReg'
   ];
   CertRegsFMNewCtrl.$resolve = {
     aircraftCertRegistration: function () {
       return {
         part: {
+          removalDate: null, // TODO HACK
+          removalReason: null,
+          removalText: null,
+          removalDocumentNumber: null,
+          removalDocumentDate: null,
+          removalInspector: null,
+          removalCountry: null,
+          removalNotes: null,
+          removalNotesAlt: null,
           isActive: true
         }
       };
-    }
+    },
+    oldReg: [
+      '$stateParams',
+      'AircraftCertRegistrationFM',
+      function ($stateParams, AircraftCertRegistrationFM) {
+        return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+          .$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertRegsFMNewCtrl', CertRegsFMNewCtrl);
-}(angular));
+}(angular, _));
