@@ -545,7 +545,7 @@ namespace Gva.Api.Controllers
         [Route("aircraftProducers")]
         public IHttpActionResult GetAircraftProducers(string term = null, int offset = 0, int? limit = null, bool? makeEngine = false, bool? makeRadio = false, bool? makePropeller = false, bool? makeAircraft = false)
         {
-            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("aircraftProducers").Where(ap =>
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("aircraftProducers", term).Where(ap =>
             {
                 JObject content = JObject.Parse(ap.TextContent);
                 bool isMatch = true;
