@@ -4,28 +4,22 @@ using Regs.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaViewAircraftRegistration
+    public partial class GvaViewAircraftRegMark
     {
         public int LotPartId { get; set; }
 
         public int LotId { get; set; }
 
-        public int CertRegisterId { get; set; }
-
-        public int CertNumber { get; set; }
-
         public string RegMark { get; set; }
-
-        public int? CertAirworthinessId { get; set; }
 
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
     }
 
-    public class GvaViewAircraftRegistrationMap : EntityTypeConfiguration<GvaViewAircraftRegistration>
+    public class GvaViewAircraftRegMarkMap : EntityTypeConfiguration<GvaViewAircraftRegMark>
     {
-        public GvaViewAircraftRegistrationMap()
+        public GvaViewAircraftRegMarkMap()
         {
             // Primary Key
             this.HasKey(t => t.LotPartId);
@@ -35,13 +29,10 @@ namespace Gva.Api.Models
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
-            this.ToTable("GvaViewAircraftRegistrations");
+            this.ToTable("GvaViewAircraftRegMarks");
             this.Property(t => t.LotPartId).HasColumnName("LotPartId");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.CertRegisterId).HasColumnName("CertRegisterId");
-            this.Property(t => t.CertNumber).HasColumnName("CertNumber");
             this.Property(t => t.RegMark).HasColumnName("RegMark");
-            this.Property(t => t.CertAirworthinessId).HasColumnName("CertAirworthinessId");
 
             // Relationships
             this.HasRequired(t => t.Lot)

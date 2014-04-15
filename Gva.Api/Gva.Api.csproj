@@ -86,6 +86,7 @@
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationAwHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNewAwHandler.cs" />
+    <Compile Include="LotEventHandlers\AircraftView\AircraftRegMarkHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="Models\GvaViewAircraftRegMark.cs" />
     <Compile Include="Models\GvaViewAircraftAw.cs">
       <SubType>Code</SubType>
     </Compile>
