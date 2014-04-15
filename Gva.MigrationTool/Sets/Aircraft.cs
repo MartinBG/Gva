@@ -367,7 +367,7 @@ namespace Gva.MigrationTool.Sets
                             new
                             {
                                 nomValueId = pv.Part.Index,
-                                name = aircraftCertRegistrationFM.Get<string>("certNumber")
+                                name = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
                             });
 
 
