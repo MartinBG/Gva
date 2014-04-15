@@ -30,6 +30,7 @@ namespace Gva.Api.Controllers
         private IInventoryRepository inventoryRepository;
         private IAircraftRepository aircraftRepository;
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
+        private IAircraftRegMarkRepository aircraftRegMarkRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
@@ -41,6 +42,7 @@ namespace Gva.Api.Controllers
             IInventoryRepository inventoryRepository,
             IAircraftRepository aircraftRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository,
+            IAircraftRegMarkRepository aircraftRegMarkRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
@@ -52,6 +54,7 @@ namespace Gva.Api.Controllers
             this.inventoryRepository = inventoryRepository;
             this.aircraftRepository = aircraftRepository;
             this.aircraftRegistrationRepository = aircraftRegistrationRepository;
+            this.aircraftRegMarkRepository = aircraftRegMarkRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
@@ -138,24 +141,26 @@ namespace Gva.Api.Controllers
 
         [HttpGet]
         [Route("checkRegMark")]
-        public IHttpActionResult CheckRegMark(string regMark = null)
+        public IHttpActionResult CheckRegMark(int lotId, string regMark = null)
         {
-            System.Threading.Thread.Sleep(500);
+            bool isValid = this.aircraftRegMarkRepository.RegMarkIsValid(lotId, regMark);
 
             return Ok(new
             {
-                IsValid = true
+                IsValid = isValid
             });
         }
 
         [Route("getNextCertNumber")]
-        public IHttpActionResult GetNextCertNumber()
+        public IHttpActionResult GetNextCertNumber(int registerId, int? currentCertNumber = null)
         {
-            System.Threading.Thread.Sleep(500);
+            int? lastCertNumber = this.aircraftRegistrationRepository.GetLastCertNumber(registerId);
+
+            int nextCertNumber = Math.Max(lastCertNumber ?? 0, currentCertNumber ?? 0) + 1;
 
             return Ok(new
             {
-                CertNumber = new Random().Next() % 99999
+                CertNumber =  nextCertNumber
             });
         }
 

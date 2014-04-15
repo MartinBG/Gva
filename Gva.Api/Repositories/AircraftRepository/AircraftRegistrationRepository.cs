@@ -17,6 +17,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         {
             this.unitOfWork = unitOfWork;
         }
+
         public IEnumerable<GvaViewAircraftRegistration> GetRegistrations(int? aircraftId = null)
         {
             var gvaRegistrations = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>().Include(e => e.Part);
@@ -32,10 +33,18 @@ namespace Gva.Api.Repositories.AircraftRepository
                        .ToList();
             }
         }
+
         public GvaViewAircraftRegistration GetRegistration(int registrationId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                 .SingleOrDefault(p => p.LotPartId == registrationId);
+        }
+
+        public int? GetLastCertNumber(int registerId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                .Where(v => v.CertRegisterId == registerId)
+                .Max(v => (int?)v.CertNumber);
         }
     }
 }

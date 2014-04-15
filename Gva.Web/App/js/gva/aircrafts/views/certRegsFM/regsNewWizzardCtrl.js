@@ -5,6 +5,7 @@
   function CertRegsFMNewWizzardCtrl(
     $scope,
     $state,
+    $stateParams,
     Aircraft
   ) {
     $scope.steps = {
@@ -28,8 +29,10 @@
 
             switch ($scope.currentStep) {
             case $scope.steps.chooseRegister:
-              return Aircraft.getNextCertNumber()
-                .$promise.then(function (result) {
+              return Aircraft.getNextCertNumber({
+                registerId: $scope.model.register.nomValueId,
+                currentCertNumber: $scope.model.certNumber
+              }).$promise.then(function (result) {
                   $scope.model.certNumber = result.certNumber;
                   $scope.currentStep = $scope.steps.chooseRegNumber;
                 });
@@ -37,7 +40,7 @@
               $scope.currentStep = $scope.steps.chooseRegMark;
               break;
             case $scope.steps.chooseRegMark:
-              return Aircraft.checkRegMark({ regMark: $scope.model.regMark })
+              return Aircraft.checkRegMark({ lotId: $stateParams.id, regMark: $scope.model.regMark })
                 .$promise.then(function (result) {
                   if (result.isValid) {
                     $scope.currentStep = $scope.steps.confirmRegMark;
@@ -56,6 +59,7 @@
     $scope.back = function () {
       switch ($scope.currentStep) {
       case $scope.steps.chooseRegNumber:
+        $scope.model.certNumber = null;
         $scope.currentStep = $scope.steps.chooseRegister;
         break;
       case $scope.steps.chooseRegMark:
@@ -71,8 +75,10 @@
     };
 
     $scope.getNextCertNumber = function () {
-      return Aircraft.getNextCertNumber()
-        .$promise.then(function (result) {
+      return Aircraft.getNextCertNumber({
+        registerId: $scope.model.register.nomValueId,
+        currentCertNumber: $scope.model.certNumber
+      }).$promise.then(function (result) {
           $scope.model.certNumber = result.certNumber;
         });
     };
@@ -82,7 +88,12 @@
     };
   }
 
-  CertRegsFMNewWizzardCtrl.$inject = ['$scope', '$state', 'Aircraft'];
+  CertRegsFMNewWizzardCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Aircraft'
+  ];
 
   angular.module('gva').controller('CertRegsFMNewWizzardCtrl', CertRegsFMNewWizzardCtrl);
 }(angular));

@@ -90,6 +90,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<EquipmentRepository>().As<IEquipmentRepository>();
             moduleBuilder.RegisterType<AirportRepository>().As<IAirportRepository>();
             moduleBuilder.RegisterType<AircraftRegistrationRepository>().As<IAircraftRegistrationRepository>();
+            moduleBuilder.RegisterType<AircraftRegMarkRepository>().As<IAircraftRegMarkRepository>();
             moduleBuilder.RegisterType<AircraftRegistrationAwRepository>().As<IAircraftRegistrationAwRepository>();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>();
