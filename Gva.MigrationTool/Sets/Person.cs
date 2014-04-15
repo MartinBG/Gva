@@ -25,6 +25,11 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.ModelsDO;
 using Common.Json;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.LotEventHandlers.EquipmentView;
+using Gva.Api.LotEventHandlers.AircraftView;
+using Gva.Api.LotEventHandlers.AirportView;
+using Gva.Api.Repositories.AircraftRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 
 namespace Gva.MigrationTool.Sets
 {
@@ -43,28 +48,51 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var personId in personIds) //new int[] { 6730 })
             {
+                if (personId >= 200)
+                {
+                    break;
+                }
+
                 using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
                 {
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
                     var userContext = new UserContext(2);
                     var lotRepository = new LotRepository(unitOfWork);
+                    var caseTypeRepository = new CaseTypeRepository(unitOfWork);
                     var userRepository = new UserRepository(unitOfWork);
                     var fileRepository = new FileRepository(unitOfWork);
                     var applicationRepository = new ApplicationRepository(unitOfWork);
+                    var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
+
                     var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
                     {
+                        new AircraftRegistrationAwHandler(unitOfWork),
+                        new AircraftRegistrationHandler(unitOfWork, aircraftRegistrationAwRepository),
+                        new AircraftRegistrationNewAwHandler(unitOfWork),
+                        new AircraftRegistrationNumberHandler(unitOfWork),
+                        new AircraftViewDataHandler(unitOfWork),
+                        new AirportDataHandler(unitOfWork),
                         new ApplicationsViewAircraftHandler(unitOfWork),
-                        new ApplicationsViewPersonHandler(unitOfWork),
-                        new ApplicationsViewOrganizationHandler(unitOfWork),
                         new ApplicationsViewAirportHandler(unitOfWork),
                         new ApplicationsViewEquipmentHandler(unitOfWork),
+                        new ApplicationsViewOrganizationHandler(unitOfWork),
+                        new ApplicationsViewPersonHandler(unitOfWork),
+                        new EquipmentDataHandler(unitOfWork),
                         new AircraftApplicationHandler(unitOfWork, userRepository),
                         new AircraftDebtHandler(unitOfWork, userRepository),
                         new AircraftInspectionHandler(unitOfWork, userRepository),
                         new AircraftOccurrenceHandler(unitOfWork, userRepository),
                         new AircraftOtherHandler(unitOfWork, userRepository),
                         new AircraftOwnerHandler(unitOfWork, userRepository),
+                        new AirportApplicationHandler(unitOfWork, userRepository),
+                        new AirportInspectionHandler(unitOfWork, userRepository),
+                        new AirportOtherHandler(unitOfWork, userRepository),
+                        new AirportOwnerHandler(unitOfWork, userRepository),
+                        new EquipmentApplicationHandler(unitOfWork, userRepository),
+                        new EquipmentInspectionHandler(unitOfWork, userRepository),
+                        new EquipmentOtherHandler(unitOfWork, userRepository),
+                        new EquipmentOwnerHandler(unitOfWork, userRepository),
                         new OrganizationApplicationHandler(unitOfWork, userRepository),
                         new OrganizationOtherHandler(unitOfWork, userRepository),
                         new PersonApplicationHandler(unitOfWork, userRepository),
@@ -85,6 +113,7 @@ namespace Gva.MigrationTool.Sets
                     var lot = lotRepository.GetSet("Person").CreateLot(userContext);
 
                     var personData = Person.getPersonData(con, personId);
+                    caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
                     lot.CreatePart("personData", personData, userContext);
 
                     lot.Commit(userContext, lotEventDispatcher);
@@ -348,6 +377,19 @@ namespace Gva.MigrationTool.Sets
 
         public static JObject getPersonData(OracleConnection con, int personId)
         {
+            var lins = new Dictionary<string, string>()
+                {
+                    { "1", "pilots"           },
+                    { "2", "flyingCrew"       },
+                    { "3", "crewStaff"        },
+                    { "4", "HeadFlights"      },
+                    { "5", "AirlineEngineers" },
+                    { "6", "dispatchers"      },
+                    { "7", "paratroopers"     },
+                    { "8", "engineersRVD"     },
+                    { "9", "deltaplaner"      }
+                };
+
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON WHERE {0} {1}",
                 new DbClause("1=1"),
@@ -358,7 +400,9 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
                         __migrTable = "PERSON",
+                        caseTypes = new JObject[] { Utils.DUMMY_PILOT_CASE_TYPE },
                         lin = r.Field<string>("LIN"),
+                        linType = noms["linTypes"].ByCode(lins[r.Field<string>("LIN").Substring(0, 1)]),
                         uin = r.Field<string>("EGN"),
                         firstName = r.Field<string>("NAME"),
                         firstNameAlt = r.Field<string>("NAME_TRANS"),

@@ -304,18 +304,23 @@ namespace Gva.Api.Controllers
         {
             if (graduationId == null)
             {
-                return Ok(new List<NomValue>());
+                return Ok(this.nomRepository.GetNomValues("schools", term, offset: offset, limit: limit));
             }
 
             return Ok(
                 this.nomRepository.GetNomValues("schools", term)
-                .Where(nv => JObject.Parse(nv.TextContent).GetItems<string>("graduationIds").Contains(graduationId.ToString()))
+                .Where(nv => JObject.Parse(nv.TextContent).GetItems<int>("graduationIds").Contains(graduationId.Value))
                 .WithOffsetAndLimit(offset, limit));
         }
 
         [Route("addressTypes")]
         public IHttpActionResult GetAddressTypes(string term = null, string type = null, int offset = 0, int? limit = null)
         {
+            if (type == null)
+            {
+                return Ok(this.nomRepository.GetNomValues("addressTypes", term, offset: offset, limit: limit));
+            }
+
             return Ok(
                 this.nomRepository.GetNomValues("addressTypes", term)
                 .Where(nv => JObject.Parse(nv.TextContent).Get<string>("type") == type)

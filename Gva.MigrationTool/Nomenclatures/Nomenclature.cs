@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Api.Repositories.NomRepository;
+using System.Data.SqlClient;
 
 namespace Gva.MigrationTool.Nomenclatures
 {
@@ -71,7 +72,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static Dictionary<string, Dictionary<string, NomValue>> noms;
 
-        public static void migrateNomenclatures(OracleConnection conn)
+        public static void migrateNomenclatures(OracleConnection oracleConn, SqlConnection sqlConn)
         {
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
@@ -87,532 +88,565 @@ namespace Gva.MigrationTool.Nomenclatures
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateGenders(repo, conn);
+                noms["registers"] = repo.GetNomValues("registers").ToDictionary(n => "no old id " + n.NomValueId);
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                noms["linTypes"] = repo.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateGenders(repo, oracleConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateCountires(repo, oracleConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateCities(repo, oracleConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateAddressTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateCountires(repo, conn);
+                migrateStaffTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateCities(repo, conn);
+                migrateEmploymentCategories(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAddressTypes(repo, conn);
+                migrateGraduations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateStaffTypes(repo, conn);
+                migrateSchools(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateEmploymentCategories(repo, conn);
+                migrateDirections(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateGraduations(repo, conn);
+                migrateDocumentTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateSchools(repo, conn);
+                migrateDocumentRoles(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateDirections(repo, conn);
+                migratePersonStatusTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateDocumentTypes(repo, conn);
+                migrateOtherDocPublishers(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateDocumentRoles(repo, conn);
+                migrateMedDocPublishers(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonStatusTypes(repo, conn);
+                migrateRatingTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateOtherDocPublishers(repo, conn);
+                migrateRatingClassGroups(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedDocPublishers(repo, conn);
+                migrateRatingClasses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingTypes(repo, conn);
+                migrateRatingSubClasses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingClassGroups(repo, conn);
+                migrateAuthorizationGroups(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingClasses(repo, conn);
+                migrateAuthorizations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingSubClasses(repo, conn);
+                migrateLicenceTypeDictionary(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuthorizationGroups(repo, conn);
+                migrateLicenceTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuthorizations(repo, conn);
+                migrateLocationIndicators(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceTypeDictionary(repo, conn);
+                migrateAircraftTCHolders(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceTypes(repo, conn);
+                migrateAircraftTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLocationIndicators(repo, conn);
+                migrateAircraftTypeGroups(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTCHolders(repo, conn);
+                migrateAircraftGroup66(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypes(repo, conn);
+                migrateAircraftClases66(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypeGroups(repo, conn);
+                migrateLimitations66(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftGroup66(repo, conn);
+                migrateMedClasses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftClases66(repo, conn);
+                migrateMedLimitation(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLimitations66(repo, conn);
+                migratePersonExperienceRoles(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedClasses(repo, conn);
+                migratePersonExperienceMeasures(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedLimitation(repo, conn);
+                migrateCaa(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonExperienceRoles(repo, conn);
+                migratePersonRatingLevels(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonExperienceMeasures(repo, conn);
+                migrateLicenceActions(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateCaa(repo, conn);
+                migrateOrganizationTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonRatingLevels(repo, conn);
+                migrateOrganizationKinds(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceActions(repo, conn);
+                migrateApplicationTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateOrganizationTypes(repo, conn);
+                migrateApplicationPaymentTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateOrganizationKinds(repo, conn);
+                migrateCurrencies(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateApplicationTypes(repo, conn);
+                migrateApprovalTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateApplicationPaymentTypes(repo, conn);
+                migrateApprovalStates(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateCurrencies(repo, conn);
+                migrateLim147classes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateApprovalTypes(repo, conn);
+                migrateLim147ratings(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateApprovalStates(repo, conn);
+                migrateLim147limitations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147classes(repo, conn);
+                migrateLim145classes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147ratings(repo, conn);
+                migrateLim145limitations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147limitations(repo, conn);
+                migrateAuditParts(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim145classes(repo, conn);
+                migrateAuditPartRequirmants(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim145limitations(repo, conn);
+                migrateAuditPartSections(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditParts(repo, conn);
+                migrateAuditPartSectionDetails(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartRequirmants(repo, conn);
+                migrateAuditReasons(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartSections(repo, conn);
+                migrateAuditTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartSectionDetails(repo, conn);
+                migrateAuditStatuses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditReasons(repo, conn);
+                migrateAuditResults(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditTypes(repo, conn);
+                migrateAircraftCategories(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditStatuses(repo, conn);
+                migrateAircraftProducers(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditResults(repo, conn);
+                migrateAircraftSCodeTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCategories(repo, conn);
+                migrateAircraftRelations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftProducers(repo, conn);
+                migrateAircraftParts(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftSCodeTypes(repo, conn);
+                migrateAircraftPartStatuses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRelations(repo, conn);
+                migrateAircraftDebtTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftParts(repo, conn);
+                migrateAircraftOccurrenceClasses(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftPartStatuses(repo, conn);
+                migrateAircraftCertificateTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftDebtTypes(repo, conn);
+                migrateAircraftOperTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftOccurrenceClasses(repo, conn);
+                migrateAircraftTypeCertificateTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCertificateTypes(repo, conn);
+                migrateAircraftRemovalReasons(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftOperTypes(repo, conn);
+                migrateAirportTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypeCertificateTypes(repo, conn);
+                migrateAirportRelations(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRemovalReasons(repo, conn);
+                migrateAircraftRadiotypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportTypes(repo, conn);
+                migrateAirportOperatorActivityTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportRelations(repo, conn);
+                migrateGroundServiceOperatorActivityTypes(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRadiotypes(repo, conn);
+                migratePersonCheckRatingValues(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportOperatorActivityTypes(repo, conn);
+                migratePersonRatingModels(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateGroundServiceOperatorActivityTypes(repo, conn);
+                migrateEngLangLevels(repo, oracleConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonCheckRatingValues(repo, conn);
+                migrateAircraftProducersFm(repo, sqlConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonRatingModels(repo, conn);
+                migrateAircraftLimitationsFm(repo, sqlConn);
                 unitOfWork.Save();
             }
 
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
-                migrateEngLangLevels(repo, conn);
+                migrateAircraftRegStatsesFm(repo, sqlConn);
                 unitOfWork.Save();
             }
 
@@ -875,6 +909,8 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static void migrateSchools(INomRepository repo, OracleConnection conn)
         {
+            Func<string, int?> getGradId = (oldId) => noms["graduations"].ByOldId(oldId).NomValueId();
+
             Nom nom = repo.GetNom("schools");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.SCHOOL")
                 .Materialize(r =>
@@ -891,8 +927,13 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 isPilotTraining = r.Field<string>("PILOT_TRAINING")== "Y" ? true : false,
-                                graduationId = noms["graduations"].ByOldId(r.Field<decimal?>("GRADUATION_ID").ToString()).NomValueId(),
-                                graduationIds = r.Field<string>("GRADUATION_ID_LIST").Split(':').Select(gi => int.Parse(gi)).ToArray()
+                                graduationId = getGradId(r.Field<decimal?>("GRADUATION_ID").ToString()),
+                                graduationIds = r.Field<string>("GRADUATION_ID_LIST")
+                                    .Split(':')
+                                    .Select(gi => getGradId(gi))
+                                    .Where(gi => gi.HasValue)
+                                    .Select(gi => gi.Value)
+                                    .ToArray()
                             })
                     })
                 .ToList();
@@ -2938,6 +2979,89 @@ namespace Gva.MigrationTool.Nomenclatures
             foreach (var row in results)
             {
                 noms["engLangLevels"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        //TODO
+        public static void migrateAircraftProducersFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftProducersFm");
+            var results = conn.CreateStoreCommand(@"SELECT * FROM Makers")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<object>("nMakerID").ToString(),
+                        Code = null,
+                        Name = r.Field<string>("tNameBG"),
+                        NameAlt = null,
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = null
+                    })
+                .ToList();
+
+            noms["aircraftProducersFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["aircraftProducersFm"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateAircraftLimitationsFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftLimitationsFm");
+            var results = conn.CreateStoreCommand(@"
+                SELECT [Code] code, [Limitation BG] name, [Limitation EN] nameAlt
+                FROM [GvaAircraft].[dbo].[LimitAW]")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<string>("code"),
+                        Code = r.Field<string>("code"),
+                        Name = r.Field<string>("name"),
+                        NameAlt = r.Field<string>("nameAlt"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = null
+                    })
+                .ToList();
+
+            noms["aircraftLimitationsFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["aircraftLimitationsFm"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateAircraftRegStatsesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftRegStatsesFm");
+            var results = conn.CreateStoreCommand(@"
+                SELECT [Code] code, [Registration Status] name
+                FROM [GvaAircraft].[dbo].[RegStatus]")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<string>("code"),
+                        Code = r.Field<string>("code"),
+                        Name = r.Field<string>("name"),
+                        NameAlt = null,
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = null
+                    })
+                .ToList();
+
+            noms["aircraftRegStatsesFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["aircraftRegStatsesFm"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }

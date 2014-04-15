@@ -48,7 +48,7 @@ namespace Gva.MigrationTool.Sets
             var aircraftIds = Aircraft.getAircraftIds(oracleCon);
             foreach (var aircraftId in aircraftIds)
             {
-                if (aircraftId >= 50)
+                if (aircraftId >= 200)
                     break;
 
                 using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
@@ -57,17 +57,36 @@ namespace Gva.MigrationTool.Sets
                     var userRepository = new UserRepository(unitOfWork);
                     var fileRepository = new FileRepository(unitOfWork);
                     var applicationRepository = new ApplicationRepository(unitOfWork);
+                    var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
+
                     var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
                     {
+                        new AircraftRegistrationAwHandler(unitOfWork),
+                        new AircraftRegistrationHandler(unitOfWork, aircraftRegistrationAwRepository),
+                        new AircraftRegistrationNewAwHandler(unitOfWork),
+                        new AircraftRegistrationNumberHandler(unitOfWork),
+                        new AircraftViewDataHandler(unitOfWork),
+                        new AirportDataHandler(unitOfWork),
                         new ApplicationsViewAircraftHandler(unitOfWork),
-                        new ApplicationsViewPersonHandler(unitOfWork),
+                        new ApplicationsViewAirportHandler(unitOfWork),
+                        new ApplicationsViewEquipmentHandler(unitOfWork),
                         new ApplicationsViewOrganizationHandler(unitOfWork),
+                        new ApplicationsViewPersonHandler(unitOfWork),
+                        new EquipmentDataHandler(unitOfWork),
                         new AircraftApplicationHandler(unitOfWork, userRepository),
                         new AircraftDebtHandler(unitOfWork, userRepository),
                         new AircraftInspectionHandler(unitOfWork, userRepository),
                         new AircraftOccurrenceHandler(unitOfWork, userRepository),
                         new AircraftOtherHandler(unitOfWork, userRepository),
                         new AircraftOwnerHandler(unitOfWork, userRepository),
+                        new AirportApplicationHandler(unitOfWork, userRepository),
+                        new AirportInspectionHandler(unitOfWork, userRepository),
+                        new AirportOtherHandler(unitOfWork, userRepository),
+                        new AirportOwnerHandler(unitOfWork, userRepository),
+                        new EquipmentApplicationHandler(unitOfWork, userRepository),
+                        new EquipmentInspectionHandler(unitOfWork, userRepository),
+                        new EquipmentOtherHandler(unitOfWork, userRepository),
+                        new EquipmentOwnerHandler(unitOfWork, userRepository),
                         new OrganizationApplicationHandler(unitOfWork, userRepository),
                         new OrganizationOtherHandler(unitOfWork, userRepository),
                         new PersonApplicationHandler(unitOfWork, userRepository),
@@ -257,6 +276,8 @@ namespace Gva.MigrationTool.Sets
                     lot.Commit(context, lotEventDispatcher);
 
                     unitOfWork.Save();
+
+                    Console.WriteLine("Migrated APEX aircraftId: {0} manSN: {1}", aircraftId, manSN);
                 }
             }
 
@@ -389,6 +410,8 @@ namespace Gva.MigrationTool.Sets
                     }
 
                     unitOfWork.Save();
+
+                    Console.WriteLine("Migrated FM aircraftIdMsnFM: {0}", aircraftIdMsnFM);
                 }
             }
         }
@@ -452,8 +475,8 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("n_Act_ID"),
                         __migrTable = "Acts",
-                        aircraftProducerId = toNum(r.Field<string>("n_Act_Maker_ID")),//TODO
-                        aircraftCategoryId = r.Field<string>("t_Act_TypeCode"),//TODO
+                        aircraftProducer = noms["aircraftProducers"].ByOldId(r.Field<string>("n_Act_Maker_ID")),
+                        aircraftCategory = noms["aircraftCategories"].ByCode(r.Field<string>("t_Act_TypeCode")),
                         icao = r.Field<string>("t_Act_ICAO"),
                         model = r.Field<string>("t_Act_Bg"),
                         modelAlt = r.Field<string>("t_Act_EN"),
@@ -527,7 +550,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "Reg1, Reg2",
-                        register = r.Field<int>("regNumber"),
+                        register = noms["registers"].Values.First(), //TODO r.Field<int>("regNumber"),
                         certNumber = toNum(r.Field<string>("nRegNum")),
                         certDate = toDate(r.Field<string>("dRegDate")),
                         regMark = r.Field<string>("tRegMark"),
@@ -537,14 +560,14 @@ namespace Gva.MigrationTool.Sets
                         inspectorId = r.Field<string>("tRegUser"),//TODO
                         ownerId = r.Field<string>("nOwner"),//TODO
                         operatorId = r.Field<string>("nOper"),//TODO
-                        aircraftCategoryId = r.Field<string>("tCatCode"),//TODO
-                        aircraftLimitationId = r.Field<string>("nLimitID"),//TODO
+                        aircraftCategory = noms["aircraftCategories"].ByCodeOrDefault(r.Field<string>("tCatCode")) ?? noms["aircraftCategories"].ByCode("A2"),//TODO
+                        aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = toDate(r.Field<string>("dR83_Data")),
                         leasingLessor = r.Field<string>("tLessor"),
                         leasingAgreement = r.Field<string>("tLessorAgreement"),
                         leasingEndDate = toDate(r.Field<string>("dLeaseDate")),
-                        statusId = r.Field<string>("nStatus"),//TODO
+                        status = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")),
                         EASA25Number = r.Field<string>("tEASA_25"),
                         EASA25Date = toDate(r.Field<string>("dEASA_25")),
                         EASA15Date = toDate(r.Field<string>("dEASA_15")),

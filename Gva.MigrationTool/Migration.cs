@@ -48,9 +48,9 @@ namespace Gva.MigrationTool
 
                     oracleConn.Open();
                     sqlConn.Open();
-                    Nomenclature.migrateNomenclatures(oracleConn);
+                    Nomenclature.migrateNomenclatures(oracleConn, sqlConn);
                     Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms);
-                    //Person.migratePersons(oracleConn, Nomenclature.noms);
+                    Person.migratePersons(oracleConn, Nomenclature.noms);
                 }
                 catch (OracleException e)
                 {

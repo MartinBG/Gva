@@ -77,4 +77,7 @@ INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (79 ,N'Нива на 
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (80 ,N'Типове документи',                                                       N'documentParts'                      )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (81 ,N'Да/Не номенклатура'                                                     ,N'boolean'                            )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (82 ,N'Типове персонал за обучение'                                            ,N'trainingStaffTypes'                 )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (83 ,N'Производители на ВС(Fm)'                                                ,N'aircraftProducersFm'                )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (84 ,N'Ограничения при регистрация на ВС(Fm)'                                  ,N'aircraftLimitationsFm'              )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (85 ,N'Състяние на регистрация на ВС(Fm)'                                      ,N'aircraftRegStatsesFm'               )
 GO
