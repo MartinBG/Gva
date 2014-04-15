@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [LotPartId]              INT           NOT NULL,
     [LotId]                  INT           NOT NULL,
     [CertRegisterId]         INT           NOT NULL,
-    [CertNumber]             NVARCHAR(50)  NOT NULL,
+    [CertNumber]             INT           NOT NULL,
     [RegMark]                NVARCHAR(50)  NOT NULL,
     [CertAirworthinessId]    INT           NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]                   PRIMARY KEY ([LotPartId]),
