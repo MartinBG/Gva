@@ -270,8 +270,6 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertSmodView.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftData.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDataApex.html" />
-    <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentApplication.html" />
-    <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentDebt.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentDebtFM.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftDocumentOccurrence.html" />
@@ -448,8 +446,6 @@
     <Content Include="App\js\gva\airports\forms\airportCertOperationalCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportData.html" />
     <Content Include="App\js\gva\airports\forms\airportDataCtrl.js" />
-    <Content Include="App\js\gva\airports\forms\airportDocumentApplication.html" />
-    <Content Include="App\js\gva\airports\forms\airportDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOther.html" />
     <Content Include="App\js\gva\airports\forms\airportDocumentOwner.html" />
     <Content Include="App\js\gva\airports\resources\airportInventory.js" />
@@ -565,8 +561,6 @@
     <Content Include="App\js\gva\equipments\forms\equipmentCertOperational.html" />
     <Content Include="App\js\gva\equipments\forms\equipmentCertOperationalCtrl.js" />
     <Content Include="App\js\gva\equipments\forms\equipmentData.html" />
-    <Content Include="App\js\gva\equipments\forms\equipmentDocumentApplication.html" />
-    <Content Include="App\js\gva\equipments\forms\equipmentDocumentApplicationCtrl.js" />
     <Content Include="App\js\gva\equipments\forms\equipmentDocumentOther.html" />
     <Content Include="App\js\gva\equipments\forms\equipmentDocumentOwner.html" />
     <Content Include="App\js\gva\equipments\resources\equipment.js" />

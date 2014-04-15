@@ -1,6 +1,4 @@
-﻿
-
-/*global angular*/
+﻿/*global angular*/
 (function (angular) {
   'use strict';
 
@@ -13,7 +11,6 @@
       return $scope.model.requestDate <= $scope.model.documentDate;
     };
   }
-
 
   angular.module('gva').controller('CommonDocumentApplicationCtrl', CommonDocumentApplicationCtrl);
 }(angular));

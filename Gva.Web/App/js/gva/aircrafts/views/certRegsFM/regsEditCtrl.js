@@ -19,7 +19,9 @@
       $scope.editMode = 'edit';
     };
     $scope.rereg = function () {
-      return $state.go('root.aircrafts.view.regsFM.newWizzard', { oldInd: aircraftCertRegistration.partIndex });
+      return $state.go('root.aircrafts.view.regsFM.newWizzard', {
+        oldInd: aircraftCertRegistration.partIndex
+      });
     };
 
     $scope.cancel = function () {

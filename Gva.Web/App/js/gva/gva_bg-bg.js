@@ -12,6 +12,18 @@
           search: 'Търси',
           select: 'Избор'
         },
+        docApplicationDirective: {
+          documentNumber: '№ на документ',
+          documentDate: 'От дата',
+          requestDate: 'Дата на заявител',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          applicationType: 'Тип заявление',
+          applicationPaymentType: 'Член',
+          currency: 'Парична единица',
+          taxAmount: 'Платена такса'
+        },
         scannedDocumentlDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
@@ -312,19 +324,6 @@
           inspector: 'Проверил',
           valid: 'Валиден'
         },
-        airportDocApplicationDirective: {
-          title: 'Заявление',
-          documentNumber: '№ на документ',
-          documentDate: 'От дата',
-          requestDate: 'Дата на заявител',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          applicationType: 'Тип заявление',
-          applicationPaymentType: 'Член',
-          currency: 'Парична единица',
-          taxAmount: 'Платена такса'
-        },
         airportDocApplicationSearch: {
           newApplication: 'Ново заявление',
           documentNumber: '№ на документ',
@@ -599,19 +598,6 @@
           organization: 'Организация',
           inspector: 'Проверил',
           valid: 'Валиден'
-        },
-        equipmentDocApplicationDirective: {
-          title: 'Заявление',
-          documentNumber: '№ на документ',
-          documentDate: 'От дата',
-          requestDate: 'Дата на заявител',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          applicationType: 'Тип заявление',
-          applicationPaymentType: 'Член',
-          currency: 'Парична единица',
-          taxAmount: 'Платена такса'
         },
         equipmentDocApplicationSearch: {
           newApplication: 'Ново заявление',
@@ -1573,18 +1559,6 @@
           organization: 'Организация',
           person: 'Физическо лице'
         },
-        aircraftDocApplicationDirective: {
-          documentNumber: '№ на документ',
-          documentDate: 'От дата',
-          requestDate: 'Дата на заявител',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          applicationType: 'Тип заявление',
-          applicationPaymentType: 'Член',
-          currency: 'Парична единица',
-          taxAmount: 'Платена такса'
-        },
         aircraftDocApplicationSearch: {
           newApplication: 'Ново заявление',
           documentNumber: '№ на документ',
@@ -1944,18 +1918,6 @@
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.'
-        },
-        personDocApplicationDirective: {
-          documentNumber: '№ на документ',
-          documentDate: 'От дата',
-          requestDate: 'Дата на заявител',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          applicationType: 'Тип заявление',
-          applicationPaymentType: 'Член',
-          currency: 'Парична единица',
-          taxAmount: 'Платена такса'
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',

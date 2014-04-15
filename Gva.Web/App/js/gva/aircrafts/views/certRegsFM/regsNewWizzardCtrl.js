@@ -44,8 +44,10 @@
               }
               break;
             case $scope.steps.chooseRegMark:
-              return Aircraft.checkRegMark({ lotId: $stateParams.id, regMark: $scope.model.regMark })
-                .$promise.then(function (result) {
+              return Aircraft.checkRegMark({
+                lotId: $stateParams.id,
+                regMark: $scope.model.regMark
+              }).$promise.then(function (result) {
                   if (result.isValid) {
                     $scope.currentStep = $scope.steps.confirmRegMark;
                   }
@@ -54,7 +56,11 @@
                   }
                 });
             case $scope.steps.confirmRegMark:
-              return $state.go('root.aircrafts.view.regsFM.new', { oldInd: $stateParams.oldInd }, {}, $scope.model);
+              return $state.go(
+                'root.aircrafts.view.regsFM.new',
+                { oldInd: $stateParams.oldInd },
+                {},
+                $scope.model);
             }
           }
         });
