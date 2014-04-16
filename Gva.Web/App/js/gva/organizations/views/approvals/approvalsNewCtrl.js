@@ -7,10 +7,24 @@
     $state,
     $stateParams,
     OrganizationApproval,
-    organizationApproval
+    organizationApproval,
+    selectedLimitation
   ) {
 
     $scope.approval = organizationApproval;
+
+    var limitation = selectedLimitation.pop();
+
+    if(limitation) {
+      var index = parseInt(limitation.index, 10);
+      if(limitation.limitationAlias === 'lim147limitations') {
+        $scope.approval.part.amendments[0].lims147[index].lim147limitation = limitation.name;
+      } else if(limitation.limitationAlias === 'lim145limitations') {
+        $scope.approval.part.amendments[0].lims145[index].lim145limitation = limitation.name;
+      } else if (limitation.limitationAlias === 'aircraftTypeGroups') {
+        $scope.approval.part.amendments[0].limsMG[index].aircraftTypeGroup = limitation.name;
+      }
+    }
 
     $scope.save = function () {
       return $scope.newApprovalForm.$validate()
@@ -35,7 +49,8 @@
     '$state',
     '$stateParams',
     'OrganizationApproval',
-    'organizationApproval'
+    'organizationApproval',
+    'selectedLimitation'
   ];
 
   ApprovalsNewCtrl.$resolve = {
@@ -50,6 +65,9 @@
           }]
         }
       };
+    },
+    selectedLimitation: function () {
+      return [];
     }
   };
 

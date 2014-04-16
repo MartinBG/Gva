@@ -41,7 +41,12 @@
             <sc-int ng-model="limitation.sortOrder" ng-readonly="readonly"></sc-int>
           </td>
           <td>
-            <sc-nomenclature ng-model="limitation.lim147limitation" alias="'lim147limitations'" ng-readonly="readonly"></sc-nomenclature>
+            <div class="input-group input-group-sm">
+              <sc-text ng-model="limitation.lim147limitation" ng-readonly="readonly"></sc-text>
+              <span class="input-group-btn">
+                <sc-button class="btn btn-default" btn-click="chooseLimitation({index: $index, alias: 'lim147limitations'})" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+              </span>
+            </div>
           </td>
             <td>
             <sc-text ng-model="limitation.lim147limitationText" ng-readonly="readonly"></sc-text>
@@ -78,10 +83,15 @@
       <tbody>
         <tr ng-repeat-start="limitation in model.lims145">
           <td>
-            <sc-nomenclature ng-model="limitation.lim145limitation" alias="'lim145limitations'" ng-readonly="readonly"></sc-nomenclature>
+            <div class="input-group input-group-sm">
+              <sc-text ng-model="limitation.lim145limitation" ng-readonly="readonly"></sc-text>
+              <span class="input-group-btn">
+                <sc-button class="btn btn-default" btn-click="$parent.chooseLimitation({index: $index, alias: 'lim145limitations'})" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+              </span>
+            </div>
           </td>
             <td>
-            <sc-text ng-model="limitation.lim147limitationText" ng-readonly="readonly"></sc-text>
+            <sc-text ng-model="limitation.lim145limitationText" ng-readonly="readonly"></sc-text>
           </td>
           <td>
             <sc-nomenclature ng-model="limitation.base" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
@@ -111,7 +121,7 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th l10n-text="organizations.amendmentDirective.limsMG.typeAC"></th>
+          <th l10n-text="organizations.amendmentDirective.limsMG.typeAC" class="col-md-3 col-sm-4"></th>
           <th l10n-text="organizations.amendmentDirective.limsMG.qualitySystem"></th>
           <th l10n-text="organizations.amendmentDirective.limsMG.awapproval"></th>
           <th l10n-text="organizations.amendmentDirective.limsMG.pfapproval"></th>
@@ -121,7 +131,10 @@
       <tbody>
         <tr ng-repeat-start="limitation in model.limsMG">
           <td>
-            <sc-nomenclature ng-model="limitation.aircraftTypeGroup" alias="'aircraftTypeGroups'" ng-readonly="readonly"></sc-nomenclature>
+            <sc-text ng-model="limitation.aircraftTypeGroup" ng-readonly="readonly"></sc-text>
+            <span class="input-group-btn">
+              <sc-button class="btn btn-default" btn-click="$parent.chooseLimitation({index: $index, alias: 'aircraftTypeGroups'})" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+            </span>
           </td>
           <td>
             <sc-text ng-model="limitation.qualitySystem" ng-readonly="readonly"></sc-text>
@@ -174,13 +187,8 @@
         <td class="col-sm-3 col-md-2">
           <sc-date ng-model="document.approvalDate" ng-readonly="readonly"></sc-date>
         </td>
-        <td class="col-sm-3 col-md-3">
-           <input type="hidden" ng-model="document.linkedLim" class="input-sm col-sm-5 col-md-4"
-             ui-select2="{
-              allowClear: true,
-              placeholder: '',
-              tags: linkedLimOptions
-            }"/>
+        <td class="col-sm-5 col-md-4">
+          <input type="hidden" ng-model="document.linkedLim" class="input-sm select2input" ui-select2="select2Options" ng-readonly="readonly"/>
         </td>
         <td class="col-sm-3 col-md-3">
           <a class="glyphicon glyphicon-file" ng-click="viewDocument(document)"></a>
@@ -195,5 +203,4 @@
       </tr>
     </tbody>
   </table>
-
 </ng-form>

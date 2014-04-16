@@ -12,7 +12,8 @@
       if ($scope.$parent.form.$name === 'aircraftInspectionForm') {
         queryString = {
           alias: 'auditPartRequirements',
-          type: 'aircrafts'
+          type: 'aircrafts',
+          auditPartCode: '21'
         };
       } else if ($scope.$parent.form.$name === 'organizationInspectionForm') {
         queryString = {

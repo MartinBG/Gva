@@ -13,7 +13,7 @@
     $scope.model.part.auditorsReview.disparities = [];
 
     $scope.chooseAudits = function () {
-      $state.go($state.current.name + '.chooseAudits');
+      $state.go('.chooseAudits');
     };
 
     if ($scope.model.part.includedAudits.length > 0) {

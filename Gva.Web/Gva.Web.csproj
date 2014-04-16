@@ -744,6 +744,8 @@
     <Content Include="App\js\gva\organizations\views\organizationsSearchCtrl.js" />
     <Content Include="App\js\gva\organizations\views\organizationsView.html" />
     <Content Include="App\js\gva\organizations\views\organizationsViewCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\chooseLimitation\chooseLimitation.html" />
+    <Content Include="App\js\gva\organizations\views\chooseLimitation\chooseLimitationCtrl.js" />
     <Content Include="App\js\gva\organizations\views\recommendations\audits\chooseAudits.html" />
     <Content Include="App\js\gva\organizations\views\recommendations\audits\chooseAuditsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\recommendations\recommendationsEdit.html" />

@@ -574,7 +574,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("linTypes")]
-        public IHttpActionResult GetDocumentParts()
+        public IHttpActionResult GetLinTypes()
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("linTypes");
 

@@ -9,7 +9,7 @@
     };
 
     $scope.chooseDocuments = function () {
-      $state.go($state.current.name + '.chooseDocuments');
+      $state.go('.chooseDocuments');
     };
 
     $scope.viewDocument = function (document) {

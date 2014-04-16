@@ -3007,6 +3007,10 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        chooseLimitation: {
+          name: 'Наименование',
+          select: 'Избери'
+        },
         chooseAudits: {
           save: 'Запис',
           back: 'Назад',
