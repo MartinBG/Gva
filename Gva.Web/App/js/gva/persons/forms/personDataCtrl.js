@@ -47,9 +47,19 @@
       var isValidUin = checkDigit === parseInt($scope.model.uin[9], 10);
 
       if ($scope.model.dateOfBirth) {
-        var dateOfBirth = moment($scope.model.dateOfBirth).format('YYMMDD');
+        var dateOfBirth = moment($scope.model.dateOfBirth);
+        var formattedDate;
+        
+        if (dateOfBirth.year() >= 2000 && dateOfBirth.year() < 2100) {
+          formattedDate = dateOfBirth.format('YY') +
+            (dateOfBirth.month() + 41) +
+            dateOfBirth.format('DD');
+        }
+        else {
+          formattedDate = dateOfBirth.format('YYMMDD');
+        }
 
-        isValidUin = isValidUin && $scope.model.uin.substring(0, 6) === dateOfBirth;
+        isValidUin = isValidUin && $scope.model.uin.substring(0, 6) === formattedDate;
       }
 
       if ($scope.model.sex) {
