@@ -54,7 +54,11 @@ module.exports = function (grunt) {
           '!Regs.Database/Properties/AssemblyInfo.cs',
           '!Regs.Api.Tests/Properties/AssemblyInfo.cs',
           '!Docs.Api.Tests/Properties/AssemblyInfo.cs',
-          '!Gva.MigrationTool/Properties/AssemblyInfo.cs'
+          '!Gva.MigrationTool/Properties/AssemblyInfo.cs',
+          '!Portal/Gva.Portal.Common/Properties/AssemblyInfo.cs',
+          '!Portal/Gva.Portal.Components/Properties/AssemblyInfo.cs',
+          '!Portal/Gva.Portal.Model/Properties/AssemblyInfo.cs',
+          '!Portal/Gva.Portal.RioObjects/Properties/AssemblyInfo.cs'
         ]
       }
     },

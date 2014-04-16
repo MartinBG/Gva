@@ -15,12 +15,12 @@ namespace Common.Api
         {
             moduleBuilder.RegisterType<CommonDbConfiguration>().As<IDbConfiguration>().SingleInstance();
             moduleBuilder.RegisterType<CommonApiWebApiConfig>().As<IWebApiConfig>().SingleInstance();
-            moduleBuilder.RegisterType<NomRepository>().As<INomRepository>();
-            moduleBuilder.RegisterType<UserRepository>().As<IUserRepository>();
+            moduleBuilder.RegisterType<NomRepository>().As<INomRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
 
             //controllers
-            moduleBuilder.RegisterType<BlobController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<NomController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<BlobController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NomController>().InstancePerLifetimeScope();
         }
     }
 }

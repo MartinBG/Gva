@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ApplicationsEditAddPartCtrl(
@@ -86,7 +86,8 @@
       'application',
       function ($q, $stateParams, Application, application) {
         var docFile,
-            doc;
+            doc,
+            docValues;
 
         if (($stateParams.setPartAlias === 'personApplication' ||
           $stateParams.setPartAlias === 'organizationApplication' ||
@@ -99,14 +100,21 @@
         }
         if (!!$stateParams.docFileId) {
           docFile = Application.getDocFile({ docFileId: $stateParams.docFileId });
+
+          docValues = Application.getPersonDocumentValues({ docFileId: $stateParams.docFileId });
         }
 
         return $q.all({
           doc: doc && doc.$promise,
-          docFile: docFile && docFile.$promise
+          docFile: docFile && docFile.$promise,
+          docValues: docValues && docValues.$promise
         }).then(function (res) {
           var part = {};
           res.docFile = res.docFile || {};
+
+          if (res.docValues && res.docValues.values) {
+            _.assign(part, res.docValues.values);
+          }
 
           //add lotId for the applicationDocument form to filter the case type by lot
           res.docFile.lotId = application.lotId;
@@ -136,4 +144,4 @@
   };
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);
-}(angular));
+}(angular, _));

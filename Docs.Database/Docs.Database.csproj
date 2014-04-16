@@ -73,6 +73,7 @@
     <Content Include="Create\Tables\Correspondents\CorrespondentGroups.sql" />
     <Content Include="Create\Tables\Correspondents\Correspondents.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentTypes.sql" />
+    <Content Include="Create\Tables\Documents\DocFileOriginTypes.sql" />
     <Content Include="Create\Tables\Documents\DocHasReads.sql" />
     <Content Include="Create\Tables\Documents\DocCasePartMovements.sql" />
     <Content Include="Create\Tables\Documents\DocCasePartTypes.sql" />
@@ -122,8 +123,10 @@
     <Content Include="Insert\Classifications\ClassificationRelations.sql" />
     <Content Include="Insert\Classifications\ClassificationRoles.sql" />
     <Content Include="Insert\Classifications\Classifications.sql" />
+    <Content Include="Insert\Correspondents\Correspondents.sql" />
     <Content Include="Insert\Correspondents\CorrespondentGroups.sql" />
     <Content Include="Insert\Correspondents\CorrespondentTypes.sql" />
+    <Content Include="Insert\Docs\DocFileOriginTypes.sql" />
     <Content Include="Insert\Docs\DocCasePartTypes.sql" />
     <Content Include="Insert\Docs\DocDestinationTypes.sql" />
     <Content Include="Insert\Docs\DocDirections.sql" />
@@ -142,6 +145,7 @@
     <Content Include="Insert\Docs\RegisterIndexes.sql" />
     <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql" />
     <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStages.sql" />
+    <Content Include="Insert\IncomingDocs\IncomingDocStatuses.sql" />
     <Content Include="Insert\Units\UnitClassifications.sql" />
     <Content Include="Insert\Units\UnitRelations.sql" />
     <Content Include="Insert\Units\Units.sql" />

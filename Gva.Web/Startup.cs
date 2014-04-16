@@ -21,8 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Regs.Api;
-
-[assembly: OwinStartup(typeof(Gva.Web.Startup))]
+using Gva.Web.Jobs;
 
 namespace Gva.Web
 {
@@ -35,6 +34,7 @@ namespace Gva.Web
             ConfigureAuth(app);
             ConfigureWebApi(app, container);
             ConfigureStaticFiles(app);
+            StartJobs(container);
         }
 
         public static IContainer CreateAutofacContainer()
@@ -45,6 +45,7 @@ namespace Gva.Web
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new GvaApiModule());
             builder.RegisterModule(new RegsApiModule());
+            builder.RegisterModule(new GvaWebModule());
             return builder.Build();
         }
 
@@ -116,6 +117,16 @@ namespace Gva.Web
                 ContentTypeProvider = new ContentTypeProvider(),
                 ServeUnknownFileTypes = false
             });
+        }
+
+        public void StartJobs(IContainer container)
+        {
+            var jobs = container.Resolve<IJob[]>();
+
+            foreach (var job in jobs)
+            {
+                job.Start();
+            }
         }
     }
 }

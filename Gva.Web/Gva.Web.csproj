@@ -109,6 +109,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -144,6 +146,14 @@
     <Content Include="App\build\**\*.*" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abbcdn\AbbcdnStorage.cs" />
+    <Compile Include="Abbcdn\IAbbcdn.cs" />
+    <Compile Include="GvaWebModule.cs" />
+    <Compile Include="Jobs\Helpers\DocIdentifierHelper.cs" />
+    <Compile Include="Jobs\Helpers\RioServiceHelper.cs" />
+    <Compile Include="Jobs\IJob.cs" />
+    <Compile Include="Jobs\IncomingDocsJob.cs" />
+    <Compile Include="Jobs\JobHost.cs" />
     <Compile Include="Owin\ContentTypeProvider.cs" />
     <Compile Include="Owin\RerouteExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +200,7 @@
     <Content Include="App\js\ems\docs\forms\docInfo.html" />
     <Content Include="App\js\ems\docs\forms\docNew\docNewCommon.html" />
     <Content Include="App\js\ems\docs\forms\docNew\docNewCommonCtrl.js" />
+    <Content Include="App\js\ems\docs\forms\docView\docFilesViewCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docClassification.html" />
     <Content Include="App\js\ems\docs\forms\docView\docClassificationCtrl.js" />
     <Content Include="App\js\ems\docs\forms\docView\docFilesEdit.html" />
@@ -238,6 +249,8 @@
     <Content Include="App\js\ems\docs\views\editStageCtrl.js" />
     <Content Include="App\js\ems\docs\views\endStage.html" />
     <Content Include="App\js\ems\docs\views\endStageCtrl.js" />
+    <Content Include="App\js\ems\docs\views\portalModal.html" />
+    <Content Include="App\js\ems\docs\views\portalModalCtrl.js" />
     <Content Include="App\js\ems\docs\views\nextStage.html" />
     <Content Include="App\js\ems\docs\views\nextStageCtrl.js" />
     <Content Include="App\js\ems\docs\views\selectCorrView.html" />
@@ -1389,16 +1402,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\js\ems\corrs\forms\" />
-    <Folder Include="App\test\ems\mocks\" />
-    <Folder Include="App\test\gva\aircrafts\pageObjects\" />
-    <Folder Include="App\test\gva\aircrafts\specs\" />
-    <Folder Include="App\test\gva\airports\pageObjects\" />
-    <Folder Include="App\test\gva\airports\specs\" />
-    <Folder Include="App\test\gva\organizations\pageObjects\" />
-    <Folder Include="App\test\gva\organizations\specs\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1421,6 +1424,14 @@
     <ProjectReference Include="..\Gva.Api\Gva.Api.csproj">
       <Project>{f9afa12d-933e-4c98-b53a-92d603201eda}</Project>
       <Name>Gva.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
+      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
+      <Name>Gva.Portal.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
+      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
+      <Name>Gva.Portal.RioObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Regs.Api\Regs.Api.csproj">
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
@@ -1474,6 +1485,23 @@
     <ExcludeFromPackageFiles Include="App\test\**\*.*">
       <InProject>false</InProject>
     </ExcludeFromPackageFiles>
+    <Content Include="RioSchemas\**\*.*">
+      <InProject>false</InProject>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App\js\ems\corrs\forms\" />
+    <Folder Include="App\js\gva\directives\button\" />
+    <Folder Include="App\js\gva\directives\hasError\" />
+    <Folder Include="App\js\gva\directives\validationError\" />
+    <Folder Include="App\js\gva\persons\views\publishers\" />
+    <Folder Include="App\test\ems\mocks\" />
+    <Folder Include="App\test\gva\aircrafts\pageObjects\" />
+    <Folder Include="App\test\gva\aircrafts\specs\" />
+    <Folder Include="App\test\gva\airports\pageObjects\" />
+    <Folder Include="App\test\gva\airports\specs\" />
+    <Folder Include="App\test\gva\organizations\pageObjects\" />
+    <Folder Include="App\test\gva\organizations\specs\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1504,6 +1532,11 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>echo Copying RioSchemas
+xcopy "$(ProjectDir)..\Portal\Gva.Portal.RioObjects\Schemas" "$(ProjectDir)RioSchemas\" /Y /R /I /S /Q
+</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

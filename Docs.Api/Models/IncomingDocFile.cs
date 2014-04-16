@@ -15,9 +15,7 @@ namespace Docs.Api.Models
 
         public string DocFileName { get; set; }
 
-        public string DocContentStorage { get; set; }
-
-        public Guid? DocFileContentId { get; set; }
+        public string DocFileContent { get; set; }
 
         public byte[] Version { get; set; }
 
@@ -41,9 +39,8 @@ namespace Docs.Api.Models
                 .IsRequired()
                 .HasMaxLength(1000);
 
-            this.Property(t => t.DocContentStorage)
-                .IsRequired()
-                .HasMaxLength(50);
+            this.Property(t => t.DocFileContent)
+                .IsRequired();
 
             this.Property(t => t.Version)
                 .IsRequired()
@@ -58,8 +55,7 @@ namespace Docs.Api.Models
             this.Property(t => t.DocFileTypeId).HasColumnName("DocFileTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.DocFileName).HasColumnName("DocFileName");
-            this.Property(t => t.DocContentStorage).HasColumnName("DocContentStorage");
-            this.Property(t => t.DocFileContentId).HasColumnName("DocFileContentId");
+            this.Property(t => t.DocFileContent).HasColumnName("DocFileContent");
             this.Property(t => t.Version).HasColumnName("Version");
 
             // Relationships

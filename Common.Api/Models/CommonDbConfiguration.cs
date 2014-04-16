@@ -15,6 +15,7 @@ namespace Common.Api.Models
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new NomMap());
             modelBuilder.Configurations.Add(new NomValueMap());
+            modelBuilder.Configurations.Add(new BlobMap());
         }
     }
 }

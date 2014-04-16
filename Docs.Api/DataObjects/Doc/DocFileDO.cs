@@ -39,6 +39,11 @@ namespace Docs.Api.DataObjects
                 {
                     this.DocFileTypealias = d.DocFileType.Alias;
                 }
+
+                if (d.DocFileOriginType != null)
+                {
+                    this.IsElectronicApplication = d.DocFileOriginType.Alias == "EApplication";
+                }
             }
         }
 
@@ -57,6 +62,8 @@ namespace Docs.Api.DataObjects
         public string DocFileUrl { get; set; }
         public string DocFileKindAlias { get; set; }
         public string DocFileTypealias { get; set; }
+
+        public bool? IsElectronicApplication { get; set; }
 
         //? implementation for xml files
         //public Nullable<int> TicketId { get; set; }

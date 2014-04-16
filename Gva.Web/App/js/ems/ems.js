@@ -62,7 +62,8 @@
     });
     scaffoldingProvider.form({
       name: 'emsDocFilesView',
-      templateUrl: 'ems/docs/forms/docView/docFilesView.html'
+      templateUrl: 'ems/docs/forms/docView/docFilesView.html',
+      controller: 'DocFilesViewCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsDocViewDocClassification',

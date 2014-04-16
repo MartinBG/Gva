@@ -60,5 +60,13 @@ namespace Docs.Api.Repositories.CorrespondentRepository
             UserContext userContext);
 
         void DeteleCorrespondent(int id, byte[] corrVersion);
+
+        Correspondent GetBgCitizenCorrespondent(string email, string bgCitizenFirstName, string bgCitizenLastName, string BgCitizenUin);
+        
+        Correspondent GetForeignerCorrespondent(string email, string foreignerFirstName, string foreignerLastName, int? foreignerCountryId, string foreignerSettlement, DateTime? foreignerBirthDate);
+        
+        Correspondent GetLegalEntityCorrespondent(string email, string LegalEntityName, string LegalEntityBulstat);
+
+        Correspondent GetFLegalEntityCorrespondent(string email, string fLegalEntityName, int? fLegalEntityCountryId, string fLegalEntityRegisterName, string fLegalEntityRegisterNumber);
     }
 }

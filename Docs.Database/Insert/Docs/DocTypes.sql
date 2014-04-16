@@ -58,7 +58,8 @@ INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (245, 201, 0, 'Заявление за одобрение по Част-147, промяна','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (246, 201, 0, 'Заявление за издаване на свидетелство за правоспособност ATC','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (247, 201, 0, 'Заявление 1 - за издаване на свидетелство за правоспособност – любители пилоти','', 1)
-INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (248, 201, 0, 'Заявление 2 - за издаване на свидетелство за правоспособност на професионален пилот, транспортен пилот и правоспособност за полети по ППП','', 1)
+--INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (248, 201, 0, 'Заявление 2 - за издаване на свидетелство за правоспособност на професионален пилот, транспортен пилот и правоспособност за полети по ППП','', 1)
+INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive, PrimaryRegisterIndexId, SecondaryRegisterIndexId, ElectronicServiceFileTypeUri) VALUES (248, 201, 1, 'Заявление 2 - за издаване на свидетелство за правоспособност на професионален пилот, транспортен пилот и правоспособност за полети по ППП','R-4186', 1, 4, 4, '0010-004186')
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (249, 201, 0, 'Заявление 3 - За издаване на свидетелство за правоспособност на членове на екипажа различни от пилоти','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (250, 201, 0, 'Заявление 9 - за замяна и подмяна на валидно свидетелство за правоспособност – пилоти','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (251, 201, 0, 'Заявление 10 - за замяна и подмяна на валидно свидетелство за правоспособност на членове на екипажа различни от пилоти','', 1)
@@ -103,5 +104,10 @@ INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (290, 201, 0, 'Заявление за одобрение на ръководен персонал - ЕАСА Форма 4','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (291, 201, 0, 'Заявление за издаване на удостоверение за летателна годност','', 1)
 INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive) VALUES (292, 201, 0, 'Application for examiner authorisation','', 1)
+
+--Отговори на услуги
+INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive, PrimaryRegisterIndexId, SecondaryRegisterIndexId, ElectronicServiceFileTypeUri) VALUES (301, 300, 1, 'Съобщение, че получаването не се потвърждава','ReceiptNotAcknowledgedMessage', 1, NULL, NULL, '0010-000001')
+INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive, PrimaryRegisterIndexId, SecondaryRegisterIndexId, ElectronicServiceFileTypeUri) VALUES (302, 300, 1, 'Потвърждаване за получаване','ReceiptAcknowledgedMessage', 1, NULL, NULL, '0010-000002')
+INSERT INTO DocTypes(DocTypeId, DocTypeGroupId, IsElectronicService, Name, Alias, IsActive, PrimaryRegisterIndexId, SecondaryRegisterIndexId, ElectronicServiceFileTypeUri) VALUES (303, 300, 1, 'Указания за отстраняване на нередовности','RemovingIrregularitiesInstructions', 1, NULL, NULL, '0010-003010')
 
 SET IDENTITY_INSERT DocTypes OFF

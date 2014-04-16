@@ -27,6 +27,7 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocFileKindMap());
             modelBuilder.Configurations.Add(new DocFileMap());
             modelBuilder.Configurations.Add(new DocFileTypeMap());
+            modelBuilder.Configurations.Add(new DocFileOriginTypeMap());
             modelBuilder.Configurations.Add(new DocFormatTypeMap());
             modelBuilder.Configurations.Add(new DocHasReadMap());
             modelBuilder.Configurations.Add(new DocIncomingDocMap());

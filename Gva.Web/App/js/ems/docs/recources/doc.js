@@ -49,6 +49,14 @@
               params: {
                 docVersion: '@docVersion'
               }
+            },
+            'createTicket': {
+              method: 'POST',
+              url: '/api/docs/:id/createTicket',
+              params: {
+                docFileId: '@docFileId',
+                fileKey: '@fileKey'
+              }
             }
           });
       }]);

@@ -178,5 +178,51 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                 throw new Exception(string.Format("Correspondent with ID = {0} does not exist.", id));
             }
         }
+
+        public Correspondent GetBgCitizenCorrespondent(string email, string bgCitizenFirstName, string bgCitizenLastName, string BgCitizenUin)
+        {
+            return this.unitOfWork.DbContext.Set<Correspondent>()
+                .FirstOrDefault(c =>
+                    c.CorrespondentType.Alias == "BulgarianCitizen" &&
+                    email != null ? c.Email == email : c.Email == null &&
+                    bgCitizenFirstName != null ? c.BgCitizenFirstName == bgCitizenFirstName : c.BgCitizenFirstName == null &&
+                    bgCitizenLastName != null ? c.BgCitizenLastName == bgCitizenLastName : c.BgCitizenLastName == null &&
+                    BgCitizenUin != null ? c.BgCitizenUIN == BgCitizenUin : c.BgCitizenUIN == null);
+        }
+
+        public Correspondent GetForeignerCorrespondent(string email, string foreignerFirstName, string foreignerLastName, int? foreignerCountryId, string foreignerSettlement, DateTime? foreignerBirthDate)
+        {
+            return this.unitOfWork.DbContext.Set<Correspondent>()
+                .FirstOrDefault(c =>
+                    c.CorrespondentType.Alias == "Foreigner" &&
+                    email != null ? c.Email == email : c.Email == null &&
+                    foreignerFirstName != null ? c.ForeignerFirstName == foreignerFirstName : c.ForeignerFirstName == null &&
+                    foreignerLastName != null ? c.ForeignerLastName == foreignerLastName : c.ForeignerLastName == null &&
+                    c.ForeignerCountryId == foreignerCountryId &&
+                    foreignerSettlement != null ? c.ForeignerSettlement == foreignerSettlement : c.ForeignerSettlement == null &&
+                    foreignerBirthDate.HasValue ? c.ForeignerBirthDate == foreignerBirthDate.Value : c.ForeignerBirthDate == null);
+        }
+
+        public Correspondent GetLegalEntityCorrespondent(string email, string LegalEntityName, string LegalEntityBulstat)
+        {
+            return this.unitOfWork.DbContext.Set<Correspondent>()
+                .FirstOrDefault(c =>
+                    c.CorrespondentType.Alias == "LegalEntity" &&
+                    LegalEntityName != null ? c.LegalEntityName == LegalEntityName : c.LegalEntityName == null &&
+                    LegalEntityBulstat != null ? c.LegalEntityBulstat == LegalEntityBulstat : c.LegalEntityBulstat == null &&
+                    email != null ? c.Email == email : c.Email == null);
+        }
+
+        public Correspondent GetFLegalEntityCorrespondent(string email, string fLegalEntityName, int? fLegalEntityCountryId, string fLegalEntityRegisterName, string fLegalEntityRegisterNumber)
+        {
+            return this.unitOfWork.DbContext.Set<Correspondent>()
+                .FirstOrDefault(c =>
+                    c.CorrespondentType.Alias == "ForeignLegalEntity" &&
+                    email != null ? c.Email == email : c.Email == null &&
+                    fLegalEntityName != null ? c.FLegalEntityName == fLegalEntityName : c.FLegalEntityName == null &&
+                    c.FLegalEntityCountryId == fLegalEntityCountryId &&
+                    fLegalEntityRegisterName != null ? c.FLegalEntityRegisterName == fLegalEntityRegisterName : c.FLegalEntityRegisterName == null &&
+                    fLegalEntityRegisterNumber != null ? c.FLegalEntityRegisterNumber == fLegalEntityRegisterNumber : c.FLegalEntityRegisterNumber == null);
+        }
     }
 }

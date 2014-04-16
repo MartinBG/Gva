@@ -397,3 +397,7 @@ table.table thead th {
 .expiredLicence {
     background-color: #C0C0C0
 }
+
+.ems-portal-modal-window .modal-dialog {
+  width: 1065px;
+}

@@ -9,23 +9,7 @@
     <div class="well-sm panel-body">
       <ng-form name="appForm" sc-validate="{}">
         <div class="well-sm panel-body">
-          <div ng-if="filter === 'Person'">
-            <gva-application-select-person name="personForm" ng-model="appModel" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()"></gva-application-select-person>
-          </div>
-          <div ng-if="filter === 'Organization'">
-            <gva-application-select-organization name="organizationForm" ng-model="appModel" sc-on-select-organization="selectOrganization()" sc-on-new-organization="newOrganization()"></gva-application-select-organization>
-          </div>
-          <div ng-if="filter === 'Aircraft'">
-            <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" sc-on-select-aircraft="selectAircraft()" sc-on-new-aircraft="newAircraft()"></gva-application-select-aircraft>
-          </div>
-          <div ng-if="filter === 'Airport'">
-            <gva-application-select-airport name="airportForm" ng-model="appModel" sc-on-select-airport="selectAirport()" sc-on-new-airport="newAirport()"></gva-application-select-airport>
-          </div>
-          <div ng-if="filter === 'Equipment'">
-            <gva-application-select-equipment name="equipmentForm" ng-model="appModel" sc-on-select-equipment="selectEquipment()" sc-on-new-equipment="newEquipment()"></gva-application-select-equipment>
-          </div>
 
-          <br />
           <div class="row card" ng-class="{'has-error': !appModel.doc.docId && appForm.$validated}">
             <div class="form-group col-md-3">
               <div class="input-group input-group-sm">
@@ -50,6 +34,23 @@
                 <sc-button btn-click="selectDoc()" name="selectDocBtn" text="applications.link.selectDoc" class="btn btn-default btn-sm"></sc-button>
             </div>
           </div>
+
+          <div ng-if="filter === 'Person'">
+            <gva-application-select-person name="personForm" ng-model="appModel" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()"></gva-application-select-person>
+          </div>
+          <div ng-if="filter === 'Organization'">
+            <gva-application-select-organization name="organizationForm" ng-model="appModel" sc-on-select-organization="selectOrganization()" sc-on-new-organization="newOrganization()"></gva-application-select-organization>
+          </div>
+          <div ng-if="filter === 'Aircraft'">
+            <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" sc-on-select-aircraft="selectAircraft()" sc-on-new-aircraft="newAircraft()"></gva-application-select-aircraft>
+          </div>
+          <div ng-if="filter === 'Airport'">
+            <gva-application-select-airport name="airportForm" ng-model="appModel" sc-on-select-airport="selectAirport()" sc-on-new-airport="newAirport()"></gva-application-select-airport>
+          </div>
+          <div ng-if="filter === 'Equipment'">
+            <gva-application-select-equipment name="equipmentForm" ng-model="appModel" sc-on-select-equipment="selectEquipment()" sc-on-new-equipment="newEquipment()"></gva-application-select-equipment>
+          </div>
+          
         </div>
       </form>
     </div>

@@ -15,14 +15,14 @@ namespace Docs.Api
         {
             moduleBuilder.RegisterType<DocsWebApiConfig>().As<IWebApiConfig>().SingleInstance();
             moduleBuilder.RegisterType<DocsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
-            moduleBuilder.RegisterType<CorrespondentRepository>().As<ICorrespondentRepository>();
-            moduleBuilder.RegisterType<DocRepository>().As<IDocRepository>();
+            moduleBuilder.RegisterType<CorrespondentRepository>().As<ICorrespondentRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<DocRepository>().As<IDocRepository>().InstancePerLifetimeScope();
 
             //controllers
-            moduleBuilder.RegisterType<CorrespondentController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<DocController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<DocNomController>().InstancePerApiRequest();
-            moduleBuilder.RegisterType<UnitController>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<DocController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
         }
     }
 }

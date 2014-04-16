@@ -235,5 +235,15 @@ namespace Docs.Api.Repositories.DocRepository
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
             out int totalCount);
+
+        IncomingDoc GetIncomingDocByDocumentGuid(Guid documentGuid);
+
+        Doc GetDocByRegUri(string regIndex, int regNumber, DateTime regDate);
+
+        DocFile GetPrimaryOrFirstDocFileByDocId(int docId);
+
+        DocElectronicServiceStage GetCurrentServiceStageByDocId(int docId);
+
+        bool CheckForExistingAccessCode(string accessCode);
     }
 }

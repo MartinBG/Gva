@@ -17,7 +17,7 @@
         <div class="input-group input-group-sm">
           <span ng-repeat="df in model.publicDocFiles">
             <i style="color:#428bca; margin-left:5px;" class="fa fa-file"></i>
-            <span>{{df.name}} </span> (<a ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a>)
+              <span>{{df.name}} </span> (<a ng-show="!df.isElectronicApplication" ng-href="{{df.docFileUrl}}" target="_blank"><span>{{ df.file.name }}</span></a><a ng-show="df.isElectronicApplication" ng-click="viewEApplication(df)"><span>{{ df.file.name }}</span></a>)
           </span>
         </div>
       </div>

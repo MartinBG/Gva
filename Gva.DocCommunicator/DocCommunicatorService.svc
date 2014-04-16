@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost
+    Language="C#" 
+    Debug="true" 
+    Service="Gva.DocCommunicator.DocCommunicatorService, Gva.DocCommunicator" 
+    CodeBehind="DocCommunicatorService.svc.cs" %>

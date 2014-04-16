@@ -17,6 +17,8 @@ namespace Docs.Api.Models
 
         public int DocFileKindId { get; set; }
 
+        public Nullable<int> DocFileOriginTypeId { get; set; }
+
         public string Name { get; set; }
 
         public string DocFileName { get; set; }
@@ -38,6 +40,8 @@ namespace Docs.Api.Models
         public virtual DocFileKind DocFileKind { get; set; }
 
         public virtual DocFileType DocFileType { get; set; }
+
+        public virtual DocFileOriginType DocFileOriginType { get; set; }
 
         public virtual Doc Doc { get; set; }
     }
@@ -72,6 +76,7 @@ namespace Docs.Api.Models
             this.Property(t => t.DocId).HasColumnName("DocId");
             this.Property(t => t.DocFileTypeId).HasColumnName("DocFileTypeId");
             this.Property(t => t.DocFileKindId).HasColumnName("DocFileKindId");
+            this.Property(t => t.DocFileOriginTypeId).HasColumnName("DocFileOriginTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.DocFileName).HasColumnName("DocFileName");
             this.Property(t => t.DocContentStorage).HasColumnName("DocContentStorage");
@@ -86,6 +91,9 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.DocFileKind)
                 .WithMany(t => t.DocFiles)
                 .HasForeignKey(d => d.DocFileKindId);
+            this.HasOptional(t => t.DocFileOriginType)
+                .WithMany(t => t.DocFiles)
+                .HasForeignKey(d => d.DocFileOriginTypeId);
             this.HasRequired(t => t.DocFileType)
                 .WithMany(t => t.DocFiles)
                 .HasForeignKey(d => d.DocFileTypeId);
