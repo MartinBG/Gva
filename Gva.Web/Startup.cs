@@ -22,8 +22,6 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using Regs.Api;
 
-[assembly: OwinStartup(typeof(Gva.Web.Startup))]
-
 namespace Gva.Web
 {
     public class Startup
