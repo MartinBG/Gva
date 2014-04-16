@@ -469,9 +469,13 @@ namespace Gva.Api.Controllers
 
             var requirements = this.nomRepository.GetNomValues("auditPartRequirements").Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
 
-            if (type == "organizations" || type == "aircrafts")
+            if (type == "organizations")
             {
                 requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == auditPartCode);
+            }
+            if (type == "aircrafts")
+            {
+                requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == "aircrafts");
             }
 
             JArray auditPartRequirements = new JArray();
