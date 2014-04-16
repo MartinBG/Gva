@@ -44,7 +44,9 @@
         id: $stateParams.id,
         ind: personDocumentApplication.partIndex
       }).$promise.then(function () {
-        return $state.go('root.persons.view.documentApplications.search');
+        return $state.go('root.persons.view.documentApplications.search', {
+          appId: null
+        }, { reload: true });
       });
     };
   }

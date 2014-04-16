@@ -42,7 +42,9 @@
       return OrganizationDocumentApplication
         .remove({ id: $stateParams.id, ind: organizationDocumentApplication.partIndex })
         .$promise.then(function () {
-          return $state.go('root.organizations.view.documentApplications.search');
+          return $state.go('root.organizations.view.documentApplications.search', {
+            appId: null
+          }, { reload: true });
         });
     };
   }

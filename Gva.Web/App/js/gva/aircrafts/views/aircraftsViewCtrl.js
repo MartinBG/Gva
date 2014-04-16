@@ -44,7 +44,14 @@
       'AircraftApplication',
       function ResolveApplication($stateParams, AircraftApplication) {
         if (!!$stateParams.appId) {
-          return AircraftApplication.get($stateParams).$promise;
+          return AircraftApplication.get($stateParams).$promise
+            .then(function (result) {
+              if (result.applicationId) {
+                return result;
+              }
+
+              return null;
+            });
         }
 
         return null;

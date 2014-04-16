@@ -44,8 +44,10 @@
         id: $stateParams.id,
         ind: aircraftDocumentApplication.partIndex
       }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.applications.search');
-        });
+        return $state.go('root.aircrafts.view.applications.search', {
+          appId: null
+        }, { reload: true });
+      });
     };
   }
 

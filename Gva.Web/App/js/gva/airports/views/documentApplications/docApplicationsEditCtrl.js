@@ -44,7 +44,9 @@
         id: $stateParams.id,
         ind: airportDocumentApplication.partIndex
       }).$promise.then(function () {
-        return $state.go('root.airports.view.applications.search');
+        return $state.go('root.airports.view.applications.search', {
+          appId: null
+        }, { reload: true });
       });
     };
   }

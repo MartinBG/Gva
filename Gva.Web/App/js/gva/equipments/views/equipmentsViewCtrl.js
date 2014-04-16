@@ -44,7 +44,14 @@
       'EquipmentApplication',
       function ResolveApplication($stateParams, EquipmentApplication) {
         if (!!$stateParams.appId) {
-          return EquipmentApplication.get($stateParams).$promise;
+          return EquipmentApplication.get($stateParams).$promise
+            .then(function (result) {
+              if (result.applicationId) {
+                return result;
+              }
+
+              return null;
+            });
         }
 
         return null;

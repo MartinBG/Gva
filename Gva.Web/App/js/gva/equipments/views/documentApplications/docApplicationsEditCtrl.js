@@ -44,7 +44,9 @@
         id: $stateParams.id,
         ind: equipmentDocumentApplication.partIndex
       }).$promise.then(function () {
-        return $state.go('root.equipments.view.applications.search');
+        return $state.go('root.equipments.view.applications.search', {
+          appId: null
+        }, { reload: true });
       });
     };
   }

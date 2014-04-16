@@ -56,7 +56,9 @@ namespace Gva.Api.Repositories.FileRepository
         public void DeleteFileReferences(PartVersion partVersion)
         {
             var lotFiles = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaFile)
+                .Include(f => f.DocFile)
                 .Where(f => f.LotPartId == partVersion.Part.PartId);
 
             foreach (var lotFile in lotFiles)
@@ -165,17 +167,20 @@ namespace Gva.Api.Repositories.FileRepository
 
         private void DeleteLotFile(GvaLotFile lotFile)
         {
-            if (lotFile.GvaFile == null)
-            {
-                throw new Exception(string.Format("Connot delete GvaLotFile with id: {0}", lotFile.GvaLotFileId));
-            }
-
             foreach (var gvaAppLotFile in lotFile.GvaAppLotFiles.ToList())
             {
                 this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(gvaAppLotFile);
             }
 
-            this.unitOfWork.DbContext.Set<GvaFile>().Remove(lotFile.GvaFile);
+            if (lotFile.GvaFile != null)
+            {
+                this.unitOfWork.DbContext.Set<GvaFile>().Remove(lotFile.GvaFile);
+            }
+            if (lotFile.DocFile != null)
+            {
+                this.unitOfWork.DbContext.Set<Docs.Api.Models.DocFile>().Remove(lotFile.DocFile);
+            }
+            
             this.unitOfWork.DbContext.Set<GvaLotFile>().Remove(lotFile);
         }
     }

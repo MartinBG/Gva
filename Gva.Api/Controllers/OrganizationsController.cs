@@ -121,9 +121,13 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            var returnValue = new ApplicationNomDO(this.applicationRepository.GetNomApplication(appId));
+            GvaApplication gvaNomApp = this.applicationRepository.GetNomApplication(appId);
+            if (gvaNomApp != null)
+            {
+                return Ok(new ApplicationNomDO(gvaNomApp));
+            }
 
-            return Ok(returnValue);
+            return Ok();
         }
 
         [Route("")]

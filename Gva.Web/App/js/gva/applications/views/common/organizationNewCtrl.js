@@ -10,9 +10,9 @@
     ) {
 
     $scope.save = function () {
-      return $scope.organizationForm.$validate()
+      return $scope.newOrganizationForm.$validate()
       .then(function () {
-        if ($scope.organizationForm.$valid) {
+        if ($scope.newOrganizationForm.$valid) {
           return Organization.save($scope.organization).$promise
             .then(function (organization) {
               selectedOrganization.push(organization.id);

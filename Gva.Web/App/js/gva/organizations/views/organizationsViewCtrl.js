@@ -118,7 +118,14 @@
       'OrganizationApplication',
       function ResolveApplication($stateParams, OrganizationApplication) {
         if (!!$stateParams.appId) {
-          return OrganizationApplication.get($stateParams).$promise;
+          return OrganizationApplication.get($stateParams).$promise
+            .then(function (result) {
+              if (result.applicationId) {
+                return result;
+              }
+
+              return null;
+            });
         }
 
         return null;

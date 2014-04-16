@@ -56,7 +56,14 @@
       'PersonApplication',
       function ResolveApplication($stateParams, PersonApplication) {
         if (!!$stateParams.appId) {
-          return PersonApplication.get($stateParams).$promise;
+          return PersonApplication.get($stateParams).$promise
+            .then(function (result) {
+              if (result.applicationId) {
+                return result;
+              }
+
+              return null;
+            });
         }
 
         return null;
