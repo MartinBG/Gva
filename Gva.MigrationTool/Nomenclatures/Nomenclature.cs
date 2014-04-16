@@ -27,7 +27,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static NomValue ByCode(this Dictionary<string, NomValue> nomValues, string code)
         {
-            if (code == null)
+            if (String.IsNullOrEmpty(code))
             {
                 return null;
             }
@@ -632,6 +632,55 @@ namespace Gva.MigrationTool.Nomenclatures
             using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
             {
                 NomRepository repo = new NomRepository(unitOfWork);
+                migrateCountriesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateCofATypesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateEASATypesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateEASACategoriesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateEURegTypesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateAircraftDebtTypesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateAircraftCreditorsFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
                 migrateAircraftProducersFm(repo, sqlConn);
                 unitOfWork.Save();
             }
@@ -649,6 +698,14 @@ namespace Gva.MigrationTool.Nomenclatures
                 migrateAircraftRegStatsesFm(repo, sqlConn);
                 unitOfWork.Save();
             }
+
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                NomRepository repo = new NomRepository(unitOfWork);
+                migrateAircraftCategoriesFm(repo, sqlConn);
+                unitOfWork.Save();
+            }
+
 
             timer.Stop();
             Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
@@ -2983,33 +3040,6 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        //TODO
-        public static void migrateAircraftProducersFm(INomRepository repo, SqlConnection conn)
-        {
-            Nom nom = repo.GetNom("aircraftProducersFm");
-            var results = conn.CreateStoreCommand(@"SELECT * FROM Makers")
-                .Materialize(r =>
-                    new NomValue
-                    {
-                        OldId = r.Field<object>("nMakerID").ToString(),
-                        Code = null,
-                        Name = r.Field<string>("tNameBG"),
-                        NameAlt = null,
-                        Alias = null,
-                        IsActive = true,
-                        ParentValueId = null,
-                        TextContent = null
-                    })
-                .ToList();
-
-            noms["aircraftProducersFm"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
-            {
-                noms["aircraftProducersFm"][row.OldId] = row;
-                nom.NomValues.Add(row);
-            }
-        }
-
         public static void migrateAircraftLimitationsFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftLimitationsFm");
@@ -3063,6 +3093,325 @@ namespace Gva.MigrationTool.Nomenclatures
             {
                 noms["aircraftRegStatsesFm"][row.OldId] = row;
                 nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftCategoriesFM");
+            var results = conn.CreateStoreCommand(@"select * from CatAct")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<string>("Code"),
+                        Code = r.Field<string>("Code"),
+                        Name = r.Field<string>("Category BG"),
+                        NameAlt = r.Field<string>("Category EN"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = null
+                    })
+                .ToList();
+
+            noms["aircraftCategoriesFM"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["aircraftCategoriesFM"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateCountriesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("countriesFm");
+            var results = conn.CreateStoreCommand(@"select * from Cnts")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<string>("nCntsRecNo"),
+                        Code = r.Field<string>("tISO"),
+                        Name = r.Field<string>("tNameFullBG"),
+                        NameAlt = r.Field<string>("tNameFullEN"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = JsonConvert.SerializeObject(
+                            new
+                            {
+                                code3 = r.Field<string>("tISO3"),
+                                heading = r.Field<string>("tNamePrintBG"),
+                                headingAlt = r.Field<string>("tNamePrintEN"),
+                                shortName = r.Field<string>("tName"),
+                            })
+                    })
+                .ToList();
+
+            noms["countriesFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["countriesFm"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateAircraftProducersFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftProducersFm");
+            var results = conn.CreateStoreCommand(@"select * from Makers")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<string>("nMakerID"),
+                        Code = null,
+                        Name = r.Field<string>("tNameBG"),
+                        NameAlt = r.Field<string>("tNameEN"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = noms["countriesFm"].ByCode(r.Field<string>("tCntsISO")).NomValueId(),
+                        TextContent = JsonConvert.SerializeObject(
+                            new
+                            {
+                                address = r.Field<string>("tAdrsStreetBG"),
+                                addressCity = r.Field<string>("tAdrsCityBG"),
+                                addressAlt = r.Field<string>("tAdrsStreetEN"),
+                                addressCityAlt = r.Field<string>("tAdrsCityEN"),
+                                website = r.Field<string>("t_WebSite"),
+                                email = r.Field<string>("t_eMail"),
+                                notes = r.Field<string>("tRemark"),
+                                printName = r.Field<string>("t_PrintBG"),
+                                printNameAlt = r.Field<string>("t_PrintEN"),
+                            })
+                    })
+                .ToList();
+
+            noms["aircraftProducersFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["aircraftProducersFm"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        public static void migrateCofATypesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("CofATypesFm");
+
+            var nomInfo = new Dictionary<string, Tuple<string, string>>()
+            {
+                { "E25", new Tuple<string,string>("EASA 25"          , "EASA 25"         )},
+                { "E24", new Tuple<string,string>("EASA 24"          , "EASA 24"         )},
+                { "BGF", new Tuple<string,string>("BG Form"          , "BG Form"         )},
+                { "TEC", new Tuple<string,string>("Tech Cert"        , "Tech Cert"       )},
+                { "EXP", new Tuple<string,string>("EXP"              , "EXP"             )}
+            };
+            int OldId = 1;
+            noms["CofATypesFm"] = new Dictionary<string, NomValue>();
+            foreach (var ni in nomInfo)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = OldId.ToString(),
+                    Code = ni.Key,
+                    Name = ni.Value.Item1,
+                    NameAlt = ni.Value.Item2,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContent = null
+                };
+                noms["CofATypesFm"][OldId.ToString()] = row;
+                nom.NomValues.Add(row);
+                OldId++;
+            }
+        }
+
+        public static void migrateEASATypesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("EASATypesFm");
+
+            var nomInfo = new Dictionary<string, Tuple<string, string>>()
+            {
+                { "BA"  , new Tuple<string,string>("Balloon"                                 , "Balloon"                                 )},
+                { "CO"  , new Tuple<string,string>("Commuter"                                , "Commuter"                                )},
+                { "EX"  , new Tuple<string,string>("Experimental"                            , "Experimental"                            )},
+                { "GL"  , new Tuple<string,string>("Glider"                                  , "Glider"                                  )},
+                { "GY"  , new Tuple<string,string>("Gyroplane"                               , "Gyroplane"                               )},
+                { "LA"  , new Tuple<string,string>("Large Aeroplane"                         , "Large Aeroplane"                         )},
+                { "MH"  , new Tuple<string,string>("Motor-hanglider"                         , "Motor-hanglider"                         )},
+                { "PT"  , new Tuple<string,string>("Paramotor-Trike"                         , "Paramotor-Trike"                         )},
+                { "RO"  , new Tuple<string,string>("Rotorcraft"                              , "Rotorcraft"                              )},
+                { "SA"  , new Tuple<string,string>("Small Aeroplane"                         , "Small Aeroplane"                         )},
+                { "SR"  , new Tuple<string,string>("Small Rotorcraft"                        , "Small Rotorcraft"                        )},
+                { "VLA" , new Tuple<string,string>("Very Light Aeroplane"                    , "Very Light Aeroplane"                    )},
+                { "VLR" , new Tuple<string,string>("Very Light Rotorcraft"                   , "Very Light Rotorcraft"                   )}
+            };
+            int OldId = 1;
+            noms["EASATypesFm"] = new Dictionary<string, NomValue>();
+            foreach (var ni in nomInfo)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = OldId.ToString(),
+                    Code = ni.Key,
+                    Name = ni.Value.Item1,
+                    NameAlt = ni.Value.Item2,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContent = null
+                };
+                noms["EASATypesFm"][OldId.ToString()] = row;
+                nom.NomValues.Add(row);
+                OldId++;
+            }
+        }
+
+        public static void migrateEASACategoriesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("EASACategoriesFm");
+
+            var nomInfo = new Dictionary<string, Tuple<string, string>>()
+            {
+                { "AW"  , new Tuple<string,string>("Aerial Work"                   , "Aerial Work"                     )},
+                { "COM" , new Tuple<string,string>("Commercial"                    , "Commercial"                      )},
+                { "COR" , new Tuple<string,string>("Corporate"                     , "Corporate"                       )},
+                { "PR"  , new Tuple<string,string>("Private"                       , "Private"                         )},
+                { "VLA" , new Tuple<string,string>("VLA"                           , "VLA"                             )}
+            };
+            int OldId = 1;
+            noms["EASACategoriesFm"] = new Dictionary<string, NomValue>();
+            foreach (var ni in nomInfo)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = OldId.ToString(),
+                    Code = ni.Key,
+                    Name = ni.Value.Item1,
+                    NameAlt = ni.Value.Item2,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContent = null
+                };
+                noms["EASACategoriesFm"][OldId.ToString()] = row;
+                nom.NomValues.Add(row);
+                OldId++;
+            }
+        }
+
+        public static void migrateEURegTypesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("EURegTypesFm");
+
+            var nomInfo = new Dictionary<string, Tuple<string, string>>()
+            {
+                { "EU"  , new Tuple<string,string>("EU"                             , "EU"                              )},
+                { "EUR" , new Tuple<string,string>("EU - Restricted"                , "EU - Restricted"                 )},
+                { "OD"  , new Tuple<string,string>("Old Doc"                        , "Old Doc"                         )},
+                { "AN"  , new Tuple<string,string>("Annex II"                       , "Annex II"                        )},
+                { "A2"  , new Tuple<string,string>("Article-2"                      , "Article-2"                       )},
+                { "A1"  , new Tuple<string,string>("Article-1"                      , "Article-1"                       )},
+                { "VLA" , new Tuple<string,string>("VLA"                            , "VLA"                             )},
+                { "AM"  , new Tuple<string,string>("Amateur"                        , "Amateur"                         )},
+                { "EXP" , new Tuple<string,string>("EXP"                            , "EXP"                             )}
+            };
+            int OldId = 1;
+            noms["EURegTypesFm"] = new Dictionary<string, NomValue>();
+            foreach (var ni in nomInfo)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = OldId.ToString(),
+                    Code = ni.Key,
+                    Name = ni.Value.Item1,
+                    NameAlt = ni.Value.Item2,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContent = null
+                };
+                noms["EURegTypesFm"][OldId.ToString()] = row;
+                nom.NomValues.Add(row);
+                OldId++;
+            }
+        }
+
+        public static void migrateAircraftDebtTypesFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftDebtTypesFm");
+
+            var nomInfo = new Dictionary<string, Tuple<string, string>>()
+            {
+                {"ANN" , new Tuple<string,string>("АНЕКС"                                  , "Annex"                                      )},
+                {"ENT" , new Tuple<string,string>("ВЪЗЛОЖЕН"                               , "Entrusted"                                  )},
+                {"EWD" , new Tuple<string,string>("ВЪЗЛОЖЕН и снети ЗАПОРИ"                , "Entrusted and waived distraints"            )},
+                {"CCON", new Tuple<string,string>("ДОГОВОР ЗА ЦЕСИЯ"                       , "Cession contract"                           )},
+                {"REM" , new Tuple<string,string>("ЗАБЕЛЕЖКА"                              , "Remark"                                     )},
+                {"PEST", new Tuple<string,string>("ЗАЛОГ  - УЧРЕДЕН"                       , "Pledge - established"                       )},
+                {"POBL", new Tuple<string,string>("ЗАЛОГ - ЗАЛИЧЕН"                        , "Pledge - obliterated"                       )},
+                {"PTRA", new Tuple<string,string>("ЗАЛОГ - ПРЕХВЪРЛЕН"                     , "Pledge - transferred"                       )},
+                {"PLEE", new Tuple<string,string>("ЗАЛОГ - УЧРЕДЕН"                        , "Pledge - established"                       )},
+                {"PES" , new Tuple<string,string>("ЗАЛОГ - УЧРЕДЕН - ВТОРИ"                , "Pledge - established - second"              )},
+                {"PMO" , new Tuple<string,string>("ЗАЛОГ и ИПОТЕКА - ЗАЛИЧЕНИ"             , "Pledge and mortgage - obliterated"          )},
+                {"PSOB", new Tuple<string,string>("ЗАЛОЗИ - ЗАЛИЧЕНИ"                      , "Pledges - obliterated"                      )},
+                {"DIMP", new Tuple<string,string>("ЗАПОР - НАЛОЖЕН"                        , "Distraint - imposed"                        )},
+                {"DCAN", new Tuple<string,string>("ЗАПОР - ОТМЕНЕН"                        , "Distraint - cancelled"                      )},
+                {"DSCA", new Tuple<string,string>("ЗАПОРИ - ОТМЕНЕНИ"                      , "Distraints - cancelled"                     )},
+                {"DPOB", new Tuple<string,string>("Запори и залог - заличени"              , "Distraints and pledge - obliterated"        )},
+                {"MEST", new Tuple<string,string>("ИПОТЕКА  - УЧРЕДЕНА"                    , "Mortgage - established"                     )},
+                {"MLAP", new Tuple<string,string>("ИПОТЕКА - ПОГАСЕНА"                     , "Mortgage - lapsed"                          )},
+                {"MOES", new Tuple<string,string>("ИПОТЕКА - УЧРЕДЕНА"                     , "Mortgage - established"                     )},
+                {"LET" , new Tuple<string,string>("Писмо"                                  , "Letter"                                     )},
+                {"DCOL", new Tuple<string,string>("Постановление за обезпечение"           , "Decree collateral"                          )}
+            };
+            int OldId = 1;
+            noms["aircraftDebtTypesFm"] = new Dictionary<string, NomValue>();
+            foreach (var ni in nomInfo)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = OldId.ToString(),
+                    Code = ni.Key,
+                    Name = ni.Value.Item1,
+                    NameAlt = ni.Value.Item2,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContent = null
+                };
+                noms["aircraftDebtTypesFm"][OldId.ToString()] = row;
+                nom.NomValues.Add(row);
+                OldId++;
+            }
+        }
+
+        public static void migrateAircraftCreditorsFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftCreditorsFm");
+            var results = conn.CreateStoreCommand(@"select distinct Creditor from Morts")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = null,
+                        Code = null,
+                        Name = r.Field<string>("Creditor"),
+                        NameAlt = null,
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContent = null
+                    })
+                .ToList();
+
+            int OldId = 1;
+            noms["aircraftCreditorsFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                row.OldId = OldId.ToString();
+                noms["aircraftCreditorsFm"][row.OldId] = row;
+                nom.NomValues.Add(row);
+                OldId++;
             }
         }
     }

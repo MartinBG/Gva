@@ -80,4 +80,13 @@ INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (82 ,N'Типове �
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (83 ,N'Производители на ВС(Fm)'                                                ,N'aircraftProducersFm'                )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (84 ,N'Ограничения при регистрация на ВС(Fm)'                                  ,N'aircraftLimitationsFm'              )
 INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (85 ,N'Състяние на регистрация на ВС(Fm)'                                      ,N'aircraftRegStatsesFm'               )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (86 ,N'Държави(Fm)'                                                            ,N'countriesFm'                        )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (87 ,N'Тип летателна годност на ВС(Fm)'                                        ,N'CofATypesFm'                        )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (88 ,N'Тип EASA на ВС(Fm)'                                                     ,N'EASATypesFm'                        )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (89 ,N'Категория EASA на ВС(Fm)'                                               ,N'EASACategoriesFm'                   )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (90 ,N'Тип EU регистър на ВС(Fm)'                                              ,N'EURegTypesFm'                       )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (91 ,N'Типове тежести върху ВС(Fm)'                                            ,N'aircraftDebtTypesFm'                )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (92 ,N'Кредиторите на ВС(Fm)'                                                  ,N'aircraftCreditorsFm'                )
+INSERT INTO [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (93 ,N'Категории ВС(Fm)'                                                       ,N'aircraftCategoriesFm'               )
+
 GO

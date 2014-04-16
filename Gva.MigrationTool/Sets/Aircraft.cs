@@ -480,7 +480,7 @@ namespace Gva.MigrationTool.Sets
                         icao = r.Field<string>("t_Act_ICAO"),
                         model = r.Field<string>("t_Act_Bg"),
                         modelAlt = r.Field<string>("t_Act_EN"),
-                        manSN = r.Field<string>("gt_ActMSN"),
+                        manSN = r.Field<string>("t_Act_MSN"),
                         engine = r.Field<string>("t_Act_EngBg"),
                         engineAlt = r.Field<string>("t_Act_EngEn"),
                         propeller = r.Field<string>("t_Act_PropBg"),
