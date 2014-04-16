@@ -8,7 +8,7 @@ namespace Common
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
-            moduleBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerApiRequest();
+            moduleBuilder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
         }
     }
 }
