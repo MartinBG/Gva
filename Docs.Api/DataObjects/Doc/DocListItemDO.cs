@@ -43,6 +43,11 @@ namespace Docs.Api.DataObjects
                 {
                     this.IsRead = d.DocUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
                 }
+
+                if (d.DocSourceType != null)
+                {
+                    this.IsElectronic = d.DocSourceType.Alias == "Internet";
+                }
             }
         }
 
@@ -102,6 +107,7 @@ namespace Docs.Api.DataObjects
 
         public bool IsSelected { get; set; }
         public bool IsRead { get; set; }
+        public bool IsElectronic { get; set; }
 
         #region ForManagement/ForControl
 

@@ -129,11 +129,18 @@
           }
 
           return Application.link(newApplication).$promise.then(function (app) {
-            return $state.go('root.applications.edit.case.addPart', {
-              id: app.applicationId,
-              docId: app.docId,
-              setPartAlias: $scope.setPartAlias
-            });
+            if ($scope.appModel.doc.isElectronic) {
+              return $state.go('root.applications.edit.case', {
+                id: app.applicationId
+              });
+            }
+            else {
+              return $state.go('root.applications.edit.case.addPart', {
+                id: app.applicationId,
+                docId: app.docId,
+                setPartAlias: $scope.setPartAlias
+              });
+            }
           });
         }
       });

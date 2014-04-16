@@ -15,6 +15,7 @@ using System.Data.Entity;
 using Common.Api.UserContext;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Configuration;
 
 namespace Docs.Api.Controllers
 {
@@ -599,6 +600,7 @@ namespace Docs.Api.Controllers
             .ToList();
 
             this.unitOfWork.DbContext.Set<DocFile>()
+             .Include(e => e.DocFileOriginType)
              .Include(e => e.DocFileType)
              .Include(e => e.DocFileKind)
              .Where(e => e.DocId == id)
@@ -1407,6 +1409,24 @@ namespace Docs.Api.Controllers
         {
             //? implement connection to application
             throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateDocFileTicket(int id, int docFileId, Guid fileKey)
+        {
+            Ticket ticket = new Ticket();
+            ticket.TicketId = Guid.NewGuid();
+            ticket.DocFileId = docFileId;
+            ticket.OldKey = fileKey;
+            ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
+
+            this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
+            this.unitOfWork.Save();
+
+            string portalAddress = ConfigurationManager.AppSettings["PortalWebAddress"].ToString();
+            string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
+
+            return Ok(new { url = accessUrl });
         }
     }
 }

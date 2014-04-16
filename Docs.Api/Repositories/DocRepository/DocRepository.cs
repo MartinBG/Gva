@@ -968,5 +968,51 @@ namespace Docs.Api.Repositories.DocRepository
                 isCase,
                 out totalCount);
         }
+
+        public IncomingDoc GetIncomingDocByDocumentGuid(Guid documentGuid)
+        {
+            return
+                this.unitOfWork.DbContext.Set<IncomingDoc>()
+                .Include(id => id.IncomingDocFiles)
+                .Include(id => id.IncomingDocStatus)
+                .Include(id => id.DocIncomingDocs)
+                .FirstOrDefault(id => id.DocumentGuid == documentGuid);
+        }
+
+        public Doc GetDocByRegUri(string regIndex, int regNumber, DateTime regDate)
+        {
+            var docs =
+                this.unitOfWork.DbContext.Set<Doc>()
+                .Include(d => d.DocStatus)
+                .Include(d => d.DocElectronicServiceStages)
+                .Where(d => d.RegIndex == regIndex && d.RegNumber == regNumber)
+                .ToList();
+
+            return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
+        }
+
+        public DocFile GetPrimaryOrFirstDocFileByDocId(int docId)
+        {
+            return this.unitOfWork.DbContext.Set<DocFile>()
+                .Include(d => d.DocFileKind)
+                .Where(d => d.DocId == docId)
+                .OrderByDescending(d => d.IsPrimary)
+                .ThenBy(d => d.DocFileId)
+                .FirstOrDefault();
+        }
+
+        public DocElectronicServiceStage GetCurrentServiceStageByDocId(int docId)
+        {
+            return this.unitOfWork.DbContext.Set<DocElectronicServiceStage>()
+                .Include(s => s.ElectronicServiceStage.ElectronicServiceStageExecutors)
+                .FirstOrDefault(s => s.DocId == docId && s.IsCurrentStage);
+        }
+
+        public bool CheckForExistingAccessCode(string accessCode)
+        {
+            return this.unitOfWork.DbContext.Set<Doc>()
+                .Where(d => d.AccessCode == accessCode)
+                .Any();
+        }
     }
 }

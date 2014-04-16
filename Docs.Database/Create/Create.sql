@@ -33,6 +33,7 @@ GO
 -- CommonDocuments
 :r $(rootPath)"\Tables\Documents\DocFileTypes.sql"
 :r $(rootPath)"\Tables\Documents\DocFileKinds.sql"
+:r $(rootPath)"\Tables\Documents\DocFileOriginTypes.sql"
 
 -- IncomingDocuments
 :r $(rootPath)"\Tables\IncomingDocuments\IncomingDocStatuses.sql"
@@ -139,9 +140,6 @@ GO
 :r $(rootPath)\"..\Insert\Classifications\ClassificationRelations.sql"
 :r $(rootPath)\"..\Insert\Classifications\ClassificationRoles.sql"
 
---correspondents
-:r $(rootPath)\"..\Insert\Correspondents\CorrespondentGroups.sql"
-:r $(rootPath)\"..\Insert\Correspondents\CorrespondentTypes.sql"
 
 --assignments
 :r $(rootPath)\"..\Insert\Assignments\AssignmentTypes.sql"
@@ -170,6 +168,15 @@ GO
 :r $(rootPath)\"..\Insert\Docs\DocWorkflowActions.sql"
 :r $(rootPath)\"..\Insert\Docs\DocFileKinds.sql"
 :r $(rootPath)\"..\Insert\Docs\DocFileTypes.sql"
+:r $(rootPath)\"..\Insert\Docs\DocFileOriginTypes.sql"
+
+--correspondents
+:r $(rootPath)\"..\Insert\Correspondents\CorrespondentGroups.sql"
+:r $(rootPath)\"..\Insert\Correspondents\CorrespondentTypes.sql"
+:r $(rootPath)\"..\Insert\Correspondents\Correspondents.sql"
+
+--IncomingDocs
+:r $(rootPath)\"..\Insert\IncomingDocs\IncomingDocStatuses.sql"
 
 --electronic service stages
 :r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"

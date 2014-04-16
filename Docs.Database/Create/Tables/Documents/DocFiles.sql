@@ -8,6 +8,7 @@ CREATE TABLE DocFiles
 	DocId				INT				NOT NULL,
 	DocFileTypeId		INT				NOT NULL,
     DocFileKindId		INT				NOT NULL,
+	DocFileOriginTypeId	INT				NULL,
     Name    			NVARCHAR (1000)	NULL,
     --Alias    			NVARCHAR (200)	NULL,
 	DocFileName			NVARCHAR (1000)	NULL,
@@ -30,6 +31,7 @@ CREATE TABLE DocFiles
 	CONSTRAINT [FK_DocFiles_Docs] FOREIGN KEY ([DocId]) REFERENCES [dbo].[Docs] ([DocId]),
 	CONSTRAINT [FK_DocFiles_DocFileTypes] FOREIGN KEY ([DocFileTypeId]) REFERENCES [dbo].[DocFileTypes] ([DocFileTypeId]),
     CONSTRAINT [FK_DocFiles_DocFileKinds] FOREIGN KEY ([DocFileKindId]) REFERENCES [dbo].[DocFileKinds] ([DocFileKindId]),
+	CONSTRAINT [FK_DocFiles_DocFileOriginTypes] FOREIGN KEY ([DocFileOriginTypeId]) REFERENCES [dbo].[DocFileOriginTypes] ([DocFileOriginTypeId]),
 )
 GO 
 

@@ -41,6 +41,7 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/markAsUnread"      , "Doc", "MarkAsUnread");
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                   , "Doc", "GetDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                   , "Doc", "UpdateDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createTicket"      , "Doc", "CreateDocFileTicket");
             this.MapRoute(config, HttpMethod.Get   , "api/docs"                        , "Doc", "GetDocs");
             this.MapRoute(config, HttpMethod.Post  , "api/docs"                        , "Doc", "CreateDoc");
         }

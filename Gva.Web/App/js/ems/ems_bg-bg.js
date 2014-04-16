@@ -297,6 +297,12 @@
           }
         }
       },
+      portalModal: {
+        eApplication: {
+          title: 'Електронно заявление',
+          cancel: 'Отказ'
+        }
+      },
       states: {
         'root.docs': 'Документи',
         'root.docs.new': 'Нов документ',

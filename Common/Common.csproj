@@ -92,6 +92,7 @@
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Extensions\Helper.cs" />
+    <Compile Include="Extensions\MimeTypeHelper.cs" />
     <Compile Include="Http\IMvcConfig.cs" />
     <Compile Include="Http\IWebApiConfig.cs" />
     <Compile Include="Json\JTokenExtensions.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Linq\ExpressionParameterRebinder.cs" />
     <Compile Include="Linq\PredicateBuilder.cs" />
     <Compile Include="Linq\ExpressionExtensions.cs" />
+    <Compile Include="Utils\Utf8Utils.cs" />
     <Compile Include="Utils\NLogExceptionFilter.cs" />
     <Compile Include="Utils\NLogTraceFilter.cs" />
     <Compile Include="Utils\RequestIdLayoutRenderer.cs" />

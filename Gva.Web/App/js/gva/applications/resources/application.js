@@ -64,6 +64,11 @@
               method: 'GET',
               url: '/api/apps/appByDocId',
               params: { docId: '@docId' }
+            },
+            'getPersonDocumentValues': {
+              method: 'GET',
+              url: '/api/apps/personDocumentValues',
+              params: { docFileId: '@docFileId' }
             }
           });
       }]);

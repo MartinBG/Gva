@@ -46,7 +46,8 @@
         docId: result.docId,
         regUri: result.regUri,
         docTypeName: result.docTypeName,
-        docStatusName: result.docStatusName
+        docStatusName: result.docStatusName,
+        isElectronic: result.isElectronic
       });
       return $state.go('^');
     };

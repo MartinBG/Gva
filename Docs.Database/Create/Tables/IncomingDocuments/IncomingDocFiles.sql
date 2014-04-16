@@ -8,12 +8,7 @@ CREATE TABLE IncomingDocFiles
 	DocFileTypeId		INT				NOT NULL,
     Name    			NVARCHAR (1000)	NULL,
 	DocFileName			NVARCHAR (1000)	NOT NULL,
-
-	--DocContentHashName	NVARCHAR (50)	NULL,
-	--DocContentHash		NVARCHAR (100)	NULL,
-	DocContentStorage	NVARCHAR (50)	NOT NULL,
-	DocFileContentId	uniqueidentifier NULL,
-
+	DocFileContent		NVARCHAR (MAX) NOT NULL,
     Version				ROWVERSION     NOT NULL,
     CONSTRAINT [PK_IncomingDocFiles] PRIMARY KEY CLUSTERED (IncomingDocFileId),
 	CONSTRAINT [FK_IncomingDocFiles_IncomingDocs] FOREIGN KEY ([IncomingDocId]) REFERENCES [dbo].[IncomingDocs] ([IncomingDocId]),

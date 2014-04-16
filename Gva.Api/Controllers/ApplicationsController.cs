@@ -731,5 +731,28 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
+        [Route("personDocumentValues")]
+        [HttpGet]
+        public IHttpActionResult GetPersonDocumentValues(int docFileId)
+        {
+            var docFile = this.unitOfWork.DbContext.Set<DocFile>()
+                .Include(e => e.DocFileOriginType)
+                .SingleOrDefault(e => e.DocFileId == docFileId);
+
+            if (docFile != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
+            {
+                return Ok(new
+                {
+                    Values = new
+                    {
+                        DocumentNumber = "1234",
+                        DocumentDateValidFrom = new DateTime(2014, 4, 15),
+                        DocumentPublisher = "МВР"
+                    }
+                });
+            }
+
+            return Ok();
+        }
     }
 }
