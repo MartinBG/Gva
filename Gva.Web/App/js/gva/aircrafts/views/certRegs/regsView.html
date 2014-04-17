@@ -52,7 +52,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
       <div class="well-sm panel-body">
-         <sc-datatable ng-model="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+         <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
            <sc-column data="part.certId" title="aircrafts.debtSearchFM.certId">
            </sc-column>
            <sc-column data="part.regDate" title="aircrafts.debtSearchFM.regDate" type="date">

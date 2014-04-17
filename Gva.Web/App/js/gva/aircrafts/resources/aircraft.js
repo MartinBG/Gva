@@ -11,6 +11,10 @@
       'getNextCertNumber': {
         method: 'GET',
         url: '/api/aircrafts/getNextCertNumber'
+      },
+      'checkMSN': {
+        method: 'GET',
+        url: '/api/aircrafts/checkMSN'
       }
     });
   }]);

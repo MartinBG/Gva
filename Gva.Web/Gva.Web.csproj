@@ -293,6 +293,7 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftDataCtrl.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraft.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftApex.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertAirworthiness.js" />
@@ -319,6 +320,7 @@
     <Content Include="App\js\gva\aircrafts\resources\aircraftApplication.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftInventory.js" />
     <Content Include="App\js\gva\aircrafts\resources\aircraftCertRegistrationCurrentFM.js" />
+    <Content Include="App\js\gva\aircrafts\resources\aircraftCurrentDebtFM.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftDataApex\aircraftDataEdit.html" />
     <Content Include="App\js\gva\aircrafts\views\aircraftDataApex\aircraftDataEditCtrl.js" />
     <Content Include="App\js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />

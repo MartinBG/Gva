@@ -186,7 +186,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftData',
-      templateUrl: 'gva/aircrafts/forms/aircraftData.html'
+      templateUrl: 'gva/aircrafts/forms/aircraftData.html',
+      controller: 'AircraftDataCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDataApex',

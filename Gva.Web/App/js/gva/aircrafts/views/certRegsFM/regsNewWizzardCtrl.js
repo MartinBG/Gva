@@ -20,7 +20,8 @@
     $scope.currentStep = $scope.steps.chooseRegister;
 
     $scope.model = {};
-
+    $scope.oldInd = $stateParams.oldInd;
+    $scope.reregMode = !!(oldReg && oldReg.part);
 
     $scope.forward = function () {
       return $scope.newRegForm.$validate()
@@ -34,12 +35,17 @@
                 registerId: $scope.model.register.nomValueId,
                 currentCertNumber: $scope.model.certNumber
               }).$promise.then(function (result) {
+                if ($scope.reregMode) {
+                  $scope.model.certNumber = oldReg.part.certNumber;
+                } else {
                   $scope.model.certNumber = result.certNumber;
-                  $scope.currentStep = $scope.steps.chooseRegNumber;
-                });
+                }
+                $scope.model.actNumber = result.certNumber;
+                $scope.currentStep = $scope.steps.chooseRegNumber;
+              });
             case $scope.steps.chooseRegNumber:
               $scope.currentStep = $scope.steps.chooseRegMark;
-              if (oldReg) {
+              if ($scope.reregMode) {
                 $scope.model.regMark = oldReg.part.regMark;
               }
               break;
@@ -89,7 +95,10 @@
         registerId: $scope.model.register.nomValueId,
         currentCertNumber: $scope.model.certNumber
       }).$promise.then(function (result) {
-          $scope.model.certNumber = result.certNumber;
+          if(!$scope.reregMode) {
+            $scope.model.certNumber = result.certNumber;
+          }
+          $scope.model.actNumber = result.certNumber;
         });
     };
 
@@ -103,8 +112,13 @@
       '$stateParams',
       'AircraftCertRegistrationFM',
       function ($stateParams, AircraftCertRegistrationFM) {
-        return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
-          .$promise;
+        if ($stateParams.oldInd) {
+          return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+            .$promise;
+        }
+        else {
+          return null;
+        }
       }
     ]
   };

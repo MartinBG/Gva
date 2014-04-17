@@ -14,5 +14,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             int? limit = null);
 
         GvaViewAircraft GetAircraft(int aircraftId);
+
+        bool IsUniqueMSN(string msn, int? aircraftId = null);
     }
 }

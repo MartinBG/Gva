@@ -4,18 +4,22 @@
       <strong l10n-text="aircrafts.regViewDirective.title"></strong>
        <div class="pull-right">
          <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"></sc-button>
-         <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
+         <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle" ng-show="model.isActive"></sc-button>
        </div>
     </div>
     <div class="well-sm panel-body">
       <div class="row">
+        <div class="form-group col-md-2 col-sm-3">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.register"></label>
+          <input disabled name="register" type="text" class="form-control input-sm" value="{{model.register.name}}" />
+        </div>
         <div class="form-group col-md-1 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.certNumber"></label>
           <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.certNumber}}" />
         </div>
         <div class="form-group col-md-1 col-sm-3">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.register"></label>
-          <input disabled name="register" type="text" class="form-control input-sm" value="{{model.register.name}}" />
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.actNumber"></label>
+          <input disabled name="actNumber" type="text" class="form-control input-sm" value="{{model.actNumber}}" />
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.regMark"></label>

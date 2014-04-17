@@ -837,6 +837,7 @@
           cancel: 'Отказ',
           register: 'Регистър',
           certNumber: 'Рег. номер',
+          actNumber: 'Дел. номер',
           skipNumber: 'Пропусни',
           regMark: 'Регистрационен знак',
           confirmRegMark: 'Желаният регистрационен знак е свободен.',
@@ -1079,7 +1080,8 @@
           currentCert: 'Текущ запис',
           lastCert: 'Последен запис',
           firstCert: 'Първи запис',
-          certNumber: 'Рег. номер',
+          certNumber: 'Рег. №',
+          actNumber: 'Дел. №',
           register: 'Регистър',
           regMark: 'Рег. знак',
           certDate: 'Дата на рег.',
@@ -1258,6 +1260,7 @@
         regDirective: {
           typeCertTitle: 'Типов сертификат',
           certNumber: 'Рег. номер',
+          actNumber: 'Дел. номер',
           certDate: 'Дата на издаване',
           register: 'Регистър',
           aircraftCertificateType: 'Вид удостоверение',
@@ -1273,6 +1276,7 @@
         },
         regFMDirective: {
           certNumber: 'Рег. номер',
+          actNumber: 'Дел. номер',
           certDate: 'Дата на издаване',
           register: 'Регистър',
           regMark: 'Регистрационен знак',

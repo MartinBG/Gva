@@ -12,7 +12,7 @@
     aircraftCertRegistrations,
     aircraftCertRegistration,
     aircraftCertAirworthiness,
-    AircraftDocumentDebtFM,
+    AircraftCurrentDebtFM,
     debts
   ) {
     $scope.isEdit = true;
@@ -56,7 +56,7 @@
     'aircraftCertRegistrations',
     'aircraftCertRegistration',
     'aircraftCertAirworthiness',
-    'AircraftDocumentDebtFM',
+    'AircraftCurrentDebtFM',
     'debts'
   ];
 
@@ -106,11 +106,17 @@
     ],
     debts: [
       '$stateParams',
-      'AircraftDocumentDebtFM',
-      function ($stateParams, AircraftDocumentDebtFM) {
-        return AircraftDocumentDebtFM.query({
-          id: $stateParams.id
-        }).$promise;
+      'AircraftCurrentDebtFM',
+      'aircraftCertRegistrations',
+      function ($stateParams, AircraftDocumentDebtFM, aircraftCertRegistrations) {
+        if (!aircraftCertRegistrations.notRegistered) {
+          return AircraftDocumentDebtFM.query({
+            id: $stateParams.id,
+            ind: aircraftCertRegistrations.currentIndex
+          }).$promise;
+        } else {
+          return undefined;
+        }
       }
     ]
   };

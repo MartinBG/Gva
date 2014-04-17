@@ -31,8 +31,8 @@
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="manSN">
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.manSN"></label>
-      <sc-validation-error field-name="manSN" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.manSN" name="manSN" ng-required="true" ng-readonly="readonly"></sc-text>
+      <sc-validation-error field-name="manSN" validations="{required: null, unique: null}"></sc-validation-error>
+      <sc-text ng-model="model.manSN" name="manSN" ng-required="true" ng-readonly="readonly" sc-validate="{unique: isUniqueMSN}" sc-validate-immediate="true"></sc-text>
     </div>
   </div>
 

@@ -140,6 +140,18 @@ namespace Gva.Api.Controllers
         }
 
         [HttpGet]
+        [Route("checkMSN")]
+        public IHttpActionResult checkMSN(string msn, int? aircraftId = null)
+        {
+            bool isValid = this.aircraftRepository.IsUniqueMSN(msn, aircraftId);
+
+            return Ok(new
+            {
+                IsValid = isValid
+            });
+        }
+
+        [HttpGet]
         [Route("checkRegMark")]
         public IHttpActionResult CheckRegMark(int lotId, string regMark = null)
         {
@@ -251,7 +263,7 @@ namespace Gva.Api.Controllers
         public RegistrationsDO GetRegistrationsData(IEnumerable<PartVersion> registrations, IEnumerable<GvaViewAircraftRegistration> registrationsView, int? lotInd = null)
         {
             RegistrationsDO regsData = new RegistrationsDO();
-            var regs = registrations.OrderByDescending(r => r.CreateDate).ToArray();
+            var regs = registrations.OrderByDescending(r => r.Content.Get<int>("actNumber")).ToArray();
             int regIndex;
             int? regPartId;
             if (lotInd.HasValue)
@@ -279,7 +291,7 @@ namespace Gva.Api.Controllers
             return regsData;
         }
         [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}")]
-        public IHttpActionResult GetRegistrations(int lotId)
+        public IHttpActionResult GetRegistrationsData(int lotId)
         {
             var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
             if (registrations.Length > 0)
@@ -295,7 +307,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{path:regex(^aircraftCertRegistrationsCurrent$)}/{lotInd}")]
-        public IHttpActionResult GetRegistrations(int lotId, int? lotInd = null)
+        public IHttpActionResult GetRegistrationsData(int lotId, int? lotInd = null)
         {
             var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
             if (registrations.Length > 0)
@@ -338,7 +350,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftParts$)}"),
          Route(@"{lotId}/{*path:regex(^maintenances$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks$)}"),
@@ -350,6 +361,22 @@ namespace Gva.Api.Controllers
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
+        }
+
+        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
+        public IHttpActionResult GetRegistrations(int lotId, string path)
+        {
+            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
+
+            return Ok(parts.Select(pv => new PartVersionDO(pv)));
+        }
+
+        [Route(@"{lotId}/{path:regex(^aircraftCurrentDocumentDebtsFM$)}/{regId}")]
+        public IHttpActionResult GetRegistrations(int lotId, int regId)
+        {
+            var parts = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regId);
+
+            return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners$)}"),

@@ -35,6 +35,7 @@
     $scope.cancel = function () {
       return $state.go('root.aircrafts.search');
     };
+
   }
 
   AircraftsNewCtrl.$inject = ['$scope', '$state', 'Aircraft', 'aircraft'];

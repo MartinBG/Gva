@@ -44,5 +44,19 @@ namespace Gva.Api.Repositories.AircraftRepository
             return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                 .SingleOrDefault(p => p.LotId == aircraftId);
         }
+
+        public bool IsUniqueMSN(string msn, int? aircraftId = null)
+        {
+            if (aircraftId != null)
+            {
+                return !this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                    .Where(p => p.ManSN == msn && p.LotId != aircraftId).Any();
+            }
+            else
+            {
+                return !this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                    .Where(p => p.ManSN == msn).Any();
+            }
+        }
     }
 }

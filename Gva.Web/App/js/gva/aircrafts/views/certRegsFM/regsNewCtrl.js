@@ -14,13 +14,15 @@
 
     $scope.reg = aircraftCertRegistration;
 
-    if (oldReg) {
+    if (oldReg && oldReg.part) {
       _.defaults($scope.reg.part, _.cloneDeep(oldReg.part));
+      oldReg.part.isActive = false;
     }
 
     if ($state.payload) {
       $scope.reg.part.register = $state.payload.register;
       $scope.reg.part.certNumber = $state.payload.certNumber;
+      $scope.reg.part.actNumber = $state.payload.actNumber;
       $scope.reg.part.regMark = $state.payload.regMark;
     }
 
@@ -31,7 +33,15 @@
               return AircraftCertRegistrationFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
-                return $state.go('root.aircrafts.view.regsFM.search');
+                if (oldReg && oldReg.part) {
+                  return AircraftCertRegistrationFM
+                  .save({ id: $stateParams.id, ind: oldReg.partIndex }, oldReg).$promise
+                  .then(function () {
+                    return $state.go('root.aircrafts.view.regsFM.search');
+                  });
+                } else {
+                  return $state.go('root.aircrafts.view.regsFM.search');
+                }
               });
             }
           });
@@ -71,8 +81,13 @@
       '$stateParams',
       'AircraftCertRegistrationFM',
       function ($stateParams, AircraftCertRegistrationFM) {
-        return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
-          .$promise;
+        if ($stateParams.oldInd) {
+          return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+            .$promise;
+        }
+        else {
+          return null;
+        }
       }
     ]
   };

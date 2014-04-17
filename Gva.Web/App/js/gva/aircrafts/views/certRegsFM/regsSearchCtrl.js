@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CertRegsFMSearchCtrl(
@@ -10,6 +10,9 @@
     regs
   ) {
     $scope.regs = regs;
+    $scope.showNewButton = _.filter(regs, function (reg) {
+      return reg.part.isActive;
+    }).length < 1;
 
 
     $scope.editCertReg = function (reg) {
@@ -43,4 +46,4 @@
   };
 
   angular.module('gva').controller('CertRegsFMSearchCtrl', CertRegsFMSearchCtrl);
-}(angular));
+}(angular, _));

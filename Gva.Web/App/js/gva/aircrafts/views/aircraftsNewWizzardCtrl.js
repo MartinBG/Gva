@@ -26,6 +26,45 @@
         });
     };
 
+    var oldModel = null;
+    $scope.$watch('model.aircraftModel', function (newVal, oldVal) {
+      if (newVal && (newVal !== oldVal)) {
+        oldModel = $scope.model.aircraftModel;
+        $scope.model.aircraftCategory = $scope.model.aircraftModel.aircraftCategory;
+        $scope.model.aircraftProducer = $scope.model.aircraftModel.aircraftProducer;
+        $scope.$evalAsync(function() {
+          if (oldModel) {
+            $scope.model.aircraftModel = oldModel;
+            oldModel = null;
+          }
+        });
+      }
+    });
+
+    $scope.$watch('model.aircraftCategory', function (newVal, oldVal) {
+      if (newVal !== oldVal && !newVal) {
+        oldModel = $scope.model.aircraftModel;
+        $scope.$evalAsync(function() {
+          if (oldModel) {
+            $scope.model.aircraftModel = oldModel;
+            oldModel = null;
+          }
+        });
+      }
+    });
+
+    $scope.$watch('model.aircraftProducer', function (newVal, oldVal) {
+      if (newVal !== oldVal && !newVal) {
+        oldModel = $scope.model.aircraftModel;
+        $scope.$evalAsync(function() {
+          if (oldModel) {
+            $scope.model.aircraftModel = oldModel;
+            oldModel = null;
+          }
+        });
+      }
+    });
+
     $scope.cancel = function () {
       return $state.go('root.aircrafts.search');
     };
