@@ -39,7 +39,7 @@ namespace Gva.MigrationTool
                         return new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                            NullValueHandling = NullValueHandling.Ignore,
+                            //NullValueHandling = NullValueHandling.Ignore,
                             DefaultValueHandling = DefaultValueHandling.Include,
                             DateFormatHandling = DateFormatHandling.IsoDateFormat,
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
@@ -49,8 +49,14 @@ namespace Gva.MigrationTool
                     oracleConn.Open();
                     sqlConn.Open();
                     Nomenclature.migrateNomenclatures(oracleConn, sqlConn);
-                    Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms);
-                    Person.migratePersons(oracleConn, Nomenclature.noms);
+
+                    Aircraft.createAircraftsLots(oracleConn, Nomenclature.noms);
+                    Person.createPersonsLots(oracleConn, Nomenclature.noms);
+                    Organization.createOrganizationsLots(oracleConn, Nomenclature.noms);
+
+                    Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms, Person.personOldIdsLotIds, Organization.organizationOldIdsLotIds);
+                    Person.migratePersons(oracleConn, Nomenclature.noms, Aircraft.aircraftOldIdsLotIds, Organization.organizationOldIdsLotIds);
+                    Organization.migrateOrganizations(oracleConn, Nomenclature.noms, Aircraft.aircraftOldIdsLotIds, Person.personOldIdsLotIds);//TODO
                 }
                 catch (OracleException e)
                 {

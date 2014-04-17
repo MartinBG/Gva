@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewAircraftAws] (
     [LotPartId] INT           NOT NULL,
     [LotId] INT           NOT NULL,
     [RegId] INT               NOT NULL,
-    [IssueDate]            DATETIME2  NOT NULL,
+    [IssueDate]            DATETIME2  NULL,
     [ValidFromDate]            DATETIME2  NOT NULL,
     [ValidToDate]            DATETIME2  NOT NULL,
     [Inspector]             NVARCHAR(50)    NULL,

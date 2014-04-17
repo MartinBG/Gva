@@ -30,17 +30,67 @@ using Gva.Api.LotEventHandlers.AircraftView;
 using Gva.Api.LotEventHandlers.AirportView;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.MigrationTool.Sets
 {
-    class Person
+    public static class Person
     {
+        public static Dictionary<int, int> personOldIdsLotIds;
+        public static Dictionary<int, int> aircraftOldIdsLotIds;
+        public static Dictionary<int, int> organizationOldIdsLotIds;
         public static Dictionary<string, Dictionary<string, NomValue>> noms;
 
-        public static void migratePersons(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n)
+        public static void createPersonsLots(OracleConnection oracleCon, Dictionary<string, Dictionary<string, NomValue>> n)
         {
             noms = n;
+            var context = new UserContext(2);
+            Dictionary<int, Lot> oldIdsLots = new Dictionary<int, Lot>();
+            var personIds = Person.getPersonIds(oracleCon);
 
+            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            {
+                var userContext = new UserContext(2);
+                var lotRepository = new LotRepository(unitOfWork);
+                var caseTypeRepository = new CaseTypeRepository(unitOfWork);
+                var userRepository = new UserRepository(unitOfWork);
+                var fileRepository = new FileRepository(unitOfWork);
+                var applicationRepository = new ApplicationRepository(unitOfWork);
+                var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
+                var organizationRepository = new OrganizationRepository(unitOfWork);
+                var aircraftRepository = new AircraftRepository(unitOfWork);
+
+                var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
+
+                unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
+
+                Set personSet = lotRepository.GetSet("Person");
+
+                foreach (var personId in personIds)
+                {
+                    if (personId >= 200)
+                    {
+                        break;
+                    }
+                    var lot = personSet.CreateLot(context);
+                    oldIdsLots.Add(personId, lot);
+                    var personData = Person.getPersonData(oracleCon, personId);
+                    caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
+                    lot.CreatePart("personData", personData, context);
+                    lot.Commit(context, lotEventDispatcher);
+                    unitOfWork.Save();
+                    Console.WriteLine("Created personData part for person with id {0}", personId);
+                }
+            }
+
+            personOldIdsLotIds = oldIdsLots.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.LotId);
+        }
+
+        public static void migratePersons(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> aIdsLots, Dictionary<int, int> oIdsLots)
+        {
+            noms = n;
+            aircraftOldIdsLotIds = aIdsLots;
+            organizationOldIdsLotIds = oIdsLots;
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
@@ -64,60 +114,13 @@ namespace Gva.MigrationTool.Sets
                     var fileRepository = new FileRepository(unitOfWork);
                     var applicationRepository = new ApplicationRepository(unitOfWork);
                     var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
+                    var organizationRepository = new OrganizationRepository(unitOfWork);
+                    var aircraftRepository = new AircraftRepository(unitOfWork);
 
-                    var lotEventDispatcher = new LotEventDispatcher(new List<ILotEventHandler>()
-                    {
-                        new AircraftRegistrationAwHandler(unitOfWork),
-                        new AircraftRegistrationHandler(unitOfWork, aircraftRegistrationAwRepository),
-                        new AircraftRegistrationNewAwHandler(unitOfWork),
-                        new AircraftRegistrationNumberHandler(unitOfWork),
-                        new AircraftViewDataHandler(unitOfWork),
-                        new AirportDataHandler(unitOfWork),
-                        new ApplicationsViewAircraftHandler(unitOfWork),
-                        new ApplicationsViewAirportHandler(unitOfWork),
-                        new ApplicationsViewEquipmentHandler(unitOfWork),
-                        new ApplicationsViewOrganizationHandler(unitOfWork),
-                        new ApplicationsViewPersonHandler(unitOfWork),
-                        new EquipmentDataHandler(unitOfWork),
-                        new AircraftApplicationHandler(unitOfWork, userRepository),
-                        new AircraftDebtHandler(unitOfWork, userRepository),
-                        new AircraftInspectionHandler(unitOfWork, userRepository),
-                        new AircraftOccurrenceHandler(unitOfWork, userRepository),
-                        new AircraftOtherHandler(unitOfWork, userRepository),
-                        new AircraftOwnerHandler(unitOfWork, userRepository),
-                        new AirportApplicationHandler(unitOfWork, userRepository),
-                        new AirportInspectionHandler(unitOfWork, userRepository),
-                        new AirportOtherHandler(unitOfWork, userRepository),
-                        new AirportOwnerHandler(unitOfWork, userRepository),
-                        new EquipmentApplicationHandler(unitOfWork, userRepository),
-                        new EquipmentInspectionHandler(unitOfWork, userRepository),
-                        new EquipmentOtherHandler(unitOfWork, userRepository),
-                        new EquipmentOwnerHandler(unitOfWork, userRepository),
-                        new OrganizationApplicationHandler(unitOfWork, userRepository),
-                        new OrganizationOtherHandler(unitOfWork, userRepository),
-                        new PersonApplicationHandler(unitOfWork, userRepository),
-                        new PersonCheckHandler(unitOfWork, userRepository),
-                        new PersonDocumentIdHandler(unitOfWork, userRepository),
-                        new PersonEducationHandler(unitOfWork, userRepository),
-                        new PersonEmploymentHandler(unitOfWork, userRepository),
-                        new PersonMedicalHandler(unitOfWork, userRepository),
-                        new PersonOtherHandler(unitOfWork, userRepository),
-                        new PersonTrainingHandler(unitOfWork, userRepository),
-                        new OrganizationViewDataHandler(unitOfWork),
-                        new PersonViewDataHandler(unitOfWork),
-                        new PersonViewEmploymentHandler(unitOfWork),
-                        new PersonViewLicenceHandler(unitOfWork),
-                        new PersonViewRatingHandler(unitOfWork)
-                    });
+                    var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
 
-                    var lot = lotRepository.GetSet("Person").CreateLot(userContext);
-
-                    var personData = Person.getPersonData(con, personId);
-                    caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
-                    lot.CreatePart("personData", personData, userContext);
-
-                    lot.Commit(userContext, lotEventDispatcher);
-                    unitOfWork.Save();
+                    //var lot = lotRepository.GetSet("Person").CreateLot(userContext);
+                    var lot = lotRepository.GetLotIndex(personOldIdsLotIds[personId]);
 
                     var personAddresses = Person.getPersonAddresses(con, personId);
                     foreach (var address in personAddresses)
@@ -305,7 +308,7 @@ namespace Gva.MigrationTool.Sets
                         addPartWithFiles("personDocumentEducations/*", docEducation);
                     }
 
-                    var personDocumentEmployments = Person.getPersonDocumentEmployments(con, personId);
+                    var personDocumentEmployments = Person.getPersonDocumentEmployments(con, personId, organizationRepository);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
                         addPartWithFiles("personDocumentEmployments/*", docEmployment);
@@ -317,7 +320,7 @@ namespace Gva.MigrationTool.Sets
                         addPartWithFiles("personDocumentMedicals/*", docMedical);
                     }
 
-                    var personFlyingExperiences = Person.getPersonFlyingExperiences(con, personId);
+                    var personFlyingExperiences = Person.getPersonFlyingExperiences(con, personId, organizationRepository, aircraftRepository);
                     foreach (var flyingExperience in personFlyingExperiences)
                     {
                         lot.CreatePart("personFlyingExperiences/*", flyingExperience, userContext);
@@ -790,7 +793,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentEmployments(OracleConnection con, int personId)
+        public static IList<JObject> getPersonDocumentEmployments(OracleConnection con, int personId, IOrganizationRepository or)
         {
             var parts = con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0} {1}",
@@ -808,7 +811,7 @@ namespace Gva.MigrationTool.Sets
 
                         hiredate = r.Field<DateTime?>("HIREDATE"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        organization = Utils.DUMMY_ORGANIZATION, //TODO noms["organizations"].ByOldId(r.Field<decimal?>("FIRM_ID").ToString()),
+                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("FIRM_ID")), or),
                         employmentCategory = noms["employmentCategories"].ByOldId(r.Field<decimal?>("JOB_CATEGORY_ID").ToString()),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()),
                         notes = r.Field<string>("NOTES")
@@ -1009,7 +1012,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonFlyingExperiences(OracleConnection con, int personId)
+        public static IList<JObject> getPersonFlyingExperiences(OracleConnection con, int personId, IOrganizationRepository or, IAircraftRepository ar)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0} {1}",
@@ -1025,8 +1028,8 @@ namespace Gva.MigrationTool.Sets
                         staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
                         documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
                         period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
-                        organization = Utils.DUMMY_ORGANIZATION, //TODO noms["organizations"].ByOldId(r.Field<decimal?>("FIRM_ID").ToString()),
-                        aircraft = Utils.DUMMY_AIRCRAFT, //TODO noms["aircrafts"].ByOldId(r.Field<long?>("AC_ID").ToString()),
+                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("FIRM_ID")), or),
+                        aircraft = Utils.GetAircraft(aircraftOldIdsLotIds.GetLotId((int?)r.Field<long?>("AC_ID")), ar),
                         ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
                         ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                         authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),

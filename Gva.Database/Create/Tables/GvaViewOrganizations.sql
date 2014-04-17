@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[GvaViewOrganizations] (
     [Name]                 NVARCHAR(100) NOT NULL,
     [CAO]                  NVARCHAR(50)  NULL,
     [Valid]                NVARCHAR(50)  NOT NULL,
-    [OrganizationType]     NVARCHAR(50)  NOT NULL,
+    [OrganizationType]     NVARCHAR(100)  NOT NULL,
     [Uin]                  NVARCHAR(50)  NULL,
     [DateValidTo]          DATETIME2(7)  NULL,
     [DateCAOValidTo]       DATETIME2(7)  NULL,

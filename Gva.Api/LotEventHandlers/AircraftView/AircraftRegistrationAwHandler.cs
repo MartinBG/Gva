@@ -25,7 +25,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
             aw.Part = part.Part;
             aw.Lot = part.Part.Lot;
             aw.RegId = part.Content.Get<int>("registration.nomValueId");
-            aw.IssueDate = part.Content.Get<DateTime>("issueDate");
+            aw.IssueDate = part.Content.Get<DateTime?>("issueDate");
             aw.ValidFromDate = part.Content.Get<DateTime>("validFromDate");
             aw.ValidToDate = part.Content.Get<DateTime>("validToDate");
             aw.Inspector = part.Content.Get<string>("inspector.name");

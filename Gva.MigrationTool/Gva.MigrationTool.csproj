@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DbClause.cs" />
+    <Compile Include="Sets\Organization.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Materializer.cs" />
     <Compile Include="Migration.cs" />

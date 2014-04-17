@@ -13,7 +13,7 @@ namespace Gva.Api.Models
 
         public int RegId { get; set; }
 
-        public DateTime IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public DateTime ValidFromDate { get; set; }
 
