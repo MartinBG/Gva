@@ -64,16 +64,7 @@
     aircraftCertRegistration: function () {
       return {
         part: {
-          removalDate: null, // TODO HACK
-          removalReason: null,
-          removalText: null,
-          removalDocumentNumber: null,
-          removalDocumentDate: null,
-          removalInspector: null,
-          removalCountry: null,
-          removalNotes: null,
-          removalNotesAlt: null,
-          isActive: true
+          removal: null
         }
       };
     },
