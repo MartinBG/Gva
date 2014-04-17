@@ -211,11 +211,14 @@ namespace Gva.Api.Controllers
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
+            var partContent = content.Get<JObject>("part");
+            partContent.Add("nextIndex", 1);
+            partContent.Get<JObject>("editions[0]").Add("index", 0);
+            PartVersion partVersion = lot.CreatePart(path + "/*", partContent, userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
 
-            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("part.editions[0].applications"));
+            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("part.editions[0].applications"));
 
             lot.Commit(userContext, lotEventDispatcher);
 
@@ -230,16 +233,26 @@ namespace Gva.Api.Controllers
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
 
-            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
+            var partContent = content.Get<JObject>("part");
+            int nextIndex = partContent.Get<int>("nextIndex");
+            var part = lot.Parts.FirstOrDefault(p => p.Path == path);
 
-            var editions = content.GetItems<JObject>("part.editions");
-
-            foreach (var edition in editions)
+            foreach (var edition in partContent.GetItems("editions"))
             {
-                this.applicationRepository.AddApplicationRefs(partVersion, edition.GetItems<ApplicationNomDO>("applications"));
+                if (!edition.Get<int?>("index").HasValue)
+                {
+                    (edition as JObject).Add("index", nextIndex);
+                    nextIndex++;
+                }
+
+                this.applicationRepository.AddApplicationRefs(part, edition.GetItems<ApplicationNomDO>("applications"));
             }
+
+            var nextIndexToken = partContent.Get("nextIndex");
+            nextIndexToken.Replace(nextIndex);
+
+            lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
 
             lot.Commit(userContext, lotEventDispatcher);
 

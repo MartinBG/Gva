@@ -13,7 +13,7 @@ namespace Common.WordTemplates
     public class WordCustomXmlToContentControls
     {
 
-        public static void Replace(Stream template, bool hasNestedControls)
+        public static void Replace(Stream template, bool hasNestedControls = true)
         {
             if (hasNestedControls)
             {

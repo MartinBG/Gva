@@ -185,10 +185,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .FirstOrDefault(e => e.DocId == docId);
         }
 
-        public void AddApplicationRefs(PartVersion partVersion, IEnumerable<ApplicationNomDO> applications)
+        public void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications)
         {
             var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(lo => lo.LotPartId == partVersion.Part.PartId)
+                .Where(lo => lo.LotPartId == part.PartId)
                 .ToList();
             foreach (var lotObject in lotObjects)
             {
@@ -200,7 +200,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 GvaLotObject lotObject = new GvaLotObject()
                 {
                     GvaApplicationId = application.ApplicationId,
-                    LotPart = partVersion.Part
+                    LotPart = part
                 };
                 this.unitOfWork.DbContext.Set<GvaLotObject>().Add(lotObject);
             }

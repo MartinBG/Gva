@@ -109,7 +109,7 @@ namespace Gva.Api.Controllers
             PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
+            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
 
             lot.Commit(userContext, lotEventDispatcher);
 
@@ -125,7 +125,7 @@ namespace Gva.Api.Controllers
             PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
 
             this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
+            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
 
             lot.Commit(userContext, lotEventDispatcher);
 

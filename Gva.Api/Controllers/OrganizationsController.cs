@@ -245,7 +245,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
+            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
 
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
@@ -314,7 +314,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
-            this.applicationRepository.AddApplicationRefs(partVersion, content.GetItems<ApplicationNomDO>("applications"));
+            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
 
             int recommendationPartIndex = content.Get<int>("partIndex");
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))

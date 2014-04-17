@@ -12,6 +12,7 @@
     var originalLicence = _.cloneDeep(licence);
     $scope.licence = licence;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
 
     $scope.backFromChild = false;
 

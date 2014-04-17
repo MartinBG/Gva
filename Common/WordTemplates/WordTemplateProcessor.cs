@@ -35,7 +35,7 @@ namespace Common.WordTemplates
             }
         }
 
-        public IEnumerable<T> ClosestDescendants<T>(OpenXmlElement root) where T : OpenXmlElement
+        private IEnumerable<T> ClosestDescendants<T>(OpenXmlElement root) where T : OpenXmlElement
         {
             foreach (var child in root.ChildElements)
             {
@@ -53,7 +53,7 @@ namespace Common.WordTemplates
             }
         }
 
-        public void TransformElement(SdtElement sdtElement, JToken parentContext)
+        private void TransformElement(SdtElement sdtElement, JToken parentContext)
         {
             var sdtProperties = sdtElement.GetFirstChild<SdtProperties>();
             var tag = sdtProperties != null ? sdtProperties.GetFirstChild<Tag>() : null;
@@ -147,7 +147,7 @@ namespace Common.WordTemplates
             }
         }
 
-        public void RemoveContentControl(SdtElement sdtElement)
+        private void RemoveContentControl(SdtElement sdtElement)
         {
             OpenXmlElement sdtContent = null;
             if (sdtElement.GetFirstChild <SdtContentRun>() != null)
@@ -182,7 +182,7 @@ namespace Common.WordTemplates
             sdtElement.Remove();
         }
 
-        public void setRunText(Run r, JToken context)
+        private void setRunText(Run r, JToken context)
         {
             Text runText = r.GetFirstChild<Text>();
             runText.SetAttribute(new OpenXmlAttribute("space", XNamespace.Xml.NamespaceName, "preserve"));

@@ -37,7 +37,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaApplication GetGvaApplicationByDocId(int docId);
 
-        void AddApplicationRefs(PartVersion partVersion, IEnumerable<ApplicationNomDO> applications);
+        void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications);
 
         GvaApplication[] GetApplicationRefs(int partId);
 
