@@ -24,7 +24,7 @@ using System.Configuration;
 
 namespace Gva.DocCommunicator
 {
-    public class DocCommunicatorService : IAISDocumentServiceViewer
+    public class DocCommunicatorService : IAISDocumentServiceViewer, IDisposable
     {
         private IUnitOfWork unitOfWork;
 
@@ -93,6 +93,28 @@ namespace Gva.DocCommunicator
             this.unitOfWork.Save();
 
             return null;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing && this.unitOfWork != null)
+                {
+                    using (this.unitOfWork)
+                    {
+                    }
+                }
+            }
+            finally
+            {
+                this.unitOfWork = null;
+            }
         }
 
         #region Not implemented methods
@@ -550,7 +572,7 @@ namespace Gva.DocCommunicator
                 writer.Write(xmlContent);
                 writer.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

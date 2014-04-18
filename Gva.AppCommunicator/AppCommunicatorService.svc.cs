@@ -279,7 +279,7 @@ namespace Gva.AppCommunicator
                 writer.Write(xmlContent);
                 writer.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

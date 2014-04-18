@@ -254,7 +254,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentCertOperationals$)}")]
-        public IHttpActionResult PostNewPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
@@ -264,7 +264,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentCertOperationals/\d+$)}")]
-        public IHttpActionResult PostPart(int lotId, string path, JObject content)
+        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
         }

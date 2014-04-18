@@ -13,7 +13,6 @@ namespace Regs.Api.LotEvents
         private string setPartAlias;
         private Func<PartVersion, bool> partMatcher;
         private Func<PartVersion, Expression<Func<TView, bool>>> viewMatcher;
-        private object viewMatcher1;
 
         public CommitEventHandler(
             IUnitOfWork unitOfWork,

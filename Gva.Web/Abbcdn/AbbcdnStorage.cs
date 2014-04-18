@@ -35,7 +35,7 @@ namespace Gva.Web.Abbcdn
 
                 return fileInfo.FileKey;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Guid.Empty;
             }
@@ -47,7 +47,7 @@ namespace Gva.Web.Abbcdn
             {
                 return _client.Download(fileKey);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -64,7 +64,7 @@ namespace Gva.Web.Abbcdn
             {
                 return _client.SetIsInUse(fileKey, isInUse);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
