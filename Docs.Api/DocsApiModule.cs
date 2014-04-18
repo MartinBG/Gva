@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Integration.WebApi;
 using Common.Data;
 using Common.Http;
 using Docs.Api.Controllers;

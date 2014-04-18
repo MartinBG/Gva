@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Integration.WebApi;
 using Common.Data;
 using Gva.Api.Controllers;
 using Gva.Api.LotEventHandlers.ApplicationView;
