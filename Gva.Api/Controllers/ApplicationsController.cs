@@ -739,7 +739,7 @@ namespace Gva.Api.Controllers
                 .Include(e => e.DocFileOriginType)
                 .SingleOrDefault(e => e.DocFileId == docFileId);
 
-            if (docFile != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
+            if (docFile != null && docFile.DocFileOriginType != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
             {
                 return Ok(new
                 {
