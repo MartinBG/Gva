@@ -10,7 +10,8 @@
     selectedOrganization
     ) {
     $scope.filters = {
-      name: null
+      name: null,
+      uin: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -40,6 +41,10 @@
     $scope.selectOrganization = function (result) {
       selectedOrganization.push(result.id);
       return $state.go('^');
+    };
+
+    $scope.viewOrganization = function (result) {
+      return $state.go('root.organizations.view.edit', { id: result.id });
     };
   }
 

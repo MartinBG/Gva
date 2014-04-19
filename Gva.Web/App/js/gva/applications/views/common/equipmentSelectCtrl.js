@@ -31,6 +31,10 @@
       selectedEquipment.push(result.id);
       return $state.go('^');
     };
+
+    $scope.viewEquipment = function (result) {
+      return $state.go('root.equipments.view.edit', { id: result.id });
+    };
   }
 
   EquipmentSelectCtrl.$inject = [

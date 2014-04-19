@@ -5,7 +5,8 @@
   function PersonSelectCtrl($scope, $state, $stateParams, Person, selectedPerson) {
     $scope.filters = {
       lin: null,
-      uin: null
+      uin: null,
+      names: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -36,6 +37,10 @@
     $scope.selectPerson = function (result) {
       selectedPerson.push(result.id);
       return $state.go('^');
+    };
+
+    $scope.viewPerson = function (result) {
+      return $state.go('root.persons.view.edit', { id: result.id });
     };
   }
 

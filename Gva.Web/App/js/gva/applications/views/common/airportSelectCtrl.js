@@ -33,6 +33,10 @@
       selectedAirport.push(result.id);
       return $state.go('^');
     };
+
+    $scope.viewAirport = function (result) {
+      return $state.go('root.airports.view.edit', { id: result.id });
+    };
   }
 
   AirportSelectCtrl.$inject = [

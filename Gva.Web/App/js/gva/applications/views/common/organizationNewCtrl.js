@@ -8,6 +8,14 @@
     Organization,
     selectedOrganization
     ) {
+    var organizationData = {
+      name: $state.payload ? $state.payload.name : null,
+      uin: $state.payload ? $state.payload.uin : null
+    };
+
+    $scope.organization = {
+      organizationData: organizationData
+    };
 
     $scope.save = function () {
       return $scope.newOrganizationForm.$validate()

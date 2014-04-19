@@ -34,6 +34,10 @@
       selectedAircraft.push(result.id);
       return $state.go('^');
     };
+
+    $scope.viewAircraft = function (result) {
+      return $state.go('root.aircrafts.view.edit', { id: result.id });
+    };
   }
 
   AircraftSelectCtrl.$inject = [

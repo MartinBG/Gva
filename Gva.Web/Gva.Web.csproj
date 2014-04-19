@@ -522,6 +522,8 @@
     <Content Include="App\js\gva\applications\forms\selectPerson.html" />
     <Content Include="App\js\gva\applications\resources\application.js" />
     <Content Include="App\js\gva\applications\views\common\airportNew.html" />
+    <Content Include="App\js\gva\applications\views\common\corrNew.html" />
+    <Content Include="App\js\gva\applications\views\common\corrNewCtrl.js" />
     <Content Include="App\js\gva\applications\views\common\equipmentNewCtrl.js" />
     <Content Include="App\js\gva\applications\views\common\equipmentSelectCtrl.js" />
     <Content Include="App\js\gva\applications\views\common\equipmentNew.html" />
@@ -563,6 +565,8 @@
     <Content Include="App\js\gva\applications\views\common\organizationNewCtrl.js" />
     <Content Include="App\js\gva\applications\views\common\organizationSelect.html" />
     <Content Include="App\js\gva\applications\views\common\organizationSelectCtrl.js" />
+    <Content Include="App\js\gva\applications\views\common\corrSelect.html" />
+    <Content Include="App\js\gva\applications\views\common\corrSelectCtrl.js" />
     <Content Include="App\js\gva\common\forms\commonAuditDetail.html" />
     <Content Include="App\js\gva\common\forms\commonAuditDetailCtrl.js" />
     <Content Include="App\js\gva\common\forms\commonDisparity.html" />

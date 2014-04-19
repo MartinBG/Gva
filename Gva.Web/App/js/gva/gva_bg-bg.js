@@ -2499,7 +2499,8 @@
           manDate: 'Дата на производство',
           place: 'Местоположение',
           operationalDate: 'Дата на въвеждане в експлоатация',
-          search: 'Търси'
+          search: 'Търси',
+          viewEquipment: 'Преглед'
         },
         equipmentNew: {
           title: 'Ново съоръжение',
@@ -2519,7 +2520,8 @@
           course: 'Курс',
           excess: 'Превишение ',
           concrete: 'Полоса-бетон',
-          search: 'Търси'
+          search: 'Търси',
+          viewAirport: 'Преглед'
         },
         airportNew: {
           title: 'Ново летище',
@@ -2545,12 +2547,13 @@
           modifOrWingColor: 'Модификация/Цвят на крило',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewAircraft: 'Преглед'
         },
         organizationSelect: {
           organization: 'Организация',
           newOrganization: 'Нова организация',
-          uin: 'ЕГН',
+          uin: 'БУЛСТАТ',
           name: 'Наименование',
           CAO: 'CAO',
           dateValidTo: 'Валидност до',
@@ -2559,10 +2562,26 @@
           organizationType: 'Тип организация',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewOrganization: 'Преглед'
         },
         organizationNew: {
           title: 'Нова организация',
+          saveAndSelect: 'Запис и избор',
+          cancel: 'Отказ'
+        },
+        corrSelect: {
+          correspondent: 'Кореспондент',
+          newCorr: 'Нов кореспондент',
+          displayName: 'Наименование',
+          email: 'Имейл',
+          correspondentType: 'Тип',
+          search: 'Търси',
+          cancel: 'Назад',
+          select: 'Избор'
+        },
+        corrNew: {
+          title: 'Нов кореспондент',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -2570,6 +2589,7 @@
           person: 'Заявител',
           newPerson: 'Нов заявител',
           select: 'Избери',
+          viewPerson: 'Преглед',
           cancel: 'Отказ',
           names: 'Име',
           lin: 'ЛИН',
@@ -2608,7 +2628,8 @@
           correspondentName: 'Кореспондент',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewDoc: 'Преглед'
         },
         search: {
           fromDate: 'От дата на заявител',
@@ -3391,6 +3412,8 @@
         'root.applications.new.airportNew': 'Ново летище',
         'root.applications.new.equipmentSelect': 'Избор на съоръжение',
         'root.applications.new.equipmentNew': 'Ново съоръжение',
+        'root.applications.new.corrSelect': 'Избор на кореспондент',
+        'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
         'root.applications.link.personSelect': 'Избор на заявител',

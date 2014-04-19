@@ -50,9 +50,14 @@ namespace Docs.Api.DataObjects
                 {
                     this.CorrespondentDisplayName = d.Correspondent.DisplayName;
                     this.CorrespondentEmail = d.Correspondent.Email;
-
                     this.CorrespondentCorrespondentTypeName = d.Correspondent.CorrespondentType != null ? d.Correspondent.CorrespondentType.Name : string.Empty;
                     this.CorrespondentRegisterIndexCodeName = d.Correspondent.RegisterIndex != null ? string.Format("{0} {1}", d.Correspondent.RegisterIndex.Code, d.Correspondent.RegisterIndex.Name) : string.Empty;
+
+                    this.BgCitizenFirstName = d.Correspondent.BgCitizenFirstName;
+                    this.BgCitizenLastName = d.Correspondent.BgCitizenLastName;
+                    this.BgCitizenUIN = d.Correspondent.BgCitizenUIN;
+                    this.LegalEntityName = d.Correspondent.LegalEntityName;
+                    this.LegalEntityBulstat = d.Correspondent.LegalEntityBulstat;
                 }
             }
         }
@@ -71,5 +76,11 @@ namespace Docs.Api.DataObjects
         public string CorrespondentEmail { get; set; }
         public string CorrespondentCorrespondentTypeName { get; set; }
         public string CorrespondentRegisterIndexCodeName { get; set; }
+
+        public string BgCitizenFirstName { get; set; }
+        public string BgCitizenLastName { get; set; }
+        public string BgCitizenUIN { get; set; }
+        public string LegalEntityName { get; set; }
+        public string LegalEntityBulstat { get; set; }
     }
 }
