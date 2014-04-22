@@ -10,6 +10,7 @@ CREATE TABLE [dbo].[Users] (
     [Fullname]              NVARCHAR (200)      NULL,
     [Notes]                 NVARCHAR (MAX)      NULL,
     [CertificateThumbprint] NVARCHAR (200)      NULL,
+    [Email]                 NVARCHAR (100)      NULL,
     [IsActive]              BIT                 NOT NULL,
     [Version]               ROWVERSION          NOT NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY ([UserId]),

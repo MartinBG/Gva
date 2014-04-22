@@ -18,6 +18,7 @@ namespace Common.Api.Models
         public string Fullname { get; set; }
         public string Notes { get; set; }
         public string CertificateThumbprint { get; set; }
+        public string Email { get; set; }
         public bool IsActive { get; set; }
         public bool HasPassword { get; set; }
         public byte[] Version { get; set; }
@@ -69,6 +70,9 @@ namespace Common.Api.Models
                 .HasMaxLength(8)
                 .IsRowVersion();
 
+            this.Property(t => t.Email)
+                .HasMaxLength(100);
+
             // Table & Column Mappings
             this.ToTable("Users");
             this.Property(t => t.UserId).HasColumnName("UserId");
@@ -79,6 +83,7 @@ namespace Common.Api.Models
             this.Property(t => t.Fullname).HasColumnName("Fullname");
             this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.CertificateThumbprint).HasColumnName("CertificateThumbprint");
+            this.Property(t => t.Email).HasColumnName("Email");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.Version).HasColumnName("Version");
 

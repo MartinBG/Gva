@@ -136,8 +136,8 @@ GO
 -- Insert
 ---------------------------------------------------------------
 --classifications
-:r $(rootPath)\"..\Insert\Classifications\Classifications.sql"
-:r $(rootPath)\"..\Insert\Classifications\ClassificationRelations.sql"
+--:r $(rootPath)\"..\Insert\Classifications\Classifications.sql"
+--:r $(rootPath)\"..\Insert\Classifications\ClassificationRelations.sql"
 :r $(rootPath)\"..\Insert\Classifications\ClassificationRoles.sql"
 
 
@@ -146,13 +146,12 @@ GO
 
 --units
 :r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
-:r $(rootPath)\"..\Insert\Units\Units.sql"
-:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
-:r $(rootPath)\"..\Insert\Units\UnitUsers.sql"
-:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"
+--:r $(rootPath)\"..\Insert\Units\Units.sql"
+--:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
+--:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"
 
 --docs
-:r $(rootPath)\"..\Insert\Docs\RegisterIndexes.sql"
+--:r $(rootPath)\"..\Insert\Docs\RegisterIndexes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocCasePartTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocDestinationTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocDirections.sql"
@@ -160,9 +159,9 @@ GO
 :r $(rootPath)\"..\Insert\Docs\DocFormatTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocStatuses.sql"
 :r $(rootPath)\"..\Insert\Docs\DocSourceTypes.sql"
-:r $(rootPath)\"..\Insert\Docs\DocTypeGroups.sql"
-:r $(rootPath)\"..\Insert\Docs\DocTypes.sql"
-:r $(rootPath)\"..\Insert\Docs\DocTypeClassifications.sql"
+--:r $(rootPath)\"..\Insert\Docs\DocTypeGroups.sql"
+--:r $(rootPath)\"..\Insert\Docs\DocTypes.sql"
+--:r $(rootPath)\"..\Insert\Docs\DocTypeClassifications.sql"
 :r $(rootPath)\"..\Insert\Docs\DocUnitPermissions.sql"
 :r $(rootPath)\"..\Insert\Docs\DocUnitRoles.sql"
 :r $(rootPath)\"..\Insert\Docs\DocWorkflowActions.sql"
@@ -173,13 +172,33 @@ GO
 --correspondents
 :r $(rootPath)\"..\Insert\Correspondents\CorrespondentGroups.sql"
 :r $(rootPath)\"..\Insert\Correspondents\CorrespondentTypes.sql"
-:r $(rootPath)\"..\Insert\Correspondents\Correspondents.sql"
 
 --IncomingDocs
 :r $(rootPath)\"..\Insert\IncomingDocs\IncomingDocStatuses.sql"
 
 --electronic service stages
-:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
-:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"
+--:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
+--:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"
 
 
+---------------------------------------------------------------
+--Insert GVA EXCEL CONFIG
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Units.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\UnitRelations.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\RegisterIndexes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocFileTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\IrregularityTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Classifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ClassificationRelations.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\UnitClassifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeUnitRoles.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeClassifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ElectronicServiceStages.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ElectronicServiceStageExecutors.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Users.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ConfigFinalize.sql"
+
+:r $(rootPath)\"..\Insert\Correspondents\Correspondents.sql"
