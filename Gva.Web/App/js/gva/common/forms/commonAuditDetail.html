@@ -1,10 +1,11 @@
 ﻿<ng-form  class="form-inline" sc-validate="{}">
   <sc-button btn-click="insertAuditDetails()" ng-disabled="!model.auditPart || readonly"
-    ng-if="!model.auditDetails.length && $parent.form.$name === 'organizationInspectionForm'"
+    ng-if="!model.auditDetails.length && setPart === 'organization'"
     text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
   <sc-button btn-click="insertAuditDetails()" ng-disabled="readonly"
-    ng-if="!model.auditDetails.length && $parent.form.$name === 'aircraftInspectionForm'"
+    ng-if="!model.auditDetails.length && setPart === 'aircraft'"
     text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
+
   <table class="table table-striped table-bordered" ng-if="model.auditDetails.length > 0" >
     <thead>
       <tr>

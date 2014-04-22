@@ -56,6 +56,8 @@
         },
         inspectionDirective: {
           organizationTitle: 'Одит',
+          auditCaseType: 'Тип на одита',
+          setPart: 'Одит за',
           title: 'Инспекция',
           documentNumber: '№ на документ',
           auditState: 'Състояние',
@@ -2963,12 +2965,12 @@
           application: 'Преписка (Заявление)'
         },
         newInspection: {
-          title: 'Нова инспекция',
+          title: 'Нов одит',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editInspection: {
-          title: 'Преглед на инспекция',
+          title: 'Преглед на одит',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',

@@ -8,6 +8,24 @@
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
 
+    if($scope.$parent.organization) {
+      $scope.caseTypesOptions = {
+        multiple: false,
+        allowClear: true,
+        placeholder: ' ',
+        tags: $scope.$parent.organization.caseTypes
+      };
+    }
+
+    $scope.$watch('setPart', function(){
+      var aliases = {
+        organization: 'Организация',
+        aircraft: 'ВС'
+      };
+
+      $scope.model.part.setPart = aliases[$scope.setPart];
+    });
+
     $scope.deleteExaminer = function (examiner) {
       var index = $scope.model.part.examiners.indexOf(examiner);
       $scope.model.part.examiners.splice(index, 1);

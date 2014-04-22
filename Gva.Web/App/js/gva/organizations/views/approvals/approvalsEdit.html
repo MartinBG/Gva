@@ -7,16 +7,16 @@
         <input type="radio" ng-checked="item === currentAmendment" sc-click="selectAmendment(item)">
       </sc-column>
       <sc-column title="organizations.approvalEdit.approvalType" has-content="true">
-        {{organizationApproval.part.approvalType.name}}
+        {{approval.part.approvalType.name}}
       </sc-column>
       <sc-column title="organizations.approvalEdit.documentNumber" has-content="true">
-        {{organizationApproval.part.documentNumber}}
+        {{approval.part.documentNumber}}
       </sc-column>
       <sc-column title="organizations.approvalEdit.documentNumberAmendment" has-content="true">
         {{item.documentNumber}}
       </sc-column>
       <sc-column title="organizations.approvalEdit.documentFirstDateIssue" has-content="true">
-        {{(organizationApproval.part.amendments | first).documentDateIssue | date:'mediumDate'}}
+        {{(approval.part.amendments | first).documentDateIssue | date:'mediumDate'}}
       </sc-column>
       <sc-column  title="organizations.approvalEdit.documentDateIssueAmendment" has-content="true">
          {{item.documentDateIssue | date:'mediumDate'}}
@@ -25,7 +25,7 @@
         {{item.changeNum}}
       </sc-column>
       <sc-column title="organizations.approvalEdit.approvalState" has-content="true">
-        {{organizationApproval.part.approvalState.name}}
+        {{approval.part.approvalState.name}}
       </sc-column>
     </sc-datatable>
     <div style="clear: both"></div>
