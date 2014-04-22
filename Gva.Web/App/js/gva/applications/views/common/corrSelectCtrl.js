@@ -29,18 +29,17 @@
       email: null
     };
 
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
-
-    $scope.search = function Search() {
-      return $state.go($state.current, {
-        displayName: $scope.filters.displayName,
-        email: $scope.filters.email,
-        stamp: new Date().getTime()
+    _.forOwn(_.pick($stateParams, ['displayName', 'email']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
       });
+
+    $scope.search = function () {
+      $state.go($state.current, _.assign($scope.filters, {
+        stamp: new Date().getTime()
+      }));
     };
 
     $scope.selectCorr = function selectCorr(corr) {

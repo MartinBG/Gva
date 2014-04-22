@@ -42,8 +42,9 @@
         docTypeId: $scope.filters.docTypeId,
         docStatusId: $scope.filters.docStatusId,
         corrs: $scope.filters.corrs,
-        units: $scope.filters.units
-      }, { reload: true });
+        units: $scope.filters.units,
+        stamp: new Date().getTime()
+      });
     };
 
     $scope.selectDoc = function (result) {

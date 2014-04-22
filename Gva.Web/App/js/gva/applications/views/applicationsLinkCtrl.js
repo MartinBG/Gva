@@ -142,7 +142,7 @@
     $scope.link = function () {
       return $scope.appForm.$validate()
       .then(function () {
-        if ($scope.appForm.$valid) {
+        if ($scope.appForm.$valid && $scope.appModel.doc) {
 
           var newApplication = {
             lotId: $scope.appModel.lot.id,

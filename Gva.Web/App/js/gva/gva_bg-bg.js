@@ -2403,6 +2403,7 @@
         }
       },
       applications: {
+        lotSet: 'Тип на дело',
         edit: {
           equipmentName: 'Име',
           equipmentType: 'Тип',

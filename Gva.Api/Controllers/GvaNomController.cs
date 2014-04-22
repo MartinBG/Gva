@@ -142,6 +142,33 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
+        [Route("lotSets/{id:int}")]
+        public IHttpActionResult GetLotSet(int id)
+        {
+            var lotSet = this.applicationRepository.GetLotSet(id);
+            return Ok(new
+            {
+                nomValueId = lotSet.SetId,
+                name = lotSet.Name,
+                alias = lotSet.Alias
+            });
+        }
+
+        [Route("lotSets")]
+        public IHttpActionResult GetLotSets(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.applicationRepository.GetLotSets(name: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.SetId,
+                    name = e.Name,
+                    alias = e.Alias
+                });
+
+            return Ok(returnValue);
+        }
+
         [Route("aircrafts/{id:int}")]
         public IHttpActionResult GetAircraft(int id)
         {
