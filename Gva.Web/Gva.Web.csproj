@@ -799,8 +799,17 @@
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personExamCtrl.js" />
+    <Content Include="App\js\gva\persons\forms\personExam.html" />
     <Content Include="App\js\gva\persons\forms\personLicenceCtrl.js" />
+    <Content Include="App\js\gva\persons\resources\personExam.js" />
     <Content Include="App\js\gva\persons\resources\personLastLicenceNumber.js" />
+    <Content Include="App\js\gva\persons\views\exams\examsEdit.html" />
+    <Content Include="App\js\gva\persons\views\exams\examsEditCtrl.js" />
+    <Content Include="App\js\gva\persons\views\exams\examsNew.html" />
+    <Content Include="App\js\gva\persons\views\exams\examsNewCtrl.js" />
+    <Content Include="App\js\gva\persons\views\exams\examsSearch.html" />
+    <Content Include="App\js\gva\persons\views\exams\examsSearchCtrl.js" />
     <Content Include="App\js\gva\persons\views\licences\chooseLicence.html" />
     <Content Include="App\js\gva\persons\views\licences\chooseLicenceCtrl.js" />
     <Content Include="App\js\gva\persons\views\licences\licencesEdit.html" />

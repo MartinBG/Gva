@@ -1,0 +1,127 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="examDate">
+      <label class="control-label" l10n-text="persons.examDirective.examDate"></label>
+      <sc-validation-error field-name="examDate" validations="{required: null}"></sc-validation-error>
+      <sc-date ng-model="model.examDate" name="examDate" ng-readonly="readonly" ng-required="true"></sc-date>
+    </div>
+  </div>
+  <h5 class="form-header" l10n-text="persons.examDirective.commonQuestions" style="margin-top:10px;"></h5>
+  <div class="row" style="margin-bottom:20px;">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="commonQuestion">
+      <sc-validation-error field-name="commonQuestion" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.commonQuestion" name="commonQuestion" alias="'commonQuestions'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-md-3 col-sm-4">
+    <ol>
+      <li ng-repeat="question in model.commonQuestions | first:5" style="padding-bottom: 5px;">
+        <ul class="list-inline answer-list">
+          <li>
+            <input type="checkbox" ng-model="question.A" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.B" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.C" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.D" ng-disabled="readonly"/>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+  <div class="col-md-3 col-sm-4">
+    <ol start="6">
+      <li ng-repeat="question in model.commonQuestions | rest:5" style="padding-bottom: 5px;">
+        <ul class="list-inline answer-list">
+          <li>
+            <input type="checkbox" ng-model="question.A" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.B" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.C" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.D" ng-disabled="readonly"/>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+   </div>
+  <h5 class="form-header" l10n-text="persons.examDirective.specializedQuestions" style="margin-top:20px;"></h5>
+  <div class="row" style="margin-bottom:20px;">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="specializedQuestion">
+      <sc-validation-error field-name="specializedQuestion" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.specializedQuestion" name="specializedQuestion" alias="'specializedQuestions'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-md-3 col-sm-4">
+    <ol>
+      <li ng-repeat="question in model.specializedQuestions | first:10" style="padding-bottom: 5px;">
+        <ul class="list-inline answer-list">
+          <li>
+            <input type="checkbox" ng-model="question.A" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.B" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.C" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.D" ng-disabled="readonly"/>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+  <div class="col-md-3 col-sm-4">
+    <ol start="11">
+      <li ng-repeat="question in model.specializedQuestions | rest:10"  style="padding-bottom: 5px;">
+        <ul class="list-inline answer-list">
+          <li>
+            <input type="checkbox" ng-model="question.A" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.B" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.C" ng-disabled="readonly"/>
+          </li>
+          <li>
+            <input type="checkbox" ng-model="question.D" ng-disabled="readonly"/>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+  </div>
+  <h5 class="form-header" l10n-text="persons.examDirective.inspectors" style="margin-top:20px;"></h5>
+  <div class="row">
+    <div class="form-group col-sm-8" sc-has-error="secondType">
+      <sc-validation-error field-name="inspector" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly" multiple></sc-nomenclature>
+    </div>
+  </div>
+  <h5 class="form-header" l10n-text="persons.examDirective.grading" style="margin-top:20px;"></h5>
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="persons.examDirective.score"></label>
+      <sc-int ng-model="model.score" name="score" ng-readonly="readonly" multiple></sc-int>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="persons.examDirective.passed"></label>
+      <sc-nomenclature ng-model="model.passed" name="passed" alias="'boolean'" ng-readonly="readonly" ></sc-nomenclature>
+    </div>
+    <sc-button name="grade" btn-click="gradeExam()" text="persons.examDirective.grade" class="btn btn-default btn-xs" style="margin-top:20px;">
+    </sc-button>
+  </div>
+</ng-form>

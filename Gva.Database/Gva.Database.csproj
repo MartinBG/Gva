@@ -68,6 +68,8 @@
     <Content Include="Insert\Noms\aircarrierServices.sql" />
     <Content Include="Insert\linTypes.sql" />
     <Content Include="Insert\Noms\aircraftModels.sql" />
+    <Content Include="Insert\Noms\commonQuestions.sql" />
+    <Content Include="Insert\Noms\specializedQuestions.sql" />
     <Content Include="Insert\Noms\equipmentProducers.sql" />
     <Content Include="Insert\Noms\equipmentTypes.sql" />
     <Content Include="Insert\Noms\recommendationPartNumbers.sql" />

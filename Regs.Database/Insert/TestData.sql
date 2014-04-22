@@ -80,5 +80,7 @@ VALUES
     (66            , 5         ,'Друг документ'                                                                          , 'equipmentOther'                                              , N'^equipmentDocumentOthers/\d+$'                         , N'{}'   ),
     (67            , 5         ,'Заявление'                                                                              , 'equipmentApplication'                                        , N'^equipmentDocumentApplications/\d+$'                   , N'{}'   ),
     (68            , 5         ,'Eксплоатационна годност'                                                                , 'equipmentOperational'                                        , N'^equipmentCertOperationals/\d+$'                       , N'{}'   ),
-    (69            , 5         ,'Инспекция'                                                                              , 'equipmentInspection'                                         , N'^inspections/\d+$'                                     , N'{}'   )
+    (69            , 5         ,'Инспекция'                                                                              , 'equipmentInspection'                                         , N'^inspections/\d+$'                                     , N'{}'   ),
+    (70            , 1         ,''                                                                                       , 'exams'                                                       , N'^personExams/\d+$'                                     , N'{}'   )
+
 GO

@@ -1624,7 +1624,8 @@
           docs: 'Документи',
           others: 'Други',
           inventory: 'Опис',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          examASs: 'Теор. изпити АС'
         },
         search: {
           names: 'Име',
@@ -1638,6 +1639,35 @@
           no: 'Не',
           'new': 'Ново лице',
           search: 'Търси'
+        },
+        examDirective: {
+          commonQuestions: 'Основни знания',
+          specializedQuestions: 'Специализирани знания',
+          examDate: 'Дата',
+          inspectors: 'Инспектори',
+          score: 'Точки',
+          passed: 'Издържал',
+          grade: 'Изчисляване',
+          grading: 'Оценяване'
+        },
+        newExamAS: {
+          title: 'Нов на теоретичен изпит АС',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        searchExamAS: {
+          examDate: 'Дата',
+          commonQuestion: 'Основни знания',
+          specializedQuestion: 'Специализирани знания',
+          inspector: 'Инспектор',
+          newExam: 'Нов теоретичен изпит АС'
+        },
+        editExamAS: {
+          title: 'Редакция на теоретичен изпит АС',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteExam: 'Изтрий'
         },
         personDataDirective: {
           lin: 'ЛИН',
@@ -3496,6 +3526,9 @@
         'root.persons.view.exams': 'Теоритични изпити',
         'root.persons.view.exams.new': 'Нов теоритичен изпит',
         'root.persons.view.exams.edit': 'Детайли за теоритичен изпит',
+        'root.persons.view.examASs': 'Теоритични изпити АС',
+        'root.persons.view.examASs.new': 'Нов теоритичен изпит АС',
+        'root.persons.view.examASs.edit': 'Детайли за теоритичен изпит АС',
         'root.persons.view.inventory': 'Опис',
         'root.persons.view.documentOthers': 'Други документи',
         'root.persons.view.documentOthers.new': 'Нов документ',

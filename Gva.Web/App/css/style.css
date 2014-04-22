@@ -415,6 +415,17 @@ table.table thead th {
   width: 1065px;
 }
 
+ul.answer-list > li {
+  margin: 3px;
+}
+
+ul.answer-list > li > input{
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
 .table.ctrl-table > tbody > tr > td.ctrl-cell {
   padding: 0px;
 }
