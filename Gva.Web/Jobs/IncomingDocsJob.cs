@@ -201,7 +201,7 @@ namespace Gva.Web.Jobs
 
                                 DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
 
-                                DocFile initialDocFile = CreateInitialDocFile(incomingDocFile, initialDoc, fileKey, docIdentifier.DocFileType.DocFileTypeId, publicDocFileKind.DocFileKindId, rioService.ServiceHeader.ApplicationSigningTime);
+                                DocFile initialDocFile = CreateInitialDocFile(initialDoc, fileKey, docIdentifier.DocFileType.DocFileTypeId, publicDocFileKind.DocFileKindId, rioService.ServiceHeader.ApplicationSigningTime);
                                 this.unitOfWork.DbContext.Set<DocFile>().Add(initialDocFile);
 
                                 //Add attached application files as DocFiles
@@ -219,7 +219,7 @@ namespace Gva.Web.Jobs
 
                                     Guid key = WriteToBlob(fileContent);
 
-                                    DocFile attachedAppDocFile = CreateEApplicationAttachDocFile(attachedAppFile, initialDoc, publicDocFileKind.DocFileKindId, key, "Копие от личната карта");
+                                    DocFile attachedAppDocFile = CreateEApplicationAttachDocFile(attachedAppFile, initialDoc, publicDocFileKind.DocFileKindId, key);
                                     this.unitOfWork.DbContext.Set<DocFile>().Add(attachedAppDocFile);
                                 }
 
@@ -255,7 +255,7 @@ namespace Gva.Web.Jobs
 
                                 Guid receiptFileKey = CreateReceiptDocFileContent(initialDoc, receiptDoc, docIdentifier, rootDoc, discrepancies);
 
-                                DocFile receiptDocFile = CreateReceiptDocFile(incomingDocFile, publicDocFileKind.DocFileKindId, receiptDoc, receiptFileKey, isDocAcknowledged);
+                                DocFile receiptDocFile = CreateReceiptDocFile(publicDocFileKind.DocFileKindId, receiptDoc, receiptFileKey, isDocAcknowledged);
                                 this.unitOfWork.DbContext.Set<DocFile>().Add(receiptDocFile);
 
                                 if (docIdentifier.ServiceHeader.SendApplicationWithReceiptAcknowledgedMessage)
@@ -698,7 +698,7 @@ namespace Gva.Web.Jobs
             }
         }
 
-        private DocFile CreateInitialDocFile(IncomingDocFile incomingDocFile, Doc doc, Guid fileKey, int docFileTypeId, int docFileKindId, DateTime? applicationSigningTime)
+        private DocFile CreateInitialDocFile(Doc doc, Guid fileKey, int docFileTypeId, int docFileKindId, DateTime? applicationSigningTime)
         {
             DocFile docFile = new DocFile();
             docFile.DocFileContentId = fileKey;
@@ -831,13 +831,13 @@ namespace Gva.Web.Jobs
             return fileKey;
         }
 
-        private DocFile CreateReceiptDocFile(IncomingDocFile incomingDocFile, int docFileKindId, Doc doc, Guid fileKey, bool isDocAcknowledged)
+        private DocFile CreateReceiptDocFile(int docFileKindId, Doc doc, Guid fileKey, bool isDocAcknowledged)
         {
             DocFile docFile = new DocFile();
             docFile.Doc = doc;
             docFile.DocContentStorage = String.Empty;
             docFile.DocFileContentId = fileKey;
-            docFile.DocFileTypeId = incomingDocFile.DocFileTypeId;
+            docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == "XML").DocFileTypeId;
             docFile.DocFileKindId = docFileKindId;
             docFile.Name = isDocAcknowledged ? "Съобщение, че получаването се потвърждава" : "Съобщение, че получаването не се потвърждава";
             docFile.DocFileName = isDocAcknowledged ? "ReceiptAcknowledgedMessage.xml" : "ReceiptNotAcknowledgedMessage.xml";
@@ -849,8 +849,7 @@ namespace Gva.Web.Jobs
             return docFile;
         }
 
-        //Hack: remove dfName
-        private DocFile CreateEApplicationAttachDocFile(RioServiceHelper.AttachedDocument attachedDocument, Doc doc, int docFileKindId, Guid fileKey, string dfName)
+        private DocFile CreateEApplicationAttachDocFile(RioServiceHelper.AttachedDocument attachedDocument, Doc doc, int docFileKindId, Guid fileKey)
         {
             DocFile docFile = new DocFile();
             docFile.Doc = doc;
@@ -871,7 +870,7 @@ namespace Gva.Web.Jobs
             docFile.DocFileTypeId = docFileTypeId;
             docFile.DocFileKindId = docFileKindId;
             docFile.DocFileOriginTypeId = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "EApplicationAttachedFile").DocFileOriginTypeId;
-            docFile.Name = !String.IsNullOrWhiteSpace(dfName) ? dfName : attachedDocument.FileName;
+            docFile.Name = attachedDocument.DocKind;
             docFile.DocFileName = attachedDocument.AbbcdnInfo.AttachedDocumentFileName;
             docFile.DocContentStorage = String.Empty;
             docFile.DocFileContentId = fileKey;

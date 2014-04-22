@@ -72,8 +72,8 @@ namespace Gva.AppCommunicator
 
                 IncomingDocFile incomingDocFile = new IncomingDocFile();
                 incomingDocFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == "XML").DocFileTypeId;
-                incomingDocFile.Name = String.Format("{0}_{1}", GetRioServiceTypeName(documentMetaData), Guid.NewGuid().ToString());
-                incomingDocFile.DocFileName = string.Format("WebPortal_{0}_{1}.xml", GetRioServiceTypeName(documentMetaData), Guid.NewGuid().ToString());
+                incomingDocFile.Name = String.Format("WebPortalApp_{0}_{1}", DateTime.Now.ToString(), Guid.NewGuid().ToString());
+                incomingDocFile.DocFileName = String.Format("WebPortalApp_{0}_{1}.xml", DateTime.Now.ToString(), Guid.NewGuid().ToString());
                 incomingDocFile.DocFileContent = request.DocumentData;
                 incomingDocFile.IncomingDoc = incomingDoc;
 
@@ -237,18 +237,6 @@ namespace Gva.AppCommunicator
         }
 
         #region Private methods
-
-        private string GetRioServiceTypeName(RioDocumentMetadata documentMetaData)
-        {
-            if (documentMetaData.RioObjectType == typeof(R_4186.InitialCertificationCommercialPilotCapacityInstrumentFlightApplication))
-            {
-                return "InitialCertificationCommercialPilotCapacityInstrumentFlightApplication";
-            }
-            else
-            {
-                throw new Exception("RioObjectType is unknown.");
-            }
-        }
 
         private Guid WriteToBlob(byte[] content)
         {
