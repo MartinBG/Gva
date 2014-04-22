@@ -375,7 +375,7 @@
                 }
                 else
                 {
-                    unitsTableRows.Add(String.Format("INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES({0},N'{1}',{2},{3},{4});", unitsIdentity, name, 3, 0, 1));
+                    unitsTableRows.Add(String.Format("INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES({0},N'{1}',{2},{3},{4});", unitsIdentity, name, 2, 0, 1));
                     unitRelationsTableRows.Add(String.Format("INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES({0},{1},{2},{3});", unitRelationsIdentity, unitsIdentity, parentId.HasValue ? parentId.Value.ToString() : "NULL", rootId));
 
                     codeUnitIdRelations.Add(code, new Tuple<int, int>(unitsIdentity, rootId));
@@ -384,7 +384,7 @@
                     unitsIdentity++;
                     unitRelationsIdentity++;
 
-                    unitsTableRows.Add(String.Format("INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES({0},N'{1}',{2},{3},{4});", unitsIdentity, user, 2, 0, 1));
+                    unitsTableRows.Add(String.Format("INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES({0},N'{1}',{2},{3},{4});", unitsIdentity, user, 3, 0, 1));
                     unitRelationsTableRows.Add(String.Format("INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES({0},{1},{2},{3});", unitRelationsIdentity, unitsIdentity, unitsIdentity - 1, rootId));
 
                     codeUnitIdRelations.Add(code + "01", new Tuple<int, int>(unitsIdentity, rootId));

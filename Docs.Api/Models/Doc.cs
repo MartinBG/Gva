@@ -1022,7 +1022,7 @@ namespace Docs.Api.Models
             {
                 foreach (var item in docTypeUnitRoles)
                 {
-                    this.CreateDocUnit(item.UnitId, item.DocTypeUnitRoleId, userContext);
+                    this.CreateDocUnit(item.UnitId, item.DocUnitRoleId, userContext);
                 }
             }
 
