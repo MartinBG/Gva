@@ -43,8 +43,8 @@
         },
         disparityDirective: {
           subject: 'Тема',
-          sortOrder: 'Пореден №',
-          refNumber: 'Референтен №',
+          sortOrder: '№',
+          refNumber: 'Реф. №',
           description: 'Описание на несъответствие',
           disparityLevel: 'Ниво',
           removalDate: 'Дата за отстраняване',

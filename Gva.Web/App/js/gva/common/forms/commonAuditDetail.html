@@ -5,18 +5,12 @@
   <sc-button btn-click="insertAuditDetails()" ng-disabled="readonly"
     ng-if="!model.auditDetails.length && setPart === 'aircraft'"
     text="common.auditDetailDirective.insertAuditDetails" class="btn btn-default"></sc-button>
-
-  <table class="table table-striped table-bordered" ng-if="model.auditDetails.length > 0" >
+  <table class="table table-striped table-bordered ctrl-table" ng-if="model.auditDetails.length > 0" >
     <thead>
       <tr>
-        <th l10n-text="common.auditDetailDirective.code"></th>
-        <th l10n-text="common.auditDetailDirective.subject"></th>
-          <th>
-          <div sc-has-error="auditResult"  class="col-sm-2 col-md-2">
-            <label class="control-label" l10n-text="common.auditDetailDirective.auditResult"></label>
-            <sc-validation-error field-name="auditResult" validations="{required: null}"></sc-validation-error>
-          </div>
-        </th>
+        <th style="width: 60px;" l10n-text="common.auditDetailDirective.code"></th>
+        <th style="width: 310px;" l10n-text="common.auditDetailDirective.subject"></th>
+        <th style="width: 310px;" l10n-text="common.auditDetailDirective.auditResult"></th>
         <th l10n-text="common.auditDetailDirective.disparity"></th>
       </tr>
     </thead>
@@ -25,20 +19,20 @@
         <td style="width: 10px;">
           {{detail.code}}
         </td>
-        <td class="col-sm-4 col-md-3">
+        <td>
           {{detail.subject}}
         </td>
-        <td class="col-sm-4 col-md-3">
+        <td class="ctrl-cell">
           <sc-nomenclature ng-model="detail.auditResult" alias="'auditResults'" name="auditResult" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
         </td>
-        <td class="row">
-          <sc-button name="addDisparityBtn" type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-sm pull-right" icon="glyphicon-plus" 
+        <td>
+          <sc-button name="addDisparityBtn" type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-xs pull-right" icon="glyphicon-plus" 
               ng-show="detail.auditResult.code === '1' || detail.auditResult.code === '2'"
               ng-disabled="readonly">
           </sc-button>
           <div class="nav-pills pull-left" ng-repeat="detail in detail.disparities">
               <a href="" scroll-to=".disparity{{detail}}">
-                <span class="badge pull-right">{{detail}}</span>
+                <span class="badge">{{detail}}</span>
               </a>
           </div>
         </td>
