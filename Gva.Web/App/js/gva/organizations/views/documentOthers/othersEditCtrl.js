@@ -69,10 +69,7 @@
       '$stateParams',
       'OrganizationDocumentOther',
       function ($stateParams, OrganizationDocumentOther) {
-        return OrganizationDocumentOther.get({
-          id: $stateParams.id,
-          ind: $stateParams.ind
-        }).$promise;
+        return OrganizationDocumentOther.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

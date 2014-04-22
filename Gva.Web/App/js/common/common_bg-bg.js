@@ -43,7 +43,7 @@
             appsLink: 'Свържи заявление'
           },
           organizations: {
-            title: 'Орг',
+            title: 'ОО',
             search: 'Търсене',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
