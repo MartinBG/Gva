@@ -71,7 +71,7 @@
       <gva-licence name="licenceForm" ng-model="licence.part" sc-data-is-new="false" sc-data-back-from-child="backFromChild" readonly="editMode !== 'edit'"></gva-licence>
 
       <h5 class="form-header" l10n-text="persons.editLicence.editionForm"></h5>
-      <gva-licence-edition name="licenceEditionForm" ng-model="currentEdition" sc-data-back-from-child="backFromChild" readonly="editMode !== 'edit'"></gva-licence-edition>
+      <gva-licence-edition name="licenceEditionForm" ng-model="currentEdition" sc-data-staff-type="licence.part.staffType" sc-data-back-from-child="backFromChild" readonly="editMode !== 'edit'"></gva-licence-edition>
 
     </div>
   </div>

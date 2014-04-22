@@ -168,8 +168,8 @@
             <td><span>{{training.part.documentDateValidTo | date:'mediumDate'}}</span></td>
             <td>{{training.part.documentPublisher}}</td>
             <td>{{training.part.ratingType.name}}</td>
-            <td>{{training.part.personOtherDocumentType.name}}</td>
-            <td>{{training.part.personOtherDocumentRole.name}}</td>
+            <td>{{training.part.documentType.name}}</td>
+            <td>{{training.part.documentRole.name}}</td>
           </tr>
         </tbody>
       </table>
@@ -269,7 +269,7 @@
           <thead>
             <tr>
               <th width="1px" ng-show="!(readonly && !backFromChild)"></th>
-              <th width="1px" ng-show="!(readonly && !backFromChild)></th>
+              <th width="1px" ng-show="!(readonly && !backFromChild)"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceNumber"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceType"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.documentDateValidFrom"></th>
