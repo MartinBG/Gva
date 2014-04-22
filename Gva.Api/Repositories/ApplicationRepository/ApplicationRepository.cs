@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Models;
 using Common.Api.Repositories;
 using Common.Data;
 using Common.Linq;
@@ -41,6 +42,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from o2 in o1.DefaultIfEmpty()
                 join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>() on va2.LotId equals ac.LotId into ac1
                 from ac2 in ac1.DefaultIfEmpty()
+                join nv1 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AircraftCategoryId equals nv1.NomValueId into nv2
+                from nv3 in nv2.DefaultIfEmpty()
+                join nv4 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AircraftProducerId equals nv4.NomValueId into nv5
+                from nv6 in nv5.DefaultIfEmpty()
                 join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>() on va2.LotId equals ap.LotId into ap1
                 from ap2 in ap1.DefaultIfEmpty()
                 join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>() on va2.LotId equals eq.LotId into eq1
@@ -101,8 +106,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,
                     GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null,
                     GvaAircraftId = e.GViewAircraft != null ? (int?)e.GViewAircraft.LotId : null,
-                    GvaAircraftCategory = e.GViewAircraft != null ? e.GViewAircraft.AircraftCategory : null,
-                    GvaAircraftProducer = e.GViewAircraft != null ? e.GViewAircraft.AircraftProducer : null,
+                    GvaAircraftCategory = e.GViewAircraft != null && e.GViewAircraft.AircraftCategory != null ? e.GViewAircraft.AircraftCategory.Name : null,
+                    GvaAircraftProducer = e.GViewAircraft != null && e.GViewAircraft.AircraftProducer != null ? e.GViewAircraft.AircraftProducer.Name : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
                     GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
                     GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType : null,

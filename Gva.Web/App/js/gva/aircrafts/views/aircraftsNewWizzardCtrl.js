@@ -30,8 +30,8 @@
     $scope.$watch('model.aircraftModel', function (newVal, oldVal) {
       if (newVal && (newVal !== oldVal)) {
         oldModel = $scope.model.aircraftModel;
-        $scope.model.aircraftCategory = $scope.model.aircraftModel.aircraftCategory;
-        $scope.model.aircraftProducer = $scope.model.aircraftModel.aircraftProducer;
+        $scope.model.aircraftCategory = $scope.model.aircraftModel.textContent.aircraftCategory;
+        $scope.model.aircraftProducer = $scope.model.aircraftModel.textContent.aircraftProducer;
         $scope.$evalAsync(function() {
           if (oldModel) {
             $scope.model.aircraftModel = oldModel;

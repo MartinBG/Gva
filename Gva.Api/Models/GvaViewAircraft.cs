@@ -19,13 +19,9 @@ namespace Gva.Api.Models
 
         public string ICAO { get; set; }
 
-        public string AircraftCategory { get; set; }
+        public int? AircraftCategoryId { get; set; }
 
-        public int AircraftCategoryId { get; set; }
-
-        public string AircraftProducer { get; set; }
-
-        public int AircraftProducerId { get; set; }
+        public int? AircraftProducerId { get; set; }
 
         public string Engine { get; set; }
 
@@ -38,6 +34,10 @@ namespace Gva.Api.Models
         public DateTime? OutputDate { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public virtual NomValue AircraftCategory { get; set; }
+
+        public virtual NomValue AircraftProducer { get; set; }
     }
 
     public class GvaViewAircraftMap : EntityTypeConfiguration<GvaViewAircraft>
@@ -66,9 +66,7 @@ namespace Gva.Api.Models
             this.Property(t => t.ModelAlt).HasColumnName("ModelAlt");
             this.Property(t => t.OutputDate).HasColumnName("OutputDate");
             this.Property(t => t.ICAO).HasColumnName("ICAO");
-            this.Property(t => t.AircraftCategory).HasColumnName("AircraftCategory");
             this.Property(t => t.AircraftCategoryId).HasColumnName("AircraftCategoryId");
-            this.Property(t => t.AircraftProducer).HasColumnName("AircraftProducer");
             this.Property(t => t.AircraftProducerId).HasColumnName("AircraftProducerId");
             this.Property(t => t.Engine).HasColumnName("Engine");
             this.Property(t => t.Propeller).HasColumnName("Propeller");
@@ -78,6 +76,12 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
+            this.HasOptional(t => t.AircraftCategory)
+                .WithMany()
+                .HasForeignKey(t => t.AircraftCategoryId);
+            this.HasOptional(t => t.AircraftProducer)
+                .WithMany()
+                .HasForeignKey(t => t.AircraftProducerId);
         }
     }
 }

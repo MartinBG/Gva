@@ -8,9 +8,7 @@ CREATE TABLE [dbo].[GvaViewAircrafts] (
     [ModelAlt]           NVARCHAR(50)  NULL,
     [OutputDate]         DATETIME2     NULL,
     [ICAO]               NVARCHAR(50)  NULL,
-    [AircraftCategory]   NVARCHAR(MAX) NULL,
     [AircraftCategoryId] INT NULL,
-    [AircraftProducer]   NVARCHAR(MAX) NULL,
     [AircraftProducerId] INT NULL,
     [Engine]             NVARCHAR(50)  NULL,
     [Propeller]          NVARCHAR(50)  NULL,
@@ -23,19 +21,17 @@ CREATE TABLE [dbo].[GvaViewAircrafts] (
 )
 GO
 
-exec spDescTable  N'GvaViewAircrafts', N'Физически лица.'
+exec spDescTable  N'GvaViewAircrafts', N'Въздухоплавателни средства.'
 exec spDescColumn N'GvaViewAircrafts', N'LotId', N'Идентификатор на партида на ВС.'
-exec spDescColumn N'GvaViewAircrafts', N'ManSN'           , N'Личен идентификационен номер.'
-exec spDescColumn N'GvaViewAircrafts', N'Model'           , N'Единен граждански номер.'
-exec spDescColumn N'GvaViewAircrafts', N'ModelAlt'           , N'Единен граждански номер.'
-exec spDescColumn N'GvaViewAircrafts', N'OutputDate'         , N'Имена.'
-exec spDescColumn N'GvaViewAircrafts', N'ICAO'           , N'Възраст.'
-exec spDescColumn N'GvaViewAircrafts', N'AircraftCategory'      , N'Лицензи.'
-exec spDescColumn N'GvaViewAircrafts', N'AircraftCategoryId'      , N'Лицензи.'
-exec spDescColumn N'GvaViewAircrafts', N'AircraftProducer'       , N'Квалификации.'
-exec spDescColumn N'GvaViewAircrafts', N'AircraftProducerId'       , N'Квалификации.'
-exec spDescColumn N'GvaViewAircrafts', N'Engine'  , N'Фирма.'
-exec spDescColumn N'GvaViewAircrafts', N'Propeller'    , N'Длъжност.'
-exec spDescColumn N'GvaViewAircrafts', N'ModifOrWingColor'    , N'Длъжност2.'
-exec spDescColumn N'GvaViewAircrafts', N'Mark'    , N'Длъжност3.'
+exec spDescColumn N'GvaViewAircrafts', N'ManSN', N'Сериен номер.'
+exec spDescColumn N'GvaViewAircrafts', N'Model', N'Модел.'
+exec spDescColumn N'GvaViewAircrafts', N'ModelAlt', N'Модел (английски).'
+exec spDescColumn N'GvaViewAircrafts', N'OutputDate', N'Дата на произв.'
+exec spDescColumn N'GvaViewAircrafts', N'ICAO', N'ICAO код.'
+exec spDescColumn N'GvaViewAircrafts', N'AircraftCategoryId', N'Категория.'
+exec spDescColumn N'GvaViewAircrafts', N'AircraftProducerId', N'Производител.'
+exec spDescColumn N'GvaViewAircrafts', N'Engine', N'Двигател.'
+exec spDescColumn N'GvaViewAircrafts', N'Propeller', N'Витло.'
+exec spDescColumn N'GvaViewAircrafts', N'ModifOrWingColor', N'Модификация.'
+exec spDescColumn N'GvaViewAircrafts', N'Mark', N'Код.'
 GO

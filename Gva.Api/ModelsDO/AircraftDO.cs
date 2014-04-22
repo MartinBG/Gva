@@ -6,8 +6,11 @@ namespace Gva.Api.ModelsDO
 {
     public class AircraftDO
     {
-        public AircraftDO(
-            GvaViewAircraft aircraftData)
+        public AircraftDO()
+        {
+        }
+
+        public AircraftDO(GvaViewAircraft aircraftData)
         {
             this.Id = aircraftData.LotId;
             this.ManSN = aircraftData.ManSN;
@@ -15,16 +18,14 @@ namespace Gva.Api.ModelsDO
             this.ModelAlt = aircraftData.ModelAlt;
             this.OutputDate = aircraftData.OutputDate;
             this.ICAO = aircraftData.ICAO;
-            this.AircraftCategory = aircraftData.AircraftCategory;
-            this.AircraftCategoryId = aircraftData.AircraftCategoryId;
-            this.AircraftProducer = aircraftData.AircraftProducer;
-            this.AircraftProducerId = aircraftData.AircraftProducerId;
+            this.AircraftCategory = aircraftData.AircraftCategory != null ? aircraftData.AircraftCategory.Name : null;
+            this.AircraftProducer = aircraftData.AircraftProducer != null ?aircraftData.AircraftProducer.Name : null;
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
             this.ModifOrWingColor = aircraftData.ModifOrWingColor;
-            this.ModifOrWingColor = aircraftData.ModifOrWingColor;
             this.Mark = aircraftData.Mark;
         }
+
         public int Id { get; set; }
 
         public string ManSN { get; set; }
@@ -39,11 +40,7 @@ namespace Gva.Api.ModelsDO
 
         public string AircraftCategory { get; set; }
 
-        public int AircraftCategoryId { get; set; }
-
         public string AircraftProducer { get; set; }
-
-        public int AircraftProducerId { get; set; }
 
         public string Engine { get; set; }
 

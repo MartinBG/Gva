@@ -64,7 +64,7 @@ namespace Gva.Api.Controllers
         [Route("")]
         public IHttpActionResult GetAircrafts(string manSN = null, string model = null, string icao = null, bool exact = false)
         {
-            var aircrafts = this.aircraftRepository.GetAircrafts(manSN, model, icao, exact);
+            var aircrafts = this.aircraftRepository.GetAircrafts(manSN: manSN, model: model, icao: icao, exact: exact);
 
             return Ok(aircrafts.Select(a => new AircraftDO(a)));
         }

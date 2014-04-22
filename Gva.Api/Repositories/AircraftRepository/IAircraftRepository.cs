@@ -9,6 +9,8 @@ namespace Gva.Api.Repositories.AircraftRepository
             string manSN = null,
             string model = null,
             string icao = null,
+            string category = null,
+            string producer = null,
             bool exact = false,
             int offset = 0,
             int? limit = null);

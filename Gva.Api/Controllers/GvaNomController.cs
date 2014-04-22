@@ -157,15 +157,18 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null, string category = "", string producer = "")
         {
             var returnValue =
-                this.aircraftRepository.GetAircrafts(model: term, exact: false, offset: offset, limit: limit)
-                .Where(e => e.AircraftCategory.Contains(category) && e.AircraftProducer.Contains(producer)).Select(e => new
+                this.aircraftRepository.GetAircrafts(model: term, category: category, producer: producer, exact: false, offset: offset, limit: limit)
+                .Select(e => new
                 {
                     nomValueId = e.LotId,
                     name = e.Model,
                     nameAlt = e.ModelAlt,
-                    // TODO HACK
-                    aircraftCategory = this.nomRepository.GetNomValue("aircraftCategories", e.AircraftCategoryId),
-                    aircraftProducer = this.nomRepository.GetNomValue("aircraftProducers", e.AircraftProducerId)
+                    TextContent =
+                        new
+                        {
+                            aircraftCategory = e.AircraftCategory,
+                            aircraftProducer = e.AircraftProducer
+                        }
                 });
 
             return Ok(returnValue);
