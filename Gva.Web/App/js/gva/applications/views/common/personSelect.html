@@ -1,7 +1,7 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="applications.personSelect.lin"></sc-filter>
   <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="applications.personSelect.uin"></sc-filter>
-  <sc-filter type="text" name="names" class="col-sm-3" removable="true" label="applications.personSelect.names"></sc-filter>
+  <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="applications.personSelect.names"></sc-filter>
   <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="applications.personSelect.licences"></sc-filter>
   <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="applications.personSelect.ratings"></sc-filter>
   <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="applications.personSelect.organization"></sc-filter>
@@ -14,6 +14,7 @@
 <sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button btn-click="selectPerson(item)" text="applications.personSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="viewPerson(item)" text="applications.personSelect.viewPerson" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
   <sc-column data="names" title="applications.personSelect.names">
   </sc-column>

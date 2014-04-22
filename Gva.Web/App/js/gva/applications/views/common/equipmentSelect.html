@@ -7,7 +7,8 @@
 
 <sc-datatable items="equipments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-   <sc-button btn-click="selectEquipment(item)" text="applications.equipmentSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="selectEquipment(item)" text="applications.equipmentSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="viewEquipment(item)" text="applications.equipmentSelect.viewEquipment" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
   <sc-column data="equipmentType" title="applications.equipmentSelect.equipmentType">
   </sc-column>

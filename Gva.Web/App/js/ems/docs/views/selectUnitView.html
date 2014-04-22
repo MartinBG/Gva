@@ -1,13 +1,13 @@
 ﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
   <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="docs.edit.view.selectUnit.name"></sc-filter>
-  <sc-search-button action="cancel()" text="docs.edit.view.selectUnit.cancel" icon="glyphicon-arrow-left"></sc-search-button>
-  <sc-search-button action="search()" text="docs.edit.view.selectUnit.search" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="search()" text="docs.edit.view.selectUnit.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="docs.edit.view.selectUnit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
 <sc-datatable items="units" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-    <sc-button name="selectBtn" btn-click="selectUnit(item)" class="btn btn-xs btn-primary" text="docs.edit.view.selectUnit.select"></sc-button>
+    <sc-button name="selectBtn" btn-click="selectUnit(item)" class="btn btn-xs btn-primary" text="docs.edit.view.selectUnit.select" ng-disabled="selectedUnits | contains:item.nomValueId"></sc-button>
   </sc-column>
   <sc-column data="name" title="docs.edit.view.selectUnit.name">
   </sc-column>

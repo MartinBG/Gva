@@ -2,7 +2,14 @@
 (function (angular, _) {
   'use strict';
 
-  function DocSelectCtrl($scope, $state, $stateParams, Application, selectedDoc) {
+  function DocSelectCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Application,
+    docs,
+    selectedDoc
+    ) {
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -24,9 +31,7 @@
       }
     });
 
-    Application.notLinkedDocs($stateParams).$promise.then(function (docs) {
-      $scope.docs = docs.documents;
-    });
+    $scope.docs = docs.documents;
 
     $scope.search = function () {
       return $state.go($state.current, {
@@ -37,29 +42,45 @@
         docTypeId: $scope.filters.docTypeId,
         docStatusId: $scope.filters.docStatusId,
         corrs: $scope.filters.corrs,
-        units: $scope.filters.units
-      }, { reload: true });
+        units: $scope.filters.units,
+        stamp: new Date().getTime()
+      });
     };
 
     $scope.selectDoc = function (result) {
-      selectedDoc.push({
-        docId: result.docId,
-        regUri: result.regUri,
-        docTypeName: result.docTypeName,
-        docStatusName: result.docStatusName,
-        isElectronic: result.isElectronic
-      });
+      selectedDoc.push(result);
       return $state.go('^');
     };
 
     $scope.cancel = function () {
       return $state.go('^');
     };
+
+    $scope.viewDoc = function (result) {
+      return $state.go('root.docs.edit.view', { id: result.docId });
+    };
   }
 
   DocSelectCtrl.$inject = [
-    '$scope', '$state', '$stateParams', 'Application', 'selectedDoc'
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Application',
+    'docs',
+    'selectedDoc'
   ];
+
+  DocSelectCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Application',
+      function ($stateParams, Application) {
+        return Application.notLinkedDocs($stateParams).$promise.then(function (docs) {
+          return docs;
+        });
+      }
+    ]
+  };
 
   angular.module('gva').controller('DocSelectCtrl', DocSelectCtrl);
 }(angular, _));

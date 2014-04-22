@@ -193,6 +193,15 @@ form.card input.form-control[disabled]
   border-bottom: 1px solid #DDDDDD;
 }
 
+.clear-border-bottom {
+  border-bottom: 0px !important;
+}
+
+.table-bordered-red {
+  border: 1px solid #b94a48;
+  color: #b94a48 !important;
+}
+
 .nav-tabs
 {
   margin-bottom: 0px;
@@ -381,6 +390,10 @@ table.sc-data-table th.sorting span
 
 #menu-navigation a, #app-case a{
   cursor: pointer;
+}
+
+.accordion-toggle a {
+    cursor: pointer;
 }
 
 table.table thead th {

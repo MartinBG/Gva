@@ -8,22 +8,21 @@
       model: null
     };
 
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
+    _.forOwn(_.pick($stateParams, ['manSN', 'model', 'icao']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
+      });
 
-    Aircraft.query($stateParams).$promise.then(function (aircrafts) {
+    Aircraft.query($scope.filters).$promise.then(function (aircrafts) {
       $scope.aircrafts = aircrafts;
     });
 
     $scope.search = function () {
-      $state.go($state.current, {
-        manSN: $scope.filters.manSN,
-        model: $scope.filters.model,
-        icao: $scope.filters.icao
-      }, { reload: true });
+      $state.go($state.current, _.assign($scope.filters, {
+        stamp: new Date().getTime()
+      }));
     };
 
     $scope.cancel = function () {
@@ -33,6 +32,10 @@
     $scope.selectAircraft = function (result) {
       selectedAircraft.push(result.id);
       return $state.go('^');
+    };
+
+    $scope.viewAircraft = function (result) {
+      return $state.go('root.aircrafts.view.edit', { id: result.id });
     };
   }
 

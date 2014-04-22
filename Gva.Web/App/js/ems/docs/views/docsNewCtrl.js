@@ -83,19 +83,34 @@
   ];
 
   DocsNewCtrl.$resolve = {
-    docModel: ['$q', 'Nomenclature',
-      function ($q, Nomenclature) {
+    docModel: ['$q', '$stateParams', 'Nomenclature',
+      function ($q, $stateParams, Nomenclature) {
         return $q.all({
           docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
           docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
           docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
+          res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
+            return dft.alias === 'Paper';
+          });
+
+          if (!!$stateParams.parentDocId) {
+            res.docCasePartTypes = _.filter(res.docCasePartTypes, function (dcpt) {
+              return dcpt.alias === 'Public' || dcpt.alias === 'Internal';
+            });
+          }
+          else {
+            res.docCasePartTypes = _.filter(res.docCasePartTypes, function (dcpt) {
+              return dcpt.alias === 'Public';
+            });
+          }
+
           var doc = {
             parentDocId: null,
-            docFormatTypeId: _(res.docFormatTypes).first().nomValueId,
-            docFormatTypeName: _(res.docFormatTypes).first().name,
-            docCasePartTypeId: _(res.docCasePartTypes).first().nomValueId,
-            docCasePartTypeName: _(res.docCasePartTypes).first().name,
+            docFormatTypeId: _(res.docFormatTypes).filter({ alias: 'Paper' }).first().nomValueId,
+            docFormatTypeName: _(res.docFormatTypes).filter({ alias: 'Paper' }).first().name,
+            docCasePartTypeId: _(res.docCasePartTypes).filter({alias: 'Public'}).first().nomValueId,
+            docCasePartTypeName: _(res.docCasePartTypes).filter({ alias: 'Public' }).first().name,
             docDirectionId: _(res.docDirections).first().nomValueId,
             docDirectionName: _(res.docDirections).first().name,
             docTypeGroupId: undefined,

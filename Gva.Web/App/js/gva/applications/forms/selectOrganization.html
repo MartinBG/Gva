@@ -5,7 +5,7 @@
       <label class="control-label" l10n-text="applications.organizationSelect.organization"></label>
       <sc-validation-error field-name="оrganizationLotId" validations="{required: null}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.organization.id" alias="'organizations'" mode="id" name="оrganizationLotId" required style="float: left;"></sc-nomenclature>
+        <sc-nomenclature ng-model="model.lot.id" alias="'organizations'" mode="id" name="оrganizationLotId" required style="float: left;"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectOrganization')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
           <sc-button btn-click="$raise('scOnNewOrganization')" class="btn btn-default" text="applications.organizationSelect.newOrganization"></sc-button>

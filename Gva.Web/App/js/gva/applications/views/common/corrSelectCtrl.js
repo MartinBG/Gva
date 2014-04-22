@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function SelectCorrViewCtrl(
+  function CorrSelectCtrl(
     $state,
     $stateParams,
     $scope,
@@ -22,36 +22,28 @@
       };
     });
     $scope.corrCount = corrs.correspondentCount;
-    $scope.selectedCorrs = _.map(selectedCorrs.corrs, function(corr) {
-      return corr.nomValueId;
-    });
+    $scope.selectedCorrs = selectedCorrs.corrs;
 
     $scope.filters = {
       displayName: null,
       email: null
     };
 
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
-
-    $scope.search = function Search() {
-      return $state.go($state.current, {
-        displayName: $scope.filters.displayName,
-        email: $scope.filters.email,
-        stamp: new Date().getTime()
+    _.forOwn(_.pick($stateParams, ['displayName', 'email']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
       });
+
+    $scope.search = function () {
+      $state.go($state.current, _.assign($scope.filters, {
+        stamp: new Date().getTime()
+      }));
     };
 
     $scope.selectCorr = function selectCorr(corr) {
-      var nomItem = {
-        nomValueId: corr.correspondentId,
-        name: corr.displayName
-      };
-
-      selectedCorrs.onCorrSelect(nomItem);
+      selectedCorrs.onCorrSelect(corr.correspondentId);
       return $state.go('^');
     };
 
@@ -60,7 +52,7 @@
     };
   }
 
-  SelectCorrViewCtrl.$inject = [
+  CorrSelectCtrl.$inject = [
     '$state',
     '$stateParams',
     '$scope',
@@ -68,7 +60,7 @@
     'selectedCorrs'
   ];
 
-  SelectCorrViewCtrl.$resolve = {
+  CorrSelectCtrl.$resolve = {
     corrs: [
       '$stateParams',
       'Corr',
@@ -82,5 +74,5 @@
     ]
   };
 
-  angular.module('ems').controller('SelectCorrViewCtrl', SelectCorrViewCtrl);
+  angular.module('gva').controller('CorrSelectCtrl', CorrSelectCtrl);
 }(angular, _));

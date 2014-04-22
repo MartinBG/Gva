@@ -232,5 +232,31 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 this.unitOfWork.DbContext.Set<GvaLotObject>().Remove(lotObject);
             }
         }
+
+        public IEnumerable<Set> GetLotSets(
+            string names = null,
+            bool exact = false,
+            int offset = 0,
+            int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<Set>();
+
+            predicate = predicate
+                .AndStringMatches(p => p.Name, names, exact);
+
+            var persons = this.unitOfWork.DbContext.Set<Set>()
+                .Where(predicate);
+
+            return persons
+                .OrderBy(p => p.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
+        }
+
+        public Set GetLotSet(int lotSetId)
+        {
+            return this.unitOfWork.DbContext.Set<Set>()
+                .SingleOrDefault(p => p.SetId == lotSetId);
+        }
     }
 }

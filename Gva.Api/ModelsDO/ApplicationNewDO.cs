@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO
 
         public string LotSetAlias { get; set; }
 
-        public DocDO Doc { get; set; }
+        public PreDocDO PreDoc { get; set; }
 
         public JObject AppPart { get; set; }
 

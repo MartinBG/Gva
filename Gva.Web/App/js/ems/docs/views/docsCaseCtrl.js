@@ -12,6 +12,7 @@
   ) {
     $scope.appId = application.id;
     $scope.docId = doc.docId;
+    $scope.isCase = doc.isCase;
     $scope.docRelations = _.map(_.cloneDeep(doc.docRelations), function (docRelation) {
       docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
       docRelation.docDescriptionHtml = $sce.trustAsHtml(docRelation.docDescriptionHtml);
@@ -25,6 +26,10 @@
 
     $scope.viewApplication = function (applicationId) {
       return $state.go('root.applications.edit.case', { id: applicationId });
+    };
+
+    $scope.linkApplication = function () {
+      return $state.go('root.docs.edit.case.linkApp');
     };
   }
 

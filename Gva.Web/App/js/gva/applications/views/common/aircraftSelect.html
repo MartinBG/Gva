@@ -9,7 +9,8 @@
 
 <sc-datatable items="aircrafts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-   <sc-button btn-click="selectAircraft(item)" text="applications.aircraftSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="selectAircraft(item)" text="applications.aircraftSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="viewAircraft(item)" text="applications.aircraftSelect.viewAircraft" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
   <sc-column data="manSN" title="applications.aircraftSelect.manSN">
   </sc-column>

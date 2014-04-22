@@ -3,6 +3,15 @@
   'use strict';
 
   function PersonNewCtrl($scope, $state, Person, selectedPerson) {
+    var personData = {
+      firstName: $state.payload ? $state.payload.firstName : null,
+      lastName: $state.payload ? $state.payload.lastName : null,
+      uin: $state.payload ? $state.payload.uin : null
+    };
+
+    $scope.newPerson = {
+      personData: personData
+    };
 
     $scope.save = function () {
       return $scope.newPersonForm.$validate()

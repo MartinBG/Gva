@@ -106,6 +106,11 @@ namespace Docs.Api.DataObjects
                 {
                     this.IsRead = d.DocHasReads.Any(e => e.UnitId == unitUser.UnitId && e.HasRead);
                 }
+
+                if (d.DocSourceType != null)
+                {
+                    this.IsElectronic = d.DocSourceType.Alias == "Internet";
+                }
             }
         }
 
@@ -138,6 +143,7 @@ namespace Docs.Api.DataObjects
         public bool IsSigned { get; set; }
 
         public bool IsSelected { get; set; }
+        public bool IsElectronic { get; set; }
 
         public bool IsActive { get; set; }
         public byte[] Version { get; set; }

@@ -7,6 +7,7 @@
     $scope,
     $state,
     $stateParams,
+    $sce,
     Application,
     appModel,
     selectedPerson,
@@ -17,33 +18,34 @@
     selectedDoc
     ) {
     if (selectedPerson.length > 0) {
-      appModel.person = {
+      appModel.lot = {
         id: selectedPerson.pop()
       };
     }
     if (selectedOrganization.length > 0) {
-      appModel.organization = {
+      appModel.lot = {
         id: selectedOrganization.pop()
       };
     }
     if (selectedAircraft.length > 0) {
-      appModel.aircraft = {
+      appModel.lot = {
         id: selectedAircraft.pop()
       };
     }
     if (selectedAirport.length > 0) {
-      appModel.airport = {
+      appModel.lot = {
         id: selectedAirport.pop()
       };
     }
     if (selectedEquipment.length > 0) {
-      appModel.equipment = {
+      appModel.lot = {
         id: selectedEquipment.pop()
       };
     }
 
     if (selectedDoc.length > 0) {
       appModel.doc = selectedDoc.pop();
+      appModel.doc.correspondentNames = $sce.trustAsHtml(appModel.doc.correspondentNames);
     }
 
     $scope.appModel = appModel;
@@ -51,17 +53,55 @@
     $scope.setPartAlias = '';
 
     $scope.newPerson = function () {
-      return $state.go('root.applications.link.personNew');
+      var personData = {};
+      if ($scope.appModel.doc) {
+        if ($scope.appModel.doc.docCorrespondents.length > 0) {
+          personData.uin = $scope.appModel.doc.docCorrespondents[0].bgCitizenUIN;
+          personData.firstName = $scope.appModel.doc.docCorrespondents[0].bgCitizenFirstName;
+          personData.lastName = $scope.appModel.doc.docCorrespondents[0].bgCitizenLastName;
+        }
+      }
+
+      return $state.go('root.applications.link.personNew', null, null, personData);
     };
     $scope.selectPerson = function () {
-      return $state.go('root.applications.link.personSelect');
+      var uin, names, firstName, lastName;
+      if ($scope.appModel.doc) {
+        if ($scope.appModel.doc.docCorrespondents.length > 0) {
+          uin = $scope.appModel.doc.docCorrespondents[0].bgCitizenUIN;
+          firstName = $scope.appModel.doc.docCorrespondents[0].bgCitizenFirstName;
+          lastName = $scope.appModel.doc.docCorrespondents[0].bgCitizenLastName;
+
+          if (!!firstName && !!lastName) {
+            names = firstName + ' ' + lastName;
+          }
+        }
+      }
+
+      return $state.go('root.applications.link.personSelect', { uin: uin, names: names });
     };
 
     $scope.newOrganization = function () {
-      return $state.go('root.applications.link.organizationNew');
+      var organizationData = {};
+      if ($scope.appModel.doc) {
+        if ($scope.appModel.doc.docCorrespondents.length > 0) {
+          organizationData.name = $scope.appModel.doc.docCorrespondents[0].legalEntityName;
+          organizationData.uin = $scope.appModel.doc.docCorrespondents[0].legalEntityBulstat;
+        }
+      }
+
+      return $state.go('root.applications.link.organizationNew', null, null, organizationData);
     };
     $scope.selectOrganization = function () {
-      return $state.go('root.applications.link.organizationSelect');
+      var uin, name;
+      if ($scope.appModel.doc) {
+        if ($scope.appModel.doc.docCorrespondents.length > 0) {
+          uin = $scope.appModel.doc.docCorrespondents[0].legalEntityBulstat;
+          name = $scope.appModel.doc.docCorrespondents[0].legalEntityName;
+        }
+      }
+
+      return $state.go('root.applications.link.organizationSelect', { uin: uin, name: name });
     };
 
     $scope.newAircraft = function () {
@@ -86,7 +126,9 @@
     };
 
     $scope.selectDoc = function () {
-      return $state.go('root.applications.link.docSelect', { hasLot: false });
+      var regUri = $scope.appModel.doc ? $scope.appModel.doc.regUri : null;
+
+      return $state.go('root.applications.link.docSelect', { hasLot: false, regUri: regUri });
     };
 
     $scope.cancel = function () {
@@ -100,31 +142,27 @@
     $scope.link = function () {
       return $scope.appForm.$validate()
       .then(function () {
-        if ($scope.appForm.$valid) {
+        if ($scope.appForm.$valid && $scope.appModel.doc) {
 
           var newApplication = {
-            lotId: null,
+            lotId: $scope.appModel.lot.id,
             docId: $scope.appModel.doc.docId
           };
 
+          //todo make it better
           if ($scope.filter === 'Person') {
-            newApplication.lotId = $scope.appModel.person.id;
             $scope.setPartAlias = 'personApplication';
           }
           else if ($scope.filter === 'Organization') {
-            newApplication.lotId = $scope.appModel.organization.id;
             $scope.setPartAlias = 'organizationApplication';
           }
           else if ($scope.filter === 'Aircraft') {
-            newApplication.lotId = $scope.appModel.aircraft.id;
             $scope.setPartAlias = 'aircraftApplication';
           }
           else if ($scope.filter === 'Airport') {
-            newApplication.lotId = $scope.appModel.airport.id;
             $scope.setPartAlias = 'airportApplication';
           }
           else if ($scope.filter === 'Equipment') {
-            newApplication.lotId = $scope.appModel.equipment.id;
             $scope.setPartAlias = 'equipmentApplication';
           }
 
@@ -152,6 +190,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    '$sce',
     'Application',
     'appModel',
     'selectedPerson',
