@@ -165,8 +165,7 @@
             }
 
             return $state.go('root.applications.new.corrSelect', {
-              displayName: displayName,
-              email: data.part.email
+              displayName: displayName
             });
           });
         }

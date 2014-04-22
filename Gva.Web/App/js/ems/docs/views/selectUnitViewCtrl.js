@@ -13,16 +13,9 @@
       return $state.go('^');
     }
 
-    $scope.units = _.map(units, function (unit) {
-      var su = _(selectedUnits.units).filter({ nomValueId: unit.nomValueId }).first();
-
-      if (!su) {
-        return unit;
-      }
-    });
-
-    $scope.units = _.filter($scope.units, function (unit) {
-      return !!unit;
+    $scope.units = units;
+    $scope.selectedUnits = _.map(selectedUnits.units, function (unit) {
+      return unit.nomValueId;
     });
 
     $scope.filters = {

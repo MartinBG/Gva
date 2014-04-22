@@ -392,6 +392,10 @@ table.sc-data-table th.sorting span
   cursor: pointer;
 }
 
+.accordion-toggle a {
+    cursor: pointer;
+}
+
 table.table thead th {
     background-color: #f5f5f5;
 }

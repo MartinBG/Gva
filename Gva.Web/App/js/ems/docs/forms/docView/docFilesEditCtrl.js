@@ -1,8 +1,8 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
-  function DocFilesEditCtrl($scope) {
+  function DocFilesEditCtrl($scope, Nomenclature) {
     $scope.editDocFile = function editDocFile(target) {
       target.isInEdit = true;
       target.prevValues = {
@@ -71,13 +71,22 @@
       };
 
       $scope.model.docFiles = $scope.model.docFiles || [];
-      $scope.model.docFiles.push(docFile);
+
+      return Nomenclature.query({ alias: 'docFileKind' }).$promise
+        .then(function (result) {
+          var docFileKind = _(result).filter({ alias: 'PublicAttachedFile' }).first();
+
+          docFile.docFileKindId = docFileKind.nomValueId;
+          docFile.docFileKind = docFileKind;
+          $scope.model.docFiles.push(docFile);
+        });
     };
   }
 
   DocFilesEditCtrl.$inject = [
-    '$scope'
+    '$scope',
+    'Nomenclature'
   ];
 
   angular.module('ems').controller('DocFilesEditCtrl', DocFilesEditCtrl);
-}(angular));
+}(angular, _));

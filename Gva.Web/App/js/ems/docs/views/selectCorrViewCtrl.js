@@ -12,22 +12,18 @@
     if (!selectedCorrs.onCorrSelect) {
       return $state.go('^');
     }
-    $scope.corrs = _.map(corrs.correspondents, function (corr) {
-      var sc = _(selectedCorrs.corrs).filter({ nomValueId: corr.correspondentId }).first();
 
-      if (!sc) {
-        return {
-          correspondentId: corr.correspondentId,
-          displayName: corr.displayName,
-          email: corr.email,
-          correspondentTypeName: corr.correspondentTypeName
-        };
-      }
+    $scope.corrs = _.map(corrs.correspondents, function (corr) {
+      return {
+        correspondentId: corr.correspondentId,
+        displayName: corr.displayName,
+        email: corr.email,
+        correspondentTypeName: corr.correspondentTypeName
+      };
     });
     $scope.corrCount = corrs.correspondentCount;
-
-    $scope.corrs = _.filter($scope.corrs, function (corr) {
-      return !!corr;
+    $scope.selectedCorrs = _.map(selectedCorrs.corrs, function(corr) {
+      return corr.nomValueId;
     });
 
     $scope.filters = {
@@ -52,8 +48,7 @@
     $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
         nomValueId: corr.correspondentId,
-        name: corr.displayName,
-        content: corr
+        name: corr.displayName
       };
 
       selectedCorrs.onCorrSelect(nomItem);
@@ -81,7 +76,7 @@
         return Corr.get(
           {
             displayName: $stateParams.displayName,
-            email: $stateParams.email
+            correspondentEmail: $stateParams.email
           }).$promise;
       }
     ]

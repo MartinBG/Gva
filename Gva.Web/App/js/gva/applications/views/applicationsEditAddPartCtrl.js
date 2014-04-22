@@ -115,7 +115,7 @@
             alias: $stateParams.setPartAlias
           }).first().name;
             
-          res.docFile = res.docFile || { name: docPartTypeName };
+          res.docFile = res.docFile || { name: docPartTypeName, docFileKindId: 2 };
 
           if (res.docValues && res.docValues.values) {
             _.assign(part, res.docValues.values);
