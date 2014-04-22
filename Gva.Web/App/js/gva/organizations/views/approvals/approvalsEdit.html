@@ -2,7 +2,7 @@
   <h5 class="form-header" l10n-text="organizations.approvalEdit.amendments"></h5>
   <div>
 
-    <sc-datatable items="organizationApproval.part.amendments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-datatable items="approval.part.amendments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
       <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
         <input type="radio" ng-checked="item === currentAmendment" sc-click="selectAmendment(item)">
       </sc-column>

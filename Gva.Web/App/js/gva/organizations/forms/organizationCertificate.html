@@ -23,7 +23,7 @@
       <label class="control-label" l10n-text="organizations.certificateDirective.organization"></label>
       <sc-nomenclature ng-model="model.organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-3 col-md-2">
+    <div class="form-group col-sm-3 col-md-2" ng-if="$parent.certGroundServiceOperatorForm || $parent.certAirportOperatorForm">
       <label class="control-label" l10n-text="organizations.certificateDirective.airport"></label>
       <sc-nomenclature ng-model="model.airport" alias="'airports'" ng-readonly="readonly"></sc-nomenclature>
     </div>
