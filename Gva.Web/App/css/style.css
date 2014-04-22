@@ -401,3 +401,8 @@ table.table thead th {
 .ems-portal-modal-window .modal-dialog {
   width: 1065px;
 }
+
+ul.checkbox-list li {
+    padding-left: 0px;
+    width: 120px;
+}
