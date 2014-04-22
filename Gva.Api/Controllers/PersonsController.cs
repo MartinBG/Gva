@@ -239,21 +239,20 @@ namespace Gva.Api.Controllers
             int nextIndex = partContent.Get<int>("nextIndex");
             var part = lot.Parts.FirstOrDefault(p => p.Path == path);
 
-            foreach (var edition in partContent.GetItems("editions"))
+            foreach (var edition in partContent.GetItems<JObject>("editions"))
             {
                 if (!edition.Get<int?>("index").HasValue)
                 {
-                    (edition as JObject).Add("index", nextIndex);
+                    edition.Add("index", nextIndex);
                     nextIndex++;
                 }
 
                 this.applicationRepository.AddApplicationRefs(part, edition.GetItems<ApplicationNomDO>("applications"));
             }
 
-            var nextIndexToken = partContent.Get("nextIndex");
-            nextIndexToken.Replace(nextIndex);
+            partContent.Get("nextIndex").Replace(nextIndex);
 
-            lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
+            lot.UpdatePart(path, partContent, userContext);
 
             lot.Commit(userContext, lotEventDispatcher);
 

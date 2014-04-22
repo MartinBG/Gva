@@ -1843,7 +1843,8 @@
           authorization: 'Разрешение',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingCategory: 'Категория',
-          personRatingModel: 'Модел'
+          personRatingModel: 'Модел',
+          administration: 'Администрация'
         },
         licenceDirective: {
           staffType: 'Тип персонал',

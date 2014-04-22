@@ -40,21 +40,28 @@
   RatingsNewCtrl.$resolve = {
     rating: [
       'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {
-              editions: [{ applications: [application] }]
+      'Nomenclature',
+      function (application, Nomenclature) {
+        return Nomenclature
+          .get({ alias: 'caa', valueAlias: 'BG' })
+          .$promise
+          .then(function (caa) {
+            if (application) {
+              return {
+                part: {
+                  caa: caa,
+                  editions: [{ applications: [application] }]
+                }
+              };
+            } else {
+              return {
+                part: {
+                  caa: caa,
+                  editions: [{}]
+                }
+              };
             }
-          };
-        }
-        else {
-          return {
-            part: {
-              editions: [{}]
-            }
-          };
-        }
+          });
       }
     ]
   };
