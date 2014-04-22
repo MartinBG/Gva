@@ -586,7 +586,8 @@ namespace Docs.Api.Controllers
                 e => e.DocEntryType,
                 e => e.DocCasePartType,
                 e => e.DocDirection,
-                e => e.DocType);
+                e => e.DocType,
+                e => e.DocSourceType);
 
             if (doc == null)
             {

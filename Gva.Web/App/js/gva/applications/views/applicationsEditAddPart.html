@@ -2,7 +2,7 @@
   <ng-form name="addFormWrapper" sc-validate="{}">
     <div class="panel panel-default" style="margin-top: 10px">
       <div class="panel-heading">
-        <strong l10n-text="applications.edit.addPart.title"></strong>
+        <strong>{{ applicationPart.docPartTypeName }}</strong>
         <div class="pull-right">
           <sc-button ng-if="!applicationPart.hasDocFile" name="saveBtn" btn-click="addPart()" text="applications.edit.addPart.save"
             class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">

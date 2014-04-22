@@ -105,3 +105,9 @@ DBCC CHECKIDENT ('NomValues', RESEED, 999)
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
 :r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
+
+---------------------------------------------------------------
+-- AS Exams test noms
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\Noms\commonQuestions.sql"
+:r $(rootPath)\"..\Insert\Noms\specializedQuestions.sql"

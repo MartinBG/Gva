@@ -25,7 +25,7 @@
   <div class="table-responsive">
     <table style="margin-bottom: 0; clear: both;" cellpadding="0" cellspacing="0" border="0" class="table table-bordered sc-data-table"></table>
   </div>
-  <div class="datatable-info-text pull-left" style="padding-top: 8px; font-size: 11px;">{{dataTableTexts.info}}</div>
+  <div class="datatable-info-text pull-left" style="padding-top: 8px; font-size: 11px;" ng-show="pageable">{{dataTableTexts.info}}</div>
   <div class="datatable-filtered-text pull-left" style="margin-left: 3px; padding-top: 8px; font-size: 11px;" ng-show="filter && (items.length !== filteredItems.length)">{{dataTableTexts.filtered}}</div>
   <ul class="pagination pull-right" style="margin: 2px;" ng-show="pageable">
     <li ng-class="{'disabled' : pagingContents.length === 0 || currentPage === 1}"><a href="" ng-click="setCurrentPage(currentPage-1)">{{dataTableTexts.previousPage}}</a></li>

@@ -4,40 +4,99 @@
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     var roles = [{
         roleId: 1,
-        name: 'Role1'
+        name: 'ЛАП четене'
       }, {
         roleId: 2,
-        name: 'Role2'
+        name: 'ЛАП редакция'
+      }, {
+        roleId: 3,
+        name: 'ЛАП админ'
+      }, {
+        roleId: 4,
+        name: 'ВС четене'
+      }, {
+        roleId: 5,
+        name: 'ВС редакция'
+      }, {
+        roleId: 6,
+        name: 'ВС админ'
+      }, {
+        roleId: 7,
+        name: 'ОО четене'
+      }, {
+        roleId: 8,
+        name: 'ОО редакция'
+      }, {
+        roleId: 9,
+        name: 'ОО админ'
+      }, {
+        roleId: 10,
+        name: 'ЛЛП четене'
+      }, {
+        roleId: 11,
+        name: 'ЛЛП редакция'
+      }, {
+        roleId: 12,
+        name: 'ЛЛП админ'
+      }, {
+        roleId: 13,
+        name: 'СУВД четене'
+      }, {
+        roleId: 14,
+        name: 'СУВД редакция'
+      }, {
+        roleId: 15,
+        name: 'СУВД админ'
+      }, {
+        roleId: 16,
+        name: 'АУЦ четене'
+      }, {
+        roleId: 17,
+        name: 'АУЦ редакция'
+      }, {
+        roleId: 18,
+        name: 'АУЦ админ'
+      }, {
+        roleId: 19,
+        name: 'ВП четене'
+      }, {
+        roleId: 20,
+        name: 'ВП редакция'
+      }, {
+        roleId: 21,
+        name: 'ВП админ'
+      }, {
+        roleId: 22,
+        name: 'САО четене'
+      }, {
+        roleId: 23,
+        name: 'САО редакция'
+      }, {
+        roleId: 24,
+        name: 'САО админ'
+      }, {
+        roleId: 25,
+        name: 'АНО четене'
+      }, {
+        roleId: 26,
+        name: 'АНО редакция'
+      }, {
+        roleId: 27,
+        name: 'АНО админ'
+      }, {
+        roleId: 28,
+        name: 'АС четене'
+      }, {
+        roleId: 29,
+        name: 'АС редакция'
+      }, {
+        roleId: 30,
+        name: 'АС админ'
+      }, {
+        roleId: 1,
+        name: 'АИС достъп'
       }],
-      users = [{
-        userId: 1,
-        username: 'admin',
-        fullname: 'Administrator',
-        roles: roles.slice(),
-        isActive: true,
-        hasPassword: true
-      }, {
-        userId: 2,
-        username: 'peter',
-        fullname: 'Peter Ivanov',
-        roles: roles.slice(),
-        isActive: true,
-        hasPassword: true
-      }, {
-        userId: 3,
-        username: 'georgi',
-        fullname: 'Georgi Petrov',
-        roles: roles.slice(),
-        isActive: true,
-        hasPassword: true
-      }, {
-        userId: 4,
-        username: 'test1',
-        fullname: 'iztrit',
-        roles: roles.slice(),
-        isActive: false,
-        certificateThumbprint: '1234'
-      }],
+      users = [],
       nextUserId = 5;
 
     $httpBackendConfiguratorProvider

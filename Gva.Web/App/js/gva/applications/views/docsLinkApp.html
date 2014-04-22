@@ -1,0 +1,33 @@
+﻿<div class="well-sm panel-body">
+  <ng-form name="linkAppForm" sc-validate="{}">
+    <div class="well-sm">
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-4" sc-has-error="lotSet">
+          <label class="control-label" l10n-text="applications.lotSet"></label>
+          <sc-validation-error field-name="lotSet" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature ng-model="appModel.lotSet" name="lotSet" alias="'lotSets'" required></sc-nomenclature>
+        </div>
+      </div>
+      <div ng-if="appModel.lotSet.alias === 'Person'">
+        <gva-application-select-person name="personForm" ng-model="appModel" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()"></gva-application-select-person>
+      </div>
+      <div ng-if="appModel.lotSet.alias === 'Organization'">
+        <gva-application-select-organization name="organizationForm" ng-model="appModel" sc-on-select-organization="selectOrganization()" sc-on-new-organization="newOrganization()"></gva-application-select-organization>
+      </div>
+      <div ng-if="appModel.lotSet.alias === 'Aircraft'">
+        <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" sc-on-select-aircraft="selectAircraft()" sc-on-new-aircraft="newAircraft()"></gva-application-select-aircraft>
+      </div>
+      <div ng-if="appModel.lotSet.alias === 'Airport'">
+        <gva-application-select-airport name="airportForm" ng-model="appModel" sc-on-select-airport="selectAirport()" sc-on-new-airport="newAirport()"></gva-application-select-airport>
+      </div>
+      <div ng-if="appModel.lotSet.alias === 'Equipment'">
+        <gva-application-select-equipment name="equipmentForm" ng-model="appModel" sc-on-select-equipment="selectEquipment()" sc-on-new-equipment="newEquipment()"></gva-application-select-equipment>
+      </div>
+    </div>
+  </ng-form>
+
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="save()" text="docs.edit.case.casePart.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.case.casePart.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+  </div>
+</div>

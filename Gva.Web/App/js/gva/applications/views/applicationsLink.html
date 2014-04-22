@@ -10,28 +10,36 @@
       <ng-form name="appForm" sc-validate="{}">
         <div class="well-sm panel-body">
 
-          <div class="row card" ng-class="{'has-error': !appModel.doc.docId && appForm.$validated}">
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="applications.link.docNumber"/>
-                <input disabled="disabled" name="regUri" type="text" class="form-control" value="{{ appModel.doc.regUri }}">
-              </div>
+          <div class="row">
+
+            <div class="col-md-9">
+              <table class="table table-bordered table-condensed" ng-class="{'table-bordered-red': !appModel.doc.docId && appForm.$validated}">
+                <thead>
+                  <tr>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.regDate"></span></th>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.regUri"></span></th>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.docSubject"></span></th>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.docDirectionName"></span></th>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.docStatusName"></span></th>
+                    <th ng-class="{ 'clear-border-bottom': !appModel.doc.docId}"><span l10n-text="applications.docSelect.correspondentName"></span></th>
+                  </tr>
+                </thead>
+                <tbody ng-show="appModel.doc.docId">
+                  <tr>
+                    <td>{{ appModel.doc.regDate | date:'dd.MM.yyyy' }}</td>
+                    <td>{{ appModel.doc.regUri }}</td>
+                    <td>{{ appModel.doc.docSubject }}</td>
+                    <td>{{ appModel.doc.docDirectionName }}</td>
+                    <td>{{ appModel.doc.docStatusName }}</td>
+                    <td ng-bind-html="appModel.doc.correspondentNames"></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="applications.link.docName"/>
-                <input disabled="disabled" name="docTypeName" type="text" class="form-control" value="{{ appModel.doc.docTypeName }}">
-              </div>
-            </div>
-            <div class="form-group col-md-3">
-              <div class="input-group input-group-sm">
-                <span class="input-group-addon" l10n-text="applications.link.docStatus"/>
-                <input disabled="disabled" name="docStatusName" type="text" class="form-control" value="{{ appModel.doc.docStatusName }}">
-              </div>
-            </div>
-            <div class="form-group col-md-3">
+
+            <div class="col-md-3">
                 <sc-button btn-click="clear()" name="clearBtn" text="applications.link.clear" class="btn btn-default btn-sm"></sc-button>
-                <sc-button btn-click="selectDoc()" name="selectDocBtn" text="applications.link.selectDoc" class="btn btn-default btn-sm"></sc-button>
+                <sc-button btn-click="selectDoc()" name="selectDocBtn" text="applications.link.selectDoc" class="btn btn-default btn-sm" icon="glyphicon glyphicon-search"></sc-button>
             </div>
           </div>
 
@@ -50,9 +58,8 @@
           <div ng-if="filter === 'Equipment'">
             <gva-application-select-equipment name="equipmentForm" ng-model="appModel" sc-on-select-equipment="selectEquipment()" sc-on-new-equipment="newEquipment()"></gva-application-select-equipment>
           </div>
-          
-        </div>
-      </form>
     </div>
+    </ng-form>
   </div>
+</div>
 </div>

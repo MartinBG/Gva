@@ -7,20 +7,21 @@
       name: null
     };
 
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
+    _.forOwn(_.pick($stateParams, ['name']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
+      });
 
-    Equipment.query($stateParams).$promise.then(function (equipments) {
+    Equipment.query($scope.filters).$promise.then(function (equipments) {
       $scope.equipments = equipments;
     });
 
     $scope.search = function () {
-      $state.go($state.current, {
-        name: $scope.filters.name
-      }, { reload: true });
+      $state.go($state.current, _.assign($scope.filters, {
+        stamp: new Date().getTime()
+      }));
     };
 
     $scope.cancel = function () {
@@ -30,6 +31,10 @@
     $scope.selectEquipment = function (result) {
       selectedEquipment.push(result.id);
       return $state.go('^');
+    };
+
+    $scope.viewEquipment = function (result) {
+      return $state.go('root.equipments.view.edit', { id: result.id });
     };
   }
 

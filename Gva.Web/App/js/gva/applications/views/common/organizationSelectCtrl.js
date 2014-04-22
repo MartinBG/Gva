@@ -10,27 +10,25 @@
     selectedOrganization
     ) {
     $scope.filters = {
-      name: null
+      name: null,
+      uin: null
     };
 
-    _.forOwn($stateParams, function (value, param) {
-      if (value !== null && value !== undefined) {
-        $scope.filters[param] = value;
-      }
-    });
+    _.forOwn(_.pick($stateParams, ['CAO', 'uin', 'dateValidTo', 'dateCAOValidTo', 'name']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
+      });
 
-    Organization.query($stateParams).$promise.then(function (organizations) {
+    Organization.query($scope.filters).$promise.then(function (organizations) {
       $scope.organizations = organizations;
     });
 
     $scope.search = function () {
-      $state.go($state.current, {
-        CAO: $scope.filters.CAO,
-        uin: $scope.filters.uin,
-        dateValidTo: $scope.filters.dateValidTo,
-        dateCAOValidTo: $scope.filters.dateCAOValidTo,
-        name: $scope.filters.name
-      }, { reload: true });
+      $state.go($state.current, _.assign($scope.filters, {
+        stamp: new Date().getTime()
+      }));
     };
 
     $scope.cancel = function () {
@@ -40,6 +38,10 @@
     $scope.selectOrganization = function (result) {
       selectedOrganization.push(result.id);
       return $state.go('^');
+    };
+
+    $scope.viewOrganization = function (result) {
+      return $state.go('root.organizations.view.edit', { id: result.id });
     };
   }
 

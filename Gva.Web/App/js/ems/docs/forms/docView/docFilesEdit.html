@@ -2,19 +2,19 @@
   <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-          <th l10n-text="docs.edit.view.docFile.kind"></th>
           <th l10n-text="docs.edit.view.docFile.name"></th>
+          <th l10n-text="docs.edit.view.docFile.kind"></th>
           <th l10n-text="docs.edit.view.docFile.attachedFile" style="width: 300px;"></th>
           <th style="width: 70px;"></th>
         </tr>
     </thead>
     <tbody>
       <tr ng-repeat="df in model.docFiles | filter: { isDeleted: false }" ng-form sc-form-name="{ local: 'form', parent: 's' + $index }" sc-validate="{}">
-        <td style="width: 150px;" sc-has-error="docFileKind">
-            <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
-        </td>
         <td style="width: 300px;" sc-has-error="name">
           <sc-text name="name" ng-model="df.name" ng-readonly="!df.isInEdit" required></sc-text>
+        </td>
+        <td style="width: 150px;" sc-has-error="docFileKind">
+            <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
         </td>
         <td sc-has-error="docFile">
           <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>

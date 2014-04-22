@@ -4,7 +4,7 @@
       <label class="control-label" l10n-text="applications.aircraftSelect.aircraft"></label>
       <sc-validation-error field-name="aircraftLotId" validations="{required: null}"></sc-validation-error>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.aircraft.id" alias="'aircrafts'" mode="id" name="aircraftLotId" required style="float: left;"></sc-nomenclature>
+        <sc-nomenclature ng-model="model.lot.id" alias="'aircrafts'" mode="id" name="aircraftLotId" required style="float: left;"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectAircraft')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
           <sc-button btn-click="$raise('scOnNewAircraft')" class="btn btn-default" text="applications.aircraftSelect.newAircraft"></sc-button>

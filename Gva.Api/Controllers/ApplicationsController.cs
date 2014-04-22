@@ -414,118 +414,118 @@ namespace Gva.Api.Controllers
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
                 DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == "Public".ToLower());
-                DocSourceType manuelSoruce = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
+                DocSourceType manualSource = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Manual");
 
-                var gvaCorrespondent = this.applicationRepository.GetGvaCorrespondentByLotId(applicationNewDO.LotId);
-                Correspondent correspondent = null;
-                if (gvaCorrespondent == null)
-                {
-                    var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-                    CorrespondentGroup applicantCorrespondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>().SingleOrDefault(e => e.Alias == "Applicants");//?
-                    CorrespondentType bgCorrespondentType = this.unitOfWork.DbContext.Set<CorrespondentType>().SingleOrDefault(e => e.Alias == "BulgarianCitizen");//?
+                //var gvaCorrespondent = this.applicationRepository.GetGvaCorrespondentByLotId(applicationNewDO.LotId);
+                //Correspondent correspondent = null;
+                //if (gvaCorrespondent == null)
+                //{
+                //    var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
+                //    CorrespondentGroup applicantCorrespondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>().SingleOrDefault(e => e.Alias == "Applicants");//?
+                //    CorrespondentType bgCorrespondentType = this.unitOfWork.DbContext.Set<CorrespondentType>().SingleOrDefault(e => e.Alias == "BulgarianCitizen");//?
 
-                    if (applicationNewDO.LotSetAlias == "Person")
-                    {
-                        JObject personData = lot.GetPartContent("personData");
+                //    if (applicationNewDO.LotSetAlias == "Person")
+                //    {
+                //        JObject personData = lot.GetPartContent("personData");
 
-                        correspondent = this.correspondentRepository.CreateBgCitizen(
-                         applicantCorrespondentGroup.CorrespondentGroupId,
-                         bgCorrespondentType.CorrespondentTypeId,
-                         true,
-                         personData.Get<string>("firstName"),
-                         personData.Get<string>("lastName"),
-                         personData.Get<string>("uin"),
-                         this.userContext);
-                        correspondent.Email = personData.Get<string>("email");
+                //        correspondent = this.correspondentRepository.CreateBgCitizen(
+                //         applicantCorrespondentGroup.CorrespondentGroupId,
+                //         bgCorrespondentType.CorrespondentTypeId,
+                //         true,
+                //         personData.Get<string>("firstName"),
+                //         personData.Get<string>("lastName"),
+                //         personData.Get<string>("uin"),
+                //         this.userContext);
+                //        correspondent.Email = personData.Get<string>("email");
 
-                        correspondent.CreateCorrespondentContact(
-                        String.Format("{0} {1} {2}", personData.Get<string>("firstName"), personData.Get<string>("middleName"), personData.Get<string>("lastName")),
-                        personData.Get<string>("uin"),
-                        null,
-                        true,
-                        userContext);
-                    }
-                    //todo ??
-                    else if (applicationNewDO.LotSetAlias == "Organization")
-                    {
-                        JObject organizationData = lot.GetPartContent("organizationData");
+                //        correspondent.CreateCorrespondentContact(
+                //        String.Format("{0} {1} {2}", personData.Get<string>("firstName"), personData.Get<string>("middleName"), personData.Get<string>("lastName")),
+                //        personData.Get<string>("uin"),
+                //        null,
+                //        true,
+                //        userContext);
+                //    }
+                //    //todo ??
+                //    else if (applicationNewDO.LotSetAlias == "Organization")
+                //    {
+                //        JObject organizationData = lot.GetPartContent("organizationData");
 
-                        correspondent = this.correspondentRepository.CreateBgCitizen(
-                        applicantCorrespondentGroup.CorrespondentGroupId,
-                        bgCorrespondentType.CorrespondentTypeId,
-                        true,
-                        organizationData.Get<string>("name"),
-                        "",
-                        "",
-                        this.userContext);
-                    }
-                    //todo ??
-                    else if (applicationNewDO.LotSetAlias == "Aircraft")
-                    {
-                        JObject aircraftData = lot.GetPartContent("aircraftData");
+                //        correspondent = this.correspondentRepository.CreateBgCitizen(
+                //        applicantCorrespondentGroup.CorrespondentGroupId,
+                //        bgCorrespondentType.CorrespondentTypeId,
+                //        true,
+                //        organizationData.Get<string>("name"),
+                //        "",
+                //        "",
+                //        this.userContext);
+                //    }
+                //    //todo ??
+                //    else if (applicationNewDO.LotSetAlias == "Aircraft")
+                //    {
+                //        JObject aircraftData = lot.GetPartContent("aircraftData");
 
-                        correspondent = this.correspondentRepository.CreateBgCitizen(
-                        applicantCorrespondentGroup.CorrespondentGroupId,
-                        bgCorrespondentType.CorrespondentTypeId,
-                        true,
-                        (aircraftData.Get<string>("model") + " " + aircraftData.Get<string>("icao")),
-                        "",
-                        "",
-                        this.userContext);
-                    }
-                    //todo ?
-                    else if (applicationNewDO.LotSetAlias == "Airport")
-                    {
-                        JObject airportData = lot.GetPartContent("airportData");
+                //        correspondent = this.correspondentRepository.CreateBgCitizen(
+                //        applicantCorrespondentGroup.CorrespondentGroupId,
+                //        bgCorrespondentType.CorrespondentTypeId,
+                //        true,
+                //        (aircraftData.Get<string>("model") + " " + aircraftData.Get<string>("icao")),
+                //        "",
+                //        "",
+                //        this.userContext);
+                //    }
+                //    //todo ?
+                //    else if (applicationNewDO.LotSetAlias == "Airport")
+                //    {
+                //        JObject airportData = lot.GetPartContent("airportData");
 
-                        correspondent = this.correspondentRepository.CreateBgCitizen(
-                        applicantCorrespondentGroup.CorrespondentGroupId,
-                        bgCorrespondentType.CorrespondentTypeId,
-                        true,
-                        (airportData.Get<string>("name") + " " + airportData.Get<string>("airportType.name")),
-                        "",
-                        "",
-                        this.userContext);
-                    }
-                    //todo ?
-                    else if (applicationNewDO.LotSetAlias == "Equipment")
-                    {
-                        JObject equipmentData = lot.GetPartContent("equipmentData");
+                //        correspondent = this.correspondentRepository.CreateBgCitizen(
+                //        applicantCorrespondentGroup.CorrespondentGroupId,
+                //        bgCorrespondentType.CorrespondentTypeId,
+                //        true,
+                //        (airportData.Get<string>("name") + " " + airportData.Get<string>("airportType.name")),
+                //        "",
+                //        "",
+                //        this.userContext);
+                //    }
+                //    //todo ?
+                //    else if (applicationNewDO.LotSetAlias == "Equipment")
+                //    {
+                //        JObject equipmentData = lot.GetPartContent("equipmentData");
 
-                        correspondent = this.correspondentRepository.CreateBgCitizen(
-                        applicantCorrespondentGroup.CorrespondentGroupId,
-                        bgCorrespondentType.CorrespondentTypeId,
-                        true,
-                        (equipmentData.Get<string>("name") + " " + equipmentData.Get<string>("equipmentType.name")),
-                        "",
-                        "",
-                        this.userContext);
-                    }
+                //        correspondent = this.correspondentRepository.CreateBgCitizen(
+                //        applicantCorrespondentGroup.CorrespondentGroupId,
+                //        bgCorrespondentType.CorrespondentTypeId,
+                //        true,
+                //        (equipmentData.Get<string>("name") + " " + equipmentData.Get<string>("equipmentType.name")),
+                //        "",
+                //        "",
+                //        this.userContext);
+                //    }
 
-                    this.unitOfWork.Save();
+                //    this.unitOfWork.Save();
 
-                    gvaCorrespondent = new GvaCorrespondent();
-                    gvaCorrespondent.Correspondent = correspondent;
-                    gvaCorrespondent.LotId = applicationNewDO.LotId;
-                    gvaCorrespondent.IsActive = true;
+                //    gvaCorrespondent = new GvaCorrespondent();
+                //    gvaCorrespondent.Correspondent = correspondent;
+                //    gvaCorrespondent.LotId = applicationNewDO.LotId;
+                //    gvaCorrespondent.IsActive = true;
 
-                    this.applicationRepository.AddGvaCorrespondent(gvaCorrespondent);
-                }
-                else
-                {
-                    correspondent = gvaCorrespondent.Correspondent;
-                }
+                //    this.applicationRepository.AddGvaCorrespondent(gvaCorrespondent);
+                //}
+                //else
+                //{
+                //    correspondent = gvaCorrespondent.Correspondent;
+                //}
 
                 Doc newDoc = docRepository.CreateDoc(
-                    applicationNewDO.Doc.DocDirectionId,
+                    applicationNewDO.PreDoc.DocDirectionId,
                     documentEntryType.DocEntryTypeId,
                     draftStatus.DocStatusId,
-                    applicationNewDO.Doc.DocSubject,
-                    applicationNewDO.Doc.DocCasePartTypeId,
-                    manuelSoruce.DocSourceTypeId,
-                    applicationNewDO.Doc.DocDestinationTypeId,
-                    applicationNewDO.Doc.DocTypeId,
-                    applicationNewDO.Doc.DocFormatTypeId,
+                    applicationNewDO.PreDoc.DocSubject,
+                    applicationNewDO.PreDoc.DocCasePartTypeId,
+                    manualSource.DocSourceTypeId,
+                    null,
+                    applicationNewDO.PreDoc.DocTypeId,
+                    applicationNewDO.PreDoc.DocFormatTypeId,
                     null,
                     userContext);
 
@@ -551,7 +551,7 @@ namespace Gva.Api.Controllers
                         docTypeUnitRoles,
                         importedBy,
                         unitUser,
-                        correspondent != null ? new List<int> { correspondent.CorrespondentId } : null,
+                        applicationNewDO.PreDoc.Correspondents,
                         null,
                         this.userContext);
 
@@ -739,7 +739,7 @@ namespace Gva.Api.Controllers
                 .Include(e => e.DocFileOriginType)
                 .SingleOrDefault(e => e.DocFileId == docFileId);
 
-            if (docFile != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
+            if (docFile != null && docFile.DocFileOriginType != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
             {
                 return Ok(new
                 {

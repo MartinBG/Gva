@@ -8,7 +8,8 @@
 
 <sc-datatable items="airports" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-   <sc-button btn-click="selectAirport(item)" text="applications.airportSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="selectAirport(item)" text="applications.airportSelect.select" class="btn btn-xs btn-primary"></sc-button>
+    <sc-button btn-click="viewAirport(item)" text="applications.airportSelect.viewAirport" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
   <sc-column data="airportType" title="applications.airportSelect.airportType">
   </sc-column>

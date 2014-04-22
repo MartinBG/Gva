@@ -1,0 +1,14 @@
+﻿<sc-button name="createBtn" btn-click="newExam()" text="persons.searchExamAS.newExam" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-button name="editBtn" btn-click="editExam(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.examDate" title="persons.searchExamAS.examDate" type="date">
+  </sc-column>
+  <sc-column data="part.commonQuestion.name" type="date" title="persons.searchExamAS.commonQuestion">
+  </sc-column>
+  <sc-column data="part.specializedQuestion.name" title="persons.searchExamAS.specializedQuestion">
+  </sc-column>
+  <sc-column data="part.inspectors[0].name" title="persons.searchExamAS.inspector">
+  </sc-column>
+</sc-datatable>

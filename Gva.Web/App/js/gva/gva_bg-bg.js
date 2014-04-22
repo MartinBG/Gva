@@ -43,8 +43,8 @@
         },
         disparityDirective: {
           subject: 'Тема',
-          sortOrder: 'Пореден №',
-          refNumber: 'Референтен №',
+          sortOrder: '№',
+          refNumber: 'Реф. №',
           description: 'Описание на несъответствие',
           disparityLevel: 'Ниво',
           removalDate: 'Дата за отстраняване',
@@ -1624,7 +1624,8 @@
           docs: 'Документи',
           others: 'Други',
           inventory: 'Опис',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          examASs: 'Теор. изпити АС'
         },
         search: {
           names: 'Име',
@@ -1638,6 +1639,35 @@
           no: 'Не',
           'new': 'Ново лице',
           search: 'Търси'
+        },
+        examDirective: {
+          commonQuestions: 'Основни знания',
+          specializedQuestions: 'Специализирани знания',
+          examDate: 'Дата',
+          inspectors: 'Инспектори',
+          score: 'Точки',
+          passed: 'Издържал',
+          grade: 'Изчисляване',
+          grading: 'Оценяване'
+        },
+        newExamAS: {
+          title: 'Нов на теоретичен изпит АС',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        searchExamAS: {
+          examDate: 'Дата',
+          commonQuestion: 'Основни знания',
+          specializedQuestion: 'Специализирани знания',
+          inspector: 'Инспектор',
+          newExam: 'Нов теоретичен изпит АС'
+        },
+        editExamAS: {
+          title: 'Редакция на теоретичен изпит АС',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteExam: 'Изтрий'
         },
         personDataDirective: {
           lin: 'ЛИН',
@@ -2403,6 +2433,7 @@
         }
       },
       applications: {
+        lotSet: 'Тип на дело',
         edit: {
           equipmentName: 'Име',
           equipmentType: 'Тип',
@@ -2499,7 +2530,8 @@
           manDate: 'Дата на производство',
           place: 'Местоположение',
           operationalDate: 'Дата на въвеждане в експлоатация',
-          search: 'Търси'
+          search: 'Търси',
+          viewEquipment: 'Преглед'
         },
         equipmentNew: {
           title: 'Ново съоръжение',
@@ -2519,7 +2551,8 @@
           course: 'Курс',
           excess: 'Превишение ',
           concrete: 'Полоса-бетон',
-          search: 'Търси'
+          search: 'Търси',
+          viewAirport: 'Преглед'
         },
         airportNew: {
           title: 'Ново летище',
@@ -2545,12 +2578,13 @@
           modifOrWingColor: 'Модификация/Цвят на крило',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewAircraft: 'Преглед'
         },
         organizationSelect: {
           organization: 'Организация',
           newOrganization: 'Нова организация',
-          uin: 'ЕГН',
+          uin: 'БУЛСТАТ',
           name: 'Наименование',
           CAO: 'CAO',
           dateValidTo: 'Валидност до',
@@ -2559,10 +2593,26 @@
           organizationType: 'Тип организация',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewOrganization: 'Преглед'
         },
         organizationNew: {
           title: 'Нова организация',
+          saveAndSelect: 'Запис и избор',
+          cancel: 'Отказ'
+        },
+        corrSelect: {
+          correspondent: 'Кореспондент',
+          newCorr: 'Нов кореспондент',
+          displayName: 'Наименование',
+          email: 'Имейл',
+          correspondentType: 'Тип',
+          search: 'Търси',
+          cancel: 'Назад',
+          select: 'Избор'
+        },
+        corrNew: {
+          title: 'Нов кореспондент',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -2570,6 +2620,7 @@
           person: 'Заявител',
           newPerson: 'Нов заявител',
           select: 'Избери',
+          viewPerson: 'Преглед',
           cancel: 'Отказ',
           names: 'Име',
           lin: 'ЛИН',
@@ -2608,7 +2659,8 @@
           correspondentName: 'Кореспондент',
           search: 'Търси',
           cancel: 'Отказ',
-          select: 'Избери'
+          select: 'Избери',
+          viewDoc: 'Преглед'
         },
         search: {
           fromDate: 'От дата на заявител',
@@ -3391,6 +3443,8 @@
         'root.applications.new.airportNew': 'Ново летище',
         'root.applications.new.equipmentSelect': 'Избор на съоръжение',
         'root.applications.new.equipmentNew': 'Ново съоръжение',
+        'root.applications.new.corrSelect': 'Избор на кореспондент',
+        'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
         'root.applications.link.personSelect': 'Избор на заявител',
@@ -3472,6 +3526,9 @@
         'root.persons.view.exams': 'Теоритични изпити',
         'root.persons.view.exams.new': 'Нов теоритичен изпит',
         'root.persons.view.exams.edit': 'Детайли за теоритичен изпит',
+        'root.persons.view.examASs': 'Теоритични изпити АС',
+        'root.persons.view.examASs.new': 'Нов теоритичен изпит АС',
+        'root.persons.view.examASs.edit': 'Детайли за теоритичен изпит АС',
         'root.persons.view.inventory': 'Опис',
         'root.persons.view.documentOthers': 'Други документи',
         'root.persons.view.documentOthers.new': 'Нов документ',

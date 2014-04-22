@@ -82,12 +82,12 @@
     applicationPart: [
       '$q',
       '$stateParams',
+      'Nomenclature',
+      'l10n',
       'Application',
       'application',
-      function ($q, $stateParams, Application, application) {
-        var docFile,
-            doc,
-            docValues;
+      function ($q, $stateParams, Nomenclature, l10n, Application, application) {
+        var docFile, doc, docValues;
 
         if (($stateParams.setPartAlias === 'personApplication' ||
           $stateParams.setPartAlias === 'organizationApplication' ||
@@ -107,10 +107,15 @@
         return $q.all({
           doc: doc && doc.$promise,
           docFile: docFile && docFile.$promise,
-          docValues: docValues && docValues.$promise
+          docValues: docValues && docValues.$promise,
+          docPartType: Nomenclature.query({ alias: 'documentParts' }).$promise
         }).then(function (res) {
           var part = {};
-          res.docFile = res.docFile || {};
+          var docPartTypeName = _(res.docPartType).filter({
+            alias: $stateParams.setPartAlias
+          }).first().name;
+            
+          res.docFile = res.docFile || { name: docPartTypeName, docFileKindId: 2 };
 
           if (res.docValues && res.docValues.values) {
             _.assign(part, res.docValues.values);
@@ -133,7 +138,8 @@
             hasDocFile: !!$stateParams.docFileId,
             setPartAlias: $stateParams.setPartAlias,
             appFile: res.docFile,
-            part: part
+            part: part,
+            docPartTypeName: l10n.applications.edit.addPart.title + ': ' + docPartTypeName
           };
         });
       }
