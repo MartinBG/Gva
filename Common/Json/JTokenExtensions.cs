@@ -11,13 +11,19 @@ namespace Common.Json
     {
         public static JToken Get(this JToken o, string path)
         {
-            return o.SelectToken(path);
+            var token = o.SelectToken(path);
+            if (token == null || token.Type == JTokenType.Null)
+            {
+                return null;
+            }
+
+            return token;
         }
 
         public static T Get<T>(this JToken o, string path)
         {
             var token = o.SelectToken(path);
-            if (token == null)
+            if (token == null || token.Type == JTokenType.Null)
             {
                 return default(T);
             }
@@ -35,7 +41,7 @@ namespace Common.Json
         public static IEnumerable<JToken> GetItems(this JToken o, string path)
         {
             var token = o.SelectToken(path);
-            if (token == null)
+            if (token == null || token.Type == JTokenType.Null)
             {
                 return Enumerable.Empty<JToken>();
             }
@@ -46,7 +52,7 @@ namespace Common.Json
         public static IEnumerable<T> GetItems<T>(this JToken o, string path)
         {
             var token = o.SelectToken(path);
-            if (token == null)
+            if (token == null || token.Type == JTokenType.Null)
             {
                 return Enumerable.Empty<T>();
             }
