@@ -19,6 +19,7 @@ using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.LotEventHandlers.EquipmentView;
 using Gva.Api.LotEventHandlers.AirportView;
 using Gva.Api.Repositories.AirportRepository;
+using Gva.Api.WordTemplates;
 
 namespace Gva.Api
 {
@@ -105,6 +106,16 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<CoordinatorSimi>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<StudentFilghtLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AMLNational>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<CabinCrewLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ForeignLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Convoy>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ControllerLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }

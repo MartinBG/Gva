@@ -257,8 +257,9 @@ namespace Gva.Api.Controllers
             var returnValue = this.organizationRepository.GetOrganization(id);
             return Ok(new
             {
-                nomValueId = returnValue.LotId,
-                name = returnValue.Name
+                NomValueId = returnValue.LotId,
+                Name = returnValue.Name,
+                NameAlt = returnValue.NameAlt
             });
         }
 
@@ -269,8 +270,9 @@ namespace Gva.Api.Controllers
                 this.organizationRepository.GetOrganizations(name: term, caseTypeId: null, offset: offset, limit: limit, uin: null, CAO: null, dateCAOValidTo: null, dateValidTo: null)
                 .Select(e => new
                 {
-                    nomValueId = e.LotId,
-                    name = e.Name
+                    NomValueId = e.LotId,
+                    Name = e.Name,
+                    NameAlt = e.NameAlt
                 });
 
             return Ok(returnValue);
@@ -396,7 +398,8 @@ namespace Gva.Api.Controllers
                         JToken staffAlias;
                         if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
                         {
-                            isMatch &= staffAliases.Contains(staffAlias.ToString());
+                            string staffAliasStr = staffAlias.ToString();
+                            isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
                         }
 
                         return isMatch;

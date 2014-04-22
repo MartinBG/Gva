@@ -78,6 +78,7 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNumberHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Models\GvaViewPerson.cs" />
     <Compile Include="Models\GvaViewPersonLicence.cs" />
     <Compile Include="Models\GvaViewPersonRating.cs" />
+    <Compile Include="Models\GvaWordTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
@@ -189,6 +191,16 @@
     <Compile Include="Repositories\InventoryRepository\InventoryRepository.cs" />
     <Compile Include="Repositories\PersonRepository\IPersonRepository.cs" />
     <Compile Include="Repositories\PersonRepository\PersonRepository.cs" />
+    <Compile Include="WordTemplates\AMLNational.cs" />
+    <Compile Include="WordTemplates\CabinCrewLicence.cs" />
+    <Compile Include="WordTemplates\ControllerLicence.cs" />
+    <Compile Include="WordTemplates\CoordinatorSimi.cs" />
+    <Compile Include="WordTemplates\ForeignLicence.cs" />
+    <Compile Include="WordTemplates\Convoy.cs" />
+    <Compile Include="WordTemplates\IDataGenerator.cs" />
+    <Compile Include="WordTemplates\LicenceDictionary.cs" />
+    <Compile Include="WordTemplates\Pilot142year2013.cs" />
+    <Compile Include="WordTemplates\StudentFilghtLicence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

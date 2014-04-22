@@ -60,7 +60,7 @@
         .then(function () {
           if ($scope.editLicenceForm.$valid) {
             $scope.editMode = 'saving';
-
+            $scope.backFromChild = false;
             return PersonLicence
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence).$promise
               .then(function () {

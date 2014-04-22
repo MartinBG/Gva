@@ -658,7 +658,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
-                        Alias = null,
+                        Alias = r.Field<string>("NAME_TRANS"),
                         TextContent = null,
                         IsActive = true
                     })
@@ -1025,6 +1025,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "F", "flying"},
                 { "E", "graduation"},
             };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")
                 .Materialize(r =>
                     new NomValue
@@ -1033,7 +1034,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
-                        Alias = null,
+                        Alias = r.Field<string>("CODE") == "ENG" ? "engTraining" : null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
                         TextContent = JsonConvert.SerializeObject(
@@ -1355,6 +1356,27 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "5", "to_suvd"}
             };
 
+            var templateNames = new Dictionary<string, string>()
+            {
+                { "103", "flight_licence" },
+                { "161", "foreign_licence" },
+                { "181", "caa_steward" },
+                { "242", "student_flight_licence" },
+                { "261", "coordinator" },
+                { "262", "flight" },
+                { "281", "atcl1" },
+                { "289", "convoy" },
+                { "302", "AML_national" },
+                { "321", "coordinator_simi" },
+                { "323", "rvd_licence" },
+                { "324", "AML_III" },
+                { "327", "Pilot142" },
+                { "328", "Pilot142_2013" },
+                { "329", "CAL03_2013" },
+                { "361", "pilot" },
+                { "601", "AML" }
+            };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LICENCE_TYPE")
                 .Materialize(r =>
                     new NomValue
@@ -1362,7 +1384,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         OldId = r.Field<object>("ID").ToString(),
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
-                        NameAlt = null,
+                        NameAlt = r.Field<string>("NAME_TRANS"),
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
@@ -1381,6 +1403,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 licenceCode = r.Field<string>("LICENCE_CODE"),
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
                                 qlfCode = r.Field<string>("QLF_CODE"),
+                                templateName = templateNames[r.Field<object>("PRT_PRINTABLE_DOCUMENT_ID").ToString()],
                                 staffTypeAlias = aliases[r.Field<object>("STAFF_TYPE_ID").ToString()]
                             })
                     })
@@ -1490,7 +1513,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         OldId = r.Field<object>("ID").ToString(),
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
-                        NameAlt = null,
+                        NameAlt = r.Field<string>("NAME_TRANS"),
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["aircraftTypes"].ByOldId(r.Field<long?>("ID_AC_TYPE").ToString()).NomValueId(),
@@ -1553,7 +1576,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContent = JsonConvert.SerializeObject(
                             new
                             {
-                                alias = r.Field<string>("CATEGORY"),
+                                alias = r.Field<string>("CATEGORY")
                             })
                     })
                 .ToList();

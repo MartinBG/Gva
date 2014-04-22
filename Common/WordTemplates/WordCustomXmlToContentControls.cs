@@ -30,7 +30,7 @@ namespace Common.WordTemplates
             }
         }
 
-        public static int ReplaceHelper(Stream template, bool hasNestedControls)
+        private static int ReplaceHelper(Stream template, bool hasNestedControls)
         {
             int replacedElements = 0;
             using (WordprocessingDocument doc = WordprocessingDocument.Open(template, true))
@@ -60,25 +60,25 @@ namespace Common.WordTemplates
                     if (customXmlElement.GetType() == typeof(CustomXmlBlock))
                     {
                         SdtContentBlock sdtContent = new SdtContentBlock();
-                        transferChildElements(customXmlElement, sdtContent);
+                        TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtBlock(sdtPr, sdtContent);
                     }
                     else if (customXmlElement.GetType() == typeof(CustomXmlRun))
                     {
                         SdtContentRun sdtContent = new SdtContentRun();
-                        transferChildElements(customXmlElement, sdtContent);
+                        TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtRun(sdtPr, sdtContent);
                     }
                     else if (customXmlElement.GetType() == typeof(CustomXmlRow))
                     {
                         SdtContentRow sdtContent = new SdtContentRow();
-                        transferChildElements(customXmlElement, sdtContent);
+                        TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtRow(sdtPr, sdtContent);
                     }
                     else if (customXmlElement.GetType() == typeof(CustomXmlCell))
                     {
                         SdtContentCell sdtContent = new SdtContentCell();
-                        transferChildElements(customXmlElement, sdtContent);
+                        TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtCell(sdtPr, sdtContent);
                     }
                     customXmlElement.Parent.InsertAfter(newElement, customXmlElement);
@@ -89,7 +89,7 @@ namespace Common.WordTemplates
             return replacedElements;
         }
 
-        public static void transferChildElements(CustomXmlElement from, OpenXmlCompositeElement to)
+        private static void TransferChildElements(CustomXmlElement from, OpenXmlCompositeElement to)
         {
             OpenXmlElement[] elements = from.ChildElements.ToArray();
             foreach (var e in elements)

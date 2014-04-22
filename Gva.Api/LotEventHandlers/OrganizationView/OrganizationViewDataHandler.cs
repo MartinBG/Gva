@@ -24,6 +24,7 @@ namespace Gva.Api.LotEventHandlers.OrganizationView
             organization.Lot = part.Part.Lot;
 
             organization.Name = part.Content.Get<string>("name");
+            organization.NameAlt = part.Content.Get<string>("nameAlt");
             organization.CAO = part.Content.Get<string>("CAO");
             organization.Valid = part.Content.Get<string>("valid.name");
             organization.Uin = part.Content.Get<string>("uin");

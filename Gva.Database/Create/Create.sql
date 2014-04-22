@@ -25,6 +25,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegMarks.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftAws.sql"
+:r $(rootPath)\"Tables\GvaWordTemplates.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -44,6 +45,7 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\gvaCaseTypes.sql"
+:r $(rootPath)\"..\Insert\gvaWordTemplates.sql"
 :r $(rootPath)\"..\Insert\noms.sql"
 :r $(rootPath)\"..\Insert\boolean.sql"
 :r $(rootPath)\"..\Insert\documentParts.sql"

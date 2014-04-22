@@ -66,6 +66,8 @@
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
     <Content Include="Insert\testScores.sql" />
+    <Content Include="Create\Tables\GvaWordTemplates.sql" />
+    <Content Include="Insert\gvaWordTemplates.sql" />
     <Content Include="Insert\Noms\aircarrierServices.sql" />
     <Content Include="Insert\linTypes.sql" />
     <Content Include="Insert\Noms\commonQuestions.sql" />

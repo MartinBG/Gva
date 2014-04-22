@@ -4,6 +4,7 @@ GO
 CREATE TABLE [dbo].[GvaViewOrganizations] (
     [LotId]                INT           NOT NULL,
     [Name]                 NVARCHAR(100) NOT NULL,
+    [NameAlt]              NVARCHAR(100) NOT NULL,
     [CAO]                  NVARCHAR(50)  NULL,
     [Valid]                NVARCHAR(50)  NOT NULL,
     [OrganizationType]     NVARCHAR(100)  NOT NULL,
@@ -18,6 +19,7 @@ GO
 exec spDescTable  N'GvaViewOrganizations', N'Организации.'
 exec spDescColumn N'GvaViewOrganizations', N'LotId'                   , N'Идентификатор на партида на организация.'
 exec spDescColumn N'GvaViewOrganizations', N'Name'                    , N'Наменование.'
+exec spDescColumn N'GvaViewOrganizations', N'NameAlt'                 , N'Наменование на поддържан език.'
 exec spDescColumn N'GvaViewOrganizations', N'CAO'                     , N'CAO номер.'
 exec spDescColumn N'GvaViewOrganizations', N'Valid'                   , N'Валидност.'
 exec spDescColumn N'GvaViewOrganizations', N'Uin'                     , N'Булстат.'

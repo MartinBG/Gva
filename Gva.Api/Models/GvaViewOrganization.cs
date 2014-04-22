@@ -12,6 +12,8 @@ namespace Gva.Api.Models
 
         public string Name { get; set; }
 
+        public string NameAlt { get; set; }
+
         public string CAO { get; set; }
 
         public string Uin { get; set; }
@@ -44,6 +46,10 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(100);
 
+            this.Property(t => t.NameAlt)
+                .IsRequired()
+                .HasMaxLength(100);
+
             this.Property(t => t.CAO)
                 .HasMaxLength(50);
 
@@ -60,6 +66,7 @@ namespace Gva.Api.Models
             this.ToTable("GvaViewOrganizations");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.NameAlt).HasColumnName("NameAlt");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.CAO).HasColumnName("CAO");
             this.Property(t => t.Valid).HasColumnName("Valid");

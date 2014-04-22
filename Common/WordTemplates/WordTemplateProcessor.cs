@@ -121,7 +121,7 @@ namespace Common.WordTemplates
                 }
                 else
                 {
-                    foreach (SdtElement childSdtElement in this.ClosestDescendants<SdtElement>(sdtElement))
+                    foreach (SdtElement childSdtElement in this.ClosestDescendants<SdtElement>(sdtElement).ToList())
                     {
                         TransformElement(childSdtElement, context);
                     }
@@ -185,8 +185,21 @@ namespace Common.WordTemplates
         private void setRunText(Run r, JToken context)
         {
             Text runText = r.GetFirstChild<Text>();
+            if (runText == null)
+            {
+                runText = new Text();
+                r.AppendChild(runText);
+            }
             runText.SetAttribute(new OpenXmlAttribute("space", XNamespace.Xml.NamespaceName, "preserve"));
-            runText.Text = context != null ? context.ToString() : string.Empty;
+
+            if (context == null)
+            {
+                runText.Text = string.Empty;
+            }
+            else
+            {
+                runText.Text = context.Type == JTokenType.Date ? ((DateTime)context).ToString("dd.MM.yyyy") : context.ToString();
+            }
         }
 
         private void RemoveAllChildrenButFirst<T>(OpenXmlCompositeElement content) where T : OpenXmlElement
