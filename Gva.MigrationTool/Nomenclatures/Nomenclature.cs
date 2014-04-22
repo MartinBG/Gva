@@ -39,7 +39,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public static NomValue ByName(this Dictionary<string, NomValue> nomValues, string name)
         {
-            if (name == null)
+            if (String.IsNullOrEmpty(name))
             {
                 return null;
             }
@@ -629,11 +629,11 @@ namespace Gva.MigrationTool.Nomenclatures
                 dependencies.Value.Item1.Save();
             }
 
-            using (var dependencies = dependencyFactory())
-            {
-                migrateAircraftCategoriesFm(dependencies.Value.Item2, sqlConn);
-                dependencies.Value.Item1.Save();
-            }
+            //using (var dependencies = dependencyFactory())
+            //{
+            //    migrateAircraftCategoriesFm(dependencies.Value.Item2, sqlConn);
+            //    dependencies.Value.Item1.Save();
+            //}
 
             timer.Stop();
             Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
@@ -2389,12 +2389,35 @@ namespace Gva.MigrationTool.Nomenclatures
                     })
                 .ToList();
 
+            results.Add(new NomValue() {
+                OldId = "11",
+                Code = "VP",
+                Name = "Мотопарапланер",
+                NameAlt = "Paramotor-Trike",
+                Alias = null,
+                IsActive = true,
+                ParentValueId = null,
+                TextContent = null
+            });
+
+            results.Add(new NomValue() {
+                OldId = "12",
+                Code = "GR",
+                Name = "Автожир",
+                NameAlt = "Gyroplane",
+                Alias = null,
+                IsActive = true,
+                ParentValueId = null,
+                TextContent = null
+            });
             noms["aircraftCategories"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
                 noms["aircraftCategories"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
+
+
         }
 
         private void migrateAircraftProducers(INomRepository repo, OracleConnection conn)
@@ -3026,31 +3049,31 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        private void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
-        {
-            Nom nom = repo.GetNom("aircraftCategoriesFM");
-            var results = conn.CreateStoreCommand(@"select * from CatAct")
-                .Materialize(r =>
-                    new NomValue
-                    {
-                        OldId = r.Field<string>("Code"),
-                        Code = r.Field<string>("Code"),
-                        Name = r.Field<string>("Category BG"),
-                        NameAlt = r.Field<string>("Category EN"),
-                        Alias = null,
-                        IsActive = true,
-                        ParentValueId = null,
-                        TextContent = null
-                    })
-                .ToList();
+        //private void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
+        //{
+        //    Nom nom = repo.GetNom("aircraftCategoriesFM");
+        //    var results = conn.CreateStoreCommand(@"select * from CatAct")
+        //        .Materialize(r =>
+        //            new NomValue
+        //            {
+        //                OldId = r.Field<string>("Code"),
+        //                Code = r.Field<string>("Code"),
+        //                Name = r.Field<string>("Category BG"),
+        //                NameAlt = r.Field<string>("Category EN"),
+        //                Alias = null,
+        //                IsActive = true,
+        //                ParentValueId = null,
+        //                TextContent = null
+        //            })
+        //        .ToList();
 
-            noms["aircraftCategoriesFM"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
-            {
-                noms["aircraftCategoriesFM"][row.OldId] = row;
-                nom.NomValues.Add(row);
-            }
-        }
+        //    noms["aircraftCategoriesFM"] = new Dictionary<string, NomValue>();
+        //    foreach (var row in results)
+        //    {
+        //        noms["aircraftCategoriesFM"][row.OldId] = row;
+        //        nom.NomValues.Add(row);
+        //    }
+        //}
 
         private void migrateCountriesFm(INomRepository repo, SqlConnection conn)
         {
@@ -3126,14 +3149,17 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateCofATypesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("CofATypesFm");
-
             var nomInfo = new Dictionary<string, Tuple<string, string>>()
             {
                 { "E25", new Tuple<string,string>("EASA 25"          , "EASA 25"         )},
                 { "E24", new Tuple<string,string>("EASA 24"          , "EASA 24"         )},
                 { "BGF", new Tuple<string,string>("BG Form"          , "BG Form"         )},
                 { "TEC", new Tuple<string,string>("Tech Cert"        , "Tech Cert"       )},
-                { "EXP", new Tuple<string,string>("EXP"              , "EXP"             )}
+                { "EXP", new Tuple<string,string>("EXP"              , "EXP"             )},
+                { "EA" , new Tuple<string,string>("EASA"             , "EASA"            )},
+                { "OBF", new Tuple<string,string>("Old BG Form"      , "Old BG Form"     )}//,
+                //{ "TC" , new Tuple<string,string>("\"Tech Cert\""    , "\"Tech Cert\""   )},
+                //{ "BF" , new Tuple<string,string>("\"BG Form\""      , "\"BG Form\""     )},
             };
             int OldId = 1;
             noms["CofATypesFm"] = new Dictionary<string, NomValue>();
@@ -3244,7 +3270,8 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "A1"  , new Tuple<string,string>("Article-1"                      , "Article-1"                       )},
                 { "VLA" , new Tuple<string,string>("VLA"                            , "VLA"                             )},
                 { "AM"  , new Tuple<string,string>("Amateur"                        , "Amateur"                         )},
-                { "EXP" , new Tuple<string,string>("EXP"                            , "EXP"                             )}
+                { "EXP" , new Tuple<string,string>("EXP"                            , "EXP"                             )},
+                { "RU"  , new Tuple<string,string>("RU"                             , "RU"                              )},
             };
             int OldId = 1;
             noms["EURegTypesFm"] = new Dictionary<string, NomValue>();

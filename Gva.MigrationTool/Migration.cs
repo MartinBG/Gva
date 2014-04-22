@@ -61,7 +61,7 @@ namespace Gva.MigrationTool
                 return new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                    //NullValueHandling = NullValueHandling.Ignore, //TODO why?
+                    //NullValueHandling = NullValueHandling.Ignore, //TODO remove before final migration
                     DefaultValueHandling = DefaultValueHandling.Include,
                     DateFormatHandling = DateFormatHandling.IsoDateFormat,
                     ContractResolver = new CamelCasePropertyNamesContractResolver()

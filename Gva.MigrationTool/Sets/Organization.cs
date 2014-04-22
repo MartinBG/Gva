@@ -141,5 +141,31 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .Single();
         }
+
+        private IList<JObject> getOrganizationAddress(OracleConnection con, int organizationId)
+        {
+            return con.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.FIRM_ADDRESS WHERE {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("and ID = {0}", organizationId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = (int)r.Field<decimal>("ID"),
+                        __migrTable = "FIRM_ADDRESS",
+                        addressTypeId = r.Field<decimal?>("ADDRESS_TYPE_ID"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                        settlementId = r.Field<decimal?>("TOWN_VILLAGE_ID"),
+                        address = r.Field<string>("ADDRESS"),
+                        addressAlt = r.Field<string>("ADDRESS_TRANS"),
+                        phone = r.Field<string>("PHONES"),
+                        fax = r.Field<string>("FAXES"),
+                        postalCode = r.Field<string>("POSTAL_CODE"),
+                        contactPerson = r.Field<string>("CONTACT_PERSON"),
+                        email = r.Field<string>("E_MAIL")
+                    }))
+                .ToList();
+        }
     }
 }

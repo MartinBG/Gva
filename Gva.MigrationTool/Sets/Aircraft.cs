@@ -81,8 +81,8 @@ namespace Gva.MigrationTool.Sets
                     //    continue;
                     //}
 
-                    //if (aircraftId != 1286) //MSN E1258, MARK LZ-TIM
-                    //    break;
+                    if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
+                        continue;
 
                     var lot = aircraftSet.CreateLot(context);
                     var aircraftData = this.getAircraftData(aircraftApexId, noms);
@@ -107,6 +107,9 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var aircraftFmId in this.getAircraftFmIds())
                 {
+                    if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
+                        continue;
+
                     var aircraftDataFM = this.getAircraftDataFM(aircraftFmId, noms);
                     var msn = aircraftDataFM.Get<string>("manSN");
 
@@ -147,10 +150,51 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, int> personApexIdToLotId,
             Dictionary<int, int> orgApexIdToLotId)
         {
+            Dictionary<string, int> inspectorsFM = new Dictionary<string, int>()
+            {
+                {""              , -1},//TODO
+                {"Стар запис"    , -1},//TODO
+                {"А.Борисов"     , 6203},
+                {"А.Станков"     , 1149},
+                {"Б.Божинов"     , -1},//TODO
+                {"В.Драганов"    , 5464},
+                {"В.Дяков"       , 3897},
+                {"В.Михайлов"    , 2666},
+                {"В.Наньов"      , 6023},
+                {"В.Пешев"       , 2606},
+                {"В.Текнеджиев"  , 2219},
+                {"Г.Илчов"       , -1},//TODO
+                {"Е.Крайкова"    , 7328},
+                {"И.Банковски"   , 5466},
+                {"И.Иванов"      , -1},//TODO
+                {"И.Коев"        , 5468},
+                {"И.Найденов"    , -1},//TODO
+                {"И.С.Иванов"    , 3491},
+                {"Ив.Иванов"     , 2590},
+                {"Ил.Иванов"     , 1087},
+                {"К.Гълъбов"     , 4162},
+                {"М.Илов"        , 9184},
+                {"М.Митов"       , -1},//TODO
+                {"Н. Начев"      , 1150},
+                {"Н.Василев"     , 5463},
+                {"Н.Джамбов"     , 2286},
+                {"Н.Начев"       , 1150},
+                {"Н.Тотева"      , -1},//TODO
+                {"П.Младенов"    , -1},//TODO
+                {"П.Юнашкова"    , 2349},
+                {"С.Живков"      , 2396},
+                {"С.Пенчев"      , 803},
+                {"С.Тодоров"     , 5465},
+                {"Т.Вълков"      , 5467}
+            };
+
             foreach (var aircraftApexId in this.getAircraftApexIds())
             {
                 //if (aircraftApexId >= 200)
                 //    break;
+
+                if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
+                    continue;
 
                 using (var dependencies = dependencyFactory())
                 {
@@ -338,6 +382,11 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var aircraftFmId in this.getAircraftFmIds())
             {
+
+                //TODO remove
+                if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
+                    continue;
+
                 using (var dependencies = dependencyFactory())
                 {
                     var unitOfWork = dependencies.Value.Item1;
@@ -352,9 +401,12 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
+                    Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personApexIdToLotId);
+                    Func<int?, JObject> getOrganization = (orgApexId) => Utils.GetOrganization(orgApexId, organizationRepository, orgApexIdToLotId);
+
                     Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);;
 
-                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms);
+                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, inspectorsFM, noms, getPerson);
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                     {
                         var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
@@ -370,13 +422,13 @@ namespace Gva.MigrationTool.Sets
 
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom);
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom, inspectorsFM, getPerson);
                         foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
                         {
                             lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
                         }
 
-                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom);
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom, inspectorsFM, noms, getPerson);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                         {
                             try
@@ -470,7 +522,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("n_Act_ID"),
                         __migrTable = "Acts",
-                        aircraftProducer = noms["aircraftProducers"].ByOldId(r.Field<string>("n_Act_Maker_ID")),
+                        aircraftProducer = noms["aircraftProducersFm"].ByOldId(r.Field<string>("n_Act_Maker_ID")),
                         aircraftCategory = noms["aircraftCategories"].ByCode(r.Field<string>("t_Act_TypeCode")),
                         icao = r.Field<string>("t_Act_ICAO"),
                         model = r.Field<string>("t_Act_Bg"),
@@ -487,16 +539,16 @@ namespace Gva.MigrationTool.Sets
                         seats = toNum(r.Field<string>("n_Act_SeatNo")),
                         outputDate = toDate(r.Field<string>("d_Act_DateOutput")),
                         docRoom = r.Field<string>("t_Act_Place_of_Documents"),
-                        CofATypeId = r.Field<string>("t_CofA_Type"),//TODO
-                        EASATypeId = r.Field<string>("t_Act_EASA_Type"),//TODO
-                        EURegTypeId = r.Field<string>("t_Act_EU_RU"),//TODO
-                        EASACategoryId = r.Field<string>("t_EASA_Category"),//TODO
+                        cofAType = noms["CofATypesFm"].ByName(r.Field<string>("t_CofA_Type").Replace("\"", string.Empty)),
+                        easaType = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
+                        euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
+                        easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
                         tcds = r.Field<string>("t_EASA_TCDS")
                     }))
                 .Single();
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom)
+        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom, Dictionary<string, int> inspectors, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts where {0} {1}",
@@ -511,17 +563,17 @@ namespace Gva.MigrationTool.Sets
                         registration = regNom,
                         certId = toNum(r.Field<string>("RegNo")),
                         regDate = toDate(r.Field<string>("Date")),
-                        aircraftDebtType = new { name = "ЗАЛОГ - УЧРЕДЕН" },// r.Field<string>("Action"),//TODO
+                        aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action")),
                         documentNumber = r.Field<string>("gt_DocCAA"),
                         documentDate = r.Field<string>("gd_DocCAA"),
-                        aircraftCreditorId = r.Field<string>("Creditor"),//TODO
+                        aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
                         creditorDocument = r.Field<string>("Doc Creditor"),
-                        inspectorId = r.Field<string>("tUser")//TODO
+                        inspector = getPerson(inspectors[r.Field<string>("tUser")])
                     }))
                 .ToList();
         }
 
-        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, int> inspectors, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from 
@@ -553,7 +605,7 @@ namespace Gva.MigrationTool.Sets
                         incomingDocNumber = r.Field<string>("tDocCAA"),
                         incomingDocDate = toDate(r.Field<string>("dDateCAA")),
                         incomingDocDesc = r.Field<string>("tDocOther"),
-                        inspectorId = r.Field<string>("tRegUser"),//TODO
+                        inspector = getPerson(inspectors[r.Field<string>("tRegUser")]),
                         ownerId = r.Field<string>("nOwner"),//TODO
                         operatorId = r.Field<string>("nOper"),//TODO
                         aircraftCategory = noms["aircraftCategories"].ByCodeOrDefault(r.Field<string>("tCatCode")) ?? noms["aircraftCategories"].ByCode("A2"),//TODO
@@ -579,13 +631,13 @@ namespace Gva.MigrationTool.Sets
                             text = r.Field<string>("tRemarkDeReg"),
                             documentNumber = r.Field<string>("tDeDocCAA"),
                             documentDate = toDate(r.Field<string>("dDeDateCAA")),
-                            inspectorId = r.Field<string>("tDeUser")//TODO
+                            inspector = getPerson(inspectors[r.Field<string>("tDeUser")])
                         }
                     }))
                 .ToList();
         }
 
-        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom)
+        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom, Dictionary<string, int> inspectors, Func<int?, JObject> getPerson)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from 
@@ -611,7 +663,9 @@ namespace Gva.MigrationTool.Sets
                         issueDate = toDate(r.Field<string>("dIssue")),
                         validfromDate = toDate(r.Field<string>("dFrom")),
                         validtoDate = toDate(r.Field<string>("dValid")),
-                        inspectorId = r.Field<string>("t_Reviewed_By"),//TODO
+                        inspector = inspectors.ContainsKey(r.Field<string>("t_Reviewed_By")) ? 
+                            getPerson(inspectors[r.Field<string>("t_Reviewed_By")]) :
+                            Utils.reviewCase("Aircrafts-> getAircraftCertAirworthinessesFM-> inspectors doesn't contain the key {0}", r.Field<string>("t_Reviewed_By")),
                         incomingDocNumber = r.Field<string>("tDocCAA"),
                         incomingDocDate = toDate(r.Field<string>("dDocCAA")),
                         EASA25IssueDate = toDate(r.Field<string>("dDateEASA_25_Issue")),
@@ -1553,12 +1607,12 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = (int)r.Field<long>("ID"),
                         __migrTable = "AC_FLY_PERMIT",
                         certId = r.Field<long?>("ID_CERTIFICATE"),
                         issueDate = r.Field<DateTime?>("ISSUE_DATE"),
                         issuePlace = r.Field<string>("ISSUE_PLACE"),
-                        purpose = r.Field<DateTime?>("PURPOSE"),
+                        purpose = r.Field<string>("PURPOSE"),
                         purposeAlt = r.Field<string>("PURPOSE_TRANS"),
                         pointFrom = r.Field<string>("POINT_FROM"),
                         pointFromAlt = r.Field<string>("POINT_FROM_TRANS"),

@@ -78,7 +78,7 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var personId in personIds)
                 {
-                    if (personId >= 200)
+                    if (personId >= 50)
                     {
                         break;
                     }
@@ -108,7 +108,7 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var personId in personIds) //new int[] { 6730 })
             {
-                if (personId >= 200)
+                if (personId >= 50)
                 {
                     break;
                 }

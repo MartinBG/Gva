@@ -167,5 +167,11 @@ namespace Gva.MigrationTool
                 name = organization.Name
             });
         }
+
+        public static Object reviewCase(string formatStr, params object[] list)
+        {
+            Console.WriteLine(formatStr, list);
+            return null;
+        }
     }
 }
