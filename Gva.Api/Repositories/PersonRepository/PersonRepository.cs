@@ -38,8 +38,8 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndStringMatches(p => p.LinType, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
-                .AndCollectionContains(p => p.Licences.Select(l => l.LicenceType), licences)
-                .AndCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
+                .AndStringCollectionContains(p => p.Licences.Select(l => l.LicenceType), licences)
+                .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
                 .AndStringMatches(p => p.Organization, organization, exact);
 
             var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()

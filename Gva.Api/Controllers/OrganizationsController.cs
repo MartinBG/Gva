@@ -54,9 +54,16 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetOrganizations(string name = null, string CAO = null, string uin = null, DateTime? dateValidTo = null, DateTime? dateCAOValidTo = null, bool exact = false)
+        public IHttpActionResult GetOrganizations(
+            string name = null,
+            int? caseTypeId = null,
+            string CAO = null,
+            string uin = null,
+            DateTime? dateValidTo = null,
+            DateTime? dateCAOValidTo = null,
+            bool exact = false)
         {
-            var organizations = this.organizationRepository.GetOrganizations(name, CAO, uin, dateValidTo, dateCAOValidTo, exact);
+            var organizations = this.organizationRepository.GetOrganizations(name, caseTypeId, CAO, uin, dateValidTo, dateCAOValidTo, exact);
             return Ok(organizations.Select(o => new OrganizationDO(o)));
         }
 
@@ -65,7 +72,7 @@ namespace Gva.Api.Controllers
         {
             var organization = this.organizationRepository.GetOrganization(lotId);
             OrganizationDO returnValue = new OrganizationDO(organization);
-            returnValue.CaseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId).Select(ct => ct.Name).ToList();
+            returnValue.CaseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId).Select(ct => ct.Alias).ToList();
 
             return Ok(returnValue);
         }

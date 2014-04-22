@@ -30,13 +30,13 @@
 
     var initTabList = function (caseTypes) {
       $scope.tablist = {};
-      if (_.contains(caseTypes, 'ЛГ')) {
+      if (_.contains(caseTypes, 'approvedOrg')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.approvals': 'root.organizations.view.approvals'
         });
       }
 
-      if (_.contains(caseTypes, 'ЛО')) {
+      if (_.contains(caseTypes, 'airportOperator')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.airportOperator': {
             'organizations.tabs.certAirportOperators':
@@ -45,16 +45,7 @@
         });
       }
 
-      if (_.contains(caseTypes, 'ЛО')) {
-        $scope.tablist = _.extend($scope.tablist, {
-          'organizations.tabs.airportOperator': {
-            'organizations.tabs.certAirportOperators':
-              'root.organizations.view.certAirportOperators'
-          }
-        });
-      }
-
-      if (_.contains(caseTypes, 'ОНО')) {
+      if (_.contains(caseTypes, 'groundSvcOperator')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.groundServiceOperators': {
             'organizations.tabs.certGroundServiceOperators':
@@ -65,7 +56,7 @@
         });
       }
 
-      if (_.contains(caseTypes, 'ВП')) {
+      if (_.contains(caseTypes, 'airCarrier')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.airCarrier': {
             'organizations.tabs.certAirCarriers': 'root.organizations.view.certAirCarriers'
@@ -73,7 +64,7 @@
         });
       }
 
-      if (_.contains(caseTypes, 'АО')) {
+      if (_.contains(caseTypes, 'airOperator')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.airOperator': {
             'organizations.tabs.certAirOperators': 'root.organizations.view.certAirOperators'
@@ -81,7 +72,7 @@
         });
       }
 
-      if (_.contains(caseTypes, 'ДАО')) {
+      if (_.contains(caseTypes, 'airNavSvcProvider')) {
         $scope.tablist = _.extend($scope.tablist, {
           'organizations.tabs.airNavigationServiceDeliverer': {
             'organizations.tabs.certAirNavigationServiceDeliverer':
@@ -115,7 +106,7 @@
     };
 
     if (caseType) {
-      initTabList([caseType.name]);
+      initTabList([caseType.alias]);
     }
     else {
       initTabList(organization.caseTypes);

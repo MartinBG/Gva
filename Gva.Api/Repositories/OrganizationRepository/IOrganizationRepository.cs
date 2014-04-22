@@ -8,6 +8,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
     {
         IEnumerable<GvaViewOrganization> GetOrganizations(
             string name,
+            int? caseTypeId,
             string CAO,
             string uin,
             DateTime? dateValidTo,

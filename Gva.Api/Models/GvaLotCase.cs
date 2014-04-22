@@ -17,6 +17,8 @@ namespace Gva.Api.Models
         public virtual GvaCaseType GvaCaseType { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public virtual GvaViewOrganization Organization { get; set; }
     }
 
     public class GvaLotCaseMap : EntityTypeConfiguration<GvaLotCase>
@@ -43,6 +45,9 @@ namespace Gva.Api.Models
                 .WithMany()
                 .HasForeignKey(d => d.LotId);
 
+            this.HasRequired(t => t.Organization)
+                .WithMany(t => t.GvaLotCases)
+                .HasForeignKey(d => d.LotId);
         }
     }
 }

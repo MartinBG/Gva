@@ -24,12 +24,6 @@
     <sc-navigation-item state="root.applications.new" params="{ filter: 'Aircraft' }" text="common.navigation.aircrafts.appsNew"></sc-navigation-item>
     <sc-navigation-item state="root.applications.link" params="{ filter: 'Aircraft' }" text="common.navigation.aircrafts.appsLink"></sc-navigation-item>
   </sc-navigation-item>
-  <sc-navigation-item text="common.navigation.organizations.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.organizations.search"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.search" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsSearch"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.new" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsNew"></sc-navigation-item>
-    <sc-navigation-item state="root.applications.link" params="{ filter: 'Organization' }" text="common.navigation.organizations.appsLink"></sc-navigation-item>
-  </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airports.title" parent="true">
     <sc-navigation-item state="root.airports.search" text="common.navigation.airports.search"></sc-navigation-item>
     <sc-navigation-item state="root.applications.search" params="{ filter: 'Airport' }" text="common.navigation.airports.appsSearch"></sc-navigation-item>
@@ -42,20 +36,29 @@
     <sc-navigation-item state="root.applications.new" params="{ filter: 'Equipment' }" text="common.navigation.equipments.appsNew"></sc-navigation-item>
     <sc-navigation-item state="root.applications.link" params="{ filter: 'Equipment' }" text="common.navigation.equipments.appsLink"></sc-navigation-item>
   </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.approvedOrgs.title" parent="true">
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('approvedOrg') }" text="common.navigation.approvedOrgs.search"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.search" params="{ filter: 'Organization' }" text="common.navigation.approvedOrgs.appsSearch"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.new" params="{ filter: 'Organization' }" text="common.navigation.approvedOrgs.appsNew"></sc-navigation-item>
+    <sc-navigation-item state="root.applications.link" params="{ filter: 'Organization' }" text="common.navigation.approvedOrgs.appsLink"></sc-navigation-item>
+  </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airportOperators.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.airportOperators.search"></sc-navigation-item>
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('airportOperator') }" text="common.navigation.airportOperators.search"></sc-navigation-item>
+  </sc-navigation-item>
+  <sc-navigation-item text="common.navigation.groundSvcOperators.title" parent="true">
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('groundSvcOperator') }" text="common.navigation.groundSvcOperators.search"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.educationOrgs.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.educationOrgs.search"></sc-navigation-item>
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('educationOrg') }" text="common.navigation.educationOrgs.search"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airCarriers.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.airCarriers.search"></sc-navigation-item>
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('airCarrier') }" text="common.navigation.airCarriers.search"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airOperators.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.airOperators.search"></sc-navigation-item>
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('airOperator') }" text="common.navigation.airOperators.search"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.airNavSvcProviders.title" parent="true">
-    <sc-navigation-item state="root.organizations.search" text="common.navigation.airNavSvcProviders.search"></sc-navigation-item>
+    <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('airNavSvcProvider') }" text="common.navigation.airNavSvcProviders.search"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true">
     <sc-navigation-item state="root.users.search" text="common.navigation.admin.users"></sc-navigation-item>

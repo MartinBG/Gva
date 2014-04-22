@@ -1,8 +1,8 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular,_*/
+(function (angular, _) {
   'use strict';
 
-  function RootCtrl($scope, $timeout) {
+  function RootCtrl($scope, $timeout, orgCaseTypes) {
     $scope.alerts = [];
     $scope.removeAlert = function (alert) {
       var index = $scope.alerts.indexOf(alert);
@@ -25,9 +25,27 @@
         //swallow all exception so that we don't end up in an infinite loop
       }
     });
+
+    $scope.getOrgCaseType = function (alias) {
+      var caseType = _.find(orgCaseTypes, function (caseType) {
+        return caseType.alias === alias;
+      });
+
+      return caseType.nomValueId;
+    };
   }
 
-  RootCtrl.$inject = ['$scope', '$timeout' ];
+  RootCtrl.$inject = ['$scope', '$timeout', 'orgCaseTypes'];
+
+  RootCtrl.$resolve = {
+    orgCaseTypes: [
+      '$stateParams',
+      'Nomenclature',
+      function ($stateParams, Nomenclature) {
+        return Nomenclature.query({ alias: 'organizationCaseTypes' }).$promise;
+      }
+    ]
+  };
 
   angular.module('common').controller('RootCtrl', RootCtrl);
-}(angular));
+}(angular, _));

@@ -10,7 +10,8 @@
   ) {
 
     $scope.filters = {
-      name: null
+      name: null,
+      caseTypeId: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -27,7 +28,8 @@
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,
         dateCAOValidTo: $scope.filters.dateCAOValidTo,
-        name: $scope.filters.name
+        name: $scope.filters.name,
+        caseTypeId: $scope.filters.caseTypeId
       });
     };
 

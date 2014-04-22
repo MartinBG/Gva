@@ -2723,6 +2723,7 @@
           newOrganization: 'Нова организация',
           search: 'Търси',
           name: 'Наименование',
+          caseType: 'Тип дело',
           CAO: 'CAO',
           valid: 'Валидност',
           organizationType: 'Тип организация',

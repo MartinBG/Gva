@@ -1,17 +1,18 @@
 ﻿INSERT INTO [GvaCaseTypes]
     ([GvaCaseTypeId], [Name]       , [Alias]    , [LotSetId])
 VALUES
-    (1              , N'Пилот'     , NULL       , 1         ),
-    (2              , N'РВД'       , NULL       , 1         ),
-    (3              , N'ЛГ'        , NULL       , 2         ),
-    (4              , N'ЛО'        , NULL       , 2         ),
-    (5              , N'ОНО'       , NULL       , 2         ),
-    (6              , N'ВП'        , NULL       , 2         ),
-    (7              , N'АО'        , NULL       , 2         ),
-    (8              , N'ДАО'       , NULL       , 2         ),
-    (9              , N'Инспектор' , 'inspector', 1         ),
-    (10             , N'Проверяващ', 'examiner' , 1         ),
-    (11             , N'ВС'        , NULL       , 3         ),
-    (12             , N'Летище'    , NULL       , 4         ),
-    (13             , N'Съоръжение', NULL       , 5         )
+    (1              , N'Пилот'     , 'pilot'            , 1         ),
+    (2              , N'РВД'       , 'RVD'              , 1         ),
+    (3              , N'ОО'        , 'approvedOrg'      , 2         ),
+    (4              , N'ЛО'        , 'airportOperator'  , 2         ),
+    (5              , N'ОНО'       , 'groundSvcOperator', 2         ),
+    (6              , N'ВП'        , 'airCarrier'       , 2         ),
+    (7              , N'АО'        , 'airOperator'      , 2         ),
+    (8              , N'АУЦ'       , 'educationOrg'     , 2         ),
+    (9              , N'ДАО'       , 'airNavSvcProvider', 2         ),
+    (10             , N'Инспектор' , 'inspector'        , 1         ),
+    (11             , N'Проверяващ', 'examiner'         , 1         ),
+    (12             , N'ВС'        , 'aircraft'         , 3         ),
+    (13             , N'Летище'    , 'airport'          , 4         ),
+    (14             , N'Съоръжение', 'equipment'        , 5         )
 GO

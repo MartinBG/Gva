@@ -2,8 +2,20 @@
 (function (angular, Select2, _) {
   'use strict';
 
-  function CommonScannedDocCtrl($scope, $stateParams) {
+  function CommonScannedDocCtrl($scope, $stateParams, Nomenclature) {
+    var caseType = null;
     $scope.lotId = $stateParams.id;
+
+    var addNewFile = function () {
+      $scope.model.unshift({
+        caseType: caseType,
+        file: null,
+        bookPageNumber: null,
+        pageCount: null,
+        isAdded: true,
+        isDeleted: false
+      });
+    };
 
     if (_.isArray($scope.model)) {
       $scope.hideApplications = false;
@@ -24,13 +36,18 @@
     });
 
     $scope.addFile = function () {
-      $scope.model.unshift({
-        file: null,
-        bookPageNumber: null,
-        pageCount: null,
-        isAdded: true,
-        isDeleted: false
-      });
+      if ($stateParams.caseTypeId && !caseType) {
+        return Nomenclature.get({
+          alias: 'organizationCaseTypes',
+          id: $stateParams.caseTypeId
+        }).$promise.then(function (ct) {
+          caseType = ct;
+          addNewFile();
+        });
+      }
+      else {
+        addNewFile();
+      }
     };
 
     $scope.removeFile = function (index) {
@@ -49,7 +66,7 @@
     };
   }
 
-  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams'];
+  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclature'];
 
   angular.module('gva').controller('CommonScannedDocCtrl', CommonScannedDocCtrl);
 }(angular, Select2, _));

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Regs.Api.Models;
-using System;
-using Common.Api.Models;
 
 namespace Gva.Api.Models
 {
@@ -25,6 +25,8 @@ namespace Gva.Api.Models
         public DateTime? DateCAOValidTo { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
     }
 
     public class GvaViewOrganizationMap : EntityTypeConfiguration<GvaViewOrganization>

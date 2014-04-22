@@ -266,7 +266,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetOrganizations(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.organizationRepository.GetOrganizations(name: term, offset: offset, limit: limit, uin: null, CAO: null, dateCAOValidTo: null, dateValidTo: null)
+                this.organizationRepository.GetOrganizations(name: term, caseTypeId: null, offset: offset, limit: limit, uin: null, CAO: null, dateCAOValidTo: null, dateValidTo: null)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -297,8 +297,9 @@ namespace Gva.Api.Controllers
             var caseType = this.caseTypeRepository.GetCaseType(id);
             return Ok(new
             {
-                nomValueId = caseType.GvaCaseTypeId,
-                name = caseType.Name
+                NomValueId = caseType.GvaCaseTypeId,
+                Name = caseType.Name,
+                Alias = caseType.Alias
             });
         }
 
@@ -324,8 +325,9 @@ namespace Gva.Api.Controllers
             return Ok(
                 caseTypes.Select(ct => new
                 {
-                    nomValueId = ct.GvaCaseTypeId,
-                    name = ct.Name
+                    NomValueId = ct.GvaCaseTypeId,
+                    Name = ct.Name,
+                    Alias = ct.Alias
                 }));
         }
 
