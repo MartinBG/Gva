@@ -31,36 +31,46 @@ using Gva.Api.LotEventHandlers.AirportView;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.OrganizationRepository;
+using Autofac.Features.OwnedInstances;
+using Common.Tests;
 
 namespace Gva.MigrationTool.Sets
 {
-    public static class Person
+    public class Person
     {
-        public static Dictionary<int, int> personOldIdsLotIds;
-        public static Dictionary<int, int> aircraftOldIdsLotIds;
-        public static Dictionary<int, int> organizationOldIdsLotIds;
-        public static Dictionary<string, Dictionary<string, NomValue>> noms;
+        public Dictionary<int, int> personOldIdsLotIds;
+        public Dictionary<int, int> aircraftOldIdsLotIds;
+        public Dictionary<int, int> organizationOldIdsLotIds;
+        private Dictionary<string, Dictionary<string, NomValue>> noms;
 
-        public static void createPersonsLots(OracleConnection oracleCon, Dictionary<string, Dictionary<string, NomValue>> n)
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IOrganizationRepository, IAircraftRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private OracleConnection oracleConn;
+
+        public Person(OracleConnection oracleConn,
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IOrganizationRepository, IAircraftRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+        {
+            this.dependencyFactory = dependencyFactory;
+            this.oracleConn = oracleConn;
+        }
+
+        public void createPersonsLots(Dictionary<string, Dictionary<string, NomValue>> n)
         {
             noms = n;
-            var context = new UserContext(2);
             Dictionary<int, Lot> oldIdsLots = new Dictionary<int, Lot>();
-            var personIds = Person.getPersonIds(oracleCon);
+            var personIds = this.getPersonIds(oracleConn);
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = this.dependencyFactory())
             {
-                var userContext = new UserContext(2);
-                var lotRepository = new LotRepository(unitOfWork);
-                var caseTypeRepository = new CaseTypeRepository(unitOfWork);
-                var userRepository = new UserRepository(unitOfWork);
-                var fileRepository = new FileRepository(unitOfWork);
-                var applicationRepository = new ApplicationRepository(unitOfWork);
-                var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
-                var organizationRepository = new OrganizationRepository(unitOfWork);
-                var aircraftRepository = new AircraftRepository(unitOfWork);
-
-                var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
+                var unitOfWork = dependencies.Value.Item1;
+                var lotRepository = dependencies.Value.Item2;
+                var userRepository = dependencies.Value.Item3;
+                var fileRepository = dependencies.Value.Item4;
+                var applicationRepository = dependencies.Value.Item5;
+                var caseTypeRepository = dependencies.Value.Item6;
+                var organizationRepository = dependencies.Value.Item7;
+                var aircraftRepository = dependencies.Value.Item8;
+                var lotEventDispatcher = dependencies.Value.Item9;
+                var context = dependencies.Value.Item10;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -74,7 +84,7 @@ namespace Gva.MigrationTool.Sets
                     }
                     var lot = personSet.CreateLot(context);
                     oldIdsLots.Add(personId, lot);
-                    var personData = Person.getPersonData(oracleCon, personId);
+                    var personData = this.getPersonData(oracleConn, personId);
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
                     lot.CreatePart("personData", personData, context);
                     lot.Commit(context, lotEventDispatcher);
@@ -86,7 +96,7 @@ namespace Gva.MigrationTool.Sets
             personOldIdsLotIds = oldIdsLots.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.LotId);
         }
 
-        public static void migratePersons(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> aIdsLots, Dictionary<int, int> oIdsLots)
+        public void migratePersons(Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> aIdsLots, Dictionary<int, int> oIdsLots)
         {
             noms = n;
             aircraftOldIdsLotIds = aIdsLots;
@@ -94,7 +104,7 @@ namespace Gva.MigrationTool.Sets
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
-            IList<int> personIds = Person.getPersonIds(con);
+            IList<int> personIds = this.getPersonIds(oracleConn);
 
             foreach (var personId in personIds) //new int[] { 6730 })
             {
@@ -103,41 +113,40 @@ namespace Gva.MigrationTool.Sets
                     break;
                 }
 
-                using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+                using (var dependencies = this.dependencyFactory())
                 {
+                    var unitOfWork = dependencies.Value.Item1;
+                    var lotRepository = dependencies.Value.Item2;
+                    var userRepository = dependencies.Value.Item3;
+                    var fileRepository = dependencies.Value.Item4;
+                    var applicationRepository = dependencies.Value.Item5;
+                    var caseTypeRepository = dependencies.Value.Item6;
+                    var organizationRepository = dependencies.Value.Item7;
+                    var aircraftRepository = dependencies.Value.Item8;
+                    var lotEventDispatcher = dependencies.Value.Item9;
+                    var context = dependencies.Value.Item10;
+
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
-
-                    var userContext = new UserContext(2);
-                    var lotRepository = new LotRepository(unitOfWork);
-                    var caseTypeRepository = new CaseTypeRepository(unitOfWork);
-                    var userRepository = new UserRepository(unitOfWork);
-                    var fileRepository = new FileRepository(unitOfWork);
-                    var applicationRepository = new ApplicationRepository(unitOfWork);
-                    var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
-                    var organizationRepository = new OrganizationRepository(unitOfWork);
-                    var aircraftRepository = new AircraftRepository(unitOfWork);
-
-                    var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
 
                     //var lot = lotRepository.GetSet("Person").CreateLot(userContext);
                     var lot = lotRepository.GetLotIndex(personOldIdsLotIds[personId]);
 
-                    var personAddresses = Person.getPersonAddresses(con, personId);
+                    var personAddresses = this.getPersonAddresses(oracleConn, personId);
                     foreach (var address in personAddresses)
                     {
-                        lot.CreatePart("personAddresses/*", address, userContext);
+                        lot.CreatePart("personAddresses/*", address, context);
                     }
 
                     Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                     {
-                        var pv = lot.CreatePart(path, content.Get<JObject>("part"), userContext);
+                        var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
                         fileRepository.AddFileReferences(pv, content.GetItems<FileDO>("files"));
                         return pv;
                     };
 
                     Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>> applications =
                         new Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>>();
-                    var personDocumentApplications = Person.getPersonDocumentApplications(con, personId);
+                    var personDocumentApplications = this.getPersonDocumentApplications(oracleConn, personId);
                     foreach (var docApplication in personDocumentApplications)
                     {
                         var pv = addPartWithFiles("personDocumentApplications/*", docApplication);
@@ -176,7 +185,7 @@ namespace Gva.MigrationTool.Sets
                                 Utils.ToJObject(appNomDO));
                     }
 
-                    var personDocuments = Person.getPersonDocuments(con, personId, nomApplications);
+                    var personDocuments = this.getPersonDocuments(oracleConn, personId, nomApplications);
                     foreach (var personDocument in personDocuments)
                     {
                         if ((new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
@@ -302,34 +311,34 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    var personDocumentEducations = Person.getPersonDocumentEducations(con, personId, nomApplications);
+                    var personDocumentEducations = this.getPersonDocumentEducations(oracleConn, personId, nomApplications);
                     foreach (var docEducation in personDocumentEducations)
                     {
                         addPartWithFiles("personDocumentEducations/*", docEducation);
                     }
 
-                    var personDocumentEmployments = Person.getPersonDocumentEmployments(con, personId, organizationRepository);
+                    var personDocumentEmployments = this.getPersonDocumentEmployments(oracleConn, personId, organizationRepository);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
                         addPartWithFiles("personDocumentEmployments/*", docEmployment);
                     }
 
-                    var personDocumentMedicals = Person.getPersonDocumentMedicals(con, personId, nomApplications);
+                    var personDocumentMedicals = this.getPersonDocumentMedicals(oracleConn, personId, nomApplications);
                     foreach (var docMedical in personDocumentMedicals)
                     {
                         addPartWithFiles("personDocumentMedicals/*", docMedical);
                     }
 
-                    var personFlyingExperiences = Person.getPersonFlyingExperiences(con, personId, organizationRepository, aircraftRepository);
+                    var personFlyingExperiences = this.getPersonFlyingExperiences(oracleConn, personId, organizationRepository, aircraftRepository);
                     foreach (var flyingExperience in personFlyingExperiences)
                     {
-                        lot.CreatePart("personFlyingExperiences/*", flyingExperience, userContext);
+                        lot.CreatePart("personFlyingExperiences/*", flyingExperience, context);
                     }
 
-                    var personStatuses = Person.getPersonStatuses(con, personId);
+                    var personStatuses = this.getPersonStatuses(oracleConn, personId);
                     foreach (var personStatus in personStatuses)
                     {
-                        lot.CreatePart("personStatuses/*", personStatus, userContext);
+                        lot.CreatePart("personStatuses/*", personStatus, context);
                     }
 
 
@@ -354,7 +363,7 @@ namespace Gva.MigrationTool.Sets
 
                     try
                     {
-                        lot.Commit(userContext, lotEventDispatcher);
+                        lot.Commit(context, lotEventDispatcher);
                     }
                     //swallow the Cannot commit without modifications exception
                     catch (InvalidOperationException)
@@ -371,14 +380,14 @@ namespace Gva.MigrationTool.Sets
             Console.WriteLine("Person migration time - {0}", timer.Elapsed.TotalMinutes);
         }
 
-        public static IList<int> getPersonIds(OracleConnection con)
+        private IList<int> getPersonIds(OracleConnection con)
         {
             return con.CreateStoreCommand("SELECT ID FROM CAA_DOC.PERSON")
                 .Materialize(r => (int)r.Field<decimal>("ID"))
                     .ToList();
         }
 
-        public static JObject getPersonData(OracleConnection con, int personId)
+        private JObject getPersonData(OracleConnection con, int personId)
         {
             var lins = new Dictionary<string, string>()
                 {
@@ -428,7 +437,7 @@ namespace Gva.MigrationTool.Sets
                 .Single();
         }
 
-        public static IList<JObject> getPersonAddresses(OracleConnection con, int personId)
+        private IList<JObject> getPersonAddresses(OracleConnection con, int personId)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_ADDRESS WHERE {0} {1}",
@@ -452,7 +461,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentApplications(OracleConnection con, int personId)
+        private IList<JObject> getPersonDocumentApplications(OracleConnection con, int personId)
         {
             var parts = con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REQUEST WHERE {0} {1}",
@@ -545,7 +554,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonDocuments(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
+        private IList<JObject> getPersonDocuments(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
         {
             var parts = con.CreateStoreCommand(
                 @"SELECT PD.ID,
@@ -688,7 +697,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentEducations(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
+        private IList<JObject> getPersonDocumentEducations(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
         {
             var parts = con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EDUCATION WHERE {0} {1}",
@@ -793,7 +802,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentEmployments(OracleConnection con, int personId, IOrganizationRepository or)
+        private IList<JObject> getPersonDocumentEmployments(OracleConnection con, int personId, IOrganizationRepository or)
         {
             var parts = con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0} {1}",
@@ -811,7 +820,7 @@ namespace Gva.MigrationTool.Sets
 
                         hiredate = r.Field<DateTime?>("HIREDATE"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("FIRM_ID")), or),
+                        organization = Utils.GetOrganization((int?)r.Field<decimal?>("FIRM_ID"), or, organizationOldIdsLotIds),
                         employmentCategory = noms["employmentCategories"].ByOldId(r.Field<decimal?>("JOB_CATEGORY_ID").ToString()),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()),
                         notes = r.Field<string>("NOTES")
@@ -882,7 +891,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonDocumentMedicals(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
+        private IList<JObject> getPersonDocumentMedicals(OracleConnection con, int personId, IDictionary<int, JObject> nomApplications)
         {
             var medLimitations = con
                 .CreateStoreCommand(
@@ -1012,7 +1021,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getPersonFlyingExperiences(OracleConnection con, int personId, IOrganizationRepository or, IAircraftRepository ar)
+        private IList<JObject> getPersonFlyingExperiences(OracleConnection con, int personId, IOrganizationRepository or, IAircraftRepository ar)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0} {1}",
@@ -1028,8 +1037,8 @@ namespace Gva.MigrationTool.Sets
                         staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
                         documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
                         period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
-                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("FIRM_ID")), or),
-                        aircraft = Utils.GetAircraft(aircraftOldIdsLotIds.GetLotId((int?)r.Field<long?>("AC_ID")), ar),
+                        organization = Utils.GetOrganization((int?)r.Field<decimal?>("FIRM_ID"), or, organizationOldIdsLotIds),
+                        aircraft = Utils.GetAircraft((int?)r.Field<long?>("AC_ID"), ar, aircraftOldIdsLotIds),
                         ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
                         ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                         authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
@@ -1052,7 +1061,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        public static IList<JObject> getPersonStatuses(OracleConnection con, int personId)
+        private IList<JObject> getPersonStatuses(OracleConnection con, int personId)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_STATE WHERE {0} {1}",
@@ -1074,7 +1083,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        //public static IList<JObject> getPersonRatings(OracleConnection con, int personId)
+        //private IList<JObject> getPersonRatings(OracleConnection con, int personId)
         //{
         //    return con.CreateStoreCommand(
         //        @"SELECT * FROM CAA_DOC.RATING_CAA WHERE {0} {1}",
@@ -1101,7 +1110,7 @@ namespace Gva.MigrationTool.Sets
         //        .ToList();
         //}
 
-        //public static IList<JObject> getPersonRatingEditions(OracleConnection con, int ratingId)
+        //private IList<JObject> getPersonRatingEditions(OracleConnection con, int ratingId)
         //{
         //    return con.CreateStoreCommand(
         //        @"SELECT * FROM CAA_DOC.RATING_CAA_DATES WHERE {0} {1}",

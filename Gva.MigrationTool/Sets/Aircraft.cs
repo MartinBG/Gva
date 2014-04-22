@@ -1,182 +1,209 @@
-﻿using Common.Api.UserContext;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using Autofac.Features.OwnedInstances;
+using Common.Api.Models;
+using Common.Api.Repositories.UserRepository;
+using Common.Api.UserContext;
 using Common.Data;
-using Newtonsoft.Json;
+using Common.Json;
+using Common.Tests;
+using Gva.Api.Models;
+using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.OrganizationRepository;
+using Gva.Api.Repositories.PersonRepository;
+using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gva.MigrationTool.Nomenclatures;
-using Common.Api.Models;
-using Docs.Api.Models;
-using Gva.Api.Models;
-using Gva.Api.LotEventHandlers.PersonView;
-using Gva.Api.LotEventHandlers.OrganizationView;
-using Gva.Api.LotEventHandlers.InventoryView;
-using Gva.Api.LotEventHandlers.ApplicationView;
-using Common.Api.Repositories.UserRepository;
-using Regs.Api.LotEvents;
-using System.Data.SqlClient;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.ApplicationRepository;
-using Gva.Api.ModelsDO;
-using Common.Json;
-using Gva.Api.LotEventHandlers.AircraftView;
-using Gva.Api.LotEventHandlers.AirportView;
-using Gva.Api.LotEventHandlers.EquipmentView;
-using Gva.Api.Repositories.AircraftRepository;
-using Gva.Api.Repositories.PersonRepository;
-using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.MigrationTool.Sets
 {
-    public static class Aircraft
+    public class Aircraft
     {
-        public static Dictionary<int, int> aircraftOldIdsLotIds;
-        public static Dictionary<int, int> personOldIdsLotIds;
-        public static Dictionary<int, int> organizationOldIdsLotIds;
-        public static Dictionary<string, Dictionary<string, NomValue>> noms;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private OracleConnection oracleConn;
+        private SqlConnection sqlConn;
 
-        public static int? GetLotId(this Dictionary<int, int> dic, int? id){
-            if(id == null || !dic.ContainsKey((int)id))
-            {
-                return null;
-            }
-            return dic[(int)id];
+        public Aircraft(
+            OracleConnection oracleConn,
+            SqlConnection sqlConn,
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+        {
+            this.dependencyFactory = dependencyFactory;
+            this.oracleConn = oracleConn;
+            this.sqlConn = sqlConn;
         }
 
-        public static void createAircraftsLots(OracleConnection oracleCon, Dictionary<string, Dictionary<string, NomValue>> n)
+        public Tuple<Dictionary<int, int>, Dictionary<string, int>> createAircraftsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            noms = n;
-            var context = new UserContext(2);
-            Dictionary<int, Lot> oldIdsLots = new Dictionary<int, Lot>();
-            var aircraftIds = Aircraft.getAircraftIds(oracleCon);
+            Dictionary<int, int> apexIdtoLotId = new Dictionary<int, int>();
+            Dictionary<string, int> apexMSNtoLotId = new Dictionary<string, int>();
+            Dictionary<string, int> fmIdtoLotId = new Dictionary<string, int>();
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                var lotRepository = new LotRepository(unitOfWork);
-                var userRepository = new UserRepository(unitOfWork);
-                var fileRepository = new FileRepository(unitOfWork);
-                var applicationRepository = new ApplicationRepository(unitOfWork);
-                var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
-                var personRepository = new PersonRepository(unitOfWork);
-                var organizationRepository = new OrganizationRepository(unitOfWork);
-
-                var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
+                var unitOfWork = dependencies.Value.Item1;
+                var lotRepository = dependencies.Value.Item2;
+                var userRepository = dependencies.Value.Item3;
+                var fileRepository = dependencies.Value.Item4;
+                var applicationRepository = dependencies.Value.Item5;
+                var personRepository = dependencies.Value.Item6;
+                var organizationRepository = dependencies.Value.Item7;
+                var lotEventDispatcher = dependencies.Value.Item8;
+                var context = dependencies.Value.Item9;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
                 Set aircraftSet = lotRepository.GetSet("Aircraft");
 
-                var list = new List<int>()
-                {
-                    1229,
-                    1821,
-                    419,
-                    1817,
-                    1295,
-                    395,
-                    1303,
-                    42
-                };
+                //var list = new List<int>()
+                //{
+                //    1229,
+                //    1821,
+                //    419,
+                //    1817,
+                //    1295,
+                //    395,
+                //    1303,
+                //    42
+                //};
 
-                foreach (var aircraftId in aircraftIds)
+                foreach (var aircraftApexId in this.getAircraftApexIds())
                 {
-                    if (list.Contains(aircraftId))
-                    {
-                        continue;
-                    }
-                    if (aircraftId >= 200)
-                        break;
+                    //if (list.Contains(aircraftId))
+                    //{
+                    //    continue;
+                    //}
+
+                    //if (aircraftId != 1286) //MSN E1258, MARK LZ-TIM
+                    //    break;
 
                     var lot = aircraftSet.CreateLot(context);
-                    oldIdsLots.Add(aircraftId, lot);
-                    var aircraftData = Aircraft.getAircraftData(oracleCon, aircraftId);
+                    var aircraftData = this.getAircraftData(aircraftApexId, noms);
                     lot.CreatePart("aircraftDataApex", aircraftData, context);
                     lot.Commit(context, lotEventDispatcher);
+
                     unitOfWork.Save();
-                    Console.WriteLine("Created aircraftDataApex part for aircraft with id {0}", aircraftId);
+                    Console.WriteLine("Created aircraftDataApex part for aircraft with APEX id {0}", aircraftApexId);
+
+                    apexIdtoLotId.Add(aircraftApexId, lot.LotId);
+
+                    var msn = aircraftData.Get<string>("manSN");
+                    if (apexMSNtoLotId.ContainsKey(msn))
+                    {
+                        Console.WriteLine("Duplicate Apex MSN: {0}", msn);
+                    }
+                    else
+                    {
+                        apexMSNtoLotId.Add(msn, lot.LotId);
+                    }
+                }
+
+                foreach (var aircraftFmId in this.getAircraftFmIds())
+                {
+                    var aircraftDataFM = this.getAircraftDataFM(aircraftFmId, noms);
+                    var msn = aircraftDataFM.Get<string>("manSN");
+
+                    Lot lot;
+                    if (apexMSNtoLotId.ContainsKey(msn))
+                    {
+                        lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Missing aircraft with MSN {0} in APEX", msn);
+                        lot = aircraftSet.CreateLot(context);
+                    }
+
+                    if (lot.GetPart("aircraftData") != null)
+                    {
+                        Console.WriteLine("Aircraft with MSN {0} in FM has already been migrated", msn);
+                        continue;
+                    }
+
+                    lot.CreatePart("aircraftData", aircraftDataFM, context);
+                    lot.Commit(context, lotEventDispatcher);
+
+                    unitOfWork.Save();
+                    Console.WriteLine("Created aircraftData part for aircraft with FM id {0}", aircraftFmId);
+
+                    fmIdtoLotId.Add(aircraftFmId, lot.LotId);
                 }
             }
 
-            aircraftOldIdsLotIds = oldIdsLots.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.LotId);
+            return Tuple.Create(apexIdtoLotId, fmIdtoLotId);
         }
 
-        public static void migrateAircrafts(OracleConnection oracleCon, SqlConnection sqlCon, Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> pIdsLots, Dictionary<int, int> oIdsLots)
+        public void migrateAircrafts(
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> aircraftApexIdtoLotId,
+            Dictionary<string, int> aircraftFmIdtoLotId,
+            Dictionary<int, int> personApexIdToLotId,
+            Dictionary<int, int> orgApexIdToLotId)
         {
-
-            noms = n;
-            var context = new UserContext(2);
-            personOldIdsLotIds = pIdsLots;
-            organizationOldIdsLotIds = oIdsLots;
-            Dictionary<string, int> apexAircraftsIdsMsn = new Dictionary<string, int>();
-
-
-            var aircraftIds = Aircraft.getAircraftIds(oracleCon);
-            foreach (var aircraftId in aircraftIds)
+            foreach (var aircraftApexId in this.getAircraftApexIds())
             {
-                if (aircraftId >= 200)
-                    break;
+                //if (aircraftApexId >= 200)
+                //    break;
 
-                using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+                using (var dependencies = dependencyFactory())
                 {
-                    var lotRepository = new LotRepository(unitOfWork);
-                    var userRepository = new UserRepository(unitOfWork);
-                    var fileRepository = new FileRepository(unitOfWork);
-                    var applicationRepository = new ApplicationRepository(unitOfWork);
-                    var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
-                    var personRepository = new PersonRepository(unitOfWork);
-                    var organizationRepository = new OrganizationRepository(unitOfWork);
-
-                    var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
-
-                    var list = new List<string>()
-                    {
-                        "0103",
-                        "011",
-                        "0922",
-                        "1087",
-                        "174710",
-                        "174725",
-                        "421",
-                        "422",
-                        "5602",
-                        "6001",
-                        "8007",
-                        "9002",
-                        "W-571"
-                    };
-                    var aircraftData = Aircraft.getAircraftData(oracleCon, aircraftId);
-                    if (list.Contains(aircraftData["manSN"].Value<string>()))
-                    {
-                        continue;
-                    }
-
-                    Set aircraftSet = lotRepository.GetSet("Aircraft");
+                    var unitOfWork = dependencies.Value.Item1;
+                    var lotRepository = dependencies.Value.Item2;
+                    var userRepository = dependencies.Value.Item3;
+                    var fileRepository = dependencies.Value.Item4;
+                    var applicationRepository = dependencies.Value.Item5;
+                    var personRepository = dependencies.Value.Item6;
+                    var organizationRepository = dependencies.Value.Item7;
+                    var lotEventDispatcher = dependencies.Value.Item8;
+                    var context = dependencies.Value.Item9;
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    var lot = lotRepository.GetLotIndex(aircraftOldIdsLotIds[aircraftId]);
-                    //error check
-                    //if(lot == null){
+                    Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personApexIdToLotId);
+                    Func<int?, JObject> getOrganization = (orgApexId) => Utils.GetOrganization(orgApexId, organizationRepository, orgApexIdToLotId);
 
+                    //var list = new List<string>()
+                    //{
+                    //    "0103",
+                    //    "011",
+                    //    "0922",
+                    //    "1087",
+                    //    "174710",
+                    //    "174725",
+                    //    "421",
+                    //    "422",
+                    //    "5602",
+                    //    "6001",
+                    //    "8007",
+                    //    "9002",
+                    //    "W-571"
+                    //};
+                    //var aircraftData = this.getAircraftData(aircraftApexId);
+                    //var manSN = aircraftData["manSN"].Value<string>();
+
+                    //if (list.Contains(manSN))
+                    //{
+                    //    continue;
                     //}
 
-                    var manSN = aircraftData["manSN"].Value<string>();
-                    apexAircraftsIdsMsn.Add(manSN, lot.LotId);
+                    var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId]);
 
-                    var aircraftParts = Aircraft.getAircraftParts(oracleCon, aircraftId);
+                    //MSNtoApexId.Add(manSN, lot.LotId);
+
+                    var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
                     foreach (var aircraftPart in aircraftParts)
                     {
                         lot.CreatePart("aircraftParts/*", aircraftPart, context);
                     }
 
-                    var aircraftMaintenances = Aircraft.getAircraftMaintenances(oracleCon, aircraftId, personRepository, organizationRepository);
+                    var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPerson, getOrganization, noms);
                     foreach (var aircraftMaintenance in aircraftMaintenances)
                     {
                         lot.CreatePart("maintenances/*", aircraftMaintenance, context);
@@ -191,11 +218,10 @@ namespace Gva.MigrationTool.Sets
 
                     Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>> applications =
                         new Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>>();
-                    var aircraftDocumentApplications = Aircraft.getAircraftDocumentApplications(oracleCon, aircraftId);
+                    var aircraftDocumentApplications = this.getAircraftDocumentApplications(aircraftApexId, noms);
                     foreach (var aircraftDocumentApplication in aircraftDocumentApplications)
                     {
                         var pv = addPartWithFiles("aircraftDocumentApplications/*", aircraftDocumentApplication);
-                        //lot.CreatePart("aircraftDocumentApplications/*", aircraftDocumentApplication, context);
 
                         GvaApplication application = new GvaApplication()
                         {
@@ -231,25 +257,25 @@ namespace Gva.MigrationTool.Sets
                                 Utils.ToJObject(appNomDO));
                     }
 
-                    var aircraftDocumentOccurrences = Aircraft.getAircraftDocumentOccurrences(oracleCon, aircraftId, nomApplications);
+                    var aircraftDocumentOccurrences = this.getAircraftDocumentOccurrences(aircraftApexId, nomApplications, noms);
                     foreach (var aircraftDocumentOccurrence in aircraftDocumentOccurrences)
                     {
                         addPartWithFiles("documentOccurrences/*", aircraftDocumentOccurrence);
                     }
 
-                    var aircraftDocumentDebts = Aircraft.getAircraftDocumentDebts(oracleCon, aircraftId, nomApplications, personRepository, organizationRepository);
+                    var aircraftDocumentDebts = this.getAircraftDocumentDebts(aircraftApexId, nomApplications, getPerson, getOrganization, noms);
                     foreach (var aircraftDocumentDebt in aircraftDocumentDebts)
                     {
                         addPartWithFiles("aircraftDocumentDebts/*", aircraftDocumentDebt);
                     }
 
-                    var aircraftDocumentOwners = Aircraft.getAircraftDocumentOwners(oracleCon, aircraftId, nomApplications, personRepository, organizationRepository);
+                    var aircraftDocumentOwners = this.getAircraftDocumentOwners(aircraftApexId, nomApplications, getPerson, getOrganization, noms);
                     foreach (var aircraftDocumentOwner in aircraftDocumentOwners)
                     {
                         addPartWithFiles("aircraftDocumentOwners/*", aircraftDocumentOwner);
                     }
 
-                    var aircraftDocumentOthers = Aircraft.getAircraftDocumentOthers(oracleCon, aircraftId, nomApplications);
+                    var aircraftDocumentOthers = this.getAircraftDocumentOthers(aircraftApexId, nomApplications, noms);
                     foreach (var aircraftDocumentOther in aircraftDocumentOthers)
                     {
                         addPartWithFiles("aircraftDocumentOthers/*", aircraftDocumentOther);
@@ -257,46 +283,46 @@ namespace Gva.MigrationTool.Sets
 
                     Dictionary<int, int> inspections = new Dictionary<int, int>();
 
-                    var aircraftInspections = Aircraft.getAircraftInspections(oracleCon, aircraftId, nomApplications, personRepository);
+                    var aircraftInspections = this.getAircraftInspections(aircraftApexId, nomApplications, getPerson, noms);
                     foreach (var aircraftInspection in aircraftInspections)
                     {
                         var pv = lot.CreatePart("inspections/*", aircraftInspection, context);
                         inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index.Value);
                     }
 
-                    var aircraftCertRegistrations = Aircraft.getAircraftCertRegistrations(oracleCon, aircraftId, personRepository, organizationRepository);
+                    var aircraftCertRegistrations = this.getAircraftCertRegistrations(aircraftApexId, getPerson, getOrganization, noms);
                     foreach (var aircraftCertRegistration in aircraftCertRegistrations)
                     {
                         lot.CreatePart("aircraftCertRegistrations/*", aircraftCertRegistration, context);
 
                         int certId = aircraftCertRegistration["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinesses = Aircraft.getAircraftCertAirworthinesses(oracleCon, certId, inspections, personRepository);
+                        var aircraftCertAirworthinesses = this.getAircraftCertAirworthinesses(certId, inspections, getPerson, noms);
                         foreach (var aircraftCertAirworthiness in aircraftCertAirworthinesses)
                         {
                             lot.CreatePart("aircraftCertAirworthinesses/*", aircraftCertAirworthiness, context);
                         }
 
-                        var aircraftCertPermitsToFly = Aircraft.getAircraftCertPermitsToFly(oracleCon, certId);
+                        var aircraftCertPermitsToFly = this.getAircraftCertPermitsToFly(certId);
                         foreach (var aircraftCertPermitToFly in aircraftCertPermitsToFly)
                         {
                             lot.CreatePart("aircraftCertPermitsToFly/*", aircraftCertPermitToFly, context);
                         }
 
-                        var aircraftCertNoises = Aircraft.getAircraftCertNoises(oracleCon, certId);
+                        var aircraftCertNoises = this.getAircraftCertNoises(certId);
                         foreach (var aircraftCertNoise in aircraftCertNoises)
                         {
                             lot.CreatePart("aircraftCertNoises/*", aircraftCertNoise, context);
                         }
                     }
 
-                    var aircraftCertMarks = Aircraft.getAircraftCertMarks(oracleCon, aircraftId);
+                    var aircraftCertMarks = this.getAircraftCertMarks(aircraftApexId, noms);
                     foreach (var aircraftCertMark in aircraftCertMarks)
                     {
                         lot.CreatePart("aircraftCertMarks/*", aircraftCertMark, context);
                     }
 
-                    var aircraftCertSmods = Aircraft.getAircraftCertSmods(oracleCon, aircraftId);
+                    var aircraftCertSmods = this.getAircraftCertSmods(aircraftApexId, noms);
                     foreach (var aircraftCertSmod in aircraftCertSmods)
                     {
                         lot.CreatePart("aircraftCertSmods/*", aircraftCertSmod, context);
@@ -304,46 +330,31 @@ namespace Gva.MigrationTool.Sets
 
 
                     lot.Commit(context, lotEventDispatcher);
-
                     unitOfWork.Save();
 
-                    Console.WriteLine("Migrated APEX aircraftId: {0} manSN: {1}", aircraftId, manSN);
+                    Console.WriteLine("Migrated APEX aircraftId: {0}", aircraftApexId);
                 }
             }
 
-            var aircraftIdsMsnsFM = getAircraftIdsMsnsFM(sqlCon);
-            foreach (var aircraftIdMsnFM in aircraftIdsMsnsFM)
+            foreach (var aircraftFmId in this.getAircraftFmIds())
             {
-                using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+                using (var dependencies = dependencyFactory())
                 {
-                    var lotRepository = new LotRepository(unitOfWork);
-                    var userRepository = new UserRepository(unitOfWork);
-                    var fileRepository = new FileRepository(unitOfWork);
-                    var applicationRepository = new ApplicationRepository(unitOfWork);
-                    var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
+                    var unitOfWork = dependencies.Value.Item1;
+                    var lotRepository = dependencies.Value.Item2;
+                    var userRepository = dependencies.Value.Item3;
+                    var fileRepository = dependencies.Value.Item4;
+                    var applicationRepository = dependencies.Value.Item5;
+                    var personRepository = dependencies.Value.Item6;
+                    var organizationRepository = dependencies.Value.Item7;
+                    var lotEventDispatcher = dependencies.Value.Item8;
+                    var context = dependencies.Value.Item9;
 
-                    var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
+                    unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    Lot lot;
-                    Set aircraftSet = lotRepository.GetSet("Aircraft");
+                    Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);;
 
-                    if (apexAircraftsIdsMsn.Where(a => a.Key == aircraftIdMsnFM.Item2).Any())
-                    {
-                        lot = lotRepository.GetLotIndex(apexAircraftsIdsMsn[aircraftIdMsnFM.Item2]);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown aircraft with id - {0}, msn - {1}", aircraftIdMsnFM.Item1, aircraftIdMsnFM.Item2);
-                        continue;
-                        lot = aircraftSet.CreateLot(context);
-                    }
-
-                    var aircraftDataFM = Aircraft.getAircraftDataFM(sqlCon, aircraftIdMsnFM.Item1);
-                    lot.CreatePart("aircraftData", aircraftDataFM, context);
-                    lot.Commit(context, lotEventDispatcher);
-                    unitOfWork.Save();
-
-                    var aircraftCertRegistrationsFM = Aircraft.getAircraftCertRegistrationsFM(sqlCon, aircraftIdMsnFM.Item1);
+                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms);
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                     {
                         var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
@@ -357,16 +368,15 @@ namespace Gva.MigrationTool.Sets
                                 name = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
                             });
 
-
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinessesFM = Aircraft.getAircraftCertAirworthinessesFM(sqlCon, certId, regNom);
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom);
                         foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
                         {
                             lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
                         }
 
-                        var aircraftDocumentDebtsFM = Aircraft.getAircraftDocumentDebtsFM(sqlCon, certId, regNom);
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                         {
                             try
@@ -381,7 +391,7 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    var aircraftCertNoisesFM = Aircraft.getAircraftCertNoisesFM(sqlCon, aircraftIdMsnFM.Item1);
+                    var aircraftCertNoisesFM = this.getAircraftCertNoisesFM(aircraftFmId);
                     foreach (var aircraftCertNoiseFM in aircraftCertNoisesFM)
                     {
                         lot.CreatePart("aircraftCertNoisesFM/*", aircraftCertNoiseFM, context);
@@ -398,17 +408,17 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.Save();
 
-                    Console.WriteLine("Migrated FM aircraftIdMsnFM: {0}", aircraftIdMsnFM);
+                    Console.WriteLine("Migrated FM aircraftId: {0}", aircraftFmId);
                 }
             }
         }
 
-        public static bool checkValue(string val)
+        private bool checkValue(string val)
         {
             return !String.IsNullOrEmpty(val) && val.Trim() != "n/a" && val.Trim() != "n / a";
         }
 
-        public static int? toNum(string val)
+        private int? toNum(string val)
         {
             int value;
             if (checkValue(val) && Int32.TryParse(val.Trim(), out value))
@@ -419,7 +429,7 @@ namespace Gva.MigrationTool.Sets
             return null;
         }
 
-        public static decimal? toDecimal(string val)
+        private decimal? toDecimal(string val)
         {
             decimal value;
             if(checkValue(val) && decimal.TryParse(val.Trim(), out value))
@@ -430,7 +440,7 @@ namespace Gva.MigrationTool.Sets
             return null;
         }
 
-        public static DateTime? toDate(string val)
+        private DateTime? toDate(string val)
         {
             DateTime value;
             if(checkValue(val) && DateTime.TryParseExact(val.Trim(), "d.M.yyyy", null, System.Globalization.DateTimeStyles.None, out value))
@@ -441,23 +451,21 @@ namespace Gva.MigrationTool.Sets
             return null;
         }
 
-        public static IList<Tuple<string, string>> getAircraftIdsMsnsFM(SqlConnection sqlCon)
+        private IList<string> getAircraftFmIds()
         {
-            return sqlCon.CreateStoreCommand("select * from Acts")
-                .Materialize(r => new Tuple<string, string>(r.Field<string>("n_Act_ID"), r.Field<string>("t_Act_MSN")))
-                    .ToList();
+            return this.sqlConn.CreateStoreCommand("select n_Act_ID from Acts")
+                .Materialize(r => r.Field<string>("n_Act_ID"))
+                .ToList();
         }
 
-
-
-        public static JObject getAircraftDataFM(SqlConnection sqlCon, string aircraftId)
+        private JObject getAircraftDataFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return sqlCon.CreateStoreCommand(
+            return this.sqlConn.CreateStoreCommand(
                 @"select * from Acts where {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and n_Act_ID = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("n_Act_ID"),
@@ -484,18 +492,18 @@ namespace Gva.MigrationTool.Sets
                         EURegTypeId = r.Field<string>("t_Act_EU_RU"),//TODO
                         EASACategoryId = r.Field<string>("t_EASA_Category"),//TODO
                         tcds = r.Field<string>("t_EASA_TCDS")
-                    })))
+                    }))
                 .Single();
         }
 
-        public static IList<JObject> getAircraftDocumentDebtsFM(SqlConnection sqlCon, int certId, JObject regNom)
+        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom)
         {
-            return sqlCon.CreateStoreCommand(
+            return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts where {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and RegNo = {0}", certId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("nRecNo"),
@@ -509,13 +517,13 @@ namespace Gva.MigrationTool.Sets
                         aircraftCreditorId = r.Field<string>("Creditor"),//TODO
                         creditorDocument = r.Field<string>("Doc Creditor"),
                         inspectorId = r.Field<string>("tUser")//TODO
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertRegistrationsFM(SqlConnection sqlCon, string aircraftId)
+        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return sqlCon.CreateStoreCommand(
+            return this.sqlConn.CreateStoreCommand(
                 @"select * from 
                     (select 1 as regNumber, nActID, nRegNum, dRegDate, tRegMark, tDocCAA, dDateCAA, tDocOther, tRegUser, nOwner,
                             nOper, tCatCode, nLimitID, tR83_Zapoved, dR83_Data, tLessor, tLessorAgreement, dLeaseDate,
@@ -532,7 +540,7 @@ namespace Gva.MigrationTool.Sets
                 new DbClause("1=1"),
                 new DbClause("and nActID = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("nRegNum"),
@@ -573,13 +581,13 @@ namespace Gva.MigrationTool.Sets
                             documentDate = toDate(r.Field<string>("dDeDateCAA")),
                             inspectorId = r.Field<string>("tDeUser")//TODO
                         }
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertAirworthinessesFM(SqlConnection sqlCon, int certId, JObject regNom)
+        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom)
         {
-            return sqlCon.CreateStoreCommand(
+            return this.sqlConn.CreateStoreCommand(
                 @"select * from 
                     (select nRegNum, NumberIssue, dIssue, dFrom, dValid, t_Reviewed_By, tDocCAA,
                             dDocCAA, dDateEASA_25_Issue, d_24_Issue, d_24_Valid, d_ARC_Issue, d_ARC_Valid, t_ARC_RefNo
@@ -592,7 +600,7 @@ namespace Gva.MigrationTool.Sets
                 new DbClause("1=1"),
                 new DbClause("and nRegNum = {0}", certId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("nRegNum"),
@@ -612,18 +620,18 @@ namespace Gva.MigrationTool.Sets
                         EASA15IssueDate = toDate(r.Field<string>("d_ARC_Issue")),
                         EASA15IssueValidToDate = toDate(r.Field<string>("d_ARC_Valid")),
                         EASA15IssueRefNo = r.Field<string>("t_ARC_RefNo")
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertNoisesFM(SqlConnection sqlCon, string aircraftId)
+        private IList<JObject> getAircraftCertNoisesFM(string aircraftId)
         {
-            return sqlCon.CreateStoreCommand(
+            return this.sqlConn.CreateStoreCommand(
                 @"select * from Acts where {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and n_Act_ID = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("n_Act_ID"),
@@ -640,25 +648,25 @@ namespace Gva.MigrationTool.Sets
                         modifications = r.Field<string>("t_Noise_AddModifBg"),
                         modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
                         notes = r.Field<string>("t_Noise_Remark"),
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<int> getAircraftIds(OracleConnection oracleCon)
+        private IList<int> getAircraftApexIds()
         {
-            return oracleCon.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
+            return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
                 .Materialize(r => (int)r.Field<long>("ID"))
-                    .ToList();
+                .ToList();
         }
 
-        public static JObject getAircraftData(OracleConnection oracleCon, int aircraftId)
+        private JObject getAircraftData(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AIRCRAFT WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -707,13 +715,18 @@ namespace Gva.MigrationTool.Sets
                             incommingApprovalnumber = r.Field<string>("RADIO_DOC"),
                             incommingApprovalDate = r.Field<DateTime?>("RADIO_DOC_DATE")
                         }
-                    })))
+                    }))
                 .Single();
         }
 
-        public static IList<JObject> getAircraftDocumentOwners(OracleConnection oracleCon, int aircraftId, Dictionary<int, JObject> nomApplications, IPersonRepository pr, IOrganizationRepository or)
+        private IList<JObject> getAircraftDocumentOwners(
+            int aircraftId,
+            Dictionary<int, JObject> nomApplications,
+            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getOrganization,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var parts = oracleCon.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_OWNER WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -728,8 +741,8 @@ namespace Gva.MigrationTool.Sets
                         __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
 
                         aircraftRelation = noms["aircraftRelations"].ByOldId(r.Field<long?>("TYPE_RELATION").ToString()),
-                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_FIRM")), or),
-                        person = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_PERSON")), pr),
+                        organization = getOrganization((int?)r.Field<decimal?>("ID_FIRM")),
+                        person = getPerson((int?)r.Field<decimal?>("ID_PERSON")),
                         documentNumber = r.Field<string>("DOC_NUM"),
                         documentDate = r.Field<DateTime?>("DOC_DATE"),
                         fromDate = r.Field<DateTime?>("DATE_FROM"),
@@ -739,7 +752,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = oracleCon.CreateStoreCommand(
+            var files = this.oracleConn.CreateStoreCommand(
                 @"SELECT O.ID,
                         D.DOC_ID,
                         D.MIME_TYPE,
@@ -805,14 +818,14 @@ namespace Gva.MigrationTool.Sets
 
         }
 
-        public static IList<JObject> getAircraftParts(OracleConnection oracleCon, int aircraftId)
+        private IList<JObject> getAircraftParts(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_PART WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -827,13 +840,18 @@ namespace Gva.MigrationTool.Sets
                         manDate = r.Field<DateTime?>("MAN_DATE"),
                         manPlace = r.Field<string>("MAN_PLACE"),
                         description = r.Field<string>("DESCRIPTION"),
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftDocumentDebts(OracleConnection oracleCon, int aircraftId, Dictionary<int, JObject> nomApplications, IPersonRepository pr, IOrganizationRepository or)
+        private IList<JObject> getAircraftDocumentDebts(
+            int aircraftId,
+            Dictionary<int, JObject> nomApplications,
+            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getOrganization,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var parts = oracleCon.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_DEBT WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -852,21 +870,21 @@ namespace Gva.MigrationTool.Sets
                         contractNumber = r.Field<string>("CONTRACT_NUM"),
                         contractDate = r.Field<DateTime?>("CONTRACT_DATE"),
                         startDate = r.Field<DateTime?>("START_DATE"),
-                        inspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("REG_EXAMINER_ID")), pr),
+                        inspector = getPerson((int?)r.Field<decimal?>("REG_EXAMINER_ID")),
                         startReason = r.Field<string>("START_REASON"),
                         startReasonAlt = r.Field<string>("START_REASON_TRANS"),
                         notes = r.Field<string>("NOTES"),
                         ltrNumber = r.Field<string>("LTR_CAA_NOM"),
                         ltrDate = r.Field<DateTime?>("LTR_CAA_DATE"),
-                        owner = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<long?>("ID_OWNER")), or),
-                        oper = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<long?>("ID_OPER")), or),
+                        owner = getOrganization((int?)r.Field<long?>("ID_OWNER")),
+                        oper = getOrganization((int?)r.Field<long?>("ID_OPER")),
                         endReason = r.Field<string>("END_REASON"),
                         endDate = r.Field<DateTime?>("END_DATE"),
                         closeAplicationNumber = r.Field<string>("CLOSE_APPL_DOC"),
                         closeAplicationDate = r.Field<DateTime?>("CLOSE_APPL_DATE"),
                         closeCaaAplicationNumber = r.Field<string>("CLOSE_CAA_DOC"),
                         closeCaaAplicationDate = r.Field<DateTime?>("CLOSE_CAA_DATE"),
-                        closeInspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("CLOSE_EXAMINER_ID")), pr),
+                        closeInspector = getPerson((int?)r.Field<decimal?>("CLOSE_EXAMINER_ID")),
                         creditorName = r.Field<string>("CREDITOR_NAME"),
                         creditorNameAlt = r.Field<string>("CREDITOR_NAME_TRANS"),
                         creditorAddress = r.Field<string>("CREDITOR_ADRES"),
@@ -876,7 +894,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = oracleCon.CreateStoreCommand(
+            var files = this.oracleConn.CreateStoreCommand(
                 @"SELECT AD.ID,
                         D.DOC_ID,
                         D.MIME_TYPE,
@@ -905,7 +923,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var apps = oracleCon.CreateStoreCommand(
+            var apps = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID REQUEST_ID,
                         AD.ID AC_DEBT_ID
                     FROM CAA_DOC.REQUEST R
@@ -976,14 +994,18 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getAircraftMaintenances(OracleConnection oracleCon, int aircraftId, IPersonRepository pr, IOrganizationRepository or)
+        private IList<JObject> getAircraftMaintenances(
+            int aircraftId,
+            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getOrganization,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_MAINTENANCE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -992,15 +1014,18 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("REMARKS"),
                         fromDate = r.Field<DateTime?>("DATE_FROM"),
                         toDate = r.Field<DateTime?>("DATE_TO"),
-                        organization = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_FIRM")), or),
-                        person = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_PERSON")), pr),
-                    })))
+                        organization = getOrganization((int?)r.Field<decimal?>("ID_FIRM")),
+                        person = getPerson((int?)r.Field<decimal?>("ID_PERSON")),
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftDocumentOccurrences(OracleConnection oracleCon, int aircraftId, Dictionary<int, JObject> nomApplications)
+        private IList<JObject> getAircraftDocumentOccurrences(
+            int aircraftId,
+            Dictionary<int, JObject> nomApplications,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var parts = oracleCon.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_OCCURRENCE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AC = {0}", aircraftId)
@@ -1028,7 +1053,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = oracleCon.CreateStoreCommand(
+            var files = this.oracleConn.CreateStoreCommand(
                 @"SELECT O.ID,
                         D.DOC_ID,
                         D.MIME_TYPE,
@@ -1090,9 +1115,13 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getAircraftInspections(OracleConnection oracleCon, int aircraftId, Dictionary<int, JObject> nomApplications, IPersonRepository pr)
+        private IList<JObject> getAircraftInspections(
+            int aircraftId,
+            Dictionary<int, JObject> nomApplications,
+            Func<int?, JObject> getPerson,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var inspectionDisparities = oracleCon.CreateStoreCommand(
+            var inspectionDisparities = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM 
                                 CAA_DOC.REC_DISPARITY
                                 WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
@@ -1128,7 +1157,7 @@ namespace Gva.MigrationTool.Sets
                                 n.closureDocument
                             }).ToArray()));
 
-            var inspectionDetails = oracleCon.CreateStoreCommand(
+            var inspectionDetails = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM 
                     CAA_DOC.AUDITS_DETAIL
                     WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
@@ -1145,7 +1174,7 @@ namespace Gva.MigrationTool.Sets
                     })
                 .ToArray();
 
-            var inspectors = oracleCon.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM 
                     CAA_DOC.AUDITOR
                     WHERE ID_ODIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
@@ -1155,16 +1184,16 @@ namespace Gva.MigrationTool.Sets
                     new
                     {
                         sortOrder = r.Field<decimal?>("SEQ").ToString(),
-                        examinerId = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_EXAMINER")), pr),
+                        examinerId = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
                     })
                 .ToArray();
 
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -1185,13 +1214,13 @@ namespace Gva.MigrationTool.Sets
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey((int)r.Field<decimal?>("ID_REQUEST"))) ?
                             nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] :
                             null
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftDocumentApplications(OracleConnection oracleCon, int aircraftId)
+        private IList<JObject> getAircraftDocumentApplications(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var parts = oracleCon.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REQUEST WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and APPLICANT_AC_ID = {0}", aircraftId)
@@ -1216,7 +1245,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = oracleCon.CreateStoreCommand(
+            var files = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID,
                         R.BOOK_PAGE_NO,
                         R.PAGES_COUNT,
@@ -1282,9 +1311,12 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getAircraftDocumentOthers(OracleConnection oracleCon, int aircraftId, Dictionary<int, JObject> nomApplications)
+        private IList<JObject> getAircraftDocumentOthers(
+            int aircraftId,
+            Dictionary<int, JObject> nomApplications,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var parts = oracleCon.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_DOCUMENT WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and AC_ID = {0}", aircraftId)
@@ -1309,7 +1341,7 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = oracleCon.CreateStoreCommand(
+            var files = this.oracleConn.CreateStoreCommand(
                 @"SELECT PD.ID,
                         D.DOC_ID,
                         D.MIME_TYPE,
@@ -1372,14 +1404,18 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        public static IList<JObject> getAircraftCertRegistrations(OracleConnection oracleCon, int aircraftId, IPersonRepository pr, IOrganizationRepository or)
+        private IList<JObject> getAircraftCertRegistrations(
+            int aircraftId,
+            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getOrganization,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_CERTIFICATE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -1389,9 +1425,9 @@ namespace Gva.MigrationTool.Sets
                         certDate = r.Field<DateTime?>("CERT_DATE"),
                         aircraftNewOld = noms["aircraftPartStatuses"].ByCode(r.Field<string>("NEW_USED")),
                         operationType = noms["aircraftOperTypes"].ByOldId(r.Field<long?>("ID_TYPE_OPER").ToString()),
-                        owner = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<long?>("ID_OWNER")), or),
-                        oper = Utils.GetOrganization(organizationOldIdsLotIds.GetLotId((int?)r.Field<long?>("ID_OPER")), or),
-                        inspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_EXAMINER_REG")), pr),
+                        owner = getOrganization((int?)r.Field<long?>("ID_OWNER")),
+                        oper = getOrganization((int?)r.Field<long?>("ID_OPER")),
+                        inspector = getPerson((int?)r.Field<decimal?>("ID_EXAMINER_REG")),
                         regnotes = r.Field<string>("NOTES_REG"),
                         paragraph = r.Field<string>("PARAGRAPH"),
                         paragraphAlt = r.Field<string>("PARAGRAPH_TRANS"),
@@ -1409,18 +1445,22 @@ namespace Gva.MigrationTool.Sets
                             certRelease = r.Field<string>("TC_REALEASE"),
                             country = noms["countries"].ByOldId(r.Field<decimal?>("TC_COUNTRY_ID").ToString())
                         }
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertAirworthinesses(OracleConnection oracleCon, int certId, Dictionary<int, int> inspections, IPersonRepository pr)
+        private IList<JObject> getAircraftCertAirworthinesses(
+            int certId,
+            Dictionary<int, int> inspections,
+            Func<int?, JObject> getPerson,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_AIRWORTHINESS WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_CERTIFICATE = {0}", certId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -1434,36 +1474,36 @@ namespace Gva.MigrationTool.Sets
                             inspections[(int)r.Field<long?>("ID_AUDITS")] :
                             (int?)null,//TODO
                         approvalId = r.Field<long?>("ID_APPROVAL"),//TODO
-                        inspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("ID_EXAMINER")), pr),
+                        inspector = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                         ext1Date = r.Field<DateTime?>("EXT1_DATE"),
                         ext1validtoDate = r.Field<DateTime?>("EXT1_VALID_TO"),
                         ext1approvalId = r.Field<long?>("EXT1_APPROVAL_ID"),//TODO
-                        ext1inspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("EXT1_ID_EXAMINER")), pr),
+                        ext1inspector = getPerson((int?)r.Field<decimal?>("EXT1_ID_EXAMINER")),
                         ext2Date = r.Field<DateTime?>("EXT2_DATE"),
                         ext2validtoDate = r.Field<DateTime?>("EXT2_VALID_TO"),
                         ext2approvalId = r.Field<long?>("EXT2_APPROVAL_ID"),//TODO
-                        ext2inspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("EXT2_ID_EXAMINER")), pr),
+                        ext2inspector = getPerson((int?)r.Field<decimal?>("EXT2_ID_EXAMINER")),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY_TRANSFER").ToString()),
                         exemptions = r.Field<string>("EXEMPTIONS"),
                         exemptionsAlt = r.Field<string>("EXEMPTIONS_TRANS"),
                         specialReq = r.Field<string>("SPECIAL_REQ"),
                         specialReqAlt = r.Field<string>("SPECIAL_REQ_TRANS"),
                         revokeDate = r.Field<DateTime?>("REVOKE_DATE"),
-                        revokeinspector = Utils.GetPerson(personOldIdsLotIds.GetLotId((int?)r.Field<decimal?>("REVOKE_ID_EXAMINER")), pr),
+                        revokeinspector = getPerson((int?)r.Field<decimal?>("REVOKE_ID_EXAMINER")),
                         revokeCause = r.Field<string>("SPECIAL_REQ")
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertMarks(OracleConnection oracleCon, int aircraftId)
+        private IList<JObject> getAircraftCertMarks(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_MARK WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
@@ -1474,18 +1514,18 @@ namespace Gva.MigrationTool.Sets
                         ltrCaaDate = r.Field<DateTime?>("LTR_CAA_DATE"),
                         mark = r.Field<string>("MARK"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertSmods(OracleConnection oracleCon, int aircraftId)
+        private IList<JObject> getAircraftCertSmods(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_S_CODE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
@@ -1499,18 +1539,18 @@ namespace Gva.MigrationTool.Sets
                         caaToAddress = r.Field<string>("LTR_CAA_TO_ADDRESS"),
                         scode = r.Field<string>("S_CODE"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertPermitsToFly(OracleConnection oracleCon, int certId)
+        private IList<JObject> getAircraftCertPermitsToFly(int certId)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_FLY_PERMIT WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_CERTIFICATE = {0}", certId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
@@ -1531,18 +1571,18 @@ namespace Gva.MigrationTool.Sets
                         notesAlt = r.Field<string>("REMARKS_TRANS"),
                         crew = r.Field<string>("CREW"),
                         crewAlt = r.Field<string>("CREW_TRANS"),
-                    })))
+                    }))
                 .ToList();
         }
 
-        public static IList<JObject> getAircraftCertNoises(OracleConnection oracleCon, int certId)
+        private IList<JObject> getAircraftCertNoises(int certId)
         {
-            return oracleCon.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_NOISE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_CERTIFICATE = {0}", certId)
                 )
-                .Materialize(r => JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(
+                .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = (int)r.Field<long>("ID"),
@@ -1559,7 +1599,7 @@ namespace Gva.MigrationTool.Sets
                         modifications = r.Field<string>("MODIFICATIONS"),
                         modificationsAlt = r.Field<string>("MODIFICATIONS_TRANS"),
                         notes = r.Field<string>("REMARKS")
-                    })))
+                    }))
                 .ToList();
         }
     }

@@ -30,6 +30,33 @@ using Newtonsoft.Json;
 
 namespace Gva.MigrationTool
 {
+    public static class DictionaryExtensions
+    {
+        public static Nullable<TValue> ByKey<TKey, TValue>(this Dictionary<TKey, TValue> dict, Nullable<TKey> key)
+            where TKey : struct
+            where TValue : struct
+        {
+            if (key == null)
+            {
+                return null;
+            }
+
+            return dict[key.Value];
+        }
+
+        public static Nullable<TValue> ByKeyOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dict, Nullable<TKey> key)
+            where TKey : struct
+            where TValue : struct
+        {
+            if (key == null || !dict.ContainsKey(key.Value))
+            {
+                return null;
+            }
+
+            return dict[key.Value];
+        }
+    }
+
     public class Utils
     {
         public const string DUMMY_FILE_KEY = "7C0604F9-FB44-4CCD-BE0E-66E82142AE76";
@@ -37,14 +64,18 @@ namespace Gva.MigrationTool
             new JObject(
                 new JProperty("nomValueId", 1),
                 new JProperty("name", "Пилот"));
+        public static readonly JObject DUMMY_PERSON =
+            new JObject(
+                new JProperty("nomValueId", 1),
+                new JProperty("name", "Персонал 1"));
         public static readonly JObject DUMMY_ORGANIZATION =
             new JObject(
                 new JProperty("nomValueId", 1),
-                new JProperty("name", "org1"));
+                new JProperty("name", "Организация 1"));
         public static readonly JObject DUMMY_AIRCRAFT =
             new JObject(
                 new JProperty("nomValueId", 1),
-                new JProperty("name", "ac1"));
+                new JProperty("name", "Въздухоплавателно Средство 1"));
 
         public static JObject ToJObject(object o)
         {
@@ -71,72 +102,20 @@ namespace Gva.MigrationTool
             return o;
         }
 
-        public static IUnitOfWork CreateUnitOfWork()
+        public static JObject GetPerson(int? oldId, IPersonRepository personRepository, Dictionary<int, int> personOldIdsLotIds)
         {
-            return new UnitOfWork(
-                new IDbConfiguration[]
-                {
-                    new RegsDbConfiguration(),
-                    new CommonDbConfiguration(),
-                    new DocsDbConfiguration(),
-                    new GvaDbConfiguration()
-                });
-        }
-
-        public static ILotEventDispatcher CreateLotEventDispatcher(IUnitOfWork unitOfWork, IUserRepository userRepository, IAircraftRegistrationAwRepository aircraftRegistrationAwRepository)
-        {
-            return new LotEventDispatcher(new List<ILotEventHandler>()
-                {
-                    new AircraftRegistrationAwHandler(unitOfWork),
-                    new AircraftRegistrationHandler(unitOfWork, aircraftRegistrationAwRepository),
-                    new AircraftRegistrationNewAwHandler(unitOfWork),
-                    new AircraftRegistrationNumberHandler(unitOfWork),
-                    new AircraftViewDataHandler(unitOfWork),
-                    new AirportDataHandler(unitOfWork),
-                    new ApplicationsViewAircraftHandler(unitOfWork),
-                    new ApplicationsViewAirportHandler(unitOfWork),
-                    new ApplicationsViewEquipmentHandler(unitOfWork),
-                    new ApplicationsViewOrganizationHandler(unitOfWork),
-                    new ApplicationsViewPersonHandler(unitOfWork),
-                    new EquipmentDataHandler(unitOfWork),
-                    new AircraftApplicationHandler(unitOfWork, userRepository),
-                    new AircraftDebtHandler(unitOfWork, userRepository),
-                    new AircraftInspectionHandler(unitOfWork, userRepository),
-                    new AircraftOccurrenceHandler(unitOfWork, userRepository),
-                    new AircraftOtherHandler(unitOfWork, userRepository),
-                    new AircraftOwnerHandler(unitOfWork, userRepository),
-                    new AirportApplicationHandler(unitOfWork, userRepository),
-                    new AirportInspectionHandler(unitOfWork, userRepository),
-                    new AirportOtherHandler(unitOfWork, userRepository),
-                    new AirportOwnerHandler(unitOfWork, userRepository),
-                    new EquipmentApplicationHandler(unitOfWork, userRepository),
-                    new EquipmentInspectionHandler(unitOfWork, userRepository),
-                    new EquipmentOtherHandler(unitOfWork, userRepository),
-                    new EquipmentOwnerHandler(unitOfWork, userRepository),
-                    new OrganizationApplicationHandler(unitOfWork, userRepository),
-                    new OrganizationOtherHandler(unitOfWork, userRepository),
-                    new PersonApplicationHandler(unitOfWork, userRepository),
-                    new PersonCheckHandler(unitOfWork, userRepository),
-                    new PersonDocumentIdHandler(unitOfWork, userRepository),
-                    new PersonEducationHandler(unitOfWork, userRepository),
-                    new PersonEmploymentHandler(unitOfWork, userRepository),
-                    new PersonMedicalHandler(unitOfWork, userRepository),
-                    new PersonOtherHandler(unitOfWork, userRepository),
-                    new PersonTrainingHandler(unitOfWork, userRepository),
-                    new OrganizationViewDataHandler(unitOfWork),
-                    new PersonViewDataHandler(unitOfWork),
-                    new PersonViewEmploymentHandler(unitOfWork),
-                    new PersonViewLicenceHandler(unitOfWork),
-                    new PersonViewRatingHandler(unitOfWork)
-                });
-        }
-
-        public static JObject GetPerson(int? id, IPersonRepository personRepository)
-        {
-            if (id == null)
+            if (oldId == null)
             {
                 return null;
             }
+
+            int? id = personOldIdsLotIds.ByKeyOrDefault(oldId);
+
+            if (id == null)
+            {
+                return DUMMY_PERSON;//TODO remove
+            }
+
             var person = personRepository.GetPerson((int)id);
             return JObject.FromObject(new
             {
@@ -145,12 +124,20 @@ namespace Gva.MigrationTool
             });
         }
 
-        public static JObject GetAircraft(int? id, IAircraftRepository aircraftRepository)
+        public static JObject GetAircraft(int? oldId, IAircraftRepository aircraftRepository, Dictionary<int, int> aircraftOldIdsLotIds)
         {
-            if (id == null)
+            if (oldId == null)
             {
                 return null;
             }
+
+            int? id = aircraftOldIdsLotIds.ByKeyOrDefault(oldId);
+
+            if (id == null)
+            {
+                return DUMMY_AIRCRAFT; //TODO remove
+            }
+
             var aircraft = aircraftRepository.GetAircraft((int)id);
             return JObject.FromObject(new
             {
@@ -159,12 +146,20 @@ namespace Gva.MigrationTool
             });
         }
 
-        public static JObject GetOrganization(int? id, IOrganizationRepository organizationRepository)
+        public static JObject GetOrganization(int? oldId, IOrganizationRepository organizationRepository, Dictionary<int, int> organizationOldIdsLotIds)
         {
-            if (id == null)
+            if (oldId == null)
             {
                 return null;
             }
+
+            int? id = organizationOldIdsLotIds.ByKeyOrDefault(oldId);
+
+            if (id == null)
+            {
+                return DUMMY_ORGANIZATION; //TODO remove
+            }
+
             var organization = organizationRepository.GetOrganization((int)id);
             return JObject.FromObject(new
             {

@@ -19,44 +19,90 @@ using Regs.Api.LotEvents;
 using Newtonsoft.Json.Serialization;
 using System.Data.SqlClient;
 using System.Data.Common;
+using Autofac;
+using Common;
+using Common.Api;
+using Docs.Api;
+using Gva.Api;
+using Regs.Api;
 
 namespace Gva.MigrationTool
 {
     class Migration
     {
+        private const string oracleConnStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
+        private const string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
+
+        public static IContainer CreateAutofacContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(new CommonModule());
+            builder.RegisterModule(new CommonApiModule());
+            builder.RegisterModule(new DocsApiModule());
+            builder.RegisterModule(new GvaApiModule());
+            builder.RegisterModule(new RegsApiModule());
+
+            builder.Register(c => new OracleConnection(oracleConnStr)).InstancePerLifetimeScope();
+            builder.Register(c => new SqlConnection(sqlConnStr)).InstancePerLifetimeScope();
+            builder.Register(c => new UserContext(2)).InstancePerLifetimeScope();
+
+            builder.RegisterType<Nomenclature>().InstancePerLifetimeScope();
+            builder.RegisterType<Aircraft>().InstancePerLifetimeScope();
+            builder.RegisterType<Person>().InstancePerLifetimeScope();
+            builder.RegisterType<Organization>().InstancePerLifetimeScope();
+
+            return builder.Build();
+        }
+
         static void Main(string[] args)
         {
-            string oracleConnStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
-            string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
-
-            using (OracleConnection oracleConn = new OracleConnection(oracleConnStr))
-            using (SqlConnection sqlConn = new SqlConnection(sqlConnStr))
+            JsonConvert.DefaultSettings = () =>
             {
+                return new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                    //NullValueHandling = NullValueHandling.Ignore, //TODO why?
+                    DefaultValueHandling = DefaultValueHandling.Include,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+            };
+
+            var container = CreateAutofacContainer();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                OracleConnection oracleConn = scope.Resolve<OracleConnection>();
+                SqlConnection sqlConn = scope.Resolve<SqlConnection>();
+
                 try
                 {
-                    JsonConvert.DefaultSettings = () =>
-                    {
-                        return new JsonSerializerSettings()
-                        {
-                            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                            //NullValueHandling = NullValueHandling.Ignore,
-                            DefaultValueHandling = DefaultValueHandling.Include,
-                            DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        };
-                    };
-
                     oracleConn.Open();
                     sqlConn.Open();
-                    Nomenclature.migrateNomenclatures(oracleConn, sqlConn);
 
-                    Aircraft.createAircraftsLots(oracleConn, Nomenclature.noms);
-                    Person.createPersonsLots(oracleConn, Nomenclature.noms);
-                    Organization.createOrganizationsLots(oracleConn, Nomenclature.noms);
+                    var nomenclature = scope.Resolve<Nomenclature>();
+                    var aircraft = scope.Resolve<Aircraft>();
+                    var person = scope.Resolve<Person>();
+                    var organization = scope.Resolve<Organization>();
 
-                    Aircraft.migrateAircrafts(oracleConn, sqlConn, Nomenclature.noms, Person.personOldIdsLotIds, Organization.organizationOldIdsLotIds);
-                    Person.migratePersons(oracleConn, Nomenclature.noms, Aircraft.aircraftOldIdsLotIds, Organization.organizationOldIdsLotIds);
-                    Organization.migrateOrganizations(oracleConn, Nomenclature.noms, Aircraft.aircraftOldIdsLotIds, Person.personOldIdsLotIds);//TODO
+                    var noms = nomenclature.migrateNomenclatures();
+
+                    var aircraftIds = aircraft.createAircraftsLots(noms);
+                    var aircraftApexIdtoLotId = aircraftIds.Item1;
+                    var aircraftFmIdtoLotId = aircraftIds.Item2;
+
+                    person.createPersonsLots(noms);
+                    organization.createOrganizationsLots(noms);
+
+                    aircraft.migrateAircrafts(
+                        noms,
+                        aircraftApexIdtoLotId,
+                        aircraftFmIdtoLotId,
+                        person.personOldIdsLotIds,
+                        organization.organizationOldIdsLotIds);
+
+                    person.migratePersons(noms, aircraftApexIdtoLotId, organization.organizationOldIdsLotIds);
+                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, person.personOldIdsLotIds);//TODO
                 }
                 catch (OracleException e)
                 {
@@ -68,13 +114,8 @@ namespace Gva.MigrationTool
                     Console.WriteLine("Exception Message: " + e.Message);
                     Console.WriteLine("Exception Source: " + e.Source);
                 }
-                finally
-                {
-                    oracleConn.Dispose();
-                    sqlConn.Dispose();
-                }
-
             }
+
             Console.WriteLine("Migration finished!");
         }
     }

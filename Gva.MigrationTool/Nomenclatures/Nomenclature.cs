@@ -15,10 +15,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Api.Repositories.NomRepository;
 using System.Data.SqlClient;
+using Autofac.Features.OwnedInstances;
+using Common.Tests;
 
 namespace Gva.MigrationTool.Nomenclatures
 {
-    public static class Nomenclature
+    public static class NomenclatureExtensions
     {
         public static NomValue ByCodeOrDefault(this Dictionary<string, NomValue> nomValues, string code)
         {
@@ -69,649 +71,577 @@ namespace Gva.MigrationTool.Nomenclatures
         {
             return nomValue != null ? (int?)nomValue.NomValueId : null;
         }
+    }
 
-        public static Dictionary<string, Dictionary<string, NomValue>> noms;
+    public class Nomenclature
+    {
+        private Func<Owned<DisposableTuple<IUnitOfWork, INomRepository>>> dependencyFactory;
+        private OracleConnection oracleConn;
+        private SqlConnection sqlConn;
 
-        public static void migrateNomenclatures(OracleConnection oracleConn, SqlConnection sqlConn)
+        public Nomenclature(
+            OracleConnection oracleConn,
+            SqlConnection sqlConn,
+            Func<Owned<DisposableTuple<IUnitOfWork, INomRepository>>> dependencyFactory)
+        {
+            this.dependencyFactory = dependencyFactory;
+            this.oracleConn = oracleConn;
+            this.sqlConn = sqlConn;
+        }
+
+        private Dictionary<string, Dictionary<string, NomValue>> noms;
+
+        public Dictionary<string, Dictionary<string, NomValue>> migrateNomenclatures()
         {
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
             noms = new Dictionary<string, Dictionary<string, NomValue>>();
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                noms["boolean"] = repo.GetNomValues("boolean").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["boolean"] = dependencies.Value.Item2.GetNomValues("boolean").ToDictionary(n => "no old id " + n.NomValueId);
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                noms["registers"] = repo.GetNomValues("registers").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["registers"] = dependencies.Value.Item2.GetNomValues("registers").ToDictionary(n => "no old id " + n.NomValueId);
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                noms["linTypes"] = repo.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["linTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateGenders(repo, oracleConn);
-                unitOfWork.Save();
+                migrateGenders(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCountires(repo, oracleConn);
-                unitOfWork.Save();
+                migrateCountires(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCities(repo, oracleConn);
-                unitOfWork.Save();
+                migrateCities(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAddressTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAddressTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateStaffTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateStaffTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateEmploymentCategories(repo, oracleConn);
-                unitOfWork.Save();
+                migrateEmploymentCategories(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateGraduations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateGraduations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateSchools(repo, oracleConn);
-                unitOfWork.Save();
+                migrateSchools(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateDirections(repo, oracleConn);
-                unitOfWork.Save();
+                migrateDirections(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateDocumentTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateDocumentTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateDocumentRoles(repo, oracleConn);
-                unitOfWork.Save();
+                migrateDocumentRoles(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonStatusTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonStatusTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateOtherDocPublishers(repo, oracleConn);
-                unitOfWork.Save();
+                migrateOtherDocPublishers(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedDocPublishers(repo, oracleConn);
-                unitOfWork.Save();
+                migrateMedDocPublishers(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateRatingTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingClassGroups(repo, oracleConn);
-                unitOfWork.Save();
+                migrateRatingClassGroups(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingClasses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateRatingClasses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateRatingSubClasses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateRatingSubClasses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuthorizationGroups(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuthorizationGroups(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuthorizations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuthorizations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceTypeDictionary(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLicenceTypeDictionary(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLicenceTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLocationIndicators(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLocationIndicators(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTCHolders(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftTCHolders(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypeGroups(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftTypeGroups(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftGroup66(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftGroup66(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftClases66(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftClases66(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLimitations66(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLimitations66(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedClasses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateMedClasses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateMedLimitation(repo, oracleConn);
-                unitOfWork.Save();
+                migrateMedLimitation(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonExperienceRoles(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonExperienceRoles(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonExperienceMeasures(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonExperienceMeasures(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCaa(repo, oracleConn);
-                unitOfWork.Save();
+                migrateCaa(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonRatingLevels(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonRatingLevels(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLicenceActions(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLicenceActions(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateOrganizationTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateOrganizationTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateOrganizationKinds(repo, oracleConn);
-                unitOfWork.Save();
+                migrateOrganizationKinds(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateApplicationTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateApplicationTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateApplicationPaymentTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateApplicationPaymentTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCurrencies(repo, oracleConn);
-                unitOfWork.Save();
+                migrateCurrencies(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateApprovalTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateApprovalTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateApprovalStates(repo, oracleConn);
-                unitOfWork.Save();
+                migrateApprovalStates(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147classes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLim147classes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147ratings(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLim147ratings(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim147limitations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLim147limitations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim145classes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLim145classes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateLim145limitations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateLim145limitations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditParts(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditParts(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartRequirmants(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditPartRequirmants(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartSections(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditPartSections(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditPartSectionDetails(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditPartSectionDetails(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditReasons(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditReasons(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditStatuses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditStatuses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAuditResults(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAuditResults(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCategories(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftCategories(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftProducers(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftProducers(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftSCodeTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftSCodeTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRelations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftRelations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftParts(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftParts(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftPartStatuses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftPartStatuses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftDebtTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftDebtTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftOccurrenceClasses(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftOccurrenceClasses(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCertificateTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftCertificateTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftOperTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftOperTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftTypeCertificateTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftTypeCertificateTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRemovalReasons(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftRemovalReasons(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAirportTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportRelations(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAirportRelations(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRadiotypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAircraftRadiotypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAirportOperatorActivityTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateAirportOperatorActivityTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateGroundServiceOperatorActivityTypes(repo, oracleConn);
-                unitOfWork.Save();
+                migrateGroundServiceOperatorActivityTypes(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonCheckRatingValues(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonCheckRatingValues(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migratePersonRatingModels(repo, oracleConn);
-                unitOfWork.Save();
+                migratePersonRatingModels(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateEngLangLevels(repo, oracleConn);
-                unitOfWork.Save();
+                migrateEngLangLevels(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCountriesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateCountriesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateCofATypesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateCofATypesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateEASATypesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateEASATypesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateEASACategoriesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateEASACategoriesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateEURegTypesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateEURegTypesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftDebtTypesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftDebtTypesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCreditorsFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftCreditorsFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftProducersFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftProducersFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftLimitationsFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftLimitationsFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftRegStatsesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftRegStatsesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = dependencyFactory())
             {
-                NomRepository repo = new NomRepository(unitOfWork);
-                migrateAircraftCategoriesFm(repo, sqlConn);
-                unitOfWork.Save();
+                migrateAircraftCategoriesFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
             }
-
 
             timer.Stop();
             Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
+
+            return noms;
         }
 
-        public static void migrateGenders(INomRepository repo, OracleConnection conn)
+        private void migrateGenders(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("gender");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SEX")
@@ -737,7 +667,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCountires(INomRepository repo, OracleConnection conn)
+        private void migrateCountires(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("countries");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_COUNTRY")
@@ -769,7 +699,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCities(INomRepository repo, OracleConnection conn)
+        private void migrateCities(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("cities");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_TOWN_VILLAGE")
@@ -803,7 +733,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAddressTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAddressTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("addressTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_ADDRESS_TYPE")
@@ -833,7 +763,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateStaffTypes(INomRepository repo, OracleConnection conn)
+        private void migrateStaffTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("staffTypes");
             var aliases = new Dictionary<string, string>()
@@ -902,7 +832,7 @@ namespace Gva.MigrationTool.Nomenclatures
             trainingStaffTypesNom.NomValues.Add(generalDocument);
         }
 
-        public static void migrateEmploymentCategories(INomRepository repo, OracleConnection conn)
+        private void migrateEmploymentCategories(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("employmentCategories");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_JOB_CATEGORY")
@@ -934,7 +864,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateGraduations(INomRepository repo, OracleConnection conn)
+        private void migrateGraduations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("graduations");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_GRADUATION")
@@ -964,7 +894,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateSchools(INomRepository repo, OracleConnection conn)
+        private void migrateSchools(INomRepository repo, OracleConnection conn)
         {
             Func<string, int?> getGradId = (oldId) => noms["graduations"].ByOldId(oldId).NomValueId();
 
@@ -1003,7 +933,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateDirections(INomRepository repo, OracleConnection conn)
+        private void migrateDirections(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("directions");
             var nameAlts = new Dictionary<string, string>()
@@ -1038,7 +968,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateDocumentTypes(INomRepository repo, OracleConnection conn)
+        private void migrateDocumentTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("documentTypes");
             string[] codes = {"3","4","5","115"};
@@ -1078,7 +1008,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateDocumentRoles(INomRepository repo, OracleConnection conn)
+        private void migrateDocumentRoles(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("documentRoles");
             var categoryAliases = new Dictionary<string, string>()
@@ -1127,7 +1057,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migratePersonStatusTypes(INomRepository repo, OracleConnection conn)
+        private void migratePersonStatusTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("personStatusTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'STATE_REASON'")
@@ -1153,7 +1083,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateOtherDocPublishers(INomRepository repo, OracleConnection conn)
+        private void migrateOtherDocPublishers(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("otherDocPublishers");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_OTHER_PUBLISHERS")
@@ -1179,7 +1109,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateMedDocPublishers(INomRepository repo, OracleConnection conn)
+        private void migrateMedDocPublishers(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("medDocPublishers");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_MED_PUBLISHERS")
@@ -1205,7 +1135,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateRatingTypes(INomRepository repo, OracleConnection conn)
+        private void migrateRatingTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("ratingTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_RATING_TYPE")
@@ -1237,7 +1167,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateRatingClassGroups(INomRepository repo, OracleConnection conn)
+        private void migrateRatingClassGroups(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("ratingClassGroups");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_RATING_CLASS_GROUP")
@@ -1263,7 +1193,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateRatingClasses(INomRepository repo, OracleConnection conn)
+        private void migrateRatingClasses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("ratingClasses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_RATING_CLASS")
@@ -1295,7 +1225,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateRatingSubClasses(INomRepository repo, OracleConnection conn)
+        private void migrateRatingSubClasses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("ratingSubClasses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SUBCLASS_ATSM")
@@ -1321,7 +1251,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuthorizationGroups(INomRepository repo, OracleConnection conn)
+        private void migrateAuthorizationGroups(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("authorizationGroups");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AUTHORIZATION_GROUP")
@@ -1351,7 +1281,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuthorizations(INomRepository repo, OracleConnection conn)
+        private void migrateAuthorizations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("authorizations");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AUTHORIZATION")
@@ -1383,7 +1313,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLicenceTypeDictionary(INomRepository repo, OracleConnection conn)
+        private void migrateLicenceTypeDictionary(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("licenceTypeDictionary");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.LICENCE_DICTIONARY")
@@ -1409,7 +1339,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLicenceTypes(INomRepository repo, OracleConnection conn)
+        private void migrateLicenceTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("licenceTypes");
             var aliases = new Dictionary<string, string>()
@@ -1459,7 +1389,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLocationIndicators(INomRepository repo, OracleConnection conn)
+        private void migrateLocationIndicators(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("locationIndicators");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_INDICATOR")
@@ -1489,7 +1419,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftTCHolders(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftTCHolders(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftTCHolders");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_TC_HOLDER")
@@ -1515,7 +1445,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_TYPE")
@@ -1545,7 +1475,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftTypeGroups(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftTypeGroups(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftTypeGroups");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_GROUP")
@@ -1575,7 +1505,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftGroup66(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftGroup66(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftGroup66");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_66")
@@ -1601,7 +1531,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftClases66(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftClases66(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftClases66");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_CATEGORY_66")
@@ -1631,7 +1561,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLimitations66(INomRepository repo, OracleConnection conn)
+        private void migrateLimitations66(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("limitations66");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LIMITATIONS_66")
@@ -1661,7 +1591,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateMedClasses(INomRepository repo, OracleConnection conn)
+        private void migrateMedClasses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("medClasses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_MED_CLASS")
@@ -1687,7 +1617,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateMedLimitation(INomRepository repo, OracleConnection conn)
+        private void migrateMedLimitation(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("medLimitation");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_MED_LIMITATION")
@@ -1713,7 +1643,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migratePersonExperienceRoles(INomRepository repo, OracleConnection conn)
+        private void migratePersonExperienceRoles(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("experienceRoles");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_EXPERIENCE_ROLE")
@@ -1743,7 +1673,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migratePersonExperienceMeasures(INomRepository repo, OracleConnection conn)
+        private void migratePersonExperienceMeasures(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("experienceMeasures");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_EXPERIENCE_MEASURE")
@@ -1773,7 +1703,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCaa(INomRepository repo, OracleConnection conn)
+        private void migrateCaa(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("caa");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.CAA")
@@ -1806,7 +1736,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migratePersonRatingLevels(INomRepository repo, OracleConnection conn)
+        private void migratePersonRatingLevels(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("personRatingLevels");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'ATSML_STEPEN'")
@@ -1832,7 +1762,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLicenceActions(INomRepository repo, OracleConnection conn)
+        private void migrateLicenceActions(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("licenceActions");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LICENCE_ACTION")
@@ -1858,7 +1788,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateOrganizationTypes(INomRepository repo, OracleConnection conn)
+        private void migrateOrganizationTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("organizationTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_FIRM_TYPE")
@@ -1884,7 +1814,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateOrganizationKinds(INomRepository repo, OracleConnection conn)
+        private void migrateOrganizationKinds(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("organizationKinds");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'TYPE_ORG'")
@@ -1910,7 +1840,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateApplicationTypes(INomRepository repo, OracleConnection conn)
+        private void migrateApplicationTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("applicationTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_REQUEST_TYPE")
@@ -1944,7 +1874,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateApplicationPaymentTypes(INomRepository repo, OracleConnection conn)
+        private void migrateApplicationPaymentTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("applicationPaymentTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_PAYMENT_TYPE")
@@ -1975,7 +1905,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCurrencies(INomRepository repo, OracleConnection conn)
+        private void migrateCurrencies(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("currencies");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_CURRENCY")
@@ -2001,7 +1931,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateApprovalTypes(INomRepository repo, OracleConnection conn)
+        private void migrateApprovalTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("approvalTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'APPROVAL_TYPE'")
@@ -2027,7 +1957,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateApprovalStates(INomRepository repo, OracleConnection conn)
+        private void migrateApprovalStates(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("approvalStates");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'APPROVAL_STATE'")
@@ -2053,7 +1983,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLim147classes(INomRepository repo, OracleConnection conn)
+        private void migrateLim147classes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("lim147classes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_147_CLASS")
@@ -2079,7 +2009,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLim147ratings(INomRepository repo, OracleConnection conn)
+        private void migrateLim147ratings(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("lim147ratings");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_147_RATING")
@@ -2105,7 +2035,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLim147limitations(INomRepository repo, OracleConnection conn)
+        private void migrateLim147limitations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("lim147limitations");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_147_LIMITATION")
@@ -2135,7 +2065,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLim145classes(INomRepository repo, OracleConnection conn)
+        private void migrateLim145classes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("lim145classes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_MF145_CLASS")
@@ -2161,7 +2091,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateLim145limitations(INomRepository repo, OracleConnection conn)
+        private void migrateLim145limitations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("lim145limitations");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_MF145_LIMITATION")
@@ -2191,7 +2121,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditParts(INomRepository repo, OracleConnection conn)
+        private void migrateAuditParts(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditParts");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_PART")
@@ -2221,7 +2151,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditPartRequirmants(INomRepository repo, OracleConnection conn)
+        private void migrateAuditPartRequirmants(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditPartRequirements");
             var idPartAliases = new Dictionary<string, string>()
@@ -2268,7 +2198,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditPartSections(INomRepository repo, OracleConnection conn)
+        private void migrateAuditPartSections(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditPartSections");
             var idPartAliases = new Dictionary<string, string>()
@@ -2307,7 +2237,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditPartSectionDetails(INomRepository repo, OracleConnection conn)
+        private void migrateAuditPartSectionDetails(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditPartSectionDetails");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SECTION_DETAIL")
@@ -2337,7 +2267,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditReasons(INomRepository repo, OracleConnection conn)
+        private void migrateAuditReasons(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditReasons");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'AUDIT_REASON'")
@@ -2363,7 +2293,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAuditTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'AUDIT_MODE'")
@@ -2389,7 +2319,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditStatuses(INomRepository repo, OracleConnection conn)
+        private void migrateAuditStatuses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditStatuses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'AUDIT_STATE'")
@@ -2415,7 +2345,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAuditResults(INomRepository repo, OracleConnection conn)
+        private void migrateAuditResults(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditResults");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'CC_RESULT'")
@@ -2441,7 +2371,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftCategories(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftCategories(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftCategories");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_CATEGORY")
@@ -2467,7 +2397,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftProducers(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftProducers(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftProducers");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_MANUFACTURER")
@@ -2504,7 +2434,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftSCodeTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftSCodeTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftSCodeTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_STYPE")
@@ -2537,7 +2467,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftRelations(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftRelations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftRelations");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_RELATION")
@@ -2563,7 +2493,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftParts(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftParts(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftParts");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_PART")
@@ -2589,7 +2519,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftPartStatuses(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftPartStatuses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftPartStatuses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'NEW_USED'")
@@ -2615,7 +2545,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftDebtTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftDebtTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftDebtTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'REC_TYPE'")
@@ -2641,7 +2571,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftOccurrenceClasses(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftOccurrenceClasses(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftOccurrenceClasses");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'INCIDENT_CLASS'")
@@ -2667,7 +2597,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftCertificateTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftCertificateTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftCertificateTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'CERTIFICATE_TYPE'")
@@ -2693,7 +2623,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftOperTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftOperTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftOperTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_OPER")
@@ -2719,7 +2649,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftTypeCertificateTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftTypeCertificateTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftTypeCertificateTypes");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'TC_TYPE'")
@@ -2745,7 +2675,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftRemovalReasons(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftRemovalReasons(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftRemovalReasons");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'REMOVAL_REASON'")
@@ -2772,7 +2702,7 @@ namespace Gva.MigrationTool.Nomenclatures
         }
 
 
-        public static void migratePersonCheckRatingValues(INomRepository repo, OracleConnection conn)
+        private void migratePersonCheckRatingValues(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("personCheckRatingValues");
 
@@ -2810,7 +2740,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migratePersonRatingModels(INomRepository repo, OracleConnection conn)
+        private void migratePersonRatingModels(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("personRatingModels");
 
@@ -2840,7 +2770,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAirportTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAirportTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("airportTypes");
 
@@ -2871,7 +2801,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAirportRelations(INomRepository repo, OracleConnection conn)
+        private void migrateAirportRelations(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("airportRelations");
 
@@ -2902,7 +2832,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftRadiotypes(INomRepository repo, OracleConnection conn)
+        private void migrateAircraftRadiotypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("aircraftRadiotypes");
 
@@ -2938,7 +2868,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAirportOperatorActivityTypes(INomRepository repo, OracleConnection conn)
+        private void migrateAirportOperatorActivityTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("airportoperatorActivityTypes");
 
@@ -2970,7 +2900,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateGroundServiceOperatorActivityTypes(INomRepository repo, OracleConnection conn)
+        private void migrateGroundServiceOperatorActivityTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("groundServiceOperatorActivityTypes");
 
@@ -3010,7 +2940,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateEngLangLevels(INomRepository repo, OracleConnection conn)
+        private void migrateEngLangLevels(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("engLangLevels");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_ENG_LANG")
@@ -3040,7 +2970,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftLimitationsFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftLimitationsFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftLimitationsFm");
             var results = conn.CreateStoreCommand(@"
@@ -3068,7 +2998,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftRegStatsesFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftRegStatsesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftRegStatsesFm");
             var results = conn.CreateStoreCommand(@"
@@ -3096,7 +3026,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftCategoriesFM");
             var results = conn.CreateStoreCommand(@"select * from CatAct")
@@ -3122,7 +3052,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCountriesFm(INomRepository repo, SqlConnection conn)
+        private void migrateCountriesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("countriesFm");
             var results = conn.CreateStoreCommand(@"select * from Cnts")
@@ -3155,7 +3085,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftProducersFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftProducersFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftProducersFm");
             var results = conn.CreateStoreCommand(@"select * from Makers")
@@ -3193,7 +3123,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateCofATypesFm(INomRepository repo, SqlConnection conn)
+        private void migrateCofATypesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("CofATypesFm");
 
@@ -3226,7 +3156,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateEASATypesFm(INomRepository repo, SqlConnection conn)
+        private void migrateEASATypesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("EASATypesFm");
 
@@ -3267,7 +3197,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateEASACategoriesFm(INomRepository repo, SqlConnection conn)
+        private void migrateEASACategoriesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("EASACategoriesFm");
 
@@ -3300,7 +3230,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateEURegTypesFm(INomRepository repo, SqlConnection conn)
+        private void migrateEURegTypesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("EURegTypesFm");
 
@@ -3337,7 +3267,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftDebtTypesFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftDebtTypesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftDebtTypesFm");
 
@@ -3386,7 +3316,7 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        public static void migrateAircraftCreditorsFm(INomRepository repo, SqlConnection conn)
+        private void migrateAircraftCreditorsFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftCreditorsFm");
             var results = conn.CreateStoreCommand(@"select distinct Creditor from Morts")

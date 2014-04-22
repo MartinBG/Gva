@@ -31,36 +31,43 @@ using Gva.Api.LotEventHandlers.AirportView;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.OrganizationRepository;
+using Autofac.Features.OwnedInstances;
+using Common.Tests;
 
 namespace Gva.MigrationTool.Sets
 {
-    public static class Organization
+    public class Organization
     {
-        public static Dictionary<int, int> personOldIdsLotIds;
-        public static Dictionary<int, int> aircraftOldIdsLotIds;
-        public static Dictionary<int, int> organizationOldIdsLotIds;
-        public static Dictionary<string, Dictionary<string, NomValue>> noms;
+        public Dictionary<int, int> personOldIdsLotIds;
+        public Dictionary<int, int> aircraftOldIdsLotIds;
+        public Dictionary<int, int> organizationOldIdsLotIds;
+        private Dictionary<string, Dictionary<string, NomValue>> noms;
 
-        public static void createOrganizationsLots(OracleConnection oracleCon, Dictionary<string, Dictionary<string, NomValue>> n)
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private OracleConnection oracleConn;
+
+        public Organization(OracleConnection oracleConn,
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+        {
+            this.dependencyFactory = dependencyFactory;
+            this.oracleConn = oracleConn;
+        }
+
+        public void createOrganizationsLots(Dictionary<string, Dictionary<string, NomValue>> n)
         {
             noms = n;
-            var context = new UserContext(2);
             Dictionary<int, Lot> oldIdsLots = new Dictionary<int, Lot>();
-            var organizationIds = Organization.getOrganizationIds(oracleCon);
+            var organizationIds = this.getOrganizationIds(oracleConn);
 
-            using (IUnitOfWork unitOfWork = Utils.CreateUnitOfWork())
+            using (var dependencies = this.dependencyFactory())
             {
-                var userContext = new UserContext(2);
-                var lotRepository = new LotRepository(unitOfWork);
-                var caseTypeRepository = new CaseTypeRepository(unitOfWork);
-                var userRepository = new UserRepository(unitOfWork);
-                var fileRepository = new FileRepository(unitOfWork);
-                var applicationRepository = new ApplicationRepository(unitOfWork);
-                var aircraftRegistrationAwRepository = new AircraftRegistrationAwRepository(unitOfWork);
-                var organizationRepository = new OrganizationRepository(unitOfWork);
-                var aircraftRepository = new AircraftRepository(unitOfWork);
-
-                var lotEventDispatcher = Utils.CreateLotEventDispatcher(unitOfWork, userRepository, aircraftRegistrationAwRepository);
+                var unitOfWork = dependencies.Value.Item1;
+                var lotRepository = dependencies.Value.Item2;
+                var userRepository = dependencies.Value.Item3;
+                var fileRepository = dependencies.Value.Item4;
+                var applicationRepository = dependencies.Value.Item5;
+                var lotEventDispatcher = dependencies.Value.Item6;
+                var context = dependencies.Value.Item7;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -74,7 +81,7 @@ namespace Gva.MigrationTool.Sets
                     }
                     var lot = organizationSet.CreateLot(context);
                     oldIdsLots.Add(organizationId, lot);
-                    var organizationData = Organization.getOrganizationData(oracleCon, organizationId);
+                    var organizationData = this.getOrganizationData(oracleConn, organizationId);
                     lot.CreatePart("organizationData", organizationData, context);
                     lot.Commit(context, lotEventDispatcher);
                     unitOfWork.Save();
@@ -85,7 +92,7 @@ namespace Gva.MigrationTool.Sets
             organizationOldIdsLotIds = oldIdsLots.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.LotId);
         }
 
-        public static void migrateOrganizations(OracleConnection con, Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> aIdsLots, Dictionary<int, int> pIdsLots)
+        public void migrateOrganizations(Dictionary<string, Dictionary<string, NomValue>> n, Dictionary<int, int> aIdsLots, Dictionary<int, int> pIdsLots)
         {
 
             personOldIdsLotIds = pIdsLots;
@@ -93,14 +100,14 @@ namespace Gva.MigrationTool.Sets
             noms = n;
         }
 
-        public static IList<int> getOrganizationIds(OracleConnection con)
+        private IList<int> getOrganizationIds(OracleConnection con)
         {
             return con.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
                 .Materialize(r => (int)r.Field<decimal>("ID"))
                     .ToList();
         }
 
-        public static JObject getOrganizationData(OracleConnection con, int organizationId)
+        private JObject getOrganizationData(OracleConnection con, int organizationId)
         {
             return con.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FIRM WHERE {0} {1}",
