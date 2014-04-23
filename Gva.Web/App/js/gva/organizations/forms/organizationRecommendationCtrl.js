@@ -13,8 +13,18 @@
     $scope.model.part.auditorsReview.disparities = [];
 
     $scope.chooseAudits = function () {
-      $state.go('.chooseAudits');
+      $state.go('.chooseAudits', {}, {}, {
+        selectedAudits: $scope.model.part.includedAudits
+      });
     };
+
+    // coming from a child state and carrying payload
+    if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
+      if ($state.payload.selectedAudits) {
+        $scope.model.part.includedAudits = [];
+        [].push.apply($scope.model.part.includedAudits, $state.payload.selectedAudits);
+      }
+    }
 
     if ($scope.model.part.includedAudits.length > 0) {
       $scope.model.part.auditorsReview = {

@@ -1,20 +1,27 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function CommonInspectionCtrl($scope, $state, $stateParams) {
+  function CommonInspectionCtrl($scope, $state, $stateParams, Organization) {
     $scope.watchList = [];
 
     $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
+    $scope.caseTypesOptions = {
+      multiple: false,
+      allowClear: true,
+      placeholder: ' ',
+      tags: []
+    };
 
     if($scope.$parent.organization) {
-      $scope.caseTypesOptions = {
-        multiple: false,
-        allowClear: true,
-        placeholder: ' ',
-        tags: $scope.$parent.organization.caseTypes
-      };
+
+      Organization.getCaseTypes({
+        lotId: $stateParams.id
+      }).$promise.then(function(result){
+        $scope.caseTypesOptions.tags = result.caseTypes;
+        angular.element('.select2input').select2($scope.caseTypesOptions);
+      });
     }
 
     $scope.$watch('setPart', function(){
@@ -90,7 +97,7 @@
       });
     };
   }
-  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams'];
+  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Organization'];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));

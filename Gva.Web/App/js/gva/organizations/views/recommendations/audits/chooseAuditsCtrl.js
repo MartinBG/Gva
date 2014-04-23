@@ -6,17 +6,29 @@
     $state,
     $stateParams,
     $scope,
-    organizationRecommendation,
-    availableAudits) {
-    $scope.availableAudits = availableAudits;
+    audits
+  ) {
+
+    $scope.audits = _.map(audits, function (audit) {
+      if (_.contains($state.payload.selectedAudits,
+        audit.partIndex)) {
+        audit.checked = true;
+      }
+
+      if(audit.part.auditDetails.length === 0){
+        audit.disabled = true;
+      }
+
+      return audit;
+    });
 
     $scope.save = function () {
-      organizationRecommendation.part.includedAudits = [];
-
-      _.each(_.filter($scope.availableAudits, { 'checked': true }), function (audit) {
-        organizationRecommendation.part.includedAudits.push(audit.partIndex);
+      var includedAudits = [];
+      _.each(_.filter($scope.audits, { 'checked': true }), function (audit) {
+        includedAudits.push(audit.partIndex);
       });
-      return $state.go('^');
+
+      return $state.go('^', {}, {}, { selectedAudits: includedAudits });
     };
 
     $scope.goBack = function () {
@@ -29,31 +41,15 @@
     '$state',
     '$stateParams',
     '$scope',
-    'organizationRecommendation',
-    'availableAudits'
+    'audits'
   ];
 
   ChooseAuditsCtrl.$resolve = {
-    availableAudits: [
+    audits: [
       '$stateParams',
       'OrganizationInspection',
-      'organizationRecommendation',
-      function ($stateParams, OrganizationInspection, organizationRecommendation) {
-        return OrganizationInspection.query({ id: $stateParams.id })
-            .$promise.then(function (availableAudits) {
-              return _.map(availableAudits, function (availableAudit) {
-                if (_.contains(organizationRecommendation.part.includedAudits,
-                  availableAudit.partIndex)) {
-                  availableAudit.checked = true;
-                }
-
-                if(availableAudit.part.auditDetails.length === 0){
-                  availableAudit.disabled = true;
-                }
-
-                return availableAudit;
-              });
-            });
+      function ($stateParams, OrganizationInspection) {
+        return OrganizationInspection.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

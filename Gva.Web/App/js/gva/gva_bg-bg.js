@@ -2706,7 +2706,7 @@
           groundServiceOperators: 'Оператор по наземно обслужване',
           airOperator: 'Авиационен оператор',
           certAirOperators: 'Свидетелство',
-          airCarrier: 'Въдушен превозвач',
+          airCarrier: 'Въздушен превозвач',
           certAirCarriers: 'Лиценз',
           airNavigationServiceDeliverer: 'Доставчик АО',
           certAirNavigationServiceDeliverer: 'Свидетелство',
