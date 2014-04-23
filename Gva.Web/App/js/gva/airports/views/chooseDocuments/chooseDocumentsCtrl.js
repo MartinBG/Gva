@@ -1,42 +1,55 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, _, $*/
+(function (angular, _, $) {
   'use strict';
 
   function AirportsChooseDocumentsCtrl(
-    $state,
+     $state,
     $stateParams,
     $scope,
-    airportCertOper,
-    availableDocuments,
-    Nomenclature
+    documents,
+    documentParts
   ) {
-    $scope.availableDocuments = availableDocuments;
 
-    if ($stateParams.documentTypes) {
-      Nomenclature.query({alias: 'documentParts', set: 'airport'})
-      .$promise.then(function(documentTypes){
-        $scope.documentParts = _.filter(documentTypes, function (type) {
-          return _.contains($stateParams.documentTypes, type.alias);
-        });
+    $scope.selectedDocuments = [];
+
+    $scope.availableDocuments =  _.reject(documents, function (document) {
+        var count = _.where($state.payload.selectedDocuments,
+          { partIndex: document.partIndex }).length;
+        return count > 0;
       });
-    }
+
+    $scope.documentParts = documentParts;
 
     $scope.save = function () {
-      _.each(_.filter($scope.availableDocuments, { 'checked': true }),
-        function (document) {
-          airportCertOper.part.includedDocuments.push({
-            partIndex: document.partIndex,
-            setPartAlias: document.setPartAlias
-          });
+      var documents = [];
+      _.each($scope.selectedDocuments, function (document) {
+        documents.push({
+          partIndex: document.partIndex,
+          setPartAlias: document.setPartAlias
         });
-      return $state.go('^');
+      });
+
+      return $state.go('^', {}, {}, {
+        selectedDocuments: documents
+      });
+    };
+
+    $scope.selectDocument = function (event, document) {
+      if ($(event.target).is(':checked')) {
+        $scope.selectedDocuments.push(document);
+      }
+      else {
+        $scope.selectedDocuments = _.without($scope.selectedDocuments, document);
+      }
     };
 
     $scope.search = function () {
-      return $state.go($state.current, {
-        id: $stateParams.id,
-        documentTypes: _.pluck($scope.documentParts, 'alias')
-      });
+      return $state.go('.', {
+          id: $stateParams.id,
+          documentTypes: _.pluck($scope.documentParts, 'alias')
+        }, {}, {
+          selectedDocuments: $state.payload.selectedDocuments
+        });
     };
 
     $scope.goBack = function () {
@@ -49,34 +62,40 @@
     '$state',
     '$stateParams',
     '$scope',
-    'airportCertOper',
-    'availableDocuments',
-    'Nomenclature'
+    'documents',
+    'documentParts'
   ];
 
   AirportsChooseDocumentsCtrl.$resolve = {
-    availableDocuments: [
+    documents: [
       '$stateParams',
-      'AirportInventory',
-      'airportCertOper',
-      function ($stateParams, AirportInventory, airportCertOper) {
-        return AirportInventory
+      'OrganizationInventory',
+      function ($stateParams, OrganizationInventory) {
+        return OrganizationInventory
           .query({
             id: $stateParams.id,
             documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null
-          })
-          .$promise
-          .then(function (availableDocuments) {
-            return _.reject(availableDocuments, function (availableDocument) {
-              var count = _.where(airportCertOper.part.includedDocuments,
-                { partIndex: availableDocument.partIndex }).length;
-              return count > 0;
+          }).$promise;
+      }
+    ],
+    documentParts: [
+      '$stateParams',
+      'Nomenclature',
+      function ($stateParams, Nomenclature) {
+        if ($stateParams.documentTypes) {
+          return Nomenclature.query({alias: 'documentParts', set: 'airport'})
+          .$promise.then(function(documentTypes){
+            return  _.filter(documentTypes, function (type) {
+              return _.contains($stateParams.documentTypes, type.alias);
             });
           });
+        } else {
+          return [];
+        }
       }
     ]
   };
 
   angular.module('gva')
     .controller('AirportsChooseDocumentsCtrl', AirportsChooseDocumentsCtrl);
-}(angular, _));
+}(angular, _, $));

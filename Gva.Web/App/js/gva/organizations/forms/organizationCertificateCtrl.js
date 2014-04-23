@@ -4,7 +4,6 @@
   function OrganizationCertificateCtrl($scope, $state, $stateParams) {
 
     $scope.lotId = $stateParams.id;
-    $scope.model.includedDocuments = $scope.model.includedDocuments || [];
 
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);

@@ -14,7 +14,7 @@
 
   <sc-datatable items="availableDocuments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
     <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
-      <input type="checkbox" ng-model="item.checked">
+      <input type="checkbox" ng-checked="selectedDocuments | contains:item" sc-click="selectDocument($event, item)">
     </sc-column>
      <sc-column data="file.bookPageNumber" title="airports.chooseDocuments.bookPageNumber" width="80px">
     </sc-column>
