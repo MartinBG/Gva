@@ -499,32 +499,41 @@ namespace Gva.Api.Controllers
                     new JProperty("code", n.Code),
                     new JProperty("name", n.Name))).First();
 
-            var requirements = this.nomRepository.GetNomValues("auditPartRequirements").Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
+            var requirements = this.nomRepository.GetNomValues("auditPartRequirements");
 
-            if (type == "organizations")
+            if (type == "organizations" || type == "aircrafts")
             {
-                requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == auditPartCode);
-            }
-            if (type == "aircrafts")
-            {
-                requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == "aircrafts");
+                requirements = requirements
+                    .Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
+
+                if (type == "organizations")
+                {
+                    requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == auditPartCode);
+                }
+                if (type == "aircrafts")
+                {
+                    requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == "aircrafts");
+                }
+
+                JArray auditPartRequirements = new JArray();
+                foreach (var requirement in requirements)
+                {
+                    string sortOrder = JObject.Parse(requirement.TextContent).Get<string>("sortOrder");
+                    auditPartRequirements.Add(
+                        new JObject(
+                            new JProperty("subject", requirement.Name),
+                            new JProperty("auditResult", defaultAuditResult),
+                            new JProperty("disparities", new JArray()),
+                            new JProperty("code", requirement.Code),
+                            new JProperty("sortOrder", sortOrder)
+                    ));
+                }
+
+                return Ok(auditPartRequirements.OrderBy(e => e.Get<int>("sortOrder")));
+
             }
 
-            JArray auditPartRequirements = new JArray();
-            foreach (var requirement in requirements)
-            {
-                string sortOrder = JObject.Parse(requirement.TextContent).Get<string>("sortOrder");
-                auditPartRequirements.Add(
-                    new JObject(
-                        new JProperty("subject", requirement.Name),
-                        new JProperty("auditResult", defaultAuditResult),
-                        new JProperty("disparities", new JArray()),
-                        new JProperty("code", requirement.Code),
-                        new JProperty("sortOrder", sortOrder)
-                ));
-            }
-
-            return Ok(auditPartRequirements.OrderBy(e => e.Get<int>("sortOrder")));
+            return Ok(requirements);
         }
 
         [Route("auditDetails")]
