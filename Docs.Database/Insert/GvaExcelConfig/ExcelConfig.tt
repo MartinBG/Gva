@@ -117,6 +117,7 @@
          List<Tuple<string, string>> AllDocTypesAndUnits = new List<Tuple<string, string>>();
 
          Dictionary<string, Tuple<string, string>> DocTypeAndClassification2Dictionary = new Dictionary<string, Tuple<string, string>>();
+		 Dictionary<string, Tuple<string, string>> DocTypeAndDocTypeGroupsDictionary = new Dictionary<string, Tuple<string, string>>();
 
         class TableInfo
         {
@@ -275,9 +276,9 @@
                     int electronicServiceStageExecutorsIdentity = 1;
                     int identityValue = 1;
 
-                    foreach (var item in DocTypeAndClassification2Dictionary)
+                    foreach (var item in DocTypeAndDocTypeGroupsDictionary)
                     {
-                        if (item.Value.Item2 == "1")
+                        if (item.Value.Item2 == "Заявление")
                         {
                             AddRow_ElectronicServiceStagesAndExecutors(electronicServiceStagesTableRows, electronicServiceStageExecutorsTableRows, allElectronicServiceStages, item.Key, ref electronicServiceStageExecutorsIdentity, ref identityValue);
                         }
@@ -524,6 +525,8 @@
                 DocTypeElectronicServiceRelations.Add(identityValue.ToString(), new Tuple<string, string>(electronicServiceTypeApplication, electronicServiceProvider));
 
                 DocTypeAndClassification2Dictionary.Add(identityValue.ToString(), new Tuple<string, string>(classificationsId2, isElectronicService));
+
+				DocTypeAndDocTypeGroupsDictionary.Add(identityValue.ToString(), new Tuple<string, string>(docTypeGroupId, docTypeGroup));
 
                 identityValue++;
             }
