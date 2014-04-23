@@ -255,7 +255,7 @@ namespace Gva.Web.Jobs.Helpers
                 {
                     attachedFileNames.AddRange(deserializedObject.AttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
                         new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
-                }
+                } 
             }
             else if (this.DocumentMetaData.RioObjectType == typeof(R_4578.AirworthinessAmateurBuiltAircraftApplication))
             {
@@ -302,6 +302,11 @@ namespace Gva.Web.Jobs.Helpers
                     attachedFileNames.AddRange(deserializedObject.AttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
                         new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
                 }
+                if (deserializedObject.AdditionalAttachedDocumentDatasCollection != null)
+                {
+                    attachedFileNames.AddRange(deserializedObject.AdditionalAttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
+                        new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
+                }
             }
             else if (this.DocumentMetaData.RioObjectType == typeof(R_4598.AuthorizationAirportOperatorApplication))
             {
@@ -312,6 +317,11 @@ namespace Gva.Web.Jobs.Helpers
                 if (deserializedObject.AttachedDocumentDatasCollection != null)
                 {
                     attachedFileNames.AddRange(deserializedObject.AttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
+                        new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
+                } 
+                if (deserializedObject.AdditionalAttachedDocumentDatasCollection != null)
+                {
+                    attachedFileNames.AddRange(deserializedObject.AdditionalAttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
                         new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
                 }
             }
@@ -326,6 +336,11 @@ namespace Gva.Web.Jobs.Helpers
                     attachedFileNames.AddRange(deserializedObject.AttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
                         new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
                 }
+                if (deserializedObject.AdditionalAttachedDocumentDatasCollection != null)
+                {
+                    attachedFileNames.AddRange(deserializedObject.AdditionalAttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
+                        new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
+                }
             }
             else if (this.DocumentMetaData.RioObjectType == typeof(R_4614.GroundHandlingEquipmentApplication))
             {
@@ -336,6 +351,11 @@ namespace Gva.Web.Jobs.Helpers
                 if (deserializedObject.AttachedDocumentDatasCollection != null)
                 {
                     attachedFileNames.AddRange(deserializedObject.AttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
+                        new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
+                }
+                if (deserializedObject.AdditionalAttachedDocumentDatasCollection != null)
+                {
+                    attachedFileNames.AddRange(deserializedObject.AdditionalAttachedDocumentDatasCollection.AttachedDocumentDataCollection.Where(e => e.AttachedDocumentUniqueIdentifier != null).Select(e =>
                         new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
                 }
             }
