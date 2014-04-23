@@ -1,35 +1,55 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, _, $*/
+(function (angular, _, $) {
   'use strict';
 
   function OrganizationsChooseDocumentsCtrl(
     $state,
     $stateParams,
     $scope,
-    certificate,
-    availableDocuments,
+    documents,
     documentParts
   ) {
-    $scope.availableDocuments = availableDocuments;
+
+    $scope.selectedDocuments = [];
+
+    $scope.availableDocuments =  _.reject(documents, function (document) {
+        var count = _.where($state.payload.selectedDocuments,
+          { partIndex: document.partIndex }).length;
+        return count > 0;
+      });
 
     $scope.documentParts = documentParts;
 
     $scope.save = function () {
-      _.each(_.filter($scope.availableDocuments, { 'checked': true }),
-        function (document) {
-          certificate.part.includedDocuments.push({
-            partIndex: document.partIndex,
-            setPartAlias: document.setPartAlias
-          });
+      var documents = [];
+      _.each($scope.selectedDocuments, function (document) {
+        documents.push({
+          partIndex: document.partIndex,
+          setPartAlias: document.setPartAlias
         });
-      return $state.go('^');
+      });
+
+      return $state.go('^', {}, {}, {
+        selectedDocuments: documents
+      });
+    };
+
+    $scope.selectDocument = function (event, document) {
+      if ($(event.target).is(':checked')) {
+        $scope.selectedDocuments.push(document);
+      }
+      else {
+        $scope.selectedDocuments = _.without($scope.selectedDocuments, document);
+      }
     };
 
     $scope.search = function () {
-      return $state.go($state.current, {
-        id: $stateParams.id,
-        documentTypes: _.pluck($scope.documentParts, 'alias')
-      });
+      return $state.go('.', {
+          id: $stateParams.id,
+          documentTypes: _.pluck($scope.documentParts, 'alias')
+        }, {}, {
+          selectedDocuments: $state.payload.selectedDocuments
+        });
     };
 
     $scope.goBack = function () {
@@ -42,30 +62,20 @@
     '$state',
     '$stateParams',
     '$scope',
-    'certificate',
-    'availableDocuments',
+    'documents',
     'documentParts'
   ];
 
   OrganizationsChooseDocumentsCtrl.$resolve = {
-    availableDocuments: [
+    documents: [
       '$stateParams',
       'OrganizationInventory',
-      'certificate',
-      function ($stateParams, OrganizationInventory, certificate) {
+      function ($stateParams, OrganizationInventory) {
         return OrganizationInventory
           .query({
             id: $stateParams.id,
             documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null
-          })
-          .$promise
-          .then(function (availableDocuments) {
-            return _.reject(availableDocuments, function (availableDocument) {
-              var count = _.where(certificate.part.includedDocuments,
-                { partIndex: availableDocument.partIndex }).length;
-              return count > 0;
-            });
-          });
+          }).$promise;
       }
     ],
     documentParts: [
@@ -88,4 +98,4 @@
 
   angular.module('gva')
     .controller('OrganizationsChooseDocumentsCtrl', OrganizationsChooseDocumentsCtrl);
-}(angular, _));
+}(angular, _, $));

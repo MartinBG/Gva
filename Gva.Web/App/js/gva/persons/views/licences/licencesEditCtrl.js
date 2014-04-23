@@ -65,6 +65,7 @@
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence).$promise
               .then(function () {
                 $scope.editMode = null;
+                $scope.backFromChild = false;
                 originalLicence = _.cloneDeep($scope.licence);
               }, function () {
                 $scope.editMode = 'edit';

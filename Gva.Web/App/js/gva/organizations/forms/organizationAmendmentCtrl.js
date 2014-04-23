@@ -60,8 +60,17 @@
     });
 
     $scope.chooseDocuments = function () {
-      $state.go('.chooseDocuments');
+      $state.go('.chooseDocuments', {}, {}, {
+        selectedDocuments: $scope.model.includedDocuments
+      });
     };
+
+    // coming from a child state and carrying payload
+    if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
+      if ($state.payload.selectedDocuments) {
+        [].push.apply($scope.model.includedDocuments, $state.payload.selectedDocuments);
+      }
+    }
 
     $scope.chooseLimitation = function (section) {
       return $state.go('.chooseLimitation',

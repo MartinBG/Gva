@@ -96,7 +96,7 @@
     </div>
   </div>
 
-  <h5 class="table-header" l10n-text="common.inspectionDirective.recommendationReports" style="margin-top:10px;" ng-if="setPart === 'organization'"></h5>
+  <h5 class="table-header" l10n-text="common.inspectionDirective.recommendationReports" ng-if="setPart === 'organization'"></h5>
   <sc-datatable items="model.part.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false" ng-if="setPart === 'organization'">
     <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
       <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

@@ -708,7 +708,6 @@
     <Content Include="App\js\gva\organizations\views\addresses\addrNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearch.html" />
     <Content Include="App\js\gva\organizations\views\addresses\addrSearchCtrl.js" />
-    <Content Include="App\js\gva\organizations\views\chooseDocuments\approvalsChooseDocumentsCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNew.html" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\approvals\approvalsSearch.html" />

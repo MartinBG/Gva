@@ -14,6 +14,10 @@
     $scope.approval = approval;
     $scope.editMode = null;
 
+    if ($state.previous && $state.previous.includes[$state.current.name]) {
+      $scope.backFromChild = true;
+    }
+
     $scope.$watch('approval.part.amendments | last', function (lastAmendment) {
       $scope.currentAmendment = lastAmendment;
       $scope.lastAmendment = lastAmendment;
