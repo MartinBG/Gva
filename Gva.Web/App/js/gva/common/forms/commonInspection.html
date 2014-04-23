@@ -23,20 +23,27 @@
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-2" sc-has-error="auditReason">
+    <div class="form-group col-sm-2  col-md-2" sc-has-error="auditReason">
       <label class="control-label" l10n-text="common.inspectionDirective.auditReason"></label>
       <sc-validation-error field-name="auditReason" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.part.auditReason" name="auditReason" alias="'auditReasons'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-2" sc-has-error="auditType">
+    <div class="form-group col-sm-2 col-md-2" sc-has-error="auditType">
       <label class="control-label" l10n-text="common.inspectionDirective.auditType"></label>
       <sc-validation-error field-name="auditType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.part.auditType" name="auditType" alias="'auditTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-2" sc-has-error="auditState">
+    <div class="form-group col-sm-2 col-md-2" sc-has-error="auditState">
       <label class="control-label" l10n-text="common.inspectionDirective.auditState"></label>
       <sc-validation-error field-name="auditState" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.part.auditState" name="auditState" alias="'auditStatuses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-3 col-md-3" sc-has-error="notification">
+        <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
+        <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
+      <div class="col-md-7" style="padding:0px">
+        <sc-nomenclature ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      </div>
     </div>
   </div>
 
@@ -52,14 +59,6 @@
     <div class="form-group col-sm-6 col-md-6">
       <label class="control-label" l10n-text="common.inspectionDirective.applications"></label>
       <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="readonly"></gva-applications>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="form-group col-sm-4 col-md-3" sc-has-error="notification">
-      <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
-      <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature  ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
 
@@ -99,7 +98,7 @@
   <h5 class="table-header" l10n-text="common.inspectionDirective.recommendationReports" ng-if="setPart === 'organization'"></h5>
   <sc-datatable items="model.part.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false" ng-if="setPart === 'organization'">
     <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-      <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="readonly"></sc-button>
     </sc-column>
     <sc-column data="recommendationPartName" title="common.inspectionDirective.recommendationPart">
     </sc-column>

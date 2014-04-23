@@ -64,7 +64,6 @@
 
 
     $scope.insertAuditDetails = function () {
-      $scope.insertionBtnIsClicked = true;
       return Nomenclature.query({
         alias: 'auditDetails',
         type: 'organizationRecommendations',
