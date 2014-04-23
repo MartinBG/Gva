@@ -3203,8 +3203,8 @@
         },
         organizationDataDirective: {
           name: 'Наименование',
-          nameAlt: 'Наименование на поддържащ език',
-          code: 'Идентификационен код',
+          nameAlt: 'Наим. на поддържащ език',
+          code: 'Ид. код',
           uin: 'Булстат',
           CAO: 'CAO №',
           dateCAOFirstIssue: 'Първо издаване',
@@ -3220,7 +3220,7 @@
           notes: 'Бележки',
           valid: 'Валидност',
           dateValidTo: 'Валидност до',
-          docRoom: 'Документацията е в стая',
+          docRoom: 'Документ. е в стая',
           caseTypes: 'Типове дела'
         },
         organizationAddressDirective: {
