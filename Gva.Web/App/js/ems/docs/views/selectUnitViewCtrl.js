@@ -58,7 +58,7 @@
       '$stateParams',
       'Nomenclature',
       function ResolveUnits($stateParams, Nomenclature) {
-        var params = _.assign({ alias: 'units' }, { name: $stateParams.name });
+        var params = _.assign({ alias: 'employeeUnit' }, { term: $stateParams.name });
 
         return Nomenclature.query(params).$promise;
       }

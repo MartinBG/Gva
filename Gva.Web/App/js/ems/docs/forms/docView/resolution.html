@@ -9,7 +9,7 @@
           <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
           <sc-validation-error field-name="docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
           <div class="input-group input-group-sm">
-            <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'unit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -18,7 +18,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -31,7 +31,7 @@
           <label class="control-label" l10n-text="docs.edit.view.inCharge"></label>
           <sc-validation-error field-name="docUnitsInCharge" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
           <div class="input-group input-group-sm">
-            <sc-nomenclature name="docUnitsInCharge" ng-model="model.docUnitsInCharge" alias="'unit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsInCharge }" required ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature name="docUnitsInCharge" ng-model="model.docUnitsInCharge" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsInCharge }" required ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'inCharge' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -41,7 +41,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.controlling"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsControlling" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsControlling" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'controlling' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -77,7 +77,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.readers"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsReaders" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsReaders" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'readers' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -86,7 +86,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.editors"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsEditors" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsEditors" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'editors' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -97,7 +97,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>
@@ -106,7 +106,7 @@
         <div class="form-group col-md-6">
           <label class="control-label" l10n-text="docs.edit.view.registrators"></label>
           <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsRegistrators" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.docUnitsRegistrators" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
             <span class="input-group-btn">
               <sc-button btn-click="$raise('scOnSelectUnit', { type: 'registrators' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
             </span>

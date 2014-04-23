@@ -623,6 +623,10 @@ namespace Gva.Api.Controllers
             string units = null
             )
         {
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            limit = 1000;
+            offset = 0;
+
             UserContext userContext = this.Request.GetUserContext();
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);

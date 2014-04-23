@@ -3,7 +3,7 @@
     <div class="form-group col-md-6">
       <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
         </span>
@@ -12,7 +12,7 @@
     <div class="form-group col-md-6">
       <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
       <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'unit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
         </span>

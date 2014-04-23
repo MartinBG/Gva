@@ -20,7 +20,7 @@ namespace Docs.Api.DataObjects
             {
                 this.Alias = d.Unit.Name;
                 this.IsActive = d.Unit.IsActive;
-                this.Name = d.Unit.Name;
+                this.Name = String.Format("{0}{1}", d.Unit.Name, d.Unit.UnitRelations.Any(f => f.ParentUnitId.HasValue) ? " (" + d.Unit.UnitRelations.First().ParentUnit.Name + ")" : String.Empty);
                 this.NomValueId = d.Unit.UnitId;
             }
         }

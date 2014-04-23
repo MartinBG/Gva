@@ -16,8 +16,8 @@ namespace Docs.Api.Models
             this.ElectronicServiceStageExecutors = new List<ElectronicServiceStageExecutor>();
             this.UnitClassifications = new List<UnitClassification>();
             this.UnitRelations = new List<UnitRelation>();
-            this.UnitRelations1 = new List<UnitRelation>();
-            this.UnitRelations2 = new List<UnitRelation>();
+            //this.UnitRelations1 = new List<UnitRelation>();
+            //this.UnitRelations2 = new List<UnitRelation>();
             this.UnitUsers = new List<UnitUser>();
         }
 
@@ -51,9 +51,9 @@ namespace Docs.Api.Models
 
         public virtual ICollection<UnitRelation> UnitRelations { get; set; }
 
-        public virtual ICollection<UnitRelation> UnitRelations1 { get; set; }
+        //public virtual ICollection<UnitRelation> UnitRelations1 { get; set; }
 
-        public virtual ICollection<UnitRelation> UnitRelations2 { get; set; }
+        //public virtual ICollection<UnitRelation> UnitRelations2 { get; set; }
 
         public virtual ICollection<UnitUser> UnitUsers { get; set; }
 

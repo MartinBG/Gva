@@ -608,7 +608,7 @@ namespace Docs.Api.Controllers
              .ToList();
 
             this.unitOfWork.DbContext.Set<DocUnit>()
-             .Include(e => e.Unit)
+             .Include(e => e.Unit.UnitRelations.Select(er => er.ParentUnit))
              .Include(e => e.DocUnitRole)
              .Where(e => e.DocId == id)
              .ToList();

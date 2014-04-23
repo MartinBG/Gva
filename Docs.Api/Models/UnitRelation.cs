@@ -16,9 +16,9 @@ namespace Docs.Api.Models
 
         public virtual Unit Unit { get; set; }
 
-        public virtual Unit Unit1 { get; set; }
+        public virtual Unit ParentUnit { get; set; }
 
-        public virtual Unit Unit2 { get; set; }
+        public virtual Unit RootUnit { get; set; }
     }
 
     public class UnitRelationMap : EntityTypeConfiguration<UnitRelation>
@@ -47,11 +47,11 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Unit)
                 .WithMany(t => t.UnitRelations)
                 .HasForeignKey(d => d.UnitId);
-            this.HasOptional(t => t.Unit1)
-                .WithMany(t => t.UnitRelations1)
+            this.HasOptional(t => t.ParentUnit)
+                .WithMany()
                 .HasForeignKey(d => d.ParentUnitId);
-            this.HasRequired(t => t.Unit2)
-                .WithMany(t => t.UnitRelations2)
+            this.HasRequired(t => t.RootUnit)
+                .WithMany()
                 .HasForeignKey(d => d.RootUnitId);
         }
     }

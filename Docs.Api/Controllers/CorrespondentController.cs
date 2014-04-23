@@ -51,6 +51,10 @@ namespace Docs.Api.Controllers
             string correspondentEmail = null
             )
         {
+            //? hot fix: load fist 1000 corrs, so the paging with datatable will work
+            limit = 1000;
+            offset = 0;
+
             int totalCount = 0;
 
             var returnValue =

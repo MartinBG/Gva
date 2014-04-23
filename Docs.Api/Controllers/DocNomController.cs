@@ -1,6 +1,7 @@
 ﻿using Common.Extensions;
 using Common.Linq;
 using Docs.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -405,13 +406,14 @@ namespace Docs.Api.Controllers
         public IHttpActionResult GetEmployeeUnit(int id)
         {
             var result = this.unitOfWork.DbContext.Set<Unit>()
+                .Include(e => e.UnitRelations.Select(d => d.ParentUnit))
                 .Where(e => e.UnitType.Alias == "Employee" && e.UnitId == id)
                 .SingleOrDefault();
 
             return Ok(new
             {
                 nomValueId = result.UnitId,
-                name = result.Name,
+                name = String.Format("{0}{1}", result.Name, result.UnitRelations.Any(f => f.ParentUnitId.HasValue) ? " (" + result.UnitRelations.First().ParentUnit.Name + ")" : String.Empty),
                 alias = result.Name,
                 isActive = result.IsActive
             });
@@ -428,13 +430,15 @@ namespace Docs.Api.Controllers
 
             var results =
                 this.unitOfWork.DbContext.Set<Unit>()
+                .Include(e => e.UnitRelations.Select(d => d.ParentUnit))
                 .Where(predicate)
                 .OrderBy(e => e.Name)
                 .WithOffsetAndLimit(offset, limit)
+                .ToList()
                 .Select(e => new
                 {
                     nomValueId = e.UnitId,
-                    name = e.Name,
+                    name = String.Format("{0}{1}", e.Name, e.UnitRelations.Any(f => f.ParentUnitId.HasValue) ? " (" + e.UnitRelations.First().ParentUnit.Name + ")" : String.Empty),
                     alias = e.Name,
                     isActive = e.IsActive
                 })
