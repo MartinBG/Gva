@@ -7,7 +7,7 @@
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
   <Created>2006-09-16T00:00:00Z</Created>
-  <LastSaved>2014-04-22T14:20:51Z</LastSaved>
+  <LastSaved>2014-04-23T12:11:02Z</LastSaved>
   <Version>14.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -18,8 +18,9 @@
   <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
-  <TabRatio>616</TabRatio>
-  <ActiveSheet>2</ActiveSheet>
+  <TabRatio>651</TabRatio>
+  <ActiveSheet>9</ActiveSheet>
+  <FirstVisibleSheet>1</FirstVisibleSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -565,8 +566,8 @@
    <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
     <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
-    <Cell ss:StyleID="s82" ss:HRef="mailto:vanq@caa.bg"><Data ss:Type="String">vanq@caa.bg</Data></Cell>
+    <Cell ss:StyleID="s78"/>
+    <Cell ss:StyleID="s82"/>
    </Row>
    <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
     <Cell ss:StyleID="s77"><Data ss:Type="String">020402</Data></Cell>
@@ -733,12 +734,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>37</ActiveRow>
-     <ActiveCol>3</ActiveCol>
+     <ActiveRow>13</ActiveRow>
+     <RangeSelection>R14C1:R14C3</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -3053,7 +3053,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="UnitClassifications">
-  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="111" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="106" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="54.75"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="123" ss:Span="1"/>
@@ -3128,14 +3128,6 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
     <Cell><Data ss:Type="String">Read</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
-    <Cell><Data ss:Type="String">Read</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">020402</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Инспектор</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Иван Х. Иванов</Data></Cell>
@@ -3299,14 +3291,6 @@
     <Cell ss:StyleID="s77"><Data ss:Type="String">020302</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Инспектор</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Надя Тотева</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
-    <Cell><Data ss:Type="String">Register</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
@@ -3480,14 +3464,6 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
     <Cell><Data ss:Type="String">Management</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
-    <Cell><Data ss:Type="String">Management</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">020402</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Инспектор</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Иван Х. Иванов</Data></Cell>
@@ -3656,14 +3632,6 @@
     <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
     <Cell><Data ss:Type="String">Finish</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
-    <Cell><Data ss:Type="String">Finish</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">020402</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Инспектор</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Иван Х. Иванов</Data></Cell>
@@ -3827,14 +3795,6 @@
     <Cell ss:StyleID="s77"><Data ss:Type="String">020302</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Инспектор</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">Надя Тотева</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Услуги</Data></Cell>
-    <Cell><Data ss:Type="String">Reverse</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">020401</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">Ваня Наумова</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
@@ -3965,8 +3925,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>22</ActiveRow>
-     <ActiveCol>4</ActiveCol>
+     <ActiveRow>95</ActiveRow>
+     <ActiveCol>5</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -3974,12 +3934,12 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="ElectronicServiceStages">
-  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="9" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="7" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="167.25"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="188.25"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="86.25" ss:Span="2"/>
-   <Column ss:Index="6" ss:StyleID="s64" ss:Width="417"/>
+   <Column ss:Index="6" ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="484.5"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="162"/>
    <Column ss:Index="9" ss:StyleID="s64" ss:Width="80.25"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="92.25"/>
@@ -4005,7 +3965,7 @@
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">Приемане на заявление за  административна услуга</Data></Cell>
+    <Cell><Data ss:Type="String">Приемане на заявление за административна услуга</Data></Cell>
     <Cell><Data ss:Type="String">AcceptApplication</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -4019,7 +3979,7 @@
     <Cell><Data ss:Type="String">2</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">Проверка за редовност и допустимост на заявлението</Data></Cell>
+    <Cell><Data ss:Type="String">Проверка за формална редовност и допустимост</Data></Cell>
     <Cell><Data ss:Type="String">CheckRegularity</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -4033,6 +3993,20 @@
     <Cell><Data ss:Type="String">3</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">Проверка по същество</Data></Cell>
+    <Cell><Data ss:Type="String">ExamineApplication</Data></Cell>
+    <Cell><Data ss:Type="String">30</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">*</Data></Cell>
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">Уведомяване за нередности и предоставяне на допълнителни документи</Data></Cell>
     <Cell><Data ss:Type="String">IrregularitiesNotification</Data></Cell>
     <Cell><Data ss:Type="String">30</Data></Cell>
@@ -4044,25 +4018,11 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">4</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">Приемане на заявление за отстраняване на нередовностите от страна на заявителя</Data></Cell>
-    <Cell><Data ss:Type="String">AcceptIrregularityApplication</Data></Cell>
-    <Cell><Data ss:Type="String">30</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">05</Data></Cell>
-    <Cell ss:StyleID="Default"><Data ss:Type="String">Системни</Data></Cell>
-    <Cell ss:StyleID="Default"><Data ss:Type="String">Система</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">5</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell><Data ss:Type="String">Прекратяване по искане на заявителя</Data></Cell>
-    <Cell><Data ss:Type="String">DecreeRefusal</Data></Cell>
+    <Cell><Data ss:Type="String">Уведомяване на заявителя за резултата от осъществената административна услуга</Data></Cell>
+    <Cell><Data ss:Type="String">NotifyCorrespondent</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">*</Data></Cell>
@@ -4074,37 +4034,9 @@
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">6</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">РАЗГЛЕЖДАНЕ НА ЗАЯВЛЕНИЕТО ПО СЪЩЕСТВО</Data></Cell>
-    <Cell><Data ss:Type="String">ExamineApplication</Data></Cell>
-    <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">7</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">Приключване на разглеждането по същество и изготвяне на проекто-прeдложение до комисята</Data></Cell>
-    <Cell><Data ss:Type="String">CreateProjectSuggestion</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">8</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell><Data ss:Type="String">Уведомяване на заявителя за резултата от осъществената административна услуга</Data></Cell>
-    <Cell><Data ss:Type="String">NotifyCorrespondent</Data></Cell>
+    <Cell><Data ss:Type="String">Прекратяване по искане на заявителя</Data></Cell>
+    <Cell><Data ss:Type="String">DecreeRefusal</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">*</Data></Cell>
@@ -4125,10 +4057,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>9</ActiveRow>
+     <ActiveRow>16</ActiveRow>
      <ActiveCol>5</ActiveCol>
     </Pane>
    </Panes>

@@ -1245,12 +1245,7 @@ namespace Docs.Api.Controllers
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
                 .SingleOrDefault(e => e.Alias.ToLower() == docWorkflow.DocWorkflowActionAlias.ToLower());
 
-            bool? yesNo = null;
-
-            if (docWorkflow.YesNoId.HasValue)
-            {
-                yesNo = Convert.ToBoolean(docWorkflow.YesNoId.Value);
-            }
+            bool? yesNo = (docWorkflow.YesNoId.HasValue && docWorkflow.YesNoId.Value == 1) ? true : false;
 
             doc.CreateDocWorkflow(
                 docWorkflowAction,

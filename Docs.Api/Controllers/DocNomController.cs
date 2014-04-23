@@ -699,7 +699,7 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
                 .Where(predicate)
-                .OrderBy(e => e.Name)
+                .OrderBy(e => e.ElectronicServiceStageId)
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {

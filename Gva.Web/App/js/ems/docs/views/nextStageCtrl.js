@@ -58,7 +58,7 @@
           docId: doc.docId,
           docVersion: doc.version,
           docTypeId: doc.docTypeId,
-          startingDate: moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+          startingDate: moment().startOf('minute').format('YYYY-MM-DDTHH:mm:ss')
         };
       }
     ]

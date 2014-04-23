@@ -61,6 +61,7 @@
           .$promise
           .then(function (result) {
             result.docVersion = doc.version;
+            result.docTypeId = doc.docTypeId;
             return result;
           });
       }

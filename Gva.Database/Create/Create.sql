@@ -53,8 +53,8 @@ GO
 -- Insert Migration Noms Values
 ---------------------------------------------------------------
 
---:r $(rootPath)\"..\Insert\migrationNomValues.sql"
-DBCC CHECKIDENT ('NomValues', RESEED, 999)
+:r $(rootPath)\"..\Insert\migrationNomValues.sql"
+--DBCC CHECKIDENT ('NomValues', RESEED, 999)
 
 ---------------------------------------------------------------
 -- Aircrafts test noms from Apex
