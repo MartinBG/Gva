@@ -192,7 +192,11 @@
     <Content Include="App\js\common\users\views\search.html" />
     <Content Include="App\js\common\users\views\searchCtrl.js" />
     <Content Include="App\js\app_bg-bg.js" />
+    <Content Include="App\js\ems\corrs\forms\corrData.html" />
+    <Content Include="App\js\ems\corrs\forms\corrDataCtrl.js" />
     <Content Include="App\js\ems\corrs\resources\corr.js" />
+    <Content Include="App\js\ems\corrs\views\corrNewCtrl.js" />
+    <Content Include="App\js\ems\corrs\views\corrNew.html" />
     <Content Include="App\js\ems\corrs\views\corrEdit.html" />
     <Content Include="App\js\ems\corrs\views\corrEditCtrl.js" />
     <Content Include="App\js\ems\corrs\views\corrSearch.html" />
@@ -1506,7 +1510,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\js\ems\corrs\forms\" />
     <Folder Include="App\js\gva\directives\button\" />
     <Folder Include="App\js\gva\directives\hasError\" />
     <Folder Include="App\js\gva\directives\validationError\" />

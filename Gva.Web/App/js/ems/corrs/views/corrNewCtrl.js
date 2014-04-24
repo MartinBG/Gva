@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function CorrsEditCtrl(
+  function CorrsNewCtrl(
     $scope,
     $filter,
     $state,
@@ -31,7 +31,7 @@
     };
   }
 
-  CorrsEditCtrl.$inject = [
+  CorrsNewCtrl.$inject = [
     '$scope',
     '$filter',
     '$state',
@@ -40,15 +40,15 @@
     'corr'
   ];
 
-  CorrsEditCtrl.$resolve = {
+  CorrsNewCtrl.$resolve = {
     corr: [
       '$stateParams',
       'Corr',
       function resolveCorr($stateParams, Corr) {
-        return Corr.get({ id: $stateParams.id }).$promise;
+        return Corr.getNew().$promise;
       }
     ]
   };
 
-  angular.module('ems').controller('CorrsEditCtrl', CorrsEditCtrl);
+  angular.module('ems').controller('CorrsNewCtrl', CorrsNewCtrl);
 }(angular));

@@ -254,6 +254,7 @@
           search: 'Търси'
         },
         edit: {
+          contactDataForm: 'Лични данни',
           correspondentTitle: 'Кореспондент',
           email: 'Имейл',
           correspondentType: 'Тип кореспондент',

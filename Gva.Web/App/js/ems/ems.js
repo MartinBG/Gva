@@ -13,6 +13,11 @@
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
+      name: 'emsCorrData',
+      templateUrl: 'ems/corrs/forms/corrData.html',
+      controller: 'CorrsDataCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'emsDocNewCommon',
       templateUrl: 'ems/docs/forms/docNew/docNewCommon.html',
       controller: 'DocNewCommonCtrl'
@@ -110,7 +115,7 @@
       .state(['root.docs.edit.case.docType.selectUnit'        , '/selectUnit?name'                                                                                     , ['@root.docs.edit' , 'ems/docs/views/selectUnitView.html'                   ,'SelectUnitViewCtrl'    ]])
       .state(['root.corrs'                                    , '/corrs?displayName&correspondentEmail&limit&offset'                                                                                                                                                           ])
       .state(['root.corrs.search'                             , ''                                                                                                     , ['@root'           , 'ems/corrs/views/corrSearch.html'                      ,'CorrsSearchCtrl'       ]])
-      .state(['root.corrs.new'                                , '/new'                                                                                                 , ['@root'           , 'ems/corrs/views/corrEdit.html'                        ,'CorrsEditCtrl'         ]])
+      .state(['root.corrs.new'                                , '/new'                                                                                                 , ['@root'           , 'ems/corrs/views/corrNew.html'                         ,'CorrsNewCtrl'          ]])
       .state(['root.corrs.edit'                               , '/:id'                                                                                                 , ['@root'           , 'ems/corrs/views/corrEdit.html'                        ,'CorrsEditCtrl'         ]]);
   }]);
 }(angular));
