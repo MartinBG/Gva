@@ -92,17 +92,18 @@ namespace Gva.MigrationTool
                     var aircraftFmIdtoLotId = aircraftIds.Item2;
 
                     person.createPersonsLots(noms);
-                    organization.createOrganizationsLots(noms);
 
-                    aircraft.migrateAircrafts(
-                        noms,
-                        aircraftApexIdtoLotId,
-                        aircraftFmIdtoLotId,
-                        person.personOldIdsLotIds,
-                        organization.organizationOldIdsLotIds);
+                    var organizationIdtoLotId = organization.createOrganizationsLots(noms);
 
-                    person.migratePersons(noms, aircraftApexIdtoLotId, organization.organizationOldIdsLotIds);
-                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, person.personOldIdsLotIds);//TODO
+                    //aircraft.migrateAircrafts(
+                    //    noms,
+                    //    aircraftApexIdtoLotId,
+                    //    aircraftFmIdtoLotId,
+                    //    person.personOldIdsLotIds,
+                    //    organizationIdtoLotId);
+
+                    //person.migratePersons(noms, aircraftApexIdtoLotId, organizationIdtoLotId);
+                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, person.personOldIdsLotIds, organizationIdtoLotId);
                 }
                 catch (OracleException e)
                 {

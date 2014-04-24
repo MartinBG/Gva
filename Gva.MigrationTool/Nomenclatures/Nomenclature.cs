@@ -71,6 +71,11 @@ namespace Gva.MigrationTool.Nomenclatures
         {
             return nomValue != null ? (int?)nomValue.NomValueId : null;
         }
+
+        public static string Name(this NomValue nomValue)
+        {
+            return nomValue != null ? nomValue.Name : null;
+        }
     }
 
     public class Nomenclature

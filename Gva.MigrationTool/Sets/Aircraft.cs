@@ -1257,7 +1257,7 @@ namespace Gva.MigrationTool.Sets
                         auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
                         subject = r.Field<string>("SUBJECT"),
                         auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
-                        notification = r.Field<string>("NOTIFICATION"),
+                        notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
                         startDate = r.Field<DateTime?>("DATE_BEGIN"),
                         endDate = r.Field<DateTime?>("DATE_END"),
                         inspectionPlace = r.Field<string>("INSPECTION_PLACE"),

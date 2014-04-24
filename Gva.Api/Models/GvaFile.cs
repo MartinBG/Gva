@@ -32,7 +32,7 @@ namespace Gva.Api.Models
             // Properties
             this.Property(t => t.Filename)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.MimeType)
                 .IsOptional()
