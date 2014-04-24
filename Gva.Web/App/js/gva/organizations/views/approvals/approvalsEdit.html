@@ -40,10 +40,10 @@
           ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
         <sc-button name="editBtn" btn-click="editLastAmendment()" text="organizations.approvalEdit.editLastAmendment"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteLastAmendment()" text="organizations.approvalEdit.deleteLastAmendment"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalEdit.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">

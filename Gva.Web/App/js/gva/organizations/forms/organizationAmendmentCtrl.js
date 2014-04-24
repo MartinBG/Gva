@@ -25,38 +25,43 @@
         }
       });
 
-      angular.element('.select2input').select2('destroy');
       angular.element('.select2input').select2($scope.select2Options);
     };
 
     $scope.$watch('model.lims147.length', function () {
-      updateSelect2Options($scope.model.lims147);
-      angular.forEach($scope.model.lims147, function(lim, key){
-        $scope.$watch('model.lims147[' + key + '].lim147limitation',
-          function(){
-            updateSelect2Options($scope.model.lims147);
-          });
-      });
+      if($scope.model) {
+        updateSelect2Options($scope.model.lims147);
+        angular.forEach($scope.model.lims147, function(lim, key){
+          $scope.$watch('model.lims147[' + key + '].lim147limitation',
+            function(){
+              updateSelect2Options($scope.model.lims147);
+            });
+        });
+      }
     });
 
     $scope.$watch('model.lims145.length', function () {
-      updateSelect2Options($scope.model.lims145);
-      angular.forEach($scope.model.lims145, function(lim, key){
-        $scope.$watch('model.lims145[' + key + '].lim145limitation',
-          function(){
-            updateSelect2Options($scope.model.lims145);
-          });
-      });
+      if($scope.model) {
+        updateSelect2Options($scope.model.lims145);
+        angular.forEach($scope.model.lims145, function(lim, key){
+          $scope.$watch('model.lims145[' + key + '].lim145limitation',
+            function(){
+              updateSelect2Options($scope.model.lims145);
+            });
+        });
+      }
     });
 
     $scope.$watch('model.limsMG.length', function () {
-      updateSelect2Options($scope.model.limsMG);
-      angular.forEach($scope.model.limsMG, function(lim, key){
-        $scope.$watch('model.limsMG[' + key + '].aircraftTypeGroup',
-          function(){
-            updateSelect2Options($scope.model.limsMG);
-          });
-      });
+      if($scope.model) {
+        updateSelect2Options($scope.model.limsMG);
+        angular.forEach($scope.model.limsMG, function(lim, key){
+          $scope.$watch('model.limsMG[' + key + '].aircraftTypeGroup',
+            function(){
+              updateSelect2Options($scope.model.limsMG);
+            });
+        });
+      }
     });
 
     $scope.chooseDocuments = function () {
@@ -65,12 +70,17 @@
       });
     };
 
-    // coming from a child state and carrying payload
-    if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
-      if ($state.payload.selectedDocuments) {
-        [].push.apply($scope.model.includedDocuments, $state.payload.selectedDocuments);
+    $scope.$watch('model', function(){
+      if($scope.model){
+        if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
+          if ($state.payload.selectedDocuments) {
+            [].push.apply($scope.model.includedDocuments, $state.payload.selectedDocuments);
+          }
+        }
       }
-    }
+    });
+    // coming from a child state and carrying payload
+    
 
     $scope.chooseLimitation = function (section) {
       return $state.go('.chooseLimitation',

@@ -66,7 +66,7 @@
         .then(function () {
           if ($scope.editApprovalForm.$valid) {
             $scope.editMode = 'saving';
-
+            $scope.backFromChild = false;
             return OrganizationApproval
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.approval)
               .$promise
@@ -83,6 +83,7 @@
     $scope.cancel = function () {
       $scope.approval = _.cloneDeep(originalApproval);
       $scope.editMode = null;
+      $scope.backFromChild = false;
     };
 
     var limitation = selectedLimitation.pop();

@@ -27,7 +27,9 @@
     $scope.$watch('setPart', function(){
       var aliases = {
         organization: 'Организация',
-        aircraft: 'ВС'
+        aircraft: 'ВС',
+        aiport: 'Летище',
+        equipment: 'Съоръжение'
       };
 
       $scope.model.part.setPart = aliases[$scope.setPart];

@@ -38,10 +38,10 @@
       <sc-validation-error field-name="auditState" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.part.auditState" name="auditState" alias="'auditStatuses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-3 col-md-3" sc-has-error="notification">
+    <div class="form-group col-sm-4 col-md-3" sc-has-error="notification">
         <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
         <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
-      <div class="col-md-7" style="padding:0px">
+      <div class="col-sm-5 col-md-7" style="padding:0px">
         <sc-nomenclature ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
