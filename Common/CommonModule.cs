@@ -18,6 +18,7 @@ namespace Common
             moduleBuilder.RegisterGeneric(typeof(DisposableTuple<,,,,,,,>)).AsSelf();
             moduleBuilder.RegisterGeneric(typeof(DisposableTuple<,,,,,,,,>)).AsSelf();
             moduleBuilder.RegisterGeneric(typeof(DisposableTuple<,,,,,,,,,>)).AsSelf();
+            moduleBuilder.RegisterGeneric(typeof(DisposableTuple<,,,,,,,,,,>)).AsSelf();
         }
     }
 }

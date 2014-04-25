@@ -1719,7 +1719,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
-                        Alias = null,
+                        Alias = r.Field<string>("CODE"),
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()).NomValueId(),
                         TextContent = JsonConvert.SerializeObject(

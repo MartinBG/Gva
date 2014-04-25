@@ -77,6 +77,9 @@ namespace Gva.MigrationTool
 
                 try
                 {
+                    System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+                    timer.Start();
+
                     oracleConn.Open();
                     sqlConn.Open();
 
@@ -91,19 +94,22 @@ namespace Gva.MigrationTool
                     var aircraftApexIdtoLotId = aircraftIds.Item1;
                     var aircraftFmIdtoLotId = aircraftIds.Item2;
 
-                    person.createPersonsLots(noms);
+                    var personIdToLotId = person.createPersonsLots(noms);
 
                     var organizationIdtoLotId = organization.createOrganizationsLots(noms);
 
-                    //aircraft.migrateAircrafts(
-                    //    noms,
-                    //    aircraftApexIdtoLotId,
-                    //    aircraftFmIdtoLotId,
-                    //    person.personOldIdsLotIds,
-                    //    organizationIdtoLotId);
+                    aircraft.migrateAircrafts(
+                        noms,
+                        aircraftApexIdtoLotId,
+                        aircraftFmIdtoLotId,
+                        personIdToLotId,
+                        organizationIdtoLotId);
 
-                    //person.migratePersons(noms, aircraftApexIdtoLotId, organizationIdtoLotId);
-                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, person.personOldIdsLotIds, organizationIdtoLotId);
+                    person.migratePersons(noms, aircraftApexIdtoLotId, organizationIdtoLotId, personIdToLotId);
+                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, personIdToLotId, organizationIdtoLotId);
+
+                    timer.Stop();
+                    Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
                 }
                 catch (OracleException e)
                 {

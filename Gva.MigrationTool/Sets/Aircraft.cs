@@ -81,8 +81,8 @@ namespace Gva.MigrationTool.Sets
                     //    continue;
                     //}
 
-                    if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
-                        continue;
+                    //if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
+                    //    continue;
 
                     var lot = aircraftSet.CreateLot(context);
                     var aircraftData = this.getAircraftData(aircraftApexId, noms);
@@ -107,8 +107,8 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var aircraftFmId in this.getAircraftFmIds())
                 {
-                    if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
-                        continue;
+                    //if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
+                    //    continue;
 
                     var aircraftDataFM = this.getAircraftDataFM(aircraftFmId, noms);
                     var msn = aircraftDataFM.Get<string>("manSN");
@@ -126,6 +126,7 @@ namespace Gva.MigrationTool.Sets
 
                     if (lot.GetPart("aircraftData") != null)
                     {
+                        //TODO duplicate?
                         Console.WriteLine("Aircraft with MSN {0} in FM has already been migrated", msn);
                         continue;
                     }
@@ -180,7 +181,7 @@ namespace Gva.MigrationTool.Sets
                 {"Н.Джамбов"     , 2286},
                 {"Н.Начев"       , 1150},
                 {"Н.Тотева"      , -1},//TODO
-                {"П.Младенов"    , -1},//TODO
+                {"П.МЛАДЕНОВ"    , -1},//TODO
                 {"П.Юнашкова"    , 2349},
                 {"С.Живков"      , 2396},
                 {"С.Пенчев"      , 803},
@@ -190,11 +191,8 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var aircraftApexId in this.getAircraftApexIds())
             {
-                //if (aircraftApexId >= 200)
-                //    break;
-
-                if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
-                    continue;
+                //if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
+                //    continue;
 
                 using (var dependencies = dependencyFactory())
                 {
@@ -372,8 +370,15 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("aircraftCertSmods/*", aircraftCertSmod, context);
                     }
 
+                    try
+                    {
+                        lot.Commit(context, lotEventDispatcher);
+                    }
+                    // ignore empty commit exceptions
+                    catch (InvalidOperationException)
+                    {
+                    }
 
-                    lot.Commit(context, lotEventDispatcher);
                     unitOfWork.Save();
 
                     Console.WriteLine("Migrated APEX aircraftId: {0}", aircraftApexId);
@@ -382,10 +387,9 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var aircraftFmId in this.getAircraftFmIds())
             {
-
-                //TODO remove
-                if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
-                    continue;
+                ////TODO remove
+                //if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
+                //    continue;
 
                 using (var dependencies = dependencyFactory())
                 {
@@ -403,10 +407,35 @@ namespace Gva.MigrationTool.Sets
 
                     Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personApexIdToLotId);
                     Func<int?, JObject> getOrganization = (orgApexId) => Utils.GetOrganization(orgApexId, organizationRepository, orgApexIdToLotId);
+                    Func<string, JObject> getInspector = (tRegUser) =>
+                    {
+                        if (!inspectorsFM.ContainsKey(tRegUser))
+                        {
+                            //TODO throw error
+                            Console.WriteLine("Cannot find inspector {0}", tRegUser);
+                            return null;
+                        }
 
-                    Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);;
+                        int personId = inspectorsFM[tRegUser];
+                        if (personId == -1)
+                        {
+                            //TODO throw error
+                            Console.WriteLine("Inspector {0} is not mapped to personId", tRegUser);
+                            return null;
+                        }
 
-                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, inspectorsFM, noms, getPerson);
+                        return getPerson(personId);
+                    };
+
+                    if (!aircraftFmIdtoLotId.ContainsKey(aircraftFmId))
+                    {
+                        //TODO remove, those are the ones with duplicate MSN skipped earlier
+                        continue;
+                    }
+
+                    Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);
+
+                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector);
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                     {
                         var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
@@ -422,13 +451,13 @@ namespace Gva.MigrationTool.Sets
 
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom, inspectorsFM, getPerson);
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom, getInspector);
                         foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
                         {
                             lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
                         }
 
-                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom, inspectorsFM, noms, getPerson);
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom, noms, getInspector);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                         {
                             try
@@ -548,7 +577,7 @@ namespace Gva.MigrationTool.Sets
                 .Single();
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom, Dictionary<string, int> inspectors, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts where {0} {1}",
@@ -563,17 +592,17 @@ namespace Gva.MigrationTool.Sets
                         registration = regNom,
                         certId = toNum(r.Field<string>("RegNo")),
                         regDate = toDate(r.Field<string>("Date")),
-                        aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action")),
+                        aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
                         documentNumber = r.Field<string>("gt_DocCAA"),
                         documentDate = r.Field<string>("gd_DocCAA"),
                         aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
                         creditorDocument = r.Field<string>("Doc Creditor"),
-                        inspector = getPerson(inspectors[r.Field<string>("tUser")])
+                        inspector = getInspector(r.Field<string>("tUser"))
                     }))
                 .ToList();
         }
 
-        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, int> inspectors, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from 
@@ -605,7 +634,7 @@ namespace Gva.MigrationTool.Sets
                         incomingDocNumber = r.Field<string>("tDocCAA"),
                         incomingDocDate = toDate(r.Field<string>("dDateCAA")),
                         incomingDocDesc = r.Field<string>("tDocOther"),
-                        inspector = getPerson(inspectors[r.Field<string>("tRegUser")]),
+                        inspector = getInspector(r.Field<string>("tRegUser")),
                         ownerId = r.Field<string>("nOwner"),//TODO
                         operatorId = r.Field<string>("nOper"),//TODO
                         aircraftCategory = noms["aircraftCategories"].ByCodeOrDefault(r.Field<string>("tCatCode")) ?? noms["aircraftCategories"].ByCode("A2"),//TODO
@@ -624,20 +653,20 @@ namespace Gva.MigrationTool.Sets
                         noiseNumber = r.Field<string>("tNoise_New"),
                         paragraph = r.Field<string>("tAnnexII_Bg"),
                         paragraphAlt = r.Field<string>("tAnnexII_En"),
-                        removal = new 
+                        removal = new
                         {
                             date = toDate(r.Field<string>("dDeRegDate")),
                             reason = r.Field<string>("tDeDocOther"),
                             text = r.Field<string>("tRemarkDeReg"),
                             documentNumber = r.Field<string>("tDeDocCAA"),
                             documentDate = toDate(r.Field<string>("dDeDateCAA")),
-                            inspector = getPerson(inspectors[r.Field<string>("tDeUser")])
+                            inspector = getInspector(r.Field<string>("tDeUser"))
                         }
                     }))
                 .ToList();
         }
 
-        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom, Dictionary<string, int> inspectors, Func<int?, JObject> getPerson)
+        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from 
@@ -663,9 +692,7 @@ namespace Gva.MigrationTool.Sets
                         issueDate = toDate(r.Field<string>("dIssue")),
                         validfromDate = toDate(r.Field<string>("dFrom")),
                         validtoDate = toDate(r.Field<string>("dValid")),
-                        inspector = inspectors.ContainsKey(r.Field<string>("t_Reviewed_By")) ? 
-                            getPerson(inspectors[r.Field<string>("t_Reviewed_By")]) :
-                            Utils.reviewCase("Aircrafts-> getAircraftCertAirworthinessesFM-> inspectors doesn't contain the key {0}", r.Field<string>("t_Reviewed_By")),
+                        inspector = getInspector(r.Field<string>("t_Reviewed_By")),
                         incomingDocNumber = r.Field<string>("tDocCAA"),
                         incomingDocDate = toDate(r.Field<string>("dDocCAA")),
                         EASA25IssueDate = toDate(r.Field<string>("dDateEASA_25_Issue")),
@@ -710,7 +737,7 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
                 .Materialize(r => (int)r.Field<long>("ID"))
-                .ToList();
+                .ToList().Take(200).ToList();
         }
 
         private JObject getAircraftData(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
