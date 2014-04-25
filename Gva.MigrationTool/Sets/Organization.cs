@@ -74,7 +74,7 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var organizationId in organizationIds)
                 {
-                    if (organizationId >= 200)
+                    if (organizationId >= 500)
                     {
                         break;
                     }
@@ -101,14 +101,14 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var organizationId in this.getOrganizationIds())
             {
-                //if (organizationId >= 200)
-                //{
-                //    break;
-                //}
-                if (organizationId != 86)
+                if (organizationId >= 500)
                 {
-                    continue;
+                    break;
                 }
+                //if (organizationId != 86)
+                //{
+                //    continue;
+                //}
 
 
                 using (var dependencies = this.dependencyFactory())
@@ -252,6 +252,15 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
                         __migrTable = "FIRM",
+                        caseTypes = new[] 
+                        {
+                            new 
+                            {
+                                NomValueId = 3,
+                                Name = "ОО",
+                                Alias = "approvedOrg"
+                            }
+                        },
                         name = r.Field<string>("NAME"),
                         nameAlt = r.Field<string>("NAME_TRANS"),
                         code = r.Field<string>("CODE"),
@@ -317,8 +326,7 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<long?>("ID"),
                         limitation = r.Field<string>("TYPE_AC")
                     })
-                .GroupBy(g => g.__oldId)
-                .ToDictionary(l => l.Key, l => l.Select(n => n.limitation));
+                .ToDictionary(l => l.__oldId, l => l.limitation);
 
             var lim145 = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.SCH_MF145_APPROVAL")
                 .Materialize(r =>
@@ -327,8 +335,7 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<long?>("ID"),
                         limitation = noms["lim145limitations"].ByOldId(r.Field<long?>("ID_MF145_LIMIT").ToString()).Name()
                     })
-                .GroupBy(g => g.__oldId)
-                .ToDictionary(l => l.Key, l => l.Select(n => n.limitation));
+                .ToDictionary(l => l.__oldId, l => l.limitation);
 
             var lim147 = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.SCH_147_APPROVAL")
                 .Materialize(r =>
@@ -337,8 +344,7 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<long?>("ID"),
                         limitation = noms["lim147limitations"].ByOldId(r.Field<long?>("ID_147_LIMIT").ToString()).Name()
                     })
-                .GroupBy(g => g.__oldId)
-                .ToDictionary(l => l.Key, l => l.Select(n => n.limitation));
+                .ToDictionary(l => l.__oldId, l => l.limitation);
 
             var includedDocumentsResults = this.oracleConn.CreateStoreCommand(
                 @"SELECT ADI.ID, ADI.EXAMINER_ID, ADI.APPROWAL_DATE, ADI.ID_SCH_145, ADI.ID_SCH_147, ADI.ID_SCH_MG, ADI.PERSON_DOCUMENT_ID, APS.ID AS APS_ID
@@ -393,10 +399,10 @@ namespace Gva.MigrationTool.Sets
                         __approvalScheduleId = (int)r.Field<long>("APS_ID"),
                         __oldId = (int)r.Field<long>("ID"),
                         __migrTable = "SCH_MG_APPROVAL",
-                        typeAC = r.Field<string>("TYPE_AC"),
+                        aircraftTypeGroup = r.Field<string>("TYPE_AC"),
                         qualitySystem = r.Field<string>("QUALITY_SYSTEM"),
-                        awapproval = r.Field<string>("AW_APPROVAL"),
-                        pfapproval = r.Field<string>("PF_APPROVAL"),
+                        awapproval = noms["boolean"].ByCode(r.Field<string>("AW_APPROVAL") == "Y" ? "Y" : "N"),
+                        pfapproval = noms["boolean"].ByCode(r.Field<string>("PF_APPROVAL") == "Y" ? "Y" : "N")
                     })
                 .GroupBy(g => g.__approvalScheduleId)
                 .ToDictionary(l => l.Key, l => l.Select(n =>
@@ -404,7 +410,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         n.__oldId,
                         n.__migrTable,
-                        n.typeAC,
+                        n.aircraftTypeGroup,
                         n.qualitySystem,
                         n.awapproval,
                         n.pfapproval
@@ -500,7 +506,7 @@ namespace Gva.MigrationTool.Sets
                         limsMG = r.Field<long?>("ID") != null && limsMGResults.ContainsKey((int)r.Field<long>("ID")) ? limsMGResults[(int)r.Field<long>("ID")] : null,
                         includedDocuments = r.Field<long?>("ID") != null && includedDocumentsResults.ContainsKey((int)r.Field<long>("ID")) ? includedDocumentsResults[(int)r.Field<long>("ID")] : null,
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey((int)r.Field<decimal?>("ID_REQUEST"))) ?
-                            nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] :
+                            new JArray () { nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] } :
                             null
 
                     })
@@ -640,7 +646,7 @@ namespace Gva.MigrationTool.Sets
                         auditDetails = inspectionDetails,
                         examiners = inspectors,
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey((int)r.Field<decimal?>("ID_REQUEST"))) ?
-                            nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] :
+                            new JArray() { nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] } :
                             null
                     }))
                 .ToList();
@@ -708,7 +714,7 @@ namespace Gva.MigrationTool.Sets
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON R.ID + 90000000 = D.DOC_ID
                     WHERE {0} {1}",
                 new DbClause("1=1"),
-                new DbClause("and R.APPLICANT_AC_ID = {0}", organizationId)
+                new DbClause("and R.APPLICANT_FIRM_ID = {0}", organizationId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -853,26 +859,60 @@ namespace Gva.MigrationTool.Sets
 
         //private IList<JObject> getOrganizationRecommendation(OracleConnection con, int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
         //{
-        //    return con.CreateStoreCommand(
-        //        @"SELECT * FROM CAA_DOC.MANAGEMENT_STAFF WHERE {0} {1}",
+        //    var inspectors = con.CreateStoreCommand(
+        //        @"SELECT * FROM CAA_DOC.REC_AUDITOR WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE{0} {1})",
         //        new DbClause("1=1"),
-        //        new DbClause("and FIRM_ID = {0}", organizationId)
+        //        new DbClause("and ID_FIRM = {0}", organizationId)
         //        )
         //        .Materialize(r => Utils.ToJObject(
         //            new
         //            {
-        //                __oldId = (int)r.Field<decimal>("ID"),
-        //                __migrTable = "MANAGEMENT_STAFF",
-        //                documentNumber = r.Field<short?>("PLAN_YEAR"),
-        //                documentDateValidFrom = r.Field<short?>("PLAN_MONTH"),
-        //                documentDateValidTo = r.Field<short?>("SASASASASAAS"),
-        //                documentPublisher = r.Field<short?>("SASASASASAAS"),
-        //                documentTypeId = r.Field<short?>("SASASASASAAS"),
-        //                documentRoleId = r.Field<short?>("SASASASASAAS"),
-        //                valid = r.Field<short?>("SASASASASAAS"),
-        //                notes = r.Field<short?>("SASASASASAAS"),
-        //                asdasdasda = r.Field<short?>("SASASASASAAS"),
+        //                __oldId = (int)r.Field<long>("ID"),
+        //                __migrTable = "REC_AUDITOR",
         //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                asdasdasda1 = r.Field<short?>("SASASASASAAS")
+        //            }))
+        //        .ToArray();
+
+        //    return con.CreateStoreCommand(
+        //        @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}",
+        //        new DbClause("1=1"),
+        //        new DbClause("and ID_FIRM = {0}", organizationId)
+        //        )
+        //        .Materialize(r => Utils.ToJObject(
+        //            new
+        //            {
+        //                __oldId = (int)r.Field<long>("ID"),
+        //                __migrTable = "RECOMMENDATION",
+        //                recommendationPartId = r.Field<long?>("ID_PART"),
+        //                formDate = r.Field<DateTime?>("FORM_DATE"),
+        //                formText = r.Field<string>("FORM_TEXT"),
+        //                interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
+        //                fromDate = r.Field<DateTime?>("NADZOR_FROM"),
+        //                toDate = r.Field<DateTime?>("NADZOR_TO"),
+        //                finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
+        //                town1 = r.Field<string>("TOWN_P1"),
+        //                finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
+        //                town2 = r.Field<string>("TOWN_P2"),
+        //                finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
+        //                town3 = r.Field<string>("TOWN_P3"),
+        //                finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
+        //                town4 = r.Field<string>("TOWN_P4"),
+        //                finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
+        //                town5 = r.Field<string>("TOWN_P5"),
+        //                documentDescription = r.Field<string>("DESCRIPTION_DOC"),
+        //                recommendation = r.Field<string>("RECOMMENDATION"),
+        //                part1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
+        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
         //            }))
         //        .ToList();
         //}

@@ -13,8 +13,8 @@ namespace Gva.Api.ModelsDO
             this.Uin = o.Uin;
             this.Valid = o.Valid;
             this.OrganizationType = o.OrganizationType;
-            this.DateValidTo = o.DateCAOValidTo;
-            this.DateCAOValidTo = o.DateValidTo;
+            this.DateValidTo = o.DateValidTo;
+            this.DateCAOValidTo = o.DateCAOValidTo;
         }
 
         public int Id { get; set; }

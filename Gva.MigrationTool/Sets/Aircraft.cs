@@ -1293,7 +1293,7 @@ namespace Gva.MigrationTool.Sets
                         auditDetails = inspectionDetails,
                         examiners = inspectors,
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey((int)r.Field<decimal?>("ID_REQUEST"))) ?
-                            nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] :
+                            new JArray () { nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] } :
                             null
                     }))
                 .ToList();
