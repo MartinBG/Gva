@@ -48,6 +48,7 @@ GO
 :r $(rootPath)\"..\Insert\boolean.sql"
 :r $(rootPath)\"..\Insert\documentParts.sql"
 :r $(rootPath)\"..\Insert\linTypes.sql"
+:r $(rootPath)\"..\Insert\testScores.sql"
 
 ---------------------------------------------------------------
 -- Insert Migration Noms Values

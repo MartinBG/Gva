@@ -2779,6 +2779,11 @@
           pageCount: 'Бр. стр.',
           file: 'Файл'
         },
+        chooseEmployment: {
+          name: 'Наименование',
+          select: 'Избери',
+          back: 'Назад'
+        },
         editCertAirportOperator: {
           title: 'Преглед на лиценз на летищен оператор',
           edit: 'Редакция',
@@ -2884,7 +2889,7 @@
           newStaffManagement: 'Нов ръководен персонал',
           position: 'Предлагана длъжност',
           person: 'Предложено лице',
-          testDate: 'Дата на полагане на писмен тест',
+          testDate: 'Дата на писмен тест',
           testScore: 'Оценка',
           valid: 'Валиден',
           application: 'Преписка (Заявление)'
@@ -3191,7 +3196,7 @@
           planMonth: 'Месец',
           position: 'Предлагана длъжност',
           person: 'Предложено лице',
-          testDate: 'Дата на полагане на писмен тест',
+          testDate: 'Дата на писмен тест',
           testScore: 'Оценка от писмен тест',
           valid: 'Валиден',
           applications: 'Заявления'

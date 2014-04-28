@@ -65,6 +65,7 @@
     <Content Include="Create\Tables\GvaViewPersonLicences.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
+    <Content Include="Insert\testScores.sql" />
     <Content Include="Insert\Noms\aircarrierServices.sql" />
     <Content Include="Insert\linTypes.sql" />
     <Content Include="Insert\Noms\aircraftModels.sql" />

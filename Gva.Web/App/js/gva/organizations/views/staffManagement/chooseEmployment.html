@@ -1,0 +1,11 @@
+﻿<div>
+  <sc-button name="backBtn" btn-click="goBack()" text="organizations.chooseEmployment.back" class="btn btn-sm btn-primary pull-left" icon="glyphicon-arrow-left" style="margin-bottom: 5px;"></sc-button>
+
+  <sc-datatable items="employments" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectEmployment(item)" l10n-text="organizations.chooseEmployment.select"></sc-button>
+    </sc-column>
+    <sc-column data="name" sortable="true" title="organizations.chooseEmployment.name">
+    </sc-column>
+  </sc-datatable>
+</div>

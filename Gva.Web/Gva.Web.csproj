@@ -796,6 +796,8 @@
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersNewCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersSearch.html" />
     <Content Include="App\js\gva\organizations\views\staffExaminers\staffExaminersSearchCtrl.js" />
+    <Content Include="App\js\gva\organizations\views\staffManagement\chooseEmployment.html" />
+    <Content Include="App\js\gva\organizations\views\staffManagement\chooseEmploymentCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementEdit.html" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementEditCtrl.js" />
     <Content Include="App\js\gva\organizations\views\staffManagement\staffManagementNew.html" />

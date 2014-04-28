@@ -7,9 +7,18 @@
     $state,
     $stateParams,
     OrganizationStaffManagement,
-    organizationStaffManagement
+    organizationStaffManagement,
+    selectedEmployment
   ) {
     $scope.organizationStaffManagement = organizationStaffManagement;
+
+    var employment = selectedEmployment.pop();
+    if(employment) {
+      $scope.organizationStaffManagement.part.position = employment;
+    } else {
+      $scope.organizationStaffManagement.part.position = organizationStaffManagement.part ?
+        organizationStaffManagement.part.position : '';
+    }
 
     $scope.save = function () {
       return $scope.newStaffManagement.$validate()
@@ -28,6 +37,10 @@
     $scope.cancel = function () {
       return $state.go('root.organizations.view.staffManagement.search');
     };
+
+    $scope.chooseEmployment = function () {
+      return $state.go('.chooseEmployment');
+    };
   }
 
   StaffManagementNewCtrl.$inject = [
@@ -35,7 +48,8 @@
     '$state',
     '$stateParams',
     'OrganizationStaffManagement',
-    'organizationStaffManagement'
+    'organizationStaffManagement',
+    'selectedEmployment'
   ];
 
   StaffManagementNewCtrl.$resolve = {
@@ -48,10 +62,15 @@
           };
         }
         else {
-          return { };
+          return {
+            part: {}
+          };
         }
       }
-    ]
+    ],
+    selectedEmployment: function () {
+      return [];
+    }
   };
 
   angular.module('gva').controller('StaffManagementNewCtrl', StaffManagementNewCtrl);
