@@ -472,11 +472,11 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    var aircraftCertNoisesFM = this.getAircraftCertNoisesFM(aircraftFmId);
-                    foreach (var aircraftCertNoiseFM in aircraftCertNoisesFM)
-                    {
-                        lot.CreatePart("aircraftCertNoisesFM/*", aircraftCertNoiseFM, context);
-                    }
+                    //var aircraftCertNoisesFM = this.getAircraftCertNoisesFM(aircraftFmId);
+                    //foreach (var aircraftCertNoiseFM in aircraftCertNoisesFM)
+                    //{
+                    //    lot.CreatePart("aircraftCertNoisesFM/*", aircraftCertNoiseFM, context);
+                    //}
 
                     try
                     {
@@ -541,6 +541,31 @@ namespace Gva.MigrationTool.Sets
 
         private JObject getAircraftDataFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
+            var noisesResults = this.sqlConn.CreateStoreCommand(
+                @"select * from Acts where {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("and n_Act_ID = {0}", aircraftId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<string>("n_Act_ID"),
+                        __migrTable = "Acts",
+                        issueNumber = toNum(r.Field<string>("n_Noise_No_Issued")),
+                        issueDate = toDate(r.Field<string>("d_CofN_45_Date")),
+                        tcdsn = r.Field<string>("t_Noise_TCDS"),
+                        chapter = r.Field<string>("t_Noise_Chapter"),
+                        lateral = toDecimal(r.Field<string>("n_Noise_Literal")),
+                        approach = toDecimal(r.Field<string>("n_Noise_Approach")),
+                        flyover = toDecimal(r.Field<string>("n_Noise_FlyOver")),
+                        overflight = toDecimal(r.Field<string>("n_Noise_OverFlight")),
+                        takeoff = toDecimal(r.Field<string>("n_Noise_TakeOff")),
+                        modifications = r.Field<string>("t_Noise_AddModifBg"),
+                        modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
+                        notes = r.Field<string>("t_Noise_Remark"),
+                    }))
+                .Single();
+
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Acts where {0} {1}",
                 new DbClause("1=1"),
@@ -572,7 +597,8 @@ namespace Gva.MigrationTool.Sets
                         easaType = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
                         euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
                         easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
-                        tcds = r.Field<string>("t_EASA_TCDS")
+                        tcds = r.Field<string>("t_EASA_TCDS"),
+                        noises = noisesResults
                     }))
                 .Single();
         }
@@ -1557,19 +1583,27 @@ namespace Gva.MigrationTool.Sets
                         approvalId = r.Field<long?>("ID_APPROVAL"),//TODO
                         inspector = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        ext1Date = r.Field<DateTime?>("EXT1_DATE"),
-                        ext1validtoDate = r.Field<DateTime?>("EXT1_VALID_TO"),
-                        ext1approvalId = r.Field<long?>("EXT1_APPROVAL_ID"),//TODO
-                        ext1inspector = getPerson((int?)r.Field<decimal?>("EXT1_ID_EXAMINER")),
-                        ext2Date = r.Field<DateTime?>("EXT2_DATE"),
-                        ext2validtoDate = r.Field<DateTime?>("EXT2_VALID_TO"),
-                        ext2approvalId = r.Field<long?>("EXT2_APPROVAL_ID"),//TODO
-                        ext2inspector = getPerson((int?)r.Field<decimal?>("EXT2_ID_EXAMINER")),
-                        country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY_TRANSFER").ToString()),
-                        exemptions = r.Field<string>("EXEMPTIONS"),
-                        exemptionsAlt = r.Field<string>("EXEMPTIONS_TRANS"),
-                        specialReq = r.Field<string>("SPECIAL_REQ"),
-                        specialReqAlt = r.Field<string>("SPECIAL_REQ_TRANS"),
+                        firstAmmendment = new
+                        {
+                            issueDate = r.Field<DateTime?>("EXT1_DATE"),
+                            validToDate = r.Field<DateTime?>("EXT1_VALID_TO"),
+                            approvalId = r.Field<long?>("EXT1_APPROVAL_ID"),//TODO
+                            inspector = getPerson((int?)r.Field<decimal?>("EXT1_ID_EXAMINER")),
+                        },
+                        secondAmmendment = new
+                        {
+                            issueDate = r.Field<DateTime?>("EXT2_DATE"),
+                            validToDate = r.Field<DateTime?>("EXT2_VALID_TO"),
+                            approvalId = r.Field<long?>("EXT2_APPROVAL_ID"),//TODO
+                            inspector = getPerson((int?)r.Field<decimal?>("EXT2_ID_EXAMINER")),
+                        },
+                        export = new {
+                            country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY_TRANSFER").ToString()),
+                            exceptions = r.Field<string>("EXEMPTIONS"),
+                            exceptionsAlt = r.Field<string>("EXEMPTIONS_TRANS"),
+                            special = r.Field<string>("SPECIAL_REQ"),
+                            specialAlt = r.Field<string>("SPECIAL_REQ_TRANS"),
+                        },
                         revokeDate = r.Field<DateTime?>("REVOKE_DATE"),
                         revokeinspector = getPerson((int?)r.Field<decimal?>("REVOKE_ID_EXAMINER")),
                         revokeCause = r.Field<string>("SPECIAL_REQ")

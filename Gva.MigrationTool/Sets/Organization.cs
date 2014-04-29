@@ -218,6 +218,13 @@ namespace Gva.MigrationTool.Sets
                     //    lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
                     //}
 
+
+                    var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPerson);
+                    foreach (var organizationManagementStaff in organizationManagementStaffs)
+                    {
+                        lot.CreatePart("organizationStaffManagement/*", organizationManagementStaff, context);
+                    }
+
                     try
                     {
                         lot.Commit(context, lotEventDispatcher);
@@ -857,64 +864,224 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        //private IList<JObject> getOrganizationRecommendation(OracleConnection con, int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
-        //{
-        //    var inspectors = con.CreateStoreCommand(
-        //        @"SELECT * FROM CAA_DOC.REC_AUDITOR WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE{0} {1})",
-        //        new DbClause("1=1"),
-        //        new DbClause("and ID_FIRM = {0}", organizationId)
-        //        )
-        //        .Materialize(r => Utils.ToJObject(
-        //            new
-        //            {
-        //                __oldId = (int)r.Field<long>("ID"),
-        //                __migrTable = "REC_AUDITOR",
-        //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                asdasdasda1 = r.Field<short?>("SASASASASAAS")
-        //            }))
-        //        .ToArray();
+        //TODO
+        private IList<JObject> getOrganizationRecommendation(OracleConnection con, int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        {
+            var disparitiesResults = con.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.REC_DISPARITY WHERE ID_REC_COMPLIANCE IN ( SELECT ID FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}))",
+                new DbClause("1=1"),
+                new DbClause("and ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        __oldId = (int)r.Field<long>("ID"),
+                        __migrTable = "REC_DISPARITY",
+                        sortOrder = r.Field<decimal?>("SEQ"),
+                        refNumber = r.Field<string>("REF_NUMBER"),
+                        description = r.Field<string>("DESCRIPTION"),
+                        disparityLevel = r.Field<decimal?>("REC_DISPRT_LEVEL"),
+                        removalDate = r.Field<DateTime?>("REMOVAL_DATE"),
+                        rectifyAction = r.Field<string>("RECTIFY_ACTION"),
+                        closureDate = r.Field<DateTime?>("CLOSURE_DATE"),
+                        closureDocument = r.Field<string>("CLOSURE_DOC")
+                    })
+                .ToArray();
 
-        //    return con.CreateStoreCommand(
-        //        @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}",
-        //        new DbClause("1=1"),
-        //        new DbClause("and ID_FIRM = {0}", organizationId)
-        //        )
-        //        .Materialize(r => Utils.ToJObject(
-        //            new
-        //            {
-        //                __oldId = (int)r.Field<long>("ID"),
-        //                __migrTable = "RECOMMENDATION",
-        //                recommendationPartId = r.Field<long?>("ID_PART"),
-        //                formDate = r.Field<DateTime?>("FORM_DATE"),
-        //                formText = r.Field<string>("FORM_TEXT"),
-        //                interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
-        //                fromDate = r.Field<DateTime?>("NADZOR_FROM"),
-        //                toDate = r.Field<DateTime?>("NADZOR_TO"),
-        //                finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
-        //                town1 = r.Field<string>("TOWN_P1"),
-        //                finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
-        //                town2 = r.Field<string>("TOWN_P2"),
-        //                finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
-        //                town3 = r.Field<string>("TOWN_P3"),
-        //                finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
-        //                town4 = r.Field<string>("TOWN_P4"),
-        //                finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
-        //                town5 = r.Field<string>("TOWN_P5"),
-        //                documentDescription = r.Field<string>("DESCRIPTION_DOC"),
-        //                recommendation = r.Field<string>("RECOMMENDATION"),
-        //                part1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //                //asdasdasda1 = r.Field<short?>("SASASASASAAS"),
-        //            }))
-        //        .ToList();
-        //}
+            var descriptionReviewResults = con.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
+                new DbClause("1=1"),
+                new DbClause("and ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        __oldId = (int)r.Field<long>("ID"),
+                        __migrTable = "REC_COMPLIANCE",
+                        auditPartSectionDetailId = r.Field<long?>("ID_SECTION"),
+                        auditResultId = r.Field<string>("STATE"),
+                        disparities = disparitiesResults
+                    })
+                .ToArray();
+
+            var examiners = con.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.REC_AUDITOR WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
+                new DbClause("1=1"),
+                new DbClause("and ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        __oldId = (int)r.Field<long>("ID"),
+                        __migrTable = "REC_AUDITOR",
+                        part = r.Field<string>("PART"),
+                        sortOrder = r.Field<decimal?>("SEQ"),
+                        examiner = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
+                    })
+                .GroupBy(g => g.part)
+                .ToDictionary(d => d.Key, d => d.Select(n =>
+                    new
+                    {
+                        n.part,
+                        n.sortOrder,
+                        n.examiner
+                    }).ToArray());
+
+            var parts = this.oracleConn.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("and ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = (int)r.Field<decimal>("ID"),
+                        __migrTable = "RECOMMENDATION",
+
+                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
+                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
+
+                        recommendationPartId = r.Field<long?>("ID_PART"),
+                        formDate = r.Field<DateTime?>("FORM_DATE"),
+                        formText = r.Field<string>("FORM_TEXT"),
+                        interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
+                        fromDate = r.Field<DateTime?>("NADZOR_FROM"),
+                        toDate = r.Field<DateTime?>("NADZOR_TO"),
+                        finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
+                        town1 = r.Field<string>("TOWN_P1"),
+                        finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
+                        town2 = r.Field<string>("TOWN_P2"),
+                        finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
+                        town3 = r.Field<string>("TOWN_P3"),
+                        finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
+                        town4 = r.Field<string>("TOWN_P4"),
+                        finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
+                        town5 = r.Field<string>("TOWN_P5"),
+                        documentDescription = r.Field<string>("DESCRIPTION_DOC"),
+                        recommendation = r.Field<string>("RECOMMENDATION"),
+                        part1 = new
+                        {
+                            examiners = examiners.ContainsKey("1") ? examiners["1"] : null
+                        },
+                        part2 = new
+                        {
+                            examiners = examiners.ContainsKey("2") ? examiners["2"] : null
+                        },
+                        part3 = new
+                        {
+                            examiners = examiners.ContainsKey("3") ? examiners["3"] : null
+                        },
+                        part4 = new
+                        {
+                            examiners = examiners.ContainsKey("4") ? examiners["4"] : null
+                        },
+                        part5 = new
+                        {
+                            examiners = examiners.ContainsKey("5") ? examiners["5"] : null
+                        },
+                        descriptionReview = descriptionReviewResults
+                    }))
+                .ToList();
+
+            var files = this.oracleConn.CreateStoreCommand(//TODO PD.ID + ******** = D.DOC_ID
+                @"SELECT PD.ID,
+                        D.DOC_ID,
+                        D.MIME_TYPE,
+                        D.DESCRIPTION,
+                        D.INS_USER,
+                        D.INS_DATE,
+                        D.UPD_USER,
+                        D.UPD_DATE,
+                        D.NAME
+                    FROM CAA_DOC.PERSON_DOCUMENT PD
+                    JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON PD.ID + 10000000 = D.DOC_ID
+                    WHERE {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("and PD.FIRM_ID = {0}", organizationId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __migrTable = "DOCLIB_DOCUMENTS",
+                        __ORGANIZATION_RECOMMENDATION_ID = (int)r.Field<decimal>("ID"),
+
+                        key = Utils.DUMMY_FILE_KEY,//TODO
+                        name = r.Field<string>("NAME"),
+                        mimeType = r.Field<string>("MIME_TYPE")
+                    }))
+                .ToList();
+
+            return (from part in parts
+                    join file in files on part.Get<int>("__oldId") equals file.Get<int>("__ORGANIZATION_RECOMMENDATION_ID") into fg
+                    let file = fg.Any() ? fg.Single() : null //throw if more than one files present
+                    let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
+                    let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    select new JObject(
+                        new JProperty("part",
+                            Utils.Pluck(part,
+                                new string[] 
+                                {
+                                    "__oldId",
+                                    "__migrTable",
+
+                                    "recommendationPartId",
+                                    "formDate",
+                                    "formText",
+                                    "interviewedStaff",
+                                    "fromDate",
+                                    "toDate",
+                                    "finished1Date",
+                                    "town1",
+                                    "finished2Date",
+                                    "town2",
+                                    "finished3Date",
+                                    "town3",
+                                    "finished4Date",
+                                    "town4",
+                                    "finished5Date",
+                                    "town5",
+                                    "documentDescription",
+                                    "recommendation",
+                                    "part1",
+                                    "part2",
+                                    "part3",
+                                    "part4",
+                                    "part5",
+                                    "descriptionReview"
+                                })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
+                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("bookPageNumber", bookPageNumber),
+                                    new JProperty("pageCount", pageCount),
+                                    new JProperty("applications", new JArray()))))))
+                    .ToList();
+        }
+
+        private IList<JObject> getOrganizationManagementStaff(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        {
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.MANAGEMENT_STAFF WHERE REQUEST_ID IN (SELECT ID FROM CAA_DOC.REQUEST WHERE {0} {1})",
+                new DbClause("1=1"),
+                new DbClause("and APPLICANT_FIRM_ID = {0}", organizationId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = (int)r.Field<decimal>("ID"),
+                        __migrTable = "MANAGEMENT_STAFF",
+                        position = r.Field<string>("POSITION"),
+                        person = getPerson((int?)r.Field<decimal?>("PERSON_ID")),
+                        testDate = r.Field<DateTime?>("TEST_DATE"),
+                        testScore = r.Field<string>("TEST_SCORE"),
+                        number = r.Field<decimal?>("REQUEST_ID"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                    }))
+                .ToList();
+        }
     }
 }
