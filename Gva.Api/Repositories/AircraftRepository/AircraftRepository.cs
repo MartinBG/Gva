@@ -18,18 +18,19 @@ namespace Gva.Api.Repositories.AircraftRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaViewAircraft> GetAircrafts(string manSN,
+        public IEnumerable<GvaViewAircraft> GetAircrafts(
+            string mark,
+            string manSN,
             string model,
-            string icao,
-            string category,
-            string producer,
+            string easaType,
+            string aircraftProducer,
             bool exact,
             int offset = 0,
             int? limit = null)
         {
             var gvaAircrafts =
                 this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AircraftCategory)
+                .Include(a => a.EASAType)
                 .Include(a => a.AircraftProducer);
 
             var predicate = PredicateBuilder.True<GvaViewAircraft>();
@@ -37,9 +38,9 @@ namespace Gva.Api.Repositories.AircraftRepository
             predicate = predicate
                 .AndStringMatches(p => p.ManSN, manSN, exact)
                 .AndStringMatches(p => p.Model, model, exact)
-                .AndStringMatches(p => p.ICAO, icao, exact)
-                .AndStringMatches(p => p.AircraftCategory.Name, category, exact)
-                .AndStringMatches(p => p.AircraftProducer.Name, producer, exact);
+                .AndStringMatches(p => p.Mark, mark, exact)
+                .AndStringMatches(p => p.EASAType.Name, easaType, exact)
+                .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, exact);
 
             return gvaAircrafts
                 .Where(predicate)
@@ -50,7 +51,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         public GvaViewAircraft GetAircraft(int aircraftId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AircraftCategory)
+                .Include(a => a.EASAType)
                 .Include(a => a.AircraftProducer)
                 .SingleOrDefault(p => p.LotId == aircraftId);
         }

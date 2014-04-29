@@ -8,14 +8,14 @@
     if ($state.payload) {
       if ($state.payload.aircraftModel) {
         $scope.aircraft.aircraftData.aircraftProducer =
-          $state.payload.aircraftModel.aircraftProducer;
-        $scope.aircraft.aircraftData.aircraftCategory =
-          $state.payload.aircraftModel.aircraftCategory;
+          $state.payload.aircraftModel.textContent.aircraftProducer;
+        $scope.aircraft.aircraftData.easaType =
+          $state.payload.aircraftModel.textContent.easaType;
         $scope.aircraft.aircraftData.model = $state.payload.aircraftModel.name;
         $scope.aircraft.aircraftData.modelAlt = $state.payload.aircraftModel.nameAlt;
       } else {
         $scope.aircraft.aircraftData.aircraftProducer = $state.payload.aircraftProducer;
-        $scope.aircraft.aircraftData.aircraftCategory = $state.payload.aircraftCategory;
+        $scope.aircraft.aircraftData.easaType = $state.payload.easaType;
       }
     }
     $scope.save = function () {

@@ -6,11 +6,11 @@ namespace Gva.Api.Repositories.AircraftRepository
     public interface IAircraftRepository
     {
         IEnumerable<GvaViewAircraft> GetAircrafts(
-            string manSN = null,
-            string model = null,
-            string icao = null,
-            string category = null,
-            string producer = null,
+            string mark,
+            string manSN,
+            string model,
+            string easaType,
+            string aircraftProducer,
             bool exact = false,
             int offset = 0,
             int? limit = null);

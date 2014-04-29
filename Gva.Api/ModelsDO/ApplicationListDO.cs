@@ -25,7 +25,7 @@ namespace Gva.Api.ModelsDO
         public string GvaOrganizationUin { get; set; }
 
         public int? GvaAircraftId { get; set; }
-        public string GvaAircraftCategory { get; set; }
+        public string GvaEASAType { get; set; }
         public string GvaAircraftProducer { get; set; }
         public string GvaAircraftICAO { get; set; }
 
@@ -52,7 +52,7 @@ namespace Gva.Api.ModelsDO
                 }
                 else if (this.GvaAircraftId.HasValue)
                 {
-                    return string.Format("{0} - {1} - {2}", this.GvaAircraftProducer, this.GvaAircraftCategory, this.GvaAircraftICAO);
+                    return string.Format("{0} - {1} - {2}", this.GvaAircraftProducer, this.GvaEASAType, this.GvaAircraftICAO);
                 }
                 else if (this.GvaAirportId.HasValue)
                 {

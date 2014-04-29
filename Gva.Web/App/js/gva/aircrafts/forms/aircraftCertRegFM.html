@@ -58,7 +58,7 @@
     <div class="form-group col-md-4 col-sm-6" sc-has-error="limitation">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.limitation"></label>
       <sc-validation-error field-name="limitation" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.limitation" name="limitation" alias="'aircraftLimitationsFm'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.limitation" name="limitation" alias="'aircraftLimitationsFm'" ng-required="true" ng-readonly="readonly" multiple></sc-nomenclature>
     </div>
   </div>
   <h5 class="form-header"></h5>
@@ -85,7 +85,7 @@
   <div class="row">
     <div class="form-group col-md-8 col-sm-12">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingAgreement"></label>
-      <sc-textarea rows="2" ng-model="model.leasingAgreement" name="leasingAgreement" ng-readonly="readonly"></sc-textarea>
+      <sc-textarea rows="1" ng-model="model.leasingAgreement" name="leasingAgreement" ng-readonly="readonly"></sc-textarea>
     </div>
   </div>
   <h5 class="form-header"></h5>
@@ -94,46 +94,6 @@
       <label class="control-label" l10n-text="aircrafts.regFMDirective.status"></label>
       <sc-validation-error field-name="status" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.status" name="status" alias="'aircraftRegStatsesFm'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.EASA25Number"></label>
-      <sc-text ng-model="model.EASA25Number" name="EASA25Number" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.EASA25Date"></label>
-      <sc-date ng-model="model.EASA25Date" name="EASA25Date" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.EASA15Date"></label>
-      <sc-date ng-model="model.EASA15Date" name="EASA15Date" ng-readonly="readonly"></sc-date>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.cofRDate"></label>
-      <sc-date ng-model="model.cofRDate" name="cofRDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.noiseDate"></label>
-      <sc-date ng-model="model.noiseDate" name="noiseDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.noiseNumber"></label>
-      <sc-text ng-model="model.noiseNumber" name="noiseNumber" ng-readonly="readonly"></sc-text>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.paragraph"></label>
-      <sc-textarea rows="2" ng-model="model.paragraph" name="paragraph" ng-readonly="readonly"></sc-textarea>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.paragraphAlt"></label>
-      <sc-textarea rows="2" ng-model="model.paragraphAlt" name="paragraphAlt" ng-readonly="readonly"></sc-textarea>
     </div>
   </div>
 </ng-form>

@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaViewAircraft
+    public partial class    GvaViewAircraft
     {
         public int LotId { get; set; }
 
@@ -19,7 +19,7 @@ namespace Gva.Api.Models
 
         public string ICAO { get; set; }
 
-        public int? AircraftCategoryId { get; set; }
+        public int? EASATypeId { get; set; }
 
         public int? AircraftProducerId { get; set; }
 
@@ -35,7 +35,7 @@ namespace Gva.Api.Models
 
         public virtual Lot Lot { get; set; }
 
-        public virtual NomValue AircraftCategory { get; set; }
+        public virtual NomValue EASAType { get; set; }
 
         public virtual NomValue AircraftProducer { get; set; }
     }
@@ -55,8 +55,6 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.ICAO)
-                .IsRequired();
 
             // Table & Column Mappings
             this.ToTable("GvaViewAircrafts");
@@ -66,7 +64,7 @@ namespace Gva.Api.Models
             this.Property(t => t.ModelAlt).HasColumnName("ModelAlt");
             this.Property(t => t.OutputDate).HasColumnName("OutputDate");
             this.Property(t => t.ICAO).HasColumnName("ICAO");
-            this.Property(t => t.AircraftCategoryId).HasColumnName("AircraftCategoryId");
+            this.Property(t => t.EASATypeId).HasColumnName("EASATypeId");
             this.Property(t => t.AircraftProducerId).HasColumnName("AircraftProducerId");
             this.Property(t => t.Engine).HasColumnName("Engine");
             this.Property(t => t.Propeller).HasColumnName("Propeller");
@@ -76,9 +74,9 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
-            this.HasOptional(t => t.AircraftCategory)
+            this.HasOptional(t => t.EASAType)
                 .WithMany()
-                .HasForeignKey(t => t.AircraftCategoryId);
+                .HasForeignKey(t => t.EASATypeId);
             this.HasOptional(t => t.AircraftProducer)
                 .WithMany()
                 .HasForeignKey(t => t.AircraftProducerId);

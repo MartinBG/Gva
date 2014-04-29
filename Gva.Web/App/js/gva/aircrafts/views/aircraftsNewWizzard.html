@@ -6,7 +6,7 @@
         <sc-button btn-click="cancel()" text="aircrafts.newWizzard.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
-        <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button" ng-if="currentStep !== steps.regMarkInUse">
+        <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button">
           <span l10n-text="aircrafts.newWizzard.forward"></span>
           <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !forwardButton.$pending, 'glyphicon-loading': forwardButton.$pending}"></span>
         </button>
@@ -21,15 +21,15 @@
             <sc-validation-error field-name="aircraftProducer" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="model.aircraftProducer" name="aircraftProducer" alias="'aircraftProducers'" ng-required="!model.aircraftModel" params="{ makeAircraft: 'true'}"></sc-nomenclature>
           </div>
-          <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCategory">
-            <label class="control-label" l10n-text="aircrafts.newWizzard.aircraftCategory"></label>
-            <sc-validation-error field-name="aircraftCategory" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.aircraftCategory" name="aircraftCategory" alias="'aircraftCategories'" ng-required="!model.aircraftModel"></sc-nomenclature>
+          <div class="form-group col-md-4 col-sm-8" sc-has-error="easaType">
+            <label class="control-label" l10n-text="aircrafts.newWizzard.easaType"></label>
+            <sc-validation-error field-name="easaType" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="model.easaType" name="easaType" alias="'easaTypes'" ng-required="!model.aircraftModel"></sc-nomenclature>
           </div>
           <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftModel">
             <label class="control-label" l10n-text="aircrafts.newWizzard.aircraftModel"></label>
             <sc-validation-error field-name="aircraftModel" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.aircraftModel" name="aircraftModel" alias="'aircrafts'" ng-required="!model.aircraftProducer && !model.aircraftCategory" params="{ category: model.aircraftCategory.name, producer: model.aircraftProducer.name }"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.aircraftModel" name="aircraftModel" alias="'aircrafts'" ng-required="!model.aircraftProducer && !model.aircraftCategory" params="{ easaType: model.easaType.name, aircraftProducer: model.aircraftProducer.name }"></sc-nomenclature>
           </div>
         </div>
       </div>

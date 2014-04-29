@@ -27,16 +27,7 @@
           <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber" ng-if="currentStep !== steps.chooseRegister">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.actNumber"></label>
             <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
-            <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true" ng-if="currentStep !== steps.chooseRegNumber"></sc-int>
-            <span class="input-group input-group-sm" ng-if="currentStep === steps.chooseRegNumber">
-              <sc-int ng-model="model.actNumber" name="actNumber" ng-required="true" ng-readonly="true"></sc-int>
-              <span class="input-group-btn">
-                <button name="nextNumberButton" class="btn btn-default" type="button" sc-click="getNextCertNumber()">
-                  <span class="glyphicon glyphicon-loading" ng-show="nextNumberButton.$pending"></span>
-                  <span l10n-text="aircrafts.newRegWizzard.skipNumber"></span>
-                </button>
-              </span>
-            </span>
+            <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-int>
           </div>
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark" ng-if="[steps.chooseRegister, steps.chooseRegNumber].indexOf(currentStep) < 0">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>

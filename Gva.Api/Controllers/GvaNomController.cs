@@ -181,10 +181,10 @@ namespace Gva.Api.Controllers
         }
 
         [Route("aircrafts")]
-        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null, string category = "", string producer = "")
+        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null, string easaType = "", string aircraftProducer = "")
         {
             var returnValue =
-                this.aircraftRepository.GetAircrafts(model: term, category: category, producer: producer, exact: false, offset: offset, limit: limit)
+                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, model: term, easaType: easaType, aircraftProducer: aircraftProducer, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -193,7 +193,7 @@ namespace Gva.Api.Controllers
                     TextContent =
                         new
                         {
-                            aircraftCategory = e.AircraftCategory,
+                            easaType = e.EASAType,
                             aircraftProducer = e.AircraftProducer
                         }
                 });

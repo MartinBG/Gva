@@ -1,23 +1,31 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCertificateType">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType"></label>
+      <sc-validation-error field-name="aircraftCertificateType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" ng-required="true" alias="'aircraftCertificateTypes'" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.registration"></label>
       <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.certNumber"></label>
+      <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="readonly"></sc-text>
+    </div>
   </div>
+
   <div class="row">
     <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
       <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="validFromDate">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validFromDate"></label>
-      <sc-validation-error field-name="validFromDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.validFromDate" name="validFromDate" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="validToDate">
+    <div class="form-group col-md-2 col-sm-4" sc-has-error="validToDate" ng-show="model.aircraftCertificateType.code !== 'AC'">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
       <sc-validation-error field-name="validToDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.validToDate" name="validToDate" ng-required="true" ng-readonly="readonly"></sc-date>
@@ -25,10 +33,17 @@
   </div>
 
   <div class="row">
+    <div class="form-group col-md-4 col-sm-8" ng-show="model.aircraftCertificateType.code === 'AW'">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
+      <sc-nomenclature ng-model="model.organzation" name="organzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
     <div class="form-group col-md-4 col-sm-8">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
       <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
     </div>
+  </div>
+
+  <div class="row">
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.incomingDocNumber"></label>
       <sc-text ng-model="model.incomingDocNumber" name="incomingDocNumber" ng-readonly="readonly"></sc-text>
@@ -39,34 +54,100 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA25IssueDate"></label>
-      <sc-date ng-model="model.EASA25IssueDate" name="EASA25IssueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA24IssueDate"></label>
-      <sc-date ng-model="model.EASA24IssueDate" name="EASA24IssueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA24IssueValidToDate"></label>
-      <sc-date ng-model="model.EASA24IssueValidToDate" name="EASA24IssueValidToDate" ng-readonly="readonly"></sc-date>
-    </div>
-  </div>
+  <accordion ng-show="model.aircraftCertificateType.code === 'AV' || model.aircraftCertificateType.code === 'AW'">
+    <accordion-group style="margin-top: 5px;">
+      <accordion-heading>
+        <a l10n-text="aircrafts.airworthinessFMDirective.firstAmmendment" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
+          <sc-date ng-model="model.firstAmmendment.issueDate" name="firstAmmendmentIssueDate" ng-readonly="readonly"></sc-date>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
+          <sc-date ng-model="model.firstAmmendment.validToDate" name="firstAmmendmentValidToDate" ng-readonly="readonly"></sc-date>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
+          <sc-nomenclature ng-model="model.firstAmmendment.organzation" name="firstAmmendmentOrganzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+        <div class="form-group col-md-4 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
+          <sc-nomenclature ng-model="model.firstAmmendment.inspector" name="firstAmmendmentInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
 
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA15IssueDate"></label>
-      <sc-date ng-model="model.EASA15IssueDate" name="EASA15IssueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA15IssueValidToDate"></label>
-      <sc-date ng-model="model.EASA15IssueValidToDate" name="EASA15IssueValidToDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.EASA15IssueRefNo"></label>
-      <sc-text ng-model="model.EASA15IssueRefNo" name="EASA15IssueRefNo" ng-readonly="readonly"></sc-text>
-    </div>
-  </div>
+  <accordion ng-show="model.aircraftCertificateType.code === 'AV' || model.aircraftCertificateType.code === 'AW'">
+    <accordion-group style="margin-top: 5px;">
+      <accordion-heading>
+        <a l10n-text="aircrafts.airworthinessFMDirective.secondAmmendment" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
+          <sc-date ng-model="model.secondAmmendment.issueDate" name="secondAmmendmentIssueDate" ng-readonly="readonly"></sc-date>
+        </div>
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
+          <sc-date ng-model="model.secondAmmendment.validToDate" name="secondAmmendmentValidToDate"  ng-readonly="readonly"></sc-date>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
+          <sc-nomenclature ng-model="model.secondAmmendment.organzation" name="secondAmmendmentOrganzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+        <div class="form-group col-md-4 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
+          <sc-nomenclature ng-model="model.secondAmmendment.inspector" name="secondAmmendmentInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
+
+  <accordion ng-show="model.aircraftCertificateType.code === 'AE'">
+    <accordion-group style="margin-top: 5px;">
+      <accordion-heading>
+        <a l10n-text="aircrafts.airworthinessFMDirective.export" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-8">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.contry"></label>
+          <sc-nomenclature ng-model="model.export.contry" name="contry" alias="'countries'" ng-readonly="readonly"></sc-nomenclature>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8 col-sm-12">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.exceptions"></label>
+          <sc-textarea rows="2" ng-model="model.export.exceptions" name="exceptions" ng-readonly="readonly"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8 col-sm-12">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.exceptionsAlt"></label>
+          <sc-textarea rows="2" ng-model="model.export.exceptionsAlt" name="exceptionsAlt" ng-readonly="readonly"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8 col-sm-12">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.special"></label>
+          <sc-textarea rows="2" ng-model="model.export.special" name="special" ng-readonly="readonly"></sc-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-8 col-sm-12">
+          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.specialAlt"></label>
+          <sc-textarea rows="2" ng-model="model.export.specialAlt" name="specialAlt" ng-readonly="readonly"></sc-textarea>
+        </div>
+      </div>
+    </accordion-group>
+  </accordion>
+
 
 </ng-form>

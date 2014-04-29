@@ -6,13 +6,6 @@
     $scope,
     $state
   ) {
-    $scope.steps = {
-      chooseProducer: {},
-      chooseCategory: {},
-      chooseModel: {}
-    };
-
-    $scope.currentStep = $scope.steps.chooseProducer;
 
     $scope.model = {};
 
@@ -30,7 +23,7 @@
     $scope.$watch('model.aircraftModel', function (newVal, oldVal) {
       if (newVal && (newVal !== oldVal)) {
         oldModel = $scope.model.aircraftModel;
-        $scope.model.aircraftCategory = $scope.model.aircraftModel.textContent.aircraftCategory;
+        $scope.model.easaType = $scope.model.aircraftModel.textContent.easaType;
         $scope.model.aircraftProducer = $scope.model.aircraftModel.textContent.aircraftProducer;
         $scope.$evalAsync(function() {
           if (oldModel) {
@@ -41,7 +34,7 @@
       }
     });
 
-    $scope.$watch('model.aircraftCategory', function (newVal, oldVal) {
+    $scope.$watch('model.easaType', function (newVal, oldVal) {
       if (newVal !== oldVal && !newVal) {
         oldModel = $scope.model.aircraftModel;
         $scope.$evalAsync(function() {

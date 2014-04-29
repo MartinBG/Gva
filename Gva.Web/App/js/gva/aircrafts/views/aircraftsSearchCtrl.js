@@ -10,7 +10,8 @@
 
     $scope.filters = {
       manSN: null,
-      model: null
+      model: null,
+      mark: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -25,7 +26,9 @@
       $state.go('root.aircrafts.search', {
         manSN: $scope.filters.manSN,
         model: $scope.filters.model,
-        icao: $scope.filters.icao
+        mark: $scope.filters.mark,
+        easaType: $scope.filters.easaType,
+        aircraftProducer: $scope.filters.aircraftProducer
       });
     };
 

@@ -482,7 +482,7 @@
       .state(['root.persons.view.documentApplications.edit'             , '/:ind'                                      , ['@root.persons.view', 'gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'      ]]);
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.aircrafts'                                          , '/aircrafts?manSN&model&icao'                                                                                                                                                    ])
+      .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&model&easaType&aircraftProducer'                                                                                                                          ])
       .state(['root.aircrafts.search'                                   , ''                                           , ['@root'               , 'gva/aircrafts/views/aircraftsSearch.html'                            , 'AircraftsSearchCtrl'            ]])
       .state(['root.aircrafts.new'                                      , '/new'                                       , ['@root'               , 'gva/aircrafts/views/aircraftsNew.html'                               , 'AircraftsNewCtrl'               ]])
       .state(['root.aircrafts.newWizzard'                               , '/newWizzard'                                , ['@root'               , 'gva/aircrafts/views/aircraftsNewWizzard.html'                        , 'AircraftsNewWizzardCtrl'        ]])

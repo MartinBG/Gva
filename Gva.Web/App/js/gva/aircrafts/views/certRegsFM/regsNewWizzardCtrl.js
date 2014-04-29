@@ -19,7 +19,12 @@
 
     $scope.currentStep = $scope.steps.chooseRegister;
 
-    $scope.model = {};
+    $scope.model = {
+      register: {
+        nomValueId: 9008224,
+        name: 'Регистър 1'
+      }
+    };
     $scope.oldInd = $stateParams.oldInd;
     $scope.reregMode = !!(oldReg && oldReg.part);
 
