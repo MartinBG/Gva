@@ -41,7 +41,8 @@
   CertRadiosNewCtrl.$resolve = {
     aircraftCertRadio: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

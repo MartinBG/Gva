@@ -20,6 +20,8 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-cert-noise-fm name="aircraftCertNoiseForm" ng-model="noise.part" readonly="!editMode"></gva-aircraft-cert-noise-fm>
+
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="noise.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

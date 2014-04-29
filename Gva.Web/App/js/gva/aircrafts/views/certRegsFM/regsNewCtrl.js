@@ -65,7 +65,8 @@
       return {
         part: {
           removal: null
-        }
+        },
+        files: []
       };
     },
     oldReg: [

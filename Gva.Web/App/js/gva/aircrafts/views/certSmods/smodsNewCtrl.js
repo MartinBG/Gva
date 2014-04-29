@@ -41,7 +41,8 @@
   CertSmodsNewCtrl.$resolve = {
     aircraftCertSmod: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

@@ -41,7 +41,8 @@
   CertNoisesFMNewCtrl.$resolve = {
     aircraftCertNoise: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

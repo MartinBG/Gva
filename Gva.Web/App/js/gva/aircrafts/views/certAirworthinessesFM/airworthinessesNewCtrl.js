@@ -45,7 +45,8 @@
         return {
           part: {
             lotId: $stateParams.id
-          }
+          },
+          files: []
         };
       }
     ]

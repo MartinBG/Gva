@@ -41,7 +41,8 @@
   CertAirworthinessesNewCtrl.$resolve = {
     aircraftCertAirworthiness: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

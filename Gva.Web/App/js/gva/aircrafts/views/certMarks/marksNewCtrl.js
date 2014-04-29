@@ -41,7 +41,8 @@
   CertMarksNewCtrl.$resolve = {
     aircraftCertMark: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

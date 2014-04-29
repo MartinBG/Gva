@@ -41,7 +41,8 @@
   CertPermitsToFlyNewCtrl.$resolve = {
     aircraftCertPermitToFly: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };

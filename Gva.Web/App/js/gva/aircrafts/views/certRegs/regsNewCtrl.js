@@ -41,7 +41,8 @@
   CertRegsNewCtrl.$resolve = {
     aircraftCertRegistration: function () {
       return {
-        part: {}
+        part: {},
+        files: []
       };
     }
   };
