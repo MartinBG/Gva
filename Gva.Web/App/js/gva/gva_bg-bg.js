@@ -801,7 +801,10 @@
           operationType: 'Тип на опериране',
           removalDate: 'Дата на отписване',
           removalReason: 'Причина за отписване',
-          newReg: 'Нова регистрация'
+          newReg: 'Нова регистрация',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         regFMSearch: {
           isActive: 'Активна',
@@ -838,7 +841,10 @@
           removalDocumentNumber: 'Номер на документ за отписване',
           removalDocumentDate: 'Дата на документ за отписване',
           removalInspector: 'Инспектор, отписал ВС',
-          newReg: 'Нова регистрация'
+          newReg: 'Нова регистрация',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newReg: {
           title: 'Нова регистрация',
@@ -892,7 +898,10 @@
           ltrInDate: 'Тяхна дата',
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата',
-          newSmod: 'Нов S-code'
+          newSmod: 'Нов S-code',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newSmod: {
           title: 'Нов mode S код',
@@ -913,7 +922,10 @@
           ltrInDate: 'Тяхна дата',
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата',
-          newMark: 'Нов знак'
+          newMark: 'Нов знак',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newMark: {
           title: 'Нов регистрационен знак',
@@ -932,7 +944,10 @@
           refNumber: 'Рег. знак',
           issueDate: 'Тяхно писмо №',
           validToDate: 'Тяхна дата',
-          newAirworthiness: 'Нова годност'
+          newAirworthiness: 'Нова годност',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         airworthinessFMSearch: {
           issueDate: 'От дата',
@@ -947,7 +962,10 @@
           EASA15IssueDate: 'Form 15 Issue',
           EASA15IssueValidToDate: 'Form 15 Valid',
           EASA15IssueRefNo: 'EASA Form 15a',
-          newAirworthiness: 'Нова годност'
+          newAirworthiness: 'Нова годност',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newAirworthiness: {
           title: 'Нова летателна годност',
@@ -969,7 +987,10 @@
           pointTo: 'Краен пункт',
           planStops: 'Планирани спирания',
           crew: 'Екипаж',
-          newPermit: 'Ново разрешение'
+          newPermit: 'Ново разрешение',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newPermit: {
           title: 'Ново разрешение за полет',
@@ -992,7 +1013,10 @@
           lateral: 'Странично',
           overflight: 'Полет над',
           takeoff: 'Излитане',
-          newNoise: 'Ново удостоверение'
+          newNoise: 'Ново удостоверение',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         noiseSearchFM: {
           standart: 'Стандарт',
@@ -1003,7 +1027,10 @@
           lateral: 'Странично',
           overflight: 'Полет над',
           takeoff: 'Излитане',
-          newNoise: 'Ново удостоверение'
+          newNoise: 'Ново удостоверение',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newNoise: {
           title: 'Ново удостоверение за съответствие с нормите за авиационен шум',
@@ -1026,7 +1053,10 @@
           count: 'Брой',
           producer: 'Производител',
           model: 'Модел',
-          newRadio: 'Ново разрешително'
+          newRadio: 'Ново разрешително',
+          bookPageNumber: '№ на страница',
+          pageCount: 'Брой стр.',
+          file: 'Файл'
         },
         newRadio: {
           title: 'Ново разрешително за използване на радиостанция',
