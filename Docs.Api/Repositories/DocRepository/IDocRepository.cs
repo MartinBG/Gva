@@ -245,5 +245,7 @@ namespace Docs.Api.Repositories.DocRepository
         DocElectronicServiceStage GetCurrentServiceStageByDocId(int docId);
 
         bool CheckForExistingAccessCode(string accessCode);
+
+        Doc GetDocByRegUriIncludeElectronicServiceStages(string regIndex, int regNumber, DateTime regDate);
     }
 }

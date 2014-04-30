@@ -193,41 +193,139 @@ namespace Gva.AppCommunicator
             throw new NotImplementedException();
         }
 
-        public ServiceStatus GetServiceStatus(DocumentURI uri, string serviceIdentifier)
+        //public ServiceStatus GetServiceStatus(DocumentURI uri, string serviceIdentifier)
+        //{
+        //    var doc = this.docRepository.GetDocByRegUri(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value);
+        //    if (doc != null)
+        //    {
+        //        ServiceStatus serviceStatus = new ServiceStatus();
+        //        serviceStatus.InitiatingDocumentURI = new InitiatingDocumentURI();
+        //        serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
+        //        serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
+        //        serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
+
+        //        DocElectronicServiceStage currentDocStage = this.docRepository.GetCurrentServiceStageByDocId(doc.DocId);
+
+        //        if (currentDocStage != null)
+        //        {
+
+        //            serviceStatus.UnexecutedTasks = new UnexecutedTasks();
+        //            serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
+
+        //            var task = new TaskOrServiceStage();
+        //            task.Task = new TaskOrServiceStageTask();
+        //            task.Task.TaskData = new AISTask();
+        //            task.Task.TaskData.NameAndShortDescription = currentDocStage.ElectronicServiceStage.Name;
+        //            task.Task.TaskData.ExpandedDescription = currentDocStage.ElectronicServiceStage.Description;
+        //            task.Task.TaskData.ActualStartDate = currentDocStage.StartingDate;
+        //            task.Task.TaskData.ActualCompletionDate = currentDocStage.EndingDate;
+
+        //            serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);
+        //        }
+
+        //        return serviceStatus;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Document not found.");
+        //    }
+        //}
+
+        public R_0009_000067.ServiceStatus GetServiceStatus(R_0009_000001.DocumentURI uri, string serviceIdentifier)
         {
-            var doc = this.docRepository.GetDocByRegUri(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value);
-            if (doc != null)
+            //TODO: Test Mirko
+            if (uri != null)
             {
-                ServiceStatus serviceStatus = new ServiceStatus();
-                serviceStatus.InitiatingDocumentURI = new InitiatingDocumentURI();
-                serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
-                serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
-                serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
-
-                DocElectronicServiceStage currentDocStage = this.docRepository.GetCurrentServiceStageByDocId(doc.DocId);
-
-                if (currentDocStage != null)
+                var doc = this.docRepository.GetDocByRegUriIncludeElectronicServiceStages(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value);
+                if (doc != null)
                 {
+                    //TODO: Consider object properties
+                    R_0009_000067.ServiceStatus serviceStatus = new R_0009_000067.ServiceStatus();
+                    serviceStatus.InitiatingDocumentURI = new R_0009_000046.InitiatingDocumentURI();
+                    serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
+                    serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
+                    serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
+                    if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
+                    {
+                        serviceStatus.ServiceURI = new R_0009_000054.AdministrativeNomenclatureServiceURI();
+                        serviceStatus.ServiceURI.SUNAUServiceURI = doc.DocType.ElectronicServiceFileTypeUri;
+                    }
 
-                    serviceStatus.UnexecutedTasks = new UnexecutedTasks();
-                    serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
+                    var allStages = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                        .Where(e => e.DocTypeId == doc.DocTypeId.Value)
+                        .ToList();
 
-                    var task = new TaskOrServiceStage();
-                    task.Task = new TaskOrServiceStageTask();
-                    task.Task.TaskData = new AISTask();
-                    task.Task.TaskData.NameAndShortDescription = currentDocStage.ElectronicServiceStage.Name;
-                    task.Task.TaskData.ExpandedDescription = currentDocStage.ElectronicServiceStage.Description;
-                    task.Task.TaskData.ActualStartDate = currentDocStage.StartingDate;
-                    task.Task.TaskData.ActualCompletionDate = currentDocStage.EndingDate;
+                    if (doc.DocElectronicServiceStages.Where(s => s.EndingDate.HasValue).Any())
+                    {
+                        serviceStatus.ExecutedTasks = new R_0009_000067.ExecutedTasks();
+                        serviceStatus.ExecutedTasks.TaskCollection = new R_0009_000067.TaskCollection();
 
-                    serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);
+                        foreach (var executedStage in doc.DocElectronicServiceStages.Where(s => s.EndingDate.HasValue))
+                        {
+                            var stage = allStages.Where(s => s.ElectronicServiceStageId == executedStage.ElectronicServiceStageId).FirstOrDefault();
+
+                            if (stage != null)
+                            {
+                                var task = new R_0009_000067.Task();
+
+                                task.TaskData = new R_0009_000068.AISTask();
+                                task.TaskData.NameAndShortDescription = stage.Name;
+                                task.TaskData.ExpandedDescription = stage.Description; ;
+                                task.TaskData.ScheduledStartDate = executedStage.StartingDate;
+                                task.TaskData.ScheduledCompletionDate = executedStage.ExpectedEndingDate;
+                                task.TaskData.ActualStartDate = executedStage.StartingDate;
+                                task.TaskData.ActualCompletionDate = executedStage.EndingDate;
+                                task.TaskData.ExecutedBy = new R_0009_000062.AISTaskExecutor();
+                                task.TaskData.ExecutedBy.Names = new R_0009_000018.AISUserNames();
+                                task.TaskData.ExecutedBy.Names.PersonNames = new R_0009_000005.PersonNames();
+                                task.TaskData.ExecutedBy.Names.PersonNames.First = doc.DocSourceType.Alias == "Internet" && stage.Alias == "AcceptApplication" ? "Системен потребител" : "Служител ГВА";
+
+                                serviceStatus.ExecutedTasks.TaskCollection.Add(task);
+                            }
+                        }
+                    }
+
+                    var unexecutedStages =
+                        allStages.Where(s =>
+                        !doc.DocElectronicServiceStages.Where(ds => ds.EndingDate.HasValue).Select(ds => ds.ElectronicServiceStageId).ToList()
+                        .Contains(s.ElectronicServiceStageId));
+
+                    if (unexecutedStages.Any())
+                    {
+                        serviceStatus.UnexecutedTasks = new R_0009_000067.UnexecutedTasks();
+                        serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new R_0009_000067.TaskOrServiceStageCollection();
+
+                        foreach (var unexecutedStage in unexecutedStages)
+                        {
+                            if (unexecutedStage.Alias != "DecreeRefusal")
+                            {
+                                var task = new R_0009_000067.TaskOrServiceStage();
+                                task.Task = new R_0009_000067.TaskOrServiceStageTask();
+                                task.Task.TaskData = new R_0009_000068.AISTask();
+                                task.Task.TaskData.NameAndShortDescription = unexecutedStage.Name;
+                                task.Task.TaskData.ExpandedDescription = unexecutedStage.Description;
+                                task.Task.TaskData.ScheduledStartDate = null;
+                                task.Task.TaskData.ScheduledCompletionDate = null;
+                                task.Task.TaskData.ExecutedBy = new R_0009_000062.AISTaskExecutor();
+                                task.Task.TaskData.ExecutedBy.Names = new R_0009_000018.AISUserNames();
+                                task.Task.TaskData.ExecutedBy.Names.PersonNames = new R_0009_000005.PersonNames();
+                                task.Task.TaskData.ExecutedBy.Names.PersonNames.First = "Служител ГВА";
+
+                                serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);
+                            }
+                        }
+                    }
+
+                    return serviceStatus;
                 }
-
-                return serviceStatus;
+                else
+                {
+                    throw new Exception("Document not found.");
+                }
             }
             else
             {
-                throw new Exception("Document not found.");
+                throw new ArgumentException();
             }
         }
 

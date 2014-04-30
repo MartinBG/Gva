@@ -1014,5 +1014,19 @@ namespace Docs.Api.Repositories.DocRepository
                 .Where(d => d.AccessCode == accessCode)
                 .Any();
         }
+
+        public Doc GetDocByRegUriIncludeElectronicServiceStages(string regIndex, int regNumber, DateTime regDate)
+        {
+            var docs =
+                this.unitOfWork.DbContext.Set<Doc>()
+                .Include(d => d.DocStatus)
+                .Include(d => d.DocSourceType)
+                .Include(d => d.DocType)
+                .Include(d => d.DocElectronicServiceStages)
+                .Where(d => d.RegIndex == regIndex && d.RegNumber == regNumber)
+                .ToList();
+
+            return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
+        }
     }
 }

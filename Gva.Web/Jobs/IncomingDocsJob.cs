@@ -622,7 +622,7 @@ namespace Gva.Web.Jobs
                 serviceStage.DocId = doc.DocId;
                 serviceStage.ElectronicServiceStageId = electronicServiceStage.ElectronicServiceStageId;
                 serviceStage.StartingDate = DateTime.Now;
-                //serviceStage.ExpectedEndingDate = electronicServiceStage.Duration.HasValue ? serviceStage.StartingDate.AddDays(electronicServiceStage.Duration.Value) : (DateTime?)null;
+                serviceStage.ExpectedEndingDate = DateTime.Now;
                 serviceStage.EndingDate = null;
                 serviceStage.IsCurrentStage = true;
                 serviceStage.EndingDate = DateTime.Now;
