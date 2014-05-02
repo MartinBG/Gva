@@ -1046,7 +1046,7 @@ namespace Docs.Api.Models
 
             if (docTypeUnitRoles != null)
             {
-                foreach (var item in docTypeUnitRoles)
+                foreach (var item in docTypeUnitRoles.Where(e => e.IsActive))
                 {
                     this.CreateDocUnit(item.UnitId, item.DocUnitRoleId, userContext);
                 }
