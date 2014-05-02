@@ -37,7 +37,11 @@ namespace Docs.Api.Controllers
         {
             base.Initialize(controllerContext);
 
-            //this.userContext = this.Request.GetUserContext();
+            try
+            {
+                this.userContext = this.Request.GetUserContext();
+            }
+            catch { }
         }
 
         /// <summary>
