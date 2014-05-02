@@ -31,7 +31,10 @@ namespace Docs.Api.DataObjects
                     this.DocRegDate = d.Doc.RegDate;
                     this.DocDocDirectionName = d.Doc.DocDirection != null ? d.Doc.DocDirection.Name : string.Empty;
                     this.DocStatusId = d.Doc.DocStatusId;
+                    this.DocVersion = d.Doc.Version;
+
                     this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
+                    this.DocDocTypeId = d.Doc.DocType != null ? d.Doc.DocType.DocTypeId : (int?)null; 
                     this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.DocStatus.Name : string.Empty;
                     this.DocDocCasePartTypeId = d.Doc.DocCasePartTypeId;
                     this.DocDocCasePartTypeName = d.Doc.DocCasePartType != null ? d.Doc.DocCasePartType.Name : string.Empty;
@@ -55,7 +58,9 @@ namespace Docs.Api.DataObjects
         public string DocDocCasePartTypeAlias { get; set; }
         public int DocStatusId { get; set; }
         public string DocDocTypeName { get; set; }
+        public int? DocDocTypeId { get; set; }
         public string DocDocStatusName { get; set; }
+        public byte[] DocVersion { get; set; }
 
         public string DocDataHtml
         {

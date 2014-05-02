@@ -1,5 +1,5 @@
-﻿/*global angular, moment*/
-(function (angular, moment) {
+﻿/*global angular, moment, _*/
+(function (angular, moment, _) {
   'use strict';
 
   function NextStageCtrl(
@@ -54,10 +54,14 @@
   NextStageCtrl.$resolve = {
     stageModel: ['Nomenclature', 'doc',
       function (Nomenclature, doc) {
+        var caseDoc = _.first(doc.docRelations, function (item) {
+          return item.docId === item.rootDocId;
+        });
+
         return {
           docId: doc.docId,
-          docVersion: doc.version,
-          docTypeId: doc.docTypeId,
+          docVersion: caseDoc.length > 0 ? caseDoc[0].docVersion : doc.version,
+          docTypeId: caseDoc.length > 0 ? caseDoc[0].docDocTypeId : doc.docTypeId,
           startingDate: moment().startOf('minute').format('YYYY-MM-DDTHH:mm:ss')
         };
       }
@@ -65,4 +69,4 @@
   };
 
   angular.module('ems').controller('NextStageCtrl', NextStageCtrl);
-}(angular, moment));
+}(angular, moment, _));
