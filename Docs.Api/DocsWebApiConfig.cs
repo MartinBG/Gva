@@ -28,6 +28,7 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setDocType"        , "Doc", "UpdateTechDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/register"          , "Doc", "RegisterDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/manualRegister"    , "Doc", "ManualRegisterDoc");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/registerIndex"     , "Doc", "GetDocRegisterIndex");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/next"              , "Doc", "SetNextStatus");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/reverse"           , "Doc", "ReverseStatus");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/cancel"            , "Doc", "CancelDoc");

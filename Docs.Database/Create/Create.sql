@@ -107,6 +107,7 @@ GO
 -- Procedures
 ---------------------------------------------------------------
 :r $(rootPath)"\Procedures\spGetDocRegisterId.sql"
+:r $(rootPath)"\Procedures\spGetDocRegisterIdByRegisterIndexId.sql"
 :r $(rootPath)"\Procedures\spGetDocRegisterNextNumber.sql"
 :r $(rootPath)"\Procedures\spDeleteNotRegisteredDoc.sql"
 

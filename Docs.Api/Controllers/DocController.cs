@@ -1070,60 +1070,85 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var oldDoc = this.docRepository.Find(id, e => e.DocUnits);
+                Doc oldDoc = this.docRepository.Find(id, 
+                    e => e.DocType,
+                    e => e.DocUnits);
 
-                #region DocUnits
-
-                List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
-
-                doc.DocUnitsFrom.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "From").DocUnitRoleId; });
-                doc.DocUnitsTo.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "To").DocUnitRoleId; });
-                doc.DocUnitsImportedBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "ImportedBy").DocUnitRoleId; });
-                doc.DocUnitsMadeBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "MadeBy").DocUnitRoleId; });
-                doc.DocUnitsCCopy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "CCopy").DocUnitRoleId; });
-                doc.DocUnitsInCharge.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "InCharge").DocUnitRoleId; });
-                doc.DocUnitsControlling.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Controlling").DocUnitRoleId; });
-                doc.DocUnitsReaders.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Readers").DocUnitRoleId; });
-                doc.DocUnitsEditors.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Editors").DocUnitRoleId; });
-                doc.DocUnitsRegistrators.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Registrators").DocUnitRoleId; });
-
-                var allDocUnits = doc.DocUnitsTo.Union(
-                    doc.DocUnitsFrom.Union(
-                        doc.DocUnitsImportedBy.Union(
-                            doc.DocUnitsMadeBy.Union(
-                                doc.DocUnitsCCopy.Union(
-                                    doc.DocUnitsInCharge.Union(
-                                        doc.DocUnitsControlling.Union(
-                                            doc.DocUnitsReaders.Union(
-                                                doc.DocUnitsEditors.Union(
-                                                    doc.DocUnitsRegistrators)))))))));
-
-                var listDocUnits = oldDoc.DocUnits.ToList();
-
-                for (var i = 0; i < listDocUnits.Count; i++)
+                if (doc.UnregisterDoc)
                 {
-                    var matching = allDocUnits
-                        .Where(e => e.NomValueId == listDocUnits[i].UnitId && e.ForeignKeyId == listDocUnits[i].DocUnitRoleId)
-                        .ToList();
+                    oldDoc.Unregister(this.userContext);
+                }
 
-                    if (matching.Any())
+                if (doc.PrimaryRegisterIndexId.HasValue)
+                {
+                    DocRegister docRegister = this.unitOfWork.DbContext.Set<DocRegister>()
+                        .FirstOrDefault(e => e.RegisterIndexId == doc.PrimaryRegisterIndexId.Value);
+
+                    if (docRegister != null)
                     {
-                        matching.ForEach(e => { e.IsProcessed = true; });
+                        oldDoc.DocRegisterId = docRegister.DocRegisterId;
                     }
                     else
                     {
-                        oldDoc.DeleteDocUnit(listDocUnits[i], this.userContext);
+                        oldDoc.DocRegisterId = this.docRepository.spGetDocRegisterIdByRegisterIndexId(doc.PrimaryRegisterIndexId.Value);
                     }
                 }
-                foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
+
+                if (oldDoc.DocTypeId != doc.DocTypeId || oldDoc.DocDirectionId != doc.DocDirectionId)
                 {
-                    oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, this.userContext);
+                    #region DocUnits
+
+                    List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
+
+                    doc.DocUnitsFrom.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "From").DocUnitRoleId; });
+                    doc.DocUnitsTo.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "To").DocUnitRoleId; });
+                    doc.DocUnitsImportedBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "ImportedBy").DocUnitRoleId; });
+                    doc.DocUnitsMadeBy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "MadeBy").DocUnitRoleId; });
+                    doc.DocUnitsCCopy.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "CCopy").DocUnitRoleId; });
+                    doc.DocUnitsInCharge.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "InCharge").DocUnitRoleId; });
+                    doc.DocUnitsControlling.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Controlling").DocUnitRoleId; });
+                    doc.DocUnitsReaders.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Readers").DocUnitRoleId; });
+                    doc.DocUnitsEditors.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Editors").DocUnitRoleId; });
+                    doc.DocUnitsRegistrators.ForEach(e => { e.ForeignKeyId = docUnitRoles.Single(p => p.Alias == "Registrators").DocUnitRoleId; });
+
+                    var allDocUnits = doc.DocUnitsTo.Union(
+                        doc.DocUnitsFrom.Union(
+                            doc.DocUnitsImportedBy.Union(
+                                doc.DocUnitsMadeBy.Union(
+                                    doc.DocUnitsCCopy.Union(
+                                        doc.DocUnitsInCharge.Union(
+                                            doc.DocUnitsControlling.Union(
+                                                doc.DocUnitsReaders.Union(
+                                                    doc.DocUnitsEditors.Union(
+                                                        doc.DocUnitsRegistrators)))))))));
+
+                    var listDocUnits = oldDoc.DocUnits.ToList();
+
+                    for (var i = 0; i < listDocUnits.Count; i++)
+                    {
+                        var matching = allDocUnits
+                            .Where(e => e.NomValueId == listDocUnits[i].UnitId && e.ForeignKeyId == listDocUnits[i].DocUnitRoleId)
+                            .ToList();
+
+                        if (matching.Any())
+                        {
+                            matching.ForEach(e => { e.IsProcessed = true; });
+                        }
+                        else
+                        {
+                            oldDoc.DeleteDocUnit(listDocUnits[i], this.userContext);
+                        }
+                    }
+                    foreach (var du in allDocUnits.Where(e => !e.IsProcessed))
+                    {
+                        oldDoc.CreateDocUnit(du.NomValueId, du.ForeignKeyId, this.userContext);
+                    }
+
+                    #endregion
+
+                    oldDoc.DocTypeId = doc.DocTypeId;
+                    oldDoc.DocDirectionId = doc.DocDirectionId;
                 }
-
-                #endregion
-
-                oldDoc.DocTypeId = doc.DocTypeId;
-                oldDoc.DocDirectionId = doc.DocDirectionId;
 
                 this.unitOfWork.Save();
 
@@ -1177,6 +1202,32 @@ namespace Docs.Api.Controllers
             this.unitOfWork.Save();
 
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetDocRegisterIndex(int id)
+        {
+            Doc doc = this.docRepository.Find(id,
+                e => e.DocRegister,
+                e => e.DocType);
+
+            // no usage of secondary register index for now
+            if (doc.DocRegisterId.HasValue)
+            {
+                return Ok(new
+                {
+                    primaryRegisterIndexId = doc.DocRegister.RegisterIndexId,
+                    secondaryRegisterIndexId = doc.DocType.SecondaryRegisterIndexId
+                });
+            }
+            else
+            {
+                return Ok(new
+                {
+                    primaryRegisterIndexId = doc.DocType.PrimaryRegisterIndexId,
+                    secondaryRegisterIndexId = doc.DocType.SecondaryRegisterIndexId
+                });
+            }
         }
 
         /// <summary>

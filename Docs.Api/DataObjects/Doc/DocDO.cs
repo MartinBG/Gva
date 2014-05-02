@@ -71,6 +71,7 @@ namespace Docs.Api.DataObjects
 
                 if (d.DocType != null)
                 {
+                    this.DocTypeGroupId = d.DocType.DocTypeGroupId;
                     this.DocTypeAlias = d.DocType.Alias;
                     this.DocTypeName = d.DocType.Name;
                     this.DocTypeIsElectronicService = d.DocType.IsElectronicService;
@@ -149,6 +150,12 @@ namespace Docs.Api.DataObjects
         public byte[] Version { get; set; }
 
         #region Aux fields
+
+        //tech edit
+        public int? PrimaryRegisterIndexId { get; set; }
+        public int? SecondaryRegisterIndexId { get; set; }
+        public bool UnregisterDoc { get; set; }
+        public int? DocTypeGroupId { get; set; }
 
         public bool IsDocIncoming { get; set; }
         public bool IsDocInternal { get; set; }

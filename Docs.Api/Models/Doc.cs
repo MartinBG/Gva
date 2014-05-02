@@ -1108,6 +1108,18 @@ namespace Docs.Api.Models
             this.IsRegistered = true;
         }
 
+        public void Unregister(UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            this.DocRegisterId = null;
+            this.RegUri = null;
+            this.RegIndex = null;
+            this.RegNumber = null;
+            this.IsRegistered = false;
+        }
+
         public void EnsureForProperVersion(byte[] version)
         {
             if (!this.Version.SequenceEqual(version))

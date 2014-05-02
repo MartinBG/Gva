@@ -154,6 +154,8 @@
               cancel: 'Отказ'
             },
             docType: {
+              registerIndex: 'Регистър на документа',
+              unregisterDoc: 'Дерегистриране на документа?',
               docTypeGroup: 'Група',
               docType: 'Вид',
               docDirection: 'Част от преписка',

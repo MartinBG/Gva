@@ -233,13 +233,26 @@
       }
     ],
     docTypeModel: [
-      function resolveDocTypeModel() {
-        return {
-          doc: {},
-          missingFields: [],
-          allFields: [],
-          showFields: false
-        };
+      '$stateParams',
+      'doc',
+      'Doc',
+      function resolveDocTypeModel($stateParams, doc, Doc) {
+        return Doc.getRegisterIndex({ id: $stateParams.id })
+          .$promise
+          .then(function (data) {
+            return {
+              doc: {
+                docTypeGroupId: doc.docTypeGroupId,
+                docTypeId: doc.docTypeId,
+                docDirectionId: doc.docDirectionId,
+                primaryRegisterIndexId: data.primaryRegisterIndexId,
+                unregisterDoc: false
+              },
+              missingFields: [],
+              allFields: [],
+              showFields: false
+            };
+          });
       }
     ]
   };

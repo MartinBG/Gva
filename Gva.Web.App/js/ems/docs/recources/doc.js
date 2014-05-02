@@ -65,6 +65,10 @@
                 docVersion: '@docVersion',
                 regUri: ''
               }
+            },
+            'getRegisterIndex': {
+              method: 'GET',
+              url: '/api/docs/:id/registerIndex'
             }
           });
       }]);

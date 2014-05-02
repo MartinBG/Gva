@@ -59,6 +59,7 @@
     <Content Include="Create\Procedures\Classifications\spSetDeactiveUnit.sql" />
     <Content Include="Create\Procedures\Classifications\spSetDocUsers.sql" />
     <Content Include="Create\Procedures\Classifications\spSetUserDocs.sql" />
+    <Content Include="Create\Procedures\spGetDocRegisterIdByRegisterIndexId.sql" />
     <Content Include="Create\Procedures\spDeleteNotRegisteredDoc.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterId.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterNextNumber.sql" />

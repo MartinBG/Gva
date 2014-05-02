@@ -20,6 +20,8 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterId(int id);
 
+        int? spGetDocRegisterIdByRegisterIndexId(int registerIndexId);
+
         Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext);
 
         Doc MarkAsUnread(int id, byte[] docVersion, int unitId, UserContext userContext);

@@ -50,6 +50,14 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<int?>("spGetDocRegisterId", parameters).FirstOrDefault();
         }
 
+        public int? spGetDocRegisterIdByRegisterIndexId(int registerIndexId)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("RegisterIndexId", registerIndexId));
+
+            return this.ExecProcedure<int?>("spGetDocRegisterIdByRegisterIndexId", parameters).FirstOrDefault();
+        }
+
         public Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext)
         {
             Doc doc = this.Find(id, e => e.DocHasReads);
