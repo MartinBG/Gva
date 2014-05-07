@@ -19,6 +19,10 @@
     selectedEquipment,
     selectedCorrs
     ) {
+    if (selectedCorrs.current.length > 0) {
+      appModel.doc.docCorrespondents.push(selectedCorrs.current.pop());
+    }
+
     if (selectedPerson.length > 0) {
       appModel.lot = {
         id: selectedPerson.pop()
@@ -44,6 +48,15 @@
         id: selectedEquipment.pop()
       };
     }
+
+    $scope.$watch('appModel.lot.id', function (newValue, oldValue) {
+      if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
+        return Application.getGvaCorrespodents({ lotId: appModel.lot.id }).$promise
+          .then(function (data) {
+            appModel.doc.docCorrespondents = data.corrs;
+          });
+      }
+    });
 
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
@@ -85,13 +98,11 @@
     };
 
     $scope.newCorr = function () {
-      var doc = $scope.appModel.doc, partData, isPersonSelect, isOrgSelect;
+      var partData = {}, isPersonSelect, isOrgSelect;
+      partData.$promise = $q.when(false);
 
-      selectedCorrs.corrs.splice(0);
-      selectedCorrs.onCorrSelect = function (corr) {
-        doc.docCorrespondents.push(corr);
-        selectedCorrs.onCorrSelect = null;
-      };
+      selectedCorrs.current.splice(0);
+      selectedCorrs.total = $scope.appModel.doc.docCorrespondents;
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
@@ -102,59 +113,35 @@
           isOrgSelect = true;
           partData = OrganizationData.get({ id: $scope.appModel.lot.id });
         }
-        else {
-          partData = $q.when(false);
-        }
-      }
-      else {
-        partData = $q.when(false);
       }
 
-      return $q.all({
-        partData: partData.$promise,
-        corrGroups: Nomenclature.query({ alias: 'correspondentGroup' }).$promise,
-        corrTypes: Nomenclature.query({ alias: 'correspondentType' }).$promise
-      }).then(function (res) {
+      return partData.$promise.then(function (data) {
         var corr = {};
-        var corrGroup = _(res.corrGroups).filter({ alias: 'Applicants' }).first();
-        var corrType = _(res.corrTypes).filter({ alias: 'LegalEntity' }).first();
-        var corrTypePerson = _(res.corrTypes).filter({ alias: 'BulgarianCitizen' }).first();
 
-        corr.correspondentGroupId = corrGroup.nomValueId;
-        corr.correspondentTypeId = corrType.nomValueId;
-        corr.correspondentType = corrType;
-        if ($scope.filter === 'Person') {
-          corr.correspondentTypeId = corrTypePerson.nomValueId;
-          corr.correspondentType = corrTypePerson;
-        }
         if (isPersonSelect) {
-          corr.bgCitizenFirstName = res.partData.part.firstName;
-          corr.bgCitizenLastName = res.partData.part.lastName;
-          if (res.partData.part.uin) {
-            corr.bgCitizenUIN = res.partData.part.uin;
+          corr.bgCitizenFirstName = data.part.firstName;
+          corr.bgCitizenLastName = data.part.lastName;
+          if (data.part.uin) {
+            corr.bgCitizenUIN = data.part.uin;
           }
-          if (res.partData.part.email) {
-            corr.email = res.partData.part.email;
+          if (data.part.email) {
+            corr.email = data.part.email;
           }
         }
         if (isOrgSelect) {
-          corr.legalEntityName = res.partData.part.name;
-          if (res.partData.part.uin) {
-            corr.legalEntityBulstat = res.partData.part.uin;
+          corr.legalEntityName = data.part.name;
+          if (data.part.uin) {
+            corr.legalEntityBulstat = data.part.uin;
           }
         }
 
         return $state.go('root.applications.new.corrNew', null, null, corr);
       });
+
     };
     $scope.selectCorr = function selectCorr() {
-      var doc = $scope.appModel.doc;
-      selectedCorrs.corrs.splice(0);
-      selectedCorrs.corrs = _.assign(selectedCorrs.corrs, doc.docCorrespondents);
-      selectedCorrs.onCorrSelect = function (corr) {
-        doc.docCorrespondents.push(corr);
-        selectedCorrs.onCorrSelect = null;
-      };
+      selectedCorrs.current.splice(0);
+      selectedCorrs.total = $scope.appModel.doc.docCorrespondents;
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
@@ -303,14 +290,12 @@
     selectedEquipment: function () {
       return [];
     },
-    selectedCorrs: [
-      function resolveSelectedCorrs() {
-        return {
-          corrs: [],
-          onCorrSelect: null
-        };
-      }
-    ]
+    selectedCorrs: function selectedCorrs() {
+      return {
+        total: [],
+        current: []
+      };
+    }
   };
 
   angular.module('gva').controller('ApplicationsNewCtrl', ApplicationsNewCtrl);

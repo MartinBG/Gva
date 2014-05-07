@@ -114,7 +114,7 @@
           var docPartTypeName = _(res.docPartType).filter({
             alias: $stateParams.setPartAlias
           }).first().name;
-            
+
           res.docFile = res.docFile || { name: docPartTypeName, docFileKindId: 2 };
 
           if (res.docValues && res.docValues.values) {

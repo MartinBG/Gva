@@ -172,11 +172,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
             this.unitOfWork.DbContext.Set<GvaAppLotFile>().Add(gvaAppLotFile);
         }
 
-        public GvaCorrespondent GetGvaCorrespondentByLotId(int lotId)
+        public List<GvaCorrespondent> GetGvaCorrespondentsByLotId(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaCorrespondent>()
                 .Include(e => e.Correspondent)
-                .SingleOrDefault(p => p.LotId == lotId);
+                .Where(p => p.LotId == lotId)
+                .ToList();
         }
 
         public void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent)

@@ -9,10 +9,6 @@
     corrs,
     selectedCorrs
   ) {
-    if (!selectedCorrs.onCorrSelect) {
-      return $state.go('^');
-    }
-
     $scope.corrs = _.map(corrs.correspondents, function (corr) {
       return {
         correspondentId: corr.correspondentId,
@@ -22,7 +18,7 @@
       };
     });
     $scope.corrCount = corrs.correspondentCount;
-    $scope.selectedCorrs = _.map(selectedCorrs.corrs, function(corr) {
+    $scope.selectedCorrs = _.map(selectedCorrs.total, function (corr) {
       return corr.nomValueId;
     });
 
@@ -45,13 +41,17 @@
       });
     };
 
+    $scope.newCorr = function NewCorr() {
+      return $state.go('root.docs.edit.view.selectCorr.newCorr');
+    };
+
     $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
         nomValueId: corr.correspondentId,
         name: corr.displayName
       };
 
-      selectedCorrs.onCorrSelect(nomItem);
+      selectedCorrs.current.push(nomItem);
       return $state.go('^');
     };
 

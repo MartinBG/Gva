@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CorrNewCtrl(
@@ -7,27 +7,26 @@
     $state,
     $stateParams,
     Corr,
-    selectedCorrs
+    corrGroups,
+    corrTypes,
+    selectedCorrs,
+    corr
     ) {
-    if (!selectedCorrs.onCorrSelect) {
-      return $state.go('^');
-    }
-
-    $scope.corr = {
-      isActive: true
-    };
+    $scope.corr = corr;
 
     if ($state.payload) {
-      $scope.corr.correspondentGroupId = $state.payload.correspondentGroupId;
-      $scope.corr.correspondentTypeId = $state.payload.correspondentTypeId;
-      $scope.corr.correspondentType = $state.payload.correspondentType;
-      if ($state.payload.correspondentType.alias === 'BulgarianCitizen') {
+      if ($stateParams.filter === 'Person') {
+        $scope.corr.correspondentTypeId = _(corrTypes)
+          .filter({ alias: 'BulgarianCitizen' })
+          .first()
+          .nomValueId;
+        $scope.corr.correspondentType = _(corrTypes).filter({ alias: 'BulgarianCitizen' }).first();
         $scope.corr.bgCitizenFirstName = $state.payload.bgCitizenFirstName;
         $scope.corr.bgCitizenLastName = $state.payload.bgCitizenLastName;
         $scope.corr.bgCitizenUIN = $state.payload.bgCitizenUIN;
         $scope.corr.email = $state.payload.email;
       }
-      else if ($state.payload.correspondentType.alias === 'LegalEntity') {
+      else if ($stateParams.filter === 'Organization') {
         $scope.corr.legalEntityName = $state.payload.legalEntityName;
         $scope.corr.legalEntityBulstat = $state.payload.legalEntityBulstat;
       }
@@ -38,7 +37,7 @@
         .then(function () {
           if ($scope.newCorrForm.$valid) {
             return Corr.save($scope.corr).$promise.then(function (corr) {
-              selectedCorrs.onCorrSelect(corr.correspondentId);
+              selectedCorrs.current.push(corr.correspondentId);
               return $state.go('^');
             });
           }
@@ -56,8 +55,33 @@
     '$state',
     '$stateParams',
     'Corr',
-    'selectedCorrs'
+    'corrGroups',
+    'corrTypes',
+    'selectedCorrs',
+    'corr'
   ];
 
+  CorrNewCtrl.$resolve = {
+    corr: [
+      '$stateParams',
+      'Corr',
+      function resolveCorr($stateParams, Corr) {
+        return Corr.getNew().$promise;
+      }
+    ],
+    corrGroups: [
+      'Nomenclature',
+      function resolveCorr(Nomenclature) {
+        return Nomenclature.query({ alias: 'correspondentGroup' }).$promise;
+      }
+    ],
+    corrTypes: [
+      'Nomenclature',
+      function resolveCorr(Nomenclature) {
+        return Nomenclature.query({ alias: 'correspondentType' }).$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('CorrNewCtrl', CorrNewCtrl);
-}(angular));
+}(angular, _));

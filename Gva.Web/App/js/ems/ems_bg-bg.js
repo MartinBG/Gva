@@ -84,7 +84,8 @@
               correspondentType: 'Тип',
               search: 'Търси',
               cancel: 'Назад',
-              select: 'Избор'
+              select: 'Избор',
+              'new': 'Нов'
             },
             selectUnit: {
               name: 'Име',

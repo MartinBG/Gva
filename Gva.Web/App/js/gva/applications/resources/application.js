@@ -69,6 +69,11 @@
               method: 'GET',
               url: '/api/apps/personDocumentValues',
               params: { docFileId: '@docFileId' }
+            },
+            'getGvaCorrespodents': {
+              method: 'GET',
+              url: '/api/apps/getGvaCorrespodents',
+              params: { lotId: '@lotId' }
             }
           });
       }]);

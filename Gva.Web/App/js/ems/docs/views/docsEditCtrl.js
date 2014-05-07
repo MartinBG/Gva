@@ -96,7 +96,7 @@
       doc.flags.isVisiblePreparedStatusReverseCmd || doc.flags.isVisibleFinishedStatusReverseCmd ||
       doc.flags.isVisibleCanceledStatusReverseCmd;
 
-    $scope.inEditMode = false;
+    $scope.inEditMode = ($state.payload && $state.payload.inEditmode) || false;
 
     $scope.markAsRead = function () {
       return Doc

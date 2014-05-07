@@ -12,14 +12,13 @@
   ) {
     $scope.doc = doc;
 
+    if (selectedCorrs.current.length > 0) {
+      doc.docCorrespondents.push(selectedCorrs.current.pop());
+    }
+
     $scope.selectCorr = function selectCorr() {
-      var doc = $scope.doc;
-      selectedCorrs.corrs.splice(0);
-      selectedCorrs.corrs = _.assign(selectedCorrs.corrs, doc.docCorrespondents);
-      selectedCorrs.onCorrSelect = function (corr) {
-        doc.docCorrespondents.push(corr);
-        selectedCorrs.onCorrSelect = null;
-      };
+      selectedCorrs.current.splice(0);
+      selectedCorrs.total = doc.docCorrespondents;
 
       return $state.go('root.docs.edit.view.selectCorr');
     };
@@ -114,10 +113,11 @@
 
   DocsViewCtrl.$resolve = {
     selectedCorrs: [
-      function resolveSelectedCorrs() {
+      'doc',
+      function selectedCorrs(doc) {
         return {
-          corrs: [],
-          onCorrSelect: null
+          total: doc.docCorrespondents,
+          current: []
         };
       }
     ],

@@ -16,18 +16,15 @@
       return $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
-            return Corr
-              .save($scope.corr)
-              .$promise
-              .then(function () {
-                return $state.go('root.corrs.search');
-              });
+            return Corr.save($scope.corr).$promise.then(function () {
+              return $state.go($state.previous, null, { reload: true }, { inEditmode: true });
+            });
           }
         });
     };
 
     $scope.cancel = function cancel() {
-      return $state.go('root.corrs.search');
+      return $state.go($state.previous);
     };
   }
 
