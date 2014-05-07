@@ -865,9 +865,13 @@ namespace Gva.MigrationTool.Sets
         }
 
         //TODO
-        private IList<JObject> getOrganizationRecommendation(OracleConnection con, int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        private IList<JObject> getOrganizationRecommendation(
+            int organizationId,
+            Func<int?, JObject> getPerson,
+            Dictionary<int, JObject> nomApplications,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var disparitiesResults = con.CreateStoreCommand(
+            var disparitiesResults = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REC_DISPARITY WHERE ID_REC_COMPLIANCE IN ( SELECT ID FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}))",
                 new DbClause("1=1"),
                 new DbClause("and ID_FIRM = {0}", organizationId)
@@ -888,7 +892,7 @@ namespace Gva.MigrationTool.Sets
                     })
                 .ToArray();
 
-            var descriptionReviewResults = con.CreateStoreCommand(
+            var descriptionReviewResults = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
                 new DbClause("1=1"),
                 new DbClause("and ID_FIRM = {0}", organizationId)
@@ -904,7 +908,7 @@ namespace Gva.MigrationTool.Sets
                     })
                 .ToArray();
 
-            var examiners = con.CreateStoreCommand(
+            var examiners = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REC_AUDITOR WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
                 new DbClause("1=1"),
                 new DbClause("and ID_FIRM = {0}", organizationId)
@@ -937,9 +941,6 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = (int)r.Field<decimal>("ID"),
                         __migrTable = "RECOMMENDATION",
-
-                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
-                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
 
                         recommendationPartId = r.Field<long?>("ID_PART"),
                         formDate = r.Field<DateTime?>("FORM_DATE"),
@@ -983,40 +984,25 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var files = this.oracleConn.CreateStoreCommand(//TODO PD.ID + ******** = D.DOC_ID
-                @"SELECT PD.ID,
-                        D.DOC_ID,
-                        D.MIME_TYPE,
-                        D.DESCRIPTION,
-                        D.INS_USER,
-                        D.INS_DATE,
-                        D.UPD_USER,
-                        D.UPD_DATE,
-                        D.NAME
-                    FROM CAA_DOC.PERSON_DOCUMENT PD
-                    JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON PD.ID + 10000000 = D.DOC_ID
-                    WHERE {0} {1}",
+            var apps = this.oracleConn.CreateStoreCommand(
+                @"SELECT R.ID REQUEST_ID,
+                        RCM.ID RCM_ID
+                    FROM CAA_DOC.REQUEST R
+                    JOIN CAA_DOC.RECOMMENDATION RCM ON RCM.ID_REQUEST = R.ID
+                                WHERE {0} {1}",
                 new DbClause("1=1"),
-                new DbClause("and PD.FIRM_ID = {0}", organizationId)
+                new DbClause("and RCM.ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
-                        __migrTable = "DOCLIB_DOCUMENTS",
-                        __ORGANIZATION_RECOMMENDATION_ID = (int)r.Field<decimal>("ID"),
-
-                        key = Utils.DUMMY_FILE_KEY,//TODO
-                        name = r.Field<string>("NAME"),
-                        mimeType = r.Field<string>("MIME_TYPE")
-                    }))
+                        recommendationId = (int)r.Field<long>("RCM_ID"),
+                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                    })
                 .ToList();
 
             return (from part in parts
-                    join file in files on part.Get<int>("__oldId") equals file.Get<int>("__ORGANIZATION_RECOMMENDATION_ID") into fg
-                    let file = fg.Any() ? fg.Single() : null //throw if more than one files present
-                    let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
-                    let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    join app in apps on part.Get<int>("__oldId") equals app.recommendationId into ag
                     select new JObject(
                         new JProperty("part",
                             Utils.Pluck(part,
@@ -1054,11 +1040,11 @@ namespace Gva.MigrationTool.Sets
                             new JArray(
                                 new JObject(
                                     new JProperty("isAdded", true),
-                                    new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
+                                    new JProperty("file", null),
                                     new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
-                                    new JProperty("bookPageNumber", bookPageNumber),
-                                    new JProperty("pageCount", pageCount),
-                                    new JProperty("applications", new JArray()))))))
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
                     .ToList();
         }
 
@@ -1072,7 +1058,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = (int)r.Field<long>("ID"),
                         __migrTable = "MANAGEMENT_STAFF",
                         position = r.Field<string>("POSITION"),
                         person = getPerson((int?)r.Field<decimal?>("PERSON_ID")),
