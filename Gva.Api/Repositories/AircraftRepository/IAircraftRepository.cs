@@ -9,7 +9,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             string mark,
             string manSN,
             string model,
-            string easaType,
+            string airCategory,
             string aircraftProducer,
             bool exact = false,
             int offset = 0,

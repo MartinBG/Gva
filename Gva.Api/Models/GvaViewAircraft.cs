@@ -19,7 +19,7 @@ namespace Gva.Api.Models
 
         public string ICAO { get; set; }
 
-        public int? EASATypeId { get; set; }
+        public int? AirCategoryId { get; set; }
 
         public int? AircraftProducerId { get; set; }
 
@@ -35,7 +35,7 @@ namespace Gva.Api.Models
 
         public virtual Lot Lot { get; set; }
 
-        public virtual NomValue EASAType { get; set; }
+        public virtual NomValue AirCategory { get; set; }
 
         public virtual NomValue AircraftProducer { get; set; }
     }
@@ -64,7 +64,7 @@ namespace Gva.Api.Models
             this.Property(t => t.ModelAlt).HasColumnName("ModelAlt");
             this.Property(t => t.OutputDate).HasColumnName("OutputDate");
             this.Property(t => t.ICAO).HasColumnName("ICAO");
-            this.Property(t => t.EASATypeId).HasColumnName("EASATypeId");
+            this.Property(t => t.AirCategoryId).HasColumnName("AirCategoryId");
             this.Property(t => t.AircraftProducerId).HasColumnName("AircraftProducerId");
             this.Property(t => t.Engine).HasColumnName("Engine");
             this.Property(t => t.Propeller).HasColumnName("Propeller");
@@ -74,9 +74,9 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
-            this.HasOptional(t => t.EASAType)
+            this.HasOptional(t => t.AirCategory)
                 .WithMany()
-                .HasForeignKey(t => t.EASATypeId);
+                .HasForeignKey(t => t.AirCategoryId);
             this.HasOptional(t => t.AircraftProducer)
                 .WithMany()
                 .HasForeignKey(t => t.AircraftProducerId);

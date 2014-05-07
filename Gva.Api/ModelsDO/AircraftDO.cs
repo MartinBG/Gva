@@ -18,7 +18,7 @@ namespace Gva.Api.ModelsDO
             this.ModelAlt = aircraftData.ModelAlt;
             this.OutputDate = aircraftData.OutputDate;
             this.ICAO = aircraftData.ICAO;
-            this.EASAType = aircraftData.EASAType != null ? aircraftData.EASAType.Name : null;
+            this.AirCategory = aircraftData.AirCategory != null ? aircraftData.AirCategory.Name : null;
             this.AircraftProducer = aircraftData.AircraftProducer != null ?aircraftData.AircraftProducer.Name : null;
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
@@ -38,7 +38,7 @@ namespace Gva.Api.ModelsDO
 
         public string ICAO { get; set; }
 
-        public string EASAType { get; set; }
+        public string AirCategory { get; set; }
 
         public string AircraftProducer { get; set; }
 

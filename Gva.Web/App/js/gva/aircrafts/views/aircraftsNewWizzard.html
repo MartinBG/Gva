@@ -21,15 +21,15 @@
             <sc-validation-error field-name="aircraftProducer" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="model.aircraftProducer" name="aircraftProducer" alias="'aircraftProducers'" ng-required="!model.aircraftModel" params="{ makeAircraft: 'true'}"></sc-nomenclature>
           </div>
-          <div class="form-group col-md-4 col-sm-8" sc-has-error="easaType">
-            <label class="control-label" l10n-text="aircrafts.newWizzard.easaType"></label>
-            <sc-validation-error field-name="easaType" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.easaType" name="easaType" alias="'easaTypes'" ng-required="!model.aircraftModel"></sc-nomenclature>
+          <div class="form-group col-md-4 col-sm-8" sc-has-error="airCategory">
+            <label class="control-label" l10n-text="aircrafts.newWizzard.airCategory"></label>
+            <sc-validation-error field-name="airCategory" validations="{required: null}"></sc-validation-error>
+            <sc-nomenclature ng-model="model.airCategory" name="airCategory" alias="'easaTypes'" ng-required="!model.aircraftModel"></sc-nomenclature>
           </div>
           <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftModel">
             <label class="control-label" l10n-text="aircrafts.newWizzard.aircraftModel"></label>
             <sc-validation-error field-name="aircraftModel" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.aircraftModel" name="aircraftModel" alias="'aircrafts'" ng-required="!model.aircraftProducer && !model.aircraftCategory" params="{ easaType: model.easaType.name, aircraftProducer: model.aircraftProducer.name }"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.aircraftModel" name="aircraftModel" alias="'aircrafts'" ng-required="!model.aircraftProducer && !model.airCategory" params="{ airCategory: model.airCategory.name, aircraftProducer: model.aircraftProducer.name }"></sc-nomenclature>
           </div>
         </div>
       </div>

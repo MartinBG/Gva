@@ -28,7 +28,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
             aircraft.ModelAlt = part.Content.Get<string>("modelAlt");
             aircraft.OutputDate = part.Content.Get<DateTime?>("outputDate");
             aircraft.ICAO = part.Content.Get<string>("icao");
-            aircraft.EASATypeId = part.Content.Get<int?>("easaType.nomValueId");
+            aircraft.AirCategoryId = part.Content.Get<int?>("airCategory.nomValueId");
             aircraft.AircraftProducerId = part.Content.Get<int?>("aircraftProducer.nomValueId");
             aircraft.Engine = part.Content.Get<string>("engine");
             aircraft.Propeller = part.Content.Get<string>("propeller");

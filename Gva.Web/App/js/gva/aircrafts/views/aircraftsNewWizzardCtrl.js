@@ -23,7 +23,7 @@
     $scope.$watch('model.aircraftModel', function (newVal, oldVal) {
       if (newVal && (newVal !== oldVal)) {
         oldModel = $scope.model.aircraftModel;
-        $scope.model.easaType = $scope.model.aircraftModel.textContent.easaType;
+        $scope.model.airCategory = $scope.model.aircraftModel.textContent.airCategory;
         $scope.model.aircraftProducer = $scope.model.aircraftModel.textContent.aircraftProducer;
         $scope.$evalAsync(function() {
           if (oldModel) {
@@ -34,7 +34,7 @@
       }
     });
 
-    $scope.$watch('model.easaType', function (newVal, oldVal) {
+    $scope.$watch('model.airCategory', function (newVal, oldVal) {
       if (newVal !== oldVal && !newVal) {
         oldModel = $scope.model.aircraftModel;
         $scope.$evalAsync(function() {

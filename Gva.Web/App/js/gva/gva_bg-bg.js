@@ -669,7 +669,7 @@
           model: 'Модел',
           outputDate: 'Дата на производство',
           icao: 'ICAO код',
-          easaType: 'AIR категория',
+          airCategory: 'AIR категория',
           aircraftProducer: 'Производител',
           engine: 'Двигател',
           propeller: 'Витло',
@@ -703,7 +703,7 @@
           docRoom: 'Документи в стая',
           cofAType: 'CofA Type',
           tcds: 'TCDS',
-          easaType: 'AIR Category',
+          airCategory: 'AIR Category',
           easaCategory: 'EASA Категория',
           euRegType: 'EASA Reg',
           maxMassL: 'Макс. маса при излитане (MTOM)',
@@ -772,7 +772,7 @@
           back: 'Назад',
           cancel: 'Отказ',
           aircraftProducer: 'Производител',
-          easaType: 'AIR категория',
+          airCategory: 'AIR категория',
           aircraftModel: 'Модел ВС'
         },
         editAircraft: {
@@ -783,7 +783,7 @@
         },
         viewAircraft: {
           aircraftProducer: 'Производител',
-          easaType: 'AIR категория',
+          airCategory: 'AIR категория',
           icao: 'ICAO',
           model: 'Модел ВС',
           modelAlt: 'Модел ВС (английски)',

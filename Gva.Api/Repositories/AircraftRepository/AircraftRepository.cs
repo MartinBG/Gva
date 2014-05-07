@@ -22,7 +22,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             string mark,
             string manSN,
             string model,
-            string easaType,
+            string airCategory,
             string aircraftProducer,
             bool exact,
             int offset = 0,
@@ -30,7 +30,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         {
             var gvaAircrafts =
                 this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.EASAType)
+                .Include(a => a.AirCategory)
                 .Include(a => a.AircraftProducer);
 
             var predicate = PredicateBuilder.True<GvaViewAircraft>();
@@ -39,7 +39,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .AndStringMatches(p => p.ManSN, manSN, exact)
                 .AndStringMatches(p => p.Model, model, exact)
                 .AndStringMatches(p => p.Mark, mark, exact)
-                .AndStringMatches(p => p.EASAType.Name, easaType, exact)
+                .AndStringMatches(p => p.AirCategory.Name, airCategory, exact)
                 .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, exact);
 
             return gvaAircrafts
@@ -51,7 +51,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         public GvaViewAircraft GetAircraft(int aircraftId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.EASAType)
+                .Include(a => a.AirCategory)
                 .Include(a => a.AircraftProducer)
                 .SingleOrDefault(p => p.LotId == aircraftId);
         }

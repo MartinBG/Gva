@@ -27,7 +27,7 @@
         manSN: $scope.filters.manSN,
         model: $scope.filters.model,
         mark: $scope.filters.mark,
-        easaType: $scope.filters.easaType,
+        airCategory: $scope.filters.airCategory,
         aircraftProducer: $scope.filters.aircraftProducer
       });
     };
