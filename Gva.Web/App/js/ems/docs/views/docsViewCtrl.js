@@ -16,6 +16,10 @@
       doc.docCorrespondents.push(selectedCorrs.current.pop());
     }
 
+    $scope.newCorr = function NewCorr() {
+      return $state.go('root.docs.edit.view.newCorr');
+    };
+
     $scope.selectCorr = function selectCorr() {
       selectedCorrs.current.splice(0);
       selectedCorrs.total = doc.docCorrespondents;

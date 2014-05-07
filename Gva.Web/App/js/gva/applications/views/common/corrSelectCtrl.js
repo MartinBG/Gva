@@ -61,41 +61,10 @@
       '$stateParams',
       'Corr',
       function resolveCorrs($stateParams, Corr) {
-        //var partData = $q.when(false);
-        //if (appModel.common.lotId) {
-        //  if ($stateParams.filter === 'Person') {
-        //    partData = PersonData.get({ id: appModel.common.lotId });
-        //  }
-        //  else if ($stateParams.filter === 'Organization') {
-        //    partData = OrgData.get({ id: appModel.common.lotId });
-        //  }
-        //}
-
-        //return $q.all({
-        //  pd: partData.$promise
-        //}).then(function (r) {
-        //  var dn;
-        //  if ($stateParams.filter === 'Person' && appModel.common.lotId) {
-        //    dn = r.pd.part.firstName + ' ' + r.pd.part.lastName;
-        //    if (r.pd.part.uin) {
-        //      dn = dn + ' ' + r.pd.part.uin;
-        //    }
-        //  }
-        //  else if ($stateParams.filter === 'Organization' && appModel.common.lotId) {
-        //    dn = r.pd.part.name;
-        //  }
-
-        //  appModel.common.lotId = null;
-
-        return Corr.get(
-          {
-            displayName: $stateParams.displayName,
-            correspondentEmail: $stateParams.email
-          }).$promise;
-
-        //});
-
-
+        return Corr.get({
+          displayName: $stateParams.displayName,
+          correspondentEmail: $stateParams.email
+        }).$promise;
       }
     ]
   };

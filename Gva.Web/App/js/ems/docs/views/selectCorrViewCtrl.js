@@ -41,10 +41,6 @@
       });
     };
 
-    $scope.newCorr = function NewCorr() {
-      return $state.go('root.docs.edit.view.selectCorr.newCorr');
-    };
-
     $scope.selectCorr = function selectCorr(corr) {
       var nomItem = {
         nomValueId: corr.correspondentId,

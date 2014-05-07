@@ -2,42 +2,49 @@
 (function (angular) {
   'use strict';
 
-  function CorrsNewCtrl(
+  function DocsCorrNewCtrl(
     $scope,
     $filter,
     $state,
     $stateParams,
     Corr,
-    corr
+    corr,
+    doc
   ) {
     $scope.corr = corr;
+    $scope.doc = doc;
 
     $scope.save = function save() {
       return $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
-            return Corr.save($scope.corr).$promise.then(function () {
-              return $state.go('root.corrs.search');
+            return Corr.save($scope.corr).$promise.then(function (corr) {
+              doc.docCorrespondents.push({
+                name: corr.obj.displayName,
+                nomValueId: corr.correspondentId
+              });
+              return $state.go('^');
             });
           }
         });
     };
 
     $scope.cancel = function cancel() {
-      return $state.go('root.corrs.search');
+      return $state.go('^');
     };
   }
 
-  CorrsNewCtrl.$inject = [
+  DocsCorrNewCtrl.$inject = [
     '$scope',
     '$filter',
     '$state',
     '$stateParams',
     'Corr',
-    'corr'
+    'corr',
+    'doc'
   ];
 
-  CorrsNewCtrl.$resolve = {
+  DocsCorrNewCtrl.$resolve = {
     corr: [
       '$stateParams',
       'Corr',
@@ -47,5 +54,5 @@
     ]
   };
 
-  angular.module('ems').controller('CorrsNewCtrl', CorrsNewCtrl);
+  angular.module('ems').controller('DocsCorrNewCtrl', DocsCorrNewCtrl);
 }(angular));
