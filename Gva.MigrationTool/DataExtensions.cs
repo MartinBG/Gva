@@ -12,6 +12,51 @@ namespace Gva.MigrationTool
 {
     public static class DataExtensions
     {
+        private static bool IsNullableType(Type type)
+        {
+            if (!type.IsValueType)
+            {
+                return true;
+            }
+
+            if (Nullable.GetUnderlyingType(type) != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static T NullOrThrow<T>()
+        {
+            if (IsNullableType(typeof(T)))
+            {
+                return default(T);//null
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
+        }
+
+        public static T ChangeType<T>(object value)
+        {
+            Type t = typeof(T);
+
+            if (t.IsGenericType)
+            {
+                Type underlyingType = Nullable.GetUnderlyingType(t);
+
+                //nullable type
+                if (underlyingType != null)
+                {
+                    t = underlyingType;
+                }
+            }
+
+            return (T)Convert.ChangeType(value, t);
+        }
+
         public static T Field<T>(this IDataRecord record, string name)
         {
             return Field<T>(record, record.GetOrdinal(name));
@@ -19,9 +64,14 @@ namespace Gva.MigrationTool
 
         public static T Field<T>(this IDataRecord record, int ordinal)
         {
-            object value = record.IsDBNull(ordinal) ? null : record.GetValue(ordinal);
+            if (record.IsDBNull(ordinal))
+            {
+                //make sure that in case of DBNUll we return null and not the default value
+                //and will throw an exception if we are not expecting a null value
+                return NullOrThrow<T>();
+            }
 
-            return (T)value;
+            return ChangeType<T>(record.GetValue(ordinal));
         }
 
         public static IEnumerable<T> Materialize<T>(this IDbCommand command, Expression<Func<IDataRecord, T>> expression)
@@ -36,9 +86,13 @@ namespace Gva.MigrationTool
                 object result = command.ExecuteScalar();
 
                 if (Convert.IsDBNull(result))
-                    return default(T);
+                {
+                    //make sure that in case of DBNUll we return null and not the default value
+                    //and will throw an exception if we are not expecting a null value
+                    return NullOrThrow<T>();
+                }
 
-                return (T)result;
+                return ChangeType<T>(result);
             }
         }
 

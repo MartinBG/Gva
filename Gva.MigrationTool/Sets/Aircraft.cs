@@ -762,7 +762,7 @@ namespace Gva.MigrationTool.Sets
         private IList<int> getAircraftApexIds()
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
-                .Materialize(r => (int)r.Field<long>("ID"))
+                .Materialize(r => r.Field<int>("ID"))
                 .ToList().Take(200).ToList();
         }
 
@@ -776,7 +776,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AIRCRAFT",
                         name = r.Field<string>("NAME"),
                         model = r.Field<string>("MODEL"),
@@ -841,7 +841,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_OWNER",
 
                         __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
@@ -878,9 +878,9 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __oldId = r.Field<int>("DOC_ID"),
                         __migrTable = "DOCLIB_DOCUMENTS",
-                        __AC_OWNER_ID = (int)r.Field<long>("ID"),
+                        __AC_OWNER_ID = r.Field<int>("ID"),
 
                         key = Utils.DUMMY_FILE_KEY,//TODO
                         name = r.Field<string>("NAME"),
@@ -935,7 +935,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_PART",
                         aircraftPart = noms["aircraftParts"].ByOldId(r.Field<long?>("PART_TYPE").ToString()),
                         partProducer = noms["aircraftProducers"].ByOldId(r.Field<long?>("ID_MANUFACTURER").ToString()),
@@ -966,7 +966,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_DEBT",
 
                         __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
@@ -1020,9 +1020,9 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __oldId = r.Field<int>("DOC_ID"),
                         __migrTable = "DOCLIB_DOCUMENTS",
-                        __DEBT_ID = (int)r.Field<long>("ID"),
+                        __DEBT_ID = r.Field<int>("ID"),
 
                         key = Utils.DUMMY_FILE_KEY,//TODO
                         name = r.Field<string>("NAME"),
@@ -1043,8 +1043,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftDebtId = (int)r.Field<long>("AC_DEBT_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftDebtId = r.Field<int>("AC_DEBT_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1115,7 +1115,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_MAINTENANCE",
                         lim145limitation = noms["lim145limitations"].ByOldId(r.Field<long?>("ID_MF145_LIMIT").ToString()),
                         notes = r.Field<string>("REMARKS"),
@@ -1140,7 +1140,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_OCCURRENCE",
 
                         __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
@@ -1179,9 +1179,9 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __oldId = r.Field<int>("DOC_ID"),
                         __migrTable = "DOCLIB_DOCUMENTS",
-                        __OCCURRENCE_ID = (int)r.Field<long>("ID"),
+                        __OCCURRENCE_ID = r.Field<int>("ID"),
 
                         key = Utils.DUMMY_FILE_KEY,//TODO
                         name = r.Field<string>("NAME"),
@@ -1303,7 +1303,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AUDITS",
                         documentNumber = r.Field<string>("DOC_NUMBER"),
                         auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
@@ -1318,8 +1318,8 @@ namespace Gva.MigrationTool.Sets
                         inspectionTo = r.Field<DateTime?>("INSPECTION_TO"),
                         auditDetails = inspectionDetails,
                         examiners = inspectors,
-                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey((int)r.Field<decimal?>("ID_REQUEST"))) ?
-                            new JArray () { nomApplications[(int)r.Field<decimal?>("ID_REQUEST")] } :
+                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
+                            new JArray () { nomApplications[r.Field<int>("ID_REQUEST")] } :
                             null
                     }))
                 .ToList();
@@ -1335,7 +1335,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "REQUEST",
 
                         __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
@@ -1373,10 +1373,10 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __oldId = r.Field<int>("DOC_ID"),
                         __migrTable = "DOCLIB_DOCUMENTS",
 
-                        __REQUEST_ID = (int)r.Field<decimal>("ID"),
+                        __REQUEST_ID = r.Field<int>("ID"),
 
                         key = Utils.DUMMY_FILE_KEY,//TODO
                         name = r.Field<string>("NAME"),
@@ -1431,7 +1431,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "PERSON_DOCUMENT",
 
                         __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
@@ -1467,9 +1467,9 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("DOC_ID"),
+                        __oldId = r.Field<int>("DOC_ID"),
                         __migrTable = "DOCLIB_DOCUMENTS",
-                        __AIRCRAFT_DOCUMENT_ID = (int)r.Field<decimal>("ID"),
+                        __AIRCRAFT_DOCUMENT_ID = r.Field<int>("ID"),
 
                         key = Utils.DUMMY_FILE_KEY,//TODO
                         name = r.Field<string>("NAME"),
@@ -1526,7 +1526,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_CERTIFICATE",
 
                         register = r.Field<long>("ID").ToString().Substring(0, 1),
@@ -1570,8 +1570,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftCerttificateId = (int)r.Field<long>("AC_CERT_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftCerttificateId = r.Field<int>("AC_CERT_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1631,15 +1631,15 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_AIRWORTHINESS",
                         aircraftCertificateType = noms["aircraftCertificateTypes"].ByCode(r.Field<string>("CERTIFICATE_TYPE")),
                         certId = r.Field<long?>("ID_CERTIFICATE"),
                         refNumber = r.Field<string>("REF_NUMBER"),
                         issueDate = r.Field<DateTime?>("ISSUE_DATE"),
                         validToDate = r.Field<DateTime?>("VALID_TO"),
-                        auditPartIndex = (r.Field<long?>("ID_AUDITS") != null && inspections.ContainsKey((int)r.Field<long?>("ID_AUDITS"))) ?
-                            inspections[(int)r.Field<long?>("ID_AUDITS")] :
+                        auditPartIndex = (r.Field<long?>("ID_AUDITS") != null && inspections.ContainsKey(r.Field<int>("ID_AUDITS"))) ?
+                            inspections[r.Field<int>("ID_AUDITS")] :
                             (int?)null,//TODO
                         approvalId = r.Field<long?>("ID_APPROVAL"),//TODO
                         inspector = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
@@ -1683,8 +1683,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftAirworthinessId = (int)r.Field<long>("AC_AW_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftAirworthinessId = r.Field<int>("AC_AW_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1736,7 +1736,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_MARK",
                         ltrInNumber = r.Field<string>("LTR_IN_NOM"),
                         ltrInDate = r.Field<DateTime?>("LTR_IN_DATE"),
@@ -1759,8 +1759,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftCertMarkId = (int)r.Field<long>("AC_MARK_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftCertMarkId = r.Field<int>("AC_MARK_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1803,7 +1803,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<decimal>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_S_CODE",
                         ltrInNumber = r.Field<string>("LTR_IN_NOM"),
                         ltrInDate = r.Field<DateTime?>("LTR_IN_DATE"),
@@ -1829,8 +1829,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftCertScodeId = (int)r.Field<long>("AC_SCODE_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftCertScodeId = r.Field<int>("AC_SCODE_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1876,7 +1876,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_FLY_PERMIT",
                         certId = r.Field<long?>("ID_CERTIFICATE"),
                         issueDate = r.Field<DateTime?>("ISSUE_DATE"),
@@ -1909,8 +1909,8 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftCertFlyPermitId = (int)r.Field<long>("AC_FLYPERM_ID"),
-                        nomApp = nomApplications[(int)r.Field<decimal>("REQUEST_ID")]
+                        aircraftCertFlyPermitId = r.Field<int>("AC_FLYPERM_ID"),
+                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
@@ -1963,7 +1963,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = (int)r.Field<long>("ID"),
+                        __oldId = r.Field<int>("ID"),
                         __migrTable = "AC_S_CODE",
                         certId = r.Field<long?>("ID_CERTIFICATE"),
                         issueDate = r.Field<DateTime?>("ISSUE_DATE"),
