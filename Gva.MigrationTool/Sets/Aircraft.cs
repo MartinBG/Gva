@@ -337,7 +337,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         addPartWithFiles("aircraftCertRegistrations/*", aircraftCertRegistration);
 
-                        int certId = aircraftCertRegistration["__oldId"].Value<int>();
+                        int certId = aircraftCertRegistration["part"]["__oldId"].Value<int>();
 
                         var aircraftCertAirworthinesses = this.getAircraftCertAirworthinesses(certId, inspections, getPerson, nomApplications, noms);
                         foreach (var aircraftCertAirworthiness in aircraftCertAirworthinesses)
@@ -594,7 +594,7 @@ namespace Gva.MigrationTool.Sets
                         outputDate = toDate(r.Field<string>("d_Act_DateOutput")),
                         docRoom = r.Field<string>("t_Act_Place_of_Documents"),
                         cofAType = noms["CofATypesFm"].ByName(r.Field<string>("t_CofA_Type").Replace("\"", string.Empty)),
-                        easaType = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
+                        airCategory = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
                         euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
                         easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
                         tcds = r.Field<string>("t_EASA_TCDS"),
