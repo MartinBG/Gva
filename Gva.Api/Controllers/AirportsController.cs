@@ -92,40 +92,7 @@ namespace Gva.Api.Controllers
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, [FromUri] string[] documentTypes = null, int? caseTypeId = null)
         {
-            this.lotRepository.GetLotIndex(lotId);
-            var inventoryItems = this.inventoryRepository.GetInventoryItemsForLot(lotId);
-
-            List<InventoryItemDO> inventory;
-            if (caseTypeId.HasValue)
-            {
-                var lotFiles = this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value);
-
-                inventory = inventoryItems
-                    .Join(
-                        lotFiles,
-                        i => i.PartId,
-                        f => f.LotPartId,
-                        (i, f) => new InventoryItemDO(i, f))
-                    .ToList();
-            }
-            else
-            {
-                inventory = new List<InventoryItemDO>();
-                foreach (var inventoryItem in inventoryItems)
-                {
-                    var lotFiles = this.fileRepository.GetFileReferences(inventoryItem.PartId, null);
-
-                    if (lotFiles.Length == 0)
-                    {
-                        inventory.Add(new InventoryItemDO(inventoryItem, null));
-                    }
-
-                    foreach (var lotFile in lotFiles)
-                    {
-                        inventory.Add(new InventoryItemDO(inventoryItem, lotFile));
-                    }
-                }
-            }
+            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
 
             if (documentTypes.Length > 0)
             {

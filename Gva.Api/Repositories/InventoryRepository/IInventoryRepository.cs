@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Repositories.InventoryRepository
 {
     public interface IInventoryRepository
     {
-        IEnumerable<GvaViewInventoryItem> GetInventoryItemsForLot(int lotId);
+        IEnumerable<InventoryItemDO> GetInventoryItemsForLot(int lotId, int? caseTypeId);
     }
 }

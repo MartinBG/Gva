@@ -226,9 +226,9 @@ namespace Gva.Api.Controllers
                     LotPart = partVersion.Part,
                     DocFile = docFile,
                     GvaCaseTypeId = linkNewPart.Get<int>("appFile.caseTypeId"),
+                    PageIndex = linkNewPart.Get<string>("appFile.bookPageNumber"),
                     PageNumber = linkNewPart.Get<int>("appFile.pageCount")
                 };
-                lotFile.SavePageIndex(linkNewPart.Get<string>("appFile.bookPageNumber"));
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {
@@ -298,9 +298,9 @@ namespace Gva.Api.Controllers
                     LotPart = partVersion.Part,
                     DocFile = docFile,
                     GvaCaseTypeId = newPart.Get<int>("appFile.caseTypeId"),
+                    PageIndex = newPart.Get<string>("appFile.bookPageNumber"),
                     PageNumber = newPart.Get<int>("appFile.pageCount")
                 };
-                lotFile.SavePageIndex(newPart.Get<string>("appFile.bookPageNumber"));
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
                 {

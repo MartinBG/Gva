@@ -76,18 +76,6 @@ namespace Gva.Api.Repositories.FileRepository
                 .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaAppLotFiles.Select(gf => gf.GvaApplication))
                 .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
-                .OrderBy(f => f.FormPageIndex)
-                .ToArray();
-        }
-
-        public GvaLotFile[] GetFileReferencesForLot(int lotId, int caseType)
-        {
-            return this.unitOfWork.DbContext.Set<GvaLotFile>()
-                .Include(f => f.GvaCaseType)
-                .Include(f => f.DocFile)
-                .Include(f => f.GvaFile)
-                .Where(f => f.LotPart.LotId == lotId && f.GvaCaseTypeId == caseType)
-                .OrderBy(f => f.FormPageIndex)
                 .ToArray();
         }
 
@@ -111,9 +99,9 @@ namespace Gva.Api.Repositories.FileRepository
                 LotPart = part,
                 GvaFile = file,
                 GvaCaseTypeId = fileObj.CaseType.NomValueId,
+                PageIndex = (string)fileObj.BookPageNumber,
                 PageNumber = (int?)fileObj.PageCount
             };
-            newLotFile.SavePageIndex((string)fileObj.BookPageNumber);
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
 
@@ -134,8 +122,8 @@ namespace Gva.Api.Repositories.FileRepository
         private void UpdateLotFile(GvaLotFile lotFile, FileDO fileObj)
         {
             lotFile.GvaCaseTypeId = fileObj.CaseType.NomValueId;
+            lotFile.PageIndex = fileObj.BookPageNumber;
             lotFile.PageNumber = fileObj.PageCount;
-            lotFile.SavePageIndex((string)fileObj.BookPageNumber);
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
                 fileObj.Applications,

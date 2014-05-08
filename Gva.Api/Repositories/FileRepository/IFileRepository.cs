@@ -13,7 +13,5 @@ namespace Gva.Api.Repositories.FileRepository
         void DeleteFileReferences(PartVersion partVersion);
 
         GvaLotFile[] GetFileReferences(int partId, int? casetype);
-
-        GvaLotFile[] GetFileReferencesForLot(int lotId, int caseType);
     }
 }

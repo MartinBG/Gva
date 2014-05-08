@@ -16,7 +16,7 @@
     <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
       <input type="checkbox" ng-checked="selectedDocuments | contains:item" sc-click="selectDocument($event, item)">
     </sc-column>
-     <sc-column data="file.bookPageNumber" title="organizations.chooseDocuments.bookPageNumber" width="80px">
+     <sc-column data="bookPageNumber" title="organizations.chooseDocuments.bookPageNumber" width="80px">
     </sc-column>
     <sc-column data="name" title="organizations.chooseDocuments.document">
     </sc-column>
@@ -34,10 +34,10 @@
     </sc-column>
     <sc-column data="toDate" title="organizations.chooseDocuments.toDate" type="date">
     </sc-column>
-    <sc-column data="file.pageCount" title="organizations.chooseDocuments.pageCount">
+    <sc-column data="pageCount" title="organizations.chooseDocuments.pageCount">
     </sc-column>
     <sc-column sortable="false" title="organizations.chooseDocuments.file" has-content="true">
-      <a target="_self" ng-href="api/file?fileKey={{item.file.file.key}}&fileName={{item.file.file.name}}" ng-show="item.file" title="{{item.file.file.name}}">
+      <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>
     </sc-column>

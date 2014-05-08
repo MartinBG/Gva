@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -16,12 +17,22 @@ namespace Common.Linq
             return f => true;
         }
 
+        public static Expression<Func<T, bool>> True<T>(IQueryable<T> typeInference)
+        {
+            return f => true;
+        }
+
         public static Expression<Func<T, bool>> False<T>()
         {
             return f => false;
         }
 
         public static Expression<Func<T, bool>> False<T>(T typeInference)
+        {
+            return f => false;
+        }
+
+        public static Expression<Func<T, bool>> False<T>(IQueryable<T> typeInference)
         {
             return f => false;
         }

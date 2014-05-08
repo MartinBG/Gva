@@ -8,7 +8,6 @@ CREATE TABLE [dbo].[GvaLotFiles] (
     [DocFileId]         INT           NULL,
     [GvaCaseTypeId]     INT           NOT NULL,
     [PageIndex]         NVARCHAR (50) NOT NULL,
-    [FormPageIndex]     NVARCHAR (50) NOT NULL,
     [PageNumber]        INT           NULL,
     CONSTRAINT [PK_GvaLotFiles]                 PRIMARY KEY ([GvaLotFileId]),
     CONSTRAINT [FK_GvaLotFiles_DocFiles]        FOREIGN KEY([DocFileId])        REFERENCES [dbo].[DocFiles]     ([DocFileId]),
@@ -25,6 +24,5 @@ exec spDescColumn N'GvaLotFiles', N'GvaFileId'        , N'Файл.'
 exec spDescColumn N'GvaLotFiles', N'DocFileId'        , N'Файл от документооборота.'
 exec spDescColumn N'GvaLotFiles', N'GvaCaseTypeId'    , N'Тип дело.'
 exec spDescColumn N'GvaLotFiles', N'PageIndex'        , N'Номер на страницата в описа.'
-exec spDescColumn N'GvaLotFiles', N'FormPageIndex'    , N'Форматиран номер на страницата в описа.'
 exec spDescColumn N'GvaLotFiles', N'PageNumber'       , N'Брой страници.'
 GO

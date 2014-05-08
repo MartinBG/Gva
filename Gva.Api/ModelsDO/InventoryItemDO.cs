@@ -5,25 +5,6 @@ namespace Gva.Api.ModelsDO
 {
     public class InventoryItemDO
     {
-        public InventoryItemDO(GvaViewInventoryItem inventoryItem, GvaLotFile lotFile)
-        {
-            this.SetPartAlias = inventoryItem.SetPartAlias;
-            this.PartIndex = inventoryItem.Part.Index.Value;
-            this.Name = inventoryItem.Name;
-            this.Type = inventoryItem.Type;
-            this.Number = inventoryItem.Number;
-            this.Date = inventoryItem.Date;
-            this.Publisher = inventoryItem.Publisher;
-            this.Valid = inventoryItem.Valid;
-            this.FromDate = inventoryItem.FromDate;
-            this.ToDate = inventoryItem.ToDate;
-            this.CreatedBy = inventoryItem.CreatedBy;
-            this.CreationDate = inventoryItem.CreationDate;
-            this.EditedBy = inventoryItem.EditedBy;
-            this.EditedDate = inventoryItem.EditedDate;
-            this.File = lotFile == null ? null : new FileDO(lotFile);
-        }
-
         public string SetPartAlias { get; set; }
 
         public int PartIndex { get; set; }
@@ -44,6 +25,12 @@ namespace Gva.Api.ModelsDO
 
         public DateTime? ToDate { get; set; }
 
+        public string BookPageNumber { get; set; }
+
+        public int? PageCount { get; set; }
+
+        public FileDataDO File { get; set; }
+
         public string CreatedBy { get; set; }
 
         public DateTime? CreationDate { get; set; }
@@ -51,7 +38,5 @@ namespace Gva.Api.ModelsDO
         public string EditedBy { get; set; }
 
         public DateTime? EditedDate { get; set; }
-
-        public FileDO File { get; set; }
     }
 }

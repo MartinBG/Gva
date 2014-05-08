@@ -80,44 +80,11 @@ namespace Gva.Api.Controllers
         [Route("{lotId}/organizationInventory")]
         public IHttpActionResult GetInventory(int lotId, [FromUri] string[] documentTypes = null, int? caseTypeId = null)
         {
-            this.lotRepository.GetLotIndex(lotId);
-            var inventoryItems = this.inventoryRepository.GetInventoryItemsForLot(lotId);
+            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
 
-            List<InventoryItemDO> inventory;
-            if (caseTypeId.HasValue)
+            if (documentTypes.Length > 0)
             {
-                var lotFiles = this.fileRepository.GetFileReferencesForLot(lotId, caseTypeId.Value);
-
-                inventory = inventoryItems
-                    .Join(
-                        lotFiles,
-                        i => i.PartId,
-                        f => f.LotPartId,
-                        (i, f) => new InventoryItemDO(i, f))
-                    .ToList();
-            }
-            else
-            {
-                inventory = new List<InventoryItemDO>();
-                foreach (var inventoryItem in inventoryItems)
-                {
-                    var lotFiles = this.fileRepository.GetFileReferences(inventoryItem.PartId, null);
-
-                    if (lotFiles.Length == 0)
-                    {
-                        inventory.Add(new InventoryItemDO(inventoryItem, null));
-                    }
-
-                    foreach (var lotFile in lotFiles)
-                    {
-                        inventory.Add(new InventoryItemDO(inventoryItem, lotFile));
-                    }
-                }
-
-                if (documentTypes.Length > 0)
-                {
-                    inventory = inventory.Where(item => documentTypes.Contains(item.SetPartAlias)).ToList();
-                }
+                inventory = inventory.Where(item => documentTypes.Contains(item.SetPartAlias)).ToList();
             }
 
             return Ok(inventory);
