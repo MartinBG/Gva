@@ -84,7 +84,7 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             GvaApplication gvaNomApp = this.applicationRepository.GetNomApplication(appId);
-            if (gvaNomApp != null)
+            if (gvaNomApp != null && gvaNomApp.GvaAppLotPart != null)
             {
                 return Ok(new ApplicationNomDO(gvaNomApp));
             }
