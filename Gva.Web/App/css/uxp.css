@@ -69,9 +69,11 @@ a.profile_links{
 	content: ">";
 	padding-right: 2px;
 }
-.dropdown-menu > div{
+.dropdown-menu > div,
+.dropdown-menu > li{
 	padding-left:10px;
 	padding-right:10px;
+    white-space: nowrap;
 }
 .breadcrumb-page-view{
 	padding-top: 30px !important;

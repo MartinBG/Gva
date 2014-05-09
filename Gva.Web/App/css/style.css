@@ -134,11 +134,6 @@ i.tree-image-close
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-.dynamic-columns-btn
-{
-  margin-left: 5px;
-}
-
 .glyphicon-loading:before
 {
   content: url('../img/loading-icon.gif');

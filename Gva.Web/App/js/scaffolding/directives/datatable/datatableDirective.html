@@ -1,30 +1,39 @@
 ﻿<div>
   <div ng-transclude></div>
-  <div class="btn-group dynamic-columns-btn pull-right" ng-show="dynamicColumns">
-    <button type="button" class="btn btn-default btn-sm" l10n-text="scaffolding.scDatatable.deleteColumns"></button>
-    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-      <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <div class="dropdown-menu" role="menu">
-      <div ng-repeat="column in columnDefs | filter:nonEmpty">
-        <input type="checkbox" ng-click="hideColumn(column.index[0])" ng-model="column.visible">
-        <span>{{column.title}}</span>
-      </div>
+
+  <div class="form-inline" style="text-align: right; margin-bottom: 3px;">
+    <div class="form-group" ng-show="filterable" style="width: 300px">
+      <input ng-model="filter" type="search" class="form-control input-sm" placeholder="{{dataTableTexts.search}}" />
+    </div>
+
+    <div class="form-group" ng-show="filterable">
+      <select ng-model="pageSize" class="form-control input-sm" style="width: 100px; text-align: left;">
+        <option >10</option>
+        <option >25</option>
+        <option >50</option>
+        <option >100</option>
+      </select>
+    </div>
+
+    <div class="btn-group dynamic-columns-btn" ng-show="dynamicColumns">
+      <button type="button" class="btn btn-default btn-sm" l10n-text="scaffolding.scDatatable.deleteColumns"></button>
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu pull-right" role="menu" style="text-align: left;">
+        <li ng-repeat="column in columnDefs | filter:nonEmpty">
+          <input type="checkbox" ng-click="hideColumn(column.index[0])" ng-model="column.visible">
+          <span>{{column.title}}</span>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="pull-right" ng-show="filterable">{{dataTableTexts.displayRecords}}</div>
-  <select class="pull-right" ng-model="pageSize" style="margin-left: 5px;" ng-show="filterable">
-    <option>10</option>
-    <option>25</option>
-    <option>50</option>
-    <option>100</option>
-  </select>
-  <input ng-model="filter" type="search" class="form-control input-sm" style="float: right; width: 25%" ng-show="filterable">
-  <div class="pull-right" ng-show="filterable">{{dataTableTexts.search}}</div>
+
   <div class="table-responsive">
     <table style="margin-bottom: 0; clear: both;" cellpadding="0" cellspacing="0" border="0" class="table table-bordered sc-data-table"></table>
   </div>
+
   <div class="datatable-info-text pull-left" style="padding-top: 8px; font-size: 11px;" ng-show="pageable">{{dataTableTexts.info}}</div>
   <div class="datatable-filtered-text pull-left" style="margin-left: 3px; padding-top: 8px; font-size: 11px;" ng-show="filter && (items.length !== filteredItems.length)">{{dataTableTexts.filtered}}</div>
   <ul class="pagination pull-right" style="margin: 2px;" ng-show="pageable">

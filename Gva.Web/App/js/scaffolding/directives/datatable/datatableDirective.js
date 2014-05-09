@@ -37,9 +37,7 @@ Usage <sc-datatable items="data"
 
         select2 = $element
           .find('select')
-          .addClass('input-sm')
           .select2({
-            width: '60px',
             minimumResultsForSearch: -1
           });
 
