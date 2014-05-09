@@ -4,7 +4,7 @@
 (function (angular, _) {
   'use strict';
 
-  function SearchDirective() {
+  function SearchDirective($timeout) {
     function SearchController ($scope) {
       var filters = {},
           //an object used as the special value of the watch expression
@@ -56,6 +56,7 @@
       }
 
       return function ($scope, element, attrs, scSearch, transcludeFn) {
+
         transcludeFn($scope.$parent, function (clone) {
           var buttonBlock = element.find('div.btns-block');
 
@@ -73,6 +74,15 @@
         });
 
         scSearch.initialize();
+
+        //delaying the focus, because using a templateUrl leads to
+        //an asynchronous resolve which delays the inner directives' linking
+        $timeout(function () {
+          if ($scope.selectedFilters !== null) {
+            $('form[selected-filters] input').first().focus();
+          }
+        },
+        0);
       };
     }
 
@@ -89,6 +99,8 @@
       compile: SearchCompile
     };
   }
+
+  SearchDirective.inject = ['$timeout'];
 
   angular.module('scaffolding').directive('scSearch', SearchDirective);
 }(angular, _));
