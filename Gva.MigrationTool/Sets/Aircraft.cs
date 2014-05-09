@@ -337,7 +337,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         addPartWithFiles("aircraftCertRegistrations/*", aircraftCertRegistration);
 
-                        int certId = aircraftCertRegistration["part"]["__oldId"].Value<int>();
+                        int certId = aircraftCertRegistration.Get<int>("part.__oldId");
 
                         var aircraftCertAirworthinesses = this.getAircraftCertAirworthinesses(certId, inspections, getPerson, nomApplications, noms);
                         foreach (var aircraftCertAirworthiness in aircraftCertAirworthinesses)
@@ -1819,12 +1819,12 @@ namespace Gva.MigrationTool.Sets
 
             var apps = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID REQUEST_ID,
-                        ASC.ID AC_SCODE_ID
+                        AC.ID AC_SCODE_ID
                     FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.AC_S_CODE ASC ON ASC.ID_REQUEST = R.ID
+                    JOIN CAA_DOC.AC_S_CODE AC ON AC.ID_REQUEST = R.ID
                                 WHERE {0} {1}",
                 new DbClause("1=1"),
-                new DbClause("and ASC.ID_AIRCRAFT = {0}", aircraftId)
+                new DbClause("and AC.ID_AIRCRAFT = {0}", aircraftId)
                 )
                 .Materialize(r =>
                     new

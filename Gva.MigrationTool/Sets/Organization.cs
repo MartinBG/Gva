@@ -40,11 +40,11 @@ namespace Gva.MigrationTool.Sets
     public class Organization
     {
 
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IAircraftRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IAircraftRepository, ILotEventDispatcher, ICaseTypeRepository, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
 
         public Organization(OracleConnection oracleConn,
-             Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IAircraftRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+             Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IAircraftRepository, ILotEventDispatcher, ICaseTypeRepository, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -66,7 +66,8 @@ namespace Gva.MigrationTool.Sets
                 var personRepository = dependencies.Value.Item6;
                 var aircraftRepository = dependencies.Value.Item7;
                 var lotEventDispatcher = dependencies.Value.Item8;
-                var context = dependencies.Value.Item9;
+                var caseTypeRepository = dependencies.Value.Item9;
+                var context = dependencies.Value.Item10;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -81,6 +82,9 @@ namespace Gva.MigrationTool.Sets
                     var lot = organizationSet.CreateLot(context);
                     oldIdsLots.Add(organizationId, lot);
                     var organizationData = this.getOrganizationData(organizationId, noms);
+
+                    caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes"));
+
                     lot.CreatePart("organizationData", organizationData, context);
                     lot.Commit(context, lotEventDispatcher);
                     unitOfWork.Save();
@@ -121,7 +125,8 @@ namespace Gva.MigrationTool.Sets
                     var personRepository = dependencies.Value.Item6;
                     var aircraftRepository = dependencies.Value.Item7;
                     var lotEventDispatcher = dependencies.Value.Item8;
-                    var context = dependencies.Value.Item9;
+                    var caseTypeRepository = dependencies.Value.Item9;
+                    var context = dependencies.Value.Item10;
 
                     Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personApexIdToLotId);
                     Func<int?, JObject> getAircraft = (aircraftApexId) => Utils.GetAircraft(aircraftApexId, aircraftRepository, aircraftApexIdToLotId);
@@ -259,14 +264,9 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "FIRM",
-                        caseTypes = new[] 
+                        caseTypes = new[] //TODO
                         {
-                            new 
-                            {
-                                NomValueId = 3,
-                                Name = "ОО",
-                                Alias = "approvedOrg"
-                            }
+                            Utils.DUMMY_APPROVED_ORG_CASE_TYPE
                         },
                         name = r.Field<string>("NAME"),
                         nameAlt = r.Field<string>("NAME_TRANS"),
@@ -764,7 +764,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.DUMMY_APPROVED_ORG_CASE_TYPE), //TODO
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -857,7 +857,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.DUMMY_APPROVED_ORG_CASE_TYPE), //TODO
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1041,7 +1041,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.DUMMY_APPROVED_ORG_CASE_TYPE), //TODO
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))

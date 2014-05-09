@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[GvaLotFiles] (
     [GvaFileId]         INT           NULL,
     [DocFileId]         INT           NULL,
     [GvaCaseTypeId]     INT           NOT NULL,
-    [PageIndex]         NVARCHAR (50) NOT NULL,
+    [PageIndex]         NVARCHAR (50) NULL,
     [PageNumber]        INT           NULL,
     CONSTRAINT [PK_GvaLotFiles]                 PRIMARY KEY ([GvaLotFileId]),
     CONSTRAINT [FK_GvaLotFiles_DocFiles]        FOREIGN KEY([DocFileId])        REFERENCES [dbo].[DocFiles]     ([DocFileId]),

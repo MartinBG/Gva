@@ -64,6 +64,11 @@ namespace Gva.MigrationTool
             new JObject(
                 new JProperty("nomValueId", 1),
                 new JProperty("name", "Пилот"));
+        public static readonly JObject DUMMY_APPROVED_ORG_CASE_TYPE = 
+            new JObject(
+                new JProperty("nomValueId", 3),
+                new JProperty("name", "ОО"),
+                new JProperty("alias", "approvedOrg"));
         public static readonly JObject DUMMY_PERSON =
             new JObject(
                 new JProperty("nomValueId", 1),
