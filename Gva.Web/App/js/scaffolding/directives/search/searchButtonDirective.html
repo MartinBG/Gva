@@ -1,8 +1,5 @@
 ﻿<div style="display: inline-block;">
-  <button type="button" ng-click="btnAction()">
-    <span ng-show="icon" class="glyphicon {{icon}}"></span>
-    <span>{{text}}</span>
-  </button>
+  <sc-button type="submit" btn-click="btnAction()" text="{{text}}" icon="{{icon}}" ng-show="icon"></sc-button>
   <div class="btn-group" ng-show="(dropdownFilters | filter:{visible: true}).length">
     <button type="button" dropdown-toggle data-toggle="dropdown">
       <span class="glyphicon glyphicon-plus"></span>

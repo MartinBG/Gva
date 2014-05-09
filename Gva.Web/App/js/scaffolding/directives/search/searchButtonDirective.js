@@ -9,12 +9,12 @@
       var btnClasses = tElement.attr('class');
 
       if (tAttrs.action === 'add') {
-        tElement.children('button').remove();
+        tElement.children('button, sc-button').remove();
       } else {
         tElement.children('div.btn-group').remove();
       }
 
-      tElement.find('button').each(function (index, button) {
+      tElement.find('button, sc-button').each(function (index, button) {
         $(button).attr('class', btnClasses || 'btn btn-sm btn-default');
       });
 
@@ -46,7 +46,7 @@
 
         parsedAction = $parse(attrs.action);
         $scope.btnAction = function () {
-          parsedAction($scope.$parent);
+          return parsedAction($scope.$parent);
         };
       }
     }
