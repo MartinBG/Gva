@@ -74,6 +74,14 @@ namespace Common.WordTemplates
                         SdtContentRow sdtContent = new SdtContentRow();
                         TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtRow(sdtPr, sdtContent);
+
+                        foreach (var tableCell in newElement.Descendants<TableCell>().ToList())
+                        {
+                            if (tableCell.GetFirstChild<Paragraph>() == null)
+                            {
+                                tableCell.Append(new Paragraph());
+                            }
+                        }
                     }
                     else if (customXmlElement.GetType() == typeof(CustomXmlCell))
                     {
