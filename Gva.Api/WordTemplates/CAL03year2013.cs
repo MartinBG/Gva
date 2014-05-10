@@ -41,7 +41,6 @@ namespace Gva.Api.WordTemplates
 
             var includedRatings = edition.GetItems<int>("includedRatings")
                 .Select(i => lot.GetPart("ratings/" + i).Content);
-
     
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
 

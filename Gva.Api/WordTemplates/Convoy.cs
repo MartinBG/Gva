@@ -210,6 +210,7 @@ namespace Gva.Api.WordTemplates
             }
 
             return includedTrainings
+                .Where(e => e.Get<string>("valid.code") == "Y")
                 .Where(t => documentRoleCodes.Contains(t.Get<string>("documentRole.code")))
                 .Select(t =>
                     new

@@ -94,6 +94,30 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
+                "ATSM1",
+                new
+                {
+                    NAME_BG = "1.Притежателят на това свидетелство за правоспособност 1.ATSML е     упълномощен да изпълнява функции по техническо обслужване на средствата за управление на въздушното движение в съответствие с вписаните степени, квалификационни и подквалификационни класове.",
+                    NAME_TRANS = "1.The holder is entitled to exercise the functions of the written rating(s) for which current endorsement(s)."
+                }
+            },
+            {
+                "ATSM2",
+                new
+                {
+                    NAME_BG = "2.Притежателят на ATSML може да упражнява прават, давани от свидетелството и вписаните в него квалификационни и подквалификационни класове, при условие, че през последните 24 месеца има най-малко 6 месеца трудов стаж по съответните квалификационни и подквалификационн класове.",
+                    NAME_TRANS = "2.The holder of the ATSML may exercise the privileges, granted by this licence and the written ratings and subratings, under the condition that during the past 24 months, the holder has exercised the same ratings and subratings for a period of 6 months of service at least."
+                }
+            },
+            {
+                "ATSM3",
+                new
+                {
+                    NAME_BG = "3.Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "3.A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
+            {
                 "medCert",
                 new
                 {
