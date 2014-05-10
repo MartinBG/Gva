@@ -17,12 +17,323 @@ namespace Gva.Api.WordTemplates
             { "ATCL", new [] { "ENG", "47A", "48A", "50A", "51A", "52A", "53", "BG" } },
             { "SATCL", new [] { "BTT", "ENG", "RT1", "RT2", "BG" } },
             { "C/AL", new [] { "15", "4", "7" } },
-            { "F/CL", new[] { "4", "6" , "752", "775", "997"} },
-            { "CATML-SIMI", new[] { "6" , "997", "1014", "1015", "1016", "1054"} }
+            { "F/CL", new[] { "4", "6" , "15", "25", "ENG"} },
+            { "CATML-SIMI", new[] { "6" , "997", "1014", "1015", "1016", "1054"} },
+            { "ATPL(A)", new[] { "1", "4", "BG", "5", "ENG", "6", "7" } },
+            { "ATPL(H)", new[] { "ENG", "4", "1" } },
+            { "CPL(A)", new[] { "ENG", "4", "5", "7", "6", "1" } },
+            { "CPL(H)", new[] { "ENG", "1", "08", "4" } },
+            { "FDL", new[] { "6", "25", "4" } },
+            { "FEL", new[] { "5", "1", "7", "ENG", "4", "6" } },
+            { "FOL", new[] { "ENG" } },
+            { "PL(FB)", new[] { "6", "7", "ENG" } },
+            { "PL(G)", new[] { "ENG" } },
+            { "PPL(A)", new[] { "6", "ENG", "1", "5", "4" } },
+            { "PPL(H)", new[] { "ENG", "1", "4" } },
+            { "PPL(SA)", new[] { "ENG", "5", "4", "1", "6" } }
         };
 
         private static Dictionary<string, object> licencePrivilege = new Dictionary<string, object>()
         {
+            {
+                "dateValid",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Това удостоверение е валидно до: {0}",
+                    NAME_TRANS = "1. This licence is to be re-issued not later than: {0}"
+                }
+            },
+            {
+                "12typeVS",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство за правоспособност има право да изпълнява полети като борден съпроводител на пътници на посочените в раздел XII типове ВС.",
+                    NAME_TRANS = "2. The holder of this licence shall be exercised only if the holder has a valid medical certificate for the required privilege only."
+                }
+            },
+            {
+                "ATPL(A)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на свидетелство за правоспособност ATPL(A) има право да:",
+                    NAME_TRANS = "2. The holder of ATPL(A) is entitled to:"
+                }
+            },
+            {
+                "ATPL(H)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на свидетество за правоспособност ATPL(H) има право да:",
+                    NAME_TRANS = "2. The holder of the ATPL(H) is entitled to:"
+                }
+            },
+            {
+                "CPL(A)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of the CPL(A) is entitled to:"
+                }
+            },
+            {
+                "CPL(H)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of the CPL(H) is entitled to: "
+                }
+            },
+            {
+                "FDL",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на свидетелство за правоспособност FDL може да изпълнява функциите на полетен диспечер в АО за типовете ВС, за които е прибодил квалификационен клас.",
+                    NAME_TRANS = "2. The holder of the FАL may be perform the functions of an airline Flight Dispetcher operating the type(s) of aircraft, for which he has a type rating course attained. "
+                }
+            },
+            {
+                "F/EL",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на свидетелство за правоспособност F/EL може да изпълнява функциите на борден инжене в състава на екипажа на типовете ВС, за които е прибодил квалификационен клас.",
+                    NAME_TRANS = "2. The holder of the F/EL may be perform the functions of a Flight Engineer as a flight crew member, operating the type(s) of aircraft, for which he has a type rating course attained."
+                }
+            },
+            {
+                "F/OL",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на свидетелство за правоспособност F/OL може да изпълнява функциите на борден оператор в състава на екипажа на типовете ВС, за които е придобил квалификационен клас.",
+                    NAME_TRANS = "2. The holder of the F/OL may perform the functions of a Flight Operator as a flight crew member, operating the type(s) of aircraft, for which he has a type rating course attained."
+                }
+            },
+            {
+                "PL(FB)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да изпълнява полети с балони по правилата за взиуални полети през деня.",
+                    NAME_TRANS = "2. The holder of the PL(FB) is entitled to operate VFR baloon flights during only. "
+                }
+            },
+            {
+                "PL(G)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of the PL(G) is entitled to:"
+                }
+            },
+            {
+                "PPL(A)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of the PPL(A) is entitled to:"
+                }
+            },
+            {
+                "PPL(H)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of the PPL(H) is entitled to:"
+                }
+            },
+            {
+                "PPL(SA)",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да:",
+                    NAME_TRANS = "2. The holder of hte PPL(SA) is entitled to:"
+                }
+            },
+            {
+                "PPL(A)/CPL(A)/IR(A)",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. упражнява правата, давани от PPL(A), CPL(A) и квалификационен клас IR(A);",
+                    NAME_TRANS = "2a. exercise the rights granted by hte PPL(A), CPL(A) and IR(A);"
+                }
+            },
+            {
+                "PPL(H)/CPL(H)/IR(H)",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. упражнява правата, давани от PPL(H), CPL(H) и квалификационен клас IR(H);",
+                    NAME_TRANS = "2a. exercise the rights granted by the PPL(H), CPL(H) and IR(H);"
+                }
+            },
+            {
+                "PPL(A)2",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. упражнява правата, на притежател на PPL(A),",
+                    NAME_TRANS = "2a. exercise the privileges of the holder of a PPL(A);"
+                }
+            },
+            {
+                "PPL(H)2",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. упражнява правата, на притежател на PPL(H);",
+                    NAME_TRANS = "2a. exercise all the privileges of the holder of a PPL(H);"
+                }
+            },
+            {
+                "VFR",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. изпълнява без възнаграждение нетърговски полети на малки ВС по правилата за визуални полети през деня и при спазване на следните ограничения:",
+                    NAME_TRANS = "2a. operate with no renumeration non-commercial flights on small aircraft according VFR, during day-light and comply with the following restrictions:"
+                }
+            },
+            {
+                "VFRXII",
+                new
+                {
+                    NO = 210,
+                    NAME_BG = "2а. изпълнява без възнаграждение като КВС или втори пилот нетърговски полети по правилата за визуални полети през деня за самолетите посочени в раздел XII.",
+                    NAME_TRANS = "2a. act, but not for renumaration non-commercial flights as a pilot-in-command or a co-pilot on aircraft according VFR, during day-light of aeroplane types entered in sextion XII."
+                }
+            },
+            {
+                "noPoW",
+                new
+                {
+                    NO = 211,
+                    NAME_BG = "- не може да извършва полети над населени места и водни басейни.",
+                    NAME_TRANS = "- does not have the right to operate flights over populated areas and aquatic territories."
+                }
+            },
+            {
+                "PIC/CO-com",
+                new
+                {
+                    NO = 220,
+                    NAME_BG = "2б. действа като КВС или втори пилот на самолети при полети за търговски въздушни превози;",
+                    NAME_TRANS = "2b. act as a pilot-in-comand or as a co-pilot of aircraft, operating commercial air transport flights;"
+                }
+            },
+            {
+                "PIC/CO",
+                new
+                {
+                    NO = 220,
+                    NAME_BG = "2б. действа като КВС или втори пилот на самолети, при изпълнение на полети, различни от търговски въздушен превоз;",
+                    NAME_TRANS = "2b. to act as a pilot-in-command or co-piloti in any aeroplane engaged in operations other than commercial air transportation;"
+                }
+            },
+            {
+                "PIC",
+                new
+                {
+                    NO = 230,
+                    NAME_BG = "2в. действа като КВС на еднопилотни самолети, при изпълнение на полети за търговски въздушен превоз;",
+                    NAME_TRANS = "2c. to act as a pilot-in-command in commercial air transportation in aeroplanes certificated for single-pilot operation;"
+                }
+            },
+            {
+                "PIC-heli",
+                new
+                {
+                    NO = 230,
+                    NAME_BG = "2в. действа като КВС на еднопилотни вертолети, при изпълнение на полети за търговски въздушен превоз;",
+                    NAME_TRANS = "2c. to act as pilot-in-command in commercial air transportation in helicopters certificated for single-pilot operation;"
+                }
+            },
+            {
+                "CO",
+                new
+                {
+                    NO = 240,
+                    NAME_BG = "2г. действа като втори пилот на многопилотни самолети при полети за търговски въздушен превоз;",
+                    NAME_TRANS = "2d. to act as a co-pilot in commercial air transportation."
+                }
+            },
+            {
+                "CO-heli",
+                new
+                {
+                    NO = 240,
+                    NAME_BG = "2г. действа като втори пилот на многопилотни вертолети при полети за търговски въздушен превоз. ",
+                    NAME_TRANS = "2d. to act as co-pilot in commercial air transportation."
+                }
+            },
+            {
+                "medCert2",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "3. Притежателят на това свидетелство трябва да има валидно свидетелство за медицинска годност от клас, съответстващ на упражняваното право.",
+                    NAME_TRANS = "3. The privileges of this licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
+                }
+            },
+            {
+                "PL(FB)-noPoW",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "3. Притежателят на това свидетелство няма право да извършва полети над населени места и водни басейни.",
+                    NAME_TRANS = "3. The holder of this PL(FB) does not have the right to operate flights over populated areas and over water."
+                }
+            },
+            {
+                "medCertClass2",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "3. Притежателят на това свидетелство трябва да има валидно свидетелство за медицинска годност най-малко втори клас.",
+                    NAME_TRANS = "3. The privileges of hte licence shall be exercised only if the holder has a current Class 2 Medical Certificate."
+                }
+            },
+            {
+                "idDoc",
+                new
+                {
+                    NO = 400,
+                    NAME_BG = "4. Притежателят на това удостоверение се легитимира с документ за самоличност.",
+                    NAME_TRANS = "4. A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
+            {
+                "medCert3",
+                new
+                {
+                    NO = 400,
+                    NAME_BG = "4. Притежателят на това свидетелство трябва да има валидно свидетелство за медицинска годност от клас, съответстващ на упражняваното право.",
+                    NAME_TRANS = "4. The privileges of this licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
+                }
+            },
+            {
+                "idDoc2",
+                new
+                {
+                    NO = 500,
+                    NAME_BG = "5. Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "5. A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
+
+
             {
                 "coordinatorSimi1",
                 new
@@ -126,14 +437,6 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
-                "medCert2",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство трябва да има валидно свидетелство за медицинска годност от клас, съответстващ на упражняваното право.",
-                    NAME_TRANS = "The privileges of this licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
-                }
-            },
-            {
                 "medCertClass1or2",
                 new
                 {
@@ -158,27 +461,11 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
-                "dateValid",
-                new
-                {
-                    NAME_BG = "Това удостоверение е валидно до: {0}",
-                    NAME_TRANS = "This licence is to be re-issued not later than: {0}"
-                }
-            },
-            {
                 "instr",
                 new
                 {
                     NAME_BG = "Притежателят на това удостоверение не трябва да лети сам, освен ако не е упълномощен от инструктор.",
                     NAME_TRANS = "The holder of this licence shall not fly solo unless authorised by a Flight Instructor"
-                }
-            },
-            {
-                "idDoc",
-                new
-                {
-                    NAME_BG = "Притежателят на това удостоверение се легитимира с документ за самоличност.",
-                    NAME_TRANS = "A legal identification document has to be carried for the purpose of identification of the licence holder."
                 }
             },
             {
