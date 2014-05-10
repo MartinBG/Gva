@@ -6,7 +6,7 @@
         <sc-button btn-click="cancel()" text="aircrafts.newRegWizzard.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
-        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegister"
+        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegMark"
           class="btn btn-default btn-xs" icon="glyphicon-chevron-left">
         </sc-button>
         <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button" ng-if="currentStep !== steps.regMarkInUse">
@@ -22,14 +22,14 @@
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.register"></label>
             <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="currentStep !== steps.chooseRegister"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="true"></sc-nomenclature>
           </div>
-          <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber" ng-if="currentStep !== steps.chooseRegister">
+          <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.actNumber"></label>
             <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
             <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-int>
           </div>
-          <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark" ng-if="[steps.chooseRegister, steps.chooseRegNumber].indexOf(currentStep) < 0">
+          <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
             <sc-validation-error field-name="regMark" validations="{required: null}"></sc-validation-error>
             <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegMark"></sc-text>
