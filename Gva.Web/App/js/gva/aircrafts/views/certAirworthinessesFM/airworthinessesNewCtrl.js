@@ -44,7 +44,11 @@
       function ($stateParams) {
         return {
           part: {
-            lotId: $stateParams.id
+            lotId: $stateParams.id,
+            reviews: [{
+              amendment1: null,
+              amendment2: null
+            }]
           },
           files: []
         };

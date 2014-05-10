@@ -209,7 +209,8 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftParts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
@@ -286,7 +287,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
@@ -314,7 +314,8 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftParts$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances$)}")]
+         Route(@"{lotId}/{*path:regex(^maintenances$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
@@ -344,7 +345,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly$)}"),

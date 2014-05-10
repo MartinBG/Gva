@@ -64,7 +64,8 @@
     aircraftCertRegistration: function () {
       return {
         part: {
-          removal: null
+          removal: null,
+          isActive: true
         },
         files: []
       };

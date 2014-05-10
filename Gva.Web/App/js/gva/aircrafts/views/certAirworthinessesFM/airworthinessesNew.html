@@ -14,8 +14,10 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-fm>
-
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>
+  </div>
+  <div ng-show="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
+    <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.review" style="margin-top:10px;"></h5>
+    <gva-airworthiness-review name="airworthinessReviewForm" ng-model="aw.part.reviews[0]"></gva-airworthiness-review>
   </div>
 </ng-form>

@@ -162,6 +162,14 @@
       templateUrl: 'gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaAirworthinessAmendment',
+      templateUrl: 'gva/aircrafts/forms/aircraftAirworthinessAmendment.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirworthinessReview',
+      templateUrl: 'gva/aircrafts/forms/aircraftAirworthinessReview.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaAircraftCertPermit',
       templateUrl: 'gva/aircrafts/forms/aircraftCertPermitToFly.html'
     });

@@ -97,6 +97,14 @@ GO
 --:r $(rootPath)\"..\Insert\Noms\removalReasons.sql"
 
 ---------------------------------------------------------------
+-- Aircrafts test noms
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Noms\easaTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\airworthinessCertificateTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\airworthinessReviewTypes.sql"
+
+---------------------------------------------------------------
 -- Organizations test noms
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\Noms\disparityLevels.sql"

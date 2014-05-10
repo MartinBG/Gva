@@ -229,8 +229,9 @@
     <Content Include="App\js\ems\docs\recources\docWorkflow.js" />
     <Content Include="App\js\ems\docs\views\caseSelect.html" />
     <Content Include="App\js\ems\docs\views\caseSelectCtrl.js" />
-    <Content Include="App\js\ems\docs\views\docsCorrNewCtrl.js" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertNoiseDataFM.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftAirworthinessAmendment.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftAirworthinessReview.html" />
     <Content Include="App\js\gva\applications\views\docsLinkApp.html" />
     <Content Include="App\js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />

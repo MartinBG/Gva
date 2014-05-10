@@ -3,7 +3,7 @@
     <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCertificateType">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType"></label>
       <sc-validation-error field-name="aircraftCertificateType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" ng-required="true" alias="'aircraftCertificateTypes'" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
   </div>
 
@@ -25,21 +25,19 @@
       <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="validToDate" ng-show="model.aircraftCertificateType.code !== 'AC'">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
-      <sc-validation-error field-name="validToDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.validToDate" name="validToDate" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
   </div>
 
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" ng-show="model.aircraftCertificateType.code === 'AW'">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
-      <sc-nomenclature ng-model="model.organzation" name="organzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
     <div class="form-group col-md-4 col-sm-8">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
       <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row" ng-hide="hideApplications">
+    <div class="form-group col-sm-10 col-md-4">
+      <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
+      <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="readonly"></gva-applications>
     </div>
   </div>
 
@@ -53,101 +51,4 @@
       <sc-date ng-model="model.incomingDocDate" name="incomingDocDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>
-
-  <accordion ng-show="model.aircraftCertificateType.code === 'AV' || model.aircraftCertificateType.code === 'AW'">
-    <accordion-group style="margin-top: 5px;">
-      <accordion-heading>
-        <a l10n-text="aircrafts.airworthinessFMDirective.firstAmmendment" style="font-size: 12px;"></a>
-      </accordion-heading>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
-          <sc-date ng-model="model.firstAmmendment.issueDate" name="firstAmmendmentIssueDate" ng-readonly="readonly"></sc-date>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
-          <sc-date ng-model="model.firstAmmendment.validToDate" name="firstAmmendmentValidToDate" ng-readonly="readonly"></sc-date>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
-          <sc-nomenclature ng-model="model.firstAmmendment.organzation" name="firstAmmendmentOrganzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
-          <sc-nomenclature ng-model="model.firstAmmendment.inspector" name="firstAmmendmentInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-        </div>
-      </div>
-    </accordion-group>
-  </accordion>
-
-  <accordion ng-show="model.aircraftCertificateType.code === 'AV' || model.aircraftCertificateType.code === 'AW'">
-    <accordion-group style="margin-top: 5px;">
-      <accordion-heading>
-        <a l10n-text="aircrafts.airworthinessFMDirective.secondAmmendment" style="font-size: 12px;"></a>
-      </accordion-heading>
-      <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
-          <sc-date ng-model="model.secondAmmendment.issueDate" name="secondAmmendmentIssueDate" ng-readonly="readonly"></sc-date>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
-          <sc-date ng-model="model.secondAmmendment.validToDate" name="secondAmmendmentValidToDate"  ng-readonly="readonly"></sc-date>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
-          <sc-nomenclature ng-model="model.secondAmmendment.organzation" name="secondAmmendmentOrganzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
-        </div>
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
-          <sc-nomenclature ng-model="model.secondAmmendment.inspector" name="secondAmmendmentInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-        </div>
-      </div>
-    </accordion-group>
-  </accordion>
-
-  <accordion ng-show="model.aircraftCertificateType.code === 'AE'">
-    <accordion-group style="margin-top: 5px;">
-      <accordion-heading>
-        <a l10n-text="aircrafts.airworthinessFMDirective.export" style="font-size: 12px;"></a>
-      </accordion-heading>
-      <div class="row">
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.contry"></label>
-          <sc-nomenclature ng-model="model.export.contry" name="contry" alias="'countries'" ng-readonly="readonly"></sc-nomenclature>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.exceptions"></label>
-          <sc-textarea rows="2" ng-model="model.export.exceptions" name="exceptions" ng-readonly="readonly"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.exceptionsAlt"></label>
-          <sc-textarea rows="2" ng-model="model.export.exceptionsAlt" name="exceptionsAlt" ng-readonly="readonly"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.special"></label>
-          <sc-textarea rows="2" ng-model="model.export.special" name="special" ng-readonly="readonly"></sc-textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.specialAlt"></label>
-          <sc-textarea rows="2" ng-model="model.export.specialAlt" name="specialAlt" ng-readonly="readonly"></sc-textarea>
-        </div>
-      </div>
-    </accordion-group>
-  </accordion>
-
-
 </ng-form>

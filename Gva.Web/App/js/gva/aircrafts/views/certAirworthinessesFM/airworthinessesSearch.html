@@ -3,6 +3,8 @@
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="editBtn" btn-click="editCertAirworthiness(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
+  <sc-column data="part.aircraftCertificateType.name" title="aircrafts.airworthinessFMSearch.aircraftCertificateType">
+  </sc-column>
   <sc-column data="part.issueDate" title="aircrafts.airworthinessFMSearch.issueDate" type="date">
   </sc-column>
   <sc-column data="part.validFromDate" title="aircrafts.airworthinessFMSearch.validFromDate" type="date">
@@ -14,22 +16,5 @@
   <sc-column data="part.incomingDocNumber" title="aircrafts.airworthinessFMSearch.incomingDocNumber">
   </sc-column>
   <sc-column data="part.incomingDocDate" title="aircrafts.airworthinessFMSearch.incomingDocDate" type="date">
-  </sc-column>
-  <sc-column data="part.EASA25IssueDate" title="aircrafts.airworthinessFMSearch.EASA25IssueDate" type="date">
-  </sc-column>
-  <sc-column data="part.EASA24IssueDate" title="aircrafts.airworthinessFMSearch.EASA24IssueDate" type="date">
-  </sc-column>
-  <sc-column data="part.EASA15IssueDate" title="aircrafts.airworthinessFMSearch.EASA15IssueDate" type="date">
-  </sc-column>
-  <sc-column data="part.EASA15IssueRefNo" title="aircrafts.airworthinessFMSearch.EASA15IssueRefNo">
-  </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="aircrafts.airworthinessFMSearch.bookPageNumber" width="50px">
-  </sc-column>
-  <sc-column data="files[0].pageCount" title="aircrafts.airworthinessFMSearch.pageCount" width="50px">
-  </sc-column>
-  <sc-column sortable="false" title="aircrafts.airworthinessFMSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
   </sc-column>
 </sc-datatable>

@@ -1,0 +1,29 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-md-4 col-sm-8" sc-has-error="airworthinessReviewType">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.airworthinessReviewType"></label>
+      <sc-validation-error field-name="airworthinessReviewType" validations="{required: null}"></sc-validation-error>
+      <sc-nomenclature ng-model="model.airworthinessReviewType" name="airworthinessReviewType" ng-required="true" alias="'airworthinessReviewTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
+      <sc-date ng-model="model.issueDate" name="issueDate" ng-readonly="readonly"></sc-date>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
+      <sc-date ng-model="model.validToDate" name="validToDate"  ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
+      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-md-2 col-sm-4">
+      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.number"></label>
+      <sc-text ng-model="model.number" name="number" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+</ng-form>

@@ -956,6 +956,7 @@
           inspector: 'Заверил инспектор',
           incomingDocNumber: 'Вх. номер ГВА',
           incomingDocDate: 'Дата',
+          aircraftCertificateType: 'Тип сертификат',
           EASA25IssueDate: 'EASA Form 25',
           EASA24IssueDate: 'EASA Form 24',
           EASA24IssueValidToDate: 'EASA Form 24 Valid',
@@ -977,7 +978,22 @@
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
-          deleteAirworthiness: 'Изтрий'
+          deleteLastReview: 'Изтрий',
+          deleteAirworthiness: 'Изтрий',
+          review: 'Преглед',
+          newReview: 'Нов преглед',
+          amendment1: 'Първо продължаване на срока',
+          amendment2: 'Второ продължаване на срока',
+          from: 'Валидно от',
+          to: 'Валидно до',
+          inspector: 'Инспектор',
+          amendment1From: '1-во продължение от',
+          amendment1To: '1-во продължение до',
+          amendment2From: '2-ро продължение от',
+          amendment2To: '2-ро продължение до',
+          reviews: 'Прегледи',
+          airworthinessReviewType: 'Тип',
+          issueDate: 'Издадено на'
         },
         permitSearch: {
           issuePlace: 'Място на издаване',
@@ -1253,7 +1269,10 @@
           specialAlt: 'Специални изисквания (англ.)',
           organzation: 'Организация',
           firstAmmendment: '1-во продължение на преглед на ЛГ',
-          secondAmmendment: '2-ро продължение на преглед на ЛГ'
+          secondAmmendment: '2-ро продължение на преглед на ЛГ',
+          aircraftCertificationType: 'Тип',
+          airworthinessReviewType: 'Тип',
+          number: 'Номер'
         },
         permitDirective: {
           issuePlace: 'Място на издаване',

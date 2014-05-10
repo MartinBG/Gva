@@ -15,8 +15,54 @@
     $scope.aw = aircraftCertAirworthiness;
     $scope.editMode = null;
 
+    $scope.$watch('aw.part.reviews | last', function (lastReview) {
+      $scope.currentReview = lastReview;
+      $scope.lastReview = lastReview;
+    });
+
+    $scope.selectReview = function (item) {
+      $scope.currentReview = item;
+    };
+
+    $scope.newReview = function () {
+      $scope.aw.part.reviews.push({
+        amendment1: null,
+        amendment2: null
+      });
+
+      $scope.editMode = 'editReview';
+    };
+
+    $scope.editLastReview = function () {
+      $scope.editMode = 'editReview';
+    };
+
+    $scope.deleteLastReview = function () {
+      $scope.aw.part.reviews.pop();
+      return AircraftCertAirworthinessFM.save(
+        { id: $stateParams.id, ind: $stateParams.ind },
+        $scope.aw
+      )
+      .$promise.then(function () {
+        originalAirworthiness = _.cloneDeep($scope.aw);
+      });
+    };
+    
+
+    $scope.deleteAirworthiness = function () {
+      return AircraftCertAirworthinessFM
+        .remove({ id: $stateParams.id, ind: $stateParams.ind })
+        .$promise.then(function () {
+          return $state.go('root.aircrafts.view.airworthinessesFM.search');
+        });
+    };
+
     $scope.edit = function () {
       $scope.editMode = 'edit';
+    };
+
+    $scope.editReview = function () {
+      $scope.editMode = 'editReview';
     };
 
     $scope.cancel = function () {
@@ -36,15 +82,6 @@
             });
         }
       });
-    };
-
-    $scope.deleteAirworthiness = function () {
-      return AircraftCertAirworthinessFM.remove({
-        id: $stateParams.id,
-        ind: aircraftCertAirworthiness.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.airworthinessesFM.search');
-        });
     };
   }
 

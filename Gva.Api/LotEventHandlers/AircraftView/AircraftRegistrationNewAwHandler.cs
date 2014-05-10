@@ -5,12 +5,16 @@ using Common.Json;
 using Gva.Api.Models;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
+using Gva.Api.Repositories.AircraftRepository;
 
 namespace Gva.Api.LotEventHandlers.AircraftView
 {
     public class AircraftRegistrationNewAwHandler : CommitEventHandler<GvaViewAircraftRegistration>
     {
-        public AircraftRegistrationNewAwHandler(IUnitOfWork unitOfWork)
+        private IAircraftRegistrationAwRepository aircraftRegistrationAwRepository;
+
+        public AircraftRegistrationNewAwHandler(IUnitOfWork unitOfWork,
+            IAircraftRegistrationAwRepository aircraftRegistrationAwRepository)
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Aircraft",
@@ -22,6 +26,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
                 },
                 isPrincipal: false)
         {
+            this.aircraftRegistrationAwRepository = aircraftRegistrationAwRepository;
         }
 
         public override void Fill(GvaViewAircraftRegistration reg, PartVersion part)
@@ -31,7 +36,9 @@ namespace Gva.Api.LotEventHandlers.AircraftView
 
         public override void Clear(GvaViewAircraftRegistration reg)
         {
-            throw new NotSupportedException();
+            var aw = this.aircraftRegistrationAwRepository.GetLastAw(reg.Lot.LotId);
+
+            reg.CertAirworthinessId = aw.LotPartId;
         }
     }
 }
