@@ -1,7 +1,7 @@
 ﻿// Usage: <sc-search selected-filters="" btn-classes=""></sc-search>
 
-/*globals angular, _*/
-(function (angular, _) {
+/*globals angular, _, $*/
+(function (angular, _, $) {
   'use strict';
 
   function SearchDirective($timeout) {
@@ -103,4 +103,4 @@
   SearchDirective.inject = ['$timeout'];
 
   angular.module('scaffolding').directive('scSearch', SearchDirective);
-}(angular, _));
+}(angular, _, $));

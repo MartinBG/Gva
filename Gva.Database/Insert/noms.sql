@@ -180,3 +180,23 @@ INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (92, N'Кредитори�
 GO
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (93, N'Категории ВС(Fm)', N'aircraftCategoriesFm')
 GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (94, N'Регистър ВС', N'registers')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (95, N'Номенклатура типове лин', N'linTypes')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (96, N'Номенклатура Оценка от писмен изпити', N'testScores')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (97, N'Номенклатура Въздухоплавателни услуги', N'aircarrierServices')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (98, N'Тип съоръжение', N'equipmentTypes')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (99, N'Производител', N'equipmentProducers')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (100, N'Статут на част', N'commonQuestions')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (101, N'Нива на несъответстие', N'disparityLevels')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (102, N'Номер на част от доклад номенклатура', N'recommendationPartNumbers')
+GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (103, N'Статут на част', N'specializedQuestions')
+GO
