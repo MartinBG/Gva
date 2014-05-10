@@ -116,6 +116,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ForeignLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<Convoy>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ControllerLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<CAL03year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }
