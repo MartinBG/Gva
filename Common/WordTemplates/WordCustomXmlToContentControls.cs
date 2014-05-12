@@ -37,6 +37,7 @@ namespace Common.WordTemplates
             {
                 MainDocumentPart main = doc.MainDocumentPart;
                 var customXmlElements = main.Document.Descendants<CustomXmlElement>().Where(cb => !cb.Descendants<CustomXmlElement>().Any()).ToList();
+
                 foreach (var customXmlElement in customXmlElements)
                 {
                     string elementXmlPath = String.Concat(customXmlElement.Ancestors<CustomXmlElement>().Select(ce => ce.GetAttribute("element", customXmlElement.NamespaceUri).Value + "/").ToArray().Reverse()),
@@ -74,14 +75,6 @@ namespace Common.WordTemplates
                         SdtContentRow sdtContent = new SdtContentRow();
                         TransferChildElements(customXmlElement, sdtContent);
                         newElement = new SdtRow(sdtPr, sdtContent);
-
-                        foreach (var tableCell in newElement.Descendants<TableCell>().ToList())
-                        {
-                            if (tableCell.GetFirstChild<Paragraph>() == null)
-                            {
-                                tableCell.Append(new Paragraph());
-                            }
-                        }
                     }
                     else if (customXmlElement.GetType() == typeof(CustomXmlCell))
                     {

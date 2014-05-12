@@ -117,6 +117,10 @@ namespace Common.WordTemplates
                         }
                     }
 
+                    if(!context.Any()){
+                        sdtElement.Parent.Append(new Paragraph());
+                    }
+
                     sdtElement.Remove();
                 }
                 else
