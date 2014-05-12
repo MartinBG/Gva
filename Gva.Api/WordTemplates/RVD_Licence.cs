@@ -206,7 +206,7 @@ namespace Gva.Api.WordTemplates
             {
                 LicenceDictionary.LicencePrivilege["ATSM1"],
                 LicenceDictionary.LicencePrivilege["ATSM2"],
-                LicenceDictionary.LicencePrivilege["ATSM3"]
+                LicenceDictionary.LicencePrivilege["requiresLegalID"]
             };
         }
 

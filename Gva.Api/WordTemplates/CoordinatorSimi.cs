@@ -104,6 +104,8 @@ namespace Gva.Api.WordTemplates
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
 
+            List<dynamic> licencePrivileges = this.GetLicencePrivileges();
+
             var json = new
             {
                 root = new
@@ -116,8 +118,8 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_TYPE_CA_CODE2 = licenceCodeCa,
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    L_LICENCE_PRIV = this.GetLicencePrivilegesBG(licence),
-                    L_LICENCE_PRIV_TRANS = this.GetLicencePrivilegesAlt(licence),
+                    L_LICENCE_PRIV = licencePrivileges.Select(p => p.NAME_BG),
+                    L_LICENCE_PRIV_TRANS = licencePrivileges.Select(p => p.NAME_TRANS),
                     ENDORSEMENT = endorsements,
                     L_ENDORSEMENT = lEndorsements,
                     L_LANG_LEVEL = lLangLevel,
@@ -256,17 +258,17 @@ namespace Gva.Api.WordTemplates
             return new[]
             {
                 LicenceDictionary.LicenceAbbreviation["AFIS"],
-                LicenceDictionary.LicenceAbbreviation["SAR"],
                 LicenceDictionary.LicenceAbbreviation["ASM"],
-                LicenceDictionary.LicenceAbbreviation["FIS"],
-                LicenceDictionary.LicenceAbbreviation["FDA"],
                 LicenceDictionary.LicenceAbbreviation["ATFM"],
+                LicenceDictionary.LicenceAbbreviation["FDA"],
+                LicenceDictionary.LicenceAbbreviation["FIS"],
                 LicenceDictionary.LicenceAbbreviation["OJTI"],
+                LicenceDictionary.LicenceAbbreviation["SAR"],
                 LicenceDictionary.LicenceAbbreviation["SIMI"]
             };
         }
 
-        private List<object> GetLicencePrivilegesBG(JObject licence)
+        private List<object> GetLicencePrivileges()
         {
             return new List<object>()
             {
@@ -275,18 +277,6 @@ namespace Gva.Api.WordTemplates
                 LicenceDictionary.LicencePrivilege["coordinatorSimi3"],
                 LicenceDictionary.LicencePrivilege["coordinatorSimi4"],
                 LicenceDictionary.LicencePrivilege["coordinatorSimi5"]
-            };
-        }
-
-        private List<object> GetLicencePrivilegesAlt(JObject licence)
-        {
-            return new List<object>()
-            {
-                LicenceDictionary.LicencePrivilege["coordinatorSimi1Alt"],
-                LicenceDictionary.LicencePrivilege["coordinatorSimi2Alt"],
-                LicenceDictionary.LicencePrivilege["coordinatorSimi3Alt"],
-                LicenceDictionary.LicencePrivilege["coordinatorSimi4Alt"],
-                LicenceDictionary.LicencePrivilege["coordinatorSimi5Alt"]
             };
         }
     }

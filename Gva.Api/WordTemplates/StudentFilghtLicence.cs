@@ -185,7 +185,7 @@ namespace Gva.Api.WordTemplates
         private List<object> GetLicencePrivileges(string licenceTypeCode, JObject edition)
         {
             List<object> privileges;
-            List<object> result = new object[0].ToList();
+            List<dynamic> result = new object[0].ToList();
 
             if (licencePrivileges.TryGetValue(licenceTypeCode, out privileges))
             {
@@ -203,7 +203,9 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            return result;
+            return result
+                .OrderBy(p => p.NO)
+                .ToList<object>();
         }
 
         private object[] GetDocuments(string licenceTypeCode, IEnumerable<JObject> includedTrainings)

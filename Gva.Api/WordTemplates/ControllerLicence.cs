@@ -194,12 +194,7 @@ namespace Gva.Api.WordTemplates
             if (licencePrivileges.TryGetValue(licenceTypeCode, out privileges))
             {
                 return privileges
-                    .Select((p, i) => 
-                        new
-                        {
-                            NAME_BG = string.Format("{0}. {1}", i + 1, p.NAME_BG),
-                            NAME_TRANS = string.Format("{0}. {1}", i + 1, p.NAME_TRANS)
-                        })
+                    .OrderBy(p => p.NO)
                     .ToList<object>();
             }
 

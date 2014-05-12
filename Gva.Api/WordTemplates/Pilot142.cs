@@ -428,21 +428,21 @@ namespace Gva.Api.WordTemplates
         {
             return new List<object>()
                 {
-                    LicenceDictionary.LicenceAbbreviation["TRI"],
+                    LicenceDictionary.LicenceAbbreviation["Aeroplane"],
+                    LicenceDictionary.LicenceAbbreviation["ATPL"],
+                    LicenceDictionary.LicenceAbbreviation["Co-pilot"],
+                    LicenceDictionary.LicenceAbbreviation["CPL"],
+                    LicenceDictionary.LicenceAbbreviation["CRI"],
+                    LicenceDictionary.LicenceAbbreviation["flightInstr"],
                     LicenceDictionary.LicenceAbbreviation["instrumentRating"],
                     LicenceDictionary.LicenceAbbreviation["IRI"],
                     LicenceDictionary.LicenceAbbreviation["MEP"],
                     LicenceDictionary.LicenceAbbreviation["PIC"],
+                    LicenceDictionary.LicenceAbbreviation["PPL"],
                     LicenceDictionary.LicenceAbbreviation["R/T"],
                     LicenceDictionary.LicenceAbbreviation["SEP"],
-                    LicenceDictionary.LicenceAbbreviation["Co-pilot"],
-                    LicenceDictionary.LicenceAbbreviation["Aeroplane"],
-                    LicenceDictionary.LicenceAbbreviation["ATPL"],
-                    LicenceDictionary.LicenceAbbreviation["CPL"],
-                    LicenceDictionary.LicenceAbbreviation["CRI"],
-                    LicenceDictionary.LicenceAbbreviation["flightInstr"],
-                    LicenceDictionary.LicenceAbbreviation["PPL"],
-                    LicenceDictionary.LicenceAbbreviation["TMG"]
+                    LicenceDictionary.LicenceAbbreviation["TMG"],
+                    LicenceDictionary.LicenceAbbreviation["TRI"],
                 };
         }
     }

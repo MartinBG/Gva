@@ -172,32 +172,32 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetLicencePrivileges(string licenceTypeCode, JObject edition)
         {
-            List<object> result = new object[0].ToList();
+            List<dynamic> result = new object[0].ToList();
 
-                if (licenceTypeCode == "PPH" ||
-                    licenceTypeCode == "CPH" ||
-                    licenceTypeCode == "ATPA" ||
-                    licenceTypeCode == "CPA" ||
-                    licenceTypeCode == "ATPH" ||
-                    licenceTypeCode == "PPA")
+            if (licenceTypeCode == "PPH" ||
+                licenceTypeCode == "CPH" ||
+                licenceTypeCode == "ATPA" ||
+                licenceTypeCode == "CPA" ||
+                licenceTypeCode == "ATPH" ||
+                licenceTypeCode == "PPA")
+            {
+                dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid2"];
+                string dateValid = edition.Get<DateTime>("documentDateValidTo").ToString("dd.MM.yyyy");
+
+                result = new List<object>()
                 {
-                    dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid2"];
-                    string dateValid = edition.Get<DateTime>("documentDateValidTo").ToString("dd.MM.yyyy");
+                    LicenceDictionary.LicencePrivilege["validWithMedCert"],
+                    LicenceDictionary.LicencePrivilege["requiresLegalID"]
+                };
 
-                    result = new List<object>()
-                    {
-                        LicenceDictionary.LicencePrivilege["validWithMedCert"],
-                        LicenceDictionary.LicencePrivilege["requiresLegalID"]
-                    };
+                result.Add(new
+                {
+                    NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
+                    NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
+                });
+            }
 
-                    result.Add(new
-                    {
-                        NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
-                    });
-                }
-
-            return result;
+            return result.OrderBy(p => p.NO).ToList<object>();
         }
 
         private List<object> GetOtherLicences(
@@ -426,21 +426,21 @@ namespace Gva.Api.WordTemplates
             {
                 return new List<object>()
                 {
-                    LicenceDictionary.LicenceAbbreviation["TRI"],
+                    LicenceDictionary.LicenceAbbreviation["Aeroplane"],
+                    LicenceDictionary.LicenceAbbreviation["ATPL"],
+                    LicenceDictionary.LicenceAbbreviation["Co-pilot"],
+                    LicenceDictionary.LicenceAbbreviation["CPL"],
+                    LicenceDictionary.LicenceAbbreviation["CRI"],
+                    LicenceDictionary.LicenceAbbreviation["flightInstr"],
                     LicenceDictionary.LicenceAbbreviation["instrumentRating"],
                     LicenceDictionary.LicenceAbbreviation["IRI"],
                     LicenceDictionary.LicenceAbbreviation["MEP"],
                     LicenceDictionary.LicenceAbbreviation["PIC"],
+                    LicenceDictionary.LicenceAbbreviation["PPL"],
                     LicenceDictionary.LicenceAbbreviation["R/T"],
                     LicenceDictionary.LicenceAbbreviation["SEP"],
-                    LicenceDictionary.LicenceAbbreviation["Co-pilot"],
-                    LicenceDictionary.LicenceAbbreviation["Aeroplane"],
-                    LicenceDictionary.LicenceAbbreviation["ATPL"],
-                    LicenceDictionary.LicenceAbbreviation["CPL"],
-                    LicenceDictionary.LicenceAbbreviation["CRI"],
-                    LicenceDictionary.LicenceAbbreviation["flightInstr"],
-                    LicenceDictionary.LicenceAbbreviation["PPL"],
-                    LicenceDictionary.LicenceAbbreviation["TMG"]
+                    LicenceDictionary.LicenceAbbreviation["TMG"],
+                    LicenceDictionary.LicenceAbbreviation["TRI"],
                 };
             }
 

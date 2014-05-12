@@ -35,7 +35,7 @@ namespace Gva.Api.WordTemplates
             { "CATML-SIMI", new[] { "6" , "54", "47A", "48A", "49A", "ENG"} },
             { "PPH", new [] { "ENG" } },
             { "CPH", new [] { "ENG" } },
-            { "ATPA", new [] { "1", "4", "5", "6", "7" } },
+            { "ATPA", new [] { "1", "4", "5", "6", "7", "ENG" } },
             { "ATPH", new [] { "ENG" } },
             { "CPA", new [] { "ENG", "1", "4", "5", "6" } },
             { "PPA", new [] { "ENG" } }
@@ -50,6 +50,150 @@ namespace Gva.Api.WordTemplates
                     NO = 100,
                     NAME_BG = "1. Това удостоверение е валидно до: {0}",
                     NAME_TRANS = "1. This licence is to be re-issued not later than: {0}"
+                }
+            },
+            {
+                "dateValid2",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "Това свидетелство трябва да бъде преиздадено не по-късно от: {0}",
+                    NAME_TRANS = "This licence is to be re-issued not later than: {0}"
+                }
+            },
+            {
+                "ATCLratings",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Притежателят на това свидетелство за правоспособност ATCL е упълномощен да изпълнява функции в органите за ОВД за следните квалификационни класове, за които притежава валидно(и) разрешение(я), както следва:",
+                    NAME_TRANS = "1. The holder is entitled to exercise the functions of the following rating(s) at the air traffic service unit(s) for which current endorsement(s) is/are held as follows:"
+                }
+            },
+            {
+                "medCertClass3",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Към това свидетелство се включва валидно свидетелство за медицинска годност клас 3.",
+                    NAME_TRANS = "1. This licence is subject to the inclusion of a valid medical certificate class 3."
+                }
+            },
+            {
+                "medCert",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Правата на свидетелството се упражняват единствено ако притежателят има валидно медицинско свидетелство за исканото право.",
+                    NAME_TRANS = "1. The privileges of the licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
+                }
+            },
+            {
+                "ATSM1",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Притежателят на това свидетелство за правоспособност ATSML е упълномощен да изпълнява функции по техническо обслужване на средствата за управление на въздушното движение в съответствие с вписаните степени, квалификационни и подквалификационни класове.",
+                    NAME_TRANS = "1. The holder is entitled to exercise the functions of the written rating(s) for which current endorsement(s)."
+                }
+            },
+            {
+                "coordinatorSimi1",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Притежателят на това свидетелство за правоспособност CATML с вписано разрешение SIMI към него може да:",
+                    NAME_TRANS = "1. The holder of this CATML, with registered SIMI endorsementis entitled to:"
+                }
+            },
+            {
+                "coordinatorSimi2",
+                new
+                {
+                    NO = 101,
+                    NAME_BG = "1а. обучава РП в курсове;",
+                    NAME_TRANS = "1a. train in courses air traffic controllers;"
+                }
+            },
+            {
+                "coordinatorSimi3",
+                new
+                {
+                    NO = 102,
+                    NAME_BG = "1б. участва в провеждането на изпити на РП на тренажор;",
+                    NAME_TRANS = "1b. to participle testing in the simulator the air traffic controllers;"
+                }
+            },
+            {
+                "coordinatorSimi4",
+                new
+                {
+                    NO = 103,
+                    NAME_BG = "1в. участва при проверки и оценява компетентността на РП на тренажор;",
+                    NAME_TRANS = "1c. participle in checks and competence assessment of the air traffic controllers in the simulator;"
+                }
+            },
+            {
+                "coordinatorSimi5",
+                new
+                {
+                    NO = 104,
+                    NAME_BG = "1г. Провежда обучение в АУЦ на ученици РП, обучаеми РП и РП с временно прекратена валидност на свидетелство за РП, квалификационен клас и/или разрешение, включително и да им провежда изпити, проверки или да извършва оценяване.",
+                    NAME_TRANS = "1d. carry out training of the air traffic controller-students in the Training Centre and trainee air traffic controllers and the air traffic controllers with temporarily discontinued validity of ATCL, rating and/or endorsement, including the administration of tests, checks or making assessments."
+                }
+            },
+            {
+                "ATSM2",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на ATSML може да упражнява прават, давани от свидетелството и вписаните в него квалификационни и подквалификационни класове, при условие, че през последните 24 месеца има най-малко 6 месеца трудов стаж по съответните квалификационни и подквалификационн класове.",
+                    NAME_TRANS = "2. The holder of the ATSML may exercise the privileges, granted by this licence and the written ratings and subratings, under the condition that during the past 24 months, the holder has exercised the same ratings and subratings for a period of 6 months of service at least."
+                }
+            },
+            {
+                "photo",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Трябва да се носи документ със снимка с цел идентифициране на притежателя на свидетелството за правоспособност.",
+                    NAME_TRANS = "2. A document containing a photo shall be carried for the purposes of identification of the licence holder."
+                }
+            },
+            {
+                "validWithMedCert",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Правата на свидетелството трябва да се упражняват само ако притежателят има валиден медицински сертификат за съответните права.",
+                    NAME_TRANS = "2. The privileges of the licence shall be exercised only if the holder has a valid medical certificate for required privileges."
+                }
+            },
+            {
+                "instr",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това удостоверение не трябва да лети сам, освен ако не е упълномощен от инструктор.",
+                    NAME_TRANS = "2. The holder of this licence shall not fly solo unless authorised by a Flight Instructor"
+                }
+            },
+            {
+                "ATCLstudent",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство е упълномощен да изпълнява функции на ученик-ръководител на полети за придобиване на свидетелство ATCL за следните квалификационни класове.",
+                    NAME_TRANS = "2. The holder of this is entitled to exercise the functions of a student air controller for the purpose of becoming qualified for the grant of an air traffic controller licence in the following rating as dated:"
+                }
+            },
+            {
+                "steward",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство има право да изпълнява полети като стюард/еса на посочените в раздел XII типове ВС.",
+                    NAME_TRANS = "2. The holder of this licence is authorised to act as cabin attendant of aeroplane types entered in section XII."
                 }
             },
             {
@@ -314,6 +458,24 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
+                "medCertClass1or2",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "Притежателят на това удостоверение трябва да има валидно свидетелство за медицинска годност първи или втори клас.",
+                    NAME_TRANS = "The privileges of the licence should be exercised only if the holder has a valid medical certificate for Class 1 or Class 2."
+                }
+            },
+            {
+                "requiresLegalID",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "3. Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "3. A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
+            {
                 "idDoc",
                 new
                 {
@@ -340,188 +502,6 @@ namespace Gva.Api.WordTemplates
                     NAME_TRANS = "5. A legal identification document has to be carried for the purpose of identification of the licence holder."
                 }
             },
-            {
-                "validWithMedCert",
-                new
-                {
-                    NAME_BG = "Правата на свидетелството трябва да се упражняват само ако притежателят има валиден медицински сертификат за съответните права.",
-                    NAME_TRANS = "The privileges of the licence shall be exercised only if the holder has a valid medical certificate for required privileges."
-                }
-            },
-            {
-                "requiresLegalID",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство се легитимира с документ за самоличност.",
-                    NAME_TRANS = "A legal identification document has to be carried for the purpose of identification of the licence holder."
-                }
-            },
-            {
-                "coordinatorSimi1",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство за правоспособност CATML с вписано разрешение SIMI към него може да:"
-                }
-            },
-            {
-                "coordinatorSimi1Alt",
-                new
-                {
-                    NAME_TRANS = "The holder of this CATML, with registered SIMI endorsementis entitled to:"
-                }
-            },
-            {
-                "coordinatorSimi2",
-                new
-                {
-                    NAME_BG = "1. обучава РП в курсове;"
-                }
-            },
-            {
-                "coordinatorSimi2Alt",
-                new
-                {
-                    NAME_TRANS = "1. train in courses air traffic controllers;"
-                }
-            },
-            {
-                "coordinatorSimi3",
-                new
-                {
-                    NAME_BG = "2. участва в провеждането на изпити на РП на тренажор;"
-                }
-            },
-             {
-                "coordinatorSimi3Alt",
-                new
-                {
-                    NAME_TRANS = "2. to participle testing in the simulator the air traffic controllers;"
-                }
-            },
-            {
-                "coordinatorSimi4",
-                new
-                {
-                    NAME_BG = "3. участва при проверки и оценява компетентността на РП на тренажор;"
-                }
-            },
-              {
-                "coordinatorSimi4Alt",
-                new
-                {
-                    NAME_TRANS = "3. participle in checks and competence assessment of the air traffic controllers in the simulator;"
-                }
-            },
-            {
-                "coordinatorSimi5",
-                new
-                {
-                    NAME_BG = "4. Провежда обучение в АУЦ на ученици РП, обучаеми РП и РП с временно прекратена валидност на свидетелство за РП, квалификационен клас и/или разрешение, включително и да им провежда изпити, проверки или да извършва оценяване.",
-                }
-            },
-            {
-                "coordinatorSimi5Alt",
-                new
-                {
-                    NAME_TRANS = "4. carry out training of the air traffic controller-students in the Training Centre and trainee air traffic controllers and the air traffic controllers with temporarily discontinued validity of ATCL, rating and/or endorsement, including the administration of tests, checks or making assessments."
-                }
-            },
-            {
-                "ATSM1",
-                new
-                {
-                    NAME_BG = "1.Притежателят на това свидетелство за правоспособност 1.ATSML е     упълномощен да изпълнява функции по техническо обслужване на средствата за управление на въздушното движение в съответствие с вписаните степени, квалификационни и подквалификационни класове.",
-                    NAME_TRANS = "1.The holder is entitled to exercise the functions of the written rating(s) for which current endorsement(s)."
-                }
-            },
-            {
-                "ATSM2",
-                new
-                {
-                    NAME_BG = "2.Притежателят на ATSML може да упражнява прават, давани от свидетелството и вписаните в него квалификационни и подквалификационни класове, при условие, че през последните 24 месеца има най-малко 6 месеца трудов стаж по съответните квалификационни и подквалификационн класове.",
-                    NAME_TRANS = "2.The holder of the ATSML may exercise the privileges, granted by this licence and the written ratings and subratings, under the condition that during the past 24 months, the holder has exercised the same ratings and subratings for a period of 6 months of service at least."
-                }
-            },
-            {
-                "ATSM3",
-                new
-                {
-                    NAME_BG = "3.Притежателят на това свидетелство се легитимира с документ за самоличност.",
-                    NAME_TRANS = "3.A legal identification document has to be carried for the purpose of identification of the licence holder."
-                }
-            },
-            {
-                "medCert",
-                new
-                {
-                    NAME_BG = "Правата на свидетелството се упражняват единствено ако притежателят има валидно медицинско свидетелство за исканото право.",
-                    NAME_TRANS = "The privileges of the licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
-                }
-            },
-            {
-                "medCertClass1or2",
-                new
-                {
-                    NAME_BG = "Притежателят на това удостоверение трябва да има валидно свидетелство за медицинска годност първи или втори клас.",
-                    NAME_TRANS = "The privileges of the licence should be exercised only if the holder has a valid medical certificate for Class 1 or Class 2."
-                }
-            },
-            {
-                "medCertClass3",
-                new
-                {
-                    NAME_BG = "Към това свидетелство се включва валидно свидетелство за медицинска годност клас 3.",
-                    NAME_TRANS = "This licence is subject to the inclusion of a valid medical certificate class 3."
-                }
-            },
-            {
-                "photo",
-                new
-                {
-                    NAME_BG = "Трябва да се носи документ със снимка с цел идентифициране на притежателя на свидетелството за правоспособност.",
-                    NAME_TRANS = "A document containing a photo shall be carried for the purposes of identification of the licence holder."
-                }
-            },
-            {
-                "dateValid2",
-                new
-                {
-                    NAME_BG = "Това свидетелство трябва да бъде преиздадено не по-късно от: {0}",
-                    NAME_TRANS = "This licence is to be re-issued not later than: {0}"
-                }
-            },
-            {
-                "instr",
-                new
-                {
-                    NAME_BG = "Притежателят на това удостоверение не трябва да лети сам, освен ако не е упълномощен от инструктор.",
-                    NAME_TRANS = "The holder of this licence shall not fly solo unless authorised by a Flight Instructor"
-                }
-            },
-            {
-                "steward",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство има право да изпълнява полети като стюард/еса на посочените в раздел XII типове ВС.",
-                    NAME_TRANS = "The holder of this licence is authorised to act as cabin attendant of aeroplane types entered in section XII."
-                }
-            },
-            {
-                "ATCLratings",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство за правоспособност ATCL е упълномощен да изпълнява функции в органите за ОВД за следните квалификационни класове, за които притежава валидно(и) разрешение(я), както следва:",
-                    NAME_TRANS = "The holder is entitled to exercise the functions of the following rating(s) at the air traffic service unit(s) for which current endorsement(s) is/are held as follows:"
-                }
-            },
-            {
-                "ATCLstudent",
-                new
-                {
-                    NAME_BG = "Притежателят на това свидетелство е упълномощен да изпълнява функции на ученик-ръководител на полети за придобиване на свидетелство ATCL за следните квалификационни класове.",
-                    NAME_TRANS = "The holder of this is entitled to exercise the functions of a student air controller for the purpose of becoming qualified for the grant of an air traffic controller licence in the following rating as dated:"
-                }
-            }
         };
 
         private static Dictionary<string, object> licenceAbbreviation = new Dictionary<string, object>()

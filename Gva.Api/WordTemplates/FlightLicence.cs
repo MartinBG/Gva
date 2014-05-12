@@ -51,7 +51,7 @@ namespace Gva.Api.WordTemplates
                     LicenceDictionary.LicencePrivilege["CPL(A)"],
                     LicenceDictionary.LicencePrivilege["medCert2"],
                     LicenceDictionary.LicencePrivilege["idDoc"],
-                    LicenceDictionary.LicencePrivilege["PPL(A)"],
+                    LicenceDictionary.LicencePrivilege["PPL(A)2"],
                     LicenceDictionary.LicencePrivilege["PIC/CO"],
                     LicenceDictionary.LicencePrivilege["PIC"],
                     LicenceDictionary.LicencePrivilege["CO"]
@@ -64,7 +64,7 @@ namespace Gva.Api.WordTemplates
                     LicenceDictionary.LicencePrivilege["CPL(H)"],
                     LicenceDictionary.LicencePrivilege["medCert2"],
                     LicenceDictionary.LicencePrivilege["idDoc"],
-                    LicenceDictionary.LicencePrivilege["PPL(H)"],
+                    LicenceDictionary.LicencePrivilege["PPL(H)2"],
                     LicenceDictionary.LicencePrivilege["PIC/CO"],
                     LicenceDictionary.LicencePrivilege["PIC-heli"],
                     LicenceDictionary.LicencePrivilege["CO-heli"]

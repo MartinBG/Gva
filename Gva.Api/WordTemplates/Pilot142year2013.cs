@@ -287,10 +287,12 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetLicencePrivileges(JObject licence)
         {
-            List<object> privileges;
+            List<dynamic> privileges;
             if (licencePrivileges.TryGetValue(licence.Get<string>("licenceType.code"), out privileges))
             {
-                return privileges;
+                return privileges
+                    .OrderBy(p => p.NO)
+                    .ToList<object>();
             }
 
             return new object[0].ToList();
