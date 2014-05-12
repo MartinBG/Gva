@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gva.Web.Abbcdn
+namespace Gva.Rio.Abbcdn
 {
     public class AbbcdnStorage : IDisposable
     {

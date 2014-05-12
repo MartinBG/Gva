@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.AppCommunicator", "Gva.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.DocCommunicator", "Gva.DocCommunicator\Gva.DocCommunicator.csproj", "{2EBB9EB5-CFDD-4624-B2F9-6915F37BCD37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.Rio", "Gva.Rio\Gva.Rio.csproj", "{8238B367-2571-4D08-9A2A-5C99EC6B7811}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{2EBB9EB5-CFDD-4624-B2F9-6915F37BCD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EBB9EB5-CFDD-4624-B2F9-6915F37BCD37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EBB9EB5-CFDD-4624-B2F9-6915F37BCD37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8238B367-2571-4D08-9A2A-5C99EC6B7811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8238B367-2571-4D08-9A2A-5C99EC6B7811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8238B367-2571-4D08-9A2A-5C99EC6B7811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8238B367-2571-4D08-9A2A-5C99EC6B7811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

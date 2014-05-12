@@ -21,7 +21,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Regs.Api;
-using Gva.Web.Jobs;
+using Common.Api.Jobs;
+using Gva.Rio;
 
 namespace Gva.Web
 {
@@ -45,7 +46,7 @@ namespace Gva.Web
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new GvaApiModule());
             builder.RegisterModule(new RegsApiModule());
-            builder.RegisterModule(new GvaWebModule());
+            builder.RegisterModule(new GvaRioModule());
             return builder.Build();
         }
 
@@ -125,7 +126,7 @@ namespace Gva.Web
 
             foreach (var job in jobs)
             {
-                job.Start();
+                (new JobHost(job)).Start();
             }
         }
     }

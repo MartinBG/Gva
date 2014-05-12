@@ -1,13 +1,14 @@
 ﻿using Autofac;
-using Gva.Web.Jobs;
+using Gva.Rio.Jobs;
+using Common.Api.Jobs;
 
-namespace Gva.Web
+namespace Gva.Rio
 {
-    public class GvaWebModule : Module
+    public class GvaRioModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
-            if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["EnableIncomingDocumentsJob"]))
+            if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Gva.Rio:EnableIncomingDocumentsJob"]))
             {
                 moduleBuilder.RegisterType<IncomingDocsJob>().As<IJob>().ExternallyOwned();
             }

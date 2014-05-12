@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace Gva.Web.Abbcdn
+namespace Gva.Rio.Abbcdn
 {
     [ServiceContract(Namespace = "http://abbcdn.bg/2013/AbbcdnService/v1")]
     public interface IAbbcdn

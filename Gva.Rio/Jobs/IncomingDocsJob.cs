@@ -8,11 +8,11 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Data.Entity;
-using Gva.Web.Abbcdn;
+using Gva.Rio.Abbcdn;
 using System.Reflection;
 using Gva.Portal.RioObjects;
 using R_0009_000016;
-using Gva.Web.Jobs.Helpers;
+using Gva.Rio.Jobs.Helpers;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using System.Text;
@@ -20,8 +20,6 @@ using Common.Api.UserContext;
 using Common.Utils;
 using Gva.Portal.RioObjects.Enums;
 using Gva.Portal.Components.DocumentSerializer;
-using System.Web.Http.Filters;
-using NLog;
 using Common.Blob;
 using System.ServiceModel;
 using Common.Extensions;
@@ -29,13 +27,14 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Autofac.Features.OwnedInstances;
 using Common.Tests;
+using Common.Api.Jobs;
+using NLog;
 
-namespace Gva.Web.Jobs
+namespace Gva.Rio.Jobs
 {
     public class IncomingDocsJob : IJob
     {
-        private readonly Timer timer;
-        private readonly JobHost jobHost;
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         private Func<Owned<DisposableTuple<IUnitOfWork, IDocRepository, ICorrespondentRepository>>> dependencyFactory;
 
@@ -46,49 +45,28 @@ namespace Gva.Web.Jobs
         private IDocumentSerializer documentSerializer;
         private AbbcdnStorage abbcdnStorage;
 
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-
         public IncomingDocsJob(Func<Owned<DisposableTuple<IUnitOfWork, IDocRepository, ICorrespondentRepository>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
 
             this.documentSerializer = new DocumentSerializerImpl();
             this.abbcdnStorage = new AbbcdnStorage(new ChannelFactory<IAbbcdn>("WSHttpBinding_IAbbcdn"));
-
-            this.timer = new Timer(this.OnTimerElapsed);
-            this.jobHost = new JobHost();
         }
 
-        private void OnTimerElapsed(object sender)
+        public string Name
         {
-            this.jobHost.DoAction(() =>
+            get { return "IncomingDocumentsJob"; }
+        }
+
+        public TimeSpan Period
+        {
+            get
             {
-                if (this.jobHost.IsShuttingDown)
-                    return;
-
-                logger.Info("IncomingDocumentsJob Started.");
-
-                ProcessPendingDocs();
-
-                logger.Info("IncomingDocumentsJob Finished.");
-            });
+                return TimeSpan.FromSeconds(int.Parse(System.Configuration.ConfigurationManager.AppSettings["Gva.Rio:IncomingDocsJobIntervalInSeconds"]));
+            }
         }
 
-        public void Start()
-        {
-            logger.Info("IncomingDocumentsJob Initializing.");
-
-            this.timer.Change(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(int.Parse(System.Configuration.ConfigurationManager.AppSettings["IncomingDocsJobIntervalInSeconds"])));
-        }
-
-        public void Dispose()
-        {
-            this.timer.Dispose();
-
-            logger.Info("IncomingDocumentsJob Disposed.");
-        }
-
-        private void ProcessPendingDocs()
+        public void Action()
         {
             try
             {

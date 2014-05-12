@@ -109,8 +109,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -146,14 +144,6 @@
     <Content Include="App\build\**\*.*" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abbcdn\AbbcdnStorage.cs" />
-    <Compile Include="Abbcdn\IAbbcdn.cs" />
-    <Compile Include="GvaWebModule.cs" />
-    <Compile Include="Jobs\Helpers\DocIdentifierHelper.cs" />
-    <Compile Include="Jobs\Helpers\RioServiceHelper.cs" />
-    <Compile Include="Jobs\IJob.cs" />
-    <Compile Include="Jobs\IncomingDocsJob.cs" />
-    <Compile Include="Jobs\JobHost.cs" />
     <Compile Include="Owin\ContentTypeProvider.cs" />
     <Compile Include="Owin\RerouteExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1450,13 +1440,9 @@
       <Project>{f9afa12d-933e-4c98-b53a-92d603201eda}</Project>
       <Name>Gva.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
-      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
-      <Name>Gva.Portal.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
-      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
-      <Name>Gva.Portal.RioObjects</Name>
+    <ProjectReference Include="..\Gva.Rio\Gva.Rio.csproj">
+      <Project>{8238b367-2571-4d08-9a2a-5c99ec6b7811}</Project>
+      <Name>Gva.Rio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Regs.Api\Regs.Api.csproj">
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>

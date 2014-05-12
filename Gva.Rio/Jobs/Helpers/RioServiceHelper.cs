@@ -15,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gva.Web.Jobs.Helpers
+namespace Gva.Rio.Jobs.Helpers
 {
     public class RioServiceHelper
     {
