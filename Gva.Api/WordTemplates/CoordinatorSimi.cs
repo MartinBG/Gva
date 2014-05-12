@@ -41,7 +41,7 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personAddressPart.Content;
             var licence = lot.GetPart(path).Content;
-            var firstEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
+            var firstEdition = licence.Get<JObject>("editions[0]");
             var lastEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
@@ -99,7 +99,7 @@ namespace Gva.Api.WordTemplates
                         VALID_DATE = r.GetItems<JObject>("editions").Last().Get<DateTime>("documentDateValidTo")
                     });
             var licenceNumber = string.Format(
-                "BGR. {0} - {1} - {2}",
+                "BG {0} - {1} - {2}",
                 licenceType.Code,
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));

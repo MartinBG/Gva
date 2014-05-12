@@ -43,7 +43,7 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personAddressPart.Content;
             var licence = lot.GetPart(path).Content;
-            var firstEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
+            var firstEdition = licence.Get<JObject>("editions[0]");
             var lastEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
@@ -58,7 +58,7 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(includedTrainings, includedExams);
             var licenceCodeCa = JsonConvert.DeserializeObject<JObject>(licenceType.TextContent).Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BGR. {0} - {1} - {2}",
+                "BG {0} - {1} - {2}",
                 licenceType.Code,
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
@@ -81,7 +81,7 @@ namespace Gva.Api.WordTemplates
                     T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_NO = licenceNumber,
                     T_LICENCE_CODE = licenceType.Code,
-                    T_ACTION = firstEdition.Get<string>("licenceAction.name"),
+                    T_ACTION = lastEdition.Get<string>("licenceAction.name"),
                     T_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
                     T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     T_DOCUMENTS = documents,
@@ -171,7 +171,7 @@ namespace Gva.Api.WordTemplates
                                 DOC_TYPE = t.Get<string>("documentType.name"),
                                 DOC_NO = t.Get<string>("documentNumber"),
                                 DATE = t.Get<DateTime>("documentDateValidFrom"),
-                                DOC_PUBLISHER = t.Get<string>("documentPublisher"),
+                                DOC_PUBLISHER = t.Get<string>("documentPublisher")
                             }
                         }
                     }).ToArray<dynamic>();
@@ -189,7 +189,7 @@ namespace Gva.Api.WordTemplates
                                 DOC_TYPE = e.Get<string>("documentType.name"),
                                 DOC_NO = e.Get<string>("documentNumber"),
                                 DATE = e.Get<DateTime>("documentDateValidFrom"),
-                                DOC_PUBLISHER = e.Get<string>("documentPublisher"),
+                                DOC_PUBLISHER = e.Get<string>("documentPublisher")
                             }
                         }
                     }).ToArray<dynamic>();
@@ -206,7 +206,7 @@ namespace Gva.Api.WordTemplates
             {
                 LicenceDictionary.LicencePrivilege["ATSM1"],
                 LicenceDictionary.LicencePrivilege["ATSM2"],
-                LicenceDictionary.LicencePrivilege["ATSM3"],
+                LicenceDictionary.LicencePrivilege["ATSM3"]
             };
         }
 

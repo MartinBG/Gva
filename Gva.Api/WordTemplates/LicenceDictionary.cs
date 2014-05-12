@@ -18,7 +18,6 @@ namespace Gva.Api.WordTemplates
             { "SATCL", new [] { "BTT", "ENG", "RT1", "RT2", "BG" } },
             { "C/AL", new [] { "15", "4", "7" } },
             { "F/CL", new[] { "4", "6" , "15", "25", "ENG"} },
-            { "CATML-SIMI", new[] { "6" , "997", "1014", "1015", "1016", "1054"} },
             { "ATPL(A)", new[] { "1", "4", "BG", "5", "ENG", "6", "7" } },
             { "ATPL(H)", new[] { "ENG", "4", "1" } },
             { "CPL(A)", new[] { "ENG", "4", "5", "7", "6", "1" } },
@@ -30,7 +29,14 @@ namespace Gva.Api.WordTemplates
             { "PL(G)", new[] { "ENG" } },
             { "PPL(A)", new[] { "6", "ENG", "1", "5", "4" } },
             { "PPL(H)", new[] { "ENG", "1", "4" } },
-            { "PPL(SA)", new[] { "ENG", "5", "4", "1", "6" } }
+            { "PPL(SA)", new[] { "ENG", "5", "4", "1", "6" } },
+            { "CATML-SIMI", new[] { "6" , "54", "47A", "48A", "49A", "ENG"} },
+            { "PPH", new [] { "ENG" } },
+            { "CPH", new [] { "ENG" } },
+            { "ATPA", new [] { "1", "4", "5", "6", "7" } },
+            { "ATPH", new [] { "ENG" } },
+            { "CPA", new [] { "ENG", "1", "4", "5", "6" } },
+            { "PPA", new [] { "ENG" } }
         };
 
         private static Dictionary<string, object> licencePrivilege = new Dictionary<string, object>()
@@ -332,8 +338,22 @@ namespace Gva.Api.WordTemplates
                     NAME_TRANS = "5. A legal identification document has to be carried for the purpose of identification of the licence holder."
                 }
             },
-
-
+            {
+                "validWithMedCert",
+                new
+                {
+                    NAME_BG = "Правата на свидетелството трябва да се упражняват само ако притежателят има валиден медицински сертификат за съответните права.",
+                    NAME_TRANS = "The privileges of the licence shall be exercised only if the holder has a valid medical certificate for required privileges."
+                }
+            },
+            {
+                "requiresLegalID",
+                new
+                {
+                    NAME_BG = "Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
             {
                 "coordinatorSimi1",
                 new
@@ -458,6 +478,14 @@ namespace Gva.Api.WordTemplates
                 {
                     NAME_BG = "Трябва да се носи документ със снимка с цел идентифициране на притежателя на свидетелството за правоспособност.",
                     NAME_TRANS = "A document containing a photo shall be carried for the purposes of identification of the licence holder."
+                }
+            },
+            {
+                "dateValid2",
+                new
+                {
+                    NAME_BG = "Това свидетелство трябва да бъде преиздадено не по-късно от: {0}",
+                    NAME_TRANS = "This licence is to be re-issued not later than: {0}"
                 }
             },
             {

@@ -40,17 +40,17 @@ namespace Gva.Api.WordTemplates
              var personAddress = personAddressPart == null ?
                 new JObject() :
                 personAddressPart.Content;
-            var part = lot.GetPart(path);
-            var firstEdition = part.Content.Get<JObject>(string.Format("editions[0]"));
-            var lastEdition = part.Content.Get<JObject>(string.Format("editions[{0}]", index));
+            var licence = lot.GetPart(path).Content;
+            var firstEdition = licence.Get<JObject>("editions[0]");
+            var lastEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
             var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.GetPart("ratings/" + i).Content);
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", part.Content.Get<int>("licenceType.nomValueId"));
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
-                "BGR. {0} - {1} - {2}",
-                part.Content.Get<string>("licenceType.code"),
-                part.Content.Get<string>("licenceNumber"),
+                "BG {0} - {1} - {2}",
+                licence.Get<string>("licenceType.code"),
+                licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
             var personName = string.Format("{0} {1} {2}",
                     personData.Get<string>("firstName"),

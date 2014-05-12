@@ -50,7 +50,7 @@ namespace Gva.Api.WordTemplates
             var nationality = this.nomRepository.GetNomValue("countries", personData.Get<int>("country.nomValueId"));
 
             var refNumber = string.Format(
-                "{0} - {1} - {2}",
+                "BG {0} - {1} - {2}",
                 licenceType.Code,
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
