@@ -44,33 +44,43 @@
                        $scope.model.uin[8] * 6) % 11;
       checkDigit = checkDigit === 10 ? 0 : checkDigit;
 
-      var isValidUin = checkDigit === parseInt($scope.model.uin[9], 10);
+      return checkDigit === parseInt($scope.model.uin[9], 10);
+    };
 
-      if ($scope.model.dateOfBirth) {
-        var dateOfBirth = moment($scope.model.dateOfBirth);
-        var formattedDate;
-        
-        if (dateOfBirth.year() >= 2000 && dateOfBirth.year() < 2100) {
-          formattedDate = dateOfBirth.format('YY') +
-            (dateOfBirth.month() + 41) +
-            dateOfBirth.format('DD');
+    $scope.setAgeSex = function () {
+      if (!/\d{10}/.test($scope.model.uin)) {
+        return;
+      }
+
+      if (!$scope.model.sex) {
+        var sexDigit = parseInt($scope.model.uin[8], 10);
+        if (sexDigit % 2 === 1) {
+          Nomenclature.get({ alias: 'gender', valueAlias: 'Female' })
+            .$promise.then(function (sex) {
+              $scope.model.sex = sex;
+            });
         }
         else {
-          formattedDate = dateOfBirth.format('YYMMDD');
+          Nomenclature.get({ alias: 'gender', valueAlias: 'Male' })
+            .$promise.then(function (sex) {
+              $scope.model.sex = sex;
+            });
         }
-
-        isValidUin = isValidUin && $scope.model.uin.substring(0, 6) === formattedDate;
       }
 
-      if ($scope.model.sex) {
-        var isFemale = $scope.model.sex.alias === 'Female';
-        var sexDigit = parseInt($scope.model.uin[8], 10);
-
-        isValidUin = isValidUin &&
-          (isFemale && sexDigit % 2 === 1 || !isFemale && sexDigit % 2 === 0);
+      if (!$scope.model.dateOfBirth) {
+        var dateOfBirth = $scope.model.uin.substring(0, 6);
+        var monthDigits = parseInt(dateOfBirth.substring(2, 4));
+        if (monthDigits > 13) {
+          monthDigits = monthDigits - 40;
+          monthDigits = monthDigits < 10 ? '0' + monthDigits : monthDigits;
+          dateOfBirth = dateOfBirth.substring(0, 2) + monthDigits + dateOfBirth.substring(4, 6);
+          $scope.model.dateOfBirth = moment('20' + dateOfBirth, 'YYYYMMDD').format();
+        }
+        else {
+          $scope.model.dateOfBirth = moment('19' + dateOfBirth, 'YYYYMMDD').format();
+        }
       }
-
-      return isValidUin;
     };
   }
 

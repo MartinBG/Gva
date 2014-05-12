@@ -56,7 +56,7 @@
     <div class="form-group col-sm-3 col-md-2" sc-has-error="uin">
       <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>
       <sc-validation-error field-name="uin" validations="{validValue: 'errorTexts.uin'}"></sc-validation-error>
-      <sc-text ng-model="model.uin "name="uin" sc-validate="{ validValue: uinValid }" ng-readonly="readonly"></sc-text>
+      <sc-text ng-model="model.uin " name="uin" ng-change="setAgeSex()" sc-validate="{ validValue: uinValid }" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="sex">
       <label class="control-label" l10n-text="persons.personDataDirective.sex"></label>
