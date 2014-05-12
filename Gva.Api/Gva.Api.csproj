@@ -197,6 +197,7 @@
     <Compile Include="WordTemplates\CoordinatorLicence.cs" />
     <Compile Include="WordTemplates\CoordinatorSimi.cs" />
     <Compile Include="WordTemplates\CAL03year2013.cs" />
+    <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\Pilot142.cs" />
     <Compile Include="WordTemplates\Pilot.cs" />
     <Compile Include="WordTemplates\RVD_Licence.cs" />

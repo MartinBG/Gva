@@ -192,6 +192,7 @@ namespace Gva.Api.WordTemplates
 
                 result.Add(new
                 {
+                    NO = dateValidPrivilege.NO,
                     NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
                     NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
                 });

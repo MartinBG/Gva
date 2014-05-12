@@ -408,9 +408,9 @@ namespace Gva.Api.WordTemplates
                 result = new List<object>(privileges);
                 result.Add(new
                 {
+                    NO = dateValidPrivilege.NO,
                     NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                    NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid),
-                    NO = dateValidPrivilege.NO
+                    NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
                 });
             }
 
