@@ -33,6 +33,8 @@ namespace Gva.Api.WordTemplates
             { "PPL(H)", new[] { "ENG", "1", "4" } },
             { "PPL(SA)", new[] { "ENG", "5", "4", "1", "6" } },
             { "CATML-SIMI", new[] { "6" , "54", "47A", "48A", "49A", "ENG"} },
+            { "CATML", new[] { "54", "47A", "48A", "49A", "6" } },
+            { "FDA", new[] { "54", "47A", "48A", "49A", "6" } },
             { "PPH", new [] { "ENG" } },
             { "CPH", new [] { "ENG" } },
             { "ATPA", new [] { "1", "4", "5", "6", "7", "ENG" } },
@@ -98,6 +100,15 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
+                "CATML",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1. Притежателят на това свидетелство за правоспособност CATML с вписано към него разрешение ASM  и/или ATFM, и/или SAR, и/или FIS, и/или AFIS може да упражнява правата по координация и взаимодействие по УВД, а така също и предоставените му специфични права за длъжността, която заема.",
+                    NAME_TRANS = "1. The holder of this CATML which includes the endorsements:ASM, and/or ATFM, and/or SAR, and/or FIs, and/or AFIS is entitled to exercise the rights of ATM coordination and interaction as well as the specific rights related to the position he/she holds."
+                }
+            },
+            {
                 "coordinatorSimi1",
                 new
                 {
@@ -140,6 +151,16 @@ namespace Gva.Api.WordTemplates
                     NO = 104,
                     NAME_BG = "1г. Провежда обучение в АУЦ на ученици РП, обучаеми РП и РП с временно прекратена валидност на свидетелство за РП, квалификационен клас и/или разрешение, включително и да им провежда изпити, проверки или да извършва оценяване.",
                     NAME_TRANS = "1d. carry out training of the air traffic controller-students in the Training Centre and trainee air traffic controllers and the air traffic controllers with temporarily discontinued validity of ATCL, rating and/or endorsement, including the administration of tests, checks or making assessments."
+                }
+            },
+            {
+                "idDoc3",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "2. A legal identification document has to be carried for the purpose of identification of the licence holder."
+
                 }
             },
             {

@@ -237,6 +237,7 @@ namespace Gva.Api.WordTemplates
         private List<object> GetEndorsements2(IEnumerable<JObject> includedRatings)
         {
             return includedRatings
+                .Where(r => r.Get<string>("staffType.alias") == "ovd")
                 .Select(r =>
                 {
                     {
