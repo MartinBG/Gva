@@ -11,14 +11,14 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
 {
-    public class Pilot : IDataGenerator
+    public class Pilot142 : IDataGenerator
     {
         private static string publisherCaaCode = "BG";
 
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
 
-        public Pilot(
+        public Pilot142(
             ILotRepository lotRepository,
             INomRepository nomRepository)
         {
@@ -30,7 +30,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "pilot" };
+                return new string[] { "Pilot142" };
             }
         }
 
@@ -58,12 +58,14 @@ namespace Gva.Api.WordTemplates
 
             var inspectorId = lastEdition.Get<int?>("inspector.nomValueId");
             object[] instructorData = new object[0];
+            object[] examinerData = new object[0];
             if (inspectorId.HasValue)
             {
                 var inspectorRatings = this.lotRepository.GetLotIndex(inspectorId.Value)
                     .GetParts("ratings");
 
                 instructorData = this.GetInstructorData(inspectorRatings);
+                examinerData = this.GetExaminerData(inspectorRatings);
             }
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
@@ -91,12 +93,13 @@ namespace Gva.Api.WordTemplates
                     COUNTRY_CODE = JObject.Parse(nationality.TextContent).Get<string>("nationalityCodeCA"),
                     ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     OTHER_LICENCE = otherLicences,
-                    L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.Code, lastEdition),
+                    L_LICENCE_PRIV = this.GetLicencePrivileges(licence),
                     RTO_NOTES = rtoRating.Get<string>("notes"),
                     RTO_NOTES_EN = rtoRating.Get<string>("notesAlt"),
                     ENG_LEVEL = engLevel,
                     T_RATING = ratings,
                     INSTRUCTOR = instructorData,
+                    EXAMINER = examinerData,
                     T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
@@ -113,6 +116,7 @@ namespace Gva.Api.WordTemplates
                     ENG_LEVEL1 = engLevel,
                     L_RATING = ratings,
                     INSTRUCTOR1 = instructorData,
+                    EXAMINER1 = examinerData,
                     REVAL = new object[0],
                     REVAL2 = new object[0],
                     REVAL3 = new object[0],
@@ -170,34 +174,13 @@ namespace Gva.Api.WordTemplates
             return country;
         }
 
-        private List<object> GetLicencePrivileges(string licenceTypeCode, JObject edition)
+        private List<object> GetLicencePrivileges(JObject licence)
         {
-            List<object> result = new object[0].ToList();
-
-                if (licenceTypeCode == "PPH" ||
-                    licenceTypeCode == "CPH" ||
-                    licenceTypeCode == "ATPA" ||
-                    licenceTypeCode == "CPA" ||
-                    licenceTypeCode == "ATPH" ||
-                    licenceTypeCode == "PPA")
-                {
-                    dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid2"];
-                    string dateValid = edition.Get<DateTime>("documentDateValidTo").ToString("dd.MM.yyyy");
-
-                    result = new List<object>()
-                    {
-                        LicenceDictionary.LicencePrivilege["validWithMedCert"],
-                        LicenceDictionary.LicencePrivilege["requiresLegalID"]
-                    };
-
-                    result.Add(new
-                    {
-                        NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
-                    });
-                }
-
-            return result;
+            return new List<object>()
+            {
+                LicenceDictionary.LicencePrivilege["medCert"],
+                LicenceDictionary.LicencePrivilege["photo"]
+            };
         }
 
         private List<object> GetOtherLicences(
@@ -339,6 +322,32 @@ namespace Gva.Api.WordTemplates
                     }).ToArray<object>();
         }
 
+        private object[] GetExaminerData(IEnumerable<PartVersion> inspectorRatings)
+        {
+            var authorizationGroup = this.nomRepository.GetNomValues("authorizationGroups")
+                .First(nv => nv.Code == "FC");
+
+            return inspectorRatings
+                .Where(
+                    p => p.Content.Get<string>("authorization.code") != "RTO" &&
+                    p.Content.Get<int>("authorization.parentValueId") == authorizationGroup.NomValueId)
+                .Select(p =>
+                    {
+                        var exRatingEdPart = p.Content.GetItems<JObject>("editions").Last();
+
+                        return new
+                        {
+                            TYPE = string.Format(
+                                "{0} {1} {2}",
+                                p.Content.Get<string>("ratingClass.code"),
+                                p.Content.Get<string>("ratingType.code"),
+                                p.Content.Get<string>("authorization.code")).Trim(),
+                            VALID_DATE = exRatingEdPart.Get<DateTime>("documentDateValidFrom"),
+                            AUTH_NOTES = exRatingEdPart.Get<string>("notesAlt")
+                        };
+                    }).ToArray<object>();
+        }
+
         private object GetLicenceHolder(JObject personData, JObject personAddress)
         {
             return new
@@ -417,14 +426,7 @@ namespace Gva.Api.WordTemplates
 
         private IEnumerable<object> GetAbbreviations(string licenceTypeCode)
         {
-            if (licenceTypeCode == "CPH" ||
-                licenceTypeCode == "ATPA" ||
-                licenceTypeCode == "PPH" ||
-                licenceTypeCode == "PPA" ||
-                licenceTypeCode == "CPA" ||
-                licenceTypeCode == "ATPH")
-            {
-                return new List<object>()
+            return new List<object>()
                 {
                     LicenceDictionary.LicenceAbbreviation["TRI"],
                     LicenceDictionary.LicenceAbbreviation["instrumentRating"],
@@ -442,9 +444,6 @@ namespace Gva.Api.WordTemplates
                     LicenceDictionary.LicenceAbbreviation["PPL"],
                     LicenceDictionary.LicenceAbbreviation["TMG"]
                 };
-            }
-
-            return new object[0].ToList();
         }
     }
 }

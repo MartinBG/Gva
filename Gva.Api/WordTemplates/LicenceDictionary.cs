@@ -12,6 +12,8 @@ namespace Gva.Api.WordTemplates
         {
             { "FCL/ATPA", new [] { "BG" } },
             { "FCL/ATPH", new [] { "BG" } },
+            { "FCL/PPA", new [] { "ENG" } },
+            { "FCL/CPH", new [] { "ENG", "BG" } },
             { "FCL/CPA", new [] { "BG" } },
             { "SP(A)", new [] { "3", "4" } },
             { "ATCL", new [] { "ENG", "47A", "48A", "50A", "51A", "52A", "53", "BG" } },
