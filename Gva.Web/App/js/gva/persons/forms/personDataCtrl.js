@@ -70,7 +70,7 @@
 
       if (!$scope.model.dateOfBirth) {
         var dateOfBirth = $scope.model.uin.substring(0, 6);
-        var monthDigits = parseInt(dateOfBirth.substring(2, 4));
+        var monthDigits = parseInt(dateOfBirth.substring(2, 4), 10);
         if (monthDigits > 13) {
           monthDigits = monthDigits - 40;
           monthDigits = monthDigits < 10 ? '0' + monthDigits : monthDigits;
