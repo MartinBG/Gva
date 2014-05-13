@@ -122,6 +122,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<Pilot142>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CoordinatorLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AML>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AML_III>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }

@@ -10,12 +10,12 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
 {
-    public class AMLNational : IDataGenerator
+    public class AML_III : IDataGenerator
     {
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
 
-        public AMLNational(
+        public AML_III(
             ILotRepository lotRepository,
             INomRepository nomRepository)
         {
@@ -27,7 +27,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "AML_national" };
+                return new string[] { "AML_III" };
             }
         }
 
@@ -47,62 +47,92 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.GetPart("ratings/" + i).Content);
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
             var country = this.GetCountry(personAddress);
+            string licenceCode = licence.Get<string>("licenceType.code");
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
-                licence.Get<string>("licenceType.code"),
+                "{0}.{1} - {2}",
+                licenceCode != string.Empty ? licenceCode : "BG",
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
-            var personName = string.Format("{0} {1} {2}",
+            var personNameBG = string.Format("{0} {1} {2}",
                     personData.Get<string>("firstName").ToUpper(),
                     personData.Get<string>("middleName").ToUpper(),
                     personData.Get<string>("lastName").ToUpper());
+            var personNameAlt = string.Format("{0} {1} {2}",
+                    personData.Get<string>("firstNameAlt").ToUpper(),
+                    personData.Get<string>("middleNameAlt").ToUpper(),
+                    personData.Get<string>("lastNameAlt").ToUpper());
+
+            var categoryNP = this.GetCategoryNP(includedRatings);
+
             var json = new
             {
                 root = new
                 {
-                    LICENCE_TYPE = licenceType.Code,
-                    LICENCE_NO = licenceNumber,
-                    PERSON = personName,
-                    PERSON_EN = string.Format("{0} {1} {2}",
-                        personData.Get<string>("firstNameAlt").ToUpper(),
-                        personData.Get<string>("middleNameAlt").ToUpper(),
-                        personData.Get<string>("lastNameAlt").ToUpper()),
-                    DATE_OF_BIRTH = personData.Get<DateTime>("dateOfBirth"),
-                    SEX = personData.Get<string>("sex.name"),
-                    ADDRESS = string.Format(
-                        "{0}, {1}",
-                        personAddress.Get<string>("settlement.name"),
-                        personAddress.Get<string>("address")),
-                    NATIONALITY = country.Name,
-                    NATIONALITY_EN = country.Code,
-                    ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
-                    FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
+                    LIC_NO1 = licenceNumber,
+                    PERSON_NAME = new
+                    {
+                        NAME_EN = personNameAlt,
+                        NAME = personNameBG
+                    },
+                    BIRTH = new
+                    {
+                        DATE = personData.Get<DateTime>("dateOfBirth"),
+                        PLACE_EN = personData.Get<string>("placeOfBirth.nameAlt"),
+                        PLACE = personData.Get<string>("placeOfBirth.name")
+                    },
+                    ADDRESS = new 
+                    {
+                        ADDR_EN = string.Format(
+                            "{0}, {1}",
+                            personAddress.Get<string>("settlement.nameAlt"),
+                            personAddress.Get<string>("addressAlt")),
+                        ADDR = string.Format(
+                            "{0}, {1}",
+                            personAddress.Get<string>("settlement.name"),
+                            personAddress.Get<string>("address")),
+                    },
+                    NATIONALITY = new
+                    {
+                        NAME = country.Name,
+                        CODE = country.Code
+                    },
                     LIC_NO2 = licenceNumber,
-                    CAT1 = "A", 
-                    CAT2 = "B 1",
-                    CAT3 = "B 2",
-                    CAT4 = "C",
-                    CATEGORIES = this.GetCategories(includedRatings),
-                    LIC_NO3 = licenceNumber,
-                    NAME = personName,
-                    DATE_OF_BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
-                        personData.Get<DateTime>("dateOfBirth"),
-                        personData.Get<string>("placeOfBirth.name")),
-                    ADDR =  personAddress.Get<string>("address"),
+                    NAME = personNameBG,
+                    BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
+                       personData.Get<DateTime>("dateOfBirth"),
+                       personData.Get<string>("placeOfBirth.name")),
+                    ADDR = personAddress.Get<string>("address"),
                     NATIONALITY1 = country.Name,
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     T_VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
                     CATEGORY = this.GetCategory(includedRatings),
+                    CATEGORY_NP = categoryNP,
+                    VALIDITY = lastEdition.Get<DateTime>("documentDateValidTo"),
+                    CAT1 = "A",
+                    CAT2 = "B 1",
+                    CAT3 = "B 2",
+                    CAT4 = "B 3",
+                    CAT5 = "C",
+                    CATEGORIES = this.GetCategories(includedRatings),
+                    IS_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
+                    NA = categoryNP.Length == 0 ? "NOT APPLICABLE" : " ",
+                    IS_DATE2 = lastEdition.Get<DateTime>("documentDateValidFrom"),
+                    LIC_NO3 = licenceNumber,
+                    LIC_NO4 = licenceNumber,
+                    LIC_NO41 = licenceNumber,
+                    AIRCRAFTS = this.GetAircrafts(includedRatings),
+                    LIC_NO5 = licenceNumber,
                     LIMITATIONS = this.GetLimitations(lastEdition),
                     AC_LIMITATIONS = this.GetACLimitations(includedRatings),
                     VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
-                    LIC_NO4 = licenceNumber
+                    LIC_NO6 = licenceNumber
                 }
             };
 
             return JObject.FromObject(json);
         }
+
         private NomValue GetCountry(JObject personAddress)
         {
             int? countryId = personAddress.Get<int?>("settlement.parentValueId");
@@ -116,10 +146,32 @@ namespace Gva.Api.WordTemplates
 
             return country;
         }
-        
+
+        private object[] GetAircrafts(IEnumerable<JObject> includedRatings)
+        {
+            return includedRatings
+                .Where(r => r.GetItems<JObject>("editions").Last().GetItems("limitations").Count() == 0)
+                .Select(r =>
+                {
+                    JObject lastEdition = r.GetItems<JObject>("editions").Last();
+                    dynamic date =  "";
+                    if(lastEdition.Get<string>("aircraftTypeGroup.name") != "No type")
+                    {
+                        date = lastEdition.Get<DateTime>("documentDateValidFrom");
+                    }
+
+                    return new
+                    {
+                        AC_TYPE = r.Get<string>("aircraftTypeGroup.name"),
+	                    CATEGORY = r.Get<string>("aircraftTypeCategory.code"),
+	                    DATE = date
+                    };
+                }).ToArray<object>();
+        }
+
         private object[] GetCategories(IEnumerable<JObject> includedRatings)
         {
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
             IEnumerable<NomValue> aircraftGroups66 = this.nomRepository.GetNomValues("aircraftGroup66").Where(r => validCodes.Contains(r.Code));
 
             List<object> results = new List<object>();
@@ -130,28 +182,29 @@ namespace Gva.Api.WordTemplates
                     .Select(rating => rating.Get<int>("aircraftTypeCategory.nomValueId"));
 
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
-                IEnumerable<string> aliases =   categories.Select(category => JsonConvert.DeserializeObject<JObject>(category.TextContent).Get<string>("alias"));
+                IEnumerable<string> aliases = categories.Select(category => JsonConvert.DeserializeObject<JObject>(category.TextContent).Get<string>("alias"));
 
-                    results.Add(new
+                results.Add(new
+                {
+                    NAME = new
                     {
-                        NAME = new
-                        {
-                            EN = group66.NameAlt,
-                            BG = group66.Name
-                        },
-                        CAT1 = aliases.Contains("A") ? "X" : "n/a",
-                        CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
-                        CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
-                        CAT4 = aliases.Contains("C") ? "X" : "n/a"
-                    });
+                        EN = group66.NameAlt,
+                        BG = group66.Name
+                    },
+                    CAT1 = aliases.Contains("A") ? "X" : "n/a",
+                    CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
+                    CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
+                    CAT43 = aliases.Contains("B 3") ? "X" : "n/a",
+                    CAT5 = aliases.Contains("C") ? "X" : "n/a"
+                });
             }
             return results.ToArray<object>();
         }
 
         private object[] GetCategory(IEnumerable<JObject> includedRatings)
         {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
 
             return includedRatings
                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
@@ -160,8 +213,7 @@ namespace Gva.Api.WordTemplates
                     JsonConvert.DeserializeObject<JObject>(
                     this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
                     .TextContent).Get<string>("alias")))
-                .Select(r => new
-                {
+                .Select(r => new{
                     TYPE = r.Get<string>("aircraftTypeGroup.name"),
                     CAT = r.Get<string>("aircraftTypeCategory.code"),
                     DATE = r.GetItems<JObject>("editions").Last().Get<DateTime>("documentDateValidFrom"),
@@ -170,18 +222,42 @@ namespace Gva.Api.WordTemplates
                 }).ToArray<object>();
         }
 
-        private object[] GetACLimitations(IEnumerable<JObject> includedRatings)
+        private object[] GetCategoryNP(IEnumerable<JObject> includedRatings)
         {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCode = new List<string> { "1", "2", "3", "4", "5", "6"};
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
 
             return includedRatings
-                .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
-                    validCode.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) && 
+                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
+                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
                     validAliases.Contains(
                     JsonConvert.DeserializeObject<JObject>(
-                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId")).TextContent)
-                    .Get<string>("alias")))
+                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
+                    .TextContent).Get<string>("alias")))
+                .Select(r => new
+                {
+                    TYPE = r.Get<string>("aircraftTypeGroup.name"),
+                    CAT = r.Get<string>("aircraftTypeCategory.code"),
+                    DATE_FROM = r.GetItems<JObject>("editions").Last().Get<DateTime>("documentDateValidFrom"),
+                    DATE_TO = r.GetItems<JObject>("editions").Last().Get<DateTime>("documentDateValidTo"),
+                    LIMIT = r.GetItems<JObject>("editions").Last().GetItems("limitations").Count() > 0 ?
+                    string.Join(",", r.GetItems<JObject>("editions").Last().GetItems("limitations").Select(l => l.Get<string>("name"))) : "NP"
+                }).ToArray<object>();
+        }
+
+        private object[] GetACLimitations(IEnumerable<JObject> includedRatings)
+        {
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
+
+            return includedRatings
+                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
+                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
+                    validAliases.Contains(
+                    JsonConvert.DeserializeObject<JObject>(
+                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
+                    .TextContent).Get<string>("alias")))
+                .Where(r => r.Get<JObject>("aircraftTypeGroup") != null)
                 .Select(r => new
                 {
                     AIRCRAFT = r.Get<string>("aircraftTypeGroup.name"),
@@ -211,7 +287,7 @@ namespace Gva.Api.WordTemplates
                 CAT = "A 1",
                 LIMT = AT_a_Ids.Count() > 0 ? string.Join(",", AT_a_Ids.Select(l => l.Get<string>("name")).ToList()) : "No limitation"
             });
-
+           
             limitations.Add(new
             {
                 NAME = "Aeroplanes Turbine",
@@ -267,7 +343,7 @@ namespace Gva.Api.WordTemplates
                 LIMT = avionics_Ids.Count() > 0 ? string.Join(",", avionics_Ids.Select(l => l.Get<string>("name")).ToList()) : "No limitation"
             });
 
-            return limitations.ToArray<object>(); ;
+            return limitations.ToArray<object>();
         }
     }
 }

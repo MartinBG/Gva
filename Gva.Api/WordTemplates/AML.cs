@@ -83,13 +83,13 @@ namespace Gva.Api.WordTemplates
                     ADDRESS = new 
                     {
                         ADDR_EN = string.Format(
-                        "{0}, {1}",
-                        personAddress.Get<string>("settlement.nameAlt"),
-                        personAddress.Get<string>("addressAlt")),
+                            "{0}, {1}",
+                            personAddress.Get<string>("settlement.nameAlt"),
+                            personAddress.Get<string>("addressAlt")),
                         ADDR = string.Format(
-                        "{0}, {1}",
-                        personAddress.Get<string>("settlement.name"),
-                        personAddress.Get<string>("address")),
+                            "{0}, {1}",
+                            personAddress.Get<string>("settlement.name"),
+                            personAddress.Get<string>("address")),
                     },
                     NATIONALITY = new
                     {
@@ -170,20 +170,11 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetCategories(IEnumerable<JObject> includedRatings)
         {
-            List<NomValue> aircraftGroup66 = new List<NomValue>();
             List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
-
-            foreach (var rating in includedRatings)
-            {
-                NomValue group66 = this.nomRepository.GetNomValue("aircraftGroup66", rating.Get<int>("aircraftTypeCategory.parentValueId"));
-                if (group66 != null && !aircraftGroup66.Contains(group66) && validCodes.Contains(group66.Code))
-                {
-                    aircraftGroup66.Add(group66);
-                }
-            }
+            IEnumerable<NomValue> aircraftGroups66 = this.nomRepository.GetNomValues("aircraftGroup66").Where(r => validCodes.Contains(r.Code));
 
             List<object> results = new List<object>();
-            foreach (var group66 in aircraftGroup66)
+            foreach (var group66 in aircraftGroups66)
             {
                 IEnumerable<int> categoriesIds = includedRatings
                     .Where(rating => rating.Get<int>("aircraftTypeCategory.parentValueId") == group66.NomValueId)
@@ -231,8 +222,16 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetCategoryNP(IEnumerable<JObject> includedRatings)
         {
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
 
             return includedRatings
+                .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
+                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
+                    validAliases.Contains(
+                    JsonConvert.DeserializeObject<JObject>(
+                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
+                    .TextContent).Get<string>("alias")))
                 .Select(r => new
                 {
                     TYPE = r.Get<string>("aircraftTypeGroup.name"),
@@ -246,9 +245,16 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetACLimitations(IEnumerable<JObject> includedRatings)
         {
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
 
             return includedRatings
-                .Where(r => r.Get<JObject>("aircraftTypeGroup") != null)
+                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
+                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
+                    validAliases.Contains(
+                    JsonConvert.DeserializeObject<JObject>(
+                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
+                    .TextContent).Get<string>("alias")))
                 .Select(r => new
                 {
                     AIRCRAFT = r.Get<string>("aircraftTypeGroup.name"),
