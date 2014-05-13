@@ -7,8 +7,8 @@
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
   <Created>2006-09-16T00:00:00Z</Created>
-  <LastSaved>2014-04-23T12:11:02Z</LastSaved>
-  <Version>14.00</Version>
+  <LastSaved>2014-05-13T08:32:18Z</LastSaved>
+  <Version>15.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
   <RemovePersonalInformation/>
@@ -273,16 +273,32 @@
    <NumberFormat/>
   </Style>
   <Style ss:ID="s97">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s98">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000" ss:Bold="1"/>
    <NumberFormat/>
   </Style>
-  <Style ss:ID="s98">
+  <Style ss:ID="s99">
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s100">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000"/>
    <NumberFormat/>
   </Style>
-  <Style ss:ID="s99">
+  <Style ss:ID="s101">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s102">
    <Alignment ss:Vertical="Bottom"/>
    <Borders/>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
@@ -291,7 +307,16 @@
    <NumberFormat/>
    <Protection/>
   </Style>
-  <Style ss:ID="s100">
+  <Style ss:ID="s103">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s104">
+   <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s105">
    <Alignment ss:Vertical="Center"/>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000"/>
@@ -704,19 +729,19 @@
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s77"><Data ss:Type="String">0501</Data></Cell>
     <Cell ss:StyleID="s89"><Data ss:Type="String">Система</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">system</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">Системен потребител</Data></Cell>
     <Cell ss:StyleID="s92"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s77"><Data ss:Type="String">0502</Data></Cell>
     <Cell ss:StyleID="s89"><Data ss:Type="String">Администратор</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">admin</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">Системен администратор</Data></Cell>
     <Cell ss:StyleID="s92"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s77"><Data ss:Type="String">0503</Data></Cell>
     <Cell ss:StyleID="s89"><Data ss:Type="String">Служител ГВА</Data></Cell>
-    <Cell ss:StyleID="s78"><Data ss:Type="String">systemusergva</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">Системен служител ГВА</Data></Cell>
     <Cell ss:StyleID="s92" ss:HRef="mailto:systemusergva@caa.bg"><Data
       ss:Type="String">systemusergva@caa.bg</Data></Cell>
    </Row>
@@ -737,8 +762,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>13</ActiveRow>
-     <RangeSelection>R14C1:R14C3</RangeSelection>
+     <ActiveRow>38</ActiveRow>
+     <ActiveCol>2</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1146,7 +1171,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocTypes">
-  <Table ss:ExpandedColumnCount="16" ss:ExpandedRowCount="68" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="17" ss:ExpandedRowCount="68" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s96" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="98.25"/>
    <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="81.75"/>
@@ -1156,13 +1181,14 @@
    <Column ss:StyleID="s96" ss:Width="75.75" ss:Span="1"/>
    <Column ss:Index="8" ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="32.25"/>
    <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="41.25"/>
-   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="140.25"/>
-   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="180"/>
-   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="227.25"/>
-   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="814.5"/>
+   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="53.25"/>
+   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="8.25"/>
+   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="32.25"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="442.5"/>
+   <Column ss:StyleID="s96" ss:AutoFitWidth="0" ss:Width="351"/>
    <Column ss:StyleID="s96" ss:Width="94.5"/>
    <Column ss:StyleID="s96" ss:Width="148.5"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">DocTypeGroup</Data></Cell>
     <Cell><Data ss:Type="String">DocDirection</Data></Cell>
     <Cell><Data ss:Type="String">IsElectronicService</Data></Cell>
@@ -1175,12 +1201,13 @@
     <Cell><Data ss:Type="String">Alias</Data></Cell>
     <Cell><Data ss:Type="String">ElectronicServiceFileTypeUri</Data></Cell>
     <Cell><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
-    <Cell><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s98"><Data ss:Type="String">Name</Data></Cell>
+    <Cell><Data ss:Type="String">ApplicationName</Data></Cell>
     <Cell><Data ss:Type="String">ExecutionDeadline</Data></Cell>
     <Cell><Data ss:Type="String">RemoveIrregularitiesDeadline</Data></Cell>
     <Cell><Data ss:Type="String">IsActive</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1190,15 +1217,16 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Resolution</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Resolution</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Резолюция</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Резолюция</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1208,15 +1236,16 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Task</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Task</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Задача</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Задача</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1226,15 +1255,16 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Remark</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Remark</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Забележка</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Забележка</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1247,12 +1277,13 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Писмо</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Писмо</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1265,12 +1296,13 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Приемно предавателен протокол</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Приемно предавателен протокол</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1280,15 +1312,16 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-000001</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-000001</Data></Cell>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1298,15 +1331,16 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-000002</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-000002</Data></Cell>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1316,49 +1350,52 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-003010</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell><Data ss:Type="String">Невалидни услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">9999</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">9999</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">9999</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">9999</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">InvalidService</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">InvalidService</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Невалидна услуга</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Невалидна услуга</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:Index="2" ss:StyleID="Default"/>
     <Cell ss:Index="4" ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s101"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1368,15 +1405,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s99"><Data ss:Type="String">Request</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="String">Request</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Заявление</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Заявление</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1386,31 +1424,33 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s99"><Data ss:Type="String">Request supplement</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="String">Request supplement</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">02</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Допълване на заявление</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Допълване на заявление</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:Index="2" ss:StyleID="Default"/>
     <Cell ss:Index="4" ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s101"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1420,15 +1460,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4686</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4686</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004686</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">03</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на оперативен лиценз на въздушен превозвач</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на оперативен лиценз на въздушен превозвач</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на оперативен лиценз на въздушен превозвач</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1438,15 +1479,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-5090</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-5090</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-005090</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">04</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1456,15 +1498,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-5000</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-5000</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-005000</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">05</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1474,15 +1517,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4834</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4834</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004834</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">06</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за професионално обучение на авиационен учебен център</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за професионално обучение на авиационен учебен център</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за професионално обучение на авиационен учебен център</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1492,15 +1536,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4186</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4186</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004186</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">07</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за първоначално издаване на свидетелство за правоспособност на професионален пилот и правоспособност за полет по прибори</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1510,15 +1555,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4244</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4244</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004244</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">08</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – членове на летателния състав от екипажите на ВС, различни от пилоти</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – членове на летателния състав от екипажите на ВС, различни от пилоти</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на авиационен персонал – членове на летателния състав от екипажите на ВС, различни от пилоти</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1528,15 +1574,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4864</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4864</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004864</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">09</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на членовете на кабинния екипаж</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност на членовете на кабинния екипаж</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на членовете на кабинния екипаж</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1546,15 +1593,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4242</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4242</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004242</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – полетни диспечери</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – полетни диспечери</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на авиационен персонал – полетни диспечери</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1564,15 +1612,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4240</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4240</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004240</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">11</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за първоначално издаване на лиценз за техническо обслужване на въздухоплавателни средства (AML) по Част 66</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1582,15 +1631,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4296</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4296</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004296</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">12</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Признаване на свидетелство за правоспособност на чужди граждани</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Признаване на свидетелство за правоспособност на чужди граждани</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за признаване на свидетелство за правоспособност на чужди граждани</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1600,15 +1650,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4900</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4900</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004900</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">13</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на удостоверение за одобрение за ползване на авиационен тренажор</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на удостоверение за одобрение за ползване на авиационен тренажор</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на удостоверение за одобрение за ползване на авиационен тренажор</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="Number">0</Data></Cell>
@@ -1618,15 +1669,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">14</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на разрешително за проверяващ</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на разрешително за проверяващ</Data></Cell>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1636,15 +1688,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4860</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4860</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004860</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">15</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за одобрение на организация за обучение</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за одобрение на организация за обучение</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за одобрение на организация за обучение</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1657,12 +1710,13 @@
     <Cell ss:StyleID="Default"><Data ss:Type="String">R-4862</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004862</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">16</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за обучение, намираща се в друга държава</Data></Cell>
+    <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за обучение, намираща се в друга държава</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на удостоверение за одобрение на организация за обучение, намираща се в друга държава</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1675,12 +1729,13 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">R-4356</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0010-004356</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">17</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">Издаване на удостоверение за регистрация на ВС</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Издаване на удостоверение за регистрация на ВС</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Заявление за издаване на удостоверение за регистрация  на ВС</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1693,12 +1748,13 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">R-4284</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0010-004284</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">18</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">Издаване на свидетелство за правоспособност на ръководители на полети, на ученик-ръководители на полети, на асистент-координатори на полети и на координатори по УВД</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Издаване на свидетелство за правоспособност на ръководители на полети, на ученик-ръководители на полети, на асистент-координатори на полети и на координатори по УВД</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на ръководители на полети, на ученик-ръководители на полети, на асистент-координатори на полети и на координатори по УВД</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="Number">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s97">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s99">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1711,15 +1767,16 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">R-4958</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0010-004958</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">19</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">Издаване на свидетелство за правоспособност на инженерно-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение</Data></Cell>
+    <Cell ss:StyleID="s103"><Data ss:Type="String">Издаване на свидетелство за правоспособност на инженерно-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на инженерно-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -1730,248 +1787,258 @@
     <Cell><Data ss:Type="String">0010-004824</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">20</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на свидетелство за преподавател към авиационни учебни центрове</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на свидетелство за преподавател към авиационни учебни центрове</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4738</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004738</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4738</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004738</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">21</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на свидетелство на доставчик на аеронавигационно обслужване</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на свидетелство на доставчик на аеронавигационно обслужване</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4764</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004764</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4764</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004764</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">22</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на свидетелство за експлоатационна годност на автоматизираните системи за УВД</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на свидетелство за експлоатационна годност на автоматизираните системи за УВД</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4766</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004766</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4766</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004766</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">23</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на свидетелства за експлоатационна годност на навигационните съоръжения за въздушна навигация и кацане</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на свидетелства за експлоатационна годност на навигационните съоръжения за въздушна навигация и кацане</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4588</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004588</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4588</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004588</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">24</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за експлоатационна годност на граждански летища</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за експлоатационна годност на граждански летища</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4590</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004590</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4590</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004590</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">25</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за експлоатационна годност на летателни площадки</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за експлоатационна годност на летателни площадки</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4614</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004614</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4614</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004614</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">26</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4598</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004598</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4598</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004598</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">27</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на лиценз на летищен оператор</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на лиценз на летищен оператор</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">R-4606</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">0010-004606</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">R-4606</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">0010-004606</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">28</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на лиценз на оператор по наземно обслужване или самообслужване на летище</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на лиценз на оператор по наземно обслужване или самообслужване на летище</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">29</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение  за одобрение на организация за управление на поддържане на постоянна летателна годност (EASA Form 14)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за техническо обслужване (EASA Form 3F)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">31</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за техническо обслужване (EASA Form 3)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">32</Data></Cell>
-    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на одобрение за производствена организация</Data></Cell>
+    <Cell ss:StyleID="s104"><Data ss:Type="String">Издаване на одобрение за производствена организация</Data></Cell>
+    <Cell ss:StyleID="s105"/>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s98"/>
-    <Cell ss:StyleID="s98"/>
+    <Cell ss:StyleID="s100"/>
+    <Cell ss:StyleID="s100"/>
     <Cell ss:StyleID="s64"><Data ss:Type="String">33</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за обучение и изпит-ване на персонал за техническо обслужване (EASA Form 11)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -1980,14 +2047,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">34</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на лиценз за техническо обслужване и ремонт на авиационна техника (за въздухоплавателни средства извън обхвата на Регламент (ЕО) № 216/2008 на Европейския парламент и Съвета от 20 февруари 2008 година относно общи правила в областта на гражданското въздухоплаване, за създаване на Европейска агенция за авиационна безопасност - включени в Приложение ІІ на Регламента)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -1996,14 +2063,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">35</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на медицинско свидетелство на авиационния персонал</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2014,14 +2081,15 @@
     <Cell><Data ss:Type="String">0010-004470</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">36</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за летателна годност на ВС</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за летателна годност на ВС</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2032,14 +2100,15 @@
     <Cell><Data ss:Type="String">0010-004544</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">37</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за преглед на летателна годност (EASA Form 15a)</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за преглед на летателна годност (EASA Form 15a)</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2050,14 +2119,15 @@
     <Cell><Data ss:Type="String">0010-004514</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">38</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на удостоверение за съответствие с нормите за авиационен шум</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на удостоверение за съответствие с нормите за авиационен шум</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2066,14 +2136,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">39</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на документ за съгласие за производство от производствена организация без одобрение</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2084,14 +2154,15 @@
     <Cell><Data ss:Type="String">0010-004810</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">40</Data></Cell>
     <Cell><Data ss:Type="String">Издаване и поддържане на сертификат за компетентност на лица, изпълняващи задачи по проверка и контрол за сигурност в гражданското въздухоплаване</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване и поддържане на сертификат за компетентност на лица, изпълняващи задачи по проверка и контрол за сигурност в гражданското въздухоплаване</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2102,14 +2173,15 @@
     <Cell><Data ss:Type="String">0010-004490</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">41</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Разрешително за ползване на радиостанция на въздухоплавателно средство</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на Разрешително за ползване на радиостанция на въздухоплавателно средство</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2120,14 +2192,15 @@
     <Cell><Data ss:Type="String">0010-004396</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">42</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Удостоверение за отписване от Регистъра на ВС</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на Удостоверение за отписване от Регистъра на ВС</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2138,14 +2211,15 @@
     <Cell><Data ss:Type="String">0010-004566</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">43</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на експортно удостоверение за летателна годност</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на експортно удостоверение за летателна годност</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2156,14 +2230,15 @@
     <Cell><Data ss:Type="String">0010-004578</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">44</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Специално удостоверение за ЛГ за любителски построено ВС</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на Специално удостоверение за ЛГ за любителски построено ВС</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2174,14 +2249,15 @@
     <Cell><Data ss:Type="String">0010-004926</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">45</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на разрешение за полет</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за издаване на разрешение за полет по част 21 (EASA Form20)</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2190,14 +2266,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">46</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на ръководен персонал     ( EASA Form 4)  за всички одобрени организации</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2206,14 +2282,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">47</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на описание на организация за управление поддържането на постоянна летателна годност</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2222,14 +2298,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">48</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на описание на организация за техническо обслужване</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2238,14 +2314,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">49</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на ръководство за техническо обслужване на организация</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2254,14 +2330,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">50</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на описание на организация за техническо обслужване (на Организации по Наредба № 145)</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2270,14 +2346,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">51</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на описание на организация за обучение на персонал за техническо обслужване на ВС</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2286,14 +2362,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">52</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на технически борден дневник – по типове ВС</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2302,14 +2378,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">53</Data></Cell>
     <Cell><Data ss:Type="String">Издаване на Одобрение на програма за техническо обслужване на ВС – за всяко ВС</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2320,14 +2396,15 @@
     <Cell><Data ss:Type="String">0010-004378</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">54</Data></Cell>
     <Cell><Data ss:Type="String">Назначаване на S-Mode код (24 битов адрес на ВС)</Data></Cell>
+    <Cell><Data ss:Type="String">Заявление за назначаване на S-Mode код (24 битов адрес на ВС)</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2336,14 +2413,14 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">55</Data></Cell>
     <Cell><Data ss:Type="String">Вписване и отписване в Регистъра на гражданските въздухоплавателни средства в Република България на залози и запори</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s93"><Data ss:Type="String">Заявление</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="String">Входящ</Data></Cell>
-    <Cell ss:StyleID="s97"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="Number">0</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
@@ -2352,7 +2429,7 @@
     <Cell ss:StyleID="s64"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:Index="12" ss:StyleID="s64"><Data ss:Type="String">56</Data></Cell>
     <Cell><Data ss:Type="String">Продължаване срока на валидност, изменение и анулиране на издаваните лицензи, свидетелства, удостоверения, сертификати и одобрения.</Data></Cell>
-    <Cell><Data ss:Type="String">14</Data></Cell>
+    <Cell ss:Index="15"><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
@@ -2370,12 +2447,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>5</TopRowVisible>
+   <LeftColumnVisible>12</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>27</ActiveRow>
-     <ActiveCol>10</ActiveCol>
+     <ActiveRow>5</ActiveRow>
+     <ActiveCol>13</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -2470,7 +2547,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Заявление</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2480,7 +2557,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">02</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Допълване на заявление</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Допълване на заявление</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2490,7 +2567,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">03</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на оперативен лиценз на въздушен превозвач</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на оперативен лиценз на въздушен превозвач</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2500,7 +2577,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">04</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2510,7 +2587,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">05</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2520,7 +2597,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">06</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за професионално обучение на авиационен учебен център</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за професионално обучение на авиационен учебен център</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2530,7 +2607,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">07</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2540,7 +2617,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">08</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – членове на летателния състав от екипажите на ВС, различни от пилоти</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – членове на летателния състав от екипажите на ВС, различни от пилоти</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2550,7 +2627,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">09</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на членовете на кабинния екипаж</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за правоспособност на членовете на кабинния екипаж</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2560,7 +2637,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">10</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – полетни диспечери</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – полетни диспечери</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2570,7 +2647,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">11</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за правоспособност за техническо обслужване на самолети и хеликоптери</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2580,7 +2657,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">12</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Признаване на свидетелство за правоспособност на чужди граждани</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Признаване на свидетелство за правоспособност на чужди граждани</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2590,7 +2667,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">13</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на удостоверение за одобрение за ползване на авиационен тренажор</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на удостоверение за одобрение за ползване на авиационен тренажор</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2600,7 +2677,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на разрешително за проверяващ</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на разрешително за проверяващ</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2610,7 +2687,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">15</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на свидетелство за одобрение на организация за обучение</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на свидетелство за одобрение на организация за обучение</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2620,7 +2697,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">16</Data></Cell>
-    <Cell ss:StyleID="s98"><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за обучение, намираща се в друга държава</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на удостоверение за одобрение на организация за обучение, намираща се в друга държава</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -2780,7 +2857,7 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">32</Data></Cell>
-    <Cell ss:StyleID="s100"><Data ss:Type="String">Издаване на одобрение за производствена организация</Data></Cell>
+    <Cell ss:StyleID="s105"><Data ss:Type="String">Издаване на одобрение за производствена организация</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
     <Cell ss:StyleID="s77"><Data ss:Type="String">0101</Data></Cell>
@@ -3990,20 +4067,6 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000000001</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">3</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell><Data ss:Type="String">Проверка по същество</Data></Cell>
-    <Cell><Data ss:Type="String">ExamineApplication</Data></Cell>
-    <Cell><Data ss:Type="String">30</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">4</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -4012,6 +4075,20 @@
     <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="s70"><Data ss:Type="String">*</Data></Cell>
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">3</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">Проверка по същество</Data></Cell>
+    <Cell><Data ss:Type="String">ExamineApplication</Data></Cell>
+    <Cell><Data ss:Type="String">30</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">*</Data></Cell>
     <Cell ss:StyleID="s89"/>
     <Cell ss:StyleID="s89"/>
    </Row>
@@ -4061,8 +4138,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>16</ActiveRow>
-     <ActiveCol>5</ActiveCol>
+     <ActiveRow>3</ActiveRow>
+     <RangeSelection>R4</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

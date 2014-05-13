@@ -240,6 +240,8 @@ namespace Docs.Api.Repositories.DocRepository
 
         Doc GetDocByRegUri(string regIndex, int regNumber, DateTime regDate);
 
+        Doc GetByRegUriAndAccessCode(string regIndex, int regNumber, DateTime regDate, string accessCode);
+
         DocFile GetPrimaryOrFirstDocFileByDocId(int docId);
 
         DocElectronicServiceStage GetCurrentServiceStageByDocId(int docId);
@@ -247,5 +249,9 @@ namespace Docs.Api.Repositories.DocRepository
         bool CheckForExistingAccessCode(string accessCode);
 
         Doc GetDocByRegUriIncludeElectronicServiceStages(string regIndex, int regNumber, DateTime regDate);
+
+        Tuple<string, string> GetPositionAndNameById(int unitId);
+
+        List<Doc> FindPublicLeafsByDocId(int docId);
     }
 }

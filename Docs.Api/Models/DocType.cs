@@ -24,6 +24,8 @@ namespace Docs.Api.Models
 
         public string Name { get; set; }
 
+        public string ApplicationName { get; set; }
+
         public string Alias { get; set; }
 
         public bool IsElectronicService { get; set; }
@@ -71,6 +73,10 @@ namespace Docs.Api.Models
                 .IsRequired()
                 .HasMaxLength(500);
 
+            this.Property(t => t.ApplicationName)
+                .IsRequired()
+                .HasMaxLength(500);
+
             this.Property(t => t.Alias)
                 .IsRequired()
                 .HasMaxLength(200);
@@ -97,6 +103,7 @@ namespace Docs.Api.Models
             this.Property(t => t.PrimaryRegisterIndexId).HasColumnName("PrimaryRegisterIndexId");
             this.Property(t => t.SecondaryRegisterIndexId).HasColumnName("SecondaryRegisterIndexId");
             this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.ApplicationName).HasColumnName("ApplicationName");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.IsElectronicService).HasColumnName("IsElectronicService");
             this.Property(t => t.ElectronicServiceFileTypeUri).HasColumnName("ElectronicServiceFileTypeUri");

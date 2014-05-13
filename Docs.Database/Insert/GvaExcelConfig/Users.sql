@@ -86,7 +86,7 @@ Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, Certif
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 54, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'systemusergva', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'systemusergva', N'', N'', 1, N'systemusergva@caa.bg', 1)
+                        values (N'systemusergva', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Системен служител ГВА', N'', N'', 1, N'systemusergva@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 61, 1
 GO

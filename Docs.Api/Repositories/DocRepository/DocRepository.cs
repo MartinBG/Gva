@@ -991,6 +991,18 @@ namespace Docs.Api.Repositories.DocRepository
             return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
         }
 
+        public Doc GetByRegUriAndAccessCode(string regIndex, int regNumber, DateTime regDate, string accessCode)
+        {
+            var docs =
+                this.unitOfWork.DbContext.Set<Doc>()
+                .Include(d => d.DocType)
+                .Include(d => d.DocCasePartType)
+                .Where(d => d.RegIndex == regIndex && d.RegNumber == regNumber && d.AccessCode == accessCode)
+                .ToList();
+
+            return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
+        }
+
         public DocFile GetPrimaryOrFirstDocFileByDocId(int docId)
         {
             return this.unitOfWork.DbContext.Set<DocFile>()
@@ -1027,6 +1039,98 @@ namespace Docs.Api.Repositories.DocRepository
                 .ToList();
 
             return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
+        }
+
+        public Tuple<string, string> GetPositionAndNameById(int unitId)
+        {
+            string position = String.Empty;
+            string name = String.Empty;
+
+            var unit = 
+                this.unitOfWork.DbContext.Set<Unit>()
+                .Include(u => u.UnitType)
+                .Include(u => u.UnitRelations.Select(ur => ur.ParentUnit))
+                .FirstOrDefault(u => u.UnitId == unitId);
+
+            if (unit != null)
+            {
+                if (unit.UnitType.Alias.ToLower() == "department" || unit.UnitType.Alias.ToLower() == "position")
+                {
+                    position = unit.Name;
+                }
+                else //unit.UnitType.Alias.ToLower() == "employee"
+                {
+                    name = unit.Name;
+
+                    if (unit.UnitRelations.Count > 0)
+                    {
+                        var parentUnit = unit.UnitRelations.First().ParentUnit;
+
+                        position = parentUnit.Name;
+                    }
+                }
+            }
+
+            return new Tuple<string, string>(position, name);
+        }
+
+        public List<Doc> FindPublicLeafsByDocId(int docId)
+        {
+            var returnValue = new List<Doc>();
+
+            returnValue.AddRange(
+                this.unitOfWork.DbContext.Set<DocRelation>()
+                .Where(d =>
+                    d.DocId == docId &&
+                    d.Doc.DocCasePartType.Alias == "Public" &&
+                    d.Doc.DocStatus.Alias != "Draft" && d.Doc.DocStatus.Alias != "Canceled")
+                .Select(d => d.Doc)
+                .Include(d => d.DocType)
+                .Include(d => d.DocWorkflows.Select(dw => dw.DocWorkflowAction))
+                .Include(d => d.DocCasePartType)
+                .ToList());
+
+            if (returnValue.Count == 0)
+            {
+                return returnValue;
+            }
+
+            int caseDocTypeId = returnValue[0].DocTypeId.Value;
+
+            var parentIds = new List<int>();
+            parentIds.Add(docId);
+
+            while (parentIds.Count > 0)
+            {
+                var docs =
+                    this.unitOfWork.DbContext.Set<DocRelation>()
+                    .Include(d => d.Doc.DocCasePartType)
+                    .Where(d => d.ParentDocId.HasValue && parentIds.Contains(d.ParentDocId.Value) && d.Doc.DocCasePartType.Alias == "Public")
+                    //.Where(d =>
+                    //    d.ParentDocId.HasValue &&
+                    //    parentIds.Contains(d.ParentDocId.Value) &&
+                    //    d.Doc.DocCasePartType.Alias == "Public" &&
+                    //    (
+                    //        d.Doc.DocType.Alias.ToLower() == "RemovingIrregularitiesInstructions".ToLower() ||
+                    //        (
+                    //            d.Doc.DocTypeId == caseDocTypeId &&
+                    //            d.Doc.DocType.DocTypeGroup.IsElectronicService &&                                  //
+                    //            d.Doc.DocType.DocTypeGroup.IsActive &&                                             //search for correction electronic document
+                    //            d.Doc.DocType.DocTypeGroup.Name.ToLower() != "Отговори на услуги".ToLower())       //
+                    //        )
+                    //    )
+                    .Select(d => d.Doc)
+                    .Include(d => d.DocType)
+                    .Include(d => d.DocCasePartType)
+                    .ToList();
+
+                returnValue.AddRange(docs);
+
+                parentIds = new List<int>();
+                parentIds.AddRange(docs.Select(d => d.DocId));
+            }
+
+            return returnValue;
         }
     }
 }

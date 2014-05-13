@@ -25,6 +25,21 @@ using R_0009_000046;
 using R_0009_000068;
 using System.Data.SqlClient;
 using System.Configuration;
+using R_0009_000089;
+using R_0009_000073;
+using Common.Extensions;
+using R_0009_000054;
+using R_0009_000062;
+using R_0009_000005;
+using R_0009_000018;
+using R_0009_000030;
+using R_0009_000027;
+using R_0009_000026;
+using R_0009_000044;
+using R_0009_000072;
+using R_0009_000042;
+using R_0009_000043;
+using R_0009_000031;
 
 namespace Gva.AppCommunicator
 {
@@ -190,75 +205,190 @@ namespace Gva.AppCommunicator
 
         public CaseFileInfo GetCaseFileInfo(DocumentURI uri, string publicAccessCode)
         {
-            throw new NotImplementedException();
+            if (uri != null || String.IsNullOrWhiteSpace(publicAccessCode))
+            {
+                var caseDoc = this.docRepository.GetByRegUriAndAccessCode(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value, publicAccessCode);
+                if (caseDoc != null)
+                {
+                    CaseFileInfo caseFileInfo = new CaseFileInfo();
+                    caseFileInfo.AISCaseDataInternetAccess = new AISCaseDataInternetAccess();
+                    caseFileInfo.AISCaseDataInternetAccess.Name = !String.IsNullOrWhiteSpace(caseDoc.DocType.ApplicationName) ? caseDoc.DocType.ApplicationName : caseDoc.DocType.Name;
+                    caseFileInfo.AISCaseDataInternetAccess.URI = new AISCaseURI();
+                    caseFileInfo.AISCaseDataInternetAccess.URI.DocumentURI = uri;
+                    caseFileInfo.AISCaseDataInternetAccess.Documents = new Documents();
+                    caseFileInfo.AISCaseDataInternetAccess.Documents.DocumentCollection = new DocumentCollection();
+                    caseFileInfo.AISCaseDataInternetAccess.ServiceName = caseDoc.DocType.Name;
+
+                    var serviceStages = 
+                        this.unitOfWork.DbContext.Set<DocElectronicServiceStage>()
+                        .Include(s => s.ElectronicServiceStage.ElectronicServiceStageExecutors)
+                        .Where(s => s.DocId == caseDoc.DocId)
+                        .OrderBy(s => s.ElectronicServiceStageId)
+                        .ToList();
+
+                    if (serviceStages.Count > 0)
+                    {
+
+                        caseFileInfo.AISCaseDataInternetAccess.Stages = new AISCaseDataInternetAccessStages();
+                        caseFileInfo.AISCaseDataInternetAccess.Stages.StageCollection = new AISCaseDataInternetAccessStagesStageCollection();
+
+                        foreach (var serviceStage in serviceStages)
+                        {
+                            var stage = new AISCaseDataInternetAccessStagesStage();
+                            stage.ActualCompletionDate = serviceStage.EndingDate;
+                            stage.StageDescription = serviceStage.ElectronicServiceStage.Description;
+                            stage.StageName = serviceStage.ElectronicServiceStage.Name;
+
+                            string executorPosition = String.Empty;
+                            string executorName = String.Empty;
+
+                            if (serviceStage.ElectronicServiceStage.ElectronicServiceStageExecutors.Count > 0)
+                            {
+                                Tuple<string, string> postionAndName = this.docRepository.GetPositionAndNameById(serviceStage.ElectronicServiceStage.ElectronicServiceStageExecutors.First().UnitId);
+
+                                executorPosition = postionAndName.Item1;
+                                executorName = postionAndName.Item2;
+                            }
+
+                            stage.Executor = new R_0009_000041.ServiceStageExecutor();
+                            stage.Executor.PositionInAdministrationOrAISUser = new PositionInAdministrationOrAISUser();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData = new AISUserBasicData();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position = new AISUserPositionInAdministration();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position.Position = new Position();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position.Position.EKDAPositonName = executorPosition;
+
+                            Tuple<string, string, string> splitNames = Helper.SplitNames(executorName);
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names = new AISUserNames();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames = new PersonNames();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.First = splitNames.Item1;
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.Middle = splitNames.Item2;
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.Last = splitNames.Item3;
+
+                            caseFileInfo.AISCaseDataInternetAccess.Stages.StageCollection.Add(stage);
+                        }
+                    }
+
+                    var docs = this.docRepository.FindPublicLeafsByDocId(caseDoc.DocId);
+
+                    foreach (var doc in docs)
+                    {
+
+                        DocFile docFile =
+                            this.unitOfWork.DbContext.Set<DocFile>()
+                            .Include(d => d.DocFileKind)
+                            .Include(d => d.DocFileType)
+                            .Where(d => d.DocId == doc.DocId)
+                            .OrderByDescending(d => d.IsPrimary)
+                            .ThenBy(d => d.DocFileId)
+                            .FirstOrDefault();
+
+                        Document document = new Document();
+                        document.AccessIdentifier = doc.RegUri;
+                        document.AISDocumentRegisterDocumentData = new AISDocumentRegisterDocumentData();
+                        document.AISDocumentRegisterDocumentData.RegistrationTime = doc.RegDate;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI = new RegisteredDocumentURI();
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI = new DocumentURI();
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.RegisterIndex = doc.RegIndex;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.SequenceNumber = doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.ReceiptOrSigningDate = doc.RegDate;
+                        document.AISDocumentRegisterDocumentData.DocumentType = new AdministrativeNomenclatureDocumentTypeBasicData();
+                        document.AISDocumentRegisterDocumentData.DocumentType.Name = doc.DocType.Name;
+                        if (doc.DocType.IsElectronicService)
+                        {
+                            document.AISDocumentRegisterDocumentData.DocumentType.URI = new AdministrativeNomenclatureDocumentTypeURI();
+                            document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI = new UnifiedDataURI();
+                            if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
+                            {
+                                document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI.RegisterIndex = doc.DocType.ElectronicServiceFileTypeUri.Split(new char[] { '-' })[0];
+                                document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI.BatchNumber = doc.DocType.ElectronicServiceFileTypeUri.Split(new char[] { '-' })[1];
+                            }
+                        }
+
+                        document.AISDocument = new R_0009_000085.AISDocument();
+
+                        if (docFile != null && docFile.DocFileKind.Alias.ToLower() == "PublicAttachedFile".ToLower())
+                        {
+                            document.AISDocument.Name = docFile.DocFileName;
+                            document.AISDocument.DocumentProcessType = "0006-000050";   //TODO: Consider value
+                            document.AISDocument.ObjectCreationData = new R_0009_000032.AISObjectCreationData();
+                            document.AISDocument.ObjectCreationData.CreationTime = doc.RegDate;
+
+                            document.AISDocumentRegisterDocumentData.DocumentElectronicTransportType = docFile.DocFileType.MimeType;
+                        }
+
+                        string registratorPosition = String.Empty;
+                        string registratorName = String.Empty;
+                        if (doc.DocWorkflows.Any(e => e.DocWorkflowAction.Alias == "Registration"))
+                        {
+                            int? unitId = doc.DocWorkflows.Where(e => e.DocWorkflowAction.Alias == "Registration").First().PrincipalUnitId;
+                            if (unitId.HasValue)
+                            {
+                                Tuple<string, string> postionAndName = this.docRepository.GetPositionAndNameById(unitId.Value);
+
+                                registratorPosition = postionAndName.Item1;
+                                registratorName = postionAndName.Item2;
+                            }
+                        }
+
+                        Tuple<string, string, string> splitNames = Helper.SplitNames(registratorName);
+                        document.AISDocumentRegisterDocumentData.RegisteredBy = new R_0009_000070.RegistrationInDocumentRegisterRegistrar();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData = new R_0009_000027.AISUserBasicData();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names = new R_0009_000018.AISUserNames();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames = new R_0009_000005.PersonNames();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.First = splitNames.Item1;
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.Middle = splitNames.Item2;
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.Last = splitNames.Item3;
+
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position = new R_0009_000026.AISUserPositionInAdministration();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position.Position = new R_0009_000026.Position();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position.Position.EKDAPositonName = registratorPosition;
+
+                        caseFileInfo.AISCaseDataInternetAccess.Documents.DocumentCollection.Add(document);
+                    }
+
+                    return caseFileInfo;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
-        //public ServiceStatus GetServiceStatus(DocumentURI uri, string serviceIdentifier)
-        //{
-        //    var doc = this.docRepository.GetDocByRegUri(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value);
-        //    if (doc != null)
-        //    {
-        //        ServiceStatus serviceStatus = new ServiceStatus();
-        //        serviceStatus.InitiatingDocumentURI = new InitiatingDocumentURI();
-        //        serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
-        //        serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
-        //        serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
-
-        //        DocElectronicServiceStage currentDocStage = this.docRepository.GetCurrentServiceStageByDocId(doc.DocId);
-
-        //        if (currentDocStage != null)
-        //        {
-
-        //            serviceStatus.UnexecutedTasks = new UnexecutedTasks();
-        //            serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
-
-        //            var task = new TaskOrServiceStage();
-        //            task.Task = new TaskOrServiceStageTask();
-        //            task.Task.TaskData = new AISTask();
-        //            task.Task.TaskData.NameAndShortDescription = currentDocStage.ElectronicServiceStage.Name;
-        //            task.Task.TaskData.ExpandedDescription = currentDocStage.ElectronicServiceStage.Description;
-        //            task.Task.TaskData.ActualStartDate = currentDocStage.StartingDate;
-        //            task.Task.TaskData.ActualCompletionDate = currentDocStage.EndingDate;
-
-        //            serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);
-        //        }
-
-        //        return serviceStatus;
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Document not found.");
-        //    }
-        //}
-
-        public R_0009_000067.ServiceStatus GetServiceStatus(R_0009_000001.DocumentURI uri, string serviceIdentifier)
+        public ServiceStatus GetServiceStatus(DocumentURI uri, string serviceIdentifier)
         {
-            //TODO: Test Mirko
             if (uri != null)
             {
                 var doc = this.docRepository.GetDocByRegUriIncludeElectronicServiceStages(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value);
                 if (doc != null)
                 {
-                    //TODO: Consider object properties
-                    R_0009_000067.ServiceStatus serviceStatus = new R_0009_000067.ServiceStatus();
-                    serviceStatus.InitiatingDocumentURI = new R_0009_000046.InitiatingDocumentURI();
+                    ServiceStatus serviceStatus = new ServiceStatus();
+                    serviceStatus.InitiatingDocumentURI = new InitiatingDocumentURI();
                     serviceStatus.InitiatingDocumentURI.RegisterIndex = uri.RegisterIndex;
                     serviceStatus.InitiatingDocumentURI.SequenceNumber = uri.SequenceNumber;
                     serviceStatus.InitiatingDocumentURI.ReceiptOrSigningDate = uri.ReceiptOrSigningDate;
-                    if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
-                    {
-                        serviceStatus.ServiceURI = new R_0009_000054.AdministrativeNomenclatureServiceURI();
-                        serviceStatus.ServiceURI.SUNAUServiceURI = doc.DocType.ElectronicServiceFileTypeUri;
-                    }
+                    //if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
+                    //{
+                    //    serviceStatus.ServiceURI = new AdministrativeNomenclatureServiceURI();
+                    //    serviceStatus.ServiceURI.SUNAUServiceURI = doc.DocType.ElectronicServiceFileTypeUri;
+                    //}
+                    serviceStatus.ServiceURI = new AdministrativeNomenclatureServiceURI();
+                    serviceStatus.ServiceURI.SUNAUServiceURI = !String.IsNullOrWhiteSpace(doc.DocType.ApplicationName) ? doc.DocType.ApplicationName : doc.DocType.Name;
+                    
 
                     var allStages = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
                         .Where(e => e.DocTypeId == doc.DocTypeId.Value)
+                        .OrderBy(e => e.ElectronicServiceStageId)
                         .ToList();
 
                     if (doc.DocElectronicServiceStages.Where(s => s.EndingDate.HasValue).Any())
                     {
-                        serviceStatus.ExecutedTasks = new R_0009_000067.ExecutedTasks();
-                        serviceStatus.ExecutedTasks.TaskCollection = new R_0009_000067.TaskCollection();
+                        serviceStatus.ExecutedTasks = new ExecutedTasks();
+                        serviceStatus.ExecutedTasks.TaskCollection = new TaskCollection();
 
                         foreach (var executedStage in doc.DocElectronicServiceStages.Where(s => s.EndingDate.HasValue))
                         {
@@ -266,18 +396,18 @@ namespace Gva.AppCommunicator
 
                             if (stage != null)
                             {
-                                var task = new R_0009_000067.Task();
+                                var task = new Task();
 
-                                task.TaskData = new R_0009_000068.AISTask();
+                                task.TaskData = new AISTask();
                                 task.TaskData.NameAndShortDescription = stage.Name;
                                 task.TaskData.ExpandedDescription = stage.Description; ;
                                 task.TaskData.ScheduledStartDate = executedStage.StartingDate;
                                 task.TaskData.ScheduledCompletionDate = executedStage.ExpectedEndingDate;
                                 task.TaskData.ActualStartDate = executedStage.StartingDate;
                                 task.TaskData.ActualCompletionDate = executedStage.EndingDate;
-                                task.TaskData.ExecutedBy = new R_0009_000062.AISTaskExecutor();
-                                task.TaskData.ExecutedBy.Names = new R_0009_000018.AISUserNames();
-                                task.TaskData.ExecutedBy.Names.PersonNames = new R_0009_000005.PersonNames();
+                                task.TaskData.ExecutedBy = new AISTaskExecutor();
+                                task.TaskData.ExecutedBy.Names = new AISUserNames();
+                                task.TaskData.ExecutedBy.Names.PersonNames = new PersonNames();
                                 task.TaskData.ExecutedBy.Names.PersonNames.First = doc.DocSourceType.Alias == "Internet" && stage.Alias == "AcceptApplication" ? "Системен потребител" : "Служител ГВА";
 
                                 serviceStatus.ExecutedTasks.TaskCollection.Add(task);
@@ -292,23 +422,23 @@ namespace Gva.AppCommunicator
 
                     if (unexecutedStages.Any())
                     {
-                        serviceStatus.UnexecutedTasks = new R_0009_000067.UnexecutedTasks();
-                        serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new R_0009_000067.TaskOrServiceStageCollection();
+                        serviceStatus.UnexecutedTasks = new UnexecutedTasks();
+                        serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
 
                         foreach (var unexecutedStage in unexecutedStages)
                         {
                             if (unexecutedStage.Alias != "DecreeRefusal")
                             {
-                                var task = new R_0009_000067.TaskOrServiceStage();
-                                task.Task = new R_0009_000067.TaskOrServiceStageTask();
-                                task.Task.TaskData = new R_0009_000068.AISTask();
+                                var task = new TaskOrServiceStage();
+                                task.Task = new TaskOrServiceStageTask();
+                                task.Task.TaskData = new AISTask();
                                 task.Task.TaskData.NameAndShortDescription = unexecutedStage.Name;
                                 task.Task.TaskData.ExpandedDescription = unexecutedStage.Description;
                                 task.Task.TaskData.ScheduledStartDate = null;
                                 task.Task.TaskData.ScheduledCompletionDate = null;
-                                task.Task.TaskData.ExecutedBy = new R_0009_000062.AISTaskExecutor();
-                                task.Task.TaskData.ExecutedBy.Names = new R_0009_000018.AISUserNames();
-                                task.Task.TaskData.ExecutedBy.Names.PersonNames = new R_0009_000005.PersonNames();
+                                task.Task.TaskData.ExecutedBy = new AISTaskExecutor();
+                                task.Task.TaskData.ExecutedBy.Names = new AISUserNames();
+                                task.Task.TaskData.ExecutedBy.Names.PersonNames = new PersonNames();
                                 task.Task.TaskData.ExecutedBy.Names.PersonNames.First = "Служител ГВА";
 
                                 serviceStatus.UnexecutedTasks.TaskOrServiceStageCollection.Add(task);

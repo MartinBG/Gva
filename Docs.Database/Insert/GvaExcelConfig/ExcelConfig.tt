@@ -460,6 +460,7 @@
                 string electronicServiceFileTypeUri = (row.ContainsKey("ElectronicServiceFileTypeUri") && !String.IsNullOrWhiteSpace(row["ElectronicServiceFileTypeUri"])) ? row["ElectronicServiceFileTypeUri"].Trim() : String.Empty;
                 string electronicServiceTypeApplication = (row.ContainsKey("ElectronicServiceTypeApplication") && !String.IsNullOrWhiteSpace(row["ElectronicServiceTypeApplication"])) ? row["ElectronicServiceTypeApplication"].Trim() : String.Empty;
                 string name = row["Name"].Trim();
+				string applicationName = (row.ContainsKey("ApplicationName") && !String.IsNullOrWhiteSpace(row["ApplicationName"])) ? row["ApplicationName"].Trim() : String.Empty;
                 string executionDeadline = (row.ContainsKey("ExecutionDeadline") && !String.IsNullOrWhiteSpace(row["ExecutionDeadline"])) ? row["ExecutionDeadline"].Trim() : String.Empty;
                 string removeIrregularitiesDeadline = (row.ContainsKey("RemoveIrregularitiesDeadline") && !String.IsNullOrWhiteSpace(row["RemoveIrregularitiesDeadline"])) ? row["RemoveIrregularitiesDeadline"].Trim() : String.Empty;
                 string isActive = row["IsActive"].Trim();
@@ -487,12 +488,13 @@
                     sRegisterIndexId = RegisterIndexesDictionary.Where(i => i.Value == sRegisterIndex).Single().Key;
                 }
 
-                docTypesTableRows.Add(String.Format("INSERT INTO [DocTypes]([DocTypeId],[DocTypeGroupId],[PrimaryRegisterIndexId],[SecondaryRegisterIndexId],[Name],[Alias],[IsElectronicService],[ElectronicServiceFileTypeUri],[ElectronicServiceTypeApplication],[ElectronicServiceProvider],[ExecutionDeadline],[RemoveIrregularitiesDeadline],[IsActive])VALUES({0},{1},{2},{3},N'{4}',N'{5}',{6},N'{7}',N'{8}',N'{9}',{10},{11},{12});",
+                docTypesTableRows.Add(String.Format("INSERT INTO [DocTypes]([DocTypeId],[DocTypeGroupId],[PrimaryRegisterIndexId],[SecondaryRegisterIndexId],[Name],[ApplicationName],[Alias],[IsElectronicService],[ElectronicServiceFileTypeUri],[ElectronicServiceTypeApplication],[ElectronicServiceProvider],[ExecutionDeadline],[RemoveIrregularitiesDeadline],[IsActive])VALUES({0},{1},{2},{3},N'{4}',N'{5}',N'{6}',{7},N'{8}',N'{9}',N'{10}',{11},{12},{13});",
                     identityValue,//[DocTypeId],
                     docTypeGroupId,//[DocTypeGroupId],
                     !String.IsNullOrWhiteSpace(pRegisterIndexId) ? pRegisterIndexId : "NULL",//[PrimaryRegisterIndexId],
                     !String.IsNullOrWhiteSpace(sRegisterIndexId) ? sRegisterIndexId : "NULL",//[SecondaryRegisterIndexId],
                     name,//[Name],
+					applicationName,//[ApplicationName],
                     alias,//[Alias],
                     isElectronicService,//[IsElectronicService],
                     electronicServiceFileTypeUri,//[ElectronicServiceFileTypeUri],

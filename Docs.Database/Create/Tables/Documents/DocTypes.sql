@@ -8,6 +8,7 @@ CREATE TABLE DocTypes
     PrimaryRegisterIndexId INT            NULL,
     SecondaryRegisterIndexId INT          NULL,
     Name			NVARCHAR (500) NOT NULL,
+	ApplicationName NVARCHAR (500) NOT NULL,
 	Alias			NVARCHAR (200) NOT NULL,
 	IsElectronicService					BIT            NOT NULL,
 	ElectronicServiceFileTypeUri		NVARCHAR (200) NULL,
