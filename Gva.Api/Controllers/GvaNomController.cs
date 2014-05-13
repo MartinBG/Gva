@@ -482,7 +482,8 @@ namespace Gva.Api.Controllers
                         JToken staffAlias;
                         if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
                         {
-                            isMatch &= staffAliases.Contains(staffAlias.ToString());
+                            string staffAliasStr = staffAlias.ToString();
+                            isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
                         }
 
                         return isMatch;
