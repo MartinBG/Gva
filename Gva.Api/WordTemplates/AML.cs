@@ -47,7 +47,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.GetPart("ratings/" + i).Content);
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
             var country = this.GetCountry(personAddress);
-            string licenceCode = licence.Get<string>("licenceType.code") ;
+            string licenceCode = licence.Get<string>("licenceType.code");
             var licenceNumber = string.Format(
                 "{0}.{1} - {2}",
                 licenceCode != string.Empty ? licenceCode : "BG",
@@ -63,6 +63,7 @@ namespace Gva.Api.WordTemplates
                     personData.Get<string>("lastNameAlt").ToUpper());
 
             var categoryNP = this.GetCategoryNP(includedRatings);
+
             var json = new
             {
                 root = new
@@ -73,13 +74,23 @@ namespace Gva.Api.WordTemplates
                         NAME_EN = personNameAlt,
                         NAME = personNameBG
                     },
-                    BIRTH = string.Format("{0:dd.mm.yyyy} {1}",
-                       personData.Get<DateTime>("dateOfBirth"),
-                       personData.Get<string>("placeOfBirth.name")),
-                    ADDRESS = string.Format(
+                    BIRTH = new
+                    {
+                        DATE = personData.Get<DateTime>("dateOfBirth"),
+                        PLACE_EN = personData.Get<string>("placeOfBirth.nameAlt"),
+                        PLACE = personData.Get<string>("placeOfBirth.name")
+                    },
+                    ADDRESS = new 
+                    {
+                        ADDR_EN = string.Format(
+                        "{0}, {1}",
+                        personAddress.Get<string>("settlement.nameAlt"),
+                        personAddress.Get<string>("addressAlt")),
+                        ADDR = string.Format(
                         "{0}, {1}",
                         personAddress.Get<string>("settlement.name"),
                         personAddress.Get<string>("address")),
+                    },
                     NATIONALITY = new
                     {
                         NAME = country.Name,
