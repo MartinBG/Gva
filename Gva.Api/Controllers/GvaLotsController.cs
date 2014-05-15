@@ -43,8 +43,14 @@ namespace Gva.Api.Controllers
         public virtual IHttpActionResult GetPart(int lotId, string path)
         {
             var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
-
-            return Ok(new PartVersionDO(part));
+            if (part != null)
+            {
+                return Ok(new PartVersionDO(part));
+            }
+            else
+            {
+                return Ok();
+            }
         }
 
         public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
