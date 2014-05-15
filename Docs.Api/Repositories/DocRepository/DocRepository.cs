@@ -1121,6 +1121,7 @@ namespace Docs.Api.Repositories.DocRepository
                     //    )
                     .Select(d => d.Doc)
                     .Include(d => d.DocType)
+                    .Include(d => d.DocWorkflows.Select(dw => dw.DocWorkflowAction))
                     .Include(d => d.DocCasePartType)
                     .ToList();
 
