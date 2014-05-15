@@ -37,15 +37,37 @@
   </div>
   <h5 class="form-header"></h5>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="owner">
+
+
+    <div class="col-sm-2 col-md-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.owner"></label>
-      <sc-validation-error field-name="owner" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.owner" name="owner" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 80px" ng-disabled="readonly">
+            {{model.ownerType.name || 'Избери'}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="type in ownerTypes"><a ng-click="setOwnerType(type)">{{type.name}}</a></li>
+          </ul>
+        </div>
+          <sc-nomenclature ng-if="model.ownerType.code === 'O'" class="form-control input-sm" ng-model="model.ownerOrganization" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="model.ownerType.code === 'P'" class="form-control input-sm" ng-model="model.ownerPerson" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+      </div>
     </div>
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="operator">
+    <div class="form-group col-md-4 col-sm-6">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.operator"></label>
-      <sc-validation-error field-name="operator" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.operator" name="operator" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 80px" ng-disabled="readonly">
+            {{model.operType.name || 'Избери'}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="type in ownerTypes"><a ng-click="setOperType(type)">{{type.name}}</a></li>
+          </ul>
+        </div>
+          <sc-nomenclature ng-if="model.operType.code === 'O'" class="form-control input-sm" ng-model="model.operOrganization" name="operOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="model.operType.code === 'P'" class="form-control input-sm" ng-model="model.operPerson" name="operPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+      </div>
     </div>
   </div>
   <h5 class="form-header"></h5>
@@ -79,9 +101,20 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-6">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingLessor"></label>
-      <sc-nomenclature ng-model="model.leasingLessor" name="leasingLessor" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 80px" ng-disabled="readonly">
+            {{model.lessorType.name || 'Избери'}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="type in ownerTypes"><a ng-click="setLessorType(type)">{{type.name}}</a></li>
+          </ul>
+        </div>
+        <sc-nomenclature ng-if="model.lessorType.code === 'O'" class="form-control input-sm" ng-model="model.lesorOrganization" name="lesorOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="model.lessorType.code === 'P'" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+      </div>
     </div>
-  </div>
+    </div>
   <div class="row">
     <div class="form-group col-md-8 col-sm-12">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingAgreement"></label>

@@ -228,6 +228,7 @@
     <Content Include="App\js\gva\aircrafts\forms\aircraftCertNoiseDataFM.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftAirworthinessAmendment.html" />
     <Content Include="App\js\gva\aircrafts\forms\aircraftAirworthinessReview.html" />
+    <Content Include="App\js\gva\aircrafts\forms\aircraftCertRegFMCtrl.js" />
     <Content Include="App\js\gva\applications\views\docsLinkApp.html" />
     <Content Include="App\js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="App\js\ems\docs\views\docsCase.html" />
