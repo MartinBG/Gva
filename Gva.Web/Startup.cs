@@ -23,6 +23,7 @@ using Owin;
 using Regs.Api;
 using Common.Api.Jobs;
 using Gva.Rio;
+using Common.Rio;
 
 namespace Gva.Web
 {
@@ -30,12 +31,21 @@ namespace Gva.Web
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureAutoMapper();
             var container = CreateAutofacContainer();
             app.UseAutofacMiddleware(container);
             ConfigureAuth(app);
             ConfigureWebApi(app, container);
             ConfigureStaticFiles(app);
             StartJobs(container);
+        }
+
+        public static void ConfigureAutoMapper()
+        {
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile(new Gva.RioBridge.GvaRioBridgeMapperProfile());
+            });
         }
 
         public static IContainer CreateAutofacContainer()
@@ -46,6 +56,8 @@ namespace Gva.Web
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new GvaApiModule());
             builder.RegisterModule(new RegsApiModule());
+            builder.RegisterModule(new CommonRioModule());
+            builder.RegisterModule(new GvaRioBrdigeModule());
             builder.RegisterModule(new GvaRioModule());
             return builder.Build();
         }

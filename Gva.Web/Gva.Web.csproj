@@ -53,6 +53,12 @@
     <Reference Include="Autofac.Integration.WebApi.Owin">
       <HintPath>..\packages\Autofac.WebApi2.Owin.3.0.0-alpha\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
@@ -1424,6 +1430,10 @@
       <Project>{69bed796-4199-433e-bc42-e8d7406369d9}</Project>
       <Name>Common.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Rio\Common.Rio.csproj">
+      <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
+      <Name>Common.Rio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common</Name>
@@ -1439,6 +1449,10 @@
     <ProjectReference Include="..\Gva.Api\Gva.Api.csproj">
       <Project>{f9afa12d-933e-4c98-b53a-92d603201eda}</Project>
       <Name>Gva.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gva.RioBridge\Gva.RioBridge.csproj">
+      <Project>{19ba4ba2-93d9-48bb-a383-2c3131a6ac63}</Project>
+      <Name>Gva.RioBridge</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gva.Rio\Gva.Rio.csproj">
       <Project>{8238b367-2571-4d08-9a2a-5c99ec6b7811}</Project>
@@ -1547,6 +1561,7 @@
 xcopy "$(ProjectDir)..\Portal\Gva.Portal.RioObjects\Schemas" "$(ProjectDir)RioSchemas\" /Y /R /I /S /Q
 </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

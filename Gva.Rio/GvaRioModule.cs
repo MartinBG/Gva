@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Gva.Rio.Jobs;
 using Common.Api.Jobs;
+using Common.Rio.RioObjectExtraction;
+using Gva.Rio.IncomingDocProcessor;
 
 namespace Gva.Rio
 {
@@ -11,6 +13,7 @@ namespace Gva.Rio
             if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Gva.Rio:EnableIncomingDocumentsJob"]))
             {
                 moduleBuilder.RegisterType<IncomingDocsJob>().As<IJob>().ExternallyOwned();
+                moduleBuilder.RegisterType<IncomingDocProcessor.IncomingDocProcessor>().As<IIncomingDocProcessor>();
             }
         }
     }

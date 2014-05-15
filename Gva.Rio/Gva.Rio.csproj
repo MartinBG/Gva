@@ -61,8 +61,8 @@
     <Compile Include="Abbcdn\AbbcdnStorage.cs" />
     <Compile Include="Abbcdn\IAbbcdn.cs" />
     <Compile Include="GvaRioModule.cs" />
-    <Compile Include="Jobs\Helpers\DocIdentifierHelper.cs" />
-    <Compile Include="Jobs\Helpers\RioServiceHelper.cs" />
+    <Compile Include="IncomingDocProcessor\IncomingDocProcessor.cs" />
+    <Compile Include="IncomingDocProcessor\IIncomingDocProcessor.cs" />
     <Compile Include="Jobs\IncomingDocsJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +70,10 @@
     <ProjectReference Include="..\Common.Api\Common.Api.csproj">
       <Project>{69bed796-4199-433e-bc42-e8d7406369d9}</Project>
       <Name>Common.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Rio\Common.Rio.csproj">
+      <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
+      <Name>Common.Rio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
@@ -79,18 +83,15 @@
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
       <Name>Docs.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
-      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
-      <Name>Gva.Portal.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
-      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
-      <Name>Gva.Portal.RioObjects</Name>
+    <ProjectReference Include="..\Gva.RioBridge\Gva.RioBridge.csproj">
+      <Project>{19ba4ba2-93d9-48bb-a383-2c3131a6ac63}</Project>
+      <Name>Gva.RioBridge</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
