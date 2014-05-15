@@ -14,12 +14,12 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>13515</WindowHeight>
-  <WindowWidth>30720</WindowWidth>
+  <WindowHeight>8955</WindowHeight>
+  <WindowWidth>23010</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>9</ActiveSheet>
+  <ActiveSheet>5</ActiveSheet>
   <FirstVisibleSheet>1</FirstVisibleSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
@@ -1540,7 +1540,7 @@
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-004186</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">07</Data></Cell>
     <Cell ss:StyleID="s101"><Data ss:Type="String">Издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
-    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за първоначално издаване на свидетелство за правоспособност на професионален пилот и правоспособност за полет по прибори</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Заявление за издаване на свидетелство за правоспособност на авиационен персонал – пилоти</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">14</Data></Cell>
     <Cell ss:StyleID="s96"><Data ss:Type="String">10</Data></Cell>
     <Cell ss:StyleID="s100"><Data ss:Type="Number">1</Data></Cell>
@@ -2447,11 +2447,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <LeftColumnVisible>12</LeftColumnVisible>
+   <Selected/>
+   <LeftColumnVisible>4</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>5</ActiveRow>
+     <ActiveRow>19</ActiveRow>
      <ActiveCol>13</ActiveCol>
     </Pane>
    </Panes>
@@ -4134,7 +4135,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
