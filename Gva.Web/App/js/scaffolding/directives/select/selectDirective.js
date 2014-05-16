@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/directives/select/selectDirective.html',
+      templateUrl: 'js/scaffolding/directives/select/selectDirective.html',
       compile: function (tElement, tAttrs) {
         tAttrs.$set('uiSelect2', tAttrs.scSelect);
       }

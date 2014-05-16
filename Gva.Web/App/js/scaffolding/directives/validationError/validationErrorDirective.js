@@ -14,7 +14,7 @@
         fieldName: '@',
         getValidations: '&validations'
       },
-      templateUrl: 'scaffolding/directives/validationError/validationErrorDirective.html',
+      templateUrl: 'js/scaffolding/directives/validationError/validationErrorDirective.html',
       link: function (scope, element) {
         scope.form = element.parent().controller('form');
         scope.validations = [];

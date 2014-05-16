@@ -12,7 +12,7 @@
       scope: {
         promise: '='
       },
-      templateUrl: 'scaffolding/directives/promiseState/promiseStateDirective.html',
+      templateUrl: 'js/scaffolding/directives/promiseState/promiseStateDirective.html',
       link: function (scope) {
         scope.state = null;
         scope.title = '';

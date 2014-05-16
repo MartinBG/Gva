@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/directives/tabs/tabsDirective.html',
+      templateUrl: 'js/scaffolding/directives/tabs/tabsDirective.html',
       scope: {
         tabList: '&'
       },

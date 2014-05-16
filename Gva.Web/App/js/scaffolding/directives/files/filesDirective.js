@@ -18,7 +18,7 @@
         scope: {
           ngModel: '&'
         },
-        templateUrl: 'scaffolding/directives/files/filesDirective.html',
+        templateUrl: 'js/scaffolding/directives/files/filesDirective.html',
         link: function link(scope, iElement, iAttrs, controllers) {
           var filesCtrl = controllers[0],
               ngModelCtrl = controllers[1];

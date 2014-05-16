@@ -12,7 +12,7 @@
       require: '?ngModel',
       scope: {
       },
-      templateUrl: 'scaffolding/directives/date/dateDirective.html',
+      templateUrl: 'js/scaffolding/directives/date/dateDirective.html',
       link: function (scope, element, attrs, ngModel) {
         if (!ngModel) {
           return;

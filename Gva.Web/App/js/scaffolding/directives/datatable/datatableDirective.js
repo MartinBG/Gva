@@ -15,7 +15,7 @@ Usage <sc-datatable items="data"
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'scaffolding/directives/datatable/datatableDirective.html',
+      templateUrl: 'js/scaffolding/directives/datatable/datatableDirective.html',
       scope: {
         filterable: '&',
         pageable: '&',

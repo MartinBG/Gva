@@ -13,7 +13,7 @@
       scope: {
         homeState: '@'
       },
-      templateUrl: 'scaffolding/directives/breadcrumb/breadcrumbDirective.html',
+      templateUrl: 'js/scaffolding/directives/breadcrumb/breadcrumbDirective.html',
       controller: function BreadcrumbCtrl($scope, $state, l10n) {
         $scope.getBreadcrumbStates = function (state) {
           var states = [];

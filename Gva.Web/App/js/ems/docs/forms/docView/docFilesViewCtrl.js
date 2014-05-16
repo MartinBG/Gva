@@ -13,7 +13,7 @@
         .$promise
         .then(function (data) {
           $modal.open({
-            templateUrl: 'ems/docs/views/portalModal.html',
+            templateUrl: 'js/ems/docs/views/portalModal.html',
             controller: 'PortalModalCtrl',
             backdrop: 'static',
             keyboard: false,

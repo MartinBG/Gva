@@ -75,7 +75,7 @@
       scope: {
         removable: '&'
       },
-      templateUrl: 'scaffolding/directives/search/filterDirective.html',
+      templateUrl: 'js/scaffolding/directives/search/filterDirective.html',
       compile: FilterCompile
     };
   }

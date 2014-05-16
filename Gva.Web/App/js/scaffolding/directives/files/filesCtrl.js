@@ -6,8 +6,8 @@
     $scope.openModal = function () {
       var modal = $modal.open({
         templateUrl: $scope.isMultiple ?
-          'scaffolding/directives/files/filesModal.html' :
-          'scaffolding/directives/files/singleFileModal.html',
+          'js/scaffolding/directives/files/filesModal.html' :
+          'js/scaffolding/directives/files/singleFileModal.html',
         controller: $scope.isMultiple ?
           'FilesModalCtrl' : 'SingleFileModalCtrl',
         backdrop: 'static',

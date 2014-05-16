@@ -60,7 +60,7 @@
 
       authenticating = true;
       $modal.open({
-        templateUrl: 'common/login/loginModal.html',
+        templateUrl: 'js/common/login/loginModal.html',
         controller: 'LoginModalCtrl',
         backdrop: 'static',
         keyboard: false

@@ -90,7 +90,7 @@
       restrict: 'E',
       transclude: true,
       replace: true,
-      templateUrl: 'scaffolding/directives/search/searchDirective.html',
+      templateUrl: 'js/scaffolding/directives/search/searchDirective.html',
       scope: {
         selectedFilters: '=',
         btnClasses: '@'

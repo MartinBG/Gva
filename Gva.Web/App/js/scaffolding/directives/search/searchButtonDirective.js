@@ -59,7 +59,7 @@
         action: '@',
         icon: '@'
       },
-      templateUrl: 'scaffolding/directives/search/searchButtonDirective.html',
+      templateUrl: 'js/scaffolding/directives/search/searchButtonDirective.html',
       compile: ButtonCompile
     };
   }

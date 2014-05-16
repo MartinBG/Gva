@@ -11,7 +11,7 @@
       restrict: 'E',
       transclude: true,
       replace: true,
-      templateUrl: 'scaffolding/directives/navigation/navigationDirective.html',
+      templateUrl: 'js/scaffolding/directives/navigation/navigationDirective.html',
       scope: {
         userFullname: '@',
         changePasswordState: '@',

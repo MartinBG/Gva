@@ -122,11 +122,11 @@ namespace Gva.Web
 
         public void ConfigureStaticFiles(IAppBuilder app)
         {
-            app.UseReroute("/", "/app/build/index.html");
+            app.UseReroute("/", "/index.htm");
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = new PathString(""),
-                FileSystem = new PhysicalFileSystem("./"),
+                FileSystem = new PhysicalFileSystem("./App"),
                 ContentTypeProvider = new ContentTypeProvider(),
                 ServeUnknownFileTypes = false
             });

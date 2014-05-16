@@ -259,7 +259,7 @@ module.exports = function (grunt) {
     },
     html2js: {
       options: {
-        base: 'js'
+        base: '.'
       },
       navigation: {
         src: ['js/common/**/*.html'],
@@ -350,7 +350,6 @@ module.exports = function (grunt) {
     },
     bundle: {
       options: {
-        appPath: '/app',
         bundles: ['<%= jsBundles %>', '<%= cssBundles %>'],
         data: {
           fullVersion: grunt.option('fullVersion')
@@ -361,7 +360,7 @@ module.exports = function (grunt) {
           debug: true
         },
         files: {
-          'build/index.html': ['index.html']
+          'index.htm': ['index.html']
         }
       },
       release: {
@@ -369,7 +368,7 @@ module.exports = function (grunt) {
           debug: false
         },
         files: {
-          'build/index.html': ['index.html']
+          'index.htm': ['index.html']
         }
       }
     }

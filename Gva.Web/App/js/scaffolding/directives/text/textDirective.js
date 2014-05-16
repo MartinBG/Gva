@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/directives/text/textDirective.html'
+      templateUrl: 'js/scaffolding/directives/text/textDirective.html'
     };
   }
 

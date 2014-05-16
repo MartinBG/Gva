@@ -11,7 +11,7 @@
         restrict: 'E',
         replace: true,
         require: '?ngModel',
-        templateUrl: 'scaffolding/directives/number/numberDirectives.html',
+        templateUrl: 'js/scaffolding/directives/number/numberDirectives.html',
         link: function (scope, element, attrs, ngModel) {
           if (!ngModel) {
             return;

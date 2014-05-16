@@ -21,7 +21,7 @@
         newTab: '@',
         params: '&'
       },
-      templateUrl: 'scaffolding/directives/navigation/navigationItemDirective.html',
+      templateUrl: 'js/scaffolding/directives/navigation/navigationItemDirective.html',
       controller: function NavigationItemCtrl($scope, $state) {
         $scope.item = {
           active: $scope.active,

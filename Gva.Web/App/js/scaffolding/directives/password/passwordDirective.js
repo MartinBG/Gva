@@ -9,7 +9,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/directives/password/passwordDirective.html'
+      templateUrl: 'js/scaffolding/directives/password/passwordDirective.html'
     };
   }
 

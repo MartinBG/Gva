@@ -132,7 +132,7 @@
       priority: 110,
       restrict: 'E',
       replace: true,
-      templateUrl: 'scaffolding/directives/nomenclature/nomenclatureDirective.html',
+      templateUrl: 'js/scaffolding/directives/nomenclature/nomenclatureDirective.html',
       scope: {
         alias: '&'
       },

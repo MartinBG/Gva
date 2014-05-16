@@ -46,7 +46,7 @@
         btnClick: '&',
         icon: '@'
       },
-      templateUrl: 'scaffolding/directives/button/buttonDirective.html',
+      templateUrl: 'js/scaffolding/directives/button/buttonDirective.html',
       compile: function compile(tElement, tAttrs) {
         if(!tAttrs.type) {
           tAttrs.type = 'button';
