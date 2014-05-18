@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="version" content="<%= fullVersion %>">
-
-  <%= cssBundle('build/css/styles.css') %>
+<% cssBundle('styles.css').forEach(function(file) { %>
+  <link href="<%= file.path %>?_h=<%= file.hash %>" rel="stylesheet" /><% }); %>
 </head>
 <body id="ng-app" ng-app="app">
   <noscript>
@@ -26,16 +26,17 @@
     window.IE_ANGULAR_NODE_NAMES = "sc-breadcrumb|sc-button|sc-datatable|sc-column|sc-date|sc-files|sc-navigation|sc-navigation-item|sc-nomenclature|sc-float|sc-int|sc-promise-state|" +
     "sc-search|sc-search-button|sc-filter|sc-select|sc-tabs|sc-text|sc-textarea|sc-validation-error|ng-form|accordion|accordion-group|accordion-heading|";
   </script>
-  <%= jsBundle('build/js/lib.ie8.js') %>
+<% jsBundle('lib.ie8.js').forEach(function(file) { %>
+  <script src="<%= file.path %>?_h=<%= file.hash %>"></script><% }); %>
   <![endif]-->
 
   <!--[if gte IE 9]>-->
-  <%= jsBundle('build/js/lib.js') %>
+<% jsBundle('lib.js').forEach(function(file) { %>
+  <script src="<%= file.path %>?_h=<%= file.hash %>"></script><% }); %>
   <!--<![endif]-->
-
-  <%= jsBundle('build/js/app.js') %>
-  <%= jsBundle('build/js/templates.js') %>
-  <%= jsBundle('build/js/sample.data.js') %>
-<!--  <%= jsBundle('build/js/test.js') %>-->
+<% jsBundle('app.js').forEach(function(file) { %>
+  <script src="<%= file.path %>?_h=<%= file.hash %>"></script><% }); %>  
+<% templatesBundle('templates.js').forEach(function(file) { %>
+  <script src="<%= file.path %>?_h=<%= file.hash %>"></script><% }); %>
 </body>
 </html>

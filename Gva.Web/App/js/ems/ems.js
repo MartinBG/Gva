@@ -8,7 +8,9 @@
     'ui.router',
     'ui.bootstrap',
     'common',
-    //'ems.templates',
+    // @ifndef DEBUG
+    'ems.templates',
+    // @endif
     'l10n',
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {

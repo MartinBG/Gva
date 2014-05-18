@@ -5,7 +5,9 @@
   angular.module('scaffolding', [
     'ng',
     'ui.bootstrap',
-    'ui.jq'//,
-    //'scaffolding.templates'
+    // @ifndef DEBUG
+    'scaffolding.templates',
+    // @endif
+    'ui.jq'
   ]);
 }(angular));

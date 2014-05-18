@@ -160,10 +160,7 @@
     <Content Include="App\css\dataTables.bootstrap.css" />
     <Content Include="App\css\style.css" />
     <Content Include="App\css\uxp.css" />
-    <Content Include="App\gruntfile.js" />
-    <Content Include="App\gruntTasks\bundle.js" />
-    <Content Include="App\gruntTasks\protractorRunner.js" />
-    <Content Include="App\gruntTasks\tv4.js" />
+    <Content Include="App\gulpfile.js" />
     <Content Include="App\img\initial-loader.gif" />
     <Content Include="App\img\loading-icon-white.gif" />
     <Content Include="App\img\loading-icon.gif" />

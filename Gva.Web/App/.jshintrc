@@ -17,5 +17,6 @@
   "strict": true,
   "trailing": true,
   "maxlen": 100,
-  "quotmark": "single"
+  "quotmark": "single",
+  "-W100": true // BOM markers throw a 'This character may get silently deleted by one or more browsers.' message
 }

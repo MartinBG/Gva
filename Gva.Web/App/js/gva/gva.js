@@ -7,7 +7,9 @@
     'ngResource',
     'ui.router',
     'ui.bootstrap',
-    //'gva.templates',
+    // @ifndef DEBUG
+    'gva.templates',
+    // @endif
     'common',
     'l10n',
     'l10n-tools',

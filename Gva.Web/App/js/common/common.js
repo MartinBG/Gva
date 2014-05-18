@@ -7,7 +7,9 @@
     'ngResource',
     'ui.router',
     'ui.bootstrap',
-    //'common.templates',
+    // @ifndef DEBUG
+    'common.templates',
+    // @endif
     'l10n',
     'l10n-tools'
   ]).config(['$stateProvider', function ($stateProvider) {
