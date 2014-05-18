@@ -92,11 +92,6 @@
           'organizations.tabs.staffExaminers': 'root.organizations.view.staffExaminers'
         },
         'organizations.tabs.addresses': 'root.organizations.view.addresses',
-        //'organizations.tabs.registers': {
-        //  'organizations.tabs.regAirportOperators': 'root.organizations.view.regAirportOperators',
-        //  'organizations.tabs.regGroundServiceOperators':
-        //    'root.organizations.view.regGroundServiceOperators'
-        //},
         'organizations.tabs.docs': {
           'organizations.tabs.others': 'root.organizations.view.documentOthers'
         },
