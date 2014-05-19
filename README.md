@@ -4,13 +4,13 @@ gva
 #### Build
 
 1. Install [NodeJS](http://nodejs.org/)
-2. Install `grunt-cli` globally with `npm install -g grunt-cli`
+2. Install `gulp` globally with `npm install -g gulp`
 3. Install `bower` globally with `npm install -g bower`
-4. In the js app folder `cd .\Gva.Web\App`
+4. In the js app folder `cd .\Gva.Web.App`
   * Install the required npm packages with `npm install`
   * Install the required bower components with `bower install`
-  * Build the js app with `grunt`
-5. Open the solution `Gva.sln` and run the web project `Gva.Web`
+  * Build the js app with `gulp`
+5. Open the solution `Gva.sln` and run the web project `Gva.Web.Host`
 
 #### Test
 
