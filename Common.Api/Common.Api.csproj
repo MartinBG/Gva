@@ -112,8 +112,6 @@
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
     <Compile Include="Blob\MultipartBlobData.cs" />
-    <Compile Include="Jobs\IJob.cs" />
-    <Compile Include="Jobs\JobHost.cs" />
     <Compile Include="Models\Blob.cs" />
     <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -139,7 +137,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
-      <Name>Common</Name>
+      <Name>Common %28Common\Common%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

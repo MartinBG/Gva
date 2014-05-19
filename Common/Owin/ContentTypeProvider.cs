@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Owin.StaticFiles.ContentTypes;
 
-namespace Gva.Web.Owin
+namespace Common.Owin
 {
     public class ContentTypeProvider : FileExtensionContentTypeProvider
     {

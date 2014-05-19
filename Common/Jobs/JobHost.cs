@@ -6,7 +6,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Common.Api.Jobs
+namespace Common.Jobs
 {
     public class JobHost : IRegisteredObject, IDisposable
     {

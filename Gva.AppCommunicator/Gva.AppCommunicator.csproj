@@ -104,7 +104,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
-      <Name>Common</Name>
+      <Name>Common %28Common\Common%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Docs.Api\Docs.Api.csproj">
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>

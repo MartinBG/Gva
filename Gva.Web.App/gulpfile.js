@@ -161,7 +161,7 @@ var stylishReporter = function (result, config, options) {
   console.log(ret + '\n');
 };
 
-var outputDir = 'build';
+var outputDir = '../Gva.Web.Host/App';
 var jsOutputDir = outputDir + '/js';
 var cssOutputDir = outputDir + '/css';
 var templatesOutputDir = outputDir + '/templates';
@@ -367,7 +367,7 @@ var bundles = {
 gulp.task('clean', function () {
   return gulp
     .src(outputDir, {read: false})
-    .pipe(clean());
+    .pipe(clean({ force: true }));
 });
 
 gulp.task('lint', function() {

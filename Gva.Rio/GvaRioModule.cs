@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using Gva.Rio.Jobs;
-using Common.Api.Jobs;
+using Common.Jobs;
 using Common.Rio.RioObjectExtraction;
 using Gva.Rio.IncomingDocProcessor;
+using Gva.Rio.Jobs;
 
 namespace Gva.Rio
 {

@@ -21,7 +21,6 @@ namespace Common.Api.OAuth
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-
             User user = await this.TryGetUserWithCredentials(context.UserName, context.Password, context.OwinContext);
             if (user != null)
             {

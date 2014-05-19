@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Common.Api.Jobs
+namespace Common.Jobs
 {
     public interface IJob
     {

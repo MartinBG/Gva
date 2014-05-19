@@ -1,6 +1,6 @@
 ﻿using Owin;
 
-namespace Gva.Web.Owin
+namespace Common.Owin
 {
     public static class RerouteExtensions
     {

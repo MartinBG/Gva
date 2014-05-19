@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
 using Autofac.Integration.WebApi.Owin;
-using Common;
-using Common.Api;
-using Common.Api.OAuth;
 using Common.Http;
+using Common.Jobs;
 using Common.Utils;
-using Docs.Api;
-using Gva.Api;
-using Gva.Web.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.Security.Infrastructure;
@@ -20,54 +18,26 @@ using Microsoft.Owin.StaticFiles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using Regs.Api;
-using Common.Api.Jobs;
-using Gva.Rio;
-using Common.Rio;
 
-namespace Gva.Web
+namespace Common.Owin
 {
-    public class Startup
+    public class App
     {
-        public void Configuration(IAppBuilder app)
+        public static void Configure(IAppBuilder app, IContainer container)
         {
-            ConfigureAutoMapper();
-            var container = CreateAutofacContainer();
             app.UseAutofacMiddleware(container);
-            ConfigureAuth(app);
+            ConfigureAuth(app, container);
             ConfigureWebApi(app, container);
             ConfigureStaticFiles(app);
             StartJobs(container);
         }
 
-        public static void ConfigureAutoMapper()
-        {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new Gva.RioBridge.GvaRioBridgeMapperProfile());
-            });
-        }
-
-        public static IContainer CreateAutofacContainer()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new CommonModule());
-            builder.RegisterModule(new CommonApiModule());
-            builder.RegisterModule(new DocsApiModule());
-            builder.RegisterModule(new GvaApiModule());
-            builder.RegisterModule(new RegsApiModule());
-            builder.RegisterModule(new CommonRioModule());
-            builder.RegisterModule(new GvaRioBrdigeModule());
-            builder.RegisterModule(new GvaRioModule());
-            return builder.Build();
-        }
-
-        public void ConfigureAuth(IAppBuilder app)
+        public static void ConfigureAuth(IAppBuilder app, IContainer container)
         {
             app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/api/token"),
-                Provider = new ApplicationOAuthProvider(),
+                Provider = container.Resolve<IOAuthAuthorizationServerProvider>(),
                 //override the token serialization/deserialization to be able to capture the properties
                 AccessTokenProvider = new AuthenticationTokenProvider()
                 {
@@ -86,7 +56,7 @@ namespace Gva.Web
             });
         }
 
-        public void ConfigureWebApi(IAppBuilder app, IContainer container)
+        public static void ConfigureWebApi(IAppBuilder app, IContainer container)
         {
             HttpConfiguration config = new HttpConfiguration();
 
@@ -120,19 +90,19 @@ namespace Gva.Web
             app.UseWebApi(config);
         }
 
-        public void ConfigureStaticFiles(IAppBuilder app)
+        public static void ConfigureStaticFiles(IAppBuilder app)
         {
             app.UseReroute("/", "/index.html");
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = new PathString(""),
-                FileSystem = new PhysicalFileSystem("./App/build"),
+                FileSystem = new PhysicalFileSystem("./App"),
                 ContentTypeProvider = new ContentTypeProvider(),
                 ServeUnknownFileTypes = false
             });
         }
 
-        public void StartJobs(IContainer container)
+        public static void StartJobs(IContainer container)
         {
             var jobs = container.Resolve<IJob[]>();
 

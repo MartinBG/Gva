@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Gva.Web.Owin
+namespace Common.Owin
 {
     public class RerouteMiddleware
     {
