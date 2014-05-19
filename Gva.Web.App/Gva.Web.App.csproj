@@ -1327,19 +1327,7 @@
   <ItemGroup>
     <Content Include="schema\person-status.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\gva\directives\button\" />
-    <Folder Include="js\gva\directives\hasError\" />
-    <Folder Include="js\gva\directives\validationError\" />
-    <Folder Include="js\gva\persons\views\publishers\" />
-    <Folder Include="test\ems\mocks\" />
-    <Folder Include="test\gva\aircrafts\pageObjects\" />
-    <Folder Include="test\gva\aircrafts\specs\" />
-    <Folder Include="test\gva\airports\pageObjects\" />
-    <Folder Include="test\gva\airports\specs\" />
-    <Folder Include="test\gva\organizations\pageObjects\" />
-    <Folder Include="test\gva\organizations\specs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
