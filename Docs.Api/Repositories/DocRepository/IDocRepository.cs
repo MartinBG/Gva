@@ -75,6 +75,7 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             UserContext userContext,
             string regUri,
+            DateTime regDate,
             bool checkVersion = false,
             byte[] docVersion = null);
 

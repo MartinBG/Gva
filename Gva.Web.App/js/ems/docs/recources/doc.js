@@ -63,7 +63,8 @@
               url: '/api/docs/:id/manualRegister',
               params: {
                 docVersion: '@docVersion',
-                regUri: ''
+                regUri: '',
+                regDate: ''
               }
             },
             'getRegisterIndex': {

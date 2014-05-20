@@ -1070,7 +1070,7 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                Doc oldDoc = this.docRepository.Find(id, 
+                Doc oldDoc = this.docRepository.Find(id,
                     e => e.DocType,
                     e => e.DocUnits);
 
@@ -1184,7 +1184,7 @@ namespace Docs.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult ManualRegisterDoc(int id, string docVersion, string regUri)
+        public IHttpActionResult ManualRegisterDoc(int id, string docVersion, string regUri, DateTime regDate)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
@@ -1196,6 +1196,7 @@ namespace Docs.Api.Controllers
                 unitUser,
                 this.userContext,
                 regUri,
+                regDate,
                 true,
                 Helper.StringToVersion(docVersion));
 

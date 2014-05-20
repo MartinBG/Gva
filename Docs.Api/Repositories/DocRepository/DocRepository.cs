@@ -456,6 +456,7 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             UserContext userContext,
             string regUri,
+            DateTime regDate,
             bool checkVersion = false,
             byte[] docVersion = null)
         {
@@ -501,6 +502,7 @@ namespace Docs.Api.Repositories.DocRepository
                 docRegister.DocRegisterId,
                 registerIndex.Code,
                 regUri,
+                regDate,
                 userContext);
 
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()

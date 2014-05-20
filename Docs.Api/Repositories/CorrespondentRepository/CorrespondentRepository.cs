@@ -11,6 +11,7 @@ using Common.Api.Repositories;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
+    //? rewrite with predicate
     public class CorrespondentRepository : Repository<Correspondent>, ICorrespondentRepository
     {
         public CorrespondentRepository(IUnitOfWork unitOfWork)

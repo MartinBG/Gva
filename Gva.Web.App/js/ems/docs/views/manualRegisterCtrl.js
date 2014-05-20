@@ -16,7 +16,8 @@
             .manualRegister({
               id: doc.docId,
               docVersion: doc.version,
-              regUri: $scope.regUri
+              regUri: $scope.regUri,
+              regDate: $scope.regDate
             }, {})
             .$promise
             .then(function () {
