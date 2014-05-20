@@ -9,17 +9,7 @@ var _ = require('lodash');
 var crypto = require('crypto');
 
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var clean = require('gulp-clean');
-var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
-var concatSourcemap = require('gulp-concat-sourcemap');
-var uglify = require('gulp-uglify');
-var html2js = require('gulp-html2js');
-var minifyCSS = require('gulp-minify-css');
-var template = require('gulp-template');
-var preprocess = require('gulp-preprocess');
-var gulpif = require('gulp-if');
+var plugins = require('gulp-load-plugins')();
 var es = require('event-stream');
 
 // expand all globs the way gulp would expland them synchronously
@@ -367,7 +357,7 @@ var bundles = {
 gulp.task('clean', function () {
   return gulp
     .src(outputDir, {read: false})
-    .pipe(clean({ force: true }));
+    .pipe(plugins.clean({ force: true }));
 });
 
 gulp.task('lint', function() {
@@ -377,8 +367,9 @@ gulp.task('lint', function() {
       'js/**/*.js',
       'test/**/*.js'
     ])
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylishReporter)).on('error', gutil.log);
+    .pipe(plugins.jshint())
+    .pipe(plugins.jshint.reporter(stylishReporter))
+    .on('error', plugins.util.log);
 });
 
 gulp.task('js-raw', ['clean'], function() {
@@ -388,7 +379,7 @@ gulp.task('js-raw', ['clean'], function() {
       bundles.js['lib.ie8.js'],
       bundles.js['app.js']
     ), { base: '.' })
-    .pipe(preprocess({ context: { DEBUG: true } }))
+    .pipe(plugins.preprocess({ context: { DEBUG: true } }))
     .pipe(gulp.dest(outputDir));
 });
 
@@ -396,8 +387,8 @@ gulp.task('js-bundled', ['clean'], function() {
   var pipeline = function (file) {
     return gulp
       .src(bundles.js[file])
-      .pipe(preprocess())
-      .pipe(concatSourcemap(file, {
+      .pipe(plugins.preprocess())
+      .pipe(plugins.concatSourcemap(file, {
         sourceRoot: '/',
         sourcesContent: true
       }));
@@ -415,11 +406,11 @@ gulp.task('js-minified', ['clean'], function() {
   var pipeline = function (file, useUglify) {
     return gulp
       .src(bundles.js[file])
-      .pipe(preprocess())
-      .pipe(gulpif(useUglify, uglify({
+      .pipe(plugins.preprocess())
+      .pipe(plugins['if'](useUglify, plugins.uglify({
         mangle: false
       })))
-      .pipe(concat(file));
+      .pipe(plugins.concat(file));
   };
 
   return es.merge(
@@ -439,7 +430,7 @@ gulp.task('css-raw', ['clean'], function() {
 gulp.task('css-bundled', ['clean'], function() {
   return gulp
     .src(bundles.css['styles.css'])
-    .pipe(concatSourcemap('styles.css', {
+    .pipe(plugins.concatSourcemap('styles.css', {
       sourceRoot: '/',
       sourcesContent: true
     }))
@@ -449,8 +440,8 @@ gulp.task('css-bundled', ['clean'], function() {
 gulp.task('css-minified', ['clean'], function() {
   return gulp
     .src(bundles.css['styles.css'])
-    .pipe(minifyCSS())
-    .pipe(concat('styles.css'))
+    .pipe(plugins.minifyCSS())
+    .pipe(plugins.concat('styles.css'))
     .pipe(gulp.dest(cssOutputDir));
 });
 
@@ -469,11 +460,11 @@ gulp.task('templates-bundled', ['clean'], function() {
   var pipeline = function (file) {
     return gulp
       .src(bundles.templates[file])
-      .pipe(html2js({
+      .pipe(plugins.html2js({
         base: '.',
         outputModuleName: file.replace(/\.js$/i, '') // remove .js extension
       }))
-      .pipe(concat(file));
+      .pipe(plugins.concat(file));
   };
 
   return es.merge(
@@ -482,7 +473,7 @@ gulp.task('templates-bundled', ['clean'], function() {
       pipeline('ems.templates.js'),
       pipeline('scaffolding.templates.js')
     )
-    .pipe(concat('templates.js'))
+    .pipe(plugins.concat('templates.js'))
     .pipe(gulp.dest(templatesOutputDir));
 });
 
@@ -549,7 +540,7 @@ var index = function(options) {
   return function () {
     return gulp
       .src('index.html')
-      .pipe(template({
+      .pipe(plugins.template({
         fullVersion: '',
         jsBundle: _.partial(getBundle, 'js'),
         cssBundle: _.partial(getBundle, 'css'),
