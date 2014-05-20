@@ -1,5 +1,5 @@
 'use strict';
-/*global process, require, console*/
+/*global process, require*/
 /*jshint -W069*/ // ['XXX'] is better written in dot notation
 /*jshint -W097*/ // Use the function form of "use strict".
 /*jshint maxlen:false*/
@@ -93,62 +93,6 @@ var globMultipleSync = function(globs, opt) {
     })
     .uniq('path')
     .value();
-};
-
-// a fork of jshint-stylish with some minor changes (changed colors and added error codes)
-// https://github.com/sindresorhus/jshint-stylish/blob/master/stylish.js
-var stylishReporter = function (result, config, options) {
-  var chalk = require('chalk');
-  var table = require('text-table');
-
-  var total = result.length;
-  var ret = '';
-  var headers = [];
-  var prevfile;
-
-  options = options || {};
-
-  ret += table(result.map(function (el, i) {
-    var err = el.error;
-    // E: Error, W: Warning, I: Info
-    var isError = err.code && err.code[0] === 'E';
-
-    var line = [
-      '',
-      chalk.gray('line ' + err.line),
-      chalk.gray('col ' + err.character),
-      isError ? chalk.red(err.code + ' ' + err.reason) : chalk.cyan(err.code + ' ' + err.reason)
-    ];
-
-    if (el.file !== prevfile) {
-      headers[i] = el.file;
-    }
-
-    if (options.verbose) {
-      line.push(chalk.gray('(' + err.code + ')'));
-    }
-
-    prevfile = el.file;
-
-    return line;
-  }), {
-    stringLength: function (str) {
-      return chalk.stripColor(str).length;
-    }
-  }).split('\n').map(function (el, i) {
-    return headers[i] ? '\n' + chalk.underline(headers[i]) + '\n' + el : el;
-  }).join('\n') + '\n\n';
-
-  if (total > 0) {
-    /*jshint -W101*/
-    ret += chalk.red((process.platform !== 'win32' ? '? ' : '') + total + ' problem' + (total === 1 ? '' : 's'));
-    /*jshint +W101*/
-  } else {
-    ret += chalk.green((process.platform !== 'win32' ? '? ' : '') + 'No problems');
-    ret = '\n' + ret.trim();
-  }
-
-  console.log(ret + '\n');
 };
 
 var outputDir = '../Gva.Web.Host/App';
@@ -368,7 +312,7 @@ gulp.task('lint', function() {
       'test/**/*.js'
     ])
     .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter(stylishReporter))
+    .pipe(plugins.jshint.reporter('jshint-stylish'))
     .on('error', plugins.util.log);
 });
 
