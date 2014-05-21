@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function AirportInventorySearchCtrl(
@@ -11,6 +11,12 @@
     inventory
   ) {
     $scope.inventory = inventory;
+    $scope.indexed = _.filter(inventory, function(item) {
+       return item.bookPageNumber;
+    });
+    $scope.notIndexed =  _.filter(inventory, function(item) {
+       return !item.bookPageNumber;
+    });
 
     $scope.edit = function (item) {
       var state;
@@ -55,4 +61,4 @@
   };
 
   angular.module('gva').controller('AirportInventorySearchCtrl', AirportInventorySearchCtrl);
-}(angular));
+}(angular, _));

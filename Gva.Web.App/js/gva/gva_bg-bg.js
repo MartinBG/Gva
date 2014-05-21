@@ -363,7 +363,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notIndexed: 'Документи извън описа'
         }
       },
       equipments: {
@@ -638,7 +639,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notIndexed: 'Документи извън описа'
         }
       },
       aircrafts: {
@@ -1675,7 +1677,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notIndexed: 'Документи извън описа'
         }
       },
       persons: {
@@ -2388,7 +2391,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notIndexed: 'Документи извън описа'
         },
         ratingSearch: {
           newRating: 'Нов клас',
@@ -2840,7 +2844,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           pageCount: 'Бр. стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notIndexed: 'Документи извън описа'
         },
         chooseDocuments: {
           save: 'Запис',

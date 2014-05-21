@@ -1,5 +1,5 @@
 ﻿<div>
-  <sc-datatable items="inventory" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
       <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
@@ -27,6 +27,33 @@
       <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
         <span class="glyphicon glyphicon-file"></span>
       </a>
+    </sc-column>
+  </sc-datatable>
+</div>
+
+<div style="margin-top:40px;">
+ <h5 class="form-header" l10n-text="persons.inventorySearch.notIndexed"></h5>
+  <sc-datatable items="notIndexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
+    </sc-column>
+    <sc-column data="name" title="persons.inventorySearch.document">
+    </sc-column>
+    <sc-column data="type" title="persons.inventorySearch.type">
+    </sc-column>
+    <sc-column data="number" title="persons.inventorySearch.docNumber">
+    </sc-column>
+    <sc-column data="date" title="persons.inventorySearch.date" type="date">
+    </sc-column>
+    <sc-column data="publisher" title="persons.inventorySearch.publisher">
+    </sc-column>
+    <sc-column data="valid" title="persons.inventorySearch.valid" type="boolean">
+    </sc-column>
+    <sc-column data="fromDate" title="persons.inventorySearch.fromDate" type="date">
+    </sc-column>
+    <sc-column data="toDate" title="persons.inventorySearch.toDate" type="date">
     </sc-column>
   </sc-datatable>
 </div>
