@@ -44,7 +44,7 @@ namespace OMR
             {
                 if (extractedImg == null)
                 {
-                    throw new Exception("Image not extracted");
+                    return null;
                 }
 
                 double ctrlDarkness;
@@ -274,7 +274,7 @@ namespace OMR
         /// <param name="width">The width to resize to.</param>
         /// <param name="height">The height to resize to.</param>
         /// <returns>The resized image.</returns>
-        private Bitmap ResizeImage(Bitmap image, int width, int height)
+        public Bitmap ResizeImage(Bitmap image, int width, int height)
         {
             Bitmap result = new Bitmap(width, height);
             // set the resolutions the same to avoid cropping due to resolution differences
