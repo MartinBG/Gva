@@ -122,3 +122,26 @@ GO
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\Noms\commonQuestions.sql"
 :r $(rootPath)\"..\Insert\Noms\specializedQuestions.sql"
+
+
+---------------------------------------------------------------
+--Insert GVA EXCEL CONFIG
+---------------------------------------------------------------
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Units.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\UnitRelations.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\RegisterIndexes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocFileTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\IrregularityTypes.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Classifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ClassificationRelations.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\UnitClassifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeUnitRoles.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeClassifications.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ElectronicServiceStages.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ElectronicServiceStageExecutors.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\Users.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ConfigFinalize.sql"
+
+:r $(rootPath)\"..\Insert\GvaCorrespondents.sql"

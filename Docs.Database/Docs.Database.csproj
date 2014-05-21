@@ -123,7 +123,6 @@
     <Content Include="Insert\Classifications\ClassificationRelations.sql" />
     <Content Include="Insert\Classifications\ClassificationRoles.sql" />
     <Content Include="Insert\Classifications\Classifications.sql" />
-    <Content Include="Insert\Correspondents\Correspondents.sql" />
     <Content Include="Insert\Correspondents\CorrespondentGroups.sql" />
     <Content Include="Insert\Correspondents\CorrespondentTypes.sql" />
     <Content Include="Insert\Docs\DocFileOriginTypes.sql" />
