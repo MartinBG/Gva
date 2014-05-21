@@ -358,7 +358,7 @@ namespace Docs.Api.Repositories.DocRepository
                 .ToList();
         }
 
-        public void RegisterDoc(
+        public string RegisterDoc(
             Doc doc,
             UnitUser unitUser,
             UserContext userContext,
@@ -374,11 +374,21 @@ namespace Docs.Api.Repositories.DocRepository
 
             DateTime currentDate = DateTime.Now;
 
-            DocRegister docRegister = spGetDocRegisterNextNumber(spGetDocRegisterId(doc.DocId).Value);
+            DocRegister docRegister;
+
+            if (doc.DocRegisterId.HasValue)
+            {
+                docRegister = spGetDocRegisterNextNumber(doc.DocRegisterId.Value);
+            }
+            else
+            {
+                docRegister = spGetDocRegisterNextNumber(spGetDocRegisterId(doc.DocId).Value);
+            }
+
             RegisterIndex registerIndex = this.unitOfWork.DbContext.Set<RegisterIndex>()
                 .SingleOrDefault(e => e.RegisterIndexId == docRegister.RegisterIndexId);
 
-            if (doc.DocRegisterId.HasValue)
+            if (!string.IsNullOrEmpty(doc.RegUri))
             {
                 throw new Exception("Document has been already registered.");
             }
@@ -386,6 +396,11 @@ namespace Docs.Api.Repositories.DocRepository
             if (registerIndex == null)
             {
                 throw new Exception("RegisterIndex can not be found.");
+            }
+
+            if (registerIndex.Alias == "Manual")
+            {
+                return "Manual";
             }
 
             int? caseId = doc.DocRelations.FirstOrDefault().RootDocId;
@@ -424,6 +439,76 @@ namespace Docs.Api.Repositories.DocRepository
                 doc.RegUri,
                 unitUser.UnitUserId,
                 userContext);
+
+            return string.Empty;
+        }
+
+        public string ManualRegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            string regUri,
+            bool checkVersion = false,
+            byte[] docVersion = null)
+        {
+            doc.EnsureDocRelationsAreLoaded();
+
+            if (checkVersion)
+            {
+                doc.EnsureForProperVersion(docVersion);
+            }
+
+            DateTime currentDate = DateTime.Now;
+
+            DocRegister docRegister;
+
+            if (doc.DocRegisterId.HasValue)
+            {
+                docRegister = spGetDocRegisterNextNumber(doc.DocRegisterId.Value);
+            }
+            else
+            {
+                docRegister = spGetDocRegisterNextNumber(spGetDocRegisterId(doc.DocId).Value);
+            }
+
+            RegisterIndex registerIndex = this.unitOfWork.DbContext.Set<RegisterIndex>()
+                .SingleOrDefault(e => e.RegisterIndexId == docRegister.RegisterIndexId);
+
+            if (!string.IsNullOrEmpty(doc.RegUri))
+            {
+                throw new Exception("Document has been already registered.");
+            }
+
+            if (registerIndex == null)
+            {
+                throw new Exception("RegisterIndex can not be found.");
+            }
+
+            if (registerIndex.Alias != "Manual")
+            {
+                throw new Exception("RegisterIndex is not used.");
+            }
+
+            doc.ManualRegister(
+                docRegister.DocRegisterId,
+                registerIndex.Code,
+                regUri,
+                userContext);
+
+            DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
+                .SingleOrDefault(e => e.Alias.ToLower() == "Registration".ToLower());
+
+            doc.CreateDocWorkflow(
+                docWorkflowAction,
+                currentDate,
+                null,
+                null,
+                unitUser.UnitId,
+                doc.RegUri,
+                unitUser.UnitUserId,
+                userContext);
+
+            return string.Empty;
         }
 
         public void GenerateAccessCode(Doc doc, UserContext userContext)

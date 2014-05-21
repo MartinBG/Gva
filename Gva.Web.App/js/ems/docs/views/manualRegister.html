@@ -1,0 +1,19 @@
+﻿<div class="well-sm panel-body">
+  <ng-form name="manualRegisterForm" sc-validate="{}">
+      <div class="well-sm panel-body ">
+
+        <div class="row">
+          <div class="form-group col-sm-8" sc-has-error="regUri">
+            <label class="control-label" l10n-text="docs.edit.case.manualRegister.manualNumber"></label>
+            <sc-text ng-model="regUri" name="regUri" required></sc-text>
+          </div>
+        </div>
+
+      </div>
+    </ng-form>
+
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="save()" text="docs.edit.case.manualRegister.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.case.manualRegister.cancel" class="btn btn-default" icon="glyphicon-arrow-left"></sc-button>
+  </div>
+</div>

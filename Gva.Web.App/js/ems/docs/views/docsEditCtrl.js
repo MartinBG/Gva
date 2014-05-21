@@ -252,8 +252,12 @@
         docVersion: doc.version
       }, {})
         .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        .then(function (data) {
+          if (data.result && data.result === 'Manual') {
+            return $state.go('root.docs.edit.case.manualRegister');
+          } else {
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          }
         });
     };
 

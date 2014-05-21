@@ -61,10 +61,18 @@ namespace Docs.Api.Repositories.DocRepository
 
         List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser);
 
-        void RegisterDoc(
+        string RegisterDoc(
             Doc doc,
             UnitUser unitUser,
             UserContext userContext,
+            bool checkVersion = false,
+            byte[] docVersion = null);
+
+        string ManualRegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            string regUri,
             bool checkVersion = false,
             byte[] docVersion = null);
 

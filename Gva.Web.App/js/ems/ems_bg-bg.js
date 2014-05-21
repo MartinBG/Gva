@@ -169,6 +169,11 @@
               roleReaders: 'Читатели',
               editors: 'Редактори',
               roleRegistrators: 'Регистратори'
+            },
+            manualRegister: {
+              manualNumber: 'Номер на документ',
+              save: 'Запис',
+              cancel: 'Отказ'
             }
           },
           classifications: {

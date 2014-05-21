@@ -109,6 +109,7 @@
     <Content Include="js\ems\docs\views\caseSelectCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="js\ems\docs\views\docsCorrNewCtrl.js" />
     <Content Include="js\ems\docs\views\docsEdit.html" />
     <Content Include="js\ems\docs\views\docsEditCtrl.js" />
     <Content Include="js\ems\docs\views\docsNew.html" />
@@ -131,6 +132,8 @@
     <Content Include="js\ems\docs\views\editStageCtrl.js" />
     <Content Include="js\ems\docs\views\endStage.html" />
     <Content Include="js\ems\docs\views\endStageCtrl.js" />
+    <Content Include="js\ems\docs\views\manualRegister.html" />
+    <Content Include="js\ems\docs\views\manualRegisterCtrl.js" />
     <Content Include="js\ems\docs\views\nextStage.html" />
     <Content Include="js\ems\docs\views\nextStageCtrl.js" />
     <Content Include="js\ems\docs\views\portalModal.html" />

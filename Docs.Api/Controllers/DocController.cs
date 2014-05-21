@@ -1143,10 +1143,34 @@ namespace Docs.Api.Controllers
             Doc doc = this.docRepository.Find(id,
                 e => e.DocRelations);
 
-            this.docRepository.RegisterDoc(
+            string result = this.docRepository.RegisterDoc(
                 doc,
                 unitUser,
                 this.userContext,
+                true,
+                Helper.StringToVersion(docVersion));
+
+            this.unitOfWork.Save();
+
+            return Ok(new
+            {
+                result = result
+            });
+        }
+
+        [HttpPost]
+        public IHttpActionResult ManualRegisterDoc(int id, string docVersion, string regUri)
+        {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            Doc doc = this.docRepository.Find(id,
+                e => e.DocRelations);
+
+            string result = this.docRepository.ManualRegisterDoc(
+                doc,
+                unitUser,
+                this.userContext,
+                regUri,
                 true,
                 Helper.StringToVersion(docVersion));
 

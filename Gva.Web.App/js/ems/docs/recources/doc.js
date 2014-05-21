@@ -57,6 +57,14 @@
                 docFileId: '@docFileId',
                 fileKey: '@fileKey'
               }
+            },
+            'manualRegister': {
+              method: 'POST',
+              url: '/api/docs/:id/manualRegister',
+              params: {
+                docVersion: '@docVersion',
+                regUri: ''
+              }
             }
           });
       }]);

@@ -1093,6 +1093,21 @@ namespace Docs.Api.Models
             this.IsRegistered = true;
         }
 
+        public void ManualRegister(int? docRegisterId, string regIndex, string regUri, UserContext userContext)
+        {
+            DateTime currentDate = DateTime.Now;
+
+            this.ModifyDate = currentDate;
+            this.ModifyUserId = userContext.UserId;
+
+            this.DocRegisterId = docRegisterId;
+            this.RegUri = regUri;
+            this.RegIndex = regIndex;
+            this.RegNumber = 1;
+            this.RegDate = currentDate;
+            this.IsRegistered = true;
+        }
+
         public void EnsureForProperVersion(byte[] version)
         {
             if (!this.Version.SequenceEqual(version))
