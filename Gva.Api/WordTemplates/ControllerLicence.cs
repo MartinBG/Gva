@@ -98,7 +98,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.GetPart("personDocumentMedicals/" + i).Content);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
-            var licenceCaCode = JObject.Parse(licenceType.TextContent).Get<string>("codeCA");
+            var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licenceType.Code,
@@ -145,7 +145,7 @@ namespace Gva.Api.WordTemplates
                         personAddress.Get<string>("addressAlt"),
                         personAddress.Get<string>("settlement.nameAlt")),
                     NATIONALITY = nationality.Name,
-                    NATIONALITY_EN = JObject.Parse(nationality.TextContent).Get<string>("nationalityCodeCA"),
+                    NATIONALITY_EN = nationality.TextContent.Get<string>("nationalityCodeCA"),
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.Code),
                     L_RATINGS = this.GetRatings(includedRatings),
                     ENDORSEMENT = this.GetEndorsements(includedRatings),
@@ -280,7 +280,7 @@ namespace Gva.Api.WordTemplates
                 }
 
                 var engLevel = this.nomRepository.GetNomValue("engLangLevels", engLangLevelId.Value);
-                int? seqNumber = JObject.Parse(engLevel.TextContent).Get<int?>("seqNumber");
+                int? seqNumber = engLevel.TextContent.Get<int?>("seqNumber");
                 if (!seqNumber.HasValue)
                 {
                     continue;

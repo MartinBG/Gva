@@ -56,7 +56,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.GetPart("personDocumentExams/" + i).Content);
             var classes = this.GetClasses(includedRatings);
             var documents = this.GetDocuments(includedTrainings, includedExams);
-            var licenceCodeCa = JsonConvert.DeserializeObject<JObject>(licenceType.TextContent).Get<string>("codeCA");
+            var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licenceType.Code,

@@ -42,8 +42,7 @@ namespace Gva.Api.Controllers
                 .GetLotIndex(lotId)
                 .GetPart(path)
                 .Content.Get<int>("licenceType.nomValueId");
-            string templateName = JObject.Parse(this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent)
-                .Get<string>("templateName");
+            string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
             JObject json = dataGenerator.GetData(lotId, path, index);

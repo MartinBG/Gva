@@ -181,7 +181,7 @@ namespace Gva.Api.WordTemplates
                 null;
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
-            var licenceCaCode = JObject.Parse(licenceType.TextContent).Get<string>("codeCA");
+            var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = this.GetOtherLicences(licenceCaCode, edition, includedLicences);
             var rtoRating = this.GetRtoRating(includedRatings);
             var engLevel = this.GetEngLevel(includedTrainings);
@@ -201,7 +201,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
                     COUNTRY_NAME_BG = country.Name,
-                    COUNTRY_CODE = JsonConvert.DeserializeObject<JObject>(country.TextContent).Get<string>("nationalityCodeCA"),
+                    COUNTRY_CODE = country.TextContent.Get<string>("nationalityCodeCA"),
                     ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
                     OTHER_LICENCE = otherLicences,
                     T_DOCUMENTS = new object[0],
@@ -279,7 +279,7 @@ namespace Gva.Api.WordTemplates
                 new NomValue
                 {
                     Name = null,
-                    TextContent = string.Empty
+                    TextContentString = string.Empty
                 };
 
             return country;
@@ -316,10 +316,7 @@ namespace Gva.Api.WordTemplates
             otherLicences = otherLicences.Concat(includedLicences.Select(l =>
                 new
                 {
-                    LIC_NO = JObject.Parse(this.nomRepository.GetNomValue(
-                            "licenceTypes",
-                            l.Get<int>("licenceType.nomValueId")).TextContent)
-                        .Get<string>("codeCA"),
+                    LIC_NO = this.nomRepository.GetNomValue("licenceTypes", l.Get<int>("licenceType.nomValueId")).TextContent.Get<string>("codeCA"),
                     ISSUE_DATE = l.GetItems<JObject>("editions")
                         .LastOrDefault()
                         .Get<DateTime>("documentDateValidFrom"),
@@ -359,7 +356,7 @@ namespace Gva.Api.WordTemplates
                 }
 
                 var engLevel = this.nomRepository.GetNomValue("engLangLevels", engLangLevelId.Value);
-                int? seqNumber = JObject.Parse(engLevel.TextContent).Get<int?>("seqNumber");
+                int? seqNumber = engLevel.TextContent.Get<int?>("seqNumber");
                 if (!seqNumber.HasValue)
                 {
                     continue;

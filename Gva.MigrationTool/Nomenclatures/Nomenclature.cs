@@ -659,7 +659,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
                         Alias = r.Field<string>("NAME_TRANS"),
-                        TextContent = null,
+                        TextContentString = null,
                         IsActive = true
                     })
                 .ToList();
@@ -685,7 +685,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
                         Alias = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new {
                                 NationalityCodeCA = r.Field<string>("CA_NATIONALITY_CODE"),
                                 Heading = r.Field<string>("HEADING"),
@@ -717,7 +717,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()).NomValueId(),
                         Alias = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 type = r.Field<string>("TV_TYPE"),
@@ -751,7 +751,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
                         Alias = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 type = r.Field<string>("ADDRESS_TYPE")
@@ -788,7 +788,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
                         Alias = aliases[r.Field<string>("CODE")],
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE")
@@ -814,7 +814,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     NameAlt = v.NameAlt,
                     ParentValueId = v.ParentValueId,
                     Alias = v.Alias,
-                    TextContent = v.TextContent,
+                    TextContentString = v.TextContentString,
                     IsActive = v.IsActive
                 });
 
@@ -850,7 +850,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = (r.Field<decimal?>("STAFF_TYPE_ID") != null) ? noms["staffTypes"][r.Field<decimal?>("STAFF_TYPE_ID").ToString()].NomValueId : (int?)null,
                         Alias = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -883,7 +883,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 rating = r.Field<short?>("RATING")
@@ -915,7 +915,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 isPilotTraining = r.Field<string>("PILOT_TRAINING")== "Y" ? true : false,
@@ -961,7 +961,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -988,7 +988,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
@@ -1037,7 +1037,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = r.Field<string>("CODE") == "ENG" ? "engTraining" : null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
@@ -1077,7 +1077,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1103,7 +1103,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1129,7 +1129,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1155,7 +1155,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1187,7 +1187,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1213,7 +1213,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["ratingClassGroups"].ByOldId(r.Field<decimal>("GROUP_ID").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1245,7 +1245,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["ratingClasses"].ByOldId(r.Field<decimal>("CLASS_ID").ToString()).NomValueId(),
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1271,7 +1271,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 ratingClassGroupId = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("CLASS_GROUP_ID").ToString()).NomValueId()
@@ -1301,7 +1301,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["authorizationGroups"].ByOldId(r.Field<decimal?>("GROUP_ID").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1333,7 +1333,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1388,7 +1388,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1431,7 +1431,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 type = r.Field<string>("FLAG_YN"),
@@ -1461,7 +1461,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1487,7 +1487,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 description = r.Field<string>("DESCRIPTION"),
@@ -1517,7 +1517,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["aircraftTypes"].ByOldId(r.Field<long?>("ID_AC_TYPE").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 aircraftTCHolderId = noms["aircraftTCHolders"].ByOldId(r.Field<long?>("ID_TC_HOLD").ToString()).NomValueId()
@@ -1547,7 +1547,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1573,7 +1573,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["aircraftGroup66"].ByOldId(r.Field<long?>("ID_AC_66").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 alias = r.Field<string>("CATEGORY")
@@ -1603,7 +1603,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 general = r.Field<string>("GENERAL"),
@@ -1633,7 +1633,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1659,7 +1659,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1685,7 +1685,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1715,7 +1715,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 codeCA = r.Field<string>("CA_CODE"),
@@ -1745,7 +1745,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = r.Field<string>("CODE"),
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 heading = r.Field<string>("HEADING"),
@@ -1778,7 +1778,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1804,7 +1804,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1830,7 +1830,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1856,7 +1856,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1882,7 +1882,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 dateValidFrom = r.Field<DateTime?>("DATE_FROM"),
@@ -1916,7 +1916,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 dateValidFrom = r.Field<DateTime?>("DATE_FROM"),
@@ -1947,7 +1947,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1973,7 +1973,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -1999,7 +1999,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2025,7 +2025,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2051,7 +2051,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["lim147classes"].ByOldId(r.Field<long?>("ID_147_CLASS").ToString()).NomValueId(),
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2077,7 +2077,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["lim147ratings"].ByOldId(r.Field<long?>("ID_147_RATING").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 SortOrder = r.Field<string>("SORT_ORDER"),
@@ -2107,7 +2107,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2133,7 +2133,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["lim145classes"].ByOldId(r.Field<long?>("ID_MF145_CLASS").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 SortOrder = r.Field<string>("SORT_ORDER"),
@@ -2163,7 +2163,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 description = r.Field<string>("DESCRIPTION"),
@@ -2209,7 +2209,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["auditParts"].ByOldId(r.Field<long?>("ID_PART").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
@@ -2248,7 +2248,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["auditParts"].ByOldId(r.Field<long?>("ID_PART").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
@@ -2279,7 +2279,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["auditPartSections"].ByOldId(r.Field<long?>("ID_SECTION").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 sortOrder = r.Field<decimal?>("SORT_ORDER").ToString(),
@@ -2309,7 +2309,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2335,7 +2335,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2361,7 +2361,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2387,7 +2387,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2413,7 +2413,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2425,7 +2425,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 Alias = null,
                 IsActive = true,
                 ParentValueId = null,
-                TextContent = null
+                TextContentString = null
             });
 
             results.Add(new NomValue() {
@@ -2436,7 +2436,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 Alias = null,
                 IsActive = true,
                 ParentValueId = null,
-                TextContent = null
+                TextContentString = null
             });
             noms["aircraftCategories"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
@@ -2462,7 +2462,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY").ToString()).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 address = r.Field<string>("ADDRESS"),
@@ -2499,7 +2499,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 scodeGroup = r.Field<string>("S_CODE_GROUP"),
@@ -2532,7 +2532,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2558,7 +2558,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2584,7 +2584,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2610,7 +2610,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2636,7 +2636,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2662,7 +2662,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2688,7 +2688,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2714,7 +2714,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2740,7 +2740,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -2783,7 +2783,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     };
                 noms["personCheckRatingValues"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2813,7 +2813,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["personRatingModels"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2844,7 +2844,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["airportTypes"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2875,7 +2875,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["airportRelations"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2911,7 +2911,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["aircraftRadiotypes"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2943,7 +2943,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["airportoperatorActivityTypes"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -2983,7 +2983,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["groundServiceOperatorActivityTypes"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3005,7 +3005,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 seqNumber = r.Field<decimal?>("SEQ_NUMBER").ToString(),
@@ -3037,7 +3037,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -3065,7 +3065,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 
@@ -3117,7 +3117,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 code3 = r.Field<string>("tISO3"),
@@ -3150,7 +3150,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = noms["countriesFm"].ByCode(r.Field<string>("tCntsISO")).NomValueId(),
-                        TextContent = JsonConvert.SerializeObject(
+                        TextContentString = JsonConvert.SerializeObject(
                             new
                             {
                                 address = r.Field<string>("tAdrsStreetBG"),
@@ -3202,7 +3202,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["CofATypesFm"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3243,7 +3243,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["EASATypesFm"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3276,7 +3276,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["EASACategoriesFm"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3314,7 +3314,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["EURegTypesFm"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3363,7 +3363,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     Alias = null,
                     IsActive = true,
                     ParentValueId = null,
-                    TextContent = null
+                    TextContentString = null
                 };
                 noms["aircraftDebtTypesFm"][OldId.ToString()] = row;
                 nom.NomValues.Add(row);
@@ -3385,7 +3385,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContent = null
+                        TextContentString = null
                     })
                 .ToList();
 

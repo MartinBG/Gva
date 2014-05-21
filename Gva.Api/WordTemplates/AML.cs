@@ -140,7 +140,7 @@ namespace Gva.Api.WordTemplates
                 new NomValue
                 {
                     Name = null,
-                    TextContent = string.Empty
+                    TextContentString = string.Empty
                 };
 
             return country;
@@ -181,7 +181,7 @@ namespace Gva.Api.WordTemplates
                     .Select(rating => rating.Get<int>("aircraftTypeCategory.nomValueId"));
 
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
-                IEnumerable<string> aliases = categories.Select(category => JsonConvert.DeserializeObject<JObject>(category.TextContent).Get<string>("alias"));
+                IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
 
                 results.Add(new
                 {
@@ -207,10 +207,7 @@ namespace Gva.Api.WordTemplates
             return includedRatings
                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) && 
-                    validAliases.Contains(
-                    JsonConvert.DeserializeObject<JObject>(
-                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
-                    .TextContent).Get<string>("alias")))
+                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId")).TextContent.Get<string>("alias")))
                 .Select(r => new{
                     TYPE = r.Get<string>("aircraftTypeGroup.name"),
                     CAT = r.Get<string>("aircraftTypeCategory.code"),
@@ -228,10 +225,7 @@ namespace Gva.Api.WordTemplates
             return includedRatings
                 .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
-                    validAliases.Contains(
-                    JsonConvert.DeserializeObject<JObject>(
-                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
-                    .TextContent).Get<string>("alias")))
+                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId")).TextContent.Get<string>("alias")))
                 .Select(r => new
                 {
                     TYPE = r.Get<string>("aircraftTypeGroup.name"),
@@ -251,10 +245,7 @@ namespace Gva.Api.WordTemplates
             return includedRatings
                  .Where(r => r.Get<JObject>("aircraftTypeGroup") != null && r.Get<JObject>("aircraftTypeCategory") != null &&
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.Get<int>("aircraftTypeCategory.parentValueId")).Code) &&
-                    validAliases.Contains(
-                    JsonConvert.DeserializeObject<JObject>(
-                    this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId"))
-                    .TextContent).Get<string>("alias")))
+                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", r.Get<int>("aircraftTypeCategory.nomValueId")).TextContent.Get<string>("alias")))
                 .Select(r => new
                 {
                     AIRCRAFT = r.Get<string>("aircraftTypeGroup.name"),

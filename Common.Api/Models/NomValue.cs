@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Common.Api.Models
 {
@@ -19,7 +20,39 @@ namespace Common.Api.Models
 
         public string Alias { get; set; }
 
-        public string TextContent { get; set; }
+        private string textContentString;
+        [JsonIgnore]
+        public string TextContentString
+        {
+            get
+            {
+                return this.textContentString;
+            }
+            set
+            {
+                this.textContentString = value;
+                this.textContent = null;
+            }
+        }
+
+        private JContainer textContent;
+        //use JContainer instead of JObject because entity framework throws an error
+        //if a property type implements ICollection more than once and
+        //ignoring it does not solve the problem
+        //http://entityframework.codeplex.com/workitem/2014
+        //https://entityframework.codeplex.com/workitem/2021
+        public JContainer TextContent
+        {
+            get
+            {
+                if (this.textContent == null && !string.IsNullOrEmpty(this.TextContentString))
+                {
+                    this.textContent = JObject.Parse(this.TextContentString);
+                }
+
+                return this.textContent;
+            }
+        }
 
         public bool IsActive { get; set; }
 
@@ -53,7 +86,7 @@ namespace Common.Api.Models
             this.Property(t => t.Alias)
                 .HasMaxLength(50);
 
-            this.Property(t => t.TextContent)
+            this.Property(t => t.TextContentString)
                 .IsOptional();
 
             this.Property(t => t.IsActive)
@@ -68,7 +101,7 @@ namespace Common.Api.Models
             this.Property(t => t.NameAlt).HasColumnName("NameAlt");
             this.Property(t => t.ParentValueId).HasColumnName("ParentValueId");
             this.Property(t => t.Alias).HasColumnName("Alias");
-            this.Property(t => t.TextContent).HasColumnName("TextContent");
+            this.Property(t => t.TextContentString).HasColumnName("TextContent");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
@@ -79,6 +112,9 @@ namespace Common.Api.Models
             this.HasOptional(t => t.ParentValue)
                 .WithMany()
                 .HasForeignKey(d => d.ParentValueId);
+
+            // Local-only properties
+            this.Ignore(t => t.TextContent);
         }
     }
 }

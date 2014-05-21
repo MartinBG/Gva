@@ -197,10 +197,7 @@ namespace Gva.Api.WordTemplates
                 licence.Get<string>("licenceNumber"),
                 personData.Get<string>("lin"));
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
-            var licenceCaCode = JObject.Parse(this.nomRepository.GetNomValue(
-                    "licenceTypes",
-                    licence.Get<int>("licenceType.nomValueId")).TextContent)
-                .Get<string>("codeCA");
+            var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
 
@@ -298,7 +295,7 @@ namespace Gva.Api.WordTemplates
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality.Name,
-                    COUNTRY_CODE = JObject.Parse(nationality.TextContent).Get<string>("nationalityCodeCA")
+                    COUNTRY_CODE = nationality.TextContent.Get<string>("nationalityCodeCA")
                 }
             };
         }

@@ -53,7 +53,7 @@ namespace Gva.Api.WordTemplates
             var includedExams = lastEdition.GetItems<int>("includedExams")
                 .Select(i => lot.GetPart("personDocumentExams/" + i).Content);
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
-            var licenceCodeCa = JsonConvert.DeserializeObject<JObject>(licenceType.TextContent).Get<string>("codeCA");
+            var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
             IEnumerable<JObject> engLevels = includedTrainings.Where(t => t.Get<string>("documentRole.alias") == "engTraining");
 
@@ -175,7 +175,7 @@ namespace Gva.Api.WordTemplates
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality.Name,
-                    COUNTRY_CODE = JObject.Parse(nationality.TextContent).Get<string>("nationalityCodeCA")
+                    COUNTRY_CODE = nationality.TextContent.Get<string>("nationalityCodeCA")
                 }
             };
         }

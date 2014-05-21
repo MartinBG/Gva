@@ -343,7 +343,7 @@ namespace Gva.Api.Controllers
 
             return Ok(
                 this.nomRepository.GetNomValues("schools", term)
-                .Where(nv => JObject.Parse(nv.TextContent).GetItems<int>("graduationIds").Contains(graduationId.Value))
+                .Where(nv => nv.TextContent.GetItems<int>("graduationIds").Contains(graduationId.Value))
                 .WithOffsetAndLimit(offset, limit));
         }
 
@@ -357,7 +357,7 @@ namespace Gva.Api.Controllers
 
             return Ok(
                 this.nomRepository.GetNomValues("addressTypes", term)
-                .Where(nv => JObject.Parse(nv.TextContent).Get<string>("type") == type)
+                .Where(nv => nv.TextContent.Get<string>("type") == type)
                 .WithOffsetAndLimit(offset, limit));
         }
 
@@ -381,24 +381,21 @@ namespace Gva.Api.Controllers
                     this.nomRepository.GetNomValues("documentRoles", term)
                     .Where(nv =>
                     {
-                        JObject content = JObject.Parse(nv.TextContent);
                         bool isMatch = true;
 
                         if (categoryAlias != null)
                         {
-                            isMatch &= content.Get<string>("categoryAlias") == categoryAlias;
+                            isMatch &= nv.TextContent.Get<string>("categoryAlias") == categoryAlias;
                         }
 
-                        JToken categoryCode;
-                        if (isMatch && categoryCodes != null && categoryCodes.Length > 0 && content.TryGetValue("categoryCode", out categoryCode))
+                        if (isMatch && categoryCodes != null && categoryCodes.Length > 0)
                         {
-                            isMatch &= categoryCodes.Contains(categoryCode.ToString());
+                            isMatch &= categoryCodes.Contains(nv.TextContent.Get<string>("categoryCode"));
                         }
 
-                        JToken staffAlias;
-                        if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
+                        if (isMatch && staffAliases != null && staffAliases.Length > 0)
                         {
-                            string staffAliasStr = staffAlias.ToString();
+                            string staffAliasStr = nv.TextContent.Get<string>("staffAlias");
                             isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
                         }
 
@@ -434,7 +431,7 @@ namespace Gva.Api.Controllers
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("limitations66");
             if (!string.IsNullOrEmpty(general))
             {
-                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("general") == general);
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("general") == general);
             }
 
             return Ok(nomValues);
@@ -446,13 +443,13 @@ namespace Gva.Api.Controllers
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes");
             if (fclCode == "Y")
             {
-                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("licenceCode").Contains("FCL"));
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("licenceCode").Contains("FCL"));
 
             }
 
             if (!string.IsNullOrEmpty(staffTypeAlias))
             {
-                nomValues = nomValues.Where(l => JObject.Parse(l.TextContent).Get<string>("staffTypeAlias") == staffTypeAlias);
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("staffTypeAlias") == staffTypeAlias);
             }
             return Ok(nomValues);
         }
@@ -471,18 +468,16 @@ namespace Gva.Api.Controllers
                     this.nomRepository.GetNomValues("documentTypes", term)
                     .Where(nv =>
                     {
-                        JObject content = JObject.Parse(nv.TextContent);
                         bool isMatch = true;
 
                         if (isIdDocument != null)
                         {
-                            isMatch &= content.Get<bool>("isIdDocument") == isIdDocument;
+                            isMatch &= nv.TextContent.Get<bool>("isIdDocument") == isIdDocument;
                         }
 
-                        JToken staffAlias;
-                        if (isMatch && staffAliases != null && staffAliases.Length > 0 && content.TryGetValue("staffAlias", out staffAlias))
+                        if (isMatch && staffAliases != null && staffAliases.Length > 0)
                         {
-                            string staffAliasStr = staffAlias.ToString();
+                            string staffAliasStr = nv.TextContent.Get<string>("staffAlias");
                             isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
                         }
 
@@ -507,22 +502,21 @@ namespace Gva.Api.Controllers
 
             if (type == "organizations" || type == "aircrafts")
             {
-                requirements = requirements
-                    .Where(r => JObject.Parse(r.TextContent).Get("idPart") != null);
+                requirements = requirements.Where(r => r.TextContent.Get("idPart") != null);
 
                 if (type == "organizations")
                 {
-                    requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == auditPartCode);
+                    requirements = requirements.Where(r => r.TextContent.Get<string>("idPart") == auditPartCode);
                 }
                 if (type == "aircrafts")
                 {
-                    requirements = requirements.Where(r => JObject.Parse(r.TextContent).Get<string>("idPart") == "aircrafts");
+                    requirements = requirements.Where(r => r.TextContent.Get<string>("idPart") == "aircrafts");
                 }
 
                 JArray auditPartRequirements = new JArray();
                 foreach (var requirement in requirements)
                 {
-                    string sortOrder = JObject.Parse(requirement.TextContent).Get<string>("sortOrder");
+                    string sortOrder = requirement.TextContent.Get<string>("sortOrder");
                     auditPartRequirements.Add(
                         new JObject(
                             new JProperty("subject", requirement.Name),
@@ -557,7 +551,7 @@ namespace Gva.Api.Controllers
 
                 this.nomRepository.GetNomValues("auditPartSections").ToArray();
                 var requirements = this.nomRepository.GetNomValues("auditPartSectionDetails")
-                    .Where(d => JObject.Parse(d.ParentValue.TextContent).Get<string>("idPart") == auditPartCode)
+                    .Where(d => d.ParentValue.TextContent.Get<string>("idPart") == auditPartCode)
                     .GroupBy(d => d.ParentValue.Code)
                     .OrderBy(d => d.Key);
 
@@ -566,7 +560,7 @@ namespace Gva.Api.Controllers
                     JArray elements = new JArray();
                     foreach (var element in requirement)
                     {
-                        string sortOrder = JObject.Parse(element.TextContent).Get<string>("sortOrder");
+                        string sortOrder = element.TextContent.Get<string>("sortOrder");
 
                         elements.Add(
                             new JObject(
@@ -596,24 +590,23 @@ namespace Gva.Api.Controllers
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("aircraftProducers", term).Where(ap =>
             {
-                JObject content = JObject.Parse(ap.TextContent);
                 bool isMatch = true;
 
                 if (makeEngine.Value)
                 {
-                    isMatch &= content.Get<bool>("makeEngine");
+                    isMatch &= ap.TextContent.Get<bool>("makeEngine");
                 }
                 else if (makeRadio.Value)
                 {
-                    isMatch &= content.Get<bool>("makeRadio");
+                    isMatch &= ap.TextContent.Get<bool>("makeRadio");
                 }
                 else if (makePropeller.Value)
                 {
-                    isMatch &= content.Get<bool>("makePropeller");
+                    isMatch &= ap.TextContent.Get<bool>("makePropeller");
                 }
                 else if (makeAircraft.Value)
                 {
-                    isMatch &= content.Get<bool>("makeAircraft");
+                    isMatch &= ap.TextContent.Get<bool>("makeAircraft");
                 }
 
                 return isMatch;
