@@ -1292,9 +1292,6 @@
     <Content Include="bower.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="package.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="schema\nomenclature-country-content.json" />
   </ItemGroup>
   <ItemGroup>
