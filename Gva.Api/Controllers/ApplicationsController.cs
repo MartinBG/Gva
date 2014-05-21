@@ -285,6 +285,7 @@ namespace Gva.Api.Controllers
                 var docFile = doc.CreateDocFile(
                     newPart.Get<int>("appFile.docFileKindId"),
                     docFileType.DocFileTypeId,
+                    null,
                     newPart.Get<string>("appFile.name"),
                     newPart.Get<string>("appFile.file.name"),
                     String.Empty,

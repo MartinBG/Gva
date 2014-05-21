@@ -37,7 +37,7 @@ namespace Docs.Api.Controllers
         {
             base.Initialize(controllerContext);
 
-            this.userContext = this.Request.GetUserContext();
+            //this.userContext = this.Request.GetUserContext();
         }
 
         /// <summary>
@@ -74,6 +74,8 @@ namespace Docs.Api.Controllers
             string ds = null
             )
         {
+            this.userContext = this.Request.GetUserContext();
+
             //? hot fix: load fist 1000 docs, so the paging with datatable will work
             limit = 1000;
             offset = 0;
@@ -784,7 +786,7 @@ namespace Docs.Api.Controllers
                 DateTime currentDate = DateTime.Now;
                 var oldDoc = this.docRepository.Find(id,
                         e => e.DocCorrespondents,
-                        e => e.DocFiles,
+                        e => e.DocFiles.Select(df => df.DocFileOriginType),
                         e => e.DocUnits);
 
                 oldDoc.EnsureForProperVersion(doc.Version);
@@ -1245,7 +1247,8 @@ namespace Docs.Api.Controllers
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
                 .SingleOrDefault(e => e.Alias.ToLower() == docWorkflow.DocWorkflowActionAlias.ToLower());
 
-            bool? yesNo = (docWorkflow.YesNoId.HasValue && docWorkflow.YesNoId.Value == 1) ? true : false;
+            //aop code is wrong
+            bool? yesNo = docWorkflow.YesNoId.HasValue ? (docWorkflow.YesNoId.Value == 1 ? true : false) : (bool?)null;
 
             doc.CreateDocWorkflow(
                 docWorkflowAction,

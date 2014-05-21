@@ -72,5 +72,13 @@ namespace Docs.Api.DataObjects
                 return string.Format("{0}: {1}", this.DocDocTypeName, this.DocSubject);
             }
         }
+
+        public string Data
+        {
+            get
+            {
+                return string.Format("{0} {1}: {2}", this.DocRegUri, this.DocDocTypeName, this.DocSubject);
+            }
+        }
     }
 }

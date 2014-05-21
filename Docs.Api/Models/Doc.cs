@@ -517,6 +517,7 @@ namespace Docs.Api.Models
         public DocFile CreateDocFile(
             int docFileKindId,
             int docFileTypeId,
+            int? docFileOriginTypeId,
             string name,
             string docFileName,
             string docContentStorage,
@@ -532,6 +533,7 @@ namespace Docs.Api.Models
             {
                 DocFileKindId = docFileKindId,
                 DocFileTypeId = docFileTypeId,
+                DocFileOriginTypeId = docFileOriginTypeId,
                 Name = name,
                 DocFileName = docFileName,
                 DocContentStorage = docContentStorage,
@@ -557,6 +559,30 @@ namespace Docs.Api.Models
             return this.CreateDocFile(
                 docFileKindId,
                 docFileTypeId,
+                null,
+                name,
+                docFileName,
+                docContentStorage,
+                docFileContentId,
+                false,
+                true,
+                userContext);
+        }
+
+        public DocFile CreateDocFile(
+            int docFileKindId,
+            int docFileTypeId,
+            int? docFileOriginTypeId,
+            string name,
+            string docFileName,
+            string docContentStorage,
+            Guid docFileContentId,
+            UserContext userContext)
+        {
+            return this.CreateDocFile(
+                docFileKindId,
+                docFileTypeId,
+                docFileOriginTypeId,
                 name,
                 docFileName,
                 docContentStorage,

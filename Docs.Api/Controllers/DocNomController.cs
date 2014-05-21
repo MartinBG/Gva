@@ -22,6 +22,67 @@ namespace Docs.Api.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+        [Route("boolean")]
+        public IHttpActionResult GetBooleans(string term = null, int offset = 0, int? limit = null)
+        {
+            return Ok(new []
+            {
+                new {
+                    nomValueId = 1,
+                    name = "Да",
+                    alias = "Yes",
+                    isActive = true
+                },
+                new {
+                    nomValueId = 2,
+                    name = "Не",
+                    alias = "No",
+                    isActive = true
+                },
+            });
+        }
+
+        [Route("registerIndex/{id:int}")]
+        public IHttpActionResult GetRegisterIndex(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<RegisterIndex>()
+                .Where(e => e.RegisterIndexId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.RegisterIndexId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("registerIndex")]
+        public IHttpActionResult GetRegisterIndexes(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<RegisterIndex>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<RegisterIndex>()
+                .Where(predicate)
+                .OrderBy(e => e.RegisterIndexId)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.RegisterIndexId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
         [Route("correspondentGroup/{id:int}")]
         public IHttpActionResult GetCorrespondentGroup(int id)
         {
@@ -254,7 +315,7 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocTypeGroup>()
                 .Where(predicate)
-                .OrderBy(e => e.Name)
+                .OrderBy(e => e.DocTypeGroupId)
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
