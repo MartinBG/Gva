@@ -40,3 +40,7 @@ where `username` is your current user
 `c:\oracle\;c:\oracle\bin\;`
 5. Run Custom Tool `.\Gva.Database\CreateAll.tt`
 6. Run the `.\Gva.MigrationTool` project
+
+#### To use OMR 
+1. Install Ghostscript platform from
+http://www.ghostscript.com/download/gsdnld.html

@@ -711,6 +711,7 @@
     <Content Include="js\gva\persons\forms\personRating.html" />
     <Content Include="js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="js\gva\persons\forms\personStatus.html" />
+    <Content Include="js\gva\persons\resources\personExamAnswers.js" />
     <Content Include="js\gva\persons\resources\person.js" />
     <Content Include="js\gva\persons\resources\personAddress.js" />
     <Content Include="js\gva\persons\resources\personApplication.js" />

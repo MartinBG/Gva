@@ -16,6 +16,12 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Common.Blob;
+using OMR;
+using System.IO;
+using Ghostscript.NET;
+using Ghostscript.NET.Rasterizer;
+using System.Drawing;
 
 namespace Gva.Api.Controllers
 {
@@ -411,6 +417,67 @@ namespace Gva.Api.Controllers
             this.unitOfWork.Save();
 
             return result;
+        }
+
+        [Route("{lotId}/examAnswers")]
+        public IHttpActionResult GetPersonExamAnswers(int lotId, string fileKey)
+        {
+            GhostscriptVersionInfo lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
+            Dictionary<string, List<List<bool>>> answers = new Dictionary<string, List<List<bool>>>();
+            byte[] file;
+
+            using (MemoryStream m1 = new MemoryStream())
+            {
+                using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", fileKey))
+                {
+                    blobStream.CopyTo(m1);
+                }
+
+                Bitmap bitmapImg;
+                using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
+                {
+                    rasterizer.Open(m1, lastInstalledVersion, false);
+
+                    //Copied, because rasterizer disposes itself
+                    bitmapImg = new Bitmap(rasterizer.GetPage(300, 300, 1));
+                }
+
+                OMRConfiguration conf = new OMRConfiguration();
+                conf.AdjustmentBlock = new OMRAdjustmentBlock(1572, 3075, 425, 106);
+                conf.WhiteBlock = new OMRAdjustmentBlock(1997, 3075, 106, 106);
+                conf.DarkFactor = 0.90;
+                conf.FillFactor = 1.60;
+                conf.ImageWidth = 2182;
+                conf.ImageHeight = 3210;
+                conf.Blocks.Add(new OMRQuestionBlock("commonQuestions1", 387, 1059, 425, 530, 5));
+                conf.Blocks.Add(new OMRQuestionBlock("commonQuestions2", 1312, 1059, 425, 530, 5));
+                conf.Blocks.Add(new OMRQuestionBlock("specializedQuestions1", 387, 1798, 425, 1060, 10));
+                conf.Blocks.Add(new OMRQuestionBlock("specializedQuestions2", 1312, 1798, 425, 1060, 10));
+
+                using (var omr = new OMRReader(conf))
+                using (bitmapImg)
+                {
+                    answers = omr.Read(bitmapImg);
+
+                    using (Bitmap bitmapImgResized = omr.ResizeImage(bitmapImg, 580, 800))
+                    {
+                        using (MemoryStream m2 = new MemoryStream())
+                        {
+                            bitmapImgResized.Save(m2, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            file = m2.ToArray();
+                        }
+                    }
+                }
+            }
+
+            if (answers != null)
+            {
+                return Ok(new { answ = answers, file = file });
+            }
+            else
+            {
+                return Ok(new { msg = "Неуспешно разпознаване" });
+            }
         }
     }
 }
