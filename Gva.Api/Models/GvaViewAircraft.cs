@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models
 {
-    public partial class    GvaViewAircraft
+    public partial class GvaViewAircraft
     {
         public int LotId { get; set; }
 

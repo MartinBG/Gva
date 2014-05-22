@@ -6,7 +6,10 @@
     </div>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.certNumber"></label>
-      <sc-int ng-model="model.certNumber" name="certNumber" ng-readonly="true"></sc-int>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon" ng-show="model.register && model.register.textContent.regPrefix">{{model.register && model.register.textContent.regPrefix}}</span>
+        <sc-int ng-model="model.certNumber" name="certNumber" ng-readonly="true"></sc-int>
+      </div>
     </div>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.actNumber"></label>

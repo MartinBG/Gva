@@ -5,7 +5,7 @@
   </sc-column>
   <sc-column data="part.isActive? 'Да' : 'Не'" title="aircrafts.regFMSearch.isActive">
   </sc-column>
-  <sc-column data="part.certNumber" title="aircrafts.regFMSearch.certNumber">
+  <sc-column data="part.register.textContent.regPrefix + part.certNumber" title="aircrafts.regFMSearch.certNumber">
   </sc-column>
   <sc-column data="part.certDate" title="aircrafts.regFMSearch.certDate" type="date">
   </sc-column>

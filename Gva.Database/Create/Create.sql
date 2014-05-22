@@ -51,6 +51,7 @@ GO
 :r $(rootPath)\"..\Insert\documentParts.sql"
 :r $(rootPath)\"..\Insert\linTypes.sql"
 :r $(rootPath)\"..\Insert\testScores.sql"
+:r $(rootPath)\"..\Insert\registers.sql"
 
 ---------------------------------------------------------------
 -- Insert Migration Noms Values
@@ -78,7 +79,6 @@ GO
 --:r $(rootPath)\"..\Insert\Noms\auditStates.sql"
 --:r $(rootPath)\"..\Insert\Noms\otherDocumentTypes.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftCertificateTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\registers.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftNewOld.sql"
 --:r $(rootPath)\"..\Insert\Noms\operationTypes.sql"
 --:r $(rootPath)\"..\Insert\Noms\aircraftTypeCertificateTypes.sql"

@@ -15,7 +15,7 @@
         </div>
         <div class="form-group col-md-1 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.certNumber"></label>
-          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.certNumber}}" />
+          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.register.textContent.regPrefix + model.certNumber}}" />
         </div>
         <div class="form-group col-md-1 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.actNumber"></label>

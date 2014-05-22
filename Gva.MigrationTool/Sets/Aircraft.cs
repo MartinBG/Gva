@@ -652,7 +652,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "Reg1, Reg2",
-                        register = noms["registers"].Values.First(), //TODO r.Field<int>("regNumber"),
+                        register = noms["registers"].ByCode(r.Field<int>("regNumber").ToString()),
                         //actNumber = "TODO",
                         certNumber = toNum(r.Field<string>("nRegNum")),
                         certDate = toDate(r.Field<string>("dRegDate")),

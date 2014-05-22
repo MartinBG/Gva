@@ -888,7 +888,6 @@
           next: 'Следваща рег.',
           firstReg: 'Първа рег № ',
           lastReg: 'Посл. рег. № ',
-          register: 'рег. ',
           regFrom: ' от ',
           debts: 'Залози',
           newReg: 'Нова регистрация'

@@ -27,7 +27,10 @@
           <div class="form-group col-md-2 col-sm-4" sc-has-error="certNumber">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.actNumber"></label>
             <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
-            <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-int>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon" ng-show="model.register && model.register.textContent.regPrefix">{{model.register && model.register.textContent.regPrefix}}</span>
+              <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-int>
+            </div>
           </div>
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>

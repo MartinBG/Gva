@@ -22,7 +22,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
 
         public override void Fill(GvaViewAircraft aircraft, PartVersion part)
         {
-            aircraft.Mark = part.Content.Get<string>("certNumber");
+            aircraft.Mark = part.Content.Get<string>("regMark");
         }
 
         public override void Clear(GvaViewAircraft aircraft)

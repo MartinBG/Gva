@@ -127,7 +127,7 @@
     <Content Include="Insert\Noms\equipmentTypes.sql" />
     <Content Include="Insert\Noms\recommendationPartNumbers.sql" />
     <Content Include="Insert\Noms\disparityLevels.sql" />
-    <Content Include="Insert\Noms\registers.sql" />
+    <Content Include="Insert\registers.sql" />
     <Content Include="Insert\documentParts.sql" />
     <Content Include="Insert\gvaCaseTypes.sql" />
     <Content Include="Insert\migrationNomValues.sql" />

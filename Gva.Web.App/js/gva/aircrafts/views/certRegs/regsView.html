@@ -4,9 +4,8 @@
         <div class="row">
           <div class="col-sm-12">
             <span l10n-text="aircrafts.regView.firstReg"></span>
-            <span>{{regs.firstReg.certNumber}}(</span>
-            <span l10n-text="aircrafts.regView.register"></span>
-            <span>{{regs.firstReg.register.name}}), {{regs.firstReg.regMark}}</span>
+            <span>{{regs.firstReg.register.textContent.regPrefix + regs.firstReg.certNumber}}</span>
+            <span>, {{regs.firstReg.regMark}}</span>
             <span l10n-text="aircrafts.regView.regFrom"></span>
             <span>{{regs.firstReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
           </div>
@@ -14,9 +13,8 @@
         <div class="row">
           <div class="col-sm-12">
             <span l10n-text="aircrafts.regView.lastReg"></span>
-            <span>{{regs.lastReg.certNumber}}(</span>
-            <span l10n-text="aircrafts.regView.register"></span>
-            <span>{{regs.lastReg.register.name}}), {{regs.lastReg.regMark}}</span>
+            <span>{{regs.lastReg.register.textContent.regPrefix + regs.lastReg.certNumber}}</span>
+            <span>, {{regs.lastReg.regMark}}</span>
             <span l10n-text="aircrafts.regView.regFrom"></span>
             <span>{{regs.lastReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
           </div>
