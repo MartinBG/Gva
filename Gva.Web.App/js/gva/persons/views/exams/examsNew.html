@@ -13,7 +13,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-exam name="examForm" ng-model="exam.part"></gva-person-exam>
+      <gva-person-exam name="examForm" ng-model="exam.part" sc-on-grade-exam="gradeExam()" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages"></gva-person-exam>
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files" sc-data-set-part="'person'"></gva-common-scanned-document>
     </div>
   </div>
