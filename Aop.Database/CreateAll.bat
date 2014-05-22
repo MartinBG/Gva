@@ -1,0 +1,1 @@
+@sqlcmd -S. -v dbName="Aop" -i"CreateAll.sql"

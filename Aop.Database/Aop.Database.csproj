@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB84AEAB-D581-4896-B63B-830705F0015C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aop.Database</RootNamespace>
+    <AssemblyName>Aop.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateAll.bat" />
+    <None Include="CreateAll.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateAll.tt</DependentUpon>
+    </None>
+    <None Include="CreateAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateAll.log</LastGenOutput>
+    </None>
+    <None Include="Insert\AopExcelConfig\ExcelConfig.log" />
+    <None Include="Insert\AopExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
+    </None>
+    <None Include="Insert\AopExcelConfig\ExcelConfig1.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CreateAll.sql" />
+    <Content Include="Create\Create.sql" />
+    <Content Include="Create\Tables\AopApplications.sql" />
+    <Content Include="Create\Tables\AopEmployers.sql" />
+    <Content Include="Create\Tables\AopEmployerTypes.sql" />
+    <Content Include="Create\Tables\AopApplicationTypes.sql" />
+    <Content Include="Create\Tables\AopChecklistStatuses.sql" />
+    <Content Include="Create\Tables\AopProcedureStatuses.sql" />
+    <Content Include="Create\Tables\AopApplicationCriteria.sql" />
+    <Content Include="Create\Tables\AopApplicationObjects.sql" />
+    <Content Include="Insert\AopCorrespondents.sql" />
+    <Content Include="Insert\AopExcelConfig\ClassificationRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\Classifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\ConfigFinalize.sql" />
+    <Content Include="Insert\AopExcelConfig\DocFileTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\DocTypeClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\DocTypeGroups.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\DocTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\DocTypeUnitRoles.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\ElectronicServiceStageExecutors.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\ElectronicServiceStages.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\ExcelConfig.xml" />
+    <Content Include="Insert\AopEmployerTypes.sql" />
+    <Content Include="Insert\AopChecklistStatuses.sql" />
+    <Content Include="Insert\AopExcelConfig\IrregularityTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\RegisterIndexes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\UnitClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\UnitRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\Units.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopExcelConfig\Users.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\AopProcedureStatuses.sql" />
+    <Content Include="Insert\AopApplicationTypes.sql" />
+    <Content Include="Insert\AopApplicationCriteria.sql" />
+    <Content Include="Insert\AopApplicationObjects.sql" />
+    <Content Include="Insert\Docs\DocEntryTypes.sql" />
+    <Content Include="Insert\Docs\DocFileOriginTypes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Create\Diagram\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
