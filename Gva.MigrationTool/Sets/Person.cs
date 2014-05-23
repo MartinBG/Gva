@@ -70,14 +70,17 @@ namespace Gva.MigrationTool.Sets
 
                 Set personSet = lotRepository.GetSet("Person");
 
-                foreach (var personId in this.getPersonIds().OrderByDescending(i => i).Take(1000))
+                foreach (var personId in this.getPersonIds()) //new int[] { 6730 })
                 {
-                    //if (personId != 6730)
-                    //{
-                    //    continue;
-                    //}
+                    var personCaseTypes = this.getPersonCaseTypes(personId, noms);
 
-                    var personData = this.getPersonData(personId, noms);
+                    if (personCaseTypes.Length == 0)
+                    {
+                        Console.WriteLine("No caseTypes for person with id {0}", personId);
+                        continue;
+                    }
+
+                    var personData = this.getPersonData(personId, noms, personCaseTypes);
 
                     if (personData.Get<string>("lin") == null)
                     {
@@ -109,7 +112,7 @@ namespace Gva.MigrationTool.Sets
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
-            foreach (var personId in this.getPersonIds().OrderByDescending(i => i).Take(1000)) //new int[] { 6730 })
+            foreach (var personId in this.getPersonIds()) //new int[] { 6730 })
             {
                 if (!personIdToLotId.ContainsKey(personId))
                 {
@@ -142,6 +145,9 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("personAddresses/*", address, context);
                     }
 
+                    //TODO think ofsome caseType priority and dealing with persons without caseType
+                    var caseType = lot.GetPartContent("personData").GetItems<JObject>("caseTypes").First();
+
                     Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                     {
                         var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
@@ -151,7 +157,7 @@ namespace Gva.MigrationTool.Sets
 
                     Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>> applications =
                         new Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>>();
-                    var personDocumentApplications = this.getPersonDocumentApplications(personId, noms);
+                    var personDocumentApplications = this.getPersonDocumentApplications(personId, noms, caseType);
                     foreach (var docApplication in personDocumentApplications)
                     {
                         var pv = addPartWithFiles("personDocumentApplications/*", docApplication);
@@ -190,7 +196,7 @@ namespace Gva.MigrationTool.Sets
                                 Utils.ToJObject(appNomDO));
                     }
 
-                    var personDocuments = this.getPersonDocuments(personId, nomApplications, noms);
+                    var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, caseType);
                     foreach (var personDocument in personDocuments)
                     {
                         if ((new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
@@ -316,19 +322,19 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms);
+                    var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms, caseType);
                     foreach (var docEducation in personDocumentEducations)
                     {
                         addPartWithFiles("personDocumentEducations/*", docEducation);
                     }
 
-                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, organizationRepository, noms, organizationIdtoLotId);
+                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, organizationRepository, noms, organizationIdtoLotId, caseType);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
                         addPartWithFiles("personDocumentEmployments/*", docEmployment);
                     }
 
-                    var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms);
+                    var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms, caseType);
                     foreach (var docMedical in personDocumentMedicals)
                     {
                         addPartWithFiles("personDocumentMedicals/*", docMedical);
@@ -367,11 +373,11 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    //var personLicences = Person.getPersonLicences(con, personId);
-                    //foreach (var personLicence in personLicences)
-                    //{
-                    //    lot.CreatePart("/licences/*", personLicence, context);
-                    //}
+                    var personLicences = this.getPersonLicences(personId, getPerson, noms);
+                    foreach (var personLicence in personLicences)
+                    {
+                        lot.CreatePart("licences/*", personLicence, context);
+                    }
 
                     try
                     {
@@ -399,20 +405,40 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        private JObject getPersonData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private NomValue[] getPersonCaseTypes(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            var caseTypeAliases = new Dictionary<string, string>()
+            {
+                { "F", "flightCrew" },
+                { "T", "ovd"},
+                { "G", "to_vs"},
+                { "M", "to_suvd"}
+            };
+
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT CODE FROM CAA_DOC.NM_STAFF_TYPE WHERE ID IN 
+                    (SELECT STAFF_TYPE_ID FROM CAA_DOC.LICENCE L INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID WHERE {0}
+                    UNION ALL SELECT STAFF_TYPE_ID FROM CAA_DOC.RATING_CAA WHERE {0})",
+                new DbClause("PERSON_ID = {0}", personId))
+                .Materialize(r => r.Field<string>("CODE"))
+                .Select(c => noms["personCaseTypes"].ByAlias(caseTypeAliases[c]))
+                .ToArray();
+        }
+
+        private JObject getPersonData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, NomValue[] caseTypes)
         {
             var lins = new Dictionary<string, string>()
-                {
-                    { "1", "pilots"           },
-                    { "2", "flyingCrew"       },
-                    { "3", "crewStaff"        },
-                    { "4", "HeadFlights"      },
-                    { "5", "AirlineEngineers" },
-                    { "6", "dispatchers"      },
-                    { "7", "paratroopers"     },
-                    { "8", "engineersRVD"     },
-                    { "9", "deltaplaner"      }
-                };
+            {
+                { "1", "pilots"           },
+                { "2", "flyingCrew"       },
+                { "3", "crewStaff"        },
+                { "4", "HeadFlights"      },
+                { "5", "AirlineEngineers" },
+                { "6", "dispatchers"      },
+                { "7", "paratroopers"     },
+                { "8", "engineersRVD"     },
+                { "9", "deltaplaner"      }
+            };
 
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON WHERE {0} {1}",
@@ -424,7 +450,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "PERSON",
-                        caseTypes = new JObject[] { Utils.DUMMY_PILOT_CASE_TYPE },
+                        caseTypes = caseTypes,
                         lin = r.Field<string>("LIN"),
                         linType = r.Field<string>("LIN") != null ?
                             noms["linTypes"].ByCode(lins[r.Field<string>("LIN").Substring(0, 1)]):
@@ -475,7 +501,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getPersonDocumentApplications(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonDocumentApplications(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.REQUEST WHERE {0} {1}",
@@ -561,14 +587,14 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", caseType),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocuments(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonDocuments(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT PD.ID,
@@ -704,14 +730,14 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", caseType),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentEducations(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonDocumentEducations(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EDUCATION WHERE {0} {1}",
@@ -809,14 +835,14 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", caseType),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentEmployments(int personId, IOrganizationRepository or, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, int> organizationIdtoLotId)
+        private IList<JObject> getPersonDocumentEmployments(int personId, IOrganizationRepository or, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, int> organizationIdtoLotId, JObject caseType)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0} {1}",
@@ -898,14 +924,14 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", caseType),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentMedicals(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonDocumentMedicals(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
         {
             var medLimitations = this.oracleConn
                 .CreateStoreCommand(
@@ -1028,7 +1054,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", caseType),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
@@ -1103,9 +1129,9 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getPersonRatings(int personId, Func<int?, JObject> getPerson, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private NomValue[] transformLimitations66(string limitations66, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            Dictionary<string, string> limitationFixups = new Dictionary<string, string>
+            Dictionary<string, string> preSplitLimFixups = new Dictionary<string, string>
             {
                 { "NO, AVC", "NO:AVC" },
                 { "No, Electr. AVC-Line", "No:Electr. AVC-Line" },
@@ -1117,21 +1143,49 @@ namespace Gva.MigrationTool.Sets
                 { "Limited to,  Metal structure aeroplanes", "Limited to: Metal structure aeroplanes" }
             };
 
-            Func<string, NomValue[]> transformLimitations = (l) =>
+            Dictionary<string, string> postSplitLimFixups = new Dictionary<string, string>
             {
-                if (l == null)
-                {
-                    return null;
-                }
-
-                foreach (var kvp in limitationFixups)
-                {
-                    l = l.Replace(kvp.Key, kvp.Value);
-                }
-
-                return l.Split(',').Select(sc => noms["limitations66"].ByCode(sc.Trim())).ToArray();
+                { "3.", "3" }
             };
 
+            if (limitations66 == null)
+            {
+                return null;
+            }
+
+            Func<string, string> preSplitLimFixup = limitations =>
+            {
+                foreach (var f in preSplitLimFixups)
+                {
+                    limitations = limitations.Replace(f.Key, f.Value);
+                }
+
+                return limitations;
+            };
+
+            Func<string, string> postSplitLimFixup = lim =>
+            {
+                if (postSplitLimFixups.ContainsKey(lim))
+                {
+                    return postSplitLimFixups[lim];
+                }
+                else
+                {
+                    return lim;
+                }
+            };
+
+            return
+                preSplitLimFixup(limitations66)
+                .Split(',')
+                .Select(sc => 
+                    noms["limitations66"]
+                    .ByCode(postSplitLimFixup(sc.Trim())))
+                .ToArray();
+        }
+
+        private IList<JObject> getPersonRatings(int personId, Func<int?, JObject> getPerson, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
             Func<string, NomValue[]> transformSubclasses = (s) =>
             {
                 if (s == null)
@@ -1166,7 +1220,7 @@ namespace Gva.MigrationTool.Sets
                         __RATING_CAA_ID = r.Field<int>("RATING_CAA_ID"),
 
                         ratingSubClasses = transformSubclasses(r.Field<string>("SUBCLASSES")),
-                        limitations = transformLimitations(r.Field<string>("LIMITATIONS")),
+                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS"), noms),
                         documentDateValidFrom = r.Field<DateTime?>("ISSUE_DATE"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),
@@ -1216,6 +1270,140 @@ namespace Gva.MigrationTool.Sets
                         editions = editions[r.Field<int>("ID")]
                     }))
                 .ToList();;
+        }
+
+        private IList<JObject> getPersonLicences(int personId, Func<int?, JObject> getPerson, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            var editions = oracleConn.CreateStoreCommand(
+                @"SELECT LL.LICENCE_ID,
+                        LL.ID,
+                        LL.EXAMINER_ID,
+                        LL.ISSUE_DATE,
+                        LL.VALID_DATE,
+                        LL.NOTES,
+                        LL.NOTES_TRANS,
+                        LL.LICENCE_ACTION_ID,
+                        LL.PAPER_NO,
+                        LL.BOOK_PAGE_NO,
+                        LL.PAGES_COUNT,
+                        LL.LIMITATIONS_OLD,
+                        LL.LIM_OTHER,
+                        LL.LIM_MED_CERT,
+                        LL.LIM_AT_A,
+                        LL.LIM_AT_B1,
+                        LL.LIM_AP_A,
+                        LL.LIM_AP_B1,
+                        LL.LIM_HT_A,
+                        LL.LIM_HT_B1,
+                        LL.LIM_HP_A,
+                        LL.LIM_HP_B1,
+                        LL.LIM_AVIONICS,
+                        LL.LIM_PE_B3,
+                        LL.REQUEST_ID
+                    FROM CAA_DOC.LICENCE L
+                    JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
+                    WHERE {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("AND L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "LICENCE_LOG",
+
+                        __LICENCE_ID = r.Field<int>("LICENCE_ID"),
+
+                        //TODO show somewhere?
+                        __PAPER_NO = r.Field<string>("PAPER_NO"),
+                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
+                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
+                        __LIM_OTHER = r.Field<string>("LIM_OTHER"),
+                        __LIM_MED_CERT = r.Field<string>("LIM_MED_CERT"),
+
+                        inspector = getPerson(r.Field<int?>("EXAMINER_ID")),
+                        documentDateValidFrom = r.Field<DateTime?>("ISSUE_DATE"),
+                        documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
+                        notes = r.Field<string>("NOTES"),
+                        notesAlt = r.Field<string>("NOTES_TRANS"),
+                        licenceAction = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
+                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms),
+
+                        AMLlimitations = new
+                        {
+                            AT_a_Ids = transformLimitations66(r.Field<string>("LIM_AT_A"), noms),
+                            AT_b1_Ids = transformLimitations66(r.Field<string>("LIM_AT_B1"), noms),
+                            AP_a_Ids = transformLimitations66(r.Field<string>("LIM_AP_A"), noms),
+                            AP_b1_Ids = transformLimitations66(r.Field<string>("LIM_AP_B1"), noms),
+                            HT_a_Ids = transformLimitations66(r.Field<string>("LIM_HT_A"), noms),
+                            HT_b1_Ids = transformLimitations66(r.Field<string>("LIM_HT_B1"), noms),
+                            HP_a_Ids = transformLimitations66(r.Field<string>("LIM_HP_A"), noms),
+                            HP_b1_Ids = transformLimitations66(r.Field<string>("LIM_HP_B1"), noms),
+                            avionics_Ids = transformLimitations66(r.Field<string>("LIM_AVIONICS"), noms),
+                            PE_b3_Ids = transformLimitations66(r.Field<string>("LIM_PE_B3"), noms)
+                        }
+                    }))
+                .ToList()
+                .GroupBy(r => r.Get<int>("__LICENCE_ID"))
+                .ToDictionary(g => g.Key,
+                    g => g.Select(r => Utils.Pluck(r,
+                        new string[] 
+                        {
+                            "__oldId",
+                            "__migrTable",
+
+                            "__PAPER_NO",
+                            "__BOOK_PAGE_NO",
+                            "__PAGES_COUNT",
+                            "__LIM_OTHER",
+                            "__LIM_MED_CERT",
+
+                            "inspector",
+                            "documentDateValidFrom",
+                            "documentDateValidTo",
+                            "notes",
+                            "notesAlt",
+                            "licenceAction",
+                            "limitations"
+                        })));
+
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT L.ID,
+                        L.LICENCE_TYPE_ID,
+                        L.LICENCE_NO,
+                        L.FOREIGN_LICENCE_NO,
+                        L.VALID_YN,
+                        L.PUBLISHER_CAA_ID,
+                        L.FOREIGN_CAA_ID,
+                        L.EMPLOYEE_ID,
+                        L.ISSUE_DATE,
+                        LT.STAFF_TYPE_ID,
+                        LT.CODE as LICENCE_TYPE_CODE
+                    FROM CAA_DOC.LICENCE L
+                    INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
+                    WHERE {0} {1}",
+                new DbClause("1=1"),
+                new DbClause("and L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "LICENCE",
+                        __PUBLISHER_CAA_ID = r.Field<int?>("PUBLISHER_CAA_ID"),
+                        __FOREIGN_CAA_ID = r.Field<int?>("FOREIGN_CAA_ID"),
+                        __EMPLOYEE_ID = r.Field<int?>("EMPLOYEE_ID"),
+                        __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
+
+                        licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
+                        staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
+                        fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
+                        licenceNumber = r.Field<string>("LICENCE_NO"),
+                        foreignLicenceNumber = r.Field<string>("LICENCE_TYPE_CODE") == "FOREIGN" ? r.Field<string>("FOREIGN_LICENCE_NO") : null,
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                        editions = editions[r.Field<int>("ID")]
+                    }))
+                .ToList();
         }
     }
 }

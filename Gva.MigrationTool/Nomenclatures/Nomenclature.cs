@@ -17,6 +17,7 @@ using Common.Api.Repositories.NomRepository;
 using System.Data.SqlClient;
 using Autofac.Features.OwnedInstances;
 using Common.Tests;
+using Gva.Api.Repositories.CaseTypeRepository;
 
 namespace Gva.MigrationTool.Nomenclatures
 {
@@ -35,6 +36,16 @@ namespace Gva.MigrationTool.Nomenclatures
             }
 
             return nomValues.Where(v => v.Value.Code == code).Select(v => v.Value).Single();
+        }
+
+        public static NomValue ByAlias(this Dictionary<string, NomValue> nomValues, string alias)
+        {
+            if (String.IsNullOrEmpty(alias))
+            {
+                return null;
+            }
+
+            return nomValues.Where(v => v.Value.Alias == alias).Select(v => v.Value).Single();
         }
 
         public static NomValue ByName(this Dictionary<string, NomValue> nomValues, string name)
@@ -80,14 +91,14 @@ namespace Gva.MigrationTool.Nomenclatures
 
     public class Nomenclature
     {
-        private Func<Owned<DisposableTuple<IUnitOfWork, INomRepository>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, INomRepository, ICaseTypeRepository>>> dependencyFactory;
         private OracleConnection oracleConn;
         private SqlConnection sqlConn;
 
         public Nomenclature(
             OracleConnection oracleConn,
             SqlConnection sqlConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, INomRepository>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, INomRepository, ICaseTypeRepository>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -116,6 +127,22 @@ namespace Gva.MigrationTool.Nomenclatures
             using (var dependencies = dependencyFactory())
             {
                 noms["linTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["gvaCaseTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person").ToDictionary(ct => "no old id " + ct.GvaCaseTypeId, ct =>
+                    new NomValue
+                    {
+                        NomValueId = ct.GvaCaseTypeId,
+                        Name = ct.Name,
+                        Alias = ct.Alias
+                    });
             }
 
             using (var dependencies = dependencyFactory())
@@ -1513,7 +1540,6 @@ namespace Gva.MigrationTool.Nomenclatures
                         OldId = r.Field<object>("ID").ToString(),
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
-                        NameAlt = r.Field<string>("NAME_TRANS"),
                         Alias = null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = noms["aircraftTypes"].ByOldId(r.Field<long?>("ID_AC_TYPE").ToString()).NomValueId(),
