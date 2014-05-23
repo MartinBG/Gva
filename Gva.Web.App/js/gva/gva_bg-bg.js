@@ -1931,7 +1931,6 @@
           licenceNumber: 'Лиценз No',
           foreignLicenceNumber: 'Чужд лиценз No',
           valid: 'Действителен',
-          documentDateFirstIssue: 'Дата на първо издаване',
           fcl: 'FCL',
           lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No'
         },
