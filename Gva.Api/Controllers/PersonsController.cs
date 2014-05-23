@@ -22,6 +22,7 @@ using System.IO;
 using Ghostscript.NET;
 using Ghostscript.NET.Rasterizer;
 using System.Drawing;
+using System;
 
 namespace Gva.Api.Controllers
 {
@@ -131,7 +132,7 @@ namespace Gva.Api.Controllers
                 return Ok(new { id = newLot.LotId });
             }
         }
-        
+
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
@@ -420,11 +421,17 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{lotId}/examAnswers")]
-        public IHttpActionResult GetPersonExamAnswers(int lotId, string fileKey)
+        public IHttpActionResult GetPersonExamAnswers(int lotId, string fileKey, string name)
         {
             GhostscriptVersionInfo lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
             Dictionary<string, List<List<bool>>> answers = new Dictionary<string, List<List<bool>>>();
             byte[] file;
+
+            string[] extentions = { ".pdf", ".jpg", ".bmp", ".jpeg", ".png", ".tiff" };
+            if (!extentions.Contains(Path.GetExtension(name)))
+            {
+                return Ok(new { err = "No PDF or IMAGE file" });
+            }
 
             using (MemoryStream m1 = new MemoryStream())
             {
@@ -434,12 +441,19 @@ namespace Gva.Api.Controllers
                 }
 
                 Bitmap bitmapImg;
-                using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
+                if (Path.GetExtension(name) == ".pdf")
                 {
-                    rasterizer.Open(m1, lastInstalledVersion, false);
+                    using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
+                    {
+                        rasterizer.Open(m1, lastInstalledVersion, false);
 
-                    //Copied, because rasterizer disposes itself
-                    bitmapImg = new Bitmap(rasterizer.GetPage(300, 300, 1));
+                        //Copied, because rasterizer disposes itself
+                        bitmapImg = new Bitmap(rasterizer.GetPage(300, 300, 1));
+                    }
+                }
+                else
+                {
+                    bitmapImg = new Bitmap(m1);
                 }
 
                 OMRConfiguration conf = new OMRConfiguration();
@@ -476,7 +490,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                return Ok(new { msg = "Неуспешно разпознаване" });
+                return Ok(new { err = "Failed recognition!" });
             }
         }
     }

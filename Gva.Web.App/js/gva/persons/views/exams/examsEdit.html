@@ -1,4 +1,4 @@
-﻿<ng-form name="editExamForm"  sc-validate="{}">
+﻿<ng-form name="editExamForm" sc-validate="{}">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.editExam.title"></strong>
@@ -19,9 +19,8 @@
     </div>
   </div>
 
-    <div class="well-sm panel-body">
-      <gva-person-exam name="examForm" ng-model="exam.part" sc-on-grade-exam="gradeExam()" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages" readonly="!editMode"></gva-person-exam>
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files" sc-data-set-part="'person'" readonly="!editMode"></gva-common-scanned-document>
-    </div>
+  <div class="well-sm panel-body">
+    <gva-person-exam name="examForm" ng-model="exam.part" sc-on-grade-exam="gradeExam()" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages" readonly="!editMode"></gva-person-exam>
+    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files" sc-data-set-part="'person'" readonly="!editMode"></gva-common-scanned-document>
   </div>
 </ng-form>

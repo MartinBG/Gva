@@ -3520,7 +3520,12 @@
         mail: 'Невалиден E-mail',
         uin : 'Невалидно ЕГН',
         lin: 'Невалиден ЛИН',
-        date: 'Невалидна дата'
+        date: 'Невалидна дата',
+        noFile: 'Моля, прикачете файл',
+        noPDForIMGFile: 'Моля, прикачете PDF или IMAGE файл'
+      },
+      successTexts: {
+        successExtract: 'Успешно разпознаване'
       },
       states: {
         'root.applications': 'Заявления',

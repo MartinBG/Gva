@@ -6,6 +6,7 @@
     $scope,
     $state,
     $stateParams,
+    l10n,
     PersonExamAnswers,
     PersonExam,
     exam
@@ -36,31 +37,41 @@
     };
 
     $scope.extractAnswers = function () {
-      if ($scope.exam.files.length > 0 && $scope.exam.files[0].file !== null) {
-        return PersonExamAnswers.get({
-          id: $stateParams.id,
-          fileKey: $scope.exam.files[0].file.key
-        }).$promise
-        .then(function (data) {
-          if (data.msg) {
-            $scope.messages.bad = data.msg;
-            $scope.messages.good = undefined;
-          }
-          else {
-            $scope.exam.part.commonQuestions1 = data.answ.commonQuestions1;
-            $scope.exam.part.commonQuestions2 = data.answ.commonQuestions2;
-            $scope.exam.part.specializedQuestions1 = data.answ.specializedQuestions1;
-            $scope.exam.part.specializedQuestions2 = data.answ.specializedQuestions2;
+      var ext, exts = ['pdf', 'jpg', 'bmp', 'jpeg', 'png', 'tiff'];
 
-            $scope.exam.part.file = 'data:image/jpg;base64,' + data.file;
-            $scope.messages.good = 'Успешно';
-            $scope.messages.bad = undefined;
-          }
-        });
+      if ($scope.exam.files.length > 0 && !!$scope.exam.files[0].file) {
+        ext = $scope.exam.files[0].file.name.split('.').pop();
+        if (exts.indexOf(ext) === -1) {
+          $scope.messages.error = l10n.get('errorTexts.noPDForIMGFile');
+          $scope.messages.success = undefined;
+        }
+        else {
+          return PersonExamAnswers.get({
+            id: $stateParams.id,
+            fileKey: $scope.exam.files[0].file.key,
+            name: $scope.exam.files[0].file.name
+          }).$promise
+          .then(function (data) {
+            if (data.err) {
+              $scope.messages.error = data.err;
+              $scope.messages.success = undefined;
+            }
+            else {
+              $scope.exam.part.commonQuestions1 = data.answ.commonQuestions1;
+              $scope.exam.part.commonQuestions2 = data.answ.commonQuestions2;
+              $scope.exam.part.specializedQuestions1 = data.answ.specializedQuestions1;
+              $scope.exam.part.specializedQuestions2 = data.answ.specializedQuestions2;
+
+              $scope.exam.part.file = 'data:image/jpg;base64,' + data.file;
+              $scope.messages.success = l10n.get('successTexts.successExtract');
+              $scope.messages.error = undefined;
+            }
+          });
+        }
       }
       else {
-        $scope.messages.bad = 'Моля, прикачете файл!';
-        $scope.messages.good = undefined;
+        $scope.messages.error = l10n.get('errorTexts.noFile');
+        $scope.messages.success = undefined;
       }
     };
 
@@ -82,6 +93,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'l10n',
     'PersonExamAnswers',
     'PersonExam',
     'exam'

@@ -135,18 +135,18 @@
       <sc-button name="extract" btn-click="$raise('scOnExtractAnswers')" text="persons.examDirective.extract" class="btn btn-default" ng-disabled="readonly" style="margin-top:10px;">
       </sc-button>
     </div>
-    <div class="form-group has-success" ng-if="msg.good">
+    <div class="form-group has-success" ng-if="msg.success">
       <label class="control-label"></label>
       <span class="help-block">
         <span class="glyphicon glyphicon-ok"></span> 
-        <span>{{msg.good}}</span>
+        <span>{{msg.success}}</span>
       </span>
     </div>
-    <div class="form-group has-error" ng-if="msg.bad">
+    <div class="form-group has-error" ng-if="msg.error">
       <label class="control-label"></label>
       <span class="help-block">
         <span class="glyphicon glyphicon-remove"></span> 
-        <span>{{msg.bad}}</span>
+        <span>{{msg.error}}</span>
       </span>
     </div>
   </div>
