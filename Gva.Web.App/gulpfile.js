@@ -3,216 +3,136 @@
 /*jshint -W069*/ // ['XXX'] is better written in dot notation
 /*jshint -W097*/ // Use the function form of "use strict".
 /*jshint maxlen:false*/
-var fs = require('fs');
-
-var _ = require('lodash');
-var crypto = require('crypto');
+var path = require('path');
 
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var es = require('event-stream');
-var globMultipleSync = require('../gulp/globMultipleSync');
+var streamqueue = require('streamqueue');
 
-var outputDir = '../Gva.Web.Host/App';
-var jsOutputDir = outputDir + '/js';
-var cssOutputDir = outputDir + '/css';
-var templatesOutputDir = outputDir + '/templates';
+var outputDir = '../Gva.Web.Host/App/';
+var jsDir = 'js/';
+var cssDir = 'css/';
+var templatesDir = 'templates/';
 
-var bundles = {
+var streams = {
   js: {
-    'app.js': [
-      'js/*.js',
-      'js/scaffolding/*.js',
-      'js/scaffolding/**/*.js',
-      'js/common/*.js',
-      'js/common/**/*.js',
-      'js/gva/*.js',
-      'js/gva/**/*.js',
-      'js/ems/*.js',
-      'js/ems/**/*.js'
-    ],
-    'sample.data.js': [
-      'schema/requireShim.js',
-      'schema/nomenclatures/*.js',
-      'schema/nomenclatures.sample.js',
-      'schema/person-data.sample.js',
-      'schema/person-document-education.sample.js',
-      'schema/person-document-employment.sample.js',
-      'schema/person-document-id.sample.js',
-      'schema/person-document-med.sample.js',
-      'schema/person-document-other.sample.js',
-      'schema/person-document-training.sample.js',
-      'schema/person-document-checks.sample.js',
-      'schema/person-address.sample.js',
-      'schema/person-flyingExperience.sample.js',
-      'schema/person-status.sample.js',
-      'schema/person.sample.js',
-      'schema/person-rating-edition.sample.js',
-      'schema/person-rating.sample.js',
-      'schema/person-document-exam.sample.js',
-      'schema/person-document-application.sample.js',
-      'schema/aircrafts/aircraft-data.sample.js',
-      'schema/aircrafts/aircraft-dataapex.sample.js',
-      'schema/aircrafts/aircraft-cert-registrations.sample.js',
-      'schema/aircrafts/aircraft-cert-registrationsfm.sample.js',
-      'schema/aircrafts/aircraft-cert-smods.sample.js',
-      'schema/aircrafts/aircraft-cert-marks.sample.js',
-      'schema/aircrafts/aircraft-cert-airworthinesses.sample.js',
-      'schema/aircrafts/aircraft-cert-airworthinessesfm.sample.js',
-      'schema/aircrafts/aircraft-cert-noises.sample.js',
-      'schema/aircrafts/aircraft-cert-noisesfm.sample.js',
-      'schema/aircrafts/aircraft-cert-permitstofly.sample.js',
-      'schema/aircrafts/aircraft-cert-radios.sample.js',
-      'schema/aircrafts/aircraft-document-debts.sample.js',
-      'schema/aircrafts/aircraft-document-debtsfm.sample.js',
-      'schema/aircrafts/aircraft-document-other.sample.js',
-      'schema/aircrafts/aircraft-inspections.sample.js',
-      'schema/aircrafts/aircraft-document-occurrences.sample.js',
-      'schema/aircrafts/aircraft-maintenance.sample.js',
-      'schema/aircrafts/aircraft-document-owner.sample.js',
-      'schema/aircrafts/aircraft-parts.sample.js',
-      'schema/aircrafts/aircraft-document-application.sample.js',
-      'schema/organizations/organization-data.sample.js',
-      'schema/organizations/organization-address.sample.js',
-      'schema/organizations/organization-cert-airportoperator.sample.js',
-      'schema/organizations/organization-auditplan.sample.js',
-      'schema/organizations/organization-staff-managment.sample.js',
-      'schema/organizations/organization-document-other.sample.js',
-      'schema/organizations/organization-cert-groundserviceoperator.sample.js',
-      'schema/organizations/organization-cert-groundserviceoperatorssnooperational.sample.js',
-      'schema/organizations/organization-inspections.sample.js',
-      'schema/organizations/organization-approval.sample.js',
-      'schema/organizations/organization-amendment.sample.js',
-      'schema/organizations//organization-staff-examiner.sample.js',
-      'schema/organizations/organization-recommendation.sample.js',
-      'schema/organizations/organization-reg-ground-service-operator.sample.js',
-      'schema/organizations/organization-reg-airport-operator.sample.js',
-      'schema/airports/airport-data.sample.js',
-      'schema/airports/airport-document-other.sample.js',
-      'schema/airports/airport-document-owner.sample.js',
-      'schema/airports/airport-cert-operational.sample.js',
-      'schema/airports/airport-document-application.sample.js',
-      'schema/airports/airport-inspections.sample.js'
-    ],
-    'templates.js': [
-      'build/templates/*.js'
-    ],
-    'lib.js': [
-      'bower_components/jquery-modern/jquery.js',
-      'bower_components/lodash/dist/lodash.js',
-      'bower_components/select2/select2.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-i18n/angular-locale_bg-bg.js',
-      'bower_components/angular-l10n/build/l10n-with-tools.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-ui-select2/src/select2.js',
-      'bower_components/angular-ui-sortable/src/sortable.js',
-      'bower_components/angular-ui-utils/modules/jq/jq.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-      'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
-      'bower_components/jquery-ui/ui/jquery.ui.widget.js',
-      'bower_components/jquery-ui/ui/jquery.ui.core.js',
-      'bower_components/jquery-ui/ui/jquery.ui.mouse.js',
-      'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
-      'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
-      'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/moment/moment.js',
-      'bower_components/angular-scrollto/angular-scrollto.js',
-      'bower_components/autofill-event/src/autofill-event.js'
-    ],
-    'lib.ie8.js': [
-      'bower_components/html5shiv/dist/html5shiv.js',
-      'bower_components/respond/respond.src.js',
-      'bower_components/jquery-legacy/jquery.js',
-      'bower_components/lodash/dist/lodash.compat.js',
-      'bower_components/es5-shim/es5-shim.js',
-      'bower_components/select2/select2.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-i18n/angular-locale_bg-bg.js',
-      'bower_components/angular-l10n/build/l10n-with-tools.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-ui-select2/src/select2.js',
-      'bower_components/angular-ui-sortable/src/sortable.js',
-      'bower_components/angular-ui-utils/modules/jq/jq.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/bootstrap/js/collapse.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-      'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
-      'bower_components/jquery-ui/ui/jquery.ui.widget.js',
-      'bower_components/jquery-ui/ui/jquery.ui.core.js',
-      'bower_components/jquery-ui/ui/jquery.ui.mouse.js',
-      'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
-      'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
-      'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/moment/moment.js',
-      'bower_components/autofill-event/src/autofill-event.js'
-    ],
-    'test.js': [
-      'test/delay.js',
-      'test/e2eMocksSetup.js',
-      'test/httpBackendConfiguratorProvider.js',
-      'test/common/mocks/*.js',
-      'test/ems/corrs/mocks/*.js',
-      'test/ems/docs/mocks/*.js',
-      'test/gva/common/mocks/*.js',
-      'test/gva/applications/mocks/*.js',
-      'test/gva/persons/mocks/*.js',
-      'test/gva/aircrafts/mocks/*.js',
-      'test/gva/organizations/mocks/*.js',
-      'test/gva/airports/mocks/*.js',
-      'test/scaffolding/testbeds/states.js',
-      'test/scaffolding/testbeds/*.js',
-      'test/gva/directives/testbeds/states.js',
-      'test/gva/directives/testbeds/*.js'
-    ]
+    app: function () {
+      return streamqueue({ objectMode: true, allowHalfOpen: false },
+        gulp.src('js/**/*.js', { base: '.' }),
+        gulp.src('../Common.Web.App/js/**/*.js', { base: '../Common.Web.App/' })
+      );
+    },
+    lib: function () {
+      return gulp.src([
+        'bower_components/jquery-modern/jquery.js',
+        'bower_components/lodash/dist/lodash.js',
+        'bower_components/select2/select2.js',
+        'bower_components/angular/angular.js',
+        'bower_components/angular-i18n/angular-locale_bg-bg.js',
+        'bower_components/angular-l10n/build/l10n-with-tools.js',
+        'bower_components/angular-resource/angular-resource.js',
+        'bower_components/angular-ui-select2/src/select2.js',
+        'bower_components/angular-ui-sortable/src/sortable.js',
+        'bower_components/angular-ui-utils/modules/jq/jq.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
+        'bower_components/jquery-ui/ui/jquery.ui.widget.js',
+        'bower_components/jquery-ui/ui/jquery.ui.core.js',
+        'bower_components/jquery-ui/ui/jquery.ui.mouse.js',
+        'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
+        'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
+        'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/moment/moment.js',
+        'bower_components/angular-scrollto/angular-scrollto.js',
+        'bower_components/autofill-event/src/autofill-event.js'
+      ], { base: '.' });
+    },
+    lib_ie8: function () {
+      return gulp.src([
+        'bower_components/html5shiv/dist/html5shiv.js',
+        'bower_components/respond/respond.src.js',
+        'bower_components/jquery-legacy/jquery.js',
+        'bower_components/lodash/dist/lodash.compat.js',
+        'bower_components/es5-shim/es5-shim.js',
+        'bower_components/select2/select2.js',
+        'bower_components/angular/angular.js',
+        'bower_components/angular-i18n/angular-locale_bg-bg.js',
+        'bower_components/angular-l10n/build/l10n-with-tools.js',
+        'bower_components/angular-resource/angular-resource.js',
+        'bower_components/angular-ui-select2/src/select2.js',
+        'bower_components/angular-ui-sortable/src/sortable.js',
+        'bower_components/angular-ui-utils/modules/jq/jq.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'bower_components/bootstrap/js/collapse.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
+        'bower_components/jquery-ui/ui/jquery.ui.widget.js',
+        'bower_components/jquery-ui/ui/jquery.ui.core.js',
+        'bower_components/jquery-ui/ui/jquery.ui.mouse.js',
+        'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
+        'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
+        'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/moment/moment.js',
+        'bower_components/autofill-event/src/autofill-event.js'
+      ], { base: '.' });
+    }
   },
   css: {
-    'styles.css': [
-      'bower_components/bootstrap/dist/css/bootstrap.css',
-      'bower_components/font-awesome/css/font-awesome.css',
-      'bower_components/select2/select2.css',
-      'bower_components/select2-bootstrap-css/select2-bootstrap.css',
-      'bower_components/bootstrap-datepicker/css/datepicker3.css',
-      'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
-      'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
-      'css/*.css'
-    ]
+    styles: function () {
+      return gulp.src([
+        'bower_components/bootstrap/dist/css/bootstrap.css',
+        'bower_components/font-awesome/css/font-awesome.css',
+        'bower_components/select2/select2.css',
+        'bower_components/select2-bootstrap-css/select2-bootstrap.css',
+        'bower_components/bootstrap-datepicker/css/datepicker3.css',
+        'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
+        'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
+        'css/*.css'
+      ], { base: '.' });
+    }
   },
   templates: {
-    'common.templates.js': [
-      'js/common/**/*.html'
-    ],
-    'gva.templates.js': [
-      'js/gva/**/*.html'
-    ],
-    'ems.templates.js': [
-      'js/ems/**/*.html'
-    ],
-    'scaffolding.templates.js': [
-      'js/scaffolding/**/*.html'
-    ]
+    common: function () {
+      return streamqueue({ objectMode: true, allowHalfOpen: false },
+        gulp.src('js/common/**/*.html', { base: '.' }),
+        gulp.src('../Common.Web.App/js/common/**/*.html', { base: '../Common.Web.App/' })
+      );
+    },
+    gva: function () {
+      return gulp.src('js/gva/**/*.html', { base: '.' });
+    },
+    ems: function () {
+      return streamqueue({ objectMode: true, allowHalfOpen: false },
+        gulp.src('js/ems/**/*.html', { base: '.' }),
+        gulp.src('../Common.Web.App/js/ems/**/*.html', { base: '../Common.Web.App/' })
+      );
+    },
+    scaffolding: function () {
+      return gulp.src('../Common.Web.App/js/scaffolding/**/*.html', { base: '../Common.Web.App/' });
+    }
   },
   assets: {
-    'bootstrap': [
-      'bower_components/bootstrap/dist/fonts/**'
-    ],
-    'font-awesome': [
-      'bower_components/font-awesome/fonts/**'
-    ],
-    'select2': [
-      'bower_components/select2/*.+(png|gif)'
-    ],
-    'blueimp-file-upload': [
-      'bower_components/blueimp-file-upload/img/**'
-    ],
-    'img': [
-      'img/**'
-    ]
+    bootstrap: function () {
+      return gulp.src('bower_components/bootstrap/dist/fonts/**', { base: '.' });
+    },
+    font_awesome: function () {
+      return gulp.src('bower_components/font-awesome/fonts/**', { base: '.' });
+    },
+    select2: function () {
+      return gulp.src('bower_components/select2/*.+(png|gif)', { base: '.' });
+    },
+    blueimp_file_upload: function () {
+      return gulp.src('bower_components/blueimp-file-upload/img/**', { base: '.' });
+    },
+    img: function () {
+      return gulp.src('img/**', { base: '.' });
+    }
   }
 };
 
@@ -226,6 +146,7 @@ gulp.task('lint', function() {
   return gulp
     .src([
       'gulpfile.js',
+      '../Common.Web.App/js/**/*.js',
       'js/**/*.js',
       'test/**/*.js'
     ])
@@ -234,23 +155,20 @@ gulp.task('lint', function() {
     .on('error', plugins.util.log);
 });
 
-gulp.task('js-raw', ['clean'], function() {
-  return gulp
-    .src(_.union(
-      bundles.js['lib.js'],
-      bundles.js['lib.ie8.js'],
-      bundles.js['app.js']
-    ), { base: '.' })
-    .pipe(plugins.preprocess({ context: { DEBUG: true } }))
-    .pipe(gulp.dest(outputDir));
-});
+var js_raw = function() {
+  return streamqueue({ objectMode: true, allowHalfOpen: false },
+      streams.js['lib.js'],
+      streams.js['lib.ie8.js'],
+      streams.js['app.js']
+    )
+    .pipe(plugins.preprocess({ context: { DEBUG: true } }));
+};
 
-gulp.task('js-bundled', ['clean'], function() {
-  var pipeline = function (file) {
-    return gulp
-      .src(bundles.js[file])
+var js_bundled = function() {
+  var pipeline = function (stream) {
+    return streams.js[stream]
       .pipe(plugins.preprocess())
-      .pipe(plugins.concatSourcemap(file, {
+      .pipe(plugins.concatSourcemap(jsDir + stream, {
         sourceRoot: '/',
         sourcesContent: true
       }));
@@ -260,73 +178,61 @@ gulp.task('js-bundled', ['clean'], function() {
       pipeline('lib.js'),
       pipeline('lib.ie8.js'),
       pipeline('app.js')
-    )
-    .pipe(gulp.dest(jsOutputDir));
-});
+    );
+};
 
-gulp.task('js-minified', ['clean'], function() {
-  var pipeline = function (file, useUglify) {
-    return gulp
-      .src(bundles.js[file])
+var js_minified = function() {
+  var pipeline = function (stream, useUglify) {
+    return streams.js[stream]
       .pipe(plugins.preprocess())
       .pipe(plugins['if'](useUglify, plugins.uglify({
         mangle: false
       })))
-      .pipe(plugins.concat(file));
+      .pipe(plugins.concat(jsDir + stream));
   };
 
   return es.merge(
       pipeline('lib.js', false),
       pipeline('lib.ie8.js', false),
       pipeline('app.js', true)
-    )
-    .pipe(gulp.dest(jsOutputDir));
-});
+    );
+};
 
-gulp.task('css-raw', ['clean'], function() {
-  return gulp
-    .src(bundles.css['styles.css'], {base: '.'})
-    .pipe(gulp.dest(outputDir));
-});
+var css_raw = function() {
+  return streams.css.styles();
+};
 
-gulp.task('css-bundled', ['clean'], function() {
-  return gulp
-    .src(bundles.css['styles.css'])
-    .pipe(plugins.concatSourcemap('styles.css', {
+var css_bundled = function() {
+  return streams.css['styles.css']
+    .pipe(plugins.concatSourcemap(cssDir + 'styles.css', {
       sourceRoot: '/',
       sourcesContent: true
-    }))
-    .pipe(gulp.dest(cssOutputDir));
-});
+    }));
+};
 
-gulp.task('css-minified', ['clean'], function() {
-  return gulp
-    .src(bundles.css['styles.css'])
+var css_minified = function() {
+  return streams.css['styles.css']
     .pipe(plugins.minifyCSS())
-    .pipe(plugins.concat('styles.css'))
-    .pipe(gulp.dest(cssOutputDir));
-});
+    .pipe(plugins.concat(cssDir + 'styles.css'));
+};
 
-gulp.task('templates-raw', ['clean'], function() {
-  return gulp
-    .src(_.union(
-      bundles.templates['common.templates.js'],
-      bundles.templates['gva.templates.js'],
-      bundles.templates['ems.templates.js'],
-      bundles.templates['scaffolding.templates.js']
-    ), {base: '.'})
-    .pipe(gulp.dest(outputDir));
-});
+var templates_raw = function() {
+  return streamqueue({ objectMode: true, allowHalfOpen: false },
+      streams.templates.common(),
+      streams.templates.gva(),
+      streams.templates.ems(),
+      streams.templates.scaffolding()
+    );
+};
 
-gulp.task('templates-bundled', ['clean'], function() {
-  var pipeline = function (file) {
-    return gulp
-      .src(bundles.templates[file])
+var templates_bundled = function() {
+  var pipeline = function (stream) {
+    return streams.templates[stream]
       .pipe(plugins.html2js({
         base: '.',
-        outputModuleName: file.replace(/\.js$/i, '') // remove .js extension
+        outputModuleName: stream.replace(/\.js$/i, '') // remove .js extension
       }))
-      .pipe(plugins.concat(file));
+      .pipe(plugins.concat(templatesDir + stream));
   };
 
   return es.merge(
@@ -335,86 +241,82 @@ gulp.task('templates-bundled', ['clean'], function() {
       pipeline('ems.templates.js'),
       pipeline('scaffolding.templates.js')
     )
-    .pipe(plugins.concat('templates.js'))
-    .pipe(gulp.dest(templatesOutputDir));
-});
-
-gulp.task('assets-raw', ['clean'], function() {
-  return gulp
-    .src(_.union(
-      bundles.assets['bootstrap'],
-      bundles.assets['font-awesome'],
-      bundles.assets['select2'],
-      bundles.assets['blueimp-file-upload'],
-      bundles.assets['img']
-    ), {base: '.'})
-    .pipe(gulp.dest(outputDir));
-});
-
-gulp.task('assets-relocated', ['clean'], function() {
-  return es.merge(
-      gulp.src(bundles.assets['bootstrap']).pipe(gulp.dest(cssOutputDir + '/../fonts')),
-      gulp.src(bundles.assets['font-awesome']).pipe(gulp.dest(cssOutputDir + '/../fonts')),
-      gulp.src(bundles.assets['select2']).pipe(gulp.dest(cssOutputDir)),
-      gulp.src(bundles.assets['blueimp-file-upload']).pipe(gulp.dest(cssOutputDir + '/../img')),
-      gulp.src(bundles.assets['img']).pipe(gulp.dest(cssOutputDir + '/../img'))
-    );
-});
-
-var index = function(options) {
-  var md5 = function (file) {
-    return crypto.createHash('md5').update(fs.readFileSync(file), 'utf8').digest('hex');
-  };
-
-  var getBundle = function(type) {
-    var bundleNames = Array.prototype.slice.call(arguments, 1);
-    
-    if (options[type] === 'raw') {
-      var globs = _(bundleNames)
-        .map(function (name) {
-          return bundles[type][name];
-        })
-        .flatten(true)
-        .value();
-
-      return globMultipleSync(globs, {base: '.'}).map(function (file) {
-        return {
-          path: '/' + file.relative.replace(/\\/g, '/'),
-          hash: md5(file.path)
-        };
-      });
-    } else if (options[type] === 'bundled') {
-      return _(bundleNames)
-        .map(function (name) {
-          var bundlePath = '/' + type + '/' + name;          
-          return {
-            path: bundlePath,
-            hash: md5(outputDir + '/' + bundlePath)
-          };
-        });
-    } else if (options[type] === 'none') {
-      return [];
-    } else {
-      throw new Error('Unknown bundling type: ' + options[type]);
-    }
-  };
-
-  return function () {
-    return gulp
-      .src('index.html')
-      .pipe(plugins.template({
-        fullVersion: '',
-        jsBundle: _.partial(getBundle, 'js'),
-        cssBundle: _.partial(getBundle, 'css'),
-        templatesBundle: _.partial(getBundle, 'templates')
-      }))
-      .pipe(gulp.dest(outputDir));
-  };
+    .pipe(plugins.concat(templatesDir + 'templates.js'));
 };
 
-gulp.task('debug',         ['lint', 'js-raw'     , 'css-raw'     , 'templates-raw'    , 'assets-raw'      ], index({js: 'raw'    , css: 'raw'    , templates: 'none'   }));
-gulp.task('debug-bundled', ['lint', 'js-bundled' , 'css-bundled' , 'templates-bundled', 'assets-relocated'], index({js: 'bundled', css: 'bundled', templates: 'bundled'}));
-gulp.task('release',       ['lint', 'js-minified', 'css-minified', 'templates-bundled', 'assets-relocated'], index({js: 'bundled', css: 'bundled', templates: 'bundled'}));
-gulp.task('design',        ['lint', 'js-minified', 'css-raw'     , 'templates-raw'    , 'assets-raw'      ], index({js: 'bundled', css: 'raw'    , templates: 'none'   }));
+var assets_raw = function() {
+  return streamqueue({ objectMode: true, allowHalfOpen: false },
+      streams.assets.bootstrap(),
+      streams.assets.font_awesome(),
+      streams.assets.select2(),
+      streams.assets.blueimp_file_upload(),
+      streams.assets.img()
+    );
+};
+
+var assets_relocated = function() {
+  return es.merge(
+      streams.assets['bootstrap'].pipe(gulp.dest(cssOutputDir + '/../fonts')),
+      streams.assets['font-awesome'].pipe(gulp.dest(cssOutputDir + '/../fonts')),
+      streams.assets['select2'].pipe(gulp.dest(cssOutputDir)),
+      streams.assets['blueimp-file-upload'].pipe(gulp.dest(cssOutputDir + '/../img')),
+      streams.assets['img'].pipe(gulp.dest(cssOutputDir + '/../img'))
+    );
+};
+
+var inject = function (stream, tag) {
+  return plugins.inject(stream, {
+      starttag: '<!-- inject:' + tag + ':{{ext}} -->',
+      transform: function (filepath, file) {
+        var relativePath = '/' + path.relative(file.base, file.path).replace(/\\/g, '/');
+
+        switch (path.extname(relativePath).slice(1)) {
+          case 'css':
+            return '<link rel="stylesheet" href="' + relativePath + '">';
+          case 'js':
+            return '<script src="' + relativePath + '"></script>';
+        }
+      },
+      removeTags: true
+    }
+  );
+};
+
+//gulp.task('debug',         ['lint', 'js-raw'     , 'css-raw'     , 'templates-raw'    , 'assets-raw'      ], index({js: 'raw'    , css: 'raw'    , templates: 'none'   }));
+//gulp.task('debug-bundled', ['lint', 'js-bundled' , 'css-bundled' , 'templates-bundled', 'assets-relocated'], index({js: 'bundled', css: 'bundled', templates: 'bundled'}));
+//gulp.task('release',       ['lint', 'js-minified', 'css-minified', 'templates-bundled', 'assets-relocated'], index({js: 'bundled', css: 'bundled', templates: 'bundled'}));
+//gulp.task('design', ['lint', 'js-minified', 'css-raw', 'templates-raw', 'assets-raw'], index({ js: 'bundled', css: 'raw', templates: 'none' }));
+
+gulp.on('err', function (e) {
+  console.log(e.err.stack);
+});
+
+gulp.task('debug', ['clean'], function () {
+
+  var app_js = streams.js.app()
+    .pipe(plugins.preprocess({ context: { DEBUG: true } }));
+
+  var lib_js = streams.js.lib();
+  var lib_ie8 = streams.js.lib_ie8();
+
+  var css = css_raw();
+  var templates = templates_raw();
+  var assets = assets_raw();
+
+  return es.merge(
+    app_js,
+    lib_js,
+    lib_ie8,
+    css,
+    templates,
+    assets,
+    gulp.src('index.html')
+      .pipe(inject(css, 'styles.css'))
+      .pipe(inject(app_js, 'app.js'))
+      .pipe(inject(lib_js, 'lib.js'))
+      .pipe(inject(lib_ie8, 'lib.ie8.js'))
+  )
+  .pipe(gulp.dest(outputDir));
+});
 
 gulp.task('default', ['debug']);
