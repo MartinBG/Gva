@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace Gva.RioBridge.DataObjects
 {
-    public class AbbcdnInfo
-    {
-        public string AttachedDocumentUniqueIdentifier { get; set; }
-        public string AttachedDocumentFileName { get; set; }
-    }
-
     public class AttachedDocDo
     {
         public string DocKind { get; set; }

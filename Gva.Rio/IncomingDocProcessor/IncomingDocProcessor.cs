@@ -95,7 +95,7 @@ namespace Gva.Rio.IncomingDocProcessor
                     var validationErrors = rioDocumentParser.GetValidationErrors(docFileType.DocTypeUri, xmlContent);
 
                     Doc rootDoc = null;
-                    if (rioApplication.DocumentURI == null)
+                    if (rioApplication.DocumentURI != null)
                     {
                         string regIndex = rioApplication.DocumentURI.RegisterIndex.PadLeft(4, '0');
                         int regNumber = int.Parse(rioApplication.DocumentURI.SequenceNumber);
@@ -224,6 +224,8 @@ namespace Gva.Rio.IncomingDocProcessor
             catch (Exception ex)
             {
                 var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
+                this.unitOfWork.DbContext.Entry(incomingDoc).Reload();
+
                 incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
 
                 this.unitOfWork.Save();

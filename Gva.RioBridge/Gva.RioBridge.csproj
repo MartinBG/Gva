@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\AttachedDocDo.cs" />
+    <Compile Include="DataObjects\AbbcdnInfo.cs" />
     <Compile Include="Extractions\AttachedDocDo\AttachedDocDoExtraction.cs" />
     <Compile Include="Extractions\AttachedDocDo\R5090AttachedDocDoExtraction.cs" />
     <Compile Include="Extractions\AttachedDocDo\R5000AttachedDocDoExtraction.cs" />
