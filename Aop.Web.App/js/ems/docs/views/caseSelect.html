@@ -1,0 +1,34 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="date" name="csFromDate" class="col-sm-3" removable="false" label="docs.caseSelect.fromDate"></sc-filter>
+  <sc-filter type="date" name="csToDate" class="col-sm-3" removable="false" label="docs.caseSelect.toDate"></sc-filter>
+  <sc-filter type="text" name="csRegUri" class="col-sm-3" removable="false" label="docs.caseSelect.regUri"></sc-filter>
+  <sc-filter type="text" name="csDocName" class="col-sm-3" removable="false" label="docs.caseSelect.docName"></sc-filter>
+  <sc-filter type="nomenclature" name="csDocTypeId" class="col-sm-3" removable="false" alias="docType" load="false" mode="id" label="docs.caseSelect.docType">
+  </sc-filter>
+  <sc-filter type="nomenclature" name="csDocStatusId" class="col-sm-3" alias="docStatus" load="false" mode="id" removable="false" label="docs.caseSelect.docStatus">
+  </sc-filter>
+  <sc-filter type="nomenclature" name="csCorrs" class="col-sm-3" removable="false" alias="correspondent" load="false" mode="id" label="docs.caseSelect.corrs" multiple="multiple">
+  </sc-filter>
+  <sc-filter type="nomenclature" name="csUnits" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="docs.caseSelect.units" multiple="multiple">
+  </sc-filter>
+  <sc-search-button action="search()" text="docs.caseSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="cancel()" text="docs.caseSelect.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
+</sc-search>
+
+<sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+   <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column>
+  <sc-column width="100" type="date" data="regDate" title="docs.caseSelect.regDate">
+  </sc-column>
+  <sc-column data="regUri" title="docs.caseSelect.regUri">
+  </sc-column>
+  <sc-column width="350" data="docSubject" title="docs.caseSelect.docSubject">
+  </sc-column>
+  <sc-column data="docDirectionName" title="docs.caseSelect.docDirectionName">
+  </sc-column>
+  <sc-column data="docStatusName" title="docs.caseSelect.docStatusName">
+  </sc-column>
+  <sc-column data="correspondentName" title="docs.caseSelect.correspondentName">
+  </sc-column>
+</sc-datatable>

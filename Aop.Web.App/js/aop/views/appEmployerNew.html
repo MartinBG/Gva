@@ -1,0 +1,40 @@
+﻿<ng-form name="aopEmpForm" class="form-inline" sc-validate="{}">
+
+  <div class="panel panel-default">
+    <nav class="panel-heading">
+      <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
+        <sc-button name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
+        <sc-button btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </nav>
+
+    <div class="well-sm panel-body">
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="Наименование:"></label>
+          <div class="input-group input-group-sm">
+            <sc-text ng-model="emp.name" required></sc-text>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="Партиден номер:"></label>
+          <div class="input-group input-group-sm">
+            <sc-text ng-model="emp.lotNum" required></sc-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6" sc-has-error="aopEmployerTypeId">
+          <label class="control-label" l10n-text="Тип:"></label>
+          <sc-validation-error field-name="aopEmployerTypeId" validations="{required: null}"></sc-validation-error>
+          <sc-nomenclature name="aopEmployerTypeId" ng-model="emp.aopEmployerTypeId" alias="'aopEmployerType'" mode="id" required></sc-nomenclature>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-form>

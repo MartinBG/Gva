@@ -1,0 +1,452 @@
+li.dropdown-split-right > a
+{
+  padding-left: 4px;
+}
+
+li.dropdown-split-left > a
+{
+  padding-right: 0px;
+}
+
+div.labeless
+{
+  margin-top: 25px;
+}
+
+@media (max-width:767px)
+{
+  .hidden-phone
+  {
+    display: none !important;
+  }
+}
+
+.page-view
+{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.breadcrumb-page-view
+{
+  padding-top: 91px;
+  padding-bottom: 10px;
+}
+
+.navbar.breadcrumb-bar
+{
+  top: 51px;
+  min-height: 30px;
+  z-index: 1029;
+}
+
+.breadcrumb-bar .breadcrumb
+{
+  margin-bottom: 0;
+  padding: 5px 15px;
+}
+
+/*****TREE*******/
+ul.tree
+{
+  list-style: none outside none;
+  margin: 0;
+  font-size: 12px;
+  padding-left: 4px;
+}
+
+ul.tree.tree-root
+{
+  margin-top: 15px;
+  list-style: none outside none;
+  margin: 0;
+  font-size: 12px;
+  padding-left: 4px;
+}
+
+ul.tree > li
+{
+  line-height: 18px;
+  padding-left: 15px;
+  font-size: 12px;
+}
+
+ul.tree.tree-root > li
+{
+  padding-left: 0px;
+  font-size: 12px;
+}
+
+ul.tree > li > i
+{
+  vertical-align: text-top;
+  line-height: 14px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+
+i.tree-image-folder
+{
+  vertical-align: text-top;
+  line-height: 14px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 2px;
+  margin-top: 0px;
+}
+
+i.tree-image-close
+{
+  vertical-align: text-top;
+  line-height: 14px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-left: 2px;
+  margin-top: 0px;
+}
+/****************/
+.pagination > .active > a, .pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus
+{
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: default;
+}
+
+.dataTables_filter input
+{
+  width: 200px;
+  display: inline-block;
+  height: 30px;
+  padding: 5px 10px;
+  line-height: 1.5;
+  color: rgb(85, 85, 85);
+  vertical-align: middle;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.glyphicon-loading:before
+{
+  content: url('../img/loading-icon.gif');
+}
+
+.btn-primary .glyphicon-loading:before
+{
+  content: url('../img/loading-icon-white.gif');
+}
+
+.panel-default > .form-title
+{
+  background-color: rgba(228, 221, 221, 0.97);
+}
+
+.panel-default > .form-body
+{
+  background-color: #f5f5f5;
+  font-size: 12px;
+}
+
+.centered
+{
+  float: none;
+  margin: 0px auto;
+}
+
+.has-error .glyphicon-warning-sign
+{
+  color: #b94a48;
+}
+
+div.labeless.has-error
+{
+  margin-top: 0px !important;
+}
+
+form.card input.form-control[disabled]
+{
+  cursor: auto;
+  background-color: #ffffff;
+}
+
+/*  EMS  */
+
+.tab-content
+{
+  background-color: #FFFFFF;
+  padding: 15px 10px;
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.clear-border-bottom {
+  border-bottom: 0px !important;
+}
+
+.table-bordered-red {
+  border: 1px solid #b94a48;
+  color: #b94a48 !important;
+}
+
+.nav-tabs
+{
+  margin-bottom: 0px;
+}
+
+.nav-tabs > li > a
+{
+  cursor: pointer;
+}
+
+/*TODO Remove accordion classes*/
+/*.accordion
+{
+  margin-bottom: 16px;
+}
+
+.accordion-group
+{
+  margin-bottom: 2px;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.accordion-heading
+{
+  border-bottom: 0;
+}
+
+.accordion-heading .accordion-toggle
+{
+  display: block;
+  padding: 8px 15px;
+}
+
+.accordion-toggle
+{
+  cursor: pointer;
+}
+
+.accordion-inner
+{
+  padding: 9px 15px;
+  border-top: 1px solid #e5e5e5;
+}*/
+
+/* Initial loader */
+#initial-loader
+{
+  margin-top: 100px;
+}
+
+#initial-loader > h4
+{
+  margin: 8px 0;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 16px;
+  color: inherit;
+  vertical-align: middle;
+  text-align: center;
+  text-rendering: optimizelegibility;
+}
+
+#initial-loader > i
+{
+  display: block;
+  background-image: url('../img/initial-loader.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 32px;
+  margin: 5px;
+  padding: 0;
+}
+
+.padding-top10 {
+  padding-top: 10px;
+}
+.padding6 {
+  padding: 6px;
+}
+
+table.dataTable td.buttons-cell
+{
+  white-space: nowrap;
+  padding: 2px;
+}
+
+/*tabs loading*/
+.tab-loading {
+  opacity: 0;
+}
+
+.panel-body {
+  padding: 10px !important;
+}
+
+.form-header {
+  font-weight: bold;
+  padding-bottom: 2px;
+  color: #2a6496;
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 2px;
+  margin-top: 20px;
+}
+
+.form-header:first-child {
+    margin-top: 0px;
+}
+
+.navigation a {
+  cursor: pointer;
+}
+
+.breadcrumb a {
+  cursor: pointer;
+}
+
+.alert-container .alert {
+    margin-bottom: 6px;
+    padding: 9px;
+}
+
+table.sc-data-table th.sorting
+{
+  cursor: pointer;
+}
+
+table.sc-data-table th.sorting span
+{
+  opacity: 0.3;
+}
+
+
+/* hack bootstrap to use responsive tables in all resolutions*/
+.table-responsive {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border: 1px solid #dddddd;
+}
+.table-responsive > .table {
+  margin-bottom: 0;
+}
+.table-responsive > .table > thead > tr > th,
+.table-responsive > .table > tbody > tr > th,
+.table-responsive > .table > tfoot > tr > th,
+.table-responsive > .table > thead > tr > td,
+.table-responsive > .table > tbody > tr > td,
+.table-responsive > .table > tfoot > tr > td {
+  white-space: nowrap;
+}
+.table-responsive > .table-bordered {
+  border: 0;
+}
+.table-responsive > .table-bordered > thead > tr > th:first-child,
+.table-responsive > .table-bordered > tbody > tr > th:first-child,
+.table-responsive > .table-bordered > tfoot > tr > th:first-child,
+.table-responsive > .table-bordered > thead > tr > td:first-child,
+.table-responsive > .table-bordered > tbody > tr > td:first-child,
+.table-responsive > .table-bordered > tfoot > tr > td:first-child {
+  border-left: 0;
+}
+.table-responsive > .table-bordered > thead > tr > th:last-child,
+.table-responsive > .table-bordered > tbody > tr > th:last-child,
+.table-responsive > .table-bordered > tfoot > tr > th:last-child,
+.table-responsive > .table-bordered > thead > tr > td:last-child,
+.table-responsive > .table-bordered > tbody > tr > td:last-child,
+.table-responsive > .table-bordered > tfoot > tr > td:last-child {
+  border-right: 0;
+}
+.table-responsive > .table-bordered > tbody > tr:last-child > th,
+.table-responsive > .table-bordered > tfoot > tr:last-child > th,
+.table-responsive > .table-bordered > tbody > tr:last-child > td,
+.table-responsive > .table-bordered > tfoot > tr:last-child > td {
+  border-bottom: 0;
+}
+
+/* remove bottom margin from .table-responsive*/
+.table-responsive {
+  margin-bottom: 0px;
+}
+
+#menu-navigation a, #app-case a{
+  cursor: pointer;
+}
+
+.accordion-toggle a {
+    cursor: pointer;
+}
+
+table.table thead th {
+    background-color: #f5f5f5;
+}
+
+.validLicence {
+    background-color: #ffff99
+}
+
+.invalidLicence {
+    background-color: #ffcc99
+}
+.expiredLicence {
+    background-color: #C0C0C0
+}
+
+.ems-portal-modal-window .modal-dialog {
+  width: 1065px;
+}
+
+ul.answer-list > li {
+  margin: 3px;
+}
+
+ul.answer-list > li > input{
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+.table.ctrl-table > tbody > tr > td.ctrl-cell {
+  padding: 0px;
+}
+
+.table.ctrl-table > tbody > tr > td {
+  padding-top: 3px;
+}
+
+.table.ctrl-table > tbody > tr > td .nav-pills {
+  margin-top: 1px;
+  margin-right: 2px;
+}
+
+ul.checkbox-list li {
+    padding-left: 0px;
+    width: 120px;
+}
+
+.table-header {
+  font-weight: bold;
+  padding-bottom: 2px;
+  color: #2a6496;
+  margin-bottom: 2px;
+  margin-top: 20px;
+}
+
+.table-header:first-child {
+    margin-top: 0px;
+}

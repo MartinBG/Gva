@@ -1,0 +1,258 @@
+﻿<ng-form name="appForm" class="form-inline" sc-validate="{}">
+
+  <div class="panel panel-default">
+    <nav class="panel-heading">
+      <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
+        <sc-button ng-show="!inEditMode" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
+        <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
+        <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </nav>
+
+    <div class="well-sm panel-body">
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="Възложител"></label>
+          <div class="input-group input-group-sm">
+            <sc-nomenclature ng-model="app.aopEmployerId" nom-obj="aopEmployer" alias="'aopEmployer'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            <span class="input-group-btn">
+              <sc-button btn-click="newAopEmployer()" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="!inEditMode"></sc-button>
+            </span>
+          </div>
+
+        </div>
+      <!--  <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="Партиден номер"></label>
+          <sc-text ng-model="app.aopEmployer.alias" ng-readonly="true"></sc-text>
+        </div>-->
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="control-label" l10n-text="Имейл"></label>
+          <div class="input-group input-group-sm">
+            <sc-text ng-model="app.email" ng-readonly="!inEditMode"></sc-text>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <accordion close-others="false">
+
+        <accordion-group is-open="true">
+          <accordion-heading>
+              <a l10n-text="I-ви етап" style="font-size: 12px;"></a>
+          </accordion-heading>
+
+          <div class="row">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Документ към етап I:"></label>
+              <a sc-click="gotoDoc(app.stDocRelation.docId)" ng-if="app.stDocRelation.docRelationId">{{ app.stDocRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectSTDoc()" ng-if="!app.stDocRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectSTDoc()" ng-if="app.stDocRelation.docRelationId">разкачи</a>
+            </div>
+          </div>
+
+          <div class="row" ng-if="app.stDocRelation.docRelationId">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Чеклист към етап I:"></label>
+              <a sc-click="gotoDoc(app.stChecklistRelation.docId)" ng-if="app.stChecklistRelation.docRelationId">{{ app.stChecklistRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectSTChecklist()" ng-if="!app.stChecklistRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectSTChecklist()" ng-if="app.stChecklistRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="generateSTChecklist('new')">нов</a>&nbsp|
+              <a sc-click="generateSTChecklist('copy')">копие</a>&nbsp|
+              <a sc-click="generateSTChecklist('correct')">поправка</a>
+            </div>
+          </div>
+
+          <div class="row" ng-if="app.stDocRelation.docRelationId">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Становище към етап I:"></label>
+              <a sc-click="gotoDoc(app.stNoteRelation.docId)" ng-if="app.stNoteRelation.docRelationId">{{ app.stNoteRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectSTNote()" ng-if="!app.stNoteRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectSTNote()" ng-if="app.stNoteRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="generateSTNote()">генерирай</a>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="control-label" l10n-text="Вид на процедурата"></label>
+              <sc-nomenclature ng-model="app.stAopApplicationTypeId" alias="'aopApplicationType'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Обект"></label>
+              <sc-nomenclature ng-model="app.stObjectId" alias="'aopApplicationObject'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Критерий"></label>
+              <sc-nomenclature ng-model="app.stCriteriaId" alias="'aopApplicationCriteria'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Предмет на поръчката"></label>
+              <sc-textarea rows="2" ng-model="app.stSubject" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Стойност на поръчката"></label>
+              <sc-text ng-model="app.stValue" ng-readonly="!inEditMode"></sc-text>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="control-label" l10n-text="Поръчката свързана ли е с отбраната/сигурността"></label><br />
+              <input type="checkbox" ng-model="app.stIsMilitary" ng-disabled="!inEditMode"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Забележка"></label>
+              <sc-textarea rows="2" ng-model="app.stRemark" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+        </accordion-group>
+
+        <accordion-group is-open="true">
+          <accordion-heading>
+              <a l10n-text="II-ви етап" style="font-size: 12px;"></a>
+          </accordion-heading>
+
+           <div class="row">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Документ към етап II:"></label>
+              <a sc-click="gotoDoc(app.ndDocRelation.docId)" ng-if="app.ndDocRelation.docRelationId">{{ app.ndDocRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectNDDoc()" ng-if="!app.ndDocRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectNDDoc()" ng-if="app.ndDocRelation.docRelationId">разкачи</a>
+            </div>
+          </div>
+
+          <div class="row" ng-if="app.ndDocRelation.docRelationId">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Чеклист към етап II:"></label>
+              <a sc-click="gotoDoc(app.ndChecklistRelation.docId)" ng-if="app.ndChecklistRelation.docRelationId">{{ app.ndChecklistRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectNDChecklist()" ng-if="!app.ndChecklistRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectNDChecklist()" ng-if="app.ndChecklistRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="generateNDChecklist('new')">нов</a>&nbsp|
+              <a sc-click="generateNDChecklist('copy')">копие</a>&nbsp|
+              <a sc-click="generateNDChecklist('correct')">поправка</a>
+            </div>
+          </div>
+
+          <div class="row" ng-if="app.ndDocRelation.docRelationId">
+            <div class="form-group col-md-9">
+              <label class="control-label" l10n-text="Доклад към етап II:"></label>
+              <a sc-click="gotoDoc(app.ndReportRelation.docId)" ng-if="app.ndReportRelation.docRelationId">{{ app.ndReportRelation.data }}</a>
+            </div>
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+              <a sc-click="connectNDReport()" ng-if="!app.ndReportRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectNDReport()" ng-if="app.ndReportRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="generateNDReport()">генерирай</a>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="control-label" l10n-text="Вид на процедурата"></label>
+              <sc-nomenclature ng-model="app.ndAopApplicationTypeId" alias="'aopApplicationType'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Обект"></label>
+              <sc-nomenclature ng-model="app.ndObjectId" alias="'aopApplicationObject'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Критерий"></label>
+              <sc-nomenclature ng-model="app.ndCriteriaId" alias="'aopApplicationCriteria'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Предмет на поръчката"></label>
+              <sc-textarea rows="2" ng-model="app.ndSubject" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label class="control-label" l10n-text="Индетификационен номер в РОП"></label>
+              <sc-text ng-model="app.ndropIdNum" ng-readonly="!inEditMode"></sc-text>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="control-label" l10n-text="Уникален номер на поръчката в РОП"></label>
+              <sc-text ng-model="app.ndropUnqNum" ng-readonly="!inEditMode"></sc-text>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="control-label" l10n-text="Дата на публикуване в РОП"></label>
+              <sc-date ng-model="app.ndropDate" ng-readonly="!inEditMode"></sc-date>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label class="control-label" l10n-text="Вид на процедурата"></label>
+              <sc-nomenclature ng-model="app.ndProcedureStatusId" alias="'aopProcedureStatus'" mode="id" ng-readonly="!inEditMode"></sc-nomenclature>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label class="control-label" l10n-text="Стойност на поръчката"></label>
+              <sc-text ng-model="app.ndValue" ng-readonly="!inEditMode"></sc-text>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="control-label" l10n-text="Поръчката свързана ли е с отбраната/сигурността"></label><br />
+              <input type="checkbox" ng-model="app.ndIsMilitary" ng-disabled="!inEditMode"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Основания за прекратяване"></label>
+              <sc-textarea rows="2" ng-model="app.ndRefusalReason" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Обжалване"></label>
+              <sc-textarea rows="2" ng-model="app.ndAppeal" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="Забележка"></label>
+              <sc-textarea rows="2" ng-model="app.ndRemark" ng-readonly="!inEditMode"></sc-textarea>
+            </div>
+          </div>
+
+        </accordion-group>
+
+      </accordion>
+
+    </div>
+
+  </div>
+
+</ng-form>

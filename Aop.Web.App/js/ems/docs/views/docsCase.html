@@ -1,0 +1,25 @@
+﻿<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th style="width: 150px;"><span l10n-text="docs.edit.case.regNumber"></span></th>
+      <th><span l10n-text="docs.edit.case.regDate"></span></th>
+      <th style="width: 100px;"><span l10n-text="docs.edit.case.statusName"></span></th>
+      <th><span l10n-text="docs.edit.case.description"></span></th>
+      <th style="width: 75px;"><span l10n-text="docs.edit.case.doc"></span></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="dr in docRelations">
+    <tr ng-style="{ 'font-weight': dr.docId === docId ? 'bold' : 'normal'}">
+      <td ng-bind-html="dr.docDataHtml"></td>
+      <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dr.docDocStatusName }}</td>
+      <td ng-bind-html="dr.docDescriptionHtml"></td>
+      <td style="text-align: right;">
+        <a ng-click="viewDoc(dr.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<a sc-click="gotoAopApp(aopAppId)" ng-if="aopAppId">Заявление</a>

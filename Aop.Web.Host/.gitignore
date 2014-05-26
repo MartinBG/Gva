@@ -1,0 +1,14 @@
+bin/*
+bin/**/*
+
+obj/*
+obj/**/*
+
+errors/*
+errors/**/*
+
+RioSchemas/*
+RioSchemas/**/*
+
+App/*
+App/**/*
