@@ -195,6 +195,7 @@
           cancel: 'Отказ'
         },
         search: {
+          search: 'Търсене',
           fromDate: 'От дата',
           toDate: 'До дата',
           docName: 'Относно',
