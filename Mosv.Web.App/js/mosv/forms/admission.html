@@ -1,0 +1,215 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="admissions.admissionDirective.incomingLot"></label>
+      <sc-text ng-model="model.incomingLot" name="incomingLot" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="admissions.admissionDirective.incomingNumber"></label>
+      <sc-text ng-model="model.incomingNumber" name="incomingNumber" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="admissions.admissionDirective.incomingDate"></label>
+      <sc-date ng-model="model.incomingDate" name="incomingDate" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="admissions.admissionDirective.applicantType"></label>
+      <sc-nomenclature ng-model="model.applicantType" name="applicantType" alias="'applicantTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-7 col-md-6">
+      <label class="control-label" l10n-text="admissions.admissionDirective.applicant"></label>
+      <sc-text ng-model="model.applicant" name="applicant" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="admissions.admissionDirective.provideType"></label>
+      <sc-nomenclature ng-model="model.provideType" name="provideType" alias="'provideTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-5">
+      <label class="control-label" l10n-text="admissions.admissionDirective.clarification"></label>
+      <sc-text ng-model="model.clarification" name="clarification" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="admissions.admissionDirective.informationType"></label>
+      <sc-nomenclature ng-model="model.informationType" name="informationType" alias="'informationTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-6 col-md-5">
+      <label class="control-label" l10n-text="admissions.admissionDirective.theme"></label>
+      <sc-nomenclature ng-model="model.theme" name="theme" alias="'themes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="admissions.admissionDirective.about"></label>
+      <sc-textarea ng-model="model.about" name="about" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="admissions.admissionDirective.fee"></label>
+      <sc-text ng-model="model.fee" name="fee" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="admissions.admissionDirective.paymentType"></label>
+      <sc-nomenclature ng-model="model.paymentType" name="paymentType" alias="'paymentTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="admissions.admissionDirective.paidFee"></label><br />
+      <input type="checkbox" ng-model="model.paidFee" ng-disabled="readonly" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="admissions.admissionDirective.status"></label>
+      <sc-nomenclature ng-model="model.status" name="status" alias="'statuses1'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  
+  <!--ACCEPTANCE-->
+  <h5 class="form-header" l10n-text="admissions.admissionDirective.acceptanceTitle" ng-show="model.status.alias === 'acceptance'"></h5>
+  <div ng-show="model.status.alias === 'acceptance'">
+
+    <div class="row">
+      <div class="form-group col-sm-4 col-md-3">
+        <label class="control-label" l10n-text="Тип"></label>
+        <sc-nomenclature ng-model="model.decisionType" name="decisionType" alias="'decisionTypes'" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="admissions.admissionDirective.acceptanceResolutionNumber"></label>
+        <sc-text ng-model="model.acceptanceResolutionNumber" name="acceptanceResolutionNumber" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-3 col-md-2">
+        <label class="control-label" l10n-text="admissions.admissionDirective.acceptanceResolutionDate"></label>
+        <sc-date ng-model="model.acceptanceResolutionDate" name="acceptanceResolutionDate" ng-readonly="readonly"></sc-date>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-4 col-md-3">
+        <label class="control-label" l10n-text="Срок"></label>
+        <sc-nomenclature ng-model="model.decisionDeadlineType" name="decisionDeadlineType" alias="'decisionDeadlineTypes'" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <input type="checkbox" ng-model="model.isExtended" ng-disabled="readonly" />
+        <label class="control-label" l10n-text="Удължаване"></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="Причина за удължаване"></label>
+        <sc-nomenclature ng-model="model.extensionReason" name="extensionReason" alias="'extensionReasons'" ng-readonly="readonly" ng-disabled="!model.isExtended"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="admissions.admissionDirective.clarification"></label>
+        <sc-text ng-model="model.extensionClarification" name="extensionClarification" ng-readonly="readonly" ng-disabled="!model.isExtended"></sc-text>
+      </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <input type="checkbox" ng-model="model.isDoiDenied" ng-disabled="readonly" />
+        <label class="control-label" l10n-text="Отказ"></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="Основания за отказ за предоставяне на ДОИ"></label>
+        <sc-nomenclature ng-model="model.doiDenialReason" name="doiDenialReason" alias="'doiDenialReasons'" ng-readonly="readonly" ng-disabled="!model.isDoiDenied"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="admissions.admissionDirective.clarification"></label>
+        <sc-text ng-model="model.doiDenialClarification" name="doiDenialClarification" ng-readonly="readonly" ng-disabled="!model.isDoiDenied"></sc-text>
+      </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <input type="checkbox" ng-model="model.isDeniedByApplicant" ng-disabled="readonly" />
+        <label class="control-label" l10n-text="Отказ на заявителя от предоставения му достъп"></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="admissions.admissionDirective.reason"></label>
+        <sc-nomenclature ng-model="model.applicantDenialReason" name="applicantDenialReason" alias="'applicantDenialReasons'" ng-readonly="readonly" ng-disabled="!model.isDeniedByApplicant"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="admissions.admissionDirective.clarification"></label>
+        <sc-text ng-model="model.applicantDenialClarification" name="applicantDenialClarification" ng-readonly="readonly" ng-disabled="!model.isDeniedByApplicant"></sc-text>
+      </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <input type="checkbox" ng-model="model.hasAppeal" ng-disabled="readonly" />
+        <label class="control-label" l10n-text="Има жалба"></label>
+      </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <input type="checkbox" ng-model="model.isAppealed" ng-disabled="readonly" />
+        <label class="control-label" l10n-text="Обжалване"></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="Резултат от обжалване"></label>
+        <sc-nomenclature ng-model="model.appealResult" name="appealResult" alias="'appealResults'" ng-readonly="readonly" ng-disabled="!model.isAppealed"></sc-nomenclature>
+      </div>
+    </div>
+
+  </div>
+
+  <!--DENIAL-->
+  <h5 class="form-header" l10n-text="admissions.admissionDirective.denialTitle" ng-show="model.status.alias === 'denial'"></h5>
+  <div ng-show="model.status.alias === 'denial'">
+
+    <div class="row">
+      <div class="form-group col-sm-4 col-md-3">
+        <label class="control-label" l10n-text="admissions.admissionDirective.reason"></label>
+        <sc-nomenclature ng-model="model.denialReason" name="denialReason" alias="'denialReasons'" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-6 col-md-5">
+        <label class="control-label" l10n-text="admissions.admissionDirective.clarification"></label>
+        <sc-text ng-model="model.denialClarification" name="denialClarification" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+  </div>
+
+</ng-form>

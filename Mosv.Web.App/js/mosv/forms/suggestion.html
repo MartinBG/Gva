@@ -1,0 +1,57 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.lot"></label>
+      <sc-text ng-model="model.lot" name="lot" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.number"></label>
+      <sc-text ng-model="model.number" name="number" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.date"></label>
+      <sc-date ng-model="model.date" name="date" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-3">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.submitType"></label>
+      <sc-nomenclature ng-model="model.submitType" name="submitType" alias="'submitTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.applicant"></label>
+      <sc-text ng-model="model.applicant" name="applicant" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.institution"></label>
+      <sc-nomenclature ng-model="model.institution" name="institution" alias="'institutions'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.character"></label>
+      <sc-textarea ng-model="model.character" name="character" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.status"></label>
+      <sc-nomenclature ng-model="model.status" name="status" alias="'statuses2'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row" ng-show="model.status.alias === 'hasActions'">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="suggestions.suggestionDirective.actions"></label>
+      <sc-textarea ng-model="model.actions" name="actions" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+</ng-form>

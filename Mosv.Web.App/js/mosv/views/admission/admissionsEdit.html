@@ -1,0 +1,22 @@
+﻿<ng-form name="editAdmissionForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="admissions.editAdmission.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="admissions.editAdmission.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="admissions.editAdmission.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="admissions.editAdmission.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <mosv-admission name="admissionForm" ng-model="admission.part" readonly="!editMode"></mosv-admission>
+    </div>
+  </div>
+</ng-form>

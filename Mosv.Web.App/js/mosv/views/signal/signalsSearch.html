@@ -1,0 +1,30 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="incomingNumber" class="col-sm-2" removable="false" label="signals.search.incomingNumber"></sc-filter>
+    <sc-filter type="text" name="incomingLot" class="col-sm-2" removable="true" label="signals.search.incomingLot"></sc-filter>
+    <sc-filter type="text" name="applicant" class="col-sm-2" removable="true" label="signals.search.applicant"></sc-filter>
+    <sc-filter type="date" name="incomingDate" class="col-sm-2" removable="true" label="signals.search.incomingDate"></sc-filter>
+    <sc-filter type="text" name="violation" class="col-sm-2" removable="true" label="signals.search.violation"></sc-filter>
+    <sc-search-button action="search()" text="signals.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newSignal()" text="signals.search.newSignal" icon="glyphicon-user"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable items="signals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="viewButton" btn-click="viewSignal(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+      <sc-column data="incomingLot" title="signals.search.incomingLot" width="60px">
+    </sc-column>
+    <sc-column data="incomingNumber" title="signals.search.incomingNumber" width="60px">
+    </sc-column>
+    <sc-column data="incomingDate" title="signals.search.incomingDate" width="60px" type="date">
+    </sc-column>
+    <sc-column data="applicant" title="signals.search.applicant" width="60px">
+    </sc-column>
+    <sc-column data="institution" title="signals.search.institution">
+    </sc-column>
+    <sc-column data="violation" title="signals.search.violation">
+    </sc-column>
+  </sc-datatable>
+</div>

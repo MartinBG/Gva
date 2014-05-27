@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6858000-2FE8-4270-A737-CB239F48A25A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mosv.Web.App</RootNamespace>
+    <AssemblyName>Mosv.Web.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower.json" />
+    <Content Include="css\dataTables.bootstrap.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\uxp.css" />
+    <Content Include="gulpfile.js" />
+    <Content Include="img\initial-loader.gif" />
+    <Content Include="img\loading-icon-white.gif" />
+    <Content Include="img\loading-icon.gif" />
+    <Content Include="index.html" />
+    <Content Include="js\app.js" />
+    <Content Include="js\app_bg-bg.js" />
+    <Content Include="js\common\common.js" />
+    <Content Include="js\common\common_bg-bg.js" />
+    <Content Include="js\common\root\views\root.html" />
+    <Content Include="js\common\root\views\rootCtrl.js" />
+    <Content Include="js\mosv\forms\admission.html" />
+    <Content Include="js\mosv\forms\signal.html" />
+    <Content Include="js\mosv\forms\suggestion.html" />
+    <Content Include="js\mosv\mosv.js" />
+    <Content Include="js\mosv\mosv_bg-bg.js" />
+    <Content Include="js\mosv\resources\admission.js" />
+    <Content Include="js\mosv\resources\admissionData.js" />
+    <Content Include="js\mosv\resources\signal.js" />
+    <Content Include="js\mosv\resources\signalData.js" />
+    <Content Include="js\mosv\resources\suggestion.js" />
+    <Content Include="js\mosv\resources\suggestionData.js" />
+    <Content Include="js\mosv\views\admission\admissionsEdit.html" />
+    <Content Include="js\mosv\views\admission\admissionsEditCtrl.js" />
+    <Content Include="js\mosv\views\admission\admissionsNew.html" />
+    <Content Include="js\mosv\views\admission\admissionsNewCtrl.js" />
+    <Content Include="js\mosv\views\admission\admissionsSearch.html" />
+    <Content Include="js\mosv\views\admission\admissionsSearchCtrl.js" />
+    <Content Include="js\mosv\views\signal\signalsEdit.html" />
+    <Content Include="js\mosv\views\signal\signalsEditCtrl.js" />
+    <Content Include="js\mosv\views\signal\signalsNew.html" />
+    <Content Include="js\mosv\views\signal\signalsNewCtrl.js" />
+    <Content Include="js\mosv\views\signal\signalsSearch.html" />
+    <Content Include="js\mosv\views\signal\signalsSearchCtrl.js" />
+    <Content Include="js\mosv\views\suggestion\suggestionsEdit.html" />
+    <Content Include="js\mosv\views\suggestion\suggestionsEditCtrl.js" />
+    <Content Include="js\mosv\views\suggestion\suggestionsNew.html" />
+    <Content Include="js\mosv\views\suggestion\suggestionsNewCtrl.js" />
+    <Content Include="js\mosv\views\suggestion\suggestionsSearch.html" />
+    <Content Include="js\mosv\views\suggestion\suggestionsSearchCtrl.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".jshintrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\ems\corrs\forms\" />
+    <Folder Include="js\ems\corrs\resources\" />
+    <Folder Include="js\ems\corrs\views\" />
+    <Folder Include="js\ems\docs\forms\docNew\" />
+    <Folder Include="js\ems\docs\forms\docView\" />
+    <Folder Include="js\ems\docs\recources\" />
+    <Folder Include="js\ems\docs\views\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

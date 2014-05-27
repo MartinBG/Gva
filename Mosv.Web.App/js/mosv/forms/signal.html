@@ -1,0 +1,92 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+
+  <div class="row">
+    <div class="form-group  col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="signals.signalDirective.incomingLot"></label>
+      <sc-text ng-model="model.incomingLot" name="incomingLot" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="signals.signalDirective.number"></label>
+      <sc-text ng-model="model.number" name="number" ng-readonly="readonly"></sc-text>
+    </div>
+    <div class="form-group col-sm-3 col-md-2">
+      <label class="control-label" l10n-text="signals.signalDirective.date"></label>
+      <sc-date ng-model="model.date" name="date" ng-readonly="readonly"></sc-date>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-3">
+      <label class="control-label" l10n-text="signals.signalDirective.submitType"></label>
+      <sc-nomenclature ng-model="model.submitType" name="submitType" alias="'submitTypes'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+    <div class="form-group col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="signals.signalDirective.applicant"></label>
+      <sc-text ng-model="model.applicant" name="applicant" ng-readonly="readonly"></sc-text>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-4">
+      <label class="control-label" l10n-text="signals.signalDirective.institution"></label>
+      <sc-nomenclature ng-model="model.institution" name="institution" alias="'institutions'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.violation"></label>
+      <sc-textarea ng-model="model.violation" name="violation" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.violationPlace"></label>
+      <sc-textarea ng-model="model.violationPlace" name="violationPlace" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.affectedParts"></label>
+      <sc-textarea ng-model="model.affectedParts" name="affectedParts" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.checkTime"></label>
+      <sc-textarea ng-model="model.checkTime" name="checkTime" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.damages"></label>
+      <sc-textarea ng-model="model.damages" name="damages" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.precautions"></label>
+      <sc-textarea ng-model="model.precautions" name="precautions" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="signals.signalDirective.status"></label>
+      <sc-nomenclature ng-model="model.status" name="status" alias="'statuses2'" ng-readonly="readonly"></sc-nomenclature>
+    </div>
+  </div>
+
+  <div class="row" ng-show="model.status.alias === 'hasActions'">
+    <div class="form-group col-sm-10 col-md-8">
+      <label class="control-label" l10n-text="signals.signalDirective.actions"></label>
+      <sc-textarea ng-model="model.actions" name="actions" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+</ng-form>

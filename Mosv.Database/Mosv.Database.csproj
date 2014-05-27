@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{070EE8CD-B733-4F87-96E0-D18D0949E06D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mosv.Database</RootNamespace>
+    <AssemblyName>Mosv.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CreateAll.sql" />
+    <Content Include="Create\Create.sql" />
+    <Content Include="Create\Tables\MosvViewAdmissions.sql" />
+    <Content Include="Create\Tables\MosvViewSignals.sql" />
+    <Content Include="Create\Tables\MosvViewSuggestions.sql" />
+    <Content Include="Insert\MosvCorrespondents.sql" />
+    <Content Include="Insert\MosvExcelConfig\ClassificationRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\Classifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\ConfigFinalize.sql" />
+    <Content Include="Insert\MosvExcelConfig\DocFileTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\DocTypeClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\DocTypeGroups.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\DocTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\DocTypeUnitRoles.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\ElectronicServiceStageExecutors.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\ElectronicServiceStages.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\ExcelConfig.xml" />
+    <Content Include="Insert\MosvExcelConfig\IrregularityTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\RegisterIndexes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\UnitClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\UnitRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\Units.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\Users.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\Noms\mosv.sql" />
+    <Content Include="Insert\Noms\registers.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateAll.bat" />
+    <None Include="CreateAll.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateAll.tt</DependentUpon>
+    </None>
+    <None Include="CreateAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateAll.log</LastGenOutput>
+    </None>
+    <None Include="Insert\MosvExcelConfig\ExcelConfig.log" />
+    <None Include="Insert\MosvExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
+    </None>
+    <None Include="Insert\MosvExcelConfig\ExcelConfig1.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

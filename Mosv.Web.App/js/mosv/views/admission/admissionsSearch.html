@@ -1,0 +1,27 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-filter type="text" name="incomingNumber" class="col-sm-2" removable="false" label="admissions.search.incomingNumber"></sc-filter>
+    <sc-filter type="text" name="incomingLot" class="col-sm-2" removable="true" label="admissions.search.incomingLot"></sc-filter>
+    <sc-filter type="text" name="applicant" class="col-sm-2" removable="true" label="admissions.search.applicant"></sc-filter>
+    <sc-filter type="date" name="incomingDate" class="col-sm-2" removable="true" label="admissions.search.incomingDate"></sc-filter>
+    <sc-search-button action="search()" text="admissions.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="newAdmission()" text="admissions.search.newAdmission" icon="glyphicon-user"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable items="admissions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-button name="viewButton" btn-click="viewAdmission(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="incomingLot" title="admissions.search.incomingLot" width="60px">
+    </sc-column>
+    <sc-column data="incomingNumber" title="admissions.search.incomingNumber" width="60px">
+    </sc-column>
+    <sc-column data="incomingDate" title="admissions.search.incomingDate" width="60px" type="date">
+    </sc-column>
+    <sc-column data="applicantType" title="admissions.search.applicantType">
+    </sc-column>
+    <sc-column data="applicant" title="admissions.search.applicant">
+    </sc-column>
+  </sc-datatable>
+</div>

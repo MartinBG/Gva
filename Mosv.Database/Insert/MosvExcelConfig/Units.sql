@@ -1,0 +1,86 @@
+﻿print 'Excel Insert Units'
+GO
+
+SET IDENTITY_INSERT [Units] ON
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(1,N'РИОСВ София',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(2,N'Директор РИОСВ',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(3,N'Иван Софийски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(4,N'"ОБЩА АДМИНИСТРАЦИЯ"',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(5,N'Дирекция „Административни, финансови и правни дейности”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(6,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(7,N'Петър Софийски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(8,N'Административно обслужване на "едно гише", деловодство',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(9,N'Николай Софийски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(10,N'"СПЕЦИАЛИЗИРАНА АДМИНИСТРАЦИЯ"',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(11,N'Дирекция „Контрол на околната среда”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(12,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(13,N'Мария Софийска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(14,N'Отдел „Контролна дейност”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(15,N'Началник на отдел',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(16,N'Петя Софийска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(17,N'Експерт',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(18,N'Ваня Софийска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(19,N'РИОСВ Пловдив',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(20,N'Директор РИОСВ',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(21,N'Иван Пловдивски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(22,N'ОБЩА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(23,N'Дирекция „Административни, финансови и правни дейности”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(24,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(25,N'Петър Пловдивски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(26,N'Административно обслужване на "едно гише", деловодство',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(27,N'Николай Пловдивски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(28,N'СПЕЦИАЛИЗИРАНА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(29,N'Дирекция „Контрол на околната среда”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(30,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(31,N'Мария Пловдивска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(32,N'Отдел „Контролна дейност”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(33,N'Началник на отдел',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(34,N'Петя Пловдивска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(35,N'Експерт',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(36,N'Ваня Пловдивска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(37,N'РИОСВ Варна',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(38,N'Директор РИОСВ',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(39,N'Иван Варненски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(40,N'ОБЩА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(41,N'Дирекция „Административни, финансови и правни дейности”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(42,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(43,N'Петър Варненски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(44,N'Административно обслужване на "едно гише", деловодство',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(45,N'Николай Варненски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(46,N'СПЕЦИАЛИЗИРАНА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(47,N'Дирекция „Контрол на околната среда”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(48,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(49,N'Мария Варненска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(50,N'Отдел „Контролна дейност”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(51,N'Началник на отдел',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(52,N'Петя Варненска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(53,N'Експерт',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(54,N'Ваня Варненска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(55,N'РИОСВ Бургас',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(56,N'Директор РИОСВ',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(57,N'Иван Бургаски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(58,N'ОБЩА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(59,N'Дирекция „Административни, финансови и правни дейности”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(60,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(61,N'Петър Бургаски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(62,N'Административно обслужване на "едно гише", деловодство',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(63,N'Николай Бургаски',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(64,N'СПЕЦИАЛИЗИРАНА АДМИНИСТРАЦИЯ',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(65,N'Дирекция „Контрол на околната среда”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(66,N'Директор дирекция',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(67,N'Мария Бургаска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(68,N'Отдел „Контролна дейност”',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(69,N'Началник на отдел',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(70,N'Петя Бургаска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(71,N'Експерт',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(72,N'Ваня Бургаска',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(73,N'Системни',1,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(74,N'Система',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(75,N'system',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(76,N'Администратор',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(77,N'admin',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(78,N'Служител МОСВ',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(79,N'systemusermosv',3,0,1);
+SET IDENTITY_INSERT [Units] OFF
+GO
+

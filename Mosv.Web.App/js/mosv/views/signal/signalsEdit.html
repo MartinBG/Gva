@@ -1,0 +1,23 @@
+﻿<ng-form name="editSignalForm"  sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="signals.edit.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="signals.edit.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="signals.edit.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="signals.edit.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+  </div>
+
+    <div class="well-sm panel-body">
+      <mosv-signal name="signalForm" ng-model="signalData.part" readonly="!editMode"></mosv-signal>
+    </div>
+  </div>
+</ng-form>
