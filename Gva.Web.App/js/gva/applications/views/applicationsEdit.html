@@ -14,12 +14,6 @@
           <input name="lin" type="text" class="form-control" value="{{application.person.lin}}" disabled />
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon" l10n-text="applications.edit.status"></span>
-          <input name="status" type="text" class="form-control" value="{{}}" disabled />
-        </div>
-      </div>
       <div class="col-sm-2">
         <sc-button name="editBtn" btn-click="viewPerson(application.lotId)" text="applications.edit.viewPerson" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
@@ -57,7 +51,7 @@
       <div class="col-sm-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="applications.edit.aircraftCategory"></span>
-          <input name="aircraftCategory" type="text" class="form-control" value="{{application.aircraft.aircraftCategory}}" disabled />
+          <input name="aircraftCategory" type="text" class="form-control" value="{{application.aircraft.airCategory}}" disabled />
         </div>
       </div>
       <div class="col-sm-2">

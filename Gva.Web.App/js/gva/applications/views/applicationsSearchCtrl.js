@@ -15,8 +15,7 @@
       filter: null,
       fromDate: null,
       toDate: null,
-      regUri: null,
-      lin: null
+      regUri: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -30,7 +29,9 @@
         filter: $scope.filters.filter,
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
-        lin: $scope.filters.lin
+        personLin: $scope.filters.personLin,
+        aircraftIcao: $scope.filters.aircraftIcao,
+        organizationUin: $scope.filters.organizationUin
       }, { reload: true });
     };
 

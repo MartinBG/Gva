@@ -24,7 +24,10 @@
     };
 
     $scope.viewApplication = function (appId) {
-      return $state.go('root.applications.edit.case', { id: appId });
+      return $state.go('root.applications.edit.case', {
+        id: appId,
+        filter: $stateParams.filter
+      });
     };
   }
 

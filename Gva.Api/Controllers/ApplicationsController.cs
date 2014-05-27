@@ -83,9 +83,26 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetApplications(DateTime? fromDate = null, DateTime? toDate = null, string lin = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetApplications(
+            string filter = null,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string personLin = null,
+            string aircraftIcao = null,
+            string organizationUin = null,
+            int offset = 0, 
+            int? limit = null
+            )
         {
-            var applications = this.applicationRepository.GetApplications(fromDate: fromDate, toDate: toDate, lin: lin, offset: offset, limit: limit);
+            var applications = this.applicationRepository.GetApplications(
+                lotSetAlias: filter, 
+                fromDate: fromDate,
+                toDate: toDate,
+                personLin: personLin,
+                aircraftIcao: aircraftIcao,
+                organizationUin: organizationUin,
+                offset: offset,
+                limit: limit);
 
             return Ok(applications);
         }

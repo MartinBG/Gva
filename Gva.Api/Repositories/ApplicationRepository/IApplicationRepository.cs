@@ -10,9 +10,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
     public interface IApplicationRepository : IRepository<GvaApplication>
     {
         IEnumerable<ApplicationListDO> GetApplications(
+            string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            string lin = null,
+            string personLin = null,
+            string aircraftIcao = null,
+            string organizationUin = null,
             int offset = 0,
             int? limit = null
             );

@@ -2524,8 +2524,8 @@
           airportName: 'Име',
           airportType: 'Тип',
           aircraftProducer: 'Производител',
-          aircraftCategory: 'Тип ВС',
-          aircraftICAO: 'ICAO код',
+          aircraftCategory: 'AIR категория',
+          aircraftICAO: 'ICAO',
           organizationName: 'Име',
           organizationCAO: 'САО',
           organizationUIN: 'Булстат',
@@ -2757,7 +2757,9 @@
           applicationType: 'Тип заявление',
           status: 'Статус',
           lin: 'ЛИН',
-          description: 'Описание'
+          description: 'Описание',
+          aircraftICAO: 'ICAO',
+          organizationUIN: 'Булстат'
         },
         applicationDocument: {
           title: 'Сканиран (електронен) документ',

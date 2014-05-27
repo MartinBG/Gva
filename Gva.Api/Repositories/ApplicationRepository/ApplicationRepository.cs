@@ -21,9 +21,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
         }
 
         public IEnumerable<ApplicationListDO> GetApplications(
+            string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            string lin = null,
+            string personLin = null,
+            string aircraftIcao = null,
+            string organizationUin = null,
             int offset = 0,
             int? limit = null
             )
@@ -59,8 +62,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GViewPerson = p2,
                     GViewOrganization = o2,
                     GViewAircraft = ac2,
+                    GViewAircraftCat = nv3,
+                    GViewAircraftProd = nv6,
                     GViewAirport = ap2,
-                    GViewEquipment = eq2
+                    GViewEquipment = eq2,
                 };
 
             var predicate = PredicateBuilder.True(new
@@ -72,6 +77,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 GViewPerson = new GvaViewPerson(),
                 GViewOrganization = new GvaViewOrganization(),
                 GViewAircraft = new GvaViewAircraft(),
+                GViewAircraftCat = new NomValue(),
+                GViewAircraftProd = new NomValue(),
                 GViewAirport = new GvaViewAirport(),
                 GViewEquipment = new GvaViewEquipment()
             });
@@ -79,7 +86,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.RequestDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.RequestDate, toDate)
-                .AndStringContains(e => e.GViewPerson.Lin, lin);
+                .AndStringContains(e => e.GViewPerson.Lin, personLin)
+                .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
+                .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
+                .AndStringMatches(e => e.Set.Alias, lotSetAlias, true);
 
             var applications = applicationsJoin
                 .Where(predicate)
@@ -106,8 +116,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,
                     GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null,
                     GvaAircraftId = e.GViewAircraft != null ? (int?)e.GViewAircraft.LotId : null,
-                    GvaAirCategory = e.GViewAircraft != null && e.GViewAircraft.AirCategory != null ? e.GViewAircraft.AirCategory.Name : null,
-                    GvaAircraftProducer = e.GViewAircraft != null && e.GViewAircraft.AircraftProducer != null ? e.GViewAircraft.AircraftProducer.Name : null,
+                    GvaAirCategory = e.GViewAircraftCat != null ? e.GViewAircraftCat.Name : null,
+                    GvaAircraftProducer = e.GViewAircraftProd != null ? e.GViewAircraftProd.Name : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
                     GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
                     GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType : null,
