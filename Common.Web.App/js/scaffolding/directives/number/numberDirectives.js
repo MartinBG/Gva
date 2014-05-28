@@ -3,8 +3,8 @@
 (function (angular) {
   'use strict';
 
-  function createNumberDirective (name, parser, formatter, inject) {
-    function NumberDirective () {
+  function createNumberDirective(name, parserFactory, formatterFactory, inject) {
+    function NumberDirective() {
       var injected = Array.prototype.slice.apply(arguments);
       return {
         priority: 110,
@@ -16,13 +16,13 @@
           if (!ngModel) {
             return;
           }
+          injected.unshift(attrs)
+          ngModel.$parsers.push(parserFactory.apply(this, injected));
 
-          ngModel.$parsers.push(parser.apply(this, injected));
-
-          ngModel.$formatters.push(formatter.apply(this, injected));
+          ngModel.$formatters.push(formatterFactory.apply(this, injected));
 
           if (attrs.min) {
-            var minValidator = function(value) {
+            var minValidator = function (value) {
               var min = parseFloat(attrs.min);
               if (!ngModel.$isEmpty(value) && value < min) {
                 ngModel.$setValidity('min', false);
@@ -38,7 +38,7 @@
           }
 
           if (attrs.max) {
-            var maxValidator = function(value) {
+            var maxValidator = function (value) {
               var max = parseFloat(attrs.max);
               if (!ngModel.$isEmpty(value) && value > max) {
                 ngModel.$setValidity('max', false);
@@ -58,7 +58,7 @@
                 idx = formatters.length,
                 value = ngModel.$modelValue;
 
-            while(idx--) {
+            while (idx--) {
               value = formatters[idx](value);
             }
 
@@ -80,6 +80,11 @@
     angular.module('scaffolding').directive(name, NumberDirective);
   }
 
+  function padInt(value, padding) {
+    value = value.toString();
+    return value.length < padding ? padInt("0" + value, padding) : value;
+  }
+
   createNumberDirective(
     'scFloat',
     function () {
@@ -88,7 +93,7 @@
         return isNaN(num) ? undefined : Math.round((num + 0.00001) * 100) / 100;
       };
     },
-    function ($filter, $locale) {
+    function (attrs, $filter, $locale) {
       return function (numValue) {
         return numValue === undefined || numValue === null ?
           undefined :
@@ -105,11 +110,15 @@
         return isNaN(num) ? undefined : num;
       };
     },
-    function () {
+    function (attrs) {
       return function (numValue) {
-        return numValue === undefined || numValue === null ?
-          undefined :
+        numValue === undefined || numValue === null ?
+        undefined :
           numValue;
+        if (attrs.padding && numValue) {
+          numValue = padInt(numValue, attrs.padding)
+        }
+          return numValue;
       };
     });
 
