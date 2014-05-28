@@ -3,6 +3,8 @@ Usage <sc-datatable items="data"
         filterable="true|false"
         pageable="true|false"
         sortable="true|false"
+        scrollable="true|false"
+        has-info-text="true|false"
         dynamic-columns="true|false"
         row-class="{'class' : expression}">
  </sc-datatable>
@@ -20,7 +22,9 @@ Usage <sc-datatable items="data"
         filterable: '&',
         pageable: '&',
         sortable: '&',
-        dynamicColumns: '&'
+        dynamicColumns: '&',
+        scrollable: '&',
+        hasInfoText: '&'
       },
       link: function ($scope, $element, $attrs) {
         var select2,
@@ -31,7 +35,10 @@ Usage <sc-datatable items="data"
             sortable = $scope.sortable() === undefined ? true : $scope.sortable();
 
         $scope.filterable = $scope.filterable() === undefined ? true : $scope.filterable();
+        $scope.scrollable = $scope.scrollable() === undefined ? true : $scope.scrollable();
         $scope.pageable = $scope.pageable() === undefined ? true : $scope.pageable();
+        $scope.hasInfoText =
+          $scope.hasInfoText() === undefined ? true : $scope.hasInfoText();
         $scope.dynamicColumns =
           $scope.dynamicColumns() === undefined ? true : $scope.dynamicColumns();
 
