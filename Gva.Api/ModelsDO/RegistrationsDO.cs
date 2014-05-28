@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO
 {
     public class RegistrationsDO
     {
-        public int? FirstIndex { get; set; }
+        public int FirstIndex { get; set; }
 
         public int? PrevIndex { get; set; }
 
@@ -18,7 +18,7 @@ namespace Gva.Api.ModelsDO
 
         public int? NextIndex { get; set; }
 
-        public int? LastIndex { get; set; }
+        public int LastIndex { get; set; }
 
         public int? AirworthinessIndex { get; set; }
 

@@ -18,7 +18,7 @@ namespace Regs.Api.Models
 
         public string Path { get; set; }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public virtual Lot Lot { get; set; }
 

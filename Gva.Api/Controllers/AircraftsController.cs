@@ -238,10 +238,10 @@ namespace Gva.Api.Controllers
                 regPartId = currentReg.PartId;
             }
             regsData.AirworthinessIndex = registrationsView.Where(e => e.LotPartId == regPartId).FirstOrDefault().CertAirworthinessId;
-            regsData.LastIndex = regs[0].Part.Index.Value;
-            regsData.NextIndex = regIndex > 0 ? regs[regIndex - 1].Part.Index : null;
-            regsData.PrevIndex = regIndex < regs.Length - 1 ? regs[regIndex + 1].Part.Index : null;
-            regsData.FirstIndex = regs[regs.Length - 1].Part.Index.Value;
+            regsData.LastIndex = regs[0].Part.Index;
+            regsData.NextIndex = regIndex > 0 ? regs[regIndex - 1].Part.Index : (int?)null;
+            regsData.PrevIndex = regIndex < regs.Length - 1 ? regs[regIndex + 1].Part.Index : (int?)null;
+            regsData.FirstIndex = regs[regs.Length - 1].Part.Index;
             regsData.LastReg = regs[0].Content;
             regsData.FirstReg = regs[regs.Length - 1].Content;
 

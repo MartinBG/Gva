@@ -10,7 +10,7 @@ namespace Mosv.Api.ModelsDO
     {
         public PartVersionDO(PartVersion partVersion)
         {
-            this.PartIndex = partVersion.Part.Index.Value;
+            this.PartIndex = partVersion.Part.Index;
             this.PartId = partVersion.PartId;
             this.Part = partVersion.Content;
         }

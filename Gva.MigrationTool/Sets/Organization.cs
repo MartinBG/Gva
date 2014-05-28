@@ -162,7 +162,7 @@ namespace Gva.MigrationTool.Sets
                                     new ApplicationNomDO
                                     {
                                         ApplicationId = 0, //will be set later
-                                        PartIndex = pv.Part.Index.Value,
+                                        PartIndex = pv.Part.Index,
                                         ApplicationName = aircraftDocumentApplication.Get<string>("part.applicationType.name")
                                     }));
                     }

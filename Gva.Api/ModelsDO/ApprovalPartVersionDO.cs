@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO
     {
         public ApprovalPartVersionDO(PartVersion partVersion, PartVersion firstAmendment, PartVersion lastAmendment, GvaApplication[] lotObjects)
         {
-            this.PartIndex = partVersion.Part.Index.Value;
+            this.PartIndex = partVersion.Part.Index;
             this.Approval = partVersion.Content;
             this.Amendment = new PartVersionDO(firstAmendment, lotObjects);
 

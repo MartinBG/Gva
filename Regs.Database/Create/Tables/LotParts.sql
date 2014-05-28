@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[LotParts] (
     [LotSetPartId]  INT            NOT NULL,
     [LotId]         INT            NOT NULL,
     [Path]          NVARCHAR (50)  NOT NULL,
-    [Index]         INT            NULL,
+    [Index]         INT            NOT NULL,
     CONSTRAINT [PK_LotParts]             PRIMARY KEY ([LotPartId]),
     CONSTRAINT [FK_LotParts_LotSetParts] FOREIGN KEY ([LotSetPartId]) REFERENCES [dbo].[LotSetParts] ([LotSetPartId]),
     CONSTRAINT [FK_LotParts_Lots]        FOREIGN KEY ([LotId])        REFERENCES [dbo].[Lots]        ([LotId])

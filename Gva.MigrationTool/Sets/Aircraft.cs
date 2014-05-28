@@ -280,7 +280,7 @@ namespace Gva.MigrationTool.Sets
                                     new ApplicationNomDO
                                     {
                                         ApplicationId = 0, //will be set later
-                                        PartIndex = pv.Part.Index.Value,
+                                        PartIndex = pv.Part.Index,
                                         ApplicationName = aircraftDocumentApplication.Get<string>("part.applicationType.name")
                                     }));
                     }
@@ -329,7 +329,7 @@ namespace Gva.MigrationTool.Sets
                     foreach (var aircraftInspection in aircraftInspections)
                     {
                         var pv = lot.CreatePart("inspections/*", aircraftInspection, context);
-                        inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index.Value);
+                        inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index);
                     }
 
                     var aircraftCertRegistrations = this.getAircraftCertRegistrations(aircraftApexId, getPerson, getOrganization, nomApplications, noms);

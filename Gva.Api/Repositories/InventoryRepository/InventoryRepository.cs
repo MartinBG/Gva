@@ -35,7 +35,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     f.GvaCaseTypeId,
 
                     SetPartAlias = i.SetPartAlias,
-                    PartIndex = i.Part.Index.Value,
+                    PartIndex = i.Part.Index,
                     Name = i.Name,
                     Type = i.Type,
                     Number = i.Number,
