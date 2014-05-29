@@ -156,6 +156,8 @@
     <Content Include="js\scaffolding\directives\files\singleFileModalCtrl.js" />
     <Content Include="js\scaffolding\directives\formName\formNameDirective.js" />
     <Content Include="js\scaffolding\directives\hasError\hasErrorDirective.js" />
+    <Content Include="js\scaffolding\directives\linkButton\linkButtonDirective.html" />
+    <Content Include="js\scaffolding\directives\linkButton\linkButtonDirective.js" />
     <Content Include="js\scaffolding\directives\navigation\navigationDirective.html" />
     <Content Include="js\scaffolding\directives\navigation\navigationDirective.js" />
     <Content Include="js\scaffolding\directives\navigation\navigationItemDirective.html" />
@@ -176,6 +178,7 @@
     <Content Include="js\scaffolding\directives\search\searchDirective.js" />
     <Content Include="js\scaffolding\directives\select\selectDirective.html" />
     <Content Include="js\scaffolding\directives\select\selectDirective.js" />
+    <Content Include="js\scaffolding\directives\sref\srefDirective.js" />
     <Content Include="js\scaffolding\directives\tabs\tabsDirective.html" />
     <Content Include="js\scaffolding\directives\tabs\tabsDirective.js" />
     <Content Include="js\scaffolding\directives\textarea\textareaDirective.js" />
