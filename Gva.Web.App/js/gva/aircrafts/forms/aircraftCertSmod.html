@@ -42,16 +42,10 @@
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-6 col-md-4" sc-has-error="scode">
-      <label class="control-label" l10n-text="aircrafts.smodDirective.scode"></label>
-      <sc-validation-error field-name="scode" validations="{required: null}"></sc-validation-error>
-      <span class="input-group input-group-sm">
-        <sc-text ng-model="model.scode" name="scode" required disabled ng-readonly="readonly"></sc-text>
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="readonly"></button>
-        </span>
-      </span>
-    </div>
+    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{ required: null }" field-name="scode">
+      <sc-text ng-model="model.scode" name="scode" required disabled ng-readonly="readonly"></sc-text>
+      <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="readonly"></button>
+    </sc-field-group>
     <div class="form-group col-sm-2" sc-has-error="valid">
       <label class="control-label" l10n-text="aircrafts.smodDirective.valid"></label>
       <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>

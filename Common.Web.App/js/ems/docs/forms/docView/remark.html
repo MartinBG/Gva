@@ -1,23 +1,14 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row" style="margin-bottom: 5px;">
-    <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
+    <sc-field-group class="col-md-6" text="docs.edit.view.importedBy">
+      <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
+
+    <sc-field-group class="col-md-6" text="docs.edit.view.cCopy">
+      <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
   </div>
 
   <accordion close-others="false">

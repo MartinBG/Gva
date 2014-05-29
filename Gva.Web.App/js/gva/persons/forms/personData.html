@@ -37,21 +37,15 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-2 col-md-2" sc-has-error="lin">
-      <label class="control-label" l10n-text="persons.personDataDirective.lin"></label>
-      <sc-validation-error field-name="lin" validations="{required: null}"></sc-validation-error>
-      <div class="input-group">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="text-align: left; width: 120px">
-            {{model.linType.name || 'Избери'}} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li ng-repeat="type in linTypes"><a ng-click="setLin(type)">{{type.name}}</a></li>
-          </ul>
-        </div>
-        <input type="text" style="width: 50px;" class="form-control input-sm" name="lin" ng-model="model.lin" ng-readonly="true" ng-required="true">
-      </div>
-    </div>
+    <sc-field-group class="col-sm-3 col-md-2" text="persons.personDataDirective.lin" validations="{ required: null }" field-name="lin">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 100px">
+        {{model.linType.name || 'Избери'}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-repeat="type in linTypes"><a ng-click="setLin(type)">{{type.name}}</a></li>
+      </ul>
+      <sc-text name="lin" ng-model="model.lin" ng-readonly="true" ng-required="true" style="width: 50px;"></sc-text>
+    </sc-field-group>
 
     <div class="form-group col-sm-3 col-md-2" sc-has-error="uin">
       <label class="control-label" l10n-text="persons.personDataDirective.uin"></label>

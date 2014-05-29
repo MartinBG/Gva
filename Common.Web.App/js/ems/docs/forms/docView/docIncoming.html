@@ -1,47 +1,26 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
 
   <div class="row">
-    <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.view.docUnitsTo"></label>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsTo" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'to' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.view.cCopy"></label>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
+    <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsTo">
+      <sc-nomenclature ng-model="model.docUnitsTo" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'to' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
+    <sc-field-group class="col-md-6" text="docs.edit.view.cCopy">
+      <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
   </div>
 
   <div class="row">
-    <div class="form-group col-md-6">
-      <label class="control-label" l10n-text="docs.edit.view.importedBy"></label>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-md-6" sc-has-error="docCorrespondents">
-      <label class="control-label" l10n-text="docs.edit.view.docCorrespondents"></label>
-      <sc-validation-error field-name="docCorrespondents" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrs }" ng-readonly="readonly" multiple></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-          <sc-button btn-click="$raise('scOnNewCorr')" class="btn btn-default" icon="glyphicon glyphicon-user" ng-disabled="readonly"></sc-button>
-        </span>
-      </div>
-    </div>
+    <sc-field-group class="col-md-6" text="docs.edit.view.importedBy">
+      <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
+    <sc-field-group class="col-md-6" text="docs.edit.view.docCorrespondents" validations="{ required: null }" field-name="docCorrespondents">
+      <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrs }" ng-readonly="readonly" multiple></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnNewCorr')" class="btn btn-default" icon="glyphicon glyphicon-user" ng-disabled="readonly"></sc-button>
+      <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
   </div>
 
   <div class="row">
@@ -69,24 +48,14 @@
           <a l10n-text="docs.edit.view.assignment" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
-        <div class="form-group col-md-6">
-          <label class="control-label" l10n-text="docs.edit.view.inCharge"></label>
-          <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsInCharge" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-            <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'inCharge' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-            </span>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label class="control-label" l10n-text="docs.edit.view.controlling"></label>
-          <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsControlling" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-            <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'controlling' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-            </span>
-          </div>
-        </div>
+        <sc-field-group class="col-md-6" text="docs.edit.view.inCharge">
+          <sc-nomenclature ng-model="model.docUnitsInCharge" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'inCharge' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+        </sc-field-group>
+        <sc-field-group class="col-md-6" text="docs.edit.view.controlling">
+          <sc-nomenclature ng-model="model.docUnitsControlling" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'controlling' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+        </sc-field-group>
       </div>
 
       <div class="row" style="margin-bottom: 5px;">
@@ -112,33 +81,18 @@
           <a l10n-text="docs.edit.view.permissions" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row" style="margin-bottom: 5px;">
-        <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.view.readers"></label>
-          <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsReaders" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-            <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'readers' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-            </span>
-          </div>
-        </div>
-        <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.view.editors"></label>
-          <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsEditors" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-            <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'editors' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-            </span>
-          </div>
-        </div>
-        <div class="form-group col-md-4">
-          <label class="control-label" l10n-text="docs.edit.view.registrators"></label>
-          <div class="input-group input-group-sm">
-            <sc-nomenclature ng-model="model.docUnitsRegistrators" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-            <span class="input-group-btn">
-              <sc-button btn-click="$raise('scOnSelectUnit', { type: 'registrators' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
-            </span>
-          </div>
-        </div>
+        <sc-field-group class="col-md-4" text="docs.edit.view.readers">
+          <sc-nomenclature ng-model="model.docUnitsReaders" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'readers' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+        </sc-field-group>
+        <sc-field-group class="col-md-4" text="docs.edit.view.editors">
+          <sc-nomenclature ng-model="model.docUnitsEditors" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'editors' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+        </sc-field-group>
+        <sc-field-group class="col-md-4" text="docs.edit.view.registrators">
+          <sc-nomenclature ng-model="model.docUnitsRegistrators" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+          <sc-button btn-click="$raise('scOnSelectUnit', { type: 'registrators' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+        </sc-field-group>
       </div>
     </accordion-group>
 

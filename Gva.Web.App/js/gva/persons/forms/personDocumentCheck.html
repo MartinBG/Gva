@@ -66,16 +66,10 @@
         <label class="control-label" l10n-text="persons.personCheckDirective.documentDateValidTo"></label>
         <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
       </div>
-      <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
-        <label class="control-label" l10n-text="persons.personCheckDirective.documentPublisher"></label>
-        <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
-        <div class="input-group input-group-sm">
+      <sc-field-group class="col-sm-6 col-md-4" text="persons.personCheckDirective.documentPublisher" validations="{ required: null }" field-name="documentPublisher">
         <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
-          <span class="input-group-btn">
-            <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
-          </span>
-        </div>
-      </div>
+        <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
+      </sc-field-group>
     </div>
 
     <div class="row">

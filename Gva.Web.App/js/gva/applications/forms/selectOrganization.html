@@ -1,16 +1,9 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-
-    <div class="form-group col-sm-10" sc-has-error="оrganizationLotId">
-      <label class="control-label" l10n-text="applications.organizationSelect.organization"></label>
-      <sc-validation-error field-name="оrganizationLotId" validations="{required: null}"></sc-validation-error>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.lot.id" alias="'organizations'" mode="id" name="оrganizationLotId" required style="float: left;"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectOrganization')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
-          <sc-button btn-click="$raise('scOnNewOrganization')" class="btn btn-default" text="applications.organizationSelect.newOrganization"></sc-button>
-        </span>
-      </div>
-    </div>
+    <sc-field-group class="col-sm-10" text="applications.organizationSelect.organization" validations="{ required: null }" field-name="оrganizationLotId">
+      <sc-nomenclature ng-model="model.lot.id" alias="'organizations'" mode="id" name="оrganizationLotId" required></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnNewOrganization')" class="btn btn-default" text="applications.organizationSelect.newOrganization"></sc-button>
+      <sc-button btn-click="$raise('scOnSelectOrganization')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+    </sc-field-group>
   </div>
 </ng-form>

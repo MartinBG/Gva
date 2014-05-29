@@ -1,15 +1,9 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <div class="form-group col-sm-10" sc-has-error="aircraftLotId">
-      <label class="control-label" l10n-text="applications.aircraftSelect.aircraft"></label>
-      <sc-validation-error field-name="aircraftLotId" validations="{required: null}"></sc-validation-error>
-      <div class="input-group input-group-sm">
-        <sc-nomenclature ng-model="model.lot.id" alias="'aircrafts'" mode="id" name="aircraftLotId" required style="float: left;"></sc-nomenclature>
-        <span class="input-group-btn">
-          <sc-button btn-click="$raise('scOnSelectAircraft')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
-          <sc-button btn-click="$raise('scOnNewAircraft')" class="btn btn-default" text="applications.aircraftSelect.newAircraft"></sc-button>
-        </span>
-      </div>
-    </div>
+    <sc-field-group class="col-sm-10" text="applications.aircraftSelect.aircraft" validations="{ required: null }" field-name="aircraftLotId">
+      <sc-nomenclature ng-model="model.lot.id" alias="'aircrafts'" mode="id" name="aircraftLotId" required></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnNewAircraft')" class="btn btn-default" text="applications.aircraftSelect.newAircraft"></sc-button>
+      <sc-button btn-click="$raise('scOnSelectAircraft')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+    </sc-field-group>
   </div>
 </ng-form>

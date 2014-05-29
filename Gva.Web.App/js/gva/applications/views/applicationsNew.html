@@ -28,17 +28,11 @@
           <ems-doc-new-common name="docNewCommonForm" ng-model="appModel"></ems-doc-new-common>
 
           <div class="row">
-            <div class="form-group col-sm-6" sc-has-error="correspondents">
-              <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
-              <sc-validation-error field-name="correspondents" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
-              <div class="input-group input-group-sm">
-                <sc-nomenclature ng-model="appModel.doc.docCorrespondents" name="correspondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrespondents }" mode="id" multiple></sc-nomenclature>
-                <span class="input-group-btn">
-                  <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
-                  <sc-button btn-click="newCorr()" class="btn btn-default" text="applications.corrSelect.newCorr" icon="glyphicon-user"></sc-button>
-                </span>
-              </div>
-            </div>
+            <sc-field-group class="col-sm-6" text="docs.newDoc.docCorrespondent" validations="{ required: null, requiredValue: 'Задължително поле' }" field-name="correspondents">
+              <sc-nomenclature ng-model="appModel.doc.docCorrespondents" name="correspondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrespondents }" mode="id" multiple></sc-nomenclature>
+              <sc-button btn-click="newCorr()" class="btn btn-default" text="applications.corrSelect.newCorr" icon="glyphicon-user"></sc-button>
+              <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+            </sc-field-group>
           </div>
 
         </div>
