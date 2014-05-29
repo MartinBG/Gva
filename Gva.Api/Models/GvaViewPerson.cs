@@ -43,7 +43,6 @@ namespace Gva.Api.Models
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Lin)
-                .IsRequired()
                 .HasMaxLength(50);
 
             this.Property(t => t.LinType)

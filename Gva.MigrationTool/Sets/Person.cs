@@ -70,23 +70,12 @@ namespace Gva.MigrationTool.Sets
 
                 Set personSet = lotRepository.GetSet("Person");
 
-                foreach (var personId in this.getPersonIds()) //new int[] { 6730 })
+                foreach (var personId in this.getPersonIds())
                 {
                     var personCaseTypes = this.getPersonCaseTypes(personId, noms);
-
-                    if (personCaseTypes.Length == 0)
-                    {
-                        Console.WriteLine("No caseTypes for person with id {0}", personId);
-                        continue;
-                    }
+                    personCaseTypes.Add(noms["personCaseTypes"].ByAlias("none"));
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
-
-                    if (personData.Get<string>("lin") == null)
-                    {
-                        Console.WriteLine("No LIN for person with id {0}", personId);
-                        continue;
-                    }
 
                     var lot = personSet.CreateLot(context);
 
@@ -112,7 +101,7 @@ namespace Gva.MigrationTool.Sets
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
 
-            foreach (var personId in this.getPersonIds()) //new int[] { 6730 })
+            foreach (var personId in this.getPersonIds())
             {
                 if (!personIdToLotId.ContainsKey(personId))
                 {
@@ -145,9 +134,6 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("personAddresses/*", address, context);
                     }
 
-                    //TODO think ofsome caseType priority and dealing with persons without caseType
-                    var caseType = lot.GetPartContent("personData").GetItems<JObject>("caseTypes").First();
-
                     Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                     {
                         var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
@@ -155,9 +141,12 @@ namespace Gva.MigrationTool.Sets
                         return pv;
                     };
 
+                    Dictionary<int, string> appApexIdToStaffTypeCode = getPersonApplicationsStaffTypeCodes(personId);
+
                     Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>> applications =
                         new Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>>();
-                    var personDocumentApplications = this.getPersonDocumentApplications(personId, noms, caseType);
+                    
+                    var personDocumentApplications = this.getPersonDocumentApplications(personId, noms, appApexIdToStaffTypeCode);
                     foreach (var docApplication in personDocumentApplications)
                     {
                         var pv = addPartWithFiles("personDocumentApplications/*", docApplication);
@@ -196,7 +185,10 @@ namespace Gva.MigrationTool.Sets
                                 Utils.ToJObject(appNomDO));
                     }
 
-                    var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, caseType);
+                    var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, appApexIdToStaffTypeCode);
+                    Dictionary<int, int> trainingOldIdToPartIndex = new Dictionary<int, int>();
+                    Dictionary<int, int> examOldIdToPartIndex = new Dictionary<int, int>();
+                    Dictionary<int, int> checkOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personDocument in personDocuments)
                     {
                         if ((new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
@@ -245,7 +237,8 @@ namespace Gva.MigrationTool.Sets
                                 "notes"
                             });
 
-                            addPartWithFiles("personDocumentChecks/*", personDocument);
+                            var pv = addPartWithFiles("personDocumentChecks/*", personDocument);
+                            checkOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                         }
                         else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
                           personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
@@ -281,25 +274,30 @@ namespace Gva.MigrationTool.Sets
                                 personDocument.Get<JObject>("part")["staffType"] = Utils.ToJObject(noms["trainingStaffTypes"].ByOldId("0"));
                             }
 
-                            addPartWithFiles("personDocumentTrainings/*", personDocument);
+                            var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
+                            trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                         }
-                        //else if (personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE") == "2" &&
-                        //  personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
-                        //{
-                        //    Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                        //    {
-                        //        "__oldId",
-                        //        "__migrTable",
+                        else if (personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE") == "2" &&
+                          personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
+                        {
+                            Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
+                            {
+                                "__oldId",
+                                "__migrTable",
 
-                        //        "documentNumber",
-                        //        "documentDateValidFrom",
-                        //        "documentPublisher",
-                        //        "valid",
-                        //        "notes"
-                        //    });
+                                "documentNumber",
+                                "valid",
+                                "documentDateValidFrom",
+                                "documentDateValidTo",
+                                "documentType",
+                                "documentRole",
+                                "documentPublisher",
+                                "notes"
+                            });
 
-                        //    addPartWithFiles("personDocumentExams/*", personDocument);
-                        //}
+                            var pv = addPartWithFiles("personDocumentExams/*", personDocument);
+                            examOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
+                        }
                         else
                         {
                             Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
@@ -322,22 +320,24 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms, caseType);
+                    var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms, appApexIdToStaffTypeCode);
                     foreach (var docEducation in personDocumentEducations)
                     {
                         addPartWithFiles("personDocumentEducations/*", docEducation);
                     }
 
-                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, organizationRepository, noms, organizationIdtoLotId, caseType);
+                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, organizationRepository, noms, organizationIdtoLotId);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
                         addPartWithFiles("personDocumentEmployments/*", docEmployment);
                     }
 
-                    var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms, caseType);
+                    var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms, appApexIdToStaffTypeCode);
+                    Dictionary<int, int> medicalOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var docMedical in personDocumentMedicals)
                     {
-                        addPartWithFiles("personDocumentMedicals/*", docMedical);
+                        var pv = addPartWithFiles("personDocumentMedicals/*", docMedical);
+                        medicalOldIdToPartIndex.Add(docMedical.Get<int>("part.__oldId"), pv.Part.Index);
                     }
 
                     var personFlyingExperiences = this.getPersonFlyingExperiences(personId, organizationRepository, aircraftRepository, noms, organizationIdtoLotId, aircraftApexIdtoLotId);
@@ -353,6 +353,7 @@ namespace Gva.MigrationTool.Sets
                     }
 
                     var personRatings = this.getPersonRatings(personId, getPerson, noms);
+                    Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personRating in personRatings)
                     {
                         int nextIndex = 0;
@@ -371,12 +372,23 @@ namespace Gva.MigrationTool.Sets
                         {
                             applicationRepository.AddApplicationRefs(pv.Part, edition.GetItems<ApplicationNomDO>("applications"));
                         }
+
+                        ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), pv.Part.Index);
                     }
 
-                    var personLicences = this.getPersonLicences(personId, getPerson, noms);
+                    var personLicences = this.getPersonLicences(personId, getPerson, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                    Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personLicence in personLicences)
                     {
-                        lot.CreatePart("licences/*", personLicence, context);
+                        var pv = lot.CreatePart("licences/*", personLicence, context);
+                        licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), pv.Part.Index);
+                    }
+                    foreach (var personLicence in personLicences)
+                    {
+                        foreach (var edition in personLicence.GetItems<JObject>("editions"))
+                        {
+                            edition.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
+                        }
                     }
 
                     try
@@ -402,10 +414,11 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.PERSON")
                 .Materialize(r => r.Field<int>("ID"))
-                    .ToList();
+                //.Where(r => r == 6730) //РАДОСТИНА
+                .ToList();
         }
 
-        private NomValue[] getPersonCaseTypes(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private NomValue getPersonCaseTypeByStaffTypeCode(Dictionary<string, Dictionary<string, NomValue>> noms, string code)
         {
             var caseTypeAliases = new Dictionary<string, string>()
             {
@@ -415,25 +428,31 @@ namespace Gva.MigrationTool.Sets
                 { "M", "to_suvd"}
             };
 
+            return noms["personCaseTypes"].ByAlias(caseTypeAliases[code]);
+        }
+
+        private List<NomValue> getPersonCaseTypes(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT CODE FROM CAA_DOC.NM_STAFF_TYPE WHERE ID IN 
                     (SELECT STAFF_TYPE_ID FROM CAA_DOC.LICENCE L INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID WHERE {0}
-                    UNION ALL SELECT STAFF_TYPE_ID FROM CAA_DOC.RATING_CAA WHERE {0})",
+                    UNION ALL SELECT STAFF_TYPE_ID FROM CAA_DOC.RATING_CAA WHERE {0}
+                    UNION ALL SELECT PD.STAFF_TYPE_ID FROM CAA_DOC.PERSON_DOCUMENT PD INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON PD.LICENCE_TYPE_ID = LT.ID WHERE {0})",
                 new DbClause("PERSON_ID = {0}", personId))
                 .Materialize(r => r.Field<string>("CODE"))
-                .Select(c => noms["personCaseTypes"].ByAlias(caseTypeAliases[c]))
-                .ToArray();
+                .Select(c => getPersonCaseTypeByStaffTypeCode(noms, c))
+                .ToList();
         }
 
-        private JObject getPersonData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, NomValue[] caseTypes)
+        private JObject getPersonData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, List<NomValue> caseTypes)
         {
             var lins = new Dictionary<string, string>()
             {
                 { "1", "pilots"           },
                 { "2", "flyingCrew"       },
                 { "3", "crewStaff"        },
-                { "4", "HeadFlights"      },
-                { "5", "AirlineEngineers" },
+                { "4", "headFlights"      },
+                { "5", "airlineEngineers" },
                 { "6", "dispatchers"      },
                 { "7", "paratroopers"     },
                 { "8", "engineersRVD"     },
@@ -441,9 +460,8 @@ namespace Gva.MigrationTool.Sets
             };
 
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.PERSON WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.PERSON WHERE {0}",
+                new DbClause("ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -453,8 +471,8 @@ namespace Gva.MigrationTool.Sets
                         caseTypes = caseTypes,
                         lin = r.Field<string>("LIN"),
                         linType = r.Field<string>("LIN") != null ?
-                            noms["linTypes"].ByCode(lins[r.Field<string>("LIN").Substring(0, 1)]):
-                            null,
+                            noms["linTypes"].ByCode(lins[r.Field<string>("LIN").Substring(0, 1)]) :
+                            noms["linTypes"].ByCode("none"),
                         uin = r.Field<string>("EGN"),
                         firstName = r.Field<string>("NAME"),
                         firstNameAlt = r.Field<string>("NAME_TRANS"),
@@ -480,9 +498,8 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getPersonAddresses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.PERSON_ADDRESS WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.PERSON_ADDRESS WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -501,12 +518,52 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getPersonDocumentApplications(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
+        private Dictionary<int, string> getPersonApplicationsStaffTypeCodes(int personId)
+        {
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT R.ID REQUEST_ID,
+                        ST.CODE LICENCE_STAFF_TYPE_CODE
+                    FROM CAA_DOC.REQUEST R
+                    LEFT OUTER JOIN CAA_DOC.LICENCE_LOG LL ON LL.REQUEST_ID = R.ID
+                    LEFT OUTER JOIN CAA_DOC.LICENCE L ON LL.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
+                    LEFT OUTER JOIN CAA_DOC.NM_STAFF_TYPE ST ON ST.ID = LT.STAFF_TYPE_ID
+                    WHERE {0}",
+                new DbClause("R.APPLICANT_PERSON_ID = {0}", personId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        REQUEST_ID = r.Field<int>("REQUEST_ID"),
+                        LICENCE_STAFF_TYPE_CODE = r.Field<string>("LICENCE_STAFF_TYPE_CODE"),
+                    })
+                .GroupBy(r => r.REQUEST_ID)
+                .Select(g =>
+                    new
+                    {
+                        REQUEST_ID = g.Key,
+                        LICENCE_STAFF_TYPE_CODE = g.Select(r => r.LICENCE_STAFF_TYPE_CODE).Where(c => !string.IsNullOrEmpty(c)).FirstOrDefault()
+                    })
+                .ToDictionary(r => r.REQUEST_ID, r => r.LICENCE_STAFF_TYPE_CODE);
+        }
+
+        private IList<JObject> getPersonDocumentApplications(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, string> appApexIdToStaffTypeCode)
         {
             var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.REQUEST WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and APPLICANT_PERSON_ID = {0}", personId)
+                @"SELECT R.ID,
+                        R.BOOK_PAGE_NO,
+                        R.PAGES_COUNT,
+                        R.DOC_NO,
+                        R.DOC_DATE,
+                        R.REQUEST_DATE,
+                        R.NOTES,
+                        R.REQUEST_TYPE_ID,
+                        R.PAYMENT_REASON_ID,
+                        R.CURRENCY_ID,
+                        R.TAX_AMOUNT
+                    FROM CAA_DOC.REQUEST R
+                    WHERE {0}",
+                new DbClause("R.APPLICANT_PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -514,8 +571,8 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "REQUEST",
 
-                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
-                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
+                        __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
+                        __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
 
                         documentNumber = r.Field<string>("DOC_NO"),
                         documentDate = r.Field<DateTime?>("DOC_DATE"),
@@ -542,9 +599,8 @@ namespace Gva.MigrationTool.Sets
                         D.NAME
                     FROM CAA_DOC.REQUEST R
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON R.ID + 90000000 = D.DOC_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and R.APPLICANT_PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("R.APPLICANT_PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -565,6 +621,7 @@ namespace Gva.MigrationTool.Sets
                     let file = fg.Any() ? fg.Single() : null //throw if more than one files present
                     let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
                     let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    let licenceStaffTypeCode = appApexIdToStaffTypeCode[part.Get<int>("__oldId")]
                     select new JObject(
                         new JProperty("part",
                             Utils.Pluck(part,
@@ -587,14 +644,16 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", caseType),
+                                    new JProperty("caseType",
+                                        (licenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, licenceStaffTypeCode)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocuments(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
+        private IList<JObject> getPersonDocuments(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, string> appApexIdToStaffTypeCode)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT PD.ID,
@@ -623,13 +682,15 @@ namespace Gva.MigrationTool.Sets
                         DT.ID_DIRECTION DOCUMENT_TYPE_ID_DIRECTION,
                         DR.ID_DIRECTION DOCUMENT_ROLE_ID_DIRECTION,
                         DR.CODE DOCUMENT_ROLE_CODE,
-                        DR.CATEGORY_CODE DOCUMENT_ROLE_CATEGORY_CODE
+                        DR.CATEGORY_CODE DOCUMENT_ROLE_CATEGORY_CODE,
+                        ST.CODE LICENCE_STAFF_TYPE_CODE
                     FROM CAA_DOC.PERSON_DOCUMENT PD
                     JOIN CAA_DOC.NM_DOCUMENT_TYPE DT ON PD.DOCUMENT_TYPE_ID = DT.ID
                     JOIN CAA_DOC.NM_DOCUMENT_ROLE DR ON PD.DOCUMENT_ROLE_ID = DR.ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PD.PERSON_ID = {0}", personId)
+                    LEFT OUTER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON PD.LICENCE_TYPE_ID = LT.ID
+                    LEFT OUTER JOIN CAA_DOC.NM_STAFF_TYPE ST ON ST.ID = LT.STAFF_TYPE_ID
+                    WHERE {0}",
+                new DbClause("PD.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -644,8 +705,10 @@ namespace Gva.MigrationTool.Sets
                         __DOCUMENT_ROLE_CATEGORY_CODE = r.Field<string>("DOCUMENT_ROLE_CATEGORY_CODE"),
                         __DOCUMENT_ROLE_ID_DIRECTION = r.Field<string>("DOCUMENT_ROLE_ID_DIRECTION"),
 
-                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
-                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
+                        __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
+                        __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
+
+                        __LICENCE_STAFF_TYPE_CODE = r.Field<string>("LICENCE_STAFF_TYPE_CODE"),
 
                         documentNumber = r.Field<string>("DOC_NO"),
                         documentPersonNumber = r.Field<decimal?>("PERSON_NUM"),
@@ -682,9 +745,8 @@ namespace Gva.MigrationTool.Sets
                         D.NAME
                     FROM CAA_DOC.PERSON_DOCUMENT PD
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON PD.ID + 10000000 = D.DOC_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PD.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("PD.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -705,24 +767,25 @@ namespace Gva.MigrationTool.Sets
                     FROM CAA_DOC.REQUEST R 
                     JOIN CAA_DOC.REQUEST_INVENTORY RI ON RI.REQUEST_ID = R.ID
                     JOIN CAA_DOC.PERSON_DOCUMENT PD ON PD.ID = RI.PERSON_DOCUMENT_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PD.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("PD.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        persondDocumentId = r.Field<int>("PERSON_DOCUMENT_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
+                        PERSON_DOCUMENT_ID = r.Field<int>("PERSON_DOCUMENT_ID"),
+                        REQUEST_ID = r.Field<int>("REQUEST_ID")
                     })
                 .ToList();
 
             return (from part in parts
                     join file in files on part.Get<int>("__oldId") equals file.Get<int>("__PERSON_DOCUMENT_ID") into fg
-                    join app in apps on part.Get<int>("__oldId") equals app.persondDocumentId into ag
+                    join app in apps on part.Get<int>("__oldId") equals app.PERSON_DOCUMENT_ID into ag
                     let file = fg.Any() ? fg.Single() : null //throw if more than one files present
                     let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
                     let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    let appLicenceStaffTypeCode = ag.Select(a => appApexIdToStaffTypeCode[a.REQUEST_ID]).Where(c => c != null).FirstOrDefault()
+                    let licenceStaffTypeCode = part.Get<string>("__LICENCE_STAFF_TYPE_CODE")
                     select new JObject(
                         new JProperty("part", part),
                         new JProperty("files", 
@@ -730,19 +793,21 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", caseType),
+                                    new JProperty("caseType",
+                                        (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
+                                        ?? (licenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, licenceStaffTypeCode)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
+                                    new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentEducations(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
+        private IList<JObject> getPersonDocumentEducations(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, string> appApexIdToStaffTypeCode)
         {
             var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.EDUCATION WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.EDUCATION WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -774,9 +839,8 @@ namespace Gva.MigrationTool.Sets
                         D.NAME
                     FROM CAA_DOC.EDUCATION E
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON E.ID + 60000000 = D.DOC_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and E.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("E.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -797,24 +861,24 @@ namespace Gva.MigrationTool.Sets
                     FROM CAA_DOC.REQUEST R 
                     JOIN CAA_DOC.REQUEST_INVENTORY RI ON RI.REQUEST_ID = R.ID
                     JOIN CAA_DOC.EDUCATION E ON E.ID = RI.EDUCATION_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and E.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("E.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        educationId = r.Field<int>("EDUCATION_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
+                        EDUCATION_ID = r.Field<int>("EDUCATION_ID"),
+                        REQUEST_ID = r.Field<int>("REQUEST_ID")
                     })
                 .ToList();
 
             return (from part in parts
                     join file in files on part.Get<int>("__oldId") equals file.Get<int>("__EDUCATION_ID") into fg
-                    join app in apps on part.Get<int>("__oldId") equals app.educationId into ag
+                    join app in apps on part.Get<int>("__oldId") equals app.EDUCATION_ID into ag
                     let file = fg.Any() ? fg.Single() : null //throw if more than one files present
                     let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
                     let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    let appLicenceStaffTypeCode = ag.Select(a => appApexIdToStaffTypeCode[a.REQUEST_ID]).Where(c => c != null).FirstOrDefault()
                     select new JObject(
                         new JProperty("part",
                             Utils.Pluck(part,
@@ -835,19 +899,20 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", caseType),
+                                    new JProperty("caseType",
+                                        (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
+                                    new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentEmployments(int personId, IOrganizationRepository or, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, int> organizationIdtoLotId, JObject caseType)
+        private IList<JObject> getPersonDocumentEmployments(int personId, IOrganizationRepository or, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, int> organizationIdtoLotId)
         {
             var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -881,9 +946,8 @@ namespace Gva.MigrationTool.Sets
                         D.NAME
                     FROM CAA_DOC.EMPLOYEE E
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON E.ID + 100000000 = D.DOC_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and E.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("E.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -924,22 +988,21 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", caseType),
+                                    new JProperty("caseType", Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentMedicals(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, JObject caseType)
+        private IList<JObject> getPersonDocumentMedicals(int personId, IDictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, string> appApexIdToStaffTypeCode)
         {
             var medLimitations = this.oracleConn
                 .CreateStoreCommand(
                     @"SELECT * FROM 
                         CAA_DOC.MED_CERT_LIMITATION 
                         WHERE MED_CERT_ID in (SELECT ID FROM CAA_DOC.MED_CERT WHERE {0})",
-                    new DbClause("1=1"),
-                    new DbClause("and PERSON_ID = {0}", personId))
+                    new DbClause("PERSON_ID = {0}", personId))
                 .Materialize(r =>
                     new
                     {
@@ -951,9 +1014,8 @@ namespace Gva.MigrationTool.Sets
 
             var parts = this.oracleConn
                 .CreateStoreCommand(
-                    @"SELECT * FROM CAA_DOC.MED_CERT WHERE {0} {1}",
-                    new DbClause("1=1"),
-                    new DbClause("and PERSON_ID = {0}", personId))
+                    @"SELECT * FROM CAA_DOC.MED_CERT WHERE {0}",
+                    new DbClause("PERSON_ID = {0}", personId))
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
@@ -989,9 +1051,8 @@ namespace Gva.MigrationTool.Sets
                         D.NAME
                     FROM CAA_DOC.MED_CERT MC
                     JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON MC.ID + 40000000 = D.DOC_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and MC.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("MC.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -1013,24 +1074,24 @@ namespace Gva.MigrationTool.Sets
                     FROM CAA_DOC.REQUEST R 
                     JOIN CAA_DOC.REQUEST_INVENTORY RI ON RI.REQUEST_ID = R.ID
                     JOIN CAA_DOC.MED_CERT MC ON MC.ID = RI.MED_CERT_ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and MC.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("MC.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        medicalId = r.Field<int>("MED_CERT_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
+                        MED_CERT_ID = r.Field<int>("MED_CERT_ID"),
+                        REQUEST_ID = r.Field<int>("REQUEST_ID")
                     })
                 .ToList();
 
             return (from part in parts
                     join file in files on part.Get<int>("__oldId") equals file.Get<int>("__MED_CERT_ID") into fg
-                    join app in apps on part.Get<int>("__oldId") equals app.medicalId into ag
+                    join app in apps on part.Get<int>("__oldId") equals app.MED_CERT_ID into ag
                     let file = fg.Any() ? fg.Single() : null //throw if more than one files present
                     let bookPageNumber = part.Get<int?>("__BOOK_PAGE_NO").ToString()
                     let pageCount = part.Get<int?>("__PAGES_COUNT")
+                    let appLicenceStaffTypeCode = ag.Select(a => appApexIdToStaffTypeCode[a.REQUEST_ID]).Where(c => c != null).FirstOrDefault()
                     select new JObject(
                         new JProperty("part",
                             Utils.Pluck(part,
@@ -1054,10 +1115,12 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", caseType),
+                                    new JProperty("caseType",
+                                        (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
+                                    new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))
                     .ToList();
         }
 
@@ -1070,9 +1133,8 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, int> aircraftIdtoLotId)
         {
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -1110,9 +1172,8 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getPersonStatuses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.PERSON_STATE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.PERSON_STATE WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -1208,9 +1269,8 @@ namespace Gva.MigrationTool.Sets
                         RD.EXAMINER_ID
                     FROM CAA_DOC.RATING_CAA R
                     JOIN CAA_DOC.RATING_CAA_DATES RD ON RD.RATING_CAA_ID = R.ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("AND R.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("R.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -1246,9 +1306,8 @@ namespace Gva.MigrationTool.Sets
                         })));
 
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.RATING_CAA WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and PERSON_ID = {0}", personId)
+                @"SELECT * FROM CAA_DOC.RATING_CAA WHERE {0}",
+                new DbClause("PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -1272,8 +1331,112 @@ namespace Gva.MigrationTool.Sets
                 .ToList();;
         }
 
-        private IList<JObject> getPersonLicences(int personId, Func<int?, JObject> getPerson, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonLicences(
+            int personId,
+            Func<int?, JObject> getPerson,
+            IDictionary<int, JObject> nomApplications,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> ratings,
+            Dictionary<int, int> medicals,
+            Dictionary<int, int> trainings,
+            Dictionary<int, int> exams,
+            Dictionary<int, int> checks)
         {
+            var includedRatings = oracleConn.CreateStoreCommand(
+                @"SELECT LL.ID LICENCE_LOG_ID,
+                        R.ID RATING_ID
+                    FROM CAA_DOC.LICENCE L
+                    JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.LICENCE_RATING_INCL LRI ON LRI.LICENCE_LOG_ID = LL.ID
+                    LEFT OUTER JOIN CAA_DOC.RATING_CAA_DATES RD ON RD.ID = LRI.RATING_DATES_ID
+                    LEFT OUTER JOIN CAA_DOC.RATING_CAA R ON R.ID = RD.RATING_CAA_ID
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => new
+                {
+                    LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
+                    RATING_ID = r.Field<int?>("RATING_ID")
+                })
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.RATING_ID != null).Select(r => ratings[r.RATING_ID.Value]).ToArray());
+
+            var includedMedicals = oracleConn.CreateStoreCommand(
+                @"SELECT LL.ID LICENCE_LOG_ID,
+                        LMCI.MED_CERT_ID
+                    FROM CAA_DOC.LICENCE L
+                    JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.LICENCE_MED_CERT_INCL LMCI ON LMCI.LICENCE_LOG_ID = LL.ID
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => new
+                {
+                    LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
+                    MED_CERT_ID = r.Field<int?>("MED_CERT_ID")
+                })
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.MED_CERT_ID != null).Select(r => medicals[r.MED_CERT_ID.Value]).ToArray());
+
+            var includedDocuments = oracleConn.CreateStoreCommand(
+                @"SELECT LL.ID LICENCE_LOG_ID,
+                        LDI.DOC_ID PERSON_DOCUMENT_ID
+                    FROM CAA_DOC.LICENCE L
+                    JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.LICENCE_DOC_INCL LDI ON LDI.LICENCE_LOG_ID = LL.ID
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => new
+                {
+                    LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
+                    PERSON_DOCUMENT_ID = r.Field<int?>("PERSON_DOCUMENT_ID")
+                })
+                .Select(r => new
+                {
+                    LICENCE_LOG_ID = r.LICENCE_LOG_ID,
+                    PERSON_DOCUMENT_ID = r.PERSON_DOCUMENT_ID,
+                    trainingPartIndex = (r.PERSON_DOCUMENT_ID != null && trainings.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? trainings[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
+                    //TODO decide if no exams are included in licence
+                    //examPartIndex = (r.PERSON_DOCUMENT_ID != null && exams.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? exams[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
+                    checkPartIndex = (r.PERSON_DOCUMENT_ID != null && checks.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? checks[r.PERSON_DOCUMENT_ID.Value] : (int?)null
+                });
+
+            foreach (var doc in includedDocuments.Where(d => d.PERSON_DOCUMENT_ID != null && d.trainingPartIndex == null && d.checkPartIndex == null))
+            {
+                Console.WriteLine("PERSON_DOCUMENT_ID {0} included in LICENCE_LOG_ID {1} is not a training, exam or check for PERSON_ID {2}", doc.PERSON_DOCUMENT_ID, doc.LICENCE_LOG_ID, personId);
+            }
+
+            var includedTrainings = includedDocuments
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+
+            //TODO
+            //var includedExams = includedDocuments
+            //    .GroupBy(r => r.LICENCE_LOG_ID)
+            //    .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select(r => r.examPartIndex.Value).ToArray());
+
+            var includedChecks = includedDocuments
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.checkPartIndex != null).Select(r => r.checkPartIndex.Value).ToArray());
+
+            var includedLicences = oracleConn.CreateStoreCommand(
+                @"SELECT LL.ID LICENCE_LOG_ID,
+                        LLI.LICENCE_ID
+                    FROM CAA_DOC.LICENCE L
+                    JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.LICENCE_LICENCE_INCL LLI ON LLI.LICENCE_LOG_ID = LL.ID
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => new
+                {
+                    LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
+                    LICENCE_ID = r.Field<int?>("LICENCE_ID")
+                })
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.LICENCE_ID != null).Select(r => r.LICENCE_ID.Value).ToArray());
+
             var editions = oracleConn.CreateStoreCommand(
                 @"SELECT LL.LICENCE_ID,
                         LL.ID,
@@ -1302,11 +1465,10 @@ namespace Gva.MigrationTool.Sets
                         LL.REQUEST_ID
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("AND L.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
                     new
                     {
                         __oldId = r.Field<int>("ID"),
@@ -1329,6 +1491,15 @@ namespace Gva.MigrationTool.Sets
                         licenceAction = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
                         limitations = transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms),
 
+                        applications = r.Field<int?>("REQUEST_ID") != null ? new JObject[] { nomApplications[r.Field<int?>("REQUEST_ID").Value] } : new JObject[0],
+                        includedRatings = includedRatings[r.Field<int>("ID")],
+                        includedMedicals = includedMedicals[r.Field<int>("ID")],
+                        includedTrainings = includedTrainings[r.Field<int>("ID")],
+                        //TODO
+                        //includedExams = includedExams[r.Field<int>("ID")],
+                        includedLicences = includedLicences[r.Field<int>("ID")],
+                        includedChecks = includedChecks[r.Field<int>("ID")],
+
                         AMLlimitations = new
                         {
                             AT_a_Ids = transformLimitations66(r.Field<string>("LIM_AT_A"), noms),
@@ -1342,29 +1513,38 @@ namespace Gva.MigrationTool.Sets
                             avionics_Ids = transformLimitations66(r.Field<string>("LIM_AVIONICS"), noms),
                             PE_b3_Ids = transformLimitations66(r.Field<string>("LIM_PE_B3"), noms)
                         }
-                    }))
+                    })
                 .ToList()
-                .GroupBy(r => r.Get<int>("__LICENCE_ID"))
+                .GroupBy(r => r.__LICENCE_ID)
                 .ToDictionary(g => g.Key,
-                    g => g.Select(r => Utils.Pluck(r,
-                        new string[] 
+                    g => g.Select(r => Utils.ToJObject(
+                        new
                         {
-                            "__oldId",
-                            "__migrTable",
+                            r.__oldId,
+                            r.__migrTable,
 
-                            "__PAPER_NO",
-                            "__BOOK_PAGE_NO",
-                            "__PAGES_COUNT",
-                            "__LIM_OTHER",
-                            "__LIM_MED_CERT",
+                            r.__PAPER_NO,
+                            r.__BOOK_PAGE_NO,
+                            r.__PAGES_COUNT,
+                            r.__LIM_OTHER,
+                            r.__LIM_MED_CERT,
 
-                            "inspector",
-                            "documentDateValidFrom",
-                            "documentDateValidTo",
-                            "notes",
-                            "notesAlt",
-                            "licenceAction",
-                            "limitations"
+                            r.inspector,
+                            r.documentDateValidFrom,
+                            r.documentDateValidTo,
+                            r.notes,
+                            r.notesAlt,
+                            r.licenceAction,
+                            r.limitations,
+                            r.includedRatings,
+                            r.includedMedicals,
+                            r.includedTrainings,
+                            //TODO
+                            //r.includedExams,
+                            r.includedLicences,
+                            r.includedChecks,
+
+                            r.AMLlimitations
                         })));
 
             return this.oracleConn.CreateStoreCommand(
@@ -1381,15 +1561,16 @@ namespace Gva.MigrationTool.Sets
                         LT.CODE as LICENCE_TYPE_CODE
                     FROM CAA_DOC.LICENCE L
                     INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
-                    WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and L.PERSON_ID = {0}", personId)
+                    WHERE {0}",
+                new DbClause("L.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "LICENCE",
+
+                        //TODO show somewhere?
                         __PUBLISHER_CAA_ID = r.Field<int?>("PUBLISHER_CAA_ID"),
                         __FOREIGN_CAA_ID = r.Field<int?>("FOREIGN_CAA_ID"),
                         __EMPLOYEE_ID = r.Field<int?>("EMPLOYEE_ID"),
@@ -1399,7 +1580,7 @@ namespace Gva.MigrationTool.Sets
                         staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
                         fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
                         licenceNumber = r.Field<string>("LICENCE_NO"),
-                        foreignLicenceNumber = r.Field<string>("LICENCE_TYPE_CODE") == "FOREIGN" ? r.Field<string>("FOREIGN_LICENCE_NO") : null,
+                        foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                         editions = editions[r.Field<int>("ID")]
                     }))

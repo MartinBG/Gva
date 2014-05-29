@@ -3,7 +3,7 @@ GO
 
 CREATE TABLE [dbo].[GvaViewPersons] (
     [LotId]          INT           NOT NULL,
-    [Lin]            NVARCHAR(50)  NOT NULL,
+    [Lin]            NVARCHAR(50)  NULL,
     [LinType]        NVARCHAR(50)  NOT NULL,
     [Uin]            NVARCHAR(50)  NULL,
     [Names]          NVARCHAR(MAX) NOT NULL,
