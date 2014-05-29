@@ -205,8 +205,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>echo Copying RioSchemas
+xcopy "$(ProjectDir)..\Mosv.Portal\Mosv.Portal.RioObjects\Schemas" "$(ProjectDir)RioSchemas\" /Y /R /I /S /Q
+</PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
