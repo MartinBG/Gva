@@ -14,12 +14,13 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>8955</WindowHeight>
-  <WindowWidth>21570</WindowWidth>
+  <WindowHeight>13515</WindowHeight>
+  <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>5</ActiveSheet>
+  <ActiveSheet>9</ActiveSheet>
+  <FirstVisibleSheet>1</FirstVisibleSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -880,12 +881,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>8</ActiveRow>
-     <ActiveCol>5</ActiveCol>
+     <ActiveRow>29</ActiveRow>
+     <ActiveCol>8</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -959,8 +959,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>1</ActiveRow>
-     <RangeSelection>R2:R57</RangeSelection>
+     <ActiveRow>33</ActiveRow>
+     <ActiveCol>3</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1042,7 +1042,7 @@
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">Обработва се</Data></Cell>
-    <Cell><Data ss:Type="String">Submitted</Data></Cell>
+    <Cell><Data ss:Type="String">Pending</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">05</Data></Cell>
@@ -1070,7 +1070,7 @@
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">Разглежда се</Data></Cell>
-    <Cell><Data ss:Type="String">InProgress</Data></Cell>
+    <Cell><Data ss:Type="String">InProcess</Data></Cell>
     <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">*</Data></Cell>
@@ -1084,7 +1084,7 @@
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">Приключило</Data></Cell>
-    <Cell><Data ss:Type="String">Finished</Data></Cell>
+    <Cell><Data ss:Type="String">Completed</Data></Cell>
     <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">*</Data></Cell>
@@ -1105,11 +1105,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>15</TopRowVisible>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>2</ActiveRow>
+     <ActiveRow>5</ActiveRow>
+     <ActiveCol>6</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

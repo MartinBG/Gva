@@ -14,6 +14,7 @@ GO
 
 :r $(rootPath)"\Tables\AopEmployers.sql"
 :r $(rootPath)"\Tables\AopApplications.sql"
+:r $(rootPath)"\Tables\AopPortalDocRelations.sql"
 
 ---------------------------------------------------------------
 -- Diagram

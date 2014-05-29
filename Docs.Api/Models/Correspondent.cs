@@ -34,6 +34,8 @@ namespace Docs.Api.Models
 
         public string BgCitizenUIN { get; set; }
 
+        public string BgCitizenPosition { get; set; }
+
         public string ForeignerFirstName { get; set; }
 
         public string ForeignerLastName { get; set; }
@@ -202,6 +204,9 @@ namespace Docs.Api.Models
             this.Property(t => t.BgCitizenUIN)
                 .HasMaxLength(50);
 
+            this.Property(t => t.BgCitizenPosition)
+                .HasMaxLength(200);
+
             this.Property(t => t.ForeignerFirstName)
                 .HasMaxLength(200);
 
@@ -258,6 +263,7 @@ namespace Docs.Api.Models
             this.Property(t => t.BgCitizenFirstName).HasColumnName("BgCitizenFirstName");
             this.Property(t => t.BgCitizenLastName).HasColumnName("BgCitizenLastName");
             this.Property(t => t.BgCitizenUIN).HasColumnName("BgCitizenUIN");
+            this.Property(t => t.BgCitizenPosition).HasColumnName("BgCitizenPosition");
             this.Property(t => t.ForeignerFirstName).HasColumnName("ForeignerFirstName");
             this.Property(t => t.ForeignerLastName).HasColumnName("ForeignerLastName");
             this.Property(t => t.ForeignerCountryId).HasColumnName("ForeignerCountryId");

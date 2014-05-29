@@ -101,11 +101,11 @@
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
       <Name>Docs.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
+    <ProjectReference Include="..\Gva.Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
       <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
       <Name>Gva.Portal.Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
+    <ProjectReference Include="..\Gva.Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
       <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
       <Name>Gva.Portal.RioObjects</Name>
     </ProjectReference>
@@ -123,7 +123,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>64712</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:52954/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

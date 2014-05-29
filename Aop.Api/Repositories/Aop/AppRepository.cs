@@ -9,6 +9,7 @@ using Aop.Api.Models;
 using Common.Api.UserContext;
 using Common.Api.Repositories;
 using Common.Linq;
+using Docs.Api.Models;
 
 namespace Aop.Api.Repositories.Aop
 {
@@ -62,6 +63,31 @@ namespace Aop.Api.Repositories.Aop
             this.unitOfWork.DbContext.Set<AopApp>().Add(app);
 
             return app;
+        }
+
+        public Doc GetDocByPortalDocId(Guid portalDocId)
+        {
+            var docsQuery = 
+                from d in this.unitOfWork.DbContext.Set<Doc>()
+                join pdr in this.unitOfWork.DbContext.Set<AopPortalDocRelation>() on d.DocId equals pdr.DocId
+                where pdr.PortalDocId == portalDocId
+                select new
+                {
+                    docId = d.DocId
+                };
+
+            var doc = docsQuery.SingleOrDefault();
+
+            if (doc != null)
+            {
+                return this.unitOfWork.DbContext.Set<Doc>()
+                .Include(e => e.DocElectronicServiceStages.Select(s => s.ElectronicServiceStage))
+                .SingleOrDefault(e => e.DocId == doc.docId);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         //public Correspondent CreateBgCitizen(

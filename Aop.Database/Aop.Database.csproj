@@ -52,7 +52,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CreateAll.log</LastGenOutput>
     </None>
-    <None Include="Insert\AopExcelConfig\ExcelConfig.log" />
     <None Include="Insert\AopExcelConfig\ExcelConfig.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ExcelConfig1.log</LastGenOutput>
@@ -74,6 +73,7 @@
     <Content Include="Create\Tables\AopProcedureStatuses.sql" />
     <Content Include="Create\Tables\AopApplicationCriteria.sql" />
     <Content Include="Create\Tables\AopApplicationObjects.sql" />
+    <Content Include="Create\Tables\AopPortalDocRelations.sql" />
     <Content Include="Insert\AopCorrespondents.sql" />
     <Content Include="Insert\AopExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>

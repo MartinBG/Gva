@@ -204,7 +204,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>61555</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49676/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -218,7 +218,7 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PreBuildEvent>echo Copying RioSchemas
-xcopy "$(ProjectDir)..\Portal\Gva.Portal.RioObjects\Schemas" "$(ProjectDir)RioSchemas\" /Y /R /I /S /Q
+xcopy "$(ProjectDir)..\Gva.Portal\Gva.Portal.RioObjects\Schemas" "$(ProjectDir)RioSchemas\" /Y /R /I /S /Q
 </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

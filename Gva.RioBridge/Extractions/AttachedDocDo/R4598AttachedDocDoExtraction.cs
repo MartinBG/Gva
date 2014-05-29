@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gva.RioBridge.Extractions.AttachedDocDo
 {
-    public class R4598CollectionAttachedDocDoExtraction : R3994CollectionAttachedDocDoExtraction<R_4598.AuthorizationAirportOperatorApplication>
+    public class R4598AttachedDocDoExtraction : R3994CollectionAttachedDocDoExtraction<R_4598.AuthorizationAirportOperatorApplication>
     {
         protected override R_3994.AttachedDocumentDatasCollection GetR3994Collection1(R_4598.AuthorizationAirportOperatorApplication rioObject)
         {

@@ -13,10 +13,11 @@ CREATE TABLE Correspondents
 	BgCitizenFirstName					NVARCHAR (200)	NULL,
 	BgCitizenLastName					NVARCHAR (200)	NULL,
 	BgCitizenUIN						NVARCHAR (50)	NULL,
+	BgCitizenPosition					NVARCHAR (200)	NULL,
 
 	ForeignerFirstName					NVARCHAR (200)	NULL,
 	ForeignerLastName					NVARCHAR (200)	NULL,
-		ForeignerCountryId					int	NULL,
+	ForeignerCountryId					INT				NULL,
 	ForeignerSettlement					NVARCHAR (50)	NULL,
 	ForeignerBirthDate					DATETIME	NULL,
 

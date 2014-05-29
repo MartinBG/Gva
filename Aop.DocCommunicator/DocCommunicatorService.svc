@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost
+    Language="C#" 
+    Debug="true" 
+    Service="Aop.DocCommunicator.DocCommunicatorService" 
+    CodeBehind="DocCommunicatorService.svc.cs" %>
