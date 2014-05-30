@@ -110,13 +110,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Web.App", "Common.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portal", "Portal", "{3646FB5D-4B67-477B-A728-7560B6BC7E36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Common", "..\MosvPortal\Mosv.Portal.Common\Mosv.Portal.Common.csproj", "{8F6769B8-83BC-4874-9AFC-4F2FE2C1FD52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Common", "Mosv.Portal\Mosv.Portal.Common\Mosv.Portal.Common.csproj", "{8F6769B8-83BC-4874-9AFC-4F2FE2C1FD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Components", "..\MosvPortal\Mosv.Portal.Components\Mosv.Portal.Components.csproj", "{599DB491-1ADE-4042-9BB8-32701A25E8F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Components", "Mosv.Portal\Mosv.Portal.Components\Mosv.Portal.Components.csproj", "{599DB491-1ADE-4042-9BB8-32701A25E8F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Model", "..\MosvPortal\Mosv.Portal.Model\Mosv.Portal.Model.csproj", "{CE68B140-6997-488B-BE56-77F19A5E1292}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.Model", "Mosv.Portal\Mosv.Portal.Model\Mosv.Portal.Model.csproj", "{CE68B140-6997-488B-BE56-77F19A5E1292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.RioObjects", "..\MosvPortal\Mosv.Portal.RioObjects\Mosv.Portal.RioObjects.csproj", "{E6C91DEF-523A-4040-AD21-970AB45B2B48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosv.Portal.RioObjects", "Mosv.Portal\Mosv.Portal.RioObjects\Mosv.Portal.RioObjects.csproj", "{E6C91DEF-523A-4040-AD21-970AB45B2B48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
