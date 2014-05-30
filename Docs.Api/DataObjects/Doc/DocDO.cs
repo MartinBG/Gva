@@ -187,6 +187,8 @@ namespace Docs.Api.DataObjects
         //for presentation
         public List<DocFileDO> PrivateDocFiles { get; set; }
         public List<DocFileDO> PublicDocFiles { get; set; }
+        public string EditableFileForm { get; set; }
+        public string EditableFile { get; set; }
         //for edit
         public List<DocFileDO> DocFiles { get; set; }
 

@@ -716,7 +716,21 @@ namespace Docs.Api.Controllers
 
             #region DocFiles
 
-            foreach (var df in doc.DocFiles)
+            //?
+            DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+            if (editable != null)
+            {
+                List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
+                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
+
+                byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
+
+                returnValue.EditableFile = System.Text.Encoding.UTF8.GetString(content);
+                returnValue.EditableFileForm = editable.Name;
+            }
+
+            foreach (var df in doc.DocFiles.Where(e => !e.DocFileOriginTypeId.HasValue || e.DocFileOriginType.Alias != "EditableFile"))
+            //foreach (var df in doc.DocFiles)
             {
                 if (df.DocFileKind.Alias.ToLower() == "PrivateAttachedFile".ToLower())
                 {
@@ -979,6 +993,29 @@ namespace Docs.Api.Controllers
                 #endregion
 
                 #region DocFiles
+
+                //?
+                DocFile editable = oldDoc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+
+                if (editable != null)
+                {
+                    string contentStr = doc.EditableFile;
+                    byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
+
+                    System.Security.Cryptography.SHA1 sha1 = new System.Security.Cryptography.SHA1Managed();
+                    sha1.ComputeHash(content);
+
+                    List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
+                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
+                    //sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", BitConverter.ToString(sha1.Hash).Replace("-", string.Empty)));
+                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", Guid.NewGuid().ToString().Replace("-", string.Empty))); //to bypass hash unique constraint in db
+                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@size", content.LongCount()));
+                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@content", content));
+
+                    this.docRepository.SqlQuery<object>(
+                        @"UPDATE [dbo].[Blobs] SET [Hash] = @hash, [Size] = @size, [Content] = @content WHERE [Key] = @key",
+                        sqlParams).FirstOrDefault();
+                }
 
                 List<DocFileDO> allDocFiles = doc.DocFiles;
                 List<DocFileType> docFileTypes = this.unitOfWork.DbContext.Set<DocFileType>().ToList();
