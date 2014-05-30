@@ -161,6 +161,8 @@
     <Content Include="js\scaffolding\directives\hasError\hasErrorDirective.js" />
     <Content Include="js\scaffolding\directives\linkButton\linkButtonDirective.html" />
     <Content Include="js\scaffolding\directives\linkButton\linkButtonDirective.js" />
+    <Content Include="js\scaffolding\directives\info\infoDirective.html" />
+    <Content Include="js\scaffolding\directives\info\infoDirective.js" />
     <Content Include="js\scaffolding\directives\navigation\navigationDirective.html" />
     <Content Include="js\scaffolding\directives\navigation\navigationDirective.js" />
     <Content Include="js\scaffolding\directives\navigation\navigationItemDirective.html" />
