@@ -50,7 +50,7 @@
               }
 
               hasSuffix = true;
-              addons[1].prepend(elem);
+              addons[1].append(elem);
             }
             else {
               if (tagName === 'BUTTON') {
@@ -58,7 +58,7 @@
               }
 
               hasPreffix = true;
-              addons[0].prepend(elem);
+              addons[0].append(elem);
             }
           });
 

@@ -2,8 +2,8 @@
   <div class="row">
     <sc-field-group class="col-sm-10" text="applications.aircraftSelect.aircraft" validations="{ required: null }" field-name="aircraftLotId">
       <sc-nomenclature ng-model="model.lot.id" alias="'aircrafts'" mode="id" name="aircraftLotId" required></sc-nomenclature>
-      <sc-button btn-click="$raise('scOnNewAircraft')" class="btn btn-default" text="applications.aircraftSelect.newAircraft"></sc-button>
       <sc-button btn-click="$raise('scOnSelectAircraft')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+      <sc-button btn-click="$raise('scOnNewAircraft')" class="btn btn-default" text="applications.aircraftSelect.newAircraft"></sc-button>
     </sc-field-group>
   </div>
 </ng-form>
