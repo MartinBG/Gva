@@ -22,15 +22,7 @@
     <div class="form-group col-sm-3 col-md-2" sc-has-error="localTime">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.localTime"></label>
       <sc-validation-error field-name="localTime" validations="{required: null}"></sc-validation-error>
-      <div class="input-group input-group-sm">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-time">
-          </span>
-        </span>
-        <sc-int ng-model="model.localTime.hours" ng-required="true" name="localTime" ng-readonly="readonly"></sc-int>
-        <span class="input-group-addon padding6">:</span>
-        <sc-int ng-model="model.localTime.minutes" ng-required="true" name="localTime" ng-readonly="readonly"></sc-int>
-      </div>
+      <sc-time ng-model="model.localTime" ng-required="true" name="localTime" ng-readonly="readonly"></sc-time>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="area">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.area"></label>

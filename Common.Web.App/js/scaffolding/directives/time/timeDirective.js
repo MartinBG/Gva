@@ -36,10 +36,12 @@
         }
 
         ngModel.$render = function () {
-          var minutes = ngModel.$viewValue / 60000;
+          if (ngModel.$viewValue) {
+            var minutes = ngModel.$viewValue / 60000;
 
-          scope.hours = Math.floor(minutes / 60);
-          scope.minutes = minutes % 60;
+            scope.hours = Math.floor(minutes / 60);
+            scope.minutes = minutes % 60;
+          }
         }
 
         scope.$watch('minutes', function (value) {

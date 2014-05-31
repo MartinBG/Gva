@@ -11,22 +11,12 @@
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.regDate"></label>
       <sc-date ng-model="model.regDate" name="regDate" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
+    <div class="form-group col-sm-3 col-md-2"  sc-has-error="regTime">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.regTime"></label>
-      <span name="regTimeValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
-              class="glyphicon glyphicon-warning-sign"
-              title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
-      <div class="input-group input-group-sm">
-        <sc-int ng-model="model.regTime.hours" min="0" max="23" name="hours" ng-readonly="readonly"></sc-int>
-        <span class="input-group-addon padding6">:</span>
-        <sc-int ng-model="model.regTime.minutes" min="0" max="59" name="minutes" ng-readonly="readonly"></sc-int>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-time">
-          </span>
-        </span>
-      </div>
+      <sc-validation-error field-name="regTime" validations="{required: null}"></sc-validation-error>
+      <sc-time ng-model="model.regTime" name="regTime" ng-readonly="readonly" ng-required="true"></sc-time>
     </div>
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
+        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftDebtType"></label>
       <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>

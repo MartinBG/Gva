@@ -159,43 +159,20 @@
     <hr />
 
     <div class="row">
-      <div class="form-group col-sm-3 col-md-2" ng-class="{'has-error': (form.hours.$invalid || form.minutes.$invalid) && form.$validated}">
+      <div class="form-group col-sm-3 col-md-2" sc-has-error="totalDoc">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
-        <span name="totalDocValidationSpan" ng-show="(form.hours.$invalid || form.minutes.$invalid) && form.$validated"
-              class="glyphicon glyphicon-warning-sign"
-              title="{{(form.hours.$error.required || form.minutes.$error.required) && 'Задължително поле'}}"></span>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-          </span>
-          <sc-int ng-model="model.totalDoc.hours" name="hours" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
-          <span class="input-group-addon padding6">:</span>
-          <sc-int ng-model="model.totalDoc.minutes" name="minutes" ng-required="model.staffType.alias === 'flightCrew'" ng-readonly="readonly"></sc-int>
-        </div>
+        <sc-validation-error field-name="totalDoc" validations="{required: null}"></sc-validation-error>
+        <sc-time ng-model="model.totalDoc" name="totalDoc" ng-readonly="readonly" ng-required="true"></sc-time>
       </div>
 
       <div class="form-group col-sm-3 col-md-2" ng-if="model.staffType.alias === 'flightCrew'">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths"></label>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-          </span>
-          <sc-int ng-model="model.totalLastMonths.hours" ng-readonly="readonly"></sc-int>
-          <span class="input-group-addon padding6">:</span>
-          <sc-int ng-model="model.totalLastMonths.minutes" ng-readonly="readonly"></sc-int>
-        </div>
+        <sc-time ng-model="model.totalLastMonths" name="totalLastMonths" ng-readonly="readonly"></sc-time>
       </div>
 
       <div class="form-group col-sm-3 col-md-2">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.total"></label>
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-          </span>
-          <sc-int ng-model="model.total.hours" ng-readonly="readonly"></sc-int>
-          <span class="input-group-addon padding6">:</span>
-          <sc-int ng-model="model.total.minutes" ng-readonly="readonly"></sc-int>
-        </div>
+        <sc-time ng-model="model.total" name="total" ng-readonly="readonly"></sc-time>
       </div>
     </div>
   </div>
