@@ -45,7 +45,7 @@
       AuthService.prototype.authenticate = function(username, password) {
         getHttp();
 
-        delete $window.sessionStorage.token;
+        delete $window.localStorage.token;
         return $http({
           method: 'POST',
           url: authServiceConfig.tokenUrl,
@@ -65,12 +65,12 @@
           expiresIn = response.data.expires_in && parseInt(response.data.expires_in, 10);
           if (expiresIn) {
             $timeout(function () {
-              delete $window.sessionStorage.token;
+              delete $window.localStorage.token;
               $rootScope.$broadcast('authRequired', this);
             }, expiresIn * 1000);
           }
 
-          $window.sessionStorage.token = response.data.access_token;
+          $window.localStorage.token = response.data.access_token;
           return true;
         }, function (response) {
           if (response.data.error === 'invalid_grant') {
@@ -81,8 +81,8 @@
       };
 
       AuthService.prototype.authConfig = function (config) {
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+        if ($window.localStorage.token) {
+          config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
         }
 
         return config;
