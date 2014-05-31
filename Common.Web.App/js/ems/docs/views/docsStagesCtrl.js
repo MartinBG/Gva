@@ -7,7 +7,10 @@
     $sce,
     doc
   ) {
+    $scope.doc = doc;
     $scope.docId = doc.docId;
+
+
     $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
       function (docElectronicServiceStage) {
         docElectronicServiceStage.electronicServiceStageExecutors =

@@ -1,5 +1,4 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
-  <div class="well-sm panel-body">
     <div class="row">
       <div class="col-md-12">
         <label>{{ model.docTypeName }}</label>
@@ -12,7 +11,7 @@
       </div>
     </div>
 
-    <div class="row card">
+    <div class="row">
       <div class="form-group col-md-3">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="docs.edit.regDate"></span>
@@ -39,14 +38,11 @@
       </div>
     </div>
 
-    <div class="row card">
+    <div class="row">
       <div class="form-group col-md-12">
-        <div class="input-group input-group-sm">
-          <span class="input-group-addon" l10n-text="docs.edit.docSubject"></span>
-          <sc-text ng-model="model.docSubject" ng-readonly="!readonly"></sc-text>
-        </div>
+        <label class="control-label" l10n-text="docs.edit.docSubject"></label>
+        <sc-text ng-model="model.docSubject" ng-readonly="!readonly"></sc-text>
       </div>
     </div>
 
-  </div>
 </ng-form>

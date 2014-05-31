@@ -1,4 +1,6 @@
-﻿<div ng-if="doc.isDocIncoming">
+﻿<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
+
+<div ng-if="doc.isDocIncoming">
   <ems-doc-view-doc-incoming name="docViewForm" sc-on-select-unit="selectUnit($message)" sc-on-select-corr="selectCorr()" sc-on-new-corr="newCorr()" readonly="!inEditMode" ng-model="doc"></ems-doc-view-doc-incoming>
 </div>
 <div ng-if="doc.isDocInternal">

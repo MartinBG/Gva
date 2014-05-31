@@ -9,6 +9,7 @@
     DocWorkflow,
     doc
   ) {
+    $scope.doc = doc;
     $scope.canDeleteWorkflow = doc.flags.canDeleteWorkflow;
 
     $scope.removeDocWorkflow = function (dwf) {

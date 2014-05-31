@@ -10,6 +10,7 @@
     application,
     doc
   ) {
+    $scope.doc = doc;
     $scope.appId = application.id;
     $scope.docId = doc.docId;
     $scope.isCase = doc.isCase;
