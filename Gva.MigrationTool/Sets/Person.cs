@@ -1536,6 +1536,8 @@ namespace Gva.MigrationTool.Sets
                             r.notesAlt,
                             r.licenceAction,
                             r.limitations,
+
+                            r.applications,
                             r.includedRatings,
                             r.includedMedicals,
                             r.includedTrainings,
