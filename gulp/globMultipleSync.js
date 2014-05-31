@@ -1,3 +1,6 @@
+'use strict';
+/*global require, module, process*/
+/*jshint -W097*/ // Use the function form of "use strict".
 var _ = require('lodash');
 var glob = require('glob');
 var minimatch = require('minimatch');
