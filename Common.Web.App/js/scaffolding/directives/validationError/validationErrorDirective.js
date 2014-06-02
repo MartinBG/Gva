@@ -21,7 +21,9 @@
         _.forOwn(scope.getValidations(), function (text, type) {
           scope.validations.push({
             type: type,
-            text: l10n.get(text || scValidationErrorConfig.defaultErrorTexts[type])
+            text: l10n.get(text !== 'default' ?
+              text :
+              scValidationErrorConfig.defaultErrorTexts[type])
           });
         });
       }
@@ -33,8 +35,12 @@
   angular.module('scaffolding')
     .constant('scValidationErrorConfig', {
       defaultErrorTexts: {
-        required: 'errorTexts.required',
-        min: 'errorTexts.min'
+        required: 'defaultErrorTexts.required',
+        pattern: 'defaultErrorTexts.pattern',
+        minlength: 'defaultErrorTexts.minlength',
+        maxlength: 'defaultErrorTexts.maxlength',
+        min: 'defaultErrorTexts.min',
+        max: 'defaultErrorTexts.max'
       }
     })
     .directive('scValidationError', ValidationErrorDirective);
