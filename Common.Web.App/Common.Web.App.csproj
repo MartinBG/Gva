@@ -172,6 +172,7 @@
     <Content Include="js\scaffolding\directives\password\passwordDirective.js" />
     <Content Include="js\scaffolding\directives\promiseState\promiseStateDirective.html" />
     <Content Include="js\scaffolding\directives\promiseState\promiseStateDirective.js" />
+    <Content Include="js\scaffolding\directives\formReadonly\formReadonlyDirective.js" />
     <Content Include="js\scaffolding\directives\search\filterDirective.html" />
     <Content Include="js\scaffolding\directives\search\filterDirective.js" />
     <Content Include="js\scaffolding\directives\search\searchButtonDirective.html" />
