@@ -35,10 +35,15 @@
       $scope.editableFiles.editableFileForComparison = item;
     };
 
-    $scope.$watch('readonly', function(){
-      $scope.isDisabled = $scope.readonly ||
+    $scope.$watch('readonly', function(value){
+      $scope.isDisabled = value || 
         $scope.editableFiles.currentEditableFile !== $scope.editableFiles.lastEditableFile;
+      if(!value) {
+        $scope.editableFiles.editableFileForComparison = 
+          _.last($scope.model.editableFilesForComparison);
+      }
     });
+
   }
 
   EditableFileCtrl.$inject = ['$scope'];
