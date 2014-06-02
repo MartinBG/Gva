@@ -1,0 +1,37 @@
+﻿<ng-form class="form-inline">
+  <div class="row col-sm-10 col-md-10">
+    <div class="col-sm-4 col-md-4">
+      <label class="control-label" l10n-text="editableFiles.currentChecklist"></label>
+      <sc-datatable items="model.editableFiles" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
+        <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <input type="radio" ng-checked="item === editableFiles.currentEditableFile" sc-click="selectEditableFile(item)">
+        </sc-column>
+        <sc-column title="editableFiles.author" has-content="true">
+          {{item.author}}
+        </sc-column>
+        <sc-column title="editableFiles.createDate" has-content="true" type="date">
+          {{item.createDate | date:'mediumDate'}}
+        </sc-column>
+      </sc-datatable>
+    </div>
+  
+    <div class="col-sm-4 col-md-4">
+      <label class="control-label" l10n-text="editableFiles.compareTo"></label>
+      <sc-datatable  items="model.editableFilesForComparison" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
+        <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <input type="radio" ng-checked="item === editableFiles.editableFileForComparison" sc-click="compareTo(item)">
+        </sc-column>
+        <sc-column title="editableFiles.author" has-content="true">
+          {{item.author}}
+        </sc-column>
+        <sc-column title="editableFiles.createDate" has-content="true" type="date">
+          {{item.createDate | date:'mediumDate'}}
+        </sc-column>
+      </sc-datatable>
+    </div>
+  </div>
+
+
+  <div class="row"></div>
+  <ems-doc-file-checklist name="docFileChecklist" ng-model="editableFiles" readonly="isDisabled"></ems-doc-file-checklist>
+</ng-form>

@@ -144,7 +144,7 @@
       return $scope.editDocForm.$validate().then(function () {
         if ($scope.editDocForm.$valid) {
           //aop: stringigy js object
-          $scope.doc.editableFile = JSON.stringify($scope.doc.editableFile);
+          $scope.doc.editableFiles = JSON.stringify($scope.doc.editableFiles);
 
           return Doc
             .save($stateParams, $scope.doc)

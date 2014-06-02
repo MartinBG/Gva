@@ -19,6 +19,11 @@
       templateUrl: 'js/ems/docs/forms/editableFile/checklist.html',
       controller: 'ChecklistCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'emsEditableFile',
+      templateUrl: 'js/ems/docs/forms/editableFile/editableFile.html',
+      controller: 'EditableFileCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.apps'                                     , '/aop/app?limit&offset'                                                                                                                                                                                    ])

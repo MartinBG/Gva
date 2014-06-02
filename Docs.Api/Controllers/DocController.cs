@@ -725,7 +725,7 @@ namespace Docs.Api.Controllers
 
                 byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
 
-                returnValue.EditableFile = System.Text.Encoding.UTF8.GetString(content);
+                returnValue.EditableFiles = System.Text.Encoding.UTF8.GetString(content);
                 returnValue.EditableFileForm = editable.Name;
             }
 
@@ -999,7 +999,7 @@ namespace Docs.Api.Controllers
 
                 if (editable != null)
                 {
-                    string contentStr = doc.EditableFile;
+                    string contentStr = doc.EditableFiles;
                     byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
 
                     System.Security.Cryptography.SHA1 sha1 = new System.Security.Cryptography.SHA1Managed();

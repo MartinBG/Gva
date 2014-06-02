@@ -157,7 +157,8 @@
           <a l10n-text="docs.edit.view.editableFile" style="font-size: 12px;"></a>
       </accordion-heading>
 
-      <ems-doc-file-checklist name="docFileChecklist" ng-model="model" readonly="readonly" ng-if="model.editableFileForm === 'Checklist'"></ems-doc-file-checklist>
+      <ems-editable-file name="docFileChecklist" ng-model="model" readonly="readonly" ng-if="model.editableFileForm === 'Checklist'"></ems-editable-file>
+
     </accordion-group>
 
     <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">

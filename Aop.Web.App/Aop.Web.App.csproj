@@ -77,6 +77,8 @@
     <Content Include="js\ems\docs\forms\docView\task.html" />
     <Content Include="js\ems\docs\forms\editableFile\checklist.html" />
     <Content Include="js\ems\docs\forms\editableFile\checklistCtrl.js" />
+    <Content Include="js\ems\docs\forms\editableFile\editableFile.html" />
+    <Content Include="js\ems\docs\forms\editableFile\editableFileCtrl.js" />
     <Content Include="js\ems\docs\views\caseSelect.html" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />

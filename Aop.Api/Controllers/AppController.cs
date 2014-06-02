@@ -20,6 +20,8 @@ using Common.Blob;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.DataObjects;
+using Newtonsoft.Json;
+using Common.Api.Repositories.UserRepository;
 
 namespace Aop.Api.Controllers
 {
@@ -31,14 +33,17 @@ namespace Aop.Api.Controllers
         private Aop.Api.Repositories.Aop.IAppRepository appRepository;
         private Docs.Api.Repositories.DocRepository.IDocRepository docRepository;
         private UserContext userContext;
+        private IUserRepository userRepository;
 
         public AppController(Common.Data.IUnitOfWork unitOfWork,
             Aop.Api.Repositories.Aop.IAppRepository appRepository,
-            Docs.Api.Repositories.DocRepository.IDocRepository docRepository)
+            Docs.Api.Repositories.DocRepository.IDocRepository docRepository,
+            IUserRepository userRepository)
         {
             this.unitOfWork = unitOfWork;
             this.appRepository = appRepository;
             this.docRepository = docRepository;
+            this.userRepository = userRepository;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -499,8 +504,16 @@ namespace Aop.Api.Controllers
                     this.userContext);
 
                 Guid key = Guid.NewGuid();
-                string contentStr = "{}";
 
+                string username = userRepository.GetUser(unitUser.UserId).Username;
+                string emptyChecklist = JsonConvert.SerializeObject(new
+                {
+                    version = "1",
+                    author = username,
+                    createDate = DateTime.Now
+                }).ToString();
+
+                string contentStr = string.Format("[{0}]", emptyChecklist);
                 if (copy || correct)
                 {
                     DocFile editable = this.unitOfWork.DbContext.Set<DocFile>()
@@ -512,8 +525,25 @@ namespace Aop.Api.Controllers
                         sp.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
 
                         byte[] contentToBeCopied = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sp).FirstOrDefault();
+                        
+                        string contentToString = System.Text.Encoding.UTF8.GetString(contentToBeCopied);
 
-                        contentStr = System.Text.Encoding.UTF8.GetString(contentToBeCopied);
+                        JArray editableFiles = JsonConvert.DeserializeObject<JArray>(contentToString);
+                        dynamic lastChecklist = editableFiles[editableFiles.Count - 1];
+                        lastChecklist.version = int.Parse(Convert.ToString(lastChecklist.version)) + 1;
+                        lastChecklist.author = username;
+                        lastChecklist.createDate = DateTime.Now;
+
+                        if (copy)
+                        {
+                            editableFiles.Add(lastChecklist);
+                        }
+                        else if (correct)
+                        {
+                            editableFiles[editableFiles.Count - 1] = lastChecklist;
+                        }
+
+                        contentStr = JsonConvert.SerializeObject(editableFiles).ToString();
                     }
                 }
 

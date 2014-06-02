@@ -13,6 +13,13 @@
           docIIstage: 'Документ за II етап'
         }
       },
+      editableFiles: {
+        createDate: 'Дата на създаване',
+        author: 'Автор',
+        currentChecklist: 'Текущ чеклист',
+        compareTo: 'Сравни със:',
+        clearComparison: 'Изчисти сравнението'
+      },
       states: {
         'root.apps': 'Заявления',
         'root.apps.new': 'Ново заявление',
