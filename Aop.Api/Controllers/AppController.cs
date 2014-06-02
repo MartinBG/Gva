@@ -77,7 +77,6 @@ namespace Aop.Api.Controllers
             });
         }
 
-
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetApps(

@@ -44,7 +44,6 @@
       $scope.docCount = docs.documentCount;
     });
 
-    //aop filtrite dali shte rabotqt?
     $scope.search = function () {
       $state.go('root.apps.edit.docSelect', {
         filter: 'all',
@@ -66,7 +65,7 @@
         regUri: result.regUri || '',
         docTypeName: result.docTypeName,
         docSubject: result.docSubject,
-        type: $state.payload.type
+        type: $stateParams.type
       });
       return $state.go('^');
     };

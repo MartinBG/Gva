@@ -53,29 +53,19 @@
       return $state.go('root.apps.edit.newAopEmployer');
     };
 
-    $scope.gotoDoc = function (id) {
-      return $state.go('root.docs.edit.view', { id: id });
+    $scope.connectToDoc = function (type) {
+      return $state.go('root.apps.edit.docSelect', { type: type }, null, null);
+    };
+
+    $scope.disconnectDoc = function (connections) {
+      for (var i = 0; i < connections.length; i++) {
+        $scope.app[connections[i]] = undefined;
+      }
+
+      return $scope.fastSave();
     };
 
     //ST
-    $scope.connectSTDoc = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'stDoc'});
-    };
-
-    $scope.disconnectSTDoc = function () {
-      $scope.app.stDocId = undefined;
-      return $scope.fastSave();
-    };
-
-    $scope.connectSTChecklist = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'stChecklist' });
-    };
-
-    $scope.disconnectSTChecklist = function () {
-      $scope.app.stChecklistId = undefined;
-      return $scope.fastSave();
-    };
-
     $scope.generateSTChecklist = function (action) {
       return Aop
         .generateChecklist({
@@ -89,34 +79,18 @@
         });
     };
 
-    $scope.connectSTNote = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'stNote' });
-    };
-
-    $scope.disconnectSTNote = function () {
-      $scope.app.stNoteId = undefined;
-      return $scope.fastSave();
+    $scope.generateSTNote = function () {
+      return Aop
+        .generateNote({
+          id: $scope.app.aopApplicationId
+        }, {})
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     //ND
-    $scope.connectNDDoc = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'ndDoc' });
-    };
-
-    $scope.disconnectNDDoc = function () {
-      $scope.app.ndDocId = undefined;
-      return $scope.fastSave();
-    };
-
-    $scope.connectNDChecklist = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'ndChecklist' });
-    };
-
-    $scope.disconnectNDChecklist = function () {
-      $scope.app.ndChecklistId = undefined;
-      return $scope.fastSave();
-    };
-
     $scope.generateNDChecklist = function (action) {
       return Aop
         .generateChecklist({
@@ -130,36 +104,38 @@
         });
     };
 
-    $scope.connectNDReport = function () {
-      return $state.go('root.apps.edit.docSelect', null, null, { type: 'ndReport' });
-    };
-
-    $scope.disconnectNDReport = function () {
-      $scope.app.ndReportId = undefined;
-      return $scope.fastSave();
+    $scope.generateNDReport = function () {
+      return Aop
+        .generateReport({
+          id: $scope.app.aopApplicationId
+        }, {})
+        .$promise
+        .then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
     };
 
     if (selectDoc.length > 0) {
       var sd = selectDoc.pop();
       switch (sd.type) {
-      case 'stDoc':
-        $scope.app.stDocId = sd.docId;
-        return $scope.fastSave();
-      case 'stChecklist':
-        $scope.app.stChecklistId = sd.docId;
-        return $scope.fastSave();
-      case 'stNote':
-        $scope.app.stNoteId = sd.docId;
-        return $scope.fastSave();
-      case 'ndDoc':
-        $scope.app.ndDocId = sd.docId;
-        return $scope.fastSave();
-      case 'ndChecklist':
-        $scope.app.ndChecklistId = sd.docId;
-        return $scope.fastSave();
-      case 'ndReport':
-        $scope.app.ndReportId = sd.docId;
-        return $scope.fastSave();
+        case 'stDoc':
+          $scope.app.stDocId = sd.docId;
+          return $scope.fastSave();
+        case 'stChecklist':
+          $scope.app.stChecklistId = sd.docId;
+          return $scope.fastSave();
+        case 'stNote':
+          $scope.app.stNoteId = sd.docId;
+          return $scope.fastSave();
+        case 'ndDoc':
+          $scope.app.ndDocId = sd.docId;
+          return $scope.fastSave();
+        case 'ndChecklist':
+          $scope.app.ndChecklistId = sd.docId;
+          return $scope.fastSave();
+        case 'ndReport':
+          $scope.app.ndReportId = sd.docId;
+          return $scope.fastSave();
       }
     }
   }

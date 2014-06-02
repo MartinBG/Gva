@@ -49,22 +49,22 @@
           <div class="row">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Документ към етап I:"></label>
-              <a sc-click="gotoDoc(app.stDocRelation.docId)" ng-if="app.stDocRelation.docRelationId">{{ app.stDocRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.stDocRelation.docId }} }}" ng-if="app.stDocRelation.docRelationId">{{ app.stDocRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectSTDoc()" ng-if="!app.stDocRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectSTDoc()" ng-if="app.stDocRelation.docRelationId">разкачи</a>
+              <a sc-click="connectToDoc('stDoc')" ng-if="!app.stDocRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['stDocId', 'stChecklistId', 'stNoteId'])" ng-if="app.stDocRelation.docRelationId">разкачи</a>
             </div>
           </div>
 
           <div class="row" ng-if="app.stDocRelation.docRelationId">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Чеклист към етап I:"></label>
-              <a sc-click="gotoDoc(app.stChecklistRelation.docId)" ng-if="app.stChecklistRelation.docRelationId">{{ app.stChecklistRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.stChecklistRelation.docId }} }}" ng-if="app.stChecklistRelation.docRelationId">{{ app.stChecklistRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectSTChecklist()" ng-if="!app.stChecklistRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectSTChecklist()" ng-if="app.stChecklistRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="connectToDoc('stChecklist')" ng-if="!app.stChecklistRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['stChecklistId'])" ng-if="app.stChecklistRelation.docRelationId">разкачи</a>&nbsp|
               <a sc-click="generateSTChecklist('new')">нов</a>&nbsp|
               <a sc-click="generateSTChecklist('copy')">копие</a>&nbsp|
               <a sc-click="generateSTChecklist('correct')">поправка</a>
@@ -74,11 +74,11 @@
           <div class="row" ng-if="app.stDocRelation.docRelationId">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Становище към етап I:"></label>
-              <a sc-click="gotoDoc(app.stNoteRelation.docId)" ng-if="app.stNoteRelation.docRelationId">{{ app.stNoteRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.stNoteRelation.docId }} }}" ng-if="app.stNoteRelation.docRelationId">{{ app.stNoteRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectSTNote()" ng-if="!app.stNoteRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectSTNote()" ng-if="app.stNoteRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="connectToDoc('stNote')" ng-if="!app.stNoteRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['stNoteId'])" ng-if="app.stNoteRelation.docRelationId">разкачи</a>&nbsp|
               <a target="_self" ng-href="/api/aop/apps/{{app.aopApplicationId}}/note">генерирай</a>
             </div>
           </div>
@@ -135,22 +135,22 @@
            <div class="row">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Документ към етап II:"></label>
-              <a sc-click="gotoDoc(app.ndDocRelation.docId)" ng-if="app.ndDocRelation.docRelationId">{{ app.ndDocRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.ndDocRelation.docId }} }}" ng-if="app.ndDocRelation.docRelationId">{{ app.ndDocRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectNDDoc()" ng-if="!app.ndDocRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectNDDoc()" ng-if="app.ndDocRelation.docRelationId">разкачи</a>
+              <a sc-click="connectToDoc('ndDoc')" ng-if="!app.ndDocRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['ndDocId', 'ndChecklistId', 'ndReportId'])" ng-if="app.ndDocRelation.docRelationId">разкачи</a>
             </div>
           </div>
 
           <div class="row" ng-if="app.ndDocRelation.docRelationId">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Чеклист към етап II:"></label>
-              <a sc-click="gotoDoc(app.ndChecklistRelation.docId)" ng-if="app.ndChecklistRelation.docRelationId">{{ app.ndChecklistRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.ndChecklistRelation.docId }} }}" ng-if="app.ndChecklistRelation.docRelationId">{{ app.ndChecklistRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectNDChecklist()" ng-if="!app.ndChecklistRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectNDChecklist()" ng-if="app.ndChecklistRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="connectToDoc('ndChecklist')" ng-if="!app.ndChecklistRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['ndChecklistId'])" ng-if="app.ndChecklistRelation.docRelationId">разкачи</a>&nbsp|
               <a sc-click="generateNDChecklist('new')">нов</a>&nbsp|
               <a sc-click="generateNDChecklist('copy')">копие</a>&nbsp|
               <a sc-click="generateNDChecklist('correct')">поправка</a>
@@ -160,11 +160,11 @@
           <div class="row" ng-if="app.ndDocRelation.docRelationId">
             <div class="form-group col-md-9">
               <label class="control-label" l10n-text="Доклад към етап II:"></label>
-              <a sc-click="gotoDoc(app.ndReportRelation.docId)" ng-if="app.ndReportRelation.docRelationId">{{ app.ndReportRelation.data }}</a>
+              <a sc-sref="{state: 'root.docs.edit.view', params: { id: {{ app.ndReportRelation.docId }} }}" ng-if="app.ndReportRelation.docRelationId">{{ app.ndReportRelation.data }}</a>
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
-              <a sc-click="connectNDReport()" ng-if="!app.ndReportRelation.docRelationId">свържи</a>
-              <a sc-click="disconnectNDReport()" ng-if="app.ndReportRelation.docRelationId">разкачи</a>&nbsp|
+              <a sc-click="connectToDoc('ndReport')" ng-if="!app.ndReportRelation.docRelationId">свържи</a>
+              <a sc-click="disconnectDoc(['ndReportId'])" ng-if="app.ndReportRelation.docRelationId">разкачи</a>&nbsp|
               <a target="_self" ng-href="/api/aop/apps/{{app.aopApplicationId}}/report">генерирай</a>
             </div>
           </div>
