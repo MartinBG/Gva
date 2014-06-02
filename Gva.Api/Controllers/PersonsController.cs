@@ -72,7 +72,7 @@ namespace Gva.Api.Controllers
             string caseTypeAlias = null,
             bool exact = false)
         {
-            var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, exact);
+            var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, exact, 0, 1000);
 
             return Ok(persons.Select(p => new PersonDO(p)));
         }

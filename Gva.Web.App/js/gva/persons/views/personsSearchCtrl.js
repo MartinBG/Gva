@@ -37,7 +37,7 @@
     };
 
     $scope.viewPerson = function (person) {
-      return $state.go('root.persons.view', { id: person.id });
+      return $state.go('root.persons.view.licences.search', { id: person.id });
     };
   }
 
