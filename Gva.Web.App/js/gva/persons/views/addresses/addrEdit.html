@@ -1,4 +1,4 @@
-﻿<ng-form name="editAddressForm" sc-validate="{}">
+﻿<ng-form name="editAddressForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.editAddress.title"></strong>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-address name="personAddressForm" ng-model="personAddress.part" readonly="!editMode"></gva-person-address>
+      <gva-person-address name="personAddressForm" ng-model="personAddress.part"></gva-person-address>
     </div>
   </div>
 </ng-form>

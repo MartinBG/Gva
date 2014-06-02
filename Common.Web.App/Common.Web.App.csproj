@@ -148,6 +148,7 @@
     <Content Include="js\scaffolding\directives\date\dateDirective.js" />
     <Content Include="js\scaffolding\directives\fieldGroup\fieldGroupDirective.html" />
     <Content Include="js\scaffolding\directives\fieldGroup\fieldGroupDirective.js" />
+    <Content Include="js\scaffolding\directives\field\fieldDirective.js" />
     <Content Include="js\scaffolding\directives\files\filesCtrl.js" />
     <Content Include="js\scaffolding\directives\files\filesDirective.html" />
     <Content Include="js\scaffolding\directives\files\filesDirective.js" />

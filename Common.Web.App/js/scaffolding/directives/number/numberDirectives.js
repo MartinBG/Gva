@@ -113,8 +113,8 @@
     },
     function (attrs) {
       return function (numValue) {
-        numValue === undefined || numValue === null ?
-        undefined :
+        numValue = numValue === undefined || numValue === null ?
+          undefined :
           numValue;
         if (attrs.padding && numValue) {
           numValue = padInt(numValue, attrs.padding);
