@@ -1,4 +1,5 @@
-﻿// Usage: <sc-link-button name="" sc-sref="{state: '...', params: {...}}" text="" class="" icon=""></sc-link-button>
+﻿// Usage: <sc-link-button name="" sc-sref="{state: '...', params: {...}}" text="" class="" icon="">
+//</sc-link-button>
 
 /*global angular*/
 (function (angular) {

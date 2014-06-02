@@ -18,7 +18,7 @@
           return;
         }
 
-        var infinityMode = attrs.mode === "infinity";
+        var infinityMode = attrs.mode === 'infinity';
 
         attrs.$observe('readonly', function (value) {
           scope.isReadonly = !!value;
@@ -42,7 +42,7 @@
             scope.hours = Math.floor(minutes / 60);
             scope.minutes = minutes % 60;
           }
-        }
+        };
 
         scope.$watch('minutes', function (value) {
           scope.minutes = value > 59 ? undefined : value;

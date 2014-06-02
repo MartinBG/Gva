@@ -16,7 +16,7 @@
       }
       else {
         validationElem.remove();
-        tElement.removeAttr('sc-has-error')
+        tElement.removeAttr('sc-has-error');
       }
 
       var label = tElement.find('label');
@@ -74,7 +74,7 @@
             clone.remove();
           });
         });
-      }
+      };
     }
 
     return {

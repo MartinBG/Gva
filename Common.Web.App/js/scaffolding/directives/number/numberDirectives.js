@@ -16,7 +16,8 @@
           if (!ngModel) {
             return;
           }
-          injected.unshift(attrs)
+          injected.unshift(attrs);
+
           ngModel.$parsers.push(parserFactory.apply(this, injected));
 
           ngModel.$formatters.push(formatterFactory.apply(this, injected));
@@ -82,7 +83,7 @@
 
   function padInt(value, padding) {
     value = value.toString();
-    return value.length < padding ? padInt("0" + value, padding) : value;
+    return value.length < padding ? padInt('0' + value, padding) : value;
   }
 
   createNumberDirective(
@@ -116,7 +117,7 @@
         undefined :
           numValue;
         if (attrs.padding && numValue) {
-          numValue = padInt(numValue, attrs.padding)
+          numValue = padInt(numValue, attrs.padding);
         }
           return numValue;
       };
