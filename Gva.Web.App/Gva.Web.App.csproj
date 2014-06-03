@@ -67,8 +67,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertMark.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertMarkView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseDataFM.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertPermitToFly.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertPermitToFlyView.html" />
@@ -99,7 +97,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertMark.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoise.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertNoiseFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertPermitToFly.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadio.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistration.js" />
@@ -157,12 +154,6 @@
     <Content Include="js\gva\aircrafts\views\certMarks\marksNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certMarks\marksSearch.html" />
     <Content Include="js\gva\aircrafts\views\certMarks\marksSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesEdit.html" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesNew.html" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesSearch.html" />
-    <Content Include="js\gva\aircrafts\views\certNoisesFM\noisesSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesEdit.html" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesNew.html" />
@@ -765,7 +756,6 @@
     <Content Include="schema\aircrafts\aircraft-cert-airworthinessesfm.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-marks.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-noises.sample.js" />
-    <Content Include="schema\aircrafts\aircraft-cert-noisesfm.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-permitstofly.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-radios.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-registrations.sample.js" />
@@ -937,7 +927,6 @@
     <Content Include="test\gva\aircrafts\mocks\aircraftCertAirworthinessesFMHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftCertAirworthinessesHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftCertMarksHttp.js" />
-    <Content Include="test\gva\aircrafts\mocks\aircraftCertNoisesFMHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftCertNoisesHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftCertPermitsToFlyHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftCertRadiosHttp.js" />

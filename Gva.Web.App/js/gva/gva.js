@@ -180,10 +180,6 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoise.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftCertNoiseFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoiseFM.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftCertRadio',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadio.html'
     });
@@ -535,10 +531,6 @@
       .state(['root.aircrafts.view.noises.search'                       , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoises/noisesSearch.html'                    , 'CertNoisesSearchCtrl'           ]])
       .state(['root.aircrafts.view.noises.new'                          , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoises/noisesNew.html'                       , 'CertNoisesNewCtrl'              ]])
       .state(['root.aircrafts.view.noises.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoises/noisesEdit.html'                      , 'CertNoisesEditCtrl'             ]])
-      .state(['root.aircrafts.view.noisesFM'                            , '/noisesFM'                                                                                                                                                                      ])
-      .state(['root.aircrafts.view.noisesFM.search'                     , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoisesFM/noisesSearch.html'                  , 'CertNoisesFMSearchCtrl'         ]])
-      .state(['root.aircrafts.view.noisesFM.new'                        , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoisesFM/noisesNew.html'                     , 'CertNoisesFMNewCtrl'            ]])
-      .state(['root.aircrafts.view.noisesFM.edit'                       , '/:ind'                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certNoisesFM/noisesEdit.html'                    , 'CertNoisesFMEditCtrl'           ]])
       .state(['root.aircrafts.view.radios'                              , '/radios'                                                                                                                                                                        ])
       .state(['root.aircrafts.view.radios.search'                       , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRadios/radiosSearch.html'                    , 'CertRadiosSearchCtrl'           ]])
       .state(['root.aircrafts.view.radios.new'                          , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRadios/radiosNew.html'                       , 'CertRadiosNewCtrl'              ]])

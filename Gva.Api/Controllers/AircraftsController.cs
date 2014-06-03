@@ -291,7 +291,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
@@ -349,7 +348,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
@@ -378,7 +376,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
@@ -402,7 +399,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
@@ -425,7 +421,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoisesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {

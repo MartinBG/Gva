@@ -11,7 +11,6 @@
       aircraftCertAirworthinesses = require('./aircraft-cert-airworthinesses.sample'),
       aircraftCertAirworthinessesFM = require('./aircraft-cert-airworthinessesfm.sample'),
       aircraftCertNoises = require('./aircraft-cert-noises.sample'),
-      aircraftCertNoisesFM = require('./aircraft-cert-noisesfm.sample'),
       aircraftCertPermitsToFly = require('./aircraft-cert-permitstofly.sample'),
       aircraftCertRadios = require('./aircraft-cert-radios.sample'),
       aircraftDocumentDebts = require('./aircraft-document-debts.sample'),
@@ -108,12 +107,6 @@
         {
           partIndex: 11,
           part: aircraftCertNoises.aircraft1Noise1
-        }
-      ],
-      aircraftCertNoisesFM: [
-        {
-          partIndex: 25,
-          part: aircraftCertNoisesFM.aircraft1Noise1
         }
       ],
       aircraftCertPermitsToFly: [

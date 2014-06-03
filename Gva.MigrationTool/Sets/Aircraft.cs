@@ -472,12 +472,6 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
-                    //var aircraftCertNoisesFM = this.getAircraftCertNoisesFM(aircraftFmId);
-                    //foreach (var aircraftCertNoiseFM in aircraftCertNoisesFM)
-                    //{
-                    //    lot.CreatePart("aircraftCertNoisesFM/*", aircraftCertNoiseFM, context);
-                    //}
-
                     try
                     {
                         lot.Commit(context, lotEventDispatcher);
@@ -541,31 +535,6 @@ namespace Gva.MigrationTool.Sets
 
         private JObject getAircraftDataFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var noisesResults = this.sqlConn.CreateStoreCommand(
-                @"select * from Acts where {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and n_Act_ID = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<string>("n_Act_ID"),
-                        __migrTable = "Acts",
-                        issueNumber = toNum(r.Field<string>("n_Noise_No_Issued")),
-                        issueDate = toDate(r.Field<string>("d_CofN_45_Date")),
-                        tcdsn = r.Field<string>("t_Noise_TCDS"),
-                        chapter = r.Field<string>("t_Noise_Chapter"),
-                        lateral = toDecimal(r.Field<string>("n_Noise_Literal")),
-                        approach = toDecimal(r.Field<string>("n_Noise_Approach")),
-                        flyover = toDecimal(r.Field<string>("n_Noise_FlyOver")),
-                        overflight = toDecimal(r.Field<string>("n_Noise_OverFlight")),
-                        takeoff = toDecimal(r.Field<string>("n_Noise_TakeOff")),
-                        modifications = r.Field<string>("t_Noise_AddModifBg"),
-                        modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
-                        notes = r.Field<string>("t_Noise_Remark"),
-                    }))
-                .Single();
-
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Acts where {0} {1}",
                 new DbClause("1=1"),
@@ -598,7 +567,21 @@ namespace Gva.MigrationTool.Sets
                         euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
                         easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
                         tcds = r.Field<string>("t_EASA_TCDS"),
-                        noises = noisesResults
+                        noise = new
+                        {
+                            issueNumber = toNum(r.Field<string>("n_Noise_No_Issued")),
+                            issueDate = toDate(r.Field<string>("d_CofN_45_Date")),
+                            tcdsn = r.Field<string>("t_Noise_TCDS"),
+                            chapter = r.Field<string>("t_Noise_Chapter"),
+                            lateral = toDecimal(r.Field<string>("n_Noise_Literal")),
+                            approach = toDecimal(r.Field<string>("n_Noise_Approach")),
+                            flyover = toDecimal(r.Field<string>("n_Noise_FlyOver")),
+                            overflight = toDecimal(r.Field<string>("n_Noise_OverFlight")),
+                            takeoff = toDecimal(r.Field<string>("n_Noise_TakeOff")),
+                            modifications = r.Field<string>("t_Noise_AddModifBg"),
+                            modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
+                            notes = r.Field<string>("t_Noise_Remark")
+                        }
                     }))
                 .Single();
         }
@@ -727,34 +710,6 @@ namespace Gva.MigrationTool.Sets
                         EASA15IssueDate = toDate(r.Field<string>("d_ARC_Issue")),
                         EASA15IssueValidToDate = toDate(r.Field<string>("d_ARC_Valid")),
                         EASA15IssueRefNo = r.Field<string>("t_ARC_RefNo")
-                    }))
-                .ToList();
-        }
-
-        private IList<JObject> getAircraftCertNoisesFM(string aircraftId)
-        {
-            return this.sqlConn.CreateStoreCommand(
-                @"select * from Acts where {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and n_Act_ID = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<string>("n_Act_ID"),
-                        __migrTable = "Acts",
-                        issueNumber = toNum(r.Field<string>("n_Noise_No_Issued")),
-                        issueDate = toDate(r.Field<string>("d_CofN_45_Date")),
-                        tcdsn = r.Field<string>("t_Noise_TCDS"),
-                        chapter = r.Field<string>("t_Noise_Chapter"),
-                        lateral = toDecimal(r.Field<string>("n_Noise_Literal")),
-                        approach = toDecimal(r.Field<string>("n_Noise_Approach")),
-                        flyover = toDecimal(r.Field<string>("n_Noise_FlyOver")),
-                        overflight = toDecimal(r.Field<string>("n_Noise_OverFlight")),
-                        takeoff = toDecimal(r.Field<string>("n_Noise_TakeOff")),
-                        modifications = r.Field<string>("t_Noise_AddModifBg"),
-                        modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
-                        notes = r.Field<string>("t_Noise_Remark"),
                     }))
                 .ToList();
         }
