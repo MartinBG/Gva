@@ -44,31 +44,31 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="readonly">
-            {{ownerIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
+            {{model.ownerIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a ng-click="ownerIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
-            <li><a ng-click="ownerIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
+            <li><a ng-click="model.ownerIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
+            <li><a ng-click="model.ownerIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
           </ul>
         </div>
-          <sc-nomenclature ng-if="ownerIsOrg" class="form-control input-sm" ng-model="model.ownerOrganization" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
-          <sc-nomenclature ng-if="!ownerIsOrg" class="form-control input-sm" ng-model="model.ownerPerson" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="model.ownerIsOrg" class="form-control input-sm" ng-model="model.ownerOrganization" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="!model.ownerIsOrg" class="form-control input-sm" ng-model="model.ownerPerson" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
     <div class="form-group col-md-4 col-sm-6">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.operator"></label>
       <div class="input-group">
         <div class="input-group-btn">
-          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 80px" ng-disabled="readonly">
-            {{operIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="readonly">
+            {{model.operIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a ng-click="operIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
-            <li><a ng-click="operIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
+            <li><a ng-click="model.operIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
+            <li><a ng-click="model.operIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
           </ul>
         </div>
-          <sc-nomenclature ng-if="operIsOrg" class="form-control input-sm" ng-model="model.operOrganization" name="operOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
-          <sc-nomenclature ng-if="!operIsOrg" class="form-control input-sm" ng-model="model.operPerson" name="operPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="model.operIsOrg" class="form-control input-sm" ng-model="model.operOrganization" name="operOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+          <sc-nomenclature ng-if="!model.operIsOrg" class="form-control input-sm" ng-model="model.operPerson" name="operPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
   </div>
@@ -105,16 +105,16 @@
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingLessor"></label>
       <div class="input-group">
         <div class="input-group-btn">
-          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 80px" ng-disabled="readonly">
-            {{lessorIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="readonly">
+            {{model.lessorIsOrg? 'ЮЛ' : 'ФЛ'}} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a ng-click="lessorIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
-            <li><a ng-click="lessorIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
+            <li><a ng-click="model.lessorIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a></li>
+            <li><a ng-click="model.lessorIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a></li>
           </ul>
         </div>
-        <sc-nomenclature ng-if="lessorIsOrg" class="form-control input-sm" ng-model="model.lesorOrganization" name="lesorOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
-        <sc-nomenclature ng-if="!lessorIsOrg" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="model.lessorIsOrg" class="form-control input-sm" ng-model="model.lesorOrganization" name="lesorOrganization" alias="'organizations'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="!model.lessorIsOrg" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
     </div>

@@ -65,7 +65,10 @@
       return {
         part: {
           removal: null,
-          isActive: true
+          isActive: true,
+          ownerIsOrg: true,
+          operIsOrg: true,
+          lessorIsOrg: true
         },
         files: []
       };

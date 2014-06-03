@@ -77,7 +77,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertReg.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFM.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertRegFMCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmod.html" />
