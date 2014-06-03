@@ -1185,41 +1185,7 @@
   <ItemGroup>
     <Content Include="schema\person-status.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\common\filters\" />
-    <Folder Include="js\common\login\" />
-    <Folder Include="js\common\users\resources\" />
-    <Folder Include="js\common\users\views\" />
-    <Folder Include="js\ems\corrs\forms\" />
-    <Folder Include="js\ems\corrs\resources\" />
-    <Folder Include="js\ems\corrs\views\" />
-    <Folder Include="js\ems\docs\forms\docNew\" />
-    <Folder Include="js\ems\docs\forms\docView\" />
-    <Folder Include="js\ems\docs\recources\" />
-    <Folder Include="js\ems\docs\views\" />
-    <Folder Include="js\scaffolding\directives\breadcrumb\" />
-    <Folder Include="js\scaffolding\directives\button\" />
-    <Folder Include="js\scaffolding\directives\click\" />
-    <Folder Include="js\scaffolding\directives\datatable\" />
-    <Folder Include="js\scaffolding\directives\date\" />
-    <Folder Include="js\scaffolding\directives\files\" />
-    <Folder Include="js\scaffolding\directives\formName\" />
-    <Folder Include="js\scaffolding\directives\hasError\" />
-    <Folder Include="js\scaffolding\directives\navigation\" />
-    <Folder Include="js\scaffolding\directives\nomenclature\" />
-    <Folder Include="js\scaffolding\directives\number\" />
-    <Folder Include="js\scaffolding\directives\password\" />
-    <Folder Include="js\scaffolding\directives\promiseState\" />
-    <Folder Include="js\scaffolding\directives\search\" />
-    <Folder Include="js\scaffolding\directives\select\" />
-    <Folder Include="js\scaffolding\directives\tabs\" />
-    <Folder Include="js\scaffolding\directives\textarea\" />
-    <Folder Include="js\scaffolding\directives\text\" />
-    <Folder Include="js\scaffolding\directives\validate\" />
-    <Folder Include="js\scaffolding\directives\validationError\" />
-    <Folder Include="js\scaffolding\providers\" />
-    <Folder Include="js\scaffolding\resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

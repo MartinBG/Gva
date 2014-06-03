@@ -96,15 +96,7 @@
   <ItemGroup>
     <Content Include=".jshintrc" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\ems\corrs\forms\" />
-    <Folder Include="js\ems\corrs\resources\" />
-    <Folder Include="js\ems\corrs\views\" />
-    <Folder Include="js\ems\docs\forms\docNew\" />
-    <Folder Include="js\ems\docs\forms\docView\" />
-    <Folder Include="js\ems\docs\recources\" />
-    <Folder Include="js\ems\docs\views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
