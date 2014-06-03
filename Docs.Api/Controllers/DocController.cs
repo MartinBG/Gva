@@ -1,26 +1,28 @@
 ﻿using Common.Api.Models;
+using Common.Api.UserContext;
+using Common.Blob;
 using Common.Extensions;
+using Common.Rio.PortalBridge;
+using Common.Rio.PortalBridge.RioObjects;
+using Common.Utils;
 using Docs.Api.DataObjects;
 using Docs.Api.Enums;
 using Docs.Api.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Data.Entity;
-using Common.Api.UserContext;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Configuration;
-using Common.Rio.PortalBridge.RioObjects;
-using System.Data.SqlClient;
-using Common.Rio.PortalBridge;
-using Common.Utils;
-using Common.Blob;
+
 
 namespace Docs.Api.Controllers
 {
@@ -724,21 +726,13 @@ namespace Docs.Api.Controllers
 
             #region DocFiles
 
-            //?
             DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
             if (editable != null)
             {
-                List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
-
-                byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
-
-                returnValue.EditableFiles = System.Text.Encoding.UTF8.GetString(content);
-                returnValue.EditableFileForm = editable.Name;
+                returnValue.JObjectForm = editable.Name;
             }
 
             foreach (var df in doc.DocFiles.Where(e => !e.DocFileOriginTypeId.HasValue || e.DocFileOriginType.Alias != "EditableFile"))
-            //foreach (var df in doc.DocFiles)
             {
                 if (df.DocFileKind.Alias.ToLower() == "PrivateAttachedFile".ToLower())
                 {
@@ -1002,20 +996,16 @@ namespace Docs.Api.Controllers
 
                 #region DocFiles
 
-                //?
                 DocFile editable = oldDoc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
 
                 if (editable != null)
                 {
-                    string contentStr = doc.EditableFiles;
+                    string contentStr =  JsonConvert.SerializeObject(doc.JObject);
                     byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
 
-                    System.Security.Cryptography.SHA1 sha1 = new System.Security.Cryptography.SHA1Managed();
-                    sha1.ComputeHash(content);
-
+                    //? aop replace with stream
                     List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
                     sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
-                    //sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", BitConverter.ToString(sha1.Hash).Replace("-", string.Empty)));
                     sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", Guid.NewGuid().ToString().Replace("-", string.Empty))); //to bypass hash unique constraint in db
                     sqlParams.Add(new System.Data.SqlClient.SqlParameter("@size", content.LongCount()));
                     sqlParams.Add(new System.Data.SqlClient.SqlParameter("@content", content));

@@ -7,6 +7,10 @@
       function ($resource) {
         return $resource('/api/aop/apps/:id', { id: '@appId' },
           {
+            'loadChecklist': {
+              method: 'GET',
+              url: '/api/aop/editableFiles/checklist'
+            },
             'getNew': {
               method: 'POST',
               url: '/api/aop/apps/new'

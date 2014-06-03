@@ -19,8 +19,8 @@ namespace Aop.Api
             moduleBuilder.RegisterType<AppController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AppEmpController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AppNomController>().InstancePerLifetimeScope();
-
             moduleBuilder.RegisterType<DataGenerator>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ChecklistController>().InstancePerLifetimeScope();
         }
     }
 }

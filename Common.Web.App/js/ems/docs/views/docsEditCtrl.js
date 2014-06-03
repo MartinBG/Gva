@@ -138,9 +138,13 @@
     $scope.save = function () {
       return $scope.editDocForm.$validate().then(function () {
         if ($scope.editDocForm.$valid) {
-          return Doc.save($stateParams, $scope.doc).$promise.then(function () {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          });
+
+          return Doc
+            .save($stateParams, $scope.doc)
+            .$promise
+            .then(function () {
+              return $state.transitionTo($state.current, $stateParams, { reload: true });
+            });
         }
         else {
           $scope.doc.openAccordion = true;

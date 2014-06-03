@@ -451,11 +451,6 @@ ul.checkbox-list li {
     margin-top: 0px;
 }
 
-.checklist-current-value
-{
-    color: #336633;
-}
-
 .checklist-current-value-checkbox{
   outline:2px solid green;
 }

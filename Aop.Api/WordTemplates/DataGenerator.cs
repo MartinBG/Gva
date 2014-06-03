@@ -38,15 +38,13 @@ namespace Aop.Api.WordTemplates
 
         private object GetParagraph1(JObject paragraph1)
         {
-            if (paragraph1 == null)
-            {
-                return null;
-            }
+            var emplJObj = paragraph1 == null ? new JObject() : paragraph1.Get<JObject>("employer.table1");
+            var procJObj = paragraph1 == null ? new JObject() : paragraph1.Get<JObject>("proc");
 
             return new
             {
-                employer = this.GetEmployer(paragraph1.Get<JObject>("employer.table1")),
-                procedure = this.GetProcedure(paragraph1.Get<JObject>("proc"))
+                employer = this.GetEmployer(emplJObj),
+                procedure = this.GetProcedure(procJObj)
             };
         }
 

@@ -15,14 +15,14 @@
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
-      name: 'emsDocFileChecklist',
-      templateUrl: 'js/ems/docs/forms/editableFile/checklist.html',
-      controller: 'ChecklistCtrl'
+      name: 'emsChecklistContent',
+      templateUrl: 'js/ems/docs/forms/editableFile/checklistContent.html',
+      controller: 'ChecklistContentCtrl'
     });
     scaffoldingProvider.form({
-      name: 'emsEditableFile',
-      templateUrl: 'js/ems/docs/forms/editableFile/editableFile.html',
-      controller: 'EditableFileCtrl'
+      name: 'emsChecklist',
+      templateUrl: 'js/ems/docs/forms/editableFile/checklistHeader.html',
+      controller: 'ChecklistHeaderCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider

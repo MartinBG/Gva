@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  
+
   function UsersEditCtrl(
     $q,
     $scope,
@@ -23,7 +23,7 @@
     }
     $scope.roles = Role.query();
     $scope.saveClicked = false;
-    
+
     $q.all({
       user: $scope.user.$promise,
       roles: $scope.roles.$promise
@@ -32,7 +32,7 @@
         role.selected =
           $filter('filter')(res.user.roles || [], {roleId: role.roleId}).length > 0;
       });
-      
+
       $scope.setPassword = res.user.hasPassword;
       $scope.password = '';
       $scope.confirmPassword = '';
@@ -49,15 +49,15 @@
         } else {
           $scope.user.password = '';
         }
-        
+
         if ($scope.setCertificate) {
           $scope.user.certificateThumbprint = $scope.certificate;
         } else {
           $scope.user.certificateThumbprint = '';
         }
-        
+
         $scope.user.roles = $filter('filter')($scope.roles, {selected: true});
-        
+
         if ($scope.isEdit) {
           userExistsPromise = $q.when(false);
         } else {
@@ -84,7 +84,7 @@
       $state.go('root.users.search');
     };
   }
-  
+
   UsersEditCtrl.$inject = [
     '$q',
     '$scope',
@@ -94,6 +94,6 @@
     'User',
     'Role'
   ];
-  
+
   angular.module('common').controller('UsersEditCtrl', UsersEditCtrl);
 }(angular));

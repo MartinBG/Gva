@@ -126,11 +126,12 @@
       </div>
     </accordion-group>
 
-    <accordion-group is-open="true" ng-if="model.editableFileForm">
+    <accordion-group is-open="true" ng-if="model.jObjectForm">
       <accordion-heading>
           <a l10n-text="docs.edit.view.editableFile" style="font-size: 12px;"></a>
       </accordion-heading>
-      <ems-editable-file name="docFileChecklist" ng-model="model" readonly="readonly" ng-if="model.editableFileForm === 'Checklist'"></ems-editable-file>
+
+      <ems-checklist name="docFileChecklist" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === 'Checklist'"></ems-checklist>
     </accordion-group>
 
     <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">

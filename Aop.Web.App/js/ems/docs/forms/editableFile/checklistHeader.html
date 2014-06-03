@@ -1,0 +1,39 @@
+﻿<ng-form class="form-inline">
+  <div ng-if="isLoaded">
+    <div class="row col-sm-10 col-md-10">
+
+      <div class="col-sm-5 col-md-5">
+        <label class="control-label" l10n-text="checklist.currentChecklist"></label>
+        <sc-datatable items="model.jObject.versions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
+          <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <input type="radio" ng-checked="item.version === checklistVM.currentVersion.version" ng-disabled="!readonly" sc-click="view(item)">
+          </sc-column>
+          <sc-column title="checklist.author" has-content="true">
+            {{item.author}}
+          </sc-column>
+          <sc-column title="checklist.createDate" has-content="true" type="date">
+            {{item.createDate | date:'medium'}}
+          </sc-column>
+        </sc-datatable>
+      </div>
+
+      <div class="col-sm-5 col-md-5">
+        <label class="control-label" l10n-text="checklist.compareTo"></label>
+        <sc-datatable  items="comparings" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
+          <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+            <input type="radio" ng-checked="item.version === checklistVM.compareToVersion.version" ng-disabled="!readonly" sc-click="compareTo(item)">
+          </sc-column>
+          <sc-column title="checklist.author" has-content="true">
+            {{item.author}}
+          </sc-column>
+          <sc-column title="checklist.createDate" has-content="true" type="date">
+            {{item.createDate | date:'medium'}}
+          </sc-column>
+        </sc-datatable>
+      </div>
+    </div>
+
+    <div class="row"></div>
+    <ems-checklist-content name="docFileChecklist" ng-model="checklistVM" readonly="readonly"></ems-checklist-content>
+  </div>
+</ng-form>

@@ -71,6 +71,7 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\AppEmpController.cs" />
     <Compile Include="Controllers\AppNomController.cs" />
+    <Compile Include="Controllers\ChecklistController.cs" />
     <Compile Include="DataObjects\Aop\AopEmployerDO.cs" />
     <Compile Include="DataObjects\Aop\AppDO.cs" />
     <Compile Include="DataObjects\Aop\AppListItemDO.cs" />
