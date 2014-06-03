@@ -1387,7 +1387,9 @@
           removalInspector: 'Инспектор, отписал ВС',
           removalCountry: 'Държава',
           removalNotes: 'Забележки/Изключения',
-          removalNotesAlt: 'Забележки/Изключения (англ.)'
+          removalNotesAlt: 'Забележки/Изключения (англ.)',
+          person: 'ФЛ',
+          organization: 'ЮЛ'
         },
         debtDirectiveFM: {
           certId: 'Регистрация №',

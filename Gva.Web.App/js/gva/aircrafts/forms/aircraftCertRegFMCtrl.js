@@ -7,18 +7,9 @@
       .$promise.then(function(ownerTypes){
         $scope.ownerTypes = ownerTypes;
       });
-
-    $scope.setOwnerType = function (item) {
-      $scope.model.ownerType = item;
-    };
-
-    $scope.setOperType = function (item) {
-      $scope.model.operType = item;
-    };
-
-    $scope.setLessorType = function (item) {
-      $scope.model.lessorType = item;
-    };
+    $scope.ownerIsOrg = true;
+    $scope.operIsOrg = true;
+    $scope.lessorIsOrg = true;
 
   }
 
