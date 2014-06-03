@@ -1,0 +1,29 @@
+﻿<h4><span l10n-text="docs.edit.case.caseFinish.notFinishedMsg">></span></h4>
+
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th style="width: 150px;"><span l10n-text="docs.edit.case.caseFinish.regNumber"></span></th>
+      <th><span l10n-text="docs.edit.case.caseFinish.regDate"></span></th>
+      <th style="width: 100px;"><span l10n-text="docs.edit.case.caseFinish.statusName"></span></th>
+      <th><span l10n-text="docs.edit.case.caseFinish.description"></span></th>
+      <th style="width: 75px;"><span l10n-text="docs.edit.case.caseFinish.finish"></span></th>
+    </tr>
+  </thead>
+  <tbody ng-repeat="dr in docRelations">
+    <tr ng-style="{ 'font-weight': dr.docId === docId ? 'bold' : 'normal'}">
+      <td ng-bind-html="dr.docDataHtml"></td>
+      <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dr.docDocStatusName }}</td>
+      <td ng-bind-html="dr.docDescriptionHtml"></td>
+      <td style="text-align: center;">
+        <input type="checkbox" ng-model="dr.check"/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="col-sm-3 col-sm-offset-5">
+  <sc-button name="saveBtn" btn-click="save()" text="docs.edit.case.caseFinish.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+  <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.case.caseFinish.cancel" class="btn btn-default" icon="glyphicon-ban-circle"></sc-button>
+</div>

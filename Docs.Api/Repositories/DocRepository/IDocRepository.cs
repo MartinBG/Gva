@@ -46,6 +46,7 @@ namespace Docs.Api.Repositories.DocRepository
             bool forceClosure,
             List<DocStatus> docStatuses,
             List<DocCasePartType> docCasePartTypes,
+            int[] checkedIds,
             UserContext userContext,
             out List<DocRelation> docRelations);
 

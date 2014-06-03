@@ -103,9 +103,7 @@
         .markAsRead({
           id: $scope.doc.docId,
           docVersion: $scope.doc.version
-        }, {})
-        .$promise
-        .then(function () {
+        }, {}).$promise.then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
     };
@@ -115,9 +113,7 @@
         .markAsUnread({
           id: $scope.doc.docId,
           docVersion: $scope.doc.version
-        }, {})
-        .$promise
-        .then(function () {
+        }, {}).$promise.then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
     };
@@ -142,12 +138,9 @@
     $scope.save = function () {
       return $scope.editDocForm.$validate().then(function () {
         if ($scope.editDocForm.$valid) {
-          return Doc
-            .save($stateParams, $scope.doc)
-            .$promise
-            .then(function () {
-              return $state.transitionTo($state.current, $stateParams, { reload: true });
-            });
+          return Doc.save($stateParams, $scope.doc).$promise.then(function () {
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          });
         }
         else {
           $scope.doc.openAccordion = true;
@@ -164,9 +157,7 @@
         .createChild({
           id: doc.docId,
           docEntryTypeAlias: docEntryTypeAlias
-        }, {})
-        .$promise
-        .then(function (result) {
+        }, {}).$promise.then(function (result) {
           return $state.go('root.docs.edit.view', { id: result.docId });
         });
     };
@@ -200,11 +191,9 @@
         return DocStage.reverse({
           id: doc.docId,
           docVersion: doc.version
-        })
-          .$promise
-          .then(function () {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          });
+        }).$promise.then(function () {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        });
       });
     };
 
@@ -212,53 +201,46 @@
       return DocStatus.next({
         docId: doc.docId,
         docVersion: doc.version
-      })
-        .$promise
-        .then(function (data) {
-          if (data && data.docRelations) {
-            //? implement dialog for asking to finish all docs in case
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          } else {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          }
-        });
+      }).$promise.then(function (data) {
+        if (data && data.docRelations) {
+          return $state.go('root.docs.edit.case.caseFinish', $stateParams, {}, {
+            docRelations: data.docRelations
+          });
+        } else {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        }
+      });
     };
 
     $scope.reverseStatus = function () {
       return DocStatus.reverse({
         docId: doc.docId,
         docVersion: doc.version
-      })
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
+      }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
     };
 
     $scope.cancelStatus = function () {
       return DocStatus.cancel({
         docId: doc.docId,
         docVersion: doc.version
-      })
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
+      }).$promise.then(function () {
+        return $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
     };
 
     $scope.register = function () {
       return Doc.register({
         id: doc.docId,
         docVersion: doc.version
-      }, {})
-        .$promise
-        .then(function (data) {
-          if (data.result && data.result === 'Manual') {
-            return $state.go('root.docs.edit.case.manualRegister');
-          } else {
-            return $state.transitionTo($state.current, $stateParams, { reload: true });
-          }
-        });
+      }, {}).$promise.then(function (data) {
+        if (data.result && data.result === 'Manual') {
+          return $state.go('root.docs.edit.case.manualRegister');
+        } else {
+          return $state.transitionTo($state.current, $stateParams, { reload: true });
+        }
+      });
     };
 
     $scope.signRequest = function () {

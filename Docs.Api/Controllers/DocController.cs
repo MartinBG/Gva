@@ -1037,7 +1037,7 @@ namespace Docs.Api.Controllers
                     {
                         docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
                     }
-                    
+
                     oldDoc.UpdateDocFile(file.DocFileId.Value, file.DocFileKindId, docFileType.DocFileTypeId, file.Name, file.File.Name, "", file.File.Key, userContext);
                 }
 
@@ -1279,7 +1279,9 @@ namespace Docs.Api.Controllers
         public IHttpActionResult SetNextStatus(
             int id,
             string docVersion,
-            bool? closure = null)
+            [FromUri] int[] checkedIds = null,
+            bool? closure = null
+            )
         {
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().ToList();
             List<DocCasePartType> docCasePartTypes = this.unitOfWork.DbContext.Set<DocCasePartType>().ToList();
@@ -1291,6 +1293,7 @@ namespace Docs.Api.Controllers
                 closure ?? false,
                 docStatuses,
                 docCasePartTypes,
+                checkedIds,
                 this.userContext,
                 out docRelations);
 

@@ -94,6 +94,8 @@
     <Content Include="js\ems\docs\views\caseSelectCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="js\ems\docs\views\caseFinish.html" />
+    <Content Include="js\ems\docs\views\caseFinishCtrl.js" />
     <Content Include="js\ems\docs\views\docsCorrNewCtrl.js" />
     <Content Include="js\ems\docs\views\docsEdit.html" />
     <Content Include="js\ems\docs\views\docsEditCtrl.js" />

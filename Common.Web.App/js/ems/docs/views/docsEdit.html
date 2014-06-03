@@ -31,6 +31,7 @@
           <sc-button ng-show="!inEditMode && ($state.current.name === 'root.docs.edit.view') && doc.flags.isVisibleEditCmd" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
           <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
           <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+
           <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-tag" label="docs.edit.management" 
               options="[
                 {
@@ -115,10 +116,12 @@
                 }, {
                   text: 'docs.edit.reverseDocFinished',
                   action: reverseStatus,
-                  visible: doc.flags.isVisibleFinishedStatusReverseCmd || doc.flags.isVisibleCanceledStatusReverseCmd
+                  visible: doc.flags.isVisibleProcessedStatusReverseCmd
                 }
               ]">
           </sc-dropdown-button>
+
+
           <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.stagesName" 
             options="[
                 {
@@ -140,6 +143,8 @@
                 }
             ]">
           </sc-dropdown-button>
+
+
           <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.caseManagement" 
             options="[
                 {
@@ -153,6 +158,7 @@
                 }
             ]">
           </sc-dropdown-button>
+
 
           <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
             <i class="glyphicon glyphicon-eye-open"></i>

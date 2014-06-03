@@ -12,7 +12,11 @@
           {
             'next': {
               method: 'POST',
-              url: '/api/docs/:id/next'
+              url: '/api/docs/:id/next',
+              params: {
+                closure: '@closure',
+                checkedIds: '@checkedIds'
+              }
             },
             'reverse': {
               method: 'POST',

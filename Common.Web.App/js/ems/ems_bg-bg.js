@@ -154,6 +154,16 @@
               save: 'Запис',
               cancel: 'Отказ'
             },
+            caseFinish: {
+              notFinishedMsg: 'Следните документи не са приключени в преписката:',
+              regDate: 'Дата',
+              regNumber: 'Рег.№',
+              statusName: 'Статус',
+              description: 'Описание',
+              finish: 'Приключи',
+              save: 'Приключване',
+              cancel: 'Отказ'
+            },
             docType: {
               registerIndex: 'Регистър на документа',
               unregisterDoc: 'Дерегистриране на документа?',
@@ -348,6 +358,7 @@
         'root.docs.edit.case.linkApp.equipmentNew': 'Ново съоръжение',
         'root.docs.edit.case.casePart': 'Смяна на част на преписка',
         'root.docs.edit.case.docType': 'Техническа редакция на документ',
+        'root.docs.edit.case.caseFinish': 'Приключване на преписка',
         'root.corrs': 'Кореспонденти',
         'root.corrs.new': 'Нов кореспондент',
         'root.corrs.edit': 'Редакция'

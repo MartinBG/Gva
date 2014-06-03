@@ -120,6 +120,7 @@ namespace Docs.Api.Repositories.DocRepository
             bool forceClosure,
             List<DocStatus> docStatuses,
             List<DocCasePartType> docCasePartTypes,
+            int[] checkedIds,
             UserContext userContext,
             out List<DocRelation> docRelations)
         {
@@ -219,10 +220,13 @@ namespace Docs.Api.Repositories.DocRepository
                         {
                             if (forceClosure)
                             {
-                                foreach (var item in docRelations)
+                                foreach (var item in caseDocRelations)
                                 {
-                                    item.Doc.DocStatusId = newDocStatus.DocStatusId;
-                                    item.Doc.DocStatus = newDocStatus;
+                                    if (checkedIds.Contains(item.DocId))
+                                    {
+                                        item.Doc.DocStatusId = newDocStatus.DocStatusId;
+                                        item.Doc.DocStatus = newDocStatus;
+                                    }
                                 }
                             }
                             else
@@ -1141,7 +1145,7 @@ namespace Docs.Api.Repositories.DocRepository
             string position = String.Empty;
             string name = String.Empty;
 
-            var unit = 
+            var unit =
                 this.unitOfWork.DbContext.Set<Unit>()
                 .Include(u => u.UnitType)
                 .Include(u => u.UnitRelations.Select(ur => ur.ParentUnit))
