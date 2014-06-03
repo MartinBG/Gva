@@ -26,7 +26,9 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'js/scaffolding/directives/dropdownButton/dropdownButtonDirective.html',
-      scope: {},
+      scope: {
+        icon: '@'
+      },
       link: function (scope, element, attrs) {
         scope.label = l10n.get(attrs.label);
         scope.buttons =  _.map($parse(attrs.options)(scope.$parent), 
@@ -36,7 +38,8 @@
               state: button.state,
               text: l10n.get(button.text),
               params: button.params,
-              visible: button.visible !== undefined ? button.visible : true
+              visible: button.visible !== undefined ? button.visible : true,
+              btnClass: button.btnClass
             }; 
           });
       }

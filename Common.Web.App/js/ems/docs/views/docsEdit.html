@@ -3,129 +3,156 @@
 
       <nav class="panel-heading">
         <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
-          <div ng-show="!inEditMode" class="btn-group">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-plus"></i>
-              <span l10n-text="docs.edit.child"></span> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="doc.flags.isVisibleCreateChildDoc">
-                <a sc-click="attachDoc()" name="attachNewDocBtn" l10n-text="docs.edit.document"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleCreateChildResolution">
-                <a sc-click="attachResolution()" l10n-text="docs.edit.resolution"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleCreateChildTask">
-                <a sc-click="attachTask()" l10n-text="docs.edit.task"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleCreateChildRemark">
-                <a sc-click="attachRemark()" l10n-text="docs.edit.remark"></a>
-              </li>
-            </ul>
-          </div>
+          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child" 
+              options="[
+                {
+                  text: 'docs.edit.document',
+                  action: attachDoc,
+                  visible: doc.flags.isVisibleCreateChildDoc
+                }, {
+                  text: 'docs.edit.resolution',
+                  action: attachResolution,
+                  visible: doc.flags.isVisibleCreateChildResolution
+                }, {
+                  text: 'docs.edit.task',
+                  action: attachTask,
+                  visible: doc.flags.isVisibleCreateChildTask
+                }, {
+                  text: 'docs.edit.remark',
+                  action: attachRemark,
+                  visible: doc.flags.isVisibleCreateChildRemark
+                }, {
+                  text: 'docs.edit.receiptAcknowledge',
+                  action: attachReceiptAcknowledgeDoc
+                }
+              ]">
+          </sc-dropdown-button>
 
           <sc-button ng-show="!inEditMode && ($state.current.name === 'root.docs.edit.view') && doc.flags.isVisibleEditCmd" btn-click="enterEditMode()" text="docs.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
           <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
           <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
-
-          <div class="btn-group" ng-show="!inEditMode">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-tag"></i>
-              <span l10n-text="docs.edit.management"></span> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="doc.flags.isVisiblePreparedStatusCmd">
-                <a sc-click="nextStatus()" l10n-text="docs.edit.docPrepared"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleProcessedStatusCmd">
-                <a sc-click="nextStatus()" l10n-text="docs.edit.docProcessed"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleFinishedStatusCmd">
-                <a sc-click="nextStatus()" l10n-text="docs.edit.docFinished"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleCanceledStatusCmd">
-                <a sc-click="cancelStatus()" l10n-text="docs.edit.docCanceled"></a>
-              </li>
-              <li ng-show="doc.flags.isVisbleDivider1" class="divider"></li>
-              <li ng-show="doc.flags.isVisibleRegisterCmd">
-                <a sc-click="register()" l10n-text="docs.edit.docRegister"></a>
-              </li>
-              <li ng-show="doc.flags.isVisbleDivider2" class="divider"></li>
-              <li ng-show="doc.flags.isVisibleEsignCmd">
-                <a sc-click="eSign()" l10n-text="docs.edit.docSignatures"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleUndoEsignCmd">
-                <a sc-click="undoESign()" l10n-text="docs.edit.undoDocSignatures"></a>
-              </li>
-              <li ng-show="doc.flags.isVisbleDivider3" class="divider"></li>
-              <li ng-show="doc.flags.isVisibleSignCmd">
-                <a sc-click="signConfirm()" l10n-text="docs.edit.sign"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleDiscussCmd">
-                <a sc-click="discussConfirm()" l10n-text="docs.edit.discuss"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleApprovalCmd">
-                <a sc-click="approvalConfirm()" l10n-text="docs.edit.approval"></a>
-              </li>
-              <li ng-show="doc.flags.isVisbleDivider4" class="divider"></li>
-              <li ng-show="doc.flags.isVisibleSignRequestCmd">
-                <a sc-click="signRequest()" l10n-text="docs.edit.signRequest"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleDiscussRequestCmd">
-                <a sc-click="discussRequest()" l10n-text="docs.edit.discussRequest"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleApprovalRequestCmd">
-                <a sc-click="approvalRequest()" l10n-text="docs.edit.approvalRequest"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleRegistrationRequestCmd">
-                <a sc-click="registrationRequest()" l10n-text="docs.edit.registrationRequest"></a>
-              </li>
-              <li ng-show="doc.flags.isVisbleDivider5" class="divider"></li>
-              <li ng-show="doc.flags.isVisibleDraftStatusReverseCmd">
-                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocPrepared"></a>
-              </li>
-              <li ng-show="doc.flags.isVisiblePreparedStatusReverseCmd">
-                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocProcessed"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleFinishedStatusReverseCmd || doc.flags.isVisibleCanceledStatusReverseCmd">
-                <a sc-click="reverseStatus()" l10n-text="docs.edit.reverseDocFinished"></a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="btn-group" ng-show="!inEditMode">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-              <span l10n-text="docs.edit.stagesName"></span> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="doc.flags.isVisibleEndStageCmd">
-                <a sc-click="endStage()" l10n-text="docs.edit.endElectronicStage"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleNextStageCmd">
-                <a sc-click="nextStage()" l10n-text="docs.edit.nextElectronicStage"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleEditStageCmd">
-                <a sc-click="editStage()" l10n-text="docs.edit.techEditElectronicStage"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleReverseStageCmd">
-                <a sc-click="reverseStage()" l10n-text="docs.edit.reverseElectronicStage"></a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="btn-group" ng-show="!inEditMode">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-              <span l10n-text="docs.edit.caseManagement"></span> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-show="doc.flags.isVisibleEditCasePartCmd">
-                <a sc-click="editCasePart()" l10n-text="docs.edit.casePart"></a>
-              </li>
-              <li ng-show="doc.flags.isVisibleEditTechCmd">
-                <a sc-click="editDocType()" l10n-text="docs.edit.docType"></a>
-              </li>
-            </ul>
-          </div>
+          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-tag" label="docs.edit.management" 
+              options="[
+                {
+                  text: 'docs.edit.docPrepared',
+                  action: nextStatus,
+                  visible: doc.flags.isVisiblePreparedStatusCmd
+                }, {
+                  text: 'docs.edit.docProcessed',
+                  action: nextStatus,
+                  visible: doc.flags.isVisibleProcessedStatusCmd
+                }, {
+                  text: 'docs.edit.docFinished',
+                  action: nextStatus,
+                  visible: doc.flags.isVisibleFinishedStatusCmd
+                }, {
+                  text: 'docs.edit.docCanceled',
+                  action: cancelStatus,
+                  visible: doc.flags.isVisibleCanceledStatusCmd
+                }, {
+                  btnClass: 'divider',
+                  visible: doc.flags.isVisbleDivider1
+                }, {
+                  text: 'docs.edit.docRegister',
+                  action: register,
+                  visible: doc.flags.isVisibleRegisterCmd
+                }, {
+                  btnClass: 'divider',
+                  visible: doc.flags.isVisbleDivider2
+                }, {
+                  text: 'docs.edit.docSignatures',
+                  action: eSign,
+                  visible: doc.flags.isVisibleEsignCmd
+                }, {
+                  text: 'docs.edit.undoDocSignatures',
+                  action: undoESign,
+                  visible: doc.flags.isVisibleUndoEsignCmd
+                }, {
+                  btnClass: 'divider',
+                  visible: doc.flags.isVisbleDivider3
+                }, {
+                  text: 'docs.edit.sign',
+                  action: signConfirm,
+                  visible: doc.flags.isVisibleSignCmd
+                }, {
+                  text: 'docs.edit.discuss',
+                  action: discussConfirm,
+                  visible: doc.flags.isVisibleDiscussCmd
+                }, {
+                  text: 'docs.edit.approval',
+                  action: approvalConfirm,
+                  visible: doc.flags.isVisibleApprovalCmd
+                }, {
+                  btnClass: 'divider',
+                  visible: doc.flags.isVisbleDivider4
+                }, {
+                  text: 'docs.edit.signRequest',
+                  action: signRequest,
+                  visible: doc.flags.isVisibleSignRequestCmd
+                }, {
+                  text: 'docs.edit.discussRequest',
+                  action: discussRequest,
+                  visible: doc.flags.isVisibleDiscussRequestCmd
+                }, {
+                  text: 'docs.edit.approvalRequest',
+                  action: approvalRequest,
+                  visible: doc.flags.isVisibleApprovalRequestCmd
+                }, {
+                  text: 'docs.edit.registrationRequest',
+                  action: registrationRequest,
+                  visible: doc.flags.isVisibleRegistrationRequestCmd
+                }, {
+                  btnClass: 'divider',
+                  visible: doc.flags.isVisbleDivider5
+                }, {
+                  text: 'docs.edit.reverseDocPrepared',
+                  action: reverseStatus,
+                  visible: doc.flags.isVisibleDraftStatusReverseCmd
+                }, {
+                  text: 'docs.edit.reverseDocProcessed',
+                  action: reverseStatus,
+                  visible: doc.flags.isVisiblePreparedStatusReverseCmd
+                }, {
+                  text: 'docs.edit.reverseDocFinished',
+                  action: reverseStatus,
+                  visible: doc.flags.isVisibleFinishedStatusReverseCmd || doc.flags.isVisibleCanceledStatusReverseCmd
+                }
+              ]">
+          </sc-dropdown-button>
+          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.stagesName" 
+            options="[
+                {
+                  text: 'docs.edit.endElectronicStage',
+                  action: endStage,
+                  visible: doc.flags.isVisibleEndStageCmd
+                }, {
+                  text: 'docs.edit.nextElectronicStage',
+                  action: nextStage,
+                  visible: doc.flags.isVisibleNextStageCmd
+                }, {
+                  text: 'docs.edit.techEditElectronicStage',
+                  action: editStage,
+                  visible: doc.flags.isVisibleEditStageCmd
+                }, {
+                  text: 'docs.edit.reverseElectronicStage',
+                  action: reverseStage,
+                  visible: doc.flags.isVisibleReverseStageCmd
+                }
+            ]">
+          </sc-dropdown-button>
+          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.caseManagement" 
+            options="[
+                {
+                  text: 'docs.edit.casePart',
+                  action: editCasePart,
+                  visible: doc.flags.isVisibleEditCasePartCmd
+                },{
+                  text: 'docs.edit.docType',
+                  action: editDocType,
+                  visible: doc.flags.isVisibleEditTechCmd
+                }
+            ]">
+          </sc-dropdown-button>
 
           <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
             <i class="glyphicon glyphicon-eye-open"></i>
