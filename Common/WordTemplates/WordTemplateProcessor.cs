@@ -1,20 +1,12 @@
-﻿using Common.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace Common.WordTemplates
 {
@@ -32,6 +24,24 @@ namespace Common.WordTemplates
             get
             {
                 return this.template;
+            }
+        }
+
+        public void Transform(JObject context)
+        {
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(template, true))
+            {
+                MainDocumentPart main = doc.MainDocumentPart;
+
+                foreach (var sdtElement in this.ClosestDescendants<SdtElement>(main.Document).ToList())
+                {
+                    this.TransformElement(sdtElement, context);
+                }
+
+                foreach (var sdtElement in main.Document.Descendants<SdtElement>().Reverse())
+                {
+                    this.RemoveContentControl(sdtElement);
+                }
             }
         }
 
@@ -73,20 +83,29 @@ namespace Common.WordTemplates
                 if (sdtElement is SdtBlock)
                 {
                     SdtBlock sdtBlock = (SdtBlock)sdtElement;
-                    Paragraph p = sdtBlock.SdtContentBlock.GetFirstChild<Paragraph>();
-                    Run r = p.GetFirstChild<Run>();
-                    setRunText(r, context);
 
-                    RemoveAllChildrenButFirst<Run>(p);
-                    RemoveAllChildrenButFirst<Paragraph>(sdtBlock.SdtContentBlock);
+                    Paragraph p = sdtBlock.SdtContentBlock.GetFirstChild<Paragraph>();
+
+                    Run r = p.GetFirstChild<Run>();
+                    this.SetRunText(r, context);
+
+                    this.RemoveAllChildrenButFirst<Run>(p);
+                    this.RemoveAllChildrenButFirst<Paragraph>(sdtBlock.SdtContentBlock);
                 }
                 else if (sdtElement is SdtRun)
                 {
                     SdtRun sdtRun = (SdtRun)sdtElement;
                     Run r = sdtRun.SdtContentRun.GetFirstChild<Run>();
-                    setRunText(r, context);
 
-                    RemoveAllChildrenButFirst<Run>(sdtRun.SdtContentRun);
+                    bool preserveContent = false;
+                    var checkbox = sdtRun.SdtProperties.GetFirstChild<DocumentFormat.OpenXml.Office2010.Word.SdtContentCheckBox>();
+                    if (checkbox != null)
+                    {
+                        preserveContent = true;
+                    }
+                    this.SetRunText(r, context, preserveContent);
+
+                    this.RemoveAllChildrenButFirst<Run>(sdtRun.SdtContentRun);
                 }
                 else if (sdtElement is SdtCell)
                 {
@@ -94,10 +113,10 @@ namespace Common.WordTemplates
                     TableCell cell = sdtCell.SdtContentCell.GetFirstChild<TableCell>();
                     Paragraph p = cell.GetFirstChild<Paragraph>();
                     Run r = p.GetFirstChild<Run>();
-                    setRunText(r, context);
+                    this.SetRunText(r, context);
 
-                    RemoveAllChildrenButFirst<Run>(p);
-                    RemoveAllChildrenButFirst<Paragraph>(cell);
+                    this.RemoveAllChildrenButFirst<Run>(p);
+                    this.RemoveAllChildrenButFirst<Paragraph>(cell);
                 }
             }
             else
@@ -113,7 +132,7 @@ namespace Common.WordTemplates
 
                         foreach (SdtElement childSdtElement in this.ClosestDescendants<SdtElement>(clone).ToList())
                         {
-                            TransformElement(childSdtElement, arrayItem);
+                            this.TransformElement(childSdtElement, arrayItem);
                         }
                     }
 
@@ -125,28 +144,18 @@ namespace Common.WordTemplates
                 }
                 else
                 {
-                    foreach (SdtElement childSdtElement in this.ClosestDescendants<SdtElement>(sdtElement).ToList())
+                    if (context == null || !context.Any())
                     {
-                        TransformElement(childSdtElement, context);
+                        sdtElement.Parent.Append(new Paragraph());
+                        sdtElement.Remove();
                     }
-                }
-            }
-        }
-
-        public void Transform(JObject context)
-        {
-            using (WordprocessingDocument doc = WordprocessingDocument.Open(template, true))
-            {
-                MainDocumentPart main = doc.MainDocumentPart;
-
-                foreach (var sdtElement in this.ClosestDescendants<SdtElement>(main.Document))
-                {
-                    this.TransformElement(sdtElement, context);
-                }
-
-                foreach (var sdtElement in main.Document.Descendants<SdtElement>().Reverse())
-                {
-                    this.RemoveContentControl(sdtElement);
+                    else
+                    {
+                        foreach (SdtElement childSdtElement in this.ClosestDescendants<SdtElement>(sdtElement).ToList())
+                        {
+                            this.TransformElement(childSdtElement, context);
+                        }
+                    }
                 }
             }
         }
@@ -186,7 +195,7 @@ namespace Common.WordTemplates
             sdtElement.Remove();
         }
 
-        private void setRunText(Run r, JToken context)
+        private void SetRunText(Run r, JToken context, bool preserveContent = false)
         {
             Text runText = r.GetFirstChild<Text>();
             if (runText == null)
@@ -196,13 +205,25 @@ namespace Common.WordTemplates
             }
             runText.SetAttribute(new OpenXmlAttribute("space", XNamespace.Xml.NamespaceName, "preserve"));
 
+            if (preserveContent && (context == null || context.ToString() == string.Empty))
+            {
+                return;
+            }
             if (context == null)
             {
                 runText.Text = string.Empty;
             }
+            else if (context.Type == JTokenType.Date)
+            {
+                runText.Text = ((DateTime)context).ToString("dd.MM.yyyy");
+            }
+            else if (context.Type == JTokenType.Boolean)
+            {
+                runText.Text = (bool)context ? "☒" : runText.Text;
+            }
             else
             {
-                runText.Text = context.Type == JTokenType.Date ? ((DateTime)context).ToString("dd.MM.yyyy") : context.ToString();
+                runText.Text = context.ToString();
             }
         }
 
