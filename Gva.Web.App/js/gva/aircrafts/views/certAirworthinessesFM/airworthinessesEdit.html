@@ -2,12 +2,12 @@
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editAirworthiness.title"></strong>
-      <div class="pull-right">
+      <div class="pull-right" ng-show="editMode !== 'editReview'">
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editAirworthiness.edit"
           class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteAirworthiness()" text="aircrafts.editAirworthiness.deleteAirworthiness"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !aw.part.reviews.length" >
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && (aw.part.reviews.length === 1 || aw.part.aircraftCertificateType.code === 'AS')" >
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
@@ -19,12 +19,12 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part" readonly="!editMode"></gva-aircraft-cert-airworthiness-fm>
+      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part" readonly="editMode !== 'edit'"></gva-aircraft-cert-airworthiness-fm>
     </div>
   </div>
 
   <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews"></h5>
-  <div ng-show="aw.part.reviews.length">
+  <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length">
     <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
       <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
         <input type="radio" ng-checked="item === currentReview" sc-click="selectReview(item)">
@@ -74,19 +74,26 @@
 
 
 
-  <div class="panel panel-default" style="margin-top: 10px" ng-show="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
+  <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editAirworthiness.review"></strong>
-      <div class="pull-right">
+      <div class="pull-right" ng-show="editMode !== 'edit'">
         <sc-button name="createBtn" btn-click="newReview()" text="aircrafts.editAirworthiness.newReview"
           class="btn btn-primary btn-xs" icon="glyphicon-plus"
-          ng-disabled="currentRating !== lastRating">
+          ng-disabled="lastReview !== currentReview"
+          ng-show="editMode !== 'editReview'">
         </sc-button>
         <sc-button name="editBtn" btn-click="editReview()" text="aircrafts.editAirworthiness.edit"
           class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="editMode !== 'editReview'">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteLastReview()" text="aircrafts.editAirworthiness.deleteLastReview"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove">
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="editMode !== 'editReview'" ng-disabled="aw.part.reviews.length <= 1">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode === 'editReview'">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editAirworthiness.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode === 'editReview'">
         </sc-button>
       </div>
     </div>

@@ -16,7 +16,7 @@
       <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-fm>
     </div>
   </div>
-  <div ng-show="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
+  <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
     <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.review" style="margin-top:10px;"></h5>
     <gva-airworthiness-review name="airworthinessReviewForm" ng-model="aw.part.reviews[0]"></gva-airworthiness-review>
   </div>
