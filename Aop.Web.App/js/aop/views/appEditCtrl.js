@@ -98,17 +98,6 @@
       return $scope.fastSave();
     };
 
-    $scope.generateSTNote = function () {
-      return Aop
-        .generateNote({
-          id: $scope.app.aopApplicationId
-        }, {})
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     //ND
     $scope.connectNDDoc = function () {
       return $state.go('root.apps.edit.docSelect', null, null, { type: 'ndDoc' });
@@ -148,17 +137,6 @@
     $scope.disconnectNDReport = function () {
       $scope.app.ndReportId = undefined;
       return $scope.fastSave();
-    };
-
-    $scope.generateNDReport = function () {
-      return Aop
-        .generateReport({
-          id: $scope.app.aopApplicationId
-        }, {})
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
     };
 
     if (selectDoc.length > 0) {

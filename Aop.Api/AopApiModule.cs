@@ -1,6 +1,7 @@
 ﻿using Aop.Api.Controllers;
 using Aop.Api.Models;
 using Aop.Api.Repositories.Aop;
+using Aop.Api.WordTemplates;
 using Autofac;
 using Common.Data;
 using Common.Http;
@@ -18,6 +19,8 @@ namespace Aop.Api
             moduleBuilder.RegisterType<AppController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AppEmpController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AppNomController>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<DataGenerator>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }
