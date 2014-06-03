@@ -2,18 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AircraftCertRegFMCtrl($scope, Nomenclature) {
-    Nomenclature.query({alias: 'ownerTypes'})
-      .$promise.then(function(ownerTypes){
-        $scope.ownerTypes = ownerTypes;
-      });
+  function AircraftCertRegFMCtrl($scope) {
     $scope.ownerIsOrg = true;
     $scope.operIsOrg = true;
     $scope.lessorIsOrg = true;
 
   }
 
-  AircraftCertRegFMCtrl.$inject = ['$scope', 'Nomenclature'];
+  AircraftCertRegFMCtrl.$inject = ['$scope'];
 
   angular.module('gva').controller('AircraftCertRegFMCtrl', AircraftCertRegFMCtrl);
 }(angular));
