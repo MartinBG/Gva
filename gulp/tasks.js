@@ -2,6 +2,8 @@
 /*global require, module*/
 /*jshint -W097*/ // Use the function form of "use strict".
 var path = require('path');
+var exec = require('child_process').exec;
+var util = require('util');
 
 var _ = require('lodash');
 var gulp = require('gulp');
@@ -58,71 +60,107 @@ function inject(stream, tag) {
   });
 }
 
-function build(config, opts) {
-  var appJs =
-    config.app()
-    .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
-    .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-    .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'app.js')));
+function buildTask(config, opts) {
+  return function () {
+    var appJs =
+      config.app()
+      .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
+      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'app.js')));
 
-  var libJs =
-    config.lib()
-    .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-    .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.js')));
+    var libJs =
+      config.lib()
+      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.js')));
 
-  var libIe8Js =
-    config.lib_ie8()
-    .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-    .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.ie8.js')));
+    var libIe8Js =
+      config.lib_ie8()
+      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.ie8.js')));
 
-  var css =
-    config.css()
-    .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
-    .pipe(plugins['if'](opts.minifyCss, plugins.minifyCss()))
-    .pipe(plugins['if'](opts.bundleCss, plugins.concat(config.cssDir + 'styles.css')));
+    var css =
+      config.css()
+      .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
+      .pipe(plugins['if'](opts.minifyCss, plugins.minifyCss()))
+      .pipe(plugins['if'](opts.bundleCss, plugins.concat(config.cssDir + 'styles.css')));
 
-  var templates = opts.bundleTemplates ?
-    bundleTemplates(config.templates, config.templatesDir + 'templates.js') :
-    rawTemplates(config.templates);
+    var templates = opts.bundleTemplates ?
+      bundleTemplates(config.templates, config.templatesDir + 'templates.js') :
+      rawTemplates(config.templates);
 
-  var assets = opts.relocateAssets ?
-    relocateAssets(config.assets, config.cssDir) :
-    rawAssets(config.assets);
+    var assets = opts.relocateAssets ?
+      relocateAssets(config.assets, config.cssDir) :
+      rawAssets(config.assets);
 
-  return utils.uniqueQueue(
-    appJs,
-    libJs,
-    libIe8Js,
-    css,
-    templates,
-    assets,
-    gulp.src('index.html')
-      .pipe(inject(appJs, 'app.js'))
-      .pipe(inject(libJs, 'lib.js'))
-      .pipe(inject(libIe8Js, 'lib.ie8.js'))
-      .pipe(inject(css, 'styles.css'))
-      .pipe(plugins['if'](opts.bundleTemplates, inject(templates, 'templates.js')))
-  )
-  .pipe(gulp.dest(config.outputDir));
+    return utils.uniqueQueue(
+      appJs,
+      libJs,
+      libIe8Js,
+      css,
+      templates,
+      assets,
+      gulp.src('index.html')
+        .pipe(inject(appJs, 'app.js'))
+        .pipe(inject(libJs, 'lib.js'))
+        .pipe(inject(libIe8Js, 'lib.ie8.js'))
+        .pipe(inject(css, 'styles.css'))
+        .pipe(plugins['if'](opts.bundleTemplates, inject(templates, 'templates.js')))
+    )
+    .pipe(gulp.dest(config.outputDir));
+  };
+}
+
+function packageTask(config, opts) {
+  return function (callback) {
+    exec('git rev-parse HEAD', function (error, stdout) {
+      var revision = stdout.trim();
+
+      var version = config.version + '.0';
+      var fullVersion = version + '#' + revision.substr(0, 6);
+
+      return gulp
+        .src(config.msbuild.projFile)
+        .pipe(plugins.msbuild({
+          configuration: opts.configuration,
+          targets: ['Package'],
+          stdout: true,
+          verbosity: 'minimal',
+          properties: {
+            'PlatformTarget': 'x64',
+            'PackageLocation': util.format(config.msbuild.packageLocation, fullVersion),
+            'DefaultDeployIisAppPath': config.msbuild.iisAppName,
+            'IncludeAppPool': true,
+            'IgnoreDeployManagedRuntimeVersion': true,
+            'AssemblyVersion': version,
+            'FullAssemblyVersion': fullVersion
+          }
+        }))
+        .on('finish', callback);
+    });
+  };
 }
 
 var tasks = {
   clean: function (config) {
-    return gulp
-      .src(config.outputDir, { read: false })
-      .pipe(plugins.clean({ force: true }));
+    return function () {
+      return gulp
+        .src(config.outputDir, { read: false })
+        .pipe(plugins.clean({ force: true }));
+    };
   },
   lint: function (config) {
-    return config.lint()
-      .pipe(plugins.jshint())
-      .pipe(plugins.jshint.reporter('jshint-stylish'))
-      .on('error', plugins.util.log);
+    return function () {
+      return config.lint()
+        .pipe(plugins.jshint())
+        .pipe(plugins.jshint.reporter('jshint-stylish'))
+        .on('error', plugins.util.log);
+    };
   },
   debug: function (config) {
-    return build(config, {});
+    return buildTask(config, {});
   },
-  'debug-bundled': function (config) {
-    return build(config, {
+  bundled: function (config) {
+    return buildTask(config, {
       bundleJs: true,
       bundleCss: true,
       bundleTemplates: true,
@@ -130,7 +168,7 @@ var tasks = {
     });
   },
   release: function (config) {
-    return build(config, {
+    return buildTask(config, {
       minifyJs: true,
       bundleJs: true,
       minifyCss: true,
@@ -140,9 +178,19 @@ var tasks = {
     });
   },
   design: function (config) {
-    return build(config, {
+    return buildTask(config, {
       minifyJs: true,
       bundleJs: true
+    });
+  },
+  'package-debug': function (config) {
+    return packageTask(config, {
+      configuration: 'Debug'
+    });
+  },
+  'package-release': function (config) {
+    return packageTask(config, {
+      configuration: 'Release'
     });
   }
 };

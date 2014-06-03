@@ -19,6 +19,7 @@
     "gulp-inject": "georgiyordanov/gulp-inject#bec209712cf594c78505bc9638ae33b9b89581de",
     "gulp-debug": "^0.3.0",
     "gulp-rename": "^1.2.0",
+    "gulp-msbuild": "^0.1.6",
     "streamqueue": "0.1.1",
     "unique-stream": "^1.0.0",
     "jshint-stylish": "georgiyordanov/jshint-stylish#12910209e597490536454a1558d71f1f8f62f27b",

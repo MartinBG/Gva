@@ -1,14 +1,18 @@
 'use strict';
 /*global require, console*/
 /*jshint -W097*/ // Use the function form of "use strict".
-var _ = require('lodash');
-
 var gulp = require('gulp');
 
 var utils = require('../gulp/utils');
 var tasks = require('../gulp/tasks');
 
 var config = {
+  version: '1.0.0',
+  msbuild: {
+    projFile: '../Mosv.Web.Host/Mosv.Web.Host.csproj',
+    iisAppName: 'Mosv',
+    packageLocation: '../build/mosv/mosv%s.zip' //location is relative to the csproj file
+  },
   outputDir: '../Mosv.Web.Host/App/',
   jsDir: 'js/',
   cssDir: 'css/',
@@ -140,12 +144,14 @@ var config = {
   }
 };
 
-gulp.task('clean', _.partial(tasks.clean, config));
-gulp.task('lint', _.partial(tasks.lint, config));
-gulp.task('debug', ['lint', 'clean'], _.partial(tasks.debug, config));
-gulp.task('debug-bundled', ['lint', 'clean'], _.partial(tasks['debug-bundled'], config));
-gulp.task('release', ['lint', 'clean'], _.partial(tasks.release, config));
-gulp.task('design', ['lint', 'clean'], _.partial(tasks.design, config));
+gulp.task('clean'          ,                    tasks.clean             (config));
+gulp.task('lint'           ,                    tasks.lint              (config));
+gulp.task('debug'          , ['lint', 'clean'], tasks.debug             (config));
+gulp.task('bundled'        , ['lint', 'clean'], tasks.bundled           (config));
+gulp.task('release'        , ['lint', 'clean'], tasks.release           (config));
+gulp.task('design'         , ['lint', 'clean'], tasks.design            (config));
+gulp.task('package-debug'  , ['bundled']      , tasks['package-debug']  (config));
+gulp.task('package-release', ['release']      , tasks['package-release'](config));
 
 gulp.on('err', function (e) {
   console.log(e.err.stack);
