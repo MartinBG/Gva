@@ -20,7 +20,7 @@
       },
       link: function (scope, element, attrs) {
         scope.text = l10n.get(attrs.text);
-        scope.class = 'text-' + attrs.class.match(/active|success|info|warning|danger|muted/);
+        scope['class'] = 'text-' + attrs['class'].match(/active|success|info|warning|danger|muted/);
       }
     };
   }
