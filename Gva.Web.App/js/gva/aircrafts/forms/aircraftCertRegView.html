@@ -43,11 +43,11 @@
       <div class="row">
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.owner"></label>
-          <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.owner.name}}" />
+          <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.ownerIsOrg? model.ownerOrganization.name : model.ownerPerson.name}}" />
         </div>
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.oper"></label>
-          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operator.name}}" />
+          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operIsOrg? model.operOrganization.name : model.operPerson.name}}" />
         </div>
       </div>
       <div class="row">
