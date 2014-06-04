@@ -23,29 +23,31 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Delete, "api/corrs/{id}", "Correspondent", "DeleteCorrespondent");
 
             //docs
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"            , "Doc", "CreateChildDoc"); //?
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setCasePart"       , "Doc", "UpdateDocCasePartType");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setDocType"        , "Doc", "UpdateTechDoc");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/register"          , "Doc", "RegisterDoc");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/manualRegister"    , "Doc", "ManualRegisterDoc");
-            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/registerIndex"     , "Doc", "GetDocRegisterIndex");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/next"              , "Doc", "SetNextStatus");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/reverse"           , "Doc", "ReverseStatus");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/cancel"            , "Doc", "CancelDoc");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/workflow"          , "Doc", "CreateDocWorkflow");
-            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}/workflow/{itemId}" , "Doc", "DeleteDocWorkflow");
-            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/stages"            , "Doc", "GetCurrentDocElectronicServiceStage");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages/edit"       , "Doc", "UpdateCurrentDocElectronicServiceStage");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages/end"        , "Doc", "EndCurrentDocElectronicServiceStage");
-            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}/stages"            , "Doc", "DeleteCurrentDocElectronicServiceStage");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages"            , "Doc", "CreateDocElectronicServiceStage");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/markAsRead"        , "Doc", "MarkAsRead");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/markAsUnread"      , "Doc", "MarkAsUnread");
-            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                   , "Doc", "GetDoc");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                   , "Doc", "UpdateDoc");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createTicket"      , "Doc", "CreateDocFileTicket");
-            this.MapRoute(config, HttpMethod.Get   , "api/docs"                        , "Doc", "GetDocs");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs"                        , "Doc", "CreateDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"              , "Doc", "CreateChildDoc"); //?
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createAcknowledge"   , "Doc", "CreateChildAcknowledgeDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createNotAcknowledge", "Doc", "CreateChildNotAcknowledgeDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setCasePart"         , "Doc", "UpdateDocCasePartType");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setDocType"          , "Doc", "UpdateTechDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/register"            , "Doc", "RegisterDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/manualRegister"      , "Doc", "ManualRegisterDoc");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/registerIndex"       , "Doc", "GetDocRegisterIndex");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/next"                , "Doc", "SetNextStatus");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/reverse"             , "Doc", "ReverseStatus");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/cancel"              , "Doc", "CancelDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/workflow"            , "Doc", "CreateDocWorkflow");
+            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}/workflow/{itemId}"   , "Doc", "DeleteDocWorkflow");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/stages"              , "Doc", "GetCurrentDocElectronicServiceStage");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages/edit"         , "Doc", "UpdateCurrentDocElectronicServiceStage");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages/end"          , "Doc", "EndCurrentDocElectronicServiceStage");
+            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}/stages"              , "Doc", "DeleteCurrentDocElectronicServiceStage");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/stages"              , "Doc", "CreateDocElectronicServiceStage");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/markAsRead"          , "Doc", "MarkAsRead");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/markAsUnread"        , "Doc", "MarkAsUnread");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                     , "Doc", "GetDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                     , "Doc", "UpdateDoc");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createTicket"        , "Doc", "CreateDocFileTicket");
+            this.MapRoute(config, HttpMethod.Get   , "api/docs"                          , "Doc", "GetDocs");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs"                          , "Doc", "CreateDoc");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)

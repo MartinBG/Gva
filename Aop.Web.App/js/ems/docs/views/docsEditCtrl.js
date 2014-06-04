@@ -9,6 +9,7 @@
     $state,
     $stateParams,
     Doc,
+    Aop,
     DocStage,
     DocStatus,
     doc
@@ -187,11 +188,32 @@
       return $scope.attachDocInternal('Remark');
     };
 
-    $scope.attachReceiptAcknowledgeDoc = function () {
+    $scope.attachAcknowledgeDoc = function () {
       return Doc
-        .createReceiptDoc({
-          id: doc.docId,
-          isDocAcknowledged: true
+        .createChildAcknowledge({
+          id: doc.docId
+        }, {})
+        .$promise
+        .then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
+    $scope.attachNotAcknowledgeDoc = function () {
+      return Doc
+        .createChildNotAcknowledge({
+          id: doc.docId
+        }, {})
+        .$promise
+        .then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
+    $scope.attachNotAcknowledgeDoc = function () {
+      return Aop
+        .createNotAcknowledgeDoc({
+          id: doc.docId
         }, {})
         .$promise
         .then(function (result) {
@@ -336,6 +358,7 @@
     '$state',
     '$stateParams',
     'Doc',
+    'Aop',
     'DocStage',
     'DocStatus',
     'doc'

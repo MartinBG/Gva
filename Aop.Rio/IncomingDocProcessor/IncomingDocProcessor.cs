@@ -108,7 +108,7 @@ namespace Aop.Rio.IncomingDocProcessor
                     }
 
                     //string electronicServiceFileTypeUri = String.Format("{0}-{1}", rioApplication.DocumentTypeURI.RegisterIndex, rioApplication.DocumentTypeURI.BatchNumber);
-                    string electronicServiceFileTypeUri = "0000-0001";
+                    string electronicServiceFileTypeUri = "0010-aop";
                     int docTypeId = this.unitOfWork.DbContext.Set<DocType>().Single(e => e.ElectronicServiceFileTypeUri == electronicServiceFileTypeUri).DocTypeId;
 
                     //Initial Doc

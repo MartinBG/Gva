@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>9</ActiveSheet>
+  <ActiveSheet>5</ActiveSheet>
   <FirstVisibleSheet>1</FirstVisibleSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
@@ -487,28 +487,28 @@
     <Cell ss:StyleID="s63"><Data ss:Type="Number">201</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Документ УРИ 0010-004686</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">R-0001</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-0001</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-aop</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">401</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-000001</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000001</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">402</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-000002</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000002</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">403</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-003010</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
   </Table>
@@ -522,7 +522,7 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>5</ActiveRow>
+     <ActiveRow>2</ActiveRow>
      <ActiveCol>3</ActiveCol>
     </Pane>
    </Panes>
@@ -720,7 +720,7 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s88"><Data ss:Type="String">0000-000001</Data></Cell>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">0010-000001</Data></Cell>
     <Cell ss:StyleID="s88"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="Default"/>
@@ -738,7 +738,7 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s88"><Data ss:Type="String">0000-000002</Data></Cell>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">0010-000002</Data></Cell>
     <Cell ss:StyleID="s88"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
     <Cell ss:StyleID="Default"/>
@@ -756,7 +756,7 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s88"><Data ss:Type="String">0000-003010</Data></Cell>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
     <Cell ss:StyleID="Default"/>
@@ -860,7 +860,7 @@
     <Cell ss:StyleID="s64"/>
     <Cell ss:StyleID="s64"/>
     <Cell ss:StyleID="s88"><Data ss:Type="String">R-0001</Data></Cell>
-    <Cell ss:StyleID="Default"><Data ss:Type="String">0000-0001</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">0010-aop</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">03</Data></Cell>
     <Cell ss:StyleID="s88"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
     <Cell ss:StyleID="s86"/>
@@ -881,11 +881,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>29</ActiveRow>
-     <ActiveCol>8</ActiveCol>
+     <ActiveRow>18</ActiveRow>
+     <ActiveCol>10</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -914,8 +915,7 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>15</ActiveRow>
-     <ActiveCol>1</ActiveCol>
+     <ActiveRow>38</ActiveRow>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1105,7 +1105,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>

@@ -10,6 +10,8 @@
           resolution: 'Резолюция',
           remark: 'Забележка',
           task: 'Задача',
+          acknowledgeDoc: 'Съобщение за успешно приемане',
+          notAcknowledgeDoc: 'Съобщение за неуспешно приемане',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
