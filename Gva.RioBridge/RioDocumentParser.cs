@@ -40,12 +40,16 @@ namespace Gva.Rio.PortalBridge
 
         public Common.Rio.PortalBridge.RioObjects.RioApplication XmlDeserializeApplication(string xmlContent)
         {
-            Type applicationType = this.emsUtils.GetDocumentMetadataFromXml(xmlContent).RioObjectType;
+            RioDocumentMetadata metaData = this.emsUtils.GetDocumentMetadataFromXml(xmlContent);
+            Type applicationType = metaData.RioObjectType;
             object rioApplication = this.documentSerializer.XmlDeserializeFromString(applicationType, xmlContent);
             var mappedApplication = (Common.Rio.PortalBridge.RioObjects.RioApplication)AutoMapper.Mapper.Map(rioApplication, typeof(IHeaderFooterDocumentsRioApplication), typeof(Common.Rio.PortalBridge.RioObjects.RioApplication));
+
             mappedApplication.OriginalApplication = rioApplication;
             mappedApplication.OriginalApplicationType = applicationType;
             mappedApplication.DocFileTypeAlias = applicationType.Namespace.Replace('_', '-');
+            mappedApplication.SignatureXPath = metaData.SignatureXPath;
+            mappedApplication.SignatureXPathNamespaces = metaData.SignatureXPathNamespaces;
             return mappedApplication;
         }
 

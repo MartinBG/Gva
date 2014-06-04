@@ -223,14 +223,14 @@ namespace Gva.Rio.IncomingDocProcessor
             }
             catch (Exception ex)
             {
+                logger.Error("IncommingDocProcessor Exception: " + Helper.GetDetailedExceptionInfo(ex));
+
                 var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
                 this.unitOfWork.DbContext.Entry(incomingDoc).Reload();
 
                 incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
 
                 this.unitOfWork.Save();
-
-                logger.Error("General error", ex);
             }
         }
 

@@ -43,5 +43,9 @@ namespace Common.Rio.PortalBridge.RioObjects
         public Type OriginalApplicationType { get; set; }
 
         public string DocFileTypeAlias { get; set; }
+
+        public string SignatureXPath { get; set; }
+
+        public IDictionary<string, string> SignatureXPathNamespaces { get; set; }
     }
 }

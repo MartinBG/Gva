@@ -85,7 +85,7 @@ namespace Aop.Rio.Jobs
             }
             catch (Exception ex)
             {
-                logger.Error("General error", ex);
+                logger.Error("General error: " + Helper.GetDetailedExceptionInfo(ex));
             }
         }
     }

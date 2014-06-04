@@ -16,15 +16,17 @@ namespace Common.Utils
             HttpContext context = HttpContext.Current;
             if (context == null)
             {
-                return;
+                builder.Append(Guid.Empty);
             }
-
-            if (!context.Items.Contains(RequestIdKey))
+            else
             {
-                context.Items.Add(RequestIdKey, Guid.NewGuid());
-            }
+                if (!context.Items.Contains(RequestIdKey))
+                {
+                    context.Items.Add(RequestIdKey, Guid.NewGuid());
+                }
 
-            builder.Append(context.Items[RequestIdKey]);
+                builder.Append(context.Items[RequestIdKey]);
+            }
         }
     }
 }

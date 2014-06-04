@@ -159,5 +159,28 @@ namespace Common.Extensions
             byte[] hashBytes = cryptoTransformSHA1.ComputeHash(content);
             return BitConverter.ToString(hashBytes).Replace("-", "");
         }
+
+        public static string GetDetailedExceptionInfo(Exception ex)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            if (ex != null)
+            {
+                GetExceptionInfo(strBuilder, ex);
+            }
+
+            return strBuilder.ToString();
+        }
+
+        private static void GetExceptionInfo(StringBuilder stringBuilder, Exception exception)
+        {
+            stringBuilder.AppendFormat("Exception type: {0}\n", exception.GetType().FullName);
+            stringBuilder.AppendFormat("Message: {0}\n", exception.Message);
+            stringBuilder.AppendFormat("Stack trace:\n{0}\n", exception.StackTrace);
+            if (exception.InnerException != null)
+            {
+                stringBuilder.AppendFormat("\n\nInner Exception:\n");
+                GetExceptionInfo(stringBuilder, exception.InnerException);
+            }
+        }
     }
 }
