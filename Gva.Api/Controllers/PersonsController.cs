@@ -23,6 +23,8 @@ using Ghostscript.NET;
 using Ghostscript.NET.Rasterizer;
 using System.Drawing;
 using System;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Gva.Api.Controllers
 {
@@ -435,9 +437,14 @@ namespace Gva.Api.Controllers
 
             using (MemoryStream m1 = new MemoryStream())
             {
-                using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", fileKey))
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
                 {
-                    blobStream.CopyTo(m1);
+                    connection.Open();
+
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fileKey))
+                    {
+                        blobStream.CopyTo(m1);
+                    }
                 }
 
                 Bitmap bitmapImg;

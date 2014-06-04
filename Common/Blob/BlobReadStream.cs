@@ -10,7 +10,6 @@ namespace Common.Blob
 {
     public class BlobReadStream : Stream
     {
-        private string connectionStringName;
         private SqlConnection connection;
         private SqlCommand cmdReadChunk;
         private SqlDataReader chunkReader;
@@ -18,14 +17,14 @@ namespace Common.Blob
         private long readerOffset = 0;
 
         public BlobReadStream(
-            string connectionStringName,
+            SqlConnection connection,
             string schemaName,
             string tableName,
             string blobColumn,
             string keyColumn,
             object keyValue)
         {
-            this.connectionStringName = connectionStringName;
+            this.connection = connection;
             this.cmdReadChunk = new SqlCommand(
                 string.Format(@"SELECT [{2}] FROM [{0}].[{1}] WHERE [{3}] = @key", schemaName, tableName, blobColumn, keyColumn));
             this.cmdReadChunk.Parameters.AddWithValue("@key", keyValue);
@@ -64,12 +63,6 @@ namespace Common.Blob
             }
         }
 
-        private void CreateConnection()
-        {
-            this.connection = new SqlConnection(ConfigurationManager.ConnectionStrings[this.connectionStringName].ConnectionString);
-            this.cmdReadChunk.Connection = this.connection;
-        }
-
         private int GetBytes(byte[] buffer, int offset, int count)
         {
             int read = (int)this.chunkReader.GetBytes(0, this.readerOffset, buffer, offset, count);
@@ -82,9 +75,8 @@ namespace Common.Blob
         {
             if (this.chunkReader == null)
             {
-                this.CreateConnection();
+                this.cmdReadChunk.Connection = this.connection;
 
-                this.connection.Open();
                 this.chunkReader = this.cmdReadChunk.ExecuteReader(CommandBehavior.SequentialAccess);
                 this.chunkReader.Read();
             }
@@ -94,9 +86,8 @@ namespace Common.Blob
         {
             if (this.chunkReader == null)
             {
-                this.CreateConnection();
+                this.cmdReadChunk.Connection = this.connection;
 
-                await this.connection.OpenAsync(cancellationToken);
                 this.chunkReader = await this.cmdReadChunk.ExecuteReaderAsync(CommandBehavior.SequentialAccess, cancellationToken);
                 await this.chunkReader.ReadAsync(cancellationToken);
             }
@@ -138,9 +129,8 @@ namespace Common.Blob
         {
             try
             {
-                if (disposing && this.connection != null && this.cmdReadChunk != null && this.chunkReader != null)
+                if (disposing && this.cmdReadChunk != null && this.chunkReader != null)
                 {
-                    using (this.connection)
                     using (this.cmdReadChunk)
                     using (this.chunkReader)
                     {
@@ -149,7 +139,6 @@ namespace Common.Blob
             }
             finally
             {
-                this.connection = null;
                 this.cmdReadChunk = null;
                 this.chunkReader = null;
                 base.Dispose(disposing);

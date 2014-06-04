@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
+    <Compile Include="Controllers\SignController.cs" />
     <Compile Include="Controllers\NomController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
@@ -138,6 +139,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common %28Common\Common%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SigningTools\SigningTools.csproj">
+      <Project>{8d76f798-54dd-4268-b514-acc40e2f00a0}</Project>
+      <Name>SigningTools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

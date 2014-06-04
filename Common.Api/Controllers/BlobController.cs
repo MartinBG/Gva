@@ -23,8 +23,13 @@ namespace Common.Api.Controllers
                 {
                     using (outputStream)
                     {
-                        var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", fileKey);
-                        await blobStream.CopyToAsync(outputStream);
+                        using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                        {
+                            connection.Open();
+
+                            var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fileKey);
+                            await blobStream.CopyToAsync(outputStream);
+                        }
                     }
                 });
             result.Content.Headers.ContentType =

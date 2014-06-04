@@ -21,6 +21,10 @@ namespace Common.Api
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}/{id}"        , "Nom", "GetNom", new Dictionary<string, object>() { {"id", new IntRouteConstraint() } });
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}/{valueAlias}", "Nom", "GetNom");
             this.MapRoute(config, HttpMethod.Get, "api/nomenclatures/{alias}"             , "Nom", "GetNoms");
+
+            // signs
+            this.MapRoute(config, HttpMethod.Post, "api/signXml", "Sign", "PostSignXml");
+            this.MapRoute(config, HttpMethod.Post, "api/signOffice", "Sign", "PostSignOffice");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, IDictionary<string, object> paramConstraints = null)
