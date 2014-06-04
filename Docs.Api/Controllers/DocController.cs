@@ -22,7 +22,14 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-
+using System.Data.Entity;
+using Common.Api.UserContext;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Configuration;
+using Newtonsoft.Json;
+using System.Data.SqlClient;
+using Common.Blob;
 
 namespace Docs.Api.Controllers
 {
@@ -1000,19 +1007,19 @@ namespace Docs.Api.Controllers
 
                 if (editable != null)
                 {
-                    string contentStr =  JsonConvert.SerializeObject(doc.JObject);
+                    string contentStr = JsonConvert.SerializeObject(doc.JObject);
                     byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
 
-                    //? aop replace with stream
-                    List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
-                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", Guid.NewGuid().ToString().Replace("-", string.Empty))); //to bypass hash unique constraint in db
-                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@size", content.LongCount()));
-                    sqlParams.Add(new System.Data.SqlClient.SqlParameter("@content", content));
-
-                    this.docRepository.SqlQuery<object>(
-                        @"UPDATE [dbo].[Blobs] SET [Hash] = @hash, [Size] = @size, [Content] = @content WHERE [Key] = @key",
-                        sqlParams).FirstOrDefault();
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    {
+                        connection.Open();
+                        using (var blobWriter = new BlobWriter(connection))
+                        using (var stream = blobWriter.OpenStream())
+                        {
+                            stream.Write(content, 0, content.Length);
+                            editable.DocFileContentId = blobWriter.GetBlobKey();
+                        }
+                    }
                 }
 
                 List<DocFileDO> allDocFiles = doc.DocFiles;

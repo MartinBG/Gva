@@ -66,12 +66,14 @@ namespace Aop.Api.Controllers
             }
 
             DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+            byte[] content;
 
-            List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-            sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
-
-            //? aop replace with stream
-            byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
+            using (MemoryStream m1 = new MemoryStream())
+            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+            {
+                blobStream.CopyTo(m1);
+                content = m1.ToArray();
+            }
 
             string contentToString = System.Text.Encoding.UTF8.GetString(content);
 
@@ -293,7 +295,7 @@ namespace Aop.Api.Controllers
                     null,
                     this.userContext);
 
-                Guid key = Guid.NewGuid();
+                Guid blobKey;
 
                 string emptyChecklist = JsonConvert.SerializeObject(new
                 {
@@ -306,15 +308,18 @@ namespace Aop.Api.Controllers
 
                 if (copy || correct)
                 {
-                    DocFile editable = this.unitOfWork.DbContext.Set<DocFile>()
-                        .FirstOrDefault(e => e.DocId == checklistId && e.DocFileOriginType.Alias == "EditableFile");
+                    DocFile editable = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocId == checklistId && e.DocFileOriginType.Alias == "EditableFile");
 
                     if (editable != null)
                     {
-                        List<System.Data.SqlClient.SqlParameter> sp = new List<System.Data.SqlClient.SqlParameter>();
-                        sp.Add(new System.Data.SqlClient.SqlParameter("@key", editable.DocFileContentId));
+                        byte[] contentToBeCopied;
 
-                        byte[] contentToBeCopied = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sp).FirstOrDefault();
+                        using (MemoryStream m1 = new MemoryStream())
+                        using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                        {
+                            blobStream.CopyTo(m1);
+                            contentToBeCopied = m1.ToArray();
+                        }
 
                         string contentToString = System.Text.Encoding.UTF8.GetString(contentToBeCopied);
 
@@ -333,19 +338,16 @@ namespace Aop.Api.Controllers
 
                 byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
 
-                List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", key));
-                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@hash", Guid.NewGuid().ToString().Replace("-", string.Empty))); //to bypass hash unique constraint in db
-                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@size", content.LongCount()));
-                sqlParams.Add(new System.Data.SqlClient.SqlParameter("@content", content));
-
-                this.docRepository.SqlQuery<decimal>(
-@"
-INSERT INTO [dbo].[Blobs] ([Key], [Hash], [Size], [Content], [IsDeleted]) 
-    VALUES (@key, @hash, @size , @content, 0);
-
-SELECT SCOPE_IDENTITY();
-", sqlParams).FirstOrDefault();
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                {
+                    connection.Open();
+                    using (var blobWriter = new BlobWriter(connection))
+                    using (var stream = blobWriter.OpenStream())
+                    {
+                        stream.Write(content, 0, content.Length);
+                        blobKey = blobWriter.GetBlobKey();
+                    }
+                }
 
                 DocFileKind privateKind = this.unitOfWork.DbContext.Set<DocFileKind>()
                     .FirstOrDefault(e => e.Alias == "PrivateAttachedFile");
@@ -361,7 +363,7 @@ SELECT SCOPE_IDENTITY();
                     "Checklist",
                     "Checklist",
                     "",
-                    key,
+                    blobKey,
                     this.userContext);
 
                 this.unitOfWork.Save();
@@ -524,10 +526,14 @@ SELECT SCOPE_IDENTITY();
             DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
                 .FirstOrDefault(df => df.DocFileOriginTypeId.HasValue && df.DocFileOriginType.Alias == "EditableFile");
 
-            List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-            sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", docFile.DocFileContentId));
+            byte[] content;
 
-            byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
+            using (MemoryStream m1 = new MemoryStream())
+            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+            {
+                blobStream.CopyTo(m1);
+                content = m1.ToArray();
+            }
 
             JObject note = JObject.Parse(System.Text.Encoding.UTF8.GetString(content));
             JObject json = this.dataGenerator.Generate(note);
@@ -699,10 +705,14 @@ SELECT SCOPE_IDENTITY();
             DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
                 .FirstOrDefault(df => df.DocFileOriginTypeId.HasValue && df.DocFileOriginType.Alias == "EditableFile");
 
-            List<System.Data.SqlClient.SqlParameter> sqlParams = new List<System.Data.SqlClient.SqlParameter>();
-            sqlParams.Add(new System.Data.SqlClient.SqlParameter("@key", docFile.DocFileContentId));
+            byte[] content;
 
-            byte[] content = this.docRepository.SqlQuery<byte[]>(@"SELECT [Content] FROM [dbo].[Blobs] WHERE [Key] = @key", sqlParams).FirstOrDefault();
+            using (MemoryStream m1 = new MemoryStream())
+            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+            {
+                blobStream.CopyTo(m1);
+                content = m1.ToArray();
+            }
 
             JObject note = JObject.Parse(System.Text.Encoding.UTF8.GetString(content));
             JObject json = this.dataGenerator.Generate(note);
