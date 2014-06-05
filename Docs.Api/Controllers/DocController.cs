@@ -22,14 +22,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Data.Entity;
-using Common.Api.UserContext;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Configuration;
-using Newtonsoft.Json;
-using System.Data.SqlClient;
-using Common.Blob;
 
 namespace Docs.Api.Controllers
 {
