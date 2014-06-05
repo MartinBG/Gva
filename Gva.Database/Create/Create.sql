@@ -103,6 +103,7 @@ GO
 :r $(rootPath)\"..\Insert\Noms\easaTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\airworthinessCertificateTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\airworthinessReviewTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\aircraftRemovalReasonsFm.sql"
 
 ---------------------------------------------------------------
 -- Organizations test noms

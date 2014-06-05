@@ -200,3 +200,5 @@ INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (102, N'Номер на ч
 GO
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (103, N'Статут на част', N'specializedQuestions')
 GO
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (104, N'Причина за дерегистрация на ВС', N'aircraftRemovalReasonsFm')
+GO
