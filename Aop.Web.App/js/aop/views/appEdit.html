@@ -54,7 +54,7 @@
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
               <a sc-click="connectToDoc('stDoc')" ng-if="!app.stDocRelation.docRelationId" style="cursor: pointer;">свържи</a>
-              <a sc-click="disconnectDoc(['stDocId', 'stChecklistId', 'stNoteId'])" ng-if="app.stDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>
+              <a sc-click="disconnectDoc(['stDocId', 'stChecklistId', 'stNoteId'])" ng-if="app.stDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="readFedForFirstStage()" ng-if="app.stDocRelation.docRelationId" style="cursor: pointer;">прочети .fed</a>
             </div>
           </div>
@@ -141,7 +141,7 @@
             </div>
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
               <a sc-click="connectToDoc('ndDoc')" ng-if="!app.ndDocRelation.docRelationId" style="cursor: pointer;">свържи</a>
-              <a sc-click="disconnectDoc(['ndDocId', 'ndChecklistId', 'ndReportId'])" ng-if="app.ndDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>
+              <a sc-click="disconnectDoc(['ndDocId', 'ndChecklistId', 'ndReportId'])" ng-if="app.ndDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="readFedForSecondStage()" ng-if="app.ndDocRelation.docRelationId" style="cursor: pointer;">прочети .fed</a>
             </div>
           </div>

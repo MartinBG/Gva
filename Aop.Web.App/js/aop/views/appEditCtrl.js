@@ -23,7 +23,7 @@
     };
 
     $scope.readFedForFirstStage = function remove() {
-      return Aop.readFedForFirstStage({ id: $scope.app.aopApplicationId })
+      return Aop.readFedForFirstStage({ id: $scope.app.aopApplicationId }, {})
         .$promise
         .then(function (data) {
           return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
@@ -31,7 +31,7 @@
     };
 
     $scope.readFedForSecondStage = function remove() {
-      return Aop.readFedForSecondStage({ id: $scope.app.aopApplicationId })
+      return Aop.readFedForSecondStage({ id: $scope.app.aopApplicationId }, {})
         .$promise
         .then(function (data) {
           return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
