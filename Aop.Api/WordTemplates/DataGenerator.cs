@@ -6,30 +6,75 @@ namespace Aop.Api.WordTemplates
 {
     public class DataGenerator : IDataGenerator
     {
-        public JObject Generate(JObject note)
+        public JObject GenerateNote(
+            JObject source,
+            string outgoingNum = "......................................",
+            string date = ".........................................",
+            string secretaryName = "[СЕКРЕТАР]",
+            string secretaryPosition = "/Определен със Заповед № .................../",
+            string coordinatorName = "",
+            string coordinatorPosition = "",
+            string madeByName = "",
+            string madeByPosition = ""
+            )
         {
             var json = new
             {
-                outgoingNum = "......................................",
-                date = ".........................................",
-                uniqueNum = "РОП 00106-2013-0020",
-                caseManagement = "ПК-АК-39/07.11.2013 г.",
-                paragraph1 = this.GetParagraph1(note.Get<JObject>("paragraph1")),
-                paragraph2 = this.GetParagraph2(note.Get<JObject>("paragraph2")),
-                paragraph4 = this.GetParagraph4(note.Get<JObject>("paragraph4")),
-                paragraph5 = this.GetParagraph5(note.Get<JObject>("paragraph5")),
-                paragraph6 = this.GetParagraph6(note.Get<JObject>("paragraph6")),
-                secretary = new { name = "ИВО КАЦАРОВ", position = "/Определен със Заповед № РД-10/27.02.2012 г./" },
-                director = new { name = "МИГЛЕНА ПАВЛОВА" },
+                outgoingNum = outgoingNum,
+                date = date,
+                paragraph1 = this.GetParagraph1(source.Get<JObject>("paragraph1")),
+                paragraph2 = this.GetParagraph2(source.Get<JObject>("paragraph2")),
+                paragraph4 = this.GetParagraph4(source.Get<JObject>("paragraph4")),
+                paragraph5 = this.GetParagraph5(source.Get<JObject>("paragraph5")),
+                paragraph6 = this.GetParagraph6(source.Get<JObject>("paragraph6")),
+                secretary = new { name = secretaryName, position = secretaryPosition },
                 coordinators = new object[]
                 {
-                    new { name = "Валентин Панчев", position = "началник-сектор “Предварителен контрол на процедури, финансирани с европейски средства" },
-                    new { name = "Галя Манасиева", position = "директор “МАКОП”" }
+                    new { name = coordinatorName, position = coordinatorPosition }
                 },
                 madeBy = new
                 {
-                    name = "Деница Асенова",
-                    position = "старши сътрудник сектор „ПКФЕС“"
+                    name = madeByName,
+                    position = madeByPosition
+                }
+            };
+
+            return JObject.FromObject(json);
+        }
+
+        public JObject GenerateReport(
+            JObject source,
+            string outgoingNum = "......................................",
+            string date = ".........................................",
+            string uniqueNum = "",
+            string caseManagement = "",
+            string directorName = "[ДИРЕКТОР]",
+            string coordinatorName = "",
+            string coordinatorPosition = "",
+            string madeByName = "",
+            string madeByPosition = ""
+            )
+        {
+            var json = new
+            {
+                outgoingNum = outgoingNum,
+                date = date,
+                uniqueNum = uniqueNum,
+                caseManagement = caseManagement,
+                paragraph1 = this.GetParagraph1(source.Get<JObject>("paragraph1")),
+                paragraph2 = this.GetParagraph2(source.Get<JObject>("paragraph2")),
+                paragraph4 = this.GetParagraph4(source.Get<JObject>("paragraph4")),
+                paragraph5 = this.GetParagraph5(source.Get<JObject>("paragraph5")),
+                paragraph6 = this.GetParagraph6(source.Get<JObject>("paragraph6")),
+                director = new { name = directorName },
+                coordinators = new object[]
+                {
+                    new { name = coordinatorName, position = coordinatorPosition }
+                },
+                madeBy = new
+                {
+                    name = madeByName,
+                    position = madeByPosition
                 }
             };
 

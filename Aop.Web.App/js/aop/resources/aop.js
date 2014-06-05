@@ -22,6 +22,14 @@
                 action: '',
                 identifier: ''
               }
+            },
+            'generateNote': {
+              method: 'POST',
+              url: '/api/aop/apps/:id/note'
+            },
+            'generateReport': {
+              method: 'POST',
+              url: '/api/aop/apps/:id/report'
             }
           });
       }]);

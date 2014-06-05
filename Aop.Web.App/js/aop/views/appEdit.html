@@ -79,7 +79,7 @@
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
               <a sc-click="connectToDoc('stNote')" ng-if="!app.stNoteRelation.docRelationId">свържи</a>
               <a sc-click="disconnectDoc(['stNoteId'])" ng-if="app.stNoteRelation.docRelationId">разкачи</a>&nbsp|
-              <a target="_self" ng-href="/api/aop/apps/{{app.aopApplicationId}}/note">генерирай</a>
+              <a sc-click="generateSTNote()" ng-if="app.stChecklistRelation.docRelationId && !app.stNoteRelation.docRelationId">генерирай</a>
             </div>
           </div>
 
@@ -165,7 +165,7 @@
             <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
               <a sc-click="connectToDoc('ndReport')" ng-if="!app.ndReportRelation.docRelationId">свържи</a>
               <a sc-click="disconnectDoc(['ndReportId'])" ng-if="app.ndReportRelation.docRelationId">разкачи</a>&nbsp|
-              <a target="_self" ng-href="/api/aop/apps/{{app.aopApplicationId}}/report">генерирай</a>
+              <a sc-click="generateNDReport()" ng-if="app.ndChecklistRelation.docRelationId && !app.ndReportRelation.docRelationId">генерирай</a>
             </div>
           </div>
 

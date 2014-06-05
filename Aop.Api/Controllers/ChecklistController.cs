@@ -1,7 +1,6 @@
 ﻿using Aop.Api.Models;
 using Common.Api.UserContext;
 using Common.Blob;
-using Common.Utils;
 using Common.WordTemplates;
 using Docs.Api.Models;
 using Newtonsoft.Json;
@@ -13,15 +12,11 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Web.Http;
 
 namespace Aop.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ChecklistController : ApiController
     {
         private Common.Data.IUnitOfWork unitOfWork;
@@ -66,13 +61,19 @@ namespace Aop.Api.Controllers
             }
 
             DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+
             byte[] content;
 
-            using (MemoryStream m1 = new MemoryStream())
-            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                blobStream.CopyTo(m1);
-                content = m1.ToArray();
+                connection.Open();
+
+                using (MemoryStream m1 = new MemoryStream())
+                using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                {
+                    blobStream.CopyTo(m1);
+                    content = m1.ToArray();
+                }
             }
 
             string contentToString = System.Text.Encoding.UTF8.GetString(content);
@@ -314,11 +315,16 @@ namespace Aop.Api.Controllers
                     {
                         byte[] contentToBeCopied;
 
-                        using (MemoryStream m1 = new MemoryStream())
-                        using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                        using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
                         {
-                            blobStream.CopyTo(m1);
-                            contentToBeCopied = m1.ToArray();
+                            connection.Open();
+
+                            using (MemoryStream m1 = new MemoryStream())
+                            using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                            {
+                                blobStream.CopyTo(m1);
+                                contentToBeCopied = m1.ToArray();
+                            }
                         }
 
                         string contentToString = System.Text.Encoding.UTF8.GetString(contentToBeCopied);
@@ -390,387 +396,368 @@ namespace Aop.Api.Controllers
             }
         }
 
-        //[Route("api/aop/apps/{id}/note")]
-        //[HttpPost]
-        //public IHttpActionResult CreateChildNote(int id)
-        //{
-        //    using (var transaction = this.unitOfWork.BeginTransaction())
-        //    {
-        //        int docId;
-
-        //        AopApp app = this.unitOfWork.DbContext.Set<AopApp>().Find(id);
-
-        //        if (app.STDocId.HasValue)
-        //        {
-        //            docId = app.STDocId.Value;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("STDocId missing.");
-        //        }
-
-        //        UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-        //        DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
-
-        //        DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
-        //        DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
-        //        DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Paper".ToLower());
-        //        DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
-
-        //        DocType docType = this.unitOfWork.DbContext.Set<DocType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Note".ToLower());
-        //        string docSubject = "Генерирано становище";
-
-        //        Doc newDoc = this.docRepository.CreateDoc(
-        //            internalDocDirection.DocDirectionId,
-        //            documentEntryType.DocEntryTypeId,
-        //            draftStatus.DocStatusId,
-        //            docSubject,
-        //            internalDocCasePartType.DocCasePartTypeId,
-        //            null,
-        //            null,
-        //            docType.DocTypeId,
-        //            paperDocFormatType.DocFormatTypeId,
-        //            null,
-        //            userContext);
-
-        //        DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == docId);
-
-        //        ElectronicServiceStage electronicServiceStage = null;
-        //        if (parentDocRelation == null)
-        //        {
-        //            electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
-        //                .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
-        //        }
-
-        //        List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-        //            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-        //            .ToList();
-
-        //        List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
-
-        //        List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
-
-        //        //from
-        //        docTypeUnitRoles.Add(new DocTypeUnitRole
-        //        {
-        //            DocTypeId = docType.DocTypeId,
-        //            DocDirectionId = internalDocDirection.DocDirectionId,
-        //            DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
-        //            UnitId = unitUser.UnitId,
-        //            IsActive = true
-        //        });
-
-        //        DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
-
-        //        newDoc.CreateDocProperties(
-        //            parentDocRelation,
-        //            null,
-        //            docTypeClassifications,
-        //            electronicServiceStage,
-        //            docTypeUnitRoles,
-        //            importedBy,
-        //            unitUser,
-        //            null,
-        //            null,
-        //            this.userContext);
-
-        //        this.unitOfWork.Save();
-
-        //        #region DummyFileContent
-
-        //        DocFileKind docFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
-        //        DocFileOriginType docFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "AttachedFile");
-
-        //        var fileKey = CreateDummyDocFileContent();
-
-        //        DocFile docFile = new DocFile();
-        //        docFile.Doc = newDoc;
-        //        docFile.DocContentStorage = String.Empty;
-        //        docFile.DocFileContentId = fileKey;
-        //        docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == "DOC").DocFileTypeId;
-        //        docFile.DocFileKindId = docFileKind.DocFileKindId;
-        //        docFile.Name = "Становище";
-        //        docFile.DocFileName = "Note.doc";
-        //        docFile.DocFileOriginTypeId = docFileOriginType.DocFileOriginTypeId;
-        //        docFile.IsPrimary = true;
-        //        docFile.IsSigned = false;
-        //        docFile.IsActive = true;
-
-        //        this.unitOfWork.DbContext.Set<DocFile>().Add(docFile);
-        //        this.unitOfWork.Save();
-
-        //        #endregion
-
-        //        app.STNoteId = newDoc.DocId;
-
-        //        this.docRepository.spSetDocUsers(newDoc.DocId);
-
-        //        this.unitOfWork.Save();
-
-        //        transaction.Commit();
-
-        //        return Ok(new
-        //        {
-        //            docId = newDoc.DocId
-        //        });
-        //    }
-        //}
-
         [Route("api/aop/apps/{id}/note")]
-        public HttpResponseMessage GetCreateChildNote(int id)
+        [HttpPost]
+        public IHttpActionResult CreateChildNote(int id)
         {
-            DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
-                .FirstOrDefault(df => df.DocFileOriginTypeId.HasValue && df.DocFileOriginType.Alias == "EditableFile");
-
-            byte[] content;
-
-            using (MemoryStream m1 = new MemoryStream())
-            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                blobStream.CopyTo(m1);
-                content = m1.ToArray();
-            }
+                int docId, checklistId;
 
-            JObject note = JObject.Parse(System.Text.Encoding.UTF8.GetString(content));
-            JObject json = this.dataGenerator.Generate(note);
+                AopApp app = this.unitOfWork.DbContext.Set<AopApp>().Find(id);
 
-            string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\stanovishte_template.docx");
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new PushStreamContent(
-                (outputStream, httpContent, transportContext) =>
+                if (app.STDocId.HasValue && app.STChecklistId.HasValue)
                 {
-                    using (outputStream)
-                    {
-                        using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            template.CopyTo(memoryStream);
+                    docId = app.STDocId.Value;
+                    checklistId = app.STChecklistId.Value;
+                }
+                else
+                {
+                    throw new Exception("STDocId OR STChecklistId missing.");
+                }
 
-                            WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
-                            tt.Transform(json);
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+                DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
 
-                            memoryStream.Position = 0;
-                            memoryStream.CopyTo(outputStream);
-                        }
-                    }
+                DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Paper".ToLower());
+                DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
+
+                DocType docType = this.unitOfWork.DbContext.Set<DocType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Note".ToLower());
+                string docSubject = "Генерирано становище";
+
+                Doc newDoc = this.docRepository.CreateDoc(
+                    internalDocDirection.DocDirectionId,
+                    documentEntryType.DocEntryTypeId,
+                    draftStatus.DocStatusId,
+                    docSubject,
+                    internalDocCasePartType.DocCasePartTypeId,
+                    null,
+                    null,
+                    docType.DocTypeId,
+                    paperDocFormatType.DocFormatTypeId,
+                    null,
+                    userContext);
+
+                DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == docId);
+
+                ElectronicServiceStage electronicServiceStage = null;
+                if (parentDocRelation == null)
+                {
+                    electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                        .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
+                }
+
+                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                    .ToList();
+
+                List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
+
+                List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
+
+                //from
+                docTypeUnitRoles.Add(new DocTypeUnitRole
+                {
+                    DocTypeId = docType.DocTypeId,
+                    DocDirectionId = internalDocDirection.DocDirectionId,
+                    DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
+                    UnitId = unitUser.UnitId,
+                    IsActive = true
                 });
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("attachment")
+
+                DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
+
+                newDoc.CreateDocProperties(
+                    parentDocRelation,
+                    null,
+                    docTypeClassifications,
+                    electronicServiceStage,
+                    docTypeUnitRoles,
+                    importedBy,
+                    unitUser,
+                    null,
+                    null,
+                    this.userContext);
+
+                this.unitOfWork.Save();
+
+                #region FileContent
+
+                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
+                    .FirstOrDefault(e => e.DocId == checklistId && e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+                DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias == "DOCX");
+                DocFileKind docFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
+                DocFileOriginType docFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "AttachedFile");
+
+                Guid blobKey;
+
+                byte[] content;
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
                 {
-                    FileName = "note"
-                };
+                    connection.Open();
 
-            return result;
+                    using (MemoryStream m1 = new MemoryStream())
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+                    {
+                        blobStream.CopyTo(m1);
+                        content = m1.ToArray();
+                    }
+
+                    string contentToString = System.Text.Encoding.UTF8.GetString(content);
+                    JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
+                    JArray checklistVersions = checklistObj["versions"] as JArray;
+                    JObject last = checklistVersions.Last() as JObject;
+
+                    DocUnit checklistMadeBy = this.unitOfWork.DbContext.Set<DocUnit>()
+                        .Include(e => e.Unit.UnitRelations.Select(u => u.ParentUnit))
+                        .Include(e => e.DocUnitRole)
+                        .FirstOrDefault(e => e.DocId == checklistId && (e.DocUnitRole.Alias == "ImportedBy" || e.DocUnitRole.Alias == "MadeBy"));
+
+                    DocWorkflow checklistDiscuss = this.unitOfWork.DbContext.Set<DocWorkflow>()
+                        .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
+                        .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
+
+                    JObject json = this.dataGenerator.GenerateNote(last, 
+                        date: DateTime.Now.ToString("dd.MM.yyyy"),
+                        madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
+                        madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
+                        coordinatorName: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.Name : string.Empty,
+                        coordinatorPosition: checklistDiscuss != null? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
+                        );
+
+                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\stanovishte_template.docx");
+
+                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
+                    using (var memoryStream = new MemoryStream())
+                    using (var blobWriter = new BlobWriter(connection))
+                    using (var stream = blobWriter.OpenStream())
+                    {
+                        template.CopyTo(memoryStream);
+
+                        WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
+                        tt.Transform(json);
+
+                        memoryStream.Position = 0;
+                        memoryStream.CopyTo(stream);
+
+                        blobKey = blobWriter.GetBlobKey();
+                    }
+                }
+
+                newDoc.CreateDocFile(
+                    docFileKind.DocFileKindId,
+                    docFileType.DocFileTypeId,
+                    docFileOriginType.DocFileOriginTypeId,
+                    "Note.docx",
+                    "Note.docx",
+                    "",
+                    blobKey,
+                    this.userContext);
+
+                #endregion
+
+                app.STNoteId = newDoc.DocId;
+
+                this.docRepository.spSetDocUsers(newDoc.DocId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    docId = newDoc.DocId
+                });
+            }
         }
-
-        //[Route("api/aop/apps/{id}/report")]
-        //[HttpPost]
-        //public IHttpActionResult CreateChildReport(int id)
-        //{
-        //    using (var transaction = this.unitOfWork.BeginTransaction())
-        //    {
-        //        int docId;
-
-        //        AopApp app = this.unitOfWork.DbContext.Set<AopApp>().Find(id);
-
-        //        if (app.NDDocId.HasValue)
-        //        {
-        //            docId = app.NDDocId.Value;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("NDDocId missing.");
-        //        }
-
-        //        UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-        //        DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
-
-        //        DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
-        //        DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
-        //        DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Paper".ToLower());
-        //        DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
-
-        //        DocType docType = this.unitOfWork.DbContext.Set<DocType>()
-        //            .SingleOrDefault(e => e.Alias.ToLower() == "Report".ToLower());
-        //        string docSubject = "Генериран доклад";
-
-        //        Doc newDoc = this.docRepository.CreateDoc(
-        //            internalDocDirection.DocDirectionId,
-        //            documentEntryType.DocEntryTypeId,
-        //            draftStatus.DocStatusId,
-        //            docSubject,
-        //            internalDocCasePartType.DocCasePartTypeId,
-        //            null,
-        //            null,
-        //            docType.DocTypeId,
-        //            paperDocFormatType.DocFormatTypeId,
-        //            null,
-        //            userContext);
-
-        //        DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == docId);
-
-        //        ElectronicServiceStage electronicServiceStage = null;
-        //        if (parentDocRelation == null)
-        //        {
-        //            electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
-        //                .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
-        //        }
-
-        //        List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-        //            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-        //            .ToList();
-
-        //        List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
-
-        //        List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
-
-        //        //from
-        //        docTypeUnitRoles.Add(new DocTypeUnitRole
-        //        {
-        //            DocTypeId = docType.DocTypeId,
-        //            DocDirectionId = internalDocDirection.DocDirectionId,
-        //            DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
-        //            UnitId = unitUser.UnitId,
-        //            IsActive = true
-        //        });
-
-        //        DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
-
-        //        newDoc.CreateDocProperties(
-        //            parentDocRelation,
-        //            null,
-        //            docTypeClassifications,
-        //            electronicServiceStage,
-        //            docTypeUnitRoles,
-        //            importedBy,
-        //            unitUser,
-        //            null,
-        //            null,
-        //            this.userContext);
-
-        //        this.unitOfWork.Save();
-
-        //        #region DummyFileContent
-
-        //        DocFileKind docFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
-        //        DocFileOriginType docFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "AttachedFile");
-
-        //        var fileKey = CreateDummyDocFileContent();
-
-        //        DocFile docFile = new DocFile();
-        //        docFile.Doc = newDoc;
-        //        docFile.DocContentStorage = String.Empty;
-        //        docFile.DocFileContentId = fileKey;
-        //        docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == "DOC").DocFileTypeId;
-        //        docFile.DocFileKindId = docFileKind.DocFileKindId;
-        //        docFile.Name = "Доклад";
-        //        docFile.DocFileName = "Report.doc";
-        //        docFile.DocFileOriginTypeId = docFileOriginType.DocFileOriginTypeId;
-        //        docFile.IsPrimary = true;
-        //        docFile.IsSigned = false;
-        //        docFile.IsActive = true;
-
-        //        this.unitOfWork.DbContext.Set<DocFile>().Add(docFile);
-        //        this.unitOfWork.Save();
-
-        //        #endregion
-
-        //        app.NDReportId = newDoc.DocId;
-
-        //        this.docRepository.spSetDocUsers(newDoc.DocId);
-
-        //        this.unitOfWork.Save();
-
-        //        transaction.Commit();
-
-        //        return Ok(new
-        //        {
-        //            docId = newDoc.DocId
-        //        });
-        //    }
-        //}
 
         [Route("api/aop/apps/{id}/report")]
-        public HttpResponseMessage GetCreateChildReport(int id)
+        [HttpPost]
+        public IHttpActionResult CreateChildReport(int id)
         {
-            DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
-                .FirstOrDefault(df => df.DocFileOriginTypeId.HasValue && df.DocFileOriginType.Alias == "EditableFile");
-
-            byte[] content;
-
-            using (MemoryStream m1 = new MemoryStream())
-            using (var blobStream = new BlobReadStream("DbContext", "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                blobStream.CopyTo(m1);
-                content = m1.ToArray();
-            }
+                int docId, checklistId;
 
-            JObject note = JObject.Parse(System.Text.Encoding.UTF8.GetString(content));
-            JObject json = this.dataGenerator.Generate(note);
+                AopApp app = this.unitOfWork.DbContext.Set<AopApp>().Find(id);
 
-            string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\doklad_template.docx");
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new PushStreamContent(
-                (outputStream, httpContent, transportContext) =>
+                if (app.NDDocId.HasValue && app.NDChecklistId.HasValue)
                 {
-                    using (outputStream)
-                    {
-                        using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            template.CopyTo(memoryStream);
+                    docId = app.NDDocId.Value;
+                    checklistId = app.NDChecklistId.Value;
+                }
+                else
+                {
+                    throw new Exception("NDDocId OR NDChecklistId missing.");
+                }
 
-                            WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
-                            tt.Transform(json);
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+                DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
 
-                            memoryStream.Position = 0;
-                            memoryStream.CopyTo(outputStream);
-                        }
-                    }
+                DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Paper".ToLower());
+                DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
+
+                DocType docType = this.unitOfWork.DbContext.Set<DocType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Report".ToLower());
+                string docSubject = "Генериран доклад";
+
+                Doc newDoc = this.docRepository.CreateDoc(
+                    internalDocDirection.DocDirectionId,
+                    documentEntryType.DocEntryTypeId,
+                    draftStatus.DocStatusId,
+                    docSubject,
+                    internalDocCasePartType.DocCasePartTypeId,
+                    null,
+                    null,
+                    docType.DocTypeId,
+                    paperDocFormatType.DocFormatTypeId,
+                    null,
+                    userContext);
+
+                DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == docId);
+
+                ElectronicServiceStage electronicServiceStage = null;
+                if (parentDocRelation == null)
+                {
+                    electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                        .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
+                }
+
+                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                    .ToList();
+
+                List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
+
+                List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
+
+                //from
+                docTypeUnitRoles.Add(new DocTypeUnitRole
+                {
+                    DocTypeId = docType.DocTypeId,
+                    DocDirectionId = internalDocDirection.DocDirectionId,
+                    DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
+                    UnitId = unitUser.UnitId,
+                    IsActive = true
                 });
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("attachment")
+
+                DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
+
+                newDoc.CreateDocProperties(
+                    parentDocRelation,
+                    null,
+                    docTypeClassifications,
+                    electronicServiceStage,
+                    docTypeUnitRoles,
+                    importedBy,
+                    unitUser,
+                    null,
+                    null,
+                    this.userContext);
+
+                this.unitOfWork.Save();
+
+                #region FileContent
+
+                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
+                    .FirstOrDefault(e => e.DocId == checklistId && e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+                DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias == "DOCX");
+                DocFileKind docFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
+                DocFileOriginType docFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "AttachedFile");
+
+                Guid blobKey;
+
+                byte[] content;
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
                 {
-                    FileName = "report"
-                };
+                    connection.Open();
 
-            return result;
+                    using (MemoryStream m1 = new MemoryStream())
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", docFile.DocFileContentId))
+                    {
+                        blobStream.CopyTo(m1);
+                        content = m1.ToArray();
+                    }
+
+                    string contentToString = System.Text.Encoding.UTF8.GetString(content);
+                    JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
+                    JArray checklistVersions = checklistObj["versions"] as JArray;
+                    JObject last = checklistVersions.Last() as JObject;
+
+                    DocUnit checklistMadeBy = this.unitOfWork.DbContext.Set<DocUnit>()
+                        .Include(e => e.Unit.UnitRelations.Select(u => u.ParentUnit))
+                        .Include(e => e.DocUnitRole)
+                        .FirstOrDefault(e => e.DocId == checklistId && (e.DocUnitRole.Alias == "ImportedBy" || e.DocUnitRole.Alias == "MadeBy"));
+
+                    DocWorkflow checklistDiscuss = this.unitOfWork.DbContext.Set<DocWorkflow>()
+                        .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
+                        .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
+
+                    JObject json = this.dataGenerator.GenerateReport(last, 
+                        date: DateTime.Now.ToString("dd.MM.yyyy"),
+                        madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
+                        madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
+                        coordinatorName: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.Name : string.Empty,
+                        coordinatorPosition: checklistDiscuss != null? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
+                        );
+
+                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\doklad_template.docx");
+
+                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
+                    using (var memoryStream = new MemoryStream())
+                    using (var blobWriter = new BlobWriter(connection))
+                    using (var stream = blobWriter.OpenStream())
+                    {
+                        template.CopyTo(memoryStream);
+
+                        WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
+                        tt.Transform(json);
+
+                        memoryStream.Position = 0;
+                        memoryStream.CopyTo(stream);
+
+                        blobKey = blobWriter.GetBlobKey();
+                    }
+                }
+
+                newDoc.CreateDocFile(
+                    docFileKind.DocFileKindId,
+                    docFileType.DocFileTypeId,
+                    docFileOriginType.DocFileOriginTypeId,
+                    "Report.docx",
+                    "Report.docx",
+                    "",
+                    blobKey,
+                    this.userContext);
+
+                #endregion
+
+                app.NDReportId = newDoc.DocId;
+
+                this.docRepository.spSetDocUsers(newDoc.DocId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    docId = newDoc.DocId
+                });
+            }
         }
-
-        //private Guid CreateDummyDocFileContent()
-        //{
-        //    StringBuilder builder = new StringBuilder("ГЕНЕРИРАН ФАЙЛ");
-
-        //    byte[] content = Utf8Utils.GetBytes(builder.ToString());
-
-        //    Guid fileKey = WriteToBlob(content);
-
-        //    return fileKey;
-        //}
-
-        //private Guid WriteToBlob(byte[] content)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
-        //    {
-        //        connection.Open();
-        //        using (var blobWriter = new BlobWriter(connection))
-        //        using (var stream = blobWriter.OpenStream())
-        //        {
-        //            stream.Write(content, 0, content.Length);
-        //            return blobWriter.GetBlobKey();
-        //        }
-        //    }
-        //}
     }
 }
