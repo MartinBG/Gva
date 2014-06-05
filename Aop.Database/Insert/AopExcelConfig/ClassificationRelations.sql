@@ -3,6 +3,7 @@ GO
 
 SET IDENTITY_INSERT [ClassificationRelations] ON
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(1,1,NULL,1);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(2,2,NULL,2);
 SET IDENTITY_INSERT [ClassificationRelations] OFF
 GO
 

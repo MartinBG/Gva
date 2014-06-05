@@ -104,6 +104,11 @@
             { "5", "ESign" },
             { "6", "Finish" },
             { "7", "Reverse" },
+            { "8", "SubstituteManagement" },
+            { "9", "DeleteManagement" },
+            { "10", "EditTech" },
+            { "11", "EditTechElectronicServiceStage" },
+            { "12", "DocCasePartManagement" }
         };
 
          Dictionary<string, Tuple<int, int>> CodeClassificationIdRelations = null;
