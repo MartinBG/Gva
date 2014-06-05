@@ -21,6 +21,7 @@ namespace Aop.Api.Repositories.Aop
 
         Doc GetDocByPortalDocId(Guid portalDocId);
 
+        void DeteleAopApp(int id);
         //aop delete
     }
 }

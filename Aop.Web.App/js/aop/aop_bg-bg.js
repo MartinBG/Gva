@@ -11,6 +11,12 @@
           search: 'Търси',
           docIstage: 'Документ за I етап',
           docIIstage: 'Документ за II етап'
+        },
+        edit: {
+          edit: 'Редакция',
+          remove: 'Изтриване',
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       },
       checklist: {

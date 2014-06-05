@@ -78,8 +78,11 @@ namespace Aop.Api.Controllers
 
             string contentToString = System.Text.Encoding.UTF8.GetString(content);
 
+            AopApp aopApp = this.unitOfWork.DbContext.Set<AopApp>().FirstOrDefault(e => e.STChecklistId == id || e.NDChecklistId == id);
+
             return Ok(new
             {
+                aopApplicationId = aopApp.AopApplicationId,
                 content = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(contentToString)
             });
         }
@@ -524,12 +527,12 @@ namespace Aop.Api.Controllers
                         .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
                         .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
 
-                    JObject json = this.dataGenerator.GenerateNote(last, 
+                    JObject json = this.dataGenerator.GenerateNote(last,
                         date: DateTime.Now.ToString("dd.MM.yyyy"),
                         madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
                         madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
                         coordinatorName: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.Name : string.Empty,
-                        coordinatorPosition: checklistDiscuss != null? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
+                        coordinatorPosition: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
                         );
 
                     string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\stanovishte_template.docx");
@@ -706,12 +709,12 @@ namespace Aop.Api.Controllers
                         .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
                         .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
 
-                    JObject json = this.dataGenerator.GenerateReport(last, 
+                    JObject json = this.dataGenerator.GenerateReport(last,
                         date: DateTime.Now.ToString("dd.MM.yyyy"),
                         madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
                         madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
                         coordinatorName: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.Name : string.Empty,
-                        coordinatorPosition: checklistDiscuss != null? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
+                        coordinatorPosition: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
                         );
 
                     string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\doklad_template.docx");

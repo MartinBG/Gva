@@ -1,6 +1,6 @@
 ﻿<ng-form class="form-inline">
   <div ng-if="isLoaded">
-    <div class="row col-sm-10 col-md-10">
+    <div class="row col-sm-12 col-md-12">
 
       <div class="col-sm-5 col-md-5">
         <label class="control-label" l10n-text="checklist.currentChecklist"></label>
@@ -31,6 +31,11 @@
           </sc-column>
         </sc-datatable>
       </div>
+
+      <div class="col-sm-2 col-md-2" ng-if="aopApplicationId">
+        <a sc-click="gotoAopApp()" style="cursor: pointer;">Към заявление</a>
+      </div>
+
     </div>
 
     <div class="row"></div>

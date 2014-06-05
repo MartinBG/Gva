@@ -30,6 +30,14 @@
             'generateReport': {
               method: 'POST',
               url: '/api/aop/apps/:id/report'
+            },
+            'readFedForFirstStage': {
+              method: 'POST',
+              url: '/api/aop/apps/:id/fed/first'
+            },
+            'readFedForSecondStage': {
+              method: 'POST',
+              url: '/api/aop/apps/:id/fed/second'
             }
           });
       }]);

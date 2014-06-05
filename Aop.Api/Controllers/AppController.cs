@@ -281,5 +281,52 @@ namespace Aop.Api.Controllers
                 aopApplicationId = oldApp.AopApplicationId
             });
         }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteApp(int id)
+        {
+            this.appRepository.DeteleAopApp(id);
+
+            this.unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [Route("{id}/fed/first")]
+        [HttpPost]
+        public IHttpActionResult ReadFedForFirstStage(int id, AppDO app)
+        {
+            var oldApp = this.appRepository.Find(id);
+
+            //? TODO read from FED and update aopapp properties
+            // update oldApp.STproperties
+
+            this.unitOfWork.Save();
+
+            return Ok(new
+            {
+                err = "",
+                aopApplicationId = oldApp.AopApplicationId
+            });
+        }
+
+        [Route("{id}/fed/second")]
+        [HttpPost]
+        public IHttpActionResult ReadFedForSecondStage(int id, AppDO app)
+        {
+            var oldApp = this.appRepository.Find(id);
+
+            //? TODO read from FED and update aopapp properties
+            // update oldApp.NDproperties
+
+            this.unitOfWork.Save();
+
+            return Ok(new
+            {
+                err = "",
+                aopApplicationId = oldApp.AopApplicationId
+            });
+        }
     }
 }

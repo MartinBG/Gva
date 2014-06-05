@@ -22,6 +22,30 @@
       return $state.transitionTo($state.current, $stateParams, { reload: true });
     };
 
+    $scope.readFedForFirstStage = function remove() {
+      return Aop.readFedForFirstStage({ id: $scope.app.aopApplicationId })
+        .$promise
+        .then(function (data) {
+          return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
+        });
+    };
+
+    $scope.readFedForSecondStage = function remove() {
+      return Aop.readFedForSecondStage({ id: $scope.app.aopApplicationId })
+        .$promise
+        .then(function (data) {
+          return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
+        });
+    };
+
+    $scope.remove = function remove() {
+      return Aop.remove({ id: $scope.app.aopApplicationId })
+        .$promise
+        .then(function () {
+          return $state.go('root.apps.search');
+        });
+    };
+
     $scope.save = function save() {
       return $scope.appForm.$validate()
         .then(function () {

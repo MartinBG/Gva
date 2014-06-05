@@ -4,6 +4,7 @@
 
   function ChecklistHeaderCtrl(
     $scope,
+    $state,
     Aop
   ) {
     $scope.isLoaded = false;
@@ -12,6 +13,7 @@
       id: $scope.model.docId
     }).$promise.then(function (result) {
       $scope.model.jObject = result.content;
+      $scope.aopApplicationId = result.aopApplicationId;
 
       $scope.comparings = _.cloneDeep($scope.model.jObject.versions);
       $scope.comparings.unshift({ emptyChoice: true, version: -1 });
@@ -24,6 +26,10 @@
 
       $scope.isLoaded = true;
     });
+
+    $scope.gotoAopApp = function () {
+      return $state.go('root.apps.edit', { id: $scope.aopApplicationId });
+    };
 
     $scope.view = function (item) {
       $scope.checklistVM.currentVersion = item;
@@ -58,6 +64,7 @@
 
   ChecklistHeaderCtrl.$inject = [
     '$scope',
+    '$state',
     'Aop'
   ];
 
