@@ -1247,6 +1247,7 @@
           validToDate: 'Срок на валидност'
         },
         airworthinessFMDirective: {
+          certNumber: 'Номер',
           issueDate: 'От дата',
           validFromDate: 'Валидно от',
           validToDate: 'Валидно до',
@@ -1261,7 +1262,6 @@
           EASA15IssueRefNo: 'EASA Form 15a',
           registration: 'Регистрация №',
           aircraftCertificateType: 'Тип',
-          certNumber: 'Референтен номер',
           'export': 'Експортно УЛГ',
           contry: 'Държава в която се изнася ВС',
           exceptions: 'Изключения',
@@ -1273,7 +1273,8 @@
           secondAmmendment: '2-ро продължение на преглед на ЛГ',
           aircraftCertificationType: 'Тип',
           airworthinessReviewType: 'Тип',
-          number: 'Номер'
+          refNumber: 'Референтен номер',
+          approvalNumber: 'Номер на одобрение'
         },
         permitDirective: {
           issuePlace: 'Място на издаване',
@@ -1383,7 +1384,7 @@
           removalReason: 'Основание за отписване',
           removalText: 'Основание за отписване - описание',
           removalDocumentNumber: 'Номер на документ за отписване',
-          removalDocumentDate: 'Дата на документ за отписване',
+          removalDocumentDate: 'Дата',
           removalInspector: 'Инспектор, отписал ВС',
           removalCountry: 'Държава',
           removalNotes: 'Забележки/Изключения',

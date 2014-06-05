@@ -23,9 +23,9 @@
     </div>
   </div>
 
-  <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews"></h5>
+  <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none"></h5>
   <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length">
-    <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
       <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
         <input type="radio" ng-checked="item === currentReview" sc-click="selectReview(item)">
       </sc-column>
