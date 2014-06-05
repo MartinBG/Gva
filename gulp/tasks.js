@@ -61,64 +61,75 @@ function inject(stream, tag) {
 }
 
 function buildTask(config, opts) {
-  return function () {
-    var appJs =
-      config.app()
-      .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
-      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'app.js')));
+  return function (callback) {
+    exec('git rev-parse HEAD', function (error, stdout) {
+      var revision = stdout.trim().substr(0, 6);
 
-    var libJs =
-      config.lib()
-      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.js')));
+      var appJs =
+        config.app()
+        .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
+        .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+        .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'app.js')))
+        .pipe(plugins['if'](opts.bundleJs, plugins.rev()));
 
-    var libIe8Js =
-      config.lib_ie8()
-      .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
-      .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.ie8.js')));
+      var libJs =
+        config.lib()
+        .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+        .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.js')))
+        .pipe(plugins['if'](opts.bundleJs, plugins.rev()));
 
-    var css =
-      config.css()
-      .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
-      .pipe(plugins['if'](opts.minifyCss, plugins.minifyCss()))
-      .pipe(plugins['if'](opts.bundleCss, plugins.concat(config.cssDir + 'styles.css')));
+      var libIe8Js =
+        config.lib_ie8()
+        .pipe(plugins['if'](opts.minifyJs, plugins.uglify({ mangle: false })))
+        .pipe(plugins['if'](opts.bundleJs, plugins.concat(config.jsDir + 'lib.ie8.js')))
+        .pipe(plugins['if'](opts.bundleJs, plugins.rev()));
 
-    var templates = opts.bundleTemplates ?
-      bundleTemplates(config.templates, config.templatesDir + 'templates.js') :
-      rawTemplates(config.templates);
+      var css =
+        config.css()
+        .pipe(plugins.preprocess({ context: opts.bundleTemplates ? {} : { DEBUG: true } }))
+        .pipe(plugins['if'](opts.minifyCss, plugins.minifyCss()))
+        .pipe(plugins['if'](opts.bundleCss, plugins.concat(config.cssDir + 'styles.css')))
+        .pipe(plugins['if'](opts.bundleJs, plugins.rev()));
 
-    var assets = opts.relocateAssets ?
-      relocateAssets(config.assets, config.cssDir) :
-      rawAssets(config.assets);
+      var templates = opts.bundleTemplates ?
+        bundleTemplates(config.templates, config.templatesDir + 'templates.js')
+          .pipe(plugins.rev()) :
+        rawTemplates(config.templates);
 
-    return utils.uniqueQueue(
-      appJs,
-      libJs,
-      libIe8Js,
-      css,
-      templates,
-      assets,
-      gulp.src('index.html')
-        .pipe(inject(appJs, 'app.js'))
-        .pipe(inject(libJs, 'lib.js'))
-        .pipe(inject(libIe8Js, 'lib.ie8.js'))
-        .pipe(inject(css, 'styles.css'))
-        .pipe(plugins['if'](opts.bundleTemplates, inject(templates, 'templates.js')))
-    )
-    .pipe(gulp.dest(config.outputDir));
+      var assets = opts.relocateAssets ?
+        relocateAssets(config.assets, config.cssDir) :
+        rawAssets(config.assets);
+
+      return utils.uniqueQueue(
+        appJs,
+        libJs,
+        libIe8Js,
+        css,
+        templates,
+        assets,
+        gulp.src('index.html')
+          .pipe(plugins.template({ fullVersion: config.version + '.0#' + revision }))
+          .pipe(inject(appJs, 'app.js'))
+          .pipe(inject(libJs, 'lib.js'))
+          .pipe(inject(libIe8Js, 'lib.ie8.js'))
+          .pipe(inject(css, 'styles.css'))
+          .pipe(plugins['if'](opts.bundleTemplates, inject(templates, 'templates.js')))
+      )
+      .pipe(gulp.dest(config.outputDir))
+      .on('end', callback);
+    });
   };
 }
 
 function packageTask(config, opts) {
   return function (callback) {
     exec('git rev-parse HEAD', function (error, stdout) {
-      var revision = stdout.trim();
+      var revision = stdout.trim().substr(0, 6);
 
       var version = config.version + '.0';
-      var fullVersion = version + '#' + revision.substr(0, 6);
+      var fullVersion = version + '#' + revision;
 
-      return gulp
+      gulp
         .src(config.msbuild.projFile)
         .pipe(plugins.msbuild({
           configuration: opts.configuration,
