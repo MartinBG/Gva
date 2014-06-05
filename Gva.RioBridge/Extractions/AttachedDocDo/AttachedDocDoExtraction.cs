@@ -1,14 +1,15 @@
 ﻿using Common.Rio.RioObjectExtraction;
 using Common.Rio.RioObjectExtractor;
-using Gva.Portal.Components.DocumentSerializer;
-using Gva.Portal.RioObjects;
+using Components.DocumentSerializer;
+using RioObjects;
 using Gva.RioBridge.DataObjects;
-using R_Abbcdn;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abbcdn;
 
 namespace Gva.RioBridge.Extractions.AttachedDocDo
 {

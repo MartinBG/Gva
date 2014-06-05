@@ -11,7 +11,7 @@ namespace Gva.RioBridge
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Gva.Portal.RioObjects.IHeaderFooterDocumentsRioApplication, Common.Rio.PortalBridge.RioObjects.RioApplication>()
+            Mapper.CreateMap<RioObjects.IHeaderFooterDocumentsRioApplication, Common.Rio.PortalBridge.RioObjects.RioApplication>()
                 .ForMember(a => a.ApplicationSigningTime, o => o.MapFrom(a => a.ApplicationSigningTime))
                 .ForMember(a => a.AttachedDocuments, o => o.MapFrom(a => a.AttachedDocuments))
                 .ForMember(a => a.DocumentTypeName, o => o.MapFrom(a => a.DocumentTypeName))
@@ -25,7 +25,7 @@ namespace Gva.RioBridge
                 .ForMember(a => a.SUNAUServiceName, o => o.MapFrom(a => a.SUNAUServiceName))
                 .ForMember(a => a.SUNAUServiceURI, o => o.MapFrom(a => a.SUNAUServiceURI));
 
-            Mapper.CreateMap<Gva.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature, Common.Rio.PortalBridge.RioObjects.ElectronicDocumentDiscrepancyTypeNomenclature>();
+            Mapper.CreateMap<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature, Common.Rio.PortalBridge.RioObjects.ElectronicDocumentDiscrepancyTypeNomenclature>();
 
             Mapper.CreateMap<Common.Rio.PortalBridge.RioObjects.ReceiptNotAcknowledgedMessage, R_0009_000017.ReceiptNotAcknowledgedMessage>();
             Mapper.CreateMap<Common.Rio.PortalBridge.RioObjects.ReceiptAcknowledgedMessage, R_0009_000019.ReceiptAcknowledgedMessage>();

@@ -100,13 +100,13 @@
       <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
       <Name>Common.Rio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gva.Portal\Gva.Portal.Components\Gva.Portal.Components.csproj">
+    <ProjectReference Include="..\Portal\Common\Components\Components.csproj">
       <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
-      <Name>Gva.Portal.Components</Name>
+      <Name>Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Gva.Portal\Gva.Portal.RioObjects\Gva.Portal.RioObjects.csproj">
+    <ProjectReference Include="..\Portal\Common\RioObjects\RioObjects.csproj">
       <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
-      <Name>Gva.Portal.RioObjects</Name>
+      <Name>RioObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -64,17 +64,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Aop.Portal\Aop.Portal.Components\Aop.Portal.Components.csproj">
-      <Project>{3ff3b1af-45f1-43a5-8930-9450501af6d9}</Project>
-      <Name>Aop.Portal.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aop.Portal\Aop.Portal.RioObjects\Aop.Portal.RioObjects.csproj">
-      <Project>{64a9ee64-4ad5-4d37-bedb-c9acae25e557}</Project>
-      <Name>Aop.Portal.RioObjects</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Rio\Common.Rio.csproj">
       <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
       <Name>Common.Rio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal\Common\Components\Components.csproj">
+      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portal\Common\RioObjects\RioObjects.csproj">
+      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
+      <Name>RioObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

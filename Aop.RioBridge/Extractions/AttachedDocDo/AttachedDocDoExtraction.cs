@@ -1,7 +1,7 @@
 ﻿using Common.Rio.RioObjectExtraction;
 using Common.Rio.RioObjectExtractor;
-using Aop.Portal.Components.DocumentSerializer;
-using Aop.Portal.RioObjects;
+using Components.DocumentSerializer;
+using RioObjects;
 using Aop.RioBridge.DataObjects;
 using Abbcdn;
 using System;

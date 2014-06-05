@@ -6,15 +6,14 @@ using Common.Data;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
-using Gva.AppCommunicator.AppCommunicatorObjects;
-using Gva.Portal.Components.EmsUtils;
-using Gva.Portal.Components.DocumentSigner;
-using Gva.Portal.Components.XmlSchemaValidator;
-using Gva.Portal.Components.VirusScanEngine;
-using Gva.Portal.Components.DocumentSerializer;
-using Gva.Portal.Components.DevelopmentLogger;
-using Gva.Portal.Components.PortalConfigurationManager;
-using Gva.Portal.RioObjects;
+using Components.EmsUtils;
+using Components.DocumentSigner;
+using Components.XmlSchemaValidator;
+using Components.VirusScanEngine;
+using Components.DocumentSerializer;
+using Components.DevelopmentLogger;
+using Components.PortalConfigurationManager;
+using RioObjects;
 using System.IO;
 using R_0009_000001;
 using R_0009_000085;
@@ -40,10 +39,11 @@ using R_0009_000072;
 using R_0009_000042;
 using R_0009_000043;
 using R_0009_000031;
+using Components.ApplicationCommunicator;
 
 namespace Gva.AppCommunicator
 {
-    public class AppCommunicatorService : IDocumentService
+    public class AppCommunicatorService : Components.ApplicationCommunicator.IDocumentService
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
@@ -71,7 +71,7 @@ namespace Gva.AppCommunicator
             this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
             this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
             this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsImpl(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
+            this.emsUtils = new EmsUtilsGva(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public DocumentInfo ProcessStructuredDocument(DocumentRequest request)
@@ -499,6 +499,11 @@ namespace Gva.AppCommunicator
             {
                 throw;
             }
+        }
+
+        public CaseStatusInfo GetCaseStatusInfo(Guid guid)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

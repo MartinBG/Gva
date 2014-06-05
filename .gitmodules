@@ -1,13 +1,3 @@
-[submodule "Gva.Portal"]
-	path = Gva.Portal
-	url = git@bitbucket.org:abbaty/gva-portal-integration.git
-
-[submodule "Aop.Portal"]
-	path = Aop.Portal
-	url = git@bitbucket.org:abbaty/aop-portal-integration.git
-
-[submodule "Mosv.Portal"]
-	
-	path = Mosv.Portal
-	
-	url = git@bitbucket.org:abbaty/mosv-portal-integration.git
+[submodule "Portal"]
+	path = Portal
+	url = git@bitbucket.org:abbaty/portal-integration.git

@@ -6,15 +6,14 @@ using Common.Data;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
-using Aop.AppCommunicator.AppCommunicatorObjects;
-using Aop.Portal.Components.EmsUtils;
-using Aop.Portal.Components.DocumentSigner;
-using Aop.Portal.Components.XmlSchemaValidator;
-using Aop.Portal.Components.VirusScanEngine;
-using Aop.Portal.Components.DocumentSerializer;
-using Aop.Portal.Components.DevelopmentLogger;
-using Aop.Portal.Components.PortalConfigurationManager;
-using Aop.Portal.RioObjects;
+using Components.EmsUtils;
+using Components.DocumentSigner;
+using Components.XmlSchemaValidator;
+using Components.VirusScanEngine;
+using Components.DocumentSerializer;
+using Components.DevelopmentLogger;
+using Components.PortalConfigurationManager;
+using RioObjects;
 using System.IO;
 using R_0009_000001;
 using R_0009_000085;
@@ -28,10 +27,11 @@ using System.Configuration;
 using System.Globalization;
 using Aop.Api.Repositories.Aop;
 using Aop.Api.Models;
+using Components.ApplicationCommunicator;
 
 namespace Aop.AppCommunicator
 {
-    public class AppCommunicatorService : IDocumentService
+    public class AppCommunicatorService : Components.ApplicationCommunicator.IDocumentService
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
@@ -200,27 +200,6 @@ namespace Aop.AppCommunicator
             var doc = this.appRepository.GetDocByPortalDocId(guid);
             if (doc != null)
             {
-                var documentUri = new DocumentURI();
-                if (!String.IsNullOrWhiteSpace(doc.RegUri))
-                {
-                    //documentUri.RegisterIndex = doc.RegIndex;
-                    //documentUri.SequenceNumber = doc.RegNumber.Value.ToString("D6");
-                    //documentUri.ReceiptOrSigningDate = doc.RegDate;
-
-                    var regValues = doc.RegUri.Split('-');
-                    documentUri.RegisterIndex =  regValues[0];
-                    documentUri.SequenceNumber = regValues[1];
-                    try
-                    {
-                        var dateVals = regValues[2].Split('.');
-                        documentUri.ReceiptOrSigningDate = new DateTime(int.Parse(dateVals[2]), int.Parse(dateVals[1]), int.Parse(dateVals[0]));
-                    }
-                    catch
-                    {
-                        documentUri.ReceiptOrSigningDate = DateTime.Now;
-                    }
-                }
-
                 string currentStageAlias = "Pending";
                 if (doc.DocElectronicServiceStages.Count > 0)
                 {
@@ -237,7 +216,7 @@ namespace Aop.AppCommunicator
                 return new CaseStatusInfo()
                 {
                     DocumentGuid = guid,
-                    CaseDocumentUri = documentUri,
+                    CaseDocumentUri = !String.IsNullOrWhiteSpace(doc.RegUri) ? doc.RegUri : String.Empty,
                     CaseStatus = (CaseStatus)Enum.Parse(typeof(CaseStatus), currentStageAlias)
                 };
             }

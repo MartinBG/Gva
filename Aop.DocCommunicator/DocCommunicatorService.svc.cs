@@ -12,19 +12,20 @@ using System.Data.Entity;
 using System.IO;
 using Common.Blob;
 using Common.Utils;
-using Aop.Portal.Components.EmsUtils;
-using Aop.Portal.Components.DocumentSerializer;
-using Aop.Portal.Components.VirusScanEngine;
-using Aop.Portal.Components.XmlSchemaValidator;
-using Aop.Portal.Components.DocumentSigner;
-using Aop.Portal.Components.PortalConfigurationManager;
-using Aop.Portal.Components.DevelopmentLogger;
+using Components.EmsUtils;
+using Components.DocumentSerializer;
+using Components.VirusScanEngine;
+using Components.XmlSchemaValidator;
+using Components.DocumentSigner;
+using Components.PortalConfigurationManager;
+using Components.DevelopmentLogger;
 using System.Data.SqlClient;
 using System.Configuration;
+using Components.AisDocumentCommunicator;
 
 namespace Aop.DocCommunicator
 {
-    public class DocCommunicatorService : IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Components.AisDocumentCommunicator.IAISDocumentServiceViewer, IDisposable
     {
         private IUnitOfWork unitOfWork;
 
@@ -50,7 +51,7 @@ namespace Aop.DocCommunicator
             this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
             this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
             this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsImpl(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
+            this.emsUtils = new EmsUtilsAop(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public DocumentInfo GetDocumentByTicketId(string ticketId)
@@ -76,8 +77,6 @@ namespace Aop.DocCommunicator
             documentInfo.VisualizationMode = ticket.VisualizationMode.HasValue ? (VisualizationMode)ticket.VisualizationMode.Value : VisualizationMode.DisplayWithoutSignature;
             documentInfo.SignatureXPath = signatureXPath;
             documentInfo.SignatureXPathNamespaces = signatureXPathNamespaces;
-            documentInfo.AdministrationUnit = AdministrationUnit.Sofia;
-            documentInfo.AdministrationService = AdministrationService.ApprovalTypeInstrumental;
 
             return documentInfo;
         }
@@ -133,7 +132,7 @@ namespace Aop.DocCommunicator
 
                 case NomenclatureType.OperationalProgramAop:
                     {
-                        var nom = new Aop.Portal.RioObjects.Enums.OperationalProgramNomenclature();
+                        var nom = new RioObjects.Enums.OperationalProgramNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -142,7 +141,7 @@ namespace Aop.DocCommunicator
 
                 default:
                     {
-                        var nom = new Aop.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Type = NomenclatureType.Dummy, Value = item.Value, Text = item.Text });

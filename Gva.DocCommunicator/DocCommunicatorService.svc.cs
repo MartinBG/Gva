@@ -12,19 +12,20 @@ using System.Data.Entity;
 using System.IO;
 using Common.Blob;
 using Common.Utils;
-using Gva.Portal.Components.EmsUtils;
-using Gva.Portal.Components.DocumentSerializer;
-using Gva.Portal.Components.VirusScanEngine;
-using Gva.Portal.Components.XmlSchemaValidator;
-using Gva.Portal.Components.DocumentSigner;
-using Gva.Portal.Components.PortalConfigurationManager;
-using Gva.Portal.Components.DevelopmentLogger;
+using Components.EmsUtils;
+using Components.DocumentSerializer;
+using Components.VirusScanEngine;
+using Components.XmlSchemaValidator;
+using Components.DocumentSigner;
+using Components.PortalConfigurationManager;
+using Components.DevelopmentLogger;
 using System.Data.SqlClient;
 using System.Configuration;
+using Components.AisDocumentCommunicator;
 
 namespace Gva.DocCommunicator
 {
-    public class DocCommunicatorService : IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Components.AisDocumentCommunicator.IAISDocumentServiceViewer, IDisposable
     {
         private IUnitOfWork unitOfWork;
 
@@ -50,7 +51,7 @@ namespace Gva.DocCommunicator
             this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
             this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
             this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsImpl(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
+            this.emsUtils = new EmsUtilsGva(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public DocumentInfo GetDocumentByTicketId(string ticketId)
@@ -76,8 +77,6 @@ namespace Gva.DocCommunicator
             documentInfo.VisualizationMode = ticket.VisualizationMode.HasValue ? (VisualizationMode)ticket.VisualizationMode.Value : VisualizationMode.DisplayWithoutSignature;
             documentInfo.SignatureXPath = signatureXPath;
             documentInfo.SignatureXPathNamespaces = signatureXPathNamespaces;
-            documentInfo.AdministrationUnit = AdministrationUnit.Sofia;
-            documentInfo.AdministrationService = AdministrationService.ApprovalTypeInstrumental;
 
             return documentInfo;
         }
@@ -135,7 +134,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AuthorityIssuedAttachedDocument:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AuthorityIssuedAttachedDocumentNomenclature();
+                        var nom = new RioObjects.Enums.AuthorityIssuedAttachedDocumentNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -144,7 +143,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ASCertificateType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ASCertificateTypeNomenclature();
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -153,7 +152,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AviationAdministration:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AviationAdministrationNomenclature();
+                        var nom = new RioObjects.Enums.AviationAdministrationNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -162,7 +161,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AeromedicalFitnessClass:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AeromedicalFitnessClassNomenclature();
+                        var nom = new RioObjects.Enums.AeromedicalFitnessClassNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -171,7 +170,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AeromedicalCenter:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AeromedicalCenterNomenclature();
+                        var nom = new RioObjects.Enums.AeromedicalCenterNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -180,7 +179,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ASCourseExam:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ASCourseExamNomenclature();
+                        var nom = new RioObjects.Enums.ASCourseExamNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -189,7 +188,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ATO:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ATONomenclature();
+                        var nom = new RioObjects.Enums.ATONomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -198,7 +197,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ASLLData:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ASLLDataNomenclature();
+                        var nom = new RioObjects.Enums.ASLLDataNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -207,7 +206,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.LEC:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.LECNomenclature();
+                        var nom = new RioObjects.Enums.LECNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -217,7 +216,7 @@ namespace Gva.DocCommunicator
                 case NomenclatureType.AircraftClass:
                 case NomenclatureType.AircraftClassQualificationClass:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AircraftClassQualificationClassNomenclature();
+                        var nom = new RioObjects.Enums.AircraftClassQualificationClassNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -227,7 +226,7 @@ namespace Gva.DocCommunicator
                 case NomenclatureType.AircraftType:
                 case NomenclatureType.AircraftTypeQualificationClass:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AircraftTypeQualificationClassNomenclature();
+                        var nom = new RioObjects.Enums.AircraftTypeQualificationClassNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -236,7 +235,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FlightSimulatorType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -245,7 +244,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FlightSkillTestExaminer:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.FlightSkillTestExaminerNomenclature();
+                        var nom = new RioObjects.Enums.FlightSkillTestExaminerNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -254,7 +253,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AircraftMaintenanceCategoryLicense:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AircraftMaintenanceCategoryLicenseNomenclature();
+                        var nom = new RioObjects.Enums.AircraftMaintenanceCategoryLicenseNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -263,7 +262,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.OVDBodyLocationIndicator:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.OVDBodyLocationIndicatorNomenclature();
+                        var nom = new RioObjects.Enums.OVDBodyLocationIndicatorNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -272,7 +271,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.SectorWorkplaceAviationGroundStaff:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.SectorWorkplaceAviationGroundStaffNomenclature();
+                        var nom = new RioObjects.Enums.SectorWorkplaceAviationGroundStaffNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -281,7 +280,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.OVDQualificationClassWithoutPermission:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.OVDQualificationClassWithoutPermissionNomenclature();
+                        var nom = new RioObjects.Enums.OVDQualificationClassWithoutPermissionNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -290,7 +289,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.CoordinationActivitiesInteractionAirTrafficManagementPermission:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.CoordinationActivitiesInteractionAirTrafficManagementPermissionNomenclature();
+                        var nom = new RioObjects.Enums.CoordinationActivitiesInteractionAirTrafficManagementPermissionNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -299,7 +298,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AircraftOperationType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AircraftOperationTypeNomenclature();
+                        var nom = new RioObjects.Enums.AircraftOperationTypeNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -308,7 +307,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.CategoryAircraft:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.CategoryAircraftNomenclature();
+                        var nom = new RioObjects.Enums.CategoryAircraftNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -317,7 +316,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.EngineType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -326,7 +325,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.PropellerType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -335,7 +334,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.CategoryELVS:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.CategoryELVSNomenclature();
+                        var nom = new RioObjects.Enums.CategoryELVSNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -344,7 +343,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.TypeOfObject:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.TypeOfObjectNomenclature();
+                        var nom = new RioObjects.Enums.TypeOfObjectNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -353,7 +352,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.PersonRepresentingTradingCompanyRole:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.PersonRepresentingTradingCompanyRoleNomenclature();
+                        var nom = new RioObjects.Enums.PersonRepresentingTradingCompanyRoleNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -362,7 +361,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ProvidingServiceKind:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ProvidingServiceKindNomenclature();
+                        var nom = new RioObjects.Enums.ProvidingServiceKindNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -371,7 +370,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ProvidingServicePart:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ProvidingServicePartNomenclature();
+                        var nom = new RioObjects.Enums.ProvidingServicePartNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text, ParentValue = item.ParentValue });
@@ -380,7 +379,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.ProvidingServiceSubpart:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.ProvidingServiceSubpartNomenclature();
+                        var nom = new RioObjects.Enums.ProvidingServiceSubpartNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text, ParentValue = item.ParentValue });
@@ -389,7 +388,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FacilityKindATM:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.FacilityKindNomenclature();
+                        var nom = new RioObjects.Enums.FacilityKindNomenclature();
                         foreach (var item in nom.FitnessAutomatedATMValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -398,7 +397,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FacilityKindAid:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.FacilityKindNomenclature();
+                        var nom = new RioObjects.Enums.FacilityKindNomenclature();
                         foreach (var item in nom.NavigationalAidsValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -407,7 +406,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FacilityLocation:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.FacilityLocationNomenclature();
+                        var nom = new RioObjects.Enums.FacilityLocationNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -416,7 +415,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.GroupTypeChecking:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.GroupTypeCheckingNomenclature();
+                        var nom = new RioObjects.Enums.GroupTypeCheckingNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -425,7 +424,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.TypeChecking:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.TypeCheckingNomenclature();
+                        var nom = new RioObjects.Enums.TypeCheckingNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text, ParentValue = item.ParentValue });
@@ -434,7 +433,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AviationTrainingCenter:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.AviationTrainingCenterNomenclature();
+                        var nom = new RioObjects.Enums.AviationTrainingCenterNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -443,7 +442,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.Course:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.CourseNomenclature();
+                        var nom = new RioObjects.Enums.CourseNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -452,7 +451,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.FSTDType:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.FSTDTypeNomenclature();
+                        var nom = new RioObjects.Enums.FSTDTypeNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -461,7 +460,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.PermissibleActivity:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.PermissibleActivityNomenclature();
+                        var nom = new RioObjects.Enums.PermissibleActivityNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -470,7 +469,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.Permission:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.PermissionNomenclature();
+                        var nom = new RioObjects.Enums.PermissionNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -479,7 +478,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.DirectionFunction:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DirectionFunctionNomenclature();
+                        var nom = new RioObjects.Enums.DirectionFunctionNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -488,7 +487,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.AircraftModel:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -497,7 +496,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.TrainingModuleInitial:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.TrainingModuleNomenclature();
+                        var nom = new RioObjects.Enums.TrainingModuleNomenclature();
                         foreach (var item in nom.InitialValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -506,7 +505,7 @@ namespace Gva.DocCommunicator
 
                 case NomenclatureType.TrainingModulePeriodical:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.TrainingModuleNomenclature();
+                        var nom = new RioObjects.Enums.TrainingModuleNomenclature();
                         foreach (var item in nom.PeriodicalValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -516,7 +515,7 @@ namespace Gva.DocCommunicator
 
                 default:
                     {
-                        var nom = new Gva.Portal.RioObjects.Enums.DummyNomenclature();
+                        var nom = new RioObjects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Type = NomenclatureType.Dummy, Value = item.Value, Text = item.Text });

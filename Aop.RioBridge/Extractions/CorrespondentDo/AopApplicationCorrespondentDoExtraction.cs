@@ -1,5 +1,5 @@
 ﻿using Common.Rio.RioObjectExtractor;
-using Aop.Portal.RioObjects;
+using RioObjects;
 using Aop.RioBridge.DataObjects;
 using Abbcdn;
 using System;

@@ -1,7 +1,7 @@
 ﻿using Common.Rio.RioObjectExtractor;
-using Gva.Portal.RioObjects;
+using RioObjects;
 using Gva.RioBridge.DataObjects;
-using R_Abbcdn;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

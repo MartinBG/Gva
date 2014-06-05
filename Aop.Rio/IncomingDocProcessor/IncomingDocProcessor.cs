@@ -297,7 +297,7 @@ namespace Aop.Rio.IncomingDocProcessor
             DocElectronicServiceStage serviceStage = null;
 
             var electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
-                .SingleOrDefault(e => e.Alias == "AcceptApplication" && e.DocTypeId == docTypeId);
+                .SingleOrDefault(e => e.Alias == "Pending" && e.DocTypeId == docTypeId);
 
             if (electronicServiceStage != null)
             {

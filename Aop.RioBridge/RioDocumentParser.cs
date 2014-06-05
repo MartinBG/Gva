@@ -1,19 +1,19 @@
 ﻿using Common.Rio.PortalBridge;
-using Aop.Portal.Components.DevelopmentLogger;
-using Aop.Portal.Components.DocumentSerializer;
-using Aop.Portal.Components.DocumentSigner;
-using Aop.Portal.Components.EmsUtils;
-using Aop.Portal.Components.PortalConfigurationManager;
-using Aop.Portal.Components.VirusScanEngine;
-using Aop.Portal.Components.XmlSchemaValidator;
+using Components.DevelopmentLogger;
+using Components.DocumentSerializer;
+using Components.DocumentSigner;
+using Components.EmsUtils;
+using Components.PortalConfigurationManager;
+using Components.VirusScanEngine;
+using Components.XmlSchemaValidator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Aop.Portal.RioObjects.Enums;
+using RioObjects.Enums;
 using System.Reflection;
-using Aop.Portal.RioObjects;
+using RioObjects;
 
 namespace Aop.Rio.PortalBridge
 {
@@ -35,7 +35,7 @@ namespace Aop.Rio.PortalBridge
             this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
             this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
             this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsImpl(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
+            this.emsUtils = new EmsUtilsAop(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public Common.Rio.PortalBridge.RioObjects.RioApplication XmlDeserializeApplication(string xmlContent)
@@ -63,34 +63,34 @@ namespace Aop.Rio.PortalBridge
 
         public List<Common.Rio.PortalBridge.RioObjects.ElectronicDocumentDiscrepancyTypeNomenclature> GetValidationDiscrepancies(string xmlContent)
         {
-            List<Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = new List<Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature>();
+            List<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = new List<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature>();
 
             //if (!emsUtils.CheckEmail(xmlContent))
             //{
-            //    discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NoEmail);
+            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NoEmail);
             //}
 
             if (!emsUtils.CheckDocumentSize(xmlContent))
             {
-                discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
+                discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
             }
 
             //TODO: Bug in chema validation
             //schemasPath = GetRioObjectsSchemasPath();
             //if (!emsUtils.CheckValidXmlSchema(xmlContent, schemasPath))
             //{
-            //    discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
+            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
             //}
 
             //TODO: Bug in attached file extension (.xml added)
             //if (!emsUtils.CheckSupportedFileFormats(xmlContent))
             //{
-            //    discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
             //}
 
             if (!emsUtils.CheckSignatureValidity(xmlContent))
             {
-                discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
+                discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
             }
 
             //TODO: must be setup
@@ -100,17 +100,17 @@ namespace Aop.Rio.PortalBridge
             //    var revocationErrors = emsUtils.CheckCertificateValidity(xml);
             //    if (revocationErrors != null && revocationErrors.Count() > 0)
             //    {
-            //        discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
+            //        discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
             //    }
             //}
 
             //TODO: Implement
             //if (!emsUtils.CheckForVirus())
             //{
-            //    discrepancies.Add(Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
             //}
 
-            return AutoMapper.Mapper.Map<List<Aop.Portal.RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature>, List<Common.Rio.PortalBridge.RioObjects.ElectronicDocumentDiscrepancyTypeNomenclature>>(discrepancies);
+            return AutoMapper.Mapper.Map<List<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature>, List<Common.Rio.PortalBridge.RioObjects.ElectronicDocumentDiscrepancyTypeNomenclature>>(discrepancies);
         }
 
         public List<string> GetValidationErrors(string docTypeUri, string xmlContent)
