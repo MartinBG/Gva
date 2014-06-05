@@ -115,6 +115,8 @@ function buildTask(config, opts) {
           .pipe(inject(css, 'styles.css'))
           .pipe(plugins['if'](opts.bundleTemplates, inject(templates, 'templates.js')))
       )
+      .pipe(plugins.size({ gzip: false }))
+      .pipe(plugins.size({ gzip: true }))
       .pipe(gulp.dest(config.outputDir))
       .on('end', callback);
     });
