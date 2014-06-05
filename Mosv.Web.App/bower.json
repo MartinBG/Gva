@@ -1,13 +1,13 @@
 {
-  "name": "gva",
+  "name": "mosv",
   "version": "1.0.0",
   "dependencies": {
-    "angular": "1.2.5",
-    "angular-i18n": "1.2.5",
+    "angular": "1.2.16",
+    "angular-i18n": "1.2.16",
     "angular-l10n": "georgiyordanov/angular-l10n#93382bfecc13743486a27f7e8e55338485622fb1",
-    "angular-resource": "1.2.5",
+    "angular-resource": "1.2.16",
     "angular-ui-router": "0.2.10",
-    "angular-bootstrap": "0.9.0",
+    "angular-bootstrap": "0.11.0",
     "angular-ui-utils": "0.0.4",
     "json3": "3.2.4",
     "lodash": "2.1.0",
@@ -30,7 +30,7 @@
     "autofill-event": "1.0.0"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.5",
-    "angular-scenario": "1.2.5"
+    "angular-mocks": "1.2.16",
+    "angular-scenario": "1.2.16"
   }
 }
