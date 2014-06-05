@@ -166,12 +166,43 @@ BEGIN
 		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
 			from @EmployeUnitClassifications where Alias = 'Finish' 
 
-
     insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
 		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Reverse') 
 			from @EmployeUnitClassifications where Alias = 'Reverse' 
 		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
 			from @EmployeUnitClassifications where Alias = 'Reverse' 
+
+	--new permissions--
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'SubstituteManagement') 
+			from @EmployeUnitClassifications where Alias = 'SubstituteManagement' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @EmployeUnitClassifications where Alias = 'SubstituteManagement' 
+
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'DeleteManagement') 
+			from @EmployeUnitClassifications where Alias = 'DeleteManagement' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @EmployeUnitClassifications where Alias = 'DeleteManagement' 
+
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'EditTech') 
+			from @EmployeUnitClassifications where Alias = 'EditTech' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @EmployeUnitClassifications where Alias = 'EditTech' 
+
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'EditTechElectronicServiceStage') 
+			from @EmployeUnitClassifications where Alias = 'EditTechElectronicServiceStage' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @EmployeUnitClassifications where Alias = 'EditTechElectronicServiceStage' 
+
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'DocCasePartManagement') 
+			from @EmployeUnitClassifications where Alias = 'DocCasePartManagement' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @EmployeUnitClassifications where Alias = 'DocCasePartManagement' 
+	--end of new permissions--
 
 	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
 		select uc.DocId, uc.UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 

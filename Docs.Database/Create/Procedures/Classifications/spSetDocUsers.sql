@@ -173,6 +173,12 @@ BEGIN
 			from @UnitClassifications where Alias = 'EditTechElectronicServiceStage' 
 		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
 			from @UnitClassifications where Alias = 'EditTechElectronicServiceStage' 
+
+	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
+		select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'DocCasePartManagement') 
+			from @UnitClassifications where Alias = 'DocCasePartManagement' 
+		union all select DocId, UnitId, (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
+			from @UnitClassifications where Alias = 'DocCasePartManagement' 
 	--end of new permissions--
 
 	insert into @DocUsers (DocId, UnitId, DocUnitPermissionId)
