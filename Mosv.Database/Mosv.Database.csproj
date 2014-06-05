@@ -109,15 +109,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CreateAll.log</LastGenOutput>
     </None>
-    <None Include="Insert\MosvExcelConfig\ExcelConfig.log" />
-    <None Include="Insert\MosvExcelConfig\ExcelConfig.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
-    </None>
-    <None Include="Insert\MosvExcelConfig\ExcelConfig1.log">
+    <None Include="Insert\MosvExcelConfig\ExcelConfig.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
+    <None Include="Insert\MosvExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig.log</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

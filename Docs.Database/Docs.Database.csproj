@@ -198,15 +198,14 @@
     <Content Include="Insert\Units\UnitTypes.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Insert\GvaExcelConfig\ExcelConfig.log" />
-    <None Include="Insert\GvaExcelConfig\ExcelConfig.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
-    </None>
-    <None Include="Insert\GvaExcelConfig\ExcelConfig1.log">
+    <None Include="Insert\GvaExcelConfig\ExcelConfig.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
+    <None Include="Insert\GvaExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig.log</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

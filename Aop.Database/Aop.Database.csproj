@@ -52,14 +52,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CreateAll.log</LastGenOutput>
     </None>
-    <None Include="Insert\AopExcelConfig\ExcelConfig.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
-    </None>
-    <None Include="Insert\AopExcelConfig\ExcelConfig1.log">
+    <None Include="Insert\AopExcelConfig\ExcelConfig.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
+    <None Include="Insert\AopExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig.log</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
