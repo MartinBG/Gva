@@ -23,7 +23,6 @@ using System.Configuration;
 using Aop.RioBridge.DataObjects;
 using Common.Rio.PortalBridge.RioObjects;
 using Aop.Api.Models;
-using Aop.RioBridge.DataObjects;
 
 namespace Aop.Rio.IncomingDocProcessor
 {
