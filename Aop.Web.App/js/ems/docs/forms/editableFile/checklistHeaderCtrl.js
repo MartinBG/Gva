@@ -9,7 +9,7 @@
   ) {
     $scope.isLoaded = false;
 
-    $scope.checklist = Aop.loadChecklist({
+    Aop.loadChecklist({
       id: $scope.model.docId
     }).$promise.then(function (result) {
       $scope.model.jObject = result.content;
