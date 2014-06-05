@@ -650,12 +650,15 @@
     <Content Include="js\gva\persons\views\documentApplications\docApplicationsNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentApplications\docApplicationsSearch.html" />
     <Content Include="js\gva\persons\views\documentApplications\docApplicationsSearchCtrl.js" />
+    <Content Include="js\gva\persons\views\documentChecks\addCheckCtrl.js" />
     <Content Include="js\gva\persons\views\documentChecks\checksEdit.html" />
     <Content Include="js\gva\persons\views\documentChecks\checksEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentChecks\checksNew.html" />
     <Content Include="js\gva\persons\views\documentChecks\checksNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentChecks\checksSearch.html" />
     <Content Include="js\gva\persons\views\documentChecks\checksSearchCtrl.js" />
+    <Content Include="js\gva\persons\views\documentChecks\chooseCheck.html" />
+    <Content Include="js\gva\persons\views\documentChecks\chooseCheckCtrl.js" />
     <Content Include="js\gva\persons\views\documentEducations\edusEdit.html" />
     <Content Include="js\gva\persons\views\documentEducations\edusEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentEducations\edusNew.html" />
@@ -668,9 +671,6 @@
     <Content Include="js\gva\persons\views\documentEmployments\emplsNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentEmployments\emplsSearch.html" />
     <Content Include="js\gva\persons\views\documentEmployments\emplsSearchCtrl.js" />
-    <Content Include="js\gva\persons\views\documentExams\addExamCtrl.js" />
-    <Content Include="js\gva\persons\views\documentExams\chooseExam.html" />
-    <Content Include="js\gva\persons\views\documentExams\chooseExamCtrl.js" />
     <Content Include="js\gva\persons\views\documentExams\examsEdit.html" />
     <Content Include="js\gva\persons\views\documentExams\examsEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentExams\examsNew.html" />

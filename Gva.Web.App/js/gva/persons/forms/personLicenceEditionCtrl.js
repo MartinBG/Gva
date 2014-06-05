@@ -9,7 +9,7 @@
     $q,
     PersonRating,
     PersonDocumentTraining,
-    PersonDocumentExam,
+    PersonDocumentCheck,
     PersonDocumentMedical,
     PersonLicence
   ) {
@@ -17,13 +17,13 @@
     $q.all([
       PersonRating.query({ id: $stateParams.id }).$promise,
       PersonDocumentTraining.query({ id: $stateParams.id }).$promise,
-      PersonDocumentExam.query({ id: $stateParams.id }).$promise,
+      PersonDocumentCheck.query({ id: $stateParams.id }).$promise,
       PersonDocumentMedical.query({ id: $stateParams.id }).$promise,
       PersonLicence.query({ id: $stateParams.id }).$promise
     ]).then(function (results) {
       var ratings = results[0];
       var trainings = results[1];
-      var exams = results[2];
+      var checks = results[2];
       var medicals = results[3];
       var licences = results[4];
 
@@ -34,7 +34,7 @@
 
         $scope.model.includedRatings = $scope.model.includedRatings || [];
         $scope.model.includedTrainings = $scope.model.includedTrainings || [];
-        $scope.model.includedExams = $scope.model.includedExams || [];
+        $scope.model.includedChecks = $scope.model.includedChecks || [];
         $scope.model.includedMedicals = $scope.model.includedMedicals || [];
         $scope.model.includedLicences = $scope.model.includedLicences || [];
 
@@ -44,8 +44,8 @@
             [].push.apply($scope.model.includedMedicals, $state.payload.selectedMedicals);
           }
 
-          if ($state.payload.selectedExams) {
-            [].push.apply($scope.model.includedExams, $state.payload.selectedExams);
+          if ($state.payload.selectedChecks) {
+            [].push.apply($scope.model.includedChecks, $state.payload.selectedChecks);
           }
 
           if ($state.payload.selectedTrainings) {
@@ -87,13 +87,13 @@
           });
         });
 
-        $scope.$watchCollection('model.includedExams', function () {
+        $scope.$watchCollection('model.includedChecks', function () {
           if (!$scope.model) {
             return;
           }
 
-          $scope.includedExams = _.map($scope.model.includedExams, function (ind) {
-            return _.where(exams, { partIndex: ind })[0];
+          $scope.includedChecks = _.map($scope.model.includedChecks, function (ind) {
+            return _.where(checks, { partIndex: ind })[0];
           });
         });
 
@@ -136,8 +136,8 @@
       return $state.go('.newTraining');
     };
 
-    $scope.addExam = function () {
-      return $state.go('.newExam');
+    $scope.addCheck = function () {
+      return $state.go('.newCheck');
     };
 
     $scope.addMedical = function () {
@@ -156,9 +156,9 @@
       });
     };
 
-    $scope.addExistingExam = function () {
-      return $state.go('.chooseExam', {}, {}, {
-        selectedExams: $scope.model.includedExams
+    $scope.addExistingCheck = function () {
+      return $state.go('.chooseCheck', {}, {}, {
+        selectedChecks: $scope.model.includedChecks
       });
     };
 
@@ -184,9 +184,9 @@
         _.without($scope.model.includedTrainings, training.partIndex);
     };
 
-    $scope.removeExam = function (exam) {
-      $scope.model.includedExams =
-        _.without($scope.model.includedExams, exam.partIndex);
+    $scope.removeCheck = function (check) {
+      $scope.model.includedChecks =
+        _.without($scope.model.includedChecks, check.partIndex);
     };
 
     $scope.removeMedical = function (document) {
@@ -207,7 +207,7 @@
     '$q',
     'PersonRating',
     'PersonDocumentTraining',
-    'PersonDocumentExam',
+    'PersonDocumentCheck',
     'PersonDocumentMedical',
     'PersonLicence'
   ];
