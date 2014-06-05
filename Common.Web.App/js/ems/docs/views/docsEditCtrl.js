@@ -174,6 +174,28 @@
       return $scope.attachDocInternal('Remark');
     };
 
+    $scope.attachAcknowledgeDoc = function () {
+      return Doc
+        .createChildAcknowledge({
+          id: doc.docId
+        }, {})
+        .$promise
+        .then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
+    $scope.attachNotAcknowledgeDoc = function () {
+      return Doc
+        .createChildNotAcknowledge({
+          id: doc.docId
+        }, {})
+        .$promise
+        .then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
     $scope.endStage = function () {
       return $state.go('root.docs.edit.stages.end');
     };

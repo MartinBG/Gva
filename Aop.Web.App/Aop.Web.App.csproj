@@ -82,8 +82,6 @@
     <Content Include="js\ems\docs\views\caseSelect.html" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
-    <Content Include="js\ems\docs\views\docsEdit.html" />
-    <Content Include="js\ems\docs\views\docsEditCtrl.js" />
     <Content Include="js\ems\docs\views\docsSearch.html" />
   </ItemGroup>
   <ItemGroup>
