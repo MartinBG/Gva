@@ -17,6 +17,7 @@
         <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="readonly"></sc-nomenclature>
         <span class="input-group-btn">
           <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+          <sc-button btn-click="$raise('scOnNewCorr')" class="btn btn-default" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
         </span>
       </div>
     </div>

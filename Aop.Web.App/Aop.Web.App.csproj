@@ -81,7 +81,6 @@
     <Content Include="js\ems\docs\forms\editableFile\checklistHeaderCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
-    <Content Include="js\ems\docs\views\docsSearch.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".editorconfig" />

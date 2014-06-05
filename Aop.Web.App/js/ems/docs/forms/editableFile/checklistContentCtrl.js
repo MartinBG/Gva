@@ -16,10 +16,12 @@
           compareCheckbox =
             $parse(ngModelStr.replace('currentVersion', 'compareToVersion'))($scope);
 
-        if ($scope.model.isComparing && currentCheckbox === true) {
-          checkbox.classList.add('checklist-current-value-checkbox');
-        } else if ($scope.model.isComparing && compareCheckbox === true) {
-          checkbox.classList.add('checklist-compared-value-checkbox');
+        if($scope.model.isComparing && currentCheckbox !== compareCheckbox) {
+          if (currentCheckbox === true) {
+            checkbox.classList.add('checklist-current-value-checkbox');
+          } else if (compareCheckbox === true) {
+            checkbox.classList.add('checklist-compared-value-checkbox');
+          }
         }
       });
     });
