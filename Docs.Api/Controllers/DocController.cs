@@ -104,6 +104,7 @@ namespace Docs.Api.Controllers
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
+            DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
             List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>()
                 .Where(e => e.Alias.ToLower() == "incharge" || e.Alias.ToLower() == "controlling" || e.Alias.ToLower() == "to")
@@ -132,6 +133,7 @@ namespace Docs.Api.Controllers
                         ds,
                         limit,
                         offset,
+                        docCasePartType,
                         docStatuses,
                         docUnitPermissionRead,
                         unitUser,
@@ -153,6 +155,7 @@ namespace Docs.Api.Controllers
                         ds,
                         limit,
                         offset,
+                        docCasePartType,
                         docStatuses,
                         docUnitPermissionRead,
                         unitUser,
@@ -174,6 +177,7 @@ namespace Docs.Api.Controllers
                        ds,
                        limit,
                        offset,
+                       docCasePartType,
                        docStatuses,
                        docUnitPermissionRead,
                        unitUser,
@@ -197,6 +201,7 @@ namespace Docs.Api.Controllers
                       ds,
                       limit,
                       offset,
+                      docCasePartType,
                       docStatuses,
                       docUnitPermissionRead,
                       docUnitRoles,
@@ -221,6 +226,7 @@ namespace Docs.Api.Controllers
                       ds,
                       limit,
                       offset,
+                      docCasePartType,
                       docStatuses,
                       docUnitPermissionRead,
                       unitUser,
@@ -242,6 +248,7 @@ namespace Docs.Api.Controllers
                       ds,
                       limit,
                       offset,
+                      docCasePartType,
                       docStatuses,
                       docUnitPermissionRead,
                       unitUser,
@@ -263,6 +270,7 @@ namespace Docs.Api.Controllers
                       ds,
                       limit,
                       offset,
+                      docCasePartType,
                       docStatuses,
                       docUnitPermissionRead,
                       docSourceType,
@@ -271,6 +279,27 @@ namespace Docs.Api.Controllers
                     break;
                 case "new":
                     throw new NotImplementedException();
+                case "allControl":
+                    //всички контролни
+                    docs = this.docRepository.GetControlDocs(
+                      fromDate,
+                      toDate,
+                      regUri,
+                      docName,
+                      docTypeId,
+                      docStatusId,
+                      hideRead,
+                      isCase,
+                      corrs,
+                      units,
+                      ds,
+                      limit,
+                      offset,
+                      docCasePartType,
+                      docUnitPermissionRead,
+                      unitUser,
+                      out totalCount);
+                    break;
                 case "all":
                 default:
                     //всички
@@ -288,6 +317,7 @@ namespace Docs.Api.Controllers
                       ds,
                       limit,
                       offset,
+                      docCasePartType,
                       docUnitPermissionRead,
                       unitUser,
                       out totalCount);

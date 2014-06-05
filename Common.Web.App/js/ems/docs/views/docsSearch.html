@@ -18,59 +18,65 @@
 
 <div class="panel">
   <sc-tabs tab-list="{
-      'Текущи преписки': {
+      'docs.search.current': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'current',
           ds: undefined
         }
       },
-      'Приключени преписки': {
+      'docs.search.finished': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'finished',
           ds: undefined
         }
       },
-      'За управление': {
+      'docs.search.manage': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'manage',
           ds: undefined
         }
       },
-      'За контрол и изпълнение': {
+      'docs.search.control': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'control',
           ds: undefined
         }
       },
-      'Чернови': {
+      'docs.search.draft': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'draft',
           ds: undefined
         }
       },
-      'Неприключени': {
+      'docs.search.unfinished': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'unfinished',
           ds: undefined
         }
       },
-      'Всички': {
+      'docs.search.all': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'all'
         }
       },
-      'От портал': {
+      'docs.search.portal': {
         state: 'root.docs.search',
         stateParams: {
           filter: 'portal',
           ds: undefined
+        }
+      },
+      'docs.search.allControl': {
+        state: 'root.docs.search',
+        stateParams: {
+          filter: 'allControl'
         }
       }
     }"></sc-tabs>

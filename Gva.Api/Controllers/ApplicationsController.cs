@@ -564,6 +564,7 @@ namespace Gva.Api.Controllers
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
             DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
 
             int totalCount = 0;
@@ -582,6 +583,7 @@ namespace Gva.Api.Controllers
                 null,
                 limit,
                 offset,
+                docCasePartType,
                 docStatuses,
                 docUnitPermissionRead,
                 unitUser,

@@ -707,6 +707,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
@@ -719,7 +720,8 @@ namespace Docs.Api.Repositories.DocRepository
                 .True<Doc>()
                 .And(e => e.IsCase)
                 .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
-                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId);
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -755,6 +757,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
@@ -766,7 +769,8 @@ namespace Docs.Api.Repositories.DocRepository
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
                 .And(e => e.IsCase)
-                .And(e => e.DocStatusId == docStatusFinished.DocStatusId || e.DocStatusId == docStatusCanceled.DocStatusId);
+                .And(e => e.DocStatusId == docStatusFinished.DocStatusId || e.DocStatusId == docStatusCanceled.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -802,6 +806,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
@@ -814,7 +819,8 @@ namespace Docs.Api.Repositories.DocRepository
                 .True<Doc>()
                 .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
                 .And(e => e.DocStatusId != docStatusDraft.DocStatusId)
-                .And(e => e.DocWorkflows.Any(dw => dw.ToUnitId.HasValue && dw.ToUnitId == unitUser.UnitId));
+                .And(e => e.DocWorkflows.Any(dw => dw.ToUnitId.HasValue && dw.ToUnitId == unitUser.UnitId))
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -850,6 +856,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             List<DocUnitRole> docUnitRoles,
@@ -865,7 +872,8 @@ namespace Docs.Api.Repositories.DocRepository
                 .True<Doc>()
                 .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
                 .And(e => e.DocStatusId != docStatusDraft.DocStatusId)
-                .And(e => e.DocUnits.Any(du => du.UnitId == unitUser.UnitId && docUnitRoleIds.Contains(du.DocUnitRoleId)));
+                .And(e => e.DocUnits.Any(du => du.UnitId == unitUser.UnitId && docUnitRoleIds.Contains(du.DocUnitRoleId)))
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -901,6 +909,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
@@ -910,7 +919,8 @@ namespace Docs.Api.Repositories.DocRepository
 
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
-                .And(e => e.DocStatusId == docStatusDraft.DocStatusId);
+                .And(e => e.DocStatusId == docStatusDraft.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -946,6 +956,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
@@ -957,7 +968,8 @@ namespace Docs.Api.Repositories.DocRepository
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
                 .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
-                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId);
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -993,6 +1005,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
             DocUnitPermission docUnitPermissionRead,
             DocSourceType docSourceType,
@@ -1001,7 +1014,8 @@ namespace Docs.Api.Repositories.DocRepository
         {
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
-                .And(e => e.DocSourceTypeId == docSourceType.DocSourceTypeId);
+                .And(e => e.DocSourceTypeId == docSourceType.DocSourceTypeId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
@@ -1037,6 +1051,7 @@ namespace Docs.Api.Repositories.DocRepository
             string ds,
             int limit,
             int offset,
+            DocCasePartType docCasePartType,
             DocUnitPermission docUnitPermissionRead,
             UnitUser unitUser,
             out int totalCount)
@@ -1046,7 +1061,55 @@ namespace Docs.Api.Repositories.DocRepository
             List<int> docIds = Helper.GetIdListFromString(ds);
 
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
-                .True<Doc>();
+                .True<Doc>()
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                ds,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                docUnitPermissionRead,
+                hideRead,
+                isCase,
+                out totalCount);
+        }
+
+        public List<Doc> GetControlDocs(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            DocUnitPermission docUnitPermissionRead,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            List<int> corrIds = Helper.GetIdListFromString(corrs);
+            List<int> unitIds = Helper.GetIdListFromString(units);
+            List<int> docIds = Helper.GetIdListFromString(ds);
+
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocCasePartTypeId == docCasePartType.DocCasePartTypeId);
 
             return GetDocsInternal(
                 fromDate,
