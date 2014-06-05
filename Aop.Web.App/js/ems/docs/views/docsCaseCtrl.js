@@ -6,12 +6,21 @@
     $scope,
     $state,
     $sce,
+    Aop,
     doc
   ) {
     $scope.aopAppId = doc.aopAppId;
     $scope.docId = doc.docId;
 
     $scope.isCase = doc.isCase;
+
+    $scope.aopApplicationId = undefined;
+
+    Aop.findAopApp({
+      id: $scope.docId
+    }).$promise.then(function (result) {
+      $scope.aopApplicationId = result.aopApplicationId;
+    });
 
     $scope.docRelations = _.map(_.cloneDeep(doc.docRelations), function (docRelation) {
       docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
@@ -24,8 +33,8 @@
       return $state.go('root.docs.edit.view', { id: docId });
     };
 
-    $scope.gotoAopApp = function (aopAppId) {
-      return $state.go('root.apps.edit', { id: aopAppId });
+    $scope.gotoAopApp = function () {
+      return $state.go('root.apps.edit', { id: $scope.aopApplicationId });
     };
   }
 
@@ -33,6 +42,7 @@
     '$scope',
     '$state',
     '$sce',
+    'Aop',
     'doc'
   ];
 

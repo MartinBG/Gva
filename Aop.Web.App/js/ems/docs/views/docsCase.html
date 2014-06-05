@@ -22,4 +22,6 @@
 </table>
 
 <br />
-<a sc-click="gotoAopApp(aopAppId)" ng-if="aopAppId">Заявление</a>
+<div ng-if="aopApplicationId">
+  Документът е включен към: <a sc-click="gotoAopApp()" style="cursor: pointer;">Заявление</a>
+</div>

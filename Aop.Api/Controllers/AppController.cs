@@ -293,9 +293,30 @@ namespace Aop.Api.Controllers
             return Ok();
         }
 
+        [Route("docs/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetAopAppForDoc(int id)
+        {
+            int? aopAppId = null;
+
+            AopApp app = this.unitOfWork.DbContext.Set<AopApp>()
+                .FirstOrDefault(e => e.STDocId == id || e.STChecklistId == id || e.STNoteId == id
+                    || e.NDDocId == id || e.NDChecklistId == id || e.NDReportId == id);
+
+            if (app != null)
+            {
+                aopAppId = app.AopApplicationId;
+            }
+
+            return Ok(new
+            {
+                aopApplicationId = aopAppId
+            });
+        }
+
         [Route("{id}/fed/first")]
         [HttpPost]
-        public IHttpActionResult ReadFedForFirstStage(int id, AppDO app)
+        public IHttpActionResult ReadFedForFirstStage(int id)
         {
             var oldApp = this.appRepository.Find(id);
 
@@ -313,7 +334,7 @@ namespace Aop.Api.Controllers
 
         [Route("{id}/fed/second")]
         [HttpPost]
-        public IHttpActionResult ReadFedForSecondStage(int id, AppDO app)
+        public IHttpActionResult ReadFedForSecondStage(int id)
         {
             var oldApp = this.appRepository.Find(id);
 

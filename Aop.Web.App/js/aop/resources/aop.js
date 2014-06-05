@@ -38,6 +38,10 @@
             'readFedForSecondStage': {
               method: 'POST',
               url: '/api/aop/apps/:id/fed/second'
+            },
+            'findAopApp': {
+              method: 'GET',
+              url: '/api/aop/apps/docs/:id'
             }
           });
       }]);
