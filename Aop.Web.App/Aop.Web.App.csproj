@@ -61,6 +61,7 @@
     <Content Include="js\aop\views\appEmployerNewCtrl.js" />
     <Content Include="js\aop\views\appSearch.html" />
     <Content Include="js\aop\views\appSearchCtrl.js" />
+    <Content Include="js\aop\views\docSelect.html" />
     <Content Include="js\aop\views\docSelectCtrl.js" />
     <Content Include="js\app.js" />
     <Content Include="js\app_bg-bg.js" />

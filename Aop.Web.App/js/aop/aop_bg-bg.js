@@ -17,6 +17,9 @@
           remove: 'Изтриване',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        caseSelect: {
+          hideChosen: 'Скриване на вече избраните'
         }
       },
       checklist: {

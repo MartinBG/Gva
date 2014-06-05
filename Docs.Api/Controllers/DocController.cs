@@ -323,6 +323,8 @@ namespace Docs.Api.Controllers
                .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
                .ToList();
 
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            //? gonna fail miserably with more docs
             foreach (var item in returnValue)
             {
                 if (docView == DocView.ForControl || docView == DocView.ForManagement)

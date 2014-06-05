@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     Doc,
+    Aop,
     selectDoc) {
     $scope.filters = {
       csFromDate: null,
@@ -16,8 +17,8 @@
       csDocTypeId: null,
       csDocStatusId: null,
       csCorrs: null,
-      csUnits: null
-      //csIsCase: false
+      csUnits: null,
+      csIsChosen: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -27,7 +28,6 @@
     });
 
     var stateParams = {
-      filter: 'all',
       fromDate: $stateParams.csFromDate,
       toDate: $stateParams.csToDate,
       regUri: $stateParams.csRegUri,
@@ -35,18 +35,17 @@
       docTypeId: $stateParams.csDocTypeId,
       docStatusId: $stateParams.csDocStatusId,
       corrs: $stateParams.csCorrs,
-      units: $stateParams.csUnits
-      //isCase: false
+      units: $stateParams.csUnits,
+      isChosen: $stateParams.csIsChosen
     };
 
-    Doc.get(stateParams).$promise.then(function (docs) {
+    Aop.getDocs(stateParams).$promise.then(function (docs) {
       $scope.docs = docs.documents;
       $scope.docCount = docs.documentCount;
     });
 
     $scope.search = function () {
       $state.go('root.apps.edit.docSelect', {
-        filter: 'all',
         csFromDate: $scope.filters.csFromDate,
         csToDate: $scope.filters.csToDate,
         csRegUri: $scope.filters.csRegUri,
@@ -54,8 +53,8 @@
         csDocTypeId: $scope.filters.csDocTypeId,
         csDocStatusId: $scope.filters.csDocStatusId,
         csCorrs: $scope.filters.csCorrs,
-        csUnits: $scope.filters.csUnits
-        //csIsCase: false
+        csUnits: $scope.filters.csUnits,
+        csIsChosen: $scope.filters.csIsChosen
       }, { reload: true });
     };
 
@@ -75,7 +74,13 @@
     };
   }
 
-  AppDocSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc', 'selectDoc'];
+  AppDocSelectCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Doc',
+    'Aop',
+    'selectDoc'];
 
   angular.module('aop').controller('AppDocSelectCtrl', AppDocSelectCtrl);
 }(angular, _));

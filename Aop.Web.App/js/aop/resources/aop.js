@@ -42,6 +42,10 @@
             'findAopApp': {
               method: 'GET',
               url: '/api/aop/apps/docs/:id'
+            },
+            'getDocs': {
+              method: 'GET',
+              url: '/api/aop/apps/docs'
             }
           });
       }]);

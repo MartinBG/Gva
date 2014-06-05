@@ -5,11 +5,15 @@ using Aop.Api.WordTemplates;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Extensions;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
@@ -291,6 +295,126 @@ namespace Aop.Api.Controllers
             this.unitOfWork.Save();
 
             return Ok();
+        }
+
+        [Route("docs")]
+        [HttpGet]
+        public IHttpActionResult GetDocs(
+            int limit = 10,
+            int offset = 0,
+            string filter = null,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string regUri = null,
+            string docName = null,
+            int? docTypeId = null,
+            int? docStatusId = null,
+            bool? hideRead = null,
+            string corrs = null,
+            string units = null,
+            string ds = null,
+            int? isChosen = null
+            )
+        {
+            this.userContext = this.Request.GetUserContext();
+
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            limit = 1000;
+            offset = 0;
+
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
+            DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
+            List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
+            List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                .Where(e => e.Alias.ToLower() == "incharge" || e.Alias.ToLower() == "controlling" || e.Alias.ToLower() == "to")
+                .ToList();
+
+            int totalCount = 0;
+            List<Doc> docs = new List<Doc>();
+
+            docs = this.docRepository.GetDocs(
+                      fromDate,
+                      toDate,
+                      regUri,
+                      docName,
+                      docTypeId,
+                      docStatusId,
+                      hideRead,
+                      null,
+                      corrs,
+                      units,
+                      ds,
+                      limit,
+                      offset,
+                      docCasePartType,
+                      docUnitPermissionRead,
+                      unitUser,
+                      out totalCount);
+
+            List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
+
+            List<int> loadedDocIds = returnValue.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
+
+            List<DocHasRead> docHasReadsForList = this.unitOfWork.DbContext.Set<DocHasRead>()
+                .Where(du => du.UnitId == unitUser.UnitId && loadedDocIds.Contains(du.DocId))
+               .ToList();
+
+            List<DocUser> docUsersForList = this.unitOfWork.DbContext.Set<DocUser>()
+               .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
+               .ToList();
+
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            //? gonna fail miserably with more docs
+            foreach (var item in returnValue)
+            {
+                var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
+                    .Include(e => e.Correspondent.CorrespondentType)
+                    .Where(e => e.DocId == item.DocId)
+                    .ToList();
+
+                item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
+
+                item.SetIsRead(docHasReadsForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
+            }
+
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            //? gonna fail miserably with more docs
+            if (isChosen == 1) //true
+            {
+                List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
+                List<int> aopAppDocIds = 
+                    allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
+                    .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
+                    .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
+                    .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
+                    .ToList();
+
+                for (int i = 0; i < returnValue.Count; i++)
+                {
+                    if (returnValue[i].DocId.HasValue && 
+                        aopAppDocIds.Contains(returnValue[i].DocId.Value)) {
+                        returnValue.RemoveAt(i);
+                    }
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            if (totalCount >= 10000)
+            {
+                sb.Append("Има повече от 10000 резултата, моля, въведете допълнителни филтри.");
+            }
+
+            return Ok(new
+            {
+                documents = returnValue,
+                documentCount = totalCount,
+                msg = sb.ToString()
+            });
         }
 
         [Route("docs/{id}")]
