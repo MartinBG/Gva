@@ -1,5 +1,4 @@
-﻿using Common.Api.Models;
-using Common.Api.UserContext;
+﻿using Common.Api.UserContext;
 using Common.Blob;
 using Common.Extensions;
 using Common.Rio.PortalBridge;
@@ -9,7 +8,6 @@ using Docs.Api.DataObjects;
 using Docs.Api.Enums;
 using Docs.Api.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,10 +15,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Docs.Api.Controllers
@@ -813,6 +808,7 @@ namespace Docs.Api.Controllers
             returnValue.CanDeleteManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DeleteManagement");
             returnValue.CanEditTechElectronicServiceStage = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTech");
             returnValue.CanEditTech = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTechElectronicServiceStage");
+            returnValue.CanChangeDocCasePart = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DocCasePartManagement");
 
             #endregion
 

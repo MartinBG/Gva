@@ -80,7 +80,7 @@
       $scope.doc.canEditTechElectronicServiceStage;
 
     $scope.doc.flags.isVisibleEditCasePartCmd =
-      !$scope.doc.isCase && ($scope.doc.canEditTech || $scope.doc.canRegister);
+      !$scope.doc.isCase && $scope.doc.canChangeDocCasePart;
     $scope.doc.flags.isVisibleEditTechCmd = !$scope.doc.isResolution && !$scope.doc.isTask &&
       !$scope.doc.isRemark && $scope.doc.canEditTech;
 

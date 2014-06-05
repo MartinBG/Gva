@@ -250,6 +250,7 @@ namespace Docs.Api.DataObjects
         public bool CanDeleteManagement { get; set; }
         public bool CanEditTechElectronicServiceStage { get; set; }
         public bool CanEditTech { get; set; }
+        public bool CanChangeDocCasePart { get; set; }
 
         #endregion
 

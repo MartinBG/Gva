@@ -12,6 +12,7 @@ INSERT INTO DocUnitPermissions(DocUnitPermissionId, Name, Alias, IsActive) VALUE
 INSERT INTO DocUnitPermissions(DocUnitPermissionId, Name, Alias, IsActive) VALUES (9, N'Изтриване на одобряване, съгласуване, подписване', N'DeleteManagement', 1)
 INSERT INTO DocUnitPermissions(DocUnitPermissionId, Name, Alias, IsActive) VALUES (10, N'Техн. редакция', N'EditTech', 1)
 INSERT INTO DocUnitPermissions(DocUnitPermissionId, Name, Alias, IsActive) VALUES (11, N'Техн. редакция на етап', N'EditTechElectronicServiceStage', 1)
+INSERT INTO DocUnitPermissions(DocUnitPermissionId, Name, Alias, IsActive) VALUES (12, N'Управление раздел на преписка', N'DocCasePartManagement', 1)
 
 SET IDENTITY_INSERT DocUnitPermissions OFF
 GO 
