@@ -1415,8 +1415,6 @@ namespace Gva.MigrationTool.Sets
                     LICENCE_LOG_ID = r.LICENCE_LOG_ID,
                     PERSON_DOCUMENT_ID = r.PERSON_DOCUMENT_ID,
                     trainingPartIndex = (r.PERSON_DOCUMENT_ID != null && trainings.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? trainings[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
-                    //TODO decide if no exams are included in licence
-                    //examPartIndex = (r.PERSON_DOCUMENT_ID != null && exams.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? exams[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     checkPartIndex = (r.PERSON_DOCUMENT_ID != null && checks.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? checks[r.PERSON_DOCUMENT_ID.Value] : (int?)null
                 });
 
@@ -1428,11 +1426,6 @@ namespace Gva.MigrationTool.Sets
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
                 .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
-
-            //TODO
-            //var includedExams = includedDocuments
-            //    .GroupBy(r => r.LICENCE_LOG_ID)
-            //    .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select(r => r.examPartIndex.Value).ToArray());
 
             var includedChecks = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
@@ -1496,8 +1489,8 @@ namespace Gva.MigrationTool.Sets
 
                         //TODO show somewhere?
                         __PAPER_NO = r.Field<string>("PAPER_NO"),
-                        __BOOK_PAGE_NO = (int?)r.Field<decimal?>("BOOK_PAGE_NO"),
-                        __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
+                        __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
+                        __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
                         __LIM_OTHER = r.Field<string>("LIM_OTHER"),
                         __LIM_MED_CERT = r.Field<string>("LIM_MED_CERT"),
 
@@ -1513,8 +1506,6 @@ namespace Gva.MigrationTool.Sets
                         includedRatings = includedRatings[r.Field<int>("ID")],
                         includedMedicals = includedMedicals[r.Field<int>("ID")],
                         includedTrainings = includedTrainings[r.Field<int>("ID")],
-                        //TODO
-                        //includedExams = includedExams[r.Field<int>("ID")],
                         includedLicences = includedLicences[r.Field<int>("ID")],
                         includedChecks = includedChecks[r.Field<int>("ID")],
 
@@ -1559,8 +1550,6 @@ namespace Gva.MigrationTool.Sets
                             r.includedRatings,
                             r.includedMedicals,
                             r.includedTrainings,
-                            //TODO
-                            //r.includedExams,
                             r.includedLicences,
                             r.includedChecks,
 

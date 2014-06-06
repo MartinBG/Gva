@@ -153,40 +153,43 @@ namespace Gva.MigrationTool.Sets
         {
             Dictionary<string, int> inspectorsFM = new Dictionary<string, int>()
             {
-                {""              , -1},//TODO
-                {"Стар запис"    , -1},//TODO
-                {"А.Борисов"     , 6203},
-                {"А.Станков"     , 1149},
-                {"Б.Божинов"     , -1},//TODO
-                {"В.Драганов"    , 5464},
-                {"В.Дяков"       , 3897},
-                {"В.Михайлов"    , 2666},
-                {"В.Наньов"      , 6023},
-                {"В.Пешев"       , 2606},
-                {"В.Текнеджиев"  , 2219},
-                {"Г.Илчов"       , -1},//TODO
-                {"Е.Крайкова"    , 7328},
-                {"И.Банковски"   , 5466},
-                {"И.Иванов"      , -1},//TODO
-                {"И.Коев"        , 5468},
-                {"И.Найденов"    , -1},//TODO
-                {"И.С.Иванов"    , 3491},
-                {"Ив.Иванов"     , 2590},
-                {"Ил.Иванов"     , 1087},
-                {"К.Гълъбов"     , 4162},
-                {"М.Илов"        , 9184},
-                {"М.Митов"       , -1},//TODO
-                {"Н. Начев"      , 1150},
-                {"Н.Василев"     , 5463},
-                {"Н.Джамбов"     , 2286},
-                {"Н.Начев"       , 1150},
-                {"Н.Тотева"      , -1},//TODO
-                {"П.МЛАДЕНОВ"    , -1},//TODO
-                {"П.Юнашкова"    , 2349},
-                {"С.Живков"      , 2396},
-                {"С.Пенчев"      , 803},
-                {"С.Тодоров"     , 5465},
-                {"Т.Вълков"      , 5467}
+                {"Стар запис"       , -1},//TODO
+                {"А.Борисов"        , 6203},
+                {"А.Станков"        , 1149},
+                {"Б.Божинов"        , -1},//TODO
+                {"В.Василев"        , -1},
+                {"В.Драганов"       , 5464},
+                {"В.Дяков"          , 3897},
+                {"В.Михайлов"       , 2666},
+                {"В.Наньов"         , 6023},
+                {"В.Пешев"          , 2606},
+                {"В.Текнеджиев"     , 2219},
+                {"Г.Илчов"          , -1},//TODO
+                {"Г.Андонов"        , 4028},
+                {"Г.Андонов ARS 02" , 4028},
+                {"Е.Крайкова"       , 7328},
+                {"И.Банковски"      , 5466},
+                {"И.Иванов"         , -1},//TODO
+                {"И.Коев"           , 5468},
+                {"И.Найденов"       , -1},//TODO
+                {"И.С.Иванов"       , 3491},
+                {"Ив.Иванов"        , 2590},
+                {"Ил.Иванов"        , 1087},
+                {"К.Гълъбов"        , 4162},
+                {"М.Илов"           , 9184},
+                {"М.Митов"          , -1},//TODO
+                {"Н. Начев"         , 1150},
+                {"Н.Василев"        , 5463},
+                {"Н.Джамбов"        , 2286},
+                {"Н.Начев"          , 1150},
+                {"Н.Тотева"         , -1},//TODO
+                {"П.МЛАДЕНОВ"       , -1},//TODO
+                {"П.Юнашкова"       , 2349},
+                {"С.Живков"         , 2396},
+                {"С.Пенчев"         , 803},
+                {"С.Тодоров"        , 5465},
+                {"Т.Вълков"         , 5467},
+                {"Ю.Иванчев"        , -1}
             };
 
             foreach (var aircraftApexId in this.getAircraftApexIds())
@@ -305,16 +308,12 @@ namespace Gva.MigrationTool.Sets
                         addPartWithFiles("documentOccurrences/*", aircraftDocumentOccurrence);
                     }
 
-                    var aircraftDocumentDebts = this.getAircraftDocumentDebts(aircraftApexId, nomApplications, getPerson, getOrganization, noms);
-                    foreach (var aircraftDocumentDebt in aircraftDocumentDebts)
-                    {
-                        addPartWithFiles("aircraftDocumentDebts/*", aircraftDocumentDebt);
-                    }
-
+                    Dictionary<int, int> documentOwnersOldIdToPartIndex = new Dictionary<int, int>();
                     var aircraftDocumentOwners = this.getAircraftDocumentOwners(aircraftApexId, nomApplications, getPerson, getOrganization, noms);
                     foreach (var aircraftDocumentOwner in aircraftDocumentOwners)
                     {
-                        addPartWithFiles("aircraftDocumentOwners/*", aircraftDocumentOwner);
+                        var pv = addPartWithFiles("aircraftDocumentOwners/*", aircraftDocumentOwner);
+                        documentOwnersOldIdToPartIndex.Add(aircraftDocumentOwner.Get<int>("part.__oldId"), pv.Part.Index);
                     }
 
                     var aircraftDocumentOthers = this.getAircraftDocumentOthers(aircraftApexId, nomApplications, noms);
@@ -332,12 +331,18 @@ namespace Gva.MigrationTool.Sets
                         inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index);
                     }
 
-                    var aircraftCertRegistrations = this.getAircraftCertRegistrations(aircraftApexId, getPerson, getOrganization, nomApplications, noms);
+                    var aircraftDocumentDebts = this.getAircraftDocumentDebts(aircraftApexId, nomApplications, getPerson, noms, documentOwnersOldIdToPartIndex);
+                    foreach (var aircraftDocumentDebt in aircraftDocumentDebts)
+                    {
+                        addPartWithFiles("aircraftDocumentDebts/*", aircraftDocumentDebt);
+                    }
+
+                    var aircraftCertRegistrations = this.getAircraftCertRegistrations(aircraftApexId, getPerson, nomApplications, noms, documentOwnersOldIdToPartIndex);
                     foreach (var aircraftCertRegistration in aircraftCertRegistrations)
                     {
                         addPartWithFiles("aircraftCertRegistrations/*", aircraftCertRegistration);
 
-                        int certId = aircraftCertRegistration.Get<int>("part.__oldId");
+                        long certId = aircraftCertRegistration.Get<long>("part.__oldId");
 
                         var aircraftCertAirworthinesses = this.getAircraftCertAirworthinesses(certId, inspections, getPerson, nomApplications, noms);
                         foreach (var aircraftCertAirworthiness in aircraftCertAirworthinesses)
@@ -409,6 +414,11 @@ namespace Gva.MigrationTool.Sets
                     Func<int?, JObject> getOrganization = (orgApexId) => Utils.GetOrganization(orgApexId, organizationRepository, orgApexIdToLotId);
                     Func<string, JObject> getInspector = (tRegUser) =>
                     {
+                        if (string.IsNullOrWhiteSpace(tRegUser))
+                        {
+                            return null;
+                        }
+
                         if (!inspectorsFM.ContainsKey(tRegUser))
                         {
                             //TODO throw error
@@ -910,8 +920,8 @@ namespace Gva.MigrationTool.Sets
             int aircraftId,
             Dictionary<int, JObject> nomApplications,
             Func<int?, JObject> getPerson,
-            Func<int?, JObject> getOrganization,
-            Dictionary<string, Dictionary<string, NomValue>> noms)
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> documentOwnersOldIdToPartIndex)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_DEBT WHERE {0} {1}",
@@ -938,8 +948,8 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("NOTES"),
                         ltrNumber = r.Field<string>("LTR_CAA_NOM"),
                         ltrDate = r.Field<DateTime?>("LTR_CAA_DATE"),
-                        owner = getOrganization((int?)r.Field<long?>("ID_OWNER")),
-                        oper = getOrganization((int?)r.Field<long?>("ID_OPER")),
+                        ownerPartIndex = r.Field<int?>("ID_OWNER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OWNER").Value] : (int?)null,
+                        operatorPartIndex = r.Field<int?>("ID_OPER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OPER").Value] : (int?)null,
                         endReason = r.Field<string>("END_REASON"),
                         endDate = r.Field<DateTime?>("END_DATE"),
                         closeAplicationNumber = r.Field<string>("CLOSE_APPL_DOC"),
@@ -1469,9 +1479,9 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getAircraftCertRegistrations(
             int aircraftId,
             Func<int?, JObject> getPerson,
-            Func<int?, JObject> getOrganization,
             Dictionary<int, JObject> nomApplications,
-            Dictionary<string, Dictionary<string, NomValue>> noms)
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> documentOwnersOldIdToPartIndex)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_CERTIFICATE WHERE {0} {1}",
@@ -1481,7 +1491,7 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
+                        __oldId = r.Field<long>("ID"),
                         __migrTable = "AC_CERTIFICATE",
 
                         register = r.Field<long>("ID").ToString().Substring(0, 1),
@@ -1489,9 +1499,9 @@ namespace Gva.MigrationTool.Sets
                         certDate = r.Field<DateTime?>("CERT_DATE"),
                         aircraftNewOld = noms["aircraftPartStatuses"].ByCode(r.Field<string>("NEW_USED")),
                         operationType = noms["aircraftOperTypes"].ByOldId(r.Field<long?>("ID_TYPE_OPER").ToString()),
-                        owner = getOrganization((int?)r.Field<long?>("ID_OWNER")),
-                        oper = getOrganization((int?)r.Field<long?>("ID_OPER")),
-                        inspector = getPerson((int?)r.Field<decimal?>("ID_EXAMINER_REG")),
+                        ownerPartIndex = r.Field<int?>("ID_OWNER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OWNER").Value] : (int?)null,
+                        operatorPartIndex = r.Field<int?>("ID_OPER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OPER").Value] : (int?)null,
+                        inspector = getPerson(r.Field<int?>("ID_EXAMINER_REG")),
                         regnotes = r.Field<string>("NOTES_REG"),
                         paragraph = r.Field<string>("PARAGRAPH"),
                         paragraphAlt = r.Field<string>("PARAGRAPH_TRANS"),
@@ -1500,7 +1510,7 @@ namespace Gva.MigrationTool.Sets
                         removalText = r.Field<string>("REMOVAL_TEXT"),
                         removalDocumentNumber = r.Field<string>("REMOVAL_DOC_CAA"),
                         removalDocumentDate = r.Field<DateTime?>("REMOVAL_DOC_DATE"),
-                        removalInspector = getPerson((int?)r.Field<decimal?>("REMOVAL_ID_EXAMINER")),
+                        removalInspector = getPerson(r.Field<int?>("REMOVAL_ID_EXAMINER")),
                         typeCert = new
                         {
                             aircraftTypeCertificateType = noms["aircraftTypeCertificateTypes"].ByCode(r.Field<string>("TC_TYPE")),
@@ -1525,13 +1535,13 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        aircraftCerttificateId = r.Field<int>("AC_CERT_ID"),
+                        aircraftCerttificateId = r.Field<long>("AC_CERT_ID"),
                         nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
                     })
                 .ToList();
 
             return (from part in parts
-                    join app in apps on part.Get<int>("__oldId") equals app.aircraftCerttificateId into ag
+                    join app in apps on part.Get<long>("__oldId") equals app.aircraftCerttificateId into ag
                     select new JObject(
                         new JProperty("part",
                             Utils.Pluck(part,
@@ -1572,7 +1582,7 @@ namespace Gva.MigrationTool.Sets
         }
 
         private IList<JObject> getAircraftCertAirworthinesses(
-            int certId,
+            long certId,
             Dictionary<int, int> inspections,
             Func<int?, JObject> getPerson,
             Dictionary<int, JObject> nomApplications,
@@ -1821,7 +1831,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        private IList<JObject> getAircraftCertPermitsToFly(int certId, Dictionary<int, JObject> nomApplications)
+        private IList<JObject> getAircraftCertPermitsToFly(long certId, Dictionary<int, JObject> nomApplications)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_FLY_PERMIT WHERE {0} {1}",
@@ -1908,7 +1918,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        private IList<JObject> getAircraftCertNoises(int certId)
+        private IList<JObject> getAircraftCertNoises(long certId)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_NOISE WHERE {0} {1}",
