@@ -1,5 +1,5 @@
 ﻿/* Usage:
-  <sc-dropdown-button label="l10nText" 
+  <sc-dropdown-button label="l10nText"
       options="[
           {
             text: l10nText1
@@ -20,7 +20,7 @@
   'use strict';
 
   function DropdownButtonDirective($parse, l10n) {
-    
+
     return {
       priority: 110,
       restrict: 'E',
@@ -31,7 +31,7 @@
       },
       link: function (scope, element, attrs) {
         scope.label = l10n.get(attrs.label);
-        scope.buttons =  _.map($parse(attrs.options)(scope.$parent), 
+        scope.buttons =  _.map($parse(attrs.options)(scope.$parent),
           function(button){
             return {
               action: button.action,
@@ -40,12 +40,12 @@
               params: button.params,
               visible: button.visible !== undefined ? button.visible : true,
               btnClass: button.btnClass
-            }; 
+            };
           });
       }
     };
   }
-  
+
   DropdownButtonDirective.$inject = ['$parse', 'l10n'];
 
   angular.module('scaffolding').directive('scDropdownButton', DropdownButtonDirective);

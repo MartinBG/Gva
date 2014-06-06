@@ -4,7 +4,7 @@
 	</button>
 	<ul class="dropdown-menu" role="menu">
     <li ng-repeat="button in buttons" ng-show="button.visible" ng-class="button.btnClass">
-		  <a ng-if="!!button.action" sc-click="button.action()">{{button.text}}</a>
+		  <a ng-if="!!button.action" sc-click="button.action(button.params)">{{button.text}}</a>
       <a ng-if="!!button.state" ui-sref="{{button.state}}(button.params)">{{button.text}}</a>
 	  </li>
 	</ul>
