@@ -3,8 +3,9 @@
     <div class="panel-heading">
       <strong l10n-text="aircrafts.regViewDirective.title"></strong>
        <div class="pull-right">
-         <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"></sc-button>
+         <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"  ng-show="model.isActive && model.isCurrent"></sc-button>
          <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle" ng-show="model.isActive"></sc-button>
+         <sc-link-button name="viewButton" sc-sref="{state: 'root.aircrafts.view.regsFM.edit', params: {id: aircraftId, ind: $parent.reg.partIndex}}" text="aircrafts.regViewDirective.view" class="btn btn-xs btn-primary" icon="glyphicon-search"></sc-link-button>
        </div>
     </div>
     <div class="well-sm panel-body">
@@ -52,8 +53,8 @@
       </div>
       <div class="row">
         <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.category"></label>
-          <input disabled name="category" type="text" class="form-control input-sm" value="{{model.category.name}}" />
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.catAW"></label>
+          <input disabled name="catAW" type="text" class="form-control input-sm" value="{{model.catAW.name}}" />
         </div>
       </div>
       <div class="row">

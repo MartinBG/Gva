@@ -217,7 +217,7 @@ namespace Gva.Api.Controllers
         }
 
 
-        public RegistrationsDO GetRegistrationsData(IEnumerable<PartVersion> registrations, IEnumerable<GvaViewAircraftRegistration> registrationsView, int? lotInd = null)
+        public RegistrationsDO GetRegistrationsData(IEnumerable<PartVersion> registrations, IEnumerable<GvaViewAircraftRegistration> registrationsView, int? lotInd = null, int? lotId = null)
         {
             RegistrationsDO regsData = new RegistrationsDO();
             var regs = registrations.OrderByDescending(r => r.Content.Get<int>("actNumber")).ToArray();
@@ -238,6 +238,19 @@ namespace Gva.Api.Controllers
                 regPartId = currentReg.PartId;
             }
             regsData.AirworthinessIndex = registrationsView.Where(e => e.LotPartId == regPartId).FirstOrDefault().CertAirworthinessId;
+            if (regsData.AirworthinessIndex != null)
+            {
+                regsData.HasAirworthiness = true;
+            }
+            else
+            {
+                regsData.HasAirworthiness = false;
+                var regsWithAirworthiness = registrationsView.Where(e => e.LotId == lotId && e.CertAirworthinessId.HasValue).ToList();
+                if (regsWithAirworthiness.Count > 0)
+                {
+                    regsData.AirworthinessIndex = regsWithAirworthiness.FirstOrDefault().CertAirworthinessId;
+                }
+            }
             regsData.LastIndex = regs[0].Part.Index;
             regsData.NextIndex = regIndex > 0 ? regs[regIndex - 1].Part.Index : (int?)null;
             regsData.PrevIndex = regIndex < regs.Length - 1 ? regs[regIndex + 1].Part.Index : (int?)null;
@@ -255,7 +268,7 @@ namespace Gva.Api.Controllers
             {
                 var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
 
-                return Ok(GetRegistrationsData(registrations, registrationsView));
+                return Ok(GetRegistrationsData(registrations, registrationsView, null, lotId));
             }
             else
             {
@@ -270,7 +283,7 @@ namespace Gva.Api.Controllers
             if (registrations.Length > 0)
             {
                 var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
-                return Ok(GetRegistrationsData(registrations, registrationsView, lotInd));
+                return Ok(GetRegistrationsData(registrations, registrationsView, lotInd, lotId));
             }
             else
             {
@@ -416,7 +429,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
@@ -426,5 +438,6 @@ namespace Gva.Api.Controllers
         {
             return base.DeletePart(lotId, path);
         }
+
     }
 }

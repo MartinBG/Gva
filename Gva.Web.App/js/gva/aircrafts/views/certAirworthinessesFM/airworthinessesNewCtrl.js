@@ -46,6 +46,10 @@
           part: {
             lotId: $stateParams.id,
             reviews: [{
+              airworthinessReviewType: {
+                id: 7777773,
+                name: 'Удостоверение за преглед за ЛГ (15a)'
+              },
               amendment1: null,
               amendment2: null
             }]

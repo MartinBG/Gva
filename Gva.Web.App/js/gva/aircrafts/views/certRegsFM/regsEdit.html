@@ -4,7 +4,7 @@
       <strong l10n-text="aircrafts.editReg.title"></strong>
       <div class="pull-right" ng-show="reg.part.isActive">
         <sc-button name="editBtn" btn-click="rereg()" text="aircrafts.editReg.rereg"
-          class="btn btn-primary btn-xs" icon="glyphicon-repeat" ng-show="!editMode">
+          class="btn btn-primary btn-xs" icon="glyphicon-repeat" ng-show="!editMode && reg.part.isActive">
         </sc-button>
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editReg.edit"
           class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && reg.part.isActive">
@@ -26,7 +26,7 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-cert-reg-fm name="aircraftCertRegForm" ng-model="reg.part" readonly="!editMode"></gva-aircraft-cert-reg-fm>
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="reg.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="reg.files" sc-data-set-part="'aircraft'" readonly="!editMode"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

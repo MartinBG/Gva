@@ -22,6 +22,8 @@ namespace Gva.Api.ModelsDO
 
         public int? AirworthinessIndex { get; set; }
 
+        public bool HasAirworthiness { get; set; }
+
         public JObject FirstReg { get; set; }
 
         public JObject LastReg { get; set; }

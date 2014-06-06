@@ -1,11 +1,15 @@
 ﻿<sc-button name="createBtn" btn-click="newCertReg()" text="aircrafts.regFMSearch.newReg" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk" ng-show="showNewButton"></sc-button>
 <sc-datatable items="regs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-    <sc-button name="editBtn" btn-click="editCertReg(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-click="editCertReg(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-show="item.part.isCurrent"></sc-button>
+  </sc-column>
+  <sc-column data="part.isCurrent? 'Да' : 'Не'" title="aircrafts.regFMSearch.isCurrent">
   </sc-column>
   <sc-column data="part.isActive? 'Да' : 'Не'" title="aircrafts.regFMSearch.isActive">
   </sc-column>
   <sc-column data="part.register.textContent.regPrefix + part.certNumber" title="aircrafts.regFMSearch.certNumber">
+  </sc-column>
+  <sc-column data="part.register.textContent.regPrefix + part.actNumber" title="aircrafts.regFMSearch.actNumber">
   </sc-column>
   <sc-column data="part.certDate" title="aircrafts.regFMSearch.certDate" type="date">
   </sc-column>

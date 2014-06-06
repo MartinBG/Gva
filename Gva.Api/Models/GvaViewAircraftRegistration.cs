@@ -14,6 +14,8 @@ namespace Gva.Api.Models
 
         public int CertNumber { get; set; }
 
+        public int ActNumber { get; set; }
+
         public string RegMark { get; set; }
 
         public int? CertAirworthinessId { get; set; }
@@ -40,6 +42,7 @@ namespace Gva.Api.Models
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.CertRegisterId).HasColumnName("CertRegisterId");
             this.Property(t => t.CertNumber).HasColumnName("CertNumber");
+            this.Property(t => t.ActNumber).HasColumnName("ActNumber");
             this.Property(t => t.RegMark).HasColumnName("RegMark");
             this.Property(t => t.CertAirworthinessId).HasColumnName("CertAirworthinessId");
 

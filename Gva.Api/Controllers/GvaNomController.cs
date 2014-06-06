@@ -286,7 +286,7 @@ namespace Gva.Api.Controllers
                             .Select(e => new
                             {
                                 nomValueId = e.Part.Index,
-                                name = e.CertNumber.ToString()
+                                name = e.ActNumber.ToString()
                             });
 
             return Ok(returnValue);

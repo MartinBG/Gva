@@ -30,12 +30,8 @@ namespace Gva.Api.LotEventHandlers.AircraftView
             reg.Part = part.Part;
             reg.CertRegisterId = part.Content.Get<int>("register.nomValueId");
             reg.CertNumber = part.Content.Get<int>("certNumber");
+            reg.ActNumber = part.Content.Get<int>("actNumber");
             reg.RegMark = part.Content.Get<string>("regMark");
-            var aw = this.aircraftRegistrationAwRepository.GetLastAw(part.Part.Lot.LotId);
-            if (aw != null)
-            {
-                reg.CertAirworthinessId = aw.LotPartId;
-            }
         }
 
         public override void Clear(GvaViewAircraftRegistration registration)

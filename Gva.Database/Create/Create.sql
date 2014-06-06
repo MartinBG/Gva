@@ -112,7 +112,7 @@ GO
 :r $(rootPath)\"..\Insert\Noms\disparityLevels.sql"
 :r $(rootPath)\"..\Insert\Noms\recommendationPartNumbers.sql"
 :r $(rootPath)\"..\Insert\Noms\aircarrierServices.sql"
-
+:r $(rootPath)\"..\Insert\Noms\aircraftCatAWs.sql"
 ---------------------------------------------------------------
 -- Equipments test noms
 ---------------------------------------------------------------

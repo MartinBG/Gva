@@ -66,6 +66,14 @@
     <Content Include="Create\Tables\GvaViewPersonLicences.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
+    <Content Include="Insert\Noms\airworthinessCertificateTypes.sql" />
+    <Content Include="Insert\Noms\airworthinessReviewTypes.sql" />
+    <Content Include="Insert\Noms\aircraftCatAWs.sql" />
+    <Content Include="Insert\Noms\ownerTypes.sql" />
+    <Content Include="Insert\testScores.sql" />
+    <Content Include="Create\Tables\GvaWordTemplates.sql" />
+    <Content Include="Insert\gvaWordTemplates.sql" />
+    <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>

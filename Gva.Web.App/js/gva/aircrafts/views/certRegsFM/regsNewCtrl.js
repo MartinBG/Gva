@@ -17,6 +17,7 @@
     if (oldReg && oldReg.part) {
       _.defaults($scope.reg.part, _.cloneDeep(oldReg.part));
       oldReg.part.isActive = false;
+      oldReg.part.isCurrent = false;
     }
 
     if ($state.payload) {
@@ -66,6 +67,7 @@
         part: {
           removal: null,
           isActive: true,
+          isCurrent: true,
           ownerIsOrg: true,
           operIsOrg: true,
           lessorIsOrg: true

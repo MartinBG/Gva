@@ -3,6 +3,8 @@
   'use strict';
 
   function AircraftCertRegViewCtrl($scope, $state, $stateParams) {
+    $scope.aircraftId = $stateParams.id;
+
     $scope.rereg = function (ind) {
       return $state.go('root.aircrafts.view.regsFM.newWizzard', { oldInd: ind });
     };

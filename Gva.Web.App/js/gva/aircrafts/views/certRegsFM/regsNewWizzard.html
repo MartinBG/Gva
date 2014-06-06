@@ -24,9 +24,13 @@
             <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="true"></sc-nomenclature>
           </div>
-          <sc-field-group class="col-md-2 col-sm-4" text="aircrafts.newRegWizzard.actNumber" validations="{ required: null }" field-name="certNumber">
+          <sc-field-group class="col-md-2 col-sm-4" text="aircrafts.newRegWizzard.certNumber" validations="{ required: null }" field-name="certNumber">
             <span ng-if="model.register && model.register.textContent.regPrefix">{{model.register && model.register.textContent.regPrefix}}</span>
             <sc-int ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="true"></sc-int>
+          </sc-field-group>
+          <sc-field-group class="col-md-2 col-sm-4" text="aircrafts.newRegWizzard.actNumber" validations="{ required: null }" field-name="actNumber">
+            <span ng-if="model.register && model.register.textContent.regPrefix">{{model.register && model.register.textContent.regPrefix}}</span>
+            <sc-int ng-model="model.actNumber" name="actNumber" ng-required="true" ng-readonly="true"></sc-int>
           </sc-field-group>
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
