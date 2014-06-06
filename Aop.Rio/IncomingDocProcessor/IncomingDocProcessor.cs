@@ -23,12 +23,15 @@ using System.Configuration;
 using Aop.RioBridge.DataObjects;
 using Common.Rio.PortalBridge.RioObjects;
 using Aop.Api.Models;
+using Autofac.Features.OwnedInstances;
 
 namespace Aop.Rio.IncomingDocProcessor
 {
     public class IncomingDocProcessor : IIncomingDocProcessor
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        private Func<Owned<IUnitOfWork>> unitOfWorkFactory;
 
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
@@ -37,12 +40,14 @@ namespace Aop.Rio.IncomingDocProcessor
         private IRioDocumentParser rioDocumentParser;
 
         public IncomingDocProcessor(
+            Func<Owned<IUnitOfWork>> unitOfWorkFactory,
             IUnitOfWork unitOfWork,
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IRioObjectExtractor rioObjectExtractor,
             IRioDocumentParser rioDocumentParser)
         {
+            this.unitOfWorkFactory = unitOfWorkFactory;
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
@@ -198,12 +203,16 @@ namespace Aop.Rio.IncomingDocProcessor
             {
                 logger.Error("IncommingDocProcessor Exception: " + Helper.GetDetailedExceptionInfo(ex));
 
-                var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
-                this.unitOfWork.DbContext.Entry(incomingDoc).Reload();
+                using (var factory = unitOfWorkFactory())
+                {
+                    this.unitOfWork = factory.Value;
 
-                incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
+                    var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
 
-                this.unitOfWork.Save();
+                    incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
+
+                    this.unitOfWork.Save();
+                }
             }
         }
 
@@ -257,6 +266,7 @@ namespace Aop.Rio.IncomingDocProcessor
             doc.DocTypeId = docTypeId;
             doc.DocFormatTypeId = this.unitOfWork.DbContext.Set<DocFormatType>().Where(e => e.Alias == "Electronic").Single().DocFormatTypeId;
             doc.DocCasePartTypeId = this.unitOfWork.DbContext.Set<DocCasePartType>().Where(e => e.Alias == "Public").Single().DocCasePartTypeId;
+            doc.RegDate = DateTime.Now;
             doc.CorrRegNumber = null;
             doc.CorrRegDate = null;
             doc.AccessCode = GenerateAccessCode();

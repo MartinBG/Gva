@@ -22,12 +22,15 @@ using Common.Blob;
 using System.Configuration;
 using Gva.RioBridge.DataObjects;
 using Common.Rio.PortalBridge.RioObjects;
+using Autofac.Features.OwnedInstances;
 
 namespace Gva.Rio.IncomingDocProcessor
 {
     public class IncomingDocProcessor : IIncomingDocProcessor
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        private Func<Owned<IUnitOfWork>> unitOfWorkFactory;
 
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
@@ -36,12 +39,14 @@ namespace Gva.Rio.IncomingDocProcessor
         private IRioDocumentParser rioDocumentParser;
 
         public IncomingDocProcessor(
+            Func<Owned<IUnitOfWork>> unitOfWorkFactory,
             IUnitOfWork unitOfWork,
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IRioObjectExtractor rioObjectExtractor,
             IRioDocumentParser rioDocumentParser)
         {
+            this.unitOfWorkFactory = unitOfWorkFactory;
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
             this.correspondentRepository = correspondentRepository;
@@ -225,12 +230,16 @@ namespace Gva.Rio.IncomingDocProcessor
             {
                 logger.Error("IncommingDocProcessor Exception: " + Helper.GetDetailedExceptionInfo(ex));
 
-                var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
-                this.unitOfWork.DbContext.Entry(incomingDoc).Reload();
+                using (var factory = unitOfWorkFactory())
+                {
+                    this.unitOfWork = factory.Value;
 
-                incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
+                    var incomingDoc = this.unitOfWork.DbContext.Set<IncomingDoc>().SingleOrDefault(e => e.IncomingDocId == pendingIncomingDocId);
 
-                this.unitOfWork.Save();
+                    incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>().Single(e => e.Alias == "Incorrect").IncomingDocStatusId;
+
+                    this.unitOfWork.Save();
+                }
             }
         }
 

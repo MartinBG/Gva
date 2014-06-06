@@ -9,7 +9,7 @@
     'ui.bootstrap',
     'common',
     // @ifndef DEBUG
-    'ems.templates',
+    'aop.templates',
     // @endif
     'l10n',
     'l10n-tools'
