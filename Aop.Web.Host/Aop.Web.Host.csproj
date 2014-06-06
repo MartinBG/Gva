@@ -173,6 +173,12 @@
     <Content Include="App\**\*.*">
       <InProject>false</InProject>
     </Content>
+    <Content Include="FedNoms\nom.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FedNoms\nuts.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="RioSchemas\**\*.*">
       <InProject>false</InProject>
     </Content>

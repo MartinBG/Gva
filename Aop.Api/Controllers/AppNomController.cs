@@ -33,7 +33,7 @@ namespace Aop.Api.Controllers
             return Ok(new
             {
                 nomValueId = result.AopEmployerId,
-                name = result.Name,
+                name = string.Format("{0} {1}", result.Name, result.LotNum),
                 alias = result.LotNum,
                 isActive = true
             });
@@ -54,7 +54,7 @@ namespace Aop.Api.Controllers
                 .Select(e => new
                 {
                     nomValueId = e.AopEmployerId,
-                    name = e.Name,
+                    name = e.Name + " " + e.LotNum,
                     alias = e.LotNum,
                     isActive = true
                 })

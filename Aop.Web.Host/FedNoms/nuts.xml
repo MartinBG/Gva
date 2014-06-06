@@ -1,0 +1,1782 @@
+<?xml version="1.0"  encoding = 'utf-8'?>
+<nuts>
+	<item key="BG" value="БЪЛГАРИЯ" />
+	<item key="BG3" value="СЕВРНА И ИЗТОЧНА БЪЛГАРИЯ" />
+	<item key="BG31" value="Северозападен" />
+	<item key="BG311" value="Видин" />
+	<item key="BG312" value="Монтана" />
+	<item key="BG313" value="Враца" />
+	<item key="BG314" value="Плевен" />
+	<item key="BG315" value="Ловеч" />
+	<item key="BG32" value="Северен централен" />
+	<item key="BG321" value="Велико Търново" />
+	<item key="BG322" value="Габрово" />
+	<item key="BG323" value="Русе" />
+	<item key="BG324" value="Разград" />
+	<item key="BG325" value="Силистра" />
+	<item key="BG33" value="Североизточен" />
+	<item key="BG331" value="Варна" />
+	<item key="BG332" value="Добрич" />
+	<item key="BG333" value="Шумен" />
+	<item key="BG334" value="Търговище" />
+	<item key="BG34" value="Югоизточен" />
+	<item key="BG341" value="Бургас" />
+	<item key="BG342" value="Сливен" />
+	<item key="BG343" value="Ямбол" />
+	<item key="BG344" value="Стара Загора" />
+	<item key="BG4" value="Югозападна и южна централна България" />
+	<item key="BG41" value="Югозападен" />
+	<item key="BG411" value="София (столица)" />
+	<item key="BG412" value="София " />
+	<item key="BG413" value="Благоевград" />
+	<item key="BG414" value="Перник" />
+	<item key="BG415" value="Кюстендил" />
+	<item key="BG42" value="Южен централен" />
+	<item key="BG421" value="Пловдив" />
+	<item key="BG422" value="Хасково" />
+	<item key="BG423" value="Пазарджик" />
+	<item key="BG424" value="Смолян" />
+	<item key="BG425" value="Кърджали" />
+	<item key="BGZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="BGZZ" value="Допълнителен регион" />
+	<item key="BGZZZ" value="Допълнителен регион" />
+	<item key="AT" value="РЕПУБЛИКА АВСТРИЯ" />
+	<item key="AT1" value="ИЗТОЧНА АВСТРИЯ" />
+	<item key="AT11" value="Бургенланд (А)" />
+	<item key="AT111" value="Мителбургенланд" />
+	<item key="AT112" value="Нордбургенланд" />
+	<item key="AT113" value="Зюдбургенланд" />
+	<item key="AT12" value="Долна Австрия" />
+	<item key="AT121" value="Мостфиртел-Айзенвурцен" />
+	<item key="AT122" value="Нидерьостерайх-зюд" />
+	<item key="AT123" value="Санкт Пьолтен" />
+	<item key="AT124" value="Валдфиртел" />
+	<item key="AT125" value="Вайнфиртел" />
+	<item key="AT126" value="Винер Умланд/ Нордтейл" />
+	<item key="AT127" value="Винер Умланд/ Зюдтейл" />
+	<item key="AT13" value="Виена" />
+	<item key="AT130" value="Виена" />
+	<item key="AT2" value="ЮЖНА АВСТРИЯ" />
+	<item key="AT21" value="Кернтен" />
+	<item key="AT211" value="Клагенфурт-Вилах" />
+	<item key="AT212" value="Оберкернтен" />
+	<item key="AT213" value="Унтеркернтен" />
+	<item key="AT22" value="Щирия (Steiermark)" />
+	<item key="AT221" value="Грац" />
+	<item key="AT222" value="Лийцен" />
+	<item key="AT223" value="Източна Горна Щирия" />
+	<item key="AT224" value="Източна Щирия" />
+	<item key="AT225" value="Западна и Южна Щирия" />
+	<item key="AT226" value="Западна Горна Щирия" />
+	<item key="AT3" value="ЗАПАДНА АВСТРИЯ" />
+	<item key="AT31" value="Горна Австрия" />
+	<item key="AT311" value="Инфиртел" />
+	<item key="AT312" value="Линц-Велс" />
+	<item key="AT313" value="Мюлфиртел" />
+	<item key="AT314" value="Щайр-Кирхдорф" />
+	<item key="AT315" value="Траунфиртел" />
+	<item key="AT32" value="Залцбург" />
+	<item key="AT321" value="Лунгау" />
+	<item key="AT322" value="Пинцгау-Понгау" />
+	<item key="AT323" value="Залцбург и околности" />
+	<item key="AT33" value="Тирол" />
+	<item key="AT331" value="Аусерферн" />
+	<item key="AT332" value="Инсбрук" />
+	<item key="AT333" value="Западен Тирол" />
+	<item key="AT334" value="Тиролер оберланд" />
+	<item key="AT335" value="Тиролер унтерланд" />
+	<item key="AT34" value="Форарлберг" />
+	<item key="AT341" value="Блуденц-Брегенцер Валд" />
+	<item key="AT342" value="Райнтал-Бодензеегебийт" />
+	<item key="ATZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="ATZZ" value="Допълнителен регион" />
+	<item key="ATZZZ" value="Допълнителен регион" />
+	<item key="BE" value="КРАЛСТВО БЕЛГИЯ " />
+	<item key="BE1" value="БРЮКСЕЛСКИ РЕГИОН-СТОЛИЦА" />
+	<item key="BE10" value="Брюкселски регион -  столица" />
+	<item key="BE100" value="Район Брюксел-столица" />
+	<item key="BE2" value="ФЛАМАНДСКИ РЕГИОН" />
+	<item key="BE21" value="Провинция Антверпен" />
+	<item key="BE211" value="Район Антверпен" />
+	<item key="BE212" value="Район Мехелен" />
+	<item key="BE213" value="Район Турнаут" />
+	<item key="BE22" value="Провинция Лимбург (B)" />
+	<item key="BE221" value="Район Хаселт" />
+	<item key="BE222" value="Район Маасейк" />
+	<item key="BE223" value="Район Тонгерен" />
+	<item key="BE23" value="Провинция Източна Фландрия" />
+	<item key="BE231" value="Район Аалст" />
+	<item key="BE232" value="Район Дендермонде" />
+	<item key="BE233" value="Район Еекло" />
+	<item key="BE234" value="Район Гент" />
+	<item key="BE235" value="Район Уденаарде" />
+	<item key="BE236" value="Район Синт Никлаас" />
+	<item key="BE24" value="Провинция Фландрия-Брабант" />
+	<item key="BE241" value="Район Хале-Вилвоорде" />
+	<item key="BE242" value="Район Льовен" />
+	<item key="BE25" value="Провинция Западна Фландрия" />
+	<item key="BE251" value="Район Брюге (Брюж)" />
+	<item key="BE252" value="Район Диксмуйде" />
+	<item key="BE253" value="Район Йепер" />
+	<item key="BE254" value="Район Кортрайк" />
+	<item key="BE255" value="Район Остенде" />
+	<item key="BE256" value="Район Рьозеларе" />
+	<item key="BE257" value="Район Тийлт" />
+	<item key="BE258" value="Район Вьорне" />
+	<item key="BE3" value="ВАЛОНСКИ РЕГИОН" />
+	<item key="BE31" value="Провинция Брабант Валон" />
+	<item key="BE310" value="Район Нивей" />
+	<item key="BE32" value="Провинция Хайно" />
+	<item key="BE321" value="Район Ат" />
+	<item key="BE322" value="Район Шарльороа" />
+	<item key="BE323" value="Район Монс" />
+	<item key="BE324" value="Район Мускрон" />
+	<item key="BE325" value="Район Соание" />
+	<item key="BE326" value="Район Тюин" />
+	<item key="BE327" value="Район Турне" />
+	<item key="BE33" value="Провинция Лиеж" />
+	<item key="BE331" value="Район Юи" />
+	<item key="BE332" value="Район Лиеж" />
+	<item key="BE334" value="Район Варем" />
+	<item key="BE335" value="Район Вервиер - френска общност" />
+	<item key="BE336" value="Район Вервиер - немска общност" />
+	<item key="BE34" value="Провинция Люксембург (B)" />
+	<item key="BE341" value="Район Арлон" />
+	<item key="BE342" value="Район Бастон" />
+	<item key="BE343" value="Район Марш-ан-Фамен" />
+	<item key="BE344" value="Район Ньофшато" />
+	<item key="BE345" value="Район Виртон" />
+	<item key="BE35" value="Провинция Намюр" />
+	<item key="BE351" value="Район Динан" />
+	<item key="BE352" value="Район Намюр" />
+	<item key="BE353" value="Район Филипвил" />
+	<item key="BEZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="BEZZ" value="Допълнителен регион" />
+	<item key="BEZZZ" value="Допълнителен регион" />
+	<item key="CY" value="КИПЪР" />
+	<item key="CY0" value="КИПЪР" />
+	<item key="CY00" value="Кипър" />
+	<item key="CY000" value="Кипър" />
+	<item key="CYZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="CYZZ" value="Допълнителен регион" />
+	<item key="CYZZZ" value="Допълнителен регион" />
+	<item key="CZ" value="ЧЕШКА РЕПУБЛИКА " />
+	<item key="CZ0" value="ЧЕШКА РЕПУБЛИКА " />
+	<item key="CZ01" value="Прага" />
+	<item key="CZ010" value="Столица Прага" />
+	<item key="CZ02" value="Средна Чехия" />
+	<item key="CZ020" value="Средночешки край" />
+	<item key="CZ03" value="Югозапад" />
+	<item key="CZ031" value="Южночешки край" />
+	<item key="CZ032" value="Пилзенски край" />
+	<item key="CZ04" value="Северозапад" />
+	<item key="CZ041" value="Карловарски край" />
+	<item key="CZ042" value="Устецки край" />
+	<item key="CZ05" value="Североизток" />
+	<item key="CZ051" value="Либерецки край" />
+	<item key="CZ052" value="Краловехрадецки край" />
+	<item key="CZ053" value="Пардубицки край" />
+	<item key="CZ06" value="Югоизток" />
+	<item key="CZ063" value="Височина" />
+	<item key="CZ064" value="Южноморавски край" />
+	<item key="CZ07" value="Средна Моравия" />
+	<item key="CZ071" value="Оломоуцки край" />
+	<item key="CZ072" value="Злински край" />
+	<item key="CZ08" value="Мораво-Силезия" />
+	<item key="CZ080" value="Моравско-силезки край" />
+	<item key="CZZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="CZZZ" value="Допълнителен регион" />
+	<item key="CZZZZ" value="Допълнителен регион" />
+	<item key="DE" value="ФЕДЕРАЛНА РЕПУБЛИКА ГЕРМАНИЯ" />
+	<item key="DE1" value="БАДЕН-ВЮРТЕМБЕРГ" />
+	<item key="DE11" value="Щутгарт" />
+	<item key="DE111" value="Щутгарт, град" />
+	<item key="DE112" value="Бьоблинген" />
+	<item key="DE113" value="Еслинген" />
+	<item key="DE114" value="Гьопинген" />
+	<item key="DE115" value="Лудвигсбург" />
+	<item key="DE116" value="Ремс-Мур" />
+	<item key="DE117" value="Хайлброн, град" />
+	<item key="DE118" value="Хайлброн, област" />
+	<item key="DE119" value="Хоенлоекрайс" />
+	<item key="DE11A" value="Швебиш хал" />
+	<item key="DE11B" value="Майн-Таубер" />
+	<item key="DE11C" value="Хайденхайм" />
+	<item key="DE11D" value="Осталбкрайс" />
+	<item key="DE12" value="Карлсруе" />
+	<item key="DE121" value="Баден Баден" />
+	<item key="DE122" value="Карлсруе, град" />
+	<item key="DE123" value="Карлсруе, област" />
+	<item key="DE124" value="Ращат" />
+	<item key="DE125" value="Хайделберг" />
+	<item key="DE126" value="Манхайм" />
+	<item key="DE127" value="Некар-Оденвалд" />
+	<item key="DE128" value="Райн-Некар" />
+	<item key="DE129" value="Пфорцхайм" />
+	<item key="DE12A" value="Калв" />
+	<item key="DE12B" value="Енцкрайс" />
+	<item key="DE12C" value="Фройденщадт" />
+	<item key="DE13" value="Фрайбург" />
+	<item key="DE131" value="Фрайбург им Брайсгау" />
+	<item key="DE132" value="Брайсгау-Хохшварцвалд" />
+	<item key="DE133" value="Емендинген" />
+	<item key="DE134" value="Ортенаукрайс" />
+	<item key="DE135" value="Ротвайл" />
+	<item key="DE136" value="Шварцвалд-Баар" />
+	<item key="DE137" value="Тутлинген" />
+	<item key="DE138" value="Констанц" />
+	<item key="DE139" value="Льорах" />
+	<item key="DE13A" value="Валдсхут" />
+	<item key="DE14" value="Тюбинген" />
+	<item key="DE141" value="Ройтлинген" />
+	<item key="DE142" value="Тюбинген" />
+	<item key="DE143" value="Цолерналбкрайс" />
+	<item key="DE144" value="Улм" />
+	<item key="DE145" value="Алб-Донау" />
+	<item key="DE146" value="Биберах" />
+	<item key="DE147" value="Бодензеекрайс" />
+	<item key="DE148" value="Равенсбург" />
+	<item key="DE149" value="Зигмаринген" />
+	<item key="DE2" value="БАВАРИЯ (BAYERN)" />
+	<item key="DE21" value="Горна Бавария (Oberbayern)" />
+	<item key="DE211" value="Инголщадт" />
+	<item key="DE212" value="Мюнхен, град" />
+	<item key="DE213" value="Розенхайм, град" />
+	<item key="DE214" value="Алтьотинг" />
+	<item key="DE215" value="Берхтесгаденер Ланд" />
+	<item key="DE216" value="Бад Тьолц-Волфратсхаузен" />
+	<item key="DE217" value="Дахау" />
+	<item key="DE218" value="Еберсберг" />
+	<item key="DE219" value="Айхщет" />
+	<item key="DE21A" value="Ердинг" />
+	<item key="DE21B" value="Фрайзинг" />
+	<item key="DE21C" value="Фюрстенфелдбрук" />
+	<item key="DE21D" value="Гармиш-Партенкирхен" />
+	<item key="DE21E" value="Ландсберг на Лех" />
+	<item key="DE21F" value="Мийзбах" />
+	<item key="DE21G" value="Мюлдорф на Ин" />
+	<item key="DE21H" value="Мюнхен, област" />
+	<item key="DE21I" value="Нойбург-Шробенхаузен" />
+	<item key="DE21J" value="Пфафенхофен на Илм" />
+	<item key="DE21K" value="Розенхайм, област" />
+	<item key="DE21L" value="Щарнберг" />
+	<item key="DE21M" value="Траунщайн" />
+	<item key="DE21N" value="Вайлхайм-Шонгау" />
+	<item key="DE22" value="Долна Бавария (Niederbayern)" />
+	<item key="DE221" value="Ландсхут, град" />
+	<item key="DE222" value="Пасау, град" />
+	<item key="DE223" value="Щраубинг, град" />
+	<item key="DE224" value="Дегендорф" />
+	<item key="DE225" value="Фраюнг-Графенау" />
+	<item key="DE226" value="Келхайм" />
+	<item key="DE227" value="Ландсхут, област" />
+	<item key="DE228" value="Пасау, област" />
+	<item key="DE229" value="Реген" />
+	<item key="DE22A" value="Ротал-Ин" />
+	<item key="DE22B" value="Щраубинг-Боген" />
+	<item key="DE22C" value="Динголфинг-Ландау" />
+	<item key="DE23" value="Горен Пфалц (Oberpfalz)" />
+	<item key="DE231" value="Амберг, град" />
+	<item key="DE232" value="Регенсбург, град" />
+	<item key="DE233" value="Град Вайден ( i. d. Opf)" />
+	<item key="DE234" value="Амберг-Зулцбах" />
+	<item key="DE235" value="Хам" />
+	<item key="DE236" value="Ноймаркт в Оберпфалц" />
+	<item key="DE237" value="Нойщат на Валднааб" />
+	<item key="DE238" value="Регенсбург, област" />
+	<item key="DE239" value="Швандорф" />
+	<item key="DE23A" value="Тиршенройт" />
+	<item key="DE24" value="Горна Франкия (Oberfranken)" />
+	<item key="DE241" value="Бамберг, град" />
+	<item key="DE242" value="Байройт, град" />
+	<item key="DE243" value="Кобург, град" />
+	<item key="DE244" value="Хоф, град" />
+	<item key="DE245" value="Бамберг, област" />
+	<item key="DE246" value="Байройт, област" />
+	<item key="DE247" value="Кобург, област" />
+	<item key="DE248" value="Форххайм" />
+	<item key="DE249" value="Хоф, област" />
+	<item key="DE24A" value="Кронах" />
+	<item key="DE24B" value="Кулмбах" />
+	<item key="DE24C" value="Лихтенфелс" />
+	<item key="DE24D" value="Вунзийдел им Фихтелгебирге" />
+	<item key="DE25" value="Средна Франкия (Mittelfranken)" />
+	<item key="DE251" value="Ансбах, град" />
+	<item key="DE252" value="Ерланген, град" />
+	<item key="DE253" value="Фюрт, град" />
+	<item key="DE254" value="Нюрнберг, град" />
+	<item key="DE255" value="Швабах, град" />
+	<item key="DE256" value="Ансбах, област" />
+	<item key="DE257" value="Ерланген-Хьохщат" />
+	<item key="DE258" value="Фюрт, област" />
+	<item key="DE259" value="Нюрнбергер Ланд" />
+	<item key="DE25A" value="Нойщат на Айш-Бад Виндсхайм" />
+	<item key="DE25B" value="Рот" />
+	<item key="DE25C" value="Вайсенбург-Гунценхаузен" />
+	<item key="DE26" value="Долна Франкия (Unterfranken)" />
+	<item key="DE261" value="Ашафенбург, град" />
+	<item key="DE262" value="Швайнфурт, град" />
+	<item key="DE263" value="Вюрцбург, град" />
+	<item key="DE264" value="Ашафенбург, област" />
+	<item key="DE265" value="Бад Кисинген" />
+	<item key="DE266" value="Рьон-Грабфелд" />
+	<item key="DE267" value="Хасберге" />
+	<item key="DE268" value="Китцинген" />
+	<item key="DE269" value="Милтенберг" />
+	<item key="DE26A" value="Майн-Шпесарт" />
+	<item key="DE26B" value="Швайнфурт, област" />
+	<item key="DE26C" value="Вюрцбург, област" />
+	<item key="DE27" value="Швабия" />
+	<item key="DE271" value="Аугсбург, град" />
+	<item key="DE272" value="Кауфбойрен" />
+	<item key="DE273" value="Кемптен (Алгеу)" />
+	<item key="DE274" value="Меминген" />
+	<item key="DE275" value="Айхах-Фридберг" />
+	<item key="DE276" value="Аугсбург, област" />
+	<item key="DE277" value="Дилинген на Дунав" />
+	<item key="DE278" value="Гюнцбург" />
+	<item key="DE279" value="Ной-Улм" />
+	<item key="DE27A" value="Линдау (Бодензее)" />
+	<item key="DE27B" value="Осталгеу" />
+	<item key="DE27C" value="Унтералгеу" />
+	<item key="DE27D" value="Донау-Рийс" />
+	<item key="DE27E" value="Обералгеу" />
+	<item key="DE3" value="БЕРЛИН" />
+	<item key="DE30" value="Берлин" />
+	<item key="DE300" value="Берлин" />
+	<item key="DE4" value="БРАНДЕНБУРГ" />
+	<item key="DE41" value="Бранденбург – североизток" />
+	<item key="DE411" value="Франкфурт на Одер, град" />
+	<item key="DE412" value="Барним" />
+	<item key="DE413" value="Меркиш-Одерланд" />
+	<item key="DE414" value="Оберхавел" />
+	<item key="DE415" value="Одер-Шпрее" />
+	<item key="DE416" value="Остпригниц-Рупин" />
+	<item key="DE417" value="Пригниц" />
+	<item key="DE418" value="Укермарк" />
+	<item key="DE42" value="Бранденбург – югозапад" />
+	<item key="DE421" value="Бранденбург на Хавел" />
+	<item key="DE422" value="Котбус" />
+	<item key="DE423" value="Потсдам" />
+	<item key="DE424" value="Даме-Шпреевалд" />
+	<item key="DE425" value="Елбе-Елстер" />
+	<item key="DE426" value="Хавеланд" />
+	<item key="DE427" value="Обершпреевалд-Лаузиц" />
+	<item key="DE428" value="Потсдам-Мителмарк" />
+	<item key="DE429" value="Шпрее-Найсе" />
+	<item key="DE42A" value="Телтов-Флеминг" />
+	<item key="DE5" value="БРЕМЕН" />
+	<item key="DE50" value="Бремен" />
+	<item key="DE501" value="Бремен, град" />
+	<item key="DE502" value="Бремерхавен" />
+	<item key="DE6" value="ХАМБУРГ" />
+	<item key="DE60" value="Хамбург" />
+	<item key="DE600" value="Хамбург" />
+	<item key="DE7" value="ХЕСЕН" />
+	<item key="DE71" value="Дармщадт" />
+	<item key="DE711" value="Дармщадт, град" />
+	<item key="DE712" value="Франкфурт на Майн" />
+	<item key="DE713" value="Офенбах на Майн" />
+	<item key="DE714" value="Вийсбаден" />
+	<item key="DE715" value="Бергщрасе" />
+	<item key="DE716" value="Дармщадт-Дийбург" />
+	<item key="DE717" value="Грос-Герау" />
+	<item key="DE718" value="Хохтаунускрайс" />
+	<item key="DE719" value="Майн-Кинциг" />
+	<item key="DE71A" value="Майн-Таунус" />
+	<item key="DE71B" value="Оденвалдкрайс" />
+	<item key="DE71C" value="Офенбах, област" />
+	<item key="DE71D" value="Райнгау-Таунус" />
+	<item key="DE71E" value="Ветераукрайс" />
+	<item key="DE72" value="Гийсен" />
+	<item key="DE721" value="Гийсен, област" />
+	<item key="DE722" value="Лаан-Дил" />
+	<item key="DE723" value="Лимбург-Вайлбург" />
+	<item key="DE724" value="Марбург-Бийденкопф" />
+	<item key="DE725" value="Фогелсбергкрайс" />
+	<item key="DE73" value="Касел" />
+	<item key="DE731" value="Касел, град" />
+	<item key="DE732" value="Фулда" />
+	<item key="DE733" value="Херсфелд-Ротенбург" />
+	<item key="DE734" value="Касел, област" />
+	<item key="DE735" value="Швалм-Едер" />
+	<item key="DE736" value="Валдек-Франкенберг" />
+	<item key="DE737" value="Вера-Майснер" />
+	<item key="DE8" value="МЕКЛЕНБУРГ-ПОМЕРАНИЯ" />
+	<item key="DE80" value="Mекленбург-Предна Померания" />
+	<item key="DE801" value="Грайфсвалд" />
+	<item key="DE802" value="Нойбранденбург" />
+	<item key="DE803" value="Рощок" />
+	<item key="DE804" value="Шверин" />
+	<item key="DE805" value="Щралзунд" />
+	<item key="DE806" value="Висмар" />
+	<item key="DE807" value="Бад Доберан" />
+	<item key="DE808" value="Демин" />
+	<item key="DE809" value="Гюстров" />
+	<item key="DE80A" value="Лудвигслуст" />
+	<item key="DE80B" value="Мекленбург-Щрелитц" />
+	<item key="DE80C" value="Мюритц" />
+	<item key="DE80D" value="Северна Предна Померания" />
+	<item key="DE80E" value="Северозападен Мекленбург" />
+	<item key="DE80F" value="Източна Предна Померания" />
+	<item key="DE80G" value="Пархим" />
+	<item key="DE80H" value="Рюген" />
+	<item key="DE80I" value="Юкер-Рандов" />
+	<item key="DE9" value="ДОЛНА САКСОНИЯ (NIEDERSACHSEN)" />
+	<item key="DE91" value="Брауншвайг" />
+	<item key="DE911" value="Брауншвайг, град" />
+	<item key="DE912" value="Залцгитер" />
+	<item key="DE913" value="Волфсбург" />
+	<item key="DE914" value="Гифхорн" />
+	<item key="DE915" value="Гьотинген" />
+	<item key="DE916" value="Гослар" />
+	<item key="DE917" value="Хелмщет" />
+	<item key="DE918" value="Нортхайм" />
+	<item key="DE919" value="Остероде ам Харц" />
+	<item key="DE91A" value="Пайне" />
+	<item key="DE91B" value="Волфенбютел" />
+	<item key="DE92" value="Хановер" />
+	<item key="DE922" value="Дийпхолц" />
+	<item key="DE923" value="Хамелн-Пирмонт" />
+	<item key="DE925" value="Хилдесхайм" />
+	<item key="DE926" value="Холцминден" />
+	<item key="DE927" value="Нийнбург (Везер)" />
+	<item key="DE928" value="Шаумбург" />
+	<item key="DE929" value="Регион Хановер" />
+	<item key="DE93" value="Люнебург" />
+	<item key="DE931" value="Целе" />
+	<item key="DE932" value="Куксхавен" />
+	<item key="DE933" value="Харбург" />
+	<item key="DE934" value="Люхов-Даненберг" />
+	<item key="DE935" value="Люнебург, област" />
+	<item key="DE936" value="Остерхолц" />
+	<item key="DE937" value="Ротенбург (Вюме)" />
+	<item key="DE938" value="Золтау-Фалингбостел" />
+	<item key="DE939" value="Щаде" />
+	<item key="DE93A" value="Юлцен" />
+	<item key="DE93B" value="Ферден" />
+	<item key="DE94" value="Везер-Емс" />
+	<item key="DE941" value="Делменхорст" />
+	<item key="DE942" value="Емден" />
+	<item key="DE943" value="Олденбург, град" />
+	<item key="DE944" value="Оснабрюк, град" />
+	<item key="DE945" value="Вилхелмсхавен" />
+	<item key="DE946" value="Амерланд" />
+	<item key="DE947" value="Аурих" />
+	<item key="DE948" value="Клопенбург" />
+	<item key="DE949" value="Емсланд" />
+	<item key="DE94A" value="Фрийзланд (Г)" />
+	<item key="DE94B" value="Графшафт Бентхайм" />
+	<item key="DE94C" value="Леер" />
+	<item key="DE94D" value="Олденбург, област" />
+	<item key="DE94E" value="Оснабрюк, област" />
+	<item key="DE94F" value="Фехта" />
+	<item key="DE94G" value="Везермарш" />
+	<item key="DE94H" value="Витмунд" />
+	<item key="DEA" value="СЕВЕРЕН РЕЙН-ВЕСТФАЛИЯ" />
+	<item key="DEA1" value="Дюселдорф" />
+	<item key="DEA11" value="Дюселдорф, град" />
+	<item key="DEA12" value="Дуисбург" />
+	<item key="DEA13" value="Есен" />
+	<item key="DEA14" value="Крефелд" />
+	<item key="DEA15" value="Мьонхенгладбах" />
+	<item key="DEA16" value="Мюлхайм на Рур" />
+	<item key="DEA17" value="Оберхаузен" />
+	<item key="DEA18" value="Ремшайд" />
+	<item key="DEA19" value="Золинген" />
+	<item key="DEA1A" value="Вупертал" />
+	<item key="DEA1B" value="Клеве" />
+	<item key="DEA1C" value="Метман" />
+	<item key="DEA1D" value="Райн-Крайс-Нойс" />
+	<item key="DEA1E" value="Фийрзен" />
+	<item key="DEA1F" value="Везел" />
+	<item key="DEA2" value="Кьолн" />
+	<item key="DEA21" value="Аахен, град" />
+	<item key="DEA22" value="Бон" />
+	<item key="DEA23" value="Кьолн, град" />
+	<item key="DEA24" value="Леверкузен" />
+	<item key="DEA25" value="Аахен, област" />
+	<item key="DEA26" value="Дюрен" />
+	<item key="DEA27" value="Райн-Ерфткрайс" />
+	<item key="DEA28" value="Ойскирхен" />
+	<item key="DEA29" value="Хайнсберг" />
+	<item key="DEA2A" value="Обербергишер Крайс" />
+	<item key="DEA2B" value="Райниш-Бергишер Крайс" />
+	<item key="DEA2C" value="Райн-Зийг" />
+	<item key="DEA3" value="Мюнстер" />
+	<item key="DEA31" value="Боттроп" />
+	<item key="DEA32" value="Гелзенкирхен" />
+	<item key="DEA33" value="Мюнстер" />
+	<item key="DEA34" value="Боркен" />
+	<item key="DEA35" value="Кьосфелд" />
+	<item key="DEA36" value="Реклингхаузен" />
+	<item key="DEA37" value="Щайнфурт" />
+	<item key="DEA38" value="Варендорф" />
+	<item key="DEA4" value="Детмолд" />
+	<item key="DEA41" value="Бийлефелд" />
+	<item key="DEA42" value="Гютерсло" />
+	<item key="DEA43" value="Херфорд" />
+	<item key="DEA44" value="Хьокстер" />
+	<item key="DEA45" value="Липпе" />
+	<item key="DEA46" value="Минден-Люббеке" />
+	<item key="DEA47" value="Падерборн" />
+	<item key="DEA5" value="Арнсберг" />
+	<item key="DEA51" value="Бохум" />
+	<item key="DEA52" value="Дортмунд" />
+	<item key="DEA53" value="Хаген" />
+	<item key="DEA54" value="Хам" />
+	<item key="DEA55" value="Херне" />
+	<item key="DEA56" value="Еннепе-Рур" />
+	<item key="DEA57" value="Хохзауерландкрайс" />
+	<item key="DEA58" value="Меркишер Крайс" />
+	<item key="DEA59" value="Олпе" />
+	<item key="DEA5A" value="Зийген-Витгенщайн" />
+	<item key="DEA5B" value="Зьост" />
+	<item key="DEA5C" value="Унна" />
+	<item key="DEB" value="РАЙНЛАНД-ПФАЛЦ" />
+	<item key="DEB1" value="Кобленц" />
+	<item key="DEB11" value="Кобленц, град" />
+	<item key="DEB12" value="Арвайлер" />
+	<item key="DEB13" value="Алтенкирхен (Вестервалд)" />
+	<item key="DEB14" value="Бад Кройцнах" />
+	<item key="DEB15" value="Биркенфелд" />
+	<item key="DEB16" value="Кохем-Цел" />
+	<item key="DEB17" value="Майен-Кобленц" />
+	<item key="DEB18" value="Нойвийд" />
+	<item key="DEB19" value="Райн-Хунсрюк" />
+	<item key="DEB1A" value="Райн-Лаан" />
+	<item key="DEB1B" value="Вестервалдкрайс" />
+	<item key="DEB2" value="Трир" />
+	<item key="DEB21" value="Трир, град" />
+	<item key="DEB22" value="Бернкастел-Витлих" />
+	<item key="DEB23" value="Битбург-Прюм" />
+	<item key="DEB24" value="Даун" />
+	<item key="DEB25" value="Трир-Заарбург" />
+	<item key="DEB3" value="Райнхесен-Пфалц" />
+	<item key="DEB31" value="Франкентал (Пфалц)" />
+	<item key="DEB32" value="Кайзерслаутерн, град" />
+	<item key="DEB33" value="Ландау ин дер Пфалц" />
+	<item key="DEB34" value="Лудвигсхафен на Рейн" />
+	<item key="DEB35" value="Майнц, град" />
+	<item key="DEB36" value="Нойщадт на дер Вайнщрасе" />
+	<item key="DEB37" value="Пирмасенс" />
+	<item key="DEB38" value="Шпайер" />
+	<item key="DEB39" value="Вормс, град" />
+	<item key="DEB3A" value="Цвайбрюкен" />
+	<item key="DEB3B" value="Алцай-Вормс" />
+	<item key="DEB3C" value="Бад Дюркхайм" />
+	<item key="DEB3D" value="Донерсбергкрайс" />
+	<item key="DEB3E" value="Гермерсхайм" />
+	<item key="DEB3F" value="Кайзерслаутерн, област" />
+	<item key="DEB3G" value="Кузел" />
+	<item key="DEB3H" value="Зюдлихе Вайнщрасе" />
+	<item key="DEB3I" value="Райн-Пфалц-Крайс/Лудвигсхафен, област" />
+	<item key="DEB3J" value="Майнц-Бинген" />
+	<item key="DEB3K" value="Зюдвестпфалц" />
+	<item key="DEC" value="ЗААРЛАНД" />
+	<item key="DEC0" value="Заарланд" />
+	<item key="DEC01" value="Щадтфербанд Заарбрюкен" />
+	<item key="DEC02" value="Мерциг-Вадерн" />
+	<item key="DEC03" value="Нойнкирхен" />
+	<item key="DEC04" value="Заарлуис" />
+	<item key="DEC05" value="Заарпфалц" />
+	<item key="DEC06" value="Занкт Вендел" />
+	<item key="DED" value="САКСОНИЯ (SACHSEN)" />
+	<item key="DED1" value="Кемниц" />
+	<item key="DED11" value="Кемниц, град" />
+	<item key="DED12" value="Плауен" />
+	<item key="DED13" value="Цвикау, град" />
+	<item key="DED14" value="Аннаберг" />
+	<item key="DED15" value="Кемницер Ланд" />
+	<item key="DED16" value="Фрайберг" />
+	<item key="DED17" value="Фогтландкрайс" />
+	<item key="DED18" value="Митлерер Ерцгебиргскрайс" />
+	<item key="DED19" value="Митвайда" />
+	<item key="DED1A" value="Щолберг" />
+	<item key="DED1B" value="Ауе-Шварценберг" />
+	<item key="DED1C" value="Цвикауер Ланд" />
+	<item key="DED2" value="Дрезден" />
+	<item key="DED21" value="Дрезден" />
+	<item key="DED22" value="Гьорлиц" />
+	<item key="DED23" value="Хойерсверда" />
+	<item key="DED24" value="Баутцен" />
+	<item key="DED25" value="Майсен" />
+	<item key="DED26" value="Нийдершлезишер Оберлаузитцкрайс" />
+	<item key="DED27" value="Рийза-Гросенхайн" />
+	<item key="DED28" value="Льобау-Цитау" />
+	<item key="DED29" value="Саксонска Швейцария (S?chsische Schweiz)" />
+	<item key="DED2A" value="Вайсеритцкрайс" />
+	<item key="DED2B" value="Каменц" />
+	<item key="DED3" value="Лайпциг" />
+	<item key="DED31" value="Лайпциг, град" />
+	<item key="DED32" value="Делицш" />
+	<item key="DED33" value="Дьобелн" />
+	<item key="DED34" value="Лайпцигер Ланд" />
+	<item key="DED35" value="Мулденталкрайс" />
+	<item key="DED36" value="Торгау-Ошатц" />
+	<item key="DEE" value="САКСОНИЯ-АНХАЛТ" />
+	<item key="DEE0" value="Саксония - Анхалт" />
+	<item key="DEE01" value="Дессау-Розлау, град без околността" />
+	<item key="DEE02" value="Хале (Saale), град без околността" />
+	<item key="DEE03" value="Магдебург, град без околността" />
+	<item key="DEE04" value="Алтмарккрайс Залцведел" />
+	<item key="DEE05" value="Анхалт-Битерфелд" />
+	<item key="DEE06" value="Йериховер Ланд" />
+	<item key="DEE07" value="Бьорде" />
+	<item key="DEE08" value="Бюргенланд (D)" />
+	<item key="DEE09" value="Харц" />
+	<item key="DEE0A" value="Мансфелд-Зюдхарц" />
+	<item key="DEE0B" value="Заалекрайс" />
+	<item key="DEE0C" value="Залцланд" />
+	<item key="DEE0D" value="Щендал" />
+	<item key="DEE0E" value="Витенберг" />
+	<item key="DEF" value="ШЛЕЗВИГ-ХОЛЩАЙН" />
+	<item key="DEF0" value="Шлезвиг-Холщайн" />
+	<item key="DEF01" value="Фленсбург" />
+	<item key="DEF02" value="Кийл" />
+	<item key="DEF03" value="Любек" />
+	<item key="DEF04" value="Ноймюнстер" />
+	<item key="DEF05" value="Дитмаршен" />
+	<item key="DEF06" value="Херцогтум Лауенбург" />
+	<item key="DEF07" value="Нордфрийзланд" />
+	<item key="DEF08" value="Остхолщайн" />
+	<item key="DEF09" value="Пинеберг" />
+	<item key="DEF0A" value="Пльон" />
+	<item key="DEF0B" value="Рендсбург-Екернфьорде" />
+	<item key="DEF0C" value="Шлезвиг-Фленсбург" />
+	<item key="DEF0D" value="Зегеберг" />
+	<item key="DEF0E" value="Щайнбург" />
+	<item key="DEF0F" value="Щормарн" />
+	<item key="DEG" value="ТЮРИНГИЯ" />
+	<item key="DEG0" value="Тюрингия" />
+	<item key="DEG01" value="Ерфурт" />
+	<item key="DEG02" value="Гера" />
+	<item key="DEG03" value="Йена" />
+	<item key="DEG04" value="Зул" />
+	<item key="DEG05" value="Ваймар, град" />
+	<item key="DEG06" value="Айхсфелд" />
+	<item key="DEG07" value="Нордхаузен" />
+	<item key="DEG09" value="Унщрут-Хайних" />
+	<item key="DEG0A" value="Кифхойзеркрайс" />
+	<item key="DEG0B" value="Шмалкалден-Майнинген" />
+	<item key="DEG0C" value="Гота" />
+	<item key="DEG0D" value="Зьоммерда" />
+	<item key="DEG0E" value="Хилдбургхаузен" />
+	<item key="DEG0F" value="Илм-Крайс" />
+	<item key="DEG0G" value="Ваймарер Ланд" />
+	<item key="DEG0H" value="Зоннеберг" />
+	<item key="DEG0I" value="Заалфелд-Рудолщадт" />
+	<item key="DEG0J" value="Заале-Холцланд" />
+	<item key="DEG0K" value="Заале-Орла" />
+	<item key="DEG0L" value="Грайц" />
+	<item key="DEG0M" value="Алтенбургер Ланд" />
+	<item key="DEG0N" value="Айзенах" />
+	<item key="DEG0P" value="Вартбургкрайс" />
+	<item key="DEZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="DEZZ" value="Допълнителен регион" />
+	<item key="DEZZZ" value="Допълнителен регион" />
+	<item key="DK" value="КРАЛСТВО ДАНИЯ" />
+	<item key="DK0" value="ДАНИЯ" />
+	<item key="DK01" value="Хьоведстаден" />
+	<item key="DK011" value="Град Копенхаген" />
+	<item key="DK012" value="Копенхаген околност" />
+	<item key="DK013" value="Нордзеланд" />
+	<item key="DK014" value="Борнхолм" />
+	<item key="DK02" value="Зееланд" />
+	<item key="DK021" value="Йостзеланд" />
+	<item key="DK022" value="Вест- и Зидзеланд" />
+	<item key="DK03" value="Южна Дания" />
+	<item key="DK031" value="Фин " />
+	<item key="DK032" value="Сидиланд" />
+	<item key="DK04" value="Мидтиланд" />
+	<item key="DK041" value="Вестиланд" />
+	<item key="DK042" value="Остиланд" />
+	<item key="DK05" value="Нордиланд" />
+	<item key="DK050" value="Нордиланд" />
+	<item key="DKZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="DKZZ" value="Допълнителен регион" />
+	<item key="DKZZZ" value="Допълнителен регион" />
+	<item key="EE" value="РЕПУБЛИКА ЕСТОНИЯ" />
+	<item key="EE0" value="ЕСТОНИЯ" />
+	<item key="EE00" value="Естония" />
+	<item key="EE001" value="Северна Естония" />
+	<item key="EE004" value="Западна Естония" />
+	<item key="EE006" value="Централна Естония" />
+	<item key="EE007" value="Североизточна Естония" />
+	<item key="EE008" value="Южна Естония" />
+	<item key="EEZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="EEZZ" value="Допълнителен регион" />
+	<item key="EEZZZ" value="Допълнителен регион" />
+	<item key="ES" value="КРАЛСТВО ИСПАНИЯ" />
+	<item key="ES1" value="СЕВЕРОЗАПАД" />
+	<item key="ES11" value="Галисия" />
+	<item key="ES111" value="А Коруня" />
+	<item key="ES112" value="Луго" />
+	<item key="ES113" value="Оуренсе" />
+	<item key="ES114" value="Понтеведра" />
+	<item key="ES12" value="Принсипадо де Астуриас" />
+	<item key="ES120" value="Астуриас" />
+	<item key="ES13" value="Кантабрия" />
+	<item key="ES130" value="Кантабрия" />
+	<item key="ES2" value="СЕВЕРОИЗТОК" />
+	<item key="ES21" value="Паис Васко" />
+	<item key="ES211" value="Алава" />
+	<item key="ES212" value="Хипускоа" />
+	<item key="ES213" value="Виская" />
+	<item key="ES22" value="Комунидад форал де Навара" />
+	<item key="ES220" value="Навара" />
+	<item key="ES23" value="Ла Риоха" />
+	<item key="ES230" value="Ла Риоха" />
+	<item key="ES24" value="Арагон" />
+	<item key="ES241" value="Уеска" />
+	<item key="ES242" value="Теруел" />
+	<item key="ES243" value="Сарагоса" />
+	<item key="ES3" value="ОБЩИНА МАДРИД" />
+	<item key="ES30" value="Община Мадрид" />
+	<item key="ES300" value="Мадрид" />
+	<item key="ES4" value="ЦЕНТЪР (E)" />
+	<item key="ES41" value="Кастилия и Леон" />
+	<item key="ES411" value="Авила" />
+	<item key="ES412" value="Бургос" />
+	<item key="ES413" value="Леон" />
+	<item key="ES414" value="Паленсия" />
+	<item key="ES415" value="Саламанка" />
+	<item key="ES416" value="Сеговия" />
+	<item key="ES417" value="Сория" />
+	<item key="ES418" value="Валядолид" />
+	<item key="ES419" value="Самора" />
+	<item key="ES42" value="Кастиля-Ла Манча" />
+	<item key="ES421" value="Албасете" />
+	<item key="ES422" value="Сиудад Реал" />
+	<item key="ES423" value="Куенка" />
+	<item key="ES424" value="Гуадалахара" />
+	<item key="ES425" value="Толедо" />
+	<item key="ES43" value="Екстремадура" />
+	<item key="ES431" value="Бадахос" />
+	<item key="ES432" value="Касерес" />
+	<item key="ES5" value="ИЗТОК" />
+	<item key="ES51" value="Каталуния" />
+	<item key="ES511" value="Барселона" />
+	<item key="ES512" value="Хирона" />
+	<item key="ES513" value="Леида" />
+	<item key="ES514" value="Тарагона" />
+	<item key="ES52" value="Община Валенсия" />
+	<item key="ES521" value="Аликанте" />
+	<item key="ES522" value="Кастейон" />
+	<item key="ES523" value="Валенсия" />
+	<item key="ES53" value="Балеарски острови" />
+	<item key="ES531" value="Ейвиса и Форментера" />
+	<item key="ES532" value="Майорка" />
+	<item key="ES533" value="Минорка" />
+	<item key="ES6" value="ЮГ" />
+	<item key="ES61" value="Андалусия" />
+	<item key="ES611" value="Алмерия" />
+	<item key="ES612" value="Кадис" />
+	<item key="ES613" value="Кордоба" />
+	<item key="ES614" value="Гранада" />
+	<item key="ES615" value="Уелва" />
+	<item key="ES616" value="Хаен" />
+	<item key="ES617" value="Малага" />
+	<item key="ES618" value="Севиля" />
+	<item key="ES62" value="Регион де Мурсия" />
+	<item key="ES620" value="Мурсия" />
+	<item key="ES63" value="Автономен град Сеута" />
+	<item key="ES630" value="Сеута" />
+	<item key="ES64" value="Автономен град Мелия" />
+	<item key="ES640" value="Мелия" />
+	<item key="ES7" value="КАНАРСКИ ОСТРОВИ" />
+	<item key="ES70" value="Канарски острови" />
+	<item key="ES703" value="Ел Хиеро" />
+	<item key="ES704" value="Фуертевентура" />
+	<item key="ES705" value="Гран Канария" />
+	<item key="ES706" value="Ла Гомера" />
+	<item key="ES707" value="Ла Палма" />
+	<item key="ES708" value="Ланзароте" />
+	<item key="ES709" value="Тенерифе" />
+	<item key="ESZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="ESZZ" value="Допълнителен регион" />
+	<item key="ESZZZ" value="Допълнителен регион" />
+	<item key="FI" value="РЕПУБЛИКА ФИНЛАНДИЯ" />
+	<item key="FI1" value="СЪЩИНСКА ФИНЛАНДИЯ (MANNER-SUOMI)" />
+	<item key="FI13" value="Източна Финландия" />
+	<item key="FI131" value="Южна Саво" />
+	<item key="FI132" value="Северна Саво" />
+	<item key="FI133" value="Северна Каряла" />
+	<item key="FI134" value="Кайнуу" />
+	<item key="FI18" value="Южна Финландия" />
+	<item key="FI181" value="Уузимаа" />
+	<item key="FI182" value="Източна Уузимаа" />
+	<item key="FI183" value="Варзинайс Суоми" />
+	<item key="FI184" value="Канта Хеме" />
+	<item key="FI185" value="Пеийет Хеме" />
+	<item key="FI186" value="Кименлааксо" />
+	<item key="FI187" value="Южна Каряла" />
+	<item key="FI19" value="Западна Финландия" />
+	<item key="FI193" value="Централна Финландия" />
+	<item key="FI194" value="Южна Пойанмаа" />
+	<item key="FI195" value="Пойанмаа" />
+	<item key="FI196" value="Сатакунта" />
+	<item key="FI197" value="Пирканмаа" />
+	<item key="FI1A" value="Северна Финландия" />
+	<item key="FI1A1" value="Централна Пойанмаа" />
+	<item key="FI1A2" value="Северна Пойанмаа" />
+	<item key="FI1A3" value="Лаппи" />
+	<item key="FI2" value="ОЛАНД" />
+	<item key="FI20" value="Оланд" />
+	<item key="FI200" value="Оланд" />
+	<item key="FIZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="FIZZ" value="Допълнителен регион" />
+	<item key="FIZZZ" value="Допълнителен регион" />
+	<item key="FR" value="РЕПУБЛИКА ФРАНЦИЯ" />
+	<item key="FR1" value="ИЛ ДЬО ФРАНС" />
+	<item key="FR10" value="Ил дьо Франс" />
+	<item key="FR101" value="Париж" />
+	<item key="FR102" value="Сен-е-Марн" />
+	<item key="FR103" value="Ивленс" />
+	<item key="FR104" value="Есон" />
+	<item key="FR105" value="От-дьо-Сен" />
+	<item key="FR106" value="Сен-Сен-Дени" />
+	<item key="FR107" value="Вал-дьо-Марн" />
+	<item key="FR108" value="Вал-д' Оаз" />
+	<item key="FR2" value="БАСЕН ПАРИЗИЕН" />
+	<item key="FR21" value="Шампан-Арден" />
+	<item key="FR211" value="Арденс" />
+	<item key="FR212" value="Об" />
+	<item key="FR213" value="Марн" />
+	<item key="FR214" value="От-Марн" />
+	<item key="FR22" value="Пикардия" />
+	<item key="FR221" value="Есн" />
+	<item key="FR222" value="Оаз" />
+	<item key="FR223" value="Сом" />
+	<item key="FR23" value="Горна Нормандия (Haute-Normandie)" />
+	<item key="FR231" value="Евр" />
+	<item key="FR232" value="Сен-Маритим" />
+	<item key="FR24" value="Център" />
+	<item key="FR241" value="Шер" />
+	<item key="FR242" value="Евр-е-Луар" />
+	<item key="FR243" value="Индр" />
+	<item key="FR244" value="Индр-е-Луар" />
+	<item key="FR245" value="Луар-е-Шер" />
+	<item key="FR246" value="Луаре" />
+	<item key="FR25" value="Долна Нормандия (Basse-Normandie)" />
+	<item key="FR251" value="Калвадос" />
+	<item key="FR252" value="Манш" />
+	<item key="FR253" value="Орн" />
+	<item key="FR26" value="Бургундия (Bourgogne)" />
+	<item key="FR261" value="Кот-д' Ор" />
+	<item key="FR262" value="Ниевр" />
+	<item key="FR263" value="Саон-е-Луар" />
+	<item key="FR264" value="Йон" />
+	<item key="FR3" value="НОРД - ПА-ДЬО-КАЛЕ" />
+	<item key="FR30" value="Норд - Па-дьо-Кале" />
+	<item key="FR301" value="Норд" />
+	<item key="FR302" value="Па-дьо-Кале" />
+	<item key="FR4" value="ИЗТОК" />
+	<item key="FR41" value="Лорен" />
+	<item key="FR411" value="Мьорт-е-Мозел" />
+	<item key="FR412" value="Мьоз" />
+	<item key="FR413" value="Мозел" />
+	<item key="FR414" value="Восгес" />
+	<item key="FR42" value="Елзас" />
+	<item key="FR421" value="Ба-Рен" />
+	<item key="FR422" value="От-Рен" />
+	<item key="FR43" value="Франш-Комт" />
+	<item key="FR431" value="Дубс" />
+	<item key="FR432" value="Юра" />
+	<item key="FR433" value="От-Саон" />
+	<item key="FR434" value="Теритоар дьо Белфор" />
+	<item key="FR5" value="ЗАПАД" />
+	<item key="FR51" value="Пеи дьо ла Луар" />
+	<item key="FR511" value="Луар-Атлантик" />
+	<item key="FR512" value="Мен-е-Луар" />
+	<item key="FR513" value="Майен" />
+	<item key="FR514" value="Сарт" />
+	<item key="FR515" value="Ванде" />
+	<item key="FR52" value="Бретан" />
+	<item key="FR521" value="Кот-д' Армор" />
+	<item key="FR522" value="Финистер" />
+	<item key="FR523" value="Ил-е-Вилен" />
+	<item key="FR524" value="Морбиан" />
+	<item key="FR53" value="Поату-Шарант" />
+	<item key="FR531" value="Шарант" />
+	<item key="FR532" value="Шарант-Маритим" />
+	<item key="FR533" value="Дьо-Севр" />
+	<item key="FR534" value="Виен" />
+	<item key="FR6" value="ЮГОЗАПАД" />
+	<item key="FR61" value="Аквитания (Aquitaine)" />
+	<item key="FR611" value="Дордонь" />
+	<item key="FR612" value="Жиронд" />
+	<item key="FR613" value="Ландс" />
+	<item key="FR614" value="Лот-е-Гарон" />
+	<item key="FR615" value="Пирене-Атлантикс" />
+	<item key="FR62" value="Миди-Пирене" />
+	<item key="FR621" value="Ариеж" />
+	<item key="FR622" value="Авейрон" />
+	<item key="FR623" value="От-Гарон" />
+	<item key="FR624" value="Жерс" />
+	<item key="FR625" value="Лот" />
+	<item key="FR626" value="От-Пирене" />
+	<item key="FR627" value="Тарн" />
+	<item key="FR628" value="Тарн-е-Гарон" />
+	<item key="FR63" value="Лимузен" />
+	<item key="FR631" value="Корез" />
+	<item key="FR632" value="Крьоз" />
+	<item key="FR633" value="От-Виен" />
+	<item key="FR7" value="ЦЕНТРАЛЕН-ИЗТОЧЕН" />
+	<item key="FR71" value="Рон-Алпс" />
+	<item key="FR711" value="Ен" />
+	<item key="FR712" value="Ардеш" />
+	<item key="FR713" value="Дром" />
+	<item key="FR714" value="Изер" />
+	<item key="FR715" value="Луар" />
+	<item key="FR716" value="Рон" />
+	<item key="FR717" value="Савой" />
+	<item key="FR718" value="От-Савой" />
+	<item key="FR72" value="Оверн" />
+	<item key="FR721" value="Алие" />
+	<item key="FR722" value="Кантал" />
+	<item key="FR723" value="Горна Лоара (От-Луар)" />
+	<item key="FR724" value="Пюи-дьо-Дом" />
+	<item key="FR8" value="СРЕДИЗЕМНОМОРСКИ" />
+	<item key="FR81" value="Лангедок-Русийон" />
+	<item key="FR811" value="Од" />
+	<item key="FR812" value="Гард" />
+	<item key="FR813" value="Ерол" />
+	<item key="FR814" value="Лозер" />
+	<item key="FR815" value="Пирене-Ориенталс" />
+	<item key="FR82" value="Прованс-Алпс-Кот д' Азур" />
+	<item key="FR821" value="Алпс-де-От-Прованс" />
+	<item key="FR822" value="Отс-Алпс" />
+	<item key="FR823" value="Алпс-Маритимс" />
+	<item key="FR824" value="Буш-дю-Рон" />
+	<item key="FR825" value="Вар" />
+	<item key="FR826" value="Воклюз" />
+	<item key="FR83" value="Корс" />
+	<item key="FR831" value="Корс-дю-Сюд" />
+	<item key="FR832" value="От-Корс" />
+	<item key="FR9" value="ОТВЪДМОРСКИ ТЕРИТОРИИ / ДЕПАРТАМЕНТИ" />
+	<item key="FR91" value="Остров Гваделупа" />
+	<item key="FR910" value="Гваделупа" />
+	<item key="FR92" value="Остров Мартиника" />
+	<item key="FR920" value="Мартиника" />
+	<item key="FR93" value="Френска Гвиана" />
+	<item key="FR930" value="Гвиана" />
+	<item key="FR94" value="Острови Реюнион" />
+	<item key="FR940" value="Реюнион" />
+	<item key="FRZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="FRZZ" value="Допълнителен регион" />
+	<item key="FRZZZ" value="Допълнителен регион" />
+	<item key="GR" value="РЕПУБЛИКА ГЪРЦИЯ" />
+	<item key="GR1" value="СЕВЕРНА ГЪРЦИЯ" />
+	<item key="GR11" value="Източна Македония, Тракия" />
+	<item key="GR111" value="Еврос" />
+	<item key="GR112" value="Ксанти" />
+	<item key="GR113" value="Родопи" />
+	<item key="GR114" value="Драма" />
+	<item key="GR115" value="Кавала" />
+	<item key="GR12" value="Централна Македония" />
+	<item key="GR121" value="Иматия" />
+	<item key="GR122" value="Солун (Тесалоники)" />
+	<item key="GR123" value="Килкис" />
+	<item key="GR124" value="Пела" />
+	<item key="GR125" value="Пиерия" />
+	<item key="GR126" value="Серес" />
+	<item key="GR127" value="Халкидики" />
+	<item key="GR13" value="Западна Македония" />
+	<item key="GR131" value="Гревена" />
+	<item key="GR132" value="Кастория" />
+	<item key="GR133" value="Козани" />
+	<item key="GR134" value="Флорина" />
+	<item key="GR14" value="Тесалия" />
+	<item key="GR141" value="Кардица" />
+	<item key="GR142" value="Лариса" />
+	<item key="GR143" value="Магнизия" />
+	<item key="GR144" value="Трикала" />
+	<item key="GR2" value="ЦЕНТРАЛНА ГЪРЦИЯ" />
+	<item key="GR21" value="Епир" />
+	<item key="GR211" value="Арта" />
+	<item key="GR212" value="Теспротия" />
+	<item key="GR213" value="Янина" />
+	<item key="GR214" value="Превеза" />
+	<item key="GR22" value="Островна Йония" />
+	<item key="GR221" value="Закинт(ос)" />
+	<item key="GR222" value="Керкира" />
+	<item key="GR223" value="Кефалиния" />
+	<item key="GR224" value="Левкада" />
+	<item key="GR23" value="Западна Елада" />
+	<item key="GR231" value="Етолоакарнания" />
+	<item key="GR232" value="Ахея" />
+	<item key="GR233" value="Илия" />
+	<item key="GR24" value="Централна Елада" />
+	<item key="GR241" value="Беотия" />
+	<item key="GR242" value="Евбея" />
+	<item key="GR243" value="Евритания" />
+	<item key="GR244" value="Фтиотида" />
+	<item key="GR245" value="Фокида" />
+	<item key="GR25" value="Пелопонес" />
+	<item key="GR251" value="Арголида" />
+	<item key="GR252" value="Аркадия" />
+	<item key="GR253" value="Коринтия" />
+	<item key="GR254" value="Лакония" />
+	<item key="GR255" value="Месиния" />
+	<item key="GR3" value="АТИКА" />
+	<item key="GR30" value="Атика" />
+	<item key="GR300" value="Атика" />
+	<item key="GR4" value="ЕГЕЙСКИ ОСТРОВИ, КРИТ" />
+	<item key="GR41" value="Северна Егеида" />
+	<item key="GR411" value="Лесбос" />
+	<item key="GR412" value="Самос" />
+	<item key="GR413" value="Хиос" />
+	<item key="GR42" value="Южна Егеида" />
+	<item key="GR421" value="Додеканисос" />
+	<item key="GR422" value="Кикладски острови" />
+	<item key="GR43" value="Остров Крит" />
+	<item key="GR431" value="Ираклио" />
+	<item key="GR432" value="Ласити" />
+	<item key="GR433" value="Ретимни" />
+	<item key="GR434" value="Хания" />
+	<item key="GRZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="GRZZ" value="Допълнителен регион" />
+	<item key="GRZZZ" value="Допълнителен регион " />
+	<item key="HU" value="РЕПУБЛИКА УНГАРИЯ" />
+	<item key="HU1" value="СРЕДНА УНГАРИЯ" />
+	<item key="HU10" value="Средна Унгария" />
+	<item key="HU101" value="Будапеща" />
+	<item key="HU102" value="Пеща" />
+	<item key="HU2" value="ДУНАНТУЛ (ЗАДУНАВИЕ)" />
+	<item key="HU21" value="Средно Задунавие" />
+	<item key="HU211" value="Фейер" />
+	<item key="HU212" value="Комаром-Естергом" />
+	<item key="HU213" value="Веспрем" />
+	<item key="HU22" value="Западно Задунавие" />
+	<item key="HU221" value="Дьор-Мошон-Шопрон" />
+	<item key="HU222" value="Ваш" />
+	<item key="HU223" value="Зала" />
+	<item key="HU23" value="Южно Задунавие" />
+	<item key="HU231" value="Бараня" />
+	<item key="HU232" value="Шомод" />
+	<item key="HU233" value="Толна" />
+	<item key="HU3" value="АЛФЬОЛД И СЕВЕРНА УНГАРИЯ" />
+	<item key="HU31" value="Северна Унгария" />
+	<item key="HU311" value="Боршод-Абауй-Земплен" />
+	<item key="HU312" value="Хевеш" />
+	<item key="HU313" value="Ноград" />
+	<item key="HU32" value="Северен Алфьолд" />
+	<item key="HU321" value="Хайду-Бихар" />
+	<item key="HU322" value="Яш-Надкун-Солнок" />
+	<item key="HU323" value="Саболч-Сатмар-Берег" />
+	<item key="HU33" value="Южен Алфьолд" />
+	<item key="HU331" value="Бач-Кишкун" />
+	<item key="HU332" value="Бекеш" />
+	<item key="HU333" value="Чонград" />
+	<item key="HUZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="HUZZ" value="Допълнителен регион" />
+	<item key="HUZZZ" value="Допълнителен регион" />
+	<item key="IE" value="РЕПУБЛИКА ИРЛАНДИЯ (ЕЙРЕ)" />
+	<item key="IE0" value="ИРЛАНДИЯ" />
+	<item key="IE01" value="Пограничен район, Мидлънд и Западен район" />
+	<item key="IE011" value="Пограничен район" />
+	<item key="IE012" value="Мидлънд" />
+	<item key="IE013" value="Западен район" />
+	<item key="IE02" value="Южен и Източен район" />
+	<item key="IE021" value="Дъблин" />
+	<item key="IE022" value="Среден Изток" />
+	<item key="IE023" value="Среден Запад" />
+	<item key="IE024" value="Югоизток (IRL)" />
+	<item key="IE025" value="Югозапад (IRL)" />
+	<item key="IEZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="IEZZ" value="Допълнителен регион" />
+	<item key="IEZZZ" value="Допълнителен регион" />
+	<item key="IT" value="РЕПУБЛИКА ИТАЛИЯ" />
+	<item key="ITC" value="СЕВЕРОЗАПАД" />
+	<item key="ITC1" value="Пиемонт" />
+	<item key="ITC11" value="Торино" />
+	<item key="ITC12" value="Верчели" />
+	<item key="ITC13" value="Биела" />
+	<item key="ITC14" value="Вербано-Кузио-Осола" />
+	<item key="ITC15" value="Новара" />
+	<item key="ITC16" value="Кунео" />
+	<item key="ITC17" value="Асти" />
+	<item key="ITC18" value="Алесандрия" />
+	<item key="ITC2" value="Вале д’Аоста" />
+	<item key="ITC20" value="Вале д' Аоста" />
+	<item key="ITC3" value="Лигурия" />
+	<item key="ITC31" value="Империя" />
+	<item key="ITC32" value="Савона" />
+	<item key="ITC33" value="Генуа (Дженова)" />
+	<item key="ITC34" value="Ла Специя" />
+	<item key="ITC4" value="Ломбардия" />
+	<item key="ITC41" value="Варезе" />
+	<item key="ITC42" value="Комо" />
+	<item key="ITC43" value="Леко" />
+	<item key="ITC44" value="Сондрио" />
+	<item key="ITC45" value="Милано" />
+	<item key="ITC46" value="Бергамо" />
+	<item key="ITC47" value="Бреша" />
+	<item key="ITC48" value="Павия" />
+	<item key="ITC49" value="Лоди" />
+	<item key="ITC4A" value="Кремона" />
+	<item key="ITC4B" value="Мантуа (Мантова)" />
+	<item key="ITD" value="СЕВЕРОИЗТОК" />
+	<item key="ITD1" value="Автономна провинция Болцано" />
+	<item key="ITD10" value="Болцано-Бозен" />
+	<item key="ITD2" value="Автономна провинция Тренто" />
+	<item key="ITD20" value="Тренто" />
+	<item key="ITD3" value="Венето" />
+	<item key="ITD31" value="Верона" />
+	<item key="ITD32" value="Виченца" />
+	<item key="ITD33" value="Белуно" />
+	<item key="ITD34" value="Тревизо" />
+	<item key="ITD35" value="Венеция" />
+	<item key="ITD36" value="Падуа (Падова)" />
+	<item key="ITD37" value="Ровиго" />
+	<item key="ITD4" value="Фриули-Венеция Джулия" />
+	<item key="ITD41" value="Порденоне" />
+	<item key="ITD42" value="Удине" />
+	<item key="ITD43" value="Гориция" />
+	<item key="ITD44" value="Триест" />
+	<item key="ITD5" value="Емилия-Романя" />
+	<item key="ITD51" value="Пиаченца" />
+	<item key="ITD52" value="Парма" />
+	<item key="ITD53" value="Реджо нел' Емилия" />
+	<item key="ITD54" value="Модена" />
+	<item key="ITD55" value="Болоня" />
+	<item key="ITD56" value="Ферара" />
+	<item key="ITD57" value="Равена" />
+	<item key="ITD58" value="Форли-Чезена" />
+	<item key="ITD59" value="Римини" />
+	<item key="ITE" value="ЦЕНТЪР (I)" />
+	<item key="ITE1" value="Тоскана" />
+	<item key="ITE11" value="Маса-Карара" />
+	<item key="ITE12" value="Лука" />
+	<item key="ITE13" value="Пистоя" />
+	<item key="ITE14" value="Флоренция" />
+	<item key="ITE15" value="Прато" />
+	<item key="ITE16" value="Ливорно" />
+	<item key="ITE17" value="Пиза" />
+	<item key="ITE18" value="Арецо" />
+	<item key="ITE19" value="Сиена" />
+	<item key="ITE1A" value="Гросето" />
+	<item key="ITE2" value="Умбрия" />
+	<item key="ITE21" value="Перуджа" />
+	<item key="ITE22" value="Терни" />
+	<item key="ITE3" value="Марке" />
+	<item key="ITE31" value="Пезаро и Урбино" />
+	<item key="ITE32" value="Анкона" />
+	<item key="ITE33" value="Мачерата" />
+	<item key="ITE34" value="Асколи Пичено" />
+	<item key="ITE4" value="Лацио" />
+	<item key="ITE41" value="Витербо" />
+	<item key="ITE42" value="Риети" />
+	<item key="ITE43" value="Рома" />
+	<item key="ITE44" value="Латина" />
+	<item key="ITE45" value="Фрозиноне" />
+	<item key="ITF" value="ЮГ" />
+	<item key="ITF1" value="Абруцо" />
+	<item key="ITF11" value="Л' Акуила" />
+	<item key="ITF12" value="Терамо" />
+	<item key="ITF13" value="Пескара" />
+	<item key="ITF14" value="Киети" />
+	<item key="ITF2" value="Молизе" />
+	<item key="ITF21" value="Изерния" />
+	<item key="ITF22" value="Кампобасо" />
+	<item key="ITF3" value="Кампания" />
+	<item key="ITF31" value="Казерта" />
+	<item key="ITF32" value="Беневенто" />
+	<item key="ITF33" value="Неапол" />
+	<item key="ITF34" value="Авелино" />
+	<item key="ITF35" value="Салерно" />
+	<item key="ITF4" value="Пулия" />
+	<item key="ITF41" value="Фоджа" />
+	<item key="ITF42" value="Бари" />
+	<item key="ITF43" value="Таранто" />
+	<item key="ITF44" value="Бриндизи" />
+	<item key="ITF45" value="Лече" />
+	<item key="ITF5" value="Базиликата" />
+	<item key="ITF51" value="Потенца" />
+	<item key="ITF52" value="Матера" />
+	<item key="ITF6" value="Калабрия" />
+	<item key="ITF61" value="Козенца" />
+	<item key="ITF62" value="Кротоне" />
+	<item key="ITF63" value="Катандзаро" />
+	<item key="ITF64" value="Вибо Валентия" />
+	<item key="ITF65" value="Реджо ди Калабрия" />
+	<item key="ITG" value="ОСТРОВИ" />
+	<item key="ITG1" value="Сицилия" />
+	<item key="ITG11" value="Трапани" />
+	<item key="ITG12" value="Палермо" />
+	<item key="ITG13" value="Месина" />
+	<item key="ITG14" value="Агридженто" />
+	<item key="ITG15" value="Калтанисета" />
+	<item key="ITG16" value="Енна" />
+	<item key="ITG17" value="Катания" />
+	<item key="ITG18" value="Рагуза" />
+	<item key="ITG19" value="Сиракуза" />
+	<item key="ITG2" value="Сардиния" />
+	<item key="ITG25" value="Сасари" />
+	<item key="ITG26" value="Нуоро" />
+	<item key="ITG27" value="Каглиари" />
+	<item key="ITG28" value="Ористано" />
+	<item key="ITG29" value="Олбиа-Темпио" />
+	<item key="ITG2A" value="Оглиастра" />
+	<item key="ITG2B" value="Медио Кампидано" />
+	<item key="ITG2C" value="Карбония-Иглесиас" />
+	<item key="ITZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="ITZZ" value="Допълнителен регион" />
+	<item key="ITZZZ" value="Допълнителен регион" />
+	<item key="LT" value="РЕПУБЛИКА ЛИТВА" />
+	<item key="LT0" value="ЛИТВА" />
+	<item key="LT00" value="Литва" />
+	<item key="LT001" value="Алитаус апскритис" />
+	<item key="LT002" value="Кауно апскритис" />
+	<item key="LT003" value="Клайпедос апскритис" />
+	<item key="LT004" value="Мариямполес апскритис" />
+	<item key="LT005" value="Паневецио апскритис" />
+	<item key="LT006" value="Сиаулиу апскритис" />
+	<item key="LT007" value="Таурагес апскритис" />
+	<item key="LT008" value="Телсиу апскритис" />
+	<item key="LT009" value="Утенос апскритис" />
+	<item key="LT00A" value="Вилняус апскритис" />
+	<item key="LTZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="LTZZ" value="Допълнителен регион" />
+	<item key="LTZZZ" value="Допълнителен регион" />
+	<item key="LU" value="ВЕЛИКО ХЕРЦОГСТВО ЛЮКСЕМБУРГ" />
+	<item key="LU0" value="ЛЮКСЕМБУРГ (ВЕЛИКО ХЕРЦОГСТВО)" />
+	<item key="LU00" value="Люксембург (Велико херцогство)" />
+	<item key="LU000" value="Люксембург (Велико херцогство)" />
+	<item key="LUZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="LUZZ" value="Допълнителен регион" />
+	<item key="LUZZZ" value="Допълнителен регион" />
+	<item key="LV" value="РЕПУБЛИКА ЛАТВИЯ" />
+	<item key="LV0" value="ЛАТВИЯ" />
+	<item key="LV00" value="Латвия" />
+	<item key="LV003" value="Курземе" />
+	<item key="LV005" value="Латгале" />
+	<item key="LV006" value="Рига" />
+	<item key="LV007" value="Пиерига" />
+	<item key="LV008" value="Видземе" />
+	<item key="LV009" value="Земгале" />
+	<item key="LVZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="LVZZ" value="Допълнителен регион" />
+	<item key="LVZZZ" value="Допълнителен регион" />
+	<item key="MT" value="МАЛТА" />
+	<item key="MT0" value="МАЛТА" />
+	<item key="MT00" value="Малта" />
+	<item key="MT001" value="Малта" />
+	<item key="MT002" value="Гоцо и Комино/ Гавдекс и Кеммуна" />
+	<item key="MTZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="MTZZ" value="Допълнителен регион" />
+	<item key="MTZZZ" value="Допълнителен регион" />
+	<item key="NL" value="КРАЛСТВО ХОЛАНДИЯ" />
+	<item key="NL1" value="СЕВЕРНА НИДЕРЛАНДИЯ" />
+	<item key="NL11" value="Грьонинген" />
+	<item key="NL111" value="Оост-Грьонинген" />
+	<item key="NL112" value="Делфцайл ен омгевинг" />
+	<item key="NL113" value="Овериг Грьонинген" />
+	<item key="NL12" value="Фрийзланд (NL)" />
+	<item key="NL121" value="Ноорд-Фрийзланд" />
+	<item key="NL122" value="Зюидвест-Фрийзланд" />
+	<item key="NL123" value="Зюидоост-Фрийзланд" />
+	<item key="NL13" value="Дренте" />
+	<item key="NL131" value="Ноорд-Дренте" />
+	<item key="NL132" value="Зюидоост-Дренте" />
+	<item key="NL133" value="Зюидвест-Дренте" />
+	<item key="NL2" value="ИЗТОЧНА НИДЕРЛАНДИЯ" />
+	<item key="NL21" value="Оверайссел" />
+	<item key="NL211" value="Ноорд-Оверайссел" />
+	<item key="NL212" value="Зюидвест-Оверайссел" />
+	<item key="NL213" value="Твенте" />
+	<item key="NL22" value="Гелдерланд" />
+	<item key="NL221" value="Велуве" />
+	<item key="NL224" value="Зюидвест-Гелдерланд" />
+	<item key="NL225" value="Ахтерхьок" />
+	<item key="NL226" value="Арнем/Наймеген" />
+	<item key="NL23" value="Флеволанд" />
+	<item key="NL230" value="Флеволанд" />
+	<item key="NL3" value="ЗАПАДНА НИДЕРЛАНДИЯ" />
+	<item key="NL31" value="Утрехт" />
+	<item key="NL310" value="Утрехт" />
+	<item key="NL32" value="Ноорд-Холанд" />
+	<item key="NL321" value="Коп ван Ноорд-Холанд" />
+	<item key="NL322" value="Алкмаар ен омгевинг" />
+	<item key="NL323" value="Аймонд" />
+	<item key="NL324" value="Агломерация Хаарлем" />
+	<item key="NL325" value="Заанстреек" />
+	<item key="NL326" value="Гроот-Амстердам" />
+	<item key="NL327" value="Хет Гоой ен Фехтщреек" />
+	<item key="NL33" value="Зюид-Холанд" />
+	<item key="NL331" value="Агломерация Лайден ен Боленщреек" />
+	<item key="NL332" value="Агломерация 's-Гравенхаге" />
+	<item key="NL333" value="Делфт ен Вестланд" />
+	<item key="NL334" value="Оост-Зюид-Холанд" />
+	<item key="NL335" value="Гроот-Райнмонд" />
+	<item key="NL336" value="Зюидоост-Зюид-Холанд" />
+	<item key="NL34" value="Зееланд" />
+	<item key="NL341" value="Зееувш-Флаандерен" />
+	<item key="NL342" value="Овериг Зееланд" />
+	<item key="NL4" value="ЮЖНА НИДЕРЛАНДИЯ" />
+	<item key="NL41" value="Ноорд-Брабант" />
+	<item key="NL411" value="Вест-Ноорд-Брабант" />
+	<item key="NL412" value="Мидден-Ноорд-Брабант" />
+	<item key="NL413" value="Ноордоост-Ноорд-Брабант" />
+	<item key="NL414" value="Зюидоост-Ноорд-Брабант" />
+	<item key="NL42" value="Лимбург (NL)" />
+	<item key="NL421" value="Ноорд-Лимбург" />
+	<item key="NL422" value="Мидден-Лимбург" />
+	<item key="NL423" value="Зюид-Лимбург" />
+	<item key="NLZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="NLZZ" value="Допълнителен регион" />
+	<item key="NLZZZ" value="Допълнителен регион" />
+	<item key="PL" value="РЕПУБЛИКА ПОЛША" />
+	<item key="PL1" value="ЦЕНТРАЛЕН РЕГИОН" />
+	<item key="PL11" value="Луджки" />
+	<item key="PL113" value="Град  Лодз" />
+	<item key="PL114" value="Лодски" />
+	<item key="PL115" value="Петрковски" />
+	<item key="PL116" value="Шерадски" />
+	<item key="PL117" value="Скерневицки" />
+	<item key="PL12" value="Мазовьецки" />
+	<item key="PL121" value="Чйехановско-плоцки" />
+	<item key="PL122" value="Остролецко-сйедлецки" />
+	<item key="PL127" value="Град Варшава" />
+	<item key="PL128" value="Радомски" />
+	<item key="PL129" value="Варшавски източен" />
+	<item key="PL12A" value="Варшавски западен" />
+	<item key="PL2" value="ЮЖЕН РЕГИОН" />
+	<item key="PL21" value="Малополски" />
+	<item key="PL213" value="Град Краков" />
+	<item key="PL214" value="Краковски" />
+	<item key="PL215" value="Новосандецки" />
+	<item key="PL216" value="Освиецимски" />
+	<item key="PL217" value="Тарновски" />
+	<item key="PL22" value="Сласки" />
+	<item key="PL224" value="Ченстоховски" />
+	<item key="PL225" value="Бйелски" />
+	<item key="PL227" value="Рибницки" />
+	<item key="PL228" value="Битомски" />
+	<item key="PL229" value="Гливицки" />
+	<item key="PL22A" value="Катовицки" />
+	<item key="PL22B" value="Сосновецки" />
+	<item key="PL22C" value="Тиски" />
+	<item key="PL3" value="ИЗТОЧЕН РЕГИОН" />
+	<item key="PL31" value="Лубелски" />
+	<item key="PL311" value="Биялски" />
+	<item key="PL312" value="Челмско-замойски" />
+	<item key="PL314" value="Любелски" />
+	<item key="PL315" value="Пулавски" />
+	<item key="PL32" value="Подкарпатски" />
+	<item key="PL323" value="Крошненски" />
+	<item key="PL324" value="Пшемиски" />
+	<item key="PL325" value="Ржечовски" />
+	<item key="PL326" value="Тарнобрески " />
+	<item key="PL33" value="Швьетокжиски" />
+	<item key="PL331" value="Киелски" />
+	<item key="PL332" value="Сандомерско-еджейовски " />
+	<item key="PL34" value="Подласки" />
+	<item key="PL343" value="Биялостоцки" />
+	<item key="PL344" value="Ломжински" />
+	<item key="PL345" value="Сувалски" />
+	<item key="PL4" value="СЕВЕРОЗАПАДЕН РЕГИОН" />
+	<item key="PL41" value="Вьелкополски" />
+	<item key="PL411" value="Пилски" />
+	<item key="PL414" value="Конински" />
+	<item key="PL415" value="Град Познан" />
+	<item key="PL416" value="Калиски" />
+	<item key="PL417" value="Лешчински" />
+	<item key="PL418" value="Познански " />
+	<item key="PL42" value="Заходньопоморски" />
+	<item key="PL422" value="Кошалински" />
+	<item key="PL423" value="Старгардски" />
+	<item key="PL424" value="Град Шчечин" />
+	<item key="PL425" value="Шчечински" />
+	<item key="PL43" value="Лубуски" />
+	<item key="PL431" value="Горжовски" />
+	<item key="PL432" value="Зйельоногорски" />
+	<item key="PL5" value="ЮГОЗАПАДЕН РЕГИОН" />
+	<item key="PL51" value="Долносласки" />
+	<item key="PL514" value="Град Вроцлав" />
+	<item key="PL515" value="Йеленогорски " />
+	<item key="PL516" value="Легницко-Глоговски" />
+	<item key="PL517" value="Валбржиски" />
+	<item key="PL518" value="Вроцлавски" />
+	<item key="PL52" value="Ополски" />
+	<item key="PL521" value="Ниски" />
+	<item key="PL522" value="Ополски" />
+	<item key="PL6" value="СЕВЕРЕН РЕГИОН" />
+	<item key="PL61" value="Куявско-Поморски" />
+	<item key="PL613" value="Бигодско-Торунски" />
+	<item key="PL614" value="Груджандски" />
+	<item key="PL615" value="Вроцлавски" />
+	<item key="PL62" value="Варминско-Мазурски" />
+	<item key="PL621" value="Елблашки" />
+	<item key="PL622" value="Олщински" />
+	<item key="PL623" value="Елцки" />
+	<item key="PL63" value="Поморски" />
+	<item key="PL631" value="Слупски" />
+	<item key="PL633" value="Труймейски" />
+	<item key="PL634" value="Гдански" />
+	<item key="PL635" value="Староградски" />
+	<item key="PLZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="PLZZ" value="Допълнителен регион" />
+	<item key="PLZZZ" value="Допълнителен регион" />
+	<item key="PT" value="РЕПУБЛИКА ПОРТУГАЛИЯ" />
+	<item key="PT1" value="КОНТИНЕНТАЛНА" />
+	<item key="PT11" value="Норте" />
+	<item key="PT111" value="Миньо-Лима" />
+	<item key="PT112" value="Каваду" />
+	<item key="PT113" value="Аве" />
+	<item key="PT114" value="Гранде Порту" />
+	<item key="PT115" value="Тамежа" />
+	<item key="PT116" value="Ентре Дуру е Вужа" />
+	<item key="PT117" value="Дуру" />
+	<item key="PT118" value="Алту Траш-ош-Монтеш" />
+	<item key="PT15" value="Алгарве" />
+	<item key="PT150" value="Алгарве" />
+	<item key="PT16" value="Център (P)" />
+	<item key="PT161" value="Байшу Вужа" />
+	<item key="PT162" value="Байшу Мондежу" />
+	<item key="PT163" value="Пинял Литурал" />
+	<item key="PT164" value="Пинял Интериор Норте" />
+	<item key="PT165" value="Дау-Лафоиш" />
+	<item key="PT166" value="Пинял Интериор Сул" />
+	<item key="PT167" value="Сера да Ещрея" />
+	<item key="PT168" value="Бейра Интериор Норте" />
+	<item key="PT169" value="Бейра Интериор Сул" />
+	<item key="PT16A" value="Кова да Бейра" />
+	<item key="PT16B" value="Оеще" />
+	<item key="PT16C" value="Медиу Тежу" />
+	<item key="PT17" value="Лишбоа (Лисабон)" />
+	<item key="PT171" value="Гранде Лишбоа" />
+	<item key="PT172" value="Пениншула де Сетубал" />
+	<item key="PT18" value="Алентежу" />
+	<item key="PT181" value="Алентежу Литурал" />
+	<item key="PT182" value="Алту Алентежу" />
+	<item key="PT183" value="Алентежу Централ" />
+	<item key="PT184" value="Байшу Алентежу" />
+	<item key="PT185" value="Лецириа ду Тежу" />
+	<item key="PT2" value="Автономен регион на Азорските острови" />
+	<item key="PT20" value="Автономен регион на Азорските острови" />
+	<item key="PT200" value="Автономен регион на Азорските острови" />
+	<item key="PT3" value="Автономен регион на остров Мадейра" />
+	<item key="PT30" value="Автономен регион на остров Мадейра" />
+	<item key="PT300" value="Автономен регион на остров Мадейра" />
+	<item key="PTZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="PTZZ" value="Допълнителен регион" />
+	<item key="PTZZZ" value="Допълнителен регион" />
+	<item key="RO" value="РУМЪНИЯ" />
+	<item key="RO1" value="Макрорегион 1" />
+	<item key="RO11" value="Северозапад" />
+	<item key="RO111" value="Бихор" />
+	<item key="RO112" value="Бистрица-Насауд" />
+	<item key="RO113" value="Клуж" />
+	<item key="RO114" value="Марамуреш" />
+	<item key="RO115" value="Сату Маре" />
+	<item key="RO116" value="Сълаж" />
+	<item key="RO12" value="Център" />
+	<item key="RO121" value="Алба" />
+	<item key="RO122" value="Брашов" />
+	<item key="RO123" value="Ковасна" />
+	<item key="RO124" value="Харгита" />
+	<item key="RO125" value="Муреш" />
+	<item key="RO126" value="Сибиу" />
+	<item key="RO2" value="Макрорегион 2" />
+	<item key="RO21" value="Североизток" />
+	<item key="RO211" value="Бакъу" />
+	<item key="RO212" value="Ботошани" />
+	<item key="RO213" value="Яш" />
+	<item key="RO214" value="Нямц" />
+	<item key="RO215" value="Сучава" />
+	<item key="RO216" value="Васлуй" />
+	<item key="RO22" value="Югоизток" />
+	<item key="RO221" value="Браила" />
+	<item key="RO222" value="Бузъу" />
+	<item key="RO223" value="Констанца" />
+	<item key="RO224" value="Галац" />
+	<item key="RO225" value="Тулча" />
+	<item key="RO226" value="Вранча" />
+	<item key="RO3" value="Макрорегион 3" />
+	<item key="RO31" value="Юг - Мунтения" />
+	<item key="RO311" value="Арджеш" />
+	<item key="RO312" value="Калараш" />
+	<item key="RO313" value="Дъмбовица" />
+	<item key="RO314" value="Гюргево" />
+	<item key="RO315" value="Яломица" />
+	<item key="RO316" value="Прахова" />
+	<item key="RO317" value="Телеорман" />
+	<item key="RO32" value="Букурещ-Илфов" />
+	<item key="RO321" value="Букурещ" />
+	<item key="RO322" value="Илфов" />
+	<item key="RO4" value="Макрорегион 4" />
+	<item key="RO41" value="Югозападна Олтения" />
+	<item key="RO411" value="Долж" />
+	<item key="RO412" value="Горж" />
+	<item key="RO413" value="Мехединц" />
+	<item key="RO414" value="Олт" />
+	<item key="RO415" value="Вълча" />
+	<item key="RO42" value="Запад" />
+	<item key="RO421" value="Арад" />
+	<item key="RO422" value="Караш-Северин" />
+	<item key="RO423" value="Хунедоара" />
+	<item key="RO424" value="Тимиш" />
+	<item key="ROZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="ROZZ" value="Допълнителен регион" />
+	<item key="ROZZZ" value="Допълнителен регион" />
+	<item key="SE" value="КРАЛСТВО ШВЕЦИЯ" />
+	<item key="SE1" value="Източна Швеция" />
+	<item key="SE11" value="Стокхолм" />
+	<item key="SE110" value="Окръг Стокхолм" />
+	<item key="SE12" value="Централна Източна Швеция" />
+	<item key="SE121" value="Окръг Упсала" />
+	<item key="SE122" value="Окръг Сьодерманландс" />
+	<item key="SE123" value="Окръг Устергътландс" />
+	<item key="SE124" value="Окръг Ъребро" />
+	<item key="SE125" value="Окръг Вестманландс" />
+	<item key="SE2" value="Южна Швеция" />
+	<item key="SE21" value="Смоланд и островите" />
+	<item key="SE211" value="Окръг Йънкъпингс" />
+	<item key="SE212" value="Окръг Кронобергс" />
+	<item key="SE213" value="Окръг Калмар" />
+	<item key="SE214" value="Окръг Готландс" />
+	<item key="SE22" value="Южна Швеция" />
+	<item key="SE221" value="Окръг Блекинге" />
+	<item key="SE224" value="Окръг Сконе (Сканиа)" />
+	<item key="SE23" value="Западна Швеция" />
+	<item key="SE231" value="Окръг Халандс" />
+	<item key="SE232" value="Област Вестра Гьоталандс" />
+	<item key="SE3" value="Северна Швеция" />
+	<item key="SE31" value="Централна Северна Швеция" />
+	<item key="SE311" value="Окръг Вермландс" />
+	<item key="SE312" value="Окръг Даларнас" />
+	<item key="SE313" value="Окръг Йевлеборгс" />
+	<item key="SE32" value="Среден Норланд" />
+	<item key="SE321" value="Окръг Вестернорландс" />
+	<item key="SE322" value="Окръг Йемтландс" />
+	<item key="SE33" value="Горен Норланд" />
+	<item key="SE331" value="Окръг Вестерботтенс" />
+	<item key="SE332" value="Окръг Норботтенс" />
+	<item key="SEZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="SEZZ" value="Допълнителен регион" />
+	<item key="SEZZZ" value="Допълнителен регион" />
+	<item key="SI" value="РЕПУБЛИКА СЛОВЕНИЯ" />
+	<item key="SI0" value="СЛОВЕНИЯ" />
+	<item key="SI01" value="Източна Словения" />
+	<item key="SI011" value="Помурска" />
+	<item key="SI012" value="Подравска" />
+	<item key="SI013" value="Корошка" />
+	<item key="SI014" value="Савиньска" />
+	<item key="SI015" value="Засавска" />
+	<item key="SI016" value="Сподньепосавска" />
+	<item key="SI017" value="Югоизточна Словения" />
+	<item key="SI018" value="Нотранско-крашка" />
+	<item key="SI02" value="Западна Словения" />
+	<item key="SI021" value="Осредньесловенска" />
+	<item key="SI022" value="Гореньска" />
+	<item key="SI023" value="Горишка" />
+	<item key="SI024" value="Обално-крашка" />
+	<item key="SIZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="SIZZ" value="Допълнителен регион" />
+	<item key="SIZZZ" value="Допълнителен регион" />
+	<item key="SK" value="СЛОВАШКА РЕПУБЛИКА" />
+	<item key="SK0" value="СЛОВАШКА РЕПУБЛИКА" />
+	<item key="SK01" value="Братиславски край" />
+	<item key="SK010" value="Братиславски край" />
+	<item key="SK02" value="Западна Словакия" />
+	<item key="SK021" value="Търнавски край" />
+	<item key="SK022" value="Тренчански край" />
+	<item key="SK023" value="Нитрански край" />
+	<item key="SK03" value="Средна Словакия" />
+	<item key="SK031" value="Жилински край" />
+	<item key="SK032" value="Банскобистрицки край" />
+	<item key="SK04" value="Източна Словакия" />
+	<item key="SK041" value="Прешовски край" />
+	<item key="SK042" value="Кошицки край" />
+	<item key="SKZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="SKZZ" value="Допълнителен регион" />
+	<item key="SKZZZ" value="Допълнителен регион" />
+	<item key="UK" value="ОБЕДИНЕНО КРАЛСТВО ВЕЛИКОБРИТАНИЯ И СЕВЕРНА ИРЛАНДИЯ" />
+	<item key="UKC" value="СЕВЕРОИЗТОК (АНГЛИЯ)" />
+	<item key="UKC1" value="Тийс Вали и Дърам" />
+	<item key="UKC11" value="Хартлипул и Стоктън-он-Тийс" />
+	<item key="UKC12" value="Саут Тийссайд" />
+	<item key="UKC13" value="Дарлингтън" />
+	<item key="UKC14" value="Дърам, графство" />
+	<item key="UKC2" value="Нортъмбърланд и Тайн енд Уеър" />
+	<item key="UKC21" value="Нортъмбърланд" />
+	<item key="UKC22" value="Тайнсайд" />
+	<item key="UKC23" value="Съндърланд" />
+	<item key="UKD" value="СЕВЕРОЗАПАД  (АНГЛИЯ)" />
+	<item key="UKD1" value="Къмбрия" />
+	<item key="UKD11" value="Западна Къмбрия" />
+	<item key="UKD12" value="Източна Къмбрия" />
+	<item key="UKD2" value="Чешър" />
+	<item key="UKD21" value="Халтън и Уорингтън " />
+	<item key="UKD22" value="Чешър, графство" />
+	<item key="UKD3" value="Грейтър Манчестър" />
+	<item key="UKD31" value="Грейтър Манчестър юг" />
+	<item key="UKD32" value="Грейтър Манчестър север" />
+	<item key="UKD4" value="Ланкашър" />
+	<item key="UKD41" value="Блекбърн с Даруен" />
+	<item key="UKD42" value="Блекпул" />
+	<item key="UKD43" value="Ланкашър, графство" />
+	<item key="UKD5" value="Мърсисайд" />
+	<item key="UKD51" value="Ийст Мърсисайд" />
+	<item key="UKD52" value="Ливърпул" />
+	<item key="UKD53" value="Сефтън" />
+	<item key="UKD54" value="Уиръл" />
+	<item key="UKE" value="ЙОРКШЪР И ХЪМБЪР" />
+	<item key="UKE1" value="Източен Йоркшър и Северен Линкълншър" />
+	<item key="UKE11" value="Кингстън ъпон Хъл, град" />
+	<item key="UKE12" value="Ийст Райдинг ъф Йоркшър" />
+	<item key="UKE13" value="Северен и Североизточен Линкълншър" />
+	<item key="UKE2" value="Северен Йоркшър " />
+	<item key="UKE21" value="Йорк" />
+	<item key="UKE22" value="Норт Йоркшър, графство" />
+	<item key="UKE3" value="Южен Йоркшър " />
+	<item key="UKE31" value="Барнзли, Донкастър и Родъръм" />
+	<item key="UKE32" value="Шефийлд" />
+	<item key="UKE4" value="Западен Йоркшър " />
+	<item key="UKE41" value="Брадфорд" />
+	<item key="UKE42" value="Лийдс" />
+	<item key="UKE43" value="Калдърдейл, Кърклийс и Уейкфийлд" />
+	<item key="UKF" value="ИЗТОЧЕН МИДЛЪНДС  (АНГЛИЯ)" />
+	<item key="UKF1" value="Дарбишър и Нотингамшър" />
+	<item key="UKF11" value="Дарби" />
+	<item key="UKF12" value="Източен Дарбишър " />
+	<item key="UKF13" value="Южен и Западен Дарбишър" />
+	<item key="UKF14" value="Нотингам" />
+	<item key="UKF15" value="Северен Нотингамшър " />
+	<item key="UKF16" value="Южен Нотингамшър " />
+	<item key="UKF2" value="Лестършър, Рътланд и Нортхемптъншър" />
+	<item key="UKF21" value="Лестър" />
+	<item key="UKF22" value="Лестършър, графство и Рътланд" />
+	<item key="UKF23" value="Нортхемптъншър" />
+	<item key="UKF3" value="Линкълншър" />
+	<item key="UKF30" value="Линкълншър" />
+	<item key="UKG" value="ЗАПАДЕН МИДЛЪНДС  (АНГЛИЯ)" />
+	<item key="UKG1" value="Херефордшър, Устършър и Уоруикшър" />
+	<item key="UKG11" value="Херефордшър, графство" />
+	<item key="UKG12" value="Уустършър" />
+	<item key="UKG13" value="Уоруикшър" />
+	<item key="UKG2" value="Шропшър и Стафордшър" />
+	<item key="UKG21" value="Телфърд и Рикин" />
+	<item key="UKG22" value="Шропшър, графство" />
+	<item key="UKG23" value="Стоук-он-Трент" />
+	<item key="UKG24" value="Стафордшър, графство" />
+	<item key="UKG3" value="Уест Мидлъндс" />
+	<item key="UKG31" value="Бирмингам" />
+	<item key="UKG32" value="Солихъл" />
+	<item key="UKG33" value="Ковънтри" />
+	<item key="UKG34" value="Дъдли и Сандуел" />
+	<item key="UKG35" value="Уолсол и Уулвърхемптън" />
+	<item key="UKH" value="ИЗТОЧНА АНГЛИЯ" />
+	<item key="UKH1" value="Ийст Англия" />
+	<item key="UKH11" value="Питърбро" />
+	<item key="UKH12" value="Кембриджшър, графство" />
+	<item key="UKH13" value="Норфък" />
+	<item key="UKH14" value="Съфък" />
+	<item key="UKH2" value="Бедфордшър и Хертфордшър" />
+	<item key="UKH21" value="Лутън" />
+	<item key="UKH22" value="Бедфордшър, графство" />
+	<item key="UKH23" value="Хертфордшър" />
+	<item key="UKH3" value="Есекс" />
+	<item key="UKH31" value="Саутенд-он-Сий" />
+	<item key="UKH32" value="Търък" />
+	<item key="UKH33" value="Есекс, графство" />
+	<item key="UKI" value="ЛОНДОН" />
+	<item key="UKI1" value="Вътрешен Лондон (Inner London)" />
+	<item key="UKI11" value="Инър Лъндън – Запад" />
+	<item key="UKI12" value="Инър Лъндън – Изток" />
+	<item key="UKI2" value="Външен Лондон (Outer London)" />
+	<item key="UKI21" value="Аутър Лъндън – Изток и североизток" />
+	<item key="UKI22" value="Аутър Лъндън – Юг" />
+	<item key="UKI23" value="Аутър Лъндън – Запад и северозапад" />
+	<item key="UKJ" value="ЮГОИЗТОК (АНГЛИЯ)" />
+	<item key="UKJ1" value="Бъркшър, Бъкингамшър и Оксфордшър" />
+	<item key="UKJ11" value="Бъркшър" />
+	<item key="UKJ12" value="Милтън Кейнс" />
+	<item key="UKJ13" value="Бъкингамшър, графство" />
+	<item key="UKJ14" value="Оксфордшър" />
+	<item key="UKJ2" value="Съри, Източен и Западен Съсекс" />
+	<item key="UKJ21" value="Брайтън енд Хоув" />
+	<item key="UKJ22" value="Ийст Съсекс, графство" />
+	<item key="UKJ23" value="Съри" />
+	<item key="UKJ24" value="Уест Съсекс" />
+	<item key="UKJ3" value="Хемпшър и остров Уайт" />
+	<item key="UKJ31" value="Портсмут" />
+	<item key="UKJ32" value="Саутхемптън" />
+	<item key="UKJ33" value="Хемпшър, графство" />
+	<item key="UKJ34" value="Остров Уайт" />
+	<item key="UKJ4" value="Кент" />
+	<item key="UKJ41" value="Медуей" />
+	<item key="UKJ42" value="Кент, графство" />
+	<item key="UKK" value="ЮГОЗАПАД (АНГЛИЯ)" />
+	<item key="UKK1" value="Глостършър, Уилтшър и Бристол/Бат" />
+	<item key="UKK11" value="Бристол, град" />
+	<item key="UKK12" value="Бат и Североизточен Съмърсет, Северен Съмърсет и Южен Глостършър" />
+	<item key="UKK13" value="Глостършър" />
+	<item key="UKK14" value="Суиндън" />
+	<item key="UKK15" value="Уилтшър, графство" />
+	<item key="UKK2" value="Дорсет и Съмърсет" />
+	<item key="UKK21" value="Борнмът и Пуул" />
+	<item key="UKK22" value="Дорсет, графство" />
+	<item key="UKK23" value="Съмърсет" />
+	<item key="UKK3" value="Корнуол и острови Скили" />
+	<item key="UKK30" value="Корнуол и острови Скили" />
+	<item key="UKK4" value="Девън" />
+	<item key="UKK41" value="Плимут" />
+	<item key="UKK42" value="Торбей" />
+	<item key="UKK43" value="Девън, графство" />
+	<item key="UKL" value="УЕЛС" />
+	<item key="UKL1" value="Западен Уелс и Долините (West Wales and The Valleys)" />
+	<item key="UKL11" value="Остров Ангълси" />
+	<item key="UKL12" value="Гуинед" />
+	<item key="UKL13" value="Конуи и Денбигшър" />
+	<item key="UKL14" value="Югозападен Уелс" />
+	<item key="UKL15" value="Сентръл Велис" />
+	<item key="UKL16" value="Гуент Велис" />
+	<item key="UKL17" value="Бридженд енд Нийт Порт Талбът" />
+	<item key="UKL18" value="Суонси" />
+	<item key="UKL2" value="Източен Уелс (East Wales)" />
+	<item key="UKL21" value="Монмътшър и Нюпорт" />
+	<item key="UKL22" value="Кардиф и долината Гламорган" />
+	<item key="UKL23" value="Флинтшър и Рексъм" />
+	<item key="UKL24" value="Повис" />
+	<item key="UKM" value="ШОТЛАНДИЯ" />
+	<item key="UKM2" value="Източна Шотландия" />
+	<item key="UKM21" value="Ангъс и Дънди сити" />
+	<item key="UKM22" value="Клакмананшър и Файф" />
+	<item key="UKM23" value="Ийст Лотиън и Мидлотиън" />
+	<item key="UKM24" value="Шотландкса граница" />
+	<item key="UKM25" value="Единбърг, град" />
+	<item key="UKM26" value="Фолкърк" />
+	<item key="UKM27" value="Пърт енд Кинрос и Стърлинг" />
+	<item key="UKM28" value="Уест Лотиън" />
+	<item key="UKM3" value="Югозападна Шотландия" />
+	<item key="UKM31" value="Източен и Западен Дънбартъншър, Хелънсбърг и Ломънд" />
+	<item key="UKM32" value="Дъмфрайс и Галъуей" />
+	<item key="UKM33" value="Ийст Еършър и Норт Еършър Мейнланд" />
+	<item key="UKM34" value="Глазгоу, град" />
+	<item key="UKM35" value="Инвърклайд, Ийст Ренфрюшър и Ренфрюшър" />
+	<item key="UKM36" value="Северен Ланаркшър" />
+	<item key="UKM37" value="Южен Еършър" />
+	<item key="UKM38" value="Южен Ланаркшър" />
+	<item key="UKM5" value="Североизточна Шотландия " />
+	<item key="UKM50" value="Абърдийн и Абърдийншър " />
+	<item key="UKM6" value="Хайлъндс и острови" />
+	<item key="UKM61" value="Кейтнес/Съдърланд и Рос/Кромарти" />
+	<item key="UKM62" value="Инвърнес/Неърн и Морей, Баденох и Стратспей" />
+	<item key="UKM63" value="Лохабер, Скай/Лохалш, Арен/Къмбри и Аргил/Бут " />
+	<item key="UKM64" value="Ейлийн Сиар (Западни острови)" />
+	<item key="UKM65" value="Острови Оркней" />
+	<item key="UKM66" value="Шетландски острови" />
+	<item key="UKN" value="СЕВЕРНА ИРЛАНДИЯ" />
+	<item key="UKN0" value="Северна Ирландия" />
+	<item key="UKN01" value="Белфаст" />
+	<item key="UKN02" value="Външен Белфаст" />
+	<item key="UKN03" value="Източна част от Северна Ирландия" />
+	<item key="UKN04" value="Северна част от Северна Ирландия" />
+	<item key="UKN05" value="Западна и Южна части от Северна Ирландия" />
+	<item key="UKZ" value="ДОПЪЛНИТЕЛЕН РЕГИОН" />
+	<item key="UKZZ" value="Допълнителен регион" />
+	<item key="UKZZZ" value="Допълнителен регион" />
+</nuts>

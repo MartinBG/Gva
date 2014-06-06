@@ -1,17 +1,23 @@
 ﻿using Aop.Api.DataObjects;
 using Aop.Api.Models;
 using Aop.Api.Repositories.Aop;
+using Aop.Api.Utils;
 using Aop.Api.WordTemplates;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
+using Common.Blob;
 using Common.Data;
 using Common.Extensions;
+using Components.DocumentSerializer;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
@@ -384,7 +390,7 @@ namespace Aop.Api.Controllers
             if (isChosen == 1) //true
             {
                 List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
-                List<int> aopAppDocIds = 
+                List<int> aopAppDocIds =
                     allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
                     .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
                     .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
@@ -395,8 +401,9 @@ namespace Aop.Api.Controllers
 
                 for (int i = 0; i < returnValue.Count; i++)
                 {
-                    if (returnValue[i].DocId.HasValue && 
-                        aopAppDocIds.Contains(returnValue[i].DocId.Value)) {
+                    if (returnValue[i].DocId.HasValue &&
+                        aopAppDocIds.Contains(returnValue[i].DocId.Value))
+                    {
                         returnValue.RemoveAt(i);
                     }
                 }
@@ -442,17 +449,90 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForFirstStage(int id)
         {
-            var oldApp = this.appRepository.Find(id);
+            AopApp app = this.appRepository.Find(id);
 
-            //? TODO read from FED and update aopapp properties
-            // update oldApp.STproperties
+            if (app.STDocId.HasValue)
+            {
+                Doc doc = this.docRepository.Find(app.STDocId.Value,
+                    e => e.DocFiles);
 
-            this.unitOfWork.Save();
+                var fedFile = doc.DocFiles.FirstOrDefault(e => e.DocFileName.EndsWith(".fed"));
+
+                if (fedFile != null)
+                {
+                    byte[] fedContent;
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    {
+                        connection.Open();
+
+                        using (MemoryStream m1 = new MemoryStream())
+                        using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fedFile.DocFileContentId))
+                        {
+                            blobStream.CopyTo(m1);
+                            fedContent = m1.ToArray();
+                        }
+                    }
+
+                    List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
+                    List<NUTv5.item> nuts = GetFedDocumentNuts();
+
+                    IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
+
+                    FEDv5.document fedDoc = documentSerializer.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
+
+                    FedExtractor.noms = noms;
+
+                    //ST properties
+                    string procType = FedExtractor.GetProcedureTypeShort(fedDoc);
+                    string obj = FedExtractor.GetObject(fedDoc);
+                    string criteria = FedExtractor.GetOffersCriteriaOnly(fedDoc);
+                    string subject = FedExtractor.GetSubject(fedDoc);
+                    string val = FedExtractor.GetPredictedValue(fedDoc);
+
+                    var stAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    if (stAopApplicationType != null)
+                    {
+                        app.STAopApplicationTypeId = stAopApplicationType.AopApplicationTypeId;
+                    }
+
+                    var stObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    if (stObject != null)
+                    {
+                        app.STObjectId = stObject.AopApplicationObjectId;
+                    }
+
+                    var stCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    if (stCriteria != null)
+                    {
+                        app.STCriteriaId = stCriteria.AopApplicationCriteriaId;
+                    }
+
+                    app.STSubject = subject;
+                    app.STValue = val;
+
+                    //възложител
+                    string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+
+                    var aopEmp = this.unitOfWork.DbContext.Set<AopEmployer>()
+                        .FirstOrDefault(e => e.LotNum == aopEmpLotNum);
+
+                    if (aopEmp != null)
+                    {
+                        app.AopEmployerId = aopEmp.AopEmployerId;
+                    }
+
+                    this.unitOfWork.Save();
+                }
+            }
 
             return Ok(new
             {
                 err = "",
-                aopApplicationId = oldApp.AopApplicationId
+                aopApplicationId = app.AopApplicationId
             });
         }
 
@@ -460,18 +540,113 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForSecondStage(int id)
         {
-            var oldApp = this.appRepository.Find(id);
+            AopApp app = this.appRepository.Find(id);
 
-            //? TODO read from FED and update aopapp properties
-            // update oldApp.NDproperties
+            if (app.STDocId.HasValue)
+            {
+                Doc doc = this.docRepository.Find(app.STDocId.Value,
+                    e => e.DocFiles);
 
-            this.unitOfWork.Save();
+                var fedFile = doc.DocFiles.FirstOrDefault(e => e.DocFileName.EndsWith(".fed"));
+
+                if (fedFile != null)
+                {
+                    byte[] fedContent;
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    {
+                        connection.Open();
+
+                        using (MemoryStream m1 = new MemoryStream())
+                        using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fedFile.DocFileContentId))
+                        {
+                            blobStream.CopyTo(m1);
+                            fedContent = m1.ToArray();
+                        }
+                    }
+
+                    List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
+                    List<NUTv5.item> nuts = GetFedDocumentNuts();
+
+                    IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
+
+                    FEDv5.document fedDoc = documentSerializer.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
+
+                    FedExtractor.noms = noms;
+
+                    //ND properties
+                    string procType = FedExtractor.GetProcedureTypeShort(fedDoc);
+                    string obj = FedExtractor.GetObject(fedDoc);
+                    string criteria = FedExtractor.GetOffersCriteriaOnly(fedDoc);
+                    string subject = FedExtractor.GetSubject(fedDoc);
+                    string val = FedExtractor.GetPredictedValue(fedDoc);
+
+                    var ndAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    if (ndAopApplicationType != null)
+                    {
+                        app.NDAopApplicationTypeId = ndAopApplicationType.AopApplicationTypeId;
+                    }
+
+                    var ndObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    if (ndObject != null)
+                    {
+                        app.NDObjectId = ndObject.AopApplicationObjectId;
+                    }
+
+                    var ndCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
+                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    if (ndCriteria != null)
+                    {
+                        app.NDCriteriaId = ndCriteria.AopApplicationCriteriaId;
+                    }
+
+                    app.NDSubject = subject;
+                    app.NDValue = val;
+
+                    //възложител
+                    string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+
+                    var aopEmp = this.unitOfWork.DbContext.Set<AopEmployer>()
+                        .FirstOrDefault(e => e.LotNum == aopEmpLotNum);
+
+                    if (aopEmp != null && !app.AopEmployerId.HasValue)
+                    {
+                        app.AopEmployerId = aopEmp.AopEmployerId;
+                    }
+
+                    this.unitOfWork.Save();
+                }
+            }
 
             return Ok(new
             {
                 err = "",
-                aopApplicationId = oldApp.AopApplicationId
+                aopApplicationId = app.AopApplicationId
             });
+        }
+
+        private List<NOMv5.nom> GetFedDocumentNomenclatures()
+        {
+            IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
+
+            var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nom.xml");
+            var nomXml = System.IO.File.ReadAllText(xmlPath);
+            var nomObj = documentSerializer.XmlDeserializeFromString<NOMv5.nomenclature>(nomXml);
+
+            return nomObj.nom;
+        }
+
+        private List<NUTv5.item> GetFedDocumentNuts()
+        {
+            IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
+
+            var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nuts.xml");
+            var nutXml = System.IO.File.ReadAllText(xmlPath);
+            var nutObj = documentSerializer.XmlDeserializeFromString<NUTv5.nuts>(nutXml);
+
+            return nutObj.item;
         }
     }
 }

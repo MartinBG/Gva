@@ -54,3 +54,5 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\Docs\DocFileOriginTypes.sql"
+:r $(rootPath)\"..\Insert\AopEmployers.sql"
+
