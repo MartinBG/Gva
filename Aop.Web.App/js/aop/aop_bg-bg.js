@@ -25,8 +25,8 @@
       checklist: {
         createDate: 'Дата на създаване',
         author: 'Автор',
-        currentChecklist: 'Текущ чеклист',
-        compareTo: 'Сравни със:'
+        currentChecklist: 'Версии на документа',
+        compareTo: 'Сравни с версия'
       },
       states: {
         'root.apps': 'Заявления',
