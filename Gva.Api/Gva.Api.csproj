@@ -119,6 +119,7 @@
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonTrainingHandler.cs" />
     <Compile Include="LotEventHandlers\OrganizationView\OrganizationViewDataHandler.cs" />
+    <Compile Include="LotEventHandlers\PersonView\PersonViewInspectorHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewEmploymentHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewLicenceHandler.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="Models\GvaViewPersonInspector.cs" />
     <Compile Include="Models\GvaViewAircraftRegMark.cs" />
     <Compile Include="Models\GvaViewAircraftAw.cs">
       <SubType>Code</SubType>

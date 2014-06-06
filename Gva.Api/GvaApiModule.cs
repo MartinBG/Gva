@@ -69,6 +69,7 @@ namespace Gva.Api
             //PersonView
             moduleBuilder.RegisterType<PersonViewDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonViewEmploymentHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonViewInspectorHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonViewLicenceHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonViewRatingHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 

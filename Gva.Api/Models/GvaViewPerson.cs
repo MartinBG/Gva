@@ -26,6 +26,8 @@ namespace Gva.Api.Models
 
         public virtual Lot Lot { get; set; }
 
+        public virtual GvaViewPersonInspector Inspector { get; set; }
+
         public virtual ICollection<GvaViewPersonLicence> Licences { get; set; }
 
         public virtual ICollection<GvaViewPersonRating> Ratings { get; set; }

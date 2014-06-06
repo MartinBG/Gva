@@ -391,6 +391,12 @@ namespace Gva.MigrationTool.Sets
                         }
                     }
 
+                    var inspectorData = this.getInspectorData(personId, noms);
+                    if (inspectorData != null)
+                    {
+                        lot.CreatePart("inspectorData", inspectorData, context);
+                    }
+
                     try
                     {
                         lot.Commit(context, lotEventDispatcher);
@@ -1587,6 +1593,33 @@ namespace Gva.MigrationTool.Sets
                         editions = editions[r.Field<int>("ID")]
                     }))
                 .ToList();
+        }
+
+        private JObject getInspectorData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT E.ID,
+                        E.EXAMINER_CODE,
+                        E.VALID_YN,
+                        E.CAA_ID,
+                        E.STAMP_NUM
+                    FROM CAA_DOC.EXAMINER E
+                    JOIN CAA_DOC.PERSON P ON P.ID = E.PERSON_ID
+                    WHERE E.CAA_ID IS NOT NULL {0}",
+                new DbClause("AND P.ID = {0}", personId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "EXAMINER",
+
+                        examinerCode = r.Field<string>("EXAMINER_CODE"),
+                        caa = noms["caa"].ByOldId(r.Field<int>("CAA_ID").ToString()),
+                        stampNum = r.Field<string>("STAMP_NUM"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                    }))
+                .SingleOrDefault();
         }
     }
 }
