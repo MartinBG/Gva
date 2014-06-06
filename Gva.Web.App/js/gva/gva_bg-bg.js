@@ -3401,7 +3401,7 @@
         staffExaminerDirective: {
           newStaffManagement: 'Нов проверяващи',
           nomValueId: 'Идентификатор',
-          code: 'Код',
+          examinerCode: 'Идентификационен код',
           name: 'Наименование',
           nameAlt: 'Наименование на поддържащ език',
           alias: 'Псевдоним',
