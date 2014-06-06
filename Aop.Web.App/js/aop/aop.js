@@ -16,12 +16,12 @@
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
       name: 'emsChecklistContent',
-      templateUrl: 'js/ems/docs/forms/editableFile/checklistContent.html',
+      templateUrl: 'js/ems/docs/forms/checklist/checklistContent.html',
       controller: 'ChecklistContentCtrl'
     });
     scaffoldingProvider.form({
       name: 'emsChecklist',
-      templateUrl: 'js/ems/docs/forms/editableFile/checklistHeader.html',
+      templateUrl: 'js/ems/docs/forms/checklist/checklistHeader.html',
       controller: 'ChecklistHeaderCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {

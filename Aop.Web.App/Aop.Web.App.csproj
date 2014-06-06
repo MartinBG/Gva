@@ -69,6 +69,10 @@
     <Content Include="js\common\common_bg-bg.js" />
     <Content Include="js\common\root\views\root.html" />
     <Content Include="js\common\root\views\rootCtrl.js" />
+    <Content Include="js\ems\docs\forms\checklist\checklistContent.html" />
+    <Content Include="js\ems\docs\forms\checklist\checklistContentCtrl.js" />
+    <Content Include="js\ems\docs\forms\checklist\checklistHeader.html" />
+    <Content Include="js\ems\docs\forms\checklist\checklistHeaderCtrl.js" />
     <Content Include="js\ems\docs\forms\docView\docIncoming.html" />
     <Content Include="js\ems\docs\forms\docView\docInternal.html" />
     <Content Include="js\ems\docs\forms\docView\docInternalOutgoing.html" />
@@ -76,10 +80,6 @@
     <Content Include="js\ems\docs\forms\docView\remark.html" />
     <Content Include="js\ems\docs\forms\docView\resolution.html" />
     <Content Include="js\ems\docs\forms\docView\task.html" />
-    <Content Include="js\ems\docs\forms\editableFile\checklistContent.html" />
-    <Content Include="js\ems\docs\forms\editableFile\checklistContentCtrl.js" />
-    <Content Include="js\ems\docs\forms\editableFile\checklistHeader.html" />
-    <Content Include="js\ems\docs\forms\editableFile\checklistHeaderCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
   </ItemGroup>

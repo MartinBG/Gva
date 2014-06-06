@@ -2,7 +2,7 @@
   <div ng-if="isLoaded">
     <div class="row col-sm-12 col-md-12">
 
-      <div class="col-sm-5 col-md-5">
+      <div class="col-sm-5 col-md-5" style="padding-left:0px">
         <label class="control-label" l10n-text="checklist.currentChecklist"></label>
         <sc-datatable items="model.jObject.versions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
           <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -18,10 +18,13 @@
       </div>
 
       <div class="col-sm-5 col-md-5">
-        <label class="control-label" l10n-text="checklist.compareTo"></label>
+        <div class="form-group col-md-5 col-sm-7" style="padding-left:0px">
+          <label class="control-label" l10n-text="checklist.compareTo"></label>
+          <input type="checkbox" ng-model="enableComparing" ng-init="enableComparing = false" ng-show="readonly" ng-disabled="!readonly"/>
+        </div>
         <sc-datatable  items="comparings" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
           <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
-            <input type="radio" ng-checked="item.version === checklistVM.compareToVersion.version" ng-disabled="!readonly" sc-click="compareTo(item)">
+            <input type="radio" ng-checked="item.version === checklistVM.compareToVersion.version" ng-disabled="!enableComparing || !readonly" sc-click="compareTo(item)">
           </sc-column>
           <sc-column title="checklist.author" has-content="true">
             {{item.author}}
