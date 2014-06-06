@@ -380,9 +380,21 @@ namespace Gva.MigrationTool.Sets
                     Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personLicence in personLicences)
                     {
+                        int nextIndex = 0;
+
+                        foreach (var edition in personLicence.GetItems<JObject>("editions"))
+                        {
+                            edition.Add("index", nextIndex);
+                            nextIndex++;
+                        }
+
+                        personLicence.Add("nextIndex", nextIndex);
+
                         var pv = lot.CreatePart("licences/*", personLicence, context);
                         licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), pv.Part.Index);
                     }
+
+                    //replace included licence ids with part indexes
                     foreach (var personLicence in personLicences)
                     {
                         foreach (var edition in personLicence.GetItems<JObject>("editions"))
