@@ -33,11 +33,11 @@
       });
 
       return DocStatus.next({
-        docId: doc.docId,
+        id: doc.docId,
         docVersion: doc.version,
         closure: true,
         checkedIds: $scope.checkedIds
-      }).$promise.then(function () {
+      }, {}).$promise.then(function () {
         return $state.transitionTo($state.previous, $stateParams, { reload: true });
       });
     };

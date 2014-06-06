@@ -3,7 +3,7 @@
 
       <nav class="panel-heading">
         <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
-          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child" 
+          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child"
               options="[
                 {
                   text: 'docs.edit.document',
@@ -35,23 +35,27 @@
           <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="docs.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="editDocForm.$pristine"></sc-button>
           <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="docs.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
 
-          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-tag" label="docs.edit.management" 
+          <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-tag" label="docs.edit.management"
               options="[
                 {
                   text: 'docs.edit.docPrepared',
                   action: nextStatus,
+                  params: { alias: 'Prepared' },
                   visible: doc.flags.isVisiblePreparedStatusCmd
                 }, {
                   text: 'docs.edit.docProcessed',
                   action: nextStatus,
+                  params: { alias: 'Processed' },
                   visible: doc.flags.isVisibleProcessedStatusCmd
                 }, {
                   text: 'docs.edit.docFinished',
                   action: nextStatus,
+                  params: { alias: 'Finished' },
                   visible: doc.flags.isVisibleFinishedStatusCmd
                 }, {
                   text: 'docs.edit.docCanceled',
                   action: cancelStatus,
+                  params: { alias: 'Canceled' },
                   visible: doc.flags.isVisibleCanceledStatusCmd
                 }, {
                   btnClass: 'divider',
@@ -111,21 +115,24 @@
                 }, {
                   text: 'docs.edit.reverseDocPrepared',
                   action: reverseStatus,
+                  params: { alias: 'Draft' },
                   visible: doc.flags.isVisibleDraftStatusReverseCmd
                 }, {
                   text: 'docs.edit.reverseDocProcessed',
                   action: reverseStatus,
+                  params: { alias: 'Prepared' },
                   visible: doc.flags.isVisiblePreparedStatusReverseCmd
                 }, {
                   text: 'docs.edit.reverseDocFinished',
                   action: reverseStatus,
+                  params: { alias: 'Processed' },
                   visible: doc.flags.isVisibleProcessedStatusReverseCmd
                 }
               ]">
           </sc-dropdown-button>
 
 
-          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.stagesName" 
+          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.stagesName"
             options="[
                 {
                   text: 'docs.edit.endElectronicStage',
@@ -148,7 +155,7 @@
           </sc-dropdown-button>
 
 
-          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.caseManagement" 
+          <sc-dropdown-button ng-show="!inEditMode" label="docs.edit.caseManagement"
             options="[
                 {
                   text: 'docs.edit.casePart',

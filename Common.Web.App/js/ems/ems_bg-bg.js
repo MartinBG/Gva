@@ -57,7 +57,7 @@
               attachedFile: 'Прикачен файл'
             },
             content: 'Прикачени файлове',
-            editableFile: 'Редактируем файл',
+            editableFile: 'Данни',
             text: 'Текст',
             classification: 'Код за достъп и класификация',
             accessCode: 'Код за достъп',

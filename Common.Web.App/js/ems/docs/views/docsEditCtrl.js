@@ -26,47 +26,110 @@
 
     $scope.doc.flags.isVisibleEditCmd = $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
 
-    $scope.doc.flags.isVisibleDraftStatusCmd = false;
-    $scope.doc.flags.isVisiblePreparedStatusCmd =
-      $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
-    $scope.doc.flags.isVisibleProcessedStatusCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && ($scope.doc.canEdit || $scope.doc.canManagement);
-    $scope.doc.flags.isVisibleFinishedStatusCmd =
-      $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
-    $scope.doc.flags.isVisibleCanceledStatusCmd =
-      $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
+    if ($scope.doc.isResolution || $scope.doc.isTask || $scope.doc.isRemark) {
+      $scope.doc.flags.isVisibleDraftStatusCmd = false;
+      $scope.doc.flags.isVisiblePreparedStatusCmd = false;
+      $scope.doc.flags.isVisibleProcessedStatusCmd = false;
+      $scope.doc.flags.isVisibleFinishedStatusCmd =
+        $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canFinish;
+      $scope.doc.flags.isVisibleCanceledStatusCmd =
+        $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canFinish;
 
-    $scope.doc.flags.isVisibleDraftStatusReverseCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canReverse;
-    $scope.doc.flags.isVisiblePreparedStatusReverseCmd =
-      $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canReverse;
-    $scope.doc.flags.isVisibleProcessedStatusReverseCmd =
-      ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
-      $scope.doc.canReverse;
-    $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
-    $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
+      $scope.doc.flags.isVisibleDraftStatusReverseCmd =
+        ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
+        $scope.doc.canReverse;
+      $scope.doc.flags.isVisiblePreparedStatusReverseCmd = false;
+      $scope.doc.flags.isVisibleProcessedStatusReverseCmd = false;
+      $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
+      $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
+    } else {
+      if ($scope.doc.isDocIncoming) {
+        $scope.doc.flags.isVisibleDraftStatusCmd = false;
+        $scope.doc.flags.isVisiblePreparedStatusCmd = false;
+        $scope.doc.flags.isVisibleProcessedStatusCmd =
+          $scope.doc.docStatusAlias === 'Draft' &&
+          ($scope.doc.canEdit || $scope.doc.canManagement);
+        $scope.doc.flags.isVisibleFinishedStatusCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
+        $scope.doc.flags.isVisibleCanceledStatusCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
 
-    $scope.doc.flags.isVisibleRegisterCmd = !$scope.doc.isRegistered && $scope.doc.canRegister;
+        $scope.doc.flags.isVisibleDraftStatusReverseCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canReverse;
+        $scope.doc.flags.isVisiblePreparedStatusReverseCmd = false;
+        $scope.doc.flags.isVisibleProcessedStatusReverseCmd =
+          ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
+          $scope.doc.canReverse;
+        $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
+        $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
+      } else {
+        $scope.doc.flags.isVisibleDraftStatusCmd = false;
+        $scope.doc.flags.isVisiblePreparedStatusCmd =
+          $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
+        $scope.doc.flags.isVisibleProcessedStatusCmd =
+          $scope.doc.docStatusAlias === 'Prepared' &&
+          ($scope.doc.canEdit || $scope.doc.canManagement);
+        $scope.doc.flags.isVisibleFinishedStatusCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
+        $scope.doc.flags.isVisibleCanceledStatusCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
+
+        $scope.doc.flags.isVisibleDraftStatusReverseCmd =
+          $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canReverse;
+        $scope.doc.flags.isVisiblePreparedStatusReverseCmd =
+          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canReverse;
+        $scope.doc.flags.isVisibleProcessedStatusReverseCmd =
+          ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
+          $scope.doc.canReverse;
+        $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
+        $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
+      }
+    }
+
+    $scope.doc.flags.isVisibleRegisterCmd = !$scope.doc.isRegistered && $scope.doc.canRegister &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark;
     $scope.doc.flags.isVisibleEsignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign;
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleUndoEsignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign;
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
 
     $scope.doc.flags.isVisibleSignRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && ($scope.doc.canEdit || $scope.doc.canManagement);
+      $scope.doc.docStatusAlias === 'Prepared' &&
+      ($scope.doc.canEdit || $scope.doc.canManagement) &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleDiscussRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && ($scope.doc.canEdit || $scope.doc.canManagement);
+      $scope.doc.docStatusAlias === 'Prepared' &&
+      ($scope.doc.canEdit || $scope.doc.canManagement) &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleApprovalRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && ($scope.doc.canEdit || $scope.doc.canManagement);
+      $scope.doc.docStatusAlias === 'Prepared' &&
+      ($scope.doc.canEdit || $scope.doc.canManagement) &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleRegistrationRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && ($scope.doc.canEdit || $scope.doc.canManagement);
+      $scope.doc.docStatusAlias === 'Prepared' &&
+      ($scope.doc.canEdit || $scope.doc.canManagement) &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
 
     $scope.doc.flags.isVisibleSignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement;
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleDiscussCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement;
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleApprovalCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement;
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
+      !$scope.doc.isDocIncoming;
     $scope.doc.flags.canSubstituteWorkflow = $scope.doc.canSubstituteManagement;
     $scope.doc.flags.canDeleteWorkflow = $scope.doc.canDeleteManagement;
 
@@ -80,7 +143,9 @@
       $scope.doc.canEditTechElectronicServiceStage;
 
     $scope.doc.flags.isVisibleEditCasePartCmd =
-      !$scope.doc.isCase && $scope.doc.canChangeDocCasePart;
+      !$scope.doc.isCase &&
+      ($scope.doc.canChangeDocCasePart ||
+      ($scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit));
     $scope.doc.flags.isVisibleEditTechCmd = !$scope.doc.isResolution && !$scope.doc.isTask &&
       !$scope.doc.isRemark && $scope.doc.canEditTech;
 
@@ -223,11 +288,12 @@
       });
     };
 
-    $scope.nextStatus = function () {
+    $scope.nextStatus = function (params) {
       return DocStatus.next({
-        docId: doc.docId,
+        id: doc.docId,
+        alias: params.alias,
         docVersion: doc.version
-      }).$promise.then(function (data) {
+      }, {}).$promise.then(function (data) {
         if (data && data.docRelations) {
           return $state.go('root.docs.edit.case.caseFinish', $stateParams, {}, {
             docRelations: data.docRelations
@@ -238,20 +304,21 @@
       });
     };
 
-    $scope.reverseStatus = function () {
+    $scope.reverseStatus = function (params) {
       return DocStatus.reverse({
-        docId: doc.docId,
+        id: doc.docId,
+        alias: params.alias,
         docVersion: doc.version
-      }).$promise.then(function () {
+      }, {}).$promise.then(function () {
         return $state.transitionTo($state.current, $stateParams, { reload: true });
       });
     };
 
     $scope.cancelStatus = function () {
       return DocStatus.cancel({
-        docId: doc.docId,
+        id: doc.docId,
         docVersion: doc.version
-      }).$promise.then(function () {
+      }, {}).$promise.then(function () {
         return $state.transitionTo($state.current, $stateParams, { reload: true });
       });
     };

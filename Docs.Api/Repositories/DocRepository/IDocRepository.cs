@@ -33,10 +33,11 @@ namespace Docs.Api.Repositories.DocRepository
         Doc NextDocStatus(
             int id,
             byte[] docVersion,
-            bool forceClosure,
             string targetDocStatusAlias,
+            bool forceClosure,
             List<DocStatus> docStatuses,
             List<DocCasePartType> docCasePartTypes,
+            int[] checkedIds,
             UserContext userContext,
             out List<DocRelation> docRelations);
 

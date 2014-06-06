@@ -1304,6 +1304,7 @@ namespace Docs.Api.Controllers
         public IHttpActionResult SetNextStatus(
             int id,
             string docVersion,
+            string alias,
             [FromUri] int[] checkedIds = null,
             bool? closure = null
             )
@@ -1312,15 +1313,31 @@ namespace Docs.Api.Controllers
             List<DocCasePartType> docCasePartTypes = this.unitOfWork.DbContext.Set<DocCasePartType>().ToList();
             List<DocRelation> docRelations;
 
-            this.docRepository.NextDocStatus(
-                id,
-                Helper.StringToVersion(docVersion),
-                closure ?? false,
-                docStatuses,
-                docCasePartTypes,
-                checkedIds,
-                this.userContext,
-                out docRelations);
+            if (string.IsNullOrEmpty(alias))
+            {
+                this.docRepository.NextDocStatus(
+                    id,
+                    Helper.StringToVersion(docVersion),
+                    closure ?? false,
+                    docStatuses,
+                    docCasePartTypes,
+                    checkedIds,
+                    this.userContext,
+                    out docRelations);
+            }
+            else
+            {
+                this.docRepository.NextDocStatus(
+                   id,
+                   Helper.StringToVersion(docVersion),
+                   alias,
+                   closure ?? false,
+                   docStatuses,
+                   docCasePartTypes,
+                   checkedIds,
+                   this.userContext,
+                   out docRelations);
+            }
 
             if (docRelations.Any())
             {
@@ -1344,7 +1361,9 @@ namespace Docs.Api.Controllers
         /// <param name="docVersion">Версия на документ</param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult CancelDoc(int id, string docVersion)
+        public IHttpActionResult CancelDoc(
+            int id,
+            string docVersion)
         {
             DocStatus cancelDocStatus = this.unitOfWork.DbContext.Set<DocStatus>()
                 .SingleOrDefault(e => e.Alias.ToLower() == "Canceled".ToLower());
@@ -1367,15 +1386,30 @@ namespace Docs.Api.Controllers
         /// <param name="docVersion">Версия на документ</param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult ReverseStatus(int id, string docVersion)
+        public IHttpActionResult ReverseStatus(
+            int id,
+            string docVersion,
+            string alias = null)
         {
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().ToList();
 
-            this.docRepository.ReverseDocStatus(
-                id,
-                Helper.StringToVersion(docVersion),
-                docStatuses,
-                this.userContext);
+            if (string.IsNullOrEmpty(alias))
+            {
+                this.docRepository.ReverseDocStatus(
+                    id,
+                    Helper.StringToVersion(docVersion),
+                    docStatuses,
+                    this.userContext);
+            }
+            else
+            {
+                this.docRepository.ReverseDocStatus(
+                    id,
+                    Helper.StringToVersion(docVersion),
+                    alias,
+                    docStatuses,
+                    this.userContext);
+            }
 
             this.unitOfWork.Save();
 

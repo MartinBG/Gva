@@ -14,13 +14,17 @@
               method: 'POST',
               url: '/api/docs/:id/next',
               params: {
-                closure: '@closure',
-                checkedIds: '@checkedIds'
+                alias: '',
+                closure: null,
+                checkedIds: []
               }
             },
             'reverse': {
               method: 'POST',
-              url: '/api/docs/:id/reverse'
+              url: '/api/docs/:id/reverse',
+              params: {
+                alias: ''
+              }
             },
             'cancel': {
               method: 'POST',
