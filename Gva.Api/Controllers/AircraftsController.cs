@@ -427,7 +427,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
@@ -439,5 +438,27 @@ namespace Gva.Api.Controllers
             return base.DeletePart(lotId, path);
         }
 
+
+        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
+        public IHttpActionResult DeleteRegPart(int lotId, string path)
+        {
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            var partVersion = lot.DeletePart(path, userContext);
+            this.fileRepository.DeleteFileReferences(partVersion);
+            this.applicationRepository.DeleteApplicationRefs(partVersion);
+            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM").ToList();
+            if (registrations.Count > 0)
+            {
+                var lastRegistration = registrations.FirstOrDefault();
+                lastRegistration.Content.Property("isCurrent").Value = true;
+                lot.UpdatePart("aircraftCertRegistrationsFM/" + lastRegistration.Part.Index , lastRegistration.Content, userContext);
+            }
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
+        }
     }
 }

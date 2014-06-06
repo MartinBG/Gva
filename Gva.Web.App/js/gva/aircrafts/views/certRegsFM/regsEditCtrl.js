@@ -28,6 +28,10 @@
       $scope.editMode = null;
       $scope.reg = _.cloneDeep(originalRegistration);
     };
+    $scope.removeDereg = function () {
+      $scope.reg.part.isActive = true;
+      $scope.reg.part.removal = undefined;
+    };
 
     $scope.save = function () {
       return $scope.editCertRegForm.$validate()
