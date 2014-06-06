@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\SignController.cs" />
     <Compile Include="Controllers\NomController.cs" />
     <Compile Include="Controllers\BlobController.cs" />

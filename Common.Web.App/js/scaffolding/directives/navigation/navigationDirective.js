@@ -6,7 +6,7 @@
 (function (angular) {
   'use strict';
 
-  function NavigationDirective() {
+  function NavigationDirective(authService) {
     return {
       restrict: 'E',
       transclude: true,
@@ -23,11 +23,12 @@
         };
 
         $scope.logout = function logout() {
+          authService.signOut();
           return $state.go($scope.logoutState);
         };
       }
     };
   }
-
+  NavigationDirective.$inject = ['authService'];
   angular.module('scaffolding').directive('scNavigation', NavigationDirective);
 }(angular));

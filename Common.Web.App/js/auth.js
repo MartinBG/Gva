@@ -3,7 +3,8 @@
   'use strict';
 
   angular.module('auth', ['ng']).constant('authServiceConfig', {
-    tokenUrl: '/api/token'
+    tokenUrl: '/api/token',
+    signOutUrl: 'api/auth/signout'
   }).factory('authService', [
     '$q',
     '$injector',
@@ -105,6 +106,19 @@
           retryHttpRequest(self.authConfig(req.config), req.deferred);
         });
         this.failedRequests = [];
+      };
+
+      AuthService.prototype.signOut = function() {
+        var self = this;
+        getHttp();
+        return $http({
+          method: 'POST',
+          url: authServiceConfig.signOutUrl,
+          data: ''
+        }).then(function () {
+          delete $window.localStorage.token;
+          $rootScope.$broadcast('authRequired', self);
+        });
       };
 
       return new AuthService();
