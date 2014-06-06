@@ -75,52 +75,51 @@ namespace Gva.MigrationTool
                 OracleConnection oracleConn = scope.Resolve<OracleConnection>();
                 SqlConnection sqlConn = scope.Resolve<SqlConnection>();
 
-                try
-                {
-                    System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
-                    timer.Start();
+                System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+                timer.Start();
 
-                    oracleConn.Open();
-                    sqlConn.Open();
+                oracleConn.Open();
+                sqlConn.Open();
 
-                    var nomenclature = scope.Resolve<Nomenclature>();
-                    var aircraft = scope.Resolve<Aircraft>();
-                    var person = scope.Resolve<Person>();
-                    var organization = scope.Resolve<Organization>();
+                var nomenclature = scope.Resolve<Nomenclature>();
+                var aircraft = scope.Resolve<Aircraft>();
+                var person = scope.Resolve<Person>();
+                var organization = scope.Resolve<Organization>();
 
-                    var noms = nomenclature.migrateNomenclatures();
+                var noms = nomenclature.migrateNomenclatures();
 
-                    var aircraftIds = aircraft.createAircraftsLots(noms);
-                    var aircraftApexIdtoLotId = aircraftIds.Item1;
-                    var aircraftFmIdtoLotId = aircraftIds.Item2;
+                Dictionary<int, int> aircraftApexIdtoLotId = new Dictionary<int, int>();
+                Dictionary<string, int> aircraftFmIdtoLotId = new Dictionary<string, int>();
+                Dictionary<int, int> personIdToLotId = new Dictionary<int, int>();
+                Dictionary<int, int> organizationIdtoLotId = new Dictionary<int, int>();
 
-                    var personIdToLotId = person.createPersonsLots(noms);
+                //create aircraft lots
+                var aircraftIds = aircraft.createAircraftsLots(noms);
+                aircraftApexIdtoLotId = aircraftIds.Item1;
+                aircraftFmIdtoLotId = aircraftIds.Item2;
 
-                    var organizationIdtoLotId = organization.createOrganizationsLots(noms);
+                //create person lots
+                personIdToLotId = person.createPersonsLots(noms);
 
-                    aircraft.migrateAircrafts(
-                        noms,
-                        aircraftApexIdtoLotId,
-                        aircraftFmIdtoLotId,
-                        personIdToLotId,
-                        organizationIdtoLotId);
+                //create organization lots
+                organizationIdtoLotId = organization.createOrganizationsLots(noms);
 
-                    person.migratePersons(noms, aircraftApexIdtoLotId, organizationIdtoLotId, personIdToLotId);
-                    organization.migrateOrganizations(noms, aircraftApexIdtoLotId, personIdToLotId, organizationIdtoLotId);
+                //migrate aircrafts
+                aircraft.migrateAircrafts(
+                    noms,
+                    aircraftApexIdtoLotId,
+                    aircraftFmIdtoLotId,
+                    personIdToLotId,
+                    organizationIdtoLotId);
 
-                    timer.Stop();
-                    Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
-                }
-                catch (OracleException e)
-                {
-                    Console.WriteLine("Exception Message: " + e.Message);
-                    Console.WriteLine("Exception Source: " + e.Source);
-                }
-                catch (SqlException e)
-                {
-                    Console.WriteLine("Exception Message: " + e.Message);
-                    Console.WriteLine("Exception Source: " + e.Source);
-                }
+                //migrate persosns
+                person.migratePersons(noms, aircraftApexIdtoLotId, organizationIdtoLotId, personIdToLotId);
+
+                //migrate organizations
+                organization.migrateOrganizations(noms, aircraftApexIdtoLotId, personIdToLotId, organizationIdtoLotId);
+
+                timer.Stop();
+                Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
             }
 
             Console.WriteLine("Migration finished!");

@@ -62,28 +62,10 @@ namespace Gva.MigrationTool.Sets
 
                 Set aircraftSet = lotRepository.GetSet("Aircraft");
 
-                //var list = new List<int>()
-                //{
-                //    1229,
-                //    1821,
-                //    419,
-                //    1817,
-                //    1295,
-                //    395,
-                //    1303,
-                //    42
-                //};
+
 
                 foreach (var aircraftApexId in this.getAircraftApexIds())
                 {
-                    //if (list.Contains(aircraftId))
-                    //{
-                    //    continue;
-                    //}
-
-                    //if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
-                    //    continue;
-
                     var lot = aircraftSet.CreateLot(context);
                     var aircraftData = this.getAircraftData(aircraftApexId, noms);
                     lot.CreatePart("aircraftDataApex", aircraftData, context);
@@ -97,7 +79,7 @@ namespace Gva.MigrationTool.Sets
                     var msn = aircraftData.Get<string>("manSN");
                     if (apexMSNtoLotId.ContainsKey(msn))
                     {
-                        Console.WriteLine("Duplicate Apex MSN: {0}", msn);
+                        Console.WriteLine("DUPLICATE APEX MSN: {0}", msn);//TODO
                     }
                     else
                     {
@@ -107,9 +89,6 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var aircraftFmId in this.getAircraftFmIds())
                 {
-                    //if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
-                    //    continue;
-
                     var aircraftDataFM = this.getAircraftDataFM(aircraftFmId, noms);
                     var msn = aircraftDataFM.Get<string>("manSN");
 
@@ -120,14 +99,13 @@ namespace Gva.MigrationTool.Sets
                     }
                     else
                     {
-                        Console.WriteLine("Missing aircraft with MSN {0} in APEX", msn);
+                        Console.WriteLine("MISSING AIRCRAFT WITH MSN {0} IN APEX", msn);//TODO
                         lot = aircraftSet.CreateLot(context);
                     }
 
                     if (lot.GetPart("aircraftData") != null)
                     {
-                        //TODO duplicate?
-                        Console.WriteLine("Aircraft with MSN {0} in FM has already been migrated", msn);
+                        Console.WriteLine("AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
                         continue;
                     }
 
@@ -194,9 +172,6 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var aircraftApexId in this.getAircraftApexIds())
             {
-                //if (aircraftApexId != 1286) //MSN E1258, MARK LZ-TIM
-                //    continue;
-
                 using (var dependencies = dependencyFactory())
                 {
                     var unitOfWork = dependencies.Value.Item1;
@@ -214,33 +189,7 @@ namespace Gva.MigrationTool.Sets
                     Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personApexIdToLotId);
                     Func<int?, JObject> getOrganization = (orgApexId) => Utils.GetOrganization(orgApexId, organizationRepository, orgApexIdToLotId);
 
-                    //var list = new List<string>()
-                    //{
-                    //    "0103",
-                    //    "011",
-                    //    "0922",
-                    //    "1087",
-                    //    "174710",
-                    //    "174725",
-                    //    "421",
-                    //    "422",
-                    //    "5602",
-                    //    "6001",
-                    //    "8007",
-                    //    "9002",
-                    //    "W-571"
-                    //};
-                    //var aircraftData = this.getAircraftData(aircraftApexId);
-                    //var manSN = aircraftData["manSN"].Value<string>();
-
-                    //if (list.Contains(manSN))
-                    //{
-                    //    continue;
-                    //}
-
                     var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId]);
-
-                    //MSNtoApexId.Add(manSN, lot.LotId);
 
                     var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
                     foreach (var aircraftPart in aircraftParts)
@@ -392,10 +341,6 @@ namespace Gva.MigrationTool.Sets
 
             foreach (var aircraftFmId in this.getAircraftFmIds())
             {
-                ////TODO remove
-                //if (Int32.Parse(aircraftFmId) != 1286) //MSN E1258, MARK LZ-TIM
-                //    continue;
-
                 using (var dependencies = dependencyFactory())
                 {
                     var unitOfWork = dependencies.Value.Item1;
@@ -421,16 +366,14 @@ namespace Gva.MigrationTool.Sets
 
                         if (!inspectorsFM.ContainsKey(tRegUser))
                         {
-                            //TODO throw error
-                            Console.WriteLine("Cannot find inspector {0}", tRegUser);
+                            Console.WriteLine("CANNOT FIND INSPECTOR {0}", tRegUser);//TODO
                             return null;
                         }
 
                         int personId = inspectorsFM[tRegUser];
                         if (personId == -1)
                         {
-                            //TODO throw error
-                            Console.WriteLine("Inspector {0} is not mapped to personId", tRegUser);
+                            Console.WriteLine("INSPECTOR {0} IS NOT MAPPED TO PERSONID", tRegUser);//TODO
                             return null;
                         }
 
@@ -476,7 +419,7 @@ namespace Gva.MigrationTool.Sets
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Error CreatePart aircraftDocumentDebtsFM {0}", e.Message);
+                                Console.WriteLine("ERROR CREATEPART AIRCRAFTDOCUMENTDEBTSFM {0}", e.Message);//TODO
                                 throw e;
                             }
                         }
@@ -728,7 +671,7 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
                 .Materialize(r => r.Field<int>("ID"))
-                .ToList().Take(200).ToList();
+                .ToList();
         }
 
         private JObject getAircraftData(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)

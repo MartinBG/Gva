@@ -75,10 +75,6 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var organizationId in organizationIds)
                 {
-                    if (organizationId >= 500)
-                    {
-                        break;
-                    }
                     var lot = organizationSet.CreateLot(context);
                     oldIdsLots.Add(organizationId, lot);
                     var organizationData = this.getOrganizationData(organizationId, noms);
@@ -102,19 +98,8 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, int> personApexIdToLotId,
             Dictionary<int, int> orgApexIdToLotId)
         {
-
             foreach (var organizationId in this.getOrganizationIds())
             {
-                if (organizationId >= 500)
-                {
-                    break;
-                }
-                //if (organizationId != 86)
-                //{
-                //    continue;
-                //}
-
-
                 using (var dependencies = this.dependencyFactory())
                 {
                     var unitOfWork = dependencies.Value.Item1;

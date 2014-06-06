@@ -118,6 +118,7 @@ namespace Gva.MigrationTool
 
             if (id == null)
             {
+                Console.WriteLine("CANNOT FIND PERSON WITH ID {0}", oldId);
                 return DUMMY_PERSON;//TODO remove
             }
 
@@ -140,6 +141,7 @@ namespace Gva.MigrationTool
 
             if (id == null)
             {
+                Console.WriteLine("CANNOT FIND AIRCRAFT WITH ID {0}", oldId);
                 return DUMMY_AIRCRAFT; //TODO remove
             }
 
@@ -162,6 +164,7 @@ namespace Gva.MigrationTool
 
             if (id == null)
             {
+                Console.WriteLine("CANNOT FIND ORGANIZATION WITH ID {0}", oldId);
                 return DUMMY_ORGANIZATION; //TODO remove
             }
 
