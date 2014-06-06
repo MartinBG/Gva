@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "angular": "1.2.16",
-    "angular-i18n": "1.2.16"
+    "angular-i18n": "1.2.16",
     "angular-l10n": "georgiyordanov/angular-l10n#93382bfecc13743486a27f7e8e55338485622fb1",
     "angular-resource": "1.2.16",
     "angular-ui-router": "0.2.10",
