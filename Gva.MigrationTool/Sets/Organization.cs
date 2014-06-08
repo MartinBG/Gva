@@ -240,7 +240,8 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
                 .Materialize(r => r.Field<int>("ID"))
-                    .ToList();
+                .Where(id => new int[] { 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id))
+                .ToList();
         }
 
         private JObject getOrganizationData(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)

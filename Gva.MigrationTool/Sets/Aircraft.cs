@@ -483,6 +483,10 @@ namespace Gva.MigrationTool.Sets
         {
             return this.sqlConn.CreateStoreCommand("select n_Act_ID from Acts")
                 .Materialize(r => r.Field<string>("n_Act_ID"))
+                .Where(id =>
+                    id == "1286" || //LZ-TIM
+                    id == "1303" || //LZ-YUP
+                    id == "1473") //LZ-KEC
                 .ToList();
         }
 
@@ -795,6 +799,9 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
                 .Materialize(r => r.Field<int>("ID"))
+                .Where(id =>
+                    id == 1286 || //LZ-TIM
+                    id == 1303) //LZ-YUP
                 .ToList();
         }
 
