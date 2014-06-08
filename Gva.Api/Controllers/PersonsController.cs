@@ -72,9 +72,11 @@ namespace Gva.Api.Controllers
             string ratings = null,
             string organization = null,
             string caseTypeAlias = null,
+            bool? isInspector = null,
+            bool? isExaminer = null,
             bool exact = false)
         {
-            var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, exact, 0, 1000);
+            var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, isInspector, isExaminer, exact, 0, 1000);
 
             return Ok(persons.Select(p => new PersonDO(p)));
         }

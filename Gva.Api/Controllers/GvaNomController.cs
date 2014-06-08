@@ -118,7 +118,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetInspectors(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(caseTypeAlias: "inspector", names: term, exact: false, offset: offset, limit: limit)
+                this.personRepository.GetPersons(isInspector: true, names: term, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -132,7 +132,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetExaminers(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(caseTypeAlias: "examiner", names: term, exact: false, offset: offset, limit: limit)
+                this.personRepository.GetPersons(isExaminer: true, names: term, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,

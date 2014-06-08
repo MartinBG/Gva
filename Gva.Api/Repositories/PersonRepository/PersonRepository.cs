@@ -27,6 +27,8 @@ namespace Gva.Api.Repositories.PersonRepository
             string ratings = null,
             string organization = null,
             string caseTypeAlias = null,
+            bool? isInspector = null,
+            bool? isExaminer = null,
             bool exact = false,
             int offset = 0,
             int? limit = null)
@@ -53,6 +55,20 @@ namespace Gva.Api.Repositories.PersonRepository
                           join lc in this.unitOfWork.DbContext.Set<GvaLotCase>() on p.LotId equals lc.LotId
                           join ct in this.unitOfWork.DbContext.Set<GvaCaseType>() on lc.GvaCaseTypeId equals ct.GvaCaseTypeId
                           where ct.Alias == caseTypeAlias
+                          select p;
+            }
+
+            if (isInspector != null)
+            {
+                persons = from p in persons
+                          join i in this.unitOfWork.DbContext.Set<GvaViewPersonInspector>() on p.LotId equals i.LotId
+                          select p;
+            }
+
+            if (isExaminer != null)
+            {
+                persons = from p in persons
+                          join i in this.unitOfWork.DbContext.Set<GvaViewOrganizationExaminer>() on p.LotId equals i.PersonLotId
                           select p;
             }
 
