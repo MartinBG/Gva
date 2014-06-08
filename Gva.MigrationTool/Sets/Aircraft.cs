@@ -388,7 +388,7 @@ namespace Gva.MigrationTool.Sets
 
                     Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);
 
-                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector);
+                    var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPerson, getOrganization);
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                     {
                         var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
@@ -564,8 +564,47 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftCertRegistrationsFM(
+            string aircraftId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Func<string, JObject> getInspector,
+            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getOrganization)
         {
+            Dictionary<string, int> fmOrgToOrgMap = new Dictionary<string, int>
+            {
+                { "“Бългериан Авиейшън Груп” ЕАД", 447 },
+                { "АВИОКОМПАНИЯ  “ХЕМУС  ЕР”", 563 },
+                { "БЪЛГАРИЯ  ЕР", 568 },
+                { "“България Ер” АД", 568 },
+                { "ЕЪРКРАФТ  ЛИИЗ  ЕООД", 1432 },
+                { "Еъркрафт Лииз ЕООД\nбул.”Брюксел” 1\n1540 София", 1432 },
+                { "“Еър Лазур - Дженерал Авиейшън” ЕООД - Стар адрес", 565 },
+                { "ЕЪР  ЛАЗУР-ДЖЕНЕРАЛ  АВИЕЙШЪН", 565 },
+                { "УНИКРЕДИТ  ЛИЗИНГ", 467 },
+                { "“УниКредит Лизинг” АД\nул. “Златен рог” № 22\nСофия 1407\nБългария", 467 },
+                { "“УниКредит Лизинг” АД\nбул. “Цариградско шосе” 40\nСофия 1784\nБългария", 467 },
+                { "ЕТ “КЕНТАВЪР - ЕЛИЗАР АТАНАСОВ”", 807 },
+            };
+
+            Func<string, Tuple<bool, JObject, JObject>> getOrgOrPerson = (name) =>
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    return Tuple.Create(true, (JObject)null, (JObject)null);
+                }
+
+                name = name.Trim();
+
+                if (!fmOrgToOrgMap.ContainsKey(name))
+                {
+                    Console.WriteLine("CANNOT MAP FM ORG {0}", name);//TODO
+                    return Tuple.Create(true, (JObject)null, (JObject)null);
+                }
+
+                return Tuple.Create(true, getOrganization(fmOrgToOrgMap[name]), (JObject)null);
+            };
+
             var registrations = this.sqlConn.CreateStoreCommand(
                 @"select s.regNumber,
                         s.nActID,
@@ -576,8 +615,6 @@ namespace Gva.MigrationTool.Sets
                         s.dDateCAA,
                         s.tDocOther,
                         s.tRegUser,
-                        s.nOwner,
-                        s.nOper,
                         s.tCatCode,
                         s.nLimitID,
                         s.tR83_Zapoved,
@@ -600,7 +637,9 @@ namespace Gva.MigrationTool.Sets
                         s.tDeDocCAA,
                         s.dDeDateCAA,
                         s.tDeUser,
-                        a.n_RegNum as actRegNum
+                        a.n_RegNum as actRegNum,
+                        owner.tNameBG ownerName,
+                        oper.tNameBG operName
                     from 
                     (select 1 as regNumber, nActID, nRegNum, dRegDate, tRegMark, tDocCAA, dDateCAA, tDocOther, tRegUser, nOwner,
                             nOper, tCatCode, nLimitID, tR83_Zapoved, dR83_Data, tLessor, tLessorAgreement, dLeaseDate,
@@ -614,6 +653,8 @@ namespace Gva.MigrationTool.Sets
                             dDeRegDate, tDeDocOther, null as tRemarkDeReg, tDeDocCAA, dDeDateCAA, tDeUser
                     from Reg2 as r2) s
                     left outer join Acts a on a.n_Act_ID = s.nActID
+                    left outer join Orgs owner on owner.nOrgID = s.nOwner
+                    left outer join Orgs oper on oper.nOrgID = s.nOper
                 where {0}",
                 new DbClause("s.nActID = {0}", aircraftId)
                 )
@@ -631,13 +672,13 @@ namespace Gva.MigrationTool.Sets
                         incomingDocDate = toDate(r.Field<string>("dDateCAA")),
                         incomingDocDesc = r.Field<string>("tDocOther"),
                         inspector = getInspector(r.Field<string>("tRegUser")),
-                        ownerId = r.Field<string>("nOwner"),//TODO
-                        operatorId = r.Field<string>("nOper"),//TODO
+                        owner = getOrgOrPerson(r.Field<string>("ownerName")),
+                        oper = getOrgOrPerson(r.Field<string>("operName")),
                         aircraftCategory = noms["aircraftCategories"].ByCodeOrDefault(r.Field<string>("tCatCode")) ?? noms["aircraftCategories"].ByCode("A2"),//TODO
                         aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = toDate(r.Field<string>("dR83_Data")),
-                        leasingLessor = r.Field<string>("tLessor"), //TODO
+                        leasingLessor = getOrgOrPerson(r.Field<string>("tLessor")),
                         leasingAgreement = r.Field<string>("tLessorAgreement"),
                         leasingEndDate = toDate(r.Field<string>("dLeaseDate")),
                         status = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")),
@@ -674,13 +715,19 @@ namespace Gva.MigrationTool.Sets
                         r.incomingDocDate,
                         r.incomingDocDesc,
                         r.inspector,
-                        r.ownerId,
-                        r.operatorId,
+                        ownerIsOrg = r.owner.Item1,
+                        ownerOrganization = r.owner.Item2,
+                        ownerPerson = r.owner.Item3,
+                        operIsOrg = r.oper.Item1,
+                        operOrganization = r.oper.Item2,
+                        operPerson = r.oper.Item3,
                         r.aircraftCategory,
                         r.aircraftLimitation,
                         r.leasingDocNumber,
                         r.leasingDocDate,
-                        r.leasingLessor,
+                        lessorIsOrg = r.leasingLessor.Item1,
+                        lesorOrganization = r.leasingLessor.Item2,
+                        lessorPerson = r.leasingLessor.Item3,
                         r.leasingAgreement,
                         r.leasingEndDate,
                         r.status,
