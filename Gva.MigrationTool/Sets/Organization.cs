@@ -215,6 +215,12 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("organizationStaffManagement/*", organizationManagementStaff, context);
                     }
 
+                    var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPerson);
+                    foreach (var organizationStaffExaminer in organizationStaffExaminers)
+                    {
+                        lot.CreatePart("organizationStaffExaminers/*", organizationStaffExaminer, context);
+                    }
+
                     try
                     {
                         lot.Commit(context, lotEventDispatcher);
@@ -1051,6 +1057,80 @@ namespace Gva.MigrationTool.Sets
                         testScore = r.Field<string>("TEST_SCORE"),
                         number = r.Field<decimal?>("REQUEST_ID"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                    }))
+                .ToList();
+        }
+
+        private IList<JObject> getOrganizationStaffExaminers(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPerson)
+        {
+            var approvedAircrafts = this.oracleConn.CreateStoreCommand(
+                @"SELECT EAA.ID,
+                        EAA.ID_EXAMINER,
+                        EAA.ID_AC_GROUP,
+                        EAA.DATE_APPROVED,
+                        EAA.ID_EXAMINER_APPROVED,
+                        EAA.VALID_YN,
+                        EAA.NOTES,
+                        E.PERSON_ID
+                    FROM CAA_DOC.EXAMINER_AC_APPROVED EAA
+                    JOIN CAA_DOC.EXAMINER E ON E.ID = EAA.ID_EXAMINER_APPROVED
+                    WHERE {0}",
+                new DbClause("EAA.ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "EXAMINER_AC_APPROVED",
+
+                        __ID_EXAMINER = r.Field<int>("ID_EXAMINER"),
+
+                        aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<int>("ID_AC_GROUP").ToString()),
+                        inspector = getPerson(r.Field<int>("PERSON_ID")),
+                        dateApproved = r.Field<DateTime>("DATE_APPROVED"),
+                        notes = r.Field<string>("NOTES"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                    })
+                .GroupBy(r => r.__ID_EXAMINER)
+                .ToDictionary(g => g.Key, g => g.Select(r => Utils.ToJObject(
+                    new
+                    {
+                        r.__oldId,
+                        r.__migrTable,
+
+                        r.aircraftTypeGroup,
+                        r.inspector,
+                        r.dateApproved,
+                        r.notes,
+                        r.valid
+                    }))
+                    .ToArray());
+
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT ID,
+                        EXAMINER_CODE,
+                        VALID_YN,
+                        PERSON_ID,
+                        STAMP_NUM,
+                        PERMITED_AW,
+                        PERMITED_CHECK
+                    FROM CAA_DOC.EXAMINER
+                    WHERE CAA_ID IS NULL {0}",
+                new DbClause("AND ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "EXAMINER",
+
+                        examinerCode = r.Field<string>("EXAMINER_CODE"),
+                        stampNum = r.Field<string>("STAMP_NUM"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                        person = getPerson(r.Field<int>("PERSON_ID")),
+                        permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
+                        permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
+                        approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
                     }))
                 .ToList();
         }
