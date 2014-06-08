@@ -28,6 +28,8 @@ namespace Gva.Api.Models
 
         public virtual GvaViewPersonInspector Inspector { get; set; }
 
+        public virtual ICollection<GvaViewOrganizationExaminer> OrganizationExaminers { get; set; }
+
         public virtual ICollection<GvaViewPersonLicence> Licences { get; set; }
 
         public virtual ICollection<GvaViewPersonRating> Ratings { get; set; }

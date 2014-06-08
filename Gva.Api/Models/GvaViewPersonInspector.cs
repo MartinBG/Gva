@@ -6,7 +6,7 @@ namespace Gva.Api.Models
 {
     public partial class GvaViewPersonInspector
     {
-        public int? LotId { get; set; }
+        public int LotId { get; set; }
 
         public string ExaminerCode { get; set; }
 

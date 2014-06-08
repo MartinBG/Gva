@@ -45,6 +45,7 @@
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Tables\GvaViewOrganizationExaminers.sql" />
     <Content Include="Create\Tables\GvaViewPersonInspectors.sql" />
     <Content Include="Create\Tables\GvaViewAircraftRegistrations.sql" />
     <Content Include="Create\Tables\GvaViewAircraftAws.sql" />

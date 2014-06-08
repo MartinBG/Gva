@@ -20,6 +20,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewInventoryItems.sql"
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
+:r $(rootPath)\"Tables\GvaViewOrganizationExaminers.sql"
 :r $(rootPath)\"Tables\GvaViewAircrafts.sql"
 :r $(rootPath)\"Tables\GvaViewAirports.sql"
 :r $(rootPath)\"Tables\GvaViewEquipments.sql"
@@ -58,8 +59,8 @@ GO
 -- Insert Migration Noms Values
 ---------------------------------------------------------------
 
-:r $(rootPath)\"..\Insert\migrationNomValues.sql"
---DBCC CHECKIDENT ('NomValues', RESEED, 999)
+--:r $(rootPath)\"..\Insert\migrationNomValues.sql"
+DBCC CHECKIDENT ('NomValues', RESEED, 999)
 
 ---------------------------------------------------------------
 -- Aircrafts test noms from Apex

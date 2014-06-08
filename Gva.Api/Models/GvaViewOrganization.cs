@@ -28,6 +28,8 @@ namespace Gva.Api.Models
 
         public virtual Lot Lot { get; set; }
 
+        public virtual ICollection<GvaViewOrganizationExaminer> Examiners { get; set; }
+
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
     }
 

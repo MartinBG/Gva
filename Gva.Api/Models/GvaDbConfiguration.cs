@@ -22,6 +22,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewInventoryItemMap());
             modelBuilder.Configurations.Add(new GvaViewApplicationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationMap());
+            modelBuilder.Configurations.Add(new GvaViewOrganizationExaminerMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftMap());
             modelBuilder.Configurations.Add(new GvaViewAirportMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftRegistrationMap());
