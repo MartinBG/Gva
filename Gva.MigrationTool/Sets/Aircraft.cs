@@ -566,8 +566,42 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getAircraftCertRegistrationsFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
-            return this.sqlConn.CreateStoreCommand(
-                @"select * from 
+            var registrations = this.sqlConn.CreateStoreCommand(
+                @"select s.regNumber,
+                        s.nActID,
+                        s.nRegNum,
+                        s.dRegDate,
+                        s.tRegMark,
+                        s.tDocCAA,
+                        s.dDateCAA,
+                        s.tDocOther,
+                        s.tRegUser,
+                        s.nOwner,
+                        s.nOper,
+                        s.tCatCode,
+                        s.nLimitID,
+                        s.tR83_Zapoved,
+                        s.dR83_Data,
+                        s.tLessor,
+                        s.tLessorAgreement,
+                        s.dLeaseDate,
+                        s.nStatus,
+                        s.tEASA_25,
+                        s.dEASA_25,
+                        s.dEASA_15,
+                        s.dCofR_New,
+                        s.dNoise_New,
+                        s.tNoise_New,
+                        s.tAnnexII_Bg,
+                        s.tAnnexII_En,
+                        s.dDeRegDate,
+                        s.tDeDocOther,
+                        s.tRemarkDeReg,
+                        s.tDeDocCAA,
+                        s.dDeDateCAA,
+                        s.tDeUser,
+                        a.n_RegNum as actRegNum
+                    from 
                     (select 1 as regNumber, nActID, nRegNum, dRegDate, tRegMark, tDocCAA, dDateCAA, tDocOther, tRegUser, nOwner,
                             nOper, tCatCode, nLimitID, tR83_Zapoved, dR83_Data, tLessor, tLessorAgreement, dLeaseDate,
                             nStatus, tEASA_25, dEASA_25, dEASA_15, dCofR_New, dNoise_New, tNoise_New, tAnnexII_Bg, tAnnexII_En,
@@ -579,18 +613,18 @@ namespace Gva.MigrationTool.Sets
                             nStatus, null as tEASA_25, null as dEASA_25, null as dEASA_15, dCofR_New, dNoise_New, null as tNoise_New, tAnnexII_Bg, tAnnexII_En,
                             dDeRegDate, tDeDocOther, null as tRemarkDeReg, tDeDocCAA, dDeDateCAA, tDeUser
                     from Reg2 as r2) s
-                where {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and nActID = {0}", aircraftId)
+                    left outer join Acts a on a.n_Act_ID = s.nActID
+                where {0}",
+                new DbClause("s.nActID = {0}", aircraftId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
                     new
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "Reg1, Reg2",
                         register = noms["registers"].ByCode(r.Field<int>("regNumber").ToString()),
-                        //actNumber = "TODO",
-                        certNumber = toNum(r.Field<string>("nRegNum")),
+                        nRegNum = toNum(r.Field<string>("nRegNum")).Value,
+                        actRegNum = toNum(r.Field<string>("actRegNum")).Value,
                         certDate = toDate(r.Field<string>("dRegDate")),
                         regMark = r.Field<string>("tRegMark"),
                         incomingDocNumber = r.Field<string>("tDocCAA"),
@@ -603,7 +637,7 @@ namespace Gva.MigrationTool.Sets
                         aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = toDate(r.Field<string>("dR83_Data")),
-                        leasingLessor = r.Field<string>("tLessor"),
+                        leasingLessor = r.Field<string>("tLessor"), //TODO
                         leasingAgreement = r.Field<string>("tLessorAgreement"),
                         leasingEndDate = toDate(r.Field<string>("dLeaseDate")),
                         status = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")),
@@ -624,8 +658,51 @@ namespace Gva.MigrationTool.Sets
                             documentDate = toDate(r.Field<string>("dDeDateCAA")),
                             inspector = getInspector(r.Field<string>("tDeUser"))
                         }
+                    })
+                .OrderBy(r => r.nRegNum)
+                .Select(r => Utils.ToJObject(
+                    new
+                    {
+                        r.__oldId,
+                        r.__migrTable,
+                        r.register,
+                        actNumber = r.nRegNum,
+                        certNumber = r.actRegNum >= r.nRegNum ? r.nRegNum: r.actRegNum,
+                        r.certDate,
+                        r.regMark,
+                        r.incomingDocNumber,
+                        r.incomingDocDate,
+                        r.incomingDocDesc,
+                        r.inspector,
+                        r.ownerId,
+                        r.operatorId,
+                        r.aircraftCategory,
+                        r.aircraftLimitation,
+                        r.leasingDocNumber,
+                        r.leasingDocDate,
+                        r.leasingLessor,
+                        r.leasingAgreement,
+                        r.leasingEndDate,
+                        r.status,
+                        r.EASA25Number,
+                        r.EASA25Date,
+                        r.EASA15Date,
+                        r.cofRDate,
+                        r.noiseDate,
+                        r.noiseNumber,
+                        r.paragraph,
+                        r.paragraphAlt,
+                        r.removal,
+                        isActive = false,
+                        isCurrent = false
                     }))
                 .ToList();
+
+            var lastReg = registrations.Last();
+            lastReg["isActive"] = true;
+            lastReg["isCurrent"] = true;
+
+            return registrations;
         }
 
         private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom, Func<string, JObject> getInspector)
