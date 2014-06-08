@@ -40,11 +40,11 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .SingleOrDefault(p => p.LotPartId == registrationId);
         }
 
-        public int? GetLastCertNumber(int registerId)
+        public int? GetLastActNumber(int registerId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                 .Where(v => v.CertRegisterId == registerId)
-                .Max(v => (int?)v.CertNumber);
+                .Max(v => (int?)v.ActNumber);
         }
     }
 }

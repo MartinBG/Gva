@@ -54,13 +54,13 @@
       <div class="row">
         <div class="form-group col-md-8 col-sm-12">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.catAW"></label>
-          <input disabled name="catAW" type="text" class="form-control input-sm" value="{{model.catAW.name}}" />
+          <sc-nomenclature ng-model="model.catAW" name="catAW" alias="'aircraftCatAWs'" ng-readonly="true" multiple></sc-nomenclature>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-8 col-sm-12">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
-          <input disabled type="text" class="form-control input-sm" value="{{model.limitations}}" />
+          <sc-nomenclature ng-model="model.limitations" name="limitation" alias="'aircraftLimitationsFm'" ng-readonly="true" multiple></sc-nomenclature>
         </div>
       </div>
     </div>

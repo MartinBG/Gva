@@ -14,7 +14,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
             : base(
                 unitOfWork: unitOfWork,
                 setAlias: "Aircraft",
-                setPartAlias: "aircraftMark",
+                setPartAlias: "aircraftRegistrationFM",
                 viewMatcher: pv =>
                     v => v.LotId == pv.Part.Lot.LotId && v.LotPartId == pv.Part.PartId)
         {
@@ -24,7 +24,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         {
             reg.Lot = part.Part.Lot;
             reg.Part = part.Part;
-            reg.RegMark = part.Content.Get<string>("mark");
+            reg.RegMark = part.Content.Get<string>("regMark");
         }
 
         public override void Clear(GvaViewAircraftRegMark registration)

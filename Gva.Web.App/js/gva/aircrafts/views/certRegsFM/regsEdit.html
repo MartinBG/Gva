@@ -1,8 +1,8 @@
 ﻿<ng-form name="editCertRegForm" sc-validate="{}">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong ng-if="reg.isActive"  l10n-text="aircrafts.editReg.title"></strong>
-      <strong ng-if="!reg.isActive" l10n-text="aircrafts.editReg.dereged"></strong>
+      <strong ng-if="reg.part.isActive"  l10n-text="aircrafts.editReg.title"></strong>
+      <strong ng-if="!reg.part.isActive" l10n-text="aircrafts.editReg.dereged"></strong>
       <div class="pull-right" ng-show="reg.part.isCurrent">
         <sc-button name="editBtn" btn-click="rereg()" text="aircrafts.editReg.rereg"
           class="btn btn-primary btn-xs" icon="glyphicon-repeat" ng-show="!editMode && reg.part.isActive">
@@ -23,7 +23,7 @@
           class="btn btn-danger btn-xs" icon="glyphicon-ban-circle" ng-show="!editMode && reg.part.isActive">
         </sc-button>
         <sc-button name="cancelBtn" btn-click="removeDereg()" text="aircrafts.editReg.removeDereg"
-          class="btn btn-danger btn-xs" icon="glyphicon-ban-circle" ng-show="!reg.part.isActive">
+          class="btn btn-danger btn-xs" icon="glyphicon-ban-circle" ng-show="!editMode && !reg.part.isActive">
         </sc-button>
       </div>
     </div>

@@ -4,7 +4,8 @@
       <strong l10n-text="aircrafts.airworthinessViewDirective.title"></strong>
       <strong ng-show="$parent.aw.partIndex && !$parent.regs.hasAirworthiness" l10n-text="aircrafts.airworthinessViewDirective.titleNoAw"></strong>
       <div class="pull-right">
-        <sc-button name="newButton" btn-click="newAw()" text="aircrafts.airworthinessViewDirective.new" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+        <sc-button name="newButton" btn-click="newAw()" ng-show="!$parent.aw.partIndex || !$parent.regs.hasAirworthiness"
+          text="aircrafts.airworthinessViewDirective.new" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
          <sc-link-button ng-show="$parent.aw.partIndex" name="viewButton" sc-sref="{state: 'root.aircrafts.view.airworthinessesFM.edit', params: {id: aircraftId, ind: $parent.aw.partIndex}}" text="aircrafts.regViewDirective.view" class="btn btn-xs btn-primary" icon="glyphicon-search"></sc-link-button>
       </div>
     </div>
@@ -16,11 +17,11 @@
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validFromDate"></label>
-          <input disabled name="validFromDate" type="text" class="form-control input-sm" value="{{model.validFromDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="validFromDate" type="text" class="form-control input-sm" value="{{validFromDate() | date: 'dd.MM.yyyy'}}" />
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validToDate"></label>
-          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{model.validToDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{validToDate() | date: 'dd.MM.yyyy'}}" />
         </div>
       </div>
       <div class="row">

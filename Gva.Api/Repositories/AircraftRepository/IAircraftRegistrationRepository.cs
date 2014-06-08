@@ -9,6 +9,6 @@ namespace Gva.Api.Repositories.AircraftRepository
 
         GvaViewAircraftRegistration GetRegistration(int registrationId);
 
-        int? GetLastCertNumber(int registerId);
+        int? GetLastActNumber(int registerId);
     }
 }

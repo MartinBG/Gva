@@ -14,7 +14,7 @@
     });
 
     $scope.showNewButton = _.filter(regs, function (reg) {
-      return reg.part.isCurrent;
+      return reg.part.isActive;
     }).length < 1;
 
 

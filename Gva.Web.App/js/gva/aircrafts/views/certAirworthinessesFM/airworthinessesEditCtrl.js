@@ -33,6 +33,16 @@
       $scope.editMode = 'editReview';
     };
 
+    $scope.newAmendment = function () {
+      if (!$scope.lastReview.amendment1) {
+        $scope.lastReview.amendment1 = {};
+      } else if (!$scope.lastReview.amendment2) {
+        $scope.lastReview.amendment2 = {};
+      }
+
+      $scope.editMode = 'editReview';
+    };
+
     $scope.editLastReview = function () {
       $scope.editMode = 'editReview';
     };

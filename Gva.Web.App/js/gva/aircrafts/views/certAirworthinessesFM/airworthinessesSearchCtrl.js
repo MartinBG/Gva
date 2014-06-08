@@ -9,7 +9,23 @@
     AircraftCertAirworthinessFM,
     aws
   ) {
-    $scope.aws = aws;
+    $scope.aws = aws.map(function (aw) {
+      if (aw.part && aw.part.reviews) {
+        var lastReview = aw.part.reviews[aw.part.reviews.length - 1];
+
+        aw.part.validFromDate =
+          lastReview.amendment2 ? lastReview.amendment2.issueDate :
+          lastReview.amendment1 ? lastReview.amendment1.issueDate :
+          lastReview.issueDate;
+
+        aw.part.validToDate =
+          lastReview.amendment2 ? lastReview.amendment2.validToDate :
+          lastReview.amendment1 ? lastReview.amendment1.validToDate :
+          lastReview.validToDate;
+      }
+
+      return aw;
+    });
 
 
     $scope.editCertAirworthiness = function (aw) {

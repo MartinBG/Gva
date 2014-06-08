@@ -15,7 +15,8 @@
     $scope.reg = aircraftCertRegistration;
 
     if (oldReg && oldReg.part) {
-      _.defaults($scope.reg.part, _.cloneDeep(oldReg.part));
+      _.defaults($scope.reg.part, _.cloneDeep(_.omit(oldReg.part,
+        'certDate', 'incomingDocNumber', 'incomingDocDate', 'incomingDocDesc')));
       oldReg.part.isActive = false;
       oldReg.part.isCurrent = false;
     }
@@ -25,6 +26,8 @@
       $scope.reg.part.certNumber = $state.payload.certNumber;
       $scope.reg.part.actNumber = $state.payload.actNumber;
       $scope.reg.part.regMark = $state.payload.regMark;
+    } else {
+      return $state.go('root.aircrafts.view.regsFM.search');
     }
 
     $scope.save = function () {

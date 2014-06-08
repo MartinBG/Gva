@@ -986,6 +986,7 @@
           deleteAirworthiness: 'Изтрий',
           review: 'Преглед',
           newReview: 'Нов преглед',
+          newAmendment: 'Нова заверка',
           amendment1: 'Първо продължаване на срока',
           amendment2: 'Второ продължаване на срока',
           from: 'Валидно от',
@@ -1176,7 +1177,7 @@
           validToDate: 'Валидно до',
           validFromDate: 'Валидно от',
           inspector: 'Заверил инспектор',
-          'new': 'Нова заверка ЛГ'
+          'new': 'Нова ЛГ'
         },
         noiseViewDirective: {
           title: 'Удостоверение за шум',

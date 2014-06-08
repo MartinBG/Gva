@@ -129,16 +129,14 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route("getNextCertNumber")]
-        public IHttpActionResult GetNextCertNumber(int registerId, int? currentCertNumber = null)
+        [Route("getNextActNumber")]
+        public IHttpActionResult GetNextActNumber(int registerId)
         {
-            int? lastCertNumber = this.aircraftRegistrationRepository.GetLastCertNumber(registerId);
-
-            int nextCertNumber = Math.Max(lastCertNumber ?? 0, currentCertNumber ?? 0) + 1;
+            int? lastActNumber = this.aircraftRegistrationRepository.GetLastActNumber(registerId);
 
             return Ok(new
             {
-                CertNumber =  nextCertNumber
+                ActNumber =  (lastActNumber ?? 0) + 1
             });
         }
 

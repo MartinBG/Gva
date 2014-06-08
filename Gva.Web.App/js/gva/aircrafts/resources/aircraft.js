@@ -8,9 +8,9 @@
         method: 'GET',
         url: '/api/aircrafts/checkRegMark'
       },
-      'getNextCertNumber': {
+      'getNextActNumber': {
         method: 'GET',
-        url: '/api/aircrafts/getNextCertNumber'
+        url: '/api/aircrafts/getNextActNumber'
       },
       'checkMSN': {
         method: 'GET',

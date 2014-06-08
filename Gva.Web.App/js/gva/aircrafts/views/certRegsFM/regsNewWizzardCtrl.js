@@ -8,7 +8,7 @@
     $stateParams,
     Aircraft,
     oldReg,
-    certNumber
+    actNumber
   ) {
     $scope.steps = {
       chooseRegMark: {},
@@ -29,9 +29,9 @@
     if ($scope.reregMode) {
       $scope.model.certNumber = oldReg.part.certNumber;
     } else {
-      $scope.model.certNumber = certNumber;
+      $scope.model.certNumber = actNumber;
     }
-    $scope.model.actNumber = certNumber;
+    $scope.model.actNumber = actNumber;
 
     $scope.forward = function () {
       return $scope.newRegForm.$validate()
@@ -40,24 +40,24 @@
             $scope.newRegForm.$validated = false;
 
             switch ($scope.currentStep) {
-            case $scope.steps.chooseRegMark:
-              return Aircraft.checkRegMark({
-                lotId: $stateParams.id,
-                regMark: $scope.model.regMark
-              }).$promise.then(function (result) {
-                if (result.isValid) {
-                  $scope.currentStep = $scope.steps.confirmRegMark;
-                }
-                else {
-                  $scope.currentStep = $scope.steps.regMarkInUse;
-                }
-              });
-            case $scope.steps.confirmRegMark:
-              return $state.go(
-                'root.aircrafts.view.regsFM.new',
-                { oldInd: $stateParams.oldInd },
-                {},
-                $scope.model);
+              case $scope.steps.chooseRegMark:
+                return Aircraft.checkRegMark({
+                  lotId: $stateParams.id,
+                  regMark: $scope.model.regMark
+                }).$promise.then(function (result) {
+                  if (result.isValid) {
+                    $scope.currentStep = $scope.steps.confirmRegMark;
+                  }
+                  else {
+                    $scope.currentStep = $scope.steps.regMarkInUse;
+                  }
+                });
+              case $scope.steps.confirmRegMark:
+                return $state.go(
+                  'root.aircrafts.view.regsFM.new',
+                  { oldInd: $stateParams.oldInd },
+                  {},
+                  $scope.model);
             }
           }
         });
@@ -77,15 +77,14 @@
       }
     };
 
-    $scope.getNextCertNumber = function () {
-      return Aircraft.getNextCertNumber({
-        registerId: $scope.model.register.nomValueId,
-        currentCertNumber: $scope.model.certNumber
+    $scope.getNextActNumber = function () {
+      return Aircraft.getNextActNumber({
+        registerId: $scope.model.register.nomValueId
       }).$promise.then(function (result) {
         if (!$scope.reregMode) {
-          $scope.model.certNumber = result.certNumber;
+          $scope.model.certNumber = result.actNumber;
         }
-        $scope.model.actNumber = result.certNumber;
+        $scope.model.actNumber = result.actNumber;
       });
     };
 
@@ -108,15 +107,14 @@
         }
       }
     ],
-    certNumber: [
+    actNumber: [
       'Aircraft',
       function (Aircraft) {
-        return Aircraft.getNextCertNumber({
-          registerId: 9008224,
-          currentCertNumber: undefined
+        return Aircraft.getNextActNumber({
+          registerId: 9008224
         }).$promise
         .then(function (result) {
-          return result.certNumber;
+          return result.actNumber;
         });
       }
     ]
@@ -128,7 +126,7 @@
     '$stateParams',
     'Aircraft',
     'oldReg',
-    'certNumber'
+    'actNumber'
   ];
 
   angular.module('gva').controller('CertRegsFMNewWizzardCtrl', CertRegsFMNewWizzardCtrl);
