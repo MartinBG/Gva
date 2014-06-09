@@ -11,7 +11,7 @@
     app,
     selectDoc
   ) {
-    $scope.inEditMode = false;
+    $scope.inEditMode = ($state.payload && $state.payload.inEditMode) || false;
     $scope.app = app;
 
     $scope.enterEditMode = function () {

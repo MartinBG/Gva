@@ -18,8 +18,8 @@
       $scope.comparings = _.cloneDeep($scope.model.jObject.versions);
 
       $scope.checklistVM = {
-        currentVersion: $scope.model.jObject.versions[$scope.model.jObject.versions.length - 1],
-        compareToVersion: $scope.model.jObject.versions[$scope.model.jObject.versions.length - 1],
+        currentVersion: $scope.model.jObject.versions[0],
+        compareToVersion: $scope.model.jObject.versions[0],
         isComparing: false
       };
 
@@ -48,9 +48,9 @@
     $scope.$watch('readonly', function (value) {
       if ($scope.checklistVM &&
         $scope.checklistVM.currentVersion.version !==
-        $scope.model.jObject.versions[$scope.model.jObject.versions.length - 1].version) {
+        $scope.model.jObject.versions[0].version) {
         $scope.checklistVM.currentVersion =
-          $scope.model.jObject.versions[$scope.model.jObject.versions.length - 1];
+          $scope.model.jObject.versions[0];
       }
 
       if (!value && $scope.checklistVM) {

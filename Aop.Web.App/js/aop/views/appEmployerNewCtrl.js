@@ -13,22 +13,18 @@
     $scope.emp = {};
 
     $scope.save = function save() {
-      return $scope.aopEmpForm.$validate()
-        .then(function () {
-          if ($scope.aopEmpForm.$valid) {
-            return AopEmployer
-              .save($scope.emp)
-              .$promise
-              .then(function (data) {
-                app.aopEmployerId = data.aopEmployerId;
-                return $state.go('^');
-              });
-          }
-        });
+      return $scope.aopEmpForm.$validate().then(function () {
+        if ($scope.aopEmpForm.$valid) {
+          return AopEmployer.save($scope.emp).$promise.then(function (data) {
+            app.aopEmployerId = data.aopEmployerId;
+            return $state.go('^', {}, {}, { inEditMode: true });
+          });
+        }
+      });
     };
 
     $scope.cancel = function cancel() {
-      return $state.go('^');
+      return $state.go('^', {}, {}, { inEditMode: true });
     };
   }
 

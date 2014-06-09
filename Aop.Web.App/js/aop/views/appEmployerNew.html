@@ -11,16 +11,18 @@
     <div class="well-sm panel-body">
 
       <div class="row">
-        <div class="form-group col-sm-6 col-md-6">
+        <div class="form-group col-sm-6 col-md-6" sc-has-error="name">
           <label class="control-label" l10n-text="Наименование:"></label>
-          <sc-text ng-model="emp.name" required></sc-text>
+          <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
+          <sc-text name="name" ng-model="emp.name" ng-required="true"></sc-text>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-sm-4 col-md-4">
+        <div class="form-group col-sm-4 col-md-4" sc-has-error="lotNum">
           <label class="control-label" l10n-text="Партиден номер:"></label>
-          <sc-text ng-model="emp.lotNum" required></sc-text>
+          <sc-validation-error field-name="lotNum" validations="{required: null}"></sc-validation-error>
+          <sc-text name="lotNum" ng-model="emp.lotNum" ng-required="true"></sc-text>
         </div>
       </div>
 

@@ -26,6 +26,7 @@ using System.Web.Http.Controllers;
 namespace Aop.Api.Controllers
 {
     [RoutePrefix("api/aop/apps")]
+    [Authorize]
     public class AppController : ApiController
     {
         private IUnitOfWork unitOfWork;

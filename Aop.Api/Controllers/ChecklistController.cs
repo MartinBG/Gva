@@ -334,12 +334,12 @@ namespace Aop.Api.Controllers
 
                         JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
                         JArray checklistVersions = checklistObj["versions"] as JArray;
-                        dynamic newChecklistVersion = checklistVersions.Last().DeepClone();
+                        dynamic newChecklistVersion = checklistVersions.First().DeepClone();
                         newChecklistVersion.version = int.Parse(Convert.ToString(newChecklistVersion.version)) + 1;
                         newChecklistVersion.author = unitUser.Unit.Name;
                         newChecklistVersion.createDate = DateTime.Now;
 
-                        checklistVersions.Add(newChecklistVersion);
+                        checklistVersions.Insert(0, newChecklistVersion);
 
                         contentStr = JsonConvert.SerializeObject(checklistObj);
                     }
@@ -516,7 +516,7 @@ namespace Aop.Api.Controllers
                     string contentToString = System.Text.Encoding.UTF8.GetString(content);
                     JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
                     JArray checklistVersions = checklistObj["versions"] as JArray;
-                    JObject last = checklistVersions.Last() as JObject;
+                    JObject latest = checklistVersions.First() as JObject;
 
                     DocUnit checklistMadeBy = this.unitOfWork.DbContext.Set<DocUnit>()
                         .Include(e => e.Unit.UnitRelations.Select(u => u.ParentUnit))
@@ -527,7 +527,7 @@ namespace Aop.Api.Controllers
                         .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
                         .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
 
-                    JObject json = this.dataGenerator.GenerateNote(last,
+                    JObject json = this.dataGenerator.GenerateNote(latest,
                         date: DateTime.Now.ToString("dd.MM.yyyy"),
                         madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
                         madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
@@ -535,7 +535,7 @@ namespace Aop.Api.Controllers
                         coordinatorPosition: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
                         );
 
-                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\stanovishte_template.docx");
+                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"App\word_templates\stanovishte_template.docx");
 
                     using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
                     using (var memoryStream = new MemoryStream())
@@ -698,7 +698,7 @@ namespace Aop.Api.Controllers
                     string contentToString = System.Text.Encoding.UTF8.GetString(content);
                     JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
                     JArray checklistVersions = checklistObj["versions"] as JArray;
-                    JObject last = checklistVersions.Last() as JObject;
+                    JObject lastest = checklistVersions.First() as JObject;
 
                     DocUnit checklistMadeBy = this.unitOfWork.DbContext.Set<DocUnit>()
                         .Include(e => e.Unit.UnitRelations.Select(u => u.ParentUnit))
@@ -709,7 +709,7 @@ namespace Aop.Api.Controllers
                         .Include(e => e.PrincipalUnit.UnitRelations.Select(u => u.ParentUnit))
                         .FirstOrDefault(e => e.DocId == checklistId && e.DocWorkflowAction.Alias == "Discuss");
 
-                    JObject json = this.dataGenerator.GenerateReport(last,
+                    JObject json = this.dataGenerator.GenerateReport(lastest,
                         date: DateTime.Now.ToString("dd.MM.yyyy"),
                         madeByName: checklistMadeBy != null ? checklistMadeBy.Unit.Name : string.Empty,
                         madeByPosition: checklistMadeBy != null ? checklistMadeBy.Unit.UnitRelations.First().ParentUnit.Name : string.Empty,
@@ -717,7 +717,7 @@ namespace Aop.Api.Controllers
                         coordinatorPosition: checklistDiscuss != null ? checklistDiscuss.PrincipalUnit.UnitRelations.First().ParentUnit.Name : string.Empty
                         );
 
-                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Aop.Web.App\word_templates\doklad_template.docx");
+                    string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"App\word_templates\doklad_template.docx");
 
                     using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
                     using (var memoryStream = new MemoryStream())
