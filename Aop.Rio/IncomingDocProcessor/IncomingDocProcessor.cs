@@ -269,6 +269,7 @@ namespace Aop.Rio.IncomingDocProcessor
             doc.RegDate = DateTime.Now;
             doc.CorrRegNumber = null;
             doc.CorrRegDate = null;
+            doc.RegDate = DateTime.Now;
             doc.AccessCode = GenerateAccessCode();
             doc.AssignmentTypeId = null;
             doc.AssignmentDate = null;
