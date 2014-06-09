@@ -2,7 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function RootCtrl($scope, $timeout) {
+  function RootCtrl($scope, $timeout, $http) {
+    $http({
+      method: 'GET',
+      url: 'api/user/currentData'
+    }).then(function (result) {
+      $scope.userFullname = result.data.userFullname;
+    });
+
     $scope.alerts = [];
     $scope.removeAlert = function (alert) {
       var index = $scope.alerts.indexOf(alert);
@@ -27,7 +34,7 @@
     });
   }
 
-  RootCtrl.$inject = ['$scope', '$timeout'];
+  RootCtrl.$inject = ['$scope', '$timeout', '$http'];
 
   angular.module('common').controller('RootCtrl', RootCtrl);
 }(angular));

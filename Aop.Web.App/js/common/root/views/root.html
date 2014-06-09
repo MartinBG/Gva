@@ -1,4 +1,4 @@
-<sc-navigation user-fullname="Администратор" change-password-state="root.common.users.changePassword" logout-state="root.apps.search" class="navigation">
+<sc-navigation user-fullname="{{userFullname}}" change-password-state="root.common.users.changePassword" logout-state="root.apps.search" class="navigation">
   <sc-navigation-item text="common.navigation.docs.title" icon="glyphicon glyphicon-folder-open" parent="true">
     <sc-navigation-item state="root.docs.search" params="{ filter: 'current' }" text="common.navigation.docs.search"></sc-navigation-item>
     <sc-navigation-item state="root.docs.new" text="common.navigation.docs.new"></sc-navigation-item>

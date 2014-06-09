@@ -28,6 +28,9 @@ namespace Common.Api
 
             // auth
             this.MapRoute(config, HttpMethod.Post, "api/auth/signout", "Auth", "PostSignOut");
+
+            //user
+            this.MapRoute(config, HttpMethod.Get, "api/user/currentData", "User", "GetUserData");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, IDictionary<string, object> paramConstraints = null)

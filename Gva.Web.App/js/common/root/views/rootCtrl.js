@@ -2,7 +2,14 @@
 (function (angular, _) {
   'use strict';
 
-  function RootCtrl($scope, $timeout, orgCaseTypes) {
+  function RootCtrl($scope, $timeout, $http, orgCaseTypes) {
+    $http({
+      method: 'GET',
+      url: 'api/user/currentData'
+    }).then(function (result) {
+      $scope.userFullname = result.data.userFullname;
+    });
+
     $scope.alerts = [];
     $scope.removeAlert = function (alert) {
       var index = $scope.alerts.indexOf(alert);
@@ -35,7 +42,7 @@
     };
   }
 
-  RootCtrl.$inject = ['$scope', '$timeout', 'orgCaseTypes'];
+  RootCtrl.$inject = ['$scope', '$timeout', '$http', 'orgCaseTypes'];
 
   RootCtrl.$resolve = {
     orgCaseTypes: [
