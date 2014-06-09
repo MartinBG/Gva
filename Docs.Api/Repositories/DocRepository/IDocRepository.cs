@@ -16,6 +16,8 @@ namespace Docs.Api.Repositories.DocRepository
     {
         string spSetDocUsers(int id);
 
+        List<int> fnGetSubordinateDocs(int id);
+
         DocRegister spGetDocRegisterNextNumber(int docRegisterId);
 
         int? spGetDocRegisterId(int id);

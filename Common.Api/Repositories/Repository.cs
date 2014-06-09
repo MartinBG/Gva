@@ -49,6 +49,26 @@ namespace Common.Api.Repositories
                 parameters.ToArray());
         }
 
+        public List<TSpEntity> ExecFunction<TSpEntity>(string procedureName, List<SqlParameter> parameters)
+        {
+            StringBuilder sb = new StringBuilder("SELECT * FROM " + procedureName + "(");
+
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                sb.AppendFormat("@{0}", parameters[i].ParameterName);
+                if (i != parameters.Count - 1)
+                {
+                    sb.Append(", ");
+                }
+            }
+
+            sb.Append(")");
+
+            return this.unitOfWork.DbContext.Database.SqlQuery<TSpEntity>(
+                sb.ToString(),
+                parameters.ToArray()).ToList();
+        }
+
         public DbRawSqlQuery<TSpEntity> SqlQuery<TSpEntity>(string sql, List<SqlParameter> parameters)
         {
             return this.unitOfWork.DbContext.Database.SqlQuery<TSpEntity>(sql, parameters.ToArray());

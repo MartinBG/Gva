@@ -34,6 +34,14 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<string>("spSetDocUsers", parameters).FirstOrDefault();
         }
 
+        public List<int> fnGetSubordinateDocs(int id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("DocId", id));
+
+            return this.ExecFunction<int>("fnGetSubordinateDocs", parameters);
+        }
+
         public DocRegister spGetDocRegisterNextNumber(int docRegisterId)
         {
             var parameters = new List<SqlParameter>();

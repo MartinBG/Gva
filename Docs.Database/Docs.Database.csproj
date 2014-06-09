@@ -48,6 +48,7 @@
     <Content Include="Create\Diagram\Docs.sql" />
     <Content Include="Create\Diagram\Main.sql" />
     <Content Include="Create\Diagram\Users.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateDocs.sql" />
     <Content Include="Create\Functions\fnCheckForRegisteredChildDocs.sql" />
     <Content Include="Create\Functions\fnGetCorrespondentDisplayName.sql" />
     <Content Include="Create\Functions\fnGetParentClassifications.sql" />

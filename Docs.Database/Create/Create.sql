@@ -102,6 +102,7 @@ GO
 --Units Fn
 :r $(rootPath)"\Functions\fnGetParentUnits.sql"
 :r $(rootPath)"\Functions\fnGetSubordinateUnits.sql"
+:r $(rootPath)"\Functions\fnGetSubordinateDocs.sql"
 
 ---------------------------------------------------------------
 -- Procedures
