@@ -6,7 +6,7 @@
 (function (angular) {
   'use strict';
 
-  function NavigationDirective(authService) {
+  function NavigationDirective(authService, $window) {
     return {
       restrict: 'E',
       transclude: true,
@@ -23,12 +23,15 @@
         };
 
         $scope.logout = function logout() {
-          authService.signOut();
-          return $state.go($scope.logoutState);
+          return authService.signOut().then(function () {
+            return $state.go($scope.logoutState)['finally'](function () {
+              return $window.location.reload();
+            });
+          });
         };
       }
     };
   }
-  NavigationDirective.$inject = ['authService'];
+  NavigationDirective.$inject = ['authService', '$window'];
   angular.module('scaffolding').directive('scNavigation', NavigationDirective);
 }(angular));
