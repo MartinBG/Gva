@@ -184,15 +184,30 @@ namespace Common.WordTemplates
                 return;
             }
 
-            OpenXmlElement parent = sdtElement.Parent;
-            OpenXmlElementList childElements = sdtContent.ChildElements;
-
-            foreach (OpenXmlElement childElement in childElements)
+            var checkBox = sdtElement.SdtProperties.GetFirstChild<DocumentFormat.OpenXml.Office2010.Word.SdtContentCheckBox>();
+            if (checkBox == null)
             {
-                parent.InsertBefore((OpenXmlElement)childElement.Clone(), sdtElement);
-            }
+                OpenXmlElement parent = sdtElement.Parent;
+                OpenXmlElementList childElements = sdtContent.ChildElements;
 
-            sdtElement.Remove();
+                foreach (OpenXmlElement childElement in childElements)
+                {
+
+                    if (checkBox != null)
+                    {
+                        parent.InsertBefore((OpenXmlElement)checkBox.Clone(), sdtElement);
+                    }
+
+                    parent.InsertBefore((OpenXmlElement)childElement.Clone(), sdtElement);
+                }
+
+                sdtElement.Remove();
+            }
+            else
+            {
+                sdtElement.SdtProperties.RemoveAllChildren();
+                sdtElement.SdtProperties.InsertAt((DocumentFormat.OpenXml.Office2010.Word.SdtContentCheckBox)checkBox.Clone(), 0);
+            }
         }
 
         private void SetRunText(Run r, JToken context, bool preserveContent = false)

@@ -177,7 +177,7 @@ namespace Aop.Api.WordTemplates
         {
             if (employer == null)
             {
-                return null;
+                employer = new JObject();
             }
 
             return new
@@ -199,7 +199,7 @@ namespace Aop.Api.WordTemplates
         {
             if (procedure == null)
             {
-                return null;
+                procedure = new JObject();
             }
 
             return new
