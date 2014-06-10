@@ -147,6 +147,7 @@
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
+    <Compile Include="ModelsDO\PersonInfoDO.cs" />
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="Models\GvaViewPersonInspector.cs" />

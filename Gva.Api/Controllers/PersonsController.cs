@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Http;
 using Common.Api.UserContext;
+using Common.Blob;
 using Common.Data;
 using Common.Json;
+using Ghostscript.NET;
+using Ghostscript.NET.Rasterizer;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -13,18 +19,10 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
+using OMR;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Common.Blob;
-using OMR;
-using System.IO;
-using Ghostscript.NET;
-using Ghostscript.NET.Rasterizer;
-using System.Drawing;
-using System;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Gva.Api.Controllers
 {
@@ -144,8 +142,18 @@ namespace Gva.Api.Controllers
             return Ok(inventory);
         }
 
+        [Route(@"{lotId}/personInfo")]
+        public IHttpActionResult GetPersonInfo(int lotId)
+        {
+            var person = this.lotRepository.GetLotIndex(lotId);
+
+            var personDataPart = this.lotRepository.GetLotIndex(lotId).GetPart("personData");
+            var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).GetPart("inspectorData");
+
+            return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
+        }
+
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personData$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
@@ -345,13 +353,44 @@ namespace Gva.Api.Controllers
             return base.PostPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^personData$)}")]
-        public IHttpActionResult PostPersonData(int lotId, string path, JObject content)
+        [Route(@"{lotId}/personInfo")]
+        public IHttpActionResult PostPersonInfo(int lotId, JObject content)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes"));
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UserContext userContext = this.Request.GetUserContext();
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            return base.PostPart(lotId, path, content);
+                this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("personData.part.caseTypes"));
+                lot.UpdatePart("personData", content.Get<JObject>("personData.part"), userContext);
+                this.unitOfWork.Save();
+
+                var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
+                var inspectorDataPart = lot.Parts.FirstOrDefault(p => p.Path == "inspectorData");
+
+                if (caseTypes.Any(ct => ct.Alias == "inspector"))
+                {
+                    if (inspectorDataPart == null)
+                    {
+                        lot.CreatePart("inspectorData", content.Get<JObject>("inspectorData.part"), userContext);
+                    }
+                    else
+                    {
+                        lot.UpdatePart("inspectorData", content.Get<JObject>("inspectorData.part"), userContext);
+                    }
+                }
+                else if (inspectorDataPart != null)
+                {
+                    lot.DeletePart("inspectorData", userContext);
+                }
+
+                lot.Commit(userContext, this.lotEventDispatcher);
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+
+            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),

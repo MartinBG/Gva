@@ -1,0 +1,27 @@
+﻿<ng-form name="editPersonForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.editPersonInfo.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editPersonInfo.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editPersonInfo.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editPersonInfo.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-person-data name="personDataForm" ng-model="personInfo.personData.part" readonly="!editMode" sc-data-is-new="false"></gva-person-data>
+
+      <div ng-if="showInspData()" style="margin-top:20px;">
+        <h5 class="form-header" l10n-text="persons.editPersonInfo.inspDataTitle"></h5>
+        <gva-inspector-data name="inspectorDataForm" ng-model="personInfo.inspectorData.part" readonly="!editMode"></gva-inspector-data>
+      </div>
+    </div>
+  </div>
+</ng-form>

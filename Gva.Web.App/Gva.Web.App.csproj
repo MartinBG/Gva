@@ -449,6 +449,7 @@
     <Content Include="js\gva\organizations\forms\organizationRecommendationCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="js\gva\organizations\forms\organizationStaffExaminer.html" />
+    <Content Include="js\gva\organizations\forms\organizationStaffExaminer.js" />
     <Content Include="js\gva\organizations\forms\organizationStaffManagement.html" />
     <Content Include="js\gva\organizations\resources\organization.js" />
     <Content Include="js\gva\organizations\resources\organizationAddress.js" />
@@ -591,6 +592,8 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\inspectorData.html" />
+    <Content Include="js\gva\persons\forms\inspectorDataCtrl.js" />
     <Content Include="js\gva\persons\forms\personAddress.html" />
     <Content Include="js\gva\persons\forms\personApplication.html" />
     <Content Include="js\gva\persons\forms\personApplicationCtrl.js" />
@@ -617,7 +620,7 @@
     <Content Include="js\gva\persons\resources\person.js" />
     <Content Include="js\gva\persons\resources\personAddress.js" />
     <Content Include="js\gva\persons\resources\personApplication.js" />
-    <Content Include="js\gva\persons\resources\personData.js" />
+    <Content Include="js\gva\persons\resources\personInfo.js" />
     <Content Include="js\gva\persons\resources\personDocumentApplication.js" />
     <Content Include="js\gva\persons\resources\personDocumentCheck.js" />
     <Content Include="js\gva\persons\resources\personDocumentEducation.js" />
@@ -729,8 +732,8 @@
     <Content Include="js\gva\persons\views\licences\licencesNewCtrl.js" />
     <Content Include="js\gva\persons\views\licences\licencesSearch.html" />
     <Content Include="js\gva\persons\views\licences\licencesSearchCtrl.js" />
-    <Content Include="js\gva\persons\views\personData\personDataEdit.html" />
-    <Content Include="js\gva\persons\views\personData\personDataEditCtrl.js" />
+    <Content Include="js\gva\persons\views\personInfo\personInfoEdit.html" />
+    <Content Include="js\gva\persons\views\personInfo\personInfoEditCtrl.js" />
     <Content Include="js\gva\persons\views\personsNew.html" />
     <Content Include="js\gva\persons\views\personsNewCtrl.js" />
     <Content Include="js\gva\persons\views\personsSearch.html" />

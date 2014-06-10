@@ -1745,6 +1745,12 @@
           phones: 'Телефони',
           caseTypes: 'Типове дела'
         },
+        inspectorDataDirective: {
+          examinerCode: 'Идентификационен код',
+          caa: 'Въздухоплавателна администрация',
+          stampNum: 'Номер на печат',
+          isValid: 'Валиден'
+        },
         personAddressDirective: {
           addressType: 'Вид',
           settlement: 'Населено място',
@@ -2060,11 +2066,12 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        editPersonData: {
+        editPersonInfo: {
           title: 'Преглед на лични данни',
           edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          inspDataTitle: 'Данни за инспектор'
         },
         viewPerson: {
           name: 'Име',
@@ -3412,6 +3419,8 @@
           name: 'Наименование',
           nameAlt: 'Наименование на поддържащ език',
           alias: 'Псевдоним',
+          permitedAW: 'Разрешена проверка на ЛГ',
+          permitedCheck: 'Разрешена проверка на лица',
           valid: 'Валиден',
           person: 'Физическо лице',
           content: {
@@ -3420,6 +3429,15 @@
             organization: 'Организация',
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
+          },
+          approvedAircrafts: {
+            title: 'Одобрени ВС за преглед на ЛГ',
+            aircraftTypeGroup: 'Тип/група ВС',
+            dateApproved: 'Дата на одобрение',
+            inspector: 'Одобрено от инспектор',
+            valid: 'Валидно',
+            notes: 'Бележки',
+            noEntry: 'Няма налични данни'
           },
           applications: 'Заявления'
         },

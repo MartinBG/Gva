@@ -45,6 +45,11 @@
       controller: 'PersonDataCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaInspectorData',
+      templateUrl: 'js/gva/persons/forms/inspectorData.html',
+      controller: 'InspDataCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonAddress',
       templateUrl: 'js/gva/persons/forms/personAddress.html'
     });
@@ -261,7 +266,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationStaffExaminer',
-      templateUrl: 'js/gva/organizations/forms/organizationStaffExaminer.html'
+      templateUrl: 'js/gva/organizations/forms/organizationStaffExaminer.html',
+      controller: 'OrganizationStaffExaminerCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationDocumentOther',
@@ -398,7 +404,7 @@
       .state(['root.persons.search'                                     , ''                                           , ['@root'             , 'js/gva/persons/views/personsSearch.html'                             , 'PersonsSearchCtrl'            ]])
       .state(['root.persons.new'                                        , '/new'                                       , ['@root'             , 'js/gva/persons/views/personsNew.html'                                , 'PersonsNewCtrl'               ]])
       .state(['root.persons.view'                                       , '/:id?caseTypeId&appId&filter'               , ['@root'             , 'js/gva/persons/views/personsView.html'                               , 'PersonsViewCtrl'              ]])
-      .state(['root.persons.view.edit'                                  , '/personData'                                , ['@root'             , 'js/gva/persons/views/personData/personDataEdit.html'                 , 'PersonDataEditCtrl'           ]])
+      .state(['root.persons.view.edit'                                  , '/personInfo'                                , ['@root'             , 'js/gva/persons/views/personInfo/personInfoEdit.html'                 , 'PersonInfoEditCtrl'           ]])
       .state(['root.persons.view.addresses'                             , '/addresses'                                                                                                                                                              ])
       .state(['root.persons.view.addresses.search'                      , ''                                           , ['@root.persons.view', 'js/gva/persons/views/addresses/addrSearch.html'                      , 'AddressesSearchCtrl'          ]])
       .state(['root.persons.view.addresses.new'                         , '/new'                                       , ['@root.persons.view', 'js/gva/persons/views/addresses/addrNew.html'                         , 'AddressesNewCtrl'             ]])
