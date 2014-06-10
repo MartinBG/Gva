@@ -464,6 +464,21 @@ namespace Gva.AppCommunicator
             throw new NotImplementedException();
         }
 
+        public CaseFileInfo GetCaseFileInfo(string uri)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CaseStatusInfo GetCaseStatusInfo(Guid guid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CaseFileInfo GetCaseFileInfoWithCustomUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Private methods
 
         private Guid WriteToBlob(byte[] content)
@@ -499,11 +514,6 @@ namespace Gva.AppCommunicator
             {
                 throw;
             }
-        }
-
-        public CaseStatusInfo GetCaseStatusInfo(Guid guid)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

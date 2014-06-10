@@ -298,6 +298,8 @@ namespace Docs.Api.Repositories.DocRepository
 
         Doc GetDocByRegUri(string regIndex, int regNumber, DateTime regDate);
 
+        Doc GetDocByRegUri(string regUri);
+
         Doc GetByRegUriAndAccessCode(string regIndex, int regNumber, DateTime regDate, string accessCode);
 
         DocFile GetPrimaryOrFirstDocFileByDocId(int docId);

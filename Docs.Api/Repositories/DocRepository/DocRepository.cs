@@ -1369,6 +1369,18 @@ namespace Docs.Api.Repositories.DocRepository
             return docs.Where(d => d.RegDate.Value.Date == regDate.Date).SingleOrDefault();
         }
 
+        public Doc GetDocByRegUri(string regUri)
+        {
+            return
+                this.unitOfWork.DbContext.Set<Doc>()
+                .Include(d => d.DocType)
+                .Include(d => d.DocCasePartType)
+                .Include(d => d.DocStatus)
+                .Include(d => d.DocElectronicServiceStages)
+                .Where(d => d.RegUri == regUri)
+                .SingleOrDefault();
+        }
+
         public Doc GetByRegUriAndAccessCode(string regIndex, int regNumber, DateTime regDate, string accessCode)
         {
             var docs =

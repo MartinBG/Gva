@@ -28,6 +28,19 @@ using System.Globalization;
 using Aop.Api.Repositories.Aop;
 using Aop.Api.Models;
 using Components.ApplicationCommunicator;
+using R_0009_000089;
+using R_0009_000073;
+using R_0009_000030;
+using R_0009_000027;
+using Common.Extensions;
+using R_0009_000018;
+using R_0009_000005;
+using R_0009_000072;
+using R_0009_000044;
+using R_0009_000043;
+using R_0009_000042;
+using R_0009_000031;
+using R_0009_000026;
 
 namespace Aop.AppCommunicator
 {
@@ -229,6 +242,163 @@ namespace Aop.AppCommunicator
         public void RegisterElectronicPortalPmntInfo(ElectronicPortalPaymentInfo paymentInfo)
         {
             throw new NotImplementedException();
+        }
+
+        public CaseFileInfo GetCaseFileInfoWithCustomUri(string uri)
+        {
+            if (!String.IsNullOrWhiteSpace(uri))
+            {
+                var caseDoc = this.docRepository.GetDocByRegUri(uri);
+                
+                if (caseDoc != null)
+                {
+                    CaseFileInfo caseFileInfo = new CaseFileInfo();
+                    caseFileInfo.AISCaseDataInternetAccess = new AISCaseDataInternetAccess();
+                    caseFileInfo.AISCaseDataInternetAccess.Name = !String.IsNullOrWhiteSpace(caseDoc.DocType.ApplicationName) ? caseDoc.DocType.ApplicationName : caseDoc.DocType.Name;
+                    caseFileInfo.AISCaseDataInternetAccess.URI = new AISCaseURI();
+                    caseFileInfo.AISCaseDataInternetAccess.URI.DocumentInInternalRegisterURI = caseDoc.RegUri;
+                    caseFileInfo.AISCaseDataInternetAccess.Documents = new Documents();
+                    caseFileInfo.AISCaseDataInternetAccess.Documents.DocumentCollection = new DocumentCollection();
+                    caseFileInfo.AISCaseDataInternetAccess.ServiceName = caseDoc.DocType.Name;
+
+                    var serviceStages = 
+                        this.unitOfWork.DbContext.Set<DocElectronicServiceStage>()
+                        .Include(s => s.ElectronicServiceStage.ElectronicServiceStageExecutors)
+                        .Where(s => s.DocId == caseDoc.DocId)
+                        .OrderBy(s => s.ElectronicServiceStageId)
+                        .ToList();
+
+                    if (serviceStages.Count > 0)
+                    {
+
+                        caseFileInfo.AISCaseDataInternetAccess.Stages = new AISCaseDataInternetAccessStages();
+                        caseFileInfo.AISCaseDataInternetAccess.Stages.StageCollection = new AISCaseDataInternetAccessStagesStageCollection();
+
+                        foreach (var serviceStage in serviceStages)
+                        {
+                            var stage = new AISCaseDataInternetAccessStagesStage();
+                            stage.ActualCompletionDate = serviceStage.EndingDate;
+                            stage.StageDescription = serviceStage.ElectronicServiceStage.Description;
+                            stage.StageName = serviceStage.ElectronicServiceStage.Name;
+
+                            string executorPosition = String.Empty;
+                            string executorName = String.Empty;
+
+                            if (serviceStage.ElectronicServiceStage.ElectronicServiceStageExecutors.Count > 0)
+                            {
+                                Tuple<string, string> postionAndName = this.docRepository.GetPositionAndNameById(serviceStage.ElectronicServiceStage.ElectronicServiceStageExecutors.First().UnitId);
+
+                                executorPosition = postionAndName.Item1;
+                                executorName = postionAndName.Item2;
+                            }
+
+                            stage.Executor = new R_0009_000041.ServiceStageExecutor();
+                            stage.Executor.PositionInAdministrationOrAISUser = new PositionInAdministrationOrAISUser();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData = new AISUserBasicData();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position = new AISUserPositionInAdministration();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position.Position = new Position();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Position.Position.EKDAPositonName = executorPosition;
+
+                            Tuple<string, string, string> splitNames = Helper.SplitNames(executorName);
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names = new AISUserNames();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames = new PersonNames();
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.First = splitNames.Item1;
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.Middle = splitNames.Item2;
+                            stage.Executor.PositionInAdministrationOrAISUser.AISUserBasicData.Names.PersonNames.Last = splitNames.Item3;
+
+                            caseFileInfo.AISCaseDataInternetAccess.Stages.StageCollection.Add(stage);
+                        }
+                    }
+
+                    var docs = this.docRepository.FindPublicLeafsByDocId(caseDoc.DocId);
+
+                    foreach (var doc in docs)
+                    {
+
+                        DocFile docFile =
+                            this.unitOfWork.DbContext.Set<DocFile>()
+                            .Include(d => d.DocFileKind)
+                            .Include(d => d.DocFileType)
+                            .Where(d => d.DocId == doc.DocId)
+                            .OrderByDescending(d => d.IsPrimary)
+                            .ThenBy(d => d.DocFileId)
+                            .FirstOrDefault();
+
+                        Document document = new Document();
+                        document.AccessIdentifier = doc.RegUri;
+                        document.AISDocumentRegisterDocumentData = new AISDocumentRegisterDocumentData();
+                        document.AISDocumentRegisterDocumentData.RegistrationTime = doc.RegDate;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI = new RegisteredDocumentURI();
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI = new DocumentURI();
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.RegisterIndex = doc.RegIndex;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.SequenceNumber = doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.ReceiptOrSigningDate = doc.RegDate;
+                        document.AISDocumentRegisterDocumentData.DocumentType = new AdministrativeNomenclatureDocumentTypeBasicData();
+                        document.AISDocumentRegisterDocumentData.DocumentType.Name = doc.DocType.Name;
+                        if (doc.DocType.IsElectronicService)
+                        {
+                            document.AISDocumentRegisterDocumentData.DocumentType.URI = new AdministrativeNomenclatureDocumentTypeURI();
+                            document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI = new UnifiedDataURI();
+                            if (!String.IsNullOrWhiteSpace(doc.DocType.ElectronicServiceFileTypeUri))
+                            {
+                                document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI.RegisterIndex = doc.DocType.ElectronicServiceFileTypeUri.Split(new char[] { '-' })[0];
+                                document.AISDocumentRegisterDocumentData.DocumentType.URI.SegmentUnifiedDataURI.BatchNumber = doc.DocType.ElectronicServiceFileTypeUri.Split(new char[] { '-' })[1];
+                            }
+                        }
+
+                        document.AISDocument = new R_0009_000085.AISDocument();
+
+                        if (docFile != null && docFile.DocFileKind.Alias.ToLower() == "PublicAttachedFile".ToLower())
+                        {
+                            document.AISDocument.Name = docFile.DocFileName;
+                            document.AISDocument.DocumentProcessType = "0006-000050";
+                            document.AISDocument.ObjectCreationData = new R_0009_000032.AISObjectCreationData();
+                            document.AISDocument.ObjectCreationData.CreationTime = doc.RegDate;
+
+                            document.AISDocumentRegisterDocumentData.DocumentElectronicTransportType = docFile.DocFileType.MimeType;
+                        }
+
+                        string registratorPosition = String.Empty;
+                        string registratorName = String.Empty;
+                        if (doc.DocWorkflows.Any(e => e.DocWorkflowAction.Alias == "Registration"))
+                        {
+                            int? unitId = doc.DocWorkflows.Where(e => e.DocWorkflowAction.Alias == "Registration").First().PrincipalUnitId;
+                            if (unitId.HasValue)
+                            {
+                                Tuple<string, string> postionAndName = this.docRepository.GetPositionAndNameById(unitId.Value);
+
+                                registratorPosition = postionAndName.Item1;
+                                registratorName = postionAndName.Item2;
+                            }
+                        }
+
+                        Tuple<string, string, string> splitNames = Helper.SplitNames(registratorName);
+                        document.AISDocumentRegisterDocumentData.RegisteredBy = new R_0009_000070.RegistrationInDocumentRegisterRegistrar();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData = new R_0009_000027.AISUserBasicData();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names = new R_0009_000018.AISUserNames();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames = new R_0009_000005.PersonNames();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.First = splitNames.Item1;
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.Middle = splitNames.Item2;
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Names.PersonNames.Last = splitNames.Item3;
+
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position = new R_0009_000026.AISUserPositionInAdministration();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position.Position = new R_0009_000026.Position();
+                        document.AISDocumentRegisterDocumentData.RegisteredBy.AISUserBasicData.Position.Position.EKDAPositonName = registratorPosition;
+
+                        caseFileInfo.AISCaseDataInternetAccess.Documents.DocumentCollection.Add(document);
+                    }
+
+                    return caseFileInfo;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
         #region Private methods
