@@ -1256,6 +1256,50 @@ namespace Docs.Api.Repositories.DocRepository
                 out totalCount);
         }
 
+        public List<Doc> GetDocsForChange(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            string corrs,
+            string units,
+            List<int> docRelations,
+            int limit,
+            int offset,
+            DocUnitPermission docUnitPermissionRead,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>();
+
+            if (docRelations.Any())
+            {
+                predicate = predicate.And(d => !docRelations.Contains(d.DocId));
+            }
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                null,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                docUnitPermissionRead,
+                null,
+                null,
+                out totalCount);
+        }
+
         public List<Doc> GetControlDocs(
             DateTime? fromDate,
             DateTime? toDate,

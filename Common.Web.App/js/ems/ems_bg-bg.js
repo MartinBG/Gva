@@ -166,6 +166,12 @@
               save: 'Приключване',
               cancel: 'Отказ'
             },
+            changeDocParent: {
+              title: 'Премести в преписка',
+              newCase: 'Създай нова преписка',
+              cancel: 'Отказ',
+              select: 'Избор'
+            },
             docType: {
               registerIndex: 'Регистър на документа',
               unregisterDoc: 'Дерегистриране на документа?',

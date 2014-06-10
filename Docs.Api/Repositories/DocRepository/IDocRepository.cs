@@ -259,6 +259,22 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount);
 
+        List<Doc> GetDocsForChange(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            string corrs,
+            string units,
+            List<int> docRelations,
+            int limit,
+            int offset,
+            DocUnitPermission docUnitPermissionRead,
+            UnitUser unitUser,
+            out int totalCount);
+
         List<Doc> GetControlDocs(
             DateTime? fromDate,
             DateTime? toDate,

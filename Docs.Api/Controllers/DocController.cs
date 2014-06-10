@@ -399,6 +399,133 @@ namespace Docs.Api.Controllers
                 });
         }
 
+        [HttpGet]
+        public IHttpActionResult GetDocsForChange(
+            int id,
+            int limit = 10,
+            int offset = 0,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string regUri = null,
+            string docName = null,
+            int? docTypeId = null,
+            int? docStatusId = null,
+            string corrs = null,
+            string units = null
+            )
+        {
+            this.userContext = this.Request.GetUserContext();
+
+            //? hot fix: load fist 1000 docs, so the paging with datatable will work
+            limit = 1000;
+            offset = 0;
+
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+
+            int totalCount = 0;
+
+            List<Doc> docs = new List<Doc>();
+            List<int> docRelations = this.docRepository.fnGetSubordinateDocs(id);
+            docs = this.docRepository.GetDocsForChange(
+                      fromDate,
+                      toDate,
+                      regUri,
+                      docName,
+                      docTypeId,
+                      docStatusId,
+                      corrs,
+                      units,
+                      docRelations,
+                      limit,
+                      offset,
+                      docUnitPermissionRead,
+                      unitUser,
+                      out totalCount);
+
+            List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
+
+            StringBuilder sb = new StringBuilder();
+
+            if (totalCount >= 10000)
+            {
+                sb.Append("Има повече от 10000 резултата, моля, въведете допълнителни филтри.");
+            }
+
+            return Ok(new
+            {
+                documents = returnValue,
+                documentCount = totalCount,
+                msg = sb.ToString()
+            });
+        }
+
+        [HttpPost]
+        public IHttpActionResult ChangeDocParent(int id, int newDocId)
+        {
+            //todo SetDocUsers
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                Doc doc = this.docRepository.Find(id);
+                doc.IsCase = false;
+
+                List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
+                DocRelation newDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == newDocId);
+                
+                List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
+                foreach (var docRelation in docRelations)
+                {
+                    if (docIds.Contains(docRelation.DocId))
+                    {
+                        if (docRelation.DocId == id)
+                        {
+                            docRelation.ParentDocId = newDocId;
+                        }
+                        docRelation.RootDocId = newDocRelation.RootDocId;
+                    }
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateNewCase(int id)
+        {
+            //todo SetDocUsers
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                Doc doc = this.docRepository.Find(id);
+                doc.IsCase = true;
+
+                List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
+                List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
+
+                foreach (var docRelation in docRelations)
+                {
+                    if (docIds.Contains(docRelation.DocId))
+                    {
+                        if (docRelation.DocId == id)
+                        {
+                            docRelation.ParentDocId = null;
+                        }
+                        docRelation.RootDocId = id;
+                    }
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
         /// <summary>
         /// Създаване на нов документ
         /// </summary>
@@ -1292,6 +1419,7 @@ namespace Docs.Api.Controllers
                 });
             }
         }
+
 
         /// <summary>
         /// Управление на документ

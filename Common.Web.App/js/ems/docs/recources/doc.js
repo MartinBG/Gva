@@ -78,6 +78,21 @@
             'getRegisterIndex': {
               method: 'GET',
               url: '/api/docs/:id/registerIndex'
+            },
+            'getDocsForChange': {
+              method: 'GET',
+              url: '/api/docs/:id/getDocsForChange'
+            },
+            'changeDocParent': {
+              method: 'POST',
+              url: '/api/docs/:id/changeDocParent',
+              params: {
+                newDocId: '@newDocId'
+              }
+            },
+            'createNewCase': {
+              method: 'POST',
+              url: '/api/docs/:id/createNewCase'
             }
           });
       }]);

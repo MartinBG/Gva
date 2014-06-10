@@ -372,6 +372,16 @@
       return $state.go('root.docs.edit.case.docType');
     };
 
+    $scope.changeDocParent = function () {
+      return $state.go('root.docs.edit.case.changeDocParent');
+    };
+
+    $scope.createNewCase = function () {
+      return Doc.createNewCase({ id: doc.docId }, {}).$promise.then(function () {
+        return $state.go('root.docs.edit.case', { id: doc.docId }, { reload: true });
+      });
+    };
+
     $scope.goToDoc = function (message) {
       return $state.go('root.docs.edit.view', { id: message.docId });
     };

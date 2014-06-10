@@ -165,6 +165,14 @@
                   text: 'docs.edit.docType',
                   action: editDocType,
                   visible: doc.flags.isVisibleEditTechCmd
+                },{
+                  text: 'docs.edit.case.changeDocParent.title',
+                  action: changeDocParent,
+                  visible: true
+                },{
+                  text: 'docs.edit.case.changeDocParent.newCase',
+                  action: createNewCase,
+                  visible: true
                 }
             ]">
           </sc-dropdown-button>
