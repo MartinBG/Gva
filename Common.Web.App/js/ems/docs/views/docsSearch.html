@@ -112,9 +112,12 @@
         <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
         </sc-column>
-        <sc-column width="100" data="caseDocRelation.docDataHtml" title="docs.search.kase">
+        <sc-column width="100" title="docs.search.kase" has-content="true">
+          <span><div ng-if="!!item.caseDocRelation.docRegUri">{{ item.caseDocRelation.docRegUri }}<br/></div>
+            {{item.caseDocRelation.docDocDirectionName}} | {{item.caseDocRelation.docDocCasePartTypeName}}</span>
         </sc-column>
-        <sc-column width="100" data="caseDocRelation.docDescriptionHtml">
+        <sc-column width="100" has-content="true">
+           <span>{{ item.caseDocRelation.docDocTypeName }} : {{ item.caseDocRelation.docSubject}}</span>
         </sc-column>
         <sc-column data="correspondentNames" title="docs.search.correspondentName">
         </sc-column>

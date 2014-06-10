@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    $sce,
     DocStatus,
     doc
   ) {
@@ -14,10 +13,7 @@
 
     if ($state.payload) {
       $scope.docRelations = _.map(_.cloneDeep($state.payload.docRelations), function (docRelation) {
-        docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
-        docRelation.docDescriptionHtml = $sce.trustAsHtml(docRelation.docDescriptionHtml);
         docRelation.check = true;
-
         return docRelation;
       });
     }
@@ -51,7 +47,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    '$sce',
     'DocStatus',
     'doc'
   ];

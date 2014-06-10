@@ -1,27 +1,24 @@
 ﻿<h4><span l10n-text="docs.edit.case.caseFinish.notFinishedMsg">></span></h4>
 
-<table class="table table-bordered table-condensed">
-  <thead>
-    <tr>
-      <th style="width: 150px;"><span l10n-text="docs.edit.case.caseFinish.regNumber"></span></th>
-      <th><span l10n-text="docs.edit.case.caseFinish.regDate"></span></th>
-      <th style="width: 100px;"><span l10n-text="docs.edit.case.caseFinish.statusName"></span></th>
-      <th><span l10n-text="docs.edit.case.caseFinish.description"></span></th>
-      <th style="width: 75px;"><span l10n-text="docs.edit.case.caseFinish.finish"></span></th>
-    </tr>
-  </thead>
-  <tbody ng-repeat="dr in docRelations">
-    <tr ng-style="{ 'font-weight': dr.docId === docId ? 'bold' : 'normal'}">
-      <td ng-bind-html="dr.docDataHtml"></td>
-      <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
-      <td>{{ dr.docDocStatusName }}</td>
-      <td ng-bind-html="dr.docDescriptionHtml"></td>
-      <td style="text-align: center;">
-        <input type="checkbox" ng-model="dr.check"/>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<sc-datatable items="docRelations" filterable="false" pageable="false" sortable="false" dynamic-columns="false"
+    scrollable="false" has-info-text="false" is-treetable="true"
+    row-class="{ 'case-font-weight': item.docId === docId}">
+  <sc-column title="docs.edit.case.caseFinish.regNumber" has-content="true" width="250px">
+    <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>
+      {{item.docDocDirectionName}} | {{item.docDocCasePartTypeName}}</span>
+  </sc-column>
+  <sc-column title="docs.edit.case.caseFinish.regDate" has-content="true">
+    {{ item.docRegDate | date:'dd.MM.yyyy HH:mm' }}
+  </sc-column>
+  <sc-column data="docDocStatusName" title="docs.edit.case.caseFinish.statusName">
+  </sc-column>
+  <sc-column title="docs.edit.case.caseFinish.description" has-content="true">
+    <span>{{ item.docDocTypeName }} : {{ item.docSubject}}</span>
+  </sc-column>
+  <sc-column title="docs.edit.case.caseFinish.finish" row-id="3" has-content="true">
+    <input type="checkbox" ng-model="item.check"/>
+  </sc-column>
+</sc-datatable>
 
 <div class="col-sm-3 col-sm-offset-5">
   <sc-button name="saveBtn" btn-click="save()" text="docs.edit.case.caseFinish.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>

@@ -1,29 +1,25 @@
 ﻿<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
-
 <br />
-
-<table class="table table-bordered table-condensed">
-  <thead>
-    <tr>
-      <th style="width: 150px;"><span l10n-text="docs.edit.case.regNumber"></span></th>
-      <th><span l10n-text="docs.edit.case.regDate"></span></th>
-      <th style="width: 100px;"><span l10n-text="docs.edit.case.statusName"></span></th>
-      <th><span l10n-text="docs.edit.case.description"></span></th>
-      <th style="width: 75px;"><span l10n-text="docs.edit.case.doc"></span></th>
-    </tr>
-  </thead>
-  <tbody ng-repeat="dr in docRelations">
-    <tr ng-style="{ 'font-weight': dr.docId === docId ? 'bold' : 'normal'}">
-      <td ng-bind-html="dr.docDataHtml"></td>
-      <td>{{ dr.docRegDate | date:'dd.MM.yyyy HH:mm' }}</td>
-      <td>{{ dr.docDocStatusName }}</td>
-      <td ng-bind-html="dr.docDescriptionHtml"></td>
-      <td style="text-align: right;">
-        <a ng-click="viewDoc(dr.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<sc-datatable item
+  s="docRelations" filterable="false" pageable="false" sortable="false" dynamic-columns="false"
+    scrollable="false" has-info-text="false" is-treetable="true"
+    row-class="{ 'case-font-weight': item.docId === docId}">
+  <sc-column title="docs.edit.case.regNumber" has-content="true" width="250px">
+    <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>
+      {{item.docDocDirectionName}} | {{item.docDocCasePartTypeName}}</span>
+  </sc-column>
+  <sc-column title="docs.edit.case.regDate" has-content="true">
+    {{ item.docRegDate | date:'dd.MM.yyyy HH:mm' }}
+  </sc-column>
+  <sc-column data="docDocStatusName" title="docs.edit.case.caseFinish.statusName">
+  </sc-column>
+  <sc-column title="docs.edit.case.description" has-content="true">
+    <span>{{ item.docDocTypeName }} : {{ item.docSubject}}</span>
+  </sc-column>
+  <sc-column title="docs.edit.case.doc" row-id="3" has-content="true">
+    <a ng-click="viewDoc(item.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
+  </sc-column>
+</sc-datatable>
 
 <div ng-if="!!appId">
   <div class="row">

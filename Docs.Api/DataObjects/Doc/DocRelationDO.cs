@@ -62,22 +62,6 @@ namespace Docs.Api.DataObjects
         public string DocDocStatusName { get; set; }
         public byte[] DocVersion { get; set; }
 
-        public string DocDataHtml
-        {
-            get
-            {
-                return string.Format("{0}<br/>{1} | {2}", this.DocRegUri, this.DocDocDirectionName, this.DocDocCasePartTypeName);
-            }
-        }
-
-        public string DocDescriptionHtml
-        {
-            get
-            {
-                return string.Format("{0}: {1}", this.DocDocTypeName, this.DocSubject);
-            }
-        }
-
         public string Data
         {
             get
