@@ -14,13 +14,12 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>10365</WindowHeight>
-  <WindowWidth>21570</WindowWidth>
+  <WindowHeight>13515</WindowHeight>
+  <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>8</ActiveSheet>
-  <FirstVisibleSheet>4</FirstVisibleSheet>
+  <ActiveSheet>2</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -527,19 +526,19 @@
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s76"><Data ss:Type="String">0501</Data></Cell>
     <Cell ss:StyleID="s81"><Data ss:Type="String">Система</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">system</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен потребител</Data></Cell>
     <Cell ss:StyleID="s79"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s76"><Data ss:Type="String">0502</Data></Cell>
     <Cell ss:StyleID="s81"><Data ss:Type="String">Администратор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">admin</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен администратор</Data></Cell>
     <Cell ss:StyleID="s79"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s76"><Data ss:Type="String">0503</Data></Cell>
     <Cell ss:StyleID="s81"><Data ss:Type="String">Служител АОП</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">systemuseraop</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен служител АОП</Data></Cell>
     <Cell ss:StyleID="s79" ss:HRef="mailto:systemuseraop@aop.bg"><Data
       ss:Type="String">systemuseraop@aop.bg</Data></Cell>
    </Row>
@@ -557,12 +556,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>7</ActiveRow>
-     <ActiveCol>2</ActiveCol>
-     <RangeSelection>R8C1:R8C3</RangeSelection>
+     <ActiveRow>25</ActiveRow>
+     <ActiveCol>9</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1329,7 +1328,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>

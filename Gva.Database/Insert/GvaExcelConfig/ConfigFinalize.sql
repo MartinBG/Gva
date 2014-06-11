@@ -5,14 +5,18 @@ print 'Insert UnitUsers for users system and admin'
 insert into UnitUsers(UserId, UnitId, IsActive)
 select u.UserId, uu.UnitId, 1
 from Users u 
-inner join Units uu on uu.Name=u.Username
-where Username in ('admin', 'system', 'peter')
+inner join 
+(select 
+	UnitId, 
+	case Name 
+		when 'Системен администратор' then 'admin' 
+		when 'Системен потребител' then 'system' 
+		else Name 
+	end as Name
+	from Units) uu on uu.Name=u.Username
+where Username in ('admin', 'system')
 GO
 
-print 'Set admin users to admin unit'
-update UnitUsers set unitid = (select UnitID from Units where Name = 'admin')
-    where UserId in (select UserId from Users where Username in ('admin', 'peter', 'testUser', 'systemUser'))
-GO
 print 'Set system to all Classifications'
 insert into UnitClassifications (UnitId, ClassificationId, ClassificationRoleId)
 	select UnitId, ClassificationId, ClassificationRoleId

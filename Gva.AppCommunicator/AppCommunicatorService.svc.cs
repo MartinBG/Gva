@@ -479,6 +479,11 @@ namespace Gva.AppCommunicator
             throw new NotImplementedException();
         }
 
+        public Stream GetDocumentContentWithCustomUri(string uri)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Private methods
 
         private Guid WriteToBlob(byte[] content)

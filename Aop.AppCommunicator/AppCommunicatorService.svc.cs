@@ -329,10 +329,7 @@ namespace Aop.AppCommunicator
                         document.AISDocumentRegisterDocumentData = new AISDocumentRegisterDocumentData();
                         document.AISDocumentRegisterDocumentData.RegistrationTime = doc.RegDate;
                         document.AISDocumentRegisterDocumentData.RegisteredDocumentURI = new RegisteredDocumentURI();
-                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI = new DocumentURI();
-                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.RegisterIndex = doc.RegIndex;
-                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.SequenceNumber = doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null;
-                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentURI.ReceiptOrSigningDate = doc.RegDate;
+                        document.AISDocumentRegisterDocumentData.RegisteredDocumentURI.DocumentInInternalRegisterURI = doc.RegUri;
                         document.AISDocumentRegisterDocumentData.DocumentType = new AdministrativeNomenclatureDocumentTypeBasicData();
                         document.AISDocumentRegisterDocumentData.DocumentType.Name = doc.DocType.Name;
                         if (doc.DocType.IsElectronicService)
@@ -399,6 +396,24 @@ namespace Aop.AppCommunicator
             {
                 throw new ArgumentException();
             }
+        }
+
+        public Stream GetDocumentContentWithCustomUri(string uri)
+        {
+            var doc = this.docRepository.GetDocByRegUri(uri);
+
+            if (doc != null)
+            {
+                DocFile docFile = this.docRepository.GetPrimaryOrFirstDocFileByDocId(doc.DocId);
+                if (docFile != null)
+                {
+                    var content = ReadFromBlob(docFile.DocFileContentId);
+
+                    return new MemoryStream(content);
+                }
+            }
+
+            throw new Exception("Document not found.");
         }
 
         #region Private methods

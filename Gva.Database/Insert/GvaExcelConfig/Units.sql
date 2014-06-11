@@ -58,11 +58,11 @@ INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(54,N'Николинка Угринова',3,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(55,N'Системни',1,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(56,N'Система',2,0,1);
-INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(57,N'system',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(57,N'Системен потребител',3,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(58,N'Администратор',2,0,1);
-INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(59,N'admin',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(59,N'Системен администратор',3,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(60,N'Служител ГВА',2,0,1);
-INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(61,N'systemusergva',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(61,N'Системен служител ГВА',3,0,1);
 SET IDENTITY_INSERT [Units] OFF
 GO
 

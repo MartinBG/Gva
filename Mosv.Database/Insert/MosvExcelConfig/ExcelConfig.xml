@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>3</ActiveSheet>
+  <ActiveSheet>2</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -797,19 +797,19 @@
    <Row ss:AutoFitHeight="0" ss:StyleID="s85">
     <Cell ss:StyleID="s88"><Data ss:Type="String">0501</Data></Cell>
     <Cell ss:StyleID="s80"><Data ss:Type="String">Система</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">system</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Системен потребител</Data></Cell>
     <Cell ss:StyleID="Default"/>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s85">
     <Cell ss:StyleID="s88"><Data ss:Type="String">0502</Data></Cell>
     <Cell ss:StyleID="s80"><Data ss:Type="String">Администратор</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">admin</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Системен администратор</Data></Cell>
     <Cell ss:StyleID="Default"/>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s85">
     <Cell ss:StyleID="s88"><Data ss:Type="String">0503</Data></Cell>
     <Cell ss:StyleID="s80"><Data ss:Type="String">Служител МОСВ</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">systemusermosv</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Системен служител МОСВ</Data></Cell>
     <Cell ss:StyleID="s90" ss:HRef="mailto:systemusermosv@mosv.bg"><Data
       ss:Type="String">systemusermosv@mosv.bg</Data></Cell>
    </Row>
@@ -827,11 +827,13 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
+   <TopRowVisible>36</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>6</ActiveRow>
-     <RangeSelection>R7C1:R7C3</RangeSelection>
+     <ActiveRow>53</ActiveRow>
+     <ActiveCol>2</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -930,7 +932,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
