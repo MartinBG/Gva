@@ -5,7 +5,6 @@
   function DocsCaseCtrl(
     $scope,
     $state,
-    $sce,
     Aop,
     doc
   ) {
@@ -22,12 +21,7 @@
       $scope.aopApplicationId = result.aopApplicationId;
     });
 
-    $scope.docRelations = _.map(_.cloneDeep(doc.docRelations), function (docRelation) {
-      docRelation.docDataHtml = $sce.trustAsHtml(docRelation.docDataHtml);
-      docRelation.docDescriptionHtml = $sce.trustAsHtml(docRelation.docDescriptionHtml);
-
-      return docRelation;
-    });
+    $scope.docRelations = _.cloneDeep(doc.docRelations);
 
     $scope.viewDoc = function (docId) {
       return $state.go('root.docs.edit.view', { id: docId });
@@ -41,7 +35,6 @@
   DocsCaseCtrl.$inject = [
     '$scope',
     '$state',
-    '$sce',
     'Aop',
     'doc'
   ];
