@@ -1,3 +1,4 @@
+using System;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -29,6 +30,8 @@ namespace Docs.Api.Models
         public string Subject { get; set; }
 
         public string Body { get; set; }
+
+        public DateTime? SentDate { get; set; }
 
         public byte[] Version { get; set; }
 
@@ -84,6 +87,7 @@ namespace Docs.Api.Models
             this.Property(t => t.StatusId).HasColumnName("StatusId");
             this.Property(t => t.Subject).HasColumnName("Subject");
             this.Property(t => t.Body).HasColumnName("Body");
+            this.Property(t => t.SentDate).HasColumnName("SentDate");
             this.Property(t => t.Version).HasColumnName("Version");
 
             // Relationships

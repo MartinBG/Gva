@@ -121,6 +121,8 @@
     <Content Include="Create\Tables\Units\UnitTypes.sql" />
     <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Views\vwDocs.sql" />
+    <Content Include="Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
+    <Content Include="Insert\AdministrativeEmails\AdministrativeEmailTypes.sql" />
     <Content Include="Insert\Assignments\AssignmentTypes.sql" />
     <Content Include="Insert\Classifications\ClassificationRelations.sql" />
     <Content Include="Insert\Classifications\ClassificationRoles.sql" />

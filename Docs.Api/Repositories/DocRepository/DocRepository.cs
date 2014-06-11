@@ -1472,8 +1472,10 @@ namespace Docs.Api.Repositories.DocRepository
                 this.unitOfWork.DbContext.Set<DocRelation>()
                 .Where(d =>
                     d.DocId == docId &&
+                    d.Doc.RegUri != null &&
                     d.Doc.DocCasePartType.Alias == "Public" &&
-                    d.Doc.DocStatus.Alias != "Draft" && d.Doc.DocStatus.Alias != "Canceled")
+                    d.Doc.DocStatus.Alias != "Draft" &&
+                    d.Doc.DocStatus.Alias != "Canceled")
                 .Select(d => d.Doc)
                 .Include(d => d.DocType)
                 .Include(d => d.DocWorkflows.Select(dw => dw.DocWorkflowAction))
@@ -1495,20 +1497,13 @@ namespace Docs.Api.Repositories.DocRepository
                 var docs =
                     this.unitOfWork.DbContext.Set<DocRelation>()
                     .Include(d => d.Doc.DocCasePartType)
-                    .Where(d => d.ParentDocId.HasValue && parentIds.Contains(d.ParentDocId.Value) && d.Doc.DocCasePartType.Alias == "Public")
-                    //.Where(d =>
-                    //    d.ParentDocId.HasValue &&
-                    //    parentIds.Contains(d.ParentDocId.Value) &&
-                    //    d.Doc.DocCasePartType.Alias == "Public" &&
-                    //    (
-                    //        d.Doc.DocType.Alias.ToLower() == "RemovingIrregularitiesInstructions".ToLower() ||
-                    //        (
-                    //            d.Doc.DocTypeId == caseDocTypeId &&
-                    //            d.Doc.DocType.DocTypeGroup.IsElectronicService &&                                  //
-                    //            d.Doc.DocType.DocTypeGroup.IsActive &&                                             //search for correction electronic document
-                    //            d.Doc.DocType.DocTypeGroup.Name.ToLower() != "Отговори на услуги".ToLower())       //
-                    //        )
-                    //    )
+                    .Where(d =>
+                        d.ParentDocId.HasValue &&
+                        parentIds.Contains(d.ParentDocId.Value) &&
+                        d.Doc.RegUri != null &&
+                        d.Doc.DocCasePartType.Alias == "Public" &&
+                        d.Doc.DocStatus.Alias != "Draft" &&
+                        d.Doc.DocStatus.Alias != "Canceled")
                     .Select(d => d.Doc)
                     .Include(d => d.DocType)
                     .Include(d => d.DocWorkflows.Select(dw => dw.DocWorkflowAction))

@@ -59,6 +59,9 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new UnitMap());
             modelBuilder.Configurations.Add(new UnitTypeMap());
             modelBuilder.Configurations.Add(new UnitUserMap());
+            modelBuilder.Configurations.Add(new AdministrativeEmailMap());
+            modelBuilder.Configurations.Add(new AdministrativeEmailStatusMap());
+            modelBuilder.Configurations.Add(new AdministrativeEmailTypeMap());
         }
     }
 }

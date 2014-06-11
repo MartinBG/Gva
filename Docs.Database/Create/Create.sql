@@ -178,6 +178,10 @@ GO
 --IncomingDocs
 :r $(rootPath)\"..\Insert\IncomingDocs\IncomingDocStatuses.sql"
 
+--AdministrativeEmails
+:r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql"
+:r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailTypes.sql"
+
 --electronic service stages
 --:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
 --:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"

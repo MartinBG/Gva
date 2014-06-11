@@ -1729,7 +1729,7 @@ namespace Docs.Api.Controllers
             this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
             this.unitOfWork.Save();
 
-            string portalAddress = ConfigurationManager.AppSettings["PortalWebAddress"].ToString();
+            string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
             string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
 
             return Ok(new { url = accessUrl });

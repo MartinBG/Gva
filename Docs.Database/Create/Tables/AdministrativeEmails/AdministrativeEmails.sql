@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[AdministrativeEmails](
 	[StatusId] [int] NOT NULL,
     [Subject] [nvarchar](1000) NULL,
 	[Body] [nvarchar](MAX) NULL,
+    [SentDate] [datetime] NULL,
 	[Version] ROWVERSION NOT NULL,
  CONSTRAINT [PK_AdministrativeEmails] PRIMARY KEY ([AdministrativeEmailId]),
  CONSTRAINT [FK_AdministrativeEmails_AdministrativeEmailStatuses] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[AdministrativeEmailStatuses] ([AdministrativeEmailStatusId]),

@@ -1,7 +1,10 @@
 ﻿using Autofac;
 using Common.Data;
 using Common.Http;
+using Common.Jobs;
 using Docs.Api.Controllers;
+using Docs.Api.EmailSender;
+using Docs.Api.Jobs;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
@@ -22,6 +25,13 @@ namespace Docs.Api
             moduleBuilder.RegisterType<DocController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
+
+            //Jobs
+            if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Docs.Api:EnableEmailsJob"]))
+            {
+                moduleBuilder.RegisterType<EmailsJob>().As<IJob>().ExternallyOwned();
+                moduleBuilder.RegisterType<EmailSender.EmailSender>().As<IEmailSender>();
+            }
         }
     }
 }
