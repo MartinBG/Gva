@@ -14,8 +14,10 @@
   </sc-column>
   <sc-column data="email" title="apps.search.email">
   </sc-column>
-  <sc-column data="stDocRelation.data" title="apps.search.docIstage">
+  <sc-column title="apps.search.docIstage" has-content="true">
+    {{item.stDocRelation.docRegUri}} {{item.stDocRelation.docDocTypeName}}: {{item.stDocRelation.docSubject}}
   </sc-column>
-  <sc-column data="ndDocRelation.data" title="apps.search.docIIstage">
+  <sc-column title="apps.search.docIIstage" has-content="true">
+    {{item.ndDocRelation.docRegUri}} {{item.ndDocRelation.docDocTypeName}}: {{item.ndDocRelation.docSubject}}
   </sc-column>
 </sc-datatable>

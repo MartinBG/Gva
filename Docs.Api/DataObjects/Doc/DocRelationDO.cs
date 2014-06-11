@@ -61,13 +61,5 @@ namespace Docs.Api.DataObjects
         public int? DocDocTypeId { get; set; }
         public string DocDocStatusName { get; set; }
         public byte[] DocVersion { get; set; }
-
-        public string Data
-        {
-            get
-            {
-                return string.Format("{0} {1}: {2}", this.DocRegUri, this.DocDocTypeName, this.DocSubject);
-            }
-        }
     }
 }
