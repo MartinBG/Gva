@@ -1,0 +1,10 @@
+bin/*
+bin/**/*
+
+obj/*
+obj/**/*
+
+Properties/PublishProfiles/*
+Properties/PublishProfiles/**/*
+
+App_tracelog.svclog

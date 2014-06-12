@@ -1,0 +1,8 @@
+bin/*
+bin/**/*
+
+obj/*
+obj/**/*
+
+Properties/PublishProfiles/*
+Properties/PublishProfiles/**/*
