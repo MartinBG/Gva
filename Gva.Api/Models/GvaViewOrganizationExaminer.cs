@@ -20,7 +20,7 @@ namespace Gva.Api.Models
 
         public bool PermitedCheck { get; set; }
 
-        public bool IsValid { get; set; }
+        public bool Valid { get; set; }
 
         public virtual Lot Lot { get; set; }
 
@@ -59,7 +59,7 @@ namespace Gva.Api.Models
             this.Property(t => t.StampNum).HasColumnName("StampNum");
             this.Property(t => t.PermitedAW).HasColumnName("PermitedAW");
             this.Property(t => t.PermitedCheck).HasColumnName("PermitedCheck");
-            this.Property(t => t.IsValid).HasColumnName("IsValid");
+            this.Property(t => t.Valid).HasColumnName("Valid");
 
             // Relationships
             this.HasRequired(t => t.Lot)

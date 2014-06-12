@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[GvaViewOrganizationExaminers] (
     [StampNum]       NVARCHAR(50)  NULL,
     [PermitedAW]     BIT           NOT NULL,
     [PermitedCheck]  BIT           NOT NULL,
-    [IsValid]        BIT           NOT NULL
+    [Valid]          BIT           NOT NULL
     CONSTRAINT [PK_GvaViewOrganizationExaminers]                PRIMARY KEY ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewOrganizationExaminers_Lots]           FOREIGN KEY ([LotId])       REFERENCES [dbo].[Lots] ([LotId]),
     CONSTRAINT [FK_GvaViewOrganizationExaminers_Lots2]          FOREIGN KEY ([PersonLotId]) REFERENCES [dbo].[Lots] ([LotId]),
@@ -23,5 +23,5 @@ exec spDescColumn N'GvaViewOrganizationExaminers', N'ExaminerCode'              
 exec spDescColumn N'GvaViewOrganizationExaminers', N'StampNum'                  , N'Персонален номер на авторизация (номер на печата).'
 exec spDescColumn N'GvaViewOrganizationExaminers', N'PermitedAW'                , N'Разрешена проверка на ЛГ.'
 exec spDescColumn N'GvaViewOrganizationExaminers', N'PermitedCheck'             , N'Разрешена проверка на лица.'
-exec spDescColumn N'GvaViewOrganizationExaminers', N'IsValid'                   , N'Маркер за валидност.'
+exec spDescColumn N'GvaViewOrganizationExaminers', N'Valid'                     , N'Маркер за валидност.'
 GO

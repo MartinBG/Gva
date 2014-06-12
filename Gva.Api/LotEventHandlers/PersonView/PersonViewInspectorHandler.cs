@@ -24,7 +24,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
             inspector.ExaminerCode = part.Content.Get<string>("examinerCode");
             inspector.CaaName = part.Content.Get<string>("caa.name");
             inspector.StampNum = part.Content.Get<string>("stampNum");
-            inspector.IsValid = part.Content.Get<string>("valid.code") == "Y";
+            inspector.Valid = part.Content.Get<string>("valid.code") == "Y";
         }
 
         public override void Clear(GvaViewPersonInspector licence)

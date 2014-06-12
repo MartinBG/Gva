@@ -28,7 +28,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
             examiner.StampNum = part.Content.Get<string>("stampNum");
             examiner.PermitedAW = part.Content.Get<string>("permitedAW.code") == "Y";
             examiner.PermitedCheck = part.Content.Get<string>("permitedCheck.code") == "Y";
-            examiner.IsValid = part.Content.Get<string>("valid.code") == "Y";
+            examiner.Valid = part.Content.Get<string>("valid.code") == "Y";
         }
 
         public override void Clear(GvaViewOrganizationExaminer examiner)
