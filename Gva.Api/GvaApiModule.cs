@@ -20,6 +20,7 @@ using Gva.Api.LotEventHandlers.EquipmentView;
 using Gva.Api.LotEventHandlers.AirportView;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.WordTemplates;
+using Gva.Api.Repositories.PublisherRepository;
 
 namespace Gva.Api
 {
@@ -98,6 +99,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CaseTypeRepository>().As<ICaseTypeRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PublisherRepository>().As<IPublisherRepository>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
@@ -109,6 +111,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<GvaPublisherController>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CoordinatorSimi>().As<IDataGenerator>().InstancePerLifetimeScope();

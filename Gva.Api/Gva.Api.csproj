@@ -81,6 +81,7 @@
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
+    <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\AirportDO.cs" />
     <Compile Include="ModelsDO\ApplicationLotObjectDO.cs" />
+    <Compile Include="ModelsDO\PublisherDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\EquipmentDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
@@ -190,6 +192,8 @@
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\AirportRepository\AirportRepository.cs" />
     <Compile Include="Repositories\AirportRepository\IAirportRepository.cs" />
+    <Compile Include="Repositories\PublisherRepository\IPublisherRepository.cs" />
+    <Compile Include="Repositories\PublisherRepository\PublisherRepository.cs" />
     <Compile Include="Repositories\EquipmentRepository\EquipmentRepository.cs" />
     <Compile Include="Repositories\EquipmentRepository\IEquipmentRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository\IOrganizationRepository.cs" />
@@ -202,6 +206,7 @@
     <Compile Include="Repositories\InventoryRepository\InventoryRepository.cs" />
     <Compile Include="Repositories\PersonRepository\IPersonRepository.cs" />
     <Compile Include="Repositories\PersonRepository\PersonRepository.cs" />
+    <Compile Include="ModelsDO\PublisherType.cs" />
     <Compile Include="WordTemplates\AMLNational.cs" />
     <Compile Include="WordTemplates\CabinCrewLicence.cs" />
     <Compile Include="WordTemplates\ControllerLicence.cs" />
