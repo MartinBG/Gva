@@ -18,7 +18,7 @@ namespace Gva.Api.Models
 
         public string Uin { get; set; }
 
-        public string Valid { get; set; }
+        public bool Valid { get; set; }
 
         public string OrganizationType { get; set; }
 
@@ -57,9 +57,6 @@ namespace Gva.Api.Models
 
             this.Property(t => t.Uin)
             .HasMaxLength(50);
-
-            this.Property(t => t.Valid)
-               .IsRequired();
 
             this.Property(t => t.OrganizationType)
                 .IsRequired();

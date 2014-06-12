@@ -25,7 +25,7 @@ namespace Gva.Api.ModelsDO
 
         public string Uin { get; set; }
 
-        public string Valid { get; set; }
+        public bool Valid { get; set; }
 
         public string OrganizationType { get; set; }
 
