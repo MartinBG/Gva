@@ -118,6 +118,7 @@
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
     <Compile Include="Blob\MultipartBlobData.cs" />
     <Compile Include="Models\Blob.cs" />
+    <Compile Include="Models\DbContextExtensions.cs" />
     <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

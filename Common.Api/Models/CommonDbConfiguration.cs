@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using CodeFirstStoreFunctions;
 using Common.Data;
 
 namespace Common.Api.Models
@@ -7,6 +8,7 @@ namespace Common.Api.Models
     {
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Add(new FunctionsConvention("dbo", typeof(DbContextExtensions)));
             modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Configurations.Add(new DistrictMap());
             modelBuilder.Configurations.Add(new MunicipalityMap());

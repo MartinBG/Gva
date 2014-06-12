@@ -56,13 +56,16 @@
     <Content Include="Create\Tables\Users\Roles.sql" />
     <Content Include="Create\Tables\Users\UserRoles.sql" />
     <Content Include="Create\Tables\Users\Users.sql" />
+    <Content Include="Create\Functions\ufnParseJSON.sql" />
     <Content Include="Create\Tools\DocumentationScript.sql" />
     <Content Include="Create\Tools\spDesc.sql" />
     <Content Include="Create\Tools\sp_generate_inserts.sql" />
     <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
     <Content Include="Insert\TestBlobs.sql" />
     <Content Include="Insert\TestUsers.sql" />
+    <Content Include="Create\Functions\ufnGetNomValuesByTextContentProperty.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

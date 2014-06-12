@@ -36,6 +36,13 @@ GO
 :r $(rootPath)\"Tables\Noms\NomValues.sql"
 
 ---------------------------------------------------------------
+--Functions
+---------------------------------------------------------------
+
+:r $(rootPath)\"Functions\ufnParseJSON.sql"
+:r $(rootPath)\"Functions\ufnGetNomValuesByTextContentProperty.sql"
+
+---------------------------------------------------------------
 -- Insert
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\TestBlobs.sql"
