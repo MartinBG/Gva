@@ -4,12 +4,12 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-        .when('GET', '/api/publishers?text&publisherTypeAlias',
+        .when('GET', '/api/publishers?name&publisherType',
           function ($params, $filter, publishers) {
             var pubs = [];
 
-            if ($params.publisherTypeAlias) {
-              pubs = publishers[$params.publisherTypeAlias];
+            if ($params.publisherType) {
+              pubs = publishers[$params.publisherType];
             } else {
               var keys = _.keys(publishers);
               _.each(keys, function (key) {

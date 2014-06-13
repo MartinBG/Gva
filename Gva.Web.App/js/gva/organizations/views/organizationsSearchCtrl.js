@@ -28,7 +28,7 @@
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,
         dateCAOValidTo: $scope.filters.dateCAOValidTo,
-        name: $scope.filters.name,
+        organizationName: $scope.filters.organizationName,
         caseTypeId: $scope.filters.caseTypeId
       });
     };

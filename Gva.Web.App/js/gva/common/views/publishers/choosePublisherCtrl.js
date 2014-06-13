@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ChoosePublisherCtrl(
@@ -9,29 +9,42 @@
     Publisher,
     Nomenclature,
     publishers,
-    selectedPublisher,
-    publisherType
+    selectedPublisher
   ) {
-    $scope.filters = {
-      text: null,
-      publisherType: null
+    $scope.publisherTypes = [
+      {id: 'inspector', text: 'Инспектор'},
+      {id: 'examiner', text: 'Проверяващ'},
+      {id: 'school', text: 'Учебен център'},
+      {id: 'organization', text: 'Авио-организация'},
+      {id: 'caa', text: 'Бъздушна администрация'},
+      {id: 'other', text: 'Други'}
+    ];
+
+    $scope.publisherTypesDictionary = {
+      'inspector': 'Инспектор',
+      'examiner': 'Проверяващ',
+      'school': 'Учебен център',
+      'organization': 'Авио-организация',
+      'caa':'Бъздушна администрация',
+      'other':  'Други'
     };
 
     $scope.publishers = publishers;
 
-    if ($stateParams.text) {
-      $scope.filters.text = $stateParams.text;
+    if ($stateParams.name) {
+      $scope.publisherName = $stateParams.name;
     }
 
-    if ($stateParams.publisherTypeAlias) {
-      $scope.filters.publisherType = publisherType;
+    if ($stateParams.publisherType) {
+      $scope.publisherType = _.where($scope.publisherTypes,
+        {id: $stateParams.publisherType})[0];
     }
 
     $scope.search = function () {
       return $state.go($state.current, {
-        text: $scope.filters.text,
-        publisherTypeAlias: $scope.filters.publisherType ?
-          $scope.filters.publisherType.alias : undefined
+        name: $scope.publisherName,
+        publisherType: $scope.publisherType ?
+          $scope.publisherType.id : undefined
       });
     };
 
@@ -53,8 +66,7 @@
     'Publisher',
     'Nomenclature',
     'publishers',
-    'selectedPublisher',
-    'publisherType'
+    'selectedPublisher'
   ];
 
   ChoosePublisherCtrl.$resolve = {
@@ -63,26 +75,12 @@
       'Publisher',
       function ($stateParams, Publisher) {
         return Publisher.query({
-          text: $stateParams.text,
-          publisherTypeAlias: $stateParams.publisherTypeAlias
+          name: $stateParams.name,
+          publisherType: $stateParams.publisherType
         }).$promise;
-      }
-    ],
-    publisherType: [
-      '$stateParams',
-      'Nomenclature',
-      function ($stateParams, Nomenclature) {
-        if ($stateParams.publisherTypeAlias) {
-          return Nomenclature.get({
-            alias: 'publisherTypes',
-            valueAlias: $stateParams.publisherTypeAlias
-          }).$promise;
-        } else {
-          return null;
-        }
       }
     ]
   };
 
   angular.module('gva').controller('ChoosePublisherCtrl', ChoosePublisherCtrl);
-}(angular));
+}(angular, _));

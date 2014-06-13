@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.PublisherRepository;
 
@@ -16,9 +17,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetPublishers(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetPublishers(string term = null, PublisherType publisherType = PublisherType.Undefined, string name = null, int offset = 0, int? limit = null)
         {
-            return Ok(this.publisherRepository.GetPublishers(PublisherType.Undefined, offset, limit));
+            return Ok(this.publisherRepository.GetPublishers(publisherType, name, offset, limit));
         }
     }
 }

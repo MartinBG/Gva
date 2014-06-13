@@ -25,10 +25,10 @@
       <label class="control-label" l10n-text="organizations.organizationOtherDirective.documentDateValidTo"></label>
       <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
     </div>
-    <sc-field-group class="col-sm-6 col-md-4" text="organizations.organizationOtherDirective.documentPublisher" validations="{ required: null }" field-name="documentPublisher">
+    <div class="form-group col-sm-6 col-md-4">
+      <label class="control-label" l10n-text="organizations.organizationOtherDirective.documentPublisher"></label>
       <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
-      <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
-    </sc-field-group>
+    </div>
   </div>
 
   <div class="row">

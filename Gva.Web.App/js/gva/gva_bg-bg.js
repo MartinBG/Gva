@@ -5,12 +5,12 @@
     l10n.add('bg-bg', {
       common: {
         publishers: {
-          text: 'Текст',
           publisherType: 'Тип',
           name: 'Наименование',
           back: 'Назад',
           search: 'Търси',
-          select: 'Избор'
+          select: 'Избор',
+          code: 'Код'
         },
         docApplicationDirective: {
           documentNumber: '№ на документ',

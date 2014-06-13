@@ -1,14 +1,26 @@
-﻿<sc-search name="publishersSearch" selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-  <sc-filter type="text" name="text" class="col-sm-3" removable="false" label="common.publishers.text"></sc-filter>
-  <sc-filter type="nomenclature" name="publisherType" class="col-sm-3" removable="false" alias="publisherTypes" label="common.publishers.publisherType"></sc-filter>
-  <sc-search-button action="goBack()" text="common.publishers.back" icon="glyphicon-arrow-left"></sc-search-button>
-  <sc-search-button action="search()" text="common.publishers.search" icon="glyphicon-search"></sc-search-button>
-</sc-search>
-
+﻿<div class="row">
+  <div class="form-group col-md-3 col-sm-4">
+    <label class="control-label" l10n-text="common.publishers.name"></label>
+    <sc-text ng-model="publisherName">
+  </div>
+  <div class="form-group col-md-3 col-sm-4">
+    <label class="control-label" l10n-text="common.publishers.publisherType"></label>
+    <input type="hidden" ui-select2="{ data: publisherTypes, allowClear: true, placeholder: ' ' }" ng-model="publisherType" class="form-control input-sm">
+  </div>
+  <div class="form-group col-md-4 col-sm-5" style="margin-top:15px">
+    <sc-button class="btn btn-primary btn-sm" btn-click="goBack()" l10n-text="common.publishers.back" icon="glyphicon-arrow-left"></sc-button>
+    <sc-button class="btn btn-primary btn-sm" btn-click="search()" l10n-text="common.publishers.search" icon="glyphicon-search"></sc-button>
+  </div>
+</div>
 <sc-datatable items="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
   <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
     <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="common.publishers.select"></sc-button>
   </sc-column>
   <sc-column data="name" sortable="true" title="common.publishers.name">
+  </sc-column>
+  <sc-column sortable="true" title="common.publishers.publisherType" has-content="true">
+    {{publisherTypesDictionary[item.publisherType]}}
+  </sc-column>
+  <sc-column data="code" sortable="true" title="common.publishers.code">
   </sc-column>
 </sc-datatable>

@@ -19,7 +19,7 @@ namespace Gva.Api.Repositories.PublisherRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<PublisherDO> GetPublishers(PublisherType publisherType, int offset = 0, int? limit = null)
+        public IEnumerable<PublisherDO> GetPublishers(PublisherType publisherType, string name = null, int offset = 0, int? limit = null)
         {
             IQueryable<PublisherDO> publishers = null;
 
@@ -101,6 +101,11 @@ namespace Gva.Api.Repositories.PublisherRepository
                         Code = null,
                         PublisherType = PublisherType.Other
                     });
+            }
+
+            if (!string.IsNullOrEmpty(name)) 
+            {
+                publishers = publishers.Where(p => p.Name.Contains(name));
             }
 
             return publishers
