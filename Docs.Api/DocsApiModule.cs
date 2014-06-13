@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Configuration;
+using Autofac;
 using Common.Data;
 using Common.Http;
 using Common.Jobs;
@@ -26,8 +27,11 @@ namespace Docs.Api
             moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
 
+            string enableEmailsJobConf = ConfigurationManager.AppSettings["Docs.Api:EnableEmailsJob"];
+
             //Jobs
-            if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Docs.Api:EnableEmailsJob"]))
+            bool enableEmailsJob;
+            if (!string.IsNullOrEmpty(enableEmailsJobConf) && bool.TryParse(enableEmailsJobConf, out enableEmailsJob) && enableEmailsJob)
             {
                 moduleBuilder.RegisterType<EmailsJob>().As<IJob>().ExternallyOwned();
                 moduleBuilder.RegisterType<EmailSender.EmailSender>().As<IEmailSender>();
