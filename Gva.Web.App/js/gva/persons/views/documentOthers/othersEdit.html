@@ -4,24 +4,24 @@
       <strong l10n-text="persons.editOther.title"></strong>
       <div class="pull-right">
         <sc-button name="editBtn" btn-click="edit()" text="persons.editOther.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteOther()" text="persons.editOther.deleteOther"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" >
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="persons.editOther.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
         <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editOther.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-document-other name="personDocumentOtherForm" ng-model="personDocumentOther.part" readonly="!editMode"></gva-person-document-other>
+      <gva-person-document-other name="personDocumentOtherForm" ng-model="personDocumentOther.part" readonly="!editMode  && !backFromChild"></gva-person-document-other>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentOther.files" readonly="!editMode" sc-data-set-part="'person'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentOther.files" readonly="!editMode  && !backFromChild" sc-data-set-part="'person'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

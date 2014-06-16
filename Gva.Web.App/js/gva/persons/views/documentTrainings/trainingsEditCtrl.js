@@ -16,6 +16,11 @@
     $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentTraining.part.documentPublisher;
     $scope.editMode = null;
+    $scope.backFromChild = false;
+
+    if ($state.previous && $state.previous.includes[$state.current.name]) {
+      $scope.backFromChild = true;
+    }
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

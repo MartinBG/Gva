@@ -12,10 +12,16 @@
   ) {
     var originalCheck = _.cloneDeep(personDocumentCheck);
     $scope.editMode = null;
+    $scope.backFromChild = false;
 
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.personDocumentCheck.part.documentPublisher = selectedPublisher.pop() ||
       personDocumentCheck.part.documentPublisher;
+
+    if ($state.previous && $state.previous.includes[$state.current.name]) {
+      $scope.backFromChild = true;
+    }
+
     $scope.choosePublisher = function () {
       return $state.go('root.persons.view.checks.edit.choosePublisher');
     };
