@@ -28,8 +28,8 @@
 
     $scope.publishers = publishers;
 
-    if ($stateParams.name) {
-      $scope.publisherName = $stateParams.name;
+    if ($stateParams.publisherName) {
+      $scope.publisherName = $stateParams.publisherName;
     }
 
     if ($stateParams.publisherType) {
@@ -39,7 +39,7 @@
 
     $scope.search = function () {
       return $state.go($state.current, {
-        name: $scope.publisherName,
+        publisherName: $scope.publisherName,
         publisherType: $scope.publisherType ?
           $scope.publisherType.id : undefined
       });
@@ -73,7 +73,7 @@
       'Publisher',
       function ($stateParams, Publisher) {
         return Publisher.query({
-          name: $stateParams.name,
+          publisherName: $stateParams.publisherName,
           publisherType: $stateParams.publisherType
         }).$promise;
       }

@@ -8,8 +8,8 @@
     <input type="hidden" ui-select2="{ data: publisherTypes, allowClear: true, placeholder: ' ' }" ng-model="publisherType" class="form-control input-sm">
   </div>
   <div class="form-group col-md-4 col-sm-5" style="margin-top:15px">
-    <sc-button class="btn btn-primary btn-sm" btn-click="goBack()" l10n-text="common.publishers.back" icon="glyphicon-arrow-left"></sc-button>
-    <sc-button class="btn btn-primary btn-sm" btn-click="search()" l10n-text="common.publishers.search" icon="glyphicon-search"></sc-button>
+    <sc-button class="btn btn-primary btn-sm" btn-click="goBack()" text="common.publishers.back" icon="glyphicon-arrow-left"></sc-button>
+    <sc-button class="btn btn-primary btn-sm" btn-click="search()" text="common.publishers.search" icon="glyphicon-search"></sc-button>
   </div>
 </div>
 <sc-datatable items="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
