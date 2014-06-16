@@ -6,28 +6,25 @@
     $state,
     $stateParams,
     $scope,
+    l10n,
     Publisher,
     Nomenclature,
     publishers,
     selectedPublisher
   ) {
-    $scope.publisherTypes = [
-      {id: 'inspector', text: 'Инспектор'},
-      {id: 'examiner', text: 'Проверяващ'},
-      {id: 'school', text: 'Учебен център'},
-      {id: 'organization', text: 'Авио-организация'},
-      {id: 'caa', text: 'Бъздушна администрация'},
-      {id: 'other', text: 'Други'}
-    ];
-
     $scope.publisherTypesDictionary = {
-      'inspector': 'Инспектор',
-      'examiner': 'Проверяващ',
-      'school': 'Учебен център',
-      'organization': 'Авио-организация',
-      'caa':'Бъздушна администрация',
-      'other':  'Други'
+      'inspector': l10n.get('common.publishers.inspector'),
+      'examiner': l10n.get('common.publishers.examiner'),
+      'school': l10n.get('common.publishers.school'),
+      'organization': l10n.get('common.publishers.organization'),
+      'caa': l10n.get('common.publishers.caa'),
+      'other':  l10n.get('common.publishers.other')
     };
+
+    $scope.publisherTypes = [];
+    _.forEach($scope.publisherTypesDictionary, function(value,key){
+     $scope.publisherTypes.push({id: key, text: value});
+    });
 
     $scope.publishers = publishers;
 
@@ -63,6 +60,7 @@
     '$state',
     '$stateParams',
     '$scope',
+    'l10n',
     'Publisher',
     'Nomenclature',
     'publishers',

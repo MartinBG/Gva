@@ -10,7 +10,13 @@
           back: 'Назад',
           search: 'Търси',
           select: 'Избор',
-          code: 'Код'
+          code: 'Код',
+          inspector: 'Инспектор',
+          examiner: 'Проверяващ',
+          school: 'Учебен център',
+          organization: 'Авио-организация',
+          caa: 'Бъздушна администрация',
+          other: 'Други'
         },
         docApplicationDirective: {
           documentNumber: '№ на документ',
