@@ -2,7 +2,7 @@
 using Common.Rio.RioObjectExtractor;
 using Components.DocumentSerializer;
 using RioObjects;
-using Aop.RioBridge.DataObjects;
+using Mosv.RioBridge.DataObjects;
 using Abbcdn;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aop.RioBridge.Extractions.CorrespondentDo
+namespace Mosv.RioBridge.Extractions.CorrespondentDo
 {
     public abstract class CorrespondentDoExtraction<TRioObject> : RioObjectExtraction<TRioObject, DataObjects.CorrespondentDo>
     {

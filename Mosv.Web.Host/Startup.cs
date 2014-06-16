@@ -21,6 +21,8 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using Regs.Api;
 using Mosv.Api;
+using Common.Rio;
+using Mosv.Rio;
 
 namespace Mosv.Web.Host
 {
@@ -28,19 +30,19 @@ namespace Mosv.Web.Host
     {
         public void Configuration(IAppBuilder app)
         {
-            //ConfigureAutoMapper();
+            ConfigureAutoMapper();
             var container = CreateAutofacContainer();
 
             App.Configure(app, container);
         }
 
-        //public static void ConfigureAutoMapper()
-        //{
-        //    AutoMapper.Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.AddProfile(new Gva.RioBridge.GvaRioBridgeMapperProfile());
-        //    });
-        //}
+        public static void ConfigureAutoMapper()
+        {
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile(new Mosv.RioBridge.MosvRioBridgeMapperProfile());
+            });
+        }
 
         public static IContainer CreateAutofacContainer()
         {
@@ -50,9 +52,9 @@ namespace Mosv.Web.Host
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new MosvApiModule());
             builder.RegisterModule(new RegsApiModule());
-            //builder.RegisterModule(new CommonRioModule());
-            //builder.RegisterModule(new GvaRioBrdigeModule());
-            //builder.RegisterModule(new GvaRioModule());
+            builder.RegisterModule(new CommonRioModule());
+            builder.RegisterModule(new MosvRioBrdigeModule());
+            builder.RegisterModule(new MosvRioModule());
             return builder.Build();
         }
     }

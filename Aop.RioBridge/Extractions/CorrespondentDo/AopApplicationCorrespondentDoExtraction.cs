@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using Aop;
 using Aop.RioBridge.Extractions.AttachedDocDo;
 
-namespace Aop.RioBridge.Extractions.AttachedDocDo
+namespace Aop.RioBridge.Extractions.CorrespondentDo
 {
     public class AopApplicationCorrespondentDoExtraction : CorrespondentDoExtraction<AopApplication>
     {
         protected override DataObjects.CorrespondentDo GetCorrespondent(AopApplication rioObject)
         {
-            return new CorrespondentDo()
+            return new DataObjects.CorrespondentDo()
             {
                 FirstName = rioObject.SenderName,
                 LastName = rioObject.SenderLastName,

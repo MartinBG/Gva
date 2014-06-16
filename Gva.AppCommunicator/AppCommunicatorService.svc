@@ -1,5 +1,5 @@
-﻿<%@ ServiceHost 
-    Language="C#" 
-    Debug="true" 
-    Service="Gva.AppCommunicator.AppCommunicatorService, Gva.AppCommunicator" 
+﻿<%@ ServiceHost=""
+    Language="C#"
+    Debug="true"
+    Service="Gva.AppCommunicator.AppCommunicatorService, Gva.AppCommunicator"
     CodeBehind="AppCommunicatorService.svc.cs" %>

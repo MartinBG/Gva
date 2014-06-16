@@ -200,6 +200,10 @@
       <Project>{69bed796-4199-433e-bc42-e8d7406369d9}</Project>
       <Name>Common.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Rio\Common.Rio.csproj">
+      <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
+      <Name>Common.Rio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common %28Common\Common%29</Name>
@@ -211,6 +215,14 @@
     <ProjectReference Include="..\Mosv.Api\Mosv.Api.csproj">
       <Project>{3f2ab89a-2ffc-41b4-8712-3b7d459b8fb2}</Project>
       <Name>Mosv.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mosv.RioBridge\Mosv.RioBridge.csproj">
+      <Project>{e2ee4e01-ded6-428e-8b58-73f41d1f59e6}</Project>
+      <Name>Mosv.RioBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mosv.Rio\Mosv.Rio.csproj">
+      <Project>{4f45037e-fc90-4fd5-ad29-fec3b6480c84}</Project>
+      <Name>Mosv.Rio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Regs.Api\Regs.Api.csproj">
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>

@@ -1,5 +1,1 @@
-﻿<%@ ServiceHost=""
-    Language="C#"
-    Debug="true"
-    Service="Mosv.AppCommunicator.AppCommunicatorService, Mosv.AppCommunicator"
-    CodeBehind="AppCommunicatorService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Mosv.AppCommunicator.AppCommunicatorService, Mosv.AppCommunicator" CodeBehind="AppCommunicatorService.svc.cs" %>

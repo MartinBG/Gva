@@ -2,7 +2,7 @@
 using Common.Rio.RioObjectExtractor;
 using Components.DocumentSerializer;
 using RioObjects;
-using Aop.RioBridge.DataObjects;
+using Mosv.RioBridge.DataObjects;
 using Abbcdn;
 using System;
 using System.Collections.Generic;
@@ -10,16 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aop.RioBridge.Extractions.CorrespondentDo
+namespace Mosv.RioBridge.Extractions.ServiceProviderDo
 {
-    public abstract class CorrespondentDoExtraction<TRioObject> : RioObjectExtraction<TRioObject, DataObjects.CorrespondentDo>
+    public abstract class ServiceProviderDoExtraction<TRioObject> : RioObjectExtraction<TRioObject, DataObjects.ServiceProviderDo>
     {
-        public override DataObjects.CorrespondentDo Extract(TRioObject rioObject)
+        public override DataObjects.ServiceProviderDo Extract(TRioObject rioObject)
         {
             return this.GetCorrespondent(rioObject);;
         }
 
-        protected virtual DataObjects.CorrespondentDo GetCorrespondent(TRioObject rioObject)
+        protected virtual DataObjects.ServiceProviderDo GetCorrespondent(TRioObject rioObject)
         {
             return null;
         }

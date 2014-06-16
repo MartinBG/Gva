@@ -3,6 +3,7 @@ using Common.Rio.PortalBridge;
 using Common.Rio.RioObjectExtraction;
 using Aop.Rio.PortalBridge;
 using Aop.RioBridge.Extractions.AttachedDocDo;
+using Aop.RioBridge.Extractions.CorrespondentDo;
 
 namespace Aop.Rio
 {

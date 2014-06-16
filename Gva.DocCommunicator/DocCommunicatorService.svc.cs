@@ -141,14 +141,60 @@ namespace Gva.DocCommunicator
                         }
                     } break;
 
-                case NomenclatureType.ASCertificateType:
+                case NomenclatureType.ASCertificateTypePilots:
                     {
                         var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
-                        foreach (var item in nom.Values)
+                        foreach (var item in nom.PilotValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
                     } break;
+
+                case NomenclatureType.ASCertificateTypeFlightDispatchers:
+                    {
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.FlightDispatchersValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeNotPilots:
+                    {
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.NotPilotsValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeTrafficControllers:
+                    {
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.TrafficControllersValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeForeigners:
+                    {
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.ForeignersValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeCabinCrew:
+                    {
+                        var nom = new RioObjects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.CabinCrewValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
 
                 case NomenclatureType.AviationAdministration:
                     {
@@ -522,8 +568,6 @@ namespace Gva.DocCommunicator
                         }
                     } break;
             }
-
-
 
             return list;
         }

@@ -2,7 +2,7 @@
 using Common.Rio.RioObjectExtractor;
 using Components.DocumentSerializer;
 using RioObjects;
-using Aop.RioBridge.DataObjects;
+using Mosv.RioBridge.DataObjects;
 using Abbcdn;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aop.RioBridge.Extractions.AttachedDocDo
+namespace Mosv.RioBridge.Extractions.AttachedDocDo
 {
     public abstract class AttachedDocDoExtraction<TRioObject> : RioObjectExtraction<TRioObject, IList<DataObjects.AttachedDocDo>>
     {
@@ -37,17 +37,19 @@ namespace Aop.RioBridge.Extractions.AttachedDocDo
         {
             List<KeyValuePair<string, string>> attachedFileNames = new List<KeyValuePair<string, string>>();
 
-            var attachedDocCollection = this.GetAopAttachedDocumentsCollection(rioObject);
-            if (attachedDocCollection != null)
+            var attachedDocDescriptionIdentifiersCollection = this.GetAttachedDocumentDescriptionIdentifiersCollection(rioObject);
+            if (attachedDocDescriptionIdentifiersCollection != null)
             {
                 attachedFileNames.AddRange(
-                    attachedDocCollection.AopAttachedDocumentDataCollection
+                    attachedDocDescriptionIdentifiersCollection.AttachedDocumentDescriptionIdentifierCollection
                     .Where(e => e.AttachedDocumentUniqueIdentifier != null)
-                    .Select(e => new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentKind.AttachedDocumentKindName)));
+                    .Select(e => new KeyValuePair<string, string>(e.AttachedDocumentUniqueIdentifier, e.AttachedDocumentDescription)));
             }
 
             var attachedDocuments = new List<DataObjects.AttachedDocDo>();
-            var serviceHeader = (IHeaderFooterDocumentsRioApplication)rioObject;
+
+            //var serviceHeader = (IHeaderFooterDocumentsRioApplication)rioObject;
+            var serviceHeader = (IHeaderDocumentsRioApplication)rioObject;
 
             if (serviceHeader.AttachedDocuments != null)
             {
@@ -95,7 +97,7 @@ namespace Aop.RioBridge.Extractions.AttachedDocDo
             return attachedDocuments;
         }
 
-        protected virtual AopAttachedDocuments.AopAttachedDocumentDatasCollection GetAopAttachedDocumentsCollection(TRioObject rioObject)
+        protected virtual R_6052.AttachedDocumentDescriptionIdentifiersCollection GetAttachedDocumentDescriptionIdentifiersCollection(TRioObject rioObject)
         {
             return null;
         }
