@@ -366,7 +366,7 @@ namespace Gva.Api.Controllers
                 this.unitOfWork.Save();
 
                 var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
-                var inspectorDataPart = lot.Parts.FirstOrDefault(p => p.Path == "inspectorData");
+                var inspectorDataPart = lot.GetPart("inspectorData");
 
                 if (caseTypes.Any(ct => ct.Alias == "inspector"))
                 {
