@@ -17,7 +17,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetPublishers(string term = null, PublisherType publisherType = PublisherType.Undefined, string publisherName = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetPublishers(PublisherType publisherType = PublisherType.Undefined, string publisherName = null, int offset = 0, int? limit = null)
         {
             return Ok(this.publisherRepository.GetPublishers(publisherType, publisherName, offset, limit));
         }
