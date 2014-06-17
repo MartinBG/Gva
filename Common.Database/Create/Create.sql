@@ -45,5 +45,7 @@ GO
 ---------------------------------------------------------------
 -- Insert
 ---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Noms\boolean.sql"
 :r $(rootPath)\"..\Insert\TestBlobs.sql"
 :r $(rootPath)\"..\Insert\TestUsers.sql"

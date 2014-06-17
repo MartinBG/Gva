@@ -67,14 +67,15 @@
     <Content Include="Create\Tables\GvaViewPersonLicences.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
-    <Content Include="Insert\Noms\airworthinessCertificateTypes.sql" />
-    <Content Include="Insert\Noms\airworthinessReviewTypes.sql" />
-    <Content Include="Insert\Noms\aircraftCatAWs.sql" />
-    <Content Include="Insert\Noms\ownerTypes.sql" />
-    <Content Include="Insert\testScores.sql" />
-    <Content Include="Create\Tables\GvaWordTemplates.sql" />
-    <Content Include="Insert\gvaWordTemplates.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
+    <Content Include="Insert\gvaWordTemplates.sql" />
+    <Content Include="Insert\Lots\lotData.sql" />
+    <Content Include="Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Airports\_airportsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Common\_commonMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Organizations\_organizationsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Organizations\testScores.sql" />
+    <Content Include="Create\Tables\GvaWordTemplates.sql" />
     <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
@@ -120,31 +121,25 @@
     <Content Include="Insert\GvaExcelConfig\Users.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
-    <Content Include="Insert\Noms\airworthinessCertificateTypes.sql" />
-    <Content Include="Insert\Noms\airworthinessReviewTypes.sql" />
-    <Content Include="Insert\Noms\ownerTypes.sql" />
-    <Content Include="Insert\Noms\aircraftRemovalReasonsFm.sql" />
-    <Content Include="Insert\testScores.sql" />
+    <Content Include="Insert\Noms\Aircrafts\aircraftRemovalReasonsFm.sql" />
     <Content Include="Create\Tables\GvaWordTemplates.sql" />
-    <Content Include="Insert\gvaWordTemplates.sql" />
-    <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\GvaExcelConfig\ConfigFinalize.sql" />
     <Content Include="Insert\GvaExcelConfig\ExcelConfig.xml" />
-    <Content Include="Insert\Noms\aircarrierServices.sql" />
-    <Content Include="Insert\linTypes.sql" />
-    <Content Include="Insert\Noms\commonQuestions.sql" />
-    <Content Include="Insert\Noms\specializedQuestions.sql" />
-    <Content Include="Insert\Noms\equipmentProducers.sql" />
-    <Content Include="Insert\Noms\equipmentTypes.sql" />
-    <Content Include="Insert\Noms\recommendationPartNumbers.sql" />
-    <Content Include="Insert\Noms\disparityLevels.sql" />
-    <Content Include="Insert\registers.sql" />
-    <Content Include="Insert\documentParts.sql" />
+    <Content Include="Insert\Noms\Organizations\aircarrierServices.sql" />
+    <Content Include="Insert\Noms\Persons\linTypes.sql" />
+    <Content Include="Insert\Noms\Persons\commonQuestions.sql" />
+    <Content Include="Insert\Noms\Persons\_personsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Persons\specializedQuestions.sql" />
+    <Content Include="Insert\Noms\Equipments\equipmentProducers.sql" />
+    <Content Include="Insert\Noms\Equipments\equipmentTypes.sql" />
+    <Content Include="Insert\Noms\Organizations\recommendationPartNumbers.sql" />
+    <Content Include="Insert\Noms\Organizations\disparityLevels.sql" />
+    <Content Include="Insert\Noms\Aircrafts\registers.sql" />
+    <Content Include="Insert\Noms\Common\documentParts.sql" />
     <Content Include="Insert\gvaCaseTypes.sql" />
-    <Content Include="Insert\migrationNomValues.sql" />
     <Content Include="Insert\migrationUser.sql" />
-    <Content Include="Insert\noms.sql" />
-    <Content Include="Insert\boolean.sql" />
+    <Content Include="Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql" />
+    <Content Include="Insert\Noms\Aircrafts\airworthinessReviewTypes.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

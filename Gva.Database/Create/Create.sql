@@ -35,97 +35,68 @@ GO
 
 :r $(rootPath)\"Diagram\Gva.sql"
 
+---------------------------------------------------------------
+-- Lots
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Lots\lotData.sql"
 
 ---------------------------------------------------------------
--- Insert Migration Necessities
+-- SystemData
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\migrationUser.sql"
-
----------------------------------------------------------------
--- Insert Static Noms
----------------------------------------------------------------
-
 :r $(rootPath)\"..\Insert\gvaCaseTypes.sql"
 :r $(rootPath)\"..\Insert\gvaWordTemplates.sql"
-:r $(rootPath)\"..\Insert\noms.sql"
-:r $(rootPath)\"..\Insert\boolean.sql"
-:r $(rootPath)\"..\Insert\documentParts.sql"
-:r $(rootPath)\"..\Insert\linTypes.sql"
-:r $(rootPath)\"..\Insert\testScores.sql"
-:r $(rootPath)\"..\Insert\registers.sql"
 
 ---------------------------------------------------------------
--- Insert Migration Noms Values
+-- Aircrafts Noms
 ---------------------------------------------------------------
 
---:r $(rootPath)\"..\Insert\migrationNomValues.sql"
-DBCC CHECKIDENT ('NomValues', RESEED, 999)
+:r $(rootPath)\"..\Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql"
+:r $(rootPath)\"..\Insert\Noms\Aircrafts\aircraftRemovalReasonsFm.sql"
+:r $(rootPath)\"..\Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\Aircrafts\airworthinessReviewTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\Aircrafts\registers.sql"
 
 ---------------------------------------------------------------
--- Aircrafts test noms from Apex
----------------------------------------------------------------
---:r $(rootPath)\"..\Insert\Noms\aircraftCategories.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftProducers.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftRelations.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftParts.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftPartProducers.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftPartStatuses.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftDebtTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftCreditors.sql"
---:r $(rootPath)\"..\Insert\Noms\inspectors.sql"
---:r $(rootPath)\"..\Insert\Noms\lim145limitations.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftOccurrenceClasses.sql"
---:r $(rootPath)\"..\Insert\Noms\auditReasons.sql"
---:r $(rootPath)\"..\Insert\Noms\auditTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\auditStates.sql"
---:r $(rootPath)\"..\Insert\Noms\otherDocumentTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftCertificateTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftNewOld.sql"
---:r $(rootPath)\"..\Insert\Noms\operationTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftTypeCertificateTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftLimitations.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftRegStatuses.sql"
---:r $(rootPath)\"..\Insert\Noms\examiners.sql"
---:r $(rootPath)\"..\Insert\Noms\aircraftRadioTypes.sql"
-
----------------------------------------------------------------
--- Aircrafts test noms from FM
----------------------------------------------------------------
---:r $(rootPath)\"..\Insert\Noms\cofATypes.sql"
---:r $(rootPath)\"..\Insert\Noms\easaTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\easaCategories.sql"
---:r $(rootPath)\"..\Insert\Noms\euRegTypes.sql"
---:r $(rootPath)\"..\Insert\Noms\removalReasons.sql"
-
----------------------------------------------------------------
--- Aircrafts test noms
+-- Airports Noms
 ---------------------------------------------------------------
 
-:r $(rootPath)\"..\Insert\Noms\easaTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\airworthinessCertificateTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\airworthinessReviewTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\aircraftRemovalReasonsFm.sql"
+:r $(rootPath)\"..\Insert\Noms\Airports\_airportsMigrationNoms.sql"
 
 ---------------------------------------------------------------
--- Organizations test noms
+-- Common Noms
 ---------------------------------------------------------------
-:r $(rootPath)\"..\Insert\Noms\disparityLevels.sql"
-:r $(rootPath)\"..\Insert\Noms\recommendationPartNumbers.sql"
-:r $(rootPath)\"..\Insert\Noms\aircarrierServices.sql"
-:r $(rootPath)\"..\Insert\Noms\aircraftCatAWs.sql"
----------------------------------------------------------------
--- Equipments test noms
----------------------------------------------------------------
-:r $(rootPath)\"..\Insert\Noms\equipmentProducers.sql"
-:r $(rootPath)\"..\Insert\Noms\equipmentTypes.sql"
+
+:r $(rootPath)\"..\Insert\Noms\Common\_commonMigrationNoms.sql"
+:r $(rootPath)\"..\Insert\Noms\Common\documentParts.sql"
 
 ---------------------------------------------------------------
--- AS Exams test noms
+-- Equipments Noms
 ---------------------------------------------------------------
-:r $(rootPath)\"..\Insert\Noms\commonQuestions.sql"
-:r $(rootPath)\"..\Insert\Noms\specializedQuestions.sql"
 
+:r $(rootPath)\"..\Insert\Noms\Equipments\equipmentProducers.sql"
+:r $(rootPath)\"..\Insert\Noms\Equipments\equipmentTypes.sql"
+
+---------------------------------------------------------------
+-- Organizations Noms
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Noms\Organizations\_organizationsMigrationNoms.sql"
+:r $(rootPath)\"..\Insert\Noms\Organizations\aircarrierServices.sql"
+:r $(rootPath)\"..\Insert\Noms\Organizations\disparityLevels.sql"
+:r $(rootPath)\"..\Insert\Noms\Organizations\recommendationPartNumbers.sql"
+:r $(rootPath)\"..\Insert\Noms\Organizations\testScores.sql"
+
+---------------------------------------------------------------
+-- Persons Noms
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Noms\Persons\_personsMigrationNoms.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\commonQuestions.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\specializedQuestions.sql"
 
 ---------------------------------------------------------------
 --Insert GVA EXCEL CONFIG
