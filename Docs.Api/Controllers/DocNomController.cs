@@ -22,51 +22,6 @@ namespace Docs.Api.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [Route("boolean/{id:int}")]
-        public IHttpActionResult GetBoolean(int id)
-        {
-            if (id == 1)
-            {
-                return Ok(new
-                {
-                    nomValueId = 1,
-                    name = "Да",
-                    alias = "Yes",
-                    isActive = true
-                });
-            }
-            else
-            {
-                return Ok(new
-                {
-                    nomValueId = 2,
-                    name = "Не",
-                    alias = "No",
-                    isActive = true
-                });
-            }
-        }
-
-        [Route("boolean")]
-        public IHttpActionResult GetBooleans(string term = null, int offset = 0, int? limit = null)
-        {
-            return Ok(new[]
-            {
-                new {
-                    nomValueId = 1,
-                    name = "Да",
-                    alias = "Yes",
-                    isActive = true
-                },
-                new {
-                    nomValueId = 2,
-                    name = "Не",
-                    alias = "No",
-                    isActive = true
-                },
-            });
-        }
-
         [Route("registerIndex/{id:int}")]
         public IHttpActionResult GetRegisterIndex(int id)
         {

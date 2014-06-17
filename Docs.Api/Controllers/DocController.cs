@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.Http;
+using Common.Api.StaticNomenclatures;
 
 namespace Docs.Api.Controllers
 {
@@ -1555,7 +1556,7 @@ namespace Docs.Api.Controllers
                 .SingleOrDefault(e => e.Alias.ToLower() == docWorkflow.DocWorkflowActionAlias.ToLower());
 
             //aop code is wrong
-            bool? yesNo = docWorkflow.YesNoId.HasValue ? (docWorkflow.YesNoId.Value == 1 ? true : false) : (bool?)null;
+            bool? yesNo = BooleanNomConvert.ToBool(docWorkflow.YesNo);
 
             doc.CreateDocWorkflow(
                 docWorkflowAction,

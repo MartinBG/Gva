@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Api.StaticNomenclatures;
 
 namespace Docs.Api.DataObjects
 {
@@ -21,7 +22,7 @@ namespace Docs.Api.DataObjects
                 this.DocId = d.DocId;
                 this.DocWorkflowActionId = d.DocWorkflowActionId;
                 this.EventDate = d.EventDate;
-                this.YesNo = d.YesNo;
+                this.YesNo = BooleanNomConvert.FromBool(d.YesNo);
                 this.UnitUserId = d.UnitUserId;
                 this.ToUnitId = d.ToUnitId;
                 this.PrincipalUnitId = d.PrincipalUnitId;
@@ -66,15 +67,12 @@ namespace Docs.Api.DataObjects
         public int? DocId { get; set; }
         public int DocWorkflowActionId { get; set; }
         public DateTime EventDate { get; set; }
-        public bool? YesNo { get; set; }
+        public BooleanNom? YesNo { get; set; }
         public int UnitUserId { get; set; }
         public int? ToUnitId { get; set; }
         public int? PrincipalUnitId { get; set; }
         public string Note { get; set; }
         public byte[] Version { get; set; }
-
-        //
-        public int? YesNoId { get; set; }
 
         public string DocWorkflowActionName { get; set; }
         public string DocWorkflowActionAlias { get; set; }
