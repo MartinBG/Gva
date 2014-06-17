@@ -37,6 +37,12 @@
   ];
 
   DocsCaseCtrl.$resolve = {
+    doc: [
+      'doc',
+      function (doc) {
+        return doc;
+      }
+    ],
     application: [
       '$stateParams',
       'Application',
