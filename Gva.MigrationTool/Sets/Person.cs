@@ -75,12 +75,24 @@ namespace Gva.MigrationTool.Sets
                     var personCaseTypes = this.getPersonCaseTypes(personId, noms);
                     personCaseTypes.Add(noms["personCaseTypes"].ByAlias("none"));
 
+                    var inspectorData = this.getInspectorData(personId, noms);
+                    if (inspectorData != null)
+                    {
+                        personCaseTypes.Add(noms["personCaseTypes"].ByAlias("inspector"));
+                    }
+
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
                     var lot = personSet.CreateLot(context);
 
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
+
                     lot.CreatePart("personData", personData, context);
+                    if (inspectorData != null)
+                    {
+                        lot.CreatePart("inspectorData", inspectorData, context);
+                    }
+
                     lot.Commit(context, lotEventDispatcher);
                     unitOfWork.Save();
                     Console.WriteLine("Created personData part for person with id {0}", personId);
@@ -401,12 +413,6 @@ namespace Gva.MigrationTool.Sets
                         {
                             edition.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
                         }
-                    }
-
-                    var inspectorData = this.getInspectorData(personId, noms);
-                    if (inspectorData != null)
-                    {
-                        lot.CreatePart("inspectorData", inspectorData, context);
                     }
 
                     try
