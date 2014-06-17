@@ -22,7 +22,8 @@
       register: {
         nomValueId: 9008224,
         name: 'Регистър 1'
-      }
+      },
+      regMark: $scope.$parent.aircraft.mark
     };
     $scope.oldInd = $stateParams.oldInd;
     $scope.reregMode = !!(oldReg && oldReg.part);

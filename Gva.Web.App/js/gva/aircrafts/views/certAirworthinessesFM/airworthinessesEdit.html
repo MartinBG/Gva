@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none"></h5>
+  <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none" ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length"></h5>
   <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length">
     <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
       <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
@@ -74,25 +74,25 @@
 
 
 
-  <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
+  <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.aircraftCertificateType.code != 'AS'">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editAirworthiness.review"></strong>
       <div class="pull-right" ng-show="editMode !== 'edit'">
         <sc-button name="newReviewBtn" btn-click="newReview()" text="aircrafts.editAirworthiness.newReview"
           class="btn btn-primary btn-xs" icon="glyphicon-plus"
           ng-disabled="lastReview !== currentReview"
-          ng-show="editMode !== 'editReview'">
+          ng-show="editMode !== 'editReview' && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')">
         </sc-button>
         <sc-button name="newAmendmentBtn" btn-click="newAmendment()" text="aircrafts.editAirworthiness.newAmendment"
           class="btn btn-primary btn-xs" icon="glyphicon-plus"
           ng-disabled="lastReview !== currentReview"
-          ng-show="editMode !== 'editReview' && !lastReview.amendment2">
+          ng-show="editMode !== 'editReview' && !lastReview.amendment2 && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')">
         </sc-button>
         <sc-button name="editBtn" btn-click="editReview()" text="aircrafts.editAirworthiness.edit"
           class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="editMode !== 'editReview'">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteLastReview()" text="aircrafts.editAirworthiness.deleteLastReview"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="editMode !== 'editReview'" ng-disabled="aw.part.reviews.length <= 1">
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="editMode !== 'editReview' && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')" ng-disabled="aw.part.reviews.length <= 1">
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode === 'editReview'">
@@ -106,7 +106,7 @@
     <div class="well-sm panel-body" ng-show="currentReview">
       <gva-airworthiness-review name="airworthinessReviewForm" ng-model="currentReview" readonly="editMode !== 'editReview'"></gva-airworthiness-review>
 
-      <div>
+      <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
         <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendment1" style="margin-top:10px;"></h5>
         <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment1 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment1">
           <span class="glyphicon glyphicon-plus"></span>
@@ -114,7 +114,7 @@
         <gva-airworthiness-amendment name="airworthinessAmendment1Form" ng-model="currentReview.amendment1" readonly="editMode !== 'editReview'" ng-show="currentReview.amendment1"></gva-airworthiness-amendment>
       </div>
 
-      <div ng-show="currentReview.amendment1">
+      <div ng-if="(aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR') && currentReview.amendment1">
         <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendment2" style="margin-top:10px;"></h5>
         <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment2 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment2">
           <span class="glyphicon glyphicon-plus"></span>

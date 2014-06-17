@@ -174,7 +174,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessReview',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReview.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReview.html',
+      controller: 'AircraftAirworthinessReviewCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertPermit',
@@ -360,6 +361,11 @@
       name: 'gvaEquipmentCertOperational',
       templateUrl: 'js/gva/equipments/forms/equipmentCertOperational.html',
       controller: 'EquipmentCertOperationalCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftInspector',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftInspector.html',
+      controller: 'AircraftInspectorCtrl'
     });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider

@@ -45,10 +45,23 @@
         return {
           part: {
             lotId: $stateParams.id,
+            inspector: {
+              inspectorType: {
+                name: 'Проверяващ',
+                alias: 'examiner'
+              }
+            },
             reviews: [{
+              inspector: {
+                inspectorType: {
+                  name: 'Проверяващ',
+                  alias: 'examiner'
+                }
+              },
               airworthinessReviewType: {
                 id: 7777773,
-                name: 'Удостоверение за преглед за ЛГ (15a)'
+                name: 'Удостоверение за преглед за ЛГ (15a)',
+                code: 'AV'
               },
               amendment1: null,
               amendment2: null

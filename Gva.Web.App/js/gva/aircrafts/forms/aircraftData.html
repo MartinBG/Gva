@@ -98,55 +98,12 @@
       <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.aircraftType"></label>
       <sc-nomenclature ng-model="model.aircraftType" name="aircraftType" alias="'aircraftTypes'" ng-readonly="readonly"></sc-nomenclature>
     </div>
-    <div class="form-group col-sm-8 col-md-5">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.operationType"></label>
-      <sc-nomenclature ng-model="model.operationType" name="operationType" alias="'operationTypes'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
 
   </div>
 
   <h5 class="form-header" style="margin-top:10px;">
     <a l10n-text="aircrafts.aircraftDataDirective.noiseData"></a>
   </h5>
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.issueNumber"></label>
-      <sc-text ng-model="model.noise.issueNumber" name="issueNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.issueDate"></label>
-      <sc-date ng-model="model.noise.issueDate" name="issueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.tcdsn"></label>
-      <sc-text ng-model="model.noise.tcdsn" name="tcdsn" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-4 col-sm-6">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.chapter"></label>
-      <sc-text ng-model="model.noise.chapter" name="chapter" ng-readonly="readonly"></sc-text>
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.flyover"></label>
-      <sc-float ng-model="model.noise.flyover" name="flyover" ng-readonly="readonly"></sc-float>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.approach"></label>
-      <sc-float ng-model="model.noise.approach" name="approach" ng-readonly="readonly"></sc-float>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.lateral"></label>
-      <sc-float ng-model="model.noise.lateral" name="lateral" ng-readonly="readonly"></sc-float>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.overflight"></label>
-      <sc-float ng-model="model.noise.overflight" name="overflight" ng-readonly="readonly"></sc-float>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftDataDirective.takeoff"></label>
-      <sc-float ng-model="model.noise.takeoff" name="takeoff" ng-readonly="readonly"></sc-float>
-    </div>
-  </div>
+
 
 </ng-form>

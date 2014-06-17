@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function CertRegsFMNewCtrl(
@@ -15,8 +15,6 @@
     $scope.reg = aircraftCertRegistration;
 
     if (oldReg && oldReg.part) {
-      _.defaults($scope.reg.part, _.cloneDeep(_.omit(oldReg.part,
-        'certDate', 'incomingDocNumber', 'incomingDocDate', 'incomingDocDesc')));
       oldReg.part.isActive = false;
       oldReg.part.isCurrent = false;
     }
@@ -94,4 +92,4 @@
   };
 
   angular.module('gva').controller('CertRegsFMNewCtrl', CertRegsFMNewCtrl);
-}(angular, _));
+}(angular));

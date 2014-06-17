@@ -22,21 +22,9 @@
       <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
-      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
   </div>
-
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.incomingDocNumber"></label>
-      <sc-text ng-model="model.incomingDocNumber" name="incomingDocNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.incomingDocDate"></label>
-      <sc-date ng-model="model.incomingDocDate" name="incomingDocDate" ng-readonly="readonly"></sc-date>
-    </div>
+    <gva-aircraft-inspector ng-model="model.inspector" ng-readonly="readonly"></gva-aircraft-inspector>
   </div>
 
   <div class="row" ng-hide="hideApplications">

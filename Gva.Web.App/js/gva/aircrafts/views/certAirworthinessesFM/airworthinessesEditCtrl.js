@@ -35,9 +35,23 @@
 
     $scope.newAmendment = function () {
       if (!$scope.lastReview.amendment1) {
-        $scope.lastReview.amendment1 = {};
+        $scope.lastReview.amendment1 = {
+          inspector: {
+            inspectorType: {
+              name: 'Проверяващ',
+              alias: 'examiner'
+            }
+          }
+        };
       } else if (!$scope.lastReview.amendment2) {
-        $scope.lastReview.amendment2 = {};
+        $scope.lastReview.amendment2 = {
+          inspector: {
+            inspectorType: {
+              name: 'Проверяващ',
+              alias: 'examiner'
+            }
+          }
+        };
       }
 
       $scope.editMode = 'editReview';
