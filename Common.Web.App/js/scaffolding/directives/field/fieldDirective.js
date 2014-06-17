@@ -4,12 +4,12 @@
 (function (angular, _, $) {
   'use strict';
 
-  function FieldDirective($compile) {
+  function FieldDirective($compile, $parse) {
     function FieldCompile(tElement, tAttrs) {
       var type = tAttrs.type,
           model = tAttrs.ngModel,
           text = tAttrs.l10nText,
-          validations = tAttrs.validationMsg,
+          validations = tAttrs.validations,
           cssClass = tAttrs['class'],
           hasValidations = false,
           currentValidations = [],
@@ -53,7 +53,7 @@
           return;
         }
         tElement.removeAttr(tAttrs.$attr[key]);
-        if (key === 'l10nText' || key === 'validationMsg' || key === 'class') {
+        if (key === 'l10nText' || key === 'validations' || key === 'class' || key === 'ngShow') {
           return;
         }
         if (val) {
@@ -71,13 +71,25 @@
       containerElement = $('<div></div>').addClass('form-group ' + cssClass);
       labelElement = $('<label></label>').addClass('control-label').attr('l10n-text', text);
       containerElement.append(labelElement);
-      
+
+      if (tAttrs.ngShow) {
+        containerElement.attr(tAttrs.$attr.ngShow, tAttrs.ngShow);
+      }
+
       if (validations) {
+        var mergedValidation = $parse(validations)(null);
+        if (hasValidations) {
+           _(currentValidations).forEach(function (valName) {
+             if (!_.has(mergedValidation, validationsList[valName])) {
+               mergedValidation[validationsList[valName]] = 'default';
+             }
+           });
+        }
         containerElement.attr('sc-has-error', fieldName);
         validationElement =
           $('<sc-validation-error></sc-validation-error>')
             .attr('field-name', fieldName)
-            .attr('validations', validations);
+            .attr('validations', JSON.stringify(mergedValidation));
         containerElement.append(' ');
         containerElement.append(validationElement);
       }
@@ -99,8 +111,8 @@
       tElement.append(containerElement);
 
       return {
-        pre: function preLink(scope) {
-          $compile(containerElement)(scope);
+        pre: function preLink(scope, iElement) {
+          $compile(iElement.children())(scope);
         }
       };
     }
@@ -113,7 +125,7 @@
     };
   }
 
-  FieldDirective.$inject = ['$compile'];
+  FieldDirective.$inject = ['$compile', '$parse'];
 
   angular.module('scaffolding')
     .directive('scField', FieldDirective);

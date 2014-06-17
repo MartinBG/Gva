@@ -25,6 +25,7 @@
               if (deregFunc) {
                 deregFunc();
               }
+              form.$readonly = formReadonly;
               deregFunc = scope.$watch(
                 function () {
                   return parentForm.$readonly;
