@@ -17,14 +17,6 @@
             pre: function (scope, element, attrs) {
               var eventHandlers = {};
 
-              if (attrs.readonly) {
-                scope.$parent.$watch(attrs.readonly, function (readonly) {
-                  scope.readonly = readonly;
-                });
-              }
-
-              scope.$parent[attrs.name] = scope[attrs.name];
-              scope.form = scope[attrs.name];
               scope.$raise = function (eventName, message) {
                 if (eventHandlers[eventName]) {
                   return eventHandlers[eventName](message);
@@ -52,6 +44,16 @@
                   });
                 }
               });
+            },
+            post: function (scope, element, attrs) {
+              if (attrs.readonly) {
+                scope.$parent.$watch(attrs.readonly, function (readonly) {
+                  scope.readonly = readonly;
+                });
+              }
+
+              scope.$parent[attrs.name] = scope[attrs.name];
+              scope.form = scope[attrs.name];
             }
           }
         };
