@@ -40,7 +40,8 @@
         minlength: 'defaultErrorTexts.minlength',
         maxlength: 'defaultErrorTexts.maxlength',
         min: 'defaultErrorTexts.min',
-        max: 'defaultErrorTexts.max'
+        max: 'defaultErrorTexts.max',
+        unique: 'defaultErrorTexts.unique'
       }
     })
     .directive('scValidationError', ValidationErrorDirective);
