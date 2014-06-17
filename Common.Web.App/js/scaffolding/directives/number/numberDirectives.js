@@ -5,7 +5,8 @@
 
   function createNumberDirective(name, parserFactory, formatterFactory, inject) {
     function NumberDirective() {
-      var injected = Array.prototype.slice.apply(arguments);
+      var attrsInjected = false,
+        injected = Array.prototype.slice.apply(arguments);
       return {
         priority: 110,
         restrict: 'E',
@@ -16,7 +17,13 @@
           if (!ngModel) {
             return;
           }
-          injected.unshift(attrs);
+          if(!attrsInjected) {
+            injected.unshift(attrs);
+            attrsInjected = true;
+          }
+          else {
+            injected[0] = attrs;
+          }
 
           ngModel.$parsers.push(parserFactory.apply(this, injected));
 
