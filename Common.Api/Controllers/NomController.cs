@@ -27,11 +27,15 @@ namespace Common.Api.Controllers
             return Ok(this.nomRepository.GetNomValue(alias, valueAlias));
         }
 
-        public IHttpActionResult GetNoms(string alias, [FromUri] int[] ids, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetNoms(string alias, [FromUri] int[] ids, [FromUri] string[] valueAliases, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
         {
             if (ids != null && ids.Length > 0)
             {
                 return Ok(this.nomRepository.GetNomValues(alias, ids));
+            }
+            else if (valueAliases != null && valueAliases.Length > 0)
+            {
+                return Ok(this.nomRepository.GetNomValues(alias, valueAliases));
             }
             else
             {

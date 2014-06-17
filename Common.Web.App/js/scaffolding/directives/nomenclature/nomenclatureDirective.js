@@ -16,12 +16,15 @@
     function preLink(scope, iElement, iAttrs, ngModel) {
       var idProp = scNomenclatureConfig.idProp,
           nameProp = scNomenclatureConfig.nameProp,
+          aliasProp = scNomenclatureConfig.aliasProp,
           alias = scope.alias(),
           isMultiple = angular.isDefined(iAttrs.multiple),
           initSelectionFunc,
           nomObjFunc,
           paramsFunc,
-          createQuery;
+          createQuery,
+          createValQuery,
+          valProp;
 
       if (!alias) {
         throw new Error('sc-nomenclature alias not specified!');
@@ -53,7 +56,27 @@
         };
       }
 
-      if (iAttrs.mode === 'id') {
+      if (iAttrs.mode === 'id' || iAttrs.mode === 'alias') {
+        if (iAttrs.mode === 'id') {
+          valProp = idProp;
+          createValQuery = function (isMultiple, val) {
+            if (isMultiple) {
+              return createQuery({ ids: val });
+            } else {
+              return createQuery({ id: val });
+            }
+          };
+        } else if (iAttrs.mode === 'alias') {
+          valProp = aliasProp;
+          createValQuery = function (isMultiple, val) {
+            if (isMultiple) {
+              return createQuery({ valueAliases: val });
+            } else {
+              return createQuery({ valueAlias: val });
+            }
+          };
+        }
+
         if (iAttrs.nomObj) {
           nomObjFunc = $parse(iAttrs.nomObj);
         }
@@ -67,10 +90,10 @@
             return viewValue;
           } else if (_.isArray(viewValue)) {
             return _.map(viewValue, function (item) {
-              return item[idProp];
+              return item[valProp];
             });
           } else {
-            return viewValue[idProp];
+            return viewValue[valProp];
           }
         });
 
@@ -78,11 +101,9 @@
           var val = element.select2('val'),
               resultPromise;
 
-          if (isMultiple) {
-            resultPromise = Nomenclature.query(createQuery({ ids: val })).$promise;
-          } else {
-            resultPromise = Nomenclature.get(createQuery({ id: val })).$promise;
-          }
+          resultPromise =
+            Nomenclature[isMultiple ? 'query' : 'get'](createValQuery(isMultiple, val))
+            .$promise;
 
           resultPromise
             .then(function (result) {
@@ -153,6 +174,7 @@
     .constant('scNomenclatureConfig', {
       idProp: 'nomValueId',
       nameProp: 'name',
+      aliasProp: 'alias',
       pageSize: 20
     })
     .directive('scNomenclature', NomenclatureDirective);

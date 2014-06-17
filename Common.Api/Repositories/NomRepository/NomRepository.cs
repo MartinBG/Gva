@@ -41,6 +41,13 @@ namespace Common.Api.Repositories.NomRepository
                 .ToList();
         }
 
+        public IEnumerable<NomValue> GetNomValues(string alias, string[] valueAliases)
+        {
+            return this.unitOfWork.DbContext.Set<NomValue>()
+                .Where(nv => nv.Nom.Alias == alias && valueAliases.Contains(nv.Alias))
+                .ToList();
+        }
+
         public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
         {
             var predicate =

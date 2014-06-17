@@ -128,6 +128,7 @@
     <Compile Include="Repositories\NomRepository\NomRepository.cs" />
     <Compile Include="Repositories\UserRepository\IUserRepository.cs" />
     <Compile Include="Repositories\UserRepository\UserRepository.cs" />
+    <Compile Include="StaticNomenclatures\BooleanNom.cs" />
     <Compile Include="UserContext\UserContext.cs" />
     <Compile Include="UserContext\HttpRequestMessageExtensions.cs" />
     <Compile Include="Models\Country.cs" />
