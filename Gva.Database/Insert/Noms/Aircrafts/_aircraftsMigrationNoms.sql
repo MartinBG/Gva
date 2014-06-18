@@ -30,5 +30,5 @@ VALUES
     (N'Тип EU регистър на ВС(Fm)'            , N'EURegTypesFm'                ),
     (N'Типове тежести върху ВС(Fm)'          , N'aircraftDebtTypesFm'         ),
     (N'Кредиторите на ВС(Fm)'                , N'aircraftCreditorsFm'         ),
-    (N'Категории ВС(Fm)'                     , N'aircraftCategoriesFm'        )
+    (N'Категории ВС(Fm)'                     , N'aircraftCatAWsFm'            )
 GO

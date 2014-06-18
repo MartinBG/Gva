@@ -62,8 +62,6 @@ namespace Gva.MigrationTool.Sets
 
                 Set aircraftSet = lotRepository.GetSet("Aircraft");
 
-
-
                 foreach (var aircraftApexId in this.getAircraftApexIds())
                 {
                     var lot = aircraftSet.CreateLot(context);
@@ -678,7 +676,7 @@ namespace Gva.MigrationTool.Sets
                         inspector = getInspector(r.Field<string>("tRegUser")),
                         owner = getOrgOrPerson(r.Field<string>("ownerName")),
                         oper = getOrgOrPerson(r.Field<string>("operName")),
-                        aircraftCategory = noms["aircraftCategories"].ByCodeOrDefault(r.Field<string>("tCatCode")) ?? noms["aircraftCategories"].ByCode("A2"),//TODO
+                        catAW = noms["aircraftCatAWsFm"].ByCodeOrDefault(r.Field<string>("tCatCode")),//use OrDefault to skip 0 and BLANK codes (empty)
                         aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = toDate(r.Field<string>("dR83_Data")),
@@ -725,7 +723,7 @@ namespace Gva.MigrationTool.Sets
                         operIsOrg = r.oper.Item1,
                         operOrganization = r.oper.Item2,
                         operPerson = r.oper.Item3,
-                        r.aircraftCategory,
+                        catAW = r.catAW != null ? new NomValue[] { r.catAW } : null,
                         r.aircraftLimitation,
                         r.leasingDocNumber,
                         r.leasingDocDate,

@@ -116,27 +116,32 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                noms["boolean"] = dependencies.Value.Item2.GetNomValues("boolean").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["boolean"] = dependencies.Value.Item2.GetNomValues("boolean").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
             {
-                noms["registers"] = dependencies.Value.Item2.GetNomValues("registers").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["registers"] = dependencies.Value.Item2.GetNomValues("registers").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
             {
-                noms["linTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["linTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
             {
-                noms["gvaCaseTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => "no old id " + n.NomValueId);
+                noms["gvaCaseTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
             {
-                noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person").ToDictionary(ct => "no old id " + ct.GvaCaseTypeId, ct =>
+                noms["testScores"] = dependencies.Value.Item2.GetNomValues("testScores").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person").ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
                     new NomValue
                     {
                         NomValueId = ct.GvaCaseTypeId,
@@ -661,11 +666,11 @@ namespace Gva.MigrationTool.Nomenclatures
                 dependencies.Value.Item1.Save();
             }
 
-            //using (var dependencies = dependencyFactory())
-            //{
-            //    migrateAircraftCategoriesFm(dependencies.Value.Item2, sqlConn);
-            //    dependencies.Value.Item1.Save();
-            //}
+            using (var dependencies = dependencyFactory())
+            {
+                migrateAircraftCatAWsFm(dependencies.Value.Item2, sqlConn);
+                dependencies.Value.Item1.Save();
+            }
 
             timer.Stop();
             Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
@@ -2796,13 +2801,12 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "C", new Tuple<string,string>("C"             , ""             )}
             };
 
-            int OldId = 1;
             noms["personCheckRatingValues"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                     {
-                        OldId = OldId.ToString(),
+                        OldId = null,
                         Code = ni.Key,
                         Name = ni.Value.Item1,
                         NameAlt = ni.Value.Item2,
@@ -2811,9 +2815,8 @@ namespace Gva.MigrationTool.Nomenclatures
                         ParentValueId = null,
                         TextContentString = null
                     };
-                noms["personCheckRatingValues"][OldId.ToString()] = row;
+                noms["personCheckRatingValues"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2826,13 +2829,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "P", new Tuple<string,string>("Постоянно"         , "Permanently"         )},
                 { "T", new Tuple<string,string>("Временно"          , "Temporarily"         )}
             };
-            int OldId = 1;
+
             noms["personRatingModels"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -2841,9 +2844,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["personRatingModels"][OldId.ToString()] = row;
+                noms["personRatingModels"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2857,13 +2859,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "MA", new Tuple<string,string>("Военно летище"       , "Military airport"      )},
                 { "AF", new Tuple<string,string>("Летателна площадка"  , "Airfield"              )}
             };
-            int OldId = 1;
+
             noms["airportTypes"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -2872,9 +2874,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["airportTypes"][OldId.ToString()] = row;
+                noms["airportTypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2888,13 +2889,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "TN", new Tuple<string,string>("Наемател"         , "Tenant"   )},
                 { "OP", new Tuple<string,string>("Летищен оператор" , "Operator" )}
             };
-            int OldId = 1;
+
             noms["airportRelations"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -2903,9 +2904,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["airportRelations"][OldId.ToString()] = row;
+                noms["airportRelations"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2924,13 +2924,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "RA"  , new Tuple<string,string>("Radio Altimeter" , "Radio Altimeter" )}
 
             };
-            int OldId = 1;
+
             noms["aircraftRadiotypes"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -2939,9 +2939,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["aircraftRadiotypes"][OldId.ToString()] = row;
+                noms["aircraftRadiotypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2956,13 +2955,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "OPOTH" , new Tuple<string,string>("Летищен оператор на гражданско летище за дейности, различни от вътрешни и международни превози"     , ""    )}
 
             };
-            int OldId = 1;
+
             noms["airportoperatorActivityTypes"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -2971,9 +2970,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["airportoperatorActivityTypes"][OldId.ToString()] = row;
+                noms["airportoperatorActivityTypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -2996,13 +2994,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "BBS"   , new Tuple<string,string>("Обслужване на бордния бюфет"                               , ""    )}
 
             };
-            int OldId = 1;
+
             noms["groundServiceOperatorActivityTypes"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3011,9 +3009,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["groundServiceOperatorActivityTypes"][OldId.ToString()] = row;
+                noms["groundServiceOperatorActivityTypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3215,13 +3212,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 //{ "TC" , new Tuple<string,string>("\"Tech Cert\""    , "\"Tech Cert\""   )},
                 //{ "BF" , new Tuple<string,string>("\"BG Form\""      , "\"BG Form\""     )},
             };
-            int OldId = 1;
+
             noms["CofATypesFm"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3230,9 +3227,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["CofATypesFm"][OldId.ToString()] = row;
+                noms["CofATypesFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3256,13 +3252,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "VLA" , new Tuple<string,string>("Very Light Aeroplane"                    , "Very Light Aeroplane"                    )},
                 { "VLR" , new Tuple<string,string>("Very Light Rotorcraft"                   , "Very Light Rotorcraft"                   )}
             };
-            int OldId = 1;
+
             noms["EASATypesFm"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3271,9 +3267,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["EASATypesFm"][OldId.ToString()] = row;
+                noms["EASATypesFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3289,13 +3284,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "PR"  , new Tuple<string,string>("Private"                       , "Private"                         )},
                 { "VLA" , new Tuple<string,string>("VLA"                           , "VLA"                             )}
             };
-            int OldId = 1;
+
             noms["EASACategoriesFm"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3304,9 +3299,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["EASACategoriesFm"][OldId.ToString()] = row;
+                noms["EASACategoriesFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3327,13 +3321,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "EXP" , new Tuple<string,string>("EXP"                            , "EXP"                             )},
                 { "RU"  , new Tuple<string,string>("RU"                             , "RU"                              )},
             };
-            int OldId = 1;
+
             noms["EURegTypesFm"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3342,9 +3336,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["EURegTypesFm"][OldId.ToString()] = row;
+                noms["EURegTypesFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3376,13 +3369,13 @@ namespace Gva.MigrationTool.Nomenclatures
                 {"LET" , new Tuple<string,string>("Писмо"                                  , "Letter"                                     )},
                 {"DCOL", new Tuple<string,string>("Постановление за обезпечение"           , "Decree collateral"                          )}
             };
-            int OldId = 1;
+
             noms["aircraftDebtTypesFm"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
                 {
-                    OldId = OldId.ToString(),
+                    OldId = null,
                     Code = ni.Key,
                     Name = ni.Value.Item1,
                     NameAlt = ni.Value.Item2,
@@ -3391,9 +3384,8 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["aircraftDebtTypesFm"][OldId.ToString()] = row;
+                noms["aircraftDebtTypesFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
             }
         }
 
@@ -3415,14 +3407,42 @@ namespace Gva.MigrationTool.Nomenclatures
                     })
                 .ToList();
 
-            int OldId = 1;
             noms["aircraftCreditorsFm"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                row.OldId = OldId.ToString();
-                noms["aircraftCreditorsFm"][row.OldId] = row;
+                noms["aircraftCreditorsFm"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
-                OldId++;
+            }
+        }
+
+        private void migrateAircraftCatAWsFm(INomRepository repo, SqlConnection conn)
+        {
+            Nom nom = repo.GetNom("aircraftCatAWsFm");
+            var results = conn.CreateStoreCommand(@"SELECT [Category BG], [Category EN], Code FROM CatAW")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = null,
+                        Code = r.Field<string>("Code"),
+                        Name = r.Field<string>("Category BG"),
+                        NameAlt = r.Field<string>("Category EN"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContentString = null
+                    })
+                .ToList();
+
+            noms["aircraftCatAWsFm"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                if (row.Code == "0" || row.Code == "BLANK")
+                {
+                    continue;
+                }
+
+                noms["aircraftCatAWsFm"][Guid.NewGuid().ToString()] = row; //no old id
+                nom.NomValues.Add(row);
             }
         }
     }
