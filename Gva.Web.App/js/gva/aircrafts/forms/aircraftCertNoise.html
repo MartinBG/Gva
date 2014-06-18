@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-4" sc-has-error="issueNumber">
       <label class="control-label" l10n-text="aircrafts.noiseDirective.issueNumber"></label>
-      <sc-validation-error field-name="issueNumber" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="issueNumber" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.issueNumber" name="issueNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
       <label class="control-label" l10n-text="aircrafts.noiseDirective.issueDate"></label>
-      <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="issueDate" validations="{required: 'default'}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>

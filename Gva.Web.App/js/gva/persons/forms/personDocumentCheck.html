@@ -3,7 +3,7 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.personCheckDirective.staffType"></label>
-      <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="staffType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div ng-show="model.staffType.alias === 'to_vs'">
@@ -46,12 +46,12 @@
       </div>
       <div class="form-group col-sm-3 col-md-2" sc-has-error="personCheckDocumentType">
         <label class="control-label" l10n-text="persons.personCheckDirective.personCheckDocumentType"></label>
-        <sc-validation-error field-name="personCheckDocumentType" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="personCheckDocumentType" validations="{required: 'default'}"></sc-validation-error>
         <sc-nomenclature ng-model="model.documentType" name="personCheckDocumentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffAliases: [model.staffType.alias] }" ng-readonly="readonly"></sc-nomenclature>
       </div>
       <div class="form-group col-sm-3 col-md-2" sc-has-error="personCheckDocumentRole">
         <label class="control-label" l10n-text="persons.personCheckDirective.personCheckDocumentRole"></label>
-        <sc-validation-error field-name="personCheckDocumentRole" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="personCheckDocumentRole" validations="{required: 'default'}"></sc-validation-error>
         <sc-nomenclature ng-model="model.documentRole" name="personCheckDocumentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: 'check', staffAliases: [model.staffType.alias] }" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
@@ -59,14 +59,14 @@
     <div class="row">
       <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDateValidFrom">
         <label class="control-label" l10n-text="persons.personCheckDirective.documentDateValidFrom"></label>
-        <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="documentDateValidFrom" validations="{required: 'default'}"></sc-validation-error>
         <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true" ng-readonly="readonly"></sc-date>
       </div>
       <div class="form-group col-sm-3 col-md-2">
         <label class="control-label" l10n-text="persons.personCheckDirective.documentDateValidTo"></label>
         <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
       </div>
-      <sc-field-group class="col-sm-6 col-md-4" text="persons.personCheckDirective.documentPublisher" validations="{ required: null }" field-name="documentPublisher">
+      <sc-field-group class="col-sm-6 col-md-4" text="persons.personCheckDirective.documentPublisher" validations="{ required: 'default' }" field-name="documentPublisher">
         <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
         <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
       </sc-field-group>
@@ -97,7 +97,7 @@
     <div class="row">
       <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
         <label class="control-label" l10n-text="persons.personCheckDirective.valid"></label>
-        <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
         <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>

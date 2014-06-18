@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-6" sc-has-error="docUnitsFrom">
       <label class="control-label" l10n-text="docs.edit.view.docUnitsFrom"></label>
-      <sc-validation-error field-name="docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+      <sc-validation-error field-name="docUnitsFrom" validations="{required: 'default', requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
         <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
         <span class="input-group-btn">

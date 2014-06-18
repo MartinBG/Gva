@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-md-3 col-sm-4" sc-has-error="addressType">
       <label class="control-label" l10n-text="organizations.organizationAddressDirective.addressType"></label>
-      <sc-validation-error field-name="addressType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="addressType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.addressType" name="addressType" alias="'addressTypes'" params="{ type: 'F' }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
       <label class="control-label" l10n-text="organizations.organizationAddressDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -31,12 +31,12 @@
   <div class="row">
     <div class="form-group col-sm-6 col-md-4" sc-has-error="address">
       <label class="control-label" l10n-text="organizations.organizationAddressDirective.address"></label>
-      <sc-validation-error field-name="address" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="address" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.address" name="address" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-6 col-md-4" sc-has-error="addressAlt">
       <label class="control-label" l10n-text="organizations.organizationAddressDirective.addressAlt"></label>
-      <sc-validation-error field-name="addressAlt" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="addressAlt" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.addressAlt" name="addressAlt" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>
@@ -44,7 +44,7 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="settlement">
       <label class="control-label" l10n-text="organizations.organizationAddressDirective.settlement"></label>
-      <sc-validation-error field-name="settlement" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="settlement" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.settlement" name="settlement" alias="'cities'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-3 col-md-2">

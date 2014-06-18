@@ -16,7 +16,7 @@
       <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
     </sc-field-group>
-    <sc-field-group class="col-md-6" text="docs.edit.view.docCorrespondents" validations="{ required: null }" field-name="docCorrespondents">
+    <sc-field-group class="col-md-6" text="docs.edit.view.docCorrespondents" validations="{ required: 'default' }" field-name="docCorrespondents">
       <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrs }" ng-readonly="readonly" multiple></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
       <sc-button btn-click="$raise('scOnNewCorr')" class="btn btn-default" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>

@@ -1,6 +1,6 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
+    <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: 'default', requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
       <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
     </sc-field-group>

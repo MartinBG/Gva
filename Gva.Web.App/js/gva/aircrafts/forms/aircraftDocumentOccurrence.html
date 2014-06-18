@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-sm-3" sc-has-error="aircraftOccurrenceClass">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.aircraftOccurrenceClass"></label>
-      <sc-validation-error field-name="aircraftOccurrenceClass" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftOccurrenceClass" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftOccurrenceClass" name="aircraftOccurrenceClass" alias="'aircraftOccurrenceClasses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-3" sc-has-error="country">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.country"></label>
-      <sc-validation-error field-name="country" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="country" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.country" name="country" alias="'countries'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -16,17 +16,17 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2"  sc-has-error="localDate">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.localDate"></label>
-      <sc-validation-error field-name="localDate" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="localDate" validations="{required: 'default'}"></sc-validation-error>
       <sc-date ng-model="model.localDate" ng-required="true" name="localDate" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="localTime">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.localTime"></label>
-      <sc-validation-error field-name="localTime" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="localTime" validations="{required: 'default'}"></sc-validation-error>
       <sc-time ng-model="model.localTime" ng-required="true" name="localTime" ng-readonly="readonly"></sc-time>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="area">
       <label class="control-label" l10n-text="aircrafts.occurrenceDirective.area"></label>
-      <sc-validation-error field-name="area" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="area" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.area" name="area" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>

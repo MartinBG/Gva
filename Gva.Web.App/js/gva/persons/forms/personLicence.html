@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-sm-3" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.licenceDirective.staffType"></label>
-      <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="staffType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-required="true" ng-readonly="readonly" ng-disabled="!isNew"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-2"  ng-if="model.staffType.alias === 'flightCrew'">
@@ -14,7 +14,7 @@
     <div class="row">
       <div class=" form-group col-sm-3" sc-has-error="licenceType">
         <label class="control-label" l10n-text="persons.licenceDirective.licenceType"></label>
-        <sc-validation-error field-name="licenceType" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="licenceType" validations="{required: 'default'}"></sc-validation-error>
         <sc-nomenclature alias="'licenceTypes'" name="licenceType" ng-model="model.licenceType" ng-required="true" ng-readonly="readonly"
            params="{staffTypeAlias: model.staffType.alias, fclCode: model.fcl.code}" ></sc-nomenclature>
       </div>
@@ -30,14 +30,14 @@
       </div>
       <div class="form-group col-sm-3" ng-if="model.licenceType.code === 'FOREIGN'">
         <label class="control-label" l10n-text="persons.licenceDirective.foreignLicenceNumber"></label>
-        <sc-validation-error field-name="foreignLicenceNumber" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="foreignLicenceNumber" validations="{required: 'default'}"></sc-validation-error>
         <sc-text ng-model="model.foreignLicenceNumber" name="foreignLicenceNumber" ng-readonly="readonly" ng-required="true"></sc-text>
       </div>
     </div>
     <div class="row">
       <div class=" form-group col-sm-3" sc-has-error="valid">
         <label class="control-label" l10n-text="persons.licenceDirective.valid"></label>
-        <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
         <sc-nomenclature alias="'boolean'" name="valid" ng-model="model.valid" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>

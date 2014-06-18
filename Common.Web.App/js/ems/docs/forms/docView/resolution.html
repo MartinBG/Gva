@@ -5,7 +5,7 @@
           <a l10n-text="docs.edit.view.assignment" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
-        <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
+        <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: 'default', requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
           <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
         </sc-field-group>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="row">
-        <sc-field-group class="col-md-6" text="docs.edit.view.inCharge" validations="{required: null, requiredValue: 'Задължително поле'}" field-name="docUnitsInCharge">
+        <sc-field-group class="col-md-6" text="docs.edit.view.inCharge" validations="{required: 'default', requiredValue: 'Задължително поле'}" field-name="docUnitsInCharge">
           <sc-nomenclature name="docUnitsInCharge" ng-model="model.docUnitsInCharge" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsInCharge }" required ng-readonly="readonly"></sc-nomenclature>
           <sc-button btn-click="$raise('scOnSelectUnit', { type: 'inCharge' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
         </sc-field-group>
@@ -31,7 +31,7 @@
       <div class="row" style="margin-bottom: 5px;">
         <div class="form-group col-md-3" sc-has-error="assignmentType">
           <label class="control-label" l10n-text="docs.edit.view.assignmentType"></label>
-          <sc-validation-error field-name="assignmentType" validations="{required: null}"></sc-validation-error>
+          <sc-validation-error field-name="assignmentType" validations="{required: 'default'}"></sc-validation-error>
           <sc-nomenclature name="assignmentType" ng-model="model.assignmentTypeId" nom-obj="model.assignmentType" mode="id" alias="'assignmentType'" required  ng-readonly="readonly"></sc-nomenclature>
         </div>
 
@@ -42,7 +42,7 @@
 
         <div class="form-group col-md-2" sc-has-error="assignmentDeadline">
           <label class="control-label" l10n-text="docs.edit.view.assignmentDeadline"></label>
-          <sc-validation-error field-name="assignmentDeadline" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+          <sc-validation-error field-name="assignmentDeadline" validations="{required: 'default', requiredValue: 'Задължително поле'}"></sc-validation-error>
           <sc-date name="assignmentDeadline" ng-model="model.assignmentDeadline" sc-validate="{ requiredValue: requireAssignmentDeadline }"ng-readonly="readonly"></sc-date>
         </div>
       </div>

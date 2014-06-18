@@ -36,7 +36,7 @@
   <div ng-if="model.staffType" class="row">
     <div class="form-group col-sm-3" sc-has-error="personRatingModel">
       <label class="control-label" l10n-text="persons.ratingDirective.personRatingModel"></label>
-      <sc-validation-error field-name="personRatingModel" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="personRatingModel" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.personRatingModel" name="personRatingModel" alias="'personRatingModels'" required ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>

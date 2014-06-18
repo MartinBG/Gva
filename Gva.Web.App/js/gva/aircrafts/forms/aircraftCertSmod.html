@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrInNumber">
       <label class="control-label" l10n-text="aircrafts.smodDirective.ltrInNumber"></label>
-      <sc-validation-error field-name="ltrInNumber" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="ltrInNumber" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.ltrInNumber" name="ltrInNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrInDate">
       <label class="control-label" l10n-text="aircrafts.smodDirective.ltrInDate"></label>
-      <sc-validation-error field-name="ltrInDate" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="ltrInDate" validations="{required: 'default'}"></sc-validation-error>
       <sc-date ng-model="model.ltrInDate" name="ltrInDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>
@@ -16,12 +16,12 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="ltrCaaNumber">
       <label class="control-label" l10n-text="aircrafts.smodDirective.ltrCaaNumber"></label>
-      <sc-validation-error field-name="ltrCaaNumber" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="ltrCaaNumber" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.ltrCaaNumber" name="ltrCaaNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="ltrCaaDate">
       <label class="control-label" l10n-text="aircrafts.smodDirective.ltrCaaDate"></label>
-      <sc-validation-error field-name="ltrCaaDate" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="ltrCaaDate" validations="{required: 'default'}"></sc-validation-error>
       <sc-date ng-model="model.ltrCaaDate" name="ltrCaaDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>
@@ -42,13 +42,13 @@
   </div>
 
   <div class="row">
-    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{ required: null }" field-name="scode">
+    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{ required: 'default' }" field-name="scode">
       <sc-text ng-model="model.scode" name="scode" required disabled ng-readonly="readonly"></sc-text>
       <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="readonly"></button>
     </sc-field-group>
     <div class="form-group col-sm-2" sc-has-error="valid">
       <label class="control-label" l10n-text="aircrafts.smodDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>

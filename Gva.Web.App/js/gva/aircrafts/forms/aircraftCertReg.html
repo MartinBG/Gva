@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-sm-2" sc-has-error="register">
       <label class="control-label" l10n-text="aircrafts.regDirective.register"></label>
-      <sc-validation-error field-name="register" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="register" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-6" sc-has-error="aircraftCertificateType">
       <label class="control-label" l10n-text="aircrafts.regDirective.aircraftCertificateType"></label>
-      <sc-validation-error field-name="aircraftCertificateType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftCertificateType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" alias="'aircraftCertificateTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -16,12 +16,12 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-6" sc-has-error="certNumber">
       <label class="control-label" l10n-text="aircrafts.regDirective.certNumber"></label>
-      <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="certNumber" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="certDate">
       <label class="control-label" l10n-text="aircrafts.regDirective.certDate"></label>
-      <sc-validation-error field-name="certDate" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="certDate" validations="{required: 'default'}"></sc-validation-error>
       <sc-date ng-model="model.certDate" name="certDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-md-2 col-sm-4">
@@ -45,7 +45,7 @@
   <div class="row">
     <div class="form-group col-md-6 col-sm-8" sc-has-error="aircraftTypeCertificateType">
       <label class="control-label" l10n-text="aircrafts.regDirective.aircraftTypeCertificateType"></label>
-      <sc-validation-error field-name="aircraftTypeCertificateType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftTypeCertificateType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.typeCert.aircraftTypeCertificateType" name="aircraftTypeCertificateType" alias="'aircraftTypeCertificateTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -53,7 +53,7 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.regDirective.typeCertNumber"></label>
-      <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="certNumber" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.typeCert.certNumber" name="typeCertNumber" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4">

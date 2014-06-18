@@ -2,12 +2,12 @@
   <div class="row">
     <div class="form-group col-sm-4 col-md-3" sc-has-error="name">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.name"></label>
-      <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="name" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.name" name="name" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-4 col-md-3" sc-has-error="nameAlt">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.nameAlt"></label>
-      <sc-validation-error field-name="nameAlt" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="nameAlt" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.nameAlt" name="nameAlt" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="code">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.code"></label>
-      <sc-validation-error field-name="code" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="code" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.code" name="code" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-3 col-md-2">
@@ -24,7 +24,7 @@
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="caseTypes">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.caseTypes"></label>
-      <sc-validation-error field-name="caseTypes" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+      <sc-validation-error field-name="caseTypes" validations="{required: 'default', requiredValue: 'Задължително поле'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'organizationCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -55,7 +55,7 @@
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.valid" alias="'boolean'" name="valid" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -78,12 +78,12 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="organizationType">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.organizationType"></label>
-        <sc-validation-error field-name="organizationType" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="organizationType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.organizationType" name="organizationType" alias="'organizationTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="organizationKind">
       <label class="control-label" l10n-text="organizations.organizationDataDirective.organizationKind"></label>
-        <sc-validation-error field-name="organizationKind" validations="{required: null}"></sc-validation-error>
+        <sc-validation-error field-name="organizationKind" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.organizationKind" name="organizationKind" alias="'organizationKinds'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
       <div class="form-group col-sm-3 col-md-2">

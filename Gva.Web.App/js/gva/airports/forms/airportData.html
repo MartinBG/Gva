@@ -2,19 +2,19 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-8" sc-has-error="airportType">
       <label class="control-label" l10n-text="airports.airportDataDirective.airportType"></label>
-      <sc-validation-error field-name="airportType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="airportType" validations="{required: 'default'}"></sc-validation-error>
       <sc-nomenclature ng-model="model.airportType" name="airportType" alias="'airportTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-4 col-sm-6" sc-has-error="name">
       <label class="control-label" l10n-text="airports.airportDataDirective.name"></label>
-      <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="name" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.name" name="name" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-4 col-sm-6" sc-has-error="nameAlt">
       <label class="control-label" l10n-text="airports.airportDataDirective.nameAlt"></label>
-      <sc-validation-error field-name="nameAlt" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="nameAlt" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.nameAlt" name="nameAlt" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4">
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-8" sc-has-error="place">
       <label class="control-label" l10n-text="airports.airportDataDirective.place"></label>
-      <sc-validation-error field-name="place" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="place" validations="{required: 'default'}"></sc-validation-error>
       <sc-text ng-model="model.place" name="place" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-8 col-md-4" ng-class="{'has-error': (form.longitude.$invalid || form.latitude.$invalid) && form.$validated}">
