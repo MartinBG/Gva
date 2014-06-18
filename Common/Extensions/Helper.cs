@@ -4,6 +4,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Common.Extensions
@@ -28,6 +29,33 @@ namespace Common.Extensions
             }
 
             return ids;
+        }
+
+        public static List<string> GetEmailListFromString(string input, char delimiter)
+        {
+            List<string> emails = new List<string>();
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                string[] values = input.Split(delimiter);
+
+                foreach (var val in values)
+                {
+                    if (EmailCheck(val.Trim()))
+                    {
+                        emails.Add(val.Trim());
+                    }
+                }
+            }
+
+            return emails;
+        }
+
+        public static bool EmailCheck(string email)
+        {
+            string emailRegex = @"^[\w\-!#$%&'*+/=?^`{|}~.""]+@([\w]+[.-]?)+[\w]\.[\w]+$";
+
+            return (!string.IsNullOrEmpty(email) && Regex.IsMatch(email, emailRegex));
         }
 
         public static string GetStringFromIdList(List<int> ids)
