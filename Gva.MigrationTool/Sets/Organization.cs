@@ -1055,7 +1055,7 @@ namespace Gva.MigrationTool.Sets
                         position = r.Field<string>("POSITION"),
                         person = getPerson((int?)r.Field<decimal?>("PERSON_ID")),
                         testDate = r.Field<DateTime?>("TEST_DATE"),
-                        testScore = r.Field<string>("TEST_SCORE"),
+                        testScore = noms["testScores"].ByCode(r.Field<string>("TEST_SCORE")),
                         number = r.Field<decimal?>("REQUEST_ID"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
                     }))
