@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Common.Sequence;
 
 namespace Regs.Api.Models
 {
     public partial class Commit
     {
+        public static Sequence CommitSequence = new Sequence("commitSequence");
+
         public Commit()
         {
             this.CommitVersions = new List<CommitVersion>();
@@ -51,6 +55,10 @@ namespace Regs.Api.Models
         {
             // Primary Key
             this.HasKey(t => t.CommitId);
+
+            // Properties
+            this.Property(t => t.CommitId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
             this.ToTable("LotCommits");

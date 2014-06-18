@@ -148,6 +148,7 @@
     <Compile Include="Owin\RerouteMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonModule.cs" />
+    <Compile Include="Sequence\Sequence.cs" />
     <Compile Include="Tests\DisposableTuple.cs" />
     <Compile Include="Utils\CodeGenerator.cs" />
     <Compile Include="Linq\ExpressionExpanderExtensions.cs" />

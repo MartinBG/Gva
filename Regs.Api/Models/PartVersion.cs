@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Common.Sequence;
 using Newtonsoft.Json.Linq;
 
 namespace Regs.Api.Models
 {
     public partial class PartVersion
     {
+        public static Sequence PartVersionSequence = new Sequence("partVersionSequence");
+
         private JObject content = null;
 
         public int PartVersionId { get; set; }
@@ -55,6 +58,10 @@ namespace Regs.Api.Models
         {
             // Primary Key
             this.HasKey(t => t.PartVersionId);
+
+            // Properties
+            this.Property(t => t.PartVersionId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
             this.ToTable("LotPartVersions");

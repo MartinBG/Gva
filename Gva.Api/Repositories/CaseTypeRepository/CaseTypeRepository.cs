@@ -33,7 +33,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
             {
                 GvaLotCase lotCase = new GvaLotCase
                 {
-                    Lot = lot,
+                    LotId = lot.LotId,
                     GvaCaseTypeId = caseType.Get<int>("nomValueId")
                 };
 

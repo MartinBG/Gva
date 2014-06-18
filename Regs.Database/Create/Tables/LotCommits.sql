@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotCommits] (
-    [LotCommitId]         INT           NOT NULL IDENTITY,
+    [LotCommitId]         INT           NOT NULL,
     [LotId]               INT           NOT NULL,
     [ParentLotCommitId]   INT           NULL,
     [CommiterId]          INT           NOT NULL,

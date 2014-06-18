@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Api.UserContext;
-using Common.Data;
+using Common.Sequence;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 
@@ -13,6 +13,8 @@ namespace Regs.Api.Models
 {
     public partial class Lot
     {
+        public static Sequence LotSequence = new Sequence("lotSequence");
+
         public Lot()
         {
             this.Commits = new List<Commit>();
@@ -83,6 +85,7 @@ namespace Regs.Api.Models
             {
                 part = new Part
                 {
+                    PartId = Part.PartSequence.NextValue(),
                     SetPart = this.GetSetPart(expandedPath),
                     Lot = this,
                     Path = expandedPath,
@@ -93,6 +96,7 @@ namespace Regs.Api.Models
 
             PartVersion partVersion = new PartVersion
             {
+                PartVersionId = PartVersion.PartVersionSequence.NextValue(),
                 OriginalCommit = index,
                 PartOperation = PartOperation.Add,
                 CreatorId = userContext.UserId,
@@ -241,6 +245,7 @@ namespace Regs.Api.Models
 
             Commit newIndex = new Commit
             {
+                CommitId = Regs.Api.Models.Commit.CommitSequence.NextValue(),
                 ParentCommit = newLastCommit,
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
@@ -298,6 +303,7 @@ namespace Regs.Api.Models
 
             Commit newIndex = new Commit
             {
+                CommitId = Regs.Api.Models.Commit.CommitSequence.NextValue(),
                 ParentCommit = index,
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now
@@ -388,6 +394,7 @@ namespace Regs.Api.Models
 
             PartVersion updatedPartVersion = new PartVersion
             {
+                PartVersionId = PartVersion.PartVersionSequence.NextValue(),
                 OriginalCommit = currCommit,
                 PartOperation = PartOperation.Update,
                 CreatorId = userContext.UserId,
@@ -422,6 +429,7 @@ namespace Regs.Api.Models
 
             PartVersion deletedPartVersion = new PartVersion
             {
+                PartVersionId = PartVersion.PartVersionSequence.NextValue(),
                 OriginalCommit = currCommit,
                 PartOperation = PartOperation.Delete,
                 CreatorId = userContext.UserId,
@@ -487,6 +495,9 @@ namespace Regs.Api.Models
             this.HasKey(t => t.LotId);
 
             // Properties
+            this.Property(t => t.LotId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             this.Property(t => t.Version)
                 .IsRequired()
                 .IsFixedLength()

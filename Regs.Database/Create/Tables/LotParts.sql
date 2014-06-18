@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotParts] (
-    [LotPartId]     INT            NOT NULL IDENTITY,
+    [LotPartId]     INT            NOT NULL,
     [LotSetPartId]  INT            NOT NULL,
     [LotId]         INT            NOT NULL,
     [Path]          NVARCHAR (50)  NOT NULL,

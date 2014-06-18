@@ -24,6 +24,15 @@ GO
 :r $(rootPath)\"Diagram\Regs.sql"
 
 ---------------------------------------------------------------
+-- Sequences
+---------------------------------------------------------------
+
+:r $(rootPath)\"Sequences\LotSequence.sql"
+:r $(rootPath)\"Sequences\PartSequence.sql"
+:r $(rootPath)\"Sequences\PartVersionSequence.sql"
+:r $(rootPath)\"Sequences\CommitSequence.sql"
+
+---------------------------------------------------------------
 -- Insert
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\LotPartOperations.sql"

@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[Lots] (
-    [LotId]         INT                 NOT NULL IDENTITY,
+    [LotId]         INT                 NOT NULL,
     [LotSetId]      INT                 NOT NULL,
     [NextIndex]     INT                 NOT NULL,
     [ModifyDate]    DATETIME2 (7)       NOT NULL,

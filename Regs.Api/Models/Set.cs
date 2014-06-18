@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.UserContext;
+using Common.Sequence;
 
 namespace Regs.Api.Models
 {
@@ -28,6 +29,7 @@ namespace Regs.Api.Models
         {
             Commit index = new Commit
             {
+                CommitId = Commit.CommitSequence.NextValue(),
                 CommiterId = userContext.UserId,
                 CommitDate = DateTime.Now,
                 IsIndex = true,
@@ -37,6 +39,7 @@ namespace Regs.Api.Models
             Lot lot = new Lot
             {
                 NextIndex = 0,
+                LotId = Lot.LotSequence.NextValue(),
                 Set = this
             };
             lot.Commits.Add(index);

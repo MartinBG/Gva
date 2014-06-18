@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotPartVersions] (
-    [LotPartVersionId]         INT            NOT NULL IDENTITY,
+    [LotPartVersionId]         INT            NOT NULL,
     [LotPartId]                INT            NOT NULL,
     [TextContent]              NVARCHAR(MAX)  NULL,
     [OriginalCommitId]         INT            NOT NULL,

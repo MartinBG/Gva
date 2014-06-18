@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Sequence;
 
 namespace Regs.Api.Models
 {
     public partial class Part
     {
+        public static Sequence PartSequence = new Sequence("partSequence");
+
         public Part()
         {
             this.PartVersions = new List<PartVersion>();
@@ -35,6 +39,9 @@ namespace Regs.Api.Models
             this.HasKey(t => t.PartId);
 
             // Properties
+            this.Property(t => t.PartId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             this.Property(t => t.Path)
                 .IsRequired()
                 .HasMaxLength(50);
