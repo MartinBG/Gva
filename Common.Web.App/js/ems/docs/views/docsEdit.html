@@ -177,6 +177,10 @@
             ]">
           </sc-dropdown-button>
 
+          <button ng-show="!inEditMode" ng-click="sendEmail()" type="button" class="btn btn-sm btn-default">
+            <i class="glyphicon glyphicon-envelope"></i>
+            <span l10n-text="docs.edit.docSend"></span>
+          </button>
 
           <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
             <i class="glyphicon glyphicon-eye-open"></i>

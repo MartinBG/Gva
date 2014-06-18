@@ -539,6 +539,57 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("correspondentEmail/{id:int}")]
+        public IHttpActionResult GetCorrespondentEmail(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<Correspondent>()
+                .Where(e => e.CorrespondentId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.CorrespondentId,
+                name = result.DisplayName + " " + result.Email,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("correspondentEmail")]
+        public IHttpActionResult GetCorrespondentEmails([FromUri] int[] ids, string term = null, int offset = 0, int? limit = null)
+        {
+            var query = this.unitOfWork.DbContext.Set<Correspondent>().AsQueryable();
+
+            if (ids != null && ids.Length > 0)
+            {
+                query = query.Where(e => ids.Contains(e.CorrespondentId));
+            }
+            else
+            {
+                var predicate =
+                    PredicateBuilder.True<Correspondent>()
+                    .AndStringContains(e => (e.DisplayName + e.Email), term)
+                    .And(e => e.IsActive);
+
+                query = query
+                    .Where(predicate)
+                    .OrderBy(e => e.DisplayName)
+                    .WithOffsetAndLimit(offset, limit);
+            }
+
+            var results = query
+                .Select(e => new
+                {
+                    nomValueId = e.CorrespondentId,
+                    name = e.DisplayName + " " + e.Email,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
         [Route("docSourceType/{id:int}")]
         public IHttpActionResult GetDocSourceTypes(int id)
         {

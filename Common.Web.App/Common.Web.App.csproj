@@ -94,6 +94,8 @@
     <Content Include="js\ems\docs\views\caseSelectCtrl.js" />
     <Content Include="js\ems\docs\views\changeDocParent.html" />
     <Content Include="js\ems\docs\views\changeDocParentCtrl.js" />
+    <Content Include="js\ems\docs\views\sendEmail.html" />
+    <Content Include="js\ems\docs\views\sendEmailCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
     <Content Include="js\ems\docs\views\caseFinish.html" />

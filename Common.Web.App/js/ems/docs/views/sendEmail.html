@@ -1,0 +1,42 @@
+﻿<div class="well-sm panel-body">
+  <ng-form name="sendEmailForm" sc-validate="{}">
+      <div class="well-sm panel-body">
+
+        <div class="row">
+          <div class="form-group col-sm-6" sc-has-error="emailTo">
+            <label class="control-label" l10n-text="docs.edit.sendEmail.emailTo"></label>
+            <sc-validation-error field-name="emailTo" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
+            <sc-nomenclature name="emailTo" ng-model="email.emailTo" alias="'correspondentEmail'" sc-validate="{ requiredValue: requireCorrs }" required multiple></sc-nomenclature>
+          </div>
+
+          <div class="form-group col-sm-6" sc-has-error="emailBcc">
+            <label class="control-label" l10n-text="docs.edit.sendEmail.emailBcc"></label>
+            <sc-validation-error field-name="emailBcc" validations="{required: null, checkEmails: 'Въведете email-адреси с разделител ;'}"></sc-validation-error>
+            <sc-text name="emailBcc" ng-model="email.emailBcc" sc-validate="{ checkEmails: checkEmails }"></sc-text>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12" sc-has-error="subject">
+            <label class="control-label" l10n-text="docs.edit.sendEmail.subject"></label>
+            <sc-validation-error field-name="subject" validations="{required: null}"></sc-validation-error>
+            <sc-text ng-model="email.subject" name="subject" ng-required="true"></sc-text>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="form-group col-sm-12" sc-has-error="body">
+            <label class="control-label" l10n-text="docs.edit.sendEmail.body"></label>
+            <sc-validation-error field-name="body" validations="{required: null}"></sc-validation-error>
+            <sc-textarea rows="3" ng-model="email.body" name="body" ng-required="true"></sc-textarea>
+          </div>
+        </div>
+
+      </div>
+</ng-form>
+
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="send()" text="docs.edit.sendEmail.send" class="btn btn-primary" icon="glyphicon-envelope"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.sendEmail.cancel" class="btn btn-default" icon="glyphicon-ban-circle"></sc-button>
+  </div>
+</div>

@@ -93,6 +93,14 @@
             'createNewCase': {
               method: 'POST',
               url: '/api/docs/:id/createNewCase'
+            },
+            'getDocSendEmail': {
+              method: 'GET',
+              url: '/api/docs/:id/getDocSendEmail'
+            },
+            'postDocSendEmail': {
+              method: 'POST',
+              url: '/api/docs/:id/postDocSendEmail'
             }
           });
       }]);

@@ -15,17 +15,9 @@ namespace Docs.Api.Models
 
         public int? CorrespondentContactId { get; set; }
 
-        public string Param1 { get; set; }
-
-        public string Param2 { get; set; }
-
-        public string Param3 { get; set; }
-
-        public string Param4 { get; set; }
-
-        public string Param5 { get; set; }
-
         public int StatusId { get; set; }
+
+        public string Emails { get; set; }
 
         public string Subject { get; set; }
 
@@ -48,21 +40,6 @@ namespace Docs.Api.Models
             this.HasKey(t => t.AdministrativeEmailId);
 
             // Properties
-            this.Property(t => t.Param1)
-                .HasMaxLength(500);
-
-            this.Property(t => t.Param2)
-                .HasMaxLength(500);
-
-            this.Property(t => t.Param3)
-                .HasMaxLength(500);
-
-            this.Property(t => t.Param4)
-                .HasMaxLength(500);
-
-            this.Property(t => t.Param5)
-                .HasMaxLength(500);
-
             this.Property(t => t.Subject)
                 .HasMaxLength(1000);
 
@@ -79,11 +56,6 @@ namespace Docs.Api.Models
             this.Property(t => t.UserId).HasColumnName("UserId");
             this.Property(t => t.CorrespondentId).HasColumnName("CorrespondentId");
             this.Property(t => t.CorrespondentContactId).HasColumnName("CorrespondentContactId");
-            this.Property(t => t.Param1).HasColumnName("Param1");
-            this.Property(t => t.Param2).HasColumnName("Param2");
-            this.Property(t => t.Param3).HasColumnName("Param3");
-            this.Property(t => t.Param4).HasColumnName("Param4");
-            this.Property(t => t.Param5).HasColumnName("Param5");
             this.Property(t => t.StatusId).HasColumnName("StatusId");
             this.Property(t => t.Subject).HasColumnName("Subject");
             this.Property(t => t.Body).HasColumnName("Body");

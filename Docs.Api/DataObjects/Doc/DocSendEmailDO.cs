@@ -10,10 +10,11 @@ namespace Docs.Api.DataObjects
     {
         public DocSendEmailDO()
         {
+            this.EmailTo = new List<NomDo>();
         }
 
-        public string EmailTo { get; set; }
-        public string EmailToName { get; set; }
+        public List<NomDo> EmailTo { get; set; }
+        public string EmailBcc { get; set; }
         public int? CorrespondentContactId { get; set; }
         public int? CorrespondentId { get; set; }
         public int? UserId { get; set; }
@@ -21,10 +22,5 @@ namespace Docs.Api.DataObjects
 
         public string Subject { get; set; }
         public string Body { get; set; }
-        public string Param1 { get; set; }
-        public string Param2 { get; set; }
-        public string Param3 { get; set; }
-        public string Param4 { get; set; }
-        public string Param5 { get; set; }
     }
 }

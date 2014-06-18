@@ -25,6 +25,7 @@
           docCanceled: 'Отбелязване като анулиран',
           docRegister: 'Регистриране',
           docSignatures: 'Подписване с електронен подпис',
+          docSend: 'Изпращане',
           undoDocSignatures: 'Премахване на ел. подписи',
           sign: 'Подписване',
           discuss: 'Съгласуване',
@@ -202,6 +203,14 @@
             date: 'Дата',
             'delete': 'изтрий',
             add: 'добави'
+          },
+          sendEmail: {
+            emailTo: 'До',
+            emailBcc: 'Копие до',
+            subject: 'Относно',
+            body: 'Съдържание',
+            send: 'Изпрати',
+            cancel: 'Отказ'
           }
         },
         nextStage: {

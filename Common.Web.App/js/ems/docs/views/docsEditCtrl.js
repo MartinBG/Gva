@@ -376,6 +376,10 @@
       return $state.go('root.docs.edit.case.changeDocParent');
     };
 
+    $scope.sendEmail = function () {
+      return $state.go('root.docs.edit.case.sendEmail');
+    };
+
     $scope.createNewCase = function () {
       return Doc.createNewCase({ id: doc.docId }, {}).$promise.then(function () {
         return $state.go('root.docs.edit.case', { id: doc.docId }, { reload: true });

@@ -473,7 +473,7 @@ namespace Docs.Api.Controllers
 
                 List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
                 DocRelation newDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == newDocId);
-                
+
                 List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
                 foreach (var docRelation in docRelations)
                 {
@@ -1756,6 +1756,62 @@ namespace Docs.Api.Controllers
             {
                 docId = docId
             });
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetDocSendEmail(int id)
+        {
+            Doc doc = this.docRepository.Find(id,
+                e => e.DocCorrespondents.Select(dc => dc.Correspondent),
+                e => e.DocStatus);
+
+            if (doc == null)
+            {
+                return NotFound();
+            }
+
+            DocSendEmailDO email = new DocSendEmailDO();
+            Correspondent correspondent = new Correspondent();
+
+            foreach (var item in doc.DocCorrespondents)
+            {
+                NomDo corrNom = new NomDo();
+                corrNom.NomValueId = item.Correspondent.CorrespondentId;
+                corrNom.Name = item.Correspondent.DisplayName + " " + item.Correspondent.Email;
+                corrNom.Alias = item.Correspondent.Alias;
+                corrNom.IsActive = item.Correspondent.IsActive;
+
+                email.EmailTo.Add(corrNom);
+            }
+
+            AdministrativeEmailType emailType = this.unitOfWork.DbContext.Set<AdministrativeEmailType>().SingleOrDefault(e => e.Alias.ToLower() == "CorrespondentEmail".ToLower());
+
+            email.EmailBcc = "";
+            email.TypeId = emailType.AdministrativeEmailTypeId;
+            email.Subject = emailType.Subject;
+            email.Body = emailType.Body.Replace("@@Param1", ConfigurationManager.AppSettings["PortalWebAddress"]);
+
+            return Ok(new
+            {
+                email = email
+            });
+        }
+
+        [HttpPost]
+        public IHttpActionResult PostDocSendEmail(int id, DocSendEmailDO email)
+        {
+            throw new NotImplementedException();
+
+            //using (var transaction = this.unitOfWork.BeginTransaction())
+            //{
+            //    Doc doc = this.docRepository.Find(id);
+
+            //    this.unitOfWork.Save();
+
+            //    transaction.Commit();
+
+            //    return Ok();
+            //}
         }
 
         private int CreateReceiptDoc(int id, bool isDocAcknowledged)
