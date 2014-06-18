@@ -5,8 +5,7 @@
 
   function createNumberDirective(name, parserFactory, formatterFactory, inject) {
     function NumberDirective() {
-      var attrsInjected = false,
-        injected = Array.prototype.slice.apply(arguments);
+      var injected = Array.prototype.slice.apply(arguments);
       return {
         priority: 110,
         restrict: 'E',
@@ -17,17 +16,10 @@
           if (!ngModel) {
             return;
           }
-          if(!attrsInjected) {
-            injected.unshift(attrs);
-            attrsInjected = true;
-          }
-          else {
-            injected[0] = attrs;
-          }
 
-          ngModel.$parsers.push(parserFactory.apply(this, injected));
+          ngModel.$parsers.push(parserFactory.apply(this, [attrs].concat(injected)));
 
-          ngModel.$formatters.push(formatterFactory.apply(this, injected));
+          ngModel.$formatters.push(formatterFactory.apply(this, [attrs].concat(injected)));
 
           if (attrs.min) {
             var minValidator = function (value) {
