@@ -39,24 +39,28 @@
     'aircraftCertAirworthiness'
   ];
   CertAirworthinessesFMNewCtrl.$resolve = {
+    inspectorType: [
+      'Nomenclature',
+      function (Nomenclature) {
+        return Nomenclature.get({
+          alias: 'inspectorTypes',
+          valueAlias: 'examiner'
+        }).$promise;
+      }
+    ],
     aircraftCertAirworthiness: [
       '$stateParams',
-      function ($stateParams) {
+      'inspectorType',
+      function ($stateParams, inspectorType) {
         return {
           part: {
             lotId: $stateParams.id,
             inspector: {
-              inspectorType: {
-                name: 'Проверяващ',
-                alias: 'examiner'
-              }
+              inspectorType: inspectorType
             },
             reviews: [{
               inspector: {
-                inspectorType: {
-                  name: 'Проверяващ',
-                  alias: 'examiner'
-                }
+                inspectorType: inspectorType
               },
               airworthinessReviewType: {
                 id: 7777773,

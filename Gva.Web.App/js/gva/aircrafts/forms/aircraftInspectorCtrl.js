@@ -2,22 +2,24 @@
 (function (angular) {
   'use strict';
 
-  function AircraftInspectorCtrl($scope, $attrs) {
+  function AircraftInspectorCtrl($scope, Nomenclature) {
 
-    $scope.showInspectors = $attrs.showInspectors;
-
-    $attrs.$observe('readonly', function (val) {
-      $scope.isReadonly = val;
+    var deleteWatch = $scope.$watch('showInspectors', function (showInspectors) {
+      if(showInspectors !== undefined || showInspectors !== null) {
+        $scope.inspectorTypes = Nomenclature.query({
+            alias: 'inspectorTypes',
+            showInspectors: $scope.showInspectors
+          });
+        deleteWatch();
+      }
     });
+
   }
 
   AircraftInspectorCtrl.$inject = [
     '$scope',
-    '$attrs'
+    'Nomenclature'
   ];
 
-  angular.module('gva').controller(
-    'AircraftInspectorCtrl',
-    AircraftInspectorCtrl
-    );
+  angular.module('gva').controller('AircraftInspectorCtrl', AircraftInspectorCtrl);
 }(angular));

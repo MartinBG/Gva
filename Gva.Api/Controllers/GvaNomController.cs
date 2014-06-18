@@ -622,6 +622,18 @@ namespace Gva.Api.Controllers
 
             return Ok(nomValues);
         }
+
+        [Route("inspectorTypes")]
+        public IHttpActionResult GetInspectorTypes(bool? showInspectors = true)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("inspectorTypes");
+            if (!showInspectors.Value)
+            {
+                nomValues = nomValues.Where(e => e.Alias != "gvaInspector");
+            }
+
+            return Ok(nomValues);
+        }
     }
 }
 

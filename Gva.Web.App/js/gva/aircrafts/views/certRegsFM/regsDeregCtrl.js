@@ -53,6 +53,7 @@
           ind: $stateParams.ind
         }).$promise.then(function (reg) {
           reg.part.isActive = false;
+          reg.part.removal['export'] = null;
           return reg;
         });
       }

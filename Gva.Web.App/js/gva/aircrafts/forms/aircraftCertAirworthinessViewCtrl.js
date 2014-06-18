@@ -29,6 +29,21 @@
              lastReview.validToDate;
     };
 
+    $scope.inspectorName = function () {
+      if (!$scope.model || !$scope.model.inspector || !$scope.model.inspector.inspectorType) {
+        return null;
+      }
+
+      switch ($scope.model.inspector.inspectorType.alias) {
+        case 'gvaInspector':
+          return $scope.model.inspector.gvaInspector && $scope.model.inspector.gvaInspector.name;
+        case 'examiner':
+          return $scope.model.inspector.examiner && $scope.model.inspector.examiner.name;
+        case 'other':
+          return $scope.model.inspector.other;
+      }
+    };
+
     $scope.newAw = function () {
       return $state.go('root.aircrafts.view.airworthinessesFM.new');
     };

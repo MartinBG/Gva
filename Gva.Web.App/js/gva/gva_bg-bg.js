@@ -1381,7 +1381,11 @@
           removalNotesAlt: 'Забележки/Изключения (англ.)',
           person: 'ФЛ',
           organization: 'ЮЛ',
-          operationType: 'Type of Operation'
+          operationType: 'Type of Operation',
+          text: 'Текст',
+          textAlt: 'Текст (англ.)',
+          aircraftNewOld: 'ВС е ново',
+          'export': 'Експортно удостоверение за ЛГ'
         },
         debtDirectiveFM: {
           certId: 'Регистрация №',

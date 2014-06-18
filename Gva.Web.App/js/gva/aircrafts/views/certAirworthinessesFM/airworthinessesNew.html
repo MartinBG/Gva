@@ -18,6 +18,6 @@
   </div>
   <div ng-if="aw.part.aircraftCertificateType.code != 'AS'">
     <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.review" style="margin-top:10px;"></h5>
-    <gva-airworthiness-review name="airworthinessReviewForm" ng-model="aw.part.reviews[0]" show-amendment-type="{{aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'}}"></gva-airworthiness-review>
+    <gva-airworthiness-review name="airworthinessReviewForm" ng-model="aw.part.reviews[0]" sc-data-show-amendment-type="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'"></gva-airworthiness-review>
   </div>
 </ng-form>

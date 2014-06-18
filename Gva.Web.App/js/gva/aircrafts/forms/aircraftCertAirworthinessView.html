@@ -11,13 +11,9 @@
     </div>
     <div class="well-sm panel-body" ng-show="model">
       <div class="row">
-        <div class="form-group col-md-4 col-sm-8">
-          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.aircraftCertificateType"></label>
-          <input disabled name="aircraftCertificateType" type="text" class="form-control input-sm" value="{{model.aircraftCertificateType.name}}" />
-        </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.issueDate"></label>
-          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}" />
+          <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="true"></sc-date>
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validFromDate"></label>
@@ -26,6 +22,12 @@
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validToDate"></label>
           <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{validToDate() | date: 'dd.MM.yyyy'}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-2 col-sm-4">
+          <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.inspector"></label>
+          <input disabled name="inspector" type="text" class="form-control input-sm" value="{{inspectorName()}}" />
         </div>
       </div>
     </div>
