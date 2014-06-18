@@ -9,7 +9,7 @@
     $stateParams,
     Nomenclature,
     Application,
-    PersonData,
+    PersonInfo,
     OrganizationData,
     appModel,
     selectedPerson,
@@ -107,7 +107,7 @@
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
           isPersonSelect = true;
-          partData = PersonData.get({ id: $scope.appModel.lot.id });
+          partData = PersonInfo.get({ id: $scope.appModel.lot.id });
         }
         else if ($scope.filter === 'Organization') {
           isOrgSelect = true;
@@ -115,8 +115,9 @@
         }
       }
 
-      return partData.$promise.then(function (data) {
-        var corr = {};
+      return partData.$promise.then(function (d) {
+        var corr = {},
+            data = d.personData;
 
         if (isPersonSelect) {
           corr.bgCitizenFirstName = data.part.firstName;
@@ -145,15 +146,16 @@
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
-          return PersonData.get({ id: $scope.appModel.lot.id }).$promise.then(function (data) {
-            var displayName = data.part.firstName + ' ' + data.part.lastName;
-            if (data.part.uin) {
-              displayName = displayName + ' ' + data.part.uin;
-            }
-
-            return $state.go('root.applications.new.corrSelect', {
-              displayName: displayName
-            });
+          return PersonInfo.get({ id: $scope.appModel.lot.id })
+            .$promise.then(function (d) {
+              var data = d.personData,
+                  displayName = data.part.firstName + ' ' + data.part.lastName;
+              if (data.part.uin) {
+                displayName = displayName + ' ' + data.part.uin;
+              }
+              return $state.go('root.applications.new.corrSelect', {
+                displayName: displayName
+              });
           });
         }
         else if ($scope.filter === 'Organization') {
@@ -230,7 +232,7 @@
     '$stateParams',
     'Nomenclature',
     'Application',
-    'PersonData',
+    'PersonInfo',
     'OrganizationData',
     'appModel',
     'selectedPerson',
