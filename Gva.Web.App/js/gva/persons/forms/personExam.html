@@ -3,14 +3,14 @@
     <div class="row">
       <div class="form-group col-md-4 col-sm-4" sc-has-error="examDate">
         <label class="control-label" l10n-text="persons.examDirective.examDate"></label>
-        <sc-validation-error field-name="examDate" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="examDate" validations="{required: null}"></sc-validation-error>
         <sc-date ng-model="model.examDate" name="examDate" ng-readonly="readonly" ng-required="true"></sc-date>
       </div>
     </div>
     <h5 class="form-header" l10n-text="persons.examDirective.commonQuestions" style="margin-top:10px;"></h5>
     <div class="row" style="margin-bottom:20px;">
       <div class="form-group col-md-5 col-sm-8" sc-has-error="commonQuestion">
-        <sc-validation-error field-name="commonQuestion" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="commonQuestion" validations="{required: null}"></sc-validation-error>
         <sc-nomenclature ng-model="model.commonQuestion" name="commonQuestion" alias="'commonQuestions'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
@@ -59,7 +59,7 @@
     <h5 class="form-header" l10n-text="persons.examDirective.specializedQuestions" style="margin-top:20px;"></h5>
     <div class="row" style="margin-bottom:20px;">
       <div class="form-group col-md-5 col-sm-8" sc-has-error="specializedQuestion">
-        <sc-validation-error field-name="specializedQuestion" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="specializedQuestion" validations="{required: null}"></sc-validation-error>
         <sc-nomenclature ng-model="model.specializedQuestion" name="specializedQuestion" alias="'specializedQuestions'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
@@ -113,7 +113,7 @@
   <h5 class="form-header" l10n-text="persons.examDirective.inspectors" style="margin-top:20px;"></h5>
   <div class="row">
     <div class="form-group col-sm-8" sc-has-error="secondType">
-      <sc-validation-error field-name="inspector" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="inspector" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly" multiple></sc-nomenclature>
     </div>
   </div>

@@ -1,6 +1,6 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <sc-field-group class="col-sm-10" text="applications.personSelect.person" validations="{ required: 'default' }" field-name="personLotId">
+    <sc-field-group class="col-sm-10" text="applications.personSelect.person" validations="{ required: null }" field-name="personLotId">
       <sc-nomenclature ng-model="model.lot.id" alias="'persons'" mode="id" name="personLotId" required></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectPerson')" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
       <sc-button btn-click="$raise('scOnNewPerson')" class="btn btn-default" text="applications.personSelect.newPerson"></sc-button>

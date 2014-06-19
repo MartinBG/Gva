@@ -17,7 +17,7 @@
         <div class="row">
           <div class="form-group col-sm-4 col-md-4" sc-has-error="docPartType">
             <label class="control-label" l10n-text="applications.edit.newFile.documentType"></label>
-            <sc-validation-error field-name="docPartType" validations="{required: 'default'}"></sc-validation-error>
+            <sc-validation-error field-name="docPartType" validations="{required: null}"></sc-validation-error>
             <sc-nomenclature ng-model="docPartType" name="docPartType" alias="'documentParts'" params="{ parentValueId: lotSetId }" ng-required="true"></sc-nomenclature>
           </div>
         </div>

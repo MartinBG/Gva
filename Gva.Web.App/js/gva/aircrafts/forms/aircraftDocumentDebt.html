@@ -6,12 +6,12 @@
     </div>
     <div class="form-group col-sm-3 col-md-2"  sc-has-error="regTime">
       <label class="control-label" l10n-text="aircrafts.debtDirective.regTime"></label>
-      <sc-validation-error field-name="regTime" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="regTime" validations="{required: null}"></sc-validation-error>
       <sc-time ng-model="model.regTime" name="regTime" ng-readonly="readonly" ng-required="true"></sc-time>
     </div>
     <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
       <label class="control-label" l10n-text="aircrafts.debtDirective.aircraftDebtType"></label>
-      <sc-validation-error field-name="aircraftDebtType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-md-2 col-sm-4">

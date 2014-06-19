@@ -1,11 +1,11 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <div class="row">
-    <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: 'default', requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
+    <sc-field-group class="col-md-6" text="docs.edit.view.docUnitsFrom" validations="{required: null, requiredValue: 'Задължително поле'}" field-name="docUnitsFrom">
       <sc-nomenclature name="docUnitsFrom" ng-model="model.docUnitsFrom" alias="'employeeUnit'" multiple="multiple" sc-validate="{ requiredValue: requireDocUnitsFrom }" required ng-readonly="readonly"></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectUnit', { type: 'from' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
     </sc-field-group>
 
-    <sc-field-group class="col-md-6" text="docs.edit.view.docCorrespondents" validations="{required: 'default', requiredValue: 'Задължително поле'}" field-name="docCorrespondents">
+    <sc-field-group class="col-md-6" text="docs.edit.view.docCorrespondents" validations="{required: null, requiredValue: 'Задължително поле'}" field-name="docCorrespondents">
       <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="readonly"></sc-nomenclature>
       <sc-button btn-click="$raise('scOnSelectCorr')" class="btn btn-default" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
       <sc-button btn-click="$raise('scOnNewCorr')" class="btn btn-default" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>

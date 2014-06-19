@@ -3,7 +3,7 @@
   <div class="row">
     <div class="form-group col-sm-3" sc-has-error="lim145limitation">
       <label class="control-label" l10n-text="aircrafts.maintenanceDirective.lim145limitation"></label>
-      <sc-validation-error field-name="lim145limitation" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="lim145limitation" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.lim145limitation" name="lim145limitation" alias="'lim145limitations'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -25,12 +25,12 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2"  sc-has-error="fromDate">
       <label class="control-label" l10n-text="aircrafts.maintenanceDirective.fromDate"></label>
-      <sc-validation-error field-name="fromDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="fromDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.fromDate" ng-required="true" name="fromDate" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-3 col-md-2" sc-has-error="toDate">
       <label class="control-label" l10n-text="aircrafts.maintenanceDirective.toDate"></label>
-      <sc-validation-error field-name="toDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="toDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.toDate" ng-required="true" name="toDate" ng-readonly="readonly"></sc-date>
     </div>
   </div>

@@ -3,22 +3,22 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-6" sc-has-error="certNumber">
       <label class="control-label" l10n-text="aircrafts.radioDirective.certNumber"></label>
-      <sc-validation-error field-name="certNumber" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="certNumber" validations="{required: null}"></sc-validation-error>
       <sc-text ng-model="model.certNumber" name="certNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
       <label class="control-label" l10n-text="aircrafts.radioDirective.issueDate"></label>
-      <sc-validation-error field-name="issueDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="validToDate">
       <label class="control-label" l10n-text="aircrafts.radioDirective.validToDate"></label>
-      <sc-validation-error field-name="validToDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="validToDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.validToDate" name="validToDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-2" sc-has-error="valid">
       <label class="control-label" l10n-text="aircrafts.radioDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>

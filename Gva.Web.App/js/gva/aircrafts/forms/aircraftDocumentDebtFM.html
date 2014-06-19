@@ -2,7 +2,7 @@
    <div class="row">
     <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.registration"></label>
-      <sc-validation-error field-name="registration" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
   </div>
@@ -13,12 +13,12 @@
     </div>
     <div class="form-group col-sm-3 col-md-2"  sc-has-error="regTime">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.regTime"></label>
-      <sc-validation-error field-name="regTime" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="regTime" validations="{required: null}"></sc-validation-error>
       <sc-time ng-model="model.regTime" name="regTime" ng-readonly="readonly" ng-required="true"></sc-time>
     </div>
         <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftDebtType"></label>
-      <sc-validation-error field-name="aircraftDebtType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -37,7 +37,7 @@
   <div class="row">
     <div class="form-group col-md-8 col-sm-12" sc-has-error="aircraftCreditor">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftCreditor"></label>
-      <sc-validation-error field-name="aircraftCreditor" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftCreditor" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftCreditor" name="aircraftCreditor" alias="'aircraftCreditors'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>

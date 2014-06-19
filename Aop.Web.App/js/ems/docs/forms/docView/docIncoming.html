@@ -33,7 +33,7 @@
     </div>
     <div class="form-group col-md-6" sc-has-error="docCorrespondents">
       <label class="control-label" l10n-text="docs.edit.view.docCorrespondents"></label>
-      <sc-validation-error field-name="docCorrespondents" validations="{required: 'default', requiredValue: 'Задължително поле'}"></sc-validation-error>
+      <sc-validation-error field-name="docCorrespondents" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
       <div class="input-group input-group-sm">
         <sc-nomenclature name="docCorrespondents" ng-model="model.docCorrespondents" alias="'correspondent'" multiple="multiple" sc-validate="{ requiredValue: requireCorrs }" required ng-readonly="readonly"></sc-nomenclature>
         <span class="input-group-btn">

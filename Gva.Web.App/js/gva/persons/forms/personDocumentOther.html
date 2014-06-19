@@ -19,7 +19,7 @@
       <label class="control-label" l10n-text="persons.personOtherDirective.documentDateValidTo"></label>
       <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
     </div>
-    <sc-field-group class="col-sm-6 col-md-4" text="persons.personOtherDirective.documentPublisher" validations="{ required: 'default' }" field-name="documentPublisher">
+    <sc-field-group class="col-sm-6 col-md-4" text="persons.personOtherDirective.documentPublisher" validations="{ required: null }" field-name="documentPublisher">
       <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
       <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="readonly"></sc-button>
     </sc-field-group>
@@ -28,12 +28,12 @@
   <div class="row">
     <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentType">
       <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentType"></label>
-      <sc-validation-error field-name="personOtherDocumentType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="personOtherDocumentType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.documentType" name="personOtherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false, staffAliases: ['flightCrew', 'to_vs', 'ovd'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-6 col-md-4" sc-has-error="personOtherDocumentRole">
       <label class="control-label" l10n-text="persons.personOtherDirective.personOtherDocumentRole"></label>
-      <sc-validation-error field-name="personOtherDocumentRole" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="personOtherDocumentRole" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.documentRole" name="personOtherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other', staffAliases: ['flightCrew', 'to_vs', 'ovd'] }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -41,7 +41,7 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
       <label class=" control-label" l10n-text="persons.personOtherDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>

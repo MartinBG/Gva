@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCertificateType">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType"></label>
-      <sc-validation-error field-name="aircraftCertificateType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="aircraftCertificateType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
   </div>
@@ -10,7 +10,7 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.registration"></label>
-      <sc-validation-error field-name="registration" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
     </div>
     <div class="form-group col-md-2 col-sm-4">
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
-      <sc-validation-error field-name="issueDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>

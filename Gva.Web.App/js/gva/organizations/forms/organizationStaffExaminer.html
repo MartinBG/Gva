@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-6 col-sm-8" sc-has-error="examinerCode">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.examinerCode"></label>
-      <sc-validation-error field-name="examinerCode" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="examinerCode" validations="{required: null}"></sc-validation-error>
       <sc-text name="examinerCode" ng-model="model.part.examinerCode" ng-readonly="readonly" required></sc-text>
     </div>
   </div>
@@ -10,7 +10,7 @@
   <div class="row">
     <div class="form-group col-md-6 col-sm-8" sc-has-error="person">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.person"></label>
-      <sc-validation-error field-name="person" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="person" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature name="person" ng-model="model.part.person" alias="'persons'" ng-readonly="readonly" required></sc-nomenclature>
     </div>
   </div>
@@ -18,12 +18,12 @@
   <div class="row">
     <div class="form-group col-md-3 col-sm-4" sc-has-error="permitedAW">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.permitedAW"></label>
-      <sc-validation-error field-name="permitedAW" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="permitedAW" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature name="permitedAW" ng-model="model.part.permitedAW" alias="'boolean'" ng-readonly="readonly" required></sc-nomenclature>
     </div>
     <div class="form-group col-md-3 col-sm-4" sc-has-error="permitedCheck">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.permitedCheck"></label>
-      <sc-validation-error field-name="permitedCheck" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="permitedCheck" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature name="permitedCheck" ng-model="model.part.permitedCheck" alias="'boolean'" ng-readonly="readonly" required></sc-nomenclature>
     </div>
   </div>
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group col-md-3 col-sm-4" sc-has-error="isValid">
       <label class="control-label" l10n-text="organizations.staffExaminerDirective.valid"></label>
-      <sc-validation-error field-name="isValid" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="isValid" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature name="isValid" ng-model="model.part.valid" alias="'boolean'" ng-readonly="readonly" required></sc-nomenclature>
     </div>
   </div>
@@ -49,25 +49,25 @@
           <th>
             <div sc-has-error="aircraftTypeGroup">
               <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.aircraftTypeGroup"></label>
-              <sc-validation-error field-name="aircraftTypeGroup" validations="{required: 'default'}"></sc-validation-error>
+              <sc-validation-error field-name="aircraftTypeGroup" validations="{required: null}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="dateApproved">
               <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.dateApproved"></label>
-              <sc-validation-error field-name="dateApproved" validations="{required: 'default'}"></sc-validation-error>
+              <sc-validation-error field-name="dateApproved" validations="{required: null}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="inspector">
               <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.inspector"></label>
-              <sc-validation-error field-name="inspector" validations="{required: 'default'}"></sc-validation-error>
+              <sc-validation-error field-name="inspector" validations="{required: null}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="valid">
               <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.valid"></label>
-              <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
+              <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
             </div>
           </th>
           <th l10n-text="organizations.staffExaminerDirective.approvedAircrafts.notes"></th>

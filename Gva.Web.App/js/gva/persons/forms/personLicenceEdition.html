@@ -6,7 +6,7 @@
     </div>
     <div class="form-group col-sm-2" sc-has-error="documentDateValidFrom">
       <label class="control-label" l10n-text="persons.licenceEditionDirective.documentDateValidFrom"></label>
-      <sc-validation-error field-name="documentDateValidFrom" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-sm-2" ng-if="staffType.alias === 'flightCrew' || staffType.alias === 'to_vs'" sc-has-error="documentDateValidTo">
@@ -18,7 +18,7 @@
   <div class="row">
     <div class="form-group col-sm-4" ng-if="isNew" sc-has-error="licenceAction">
       <label class="control-label" l10n-text="persons.licenceEditionDirective.licenceAction"></label>
-      <sc-validation-error field-name="licenceAction" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="licenceAction" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature alias="'licenceActions'" ng-model="model.licenceAction" name="licenceAction"
         ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>

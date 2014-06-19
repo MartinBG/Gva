@@ -3,7 +3,7 @@
   <div class="row">
     <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="staffType">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.staffType"></label>
-      <sc-validation-error field-name="staffType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
@@ -13,7 +13,7 @@
   <div class="row" ng-if="model.staffType.alias">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDate">
       <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.documentDate"></label>
-      <sc-validation-error field-name="documentDate" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentDate" validations="{required: null}"></sc-validation-error>
       <sc-date ng-model="model.documentDate" name="documentDate" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
 
@@ -88,12 +88,12 @@
     <div class="row">
       <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="experienceRole">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceRole"></label>
-        <sc-validation-error field-name="experienceRole" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="experienceRole" validations="{required: null}"></sc-validation-error>
         <sc-nomenclature ng-model="model.experienceRole" name="experienceRole" alias="'experienceRoles'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
       <div class="form-group col-sm-6 col-md-5 col-lg-4" sc-has-error="experienceMeasure">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure"></label>
-        <sc-validation-error field-name="experienceMeasure" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="experienceMeasure" validations="{required: null}"></sc-validation-error>
         <sc-nomenclature ng-model="model.experienceMeasure" name="experienceMeasure" alias="'experienceMeasures'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
@@ -161,7 +161,7 @@
     <div class="row">
       <div class="form-group col-sm-3 col-md-2" sc-has-error="totalDoc">
         <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.totalDoc"></label>
-        <sc-validation-error field-name="totalDoc" validations="{required: 'default'}"></sc-validation-error>
+        <sc-validation-error field-name="totalDoc" validations="{required: null}"></sc-validation-error>
         <sc-time ng-model="model.totalDoc" name="totalDoc" ng-readonly="readonly" ng-required="true"></sc-time>
       </div>
 

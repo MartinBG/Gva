@@ -3,12 +3,12 @@
   <div class="row">
     <div class="form-group col-sm-4 col-md-3" sc-has-error="approvalType">
       <label class="control-label" l10n-text="organizations.approvalDirective.approvalType"></label>
-      <sc-validation-error field-name="approvalType" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="approvalType" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.approvalType" name="approvalType" alias="'approvalTypes'" ng-required="true"  ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-sm-2 col-md-2" sc-has-error="documentNumber">
       <label class="control-label" l10n-text="organizations.approvalDirective.documentNumber"></label>
-      <sc-validation-error field-name="documentNumber" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
       <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true"  ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group col-sm-3 col-md-2">

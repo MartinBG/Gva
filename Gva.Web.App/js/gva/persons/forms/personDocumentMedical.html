@@ -3,14 +3,14 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-3" sc-has-error="documentNumberPrefix">
       <label class="control-label" l10n-text="persons.personMedicalDirective.testimonial"></label>
-      <sc-validation-error field-name="documentNumberPrefix" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentNumberPrefix" validations="{required: null}"></sc-validation-error>
       <sc-text ng-model="model.documentNumberPrefix" name="documentNumberPrefix" ng-required="true" ng-init="model.documentNumberPrefix='MED BG'" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group labeless" style="float: left;margin:auto -7px">
       <span>&#8212;</span>
     </div>
     <div class="form-group col-md-2 col-sm-3 labeless" sc-has-error="documentNumber">
-      <sc-validation-error field-name="documentNumber" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
       <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
     <div class="form-group labeless" style="float: left; margin: auto -7px">
@@ -30,17 +30,17 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-3" sc-has-error="medClass">
       <label class="control-label" l10n-text="persons.personMedicalDirective.medClass"></label>
-      <sc-validation-error field-name="medClass" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="medClass" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.medClass" name="medClass" alias="'medClasses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
     <div class="form-group col-md-2 col-sm-3" sc-has-error="documentDateValidFrom">
       <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidFrom"></label>
-      <sc-validation-error field-name="documentDateValidFrom" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
       <sc-date name="documentDateValidFrom" ng-model="model.documentDateValidFrom" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
     <div class="form-group col-md-2 col-sm-3" sc-has-error="documentDateValidTo">
       <label class="control-label" l10n-text="persons.personMedicalDirective.documentDateValidTo"></label>
-      <sc-validation-error field-name="documentDateValidTo" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentDateValidTo" validations="{required: null}"></sc-validation-error>
       <sc-date name="documentDateValidTo" ng-model="model.documentDateValidTo" ng-required="true" ng-readonly="readonly"></sc-date>
     </div>
   </div>
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="form-group col-sm-9 col-md-6" sc-has-error="documentPublisher">
       <label class="control-label" l10n-text="persons.personMedicalDirective.documentPublisher"></label>
-      <sc-validation-error field-name="documentPublisher" validations="{required: 'default'}"></sc-validation-error>
+      <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
       <sc-nomenclature ng-model="model.documentPublisher" name="documentPublisher" alias="'medDocPublishers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
