@@ -144,6 +144,10 @@
     <Content Include="js\scaffolding\directives\button\buttonDirective.html" />
     <Content Include="js\scaffolding\directives\button\buttonDirective.js" />
     <Content Include="js\scaffolding\directives\click\clickDirective.js" />
+    <Content Include="js\scaffolding\directives\treetable\treeColumnDirective.js" />
+    <Content Include="js\scaffolding\directives\treetable\treetableCtrl.js" />
+    <Content Include="js\scaffolding\directives\treetable\treetableDirective.html" />
+    <Content Include="js\scaffolding\directives\treetable\treetableDirective.js" />
     <Content Include="js\scaffolding\directives\time\timeDirective.html" />
     <Content Include="js\scaffolding\directives\time\timeDirective.js" />
     <Content Include="js\scaffolding\directives\datatable\columnDirective.js" />

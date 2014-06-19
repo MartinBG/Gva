@@ -34,6 +34,9 @@
           search: 'Търси',
           filtered: ' (филтрирани от {{max}} записа)',
           deleteColumns: 'Колони'
+        },
+        scTreetable: {
+          noDataAvailable: 'Няма намерени резултати'
         }
       }
     });
