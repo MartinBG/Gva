@@ -80,34 +80,16 @@ namespace Mosv.Rio.PortalBridge
                 discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
             }
 
+            //TODO: Bug in attached file extension (.xml added)
+            if (!emsUtils.CheckSupportedFileFormats(xmlContent))
+            {
+                discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            }
+
             //TODO: Bug in chema validation
-            //schemasPath = GetRioObjectsSchemasPath();
-            //if (!emsUtils.CheckValidXmlSchema(xmlContent, schemasPath))
+            //if (!emsUtils.CheckValidXmlSchema(xmlContent, SchemasPath))
             //{
             //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
-            //}
-
-            //TODO: Bug in attached file extension (.xml added)
-            //if (!emsUtils.CheckSupportedFileFormats(xmlContent))
-            //{
-            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
-            //}
-
-            //No signing in MOSV portal
-            //if (!emsUtils.CheckSignatureValidity(xmlContent))
-            //{
-            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
-            //}
-
-            //TODO: must be setup
-            //bool skipCertificateChainValidation = take it from Web.config
-            //if (!skipCertificateChainValidation)
-            //{
-            //    var revocationErrors = emsUtils.CheckCertificateValidity(xml);
-            //    if (revocationErrors != null && revocationErrors.Count() > 0)
-            //    {
-            //        discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
-            //    }
             //}
 
             //TODO: Implement
@@ -127,18 +109,21 @@ namespace Mosv.Rio.PortalBridge
             return new List<string>();
         }
 
-        private static string schemasPath = null;
-        private static string GetRioObjectsSchemasPath()
+        private static string _schemasPathValue;
+        private static string SchemasPath 
         {
-            if (schemasPath == null)
+            get
             {
-                string assemblyPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-                string binPath = System.IO.Path.GetDirectoryName(assemblyPath);
-                string projectPath = binPath.Substring(0, binPath.Length - 4);
-                schemasPath = String.Format(@"{0}\RioSchemas", projectPath);
-            }
+                if (_schemasPathValue == null)
+                {
+                    string assemblyPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+                    string binPath = System.IO.Path.GetDirectoryName(assemblyPath);
+                    string projectPath = binPath.Substring(0, binPath.Length - 4);
+                    _schemasPathValue = String.Format(@"{0}\RioSchemas", projectPath);
+                }
 
-            return schemasPath;
+                return _schemasPathValue;
+            }
         }
     }
 }

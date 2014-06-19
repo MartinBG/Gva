@@ -44,10 +44,12 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
+    <Content Include="Create\Tables\MosvElectronicServiceProviders.sql" />
     <Content Include="Create\Tables\MosvViewAdmissions.sql" />
     <Content Include="Create\Tables\MosvViewSignals.sql" />
     <Content Include="Create\Tables\MosvViewSuggestions.sql" />
     <Content Include="Insert\MosvCorrespondents.sql" />
+    <Content Include="Insert\MosvElectronicServiceProviders.sql" />
     <Content Include="Insert\MosvExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>

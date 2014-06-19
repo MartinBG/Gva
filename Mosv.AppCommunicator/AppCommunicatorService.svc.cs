@@ -40,6 +40,8 @@ using R_0009_000042;
 using R_0009_000043;
 using R_0009_000031;
 using Components.ApplicationCommunicator;
+using Mosv.Api.Models;
+using Regs.Api.Models;
 
 namespace Mosv.AppCommunicator
 {
@@ -61,6 +63,8 @@ namespace Mosv.AppCommunicator
             List<IDbConfiguration> configurations = new List<IDbConfiguration>();
             configurations.Add(new DocsDbConfiguration());
             configurations.Add(new CommonDbConfiguration());
+            configurations.Add(new MosvDbConfiguration());
+            configurations.Add(new RegsDbConfiguration());
 
             this.unitOfWork = new UnitOfWork(configurations);
             this.docRepository = new DocRepository(unitOfWork);
@@ -210,14 +214,16 @@ namespace Mosv.AppCommunicator
                 var caseDoc = this.docRepository.GetByRegUriAndAccessCode(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value, publicAccessCode);
                 if (caseDoc != null)
                 {
+                    var mosvElectronicServiceProvider = this.unitOfWork.DbContext.Set<MosvElectronicServiceProvider>().Where(e => e.Code == caseDoc.DocType.ElectronicServiceProvider).FirstOrDefault();
+
                     CaseFileInfo caseFileInfo = new CaseFileInfo();
                     caseFileInfo.AISCaseDataInternetAccess = new AISCaseDataInternetAccess();
                     caseFileInfo.AISCaseDataInternetAccess.Name = !String.IsNullOrWhiteSpace(caseDoc.DocType.ApplicationName) ? caseDoc.DocType.ApplicationName : caseDoc.DocType.Name;
+                    caseFileInfo.AISCaseDataInternetAccess.ServiceName = mosvElectronicServiceProvider != null ? mosvElectronicServiceProvider.Name : "МОСВ";
                     caseFileInfo.AISCaseDataInternetAccess.URI = new AISCaseURI();
                     caseFileInfo.AISCaseDataInternetAccess.URI.DocumentURI = uri;
                     caseFileInfo.AISCaseDataInternetAccess.Documents = new Documents();
                     caseFileInfo.AISCaseDataInternetAccess.Documents.DocumentCollection = new DocumentCollection();
-                    caseFileInfo.AISCaseDataInternetAccess.ServiceName = caseDoc.DocType.Name;
 
                     var serviceStages =
                         this.unitOfWork.DbContext.Set<DocElectronicServiceStage>()

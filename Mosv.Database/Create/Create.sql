@@ -8,6 +8,7 @@ GO
 :r $(rootPath)\"Tables\MosvViewAdmissions.sql"
 :r $(rootPath)\"Tables\MosvViewSignals.sql"
 :r $(rootPath)\"Tables\MosvViewSuggestions.sql"
+:r $(rootPath)\"Tables\MosvElectronicServiceProviders.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -60,3 +61,5 @@ GO
 :r $(rootPath)\"..\Insert\MosvExcelConfig\ConfigFinalize.sql"
 
 :r $(rootPath)\"..\Insert\MosvCorrespondents.sql"
+:r $(rootPath)\"..\Insert\MosvElectronicServiceProviders.sql"
+

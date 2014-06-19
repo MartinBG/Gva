@@ -18,7 +18,8 @@ namespace Mosv.RioBridge.Extractions.ServiceProviderDo
         {
             return new DataObjects.ServiceProviderDo()
             {
-                ElectronicServiceProvider = rioObject.ServiceInstructions
+                Id = rioObject.ServiceInstructions,
+                Name = rioObject.ServiceInstructionsName
             };
         }
     }

@@ -10,6 +10,7 @@ namespace Mosv.Api.Models
             modelBuilder.Configurations.Add(new MosvViewAdmissionMap());
             modelBuilder.Configurations.Add(new MosvViewSignalMap());
             modelBuilder.Configurations.Add(new MosvViewSuggestionMap());
+            modelBuilder.Configurations.Add(new MosvElectronicServiceProviderMap());
         }
     }
 }

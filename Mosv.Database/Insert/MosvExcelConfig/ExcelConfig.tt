@@ -117,7 +117,7 @@
          List<Tuple<string, string>> AllDocTypesAndUnits = new List<Tuple<string, string>>();
 
          Dictionary<string, Tuple<string, string>> DocTypeAndClassification2Dictionary = new Dictionary<string, Tuple<string, string>>();
-         Dictionary<string, Tuple<string, string, bool>> DocTypeAndDocTypeGroupsDictionary = new Dictionary<string, Tuple<string, string, bool>>();
+		 Dictionary<string, Tuple<string, string>> DocTypeAndDocTypeGroupsDictionary = new Dictionary<string, Tuple<string, string>>();
 
         class TableInfo
         {
@@ -278,8 +278,7 @@
 
                     foreach (var item in DocTypeAndDocTypeGroupsDictionary)
                     {
-                        //if doc is electronicService
-                        if (item.Value.Item3)
+                        if (item.Value.Item2.StartsWith("Електронни услуги "))
                         {
                             AddRow_ElectronicServiceStagesAndExecutors(electronicServiceStagesTableRows, electronicServiceStageExecutorsTableRows, allElectronicServiceStages, item.Key, ref electronicServiceStageExecutorsIdentity, ref identityValue);
                         }
@@ -527,7 +526,7 @@
 
                 DocTypeAndClassification2Dictionary.Add(identityValue.ToString(), new Tuple<string, string>(classificationsId2, isElectronicService));
 
-                DocTypeAndDocTypeGroupsDictionary.Add(identityValue.ToString(), new Tuple<string, string, bool>(docTypeGroupId, docTypeGroup, isElectronicService == "1" ? true : false));
+				DocTypeAndDocTypeGroupsDictionary.Add(identityValue.ToString(), new Tuple<string, string>(docTypeGroupId, docTypeGroup));
 
                 identityValue++;
             }

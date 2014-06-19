@@ -8,6 +8,7 @@ namespace Mosv.RioBridge.DataObjects
 {
     public class ServiceProviderDo
     {
-        public string ElectronicServiceProvider { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }

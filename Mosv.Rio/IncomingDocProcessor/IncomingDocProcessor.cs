@@ -114,7 +114,7 @@ namespace Mosv.Rio.IncomingDocProcessor
                     int docTypeId = this.unitOfWork.DbContext.Set<DocType>().Single(e =>
                         e.ElectronicServiceFileTypeUri == electronicServiceFileTypeUri &&
                         e.ElectronicServiceTypeApplication == electronicServiceFileTypeUri &&
-                        e.ElectronicServiceProvider == serviceProviderDo.ElectronicServiceProvider).DocTypeId;
+                        e.ElectronicServiceProvider == serviceProviderDo.Id).DocTypeId;
 
                     //Initial Doc
                     Doc initialDoc = CreateInitialDoc(validationErrors, docTypeId, rootDoc == null, systemUser);
@@ -209,7 +209,7 @@ namespace Mosv.Rio.IncomingDocProcessor
 
                     this.docRepository.spSetDocUsers(receiptDoc.DocId);
 
-                    Guid receiptFileKey = CreateReceiptDocFileContent(initialDoc, receiptDoc, rootDoc, discrepancies, rioApplication);
+                    Guid receiptFileKey = CreateReceiptDocFileContent(initialDoc, receiptDoc, rootDoc, discrepancies, rioApplication, serviceProviderDo);
 
                     DocFile receiptDocFile = CreateReceiptDocFile(publicDocFileKind.DocFileKindId, receiptDoc, receiptFileKey, isDocAcknowledged);
                     this.unitOfWork.DbContext.Set<DocFile>().Add(receiptDocFile);
@@ -258,247 +258,6 @@ namespace Mosv.Rio.IncomingDocProcessor
                 }
             }
         }
-
-        //private List<Correspondent> GetDocumentCorrespondents(RioApplication rioApplication)
-        //{
-        //    List<Correspondent> returnValue = new List<Correspondent>();
-
-        //    var electronicServiceApplicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
-        //    var electronicServiceApplicantContactData = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicantContactData;
-
-        //    if (electronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection.Count > 0)
-        //    {
-        //        foreach (var recipient in electronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection)
-        //        {
-        //            Correspondent correspondent = null;
-
-        //            bool isNew = false;
-
-        //            string email = electronicServiceApplicant.EmailAddress ?? "";
-
-        //            if (recipient.Person != null)
-        //            {
-        //                string bgCitizenFirstName = recipient.Person.Names.First;
-        //                string bgCitizenLastName = recipient.Person.Names.Last;
-        //                string bgCitizenEgn = recipient.Person.Identifier.EGN;
-
-        //                //Get EmptyCorrespondent
-        //                if (String.IsNullOrWhiteSpace(email) ||
-        //                    String.IsNullOrWhiteSpace(bgCitizenFirstName) ||
-        //                    String.IsNullOrWhiteSpace(bgCitizenLastName) ||
-        //                    String.IsNullOrWhiteSpace(bgCitizenEgn))
-        //                {
-        //                    correspondent = this.unitOfWork.DbContext.Set<Correspondent>().SingleOrDefault(e => e.Alias == "Empty");
-        //                }
-        //                else
-        //                {
-        //                    correspondent = this.correspondentRepository.GetBgCitizenCorrespondent(email, bgCitizenFirstName, bgCitizenLastName, bgCitizenEgn);
-
-        //                    if (correspondent == null)
-        //                    {
-        //                        isNew = true;
-
-        //                        correspondent = new Correspondent();
-        //                        correspondent.CorrespondentGroupId = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-        //                            .SingleOrDefault(e => e.Alias == "Applicants")
-        //                            .CorrespondentGroupId;
-        //                        correspondent.CorrespondentTypeId = this.unitOfWork.DbContext.Set<CorrespondentType>()
-        //                            .SingleOrDefault(e => e.Alias == "BulgarianCitizen")
-        //                            .CorrespondentTypeId;
-        //                        correspondent.BgCitizenFirstName = bgCitizenFirstName;
-        //                        correspondent.BgCitizenLastName = bgCitizenLastName;
-        //                        correspondent.BgCitizenUIN = bgCitizenEgn;
-        //                    }
-        //                }
-        //            }
-        //            else if (recipient.ForeignPerson != null)
-        //            {
-        //                string foreignerFirstName = recipient.ForeignPerson.Names.FirstLatin;
-        //                string foreignerLastName = recipient.ForeignPerson.Names.LastLatin;
-        //                string foreignerSettlement = recipient.ForeignPerson.PlaceOfBirth.SettlementName;
-        //                DateTime? foreignerBirthDate = recipient.ForeignPerson.BirthDate;
-        //                string foreignerCountryCode = recipient.ForeignPerson.PlaceOfBirth.CountryCode;
-        //                int? foreignerCountryId = null;
-
-        //                if (!String.IsNullOrWhiteSpace(foreignerCountryCode))
-        //                {
-        //                    var country = this.unitOfWork.DbContext.Set<Country>()
-        //                        .SingleOrDefault(e => e.Alpha2Code == foreignerCountryCode);
-        //                    foreignerCountryId = country != null ? country.CountryId : (int?)null;
-        //                }
-
-
-        //                //Get EmptyCorrespondent
-        //                if (String.IsNullOrWhiteSpace(email) ||
-        //                    String.IsNullOrWhiteSpace(foreignerFirstName) ||
-        //                    String.IsNullOrWhiteSpace(foreignerLastName))
-        //                {
-        //                    correspondent = this.unitOfWork.DbContext.Set<Correspondent>().SingleOrDefault(e => e.Alias == "Empty");
-        //                }
-        //                else
-        //                {
-        //                    correspondent = this.correspondentRepository.GetForeignerCorrespondent(email, foreignerFirstName, foreignerLastName, foreignerCountryId, foreignerSettlement, foreignerBirthDate);
-
-        //                    if (correspondent == null)
-        //                    {
-        //                        isNew = true;
-
-        //                        correspondent = new Correspondent();
-        //                        correspondent.CorrespondentGroupId = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-        //                            .SingleOrDefault(e => e.Alias == "Applicants")
-        //                            .CorrespondentGroupId;
-        //                        correspondent.CorrespondentTypeId = this.unitOfWork.DbContext.Set<CorrespondentType>()
-        //                            .SingleOrDefault(e => e.Alias == "Foreigner")
-        //                            .CorrespondentTypeId;
-        //                        correspondent.ForeignerFirstName = foreignerFirstName;
-        //                        correspondent.ForeignerLastName = foreignerLastName;
-        //                        correspondent.ForeignerCountryId = foreignerCountryId;
-        //                        correspondent.ForeignerSettlement = foreignerSettlement;
-        //                        correspondent.ForeignerBirthDate = foreignerBirthDate;
-        //                    }
-        //                }
-        //            }
-        //            else if (recipient.Entity != null)
-        //            {
-        //                string legalEntityName = recipient.Entity.Name;
-        //                string legalEntityBulstat = recipient.Entity.Identifier;
-
-        //                //Get EmptyCorrespondent
-        //                if (String.IsNullOrWhiteSpace(email) ||
-        //                    String.IsNullOrWhiteSpace(legalEntityName) ||
-        //                    String.IsNullOrWhiteSpace(legalEntityBulstat))
-        //                {
-        //                    correspondent = this.unitOfWork.DbContext.Set<Correspondent>().SingleOrDefault(e => e.Alias == "Empty");
-        //                }
-        //                else
-        //                {
-        //                    correspondent = this.correspondentRepository.GetLegalEntityCorrespondent(email, legalEntityName, legalEntityBulstat);
-
-        //                    if (correspondent == null)
-        //                    {
-        //                        isNew = true;
-
-        //                        correspondent = new Correspondent();
-        //                        correspondent.CorrespondentGroupId = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-        //                            .SingleOrDefault(e => e.Alias == "Applicants")
-        //                            .CorrespondentGroupId;
-        //                        correspondent.CorrespondentTypeId = this.unitOfWork.DbContext.Set<CorrespondentType>()
-        //                            .SingleOrDefault(e => e.Alias == "LegalEntity")
-        //                            .CorrespondentTypeId;
-        //                        correspondent.LegalEntityName = legalEntityName;
-        //                        correspondent.LegalEntityBulstat = legalEntityBulstat;
-        //                    }
-        //                }
-        //            }
-        //            else if (recipient.ForeignEntity != null)
-        //            {
-        //                string fLEgalEntityName = recipient.ForeignEntity.ForeignEntityName;
-        //                string fLegalEntityRegisterName = recipient.ForeignEntity.ForeignEntityRegister;
-        //                string fLegalEntityRegisterNumber = recipient.ForeignEntity.ForeignEntityIdentifier;
-        //                string fLegalEntityOtherData = recipient.ForeignEntity.ForeignEntityOtherData;
-        //                string fLegalEntityCountryCode = recipient.ForeignEntity.CountryISO3166TwoLetterCode;
-        //                int? fLegalEntityCountryId = null;
-
-        //                if (!String.IsNullOrWhiteSpace(fLegalEntityCountryCode))
-        //                {
-        //                    var country = this.unitOfWork.DbContext.Set<Country>()
-        //                        .SingleOrDefault(e => e.Alpha2Code == fLegalEntityCountryCode);
-        //                    fLegalEntityCountryId = country != null ? country.CountryId : (int?)null;
-        //                }
-
-        //                //Get EmptyCorrespondent
-        //                if (String.IsNullOrWhiteSpace(email) ||
-        //                    String.IsNullOrWhiteSpace(fLEgalEntityName) ||
-        //                    !fLegalEntityCountryId.HasValue)
-        //                {
-        //                    correspondent = this.unitOfWork.DbContext.Set<Correspondent>().SingleOrDefault(e => e.Alias == "Empty");
-        //                }
-        //                else
-        //                {
-        //                    correspondent = this.correspondentRepository.GetFLegalEntityCorrespondent(email, fLEgalEntityName, fLegalEntityCountryId, fLegalEntityRegisterName, fLegalEntityRegisterNumber);
-
-        //                    if (correspondent == null)
-        //                    {
-        //                        isNew = true;
-
-        //                        correspondent = new Correspondent();
-        //                        correspondent.CorrespondentGroupId = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-        //                            .SingleOrDefault(e => e.Alias == "Applicants")
-        //                            .CorrespondentGroupId;
-        //                        correspondent.CorrespondentTypeId = this.unitOfWork.DbContext.Set<CorrespondentType>()
-        //                            .SingleOrDefault(e => e.Alias == "ForeignLegalEntity")
-        //                            .CorrespondentTypeId;
-        //                        correspondent.FLegalEntityName = fLEgalEntityName;
-        //                        correspondent.FLegalEntityCountryId = fLegalEntityCountryId;
-        //                        correspondent.FLegalEntityRegisterName = fLegalEntityRegisterName;
-        //                        correspondent.FLegalEntityName = fLegalEntityRegisterNumber;
-        //                        correspondent.FLegalEntityOtherData = fLegalEntityOtherData;
-        //                    }
-        //                }
-        //            }
-
-        //            if (electronicServiceApplicantContactData != null)
-        //            {
-        //                int? contactDistrictId = null;
-        //                int? contactMunicipalityId = null;
-        //                int? contactSettlementId = null;
-
-        //                if (!String.IsNullOrWhiteSpace(electronicServiceApplicantContactData.DistrictCode))
-        //                {
-        //                    var district = this.unitOfWork.DbContext.Set<District>()
-        //                        .SingleOrDefault(e => e.Code == electronicServiceApplicantContactData.DistrictCode);
-        //                    contactDistrictId = district != null ? district.DistrictId : (int?)null;
-        //                }
-
-        //                if (!String.IsNullOrWhiteSpace(electronicServiceApplicantContactData.MunicipalityCode))
-        //                {
-        //                    var municipality = this.unitOfWork.DbContext.Set<Municipality>()
-        //                        .SingleOrDefault(e => e.Code == electronicServiceApplicantContactData.MunicipalityCode);
-        //                    contactMunicipalityId = municipality != null ? municipality.MunicipalityId : (int?)null;
-        //                }
-
-        //                if (!String.IsNullOrWhiteSpace(electronicServiceApplicantContactData.SettlementCode))
-        //                {
-        //                    var settlement = this.unitOfWork.DbContext.Set<Settlement>()
-        //                        .SingleOrDefault(e => e.Code == electronicServiceApplicantContactData.SettlementCode);
-        //                    contactSettlementId = settlement != null ? settlement.SettlementId : (int?)null;
-        //                }
-
-        //                correspondent.ContactDistrictId = contactDistrictId;
-        //                correspondent.ContactMunicipalityId = contactMunicipalityId;
-        //                correspondent.ContactSettlementId = contactSettlementId;
-        //                correspondent.ContactAddress = electronicServiceApplicantContactData.AddressDescription;
-        //                correspondent.ContactPostCode = electronicServiceApplicantContactData.PostCode;
-        //                correspondent.ContactPostOfficeBox = electronicServiceApplicantContactData.PostOfficeBox;
-
-        //                if (electronicServiceApplicantContactData.PhoneNumbers != null &&
-        //                    electronicServiceApplicantContactData.PhoneNumbers.PhoneNumberCollection != null &&
-        //                    electronicServiceApplicantContactData.PhoneNumbers.PhoneNumberCollection.Count > 0)
-        //                {
-        //                    correspondent.ContactPhone = electronicServiceApplicantContactData.PhoneNumbers.PhoneNumberCollection[0];
-        //                }
-
-        //                if (electronicServiceApplicantContactData.FaxNumbers != null &&
-        //                    electronicServiceApplicantContactData.FaxNumbers.ElectronicServiceApplicantFaxNumberCollection != null &&
-        //                    electronicServiceApplicantContactData.FaxNumbers.ElectronicServiceApplicantFaxNumberCollection.Count > 0)
-        //                {
-        //                    correspondent.ContactFax = electronicServiceApplicantContactData.FaxNumbers.ElectronicServiceApplicantFaxNumberCollection[0];
-        //                }
-        //            }
-
-        //            if (isNew)
-        //            {
-        //                correspondent.RegisterIndexId = 1;
-        //                correspondent.Email = email;
-        //                correspondent.IsActive = true;
-        //            }
-
-        //            returnValue.Add(correspondent);
-        //        }
-        //    }
-
-        //    return returnValue;
-        //}
 
         private List<Correspondent> GetDocumentCorrespondents(RioApplication rioApplication)
         {
@@ -602,7 +361,8 @@ namespace Mosv.Rio.IncomingDocProcessor
             string aisUserIdentifier,
             string aisURI,
             string caseAccessIdentifier,
-            RioApplication rioApplication)
+            RioApplication rioApplication,
+            ServiceProviderDo serviceProviderDo)
         {
             var receiptMessage = new ReceiptAcknowledgedMessage();
             receiptMessage.DocumentURI = new DocumentURI();
@@ -614,7 +374,8 @@ namespace Mosv.Rio.IncomingDocProcessor
                 receiptMessage.Applicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
             }
             receiptMessage.ElectronicServiceProvider = rioApplication.ElectronicServiceProviderBasicData;
-            receiptMessage.TransportType = "0006-000001";   //Чрез уеб базирано приложение;
+            receiptMessage.ElectronicServiceProvider.EntityBasicData.Name = serviceProviderDo.Name;
+            receiptMessage.TransportType = "0006-000001"; //Чрез уеб базирано приложение;
             receiptMessage.DocumentTypeURI = rioApplication.DocumentTypeURI;
             receiptMessage.DocumentTypeName = rioApplication.DocumentTypeName;
             receiptMessage.RegisteredBy = new RegisteredBy();
@@ -631,7 +392,8 @@ namespace Mosv.Rio.IncomingDocProcessor
             string sequenceNumber,
             DateTime receiptOrSigningDate,
             RioApplication rioApplication,
-            List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies)
+            List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies,
+            ServiceProviderDo serviceProviderDo)
         {
             var receiptMessage = new ReceiptNotAcknowledgedMessage();
             receiptMessage.MessageURI = new DocumentURI();
@@ -643,7 +405,8 @@ namespace Mosv.Rio.IncomingDocProcessor
                 receiptMessage.Applicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
             }
             receiptMessage.ElectronicServiceProvider = rioApplication.ElectronicServiceProviderBasicData;
-            receiptMessage.TransportType = "0006-000001";   //Чрез уеб базирано приложение;
+            receiptMessage.ElectronicServiceProvider.EntityBasicData.Name = serviceProviderDo.Name;
+            receiptMessage.TransportType = "0006-000001"; //Чрез уеб базирано приложение;
             receiptMessage.DocumentTypeURI = rioApplication.DocumentTypeURI;
             receiptMessage.DocumentTypeName = rioApplication.DocumentTypeName;
             receiptMessage.MessageCreationTime = receiptOrSigningDate;
@@ -869,7 +632,7 @@ namespace Mosv.Rio.IncomingDocProcessor
             return docRelation;
         }
 
-        private Guid CreateReceiptDocFileContent(Doc initialDoc, Doc receiptDoc, Doc rootDoc, List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies, RioApplication rioApplication)
+        private Guid CreateReceiptDocFileContent(Doc initialDoc, Doc receiptDoc, Doc rootDoc, List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies, RioApplication rioApplication, ServiceProviderDo serviceProviderDo)
         {
             bool isDocAcknowledged = discrepancies == null || discrepancies.Count() == 0;
 
@@ -885,7 +648,7 @@ namespace Mosv.Rio.IncomingDocProcessor
                 receiptOrSigningDate = receiptDoc.RegDate.Value;
 
                 receiptMessage = this.rioDocumentParser.XmlSerializeReceiptNotAcknowledgedMessage(
-                    this.CreateReceiptNotAcknowledgedMessage(registerIndex, sequenceNumber, receiptOrSigningDate, rioApplication, discrepancies));
+                    this.CreateReceiptNotAcknowledgedMessage(registerIndex, sequenceNumber, receiptOrSigningDate, rioApplication, discrepancies, serviceProviderDo));
             }
             else
             {
@@ -894,7 +657,7 @@ namespace Mosv.Rio.IncomingDocProcessor
                 receiptOrSigningDate = initialDoc.RegDate.Value;
 
                 string aisUserIdentifier = "Системен потребител";
-                string aisURI = "ГВА АИС";
+                string aisURI = String.Format("{0} АИС", serviceProviderDo.Name);
 
                 string htmlFormat = @"<p>Номер на преписка: <b>{0}</b><br/>Код за достъп: <b>{1}</b><br/></p>";
                 string regUri = rootDoc != null ? rootDoc.RegUri : initialDoc.RegUri;
@@ -902,7 +665,7 @@ namespace Mosv.Rio.IncomingDocProcessor
                 string caseAccessIdentifier = String.Format(htmlFormat, regUri, accessCode);
 
                 receiptMessage = this.rioDocumentParser.XmlSerializeReceiptAcknowledgedMessage(
-                    this.CreateReceiptAcknowledgedMessage(registerIndex, sequenceNumber, receiptOrSigningDate, aisUserIdentifier, aisURI, caseAccessIdentifier, rioApplication));
+                    this.CreateReceiptAcknowledgedMessage(registerIndex, sequenceNumber, receiptOrSigningDate, aisUserIdentifier, aisURI, caseAccessIdentifier, rioApplication, serviceProviderDo));
             }
 
             byte[] content = Utf8Utils.GetBytes(receiptMessage);

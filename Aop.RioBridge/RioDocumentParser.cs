@@ -65,33 +65,27 @@ namespace Aop.Rio.PortalBridge
         {
             List<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = new List<RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature>();
 
-            //if (!emsUtils.CheckEmail(xmlContent))
-            //{
-            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NoEmail);
-            //}
-
             if (!emsUtils.CheckDocumentSize(xmlContent))
             {
                 discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
             }
 
-            //TODO: Bug in chema validation
-            //schemasPath = GetRioObjectsSchemasPath();
-            //if (!emsUtils.CheckValidXmlSchema(xmlContent, schemasPath))
-            //{
-            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
-            //}
-
             //TODO: Bug in attached file extension (.xml added)
-            //if (!emsUtils.CheckSupportedFileFormats(xmlContent))
-            //{
-            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
-            //}
+            if (!emsUtils.CheckSupportedFileFormats(xmlContent))
+            {
+                discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            }
 
             if (!emsUtils.CheckSignatureValidity(xmlContent))
             {
                 discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
             }
+
+            //TODO: Bug in chema validation
+            //if (!emsUtils.CheckValidXmlSchema(xmlContent, SchemasPath))
+            //{
+            //    discrepancies.Add(RioObjects.Enums.ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
+            //}
 
             //TODO: must be setup
             //bool skipCertificateChainValidation = take it from Web.config
@@ -121,18 +115,21 @@ namespace Aop.Rio.PortalBridge
             return new List<string>();
         }
 
-        private static string schemasPath = null;
-        private static string GetRioObjectsSchemasPath()
+        private static string _schemasPathValue;
+        private static string SchemasPath 
         {
-            if (schemasPath == null)
+            get
             {
-                string assemblyPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-                string binPath = System.IO.Path.GetDirectoryName(assemblyPath);
-                string projectPath = binPath.Substring(0, binPath.Length - 4);
-                schemasPath = String.Format(@"{0}\RioSchemas", projectPath);
-            }
+                if (_schemasPathValue == null)
+                {
+                    string assemblyPath = (new System.Uri(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+                    string binPath = System.IO.Path.GetDirectoryName(assemblyPath);
+                    string projectPath = binPath.Substring(0, binPath.Length - 4);
+                    _schemasPathValue = String.Format(@"{0}\RioSchemas", projectPath);
+                }
 
-            return schemasPath;
+                return _schemasPathValue;
+            }
         }
     }
 }
