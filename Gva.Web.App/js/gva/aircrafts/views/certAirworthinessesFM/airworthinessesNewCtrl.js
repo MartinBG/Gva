@@ -48,10 +48,20 @@
         }).$promise;
       }
     ],
+    airworthinessReviewType: [
+      'Nomenclature',
+      function (Nomenclature) {
+        return Nomenclature.get({
+          alias: 'airworthinessReviewTypes',
+          valueAlias: '15a'
+        }).$promise;
+      }
+    ],
     aircraftCertAirworthiness: [
       '$stateParams',
       'inspectorType',
-      function ($stateParams, inspectorType) {
+      'airworthinessReviewType',
+      function ($stateParams, inspectorType, airworthinessReviewType) {
         return {
           part: {
             lotId: $stateParams.id,
@@ -62,11 +72,7 @@
               inspector: {
                 inspectorType: inspectorType
               },
-              airworthinessReviewType: {
-                id: 7777773,
-                name: 'Удостоверение за преглед за ЛГ (15a)',
-                code: 'AV'
-              },
+              airworthinessReviewType: airworthinessReviewType,
               amendment1: null,
               amendment2: null
             }]
