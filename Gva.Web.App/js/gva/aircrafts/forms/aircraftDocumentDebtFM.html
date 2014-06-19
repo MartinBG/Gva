@@ -1,59 +1,23 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
-   <div class="row">
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.registration"></label>
-      <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
-    </div>
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" l10n-text="aircrafts.debtDirectiveFM.registration" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.regDate"></label>
-      <sc-date ng-model="model.regDate" name="regDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2"  sc-has-error="regTime">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.regTime"></label>
-      <sc-validation-error field-name="regTime" validations="{required: null}"></sc-validation-error>
-      <sc-time ng-model="model.regTime" name="regTime" ng-readonly="readonly" ng-required="true"></sc-time>
-    </div>
-        <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftDebtType">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftDebtType"></label>
-      <sc-validation-error field-name="aircraftDebtType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftDebtType" name="aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="date" ng-model="model.regDate" l10n-text="aircrafts.debtDirectiveFM.regDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="time" ng-model="model.regTime" ng-required="true" l10n-text="aircrafts.debtDirectiveFM.regTime" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.aircraftDebtType" alias="'aircraftDebtTypes'" ng-required="true" l10n-text="aircrafts.debtDirectiveFM.aircraftDebtType" class="col-md-4 col-sm-8"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.documentNumber"></label>
-      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.documentDate"></label>
-      <sc-date ng-model="model.documentDate" name="documentDate" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.debtDirectiveFM.documentNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.documentDate" l10n-text="aircrafts.debtDirectiveFM.documentDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-md-8 col-sm-12" sc-has-error="aircraftCreditor">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftCreditor"></label>
-      <sc-validation-error field-name="aircraftCreditor" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftCreditor" name="aircraftCreditor" alias="'aircraftCreditors'" ng-required="false" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.aircraftCreditor" alias="'aircraftCreditors'" ng-required="false" l10n-text="aircrafts.debtDirectiveFM.aircraftCreditor" class="col-md-8 col-sm-12"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.creditorDocument"></label>
-      <sc-textarea rows="4" ng-model="model.creditorDocument" name="creditorDocument" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" rows="4" ng-model="model.creditorDocument" l10n-text="aircrafts.debtDirectiveFM.creditorDocument" class="col-md-8 col-sm-12"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.inspector"></label>
-      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.inspector" alias="'inspectors'" l10n-text="aircrafts.debtDirectiveFM.inspector" class="col-md-4 col-sm-8"></sc-field>
   </div>
-
 </ng-form>

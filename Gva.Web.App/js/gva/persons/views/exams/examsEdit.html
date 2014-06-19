@@ -1,26 +1,23 @@
-﻿<ng-form name="editExamForm" sc-validate="{}">
+<ng-form name="editExamForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.editExam.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="persons.editExamAS.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editExamAS.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteTraining()" text="persons.editExamAS.deleteExam"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteTraining()" text="persons.editExamAS.deleteExam" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="persons.editExamAS.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editExamAS.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editExamAS.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editExamAS.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
   </div>
 
   <div class="well-sm panel-body">
-    <gva-person-exam name="examForm" ng-model="exam.part" sc-on-grade-exam="gradeExam()" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages" readonly="!editMode"></gva-person-exam>
-    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files" sc-data-set-part="'person'" readonly="!editMode"></gva-common-scanned-document>
+    <gva-person-exam name="examForm" ng-model="exam.part" sc-on-grade-exam="gradeExam()" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages"></gva-person-exam>
+    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files" sc-data-set-part="'person'"></gva-common-scanned-document>
   </div>
 </ng-form>

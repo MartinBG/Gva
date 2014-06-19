@@ -1,25 +1,22 @@
-﻿<ng-form name="certAirNavigationServiceDelivererForm" sc-validate="{}">
+<ng-form name="certAirNavigationServiceDelivererForm" sc-validate="{}" sc-form-readonly="!editMode && !backFromChild">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.editCertAirNavigationServiceDeliverer.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertAirNavigationServiceDeliverer.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertAirNavigationServiceDeliverer.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCertAirNavigationServiceDeliverer()" text="organizations.editCertAirNavigationServiceDeliverer.deleteCertOp"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" >
+        <sc-button name="deleteBtn" btn-click="deleteCertAirNavigationServiceDeliverer()" text="organizations.editCertAirNavigationServiceDeliverer.deleteCertOp" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertAirNavigationServiceDeliverer.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertAirNavigationServiceDeliverer.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertAirNavigationServiceDeliverer.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertAirNavigationServiceDeliverer.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-certificate name="editCertAirNavigationServiceDelivererForm" ng-model="certificate.part" readonly="!editMode && !backFromChild"></gva-organization-certificate>
+      <gva-organization-certificate name="editCertAirNavigationServiceDelivererForm" ng-model="certificate.part"></gva-organization-certificate>
     </div>
   </div>
 </ng-form>

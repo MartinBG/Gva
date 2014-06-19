@@ -1,42 +1,16 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentNumber"></label>
-      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentDateValidFrom"></label>
-      <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentDateValidTo"></label>
-      <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-6 col-md-4" sc-has-error="documentPublisher">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.documentPublisher"></label>
-      <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-  </div>
-    <div class="row">
-      <div class="form-group col-sm-6 col-md-4" sc-has-error="otherDocumentType">
-        <label class="control-label" l10n-text="equipments.equipmentOtherDirective.otherDocumentType"></label>
-        <sc-validation-error field-name="otherDocumentType" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature ng-model="model.documentType" name="otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-6 col-md-4" sc-has-error="equipmentOtherDocumentRole">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.equipmentOtherDocumentRole"></label>
-      <sc-validation-error field-name="equipmentOtherDocumentRole" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.documentRole" name="equipmentOtherDocumentRole" alias="'documentRoles'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-6 col-md-2">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.valid"></label>
-      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="text" ng-model="model.documentNumber" l10n-text="equipments.equipmentOtherDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.documentDateValidFrom" l10n-text="equipments.equipmentOtherDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="equipments.equipmentOtherDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.documentPublisher" ng-required="true" l10n-text="equipments.equipmentOtherDirective.documentPublisher" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-sm-12 col-md-8">
-      <label class="control-label" l10n-text="equipments.equipmentOtherDirective.notes"></label>
-      <sc-textarea rows="3" cols="50" ng-model="model.notes" name="notes" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.documentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" l10n-text="equipments.equipmentOtherDirective.otherDocumentType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.documentRole" alias="'documentRoles'" ng-required="true" l10n-text="equipments.equipmentOtherDirective.equipmentOtherDocumentRole" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" l10n-text="equipments.equipmentOtherDirective.valid" class="col-sm-6 col-md-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" rows="3" cols="50" ng-model="model.notes" l10n-text="equipments.equipmentOtherDirective.notes" class="col-sm-12 col-md-8"></sc-field>
   </div>
 </ng-form>

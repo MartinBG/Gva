@@ -1,66 +1,25 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-4 col-md-2" sc-has-error="aircraftPart">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.aircraftPart"></label>
-      <sc-validation-error field-name="aircraftPart" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftPart" name="aircraftPart" alias="'aircraftParts'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-6 col-md-4" sc-has-error="partProducer">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.partProducer"></label>
-      <sc-validation-error field-name="partProducer" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.partProducer" name="partProducer" alias="'aircraftProducers'" params="{ makeRadio: model.aircraftPart.code === 'RAD', makeEngine: model.aircraftPart.code === 'ENG', makePropeller: model.aircraftPart.code === 'PRP' }" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.aircraftPart" alias="'aircraftParts'" ng-required="true" l10n-text="aircrafts.aircraftPartDirective.aircraftPart" class="col-sm-4 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.partProducer" alias="'aircraftProducers'" params="{ makeRadio: model.aircraftPart.code === 'RAD', makeEngine: model.aircraftPart.code === 'ENG', makePropeller: model.aircraftPart.code === 'PRP' }"
+    ng-required="true" l10n-text="aircrafts.aircraftPartDirective.partProducer" class="col-sm-6 col-md-4"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-12 col-md-6" sc-has-error="model">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.model"></label>
-      <sc-validation-error field-name="model" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.model" name="model" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.model" ng-required="true" l10n-text="aircrafts.aircraftPartDirective.model" class="col-sm-12 col-md-6"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-12 col-md-6">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.modelAlt"></label>
-      <sc-text ng-model="model.modelAlt" name="modelAlt" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.modelAlt" l10n-text="aircrafts.aircraftPartDirective.modelAlt" class="col-sm-12 col-md-6"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-8 col-md-4">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.sn"></label>
-      <sc-text ng-model="model.sn" name="sn" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-4 col-md-2" sc-has-error="count">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.count"></label>
-      <sc-validation-error field-name="count" validations="{required: null}"></sc-validation-error>
-      <sc-int ng-model="model.count" name="count" ng-required="true" ng-readonly="readonly"></sc-int>
-    </div>
+    <sc-field type="text" ng-model="model.sn" l10n-text="aircrafts.aircraftPartDirective.sn" class="col-sm-8 col-md-4"></sc-field>
+    <sc-field type="int" ng-model="model.count" ng-required="true" l10n-text="aircrafts.aircraftPartDirective.count" class="col-sm-4 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-4 col-md-2" sc-has-error="aircraftPartStatus">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.aircraftPartStatus"></label>
-      <sc-validation-error field-name="aircraftPartStatus" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftPartStatus" name="aircraftPartStatus" alias="'aircraftPartStatuses'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-4 col-md-2">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.manDate"></label>
-      <sc-date ng-model="model.manDate" name="manDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-4 col-md-2">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.manPlace"></label>
-      <sc-text ng-model="model.manPlace" name="manPlace" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.aircraftPartStatus" alias="'aircraftPartStatuses'" ng-required="true" l10n-text="aircrafts.aircraftPartDirective.aircraftPartStatus" class="col-sm-4 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.manDate" l10n-text="aircrafts.aircraftPartDirective.manDate" class="col-sm-4 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.manPlace" l10n-text="aircrafts.aircraftPartDirective.manPlace" class="col-sm-4 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-12 col-md-6">
-      <label class="control-label" l10n-text="aircrafts.aircraftPartDirective.description"></label>
-      <sc-textarea rows="3" ng-model="model.description" name="description" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" rows="3" ng-model="model.description" l10n-text="aircrafts.aircraftPartDirective.description" class="col-sm-12 col-md-6"></sc-field>
   </div>
-
 </ng-form>

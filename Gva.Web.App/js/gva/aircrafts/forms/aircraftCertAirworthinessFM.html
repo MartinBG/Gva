@@ -1,36 +1,19 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="aircraftCertificateType">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType"></label>
-      <sc-validation-error field-name="aircraftCertificateType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.aircraftCertificateType" name="aircraftCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="registration">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.registration"></label>
-      <sc-validation-error field-name="registration" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.registration" name="registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" ng-readonly="readonly || $parent.isEdit"></sc-nomenclature>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.certNumber"></label>
-      <sc-text ng-model="model.certNumber" name="certNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="issueDate">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
-      <sc-validation-error field-name="issueDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.aircraftCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <gva-aircraft-inspector ng-model="model.inspector" sc-data-show-inspectors="true" sc-data-is-readonly="readonly"></gva-aircraft-inspector>
+    <sc-field type="nomenclature" ng-model="model.registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.certNumber" l10n-text="aircrafts.airworthinessFMDirective.certNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
-
+  <div class="row">
+    <gva-aircraft-inspector ng-model="model.inspector" sc-data-show-inspectors="true" sc-data-is-readonly="form.$readonly"></gva-aircraft-inspector>
+  </div>
   <div class="row" ng-hide="hideApplications">
     <div class="form-group col-sm-10 col-md-4">
       <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'aircraft'" ng-readonly="readonly"></gva-applications>
+      <gva-applications ng-model="model.applications" set-part="'aircraft'" ng-readonly="form.$readonly"></gva-applications>
     </div>
   </div>
 </ng-form>

@@ -1,27 +1,24 @@
-﻿<ng-form name="editDocumentMedicalForm" sc-validate="{}">
+<ng-form name="editDocumentMedicalForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.editMedical.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="persons.editMedical.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editMedical.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteMedical()" text="persons.editMedical.deleteMed"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteMedical()" text="persons.editMedical.deleteMed" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="persons.editMedical.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editMedical.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editMedical.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editMedical.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part" readonly="!editMode"></gva-person-document-medical>
+      <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files" readonly="!editMode" sc-data-set-part="'person'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files" sc-data-set-part="'person'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

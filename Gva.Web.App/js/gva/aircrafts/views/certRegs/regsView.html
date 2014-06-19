@@ -1,5 +1,5 @@
 ﻿<div ng-show="!regs.notRegistered">
-  <ng-form name="viewCertForm" class="card">
+  <ng-form name="viewCertForm" class="card" sc-form-readonly>
       <div class="well well-sm" ng-show="regs.firstReg && regs.lastReg">
         <div class="row">
           <div class="col-sm-12">
@@ -42,17 +42,17 @@
       </div>
   </ng-form>
 
-  <gva-aircraft-cert-register-view name="aircraftCertRegisterForm" ng-model="reg.part"></gva-aircraft-cert-register-view>
+  <gva-aircraft-cert-register-view name="aircraftCertRegisterForm" ng-model="reg.part" sc-form-readonly="true"></gva-aircraft-cert-register-view>
 
-  <gva-aircraft-cert-airworthiness-view name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness-view>
+  <gva-aircraft-cert-airworthiness-view name="aircraftCertAirworthinessForm" ng-model="aw.part" sc-form-readonly="true"></gva-aircraft-cert-airworthiness-view>
 
-  <ng-form class="form-inline">
+  <ng-form class="form-inline" sc-form-readonly>
     <div class="panel panel-default">
       <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
       <div class="well-sm panel-body">
          <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
            <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
-             <sc-link-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-link-button>
+             <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
            </sc-column>
            <sc-column data="part.certId" title="aircrafts.debtSearchFM.certId">
            </sc-column>

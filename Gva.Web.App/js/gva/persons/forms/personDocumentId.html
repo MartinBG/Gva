@@ -1,50 +1,17 @@
-﻿<ng-form class="form-inline"  sc-validate="{}">
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-6 col-md-4" sc-has-error="personDocumentIdType">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.personDocumentIdTypeId"></label>
-      <sc-validation-error field-name="personDocumentIdType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.documentType" name="personDocumentIdType" alias="'documentTypes'" params="{ isIdDocument: true }" load="false" ng-required="true" ng-readonly="readonly">
-      </sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="documentNumber">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentNumber"></label>
-      <sc-validation-error field-name="documentNumber" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.documentNumber" name="documentNumber" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.valid" name="valid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.documentType" alias="'documentTypes'" params="{ isIdDocument: true }" load="false" ng-required="true" l10n-text="persons.personDocumentIdDirective.personDocumentIdTypeId" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="text" ng-model="model.documentNumber" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personDocumentIdDirective.valid" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDateValidFrom">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentDateValidFrom"></label>
-      <sc-validation-error field-name="documentDateValidFrom" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.documentDateValidFrom" name="documentDateValidFrom" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="documentDateValidTo">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentDateValidTo"></label>
-      <sc-validation-error field-name="documentDateValidTo" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.documentDateValidTo" name="documentDateValidTo" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.documentDateValidTo" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-12 col-md-8" sc-has-error="documentPublisher">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.documentPublisher"></label>
-      <sc-validation-error field-name="documentPublisher" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.documentPublisher" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentPublisher" class="col-sm-12 col-md-8"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-12 col-md-8">
-      <label class="control-label" l10n-text="persons.personDocumentIdDirective.notes"></label>
-      <sc-textarea rows="3" ng-model="model.notes" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" rows="3" ng-model="model.notes" l10n-text="persons.personDocumentIdDirective.notes" class="col-sm-12 col-md-8"></sc-field>
   </div>
-
 </ng-form>

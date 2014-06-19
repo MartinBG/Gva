@@ -1,67 +1,61 @@
-﻿<ng-form class="form-inline">
+<ng-form class="form-inline" sc-form-readonly>
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <strong l10n-text="aircrafts.regViewDirective.title"></strong>
-       <div class="pull-right">
-         <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat"  ng-show="model.isActive && model.isCurrent"></sc-button>
-         <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle" ng-show="model.isActive"></sc-button>
-         <sc-link-button name="viewButton" sc-sref="{state: 'root.aircrafts.view.regsFM.edit', params: {id: aircraftId, ind: $parent.reg.partIndex}}" text="aircrafts.regViewDirective.view" class="btn btn-xs btn-primary" icon="glyphicon-search"></sc-link-button>
-       </div>
+    <div class="panel-heading"> <strong l10n-text="aircrafts.regViewDirective.title"></strong>
+
+      <div class="pull-right">
+        <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat" ng-show="model.isActive && model.isCurrent"></sc-button>
+        <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
+        <sc-link-button name="viewButton" sc-sref="{state: 'root.aircrafts.view.regsFM.edit', params: {id: aircraftId, ind: $parent.reg.partIndex}}" text="aircrafts.regViewDirective.view" class="btn btn-xs btn-primary" icon="glyphicon-search"></sc-link-button>
+      </div>
     </div>
     <div class="well-sm panel-body">
       <div class="row">
         <div class="form-group col-md-2 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.register"></label>
-          <input disabled name="register" type="text" class="form-control input-sm" value="{{model.register.name}}" />
+          <input disabled name="register" type="text" class="form-control input-sm" value="{{model.register.name}}">
         </div>
         <div class="form-group col-md-1 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.certNumber"></label>
-          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.register.textContent.regPrefix + model.certNumber}}" />
+          <input disabled name="certNumber" type="text" class="form-control input-sm" value="{{model.register.textContent.regPrefix + model.certNumber}}">
         </div>
         <div class="form-group col-md-1 col-sm-3">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.actNumber"></label>
-          <input disabled name="actNumber" type="text" class="form-control input-sm" value="{{model.actNumber}}" />
+          <input disabled name="actNumber" type="text" class="form-control input-sm" value="{{model.actNumber}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.regMark"></label>
-          <input disabled name="regMark" type="text" class="form-control input-sm" value="{{model.regMark}}" />
+          <input disabled name="regMark" type="text" class="form-control input-sm" value="{{model.regMark}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.certDate"></label>
-          <input disabled name="certDate" type="text" class="form-control input-sm" value="{{model.certDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="certDate" type="text" class="form-control input-sm" value="{{model.certDate | date: 'dd.MM.yyyy'}}">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.incomingDocNumber"></label>
-          <input disabled name="incomingDocNumber" type="text" class="form-control input-sm" value="{{model.incomingDocNumber}}" />
+          <input disabled name="incomingDocNumber" type="text" class="form-control input-sm" value="{{model.incomingDocNumber}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.incomingDocDate"></label>
-          <input disabled name="incomingDocDate" type="text" class="form-control input-sm" value="{{model.incomingDocDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="incomingDocDate" type="text" class="form-control input-sm" value="{{model.incomingDocDate | date: 'dd.MM.yyyy'}}">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.owner"></label>
-          <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.ownerIsOrg? model.ownerOrganization.name : model.ownerPerson.name}}" />
+          <input disabled name="owner" type="text" class="form-control input-sm" value="{{model.ownerIsOrg? model.ownerOrganization.name : model.ownerPerson.name}}">
         </div>
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.oper"></label>
-          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operIsOrg? model.operOrganization.name : model.operPerson.name}}" />
+          <input disabled name="oper" type="text" class="form-control input-sm" value="{{model.operIsOrg? model.operOrganization.name : model.operPerson.name}}">
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.catAW"></label>
-          <sc-nomenclature ng-model="model.catAW" name="catAW" alias="'aircraftCatAWsFm'" ng-readonly="true" multiple></sc-nomenclature>
-        </div>
+        <sc-field type="nomenclature" ng-model="model.catAW" alias="'aircraftCatAWs'" multiple l10n-text="aircrafts.regViewDirective.catAW" class="col-md-8 col-sm-12"></sc-field>
       </div>
       <div class="row">
-        <div class="form-group col-md-8 col-sm-12">
-          <label class="control-label" l10n-text="aircrafts.regViewDirective.limitations"></label>
-          <sc-nomenclature ng-model="model.limitations" name="limitation" alias="'aircraftLimitationsFm'" ng-readonly="true" multiple></sc-nomenclature>
-        </div>
+        <sc-field type="nomenclature" ng-model="model.limitations" alias="'aircraftLimitationsFm'" multiple l10n-text="aircrafts.regViewDirective.limitations" class="col-md-8 col-sm-12"></sc-field>
       </div>
     </div>
   </div>

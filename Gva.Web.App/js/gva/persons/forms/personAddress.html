@@ -1,19 +1,15 @@
-﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.addressType" alias="'addressTypes'" params="{ type: 'P' }" ng-required="true" l10n-text="persons.personAddressDirective.addressType" class="col-md-3 col-sm-4"></sc-field>
     <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personAddressDirective.valid" class="col-sm-2"></sc-field>
   </div>
-
   <div class="row">
     <sc-field type="text" ng-model="model.address" ng-required="true" l10n-text="persons.personAddressDirective.address" class="col-sm-6 col-md-4"></sc-field>
     <sc-field type="text" ng-model="model.addressAlt" ng-required="true" l10n-text="persons.personAddressDirective.addressAlt" class="col-sm-6 col-md-4"></sc-field>
   </div>
-
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.settlement" alias="'cities'" ng-required="true" l10n-text="persons.personAddressDirective.settlement" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="text" ng-model="model.postalCode" l10n-text="persons.personAddressDirective.postalCode" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="text" ng-model="model.phone" l10n-text="persons.personAddressDirective.phone" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
 </ng-form>

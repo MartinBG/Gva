@@ -1,22 +1,9 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-4 col-md-3" sc-has-error="auditPartRequirement">
-      <label class="control-label" l10n-text="organizations.auditplanDirective.auditPartRequirement"></label>
-      <sc-validation-error field-name="auditPartRequirement" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.auditPartRequirement" name="auditPartRequirement" alias="'auditPartRequirements'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.auditPartRequirement" alias="'auditPartRequirements'" ng-required="true" l10n-text="organizations.auditplanDirective.auditPartRequirement" class="col-sm-4 col-md-3"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-2 col-md-2">
-      <label class="control-label" l10n-text="organizations.auditplanDirective.planYear"></label>
-      <sc-text ng-model="model.planYear" name="planYear" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-2 col-md-2">
-      <label class="control-label" l10n-text="organizations.auditplanDirective.planMonth"></label>
-      <sc-text ng-model="model.planMonth" name="planMonth" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.planYear" l10n-text="organizations.auditplanDirective.planYear" class="col-sm-2 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.planMonth" l10n-text="organizations.auditplanDirective.planMonth" class="col-sm-2 col-md-2"></sc-field>
   </div>
-
 </ng-form>

@@ -1,23 +1,21 @@
-﻿<ng-form name="editDocumentOperForm" sc-validate="{}">
+<ng-form name="editDocumentOperForm" sc-validate="{}" sc-form-readonly="!editMode && !backFromChild">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="airports.editOper.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="airports.editOper.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
+        <sc-button name="editBtn" btn-click="edit()" text="airports.editOper.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteOper()" text="airports.editOper.deleteOper"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" >
+        <sc-button name="deleteBtn" btn-click="deleteOper()" text="airports.editOper.deleteOper" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="airports.editOper.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="airports.editOper.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.editOper.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.editOper.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
-  <div class="well-sm panel-body">
-    <gva-airport-cert-operational operational="airportCertOperForm" ng-model="airportCertOper.part" readonly="!editMode && !backFromChild"></gva-airport-cert-operational>
+    <div class="well-sm panel-body">
+      <gva-airport-cert-operational operational="airportCertOperForm" ng-model="airportCertOper.part"></gva-airport-cert-operational>
+    </div>
   </div>
 </ng-form>

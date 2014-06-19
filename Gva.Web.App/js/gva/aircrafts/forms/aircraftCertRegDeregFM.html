@@ -1,77 +1,39 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="removalDate">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalDate"></label>
-      <sc-validation-error field-name="removalDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.date" name="removalDate" ng-required="true" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="removalReason">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalReason"></label>
-      <sc-validation-error field-name="removalReason" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.reason" name="removalReason" alias="'aircraftRemovalReasonsFm'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="date" ng-model="model.date" ng-required="true" l10n-text="aircrafts.regFMDirective.removalDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.reason" alias="'aircraftRemovalReasonsFm'" ng-required="true" l10n-text="aircrafts.regFMDirective.removalReason" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-10 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalText"></label>
-      <sc-textarea rows="2" ng-model="model.text" name="removalText" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" rows="2" ng-model="model.text" l10n-text="aircrafts.regFMDirective.removalText" class="col-md-10 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalDocumentNumber"></label>
-      <sc-text ng-model="model.documentNumber" name="removalDocumentNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalDocumentDate"></label>
-      <sc-date ng-model="model.documentDate" name="removalDocumentDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalInspector"></label>
-      <sc-nomenclature ng-model="model.inspector" name="removalInspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.regFMDirective.removalDocumentNumber" class="col-md-4 col-sm-8"></sc-field>
+    <sc-field type="date" ng-model="model.documentDate" l10n-text="aircrafts.regFMDirective.removalDocumentDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.inspector" alias="'inspectors'" l10n-text="aircrafts.regFMDirective.removalInspector" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalCountry"></label>
-      <sc-nomenclature ng-model="model.country" name="removalCountry" alias="'countries'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.country" alias="'countries'" l10n-text="aircrafts.regFMDirective.removalCountry" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalNotes"></label>
-      <sc-textarea ng-model="model.notes" name="removalNotes" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" ng-model="model.notes" l10n-text="aircrafts.regFMDirective.removalNotes" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="aircrafts.regFMDirective.removalNotesAlt"></label>
-      <sc-textarea ng-model="model.notesAlt" name="removalNotesAlt" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" ng-model="model.notesAlt" l10n-text="aircrafts.regFMDirective.removalNotesAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
-
   <h5 class="form-header" l10n-text="aircrafts.regFMDirective.export" style="margin-top:10px;"></h5>
-  <button class="btn btn-xs btn-default pull-right" ng-click="model.export = {}" style="position:relative; top:-25px" ng-disabled="readonly">
-    <span class="glyphicon glyphicon-plus"></span>
+
+  <button class="btn btn-xs btn-default pull-right" ng-click="model.export = {}" style="position:relative; top:-25px" ng-disabled="readonly"> <span class="glyphicon glyphicon-plus"></span>
+
   </button>
   <div ng-show="model.export">
     <div class="row">
-      <div class="form-group col-md-8 col-sm-12">
-        <label class="control-label" l10n-text="aircrafts.regFMDirective.text"></label>
-        <sc-textarea ng-model="model.export.text" name="text" ng-readonly="readonly"></sc-textarea>
-      </div>
+      <sc-field type="text" ng-model="model.export.text" l10n-text="aircrafts.regFMDirective.text" class="col-md-8 col-sm-12"></sc-field>
     </div>
     <div class="row">
-      <div class="form-group col-md-8 col-sm-12">
-        <label class="control-label" l10n-text="aircrafts.regFMDirective.textAlt"></label>
-        <sc-textarea ng-model="model.export.textAlt" name="textAlt" ng-readonly="readonly"></sc-textarea>
-      </div>
+      <sc-field type="text" ng-model="model.export.textAlt" l10n-text="aircrafts.regFMDirective.textAlt" class="col-md-8 col-sm-12"></sc-field>
     </div>
     <div class="row">
-      <div class="form-group col-md-4 col-sm-8">
-        <label class="control-label" l10n-text="aircrafts.regFMDirective.aircraftNewOld"></label>
-        <sc-nomenclature ng-model="model.export.aircraftNewOld" name="aircraftNewOld" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
-      </div>
+      <sc-field type="nomenclature" ng-model="model.export.aircraftNewOld" alias="'boolean'" l10n-text="aircrafts.regFMDirective.aircraftNewOld" class="col-md-4 col-sm-8"></sc-field>
     </div>
   </div>
 </ng-form>

@@ -1,8 +1,9 @@
-﻿<ng-form name="editLicenceForm" sc-validate="{}">
+<ng-form name="editLicenceForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit' && !backFromChild">
   <h5 class="form-header" l10n-text="persons.editLicence.editions"></h5>
+
   <div>
     <sc-datatable items="licence.part.editions" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-      <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
         <input type="radio" ng-checked="item === currentEdition" sc-click="selectEdition(item)">
       </sc-column>
       <sc-column title="persons.editLicence.documentDateValidFrom" has-content="true">
@@ -30,9 +31,9 @@
         {{item.pageCount}}
       </sc-column>
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <a target="_self" ng-hide="item.index === undefined"
-          ng-href="/api/print?lotId={{lotId}}&path=licences/{{licence.partIndex}}&index={{item.index}}">
+        <a target="_self" ng-hide="item.index === undefined" ng-href="/api/print?lotId={{lotId}}&path=licences/{{licence.partIndex}}&index={{item.index}}">
           <span class="glyphicon glyphicon-print"></span>
+
         </a>
       </sc-column>
     </sc-datatable>
@@ -42,25 +43,16 @@
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.editLicence.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="createBtn" btn-click="newEdition()" text="persons.editLicence.newEdition"
-          class="btn btn-primary btn-xs" icon="glyphicon-plus"
-          ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition">
+        <sc-button name="createBtn" btn-click="newEdition()" text="persons.editLicence.newEdition" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition">
         </sc-button>
-        <sc-button name="editBtn" btn-click="editLastEdition()" text="persons.editLicence.editLastEdition"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit"
-          ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition">
+        <sc-button name="editBtn" btn-click="editLastEdition()" text="persons.editLicence.editLastEdition" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteLastEdition(item)" text="persons.editLicence.deleteLastEdition"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove"
-          ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition"></sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="persons.editLicence.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"
-          ng-show="editMode || backFromChild">
+        <sc-button name="deleteBtn" btn-click="deleteLastEdition(item)" text="persons.editLicence.deleteLastEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" ng-disabled="currentEdition !== lastEdition"></sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editLicence.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editLicence.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle"
-          ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editLicence.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
@@ -68,10 +60,12 @@
     <div class="well-sm panel-body">
 
       <h5 class="form-header" l10n-text="persons.editLicence.licenceForm"></h5>
-      <gva-licence name="licenceForm" ng-model="licence.part" sc-data-is-new="false" readonly="editMode !== 'edit' && !backFromChild"></gva-licence>
+
+      <gva-licence name="licenceForm" ng-model="licence.part" sc-data-is-new="false"></gva-licence>
 
       <h5 class="form-header" l10n-text="persons.editLicence.editionForm"></h5>
-      <gva-licence-edition name="licenceEditionForm" ng-model="currentEdition" sc-data-staff-type="licence.part.staffType" readonly="editMode !== 'edit' && !backFromChild"></gva-licence-edition>
+
+      <gva-licence-edition name="licenceEditionForm" ng-model="currentEdition" sc-data-staff-type="licence.part.staffType"></gva-licence-edition>
 
     </div>
   </div>

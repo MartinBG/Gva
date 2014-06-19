@@ -1,65 +1,28 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-4 col-md-3">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.certNumber"></label>
-      <sc-int ng-model="model.certNumber" ng-readonly="readonly"></sc-int>
-    </div>
+    <sc-field type="int" ng-model="model.certNumber" l10n-text="organizations.organizationRegisterDirective.certNumber" class="col-sm-4 col-md-3"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.issueDate"></label>
-      <sc-date ng-model="model.issueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.validToDate"></label>
-      <sc-date ng-model="model.validToDate" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="date" ng-model="model.issueDate" l10n-text="organizations.organizationRegisterDirective.issueDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.validToDate" l10n-text="organizations.organizationRegisterDirective.validToDate" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.organization"></label>
-      <sc-nomenclature ng-model="model.organization" alias="'organizations'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.airport"></label>
-      <sc-nomenclature ng-model="model.airport" alias="'airports'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="organizations.organizationRegisterDirective.organization" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.airport" alias="'airports'" l10n-text="organizations.organizationRegisterDirective.airport" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-6 col-md-4">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.address"></label>
-      <sc-text ng-model="model.address" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.address" l10n-text="organizations.organizationRegisterDirective.address" class="col-sm-6 col-md-4"></sc-field>
   </div>
-
   <div class="row" ng-if="$parent.organizationRegAirportOperator">
-    <div class="form-group col-sm-5 col-md-4">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.activityTypes"></label>
-      <sc-nomenclature ng-model="model.airportoperatorActivityTypes" alias="'airportoperatorActivityTypes'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.airportoperatorActivityTypes" alias="'airportoperatorActivityTypes'" multiple="multiple" l10n-text="organizations.organizationRegisterDirective.activityTypes" class="col-sm-5 col-md-4"></sc-field>
   </div>
-
   <div class="row" ng-if="$parent.organizationRegGroundServiceOperator">
-    <div class="form-group col-sm-5 col-md-4">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.activityTypes"></label>
-      <sc-nomenclature ng-model="model.groundServiceOperatorActivityTypes" alias="'groundServiceOperatorActivityTypes'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.groundServiceOperatorActivityTypes" alias="'groundServiceOperatorActivityTypes'" multiple="multiple" l10n-text="organizations.organizationRegisterDirective.activityTypes" class="col-sm-5 col-md-4"></sc-field>
   </div>
-
   <h5 class="form-header" l10n-text="organizations.organizationRegisterDirective.revokeTitle"></h5>
-  <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.revokeDate"></label>
-      <sc-date ng-model="model.revokeDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationRegisterDirective.revokeCause"></label>
-      <sc-text ng-model="model.revokeCause" ng-readonly="readonly"></sc-text>
-    </div>
-  </div>
 
+  <div class="row">
+    <sc-field type="date" ng-model="model.revokeDate" l10n-text="organizations.organizationRegisterDirective.revokeDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.revokeCause" l10n-text="organizations.organizationRegisterDirective.revokeCause" class="col-sm-3 col-md-2"></sc-field>
+  </div>
 </ng-form>

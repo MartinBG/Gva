@@ -1,26 +1,23 @@
-﻿<ng-form name="editCertMarkForm" sc-validate="{}">
+<ng-form name="editCertMarkForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editMark.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editMark.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editMark.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteMark()" text="aircrafts.editMark.deleteMark"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteMark()" text="aircrafts.editMark.deleteMark" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editMark.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editMark.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editMark.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editMark.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-mark name="aircraftCertMarkForm" ng-model="mark.part" readonly="!editMode"></gva-aircraft-cert-mark>
-      
+      <gva-aircraft-cert-mark name="aircraftCertMarkForm" ng-model="mark.part"></gva-aircraft-cert-mark>
+
       <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="mark.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>
   </div>

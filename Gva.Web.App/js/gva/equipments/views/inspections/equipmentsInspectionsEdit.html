@@ -1,24 +1,22 @@
-﻿<ng-form name="editInspectionForm" sc-validate="{}">
+<ng-form name="editInspectionForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="equipments.editInspection.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="equipments.editInspection.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="equipments.editInspection.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteInspection()" text="equipments.editInspection.deleteInspection"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteInspection()" text="equipments.editInspection.deleteInspection" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="equipments.editInspection.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="equipments.editInspection.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="equipments.editInspection.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="equipments.editInspection.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
-  <div class="well-sm panel-body">
-    <gva-common-inspection name="equipmentInspectionForm" ng-model="equipmentInspection" readonly="!editMode" sc-data-set-part="'equipment'"></gva-common-inspection>
+    <div class="well-sm panel-body">
+      <gva-common-inspection name="equipmentInspectionForm" ng-model="equipmentInspection" sc-data-set-part="'equipment'"></gva-common-inspection>
+    </div>
   </div>
 </ng-form>

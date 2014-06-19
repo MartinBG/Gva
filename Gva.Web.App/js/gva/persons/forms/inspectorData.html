@@ -1,29 +1,10 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
-
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-9 col-lg-6">
-      <label class="control-label" l10n-text="persons.inspectorDataDirective.caa"></label>
-      <sc-nomenclature ng-model="model.caa" alias="'caa'" name="caa" ng-readonly="true"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.caa" alias="'caa'" l10n-text="persons.inspectorDataDirective.caa" class="col-sm-9 col-lg-6"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-lg-2" sc-has-error="examinerCode">
-      <label class="control-label" l10n-text="persons.inspectorDataDirective.examinerCode"></label>
-      <sc-validation-error field-name="examinerCode" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.examinerCode" name="examinerCode" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-
-    <div class="form-group col-sm-3 col-lg-2">
-      <label class="control-label" l10n-text="persons.inspectorDataDirective.stampNum"></label>
-      <sc-text ng-model="model.stampNum" name="stampNum" ng-readonly="readonly"></sc-text>
-    </div>
-
-    <div class="form-group col-sm-3 col-lg-2" sc-has-error="isValid">
-      <label class="control-label" l10n-text="persons.inspectorDataDirective.isValid"></label>
-      <sc-validation-error field-name="isValid" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.valid" name="isValid" alias="'boolean'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="text" ng-model="model.examinerCode" ng-required="true" l10n-text="persons.inspectorDataDirective.examinerCode" validations="{required: 'default'}" class="col-sm-3 col-lg-2"></sc-field>
+    <sc-field type="text" ng-model="model.stampNum" l10n-text="persons.inspectorDataDirective.stampNum" class="col-sm-3 col-lg-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="persons.inspectorDataDirective.isValid" validations="{required: 'default'}" class="col-sm-3 col-lg-2"></sc-field>
   </div>
-
 </ng-form>

@@ -1,25 +1,22 @@
-﻿<ng-form name="editCertAirworthinessForm" sc-validate="{}">
+<ng-form name="editCertAirworthinessForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editAirworthiness.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editAirworthiness.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editAirworthiness.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteAirworthiness()" text="aircrafts.editAirworthiness.deleteAirworthiness"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteAirworthiness()" text="aircrafts.editAirworthiness.deleteAirworthiness" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editAirworthiness.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editAirworthiness.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness name="aircraftCertAirworthinessForm" ng-model="aw.part" readonly="!editMode"></gva-aircraft-cert-airworthiness>
+      <gva-aircraft-cert-airworthiness name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness>
 
       <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>

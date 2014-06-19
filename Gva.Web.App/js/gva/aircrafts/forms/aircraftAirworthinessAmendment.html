@@ -1,29 +1,14 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.issueDate"></label>
-      <sc-date ng-model="model.issueDate" name="issueDate" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.validToDate"></label>
-      <sc-date ng-model="model.validToDate" name="validToDate" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="date" ng-model="model.issueDate" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.validToDate" l10n-text="aircrafts.airworthinessFMDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <gva-aircraft-inspector ng-model="model.inspector" sc-data-show-inspectors="false" sc-data-is-readonly="readonly"> </gva-aircraft-inspector>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.approvalNumber"></label>
-      <sc-text ng-model="model.approvalNumber" name="approvalNumber" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.refNumber"></label>
-      <sc-text ng-model="model.refNumber" name="refNumber" ng-readonly="readonly"></sc-text>
-    </div>
+    <gva-aircraft-inspector ng-model="model.inspector" sc-data-show-inspectors="false" sc-data-is-readonly="form.$readonly"></gva-aircraft-inspector>
+    <sc-field type="text" ng-model="model.approvalNumber" l10n-text="aircrafts.airworthinessFMDirective.approvalNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.refNumber" l10n-text="aircrafts.airworthinessFMDirective.refNumber" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.organzation"></label>
-      <sc-nomenclature ng-model="model.organzation" name="organzation" alias="'organzations'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.organzation" alias="'organzations'" l10n-text="aircrafts.airworthinessFMDirective.organzation" class="col-md-4 col-sm-8"></sc-field>
   </div>
 </ng-form>

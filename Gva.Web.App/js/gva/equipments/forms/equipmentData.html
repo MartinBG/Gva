@@ -1,50 +1,21 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="equipmentType">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.equipmentType"></label>
-      <sc-validation-error field-name="equipmentType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.equipmentType" name="equipmentType" alias="'equipmentTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.equipmentType" alias="'equipmentTypes'" ng-required="true" l10n-text="equipments.equipmentDataDirective.equipmentType" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="name">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.name"></label>
-      <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.name" name="name" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="equipmentProducer">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.equipmentProducer"></label>
-      <sc-validation-error field-name="equipmentProducer" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.equipmentProducer" name="equipmentProducer" alias="'equipmentProducers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="text" ng-model="model.name" ng-required="true" l10n-text="equipments.equipmentDataDirective.name" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.equipmentProducer" alias="'equipmentProducers'" ng-required="true" l10n-text="equipments.equipmentDataDirective.equipmentProducer" class="col-md-4 col-sm-6"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="manPlace">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.manPlace"></label>
-      <sc-validation-error field-name="manPlace" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.manPlace" name="manPlace" ng-readonly="readonly" ng-required="true"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4" sc-has-error="manDate">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.manDate"></label>
-      <sc-validation-error field-name="manDate" validations="{required: null}"></sc-validation-error>
-      <sc-date ng-model="model.manDate" name="manDate" ng-readonly="readonly" ng-required="true"></sc-date>
-    </div>
+    <sc-field type="text" ng-model="model.manPlace" ng-required="true" l10n-text="equipments.equipmentDataDirective.manPlace" class="col-md-4 col-sm-8"></sc-field>
+    <sc-field type="date" ng-model="model.manDate" ng-required="true" l10n-text="equipments.equipmentDataDirective.manDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.manPlace"></label>
-      <sc-text ng-model="model.place" name="place" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.manDate"></label>
-      <sc-date ng-model="model.operationalDate" name="operationalDate" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="text" ng-model="model.place" l10n-text="equipments.equipmentDataDirective.manPlace" class="col-md-4 col-sm-8"></sc-field>
+    <sc-field type="date" ng-model="model.operationalDate" l10n-text="equipments.equipmentDataDirective.manDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-8 col-sm-12">
-      <label class="control-label" l10n-text="equipments.equipmentDataDirective.note"></label>
-      <sc-textarea ng-model="model.note" name="note" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" ng-model="model.note" l10n-text="equipments.equipmentDataDirective.note" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <accordion>
     <accordion-group style="margin-top: 5px;">
@@ -52,36 +23,15 @@
         <a l10n-text="equipments.equipmentDataDirective.otherData" style="font-size: 12px;"></a>
       </accordion-heading>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.coordinates"></label>
-          <sc-text ng-model="model.ext.coordinates" name="coordinates" ng-readonly="readonly"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.elevation"></label>
-          <sc-text ng-model="model.ext.elevation" name="elevation" ng-readonly="readonly"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.call"></label>
-          <sc-text ng-model="model.ext.call" name="call" ng-readonly="readonly"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.frequencies"></label>
-          <sc-text ng-model="model.ext.frequencies" name="frequencies" ng-readonly="readonly"></sc-text>
-        </div>
+        <sc-field type="text" ng-model="model.ext.coordinates" l10n-text="equipments.equipmentDataDirective.coordinates" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="text" ng-model="model.ext.elevation" l10n-text="equipments.equipmentDataDirective.elevation" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="text" ng-model="model.ext.call" l10n-text="equipments.equipmentDataDirective.call" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="text" ng-model="model.ext.frequencies" l10n-text="equipments.equipmentDataDirective.frequencies" class="col-md-2 col-sm-4"></sc-field>
       </div>
       <div class="row">
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.behavior"></label>
-          <sc-text ng-model="model.ext.behavior" name="behavior" ng-readonly="readonly"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.power"></label>
-          <sc-text ng-model="model.ext.power" name="power" ng-readonly="readonly"></sc-text>
-        </div>
-        <div class="form-group col-md-2 col-sm-4">
-          <label class="control-label" l10n-text="equipments.equipmentDataDirective.range"></label>
-          <sc-text ng-model="model.ext.range" name="range" ng-readonly="readonly"></sc-text>
-        </div>
+        <sc-field type="text" ng-model="model.ext.behavior" l10n-text="equipments.equipmentDataDirective.behavior" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="text" ng-model="model.ext.power" l10n-text="equipments.equipmentDataDirective.power" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="text" ng-model="model.ext.range" l10n-text="equipments.equipmentDataDirective.range" class="col-md-2 col-sm-4"></sc-field>
       </div>
     </accordion-group>
   </accordion>

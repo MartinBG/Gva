@@ -1,66 +1,36 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="airportType">
-      <label class="control-label" l10n-text="airports.airportDataDirective.airportType"></label>
-      <sc-validation-error field-name="airportType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.airportType" name="airportType" alias="'airportTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.airportType" alias="'airportTypes'" ng-required="true" l10n-text="airports.airportDataDirective.airportType" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="name">
-      <label class="control-label" l10n-text="airports.airportDataDirective.name"></label>
-      <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.name" name="name" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-4 col-sm-6" sc-has-error="nameAlt">
-      <label class="control-label" l10n-text="airports.airportDataDirective.nameAlt"></label>
-      <sc-validation-error field-name="nameAlt" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.nameAlt" name="nameAlt" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="airports.airportDataDirective.icao"></label>
-      <sc-text ng-model="model.icao" name="icao" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.name" ng-required="true" l10n-text="airports.airportDataDirective.name" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.nameAlt" ng-required="true" l10n-text="airports.airportDataDirective.nameAlt" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.icao" l10n-text="airports.airportDataDirective.icao" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="place">
-      <label class="control-label" l10n-text="airports.airportDataDirective.place"></label>
-      <sc-validation-error field-name="place" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.place" name="place" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.place" l10n-text="airports.airportDataDirective.place" class="col-md-4 col-sm-8"></sc-field>
     <div class="form-group col-sm-8 col-md-4" ng-class="{'has-error': (form.longitude.$invalid || form.latitude.$invalid) && form.$validated}">
       <label class="control-label" l10n-text="airports.airportDataDirective.coordinates"></label>
-      <span name="regTimeValidationSpan" ng-show="(form.longitude.$invalid || form.latitude.$invalid) && form.$validated"
-              class="glyphicon glyphicon-warning-sign"></span>
+      <span name="regTimeValidationSpan" ng-show="(form.longitude.$invalid || form.latitude.$invalid) && form.$validated" class="glyphicon glyphicon-warning-sign"></span>
       <div class="input-group input-group-sm">
         <span class="input-group-addon">N</span>
-        <sc-float name="longitude" ng-model="model.coordinates.longitude" min="-180" max="180" ng-readonly="readonly"></sc-float>
+        <sc-float name="longitude" ng-model="model.coordinates.longitude" min="-180" max="180" ng-readonly="form.$readonly"></sc-float>
+
         <span class="input-group-addon padding6">E</span>
-        <sc-float name="latitude" ng-model="model.coordinates.latitude" min="-180" max="180" ng-readonly="readonly"></sc-float>
+        <sc-float name="latitude" ng-model="model.coordinates.latitude" min="-180" max="180" ng-readonly="form.$readonly"></sc-float>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="airports.airportDataDirective.runway"></label>
-      <sc-text ng-model="model.runway" name="runway" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="airports.airportDataDirective.course"></label>
-      <sc-text ng-model="model.course" name="course" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="airports.airportDataDirective.excess"></label>
-      <sc-text ng-model="model.excess" name="excess" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-md-2 col-sm-4">
-      <label class="control-label" l10n-text="airports.airportDataDirective.concrete"></label>
-      <sc-text ng-model="model.concrete" name="concrete" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.runway" l10n-text="airports.airportDataDirective.runway" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.course" l10n-text="airports.airportDataDirective.course" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.excess" l10n-text="airports.airportDataDirective.excess" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.concrete" l10n-text="airports.airportDataDirective.concrete" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-10">
       <h5 class="form-header" l10n-text="airports.airportDataDirective.frequencies"></h5>
+
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -72,22 +42,22 @@
         <tbody>
           <tr ng-repeat-start="frequency in model.frequencies">
             <td>
-              <sc-text ng-model="frequency.frequency" ng-readonly="readonly"></sc-text>
+              <sc-text ng-model="frequency.frequency" ng-readonly="form.$readonly"></sc-text>
             </td>
             <td>
-              <sc-text ng-model="frequency.parameters" ng-readonly="readonly"></sc-text>
+              <sc-text ng-model="frequency.parameters" ng-readonly="form.$readonly"></sc-text>
             </td>
             <td style="text-align: right; width: 1px;">
-              <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteFrequency(frequency)" icon="glyphicon-remove" ng-disabled="readonly"></sc-button
+              <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteFrequency(frequency)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
             </td>
           </tr>
-          <tr ng-repeat-end></tr>
+          <tr ng-repeat-end=""></tr>
           <tr class="sort-disabled" ng-if="!model.frequencies.length">
             <td colspan="8" class="text-center" l10n-text="airports.airportDataDirective.noAvailableFrequencies"></td>
           </tr>
           <tr>
             <td colspan="3" style="text-align: right; width: 1px;">
-              <sc-button type="button" btn-click="addFrequency()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+              <sc-button type="button" btn-click="addFrequency()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="form.$readonly"></sc-button>
             </td>
           </tr>
         </tbody>
@@ -96,7 +66,8 @@
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-10">
-    <h5 class="form-header" l10n-text="airports.airportDataDirective.radioNavigationAids"></h5>
+      <h5 class="form-header" l10n-text="airports.airportDataDirective.radioNavigationAids"></h5>
+
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -108,22 +79,22 @@
         <tbody>
           <tr ng-repeat-start="aid in model.radioNavigationAids">
             <td>
-              <sc-text ng-model="aid.aid" ng-readonly="readonly"></sc-text>
+              <sc-text ng-model="aid.aid" ng-readonly="form.$readonly"></sc-text>
             </td>
             <td>
-              <sc-text ng-model="aid.parameters" ng-readonly="readonly"></sc-text>
+              <sc-text ng-model="aid.parameters" ng-readonly="form.$readonly"></sc-text>
             </td>
             <td style="text-align: right; width: 1px;">
-              <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteAid(aid)" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+              <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteAid(aid)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
             </td>
           </tr>
-          <tr ng-repeat-end></tr>
+          <tr ng-repeat-end=""></tr>
           <tr class="sort-disabled" ng-if="!model.radioNavigationAids.length">
             <td colspan="8" class="text-center" l10n-text="airports.airportDataDirective.noAvailableAids"></td>
           </tr>
           <tr>
             <td colspan="3" style="text-align: right; width: 1px;">
-              <sc-button type="button" btn-click="addAid()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+              <sc-button type="button" btn-click="addAid()" class="btn btn-primary btn-sm" icon="glyphicon-plus" ng-disabled="form.$readonly"></sc-button>
             </td>
           </tr>
         </tbody>

@@ -1,9 +1,10 @@
-﻿<ng-form name="editApprovalForm" sc-validate="{}">
+<ng-form name="editApprovalForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit' && !backFromChild">
   <h5 class="form-header" l10n-text="organizations.approvalEdit.amendments"></h5>
+
   <div>
 
     <sc-datatable items="approval.part.amendments" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-      <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
         <input type="radio" ng-checked="item === currentAmendment" sc-click="selectAmendment(item)">
       </sc-column>
       <sc-column title="organizations.approvalEdit.approvalType" has-content="true">
@@ -18,8 +19,8 @@
       <sc-column title="organizations.approvalEdit.documentFirstDateIssue" has-content="true">
         {{(approval.part.amendments | first).documentDateIssue | date:'mediumDate'}}
       </sc-column>
-      <sc-column  title="organizations.approvalEdit.documentDateIssueAmendment" has-content="true">
-         {{item.documentDateIssue | date:'mediumDate'}}
+      <sc-column title="organizations.approvalEdit.documentDateIssueAmendment" has-content="true">
+        {{item.documentDateIssue | date:'mediumDate'}}
       </sc-column>
       <sc-column title="organizations.approvalEdit.changeNumAmendment" has-content="true">
         {{item.changeNum}}
@@ -34,32 +35,29 @@
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.approvalEdit.title"></strong>
+
       <div class="pull-right">
-         <sc-button name="createBtn" btn-click="newAmendment()" text="organizations.approvalEdit.newAmendment"
-          class="btn btn-primary btn-xs" icon="glyphicon-plus"
-          ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="createBtn" btn-click="newAmendment()" text="organizations.approvalEdit.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="editBtn" btn-click="editLastAmendment()" text="organizations.approvalEdit.editLastAmendment"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="editBtn" btn-click="editLastAmendment()" text="organizations.approvalEdit.editLastAmendment" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteLastAmendment()" text="organizations.approvalEdit.deleteLastAmendment"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="deleteBtn" btn-click="deleteLastAmendment()" text="organizations.approvalEdit.deleteLastAmendment" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalEdit.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.approvalEdit.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.approvalEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
-    
+
     <div class="well-sm panel-body">
       <h5 class="form-header" l10n-text="organizations.approvalEdit.approvalForm"></h5>
-      <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part" sc-data-is-new="false" readonly="editMode !== 'edit' && !backFromChild"></gva-organization-approval>
+
+      <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part" sc-data-is-new="false"></gva-organization-approval>
 
       <h5 class="form-header" l10n-text="organizations.approvalEdit.amendmentForm"></h5>
-      <gva-organization-amendment name="organizationAmendmentForm" ng-model="currentAmendment" readonly="editMode !== 'edit' && !backFromChild">></gva-organization-amendment>
+
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="currentAmendment">></gva-organization-amendment>
     </div>
 
   </div>

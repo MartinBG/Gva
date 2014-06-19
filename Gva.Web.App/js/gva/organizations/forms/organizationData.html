@@ -1,112 +1,39 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-4 col-md-3" sc-has-error="name">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.name"></label>
-      <sc-validation-error field-name="name" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.name" name="name" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-4 col-md-3" sc-has-error="nameAlt">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.nameAlt"></label>
-      <sc-validation-error field-name="nameAlt" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.nameAlt" name="nameAlt" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.name" ng-required="true" l10n-text="organizations.organizationDataDirective.name" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="text" ng-model="model.nameAlt" ng-required="true" l10n-text="organizations.organizationDataDirective.nameAlt" class="col-sm-4 col-md-3"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="code">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.code"></label>
-      <sc-validation-error field-name="code" validations="{required: null}"></sc-validation-error>
-      <sc-text ng-model="model.code" name="code" ng-required="true" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.uin"></label>
-      <sc-text ng-model="model.uin" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="caseTypes">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.caseTypes"></label>
-      <sc-validation-error field-name="caseTypes" validations="{required: null, requiredValue: 'Задължително поле'}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.caseTypes" name="caseTypes" alias="'organizationCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="text" ng-model="model.code" ng-required="true" l10n-text="organizations.organizationDataDirective.code" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.uin" l10n-text="organizations.organizationDataDirective.uin" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.caseTypes" alias="'organizationCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple l10n-text="organizations.organizationDataDirective.caseTypes" validations="{requiredValue: 'Задължително поле'}"
+    class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.CAO"></label>
-      <sc-text ng-model="model.CAO" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.dateCAOFirstIssue"></label>
-      <sc-date ng-model="model.dateCAOFirstIssue" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.dateCAOLastIssue"></label>
-      <sc-date ng-model="model.dateCAOLastIssue" ng-readonly="readonly"></sc-date>
-    </div>
+    <sc-field type="text" ng-model="model.CAO" l10n-text="organizations.organizationDataDirective.CAO" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.dateCAOFirstIssue" l10n-text="organizations.organizationDataDirective.dateCAOFirstIssue" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.dateCAOLastIssue" l10n-text="organizations.organizationDataDirective.dateCAOLastIssue" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.dateCAOValidTo"></label>
-      <sc-date ng-model="model.dateCAOValidTo" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.dateValidTo"></label>
-      <sc-date ng-model="model.dateValidTo" ng-readonly="readonly"></sc-date>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="valid">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.valid"></label>
-      <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.valid" alias="'boolean'" name="valid" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <sc-field type="date" ng-model="model.dateCAOValidTo" l10n-text="organizations.organizationDataDirective.dateCAOValidTo" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.dateValidTo" l10n-text="organizations.organizationDataDirective.dateValidTo" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="organizations.organizationDataDirective.valid" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.ICAO"></label>
-      <sc-text ng-model="model.ICAO" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.IATA"></label>
-      <sc-text ng-model="model.IATA" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.SITA"></label>
-      <sc-text ng-model="model.SITA" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.ICAO" l10n-text="organizations.organizationDataDirective.ICAO" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.IATA" l10n-text="organizations.organizationDataDirective.IATA" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.SITA" l10n-text="organizations.organizationDataDirective.SITA" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="organizationType">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.organizationType"></label>
-        <sc-validation-error field-name="organizationType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.organizationType" name="organizationType" alias="'organizationTypes'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-3 col-md-2" sc-has-error="organizationKind">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.organizationKind"></label>
-        <sc-validation-error field-name="organizationKind" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.organizationKind" name="organizationKind" alias="'organizationKinds'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-    </div>
-      <div class="form-group col-sm-3 col-md-2">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.docRoom"></label>
-      <sc-text ng-model="model.docRoom" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.organizationType" alias="'organizationTypes'" ng-required="true" l10n-text="organizations.organizationDataDirective.organizationType" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.organizationKind" alias="'organizationKinds'" ng-required="true" l10n-text="organizations.organizationDataDirective.organizationKind" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.docRoom" l10n-text="organizations.organizationDataDirective.docRoom" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-4 col-md-3">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.phones"></label>
-      <sc-text ng-model="model.phones" ng-readonly="readonly"></sc-text>
-    </div>
-    <div class="form-group col-sm-4 col-md-3">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.webSite"></label>
-      <sc-text ng-model="model.webSite" ng-readonly="readonly"></sc-text>
-    </div>
+    <sc-field type="text" ng-model="model.phones" l10n-text="organizations.organizationDataDirective.phones" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="text" ng-model="model.webSite" l10n-text="organizations.organizationDataDirective.webSite" class="col-sm-4 col-md-3"></sc-field>
   </div>
-
   <div class="row">
-    <div class="form-group col-sm-8 col-md-6">
-      <label class="control-label" l10n-text="organizations.organizationDataDirective.notes"></label>
-      <sc-textarea rows="3" ng-model="model.notes" ng-readonly="readonly"></sc-textarea>
-    </div>
+    <sc-field type="text" rows="3" ng-model="model.notes" l10n-text="organizations.organizationDataDirective.notes" class="col-sm-8 col-md-6"></sc-field>
   </div>
 </ng-form>

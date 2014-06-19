@@ -1,27 +1,24 @@
-﻿<ng-form name="editDocumentOtherForm" sc-validate="{}">
+<ng-form name="editDocumentOtherForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.editOther.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="organizations.editOther.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editOther.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteDocumentOther()" text="organizations.editOther.deleteDocument"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteDocumentOther()" text="organizations.editOther.deleteDocument" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.editOther.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editOther.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editOther.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editOther.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-document-other name="organizationDocumentOtherForm" ng-model="organizationDocumentOther.part" readonly="!editMode"></gva-organization-document-other>
+      <gva-organization-document-other name="organizationDocumentOtherForm" ng-model="organizationDocumentOther.part"></gva-organization-document-other>
 
-      <gva-common-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentOther.files" readonly="!editMode" sc-data-set-part="'organization'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="organizationScannedDocumentForm" ng-model="organizationDocumentOther.files" sc-data-set-part="'organization'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

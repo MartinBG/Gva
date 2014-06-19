@@ -1,27 +1,24 @@
-﻿<ng-form name="editDocumentApplicationForm" sc-validate="{}">
+<ng-form name="editDocumentApplicationForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="airports.editAirportDocApplication.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="airports.editAirportDocApplication.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="airports.editAirportDocApplication.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteApplication()" text="airports.editAirportDocApplication.deleteApplication"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteApplication()" text="airports.editAirportDocApplication.deleteApplication" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="airports.editAirportDocApplication.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="airports.editAirportDocApplication.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.editAirportDocApplication.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="airports.editAirportDocApplication.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-document-application name="airportDocumentApplicationForm" ng-model="airportDocumentApplication.part" readonly="!editMode"></gva-common-document-application>
+      <gva-common-document-application name="airportDocumentApplicationForm" ng-model="airportDocumentApplication.part"></gva-common-document-application>
 
-      <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentApplication.files" readonly="!editMode" sc-data-set-part="'airport'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentApplication.files" sc-data-set-part="'airport'"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

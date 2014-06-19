@@ -1,45 +1,19 @@
-﻿<ng-form class="form-inline" sc-validate="{}">
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <div class="form-group col-sm-3" sc-has-error="staffType">
-      <label class="control-label" l10n-text="persons.licenceDirective.staffType"></label>
-      <sc-validation-error field-name="staffType" validations="{required: null}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.staffType" name="staffType" alias="'staffTypes'" ng-required="true" ng-readonly="readonly" ng-disabled="!isNew"></sc-nomenclature>
-    </div>
-    <div class="form-group col-sm-2"  ng-if="model.staffType.alias === 'flightCrew'">
-      <label class="control-label" l10n-text="persons.licenceDirective.fcl"></label>
-      <sc-nomenclature alias="'boolean'" ng-model="model.fcl" ng-readonly="readonly" ng-disabled="!isNew"></sc-nomenclature>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.staffType" alias="'staffTypes'" ng-required="true" ng-disabled="!isNew" l10n-text="persons.licenceDirective.staffType" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" alias="'boolean'" ng-model="model.fcl" ng-disabled="!isNew" l10n-text="persons.licenceDirective.fcl" class="col-sm-2"></sc-field>
   </div>
   <div ng-if="model.staffType">
     <div class="row">
-      <div class=" form-group col-sm-3" sc-has-error="licenceType">
-        <label class="control-label" l10n-text="persons.licenceDirective.licenceType"></label>
-        <sc-validation-error field-name="licenceType" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature alias="'licenceTypes'" name="licenceType" ng-model="model.licenceType" ng-required="true" ng-readonly="readonly"
-           params="{staffTypeAlias: model.staffType.alias, fclCode: model.fcl.code}" ></sc-nomenclature>
-      </div>
-      <div class="form-group col-sm-4">
-        <label class="control-label" l10n-text="persons.licenceDirective.lastLicenceNumber"></label>
-        <sc-text ng-model="lastLicenceNumber" ng-readonly="true"></sc-text>
-      </div>
+      <sc-field type="nomenclature" alias="'licenceTypes'" ng-model="model.licenceType" ng-required="true" params="{staffTypeAlias: model.staffType.alias, fclCode: model.fcl.code}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-3"></sc-field>
+      <sc-field type="text" ng-model="lastLicenceNumber" l10n-text="persons.licenceDirective.lastLicenceNumber" class="col-sm-4"></sc-field>
     </div>
     <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="control-label" l10n-text="persons.licenceDirective.licenceNumber"></label>
-        <sc-text ng-model="model.licenceNumber" ng-readonly="readonly"></sc-text>
-      </div>
-      <div class="form-group col-sm-3" ng-if="model.licenceType.code === 'FOREIGN'">
-        <label class="control-label" l10n-text="persons.licenceDirective.foreignLicenceNumber"></label>
-        <sc-validation-error field-name="foreignLicenceNumber" validations="{required: null}"></sc-validation-error>
-        <sc-text ng-model="model.foreignLicenceNumber" name="foreignLicenceNumber" ng-readonly="readonly" ng-required="true"></sc-text>
-      </div>
+      <sc-field type="text" ng-model="model.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber" class="col-sm-3"></sc-field>
+      <sc-field type="text" ng-model="model.foreignLicenceNumber" ng-required="true" l10n-text="persons.licenceDirective.foreignLicenceNumber" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <div class=" form-group col-sm-3" sc-has-error="valid">
-        <label class="control-label" l10n-text="persons.licenceDirective.valid"></label>
-        <sc-validation-error field-name="valid" validations="{required: null}"></sc-validation-error>
-        <sc-nomenclature alias="'boolean'" name="valid" ng-model="model.valid" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-      </div>
+      <sc-field type="nomenclature" alias="'boolean'" ng-model="model.valid" ng-required="true" l10n-text="persons.licenceDirective.valid" class="col-sm-3"></sc-field>
     </div>
   </div>
 </ng-form>

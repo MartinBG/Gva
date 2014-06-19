@@ -1,25 +1,22 @@
-﻿<ng-form name="editFlyingExperienceForm" sc-validate="{}">
+<ng-form name="editFlyingExperienceForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.flyingExperienceEdit.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="persons.flyingExperienceEdit.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.flyingExperienceEdit.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteFlyingExp()" text="persons.flyingExperienceEdit.deleteFlyingExp"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deleteFlyingExp()" text="persons.flyingExperienceEdit.deleteFlyingExp" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="persons.flyingExperienceEdit.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.flyingExperienceEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.flyingExperienceEdit.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.flyingExperienceEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part" readonly="!editMode" sc-data-is-new="false"></gva-person-flying-experience>
+      <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part" sc-data-is-new="false"></gva-person-flying-experience>
     </div>
   </div>
 </ng-form>

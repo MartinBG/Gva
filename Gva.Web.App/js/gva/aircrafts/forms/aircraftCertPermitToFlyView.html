@@ -1,42 +1,40 @@
-﻿<ng-form class="form-inline">
+<ng-form class="form-inline" sc-form-readonly>
   <div class="panel panel-default">
-    <div class="panel-heading"><strong l10n-text="aircrafts.permitViewDirective.title"></strong></div>
+    <div class="panel-heading"><strong l10n-text="aircrafts.permitViewDirective.title"></strong>
+    </div>
     <div class="well-sm panel-body">
-
       <div class="row">
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.issueDate"></label>
-          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.issuePlace"></label>
-          <input disabled name="issuePlace" type="text" class="form-control input-sm" value="{{model.issuePlace}}" />
+          <input disabled name="issuePlace" type="text" class="form-control input-sm" value="{{model.issuePlace}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.validToDate"></label>
-          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{model.validToDate | date: 'dd.MM.yyyy'}}" />
+          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{model.validToDate | date: 'dd.MM.yyyy'}}">
         </div>
       </div>
-
       <div class="row">
         <div class="form-group col-md-3 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.pointFrom"></label>
-          <input disabled name="pointFrom" type="text" class="form-control input-sm" value="{{model.pointFrom}}" />
+          <input disabled name="pointFrom" type="text" class="form-control input-sm" value="{{model.pointFrom}}">
         </div>
         <div class="form-group col-md-3 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.pointTo"></label>
-          <input disabled name="pointTo" type="text" class="form-control input-sm" value="{{model.pointTo}}" />
+          <input disabled name="pointTo" type="text" class="form-control input-sm" value="{{model.pointTo}}">
         </div>
         <div class="form-group col-md-4 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.planStops"></label>
-          <input disabled name="planStops" type="text" class="form-control input-sm" value="{{model.planStops}}" />
+          <input disabled name="planStops" type="text" class="form-control input-sm" value="{{model.planStops}}">
         </div>
       </div>
-
       <div class="row">
         <div class="form-group col-md-10 col-sm-6">
           <label class="control-label" l10n-text="aircrafts.permitViewDirective.crew"></label>
-          <input disabled name="crew" type="text" class="form-control input-sm" value="{{model.crew}}"></input>
+          <input disabled name="crew" type="text" class="form-control input-sm" value="{{model.crew}}">
         </div>
       </div>
     </div>

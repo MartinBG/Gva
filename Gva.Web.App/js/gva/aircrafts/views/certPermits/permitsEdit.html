@@ -1,25 +1,22 @@
-﻿<ng-form name="editCertPermitForm" sc-validate="{}">
+<ng-form name="editCertPermitForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editPermit.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editPermit.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editPermit.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deletePermit()" text="aircrafts.editPermit.deletePermit"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        <sc-button name="deleteBtn" btn-click="deletePermit()" text="aircrafts.editPermit.deletePermit" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editPermit.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editPermit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editPermit.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editPermit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-permit name="aircraftCertPermitForm" ng-model="permit.part" readonly="!editMode"></gva-aircraft-cert-permit>
+      <gva-aircraft-cert-permit name="aircraftCertPermitForm" ng-model="permit.part"></gva-aircraft-cert-permit>
 
       <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="permit.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
     </div>

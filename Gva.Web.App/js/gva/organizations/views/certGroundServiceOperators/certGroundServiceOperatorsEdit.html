@@ -1,25 +1,22 @@
-﻿<ng-form name="editCertGroundServiceOperatorForm" sc-validate="{}">
+<ng-form name="editCertGroundServiceOperatorForm" sc-validate="{}" sc-form-readonly="!editMode && !backFromChild">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.editCertGroundServiceOperator.title"></strong>
+
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertGroundServiceOperator.edit"
-          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertGroundServiceOperator.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCertGroundServiceOperator()" text="organizations.editCertGroundServiceOperator.deleteCertOp"
-          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" >
+        <sc-button name="deleteBtn" btn-click="deleteCertGroundServiceOperator()" text="organizations.editCertGroundServiceOperator.deleteCertOp" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertGroundServiceOperator.save"
-          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertGroundServiceOperator.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertGroundServiceOperator.cancel"
-          class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertGroundServiceOperator.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-certificate name="certGroundServiceOperatorForm" ng-model="certificate.part" readonly="!editMode && !backFromChild"></gva-organization-certificate>
+      <gva-organization-certificate name="certGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-certificate>
     </div>
   </div>
 </ng-form>
