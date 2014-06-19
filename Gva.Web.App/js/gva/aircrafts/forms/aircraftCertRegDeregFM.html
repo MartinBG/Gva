@@ -32,22 +32,46 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8" sc-has-error="removalCountry">
+    <div class="form-group col-md-4 col-sm-8">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.removalCountry"></label>
-      <sc-validation-error field-name="removalCountry" validations="{required: 'default'}"></sc-validation-error>
-      <sc-nomenclature ng-model="model.country" name="removalCountry" alias="'countries'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-model="model.country" name="removalCountry" alias="'countries'" ng-readonly="readonly"></sc-nomenclature>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
+    <div class="form-group col-md-8 col-sm-12">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.removalNotes"></label>
       <sc-textarea ng-model="model.notes" name="removalNotes" ng-readonly="readonly"></sc-textarea>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
+    <div class="form-group col-md-8 col-sm-12">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.removalNotesAlt"></label>
       <sc-textarea ng-model="model.notesAlt" name="removalNotesAlt" ng-readonly="readonly"></sc-textarea>
+    </div>
+  </div>
+
+  <h5 class="form-header" l10n-text="aircrafts.regFMDirective.export" style="margin-top:10px;"></h5>
+  <button class="btn btn-xs btn-default pull-right" ng-click="model.export = {}" style="position:relative; top:-25px" ng-disabled="readonly">
+    <span class="glyphicon glyphicon-plus"></span>
+  </button>
+  <div ng-show="model.export">
+    <div class="row">
+      <div class="form-group col-md-8 col-sm-12">
+        <label class="control-label" l10n-text="aircrafts.regFMDirective.text"></label>
+        <sc-textarea ng-model="model.export.text" name="text" ng-readonly="readonly"></sc-textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-8 col-sm-12">
+        <label class="control-label" l10n-text="aircrafts.regFMDirective.textAlt"></label>
+        <sc-textarea ng-model="model.export.textAlt" name="textAlt" ng-readonly="readonly"></sc-textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4 col-sm-8">
+        <label class="control-label" l10n-text="aircrafts.regFMDirective.aircraftNewOld"></label>
+        <sc-nomenclature ng-model="model.export.aircraftNewOld" name="aircraftNewOld" alias="'boolean'" ng-readonly="readonly"></sc-nomenclature>
+      </div>
     </div>
   </div>
 </ng-form>

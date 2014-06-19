@@ -361,6 +361,11 @@
       templateUrl: 'js/gva/equipments/forms/equipmentCertOperational.html',
       controller: 'EquipmentCertOperationalCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftInspector',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftInspector.html',
+      controller: 'AircraftInspectorCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])

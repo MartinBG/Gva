@@ -90,6 +90,8 @@
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftPart.html" />
     <Content Include="js\gva\aircrafts\forms\aircrafttMaintenance.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftInspector.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftInspectorCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircraft.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApex.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplication.js" />

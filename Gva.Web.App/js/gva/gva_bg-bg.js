@@ -659,6 +659,7 @@
           smods: 'S-code',
           permits: 'Разрешения за полет',
           radios: 'Разрешителни за радиостанция',
+          noises: 'Удостоверения за шум',
           docs: 'Документи',
           parts: 'Оборудване',
           debts: 'Залози',
@@ -709,7 +710,6 @@
           ModifOrWingColorAlt: 'Модификация/Цвят на крило (английски)',
           docRoom: 'Документи в стая',
           cofAType: 'CofA Type',
-          tcds: 'TCDS',
           airCategory: 'AIR Category',
           easaCategory: 'EASA Категория',
           euRegType: 'EASA Reg',
@@ -718,6 +718,7 @@
           seats: 'Брой места',
           issueNumber: '№',
           tcdsn: 'TCDSN',
+          tcds: 'TCDS',
           chapter: 'Chapter',
           issueDate: 'Дата на издаване',
           flyover: 'Прелитане',
@@ -726,8 +727,7 @@
           overflight: 'Полет над',
           takeoff: 'Излитане',
           noiseData: 'Удостоверение за шум',
-          aircraftType: 'Type of Operation',
-          operationType: 'Type of Aircraft'
+          aircraftType: 'Type of Aircraft'
         },
         aircraftDataApexDirective: {
           model: 'Модел',
@@ -1188,13 +1188,15 @@
         noiseViewDirective: {
           title: 'Удостоверение за шум',
           issueNumber: '№',
-          tcdsn: 'TCDSN',
           issueDate: 'Дата на издаване',
           flyover: 'Прелитане',
           approach: 'Приближаване',
           lateral: 'Странично',
           overflight: 'Полет над',
-          takeoff: 'Излитане'
+          takeoff: 'Излитане',
+          tcdsn: 'TCDSN',
+          tcds: 'TCDS',
+          chapter: 'Chapter'
         },
         permitViewDirective: {
           title: 'Разрешениe за полет',
@@ -1303,7 +1305,11 @@
           takeoff: 'Излитане',
           modifications: 'Модификации',
           modificationsAlt: 'Модификации (англ.)',
-          notes: 'Забележки'
+          notes: 'Забележки',
+          tcdsn: 'TCDSN',
+          tcds: 'TCDS',
+          chapter: 'Chapter',
+          additionalModification: 'Допълнителна модификация'
         },
         radioDirective: {
           certNumber: '№',
@@ -1374,7 +1380,12 @@
           removalNotes: 'Забележки/Изключения',
           removalNotesAlt: 'Забележки/Изключения (англ.)',
           person: 'ФЛ',
-          organization: 'ЮЛ'
+          organization: 'ЮЛ',
+          operationType: 'Type of Operation',
+          text: 'Текст',
+          textAlt: 'Текст (англ.)',
+          aircraftNewOld: 'ВС е ново',
+          'export': 'Експортно удостоверение за ЛГ'
         },
         debtDirectiveFM: {
           certId: 'Регистрация №',
@@ -1665,6 +1676,12 @@
           pageCount: 'Бр. стр.',
           file: 'Файл',
           notIndexed: 'Документи извън описа'
+        },
+        inspectorDirective: {
+          inspector: 'Заверил',
+          gvaInspector: 'Инспектор ГВА',
+          examiner: 'Проверяващ',
+          other: 'Друг'
         }
       },
       persons: {

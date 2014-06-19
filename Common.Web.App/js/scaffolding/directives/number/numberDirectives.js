@@ -16,11 +16,10 @@
           if (!ngModel) {
             return;
           }
-          injected.unshift(attrs);
 
-          ngModel.$parsers.push(parserFactory.apply(this, injected));
+          ngModel.$parsers.push(parserFactory.apply(this, [attrs].concat(injected)));
 
-          ngModel.$formatters.push(formatterFactory.apply(this, injected));
+          ngModel.$formatters.push(formatterFactory.apply(this, [attrs].concat(injected)));
 
           if (attrs.min) {
             var minValidator = function (value) {

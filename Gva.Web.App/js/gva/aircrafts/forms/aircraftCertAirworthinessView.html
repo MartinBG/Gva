@@ -13,7 +13,7 @@
       <div class="row">
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.issueDate"></label>
-          <input disabled name="issueDate" type="text" class="form-control input-sm" value="{{model.issueDate | date: 'dd.MM.yyyy'}}" />
+          <sc-date ng-model="model.issueDate" name="issueDate" ng-required="true" ng-readonly="true"></sc-date>
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validFromDate"></label>
@@ -27,7 +27,7 @@
       <div class="row">
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.inspector"></label>
-          <input disabled name="inspector" type="text" class="form-control input-sm" value="{{model.inspector.name}}" />
+          <input disabled name="inspector" type="text" class="form-control input-sm" value="{{inspectorName()}}" />
         </div>
       </div>
     </div>

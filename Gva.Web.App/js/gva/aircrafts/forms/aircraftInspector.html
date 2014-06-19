@@ -1,0 +1,18 @@
+﻿<div class="col-sm-4 col-md-6">
+  <label class="control-label" l10n-text="aircrafts.inspectorDirective.inspector"></label>
+  <div class="input-group">
+    <div class="input-group-btn">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 120px" ng-disabled="isReadonly">
+        {{model.inspectorType.name}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-repeat="item in inspectorTypes" ng-click="model.inspectorType = item">
+            {{item.name}}
+        </li>
+      </ul>
+    </div>
+    <sc-nomenclature ng-if="model.inspectorType.alias  === 'gvaInspector'" class="form-control input-sm" ng-model="model.gvaInspector" name="gvaInspector" alias="'inspectors'" ng-required="false" ng-readonly="isReadonly"></sc-nomenclature>
+    <sc-nomenclature ng-if="model.inspectorType.alias  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'examiners'" ng-required="false" ng-readonly="isReadonly"></sc-nomenclature>
+    <sc-text ng-if="model.inspectorType.alias  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="false" ng-readonly="isReadonly"></sc-text>
+  </div>
+</div>

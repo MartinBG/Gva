@@ -10,10 +10,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-md-4 col-sm-8">
-      <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.inspector"></label>
-      <sc-nomenclature ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-readonly="readonly"></sc-nomenclature>
-    </div>
+    <gva-aircraft-inspector ng-model="model.inspector" sc-data-show-inspectors="false" sc-data-is-readonly="readonly"> </gva-aircraft-inspector>
     <div class="form-group col-md-2 col-sm-4">
       <label class="control-label" l10n-text="aircrafts.airworthinessFMDirective.approvalNumber"></label>
       <sc-text ng-model="model.approvalNumber" name="approvalNumber" ng-readonly="readonly"></sc-text>

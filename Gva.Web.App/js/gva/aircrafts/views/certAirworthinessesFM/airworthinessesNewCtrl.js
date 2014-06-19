@@ -39,16 +39,33 @@
     'aircraftCertAirworthiness'
   ];
   CertAirworthinessesFMNewCtrl.$resolve = {
+    inspectorType: [
+      'Nomenclature',
+      function (Nomenclature) {
+        return Nomenclature.get({
+          alias: 'inspectorTypes',
+          valueAlias: 'examiner'
+        }).$promise;
+      }
+    ],
     aircraftCertAirworthiness: [
       '$stateParams',
-      function ($stateParams) {
+      'inspectorType',
+      function ($stateParams, inspectorType) {
         return {
           part: {
             lotId: $stateParams.id,
+            inspector: {
+              inspectorType: inspectorType
+            },
             reviews: [{
+              inspector: {
+                inspectorType: inspectorType
+              },
               airworthinessReviewType: {
                 id: 7777773,
-                name: 'Удостоверение за преглед за ЛГ (15a)'
+                name: 'Удостоверение за преглед за ЛГ (15a)',
+                code: 'AV'
               },
               amendment1: null,
               amendment2: null

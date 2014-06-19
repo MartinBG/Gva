@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessFM,
-    aircraftCertAirworthiness
+    aircraftCertAirworthiness,
+    inspectorType
   ) {
     var originalAirworthiness = _.cloneDeep(aircraftCertAirworthiness);
 
@@ -35,9 +36,17 @@
 
     $scope.newAmendment = function () {
       if (!$scope.lastReview.amendment1) {
-        $scope.lastReview.amendment1 = {};
+        $scope.lastReview.amendment1 = {
+          inspector: {
+            inspectorType: inspectorType
+          }
+        };
       } else if (!$scope.lastReview.amendment2) {
-        $scope.lastReview.amendment2 = {};
+        $scope.lastReview.amendment2 = {
+          inspector: {
+            inspectorType: inspectorType
+          }
+        };
       }
 
       $scope.editMode = 'editReview';
@@ -100,7 +109,8 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessFM',
-    'aircraftCertAirworthiness'
+    'aircraftCertAirworthiness',
+    'inspectorType'
   ];
 
   CertAirworthinessesFMEditCtrl.$resolve = {
@@ -111,6 +121,15 @@
         return AircraftCertAirworthinessFM.get({
           id: $stateParams.id,
           ind: $stateParams.ind
+        }).$promise;
+      }
+    ],
+    inspectorType: [
+      'Nomenclature',
+      function (Nomenclature) {
+        return Nomenclature.get({
+          alias: 'inspectorTypes',
+          valueAlias: 'examiner'
         }).$promise;
       }
     ]

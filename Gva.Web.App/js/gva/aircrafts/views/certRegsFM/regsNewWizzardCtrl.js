@@ -8,7 +8,8 @@
     $stateParams,
     Aircraft,
     oldReg,
-    actNumber
+    actNumber,
+    register
   ) {
     $scope.steps = {
       chooseRegMark: {},
@@ -19,11 +20,10 @@
     $scope.currentStep = $scope.steps.chooseRegMark;
 
     $scope.model = {
-      register: {
-        nomValueId: 9008224,
-        name: 'Регистър 1'
-      }
+      register: register,
+      regMark: $scope.$parent.aircraft.mark
     };
+
     $scope.oldInd = $stateParams.oldInd;
     $scope.reregMode = !!(oldReg && oldReg.part);
     if ($scope.reregMode) {
@@ -117,6 +117,15 @@
           return result.actNumber;
         });
       }
+    ],
+    register: [
+      'Nomenclature',
+      function (Nomenclature) {
+        return Nomenclature.get({
+          alias: 'registers',
+          valueAlias: 'register1'
+        }).$promise;
+      }
     ]
   };
 
@@ -126,7 +135,8 @@
     '$stateParams',
     'Aircraft',
     'oldReg',
-    'actNumber'
+    'actNumber',
+    'register'
   ];
 
   angular.module('gva').controller('CertRegsFMNewWizzardCtrl', CertRegsFMNewWizzardCtrl);
