@@ -10,7 +10,7 @@
     <sc-field type="text" ng-model="model.lastNameAlt" ng-required="true" l10n-text="persons.personDataDirective.lastNameAlt" class="col-sm-4 col-md-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field-group class="col-sm-3 col-md-2" text="persons.personDataDirective.lin" validations="{ required: null }" field-name="lin">
+    <sc-field-group class="col-sm-3 col-md-2" text="persons.personDataDirective.lin" validations="{required: 'default'}" field-name="lin">
       <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 100px">
         {{model.linType.name || 'Избери'}}
         <span class="caret"></span>
