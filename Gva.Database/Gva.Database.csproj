@@ -70,6 +70,7 @@
     <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\gvaWordTemplates.sql" />
     <Content Include="Insert\Lots\lotData.sql" />
+    <Content Include="Insert\Noms\Aircrafts\inspectorTypes.sql" />
     <Content Include="Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql" />
     <Content Include="Insert\Noms\Airports\_airportsMigrationNoms.sql" />
     <Content Include="Insert\Noms\Common\_commonMigrationNoms.sql" />
