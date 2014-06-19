@@ -59,7 +59,8 @@ var config = {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-scrollto/angular-scrollto.js',
-      'bower_components/autofill-event/src/autofill-event.js'
+      'bower_components/autofill-event/src/autofill-event.js',
+      'bower_components/jquery-treetable/javascripts/src/jquery.treetable.js'
     ], { base: '.' });
   },
   lib_ie8: function () {
