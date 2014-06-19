@@ -3,7 +3,7 @@
     <sc-field type="nomenclature" ng-model="model.aircraftProducer" alias="'aircraftProducers'" ng-required="true" l10n-text="aircrafts.aircraftDataDirective.aircraftProducer" class="col-md-5 col-sm-8"></sc-field>
     <sc-field type="nomenclature" ng-model="model.airCategory" alias="'easaTypes'" ng-required="true" l10n-text="aircrafts.aircraftDataDirective.airCategory" class="col-sm-6 col-md-3"></sc-field>
     <sc-field type="text" ng-model="model.icao" l10n-text="aircrafts.aircraftDataDirective.icao" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.manSN" ng-required="true" sc-validate="{unique: isUniqueMSN}" sc-validate-immediate="true" l10n-text="aircrafts.aircraftDataDirective.manSN" validations="{required: null, unique: null}" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.manSN" ng-required="true" sc-validate="{unique: isUniqueMSN}" sc-validate-immediate="true" l10n-text="aircrafts.aircraftDataDirective.manSN" validations="{unique: 'default'}" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.model" ng-required="true" l10n-text="aircrafts.aircraftDataDirective.model" class="col-md-5 col-sm-8"></sc-field>

@@ -16,7 +16,7 @@
     <sc-field type="nomenclature" ng-model="model.part.auditState" alias="'auditStatuses'" ng-required="true" l10n-text="common.inspectionDirective.auditState" class="col-sm-2 col-md-2"></sc-field>
     <div class="form-group col-sm-4 col-md-3" sc-has-error="notification">
       <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
-      <sc-validation-error field-name="notification" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error field-name="notification" validations="{required: 'default'}"></sc-validation-error>
       <div class="col-sm-5 col-md-7" style="padding:0px">
         <sc-nomenclature ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="form.$readonly"></sc-nomenclature>
       </div>
@@ -73,7 +73,7 @@
         <th ng-class="{'has-error': model.part.examiners.length === 0}">
           <div sc-has-error="examiner">
             <label class="control-label" l10n-text="common.inspectionDirective.examinersTable.examiner"></label>
-            <sc-validation-error field-name="examiner" validations="{required: null}"></sc-validation-error>
+            <sc-validation-error field-name="examiner" validations="{required: 'default'}"></sc-validation-error>
           </div>
         </th>
         <th></th>

@@ -30,7 +30,7 @@
       class="col-sm-3 col-md-2"></sc-field>
     </div>
     <div class="row">
-      <sc-field-group class="col-sm-6 col-md-4" text="persons.personCheckDirective.documentPublisher" validations="{ required: null }" field-name="documentPublisher">
+      <sc-field-group class="col-sm-6 col-md-4" text="persons.personCheckDirective.documentPublisher" validations="{required: 'default'}" field-name="documentPublisher">
         <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="form.$readonly"></sc-text>
         <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
       </sc-field-group>

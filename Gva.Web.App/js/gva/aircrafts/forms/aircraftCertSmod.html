@@ -13,7 +13,7 @@
     <sc-field type="text" ng-model="model.caaToAddress" l10n-text="aircrafts.smodDirective.caaToAddress" class="col-md-4 col-sm-6"></sc-field>
   </div>
   <div class="row">
-    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{ required: null }" field-name="scode">
+    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{required: 'default'}" field-name="scode">
       <sc-text ng-model="model.scode" name="scode" required disabled ng-readonly="form.$readonly"></sc-text>
       <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="form.$readonly"></button>
     </sc-field-group>

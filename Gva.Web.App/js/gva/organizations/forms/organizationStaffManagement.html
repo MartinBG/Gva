@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field-group class="col-sm-3 col-md-2" text="organizations.staffManagementDirective.position" validations="{ required: null }" field-name="position">
+    <sc-field-group class="col-sm-3 col-md-2" text="organizations.staffManagementDirective.position" validations="{required: 'default'}" field-name="position">
       <sc-text ng-model="model.part.position" name="position" ng-required="true" ng-readonly="form.$readonly"></sc-text>
       <sc-button class="btn btn-default" btn-click="$parent.chooseEmployment()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
     </sc-field-group>
