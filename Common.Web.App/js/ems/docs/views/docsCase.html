@@ -1,23 +1,23 @@
 ﻿<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
 <br />
-<sc-datatable items="docRelations" filterable="false" pageable="false" sortable="false" dynamic-columns="false"
-    scrollable="false" has-info-text="false" row-class="{ 'case-font-weight': item.docId === docId}">
-  <sc-column title="docs.edit.case.regNumber" has-content="true" width="250px">
+<sc-treetable items="docRelations" row-class="{ 'case-font-weight': item.docId === docId}">
+  <sc-tree-column title="docs.edit.case.regNumber" has-content="true" width="250px">
     <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>
       {{item.docDocDirectionName}} | {{item.docDocCasePartTypeName}}</span>
-  </sc-column>
-  <sc-column title="docs.edit.case.regDate" has-content="true">
+  </sc-tree-column>
+  <sc-tree-column title="docs.edit.case.regDate" has-content="true">
     {{ item.docRegDate | date:'dd.MM.yyyy HH:mm' }}
-  </sc-column>
-  <sc-column data="docDocStatusName" title="docs.edit.case.caseFinish.statusName">
-  </sc-column>
-  <sc-column title="docs.edit.case.description" has-content="true">
+  </sc-tree-column>
+  <sc-tree-column data="docDocStatusName" title="docs.edit.case.caseFinish.statusName">
+  </sc-tree-column>
+  <sc-tree-column title="docs.edit.case.description" has-content="true">
     <span>{{ item.docDocTypeName }} : {{ item.docSubject}}</span>
-  </sc-column>
-  <sc-column title="docs.edit.case.doc" row-id="3" has-content="true">
+  </sc-tree-column>
+  <sc-tree-column title="docs.edit.case.doc" has-content="true">
     <a ng-click="viewDoc(item.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
-  </sc-column>
-</sc-datatable>
+  </sc-tree-column>
+</sc-treetable>
+
 
 <div ng-if="!!appId">
   <div class="row">
