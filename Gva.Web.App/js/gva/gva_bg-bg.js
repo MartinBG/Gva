@@ -3304,8 +3304,6 @@
         },
         staffManagementDirective: {
           auditPartRequirement: 'Изискване',
-          planYear: 'Година',
-          planMonth: 'Месец',
           position: 'Предлагана длъжност',
           person: 'Предложено лице',
           testDate: 'Дата на писмен тест',

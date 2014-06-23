@@ -40,7 +40,11 @@
 
   StaffExaminersNewCtrl.$resolve = {
     organizationStaffExaminer: function () {
-      return { };
+      return { 
+        part: {
+          approvedAircrafts: []
+        }
+      };
     }
   };
 

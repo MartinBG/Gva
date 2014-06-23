@@ -3,8 +3,8 @@ GO
 
 CREATE TABLE [dbo].[LotSets] (
     [LotSetId]   INT           NOT NULL,
-    [Name]       NVARCHAR (50) NOT NULL,
-    [Alias]      NVARCHAR (50) NOT NULL,
+    [Name]       NVARCHAR (60) NOT NULL,
+    [Alias]      NVARCHAR (60) NOT NULL,
     CONSTRAINT [PK_LotSets] PRIMARY KEY ([LotSetId]),
     CONSTRAINT [UQ_LotSet_Alias] UNIQUE NONCLUSTERED ([Alias])
 )
