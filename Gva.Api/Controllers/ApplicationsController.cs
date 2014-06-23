@@ -113,33 +113,37 @@ namespace Gva.Api.Controllers
             var application = this.applicationRepository.Find(id,
                 e => e.GvaAppLotFiles.Select(f => f.DocFile),
                 e => e.GvaAppLotFiles.Select(f => f.GvaLotFile),
-                e => e.Lot.Set,
                 e => e.Doc.DocFiles);
+
+            Set set = (from l in this.unitOfWork.DbContext.Set<Lot>()
+                    where l.LotId == application.LotId
+                    select l.Set)
+                    .Single();
 
             if (application == null)
             {
                 throw new Exception("Cannot find application with id " + id);
             }
 
-            ApplicationDO returnValue = new ApplicationDO(application);
+            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId);
 
-            if (application.Lot.Set.Alias == "Person")
+            if (set.Alias == "Person")
             {
                 returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
             }
-            else if (application.Lot.Set.Alias == "Organization")
+            else if (set.Alias == "Organization")
             {
                 returnValue.Organization = new OrganizationDO(this.organizationRepository.GetOrganization(application.LotId));
             }
-            else if (application.Lot.Set.Alias == "Aircraft")
+            else if (set.Alias == "Aircraft")
             {
                 returnValue.Aircraft = new AircraftDO(this.aircraftRepository.GetAircraft(application.LotId));
             }
-            else if (application.Lot.Set.Alias == "Airport")
+            else if (set.Alias == "Airport")
             {
                 returnValue.Airport = new AirportDO(this.airportRepository.GetAirport(application.LotId));
             }
-            else if (application.Lot.Set.Alias == "Equipment")
+            else if (set.Alias == "Equipment")
             {
                 returnValue.Equipment = new EquipmentDO(this.equipmentRepository.GetEquipment(application.LotId));
             }

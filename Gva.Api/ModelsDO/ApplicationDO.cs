@@ -15,17 +15,17 @@ namespace Gva.Api.ModelsDO
             
         }
 
-        public ApplicationDO(GvaApplication g)
+        public ApplicationDO(GvaApplication gvaApp, string lotSetAlias, int lotSetId)
             : this()
         {
-            if (g != null)
+            if (gvaApp != null)
             {
-                this.ApplicationId = g.GvaApplicationId;
-                this.DocId = g.DocId;
-                this.LotId = g.LotId;
-                this.GvaAppLotPartId = g.GvaAppLotPartId;
-                this.LotSetAlias = g.Lot.Set.Alias;
-                this.LotSetId = g.Lot.SetId;
+                this.ApplicationId = gvaApp.GvaApplicationId;
+                this.DocId = gvaApp.DocId;
+                this.LotId = gvaApp.LotId;
+                this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
+                this.LotSetAlias = lotSetAlias;
+                this.LotSetId = lotSetId;
             }
         }
 
