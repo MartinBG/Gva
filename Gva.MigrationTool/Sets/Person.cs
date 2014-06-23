@@ -28,9 +28,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.LotEventHandlers.EquipmentView;
 using Gva.Api.LotEventHandlers.AircraftView;
 using Gva.Api.LotEventHandlers.AirportView;
-using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
-using Gva.Api.Repositories.OrganizationRepository;
 using Autofac.Features.OwnedInstances;
 using Common.Tests;
 using Gva.Api.Repositories.PersonRepository;
@@ -39,19 +37,21 @@ namespace Gva.MigrationTool.Sets
 {
     public class Person
     {
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IOrganizationRepository, IAircraftRepository, IPersonRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IPersonRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
 
         public Person(OracleConnection oracleConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IOrganizationRepository, IAircraftRepository, IPersonRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, ICaseTypeRepository, IPersonRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
         }
 
-        public Dictionary<int, int> createPersonsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
+        public Tuple<Dictionary<int, int>, Dictionary<string, int>, Dictionary<int, JObject>> createPersonsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             Dictionary<int, int> personIdToLotId = new Dictionary<int, int>();
+            Dictionary<string, int> personEgnToLotId = new Dictionary<string, int>();
+            Dictionary<int, JObject> personLotIdToPersonNom = new Dictionary<int, JObject>();
 
             using (var dependencies = this.dependencyFactory())
             {
@@ -61,10 +61,8 @@ namespace Gva.MigrationTool.Sets
                 var fileRepository = dependencies.Value.Item4;
                 var applicationRepository = dependencies.Value.Item5;
                 var caseTypeRepository = dependencies.Value.Item6;
-                var organizationRepository = dependencies.Value.Item7;
-                var aircraftRepository = dependencies.Value.Item8;
-                var lotEventDispatcher = dependencies.Value.Item10;
-                var context = dependencies.Value.Item11;
+                var lotEventDispatcher = dependencies.Value.Item8;
+                var context = dependencies.Value.Item9;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -97,18 +95,36 @@ namespace Gva.MigrationTool.Sets
                     unitOfWork.Save();
                     Console.WriteLine("Created personData part for person with id {0}", personId);
 
-                    personIdToLotId.Add(personId, lot.LotId);
+                    int lotId = lot.LotId;
+                    personIdToLotId.Add(personId, lotId);
+
+                    var egn = personData.Get<string>("uin");
+                    if (!string.IsNullOrWhiteSpace(egn))
+                    {
+                        personEgnToLotId.Add(egn, lotId);
+                    }
+
+                    string name = string.Format("{0} {1} {2}", personData.Get<string>("firstName"), personData.Get<string>("middleName"), personData.Get<string>("lastName"));
+                    string nameAlt = string.Format("{0} {1} {2}", personData.Get<string>("firstNameAlt"), personData.Get<string>("middleNameAlt"), personData.Get<string>("lastNameAlt"));
+                    personLotIdToPersonNom.Add(lotId, Utils.ToJObject(
+                        new
+                        {
+                            nomValueId = lotId,
+                            name = name,
+                            nameAlt = nameAlt
+                        }));
                 }
             }
 
-            return personIdToLotId;
+            return Tuple.Create(personIdToLotId, personEgnToLotId, personLotIdToPersonNom);
         }
          
         public void migratePersons(
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, int> aircraftApexIdtoLotId,
-            Dictionary<int, int> organizationIdtoLotId,
-            Dictionary<int, int> personIdToLotId)
+            Dictionary<int, int> personIdToLotId,
+            Func<int?, JObject> getAircraftByApexId,
+            Func<int?, JObject> getPersonByApexId,
+            Func<int?, JObject> getOrgByApexId)
         {
             System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
             timer.Start();
@@ -128,15 +144,11 @@ namespace Gva.MigrationTool.Sets
                     var fileRepository = dependencies.Value.Item4;
                     var applicationRepository = dependencies.Value.Item5;
                     var caseTypeRepository = dependencies.Value.Item6;
-                    var organizationRepository = dependencies.Value.Item7;
-                    var aircraftRepository = dependencies.Value.Item8;
-                    var personRepository = dependencies.Value.Item9;
-                    var lotEventDispatcher = dependencies.Value.Item10;
-                    var context = dependencies.Value.Item11;
+                    var personRepository = dependencies.Value.Item7;
+                    var lotEventDispatcher = dependencies.Value.Item8;
+                    var context = dependencies.Value.Item9;
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
-
-                    Func<int?, JObject> getPerson = (personApexId) => Utils.GetPerson(personApexId, personRepository, personIdToLotId);
 
                     var lot = lotRepository.GetLotIndex(personIdToLotId[personId]);
 
@@ -338,7 +350,7 @@ namespace Gva.MigrationTool.Sets
                         addPartWithFiles("personDocumentEducations/*", docEducation);
                     }
 
-                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, organizationRepository, noms, organizationIdtoLotId);
+                    var personDocumentEmployments = this.getPersonDocumentEmployments(personId, noms, getOrgByApexId);
                     foreach (var docEmployment in personDocumentEmployments)
                     {
                         addPartWithFiles("personDocumentEmployments/*", docEmployment);
@@ -352,7 +364,7 @@ namespace Gva.MigrationTool.Sets
                         medicalOldIdToPartIndex.Add(docMedical.Get<int>("part.__oldId"), pv.Part.Index);
                     }
 
-                    var personFlyingExperiences = this.getPersonFlyingExperiences(personId, organizationRepository, aircraftRepository, noms, organizationIdtoLotId, aircraftApexIdtoLotId);
+                    var personFlyingExperiences = this.getPersonFlyingExperiences(personId, noms, getOrgByApexId, getAircraftByApexId);
                     foreach (var flyingExperience in personFlyingExperiences)
                     {
                         lot.CreatePart("personFlyingExperiences/*", flyingExperience, context);
@@ -364,13 +376,13 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("personStatuses/*", personStatus, context);
                     }
 
-                    var personRatings = this.getPersonRatings(personId, getPerson, noms);
+                    var personRatings = this.getPersonRatings(personId, getPersonByApexId, noms);
                     Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personRating in personRatings)
                     {
                         int nextIndex = 0;
 
-                        foreach (var edition in personRating.GetItems<JObject>("editions"))
+                        foreach (var edition in personRating["editions"].Cast<JObject>())
                         {
                             edition.Add("index", nextIndex);
                             nextIndex++;
@@ -388,13 +400,13 @@ namespace Gva.MigrationTool.Sets
                         ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), pv.Part.Index);
                     }
 
-                    var personLicences = this.getPersonLicences(personId, getPerson, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                    var personLicences = this.getPersonLicences(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
                     Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                     foreach (var personLicence in personLicences)
                     {
                         int nextIndex = 0;
 
-                        foreach (var edition in personLicence.GetItems<JObject>("editions"))
+                        foreach (var edition in personLicence["editions"].Cast<JObject>())
                         {
                             edition.Add("index", nextIndex);
                             nextIndex++;
@@ -935,7 +947,7 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        private IList<JObject> getPersonDocumentEmployments(int personId, IOrganizationRepository or, Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, int> organizationIdtoLotId)
+        private IList<JObject> getPersonDocumentEmployments(int personId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getOrgByApexId)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.EMPLOYEE WHERE {0}",
@@ -952,7 +964,7 @@ namespace Gva.MigrationTool.Sets
 
                         hiredate = r.Field<DateTime?>("HIREDATE"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        organization = Utils.GetOrganization((int?)r.Field<decimal?>("FIRM_ID"), or, organizationIdtoLotId),
+                        organization = getOrgByApexId((int?)r.Field<decimal?>("FIRM_ID")),
                         employmentCategory = noms["employmentCategories"].ByOldId(r.Field<decimal?>("JOB_CATEGORY_ID").ToString()),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("COUNTRY_ID").ToString()),
                         notes = r.Field<string>("NOTES")
@@ -1153,11 +1165,9 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getPersonFlyingExperiences(
             int personId,
-            IOrganizationRepository or,
-            IAircraftRepository ar,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, int> organizationIdtoLotId,
-            Dictionary<int, int> aircraftIdtoLotId)
+            Func<int?, JObject> getOrgByApexId,
+            Func<int?, JObject> getAircraftByApexId)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0}",
@@ -1172,8 +1182,8 @@ namespace Gva.MigrationTool.Sets
                         staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
                         documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
                         period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
-                        organization = Utils.GetOrganization((int?)r.Field<decimal?>("FIRM_ID"), or, organizationIdtoLotId),
-                        aircraft = Utils.GetAircraft((int?)r.Field<long?>("AC_ID"), ar, aircraftIdtoLotId),
+                        organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
+                        aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
                         ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
                         ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                         authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
@@ -1272,7 +1282,7 @@ namespace Gva.MigrationTool.Sets
                 .ToArray();
         }
 
-        private IList<JObject> getPersonRatings(int personId, Func<int?, JObject> getPerson, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonRatings(int personId, Func<int?, JObject> getPersonByApexId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             Func<string, NomValue[]> transformSubclasses = (s) =>
             {
@@ -1312,7 +1322,7 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),
                         notesAlt = r.Field<string>("NOTES_TRANS"),
-                        inspector = getPerson((int?)r.Field<decimal?>("EXAMINER_ID"))
+                        inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID"))
                     }))
                 .ToList()
                 .GroupBy(r => r.Get<int>("__RATING_CAA_ID"))
@@ -1360,7 +1370,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getPersonLicences(
             int personId,
-            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getPersonByApexId,
             IDictionary<int, JObject> nomApplications,
             Dictionary<string, Dictionary<string, NomValue>> noms,
             Dictionary<int, int> ratings,
@@ -1503,7 +1513,7 @@ namespace Gva.MigrationTool.Sets
                         __LIM_OTHER = r.Field<string>("LIM_OTHER"),
                         __LIM_MED_CERT = r.Field<string>("LIM_MED_CERT"),
 
-                        inspector = getPerson(r.Field<int?>("EXAMINER_ID")),
+                        inspector = getPersonByApexId(r.Field<int?>("EXAMINER_ID")),
                         documentDateValidFrom = r.Field<DateTime?>("ISSUE_DATE"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),

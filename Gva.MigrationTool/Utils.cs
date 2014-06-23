@@ -69,18 +69,6 @@ namespace Gva.MigrationTool
                 new JProperty("nomValueId", 3),
                 new JProperty("name", "ОО"),
                 new JProperty("alias", "approvedOrg"));
-        public static readonly JObject DUMMY_PERSON =
-            new JObject(
-                new JProperty("nomValueId", 1),
-                new JProperty("name", "Персонал 1"));
-        public static readonly JObject DUMMY_ORGANIZATION =
-            new JObject(
-                new JProperty("nomValueId", 1),
-                new JProperty("name", "Организация 1"));
-        public static readonly JObject DUMMY_AIRCRAFT =
-            new JObject(
-                new JProperty("nomValueId", 1),
-                new JProperty("name", "Въздухоплавателно Средство 1"));
 
         public static JObject ToJObject(object o)
         {
@@ -105,75 +93,6 @@ namespace Gva.MigrationTool
             }
 
             return o;
-        }
-
-        public static JObject GetPerson(int? oldId, IPersonRepository personRepository, Dictionary<int, int> personOldIdsLotIds)
-        {
-            if (oldId == null)
-            {
-                return null;
-            }
-
-            int? id = personOldIdsLotIds.ByKeyOrDefault(oldId);
-
-            if (id == null)
-            {
-                Console.WriteLine("CANNOT FIND PERSON WITH ID {0}", oldId);
-                return DUMMY_PERSON;//TODO remove
-            }
-
-            var person = personRepository.GetPerson((int)id);
-            return JObject.FromObject(new
-            {
-                nomValueId = person.LotId,
-                name = person.Names
-            });
-        }
-
-        public static JObject GetAircraft(int? oldId, IAircraftRepository aircraftRepository, Dictionary<int, int> aircraftOldIdsLotIds)
-        {
-            if (oldId == null)
-            {
-                return null;
-            }
-
-            int? id = aircraftOldIdsLotIds.ByKeyOrDefault(oldId);
-
-            if (id == null)
-            {
-                Console.WriteLine("CANNOT FIND AIRCRAFT WITH ID {0}", oldId);
-                return DUMMY_AIRCRAFT; //TODO remove
-            }
-
-            var aircraft = aircraftRepository.GetAircraft((int)id);
-            return JObject.FromObject(new
-            {
-                nomValueId = aircraft.LotId,
-                name = aircraft.Model
-            });
-        }
-
-        public static JObject GetOrganization(int? oldId, IOrganizationRepository organizationRepository, Dictionary<int, int> organizationOldIdsLotIds)
-        {
-            if (oldId == null)
-            {
-                return null;
-            }
-
-            int? id = organizationOldIdsLotIds.ByKeyOrDefault(oldId);
-
-            if (id == null)
-            {
-                Console.WriteLine("CANNOT FIND ORGANIZATION WITH ID {0}", oldId);
-                return DUMMY_ORGANIZATION; //TODO remove
-            }
-
-            var organization = organizationRepository.GetOrganization((int)id);
-            return JObject.FromObject(new
-            {
-                nomValueId = organization.LotId,
-                name = organization.Name
-            });
         }
     }
 }

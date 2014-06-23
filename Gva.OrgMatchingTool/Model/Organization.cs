@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace Gva.OrgMatchingTool.Model
 {
-    public class Organization
+    public class FmOrg
     {
         public string EIK { get; set; }
         public string TrimmedName { get; set; }
         public string Name { get; set; }
-        public string MatchedOrgTrimmedName { get; set; }
-        public string MatchedPersonTrimmedName { get; set; }
-        public string MatchedOrgName { get; set; }
-        public string MatchedPersonName { get; set; }
-        public string MatchedPersonNameBgEn { get; set; }
+    }
+
+    public class OrgMatch
+    {
+        public string EIK { get; set; }
+        public string FmOrgName { get; set; }
+        public string ApexOrgNameEn { get; set; }
+        public string ApexPersonNameEn { get; set; }
+        public string ApexPersonNameBg { get; set; }
         public string MatchType { get; set; }
-        public int MatchCount { get; set; }
     }
 }

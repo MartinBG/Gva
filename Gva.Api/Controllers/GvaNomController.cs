@@ -172,11 +172,18 @@ namespace Gva.Api.Controllers
         [Route("aircrafts/{id:int}")]
         public IHttpActionResult GetAircraft(int id)
         {
-            var returnValue = this.aircraftRepository.GetAircraft(id);
+            var ac = this.aircraftRepository.GetAircraft(id);
             return Ok(new
             {
-                nomValueId = returnValue.LotId,
-                name = returnValue.Model
+                nomValueId = ac.LotId,
+                name = ac.Model,
+                nameAlt = ac.ModelAlt,
+                textContent =
+                    new
+                    {
+                        airCategory = ac.AirCategory,
+                        aircraftProducer = ac.AircraftProducer
+                    }
             });
         }
 
@@ -190,7 +197,7 @@ namespace Gva.Api.Controllers
                     nomValueId = e.LotId,
                     name = e.Model,
                     nameAlt = e.ModelAlt,
-                    TextContent =
+                    textContent =
                         new
                         {
                             airCategory = e.AirCategory,

@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="CarlosAg.ExcelXmlWriter">
+      <HintPath>..\packages\CarlosAgExcelXmlWriterLibrary.1.0.0\lib\net40\CarlosAg.ExcelXmlWriter.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
@@ -64,6 +67,7 @@
   <ItemGroup>
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DbClause.cs" />
+    <Compile Include="FmOrgMatcher.cs" />
     <Compile Include="Sets\Organization.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Materializer.cs" />

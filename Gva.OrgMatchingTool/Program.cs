@@ -8,6 +8,7 @@ using System.Data.Common;
 using CarlosAg.ExcelXmlWriter;
 using Gva.OrgMatchingTool.Model;
 using Gva.MigrationTool;
+using System.Text.RegularExpressions;
 
 namespace Gva.OrgMatchingTool
 {
@@ -18,22 +19,19 @@ namespace Gva.OrgMatchingTool
         private const string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
 
 
-        public static string TrimName(string originalText)
+        public static string TrimName(string text)
         {
-            return originalText.Replace("\"", "")
-                .Replace(".", "")
-                .Replace(",", "")
-                .Replace(";", "")
-                .Replace("Jsc", "")
-                .Replace("Ltd", "")
-                .Replace("a/k", "")
-                .Replace("&", "")
-                .Replace("-", "")
-                .Replace("_", "")
-                .Replace("“", "")
-                .Replace("”", "")
-                .Replace(" ", "")
-                .ToLower();
+            Func<string, string, string> removeWholeWordIgnoreCase = (s, p) => Regex.Replace(s, @"\b" + p + @"\b", "", RegexOptions.IgnoreCase);
+
+            text = removeWholeWordIgnoreCase(text, "jsc");
+            text = removeWholeWordIgnoreCase(text, "ltd");
+            text = removeWholeWordIgnoreCase(text, "limited");
+            text = removeWholeWordIgnoreCase(text, "a/k");
+            text = removeWholeWordIgnoreCase(text, "ood");
+            text = removeWholeWordIgnoreCase(text, "eood");
+            text = removeWholeWordIgnoreCase(text, "et");
+            text = Regex.Replace(text, "[^а-зА-Зa-zA-Z0-9]", "", RegexOptions.Singleline); //remove any non word characters
+            return text.ToLowerInvariant();
         }
 
         static void Main(string[] args)
@@ -41,273 +39,176 @@ namespace Gva.OrgMatchingTool
             OracleConnection oracleConn = new OracleConnection(oracleConnStr);
             SqlConnection sqlConn = new SqlConnection(sqlConnStr);
 
-            try
-            {
-                oracleConn.Open();
-                sqlConn.Open();
+            oracleConn.Open();
+            sqlConn.Open();
 
-                #region queries
-                var FMOrgs = sqlConn.CreateStoreCommand("select * from orgs")
-               .Materialize(r =>
-                   new Organization
-                   {
-                       EIK = r.Field<string>("t_EIK_EGN"),
-                       TrimmedName = TrimName(r.Field<string>("tNameEN")),
-                       Name = r.Field<string>("tNameEN")
-                   })
-               .ToList();
-                FMOrgs = FMOrgs.Where(e => e.TrimmedName != "").ToList();
-
-                List<Organization> MatchedOrgs = new List<Organization>();
-
-                var ApexOrgs = oracleConn.CreateStoreCommand("select * from CAA_DOC.Firm")
-               .Materialize(r =>
-                   new ApexOrg
+            var fmOrgs = sqlConn.CreateStoreCommand("select * from orgs")
+            .Materialize(r =>
+                new
                 {
-                    Name = r.Field<string>("NAME_TRANS"),
-                    TrimmedName = TrimName(r.Field<string>("NAME_TRANS")),
-                    EIK = r.Field<string>("BULSTAT")
+                    EIK = r.Field<string>("t_EIK_EGN"),
+                    Name = r.Field<string>("tNameEN")
                 })
-               .ToList();
-
-                var ApexPersons = oracleConn.CreateStoreCommand("select * from CAA_DOC.Person")
-               .Materialize(r =>
-                   new ApexPerson
+            .Where(o => !string.IsNullOrWhiteSpace(o.Name))
+            //skip duplicates
+            .GroupBy(o => o.Name, StringComparer.InvariantCultureIgnoreCase)
+            .Select(g =>
+                new FmOrg
                 {
-                    Name = r.Field<string>("NAME_TRANS") + " " + r.Field<string>("SURNAME_TRANS") + " " + r.Field<string>("FAMILY_TRANS"),
-                    NameBgEn = r.Field<string>("NAME_TRANS") + " " + r.Field<string>("SURNAME_TRANS") + " " + r.Field<string>("FAMILY_TRANS") +
-                        "(" + r.Field<string>("NAME") + " " + r.Field<string>("SURNAME") + " " + r.Field<string>("FAMILY") + ")",
-                    TrimmedName = TrimName(r.Field<string>("NAME_TRANS") + r.Field<string>("SURNAME_TRANS") + r.Field<string>("FAMILY_TRANS")),
-                    EIK = r.Field<string>("EGN")
+                    EIK = g.Select(r => r.EIK).Where(eik => !string.IsNullOrWhiteSpace(eik)).Distinct().SingleOrDefault(),
+                    TrimmedName = TrimName(g.Key),
+                    Name = g.Key
                 })
-               .ToList();
-                #endregion
+            .OrderBy(o => o.Name)
+            .ToList();
 
-                int totalMatches = 0;
-
-                #region By EIK\EGN
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    if (org.EIK.Length == 10)
-                    {
-                        foreach (var person in ApexPersons)
-                        {
-                            if (org.EIK == person.EIK)
-                            {
-                                matchFound = true;
-                                org.MatchCount++;
-                                org.MatchedPersonTrimmedName = person.TrimmedName;
-                                org.MatchedPersonName = person.Name;
-                                org.MatchedPersonNameBgEn = person.NameBgEn;
-                                org.MatchType = "EGN";
-                            }
-                        }
-                        if (matchFound)
-                        {
-                            totalMatches++;
-                        }
-                    }
-                    else
-                    {
-                        foreach (var apexOrg in ApexOrgs)
-                        {
-                            if (org.EIK == apexOrg.EIK)
-                            {
-                                matchFound = true;
-                                org.MatchCount++;
-                                org.MatchedOrgTrimmedName = apexOrg.TrimmedName;
-                                org.MatchedOrgName = apexOrg.Name;
-                                org.MatchType = "EIK";
-                            }
-                        }
-                        if (matchFound)
-                        {
-                            totalMatches++;
-                        }
-                    }
-                }
-                MatchedOrgs = FMOrgs.Where(e => e.MatchType != null).ToList();
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region By Person Name
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    foreach (var person in ApexPersons)
-                    {
-                        if (org.Name == person.Name)
-                        {
-                            matchFound = true;
-                            org.MatchCount++;
-                            org.MatchedPersonTrimmedName = person.TrimmedName;
-                            org.MatchedPersonName = person.Name;
-                            org.MatchedPersonNameBgEn = person.NameBgEn;
-                            org.MatchType = "Person Name";
-                        }
-                    }
-                    if (matchFound)
-                    {
-                        totalMatches++;
-                    }
-                }
-                MatchedOrgs.AddRange(FMOrgs.Where(e => e.MatchType != null).ToList());
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region By Org Name
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    foreach (var apexOrg in ApexOrgs)
-                    {
-                        if (org.Name == apexOrg.Name)
-                        {
-                            matchFound = true;
-                            org.MatchCount++;
-                            org.MatchedOrgTrimmedName = apexOrg.TrimmedName;
-                            org.MatchedOrgName = apexOrg.Name;
-                            org.MatchType = "Org Name";
-                        }
-                    }
-                    if (matchFound)
-                    {
-                        totalMatches++;
-                    }
-                }
-                MatchedOrgs.AddRange(FMOrgs.Where(e => e.MatchType != null).ToList());
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region By Trimmed Person Name
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    foreach (var person in ApexPersons)
-                    {
-                        if (org.TrimmedName == person.TrimmedName)
-                        {
-                            matchFound = true;
-                            org.MatchCount++;
-                            org.MatchedPersonTrimmedName = person.TrimmedName;
-                            org.MatchedPersonName = person.Name;
-                            org.MatchedPersonNameBgEn = person.NameBgEn;
-                            org.MatchType = "Person Trimmed Name";
-                        }
-                    }
-                    if (matchFound)
-                    {
-                        totalMatches++;
-                    }
-                }
-                MatchedOrgs.AddRange(FMOrgs.Where(e => e.MatchType != null).ToList());
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region By Org Trimmed Name
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    foreach (var apexOrg in ApexOrgs)
-                    {
-                        if (org.TrimmedName == apexOrg.TrimmedName)
-                        {
-                            matchFound = true;
-                            org.MatchCount++;
-                            org.MatchedOrgTrimmedName = apexOrg.TrimmedName;
-                            org.MatchedOrgName = apexOrg.Name;
-                            org.MatchType = "Org Trimmed Name";
-                        }
-                    }
-                    if (matchFound)
-                    {
-                        totalMatches++;
-                    }
-                }
-                MatchedOrgs.AddRange(FMOrgs.Where(e => e.MatchType != null).ToList());
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region By Org Trimmed Name + Contains
-                foreach (var org in FMOrgs)
-                {
-                    org.MatchCount = 0;
-                    bool matchFound = false;
-                    foreach (var apexOrg in ApexOrgs)
-                    {
-                        if ((org.TrimmedName.Contains(apexOrg.TrimmedName) || apexOrg.TrimmedName.Contains(org.TrimmedName)) && org.TrimmedName != "")
-                        {
-                            matchFound = true;
-                            org.MatchCount++;
-                            org.MatchedOrgTrimmedName = apexOrg.TrimmedName;
-                            org.MatchedOrgName = apexOrg.Name;
-                            org.MatchType = "Org Trimmed Name + Contains";
-                        }
-                    }
-                    if (matchFound)
-                    {
-                        totalMatches++;
-                    }
-                }
-                MatchedOrgs.AddRange(FMOrgs.Where(e => e.MatchType != null).ToList());
-                FMOrgs = FMOrgs.Where(e => e.MatchType == null).ToList();
-                #endregion
-
-                #region Fill Excell
-                Workbook book = new Workbook();
-                Worksheet sheet = book.Worksheets.Add("Organizations");
-                WorksheetRow row = sheet.Table.Rows.Add();
-                row.Cells.Add("Match Type");
-                row.Cells.Add("Match Count");
-                row.Cells.Add("EIK");
-                row.Cells.Add("Organization FM");
-                row.Cells.Add("Organization Apex");
-                row.Cells.Add("Person Apex");
-                foreach (var org in MatchedOrgs)
-                {
-                    WorksheetRow nextRow = sheet.Table.Rows.Add();
-                    nextRow.Cells.Add(org.MatchType);
-                    nextRow.Cells.Add(org.MatchCount.ToString());
-                    nextRow.Cells.Add(org.EIK);
-                    nextRow.Cells.Add(org.Name);
-                    nextRow.Cells.Add(org.MatchedOrgName);
-                    nextRow.Cells.Add(org.MatchedPersonNameBgEn);
-                }
-                foreach (var org in FMOrgs)
-                {
-                    WorksheetRow nextRow = sheet.Table.Rows.Add();
-                    nextRow.Cells.Add("No Match");
-                    nextRow.Cells.Add("0");
-                    nextRow.Cells.Add(org.EIK);
-                    nextRow.Cells.Add(org.Name);
-                    nextRow.Cells.Add(org.MatchedOrgName);
-                    nextRow.Cells.Add(org.MatchedPersonName);
-                }
-                #endregion
-
-                Console.WriteLine(totalMatches + "/" + (FMOrgs.Count + totalMatches));
-                Console.ReadKey(true);
-                book.Save(@"D:\Organizations.xls");
-
-            }
-            catch (OracleException e)
+            var ApexOrgs = oracleConn.CreateStoreCommand("select * from CAA_DOC.Firm")
+            .Materialize(r =>
+                new ApexOrg
             {
-                Console.WriteLine("Exception Message: " + e.Message);
-                Console.WriteLine("Exception Source: " + e.Source);
-            }
-            catch (SqlException e)
+                Name = r.Field<string>("NAME_TRANS"),
+                TrimmedName = TrimName(r.Field<string>("NAME_TRANS")),
+                EIK = r.Field<string>("BULSTAT")
+            })
+            .ToList();
+
+            var ApexPersons = oracleConn.CreateStoreCommand("select * from CAA_DOC.Person")
+            .Materialize(r =>
+                new ApexPerson
             {
-                Console.WriteLine("Exception Message: " + e.Message);
-                Console.WriteLine("Exception Source: " + e.Source);
+                Name = r.Field<string>("NAME_TRANS") + " " + r.Field<string>("SURNAME_TRANS") + " " + r.Field<string>("FAMILY_TRANS"),
+                NameBg = r.Field<string>("NAME") + " " + r.Field<string>("SURNAME") + " " + r.Field<string>("FAMILY"),
+                TrimmedName = TrimName(r.Field<string>("NAME_TRANS") + r.Field<string>("SURNAME_TRANS") + r.Field<string>("FAMILY_TRANS")),
+                EIK = r.Field<string>("EGN")
+            })
+            .ToList();
+
+            var egnMatches =
+                (from fmO in fmOrgs
+                join p in ApexPersons on fmO.EIK equals p.EIK
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexPersonNameEn = p.Name,
+                    ApexPersonNameBg = p.NameBg,
+                    MatchType = "EGN"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !egnMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var eikMatches =
+                (from fmO in fmOrgs
+                join aO in ApexOrgs on fmO.EIK equals aO.EIK
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexOrgNameEn = aO.Name,
+                    MatchType = "EIK"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !eikMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var personNameMatches =
+                (from fmO in fmOrgs
+                join p in ApexPersons on fmO.Name equals p.Name
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexPersonNameEn = p.Name,
+                    ApexPersonNameBg = p.NameBg,
+                    MatchType = "Person Name"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !personNameMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var orgNameMatches =
+                (from fmO in fmOrgs
+                join aO in ApexOrgs on fmO.Name equals aO.Name
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexOrgNameEn = aO.Name,
+                    MatchType = "Org Name"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !orgNameMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var personTrimmedNameMatches =
+                (from fmO in fmOrgs
+                join p in ApexPersons on fmO.TrimmedName equals p.TrimmedName
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexPersonNameEn = p.Name,
+                    ApexPersonNameBg = p.NameBg,
+                    MatchType = "Person Trimmed Name"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !personTrimmedNameMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var orgTrimmedNameMatches =
+                (from fmO in fmOrgs
+                join aO in ApexOrgs on fmO.TrimmedName equals aO.TrimmedName
+                select new OrgMatch
+                {
+                    FmOrgName = fmO.Name,
+                    EIK = fmO.EIK,
+                    ApexOrgNameEn = aO.Name,
+                    MatchType = "Org Trimmed Name"
+                }).ToList();
+
+            fmOrgs = fmOrgs.Where(fmO => !orgTrimmedNameMatches.Any(m => m.FmOrgName == fmO.Name)).ToList();
+
+            var matches = egnMatches
+                .Concat(eikMatches)
+                .Concat(personNameMatches)
+                .Concat(orgNameMatches)
+                .Concat(personTrimmedNameMatches)
+                .Concat(orgTrimmedNameMatches)
+                //TODO take the first org in case of duplicated names, should be investigated
+                .GroupBy(m => m.FmOrgName)
+                .Select(g => g.First());
+
+            #region Fill Excell
+            Workbook book = new Workbook();
+            Worksheet sheet = book.Worksheets.Add("Organizations");
+            WorksheetRow row = sheet.Table.Rows.Add();
+            row.Cells.Add("Match Type");
+            row.Cells.Add("EIK");
+            row.Cells.Add("Organization FM");
+            row.Cells.Add("Organization Apex");
+            row.Cells.Add("Person Apex");
+
+            foreach (var m in matches)
+            {
+                WorksheetRow nextRow = sheet.Table.Rows.Add();
+                nextRow.Cells.Add(m.MatchType);
+                nextRow.Cells.Add(m.EIK);
+                nextRow.Cells.Add(m.FmOrgName);
+                nextRow.Cells.Add(m.ApexOrgNameEn);
+                nextRow.Cells.Add(m.ApexPersonNameEn + "(" + m.ApexPersonNameBg + ")");
             }
+
+            foreach (var org in fmOrgs)
+            {
+                WorksheetRow nextRow = sheet.Table.Rows.Add();
+                nextRow.Cells.Add("No Match");
+                nextRow.Cells.Add("0");
+                nextRow.Cells.Add(org.EIK);
+                nextRow.Cells.Add(org.Name);
+            }
+            #endregion
+
+            book.Save(@"Organizations.xls");
+
+            int matched = matches.Count();
+            int unmatched = fmOrgs.Count();
+            Console.WriteLine(matched + "/" + (matched + unmatched));
         }
-
-
     }
 }
