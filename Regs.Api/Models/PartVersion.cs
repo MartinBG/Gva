@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Common.Sequence;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Regs.Api.Models
@@ -47,7 +48,19 @@ namespace Regs.Api.Models
             set
             {
                 this.content = value;
-                this.TextContent = value.ToString();
+
+                if (this.content == null)
+                {
+                    throw new ArgumentNullException("PartVersion.Content cannot be null, use DeletePart instead");
+                }
+
+                Formatting formatting;
+#if DEBUG
+                formatting = Formatting.Indented;
+#else
+                formatting = Formatting.None;
+#endif
+                this.TextContent = value.ToString(formatting);
             }
         }
     }

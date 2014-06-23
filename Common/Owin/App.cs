@@ -66,9 +66,11 @@ namespace Common.Owin
                 {
 #if DEBUG
                     Formatting = Formatting.Indented,
+#else
+                    Formatting = Formatting.None,
 #endif
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    NullValueHandling = NullValueHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Include,
                     DefaultValueHandling = DefaultValueHandling.Include,
                     DateFormatHandling = DateFormatHandling.IsoDateFormat,
                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
