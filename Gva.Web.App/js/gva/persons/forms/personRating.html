@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.staffType" alias="'staffTypes'" ng-disabled="!isNew" l10n-text="persons.ratingDirective.staffType" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.staffType" alias="'staffTypes'" ng-required="true" ng-disabled="!isNew" l10n-text="persons.ratingDirective.staffType" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.staffType.alias === 'flightCrew' || model.staffType.alias === 'ovd' || model.staffType.alias === 'to_suvd'">
     <sc-field type="nomenclature" alias="'personRatingLevels'" ng-model="model.personRatingLevel" l10n-text="persons.ratingDirective.personRatingLevel" class="col-sm-3"></sc-field>
@@ -13,7 +13,7 @@
     <sc-field type="text" ng-model="model.sector" l10n-text="persons.ratingDirective.sector" class="col-sm-3"></sc-field>
   </div>
   <div ng-if="model.staffType" class="row">
-    <sc-field type="nomenclature" ng-model="model.personRatingModel" alias="'personRatingModels'" required l10n-text="persons.ratingDirective.personRatingModel" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.personRatingModel" alias="'personRatingModels'" ng-required="true" l10n-text="persons.ratingDirective.personRatingModel" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.staffType.alias === 'to_vs'">
     <sc-field type="nomenclature" alias="'aircraftTypeGroups'" ng-model="model.aircraftTypeGroup" l10n-text="persons.ratingDirective.aircraftTypeGroup" class="col-sm-3"></sc-field>

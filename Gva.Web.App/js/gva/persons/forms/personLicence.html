@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <sc-field type="text" ng-model="model.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber" class="col-sm-3"></sc-field>
-      <sc-field type="text" ng-model="model.foreignLicenceNumber" ng-required="true" l10n-text="persons.licenceDirective.foreignLicenceNumber" class="col-sm-3"></sc-field>
+      <sc-field type="text" ng-model="model.foreignLicenceNumber" ng-if="model.licenceType.code === 'FOREIGN'" ng-required="true" l10n-text="persons.licenceDirective.foreignLicenceNumber" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
       <sc-field type="nomenclature" alias="'boolean'" ng-model="model.valid" ng-required="true" l10n-text="persons.licenceDirective.valid" class="col-sm-3"></sc-field>
