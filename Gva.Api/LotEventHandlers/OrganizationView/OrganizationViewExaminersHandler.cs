@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
 
         public override void Fill(GvaViewOrganizationExaminer examiner, PartVersion part)
         {
-            examiner.Lot = part.Part.Lot;
+            examiner.LotId = part.Part.Lot.LotId;
             examiner.Part = part.Part;
             examiner.PersonLotId = part.Content.Get<int>("person.nomValueId");
             examiner.ExaminerCode = part.Content.Get<string>("examinerCode");

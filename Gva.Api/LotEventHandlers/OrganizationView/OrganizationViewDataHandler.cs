@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.OrganizationView
 
         public override void Fill(GvaViewOrganization organization, PartVersion part)
         {
-            organization.Lot = part.Part.Lot;
+            organization.LotId = part.Part.Lot.LotId;
 
             organization.Name = part.Content.Get<string>("name");
             organization.NameAlt = part.Content.Get<string>("nameAlt");

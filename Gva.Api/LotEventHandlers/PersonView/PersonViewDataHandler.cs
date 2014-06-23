@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
 
         public override void Fill(GvaViewPerson person, PartVersion part)
         {
-            person.Lot = part.Part.Lot;
+            person.LotId = part.Part.Lot.LotId;
 
             person.Lin = part.Content.Get<string>("lin");
             person.LinType = part.Content.Get<string>("linType.code");

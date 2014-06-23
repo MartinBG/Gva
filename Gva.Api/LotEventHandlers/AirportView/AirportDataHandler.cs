@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.AirportView
 
         public override void Fill(GvaViewAirport airport, PartVersion part)
         {
-            airport.Lot = part.Part.Lot;
+            airport.LotId = part.Part.Lot.LotId;
 
             airport.Name = part.Content.Get<string>("name");
             airport.NameAlt = part.Content.Get<string>("nameAlt");

@@ -26,7 +26,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
 
         public override void Fill(GvaViewAircraftRegistration reg, PartVersion part)
         {
-            reg.Lot = part.Part.Lot;
+            reg.LotId = part.Part.Lot.LotId;
             reg.Part = part.Part;
             reg.CertRegisterId = part.Content.Get<int>("register.nomValueId");
             reg.CertNumber = part.Content.Get<int>("certNumber");

@@ -22,7 +22,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
 
         public override void Fill(GvaViewPersonRating rating, PartVersion part)
         {
-            rating.Lot = part.Part.Lot;
+            rating.LotId = part.Part.Lot.LotId;
             rating.Part = part.Part;
             rating.RatingType = part.Content.Get<string>("ratingType.name");
         }

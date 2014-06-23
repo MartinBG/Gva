@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
 
         public override void Fill(GvaViewAircraft aircraft, PartVersion part)
         {
-            aircraft.Lot = part.Part.Lot;
+            aircraft.LotId = part.Part.Lot.LotId;
 
             aircraft.ManSN = part.Content.Get<string>("manSN");
             aircraft.Model = part.Content.Get<string>("model");

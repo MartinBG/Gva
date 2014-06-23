@@ -21,7 +21,7 @@ namespace Gva.Api.LotEventHandlers.EquipmentView
 
         public override void Fill(GvaViewEquipment equipment, PartVersion part)
         {
-            equipment.Lot = part.Part.Lot;
+            equipment.LotId = part.Part.Lot.LotId;
 
             equipment.Name = part.Content.Get<string>("name");
             equipment.EquipmentProducer = part.Content.Get<string>("equipmentProducer.name");

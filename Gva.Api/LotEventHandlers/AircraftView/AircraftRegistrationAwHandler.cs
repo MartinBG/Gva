@@ -23,7 +23,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         public override void Fill(GvaViewAircraftAw aw, PartVersion part)
         {
             aw.Part = part.Part;
-            aw.Lot = part.Part.Lot;
+            aw.LotId = part.Part.Lot.LotId;
             aw.RegId = part.Content.Get<int>("registration.nomValueId");
             aw.IssueDate = part.Content.Get<DateTime?>("issueDate");
             aw.ValidFromDate = part.Content.Get<DateTime>("validFromDate");

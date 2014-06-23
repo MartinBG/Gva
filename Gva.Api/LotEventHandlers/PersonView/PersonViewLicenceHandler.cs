@@ -22,7 +22,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
 
         public override void Fill(GvaViewPersonLicence licence, PartVersion part)
         {
-            licence.Lot = part.Part.Lot;
+            licence.LotId = part.Part.Lot.LotId;
             licence.Part = part.Part;
             licence.LicenceType = part.Content.Get<string>("licenceType.name");
         }

@@ -25,7 +25,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
 
         public override void Fill(GvaViewInventoryItem invItem, PartVersion partVersion)
         {
-            invItem.Lot = partVersion.Part.Lot;
+            invItem.LotId = partVersion.Part.Lot.LotId;
             invItem.Part = partVersion.Part;
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
 

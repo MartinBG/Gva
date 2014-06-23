@@ -20,7 +20,7 @@ namespace Gva.Api.LotEventHandlers.PersonView
 
         public override void Fill(GvaViewPersonInspector inspector, PartVersion part)
         {
-            inspector.Lot = part.Part.Lot;
+            inspector.LotId = part.Part.Lot.LotId;
             inspector.ExaminerCode = part.Content.Get<string>("examinerCode");
             inspector.CaaName = part.Content.Get<string>("caa.name");
             inspector.StampNum = part.Content.Get<string>("stampNum");
