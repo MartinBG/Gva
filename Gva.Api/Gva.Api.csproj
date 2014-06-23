@@ -149,6 +149,9 @@
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegMark.cs" />
+    <Compile Include="Models\ASExamQuestion.cs" />
+    <Compile Include="Models\ASExamVariantQuestion.cs" />
+    <Compile Include="Models\ASExamVariant.cs" />
     <Compile Include="Models\GvaViewPersonInspector.cs" />
     <Compile Include="Models\GvaViewOrganizationExaminer.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />

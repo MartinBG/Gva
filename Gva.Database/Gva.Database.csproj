@@ -45,6 +45,9 @@
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Tables\ASExamVariants.sql" />
+    <Content Include="Create\Tables\ASExamQuestions.sql" />
+    <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
     <Content Include="Create\Tables\GvaViewOrganizationExaminers.sql" />
     <Content Include="Create\Tables\GvaViewPersonInspectors.sql" />
     <Content Include="Create\Tables\GvaViewAircraftRegistrations.sql" />
@@ -131,9 +134,8 @@
     <Content Include="Insert\GvaExcelConfig\ExcelConfig.xml" />
     <Content Include="Insert\Noms\Organizations\aircarrierServices.sql" />
     <Content Include="Insert\Noms\Persons\linTypes.sql" />
-    <Content Include="Insert\Noms\Persons\commonQuestions.sql" />
+    <Content Include="Insert\Noms\Persons\asExamQuestionTypes.sql" />
     <Content Include="Insert\Noms\Persons\_personsMigrationNoms.sql" />
-    <Content Include="Insert\Noms\Persons\specializedQuestions.sql" />
     <Content Include="Insert\Noms\Equipments\equipmentProducers.sql" />
     <Content Include="Insert\Noms\Equipments\equipmentTypes.sql" />
     <Content Include="Insert\Noms\Organizations\recommendationPartNumbers.sql" />
