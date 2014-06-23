@@ -2,15 +2,15 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewEquipments] (
-    [LotId]            INT       NOT NULL,
-    [Name]            NVARCHAR(50)  NOT NULL,
-    [EquipmentProducer]            NVARCHAR(50)  NOT NULL,
-    [EquipmentType]         NVARCHAR(50)  NOT NULL,
-    [ManPlace]       NVARCHAR(50)     NOT NULL,
-    [ManDate]             DATETIME2  NOT NULL,
-    [Place]         NVARCHAR(50) NULL,
-    [OperationalDate]         NVARCHAR(50) NULL,
-    [Note]           NVARCHAR(50)  NULL,
+    [LotId]             INT          NOT NULL,
+    [Name]              NVARCHAR(50) NOT NULL,
+    [EquipmentProducer] NVARCHAR(50) NOT NULL,
+    [EquipmentType]     NVARCHAR(50) NOT NULL,
+    [ManPlace]          NVARCHAR(50) NOT NULL,
+    [ManDate]           DATETIME2    NOT NULL,
+    [Place]             NVARCHAR(50) NULL,
+    [OperationalDate]   DATETIME2    NULL,
+    [Note]              NVARCHAR(50) NULL,
     CONSTRAINT [PK_GvaViewEquipments]      PRIMARY KEY ([LotId]),
     CONSTRAINT [FK_GvaViewEquipments_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
 )

@@ -32,9 +32,7 @@
             {
               nomValueId: 4
             }
-          ],
-          frequencies: [],
-          radioNavigationAids: []
+          ]
         }
       };
     }
