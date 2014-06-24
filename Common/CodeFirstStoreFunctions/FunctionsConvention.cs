@@ -4,6 +4,7 @@ namespace CodeFirstStoreFunctions
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data.Entity;
     using System.Data.Entity.Core.Mapping;
     using System.Data.Entity.Core.Metadata.Edm;
@@ -35,6 +36,26 @@ namespace CodeFirstStoreFunctions
                 model.ConceptualModel.Container.AddFunctionImport(functionImportDefinition);
                 model.StoreModel.AddItem(storeFunctionDefinition);
 
+                FunctionImportResultMapping entityTypeResultMapping = null;
+                if (functionImport.ReturnType is EntityType)
+                {
+                    var entityType = (EntityType)functionImport.ReturnType;
+
+                    var returnTypePropertyMappings = new Collection<FunctionImportReturnTypePropertyMapping>();
+                    foreach (var propertyMapping in model.GetEntityTypePropertyMappings(entityType).OfType<ScalarPropertyMapping>())
+                    {
+                        returnTypePropertyMappings.Add(new FunctionImportReturnTypeScalarPropertyMapping(propertyMapping.Property.Name, propertyMapping.Column.Name));
+                    }
+
+                    var typeMapping = new FunctionImportEntityTypeMapping(
+                        Enumerable.Empty<EntityType>(),
+                        new[] { entityType },
+                        returnTypePropertyMappings,
+                        Enumerable.Empty<FunctionImportEntityTypeMappingCondition>());
+
+                    entityTypeResultMapping = new FunctionImportResultMapping();
+                    entityTypeResultMapping.AddTypeMapping(typeMapping);
+                }
 
                 if (functionImportDefinition.IsComposableAttribute)
                 {
@@ -42,16 +63,26 @@ namespace CodeFirstStoreFunctions
                         new FunctionImportMappingComposable(
                             functionImportDefinition,
                             storeFunctionDefinition,
-                            new FunctionImportResultMapping(),
+                            entityTypeResultMapping ?? new FunctionImportResultMapping(),
                             model.ConceptualToStoreMapping));
                 }
                 else
                 {
+                    FunctionImportResultMapping[] functionImportResultMappings;
+                    if (entityTypeResultMapping != null)
+                    {
+                        functionImportResultMappings = new FunctionImportResultMapping[] { entityTypeResultMapping };
+                    }
+                    else
+                    {
+                        functionImportResultMappings = new FunctionImportResultMapping[0];
+                    }
+
                     model.ConceptualToStoreMapping.AddFunctionImportMapping(
                         new FunctionImportMappingNonComposable(
                             functionImportDefinition,
                             storeFunctionDefinition,
-                            new FunctionImportResultMapping[0],
+                            functionImportResultMappings,
                             model.ConceptualToStoreMapping));
                 }
             }

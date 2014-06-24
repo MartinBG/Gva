@@ -125,6 +125,7 @@
     <Compile Include="Blob\BlobWriter.cs" />
     <Compile Include="Blob\BlobWriteStream.cs" />
     <Compile Include="CodeFirstStoreFunctions\DbFunctionDetailsAttribute.cs" />
+    <Compile Include="CodeFirstStoreFunctions\DbModelExtensions.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionDiscovery.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionImport.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionsConvention.cs" />
