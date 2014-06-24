@@ -62,11 +62,11 @@ namespace Regs.Api.Models
 
             this.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.Alias)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             // Table & Column Mappings
             this.ToTable("LotSets");
