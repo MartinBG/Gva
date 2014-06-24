@@ -22,5 +22,12 @@ namespace Gva.Api.Repositories.PersonRepository
             int? limit = null);
 
         GvaViewPerson GetPerson(int personId);
+
+        IEnumerable<ASExamVariant> GetQuestions(
+            int asExamQuestionTypeId,
+            string name = null,
+            bool exact = false,
+            int offset = 0,
+            int? limit = null);
     }
 }

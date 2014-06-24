@@ -85,5 +85,27 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Ratings)
                 .SingleOrDefault(p => p.LotId == personId);
         }
+
+        public IEnumerable<ASExamVariant> GetQuestions(
+            int asExamQuestionTypeId,
+            string name = null,
+            bool exact = false,
+            int offset = 0,
+            int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<ASExamVariant>();
+
+            predicate = predicate
+                .AndStringMatches(p => p.Name, name, exact)
+                .And(e => e.ASExamQuestionTypeId == asExamQuestionTypeId);
+
+            var asExamVariants = this.unitOfWork.DbContext.Set<ASExamVariant>()
+                .Where(predicate);
+
+            return asExamVariants
+                .OrderBy(p => p.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
+        }
     }
 }
