@@ -17,22 +17,21 @@
   <div class="row">
     <sc-field type="text" ng-model="model.note" l10n-text="equipments.equipmentDataDirective.note" class="col-md-8 col-sm-12"></sc-field>
   </div>
-  <accordion>
-    <accordion-group style="margin-top: 5px;">
-      <accordion-heading>
-        <a l10n-text="equipments.equipmentDataDirective.otherData" style="font-size: 12px;"></a>
-      </accordion-heading>
-      <div class="row">
-        <sc-field type="text" ng-model="model.ext.coordinates" l10n-text="equipments.equipmentDataDirective.coordinates" class="col-md-2 col-sm-4"></sc-field>
-        <sc-field type="text" ng-model="model.ext.elevation" l10n-text="equipments.equipmentDataDirective.elevation" class="col-md-2 col-sm-4"></sc-field>
-        <sc-field type="text" ng-model="model.ext.call" l10n-text="equipments.equipmentDataDirective.call" class="col-md-2 col-sm-4"></sc-field>
-        <sc-field type="text" ng-model="model.ext.frequencies" l10n-text="equipments.equipmentDataDirective.frequencies" class="col-md-2 col-sm-4"></sc-field>
-      </div>
-      <div class="row">
-        <sc-field type="text" ng-model="model.ext.behavior" l10n-text="equipments.equipmentDataDirective.behavior" class="col-md-2 col-sm-4"></sc-field>
-        <sc-field type="text" ng-model="model.ext.power" l10n-text="equipments.equipmentDataDirective.power" class="col-md-2 col-sm-4"></sc-field>
-        <sc-field type="text" ng-model="model.ext.range" l10n-text="equipments.equipmentDataDirective.range" class="col-md-2 col-sm-4"></sc-field>
-      </div>
-    </accordion-group>
-  </accordion>
+
+  <h5 class="form-header" style="margin-top:10px;" ng-init="otherDataReview = false">
+    <a l10n-text="equipments.equipmentDataDirective.otherData" ng-click="otherDataReview = !otherDataReview" style="cursor:pointer;"></a>
+  </h5>
+  <div ng-show="otherDataReview">
+    <div class="row">
+      <sc-field type="text" ng-model="model.ext.coordinates" l10n-text="equipments.equipmentDataDirective.coordinates" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="model.ext.elevation" l10n-text="equipments.equipmentDataDirective.elevation" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="model.ext.call" l10n-text="equipments.equipmentDataDirective.call" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="model.ext.frequencies" l10n-text="equipments.equipmentDataDirective.frequencies" class="col-md-2 col-sm-4"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field type="text" ng-model="model.ext.behavior" l10n-text="equipments.equipmentDataDirective.behavior" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="model.ext.power" l10n-text="equipments.equipmentDataDirective.power" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="model.ext.range" l10n-text="equipments.equipmentDataDirective.range" class="col-md-2 col-sm-4"></sc-field>
+    </div>
+  </div>
 </ng-form>

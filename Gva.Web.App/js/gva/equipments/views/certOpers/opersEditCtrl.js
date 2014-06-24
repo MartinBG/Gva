@@ -38,9 +38,9 @@
 
     $scope.cancel = function () {
       $scope.editMode = null;
-      $scope.equipmentCertOper.part = _.cloneDeep(originalCert.part);
+      $scope.equipmentCertOper = _.cloneDeep(originalCert);
     };
-    
+
     $scope.deleteOper = function () {
       return EquipmentCertOperational.remove({
         id: $stateParams.id,
