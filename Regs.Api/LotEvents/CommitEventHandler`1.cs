@@ -100,7 +100,7 @@ namespace Regs.Api.LotEvents
                     continue;
                 }
 
-                var prevPartVersion = commit.CommitVersions.SingleOrDefault(cv => cv.PartVersionId == part.PartVersionId).OldPartVersion;
+                var prevPartVersion = commit.CommitVersions.SingleOrDefault(cv => cv.PartVersion.PartVersionId == part.PartVersionId).OldPartVersion;
                 if (!this.partMatcher(prevPartVersion))
                 {
                     continue;
