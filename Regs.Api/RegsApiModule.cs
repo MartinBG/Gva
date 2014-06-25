@@ -11,6 +11,7 @@ namespace Regs.Api
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             moduleBuilder.RegisterType<RegsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
+            moduleBuilder.RegisterType<RegsDbContextInitializer>().As<IDbContextInitializer>().SingleInstance();
             moduleBuilder.RegisterType<LotRepository>().As<ILotRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<LotEventDispatcher>().As<ILotEventDispatcher>().InstancePerLifetimeScope();
         }

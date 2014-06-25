@@ -131,6 +131,7 @@
     <Compile Include="CodeFirstStoreFunctions\FunctionsConvention.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionsConvention`1.cs" />
     <Compile Include="CodeFirstStoreFunctions\StoreFunctionBuilder.cs" />
+    <Compile Include="Data\IDbContextInitializer.cs" />
     <Compile Include="Data\IDbConfiguration.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Jobs\IJob.cs" />

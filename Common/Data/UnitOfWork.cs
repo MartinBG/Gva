@@ -33,8 +33,11 @@ namespace Common.Data
 
         private DbContext context = null;
 
-        public UnitOfWork(IEnumerable<IDbConfiguration> configurations)
+        IEnumerable<IDbContextInitializer> contextInitializers;
+
+        public UnitOfWork(IEnumerable<IDbConfiguration> configurations, IEnumerable<IDbContextInitializer> contextInitializers)
         {
+            this.contextInitializers = contextInitializers;
             Initialize(configurations);
         }
 
@@ -48,6 +51,11 @@ namespace Common.Data
                     this.context.Configuration.LazyLoadingEnabled = false;
                     this.context.Configuration.ProxyCreationEnabled = false;
                     this.context.Configuration.UseDatabaseNullSemantics = true;
+
+                    foreach (IDbContextInitializer contextInitializer in this.contextInitializers)
+                    {
+                        contextInitializer.InitializeContext(context);
+                    }
 
 #if DEBUG
                     this.context.Database.Log = s => Debug.WriteLine(s);
