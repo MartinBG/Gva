@@ -33,10 +33,10 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.ASExamQuestion)
                 .WithMany(t => t.ASExamVariantQuestions)
-                .HasForeignKey(d => d.ASExamVariantId);
+                .HasForeignKey(d => d.ASExamQuestionId);
             this.HasRequired(t => t.ASExamVariant)
                 .WithMany(t => t.ASExamVariantQuestions)
-                .HasForeignKey(d => d.ASExamQuestionId);
+                .HasForeignKey(d => d.ASExamVariantId);
 
         }
     }

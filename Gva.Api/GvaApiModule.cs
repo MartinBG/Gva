@@ -106,6 +106,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaPublisherController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaPartsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ExamsController>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CoordinatorSimi>().As<IDataGenerator>().InstancePerLifetimeScope();

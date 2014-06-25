@@ -1710,7 +1710,8 @@
           passed: 'Издържал',
           grade: 'Изчисляване',
           grading: 'Оценяване',
-          extract: 'Извличане'
+          extract: 'Извличане',
+          successThreshold: 'Праг'
         },
         newExamAS: {
           title: 'Нов на теоретичен изпит АС',
