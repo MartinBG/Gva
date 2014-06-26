@@ -69,7 +69,11 @@
     <Content Include="Create\Tables\GvaViewPersons.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\gvaWordTemplates.sql" />
-    <Content Include="Insert\Lots\lotData.sql" />
+    <Content Include="Insert\Lots\aircraft.sql" />
+    <Content Include="Insert\Lots\airport.sql" />
+    <Content Include="Insert\Lots\equipment.sql" />
+    <Content Include="Insert\Lots\organization.sql" />
+    <Content Include="Insert\Lots\person.sql" />
     <Content Include="Insert\Noms\Aircrafts\inspectorTypes.sql" />
     <Content Include="Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql" />
     <Content Include="Insert\Noms\Airports\_airportsMigrationNoms.sql" />

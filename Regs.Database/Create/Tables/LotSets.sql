@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotSets] (
-    [LotSetId]   INT           NOT NULL,
+    [LotSetId]   INT            NOT NULL IDENTITY,
     [Name]       NVARCHAR (100) NOT NULL,
     [Alias]      NVARCHAR (100) NOT NULL,
     CONSTRAINT [PK_LotSets] PRIMARY KEY ([LotSetId]),

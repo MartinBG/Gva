@@ -2,7 +2,7 @@
 GO 
 
 CREATE TABLE [dbo].[LotSchemas] (
-    [LotSchemaId]  INT              NOT NULL,
+    [LotSchemaId]  INT              NOT NULL IDENTITY,
     [SchemaText]    NVARCHAR (MAX)  NOT NULL,
     CONSTRAINT [PK_LotSchemas] PRIMARY KEY ([LotSchemaId])
 )

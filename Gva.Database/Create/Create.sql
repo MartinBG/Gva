@@ -39,7 +39,11 @@ GO
 -- Lots
 ---------------------------------------------------------------
 
-:r $(rootPath)\"..\Insert\Lots\lotData.sql"
+:r $(rootPath)\"..\Insert\Lots\person.sql"
+:r $(rootPath)\"..\Insert\Lots\organization.sql"
+:r $(rootPath)\"..\Insert\Lots\aircraft.sql"
+:r $(rootPath)\"..\Insert\Lots\airport.sql"
+:r $(rootPath)\"..\Insert\Lots\equipment.sql"
 
 ---------------------------------------------------------------
 -- SystemData
