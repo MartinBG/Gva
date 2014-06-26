@@ -87,17 +87,6 @@ namespace Rio.Data.Utils.RioValidator
                         .Select(err => err.Item1)
                         .Aggregate((err1, err2) => string.Format("{0}\n{1}", err1, err2));
                 }
-#if DEBUG
-                if (warnings.Count > 0)
-                {
-                    string warningsText =
-                        warnings
-                        .Select(err => err.Item1)
-                        .Aggregate((err1, err2) => string.Format("{0}\n{1}", err1, err2));
-
-                    _developmentLogger.Log(warningsText);
-                }
-#endif
 
                 return errorCount == 0;
             }
