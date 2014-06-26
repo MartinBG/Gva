@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5034" 
+	xmlns="http://ereg.egov.bg/segment/R-5034" 
+	xmlns:amc="http://ereg.egov.bg/segment/R-4322" 
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
+	xmlns:as="http://ereg.egov.bg/value/R-4332" 
+	xmlns:mn="http://ereg.egov.bg/value/R-3986" 
+	xmlns:am="http://ereg.egov.bg/segment/R-5030"
+	xmlns:asn="http://ereg.egov.bg/value/R-4334"
+	xmlns:sc="http://ereg.egov.bg/value/R-4398"
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:ba="http://ereg.egov.bg/value/R-5032"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4322" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4332" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5030" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4398" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5032" />
+
+	<xsd:complexType name="DataCommercialTransportAircraft">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за ВС за търговски превози</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftManufacturerCountry" type="amc:AircraftManufacturerCountry" minOccurs="0" />
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="AircraftSeries" type="as:AircraftSeries" minOccurs="0" />
+			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />
+			<xsd:element name="AircraftModel" type="am:AircraftModel" minOccurs="0" />
+			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+			<xsd:element name="SeatsCount" type="sc:SeatsCount" minOccurs="0" />
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="BaseAircraft" type="ba:BaseAircraft" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NotarizedStatement" xml:space="preserve">
+    <value>Notarized statement of ownership of ELVS</value>
+  </data>
+  <data name="Admission" xml:space="preserve">
+    <value>Order on admission to the workplace</value>
+  </data>
+  <data name="Conclusion" xml:space="preserve">
+    <value>Certificate of passing a theoretical examination</value>
+  </data>
+  <data name="PassMark" xml:space="preserve">
+    <value>Certificate pass mark in the examination language center</value>
+  </data>
+  <data name="Protocols" xml:space="preserve">
+    <value>Protocols and / or acts of checks and certificates and / or protocols for training</value>
+  </data>
+  <data name="ColorPhotograph" xml:space="preserve">
+    <value>Color photograph of the applicant for a license</value>
+  </data>
+  <data name="CopyLicenseHeld" xml:space="preserve">
+    <value>A copy of the license held</value>
+  </data>
+  <data name="DyplomCopy" xml:space="preserve">
+    <value>A copy of the diploma of education</value>
+  </data>
+  <data name="FeePaid" xml:space="preserve">
+    <value>Document for paid state fee</value>
+  </data>
+  <data name="IDCopy" xml:space="preserve">
+    <value>Copy of identity card</value>
+  </data>
+  <data name="InformationFlight" xml:space="preserve">
+    <value>Information for flight training</value>
+  </data>
+  <data name="Logbook" xml:space="preserve">
+    <value>Logbook crew of aircraft</value>
+  </data>
+  <data name="MedicalCertificate" xml:space="preserve">
+    <value>Medical certificate of the relevant class</value>
+  </data>
+  <data name="PracticalTraining" xml:space="preserve">
+    <value>Certificate of flight or practical training in ATC</value>
+  </data>
+  <data name="TheoreticalExamCPL" xml:space="preserve">
+    <value>Certificate of passing a theoretical examination for CPL (A), ATPL (A), IR (A), CPL (H), ATPL (H), IR (H)</value>
+  </data>
+  <data name="BulletinsStatus" xml:space="preserve">
+    <value>Service bulletins status and airworthiness directives</value>
+  </data>
+  <data name="ValidCertificateAirworthiness" xml:space="preserve">
+    <value>Valid certificate for airworthiness.</value>
+  </data>
+  <data name="CertificateQualityNewBuilt" xml:space="preserve">
+    <value>Certificate of quality and compliance /concerns for newly built aircraft in Republic if Bulgaria/</value>
+  </data>
+  <data name="ConfirmationAdditionalRequirements" xml:space="preserve">
+    <value>Confirmation that additional requirements and conditions of the importing country are met</value>
+  </data>
+  <data name="ConfirmationApproveExceptions" xml:space="preserve">
+    <value>Confirmation that the importing country will approve these exceptions</value>
+  </data>
+  <data name="ResourceStatusAggregates" xml:space="preserve">
+    <value>Resource status of all units  equipment, emergency rescue equipment</value>
+  </data>
+  <data name="AirportManagement" xml:space="preserve">
+    <value>Guidance on management and operation of airport</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance certified by registered auditor</value>
+  </data>
+  <data name="DataListQualification" xml:space="preserve">
+    <value>List of data showing the qualifications and professional experience of the management staff</value>
+  </data>
+  <data name="ProvesCandidateRights" xml:space="preserve">
+    <value>Evidence of the applicant's right to use the equipment and / or technology ensuring compliance with applicable standards and procedures for security and safety of people, aircrafts, and equipment of the airport</value>
+  </data>
+  <data name="ReportIncome" xml:space="preserve">
+    <value>Report of revenue and expenditure certified by registered auditor</value>
+  </data>
+  <data name="ReportMoneyFlow" xml:space="preserve">
+    <value>Report for money flow certified by registered auditor</value>
+  </data>
+  <data name="CertificateAirworthiness" xml:space="preserve">
+    <value>Certificate of airworthiness for the aircraft</value>
+  </data>
+  <data name="CertificateCompliance" xml:space="preserve">
+    <value>Certificate of compliance with emission aircraft noise</value>
+  </data>
+  <data name="CertificateRegistration" xml:space="preserve">
+    <value>Certificate of registration of the aircraft</value>
+  </data>
+  <data name="ContractTransfer" xml:space="preserve">
+    <value>Contract for transfer of ownership or other document giving rise to deletion of aircraft</value>
+  </data>
+  <data name="PermitRadios" xml:space="preserve">
+    <value>Permit for use of radios</value>
+  </data>
+  <data name="WrittenAgreement" xml:space="preserve">
+    <value>Written agreement in principle by the authority of the State in whose register the aircraft will fit</value>
+  </data>
+  <data name="PracticalExperience" xml:space="preserve">
+    <value>Certificate of practical experience gained</value>
+  </data>
+  <data name="TheoreticalExamApprovedOrganization" xml:space="preserve">
+    <value>Certificate of passing a theoretical examination before an approved training organization</value>
+  </data>
+  <data name="AirportCharacteristics" xml:space="preserve">
+    <value>Act on the main characteristics and technical condition of the civil airport for public use with content in accordance with Annex № 5 of Ordinance № 20</value>
+  </data>
+  <data name="ExploitationManual" xml:space="preserve">
+    <value>Guidance for management and operation of a civil airport for public use content in accordance with Annex № 3 of Ordinance № 20</value>
+  </data>
+  <data name="OwnershipTerrainUsage" xml:space="preserve">
+    <value>Documents evidencing title to or the right to use the terrain and facilities of the airfield</value>
+  </data>
+  <data name="PermitEnvironment" xml:space="preserve">
+    <value>Permit issued pursuant to Art. 82, para. 4 and 5 of the Law on Environmental Protection</value>
+  </data>
+  <data name="ApprovedOrder" xml:space="preserve">
+    <value>Approved an order for leasing</value>
+  </data>
+  <data name="ExportCertificate" xml:space="preserve">
+    <value>Export Certificate of Airworthiness</value>
+  </data>
+  <data name="RemovedRegister" xml:space="preserve">
+    <value>Document certifying that the aircraft is removed from the register of the country of final registration</value>
+  </data>
+  <data name="CopyLicense" xml:space="preserve">
+    <value>A copy of the license</value>
+  </data>
+  <data name="CopyLogbookLast12Months" xml:space="preserve">
+    <value>Copy of the data in the logbook for the last 12 months for licenses crew</value>
+  </data>
+  <data name="CopyMedicalCertificateJAR" xml:space="preserve">
+    <value>A copy of the medical certificate in accordance with JAR-FCL 3</value>
+  </data>
+  <data name="IdentityDocumentCopy" xml:space="preserve">
+    <value>A copy of the identity document</value>
+  </data>
+  <data name="CenterMassProtocol" xml:space="preserve">
+    <value>Mass and centring of the aircraft</value>
+  </data>
+  <data name="CertificateExport" xml:space="preserve">
+    <value>Export certificate of airworthiness</value>
+  </data>
+  <data name="CertificateFlyingWorthiness" xml:space="preserve">
+    <value>Certificate of airworthiness issued by CAA</value>
+  </data>
+  <data name="CertificateFlyingWorthinessAuthorizedBody" xml:space="preserve">
+    <value>Valid certificate of airworthiness issued by the authority of the country of provenance</value>
+  </data>
+  <data name="CertificateQuality" xml:space="preserve">
+    <value>Certificate of quality and compliance</value>
+  </data>
+  <data name="CertificateQualityApprovedManufacturer" xml:space="preserve">
+    <value>Certificate of quality and compliance issued by an approved manufacturer</value>
+  </data>
+  <data name="ComparissionTable" xml:space="preserve">
+    <value>Comparative table of the exploitational bulletins issued by the manufacturer and airworthiness directives issued by the relevant aviation authorities with the completed of the given aircraft</value>
+  </data>
+  <data name="GliderEngines" xml:space="preserve">
+    <value>TTSN of the glider, the engines and APU since the start of operation, since the last repair and the last periodic maintenance/in calendar time, hours, landings, etc./ and the corresponding residual resource</value>
+  </data>
+  <data name="IncidentsReport" xml:space="preserve">
+    <value>Report for incidents, unscheduled inspections and repairs</value>
+  </data>
+  <data name="ListMaxRejections" xml:space="preserve">
+    <value>List of maximum failures</value>
+  </data>
+  <data name="ListServiceBulletins" xml:space="preserve">
+    <value>List of service bulletins and airworthiness directives</value>
+  </data>
+  <data name="ManufactureGuides" xml:space="preserve">
+    <value>A copy of all manufacturer's guidelines for maintenance, repair, illustrated catalogs</value>
+  </data>
+  <data name="ModificationsList" xml:space="preserve">
+    <value>List of the modifications and overhauls</value>
+  </data>
+  <data name="ProgramFlyingTests" xml:space="preserve">
+    <value>Flight tests program</value>
+  </data>
+  <data name="ProgramGroundTests" xml:space="preserve">
+    <value>Ground tests program</value>
+  </data>
+  <data name="ProgramMaintenance" xml:space="preserve">
+    <value>Technical maintenance program</value>
+  </data>
+  <data name="RegulationMaintenance" xml:space="preserve">
+    <value>Technical maintenance regulation</value>
+  </data>
+  <data name="ResourceAggregatesList" xml:space="preserve">
+    <value>List of all resource units and the corresponding residual resource</value>
+  </data>
+  <data name="TheoreticalExam" xml:space="preserve">
+    <value>Certificate of passing a theoretical examination</value>
+  </data>
+  <data name="AircraftFormsEngines" xml:space="preserve">
+    <value>Forms of aircraft, engines and auxiliary power unit.</value>
+  </data>
+  <data name="ComponentsPassports" xml:space="preserve">
+    <value>Passports of the components, (equivalent document)</value>
+  </data>
+  <data name="EmergencyEquipmentState" xml:space="preserve">
+    <value>State of the emergency equipment and residue resource</value>
+  </data>
+  <data name="LastPTODatePlace" xml:space="preserve">
+    <value>Date and place of last PTA</value>
+  </data>
+  <data name="ListCylindersHighPressure" xml:space="preserve">
+    <value>List of high pressure cylinders and date of the next hydrostatic testing</value>
+  </data>
+  <data name="AirportOperationGuidance" xml:space="preserve">
+    <value>Guidance for the operation of the airport</value>
+  </data>
+  <data name="DocumentsCopies" xml:space="preserve">
+    <value>Copies of documents evidencing length of service and qualifications of the senior technical staff</value>
+  </data>
+  <data name="DocumentObjectRights" xml:space="preserve">
+    <value>Document certifying the right to use the site</value>
+  </data>
+  <data name="FeePaidNonState" xml:space="preserve">
+    <value>Document for paid fee</value>
+  </data>
+  <data name="GuidanceExploitationTechnicalMaintenance" xml:space="preserve">
+    <value>Guidance for operating and maintenance of appropriate SSNO</value>
+  </data>
+  <data name="ListAuthorizedPeopleTechnicalMaintenance" xml:space="preserve">
+    <value>List of qualified persons performing activities under maintenance and / or operation and maintenance of the site</value>
+  </data>
+  <data name="ProtocolsComplianceSSNO" xml:space="preserve">
+    <value>Protocols for compliance of SSNO with Annex № 9 to Ordinance № 20, composed of members appointed by the candidate committee</value>
+  </data>
+  <data name="TechnicalDataRequirements" xml:space="preserve">
+    <value>Technical data and operational requirements of site usage</value>
+  </data>
+  <data name="BasisEstimatesCostsRevenues" xml:space="preserve">
+    <value>The basis for the forecast values of expenditure and revenue itemized for different elements described in item 1.3. Annex I of Regulation 1008/2008</value>
+  </data>
+  <data name="BusinessPlanThreeYears" xml:space="preserve">
+    <value>Business plan for a minimum of three years of operation from the presumed date of receipt of the license</value>
+  </data>
+  <data name="CertificateNotBankruptcy" xml:space="preserve">
+    <value>Certificate or declaration that the person was not involved in the bankruptcy of another company</value>
+  </data>
+  <data name="ConvictionCertificate" xml:space="preserve">
+    <value>Conviction certificate or similar document showing that a person has not been convicted of an intentional crime of general nature or has not been deprived by a final judgment of the right to exercise the relevant activity</value>
+  </data>
+  <data name="CurrentState" xml:space="preserve">
+    <value>Document for current status with an issue date up to one month before the application</value>
+  </data>
+  <data name="CurrentStatute" xml:space="preserve">
+    <value>The current statute, company agreement or founding act of the candidate</value>
+  </data>
+  <data name="CurrentStructure" xml:space="preserve">
+    <value>Current structure of the applicant</value>
+  </data>
+  <data name="FinanceSourcesInformation" xml:space="preserve">
+    <value>Details of existing and projected sources of funding, including information for the first three months since start of operation as an air carrier</value>
+  </data>
+  <data name="ForecastBalance" xml:space="preserve">
+    <value>Forecast balance sheet for the first three years of operation as an air carrier, made ​​by calendar years</value>
+  </data>
+  <data name="ForecastCostsEconomicalElements" xml:space="preserve">
+    <value>Forecast for expenditure by economical elements with the first year since start of operation including and a breakdown for the first three months, by months</value>
+  </data>
+  <data name="ForecastMoneyFlow" xml:space="preserve">
+    <value>Forecast money flow report, and liquidity plans for the first three years of operation as an air carrier made ​​by calendar years</value>
+  </data>
+  <data name="ForecastReportCostsRevenues" xml:space="preserve">
+    <value>Forecast report  for revenue and expendtire for personal capital for the first three years of operation as an air carrier incurred by calendar years</value>
+  </data>
+  <data name="ForecastThreeYears" xml:space="preserve">
+    <value>Forecasts for three years made ​​in calendar years for spring hours by aircraft types (the first year since start of operation includes a breakdown for the first three months, by months.)</value>
+  </data>
+  <data name="InterimFinancialStatements" xml:space="preserve">
+    <value>Intermediary financial report for the current year and, if any, audited annual financial report with applications for the previous financial year</value>
+  </data>
+  <data name="LeasingInstallmentsInformation" xml:space="preserve">
+    <value>Information about the lease payments and the financial terms of the lease contract</value>
+  </data>
+  <data name="PersonalCapitalPresence" xml:space="preserve">
+    <value>Information in paragraph 1 of Annex I to Regulation № 1008/2008: evidence of personal capital of at least EUR 100 thousand</value>
+  </data>
+  <data name="Policies" xml:space="preserve">
+    <value>Valid insurance policies</value>
+  </data>
+  <data name="RentContract" xml:space="preserve">
+    <value>Lease</value>
+  </data>
+  <data name="Deed" xml:space="preserve">
+    <value>Deed</value>
+  </data>
+  <data name="Geodetic" xml:space="preserve">
+    <value>Geodetic survey</value>
+  </data>
+  <data name="OtherOne" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="OtherTwo" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Security program</value>
+  </data>
+  <data name="Sketch" xml:space="preserve">
+    <value>Sketch</value>
+  </data>
+  <data name="Accordance" xml:space="preserve">
+    <value>Documents demonstrating compliance with the requirements of Annex II - V of Regulation (EC) № 1035/2011 depending on the type of service requested</value>
+  </data>
+  <data name="AnnualPlan" xml:space="preserve">
+    <value>Annual plan, to specify the business plan under item 4 in accordance with the requirements of section 2.2.2 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="AnnualReport" xml:space="preserve">
+    <value>Annual report on the activities carried out in accordance with paragraph 9 of Annex I of Regulation (EC) № 1035/2011, unless the applicant to obtain Xian not engage in the provision of ANS</value>
+  </data>
+  <data name="BusinessPlan" xml:space="preserve">
+    <value>Business plan with a minimum range of five years in accordance with the requirements of section 2.2.1 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="Certificates" xml:space="preserve">
+    <value>Documents certifying the management system of quality in accordance with the requirements of section 3.2 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Contract / s to perform part of the services of another / and hopefully (if any) and ensure that the division of responsibilities between them</value>
+  </data>
+  <data name="DescriptionManagementSystem" xml:space="preserve">
+    <value>Description of system security management in accordance with the requirements of paragraph 4 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="Economical" xml:space="preserve">
+    <value>Documents proving the economic and financial capacity of ANSPs in accordance with the requirements of section 6 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="HR" xml:space="preserve">
+    <value>HR data in accordance with the requirements of section 5 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="ManagementSystem" xml:space="preserve">
+    <value>System safety management in accordance with the requirements of section 3.1 of Annex I of Regulation (EC) № 1035/2011</value>
+  </data>
+  <data name="Operative" xml:space="preserve">
+    <value>Operating manuals for the type of services that the organization applying for a Xian</value>
+  </data>
+  <data name="OrganizationalStructure" xml:space="preserve">
+    <value>Document containing the organizational structure and functional interactions authority, duties and responsibilities of the appointed officials and in particular of the management personnel responsible for the functions related to safety, quality, security, finance and human resources;</value>
+  </data>
+  <data name="Plans" xml:space="preserve">
+    <value>Plans for emergency situations in the types of services for which the ANSPs apply</value>
+  </data>
+  <data name="Providing" xml:space="preserve">
+    <value>Documents proving the provision of services in an open and transparent manner and conditions for access to the services of ANSPs</value>
+  </data>
+  <data name="Provision" xml:space="preserve">
+    <value>Documents proving the responsibility of ensuring ANSPs and insurance coverage</value>
+  </data>
+  <data name="Certificate" xml:space="preserve">
+    <value>Document certifying that the maintenance of the equipment is carried out by an approved organization under Art. 3 § 1 of the Decree № 141, when such maintenance is not carried out by the owner or user</value>
+  </data>
+  <data name="Facility" xml:space="preserve">
+    <value>Data on the facility of art. 5 para. 3, Item 1-12 of Regulation № 141</value>
+  </data>
+  <data name="Guide" xml:space="preserve">
+    <value>Guide for maintenance and / or operation of equipment, ensuring safety is</value>
+  </data>
+  <data name="PeopleMaintenanceList" xml:space="preserve">
+    <value>List of officials, who carried out the activities of maintenance and / or operation and maintenance of the facility</value>
+  </data>
+  <data name="Technical" xml:space="preserve">
+    <value>Technical data and requirements for operation of the facility, developed by the manufacturer</value>
+  </data>
+  <data name="CopyOrder" xml:space="preserve">
+    <value>A copy of the order for admission to independent work of the employer issued in accordance with the requirements of NPOSSGV (Appendix I-3)</value>
+  </data>
+  <data name="Declaration" xml:space="preserve">
+    <value>Declaration by the employer that the applicant performs the functions certificate more than one third of working time</value>
+  </data>
+  <data name="LastPeriodical" xml:space="preserve">
+    <value>A copy of the certificate of last periodic training theoretical and CBT</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>A copy of the record that passed OJT in accordance with the requirements of NPOSSGV (Appendix I-3), as certified by the employer</value>
+  </data>
+  <data name="Specialized" xml:space="preserve">
+    <value>Copies of certificates of completion of basic and specialized training relating to the application</value>
+  </data>
+  <data name="Diploma" xml:space="preserve">
+    <value>University diploma (copy)</value>
+  </data>
+  <data name="Development" xml:space="preserve">
+    <value>Development of methodological materials for the course in which they are seeking legal aptitude</value>
+  </data>
+  <data name="Evidencing" xml:space="preserve">
+    <value>Document evidencing a contractual relationship with the relevant ATC</value>
+  </data>
+  <data name="JobResume" xml:space="preserve">
+    <value>Job resume</value>
+  </data>
+  <data name="Licenses" xml:space="preserve">
+    <value>List of licenses, certificates of competence, a list of publications and development, technology and other documents proving the qualification in the required capacity</value>
+  </data>
+  <data name="DocumentAUC" xml:space="preserve">
+    <value>Document evidencing a contractual relationship with the relevant ATC</value>
+  </data>
+  <data name="Evidence" xml:space="preserve">
+    <value>Evidence of an integrated system of quality management</value>
+  </data>
+  <data name="ListMethodological" xml:space="preserve">
+    <value>List of educational and methodological advice</value>
+  </data>
+  <data name="ManualAviationalCenter" xml:space="preserve">
+    <value>Manual operation of aviation training center</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Tax registration document</value>
+  </data>
+  <data name="AircraftTraining" xml:space="preserve">
+    <value>List of aircraft that will be used for training</value>
+  </data>
+  <data name="AirportsList" xml:space="preserve">
+    <value>List of airports that will be used for training</value>
+  </data>
+  <data name="DeclarationManager" xml:space="preserve">
+    <value>Declaration of the accountable manager</value>
+  </data>
+  <data name="EvidenceManagers" xml:space="preserve">
+    <value>Evidence of qualifications and experience of the responsible manager / responsible leaders</value>
+  </data>
+  <data name="InstructorsList" xml:space="preserve">
+    <value>List of instructors</value>
+  </data>
+  <data name="MME" xml:space="preserve">
+    <value>Organization's management manual (MME)</value>
+  </data>
+  <data name="OM" xml:space="preserve">
+    <value>Operation manual (ОМ)</value>
+  </data>
+  <data name="Simulators" xml:space="preserve">
+    <value>List of flight simulators (FSTD), the organization intends to use for training</value>
+  </data>
+  <data name="Subcontracts" xml:space="preserve">
+    <value>Subcontracts</value>
+  </data>
+  <data name="TrainingCoursesProgram" xml:space="preserve">
+    <value>Training courses offered and the program</value>
+  </data>
+  <data name="TRM" xml:space="preserve">
+    <value>Training manual (TRM)</value>
+  </data>
+  <data name="ComplianceDocument" xml:space="preserve">
+    <value>Document of Compliance for the modification of aircraft and equipment of the operator of the FSTD *</value>
+  </data>
+  <data name="OperatorFSTDCertificate" xml:space="preserve">
+    <value>Сертификат на оператора на FSTD / Certificate  of  the FSTD Operator</value>
+  </data>
+  <data name="QualificationCertificate" xml:space="preserve">
+    <value>Валиден сертификат на FSTD /Qualification  Certificate  of  the  FSTD  together  with  the  FSTD  evaluation  report.</value>
+  </data>
+  <data name="TechnicalCertifiedTraining" xml:space="preserve">
+    <value>Certificate from technical training</value>
+  </data>
+  <data name="MainCourseCompleted" xml:space="preserve">
+    <value>Certificate of completed general (integrated) and qualification (modular) course</value>
+  </data>
+  <data name="DyplomCopies" xml:space="preserve">
+    <value>A copy/copies of the diploma of education</value>
+  </data>
+  <data name="ProtocolExamSuccess" xml:space="preserve">
+    <value>Protocol passes exam for admission to independent work</value>
+  </data>
+  <data name="ProtocolExamSuccessGVA" xml:space="preserve">
+    <value>Protocol for successfully passed exam at the GD "GVA"</value>
+  </data>
+  <data name="InternshipDocument" xml:space="preserve">
+    <value>Records of service</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>SP issued by another country</value>
+  </data>
+  <data name="ContractsProcurators" xml:space="preserve">
+    <value>Contracts with commercial agents , procurator (s) and others.</value>
+  </data>
+  <data name="CourtRegistration" xml:space="preserve">
+    <value>Document for court registration</value>
+  </data>
+  <data name="DeclarationTaxInformation" xml:space="preserve">
+    <value>Declaration of consent to provide DG "CAA" tax and insurance information within the meaning of Art. 72 of the Tax Procedure Code</value>
+  </data>
+  <data name="DocumentsApproval" xml:space="preserve">
+    <value>Documents for the approval of the organization to maintain the continuing airworthiness Part M of Regulation № 2042/2003 on the continuing airworthiness of aircraft and aeronautical products, parts and appliances, and on the approval of organizations and personnel involved in these tasks , or manual control of maintenance in accordance with Annex № 8 of Ordinance № 24 - aircraft that meet the criteria of Annex II to Regulation (EC ) № 216/2008 of the European Parliament and of the Council of 20 February 2008 on common rules in field of civil aviation and establishing a European aviation Safety Agency , and repealing Council Directive 91/670/EEC, Regulation (EC ) № 1592/2002 and Directive 2004/36/EC</value>
+  </data>
+  <data name="InformationAircraftsEquipment" xml:space="preserve">
+    <value>Information for aircraft equipment , ground and airborne special equipment available , in accordance with Annex № 1 of Ordinance № 24 (ie I, II and III)</value>
+  </data>
+  <data name="InformationAssess" xml:space="preserve">
+    <value>Information to assess the financial and economic activities providing for the operation of the aircraft in accordance with Annex № 2 of Ordinance № 24</value>
+  </data>
+  <data name="ListDirectors" xml:space="preserve">
+    <value>List the names and addresses of directors , as well as evidence that they have the necessary qualifications and experience</value>
+  </data>
+  <data name="ListInvolved" xml:space="preserve">
+    <value>List the names and addresses of permanent attracted people and activities that are involved</value>
+  </data>
+  <data name="ListNames4" xml:space="preserve">
+    <value>List the names, addresses , numbers of licenses and other data for all persons associated with the operation of an aircraft operator in accordance with Annex № 1 of Ordinance № 24 , item IV</value>
+  </data>
+  <data name="ListNames5" xml:space="preserve">
+    <value>List the names, addresses , numbers of licenses and other data for all persons associated with the operation of an aircraft operator in accordance in accordance with Annex № 1 of Ordinance № 24 , item V</value>
+  </data>
+  <data name="ManualControl" xml:space="preserve">
+    <value>Manual control over maintenance</value>
+  </data>
+  <data name="OperationsFlights" xml:space="preserve">
+    <value>Operations Manual Flight</value>
+  </data>
+  <data name="OperatorManual" xml:space="preserve">
+    <value>Operator's Manual</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy circumstances that the applicant is not against open procedure for bankruptcy or liquidation</value>
+  </data>
+  <data name="Standing" xml:space="preserve">
+    <value>Certificate of good standing</value>
+  </data>
+  <data name="Agreement" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="Maintenence" xml:space="preserve">
+    <value>Мaintenance</value>
+  </data>
+  <data name="MOE" xml:space="preserve">
+    <value>MOE</value>
+  </data>
+  <data name="MaintenanceProgram" xml:space="preserve">
+    <value>Maintenance program</value>
+  </data>
+  <data name="Reliability" xml:space="preserve">
+    <value>Reliability program</value>
+  </data>
+  <data name="TechnicalDiary" xml:space="preserve">
+    <value>Technical log</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>A copy of the contract / other act</value>
+  </data>
+  <data name="InitialImage" xml:space="preserve">
+    <value>Image (only for the initial issue)</value>
+  </data>
+  <data name="LogbookSingle" xml:space="preserve">
+    <value>Logbook</value>
+  </data>
+  <data name="MedicalFitnessCopy" xml:space="preserve">
+    <value>Medical fitness-copy</value>
+  </data>
+  <data name="OriginalSkillTest" xml:space="preserve">
+    <value>Skill test - original</value>
+  </data>
+  <data name="SAA" xml:space="preserve">
+    <value>Theoretical training for SAA - copy</value>
+  </data>
+  <data name="TheoreticalClassType" xml:space="preserve">
+    <value>Theoretical training class / type of aircraft - a copy</value>
+  </data>
+  <data name="PracticalTrainingSingle" xml:space="preserve">
+    <value>Practical training</value>
+  </data>
+  <data name="AopFed" xml:space="preserve">
+    <value>Notice opshtestvena Order (.fed)</value>
+  </data>
+  <data name="AopLetter" xml:space="preserve">
+    <value>Cover Letter</value>
+  </data>
+  <data name="AopMethodica" xml:space="preserve">
+    <value>Methodica (.doc/.docx)</value>
+  </data>
+  <data name="OtherFed" xml:space="preserve">
+    <value>Other (.fed)</value>
+  </data>
+</root>

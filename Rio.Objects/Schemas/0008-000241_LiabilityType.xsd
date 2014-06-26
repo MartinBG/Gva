@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000241" xmlns="http://ereg.egov.bg/value/0008-000241" xmlns:ltn="http://ereg.egov.bg/nomenclature/0007-000021" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/nomenclature/0007-000021" />
+  <xsd:simpleType name="LiabilityType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Вид задължение по ЗМДТ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ltn:LiabilityTypesNomenclature" />
+  </xsd:simpleType>
+</xsd:schema>

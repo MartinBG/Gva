@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4274" 
+	xmlns="http://ereg.egov.bg/segment/R-4274" 
+	xmlns:oblic="http://ereg.egov.bg/value/R-4270"
+	xmlns:oblin="http://ereg.egov.bg/value/R-4272"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4270" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4272" />
+	
+	<xsd:complexType name="OVDBodyLocationIndicator">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Индикатор за местоположение на орган на ОВД</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OVDBodyLocationIndicatorCode" type="oblic:OVDBodyLocationIndicatorCode" minOccurs="0" />
+			<xsd:element name="OVDBodyLocationIndicatorName" type="oblin:OVDBodyLocationIndicatorName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

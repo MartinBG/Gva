@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000179" xmlns="http://ereg.egov.bg/segment/0009-000179" xmlns:saatc="http://ereg.egov.bg/value/0008-000248" xmlns:saat="http://ereg.egov.bg/value/0008-000249" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000248" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000249" />
+  <xsd:element name="ShelterAndAccommodationTypeData" type="ShelterAndAccommodationTypeData" />
+  <xsd:complexType name="ShelterAndAccommodationTypeData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за  видовете средства за подслон и места за настаняване</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ShelterAndAccommodationTypes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ShelterAndAccommodationType" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="saatc:ShelterAndAccommodationTypeCode" />
+                  <xsd:element name="Name" type="saat:ShelterAndAccommodationType" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

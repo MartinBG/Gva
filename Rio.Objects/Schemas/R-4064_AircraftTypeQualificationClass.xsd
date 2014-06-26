@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4064" 
+xmlns="http://ereg.egov.bg/segment/R-4064" 
+xmlns:atqcc="http://ereg.egov.bg/value/R-4058" 
+xmlns:atqcn="http://ereg.egov.bg/value/R-4060" 
+xmlns:atqca="http://ereg.egov.bg/value/R-4062" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4058" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4060"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4062" />
+	<xsd:complexType name="AircraftTypeQualificationClass">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Kвалификационен клас за тип въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftTypeQualificationClassCode" type="atqcc:AircraftTypeQualificationClassCode" minOccurs="0" />
+			<xsd:element name="AircraftTypeQualificationClassName" type="atqcn:AircraftTypeQualificationClassName" minOccurs="0" />
+			<xsd:element name="AircraftTypeQualificationClassAlt" type="atqca:AircraftTypeQualificationClassAlt" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

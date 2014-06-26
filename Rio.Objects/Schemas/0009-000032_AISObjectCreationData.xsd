@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000032" xmlns="http://ereg.egov.bg/segment/0009-000032" xmlns:auoau="http://ereg.egov.bg/segment/0009-000028" xmlns:oct="http://ereg.egov.bg/value/0008-000054" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000028" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000054" />
+  <xsd:complexType name="AISObjectCreationData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за създаване на обект в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CreatedBy" type="auoau:AISUserOrAISURI" />
+      <xsd:element name="CreationTime" type="oct:AISObjectCreationTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

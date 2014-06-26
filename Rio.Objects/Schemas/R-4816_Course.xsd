@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4816" 
+	xmlns="http://ereg.egov.bg/segment/R-4816" 
+	xmlns:cc="http://ereg.egov.bg/value/R-4812"
+	xmlns:cn="http://ereg.egov.bg/value/R-4814"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4812" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4814" />
+
+	<xsd:complexType name="Course">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Курс</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CourseCode" type="cc:CourseCode" minOccurs="0" />
+			<xsd:element name="CourseName" type="cn:CourseName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

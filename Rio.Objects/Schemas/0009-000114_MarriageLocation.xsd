@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000114" xmlns="http://ereg.egov.bg/segment/0009-000114" xmlns:dgc="http://ereg.egov.bg/value/0008-000185" xmlns:dgn="http://ereg.egov.bg/value/0008-000186" xmlns:mgc="http://ereg.egov.bg/value/0008-000187" xmlns:mgn="http://ereg.egov.bg/value/0008-000188" xmlns:sgc="http://ereg.egov.bg/value/0008-000189" xmlns:sgn="http://ereg.egov.bg/value/0008-000190" xmlns:cgc="http://ereg.egov.bg/value/0008-000183" xmlns:cgn="http://ereg.egov.bg/value/0008-000184" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000185" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000186" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000187" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000188" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000189" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000190" />
+  <xsd:complexType name="MarriageLocation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Място на сключване на граждански брак</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+      <xsd:element name="CountryName" type="cgn:CountryName" minOccurs="0" />
+      <xsd:element name="DistrictGRAOCode" type="dgc:DistrictGRAOCode" minOccurs="0" />
+      <xsd:element name="DistrictGRAOName" type="dgn:DistrictGRAOName" minOccurs="0" />
+      <xsd:element name="MunicipalityGRAOCode" type="mgc:MunicipalityGRAOCode" minOccurs="0" />
+      <xsd:element name="MunicipalityGRAOName" type="mgn:MunicipalityGRAOName" minOccurs="0" />
+      <xsd:element name="SettlementGRAOCode" type="sgc:SettlementGRAOCode" minOccurs="0" />
+      <xsd:element name="SettlementGRAOName" type="sgn:SettlementGRAOName" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NotarizedStatement" xml:space="preserve">
+    <value>Нотариално заверена декларация за собственост на ЕЛВС</value>
+  </data>
+  <data name="Admission" xml:space="preserve">
+    <value>Заповед за допуск до работно място</value>
+  </data>
+  <data name="Conclusion" xml:space="preserve">
+    <value>Заключение от комисия за авиомедицинско освидетелстване за съответния клас</value>
+  </data>
+  <data name="PassMark" xml:space="preserve">
+    <value>Удостоверение за успешно положен изпит в изпитен езиков център</value>
+  </data>
+  <data name="Protocols" xml:space="preserve">
+    <value>Протоколи и/или актове от извършени проверки и удостоверения и/или протоколи за преминато обучение</value>
+  </data>
+  <data name="ColorPhotograph" xml:space="preserve">
+    <value>Цветна снимка на кандидата за свидетелство</value>
+  </data>
+  <data name="CopyLicenseHeld" xml:space="preserve">
+    <value>Копие от притежавано свидетелство за правоспособност</value>
+  </data>
+  <data name="InformationFlight" xml:space="preserve">
+    <value>Справка за летателно обучение</value>
+  </data>
+  <data name="Logbook" xml:space="preserve">
+    <value>Летателна книжка на член на екипажа на ВС</value>
+  </data>
+  <data name="TheoreticalExamCPL" xml:space="preserve">
+    <value>Удостоверение за издържан теоретичен изпит за CPL(A), ATPL(A), IR(A), CPL(Н), ATPL(Н), IR(Н)</value>
+  </data>
+  <data name="BulletinsStatus" xml:space="preserve">
+    <value>Статус на експлоатационните бюлетини и директиви за летателна годност</value>
+  </data>
+  <data name="ValidCertificateAirworthiness" xml:space="preserve">
+    <value>Валидно Удостоверение за ЛГ.</value>
+  </data>
+  <data name="CertificateQualityNewBuilt" xml:space="preserve">
+    <value>Сертификат за качество и съответствие /отнася се за новопостроено ВС в РБ/</value>
+  </data>
+  <data name="ConfirmationAdditionalRequirements" xml:space="preserve">
+    <value>Потвърждение, че допълнителните изисквания и условия на импортиращата държава са удовлетворени</value>
+  </data>
+  <data name="ConfirmationApproveExceptions" xml:space="preserve">
+    <value>Потвърждение, че импортиращата държава ще одобри тези изключения</value>
+  </data>
+  <data name="ResourceStatusAggregates" xml:space="preserve">
+    <value>Ресурсен статус на всички агрегати, оборудване, аварийно спасителни средства</value>
+  </data>
+  <data name="AirportManagement" xml:space="preserve">
+    <value>Ръководство за управление и експлоатация на летище</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Баланс, заверен от регистриран одитор</value>
+  </data>
+  <data name="DataListQualification" xml:space="preserve">
+    <value>Списък с данни, удостоверяващи квалификацията и професионалния опит на ръководния персонал</value>
+  </data>
+  <data name="ProvesCandidateRights" xml:space="preserve">
+    <value>Доказателства за правата на кандидата да ползва техниката и/или технологиите, осигуряващи спазването на действащите стандарти и процедури за сигурност и безопасност на лицата, въздухоплавателните средства, съоръженията и оборудванията на съответното летище</value>
+  </data>
+  <data name="ReportIncome" xml:space="preserve">
+    <value>Отчет за приходите и разходите, заверен от регистриран одитор</value>
+  </data>
+  <data name="ReportMoneyFlow" xml:space="preserve">
+    <value>Отчет за паричния поток, заверен от регистриран одитор</value>
+  </data>
+  <data name="CertificateAirworthiness" xml:space="preserve">
+    <value>Удостоверение за летателна годност на ВС</value>
+  </data>
+  <data name="CertificateCompliance" xml:space="preserve">
+    <value>Удостоверение за съответствие с нормите за авиационен шум</value>
+  </data>
+  <data name="CertificateRegistration" xml:space="preserve">
+    <value>Удостоверение за регистрация на ВС</value>
+  </data>
+  <data name="ContractTransfer" xml:space="preserve">
+    <value>Договор за прехвърляне на собствеността или друг документ, даващ основание за отписване на ВС</value>
+  </data>
+  <data name="PermitRadios" xml:space="preserve">
+    <value>Разрешително за ползване на радиостанции</value>
+  </data>
+  <data name="WrittenAgreement" xml:space="preserve">
+    <value>Писмено принципно съгласие от упълномощения орган на държавата, в чийто регистър ще се впише ВС</value>
+  </data>
+  <data name="PracticalExperience" xml:space="preserve">
+    <value>Удостоверение за придобит практически опит</value>
+  </data>
+  <data name="TheoreticalExamApprovedOrganization" xml:space="preserve">
+    <value>Удостоверение за издържан теоретичен изпит пред одобрена организация за обучение</value>
+  </data>
+  <data name="AirportCharacteristics" xml:space="preserve">
+    <value>Акт за основните характеристики и техническо състояние на гражданско летище за обществено ползване със съдържание съгласно приложение  № 5 от Наредба № 20</value>
+  </data>
+  <data name="ExploitationManual" xml:space="preserve">
+    <value>Ръководство за управление и експлоатация на гражданско летище за обществено ползване със съдържание съгласно приложение № 3 от Наредба № 20</value>
+  </data>
+  <data name="OwnershipTerrainUsage" xml:space="preserve">
+    <value>Документи, удостоверяващи правото на собственост или правото да ползва терена и съоръженията на летателната площадка</value>
+  </data>
+  <data name="PermitEnvironment" xml:space="preserve">
+    <value>Разрешение, издадено съгласно чл. 82, ал. 4 и 5 от Закона за опазване на околната среда</value>
+  </data>
+  <data name="ApprovedOrder" xml:space="preserve">
+    <value>Одобрена заповед за лизинг</value>
+  </data>
+  <data name="Contract" xml:space="preserve">
+    <value>Копие от договор/друг акт</value>
+  </data>
+  <data name="ExportCertificate" xml:space="preserve">
+    <value>Експортно удостоверение за летателна годност</value>
+  </data>
+  <data name="RemovedRegister" xml:space="preserve">
+    <value>Документ, удостоверяващ, че въздухоплавателното средство е отписано от регистъра на държавата на последна регистрация</value>
+  </data>
+  <data name="CopyLicense" xml:space="preserve">
+    <value>Копие от свидетелството за правоспособност</value>
+  </data>
+  <data name="CopyLogbookLast12Months" xml:space="preserve">
+    <value>Копие от данните в летателната книжка за последните 12 месеца за свидетелства за правоспособност на член на екипажа</value>
+  </data>
+  <data name="CopyMedicalCertificateJAR" xml:space="preserve">
+    <value>Копие от свидетелството за медицинска годност съобразно JAR-FCL 3</value>
+  </data>
+  <data name="IdentityDocumentCopy" xml:space="preserve">
+    <value>Копие от документ за самоличност</value>
+  </data>
+  <data name="CenterMassProtocol" xml:space="preserve">
+    <value>Протокол за масата и центровката на ВС</value>
+  </data>
+  <data name="CertificateExport" xml:space="preserve">
+    <value>Експортно удостоверение за летателна годност</value>
+  </data>
+  <data name="CertificateFlyingWorthiness" xml:space="preserve">
+    <value>Удостоверение за летателна годност, издадено от ГВА</value>
+  </data>
+  <data name="CertificateFlyingWorthinessAuthorizedBody" xml:space="preserve">
+    <value>Валидно удостоверение за летателна годност, издадено от упълномощения орган на страната, от която се внася</value>
+  </data>
+  <data name="CertificateQuality" xml:space="preserve">
+    <value>Сертификат за качество и съответсвие</value>
+  </data>
+  <data name="CertificateQualityApprovedManufacturer" xml:space="preserve">
+    <value>Сертификат за качество и съответствие, издаден от одобрен производител</value>
+  </data>
+  <data name="ComparissionTable" xml:space="preserve">
+    <value>Сравнителна таблица на издадените експлоатационни бюлетини от производителя и директиви по летателна годност, издадени от съответните авиационни власти, с изпълнените на даденото ВС</value>
+  </data>
+  <data name="GliderEngines" xml:space="preserve">
+    <value>Наработка на планера, двигателите и ВСУ от начало на експлоатация, от последния ремонт, и последното периодично техническо обслужване /в календарен срок, часове, кацания, и т.н./ и съответния остатъчен ресурс</value>
+  </data>
+  <data name="IncidentsReport" xml:space="preserve">
+    <value>Доклад за инциденти, извънредни проверки и ремонти</value>
+  </data>
+  <data name="ListMaxRejections" xml:space="preserve">
+    <value>Списък на максимално допустимите откази</value>
+  </data>
+  <data name="ListServiceBulletins" xml:space="preserve">
+    <value>Списък на експлоатационните бюлетини и директиви по летателна годност</value>
+  </data>
+  <data name="ManufactureGuides" xml:space="preserve">
+    <value>Копие от всички ръководства на производителя за техническо обслужване, ремонт, илюстровани каталози</value>
+  </data>
+  <data name="ModificationsList" xml:space="preserve">
+    <value>Списък на извършените модификации и изпълнени ремонти.</value>
+  </data>
+  <data name="ProgramFlyingTests" xml:space="preserve">
+    <value>Програма за летателни изпитания</value>
+  </data>
+  <data name="ProgramGroundTests" xml:space="preserve">
+    <value>Програма за наземни изпитания</value>
+  </data>
+  <data name="ProgramMaintenance" xml:space="preserve">
+    <value>Програма за техническо обслужване</value>
+  </data>
+  <data name="RegulationMaintenance" xml:space="preserve">
+    <value>Регламент за техническо обслужване</value>
+  </data>
+  <data name="ResourceAggregatesList" xml:space="preserve">
+    <value>Списък на всички ресурсни агрегати и съответния остатъчен ресурс</value>
+  </data>
+  <data name="TheoreticalExam" xml:space="preserve">
+    <value>Удостоверение за издържан теоретичен изпит</value>
+  </data>
+  <data name="AircraftFormsEngines" xml:space="preserve">
+    <value>Формулярите на ВС, двигателите и спомагателната силова установка.</value>
+  </data>
+  <data name="ComponentsPassports" xml:space="preserve">
+    <value>Паспортите на компонентите (еквивалентен документ)</value>
+  </data>
+  <data name="EmergencyEquipmentState" xml:space="preserve">
+    <value>Състояние на аварийно-спасителното оборудване и остатък ресурс</value>
+  </data>
+  <data name="LastPTODatePlace" xml:space="preserve">
+    <value>Дата и място на последното ПТО</value>
+  </data>
+  <data name="ListCylindersHighPressure" xml:space="preserve">
+    <value>Списък на бутилките за високо налягане и дата на следващите хидростатични изпитания</value>
+  </data>
+  <data name="AirportOperationGuidance" xml:space="preserve">
+    <value>Ръководство за извършване на дейността на съответното летище</value>
+  </data>
+  <data name="DocumentsCopies" xml:space="preserve">
+    <value>Копия на документи, удостоверяващи трудовия стаж и професионалната квалификация на ръководния технически персонал</value>
+  </data>
+  <data name="DocumentObjectRights" xml:space="preserve">
+    <value>Документ, удостоверяващ правото за ползване на обекта</value>
+  </data>
+  <data name="FeePaidNonState" xml:space="preserve">
+    <value>Документ за платена такса</value>
+  </data>
+  <data name="GuidanceExploitationTechnicalMaintenance" xml:space="preserve">
+    <value>Ръководство за експлоатация и техническа поддръжка на съответния ССНО</value>
+  </data>
+  <data name="ListAuthorizedPeopleTechnicalMaintenance" xml:space="preserve">
+    <value>Списък на правоспособните лица, извършващи дейностите по техническа поддръжка и/или експлоатация и техническо обслужване на обекта</value>
+  </data>
+  <data name="ProtocolsComplianceSSNO" xml:space="preserve">
+    <value>Протоколи за съответствие на ССНО с изискванията по приложение № 9 към Наредба № 20, съставени от назначена от кандидата комисия</value>
+  </data>
+  <data name="TechnicalDataRequirements" xml:space="preserve">
+    <value>Технически данни и изисквания за експлоатация на обекта</value>
+  </data>
+  <data name="BasisEstimatesCostsRevenues" xml:space="preserve">
+    <value>Основата за прогнозните стойности на разходите и приходите по пера за различни елементи, описани в т.1.3. от Приложение І на Регламент 1008/2008.</value>
+  </data>
+  <data name="BusinessPlanThreeYears" xml:space="preserve">
+    <value>Бизнес план за минимум три години дейност, считано от предполагаемата дата на получаването на лиценза</value>
+  </data>
+  <data name="CertificateNotBankruptcy" xml:space="preserve">
+    <value>Удостоверение или декларация, че лицето не е било замесено във фалита на друго предприятие</value>
+  </data>
+  <data name="ConvictionCertificate" xml:space="preserve">
+    <value>Свидетелство за съдимост или аналогичен документ, доказващ, че дадено лице не е осъждано за умишлено престъпление от общ характер или не е било лишено с влязла в сила присъда от правото да упражнява съответната дейност</value>
+  </data>
+  <data name="CurrentState" xml:space="preserve">
+    <value>Документ за актуално състояние с дата на издаване до един месец преди подаване на заявлението</value>
+  </data>
+  <data name="CurrentStatute" xml:space="preserve">
+    <value>Действащият устав, дружествен договор или учредителен акт на кандидата</value>
+  </data>
+  <data name="CurrentStructure" xml:space="preserve">
+    <value>Актуална структура на кандидата</value>
+  </data>
+  <data name="FinanceSourcesInformation" xml:space="preserve">
+    <value>Подробна информация за съществуващите и предвидените източници на финансиране, включваща и информация за първите три месеца от началото на дейността като въздушен превозвач</value>
+  </data>
+  <data name="ForecastBalance" xml:space="preserve">
+    <value>Прогнозен счетоводен баланс за първите три години на дейност като въздушен превозвач, направен по календарни години</value>
+  </data>
+  <data name="ForecastCostsEconomicalElements" xml:space="preserve">
+    <value>Прогноза на разходите по икономически елементи като първата година от началото на дейността включва и разбивка за първите три месеца, по месеци</value>
+  </data>
+  <data name="ForecastMoneyFlow" xml:space="preserve">
+    <value>Прогнозен отчет за паричните потоци, както и ликвидни планове за първите три години на дейност като въздушен превозвач, направени по календарни години</value>
+  </data>
+  <data name="ForecastReportCostsRevenues" xml:space="preserve">
+    <value>Прогнозен отчет за приходите и разходите и прогнозен отчет за собствения капитал за първите три години на дейност като въздушен превозвач, направени по календарни години</value>
+  </data>
+  <data name="ForecastThreeYears" xml:space="preserve">
+    <value>Прогнози за три години, направени по календарни години за пролетените часове по типове въздухоплавателни средства (като първата година от началото на дейността включва и разбивка за първите три месеца, по месеци.)</value>
+  </data>
+  <data name="InterimFinancialStatements" xml:space="preserve">
+    <value>Mеждинен финансов отчет за текущата година и, ако има, заверен годишен финансов отчет с приложения за предходната финансова година</value>
+  </data>
+  <data name="LeasingInstallmentsInformation" xml:space="preserve">
+    <value>Информация за лизинговите вноски и финансовите условия на договора за лизинг</value>
+  </data>
+  <data name="PersonalCapitalPresence" xml:space="preserve">
+    <value>Информация по т. 1 на Приложение I на Регламент № 1008/2008: доказателства за наличие на собствен капитал в размер на най-малко 100 хил. евро</value>
+  </data>
+  <data name="Policies" xml:space="preserve">
+    <value>Валидни застрахователни полици</value>
+  </data>
+  <data name="RentContract" xml:space="preserve">
+    <value>Договор за наем</value>
+  </data>
+  <data name="Deed" xml:space="preserve">
+    <value>Нотариален акт</value>
+  </data>
+  <data name="Geodetic" xml:space="preserve">
+    <value>Геодезично заснемане</value>
+  </data>
+  <data name="OtherOne" xml:space="preserve">
+    <value>Друг</value>
+  </data>
+  <data name="OtherTwo" xml:space="preserve">
+    <value>Други</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Програма за сигурност</value>
+  </data>
+  <data name="Sketch" xml:space="preserve">
+    <value>Скица</value>
+  </data>
+  <data name="Accordance" xml:space="preserve">
+    <value>Документи, доказващи съответствието с изискванията по приложения ІІ - V от Регламент (ЕС) № 1035/2011 в зависимост от заявения вид обслужване</value>
+  </data>
+  <data name="AnnualPlan" xml:space="preserve">
+    <value>Годишен план, който да доуточнява бизнес плана по т. 4 в съответствие с изискванията на т. 2.2.2 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="AnnualReport" xml:space="preserve">
+    <value>Годишен доклад за извършваната дейност в съответствие с т. 9 от Приложение І от Регламент (ЕС) № 1035/2011, освен когато заявителят за получаване на СИАНО не е извършвал дейност по предоставяне на АНО</value>
+  </data>
+  <data name="BusinessPlan" xml:space="preserve">
+    <value>Бизнес план с обхват минимум от пет години в съответствие с изискванията на т. 2.2.1 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="Certificates" xml:space="preserve">
+    <value>Документи, удостоверяващи въведената система за управление на качеството в съответствие с изискванията на т. 3.2 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="Contracts" xml:space="preserve">
+    <value>Договор/и за извършване на част от услугите от друг/и ДАНО (ако има такъв) и гарантиране на разпределение на отговорността помежду им</value>
+  </data>
+  <data name="DescriptionManagementSystem" xml:space="preserve">
+    <value>Описание на система за управление на сигурността в съответствие с изискванията на т. 4 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="Economical" xml:space="preserve">
+    <value>Документи, доказващи икономическите и финансовите възможности на ДАНО в съответствие с изискванията на т. 6 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="HR" xml:space="preserve">
+    <value>Данни за човешките ресурси в съответствие с изискванията на т. 5 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="ManagementSystem" xml:space="preserve">
+    <value>Система за управление на безопасността в съответствие с изискванията на т. 3.1 от Приложение І от Регламент (ЕС) № 1035/2011</value>
+  </data>
+  <data name="Operative" xml:space="preserve">
+    <value>Оперативни наръчници по видовете обслужвания, за които организацията кандидатства за издаване на СИАНО</value>
+  </data>
+  <data name="OrganizationalStructure" xml:space="preserve">
+    <value>Документ, съдържащ организационна структура с функционалните взаимодействия и пълномощията, задълженията и отговорностите на назначените длъжностни лица и по-специално на управленския персонал, който отговаря за функциите, свързани с безопасността, качеството, сигурността, финансите и човешките ресурси;</value>
+  </data>
+  <data name="Plans" xml:space="preserve">
+    <value>Планове за действие при извънредни ситуации по видовете обслужвания, за които ДАНО кандидатства</value>
+  </data>
+  <data name="Providing" xml:space="preserve">
+    <value>Документи, доказващи предоставянето на услугите по открит и прозрачен начин и условия за достъп до услугите на ДАНО</value>
+  </data>
+  <data name="Provision" xml:space="preserve">
+    <value>Документи, доказващи обезпечаване на отговорностите на ДАНО и застрахователно покритие</value>
+  </data>
+  <data name="Certificate" xml:space="preserve">
+    <value>Документ, удостоверяващ, че поддържането на съоръжението се осъществява от одобрена организация по чл. 3, т. 1 от Наредба № 141, когато такова поддържане не се осъществява от собственика или ползвателя</value>
+  </data>
+  <data name="Facility" xml:space="preserve">
+    <value>Данни за съоръжението по чл. 5, ал. 3, т. 1-12 от Наредба № 141</value>
+  </data>
+  <data name="Guide" xml:space="preserve">
+    <value>Ръководство за техническа поддръжка и/или експлоатация на съответното съоръжение, осигуряващо безопасната му работа</value>
+  </data>
+  <data name="PeopleMaintenanceList" xml:space="preserve">
+    <value>Списък на длъжностните лица, на които се възлага извършването на дейностите по техническа поддръжка и/или експлоатация и техническо обслужване на съоръжението</value>
+  </data>
+  <data name="Technical" xml:space="preserve">
+    <value>Технически данни и изисквания за експлоатация на съоръжението, разработени от производителя</value>
+  </data>
+  <data name="CopyOrder" xml:space="preserve">
+    <value>Копие от заповед за допускане до самостоятелна работа на работодателя, издадена в съответствие с изискванията на НПОССГВ (Приложение I-3)</value>
+  </data>
+  <data name="Declaration" xml:space="preserve">
+    <value>Декларация на работодателя, че заявителят упражнява функциите по сертификата повече от 1/3 от работното време</value>
+  </data>
+  <data name="LastPeriodical" xml:space="preserve">
+    <value>Копие на сертификат от последно периодично обучение - теоретично и СВТ</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>Копие от протокол, доказващ преминато OJT в съответствие с изискванията на НПОССГВ (Приложение I-3), заверено от работодателя</value>
+  </data>
+  <data name="Specialized" xml:space="preserve">
+    <value>Копия на сертификати за завършено основно и специализирано обучение, отнасящо се до заявлението</value>
+  </data>
+  <data name="Diploma" xml:space="preserve">
+    <value>Диплома за висше образование (копие)</value>
+  </data>
+  <data name="Development" xml:space="preserve">
+    <value>Разработка на методическите материали за курса, по който се искат права за правоспособност</value>
+  </data>
+  <data name="Evidencing" xml:space="preserve">
+    <value>Документ, доказващ договорни отношения със съответния АУЦ</value>
+  </data>
+  <data name="JobResume" xml:space="preserve">
+    <value>Трудова автобиография</value>
+  </data>
+  <data name="Licenses" xml:space="preserve">
+    <value>Списък на свидетелства за правоспособност, свидетелства за квалификация, списък на публикации и разработки, технологии и други документи, доказващи квалификацията в областта на исканата правоспособност</value>
+  </data>
+  <data name="DocumentAUC" xml:space="preserve">
+    <value>Документ, доказващ договорни отношения със съответния АУЦ</value>
+  </data>
+  <data name="Evidence" xml:space="preserve">
+    <value>Доказателства за внедрена система за управление на качеството</value>
+  </data>
+  <data name="ListMethodological" xml:space="preserve">
+    <value>Списък на учебно-методическия съвет</value>
+  </data>
+  <data name="ManualAviationalCenter" xml:space="preserve">
+    <value>Ръководство за дейността на авиационния учебен център</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Документ за данъчна регистрация</value>
+  </data>
+  <data name="AircraftTraining" xml:space="preserve">
+    <value>Списък на въздухоплавателните средства, които ще се използват за обучение</value>
+  </data>
+  <data name="AirportsList" xml:space="preserve">
+    <value>Списък на летища, които ще се използват за обучение</value>
+  </data>
+  <data name="DeclarationManager" xml:space="preserve">
+    <value>Декларация на отговорния ръководител</value>
+  </data>
+  <data name="EvidenceManagers" xml:space="preserve">
+    <value>Доказателства за квалификация и опит на отговорния ръководител/отговорните ръководители</value>
+  </data>
+  <data name="InstructorsList" xml:space="preserve">
+    <value>Списък на инструкторите</value>
+  </data>
+  <data name="MME" xml:space="preserve">
+    <value>Organization’s management manual (ОММ)</value>
+  </data>
+  <data name="OM" xml:space="preserve">
+    <value>Operation manual (ОМ)</value>
+  </data>
+  <data name="Simulators" xml:space="preserve">
+    <value>Списък на летателните тренажори (FSTD), които организацията възнамерява да използва за обучение</value>
+  </data>
+  <data name="Subcontracts" xml:space="preserve">
+    <value>Договори с подизпълнители</value>
+  </data>
+  <data name="TrainingCoursesProgram" xml:space="preserve">
+    <value>Предлагани учебни курсове  и съответната програма</value>
+  </data>
+  <data name="TRM" xml:space="preserve">
+    <value>Training manual (TRM)</value>
+  </data>
+  <data name="ComplianceDocument" xml:space="preserve">
+    <value>Документ за съответствие на модификацията на ВС на Оператора и оборудването на FSTD *</value>
+  </data>
+  <data name="OperatorFSTDCertificate" xml:space="preserve">
+    <value>Сертификат на оператора на FSTD / Certificate  of  the FSTD Operator</value>
+  </data>
+  <data name="QualificationCertificate" xml:space="preserve">
+    <value>Валиден сертификат на FSTD /Qualification  Certificate  of  the  FSTD  together  with  the  FSTD  evaluation  report.</value>
+  </data>
+  <data name="TechnicalCertifiedTraining" xml:space="preserve">
+    <value>Удостоверение от техническо професионално обучение</value>
+  </data>
+  <data name="MainCourseCompleted" xml:space="preserve">
+    <value>Удостоверение за завършен основен (интегриран) и квалификационен (модулен) курс</value>
+  </data>
+  <data name="DyplomCopies" xml:space="preserve">
+    <value>Копие от диплома/и за завършено образование</value>
+  </data>
+  <data name="ProtocolExamSuccess" xml:space="preserve">
+    <value>Протокол за успешно издържан изпит за допускане до самостоятелна  работа</value>
+  </data>
+  <data name="ProtocolExamSuccessGVA" xml:space="preserve">
+    <value>Протокол за успешно издържан изпит пред ГД "ГВА"</value>
+  </data>
+  <data name="InternshipDocument" xml:space="preserve">
+    <value>Документ за проведен стаж</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>СП издадено от друга държава</value>
+  </data>
+  <data name="ContractsProcurators" xml:space="preserve">
+    <value>Договори с търговски представители, прокурист(и) и др.</value>
+  </data>
+  <data name="CourtRegistration" xml:space="preserve">
+    <value>Документ за съдебна регистрация</value>
+  </data>
+  <data name="DeclarationTaxInformation" xml:space="preserve">
+    <value>Декларация за съгласие да предоставя на ГД "ГВА" данъчна и осигурителна информация по смисъла на чл. 72 от Данъчно-осигурителния процесуален кодекс</value>
+  </data>
+  <data name="DocumentsApproval" xml:space="preserve">
+    <value>Документи за издаване на одобрение на Организация за поддържане на постоянна летателна годност по част М на Регламент № 2042/2003 относно поддържане на летателната годност на въздухоплавателните средства и авиационните продукти, части и устройства и за одобряване на организациите и персонала, изпълняващ тези задачи, или ръководство за контрол на техническото обслужване съгласно приложение № 8 от Наредба № 24 - за ВС, които отговарят на критериите на Приложение II към Регламент (ЕО) № 216/2008 на Европейския парламент и на Съвета от 20 февруари 2008 г. относно общи правила в областта на гражданското въздухоплаване, за създаване на Европейска агенция за авиационна безопасност и за отмяна на Директива 91/670/ЕИО на Съвета, Регламент (ЕО) № 1592/2002 и Директива 2004/36/ЕО</value>
+  </data>
+  <data name="InformationAircraftsEquipment" xml:space="preserve">
+    <value>Информация за въздухоплавателните средства, съоръженията, наземното и бордното специално оборудване, с които разполага, съгласно приложение № 1 от Наредба № 24 (т. I, II и III)</value>
+  </data>
+  <data name="InformationAssess" xml:space="preserve">
+    <value>Информация за оценка на финансово-икономическото осигуряване на дейността при експлоатацията на ВС съгласно приложение № 2 от Наредба № 24</value>
+  </data>
+  <data name="ListDirectors" xml:space="preserve">
+    <value>Списък с имената и адресите на ръководните лица, както и доказателства, че притежават необходимата квалификация и професионален опит</value>
+  </data>
+  <data name="ListInvolved" xml:space="preserve">
+    <value>Списък с имената и адресите на постоянно привлечените лица и дейностите, за които са ангажирани</value>
+  </data>
+  <data name="ListNames4" xml:space="preserve">
+    <value>Списък с имената, адресите, номерата на свидетелствата за правоспособност и други данни за всички лица, свързани с експлоатацията на ВС на оператора съгласно приложение № 1 от Наредба № 24, т. IV</value>
+  </data>
+  <data name="ListNames5" xml:space="preserve">
+    <value>Списък с имената, адресите, номерата на свидетелствата за правоспособност и други данни за всички лица, свързани с експлоатацията на ВС на оператора съгласно съгласно приложение № 1 от Наредба № 24, т. V</value>
+  </data>
+  <data name="ManualControl" xml:space="preserve">
+    <value>Ръководството за контрол върху техническото обслужване</value>
+  </data>
+  <data name="OperationsFlights" xml:space="preserve">
+    <value>Ръководството за провеждане на полетите</value>
+  </data>
+  <data name="OperatorManual" xml:space="preserve">
+    <value>Ръководството на оператора</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Декларация за обстоятелствата, че срещу заявителя не е открита процедура за обявяване в несъстоятелност или ликвидация</value>
+  </data>
+  <data name="Standing" xml:space="preserve">
+    <value>Удостоверение за актуално състояние</value>
+  </data>
+  <data name="Agreement" xml:space="preserve">
+    <value>Договор</value>
+  </data>
+  <data name="Maintenence" xml:space="preserve">
+    <value>Поддръжка</value>
+  </data>
+  <data name="MOE" xml:space="preserve">
+    <value>МОЕ</value>
+  </data>
+  <data name="MaintenanceProgram" xml:space="preserve">
+    <value>Програма за поддръжка</value>
+  </data>
+  <data name="Reliability" xml:space="preserve">
+    <value>Програма за надеждност</value>
+  </data>
+  <data name="TechnicalDiary" xml:space="preserve">
+    <value>Технически борден дневник</value>
+  </data>
+  <data name="DyplomCopy" xml:space="preserve">
+    <value>Копие от диплом за завършено образование</value>
+  </data>
+  <data name="FeePaid" xml:space="preserve">
+    <value>Документ за внесена държавна такса</value>
+  </data>
+  <data name="IDCopy" xml:space="preserve">
+    <value>Копие от личната карта</value>
+  </data>
+  <data name="MedicalCertificate" xml:space="preserve">
+    <value>Свидетелство за медицинска годност от съответния клас</value>
+  </data>
+  <data name="PracticalTraining" xml:space="preserve">
+    <value>Удостоверение за завършено летателно или практическо обучение в АУЦ</value>
+  </data>
+  <data name="InitialImage" xml:space="preserve">
+    <value>Снимка (само за първоначално издаване)</value>
+  </data>
+  <data name="LogbookSingle" xml:space="preserve">
+    <value>Летателна книжка</value>
+  </data>
+  <data name="MedicalFitnessCopy" xml:space="preserve">
+    <value>Медицинска годност- копие</value>
+  </data>
+  <data name="OriginalSkillTest" xml:space="preserve">
+    <value>Летателна проверка – оригинал</value>
+  </data>
+  <data name="SAA" xml:space="preserve">
+    <value>Теоретично обучение за ССА – копие</value>
+  </data>
+  <data name="TheoreticalClassType" xml:space="preserve">
+    <value>Теоретично обучение за клас/тип ВС – копие</value>
+  </data>
+  <data name="PracticalTrainingSingle" xml:space="preserve">
+    <value>Практическо обучение</value>
+  </data>
+  <data name="AopFed" xml:space="preserve">
+    <value>Обявление за обществена поръчка (.fed)</value>
+  </data>
+  <data name="AopLetter" xml:space="preserve">
+    <value>Придружително писмо</value>
+  </data>
+  <data name="AopMethodica" xml:space="preserve">
+    <value>Методика (.doc/.docx)</value>
+  </data>
+  <data name="OtherFed" xml:space="preserve">
+    <value>Друг (.fed)</value>
+  </data>
+</root>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4650" 
+	xmlns="http://ereg.egov.bg/segment/R-4650" 
+	xmlns:mcf="http://ereg.egov.bg/value/R-4640"
+	xmlns:tci="http://ereg.egov.bg/segment/R-4648"
+	xmlns:soc="http://ereg.egov.bg/segment/R-4638"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4640" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4648" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4638" />
+		
+	<xsd:complexType name="MotherCompanyInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Информация за компания-майка</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="MotherCompanyFlag" type="mcf:MotherCompanyFlag" minOccurs="0" />
+			<xsd:element name="TradingCompanyInformation" type="tci:TradingCompanyInformation" minOccurs="0" />
+			<xsd:element name="ShareholdersOwnersCollection" type="soc:ShareholdersOwnersCollection" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

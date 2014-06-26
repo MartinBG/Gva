@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4260" 
+	xmlns="http://ereg.egov.bg/segment/R-4260" 
+	xmlns:oqcpc="http://ereg.egov.bg/value/R-4254"
+	xmlns:oqcpn="http://ereg.egov.bg/value/R-4256"
+	xmlns:oqcpne="http://ereg.egov.bg/value/R-4258"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4254" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4256" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4258" />
+	
+	<xsd:complexType name="OVDQualificationClassPermission">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Разрешение към квалификационен клас за ОВД</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OVDQualificationClassPermissionCode" type="oqcpc:OVDQualificationClassPermissionCode" minOccurs="0" />
+			<xsd:element name="OVDQualificationClassPermissionName" type="oqcpn:OVDQualificationClassPermissionName" minOccurs="0" />
+			<xsd:element name="OVDQualificationClassPermissionNameEnglish" type="oqcpne:OVDQualificationClassPermissionNameEnglish" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

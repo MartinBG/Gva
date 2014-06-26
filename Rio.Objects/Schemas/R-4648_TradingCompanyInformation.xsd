@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4648" 
+	xmlns="http://ereg.egov.bg/segment/R-4648" 
+	xmlns:tcn="http://ereg.egov.bg/value/R-4644"
+	xmlns:tcrd="http://ereg.egov.bg/value/R-4646"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4644" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4646" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+		
+	<xsd:complexType name="TradingCompanyInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Информация за търговско дружество</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TradingCompanyName" type="tcn:TradingCompanyName" minOccurs="0" />
+			<xsd:element name="TradingCompanyRegistrationDate" type="tcrd:TradingCompanyRegistrationDate" minOccurs="0" />
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

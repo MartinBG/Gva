@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4552" 
+	xmlns="http://ereg.egov.bg/segment/R-4552"
+	xmlns:mn="http://ereg.egov.bg/value/R-3986"
+	xmlns:et="http://ereg.egov.bg/segment/R-4412"
+	xmlns:asntc="http://ereg.egov.bg/segment/R-4548"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4412" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4548" />
+
+	<xsd:complexType name="EngineDescriptionExportCertificate">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Описание на двигател за експортно удостоверение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />
+			<xsd:element name="EngineType" type="et:EngineType" minOccurs="0" />
+			<xsd:element name="AircraftsSerialNumbersTTSNCollection" type="asntc:AircraftsSerialNumbersTTSNCollection" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

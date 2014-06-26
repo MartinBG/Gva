@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000087" xmlns="http://ereg.egov.bg/segment/0009-000087" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:doct="http://ereg.egov.bg/value/0008-000118" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000118" />
+  <xsd:complexType name="DocumentOpinionCreationData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за създаване на становище по документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Author" type="aubd:AISUserBasicData" />
+      <xsd:element name="CreationTime" type="doct:DocumentOpinionCreationTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

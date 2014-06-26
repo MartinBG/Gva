@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4412" 
+	xmlns="http://ereg.egov.bg/segment/R-4412"
+	xmlns:etc="http://ereg.egov.bg/value/R-4408"
+	xmlns:etn="http://ereg.egov.bg/value/R-4410"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4408" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4410" />
+
+	<xsd:complexType name="EngineType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип на двигател</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="EngineTypeCode" type="etc:EngineTypeCode" minOccurs="0" />
+			<xsd:element name="EngineTypeName" type="etn:EngineTypeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

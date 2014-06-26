@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000147" xmlns="http://ereg.egov.bg/segment/0009-000147" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:sard="http://ereg.egov.bg/segment/0009-000141" xmlns:miars="http://ereg.egov.bg/segment/0009-000145" xmlns:nmid="http://ereg.egov.bg/value/0008-000225" xmlns:miat="http://ereg.egov.bg/value/0008-000174" xmlns:irtp="http://ereg.egov.bg/value/0008-000175" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000141" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000145" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000225" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000174" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000175" />
+  <xsd:element name="DocumentContainingMunicipalityInformationCopyApplication" type="DocumentContainingMunicipalityInformationCopyApplication" />
+  <xsd:complexType name="DocumentContainingMunicipalityInformationCopyApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявление за предоставяне на копие от документ, съдържащ публична или непублична общинска информация на хартиен или магнитен носител със или без заверка</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ServiceApplicantReceiptData" type="sard:ServiceApplicantReceiptData" minOccurs="0" />
+      <xsd:element name="MunicipalityInformationAccessRightSubject" type="miars:MunicipalityInformationAccessRightSubject" minOccurs="0" />
+      <xsd:element name="NeededMunicipalityInformationDescription" type="nmid:NeededMunicipalityInformationDescription" minOccurs="0" />
+      <xsd:element name="MunicipalityInformationAccessTypes" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="MunicipalityInformationAccessType" type="miat:MunicipalityInformationAccessType" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InformationRecordingTechnicalParameters" type="irtp:InformationRecordingTechnicalParameters" minOccurs="0" />
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

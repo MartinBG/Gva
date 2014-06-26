@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4224" 
+	xmlns="http://ereg.egov.bg/segment/R-4224" 
+	xmlns:amclc="http://ereg.egov.bg/value/R-4218"
+	xmlns:amcln="http://ereg.egov.bg/value/R-4220" 
+	xmlns:amclna="http://ereg.egov.bg/value/R-4222"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4218" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4220" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4222" />
+	
+	<xsd:complexType name="AircraftMaintenanceCategoryLicense">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Kатегория за лиценз за техническо обслужване на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftMaintenanceCategoryLicenseCode" type="amclc:AircraftMaintenanceCategoryLicenseCode" minOccurs="0" />
+			<xsd:element name="AircraftMaintenanceCategoryLicenseName" type="amcln:AircraftMaintenanceCategoryLicenseName" minOccurs="0" />
+			<xsd:element name="AircraftMaintenanceCategoryLicenseNameAlt" type="amclna:AircraftMaintenanceCategoryLicenseNameAlt" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000068" xmlns="http://ereg.egov.bg/segment/0009-000068" xmlns:tid="http://ereg.egov.bg/value/0008-000082" xmlns:tn="http://ereg.egov.bg/value/0008-000081" xmlns:ted="http://ereg.egov.bg/value/0008-000083" xmlns:ssu="http://ereg.egov.bg/segment/0009-000040" xmlns:tex="http://ereg.egov.bg/segment/0009-000062" xmlns:tssd="http://ereg.egov.bg/value/0008-000084" xmlns:tscd="http://ereg.egov.bg/value/0008-000085" xmlns:tasd="http://ereg.egov.bg/value/0008-000086" xmlns:tacd="http://ereg.egov.bg/value/0008-000087" xmlns:trtm="http://ereg.egov.bg/segment/0009-000063" xmlns:tidoc="http://ereg.egov.bg/segment/0009-000064" xmlns:tcdoc="http://ereg.egov.bg/segment/0009-000065" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000082" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000081" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000083" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000040" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000062" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000084" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000085" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000086" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000087" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000063" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000064" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000065" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISTask">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Задача</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="tid:AISTaskID" />
+      <xsd:element name="NameAndShortDescription" type="tn:AISTaskName" />
+      <xsd:element name="ExpandedDescription" type="ted:AISTaskExpandedDescription" minOccurs="0" />
+      <xsd:element name="StageURI" type="ssu:ServiceStageURI" minOccurs="0" />
+      <xsd:element name="ExecutedBy" type="tex:AISTaskExecutor" />
+      <xsd:element name="ScheduledStartDate" type="tssd:AISTaskScheduledStartDate" />
+      <xsd:element name="ScheduledCompletionDate" type="tscd:AISTaskScheduledCompletionDate" />
+      <xsd:element name="ActualStartDate" type="tasd:AISTaskActualStartDate" minOccurs="0" />
+      <xsd:element name="ActualCompletionDate" type="tacd:AISTaskActualCompletionDate" minOccurs="0" />
+      <xsd:element name="ResponsibleTeam" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="TeamMember" type="trtm:AISTaskResponsibleTeamMember" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InitialDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Document" type="tidoc:AISTaskInitialDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreatedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Document" type="tcdoc:AISTaskCreatedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

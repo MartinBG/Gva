@@ -8,7 +8,7 @@ using Common.Api.UserContext;
 using Common.Blob;
 using Common.Data;
 using Common.Extensions;
-using Components.DocumentSerializer;
+using Common.Utils;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
@@ -477,9 +477,7 @@ namespace Aop.Api.Controllers
                     List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
                     List<NUTv5.item> nuts = GetFedDocumentNuts();
 
-                    IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
-
-                    FEDv5.document fedDoc = documentSerializer.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
+                    FEDv5.document fedDoc = XmlSerializerUtils.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
 
                     FedExtractor.noms = noms;
 
@@ -568,9 +566,7 @@ namespace Aop.Api.Controllers
                     List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
                     List<NUTv5.item> nuts = GetFedDocumentNuts();
 
-                    IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
-
-                    FEDv5.document fedDoc = documentSerializer.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
+                    FEDv5.document fedDoc = XmlSerializerUtils.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
 
                     FedExtractor.noms = noms;
 
@@ -629,22 +625,18 @@ namespace Aop.Api.Controllers
 
         private List<NOMv5.nom> GetFedDocumentNomenclatures()
         {
-            IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
-
             var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nom.xml");
             var nomXml = System.IO.File.ReadAllText(xmlPath);
-            var nomObj = documentSerializer.XmlDeserializeFromString<NOMv5.nomenclature>(nomXml);
+            var nomObj = XmlSerializerUtils.XmlDeserializeFromString<NOMv5.nomenclature>(nomXml);
 
             return nomObj.nom;
         }
 
         private List<NUTv5.item> GetFedDocumentNuts()
         {
-            IDocumentSerializer documentSerializer = new DocumentSerializerImpl();
-
             var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nuts.xml");
             var nutXml = System.IO.File.ReadAllText(xmlPath);
-            var nutObj = documentSerializer.XmlDeserializeFromString<NUTv5.nuts>(nutXml);
+            var nutObj = XmlSerializerUtils.XmlDeserializeFromString<NUTv5.nuts>(nutXml);
 
             return nutObj.item;
         }

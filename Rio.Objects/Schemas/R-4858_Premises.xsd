@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4858" 
+	xmlns="http://ereg.egov.bg/segment/R-4858" 
+	xmlns:pl="http://ereg.egov.bg/value/R-4852"
+	xmlns:prc="http://ereg.egov.bg/value/R-4854"
+	xmlns:prs="http://ereg.egov.bg/value/R-4856"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4852" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4854" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4856" />
+
+	<xsd:complexType name="Premises">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Помещение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PremisesLocation" type="pl:PremisesLocation" minOccurs="0" />
+			<xsd:element name="PremisesRoomCount" type="prc:PremisesRoomCount" minOccurs="0" />
+			<xsd:element name="PremisesRoomSize" type="prs:PremisesRoomSize" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -6,27 +6,19 @@ using Common.Data;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
-using Components.EmsUtils;
-using Components.DocumentSigner;
-using Components.XmlSchemaValidator;
-using Components.VirusScanEngine;
-using Components.DocumentSerializer;
-using Components.DevelopmentLogger;
-using Components.PortalConfigurationManager;
-using RioObjects;
 using System.IO;
+using Common.Blob;
+using Common.Api.Models;
+using Common.Extensions;
+using System.Data.SqlClient;
+using System.Configuration;
 using R_0009_000001;
 using R_0009_000085;
 using R_0009_000067;
-using Common.Blob;
-using Common.Api.Models;
 using R_0009_000046;
 using R_0009_000068;
-using System.Data.SqlClient;
-using System.Configuration;
 using R_0009_000089;
 using R_0009_000073;
-using Common.Extensions;
 using R_0009_000054;
 using R_0009_000062;
 using R_0009_000005;
@@ -39,22 +31,14 @@ using R_0009_000072;
 using R_0009_000042;
 using R_0009_000043;
 using R_0009_000031;
-using Components.ApplicationCommunicator;
+using Rio.Data.ServiceContracts.AppCommunicator;
 
 namespace Gva.AppCommunicator
 {
-    public class AppCommunicatorService : Components.ApplicationCommunicator.IDocumentService
+    public class AppCommunicatorService : Rio.Data.ServiceContracts.AppCommunicator.IDocumentService
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
-
-        private IDocumentSerializer documentSerializer;
-        private IVirusScanEngine virusScanEngine;
-        private IXmlSchemaValidator xmlSchemaValidator;
-        private IDocumentSigner documentSigner;
-        private IPortalConfigurationManager portalConfigurationManager;
-        private IDevelopmentLogger developmentLogger;
-        private IEmsUtils emsUtils;
 
         public AppCommunicatorService()
         {
@@ -62,24 +46,14 @@ namespace Gva.AppCommunicator
             configurations.Add(new DocsDbConfiguration());
             configurations.Add(new CommonDbConfiguration());
 
-            this.unitOfWork = new UnitOfWork(configurations);
+            this.unitOfWork = new UnitOfWork(configurations, Enumerable.Empty<IDbContextInitializer>());
             this.docRepository = new DocRepository(unitOfWork);
-
-            this.documentSerializer = new DocumentSerializerImpl();
-            this.virusScanEngine = new VirusScanEngineImpl();
-            this.portalConfigurationManager = new PortalConfigurationManagerImpl();
-            this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
-            this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
-            this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsGva(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public DocumentInfo ProcessStructuredDocument(DocumentRequest request)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                RioDocumentMetadata documentMetaData = emsUtils.GetDocumentMetadataFromXml(request.DocumentData);
-
                 IncomingDoc incomingDoc = new IncomingDoc();
                 incomingDoc.DocumentGuid = Guid.NewGuid();
                 incomingDoc.IncomingDate = DateTime.Now;

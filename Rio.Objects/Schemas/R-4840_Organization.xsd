@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4840" 
+	xmlns="http://ereg.egov.bg/segment/R-4840" 
+	xmlns:oc="http://ereg.egov.bg/value/R-4836"
+	xmlns:on="http://ereg.egov.bg/value/R-4838"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4836" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4838" />
+
+	<xsd:complexType name="Organization">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Организация</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OrganizationCode" type="oc:OrganizationCode" minOccurs="0" />
+			<xsd:element name="OrganizationName" type="on:OrganizationName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

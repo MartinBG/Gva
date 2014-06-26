@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000168" xmlns="http://ereg.egov.bg/segment/0009-000168" xmlns:csat="http://ereg.egov.bg/value/0008-000164" xmlns:pd="http://ereg.egov.bg/segment/0009-000110" xmlns:dpd="http://ereg.egov.bg/segment/0009-000126" xmlns:dl="http://ereg.egov.bg/segment/0009-000125" xmlns:sd="http://ereg.egov.bg/segment/0009-000113" xmlns:ml="http://ereg.egov.bg/segment/0009-000114" xmlns:dd="http://ereg.egov.bg/value/0008-000158" xmlns:md="http://ereg.egov.bg/value/0008-000165" xmlns:pln="http://ereg.egov.bg/value/0008-000010" xmlns:fcln="http://ereg.egov.bg/value/0008-000015" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000164" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000110" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000126" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000125" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000113" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000114" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000158" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000165" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000010" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000015" />
+  <xsd:complexType name="CitizenshipStatusActAbsenceCertificateSpecification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Уточняващи данни за заявление за издаване на удостоверение за липса на съставен акт за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CitizenshipStatusActType" type="csat:CitizenshipStatusActType" minOccurs="0" />
+      <xsd:choice minOccurs="0">
+        <xsd:element name="DeathCertificate">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="DeceasedPersonData" type="dpd:DeceasedPersonData" minOccurs="0" />
+              <xsd:element name="DeathLocation" type="dl:DeathLocation" minOccurs="0" />
+              <xsd:element name="DateOfDeath" type="dd:DateOfDeath" minOccurs="0" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MarriageCertificate">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SpouseData" type="sd:SpouseData" minOccurs="0" />
+              <xsd:choice minOccurs="0">
+                <xsd:element name="PersonLastName" type="pln:PersonLastName" />
+                <xsd:element name="ForeignCitizenLastNameCyrillic" type="fcln:ForeignCitizenLastNameCyrillic" />
+              </xsd:choice>
+              <xsd:element name="MarriageLocation" type="ml:MarriageLocation" minOccurs="0" />
+              <xsd:element name="MarriageDate" type="md:MarriageDate" minOccurs="0" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="BirthCertificate">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="MotherData" type="pd:ParentData" minOccurs="0" />
+              <xsd:element name="FatherData" type="pd:ParentData" minOccurs="0" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

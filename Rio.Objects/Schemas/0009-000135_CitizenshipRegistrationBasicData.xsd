@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000135" xmlns="http://ereg.egov.bg/segment/0009-000135" xmlns:pbd="http://ereg.egov.bg/segment/0009-000008" xmlns:gc="http://ereg.egov.bg/value/0008-000195" xmlns:gn="http://ereg.egov.bg/value/0008-000196" xmlns:bd="http://ereg.egov.bg/value/0008-000022" xmlns:pob="http://ereg.egov.bg/segment/0009-000095" xmlns:poba="http://ereg.egov.bg/segment/0009-000096" xmlns:c="http://ereg.egov.bg/segment/0009-000133" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000195" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000196" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000022" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000095" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000096" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+  <xsd:complexType name="CitizenshipRegistrationBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основни данни за гражданска регистрация на физическо лице</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonBasicData" type="pbd:PersonBasicData" minOccurs="0" />
+      <xsd:element name="GenderCode" type="gc:GenderCode" minOccurs="0" />
+      <xsd:element name="GenderName" type="gn:GenderName" minOccurs="0" />
+      <xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0" />
+      <xsd:choice>
+        <xsd:element name="PlaceOfBirth" type="pob:PlaceOfBirth" minOccurs="0" />
+        <xsd:element name="PlaceOfBirthAbroad" type="poba:PlaceOfBirthAbroad" minOccurs="0" />
+      </xsd:choice>
+      <xsd:element name="Citizenships" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Citizenship" type="c:Citizenship" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

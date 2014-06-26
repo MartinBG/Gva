@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6006" 
+	xmlns="http://ereg.egov.bg/segment/R-6006" 
+	xmlns:espbd="http://ereg.egov.bg/segment/0009-000002" 
+	xmlns:abn="http://ereg.egov.bg/value/0008-000047" 
+	xmlns:at="http://ereg.egov.bg/value/0008-000144" 
+	xmlns:ssu="http://ereg.egov.bg/value/0008-000077"  
+	xmlns:ssn="http://ereg.egov.bg/value/0008-000131"
+	xmlns:dtn="http://ereg.egov.bg/value/0008-000007" 
+	xmlns:dtu="http://ereg.egov.bg/segment/0009-000003" 
+	xmlns:du="http://ereg.egov.bg/segment/0009-000001" 
+	xmlns:aate="http://ereg.egov.bg/value/0008-000198" 
+	xmlns:rni="http://ereg.egov.bg/segment/R-6002" 
+	xmlns:ani="http://ereg.egov.bg/segment/R-6004" 
+	xmlns:esaq="http://ereg.egov.bg/value/0008-000035" 
+	xmlns:ca="http://ereg.egov.bg/segment/R-4286" 
+	xmlns:caa="http://ereg.egov.bg/segment/R-4288" 
+	xmlns:esafn="http://ereg.egov.bg/value/0008-000130"
+	xmlns:esapn="http://ereg.egov.bg/value/0008-000129"
+	xmlns:еа="http://ereg.egov.bg/value/0008-000036"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+  
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000047" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000144" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000077" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000131" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000198" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-6002" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-6004" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-4286" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-4288" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000130"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000129"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000036"/>
+	
+  <xsd:complexType name="HeaderNoIdentification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Водеща част на заявление за предоставяне на електронна административна услуга, когато не се изисква идентификация на заявителя</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicServiceProviderBasicData" type="espbd:ElectronicServiceProviderBasicData" minOccurs="0" />
+			<xsd:element name="AdministrativeBodyName" type="abn:AdministrativeBodyName" minOccurs="0" />
+			<xsd:element name="ApplicationType" type="at:ApplicationType" minOccurs="0" />
+      <xsd:element name="SUNAUServiceURI" type="ssu:SUNAUServiceURI" minOccurs="0" />
+			<xsd:element name="SUNAUServiceName" type="ssn:SUNAUServiceName" minOccurs="0" />
+      <xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" minOccurs="0" />
+      <xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" minOccurs="0" />
+      <xsd:element name="DocumentURI" type="du:DocumentURI" minOccurs="0" />
+      <xsd:element name="SendApplicationWithReceiptAcknowledgedMessage" type="aate:SendApplicationWithReceiptAcknowledgedMessage" minOccurs="0" />
+      <xsd:element name="RecipientNoIdentification" type="rni:RecipientNoIdentification" minOccurs="0" />
+			<xsd:element name="AuthorNoIdentification" type="ani:AuthorNoIdentification" minOccurs="0" />
+			<xsd:element name="ElectronicServiceAuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddress" type="ca:CorrespondenceAddress" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddressAbroad" type="caa:CorrespondenceAddressAbroad" minOccurs="0" />
+			<xsd:element name="ElectronicServiceApplicantFaxNumber" type="esafn:ElectronicServiceApplicantFaxNumber" minOccurs="0"/>
+			<xsd:element name="ElectronicServiceApplicantPhoneNumber" type="esapn:ElectronicServiceApplicantPhoneNumber" minOccurs="0"/>
+			<xsd:element name="EmailAddress" type="еа:EmailAddress" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

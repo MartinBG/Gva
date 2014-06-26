@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000173" xmlns="http://ereg.egov.bg/segment/0009-000173" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:stbt="http://ereg.egov.bg/value/0008-000143" xmlns:sard="http://ereg.egov.bg/segment/0009-000141" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:ad="http://ereg.egov.bg/segment/0009-000139" xmlns:tittac="http://ereg.egov.bg/value/0008-000233" xmlns:crn="http://ereg.egov.bg/value/0008-000235" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000141" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000233" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000235" />
+  <xsd:element name="TaxiTransportationPermissionApplication" type="TaxiTransportationPermissionApplication" />
+  <xsd:complexType name="TaxiTransportationPermissionApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявление за издаване на разрешение за таксиметров превоз на пътници</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ServiceTermType" type="stbt:ServiceTermType" minOccurs="0" />
+      <xsd:element name="ServiceApplicantReceiptData" type="sard:ServiceApplicantReceiptData" minOccurs="0" />
+      <xsd:element name="TaxisInTaxiTransportersApplicationCount" type="tittac:TaxisInTaxiTransportersApplicationCount" minOccurs="0" />
+      <xsd:element name="CarRegistrationNumbers" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="CarRegistrationNumber" type="crn:CarRegistrationNumber" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AttachedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AttachedDocument" type="ad:AttachedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

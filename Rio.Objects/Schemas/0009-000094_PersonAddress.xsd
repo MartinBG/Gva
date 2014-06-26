@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000094" xmlns="http://ereg.egov.bg/segment/0009-000094" xmlns:digc="http://ereg.egov.bg/value/0008-000185" xmlns:dign="http://ereg.egov.bg/value/0008-000186" xmlns:mugc="http://ereg.egov.bg/value/0008-000187" xmlns:mugn="http://ereg.egov.bg/value/0008-000188" xmlns:segc="http://ereg.egov.bg/value/0008-000189" xmlns:segn="http://ereg.egov.bg/value/0008-000190" xmlns:stgc="http://ereg.egov.bg/value/0008-000123" xmlns:stt="http://ereg.egov.bg/value/0008-000124" xmlns:bn="http://ereg.egov.bg/value/0008-000125" xmlns:entr="http://ereg.egov.bg/value/0008-000126" xmlns:flr="http://ereg.egov.bg/value/0008-000127" xmlns:apt="http://ereg.egov.bg/value/0008-000193" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000185" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000186" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000187" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000188" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000189" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000190" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000123" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000124" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000125" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000126" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000127" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000193" />
+  <xsd:complexType name="PersonAddress">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Адрес на физическо лице</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DistrictGRAOCode" type="digc:DistrictGRAOCode" minOccurs="0" />
+      <xsd:element name="DistrictGRAOName" type="dign:DistrictGRAOName" minOccurs="0" />
+      <xsd:element name="MunicipalityGRAOCode" type="mugc:MunicipalityGRAOCode" minOccurs="0" />
+      <xsd:element name="MunicipalityGRAOName" type="mugn:MunicipalityGRAOName" minOccurs="0" />
+      <xsd:element name="SettlementGRAOCode" type="segc:SettlementGRAOCode" minOccurs="0" />
+      <xsd:element name="SettlementGRAOName" type="segn:SettlementGRAOName" minOccurs="0" />
+      <xsd:element name="StreetGRAOCode" type="stgc:StreetGRAOCode" minOccurs="0" />
+      <xsd:element name="StreetText" type="stt:StreetТеxt" minOccurs="0" />
+      <xsd:element name="BuildingNumber" type="bn:BuildingNumber" minOccurs="0" />
+      <xsd:element name="Entrance" type="entr:Entrance" minOccurs="0" />
+      <xsd:element name="Floor" type="flr:Floor" minOccurs="0" />
+      <xsd:element name="Apartment" type="apt:Apartment" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

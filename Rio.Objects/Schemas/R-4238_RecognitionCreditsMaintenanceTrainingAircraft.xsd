@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4238" 
+	xmlns="http://ereg.egov.bg/segment/R-4238" 
+	xmlns:dccrmta="http://ereg.egov.bg/value/R-4228"
+	xmlns:dccemta="http://ereg.egov.bg/value/R-4230"
+	xmlns:dcceegma="http://ereg.egov.bg/value/R-4232"
+	xmlns:cpegts="http://ereg.egov.bg/value/R-4234"
+	xmlns:ceeg="http://ereg.egov.bg/value/R-4236"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4228" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4230" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4232" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4234" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4236" />
+	
+	<xsd:complexType name="RecognitionCreditsMaintenanceTrainingAircraft">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Признаване на кредити за обучение за техническо обслужване на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft" type="dccrmta:DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft" minOccurs="0" />
+			<xsd:element name="DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft" type="dccemta:DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft" minOccurs="0" />
+			<xsd:element name="DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft" type="dcceegma:DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft" minOccurs="0" />
+			<xsd:element name="CreditingPracticalExperienceGainedTrainingSection" type="cpegts:CreditingPracticalExperienceGainedTrainingSection" minOccurs="0" />
+			<xsd:element name="CreditEquivalentExamsGraduation" type="ceeg:CreditEquivalentExamsGraduation" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

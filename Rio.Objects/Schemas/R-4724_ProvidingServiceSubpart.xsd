@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4724" 
+	xmlns="http://ereg.egov.bg/segment/R-4724" 
+	xmlns:pssc="http://ereg.egov.bg/value/R-4720"
+	xmlns:pssn="http://ereg.egov.bg/value/R-4722"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4720" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4722" />
+
+	<xsd:complexType name="ProvidingServiceSubpart">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Подчаст от предоставяне обслужване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ProvidingServiceSubpartCode" type="pssc:ProvidingServiceSubpartCode" minOccurs="0" />
+			<xsd:element name="ProvidingServiceSubpartName" type="pssn:ProvidingServiceSubpartName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

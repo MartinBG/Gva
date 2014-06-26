@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4954" 
+	xmlns="http://ereg.egov.bg/segment/R-4954" 
+	xmlns:rc="http://ereg.egov.bg/value/R-4950"
+	xmlns:rn="http://ereg.egov.bg/value/R-4952"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4950" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4952" />
+
+	<xsd:complexType name="Recognition">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Признаване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="RecognitionCode" type="rc:RecognitionCode" minOccurs="0" />
+			<xsd:element name="RecognitionName" type="rn:RecognitionName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

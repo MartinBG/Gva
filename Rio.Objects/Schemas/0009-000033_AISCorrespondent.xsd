@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000033" xmlns="http://ereg.egov.bg/segment/0009-000033" xmlns:pbd="http://ereg.egov.bg/segment/0009-000008" xmlns:fcbd="http://ereg.egov.bg/segment/0009-000011" xmlns:ebd="http://ereg.egov.bg/segment/0009-000013" xmlns:febd="http://ereg.egov.bg/segment/0009-000014" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000011" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISCorrespondent">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за кореспондент в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="Person">
+          <xsd:complexType>
+            <xsd:choice>
+              <xsd:element name="Person" type="pbd:PersonBasicData" />
+              <xsd:element name="ForeignCitizen" type="fcbd:ForeignCitizenBasicData" />
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Entity">
+          <xsd:complexType>
+            <xsd:choice>
+              <xsd:element name="Entity" type="ebd:EntityBasicData" />
+              <xsd:element name="ForeignEntity" type="febd:ForeignEntityBasicData" />
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

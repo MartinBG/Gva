@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000177" xmlns="http://ereg.egov.bg/segment/0009-000177" xmlns:drsd="http://ereg.egov.bg/value/0008-000004" xmlns:du="http://ereg.egov.bg/segment/0009-000001" xmlns:espbd="http://ereg.egov.bg/segment/0009-000002" xmlns:dtn="http://ereg.egov.bg/value/0008-000007" xmlns:dtu="http://ereg.egov.bg/segment/0009-000003" xmlns:xds="http://ereg.egov.bg/segment/0009-000004" xmlns:pn="http://ereg.egov.bg/segment/0009-000005" xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" xmlns:lcid="http://ereg.egov.bg/value/0008-000240" xmlns:lp="http://ereg.egov.bg/segment/0009-000175" xmlns:mal="http://ereg.egov.bg/segment/0009-000143" xmlns:lt="http://ereg.egov.bg/value/0008-000241" xmlns:ls="http://ereg.egov.bg/value/0008-000242" xmlns:lps="http://ereg.egov.bg/value/0008-000244" xmlns:lis="http://ereg.egov.bg/value/0008-000245" xmlns:lclg="http://ereg.egov.bg/value/0008-000243" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000004" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000004" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000240" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000175" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000241" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000242" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000243" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000244" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000245" />
+  <xsd:element name="LiabilityCertificate" type="LiabilityCertificate" />
+  <xsd:complexType name="LiabilityCertificate">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Удостоверение за наличие или липса на задължения по Закона за местните данъци и такси</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" />
+      <xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" />
+      <xsd:element name="DocumentURI" type="du:DocumentURI" />
+      <xsd:element name="DocumentReceiptOrSigningDate" type="drsd:DocumentReceiptOrSigningDate" />
+      <xsd:element name="MunicipalityAdministrationLocation" type="mal:MunicipalityAdministrationLocation" />
+      <xsd:element name="LiablePerson" type="lp:LiablePerson" />
+      <xsd:element name="ElectronicServiceProviderBasicData" type="espbd:ElectronicServiceProviderBasicData" />
+      <xsd:element name="LiabilityCertificateIssueDate" type="lcid:LiabilityCertificateIssueDate" />
+      <xsd:element name="Liabilities" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Liability" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="LiabilityType" type="lt:LiabilityType" />
+                  <xsd:element name="LiabilityLegalGround" type="lclg:LiabilityLegalGround" />
+                  <xsd:element name="LiabilityPrincipalSize" type="lps:LiabilityPrincipalSize" />
+                  <xsd:element name="LiabilityInterestSize" type="lis:LiabilityInterestSize" />
+                  <xsd:element name="LiabilitySize" type="ls:LiabilitySize" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Official">
+        <xsd:complexType>
+          <xsd:choice>
+            <xsd:element name="PersonNames" type="pn:PersonNames" />
+            <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" />
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="XMLDigitalSignature" type="xds:XMLDigitalSignature" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

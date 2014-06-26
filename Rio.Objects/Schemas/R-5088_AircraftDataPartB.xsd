@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5088" 
+	xmlns="http://ereg.egov.bg/segment/R-5088" 
+	xmlns:dcta="http://ereg.egov.bg/segment/R-5034"
+	xmlns:dld="http://ereg.egov.bg/segment/R-5046"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:ahd="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:lt="http://ereg.egov.bg/value/R-4902"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+	xmlns:akd="http://ereg.egov.bg/segment/R-5050"
+	xmlns:or="http://ereg.egov.bg/segment/R-5056"
+	xmlns:ord="http://ereg.egov.bg/value/R-5058"
+	xmlns:sr="http://ereg.egov.bg/segment/R-5064"
+	xmlns:srd="http://ereg.egov.bg/value/R-5066"
+	xmlns:spd="http://ereg.egov.bg/segment/R-5082"
+	xmlns:ok="http://ereg.egov.bg/value/R-5084"
+	xmlns:hon="http://ereg.egov.bg/value/R-5086"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5034" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5046" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4902" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5050" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5056" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5058" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5064" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5066" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5082" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5084" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5086" />
+
+	<xsd:complexType name="AircraftDataPartB">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за ВС Част Б</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DataCommercialTransportAircraft" type="dcta:DataCommercialTransportAircraft" minOccurs="0" />
+			<xsd:element name="DryLeaseData" type="dld:DryLeaseData" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
+			<xsd:element name="LeaseType" type="lt:LeaseType" minOccurs="0" />
+			<xsd:element name="LeaseEAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="ActivityKindDetails" type="akd:ActivityKindDetails" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="OperationRegion" type="or:OperationRegion" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="OperationRegionDescription" type="ord:OperationRegionDescription" minOccurs="0" />
+			<xsd:element name="SpecialRestriction" type="sr:SpecialRestriction" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="SpecialRestrictionDescription" type="srd:SpecialRestrictionDescription" minOccurs="0" />
+			<xsd:element name="SpecialPermissionDetails" type="spd:SpecialPermissionDetails" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="OrganizationKind" type="ok:OrganizationKind" minOccurs="0" />
+			<xsd:element name="HiredOrganizationName" type="hon:HiredOrganizationName" minOccurs="0" />
+			<xsd:element name="TechnicalEAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

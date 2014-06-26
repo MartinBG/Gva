@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000052" xmlns="http://ereg.egov.bg/segment/0009-000052" xmlns:andtu="http://ereg.egov.bg/segment/0009-000042" xmlns:andtn="http://ereg.egov.bg/value/0008-000068" xmlns:andtd="http://ereg.egov.bg/value/0008-000069" xmlns:andtpt="http://ereg.egov.bg/value/0008-000073" xmlns:ep="http://ereg.egov.bg/segment/0009-000050" xmlns:andtat="http://ereg.egov.bg/value/0008-000075" xmlns:evau="http://ereg.egov.bg/segment/0009-000051" xmlns:dtt="http://ereg.egov.bg/value/0008-000076" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000042" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000068" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000069" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000073" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000050" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000075" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000051" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000076" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AdministrativeNomenclatureDocumentTypeElement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за елемент от ведомствената номенклатура на видовете документи</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="URI" type="andtu:AdministrativeNomenclatureDocumentTypeURI" />
+      <xsd:element name="Name" type="andtn:AdministrativeNomenclatureDocumentTypeName" />
+      <xsd:element name="Description" type="andtd:AdministrativeNomenclatureDocumentTypeDescription" />
+      <xsd:element name="ProcessingType" type="andtpt:AdministrativeNomenclatureDocumentTypeProcessingType" />
+      <xsd:element name="EmpoweredPersons" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EmpoweredPerson" type="ep:EmpoweredPerson" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ArchivalType" type="andtat:AdministrativeNomenclatureDocumentTypeArchivalType" />
+      <xsd:element name="Applications" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EditingApplicationURI" type="evau:EditorOrVisualizerApplicationURI" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="VisualizingApplicationURI" type="evau:EditorOrVisualizerApplicationURI" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Template" type="dtt:DocumentTypeTemplate" minOccurs="0" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

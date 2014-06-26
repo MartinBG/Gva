@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000105" xmlns="http://ereg.egov.bg/segment/0009-000105" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:stbt="http://ereg.egov.bg/value/0008-000143" xmlns:sard="http://ereg.egov.bg/segment/0009-000141" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:ad="http://ereg.egov.bg/segment/0009-000139" xmlns:pa="http://ereg.egov.bg/segment/0009-000094" xmlns:elc="http://ereg.egov.bg/value/0008-000215" xmlns:el="http://ereg.egov.bg/value/0008-000216" xmlns:rpe="http://ereg.egov.bg/value/0008-000220" xmlns:rpec="http://ereg.egov.bg/value/0008-000219" xmlns:rpc="http://ereg.egov.bg/value/0008-000217" xmlns:rp="http://ereg.egov.bg/value/0008-000218" xmlns:mc="http://ereg.egov.bg/segment/0009-000162" xmlns:prsc="http://ereg.egov.bg/value/0008-000213" xmlns:prs="http://ereg.egov.bg/value/0008-000214" xmlns:pbd="http://ereg.egov.bg/segment/0009-000008" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000141" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000094" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000220" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000219" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000215" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000216" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000217" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000218" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000162" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000213" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000214" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:element name="ChangeCurrentAddressApplication" type="ChangeCurrentAddressApplication" />
+  <xsd:complexType name="ChangeCurrentAddressApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Адресна карта</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ServiceTermType" type="stbt:ServiceTermType" minOccurs="0" />
+      <xsd:element name="ServiceApplicantReceiptData" type="sard:ServiceApplicantReceiptData" minOccurs="0" />
+      <xsd:element name="PersonResidenceStatusCode" type="prsc:PersonResidenceStatusCode" minOccurs="0" />
+      <xsd:element name="PersonResidenceStatus" type="prs:PersonResidenceStatus" minOccurs="0" />
+      <xsd:element name="NewCurrentAddress" type="pa:PersonAddress" minOccurs="0" />
+      <xsd:element name="EducationLevelCode" type="elc:EducationLevelCode" minOccurs="0" />
+      <xsd:element name="EducationLevel" type="el:EducationLevel" minOccurs="0" />
+      <xsd:element name="ResidencePeriodCode" type="rpec:ResidencePeriodCode" minOccurs="0" />
+      <xsd:element name="ResidencePeriod" type="rpe:ResidencePeriod" minOccurs="0" />
+      <xsd:element name="ResidencePurposeCode" type="rpc:ResidencePurposeCode" minOccurs="0" />
+      <xsd:element name="ResidencePurpose" type="rp:ResidencePurpose" minOccurs="0" />
+      <xsd:element name="ApplicationSubject" type="pbd:PersonBasicData" minOccurs="0" />
+      <xsd:element name="MinorChildren" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="MinorChild" type="mc:MinorChild" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AttachedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AttachedDocument" type="ad:AttachedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

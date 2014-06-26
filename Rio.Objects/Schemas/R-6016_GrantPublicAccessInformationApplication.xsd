@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6016" 
+	xmlns="http://ereg.egov.bg/segment/R-6016"
+	xmlns:si="http://ereg.egov.bg/value/0008-000080"
+	xmlns:sin="http://ereg.egov.bg/value/R-6018"
+	xmlns:hni="http://ereg.egov.bg/segment/R-6006"
+	xmlns:rpid="http://ereg.egov.bg/value/R-6008"
+	xmlns:afpi="http://ereg.egov.bg/value/R-6012"
+	xmlns:spfapi="http://ereg.egov.bg/value/R-6014"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000080" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-6018" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-6006" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-6008" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-6012" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-6014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+	
+	<xsd:element name="GrantPublicAccessInformation" type="GrantPublicAccessInformation"/>
+	<xsd:complexType name="GrantPublicAccessInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за предоставяне на достъп до обществена информация</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />	
+			<xsd:element name="ServiceInstructionsName" type="sin:ServiceInstructionsName" minOccurs="0" />	
+			<xsd:element name="HeaderNoIdentification" type="hni:HeaderNoIdentification" minOccurs="0" />		
+			<xsd:element name="RequestedPublicInformationDescription" type="rpid:RequestedPublicInformationDescription" minOccurs="0" />	
+			<xsd:element name="AccessFormPublicInformation" type="afpi:AccessFormPublicInformation" minOccurs="0" maxOccurs="unbounded" />	
+			<xsd:element name="SpecificationPreferredFormAccessPublicInformation" type="spfapi:SpecificationPreferredFormAccessPublicInformation" minOccurs="0" />	
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

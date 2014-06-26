@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4420" 
+	xmlns="http://ereg.egov.bg/segment/R-4420" 
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:emp="http://ereg.egov.bg/value/R-4404"
+	xmlns:emd="http://ereg.egov.bg/value/R-4406"
+	xmlns:et="http://ereg.egov.bg/segment/R-4412"
+	xmlns:asn="http://ereg.egov.bg/value/R-4334"
+	xmlns:empt="http://ereg.egov.bg/value/R-4416"
+	xmlns:eu="http://ereg.egov.bg/value/R-4418"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4404" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4406" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4412" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4416" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4418" />
+
+	<xsd:complexType name="EngineData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за двигател</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="EngineManufacturePlace" type="emp:EngineManufacturePlace" minOccurs="0" />
+			<xsd:element name="EngineManufactureDate" type="emd:EngineManufactureDate" minOccurs="0" />
+			<xsd:element name="EngineType" type="et:EngineType" minOccurs="0" />
+			<xsd:element name="EngineSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+			<xsd:element name="EngineMaximumPowerThrust" type="empt:EngineMaximumPowerThrust" minOccurs="0" />
+			<xsd:element name="EngineUsage" type="eu:EngineUsage" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

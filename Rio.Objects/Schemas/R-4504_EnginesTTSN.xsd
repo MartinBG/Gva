@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4504" 
+	xmlns="http://ereg.egov.bg/segment/R-4504" 
+	xmlns:eth="http://ereg.egov.bg/value/R-4516"
+	xmlns:etlc="http://ereg.egov.bg/value/R-4518" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4516" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4518"  />
+	
+	<xsd:complexType name="EnginesTTSN">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Наработки на двигатели на ВС</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="EngineTTSN"  minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="EngineTTSNHours" type="eth:EngineTTSNHours" minOccurs="0" />
+						<xsd:element name="EngineTTSNLandingsCount" type="etlc:EngineTTSNLandingsCount" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

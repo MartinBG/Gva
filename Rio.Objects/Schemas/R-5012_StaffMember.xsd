@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5012" 
+	xmlns="http://ereg.egov.bg/segment/R-5012" 
+	xmlns:df="http://ereg.egov.bg/segment/R-5008"
+	xmlns:mpn="http://ereg.egov.bg/value/R-5010"
+	xmlns:pnd="http://ereg.egov.bg/value/R-4210"
+	xmlns:ea="http://ereg.egov.bg/value/R-4214"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5008" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5010" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4210" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+
+	<xsd:complexType name="StaffMember">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Лице от персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DirectionFunction" type="df:DirectionFunction" minOccurs="0" />
+			<xsd:element name="ManagerialPositionNames" type="mpn:ManagerialPositionNames" minOccurs="0" />
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" minOccurs="0" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

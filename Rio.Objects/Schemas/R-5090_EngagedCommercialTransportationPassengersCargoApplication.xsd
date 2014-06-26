@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5090" 
+	xmlns="http://ereg.egov.bg/segment/R-5090"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:at="http://ereg.egov.bg/value/R-4580"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:febd="http://ereg.egov.bg/segment/0009-000014"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:dii="http://ereg.egov.bg/value/R-5002"
+	xmlns:aan="http://ereg.egov.bg/value/R-4582"
+	xmlns:rap="http://ereg.egov.bg/segment/R-4702"
+	xmlns:sm="http://ereg.egov.bg/segment/R-5014"
+	xmlns:adpb="http://ereg.egov.bg/segment/R-5088"
+	xmlns:tc="http://ereg.egov.bg/segment/R-5024"
+	xmlns:addc="http://ereg.egov.bg/segment/R-3994"
+	xmlns:uaddc="http://ereg.egov.bg/segment/R-4692"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4580" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5002" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4582" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4702" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5088" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5024" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4692" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="EngagedCommercialTransportationPassengersCargoApplication" type="EngagedCommercialTransportationPassengersCargoApplication"/>
+	<xsd:complexType name="EngagedCommercialTransportationPassengersCargoApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на свидетелство за авиационен оператор, извършващ търговски превози на пътници и товари</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ApplicantType" type="at:ApplicantType" minOccurs="0" />
+			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
+			<xsd:element name="DesignatorIATAICAO" type="dii:DesignatorIATAICAO" minOccurs="0" />
+			<xsd:element name="AirportAirfieldName" type="aan:AirportAirfieldName" minOccurs="0" />
+			<xsd:element name="RepresentativeAuthorizedPerson" type="rap:RepresentativeAuthorizedPerson" minOccurs="0" />
+			<xsd:element name="Holders" type="sm:StaffMembers" minOccurs="0" />
+			<xsd:element name="Substitutes" type="sm:StaffMembers" minOccurs="0" />
+			<xsd:element name="AircraftDataPartB" type="adpb:AircraftDataPartB" minOccurs="0"  maxOccurs="unbounded" />
+			<xsd:element name="TechnicalContracts" type="tc:TechnicalContracts" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="UnnumberedAttachedDocumentDatasCollection" type="uaddc:UnnumberedAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

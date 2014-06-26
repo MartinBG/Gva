@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4294" 
+	xmlns="http://ereg.egov.bg/segment/R-4294"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4286"
+	xmlns:febd="http://ereg.egov.bg/segment/0009-000014"
+	xmlns:caa="http://ereg.egov.bg/segment/R-4288"
+	xmlns:pnd="http://ereg.egov.bg/value/R-4210"
+	xmlns:fnd="http://ereg.egov.bg/value/R-4212"
+	xmlns:ea="http://ereg.egov.bg/value/R-4214"
+	xmlns:aocn="http://ereg.egov.bg/value/R-4290"
+	xmlns:aocid="http://ereg.egov.bg/value/R-4292"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4286" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4288" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4210" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4212" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4290" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4292" />
+
+	<xsd:complexType name="AviationalOperatorBasicData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Основни данни за авиационен оператор</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />	
+			<xsd:element name="CorrespondenceAddress" type="ca:CorrespondenceAddress" minOccurs="0" />	
+			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />	
+			<xsd:element name="CorrespondenceAddressAbroad" type="caa:CorrespondenceAddressAbroad" minOccurs="0" />
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" minOccurs="0" />
+			<xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" minOccurs="0" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+			<xsd:element name="AviationalOperatorCertificateNumber" type="aocn:AviationalOperatorCertificateNumber" minOccurs="0" />
+			<xsd:element name="AviationalOperatorCertificateIssueDate" type="aocid:AviationalOperatorCertificateIssueDate" minOccurs="0" />			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

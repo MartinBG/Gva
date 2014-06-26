@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000155" xmlns="http://ereg.egov.bg/segment/0009-000155" xmlns:dgc="http://ereg.egov.bg/value/0008-000185" xmlns:dgn="http://ereg.egov.bg/value/0008-000186" xmlns:mgc="http://ereg.egov.bg/value/0008-000187" xmlns:mgn="http://ereg.egov.bg/value/0008-000188" xmlns:sgc="http://ereg.egov.bg/value/0008-000189" xmlns:sgn="http://ereg.egov.bg/value/0008-000190" xmlns:pc="http://ereg.egov.bg/value/0008-000128" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000185" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000186" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000187" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000188" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000189" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000190" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000128" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000200" />
+  <xsd:element name="AdministrativeTerritorialUnitDataGRAO" type="AdministrativeTerritorialUnitDataGRAO" />
+  <xsd:complexType name="AdministrativeTerritorialUnitDataGRAO">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за административно-териториални и териториални единици (ЕСГРАОН)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Districts">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="District" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="dgc:DistrictGRAOCode" />
+                  <xsd:element name="Name" type="dgn:DistrictGRAOName" />
+                  <xsd:element name="TLLCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[A-Z]{2}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="TLCCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[А-Я]{2}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="NSICode" type="dc:DistrictCode" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Municipalities">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Municipality" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="DistrictCode" type="dgc:DistrictGRAOCode" />
+                  <xsd:element name="Code" type="mgc:MunicipalityGRAOCode" />
+                  <xsd:element name="Name" type="mgn:MunicipalityGRAOName" />
+                  <xsd:element name="TLLCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[A-Z]{2}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="TLCCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[А-Я]{2}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Settlements">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Settlement" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="DistrictCode" type="dgc:DistrictGRAOCode" />
+                  <xsd:element name="MunicipalityCode" type="mgc:MunicipalityGRAOCode" />
+                  <xsd:element name="Code" type="sgc:SettlementGRAOCode" />
+                  <xsd:element name="AreaCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d{2}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Name" type="sgn:SettlementGRAOName" />
+                  <xsd:element name="Type">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="1" />
+                        <!--  град -->
+                        <xsd:enumeration value="3" />
+                        <!--  село -->
+                        <xsd:enumeration value="7" />
+                        <!--  манастир -->
+                        <xsd:enumeration value="0" />
+                        <!--  р-н, квартал, градска община -->
+                        <xsd:enumeration value="4" />
+                        <!--  закрито - махала -->
+                        <xsd:enumeration value="5" />
+                        <!--  закрито - колиба -->
+                        <xsd:enumeration value="9" />
+                        <!--  закрито - пром.с. -->
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="PostCode" type="pc:PostCode" />
+                  <xsd:element name="ModificationDate" type="xsd:date" />
+                  <xsd:element name="StatusCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="0" />
+                        <!--  съществуващо в нас. място (активен запис) -->
+                        <xsd:enumeration value="4" />
+                        <!--  закрито в нас. място      (архивен запис) -->
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5014" 
+	xmlns="http://ereg.egov.bg/segment/R-5014" 
+	xmlns:sm="http://ereg.egov.bg/segment/R-5012"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5012" />
+
+	<xsd:complexType name="StaffMembers">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Лица от персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="StaffMember" type="sm:StaffMember" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

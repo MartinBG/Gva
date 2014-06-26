@@ -6,14 +6,6 @@ using Common.Data;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
-using Components.EmsUtils;
-using Components.DocumentSigner;
-using Components.XmlSchemaValidator;
-using Components.VirusScanEngine;
-using Components.DocumentSerializer;
-using Components.DevelopmentLogger;
-using Components.PortalConfigurationManager;
-using RioObjects;
 using System.IO;
 using R_0009_000001;
 using R_0009_000085;
@@ -39,24 +31,16 @@ using R_0009_000072;
 using R_0009_000042;
 using R_0009_000043;
 using R_0009_000031;
-using Components.ApplicationCommunicator;
 using Mosv.Api.Models;
 using Regs.Api.Models;
+using Rio.Data.ServiceContracts.AppCommunicator;
 
 namespace Mosv.AppCommunicator
 {
-    public class AppCommunicatorService : Components.ApplicationCommunicator.IDocumentService
+    public class AppCommunicatorService : Rio.Data.ServiceContracts.AppCommunicator.IDocumentService
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
-
-        private IDocumentSerializer documentSerializer;
-        private IVirusScanEngine virusScanEngine;
-        private IXmlSchemaValidator xmlSchemaValidator;
-        private IDocumentSigner documentSigner;
-        private IPortalConfigurationManager portalConfigurationManager;
-        private IDevelopmentLogger developmentLogger;
-        private IEmsUtils emsUtils;
 
         public AppCommunicatorService()
         {
@@ -66,24 +50,14 @@ namespace Mosv.AppCommunicator
             configurations.Add(new MosvDbConfiguration());
             configurations.Add(new RegsDbConfiguration());
 
-            this.unitOfWork = new UnitOfWork(configurations);
+            this.unitOfWork = new UnitOfWork(configurations, Enumerable.Empty<IDbContextInitializer>());
             this.docRepository = new DocRepository(unitOfWork);
-
-            this.documentSerializer = new DocumentSerializerImpl();
-            this.virusScanEngine = new VirusScanEngineImpl();
-            this.portalConfigurationManager = new PortalConfigurationManagerImpl();
-            this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
-            this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
-            this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsMosv(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
         }
 
         public DocumentInfo ProcessStructuredDocument(DocumentRequest request)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                RioDocumentMetadata documentMetaData = emsUtils.GetDocumentMetadataFromXml(request.DocumentData);
-
                 IncomingDoc incomingDoc = new IncomingDoc();
                 incomingDoc.DocumentGuid = Guid.NewGuid();
                 incomingDoc.IncomingDate = DateTime.Now;

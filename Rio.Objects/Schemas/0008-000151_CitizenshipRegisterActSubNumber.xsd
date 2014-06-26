@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000151" xmlns="http://ereg.egov.bg/value/0008-000151" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="CitizenshipRegisterActSubNumber">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Под-номер на акт в регистър за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{1,2}|[А-Я]{1,2}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

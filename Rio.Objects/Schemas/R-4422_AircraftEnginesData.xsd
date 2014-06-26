@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4422" 
+	xmlns="http://ereg.egov.bg/segment/R-4422" 
+	xmlns:mcd="http://ereg.egov.bg/segment/R-3988"
+	xmlns:ec="http://ereg.egov.bg/value/R-4402"
+	xmlns:ed="http://ereg.egov.bg/segment/R-4420"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3988" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4402" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4420" />
+
+	<xsd:complexType name="AircraftEnginesData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за двигателите на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerContactData" type="mcd:ManufacturerContactData" minOccurs="0" />
+			<xsd:element name="EnginesCount" type="ec:EnginesCount" minOccurs="0" />
+			<xsd:element name="EngineData" type="ed:EngineData" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000034" xmlns="http://ereg.egov.bg/segment/0009-000034" xmlns:ssrid="http://ereg.egov.bg/value/0008-000045" xmlns:ssrn="http://ereg.egov.bg/value/0008-000046" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000045" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000046" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AdministrativeNomenclatureServiceStageResultElement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Резултат от етап</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="ssrid:ServiceStageResultID" />
+      <xsd:element name="Name" type="ssrn:ServiceStageResultName" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

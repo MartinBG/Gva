@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000009" xmlns="http://ereg.egov.bg/nomenclature/0007-000009" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="AISTaskExecutionAssessmentTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете оценки на изпълнение на задача</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000059" />
+      <xsd:enumeration value="0006-000060" />
+      <xsd:enumeration value="0006-000061" />
+      <xsd:enumeration value="0006-000062" />
+      <xsd:enumeration value="0006-000063" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CE03CC29-D823-4E37-8C22-608FBED01848}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rio.Data</RootNamespace>
+    <AssemblyName>Rio.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abbcdn\AbbcdnStorage.cs" />
+    <Compile Include="Abbcdn\IAbbcdn.cs" />
+    <Compile Include="DataObjects\ServiceProviderDo.cs" />
+    <Compile Include="DataObjects\CorrespondentDo.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Aop\AopApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4186ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4240ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4242ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4244ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4284ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4296ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4356ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4378ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4396ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4470ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4490ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4514ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4544ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4566ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4576ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4578ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4588ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4590ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4598ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4606ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4614ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4686ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4738ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4764ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4766ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4810ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4824ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4834ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4860ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4862ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4864ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4900ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4926ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R4958ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R5000ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Gva\R5090ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Mosv\R6016ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Mosv\R6054ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Mosv\R6056ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\ServiceHeaderAndFooterApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Aop\AopApplicationAttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Mosv\R6016AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Mosv\R6054AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Mosv\R6056AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\CorrespondentDo\Aop\AopApplicationCorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\CorrespondentDo\CorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\CorrespondentDo\Mosv\R6016CorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\CorrespondentDo\Mosv\R6054CorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\CorrespondentDo\Mosv\R6056CorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\ServiceProviderDo\Mosv\R6016ServiceProviderDoExtraction.cs" />
+    <Compile Include="Extractions\ServiceProviderDo\Mosv\R6054ServiceProviderDoExtraction.cs" />
+    <Compile Include="Extractions\ServiceProviderDo\Mosv\R6056ServiceProviderDoExtraction.cs" />
+    <Compile Include="Extractions\ServiceProviderDo\ServiceProviderDoExtraction.cs" />
+    <Compile Include="RioDataModule.cs" />
+    <Compile Include="DataObjects\AbbcdnInfo.cs" />
+    <Compile Include="DataObjects\AttachedDocDo.cs" />
+    <Compile Include="DataObjects\ApplicationDataDo.cs" />
+    <Compile Include="Extractions\AttachedDocDo\AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R3994CollectionAttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4186AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4240AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4242AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4244AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4284AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4296AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4356AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4378AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4396AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4470AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4490AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4514AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4544AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4566AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4576AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4578AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4588AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4590AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4598AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4606AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4614AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4686AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4738AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4764AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4766AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4810AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4824AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4834AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4860AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4862AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4864AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4900AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4926AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R4958AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R5000AttachedDocDoExtraction.cs" />
+    <Compile Include="Extractions\AttachedDocDo\Gva\R5090AttachedDocDoExtraction.cs" />
+    <Compile Include="ServiceContracts\DocCommunicator\IAISDocumentServiceViewer.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\CaseFileInfo.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\CaseStatus.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\CaseStatusInfo.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\DocumentInfo.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\DocumentRegistrationStatus.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\DocumentRequest.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\IDocumentService.cs" />
+    <Compile Include="Utils\RioValidator\IRioValidator.cs" />
+    <Compile Include="Utils\RioValidator\RioValidator.cs" />
+    <Compile Include="Utils\RioDocumentParser\RioDocumentParser.cs" />
+    <Compile Include="Utils\RioDocumentParser\IRioDocumentParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RioObjectExtraction\IRioObjectExtraction.cs" />
+    <Compile Include="RioObjectExtraction\RioObjectExtraction`1.cs" />
+    <Compile Include="RioObjectExtraction\RioObjectExtraction`2.cs" />
+    <Compile Include="RioObjectExtractor\IRioObjectExtractor.cs" />
+    <Compile Include="RioObjectExtractor\RioObjectExtractor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
+      <Name>Common %28Common\Common%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6064" 
+	xmlns="http://ereg.egov.bg/segment/R-6064"
+	xmlns:dtn="http://ereg.egov.bg/value/0008-000007"
+	xmlns:dtu="http://ereg.egov.bg/segment/0009-000003"
+	xmlns:espbd="http://ereg.egov.bg/segment/0009-000002"
+	xmlns:ftj="http://ereg.egov.bg/segment/R-6062"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-6062" />
+	
+	<xsd:element name="ContainerTransferFileCompetence" type="ContainerTransferFileCompetence"/>
+	<xsd:complexType name="ContainerTransferFileCompetence">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Контейнер за пренос на преписка по компетентност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" minOccurs="0" />
+			<xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" minOccurs="0" />
+			<xsd:element name="SenderProvider" type="espbd:ElectronicServiceProviderBasicData" minOccurs="0" />
+			<xsd:element name="ReceiverProvider" type="espbd:ElectronicServiceProviderBasicData" minOccurs="0" />
+			<xsd:element name="FileTransferredJurisdiction" type="ftj:FileTransferredJurisdiction" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

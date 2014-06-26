@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000060" xmlns="http://ereg.egov.bg/segment/0009-000060" xmlns:oid="http://ereg.egov.bg/value/0008-000062" xmlns:ot="http://ereg.egov.bg/value/0008-000063" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000062" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000063" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="ObjectAccessGrantData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за създаден достъп за изпращане на информационни обекти в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="AccessGrant" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ObjectID" type="oid:AISObjectID" />
+            <xsd:element name="ObjectType" type="ot:AISObjectType" />
+            <xsd:element name="Grantee" type="aubd:AISUserBasicData" />
+            <xsd:element name="SpecificParameters" minOccurs="0">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

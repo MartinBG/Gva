@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4140" 
+	xmlns="http://ereg.egov.bg/segment/R-4140" 
+	xmlns:ferc="http://ereg.egov.bg/value/R-4136"
+	xmlns:fern="http://ereg.egov.bg/value/R-4138"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4136" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4138"  />
+	
+	<xsd:complexType name="FlightExpRole">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Роля при натрупване на летателен опит</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightExpRoleCode" type="ferc:FlightExpRoleCode" minOccurs="0" />
+			<xsd:element name="FlightExpRoleName" type="fern:FlightExpRoleName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4226" 
+	xmlns="http://ereg.egov.bg/segment/R-4226" 
+	xmlns:amcl="http://ereg.egov.bg/segment/R-4224"
+	xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4224" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+
+	<xsd:complexType name="AircraftMaintenanceCategoryLicenseCandidatesApplicant">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Kатегории за лиценз за техническо обслужване на въздухоплавателно средство, за които кандидатства заявителят</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftMaintenanceCategoryLicense" type="amcl:AircraftMaintenanceCategoryLicense" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AircraftDescription" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AircraftMaintenanceCategoryLicense" type="amcl:AircraftMaintenanceCategoryLicense" minOccurs="0"/>
+						<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0"/>
+						<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

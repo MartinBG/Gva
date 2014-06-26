@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000057" xmlns="http://ereg.egov.bg/segment/0009-000057" xmlns:ansu="http://ereg.egov.bg/segment/0009-000054" xmlns:ansn="http://ereg.egov.bg/value/0008-000078" xmlns:ansd="http://ereg.egov.bg/value/0008-000079" xmlns:andtu="http://ereg.egov.bg/segment/0009-000042" xmlns:sr="http://ereg.egov.bg/segment/0009-000055" xmlns:st="http://ereg.egov.bg/value/0008-000122" xmlns:ssu="http://ereg.egov.bg/segment/0009-000040" xmlns:ssn="http://ereg.egov.bg/value/0008-000064" xmlns:sinstr="http://ereg.egov.bg/value/0008-000080" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000078" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000079" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000042" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000055" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000122" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000040" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000064" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000080" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AdministrativeNomenclatureServicesElement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за елемент от ведомствената номенклатура на услугите и процедурите</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="URI" type="ansu:AdministrativeNomenclatureServiceURI" />
+      <xsd:element name="Name" type="ansn:AdministrativeNomenclatureServiceName" />
+      <xsd:element name="Description" type="ansd:AdministrativeNomenclatureServiceDescription" />
+      <xsd:element name="InitiatingDocument" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="DocumentTypeURI" type="andtu:AdministrativeNomenclatureDocumentTypeURI" />
+            <xsd:element name="AdditionalData" minOccurs="0">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Responsible" type="sr:ServiceResponsible" />
+      <xsd:element name="Term" type="st:ServiceTerm" />
+      <xsd:element name="Stages" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Stage" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="StageURI" type="ssu:ServiceStageURI" />
+                  <xsd:element name="StageName" type="ssn:ServiceStageName" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Instructions" type="sinstr:ServiceInstructions" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

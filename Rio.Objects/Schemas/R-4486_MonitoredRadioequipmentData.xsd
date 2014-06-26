@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4486" 
+	xmlns="http://ereg.egov.bg/segment/R-4486"
+	xmlns:mrt="http://ereg.egov.bg/value/R-4472"
+	xmlns:mrc="http://ereg.egov.bg/value/R-4474"
+	xmlns:mrm="http://ereg.egov.bg/value/R-4476"
+	xmlns:mrmod="http://ereg.egov.bg/value/R-4478"
+	xmlns:mrp="http://ereg.egov.bg/value/R-4480"
+	xmlns:mrec="http://ereg.egov.bg/value/R-4482"
+	xmlns:mrf="http://ereg.egov.bg/value/R-4484"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4472" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4474" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4476" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4478" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4480" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4482" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4484" />
+
+	<xsd:complexType name="MonitoredRadioequipmentData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за мониторираното радиооборудване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="MonitoredRadioequipmentType" type="mrt:MonitoredRadioequipmentType" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentCount" type="mrc:MonitoredRadioequipmentCount" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentManufacturer" type="mrm:MonitoredRadioequipmentManufacturer" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentModel" type="mrmod:MonitoredRadioequipmentModel" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentPower" type="mrp:MonitoredRadioequipmentPower" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentEmissionClass" type="mrec:MonitoredRadioequipmentEmissionClass" minOccurs="0" />
+			<xsd:element name="MonitoredRadioequipmentFrequency" type="mrf:MonitoredRadioequipmentFrequency" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

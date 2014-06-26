@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4318" 
+	xmlns="http://ereg.egov.bg/segment/R-4318" 
+	xmlns:aotc="http://ereg.egov.bg/value/R-4312"
+	xmlns:aotn="http://ereg.egov.bg/value/R-4314"
+	xmlns:aotne="http://ereg.egov.bg/value/R-4316"	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4312" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4314" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4316" />
+		
+	<xsd:complexType name="AircraftOperationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип на опериране на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftOperationTypeCode" type="aotc:AircraftOperationTypeCode" minOccurs="0" />
+			<xsd:element name="AircraftOperationTypeName" type="aotn:AircraftOperationTypeName" minOccurs="0" />
+			<xsd:element name="AircraftOperationTypeNameEnglish" type="aotne:AircraftOperationTypeNameEnglish" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

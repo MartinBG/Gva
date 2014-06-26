@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000085" xmlns="http://ereg.egov.bg/segment/0009-000085" xmlns:di="http://ereg.egov.bg/value/0008-000091" xmlns:dn="http://ereg.egov.bg/value/0008-000092" xmlns:dpt="http://ereg.egov.bg/value/0008-000115" xmlns:dc="http://ereg.egov.bg/value/0008-000116" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000091" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000092" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000115" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000116" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISDocument">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за документ в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="di:DocumentID" />
+      <xsd:element name="Name" type="dn:DocumentName" />
+      <xsd:element name="DocumentProcessType" type="dpt:DocumentProcessType" />
+      <xsd:element name="Content" type="dc:DocumentContent" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

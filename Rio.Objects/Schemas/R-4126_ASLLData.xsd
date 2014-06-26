@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4126" 
+	xmlns="http://ereg.egov.bg/segment/R-4126" 
+	xmlns:ac="http://ereg.egov.bg/value/R-4120"
+	xmlns:an="http://ereg.egov.bg/value/R-4122" 
+	xmlns:anc="http://ereg.egov.bg/value/R-4124"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4120" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4122"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4124" />
+	
+	<xsd:complexType name="ASLLData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Степен на владеене на език за авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ASLLCode" type="ac:ASLLCode" minOccurs="0" />
+			<xsd:element name="ASLLName" type="an:ASLLName" minOccurs="0" />
+			<xsd:element name="ASLLNameCode" type="anc:ASLLNameCode" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

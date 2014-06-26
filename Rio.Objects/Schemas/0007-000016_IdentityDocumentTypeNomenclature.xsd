@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000016" xmlns="http://ereg.egov.bg/nomenclature/0007-000016" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="IdentityDocumentTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете български лични документи</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000087" />
+      <xsd:enumeration value="0006-000088" />
+      <xsd:enumeration value="0006-000089" />
+      <xsd:enumeration value="0006-000090" />
+      <xsd:enumeration value="0006-000091" />
+      <xsd:enumeration value="0006-000092" />
+      <xsd:enumeration value="0006-000093" />
+      <xsd:enumeration value="0006-000094" />
+      <xsd:enumeration value="0006-000095" />
+      <xsd:enumeration value="0006-000096" />
+      <xsd:enumeration value="0006-000097" />
+      <xsd:enumeration value="0006-000098" />
+      <xsd:enumeration value="0006-000099" />
+      <xsd:enumeration value="0006-000100" />
+      <xsd:enumeration value="0006-000101" />
+      <xsd:enumeration value="0006-000102" />
+      <xsd:enumeration value="0006-000103" />
+      <xsd:enumeration value="0006-000104" />
+      <xsd:enumeration value="0006-000105" />
+      <xsd:enumeration value="0006-000106" />
+      <xsd:enumeration value="0006-000107" />
+      <xsd:enumeration value="0006-000108" />
+      <xsd:enumeration value="0006-000109" />
+      <xsd:enumeration value="0006-000110" />
+      <xsd:enumeration value="0006-000111" />
+      <xsd:enumeration value="0006-000112" />
+      <xsd:enumeration value="0006-000113" />
+      <xsd:enumeration value="0006-000114" />
+      <xsd:enumeration value="0006-000115" />
+      <xsd:enumeration value="0006-000116" />
+      <xsd:enumeration value="0006-000117" />
+      <xsd:enumeration value="0006-000118" />
+      <xsd:enumeration value="0006-000119" />
+      <xsd:enumeration value="0006-000120" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

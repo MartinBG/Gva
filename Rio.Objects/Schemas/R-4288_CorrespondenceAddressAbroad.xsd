@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4288" 
+	xmlns="http://ereg.egov.bg/segment/R-4288"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:san="http://ereg.egov.bg/value/0008-000023"
+	xmlns:ada="http://ereg.egov.bg/value/0008-000308"
+	xmlns:pca="http://ereg.egov.bg/value/0008-000307"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000023" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000308" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000307" />
+	
+	<xsd:complexType name="CorrespondenceAddressAbroad">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Адрес за кореспонденция в чужбина</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="SettlementAbroadName" type="san:SettlementAbroadName" minOccurs="0" />
+			<xsd:element name="AddressDescriptionAbroad" type="ada:AddressDescriptionAbroad" minOccurs="0" />
+			<xsd:element name="PostCodeAbroad" type="pca:PostCodeAbroad" minOccurs="0" />				
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000124" xmlns="http://ereg.egov.bg/segment/0009-000124" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:stbt="http://ereg.egov.bg/value/0008-000143" xmlns:sard="http://ereg.egov.bg/segment/0009-000141" xmlns:dpd="http://ereg.egov.bg/segment/0009-000126" xmlns:dl="http://ereg.egov.bg/segment/0009-000125" xmlns:dd="http://ereg.egov.bg/value/0008-000158" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:ad="http://ereg.egov.bg/segment/0009-000139" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000141" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000126" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000125" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000158" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+  <xsd:element name="SecondDeathCertificateTranscriptApplication" type="SecondDeathCertificateTranscriptApplication" />
+  <xsd:complexType name="SecondDeathCertificateTranscriptApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявление за издаване на препис-извлечение от акт за смърт за втори и следващ път</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ServiceTermType" type="stbt:ServiceTermType" minOccurs="0" />
+      <xsd:element name="ServiceApplicantReceiptData" type="sard:ServiceApplicantReceiptData" minOccurs="0" />
+      <xsd:element name="DeceasedPersonData" type="dpd:DeceasedPersonData" minOccurs="0" />
+      <xsd:element name="DeathLocation" type="dl:DeathLocation" minOccurs="0" />
+      <xsd:element name="DateOfDeath" type="dd:DateOfDeath" minOccurs="0" />
+      <xsd:element name="AttachedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AttachedDocument" type="ad:AttachedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

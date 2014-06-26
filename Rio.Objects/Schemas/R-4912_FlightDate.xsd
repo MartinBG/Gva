@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-4912" xmlns="http://ereg.egov.bg/value/R-4912" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="FlightDate">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Дата на полет</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:date">
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

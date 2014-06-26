@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000110" xmlns="http://ereg.egov.bg/segment/0009-000110" xmlns:crbd="http://ereg.egov.bg/segment/0009-000135" xmlns:fcd="http://ereg.egov.bg/segment/0009-000109" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000135" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000109" />
+  <xsd:complexType name="ParentData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за родител</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="CitizenshipRegistrationBasicData" type="crbd:CitizenshipRegistrationBasicData" minOccurs="0" />
+        <xsd:element name="ForeignCitizenData" type="fcd:ForeignCitizenData" minOccurs="0" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

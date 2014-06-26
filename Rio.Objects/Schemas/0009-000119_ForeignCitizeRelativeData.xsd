@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000119" xmlns="http://ereg.egov.bg/segment/0009-000119" xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" xmlns:bd="http://ereg.egov.bg/value/0008-000022" xmlns:rs="http://ereg.egov.bg/value/0008-000154" xmlns:pa="http://ereg.egov.bg/segment/0009-000094" xmlns:c="http://ereg.egov.bg/segment/0009-000133" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000022" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000154" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+  <xsd:complexType name="ForeignCitizeRelativeData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за роднина – физическо лице, нерегистрирано по българското законодателство</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" minOccurs="0" />
+      <xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0" />
+      <xsd:element name="Relationship" type="rs:Relationship" minOccurs="0" />
+      <xsd:element name="Citizenships" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Citizenship" type="c:Citizenship" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

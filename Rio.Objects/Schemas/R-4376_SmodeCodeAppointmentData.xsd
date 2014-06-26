@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4376" 
+	xmlns="http://ereg.egov.bg/segment/R-4376" 
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4364"
+	xmlns:fcctn="http://ereg.egov.bg/value/R-4346"
+	xmlns:amd="http://ereg.egov.bg/segment/R-4368"
+	xmlns:maatc="http://ereg.egov.bg/segment/R-4370"
+	xmlns:mtn="http://ereg.egov.bg/value/R-4372"
+	xmlns:tm="http://ereg.egov.bg/value/R-4374"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4364" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4346" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4368" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4372" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4374" />
+	
+	<xsd:complexType name="SmodeCodeAppointmentData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за назначаване на S-Mode код</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="CategoryAircraft" type="ca:CategoryAircraft" minOccurs="0" />
+			<xsd:element name="FlightCertificateCertificationTableNumber" type="fcctn:FlightCertificateCertificationTableNumber" minOccurs="0" />
+			<xsd:element name="AircraftManufacturerData" type="amd:AircraftManufacturerData" minOccurs="0" />
+			<xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+			<xsd:element name="ManufacturerTransponderName" type="mtn:ManufacturerTransponderName" minOccurs="0" />
+			<xsd:element name="TransponderModel" type="tm:TransponderModel" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

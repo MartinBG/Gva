@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000105" xmlns="http://ereg.egov.bg/value/0008-000105" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:complexType name="OfficerInDocumentStorage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Служител, приемащ или предаващ документ в хранилище</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="aubd:AISUserBasicData" />
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

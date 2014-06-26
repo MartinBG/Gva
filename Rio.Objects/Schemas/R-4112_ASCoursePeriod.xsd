@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4112"
+            xmlns="http://ereg.egov.bg/segment/R-4112"
+			xmlns:sdtp="http://ereg.egov.bg/value/R-0454"
+			xmlns:dtp="http://ereg.egov.bg/value/R-0456"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+			
+  <xsd:import namespace="http://ereg.egov.bg/value/R-0454"/>
+  <xsd:import namespace="http://ereg.egov.bg/value/R-0456"/>
+
+  <xsd:complexType name="ASCoursePeriod">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Период на провеждане на курс за обучение на авиационен персонал</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="StartDateTimePeriod" type="sdtp:StartDateTimePeriod" minOccurs="0"/>
+	  <xsd:element name="DeadlineTimePeriod" type="dtp:DeadlineTimePeriod" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>
+
+

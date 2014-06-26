@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000061" xmlns="http://ereg.egov.bg/segment/0009-000061" xmlns:csnid="http://ereg.egov.bg/value/0008-000055" xmlns:cssid="http://ereg.egov.bg/value/0008-000058" xmlns:piaoau="http://ereg.egov.bg/segment/0009-000030" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000055" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000058" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000030" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="ClassificationSchemeAccessGrantData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за създаден достъп до класификационни схеми и раздели в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="AccessGrant" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice>
+              <xsd:element name="SchemeID" type="csnid:ClassificationSchemeOrNomenclatureID" />
+              <xsd:element name="SectionID" type="cssid:ClassificationSchemeSectionID" />
+            </xsd:choice>
+            <xsd:element name="UserGrantee" type="piaoau:PositionInAdministrationOrAISUser" />
+            <xsd:element name="SpecificParameters" minOccurs="0">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

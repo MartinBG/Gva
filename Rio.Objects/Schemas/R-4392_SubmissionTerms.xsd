@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4392" xmlns="http://ereg.egov.bg/segment/R-4392" 
+	xmlns:pd="http://ereg.egov.bg/segment/R-4388" 
+	xmlns:pdn="http://ereg.egov.bg/value/R-4390" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4388" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4390" />
+    <xsd:complexType name="SubmissionTerms">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Условия за предоставяне на документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ProvidingDocumentName" type="pdn:ProvidingDocumentName" minOccurs="0" />
+      <xsd:element name="ProvidingDocument" type="pd:ProvidingDocument" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

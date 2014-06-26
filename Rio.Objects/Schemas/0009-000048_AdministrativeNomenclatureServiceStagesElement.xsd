@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000048" xmlns="http://ereg.egov.bg/segment/0009-000048" xmlns:ssu="http://ereg.egov.bg/segment/0009-000040" xmlns:ssn="http://ereg.egov.bg/value/0008-000064" xmlns:ssd="http://ereg.egov.bg/value/0008-000065" xmlns:sse="http://ereg.egov.bg/segment/0009-000041" xmlns:sst="http://ereg.egov.bg/value/0008-000066" xmlns:cdfss="http://ereg.egov.bg/segment/0009-000045" xmlns:ssinst="http://ereg.egov.bg/value/0008-000067" xmlns:ssrid="http://ereg.egov.bg/value/0008-000045" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000040" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000064" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000065" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000041" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000066" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000045" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000067" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000045" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AdministrativeNomenclatureServiceStagesElement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за елемент от ведомствената номенклатура на етапи от услуги или процедури</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="URI" type="ssu:ServiceStageURI" />
+      <xsd:element name="Name" type="ssn:ServiceStageName" />
+      <xsd:element name="Description" type="ssd:ServiceStageDescription" />
+      <xsd:element name="Executor" type="sse:ServiceStageExecutor" />
+      <xsd:element name="Term" type="sst:ServiceStageTerm" />
+      <xsd:element name="CreatedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Document" type="cdfss:CreatedDocumentFromServiceStage" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Instructions" type="ssinst:ServiceStageInstructions" />
+      <xsd:element name="EndResults">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="ssrid:ServiceStageResultID" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

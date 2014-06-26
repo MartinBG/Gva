@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-6070" xmlns="http://ereg.egov.bg/value/R-6070" xmlns:darpin="http://ereg.egov.bg/nomenclature/R-6068" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/nomenclature/R-6068" />
+  <xsd:simpleType name="DegreeAccessRequestedPublicInformation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Степен на осигурения достъп до исканата обществена информация</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="darpin:DegreeAccessRequestedPublicInformationNomenclature" />
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000066" xmlns="http://ereg.egov.bg/value/0008-000066" xmlns:et="http://ereg.egov.bg/value/0008-000053" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000053" />
+  <xsd:simpleType name="ServiceStageTerm">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Срок за изпълнение на етап</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="et:ExecutionTerm" />
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4086" 
+xmlns="http://ereg.egov.bg/segment/R-4086" 
+xmlns:afcc="http://ereg.egov.bg/value/R-4082" 
+xmlns:afn="http://ereg.egov.bg/value/R-4084"  
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4082" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4084"  />
+	<xsd:complexType name="AeromedicalFitnessClass">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Клас на медицинска годност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AeromedicalFitnessClassCode" type="afcc:AeromedicalFitnessClassCode" minOccurs="0" />
+			<xsd:element name="AeromedicalFitnessName" type="afn:AeromedicalFitnessName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

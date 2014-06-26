@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4434" 
+	xmlns="http://ereg.egov.bg/segment/R-4434" 
+	xmlns:ptc="http://ereg.egov.bg/value/R-4430"
+	xmlns:ptn="http://ereg.egov.bg/value/R-4432"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4430" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4432" />
+
+	<xsd:complexType name="PropellerType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип на витло</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PropellerTypeCode" type="ptc:PropellerTypeCode" minOccurs="0" />
+			<xsd:element name="PropellerTypeName" type="ptn:PropellerTypeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

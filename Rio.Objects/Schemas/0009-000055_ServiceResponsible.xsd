@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000055" xmlns="http://ereg.egov.bg/segment/0009-000055" xmlns:piaoau="http://ereg.egov.bg/segment/0009-000030" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000030" />
+  <xsd:complexType name="ServiceResponsible">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Отговорен за услуга или процедура</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="piaoau:PositionInAdministrationOrAISUser" />
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

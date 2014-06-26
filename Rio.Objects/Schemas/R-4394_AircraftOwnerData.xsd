@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4394" xmlns="http://ereg.egov.bg/segment/R-4394" 
+	xmlns:pn="http://ereg.egov.bg/segment/0009-000005" 
+	xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" 
+	xmlns:en="http://ereg.egov.bg/value/0008-000029" 
+	xmlns:fen="http://ereg.egov.bg/value/0008-000030" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000029" />
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000030" />
+	
+    <xsd:complexType name="AircraftOwnerData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за собственик на ВС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="PersonNames" type="pn:PersonNames" />
+      <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" />
+      <xsd:element name="EntityName" type="en:EntityName" />
+      <xsd:element name="ForeignEntityName" type="fen:ForeignEntityName" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

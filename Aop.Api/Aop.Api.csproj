@@ -79,6 +79,64 @@
     <Compile Include="DataObjects\Aop\AppDO.cs" />
     <Compile Include="DataObjects\Aop\AppListItemDO.cs" />
     <Compile Include="AopApiModule.cs" />
+    <Compile Include="Fedv5\Classes\address.cs" />
+    <Compile Include="Fedv5\Classes\addresses.cs" />
+    <Compile Include="Fedv5\Classes\attachments.cs" />
+    <Compile Include="Fedv5\Classes\award.cs" />
+    <Compile Include="Fedv5\Classes\award_criteria.cs" />
+    <Compile Include="Fedv5\Classes\ContactPoints.cs" />
+    <Compile Include="Fedv5\Classes\contract_notice.cs" />
+    <Compile Include="Fedv5\Classes\contract_noticemsg.cs" />
+    <Compile Include="Fedv5\Classes\Country.cs" />
+    <Compile Include="Fedv5\Classes\criteria.cs" />
+    <Compile Include="Fedv5\Classes\data.cs" />
+    <Compile Include="Fedv5\Classes\document.cs" />
+    <Compile Include="Fedv5\Classes\documentsection.cs" />
+    <Compile Include="Fedv5\Classes\documentsectiongroup.cs" />
+    <Compile Include="Fedv5\Classes\documentsectiongroupcpvs.cs" />
+    <Compile Include="Fedv5\Classes\documentsectiongroupcpvsmcpv.cs" />
+    <Compile Include="Fedv5\Classes\documentsectiongroupfield.cs" />
+    <Compile Include="Fedv5\Classes\Email.cs" />
+    <Compile Include="Fedv5\Classes\Fax.cs" />
+    <Compile Include="Fedv5\Classes\file.cs" />
+    <Compile Include="Fedv5\Classes\ForTheAttentionOf.cs" />
+    <Compile Include="Fedv5\Classes\low_price.cs" />
+    <Compile Include="Fedv5\Classes\name.cs" />
+    <Compile Include="Fedv5\Classes\nom\item.cs" />
+    <Compile Include="Fedv5\Classes\nom\nom.cs" />
+    <Compile Include="Fedv5\Classes\nom\nomenclature.cs" />
+    <Compile Include="Fedv5\Classes\Number.cs" />
+    <Compile Include="Fedv5\Classes\nuts\item.cs" />
+    <Compile Include="Fedv5\Classes\nuts\nuts.cs" />
+    <Compile Include="Fedv5\Classes\OfficialName.cs" />
+    <Compile Include="Fedv5\Classes\other_notice.cs" />
+    <Compile Include="Fedv5\Classes\other_noticemsg.cs" />
+    <Compile Include="Fedv5\Classes\PostalAddress.cs" />
+    <Compile Include="Fedv5\Classes\PostalCode.cs" />
+    <Compile Include="Fedv5\Classes\scpv.cs" />
+    <Compile Include="Fedv5\Classes\section_set.cs" />
+    <Compile Include="Fedv5\Classes\section_setsection.cs" />
+    <Compile Include="Fedv5\Classes\section_setsectiongroup.cs" />
+    <Compile Include="Fedv5\Classes\section_setsectiongroupcpvs.cs" />
+    <Compile Include="Fedv5\Classes\section_setsectiongroupcpvsmcpv.cs" />
+    <Compile Include="Fedv5\Classes\section_setsectiongroupcpvsmcpvscpv.cs" />
+    <Compile Include="Fedv5\Classes\section_setsectiongroupfield.cs" />
+    <Compile Include="Fedv5\Classes\sgmsg.cs" />
+    <Compile Include="Fedv5\Classes\size.cs" />
+    <Compile Include="Fedv5\Classes\Telephone.cs" />
+    <Compile Include="Fedv5\Classes\title.cs" />
+    <Compile Include="Fedv5\Classes\Town.cs" />
+    <Compile Include="Fedv5\Classes\URL1.cs" />
+    <Compile Include="Fedv5\Classes\URL2.cs" />
+    <Compile Include="Fedv5\Classes\weights.cs" />
+    <Compile Include="Fedv5\Classes\yesno.cs" />
+    <Compile Include="Fedv5\Partials\document.cs" />
+    <Compile Include="Fedv5\Partials\documentsection.cs" />
+    <Compile Include="Fedv5\Partials\documentsectiongroup.cs" />
+    <Compile Include="Fedv5\Partials\nom.cs" />
+    <Compile Include="Fedv5\Partials\nomenclature.cs" />
+    <Compile Include="Fedv5\Partials\section_setsection.cs" />
+    <Compile Include="Fedv5\Partials\section_setsectiongroup.cs" />
     <Compile Include="Models\AopApp.cs" />
     <Compile Include="Models\AopApplicationCriteria.cs" />
     <Compile Include="Models\AopApplicationObject.cs" />
@@ -109,13 +167,9 @@
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
       <Name>Docs.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Common\Components\Components.csproj">
-      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
-      <Name>Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portal\Common\RioObjects\RioObjects.csproj">
-      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
-      <Name>RioObjects</Name>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

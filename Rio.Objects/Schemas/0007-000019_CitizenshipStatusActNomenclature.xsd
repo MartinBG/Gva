@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000019" xmlns="http://ereg.egov.bg/nomenclature/0007-000019" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="CitizenshipStatusActNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете актове за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000130" />
+      <xsd:enumeration value="0006-000131" />
+      <xsd:enumeration value="0006-000132" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4080" 
+xmlns="http://ereg.egov.bg/segment/R-4080" 
+xmlns:acn="http://ereg.egov.bg/value/R-4074" 
+xmlns:acio="http://ereg.egov.bg/value/R-4076" 
+xmlns:acv="http://ereg.egov.bg/value/R-4078" 
+xmlns:aa="http://ereg.egov.bg/segment/R-4072" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4074" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4076" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4078"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4072" />
+	<xsd:complexType name="ASCertificateData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за издадено свидетелство за правоспсобност на авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ASCertificateNumber" type="acn:ASCertificateNumber" minOccurs="0" />
+			<xsd:element name="ASCertificateIssuedOn" type="acio:ASCertificateIssuedOn" minOccurs="0" />
+			<xsd:element name="ASCertificateValidity" type="acv:ASCertificateValidity" minOccurs="0" />
+			<xsd:element name="AviationAdministration" type="aa:AviationAdministration" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

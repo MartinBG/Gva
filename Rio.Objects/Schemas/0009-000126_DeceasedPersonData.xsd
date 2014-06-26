@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000126" xmlns="http://ereg.egov.bg/segment/0009-000126" xmlns:pbd="http://ereg.egov.bg/segment/0009-000008" xmlns:fcd="http://ereg.egov.bg/segment/0009-000109" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000109" />
+  <xsd:complexType name="DeceasedPersonData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за починалото лице</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="PersonBasicData" type="pbd:PersonBasicData" minOccurs="0" />
+        <xsd:element name="ForeignCitizenData" type="fcd:ForeignCitizenData" minOccurs="0" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

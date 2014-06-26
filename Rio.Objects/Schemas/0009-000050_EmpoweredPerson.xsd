@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000050" xmlns="http://ereg.egov.bg/segment/0009-000050" xmlns:piaoau="http://ereg.egov.bg/segment/0009-000030" xmlns:epd="http://ereg.egov.bg/value/0008-000074" xmlns:du="http://ereg.egov.bg/segment/0009-000001" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000030" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000074" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:complexType name="EmpoweredPerson">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Овластено лице да подписва документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PositionInAdministrationOrAISUser" type="piaoau:PositionInAdministrationOrAISUser" />
+      <xsd:element name="Description" type="epd:EmpoweredPersonDescription" minOccurs="0" />
+      <xsd:element name="EmpoweringDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="DocumentURI" type="du:DocumentURI" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

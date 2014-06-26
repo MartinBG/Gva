@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000172" xmlns="http://ereg.egov.bg/segment/0009-000172" xmlns:rc="http://ereg.egov.bg/value/0008-000226" xmlns:sbs="http://ereg.egov.bg/value/0008-000227" xmlns:sbsn="http://ereg.egov.bg/value/0008-000228" xmlns:ema="http://ereg.egov.bg/value/0008-000229" xmlns:e="http://ereg.egov.bg/value/0008-000237" xmlns:fa="http://ereg.egov.bg/value/0008-000238" xmlns:ap="http://ereg.egov.bg/value/0008-000239" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000226" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000227" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000228" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000229" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000237" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000238" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000239" />
+  <xsd:complexType name="EntityManagementAddress">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Адрес на управление на юридическо лице, клон на чуждестранно юридическо лице или едноличен търговец</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ResidentialComplex" type="rc:ResidentialComplex" minOccurs="0" />
+      <xsd:element name="StreetBoulevardSquare" type="sbs:StreetBoulevardSquare" minOccurs="0" />
+      <xsd:element name="StreetBoulevardSquareNumber" type="sbsn:StreetBoulevardSquareNumber" minOccurs="0" />
+      <xsd:element name="ApartmentBuildingNumber" type="ema:ApartmentBuildingNumber" minOccurs="0" />
+      <xsd:element name="Entrance" type="e:EntityManagementEntrance" minOccurs="0" />
+      <xsd:element name="Floor" type="fa:EntityManagementFloor" minOccurs="0" />
+      <xsd:element name="Apartment" type="ap:EntityManagementApartment" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

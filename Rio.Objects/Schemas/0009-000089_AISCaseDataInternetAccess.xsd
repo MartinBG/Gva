@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000089" xmlns="http://ereg.egov.bg/segment/0009-000089" xmlns:acn="http://ereg.egov.bg/value/0008-000071" xmlns:acd="http://ereg.egov.bg/value/0008-000072" xmlns:acu="http://ereg.egov.bg/segment/0009-000073" xmlns:acdai="http://ereg.egov.bg/value/0008-000106" xmlns:adrdd="http://ereg.egov.bg/segment/0009-000072" xmlns:ad="http://ereg.egov.bg/segment/0009-000085" xmlns:ansn="http://ereg.egov.bg/value/0008-000078" xmlns:ansd="http://ereg.egov.bg/value/0008-000079" xmlns:ssn="http://ereg.egov.bg/value/0008-000064" xmlns:ssd="http://ereg.egov.bg/value/0008-000065" xmlns:sse="http://ereg.egov.bg/segment/0009-000041" xmlns:tacd="http://ereg.egov.bg/value/0008-000087" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000071" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000072" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000073" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000106" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000072" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000085" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000078" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000079" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000064" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000065" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000041" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000087" />
+  <xsd:complexType name="AISCaseDataInternetAccess">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Достъп до преписка през интернет</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Name" type="acn:AISCaseName" />
+      <xsd:element name="Description" type="acd:AISCaseDescription" minOccurs="0" />
+      <xsd:element name="URI" type="acu:AISCaseURI" />
+      <xsd:element name="Documents" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Document" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="AccessIdentifier" type="acdai:AISCaseDocumentAccessIdentifier" />
+                  <xsd:element name="AISDocumentRegisterDocumentData" type="adrdd:AISDocumentRegisterDocumentData" />
+                  <xsd:element name="AISDocument" type="ad:AISDocument" />
+                  <xsd:element name="AdditionalData" minOccurs="0">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ServiceName" type="ansn:AdministrativeNomenclatureServiceName" />
+      <xsd:element name="ServiceDescription" type="ansd:AdministrativeNomenclatureServiceDescription" />
+      <xsd:element name="Stages" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Stage" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="StageName" type="ssn:ServiceStageName" />
+                  <xsd:element name="StageDescription" type="ssd:ServiceStageDescription" />
+                  <xsd:element name="Executor" type="sse:ServiceStageExecutor" />
+                  <xsd:element name="ActualCompletionDate" type="tacd:AISTaskActualCompletionDate" minOccurs="0" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

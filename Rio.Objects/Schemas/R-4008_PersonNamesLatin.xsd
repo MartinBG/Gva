@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4008" 
+xmlns="http://ereg.egov.bg/segment/R-4008" 
+xmlns:pfnl="http://ereg.egov.bg/value/R-4002" 
+xmlns:pmnl="http://ereg.egov.bg/value/R-4004" 
+xmlns:plnl="http://ereg.egov.bg/value/R-4006" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4002" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4004"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4006" />
+	<xsd:complexType name="PersonNamesLatin">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Имена на физическо лице  на латиница</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PersonFirstNameLatin" type="pfnl:PersonFirstNameLatin" minOccurs="0" />
+			<xsd:element name="PersonMiddleNameLatin" type="pmnl:PersonMiddleNameLatin" minOccurs="0" />
+			<xsd:element name="PersonLastNameLatin" type="plnl:PersonLastNameLatin" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

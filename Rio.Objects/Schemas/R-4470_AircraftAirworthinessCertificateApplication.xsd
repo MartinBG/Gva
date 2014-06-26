@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4470" 
+	xmlns="http://ereg.egov.bg/segment/R-4470"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
+	xmlns:aaoi="http://ereg.egov.bg/value/R-4298" 
+	xmlns:aobd="http://ereg.egov.bg/segment/R-4294"
+	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
+	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:ahd="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:adata="http://ereg.egov.bg/segment/R-4400" 
+	xmlns:aed="http://ereg.egov.bg/segment/R-4422" 
+	xmlns:apd="http://ereg.egov.bg/segment/R-4442"
+	xmlns:pot="http://ereg.egov.bg/segment/R-4454"
+	xmlns:addwwac="http://ereg.egov.bg/segment/R-4466"
+	xmlns:addgwwac="http://ereg.egov.bg/segment/R-4468"
+	xmlns:stc="http://ereg.egov.bg/segment/R-3990"
+	xmlns:air="http://ereg.egov.bg/value/R-4464"
+	xmlns:aip="http://ereg.egov.bg/segment/R-4354"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:addc="http://ereg.egov.bg/segment/R-3994"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4298" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4294" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4400" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4422"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4442" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4454" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4466" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4468" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3990" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4464" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4354" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="AircraftAirworthinessCertificateApplication" type="AircraftAirworthinessCertificateApplication"/>
+	<xsd:complexType name="AircraftAirworthinessCertificateApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на удостоверение за летателна годност на ВС</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
+			<xsd:element name="ApplicantAviationalOperatorIndication" type="aaoi:ApplicantAviationalOperatorIndication" minOccurs="0" />	
+			<xsd:element name="AviationalOperatorBasicData" type="aobd:AviationalOperatorBasicData" minOccurs="0" />
+			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
+            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
+			<xsd:element name="AircraftData" type="adata:AircraftData" minOccurs="0" />
+			<xsd:element name="AircraftEnginesData" type="aed:AircraftEnginesData" minOccurs="0" />
+			<xsd:element name="AircraftPropellersData" type="apd:AircraftPropellersData" minOccurs="0" />
+			<xsd:element name="ProvidedOperationTypes" type="pot:ProvidedOperationTypes" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasWithWhenAppliedCollection" type="addwwac:AttachedDocumentDatasWithWhenAppliedCollection" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasGVAWithWhenAppliedCollection" type="addgwwac:AttachedDocumentDatasGVAWithWhenAppliedCollection" minOccurs="0" />
+			<xsd:element name="SupportingDocumentationSubmissionsTermsCollection" type="stc:SubmissionsTermsCollection" minOccurs="0" />
+			<xsd:element name="SupportingDocumentationAttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="InspectionReportSubmissionsTermsCollection" type="stc:SubmissionsTermsCollection" minOccurs="0" />
+			<xsd:element name="InspectionReportAttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="AircraftInspectionRepresentatives" type="air:AircraftInspectionRepresentatives" minOccurs="0" />
+			<xsd:element name="AircraftInspectionPreferences" type="aip:AircraftInspectionPreferences" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

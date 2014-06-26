@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5000" 
+	xmlns="http://ereg.egov.bg/segment/R-5000"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:at="http://ereg.egov.bg/value/R-4580"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:r="http://ereg.egov.bg/segment/0009-000142"
+	xmlns:ema="http://ereg.egov.bg/segment/0009-000172"
+	xmlns:febd="http://ereg.egov.bg/segment/0009-000014"
+	xmlns:fer="http://ereg.egov.bg/segment/0009-000144"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:ascn="http://ereg.egov.bg/value/R-4768"
+	xmlns:ascd="http://ereg.egov.bg/value/R-4770"
+	xmlns:rap="http://ereg.egov.bg/segment/R-4702"
+	xmlns:cso="http://ereg.egov.bg/segment/R-4980"
+	xmlns:ga="http://ereg.egov.bg/segment/R-4982"
+	xmlns:oa="http://ereg.egov.bg/segment/R-4988"
+	xmlns:oad="http://ereg.egov.bg/value/R-4990"
+	xmlns:awad="http://ereg.egov.bg/segment/R-4998"
+	xmlns:addc="http://ereg.egov.bg/segment/R-3994"
+	xmlns:uaddc="http://ereg.egov.bg/segment/R-4692"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4580" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000172" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000144" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4768" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4770" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4702" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4980" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4982" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4988" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4990" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4998" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4692" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="AOCConductingAerialWorkApplication" type="AOCConductingAerialWorkApplication"/>
+	<xsd:complexType name="AOCConductingAerialWorkApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на свидетелство за авиационен оператор, извършващ специализирани авиационни работи</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ApplicantType" type="at:ApplicantType" minOccurs="0" />
+			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="Residence" type="r:Residence" minOccurs="0" />
+			<xsd:element name="EntityManagementAddress" type="ema:EntityManagementAddress" minOccurs="0" />
+			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />
+			<xsd:element name="ForeignEntityResidence" type="fer:ForeignEntityResidence" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
+			<xsd:element name="AviationSecurityCertificateNumber" type="ascn:AviationSecurityCertificateNumber" minOccurs="0" />
+			<xsd:element name="AviationSecurityCertificateDate" type="ascd:AviationSecurityCertificateDate" minOccurs="0" />
+			<xsd:element name="RepresentativeAuthorizedPerson" type="rap:RepresentativeAuthorizedPerson" minOccurs="0" />
+			<xsd:element name="CertificationScopeObject" type="cso:CertificationScopeObject" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="GeneralAuthorizations" type="ga:GeneralAuthorizations" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="OperationArea" type="oa:OperationArea" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="OperationAreaDescription" type="oad:OperationAreaDescription" minOccurs="0" />
+			<xsd:element name="AerialWorkAircraftData" type="awad:AerialWorkAircraftData" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="UnnumberedAttachedDocumentDatasCollection" type="uaddc:UnnumberedAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

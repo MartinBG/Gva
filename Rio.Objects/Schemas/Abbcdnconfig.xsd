@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/Abbcdn" 
+			xmlns="http://ereg.egov.bg/segment/Abbcdn"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+	<xsd:element name="Abbcdnconfig" type="Abbcdnconfig" />
+	<xsd:complexType name="Abbcdnconfig">
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentDownloadUrl" type="xsd:string"/>
+			<xsd:element name="AttachedDocumentUniqueIdentifier" type="xsd:string"/>
+			<xsd:element name="AttachedDocumentHash" type="xsd:string"/>
+			<xsd:element name="AttachedDocumentSize" type="xsd:string"/>
+			<xsd:element name="AttachedDocumentFileName" type="xsd:string"/>
+			<xsd:element name="AttachedDocumentFileType" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

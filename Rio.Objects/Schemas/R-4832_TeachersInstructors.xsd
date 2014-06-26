@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4832" 
+	xmlns="http://ereg.egov.bg/segment/R-4832" 
+	xmlns:ti="http://ereg.egov.bg/segment/R-4830"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4830" />
+
+	<xsd:complexType name="TeachersInstructors">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Преподаватели/инструктори</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TeacherInstructor" type="ti:TeacherInstructor" minOccurs="0"  maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

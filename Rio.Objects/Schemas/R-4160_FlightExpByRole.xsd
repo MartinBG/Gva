@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4160" 
+xmlns="http://ereg.egov.bg/segment/R-4160" 
+xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+xmlns:fer="http://ereg.egov.bg/segment/R-4140" 
+xmlns:hfest="http://ereg.egov.bg/value/R-3992" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4140" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992"  />
+	<xsd:complexType name="FlightExpByRole">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за летателен опит в зависимост от ролята</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightExpRole" type="fer:FlightExpRole" minOccurs="0" />
+			<xsd:element name="HoursForType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+						<xsd:element name="FlightExpHoursByRole" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="FlightExpHoursByRoleTotal" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

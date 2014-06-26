@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000121" xmlns="http://ereg.egov.bg/segment/0009-000121" xmlns:rd="http://ereg.egov.bg/segment/0009-000118" xmlns:fcrd="http://ereg.egov.bg/segment/0009-000119" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000118" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000119" />
+  <xsd:complexType name="MinorData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за ненавършило пълнолетие дете</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice minOccurs="0">
+      <xsd:element name="RelativeData" type="rd:RelativeData" />
+      <xsd:element name="ForeignCitizeRelativeData" type="fcrd:ForeignCitizeRelativeData" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

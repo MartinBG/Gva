@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000071" xmlns="http://ereg.egov.bg/segment/0009-000071" xmlns:atid="http://ereg.egov.bg/value/0008-000082" xmlns:atscd="http://ereg.egov.bg/value/0008-000094" xmlns:ats="http://ereg.egov.bg/value/0008-000093" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000082" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000094" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000093" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISTaskStatusData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за статус на задача</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TaskID" type="atid:AISTaskID" />
+      <xsd:element name="CheckDate" type="atscd:AISTaskStatusCheckDate" />
+      <xsd:element name="Status" type="ats:AISTaskStatus" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

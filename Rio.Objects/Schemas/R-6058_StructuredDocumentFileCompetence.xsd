@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6058" 
+	xmlns="http://ereg.egov.bg/segment/R-6058"
+	xmlns:edx="http://ereg.egov.bg/segment/0009-000092"
+	xmlns:du="http://ereg.egov.bg/segment/0009-000001"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000092" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+	
+	<xsd:complexType name="StructuredDocumentFileCompetence">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Структуриран документ, съдържащ се в преписка, която се препраща по компетентност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicDocumentXml" type="edx:ElectronicDocumentXml" minOccurs="0" />
+			<xsd:element name="DocumentURI" type="du:DocumentURI" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

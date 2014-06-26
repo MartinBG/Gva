@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4000" 
+	xmlns="http://ereg.egov.bg/segment/R-4000" 
+	xmlns:gldrfc="http://ereg.egov.bg/value/R-3996"
+	xmlns:gldrfn="http://ereg.egov.bg/value/R-3998"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3996" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3998"  />
+	
+	<xsd:complexType name="GroupLicenseDependingRequirementsFiling">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Група свидетелство за правоспособност в зависимост от изискванията при заявяване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="GroupLicenseDependingRequirementsFilingCode" type="gldrfc:GroupLicenseDependingRequirementsFilingCode" minOccurs="0" />
+			<xsd:element name="GroupLicenseDependingRequirementsFilingName" type="gldrfn:GroupLicenseDependingRequirementsFilingName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

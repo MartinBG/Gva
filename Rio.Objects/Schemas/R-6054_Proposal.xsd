@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6054" 
+	xmlns="http://ereg.egov.bg/segment/R-6054"
+	xmlns:espbd="http://ereg.egov.bg/segment/0009-000002" 
+	xmlns:dtu="http://ereg.egov.bg/segment/0009-000003"
+	xmlns:dtn="http://ereg.egov.bg/value/0008-000007" 
+	xmlns:si="http://ereg.egov.bg/value/0008-000080"
+	xmlns:sin="http://ereg.egov.bg/value/R-6018"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:addic="http://ereg.egov.bg/segment/R-6052"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000080" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-6018" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-6052" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	
+	<xsd:element name="Proposal" type="Proposal"/>
+	<xsd:complexType name="Proposal">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Предложение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+      <xsd:element name="ElectronicServiceProviderBasicData" type="espbd:ElectronicServiceProviderBasicData" minOccurs="0" />
+      <xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" minOccurs="0" />
+      <xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />	
+			<xsd:element name="ServiceInstructionsName" type="sin:ServiceInstructionsName" minOccurs="0" />	
+			<xsd:element name="VendorName" type="xsd:string" minOccurs="0" />	
+			<xsd:element name="RepresentativeName" type="xsd:string" minOccurs="0" />		
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />		
+			<xsd:element name="ProposalNature" type="xsd:string" minOccurs="0" />	
+			<xsd:element name="AttachedDocumentDescriptionIdentifiersCollection" type="addic:AttachedDocumentDescriptionIdentifiersCollection" minOccurs="0" />	
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

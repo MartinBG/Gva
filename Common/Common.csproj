@@ -152,12 +152,13 @@
     <Compile Include="CommonModule.cs" />
     <Compile Include="Sequence\Sequence.cs" />
     <Compile Include="Tests\DisposableTuple.cs" />
-    <Compile Include="Utils\CodeGenerator.cs" />
+    <Compile Include="Utils\CodeGeneratorUtils.cs" />
     <Compile Include="Linq\ExpressionExpanderExtensions.cs" />
     <Compile Include="Linq\ExpressionHelper.cs" />
     <Compile Include="Linq\ExpressionParameterRebinder.cs" />
     <Compile Include="Linq\PredicateBuilder.cs" />
     <Compile Include="Linq\ExpressionExtensions.cs" />
+    <Compile Include="Utils\XmlSerializerUtils.cs" />
     <Compile Include="Utils\Utf8Utils.cs" />
     <Compile Include="Utils\NLogExceptionFilter.cs" />
     <Compile Include="Utils\NLogTraceFilter.cs" />

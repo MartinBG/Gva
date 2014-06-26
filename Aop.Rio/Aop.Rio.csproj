@@ -59,8 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abbcdn\AbbcdnStorage.cs" />
-    <Compile Include="Abbcdn\IAbbcdn.cs" />
     <Compile Include="AopRioModule.cs" />
     <Compile Include="IncomingDocProcessor\IIncomingDocProcessor.cs" />
     <Compile Include="IncomingDocProcessor\IncomingDocProcessor.cs" />
@@ -72,17 +70,9 @@
       <Project>{99f9f0de-af64-4ec7-8953-872f416cb28b}</Project>
       <Name>Aop.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Aop.RioBridge\Aop.RioBridge.csproj">
-      <Project>{049ae8eb-be49-4298-9c61-9b6a29438043}</Project>
-      <Name>Aop.RioBridge</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Api\Common.Api.csproj">
       <Project>{69bed796-4199-433e-bc42-e8d7406369d9}</Project>
       <Name>Common.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Rio\Common.Rio.csproj">
-      <Project>{39436e64-6b2e-4126-a2ac-cf91cd8ae057}</Project>
-      <Name>Common.Rio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
@@ -91,6 +81,14 @@
     <ProjectReference Include="..\Docs.Api\Docs.Api.csproj">
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
       <Name>Docs.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rio.Data\Rio.Data.csproj">
+      <Project>{ce03cc29-d823-4e37-8c22-608fbed01848}</Project>
+      <Name>Rio.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

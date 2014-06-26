@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000059" xmlns="http://ereg.egov.bg/segment/0009-000059" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:auname="http://ereg.egov.bg/value/0008-000050" xmlns:aamt="http://ereg.egov.bg/value/0008-000051" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000050" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000051" />
+  <xsd:complexType name="AISUser">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Потребител на АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="BasicData" type="aubd:AISUserBasicData" />
+      <xsd:element name="Username" type="auname:AISUsername" minOccurs="0" />
+      <xsd:element name="AISAccessInformation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AISAccessManagementType" type="aamt:AISAccessManagementType" />
+            <xsd:element name="AISAccessManagementTypeOther" type="xsd:string" minOccurs="0" />
+            <!-- Описание на друг вид удостоверяване на правото на достъп до АИС, различно от стандартните, описани в номенклатурата-->
+            <xsd:element name="AdditionalAccessData" minOccurs="0">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Active" type="xsd:boolean" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

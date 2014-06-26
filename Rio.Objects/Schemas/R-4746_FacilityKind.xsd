@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4746" 
+	xmlns="http://ereg.egov.bg/segment/R-4746" 
+	xmlns:fkc="http://ereg.egov.bg/value/R-4742"
+	xmlns:fkn="http://ereg.egov.bg/value/R-4744"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4742" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4744" />
+
+	<xsd:complexType name="FacilityKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип съоръжение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FacilityKindCode" type="fkc:FacilityKindCode" minOccurs="0" />
+			<xsd:element name="FacilityKindName" type="fkn:FacilityKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

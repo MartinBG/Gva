@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000035" xmlns="http://ereg.egov.bg/segment/0009-000035" xmlns:cssid="http://ereg.egov.bg/value/0008-000058" xmlns:cssn="http://ereg.egov.bg/value/0008-000059" xmlns:cssd="http://ereg.egov.bg/value/0008-000060" xmlns:csst="http://ereg.egov.bg/value/0008-000057" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000058" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000059" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000060" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000057" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="ClassificationSchemeSection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Раздел от класификационна схема в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="cssid:ClassificationSchemeSectionID" />
+      <xsd:element name="Name" type="cssn:ClassificationSchemeSectionName" />
+      <xsd:element name="Description" type="cssd:ClassificationSchemeSectionDescription" />
+      <xsd:element name="Type" type="csst:ClassificationSchemeSectionType" />
+      <xsd:element name="SubSection" type="cssid:ClassificationSchemeSectionID" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

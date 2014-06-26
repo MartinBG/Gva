@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4900" 
+	xmlns="http://ereg.egov.bg/segment/R-4900"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:rap="http://ereg.egov.bg/segment/R-4702"
+	xmlns:fon="http://ereg.egov.bg/value/R-4866"
+	xmlns:fd="http://ereg.egov.bg/segment/R-4888"
+	xmlns:ps="http://ereg.egov.bg/segment/R-4894"
+	xmlns:frf="http://ereg.egov.bg/value/R-4896"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+	xmlns:ipd="http://ereg.egov.bg/value/R-4898"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4702" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4866" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4888" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4894" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4896" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4898" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="AviationSimulatorApplication" type="AviationSimulatorApplication"/>
+	<xsd:complexType name="AviationSimulatorApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на удостоверение за одобрение за ползване на авиационен тренажор</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
+			<xsd:element name="RepresentativeAuthorizedPerson" type="rap:RepresentativeAuthorizedPerson" minOccurs="0" />
+			<xsd:element name="FSTDOperatorName" type="fon:FSTDOperatorName" minOccurs="0" />
+			<xsd:element name="FSTDDetails" type="fd:FSTDDetails" minOccurs="0" />
+			<xsd:element name="PlannedScope" type="ps:PlannedScope" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="FSTDRentForm" type="frf:FSTDRentForm" minOccurs="0" />
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="InspectionPlannedDate" type="ipd:InspectionPlannedDate" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+						<xsd:sequence>
+								<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+						</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

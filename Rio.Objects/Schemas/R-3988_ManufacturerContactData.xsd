@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-3988" 
+	xmlns="http://ereg.egov.bg/segment/R-3988" 
+	xmlns:mn="http://ereg.egov.bg/value/R-3986"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4286"
+	xmlns:caa="http://ereg.egov.bg/segment/R-4288"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4286" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4288" />
+	
+	<xsd:complexType name="ManufacturerContactData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за контакт с производител на ВС или оборудване за ВС</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddress" type="ca:CorrespondenceAddress" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddressAbroad" type="caa:CorrespondenceAddressAbroad" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

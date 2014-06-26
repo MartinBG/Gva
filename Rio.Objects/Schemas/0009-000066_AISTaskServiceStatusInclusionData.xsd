@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000066" xmlns="http://ereg.egov.bg/segment/0009-000066" xmlns:auoau="http://ereg.egov.bg/segment/0009-000028" xmlns:tssit="http://ereg.egov.bg/value/0008-000095" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000028" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000095" />
+  <xsd:complexType name="AISTaskServiceStatusInclusionData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за включване на задача в списък от задачи в статус на услуга или процедура</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IncludedBy" type="auoau:AISUserOrAISURI" />
+      <xsd:element name="InclusionTime" type="tssit:AISTaskServiceStatusInclusionTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000164" xmlns="http://ereg.egov.bg/segment/0009-000164" xmlns:csan="http://ereg.egov.bg/segment/0009-000107" xmlns:csacd="http://ereg.egov.bg/value/0008-000182" xmlns:csacl="http://ereg.egov.bg/segment/0009-000108" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000107" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000182" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000108" />
+  <xsd:complexType name="CitizenshipStatusActBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Общи данни за съставен акт за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CitizenshipStatusActNumber" type="csan:CitizenshipStatusActNumber" />
+      <xsd:element name="CitizenshipStatusActComposeDate" type="csacd:CitizenshipStatusActComposeDate" />
+      <xsd:element name="CitizenshipStatusActComposeLocation" type="csacl:CitizenshipStatusActComposeLocation" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

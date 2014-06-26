@@ -22,7 +22,7 @@ using Owin;
 using Regs.Api;
 using Aop.Api;
 using Aop.Rio;
-using Common.Rio;
+using Rio.Data;
 
 namespace Aop.Web.Host
 {
@@ -30,18 +30,9 @@ namespace Aop.Web.Host
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAutoMapper();
             var container = CreateAutofacContainer();
 
             App.Configure(app, container);
-        }
-
-        public static void ConfigureAutoMapper()
-        {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new Aop.RioBridge.AopRioBridgeMapperProfile());
-            });
         }
 
         public static IContainer CreateAutofacContainer()
@@ -52,8 +43,7 @@ namespace Aop.Web.Host
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new AopApiModule());
             builder.RegisterModule(new RegsApiModule());
-            builder.RegisterModule(new CommonRioModule());
-            builder.RegisterModule(new AopRioBrdigeModule());
+            builder.RegisterModule(new RioDataModule());
             builder.RegisterModule(new AopRioModule());
             return builder.Build();
         }

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000258" xmlns="http://ereg.egov.bg/value/0008-000258" xmlns:drsd="http://ereg.egov.bg/value/0008-000004" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000004" />
+  <xsd:simpleType name="TouristSiteCategoryAllocationOrderDate">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Дата на заповедта на категоризиращия орган за определяне на категория на туристическия обект</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="drsd:DocumentReceiptOrSigningDate" />
+  </xsd:simpleType>
+</xsd:schema>

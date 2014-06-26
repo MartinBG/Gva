@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4098" 
+xmlns="http://ereg.egov.bg/segment/R-4098" 
+xmlns:afc="http://ereg.egov.bg/segment/R-4086" 
+xmlns:meld="http://ereg.egov.bg/value/R-4094" 
+xmlns:mev="http://ereg.egov.bg/value/R-4096" 
+xmlns:ac="http://ereg.egov.bg/segment/R-4092" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4086" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4094" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4096"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4092" />
+	<xsd:complexType name="AeromedicalFitnessCertificateData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за издадено свидетелство за медицинска годност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AeromedicalFitnessClass" type="afc:AeromedicalFitnessClass" minOccurs="0" />
+			<xsd:element name="MedicalExaminationLastDate" type="meld:MedicalExaminationLastDate" minOccurs="0" />
+			<xsd:element name="MedicalExaminationValidity" type="mev:MedicalExaminationValidity" minOccurs="0" />
+			<xsd:element name="AeromedicalCenter" type="ac:AeromedicalCenter" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

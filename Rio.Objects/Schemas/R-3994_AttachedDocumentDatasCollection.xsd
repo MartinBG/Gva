@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-3994" 
+	xmlns="http://ereg.egov.bg/segment/R-3994" 
+            xmlns:add="http://ereg.egov.bg/segment/R-4040"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4040"/>
+
+	<xsd:complexType name="AttachedDocumentDatasCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за приложени документи</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentData" type="add:AttachedDocumentData" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

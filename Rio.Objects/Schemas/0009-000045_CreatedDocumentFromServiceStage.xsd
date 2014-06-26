@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000045" xmlns="http://ereg.egov.bg/segment/0009-000045" xmlns:andtbd="http://ereg.egov.bg/segment/0009-000043" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000043" />
+  <xsd:complexType name="CreatedDocumentFromServiceStage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Създаван документ от етап</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="andtbd:AdministrativeNomenclatureDocumentTypeBasicData">
+        <xsd:sequence>
+          <xsd:element name="AdditionalData" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

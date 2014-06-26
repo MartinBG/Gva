@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4310" 
+	xmlns="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:aon="http://ereg.egov.bg/value/R-4302"
+	xmlns:ahtcn="http://ereg.egov.bg/value/R-4304"
+	xmlns:ahtcd="http://ereg.egov.bg/value/R-4306"
+	xmlns:ahtccp="http://ereg.egov.bg/value/R-4308"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4286"
+	xmlns:caa="http://ereg.egov.bg/segment/R-4288" 	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4302" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4304" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4306" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4308" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4286" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4288" />
+		
+	<xsd:complexType name="AircraftHiringData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни, идентифициращи наемането на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftOwnerName" type="aon:AircraftOwnerName" minOccurs="0" />
+			<xsd:element name="AircraftHiringTransferContractNumber" type="ahtcn:AircraftHiringTransferContractNumber" minOccurs="0" />
+			<xsd:element name="AircraftHiringTransferContractDate" type="ahtcd:AircraftHiringTransferContractDate" minOccurs="0" />
+			<xsd:element name="AircraftHiringTransferContractConclusionPlace" type="ahtccp:AircraftHiringTransferContractConclusionPlace" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddress" type="ca:CorrespondenceAddress" minOccurs="0" />
+			<xsd:element name="CorrespondenceAddressAbroad" type="caa:CorrespondenceAddressAbroad" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4364" 
+	xmlns="http://ereg.egov.bg/segment/R-4364" 
+	xmlns:cac="http://ereg.egov.bg/value/R-4360"
+	xmlns:can="http://ereg.egov.bg/value/R-4362"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4360" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4362" />
+		
+	<xsd:complexType name="CategoryAircraft">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Категория на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CategoryAircraftCode" type="cac:CategoryAircraftCode" minOccurs="0" />
+			<xsd:element name="CategoryAircraftName" type="can:CategoryAircraftName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

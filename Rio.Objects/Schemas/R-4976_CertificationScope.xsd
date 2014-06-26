@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4976" 
+	xmlns="http://ereg.egov.bg/segment/R-4976" 
+	xmlns:csc="http://ereg.egov.bg/value/R-4972"
+	xmlns:csn="http://ereg.egov.bg/value/R-4974"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4972" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4974" />
+
+	<xsd:complexType name="CertificationScope">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Обхват на сертифициране</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CertificationScopeCode" type="csc:CertificationScopeCode" minOccurs="0" />
+			<xsd:element name="CertificationScopeName" type="csn:CertificationScopeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

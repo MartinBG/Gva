@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000143" xmlns="http://ereg.egov.bg/segment/0009-000143" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:dis="http://ereg.egov.bg/value/0008-000201" xmlns:mc="http://ereg.egov.bg/value/0008-000209" xmlns:mun="http://ereg.egov.bg/value/0008-000202" xmlns:sc="http://ereg.egov.bg/value/0008-000205" xmlns:set="http://ereg.egov.bg/value/0008-000206" xmlns:ac="http://ereg.egov.bg/value/0008-000191" xmlns:an="http://ereg.egov.bg/value/0008-000192" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000200" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000201" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000209" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000202" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000205" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000206" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000191" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000192" />
+  <xsd:complexType name="MunicipalityAdministrationLocation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Местоположение на общинска администрация</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DistrictCode" type="dc:DistrictCode" minOccurs="0" />
+      <xsd:element name="District" type="dis:DistrictName" minOccurs="0" />
+      <xsd:element name="MunicipalityCode" type="mc:MunicipalityCode" minOccurs="0" />
+      <xsd:element name="Municipality" type="mun:MunicipalityName" minOccurs="0" />
+      <xsd:element name="SettlementCode" type="sc:SettlementCode" minOccurs="0" />
+      <xsd:element name="Settlement" type="set:SettlementName" minOccurs="0" />
+      <xsd:element name="AreaCode" type="ac:AreaCode" minOccurs="0" />
+      <xsd:element name="AreaName" type="an:AreaName" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

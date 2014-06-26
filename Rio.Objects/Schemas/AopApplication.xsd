@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/Aop" 
+	xmlns="http://ereg.egov.bg/segment/Aop"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:add="http://ereg.egov.bg/segment/AopAttachedDocuments"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/AopAttachedDocuments"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="AopApplication" type="AopApplication"/>
+	<xsd:complexType name="AopApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за АОП</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="DocumentNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OperationalProgramCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="OperationalProgramName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgencyId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AgencyName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SenderName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SenderLastName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SenderPosition" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="SenderPhone" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="AssignorName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Subject" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ProcedureKind" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="EstimatedValue" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="EvaluationCriterion" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="Applications" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AopAttachedDocumentDatasCollection" type="add:AopAttachedDocumentDatasCollection" minOccurs="0" />	
+			<xsd:element name="AttachedDocuments">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>	
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>	
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

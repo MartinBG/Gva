@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000016" xmlns="http://ereg.egov.bg/segment/0009-000016" xmlns:esa="http://ereg.egov.bg/segment/0009-000012" xmlns:esaq="http://ereg.egov.bg/value/0008-000035" xmlns:esr="http://ereg.egov.bg/segment/0009-000015" xmlns:ea="http://ereg.egov.bg/value/0008-000036" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000012" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000036" />
+  <xsd:complexType name="ElectronicServiceApplicant">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявител на електронна административна услуга</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="RecipientGroup" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Author" type="esa:ElectronicStatementAuthor" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+            <xsd:element name="Recipient" type="esr:ElectronicServiceRecipient" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

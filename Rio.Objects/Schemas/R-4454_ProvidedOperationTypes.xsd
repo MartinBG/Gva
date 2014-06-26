@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4454" 
+	xmlns="http://ereg.egov.bg/segment/R-4454" 
+	xmlns:ot="http://ereg.egov.bg/segment/R-4448"
+	xmlns:aat="http://ereg.egov.bg/value/R-4450"
+	xmlns:stt="http://ereg.egov.bg/value/R-4452"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4448" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4450" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4452" />
+
+	<xsd:complexType name="ProvidedOperationTypes">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Предвидени типове за опериране</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OperationType" type="ot:OperationType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="AviationalActivityTypes" type="aat:AviationalActivityTypes" minOccurs="0" />
+			<xsd:element name="SpecializedTransportationTypes" type="stt:SpecializedTransportationTypes" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5008" 
+	xmlns="http://ereg.egov.bg/segment/R-5008" 
+	xmlns:dfc="http://ereg.egov.bg/value/R-5004"
+	xmlns:dfn="http://ereg.egov.bg/value/R-5006"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5004" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5006" />
+
+	<xsd:complexType name="DirectionFunction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Функция в ръководството на АО</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DirectionFunctionCode" type="dfc:DirectionFunctionCode" minOccurs="0" />
+			<xsd:element name="DirectionFunctionName" type="dfn:DirectionFunctionName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

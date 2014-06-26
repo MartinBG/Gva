@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4206" 
+	xmlns="http://ereg.egov.bg/segment/R-4206" 
+	xmlns:amln="http://ereg.egov.bg/value/R-4202"
+	xmlns:amld="http://ereg.egov.bg/value/R-4204" 
+	xmlns:cpin="http://ereg.egov.bg/value/R-4010"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4202" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4204" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4010" />
+	
+	<xsd:complexType name="AircraftMaintenanceLicenseData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за лиценз за техническо обслужване на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftMaintenanceLicenseNumber" type="amln:AircraftMaintenanceLicenseNumber" minOccurs="0" />
+			<xsd:element name="AircraftMaintenanceLicenseDate" type="amld:AircraftMaintenanceLicenseDate" minOccurs="0" />
+			<xsd:element name="CAAPersonalIdentificationNumber" type="cpin:CAAPersonalIdentificationNumber" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

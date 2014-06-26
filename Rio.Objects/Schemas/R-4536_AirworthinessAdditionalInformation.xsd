@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4536" 
+	xmlns="http://ereg.egov.bg/segment/R-4536" 
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:amp="http://ereg.egov.bg/value/R-4524"
+	xmlns:air="http://ereg.egov.bg/value/R-4464"
+	xmlns:ame="http://ereg.egov.bg/value/R-4526"
+	xmlns:cmr="http://ereg.egov.bg/value/R-4528"
+	xmlns:fsfb="http://ereg.egov.bg/value/R-3980"
+	xmlns:fsfr="http://ereg.egov.bg/value/R-3982"
+	xmlns:fsfo="http://ereg.egov.bg/value/R-3984"
+	xmlns:sn="http://ereg.egov.bg/value/R-3978"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4524" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4464" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4526" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4528" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3980" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3982" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3984" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3978" />
+	
+	<xsd:complexType name="AirworthinessAdditionalInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Допълнителна информация, която се изисква при преглед на летателна годност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="AircraftMaintenanceProgram" type="amp:AircraftMaintenanceProgram" minOccurs="0" />
+			<xsd:element name="AircraftInspectionRepresentatives" type="air:AircraftInspectionRepresentatives" minOccurs="0" />
+			<xsd:element name="AircraftModificationsEquipment" type="ame:AircraftModificationsEquipment" minOccurs="0" />
+			<xsd:element name="ChangesModificationsResult" type="cmr:ChangesModificationsResult" minOccurs="0" />
+			<xsd:element name="FlagSpaceFlightsBrnav" type="fsfb:FlagSpaceFlightsBrnav" minOccurs="0" />
+			<xsd:element name="FlagSpaceFlightsRvsm" type="fsfr:FlagSpaceFlightsRvsm" minOccurs="0" />
+			<xsd:element name="FlagSpaceFlightsOther" type="fsfo:FlagSpaceFlightsOther" minOccurs="0" />
+			<xsd:element name="SpaceName" type="sn:SpaceName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000029" xmlns="http://ereg.egov.bg/segment/0009-000029" xmlns:abn="http://ereg.egov.bg/value/0008-000047" xmlns:ekdapn="http://ereg.egov.bg/value/0008-000048" xmlns:adn="http://ereg.egov.bg/value/0008-000049" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000047" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000048" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000049" />
+  <xsd:complexType name="PositionInAdministration">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Позиция в административната структура</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="AdministrativeBodyName" type="abn:AdministrativeBodyName" />
+      <xsd:element name="Position">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EKDAPositonName" type="ekdapn:EKDAPositionName" minOccurs="0" />
+            <xsd:element name="DepartmentName" type="adn:AdministrativeDepartmentName" minOccurs="0" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="OnCivilContract" type="xsd:boolean" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

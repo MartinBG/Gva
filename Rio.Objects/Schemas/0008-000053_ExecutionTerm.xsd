@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000053" xmlns="http://ereg.egov.bg/value/0008-000053" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="ExecutionTerm">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Срок за изпълнение</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:duration" />
+  </xsd:simpleType>
+</xsd:schema>

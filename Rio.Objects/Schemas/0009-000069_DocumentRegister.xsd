@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000069" xmlns="http://ereg.egov.bg/segment/0009-000069" xmlns:ri="http://ereg.egov.bg/value/0008-000002" xmlns:idri="http://ereg.egov.bg/value/0008-000088" xmlns:drn="http://ereg.egov.bg/value/0008-000089" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000002" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000088" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000089" />
+  <xsd:complexType name="DocumentRegister">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Документен регистър</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="RegisterIndex" type="ri:RegisterIndex" />
+        <xsd:element name="InternalRegisterIdentifier" type="idri:InternalDocumentRegisterIdentifier" />
+      </xsd:choice>
+      <xsd:element name="Name" type="drn:DocumentRegisterName" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

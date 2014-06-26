@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4134" 
+xmlns="http://ereg.egov.bg/segment/R-4134" 
+xmlns:acp="http://ereg.egov.bg/segment/R-4112" 
+xmlns:ad="http://ereg.egov.bg/segment/R-4126" 
+xmlns:lec="http://ereg.egov.bg/segment/R-4132" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4112" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4126" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4132"  />
+	<xsd:complexType name="LLData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за езиково обучение на авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ASCoursePeriod" type="acp:ASCoursePeriod" minOccurs="0" />
+			<xsd:element name="ASLLData" type="ad:ASLLData" minOccurs="0" />
+			<xsd:element name="LEC" type="lec:LEC" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

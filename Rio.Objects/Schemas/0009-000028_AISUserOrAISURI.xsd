@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000028" xmlns="http://ereg.egov.bg/segment/0009-000028" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:au="http://ereg.egov.bg/value/0008-000039" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000039" />
+  <xsd:complexType name="AISUserOrAISURI">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Потребител на АИС или АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="AISUserBasicData" type="aubd:AISUserBasicData" />
+      <xsd:element name="AISURI" type="au:AISURI" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Common.Jobs;
-using Common.Rio.RioObjectExtraction;
 using Mosv.Rio.IncomingDocProcessor;
 using Mosv.Rio.Jobs;
+using Rio.Data.Utils.RioValidator;
 
 namespace Mosv.Rio
 {
@@ -10,6 +10,8 @@ namespace Mosv.Rio
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
+            moduleBuilder.RegisterType<RioValidator>().As<IRioValidator>();
+
             if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["Mosv.Rio:EnableIncomingDocumentsJob"]))
             {
                 moduleBuilder.RegisterType<IncomingDocsJob>().As<IJob>().ExternallyOwned();

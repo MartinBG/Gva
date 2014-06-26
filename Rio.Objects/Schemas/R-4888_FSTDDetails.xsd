@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4888" 
+	xmlns="http://ereg.egov.bg/segment/R-4888" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
+	xmlns:ft="http://ereg.egov.bg/segment/R-4872"
+	xmlns:fl="http://ereg.egov.bg/value/R-4874"
+	xmlns:fql="http://ereg.egov.bg/value/R-4876"
+	xmlns:fic="http://ereg.egov.bg/value/R-4878"
+	xmlns:fsn="http://ereg.egov.bg/value/R-4880"
+	xmlns:mn="http://ereg.egov.bg/value/R-3986"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183" 
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:md="http://ereg.egov.bg/value/R-4882"
+	xmlns:et="http://ereg.egov.bg/segment/R-4412"
+	xmlns:fvs="http://ereg.egov.bg/value/R-4884"
+	xmlns:fms="http://ereg.egov.bg/value/R-4886"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4872" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4874" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4876" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4878" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4880" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4882" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4412" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4884" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4886" />
+
+	<xsd:complexType name="FSTDDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Детайли за FSTD</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="FSTDType" type="ft:FSTDType" minOccurs="0" />
+			<xsd:element name="FSTDLocation" type="fl:FSTDLocation" minOccurs="0" />
+			<xsd:element name="FSTDQualificationLevel" type="fql:FSTDQualificationLevel" minOccurs="0" />
+			<xsd:element name="FSTDIdCode" type="fic:FSTDIdCode" minOccurs="0" />
+			<xsd:element name="FSTDSerialNumber" type="fsn:FSTDSerialNumber" minOccurs="0" />
+			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="ManufacturingDate" type="md:ManufacturingDate" minOccurs="0" />
+			<xsd:element name="EngineTypeA" type="et:EngineType" minOccurs="0" />
+			<xsd:element name="EngineTypeB" type="et:EngineType" minOccurs="0" />
+			<xsd:element name="FSTDVisualSystem" type="fvs:FSTDVisualSystem" minOccurs="0" />
+			<xsd:element name="FSTDMotionSystem" type="fms:FSTDMotionSystem" minOccurs="0" />
+			<xsd:element name="Location" type="fl:FSTDLocation" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

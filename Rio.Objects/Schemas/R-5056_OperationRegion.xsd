@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5056" 
+	xmlns="http://ereg.egov.bg/segment/R-5056" 
+	xmlns:orc="http://ereg.egov.bg/value/R-5052"
+	xmlns:orn="http://ereg.egov.bg/value/R-5054"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5052" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5054" />
+
+	<xsd:complexType name="OperationRegion">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Район на действие</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OperationRegionCode" type="orc:OperationRegionCode" minOccurs="0" />
+			<xsd:element name="OperationRegionName" type="orn:OperationRegionName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

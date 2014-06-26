@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-6012" xmlns="http://ereg.egov.bg/value/R-6012" xmlns:afpin="http://ereg.egov.bg/nomenclature/R-6010" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/nomenclature/R-6010" />
+  <xsd:simpleType name="AccessFormPublicInformation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Форма за предоставяне на достъп до обществена информация</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="afpin:AccessFormPublicInformationNomenclature" />
+  </xsd:simpleType>
+</xsd:schema>

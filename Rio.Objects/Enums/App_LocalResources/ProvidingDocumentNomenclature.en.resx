@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CenterMassProtocol" xml:space="preserve">
+    <value>Mass and centring of the aircraft</value>
+  </data>
+  <data name="CertificateAirworthiness" xml:space="preserve">
+    <value>Certificate of airworthiness for the aircraft</value>
+  </data>
+  <data name="CertificateCompliance" xml:space="preserve">
+    <value>Certificate of compliance with emission aircraft noise</value>
+  </data>
+  <data name="CertificateRegistration" xml:space="preserve">
+    <value>Certificate of registration of the aircraft</value>
+  </data>
+  <data name="ComparissionTable" xml:space="preserve">
+    <value>Comparative table of the exploitational bulletins issued by the manufacturer and airworthiness directives 
+issued by the relevant aviation authorities with the completed of the given aircraft</value>
+  </data>
+  <data name="ContractTransfer" xml:space="preserve">
+    <value>Contract for transfer of ownership or other document giving rise to deletion of aircraft</value>
+  </data>
+  <data name="GliderEngines" xml:space="preserve">
+    <value>TTSN of the glider, the engines and APU since the start of operation, since the last repair and the 
+last periodic maintenance/in calendar time, hours, landings, etc./ and the corresponding residual resource</value>
+  </data>
+  <data name="IncidentsReport" xml:space="preserve">
+    <value>Report for incidents, unscheduled inspections and repairs</value>
+  </data>
+  <data name="ListMaxRejections" xml:space="preserve">
+    <value>List of maximum failures</value>
+  </data>
+  <data name="ListServiceBulletins" xml:space="preserve">
+    <value>List of service bulletins and airworthiness directives</value>
+  </data>
+  <data name="ManufactureGuides" xml:space="preserve">
+    <value>A copy of all manufacturer's guidelines for maintenance, repair, illustrated catalogs</value>
+  </data>
+  <data name="ModificationsList" xml:space="preserve">
+    <value>List of the modifications and overhauls</value>
+  </data>
+  <data name="PermitRadios" xml:space="preserve">
+    <value>Permit for use of radios</value>
+  </data>
+  <data name="ProgramFlyingTests" xml:space="preserve">
+    <value>Flight tests program</value>
+  </data>
+  <data name="ProgramGroundTests" xml:space="preserve">
+    <value>Ground tests program</value>
+  </data>
+  <data name="ProgramMaintenance" xml:space="preserve">
+    <value>Technical maintenance program</value>
+  </data>
+  <data name="RegulationMaintenance" xml:space="preserve">
+    <value>Technical maintenance regulation</value>
+  </data>
+  <data name="ResourceAggregatesList" xml:space="preserve">
+    <value>List of all resource units and the corresponding residual resource</value>
+  </data>
+  <data name="WrittenAgreement" xml:space="preserve">
+    <value>Written agreement in principle by the authority of the State in whose register the aircraft will fit</value>
+  </data>
+</root>

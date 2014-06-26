@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4638" 
+	xmlns="http://ereg.egov.bg/segment/R-4638" 
+    xmlns:so="http://ereg.egov.bg/segment/R-4636"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4636"/>
+
+	<xsd:complexType name="ShareholdersOwnersCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Акционери/притежатели</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ShareholderOwner" type="so:ShareholderOwner" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

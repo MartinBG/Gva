@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4596" 
+	xmlns="http://ereg.egov.bg/segment/R-4596" 
+	xmlns:akc="http://ereg.egov.bg/value/R-4592"
+	xmlns:akn="http://ereg.egov.bg/value/R-4594"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4592" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4594" />
+
+	<xsd:complexType name="ActivityKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид дейност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ActivityKindCode" type="akc:ActivityKindCode" minOccurs="0" />
+			<xsd:element name="ActivityKindName" type="akn:ActivityKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

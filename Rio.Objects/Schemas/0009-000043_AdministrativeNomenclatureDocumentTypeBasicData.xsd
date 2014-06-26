@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000043" xmlns="http://ereg.egov.bg/segment/0009-000043" xmlns:andtu="http://ereg.egov.bg/segment/0009-000042" xmlns:andtn="http://ereg.egov.bg/value/0008-000068" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000042" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000068" />
+  <xsd:complexType name="AdministrativeNomenclatureDocumentTypeBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основни данни за вид документ от ведомствената номенклатура на видовете документи</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="URI" type="andtu:AdministrativeNomenclatureDocumentTypeURI" />
+      <xsd:element name="Name" type="andtn:AdministrativeNomenclatureDocumentTypeName" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

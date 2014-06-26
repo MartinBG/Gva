@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000169" xmlns="http://ereg.egov.bg/value/0008-000169" xmlns:bfc="http://ereg.egov.bg/value/0008-000166" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000166" />
+  <xsd:simpleType name="SoldBeeFamiliesCount">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Брой продадени пчелни семейства към 30 август на годината на подаване на заявлението, а ако заявлението е подадено преди 30 август – към 30 август на предходната година</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="bfc:BeeFamiliesCount" />
+  </xsd:simpleType>
+</xsd:schema>

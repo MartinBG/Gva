@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4466" 
+	xmlns="http://ereg.egov.bg/segment/R-4466" 
+    xmlns:addwwa="http://ereg.egov.bg/segment/R-4460"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4460"/>
+
+	<xsd:complexType name="AttachedDocumentDatasWithWhenAppliedCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за приложен документ, с указание кога документът ще бъде приложен</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentDataWithWhenApplied" type="addwwa:AttachedDocumentDataWithWhenApplied" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000076" xmlns="http://ereg.egov.bg/segment/0009-000076" xmlns:ti="http://ereg.egov.bg/value/0008-000082" xmlns:ad="http://ereg.egov.bg/value/0008-000100" xmlns:eat="http://ereg.egov.bg/value/0008-000099" xmlns:ead="http://ereg.egov.bg/value/0008-000101" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000082" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000100" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000099" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000101" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISTaskAssessment">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Оценка на изпълнението на задача</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TaskID" type="ti:AISTaskID" />
+      <xsd:element name="CheckDate" type="ad:AISTaskAssessmentDate" />
+      <xsd:element name="AssessmentType" type="eat:AISTaskExecutionAssessmentType" />
+      <xsd:element name="Description" type="ead:AISTaskExecutionAssessmentDescription" minOccurs="0" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

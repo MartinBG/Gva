@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000140" xmlns="http://ereg.egov.bg/segment/0009-000140" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:dn="http://ereg.egov.bg/value/0008-000201" xmlns:mc="http://ereg.egov.bg/value/0008-000209" xmlns:mn="http://ereg.egov.bg/value/0008-000202" xmlns:sc="http://ereg.egov.bg/value/0008-000205" xmlns:sn="http://ereg.egov.bg/value/0008-000206" xmlns:stt="http://ereg.egov.bg/value/0008-000124" xmlns:bn="http://ereg.egov.bg/value/0008-000125" xmlns:al="http://ereg.egov.bg/value/0008-000172" xmlns:pi="http://ereg.egov.bg/value/0008-000173" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000200" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000201" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000209" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000202" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000205" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000206" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000124" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000125" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000172" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000173" />
+  <xsd:complexType name="ApiaryAddress">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Адрес на пчелина</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DistrictCode" type="dc:DistrictCode" minOccurs="0" />
+      <xsd:element name="DistrictName" type="dn:DistrictName" minOccurs="0" />
+      <xsd:element name="MunicipalityCode" type="mc:MunicipalityCode" minOccurs="0" />
+      <xsd:element name="MunicipalityName" type="mn:MunicipalityName" minOccurs="0" />
+      <xsd:element name="SettlementCode" type="sc:SettlementCode" minOccurs="0" />
+      <xsd:element name="SettlementName" type="sn:SettlementName" minOccurs="0" />
+      <xsd:element name="StreetText" type="stt:StreetТеxt" minOccurs="0" />
+      <xsd:element name="BuildingNumber" type="bn:BuildingNumber" minOccurs="0" />
+      <xsd:element name="ApiaryLocation" type="al:ApiaryLocation" minOccurs="0" />
+      <xsd:element name="PropertyIdentifier" type="pi:PropertyIdentifier" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

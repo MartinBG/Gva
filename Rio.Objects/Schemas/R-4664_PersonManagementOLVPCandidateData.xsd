@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4664" 
+	xmlns="http://ereg.egov.bg/segment/R-4664" 
+	xmlns:procn="http://ereg.egov.bg/value/R-4654"
+	xmlns:c="http://ereg.egov.bg/segment/0009-000133"
+	xmlns:ppmoc="http://ereg.egov.bg/value/R-4662"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4654" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4662" />
+		
+	<xsd:complexType name="PersonManagementOLVPCandidateData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за лице в управлението на кандидат за ОЛВП</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PersonRepresentingOLVPCandidateNames" type="procn:PersonRepresentingOLVPCandidateNames" minOccurs="0" />
+			<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+			<xsd:element name="PositionPersonManagementOLVPCandidate" type="ppmoc:PositionPersonManagementOLVPCandidate" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

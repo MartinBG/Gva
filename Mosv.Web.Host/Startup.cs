@@ -1,28 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
-using Autofac;
-using Autofac.Integration.Owin;
-using Autofac.Integration.WebApi.Owin;
+﻿using Autofac;
 using Common;
 using Common.Api;
-using Common.Api.OAuth;
-using Common.Http;
 using Common.Owin;
-using Common.Utils;
 using Docs.Api;
-using Microsoft.Owin;
-using Microsoft.Owin.FileSystems;
-using Microsoft.Owin.Security.Infrastructure;
-using Microsoft.Owin.Security.OAuth;
-using Microsoft.Owin.StaticFiles;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Owin;
 using Regs.Api;
 using Mosv.Api;
-using Common.Rio;
 using Mosv.Rio;
+using Rio.Data;
 
 namespace Mosv.Web.Host
 {
@@ -30,18 +15,9 @@ namespace Mosv.Web.Host
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAutoMapper();
             var container = CreateAutofacContainer();
 
             App.Configure(app, container);
-        }
-
-        public static void ConfigureAutoMapper()
-        {
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new Mosv.RioBridge.MosvRioBridgeMapperProfile());
-            });
         }
 
         public static IContainer CreateAutofacContainer()
@@ -52,8 +28,7 @@ namespace Mosv.Web.Host
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new MosvApiModule());
             builder.RegisterModule(new RegsApiModule());
-            builder.RegisterModule(new CommonRioModule());
-            builder.RegisterModule(new MosvRioBrdigeModule());
+            builder.RegisterModule(new RioDataModule());
             builder.RegisterModule(new MosvRioModule());
             return builder.Build();
         }

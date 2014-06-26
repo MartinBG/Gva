@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000018" xmlns="http://ereg.egov.bg/nomenclature/0007-000018" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="SpouseNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на правното качество на съпрузите</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000137" />
+      <xsd:enumeration value="0006-000138" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

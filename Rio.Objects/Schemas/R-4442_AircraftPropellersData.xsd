@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4442" 
+	xmlns="http://ereg.egov.bg/segment/R-4442" 
+	xmlns:mcd="http://ereg.egov.bg/segment/R-3988"
+	xmlns:pc="http://ereg.egov.bg/value/R-4424"
+	xmlns:pd="http://ereg.egov.bg/segment/R-4440"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3988" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4424" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4440" />
+
+	<xsd:complexType name="AircraftPropellersData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за витлата на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerContactData" type="mcd:ManufacturerContactData" minOccurs="0" />
+			<xsd:element name="PropellersCount" type="pc:PropellersCount" minOccurs="0" />
+			<xsd:element name="PropellerData" type="pd:PropellerData" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000150" xmlns="http://ereg.egov.bg/value/0008-000150" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="CitizenshipRegisterSequenceActNumber">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Пореден номер на акт в регистър за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="9999" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

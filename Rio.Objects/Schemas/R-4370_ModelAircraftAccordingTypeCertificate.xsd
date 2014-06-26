@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4370" 
+	xmlns="http://ereg.egov.bg/segment/R-4370" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
+	xmlns:as="http://ereg.egov.bg/value/R-4332"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4332" />
+		
+	<xsd:complexType name="ModelAircraftAccordingTypeCertificate">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Модел на въздухоплавателното средство според типовия сертификат</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="AircraftSeries" type="as:AircraftSeries" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

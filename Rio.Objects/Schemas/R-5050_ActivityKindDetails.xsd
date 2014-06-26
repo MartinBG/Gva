@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5050" 
+	xmlns="http://ereg.egov.bg/segment/R-5050" 
+	xmlns:ak="http://ereg.egov.bg/segment/R-4596"
+	xmlns:as="http://ereg.egov.bg/value/R-5048"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4596" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5048" />
+
+	<xsd:complexType name="ActivityKindDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Детайли за вид дейност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ActivityKind" type="ak:ActivityKind" minOccurs="0" />
+			<xsd:element name="ActivitySchedule" type="as:ActivitySchedule" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

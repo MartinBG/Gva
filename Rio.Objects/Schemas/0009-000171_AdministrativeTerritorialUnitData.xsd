@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000171" xmlns="http://ereg.egov.bg/segment/0009-000171" xmlns:slrc="http://ereg.egov.bg/value/0008-000207" xmlns:slrn="http://ereg.egov.bg/value/0008-000208" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:dn="http://ereg.egov.bg/value/0008-000201" xmlns:mc="http://ereg.egov.bg/value/0008-000209" xmlns:mn="http://ereg.egov.bg/value/0008-000202" xmlns:mаc="http://ereg.egov.bg/value/0008-000203" xmlns:mаn="http://ereg.egov.bg/value/0008-000204" xmlns:sc="http://ereg.egov.bg/value/0008-000205" xmlns:sn="http://ereg.egov.bg/value/0008-000206" xmlns:pc="http://ereg.egov.bg/value/0008-000128" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000207" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000208" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000200" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000201" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000209" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000202" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000203" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000204" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000205" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000206" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000128" />
+  <xsd:element name="AdministrativeTerritorialUnitData" type="AdministrativeTerritorialUnitData" />
+  <xsd:complexType name="AdministrativeTerritorialUnitData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за области, общини, кметства и населени места от Единния класификатор на административно-териториалните и териториални единици (ЕКАТТЕ)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="SecondLevelRegions">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="SecondLevelRegion" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="slrc:SecondLevelRegionCode" />
+                  <xsd:element name="Name" type="slrn:SecondLevelRegionName" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Districts">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="District" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="dc:DistrictCode" />
+                  <xsd:element name="MainSettlement" type="sc:SettlementCode" />
+                  <xsd:element name="Name" type="dn:DistrictName" />
+                  <xsd:element name="SecondLevelRegionCode" type="slrc:SecondLevelRegionCode" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Municipalities">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Municipality" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="mc:MunicipalityCode" />
+                  <xsd:element name="MainSettlement" type="sc:SettlementCode" />
+                  <xsd:element name="Name" type="mn:MunicipalityName" />
+                  <xsd:element name="Category">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d{1}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Mayoralties">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Mayoralty" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="mаc:MayoraltyCode" />
+                  <xsd:element name="MainSettlement" type="sc:SettlementCode" />
+                  <xsd:element name="Name" type="mаn:MayoraltyName" />
+                  <xsd:element name="Category">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string" />
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Settlements">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Settlement" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="sc:SettlementCode" />
+                  <xsd:element name="TypeName">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Name" type="sn:SettlementName" />
+                  <xsd:element name="DistrictCode" type="dc:DistrictCode" />
+                  <xsd:element name="MunicipalityCode" type="mc:MunicipalityCode" />
+                  <xsd:element name="MayoraltyCode" type="mаc:MayoraltyCode" />
+                  <xsd:element name="TypeCode">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Category">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d{1}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Altitude">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d{1}" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

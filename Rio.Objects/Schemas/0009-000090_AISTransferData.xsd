@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000090" xmlns="http://ereg.egov.bg/segment/0009-000090" xmlns:anssr="http://ereg.egov.bg/segment/0009-000039" xmlns:anss="http://ereg.egov.bg/segment/0009-000049" xmlns:andt="http://ereg.egov.bg/segment/0009-000053" xmlns:ans="http://ereg.egov.bg/segment/0009-000058" xmlns:csch="http://ereg.egov.bg/segment/0009-000036" xmlns:cschs="http://ereg.egov.bg/segment/0009-000035" xmlns:classd="http://ereg.egov.bg/segment/0009-000038" xmlns:aisu="http://ereg.egov.bg/segment/0009-000059" xmlns:oagd="http://ereg.egov.bg/segment/0009-000060" xmlns:csagd="http://ereg.egov.bg/segment/0009-000061" xmlns:aisc="http://ereg.egov.bg/segment/0009-000033" xmlns:at="http://ereg.egov.bg/segment/0009-000068" xmlns:atsd="http://ereg.egov.bg/segment/0009-000071" xmlns:sstat="http://ereg.egov.bg/segment/0009-000067" xmlns:dr="http://ereg.egov.bg/segment/0009-000069" xmlns:aodrdd="http://ereg.egov.bg/segment/0009-000072" xmlns:acase="http://ereg.egov.bg/segment/0009-000080" xmlns:adoc="http://ereg.egov.bg/segment/0009-000085" xmlns:do="http://ereg.egov.bg/segment/0009-000088" xmlns:atаp="http://ereg.egov.bg/segment/0009-000077" xmlns:atа="http://ereg.egov.bg/segment/0009-000076" xmlns:dridsd="http://ereg.egov.bg/segment/0009-000078" xmlns:daidsd="http://ereg.egov.bg/segment/0009-000079" xmlns:ddfdsd="http://ereg.egov.bg/segment/0009-000086" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000039" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000049" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000053" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000058" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000036" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000035" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000038" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000059" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000060" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000061" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000033" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000068" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000071" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000067" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000069" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000072" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000080" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000085" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000088" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000077" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000076" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000078" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000079" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000086" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:element name="AISTransferData" type="AISTransferData" />
+  <xsd:complexType name="AISTransferData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за пренос между информационни системи</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="AdministrativeNomenclatureServiceStageResults" type="anssr:AdministrativeNomenclatureServiceStageResults" minOccurs="0" />
+      <xsd:element name="AdministrativeNomenclatureServiceStages" type="anss:AdministrativeNomenclatureServiceStages" minOccurs="0" />
+      <xsd:element name="AdministrativeNomenclatureDocumentTypes" type="andt:AdministrativeNomenclatureDocumentTypes" minOccurs="0" />
+      <xsd:element name="AdministrativeNomenclatureServices" type="ans:AdministrativeNomenclatureServices" minOccurs="0" />
+      <xsd:element name="ClassificationSchemes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Scheme" type="csch:ClassificationScheme" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ClassificationSchemeSections">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Section" type="cschs:ClassificationSchemeSection" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ClassificationData" type="classd:ClassificationData" />
+      <xsd:element name="Users">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="User" type="aisu:AISUser" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectAccessGrantData" type="oagd:ObjectAccessGrantData" />
+      <xsd:element name="ClassificationSchemeAccessGrantData" type="csagd:ClassificationSchemeAccessGrantData" />
+      <xsd:element name="Correspondents">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Correspondent" type="aisc:AISCorrespondent" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Tasks">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Task" type="at:AISTask" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TaskStatusData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Record" type="atsd:AISTaskStatusData" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ServiceStatuses">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ServiceStatus" type="sstat:ServiceStatus" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DocumentRegisters">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Register" type="dr:DocumentRegister" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DocumentsRegisteredInDocumentRegisters">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RegisteredDocument" type="aodrdd:AISDocumentRegisterDocumentData" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Cases">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Record" type="acase:AISCase" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Documents">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Record" type="adoc:AISDocument" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DocumentOpinions">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="DocumentOpinion" type="do:DocumentOpinion" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TaskAssessmentProtocolData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Record" type="atаp:AISTaskAssessmentProtocol" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TaskAssessmentData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Record" type="atа:AISTaskAssessment" minOccurs="0" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DocumentRegistrationInDocumentStorageData" type="dridsd:DocumentRegistrationInDocumentStorageData" />
+      <xsd:element name="DocumentAcceptanceInDocumentStorageData" type="daidsd:DocumentAcceptanceInDocumentStorageData" />
+      <xsd:element name="DocumentDeliveryFromDocumentStorageData" type="ddfdsd:DocumentDeliveryFromDocumentStorageData" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

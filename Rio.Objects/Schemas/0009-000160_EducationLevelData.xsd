@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000160" xmlns="http://ereg.egov.bg/segment/0009-000160" xmlns:elc="http://ereg.egov.bg/value/0008-000215" xmlns:el="http://ereg.egov.bg/value/0008-000216" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000215" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000216" />
+  <xsd:element name="EducationLevelData" type="EducationLevelData" />
+  <xsd:complexType name="EducationLevelData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за степен на образование</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="EducationLevels">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EL" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="elc:EducationLevelCode" />
+                  <xsd:element name="Name" type="el:EducationLevel" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

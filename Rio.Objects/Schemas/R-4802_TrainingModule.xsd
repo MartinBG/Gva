@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4802" 
+	xmlns="http://ereg.egov.bg/segment/R-4802" 
+	xmlns:tmc="http://ereg.egov.bg/value/R-4798"
+	xmlns:tmn="http://ereg.egov.bg/value/R-4800"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4798" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4800" />
+
+	<xsd:complexType name="TrainingModule">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Модул на обучение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TrainingModuleCode" type="tmc:TrainingModuleCode" minOccurs="0" />
+			<xsd:element name="TrainingModuleName" type="tmn:TrainingModuleName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

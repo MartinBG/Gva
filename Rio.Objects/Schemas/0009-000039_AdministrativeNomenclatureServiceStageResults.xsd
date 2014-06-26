@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000039" xmlns="http://ereg.egov.bg/segment/0009-000039" xmlns:csnid="http://ereg.egov.bg/value/0008-000055" xmlns:ann="http://ereg.egov.bg/value/0008-000052" xmlns:anssre="http://ereg.egov.bg/segment/0009-000034" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000055" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000052" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000034" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AdministrativeNomenclatureServiceStageResults">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Ведомствена номенклатура на резултати от етап</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="csnid:ClassificationSchemeOrNomenclatureID" />
+      <xsd:element name="Name" type="ann:AdministrativeNomenclatureName" />
+      <xsd:element name="ServiceStageResult" type="anssre:AdministrativeNomenclatureServiceStageResultElement" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

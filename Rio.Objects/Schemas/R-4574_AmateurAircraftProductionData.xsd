@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4574" 
+	xmlns="http://ereg.egov.bg/segment/R-4574" 
+	xmlns:mcd="http://ereg.egov.bg/segment/R-3988"
+	xmlns:ce="http://ereg.egov.bg/segment/R-4572"
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3988" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4572" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+
+	<xsd:complexType name="AmateurAircraftProductionData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Производствени данни на любителски построено ВС</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerContactData" type="mcd:ManufacturerContactData" minOccurs="0" />
+			<xsd:element name="CategoryELVS" type="ce:CategoryELVS" minOccurs="0" />
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

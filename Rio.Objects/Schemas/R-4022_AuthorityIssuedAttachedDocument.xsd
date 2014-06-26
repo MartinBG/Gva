@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4022" 
+	xmlns="http://ereg.egov.bg/segment/R-4022" 
+	xmlns:aiadc="http://ereg.egov.bg/value/R-4018"
+	xmlns:aiadn="http://ereg.egov.bg/value/R-4020"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4018" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4020"  />
+	
+	<xsd:complexType name="AuthorityIssuedAttachedDocument">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Орган, издал приложен документ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AuthorityIssuedAttachedDocumentCode" type="aiadc:AuthorityIssuedAttachedDocumentCode" minOccurs="0" />
+			<xsd:element name="AuthorityIssuedAttachedDocumentName" type="aiadn:AuthorityIssuedAttachedDocumentName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

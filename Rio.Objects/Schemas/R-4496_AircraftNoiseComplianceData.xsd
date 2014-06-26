@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4496" 
+	xmlns="http://ereg.egov.bg/segment/R-4496" 
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4364"
+	xmlns:amd="http://ereg.egov.bg/segment/R-4368"
+	xmlns:maatc="http://ereg.egov.bg/segment/R-4370"
+	xmlns:asn="http://ereg.egov.bg/value/R-4334"
+	xmlns:fcctn="http://ereg.egov.bg/value/R-4346"
+	xmlns:amme="http://ereg.egov.bg/segment/R-4492"
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:amlm="http://ereg.egov.bg/value/R-4494"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4364" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4368" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4346" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4492" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4494"/>
+
+	<xsd:complexType name="AircraftNoiseComplianceData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за ВС при удостоверяване за съответствие с нормите за авиационен шум</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="CategoryAircraft" type="ca:CategoryAircraft" minOccurs="0" />
+			<xsd:element name="AircraftManufacturerData" type="amd:AircraftManufacturerData" minOccurs="0" />
+			<xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+			<xsd:element name="FlightCertificateCertificationTableNumber" type="fcctn:FlightCertificateCertificationTableNumber" minOccurs="0" />
+			<xsd:element name="EngineModelManufacturerEquipment" type="amme:AircraftModelManufacturerEquipment" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="AirScrewEngineModelManufacturerEquipment" type="amme:AircraftModelManufacturerEquipment" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="AircraftMaximumLandingMass" type="amlm:AircraftMaximumLandingMass" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

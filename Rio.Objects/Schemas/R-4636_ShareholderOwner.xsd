@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4636" 
+	xmlns="http://ereg.egov.bg/segment/R-4636" 
+	xmlns:psn="http://ereg.egov.bg/value/R-4628"
+	xmlns:c="http://ereg.egov.bg/segment/0009-000133"
+	xmlns:suc="http://ereg.egov.bg/value/R-4630"
+	xmlns:sc="http://ereg.egov.bg/value/R-4632"
+	xmlns:rsup="http://ereg.egov.bg/value/R-4634"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4628" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4630"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4632" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4634" />
+		
+	<xsd:complexType name="ShareholderOwner">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Акционер/притежател</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PartnerShareholderName" type="psn:PartnerShareholderName" minOccurs="0" />
+			<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+			<xsd:element name="SharesUnitsCount" type="suc:SharesUnitsCount" minOccurs="0" />
+			<xsd:element name="SharesClass" type="sc:SharesClass" minOccurs="0" />
+			<xsd:element name="ReleasedSharesUnitsPercentage" type="rsup:ReleasedSharesUnitsPercentage" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000156" xmlns="http://ereg.egov.bg/segment/0009-000156" xmlns:g="http://ereg.egov.bg/value/0008-000196" xmlns:gc="http://ereg.egov.bg/value/0008-000195" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000196" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000195" />
+  <xsd:element name="GenderData" type="GenderData" />
+  <xsd:complexType name="GenderData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за пол</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Genders">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Gender" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="gc:GenderCode" />
+                  <xsd:element name="Name" type="g:GenderName" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

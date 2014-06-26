@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000096" xmlns="http://ereg.egov.bg/segment/0009-000096" xmlns:cgc="http://ereg.egov.bg/value/0008-000183" xmlns:cn="http://ereg.egov.bg/value/0008-000184" xmlns:san="http://ereg.egov.bg/value/0008-000023" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000023" />
+  <xsd:complexType name="PlaceOfBirthAbroad">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Място на раждане извън територията на Република България</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+      <xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+      <xsd:element name="SettlementAbroadName" type="san:SettlementAbroadName" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

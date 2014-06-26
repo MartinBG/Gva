@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AircraftApplicableCertificationSpecifications" xml:space="preserve">
+    <value>- For aircraft, which in practice does not comply with all applicable certification specifications, such as aircraft without a holder of a type certificate ("summary called orphan aircrafts") or aircraft that was on national law requirements for the issuance of a permit to fly and does not comply with all applicable requirements. Permit to fly for such aircraft should be granted only if a certificate of airworthiness or restricted certificate of airworthiness can not be issued due to conditions that are beyond the direct control of the owner of the aircraft, such as the lack of certified spare parts.</value>
+  </data>
+  <data name="AircraftRegistration" xml:space="preserve">
+    <value>Before registration of the aircraft in the country that will issue a Certificate of Airworthiness</value>
+  </data>
+  <data name="AircraftSelling" xml:space="preserve">
+    <value>Before selling the aircraft and / or being registered</value>
+  </data>
+  <data name="ComplianceVerify" xml:space="preserve">
+    <value>To verify compliance with the approved design, typically this will be the same program for similar aircrafts</value>
+  </data>
+  <data name="FlightAirExhibition" xml:space="preserve">
+    <value>Flight of the aircraft to an air exhibition or air demonstration and participating in an exhibition or air demonstration before the certificate for design is issued or before a compliance of the approved certificate for design is proven</value>
+  </data>
+  <data name="FlightAirworthiness" xml:space="preserve">
+    <value>Crew training flights that will perform design or production flight tests in order to receive a certificate of airworthiness</value>
+  </data>
+  <data name="FlightApprovedDesign" xml:space="preserve">
+    <value>Crew training flights that will perform design or production flight tests in order to receive a certificate of approved design</value>
+  </data>
+  <data name="FlightCompliance" xml:space="preserve">
+    <value>Flight of the aircraft, which demonstrates compliance with the applicable certification requirements, but not the environmental requirements</value>
+  </data>
+  <data name="FlightGreenAircraft" xml:space="preserve">
+    <value>Flight to supply 'green' aircraft for subsequent final production</value>
+  </data>
+  <data name="FlightMaintenanceNotPerformed" xml:space="preserve">
+    <value>Flights where maintenance is not performed in accordance with approved programs when an airworthiness directive is not covered, when specific equipment is inoperable and beyond the List of minimum equipment of the manufacturer (MMEL) or when the aircraft has undergone failures that are outside the applicable 
+restrictions</value>
+  </data>
+  <data name="FlightMarketResearch" xml:space="preserve">
+    <value>Flights for the purposes of conducting market research, demonstration with sales purposes and training of the crew of the client with aircraft that does not have type certificate or for which the compliance has not yet been found or for unregistered aircraft and before a certificate of airworthiness is issued</value>
+  </data>
+  <data name="FlightTestCertificate" xml:space="preserve">
+    <value>Perform of flight test to issue a type certificate</value>
+  </data>
+  <data name="FlightTestCertificateChanges" xml:space="preserve">
+    <value>Perform of flight test in order to make changes to the type certificate</value>
+  </data>
+  <data name="FlightTestCertificateSupplemental" xml:space="preserve">
+    <value>Perform of flight test to issue a supplemental type certificate</value>
+  </data>
+  <data name="FlightTestCompetentAuthority" xml:space="preserve">
+    <value>In case of a flight test by the competent authority to issue the certificate of airworthiness</value>
+  </data>
+  <data name="FlightTestEuropeanStandards" xml:space="preserve">
+    <value>Perform of flight test in order to obtain approval from the European technical standards and regulations</value>
+  </data>
+  <data name="SurveillanceFlights" xml:space="preserve">
+    <value>Surveillance flights with extra fuel</value>
+  </data>
+  <data name="TestingAircraft" xml:space="preserve">
+    <value>Testing new aircraft or modification(s)</value>
+  </data>
+  <data name="TestingConcepts" xml:space="preserve">
+    <value>Testing new concepts for airframe, engines, propellers and equipment</value>
+  </data>
+  <data name="TestingTechniques" xml:space="preserve">
+    <value>Testing new techniques of work</value>
+  </data>
+  <data name="TrainingOrientationFlights" xml:space="preserve">
+    <value>Includes training flights and orientation flights</value>
+  </data>
+</root>

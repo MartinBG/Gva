@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4560" 
+	xmlns="http://ereg.egov.bg/segment/R-4560"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:ertd="http://ereg.egov.bg/value/R-4556"
+	xmlns:icar="http://ereg.egov.bg/value/R-4558"
+	xmlns:add="http://ereg.egov.bg/segment/R-4040"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4556" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4558" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4040" />
+
+	<xsd:complexType name="ExportCertificateAdditionalInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Допълнителна информация за експортно удостоверение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="ExpectedRightsTransferDate" type="ertd:ExpectedRightsTransferDate" minOccurs="0" />
+			<xsd:element name="ImportCountryAdditionalRequirements" type="icar:ImportCountryAdditionalRequirements" minOccurs="0" />
+			<xsd:element name="AttachedDocumentData" type="add:AttachedDocumentData" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

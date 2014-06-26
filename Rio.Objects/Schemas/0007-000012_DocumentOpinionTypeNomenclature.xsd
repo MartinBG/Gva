@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000012" xmlns="http://ereg.egov.bg/nomenclature/0007-000012" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="DocumentOpinionTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете становища по документ в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000055" />
+      <xsd:enumeration value="0006-000056" />
+      <xsd:enumeration value="0006-000057" />
+      <xsd:enumeration value="0006-000058" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

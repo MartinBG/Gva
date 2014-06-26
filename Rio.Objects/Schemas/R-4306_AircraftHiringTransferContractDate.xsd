@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-4306" xmlns="http://ereg.egov.bg/value/R-4306" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="AircraftHiringTransferContractDate">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Дата на договор или друг акт, които има прехвърлително действие по отношение на наемането на въздухоплавателно стредство</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:date">
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

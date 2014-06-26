@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000118" xmlns="http://ereg.egov.bg/segment/0009-000118" xmlns:pn="http://ereg.egov.bg/segment/0009-000005" xmlns:bd="http://ereg.egov.bg/value/0008-000022" xmlns:rs="http://ereg.egov.bg/value/0008-000154" xmlns:pa="http://ereg.egov.bg/segment/0009-000094" xmlns:pi="http://ereg.egov.bg/segment/0009-000006" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000022" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000154" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000094" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000006" />
+  <xsd:complexType name="RelativeData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за роднина</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonNames" type="pn:PersonNames" minOccurs="0" />
+      <xsd:element name="PersonIdentifier" type="pi:PersonIdentifier" minOccurs="0" />
+      <xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0" />
+      <xsd:element name="Relationship" type="rs:Relationship" minOccurs="0" />
+      <xsd:element name="PersonAddress" type="pa:PersonAddress" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

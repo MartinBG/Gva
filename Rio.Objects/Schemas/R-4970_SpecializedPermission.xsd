@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4970" 
+	xmlns="http://ereg.egov.bg/segment/R-4970" 
+	xmlns:spc="http://ereg.egov.bg/value/R-4966"
+	xmlns:spn="http://ereg.egov.bg/value/R-4968"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4966" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4968" />
+
+	<xsd:complexType name="SpecializedPermission">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Разрешение за специализирани авиационни работи</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="SpecializedPermissionCode" type="spc:SpecializedPermissionCode" minOccurs="0" />
+			<xsd:element name="SpecializedPermissionName" type="spn:SpecializedPermissionName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

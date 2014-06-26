@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5046" 
+	xmlns="http://ereg.egov.bg/segment/R-5046" 
+	xmlns:lsd="http://ereg.egov.bg/value/R-5036"
+	xmlns:led="http://ereg.egov.bg/value/R-5038"
+	xmlns:lrd="http://ereg.egov.bg/value/R-5040"
+	xmlns:ldd="http://ereg.egov.bg/value/R-5042"
+	xmlns:cod="http://ereg.egov.bg/value/R-5044"
+	xmlns:aan="http://ereg.egov.bg/value/R-4582"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5036" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5038" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5040" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5042" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5044" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4582" />
+
+	<xsd:complexType name="DryLeaseData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за сух лизинг</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LeaseStartDate" type="lsd:LeaseStartDate" minOccurs="0" />
+			<xsd:element name="LeaseEndDate" type="led:LeaseEndDate" minOccurs="0" />
+			<xsd:element name="LeaseReleaseDate" type="lrd:LeaseReleaseDate" minOccurs="0" />
+			<xsd:element name="LeaseDeletionDate" type="ldd:LeaseDeletionDate" minOccurs="0" />
+			<xsd:element name="CommerialOperationDate" type="cod:CommerialOperationDate" minOccurs="0" />
+			<xsd:element name="AirportAirfieldName" type="aan:AirportAirfieldName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

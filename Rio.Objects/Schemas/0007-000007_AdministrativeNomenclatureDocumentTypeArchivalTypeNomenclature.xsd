@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000007" xmlns="http://ereg.egov.bg/nomenclature/0007-000007" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="AdministrativeNomenclatureDocumentTypeArchivalTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на архивните стойности на документите в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000038" />
+      <xsd:enumeration value="0006-000039" />
+      <xsd:enumeration value="0006-000040" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

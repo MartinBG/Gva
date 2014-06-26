@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000162" xmlns="http://ereg.egov.bg/segment/0009-000162" xmlns:pbd="http://ereg.egov.bg/segment/0009-000008" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:complexType name="MinorChild">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Лице, ненавършило пълнолетие, за което също се променя настоящ адрес</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="pbd:PersonBasicData" />
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

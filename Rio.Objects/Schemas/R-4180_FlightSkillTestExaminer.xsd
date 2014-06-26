@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4180" 
+	xmlns="http://ereg.egov.bg/segment/R-4180" 
+	xmlns:fstec="http://ereg.egov.bg/value/R-4176"
+	xmlns:fsten="http://ereg.egov.bg/value/R-4178" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4176" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4178"  />
+	
+	<xsd:complexType name="FlightSkillTestExaminer">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Извършващ летателна проверка</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightSkillTestExaminerCode" type="fstec:FlightSkillTestExaminerCode" minOccurs="0" />
+			<xsd:element name="FlightSkillTestExaminerName" type="fsten:FlightSkillTestExaminerName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

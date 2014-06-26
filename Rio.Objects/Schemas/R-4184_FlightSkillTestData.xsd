@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4184" 
+xmlns="http://ereg.egov.bg/segment/R-4184" 
+xmlns:fstd="http://ereg.egov.bg/value/R-4182" 
+xmlns:fst="http://ereg.egov.bg/segment/R-4168" 
+xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+xmlns:fsty="http://ereg.egov.bg/segment/R-4174" 
+xmlns:fste="http://ereg.egov.bg/segment/R-4180"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4182"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4168"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4174"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4180"  />
+	<xsd:complexType name="FlightSkillTestData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за проведена летателна проверка</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0" />
+			<xsd:element name="FlightSkillTest" type="fst:FlightSkillTest" minOccurs="0" />
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="FlightSimulatorType" type="fsty:FlightSimulatorType" minOccurs="0" />
+			<xsd:element name="FlightSkillTestExaminer" type="fste:FlightSkillTestExaminer" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

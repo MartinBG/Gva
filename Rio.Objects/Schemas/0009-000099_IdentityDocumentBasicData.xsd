@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000099" xmlns="http://ereg.egov.bg/segment/0009-000099" xmlns:in="http://ereg.egov.bg/value/0008-000145" xmlns:iid="http://ereg.egov.bg/value/0008-000146" xmlns:ii="http://ereg.egov.bg/value/0008-000147" xmlns:idt="http://ereg.egov.bg/value/0008-000212" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000145" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000146" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000147" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000212" />
+  <xsd:complexType name="IdentityDocumentBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основни данни за български личен документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IdentityNumber" type="in:IdentityNumber" minOccurs="0" />
+      <xsd:element name="IdentitityIssueDate" type="iid:IdentitityIssueDate" minOccurs="0" />
+      <xsd:element name="IdentityIssuer" type="ii:IdentityIssuer" minOccurs="0" />
+      <xsd:element name="IdentityDocumentType" type="idt:IdentityDocumentType" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

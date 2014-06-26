@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6050" 
+	xmlns="http://ereg.egov.bg/segment/R-6050" 
+	xmlns:adui="http://ereg.egov.bg/value/0008-000134"
+	xmlns:add="http://ereg.egov.bg/value/R-4688"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000134" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4688" />
+
+	<xsd:complexType name="AttachedDocumentDescriptionIdentifier">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Описание и идентификатор на приложен документ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentUniqueIdentifier" type="adui:AttachedDocumentUniqueIdentifier" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDescription" type="add:AttachedDocumentDescription" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

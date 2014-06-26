@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4514" 
+	xmlns="http://ereg.egov.bg/segment/R-4514"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
+	xmlns:aaoi="http://ereg.egov.bg/value/R-4298" 
+	xmlns:aobd="http://ereg.egov.bg/segment/R-4294"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:aod="http://ereg.egov.bg/segment/R-4394"
+	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
+	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+	xmlns:ancd="http://ereg.egov.bg/segment/R-4496" 
+	xmlns:nd="http://ereg.egov.bg/segment/R-4512"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:add="http://ereg.egov.bg/segment/R-3994"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4298" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4294" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4394" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4496" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4512" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+
+	<xsd:element name="NoiseCertificateApplication" type="NoiseCertificateApplication"/>
+	<xsd:complexType name="NoiseCertificateApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на удостоверение за съответствие с нормите за авиационен шум</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
+			<xsd:element name="ApplicantAviationalOperatorIndication" type="aaoi:ApplicantAviationalOperatorIndication" minOccurs="0" />	
+			<xsd:element name="AviationalOperatorBasicData" type="aobd:AviationalOperatorBasicData" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftOwnerData" type="aod:AircraftOwnerData" minOccurs="0" />
+			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
+			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="AircraftNoiseComplianceData" type="ancd:AircraftNoiseComplianceData" minOccurs="0" />
+			<xsd:element name="NoiseData" type="nd:NoiseData" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>					
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

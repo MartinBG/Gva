@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000178" xmlns="http://ereg.egov.bg/segment/0009-000178" xmlns:tsc="http://ereg.egov.bg/value/0008-000247" xmlns:tscc="http://ereg.egov.bg/value/0008-000246" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000247" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000246" />
+  <xsd:element name="TouristSiteCategoryData" type="TouristSiteCategoryData" />
+  <xsd:complexType name="TouristSiteCategoryData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за категории на туристически обекти</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TouristSiteCategories">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="TouristSiteCategory" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="tscc:TouristSiteCategoryCode" />
+                  <xsd:element name="Name" type="tsc:TouristSiteCategory" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

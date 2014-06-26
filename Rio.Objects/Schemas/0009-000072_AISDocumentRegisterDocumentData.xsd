@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000072" xmlns="http://ereg.egov.bg/segment/0009-000072" xmlns:ridrt="http://ereg.egov.bg/value/0008-000090" xmlns:ridrr="http://ereg.egov.bg/segment/0009-000070" xmlns:di="http://ereg.egov.bg/value/0008-000091" xmlns:rdu="http://ereg.egov.bg/segment/0009-000044" xmlns:andtbd="http://ereg.egov.bg/segment/0009-000043" xmlns:idri="http://ereg.egov.bg/value/0008-000088" xmlns:dett="http://ereg.egov.bg/value/0008-000005" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000090" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000070" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000091" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000044" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000043" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000088" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000005" />
+  <xsd:complexType name="AISDocumentRegisterDocumentData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за документ в документен регистър</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="RegistrationTime" type="ridrt:RegistrationInDocumentRegisterTime" />
+      <xsd:element name="RegisteredBy" type="ridrr:RegistrationInDocumentRegisterRegistrar" />
+      <xsd:element name="RegisteredDocumentID" type="di:DocumentID" />
+      <xsd:element name="RegisteredDocumentURI" type="rdu:RegisteredDocumentURI" />
+      <xsd:element name="DocumentType" type="andtbd:AdministrativeNomenclatureDocumentTypeBasicData" />
+      <xsd:element name="InternalRegisterIdentifier" type="idri:InternalDocumentRegisterIdentifier" minOccurs="0" />
+      <xsd:element name="DocumentElectronicTransportType" type="dett:DocumentElectronicTransportType" minOccurs="0" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

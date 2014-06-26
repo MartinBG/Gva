@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-3008" 
+xmlns="http://ereg.egov.bg/value/R-3008" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+
+  <xsd:simpleType name="DeadlineCorrectionIrregularities">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Срок за отстраняване на нередността</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:duration">
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

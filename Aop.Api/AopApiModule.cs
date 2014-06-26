@@ -5,7 +5,6 @@ using Aop.Api.WordTemplates;
 using Autofac;
 using Common.Data;
 using Common.Http;
-using Components.DocumentSerializer;
 
 namespace Aop.Api
 {

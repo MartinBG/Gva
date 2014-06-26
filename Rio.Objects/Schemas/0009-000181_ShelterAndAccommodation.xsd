@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000181" xmlns="http://ereg.egov.bg/segment/0009-000181" xmlns:tscc="http://ereg.egov.bg/value/0008-000246" xmlns:tsc="http://ereg.egov.bg/value/0008-000247" xmlns:saactc="http://ereg.egov.bg/value/0008-000248" xmlns:saat="http://ereg.egov.bg/value/0008-000249" xmlns:tsn="http://ereg.egov.bg/value/0008-000250" xmlns:tsa="http://ereg.egov.bg/segment/0009-000180" xmlns:tspn="http://ereg.egov.bg/value/0008-000251" xmlns:tsrc="http://ereg.egov.bg/value/0008-000252" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000246" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000247" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000248" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000249" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000250" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000180" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000251" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000252" />
+  <xsd:complexType name="ShelterAndAccommodation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Средство за подслон или място за настаняване, подлежащо на категоризиране</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TouristSiteCategoryCode" type="tscc:TouristSiteCategoryCode" minOccurs="0" />
+      <xsd:element name="TouristSiteCategory" type="tsc:TouristSiteCategory" minOccurs="0" />
+      <xsd:element name="ShelterAndAccommodationTypeCode" type="saactc:ShelterAndAccommodationTypeCode" minOccurs="0" />
+      <xsd:element name="ShelterAndAccommodationType" type="saat:ShelterAndAccommodationType" minOccurs="0" />
+      <xsd:element name="TouristSiteName" type="tsn:TouristSiteName" minOccurs="0" />
+      <xsd:element name="TouristSiteAddress" type="tsa:TouristSiteAddress" minOccurs="0" />
+      <xsd:element name="TouristSitePhoneNumbers" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="TouristSitePhoneNumber" type="tspn:TouristSitePhoneNumber" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TouristSiteRoomCount" type="tsrc:TouristSiteRoomCount" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

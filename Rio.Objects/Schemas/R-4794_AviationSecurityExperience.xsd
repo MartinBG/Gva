@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4794" 
+	xmlns="http://ereg.egov.bg/segment/R-4794" 
+	xmlns:pesd="http://ereg.egov.bg/value/R-4784"
+	xmlns:peed="http://ereg.egov.bg/value/R-4786"
+	xmlns:od="http://ereg.egov.bg/value/R-4788"
+	xmlns:op="http://ereg.egov.bg/value/R-4790"
+	xmlns:jd="http://ereg.egov.bg/value/R-4792"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4784" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4786" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4788" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4790" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4792" />
+
+	<xsd:complexType name="AviationSecurityExperience">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Практически опит за авиационна сигурност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PracticalExperienceStartDate" type="pesd:PracticalExperienceStartDate" minOccurs="0" />
+			<xsd:element name="PracticalExperienceEndDate" type="peed:PracticalExperienceEndDate" minOccurs="0" />
+			<xsd:element name="OrganizationDepartment" type="od:OrganizationDepartment" minOccurs="0" />
+			<xsd:element name="OrganizationPosition" type="op:OrganizationPosition" minOccurs="0" />
+			<xsd:element name="JobDescription" type="jd:JobDescription" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

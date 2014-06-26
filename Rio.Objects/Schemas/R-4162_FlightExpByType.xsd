@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4162" 
+xmlns="http://ereg.egov.bg/segment/R-4162" 
+xmlns:febr="http://ereg.egov.bg/segment/R-4160" 
+xmlns:fet="http://ereg.egov.bg/segment/R-4146" 
+xmlns:hfest="http://ereg.egov.bg/value/R-3992" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4160" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4146" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992"  />
+	<xsd:complexType name="FlightExpByType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за летателен опит в зависимост от типа</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightExpByRole" type="febr:FlightExpByRole" minOccurs="0" />
+			<xsd:element name="FlightExpType" type="fet:FlightExpType" minOccurs="0" />
+			<xsd:element name="FlightExpHoursByTypeTotal" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

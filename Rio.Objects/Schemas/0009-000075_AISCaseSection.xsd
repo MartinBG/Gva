@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000075" xmlns="http://ereg.egov.bg/segment/0009-000075" xmlns:cssn="http://ereg.egov.bg/value/0008-000098" xmlns:rdu="http://ereg.egov.bg/segment/0009-000044" xmlns:did="http://ereg.egov.bg/value/0008-000091" xmlns:cu="http://ereg.egov.bg/segment/0009-000073" xmlns:cid="http://ereg.egov.bg/value/0008-000096" xmlns:tid="http://ereg.egov.bg/value/0008-000082" xmlns:csid="http://ereg.egov.bg/segment/0009-000074" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000098" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000044" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000091" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000073" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000096" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000082" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000074" />
+  <xsd:complexType name="AISCaseSection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Раздел от преписка</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Element" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="SequenceNumber" type="cssn:CaseSectionSequenceNumber" />
+            <xsd:choice>
+              <xsd:element name="RegisteredDocumentURI" type="rdu:RegisteredDocumentURI" />
+              <xsd:element name="DocumentID" type="did:DocumentID" />
+              <xsd:element name="CaseURI" type="cu:AISCaseURI" />
+              <xsd:element name="CaseID" type="cid:AISCaseID" />
+              <xsd:element name="TaskID" type="tid:AISTaskID" />
+            </xsd:choice>
+            <xsd:element name="InclusionData" type="csid:CaseSectionInclusionData" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

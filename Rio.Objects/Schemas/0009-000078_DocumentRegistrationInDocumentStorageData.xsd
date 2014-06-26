@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000078" xmlns="http://ereg.egov.bg/segment/0009-000078" xmlns:oids="http://ereg.egov.bg/segment/0009-000192" xmlns:drist="http://ereg.egov.bg/value/0008-000103" xmlns:du="http://ereg.egov.bg/segment/0009-000044" xmlns:dlis="http://ereg.egov.bg/value/0008-000102" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000192" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000103" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000044" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000102" />
+  <xsd:complexType name="DocumentRegistrationInDocumentStorageData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за завеждане на документ в хранилище</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Record" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="RegisteredBy" type="oids:OfficerInDocumentStorage" />
+            <xsd:element name="RegistrationTime" type="drist:DocumentRegistrationInStorageTime" />
+            <xsd:element name="RegisteredDocumentURI" type="du:RegisteredDocumentURI" />
+            <xsd:element name="StorageLocation" type="dlis:DocumentLocationInStorage" />
+            <xsd:element name="AdditionalData" minOccurs="0">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

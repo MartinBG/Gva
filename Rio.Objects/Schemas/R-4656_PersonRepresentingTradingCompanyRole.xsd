@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4656" 
+	xmlns="http://ereg.egov.bg/segment/R-4656" 
+	xmlns:prtcrc="http://ereg.egov.bg/value/R-3974"
+	xmlns:prtcrn="http://ereg.egov.bg/value/R-3976"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3974" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3976" />
+		
+	<xsd:complexType name="PersonRepresentingTradingCompanyRole">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Роля на лице, представляващо или управляващо търговско дружество</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PersonRepresentingTradingCompanyRoleCode" type="prtcrc:PersonRepresentingTradingCompanyRoleCode" minOccurs="0" />
+			<xsd:element name="PersonRepresentingTradingCompanyRoleName" type="prtcrn:PersonRepresentingTradingCompanyRoleName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

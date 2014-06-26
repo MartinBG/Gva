@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4916" 
+	xmlns="http://ereg.egov.bg/segment/R-4916" 
+	xmlns:fda="http://ereg.egov.bg/value/R-4912"
+	xmlns:fdu="http://ereg.egov.bg/value/R-4914"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4912" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4914" />
+
+	<xsd:complexType name="FlightDateDuration">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Очаквана дата и времетраене на полет</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightDate" type="fda:FlightDate" minOccurs="0" />
+			<xsd:element name="FlightDuration" type="fdu:FlightDuration" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

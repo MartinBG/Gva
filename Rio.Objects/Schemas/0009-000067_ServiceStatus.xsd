@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000067" xmlns="http://ereg.egov.bg/segment/0009-000067" xmlns:idu="http://ereg.egov.bg/segment/0009-000046" xmlns:ansu="http://ereg.egov.bg/segment/0009-000054" xmlns:tn="http://ereg.egov.bg/segment/0009-000068" xmlns:tssid="http://ereg.egov.bg/segment/0009-000066" xmlns:ansse="http://ereg.egov.bg/segment/0009-000048" xmlns:tssd="http://ereg.egov.bg/value/0008-000084" xmlns:tscd="http://ereg.egov.bg/value/0008-000085" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000046" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000068" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000066" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000048" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000084" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000085" />
+  <xsd:complexType name="ServiceStatus">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Статус на услуга или процедура</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="InitiatingDocumentURI" type="idu:InitiatingDocumentURI" />
+      <xsd:element name="ServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" />
+      <xsd:element name="ExecutedTasks" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Task" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="TaskData" type="tn:AISTask" />
+                  <xsd:element name="InclusionData" type="tssid:AISTaskServiceStatusInclusionData" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UnexecutedTasks" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="TaskOrServiceStage" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:choice>
+                  <xsd:element name="Task">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="TaskData" type="tn:AISTask" />
+                        <xsd:element name="InclusionData" type="tssid:AISTaskServiceStatusInclusionData" />
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ServiceStage">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="ServiceStageData" type="ansse:AdministrativeNomenclatureServiceStagesElement" />
+                        <xsd:element name="ScheduledStartDate" type="tssd:AISTaskScheduledStartDate" />
+                        <xsd:element name="ScheduledCompletionDate" type="tscd:AISTaskScheduledCompletionDate" />
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CancelledTasks" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Task" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="TaskData" type="tn:AISTask" />
+                  <xsd:element name="InclusionData" type="tssid:AISTaskServiceStatusInclusionData" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

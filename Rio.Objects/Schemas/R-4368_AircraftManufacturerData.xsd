@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4368" 
+	xmlns="http://ereg.egov.bg/segment/R-4368" 
+	xmlns:amn="http://ereg.egov.bg/value/R-4320"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:w="http://ereg.egov.bg/value/R-4366" 
+	xmlns:ea="http://ereg.egov.bg/value/R-4214" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4320" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4366" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+	
+	<xsd:complexType name="AircraftManufacturerData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за производител на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftManufacturerName" type="amn:AircraftManufacturerName" minOccurs="0" />
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="Website" type="w:Website" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

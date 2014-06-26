@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000011" xmlns="http://ereg.egov.bg/nomenclature/0007-000011" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="DocumentProcessTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете документи по отношение на процеса</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000050" />
+      <xsd:enumeration value="0006-000051" />
+      <xsd:enumeration value="0006-000052" />
+      <xsd:enumeration value="0006-000053" />
+      <xsd:enumeration value="0006-000054" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4932" 
+	xmlns="http://ereg.egov.bg/segment/R-4932" 
+	xmlns:qcc="http://ereg.egov.bg/value/R-4928"
+	xmlns:qcn="http://ereg.egov.bg/value/R-4930"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4928" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4930" />
+
+	<xsd:complexType name="QualificationClass">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Квалификационен клас</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="QualificationClassCode" type="qcc:QualificationClassCode" minOccurs="0" />
+			<xsd:element name="QualificationClassName" type="qcn:QualificationClassName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

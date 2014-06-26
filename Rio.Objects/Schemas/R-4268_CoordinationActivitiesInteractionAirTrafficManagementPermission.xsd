@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4268" 
+	xmlns="http://ereg.egov.bg/segment/R-4268" 
+	xmlns:caiatmpc="http://ereg.egov.bg/value/R-4262"
+	xmlns:caiatmpn="http://ereg.egov.bg/value/R-4264"
+	xmlns:caiatmpne="http://ereg.egov.bg/value/R-4266"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4262" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4264" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4266" />
+	
+	<xsd:complexType name="CoordinationActivitiesInteractionAirTrafficManagementPermission">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Разрешение,  валидно за дейностите по координация и взаимодействие при управлението на въздушното движение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CoordinationActivitiesInteractionAirTrafficManagementPermissionCode" type="caiatmpc:CoordinationActivitiesInteractionAirTrafficManagementPermissionCode" minOccurs="0" />
+			<xsd:element name="CoordinationActivitiesInteractionAirTrafficManagementPermissionName" type="caiatmpn:CoordinationActivitiesInteractionAirTrafficManagementPermissionName" minOccurs="0" />
+			<xsd:element name="CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish" type="caiatmpne:CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000081" xmlns="http://ereg.egov.bg/segment/0009-000081" xmlns:ebd="http://ereg.egov.bg/segment/0009-000013" xmlns:aisn="http://ereg.egov.bg/value/0008-000107" xmlns:sn="http://ereg.egov.bg/value/0008-000108" xmlns:ccn="http://ereg.egov.bg/value/0008-000109" xmlns:ccrt="http://ereg.egov.bg/value/0008-000110" xmlns:ccpa="http://ereg.egov.bg/value/0008-000111" xmlns:ccao="http://ereg.egov.bg/value/0008-000112" xmlns:ccdr="http://ereg.egov.bg/value/0008-000113" xmlns:ccd="http://ereg.egov.bg/value/0008-000114" xmlns:xdsig="http://ereg.egov.bg/segment/0009-000004" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000107" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000108" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000109" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000110" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000111" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000112" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000113" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000114" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000004" />
+  <xsd:element name="AISCertificationCheckResult" type="AISCertificationCheckResult" />
+  <xsd:complexType name="AISCertificationCheckResult">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Резултати от тестове за оперативна съвместимост по документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ConcernedEntity" type="ebd:EntityBasicData" />
+      <xsd:element name="AccreditedEntity" type="ebd:EntityBasicData" />
+      <xsd:element name="AISOrApplicationName" type="aisn:CertificationAISOrApplicationName" />
+      <xsd:element name="Check" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="SequenceNumber" type="sn:AISCertificationCheckSequenceNumber" />
+            <xsd:element name="Name" type="ccn:AISCertificationCheckName" />
+            <xsd:element name="ResultType" type="ccrt:AISCertificationCheckResultType" />
+            <xsd:element name="PreparationActions" type="ccpa:AISCertificationCheckPreparationActions" />
+            <xsd:element name="ActualOutcome" type="ccao:AISCertificationCheckActualOutcome" />
+            <xsd:element name="Recommendations" type="ccdr:AISCertificationCheckDiscrepancyRecommendation" minOccurs="0" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckDate" type="ccd:AISCertificationCheckDate" />
+      <xsd:element name="Signature" type="xdsig:XMLDigitalSignature" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

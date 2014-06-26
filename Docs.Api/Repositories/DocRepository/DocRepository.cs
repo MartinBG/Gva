@@ -699,7 +699,7 @@ namespace Docs.Api.Repositories.DocRepository
 
         public void GenerateAccessCode(Doc doc, UserContext userContext)
         {
-            CodeGenerator codeGenerator = new CodeGenerator();
+            CodeGeneratorUtils codeGenerator = new CodeGeneratorUtils();
             codeGenerator.Minimum = 10;
             codeGenerator.Maximum = 10;
             codeGenerator.ConsecutiveCharacters = true;

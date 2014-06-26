@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000030" xmlns="http://ereg.egov.bg/segment/0009-000030" xmlns:pia="http://ereg.egov.bg/segment/0009-000029" xmlns:aubd="http://ereg.egov.bg/segment/0009-000027" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000029" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000027" />
+  <xsd:complexType name="PositionInAdministrationOrAISUser">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Позиция в администрацията или потребител на АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="PositionInAdministration" type="pia:PositionInAdministration" />
+      <xsd:element name="AISUserBasicData" type="aubd:AISUserBasicData" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

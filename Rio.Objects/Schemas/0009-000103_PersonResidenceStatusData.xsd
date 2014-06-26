@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000103" xmlns="http://ereg.egov.bg/segment/0009-000103" xmlns:prsc="http://ereg.egov.bg/value/0008-000213" xmlns:prs="http://ereg.egov.bg/value/0008-000214" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000213" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000214" />
+  <xsd:element name="PersonResidenceStatusData" type="PersonResidenceStatusData" />
+  <xsd:complexType name="PersonResidenceStatusData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за статут на физическо лице по отношение на пребиваването му в Република България</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonResidenceStatuses">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PersonResidenceStatus" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="prsc:PersonResidenceStatusCode" />
+                  <xsd:element name="Name" type="prs:PersonResidenceStatus" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

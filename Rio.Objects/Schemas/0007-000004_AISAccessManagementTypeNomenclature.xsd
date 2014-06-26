@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000004" xmlns="http://ereg.egov.bg/nomenclature/0007-000004" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="AISAccessManagementTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на начините за удостоверяване на правото на достъп на потребител</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000043" />
+      <xsd:enumeration value="0006-000044" />
+      <xsd:enumeration value="0006-000045" />
+      <xsd:enumeration value="0006-000046" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

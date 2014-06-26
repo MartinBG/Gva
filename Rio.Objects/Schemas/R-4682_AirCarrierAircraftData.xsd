@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4682" 
+	xmlns="http://ereg.egov.bg/segment/R-4682" 
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:apsc="http://ereg.egov.bg/value/R-4680"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4680" />
+		
+	<xsd:complexType name="AirCarrierAircraftData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за въздухоплавателно средство, с които ще оперира въздушния превозвач</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="AircraftPassengerSeatsCount" type="apsc:AircraftPassengerSeatsCount" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000129" xmlns="http://ereg.egov.bg/segment/0009-000129" xmlns:rel="http://ereg.egov.bg/value/0008-000154" xmlns:sd="http://ereg.egov.bg/value/0008-000163" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000154" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000163" />
+  <xsd:complexType name="LawfulSuccessionReason">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основание за наследяване по закон</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="Relationship" type="rel:Relationship" />
+        <xsd:element name="Spouse" type="sd:Spouse" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

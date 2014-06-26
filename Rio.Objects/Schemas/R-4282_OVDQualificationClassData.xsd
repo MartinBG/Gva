@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4282" 
+	xmlns="http://ereg.egov.bg/segment/R-4282"
+	xmlns:oqc="http://ereg.egov.bg/segment/R-4252"
+	xmlns:obli="http://ereg.egov.bg/segment/R-4274"
+	xmlns:swagc="http://ereg.egov.bg/segment/R-4280"
+	xmlns:oqcp="http://ereg.egov.bg/segment/R-4260"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4252" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4274" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4280" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4260" />
+	
+	<xsd:complexType name="OVDQualificationClassData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за квалификационен клас за ОВД</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OVDQualificationClass" type="oqc:OVDQualificationClass" minOccurs="0" />
+			<xsd:element name="OVDBodyLocationIndicator" type="obli:OVDBodyLocationIndicator" minOccurs="0" />
+			<xsd:element name="SectorWorkplaceAviationGroundStaff" type="swagc:SectorWorkplaceAviationGroundStaff" minOccurs="0" />
+			<xsd:element name="OVDQualificationClassPermission" type="oqcp:OVDQualificationClassPermission" minOccurs="0" maxOccurs="unbounded" />			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

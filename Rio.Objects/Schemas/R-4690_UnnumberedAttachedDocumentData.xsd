@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4690" 
+	xmlns="http://ereg.egov.bg/segment/R-4690" 
+	xmlns:adt="http://ereg.egov.bg/segment/R-4028"
+	xmlns:adk="http://ereg.egov.bg/segment/R-4034"
+	xmlns:adui="http://ereg.egov.bg/value/0008-000134"
+	xmlns:add="http://ereg.egov.bg/value/R-4688"
+	xmlns:aiad="http://ereg.egov.bg/segment/R-4022"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4028" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4034"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000134" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4688" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4022" />
+
+	<xsd:complexType name="UnnumberedAttachedDocumentData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за неномериран приложен документ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentType" type="adt:AttachedDocumentType" minOccurs="0" />
+			<xsd:element name="AttachedDocumentKind" type="adk:AttachedDocumentKind" minOccurs="0" />
+			<xsd:element name="AttachedDocumentUniqueIdentifier" type="adui:AttachedDocumentUniqueIdentifier" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDescription" type="add:AttachedDocumentDescription" minOccurs="0" />
+			<xsd:element name="AuthorityIssuedAttachedDocument" type="aiad:AuthorityIssuedAttachedDocument" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

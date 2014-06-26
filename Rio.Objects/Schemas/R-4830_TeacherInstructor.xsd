@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4830" 
+	xmlns="http://ereg.egov.bg/segment/R-4830" 
+	xmlns:tin="http://ereg.egov.bg/value/R-4826"
+	xmlns:ticn="http://ereg.egov.bg/value/R-4828"
+	xmlns:c="http://ereg.egov.bg/segment/R-4816"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4826" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4828" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4816" />
+
+	<xsd:complexType name="TeacherInstructor">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Преподавател/инструктор</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TeachersInstructorsNames" type="tin:TeachersInstructorsNames" minOccurs="0" />
+			<xsd:element name="TeachersInstructorsCertificateNumber" type="ticn:TeachersInstructorsCertificateNumber" minOccurs="0" />
+			<xsd:element name="Course" type="c:Course" minOccurs="0"  maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

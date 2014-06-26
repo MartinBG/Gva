@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000021" xmlns="http://ereg.egov.bg/nomenclature/0007-000021" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="LiabilityTypesNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете задължения по ЗМДТ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000143" />
+      <xsd:enumeration value="0006-000144" />
+      <xsd:enumeration value="0006-000145" />
+      <xsd:enumeration value="0006-000146" />
+      <xsd:enumeration value="0006-000147" />
+      <xsd:enumeration value="0006-000148" />
+      <xsd:enumeration value="0006-000149" />
+      <xsd:enumeration value="0006-000150" />
+      <xsd:enumeration value="0006-000151" />
+      <xsd:enumeration value="0006-000157" />
+      <xsd:enumeration value="0006-000152" />
+      <xsd:enumeration value="0006-000153" />
+      <xsd:enumeration value="0006-000154" />
+      <xsd:enumeration value="0006-000155" />
+      <xsd:enumeration value="0006-000156" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

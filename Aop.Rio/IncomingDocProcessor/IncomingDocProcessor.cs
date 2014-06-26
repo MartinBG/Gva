@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Rio.PortalBridge;
-using Common.Rio.RioObjectExtractor;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
-using Aop.Rio.Abbcdn;
 using NLog;
 using Common.Utils;
 using Common.Extensions;
 using System.Data.SqlClient;
 using Common.Blob;
 using System.Configuration;
-using Aop.RioBridge.DataObjects;
-using Common.Rio.PortalBridge.RioObjects;
 using Aop.Api.Models;
 using Autofac.Features.OwnedInstances;
+using Rio.Data.Abbcdn;
+using Rio.Data.RioObjectExtractor;
+using Rio.Data.Utils.RioDocumentParser;
+using Rio.Data.Utils.RioValidator;
+using Rio.Data.DataObjects;
+using Rio.Objects.Enums;
+using Rio.Objects;
 
 namespace Aop.Rio.IncomingDocProcessor
 {
@@ -38,6 +38,7 @@ namespace Aop.Rio.IncomingDocProcessor
         private ICorrespondentRepository correspondentRepository;
         private IRioObjectExtractor rioObjectExtractor;
         private IRioDocumentParser rioDocumentParser;
+        private IRioValidator rioValidator;
 
         public IncomingDocProcessor(
             Func<Owned<IUnitOfWork>> unitOfWorkFactory,
@@ -45,7 +46,8 @@ namespace Aop.Rio.IncomingDocProcessor
             IDocRepository docRepository,
             ICorrespondentRepository correspondentRepository,
             IRioObjectExtractor rioObjectExtractor,
-            IRioDocumentParser rioDocumentParser)
+            IRioDocumentParser rioDocumentParser,
+            IRioValidator rioValidator)
         {
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.unitOfWork = unitOfWork;
@@ -53,6 +55,7 @@ namespace Aop.Rio.IncomingDocProcessor
             this.correspondentRepository = correspondentRepository;
             this.rioObjectExtractor = rioObjectExtractor;
             this.rioDocumentParser = rioDocumentParser;
+            this.rioValidator = rioValidator;
         }
 
         public AbbcdnStorage AbbcdnStorage { get; set; }
@@ -76,12 +79,14 @@ namespace Aop.Rio.IncomingDocProcessor
                     IncomingDocFile incomingDocFile = incomingDoc.IncomingDocFiles.First();
 
                     string xmlContent = incomingDocFile.DocFileContent;
-                    RioApplication rioApplication = rioDocumentParser.XmlDeserializeApplication(xmlContent);
+                    object rioApplication = rioDocumentParser.XmlDeserializeApplication(xmlContent);
+
+                    ApplicationDataDo applicationDataDo = rioObjectExtractor.Extract<ApplicationDataDo>(rioApplication);
 
                     IList<AttachedDocDo> attachedDocuments = rioObjectExtractor.Extract<IList<AttachedDocDo>>(rioApplication);
                     MarkAttachedFilesAsUsed(attachedDocuments);
 
-                    List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = rioDocumentParser.GetValidationDiscrepancies(xmlContent);
+                    List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = GetValidationDiscrepancies(xmlContent, applicationDataDo, attachedDocuments);
                     bool isDocAcknowledged = discrepancies.Count == 0;
 
                     incomingDoc.IncomingDocStatusId = this.unitOfWork.DbContext.Set<IncomingDocStatus>()
@@ -96,23 +101,21 @@ namespace Aop.Rio.IncomingDocProcessor
                         this.unitOfWork.Save();
                     }
 
-                    //string docFileTypeAlias = rioApplication.DocFileTypeAlias;
-                    string docFileTypeAlias = "R-0001";
-                    var docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias == docFileTypeAlias);
-                    var validationErrors = rioDocumentParser.GetValidationErrors(docFileType.DocTypeUri, xmlContent);
+                    //TODO: Implement
+                    //var validationErrors = rioValidator.ValidateRioApplication(null, xmlContent)
+                    List<string> validationErrors = new List<string>();
 
                     Doc rootDoc = null;
-                    if (rioApplication.DocumentURI != null)
+                    if (applicationDataDo.DocumentURI != null)
                     {
-                        string regIndex = rioApplication.DocumentURI.RegisterIndex.PadLeft(4, '0');
-                        int regNumber = int.Parse(rioApplication.DocumentURI.SequenceNumber);
-                        DateTime regdDate = rioApplication.DocumentURI.ReceiptOrSigningDate.Value;
+                        string regIndex = applicationDataDo.DocumentURI.RegisterIndex.PadLeft(4, '0');
+                        int regNumber = int.Parse(applicationDataDo.DocumentURI.SequenceNumber);
+                        DateTime regdDate = applicationDataDo.DocumentURI.ReceiptOrSigningDate.Value;
 
                         rootDoc = this.docRepository.GetDocByRegUri(regIndex, regNumber, regdDate);
                     }
 
-                    //string electronicServiceFileTypeUri = String.Format("{0}-{1}", rioApplication.DocumentTypeURI.RegisterIndex, rioApplication.DocumentTypeURI.BatchNumber);
-                    string electronicServiceFileTypeUri = "0010-aop";
+                    string electronicServiceFileTypeUri = String.Format("{0}-{1}", applicationDataDo.DocumentTypeURI.RegisterIndex, applicationDataDo.DocumentTypeURI.BatchNumber);
                     int docTypeId = this.unitOfWork.DbContext.Set<DocType>().Single(e => e.ElectronicServiceFileTypeUri == electronicServiceFileTypeUri).DocTypeId;
 
                     //Initial Doc
@@ -160,8 +163,9 @@ namespace Aop.Rio.IncomingDocProcessor
 
                     DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
 
-                    DateTime? applicationSigningTime = rioApplication.ApplicationSigningTime;
-                    DocFile initialDocFile = CreateInitialDocFile(initialDoc, fileKey, docFileType.DocFileTypeId, publicDocFileKind.DocFileKindId, applicationSigningTime);
+                    var docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias == applicationDataDo.DocFileTypeAlias);
+
+                    DocFile initialDocFile = CreateInitialDocFile(initialDoc, fileKey, docFileType.DocFileTypeId, publicDocFileKind.DocFileKindId, applicationDataDo.ApplicationSigningTime);
                     this.unitOfWork.DbContext.Set<DocFile>().Add(initialDocFile);
 
                     //Add attached application files as DocFiles
@@ -185,7 +189,7 @@ namespace Aop.Rio.IncomingDocProcessor
 
                     this.unitOfWork.Save();
 
-                    if (rioApplication.SendApplicationWithReceiptAcknowledgedMessage)
+                    if (applicationDataDo.SendConfirmationEmail)
                     {
                         AddReceiveConfirmationEmailRecord(isDocAcknowledged, systemUser, docCorrespondents);
                     }
@@ -216,6 +220,61 @@ namespace Aop.Rio.IncomingDocProcessor
             }
         }
 
+        public List<ElectronicDocumentDiscrepancyTypeNomenclature> GetValidationDiscrepancies(string xmlContent, ApplicationDataDo applicationDataDo, IList<AttachedDocDo> attachedDocuments)
+        {
+            List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies = new List<ElectronicDocumentDiscrepancyTypeNomenclature>();
+
+            string[] supportedFileFormats = { "fed", "doc", "docx" };
+            RioDocumentMetadata documentMetaData = rioDocumentParser.GetDocumentMetadataFromXml(xmlContent);
+
+            if (documentMetaData.IsZeuService)
+            {
+                if (!rioValidator.CheckEmail(applicationDataDo.Email))
+                {
+                    discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.NoEmail);
+                }
+            }
+
+            if (!rioValidator.CheckDocumentSize(xmlContent))
+            {
+                discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
+            }
+
+            if (!rioValidator.CheckSignatureValidity(xmlContent, documentMetaData.SignatureXPath, documentMetaData.SignatureXPathNamespaces))
+            {
+                discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
+            }
+
+            if (!rioValidator.CheckSupportedFileFormats(attachedDocuments.Select(e => e.FileName).ToList(), supportedFileFormats))
+            {
+                discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            }
+
+            //TODO: Implement
+            //if (!rioValidator.CheckValidXmlSchema(xmlContent, GetSchemasPath()))
+            //{
+            //    discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectFormat);
+            //}
+
+            //TODO: Implement
+            //if (!skipCertificateChainValidation) //take it from Web.config
+            //{
+            //    var revocationErrors = rioValidator.CheckCertificateValidity(xmlContent, applicationDataDo.ElectronicServiceApplicant, documentMetaData.SignatureXPath, documentMetaData.SignatureXPathNamespaces);
+            //    if (revocationErrors != null && revocationErrors.Count() > 0)
+            //    {
+            //        discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
+            //    }
+            //}
+
+            //TODO: Implement
+            //if (!rioValidator.CheckForVirus(xmlContent, null, 0))
+            //{
+            //    discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+            //}
+
+            return discrepancies;
+        }
+
         //TODO
         private void MarkAttachedFilesAsUsed(IList<AttachedDocDo> attachedDocuments)
         {
@@ -228,7 +287,7 @@ namespace Aop.Rio.IncomingDocProcessor
             }
         }
 
-        private List<Correspondent> GetDocumentCorrespondents(RioApplication rioApplication)
+        private List<Correspondent> GetDocumentCorrespondents(object rioApplication)
         {
             CorrespondentDo correspondentDo = rioObjectExtractor.Extract<CorrespondentDo>(rioApplication);
 
@@ -492,7 +551,7 @@ namespace Aop.Rio.IncomingDocProcessor
 
         private string GenerateAccessCode()
         {
-            CodeGenerator codeGenerator = new CodeGenerator();
+            CodeGeneratorUtils codeGenerator = new CodeGeneratorUtils();
             codeGenerator.Minimum = 10;
             codeGenerator.Maximum = 10;
             codeGenerator.ConsecutiveCharacters = true;

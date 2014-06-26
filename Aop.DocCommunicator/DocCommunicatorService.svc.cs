@@ -4,38 +4,21 @@ using Docs.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using System.Data.Entity;
 using System.IO;
 using Common.Blob;
 using Common.Utils;
-using Components.EmsUtils;
-using Components.DocumentSerializer;
-using Components.VirusScanEngine;
-using Components.XmlSchemaValidator;
-using Components.DocumentSigner;
-using Components.PortalConfigurationManager;
-using Components.DevelopmentLogger;
 using System.Data.SqlClient;
 using System.Configuration;
-using Components.AisDocumentCommunicator;
+using Rio.Data.Utils.RioDocumentParser;
+using Rio.Data.ServiceContracts.DocCommunicator;
 
 namespace Aop.DocCommunicator
 {
-    public class DocCommunicatorService : Components.AisDocumentCommunicator.IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAISDocumentServiceViewer, IDisposable
     {
         private IUnitOfWork unitOfWork;
-
-        private IDocumentSerializer documentSerializer;
-        private IVirusScanEngine virusScanEngine;
-        private IXmlSchemaValidator xmlSchemaValidator;
-        private IDocumentSigner documentSigner;
-        private IPortalConfigurationManager portalConfigurationManager;
-        private IDevelopmentLogger developmentLogger;
-        private IEmsUtils emsUtils;
+        private IRioDocumentParser rioDocumentParser;
 
         public DocCommunicatorService()
         {
@@ -43,15 +26,8 @@ namespace Aop.DocCommunicator
             configurations.Add(new DocsDbConfiguration());
             configurations.Add(new CommonDbConfiguration());
 
-            this.unitOfWork = new UnitOfWork(configurations);
-
-            this.documentSerializer = new DocumentSerializerImpl();
-            this.virusScanEngine = new VirusScanEngineImpl();
-            this.portalConfigurationManager = new PortalConfigurationManagerImpl();
-            this.developmentLogger = new EventLogDevelopmentLoggerImpl(portalConfigurationManager);
-            this.xmlSchemaValidator = new XmlSchemaValidatorImpl(developmentLogger);
-            this.documentSigner = new DocumentSignerImpl(portalConfigurationManager, documentSerializer);
-            this.emsUtils = new EmsUtilsAop(documentSerializer, xmlSchemaValidator, virusScanEngine, documentSigner);
+            this.unitOfWork = new UnitOfWork(configurations, Enumerable.Empty<IDbContextInitializer>());
+            this.rioDocumentParser = new RioDocumentParser();
         }
 
         public DocumentInfo GetDocumentByTicketId(string ticketId)
@@ -66,7 +42,7 @@ namespace Aop.DocCommunicator
 
             string xmlContent = Utf8Utils.GetString(fileContent);
 
-            var documentMetaData = emsUtils.GetDocumentMetadataFromXml(xmlContent);
+            var documentMetaData = rioDocumentParser.GetDocumentMetadataFromXml(xmlContent);
 
             string signatureXPath = documentMetaData.SignatureXPath;
             Dictionary<string, string> signatureXPathNamespaces = new Dictionary<string, string>(documentMetaData.SignatureXPathNamespaces);
@@ -132,7 +108,7 @@ namespace Aop.DocCommunicator
 
                 case NomenclatureType.OperationalProgramAop:
                     {
-                        var nom = new RioObjects.Enums.OperationalProgramNomenclature();
+                        var nom = new Rio.Objects.Enums.OperationalProgramNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
@@ -141,7 +117,7 @@ namespace Aop.DocCommunicator
 
                 default:
                     {
-                        var nom = new RioObjects.Enums.DummyNomenclature();
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
                         foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Type = NomenclatureType.Dummy, Value = item.Value, Text = item.Text });

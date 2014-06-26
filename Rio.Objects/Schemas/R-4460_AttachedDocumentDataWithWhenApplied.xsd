@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4460" 
+	xmlns="http://ereg.egov.bg/segment/R-4460" 
+	xmlns:daf="http://ereg.egov.bg/value/R-4456"
+	xmlns:fi="http://ereg.egov.bg/value/R-4458"
+	xmlns:add="http://ereg.egov.bg/segment/R-4040"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4456" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4458" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4040" />
+
+	<xsd:complexType name="AttachedDocumentDataWithWhenApplied">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за приложен документ, с указание кога документът ще бъде приложен</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DocumentAppliedFlag" type="daf:DocumentAppliedFlag" minOccurs="0" />
+			<xsd:element name="FlagIdentification" type="fi:FlagIdentification" minOccurs="0" />
+			<xsd:element name="AttachedDocumentData" type="add:AttachedDocumentData" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

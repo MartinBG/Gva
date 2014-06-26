@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000245" xmlns="http://ereg.egov.bg/value/0008-000245" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="LiabilityInterestSize">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Размер на лихвата върху задължение по ЗМДТ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

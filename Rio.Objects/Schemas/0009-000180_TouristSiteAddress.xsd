@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000180"
+        xmlns="http://ereg.egov.bg/segment/0009-000180"
+        xmlns:dc="http://ereg.egov.bg/value/0008-000200"
+        xmlns:dn="http://ereg.egov.bg/value/0008-000201"
+        xmlns:mc="http://ereg.egov.bg/value/0008-000209"
+        xmlns:mn="http://ereg.egov.bg/value/0008-000202"
+        xmlns:sc="http://ereg.egov.bg/value/0008-000205"
+        xmlns:sn="http://ereg.egov.bg/value/0008-000206"
+        xmlns:rc="http://ereg.egov.bg/value/0008-000226"
+        xmlns:sbs="http://ereg.egov.bg/value/0008-000227"
+        xmlns:sbsn="http://ereg.egov.bg/value/0008-000228"
+        xmlns:ema="http://ereg.egov.bg/value/0008-000229"
+        xmlns:e="http://ereg.egov.bg/value/0008-000237"
+        xmlns:fa="http://ereg.egov.bg/value/0008-000238"
+        xmlns:ap="http://ereg.egov.bg/value/0008-000239"
+        xmlns:tsl="http://ereg.egov.bg/value/0008-000259"
+		xmlns:ac="http://ereg.egov.bg/value/0008-000191"
+		xmlns:an="http://ereg.egov.bg/value/0008-000192"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000200"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000201"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000209"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000202"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000205"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000206"/>
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000226" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000227" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000228" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000229" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000237" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000238" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000239" />
+        <xsd:import namespace="http://ereg.egov.bg/value/0008-000259" />
+		<xsd:import namespace="http://ereg.egov.bg/value/0008-000191"/>
+		<xsd:import namespace="http://ereg.egov.bg/value/0008-000192"/>
+
+    <xsd:complexType name="TouristSiteAddress">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Адрес на туристически обект</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="DistrictCode" type="dc:DistrictCode" minOccurs="0"/>
+            <xsd:element name="DistrictName" type="dn:DistrictName" minOccurs="0"/>
+            <xsd:element name="MunicipalityCode" type="mc:MunicipalityCode" minOccurs="0"/>
+            <xsd:element name="MunicipalityName" type="mn:MunicipalityName" minOccurs="0"/>
+			<xsd:element name="SettlementCode" type="sc:SettlementCode" minOccurs="0"/>
+			<xsd:element name="SettlementName" type="sn:SettlementName" minOccurs="0"/>
+			<xsd:element name="AreaCode" type="ac:AreaCode" minOccurs="0"/>
+			<xsd:element name="AreaName" type="an:AreaName" minOccurs="0"/>
+            <xsd:choice minOccurs="0">
+                <xsd:element name ="TouristSiteUrbanLocation">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ResidentialComplex" type="rc:ResidentialComplex" minOccurs="0"/>
+                            <xsd:element name="StreetBoulevardSquare" type="sbs:StreetBoulevardSquare" minOccurs="0"/>
+                            <xsd:element name="StreetBoulevardSquareNumber" type="sbsn:StreetBoulevardSquareNumber" minOccurs="0"/>
+                            <xsd:element name="ApartmentBuildingNumber" type="ema:ApartmentBuildingNumber" minOccurs="0"/>
+                            <xsd:element name="Entrance" type="e:EntityManagementEntrance" minOccurs="0"/>
+                            <xsd:element name="Floor" type="fa:EntityManagementFloor" minOccurs="0"/>
+                            <xsd:element name="Apartment" type="ap:EntityManagementApartment" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="TouristSiteLocation" type="tsl:TouristSiteLocation"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

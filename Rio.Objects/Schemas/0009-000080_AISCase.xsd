@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000080" xmlns="http://ereg.egov.bg/segment/0009-000080" xmlns:acid="http://ereg.egov.bg/value/0008-000096" xmlns:acn="http://ereg.egov.bg/value/0008-000071" xmlns:acd="http://ereg.egov.bg/value/0008-000072" xmlns:acu="http://ereg.egov.bg/segment/0009-000073" xmlns:acai="http://ereg.egov.bg/value/0008-000037" xmlns:acos="http://ereg.egov.bg/segment/0009-000082" xmlns:acis="http://ereg.egov.bg/segment/0009-000083" xmlns:accs="http://ereg.egov.bg/segment/0009-000084" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000096" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000071" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000072" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000073" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000037" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000082" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000083" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000084" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:complexType name="AISCase">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Преписка</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ID" type="acid:AISCaseID" />
+      <xsd:element name="Name" type="acn:AISCaseName" />
+      <xsd:element name="Description" type="acd:AISCaseDescription" minOccurs="0" />
+      <xsd:element name="URI" type="acu:AISCaseURI" />
+      <xsd:element name="AccessIdentifier" type="acai:AISCaseAccessIdentifier" minOccurs="0" />
+      <xsd:element name="OfficialSection" type="acos:AISCaseOfficialSection" />
+      <xsd:element name="InternalSection" type="acis:AISCaseInternalSection" />
+      <xsd:element name="ControlSection" type="accs:AISCaseControlSection" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

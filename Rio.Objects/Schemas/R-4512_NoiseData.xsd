@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4512" 
+	xmlns="http://ereg.egov.bg/segment/R-4512" 
+	xmlns:ncam="http://ereg.egov.bg/value/R-4498"
+	xmlns:san="http://ereg.egov.bg/value/R-4500"
+	xmlns:nla="http://ereg.egov.bg/value/R-4502"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4498" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4500" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4502" />
+
+	<xsd:complexType name="NoiseData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за авиационен шум</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="NoiseCertificationAdditionalModifications" type="ncam:NoiseCertificationAdditionalModifications" minOccurs="0" />
+			<xsd:element name="StandardAircraftNoise" type="san:StandardAircraftNoise" minOccurs="0" />
+			<xsd:element name="NoiseLevelSide" type="nla:NoiseLevelAircraft" minOccurs="0" />
+			<xsd:element name="NoiseLevelApproach" type="nla:NoiseLevelAircraft" minOccurs="0" />
+			<xsd:element name="NoiseLevelFlight" type="nla:NoiseLevelAircraft" minOccurs="0" />
+			<xsd:element name="NoiseLevelFlightOver" type="nla:NoiseLevelAircraft" minOccurs="0" />
+			<xsd:element name="NoiseLevelTakeOff" type="nla:NoiseLevelAircraft" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

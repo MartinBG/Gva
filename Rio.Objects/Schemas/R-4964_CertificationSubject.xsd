@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4964" 
+	xmlns="http://ereg.egov.bg/segment/R-4964" 
+	xmlns:csc="http://ereg.egov.bg/value/R-4960"
+	xmlns:csn="http://ereg.egov.bg/value/R-4962"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4960" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4962" />
+
+	<xsd:complexType name="CertificationSubject">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Обект на сертифициране</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CertificationSubjectCode" type="csc:CertificationSubjectCode" minOccurs="0" />
+			<xsd:element name="CertificationSubjectName" type="csn:CertificationSubjectName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

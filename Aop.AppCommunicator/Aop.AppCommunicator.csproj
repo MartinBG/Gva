@@ -143,13 +143,13 @@
       <Project>{7cb724dd-0245-4368-a15e-ac2326a38c26}</Project>
       <Name>Docs.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Common\Components\Components.csproj">
-      <Project>{13c30155-3d16-4fec-9014-3612618c74e4}</Project>
-      <Name>Components</Name>
+    <ProjectReference Include="..\Rio.Data\Rio.Data.csproj">
+      <Project>{ce03cc29-d823-4e37-8c22-608fbed01848}</Project>
+      <Name>Rio.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Portal\Common\RioObjects\RioObjects.csproj">
-      <Project>{998d3378-5555-4ec4-946b-def904da346d}</Project>
-      <Name>RioObjects</Name>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4048" 
+xmlns="http://ereg.egov.bg/segment/R-4048" 
+xmlns:actc="http://ereg.egov.bg/value/R-4042" 
+xmlns:actn="http://ereg.egov.bg/value/R-4044" 
+xmlns:actna="http://ereg.egov.bg/value/R-4046" 
+xmlns:gldrf="http://ereg.egov.bg/segment/R-4000" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4042" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4044"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4046" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4000" />
+	<xsd:complexType name="ASCertificateType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид свидетелство за правоспособност на авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ASCertificateTypeCode" type="actc:ASCertificateTypeCode" minOccurs="0" />
+			<xsd:element name="ASCertificateTypeName" type="actn:ASCertificateTypeName" minOccurs="0" />
+			<xsd:element name="ASCertificateTypeNameAlt" type="actna:ASCertificateTypeNameAlt" minOccurs="0" />
+			<xsd:element name="GroupLicenseDependingRequirementsFiling" type="gldrf:GroupLicenseDependingRequirementsFiling" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

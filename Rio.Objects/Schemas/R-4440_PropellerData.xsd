@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4440" 
+	xmlns="http://ereg.egov.bg/segment/R-4440" 
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:pmp="http://ereg.egov.bg/value/R-4426"
+	xmlns:pmd="http://ereg.egov.bg/value/R-4428"
+	xmlns:pt="http://ereg.egov.bg/segment/R-4434"
+	xmlns:asn="http://ereg.egov.bg/value/R-4334"
+	xmlns:pu="http://ereg.egov.bg/value/R-4438"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4426" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4428" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4434" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4438" />
+
+	<xsd:complexType name="PropellerData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за витло</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="PropellerManufacturePlace" type="pmp:PropellerManufacturePlace" minOccurs="0" />
+			<xsd:element name="PropellerManufactureDate" type="pmd:PropellerManufactureDate" minOccurs="0" />
+			<xsd:element name="PropellerType" type="pt:PropellerType" minOccurs="0" />
+			<xsd:element name="PropellerSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+			<xsd:element name="PropellerUsage" type="pu:PropellerUsage" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

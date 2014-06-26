@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000074" xmlns="http://ereg.egov.bg/segment/0009-000074" xmlns:auoau="http://ereg.egov.bg/segment/0009-000028" xmlns:tssit="http://ereg.egov.bg/value/0008-000097" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000028" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000097" />
+  <xsd:complexType name="CaseSectionInclusionData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за включване в раздел на преписка</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="IncludedBy" type="auoau:AISUserOrAISURI" />
+      <xsd:element name="InclusionTime" type="tssit:CaseSectionInclusionTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

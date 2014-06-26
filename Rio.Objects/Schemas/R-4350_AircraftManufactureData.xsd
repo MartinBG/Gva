@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4350" 
+	xmlns="http://ereg.egov.bg/segment/R-4350" 
+	xmlns:mcd="http://ereg.egov.bg/segment/R-3988"
+	xmlns:amc="http://ereg.egov.bg/segment/R-4322" 
+	xmlns:amp="http://ereg.egov.bg/value/R-4328"
+	xmlns:amd="http://ereg.egov.bg/value/R-4330"
+	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+	xmlns:as="http://ereg.egov.bg/value/R-4332"
+	xmlns:asn="http://ereg.egov.bg/value/R-4334"
+	xmlns:au="http://ereg.egov.bg/value/R-4336"
+	xmlns:clr="http://ereg.egov.bg/segment/R-4324"
+	xmlns:aot="http://ereg.egov.bg/segment/R-4318"
+	xmlns:amtow="http://ereg.egov.bg/value/R-4338"
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:asc="http://ereg.egov.bg/value/R-4342"
+	xmlns:fcn="http://ereg.egov.bg/value/R-4344"
+	xmlns:fcctn="http://ereg.egov.bg/value/R-4346"
+	xmlns:fcci="http://ereg.egov.bg/segment/R-4326"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3988" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4322" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4328" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4330" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4332" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4336" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4324" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4318" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4338" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4342" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4344" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4346" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4326" />
+
+	<xsd:complexType name="AircraftManufactureData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Производствени данни за въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ManufacturerContactData" type="mcd:ManufacturerContactData" minOccurs="0" />
+			<xsd:element name="AircraftManufacturerCountry" type="amc:AircraftManufacturerCountry" minOccurs="0" />
+			<xsd:element name="AircraftManufacturePlace" type="amp:AircraftManufacturePlace" minOccurs="0" />
+			<xsd:element name="AircraftManufactureDate" type="amd:AircraftManufactureDate" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="AircraftSeries" type="as:AircraftSeries" minOccurs="0" />
+			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+			<xsd:element name="AircraftUnused" type="au:AircraftUnused" minOccurs="0" />
+			<xsd:element name="CountryLastRegistration" type="clr:CountryLastRegistration" minOccurs="0" />
+			<xsd:element name="AircraftOperationType" type="aot:AircraftOperationType" minOccurs="0" />
+			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
+			<xsd:element name="CurrentAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="DesiredAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="AircraftStandardsCertified" type="asc:AircraftStandardsCertified" minOccurs="0" />
+			<xsd:element name="FlightCertificateNumber" type="fcn:FlightCertificateNumber" minOccurs="0" />
+			<xsd:element name="FlightCertificateCertificationTableNumber" type="fcctn:FlightCertificateCertificationTableNumber" minOccurs="0" />
+			<xsd:element name="FlightCertificateCountryIssuer" type="fcci:FlightCertificateCountryIssuer" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

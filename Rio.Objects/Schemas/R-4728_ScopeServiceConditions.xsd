@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4728" 
+	xmlns="http://ereg.egov.bg/segment/R-4728" 
+	xmlns:san="http://ereg.egov.bg/value/R-4704"
+	xmlns:sasf="http://ereg.egov.bg/value/R-4706"
+	xmlns:psk="http://ereg.egov.bg/segment/R-4712"
+	xmlns:psp="http://ereg.egov.bg/segment/R-4718"
+	xmlns:pss="http://ereg.egov.bg/segment/R-4724"
+	xmlns:cap="http://ereg.egov.bg/value/R-4726"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4704" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4706" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4712" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4718" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4724" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4726" />
+
+	<xsd:complexType name="ScopeServiceConditions">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Обхват на обслужване и условия, предложени от заявителя</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ServiceAreaName" type="san:ServiceAreaName" minOccurs="0" />
+			<xsd:element name="ServiceAreaSelectedFlag" type="sasf:ServiceAreaSelectedFlag" minOccurs="0" />
+			<xsd:element name="ProvidingServiceKind" type="psk:ProvidingServiceKind" minOccurs="0" />
+			<xsd:element name="ProvidingServicePart" type="psp:ProvidingServicePart" minOccurs="0" />
+			<xsd:element name="ProvidingServiceSubpart" type="pss:ProvidingServiceSubpart" minOccurs="0" />
+			<xsd:element name="ConditionsApplicantProposed" type="cap:ConditionsApplicantProposed" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

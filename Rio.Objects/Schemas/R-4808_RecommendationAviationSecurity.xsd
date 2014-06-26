@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4808" 
+	xmlns="http://ereg.egov.bg/segment/R-4808" 
+	xmlns:rn="http://ereg.egov.bg/value/R-4804"
+	xmlns:rp="http://ereg.egov.bg/value/R-4806"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4804" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4806" />
+
+	<xsd:complexType name="RecommendationAviationSecurity">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Препоръка за авиационна сигурност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="RecommendingNames" type="rn:RecommendingNames" minOccurs="0" />
+			<xsd:element name="RecommendingPosition" type="rp:RecommendingPosition" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

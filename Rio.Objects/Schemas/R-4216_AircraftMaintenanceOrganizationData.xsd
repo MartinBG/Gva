@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4216" 
+	xmlns="http://ereg.egov.bg/segment/R-4216" 
+	xmlns:amoan="http://ereg.egov.bg/value/R-4208"
+	xmlns:en="http://ereg.egov.bg/value/0008-000029"
+	xmlns:r="http://ereg.egov.bg/segment/0009-000142"
+	xmlns:ema="http://ereg.egov.bg/segment/0009-000172"
+	xmlns:pnd="http://ereg.egov.bg/value/R-4210"
+	xmlns:fnd="http://ereg.egov.bg/value/R-4212"
+	xmlns:ea="http://ereg.egov.bg/value/R-4214"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4208" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000029" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000172" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4210" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4212" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+		
+	<xsd:complexType name="AircraftMaintenanceOrganizationData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за организация за техническо обслужване на въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftMaintenanceOrganizationApprovalNumber" type="amoan:AircraftMaintenanceOrganizationApprovalNumber" minOccurs="0" />
+			<xsd:element name="EntityName" type="en:EntityName" minOccurs="0" />
+			<xsd:element name="Residence" type="r:Residence" minOccurs="0" />
+			<xsd:element name="EntityManagementAddress" type="ema:EntityManagementAddress" minOccurs="0" />
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" minOccurs="0" />
+			<xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" minOccurs="0" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

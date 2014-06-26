@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4550" 
+	xmlns="http://ereg.egov.bg/segment/R-4550"
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:mn="http://ereg.egov.bg/value/R-3986"
+	xmlns:maatc="http://ereg.egov.bg/segment/R-4370"
+	xmlns:asnt="http://ereg.egov.bg/segment/R-4546"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4546" />
+
+	<xsd:complexType name="AircraftDescriptionExportCertificate">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Описание на ВС за експортно удостоверение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />			
+			<xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+			<xsd:element name="AircraftSerialNumberTTSN" type="asnt:AircraftSerialNumberTTSN" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4158" 
+	xmlns="http://ereg.egov.bg/segment/R-4158" 
+	xmlns:atc="http://ereg.egov.bg/value/R-4154"
+	xmlns:atn="http://ereg.egov.bg/value/R-4156" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4154" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4156"  />
+	
+	<xsd:complexType name="AircraftType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип въздухоплавателно средство</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftTypeCode" type="atc:AircraftTypeCode" minOccurs="0" />
+			<xsd:element name="AircraftTypeName" type="atn:AircraftTypeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

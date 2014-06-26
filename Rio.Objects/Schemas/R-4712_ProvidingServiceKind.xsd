@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4712" 
+	xmlns="http://ereg.egov.bg/segment/R-4712" 
+	xmlns:pskc="http://ereg.egov.bg/value/R-4708"
+	xmlns:pskn="http://ereg.egov.bg/value/R-4710"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4708" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4710" />
+
+	<xsd:complexType name="ProvidingServiceKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид предоставяне обслужване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ProvidingServiceKindCode" type="pskc:ProvidingServiceKindCode" minOccurs="0" />
+			<xsd:element name="ProvidingServiceKindName" type="pskn:ProvidingServiceKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

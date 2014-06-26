@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000046" xmlns="http://ereg.egov.bg/segment/0009-000046" xmlns:du="http://ereg.egov.bg/segment/0009-000001" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:complexType name="InitiatingDocumentURI">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">УРИ на иницииращ документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="du:DocumentURI" />
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

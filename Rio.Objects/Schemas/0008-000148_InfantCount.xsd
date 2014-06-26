@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000148" xmlns="http://ereg.egov.bg/value/0008-000148" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="InfantCount">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Брой на малолетните деца, чиито родител е заявил промяна на постоянния си адрес</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:integer">
+      <xsd:minInclusive value="0" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

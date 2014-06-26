@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000106" xmlns="http://ereg.egov.bg/segment/0009-000106" xmlns:drsd="http://ereg.egov.bg/value/0008-000004" xmlns:du="http://ereg.egov.bg/segment/0009-000001" xmlns:espbd="http://ereg.egov.bg/segment/0009-000002" xmlns:dtn="http://ereg.egov.bg/value/0008-000007" xmlns:dtu="http://ereg.egov.bg/segment/0009-000003" xmlns:xds="http://ereg.egov.bg/segment/0009-000004" xmlns:pn="http://ereg.egov.bg/segment/0009-000005" xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" xmlns:pa="http://ereg.egov.bg/segment/0009-000094" xmlns:crbd="http://ereg.egov.bg/segment/0009-000135" xmlns:mal="http://ereg.egov.bg/segment/0009-000143" xmlns:prcd="http://ereg.egov.bg/value/0008-000137" xmlns:idd="http://ereg.egov.bg/segment/0009-000099" xmlns:msc="http://ereg.egov.bg/value/0008-000210" xmlns:ms="http://ereg.egov.bg/value/0008-000211" xmlns:prsc="http://ereg.egov.bg/value/0008-000213" xmlns:prs="http://ereg.egov.bg/value/0008-000214" xmlns:elc="http://ereg.egov.bg/value/0008-000215" xmlns:el="http://ereg.egov.bg/value/0008-000216" xmlns:rpc="http://ereg.egov.bg/value/0008-000217" xmlns:rp="http://ereg.egov.bg/value/0008-000218" xmlns:rpec="http://ereg.egov.bg/value/0008-000219" xmlns:rpe="http://ereg.egov.bg/value/0008-000220" xmlns:mc="http://ereg.egov.bg/segment/0009-000162" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000004" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000004" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000094" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000135" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000137" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000099" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000210" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000211" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000213" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000214" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000215" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000216" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000217" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000218" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000219" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000220" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000162" />
+  <xsd:element name="ChangeCurrentAddressMessage" type="ChangeCurrentAddressMessage" />
+  <xsd:complexType name="ChangeCurrentAddressMessage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Съобщение за промяна на настоящ адрес</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" />
+      <xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" />
+      <xsd:element name="DocumentURI" type="du:DocumentURI" />
+      <xsd:element name="DocumentReceiptOrSigningDate" type="drsd:DocumentReceiptOrSigningDate" />
+      <xsd:element name="ElectronicServiceProviderBasicData" type="espbd:ElectronicServiceProviderBasicData" />
+      <xsd:element name="MunicipalityAdministrationLocation" type="mal:MunicipalityAdministrationLocation" />
+      <xsd:element name="CitizenshipRegistrationBasicData" type="crbd:CitizenshipRegistrationBasicData" />
+      <xsd:element name="IdentityDocumentBasicData" type="idd:IdentityDocumentBasicData" />
+      <xsd:element name="MaritalStatusCode" type="msc:MaritalStatusCode" />
+      <xsd:element name="MaritalStatus" type="ms:MaritalStatus" />
+      <xsd:element name="NewCurrentAddress" type="pa:PersonAddress" />
+      <xsd:element name="PopulationRegisterCircumstanceDate" type="prcd:PopulationRegisterCircumstanceDate" />
+      <xsd:element name="PersonResidenceStatusCode" type="prsc:PersonResidenceStatusCode" />
+      <xsd:element name="PersonResidenceStatus" type="prs:PersonResidenceStatus" />
+      <xsd:element name="PreviousCurrentAddress" type="pa:PersonAddress" />
+      <xsd:element name="PermanentAddress" type="pa:PersonAddress" />
+      <xsd:element name="EducationLevelCode" type="elc:EducationLevelCode" />
+      <xsd:element name="EducationLevel" type="el:EducationLevel" />
+      <xsd:element name="ResidencePurposeCode" type="rpc:ResidencePurposeCode" />
+      <xsd:element name="ResidencePurpose" type="rp:ResidencePurpose" />
+      <xsd:element name="ResidencePeriodCode" type="rpec:ResidencePeriodCode" />
+      <xsd:element name="ResidencePeriod" type="rpe:ResidencePeriod" />
+      <xsd:element name="MinorChildren" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="MinorChild" type="mc:MinorChild" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Official">
+        <xsd:complexType>
+          <xsd:choice>
+            <xsd:element name="PersonNames" type="pn:PersonNames" />
+            <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" />
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="XMLDigitalSignature" type="xds:XMLDigitalSignature" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

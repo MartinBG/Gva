@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5024" 
+	xmlns="http://ereg.egov.bg/segment/R-5024" 
+	xmlns:tc="http://ereg.egov.bg/segment/R-5022"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5022" />
+
+	<xsd:complexType name="TechnicalContracts">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Договор за ТО</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TechnicalContract" type="tc:TechnicalContract" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

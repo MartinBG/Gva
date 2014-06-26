@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000169" xmlns="http://ereg.egov.bg/segment/0009-000169" xmlns:aa="http://ereg.egov.bg/segment/0009-000140" xmlns:cbfc="http://ereg.egov.bg/value/0008-000167" xmlns:nbbfc="http://ereg.egov.bg/value/0008-000168" xmlns:sbfc="http://ereg.egov.bg/value/0008-000169" xmlns:wbfc="http://ereg.egov.bg/value/0008-000170" xmlns:ncbfc="http://ereg.egov.bg/value/0008-000171" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:ad="http://ereg.egov.bg/segment/0009-000139" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000140" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000167" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000168" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000169" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000170" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000171" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+  <xsd:element name="BeeFamilyRegistrationApplication" type="BeeFamilyRegistrationApplication" />
+  <xsd:complexType name="BeeFamilyRegistrationApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявление за регистрация на пчелни семейства</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ApiaryAddress" type="aa:ApiaryAddress" minOccurs="0" />
+      <xsd:element name="CultivatedBeeFamiliesCount" type="cbfc:CultivatedBeeFamiliesCount" minOccurs="0" />
+      <xsd:element name="NewlyBoughtBeeFamiliesCount" type="nbbfc:NewlyBoughtBeeFamiliesCount" minOccurs="0" />
+      <xsd:element name="SoldBeeFamiliesCount" type="sbfc:SoldBeeFamiliesCount" minOccurs="0" />
+      <xsd:element name="WinteredBeeFamiliesCount" type="wbfc:WinteredBeeFamiliesCount" minOccurs="0" />
+      <xsd:element name="NewlyCreatedBeeFamiliesCount" type="ncbfc:NewlyCreatedBeeFamiliesCount" minOccurs="0" />
+      <xsd:element name="AttachedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AttachedDocument" type="ad:AttachedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

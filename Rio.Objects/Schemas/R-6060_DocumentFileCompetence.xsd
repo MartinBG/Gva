@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6060" 
+	xmlns="http://ereg.egov.bg/segment/R-6060"
+	xmlns:td="http://ereg.egov.bg/segment/0009-000020"
+	xmlns:sdfc="http://ereg.egov.bg/segment/R-6058"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000020" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-6058" />
+	
+	<xsd:complexType name="DocumentFileCompetence">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Документ, съдържащ се в преписка, която се препраща по компетентност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="TransferredDocument" type="td:TransferredDocument" />
+			<xsd:element name="StructuredDocumentFileCompetence" type="sdfc:StructuredDocumentFileCompetence" />
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:schema>

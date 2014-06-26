@@ -16,16 +16,14 @@ using Common.Blob;
 using Common.Data;
 using Common.Extensions;
 using Common.Jobs;
-using Common.Rio.PortalBridge;
-using Common.Rio.RioObjectExtractor;
 using Common.Tests;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
-using Gva.Rio.Abbcdn;
 using Gva.Rio.IncomingDocProcessor;
 using NLog;
+using Rio.Data.Abbcdn;
 
 namespace Gva.Rio.Jobs
 {

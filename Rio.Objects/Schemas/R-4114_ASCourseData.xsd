@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4114" 
+xmlns="http://ereg.egov.bg/segment/R-4114" 
+xmlns:ace="http://ereg.egov.bg/segment/R-4104" 
+xmlns:acp="http://ereg.egov.bg/segment/R-4112" 
+xmlns:hfest="http://ereg.egov.bg/value/R-3992" 
+xmlns:ato="http://ereg.egov.bg/segment/R-4110" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4104" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4112" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4110" />
+	<xsd:complexType name="ASCourseData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за провед курс на обучение на авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ASCourseExam" type="ace:ASCourseExam" minOccurs="0" />
+			<xsd:element name="ASCoursePeriod" type="acp:ASCoursePeriod" minOccurs="0" />
+			<xsd:element name="ASTeoreticalCourseHours" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+			<xsd:element name="ASFlightCourseHours" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+			<xsd:element name="ATO" type="ato:ATO" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

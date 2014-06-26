@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4590" 
+	xmlns="http://ereg.egov.bg/segment/R-4590"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:at="http://ereg.egov.bg/value/R-4580"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:febd="http://ereg.egov.bg/segment/0009-000014"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:ahd="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
+	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+	xmlns:aad="http://ereg.egov.bg/segment/R-4586"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:addc="http://ereg.egov.bg/segment/R-3994"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4580" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4586" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="CertificateFitnessAirfieldApplication" type="CertificateFitnessAirfieldApplication"/>
+	<xsd:complexType name="CertificateFitnessAirfieldApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за издаване на удостоверение за експлоатационна годност на летателни площадки</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ApplicantType" type="at:ApplicantType" minOccurs="0" />
+			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
+			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
+            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="AirportAirfieldData" type="aad:AirportAirfieldData" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="AdditionalAttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

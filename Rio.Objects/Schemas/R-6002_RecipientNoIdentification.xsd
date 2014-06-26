@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6002" xmlns="http://ereg.egov.bg/segment/R-6002" 
+	xmlns:pn="http://ereg.egov.bg/segment/0009-000005" 
+	xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" 
+	xmlns:en="http://ereg.egov.bg/value/0008-000029" 
+	xmlns:r="http://ereg.egov.bg/segment/0009-000142" 
+	xmlns:fen="http://ereg.egov.bg/value/0008-000030" 
+	xmlns:fer="http://ereg.egov.bg/segment/0009-000144" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000029" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000030" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000144" />
+	
+    <xsd:complexType name="RecipientNoIdentification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Получател на електронната административна услуга, когато не се изисква идентификация на заявителя</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="PersonNames" type="pn:PersonNames" />
+      <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" />
+			<xsd:element name="Entity">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="EntityName" type="en:EntityName" minOccurs="0" />
+						<xsd:element name="Residence" type="r:Residence" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ForeignEntity">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ForeignEntityName" type="fen:ForeignEntityName" minOccurs="0" />
+						<xsd:element name="ForeignEntityResidence" type="fer:ForeignEntityResidence" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/0007-000020" xmlns="http://ereg.egov.bg/nomenclature/0007-000020" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="MunicipalityInformationAccessTypesNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на форми за предоставяне на достъп до публична или непублична общинска информация</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="0006-000133" />
+      <xsd:enumeration value="0006-000134" />
+      <xsd:enumeration value="0006-000135" />
+      <xsd:enumeration value="0006-000136" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

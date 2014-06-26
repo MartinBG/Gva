@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4674" 
+	xmlns="http://ereg.egov.bg/segment/R-4674" 
+	xmlns:faiff="http://ereg.egov.bg/value/R-4670"
+	xmlns:fat="http://ereg.egov.bg/value/R-3972"
+	xmlns:fad="http://ereg.egov.bg/value/R-4672"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4670" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3972" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4672" />
+		
+	<xsd:complexType name="FinancialArrangement">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Финансова договореност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FinancialArrangementsInForceFlag" type="faiff:FinancialArrangementsInForceFlag" minOccurs="0" />
+			<xsd:element name="FinancialArrangementsText" type="fat:FinancialArrangementsText" minOccurs="0" />
+			<xsd:element name="FinancialArrangementsDescription" type="fad:FinancialArrangementsDescription" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

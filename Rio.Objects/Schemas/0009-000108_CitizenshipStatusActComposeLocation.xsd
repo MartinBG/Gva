@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000108" xmlns="http://ereg.egov.bg/segment/0009-000108" xmlns:dgc="http://ereg.egov.bg/value/0008-000185" xmlns:dgn="http://ereg.egov.bg/value/0008-000186" xmlns:mgc="http://ereg.egov.bg/value/0008-000187" xmlns:mgn="http://ereg.egov.bg/value/0008-000188" xmlns:sgc="http://ereg.egov.bg/value/0008-000189" xmlns:sgn="http://ereg.egov.bg/value/0008-000190" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000185" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000186" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000187" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000188" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000189" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000190" />
+  <xsd:complexType name="CitizenshipStatusActComposeLocation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Място на съставяне на акт за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DistrictGRAOCode" type="dgc:DistrictGRAOCode" />
+      <xsd:element name="DistrictGRAOName" type="dgn:DistrictGRAOName" />
+      <xsd:element name="MunicipalityGRAOCode" type="mgc:MunicipalityGRAOCode" />
+      <xsd:element name="MunicipalityGRAOName" type="mgn:MunicipalityGRAOName" />
+      <xsd:element name="SettlementGRAOCode" type="sgc:SettlementGRAOCode" />
+      <xsd:element name="SettlementGRAOName" type="sgn:SettlementGRAOName" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

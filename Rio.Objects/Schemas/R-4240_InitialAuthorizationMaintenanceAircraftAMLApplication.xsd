@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4240"
+            xmlns="http://ereg.egov.bg/segment/R-4240"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+            xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
+            xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
+			xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+            xmlns:cres="http://ereg.egov.bg/value/R-4016"
+            xmlns:amld="http://ereg.egov.bg/segment/R-4206"
+            xmlns:amod="http://ereg.egov.bg/segment/R-4216"
+            xmlns:amclca="http://ereg.egov.bg/segment/R-4226"
+            xmlns:rcmta="http://ereg.egov.bg/segment/R-4238"
+            xmlns:add="http://ereg.egov.bg/segment/R-3994"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4014"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4206"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4216"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4226"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4238"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+	
+
+	<xsd:element name="InitialAuthorizationMaintenanceAircraftAMLApplication" type="InitialAuthorizationMaintenanceAircraftAMLApplication"/>
+    <xsd:complexType name="InitialAuthorizationMaintenanceAircraftAMLApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за първоначално издаване на лиценз за техническо обслужване на въздухоплавателни средства (AML) по Част 66</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+            <xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
+            <xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0"/>
+            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+            <xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+            <xsd:element name="AircraftMaintenanceLicenseData" type="amld:AircraftMaintenanceLicenseData" minOccurs="0"/>
+            <xsd:element name="AircraftMaintenanceOrganizationData" type="amod:AircraftMaintenanceOrganizationData" minOccurs="0"/>
+            <xsd:element name="AircraftMaintenanceCategoryLicenseCandidatesApplicant" type="amclca:AircraftMaintenanceCategoryLicenseCandidatesApplicant" minOccurs="0"/>
+            <xsd:element name="RecognitionCreditsMaintenanceTrainingAircraft" type="rcmta:RecognitionCreditsMaintenanceTrainingAircraft" minOccurs="0"/>
+			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

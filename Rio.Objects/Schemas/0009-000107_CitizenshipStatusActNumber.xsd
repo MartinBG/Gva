@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000107" xmlns="http://ereg.egov.bg/segment/0009-000107" xmlns:ri="http://ereg.egov.bg/value/0008-000149" xmlns:ran="http://ereg.egov.bg/value/0008-000150" xmlns:rasn="http://ereg.egov.bg/value/0008-000151" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000149" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000150" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000151" />
+  <xsd:complexType name="CitizenshipStatusActNumber">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номер на акт за гражданско състояние</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="RegisterIndex" type="ri:CitizenshipRegisterIndex" minOccurs="0" />
+      <xsd:element name="ActSequenceNumber" type="ran:CitizenshipRegisterSequenceActNumber" />
+      <xsd:element name="SubNumber" type="rasn:CitizenshipRegisterActSubNumber" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

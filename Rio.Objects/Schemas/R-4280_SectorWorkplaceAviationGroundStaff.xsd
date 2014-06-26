@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4280" 
+	xmlns="http://ereg.egov.bg/segment/R-4280" 
+	xmlns:swagsc="http://ereg.egov.bg/value/R-4276"
+	xmlns:swagsn="http://ereg.egov.bg/value/R-4278"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4276" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4278" />
+	
+	<xsd:complexType name="SectorWorkplaceAviationGroundStaff">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Сектор/работно място за наземен авиационен персонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="SectorWorkplaceAviationGroundStaffCode" type="swagsc:SectorWorkplaceAviationGroundStaffCode" minOccurs="0" />
+			<xsd:element name="SectorWorkplaceAviationGroundStaffName" type="swagsn:SectorWorkplaceAviationGroundStaffName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

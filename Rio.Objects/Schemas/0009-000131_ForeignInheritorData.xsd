@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000131" xmlns="http://ereg.egov.bg/segment/0009-000131" xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" xmlns:bd="http://ereg.egov.bg/value/0008-000022" xmlns:dd="http://ereg.egov.bg/value/0008-000158" xmlns:lsr="http://ereg.egov.bg/segment/0009-000129" xmlns:cs="http://ereg.egov.bg/segment/0009-000133" xmlns:iuid="http://ereg.egov.bg/value/0008-000161" xmlns:idn="http://ereg.egov.bg/value/0008-000162" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000022" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000158" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000129" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000161" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000162" />
+  <xsd:complexType name="ForeignInheritorData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за наследник по закон – физическо лице, нерегистрирано по българското законодателство</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" minOccurs="0" />
+      <xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0" />
+      <xsd:element name="LawfulSuccessionReason" type="lsr:LawfulSuccessionReason" minOccurs="0" />
+      <xsd:element name="DateOfDeath" type="dd:DateOfDeath" minOccurs="0" />
+      <xsd:element name="Citizenships" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Citizenship" type="cs:Citizenship" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InheritorDataNote" type="idn:InheritorDataNote" minOccurs="0" />
+      <xsd:element name="InheritorUID" type="iuid:InheritorUID" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

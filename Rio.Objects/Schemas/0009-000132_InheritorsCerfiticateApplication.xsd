@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000132" xmlns="http://ereg.egov.bg/segment/0009-000132" xmlns:eash="http://ereg.egov.bg/segment/0009-000152" xmlns:csabd="http://ereg.egov.bg/segment/0009-000164" xmlns:stbt="http://ereg.egov.bg/value/0008-000143" xmlns:sard="http://ereg.egov.bg/segment/0009-000141" xmlns:easf="http://ereg.egov.bg/segment/0009-000153" xmlns:ad="http://ereg.egov.bg/segment/0009-000139" xmlns:crbd="http://ereg.egov.bg/segment/0009-000135" xmlns:pa="http://ereg.egov.bg/segment/0009-000094" xmlns:dd="http://ereg.egov.bg/value/0008-000158" xmlns:id="http://ereg.egov.bg/segment/0009-000130" xmlns:fid="http://ereg.egov.bg/segment/0009-000131" xmlns:iuid="http://ereg.egov.bg/value/0008-000161" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000164" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000143" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000141" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000135" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000094" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000158" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000130" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000131" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000161" />
+  <xsd:element name="InheritorsCerfiticateApplication" type="InheritorsCerfiticateApplication" />
+  <xsd:complexType name="InheritorsCerfiticateApplication">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Заявление-декларация за издаване на удостоверение за наследници</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+      <xsd:element name="ServiceTermType" type="stbt:ServiceTermType" minOccurs="0" />
+      <xsd:element name="ServiceApplicantReceiptData" type="sard:ServiceApplicantReceiptData" minOccurs="0" />
+      <xsd:element name="DeceasedPerson" type="crbd:CitizenshipRegistrationBasicData" minOccurs="0" />
+      <xsd:element name="PermanentAddress" type="pa:PersonAddress" minOccurs="0" />
+      <xsd:element name="DateOfDeath" type="dd:DateOfDeath" minOccurs="0" />
+      <xsd:element name="CitizenshipStatusActBasicData" type="csabd:CitizenshipStatusActBasicData" minOccurs="0" />
+      <xsd:element name="Inheritors" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Inheritor" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:choice>
+                    <xsd:element name="InheritorData" type="id:InheritorData" />
+                    <xsd:element name="ForeignInheritorData" type="fid:ForeignInheritorData" />
+                  </xsd:choice>
+                  <xsd:element name="ParentUID" type="iuid:InheritorUID" minOccurs="0" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AttachedDocuments" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="AttachedDocument" type="ad:AttachedDocument" maxOccurs="unbounded" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

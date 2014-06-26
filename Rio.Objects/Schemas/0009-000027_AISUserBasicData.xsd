@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000027" xmlns="http://ereg.egov.bg/segment/0009-000027" xmlns:aun="http://ereg.egov.bg/segment/0009-000018" xmlns:aui="http://ereg.egov.bg/value/0008-000038" xmlns:aupia="http://ereg.egov.bg/segment/0009-000026" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000018" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000038" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000026" />
+  <xsd:complexType name="AISUserBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основни данни за потребител на АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="Names" type="aun:AISUserNames" />
+      <xsd:element name="AISIdentifier" type="aui:AISUserIdentifier" />
+      <xsd:element name="Position" type="aupia:AISUserPositionInAdministration" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

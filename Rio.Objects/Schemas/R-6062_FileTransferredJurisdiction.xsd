@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6062" 
+	xmlns="http://ereg.egov.bg/segment/R-6062"
+	xmlns:acu="http://ereg.egov.bg/segment/0009-000073"
+	xmlns:ssn="http://ereg.egov.bg/value/0008-000131"
+	xmlns:ssu="http://ereg.egov.bg/value/0008-000077"
+	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
+	xmlns:dfc="http://ereg.egov.bg/segment/R-6060"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000073" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000131" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000077" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-6060" />
+	
+	
+	<xsd:complexType name="FileTransferredJurisdiction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Преписка, която се препраща по компетентност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AISCaseURI" type="acu:AISCaseURI" minOccurs="0" />
+			<xsd:element name="SUNAUServiceName" type="ssn:SUNAUServiceName" minOccurs="0" />
+			<xsd:element name="SUNAUServiceURI" type="ssu:SUNAUServiceURI" minOccurs="0" />
+			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
+			<xsd:element name="DocumentFileCompetence" type="dfc:DocumentFileCompetence" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

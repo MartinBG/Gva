@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000088" xmlns="http://ereg.egov.bg/segment/0009-000088" xmlns:di="http://ereg.egov.bg/value/0008-000091" xmlns:dot="http://ereg.egov.bg/value/0008-000117" xmlns:docd="http://ereg.egov.bg/segment/0009-000087" xmlns:ocd="http://ereg.egov.bg/segment/0009-000032" xmlns:doc="http://ereg.egov.bg/value/0008-000119" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000091" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000117" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000087" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000032" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000119" />
+  <xsd:complexType name="DocumentOpinion">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Становище по документ в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="DocumentID" type="di:DocumentID" minOccurs="0" />
+      <xsd:element name="Type" type="dot:DocumentOpinionType" />
+      <xsd:element name="OpinionCreationData" type="docd:DocumentOpinionCreationData" />
+      <xsd:element name="ObjectCreationData" type="ocd:AISObjectCreationData" />
+      <xsd:element name="AgreementByDigitalSignature" type="xsd:boolean" />
+      <xsd:element name="Content" type="doc:DocumentOpinionContent" minOccurs="0" />
+      <xsd:element name="ReferenceDocumentID" type="di:DocumentID" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

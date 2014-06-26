@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000047" xmlns="http://ereg.egov.bg/segment/0009-000047" xmlns:rdu="http://ereg.egov.bg/segment/0009-000044" xmlns:andtbd="http://ereg.egov.bg/segment/0009-000043" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000044" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000043" />
+  <xsd:complexType name="RegisteredDocumentOrDocumentType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Регистриран документ или вид документ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="RegisteredDocumentURI" type="rdu:RegisteredDocumentURI" />
+      <xsd:element name="DocumentType" type="andtbd:AdministrativeNomenclatureDocumentTypeBasicData" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

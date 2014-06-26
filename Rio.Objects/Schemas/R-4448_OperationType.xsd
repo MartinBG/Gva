@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4448" 
+	xmlns="http://ereg.egov.bg/segment/R-4448" 
+	xmlns:otc="http://ereg.egov.bg/value/R-4444"
+	xmlns:otn="http://ereg.egov.bg/value/R-4446"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4444" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4446" />
+
+	<xsd:complexType name="OperationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип за опериране</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OperationTypeCode" type="otc:OperationTypeCode" minOccurs="0" />
+			<xsd:element name="OperationTypeName" type="otn:OperationTypeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

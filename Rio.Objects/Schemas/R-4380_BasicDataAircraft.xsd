@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4380" xmlns="http://ereg.egov.bg/segment/R-4380" 
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4364"	
+	xmlns:amn="http://ereg.egov.bg/value/R-4320" 
+	xmlns:maatc="http://ereg.egov.bg/segment/R-4370" 
+	xmlns:asn="http://ereg.egov.bg/value/R-4334" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4364" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4320" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
+    <xsd:complexType name="BasicDataAircraft">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основни данни за въздухоплавателно средство</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+	  <xsd:element name="CategoryAircraft" type="ca:CategoryAircraft" minOccurs="0" />
+      <xsd:element name="AircraftManufacturerName" type="amn:AircraftManufacturerName" minOccurs="0" />
+      <xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+      <xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

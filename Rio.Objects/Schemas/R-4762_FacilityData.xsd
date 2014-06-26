@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4762" 
+	xmlns="http://ereg.egov.bg/segment/R-4762" 
+	xmlns:fn="http://ereg.egov.bg/value/R-4740"
+	xmlns:fk="http://ereg.egov.bg/segment/R-4746"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:ahd="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:uaddc="http://ereg.egov.bg/segment/R-4692"
+	xmlns:fl="http://ereg.egov.bg/segment/R-4752"
+	xmlns:om="http://ereg.egov.bg/value/R-4754"
+	xmlns:fmn="http://ereg.egov.bg/value/R-4756"
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:fmd="http://ereg.egov.bg/value/R-4758"
+	xmlns:fpad="http://ereg.egov.bg/value/R-4760"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4740" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4746" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4692" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4752" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4754" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4756" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4758" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4760" />
+
+	<xsd:complexType name="FacilityData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за съоръжение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FacilityName" type="fn:FacilityName" minOccurs="0" />
+			<xsd:element name="FacilityKind" type="fk:FacilityKind" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
+			<xsd:element name="UnnumberedAttachedDocumentDatasCollection" type="uaddc:UnnumberedAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="FacilityLocation" type="fl:FacilityLocation" minOccurs="0" />
+			<xsd:element name="OperatingMode" type="om:OperatingMode" minOccurs="0" />
+			<xsd:element name="FacilityManufacturerName" type="fmn:FacilityManufacturerName" minOccurs="0" />
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="FacilityManufactureDate" type="fmd:FacilityManufactureDate" minOccurs="0" />
+			<xsd:element name="FacilityPlaceAcceptanceDate" type="fpad:FacilityPlaceAcceptanceDate" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

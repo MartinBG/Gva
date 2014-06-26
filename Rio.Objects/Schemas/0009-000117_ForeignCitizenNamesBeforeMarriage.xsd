@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000117" xmlns="http://ereg.egov.bg/segment/0009-000117" xmlns:fcfn="http://ereg.egov.bg/value/0008-000014" xmlns:fcod="http://ereg.egov.bg/value/0008-000016" xmlns:fcfnbm="http://ereg.egov.bg/value/0008-000222" xmlns:fcp="http://ereg.egov.bg/value/0008-000017" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000014" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000016" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000222" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000017" />
+  <xsd:complexType name="ForeignCitizenNamesBeforeMarriage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Имена на физическо лице, нерегистрирано по българското законодателство, преди сключване на брак</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ForeignCitizenFirstNameCyrillic" type="fcfn:ForeignCitizenFirstNameCyrillic" minOccurs="0" />
+      <xsd:element name="ForeignCitizenOtherNameCyrillic" type="fcod:ForeignCitizenOtherNameCyrillic" minOccurs="0" />
+      <xsd:element name="ForeignCitizenFamilyNameBeforeMarriage" type="fcfnbm:ForeignCitizenFamilyNameBeforeMarriage" minOccurs="0" />
+      <xsd:element name="ForeignCitizenPseudonimCyrillic" type="fcp:ForeignCitizenPseudonimCyrillic" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000084" xmlns="http://ereg.egov.bg/segment/0009-000084" xmlns:acc="http://ereg.egov.bg/segment/0009-000075" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000075" />
+  <xsd:complexType name="AISCaseControlSection">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Контролен раздел на преписка</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="acc:AISCaseSection" />
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

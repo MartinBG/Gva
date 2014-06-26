@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000065" xmlns="http://ereg.egov.bg/segment/0009-000065" xmlns:rdodt="http://ereg.egov.bg/segment/0009-000047" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000047" />
+  <xsd:complexType name="AISTaskCreatedDocument">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Създаден документ от задача</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="rdodt:RegisteredDocumentOrDocumentType">
+        <xsd:sequence>
+          <xsd:element name="AdditionalData" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

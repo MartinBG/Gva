@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-6052" 
+	xmlns="http://ereg.egov.bg/segment/R-6052" 
+	xmlns:addi="http://ereg.egov.bg/segment/R-6050"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-6050"/>
+
+	<xsd:complexType name="AttachedDocumentDescriptionIdentifiersCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Описание и идентификатор на приложени документи</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentDescriptionIdentifier" type="addi:AttachedDocumentDescriptionIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

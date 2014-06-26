@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000104" xmlns="http://ereg.egov.bg/segment/0009-000104" xmlns:rpec="http://ereg.egov.bg/value/0008-000219" xmlns:rpe="http://ereg.egov.bg/value/0008-000220" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000219" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000220" />
+  <xsd:element name="ResidencePeriodData" type="ResidencePeriodData" />
+  <xsd:complexType name="ResidencePeriodData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за срок на пребиваване на физическо лице в населено място</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ResidencePeriods">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ResidencePeriod" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="rpec:ResidencePeriodCode" />
+                  <xsd:element name="Name" type="rpe:ResidencePeriod" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

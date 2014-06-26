@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4658" 
+	xmlns="http://ereg.egov.bg/segment/R-4658" 
+	xmlns:procn="http://ereg.egov.bg/value/R-4654"
+	xmlns:c="http://ereg.egov.bg/segment/0009-000133"
+	xmlns:prtcr="http://ereg.egov.bg/segment/R-4656"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4654" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4656" />
+		
+	<xsd:complexType name="PersonRepresentingTradingCompanyData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за лице, представляващо или управляващо търговско дружество</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PersonRepresentingOLVPCandidateNames" type="procn:PersonRepresentingOLVPCandidateNames" minOccurs="0" />
+			<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+			<xsd:element name="PersonRepresentingTradingCompanyRole" type="prtcr:PersonRepresentingTradingCompanyRole" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

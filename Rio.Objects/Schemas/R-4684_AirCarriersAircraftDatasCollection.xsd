@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4684" 
+	xmlns="http://ereg.egov.bg/segment/R-4684" 
+    xmlns:acad="http://ereg.egov.bg/segment/R-4682" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-4682"/>
+
+	<xsd:complexType name="AirCarriersAircraftDatasCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за въздухоплавателни средства, с които ще оперира въздушния превозвач</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AirCarrierAircraftData" type="acad:AirCarrierAircraftData" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

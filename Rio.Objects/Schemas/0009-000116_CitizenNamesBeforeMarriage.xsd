@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000116" xmlns="http://ereg.egov.bg/segment/0009-000116" xmlns:pfn="http://ereg.egov.bg/value/0008-000008" xmlns:pmn="http://ereg.egov.bg/value/0008-000009" xmlns:fnbm="http://ereg.egov.bg/value/0008-000153" xmlns:ps="http://ereg.egov.bg/value/0008-000011" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000008" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000009" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000153" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000011" />
+  <xsd:complexType name="CitizenNamesBeforeMarriage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Имена на физическо лице преди сключване на брак</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PersonFirstName" type="pfn:PersonFirstName" minOccurs="0" />
+      <xsd:element name="PersonMiddleName" type="pmn:PersonMiddleName" minOccurs="0" />
+      <xsd:element name="FamilyNameBeforeMarriage" type="fnbm:FamilyNameBeforeMarriage" minOccurs="0" />
+      <xsd:element name="PersonPseudonim" type="ps:PersonPseudonim" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

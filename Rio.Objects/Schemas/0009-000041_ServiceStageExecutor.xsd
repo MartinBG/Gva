@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000041" xmlns="http://ereg.egov.bg/segment/0009-000041" xmlns:piaoau="http://ereg.egov.bg/segment/0009-000030" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000030" />
+  <xsd:complexType name="ServiceStageExecutor">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Изпълнител на етап</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PositionInAdministrationOrAISUser" type="piaoau:PositionInAdministrationOrAISUser" minOccurs="0" />
+      <xsd:element name="AdditionalData" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##any" processContents="lax" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

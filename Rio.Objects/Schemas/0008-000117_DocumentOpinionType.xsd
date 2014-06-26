@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/0008-000117" xmlns="http://ereg.egov.bg/value/0008-000117" xmlns:nom="http://ereg.egov.bg/nomenclature/0007-000012" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/nomenclature/0007-000012" />
+  <xsd:simpleType name="DocumentOpinionType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Вид на становище по документ в АИС</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="nom:DocumentOpinionTypeNomenclature" />
+  </xsd:simpleType>
+</xsd:schema>

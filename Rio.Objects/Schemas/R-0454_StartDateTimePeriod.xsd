@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-0454" 
+xmlns="http://ereg.egov.bg/value/R-0454" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+
+  <xsd:simpleType name="StartDateTimePeriod">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Начална дата на период от време</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:date">
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

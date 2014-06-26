@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4012" 
+xmlns="http://ereg.egov.bg/segment/R-4012" 
+xmlns:cpin="http://ereg.egov.bg/value/R-4010" 
+xmlns:c="http://ereg.egov.bg/segment/0009-000133" 
+xmlns:pn="http://ereg.egov.bg/segment/0009-000005"
+xmlns:pnl="http://ereg.egov.bg/segment/R-4008"
+xmlns:pi="http://ereg.egov.bg/segment/0009-000006"
+xmlns:bd="http://ereg.egov.bg/value/0008-000022"
+xmlns:fcn="http://ereg.egov.bg/segment/0009-000007"
+xmlns:pob="http://ereg.egov.bg/segment/0009-000095"
+xmlns:poba="http://ereg.egov.bg/segment/0009-000096"
+xmlns:pa="http://ereg.egov.bg/segment/0009-000094"
+xmlns:pc="http://ereg.egov.bg/value/0008-000128"
+xmlns:san="http://ereg.egov.bg/value/0008-000023"
+xmlns:ada="http://ereg.egov.bg/value/0008-000308"
+xmlns:pca="http://ereg.egov.bg/value/0008-000307"
+xmlns:digc="http://ereg.egov.bg/value/0008-000185" 
+xmlns:dign="http://ereg.egov.bg/value/0008-000186" 
+xmlns:mugc="http://ereg.egov.bg/value/0008-000187" 
+xmlns:mugn="http://ereg.egov.bg/value/0008-000188" 
+xmlns:segc="http://ereg.egov.bg/value/0008-000189" 
+xmlns:segn="http://ereg.egov.bg/value/0008-000190"
+xmlns:ad="http://ereg.egov.bg/value/0008-000194"
+xmlns:esafn="http://ereg.egov.bg/value/0008-000130"
+xmlns:esapn="http://ereg.egov.bg/value/0008-000129"
+xmlns:pobox="http://ereg.egov.bg/value/0008-000136"
+xmlns:еа="http://ereg.egov.bg/value/0008-000036"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4010" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000005"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4008"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000006"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000022"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000007"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000095"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000096"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000094"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000128"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000023"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000308"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000307"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000185" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000186" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000187" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000188" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000189" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000190" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000194" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000130"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000129"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000136"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000036"/>
+
+	<xsd:complexType name="FlightCrewPersonalData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Лични данни на лице от авиационния пресонал</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CAAPersonalIdentificationNumber" type="cpin:CAAPersonalIdentificationNumber" minOccurs="0" />
+			<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+			<xsd:element name="Nationality" type="c:Citizenship" minOccurs="0" />
+			<xsd:element name="PersonNamesLatin" type="pnl:PersonNamesLatin" minOccurs="0"/>
+			<xsd:element name="BulgarianCitizen" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PersonNames" type="pn:PersonNames" minOccurs="0"/>
+						<xsd:element name="PersonNamesLatin" type="pnl:PersonNamesLatin" minOccurs="0"/>
+						<xsd:element name="PersonIdentifier" type="pi:PersonIdentifier" minOccurs="0"/>
+						<xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ForeignCitizen" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" minOccurs="0"/>
+						<xsd:element name="BirthDate" type="bd:BirthDate" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="BirthPlace" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PlaceOfBirth" type="pob:PlaceOfBirth" minOccurs="0"/>
+						<xsd:element name="PlaceOfBirthAbroad" type="poba:PlaceOfBirthAbroad" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PermanentAddress" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="BulgarianPermanentAddress" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PersonAddress" type="pa:PersonAddress" minOccurs="0"/>
+									<xsd:element name="PostCode" type="pc:PostCode" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ForeignPermanentAddress" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+									<xsd:element name="SettlementAbroadName" type="san:SettlementAbroadName" minOccurs="0" />
+									<xsd:element name="AddressDescriptionAbroad" type="ada:AddressDescriptionAbroad" minOccurs="0" /> 
+									<xsd:element name="PostCodeAbroad" type="pca:PostCodeAbroad" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CorrespondenceAddress" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="BulgarianCorrespondenceAddress" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="DistrictGRAOCode" type="digc:DistrictGRAOCode" minOccurs="0" />
+									<xsd:element name="DistrictGRAOName" type="dign:DistrictGRAOName" minOccurs="0" />
+									<xsd:element name="MunicipalityGRAOCode" type="mugc:MunicipalityGRAOCode" minOccurs="0" />
+									<xsd:element name="MunicipalityGRAOName" type="mugn:MunicipalityGRAOName" minOccurs="0" />
+									<xsd:element name="SettlementGRAOCode" type="segc:SettlementGRAOCode" minOccurs="0" />
+									<xsd:element name="SettlementGRAOName" type="segn:SettlementGRAOName" minOccurs="0" />
+									<xsd:element name="AddressDescription" type="ad:AddressDescription" minOccurs="0" />
+									<xsd:element name="PostCode" type="pc:PostCode" minOccurs="0"/>
+									<xsd:element name="PostOfficeBox" type="pobox:PostOfficeBox" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ForeignCorrespondenceAddress" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
+									<xsd:element name="SettlementAbroadName" type="san:SettlementAbroadName" minOccurs="0" />
+									<xsd:element name="AddressDescriptionAbroad" type="ada:AddressDescriptionAbroad" minOccurs="0" /> 
+									<xsd:element name="PostCodeAbroad" type="pca:PostCodeAbroad" minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ContactData" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ElectronicServiceApplicantFaxNumber" type="esafn:ElectronicServiceApplicantFaxNumber" minOccurs="0"/>
+						<xsd:element name="ElectronicServiceApplicantPhoneNumber" type="esapn:ElectronicServiceApplicantPhoneNumber" minOccurs="0"/>
+						<xsd:element name="EmailAddress" type="еа:EmailAddress" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

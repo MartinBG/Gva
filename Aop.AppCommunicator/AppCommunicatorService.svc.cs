@@ -6,14 +6,6 @@ using Common.Data;
 using Common.Utils;
 using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
-using Components.EmsUtils;
-using Components.DocumentSigner;
-using Components.XmlSchemaValidator;
-using Components.VirusScanEngine;
-using Components.DocumentSerializer;
-using Components.DevelopmentLogger;
-using Components.PortalConfigurationManager;
-using RioObjects;
 using System.IO;
 using R_0009_000001;
 using R_0009_000085;
@@ -24,10 +16,8 @@ using R_0009_000046;
 using R_0009_000068;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Globalization;
 using Aop.Api.Repositories.Aop;
 using Aop.Api.Models;
-using Components.ApplicationCommunicator;
 using R_0009_000089;
 using R_0009_000073;
 using R_0009_000030;
@@ -41,10 +31,11 @@ using R_0009_000043;
 using R_0009_000042;
 using R_0009_000031;
 using R_0009_000026;
+using Rio.Data.ServiceContracts.AppCommunicator;
 
 namespace Aop.AppCommunicator
 {
-    public class AppCommunicatorService : Components.ApplicationCommunicator.IDocumentService
+    public class AppCommunicatorService : Rio.Data.ServiceContracts.AppCommunicator.IDocumentService
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
@@ -57,7 +48,7 @@ namespace Aop.AppCommunicator
             configurations.Add(new CommonDbConfiguration());
             configurations.Add(new AopDbConfiguration());
 
-            this.unitOfWork = new UnitOfWork(configurations);
+            this.unitOfWork = new UnitOfWork(configurations, Enumerable.Empty<IDbContextInitializer>());
             this.docRepository = new DocRepository(unitOfWork);
             this.appRepository = new AppRepository(unitOfWork);
         }

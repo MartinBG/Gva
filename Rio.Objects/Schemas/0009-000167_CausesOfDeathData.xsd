@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000167" xmlns="http://ereg.egov.bg/segment/0009-000167" xmlns:cdc="http://ereg.egov.bg/value/0008-000223" xmlns:cd="http://ereg.egov.bg/value/0008-000224" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000223" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000224" />
+  <xsd:element name="CausesOfDeathData" type="CausesOfDeathData" />
+  <xsd:complexType name="CausesOfDeathData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за причини за смъртта</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CauseOfDeath">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="CD" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="cdc:CauseOfDeathCode" />
+                  <xsd:element name="Name" type="cd:CauseOfDeath" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>

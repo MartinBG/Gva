@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4620" 
+	xmlns="http://ereg.egov.bg/segment/R-4620" 
+	xmlns:astc="http://ereg.egov.bg/value/R-4616"
+	xmlns:astn="http://ereg.egov.bg/value/R-4618"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4616" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4618" />
+		
+	<xsd:complexType name="AirServicesType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид въздухоплавателни услуги</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AirServicesTypeCode" type="astc:AirServicesTypeCode" minOccurs="0" />
+			<xsd:element name="AirServicesTypeName" type="astn:AirServicesTypeName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4034" 
+	xmlns="http://ereg.egov.bg/segment/R-4034" 
+	xmlns:adkc="http://ereg.egov.bg/value/R-4030"
+	xmlns:adkn="http://ereg.egov.bg/value/R-4032"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4030" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4032"  />
+	
+	<xsd:complexType name="AttachedDocumentKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид приложен документ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AttachedDocumentKindCode" type="adkc:AttachedDocumentKindCode" minOccurs="0" />
+			<xsd:element name="AttachedDocumentKindName" type="adkn:AttachedDocumentKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

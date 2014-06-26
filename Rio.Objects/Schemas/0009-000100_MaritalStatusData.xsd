@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000100" xmlns="http://ereg.egov.bg/segment/0009-000100" xmlns:msc="http://ereg.egov.bg/value/0008-000210" xmlns:ms="http://ereg.egov.bg/value/0008-000211" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000210" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000211" />
+  <xsd:element name="MaritalStatusData" type="MaritalStatusData" />
+  <xsd:complexType name="MaritalStatusData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Класификатор на семейното положение на физическо лице </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="MaritalStatuses">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="MS" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="Code" type="msc:MaritalStatusCode" />
+                  <xsd:element name="Name" type="ms:MaritalStatus" />
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="versionDate" type="xsd:date" use="required" />
+  </xsd:complexType>
+</xsd:schema>
