@@ -63,7 +63,7 @@ namespace Mosv.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.GetSet("Signal").CreateLot(userContext);
+                var newLot = this.lotRepository.CreateLot("Signal", userContext);
 
                 newLot.CreatePart("signalData", signal.Get<JObject>("signalData"), userContext);
 

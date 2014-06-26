@@ -47,7 +47,7 @@ namespace Regs.Api.Tests.Specs
                 lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
                 userContext = new UserContext(1);
 
-                lot = lotRepository.GetSet("Person").CreateLot(userContext);
+                lot = lotRepository.CreateLot("Person", userContext);
                 lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
@@ -94,7 +94,7 @@ namespace Regs.Api.Tests.Specs
                 lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
                 userContext = new UserContext(1);
 
-                lot = lotRepository.GetSet("Person").CreateLot(userContext);
+                lot = lotRepository.CreateLot("Person", userContext);
                 lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 

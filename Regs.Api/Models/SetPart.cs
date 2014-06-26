@@ -8,7 +8,6 @@ namespace Regs.Api.Models
     {
         public SetPart()
         {
-            this.Parts = new List<Part>();
         }
 
         public int SetPartId { get; set; }
@@ -22,8 +21,6 @@ namespace Regs.Api.Models
         public string PathRegex { get; set; }
 
         public int? SchemaId { get; set; }
-
-        public virtual ICollection<Part> Parts { get; set; }
 
         public virtual Set Set { get; set; }
 

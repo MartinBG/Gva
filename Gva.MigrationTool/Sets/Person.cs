@@ -66,8 +66,6 @@ namespace Gva.MigrationTool.Sets
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                Set personSet = lotRepository.GetSet("Person");
-
                 foreach (var personId in this.getPersonIds())
                 {
                     var personCaseTypes = this.getPersonCaseTypes(personId, noms);
@@ -81,7 +79,7 @@ namespace Gva.MigrationTool.Sets
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
-                    var lot = personSet.CreateLot(context);
+                    var lot = lotRepository.CreateLot("Person", context);
 
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
 

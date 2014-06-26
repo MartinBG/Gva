@@ -73,11 +73,9 @@ namespace Gva.MigrationTool.Sets
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                Set organizationSet = lotRepository.GetSet("Organization");
-
                 foreach (var organizationId in organizationIds)
                 {
-                    var lot = organizationSet.CreateLot(context);
+                    var lot = lotRepository.CreateLot("Organization", context);
 
                     var organizationData = this.getOrganizationData(organizationId, noms);
                     caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes"));

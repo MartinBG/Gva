@@ -107,7 +107,7 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.GetSet("Person").CreateLot(userContext);
+                var newLot = this.lotRepository.CreateLot("Person", userContext);
 
                 newLot.CreatePart("personData", person.Get<JObject>("personData"), userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, person.GetItems<JObject>("personData.caseTypes"));

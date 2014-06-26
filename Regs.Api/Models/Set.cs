@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using Common.Api.UserContext;
 using Common.Sequence;
 
 namespace Regs.Api.Models
@@ -11,7 +10,6 @@ namespace Regs.Api.Models
     {
         public Set()
         {
-            this.Lots = new List<Lot>();
             this.SetParts = new List<SetPart>();
             this.Schemas = new List<Schema>();
         }
@@ -22,34 +20,9 @@ namespace Regs.Api.Models
 
         public string Alias { get; set; }
 
-        public virtual ICollection<Lot> Lots { get; set; }
-
         public virtual ICollection<SetPart> SetParts { get; set; }
 
         public virtual ICollection<Schema> Schemas { get; set; }
-
-        public Lot CreateLot(UserContext userContext)
-        {
-            Commit index = new Commit
-            {
-                CommitId = Commit.CommitSequence.NextValue(),
-                CommiterId = userContext.UserId,
-                CommitDate = DateTime.Now,
-                IsIndex = true,
-                IsLoaded = true
-            };
-
-            Lot lot = new Lot
-            {
-                NextIndex = 0,
-                LotId = Lot.LotSequence.NextValue(),
-                Set = this
-            };
-            lot.Commits.Add(index);
-            this.Lots.Add(lot);
-
-            return lot;
-        }
     }
 
     public class SetMap : EntityTypeConfiguration<Set>

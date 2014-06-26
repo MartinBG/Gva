@@ -61,7 +61,7 @@ namespace Mosv.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.GetSet("Suggestion").CreateLot(userContext);
+                var newLot = this.lotRepository.CreateLot("Suggestion", userContext);
 
                 newLot.CreatePart("suggestionData", suggestion, userContext);
 

@@ -61,7 +61,7 @@ namespace Regs.Api.Models
                 .WillCascadeOnDelete();
 
             this.HasRequired(t => t.SetPart)
-                .WithMany(t => t.Parts)
+                .WithMany()
                 .HasForeignKey(d => d.SetPartId);
         }
     }

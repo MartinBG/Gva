@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.UserContext;
 using Common.Data;
 using Regs.Api.Models;
 
@@ -31,6 +32,35 @@ namespace Regs.Api.Repositories.LotRepositories
                 .FirstOrDefault(s => s.Alias == alias);
 
             return set;
+        }
+
+        public Lot CreateLot(string setAlias, UserContext userContext)
+        {
+            return this.CreateLot(this.GetSet(setAlias), userContext);
+        }
+
+        public Lot CreateLot(Set set, UserContext userContext)
+        {
+            Commit index = new Commit
+            {
+                CommitId = Commit.CommitSequence.NextValue(),
+                CommiterId = userContext.UserId,
+                CommitDate = DateTime.Now,
+                IsIndex = true,
+                IsLoaded = true
+            };
+
+            Lot lot = new Lot
+            {
+                NextIndex = 0,
+                LotId = Lot.LotSequence.NextValue(),
+                Set = set
+            };
+            lot.Commits.Add(index);
+
+            this.unitOfWork.DbContext.Set<Lot>().Add(lot);
+
+            return lot;
         }
 
         public Lot GetLotIndex(int lotId)

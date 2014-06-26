@@ -514,7 +514,7 @@ namespace Regs.Api.Models
 
             // Relationships
             this.HasRequired(t => t.Set)
-                .WithMany(t => t.Lots)
+                .WithMany()
                 .HasForeignKey(d => d.SetId);
 
             // Local-only properties

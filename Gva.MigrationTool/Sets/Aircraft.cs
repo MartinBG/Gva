@@ -61,11 +61,9 @@ namespace Gva.MigrationTool.Sets
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                Set aircraftSet = lotRepository.GetSet("Aircraft");
-
                 foreach (var aircraftApexId in this.getAircraftApexIds())
                 {
-                    var lot = aircraftSet.CreateLot(context);
+                    var lot = lotRepository.CreateLot("Aircraft", context);
                     var aircraftData = this.getAircraftData(aircraftApexId, noms);
                     lot.CreatePart("aircraftDataApex", aircraftData, context);
                     lot.Commit(context, lotEventDispatcher);
@@ -99,7 +97,7 @@ namespace Gva.MigrationTool.Sets
                     else
                     {
                         Console.WriteLine("MISSING AIRCRAFT WITH MSN {0} IN APEX", msn);//TODO
-                        lot = aircraftSet.CreateLot(context);
+                        lot = lotRepository.CreateLot("Aircraft", context);
                     }
 
                     if (lot.GetPart("aircraftData") != null)
