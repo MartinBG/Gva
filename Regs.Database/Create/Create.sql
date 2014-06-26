@@ -6,7 +6,9 @@ GO
 ---------------------------------------------------------------
 
 -- Lots
+:r $(rootPath)\"Tables\LotSchemas.sql"
 :r $(rootPath)\"Tables\LotSets.sql"
+:r $(rootPath)\"Tables\LotSetSchemas.sql"
 :r $(rootPath)\"Tables\LotSetParts.sql"
 :r $(rootPath)\"Tables\Lots.sql"
 :r $(rootPath)\"Tables\LotParts.sql"

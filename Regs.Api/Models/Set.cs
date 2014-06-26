@@ -13,6 +13,7 @@ namespace Regs.Api.Models
         {
             this.Lots = new List<Lot>();
             this.SetParts = new List<SetPart>();
+            this.Schemas = new List<Schema>();
         }
 
         public int SetId { get; set; }
@@ -24,6 +25,8 @@ namespace Regs.Api.Models
         public virtual ICollection<Lot> Lots { get; set; }
 
         public virtual ICollection<SetPart> SetParts { get; set; }
+
+        public virtual ICollection<Schema> Schemas { get; set; }
 
         public Lot CreateLot(UserContext userContext)
         {
@@ -73,6 +76,15 @@ namespace Regs.Api.Models
             this.Property(t => t.SetId).HasColumnName("LotSetId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
+
+            this.HasMany(t => t.Schemas)
+                .WithMany(t => t.Sets)
+                .Map(m =>
+                {
+                    m.ToTable("LotSetSchemas");
+                    m.MapLeftKey("LotSetId");
+                    m.MapRightKey("LotSchemaId");
+                });
         }
     }
 }

@@ -21,11 +21,13 @@ namespace Regs.Api.Models
 
         public string PathRegex { get; set; }
 
-        public string Schema { get; set; }
+        public int? SchemaId { get; set; }
 
         public virtual ICollection<Part> Parts { get; set; }
 
         public virtual Set Set { get; set; }
+
+        public virtual Schema Schema { get; set; }
     }
 
     public class SetPartMap : EntityTypeConfiguration<SetPart>
@@ -51,9 +53,6 @@ namespace Regs.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.Schema)
-                .IsRequired();
-
             // Table & Column Mappings
             this.ToTable("LotSetParts");
             this.Property(t => t.SetPartId).HasColumnName("LotSetPartId");
@@ -61,12 +60,16 @@ namespace Regs.Api.Models
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.PathRegex).HasColumnName("PathRegex");
-            this.Property(t => t.Schema).HasColumnName("Schema");
+            this.Property(t => t.SchemaId).HasColumnName("LotSchemaId");
 
             // Relationships
             this.HasRequired(t => t.Set)
                 .WithMany(t => t.SetParts)
                 .HasForeignKey(d => d.SetId);
+
+            this.HasOptional(t => t.Schema)
+                .WithMany(t => t.SetParts)
+                .HasForeignKey(d => d.SchemaId);
         }
     }
 }
