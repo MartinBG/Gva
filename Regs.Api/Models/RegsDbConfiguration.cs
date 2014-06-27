@@ -14,6 +14,7 @@ namespace Regs.Api.Models
             modelBuilder.Configurations.Add(new PartVersionMap());
             modelBuilder.Configurations.Add(new SetMap());
             modelBuilder.Configurations.Add(new SetPartMap());
+            modelBuilder.Configurations.Add(new SchemaMap());
         }
     }
 }
