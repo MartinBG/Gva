@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Data;
+using Newtonsoft.Json.Schema;
 
 namespace Regs.Api.Models
 {
@@ -13,6 +14,7 @@ namespace Regs.Api.Models
         private static readonly object SyncRoot = new object();
         private static List<Set> sets;
         private static List<SetPart> setParts;
+        private static List<Schema> schemas;
         private static bool isInitialized = false;
 
         private static void InitializeStatics(DbContext context)
@@ -23,8 +25,31 @@ namespace Regs.Api.Models
                 {
                     if (!isInitialized)
                     {
-                        sets = context.Set<Set>().ToList();
-                        setParts = context.Set<SetPart>().ToList();
+                        schemas = context.Set<Schema>().ToList();
+                        sets = context.Set<Set>()
+                            .Include(s => s.Schemas)
+                            .ToList();
+                        setParts = context.Set<SetPart>()
+                            .Include(sp => sp.Schema)
+                            .ToList();
+
+                        JsonSchemaResolver resolver = new JsonSchemaResolver();
+
+                        foreach (var set in sets)
+                        {
+                            foreach (var schema in set.Schemas)
+                            {
+                                schema.JsonSchema = JsonSchema.Parse(schema.SchemaText, resolver);
+                            }
+                        }
+
+                        foreach (var setPart in setParts)
+                        {
+                            if (setPart.Schema != null)
+                            {
+                                setPart.Schema.JsonSchema = JsonSchema.Parse(setPart.Schema.SchemaText, resolver);
+                            }
+                        }
 
                         isInitialized = true;
                     }
@@ -32,7 +57,7 @@ namespace Regs.Api.Models
             }
         }
 
-        public void InitializeContext(System.Data.Entity.DbContext context)
+        public void InitializeContext(DbContext context)
         {
             InitializeStatics(context);
 
