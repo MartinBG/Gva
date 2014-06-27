@@ -5,6 +5,7 @@ using Common.Api.Models;
 using Common.Sequence;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 namespace Regs.Api.Models
 {
@@ -52,6 +53,12 @@ namespace Regs.Api.Models
                 if (this.content == null)
                 {
                     throw new ArgumentNullException("PartVersion.Content cannot be null, use DeletePart instead");
+                }
+
+                Schema schema = this.Part.SetPart.Schema;
+                if (schema != null && !this.content.IsValid(schema.JsonSchema))
+                {
+                    throw new ArgumentException(string.Format("Schema validation failed for part: {0}.", this.Part.SetPart.Alias));
                 }
 
                 Formatting formatting;

@@ -8,7 +8,6 @@ using Common.Api.UserContext;
 using Common.Sequence;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Newtonsoft.Json.Schema;
 
 namespace Regs.Api.Models
 {
@@ -81,19 +80,13 @@ namespace Regs.Api.Models
                 throw new Exception(string.Format("Specified path ({0}) is already in index", expandedPath.ToString()));
             }
 
-            SetPart setPart = this.GetSetPart(expandedPath);
-            if (setPart.Schema != null && !json.IsValid(setPart.Schema.JsonSchema))
-            {
-                throw new Exception(string.Format("Schema validation failed for part: {0}.", setPart.Alias));
-            }
-
             Part part = this.Parts.FirstOrDefault(p => p.Path == expandedPath);
             if (part == null)
             {
                 part = new Part
                 {
                     PartId = Part.PartSequence.NextValue(),
-                    SetPart = setPart,
+                    SetPart = this.GetSetPart(expandedPath),
                     Lot = this,
                     Path = expandedPath,
                     Index = partIndex
@@ -390,12 +383,6 @@ namespace Regs.Api.Models
         {
             Commit currCommit = this.Index;
             this.ModifyDate = DateTime.Now;
-
-            SetPart setPart = partVersion.Part.SetPart;
-            if (setPart.Schema != null && !json.IsValid(setPart.Schema.JsonSchema))
-            {
-                throw new Exception(string.Format("Schema validation failed for part: {0}.", setPart.Alias));
-            }
 
             if (partVersion.OriginalCommit == currCommit)
             {
