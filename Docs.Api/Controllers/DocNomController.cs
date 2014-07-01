@@ -461,20 +461,30 @@ namespace Docs.Api.Controllers
         }
 
         [Route("employeeUnit")]
-        public IHttpActionResult GetEmployeeUnits(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetEmployeeUnits([FromUri] int[] ids, string term = null, int offset = 0, int? limit = null)
         {
-            var predicate =
-                PredicateBuilder.True<Unit>()
-                .And(e => e.UnitType.Alias == "Employee")
-                .AndStringContains(e => e.Name, term)
-                .And(e => e.IsActive);
+            var query = this.unitOfWork.DbContext.Set<Unit>()
+                .Include(e => e.UnitRelations.Select(d => d.ParentUnit)).AsQueryable();
 
-            var results =
-                this.unitOfWork.DbContext.Set<Unit>()
-                .Include(e => e.UnitRelations.Select(d => d.ParentUnit))
-                .Where(predicate)
-                .OrderBy(e => e.Name)
-                .WithOffsetAndLimit(offset, limit)
+            if (ids != null && ids.Length > 0)
+            {
+                query = query.Where(e => ids.Contains(e.UnitId));
+            }
+            else
+            {
+                var predicate =
+                    PredicateBuilder.True<Unit>()
+                    .And(e => e.UnitType.Alias == "Employee")
+                    .AndStringContains(e => e.Name, term)
+                    .And(e => e.IsActive);
+
+                query = query
+                   .Where(predicate)
+                   .OrderBy(e => e.Name)
+                   .WithOffsetAndLimit(offset, limit);
+            }
+
+            var results = query
                 .ToList()
                 .Select(e => new
                 {

@@ -141,6 +141,9 @@ var config = {
         gulp.src('bower_components/blueimp-file-upload/img/**', opts),
         gulp.src('img/**', opts)
       );
+    },
+    '../word_templates': function (opts) {
+      return gulp.src('word_templates/**', opts);
     }
   }
 };

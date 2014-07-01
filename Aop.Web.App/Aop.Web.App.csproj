@@ -92,7 +92,10 @@
   <ItemGroup>
     <Content Include=".jshintrc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="word_templates\doklad_template.docx" />
+    <None Include="word_templates\stanovishte_template.docx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
