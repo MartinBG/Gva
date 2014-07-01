@@ -8,7 +8,6 @@ CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [CertNumber]             INT           NOT NULL,
     [ActNumber]              INT           NOT NULL,
     [RegMark]                NVARCHAR(50)  NOT NULL,
-    [CertAirworthinessId]    INT           NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]                   PRIMARY KEY ([LotPartId]),
     CONSTRAINT [FK_GvaAircraftRegistrations_LotParts]          FOREIGN KEY ([LotPartId]) REFERENCES [dbo].[LotParts] ([LotPartId]),
     CONSTRAINT [FK_GvaAircraftRegistrations_GvaViewAircrafts]  FOREIGN KEY ([LotId])     REFERENCES [dbo].[Lots]     ([LotId])
@@ -22,5 +21,4 @@ exec spDescColumn N'GvaViewAircraftRegistrations', N'CertRegisterId'        , N'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'CertNumber'            , N'Рег. номер.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'ActNumber'             , N'Дел. номер.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'RegMark'               , N'Рег. знак.'
-exec spDescColumn N'GvaViewAircraftRegistrations', N'CertAirworthinessId'   , N'Идентификатор на летателна годност'
 GO

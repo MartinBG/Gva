@@ -90,7 +90,6 @@
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNumberHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationAwHandler.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNewAwHandler.cs" />
     <Compile Include="LotEventHandlers\AircraftView\AircraftRegMarkHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />

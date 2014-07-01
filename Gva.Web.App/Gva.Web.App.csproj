@@ -102,7 +102,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertPermitToFly.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadio.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistration.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationCurrentFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertSmod.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCurrentDebtFM.js" />

@@ -42,7 +42,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftRegistrationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationNumberHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationAwHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegistrationNewAwHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //InventaryView

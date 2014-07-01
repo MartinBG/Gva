@@ -8,7 +8,7 @@ using System;
 
 namespace Gva.Api.ModelsDO
 {
-    public class RegistrationsDO
+    public class RegistrationViewDO
     {
         public int FirstIndex { get; set; }
 

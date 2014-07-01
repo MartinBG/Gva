@@ -6,24 +6,21 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistrationCurrentFM,
-    AircraftCertRegistrationFM,
-    AircraftCertAirworthinessFM,
-    aircraftCertRegistrations,
+    aircraftCertRegistrationView,
     aircraftCertRegistration,
     aircraftCertAirworthiness,
-    AircraftCurrentDebtFM,
     debts
   ) {
     $scope.isEdit = true;
 
-    $scope.regs = aircraftCertRegistrations;
+    $scope.regView = aircraftCertRegistrationView;
     $scope.reg = aircraftCertRegistration;
     $scope.aw = aircraftCertAirworthiness;
-    if (!aircraftCertRegistrations.notRegistered) {
-      $stateParams.ind = aircraftCertRegistration.partIndex;
-    }
     $scope.debts = debts;
+
+    if ($scope.regView) {
+      $stateParams.ind = $scope.regView.currentIndex;
+    }
 
     $scope.editDocumentDebt = function (debt) {
       return $state.go('root.aircrafts.view.debtsFM.edit', {
@@ -50,29 +47,24 @@
     $scope.newReg = function () {
       return $state.go('root.aircrafts.view.regsFM.newWizzard');
     };
-
   }
 
   CertRegsViewCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistrationCurrentFM',
-    'AircraftCertRegistrationFM',
-    'AircraftCertAirworthinessFM',
-    'aircraftCertRegistrations',
+    'aircraftCertRegistrationView',
     'aircraftCertRegistration',
     'aircraftCertAirworthiness',
-    'AircraftCurrentDebtFM',
     'debts'
   ];
 
   CertRegsViewCtrl.$resolve = {
-    aircraftCertRegistrations: [
+    aircraftCertRegistrationView: [
       '$stateParams',
-      'AircraftCertRegistrationCurrentFM',
-      function ($stateParams, AircraftCertRegistrationCurrentFM) {
-        return AircraftCertRegistrationCurrentFM.get({
+      'AircraftCertRegistrationFM',
+      function ($stateParams, AircraftCertRegistrationFM) {
+        return AircraftCertRegistrationFM.getView({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;
@@ -81,12 +73,12 @@
     aircraftCertRegistration: [
       '$stateParams',
       'AircraftCertRegistrationFM',
-      'aircraftCertRegistrations',
-      function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrations) {
-        if (!aircraftCertRegistrations.notRegistered) {
+      'aircraftCertRegistrationView',
+      function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrationView) {
+        if (aircraftCertRegistrationView) {
           return AircraftCertRegistrationFM.get({
             id: $stateParams.id,
-            ind: aircraftCertRegistrations.currentIndex
+            ind: aircraftCertRegistrationView.currentIndex
           }).$promise;
         }
         else {
@@ -97,13 +89,13 @@
     aircraftCertAirworthiness: [
       '$stateParams',
       'AircraftCertAirworthinessFM',
-      'aircraftCertRegistrations',
-      function ($stateParams, AircraftCertAirworthinessFM, aircraftCertRegistrations) {
-        if (!aircraftCertRegistrations.notRegistered &&
-          aircraftCertRegistrations.airworthinessIndex) {
+      'aircraftCertRegistrationView',
+      function ($stateParams, AircraftCertAirworthinessFM, aircraftCertRegistrationView) {
+        if (aircraftCertRegistrationView &&
+          aircraftCertRegistrationView.airworthinessIndex) {
           return AircraftCertAirworthinessFM.get({
             id: $stateParams.id,
-            ind: aircraftCertRegistrations.airworthinessIndex
+            ind: aircraftCertRegistrationView.airworthinessIndex
           }).$promise;
         }
         else {
@@ -114,12 +106,12 @@
     debts: [
       '$stateParams',
       'AircraftCurrentDebtFM',
-      'aircraftCertRegistrations',
-      function ($stateParams, AircraftDocumentDebtFM, aircraftCertRegistrations) {
-        if (!aircraftCertRegistrations.notRegistered) {
+      'aircraftCertRegistrationView',
+      function ($stateParams, AircraftDocumentDebtFM, aircraftCertRegistrationView) {
+        if (aircraftCertRegistrationView) {
           return AircraftDocumentDebtFM.query({
             id: $stateParams.id,
-            ind: aircraftCertRegistrations.currentIndex
+            ind: aircraftCertRegistrationView.currentIndex
           }).$promise;
         } else {
           return undefined;

@@ -214,78 +214,93 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-
-        public RegistrationsDO GetRegistrationsData(IEnumerable<PartVersion> registrations, IEnumerable<GvaViewAircraftRegistration> registrationsView, int? lotInd = null, int? lotId = null)
+        public RegistrationViewDO CreateRegistrationView(IEnumerable<PartVersion> registrations, IEnumerable<PartVersion> airworthinesses, int? regPartIndex)
         {
-            RegistrationsDO regsData = new RegistrationsDO();
-            var regs = registrations.OrderByDescending(r => r.Content.Get<int>("actNumber")).ToArray();
-            int regIndex;
-            int? regPartId;
-            if (lotInd.HasValue)
-            {
-                var currentReg = regs.Where(e => e.Part.Index == lotInd).FirstOrDefault();
-                regsData.CurrentIndex = currentReg.Part.Index;
-                regIndex = Array.IndexOf(regs, currentReg);
-                regPartId = currentReg.PartId;
-            }
-            else
-            {
-                var currentReg = regs.FirstOrDefault();
-                regsData.CurrentIndex = currentReg.Part.Index;
-                regIndex = Array.IndexOf(regs, currentReg);
-                regPartId = currentReg.PartId;
-            }
-            regsData.AirworthinessIndex = registrationsView.Where(e => e.LotPartId == regPartId).FirstOrDefault().CertAirworthinessId;
-            if (regsData.AirworthinessIndex != null)
-            {
-                regsData.HasAirworthiness = true;
-            }
-            else
-            {
-                regsData.HasAirworthiness = false;
-                var regsWithAirworthiness = registrationsView.Where(e => e.LotId == lotId && e.CertAirworthinessId.HasValue).ToList();
-                if (regsWithAirworthiness.Count > 0)
+            var regs =
+                (from r in registrations
+                join aw in airworthinesses on r.Part.Index equals aw.Content.Get<int>("registration.nomValueId") into gaws
+                from aw in gaws.DefaultIfEmpty()
+                group aw by r into aws
+                orderby aws.Key.Content.Get<int>("actNumber") descending
+                select aws)
+                .Select((aws, i) =>
+                    new
+                    {
+                        Position = i,
+                        Reg = aws.Key,
+                        Aws = aws.Where(aw => aw != null).OrderByDescending(a => a.Content.Get<DateTime>("issueDate")).AsEnumerable()
+                    })
+                .ToList();
+
+            var currentReg =
+                //used to create a variable from this annonymous type
+                new
                 {
-                    regsData.AirworthinessIndex = regsWithAirworthiness.FirstOrDefault().CertAirworthinessId;
-                }
-            }
-            regsData.LastIndex = regs[0].Part.Index;
-            regsData.NextIndex = regIndex > 0 ? regs[regIndex - 1].Part.Index : (int?)null;
-            regsData.PrevIndex = regIndex < regs.Length - 1 ? regs[regIndex + 1].Part.Index : (int?)null;
-            regsData.FirstIndex = regs[regs.Length - 1].Part.Index;
-            regsData.LastReg = regs[0].Content;
-            regsData.FirstReg = regs[regs.Length - 1].Content;
+                    Position = default(int),
+                    Reg = default(PartVersion),
+                    Aws = Enumerable.Empty<PartVersion>()
+                };
 
-            return regsData;
-        }
-        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}")]
-        public IHttpActionResult GetRegistrationsData(int lotId)
-        {
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM");
-            if (registrations.Length > 0)
+            if (regPartIndex.HasValue)
             {
-                var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
-
-                return Ok(GetRegistrationsData(registrations, registrationsView, null, lotId));
+                currentReg = regs.Where(r => r.Reg.Part.Index == regPartIndex).FirstOrDefault();
             }
             else
             {
-                return Ok(new { notRegistered = true });
+                currentReg = regs.FirstOrDefault();
             }
-        }
 
-        [Route(@"{lotId}/{path:regex(^aircraftCertRegistrationsCurrent$)}/{lotInd}")]
-        public IHttpActionResult GetRegistrationsData(int lotId, int? lotInd = null)
-        {
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM");
-            if (registrations.Length > 0)
+            RegistrationViewDO regView = new RegistrationViewDO();
+            regView.CurrentIndex = currentReg.Reg.Part.Index;
+
+            var currentRegAw = regs
+                .Where(r => r.Position >= currentReg.Position && r.Aws.Any())
+                .Select(r =>
+                    new
+                    {
+                        Aw = r.Aws.First(),
+                        IsForCurrentReg = r == currentReg
+                    })
+                .FirstOrDefault();
+
+            if (currentRegAw != null)
             {
-                var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
-                return Ok(GetRegistrationsData(registrations, registrationsView, lotInd, lotId));
+                regView.AirworthinessIndex = currentRegAw.Aw.Part.Index;
+                regView.HasAirworthiness = currentRegAw.IsForCurrentReg;
             }
             else
             {
-                return Ok(new { notRegistered = true });
+                regView.AirworthinessIndex = null;
+                regView.HasAirworthiness = false;
+            }
+
+            int position = currentReg.Position;
+
+            regView.LastIndex = regs[0].Reg.Part.Index;
+            regView.NextIndex = position > 0 ? regs[position - 1].Reg.Part.Index : (int?)null;
+            regView.PrevIndex = position < regs.Count - 1 ? regs[position + 1].Reg.Part.Index : (int?)null;
+            regView.FirstIndex = regs[regs.Count - 1].Reg.Part.Index;
+
+            regView.LastReg = regs[0].Reg.Content;
+            regView.FirstReg = regs[regs.Count - 1].Reg.Content;
+
+            return regView;
+        }
+
+        [Route(@"{lotId}/aircraftCertRegistrationsFM/view")]
+        [Route(@"{lotId}/aircraftCertRegistrationsFM/{regPartIndex}/view")]
+        public IHttpActionResult GetRegistrationView(int lotId, int? regPartIndex = null)
+        {
+            var index = this.lotRepository.GetLotIndex(lotId).Index;
+            var registrations = index.GetParts("aircraftCertRegistrationsFM");
+            var airworthinesses = index.GetParts("aircraftCertAirworthinessesFM");
+            if (registrations.Length > 0)
+            {
+                return Ok(CreateRegistrationView(registrations, airworthinesses, regPartIndex));
+            }
+            else
+            {
+                return Ok();
             }
         }
 

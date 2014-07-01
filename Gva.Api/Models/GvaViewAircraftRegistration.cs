@@ -18,8 +18,6 @@ namespace Gva.Api.Models
 
         public string RegMark { get; set; }
 
-        public int? CertAirworthinessId { get; set; }
-
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
@@ -44,7 +42,6 @@ namespace Gva.Api.Models
             this.Property(t => t.CertNumber).HasColumnName("CertNumber");
             this.Property(t => t.ActNumber).HasColumnName("ActNumber");
             this.Property(t => t.RegMark).HasColumnName("RegMark");
-            this.Property(t => t.CertAirworthinessId).HasColumnName("CertAirworthinessId");
 
             // Relationships
             this.HasRequired(t => t.Lot)

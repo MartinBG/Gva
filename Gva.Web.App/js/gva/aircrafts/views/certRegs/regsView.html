@@ -1,40 +1,40 @@
-﻿<div ng-show="!regs.notRegistered">
+﻿<div ng-if="regView">
   <ng-form name="viewCertForm" class="card" sc-form-readonly>
-      <div class="well well-sm" ng-show="regs.firstReg && regs.lastReg">
+      <div class="well well-sm" ng-show="regView.firstReg && regView.lastReg">
         <div class="row">
           <div class="col-sm-12">
             <span l10n-text="aircrafts.regView.firstReg"></span>
-            <span>{{regs.firstReg.register.textContent.regPrefix + regs.firstReg.certNumber}}</span>
-            <span>, {{regs.firstReg.regMark}}</span>
+            <span>{{regView.firstReg.register.textContent.regPrefix + regView.firstReg.certNumber}}</span>
+            <span>, {{regView.firstReg.regMark}}</span>
             <span l10n-text="aircrafts.regView.regFrom"></span>
-            <span>{{regs.firstReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
+            <span>{{regView.firstReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12">
             <span l10n-text="aircrafts.regView.lastReg"></span>
-            <span>{{regs.lastReg.register.textContent.regPrefix + regs.lastReg.certNumber}}</span>
-            <span>, {{regs.lastReg.regMark}}</span>
+            <span>{{regView.lastReg.register.textContent.regPrefix + regView.lastReg.certNumber}}</span>
+            <span>, {{regView.lastReg.regMark}}</span>
             <span l10n-text="aircrafts.regView.regFrom"></span>
-            <span>{{regs.lastReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
+            <span>{{regView.lastReg.certDate | date: 'dd.MM.yyyy г.'}}</span>
           </div>
         </div>
       </div>
       <div class ="row">
         <div class="form-group col-md-7 col-md-offset-3 col-sm-offset-1 col-sm-10">
-          <button name="firstBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regs.firstIndex)" ng-disabled="regs.prevIndex == undefined">
+          <button name="firstBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regView.firstIndex)" ng-disabled="regView.prevIndex == undefined">
             <span ng-class="{'glyphicon glyphicon-loading': firstBtn.$pending, 'fa fa-angle-double-left': !firstBtn.$pending }"></span>
             <span l10n-text="aircrafts.regView.first"></span>
           </button>
-          <button name="prevBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regs.prevIndex)" ng-disabled="regs.prevIndex == undefined">
+          <button name="prevBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regView.prevIndex)" ng-disabled="regView.prevIndex == undefined">
             <span ng-class="{'glyphicon glyphicon-loading': prevBtn.$pending, 'fa fa-angle-left': !prevBtn.$pending }"></span>
             <span l10n-text="aircrafts.regView.prev"></span>
           </button>
-          <button name="nextBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regs.nextIndex)" ng-disabled="regs.nextIndex == undefined">
+          <button name="nextBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regView.nextIndex)" ng-disabled="regView.nextIndex == undefined">
             <span l10n-text="aircrafts.regView.next"></span>
             <span ng-class="{'glyphicon glyphicon-loading': nextBtn.$pending, 'fa fa-angle-right': !nextBtn.$pending }"></span>
           </button>
-          <button name="lastBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regs.lastIndex)" ng-disabled="regs.nextIndex == undefined">
+          <button name="lastBtn" class="btn btn-sm btn-primary" type="button" sc-click="switchReg(regView.lastIndex)" ng-disabled="regView.nextIndex == undefined">
             <span l10n-text="aircrafts.regView.last"></span>
             <span ng-class="{'glyphicon glyphicon-loading': lastBtn.$pending, 'fa fa-angle-double-right': !lastBtn.$pending }"></span>
           </button>
@@ -82,6 +82,6 @@
     </div>
   </ng-form>
 </div>
-<div ng-show="regs.notRegistered">
+<div ng-if="!regView">
   <sc-button name="newButton" btn-click="newReg()" text="aircrafts.regView.newReg" class="btn btn-sm btn-primary" icon="glyphicon-floppy-disk"></sc-button>
 </div>

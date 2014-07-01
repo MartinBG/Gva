@@ -2,9 +2,9 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.airworthinessViewDirective.title"></strong>
-      <strong ng-show="$parent.aw.partIndex && !$parent.regs.hasAirworthiness" l10n-text="aircrafts.airworthinessViewDirective.titleNoAw"></strong>
+      <strong ng-show="$parent.aw.partIndex && !$parent.regView.hasAirworthiness" l10n-text="aircrafts.airworthinessViewDirective.titleNoAw"></strong>
       <div class="pull-right">
-        <sc-button name="newButton" btn-click="newAw()" ng-show="!$parent.aw.partIndex || !$parent.regs.hasAirworthiness" text="aircrafts.airworthinessViewDirective.new" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+        <sc-button name="newButton" btn-click="newAw()" ng-show="!$parent.aw.partIndex || !$parent.regView.hasAirworthiness" text="aircrafts.airworthinessViewDirective.new" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
         <sc-link-button ng-show="$parent.aw.partIndex" name="viewButton" sc-sref="{state: 'root.aircrafts.view.airworthinessesFM.edit', params: {id: aircraftId, ind: $parent.aw.partIndex}}" text="aircrafts.regViewDirective.view" class="btn btn-xs btn-primary"
         icon="glyphicon-search"></sc-link-button>
       </div>
