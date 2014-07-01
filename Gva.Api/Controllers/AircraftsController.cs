@@ -304,6 +304,14 @@ namespace Gva.Api.Controllers
             }
         }
 
+        [Route(@"{lotId}/aircraftCertRegistrationsFM/{regPartIndex}/debts")]
+        public IHttpActionResult GetRegistrationDebts(int lotId, int regPartIndex)
+        {
+            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regPartIndex);
+
+            return Ok(parts.Select(pv => new PartVersionDO(pv)));
+        }
+
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
@@ -350,14 +358,6 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetRegistrations(int lotId, string path)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
-
-            return Ok(parts.Select(pv => new PartVersionDO(pv)));
-        }
-
-        [Route(@"{lotId}/{path:regex(^aircraftCurrentDocumentDebtsFM$)}/{regId}")]
-        public IHttpActionResult GetRegistrations(int lotId, int regId)
-        {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regId);
 
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
