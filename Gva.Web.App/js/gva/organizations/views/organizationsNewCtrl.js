@@ -28,12 +28,11 @@
   OrganizationsNewCtrl.$inject = ['$scope', '$state', 'Organization', 'organization', 'caseType'];
 
   OrganizationsNewCtrl.$resolve = {
-    organization: [
-      'Organization',
-      function (Organization) {
-        return new Organization();
-      }
-    ],
+    organization: function () {
+      return {
+        organizationData: {}
+      };
+    },
     caseType: [
       '$stateParams',
       'Nomenclature',
