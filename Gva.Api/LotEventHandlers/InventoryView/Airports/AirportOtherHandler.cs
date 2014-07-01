@@ -30,7 +30,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
 
             invItem.SetPartAlias = partVersion.Part.SetPart.Alias;
             invItem.Name = partVersion.Content.Get<string>("documentRole.name");
-            invItem.Name = partVersion.Content.Get<string>("documentType.name");
+            invItem.Type = partVersion.Content.Get<string>("documentType.name");
             invItem.Number = partVersion.Content.Get<string>("documentNumber");
             invItem.Date = partVersion.Content.Get<DateTime?>("documentDateValidFrom");
             invItem.Publisher = partVersion.Content.Get<string>("documentPublisher");
