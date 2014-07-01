@@ -3,12 +3,7 @@
   'use strict';
 
   angular.module('gva').factory('Organization', ['$resource', function($resource) {
-    var Organization = $resource('/api/organizations/:id', {}, {
-      'getCaseTypes': {
-        method: 'GET',
-        url: '/api/organizations/caseTypes'
-      }
-    });
+    var Organization = $resource('/api/organizations/:id');
 
     var p = _.partial(Organization, {
       organizationData: {

@@ -104,15 +104,6 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route("caseTypes")]
-        public IHttpActionResult GetCaseTypes(int lotId)
-        {
-            return Ok(new
-            {
-                caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId).Select(ct => ct.Name).ToList()
-            });
-        }
-
         [Route("")]
         public IHttpActionResult PostOrganization(JObject organization)
         {

@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function CommonInspectionCtrl($scope, $state, $stateParams, Organization) {
+  function CommonInspectionCtrl($scope, $state, $stateParams, Nomenclature) {
     $scope.watchList = [];
 
     $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
@@ -15,11 +15,13 @@
     };
 
     if($scope.$parent.organization) {
-
-      Organization.getCaseTypes({
+      Nomenclature.query({
+        alias: 'organizationCaseTypes',
         lotId: $stateParams.id
       }).$promise.then(function(result){
-        $scope.caseTypesOptions.tags = result.caseTypes;
+        $scope.caseTypesOptions.tags = _.map(result, function (item) {
+          return item.name;
+        });
         angular.element('.select2input').select2($scope.caseTypesOptions);
       });
     }
@@ -99,7 +101,7 @@
       });
     };
   }
-  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Organization'];
+  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Nomenclature'];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));
