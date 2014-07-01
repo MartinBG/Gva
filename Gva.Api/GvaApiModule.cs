@@ -95,7 +95,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftRegistrationRepository>().As<IAircraftRegistrationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkRepository>().As<IAircraftRegMarkRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationAwRepository>().As<IAircraftRegistrationAwRepository>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
+            moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CaseTypeRepository>().As<ICaseTypeRepository>().InstancePerLifetimeScope();
