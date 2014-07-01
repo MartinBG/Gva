@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>2</ActiveSheet>
+  <ActiveSheet>4</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -556,7 +556,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -648,7 +647,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocFileTypes">
-  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="5" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="6" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:AutoFitWidth="0" ss:Width="129"/>
    <Column ss:AutoFitWidth="0" ss:Width="147"/>
@@ -689,6 +688,13 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1001</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Чеклист</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Checklist</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Checklist</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <PageSetup>
@@ -697,11 +703,12 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>2</ActiveRow>
-     <ActiveCol>3</ActiveCol>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>4</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

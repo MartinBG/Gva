@@ -554,35 +554,6 @@ namespace Docs.Api.Controllers
                         null,
                         userContext);
 
-                    if (newDoc.DocFormatTypeId == electronicDocFormatType.DocFormatTypeId)
-                    {
-                        DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
-
-                        byte[] eDocFileContent = this.docRepository.CreateElectornicDocumentFile(docType.ElectronicServiceFileTypeUri);
-
-                        if (eDocFileContent != null)
-                        {
-                            Guid eDocFileBlobKey = Guid.Empty;
-
-                            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
-                            {
-                                connection.Open();
-                                using (var blobWriter = new BlobWriter(connection))
-                                using (var stream = blobWriter.OpenStream())
-                                {
-                                    stream.Write(eDocFileContent, 0, eDocFileContent.Length);
-                                    eDocFileBlobKey = blobWriter.GetBlobKey();
-                                }
-                            }
-
-                            DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().SingleOrDefault(e => e.Alias == "PublicAttachedFile");
-                            DocFileOriginType eAppAttachedDocFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().SingleOrDefault(e => e.Alias == "EApplicationAttachedFile");
-                            DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.DocTypeUri == docType.ElectronicServiceFileTypeUri);
-
-                            newDoc.CreateDocFile(publicDocFileKind.DocFileKindId, docFileType.DocFileTypeId, eAppAttachedDocFileOriginType.DocFileOriginTypeId, "Електронен документ", "E-Document.xml", String.Empty, eDocFileBlobKey, userContext);
-                        }
-                    }
-
                     DocRelation parentDocRelation = null;
                     if (preDoc.ParentDocId.HasValue)
                     {
@@ -622,6 +593,43 @@ namespace Docs.Api.Controllers
                     if (newDoc.IsCase)
                     {
                         this.docRepository.GenerateAccessCode(newDoc, this.userContext);
+                    }
+
+                    if (newDoc.DocFormatTypeId == electronicDocFormatType.DocFormatTypeId)
+                    {
+                        DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
+
+                        byte[] eDocFileContent = this.docRepository.CreateElectornicDocumentFile(docType.ElectronicServiceFileTypeUri);
+
+                        if (eDocFileContent != null)
+                        {
+                            Guid eDocFileBlobKey = Guid.Empty;
+
+                            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                            {
+                                connection.Open();
+                                using (var blobWriter = new BlobWriter(connection))
+                                using (var stream = blobWriter.OpenStream())
+                                {
+                                    stream.Write(eDocFileContent, 0, eDocFileContent.Length);
+                                    eDocFileBlobKey = blobWriter.GetBlobKey();
+                                }
+                            }
+
+                            DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().SingleOrDefault(e => e.Alias == "PublicAttachedFile");
+                            DocFileOriginType editableDocFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().SingleOrDefault(e => e.Alias == "EditableFile");
+                            DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.DocTypeUri == docType.ElectronicServiceFileTypeUri);
+
+                            newDoc.CreateDocFile(
+                                publicDocFileKind.DocFileKindId,
+                                docFileType.DocFileTypeId,
+                                editableDocFileOriginType.DocFileOriginTypeId,
+                                "Електронен документ",
+                                "E-Document.xml",
+                                String.Empty,
+                                eDocFileBlobKey,
+                                userContext);
+                        }
                     }
 
                     this.unitOfWork.Save();
@@ -908,7 +916,7 @@ namespace Docs.Api.Controllers
             DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
             if (editable != null)
             {
-                returnValue.JObjectForm = editable.Name;
+                returnValue.JObjectForm = editable.DocFileType.DocTypeUri;
             }
 
             foreach (var df in doc.DocFiles.Where(e => !e.DocFileOriginTypeId.HasValue || e.DocFileOriginType.Alias != "EditableFile"))

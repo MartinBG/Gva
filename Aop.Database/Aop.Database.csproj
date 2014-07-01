@@ -130,7 +130,6 @@
     <Content Include="Insert\AopApplicationObjects.sql" />
     <Content Include="Insert\AopEmployers.sql" />
     <Content Include="Insert\Docs\DocEntryTypes.sql" />
-    <Content Include="Insert\Docs\DocFileOriginTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Create\Diagram\" />
