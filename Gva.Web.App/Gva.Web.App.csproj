@@ -104,7 +104,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistration.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertSmod.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCurrentDebtFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftData.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDataApex.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentApplication.js" />
