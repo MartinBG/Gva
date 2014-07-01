@@ -123,22 +123,8 @@ namespace Regs.Api.Models
             return this.UpdatePartVersion(partVersion, json, userContext);
         }
 
-        public PartVersion DeletePart(string path, UserContext userContext, bool lastPartOnly = false)
+        public PartVersion DeletePart(string path, UserContext userContext)
         {
-            if (lastPartOnly)
-            {
-                var allPartsPath = Regex.Match(path, @".+/\d+/[^/\d]+").Value;
-
-                var lastPartVersion = this.GetPartVersions(allPartsPath, false)
-                    .OrderByDescending(pv => pv.Part.Index)
-                    .First();
-
-                if (lastPartVersion.Part.Path != path)
-                {
-                    throw new Exception("Cannot delete part that is not last!");
-                }
-            }
-
             PartVersion partVersion = this.GetPartVersions(path, true).Single();
 
             return this.DeletePartVersion(partVersion, userContext);

@@ -377,7 +377,7 @@ namespace Gva.Api.Controllers
                 lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
             }
 
-            lot.DeletePart(path, userContext, false);
+            lot.DeletePart(path, userContext);
 
             lot.Commit(userContext, lotEventDispatcher);
 
