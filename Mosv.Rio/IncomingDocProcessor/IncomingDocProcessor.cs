@@ -276,11 +276,6 @@ namespace Mosv.Rio.IncomingDocProcessor
                 discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.SizeTooLarge);
             }
 
-            if (!rioValidator.CheckSignatureValidity(xmlContent, documentMetaData.SignatureXPath, documentMetaData.SignatureXPathNamespaces))
-            {
-                discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
-            }
-
             if (!rioValidator.CheckSupportedFileFormats(attachedDocuments.Select(e => e.FileName).ToList(), supportedFileFormats))
             {
                 discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);

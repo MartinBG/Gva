@@ -221,6 +221,10 @@
       return $state.go('root.docs.new', { parentDocId: $scope.doc.docId });
     };
 
+    $scope.attachElectronicDoc = function () {
+      return $state.go('root.docs.new', { parentDocId: $scope.doc.docId, eDoc: true });
+    };
+
     $scope.attachDocInternal = function (docEntryTypeAlias) {
       return Doc
         .createChild({
@@ -241,28 +245,6 @@
 
     $scope.attachRemark = function () {
       return $scope.attachDocInternal('Remark');
-    };
-
-    $scope.attachAcknowledgeDoc = function () {
-      return Doc
-        .createChildAcknowledge({
-          id: doc.docId
-        }, {})
-        .$promise
-        .then(function (result) {
-          return $state.go('root.docs.edit.view', { id: result.docId });
-        });
-    };
-
-    $scope.attachNotAcknowledgeDoc = function () {
-      return Doc
-        .createChildNotAcknowledge({
-          id: doc.docId
-        }, {})
-        .$promise
-        .then(function (result) {
-          return $state.go('root.docs.edit.view', { id: result.docId });
-        });
     };
 
     $scope.endStage = function () {

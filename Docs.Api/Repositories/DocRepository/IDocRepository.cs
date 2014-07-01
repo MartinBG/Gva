@@ -313,5 +313,7 @@ namespace Docs.Api.Repositories.DocRepository
         Tuple<string, string> GetPositionAndNameById(int unitId);
 
         List<Doc> FindPublicLeafsByDocId(int docId);
+
+        byte[] CreateElectornicDocumentFile(string electronicServiceFileTypeUri);
     }
 }

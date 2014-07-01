@@ -10,6 +10,10 @@
                   action: attachDoc,
                   visible: doc.flags.isVisibleCreateChildDoc
                 }, {
+                  text: 'docs.edit.electronicDocument',
+                  action: attachElectronicDoc,
+                  visible: doc.flags.isVisibleCreateChildDoc
+                }, {
                   text: 'docs.edit.resolution',
                   action: attachResolution,
                   visible: doc.flags.isVisibleCreateChildResolution
@@ -21,12 +25,6 @@
                   text: 'docs.edit.remark',
                   action: attachRemark,
                   visible: doc.flags.isVisibleCreateChildRemark
-                }, {
-                  text: 'docs.edit.acknowledgeDoc',
-                  action: attachAcknowledgeDoc
-                }, {
-                  text: 'docs.edit.notAcknowledgeDoc',
-                  action: attachNotAcknowledgeDoc
                 }
               ]">
           </sc-dropdown-button>

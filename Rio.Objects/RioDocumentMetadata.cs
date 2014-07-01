@@ -900,6 +900,14 @@ namespace Rio.Objects
             }
         }
 
+        public string DocumentTypeURIValue
+        {
+            get
+            {
+                return String.Format("{0}-{1}", _documentTypeURI.RegisterIndex, _documentTypeURI.BatchNumber);
+            }
+        }
+
         public string DocumentTypeName
         {
             get

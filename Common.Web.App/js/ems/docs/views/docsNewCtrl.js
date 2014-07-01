@@ -90,9 +90,17 @@
           docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
           docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
-          res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
-            return dft.alias === 'Paper';
-          });
+
+          if (!!$stateParams.eDoc) {
+            res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
+              return dft.alias === 'Electronic';
+            });
+          }
+          else {
+            res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
+              return dft.alias === 'Paper';
+            });
+          }
 
           if (!!$stateParams.parentDocId) {
             res.docCasePartTypes = _.filter(res.docCasePartTypes, function (dcpt) {
@@ -107,8 +115,12 @@
 
           var doc = {
             parentDocId: null,
-            docFormatTypeId: _(res.docFormatTypes).filter({ alias: 'Paper' }).first().nomValueId,
-            docFormatTypeName: _(res.docFormatTypes).filter({ alias: 'Paper' }).first().name,
+            docFormatTypeId: (!!$stateParams.eDoc) ?
+              _(res.docFormatTypes).filter({ alias: 'Electronic' }).first().nomValueId :
+              _(res.docFormatTypes).filter({ alias: 'Paper' }).first().nomValueId,
+            docFormatTypeName: (!!$stateParams.eDoc) ?
+              _(res.docFormatTypes).filter({ alias: 'Electronic' }).first().name :
+              _(res.docFormatTypes).filter({ alias: 'Paper' }).first().name,
             docCasePartTypeId: _(res.docCasePartTypes).filter({alias: 'Public'}).first().nomValueId,
             docCasePartTypeName: _(res.docCasePartTypes).filter({ alias: 'Public' }).first().name,
             docDirectionId: _(res.docDirections).first().nomValueId,

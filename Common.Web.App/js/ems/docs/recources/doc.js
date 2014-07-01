@@ -14,14 +14,6 @@
                 docEntryTypeAlias: '@docEntryTypeAlias'
               }
             },
-            'createChildAcknowledge': {
-              method: 'POST',
-              url: '/api/docs/:id/createAcknowledge'
-            },
-            'createChildNotAcknowledge': {
-              method: 'POST',
-              url: '/api/docs/:id/createNotAcknowledge'
-            },
             'register': {
               method: 'POST',
               url: '/api/docs/:id/register',

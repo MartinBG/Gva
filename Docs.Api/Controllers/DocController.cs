@@ -534,6 +534,7 @@ namespace Docs.Api.Controllers
             {
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
+                DocFormatType electronicDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>().SingleOrDefault(e => e.Alias == "Electronic");
                 DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Draft");
 
                 List<Doc> createdDocs = new List<Doc>();
@@ -552,6 +553,35 @@ namespace Docs.Api.Controllers
                         preDoc.DocFormatTypeId,
                         null,
                         userContext);
+
+                    if (newDoc.DocFormatTypeId == electronicDocFormatType.DocFormatTypeId)
+                    {
+                        DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
+
+                        byte[] eDocFileContent = this.docRepository.CreateElectornicDocumentFile(docType.ElectronicServiceFileTypeUri);
+
+                        if (eDocFileContent != null)
+                        {
+                            Guid eDocFileBlobKey = Guid.Empty;
+
+                            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                            {
+                                connection.Open();
+                                using (var blobWriter = new BlobWriter(connection))
+                                using (var stream = blobWriter.OpenStream())
+                                {
+                                    stream.Write(eDocFileContent, 0, eDocFileContent.Length);
+                                    eDocFileBlobKey = blobWriter.GetBlobKey();
+                                }
+                            }
+
+                            DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().SingleOrDefault(e => e.Alias == "PublicAttachedFile");
+                            DocFileOriginType eAppAttachedDocFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().SingleOrDefault(e => e.Alias == "EApplicationAttachedFile");
+                            DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.DocTypeUri == docType.ElectronicServiceFileTypeUri);
+
+                            newDoc.CreateDocFile(publicDocFileKind.DocFileKindId, docFileType.DocFileTypeId, eAppAttachedDocFileOriginType.DocFileOriginTypeId, "Електронен документ", "E-Document.xml", String.Empty, eDocFileBlobKey, userContext);
+                        }
+                    }
 
                     DocRelation parentDocRelation = null;
                     if (preDoc.ParentDocId.HasValue)
@@ -1731,30 +1761,6 @@ namespace Docs.Api.Controllers
             return Ok(new { url = accessUrl });
         }
 
-        [HttpPost]
-        public IHttpActionResult CreateChildAcknowledgeDoc(int id)
-        {
-            throw new NotImplementedException();
-            //int docId = CreateReceiptDoc(id, true);
-
-            //return Ok(new
-            //{
-            //    docId = docId
-            //});
-        }
-
-        [HttpPost]
-        public IHttpActionResult CreateChildNotAcknowledgeDoc(int id)
-        {
-            throw new NotImplementedException();
-            //int docId = CreateReceiptDoc(id, false);
-
-            //return Ok(new
-            //{
-            //    docId = docId
-            //});
-        }
-
         [HttpGet]
         public IHttpActionResult GetDocSendEmail(int id)
         {
@@ -1810,206 +1816,5 @@ namespace Docs.Api.Controllers
             //    return Ok();
             //}
         }
-
-        //private int CreateReceiptDoc(int id, bool isDocAcknowledged)
-        //{
-        //    using (var transaction = this.unitOfWork.BeginTransaction())
-        //    {
-        //        UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-        //        DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
-        //        DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>().SingleOrDefault(e => e.Alias == "Prepared");
-        //        DocDirection docDirection = this.unitOfWork.DbContext.Set<DocDirection>().Single(e => e.Alias == "Outgoing");
-        //        DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().Single(e => e.Alias == "Public");
-        //        string receiptMessageAlias = isDocAcknowledged ? "ReceiptAcknowledgedMessage" : "ReceiptNotAcknowledgedMessage";
-        //        DocType docTypeId = this.unitOfWork.DbContext.Set<DocType>().Single(e => e.Alias == receiptMessageAlias);
-        //        DocFormatType docFormatType = this.unitOfWork.DbContext.Set<DocFormatType>().Single(e => e.Alias == "Electronic");
-
-        //        Doc initialDoc = this.docRepository.Find(id, e => e.DocType, e => e.DocCorrespondents.Select(dc => dc.Correspondent), e => e.DocRelations);
-        //        DocRelation initialDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == initialDoc.DocId);
-        //        Doc rootDoc = this.docRepository.Find(initialDocRelation.RootDocId.Value);
-
-        //        PreDocDO preDoc = new PreDocDO()
-        //        {
-        //            ParentDocId = id,
-        //            DocFormatTypeId = docFormatType.DocFormatTypeId,
-        //            DocCasePartTypeId = docCasePartType.DocCasePartTypeId,
-        //            DocDirectionId = docDirection.DocDirectionId,
-        //            DocTypeGroupId = docTypeId.DocTypeGroupId,
-        //            DocTypeId = docTypeId.DocTypeId,
-        //            DocSubject = isDocAcknowledged ? "Съобщение за успешно приемане" : "Съобщение за неуспешно приемане",
-        //            Correspondents = initialDoc.DocCorrespondents.Count > 0 ? initialDoc.DocCorrespondents.Select(e => e.CorrespondentId).ToList() : null,
-        //            Register = false
-        //        };
-
-        //        Doc newDoc = this.docRepository.CreateDoc(
-        //             preDoc.DocDirectionId,
-        //             documentEntryType.DocEntryTypeId,
-        //             draftStatus.DocStatusId,
-        //             preDoc.DocSubject,
-        //             preDoc.DocCasePartTypeId,
-        //             null,
-        //             null,
-        //             preDoc.DocTypeId,
-        //             preDoc.DocFormatTypeId,
-        //             null,
-        //             userContext);
-
-        //        DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == preDoc.ParentDocId.Value);
-
-        //        ElectronicServiceStage electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
-        //                .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
-
-        //        List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-        //            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-        //            .ToList();
-
-        //        List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
-        //            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-        //            .ToList();
-
-        //        DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
-        //            .SingleOrDefault(e => e.Alias == "ImportedBy");
-
-        //        newDoc.CreateDocProperties(
-        //            parentDocRelation,
-        //            docCasePartType.DocCasePartTypeId,
-        //            docTypeClassifications,
-        //            electronicServiceStage,
-        //            docTypeUnitRoles,
-        //            importedBy,
-        //            unitUser,
-        //            preDoc.Correspondents,
-        //            null,
-        //            this.userContext);
-
-        //        this.unitOfWork.Save();
-
-        //        this.docRepository.spSetDocUsers(newDoc.DocId);
-
-        //        this.unitOfWork.Save();
-
-        //        DocFileKind docFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().Single(e => e.Alias == "PublicAttachedFile");
-        //        DocFileOriginType docFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().Single(e => e.Alias == "EApplication");
-
-        //        var fileKey = CreateReceiptDocFileContent(isDocAcknowledged, rootDoc, initialDoc, newDoc, null);
-
-        //        DocFile docFile = new DocFile();
-        //        docFile.Doc = newDoc;
-        //        docFile.DocContentStorage = String.Empty;
-        //        docFile.DocFileContentId = fileKey;
-        //        string docFileTypeAlias = isDocAcknowledged ? "ReceiptAcknowledgedMessage" : "ReceiptNotAcknowledgedMessage";
-        //        docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == docFileTypeAlias).DocFileTypeId;
-        //        docFile.DocFileKindId = docFileKind.DocFileKindId;
-        //        docFile.Name = isDocAcknowledged ? "Съобщение за успешно приемане" : "Съобщение за неуспешно приемане";
-        //        docFile.DocFileName = isDocAcknowledged ? "AcceptedMessage.xml" : "NotAcceptedMessage.xml";
-        //        docFile.DocFileOriginTypeId = docFileOriginType.DocFileOriginTypeId;
-        //        docFile.IsPrimary = true;
-        //        docFile.IsSigned = false;
-        //        docFile.IsActive = true;
-
-        //        this.unitOfWork.DbContext.Set<DocFile>().Add(docFile);
-        //        this.unitOfWork.Save();
-
-        //        transaction.Commit();
-
-        //        return newDoc.DocId;
-        //    }
-        //}
-
-        //private Guid CreateReceiptDocFileContent(bool isDocAcknowledged, Doc rootDoc, Doc initialDoc, Doc receiptDoc, List<string> discrepancies)
-        //{
-        //    string receiptMessageXml;
-        //    if (isDocAcknowledged)
-        //    {
-        //        string htmlFormat = @"<p>Номер на преписка: <b>{0}</b><br/>Код за достъп: <b>{1}</b><br/></p>";
-        //        string regUri = rootDoc != null ? rootDoc.RegUri : initialDoc.RegUri;
-        //        string accessCode = rootDoc != null ? rootDoc.AccessCode : initialDoc.AccessCode;
-        //        string caseAccessIdentifier = String.Format(htmlFormat, regUri, accessCode);
-
-        //        //var receiptMessage = new ReceiptAcknowledgedMessage();
-        //        //receiptMessage.DocumentURI = new DocumentURI();
-        //        //receiptMessage.DocumentURI.RegisterIndex = initialDoc.RegIndex;
-        //        //receiptMessage.DocumentURI.SequenceNumber = initialDoc.RegNumber.Value.ToString("D6");
-        //        //receiptMessage.DocumentURI.ReceiptOrSigningDate = initialDoc.RegDate.Value;
-        //        ////receiptMessage.Applicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
-        //        //receiptMessage.Applicant = new ElectronicServiceApplicant();
-        //        ////receiptMessage.ElectronicServiceProvider = rioApplication.ElectronicServiceProviderBasicData;
-        //        //receiptMessage.ElectronicServiceProvider = new ElectronicServiceProviderBasicData();
-        //        //receiptMessage.TransportType = "0006-000001";   //Чрез уеб базирано приложение;
-        //        ////receiptMessage.DocumentTypeURI = rioApplication.DocumentTypeURI;
-        //        //receiptMessage.DocumentTypeURI = new DocumentTypeURI(); ;
-        //        ////receiptMessage.DocumentTypeName = rioApplication.DocumentTypeName;
-        //        //receiptMessage.DocumentTypeName = null;
-        //        //receiptMessage.RegisteredBy = new RegisteredBy();
-        //        //receiptMessage.RegisteredBy.Officer = new Officer();
-        //        //receiptMessage.RegisteredBy.Officer.AISUserIdentifier = "Системен потребител";
-        //        //receiptMessage.RegisteredBy.AISURI = "АИС";
-        //        //receiptMessage.CaseAccessIdentifier = caseAccessIdentifier;
-
-
-        //        var receiptMessage = new ReceiptAcknowledgedMessage();
-        //        receiptMessage.DocumentURI = new DocumentURI();
-        //        receiptMessage.DocumentURI.RegisterIndex = String.Empty;
-        //        receiptMessage.DocumentURI.SequenceNumber = String.Empty;
-        //        receiptMessage.DocumentURI.ReceiptOrSigningDate = DateTime.Now;
-        //        //receiptMessage.Applicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
-        //        receiptMessage.Applicant = new ElectronicServiceApplicant();
-        //        //receiptMessage.ElectronicServiceProvider = rioApplication.ElectronicServiceProviderBasicData;
-        //        receiptMessage.ElectronicServiceProvider = new ElectronicServiceProviderBasicData();
-        //        receiptMessage.TransportType = "0006-000001";   //Чрез уеб базирано приложение;
-        //        //receiptMessage.DocumentTypeURI = rioApplication.DocumentTypeURI;
-        //        receiptMessage.DocumentTypeURI = new DocumentTypeURI();
-        //        receiptMessage.DocumentTypeURI.RegisterIndex = "0010";
-        //        receiptMessage.DocumentTypeURI.BatchNumber = "000002";
-        //        //receiptMessage.DocumentTypeName = rioApplication.DocumentTypeName;
-        //        receiptMessage.DocumentTypeName = null;
-        //        receiptMessage.RegisteredBy = new RegisteredBy();
-        //        receiptMessage.RegisteredBy.Officer = new Officer();
-        //        receiptMessage.RegisteredBy.Officer.AISUserIdentifier = "Системен потребител";
-        //        receiptMessage.RegisteredBy.AISURI = "АИС";
-        //        receiptMessage.CaseAccessIdentifier = caseAccessIdentifier;
-
-        //        receiptMessageXml = this.rioDocumentParser.XmlSerializeReceiptAcknowledgedMessage(receiptMessage);
-        //    }
-        //    else
-        //    {
-        //        var receiptMessage = new ReceiptNotAcknowledgedMessage();
-        //        receiptMessage.MessageURI = new DocumentURI();
-        //        receiptMessage.MessageURI.RegisterIndex = receiptDoc.RegIndex;
-        //        receiptMessage.MessageURI.SequenceNumber = receiptDoc.RegNumber.Value.ToString("D6");
-        //        receiptMessage.MessageURI.ReceiptOrSigningDate = receiptDoc.RegDate.Value;
-        //        //receiptMessage.Applicant = rioApplication.ElectronicAdministrativeServiceHeader.ElectronicServiceApplicant;
-        //        receiptMessage.Applicant = new ElectronicServiceApplicant();
-        //        //receiptMessage.ElectronicServiceProvider = rioApplication.ElectronicServiceProviderBasicData;
-        //        receiptMessage.ElectronicServiceProvider = new ElectronicServiceProviderBasicData();
-        //        receiptMessage.TransportType = "0006-000001";   //Чрез уеб базирано приложение;
-        //        //receiptMessage.DocumentTypeURI = rioApplication.DocumentTypeURI;
-        //        receiptMessage.DocumentTypeURI = new DocumentTypeURI(); ;
-        //        //receiptMessage.DocumentTypeName = rioApplication.DocumentTypeName;
-        //        receiptMessage.DocumentTypeName = null;
-        //        receiptMessage.MessageCreationTime = receiptDoc.RegDate.Value;
-        //        receiptMessage.Discrepancies = new Discrepancies();
-        //        receiptMessage.Discrepancies.DiscrepancyCollection = new DiscrepancyCollection();
-        //        foreach (var discrepancy in discrepancies)
-        //        {
-        //            receiptMessage.Discrepancies.DiscrepancyCollection.Add(discrepancy);
-        //        }
-
-        //        receiptMessageXml = this.rioDocumentParser.XmlSerializeReceiptNotAcknowledgedMessage(receiptMessage);
-        //    }
-
-        //    byte[] content = Utf8Utils.GetBytes(receiptMessageXml);
-
-        //    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
-        //    {
-        //        connection.Open();
-        //        using (var blobWriter = new BlobWriter(connection))
-        //        using (var stream = blobWriter.OpenStream())
-        //        {
-        //            stream.Write(content, 0, content.Length);
-        //            return blobWriter.GetBlobKey();
-        //        }
-        //    }
-        //}
     }
 }
