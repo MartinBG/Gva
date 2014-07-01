@@ -147,8 +147,8 @@ namespace Gva.Api.Controllers
         {
             var person = this.lotRepository.GetLotIndex(lotId);
 
-            var personDataPart = this.lotRepository.GetLotIndex(lotId).GetPart("personData");
-            var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).GetPart("inspectorData");
+            var personDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("personData");
+            var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("inspectorData");
 
             return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
         }
@@ -308,7 +308,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceType)
         {
 
-            PartVersion[] licences = this.lotRepository.GetLotIndex(lotId).GetParts("licences");
+            PartVersion[] licences = this.lotRepository.GetLotIndex(lotId).Index.GetParts("licences");
 
             string licenceNumber = licences.Where(l => l.Content.Get("licenceType.code").ToString() == licenceType)
                 .OrderBy(l => l.Part.PartId)
@@ -366,7 +366,7 @@ namespace Gva.Api.Controllers
                 this.unitOfWork.Save();
 
                 var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
-                var inspectorDataPart = lot.GetPart("inspectorData");
+                var inspectorDataPart = lot.Index.GetPart("inspectorData");
 
                 if (caseTypes.Any(ct => ct.Alias == "inspector"))
                 {
@@ -449,7 +449,7 @@ namespace Gva.Api.Controllers
 
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
 
                 applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
 

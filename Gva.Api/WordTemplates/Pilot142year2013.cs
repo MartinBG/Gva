@@ -132,25 +132,25 @@ namespace Gva.Api.WordTemplates
         public JObject GetData(int lotId, string path, int index)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var personData = lot.GetPart("personData").Content;
-            var personAddressPart = lot.GetParts("personAddresses")
+            var personData = lot.Index.GetPart("personData").Content;
+            var personAddressPart = lot.Index.GetParts("personAddresses")
                .FirstOrDefault(a => a.Content.Get<string>("valid.code") == "Y");
             var personAddress = personAddressPart == null ?
                 new JObject() :
                 personAddressPart.Content;
-            var licence = lot.GetPart(path).Content;
+            var licence = lot.Index.GetPart(path).Content;
             var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
             var includedTrainings = edition.GetItems<int>("includedTrainings")
-                .Select(i => lot.GetPart("personDocumentTrainings/" + i).Content);
+                .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
             var includedRatings = edition.GetItems<int>("includedRatings")
-                .Select(i => lot.GetPart("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart("ratings/" + i).Content);
             var includedLicences = edition.GetItems<int>("includedLicences")
-                .Select(i => lot.GetPart("licences/" + i).Content);
+                .Select(i => lot.Index.GetPart("licences/" + i).Content);
             var includedMedicals = edition.GetItems<int>("includedMedicals")
-                .Select(i => lot.GetPart("personDocumentMedicals/" + i).Content);
+                .Select(i => lot.Index.GetPart("personDocumentMedicals/" + i).Content);
             var includedExams = edition.GetItems<int>("includedExams")
-                .Select(i => lot.GetPart("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
 
             var inspectorId = edition.Get<int?>("inspector.nomValueId");
             object[] instructorData = new object[0];
@@ -158,7 +158,7 @@ namespace Gva.Api.WordTemplates
             if (inspectorId.HasValue)
             {
                 var inspectorRatings = this.lotRepository.GetLotIndex(inspectorId.Value)
-                    .GetParts("ratings");
+                    .Index.GetParts("ratings");
 
                 instructorData = this.GetInstructorData(inspectorRatings);
                 examinerData = this.GetExaminerData(inspectorRatings);

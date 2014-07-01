@@ -100,7 +100,7 @@ namespace Gva.MigrationTool.Sets
                         lot = lotRepository.CreateLot("Aircraft", context);
                     }
 
-                    if (lot.GetPart("aircraftData") != null)
+                    if (lot.Index.GetPart("aircraftData") != null)
                     {
                         Console.WriteLine("AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
                         continue;

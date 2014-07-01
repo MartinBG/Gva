@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 using Common.Api.Models;
 using Common.Sequence;
+using Newtonsoft.Json.Linq;
 
 namespace Regs.Api.Models
 {
@@ -46,6 +48,31 @@ namespace Regs.Api.Models
             {
                 throw new InvalidOperationException(string.Format("Commit with id {0} has not been loaded.", this.CommitId));
             }
+        }
+
+        public IEnumerable<PartVersion> Parts
+        {
+            get
+            {
+                return this.CommitVersions
+                    .Select(cv => cv.PartVersion)
+                    .Where(pv => pv.PartOperation != PartOperation.Delete);
+            }
+        }
+
+        public PartVersion GetPart(string path)
+        {
+            return this.Parts
+                .Where(pv => pv.Part.Path == path)
+                .SingleOrDefault();
+        }
+
+        public PartVersion[] GetParts(string pathSpec)
+        {
+            return this.Parts
+                .Where(pv => pv.Part.Matches(pathSpec))
+                .OrderBy(pv => pv.Part.Path)
+                .ToArray();
         }
     }
 

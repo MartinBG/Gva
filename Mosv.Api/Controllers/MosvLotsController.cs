@@ -34,14 +34,14 @@ namespace Mosv.Api.Controllers
 
         public virtual IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
 
             return Ok(new PartVersionDO(part));
         }
 
         public virtual IHttpActionResult GetParts(int lotId, string path)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path);
 
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }

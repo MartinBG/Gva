@@ -78,10 +78,10 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
-                dynamic addresses = lot2.GetPartsContent("personAddresses");
-                Assert.Equal("0-1", (string)addresses[0].address);
-                Assert.Equal("1", (string)addresses[1].address);
-                Assert.Equal("2", (string)addresses[2].address);
+                dynamic addresses = lot2.Index.GetParts("personAddresses");
+                Assert.Equal("0-1", (string)addresses[0].Content.address);
+                Assert.Equal("1", (string)addresses[1].Content.address);
+                Assert.Equal("2", (string)addresses[2].Content.address);
             });
             "can be commited".Assert(() =>
             {
@@ -91,7 +91,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lot1.LotId);
-                dynamic address = lot2.GetPartContent("personAddresses/0", lot2.LastCommit.CommitId);
+                dynamic address = lot2.LastCommit.GetPart("personAddresses/0").Content;
                 Assert.Equal("0", (string)address.address);
             });
             "can be commited partially".Assert(() =>
@@ -103,8 +103,8 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lot1.LotId);
-                dynamic address = lot2.GetPartContent("personAddresses/1", lot2.LastCommit.CommitId);
-                Assert.Null(address);
+                dynamic addressPart = lot2.LastCommit.GetPart("personAddresses/1");
+                Assert.Null(addressPart);
             });
             "cannot be commited without modifications".Assert(() =>
             {
@@ -122,9 +122,9 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
-                dynamic addresses = lot2.GetPartsContent("personAddresses");
-                Assert.Equal("0", (string)addresses[0].address);
-                Assert.Equal("1", (string)addresses[1].address);
+                dynamic addresses = lot2.Index.GetParts("personAddresses");
+                Assert.Equal("0", (string)addresses[0].Content.address);
+                Assert.Equal("1", (string)addresses[1].Content.address);
             });
         }
 
@@ -195,13 +195,13 @@ namespace Regs.Api.Tests.Specs
             "can have a part in its index updated".Assert(() =>
             {
                 var lot1 = lotRepository1.GetLotIndex(lotId);
-                dynamic address = lot1.GetPartContent("personAddresses/0");
+                dynamic address = lot1.Index.GetPart("personAddresses/0").Content;
                 address.country = "USA";
                 lot1.UpdatePart("personAddresses/0", address, userContext1);
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lotId);
-                dynamic updatedAddress = lot2.GetPartContent("personAddresses/0");
+                dynamic updatedAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("USA", (string)updatedAddress.country);
             });
             "can have a commited part be deleted".Assert(() =>
@@ -211,7 +211,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lotId);
-                var deletedRating = lot2.GetPart("personStatuses/1");
+                var deletedRating = lot2.Index.GetPart("personStatuses/1");
                 Assert.Null(deletedRating);
             });
             "cannot have a part in its index deleted".Assert(() =>
@@ -226,7 +226,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lotId);
-                dynamic createdRating = lot2.GetPartContent("personStatuses/0");
+                dynamic createdRating = lot2.Index.GetPart("personStatuses/0").Content;
                 Assert.Equal("status1-1", (string)createdRating.name);
             });
             "can have a part in its index reset".Assert(() =>
@@ -240,7 +240,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lotId);
-                dynamic resetAddress = lot2.GetPartContent("personAddresses/0");
+                dynamic resetAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("Austria", (string)resetAddress.country);
             });
             "cannot have a part in its index reset if the last commit is not loaded".Assert(() =>
@@ -252,7 +252,7 @@ namespace Regs.Api.Tests.Specs
             {
                 //get and modify the lot
                 var lot1 = lotRepository1.GetLotIndex(lotId);
-                dynamic address = lot1.GetPartContent("personAddresses/0");
+                dynamic address = lot1.Index.GetPart("personAddresses/0").Content;
                 address.country = "USA";
                 lot1.UpdatePart("personAddresses/0", address, userContext1);
 
@@ -276,7 +276,7 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLot(lotId);
-                dynamic previousAddress = lot2.GetPartContent("personAddresses/0", lot2.LastCommit.CommitId);
+                dynamic previousAddress = lot2.LastCommit.GetPart("personAddresses/0").Content;
                 Assert.Null((string)previousAddress.country);
             });
             "cannot be reset to a previous commit if all later commits have not been loaded".Assert(() =>
@@ -298,7 +298,7 @@ namespace Regs.Api.Tests.Specs
 
                 lotRepository1.GetLot(lotId, firstCommitId);
                 var lot2 = lotRepository2.GetLotIndex(lotId);
-                dynamic resetAddress = lot2.GetPartContent("personAddresses/0");
+                dynamic resetAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("Austria", (string)resetAddress.country);
             });
         }

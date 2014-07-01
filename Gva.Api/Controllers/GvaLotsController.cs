@@ -42,7 +42,7 @@ namespace Gva.Api.Controllers
 
         public virtual IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
             if (part != null)
             {
                 return Ok(new PartVersionDO(part));
@@ -55,7 +55,7 @@ namespace Gva.Api.Controllers
 
         public virtual IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
             var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
             return Ok(new PartVersionDO(partVersion, lotFiles));
@@ -63,7 +63,7 @@ namespace Gva.Api.Controllers
 
         public virtual IHttpActionResult GetApplicationPart(int lotId, string path)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
             var lotObjects = this.applicationRepository.GetApplicationRefs(partVersion.PartId);
 
             return Ok(new PartVersionDO(partVersion, lotObjects));
@@ -71,14 +71,14 @@ namespace Gva.Api.Controllers
 
         public virtual IHttpActionResult GetParts(int lotId, string path)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path);
 
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
         public virtual IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId)
         {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path);
 
             List<PartVersionDO> partVersionDOs = new List<PartVersionDO>();
             foreach (var partVersion in partVersions)
@@ -95,7 +95,7 @@ namespace Gva.Api.Controllers
 
         public virtual IHttpActionResult GetApplicationParts(int lotId, string path)
         {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).GetParts(path);
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path);
 
             List<PartVersionDO> partVersionDOs = new List<PartVersionDO>();
             foreach (var partVersion in partVersions)

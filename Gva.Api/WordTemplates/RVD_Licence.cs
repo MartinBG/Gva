@@ -36,24 +36,24 @@ namespace Gva.Api.WordTemplates
         public JObject GetData(int lotId, string path, int index)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var personData = lot.GetPart("personData").Content;
-            var personAddressPart = lot.GetParts("personAddresses")
+            var personData = lot.Index.GetPart("personData").Content;
+            var personAddressPart = lot.Index.GetParts("personAddresses")
                .FirstOrDefault(a => a.Content.Get<string>("valid.code") == "Y");
             var personAddress = personAddressPart == null ?
                 new JObject() :
                 personAddressPart.Content;
-            var licence = lot.GetPart(path).Content;
+            var licence = lot.Index.GetPart(path).Content;
             var firstEdition = licence.Get<JObject>("editions[0]");
             var lastEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
 
             var includedTrainings = lastEdition.GetItems<int>("includedTrainings")
-                .Select(i => lot.GetPart("personDocumentTrainings/" + i).Content);
+                .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.GetItems<int>("includedRatings")
-                .Select(i => lot.GetPart("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart("ratings/" + i).Content);
             var includedExams = lastEdition.GetItems<int>("includedExams")
-                .Select(i => lot.GetPart("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
             var classes = this.GetClasses(includedRatings);
             var documents = this.GetDocuments(includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");

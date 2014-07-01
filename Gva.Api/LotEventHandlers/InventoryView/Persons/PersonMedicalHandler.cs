@@ -35,7 +35,7 @@ namespace Gva.Api.LotEventHandlers.InventoryView
                     "{0}-{1}-{2}-{3}",
                     partVersion.Content.Get<string>("documentNumberPrefix"),
                     partVersion.Content.Get<string>("documentNumber"),
-                    partVersion.Part.Lot.GetPart("personData").Content.Get<string>("lin"),
+                    partVersion.Part.Lot.Index.GetPart("personData").Content.Get<string>("lin"),
                     partVersion.Content.Get<string>("documentNumberSuffix"));
             invItem.Date = partVersion.Content.Get<DateTime?>("documentDateValidFrom");
             invItem.Publisher = partVersion.Content.Get<string>("documentPublisher.name");

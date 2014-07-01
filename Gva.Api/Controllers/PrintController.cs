@@ -40,7 +40,7 @@ namespace Gva.Api.Controllers
         {
             int licenceTypeId = this.lotRepository
                 .GetLotIndex(lotId)
-                .GetPart(path)
+                .Index.GetPart(path)
                 .Content.Get<int>("licenceType.nomValueId");
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 

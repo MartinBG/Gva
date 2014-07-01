@@ -77,7 +77,7 @@ namespace Gva.Api.Controllers
         [Route("organizationsAudits")]
         public IHttpActionResult GetOrganizationsAudits(int lotId)
         {
-            var audits = this.lotRepository.GetLotIndex(lotId).GetParts("organizationInspections")
+            var audits = this.lotRepository.GetLotIndex(lotId).Index.GetParts("organizationInspections")
                 .Select(i => new
                 {
                     nomValueId = i.Part.Index,

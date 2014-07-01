@@ -28,17 +28,17 @@ namespace Gva.Api.WordTemplates
         public JObject GetData(int lotId, string path, int index)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var personData = lot.GetPart("personData").Content;
-            var personEmplPart = lot.GetParts("personDocumentEmployments")
+            var personData = lot.Index.GetPart("personData").Content;
+            var personEmplPart = lot.Index.GetParts("personDocumentEmployments")
                 .FirstOrDefault(a => a.Content.Get<string>("valid.code") == "Y");
             var personEmployment = personEmplPart == null ?
                 new JObject() :
                 personEmplPart.Content;
-            var licence = lot.GetPart(path).Content;
+            var licence = lot.Index.GetPart(path).Content;
             var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
             var includedRatings = edition.GetItems<int>("includedRatings")
-                .Select(i => lot.GetPart("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart("ratings/" + i).Content);
 
             dynamic licenceHolder = this.GetLicenceHolder(personData);
             string occupation = this.GetOccupation(includedRatings);

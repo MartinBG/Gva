@@ -191,7 +191,7 @@ namespace Gva.Api.Controllers
 
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
 
                 applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
 
@@ -261,7 +261,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsCurrent$)}")]
         public IHttpActionResult GetRegistrationsData(int lotId)
         {
-            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
+            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM");
             if (registrations.Length > 0)
             {
                 var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
@@ -277,7 +277,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{path:regex(^aircraftCertRegistrationsCurrent$)}/{lotInd}")]
         public IHttpActionResult GetRegistrationsData(int lotId, int? lotInd = null)
         {
-            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM");
+            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM");
             if (registrations.Length > 0)
             {
                 var registrationsView = this.aircraftRegistrationRepository.GetRegistrations(lotId);
@@ -334,7 +334,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
         public IHttpActionResult GetRegistrations(int lotId, string path)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).GetParts(path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
+            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
 
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
@@ -342,7 +342,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{path:regex(^aircraftCurrentDocumentDebtsFM$)}/{regId}")]
         public IHttpActionResult GetRegistrations(int lotId, int regId)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regId);
+            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regId);
 
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
@@ -445,7 +445,7 @@ namespace Gva.Api.Controllers
             var partVersion = lot.DeletePart(path, userContext);
             this.fileRepository.DeleteFileReferences(partVersion);
             this.applicationRepository.DeleteApplicationRefs(partVersion);
-            var registrations = this.lotRepository.GetLotIndex(lotId).GetParts("aircraftCertRegistrationsFM").ToList();
+            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM").ToList();
             if (registrations.Count > 0)
             {
                 var lastRegistration = registrations.FirstOrDefault();

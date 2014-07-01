@@ -232,7 +232,7 @@ namespace Gva.Api.Controllers
 
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
-                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
+                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
 
                 JArray recommendations = inspection["recommendationReports"] as JArray;
                 if (recommendations == null)
@@ -302,7 +302,7 @@ namespace Gva.Api.Controllers
             int recommendationPartIndex = content.Get<int>("partIndex");
             foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
             {
-                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
+                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
 
                 JArray recommendations = inspection["recommendationReports"] as JArray;
                 if (recommendations == null)
@@ -360,11 +360,11 @@ namespace Gva.Api.Controllers
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion part = lot.GetPart(path);
+            PartVersion part = lot.Index.GetPart(path);
 
             foreach (int inspectionPartIndex in part.Content.GetItems<int>("includedAudits"))
             {
-                JObject inspection = lot.GetPart("organizationInspections/" + inspectionPartIndex).Content;
+                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
 
                 JArray recommendations = inspection["recommendationReports"] as JArray;
 
@@ -423,7 +423,7 @@ namespace Gva.Api.Controllers
 
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
 
                 applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
 

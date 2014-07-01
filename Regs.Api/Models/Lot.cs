@@ -118,14 +118,24 @@ namespace Regs.Api.Models
 
         public PartVersion UpdatePart(string path, JObject json, UserContext userContext)
         {
-            PartVersion partVersion = this.GetPartVersions(path, true).Single();
+            PartVersion partVersion = this.Index.GetPart(path);
+
+            if (partVersion == null)
+            {
+                throw new ArgumentException("The specified path does not exist.");
+            }
 
             return this.UpdatePartVersion(partVersion, json, userContext);
         }
 
         public PartVersion DeletePart(string path, UserContext userContext)
         {
-            PartVersion partVersion = this.GetPartVersions(path, true).Single();
+            PartVersion partVersion = this.Index.GetPart(path);
+
+            if (partVersion == null)
+            {
+                throw new ArgumentException("The specified path does not exist.");
+            }
 
             return this.DeletePartVersion(partVersion, userContext);
         }
@@ -314,55 +324,6 @@ namespace Regs.Api.Models
             index.IsIndex = false;
 
             lotEventDispatcher.Dispatch(new CommitEvent(this, newIndex, index));
-        }
-
-        public PartVersion GetPart(string path, int? commitId = null)
-        {
-            return this.GetPartVersions(path, true, commitId)
-                .FirstOrDefault();
-        }
-
-        public JObject GetPartContent(string path, int? commitId = null)
-        {
-            return this.GetPartVersions(path, true, commitId)
-                .Select(pv => pv.Content)
-                .FirstOrDefault();
-        }
-
-        public PartVersion[] GetParts(string path, int? commitId = null)
-        {
-            return this.GetPartVersions(path, false, commitId)
-                .OrderBy(pv => pv.Part.Path)
-                .ToArray();
-        }
-
-        public JObject[] GetPartsContent(string path, int? commitId = null)
-        {
-            return this.GetPartVersions(path, false, commitId)
-                .OrderBy(pv => pv.Part.Path)
-                .Select(pv => pv.Content)
-                .ToArray();
-        }
-
-        public IEnumerable<PartVersion> GetPartVersions(string path, bool exact, int? commitId = null)
-        {
-            Commit commit = this.GetCommit(commitId);
-            var partVersions =
-                commit.CommitVersions
-                .Select(cv => cv.PartVersion)
-                .Where(pv =>
-                    (exact ? pv.Part.Path == path : Regex.IsMatch(pv.Part.Path, "^" + path + @"/\d+$")) &&
-                    pv.PartOperation != PartOperation.Delete);
-
-            if (exact)
-            {
-                if (partVersions.Count() > 1)
-                {
-                    throw new Exception(string.Format("More than one part with path: {0}", path));
-                }
-            }
-
-            return partVersions.ToList();
         }
 
         private PartVersion UpdatePartVersion(PartVersion partVersion, JObject json, UserContext userContext)

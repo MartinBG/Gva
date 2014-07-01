@@ -153,7 +153,7 @@ namespace Gva.Api.Controllers
 
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).GetPart(path);
+                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
 
                 applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
 

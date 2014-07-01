@@ -29,6 +29,11 @@ namespace Regs.Api.Models
         public virtual SetPart SetPart { get; set; }
 
         public virtual ICollection<PartVersion> PartVersions { get; set; }
+
+        public bool Matches(string path)
+        {
+            return this.Path.StartsWith(path);
+        }
     }
 
     public class PartMap : EntityTypeConfiguration<Part>
