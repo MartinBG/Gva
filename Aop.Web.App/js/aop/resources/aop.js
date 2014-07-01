@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('aop')
-    .factory('Aop', ['$resource',
+    .factory('Aops', ['$resource',
       function ($resource) {
         return $resource('/api/aop/apps/:id', { id: '@appId' },
           {

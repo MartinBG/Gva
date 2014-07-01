@@ -5,11 +5,11 @@
   function ChecklistHeaderCtrl(
     $scope,
     $state,
-    Aop
+    Aops
   ) {
     $scope.isLoaded = false;
 
-    Aop.loadChecklist({
+    Aops.loadChecklist({
       id: $scope.model.docId
     }).$promise.then(function (result) {
       $scope.model.jObject = result.content;
@@ -63,7 +63,7 @@
   ChecklistHeaderCtrl.$inject = [
     '$scope',
     '$state',
-    'Aop'
+    'Aops'
   ];
 
   angular.module('ems').controller('ChecklistHeaderCtrl', ChecklistHeaderCtrl);

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Aop,
+    Aops,
     apps
   ) {
     $scope.apps = apps.applications;
@@ -24,7 +24,7 @@
     });
 
     $scope.newApp = function newCorr() {
-      return Aop.getNew()
+      return Aops.getNew()
         .$promise
         .then(function (data) {
           return $state.go('root.apps.edit', { id: data.aopApplicationId });
@@ -47,16 +47,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Aop',
+    'Aops',
     'apps'
   ];
 
   AppsSearchCtrl.$resolve = {
     apps: [
       '$stateParams',
-      'Aop',
-      function resolveApps($stateParams, Aop) {
-        return Aop.get($stateParams).$promise;
+      'Aops',
+      function resolveApps($stateParams, Aops) {
+        return Aops.get($stateParams).$promise;
       }
     ]
   };

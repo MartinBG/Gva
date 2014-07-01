@@ -7,7 +7,7 @@
     $filter,
     $state,
     $stateParams,
-    Aop,
+    Aops,
     app,
     selectDoc
   ) {
@@ -23,7 +23,7 @@
     };
 
     $scope.readFedForFirstStage = function remove() {
-      return Aop.readFedForFirstStage({ id: $scope.app.aopApplicationId }, {})
+      return Aops.readFedForFirstStage({ id: $scope.app.aopApplicationId }, {})
         .$promise
         .then(function (data) {
           return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
@@ -31,7 +31,7 @@
     };
 
     $scope.readFedForSecondStage = function remove() {
-      return Aop.readFedForSecondStage({ id: $scope.app.aopApplicationId }, {})
+      return Aops.readFedForSecondStage({ id: $scope.app.aopApplicationId }, {})
         .$promise
         .then(function (data) {
           return $state.go('root.apps.edit', { id: data.aopApplicationId }, { reload: true });
@@ -39,7 +39,7 @@
     };
 
     $scope.remove = function remove() {
-      return Aop.remove({ id: $scope.app.aopApplicationId })
+      return Aops.remove({ id: $scope.app.aopApplicationId })
         .$promise
         .then(function () {
           return $state.go('root.apps.search');
@@ -50,7 +50,7 @@
       return $scope.appForm.$validate()
         .then(function () {
           if ($scope.appForm.$valid) {
-            return Aop
+            return Aops
               .save($stateParams, $scope.app)
               .$promise
               .then(function (data) {
@@ -61,7 +61,7 @@
     };
 
     $scope.fastSave = function save() {
-      return Aop
+      return Aops
         .save($stateParams, $scope.app)
         .$promise
         .then(function (data) {
@@ -99,7 +99,7 @@
 
     //ST
     $scope.generateSTChecklist = function (action) {
-      return Aop
+      return Aops
         .generateChecklist({
           id: $scope.app.aopApplicationId,
           action: action,
@@ -112,7 +112,7 @@
     };
 
     $scope.generateSTNote = function () {
-      return Aop
+      return Aops
         .generateNote({
           id: $scope.app.aopApplicationId
         }, {})
@@ -124,7 +124,7 @@
 
     //ND
     $scope.generateNDChecklist = function (action) {
-      return Aop
+      return Aops
         .generateChecklist({
           id: $scope.app.aopApplicationId,
           action: action,
@@ -137,7 +137,7 @@
     };
 
     $scope.generateNDReport = function () {
-      return Aop
+      return Aops
         .generateReport({
           id: $scope.app.aopApplicationId
         }, {})
@@ -177,7 +177,7 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Aop',
+    'Aops',
     'app',
     'selectDoc'
   ];
@@ -185,9 +185,9 @@
   AppsEditCtrl.$resolve = {
     app: [
       '$stateParams',
-      'Aop',
-      function resolveApp($stateParams, Aop) {
-        return Aop.get({ id: $stateParams.id }).$promise;
+      'Aops',
+      function resolveApp($stateParams, Aops) {
+        return Aops.get({ id: $stateParams.id }).$promise;
       }
     ],
     selectDoc: [function () {

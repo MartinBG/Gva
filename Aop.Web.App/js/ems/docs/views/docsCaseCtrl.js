@@ -5,7 +5,7 @@
   function DocsCaseCtrl(
     $scope,
     $state,
-    Aop,
+    Aops,
     doc
   ) {
     $scope.aopAppId = doc.aopAppId;
@@ -15,7 +15,7 @@
 
     $scope.aopApplicationId = undefined;
 
-    Aop.findAopApp({
+    Aops.findAopApp({
       id: $scope.docId
     }).$promise.then(function (result) {
       $scope.aopApplicationId = result.aopApplicationId;
@@ -60,7 +60,7 @@
   DocsCaseCtrl.$inject = [
     '$scope',
     '$state',
-    'Aop',
+    'Aops',
     'doc'
   ];
 

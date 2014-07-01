@@ -6,8 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
-    Aop,
+    Aops,
     selectDoc) {
     $scope.filters = {
       csFromDate: null,
@@ -39,7 +38,7 @@
       isChosen: $stateParams.csIsChosen
     };
 
-    Aop.getDocs(stateParams).$promise.then(function (docs) {
+    Aops.getDocs(stateParams).$promise.then(function (docs) {
       $scope.docs = docs.documents;
       $scope.docCount = docs.documentCount;
     });
@@ -78,8 +77,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
-    'Aop',
+    'Aops',
     'selectDoc'];
 
   angular.module('aop').controller('AppDocSelectCtrl', AppDocSelectCtrl);

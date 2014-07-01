@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('aop')
-    .factory('AopEmployer', ['$resource',
+    .factory('AopEmployers', ['$resource',
       function ($resource) {
         return $resource('/api/aop/emps/:id', { id: '@aopEmployerId' });
       }]);

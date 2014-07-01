@@ -7,7 +7,7 @@
     $filter,
     $state,
     $stateParams,
-    AopEmployer,
+    AopEmployers,
     app
   ) {
     $scope.emp = {};
@@ -15,7 +15,7 @@
     $scope.save = function save() {
       return $scope.aopEmpForm.$validate().then(function () {
         if ($scope.aopEmpForm.$valid) {
-          return AopEmployer.save($scope.emp).$promise.then(function (data) {
+          return AopEmployers.save($scope.emp).$promise.then(function (data) {
             app.aopEmployerId = data.aopEmployerId;
             return $state.go('^', {}, {}, { inEditMode: true });
           });
@@ -33,16 +33,16 @@
     '$filter',
     '$state',
     '$stateParams',
-    'AopEmployer',
+    'AopEmployers',
     'app'
   ];
 
   //AppEmployerNewCtrl.$resolve = {
   //  app: [
   //    '$stateParams',
-  //    'Aop',
-  //    function resolveApp($stateParams, Aop) {
-  //      return Aop.get({ id: $stateParams.id }).$promise;
+  //    'Aops',
+  //    function resolveApp($stateParams, Aops) {
+  //      return Aops.get({ id: $stateParams.id }).$promise;
   //    }
   //  ],
   //  selectDoc: [function () {
