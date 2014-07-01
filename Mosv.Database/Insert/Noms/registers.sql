@@ -1,7 +1,11 @@
 ﻿PRINT 'registers'
 GO
 
+SET IDENTITY_INSERT [Noms] ON
+
 INSERT INTO Noms (NomId, Name, Alias) VALUES (94,'Регистър','registers');
+
+SET IDENTITY_INSERT [Noms] OFF
 GO
 
 

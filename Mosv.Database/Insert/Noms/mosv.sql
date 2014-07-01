@@ -1,10 +1,11 @@
-﻿INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (104, N'Видове заявители', N'applicantTypes')
+﻿SET IDENTITY_INSERT [Noms] ON
+
+INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (104, N'Видове заявители', N'applicantTypes')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (105, N'Видове на информацията', N'informationTypes')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (106, N'Начини на подаване', N'submitTypes')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (107, N'Отговорни институции', N'institutions')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (108, N'Статуси1', N'statuses1')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (109, N'Статуси2', N'statuses2')
-GO
 
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (110, N'Начин на предоставяне', N'provideTypes')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (111, N'Теми', N'themes')
@@ -17,6 +18,8 @@ INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (116, N'Причини з�
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (117, N'Причини за отказ за ДОИ', N'doiDenialReasons')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (118, N'Причини за отказ от подателя', N'applicantDenialReasons')
 INSERT [dbo].[Noms] ([NomId], [Name], [Alias]) VALUES (119, N'Резултат от обжалване', N'appealResults')
+
+SET IDENTITY_INSERT [Noms] OFF
 GO
 
 INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,TextContent) VALUES(104,N'A',N'Журналисти',NULL,NULL,NULL,1,NULL);
@@ -137,19 +140,26 @@ INSERT INTO NomValues (NomId,Code,Name,NameAlt,ParentValueId,Alias,IsActive,Text
 GO
 
 
+SET IDENTITY_INSERT [LotSets] ON
+
 INSERT INTO [LotSets]
     ([LotSetId], [Name]         , [Alias]        )
 VALUES
     (6         , N'Достъп'      , N'Admission'  ),
     (7         , N'Сигнал'      , N'Signal'     ),
     (8         , N'Предложение' , N'Suggestion' )
+
+SET IDENTITY_INSERT [LotSets] OFF
 GO
 
+SET IDENTITY_INSERT [LotSetParts] ON
 
 INSERT INTO [LotSetParts]
-    ([LotSetPartId], [LotSetId], [Name]       , [Alias]                 , [PathRegex]        , [Schema])
+    ([LotSetPartId], [LotSetId], [Name]       , [Alias]                 , [PathRegex]        , LotSchemaId)
 VALUES                                                                                                 
-    (71             , 6         ,'Достъп'       , 'admissionData'      , N'^admissionData$'  , N'{}'   ),
-    (72             , 7         ,'Сигнал'       , 'signalData'         , N'^signalData$'     , N'{}'   ),
-    (73             , 8         ,'Предложение'  , 'suggestionData'     , N'^suggestionData$' , N'{}'   )
+    (71             , 6         ,'Достъп'       , 'admissionData'      , N'^admissionData$'  , null   ),
+    (72             , 7         ,'Сигнал'       , 'signalData'         , N'^signalData$'     , null   ),
+    (73             , 8         ,'Предложение'  , 'suggestionData'     , N'^suggestionData$' , null   )
+
+SET IDENTITY_INSERT [LotSetParts] OFF
 GO
