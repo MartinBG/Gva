@@ -20,8 +20,8 @@
       templateUrl: 'js/gva/applications/forms/applicationDocument.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaApplicationSelectPerson',
-      templateUrl: 'js/gva/applications/forms/selectPerson.html'
+      name: 'gvaCommonSelectPerson',
+      templateUrl: 'js/gva/common/forms/selectPerson.html'
     });
     scaffoldingProvider.form({
       name: 'gvaApplicationSelectOrganization',
@@ -371,8 +371,8 @@
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
       .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
-      .state(['root.applications.new.personSelect'                 , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                         , ['@root'                  , 'js/gva/applications/views/common/personSelect.html'       , 'PersonSelectCtrl'              ]])
-      .state(['root.applications.new.personNew'                    , '/personNew'                                                                              , ['@root'                  , 'js/gva/applications/views/common/personNew.html'          , 'PersonNewCtrl'                 ]])
+      .state(['root.applications.new.personSelect'                 , '/personSelect?exact&lin&uin&names&licences&ratings&organization'                         , ['@root'                  , 'js/gva/common/views/persons/personSelect.html'            , 'PersonSelectCtrl'              ]])
+      .state(['root.applications.new.personNew'                    , '/personNew'                                                                              , ['@root'                  , 'js/gva/common/views/persons/personNew.html'               , 'PersonNewCtrl'                 ]])
       .state(['root.applications.new.organizationSelect'           , '/organizationSelect?name&CAO&valid&organizationType&dateValidTo&dateCAOValidTo'          , ['@root'                  , 'js/gva/applications/views/common/organizationSelect.html' , 'OrganizationSelectCtrl'        ]])
       .state(['root.applications.new.organizationNew'              , '/organizationNew'                                                                        , ['@root'                  , 'js/gva/applications/views/common/organizationNew.html'    , 'OrganizationNewCtrl'           ]])
       .state(['root.applications.new.aircraftSelect'               , '/aircraftSelect?manSN&model&icao'                                                        , ['@root'                  , 'js/gva/applications/views/common/aircraftSelect.html'     , 'AircraftSelectCtrl'            ]])
@@ -385,8 +385,8 @@
       .state(['root.applications.new.corrNew'                      , '/corrNew'                                                                                , ['@root'                  , 'js/gva/applications/views/common/corrNew.html'            , 'CorrNewCtrl'                   ]])
       .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
       .state(['root.applications.link.docSelect'                   , '/docSelect?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&stamp'       , ['@root'                  , 'js/gva/applications/views/common/docSelect.html'          , 'DocSelectCtrl'                 ]])
-      .state(['root.applications.link.personSelect'                , '/personSelect?exact&lin&uin&names&licences&ratings&organization&stamp'                   , ['@root'                  , 'js/gva/applications/views/common/personSelect.html'       , 'PersonSelectCtrl'              ]])
-      .state(['root.applications.link.personNew'                   , '/personNew'                                                                              , ['@root'                  , 'js/gva/applications/views/common/personNew.html'          , 'PersonNewCtrl'                 ]])
+      .state(['root.applications.link.personSelect'                , '/personSelect?exact&lin&uin&names&licences&ratings&organization&stamp'                   , ['@root'                  , 'js/gva/common/views/persons/personSelect.html'            , 'PersonSelectCtrl'              ]])
+      .state(['root.applications.link.personNew'                   , '/personNew'                                                                              , ['@root'                  , 'js/gva/common/views/persons/personNew.html'               , 'PersonNewCtrl'                 ]])
       .state(['root.applications.link.organizationSelect'          , '/organizationSelect?name&CAO&valid&organizationType&dateValidTo&dateCAOValidTo&uin&stamp', ['@root'                  , 'js/gva/applications/views/common/organizationSelect.html' , 'OrganizationSelectCtrl'        ]])
       .state(['root.applications.link.organizationNew'             , '/organizationNew'                                                                        , ['@root'                  , 'js/gva/applications/views/common/organizationNew.html'    , 'OrganizationNewCtrl'           ]])
       .state(['root.applications.link.aircraftSelect'              , '/aircraftSelect?manSN&model&icao&stamp'                                                  , ['@root'                  , 'js/gva/applications/views/common/aircraftSelect.html'     , 'AircraftSelectCtrl'            ]])

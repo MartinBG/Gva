@@ -310,6 +310,7 @@
     <Content Include="js\gva\applications\forms\selectOrganization.html" />
     <Content Include="js\gva\applications\forms\selectPerson.html" />
     <Content Include="js\gva\applications\resources\applications.js" />
+    <Content Include="js\gva\applications\resources\application.js" />
     <Content Include="js\gva\applications\views\applicationsEdit.html" />
     <Content Include="js\gva\applications\views\applicationsEditAddPart.html" />
     <Content Include="js\gva\applications\views\applicationsEditAddPartCtrl.js" />
@@ -352,10 +353,6 @@
     <Content Include="js\gva\applications\views\common\organizationNewCtrl.js" />
     <Content Include="js\gva\applications\views\common\organizationSelect.html" />
     <Content Include="js\gva\applications\views\common\organizationSelectCtrl.js" />
-    <Content Include="js\gva\applications\views\common\personNew.html" />
-    <Content Include="js\gva\applications\views\common\personNewCtrl.js" />
-    <Content Include="js\gva\applications\views\common\personSelect.html" />
-    <Content Include="js\gva\applications\views\common\personSelectCtrl.js" />
     <Content Include="js\gva\applications\views\docsLinkApp.html" />
     <Content Include="js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="js\gva\common\forms\commonAuditDetail.html" />
@@ -368,6 +365,11 @@
     <Content Include="js\gva\common\forms\commonInspectionCtrl.js" />
     <Content Include="js\gva\common\forms\commonScannedDocument.html" />
     <Content Include="js\gva\common\forms\commonScannedDocumentCtrl.js" />
+    <Content Include="js\gva\common\forms\selectPerson.html" />
+    <Content Include="js\gva\common\views\persons\personNew.html" />
+    <Content Include="js\gva\common\views\persons\personNewCtrl.js" />
+    <Content Include="js\gva\common\views\persons\personSelect.html" />
+    <Content Include="js\gva\common\views\persons\personSelectCtrl.js" />
     <Content Include="js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="js\gva\common\views\publishers\choosePublisherCtrl.js" />
     <Content Include="js\gva\directives\application\applicationDirective.js" />
