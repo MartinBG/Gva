@@ -49,15 +49,15 @@
     <Content Include="js\common\filters\lodashFilters.js" />
     <Content Include="js\common\login\loginModal.html" />
     <Content Include="js\common\login\loginModalCtrl.js" />
-    <Content Include="js\common\users\resources\role.js" />
-    <Content Include="js\common\users\resources\user.js" />
+    <Content Include="js\common\users\resources\roles.js" />
+    <Content Include="js\common\users\resources\users.js" />
     <Content Include="js\common\users\views\edit.html" />
     <Content Include="js\common\users\views\editCtrl.js" />
     <Content Include="js\common\users\views\search.html" />
     <Content Include="js\common\users\views\searchCtrl.js" />
     <Content Include="js\ems\corrs\forms\corrData.html" />
     <Content Include="js\ems\corrs\forms\corrDataCtrl.js" />
-    <Content Include="js\ems\corrs\resources\corr.js" />
+    <Content Include="js\ems\corrs\resources\corrs.js" />
     <Content Include="js\ems\corrs\views\corrEdit.html" />
     <Content Include="js\ems\corrs\views\corrEditCtrl.js" />
     <Content Include="js\ems\corrs\views\corrNew.html" />
@@ -86,10 +86,10 @@
     <Content Include="js\ems\docs\forms\docView\resolutionCtrl.js" />
     <Content Include="js\ems\docs\forms\docView\task.html" />
     <Content Include="js\ems\docs\forms\docView\taskCtrl.js" />
-    <Content Include="js\ems\docs\recources\doc.js" />
-    <Content Include="js\ems\docs\recources\docStage.js" />
-    <Content Include="js\ems\docs\recources\docStatus.js" />
-    <Content Include="js\ems\docs\recources\docWorkflow.js" />
+    <Content Include="js\ems\docs\recources\docs.js" />
+    <Content Include="js\ems\docs\recources\docStages.js" />
+    <Content Include="js\ems\docs\recources\docStatuses.js" />
+    <Content Include="js\ems\docs\recources\docWorkflows.js" />
     <Content Include="js\ems\docs\views\caseSelect.html" />
     <Content Include="js\ems\docs\views\caseSelectCtrl.js" />
     <Content Include="js\ems\docs\views\changeDocParent.html" />
@@ -206,7 +206,7 @@
     <Content Include="js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="js\scaffolding\directives\validationError\validationErrorDirective.js" />
     <Content Include="js\scaffolding\providers\scaffoldingProvider.js" />
-    <Content Include="js\scaffolding\resources\nomenclature.js" />
+    <Content Include="js\scaffolding\resources\nomenclatures.js" />
     <Content Include="js\scaffolding\scaffolding.js" />
     <Content Include="js\scaffolding\scaffolding_bg-bg.js" />
   </ItemGroup>
