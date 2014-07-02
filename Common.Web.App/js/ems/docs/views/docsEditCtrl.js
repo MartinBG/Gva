@@ -142,6 +142,10 @@
     $scope.doc.flags.isVisibleReverseStageCmd = $scope.doc.docElectronicServiceStages.length > 1 &&
       $scope.doc.canEditTechElectronicServiceStage;
 
+    $scope.doc.flags.isVisibleSendMailCmd =
+      ($scope.doc.isDocOutgoing || $scope.doc.isDocInternalOutgoing) &&
+      ($scope.doc.docStatusAlias === 'Processed' || $scope.doc.docStatusAlias === 'Finished');
+
     $scope.doc.flags.isVisibleEditCasePartCmd =
       !$scope.doc.isCase &&
       ($scope.doc.canChangeDocCasePart ||

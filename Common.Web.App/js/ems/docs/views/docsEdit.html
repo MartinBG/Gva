@@ -175,7 +175,7 @@
             ]">
           </sc-dropdown-button>
 
-          <button ng-show="!inEditMode" ng-click="sendEmail()" type="button" class="btn btn-sm btn-default">
+          <button ng-show="!inEditMode && doc.flags.isVisibleSendMailCmd" ng-click="sendEmail()" type="button" class="btn btn-sm btn-default">
             <i class="glyphicon glyphicon-envelope"></i>
             <span l10n-text="docs.edit.docSend"></span>
           </button>
