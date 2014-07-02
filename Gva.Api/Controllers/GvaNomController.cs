@@ -188,10 +188,46 @@ namespace Gva.Api.Controllers
         }
 
         [Route("aircrafts")]
-        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null, string airCategory = "", string aircraftProducer = "")
+        public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, model: term, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: false, offset: offset, limit: limit)
+                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, model: term, airCategory: null, aircraftProducer: null, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = string.Format("{0} ({1})", e.Mark, e.Model),
+                    nameAlt = string.Format("{0} ({1})", e.Mark, e.ModelAlt)
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("aircraftModels/{id:int}")]
+        public IHttpActionResult GetAircraftModel(int id)
+        {
+            var ac = this.aircraftRepository.GetAircraftModel(id);
+            return Ok(new
+            {
+                nomValueId = ac.LotId,
+                name = string.Format("{0} ({1})", ac.Mark, ac.Model),
+                nameAlt = string.Format("{0} ({1})", ac.Mark, ac.ModelAlt)
+            });
+        }
+
+        [Route("aircraftModels")]
+        public IHttpActionResult GetAircraftModels(
+            string term = null,
+            int offset = 0,
+            int? limit = null,
+            string airCategory = "",
+            string aircraftProducer = "")
+        {
+            var returnValue =
+                this.aircraftRepository.GetAircraftModels(
+                    airCategory: airCategory,
+                    aircraftProducer: aircraftProducer,
+                    offset: offset,
+                    limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,

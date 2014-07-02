@@ -17,6 +17,14 @@ namespace Gva.Api.Repositories.AircraftRepository
 
         GvaViewAircraft GetAircraft(int aircraftId);
 
+        IEnumerable<GvaViewAircraft> GetAircraftModels(
+            string airCategory,
+            string aircraftProducer,
+            int offset = 0,
+            int? limit = null);
+
+        GvaViewAircraft GetAircraftModel(int aircraftId);
+
         bool IsUniqueMSN(string msn, int? aircraftId = null);
     }
 }

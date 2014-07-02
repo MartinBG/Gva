@@ -440,6 +440,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),

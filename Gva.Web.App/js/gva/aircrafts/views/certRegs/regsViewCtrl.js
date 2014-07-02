@@ -105,11 +105,11 @@
     ],
     debts: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
+      'AircraftCertRegistrationsFM',
       'aircraftCertRegistrationView',
-      function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrationView) {
+      function ($stateParams, AircraftCertRegistrationsFM, aircraftCertRegistrationView) {
         if (aircraftCertRegistrationView) {
-          return AircraftCertRegistrationFM.getDebts({
+          return AircraftCertRegistrationsFM.getDebts({
             id: $stateParams.id,
             ind: aircraftCertRegistrationView.currentIndex
           }).$promise;

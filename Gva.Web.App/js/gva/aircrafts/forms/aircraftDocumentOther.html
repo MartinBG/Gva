@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.otherDocumentType" alias="'documentTypes'" params="{ isIdDocument: false }" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentType" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.otherDocumentRole" alias="'otherDocumentRoles'" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.otherDocumentRole" alias="'documentRoles'" params="{ categoryAlias: 'other', categoryCodes: ['C', 'A']}" ng-required="true" l10n-text="aircrafts.aircraftOtherDirective.otherDocumentRole" class="col-sm-6 col-md-4"></sc-field>
     <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" l10n-text="aircrafts.aircraftOtherDirective.valid" class="col-sm-6 col-md-2"></sc-field>
   </div>
   <div class="row">

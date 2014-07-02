@@ -44,11 +44,45 @@ namespace Gva.Api.Repositories.AircraftRepository
 
             return gvaAircrafts
                 .Where(predicate)
-                .OrderBy(p => p.Model)
+                .OrderBy(p => p.Mark)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
         public GvaViewAircraft GetAircraft(int aircraftId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                .Include(a => a.AirCategory)
+                .Include(a => a.AircraftProducer)
+                .SingleOrDefault(p => p.LotId == aircraftId);
+        }
+
+        public IEnumerable<GvaViewAircraft> GetAircraftModels(
+            string airCategory,
+            string aircraftProducer,
+            int offset = 0,
+            int? limit = null)
+        {
+            var gvaAircrafts =
+                this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                .Include(a => a.AirCategory)
+                .Include(a => a.AircraftProducer);
+
+            var predicate = PredicateBuilder.True<GvaViewAircraft>();
+
+            predicate = predicate
+                .AndStringMatches(p => p.AirCategory.Name, airCategory, true)
+                .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, true);
+
+            return gvaAircrafts
+                .Where(predicate)
+                .GroupBy(a => a.Model)
+                .Select(g => g.FirstOrDefault())
+                .OrderBy(p => p.Model)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
+        }
+
+        public GvaViewAircraft GetAircraftModel(int aircraftId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                 .Include(a => a.AirCategory)
