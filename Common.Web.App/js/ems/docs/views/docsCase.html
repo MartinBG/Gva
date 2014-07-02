@@ -1,5 +1,7 @@
 ﻿<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
+
 <br />
+
 <sc-treetable items="docRelations" row-class="{ 'case-font-weight': item.docId === docId}">
   <sc-tree-column title="docs.edit.case.regNumber" has-content="true" width="250px">
     <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>

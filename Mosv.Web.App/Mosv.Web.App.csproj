@@ -57,6 +57,8 @@
     <Content Include="js\common\common_bg-bg.js" />
     <Content Include="js\common\root\views\root.html" />
     <Content Include="js\common\root\views\rootCtrl.js" />
+    <Content Include="js\ems\docs\views\docsCase.html" />
+    <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
     <Content Include="js\mosv\forms\admission.html" />
     <Content Include="js\mosv\forms\signal.html" />
     <Content Include="js\mosv\forms\suggestion.html" />
