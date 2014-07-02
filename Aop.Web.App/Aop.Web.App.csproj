@@ -53,8 +53,8 @@
     <Content Include="index.html" />
     <Content Include="js\aop\aop.js" />
     <Content Include="js\aop\aop_bg-bg.js" />
-    <Content Include="js\aop\resources\aop.js" />
-    <Content Include="js\aop\resources\aopEmployer.js" />
+    <Content Include="js\aop\resources\aops.js" />
+    <Content Include="js\aop\resources\aopEmployers.js" />
     <Content Include="js\aop\views\appEdit.html" />
     <Content Include="js\aop\views\appEditCtrl.js" />
     <Content Include="js\aop\views\appEmployerNew.html" />
