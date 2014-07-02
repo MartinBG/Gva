@@ -47,9 +47,9 @@
   ChooseAuditsCtrl.$resolve = {
     audits: [
       '$stateParams',
-      'OrganizationInspection',
-      function ($stateParams, OrganizationInspection) {
-        return OrganizationInspection.query({ id: $stateParams.id }).$promise;
+      'OrganizationInspections',
+      function ($stateParams, OrganizationInspections) {
+        return OrganizationInspections.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

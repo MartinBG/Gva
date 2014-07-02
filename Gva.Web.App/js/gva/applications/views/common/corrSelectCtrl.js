@@ -59,9 +59,9 @@
   CorrSelectCtrl.$resolve = {
     corrs: [
       '$stateParams',
-      'Corr',
-      function resolveCorrs($stateParams, Corr) {
-        return Corr.get({
+      'Corrs',
+      function resolveCorrs($stateParams, Corrs) {
+        return Corrs.get({
           displayName: $stateParams.displayName,
           correspondentEmail: $stateParams.email
         }).$promise;

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonFlyingExperience,
     flyingExperiences
   ) {
     $scope.flyingExperiences = flyingExperiences;
@@ -27,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonFlyingExperience',
     'flyingExperiences'
   ];
 
   FlyingExperiencesSearchCtrl.$resolve = {
     flyingExperiences: [
       '$stateParams',
-      'PersonFlyingExperience',
-      function ($stateParams, PersonFlyingExperience) {
-        return PersonFlyingExperience.query($stateParams).$promise;
+      'PersonFlyingExperiences',
+      function ($stateParams, PersonFlyingExperiences) {
+        return PersonFlyingExperiences.query($stateParams).$promise;
       }
     ]
   };

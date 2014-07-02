@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    CertAirNavigationServiceDeliverer,
+    CertAirNavigationServiceDeliverers,
     certificate
   ) {
     $scope.certificate = certificate;
@@ -15,7 +15,7 @@
       return $scope.certAirNavigationServiceDelivererForm.$validate()
         .then(function () {
           if ($scope.certAirNavigationServiceDelivererForm.$valid) {
-            return CertAirNavigationServiceDeliverer
+            return CertAirNavigationServiceDeliverers
               .save({ id: $stateParams.id }, $scope.certificate)
               .$promise
               .then(function () {
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirNavigationServiceDeliverer',
+    'CertAirNavigationServiceDeliverers',
     'certificate'
   ];
 

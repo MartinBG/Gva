@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationCertGroundServiceOperator,
+    OrganizationCertGroundServiceOperators,
     certificate
   ) {
     $scope.certificate = certificate;
@@ -15,7 +15,7 @@
       return $scope.newCertGroundServiceOperatorForm.$validate()
         .then(function () {
           if ($scope.newCertGroundServiceOperatorForm.$valid) {
-            return OrganizationCertGroundServiceOperator
+            return OrganizationCertGroundServiceOperators
               .save({ id: $stateParams.id }, $scope.certificate).$promise
               .then(function () {
                 return $state.go('root.organizations.view.certGroundServiceOperators.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationCertGroundServiceOperator',
+    'OrganizationCertGroundServiceOperators',
     'certificate'
   ];
 

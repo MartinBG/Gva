@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('PersonLastLicenceNumber', ['$resource', function($resource) {
+  angular.module('gva').factory('PersonsLastLicenceNumber', ['$resource', function($resource) {
     return $resource('/api/persons/:id/lastLicenceNumber');
   }]);
 }(angular));

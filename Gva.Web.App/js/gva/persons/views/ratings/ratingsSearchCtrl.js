@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonRating,
     ratings
   ) {
     $scope.ratings = ratings;
@@ -27,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonRating',
     'ratings'
   ];
 
   RatingsSearchCtrl.$resolve = {
     ratings: [
       '$stateParams',
-      'PersonRating',
-      function ($stateParams, PersonRating) {
-        return PersonRating.query($stateParams).$promise;
+      'PersonRatings',
+      function ($stateParams, PersonRatings) {
+        return PersonRatings.query($stateParams).$promise;
       }
     ]
   };

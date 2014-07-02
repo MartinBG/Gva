@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function PersonsNewCtrl($scope, $state, Person, person) {
+  function PersonsNewCtrl($scope, $state, Persons, person) {
     $scope.newPerson = person;
 
     $scope.save = function () {
       return $scope.newPersonForm.$validate()
       .then(function () {
         if ($scope.newPersonForm.$valid) {
-          return Person.save($scope.newPerson).$promise
+          return Persons.save($scope.newPerson).$promise
             .then(function () {
               return $state.go('root.persons.search');
             });
@@ -22,7 +22,7 @@
     };
   }
 
-  PersonsNewCtrl.$inject = ['$scope', '$state', 'Person', 'person'];
+  PersonsNewCtrl.$inject = ['$scope', '$state', 'Persons', 'person'];
 
   PersonsNewCtrl.$resolve = {
     person: function () {

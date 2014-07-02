@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentTraining,
+    PersonDocumentTrainings,
     personDocumentTraining,
     selectedPublisher
   ) {
@@ -14,7 +14,7 @@
       $scope.newDocumentTrainingForm.$validate()
         .then(function () {
           if ($scope.newDocumentTrainingForm.$valid) {
-            return PersonDocumentTraining
+            return PersonDocumentTrainings
               .save({ id: $stateParams.id }, $scope.personDocumentTraining).$promise
               .then(function (savedTraining) {
                 return $state.go('^', {}, {}, {
@@ -40,7 +40,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentTraining',
+    'PersonDocumentTrainings',
     'personDocumentTraining',
     'selectedPublisher'
   ];

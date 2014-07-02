@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationApproval,
+    OrganizationApprovals,
     organizationApproval,
     selectedLimitation
   ) {
@@ -30,7 +30,7 @@
       return $scope.newApprovalForm.$validate()
         .then(function () {
           if ($scope.newApprovalForm.$valid) {
-            return OrganizationApproval
+            return OrganizationApprovals
               .save({ id: $stateParams.id }, $scope.approval).$promise
               .then(function () {
                 return $state.go('root.organizations.view.approvals.search');
@@ -48,7 +48,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationApproval',
+    'OrganizationApprovals',
     'organizationApproval',
     'selectedLimitation'
   ];

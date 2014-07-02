@@ -52,9 +52,9 @@
   OrganizationsSearchCtrl.$resolve = {
     organizations: [
       '$stateParams',
-      'Organization',
-      function ($stateParams, Organization) {
-        return Organization.query($stateParams).$promise;
+      'Organizations',
+      function ($stateParams, Organizations) {
+        return Organizations.query($stateParams).$promise;
       }
     ]
   };

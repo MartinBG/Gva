@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentData,
+    EquipmentsData,
     equipmentData
   ) {
     var originalEquipmentData = _.cloneDeep(equipmentData);
@@ -27,7 +27,7 @@
       return $scope.equipmentDataForm.$validate()
       .then(function () {
         if ($scope.equipmentDataForm.$valid) {
-          return EquipmentData
+          return EquipmentsData
           .save({ id: $stateParams.id }, $scope.equipmentData)
           .$promise
           .then(function () {
@@ -42,16 +42,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentData',
+    'EquipmentsData',
     'equipmentData'
   ];
 
   EquipmentDataEditCtrl.$resolve = {
     equipmentData: [
       '$stateParams',
-      'EquipmentData',
-      function ($stateParams, EquipmentData) {
-        return EquipmentData.get({ id: $stateParams.id }).$promise;
+      'EquipmentsData',
+      function ($stateParams, EquipmentsData) {
+        return EquipmentsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

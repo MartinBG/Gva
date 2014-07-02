@@ -6,11 +6,9 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentCheck,
     checks
   ) {
     $scope.checks = checks;
-
 
     $scope.editDocumentCheck = function (check) {
       return $state.go('root.persons.view.checks.edit', {
@@ -28,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentCheck',
     'checks'
   ];
 
   DocumentChecksSearchCtrl.$resolve = {
     checks: [
       '$stateParams',
-      'PersonDocumentCheck',
-      function ($stateParams, PersonDocumentCheck) {
-        return PersonDocumentCheck.query($stateParams).$promise;
+      'PersonDocumentChecks',
+      function ($stateParams, PersonDocumentChecks) {
+        return PersonDocumentChecks.query($stateParams).$promise;
       }
     ]
   };

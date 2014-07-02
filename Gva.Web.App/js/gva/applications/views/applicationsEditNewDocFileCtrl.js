@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Application
+    Applications
     ) {
 
     $scope.files = {};
@@ -24,7 +24,7 @@
 
       return $scope.newDocFile.$validate().then(function () {
         if ($scope.newDocFile.$valid) {
-          return Application
+          return Applications
             .attachDocFile({
               id: $stateParams.id,
               docId: $stateParams.docId
@@ -44,7 +44,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application'
+    'Applications'
   ];
 
   angular.module('gva')

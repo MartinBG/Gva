@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentOther,
+    PersonDocumentOthers,
     personDocumentOther,
     selectedPublisher
   ) {
@@ -36,7 +36,7 @@
       return $scope.editDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.editDocumentOtherForm.$valid) {
-            return PersonDocumentOther
+            return PersonDocumentOthers
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentOther)
               .$promise
               .then(function () {
@@ -51,7 +51,7 @@
     };
 
     $scope.deleteOther = function () {
-      return PersonDocumentOther.remove({
+      return PersonDocumentOthers.remove({
         id: $stateParams.id,
         ind: personDocumentOther.partIndex
       }).$promise.then(function () {
@@ -64,7 +64,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentOther',
+    'PersonDocumentOthers',
     'personDocumentOther',
     'selectedPublisher'
   ];
@@ -72,9 +72,9 @@
   DocumentOthersEditCtrl.$resolve = {
     personDocumentOther: [
       '$stateParams',
-      'PersonDocumentOther',
-      function ($stateParams, PersonDocumentOther) {
-        return PersonDocumentOther.get($stateParams).$promise;
+      'PersonDocumentOthers',
+      function ($stateParams, PersonDocumentOthers) {
+        return PersonDocumentOthers.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

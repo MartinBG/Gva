@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AirportCertOperational,
     certOpers
   ) {
     $scope.certOpers = certOpers;
@@ -19,13 +18,6 @@
         });
     };
 
-    $scope.deleteCertOper = function (certOper) {
-      return AirportCertOperational.remove({ id: $stateParams.id, ind: certOper.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertOper = function () {
       return $state.go('root.airports.view.opers.new');
     };
@@ -35,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportCertOperational',
     'certOpers'
   ];
 
   AirportOpersSearchCtrl.$resolve = {
     certOpers: [
       '$stateParams',
-      'AirportCertOperational',
-      function ($stateParams, AirportCertOperational) {
-        return AirportCertOperational.query($stateParams).$promise;
+      'AirportCertOperationals',
+      function ($stateParams, AirportCertOperationals) {
+        return AirportCertOperationals.query($stateParams).$promise;
       }
     ]
   };

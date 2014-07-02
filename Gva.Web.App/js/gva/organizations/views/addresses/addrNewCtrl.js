@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAddress,
+    OrganizationAddresses,
     organizationAddress
     ) {
     $scope.organizationAddress = organizationAddress;
@@ -15,7 +15,7 @@
       return $scope.newAddressForm.$validate()
         .then(function () {
           if ($scope.newAddressForm.$valid) {
-            return OrganizationAddress
+            return OrganizationAddresses
               .save({ id: $stateParams.id }, $scope.organizationAddress).$promise
               .then(function () {
                 return $state.go('root.organizations.view.addresses.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAddress',
+    'OrganizationAddresses',
     'organizationAddress'
   ];
 

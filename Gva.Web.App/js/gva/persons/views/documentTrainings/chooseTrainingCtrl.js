@@ -50,9 +50,9 @@
   ChooseTrainingCtrl.$resolve = {
     trainings: [
       '$stateParams',
-      'PersonDocumentTraining',
-      function ($stateParams, PersonDocumentTraining) {
-        return PersonDocumentTraining.query({ id: $stateParams.id }).$promise;
+      'PersonDocumentTrainings',
+      function ($stateParams, PersonDocumentTrainings) {
+        return PersonDocumentTrainings.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

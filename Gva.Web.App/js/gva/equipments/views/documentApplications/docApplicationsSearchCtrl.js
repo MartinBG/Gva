@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentDocumentApplication,
     equipmentDocumentApplications
   ) {
     $scope.equipmentDocumentApplications = equipmentDocumentApplications;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentDocumentApplication',
     'equipmentDocumentApplications'
   ];
 
   EquipmentApplicationsSearchCtrl.$resolve = {
     equipmentDocumentApplications: [
       '$stateParams',
-      'EquipmentDocumentApplication',
-      function ($stateParams, EquipmentDocumentApplication) {
-        return EquipmentDocumentApplication.query($stateParams).$promise;
+      'EquipmentDocumentApplications',
+      function ($stateParams, EquipmentDocumentApplications) {
+        return EquipmentDocumentApplications.query($stateParams).$promise;
       }
     ]
   };

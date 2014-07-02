@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEducation,
+    PersonDocumentEducations,
     edu
   ) {
     var originalEdu = _.cloneDeep(edu);
@@ -27,7 +27,7 @@
       return $scope.editDocumentEducationForm.$validate()
         .then(function () {
           if ($scope.editDocumentEducationForm.$valid) {
-            return PersonDocumentEducation
+            return PersonDocumentEducations
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -41,7 +41,7 @@
     };
 
     $scope.deleteEdu = function () {
-      return PersonDocumentEducation.remove({
+      return PersonDocumentEducations.remove({
         id: $stateParams.id,
         ind: edu.partIndex
       })
@@ -55,16 +55,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation',
+    'PersonDocumentEducations',
     'edu'
   ];
 
   DocumentEducationsEditCtrl.$resolve = {
     edu: [
       '$stateParams',
-      'PersonDocumentEducation',
-      function ($stateParams, PersonDocumentEducation) {
-        return PersonDocumentEducation.get($stateParams).$promise;
+      'PersonDocumentEducations',
+      function ($stateParams, PersonDocumentEducations) {
+        return PersonDocumentEducations.get($stateParams).$promise;
       }
     ]
   };

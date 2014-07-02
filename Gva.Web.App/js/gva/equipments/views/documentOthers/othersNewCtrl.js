@@ -6,14 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentDocumentOther,
+    EquipmentDocumentOthers,
     equipmentDocumentOther
   ) {
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.newDocumentOtherForm.$valid) {
-            return EquipmentDocumentOther
+            return EquipmentDocumentOthers
               .save({ id: $stateParams.id }, $scope.equipmentDocumentOther).$promise
               .then(function () {
                 return $state.go('root.equipments.view.others.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentDocumentOther',
+    'EquipmentDocumentOthers',
     'equipmentDocumentOther'
   ];
 

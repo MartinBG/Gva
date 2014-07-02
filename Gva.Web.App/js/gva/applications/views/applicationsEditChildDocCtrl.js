@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
+    Docs,
     docModel,
     parentDoc
   ) {
@@ -28,7 +28,7 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc.save($scope.docModel.doc)
+          return Docs.save($scope.docModel.doc)
             .$promise
             .then(function () {
               return $state.transitionTo('root.applications.edit.case', {
@@ -50,7 +50,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
+    'Docs',
     'docModel',
     'parentDoc'
   ];
@@ -86,9 +86,9 @@
         });
       }
     ],
-    parentDoc: ['$stateParams', 'Doc', function ($stateParams, Doc) {
+    parentDoc: ['$stateParams', 'Docs', function ($stateParams, Docs) {
       if (!!$stateParams.parentDocId) {
-        return Doc.get({ id: $stateParams.parentDocId })
+        return Docs.get({ id: $stateParams.parentDocId })
           .$promise
           .then(function (result) {
             return [{

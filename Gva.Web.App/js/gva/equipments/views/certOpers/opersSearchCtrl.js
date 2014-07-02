@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentCertOperational,
     certOpers
   ) {
     $scope.certOpers = certOpers;
@@ -19,13 +18,6 @@
         });
     };
 
-    $scope.deleteCertOper = function (certOper) {
-      return EquipmentCertOperational.remove({ id: $stateParams.id, ind: certOper.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newCertOper = function () {
       return $state.go('root.equipments.view.opers.new');
     };
@@ -35,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentCertOperational',
     'certOpers'
   ];
 
   EquipmentOpersSearchCtrl.$resolve = {
     certOpers: [
       '$stateParams',
-      'EquipmentCertOperational',
-      function ($stateParams, EquipmentCertOperational) {
-        return EquipmentCertOperational.query($stateParams).$promise;
+      'EquipmentCertOperationals',
+      function ($stateParams, EquipmentCertOperationals) {
+        return EquipmentCertOperationals.query($stateParams).$promise;
       }
     ]
   };

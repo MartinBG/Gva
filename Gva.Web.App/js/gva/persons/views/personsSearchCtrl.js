@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Person,
     persons) {
     $scope.filters = {
       lin: null,
@@ -45,16 +44,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Person',
     'persons'
   ];
 
   PersonsSearchCtrl.$resolve = {
     persons: [
       '$stateParams',
-      'Person',
-      function ($stateParams, Person) {
-        return Person.query($stateParams).$promise.then(function (persons) {
+      'Persons',
+      function ($stateParams, Persons) {
+        return Persons.query($stateParams).$promise.then(function (persons) {
           return _(persons)
           .forEach(function (person) {
             /*jshint -W052*/

@@ -5,7 +5,7 @@
   function OrganizationNewCtrl(
     $scope,
     $state,
-    Organization,
+    Organizations,
     selectedOrganization
     ) {
     var organizationData = {
@@ -21,7 +21,7 @@
       return $scope.newOrganizationForm.$validate()
       .then(function () {
         if ($scope.newOrganizationForm.$valid) {
-          return Organization.save($scope.organization).$promise
+          return Organizations.save($scope.organization).$promise
             .then(function (organization) {
               selectedOrganization.push(organization.id);
               return $state.go('^');
@@ -38,7 +38,7 @@
   OrganizationNewCtrl.$inject = [
     '$scope',
     '$state',
-    'Organization',
+    'Organizations',
     'selectedOrganization'
   ];
 

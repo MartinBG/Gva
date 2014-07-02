@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonLicence,
+    PersonLicences,
     licence
   ) {
     var originalLicence = _.cloneDeep(licence);
@@ -43,14 +43,14 @@
       $scope.licence.part.editions.pop();
 
       if ($scope.licence.part.editions.length === 0) {
-        return PersonLicence
+        return PersonLicences
           .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.persons.view.licences.search');
           });
       }
       else {
-        return PersonLicence.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence)
+        return PersonLicences.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence)
           .$promise;
       }
     };
@@ -61,7 +61,7 @@
           if ($scope.editLicenceForm.$valid) {
             $scope.editMode = 'saving';
             $scope.backFromChild = false;
-            return PersonLicence
+            return PersonLicences
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence).$promise
               .then(function () {
                 $scope.editMode = null;
@@ -84,16 +84,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonLicence',
+    'PersonLicences',
     'licence'
   ];
 
   LicencesEditCtrl.$resolve = {
     licence: [
       '$stateParams',
-      'PersonLicence',
-      function ($stateParams, PersonLicence) {
-        return PersonLicence.get($stateParams).$promise;
+      'PersonLicences',
+      function ($stateParams, PersonLicences) {
+        return PersonLicences.get($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentOwner,
     documentOwners
   ) {
     $scope.documentOwners = documentOwners;
@@ -19,13 +18,6 @@
         });
     };
 
-    $scope.deleteDocumentOwner = function (documentOwner) {
-      return AirportDocumentOwner.remove({ id: $stateParams.id, ind: documentOwner.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOwner = function () {
       return $state.go('root.airports.view.owners.new');
     };
@@ -35,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentOwner',
     'documentOwners'
   ];
 
   AirportOwnersSearchCtrl.$resolve = {
     documentOwners: [
       '$stateParams',
-      'AirportDocumentOwner',
-      function ($stateParams, AirportDocumentOwner) {
-        return AirportDocumentOwner.query($stateParams).$promise;
+      'AirportDocumentOwners',
+      function ($stateParams, AirportDocumentOwners) {
+        return AirportDocumentOwners.query($stateParams).$promise;
       }
     ]
   };

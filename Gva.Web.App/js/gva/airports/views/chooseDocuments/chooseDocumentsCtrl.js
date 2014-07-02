@@ -69,9 +69,9 @@
   AirportsChooseDocumentsCtrl.$resolve = {
     documents: [
       '$stateParams',
-      'OrganizationInventory',
-      function ($stateParams, OrganizationInventory) {
-        return OrganizationInventory
+      'AirportsInventory',
+      function ($stateParams, AirportsInventory) {
+        return AirportsInventory
           .query({
             id: $stateParams.id,
             documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null

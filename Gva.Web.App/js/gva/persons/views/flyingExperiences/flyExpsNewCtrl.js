@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonFlyingExperience,
+    PersonFlyingExperiences,
     personFlyingExperience
   ) {
     $scope.personFlyingExperience = personFlyingExperience;
@@ -15,7 +15,7 @@
       return $scope.newFlyingExperienceForm.$validate()
         .then(function () {
           if ($scope.newFlyingExperienceForm.$valid) {
-            return PersonFlyingExperience
+            return PersonFlyingExperiences
               .save({ id: $stateParams.id }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonFlyingExperience',
+    'PersonFlyingExperiences',
     'personFlyingExperience'
   ];
 

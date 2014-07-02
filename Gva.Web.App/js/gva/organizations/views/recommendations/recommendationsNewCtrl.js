@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRecommendation,
+    OrganizationRecommendations,
     organizationRecommendation
   ) {
     $scope.organizationRecommendation = organizationRecommendation;
@@ -15,7 +15,7 @@
       return $scope.newRecommendation.$validate()
         .then(function () {
           if ($scope.newRecommendation.$valid) {
-            return OrganizationRecommendation
+            return OrganizationRecommendations
               .save({ id: $stateParams.id }, $scope.organizationRecommendation)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRecommendation',
+    'OrganizationRecommendations',
     'organizationRecommendation'
   ];
 

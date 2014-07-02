@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentMedical,
     person,
     meds
   ) {
@@ -29,7 +28,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentMedical',
     'person',
     'meds'
   ];
@@ -37,9 +35,9 @@
   DocumentMedicalsSearchCtrl.$resolve = {
     meds: [
       '$stateParams',
-      'PersonDocumentMedical',
-      function ($stateParams, PersonDocumentMedical) {
-        return PersonDocumentMedical.query($stateParams).$promise;
+      'PersonDocumentMedicals',
+      function ($stateParams, PersonDocumentMedicals) {
+        return PersonDocumentMedicals.query($stateParams).$promise;
       }
     ]
   };

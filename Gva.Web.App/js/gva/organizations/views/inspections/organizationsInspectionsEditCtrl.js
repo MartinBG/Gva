@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationInspection,
+    OrganizationInspections,
     organizationInspection
   ) {
     var originalInspection = _.cloneDeep(organizationInspection);
@@ -27,7 +27,7 @@
       return $scope.editInspectionForm.$validate()
       .then(function () {
         if ($scope.editInspectionForm.$valid) {
-          return OrganizationInspection
+          return OrganizationInspections
             .save({
               id: $stateParams.id,
               ind: $stateParams.childInd ? $stateParams.childInd : $stateParams.ind
@@ -43,7 +43,7 @@
     };
 
     $scope.deleteInspection = function () {
-      return OrganizationInspection.remove({
+      return OrganizationInspections.remove({
         id: $stateParams.id,
         ind: organizationInspection.partIndex
       }).$promise.then(function () {
@@ -58,16 +58,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationInspection',
+    'OrganizationInspections',
     'organizationInspection'
   ];
 
   OrganizationsInspectionsEditCtrl.$resolve = {
     organizationInspection: [
       '$stateParams',
-      'OrganizationInspection',
-      function ($stateParams, OrganizationInspection) {
-        return OrganizationInspection.get({
+      'OrganizationInspections',
+      function ($stateParams, OrganizationInspections) {
+        return OrganizationInspections.get({
           id: $stateParams.id,
           ind: $stateParams.childInd? $stateParams.childInd: $stateParams.ind
         }).$promise;

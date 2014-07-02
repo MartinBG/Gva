@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    CertAirNavigationServiceDeliverer,
     certAirNavigationServiceDeliverers
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirNavigationServiceDeliverer',
     'certAirNavigationServiceDeliverers'
   ];
 
   CertAirNavigationServiceDeliverersSearchCtrl.$resolve = {
     certAirNavigationServiceDeliverers: [
       '$stateParams',
-      'CertAirNavigationServiceDeliverer',
-      function ($stateParams, CertAirNavigationServiceDeliverer) {
-        return CertAirNavigationServiceDeliverer.query($stateParams).$promise;
+      'CertAirNavigationServiceDeliverers',
+      function ($stateParams, CertAirNavigationServiceDeliverers) {
+        return CertAirNavigationServiceDeliverers.query($stateParams).$promise;
       }
     ]
   };

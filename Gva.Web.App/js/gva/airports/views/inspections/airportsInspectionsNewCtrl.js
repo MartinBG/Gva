@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportInspection,
+    AirportInspections,
     airportInspection) {
     $scope.airportInspection = airportInspection;
 
@@ -14,7 +14,7 @@
       return $scope.newInspectionForm.$validate()
       .then(function () {
         if ($scope.newInspectionForm.$valid) {
-          return AirportInspection
+          return AirportInspections
             .save({ id: $stateParams.id }, $scope.airportInspection)
             .$promise
             .then(function () {
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportInspection',
+    'AirportInspections',
     'airportInspection'
   ];
 

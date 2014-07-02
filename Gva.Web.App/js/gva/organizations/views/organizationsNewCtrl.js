@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function OrganizationsNewCtrl($scope, $state, Organization, organization, caseType) {
+  function OrganizationsNewCtrl($scope, $state, Organizations, organization, caseType) {
     $scope.organization = organization;
     if (caseType) {
       $scope.organization.organizationData.caseTypes = [caseType];
@@ -12,7 +12,7 @@
       return $scope.newOrganizationForm.$validate()
       .then(function () {
         if ($scope.newOrganizationForm.$valid) {
-          return Organization.save($scope.organization).$promise
+          return Organizations.save($scope.organization).$promise
             .then(function () {
               return $state.go('root.organizations.search');
             });
@@ -25,7 +25,7 @@
     };
   }
 
-  OrganizationsNewCtrl.$inject = ['$scope', '$state', 'Organization', 'organization', 'caseType'];
+  OrganizationsNewCtrl.$inject = ['$scope', '$state', 'Organizations', 'organization', 'caseType'];
 
   OrganizationsNewCtrl.$resolve = {
     organization: function () {

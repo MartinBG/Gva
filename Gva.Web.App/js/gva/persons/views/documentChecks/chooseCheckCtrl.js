@@ -49,9 +49,9 @@
   ChooseCheckCtrl.$resolve = {
     checks: [
       '$stateParams',
-      'PersonDocumentCheck',
-      function ($stateParams, PersonDocumentCheck) {
-        return PersonDocumentCheck.query({ id: $stateParams.id }).$promise;
+      'PersonDocumentChecks',
+      function ($stateParams, PersonDocumentChecks) {
+        return PersonDocumentChecks.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

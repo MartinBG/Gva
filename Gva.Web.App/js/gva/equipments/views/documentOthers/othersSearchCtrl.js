@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentDocumentOther,
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
@@ -19,13 +18,6 @@
         });
     };
 
-    $scope.deleteDocumentOther = function (documentOther) {
-      return EquipmentDocumentOther.remove({ id: $stateParams.id, ind: documentOther.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOther = function () {
       return $state.go('root.equipments.view.others.new');
     };
@@ -35,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentDocumentOther',
     'documentOthers'
   ];
 
   EquipmentOthersSearchCtrl.$resolve = {
     documentOthers: [
       '$stateParams',
-      'EquipmentDocumentOther',
-      function ($stateParams, EquipmentDocumentOther) {
-        return EquipmentDocumentOther.query($stateParams).$promise;
+      'EquipmentDocumentOthers',
+      function ($stateParams, EquipmentDocumentOthers) {
+        return EquipmentDocumentOthers.query($stateParams).$promise;
       }
     ]
   };

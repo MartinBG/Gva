@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('gva')
-    .factory('Application', ['$resource',
+    .factory('Applications', ['$resource',
       function ($resource) {
         return $resource('/api/apps/:id', { id: '@id' },
           {

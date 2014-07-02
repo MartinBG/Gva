@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('AirportDocumentApplication', ['$resource', function ($resource) {
+  angular.module('gva').factory('AirportDocumentApplications', ['$resource', function ($resource) {
     return $resource('/api/airports/:id/airportDocumentApplications/:ind');
   }]);
 }(angular));

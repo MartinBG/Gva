@@ -2,10 +2,10 @@
 (function (angular) {
   'use strict';
 
-  function PersonLicenceCtrl($scope, $stateParams, PersonLastLicenceNumber) {
+  function PersonLicenceCtrl($scope, $stateParams, PersonsLastLicenceNumber) {
     $scope.$watch('model.licenceType', function(){
       if(!$scope.lastLicenceNumber && !!$scope.model.licenceType){
-        PersonLastLicenceNumber.get({
+        PersonsLastLicenceNumber.get({
           id: $stateParams.id,
           licenceType: $scope.model.licenceType.code
         }).$promise
@@ -16,7 +16,7 @@
     });
   }
 
-  PersonLicenceCtrl.$inject = ['$scope', '$stateParams', 'PersonLastLicenceNumber'];
+  PersonLicenceCtrl.$inject = ['$scope', '$stateParams', 'PersonsLastLicenceNumber'];
 
   angular.module('gva').controller('PersonLicenceCtrl', PersonLicenceCtrl);
 }(angular));

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Organization,
     organization,
     application,
     caseType
@@ -115,7 +114,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Organization',
     'organization',
     'application',
     'caseType'
@@ -124,17 +122,17 @@
   OrganizationsViewCtrl.$resolve = {
     organization: [
       '$stateParams',
-      'Organization',
-      function ($stateParams, Organization) {
-        return Organization.get($stateParams).$promise;
+      'Organizations',
+      function ($stateParams, Organizations) {
+        return Organizations.get($stateParams).$promise;
       }
     ],
     application: [
       '$stateParams',
-      'OrganizationApplication',
-      function ResolveApplication($stateParams, OrganizationApplication) {
+      'OrganizationApplications',
+      function ResolveApplication($stateParams, OrganizationApplications) {
         if (!!$stateParams.appId) {
-          return OrganizationApplication.get($stateParams).$promise
+          return OrganizationApplications.get($stateParams).$promise
             .then(function (result) {
               if (result.applicationId) {
                 return result;

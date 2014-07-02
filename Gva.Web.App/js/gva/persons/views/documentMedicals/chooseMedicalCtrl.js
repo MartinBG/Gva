@@ -49,9 +49,9 @@
   ChooseMedicalCtrl.$resolve = {
     medicals: [
       '$stateParams',
-      'PersonDocumentMedical',
-      function ($stateParams, PersonDocumentMedical) {
-        return PersonDocumentMedical.query({ id: $stateParams.id }).$promise;
+      'PersonDocumentMedicals',
+      function ($stateParams, PersonDocumentMedicals) {
+        return PersonDocumentMedicals.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

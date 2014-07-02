@@ -5,7 +5,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationInspection,
+    OrganizationInspections,
     Nomenclatures) {
 
     $scope.watchList = [];
@@ -32,7 +32,7 @@
         disparities: []
       };
       _.each($scope.model.part.includedAudits, function (auditPartIndex) {
-        OrganizationInspection.get({
+        OrganizationInspections.get({
           id: $stateParams.id,
           ind: auditPartIndex
         }).$promise.then(function (audit) {
@@ -143,7 +143,7 @@
   }
 
   OrganizationRecommendationCtrl.$inject =
-    ['$scope', '$state', '$stateParams', 'OrganizationInspection', 'Nomenclatures'];
+    ['$scope', '$state', '$stateParams', 'OrganizationInspections', 'Nomenclatures'];
 
   angular.module('gva')
     .controller('OrganizationRecommendationCtrl', OrganizationRecommendationCtrl);

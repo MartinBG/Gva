@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentMedical,
+    PersonDocumentMedicals,
     med
   ) {
     var originalMedical = _.cloneDeep(med);
@@ -27,7 +27,7 @@
       return $scope.editDocumentMedicalForm.$validate()
         .then(function () {
           if ($scope.editDocumentMedicalForm.$valid) {
-            return PersonDocumentMedical
+            return PersonDocumentMedicals
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentMedical)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteMedical = function () {
-      return PersonDocumentMedical.remove({ id: $stateParams.id, ind: med.partIndex })
+      return PersonDocumentMedicals.remove({ id: $stateParams.id, ind: med.partIndex })
         .$promise.then(function () {
           return $state.go('root.persons.view.medicals.search');
         });
@@ -49,16 +49,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentMedical',
+    'PersonDocumentMedicals',
     'med'
   ];
 
   DocumentMedicalsEditCtrl.$resolve = {
     med: [
       '$stateParams',
-      'PersonDocumentMedical',
-      function ($stateParams, PersonDocumentMedical) {
-        return PersonDocumentMedical.get($stateParams).$promise;
+      'PersonDocumentMedicals',
+      function ($stateParams, PersonDocumentMedicals) {
+        return PersonDocumentMedicals.get($stateParams).$promise;
       }
     ]
   };

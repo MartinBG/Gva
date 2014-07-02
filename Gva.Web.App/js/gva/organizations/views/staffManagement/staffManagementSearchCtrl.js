@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffManagement,
     organizationStaffManagement
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffManagement',
     'organizationStaffManagement'
   ];
 
   StaffManagementSearchCtrl.$resolve = {
     organizationStaffManagement: [
       '$stateParams',
-      'OrganizationStaffManagement',
-      function ($stateParams, OrganizationStaffManagement) {
-        return OrganizationStaffManagement.query($stateParams).$promise;
+      'OrganizationStaffManagements',
+      function ($stateParams, OrganizationStaffManagements) {
+        return OrganizationStaffManagements.query($stateParams).$promise;
       }
     ]
   };

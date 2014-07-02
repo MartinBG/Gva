@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function AirportSelectCtrl($scope, $state, $stateParams, Airport, selectedAirport) {
+  function AirportSelectCtrl($scope, $state, $stateParams, Airports, selectedAirport) {
     $scope.filters = {
       name: null,
       icao: null
@@ -15,7 +15,7 @@
         }
       });
 
-    Airport.query($scope.filters).$promise.then(function (airports) {
+    Airports.query($scope.filters).$promise.then(function (airports) {
       $scope.airports = airports;
     });
 
@@ -43,7 +43,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Airport',
+    'Airports',
     'selectedAirport'
   ];
 

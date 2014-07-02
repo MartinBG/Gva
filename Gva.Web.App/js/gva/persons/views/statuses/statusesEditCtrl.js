@@ -6,7 +6,7 @@
     $scope,
     $stateParams,
     $state,
-    PersonStatus,
+    PersonStatuses,
     status
   ) {
     var originalStatus = _.cloneDeep(status);
@@ -27,7 +27,7 @@
       return $scope.personStatusForm.$validate()
         .then(function () {
           if ($scope.personStatusForm.$valid) {
-            return PersonStatus
+            return PersonStatuses
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.status)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteStatus = function () {
-      return PersonStatus
+      return PersonStatuses
         .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
         .then(function () {
           return $state.go('root.persons.view.statuses.search');
@@ -50,16 +50,16 @@
     '$scope',
     '$stateParams',
     '$state',
-    'PersonStatus',
+    'PersonStatuses',
     'status'
   ];
 
   StatusesEditCtrl.$resolve = {
     status: [
       '$stateParams',
-      'PersonStatus',
-      function ($stateParams, PersonStatus) {
-        return PersonStatus.get({
+      'PersonStatuses',
+      function ($stateParams, PersonStatuses) {
+        return PersonStatuses.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

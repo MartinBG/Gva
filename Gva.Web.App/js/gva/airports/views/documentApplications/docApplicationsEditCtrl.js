@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentApplication,
+    AirportDocumentApplications,
     airportDocumentApplication) {
     var originalApplication = _.cloneDeep(airportDocumentApplication);
 
@@ -26,7 +26,7 @@
       return $scope.editDocumentApplicationForm.$validate()
         .then(function () {
           if ($scope.editDocumentApplicationForm.$valid) {
-            return AirportDocumentApplication
+            return AirportDocumentApplications
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -40,7 +40,7 @@
     };
 
     $scope.deleteApplication = function () {
-      return AirportDocumentApplication.remove({
+      return AirportDocumentApplications.remove({
         id: $stateParams.id,
         ind: airportDocumentApplication.partIndex
       }).$promise.then(function () {
@@ -55,16 +55,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentApplication',
+    'AirportDocumentApplications',
     'airportDocumentApplication'
   ];
 
   AirportApplicationsEditCtrl.$resolve = {
     airportDocumentApplication: [
       '$stateParams',
-      'AirportDocumentApplication',
-      function ($stateParams, AirportDocumentApplication) {
-        return AirportDocumentApplication.get($stateParams).$promise
+      'AirportDocumentApplications',
+      function ($stateParams, AirportDocumentApplications) {
+        return AirportDocumentApplications.get($stateParams).$promise
             .then(function (application) {
           application.files = {
             hideApplications: true,

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentOther,
+    PersonDocumentOthers,
     personDocumentOther,
     selectedPublisher
   ) {
@@ -14,7 +14,7 @@
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.newDocumentOtherForm.$valid) {
-            return PersonDocumentOther
+            return PersonDocumentOthers
               .save({ id: $stateParams.id }, $scope.personDocumentOther)
               .$promise
               .then(function () {
@@ -41,7 +41,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentOther',
+    'PersonDocumentOthers',
     'personDocumentOther',
     'selectedPublisher'
   ];

@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function PersonSelectCtrl($scope, $state, $stateParams, Person, selectedPerson) {
+  function PersonSelectCtrl($scope, $state, $stateParams, Persons, selectedPerson) {
     $scope.filters = {
       lin: null,
       uin: null,
@@ -16,7 +16,7 @@
         }
       });
 
-    Person.query($scope.filters).$promise.then(function (persons) {
+    Persons.query($scope.filters).$promise.then(function (persons) {
       $scope.persons = persons;
     });
 
@@ -44,7 +44,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Person',
+    'Persons',
     'selectedPerson'
   ];
 

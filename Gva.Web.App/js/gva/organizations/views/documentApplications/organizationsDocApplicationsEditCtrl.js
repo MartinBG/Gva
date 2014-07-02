@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationDocumentApplication,
+    OrganizationDocumentApplications,
     organizationDocumentApplication
   ) {
     var originalApplication = _.cloneDeep(organizationDocumentApplication);
@@ -27,7 +27,7 @@
       $scope.editDocumentApplicationForm.$validate()
       .then(function () {
         if ($scope.editDocumentApplicationForm.$valid) {
-          return OrganizationDocumentApplication
+          return OrganizationDocumentApplications
             .save({ id: $stateParams.id, ind: $stateParams.ind },
             $scope.organizationDocumentApplication)
             .$promise
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteApplication = function () {
-      return OrganizationDocumentApplication
+      return OrganizationDocumentApplications
         .remove({ id: $stateParams.id, ind: organizationDocumentApplication.partIndex })
         .$promise.then(function () {
           return $state.go('root.organizations.view.documentApplications.search', {
@@ -53,16 +53,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationDocumentApplication',
+    'OrganizationDocumentApplications',
     'organizationDocumentApplication'
   ];
 
   OrganizationsDocApplicationsEditCtrl.$resolve = {
     organizationDocumentApplication: [
       '$stateParams',
-      'OrganizationDocumentApplication',
-      function ($stateParams, OrganizationDocumentApplication) {
-        return OrganizationDocumentApplication.get($stateParams).$promise
+      'OrganizationDocumentApplications',
+      function ($stateParams, OrganizationDocumentApplications) {
+        return OrganizationDocumentApplications.get($stateParams).$promise
             .then(function (application) {
           application.files = {
             hideApplications: true,

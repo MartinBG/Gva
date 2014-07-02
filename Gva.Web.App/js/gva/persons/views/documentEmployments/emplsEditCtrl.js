@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEmployment,
+    PersonDocumentEmployments,
     employment
   ) {
     var originalEmpl = _.cloneDeep(employment);
@@ -27,7 +27,7 @@
       return $scope.editDocumentEmploymentForm.$validate()
         .then(function () {
           if ($scope.editDocumentEmploymentForm.$valid) {
-            return PersonDocumentEmployment
+            return PersonDocumentEmployments
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -41,7 +41,7 @@
     };
 
     $scope.deleteEmployment = function () {
-      return PersonDocumentEmployment.remove({ id: $stateParams.id, ind: employment.partIndex })
+      return PersonDocumentEmployments.remove({ id: $stateParams.id, ind: employment.partIndex })
         .$promise.then(function () {
           return $state.go('root.persons.view.employments.search');
         });
@@ -52,16 +52,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEmployment',
+    'PersonDocumentEmployments',
     'employment'
   ];
 
   DocumentEmploymentsEditCtrl.$resolve = {
     employment: [
       '$stateParams',
-      'PersonDocumentEmployment',
-      function ($stateParams, PersonDocumentEmployment) {
-        return PersonDocumentEmployment.get($stateParams).$promise;
+      'PersonDocumentEmployments',
+      function ($stateParams, PersonDocumentEmployments) {
+        return PersonDocumentEmployments.get($stateParams).$promise;
       }
     ]
   };

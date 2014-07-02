@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRegGroundServiceOperator,
+    OrganizationRegGroundServiceOperators,
     organizationRegGroundServiceOperator
   ) {
     $scope.organizationRegGroundServiceOperator = organizationRegGroundServiceOperator;
@@ -15,7 +15,7 @@
       return $scope.newRegGroundServiceOperatorForm.$validate()
         .then(function () {
           if ($scope.newRegGroundServiceOperatorForm.$valid) {
-            return OrganizationRegGroundServiceOperator
+            return OrganizationRegGroundServiceOperators
               .save({ id: $stateParams.id }, $scope.organizationRegGroundServiceOperator)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRegGroundServiceOperator',
+    'OrganizationRegGroundServiceOperators',
     'organizationRegGroundServiceOperator'
   ];
 

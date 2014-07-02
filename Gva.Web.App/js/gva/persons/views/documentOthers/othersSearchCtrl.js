@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentOther,
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentOther',
     'documentOthers'
   ];
 
   DocumentOthersSearchCtrl.$resolve = {
     documentOthers: [
       '$stateParams',
-      'PersonDocumentOther',
-      function ($stateParams, PersonDocumentOther) {
-        return PersonDocumentOther.query($stateParams).$promise;
+      'PersonDocumentOthers',
+      function ($stateParams, PersonDocumentOthers) {
+        return PersonDocumentOthers.query($stateParams).$promise;
       }
     ]
   };

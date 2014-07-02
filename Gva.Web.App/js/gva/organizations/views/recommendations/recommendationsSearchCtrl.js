@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRecommendation,
     organizationRecommendations
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRecommendation',
     'organizationRecommendations'
   ];
 
   RecommendationsSearchCtrl.$resolve = {
     organizationRecommendations: [
       '$stateParams',
-      'OrganizationRecommendation',
-      function ($stateParams, OrganizationRecommendation) {
-        return OrganizationRecommendation.query($stateParams).$promise;
+      'OrganizationRecommendations',
+      function ($stateParams, OrganizationRecommendations) {
+        return OrganizationRecommendations.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentOther,
+    AirportDocumentOthers,
     airportDocumentOther
   ) {
     var originalDoc = _.cloneDeep(airportDocumentOther);
@@ -27,7 +27,7 @@
       return $scope.editDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.editDocumentOtherForm.$valid) {
-            return AirportDocumentOther
+            return AirportDocumentOthers
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportDocumentOther)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteOther = function () {
-      return AirportDocumentOther.remove({
+      return AirportDocumentOthers.remove({
         id: $stateParams.id,
         ind: airportDocumentOther.partIndex
       }).$promise.then(function () {
@@ -51,16 +51,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentOther',
+    'AirportDocumentOthers',
     'airportDocumentOther'
   ];
 
   AirportOthersEditCtrl.$resolve = {
     airportDocumentOther: [
       '$stateParams',
-      'AirportDocumentOther',
-      function ($stateParams, AirportDocumentOther) {
-        return AirportDocumentOther.get({
+      'AirportDocumentOthers',
+      function ($stateParams, AirportDocumentOthers) {
+        return AirportDocumentOthers.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

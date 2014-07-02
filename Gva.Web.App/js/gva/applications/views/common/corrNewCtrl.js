@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Corr,
+    Corrs,
     corrGroups,
     corrTypes,
     selectedCorrs,
@@ -36,7 +36,7 @@
       return $scope.newCorrForm.$validate()
         .then(function () {
           if ($scope.newCorrForm.$valid) {
-            return Corr.save($scope.corr).$promise.then(function (corr) {
+            return Corrs.save($scope.corr).$promise.then(function (corr) {
               selectedCorrs.current.push(corr.correspondentId);
               return $state.go('^');
             });
@@ -54,7 +54,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Corr',
+    'Corrs',
     'corrGroups',
     'corrTypes',
     'selectedCorrs',
@@ -64,9 +64,9 @@
   CorrNewCtrl.$resolve = {
     corr: [
       '$stateParams',
-      'Corr',
-      function resolveCorr($stateParams, Corr) {
-        return Corr.getNew().$promise;
+      'Corrs',
+      function resolveCorr($stateParams, Corrs) {
+        return Corrs.getNew().$promise;
       }
     ],
     corrGroups: [

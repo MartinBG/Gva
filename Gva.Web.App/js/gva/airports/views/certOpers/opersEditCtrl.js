@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportCertOperational,
+    AirportCertOperationals,
     airportCertOper
   ) {
     var originalCert = _.cloneDeep(airportCertOper);
@@ -26,7 +26,7 @@
       return $scope.editDocumentOperForm.$validate()
         .then(function () {
           if ($scope.editDocumentOperForm.$valid) {
-            return AirportCertOperational
+            return AirportCertOperationals
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportCertOper)
               .$promise
               .then(function () {
@@ -42,7 +42,7 @@
     };
     
     $scope.deleteOper = function () {
-      return AirportCertOperational.remove({
+      return AirportCertOperationals.remove({
         id: $stateParams.id,
         ind: airportCertOper.partIndex
       }).$promise.then(function () {
@@ -55,16 +55,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportCertOperational',
+    'AirportCertOperationals',
     'airportCertOper'
   ];
 
   AirportOpersEditCtrl.$resolve = {
     airportCertOper: [
       '$stateParams',
-      'AirportCertOperational',
-      function ($stateParams, AirportCertOperational) {
-        return AirportCertOperational.get({
+      'AirportCertOperationals',
+      function ($stateParams, AirportCertOperationals) {
+        return AirportCertOperationals.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

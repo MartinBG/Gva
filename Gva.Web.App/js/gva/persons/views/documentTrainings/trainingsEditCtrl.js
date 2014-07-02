@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentTraining,
+    PersonDocumentTrainings,
     personDocumentTraining,
     selectedPublisher
   ) {
@@ -35,7 +35,7 @@
       return $scope.editDocumentTrainingForm.$validate()
         .then(function () {
           if ($scope.editDocumentTrainingForm.$valid) {
-            return PersonDocumentTraining
+            return PersonDocumentTrainings
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentTraining)
               .$promise
               .then(function () {
@@ -50,7 +50,7 @@
     };
 
     $scope.deleteTraining = function () {
-      return PersonDocumentTraining.remove({
+      return PersonDocumentTrainings.remove({
         id: $stateParams.id,
         ind: personDocumentTraining.partIndex
       }).$promise.then(function () {
@@ -63,7 +63,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentTraining',
+    'PersonDocumentTrainings',
     'personDocumentTraining',
     'selectedPublisher'
   ];
@@ -71,9 +71,9 @@
   DocumentTrainingsEditCtrl.$resolve = {
     personDocumentTraining: [
       '$stateParams',
-      'PersonDocumentTraining',
-      function ($stateParams, PersonDocumentTraining) {
-        return PersonDocumentTraining.get($stateParams).$promise;
+      'PersonDocumentTrainings',
+      function ($stateParams, PersonDocumentTrainings) {
+        return PersonDocumentTrainings.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

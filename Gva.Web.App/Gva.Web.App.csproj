@@ -630,14 +630,12 @@
     <Content Include="js\gva\persons\resources\personDocumentMedical.js" />
     <Content Include="js\gva\persons\resources\personDocumentOther.js" />
     <Content Include="js\gva\persons\resources\personDocumentTraining.js" />
-    <Content Include="js\gva\persons\resources\personEdition.js" />
     <Content Include="js\gva\persons\resources\personExam.js" />
     <Content Include="js\gva\persons\resources\personExamAnswers.js" />
     <Content Include="js\gva\persons\resources\personFlyingExperience.js" />
     <Content Include="js\gva\persons\resources\personInventory.js" />
     <Content Include="js\gva\persons\resources\personLastLicenceNumber.js" />
     <Content Include="js\gva\persons\resources\personLicence.js" />
-    <Content Include="js\gva\persons\resources\personLicenceEdition.js" />
     <Content Include="js\gva\persons\resources\personRating.js" />
     <Content Include="js\gva\persons\resources\personsStatus.js" />
     <Content Include="js\gva\persons\resources\publisher.js" />

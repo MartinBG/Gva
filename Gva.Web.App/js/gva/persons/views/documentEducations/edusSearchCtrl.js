@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEducation,
     edus
     ) {
     $scope.documentEducations = edus;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation',
     'edus'
   ];
 
   DocumentEducationsSearchCtrl.$resolve = {
     edus: [
       '$stateParams',
-      'PersonDocumentEducation',
-      function ($stateParams, PersonDocumentEducation) {
-        return PersonDocumentEducation.query($stateParams).$promise;
+      'PersonDocumentEducations',
+      function ($stateParams, PersonDocumentEducations) {
+        return PersonDocumentEducations.query($stateParams).$promise;
       }
     ]
   };

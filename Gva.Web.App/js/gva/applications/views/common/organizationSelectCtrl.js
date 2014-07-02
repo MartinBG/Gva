@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Organization,
+    Organizations,
     selectedOrganization
     ) {
     $scope.filters = {
@@ -21,7 +21,7 @@
         }
       });
 
-    Organization.query($scope.filters).$promise.then(function (organizations) {
+    Organizations.query($scope.filters).$promise.then(function (organizations) {
       $scope.organizations = organizations;
     });
 
@@ -49,7 +49,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Organization',
+    'Organizations',
     'selectedOrganization'
   ];
 

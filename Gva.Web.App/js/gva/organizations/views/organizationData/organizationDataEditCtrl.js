@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationData,
+    OrganizationsData,
     organizationData
   ) {
     var originalOrganizationData = _.cloneDeep(organizationData);
@@ -27,7 +27,7 @@
       return $scope.editOrganizationForm.$validate()
       .then(function () {
         if ($scope.editOrganizationForm.$valid) {
-          return OrganizationData
+          return OrganizationsData
           .save({ id: $stateParams.id }, $scope.organizationData)
           .$promise
           .then(function () {
@@ -42,16 +42,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationData',
+    'OrganizationsData',
     'organizationData'
   ];
 
   OrganizationDataEditCtrl.$resolve = {
     organizationData: [
       '$stateParams',
-      'OrganizationData',
-      function ($stateParams, OrganizationData) {
-        return OrganizationData.get({ id: $stateParams.id }).$promise;
+      'OrganizationsData',
+      function ($stateParams, OrganizationsData) {
+        return OrganizationsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

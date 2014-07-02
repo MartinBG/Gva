@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentExam,
+    PersonDocumentExams,
     exam
   ) {
     $scope.exam = exam;
@@ -15,7 +15,7 @@
       return $scope.newExamForm.$validate()
         .then(function () {
           if ($scope.newExamForm.$valid) {
-            return PersonDocumentExam
+            return PersonDocumentExams
               .save({ id: $stateParams.id }, $scope.exam).$promise
               .then(function () {
                 return $state.go('root.persons.view.exams.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentExam',
+    'PersonDocumentExams',
     'exam'
   ];
 

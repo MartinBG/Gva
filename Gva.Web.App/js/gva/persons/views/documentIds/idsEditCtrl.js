@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentId,
+    PersonDocumentIds,
     docId
   ) {
     var originalDocId = _.cloneDeep(docId);
@@ -27,7 +27,7 @@
       return $scope.editDocumentIdForm.$validate()
         .then(function () {
           if ($scope.editDocumentIdForm.$valid) {
-            return PersonDocumentId
+            return PersonDocumentIds
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentId)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteDocId = function () {
-      return PersonDocumentId.remove({ id: $stateParams.id, ind: docId.partIndex })
+      return PersonDocumentIds.remove({ id: $stateParams.id, ind: docId.partIndex })
           .$promise.then(function () {
         return $state.go('root.persons.view.documentIds.search');
       });
@@ -49,16 +49,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentId',
+    'PersonDocumentIds',
     'docId'
   ];
 
   DocumentIdsEditCtrl.$resolve = {
     docId: [
       '$stateParams',
-      'PersonDocumentId',
-      function ($stateParams, PersonDocumentId) {
-        return PersonDocumentId.get($stateParams).$promise;
+      'PersonDocumentIds',
+      function ($stateParams, PersonDocumentIds) {
+        return PersonDocumentIds.get($stateParams).$promise;
       }
     ]
   };

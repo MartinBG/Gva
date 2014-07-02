@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationDocumentApplication,
+    OrganizationDocumentApplications,
     organizationDocumentApplication
   ) {
 
@@ -16,7 +16,7 @@
       $scope.newDocumentApplicationForm.$validate()
          .then(function () {
             if ($scope.newDocumentApplicationForm.$valid) {
-              return OrganizationDocumentApplication
+              return OrganizationDocumentApplications
               .save({ id: $stateParams.id }, $scope.organizationDocumentApplication).$promise
               .then(function () {
                 return $state.go('root.organizations.view.documentApplications.search');
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationDocumentApplication',
+    'OrganizationDocumentApplications',
     'organizationDocumentApplication'
   ];
   OrganizationsDocApplicationsNewCtrl.$resolve = {

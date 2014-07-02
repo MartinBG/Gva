@@ -49,9 +49,9 @@
   ChooseRatingCtrl.$resolve = {
     ratings: [
       '$stateParams',
-      'PersonRating',
-      function ($stateParams, PersonRating) {
-        return PersonRating.query({ id: $stateParams.id }).$promise;
+      'PersonRatings',
+      function ($stateParams, PersonRatings) {
+        return PersonRatings.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

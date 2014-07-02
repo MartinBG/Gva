@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRegAirportOperator,
+    OrganizationRegAirportOperators,
     organizationRegAirportOperator
   ) {
     $scope.organizationRegAirportOperator = organizationRegAirportOperator;
@@ -15,7 +15,7 @@
       return $scope.newRegAirportOperatorForm.$validate()
         .then(function () {
           if ($scope.newRegAirportOperatorForm.$valid) {
-            return OrganizationRegAirportOperator
+            return OrganizationRegAirportOperators
               .save({ id: $stateParams.id }, $scope.organizationRegAirportOperator)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRegAirportOperator',
+    'OrganizationRegAirportOperators',
     'organizationRegAirportOperator'
   ];
 

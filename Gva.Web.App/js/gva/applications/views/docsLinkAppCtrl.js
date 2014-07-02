@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Application,
+    Applications,
     selectedPerson,
     selectedOrganization,
     selectedAircraft,
@@ -116,7 +116,7 @@
             setPartAlias = 'equipmentApplication';
           }
 
-          return Application.link(newApplication).$promise.then(function (app) {
+          return Applications.link(newApplication).$promise.then(function (app) {
             if ($scope.doc.isElectronic) {
               return $state.go('root.applications.edit.case', {
                 id: app.applicationId
@@ -139,7 +139,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application',
+    'Applications',
     'selectedPerson',
     'selectedOrganization',
     'selectedAircraft',

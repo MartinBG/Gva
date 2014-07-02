@@ -7,7 +7,6 @@
     $stateParams,
     $scope,
     l10n,
-    Publisher,
     publishers,
     selectedPublisher
   ) {
@@ -60,7 +59,6 @@
     '$stateParams',
     '$scope',
     'l10n',
-    'Publisher',
     'publishers',
     'selectedPublisher'
   ];
@@ -68,9 +66,9 @@
   ChoosePublisherCtrl.$resolve = {
     publishers: [
       '$stateParams',
-      'Publisher',
-      function ($stateParams, Publisher) {
-        return Publisher.query({
+      'Publishers',
+      function ($stateParams, Publishers) {
+        return Publishers.query({
           publisherName: $stateParams.publisherName,
           publisherType: $stateParams.publisherType
         }).$promise;

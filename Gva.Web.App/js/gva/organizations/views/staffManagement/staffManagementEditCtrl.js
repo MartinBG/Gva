@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffManagement,
+    OrganizationStaffManagements,
     organizationStaffManagement,
     selectedEmployment
   ) {
@@ -40,7 +40,7 @@
       return $scope.editStaffManagement.$validate()
         .then(function () {
           if ($scope.editStaffManagement.$valid) {
-            return OrganizationStaffManagement
+            return OrganizationStaffManagements
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -54,7 +54,7 @@
     };
 
     $scope.deleteStaffManagement = function () {
-      return OrganizationStaffManagement
+      return OrganizationStaffManagements
         .remove({ id: $stateParams.id, ind: organizationStaffManagement.partIndex })
         .$promise.then(function () {
           return $state.go('root.organizations.view.staffManagement.search');
@@ -70,7 +70,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffManagement',
+    'OrganizationStaffManagements',
     'organizationStaffManagement',
     'selectedEmployment'
   ];
@@ -78,9 +78,9 @@
   StaffManagementEditCtrl.$resolve = {
     organizationStaffManagement: [
       '$stateParams',
-      'OrganizationStaffManagement',
-      function ($stateParams, OrganizationStaffManagement) {
-        return OrganizationStaffManagement.get({
+      'OrganizationStaffManagements',
+      function ($stateParams, OrganizationStaffManagements) {
+        return OrganizationStaffManagements.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

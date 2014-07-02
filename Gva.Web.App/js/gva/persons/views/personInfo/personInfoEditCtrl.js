@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonInfo,
+    PersonsInfo,
     personInfo
   ) {
     var originalPersonInfo = _.cloneDeep(personInfo);
@@ -27,7 +27,7 @@
       return $scope.editPersonForm.$validate()
         .then(function () {
           if ($scope.editPersonForm.$valid) {
-            return PersonInfo
+            return PersonsInfo
               .save({ id: $stateParams.id }, $scope.personInfo)
               .$promise
               .then(function () {
@@ -48,16 +48,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonInfo',
+    'PersonsInfo',
     'personInfo'
   ];
 
   PersonInfoEditCtrl.$resolve = {
     personInfo: [
       '$stateParams',
-      'PersonInfo',
-      function ($stateParams, PersonInfo) {
-        return PersonInfo.get({ id: $stateParams.id }).$promise;
+      'PersonsInfo',
+      function ($stateParams, PersonsInfo) {
+        return PersonsInfo.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

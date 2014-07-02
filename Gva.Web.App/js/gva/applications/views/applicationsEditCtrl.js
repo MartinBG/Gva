@@ -6,7 +6,6 @@
     $stateParams,
     $state,
     $scope,
-    Application,
     application
     ) {
     $scope.application = application;
@@ -56,16 +55,15 @@
     '$stateParams',
     '$state',
     '$scope',
-    'Application',
     'application'
   ];
 
   ApplicationsEditCtrl.$resolve = {
     application: [
       '$stateParams',
-      'Application',
-      function ResolveApplication($stateParams, Application) {
-        return Application.get({ id: $stateParams.id }).$promise;
+      'Applications',
+      function ResolveApplication($stateParams, Applications) {
+        return Applications.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

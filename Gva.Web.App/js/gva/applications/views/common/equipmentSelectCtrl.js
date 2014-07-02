@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function EquipmentSelectCtrl($scope, $state, $stateParams, Equipment, selectedEquipment) {
+  function EquipmentSelectCtrl($scope, $state, $stateParams, Equipments, selectedEquipment) {
     $scope.filters = {
       name: null
     };
@@ -14,7 +14,7 @@
         }
       });
 
-    Equipment.query($scope.filters).$promise.then(function (equipments) {
+    Equipments.query($scope.filters).$promise.then(function (equipments) {
       $scope.equipments = equipments;
     });
 
@@ -42,7 +42,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Equipment',
+    'Equipments',
     'selectedEquipment'
   ];
 

@@ -34,9 +34,9 @@
   DocumentExamsSearchCtrl.$resolve = {
     exams: [
       '$stateParams',
-      'PersonDocumentExam',
-      function ($stateParams, PersonDocumentExam) {
-        return PersonDocumentExam.query($stateParams).$promise;
+      'PersonDocumentExams',
+      function ($stateParams, PersonDocumentExams) {
+        return PersonDocumentExams.query($stateParams).$promise;
       }
     ]
   };

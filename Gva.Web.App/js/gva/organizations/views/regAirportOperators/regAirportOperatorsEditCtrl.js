@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRegAirportOperator,
+    OrganizationRegAirportOperators,
     organizationRegAirportOperator
   ) {
     var originalOperator = _.cloneDeep(organizationRegAirportOperator);
@@ -27,7 +27,7 @@
       return $scope.editRegAirportOperatorForm.$validate()
       .then(function () {
         if ($scope.editRegAirportOperatorForm.$valid) {
-          return OrganizationRegAirportOperator
+          return OrganizationRegAirportOperators
             .save({ id: $stateParams.id, ind: $stateParams.ind },
             $scope.organizationRegAirportOperator)
             .$promise
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteRegAirportOperator = function () {
-      return OrganizationRegAirportOperator.remove({
+      return OrganizationRegAirportOperators.remove({
         id: $stateParams.id,
         ind: organizationRegAirportOperator.partIndex
       }).$promise.then(function () {
@@ -52,16 +52,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRegAirportOperator',
+    'OrganizationRegAirportOperators',
     'organizationRegAirportOperator'
   ];
 
   RegAirportOperatorsEditCtrl.$resolve = {
     organizationRegAirportOperator: [
       '$stateParams',
-      'OrganizationRegAirportOperator',
-      function ($stateParams, OrganizationRegAirportOperator) {
-        return OrganizationRegAirportOperator.get({
+      'OrganizationRegAirportOperators',
+      function ($stateParams, OrganizationRegAirportOperators) {
+        return OrganizationRegAirportOperators.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

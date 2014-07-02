@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAuditplan,
+    OrganizationAuditplans,
     organizationAuditplan
   ) {
     var originalAuditplan = _.cloneDeep(organizationAuditplan);
@@ -27,7 +27,7 @@
       return $scope.editAuditplanForm.$validate()
       .then(function () {
         if ($scope.editAuditplanForm.$valid) {
-          return OrganizationAuditplan
+          return OrganizationAuditplans
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.organizationAuditplan)
             .$promise
             .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteAuditplan = function () {
-      return OrganizationAuditplan.remove({
+      return OrganizationAuditplans.remove({
         id: $stateParams.id,
         ind: organizationAuditplan.partIndex
       }).$promise.then(function () {
@@ -51,16 +51,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAuditplan',
+    'OrganizationAuditplans',
     'organizationAuditplan'
   ];
 
   AuditplansEditCtrl.$resolve = {
     organizationAuditplan: [
       '$stateParams',
-      'OrganizationAuditplan',
-      function ($stateParams, OrganizationAuditplan) {
-        return OrganizationAuditplan.get({
+      'OrganizationAuditplans',
+      function ($stateParams, OrganizationAuditplans) {
+        return OrganizationAuditplans.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

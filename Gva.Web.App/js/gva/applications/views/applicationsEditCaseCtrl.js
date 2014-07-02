@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     application,
-    DocStatus
+    DocStatuses
     ) {
     $scope.application = application;
 
@@ -31,7 +31,7 @@
     });
 
     $scope.nextStatus = function (docId, docVersion) {
-      return DocStatus.next({
+      return DocStatuses.next({
         docId: docId,
         docVersion: docVersion
       })
@@ -188,7 +188,7 @@
     '$state',
     '$stateParams',
     'application',
-    'DocStatus'
+    'DocStatuses'
   ];
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);

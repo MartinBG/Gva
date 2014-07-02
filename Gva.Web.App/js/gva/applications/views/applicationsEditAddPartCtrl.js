@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Application,
+    Applications,
     applicationPart,
     selectedPublisher
     ) {
@@ -28,7 +28,7 @@
               appPart: $scope.applicationPart.part
             };
 
-            return Application
+            return Applications
               .createPart({
                 id: $stateParams.id,
                 docId: $scope.applicationPart.docId,
@@ -51,7 +51,7 @@
               appPart: $scope.applicationPart.part
             };
 
-            return Application
+            return Applications
               .linkNewPart({
                 id: $stateParams.id,
                 setPartAlias: $scope.applicationPart.setPartAlias
@@ -73,7 +73,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application',
+    'Applications',
     'applicationPart',
     'selectedPublisher'
   ];
@@ -86,7 +86,7 @@
       'l10n',
       'Application',
       'application',
-      function ($q, $stateParams, Nomenclatures, l10n, Application, application) {
+      function ($q, $stateParams, Nomenclatures, l10n, Applications, application) {
         var docFile, doc, docValues;
 
         if (($stateParams.setPartAlias === 'personApplication' ||
@@ -96,12 +96,12 @@
           $stateParams.setPartAlias === 'equipmentApplication') &&
           !!$stateParams.docId
           ) {
-          doc = Application.getDoc({ docId: $stateParams.docId });
+          doc = Applications.getDoc({ docId: $stateParams.docId });
         }
         if (!!$stateParams.docFileId) {
-          docFile = Application.getDocFile({ docFileId: $stateParams.docFileId });
+          docFile = Applications.getDocFile({ docFileId: $stateParams.docFileId });
 
-          docValues = Application.getPersonDocumentValues({ docFileId: $stateParams.docFileId });
+          docValues = Applications.getPersonDocumentValues({ docFileId: $stateParams.docFileId });
         }
 
         return $q.all({

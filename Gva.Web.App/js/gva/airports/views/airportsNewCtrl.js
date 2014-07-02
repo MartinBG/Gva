@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AirportsNewCtrl($scope, $state, Airport, airport) {
+  function AirportsNewCtrl($scope, $state, Airports, airport) {
     $scope.airport = airport;
 
     $scope.save = function () {
       return $scope.newAirportForm.$validate()
       .then(function () {
         if ($scope.newAirportForm.$valid) {
-          return Airport.save($scope.airport).$promise
+          return Airports.save($scope.airport).$promise
             .then(function () {
               return $state.go('root.airports.search');
             });
@@ -22,7 +22,7 @@
     };
   }
 
-  AirportsNewCtrl.$inject = ['$scope', '$state', 'Airport', 'airport'];
+  AirportsNewCtrl.$inject = ['$scope', '$state', 'Airports', 'airport'];
 
   AirportsNewCtrl.$resolve = {
     airport: function () {

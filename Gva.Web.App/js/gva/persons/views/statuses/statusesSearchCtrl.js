@@ -6,7 +6,6 @@
     $scope,
     $stateParams,
     $state,
-    PersonStatus,
     statuses
   ) {
     $scope.statuses = statuses;
@@ -27,16 +26,15 @@
     '$scope',
     '$stateParams',
     '$state',
-    'PersonStatus',
     'statuses'
   ];
 
   StatusesSearchCtrl.$resolve = {
     statuses: [
       '$stateParams',
-      'PersonStatus',
-      function ($stateParams, PersonStatus) {
-        return PersonStatus.query($stateParams).$promise
+      'PersonStatuses',
+      function ($stateParams, PersonStatuses) {
+        return PersonStatuses.query($stateParams).$promise
         .then(function (statuses) {
           return _(statuses)
           .forEach(function (s) {

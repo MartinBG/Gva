@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffExaminer,
     organizationStaffExaminers
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffExaminer',
     'organizationStaffExaminers'
   ];
 
   StaffExaminersSearchCtrl.$resolve = {
     organizationStaffExaminers: [
       '$stateParams',
-      'OrganizationStaffExaminer',
-      function ($stateParams, OrganizationStaffExaminer) {
-        return OrganizationStaffExaminer.query($stateParams).$promise;
+      'OrganizationStaffExaminers',
+      function ($stateParams, OrganizationStaffExaminers) {
+        return OrganizationStaffExaminers.query($stateParams).$promise;
       }
     ]
   };

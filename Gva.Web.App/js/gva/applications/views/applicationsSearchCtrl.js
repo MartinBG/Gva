@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Application,
     applications
     ) {
     $scope.applications = applications;
@@ -52,16 +51,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application',
     'applications'
   ];
 
   ApplicationsSearchCtrl.$resolve = {
     applications: [
       '$stateParams',
-      'Application',
-      function ResolveApps($stateParams, Application) {
-        return Application.query($stateParams).$promise;
+      'Applications',
+      function ResolveApps($stateParams, Applications) {
+        return Applications.query($stateParams).$promise;
       }
     ]
   };

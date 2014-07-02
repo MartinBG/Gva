@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEmployment,
+    PersonDocumentEmployments,
     employment
   ) {
     $scope.personDocumentEmployment = employment;
@@ -15,7 +15,7 @@
       return $scope.newDocumentEmploymentForm.$validate()
         .then(function () {
           if ($scope.newDocumentEmploymentForm.$valid) {
-            return PersonDocumentEmployment
+            return PersonDocumentEmployments
               .save({ id: $stateParams.id }, $scope.personDocumentEmployment).$promise
               .then(function () {
                 return $state.go('root.persons.view.employments.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEmployment',
+    'PersonDocumentEmployments',
     'employment'
   ];
 

@@ -2,7 +2,7 @@
 (function (angular, moment) {
   'use strict';
 
-  function PersonDataCtrl($scope, $stateParams, Person, Nomenclatures) {
+  function PersonDataCtrl($scope, $stateParams, Persons, Nomenclatures) {
     Nomenclatures.query({alias: 'linTypes'})
       .$promise.then(function(linTypes){
         $scope.linTypes = linTypes;
@@ -12,7 +12,7 @@
       $scope.model.linType = item;
       $scope.model.lin = null;
 
-      Person.getNextLin({
+      Persons.getNextLin({
         linType: item.code
       })
       .$promise .then(function(result){
@@ -84,7 +84,7 @@
     };
   }
 
-  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person', 'Nomenclatures'];
+  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Persons', 'Nomenclatures'];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
 }(angular, moment));

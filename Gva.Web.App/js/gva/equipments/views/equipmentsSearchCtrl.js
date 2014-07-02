@@ -45,9 +45,9 @@
   EquipmentsSearchCtrl.$resolve = {
     equipments: [
       '$stateParams',
-      'Equipment',
-      function ($stateParams, Equipment) {
-        return Equipment.query($stateParams).$promise;
+      'Equipments',
+      function ($stateParams, Equipments) {
+        return Equipments.query($stateParams).$promise;
       }
     ]
   };

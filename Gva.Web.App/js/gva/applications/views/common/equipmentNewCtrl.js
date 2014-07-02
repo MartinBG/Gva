@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function EquipmentNewCtrl($scope, $state, Equipment, equipment, selectedEquipment) {
+  function EquipmentNewCtrl($scope, $state, Equipments, equipment, selectedEquipment) {
     $scope.equipment = equipment;
 
     $scope.save = function () {
       return $scope.newEquipmentForm.$validate()
       .then(function () {
         if ($scope.newEquipmentForm.$valid) {
-          return Equipment.save($scope.equipment).$promise
+          return Equipments.save($scope.equipment).$promise
             .then(function (equipment) {
               selectedEquipment.push(equipment.id);
               return $state.go('^');
@@ -24,7 +24,7 @@
 
   }
 
-  EquipmentNewCtrl.$inject = ['$scope', '$state', 'Equipment', 'equipment', 'selectedEquipment'];
+  EquipmentNewCtrl.$inject = ['$scope', '$state', 'Equipments', 'equipment', 'selectedEquipment'];
 
   EquipmentNewCtrl.$resolve = {
     equipment: function () {

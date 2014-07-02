@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AirportNewCtrl($scope, $state, Airport, airport, selectedAirport) {
+  function AirportNewCtrl($scope, $state, Airports, airport, selectedAirport) {
     $scope.airport = airport;
 
     $scope.save = function () {
       return $scope.newAirportForm.$validate()
       .then(function () {
         if ($scope.newAirportForm.$valid) {
-          return Airport.save($scope.airport).$promise
+          return Airports.save($scope.airport).$promise
             .then(function (airport) {
               selectedAirport.push(airport.id);
               return $state.go('^');
@@ -24,7 +24,7 @@
 
   }
 
-  AirportNewCtrl.$inject = ['$scope', '$state', 'Airport', 'airport', 'selectedAirport'];
+  AirportNewCtrl.$inject = ['$scope', '$state', 'Airports', 'airport', 'selectedAirport'];
 
   AirportNewCtrl.$resolve = {
     airport: function () {

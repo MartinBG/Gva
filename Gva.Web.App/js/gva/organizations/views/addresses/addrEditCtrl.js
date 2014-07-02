@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAddress,
+    OrganizationAddresses,
     organizationAddress
   ) {
     var originalAddress = _.cloneDeep(organizationAddress);
@@ -27,7 +27,7 @@
       return $scope.editAddressForm.$validate()
       .then(function () {
         if ($scope.editAddressForm.$valid) {
-          return OrganizationAddress
+          return OrganizationAddresses
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.organizationAddress)
             .$promise
             .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteAddress = function () {
-      return OrganizationAddress.remove({
+      return OrganizationAddresses.remove({
         id: $stateParams.id,
         ind: organizationAddress.partIndex
       }).$promise.then(function () {
@@ -51,16 +51,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAddress',
+    'OrganizationAddresses',
     'organizationAddress'
   ];
 
   OrganizationAddressesEditCtrl.$resolve = {
     organizationAddress: [
       '$stateParams',
-      'OrganizationAddress',
-      function ($stateParams, OrganizationAddress) {
-        return OrganizationAddress.get({
+      'OrganizationAddresses',
+      function ($stateParams, OrganizationAddresses) {
+        return OrganizationAddresses.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

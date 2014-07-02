@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Airport,
     airport,
     application
   ) {
@@ -29,7 +28,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Airport',
     'airport',
     'application'
   ];
@@ -37,17 +35,17 @@
   AirportsViewCtrl.$resolve = {
     airport: [
       '$stateParams',
-      'Airport',
-      function ($stateParams, Airport) {
-        return Airport.get({ id: $stateParams.id }).$promise;
+      'Airports',
+      function ($stateParams, Airports) {
+        return Airports.get({ id: $stateParams.id }).$promise;
       }
     ],
     application: [
       '$stateParams',
-      'AirportApplication',
-      function ResolveApplication($stateParams, AirportApplication) {
+      'AirportApplications',
+      function ResolveApplication($stateParams, AirportApplications) {
         if (!!$stateParams.appId) {
-          return AirportApplication.get($stateParams).$promise
+          return AirportApplications.get($stateParams).$promise
             .then(function (result) {
               if (result.applicationId) {
                 return result;

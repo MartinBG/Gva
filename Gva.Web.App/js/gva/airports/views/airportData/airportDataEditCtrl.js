@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportData,
+    AirportsData,
     airportData
   ) {
     var originalAirportData = _.cloneDeep(airportData);
@@ -27,7 +27,7 @@
       return $scope.airportDataForm.$validate()
       .then(function () {
         if ($scope.airportDataForm.$valid) {
-          return AirportData
+          return AirportsData
           .save({ id: $stateParams.id }, $scope.airportData)
           .$promise
           .then(function () {
@@ -42,16 +42,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportData',
+    'AirportsData',
     'airportData'
   ];
 
   AirportDataEditCtrl.$resolve = {
     airportData: [
       '$stateParams',
-      'AirportData',
-      function ($stateParams, AirportData) {
-        return AirportData.get({ id: $stateParams.id }).$promise;
+      'AirportsData',
+      function ($stateParams, AirportsData) {
+        return AirportsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

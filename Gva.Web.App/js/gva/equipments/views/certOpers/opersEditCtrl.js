@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentCertOperational,
+    EquipmentCertOperationals,
     equipmentCertOper
   ) {
     var originalCert = _.cloneDeep(equipmentCertOper);
@@ -26,7 +26,7 @@
       return $scope.editDocumentOperForm.$validate()
         .then(function () {
           if ($scope.editDocumentOperForm.$valid) {
-            return EquipmentCertOperational
+            return EquipmentCertOperationals
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.equipmentCertOper)
               .$promise
               .then(function () {
@@ -42,7 +42,7 @@
     };
 
     $scope.deleteOper = function () {
-      return EquipmentCertOperational.remove({
+      return EquipmentCertOperationals.remove({
         id: $stateParams.id,
         ind: equipmentCertOper.partIndex
       }).$promise.then(function () {
@@ -55,16 +55,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentCertOperational',
+    'EquipmentCertOperationals',
     'equipmentCertOper'
   ];
 
   EquipmentOpersEditCtrl.$resolve = {
     equipmentCertOper: [
       '$stateParams',
-      'EquipmentCertOperational',
-      function ($stateParams, EquipmentCertOperational) {
-        return EquipmentCertOperational.get({
+      'EquipmentCertOperationals',
+      function ($stateParams, EquipmentCertOperationals) {
+        return EquipmentCertOperationals.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

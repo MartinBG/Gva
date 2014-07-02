@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentCheck,
+    PersonDocumentChecks,
     personDocumentCheck,
     selectedPublisher
   ) {
@@ -39,7 +39,7 @@
       return $scope.editDocumentCheckForm.$validate()
         .then(function () {
           if ($scope.editDocumentCheckForm.$valid) {
-            return PersonDocumentCheck
+            return PersonDocumentChecks
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentCheck)
               .$promise
               .then(function () {
@@ -50,7 +50,7 @@
     };
 
     $scope.deleteCheck = function () {
-      return PersonDocumentCheck.remove({
+      return PersonDocumentChecks.remove({
         id: $stateParams.id,
         ind: personDocumentCheck.partIndex
       }).$promise.then(function () {
@@ -63,7 +63,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentCheck',
+    'PersonDocumentChecks',
     'personDocumentCheck',
     'selectedPublisher'
   ];
@@ -71,9 +71,9 @@
   DocumentChecksEditCtrl.$resolve = {
     personDocumentCheck: [
       '$stateParams',
-      'PersonDocumentCheck',
-      function ($stateParams, PersonDocumentCheck) {
-        return PersonDocumentCheck.get($stateParams).$promise;
+      'PersonDocumentChecks',
+      function ($stateParams, PersonDocumentChecks) {
+        return PersonDocumentChecks.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

@@ -6,7 +6,7 @@
     $scope,
     $stateParams,
     $state,
-    PersonStatus,
+    PersonStatuses,
     status
   ) {
     $scope.status = status;
@@ -19,7 +19,7 @@
       return $scope.personStatusForm.$validate()
         .then(function () {
           if ($scope.personStatusForm.$valid) {
-            return PersonStatus
+            return PersonStatuses
               .save({ id: $stateParams.id }, $scope.status)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$stateParams',
     '$state',
-    'PersonStatus',
+    'PersonStatuses',
     'status'
   ];
 

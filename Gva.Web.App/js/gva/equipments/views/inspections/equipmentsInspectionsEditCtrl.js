@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentInspection,
+    EquipmentInspections,
     equipmentInspection) {
     var originalDoc = _.cloneDeep(equipmentInspection);
 
@@ -21,7 +21,7 @@
       return $scope.editInspectionForm.$validate()
       .then(function () {
         if ($scope.editInspectionForm.$valid) {
-          return EquipmentInspection
+          return EquipmentInspections
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.equipmentInspection)
             .$promise
             .then(function () {
@@ -37,7 +37,7 @@
     };
     
     $scope.deleteInspection = function () {
-      return EquipmentInspection.remove({
+      return EquipmentInspections.remove({
         id: $stateParams.id,
         ind: equipmentInspection.partIndex
       }).$promise.then(function () {
@@ -50,16 +50,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentInspection',
+    'EquipmentInspections',
     'equipmentInspection'
   ];
 
   EquipmentsInspectionsEditCtrl.$resolve = {
     equipmentInspection: [
       '$stateParams',
-      'EquipmentInspection',
-      function ($stateParams, EquipmentInspection) {
-        return EquipmentInspection.get({
+      'EquipmentInspections',
+      function ($stateParams, EquipmentInspections) {
+        return EquipmentInspections.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

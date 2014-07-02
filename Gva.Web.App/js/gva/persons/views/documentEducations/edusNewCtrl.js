@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEducation,
+    PersonDocumentEducations,
     edu
   ) {
     $scope.personDocumentEducation = edu;
@@ -15,7 +15,7 @@
       return $scope.newDocumentEducationForm.$validate()
         .then(function () {
           if ($scope.newDocumentEducationForm.$valid) {
-            return PersonDocumentEducation
+            return PersonDocumentEducations
               .save({ id: $stateParams.id }, $scope.personDocumentEducation)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEducation',
+    'PersonDocumentEducations',
     'edu'
   ];
 

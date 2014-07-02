@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationDocumentOther,
+    OrganizationDocumentOthers,
     organizationDocumentOther,
     selectedPublisher
   ) {
@@ -14,7 +14,7 @@
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.newDocumentOtherForm.$valid) {
-            return OrganizationDocumentOther
+            return OrganizationDocumentOthers
               .save({ id: $stateParams.id }, $scope.organizationDocumentOther).$promise
               .then(function () {
                 return $state.go('root.organizations.view.documentOthers.search');
@@ -40,7 +40,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationDocumentOther',
+    'OrganizationDocumentOthers',
     'organizationDocumentOther',
     'selectedPublisher'
   ];

@@ -8,7 +8,7 @@
     $stateParams,
     l10n,
     PersonExamAnswers,
-    PersonExam,
+    PersonExams,
     exam
   ) {
     $scope.exam = exam;
@@ -21,7 +21,7 @@
       return $scope.newExamForm.$validate()
         .then(function () {
           if ($scope.newExamForm.$valid) {
-            return PersonExam
+            return PersonExams
               .save({ id: $stateParams.id }, $scope.exam).$promise
               .then(function () {
                 return $state.go('root.persons.view.examASs.search');
@@ -80,7 +80,7 @@
     '$stateParams',
     'l10n',
     'PersonExamAnswers',
-    'PersonExam',
+    'PersonExams',
     'exam'
   ];
 

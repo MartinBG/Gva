@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentApplication,
+    AirportDocumentApplications,
     airportDocumentApplication
   ) {
 
@@ -16,7 +16,7 @@
       return $scope.newDocumentApplicationForm.$validate()
         .then(function () {
           if ($scope.newDocumentApplicationForm.$valid) {
-            return AirportDocumentApplication
+            return AirportDocumentApplications
               .save({ id: $stateParams.id }, $scope.airportDocumentApplication).$promise
               .then(function () {
                 return $state.go('root.airports.view.applications.search');
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentApplication',
+    'AirportDocumentApplications',
     'airportDocumentApplication'
   ];
   AirportApplicationsNewCtrl.$resolve = {

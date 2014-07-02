@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentOwner,
+    AirportDocumentOwners,
     airportDocumentOwner
   ) {
     var originalDoc = _.cloneDeep(airportDocumentOwner);
@@ -27,7 +27,7 @@
       return $scope.editDocumentOwnerForm.$validate()
         .then(function () {
           if ($scope.editDocumentOwnerForm.$valid) {
-            return AirportDocumentOwner
+            return AirportDocumentOwners
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.airportDocumentOwner)
               .$promise
               .then(function () {
@@ -37,8 +37,8 @@
         });
     };
 
-    $scope.deleteInspection = function () {
-      return AirportDocumentOwner.remove({
+    $scope.deleteOwner = function () {
+      return AirportDocumentOwners.remove({
         id: $stateParams.id,
         ind: airportDocumentOwner.partIndex
       }).$promise.then(function () {
@@ -51,16 +51,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentOwner',
+    'AirportDocumentOwners',
     'airportDocumentOwner'
   ];
 
   AirportOwnersEditCtrl.$resolve = {
     airportDocumentOwner: [
       '$stateParams',
-      'AirportDocumentOwner',
-      function ($stateParams, AirportDocumentOwner) {
-        return AirportDocumentOwner.get({
+      'AirportDocumentOwners',
+      function ($stateParams, AirportDocumentOwners) {
+        return AirportDocumentOwners.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAuditplan,
+    OrganizationAuditplans,
     organizationAuditplan
   ) {
     $scope.organizationAuditplan = organizationAuditplan;
@@ -15,7 +15,7 @@
       return $scope.newAuditplanForm.$validate()
         .then(function () {
           if ($scope.newAuditplanForm.$valid) {
-            return OrganizationAuditplan
+            return OrganizationAuditplans
               .save({ id: $stateParams.id }, $scope.organizationAuditplan).$promise
               .then(function () {
                 return $state.go('root.organizations.view.auditplans.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAuditplan',
+    'OrganizationAuditplans',
     'organizationAuditplan'
   ];
 

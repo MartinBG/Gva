@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffExaminer,
+    OrganizationStaffExaminers,
     organizationStaffExaminer
   ) {
     var originalStaffExaminer = _.cloneDeep(organizationStaffExaminer);
@@ -27,7 +27,7 @@
       return $scope.editStaffChecker.$validate()
         .then(function () {
           if ($scope.editStaffChecker.$valid) {
-            return OrganizationStaffExaminer
+            return OrganizationStaffExaminers
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -41,7 +41,7 @@
     };
 
     $scope.deleteStaffChecker = function () {
-      return OrganizationStaffExaminer.remove({
+      return OrganizationStaffExaminers.remove({
           id: $stateParams.id,
           ind: organizationStaffExaminer.partIndex
         }).$promise.then(function () {
@@ -54,16 +54,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffExaminer',
+    'OrganizationStaffExaminers',
     'organizationStaffExaminer'
   ];
 
   StaffExaminersEditCtrl.$resolve = {
     organizationStaffExaminer: [
       '$stateParams',
-      'OrganizationStaffExaminer',
-      function ($stateParams, OrganizationStaffExaminer) {
-        return OrganizationStaffExaminer.get({
+      'OrganizationStaffExaminers',
+      function ($stateParams, OrganizationStaffExaminers) {
+        return OrganizationStaffExaminers.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationCertGroundServiceOperatorsSnoOperational,
+    OrganizationCertGroundServiceOperatorsSnoOperationals,
     certificate
   ) {
     var originalCertificate = _.cloneDeep(certificate);
@@ -31,7 +31,7 @@
       return $scope.editCertGroundServiceOperatorsSnoOperationalForm.$validate()
         .then(function () {
           if ($scope.editCertGroundServiceOperatorsSnoOperationalForm.$valid) {
-            return OrganizationCertGroundServiceOperatorsSnoOperational
+            return OrganizationCertGroundServiceOperatorsSnoOperationals
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.certificate)
               .$promise
@@ -44,7 +44,7 @@
     };
 
     $scope.deleteCert = function () {
-      return OrganizationCertGroundServiceOperatorsSnoOperational
+      return OrganizationCertGroundServiceOperatorsSnoOperationals
         .remove({ id: $stateParams.id, ind: certificate.partIndex })
         .$promise.then(function () {
           return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
@@ -56,16 +56,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationCertGroundServiceOperatorsSnoOperational',
+    'OrganizationCertGroundServiceOperatorsSnoOperationals',
     'certificate'
   ];
 
   CertGroundServiceOperatorsSnoOperationalEditCtrl.$resolve = {
     certificate: [
       '$stateParams',
-      'OrganizationCertGroundServiceOperatorsSnoOperational',
-      function ($stateParams, OrganizationCertGroundServiceOperatorsSnoOperational) {
-        return OrganizationCertGroundServiceOperatorsSnoOperational.get({
+      'OrganizationCertGroundServiceOperatorsSnoOperationals',
+      function ($stateParams, OrganizationCertGroundServiceOperatorsSnoOperationals) {
+        return OrganizationCertGroundServiceOperatorsSnoOperationals.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

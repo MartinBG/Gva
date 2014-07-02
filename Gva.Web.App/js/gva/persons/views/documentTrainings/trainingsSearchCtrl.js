@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentTraining,
     trainings
   ) {
     $scope.documentTrainings = trainings;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentTraining',
     'trainings'
   ];
 
   DocumentTrainingsSearchCtrl.$resolve = {
     trainings: [
       '$stateParams',
-      'PersonDocumentTraining',
-      function ($stateParams, PersonDocumentTraining) {
-        return PersonDocumentTraining.query($stateParams).$promise;
+      'PersonDocumentTrainings',
+      function ($stateParams, PersonDocumentTrainings) {
+        return PersonDocumentTrainings.query($stateParams).$promise;
       }
     ]
   };

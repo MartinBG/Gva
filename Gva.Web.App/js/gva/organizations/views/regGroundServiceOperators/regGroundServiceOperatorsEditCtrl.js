@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRegGroundServiceOperator,
+    OrganizationRegGroundServiceOperators,
     organizationRegGroundServiceOperator
   ) {
     var originalOperator = _.cloneDeep(organizationRegGroundServiceOperator);
@@ -27,7 +27,7 @@
       return $scope.editRegGroundServiceOperatorForm.$validate()
       .then(function () {
         if ($scope.editRegGroundServiceOperatorForm.$valid) {
-          return OrganizationRegGroundServiceOperator
+          return OrganizationRegGroundServiceOperators
             .save({ id: $stateParams.id, ind: $stateParams.ind },
             $scope.organizationRegGroundServiceOperator)
             .$promise
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteRegGroundServiceOperator = function () {
-      return OrganizationRegGroundServiceOperator
+      return OrganizationRegGroundServiceOperators
         .remove({
           id: $stateParams.id,
           ind: organizationRegGroundServiceOperator.partIndex
@@ -53,16 +53,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRegGroundServiceOperator',
+    'OrganizationRegGroundServiceOperators',
     'organizationRegGroundServiceOperator'
   ];
 
   RegGroundServiceOperatorsEditCtrl.$resolve = {
     organizationRegGroundServiceOperator: [
       '$stateParams',
-      'OrganizationRegGroundServiceOperator',
-      function ($stateParams, OrganizationRegGroundServiceOperator) {
-        return OrganizationRegGroundServiceOperator.get({
+      'OrganizationRegGroundServiceOperators',
+      function ($stateParams, OrganizationRegGroundServiceOperators) {
+        return OrganizationRegGroundServiceOperators.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

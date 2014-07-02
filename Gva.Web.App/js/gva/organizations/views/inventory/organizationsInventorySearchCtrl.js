@@ -7,7 +7,6 @@
     $state,
     $stateParams,
     $filter,
-    OrganizationInventory,
     inventory
   ) {
     $scope.inventory = inventory;
@@ -37,16 +36,15 @@
     '$state',
     '$stateParams',
     '$filter',
-    'OrganizationInventory',
     'inventory'
   ];
 
   OrganizationsInventorySearchCtrl.$resolve = {
     inventory: [
       '$stateParams',
-      'OrganizationInventory',
-      function ($stateParams, OrganizationInventory) {
-        return OrganizationInventory.query($stateParams).$promise;
+      'OrganizationsInventory',
+      function ($stateParams, OrganizationsInventory) {
+        return OrganizationsInventory.query($stateParams).$promise;
       }
     ]
   };

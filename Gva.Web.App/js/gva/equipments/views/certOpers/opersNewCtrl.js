@@ -6,14 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentCertOperational,
+    EquipmentCertOperationals,
     equipmentCertOper
   ) {
     $scope.save = function () {
       return $scope.newCertOperForm.$validate()
         .then(function () {
           if ($scope.newCertOperForm.$valid) {
-            return EquipmentCertOperational
+            return EquipmentCertOperationals
               .save({ id: $stateParams.id }, $scope.equipmentCertOper).$promise
               .then(function () {
                 return $state.go('root.equipments.view.opers.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentCertOperational',
+    'EquipmentCertOperationals',
     'equipmentCertOper'
   ];
 

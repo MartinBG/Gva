@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentEmployment,
     empls
   ) {
     $scope.employments = empls;
@@ -28,15 +27,14 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentEmployment',
     'empls'
   ];
   DocumentEmploymentsSearchCtrl.$resolve = {
     empls: [
       '$stateParams',
-      'PersonDocumentEmployment',
-      function ($stateParams, PersonDocumentEmployment) {
-        return PersonDocumentEmployment.query($stateParams).$promise;
+      'PersonDocumentEmployments',
+      function ($stateParams, PersonDocumentEmployments) {
+        return PersonDocumentEmployments.query($stateParams).$promise;
       }
     ]
   };

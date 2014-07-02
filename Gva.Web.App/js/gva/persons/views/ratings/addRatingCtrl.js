@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonRating,
+    PersonRatings,
     rating
   ) {
     $scope.rating = rating;
@@ -15,7 +15,7 @@
       return $scope.newRatingForm.$validate()
         .then(function () {
           if ($scope.newRatingForm.$valid) {
-            return PersonRating
+            return PersonRatings
               .save({ id: $stateParams.id }, $scope.rating).$promise
               .then(function (rating) {
                 return $state.go('^', {}, {}, {
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonRating',
+    'PersonRatings',
     'rating'
   ];
 

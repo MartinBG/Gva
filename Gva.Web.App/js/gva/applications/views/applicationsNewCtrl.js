@@ -7,9 +7,9 @@
     $scope,
     $state,
     $stateParams,
-    Application,
-    PersonInfo,
-    OrganizationData,
+    Applications,
+    PersonsInfo,
+    OrganizationsData,
     appModel,
     selectedPerson,
     selectedOrganization,
@@ -50,7 +50,7 @@
 
     $scope.$watch('appModel.lot.id', function (newValue, oldValue) {
       if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
-        return Application.getGvaCorrespodents({ lotId: appModel.lot.id }).$promise
+        return Applications.getGvaCorrespodents({ lotId: appModel.lot.id }).$promise
           .then(function (data) {
             appModel.doc.docCorrespondents = data.corrs;
           });
@@ -106,11 +106,11 @@
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
           isPersonSelect = true;
-          partData = PersonInfo.get({ id: $scope.appModel.lot.id });
+          partData = PersonsInfo.get({ id: $scope.appModel.lot.id });
         }
         else if ($scope.filter === 'Organization') {
           isOrgSelect = true;
-          partData = OrganizationData.get({ id: $scope.appModel.lot.id });
+          partData = OrganizationsData.get({ id: $scope.appModel.lot.id });
         }
       }
 
@@ -145,7 +145,7 @@
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
-          return PersonInfo.get({ id: $scope.appModel.lot.id })
+          return PersonsInfo.get({ id: $scope.appModel.lot.id })
             .$promise.then(function (d) {
               var data = d.personData,
                   displayName = data.part.firstName + ' ' + data.part.lastName;
@@ -158,7 +158,7 @@
           });
         }
         else if ($scope.filter === 'Organization') {
-          return OrganizationData.get({ id: $scope.appModel.lot.id }).$promise
+          return OrganizationsData.get({ id: $scope.appModel.lot.id }).$promise
             .then(function (data) {
               return $state.go('root.applications.new.corrSelect', {
                 displayName: data.part.name
@@ -212,7 +212,7 @@
             $scope.setPartAlias = 'equipmentApplication';
           }
 
-          return Application.create(newApplication).$promise.then(function (app) {
+          return Applications.create(newApplication).$promise.then(function (app) {
             return $state.go('root.applications.edit.case.addPart', {
               id: app.applicationId,
               docId: app.docId,
@@ -229,9 +229,9 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application',
-    'PersonInfo',
-    'OrganizationData',
+    'Applications',
+    'PersonsInfo',
+    'OrganizationsData',
     'appModel',
     'selectedPerson',
     'selectedOrganization',

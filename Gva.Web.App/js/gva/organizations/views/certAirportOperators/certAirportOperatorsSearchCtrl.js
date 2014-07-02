@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    CertAirportOperator,
     certAirportOperators
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirportOperator',
     'certAirportOperators'
   ];
 
   CertAirportOperatorsSearchCtrl.$resolve = {
     certAirportOperators: [
       '$stateParams',
-      'CertAirportOperator',
-      function ($stateParams, CertAirportOperator) {
-        return CertAirportOperator.query($stateParams).$promise;
+      'CertAirportOperators',
+      function ($stateParams, CertAirportOperators) {
+        return CertAirportOperators.query($stateParams).$promise;
       }
     ]
   };

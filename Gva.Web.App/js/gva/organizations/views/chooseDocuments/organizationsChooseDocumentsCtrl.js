@@ -69,9 +69,9 @@
   OrganizationsChooseDocumentsCtrl.$resolve = {
     documents: [
       '$stateParams',
-      'OrganizationInventory',
-      function ($stateParams, OrganizationInventory) {
-        return OrganizationInventory
+      'OrganizationsInventory',
+      function ($stateParams, OrganizationsInventory) {
+        return OrganizationsInventory
           .query({
             id: $stateParams.id,
             documentTypes: $stateParams.documentTypes? $stateParams.documentTypes.split(',') : null

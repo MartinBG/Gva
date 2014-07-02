@@ -47,9 +47,9 @@
   AirportsSearchCtrl.$resolve = {
     airports: [
       '$stateParams',
-      'Airport',
-      function ($stateParams, Airport) {
-        return Airport.query($stateParams).$promise;
+      'Airports',
+      function ($stateParams, Airports) {
+        return Airports.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonRating,
+    PersonRatings,
     rating
   ) {
     var originalRating = _.cloneDeep(rating);
@@ -36,14 +36,14 @@
       $scope.rating.part.editions.pop();
 
       if ($scope.rating.part.editions.length === 0) {
-        return PersonRating
+        return PersonRatings
           .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.persons.view.ratings.search');
           });
       }
       else {
-        return PersonRating.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.rating)
+        return PersonRatings.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.rating)
           .$promise.then(function () {
             originalRating = _.cloneDeep($scope.rating);
           });
@@ -56,7 +56,7 @@
           if ($scope.editRatingForm.$valid) {
             $scope.editMode = 'saving';
 
-            return PersonRating
+            return PersonRatings
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.rating).$promise
               .then(function () {
                 $scope.editMode = null;
@@ -78,16 +78,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonRating',
+    'PersonRatings',
     'rating'
   ];
 
   RatingsEditCtrl.$resolve = {
     rating: [
       '$stateParams',
-      'PersonRating',
-      function ($stateParams, PersonRating) {
-        return PersonRating.get($stateParams).$promise;
+      'PersonRatings',
+      function ($stateParams, PersonRatings) {
+        return PersonRatings.get($stateParams).$promise;
       }
     ]
   };

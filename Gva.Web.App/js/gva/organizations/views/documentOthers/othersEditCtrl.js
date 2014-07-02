@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationDocumentOther,
+    OrganizationDocumentOthers,
     organizationDocumentOther,
     selectedPublisher
   ) {
@@ -30,7 +30,7 @@
       return $scope.editDocumentOtherForm.$validate()
         .then(function () {
           if ($scope.editDocumentOtherForm.$valid) {
-            return OrganizationDocumentOther
+            return OrganizationDocumentOthers
               .save({ id: $stateParams.id, ind: $stateParams.ind },
               $scope.organizationDocumentOther)
               .$promise
@@ -42,7 +42,7 @@
     };
 
     $scope.deleteDocumentOther = function () {
-      return OrganizationDocumentOther.remove({
+      return OrganizationDocumentOthers.remove({
         id: $stateParams.id,
         ind: organizationDocumentOther.partIndex
       }).$promise.then(function () {
@@ -59,7 +59,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationDocumentOther',
+    'OrganizationDocumentOthers',
     'organizationDocumentOther',
     'selectedPublisher'
   ];
@@ -67,9 +67,9 @@
   OrganizationDocOthersEditCtrl.$resolve = {
     organizationDocumentOther: [
       '$stateParams',
-      'OrganizationDocumentOther',
-      function ($stateParams, OrganizationDocumentOther) {
-        return OrganizationDocumentOther.get($stateParams).$promise;
+      'OrganizationDocumentOthers',
+      function ($stateParams, OrganizationDocumentOthers) {
+        return OrganizationDocumentOthers.get($stateParams).$promise;
       }
     ],
     selectedPublisher: function () {

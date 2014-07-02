@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentInspection,
+    EquipmentInspections,
     equipmentInspection) {
     $scope.equipmentInspection = equipmentInspection;
 
@@ -14,7 +14,7 @@
       return $scope.newInspectionForm.$validate()
       .then(function () {
         if ($scope.newInspectionForm.$valid) {
-          return EquipmentInspection
+          return EquipmentInspections
             .save({ id: $stateParams.id }, $scope.equipmentInspection)
             .$promise
             .then(function () {
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentInspection',
+    'EquipmentInspections',
     'equipmentInspection'
   ];
 

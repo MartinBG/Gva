@@ -7,19 +7,19 @@
     $state,
     $stateParams,
     $q,
-    PersonRating,
-    PersonDocumentTraining,
-    PersonDocumentCheck,
-    PersonDocumentMedical,
-    PersonLicence
+    PersonRatings,
+    PersonDocumentTrainings,
+    PersonDocumentChecks,
+    PersonDocumentMedicals,
+    PersonLicences
   ) {
 
     $q.all([
-      PersonRating.query({ id: $stateParams.id }).$promise,
-      PersonDocumentTraining.query({ id: $stateParams.id }).$promise,
-      PersonDocumentCheck.query({ id: $stateParams.id }).$promise,
-      PersonDocumentMedical.query({ id: $stateParams.id }).$promise,
-      PersonLicence.query({ id: $stateParams.id }).$promise
+      PersonRatings.query({ id: $stateParams.id }).$promise,
+      PersonDocumentTrainings.query({ id: $stateParams.id }).$promise,
+      PersonDocumentChecks.query({ id: $stateParams.id }).$promise,
+      PersonDocumentMedicals.query({ id: $stateParams.id }).$promise,
+      PersonLicences.query({ id: $stateParams.id }).$promise
     ]).then(function (results) {
       var ratings = results[0];
       var trainings = results[1];
@@ -205,11 +205,11 @@
     '$state',
     '$stateParams',
     '$q',
-    'PersonRating',
-    'PersonDocumentTraining',
-    'PersonDocumentCheck',
-    'PersonDocumentMedical',
-    'PersonLicence'
+    'PersonRatings',
+    'PersonDocumentTrainings',
+    'PersonDocumentChecks',
+    'PersonDocumentMedicals',
+    'PersonLicences'
   ];
 
   angular.module('gva').controller('PersonLicenceEditionCtrl', PersonLicenceEditionCtrl);

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffManagement,
+    OrganizationStaffManagements,
     organizationStaffManagement,
     selectedEmployment
   ) {
@@ -24,7 +24,7 @@
       return $scope.newStaffManagement.$validate()
         .then(function () {
           if ($scope.newStaffManagement.$valid) {
-            return OrganizationStaffManagement
+            return OrganizationStaffManagements
               .save({ id: $stateParams.id }, $scope.organizationStaffManagement)
               .$promise
               .then(function () {
@@ -47,7 +47,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffManagement',
+    'OrganizationStaffManagements',
     'organizationStaffManagement',
     'selectedEmployment'
   ];

@@ -7,7 +7,6 @@
     $state,
     $stateParams,
     $filter,
-    PersonLicence,
     licences
   ) {
     $scope.licences = licences;
@@ -35,14 +34,14 @@
   }
 
   LicencesSearchCtrl.$inject =
-    ['$scope', '$state', '$stateParams', '$filter', 'PersonLicence', 'licences'];
+    ['$scope', '$state', '$stateParams', '$filter', 'licences'];
 
   LicencesSearchCtrl.$resolve = {
     licences: [
       '$stateParams',
-      'PersonLicence',
-      function ($stateParams, PersonLicence) {
-        return PersonLicence.query($stateParams).$promise;
+      'PersonLicences',
+      function ($stateParams, PersonLicences) {
+        return PersonLicences.query($stateParams).$promise;
       }
     ]
   };

@@ -6,14 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    AirportCertOperational,
+    AirportCertOperationals,
     airportCertOper
   ) {
     $scope.save = function () {
       return $scope.newCertOperForm.$validate()
         .then(function () {
           if ($scope.newCertOperForm.$valid) {
-            return AirportCertOperational
+            return AirportCertOperationals
               .save({ id: $stateParams.id }, $scope.airportCertOper).$promise
               .then(function () {
                 return $state.go('root.airports.view.opers.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportCertOperational',
+    'AirportCertOperationals',
     'airportCertOper'
   ];
 

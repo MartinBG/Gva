@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     $filter,
-    PersonLicence,
+    PersonLicences,
     person,
     licence
   ) {
@@ -23,7 +23,7 @@
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {
         if ($scope.newLicenceForm.$valid) {
-          return PersonLicence
+          return PersonLicences
             .save({ id: $stateParams.id }, $scope.licence).$promise
             .then(function () {
               return $state.go('root.persons.view.licences.search');
@@ -42,7 +42,7 @@
     '$state',
     '$stateParams',
     '$filter',
-    'PersonLicence',
+    'PersonLicences',
     'person',
     'licence'
   ];

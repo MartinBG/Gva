@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AirportDocumentOther,
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
@@ -19,13 +18,6 @@
         });
     };
 
-    $scope.deleteDocumentOther = function (documentOther) {
-      return AirportDocumentOther.remove({ id: $stateParams.id, ind: documentOther.partIndex })
-        .$promise.then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
-
     $scope.newDocumentOther = function () {
       return $state.go('root.airports.view.others.new');
     };
@@ -35,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportDocumentOther',
     'documentOthers'
   ];
 
   AirportOthersSearchCtrl.$resolve = {
     documentOthers: [
       '$stateParams',
-      'AirportDocumentOther',
-      function ($stateParams, AirportDocumentOther) {
-        return AirportDocumentOther.query($stateParams).$promise;
+      'AirportDocumentOthers',
+      function ($stateParams, AirportDocumentOthers) {
+        return AirportDocumentOthers.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationStaffExaminer,
+    OrganizationStaffExaminers,
     organizationStaffExaminer
   ) {
     $scope.organizationStaffExaminer = organizationStaffExaminer;
@@ -15,7 +15,7 @@
       return $scope.newStaffExaminer.$validate()
         .then(function () {
           if ($scope.newStaffExaminer.$valid) {
-            return OrganizationStaffExaminer
+            return OrganizationStaffExaminers
               .save({ id: $stateParams.id }, $scope.organizationStaffExaminer)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationStaffExaminer',
+    'OrganizationStaffExaminers',
     'organizationStaffExaminer'
   ];
 

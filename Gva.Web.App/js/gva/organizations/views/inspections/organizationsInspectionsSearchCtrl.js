@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationInspection,
     organizationInspections
   ) {
 
@@ -29,16 +28,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationInspection',
     'organizationInspections'
   ];
 
   OrganizationsInspectionsSearchCtrl.$resolve = {
     organizationInspections: [
       '$stateParams',
-      'OrganizationInspection',
-      function ($stateParams, OrganizationInspection) {
-        return OrganizationInspection.query($stateParams).$promise;
+      'OrganizationInspections',
+      function ($stateParams, OrganizationInspections) {
+        return OrganizationInspections.query($stateParams).$promise;
       }
     ]
   };

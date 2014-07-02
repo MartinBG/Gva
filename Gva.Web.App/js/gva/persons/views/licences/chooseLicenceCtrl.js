@@ -49,9 +49,9 @@
   ChooseLicenceCtrl.$resolve = {
     licences: [
       '$stateParams',
-      'PersonLicence',
-      function ($stateParams, PersonLicence) {
-        return PersonLicence.query({ id: $stateParams.id }).$promise;
+      'PersonLicences',
+      function ($stateParams, PersonLicences) {
+        return PersonLicences.query({ id: $stateParams.id }).$promise;
       }
     ]
   };

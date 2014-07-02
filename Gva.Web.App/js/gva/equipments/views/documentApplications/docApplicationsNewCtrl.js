@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentDocumentApplication,
+    EquipmentDocumentApplications,
     equipmentDocumentApplication
   ) {
 
@@ -16,7 +16,7 @@
       return $scope.newDocumentApplicationForm.$validate()
         .then(function () {
           if ($scope.newDocumentApplicationForm.$valid) {
-            return EquipmentDocumentApplication
+            return EquipmentDocumentApplications
               .save({ id: $stateParams.id }, $scope.equipmentDocumentApplication).$promise
               .then(function () {
                 return $state.go('root.equipments.view.applications.search');
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentDocumentApplication',
+    'EquipmentDocumentApplications',
     'equipmentDocumentApplication'
   ];
   EquipmentApplicationsNewCtrl.$resolve = {

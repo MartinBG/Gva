@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentExam,
+    PersonDocumentExams,
     exam
   ) {
     var originalExam = _.cloneDeep(exam);
@@ -21,7 +21,7 @@
       return $scope.editExamForm.$validate()
         .then(function () {
           if ($scope.editExamForm.$valid) {
-            return PersonDocumentExam
+            return PersonDocumentExams
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.exam)
               .$promise.then(function () {
                 return $state.go('root.persons.view.exams.search');
@@ -31,7 +31,7 @@
     };
 
     $scope.deleteExam = function () {
-      return PersonDocumentExam
+      return PersonDocumentExams
         .remove({ id: $stateParams.id, ind: $stateParams.ind })
         .$promise.then(function () {
           return $state.go('root.persons.view.exams.search');
@@ -48,16 +48,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentExam',
+    'PersonDocumentExams',
     'exam'
   ];
 
   DocumentExamsEditCtrl.$resolve = {
     exam: [
       '$stateParams',
-      'PersonDocumentExam',
-      function ($stateParams, PersonDocumentExam) {
-        return PersonDocumentExam.get({ id: $stateParams.id, ind: $stateParams.ind }).$promise;
+      'PersonDocumentExams',
+      function ($stateParams, PersonDocumentExams) {
+        return PersonDocumentExams.get({ id: $stateParams.id, ind: $stateParams.ind }).$promise;
       }
     ]
   };

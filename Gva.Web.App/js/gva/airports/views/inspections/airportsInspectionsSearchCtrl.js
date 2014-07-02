@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AirportInspection,
     airportInspections) {
 
     $scope.airportInspections = airportInspections;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AirportInspection',
     'airportInspections'
   ];
 
   AirportsInspectionsSearchCtrl.$resolve = {
     airportInspections: [
       '$stateParams',
-      'AirportInspection',
-      function ($stateParams, AirportInspection) {
-        return AirportInspection.query($stateParams).$promise;
+      'AirportInspections',
+      function ($stateParams, AirportInspections) {
+        return AirportInspections.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAddress,
     organizationAddresses
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAddress',
     'organizationAddresses'
   ];
 
   OrganizationAddressesSearchCtrl.$resolve = {
     organizationAddresses: [
       '$stateParams',
-      'OrganizationAddress',
-      function ($stateParams, OrganizationAddress) {
-        return OrganizationAddress.query($stateParams).$promise;
+      'OrganizationAddresses',
+      function ($stateParams, OrganizationAddresses) {
+        return OrganizationAddresses.query($stateParams).$promise;
       }
     ]
   };

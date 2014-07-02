@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationCertGroundServiceOperator,
     organizationCertGroundServiceOperators
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationCertGroundServiceOperator',
     'organizationCertGroundServiceOperators'
   ];
 
   CertGroundServiceOperatorsSearchCtrl.$resolve = {
     organizationCertGroundServiceOperators: [
       '$stateParams',
-      'OrganizationCertGroundServiceOperator',
-      function ($stateParams, OrganizationCertGroundServiceOperator) {
-        return OrganizationCertGroundServiceOperator.query($stateParams).$promise;
+      'OrganizationCertGroundServiceOperators',
+      function ($stateParams, OrganizationCertGroundServiceOperators) {
+        return OrganizationCertGroundServiceOperators.query($stateParams).$promise;
       }
     ]
   };

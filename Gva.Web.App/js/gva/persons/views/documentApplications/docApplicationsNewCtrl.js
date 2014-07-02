@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentApplication,
+    PersonDocumentApplications,
     personDocumentApplication
   ) {
 
@@ -16,7 +16,7 @@
       return $scope.newDocumentApplicationForm.$validate()
         .then(function () {
           if ($scope.newDocumentApplicationForm.$valid) {
-            return PersonDocumentApplication
+            return PersonDocumentApplications
               .save({ id: $stateParams.id }, $scope.personDocumentApplication).$promise
               .then(function () {
                 return $state.go('root.persons.view.documentApplications.search');
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentApplication',
+    'PersonDocumentApplications',
     'personDocumentApplication'
   ];
   DocApplicationsNewCtrl.$resolve = {

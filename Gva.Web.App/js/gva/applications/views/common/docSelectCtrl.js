@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Application,
     docs,
     selectedDoc
     ) {
@@ -65,7 +64,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Application',
     'docs',
     'selectedDoc'
   ];
@@ -73,9 +71,9 @@
   DocSelectCtrl.$resolve = {
     docs: [
       '$stateParams',
-      'Application',
-      function ($stateParams, Application) {
-        return Application.notLinkedDocs($stateParams).$promise.then(function (docs) {
+      'Applications',
+      function ($stateParams, Applications) {
+        return Applications.notLinkedDocs($stateParams).$promise.then(function (docs) {
           return docs;
         });
       }

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    PersonAddress,
     addresses
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonAddress',
     'adresses'
   ];
 
   AddressesSearchCtrl.$resolve = {
     adresses: [
       '$stateParams',
-      'PersonAddress',
-      function ($stateParams, PersonAddress) {
-        return PersonAddress.query($stateParams).$promise;
+      'PersonAddresses',
+      function ($stateParams, PersonAddresses) {
+        return PersonAddresses.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationRecommendation,
+    OrganizationRecommendations,
     organizationRecommendation
   ) {
     var originalRecommendation = _.cloneDeep(organizationRecommendation);
@@ -32,7 +32,7 @@
       return $scope.editRecommendation.$validate()
         .then(function () {
           if ($scope.editRecommendation.$valid) {
-            return OrganizationRecommendation
+            return OrganizationRecommendations
               .save({
                 id: $stateParams.id,
                 ind: $stateParams.ind
@@ -46,7 +46,7 @@
     };
 
     $scope.deleteRecommendation = function () {
-      return OrganizationRecommendation
+      return OrganizationRecommendations
         .remove({ id: $stateParams.id, ind: organizationRecommendation.partIndex })
         .$promise.then(function () {
           return $state.go('root.organizations.view.recommendations.search');
@@ -58,16 +58,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationRecommendation',
+    'OrganizationRecommendations',
     'organizationRecommendation'
   ];
 
   RecommendationsEditCtrl.$resolve = {
     organizationRecommendation: [
       '$stateParams',
-      'OrganizationRecommendation',
-      function ($stateParams, OrganizationRecommendation) {
-        return OrganizationRecommendation.get({
+      'OrganizationRecommendations',
+      function ($stateParams, OrganizationRecommendations) {
+        return OrganizationRecommendations.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

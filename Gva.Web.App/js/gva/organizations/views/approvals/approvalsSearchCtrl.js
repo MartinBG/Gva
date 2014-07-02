@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationApproval,
     organizationApprovals
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationApproval',
     'organizationApprovals'
   ];
 
   ApprovalsSearchCtrl.$resolve = {
     organizationApprovals: [
       '$stateParams',
-      'OrganizationApproval',
-      function ($stateParams, OrganizationApproval) {
-        return OrganizationApproval.query($stateParams).$promise;
+      'OrganizationApprovals',
+      function ($stateParams, OrganizationApprovals) {
+        return OrganizationApprovals.query($stateParams).$promise;
       }
     ]
   };

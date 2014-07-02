@@ -6,14 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    EquipmentDocumentOwner,
+    EquipmentDocumentOwners,
     equipmentDocumentOwner
   ) {
     $scope.save = function () {
       return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
           if ($scope.newDocumentOwnerForm.$valid) {
-            return EquipmentDocumentOwner
+            return EquipmentDocumentOwners
               .save({ id: $stateParams.id }, $scope.equipmentDocumentOwner).$promise
               .then(function () {
                 return $state.go('root.equipments.view.owners.search');
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'EquipmentDocumentOwner',
+    'EquipmentDocumentOwners',
     'equipmentDocumentOwner'
   ];
 

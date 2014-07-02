@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationAuditplan,
     organizationAuditplans
   ) {
 
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationAuditplan',
     'organizationAuditplans'
   ];
 
   AuditplansSearchCtrl.$resolve = {
     organizationAuditplans: [
       '$stateParams',
-      'OrganizationAuditplan',
-      function ($stateParams, OrganizationAuditplan) {
-        return OrganizationAuditplan.query($stateParams).$promise;
+      'OrganizationAuditplans',
+      function ($stateParams, OrganizationAuditplans) {
+        return OrganizationAuditplans.query($stateParams).$promise;
       }
     ]
   };

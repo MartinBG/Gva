@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Person,
     person,
     application
   ) {
@@ -35,7 +34,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Person',
     'person',
     'application'
   ];
@@ -43,9 +41,9 @@
   PersonsViewCtrl.$resolve = {
     person: [
       '$stateParams',
-      'Person',
-      function ($stateParams, Person) {
-        return Person.get($stateParams).$promise.then(function (person) {
+      'Persons',
+      function ($stateParams, Persons) {
+        return Persons.get($stateParams).$promise.then(function (person) {
           /*jshint -W052*/
           person.age = ~~((Date.now() - new Date(person.birtDate)) / 31557600000);
           /*jshint +W052*/
@@ -56,10 +54,10 @@
     ],
     application: [
       '$stateParams',
-      'PersonApplication',
-      function ResolveApplication($stateParams, PersonApplication) {
+      'PersonApplications',
+      function ResolveApplication($stateParams, PersonApplications) {
         if (!!$stateParams.appId) {
-          return PersonApplication.get($stateParams).$promise
+          return PersonApplications.get($stateParams).$promise
             .then(function (result) {
               if (result.applicationId) {
                 return result;

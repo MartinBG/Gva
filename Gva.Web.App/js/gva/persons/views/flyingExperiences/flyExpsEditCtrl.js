@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonFlyingExperience,
+    PersonFlyingExperiences,
     personFlyingExperience
   ) {
     var originalFlyingExp = _.cloneDeep(personFlyingExperience);
@@ -27,7 +27,7 @@
       return $scope.personFlyingExperienceForm.$validate()
         .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {
-            return PersonFlyingExperience
+            return PersonFlyingExperiences
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteFlyingExp = function () {
-      return PersonFlyingExperience.remove({
+      return PersonFlyingExperiences.remove({
         id: $stateParams.id,
         ind: personFlyingExperience.partIndex
       }).$promise.then(function () {
@@ -51,16 +51,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonFlyingExperience',
+    'PersonFlyingExperiences',
     'personFlyingExperience'
   ];
 
   FlyingExperiencesEditCtrl.$resolve = {
     personFlyingExperience: [
       '$stateParams',
-      'PersonFlyingExperience',
-      function ($stateParams, PersonFlyingExperience) {
-        return PersonFlyingExperience.get({
+      'PersonFlyingExperiences',
+      function ($stateParams, PersonFlyingExperiences) {
+        return PersonFlyingExperiences.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

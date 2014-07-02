@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonAddress,
+    PersonAddresses,
     address
   ) {
     var originalAddress = _.cloneDeep(address);
@@ -27,7 +27,7 @@
       return $scope.editAddressForm.$validate()
         .then(function () {
           if ($scope.editAddressForm.$valid) {
-            return PersonAddress
+            return PersonAddresses
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personAddress)
               .$promise
               .then(function () {
@@ -38,7 +38,7 @@
     };
 
     $scope.deleteAddress = function () {
-      return PersonAddress.remove({ id: $stateParams.id, ind: address.partIndex })
+      return PersonAddresses.remove({ id: $stateParams.id, ind: address.partIndex })
           .$promise.then(function () {
         return $state.go('root.persons.view.addresses.search');
       });
@@ -49,16 +49,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonAddress',
+    'PersonAddresses',
     'address'
   ];
 
   AddressesEditCtrl.$resolve = {
     address: [
       '$stateParams',
-      'PersonAddress',
-      function ($stateParams, PersonAddress) {
-        return PersonAddress.get({
+      'PersonAddresses',
+      function ($stateParams, PersonAddresses) {
+        return PersonAddresses.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

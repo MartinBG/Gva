@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonDocumentId,
+    PersonDocumentIds,
     docId
   ) {
     $scope.personDocumentId = docId;
@@ -15,7 +15,7 @@
       return $scope.newDocumentIdForm.$validate()
         .then(function () {
           if ($scope.newDocumentIdForm.$valid) {
-            return PersonDocumentId
+            return PersonDocumentIds
               .save({ id: $stateParams.id }, $scope.personDocumentId)
               .$promise
               .then(function () {
@@ -34,7 +34,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonDocumentId',
+    'PersonDocumentIds',
     'docId'
   ];
 

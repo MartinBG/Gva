@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    OrganizationApproval,
+    OrganizationApprovals,
     approval,
     selectedLimitation
   ) {
@@ -46,14 +46,14 @@
       $scope.approval.part.amendments.pop();
 
       if ($scope.approval.part.amendments.length === 0) {
-        return OrganizationApproval
+        return OrganizationApprovals
           .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.organizations.view.approvals.search');
           });
       }
       else {
-        return OrganizationApproval
+        return OrganizationApprovals
           .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.approval)
           .$promise.then(function () {
             originalApproval = _.cloneDeep($scope.approval);
@@ -67,7 +67,7 @@
           if ($scope.editApprovalForm.$valid) {
             $scope.editMode = 'saving';
             $scope.backFromChild = false;
-            return OrganizationApproval
+            return OrganizationApprovals
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.approval)
               .$promise
               .then(function () {
@@ -106,7 +106,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'OrganizationApproval',
+    'OrganizationApprovals',
     'approval',
     'selectedLimitation'
   ];
@@ -114,9 +114,9 @@
   ApprovalsEditCtrl.$resolve = {
     approval: [
       '$stateParams',
-      'OrganizationApproval',
-      function ($stateParams, OrganizationApproval) {
-        return OrganizationApproval.get($stateParams).$promise;
+      'OrganizationApprovals',
+      function ($stateParams, OrganizationApprovals) {
+        return OrganizationApprovals.get($stateParams).$promise;
       }
     ],
     selectedLimitation: function () {
