@@ -5,7 +5,6 @@
   function DocsCaseCtrl(
     $scope,
     $state,
-    Application,
     application,
     doc
   ) {
@@ -57,7 +56,6 @@
   DocsCaseCtrl.$inject = [
     '$scope',
     '$state',
-    'Application',
     'application',
     'doc'
   ];
@@ -71,9 +69,9 @@
     ],
     application: [
       '$stateParams',
-      'Application',
-      function resolveApplication($stateParams, Application) {
-        return Application.getApplicationByDocId({ docId: $stateParams.id }).$promise;
+      'Applications',
+      function resolveApplication($stateParams, Applications) {
+        return Applications.getApplicationByDocId({ docId: $stateParams.id }).$promise;
       }
     ]
   };

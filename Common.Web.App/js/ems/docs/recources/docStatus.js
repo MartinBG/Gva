@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('ems')
-    .factory('DocStatus', ['$resource',
+    .factory('DocStatuses', ['$resource',
       function ($resource) {
         return $resource('/api/docs/:id/status', {
           id: '@docId',

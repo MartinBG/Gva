@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     l10n,
-    DocWorkflow,
+    DocWorkflows,
     doc,
     workflowModel
   ) {
@@ -30,7 +30,7 @@
     $scope.save = function () {
       return $scope.workflowForm.$validate().then(function () {
         if ($scope.workflowForm.$valid) {
-          return DocWorkflow
+          return DocWorkflows
             .save({
               id: $scope.workflowModel.docId,
               docVersion: $scope.workflowModel.docVersion
@@ -53,7 +53,7 @@
     '$state',
     '$stateParams',
     'l10n',
-    'DocWorkflow',
+    'DocWorkflows',
     'doc',
     'workflowModel'
   ];

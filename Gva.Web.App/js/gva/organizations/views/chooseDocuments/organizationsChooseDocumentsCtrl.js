@@ -80,10 +80,10 @@
     ],
     documentParts: [
       '$stateParams',
-      'Nomenclature',
-      function ($stateParams, Nomenclature) {
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
         if ($stateParams.documentTypes) {
-          return Nomenclature.query({alias: 'documentParts', set: 'organization'})
+          return Nomenclatures.query({alias: 'documentParts', set: 'organization'})
           .$promise.then(function(documentTypes){
             return  _.filter(documentTypes, function (type) {
               return _.contains($stateParams.documentTypes, type.alias);

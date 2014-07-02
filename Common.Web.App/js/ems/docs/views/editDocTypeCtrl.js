@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
+    Docs,
     doc,
     selectedUnits,
     docTypeModel
@@ -38,7 +38,7 @@
     $scope.save = function () {
       return $scope.docTypeForm.$validate().then(function () {
         if ($scope.docTypeForm.$valid) {
-          return Doc
+          return Docs
             .setDocType({
               id: $scope.oldDoc.docId,
               docVersion: $scope.oldDoc.version
@@ -217,7 +217,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
+    'Docs',
     'doc',
     'selectedUnits',
     'docTypeModel'
@@ -235,9 +235,9 @@
     docTypeModel: [
       '$stateParams',
       'doc',
-      'Doc',
-      function resolveDocTypeModel($stateParams, doc, Doc) {
-        return Doc.getRegisterIndex({ id: $stateParams.id })
+      'Docs',
+      function resolveDocTypeModel($stateParams, doc, Docs) {
+        return Docs.getRegisterIndex({ id: $stateParams.id })
           .$promise
           .then(function (data) {
             return {

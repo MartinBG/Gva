@@ -8,7 +8,6 @@
     $scope,
     l10n,
     Publisher,
-    Nomenclature,
     publishers,
     selectedPublisher
   ) {
@@ -62,7 +61,6 @@
     '$scope',
     'l10n',
     'Publisher',
-    'Nomenclature',
     'publishers',
     'selectedPublisher'
   ];

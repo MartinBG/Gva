@@ -82,11 +82,11 @@
     applicationPart: [
       '$q',
       '$stateParams',
-      'Nomenclature',
+      'Nomenclatures',
       'l10n',
       'Application',
       'application',
-      function ($q, $stateParams, Nomenclature, l10n, Application, application) {
+      function ($q, $stateParams, Nomenclatures, l10n, Application, application) {
         var docFile, doc, docValues;
 
         if (($stateParams.setPartAlias === 'personApplication' ||
@@ -108,7 +108,7 @@
           doc: doc && doc.$promise,
           docFile: docFile && docFile.$promise,
           docValues: docValues && docValues.$promise,
-          docPartType: Nomenclature.query({ alias: 'documentParts' }).$promise
+          docPartType: Nomenclatures.query({ alias: 'documentParts' }).$promise
         }).then(function (res) {
           var part = {};
           var docPartTypeName = _(res.docPartType).filter({

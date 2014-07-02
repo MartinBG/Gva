@@ -70,15 +70,15 @@
       }
     ],
     corrGroups: [
-      'Nomenclature',
-      function resolveCorr(Nomenclature) {
-        return Nomenclature.query({ alias: 'correspondentGroup' }).$promise;
+      'Nomenclatures',
+      function resolveCorr(Nomenclatures) {
+        return Nomenclatures.query({ alias: 'correspondentGroup' }).$promise;
       }
     ],
     corrTypes: [
-      'Nomenclature',
-      function resolveCorr(Nomenclature) {
-        return Nomenclature.query({ alias: 'correspondentType' }).$promise;
+      'Nomenclatures',
+      function resolveCorr(Nomenclatures) {
+        return Nomenclatures.query({ alias: 'correspondentType' }).$promise;
       }
     ]
   };

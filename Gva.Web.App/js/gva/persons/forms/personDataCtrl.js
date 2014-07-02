@@ -2,8 +2,8 @@
 (function (angular, moment) {
   'use strict';
 
-  function PersonDataCtrl($scope, $stateParams, Person, Nomenclature) {
-    Nomenclature.query({alias: 'linTypes'})
+  function PersonDataCtrl($scope, $stateParams, Person, Nomenclatures) {
+    Nomenclatures.query({alias: 'linTypes'})
       .$promise.then(function(linTypes){
         $scope.linTypes = linTypes;
       });
@@ -55,13 +55,13 @@
       if (!$scope.model.sex) {
         var sexDigit = parseInt($scope.model.uin[8], 10);
         if (sexDigit % 2 === 1) {
-          Nomenclature.get({ alias: 'gender', valueAlias: 'Female' })
+          Nomenclatures.get({ alias: 'gender', valueAlias: 'Female' })
             .$promise.then(function (sex) {
               $scope.model.sex = sex;
             });
         }
         else {
-          Nomenclature.get({ alias: 'gender', valueAlias: 'Male' })
+          Nomenclatures.get({ alias: 'gender', valueAlias: 'Male' })
             .$promise.then(function (sex) {
               $scope.model.sex = sex;
             });
@@ -84,7 +84,7 @@
     };
   }
 
-  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person', 'Nomenclature'];
+  PersonDataCtrl.$inject = ['$scope', '$stateParams', 'Person', 'Nomenclatures'];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
 }(angular, moment));

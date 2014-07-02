@@ -2,7 +2,7 @@
 (function (angular, Select2, _) {
   'use strict';
 
-  function CommonScannedDocCtrl($scope, $stateParams, Nomenclature) {
+  function CommonScannedDocCtrl($scope, $stateParams, Nomenclatures) {
     var caseType = null;
     $scope.lotId = $stateParams.id;
 
@@ -37,7 +37,7 @@
 
     $scope.addFile = function () {
       if ($stateParams.caseTypeId && !caseType) {
-        return Nomenclature.get({
+        return Nomenclatures.get({
           alias: 'organizationCaseTypes',
           id: $stateParams.caseTypeId
         }).$promise.then(function (ct) {
@@ -66,7 +66,7 @@
     };
   }
 
-  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclature'];
+  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclatures'];
 
   angular.module('gva').controller('CommonScannedDocCtrl', CommonScannedDocCtrl);
 }(angular, Select2, _));

@@ -6,7 +6,6 @@
     $state,
     $stateParams,
     $scope,
-    Nomenclature,
     selectedLimitation,
     limitations
   ) {
@@ -32,7 +31,6 @@
     '$state',
     '$stateParams',
     '$scope',
-    'Nomenclature',
     'selectedLimitation',
     'limitations'
   ];
@@ -40,9 +38,9 @@
   ChooseLimitationCtrl.$resolve = {
     limitations: [
       '$stateParams',
-      'Nomenclature',
-      function ($stateParams, Nomenclature) {
-        return Nomenclature.query({
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        return Nomenclatures.query({
           alias: $stateParams.limitationAlias
         }).$promise;
       }

@@ -7,7 +7,7 @@
     $filter,
     $state,
     $stateParams,
-    Corr,
+    Corrs,
     corr
   ) {
     $scope.corr = corr;
@@ -16,7 +16,7 @@
       return $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
-            return Corr
+            return Corrs
               .save($scope.corr)
               .$promise
               .then(function () {
@@ -36,16 +36,16 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Corr',
+    'Corrs',
     'corr'
   ];
 
   CorrsEditCtrl.$resolve = {
     corr: [
       '$stateParams',
-      'Corr',
-      function resolveCorr($stateParams, Corr) {
-        return Corr.get({ id: $stateParams.id }).$promise;
+      'Corrs',
+      function resolveCorr($stateParams, Corrs) {
+        return Corrs.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

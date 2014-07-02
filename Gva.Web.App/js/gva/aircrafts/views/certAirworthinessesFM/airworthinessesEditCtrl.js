@@ -125,9 +125,9 @@
       }
     ],
     inspectorType: [
-      'Nomenclature',
-      function (Nomenclature) {
-        return Nomenclature.get({
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.get({
           alias: 'inspectorTypes',
           valueAlias: 'examiner'
         }).$promise;

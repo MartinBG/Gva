@@ -12,7 +12,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
+    Docs,
     email
   ) {
     $scope.email = email.email;
@@ -20,7 +20,7 @@
     $scope.send = function () {
       return $scope.sendEmailForm.$validate().then(function () {
         if ($scope.sendEmailForm.$valid) {
-          return Doc.postDocSendEmail({ id: $stateParams.id }, $scope.email).$promise
+          return Docs.postDocSendEmail({ id: $stateParams.id }, $scope.email).$promise
             .then(function () {
               return $state.go('^');
             });
@@ -55,16 +55,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
+    'Docs',
     'email'
   ];
 
   SendEmailCtrl.$resolve = {
     email: [
       '$stateParams',
-      'Doc',
-      function resolveEmail($stateParams, Doc) {
-        return Doc.getDocSendEmail({ id: $stateParams.id }).$promise;
+      'Docs',
+      function resolveEmail($stateParams, Docs) {
+        return Docs.getDocSendEmail({ id: $stateParams.id }).$promise;
       }
     ]
   };

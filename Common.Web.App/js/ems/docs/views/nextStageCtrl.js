@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    DocStage,
+    DocStages,
     doc,
     stageModel
   ) {
@@ -15,7 +15,7 @@
     $scope.save = function () {
       return $scope.stageForm.$validate().then(function () {
         if ($scope.stageForm.$valid) {
-          return DocStage
+          return DocStages
             .save({
               id: $scope.stageModel.docId,
               docVersion: $scope.stageModel.docVersion
@@ -46,14 +46,14 @@
     '$scope',
     '$state',
     '$stateParams',
-    'DocStage',
+    'DocStages',
     'doc',
     'stageModel'
   ];
 
   NextStageCtrl.$resolve = {
-    stageModel: ['Nomenclature', 'doc',
-      function (Nomenclature, doc) {
+    stageModel: ['doc',
+      function (doc) {
         var caseDoc = _.first(doc.docRelations, function (item) {
           return item.docId === item.rootDocId;
         });

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
+    Docs,
     doc
   ) {
     $scope.docId = doc.docId;
@@ -17,7 +17,7 @@
       return $scope.casePartForm.$validate().then(function () {
         if ($scope.casePartForm.$valid) {
           if ($scope.docCasePartTypeId !== doc.docCasePartTypeId) {
-            return Doc
+            return Docs
               .setCasePart({
                 id: $scope.docId,
                 docVersion: $scope.docVersion,
@@ -44,7 +44,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
+    'Docs',
     'doc'
   ];
 

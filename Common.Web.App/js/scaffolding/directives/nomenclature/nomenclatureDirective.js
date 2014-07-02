@@ -10,7 +10,7 @@
     $filter,
     $parse,
     $exceptionHandler,
-    Nomenclature,
+    Nomenclatures,
     scNomenclatureConfig
   ) {
     function preLink(scope, iElement, iAttrs, ngModel) {
@@ -102,7 +102,7 @@
               resultPromise;
 
           resultPromise =
-            Nomenclature[isMultiple ? 'query' : 'get'](createValQuery(isMultiple, val))
+            Nomenclatures[isMultiple ? 'query' : 'get'](createValQuery(isMultiple, val))
             .$promise;
 
           resultPromise
@@ -125,7 +125,7 @@
         query: function (query) {
           var pageSize = scNomenclatureConfig.pageSize,
               page = query.page - 1;
-          Nomenclature
+          Nomenclatures
             .query(createQuery({ term: query.term, offset: page * pageSize, limit: pageSize }))
             .$promise
             .then(function (result) {
@@ -166,7 +166,7 @@
     '$filter',
     '$parse',
     '$exceptionHandler',
-    'Nomenclature',
+    'Nomenclatures',
     'scNomenclatureConfig'
   ];
 

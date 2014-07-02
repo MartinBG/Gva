@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     $sce,
-    Doc,
+    Docs,
     docs,
     doc
   ) {
@@ -54,7 +54,7 @@
     };
 
     $scope.select = function (newDocId) {
-      return Doc.changeDocParent({
+      return Docs.changeDocParent({
         id: doc.docId,
         newDocId: newDocId
       }, {}).$promise.then(function () {
@@ -68,7 +68,7 @@
     '$state',
     '$stateParams',
     '$sce',
-    'Doc',
+    'Docs',
     'docs',
     'doc'
   ];
@@ -76,9 +76,9 @@
   ChangeDocParentCtrl.$resolve = {
     docs: [
       '$stateParams',
-      'Doc',
-      function resolveDocs($stateParams, Doc) {
-        return Doc.getDocsForChange($stateParams).$promise;
+      'Docs',
+      function resolveDocs($stateParams, Docs) {
+        return Docs.getDocsForChange($stateParams).$promise;
       }
     ]
   };

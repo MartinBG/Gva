@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('ems')
-    .factory('Corr', ['$resource',
+    .factory('Corrs', ['$resource',
       function ($resource) {
         return $resource('/api/corrs/:id', { id: '@correspondentId' },
           {

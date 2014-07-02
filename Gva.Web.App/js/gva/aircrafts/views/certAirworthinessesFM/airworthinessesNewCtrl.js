@@ -40,18 +40,18 @@
   ];
   CertAirworthinessesFMNewCtrl.$resolve = {
     inspectorType: [
-      'Nomenclature',
-      function (Nomenclature) {
-        return Nomenclature.get({
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.get({
           alias: 'inspectorTypes',
           valueAlias: 'examiner'
         }).$promise;
       }
     ],
     airworthinessReviewType: [
-      'Nomenclature',
-      function (Nomenclature) {
-        return Nomenclature.get({
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.get({
           alias: 'airworthinessReviewTypes',
           valueAlias: '15a'
         }).$promise;

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    DocStatus,
+    DocStatuses,
     doc
   ) {
     $scope.checkedIds = [];
@@ -28,7 +28,7 @@
         }
       });
 
-      return DocStatus.next({
+      return DocStatuses.next({
         id: doc.docId,
         docVersion: doc.version,
         closure: true,
@@ -47,7 +47,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'DocStatus',
+    'DocStatuses',
     'doc'
   ];
 

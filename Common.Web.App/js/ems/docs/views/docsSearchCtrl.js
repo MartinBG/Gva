@@ -7,7 +7,6 @@
     $state,
     $stateParams,
     $sce,
-    Doc,
     docs
   ) {
     $scope.docs = docs.documents;
@@ -68,16 +67,15 @@
     '$state',
     '$stateParams',
     '$sce',
-    'Doc',
     'docs'
   ];
 
   DocsSearchCtrl.$resolve = {
     docs: [
       '$stateParams',
-      'Doc',
-      function resolveDocs($stateParams, Doc) {
-        return Doc.get($stateParams).$promise;
+      'Docs',
+      function resolveDocs($stateParams, Docs) {
+        return Docs.get($stateParams).$promise;
       }
     ]
   };

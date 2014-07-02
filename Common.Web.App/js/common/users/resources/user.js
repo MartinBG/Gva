@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('common').factory('User', ['$resource', function ($resource) {
+  angular.module('common').factory('Users', ['$resource', function ($resource) {
     return $resource('/api/users/:userId', {userId:'@userId'});
   }]);
 }(angular));

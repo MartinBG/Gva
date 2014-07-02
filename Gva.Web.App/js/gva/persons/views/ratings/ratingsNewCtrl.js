@@ -40,9 +40,9 @@
   RatingsNewCtrl.$resolve = {
     rating: [
       'application',
-      'Nomenclature',
-      function (application, Nomenclature) {
-        return Nomenclature
+      'Nomenclatures',
+      function (application, Nomenclatures) {
+        return Nomenclatures
           .get({ alias: 'caa', valueAlias: 'BG' })
           .$promise
           .then(function (caa) {

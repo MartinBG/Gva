@@ -2,9 +2,9 @@
 (function (angular) {
   'use strict';
 
-  function DocFilesViewCtrl($scope, $modal, Doc) {
+  function DocFilesViewCtrl($scope, $modal, Docs) {
     $scope.viewEApplication = function viewEApplication(docFileDO) {
-      return Doc
+      return Docs
         .createTicket({
           id: docFileDO.docId,
           docFileId: docFileDO.docFileId,
@@ -31,7 +31,7 @@
   DocFilesViewCtrl.$inject = [
     '$scope',
     '$modal',
-    'Doc'
+    'Docs'
   ];
 
   angular.module('ems').controller('DocFilesViewCtrl', DocFilesViewCtrl);

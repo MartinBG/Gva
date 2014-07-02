@@ -30,9 +30,9 @@
 
   ChooseEmploymentCtrl.$resolve = {
     employments: [
-      'Nomenclature',
-      function (Nomenclature) {
-        return Nomenclature.query({
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.query({
           alias: 'employmentCategories'
         }).$promise;
       }

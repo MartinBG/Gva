@@ -8,20 +8,20 @@
     $filter,
     $state,
     $stateParams,
-    User,
-    Role
+    Users,
+    Roles
   ) {
     var userExistsPromise;
 
     if ($stateParams.userId) {
       $scope.isEdit = true;
-      $scope.user = User.get({userId: $stateParams.userId});
+      $scope.user = Users.get({ userId: $stateParams.userId });
     } else {
       $scope.isEdit = false;
-      $scope.user = new User();
+      $scope.user = new Users();
       $scope.user.$promise = $q.when($scope.user);
     }
-    $scope.roles = Role.query();
+    $scope.roles = Roles.query();
     $scope.saveClicked = false;
 
     $q.all({
@@ -62,7 +62,7 @@
           userExistsPromise = $q.when(false);
         } else {
           userExistsPromise =
-            User.query({username: $scope.user.username, exact: true})
+            Users.query({ username: $scope.user.username, exact: true })
             .$promise
             .then(function (users) {
               return users.length > 0;
@@ -91,8 +91,8 @@
     '$filter',
     '$state',
     '$stateParams',
-    'User',
-    'Role'
+    'Users',
+    'Roles'
   ];
 
   angular.module('common').controller('UsersEditCtrl', UsersEditCtrl);

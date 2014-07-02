@@ -35,10 +35,10 @@
     },
     caseType: [
       '$stateParams',
-      'Nomenclature',
-      function ($stateParams, Nomenclature) {
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
         if ($stateParams.caseTypeId) {
-          return Nomenclature.get({
+          return Nomenclatures.get({
             alias: 'organizationCaseTypes',
             id: $stateParams.caseTypeId
           }).$promise;

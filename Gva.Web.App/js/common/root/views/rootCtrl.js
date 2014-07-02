@@ -47,9 +47,9 @@
   RootCtrl.$resolve = {
     orgCaseTypes: [
       '$stateParams',
-      'Nomenclature',
-      function ($stateParams, Nomenclature) {
-        return Nomenclature.query({ alias: 'organizationCaseTypes' }).$promise;
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        return Nomenclatures.query({ alias: 'organizationCaseTypes' }).$promise;
       }
     ]
   };

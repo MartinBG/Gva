@@ -119,9 +119,9 @@
       }
     ],
     register: [
-      'Nomenclature',
-      function (Nomenclature) {
-        return Nomenclature.get({
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.get({
           alias: 'registers',
           valueAlias: 'register1'
         }).$promise;

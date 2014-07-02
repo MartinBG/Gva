@@ -2,11 +2,11 @@
 (function (angular) {
   'use strict';
 
-  function AircraftInspectorCtrl($scope, Nomenclature) {
+  function AircraftInspectorCtrl($scope, Nomenclatures) {
 
     var deleteWatch = $scope.$watch('showInspectors', function (showInspectors) {
       if(showInspectors !== undefined || showInspectors !== null) {
-        $scope.inspectorTypes = Nomenclature.query({
+        $scope.inspectorTypes = Nomenclatures.query({
             alias: 'inspectorTypes',
             showInspectors: $scope.showInspectors
           });
@@ -18,7 +18,7 @@
 
   AircraftInspectorCtrl.$inject = [
     '$scope',
-    'Nomenclature'
+    'Nomenclatures'
   ];
 
   angular.module('gva').controller('AircraftInspectorCtrl', AircraftInspectorCtrl);

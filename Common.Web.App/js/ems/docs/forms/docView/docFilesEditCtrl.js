@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function DocFilesEditCtrl($scope, Nomenclature) {
+  function DocFilesEditCtrl($scope, Nomenclatures) {
     $scope.editDocFile = function editDocFile(target) {
       target.isInEdit = true;
       target.prevValues = {
@@ -72,7 +72,7 @@
 
       $scope.model.docFiles = $scope.model.docFiles || [];
 
-      return Nomenclature.query({ alias: 'docFileKind' }).$promise
+      return Nomenclatures.query({ alias: 'docFileKind' }).$promise
         .then(function (result) {
           var docFileKind = _(result).filter({ alias: 'PublicAttachedFile' }).first();
 
@@ -85,7 +85,7 @@
 
   DocFilesEditCtrl.$inject = [
     '$scope',
-    'Nomenclature'
+    'Nomenclatures'
   ];
 
   angular.module('ems').controller('DocFilesEditCtrl', DocFilesEditCtrl);

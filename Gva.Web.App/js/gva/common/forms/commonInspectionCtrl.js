@@ -1,7 +1,8 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function CommonInspectionCtrl($scope, $state, $stateParams, Nomenclature) {
+
+  function CommonInspectionCtrl($scope, $state, $stateParams, Nomenclatures) {
     $scope.watchList = [];
 
     $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
@@ -15,7 +16,7 @@
     };
 
     if($scope.$parent.organization) {
-      Nomenclature.query({
+      Nomenclatures.query({
         alias: 'organizationCaseTypes',
         lotId: $stateParams.id
       }).$promise.then(function(result){
@@ -101,7 +102,8 @@
       });
     };
   }
-  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Nomenclature'];
+
+  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Nomenclatures'];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));

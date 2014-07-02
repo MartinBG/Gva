@@ -6,8 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
-    Nomenclature,
+    Docs,
     docModel,
     parentDoc
   ) {
@@ -37,7 +36,7 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc
+          return Docs
             .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
@@ -52,7 +51,7 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc
+          return Docs
             .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
@@ -76,19 +75,18 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
-    'Nomenclature',
+    'Docs',
     'docModel',
     'parentDoc'
   ];
 
   DocsNewCtrl.$resolve = {
-    docModel: ['$q', '$stateParams', 'Nomenclature',
-      function ($q, $stateParams, Nomenclature) {
+    docModel: ['$q', '$stateParams', 'Nomenclatures',
+      function ($q, $stateParams, Nomenclatures) {
         return $q.all({
-          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
-          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
-          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+          docFormatTypes: Nomenclatures.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclatures.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclatures.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
 
           if (!!$stateParams.eDoc) {
@@ -140,9 +138,9 @@
         });
       }
     ],
-    parentDoc: ['$stateParams', 'Doc', function ($stateParams, Doc) {
+    parentDoc: ['$stateParams', 'Docs', function ($stateParams, Docs) {
       if (!!$stateParams.parentDocId) {
-        return Doc.get({ id: $stateParams.parentDocId })
+        return Docs.get({ id: $stateParams.parentDocId })
           .$promise
           .then(function (result) {
             return [{

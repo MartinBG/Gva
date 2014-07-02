@@ -56,11 +56,11 @@
   SelectUnitViewCtrl.$resolve = {
     units: [
       '$stateParams',
-      'Nomenclature',
-      function ResolveUnits($stateParams, Nomenclature) {
+      'Nomenclatures',
+      function ResolveUnits($stateParams, Nomenclatures) {
         var params = _.assign({ alias: 'employeeUnit' }, { term: $stateParams.name });
 
-        return Nomenclature.query(params).$promise;
+        return Nomenclatures.query(params).$promise;
       }
     ]
   };

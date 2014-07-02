@@ -6,14 +6,14 @@
     $scope,
     $state,
     $stateParams,
-    DocWorkflow,
+    DocWorkflows,
     doc
   ) {
     $scope.doc = doc;
     $scope.canDeleteWorkflow = doc.flags.canDeleteWorkflow;
 
     $scope.removeDocWorkflow = function (dwf) {
-      return DocWorkflow.remove({
+      return DocWorkflows.remove({
         id: doc.docId,
         docVersion: doc.version,
         itemId: dwf.docWorkflowId
@@ -29,7 +29,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'DocWorkflow',
+    'DocWorkflows',
     'doc'
   ];
 

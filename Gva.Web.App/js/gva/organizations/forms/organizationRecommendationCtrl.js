@@ -6,7 +6,7 @@
     $state,
     $stateParams,
     OrganizationInspection,
-    Nomenclature) {
+    Nomenclatures) {
 
     $scope.watchList = [];
     $scope.model.part.auditorsReview.auditDetails = [];
@@ -64,7 +64,7 @@
 
 
     $scope.insertAuditDetails = function () {
-      return Nomenclature.query({
+      return Nomenclatures.query({
         alias: 'auditDetails',
         type: 'organizationRecommendations',
         auditPartCode: $scope.model.part.recommendationPart.code
@@ -143,7 +143,7 @@
   }
 
   OrganizationRecommendationCtrl.$inject =
-    ['$scope', '$state', '$stateParams', 'OrganizationInspection', 'Nomenclature'];
+    ['$scope', '$state', '$stateParams', 'OrganizationInspection', 'Nomenclatures'];
 
   angular.module('gva')
     .controller('OrganizationRecommendationCtrl', OrganizationRecommendationCtrl);

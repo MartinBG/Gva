@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Corr,
     corrs
   ) {
     $scope.corrs = corrs.correspondents;
@@ -43,16 +42,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Corr',
     'corrs'
   ];
 
   CorrsSearchCtrl.$resolve = {
     corrs: [
       '$stateParams',
-      'Corr',
-      function resolveCorrs($stateParams, Corr) {
-        return Corr.get($stateParams).$promise;
+      'Corrs',
+      function resolveCorrs($stateParams, Corrs) {
+        return Corrs.get($stateParams).$promise;
       }
     ]
   };

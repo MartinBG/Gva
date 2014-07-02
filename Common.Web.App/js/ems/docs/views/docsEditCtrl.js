@@ -8,9 +8,9 @@
     $filter,
     $state,
     $stateParams,
-    Doc,
-    DocStage,
-    DocStatus,
+    Docs,
+    DocStages,
+    DocStatuses,
     doc
   ) {
     $scope.$state = $state;
@@ -164,7 +164,7 @@
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
-      return Doc
+      return Docs
         .markAsRead({
           id: $scope.doc.docId,
           docVersion: $scope.doc.version
@@ -174,7 +174,7 @@
     };
 
     $scope.markAsUnread = function () {
-      return Doc
+      return Docs
         .markAsUnread({
           id: $scope.doc.docId,
           docVersion: $scope.doc.version
@@ -204,7 +204,7 @@
       return $scope.editDocForm.$validate().then(function () {
         if ($scope.editDocForm.$valid) {
 
-          return Doc
+          return Docs
             .save($stateParams, $scope.doc)
             .$promise
             .then(function () {
@@ -226,7 +226,7 @@
     };
 
     $scope.attachDocInternal = function (docEntryTypeAlias) {
-      return Doc
+      return Docs
         .createChild({
           id: doc.docId,
           docEntryTypeAlias: docEntryTypeAlias
@@ -261,7 +261,7 @@
 
     $scope.reverseStage = function () {
       return $state.go('root.docs.edit.stages').then(function () {
-        return DocStage.reverse({
+        return DocStages.reverse({
           id: doc.docId,
           docVersion: doc.version
         }).$promise.then(function () {
@@ -271,7 +271,7 @@
     };
 
     $scope.nextStatus = function (params) {
-      return DocStatus.next({
+      return DocStatuses.next({
         id: doc.docId,
         alias: params.alias,
         docVersion: doc.version
@@ -287,7 +287,7 @@
     };
 
     $scope.reverseStatus = function (params) {
-      return DocStatus.reverse({
+      return DocStatuses.reverse({
         id: doc.docId,
         alias: params.alias,
         docVersion: doc.version
@@ -297,7 +297,7 @@
     };
 
     $scope.cancelStatus = function () {
-      return DocStatus.cancel({
+      return DocStatuses.cancel({
         id: doc.docId,
         docVersion: doc.version
       }, {}).$promise.then(function () {
@@ -306,7 +306,7 @@
     };
 
     $scope.register = function () {
-      return Doc.register({
+      return Docs.register({
         id: doc.docId,
         docVersion: doc.version
       }, {}).$promise.then(function (data) {
@@ -363,7 +363,7 @@
     };
 
     $scope.createNewCase = function () {
-      return Doc.createNewCase({ id: doc.docId }, {}).$promise.then(function () {
+      return Docs.createNewCase({ id: doc.docId }, {}).$promise.then(function () {
         return $state.go('root.docs.edit.case', { id: doc.docId }, { reload: true });
       });
     };
@@ -379,18 +379,18 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Doc',
-    'DocStage',
-    'DocStatus',
+    'Docs',
+    'DocStages',
+    'DocStatuses',
     'doc'
   ];
 
   DocsEditCtrl.$resolve = {
     doc: [
       '$stateParams',
-      'Doc',
-      function resolveDoc($stateParams, Doc) {
-        return Doc.get({ id: $stateParams.id }).$promise;
+      'Docs',
+      function resolveDoc($stateParams, Docs) {
+        return Docs.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

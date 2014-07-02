@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonAuditDetailCtrl($scope, Nomenclature) {
+  function CommonAuditDetailCtrl($scope, Nomenclatures) {
 
     $scope.addDisparity = function (detail) {
       $scope.$parent.addDisparity(detail);
@@ -26,7 +26,7 @@
           type: 'airports'
         };
       }
-      return Nomenclature.query(queryString)
+      return Nomenclatures.query(queryString)
         .$promise.then(function (details) {
           $scope.model.auditDetails = details;
         });
@@ -34,7 +34,7 @@
 
   }
 
-  CommonAuditDetailCtrl.$inject = ['$scope', 'Nomenclature'];
+  CommonAuditDetailCtrl.$inject = ['$scope', 'Nomenclatures'];
 
   angular.module('gva').controller('CommonAuditDetailCtrl', CommonAuditDetailCtrl);
 }(angular));

@@ -7,7 +7,7 @@
     $filter,
     $state,
     $stateParams,
-    Corr,
+    Corrs,
     corr,
     doc
   ) {
@@ -18,7 +18,7 @@
       return $scope.corrForm.$validate()
         .then(function () {
           if ($scope.corrForm.$valid) {
-            return Corr.save($scope.corr).$promise.then(function (corr) {
+            return Corrs.save($scope.corr).$promise.then(function (corr) {
               doc.docCorrespondents.push({
                 name: corr.obj.displayName,
                 nomValueId: corr.correspondentId
@@ -39,7 +39,7 @@
     '$filter',
     '$state',
     '$stateParams',
-    'Corr',
+    'Corrs',
     'corr',
     'doc'
   ];
@@ -47,9 +47,9 @@
   DocsCorrNewCtrl.$resolve = {
     corr: [
       '$stateParams',
-      'Corr',
-      function resolveCorr($stateParams, Corr) {
-        return Corr.getNew().$promise;
+      'Corrs',
+      function resolveCorr($stateParams, Corrs) {
+        return Corrs.getNew().$promise;
       }
     ]
   };

@@ -7,7 +7,6 @@
     $scope,
     $state,
     $stateParams,
-    Nomenclature,
     Application,
     PersonInfo,
     OrganizationData,
@@ -230,7 +229,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Nomenclature',
     'Application',
     'PersonInfo',
     'OrganizationData',
@@ -244,12 +242,12 @@
   ];
 
   ApplicationsNewCtrl.$resolve = {
-    appModel: ['$q', 'Nomenclature',
-      function ($q, Nomenclature) {
+    appModel: ['$q', 'Nomenclatures',
+      function ($q, Nomenclatures) {
         return $q.all({
-          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
-          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
-          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+          docFormatTypes: Nomenclatures.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclatures.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclatures.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
           res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
             return dft.alias === 'Paper';

@@ -7,7 +7,6 @@
     $state,
     $stateParams,
     Doc,
-    Nomenclature,
     docModel,
     parentDoc
   ) {
@@ -52,18 +51,17 @@
     '$state',
     '$stateParams',
     'Doc',
-    'Nomenclature',
     'docModel',
     'parentDoc'
   ];
 
   ApplicationsEditChildDocCtrl.$resolve = {
-    docModel: ['$q', 'Nomenclature',
-      function ($q, Nomenclature) {
+    docModel: ['$q', 'Nomenclatures',
+      function ($q, Nomenclatures) {
         return $q.all({
-          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
-          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
-          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+          docFormatTypes: Nomenclatures.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclatures.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclatures.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
           var doc = {
             parentDocId: null,

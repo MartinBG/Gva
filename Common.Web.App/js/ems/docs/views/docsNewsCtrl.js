@@ -6,8 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
-    Nomenclature,
+    Docs,
     docModel
   ) {
     $scope.docModel = docModel;
@@ -17,7 +16,7 @@
 
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc
+          return Docs
             .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
@@ -30,7 +29,7 @@
     $scope.save = function () {
       return $scope.docForm.$validate().then(function () {
         if ($scope.docForm.$valid) {
-          return Doc
+          return Docs
             .save($scope.docModel.doc)
             .$promise
             .then(function (result) {
@@ -49,18 +48,17 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
-    'Nomenclature',
+    'Docs',
     'docModel'
   ];
 
   DocsNewsCtrl.$resolve = {
-    docModel: ['$q', 'Nomenclature',
-      function ($q, Nomenclature) {
+    docModel: ['$q', 'Nomenclatures',
+      function ($q, Nomenclatures) {
         return $q.all({
-          docFormatTypes: Nomenclature.query({ alias: 'docFormatType' }).$promise,
-          docCasePartTypes: Nomenclature.query({ alias: 'docCasePartType' }).$promise,
-          docDirections: Nomenclature.query({ alias: 'docDirection' }).$promise
+          docFormatTypes: Nomenclatures.query({ alias: 'docFormatType' }).$promise,
+          docCasePartTypes: Nomenclatures.query({ alias: 'docCasePartType' }).$promise,
+          docDirections: Nomenclatures.query({ alias: 'docDirection' }).$promise
         }).then(function (res) {
           res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
             return dft.alias === 'Paper';

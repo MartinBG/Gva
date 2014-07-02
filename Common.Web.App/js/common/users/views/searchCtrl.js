@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function UsersSearchCtrl($scope, $state, $stateParams, User) {
+  function UsersSearchCtrl($scope, $state, $stateParams, Users) {
     $scope.filters = {
       username: null //always show the username filter
     };
@@ -25,7 +25,7 @@
       });
     };
 
-    User.query($stateParams).$promise.then(function (users) {
+    Users.query($stateParams).$promise.then(function (users) {
       $scope.users = users.map(function (user) {
         var roles = '';
         for (var i = 0; i < user.roles.length; i++) {
@@ -48,7 +48,7 @@
     };
   }
 
-  UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'User'];
+  UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Users'];
 
   angular.module('common').controller('UsersSearchCtrl', UsersSearchCtrl);
 }(angular, _));

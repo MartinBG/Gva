@@ -2,9 +2,9 @@
 (function (angular) {
   'use strict';
 
-  function InspDataCtrl($scope, Nomenclature) {
+  function InspDataCtrl($scope, Nomenclatures) {
     if (!$scope.model) {
-      Nomenclature.get({ alias: 'caa', valueAlias: 'BG' }).$promise.then(function (caa) {
+      Nomenclatures.get({ alias: 'caa', valueAlias: 'BG' }).$promise.then(function (caa) {
         $scope.model = {
           caa: caa
         };
@@ -12,7 +12,7 @@
     }
   }
 
-  InspDataCtrl.$inject = ['$scope', 'Nomenclature'];
+  InspDataCtrl.$inject = ['$scope', 'Nomenclatures'];
 
   angular.module('gva').controller('InspDataCtrl', InspDataCtrl);
 }(angular));

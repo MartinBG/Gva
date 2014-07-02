@@ -6,13 +6,13 @@
     $scope,
     $state,
     $stateParams,
-    Doc,
+    Docs,
     doc
   ) {
     $scope.save = function () {
       return $scope.manualRegisterForm.$validate().then(function () {
         if ($scope.manualRegisterForm.$valid) {
-          return Doc
+          return Docs
             .manualRegister({
               id: doc.docId,
               docVersion: doc.version,
@@ -36,7 +36,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Doc',
+    'Docs',
     'doc'
   ];
 

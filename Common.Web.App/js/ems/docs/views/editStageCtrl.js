@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    DocStage,
+    DocStages,
     doc,
     stageModel
   ) {
@@ -15,7 +15,7 @@
     $scope.save = function () {
       return $scope.stageForm.$validate().then(function () {
         if ($scope.stageForm.$valid) {
-          return DocStage
+          return DocStages
             .edit({
               id: $scope.stageModel.docId,
               docVersion: $scope.stageModel.docVersion
@@ -46,15 +46,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'DocStage',
+    'DocStages',
     'doc',
     'stageModel'
   ];
 
   EditStageCtrl.$resolve = {
-    stageModel: ['Nomenclature', 'doc', 'DocStage',
-      function (Nomenclature, doc, DocStage) {
-        return DocStage.get({
+    stageModel: ['doc', 'DocStages',
+      function (doc, DocStages) {
+        return DocStages.get({
           id: doc.docId,
           docVersion: doc.version
         })

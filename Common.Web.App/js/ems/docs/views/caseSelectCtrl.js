@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function CaseSelectCtrl($scope, $state, $stateParams, Doc, parentDoc) {
+  function CaseSelectCtrl($scope, $state, $stateParams, Docs, parentDoc) {
     $scope.filters = {
       csFromDate: null,
       csToDate: null,
@@ -33,7 +33,7 @@
       isCase: true
     };
 
-    Doc.get(stateParams).$promise.then(function (docs) {
+    Docs.get(stateParams).$promise.then(function (docs) {
       $scope.docs = docs.documents;
       $scope.docCount = docs.documentCount;
     });
@@ -67,7 +67,7 @@
     };
   }
 
-  CaseSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Doc', 'parentDoc'];
+  CaseSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Docs', 'parentDoc'];
 
   angular.module('ems').controller('CaseSelectCtrl', CaseSelectCtrl);
 }(angular, _));
