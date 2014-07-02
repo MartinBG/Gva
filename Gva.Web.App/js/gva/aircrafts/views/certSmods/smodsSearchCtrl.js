@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertSmod,
     smods
   ) {
     $scope.smods = smods;
@@ -27,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertSmod',
     'smods'
   ];
 
   CertSmodsSearchCtrl.$resolve = {
     smods: [
       '$stateParams',
-      'AircraftCertSmod',
-      function ($stateParams, AircraftCertSmod) {
-        return AircraftCertSmod.query($stateParams).$promise;
+      'AircraftCertSmods',
+      function ($stateParams, AircraftCertSmods) {
+        return AircraftCertSmods.query($stateParams).$promise;
       }
     ]
   };

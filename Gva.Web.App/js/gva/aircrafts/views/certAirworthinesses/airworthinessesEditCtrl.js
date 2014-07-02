@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertAirworthiness,
+    AircraftCertAirworthinesses,
     aircraftCertAirworthiness
   ) {
     var originalAirworthiness = _.cloneDeep(aircraftCertAirworthiness);
@@ -28,7 +28,7 @@
       return $scope.editCertAirworthinessForm.$validate()
       .then(function () {
         if ($scope.editCertAirworthinessForm.$valid) {
-          return AircraftCertAirworthiness
+          return AircraftCertAirworthinesses
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aw)
             .$promise
             .then(function () {
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteAirworthiness = function () {
-      return AircraftCertAirworthiness.remove({
+      return AircraftCertAirworthinesses.remove({
         id: $stateParams.id,
         ind: aircraftCertAirworthiness.partIndex
       }).$promise.then(function () {
@@ -52,16 +52,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertAirworthiness',
+    'AircraftCertAirworthinesses',
     'aircraftCertAirworthiness'
   ];
 
   CertAirworthinessesEditCtrl.$resolve = {
     aircraftCertAirworthiness: [
       '$stateParams',
-      'AircraftCertAirworthiness',
-      function ($stateParams, AircraftCertAirworthiness) {
-        return AircraftCertAirworthiness.get({
+      'AircraftCertAirworthinesses',
+      function ($stateParams, AircraftCertAirworthinesses) {
+        return AircraftCertAirworthinesses.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

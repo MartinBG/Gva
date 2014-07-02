@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('AircraftCertRegistrationFM', ['$resource', function ($resource) {
+  angular.module('gva').factory('AircraftCertRegistrationsFM', ['$resource', function ($resource) {
     return $resource('/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind', {}, {
       'getView': {
         method: 'GET',

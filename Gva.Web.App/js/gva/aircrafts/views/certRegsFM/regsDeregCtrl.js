@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistrationFM,
+    AircraftCertRegistrationsFM,
     aircraftCertRegistration
   ) {
     $scope.isEdit = true;
@@ -17,7 +17,7 @@
       return $scope.deregCertRegForm.$validate()
       .then(function () {
         if ($scope.deregCertRegForm.$valid) {
-          return AircraftCertRegistrationFM
+          return AircraftCertRegistrationsFM
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
             .$promise
             .then(function () {
@@ -39,16 +39,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistrationFM',
+    'AircraftCertRegistrationsFM',
     'aircraftCertRegistration'
   ];
 
   CertRegsFMDeregCtrl.$resolve = {
     aircraftCertRegistration: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
-      function ($stateParams, AircraftCertRegistrationFM) {
-        return AircraftCertRegistrationFM.get({
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
+        return AircraftCertRegistrationsFM.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise.then(function (reg) {

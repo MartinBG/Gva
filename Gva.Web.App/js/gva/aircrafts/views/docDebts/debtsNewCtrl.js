@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentDebt,
+    AircraftDocumentDebts,
     aircraftDocumentDebt
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newDocumentDebtForm.$validate()
          .then(function () {
             if ($scope.newDocumentDebtForm.$valid) {
-              return AircraftDocumentDebt
+              return AircraftDocumentDebts
               .save({ id: $stateParams.id }, $scope.debt).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.debts.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentDebt',
+    'AircraftDocumentDebts',
     'aircraftDocumentDebt'
   ];
   DocDebtsNewCtrl.$resolve = {

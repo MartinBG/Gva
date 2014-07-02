@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRadio,
     radios
   ) {
     $scope.radios = radios;
@@ -27,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRadio',
     'radios'
   ];
 
   CertRadiosSearchCtrl.$resolve = {
     radios: [
       '$stateParams',
-      'AircraftCertRadio',
-      function ($stateParams, AircraftCertRadio) {
-        return AircraftCertRadio.query($stateParams).$promise;
+      'AircraftCertRadios',
+      function ($stateParams, AircraftCertRadios) {
+        return AircraftCertRadios.query($stateParams).$promise;
       }
     ]
   };

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentOccurrence,
+    AircraftDocumentOccurrences,
     aircraftDocumentOccurrence) {
     $scope.aircraftDocumentOccurrence = aircraftDocumentOccurrence;
 
@@ -14,7 +14,7 @@
       return $scope.newAircraftDocumentOccurrenceForm.$validate()
       .then(function () {
         if ($scope.newAircraftDocumentOccurrenceForm.$valid) {
-          return AircraftDocumentOccurrence
+          return AircraftDocumentOccurrences
             .save({ id: $stateParams.id }, $scope.aircraftDocumentOccurrence)
             .$promise
             .then(function () {
@@ -33,7 +33,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentOccurrence',
+    'AircraftDocumentOccurrences',
     'aircraftDocumentOccurrence'
   ];
 

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftData,
+    AircraftsData,
     aircraftData
   ) {
     var originalAircraftData = _.cloneDeep(aircraftData);
@@ -27,7 +27,7 @@
       return $scope.editAircraftForm.$validate()
       .then(function () {
         if ($scope.editAircraftForm.$valid) {
-          return AircraftData
+          return AircraftsData
           .save({ id: $stateParams.id }, $scope.aircraftData)
           .$promise
           .then(function () {
@@ -42,16 +42,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftData',
+    'AircraftsData',
     'aircraftData'
   ];
 
   AircraftDataEditCtrl.$resolve = {
     aircraftData: [
       '$stateParams',
-      'AircraftData',
-      function ($stateParams, AircraftData) {
-        return AircraftData.get({ id: $stateParams.id }).$promise;
+      'AircraftsData',
+      function ($stateParams, AircraftsData) {
+        return AircraftsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

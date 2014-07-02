@@ -2,7 +2,7 @@
 (function (angular, _) {
   'use strict';
 
-  function AircraftSelectCtrl($scope, $state, $stateParams, Aircraft, selectedAircraft) {
+  function AircraftSelectCtrl($scope, $state, $stateParams, Aircrafts, selectedAircraft) {
     $scope.filters = {
       manSN: null,
       model: null
@@ -15,7 +15,7 @@
         }
       });
 
-    Aircraft.query($scope.filters).$promise.then(function (aircrafts) {
+    Aircrafts.query($scope.filters).$promise.then(function (aircrafts) {
       $scope.aircrafts = aircrafts;
     });
 
@@ -43,7 +43,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Aircraft',
+    'Aircrafts',
     'selectedAircraft'
   ];
 

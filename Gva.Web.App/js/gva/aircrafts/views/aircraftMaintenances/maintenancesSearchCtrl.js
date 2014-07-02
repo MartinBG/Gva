@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftMaintenance,
     aircraftMaintenances) {
 
     $scope.aircraftMaintenances = aircraftMaintenances;
@@ -32,16 +31,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftMaintenance',
     'aircraftMaintenances'
   ];
 
   MaintenancesSearchCtrl.$resolve = {
     aircraftMaintenances: [
       '$stateParams',
-      'AircraftMaintenance',
-      function ($stateParams, AircraftMaintenance) {
-        return AircraftMaintenance.query($stateParams).$promise;
+      'AircraftMaintenances',
+      function ($stateParams, AircraftMaintenances) {
+        return AircraftMaintenances.query($stateParams).$promise;
       }
     ]
   };

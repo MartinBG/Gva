@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertNoise,
+    AircraftCertNoises,
     aircraftCertNoise
   ) {
     var originalNoise = _.cloneDeep(aircraftCertNoise);
@@ -28,7 +28,7 @@
       return $scope.editCertNoiseForm.$validate()
       .then(function () {
         if ($scope.editCertNoiseForm.$valid) {
-          return AircraftCertNoise
+          return AircraftCertNoises
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.noise)
             .$promise
             .then(function () {
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteNoise = function () {
-      return AircraftCertNoise.remove({ id: $stateParams.id, ind: aircraftCertNoise.partIndex })
+      return AircraftCertNoises.remove({ id: $stateParams.id, ind: aircraftCertNoise.partIndex })
         .$promise.then(function () {
           return $state.go('root.aircrafts.view.noises.search');
         });
@@ -50,16 +50,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertNoise',
+    'AircraftCertNoises',
     'aircraftCertNoise'
   ];
 
   CertNoisesEditCtrl.$resolve = {
     aircraftCertNoise: [
       '$stateParams',
-      'AircraftCertNoise',
-      function ($stateParams, AircraftCertNoise) {
-        return AircraftCertNoise.get({
+      'AircraftCertNoises',
+      function ($stateParams, AircraftCertNoises) {
+        return AircraftCertNoises.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

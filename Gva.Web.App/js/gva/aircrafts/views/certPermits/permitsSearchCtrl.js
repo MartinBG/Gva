@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertPermitToFly,
     permits
   ) {
     $scope.permits = permits;
@@ -27,16 +26,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertPermitToFly',
     'permits'
   ];
 
   CertPermitsToFlySearchCtrl.$resolve = {
     permits: [
       '$stateParams',
-      'AircraftCertPermitToFly',
-      function ($stateParams, AircraftCertPermitToFly) {
-        return AircraftCertPermitToFly.query($stateParams).$promise;
+      'AircraftCertPermitsToFly',
+      function ($stateParams, AircraftCertPermitsToFly) {
+        return AircraftCertPermitsToFly.query($stateParams).$promise;
       }
     ]
   };

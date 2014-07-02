@@ -6,12 +6,9 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertAirworthiness,
     aws
   ) {
     $scope.aws = aws;
-
-
     $scope.editCertAirworthiness = function (aw) {
       return $state.go('root.aircrafts.view.airworthinesses.edit', {
         id: $stateParams.id,
@@ -28,16 +25,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertAirworthiness',
     'marks'
   ];
 
   CertAirworthinessesSearchCtrl.$resolve = {
     marks: [
       '$stateParams',
-      'AircraftCertAirworthiness',
-      function ($stateParams, AircraftCertAirworthiness) {
-        return AircraftCertAirworthiness.query($stateParams).$promise;
+      'AircraftCertAirworthinesses',
+      function ($stateParams, AircraftCertAirworthinesses) {
+        return AircraftCertAirworthinesses.query($stateParams).$promise;
       }
     ]
   };

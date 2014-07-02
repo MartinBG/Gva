@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertAirworthinessFM,
+    AircraftCertAirworthinessesFM,
     aircraftCertAirworthiness,
     inspectorType
   ) {
@@ -58,7 +58,7 @@
 
     $scope.deleteLastReview = function () {
       $scope.aw.part.reviews.pop();
-      return AircraftCertAirworthinessFM.save(
+      return AircraftCertAirworthinessesFM.save(
         { id: $stateParams.id, ind: $stateParams.ind },
         $scope.aw
       )
@@ -66,10 +66,9 @@
         originalAirworthiness = _.cloneDeep($scope.aw);
       });
     };
-    
 
     $scope.deleteAirworthiness = function () {
-      return AircraftCertAirworthinessFM
+      return AircraftCertAirworthinessesFM
         .remove({ id: $stateParams.id, ind: $stateParams.ind })
         .$promise.then(function () {
           return $state.go('root.aircrafts.view.airworthinessesFM.search');
@@ -93,7 +92,7 @@
       return $scope.editCertAirworthinessForm.$validate()
       .then(function () {
         if ($scope.editCertAirworthinessForm.$valid) {
-          return AircraftCertAirworthinessFM
+          return AircraftCertAirworthinessesFM
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aw)
             .$promise
             .then(function () {
@@ -108,7 +107,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertAirworthinessFM',
+    'AircraftCertAirworthinessesFM',
     'aircraftCertAirworthiness',
     'inspectorType'
   ];
@@ -116,9 +115,9 @@
   CertAirworthinessesFMEditCtrl.$resolve = {
     aircraftCertAirworthiness: [
       '$stateParams',
-      'AircraftCertAirworthinessFM',
-      function ($stateParams, AircraftCertAirworthinessFM) {
-        return AircraftCertAirworthinessFM.get({
+      'AircraftCertAirworthinessesFM',
+      function ($stateParams, AircraftCertAirworthinessesFM) {
+        return AircraftCertAirworthinessesFM.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

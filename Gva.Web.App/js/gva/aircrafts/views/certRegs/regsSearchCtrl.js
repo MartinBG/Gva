@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistration,
+    AircraftCertRegistrations,
     regs
   ) {
     $scope.regs = regs;
@@ -27,16 +27,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistration',
+    'AircraftCertRegistrations',
     'regs'
   ];
 
   CertRegsSearchCtrl.$resolve = {
     regs: [
       '$stateParams',
-      'AircraftCertRegistration',
-      function ($stateParams, AircraftCertRegistration) {
-        return AircraftCertRegistration.query($stateParams).$promise;
+      'AircraftCertRegistrations',
+      function ($stateParams, AircraftCertRegistrations) {
+        return AircraftCertRegistrations.query($stateParams).$promise;
       }
     ]
   };

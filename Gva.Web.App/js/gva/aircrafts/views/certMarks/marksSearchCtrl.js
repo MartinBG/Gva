@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertMark,
     marks
   ) {
     $scope.marks = marks;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertMark',
     'marks'
   ];
 
   CertMarksSearchCtrl.$resolve = {
     marks: [
       '$stateParams',
-      'AircraftCertMark',
-      function ($stateParams, AircraftCertMark) {
-        return AircraftCertMark.query($stateParams).$promise;
+      'AircraftCertMarks',
+      function ($stateParams, AircraftCertMarks) {
+        return AircraftCertMarks.query($stateParams).$promise;
       }
     ]
   };

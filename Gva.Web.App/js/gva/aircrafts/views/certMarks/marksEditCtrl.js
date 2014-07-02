@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertMark,
+    AircraftCertMarks,
     aircraftCertMark
   ) {
     var originalMark = _.cloneDeep(aircraftCertMark);
@@ -28,7 +28,7 @@
       return $scope.editCertMarkForm.$validate()
       .then(function () {
         if ($scope.editCertMarkForm.$valid) {
-          return AircraftCertMark
+          return AircraftCertMarks
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.mark)
             .$promise
             .then(function () {
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteMark = function () {
-      return AircraftCertMark.remove({ id: $stateParams.id, ind: aircraftCertMark.partIndex })
+      return AircraftCertMarks.remove({ id: $stateParams.id, ind: aircraftCertMark.partIndex })
         .$promise.then(function () {
           return $state.go('root.aircrafts.view.marks.search');
         });
@@ -50,16 +50,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertMark',
+    'AircraftCertMarks',
     'aircraftCertMark'
   ];
 
   CertMarksEditCtrl.$resolve = {
     aircraftCertMark: [
       '$stateParams',
-      'AircraftCertMark',
-      function ($stateParams, AircraftCertMark) {
-        return AircraftCertMark.get({
+      'AircraftCertMarks',
+      function ($stateParams, AircraftCertMarks) {
+        return AircraftCertMarks.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

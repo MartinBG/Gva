@@ -51,9 +51,9 @@
   AircraftsSearchCtrl.$resolve = {
     aircrafts: [
       '$stateParams',
-      'Aircraft',
-      function ($stateParams, Aircraft) {
-        return Aircraft.query($stateParams).$promise;
+      'Aircrafts',
+      function ($stateParams, Aircrafts) {
+        return Aircrafts.query($stateParams).$promise;
       }
     ]
   };

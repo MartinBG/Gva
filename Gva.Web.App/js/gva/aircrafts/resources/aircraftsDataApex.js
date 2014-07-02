@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('AircraftDataApex', ['$resource', function($resource) {
+  angular.module('gva').factory('AircraftsDataApex', ['$resource', function($resource) {
     return $resource('/api/aircrafts/:id/aircraftDataApex');
   }]);
 }(angular));

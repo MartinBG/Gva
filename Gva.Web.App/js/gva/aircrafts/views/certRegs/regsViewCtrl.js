@@ -62,9 +62,9 @@
   CertRegsViewCtrl.$resolve = {
     aircraftCertRegistrationView: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
-      function ($stateParams, AircraftCertRegistrationFM) {
-        return AircraftCertRegistrationFM.getView({
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
+        return AircraftCertRegistrationsFM.getView({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;
@@ -72,11 +72,11 @@
     ],
     aircraftCertRegistration: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
+      'AircraftCertRegistrationsFM',
       'aircraftCertRegistrationView',
-      function ($stateParams, AircraftCertRegistrationFM, aircraftCertRegistrationView) {
+      function ($stateParams, AircraftCertRegistrationsFM, aircraftCertRegistrationView) {
         if (aircraftCertRegistrationView) {
-          return AircraftCertRegistrationFM.get({
+          return AircraftCertRegistrationsFM.get({
             id: $stateParams.id,
             ind: aircraftCertRegistrationView.currentIndex
           }).$promise;
@@ -88,12 +88,12 @@
     ],
     aircraftCertAirworthiness: [
       '$stateParams',
-      'AircraftCertAirworthinessFM',
+      'AircraftCertAirworthinessesFM',
       'aircraftCertRegistrationView',
-      function ($stateParams, AircraftCertAirworthinessFM, aircraftCertRegistrationView) {
+      function ($stateParams, AircraftCertAirworthinessesFM, aircraftCertRegistrationView) {
         if (aircraftCertRegistrationView &&
           aircraftCertRegistrationView.airworthinessIndex) {
-          return AircraftCertAirworthinessFM.get({
+          return AircraftCertAirworthinessesFM.get({
             id: $stateParams.id,
             ind: aircraftCertRegistrationView.airworthinessIndex
           }).$promise;

@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertAirworthinessFM,
     aws
   ) {
     $scope.aws = aws.map(function (aw) {
@@ -44,16 +43,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertAirworthinessFM',
     'marks'
   ];
 
   CertAirworthinessesFMSearchCtrl.$resolve = {
     marks: [
       '$stateParams',
-      'AircraftCertAirworthinessFM',
-      function ($stateParams, AircraftCertAirworthinessFM) {
-        return AircraftCertAirworthinessFM.query($stateParams).$promise;
+      'AircraftCertAirworthinessesFM',
+      function ($stateParams, AircraftCertAirworthinessesFM) {
+        return AircraftCertAirworthinessesFM.query($stateParams).$promise;
       }
     ]
   };

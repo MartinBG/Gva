@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertAirworthinessFM,
+    AircraftCertAirworthinessesFM,
     aircraftCertAirworthiness
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertAirworthinessForm.$validate()
         .then(function () {
           if ($scope.newCertAirworthinessForm.$valid) {
-            return AircraftCertAirworthinessFM
+            return AircraftCertAirworthinessesFM
                 .save({ id: $stateParams.id }, $scope.aw).$promise
                 .then(function () {
               return $state.go('root.aircrafts.view.airworthinessesFM.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertAirworthinessFM',
+    'AircraftCertAirworthinessesFM',
     'aircraftCertAirworthiness'
   ];
   CertAirworthinessesFMNewCtrl.$resolve = {

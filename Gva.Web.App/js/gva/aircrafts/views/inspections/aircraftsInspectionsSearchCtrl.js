@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftInspection,
+    AircraftInspections,
     aircraftInspections) {
 
     $scope.aircraftInspections = aircraftInspections;
@@ -21,23 +21,22 @@
         ind: inspection.partIndex
       });
     };
-
   }
 
   AircraftsInspectionsSearchCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftInspection',
+    'AircraftInspections',
     'aircraftInspections'
   ];
 
   AircraftsInspectionsSearchCtrl.$resolve = {
     aircraftInspections: [
       '$stateParams',
-      'AircraftInspection',
-      function ($stateParams, AircraftInspection) {
-        return AircraftInspection.query($stateParams).$promise;
+      'AircraftInspections',
+      function ($stateParams, AircraftInspections) {
+        return AircraftInspections.query($stateParams).$promise;
       }
     ]
   };

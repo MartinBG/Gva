@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftPart,
     parts
   ) {
     $scope.parts = parts;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftPart',
     'parts'
   ];
 
   PartsSearchCtrl.$resolve = {
     parts: [
       '$stateParams',
-      'AircraftPart',
-      function ($stateParams, AircraftPart) {
-        return AircraftPart.query($stateParams).$promise;
+      'AircraftParts',
+      function ($stateParams, AircraftParts) {
+        return AircraftParts.query($stateParams).$promise;
       }
     ]
   };

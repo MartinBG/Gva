@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertMark,
+    AircraftCertMarks,
     aircraftCertMark
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertMarkForm.$validate()
          .then(function () {
             if ($scope.newCertMarkForm.$valid) {
-              return AircraftCertMark
+              return AircraftCertMarks
               .save({ id: $stateParams.id }, $scope.mark).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.marks.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertMark',
+    'AircraftCertMarks',
     'aircraftCertMark'
   ];
   CertMarksNewCtrl.$resolve = {

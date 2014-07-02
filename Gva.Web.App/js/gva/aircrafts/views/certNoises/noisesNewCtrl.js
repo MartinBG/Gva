@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertNoise,
+    AircraftCertNoises,
     aircraftCertNoise
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertNoiseForm.$validate()
          .then(function () {
             if ($scope.newCertNoiseForm.$valid) {
-              return AircraftCertNoise
+              return AircraftCertNoises
               .save({ id: $stateParams.id }, $scope.noise).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.noises.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertNoise',
+    'AircraftCertNoises',
     'aircraftCertNoise'
   ];
   CertNoisesNewCtrl.$resolve = {

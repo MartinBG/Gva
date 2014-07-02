@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistration,
+    AircraftCertRegistrations,
     aircraftCertRegistration
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertRegForm.$validate()
          .then(function () {
             if ($scope.newCertRegForm.$valid) {
-              return AircraftCertRegistration
+              return AircraftCertRegistrations
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.regs.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistration',
+    'AircraftCertRegistrations',
     'aircraftCertRegistration'
   ];
   CertRegsNewCtrl.$resolve = {

@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertSmod,
+    AircraftCertSmods,
     aircraftCertSmod
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertSmodForm.$validate()
          .then(function () {
             if ($scope.newCertSmodForm.$valid) {
-              return AircraftCertSmod
+              return AircraftCertSmods
               .save({ id: $stateParams.id }, $scope.smod).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.smods.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertSmod',
+    'AircraftCertSmods',
     'aircraftCertSmod'
   ];
   CertSmodsNewCtrl.$resolve = {

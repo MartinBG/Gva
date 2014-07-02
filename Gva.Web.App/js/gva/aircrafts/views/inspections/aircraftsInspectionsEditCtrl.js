@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftInspection,
+    AircraftInspections,
     aircraftInspection) {
     var originalInspection = _.cloneDeep(aircraftInspection);
 
@@ -26,7 +26,7 @@
       return $scope.editInspectionForm.$validate()
       .then(function () {
         if ($scope.editInspectionForm.$valid) {
-          return AircraftInspection
+          return AircraftInspections
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftInspection)
             .$promise
             .then(function () {
@@ -37,7 +37,7 @@
     };
 
     $scope.deleteInspection = function () {
-      return AircraftInspection.remove({
+      return AircraftInspections.remove({
         id: $stateParams.id,
         ind: aircraftInspection.partIndex
       }).$promise.then(function () {
@@ -50,16 +50,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftInspection',
+    'AircraftInspections',
     'aircraftInspection'
   ];
 
   AircraftsInspectionsEditCtrl.$resolve = {
     aircraftInspection: [
       '$stateParams',
-      'AircraftInspection',
-      function ($stateParams, AircraftInspection) {
-        return AircraftInspection.get({
+      'AircraftInspections',
+      function ($stateParams, AircraftInspections) {
+        return AircraftInspections.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

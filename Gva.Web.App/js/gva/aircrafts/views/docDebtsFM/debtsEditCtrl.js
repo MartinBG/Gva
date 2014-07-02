@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentDebtFM,
+    AircraftDocumentDebtsFM,
     aircraftDocumentDebt
   ) {
     var originalDebt = _.cloneDeep(aircraftDocumentDebt);
@@ -28,7 +28,7 @@
       return $scope.editDocumentDebtForm.$validate()
       .then(function () {
         if ($scope.editDocumentDebtForm.$valid) {
-          return AircraftDocumentDebtFM
+          return AircraftDocumentDebtsFM
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.debt)
             .$promise
             .then(function () {
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteDocumentDebt = function () {
-      return AircraftDocumentDebtFM.remove({
+      return AircraftDocumentDebtsFM.remove({
         id: $stateParams.id,
         ind: aircraftDocumentDebt.partIndex
       }).$promise.then(function () {
@@ -52,16 +52,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentDebtFM',
+    'AircraftDocumentDebtsFM',
     'aircraftDocumentDebt'
   ];
 
   DocDebtsFMEditCtrl.$resolve = {
     aircraftDocumentDebt: [
       '$stateParams',
-      'AircraftDocumentDebtFM',
-      function ($stateParams, AircraftDocumentDebtFM) {
-        return AircraftDocumentDebtFM.get({
+      'AircraftDocumentDebtsFM',
+      function ($stateParams, AircraftDocumentDebtsFM) {
+        return AircraftDocumentDebtsFM.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

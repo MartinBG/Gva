@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistrationFM,
+    AircraftCertRegistrationsFM,
     aircraftCertRegistration,
     oldReg
   ) {
@@ -32,11 +32,11 @@
       return $scope.newCertRegForm.$validate()
          .then(function () {
             if ($scope.newCertRegForm.$valid) {
-              return AircraftCertRegistrationFM
+              return AircraftCertRegistrationsFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
                 if (oldReg && oldReg.part) {
-                  return AircraftCertRegistrationFM
+                  return AircraftCertRegistrationsFM
                   .save({ id: $stateParams.id, ind: oldReg.partIndex }, oldReg).$promise
                   .then(function () {
                     return $state.go('root.aircrafts.view.regsFM.search');
@@ -58,7 +58,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistrationFM',
+    'AircraftCertRegistrationsFM',
     'aircraftCertRegistration',
     'oldReg'
   ];
@@ -78,10 +78,10 @@
     },
     oldReg: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
-      function ($stateParams, AircraftCertRegistrationFM) {
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
         if ($stateParams.oldInd) {
-          return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+          return AircraftCertRegistrationsFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
             .$promise;
         }
         else {

@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AircraftNewCtrl($scope, $state, Aircraft, aircraft, selectedAircraft) {
+  function AircraftNewCtrl($scope, $state, Aircrafts, aircraft, selectedAircraft) {
     $scope.aircraft = aircraft;
 
     $scope.save = function () {
       return $scope.newAircraftForm.$validate()
       .then(function () {
         if ($scope.newAircraftForm.$valid) {
-          return Aircraft.save($scope.aircraft).$promise
+          return Aircrafts.save($scope.aircraft).$promise
             .then(function (aircraft) {
               selectedAircraft.push(aircraft.id);
               return $state.go('^');
@@ -24,7 +24,7 @@
 
   }
 
-  AircraftNewCtrl.$inject = ['$scope', '$state', 'Aircraft', 'aircraft', 'selectedAircraft'];
+  AircraftNewCtrl.$inject = ['$scope', '$state', 'Aircrafts', 'aircraft', 'selectedAircraft'];
 
   AircraftNewCtrl.$resolve = {
     aircraft: function () {

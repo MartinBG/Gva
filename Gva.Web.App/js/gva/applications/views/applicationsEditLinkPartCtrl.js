@@ -17,11 +17,11 @@
     PersonDocumentApplications,
     OrganizationDocumentOthers,
     OrganizationDocumentApplications,
-    AircraftDocumentOther,
-    AircraftDocumentOccurrence,
-    AircraftDocumentDebtFM,
-    AircraftDocumentOwner,
-    AircraftDocumentApplication,
+    AircraftDocumentOthers,
+    AircraftDocumentOccurrences,
+    AircraftDocumentDebtsFM,
+    AircraftDocumentOwners,
+    AircraftDocumentApplications,
     AirportDocumentOwners,
     AirportDocumentOthers,
     AirportDocumentApplications,
@@ -144,35 +144,35 @@
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOwner') {
-          return AircraftDocumentOwner.query({ id: $scope.application.lotId })
+          return AircraftDocumentOwners.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOwners) {
               $scope.documentPart = aircraftDocumentOwners;
               $scope.showADocumentOwner = !!aircraftDocumentOwners;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftDebtFM') {
-          return AircraftDocumentDebtFM.query({ id: $scope.application.lotId })
+          return AircraftDocumentDebtsFM.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentDebtFMs) {
               $scope.documentPart = aircraftDocumentDebtFMs;
               $scope.showADocumentDebtFM = !!aircraftDocumentDebtFMs;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOccurrence') {
-          return AircraftDocumentOccurrence.query({ id: $scope.application.lotId })
+          return AircraftDocumentOccurrences.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOccurrences) {
               $scope.documentPart = aircraftDocumentOccurrences;
               $scope.showADocumentOccurrence = !!aircraftDocumentOccurrences;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftApplication') {
-          return AircraftDocumentApplication.query({ id: $scope.application.lotId })
+          return AircraftDocumentApplications.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentApplications) {
               $scope.documentPart = aircraftDocumentApplications;
               $scope.showADocumentApplication = !!aircraftDocumentApplications;
             });
         }
         else if ($scope.docPartType.alias === 'aircraftOther') {
-          return AircraftDocumentOther.query({ id: $scope.application.lotId })
+          return AircraftDocumentOthers.query({ id: $scope.application.lotId })
             .$promise.then(function (aircraftDocumentOthers) {
               $scope.documentPart = aircraftDocumentOthers;
               $scope.showADocumentOther = !!aircraftDocumentOthers;
@@ -260,11 +260,11 @@
     'PersonDocumentApplications',
     'OrganizationDocumentOthers',
     'OrganizationDocumentApplications',
-    'AircraftDocumentOther',
-    'AircraftDocumentOccurrence',
-    'AircraftDocumentDebtFM',
-    'AircraftDocumentOwner',
-    'AircraftDocumentApplication',
+    'AircraftDocumentOthers',
+    'AircraftDocumentOccurrences',
+    'AircraftDocumentDebtsFM',
+    'AircraftDocumentOwners',
+    'AircraftDocumentApplications',
     'AirportDocumentOwners',
     'AirportDocumentOthers',
     'AirportDocumentApplications',

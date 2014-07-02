@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertNoise,
+    AircraftCertNoises,
     noises
   ) {
     $scope.noises = noises;
@@ -27,16 +27,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertNoise',
+    'AircraftCertNoises',
     'noises'
   ];
 
   CertNoisesSearchCtrl.$resolve = {
     noises: [
       '$stateParams',
-      'AircraftCertNoise',
-      function ($stateParams, AircraftCertNoise) {
-        return AircraftCertNoise.query($stateParams).$promise;
+      'AircraftCertNoises',
+      function ($stateParams, AircraftCertNoises) {
+        return AircraftCertNoises.query($stateParams).$promise;
       }
     ]
   };

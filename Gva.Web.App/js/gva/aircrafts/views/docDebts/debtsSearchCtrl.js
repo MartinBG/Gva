@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentDebt,
+    AircraftDocumentDebts,
     debts
   ) {
     $scope.debts = debts;
@@ -27,16 +27,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentDebt',
+    'AircraftDocumentDebts',
     'debts'
   ];
 
   DocDebtsSearchCtrl.$resolve = {
     debts: [
       '$stateParams',
-      'AircraftDocumentDebt',
-      function ($stateParams, AircraftDocumentDebt) {
-        return AircraftDocumentDebt.query($stateParams).$promise;
+      'AircraftDocumentDebts',
+      function ($stateParams, AircraftDocumentDebts) {
+        return AircraftDocumentDebts.query($stateParams).$promise;
       }
     ]
   };

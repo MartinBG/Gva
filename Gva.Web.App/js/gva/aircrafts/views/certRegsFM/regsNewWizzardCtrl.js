@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Aircraft,
+    Aircrafts,
     oldReg,
     actNumber,
     register
@@ -41,7 +41,7 @@
 
             switch ($scope.currentStep) {
               case $scope.steps.chooseRegMark:
-                return Aircraft.checkRegMark({
+                return Aircrafts.checkRegMark({
                   lotId: $stateParams.id,
                   regMark: $scope.model.regMark
                 }).$promise.then(function (result) {
@@ -78,7 +78,7 @@
     };
 
     $scope.getNextActNumber = function () {
-      return Aircraft.getNextActNumber({
+      return Aircrafts.getNextActNumber({
         registerId: $scope.model.register.nomValueId
       }).$promise.then(function (result) {
         if (!$scope.reregMode) {
@@ -96,10 +96,10 @@
   CertRegsFMNewWizzardCtrl.$resolve = {
     oldReg: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
-      function ($stateParams, AircraftCertRegistrationFM) {
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
         if ($stateParams.oldInd) {
-          return AircraftCertRegistrationFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
+          return AircraftCertRegistrationsFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
             .$promise;
         }
         else {
@@ -108,9 +108,9 @@
       }
     ],
     actNumber: [
-      'Aircraft',
-      function (Aircraft) {
-        return Aircraft.getNextActNumber({
+      'Aircrafts',
+      function (Aircrafts) {
+        return Aircrafts.getNextActNumber({
           registerId: 9008224
         }).$promise
         .then(function (result) {
@@ -133,7 +133,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Aircraft',
+    'Aircrafts',
     'oldReg',
     'actNumber',
     'register'

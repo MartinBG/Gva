@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentApplication,
+    AircraftDocumentApplications,
     aircraftDocumentApplications
   ) {
     $scope.aircraftDocumentApplications = aircraftDocumentApplications;
@@ -27,16 +27,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentApplication',
+    'AircraftDocumentApplications',
     'aircraftDocumentApplications'
   ];
 
   AircraftApplicationsSearchCtrl.$resolve = {
     aircraftDocumentApplications: [
       '$stateParams',
-      'AircraftDocumentApplication',
-      function ($stateParams, AircraftDocumentApplication) {
-        return AircraftDocumentApplication.query($stateParams).$promise;
+      'AircraftDocumentApplications',
+      function ($stateParams, AircraftDocumentApplications) {
+        return AircraftDocumentApplications.query($stateParams).$promise;
       }
     ]
   };

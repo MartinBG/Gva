@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentOwner,
     documentOwners
   ) {
     $scope.documentOwners = documentOwners;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentOwner',
     'documentOwners'
   ];
 
   DocumentOwnersSearchCtrl.$resolve = {
     documentOwners: [
       '$stateParams',
-      'AircraftDocumentOwner',
-      function ($stateParams, AircraftDocumentOwner) {
-        return AircraftDocumentOwner.query($stateParams).$promise;
+      'AircraftDocumentOwners',
+      function ($stateParams, AircraftDocumentOwners) {
+        return AircraftDocumentOwners.query($stateParams).$promise;
       }
     ]
   };

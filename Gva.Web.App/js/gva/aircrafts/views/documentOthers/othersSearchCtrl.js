@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentOther,
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
@@ -28,16 +27,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentOther',
     'documentOthers'
   ];
 
   AircraftOthersSearchCtrl.$resolve = {
     documentOthers: [
       '$stateParams',
-      'AircraftDocumentOther',
-      function ($stateParams, AircraftDocumentOther) {
-        return AircraftDocumentOther.query($stateParams).$promise;
+      'AircraftDocumentOthers',
+      function ($stateParams, AircraftDocumentOthers) {
+        return AircraftDocumentOthers.query($stateParams).$promise;
       }
     ]
   };

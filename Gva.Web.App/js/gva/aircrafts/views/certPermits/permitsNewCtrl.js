@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertPermitToFly,
+    AircraftCertPermitsToFly,
     aircraftCertPermitToFly
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertPermitForm.$validate()
          .then(function () {
             if ($scope.newCertPermitForm.$valid) {
-              return AircraftCertPermitToFly
+              return AircraftCertPermitsToFly
               .save({ id: $stateParams.id }, $scope.permit).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.permits.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertPermitToFly',
+    'AircraftCertPermitsToFly',
     'aircraftCertPermitToFly'
   ];
   CertPermitsToFlyNewCtrl.$resolve = {

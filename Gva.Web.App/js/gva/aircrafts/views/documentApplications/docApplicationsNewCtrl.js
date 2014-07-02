@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentApplication,
+    AircraftDocumentApplications,
     aircraftDocumentApplication
   ) {
 
@@ -16,7 +16,7 @@
       return $scope.newDocumentApplicationForm.$validate()
         .then(function () {
           if ($scope.newDocumentApplicationForm.$valid) {
-            return AircraftDocumentApplication
+            return AircraftDocumentApplications
               .save({ id: $stateParams.id }, $scope.aircraftDocumentApplication)
               .$promise
               .then(function () {
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentApplication',
+    'AircraftDocumentApplications',
     'aircraftDocumentApplication'
   ];
   AircraftApplicationsNewCtrl.$resolve = {

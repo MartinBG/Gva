@@ -2,14 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function AircraftsApexNewCtrl($scope, $state, AircraftApex, aircraft) {
+  function AircraftsApexNewCtrl($scope, $state, AircraftsApex, aircraft) {
     $scope.aircraft = aircraft;
 
     $scope.save = function () {
       return $scope.newAircraftForm.$validate()
       .then(function () {
         if ($scope.newAircraftForm.$valid) {
-          return AircraftApex.save($scope.aircraft).$promise
+          return AircraftsApex.save($scope.aircraft).$promise
             .then(function () {
               return $state.go('root.aircrafts.search');
             });
@@ -22,7 +22,7 @@
     };
   }
 
-  AircraftsApexNewCtrl.$inject = ['$scope', '$state', 'AircraftApex', 'aircraft'];
+  AircraftsApexNewCtrl.$inject = ['$scope', '$state', 'AircraftsApex', 'aircraft'];
 
   AircraftsApexNewCtrl.$resolve = {
     aircraft: function () {

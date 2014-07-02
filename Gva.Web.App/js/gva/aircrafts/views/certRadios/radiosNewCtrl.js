@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRadio,
+    AircraftCertRadios,
     aircraftCertRadio
   ) {
     $scope.isEdit = false;
@@ -17,7 +17,7 @@
       return $scope.newCertRadioForm.$validate()
          .then(function () {
             if ($scope.newCertRadioForm.$valid) {
-              return AircraftCertRadio
+              return AircraftCertRadios
               .save({ id: $stateParams.id }, $scope.radio).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.radios.search');
@@ -35,7 +35,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRadio',
+    'AircraftCertRadios',
     'aircraftCertRadio'
   ];
   CertRadiosNewCtrl.$resolve = {

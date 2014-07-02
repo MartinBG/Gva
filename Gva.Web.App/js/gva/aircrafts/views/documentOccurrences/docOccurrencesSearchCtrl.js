@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftDocumentOccurrence,
     aircraftDocumentOccurrences) {
 
     $scope.aircraftDocumentOccurrences = aircraftDocumentOccurrences;
@@ -32,16 +31,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftDocumentOccurrence',
     'aircraftDocumentOccurrences'
   ];
 
   DocOccurrencesSearchCtrl.$resolve = {
     aircraftDocumentOccurrences: [
       '$stateParams',
-      'AircraftDocumentOccurrence',
-      function ($stateParams, AircraftDocumentOccurrence) {
-        return AircraftDocumentOccurrence.query($stateParams).$promise;
+      'AircraftDocumentOccurrences',
+      function ($stateParams, AircraftDocumentOccurrences) {
+        return AircraftDocumentOccurrences.query($stateParams).$promise;
       }
     ]
   };

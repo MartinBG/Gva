@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    Aircraft,
     aircraft,
     application
   ) {
@@ -29,7 +28,6 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Aircraft',
     'aircraft',
     'application'
   ];
@@ -37,17 +35,17 @@
   AircraftsViewCtrl.$resolve = {
     aircraft: [
       '$stateParams',
-      'Aircraft',
-      function ($stateParams, Aircraft) {
-        return Aircraft.get({ id: $stateParams.id }).$promise;
+      'Aircrafts',
+      function ($stateParams, Aircrafts) {
+        return Aircrafts.get({ id: $stateParams.id }).$promise;
       }
     ],
     application: [
       '$stateParams',
-      'AircraftApplication',
-      function ResolveApplication($stateParams, AircraftApplication) {
+      'AircraftApplications',
+      function ResolveApplication($stateParams, AircraftApplications) {
         if (!!$stateParams.appId) {
-          return AircraftApplication.get($stateParams).$promise
+          return AircraftApplications.get($stateParams).$promise
             .then(function (result) {
               if (result.applicationId) {
                 return result;

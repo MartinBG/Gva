@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function AircraftsNewCtrl($scope, $state, Aircraft, aircraft) {
+  function AircraftsNewCtrl($scope, $state, Aircrafts, aircraft) {
     $scope.aircraft = aircraft;
 
     if ($state.payload) {
@@ -22,7 +22,7 @@
       return $scope.newAircraftForm.$validate()
       .then(function () {
         if ($scope.newAircraftForm.$valid) {
-          return Aircraft.save($scope.aircraft).$promise
+          return Aircrafts.save($scope.aircraft).$promise
             .then(function (aircraft) {
               return $state.go('root.aircrafts.view.regsFM.newWizzard', {
                 id: aircraft.id
@@ -38,7 +38,7 @@
 
   }
 
-  AircraftsNewCtrl.$inject = ['$scope', '$state', 'Aircraft', 'aircraft'];
+  AircraftsNewCtrl.$inject = ['$scope', '$state', 'Aircrafts', 'aircraft'];
 
   AircraftsNewCtrl.$resolve = {
     aircraft: function () {

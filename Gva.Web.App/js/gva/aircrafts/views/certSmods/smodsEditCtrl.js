@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertSmod,
+    AircraftCertSmods,
     aircraftCertSmod
   ) {
     var originalSmod = _.cloneDeep(aircraftCertSmod);
@@ -28,7 +28,7 @@
       return $scope.editCertSmodForm.$validate()
       .then(function () {
         if ($scope.editCertSmodForm.$valid) {
-          return AircraftCertSmod
+          return AircraftCertSmods
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.smod)
             .$promise
             .then(function () {
@@ -39,7 +39,7 @@
     };
 
     $scope.deleteSmod = function () {
-      return AircraftCertSmod.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
+      return AircraftCertSmods.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
         .$promise.then(function () {
           return $state.go('root.aircrafts.view.smods.search');
         });
@@ -50,16 +50,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertSmod',
+    'AircraftCertSmods',
     'aircraftCertSmod'
   ];
 
   CertSmodsEditCtrl.$resolve = {
     aircraftCertSmod: [
       '$stateParams',
-      'AircraftCertSmod',
-      function ($stateParams, AircraftCertSmod) {
-        return AircraftCertSmod.get({
+      'AircraftCertSmods',
+      function ($stateParams, AircraftCertSmods) {
+        return AircraftCertSmods.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;

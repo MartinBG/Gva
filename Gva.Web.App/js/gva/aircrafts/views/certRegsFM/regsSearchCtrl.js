@@ -6,7 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    AircraftCertRegistrationFM,
     regs
   ) {
     $scope.regs = regs.sort(function(a, b) {
@@ -34,16 +33,15 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AircraftCertRegistrationFM',
     'regs'
   ];
 
   CertRegsFMSearchCtrl.$resolve = {
     regs: [
       '$stateParams',
-      'AircraftCertRegistrationFM',
-      function ($stateParams, AircraftCertRegistrationFM) {
-        return AircraftCertRegistrationFM.query($stateParams).$promise;
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
+        return AircraftCertRegistrationsFM.query($stateParams).$promise;
       }
     ]
   };
