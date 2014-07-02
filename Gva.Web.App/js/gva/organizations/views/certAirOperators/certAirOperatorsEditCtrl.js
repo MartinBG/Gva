@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    CertAirOperator,
+    CertAirOperators,
     certificate
   ) {
     var originalCertificate = _.cloneDeep(certificate);
@@ -31,7 +31,7 @@
       return $scope.certAirOperatorForm.$validate()
         .then(function () {
           if ($scope.certAirOperatorForm.$valid) {
-            return CertAirOperator
+            return CertAirOperators
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.certificate)
               .$promise
               .then(function () {
@@ -42,7 +42,7 @@
     };
 
     $scope.deleteCertAirOperator = function () {
-      return CertAirOperator.remove({ id: $stateParams.id, ind: certificate.partIndex })
+      return CertAirOperators.remove({ id: $stateParams.id, ind: certificate.partIndex })
         .$promise.then(function () {
           return $state.go('root.organizations.view.certAirOperators.search');
         });
@@ -53,16 +53,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'CertAirOperator',
+    'CertAirOperators',
     'certificate'
   ];
 
   CertAirOperatorsEditCtrl.$resolve = {
     certificate: [
       '$stateParams',
-      'CertAirOperator',
-      function ($stateParams, CertAirOperator) {
-        return CertAirOperator.get({
+      'CertAirOperators',
+      function ($stateParams, CertAirOperators) {
+        return CertAirOperators.get({
           id: $stateParams.id,
           ind: $stateParams.ind
         }).$promise;
