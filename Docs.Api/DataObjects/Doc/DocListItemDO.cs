@@ -39,9 +39,9 @@ namespace Docs.Api.DataObjects
                     this.DocDirectionName = d.DocDirection.Name;
                 }
 
-                if (d.DocUsers != null && unitUser != null)
+                if (d.DocHasReads != null && d.DocHasReads.Any())
                 {
-                    this.IsRead = d.DocUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
+                    this.IsRead = d.DocHasReads.Any(e => e.HasRead);
                 }
 
                 if (d.DocSourceType != null)
@@ -50,23 +50,6 @@ namespace Docs.Api.DataObjects
                 }
             }
         }
-
-        public void SetIsRead(List<DocHasRead> docHasReads, UnitUser unitUser = null)
-        {
-            if (docHasReads != null && unitUser != null)
-            {
-                this.IsRead = docHasReads.Any(e => e.UnitId == unitUser.UnitId && e.HasRead);
-            }
-        }
-
-        //? is it going to be used somewhere to set docusers?
-        //public void SetDocUsers(List<DocUser> docUsers, UnitUser unitUser = null)
-        //{
-        //    if (docUsers != null && unitUser != null)
-        //    {
-        //        this.IsRead = docUsers.Any(e => e.UnitId == unitUser.UnitId && e.HasRead && e.IsActive);
-        //    }
-        //}
 
         public int? DocId { get; set; }
         public DateTime? RegDate { get; set; }

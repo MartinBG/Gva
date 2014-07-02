@@ -5,11 +5,6 @@ namespace Docs.Api.Models
 {
     public partial class DocUnitPermission
     {
-        public DocUnitPermission()
-        {
-            this.DocUsers = new List<DocUser>();
-        }
-
         public int DocUnitPermissionId { get; set; }
 
         public string Name { get; set; }
@@ -19,8 +14,6 @@ namespace Docs.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
-
-        public virtual ICollection<DocUser> DocUsers { get; set; }
     }
 
     public class DocUnitPermissionMap : EntityTypeConfiguration<DocUnitPermission>

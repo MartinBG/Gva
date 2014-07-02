@@ -158,7 +158,8 @@ namespace Mosv.Rio.IncomingDocProcessor
 
                     this.unitOfWork.Save();
 
-                    this.docRepository.spSetDocUsers(initialDoc.DocId);
+                    this.docRepository.ExecSpSetDocTokens(docId: initialDoc.DocId);
+                    this.docRepository.ExecSpSetDocUnitTokens(docId: initialDoc.DocId);
 
                     Guid fileKey = WriteToBlob(Utf8Utils.GetBytes(incomingDocFile.DocFileContent));
 
@@ -216,7 +217,8 @@ namespace Mosv.Rio.IncomingDocProcessor
 
                     this.unitOfWork.Save();
 
-                    this.docRepository.spSetDocUsers(receiptDoc.DocId);
+                    this.docRepository.ExecSpSetDocTokens(docId: receiptDoc.DocId);
+                    this.docRepository.ExecSpSetDocUnitTokens(docId: receiptDoc.DocId);
 
                     Guid receiptFileKey = CreateReceiptDocFileContent(initialDoc, receiptDoc, rootDoc, discrepancies, applicationDataDo, serviceProviderDo);
 

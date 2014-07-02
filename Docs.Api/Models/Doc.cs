@@ -23,8 +23,8 @@ namespace Docs.Api.Models
             this.DocRelations1 = new List<DocRelation>();
             this.DocRelations2 = new List<DocRelation>();
             this.DocUnits = new List<DocUnit>();
-            this.DocUsers = new List<DocUser>();
             this.DocWorkflows = new List<DocWorkflow>();
+            this.vwDocUsers = new List<vwDocUser>();
         }
 
         public int DocId { get; set; }
@@ -135,9 +135,9 @@ namespace Docs.Api.Models
 
         public virtual ICollection<DocUnit> DocUnits { get; set; }
 
-        public virtual ICollection<DocUser> DocUsers { get; set; }
-
         public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
+
+        public virtual ICollection<vwDocUser> vwDocUsers { get; set; }
 
         #region DocCorrespondents
 
@@ -287,7 +287,7 @@ namespace Docs.Api.Models
 
         #region DocClassifications
 
-        public DocClassification CreateDocClassification(int classificationId, UserContext userContext)
+        public DocClassification CreateDocClassification(int classificationId, bool isInherited, UserContext userContext)
         {
             DateTime currentDate = DateTime.Now;
 
@@ -299,6 +299,7 @@ namespace Docs.Api.Models
                 ClassificationByUserId = userContext.UserId,
                 ClassificationDate = currentDate,
                 ClassificationId = classificationId,
+                IsInherited = isInherited,
                 IsActive = true
             };
 
@@ -307,9 +308,9 @@ namespace Docs.Api.Models
             return docClassification;
         }
 
-        public DocClassification CreateDocClassification(Classification classification, UserContext userContext)
+        public DocClassification CreateDocClassification(Classification classification, bool isInherited, UserContext userContext)
         {
-            return this.CreateDocClassification(classification.ClassificationId, userContext);
+            return this.CreateDocClassification(classification.ClassificationId, isInherited, userContext);
         }
 
         public void DisableDocClassification(DocClassification docClassification, UserContext userContext)
@@ -996,6 +997,7 @@ namespace Docs.Api.Models
             DocRelation parentDocRelation,
             int? docCasePartTypeId,
             List<DocTypeClassification> docTypeClassifications,
+            List<DocClassification> parentDocClassifications,
             ElectronicServiceStage electronicServiceStage,
             List<DocTypeUnitRole> docTypeUnitRoles,
             DocUnitRole importedBy,
@@ -1024,12 +1026,19 @@ namespace Docs.Api.Models
                 this.CreateDocCasePartMovement(docCasePartTypeId.Value, userContext);
             }
 
-            //? parent/child classifications inheritance
             if (docTypeClassifications != null)
             {
                 foreach (var item in docTypeClassifications)
                 {
-                    this.CreateDocClassification(item.ClassificationId, userContext);
+                    this.CreateDocClassification(item.ClassificationId, item.IsInherited, userContext);
+                }
+            }
+
+            if (parentDocClassifications != null)
+            {
+                foreach (var item in parentDocClassifications)
+                {
+                    this.CreateDocClassification(item.ClassificationId, item.IsInherited, userContext);
                 }
             }
 

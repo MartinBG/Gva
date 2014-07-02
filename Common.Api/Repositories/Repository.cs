@@ -31,6 +31,11 @@ namespace Common.Api.Repositories
             return this.FindInStore(keyValues, includes);
         }
 
+        public virtual void ExecuteSqlCommand(string sql, List<SqlParameter> parameters)
+        {
+            this.unitOfWork.DbContext.Database.ExecuteSqlCommand(sql, parameters.ToArray());
+        }
+
         public DbRawSqlQuery<TSpEntity> ExecProcedure<TSpEntity>(string procedureName, List<SqlParameter> parameters)
         {
             StringBuilder sb = new StringBuilder(procedureName + " ");

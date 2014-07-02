@@ -12,6 +12,8 @@ namespace Docs.Api.Models
 
         public int ClassificationId { get; set; }
 
+        public bool IsInherited { get; set; }
+
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
@@ -43,6 +45,7 @@ namespace Docs.Api.Models
             this.Property(t => t.DocTypeId).HasColumnName("DocTypeId");
             this.Property(t => t.DocDirectionId).HasColumnName("DocDirectionId");
             this.Property(t => t.ClassificationId).HasColumnName("ClassificationId");
+            this.Property(t => t.IsInherited).HasColumnName("IsInherited");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.Version).HasColumnName("Version");
 

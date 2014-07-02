@@ -61,4 +61,7 @@ from DocTypes dt
 	and isNull(ElectronicServiceProvider , '') <> ''
 GO
 
+exec spSetUnitTokens null
+go
+
 

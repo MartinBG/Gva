@@ -9,6 +9,7 @@ CREATE TABLE DocClassifications
 	ClassificationByUserId	INT			NOT NULL,
 	ClassificationDate		datetime	NOT NULL,
 	IsActive				BIT         NOT NULL,
+	IsInherited				BIT			NOT NULL DEFAULT(1),
     Version					ROWVERSION  NOT NULL,
     CONSTRAINT PK_DocClassifications PRIMARY KEY CLUSTERED (DocClassificationId),
 	CONSTRAINT [FK_DocClassifications_Docs] FOREIGN KEY ([DocId]) REFERENCES [dbo].[Docs] ([DocId]),

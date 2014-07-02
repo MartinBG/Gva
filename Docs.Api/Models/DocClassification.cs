@@ -14,6 +14,8 @@ namespace Docs.Api.Models
 
         public System.DateTime ClassificationDate { get; set; }
 
+        public bool IsInherited { get; set; }
+
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
@@ -44,6 +46,7 @@ namespace Docs.Api.Models
             this.Property(t => t.ClassificationId).HasColumnName("ClassificationId");
             this.Property(t => t.ClassificationByUserId).HasColumnName("ClassificationByUserId");
             this.Property(t => t.ClassificationDate).HasColumnName("ClassificationDate");
+            this.Property(t => t.IsInherited).HasColumnName("IsInherited");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.Version).HasColumnName("Version");
 

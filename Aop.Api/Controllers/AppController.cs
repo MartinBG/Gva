@@ -360,17 +360,12 @@ namespace Aop.Api.Controllers
                       unitUser,
                       out totalCount);
 
+            List<int> loadedDocIds = docs.Select(e => e.DocId).ToList();
+
+            var docHasReads = this.unitOfWork.DbContext.Set<DocHasRead>()
+                .Where(e => e.UnitId == unitUser.UnitId && loadedDocIds.Contains(e.DocId)).ToList();
+
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
-
-            List<int> loadedDocIds = returnValue.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
-
-            List<DocHasRead> docHasReadsForList = this.unitOfWork.DbContext.Set<DocHasRead>()
-                .Where(du => du.UnitId == unitUser.UnitId && loadedDocIds.Contains(du.DocId))
-               .ToList();
-
-            List<DocUser> docUsersForList = this.unitOfWork.DbContext.Set<DocUser>()
-               .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
-               .ToList();
 
             //? hot fix: load fist 1000 docs, so the paging with datatable will work
             //? gonna fail miserably with more docs
@@ -382,8 +377,6 @@ namespace Aop.Api.Controllers
                     .ToList();
 
                 item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
-
-                item.SetIsRead(docHasReadsForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
             }
 
             //? hot fix: load fist 1000 docs, so the paging with datatable will work

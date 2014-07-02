@@ -307,17 +307,12 @@ namespace Docs.Api.Controllers
                     break;
             };
 
+            List<int> loadedDocIds = docs.Select(e => e.DocId).ToList();
+
+            var docHasReads = this.unitOfWork.DbContext.Set<DocHasRead>()
+                .Where(e => e.UnitId == unitUser.UnitId && loadedDocIds.Contains(e.DocId)).ToList();
+
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
-
-            List<int> loadedDocIds = returnValue.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
-
-            List<DocHasRead> docHasReadsForList = this.unitOfWork.DbContext.Set<DocHasRead>()
-                .Where(du => du.UnitId == unitUser.UnitId && loadedDocIds.Contains(du.DocId))
-               .ToList();
-
-            List<DocUser> docUsersForList = this.unitOfWork.DbContext.Set<DocUser>()
-               .Where(du => du.UnitId == unitUser.UnitId && du.IsActive && loadedDocIds.Contains(du.DocId))
-               .ToList();
 
             //? hot fix: load fist 1000 docs, so the paging with datatable will work
             //? gonna fail miserably with more docs
@@ -356,8 +351,6 @@ namespace Docs.Api.Controllers
 
                     item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
                 }
-
-                item.SetIsRead(docHasReadsForList.Where(e => e.DocId == item.DocId).ToList(), unitUser);
             }
 
             StringBuilder sb = new StringBuilder();
@@ -424,6 +417,7 @@ namespace Docs.Api.Controllers
 
             List<Doc> docs = new List<Doc>();
             List<int> docRelations = this.docRepository.fnGetSubordinateDocs(id);
+
             docs = this.docRepository.GetDocsForChange(
                       fromDate,
                       toDate,
@@ -460,6 +454,8 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult ChangeDocParent(int id, int newDocId)
         {
+            throw new NotImplementedException();
+
             //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -493,6 +489,8 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateNewCase(int id)
         {
+            throw new NotImplementedException();
+
             //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -567,10 +565,6 @@ namespace Docs.Api.Controllers
                             .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
                     }
 
-                    List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                        .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                        .ToList();
-
                     List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
                         .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                         .ToList();
@@ -578,10 +572,31 @@ namespace Docs.Api.Controllers
                     DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
                         .SingleOrDefault(e => e.Alias == "ImportedBy");
 
+                    List<DocTypeClassification> docTypeClassifications = null;
+                    List<DocClassification> parentDocClassifications = null;
+
+                    if (parentDocRelation == null)
+                    {
+                        docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && 
+                                e.DocTypeId == newDoc.DocTypeId &&
+                                e.IsActive)
+                            .ToList();
+                    }
+                    else
+                    {
+                        parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                            .Where(e => e.DocId == parentDocRelation.DocId &&
+                                e.IsActive &&
+                                e.IsInherited)
+                            .ToList();
+                    }
+
                     newDoc.CreateDocProperties(
                         parentDocRelation,
                         preDoc.DocCasePartTypeId,
                         docTypeClassifications,
+                        parentDocClassifications,
                         electronicServiceStage,
                         docTypeUnitRoles,
                         importedBy,
@@ -634,7 +649,8 @@ namespace Docs.Api.Controllers
 
                     this.unitOfWork.Save();
 
-                    this.docRepository.spSetDocUsers(newDoc.DocId);
+                    this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                    this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                     if (preDoc.Register)
                     {
@@ -723,10 +739,6 @@ namespace Docs.Api.Controllers
                 DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                     .FirstOrDefault(e => e.DocId == id);
 
-                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
                 List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
                     .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
                     .ToList();
@@ -734,10 +746,31 @@ namespace Docs.Api.Controllers
                 DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
                         .SingleOrDefault(e => e.Alias == "ImportedBy");
 
+                List<DocTypeClassification> docTypeClassifications = null;
+                List<DocClassification> parentDocClassifications = null;
+
+                if (parentDocRelation == null)
+                {
+                    docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                        .Where(e => e.DocDirectionId == newDoc.DocDirectionId &&
+                            e.DocTypeId == newDoc.DocTypeId &&
+                            e.IsActive)
+                        .ToList();
+                }
+                else
+                {
+                    parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                        .Where(e => e.DocId == parentDocRelation.DocId &&
+                            e.IsActive &&
+                            e.IsInherited)
+                        .ToList();
+                }
+
                 newDoc.CreateDocProperties(
                        parentDocRelation,
                        internalDocCasePartType.DocCasePartTypeId,
                        docTypeClassifications,
+                       parentDocClassifications,
                        null,
                        docTypeUnitRoles,
                        importedBy,
@@ -748,7 +781,8 @@ namespace Docs.Api.Controllers
 
                 this.unitOfWork.Save();
 
-                this.docRepository.spSetDocUsers(newDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                 transaction.Commit();
 
@@ -774,12 +808,12 @@ namespace Docs.Api.Controllers
                 .Include(e => e.Unit)
                 .FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
-            List<DocUser> docUsers = this.docRepository.GetActiveDocUsersForDocByUnitId(id, unitUser);
+            List<vwDocUser> vwDocUsers = this.docRepository.GetvwDocUsersForDocByUnitId(id, unitUser);
 
             DocUnitPermission readPermission = this.unitOfWork.DbContext.Set<DocUnitPermission>()
                 .SingleOrDefault(e => e.Alias == "Read");
 
-            if (!docUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
+            if (!vwDocUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
             {
                 return BadRequest();
             }
@@ -959,19 +993,19 @@ namespace Docs.Api.Controllers
 
             #region Set permissions
 
-            returnValue.CanRead = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Read");
-            returnValue.CanEdit = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Edit");
-            returnValue.CanRegister = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Register");
-            returnValue.CanManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Management");
-            returnValue.CanESign = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "ESign");
-            returnValue.CanFinish = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Finish");
-            returnValue.CanReverse = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Reverse");
+            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Read");
+            returnValue.CanEdit = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Edit");
+            returnValue.CanRegister = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Register");
+            returnValue.CanManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Management");
+            returnValue.CanESign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "ESign");
+            returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Finish");
+            returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Reverse");
 
-            returnValue.CanSubstituteManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "SubstituteManagement");
-            returnValue.CanDeleteManagement = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DeleteManagement");
-            returnValue.CanEditTechElectronicServiceStage = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTech");
-            returnValue.CanEditTech = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTechElectronicServiceStage");
-            returnValue.CanChangeDocCasePart = docUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DocCasePartManagement");
+            returnValue.CanSubstituteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "SubstituteManagement");
+            returnValue.CanDeleteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DeleteManagement");
+            returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTech");
+            returnValue.CanEditTech = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTechElectronicServiceStage");
+            returnValue.CanChangeDocCasePart = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DocCasePartManagement");
 
             #endregion
 
@@ -1254,7 +1288,9 @@ namespace Docs.Api.Controllers
                 #endregion
 
                 this.unitOfWork.Save();
-                this.docRepository.spSetDocUsers(oldDoc.DocId);
+
+                this.docRepository.ExecSpSetDocTokens(docId: oldDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: oldDoc.DocId);
 
                 transaction.Commit();
 
@@ -1280,7 +1316,8 @@ namespace Docs.Api.Controllers
 
                 this.unitOfWork.Save();
 
-                this.docRepository.spSetDocUsers(doc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: doc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: doc.DocId);
 
                 transaction.Commit();
 
@@ -1375,7 +1412,8 @@ namespace Docs.Api.Controllers
 
                 this.unitOfWork.Save();
 
-                this.docRepository.spSetDocUsers(oldDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: oldDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: oldDoc.DocId);
 
                 transaction.Commit();
 
@@ -1453,7 +1491,6 @@ namespace Docs.Api.Controllers
                 });
             }
         }
-
 
         /// <summary>
         /// Управление на документ

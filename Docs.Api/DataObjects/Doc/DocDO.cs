@@ -30,9 +30,6 @@ namespace Docs.Api.DataObjects
             this.DocCorrespondents = new List<NomDo>();
             this.DocWorkflows = new List<DocWorkflowDO>();
             this.DocElectronicServiceStages = new List<DocElectronicServiceStageDO>();
-            this.DocUsers = new List<DocUserDO>();
-
-            //this.DocLinks = new List<DocLinkDO>();
         }
 
         public DocDO(Doc d, UnitUser unitUser = null)
@@ -209,7 +206,6 @@ namespace Docs.Api.DataObjects
         public List<NomDo> DocCorrespondents { get; set; }
         public List<DocWorkflowDO> DocWorkflows { get; set; }
         public List<DocElectronicServiceStageDO> DocElectronicServiceStages { get; set; }
-        public List<DocUserDO> DocUsers { get; set; }
 
         public DocRelationDO ParentDocRelation
         {

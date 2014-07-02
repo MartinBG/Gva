@@ -27,12 +27,29 @@ namespace Docs.Api.Repositories.DocRepository
         {
         }
 
-        public string spSetDocUsers(int id)
+        public void spSetUnitTokens(int? unitId = null)
         {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("DocId", id));
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("UnitId", Helper.CastToSqlDbValue(unitId)));
 
-            return this.ExecProcedure<string>("spSetDocUsers", parameters).FirstOrDefault();
+            this.ExecuteSqlCommand("spSetUnitTokens @UnitId", parameters);
+        }
+
+        public void ExecSpSetDocTokens(int? docId = null)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("DocId", Helper.CastToSqlDbValue(docId)));
+
+            this.ExecuteSqlCommand("spSetDocTokens @DocId", parameters);
+        }
+
+        public void ExecSpSetDocUnitTokens(int? docId = null, bool allCase = false)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("DocId", Helper.CastToSqlDbValue(docId)));
+            parameters.Add(new SqlParameter("AllCase", Helper.CastToSqlDbValue(allCase)));
+
+            this.ExecuteSqlCommand("spSetDocUnitTokens @DocId, @AllCase", parameters);
         }
 
         public List<int> fnGetSubordinateDocs(int id)
@@ -235,7 +252,7 @@ namespace Docs.Api.Repositories.DocRepository
                     }
                     break;
                 case "Draft":
-                
+
                 default:
                     throw new Exception("Unreachable next doc status");
             };
@@ -530,16 +547,11 @@ namespace Docs.Api.Repositories.DocRepository
             return currentRelation.RootDocId.Value;
         }
 
-        public List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser)
+        public List<vwDocUser> GetvwDocUsersForDocByUnitId(int docId, UnitUser unitUser)
         {
-            return this.unitOfWork.DbContext.Set<DocRelation>()
-                .Join(this.unitOfWork.DbContext.Set<DocRelation>(), dr => dr.RootDocId, dr2 => dr2.RootDocId, (dr, dr2) => new { OrgDocId = dr.DocId, DocId = dr2.DocId })
-                .Join(this.unitOfWork.DbContext.Set<DocUser>(), dr => dr.DocId, du => du.DocId, (dr, du) => new { OrgDocId = dr.OrgDocId, DocUser = du })
-                .Where(e => e.DocUser.UnitId == unitUser.UnitId && e.DocUser.IsActive && e.OrgDocId == docId)
-                .Join(this.unitOfWork.DbContext.Set<Doc>(), du => du.OrgDocId, d => d.DocId, (du, d) => du.DocUser)
-                .Include(du => du.DocUnitPermission)
-                .Where(e => e.IsActive)
-                .Distinct()
+            return this.unitOfWork.DbContext.Set<vwDocUser>()
+                .Include(e => e.DocUnitPermission)
+                .Where(e => e.UnitId == unitUser.UnitId && e.DocId == docId)
                 .ToList();
         }
 
@@ -833,21 +845,14 @@ namespace Docs.Api.Repositories.DocRepository
                 units,
                 ds);
 
-            //? optimize
-            IQueryable<Doc> query = this.unitOfWork.DbContext.Set<DocRelation>()
-                .Join(this.unitOfWork.DbContext.Set<DocRelation>(), dr => dr.RootDocId, dr2 => dr2.RootDocId, (dr, dr2) => new { OrgDocId = dr.DocId, DocId = dr2.DocId })
-                .Join(this.unitOfWork.DbContext.Set<DocUser>(), dr => dr.DocId, du => du.DocId, (dr, du) => new { OrgDocId = dr.OrgDocId, DocUser = du })
-                .Where(du => du.DocUser.UnitId == unitUser.UnitId && du.DocUser.IsActive && du.DocUser.DocUnitPermissionId == docUnitPermissionRead.DocUnitPermissionId)
-                .Join(this.unitOfWork.DbContext.Set<Doc>(), du => du.OrgDocId, d => d.DocId, (du, d) => d)
-                .Distinct()
-                .AsQueryable();
-
             if (hideRead.HasValue && hideRead.Value)
             {
-                query = query.Where(d => !d.DocUsers.Any(du => du.UnitId == unitUser.UnitId && du.HasRead));
+                predicate = predicate.And(e => !e.DocHasReads.Any(d => d.UnitId == unitUser.UnitId && d.HasRead));
             }
 
-            query = query
+            predicate = predicate.And(e => e.vwDocUsers.Any(v => v.DocUnitPermissionId == docUnitPermissionRead.DocUnitPermissionId && v.UnitId == unitUser.UnitId));
+
+            var query = this.unitOfWork.DbContext.Set<Doc>()
                 .Where(predicate)
                 .OrderByDescending(e => e.RegDate)
                 .Take(10000);

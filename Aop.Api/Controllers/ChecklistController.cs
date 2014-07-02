@@ -241,10 +241,6 @@ namespace Aop.Api.Controllers
                         .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
                 }
 
-                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
                 List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
 
                 List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
@@ -287,11 +283,18 @@ namespace Aop.Api.Controllers
                     newDoc.AssignmentDate = DateTime.Now;
                 }
 
+                List<DocClassification> parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                        .Where(e => e.DocId == parentDocRelation.DocId &&
+                            e.IsActive &&
+                            e.IsInherited)
+                        .ToList();
+
                 newDoc.CreateDocProperties(
                     parentDocRelation,
                     null,
-                    docTypeClassifications,
-                    electronicServiceStage,
+                    null,
+                    parentDocClassifications,
+                    electronicServiceStage, //? should there be a stage
                     docTypeUnitRoles,
                     importedBy,
                     unitUser,
@@ -386,7 +389,8 @@ namespace Aop.Api.Controllers
                     app.NDChecklistId = newDoc.DocId;
                 }
 
-                this.docRepository.spSetDocUsers(newDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                 this.unitOfWork.Save();
 
@@ -456,10 +460,6 @@ namespace Aop.Api.Controllers
                         .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
                 }
 
-                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
                 List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
 
                 List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
@@ -476,11 +476,18 @@ namespace Aop.Api.Controllers
 
                 DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
 
+                List<DocClassification> parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                        .Where(e => e.DocId == parentDocRelation.DocId &&
+                            e.IsActive &&
+                            e.IsInherited)
+                        .ToList();
+
                 newDoc.CreateDocProperties(
                     parentDocRelation,
                     null,
-                    docTypeClassifications,
-                    electronicServiceStage,
+                    null,
+                    parentDocClassifications,
+                    electronicServiceStage, //? should there be a stage
                     docTypeUnitRoles,
                     importedBy,
                     unitUser,
@@ -568,7 +575,8 @@ namespace Aop.Api.Controllers
 
                 app.STNoteId = newDoc.DocId;
 
-                this.docRepository.spSetDocUsers(newDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                 this.unitOfWork.Save();
 
@@ -638,10 +646,6 @@ namespace Aop.Api.Controllers
                         .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
                 }
 
-                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
                 List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>().ToList();
 
                 List<DocTypeUnitRole> docTypeUnitRoles = new List<DocTypeUnitRole>();
@@ -658,10 +662,17 @@ namespace Aop.Api.Controllers
 
                 DocUnitRole importedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
 
+                List<DocClassification> parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                       .Where(e => e.DocId == parentDocRelation.DocId &&
+                           e.IsActive &&
+                           e.IsInherited)
+                       .ToList();
+
                 newDoc.CreateDocProperties(
                     parentDocRelation,
                     null,
-                    docTypeClassifications,
+                    null,
+                    parentDocClassifications,
                     electronicServiceStage,
                     docTypeUnitRoles,
                     importedBy,
@@ -750,7 +761,8 @@ namespace Aop.Api.Controllers
 
                 app.NDReportId = newDoc.DocId;
 
-                this.docRepository.spSetDocUsers(newDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                 this.unitOfWork.Save();
 

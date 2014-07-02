@@ -7,6 +7,9 @@ namespace Docs.Api.Models
     {
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new AdministrativeEmailMap());
+            modelBuilder.Configurations.Add(new AdministrativeEmailStatusMap());
+            modelBuilder.Configurations.Add(new AdministrativeEmailTypeMap());
             modelBuilder.Configurations.Add(new ClassificationRelationMap());
             modelBuilder.Configurations.Add(new ClassificationRoleMap());
             modelBuilder.Configurations.Add(new ClassificationMap());
@@ -36,6 +39,7 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocMap());
             modelBuilder.Configurations.Add(new DocSourceTypeMap());
             modelBuilder.Configurations.Add(new DocStatusMap());
+            modelBuilder.Configurations.Add(new DocTokenMap());
             modelBuilder.Configurations.Add(new DocTypeClassificationMap());
             modelBuilder.Configurations.Add(new DocTypeGroupMap());
             modelBuilder.Configurations.Add(new DocTypeMap());
@@ -43,7 +47,6 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocUnitPermissionMap());
             modelBuilder.Configurations.Add(new DocUnitRoleMap());
             modelBuilder.Configurations.Add(new DocUnitMap());
-            modelBuilder.Configurations.Add(new DocUserMap());
             modelBuilder.Configurations.Add(new DocWorkflowActionMap());
             modelBuilder.Configurations.Add(new DocWorkflowMap());
             modelBuilder.Configurations.Add(new ElectronicServiceStageExecutorMap());
@@ -57,11 +60,10 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new UnitClassificationMap());
             modelBuilder.Configurations.Add(new UnitRelationMap());
             modelBuilder.Configurations.Add(new UnitMap());
+            modelBuilder.Configurations.Add(new UnitTokenMap());
             modelBuilder.Configurations.Add(new UnitTypeMap());
             modelBuilder.Configurations.Add(new UnitUserMap());
-            modelBuilder.Configurations.Add(new AdministrativeEmailMap());
-            modelBuilder.Configurations.Add(new AdministrativeEmailStatusMap());
-            modelBuilder.Configurations.Add(new AdministrativeEmailTypeMap());
+            modelBuilder.Configurations.Add(new vwDocUserMap());
         }
     }
 }

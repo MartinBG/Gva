@@ -484,6 +484,7 @@ namespace Gva.Api.Controllers
                         null,
                         internalDocCasePartType.DocCasePartTypeId,
                         docTypeClassifications,
+                        null,
                         electronicServiceStage,
                         docTypeUnitRoles,
                         importedBy,
@@ -496,7 +497,8 @@ namespace Gva.Api.Controllers
 
                 this.unitOfWork.Save();
 
-                this.docRepository.spSetDocUsers(newDoc.DocId);
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
                 this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
 

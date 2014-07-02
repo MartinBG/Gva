@@ -14,7 +14,11 @@ namespace Docs.Api.Repositories.DocRepository
 {
     public interface IDocRepository : IRepository<Doc>
     {
-        string spSetDocUsers(int id);
+        void spSetUnitTokens(int? unitId = null);
+
+        void ExecSpSetDocTokens(int? docId = null);
+
+        void ExecSpSetDocUnitTokens(int? docId = null, bool allCase = false);
 
         List<int> fnGetSubordinateDocs(int id);
 
@@ -65,7 +69,7 @@ namespace Docs.Api.Repositories.DocRepository
 
         int GetCaseId(int id);
 
-        List<DocUser> GetActiveDocUsersForDocByUnitId(int docId, UnitUser unitUser);
+        List<vwDocUser> GetvwDocUsersForDocByUnitId(int docId, UnitUser unitUser);
 
         string RegisterDoc(
             Doc doc,

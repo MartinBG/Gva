@@ -12,6 +12,6 @@ BEGIN
 	SET NOCOUNT ON
     update Units Set IsActive = 0 where UnitId in (select UnitID from dbo.fnGetSubordinateUnits(@UnitId))
 
-    exec spSetUserDocs @UnitId
+    --exec spSetUserDocs @UnitId
 END
 GO

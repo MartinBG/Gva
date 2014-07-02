@@ -66,7 +66,7 @@ GO
 :r $(rootPath)"\Tables\Documents\DocTypeUnitRoles.sql"
 :r $(rootPath)"\Tables\Documents\DocTypeClassifications.sql"
 :r $(rootPath)"\Tables\Documents\DocUnitPermissions.sql"
-:r $(rootPath)"\Tables\Documents\DocUsers.sql"
+--:r $(rootPath)"\Tables\Documents\DocUsers.sql"
 :r $(rootPath)"\Tables\Documents\DocHasReads.sql"
 
 :r $(rootPath)"\Tables\Documents\DocCasePartMovements.sql"
@@ -92,6 +92,10 @@ GO
 :r $(rootPath)"\Tables\AdministrativeEmails\AdministrativeEmailTypes.sql"
 :r $(rootPath)"\Tables\AdministrativeEmails\AdministrativeEmails.sql"
 
+--Tokens
+:r $(rootPath)"\Tables\Tokens\UnitTokens.sql"
+:r $(rootPath)"\Tables\Tokens\DocTokens.sql"
+
 ---------------------------------------------------------------
 -- Functions
 ---------------------------------------------------------------
@@ -112,12 +116,14 @@ GO
 :r $(rootPath)"\Procedures\spGetDocRegisterNextNumber.sql"
 :r $(rootPath)"\Procedures\spDeleteNotRegisteredDoc.sql"
 
---Classifications SP
-:r $(rootPath)"\Procedures\Classifications\spSetDocUsers.sql"
-:r $(rootPath)"\Procedures\Classifications\spSetUserDocs.sql"
-:r $(rootPath)"\Procedures\Classifications\spSetAllDocsUsers.sql"
+--Classifications
 :r $(rootPath)"\Procedures\Classifications\spGetUnitClassifications.sql"
 :r $(rootPath)"\Procedures\Classifications\spSetDeactiveUnit.sql"
+
+--Tokens
+:r $(rootPath)"\Procedures\Tokens\spSetUnitTokens.sql"
+:r $(rootPath)"\Procedures\Tokens\spSetDocTokens.sql"
+:r $(rootPath)"\Procedures\Tokens\spSetDocUnitTokens.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -131,7 +137,7 @@ GO
 ---------------------------------------------------------------
 -- Views
 ---------------------------------------------------------------
-:r $(rootPath)"\Views\vwDocs.sql"
+:r $(rootPath)"\Views\vwDocUsers.sql"
 
 
 ---------------------------------------------------------------

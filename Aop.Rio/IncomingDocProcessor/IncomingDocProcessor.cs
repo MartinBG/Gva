@@ -157,7 +157,8 @@ namespace Aop.Rio.IncomingDocProcessor
 
                     this.unitOfWork.Save();
 
-                    this.docRepository.spSetDocUsers(initialDoc.DocId);
+                    this.docRepository.ExecSpSetDocTokens(docId: initialDoc.DocId);
+                    this.docRepository.ExecSpSetDocUnitTokens(docId: initialDoc.DocId);
 
                     Guid fileKey = WriteToBlob(Utf8Utils.GetBytes(incomingDocFile.DocFileContent));
 

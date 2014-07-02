@@ -10,14 +10,11 @@ namespace Docs.Api.Models
             this.DocHasReads = new List<DocHasRead>();
             this.DocTypeUnitRoles = new List<DocTypeUnitRole>();
             this.DocUnits = new List<DocUnit>();
-            this.DocUsers = new List<DocUser>();
             this.DocWorkflows = new List<DocWorkflow>();
             this.DocWorkflows1 = new List<DocWorkflow>();
             this.ElectronicServiceStageExecutors = new List<ElectronicServiceStageExecutor>();
             this.UnitClassifications = new List<UnitClassification>();
             this.UnitRelations = new List<UnitRelation>();
-            //this.UnitRelations1 = new List<UnitRelation>();
-            //this.UnitRelations2 = new List<UnitRelation>();
             this.UnitUsers = new List<UnitUser>();
         }
 
@@ -39,8 +36,6 @@ namespace Docs.Api.Models
 
         public virtual ICollection<DocUnit> DocUnits { get; set; }
 
-        public virtual ICollection<DocUser> DocUsers { get; set; }
-
         public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
 
         public virtual ICollection<DocWorkflow> DocWorkflows1 { get; set; }
@@ -50,10 +45,6 @@ namespace Docs.Api.Models
         public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
 
         public virtual ICollection<UnitRelation> UnitRelations { get; set; }
-
-        //public virtual ICollection<UnitRelation> UnitRelations1 { get; set; }
-
-        //public virtual ICollection<UnitRelation> UnitRelations2 { get; set; }
 
         public virtual ICollection<UnitUser> UnitUsers { get; set; }
 
