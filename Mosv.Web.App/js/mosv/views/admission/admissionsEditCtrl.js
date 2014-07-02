@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    AdmissionData,
+    AdmissionsData,
     admission
   ) {
     var originalAdmission = _.cloneDeep(admission);
@@ -26,7 +26,7 @@
       return $scope.editAdmissionForm.$validate()
         .then(function () {
           if ($scope.editAdmissionForm.$valid) {
-            return AdmissionData
+            return AdmissionsData
               .save({ id: $stateParams.id }, $scope.admission )
               .$promise
               .then(function () {
@@ -41,16 +41,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'AdmissionData',
+    'AdmissionsData',
     'admission'
   ];
 
   AdmissionsEditCtrl.$resolve = {
     admission: [
       '$stateParams',
-      'AdmissionData',
-      function ($stateParams, AdmissionData) {
-        return AdmissionData.get({
+      'AdmissionsData',
+      function ($stateParams, AdmissionsData) {
+        return AdmissionsData.get({
           id: $stateParams.id
         }).$promise;
       }

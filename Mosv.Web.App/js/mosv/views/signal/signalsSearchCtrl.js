@@ -50,9 +50,9 @@
   SignalsSearchCtrl.$resolve = {
     signals: [
       '$stateParams',
-      'Signal',
-      function ($stateParams, Signal) {
-        return Signal.query($stateParams).$promise;
+      'Signals',
+      function ($stateParams, Signals) {
+        return Signals.query($stateParams).$promise;
       }
     ]
   };

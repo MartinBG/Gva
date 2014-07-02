@@ -51,9 +51,9 @@
   SuggestionsSearchCtrl.$resolve = {
     suggestions: [
       '$stateParams',
-      'Suggestion',
-      function ($stateParams, Suggestion) {
-        return Suggestion.query($stateParams).$promise;
+      'Suggestions',
+      function ($stateParams, Suggestions) {
+        return Suggestions.query($stateParams).$promise;
       }
     ]
   };

@@ -35,8 +35,8 @@
       return $state.go('root.admissions.new');
     };
 
-    $scope.viewAdmission = function (Admission) {
-      return $state.go('root.admissions.edit', { id: Admission.id });
+    $scope.viewAdmission = function (admission) {
+      return $state.go('root.admissions.edit', { id: admission.id });
     };
   }
 
@@ -50,9 +50,9 @@
   AdmissionsSearchCtrl.$resolve = {
     admissions: [
       '$stateParams',
-      'Admission',
-      function ($stateParams, Admission) {
-        return Admission.query($stateParams).$promise;
+      'Admissions',
+      function ($stateParams, Admissions) {
+        return Admissions.query($stateParams).$promise;
       }
     ]
   };

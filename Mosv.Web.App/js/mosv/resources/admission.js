@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('mosv').factory('Admission', ['$resource', function($resource) {
+  angular.module('mosv').factory('Admissions', ['$resource', function($resource) {
     return $resource('/api/admissions/:id');
   }]);
 }(angular));

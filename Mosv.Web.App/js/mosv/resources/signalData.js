@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('mosv').factory('SignalData', ['$resource', function ($resource) {
+  angular.module('mosv').factory('SignalsData', ['$resource', function ($resource) {
     return $resource('/api/signals/:id/signalData');
   }]);
 }(angular));

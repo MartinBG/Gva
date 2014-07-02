@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    SignalData,
+    SignalsData,
     signalData
   ) {
     var originalSignalData = _.cloneDeep(signalData);
@@ -27,7 +27,7 @@
       return $scope.editSignalForm.$validate()
         .then(function () {
           if ($scope.editSignalForm.$valid) {
-            return SignalData
+            return SignalsData
               .save({ id: $stateParams.id }, $scope.signalData)
               .$promise
               .then(function () {
@@ -42,16 +42,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'SignalData',
+    'SignalsData',
     'signalData'
   ];
 
   SignalsEditCtrl.$resolve = {
     signalData: [
       '$stateParams',
-      'SignalData',
-      function ($stateParams, SignalData) {
-        return SignalData.get({ id: $stateParams.id }).$promise;
+      'SignalsData',
+      function ($stateParams, SignalsData) {
+        return SignalsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

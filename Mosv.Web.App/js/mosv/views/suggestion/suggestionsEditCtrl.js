@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    SuggestionData,
+    SuggestionsData,
     suggestion
   ) {
     var originalSuggestion = _.cloneDeep(suggestion);
@@ -27,7 +27,7 @@
       return $scope.editSuggestionDataForm.$validate()
         .then(function () {
           if ($scope.editSuggestionDataForm.$valid) {
-            return SuggestionData
+            return SuggestionsData
               .save({ id: $stateParams.id }, $scope.suggestion)
               .$promise
               .then(function () {
@@ -46,16 +46,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'SuggestionData',
+    'SuggestionsData',
     'suggestion'
   ];
 
   SuggestionEditCtrl.$resolve = {
     suggestion: [
       '$stateParams',
-      'SuggestionData',
-      function ($stateParams, SuggestionData) {
-        return SuggestionData.get({ id: $stateParams.id }).$promise;
+      'SuggestionsData',
+      function ($stateParams, SuggestionsData) {
+        return SuggestionsData.get({ id: $stateParams.id }).$promise;
       }
     ]
   };
