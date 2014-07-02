@@ -10,7 +10,7 @@
       <ng-form name="appForm" sc-validate="{}">
         <div class="well-sm panel-body">
           <div ng-if="filter === 'Person'">
-            <gva-common-select-person name="personForm" ng-model="appModel" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()"></gva-common-select-person>
+            <gva-common-select-person name="personForm" ng-model="appModel" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()" sc-data-new-class="'col-sm-10'"></gva-common-select-person>
           </div>
           <div ng-if="filter === 'Organization'">
             <gva-application-select-organization name="organizationForm" ng-model="appModel" sc-on-select-organization="selectOrganization()" sc-on-new-organization="newOrganization()"></gva-application-select-organization>
