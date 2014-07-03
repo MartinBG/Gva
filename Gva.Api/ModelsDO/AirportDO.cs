@@ -11,6 +11,7 @@ namespace Gva.Api.ModelsDO
         {
             this.Id = airportData.LotId;
             this.Name = airportData.Name;
+            this.NameAlt = airportData.NameAlt;
             this.AirportType = airportData.AirportType;
             this.Place = airportData.Place;
             this.ICAO = airportData.ICAO;
@@ -22,6 +23,8 @@ namespace Gva.Api.ModelsDO
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string NameAlt { get; set; }
 
         public string Place { get; set; }
 
