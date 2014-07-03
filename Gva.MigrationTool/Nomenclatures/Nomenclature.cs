@@ -1024,7 +1024,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffAlias =
+                                staffTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1073,7 +1073,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffAlias =
+                                staffTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1218,8 +1218,12 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,
-                        ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).NomValueId(),
-                        TextContentString = null
+                        ParentValueId = null,
+                        TextContentString = JsonConvert.SerializeObject(
+                            new
+                            {
+                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias
+                            })
                     })
                 .ToList();
 
@@ -1302,10 +1306,11 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,
-                        ParentValueId = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()).NomValueId(),
+                        ParentValueId = null,
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
+                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias,
                                 ratingClassGroupId = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("CLASS_GROUP_ID").ToString()).NomValueId()
                             })
                     })
@@ -1380,13 +1385,6 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateLicenceTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("licenceTypes");
-            var aliases = new Dictionary<string, string>()
-            {
-                { "1", "flightCrew" },
-                { "2", "ovd"},
-                { "4", "to_vs"},
-                { "5", "to_suvd"}
-            };
 
             var templateNames = new Dictionary<string, string>()
             {
@@ -1436,7 +1434,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
                                 qlfCode = r.Field<string>("QLF_CODE"),
                                 templateName = templateNames[r.Field<object>("PRT_PRINTABLE_DOCUMENT_ID").ToString()],
-                                staffTypeAlias = aliases[r.Field<object>("STAFF_TYPE_ID").ToString()]
+                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
                             })
                     })
                 .ToList();

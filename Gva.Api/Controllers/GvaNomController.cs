@@ -438,8 +438,8 @@ namespace Gva.Api.Controllers
 
                         if (isMatch && staffAliases != null && staffAliases.Length > 0)
                         {
-                            string staffAliasStr = nv.TextContent.Get<string>("staffAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
+                            string staffTypeAliasStr = nv.TextContent.Get<string>("staffTypeAlias");
+                            isMatch &= string.IsNullOrWhiteSpace(staffTypeAliasStr) || staffAliases.Contains(staffTypeAliasStr);
                         }
 
                         return isMatch;
@@ -520,8 +520,8 @@ namespace Gva.Api.Controllers
 
                         if (isMatch && staffAliases != null && staffAliases.Length > 0)
                         {
-                            string staffAliasStr = nv.TextContent.Get<string>("staffAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(staffAliasStr) || staffAliases.Contains(staffAliasStr);
+                            string staffTypeAliasStr = nv.TextContent.Get<string>("staffTypeAlias");
+                            isMatch &= string.IsNullOrWhiteSpace(staffTypeAliasStr) || staffAliases.Contains(staffTypeAliasStr);
                         }
 
                         return isMatch;
