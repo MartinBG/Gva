@@ -274,7 +274,7 @@ namespace OMR
         /// <param name="width">The width to resize to.</param>
         /// <param name="height">The height to resize to.</param>
         /// <returns>The resized image.</returns>
-        public Bitmap ResizeImage(Bitmap image, int width, int height)
+        public static Bitmap ResizeImage(Bitmap image, int width, int height)
         {
             Bitmap result = new Bitmap(width, height);
             // set the resolutions the same to avoid cropping due to resolution differences
