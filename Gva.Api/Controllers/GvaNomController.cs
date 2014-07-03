@@ -81,7 +81,11 @@ namespace Gva.Api.Controllers
                 .Select(i => new
                 {
                     nomValueId = i.Part.Index,
-                    name = i.Content.Get<string>("documentNumber")
+                    name = string.Format(
+                        "№ {0} / {1} - {2}",
+                        i.Content.Get<string>("documentNumber"),
+                        i.Content.Get<string>("auditPart.name"),
+                        i.Content.Get<string>("auditReason.name"))
                 });
 
             return Ok(audits);

@@ -9,6 +9,6 @@
   </sc-column>
   <sc-column data="part.validToDate" title="organizations.certAirCarrierSearch.validToDate"  type="date">
   </sc-column>
-  <sc-column data="part.services" title="organizations.certAirCarrierSearch.aircarrierServices">
+  <sc-column data="(part.aircarrierServices| pluck:'name' | join:', </br>')" title="organizations.certAirCarrierSearch.aircarrierServices">
   </sc-column>
 </sc-datatable>
