@@ -29,8 +29,8 @@
       <sc-field type="text" ng-model="model.sector" l10n-text="persons.personDocumentTrainingDirective.sector" class="col-sm-6 col-md-5"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.ratingClass" ng-disabled="model.ratingType" alias="'ratingClasses'" params="{ grandParentValueId: model.staffType.nomValueId }" l10n-text="persons.personDocumentTrainingDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.authorization" alias="'authorizations'" params="{ grandParentValueId: model.staffType.nomValueId }" l10n-text="persons.personDocumentTrainingDirective.authorization" class="col-sm-6 col-md-5"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.ratingClass" ng-disabled="model.ratingType" alias="'ratingClasses'" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personDocumentTrainingDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personDocumentTrainingDirective.authorization" class="col-sm-6 col-md-5"></sc-field>
     </div>
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, staffAliases: [model.staffType.alias] }" l10n-text="persons.personDocumentTrainingDirective.personOtherDocumentType"

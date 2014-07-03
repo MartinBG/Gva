@@ -48,13 +48,12 @@ namespace Common.Api.Repositories.NomRepository
                 .ToList();
         }
 
-        public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
+        public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null)
         {
             var predicate =
                 PredicateBuilder.True<NomValue>()
                 .And(nv => nv.Nom.Alias == alias)
                 .AndEquals(nv => nv.ParentValueId.Value, parentValueId)
-                .AndEquals(nv => nv.ParentValue.ParentValueId.Value, grandParentValueId)
                 .AndStringContains(nv => nv.Name, term);
 
             return this.unitOfWork.DbContext.Set<NomValue>()
@@ -68,6 +67,34 @@ namespace Common.Api.Repositories.NomRepository
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
                 .Where(nv => nv.Nom.Alias == alias)
+                .ToList();
+        }
+
+        public IEnumerable<NomValue> GetNomValues(
+            string alias,
+            string parentAlias,
+            string prop,
+            string propValue,
+            string term = null,
+            int offset = 0,
+            int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<NomValue>();
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                predicate = predicate.AndStringContains(nv => nv.Name, term);
+            }
+
+            return this.unitOfWork.DbContext.GetNomValuesByTextContentProperty(parentAlias, prop, propValue)
+                .Join(
+                    this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == alias),
+                    (p) => p.NomValueId,
+                    (c) => c.ParentValueId,
+                    (p, c) => c)
+                .Where(predicate)
+                .OrderBy(nv => nv.Name)
+                .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
     }

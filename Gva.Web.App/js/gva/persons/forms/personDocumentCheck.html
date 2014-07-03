@@ -38,8 +38,8 @@
       <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="persons.personCheckDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.ratingClass" alias="'ratingClasses'" ng-disabled="model.ratingType" params="{ grandParentValueId: model.staffType.nomValueId }" l10n-text="persons.personCheckDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.authorization" alias="'authorizations'" params="{ grandParentValueId: model.staffType.nomValueId }" l10n-text="persons.personCheckDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.ratingClass" alias="'ratingClasses'" ng-disabled="model.ratingType" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personCheckDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personCheckDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
     </div>
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.personCheckRatingValue" alias="'personCheckRatingValues'" l10n-text="persons.personCheckDirective.personCheckRatingValue" class="col-sm-3 col-md-2"></sc-field>

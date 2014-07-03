@@ -27,7 +27,7 @@ namespace Common.Api.Controllers
             return Ok(this.nomRepository.GetNomValue(alias, valueAlias));
         }
 
-        public IHttpActionResult GetNoms(string alias, [FromUri] int[] ids, [FromUri] string[] valueAliases, string term = null, int? parentValueId = null, int? grandParentValueId = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetNoms(string alias, [FromUri] int[] ids, [FromUri] string[] valueAliases, string term = null, int? parentValueId = null, int offset = 0, int? limit = null)
         {
             if (ids != null && ids.Length > 0)
             {
@@ -39,7 +39,7 @@ namespace Common.Api.Controllers
             }
             else
             {
-                return Ok(this.nomRepository.GetNomValues(alias, term, parentValueId, grandParentValueId, offset, limit));
+                return Ok(this.nomRepository.GetNomValues(alias, term, parentValueId, offset, limit));
             }
         }
     }
