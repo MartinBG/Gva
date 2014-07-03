@@ -169,8 +169,14 @@
     };
 
     $scope.addExistingLicence = function () {
+      var hideLicences = _.clone($scope.model.includedLicences);
+
+      if ($stateParams.ind) {
+        hideLicences.push(parseInt($stateParams.ind, 10));
+      }
+
       return $state.go('.chooseLicence', {}, {}, {
-        selectedLicences: $scope.model.includedLicences
+        selectedLicences: hideLicences
       });
     };
 
