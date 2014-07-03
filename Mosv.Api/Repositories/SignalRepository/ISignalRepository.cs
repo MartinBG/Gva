@@ -16,5 +16,7 @@ namespace Mosv.Api.Repositories.SignalRepository
             bool exact = false,
             int offset = 0,
             int? limit = null);
+
+        MosvViewSignal GetSignal(int singalId);
     }
 }

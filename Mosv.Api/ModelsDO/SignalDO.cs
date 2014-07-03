@@ -8,6 +8,7 @@ namespace Mosv.Api.ModelsDO
         public SignalDO(MosvViewSignal signal)
         {
             this.Id = signal.LotId;
+            this.ApplicationDocId = signal.ApplicationDocId;
             this.IncomingLot = signal.IncomingLot;
             this.IncomingNumber = signal.IncomingNumber;
             this.IncomingDate = signal.IncomingDate;
@@ -17,6 +18,8 @@ namespace Mosv.Api.ModelsDO
         }
 
         public int Id { get; set; }
+
+        public int? ApplicationDocId { get; set; }
 
         public string IncomingNumber { get; set; }
 
@@ -29,5 +32,7 @@ namespace Mosv.Api.ModelsDO
         public string Institution { get; set; }
 
         public string Violation { get; set; }
+
+        public Docs.Api.DataObjects.DocRelationDO ApplicationDocRelation { get; set; }
     }
 }

@@ -76,6 +76,8 @@
     <Content Include="js\mosv\views\admission\admissionsNewCtrl.js" />
     <Content Include="js\mosv\views\admission\admissionsSearch.html" />
     <Content Include="js\mosv\views\admission\admissionsSearchCtrl.js" />
+    <Content Include="js\mosv\views\docSelect.html" />
+    <Content Include="js\mosv\views\docSelectCtrl.js" />
     <Content Include="js\mosv\views\signal\signalsEdit.html" />
     <Content Include="js\mosv\views\signal\signalsEditCtrl.js" />
     <Content Include="js\mosv\views\signal\signalsNew.html" />

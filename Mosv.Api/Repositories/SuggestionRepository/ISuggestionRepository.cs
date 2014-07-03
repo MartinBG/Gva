@@ -15,5 +15,7 @@ namespace Mosv.Api.Repositories.SuggestionRepository
             bool exact = false,
             int offset = 0,
             int? limit = null);
+
+        MosvViewSuggestion GetSuggestion(int suggestionId);
     }
 }

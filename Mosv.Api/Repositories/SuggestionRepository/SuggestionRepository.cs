@@ -39,5 +39,11 @@ namespace Mosv.Api.Repositories.SuggestionRepository
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
+
+        public MosvViewSuggestion GetSuggestion(int suggestionId)
+        {
+            return this.unitOfWork.DbContext.Set<MosvViewSuggestion>()
+                .SingleOrDefault(p => p.LotId == suggestionId);
+        }
     }
 }

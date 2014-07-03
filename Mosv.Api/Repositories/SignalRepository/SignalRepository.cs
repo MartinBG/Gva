@@ -42,5 +42,11 @@ namespace Mosv.Api.Repositories.SignalRepository
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
+
+        public MosvViewSignal GetSignal(int singalId)
+        {
+            return this.unitOfWork.DbContext.Set<MosvViewSignal>()
+                .SingleOrDefault(p => p.LotId == singalId);
+        }
     }
 }

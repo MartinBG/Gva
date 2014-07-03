@@ -3,6 +3,7 @@ GO
 
 CREATE TABLE [dbo].[MosvViewSignals] (
     [LotId]                        INT          NOT NULL,
+	[ApplicationDocId]			   INT			NULL,
     [IncomingLot]                  NVARCHAR(50) NULL,
     [IncomingNumber]               NVARCHAR(50) NULL,
     [IncomingDate]                 DATETIME2    NULL,
@@ -10,7 +11,8 @@ CREATE TABLE [dbo].[MosvViewSignals] (
     [Institution]                  NVARCHAR(50) NULL,
     [Violation]                    NVARCHAR(50) NULL,
     CONSTRAINT [PK_MosvViewSignals]      PRIMARY KEY ([LotId]),
-    CONSTRAINT [FK_MosvViewSignals_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
+    CONSTRAINT [FK_MosvViewSignals_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId]),
+	CONSTRAINT [FK_MosvViewSignals_Docs]  FOREIGN KEY ([ApplicationDocId]) REFERENCES [dbo].[Docs] ([DocId])
 )
 GO
 

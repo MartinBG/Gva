@@ -8,6 +8,7 @@ namespace Mosv.Api.ModelsDO
         public SuggestionDO(MosvViewSuggestion suggestion)
         {
             this.Id = suggestion.LotId;
+            this.ApplicationDocId = suggestion.ApplicationDocId;
             this.IncomingLot = suggestion.IncomingLot;
             this.IncomingNumber = suggestion.IncomingNumber;
             this.IncomingDate = suggestion.IncomingDate.HasValue ? suggestion.IncomingDate.Value.ToString("dd.MM.yyyy") : null;
@@ -16,6 +17,8 @@ namespace Mosv.Api.ModelsDO
 
         public int Id { get; set; }
 
+        public int? ApplicationDocId { get; set; }
+
         public string IncomingNumber { get; set; }
 
         public string IncomingLot { get; set; }
@@ -23,5 +26,7 @@ namespace Mosv.Api.ModelsDO
         public string Applicant { get; set; }
 
         public string IncomingDate { get; set; }
+
+        public Docs.Api.DataObjects.DocRelationDO ApplicationDocRelation { get; set; }
     }
 }

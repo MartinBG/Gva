@@ -3,13 +3,15 @@ GO
 
 CREATE TABLE [dbo].[MosvViewAdmissions] (
     [LotId]                        INT          NOT NULL,
+	[ApplicationDocId]			   INT			NULL,
     [IncomingLot]                  NVARCHAR(50) NULL,
     [IncomingNumber]               NVARCHAR(50) NULL,
     [IncomingDate]                 DATETIME2    NULL,
     [ApplicantType]                NVARCHAR(50) NULL,
     [Applicant]                    NVARCHAR(50) NULL,
     CONSTRAINT [PK_MosvViewAdmissions]      PRIMARY KEY ([LotId]),
-    CONSTRAINT [FK_MosvViewAdmissions_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId])
+    CONSTRAINT [FK_MosvViewAdmissions_Lots]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[Lots] ([LotId]),
+	CONSTRAINT [FK_MosvViewAdmissions_Docs]  FOREIGN KEY ([ApplicationDocId]) REFERENCES [dbo].[Docs] ([DocId])
 )
 GO
 

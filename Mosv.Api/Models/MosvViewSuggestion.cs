@@ -9,6 +9,8 @@ namespace Mosv.Api.Models
     {
         public int LotId { get; set; }
 
+        public int? ApplicationDocId { get; set; }
+
         public string IncomingLot { get; set; }
 
         public string IncomingNumber { get; set; }
@@ -16,6 +18,8 @@ namespace Mosv.Api.Models
         public DateTime? IncomingDate { get; set; }
 
         public string Applicant { get; set; }
+
+        public virtual Docs.Api.Models.Doc ApplicationDoc { get; set; }
 
         public virtual Lot Lot { get; set; }
     }
@@ -34,6 +38,7 @@ namespace Mosv.Api.Models
             // Table & Column Mappings
             this.ToTable("MosvViewSuggestions");
             this.Property(t => t.LotId).HasColumnName("LotId");
+            this.Property(t => t.ApplicationDocId).HasColumnName("ApplicationDocId");
             this.Property(t => t.IncomingLot).HasColumnName("IncomingLot");
             this.Property(t => t.IncomingNumber).HasColumnName("IncomingNumber");
             this.Property(t => t.IncomingDate).HasColumnName("IncomingDate");
@@ -42,6 +47,9 @@ namespace Mosv.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
+            this.HasOptional(t => t.ApplicationDoc)
+                .WithMany()
+                .HasForeignKey(t => t.ApplicationDocId);
         }
     }
 }
