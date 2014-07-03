@@ -5,6 +5,10 @@ namespace Mosv.Api.ModelsDO
 {
     public class SuggestionDO
     {
+        public SuggestionDO()
+        {
+        }
+
         public SuggestionDO(MosvViewSuggestion suggestion)
         {
             this.Id = suggestion.LotId;

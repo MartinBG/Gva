@@ -10,8 +10,8 @@
       .then(function () {
         if ($scope.newAdmissionForm.$valid) {
           return Admissions.save($scope.admission).$promise
-            .then(function () {
-              return $state.go('root.admissions.search');
+            .then(function (data) {
+              return $state.go('root.admissions.edit', { id: data.id });
             });
         }
       });

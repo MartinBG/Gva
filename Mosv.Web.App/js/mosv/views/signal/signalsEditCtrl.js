@@ -6,12 +6,15 @@
     $scope,
     $state,
     $stateParams,
+    Signals,
     SignalsData,
-    signalData
+    signalData,
+    selectDoc
   ) {
-    var originalSignalData = _.cloneDeep(signalData);
+    var originalSignalData = _.cloneDeep(signalData.partData);
 
-    $scope.signalData = signalData;
+    $scope.signalData = signalData.partData;
+    $scope.data = signalData.data;
     $scope.editMode = null;
 
     $scope.edit = function () {
@@ -36,14 +39,52 @@
           }
         });
     };
+
+    $scope.connectToDoc = function () {
+      return $state.go('root.signals.edit.docSelect');
+    };
+
+    $scope.disconnectDoc = function () {
+      $scope.data.applicationDocId = undefined;
+
+      return $scope.fastSave();
+    };
+
+    $scope.loadData = function () {
+      return Signals
+        .loadData({ id: $stateParams.id }, {})
+        .$promise
+        .then(function (data) {
+          return $state.go('root.signals.edit', { id: data.id }, { reload: true });
+        });
+    };
+
+    $scope.fastSave = function () {
+      return Signals
+        .fastSave({ id: $stateParams.id }, $scope.data)
+        .$promise
+        .then(function (data) {
+          return $state.go('root.signals.edit', { id: data.id }, { reload: true });
+        });
+    };
+
+    if (selectDoc.length > 0) {
+      var sd = selectDoc.pop();
+
+      $scope.data.applicationDocId = sd.docId;
+
+      return $scope.fastSave();
+    }
   }
 
   SignalsEditCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
+    'Signals',
     'SignalsData',
-    'signalData'
+    'signalData',
+    'selectDoc'
   ];
 
   SignalsEditCtrl.$resolve = {
@@ -53,7 +94,10 @@
       function ($stateParams, SignalsData) {
         return SignalsData.get({ id: $stateParams.id }).$promise;
       }
-    ]
+    ],
+    selectDoc: [function () {
+      return [];
+    }]
   };
 
   angular.module('mosv').controller('SignalsEditCtrl', SignalsEditCtrl);

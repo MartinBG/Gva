@@ -44,7 +44,7 @@
     });
 
     $scope.search = function () {
-      $state.go('root.admissions.edit.docSelect', {
+      $state.go($state.current, {
         csFromDate: $scope.filters.csFromDate,
         csToDate: $scope.filters.csToDate,
         csRegUri: $scope.filters.csRegUri,

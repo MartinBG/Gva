@@ -5,6 +5,10 @@ namespace Mosv.Api.ModelsDO
 {
     public class SignalDO
     {
+        public SignalDO()
+        {
+        }
+
         public SignalDO(MosvViewSignal signal)
         {
             this.Id = signal.LotId;

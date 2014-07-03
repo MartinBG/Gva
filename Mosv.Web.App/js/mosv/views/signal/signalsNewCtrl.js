@@ -10,8 +10,8 @@
       .then(function () {
         if ($scope.newSignalForm.$valid) {
           return Signals.save($scope.signal).$promise
-            .then(function () {
-              return $state.go('root.signals.search');
+            .then(function (data) {
+              return $state.go('root.signals.edit', { id: data.id });
             });
         }
       });

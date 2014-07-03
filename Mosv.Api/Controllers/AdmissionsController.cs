@@ -12,6 +12,7 @@ using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Mosv.Api.Repositories.AdmissionRepository;
+using System.Data.Entity;
 
 namespace Mosv.Api.Controllers
 {
@@ -87,7 +88,29 @@ namespace Mosv.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^admissionData$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
-            return base.GetPart(lotId, path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
+
+            var admission = this.admissionRepository.GetAdmission(lotId);
+            AdmissionDO admissionDO = new AdmissionDO(admission);
+
+            if (admissionDO.ApplicationDocId.HasValue)
+            {
+                var dr = unitOfWork.DbContext.Set<Docs.Api.Models.DocRelation>()
+                     .Include(e => e.Doc.DocCasePartType)
+                     .Include(e => e.Doc.DocCasePartMovements.Select(dc => dc.User))
+                     .Include(e => e.Doc.DocDirection)
+                     .Include(e => e.Doc.DocType)
+                     .Include(e => e.Doc.DocStatus)
+                     .FirstOrDefault(e => e.DocId == admissionDO.ApplicationDocId.Value);
+
+                admissionDO.ApplicationDocRelation = new Docs.Api.DataObjects.DocRelationDO(dr);
+            }
+
+            return Ok(new
+            {
+                data = admissionDO,
+                partData = new PartVersionDO(part)
+            });
         }
 
         [Route(@"{lotId}/{*path:regex(^admissionData$)}")]
@@ -96,6 +119,41 @@ namespace Mosv.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
 
             return base.PostPart(lotId, path, content);
+        }
+
+        [Route("{id}/fastSave")]
+        [HttpPost]
+        public IHttpActionResult FastSaveAdmission(int id, AdmissionDO data)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var admission = this.admissionRepository.GetAdmission(id);
+                admission.ApplicationDocId = data.ApplicationDocId;
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new { id = id });
+            }
+        }
+
+        [Route("{id}/loadData")]
+        [HttpPost]
+        public IHttpActionResult LoadAdmissionData(int id)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var admission = this.admissionRepository.GetAdmission(id);
+
+                //todo load and write data
+
+                //this.unitOfWork.Save();
+
+                //transaction.Commit();
+
+                return Ok(new { id = id });
+            }
         }
     }
 }

@@ -32,16 +32,19 @@
     .state(['root.signals'           , '/signals?exact&incomingLot&uin&incomingNumber&incomingDate&applicant&institution&violation'       ])
     .state(['root.signals.search'    , ''    , ['@root', 'js/mosv/views/signal/signalsSearch.html'        , 'SignalsSearchCtrl'           ]])
     .state(['root.signals.new'       , '/new', ['@root', 'js/mosv/views/signal/signalsNew.html'           , 'SignalsNewCtrl'              ]])
-    .state(['root.signals.edit'      , '/:id', ['@root', 'js/mosv/views/signal/signalsEdit.html'          , 'SignalsEditCtrl'             ]])
+    .state(['root.signals.edit', '/:id', ['@root', 'js/mosv/views/signal/signalsEdit.html', 'SignalsEditCtrl']])
+    .state(['root.signals.edit.docSelect', '/docSelect?type&csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsChosen', ['@root', 'js/mosv/views/docSelect.html', 'AppDocSelectCtrl']])
 
     .state(['root.admissions'        , '/admissions?incomingNumber&incomingLot&applicant&incomingDate&applicantType'                      ])
     .state(['root.admissions.search' , ''    , ['@root', 'js/mosv/views/admission/admissionsSearch.html'  , 'AdmissionsSearchCtrl'        ]])
     .state(['root.admissions.new'    , '/new', ['@root', 'js/mosv/views/admission/admissionsNew.html'     , 'AdmissionsNewCtrl'           ]])
-    .state(['root.admissions.edit'   , '/:id', ['@root', 'js/mosv/views/admission/admissionsEdit.html'    , 'AdmissionsEditCtrl'          ]])
+    .state(['root.admissions.edit', '/:id', ['@root', 'js/mosv/views/admission/admissionsEdit.html', 'AdmissionsEditCtrl']])
+    .state(['root.admissions.edit.docSelect', '/docSelect?type&csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsChosen', ['@root', 'js/mosv/views/docSelect.html', 'AppDocSelectCtrl']])
 
     .state(['root.suggestions'       , '/suggestions?incomingNumber&incomingLot&applicant&incomingDateFrom&incomingDate'                  ])
     .state(['root.suggestions.search', ''    , ['@root', 'js/mosv/views/suggestion/suggestionsSearch.html', 'SuggestionsSearchCtrl'       ]])
     .state(['root.suggestions.new'   , '/new', ['@root', 'js/mosv/views/suggestion/suggestionsNew.html'   , 'SuggestionsNewCtrl'          ]])
-    .state(['root.suggestions.edit'  , '/:id', ['@root', 'js/mosv/views/suggestion/suggestionsEdit.html'  , 'SuggestionEditCtrl'          ]]);
+    .state(['root.suggestions.edit', '/:id', ['@root', 'js/mosv/views/suggestion/suggestionsEdit.html', 'SuggestionEditCtrl']])
+    .state(['root.suggestions.edit.docSelect', '/docSelect?type&csFromDate&csToDate&csRegUri&csDocName&csDocTypeId&csDocStatusId&csCorrs&csUnits&csIsChosen', ['@root', 'js/mosv/views/docSelect.html', 'AppDocSelectCtrl']]);
   }]);
 }(angular));

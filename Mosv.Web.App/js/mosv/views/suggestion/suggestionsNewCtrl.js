@@ -10,8 +10,8 @@
       .then(function () {
         if ($scope.newSuggestionForm.$valid) {
           return Suggestions.save($scope.suggestion).$promise
-            .then(function () {
-              return $state.go('root.suggestions.search');
+            .then(function (data) {
+              return $state.go('root.suggestions.edit', { id: data.id });
             });
         }
       });

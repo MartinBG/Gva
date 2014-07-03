@@ -16,6 +16,22 @@
     </div>
 
     <div class="well-sm panel-body">
+
+      <div class="row">
+        <div class="form-group col-md-9">
+          <label class="control-label" l10n-text="Свързан документ:"></label>
+          <a sc-sref="{ state: 'root.docs.edit.view', params: { id: {{ data.applicationDocRelation.docId }} }}" ng-if="data.applicationDocRelation.docRelationId">
+            {{ data.applicationDocRelation.docRegUri}} {{ data.applicationDocRelation.docDocTypeName }}: {{ data.applicationDocRelation.docSubject }}
+          </a>
+        </div>
+        <div class="form-group col-md-3 pull-right" ng-if="!editMode">
+          <a sc-click="connectToDoc()" ng-if="!data.applicationDocRelation.docRelationId" style="cursor: pointer;">свържи</a>
+          <a sc-click="disconnectDoc()" ng-if="data.applicationDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>
+          <span ng-if="data.applicationDocRelation.docRelationId">&nbsp|</span>
+          <a sc-click="loadData()" ng-if="data.applicationDocRelation.docRelationId" style="cursor: pointer;">зареди данни</a>
+        </div>
+      </div>
+
       <mosv-suggestion name="suggestionDataForm" ng-model="suggestion.part" readonly="!editMode" sc-data-is-new="false"></mosv-suggestion>
     </div>
   </div>
