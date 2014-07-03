@@ -49,7 +49,7 @@ namespace Regs.Api.Models
 
             this.Property(t => t.Path)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             // Table & Column Mappings
             this.ToTable("LotParts");
