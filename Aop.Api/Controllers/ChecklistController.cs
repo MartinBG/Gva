@@ -364,7 +364,7 @@ namespace Aop.Api.Controllers
                 DocFileKind privateKind = this.unitOfWork.DbContext.Set<DocFileKind>()
                     .FirstOrDefault(e => e.Alias == "PrivateAttachedFile");
                 DocFileType unknownType = this.unitOfWork.DbContext.Set<DocFileType>()
-                    .FirstOrDefault(e => e.Alias == "UnknownBinary");
+                    .FirstOrDefault(e => e.Alias == "Checklist");
                 DocFileOriginType editableFile = this.unitOfWork.DbContext.Set<DocFileOriginType>()
                     .FirstOrDefault(e => e.Alias == "EditableFile");
 

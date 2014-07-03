@@ -477,7 +477,7 @@ namespace Aop.Rio.IncomingDocProcessor
             DocFile docFile = new DocFile();
             docFile.Doc = doc;
 
-            int docFileTypeId = docFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias.ToLower() == "UnknownBinary").DocFileTypeId;
+            int docFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.Alias.ToLower() == "UnknownBinary").DocFileTypeId;
             var fileExtension = MimeTypeHelper.GetFileExtenstionByMimeType(attachedDocument.MimeType);
             if (!String.IsNullOrWhiteSpace(fileExtension))
             {
