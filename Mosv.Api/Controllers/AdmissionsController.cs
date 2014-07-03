@@ -155,5 +155,123 @@ namespace Mosv.Api.Controllers
                 return Ok(new { id = id });
             }
         }
+
+        [Route("{id}/createLink")]
+        [HttpPost]
+        public IHttpActionResult CreateDocLotLink(int id, string lotType)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UserContext userContext = this.Request.GetUserContext();
+                JObject jObj = JObject.Parse("{}");
+
+                if (lotType == "admission")
+                {
+                    var newLot = this.lotRepository.CreateLot("Admission", userContext);
+
+                    newLot.CreatePart("admissionData", jObj, userContext);
+
+                    newLot.Commit(userContext, lotEventDispatcher);
+
+                    this.unitOfWork.Save();
+
+                    var mosvViewAdmission = this.unitOfWork.DbContext.Set<MosvViewAdmission>().Single(e => e.LotId == newLot.LotId);
+
+                    mosvViewAdmission.ApplicationDocId = id;
+
+                    this.unitOfWork.Save();
+
+                    transaction.Commit();
+
+                    return Ok(new { id = newLot.LotId });
+                }
+                else if (lotType == "signal")
+                {
+                    var newLot = this.lotRepository.CreateLot("Signal", userContext);
+
+                    newLot.CreatePart("signalData", jObj, userContext);
+
+                    newLot.Commit(userContext, lotEventDispatcher);
+
+                    this.unitOfWork.Save();
+
+                    var mosvViewSignal = this.unitOfWork.DbContext.Set<MosvViewSignal>().Single(e => e.LotId == newLot.LotId);
+
+                    mosvViewSignal.ApplicationDocId = id;
+
+                    this.unitOfWork.Save();
+
+                    transaction.Commit();
+
+                    return Ok(new { id = newLot.LotId });
+                }
+                else if (lotType == "suggestion")
+                {
+                    var newLot = this.lotRepository.CreateLot("Suggestion", userContext);
+
+                    newLot.CreatePart("suggestionData", jObj, userContext);
+
+                    newLot.Commit(userContext, lotEventDispatcher);
+
+                    this.unitOfWork.Save();
+
+                    var mosvViewSuggestion = this.unitOfWork.DbContext.Set<MosvViewSuggestion>().Single(e => e.LotId == newLot.LotId);
+
+                    mosvViewSuggestion.ApplicationDocId = id;
+
+                    this.unitOfWork.Save();
+
+                    transaction.Commit();
+
+                    return Ok(new { id = newLot.LotId });
+                }
+
+                throw new Exception("LotType is not found");
+            }
+        }
+
+        [Route("{id}/getDoc")]
+        public IHttpActionResult GetDoc(int id)
+        {
+            int? lotId = null;
+
+            var admission = this.unitOfWork.DbContext.Set<MosvViewAdmission>().FirstOrDefault(e => e.ApplicationDocId == id);
+
+            if (admission != null)
+            {
+                return Ok(new
+                {
+                    lotType = "ДОИ",
+                    lotId = admission.LotId
+                });
+            }
+
+            var signal = this.unitOfWork.DbContext.Set<MosvViewSignal>().FirstOrDefault(e => e.ApplicationDocId == id);
+
+            if (signal != null)
+            {
+                return Ok(new
+                {
+                    lotType = "Сигнал",
+                    lotId = signal.LotId
+                });
+            }
+
+            var suggestion = this.unitOfWork.DbContext.Set<MosvViewSuggestion>().FirstOrDefault(e => e.ApplicationDocId == id);
+
+            if (suggestion != null)
+            {
+                return Ok(new
+                {
+                    lotType = "Предложение",
+                    lotId = suggestion.LotId
+                });
+            }
+
+            return Ok(new
+            {
+                lotId = lotId
+            });
+        }
     }
 }

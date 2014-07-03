@@ -15,6 +15,17 @@
       'loadData': {
         method: 'POST',
         url: '/api/admissions/:id/loadData'
+      },
+      'findDocLotLink': {
+        method: 'GET',
+        url: '/api/admissions/:id/getDoc'
+      },
+      'createDocLotLink': {
+        method: 'POST',
+        url: '/api/admissions/:id/createLink',
+        params: {
+          lotType: ''
+        }
       }
     });
   }]);

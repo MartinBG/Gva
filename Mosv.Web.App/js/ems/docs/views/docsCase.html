@@ -1,4 +1,4 @@
-<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
+﻿<ems-doc-info name="docInfoForm" readonly="inEditMode" ng-model="doc" sc-on-go-to-doc="goToDoc($message)"></ems-doc-info>
 
 <br />
 
@@ -21,3 +21,15 @@
     <a ng-click="viewDoc(item.docId)" l10n-text="docs.edit.case.viewDoc" style="cursor: pointer;"></a>
   </sc-tree-column>
 </sc-treetable>
+
+<div ng-if="isLoaded">
+  <br />
+  <div ng-if="lotId">
+    Документът е включен към: <a sc-click="gotoLot()" style="cursor: pointer;">{{ lotType }}</a>
+  </div>
+  <div ng-if="!lotId && isCase">
+    <a sc-click="createAdmission()" style="cursor: pointer;">Създай ДОИ</a><br />
+    <a sc-click="createSignal()" style="cursor: pointer;">Създай сигнал</a><br />
+    <a sc-click="createSuggestion()" style="cursor: pointer;">Създай предложение</a>
+  </div>
+</div>
