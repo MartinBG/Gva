@@ -36,7 +36,7 @@ var config = {
   },
   lib: function () {
     return gulp.src([
-      'bower_components/jquery-modern/jquery.js',
+      'bower_components/jquery-legacy/jquery.js',
       'bower_components/lodash/dist/lodash.js',
       'bower_components/select2/select2.js',
       'bower_components/angular/angular.js',
