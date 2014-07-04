@@ -11,14 +11,24 @@
       scope: false,
       link: function (scope, element, attrs, formController) {
         var parentForm = _.first(_.map(element.parents('ng-form, [ng-form]'), function (formElem) {
-              return angular.element(formElem).controller('form');
-            })),
+          return angular.element(formElem).controller('form');
+        })),
             deregFunc,
             form = formController[0];
 
         scope.$watch(attrs.scFormReadonly, function (formReadonly) {
           if (formReadonly !== undefined) {
             form.$readonly = formReadonly;
+          }
+          else if (scope.readonly !== undefined) {
+            if (deregFunc) {
+              deregFunc();
+            }
+            form.$readonly = scope.readonly;
+            deregFunc = scope.$watch('readonly',
+              function (formReadonly) {
+                form.$readonly = formReadonly;
+              });
           }
           else {
             if (parentForm && _.has(parentForm, '$readonly')) {
@@ -32,7 +42,7 @@
                 },
                 function (formReadonly) {
                   form.$readonly = formReadonly;
-              });
+                });
             }
             else {
               form.$readonly = false;
