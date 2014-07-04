@@ -3,7 +3,7 @@
     <sc-field type="nomenclature" ng-model="model.aircraftCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessFMDirective.aircraftCertificateType" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field custom-type="gva-part-select" ng-model="model.registration" ng-required="true" lot-id="model.lotId" part-path="aircraftCertRegistrationsFM" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.certNumber" l10n-text="aircrafts.airworthinessFMDirective.certNumber" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
   </div>

@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.registration" ng-required="true" alias="'registrations'" params="{ parentValueId: model.lotId }" l10n-text="aircrafts.debtDirectiveFM.registration" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field custom-type="gva-part-select" ng-model="model.registration" ng-required="true" lot-id="model.lotId" part-path="aircraftCertRegistrationsFM" l10n-text="aircrafts.debtDirectiveFM.registration" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.regDate" l10n-text="aircrafts.debtDirectiveFM.regDate" class="col-md-2 col-sm-4"></sc-field>

@@ -370,9 +370,11 @@
     <Content Include="js\gva\common\forms\commonScannedDocumentCtrl.js" />
     <Content Include="js\gva\common\views\publishers\choosePublisher.html" />
     <Content Include="js\gva\common\views\publishers\choosePublisherCtrl.js" />
-    <Content Include="js\gva\directives\application\applicationDirective.html" />
     <Content Include="js\gva\directives\application\applicationDirective.js" />
     <Content Include="js\gva\directives\resources\applicationNoms.js" />
+    <Content Include="js\gva\directives\partSelect\partSelectDirective.js" />
+    <Content Include="js\gva\directives\resources\applicationNoms.js" />
+    <Content Include="js\gva\directives\resources\gvaParts.js" />
     <Content Include="js\gva\equipments\forms\equipmentCertOperational.html" />
     <Content Include="js\gva\equipments\forms\equipmentCertOperationalCtrl.js" />
     <Content Include="js\gva\equipments\forms\equipmentData.html" />

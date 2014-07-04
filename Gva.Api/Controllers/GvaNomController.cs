@@ -9,14 +9,13 @@ using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
-using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
-using System;
 
 namespace Gva.Api.Controllers
 {
@@ -30,7 +29,6 @@ namespace Gva.Api.Controllers
         private IAirportRepository airportRepository;
         private IEquipmentRepository equipmentRepository;
         private IOrganizationRepository organizationRepository;
-        private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
 
@@ -42,7 +40,6 @@ namespace Gva.Api.Controllers
             IAirportRepository airportRepository,
             IEquipmentRepository equipmentRepository,
             IOrganizationRepository organizationRepository,
-            IAircraftRegistrationRepository aircraftRegistrationRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository)
         {
@@ -53,7 +50,6 @@ namespace Gva.Api.Controllers
             this.airportRepository = airportRepository;
             this.equipmentRepository = equipmentRepository;
             this.organizationRepository = organizationRepository;
-            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
         }
@@ -321,20 +317,6 @@ namespace Gva.Api.Controllers
                     Name = e.Name,
                     NameAlt = e.NameAlt
                 });
-
-            return Ok(returnValue);
-        }
-
-        [Route("registrations")]
-        public IHttpActionResult GetRegistrations(string term = null, int offset = 0, int? limit = null, int? parentValueId = null)
-        {
-            var returnValue =
-                            this.aircraftRegistrationRepository.GetRegistrations(parentValueId)
-                            .Select(e => new
-                            {
-                                nomValueId = e.Part.Index,
-                                name = e.ActNumber.ToString()
-                            });
 
             return Ok(returnValue);
         }

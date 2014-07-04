@@ -7,6 +7,7 @@
   function FieldDirective($compile, $parse) {
     function FieldCompile(tElement, tAttrs) {
       var type = tAttrs.type,
+          customType = tAttrs.customType,
           model = tAttrs.ngModel,
           text = tAttrs.l10nText,
           validations = tAttrs.validations,
@@ -39,9 +40,14 @@
         cssClass = 'col-sm-3 col-md-2';
       }
 
-      dirElement =
-        $('<sc-' + type + '></sc-' + type + '>')
-          .attr('ng-model', model)
+      if (customType !== undefined) {
+        dirElement = $('<' + customType + '></' + customType + '>');
+      }
+      else {
+        dirElement = $('<sc-' + type + '></sc-' + type + '>');
+      }
+
+      dirElement.attr('ng-model', model)
           .attr('name', fieldName);
 
       if (!tAttrs.ngReadonly) {

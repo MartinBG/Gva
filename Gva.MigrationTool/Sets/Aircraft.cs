@@ -406,8 +406,8 @@ namespace Gva.MigrationTool.Sets
                         var regNom = Utils.ToJObject(
                             new
                             {
-                                nomValueId = pv.Part.Index,
-                                name = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
+                                partIndex = pv.Part.Index,
+                                description = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
                             });
 
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
