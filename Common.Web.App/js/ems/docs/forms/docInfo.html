@@ -7,7 +7,7 @@
 
     <div class="row" ng-show="!!model.parentDocRelation">
       <div class="col-md-12">
-        <a sc-click="$raise('scOnGoToDoc', { docId: model.parentDocRelation.docId })">{{ 'към ' + model.parentDocRelation.docRegUri + ' ' + model.parentDocRelation.docDocTypeName + ': ' + model.parentDocRelation.docSubject}}</a>
+        <a sc-click="$raise('scOnGoToDoc', { docId: model.parentDocRelation.docId })">{{ 'към ' + (model.parentDocRelation.docRegUri || '') + ' ' + model.parentDocRelation.docDocTypeName + ': ' + model.parentDocRelation.docSubject}}</a>
       </div>
     </div>
 
