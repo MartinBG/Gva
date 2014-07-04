@@ -556,6 +556,7 @@ namespace Mosv.Rio.IncomingDocProcessor
                 docClassification.ClassificationId = docTypeClassification.ClassificationId;
                 docClassification.ClassificationByUserId = systemUser.UserId;
                 docClassification.ClassificationDate = DateTime.Now;
+                docClassification.IsInherited = docTypeClassification.IsInherited;
                 docClassification.IsActive = true;
 
                 this.unitOfWork.DbContext.Set<DocClassification>().Add(docClassification);
