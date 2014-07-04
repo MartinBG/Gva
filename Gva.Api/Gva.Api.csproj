@@ -100,13 +100,11 @@
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewEquipmentHandler.cs" />
     <Compile Include="LotEventHandlers\EquipmentView\EquipmentDataHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftApplicationHandler.cs" />
-    <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftInspectionHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftDebtHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOccurrenceHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOwnerHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentApplicationHandler.cs" />
-    <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentInspectionHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Equipments\EquipmentOwnerHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Organizations\OrganizationOtherHandler.cs" />
@@ -127,7 +125,6 @@
     <Compile Include="LotEventHandlers\PersonView\PersonViewLicenceHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewRatingHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Airports\AirportApplicationHandler.cs" />
-    <Compile Include="LotEventHandlers\InventoryView\Airports\AirportInspectionHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Airports\AirportOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Airports\AirportOwnerHandler.cs" />
     <Compile Include="Controllers\AircraftsController.cs" />

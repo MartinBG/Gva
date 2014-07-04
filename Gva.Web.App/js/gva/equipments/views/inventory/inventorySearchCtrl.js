@@ -26,9 +26,6 @@
       else if (item.setPartAlias === 'equipmentOwner') {
         state = 'root.equipments.view.owners.edit';
       }
-      else if (item.setPartAlias === 'equipmentInspection') {
-        state = 'root.equipments.view.inspections.edit';
-      }
       else if (item.setPartAlias === 'equipmentApplication') {
         state = 'root.equipments.view.applications.edit';
       }

@@ -33,9 +33,6 @@
       else if (document.setPartAlias === 'equipmentApplication') {
         state = 'root.equipments.view.applications.edit';
       }
-      else if (document.setPartAlias === 'inspection') {
-        state = 'root.equipments.view.inspections.edit';
-      }
 
       return $state.go(state, { ind: document.partIndex });
     };

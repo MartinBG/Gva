@@ -20,19 +20,13 @@
     $scope.edit = function (item) {
       var state;
 
-      if (item.documentType === 'airportOther') {
+      if (item.setPartAlias === 'airportOther') {
         state = 'root.airports.view.others.edit';
       }
-      else if (item.documentType === 'airportOwner') {
+      else if (item.setPartAlias === 'airportOwner') {
         state = 'root.airports.view.owners.edit';
       }
-      else if (item.documentType === 'airportOccurrence') {
-        state = 'root.airports.view.occurrences.edit';
-      }
-      else if (item.documentType === 'airportDebtFM') {
-        state = 'root.airports.view.debtsFM.edit';
-      }
-      else if (item.documentType === 'airportApplication') {
+      else if (item.setPartAlias === 'airportApplication') {
         state = 'root.airports.view.applications.edit';
       }
 

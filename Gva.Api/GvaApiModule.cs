@@ -47,7 +47,6 @@ namespace Gva.Api
             //InventaryView
             moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDebtHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftInspectionHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftOccurrenceHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
@@ -78,14 +77,12 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AirportInspectionHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<EquipmentDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EquipmentInspectionHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            
+
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>().InstancePerLifetimeScope();

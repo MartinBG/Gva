@@ -33,9 +33,6 @@
       else if (document.setPartAlias === 'airportApplication') {
         state = 'root.airports.view.applications.edit';
       }
-      else if (document.setPartAlias === 'inspection') {
-        state = 'root.airports.view.inspections.edit';
-      }
 
       return $state.go(state, { ind: document.partIndex });
     };
