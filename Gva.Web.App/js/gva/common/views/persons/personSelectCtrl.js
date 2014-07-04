@@ -4,19 +4,29 @@
 
   function PersonSelectCtrl($scope, $state, $stateParams, Persons, selectedPerson) {
     $scope.filters = {
-      lin: null,
-      uin: null,
-      names: null
+      ilin: null,
+      iuin: null,
+      inames: null
     };
+    $scope.params = {};
 
-    _.forOwn(_.pick($stateParams, ['lin', 'uin', 'names', 'licences', 'ratings', 'organization']),
+    _.forOwn(_.pick($stateParams,
+      ['ilin', 'iuin', 'inames', 'ilicences', 'iratings', 'iorganization']),
       function (value, param) {
         if (value !== null && value !== undefined) {
           $scope.filters[param] = value;
         }
       });
 
-    Persons.query($scope.filters).$promise.then(function (persons) {
+    _.forOwn(_.pick($scope.filters,
+      ['ilin', 'iuin', 'inames', 'ilicences', 'iratings', 'iorganization']),
+      function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.params[param.substr(1)] = value;
+        }
+      });
+
+    Persons.query($scope.params).$promise.then(function (persons) {
       $scope.persons = persons;
     });
 
@@ -33,10 +43,6 @@
     $scope.selectPerson = function (result) {
       selectedPerson.push(result.id);
       return $state.go('^');
-    };
-
-    $scope.viewPerson = function (result) {
-      return $state.go('root.persons.view.edit', { id: result.id });
     };
   }
 
